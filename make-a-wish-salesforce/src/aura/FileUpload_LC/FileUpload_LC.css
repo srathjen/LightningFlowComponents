@@ -1,0 +1,37 @@
+.THIS .slds-form-element__label{
+    margin-bottom: 0.9rem !important;
+}
+
+.THIS .fa-custom{
+	font-size:15px;
+	color:#4c4c4c;
+	padding-left: 3px;
+}
+
+.THIS .nav-pos{
+	position: relative;
+	top: -4rem;
+    float:right;
+}
+
+.THIS .nav-pos a{
+    padding-left:10px;
+}
+
+.THIS .slds-modal-title{
+    font-family: "Lato",Arial,sans-serif;
+    font-weight: 900;
+    font-size: 1rem;
+    color: #4c4c4c;
+    text-transform: uppercase;
+    padding-left: 0;
+}
+
+.THIS .fillRed{
+    position: relative;
+    left:15px;
+}
+
+.THIS .fillRed svg{
+    fill:red;
+}

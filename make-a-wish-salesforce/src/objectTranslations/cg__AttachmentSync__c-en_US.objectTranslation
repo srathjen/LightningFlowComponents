@@ -1,3 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata"/>
-
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- AttachmentId --></label>
+        <name>cg__AttachmentId__c</name>
+    </fields>
+    <fields>
+        <label><!-- AttachmentObjectFileName --></label>
+        <name>cg__AttachmentObjectFileName__c</name>
+    </fields>
+    <fields>
+        <label><!-- AttachmentParentId --></label>
+        <name>cg__AttachmentParentId__c</name>
+    </fields>
+    <fields>
+        <label><!-- AttachmentParentObjectName --></label>
+        <name>cg__AttachmentParentObjectName__c</name>
+    </fields>
+    <fields>
+        <label><!-- AttachmentRelationshipName --></label>
+        <name>cg__AttachmentRelationshipName__c</name>
+    </fields>
+    <fields>
+        <label><!-- FailedMessage --></label>
+        <name>cg__FailedMessage__c</name>
+    </fields>
+    <fields>
+        <label><!-- FailedStatus --></label>
+        <name>cg__FailedStatus__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>cg__Type__c</name>
+        <picklistValues>
+            <masterLabel>Attachment</masterLabel>
+            <translation><!-- Attachment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>File</masterLabel>
+            <translation><!-- File --></translation>
+        </picklistValues>
+    </fields>
+</CustomObjectTranslation>

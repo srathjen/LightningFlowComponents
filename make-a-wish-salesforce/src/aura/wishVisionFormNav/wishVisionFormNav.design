@@ -1,0 +1,36 @@
+<design:component>
+    
+    <design:attribute name="scriptText" label="Script Text" 
+                      description="Navigation text template header" />
+    
+    <design:attribute name="wishChildFirstName" label="wishChild FirstName" 
+                      description="wishChild FirstName" />
+    
+    <design:attribute name="wishChildLastName" label="wishChild LastName" 
+                      description="wishChild LastName" />
+    
+    <design:attribute name="wishChildFullName" label="wishChild FullName" 
+                      description="wishChild FullName" />
+    
+    <design:attribute name="formValue" label="formValue" 
+                      description="Selected Value" />
+    
+    <design:attribute name="wishFavComplete" label="wishFavComplete" 
+                      description="Is Favorites Complete" />
+    
+        <design:attribute name="DetailsCompleted" label="DetailsCompleted" 
+                      description="Is wish Detail Complete" />
+    
+    <design:attribute name="wishGranter1" label="Wish Granter 1" 
+                      description="Name of Wish Granter 1" />
+    
+    <design:attribute name="wishGranter2" label="Wish Granter 2" 
+                      description="Name of Wish Granter 2" />
+    
+    <design:attribute name="interviewDate1" label="Interview Date1" 
+                      description="Interview Date 1" />
+    
+    <design:attribute name="interviewDate2" label="Interview Date2" 
+                      description="Interview Date 2"  />   
+    
+</design:component>

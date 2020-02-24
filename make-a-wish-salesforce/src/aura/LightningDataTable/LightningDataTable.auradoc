@@ -1,0 +1,8 @@
+<aura:documentation>
+	<aura:description>Documentation for LightningDataTable</aura:description>
+	<aura:example name="LightningDataTable" ref="LightningDataTable" label="LightningDataTable">
+		# Description
+        LightningDataTable is a custom component that uses the Base Component lightning:datatable to list Wish Required SIgnature records.
+		It also provides a number of Row Actions to perform on each record. The Row Actions are handled by it various child components.
+	</aura:example>
+</aura:documentation>

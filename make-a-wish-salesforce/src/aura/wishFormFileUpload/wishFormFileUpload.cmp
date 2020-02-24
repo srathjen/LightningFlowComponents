@@ -1,0 +1,120 @@
+<!--CREATED: 		08-03-2019 
+   CREATED BY: 	SHANNON PADERES
+ DESCRIPTION: 	Wish Form Attachment component for use in the Wish Design Forms Flow Screen. Available in ltngOut Applications.  -->
+<!--
+Updated 08-21-2019
+Updated by: Gustavo Mayer
+-->
+<aura:component controller="wishFormFileUpload_AC"
+                implements="lightning:availableForFlowScreens,force:hasRecordID,force:appHostable" access="global">
+    <!-- Handlers -->
+    <aura:handler name="customToastClose" event="c:CustomToastCloseEvent"
+                  action="{!c.handleCustomToastCloseEvent}"/>
+    <!-- Methods -->
+    <aura:method name="closeToast" action="{!c.closeToast}"/>
+    <!-- Attributes -->
+    <!-- 'parentId' Aura Attribute for storing the Id of the Parent Record attaching the file to-->
+    <aura:attribute name="parentId" type="string" default="{!v.parentId}"/>
+    <!-- 'showLoadingSpinner' attribute to show/hide the uploading image and msg in aura:if-->
+    <aura:attribute name="showLoadingSpinner" type="boolean" default="false"/>
+    <!-- Files to be uploaded -->
+    <aura:attribute name="files" type="Object[]"/>
+    <!-- 'fileName' attribute for display the selected file name -->
+    <aura:attribute name="fileName" type="String" default="{!$Label.c.Wish_Form_No_File_Selected}"/>
+    <!-- Lightning Input with file type and on file change call the 'handleFilesChange' controller -->
+    <!-- Lightning Input for File description -->
+    <aura:attribute name="fileDescriptionNew" type="String"/>
+    <!-- Upload Attachment button disabled until file is selected  -->
+    <aura:attribute name="isButtonActive" type="Boolean" default="true"/>
+    <aura:attribute name="description" type="string"/>
+    <aura:attribute name="showToast" type="Boolean" default="false"/>
+    <aura:attribute name="toastMessage" type="String" default=""/>
+    <aura:attribute name="toastMessageType" type="String" default=""/>
+    <!-- File Description Placeholder and Tool Tip Text -->
+    <aura:attribute name="descriptionPlaceholder" type="String" default="e.g Preferred Driver Information"/>
+    <aura:attribute name="descriptionToolTip" type="String"/>
+    <aura:attribute name="fileList" type="List[]" default=""/>
+
+    <aura:if isTrue="{!v.showToast}">
+        <div class="slds-col slds-size_1-of-1 slds-grid_vertical-align-center slds-cell-wrap slds-text-align_center">
+            <c:CustomToast message="{!v.toastMessage}" messageType="{!v.toastMessageType}"/>
+        </div>
+    </aura:if>
+    <div class="slds-page-header slds-border_bottom">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <span class="slds-icon_container" title="case upload">
+                            <lightning:icon iconName="action:upload" alternativeText="Action image"/>
+                        </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span class="slds-page-header__title slds-truncate"
+                                          title="Wish Design Form Uploads">{!$Label.c.Wish_Form_File_Upload}</span>
+                                </h1>
+                            </div>
+                        </div>
+                        <p class="slds-page-header__name-meta">
+                            <span>{!$Label.c.Wish_Form_File_Upload_Description}</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="slds-page-header ">
+        <span>
+            {!$Label.c.Wish_Form_File_Upload_Help}
+        </span>
+    </p>
+    <div class="slds-grid slds-gutters slds-wrap slds-p-left_large">
+        <div class="slds-col slds-size_1-of-3 slds-large-size_2-of-12">
+            <span>
+                <lightning:input type="text" name="input1" label="{!$Label.c.Wish_Form_Enter}" aura:id="fileDescription"
+                                 value="{!v.fileDescriptionNew}" placeholder="{!v.descriptionPlaceholder}"
+                                 onchange="{!c.descriptionUpdate}"/>
+            </span>
+        </div>
+        <div class="slds-col slds-size_2-of-3 slds-large-size_10-of-12">
+            <span>
+                <lightning:input aura:id="fileId"
+                                 files="{!v.files}"
+                                 onchange="{!c.handleFilesChange}"
+                                 type="file" name="file"
+                                 label="{!$Label.c.Wish_Form_Select_File}"
+                                 multiple="false"/>
+                <div class="slds-text-body_small slds-text-color_error">{!v.fileName}</div>
+            </span>
+        </div>
+    </div>
+    <div class="slds-grid slds-p-left_large">
+        <div class="slds-col">
+            <button class="slds-button slds-button_destructive" aura:id="uploadAttachment" disabled="{!v.isButtonActive}"
+                    onclick="{!c.doSave}">
+                {!$Label.c.Wish_Form_File_Upload_Button}
+            </button>
+        </div>
+    </div>
+    <div class="slds-grid slds-p-left_large">
+        <div class="slds-col">
+            <span class="slds-form-element__label">{!$Label.c.Wish_Form_Uploaded_Files}</span>
+            <aura:if isTrue="{!not(empty(v.fileList))}">
+                <ol class="slds-list_ordered">
+                    <aura:iteration var="a" items="{!v.fileList}">
+                        <li>{!a}</li>
+                    </aura:iteration>
+                </ol>
+            </aura:if>
+        </div>
+    </div>
+    <!--use aura:if for show-hide the loading spinner image-->
+    <aura:if isTrue="{!v.showLoadingSpinner}">
+        <div class="slds-text-body_small slds-text-color_error">
+            {!$Label.c.Wish_Form_File_Uploading}
+            <img src="/auraFW/resources/aura/images/spinner.gif" class="spinner-img" alt="Loading"/>
+        </div>
+    </aura:if>
+</aura:component>

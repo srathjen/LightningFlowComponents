@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Last Job Start Time : Account --></label>
+        <name>npsp__LastJobStartTimeAccount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Job Start Time : Contact --></label>
+        <name>npsp__LastJobStartTimeContact__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of records per batch to process when recalculating levels. --></help>
+        <label><!-- Level Assignment Batch Size --></label>
+        <name>npsp__Level_Assignment_Batch_Size__c</name>
+    </fields>
+</CustomObjectTranslation>

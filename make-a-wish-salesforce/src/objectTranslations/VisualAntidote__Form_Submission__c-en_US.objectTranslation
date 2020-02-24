@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Child Object Letter --></label>
+        <name>VisualAntidote__Child_Object_Letter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Context Id --></label>
+        <name>VisualAntidote__Context_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Context Type --></label>
+        <name>VisualAntidote__Context_Type__c</name>
+        <picklistValues>
+            <masterLabel>Admin</masterLabel>
+            <translation><!-- Admin --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>User</masterLabel>
+            <translation><!-- User --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Details --></label>
+        <name>VisualAntidote__Details__c</name>
+    </fields>
+    <fields>
+        <label><!-- Execution Order --></label>
+        <name>VisualAntidote__Execution_Order__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form Type --></label>
+        <name>VisualAntidote__Form_Type__c</name>
+        <picklistValues>
+            <masterLabel>ClassicLightning</masterLabel>
+            <translation><!-- ClassicLightning --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ClassicRegular</masterLabel>
+            <translation><!-- ClassicRegular --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NativeRegular</masterLabel>
+            <translation><!-- NativeRegular --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Form Used --></label>
+        <name>VisualAntidote__Form_Used__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form --></label>
+        <name>VisualAntidote__Form__c</name>
+        <relationshipLabel><!-- Form Submissions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- IP Address --></label>
+        <name>VisualAntidote__IP_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Native --></label>
+        <name>VisualAntidote__Is_Native__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object Order --></label>
+        <name>VisualAntidote__Object_Order__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object --></label>
+        <name>VisualAntidote__Object__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record Created/Updated --></label>
+        <name>VisualAntidote__Record_Created_Updated__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference Record Id --></label>
+        <name>VisualAntidote__Reference_Record_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Related Field Name --></label>
+        <name>VisualAntidote__Related_Field_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Repeat Index --></label>
+        <name>VisualAntidote__Repeat_Index__c</name>
+    </fields>
+    <fields>
+        <label><!-- Staging Submission --></label>
+        <name>VisualAntidote__Staging_Submission__c</name>
+        <relationshipLabel><!-- Form Submissions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>VisualAntidote__Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submission Date --></label>
+        <name>VisualAntidote__Submission_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submission --></label>
+        <name>VisualAntidote__Submission__c</name>
+        <relationshipLabel><!-- Form Submissions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Submitted Data XML --></label>
+        <name>VisualAntidote__Submitted_Data_XML__c</name>
+    </fields>
+    <fields>
+        <label><!-- User Content ID --></label>
+        <name>VisualAntidote__User_Content_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Verification_Emails --></label>
+        <name>VisualAntidote__Verification_Emails__c</name>
+    </fields>
+    <layouts>
+        <layout>Form Submission Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <webLinks>
+        <label><!-- Resubmit --></label>
+        <name>VisualAntidote__Resubmit</name>
+    </webLinks>
+</CustomObjectTranslation>

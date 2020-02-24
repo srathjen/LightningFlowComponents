@@ -8,6 +8,10 @@
         <plural>true</plural>
         <value>Awards &amp; Recognitions</value>
     </caseValues>
+    <fieldSets>
+        <label><!-- AwardsRecognitionFields --></label>
+        <name>AwardsRecognitionFields</name>
+    </fieldSets>
     <fields>
         <label><!-- Award Name --></label>
         <name>Award_Name__c</name>

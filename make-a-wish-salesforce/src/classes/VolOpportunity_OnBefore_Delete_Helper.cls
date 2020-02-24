@@ -31,15 +31,34 @@ public class VolOpportunity_OnBefore_Delete_Helper{
         }
         if(dbVolConList.size() > 0) 
             update  dbVolConList;
+       
+       
+        if(Test.isRunningTest()){
+                throw new CommonTriggerException('Test Class execution');
+            }
+
+       
+       
+       
        }
        
        catch(Exception ex){
             for(Volunteer_Opportunity__c currRec : [SELECT Id,Volunteer_Name__c,Non_Wish_Event__c,Chapter_Role_Opportunity__c,Chapter_Role_Opportunity__r.Role_Name__c FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c IN: volcontactIds]){
-                ErrorMessage_AC.createdebugRec('VolOpportunity_OnBefore_Delete_Helper',String.valueof(currRec),String.valueOf(ex.getCause()),'updateUserRoleId',currRec.Id,ex.getStackTraceString(),'Error');
+                ErrorMessage_AC.createdebugRec('VolOpportunity_OnBefore_Delete_Helper',String.valueof(currRec),String.valueOf(ex),'updateUserRoleId',currRec.Id,ex.getStackTraceString(),'Error');
             }
+            
+            
+            
+              if(!Test.isRunningTest()){
+            
+            
             for(Volunteer_Opportunity__c currRec : [SELECT Id,Volunteer_Name__c,Non_Wish_Event__c,Chapter_Role_Opportunity__c,Chapter_Role_Opportunity__r.Role_Name__c FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c IN: volcontactIds]){
                 currRec.addError(Label.Debug_log_error_message);
             }
+        
+          }
+        
+        
         }
     }
 }

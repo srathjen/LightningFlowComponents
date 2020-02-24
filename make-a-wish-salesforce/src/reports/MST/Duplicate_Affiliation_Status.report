@@ -6,6 +6,7 @@
     <filter>
         <criteriaItems>
             <column>ACCOUNT_RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Account.HH_Account</value>
         </criteriaItems>
@@ -34,6 +35,8 @@
     <reportType>ContactCustomEntity$npe5__Affiliation__c@npe5__Affiliation__c.npe5__Organization__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
         <endDate>2017-04-13</endDate>

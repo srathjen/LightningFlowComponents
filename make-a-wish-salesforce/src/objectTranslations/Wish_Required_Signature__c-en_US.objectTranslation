@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Wish Required Signature</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Wish Required Signatures</value>
+    </caseValues>
+    <fieldSets>
+        <label><!-- FamilySignatureTracker --></label>
+        <name>FamilySignatureTracker</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- MedicalSignatureTracker --></label>
+        <name>MedicalSignatureTracker</name>
+    </fieldSets>
+    <fields>
+        <label><!-- Days From Signature to Expiry --></label>
+        <name>Days_From_Signature_to_Expiry__c</name>
+    </fields>
+    <fields>
+        <help><!-- Days until this signature expires. This only shows if Status is Signed and Signed Date has a value. --></help>
+        <label><!-- Days to Expiry --></label>
+        <name>Days_to_Expiry__c</name>
+    </fields>
+    <fields>
+        <label><!-- DocuSign Status --></label>
+        <name>DocuSign_Status__c</name>
+        <relationshipLabel><!-- Wish Required Signatures --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Shows warning when this signature expires &lt;=30 days from today, or is already expired. --></help>
+        <label><!-- Expiry Warning --></label>
+        <name>Expiry_Warning__c</name>
+    </fields>
+    <fields>
+        <help><!-- The delivery and signing method of the signature. --></help>
+        <label><!-- Format --></label>
+        <name>Format__c</name>
+        <picklistValues>
+            <masterLabel>E-Signature</masterLabel>
+            <translation><!-- E-Signature --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Paper</masterLabel>
+            <translation><!-- Paper --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Include Fax Cover Sheet --></label>
+        <name>Include_Fax_Cover_Sheet__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Clearance --></label>
+        <name>Is_Clearance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Medical Summary --></label>
+        <name>Is_Medical_Summary__c</name>
+    </fields>
+    <fields>
+        <label><!-- Primary Wish Req. Signature --></label>
+        <name>Primary_Wish_Required_Signature_Record__c</name>
+        <relationshipLabel><!-- Linked Wish Required Signatures --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Sent Date --></label>
+        <name>Sent_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- For e-signature forms, the email address to which this form is sent for signature. --></help>
+        <label><!-- Send to Email Address --></label>
+        <name>Sent_to_Email_Address__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date on which this signature expires and must be re-signed.  Calculated by adding the number of days in &quot;Days From Signature to Expiry&quot; to the &quot;Signed Date&quot;. --></help>
+        <label><!-- Signature Expiry Date --></label>
+        <name>Signature_Expiry_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Signed Date --></label>
+        <name>Signed_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- To change this person, you must change the Wish Affiliation. --></help>
+        <label><!-- Signer --></label>
+        <name>Signer__c</name>
+    </fields>
+    <fields>
+        <help><!-- Primary statuses are: not sent, sent, signed, voided, and expired; the others are DocuSign statuses. --></help>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Declined</masterLabel>
+            <translation><!-- Declined --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Delivered</masterLabel>
+            <translation><!-- Delivered --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Delivery Failure</masterLabel>
+            <translation><!-- Delivery Failure --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expired</masterLabel>
+            <translation><!-- Expired --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Sent</masterLabel>
+            <translation><!-- Not Sent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Sent - Pending</masterLabel>
+            <translation><!-- Not Sent - Pending --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent</masterLabel>
+            <translation><!-- Sent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Signed</masterLabel>
+            <translation><!-- Signed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Voided</masterLabel>
+            <translation><!-- Voided --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Family forms are signed by a family member of the Wish Child or participant. Medical forms are signed by a designated medical professional. --></help>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Family</masterLabel>
+            <translation><!-- Family --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medical</masterLabel>
+            <translation><!-- Medical --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Wish Affiliation --></label>
+        <name>Wish_Affiliation__c</name>
+        <relationshipLabel><!-- Wish Required Signatures --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Wish Case --></label>
+        <lookupFilter>
+            <errorMessage><!-- Only Wish cases can be selected (e.g. Diagnosis Verification Review cases cannot be selected). --></errorMessage>
+            <informationalMessage><!-- Select the Wish case to which this signature applies. --></informationalMessage>
+        </lookupFilter>
+        <name>Wish_Case__c</name>
+        <relationshipLabel><!-- Wish Required Signatures --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Stores a record of the Wish Signature Form name, in case the parent is later deleted or updated after the form has been signed. --></help>
+        <label><!-- Wish Signature Form Name (Text) --></label>
+        <name>Wish_Signature_Form_Name_Text__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Signature Form --></label>
+        <name>Wish_Signature_Form__c</name>
+        <relationshipLabel><!-- Wish Required Signatures --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Wish Required Signature Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Signer Information --></label>
+            <section>Signer Information</section>
+        </sections>
+        <sections>
+            <label><!-- Significant Dates --></label>
+            <section>Significant Dates</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- Run_DDP --></label>
+        <name>Run_DDP</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Run_DocGen_2 --></label>
+        <name>Run_DocGen_2</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_MAW_Template_Wish_Clearance --></label>
+        <name>Send_MAW_Template_Wish_Clearance</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Wish_Clearance_Test --></label>
+        <name>Wish_Clearance_Test</name>
+    </webLinks>
+</CustomObjectTranslation>

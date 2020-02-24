@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Hash Index --></label>
+        <name>CRMfusionDBR101__Hash_Index__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hash --></label>
+        <name>CRMfusionDBR101__Hash__c</name>
+    </fields>
+    <fields>
+        <label><!-- Keys --></label>
+        <name>CRMfusionDBR101__Keys__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scenario ID --></label>
+        <name>CRMfusionDBR101__ScenarioID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Version --></label>
+        <name>CRMfusionDBR101__Version__c</name>
+    </fields>
+</CustomObjectTranslation>

@@ -5,8 +5,8 @@
     <confirmationTokenRequired>false</confirmationTokenRequired>
     <label>WinformationAttachment_VF</label>
     <packageVersions>
-        <majorNumber>1</majorNumber>
-        <minorNumber>28</minorNumber>
+        <majorNumber>2</majorNumber>
+        <minorNumber>5</minorNumber>
         <namespace>cg</namespace>
     </packageVersions>
 </ApexPage>

@@ -67,6 +67,12 @@
         <field>Lead$Best_contact_for_Physician_Email__c</field>
     </columns>
     <columns>
+        <field>Lead$Referred_Date__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Qualified_Date__c</field>
+    </columns>
+    <columns>
         <field>Lead$Inquiry_to_Referred__c</field>
     </columns>
     <columns>
@@ -88,6 +94,14 @@
         <field>Lead$Total_Referral_to_DNQ__c</field>
     </columns>
     <description>Leads overview</description>
+    <filter>
+        <criteriaItems>
+            <column>Lead$Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+    </filter>
     <format>Tabular</format>
     <name>Leads Detail</name>
     <params>
@@ -97,8 +111,12 @@
     <reportType>Leads_detail__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Lead$Total_Referral_to_Qualified__c</sortColumn>
+    <sortOrder>Desc</sortOrder>
     <timeFrameFilter>
-        <dateColumn>Lead$Inquiry_Date__c</dateColumn>
-        <interval>INTERVAL_PREV2FY</interval>
+        <dateColumn>Lead$Referred_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>

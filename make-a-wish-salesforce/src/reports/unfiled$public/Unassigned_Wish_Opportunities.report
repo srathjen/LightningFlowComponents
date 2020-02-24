@@ -45,11 +45,13 @@
     <filter>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Chapter_Name__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Greater Bay Area</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Volunteer_Name__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
@@ -68,6 +70,8 @@
     <reportType>CustomEntity$Volunteer_Opportunity__c@Volunteer_Opportunity__c.Wish__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Volunteer_Opportunity__c.NWE_Date__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

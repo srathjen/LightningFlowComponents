@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>S-Drive Shot Url click information object.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>cg__Browser__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>if( contains( lower( cg__User_Agent__c ), &quot;opera&quot; ), &quot;opera&quot;,
+
+if( contains( lower( cg__User_Agent__c ), &quot;msie&quot;	 ), &quot;Internet Explorer&quot;,
+if( contains( lower( cg__User_Agent__c ), &quot;internet explorer&quot;	), &quot;Internet Explorer&quot;,
+if( contains( lower( cg__User_Agent__c ), &quot;shiira&quot;	 ), &quot;Shiira&quot;,
+if( contains( lower( cg__User_Agent__c ), &quot;chimera&quot;	 ), &quot;Chimera&quot;,
+if( contains( lower( cg__User_Agent__c ), &quot;phoenix&quot;	 ), &quot;Phoenix&quot;,
+if( contains( lower( cg__User_Agent__c ), &quot;firebird&quot;	 ), &quot;Firebird&quot;,
+if( contains( lower( cg__User_Agent__c ), &quot;camino&quot;	 ), &quot;Camino&quot;,
+if( contains( lower( cg__User_Agent__c ), &quot;netscape&quot;	 ), &quot;Netscape&quot;,
+if( contains( lower( cg__User_Agent__c ), &quot;opera&quot;	 ), &quot;Opera&quot;,
+if( contains( lower( cg__User_Agent__c ), &quot;chrome&quot;	 ), &quot;Chrome&quot;,
+if( contains( lower( cg__User_Agent__c ), &quot;safari&quot;	 ), &quot;Safari&quot;,
+if( contains( lower( cg__User_Agent__c ), &quot;firefox&quot;	 ), &quot;Firefox&quot;,
+if( contains( lower( cg__User_Agent__c ), &quot;konqueror&quot;	 ), &quot;Konqueror&quot;,
+
+if( contains( lower( cg__User_Agent__c ), &quot;mozilla&quot;	 ), &quot;Mozilla&quot;, &quot;Unknown Browser&quot;)))))))))))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Browser</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>cg__IP_Address__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>IP Address</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>cg__OS__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>if( contains( lower( cg__User_Agent__c ), &quot;windows nt 7&quot; ), &quot;Windows 7&quot;,
+	if( contains( lower( cg__User_Agent__c ), &quot;windows nt 6&quot; ), &quot;Windows Vista&quot;,
+					if( contains( lower( cg__User_Agent__c ), &quot;windows nt 5.2&quot;	), &quot;Windows 2003&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;windows nt 5.0&quot;	), &quot;Windows 2000&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;windows nt 5.1&quot;	), &quot;Windows XP&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;windows nt 4.0&quot;	), &quot;Windows NT 4.0&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;winnt4.0&quot;			), &quot;Windows NT 4.0&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;winnt 4.0&quot;			), &quot;Windows NT&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;winnt&quot;				), &quot;Windows NT&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;windows 98&quot;		), &quot;Windows 98&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;win98&quot;				), &quot;Windows 98&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;windows 95&quot;		), &quot;Windows 95&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;win95&quot;				), &quot;Windows 95&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;windows&quot;			), &quot;Unknown Windows OS&quot;,
+if( contains( lower( cg__User_Agent__c ),&quot;iphone&quot;				), &quot;iPhone&quot;,
+if( contains( lower( cg__User_Agent__c ),&quot;ipad&quot;				), &quot;iPad&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;os x 10.6&quot;				), &quot;Mac OS X 10.6&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;os x 10.5&quot;				), &quot;Mac OS X 10.5&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;os x 10.4&quot;				), &quot;Mac OS X 10.4&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;os x 10.3&quot;				), &quot;Mac OS X 10.3&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;os x&quot;				), &quot;Mac OS X&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;ppc mac&quot;			), &quot;Power PC Mac&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;freebsd&quot;			), &quot;FreeBSD&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;ppc&quot;				), &quot;Macintosh&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;linux&quot;				), &quot;Linux&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;debian&quot;			), &quot;Debian&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;sunos&quot;				), &quot;Sun Solaris&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;beos&quot;				), &quot;BeOS&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;apachebench&quot;		), &quot;ApacheBench&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;aix&quot;				), &quot;AIX&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;irix&quot;				), &quot;Irix&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;netbsd&quot;			), &quot;NetBSD&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;bsdi&quot;				), &quot;BSDi&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;openbsd&quot;			), &quot;OpenBSD&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;gnu&quot;				), &quot;GNU/Linux&quot;,
+					if( contains( lower( cg__User_Agent__c ),&quot;unix&quot;				), &quot;Unknown Unix OS&quot;, &quot;Unknown OS&quot; ))))))))))))))))))))))))))))))))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>OS</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>cg__Referrer__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Referrer</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>cg__SUrl__c</fullName>
+        <deprecated>false</deprecated>
+        <description>S-Drive Short Url</description>
+        <externalId>false</externalId>
+        <inlineHelpText>S-Drive Short Url</inlineHelpText>
+        <label>SUrl</label>
+        <referenceTo>cg__SUrl__c</referenceTo>
+        <relationshipLabel>SUrl Hits</relationshipLabel>
+        <relationshipName>SUrl_Hits</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>cg__User_Agent__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>User Agent</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>SUrl Hit</label>
+    <listViews>
+        <fullName>cg__All</fullName>
+        <columns>NAME</columns>
+        <columns>OBJECT_ID</columns>
+        <columns>cg__SUrl__c</columns>
+        <columns>cg__User_Agent__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>A-{0000}</displayFormat>
+        <label>SUrl Click Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>SUrl Hits</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

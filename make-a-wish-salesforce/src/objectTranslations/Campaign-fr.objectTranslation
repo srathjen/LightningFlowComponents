@@ -78,6 +78,11 @@
         <label><!-- Default --></label>
         <name>Default</name>
     </recordTypes>
+    <recordTypes>
+        <description><!-- Used by program staff to track tactical communications to groups of constituents. --></description>
+        <label><!-- Program Tactical Communications --></label>
+        <name>Program_Tactical_Communications</name>
+    </recordTypes>
     <webLinks>
         <label><!-- ViewAllCampaignMembers --></label>
         <name>ViewAllCampaignMembers</name>

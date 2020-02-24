@@ -1,0 +1,6 @@
+<!--
+ - Created by mbuhler on 7/14/2019.
+ -->
+<design:component>
+    <design:attribute name="fieldSetsNames" label="Field Set Names" description="Valid field set names separated by commas."/>
+</design:component>

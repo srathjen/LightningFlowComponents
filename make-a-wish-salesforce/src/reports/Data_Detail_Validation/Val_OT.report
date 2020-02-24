@@ -25,6 +25,7 @@
     <filter>
         <criteriaItems>
             <column>Volunteer_Orientation_Training__c$CreatedBy</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>integration user</value>
         </criteriaItems>
@@ -38,6 +39,8 @@
     <reportType>Volunteer_Orientation_Training__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Volunteer_Orientation_Training__c$Completed_Date__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

@@ -31,4 +31,5 @@ Thanks,
 
 {!npe5__Affiliation__c.npe5__Organization__c}</textOnly>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

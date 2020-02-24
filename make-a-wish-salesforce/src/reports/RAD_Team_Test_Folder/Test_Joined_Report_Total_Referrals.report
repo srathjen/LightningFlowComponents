@@ -29,21 +29,25 @@
         <filter>
             <criteriaItems>
                 <column>Lead.ChapterName__c</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Make-A-Wish Arizona</value>
             </criteriaItems>
             <criteriaItems>
                 <column>STATUS</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>notEqual</operator>
                 <value>Qualified,Duplicate</value>
             </criteriaItems>
             <criteriaItems>
                 <column>LAST_NAME</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>notEqual</operator>
                 <value>clownfish</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Lead.Test_Record__c</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
@@ -56,6 +60,8 @@
         </params>
         <reportType>LeadList</reportType>
         <scope>org</scope>
+        <showGrandTotal>true</showGrandTotal>
+        <showSubTotals>true</showSubTotals>
         <timeFrameFilter>
             <dateColumn>Lead.Referred_Date__c</dateColumn>
             <interval>INTERVAL_PREVFY</interval>
@@ -87,21 +93,25 @@
         <filter>
             <criteriaItems>
                 <column>RECORDTYPE</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Case.Wish</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Wish_Assist__c</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Test_Record__c</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.ChapterName__c</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Make-A-Wish Arizona</value>
             </criteriaItems>
@@ -118,6 +128,8 @@
         </params>
         <reportType>CaseCustomEntity$cg__CaseFile__c</reportType>
         <scope>organization</scope>
+        <showGrandTotal>true</showGrandTotal>
+        <showSubTotals>true</showSubTotals>
         <timeFrameFilter>
             <dateColumn>Case.Referral_Date__c</dateColumn>
             <interval>INTERVAL_PREVFY</interval>

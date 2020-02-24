@@ -1,0 +1,16 @@
+/**
+ * Created by gmayer on 7/26/2019.
+ */
+.THIS {
+    overflow: auto;
+}
+
+.THIS #tableHeaderText {
+    font-weight: 400;
+    padding: 4px 0 4px 0;
+    text-transform: uppercase;
+}
+
+.THIS div header div {
+    font-weight: 400;
+}

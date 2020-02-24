@@ -12,8 +12,15 @@
     <filter>
         <criteriaItems>
             <column>Lead$ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Alaska &amp; Washington</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>
@@ -30,10 +37,10 @@
     <reportType>Leads_detail__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Lead$Referred_Date__c</dateColumn>
-        <endDate>2018-05-31</endDate>
         <interval>INTERVAL_CUSTOM</interval>
-        <startDate>2016-10-04</startDate>
     </timeFrameFilter>
 </Report>

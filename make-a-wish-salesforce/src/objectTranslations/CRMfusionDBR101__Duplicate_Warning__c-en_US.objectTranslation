@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <help><!-- The action that triggered this duplicate warning. --></help>
+        <label><!-- Triggering Action --></label>
+        <name>CRMfusionDBR101__Action__c</name>
+    </fields>
+    <fields>
+        <label><!-- Key --></label>
+        <name>CRMfusionDBR101__Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scenario Type --></label>
+        <name>CRMfusionDBR101__Scenario_Type__c</name>
+        <picklistValues>
+            <masterLabel>Account</masterLabel>
+            <translation><!-- Account --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Contact</masterLabel>
+            <translation><!-- Contact --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lead</masterLabel>
+            <translation><!-- Lead --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lead to Account</masterLabel>
+            <translation><!-- Lead to Account --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lead to Contact</masterLabel>
+            <translation><!-- Lead to Contact --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Scenario --></label>
+        <name>CRMfusionDBR101__Scenario__c</name>
+        <relationshipLabel><!-- DupeBlocker Duplicate Warnings --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Ignore - Internal Use Only --></label>
+        <name>CRMfusionDBR101__Unused_Datetime__c</name>
+    </fields>
+    <layouts>
+        <layout>DupeBlocker Duplicate Warning Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <webLinks>
+        <label><!-- Convert_Leads --></label>
+        <name>CRMfusionDBR101__Convert_Leads</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Merge_Duplicates --></label>
+        <name>CRMfusionDBR101__Merge_Duplicates</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Merge_or_Convert_Duplicates --></label>
+        <name>CRMfusionDBR101__Merge_or_Convert_Duplicates</name>
+    </webLinks>
+</CustomObjectTranslation>

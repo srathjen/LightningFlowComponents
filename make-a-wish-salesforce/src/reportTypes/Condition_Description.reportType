@@ -12,22 +12,12 @@
     <sections>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Code_To_Use__c</field>
+            <table>Condition_Description__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Id</field>
-            <table>Condition_Description__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Owner</field>
-            <table>Condition_Description__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>true</checkedByDefault>
-            <field>Name</field>
-            <table>Condition_Description__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>CreatedDate</field>
             <table>Condition_Description__c</table>
         </columns>
         <columns>
@@ -37,7 +27,17 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>LastModifiedDate</field>
+            <field>CreatedDate</field>
+            <table>Condition_Description__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Group1__c</field>
+            <table>Condition_Description__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>isEligible__c</field>
             <table>Condition_Description__c</table>
         </columns>
         <columns>
@@ -47,12 +47,12 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Code_To_Use__c</field>
+            <field>LastModifiedDate</field>
             <table>Condition_Description__c</table>
         </columns>
         <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Group1__c</field>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Name</field>
             <table>Condition_Description__c</table>
         </columns>
         <columns>
@@ -62,12 +62,22 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Owner</field>
+            <table>Condition_Description__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>PR_Diagnosis__c</field>
+            <table>Condition_Description__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Treatment_Subspecialty__c</field>
             <table>Condition_Description__c</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>isEligible__c</field>
+            <field>InActive__c</field>
             <table>Condition_Description__c</table>
         </columns>
         <masterLabel>Condition Description</masterLabel>
@@ -75,17 +85,12 @@
     <sections>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Id</field>
+            <field>CreatedBy</field>
             <table>Condition_Description__c.ICD_Codes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Owner</field>
-            <table>Condition_Description__c.ICD_Codes__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>true</checkedByDefault>
-            <field>Name</field>
+            <field>Condition_Description__c</field>
             <table>Condition_Description__c.ICD_Codes__r</table>
         </columns>
         <columns>
@@ -95,27 +100,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>CreatedBy</field>
-            <table>Condition_Description__c.ICD_Codes__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>LastModifiedDate</field>
-            <table>Condition_Description__c.ICD_Codes__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>LastModifiedBy</field>
-            <table>Condition_Description__c.ICD_Codes__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Group1__c</field>
-            <table>Condition_Description__c.ICD_Codes__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>ICD_Code_No_Period__c</field>
             <table>Condition_Description__c.ICD_Codes__r</table>
         </columns>
         <columns>
@@ -125,12 +110,52 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Hidden_ICD_Code__c</field>
+            <table>Condition_Description__c.ICD_Codes__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ICD_Code_No_Period__c</field>
+            <table>Condition_Description__c.ICD_Codes__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Name</field>
+            <table>Condition_Description__c.ICD_Codes__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Id</field>
+            <table>Condition_Description__c.ICD_Codes__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>LastModifiedBy</field>
+            <table>Condition_Description__c.ICD_Codes__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>LastModifiedDate</field>
+            <table>Condition_Description__c.ICD_Codes__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Long_Description__c</field>
             <table>Condition_Description__c.ICD_Codes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Owner</field>
+            <table>Condition_Description__c.ICD_Codes__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Short_Description__c</field>
+            <table>Condition_Description__c.ICD_Codes__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Skip_Medical_Question__c</field>
             <table>Condition_Description__c.ICD_Codes__r</table>
         </columns>
         <columns>

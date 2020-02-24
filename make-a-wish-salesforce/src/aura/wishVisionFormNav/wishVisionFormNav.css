@@ -1,0 +1,26 @@
+.THIS .legend  {
+   font-weight : bold;
+}
+
+.THIS .btn  {
+    width: 100%;
+}
+
+.THIS .legend {
+    font-size: 14px;
+}
+
+.THIS .assistiveText {
+    display: none;
+}
+.THIS .interviewDate {
+    max-width: 220px;
+}
+
+.THIS svg.slds-button__icon.slds-button__icon_left {
+    color: green;
+}
+.THIS li {
+    margin-right: 1rem;
+    min-width: 150X;
+}

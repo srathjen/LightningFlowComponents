@@ -1,6 +1,6 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
 <![CDATA[<div style=""><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Contact.FirstName},<br>
 <br>
@@ -13,8 +13,8 @@ Date:&nbsp;<span style="background:white">{!Volunteer_Orientation_Training__c.Da
 End Time:&nbsp;</span>{!Volunteer_Orientation_Training__c.End_Time__c}<br>
 <span style="background:white">Location:&nbsp;</span>{!Volunteer_Orientation_Training__c.Location__c}<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">&nbsp;</span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">If you need to cancel
-or&nbsp;change your training,&nbsp;please visit&nbsp;the&nbsp;<a href="https://make-a-wish.force.com/"><span style="color:blue">Make-A-Wish
-Volunteer Center</span></a>.<br>
+or&nbsp;change your training,&nbsp;please visit&nbsp;the&nbsp;<span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish
+Volunteer Center</a></span>.<br>
 <br>
 We look forward to seeing you soon.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">{!Volunteer_Orientation_Training__c.Orientation_Training_email_signature__c}</span><span style="font-size: 12pt; font-family: Lato, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom: 0.0001pt;">

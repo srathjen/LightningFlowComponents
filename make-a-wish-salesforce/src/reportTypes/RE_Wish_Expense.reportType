@@ -28,11 +28,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Budget_Approval_Status__c</field>
-            <table>Wish_Expense__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Budget_Cash__c</field>
             <table>Wish_Expense__c</table>
         </columns>

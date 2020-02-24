@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Wish Signature Form</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Wish Signature Forms</value>
+    </caseValues>
+    <fields>
+        <label><!-- Active --></label>
+        <name>Active__c</name>
+    </fields>
+    <fields>
+        <help><!-- When checked, this form is auto-generated for the guardian of every approved minor participant. --></help>
+        <label><!-- Auto-add for Participant Guardian --></label>
+        <name>Auto_add_for_Participant_Guardian__c</name>
+    </fields>
+    <fields>
+        <help><!-- When checked, this form will be auto-generated for every approved participant OVER 18 that is added to the wish who is not a guardian of another participant. --></help>
+        <label><!-- Auto-add for Participant --></label>
+        <name>Auto_add_for_Participant__c</name>
+    </fields>
+    <fields>
+        <help><!-- When checked, this form is auto-generated for the guardian of the wish child. --></help>
+        <label><!-- Auto-add for Wish Child Guardian --></label>
+        <name>Auto_add_for_Wish_Child_Guardian__c</name>
+    </fields>
+    <fields>
+        <help><!-- When checked, this form will be auto-generated for the Wish Child if they are OVER 18. --></help>
+        <label><!-- Auto-add for Wish Child --></label>
+        <name>Auto_add_for_Wish_Child__c</name>
+    </fields>
+    <fields>
+        <help><!-- The number of days for which this signature is valid before needing to be re-signed. --></help>
+        <label><!-- Days From Signature to Expiry --></label>
+        <name>Days_From_Signature_to_Expiry__c</name>
+    </fields>
+    <fields>
+        <help><!-- Use the 18-digit ID of the Drawloop delivery option for downloading to print for offline signature. --></help>
+        <label><!-- Delivery Option ID Print --></label>
+        <name>Delivery_Option_ID_Print__c</name>
+    </fields>
+    <fields>
+        <help><!-- Use the 18-digit ID of the Drawloop delivery option for eSignature. --></help>
+        <label><!-- Delivery Option ID eSign --></label>
+        <name>Delivery_Option_ID_eSign__c</name>
+    </fields>
+    <fields>
+        <help><!-- If selected, will be used as the form for the Diagnosis Verification wish required signature on Lead Convert.  Note: if more than 1 record is set with this value as true, the system will use the newest record. --></help>
+        <label><!-- Diagnosis Verification for Lead Convert --></label>
+        <name>Diagnosis_Verification_for_Lead_Convert__c</name>
+    </fields>
+    <fields>
+        <help><!-- Use the 18-digit ID of the Drawloop DocGen Package for this form. --></help>
+        <label><!-- DocGen Package ID --></label>
+        <name>DocGen_Package_ID__c</name>
+    </fields>
+    <fields>
+        <help><!-- Family forms are signed by a family member of the Wish Child or participant. Medical forms are signed by a designated medical professional. --></help>
+        <label><!-- Form Type --></label>
+        <name>Form_Type__c</name>
+        <picklistValues>
+            <masterLabel>Family</masterLabel>
+            <translation><!-- Family --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medical</masterLabel>
+            <translation><!-- Medical --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- If checked, this form is (or includes) the Wish Clearance. --></help>
+        <label><!-- Is Clearance --></label>
+        <name>Is_Clearance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Medical Summary --></label>
+        <name>Is_Medical_Summary__c</name>
+    </fields>
+    <layouts>
+        <layout>Wish Signature Form Layout</layout>
+        <sections>
+            <label><!-- Automation Information --></label>
+            <section>Automation Information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Document Information --></label>
+            <section>Document Information</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

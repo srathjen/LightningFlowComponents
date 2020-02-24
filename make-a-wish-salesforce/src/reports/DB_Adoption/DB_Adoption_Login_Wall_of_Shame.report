@@ -37,11 +37,13 @@
     <filter>
         <criteriaItems>
             <column>LAST_LOGIN</column>
+            <isUnlocked>false</isUnlocked>
             <operator>notEqual</operator>
             <value>LAST_N_DAYS:14</value>
         </criteriaItems>
         <criteriaItems>
             <column>ACTIVE</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
@@ -63,6 +65,8 @@
     </params>
     <reportType>User</reportType>
     <showDetails>false</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <sortColumn>LOGIN_DATE</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>

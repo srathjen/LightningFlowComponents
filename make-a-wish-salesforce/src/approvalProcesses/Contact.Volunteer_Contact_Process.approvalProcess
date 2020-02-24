@@ -16,8 +16,8 @@
         <allowDelegate>true</allowDelegate>
         <assignedApprover>
             <approver>
-                <name>Owner</name>
-                <type>relatedUserField</type>
+                <name>skilen@arizona.wish.org</name>
+                <type>user</type>
             </approver>
             <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
         </assignedApprover>

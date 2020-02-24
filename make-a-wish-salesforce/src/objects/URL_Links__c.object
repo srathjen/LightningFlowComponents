@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Link__c</fullName>
+        <externalId>false</externalId>
+        <label>Link</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>URL Links</label>
+    <listViews>
+        <fullName>View_Links</fullName>
+        <columns>NAME</columns>
+        <columns>Link__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>View Links</label>
+    </listViews>
+    <visibility>Public</visibility>
+</CustomObject>

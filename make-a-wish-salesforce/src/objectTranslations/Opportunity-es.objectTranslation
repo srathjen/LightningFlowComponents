@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldSets>
+        <label><!-- BDE Entry FS v2 --></label>
+        <name>npsp__BDE_Entry_FS_v2</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- New BDE List v2 --></label>
+        <name>npsp__BDE_List_FS_v2</name>
+    </fieldSets>
     <fields>
         <label><!-- DB Competitor --></label>
         <name>DB_Competitor__c</name>
@@ -15,6 +23,10 @@
             <masterLabel>Competitor C</masterLabel>
             <translation><!-- Competitor C --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Unique Record Count --></label>
+        <name>Unique_Record_Count__c</name>
     </fields>
     <fields>
         <help>Fórmula: El importe de esta oportunidad menos el Monto de pagos cancelados y el Monto de pagos recibidos.</help>
@@ -98,7 +110,7 @@
     <fields>
         <label><!-- Recurring Donation --></label>
         <name>npe03__Recurring_Donation__c</name>
-        <relationshipLabel><!-- Donations --></relationshipLabel>
+        <relationshipLabel><!-- Opportunities --></relationshipLabel>
     </fields>
     <fields>
         <help>Concatenación de campos usados durante el calculo de totales para localizar la oportunidad más reciente.</help>
@@ -106,7 +118,7 @@
         <name>npo02__CombinedRollupFieldset__c</name>
     </fields>
     <fields>
-        <help><!-- Controls if Household contact roles are created for Opportunities.  DEPRECATED.  Replaced by custom settings. --></help>
+        <help>Consola si las funciones de contacto de hogar se crean para oportunidades. DESUSADO. Sustituido por configuración personalizada.</help>
         <label><!-- _SYSTEM: HOUSEHOLD CONTACT ROLEPROCESSOR --></label>
         <name>npo02__systemHouseholdContactRoleProcessor__c</name>
         <picklistValues>
@@ -149,7 +161,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- The date when the donor was specifically asked for the donation, as opposed to the Opportunity Close Date that the organization may set to either when the Opportunity was first created, or when the Opportunity was won. --></help>
+        <help>La fecha en la que se pidió al donante esta donación. Puede ser diferente a la fecha en que la recibió.</help>
         <label><!-- Ask Date --></label>
         <name>npsp__Ask_Date__c</name>
     </fields>
@@ -159,30 +171,35 @@
         <relationshipLabel><!-- Opportunities --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- Notes on why the donation ask was not successful. --></help>
+        <help>Notas sobre el motivo por el que la petición de la donación no fue satisfactoria.</help>
         <label><!-- Closed Lost Reason --></label>
         <name>npsp__Closed_Lost_Reason__c</name>
     </fields>
     <fields>
-        <help><!-- The Fair Market Value of an In-Kind gift. --></help>
+        <help>Cuando se selecciona, deshabilita varios aspectos de la automatización de funciones de contacto de oportunidades de NPSP, dando como resultado datos potencialmente incorrectos o duplicados. Consulte la documentación del producto para obtener más detalles.</help>
+        <label><!-- Disable Contact Role Automation --></label>
+        <name>npsp__DisableContactRoleAutomation__c</name>
+    </fields>
+    <fields>
+        <help>El justiprecio de mercado de un regalo en especie.</help>
         <label><!-- Fair Market Value --></label>
         <name>npsp__Fair_Market_Value__c</name>
     </fields>
     <fields>
-        <help><!-- Categorizes the type of ask for this opportunity. --></help>
+        <help>Categoriza el tipo de petición para esta oportunidad, como por ejemplo, Nuevo donante.</help>
         <label><!-- Gift Strategy --></label>
         <name>npsp__Gift_Strategy__c</name>
         <picklistValues>
             <masterLabel>New Donor</masterLabel>
-            <translation><!-- New Donor --></translation>
+            <translation>Nuevo donante</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Renewal</masterLabel>
-            <translation><!-- Renewal --></translation>
+            <translation>Renovación</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Upgrade</masterLabel>
-            <translation><!-- Upgrade --></translation>
+            <translation>Actualización</translation>
         </picklistValues>
     </fields>
     <fields>
@@ -225,26 +242,26 @@
         <name>npsp__Honoree_Name__c</name>
     </fields>
     <fields>
-        <help><!-- Holds any rich text description of the In-Kind Gift, including pictures. --></help>
+        <help>Es una descripción de texto enriquecido del regalo en especie, incluyendo imágenes.</help>
         <label><!-- In-Kind Description --></label>
         <name>npsp__In_Kind_Description__c</name>
     </fields>
     <fields>
-        <help><!-- Checked if the donor provided the Fair Market Value for this In-Kind gift. --></help>
+        <help>Indica si el donante proporcionó el justiprecio de mercado para este regalo en especie.</help>
         <label><!-- In-Kind Donor Declared Value --></label>
         <name>npsp__In_Kind_Donor_Declared_Value__c</name>
     </fields>
     <fields>
-        <help><!-- The type of In-Kind gift. --></help>
+        <help>El tipo de regalo en especie, como por ejemplo bienes o servicios.</help>
         <label><!-- In-Kind Type --></label>
         <name>npsp__In_Kind_Type__c</name>
         <picklistValues>
             <masterLabel>Goods</masterLabel>
-            <translation><!-- Goods --></translation>
+            <translation>Bienes</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Services</masterLabel>
-            <translation><!-- Services --></translation>
+            <translation>Servicios</translation>
         </picklistValues>
     </fields>
     <fields>
@@ -347,7 +364,7 @@
         <relationshipLabel><!-- Opportunities --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- The date this donor was identified as qualifying for this donation. --></help>
+        <help>La fecha en la que su organización identificó a este donante como apto para esta donación.</help>
         <label><!-- Qualified Date --></label>
         <name>npsp__Qualified_Date__c</name>
     </fields>
@@ -379,27 +396,123 @@
             <translation>En memoria</translation>
         </picklistValues>
     </fields>
+    <layouts>
+        <layout>Donation Layout</layout>
+        <sections>
+            <label>Información de la donación</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>Información donación complementraria</label>
+            <section>Matching Gift Information</section>
+        </sections>
+        <sections>
+            <label>Información de los pagos</label>
+            <section>Payment Information</section>
+        </sections>
+        <sections>
+            <label>Información del tributo</label>
+            <section>Tribute Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Grant Layout</layout>
+        <sections>
+            <label>Información de la donación</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>Información del grant</label>
+            <section>Grant Information</section>
+        </sections>
+        <sections>
+            <label>Información del pago</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>In-Kind Gift Layout</layout>
+        <sections>
+            <label>Información de la donación</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>Información del regalo en especie</label>
+            <section>In-Kind Information</section>
+        </sections>
+        <sections>
+            <label>Información del tributo</label>
+            <section>Tribute Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Major Gift Layout</layout>
+        <sections>
+            <label>Información de la donación</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>Información de regalo importante</label>
+            <section>Major Gift Information</section>
+        </sections>
+        <sections>
+            <label>Información del pago</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Matching Gift Layout</layout>
+        <sections>
+            <label>Información de la donación</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>Información del pago</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Membership Layout</layout>
+        <sections>
+            <label>Campos</label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label>Información de la membresía</label>
+            <section>Member Information</section>
+        </sections>
+        <sections>
+            <label>Información del pago</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
     <recordTypes>
+        <description><!-- Donation Received --></description>
         <label><!-- Donation --></label>
         <name>Donation</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Grant Received --></description>
         <label><!-- Grant --></label>
         <name>Grant</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Goods or Services received as In-Kind --></description>
         <label><!-- In-Kind Gift --></label>
         <name>In_Kind_Gift</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Large Donation from a Major Donor --></description>
         <label><!-- Major Gift --></label>
         <name>MajorGift</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Matching Donation from an Donor&apos;s Employer or other Organization --></description>
         <label><!-- Matching Gift --></label>
         <name>Matching_Gift</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- A membership record type --></description>
         <label><!-- Membership --></label>
         <name>Membership</name>
     </recordTypes>

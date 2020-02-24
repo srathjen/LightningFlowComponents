@@ -8,4 +8,5 @@
     <style>freeForm</style>
     <subject>Alert: Wish Start in 30 Days</subject>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

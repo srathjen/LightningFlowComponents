@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CspTrustedSite xmlns="http://soap.sforce.com/2006/04/metadata">
+    <context>All</context>
+    <endpointUrl>https://wish.secure.force.com</endpointUrl>
+    <isActive>true</isActive>
+</CspTrustedSite>

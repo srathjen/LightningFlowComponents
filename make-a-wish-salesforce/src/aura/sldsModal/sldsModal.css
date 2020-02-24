@@ -1,0 +1,47 @@
+.THIS .slds-white .slds-icon-text-default {
+    fill: rgb(255, 255, 255);
+}
+
+.THIS.slds-backdrop {
+    position: fixed !important; /* required for full screen modal due to winter '20 */
+}
+
+.THIS.fixed {
+    position: fixed !important; /* required for full screen modal due to winter '20 */
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width: 768px) {
+    .THIS .slds-modal__container {
+        width: 90% !important;
+    }
+
+    .THIS.slds-modal-alertbox {
+        width: 100% !important;
+        margin: 0px auto;
+    }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width: 992px) {
+    .THIS .slds-modal__container {
+        width: 90% !important;
+    }
+
+    .THIS.slds-modal-alertbox {
+        width: 40% !important;
+        margin: 0px auto;
+    }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width: 1200px) {
+    .THIS .slds-modal__container {
+        width: 75% !important;
+    }
+
+    .THIS.slds-modal-alertbox {
+        width: 40% !important;
+        margin: 0px auto;
+    }
+}

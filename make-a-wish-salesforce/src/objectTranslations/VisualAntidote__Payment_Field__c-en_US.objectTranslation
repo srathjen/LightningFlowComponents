@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Account Type --></label>
+        <name>VisualAntidote__Account_Type__c</name>
+        <picklistValues>
+            <masterLabel>AuthorizeNet</masterLabel>
+            <translation><!-- AuthorizeNet --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IATS</masterLabel>
+            <translation><!-- IATS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PayPal Pro</masterLabel>
+            <translation><!-- PayPal Pro --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Stripe</masterLabel>
+            <translation><!-- Stripe --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Payment Account --></label>
+        <name>VisualAntidote__Account__c</name>
+        <relationshipLabel><!-- Payment Fields --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- American Express Accepted --></label>
+        <name>VisualAntidote__American_Express_Accepted__c</name>
+    </fields>
+    <fields>
+        <label><!-- Currency --></label>
+        <name>VisualAntidote__Currency__c</name>
+        <relationshipLabel><!-- Payment Fields --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Discover Accepted --></label>
+        <name>VisualAntidote__Discover_Accepted__c</name>
+    </fields>
+    <fields>
+        <label><!-- Display Amount Charged --></label>
+        <name>VisualAntidote__Display_Amount_Charged__c</name>
+    </fields>
+    <fields>
+        <label><!-- Failure Email BCC --></label>
+        <name>VisualAntidote__Failure_Email_BCC__c</name>
+    </fields>
+    <fields>
+        <label><!-- Failure Email Body --></label>
+        <name>VisualAntidote__Failure_Email_Body__c</name>
+    </fields>
+    <fields>
+        <label><!-- Failure Email CC --></label>
+        <name>VisualAntidote__Failure_Email_CC__c</name>
+    </fields>
+    <fields>
+        <label><!-- Failure Email Subject --></label>
+        <name>VisualAntidote__Failure_Email_Subject__c</name>
+    </fields>
+    <fields>
+        <label><!-- Failure Email To Field ID --></label>
+        <name>VisualAntidote__Failure_Email_To_Field_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Failure Email To --></label>
+        <name>VisualAntidote__Failure_Email_To__c</name>
+    </fields>
+    <fields>
+        <label><!-- Failure Email --></label>
+        <name>VisualAntidote__Failure_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Field ID --></label>
+        <name>VisualAntidote__Field_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form --></label>
+        <name>VisualAntidote__Form__c</name>
+        <relationshipLabel><!-- Payment Fields --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Is Payment Hidden --></label>
+        <name>VisualAntidote__Is_Payment_Hidden__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Payment Required --></label>
+        <name>VisualAntidote__Is_Payment_Required__c</name>
+    </fields>
+    <fields>
+        <label><!-- Label Amount --></label>
+        <name>VisualAntidote__Label_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Label CVV --></label>
+        <name>VisualAntidote__Label_CVV__c</name>
+    </fields>
+    <fields>
+        <label><!-- Label Credit Card --></label>
+        <name>VisualAntidote__Label_Credit_Card__c</name>
+    </fields>
+    <fields>
+        <label><!-- Label Expiry --></label>
+        <name>VisualAntidote__Label_Expiry__c</name>
+    </fields>
+    <fields>
+        <label><!-- Label Recurring Fee --></label>
+        <name>VisualAntidote__Label_Recurring_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Label Shipping --></label>
+        <name>VisualAntidote__Label_Shipping__c</name>
+    </fields>
+    <fields>
+        <label><!-- Label Sub Total Amount --></label>
+        <name>VisualAntidote__Label_Sub_Total_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Label Taxes --></label>
+        <name>VisualAntidote__Label_Taxes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Label Total Amount --></label>
+        <name>VisualAntidote__Label_Total_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mastercard Accepted --></label>
+        <name>VisualAntidote__Mastercard_Accepted__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notification Email BCC --></label>
+        <name>VisualAntidote__Notification_Email_BCC__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notification Email Body --></label>
+        <name>VisualAntidote__Notification_Email_Body__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notification Email CC --></label>
+        <name>VisualAntidote__Notification_Email_CC__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notification Email From Name --></label>
+        <name>VisualAntidote__Notification_Email_From_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notification Email From --></label>
+        <name>VisualAntidote__Notification_Email_From__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notification Email Subject --></label>
+        <name>VisualAntidote__Notification_Email_Subject__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notification Email To Field ID --></label>
+        <name>VisualAntidote__Notification_Email_To_Field_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notification Email To --></label>
+        <name>VisualAntidote__Notification_Email_To__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notification Email --></label>
+        <name>VisualAntidote__Notification_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Type --></label>
+        <name>VisualAntidote__Payment_Type__c</name>
+        <picklistValues>
+            <masterLabel>Recurring</masterLabel>
+            <translation><!-- Recurring --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Single</masterLabel>
+            <translation><!-- Single --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Provider Field Mapping XML --></label>
+        <name>VisualAntidote__Provider_Field_Mapping_XML__c</name>
+    </fields>
+    <fields>
+        <label><!-- Recurring Initial Amount Formula2 --></label>
+        <name>VisualAntidote__Recurring_Initial_Amount_Formula2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Recurring Payment Count --></label>
+        <name>VisualAntidote__Recurring_Payment_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Recurring Payment Field Type --></label>
+        <name>VisualAntidote__Recurring_Payment_Field_Type__c</name>
+        <picklistValues>
+            <masterLabel>Dynamic</masterLabel>
+            <translation><!-- Dynamic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Formula</masterLabel>
+            <translation><!-- Formula --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Static</masterLabel>
+            <translation><!-- Static --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Recurring Payment Frequency --></label>
+        <name>VisualAntidote__Recurring_Payment_Frequency__c</name>
+    </fields>
+    <fields>
+        <label><!-- Recurring Payment Initial Amount Formula --></label>
+        <name>VisualAntidote__Recurring_Payment_Initial_Amount_Formula__c</name>
+    </fields>
+    <fields>
+        <label><!-- Recurring Payment Initial Amt Field ID --></label>
+        <name>VisualAntidote__Recurring_Payment_Initial_Amt_Field_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Recurring Payment Initial Fixed Amount --></label>
+        <name>VisualAntidote__Recurring_Payment_Initial_Fixed_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Recurring Payment Interval --></label>
+        <name>VisualAntidote__Recurring_Payment_Interval__c</name>
+        <picklistValues>
+            <masterLabel>Day</masterLabel>
+            <translation><!-- Day --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Month</masterLabel>
+            <translation><!-- Month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SemiMonth</masterLabel>
+            <translation><!-- SemiMonth --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Week</masterLabel>
+            <translation><!-- Week --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Year</masterLabel>
+            <translation><!-- Year --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Retry Recurring Payment After Failure --></label>
+        <name>VisualAntidote__Retry_Recurring_Payment_After_Failure__c</name>
+    </fields>
+    <fields>
+        <label><!-- Shipping Field ID --></label>
+        <name>VisualAntidote__Shipping_Field_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Shipping Field Type --></label>
+        <name>VisualAntidote__Shipping_Field_Type__c</name>
+        <picklistValues>
+            <masterLabel>Dynamic</masterLabel>
+            <translation><!-- Dynamic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Formula</masterLabel>
+            <translation><!-- Formula --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Static</masterLabel>
+            <translation><!-- Static --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Shipping Fixed Amount --></label>
+        <name>VisualAntidote__Shipping_Fixed_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Shipping Formula2 --></label>
+        <name>VisualAntidote__Shipping_Formula2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Shipping Formula --></label>
+        <name>VisualAntidote__Shipping_Formula__c</name>
+    </fields>
+    <fields>
+        <label><!-- Subtotal Amount Default Formula2 --></label>
+        <name>VisualAntidote__Subtotal_Amount_Default_Formula2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Subtotal Amount Default Formula --></label>
+        <name>VisualAntidote__Subtotal_Amount_Default_Formula__c</name>
+    </fields>
+    <fields>
+        <label><!-- Subtotal Amount Field Type --></label>
+        <name>VisualAntidote__Subtotal_Amount_Field_Type__c</name>
+        <picklistValues>
+            <masterLabel>Dynamic</masterLabel>
+            <translation><!-- Dynamic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Formula</masterLabel>
+            <translation><!-- Formula --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Static</masterLabel>
+            <translation><!-- Static --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Subtotal Amount Formula2 --></label>
+        <name>VisualAntidote__Subtotal_Amount_Formula2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Subtotal Amount Formula Type --></label>
+        <name>VisualAntidote__Subtotal_Amount_Formula_Type__c</name>
+        <picklistValues>
+            <masterLabel>Custom</masterLabel>
+            <translation><!-- Custom --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Default</masterLabel>
+            <translation><!-- Default --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Subtotal Amount Formula --></label>
+        <name>VisualAntidote__Subtotal_Amount_Formula__c</name>
+    </fields>
+    <fields>
+        <label><!-- Subtotal Amount Mapping XML --></label>
+        <name>VisualAntidote__Subtotal_Amount_Mapping_XML__c</name>
+    </fields>
+    <fields>
+        <label><!-- Subtotal Fixed Amount --></label>
+        <name>VisualAntidote__Subtotal_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Subtotal Base Amount --></label>
+        <name>VisualAntidote__Subtotal_Base_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Subtotal Field ID --></label>
+        <name>VisualAntidote__Subtotal_Field_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Success Email BCC --></label>
+        <name>VisualAntidote__Success_Email_BCC__c</name>
+    </fields>
+    <fields>
+        <label><!-- Success Email Body --></label>
+        <name>VisualAntidote__Success_Email_Body__c</name>
+    </fields>
+    <fields>
+        <label><!-- Success Email CC --></label>
+        <name>VisualAntidote__Success_Email_CC__c</name>
+    </fields>
+    <fields>
+        <label><!-- Success Email Subject --></label>
+        <name>VisualAntidote__Success_Email_Subject__c</name>
+    </fields>
+    <fields>
+        <label><!-- Success Email To Field ID --></label>
+        <name>VisualAntidote__Success_Email_To_Field_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Success Email To --></label>
+        <name>VisualAntidote__Success_Email_To__c</name>
+    </fields>
+    <fields>
+        <label><!-- Success Email --></label>
+        <name>VisualAntidote__Success_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Taxes Field ID --></label>
+        <name>VisualAntidote__Taxes_Field_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Taxes Field Type --></label>
+        <name>VisualAntidote__Taxes_Field_Type__c</name>
+        <picklistValues>
+            <masterLabel>Dynamic</masterLabel>
+            <translation><!-- Dynamic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Formula</masterLabel>
+            <translation><!-- Formula --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Static</masterLabel>
+            <translation><!-- Static --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Taxes Fixed Percentage --></label>
+        <name>VisualAntidote__Taxes_Fixed_Percentage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Taxes Formula2 --></label>
+        <name>VisualAntidote__Taxes_Formula2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Taxes Formula --></label>
+        <name>VisualAntidote__Taxes_Formula__c</name>
+    </fields>
+    <fields>
+        <label><!-- Test Mode --></label>
+        <name>VisualAntidote__Test_Mode__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transaction Amount Mapping Field ID --></label>
+        <name>VisualAntidote__Transaction_Amount_Mapping_Field_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transaction ID Mapping Field ID --></label>
+        <name>VisualAntidote__Transaction_ID_Mapping_Field_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Visa Accepted --></label>
+        <name>VisualAntidote__Visa_Accepted__c</name>
+    </fields>
+</CustomObjectTranslation>

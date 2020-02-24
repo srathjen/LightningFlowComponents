@@ -3769,11 +3769,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Budget_Total__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Region__c</field>
             <table>Contact.Cases__r</table>
         </columns>
@@ -3795,16 +3790,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Wish_granter_2__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Budget_Cash__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Budget_Inkind__c</field>
             <table>Contact.Cases__r</table>
         </columns>
         <columns>
@@ -3964,11 +3949,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Actual_Total__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Adoptable__c</field>
             <table>Contact.Cases__r</table>
         </columns>
@@ -4009,16 +3989,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Actual_Cash__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Actual_Inkind__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Budget_Notes__c</field>
             <table>Contact.Cases__r</table>
         </columns>
@@ -4055,246 +4025,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>CurrentDOB__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Referral_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Referral_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Referral_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Qualified_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Qualified_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Qualified_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Completed_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Completed_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Completed_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Diagnosis_Ver_Rec_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Diagnosis_Ver_Rec_Dat__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Diagnosis_Ver_Rec_Dat__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Ready_to_Assign_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Ready_to_Assign_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Ready_to_Assign_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Assigned_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Assigned_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Assigned_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Interview_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Interview_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Interview_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Wish_Determined_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Wish_Determined_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Wish_Determined_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Concept_Approval_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Concept_Approval_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Concept_Approval_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Budget_Approved_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Budget_Approved_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Budget_Approved_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Anticipated_Start_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Anticipated_Start_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Anticipated_Start_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Start_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Start_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Start_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_End_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_End_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_End_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Hold_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Hold_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Hold_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Inactive_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Inactive_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Inactive_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Closed_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Closed_Date__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Closed_Date__c</field>
             <table>Contact.Cases__r</table>
         </columns>
         <columns>
@@ -4340,11 +4070,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Hidden_Wish_Child_FirstName__c</field>
-            <table>Contact.Cases__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Survey_Sent__c</field>
             <table>Contact.Cases__r</table>
         </columns>
         <columns>

@@ -12,6 +12,7 @@
     <filter>
         <criteriaItems>
             <column>SUBJECT</column>
+            <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Your patient has been referred for a wish!</value>
         </criteriaItems>
@@ -34,6 +35,8 @@
     <roleHierarchyFilter>National_Staff</roleHierarchyFilter>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>DUE_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

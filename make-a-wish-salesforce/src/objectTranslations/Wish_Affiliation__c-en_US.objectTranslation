@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Wish Affiliation</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Wish Affiliations</value>
+    </caseValues>
+    <fieldSets>
+        <label><!-- DesignFields --></label>
+        <name>DesignFields</name>
+    </fieldSets>
+    <fields>
+        <label><!-- Added Through Interview Flow --></label>
+        <name>Added_Through_Interview_Flow__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Medical Contact --></label>
+        <name>Best_Medical_Contact__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact --></label>
+        <name>Contact__c</name>
+        <relationshipLabel><!-- Wish Affiliations --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Created Via Lead Convert --></label>
+        <name>Created_Via_Lead_Convert__c</name>
+    </fields>
+    <fields>
+        <help><!-- The last date the participant was changed from either Approved or Requested to another value. --></help>
+        <label><!-- Date Participant Removed --></label>
+        <name>Date_Participant_Removed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date of Birth --></label>
+        <name>Date_of_Birth__c</name>
+    </fields>
+    <fields>
+        <label><!-- Details --></label>
+        <name>Details__c</name>
+    </fields>
+    <fields>
+        <label><!-- Full Name --></label>
+        <name>Full_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hospital Treatment Facility --></label>
+        <lookupFilter>
+            <errorMessage><!-- The Account record type must be of the type &quot;Hospital Treatment Facility&quot; --></errorMessage>
+            <informationalMessage><!-- The Account record type must be of the type &quot;Hospital Treatment Facility&quot; --></informationalMessage>
+        </lookupFilter>
+        <name>Health_Treatment_Facility__c</name>
+        <relationshipLabel><!-- Wish Affiliations --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Selecting this option will hide this Wish Affiliation from restricted users, such as Volunteers. --></help>
+        <label><!-- Hide from Restricted Users --></label>
+        <name>Hide_from_Restricted_Users__c</name>
+    </fields>
+    <fields>
+        <label><!-- Medical Needs --></label>
+        <name>Medical_Needs__c</name>
+    </fields>
+    <fields>
+        <help><!-- To change the status, create or update this contact&apos;s related &apos;Organization Affiliation&apos; records (on the contact) to a status of &apos;Active&apos; or &apos;Inactive&apos;. Note: this is the record or records related to the Chapter not a health treatment facility. --></help>
+        <label><!-- Medical Professional Status --></label>
+        <name>Medical_Professional_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- My Wish Affiliation --></label>
+        <name>My_Wish_Affiliation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Non-Comped --></label>
+        <name>Non_Comped__c</name>
+    </fields>
+    <fields>
+        <label><!-- Parent Legal Guardian --></label>
+        <name>Parent_Legal_Guardian__c</name>
+    </fields>
+    <fields>
+        <label><!-- Participant Turning 18 --></label>
+        <name>Participant_Turning_18__c</name>
+    </fields>
+    <fields>
+        <label><!-- Qualifying Medical Team Member --></label>
+        <name>Qualifying_Medical_Team_Member__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referral Source --></label>
+        <name>Referral_Source__c</name>
+    </fields>
+    <fields>
+        <label><!-- Related To --></label>
+        <name>Related_To__c</name>
+    </fields>
+    <fields>
+        <label><!-- Relationship Type --></label>
+        <name>Relationship_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Relationship --></label>
+        <name>Relationship__c</name>
+        <relationshipLabel><!-- Wish Affiliations --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Residing with Wish child --></label>
+        <name>Residing_with_Wish_child__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Send Clearance Forms To --></label>
+        <name>Send_Clearance_Forms_To__c</name>
+    </fields>
+    <fields>
+        <help><!-- Note: Only one survey receipt per wish can be selected.  If this contact is selected, any existing survey recipient (for this wish) will be deselected. --></help>
+        <label><!-- Survey Recipient --></label>
+        <name>Survey_Recipient__c</name>
+    </fields>
+    <fields>
+        <label><!-- Treating Healthcare Provider --></label>
+        <name>Treating_HCP__c</name>
+    </fields>
+    <fields>
+        <label><!-- Under 18 Years of Age --></label>
+        <name>Under_18__c</name>
+    </fields>
+    <fields>
+        <label><!-- Validated in Interview --></label>
+        <name>Validated_in_Interview__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Affiliation Type --></label>
+        <name>Wish_Affiliation_Type__c</name>
+        <picklistValues>
+            <masterLabel>Approved Participant</masterLabel>
+            <translation><!-- Approved Participant --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Declined Participant</masterLabel>
+            <translation><!-- Declined Participant --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Guardian of Minor Participant</masterLabel>
+            <translation><!-- Guardian of Minor Participant --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medical Professional</masterLabel>
+            <translation><!-- Medical Professional --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Requested Participant</masterLabel>
+            <translation><!-- Requested Participant --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wish Child</masterLabel>
+            <translation><!-- Wish Child --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Wish --></label>
+        <lookupFilter>
+            <errorMessage><!-- The Wish (case) record type must be of the type &apos;Wish&apos;. --></errorMessage>
+            <informationalMessage><!-- The Wish (Case) record type must be of the type &apos;Wish&apos;. --></informationalMessage>
+        </lookupFilter>
+        <name>Wish__c</name>
+        <relationshipLabel><!-- Wish Affiliations --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Work Email --></label>
+        <name>Work_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Work Phone --></label>
+        <name>Work_Phone__c</name>
+    </fields>
+    <layouts>
+        <layout>Wish Affiliation Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- HTF Information --></label>
+            <section>HTF Information</section>
+        </sections>
+        <sections>
+            <label><!-- Medical Professional Information --></label>
+            <section>Medical Professional Information</section>
+        </sections>
+        <sections>
+            <label><!-- Name and Type --></label>
+            <section>Name and Type</section>
+        </sections>
+        <sections>
+            <label><!-- Participant Information --></label>
+            <section>Participant Information</section>
+        </sections>
+        <sections>
+            <label><!-- Referral Source --></label>
+            <section>Referral Source</section>
+        </sections>
+        <sections>
+            <label><!-- Relationship Information --></label>
+            <section>Relationship Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Wish Affiliation Layout - Volunteer</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Name and Type --></label>
+            <section>Name and Type</section>
+        </sections>
+        <sections>
+            <label><!-- Participant Information --></label>
+            <section>Participant Information</section>
+        </sections>
+        <sections>
+            <label><!-- Referral Source --></label>
+            <section>Referral Source</section>
+        </sections>
+        <sections>
+            <label><!-- Relationship Information --></label>
+            <section>Relationship Information</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- All Medical Professionals must be linked to a Health Treatment Facility Account.  Please populate the HTF Account lookup field. --></errorMessage>
+        <name>Med_Profs_must_be_linked_to_a_HTF_Acc</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Only Medical Professionals can be linked to a Health Treatment Facility Account.  Please keep the HTF Account lookup blank, or update the Relationship Type to &apos;Medical Professional&apos;. --></errorMessage>
+        <name>Non_Med_Profs_cant_have_a_HTF_Acc</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Hide From Restricted Users cannot be selected for the Wish Child. --></errorMessage>
+        <name>Wish_Child_Cannot_Be_Hidden</name>
+    </validationRules>
+</CustomObjectTranslation>

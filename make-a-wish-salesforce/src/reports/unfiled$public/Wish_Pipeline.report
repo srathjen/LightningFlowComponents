@@ -34,39 +34,9 @@
         <field>Case$Start_Date__c</field>
     </columns>
     <columns>
-        <field>Case$Budget_Cash__c</field>
-    </columns>
-    <columns>
-        <field>Case$Budget_Inkind__c</field>
-    </columns>
-    <columns>
-        <field>Case$Budget_Total__c</field>
-    </columns>
-    <columns>
-        <field>Case$Actual_Cash__c</field>
-    </columns>
-    <columns>
-        <field>Case$Actual_Inkind__c</field>
-    </columns>
-    <columns>
-        <field>Case$Actual_Total__c</field>
-    </columns>
-    <columns>
         <field>Case$Description</field>
     </columns>
     <description>Wish Pipeline</description>
-    <filter>
-        <criteriaItems>
-            <column>Case$Budget_Cash__c</column>
-            <operator>notEqual</operator>
-            <value>0</value>
-        </criteriaItems>
-        <criteriaItems>
-            <column>Case$Budget_Inkind__c</column>
-            <operator>notEqual</operator>
-            <value>0</value>
-        </criteriaItems>
-    </filter>
     <format>Summary</format>
     <name>Wish Pipeline</name>
     <params>
@@ -76,6 +46,8 @@
     <reportType>Wish_Pipeline__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Case$Anticipated_Start_Date__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

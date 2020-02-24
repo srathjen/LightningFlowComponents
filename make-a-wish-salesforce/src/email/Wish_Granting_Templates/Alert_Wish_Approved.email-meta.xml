@@ -8,4 +8,5 @@
     <style>freeForm</style>
     <subject>Alert: Wish has been approved!</subject>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

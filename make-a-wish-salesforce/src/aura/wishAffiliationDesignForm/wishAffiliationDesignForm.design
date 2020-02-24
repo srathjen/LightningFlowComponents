@@ -1,0 +1,7 @@
+<!--
+ - Created by mnahar on 10/31/2019.
+ -->
+
+<design:component>
+    <design:attribute name="wishCaseRecordId" label="wishCaseRecordId" />
+</design:component>

@@ -60,10 +60,12 @@
         </sections>
     </layouts>
     <recordTypes>
+        <description><!-- It contains medical questions --></description>
         <label><!-- Medical Questions --></label>
         <name>Medical_Questions</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- It contains the list of current conditions for travel algorithm --></description>
         <label><!-- Travel Algorithm --></label>
         <name>Travel_Algorithm</name>
     </recordTypes>

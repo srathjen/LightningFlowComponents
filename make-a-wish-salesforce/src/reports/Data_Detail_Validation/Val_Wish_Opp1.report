@@ -31,11 +31,13 @@
     <filter>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Migrated_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>CUST_RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Volunteer_Opportunity__c.Wish</value>
         </criteriaItems>
@@ -49,6 +51,8 @@
     <reportType>CustomEntity$Volunteer_Opportunity__c@Volunteer_Opportunity__c.Wish__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Volunteer_Opportunity__c.NWE_Date__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

@@ -1,0 +1,7 @@
+<aura:documentation>
+	<aura:description>Documentation for PrintForOffline</aura:description>
+	<aura:example name="PrintForOffline" ref="PrintForOffline" label="PrintForOffline">
+		# Description
+		PrintForOffline is a custom component that generates a document link to Download and Print the DocGen Template.
+	</aura:example>
+</aura:documentation>

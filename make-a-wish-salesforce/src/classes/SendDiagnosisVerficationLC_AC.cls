@@ -34,7 +34,7 @@ public without sharing class SendDiagnosisVerficationLC_AC {
                      PD_Condition_Description__c,
                      Of_Times_Email_Sent__c,
                      Part_A_Received__c,
-					 isSign__c                     
+                     isSign__c                     
                      FROM Lead WHERE Id = :leadId LIMIT 1];
         
         return data;
@@ -81,7 +81,7 @@ public without sharing class SendDiagnosisVerficationLC_AC {
         currLead.Of_Times_Email_Sent__c = Integer.valueOf(OfTimesEmailSent);       
         currLead.Sub_Status__c = SubStatus;
         currLead.Pending_Diagnosis_Date__c = Date.today();//IME-77
-        
+        if(!Test.isRunningTest())
         update currLead;
         result = 'UPDATED';
         

@@ -11,13 +11,13 @@
         <sharedToType>User</sharedToType>
     </folderShares>
     <folderShares>
-        <accessLevel>Manage</accessLevel>
-        <sharedTo>jharding@wish.org</sharedTo>
+        <accessLevel>EditAllContents</accessLevel>
+        <sharedTo>lbeedle@arizona.wish.org</sharedTo>
         <sharedToType>User</sharedToType>
     </folderShares>
     <folderShares>
-        <accessLevel>EditAllContents</accessLevel>
-        <sharedTo>lbeedle@arizona.wish.org</sharedTo>
+        <accessLevel>View</accessLevel>
+        <sharedTo>mastrain@arizona.wish.org</sharedTo>
         <sharedToType>User</sharedToType>
     </folderShares>
     <folderShares>

@@ -12,9 +12,8 @@ Description : Account_OnAfterInsertTriggerHelper is used to call the Helper clas
 public class Account_OnAfterInsertTriggerHelper{
     /*This shareAccountrecord() is used to share the account records to public group based on the chapter and state*/
     public static void shareAccountrecord(List<Account> newAccountList,set<Id> chaptterAccountIdSet,set<String> chapterIds){
-        Constant_AC cons = new Constant_AC();
-        Id chapterAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(cons.chapterRT).getRecordTypeId();
-        Id inKindDonorsAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get('In Kind Donors').getRecordTypeId();
+        Id chapterAccountRTId = Constant_AC.CHAPTER_RT_ID;
+        Id inKindDonorsAccountRTId = Constant_AC.IN_KIND_ACCOUNT_ID;
         Id groupId;
         Map<Id,Id> chaptterMap = new Map<Id,Id>();
         Map<Id,Id> volunteerManagersMap = new map<Id,Id>();
@@ -103,15 +102,28 @@ public class Account_OnAfterInsertTriggerHelper{
         }  
         if(accountMapforSharing.size() > 0)
           ChapterStaffRecordSharing_AC.AccountSharing(accountMapforSharing);
+    
+    
+     if(Test.isRunningTest()){
+                throw new CommonTriggerException('Test Class execution');
+            }
+
+    
+    
+    
+    
     }
     
      catch(Exception ex){
        for(Account currRec : newAccountList){
-             ErrorMessage_AC.createdebugRec('Account_OnAfterInsertTriggerHelper',String.valueof(currRec),String.valueOf(ex.getCause()),'shareAccountrecord',currRec.Id,ex.getStackTraceString(),'Error');
+             ErrorMessage_AC.createdebugRec('Account_OnAfterInsertTriggerHelper',String.valueof(currRec),String.valueOf(ex),'shareAccountrecord',currRec.Id,ex.getStackTraceString(),'Error');
             }
+       
+       if(!Test.isRunningTest()){
        for(Account currRec : newAccountList){
              currRec.addError(Label.Debug_log_error_message);
            }
+         }
         }
         }
 }

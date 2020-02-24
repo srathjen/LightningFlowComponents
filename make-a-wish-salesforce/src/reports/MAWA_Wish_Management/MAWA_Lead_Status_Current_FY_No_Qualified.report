@@ -74,11 +74,13 @@
     <filter>
         <criteriaItems>
             <column>Lead.ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>STATUS</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Qualified</value>
         </criteriaItems>
@@ -102,6 +104,8 @@
     <reportType>LeadList</reportType>
     <scope>org</scope>
     <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Lead.Referred_Date__c</dateColumn>
         <interval>INTERVAL_CURFY</interval>

@@ -1,12 +1,12 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
 <![CDATA[<p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Contact.FirstName},<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Thank you for
 volunteering for&nbsp;<span style="background:white">{!Case.Hidden_Wish_Child_FirstName__c}</span>’s
 wish. Please take a moment to enter the wish presentation date for this wish
 child into the Make-A-Wish Volunteer Center once it is scheduled.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">To
-find this wish child's record, log in to the&nbsp;</span><span style="font-size: 12pt; font-family: Lato, sans-serif;"><a href="https://make-a-wish.force.com/communitieslogin"><span style="color:blue;
-background:white">Make-A-Wish Volunteer Center</span></a><span style="background:white">&nbsp;and click&nbsp;<b>"My Assignments"</b>.
+find this wish child's record, log in to the&nbsp;</span><span style="font-size: 12pt; font-family: Lato, sans-serif;"><span style="color:blue;
+background:white"><a href="{!$Label.Site_Url}">Make-A-Wish Volunteer Center</a></span><span style="background:white">&nbsp;and click&nbsp;<b>"My Assignments"</b>.
 Then click&nbsp;<b>"View"</b>&nbsp;on the&nbsp;appropriate&nbsp;wish
 child to access the record. Click the blue&nbsp;<b>"Granting"&nbsp;</b>section
 at the top of the page. Enter all the relevant information into the Wish

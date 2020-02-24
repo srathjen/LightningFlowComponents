@@ -1,0 +1,23 @@
+/**
+ * Created by gmayer on 02-Nov-19.
+ */
+
+.THIS .cardAffiliation {
+    min-height: 180px !important;
+}
+
+.THIS .cardType {
+    margin: auto;
+}
+
+.THIS .cardHeading {
+    font-size: 1.5em !important;
+}
+
+.THIS .cardAction {
+    align-self: center !important;
+}
+
+.THIS .iconAlert svg {
+    fill: #CF472A;
+}

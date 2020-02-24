@@ -30,16 +30,19 @@
     <filter>
         <criteriaItems>
             <column>Lead.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Hospital_Treatment_Facility_Treating__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Wish Assist</value>
         </criteriaItems>
@@ -58,6 +61,8 @@
     <reportType>LeadList</reportType>
     <scope>org</scope>
     <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
         <interval>INTERVAL_CURFY</interval>

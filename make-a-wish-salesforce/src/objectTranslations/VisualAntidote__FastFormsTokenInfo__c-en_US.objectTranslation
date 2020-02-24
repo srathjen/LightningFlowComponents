@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Is Native Setup Done --></label>
+        <name>VisualAntidote__Is_Native_Setup_Done__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Native --></label>
+        <name>VisualAntidote__Is_Native__c</name>
+    </fields>
+    <fields>
+        <help><!-- This field is not used anymore. --></help>
+        <label><!-- Old Refresh Token Field --></label>
+        <name>VisualAntidote__RefreshToken__c</name>
+    </fields>
+    <fields>
+        <help><!-- Check this field if you want to reset your Refresh Token. Do not forget to Publish your form after you check this field. --></help>
+        <label><!-- Reset Refresh Token --></label>
+        <name>VisualAntidote__Reset__c</name>
+    </fields>
+    <fields>
+        <label><!-- User Id --></label>
+        <name>VisualAntidote__User_Id__c</name>
+    </fields>
+</CustomObjectTranslation>

@@ -17,8 +17,11 @@ public class CloseVolunteerActivities_AC_Test {
     static testMethod void openWishActivities() {
         User volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null AND isActive = true LIMIT 1];
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
+        insert wishChild;
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        insert parentCase;
         Task newTask = OrientationandTrainingUtil.wishPresentationNotSet(parentCase.Id);
+        insert newTask;
         newTask.Subject = 'Conduct Intial Wish Visit';
         newTask.OwnerId = volUser.Id;
         newTask.Status = 'Not Started';

@@ -1,0 +1,73 @@
+<!-- 
+   * Locker Service Ready.
+   -->
+<aura:component controller="FormTrackerAttachment_AC" implements="force:appHostable,flexipage:availableForRecordHome,force:hasRecordID"
+                access="global">
+    
+    <aura:registerEvent name="appEvent" type="c:FormTrackerAttachment_LE"/>
+    <aura:handler event="c:FormTrackerAttachment_LE" action="{!c.handleApplicationEvent}"/>
+    
+    <!-- 'parentId' Aura Attribute for store the Id for Parent Record where we are attach our file -->  
+    <aura:attribute name="queryParams" type="Object"/>
+    <!-- 'parentId' Aura Attribute for store the Id for Parent Record where we are attach our file -->  
+    <aura:attribute name="parentId" type="Id" default="{!v.queryParams.recordId}" />
+    <!-- 'showLoadingSpinner' attribute for show/hide the uploading image and msg in aura:if-->
+    <aura:attribute name="showLoadingSpinner" type="boolean" default="false" />
+    <!-- 'fileName' attribute for display the selected file name -->  
+    <aura:attribute name="fileName" type="String" default="No File Selected.." />
+    <!-- Lightning Input with file type and on file change call the 'handleFilesChange' controller --> 
+    <aura:attribute name="showNav" type="boolean" default="false" />
+
+    <aura:attribute name="isButtonclicked" type="boolean" default="false" />
+
+    <aura:attribute name="isUploaded" type="boolean" default="true" />
+    
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    
+    <div class="col-sm-12 fieldsetwrapper">
+        <fieldset>
+            <legend>Upload Attachments</legend>
+            <div class="slds-grid nav-pos">
+                <div class="slds-col">
+                    <a data-label="returnToTrackModal" title="Return To Form Tracker" onclick="{!c.navigateToTraker}"><i class="fa fa-arrow-circle-o-left fa-custom"></i> Return To Form Tracker</a>
+                </div>
+                <aura:if isTrue="{!v.isUploaded}">                    
+                    <!-- <div class="slds-col">
+                        <a onclick="{!c.refreshComponent}" title="Attachments"> <i class="fa fa-upload fa-custom"></i> Attachments</a>  
+                    </div> -->
+                 <!--   <div class="slds-col">
+                        <a onclick="{!c.syncAttachment}" title="Attachments"> <i class="fa fa-cloud-upload fa-custom"></i> S-Drive Sync </a>  
+                    </div>-->
+                </aura:if> 
+            </div>
+            <lightning:input aura:id="fileId" onchange="{!c.handleFilesChange}" type="file" name="file" label="Upload Attachment" multiple="false"/>
+            <div class="slds-text-body_small slds-text-color_error slds-m-top_x-small">{!v.fileName} </div>
+            <!--use aura:if for show-hide the loading spinner image--> 
+            <aura:if isTrue="{!v.showLoadingSpinner}">
+                <div class="slds-text-body_small slds-text-color_error">Uploading... 
+                    <img src="/auraFW/resources/aura/images/spinner.gif" class="spinner-img" alt="Loading"/>'
+                </div>
+            </aura:if>
+            <br/>
+            <button disabled="{!v.isUploaded}" class="slds-button slds-button_brand" onclick="{!c.doSave}">Upload Attachment</button>
+        </fieldset>
+    </div>
+    <!-- Return to Wish Modal Popup Start -->
+    <c:sldsModal confirmboxActive='true' aura:id="returnToTrackModal" closeAction="{!c.closeTaskModal}">
+        <aura:set attribute="header">
+            ALERT
+        </aura:set>
+        <aura:set attribute="content">
+            <div class="col-sm-12">
+                 <lightning:icon class="fillRed col-sm-2" alternativeText="View" iconName="utility:warning" size="small"  /> 
+                <div class="col-sm-10">
+                    You have an attachment that has not been uploaded yet. Please click the UPLOAD button to complete uploading process
+                </div>
+            </div>
+        </aura:set>
+        <aura:set attribute="footer">
+          
+        </aura:set>
+    </c:sldsModal>
+    <!--  Return to Wish Modal Popup End -->
+</aura:component>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- fileIds --></label>
+        <name>cg__fileIds__c</name>
+    </fields>
+    <fields>
+        <label><!-- fileObjectName --></label>
+        <name>cg__fileObjectName__c</name>
+    </fields>
+    <fields>
+        <label><!-- namespace --></label>
+        <name>cg__namespace__c</name>
+    </fields>
+    <fields>
+        <label><!-- organizationId --></label>
+        <name>cg__organizationId__c</name>
+    </fields>
+    <fields>
+        <label><!-- parentId --></label>
+        <name>cg__parentId__c</name>
+    </fields>
+    <fields>
+        <label><!-- relationshipName --></label>
+        <name>cg__relationshipName__c</name>
+    </fields>
+    <fields>
+        <label><!-- sDriveFolderId --></label>
+        <name>cg__sDriveFolderId__c</name>
+    </fields>
+</CustomObjectTranslation>

@@ -24,6 +24,7 @@
     <filter>
         <criteriaItems>
             <column>ProcessInstance$Status</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>P</value>
         </criteriaItems>
@@ -42,6 +43,8 @@
     <reportType>Delegated_Approver_Report__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>ProcessInstance$CreatedDate</dateColumn>
         <interval>INTERVAL_CURPREV1</interval>

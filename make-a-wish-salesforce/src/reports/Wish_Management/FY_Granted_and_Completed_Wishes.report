@@ -62,10 +62,7 @@
         <field>Case.Concept_Approval_Date__c</field>
     </columns>
     <columns>
-        <field>Case.Budget_Approved_Date__c</field>
-    </columns>
-    <columns>
-        <field>Case.Anticipated_Start_Date__c</field>
+        <field>Case.Budget_Approved_Date_from_Budget__c</field>
     </columns>
     <columns>
         <field>Case.Start_Date__c</field>
@@ -82,31 +79,37 @@
     <filter>
         <criteriaItems>
             <column>STATUS</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Granted,Completed</value>
         </criteriaItems>
         <criteriaItems>
             <column>CONTACT_RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Contact.Medical_Professional,Contact.Volunteer_Contact,Contact.Wish_Family,Contact.Board_Member</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Assist__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>CONTACT.NAME</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>nemo clownfish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
@@ -129,6 +132,8 @@
     <reportType>CaseList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <sortColumn>CONTACT.NAME</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>

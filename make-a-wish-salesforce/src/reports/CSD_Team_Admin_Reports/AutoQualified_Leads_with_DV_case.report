@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Lead$Name</field>
+    </columns>
+    <columns>
+        <field>Lead$Auto_Qualified__c</field>
+    </columns>
+    <columns>
+        <field>Lead$RFI_Form_Info_Hidden__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Using_Paper_Process_For_DV__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Lead$ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Make-A-Wish Arizona,Make-A-Wish North Texas,Make-A-Wish Alaska &amp; Washington</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Lead$ChapterName__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>AutoQualified Leads with DV case</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Leads_with_Diagnosis_Verification_case_details__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2018-05-05</startDate>
+    </timeFrameFilter>
+</Report>

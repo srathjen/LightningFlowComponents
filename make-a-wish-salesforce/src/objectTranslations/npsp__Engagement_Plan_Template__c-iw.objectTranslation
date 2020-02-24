@@ -20,6 +20,69 @@
         <plural>true</plural>
         <value><!-- הEngagement Plan Template --></value>
     </caseValues>
+    <fieldSets>
+        <label><!-- Manage EP Template FS --></label>
+        <name>npsp__ManageEPTemplateFS</name>
+    </fieldSets>
+    <fields>
+        <help>חישוב מחדש של תאריך היעד של משימת צאצא לפי המועד שבו משימת האב הושלמה בפועל.</help>
+        <label><!-- Automatically Update Child Task Due Date --></label>
+        <name>npsp__Automatically_Update_Child_Task_Due_Date__c</name>
+    </fields>
+    <fields>
+        <help>כאשר השדה &apos;הוקצה ל-&apos; של משימת תוכנית מעורבות נשאר ריק, למי יש להפנות את המשימה?</help>
+        <label><!-- Default Assignee --></label>
+        <name>npsp__Default_Assignee__c</name>
+        <picklistValues>
+            <masterLabel>Owner of Object for Engagement Plan</masterLabel>
+            <translation>בעלים של אובייקט עבור תוכנית מעורבות</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>User Creating Engagement Plan</masterLabel>
+            <translation>משתמש היוצר תוכנית מעורבות</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>npsp__Description__c</name>
+    </fields>
+    <fields>
+        <help>האם משימות שתאריך היעד שלהן בסוף השבוע צריכות להיות מתוזמנות ליום שישי שלפני סוף השבוע, או ליום שני שאחריו? אפשרות זו תקפה רק אם האפשרות &apos;דלג על סופי שבוע&apos; מסומנת.</help>
+        <label><!-- Reschedule To --></label>
+        <name>npsp__Reschedule_To__c</name>
+        <picklistValues>
+            <masterLabel>Friday</masterLabel>
+            <translation>שישי</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Monday</masterLabel>
+            <translation>שני</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help>אם אפשרות זו מסומנת, תאריכי היעד של משימות שייווצרו בתוכנית מעורבות זו לא יהיו בימי שבת או ראשון.</help>
+        <label><!-- Skip Weekends --></label>
+        <name>npsp__Skip_Weekends__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Engagement Plans --></label>
+        <name>npsp__Total_Engagement_Plans__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Tasks --></label>
+        <name>npsp__Total_Tasks__c</name>
+    </fields>
     <gender><!-- Masculine --></gender>
+    <layouts>
+        <layout>Engagement Plan Template Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
     <nameFieldLabel><!-- Engagement Plan Template Name --></nameFieldLabel>
+    <webLinks>
+        <label><!-- Manage_Template --></label>
+        <name>npsp__Manage_Template</name>
+    </webLinks>
 </CustomObjectTranslation>

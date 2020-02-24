@@ -19,6 +19,7 @@
     <filter>
         <criteriaItems>
             <column>User$Profile.UserLicense.Name</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Customer Community Plus</value>
         </criteriaItems>
@@ -37,6 +38,8 @@
     <reportType>Volunteer_Retention__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>User*User$Inactive_Date__c</dateColumn>
         <interval>INTERVAL_CURRENTQ</interval>

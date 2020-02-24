@@ -65,8 +65,10 @@
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Diagnosis Verification Record Page</masterLabel>
-    <pageTemplate>flexipage:recordHomeTemplateDesktop</pageTemplate>
     <parentFlexiPage>flexipage__default_rec_L</parentFlexiPage>
     <sobjectType>Diagnosis_Verification__c</sobjectType>
+    <template>
+        <name>flexipage:recordHomeTemplateDesktop</name>
+    </template>
     <type>RecordPage</type>
 </FlexiPage>

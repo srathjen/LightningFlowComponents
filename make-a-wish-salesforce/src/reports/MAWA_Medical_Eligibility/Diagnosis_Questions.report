@@ -37,6 +37,14 @@
         <field>Lead.Diagnosis_Verification__r$Medical_Question_Answer__c</field>
     </columns>
     <description>Leads and Mini case for DV</description>
+    <filter>
+        <criteriaItems>
+            <column>Lead$Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+    </filter>
     <format>Tabular</format>
     <name>Diagnosis Questions</name>
     <params>
@@ -46,8 +54,10 @@
     <reportType>Leads_detail__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Lead$Referred_Date__c</dateColumn>
-        <interval>INTERVAL_PREV2FY</interval>
+        <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>

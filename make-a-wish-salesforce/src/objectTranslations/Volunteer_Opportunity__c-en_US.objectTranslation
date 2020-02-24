@@ -8,6 +8,34 @@
         <plural>true</plural>
         <value>Volunteer Opportunities</value>
     </caseValues>
+    <fieldSets>
+        <label><!-- MyAssignmentsClosedNonWish --></label>
+        <name>MyAssignmentsClosedNonWish</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- MyAssignmentsClosedWish --></label>
+        <name>MyAssignmentsClosedWish</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- MyAssignmentsNonWish --></label>
+        <name>MyAssignmentsNonWish</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- MyAssignmentsWish --></label>
+        <name>MyAssignmentsWish</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- NonWishEvents --></label>
+        <name>NonWishEvents</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- VolunteerDetails --></label>
+        <name>VolunteerDetails</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- WishEvents --></label>
+        <name>WishEvents</name>
+    </fieldSets>
     <fields>
         <label><!-- About Me --></label>
         <name>About_Me__c</name>
@@ -39,6 +67,10 @@
             <masterLabel>Rejection Notification</masterLabel>
             <translation><!-- Rejection Notification --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Approved Date --></label>
+        <name>Approved_Date__c</name>
     </fields>
     <fields>
         <label><!-- Case Owner --></label>
@@ -360,6 +392,10 @@
         <name>Hidden_Volunteer_FirstName__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden allow Hold status --></label>
+        <name>Hidden_allow_Hold_status__c</name>
+    </fields>
+    <fields>
         <label><!-- Hobbies --></label>
         <name>Hobbies__c</name>
     </fields>
@@ -436,6 +472,7 @@
         <name>Name__c</name>
     </fields>
     <fields>
+        <help><!-- Note: Wish Granters require additional training prior to working with Non-Verbal wish children. --></help>
         <label><!-- Non - Verbal --></label>
         <name>Non_Verbal__c</name>
     </fields>
@@ -443,6 +480,14 @@
         <label><!-- Name --></label>
         <name>Non_Wish_Event__c</name>
         <relationshipLabel><!-- Volunteer Opportunities --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Number Of Active Wishes For This Vol --></label>
+        <name>Number_Of_Active_Wishes_For_This_Vol__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number Of Wishes Granted By This Vol --></label>
+        <name>Number_Of_Wishes_Granted_By_This_Vol__c</name>
     </fields>
     <fields>
         <label><!-- RE Created Date --></label>
@@ -736,6 +781,10 @@
             <translation><!-- Completed --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Hold</masterLabel>
+            <translation><!-- Hold --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Inactive</masterLabel>
             <translation><!-- Inactive --></translation>
         </picklistValues>
@@ -751,6 +800,10 @@
     <fields>
         <label><!-- Total Hours --></label>
         <name>Total_Hours__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unique Record Count --></label>
+        <name>Unique_Record_Count__c</name>
     </fields>
     <fields>
         <label><!-- Volunteer Contact --></label>
@@ -859,6 +912,10 @@
         <name>Waiting_Since__c</name>
     </fields>
     <fields>
+        <label><!-- Wish Child Name --></label>
+        <name>Wish_Child_Name__c</name>
+    </fields>
+    <fields>
         <label><!-- Wish Child --></label>
         <name>Wish_Child__c</name>
     </fields>
@@ -886,6 +943,10 @@
     <fields>
         <label><!-- Zip --></label>
         <name>Zip__c</name>
+    </fields>
+    <fields>
+        <label><!-- # of Days until Approved --></label>
+        <name>of_Days_until_Approved__c</name>
     </fields>
     <layouts>
         <layout>Non Wish &amp; Event</layout>
@@ -979,8 +1040,23 @@
             <section>Volunteer Details</section>
         </sections>
         <sections>
+            <label><!-- Wish Child Communication --></label>
+            <section>Wish Child Communication</section>
+        </sections>
+        <sections>
             <label><!-- Wish Child Details --></label>
             <section>Wish Child Details</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Details --></label>
+            <section>Wish Details</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Wish (for Vol Opp Approvals)</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
         </sections>
     </layouts>
     <layouts>
@@ -1005,8 +1081,16 @@
             <section>Custom Links</section>
         </sections>
         <sections>
+            <label><!-- General Information --></label>
+            <section>General Information</section>
+        </sections>
+        <sections>
             <label><!-- Volunteer Details --></label>
             <section>Volunteer Details</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Child Communication --></label>
+            <section>Wish Child Communication</section>
         </sections>
         <sections>
             <label><!-- Wish Child Details --></label>
@@ -1014,18 +1098,22 @@
         </sections>
     </layouts>
     <recordTypes>
+        <description><!-- This record type would associate the volunteer to non wish and event --></description>
         <label><!-- Non Wish &amp; Event --></label>
         <name>Non_Wish_Event</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- This Record type is assigned to volunteer.Who are all registered for the non wish. --></description>
         <label><!-- Volunteer Registered Non Wish --></label>
         <name>Volunteer_Registered_Non_Wish</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- This Record type is assigned to volunteer for who are all registered for the wish. --></description>
         <label><!-- Volunteer Registered Wish --></label>
         <name>Volunteer_Registered_Wish</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- This record type would associate the volunteer to the wish --></description>
         <label><!-- Wish --></label>
         <name>Wish</name>
     </recordTypes>
@@ -1037,6 +1125,10 @@
     <validationRules>
         <errorMessage><!-- You cannot create volunteer opportunity for closed wish. --></errorMessage>
         <name>Vol_Opp_Do_Not_Create_for_Closed_Wish</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Hold is a system-generated status and cannot be manually assigned. --></errorMessage>
+        <name>Volunteer_Opp_Hold_Status</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- Please check the Inactive check box. --></errorMessage>

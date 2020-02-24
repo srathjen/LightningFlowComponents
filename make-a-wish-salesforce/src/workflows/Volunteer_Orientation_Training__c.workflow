@@ -109,6 +109,16 @@
         <template>Automated_Volunteer_Templates/Training_Virtual_Self_Paced_Registered_Email_Template</template>
     </alerts>
     <fieldUpdates>
+        <fullName>Copy_Class_Date</fullName>
+        <description>Copies class date from parent Class Offering record</description>
+        <field>Class_Date__c</field>
+        <formula>Class_Offering__r.Date__c</formula>
+        <name>Copy Class Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>VolunteerO_T_Completed_Date</fullName>
         <description>It update the Hidden Completed Date Field: if record type as Virtual_Self_Paced then value is Today()  other wise Class Offering Date.</description>
         <field>Hidden_Completed_Date__c</field>
@@ -330,6 +340,17 @@
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
+        <fullName>Stamp Class Date</fullName>
+        <actions>
+            <name>Copy_Class_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Workflow rule fires to populate the Class Date directly on the Volunteer Orientation &amp; Training record, so that it can be used in roll-up-summaries to the Contact.</description>
+        <formula>!ISBLANK(Class_Offering__c) &amp;&amp;  ISBLANK(Class_Date__c) &amp;&amp;  !ISBLANK(Class_Offering__r.Date__c)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
         <fullName>Training%3A Pending Volunteer%2C Virtual Self Paced Cancelled  Workflow</fullName>
         <active>false</active>
         <criteriaItems>
@@ -415,7 +436,7 @@
     </rules>
     <tasks>
         <fullName>O_T_ET_Orientation_Cancelled</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -427,7 +448,7 @@
     </tasks>
     <tasks>
         <fullName>O_T_ET_Orientation_Completed</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -439,7 +460,7 @@
     </tasks>
     <tasks>
         <fullName>O_T_ET_Successfully_Registered_for_Orientation</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -451,7 +472,7 @@
     </tasks>
     <tasks>
         <fullName>O_T_ET_Successfully_Registered_for_Orientation_VSF</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -463,7 +484,7 @@
     </tasks>
     <tasks>
         <fullName>O_T_ET_Successfully_Registered_for_Training</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -475,7 +496,7 @@
     </tasks>
     <tasks>
         <fullName>O_T_ET_Successfully_Registered_for_Training_VSF</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -487,7 +508,7 @@
     </tasks>
     <tasks>
         <fullName>O_T_ET_Training_Cancelled</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -499,7 +520,7 @@
     </tasks>
     <tasks>
         <fullName>O_T_ET_Training_Completed</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>

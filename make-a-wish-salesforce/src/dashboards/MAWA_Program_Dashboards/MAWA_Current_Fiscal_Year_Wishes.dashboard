@@ -16,6 +16,7 @@
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
+            <groupingSortProperties/>
             <header>Pipeline by Anticipated Start Date</header>
             <legendPosition>Bottom</legendPosition>
             <report>MAWA_Wish_Management/MAWA_CFY_Pipeline_by_Antici_St_Date</report>
@@ -37,6 +38,7 @@
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
+            <groupingSortProperties/>
             <header>Wishes Scheduled by Month</header>
             <legendPosition>Bottom</legendPosition>
             <report>MAWA_Wish_Management/DRAFT_MAWA_CFY_Wishes_Sch_by_Month</report>

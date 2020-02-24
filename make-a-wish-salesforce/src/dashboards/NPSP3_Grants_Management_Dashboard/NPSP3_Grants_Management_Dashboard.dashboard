@@ -31,6 +31,7 @@
             <displayUnits>Integer</displayUnits>
             <gaugeMax>75000.0</gaugeMax>
             <gaugeMin>0.0</gaugeMin>
+            <groupingSortProperties/>
             <header>⬆Use the &quot;Close Date&quot; filter above to change the results</header>
             <indicatorBreakpoint1>25000.0</indicatorBreakpoint1>
             <indicatorBreakpoint2>50000.0</indicatorBreakpoint2>
@@ -39,6 +40,7 @@
             <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
             <report>NPSP3_Grants_Management_Reports/NPSP3_Total_Grants_Received</report>
             <showPercentage>true</showPercentage>
+            <showRange>false</showRange>
             <showTotal>true</showTotal>
             <showValues>false</showValues>
             <title>Goal: $75,000</title>
@@ -68,6 +70,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <groupingColumn>STAGE_NAME</groupingColumn>
+            <groupingSortProperties/>
             <header>Grant Pipeline Planning</header>
             <legendPosition>Bottom</legendPosition>
             <report>NPSP3_Grants_Management_Reports/NPSP3_Grant_Pipeline_Planning</report>
@@ -89,6 +92,7 @@
             <displayUnits>Integer</displayUnits>
             <drillEnabled>false</drillEnabled>
             <drillToDetailEnabled>false</drillToDetailEnabled>
+            <groupingSortProperties/>
             <header>Top 10 Grants Received</header>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>

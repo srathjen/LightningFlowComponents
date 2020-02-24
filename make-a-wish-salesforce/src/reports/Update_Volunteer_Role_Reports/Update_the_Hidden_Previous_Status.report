@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>CUST_ID</field>
+    </columns>
+    <columns>
+        <field>Volunteer_Roles__c.Status__c</field>
+    </columns>
+    <columns>
+        <field>Volunteer_Roles__c.Sub_status__c</field>
+    </columns>
+    <columns>
+        <field>Volunteer_Roles__c.Hidden_Previous_Status__c</field>
+    </columns>
+    <columns>
+        <field>Volunteer_Roles__c.Hidden_Previous_Sub_Status__c</field>
+    </columns>
+    <description>If  Hidden Previous Status is Pending Training then update to Pending and Hidden Sub Status is Missing Requirement.If Hidden Previous status is Former-Chapter or Former - Volunteer then update to Null.If status is blank  then update the previous status.</description>
+    <filter>
+        <booleanFilter>1 OR 2 OR 3</booleanFilter>
+        <criteriaItems>
+            <column>Volunteer_Roles__c.Status__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Volunteer_Roles__c.Hidden_Previous_Status__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Former - Chapter</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Volunteer_Roles__c.Hidden_Previous_Status__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Pending Training</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Update the Hidden Previous Status</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Volunteer_Roles__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Volunteer_Roles__c.Hidden_Previous_Status__c</sortColumn>
+    <sortOrder>Desc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>CUST_LAST_UPDATE</dateColumn>
+        <endDate>2018-10-22</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2018-09-29</startDate>
+    </timeFrameFilter>
+</Report>

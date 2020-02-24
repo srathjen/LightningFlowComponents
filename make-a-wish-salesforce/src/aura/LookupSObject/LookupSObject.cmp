@@ -1,0 +1,101 @@
+<aura:component controller="LookupSObjectCtlr"
+                implements="flexipage:availableForAllPageTypes"
+                access="global"
+                description="LookupSObject">
+
+    <!-- Attributes (internal use) -->
+    <aura:attribute name="searchString"
+                    type="String"
+                    description="The search string to find."/>
+    <aura:attribute name="matches"
+                    type="Map[]"
+                    description="The resulting matches returned by the Apex controller."/>
+
+    <!-- Attributes (set from parent component) -->
+    <aura:attribute name="lookupId" 
+                    type="String"
+                    description="Field id to manage more then one lookup when handling event"/>
+    <aura:attribute name="sObjectAPIName"
+                    type="String"
+                    required="true"
+                    description="The API name of the SObject to search"/>
+    <aura:attribute name="recordId"
+                    type="Id"
+                    required="true"
+                    description="Id from search term result (a parent component can use this to bind the value to a parent attribute)"/>
+    <aura:attribute name="label"
+                    type="String"
+                    required="true"
+                    description="The label to assign to the lookup, eg: Account"/>
+    <aura:attribute name="pluralHint"
+                    type="String"
+                    required="true"
+                    description="The plural hint to be used as part of the placeholder text, eg: Accounts"/>
+    <aura:attribute name="fieldsToReturn"
+                    type="String"
+                    default="Name"
+                    description="Field names to return when searching"/>
+    <aura:attribute name="formattedOutput"
+                    type="String"
+                    default="{0}"
+                    description="The format to return results, eg: {0}, {1} - {2}"/>
+    <aura:attribute name="iconFullName"
+                    type="String"
+                    default="standard:empty"
+                    description="The Lightning Design System name of the icon, eg: standard:contact"/>
+    <aura:attribute name="filter"
+                    type="Map[]"
+                    description="Filter fields on search"/>
+    <aura:attribute name="disabled"
+                    type="Boolean"
+                    description="Determine if the input field should be disabled"
+                    default="false"/>
+
+    <!-- Events -->
+    <aura:handler name="init"
+                  value="{!this}"
+                  action="{!c.doInit}"/>
+    <aura:handler name="lookupSObjectSelect"
+                  event="c:LookupSObjectSelectEvent"
+                  action="{!c.select}"/>
+    <aura:registerEvent name="lookupSObjectClear" type="c:LookupSObjectClearEvent"/>
+    <aura:handler name="lookupSObjectClear"
+                  event="c:LookupSObjectClearEvent"
+                  action="{!c.clear}"/>
+
+    <!-- Markup -->
+    <div class="slds-form-element__control">
+        <div class="slds-combobox_container">
+            <div aura:id="lookup-div"
+                 class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-combobox-lookup"
+                 aria-expanded="false"
+                 aria-haspopup="listbox"
+                 role="combobox">
+                <div class="slds-combobox__form-element">
+                    <lightning:input aura:id="lookup"
+                                     type="search"
+                                     name="lookup"
+                                     label="{!v.label}"
+                                     placeholder="{!'Search ' + v.pluralHint + '...'}"
+                                     value="{!v.searchString}"
+                                     onchange="{!c.search}"
+                                     onblur="{!c.blur}"
+                                     disabled="{!v.disabled}"/>
+                </div>
+                <div aura:id="lookuplist" role="listbox">
+                    <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid"
+                        role="presentation">
+                        <aura:iteration items="{!v.matches}" var="item">
+                            <c:LookupSObjectItem lookupId="{! v.lookupId }"
+                                                 record="{! item }"
+                                                 iconFullName="{! v.iconFullName }"
+                                                 searchString="{! v.searchString }"
+                                                 filter="{! v.filter }"/>
+                        </aura:iteration>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</aura:component>

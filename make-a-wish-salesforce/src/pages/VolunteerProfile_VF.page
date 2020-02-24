@@ -9,6 +9,7 @@
         .p-info-btn {font-family:'Lato', Arial, sans-serif; border: none; text-transform: uppercase; font-size: .85rem; border-bottom: 2px solid #333; color: #fff; height: 3.75rem;}
 
     </style>
+    
  <script type="text/javascript">
             function openLMS(ssoLink, courseLink) {
                 newwindow = window.open(ssoLink, 'openLMS');
@@ -29,7 +30,7 @@
             <div class="row">
                 <section class="col-md-12">
                     <apex:form id="formId">
-                       
+                       <apex:pageMessages id="showmsg"/>
                         <h1>Profile</h1>
 
                         <apex:outputPanel rendered="{!PersonalInfoSave}" styleClass="p-info-btn-base">
@@ -37,7 +38,7 @@
 
 
                             <fieldset class="saved">
-                            <apex:pageMessages id="showmsg"/>
+                            
                                     <legend>Your Information</legend>
 
                                     <div class="col-md-12">
@@ -222,7 +223,89 @@
 
                             </fieldset>
 
+                            <!-- ------------------------ Employment - output   ----------------------- -->
+                            
+                            <fieldset class="saved">
+                                    <legend>Employment</legend>
 
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Employer: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Employer__c}" id="emp"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Street: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Street_Employer__c}" id="streetEmp"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">City: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].City_Employer__c}" id="cityEmp"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">State: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].State_Employer__c}" id="stateEmp"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Zip: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Zip_Employer__c}" id="zipEmp"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Phone: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].npe01__WorkPhone__c}" id="workPh"/></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-10 col-sm-10">May we contact you at work: </apex:outputLabel>
+                                            <span class="col-xs-2 col-sm-2 text-muted"><apex:outputField value="{!contactInstance[0].May_We_Contact_You_at_Work__c}" id="mayWeContact"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-10 col-sm-10">Would you like to share the power of a wish<sup>®</sup> at work by learning more about our wishmakers at work<sup>®</sup> program? </apex:outputLabel>
+                                            <span class="col-xs-2 col-sm-2 text-muted"><apex:outputField value="{!contactInstance[0].Interested_involved_with_Make_A_Wish__c}" id="interestedMakeWish"/></span>
+                                        </div>
+                                    </div>
+                            </fieldset>
+                            
+                            <!-- ------------------------------  Emergency Contact - output ------------------------------ -->
+                            
+                            <fieldset class="saved">
+                                    <legend>Emergency Contact</legend>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Name: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Emergency_Contact__c}" id="emergeContact"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Relationship: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Emergency_Contact_Relationship__c}" id="emergeConRelation"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Phone: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Emergency_Contact_Phone__c}" id="emergeContactPh"/></span>
+                                        </div>
+                                    </div>
+                            </fieldset>
+
+                          <!--  <fieldset class="footer">
+                                <div class="form-group row">
+                                    <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-4 col-md-push-10">
+                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md edit" value="edit" action="{!EditEmergencyInfo}" reRender="formId,uiStates"/>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </apex:outputpanel>
+
+                            <fieldset class="footer">
+                                <div class="form-group row">
+                                    <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-4 col-md-push-10">
+                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md edit" value="edit" action="{!EditEmployeeInfo}" reRender="formId,uiStates"/>
+                                    </div>
+                                </div>
+                            </fieldset> -->
+                            
+                            
+                            
                             <fieldset class="footer">
                                 <div class="form-group row">
                                     <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-4 col-md-push-10 p-info">
@@ -231,6 +314,8 @@
                                     </div>
                                 </div>
                             </fieldset>
+                            
+                            
 
                         </apex:outputPanel>
 
@@ -259,7 +344,7 @@
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-3">
-                                                <apex:outputLabel >First Name</apex:outputLabel>
+                                                <apex:outputLabel >First Name</apex:outputLabel> <span style="color:red;">*</span>
                                             </div>
                                             <div class="col-sm-6">
                                                 <apex:inputText styleClass="form-control name-group firstname" html-placeholder="FirstName" maxlength="50" value="{!contactInstance[0].FirstName}" id="firstN"/>
@@ -268,7 +353,7 @@
 
                                        <div class="form-group row">
                                             <div class="col-sm-3">
-                                                <apex:outputLabel >Last Name</apex:outputLabel>
+                                                <apex:outputLabel >Last Name</apex:outputLabel> <span style="color:red;">*</span>
                                             </div>
                                             <div class="col-sm-6">
                                                 <apex:inputText styleClass="form-control name-group lastname" html-placeholder="LastName" maxlength="50" value="{!contactInstance[0].LastName}" id="lastN"/>
@@ -286,20 +371,20 @@
 
                                         <div class="form-group row">
                                           <div class="col-sm-3">
-                                                <apex:outputLabel for="preferredphonenumber" html-aria-labelledby="Preferred Phone Number">Mobile Phone</apex:outputLabel>
+                                                <apex:outputLabel for="preferredphonenumber" html-aria-labelledby="Preferred Phone Number">Mobile Phone</apex:outputLabel> <span style="color:red;">*</span>
                                               </div>
                                             <div class="col-xs-8 col-sm-6">
                                                 <apex:inputText styleClass="form-control f-phone phonechk" maxlength="10" id="preferredphonenumber" html-placeholder="(000) 000-0000" value="{!contactInstance[0].MobilePhone}"  />
                                             </div>
                                             <label for="preferredphone" class="sr-only">Preferred Phone Number Type</label>
                                            <!-- <div class="col-xs-4 col-sm-3">
-                                                <apex:inputField styleClass="form-control col-xs-12 col-sm-12 c-select sm-list required" id="preferredphonetype" value="{!contactInstance[0].npe01__PreferredPhone__c}" />
+                                                <apex:inputField styleClass="form-control col-xs-12 col-sm-12 c-select sm-list required preferredphonetype" id="preferredphonetype" value="{!contactInstance[0].npe01__PreferredPhone__c}" />
                                             </div> -->
                                         </div>
 
                                         <div class="form-group row">
                                           <div class="col-sm-3">
-                                                <apex:outputLabel for="emailaddress">Email Address</apex:outputLabel>
+                                                <apex:outputLabel for="emailaddress">Email Address</apex:outputLabel> <span style="color:red;">*</span>
                                               </div>
                                             <div class="col-xs-8 col-sm-6">
                                                 <apex:inputText styleClass="form-control email" id="emailaddress" maxlength="50" html-placeholder="your_email@domain.com" value="{!contactInstance[0].Email}" />
@@ -312,7 +397,7 @@
 
                                         <div class="form-group row">
                                             <div class="col-sm-3">
-                                                <apex:outputLabel for="address">Street</apex:outputLabel>
+                                                <apex:outputLabel for="address">Street</apex:outputLabel> <span style="color:red;">*</span>
                                             </div>
                                             <div class="col-sm-6">
                                                 <apex:inputText styleClass="form-control address" id="address" html-placeholder="0000 NE 00 Ave"  value="{!contactInstance[0].MailingStreet}"  />
@@ -321,7 +406,7 @@
 
                                         <div class="form-group row">
                                             <div class="col-sm-3">
-                                                <apex:outputLabel for="city">City</apex:outputLabel>
+                                                <apex:outputLabel for="city">City</apex:outputLabel> <span style="color:red;">*</span>
                                             </div>
                                             <div class="col-sm-6">
                                                 <apex:inputText styleClass="form-control city" id="city" html-placeholder="City" maxlength="23" value="{!contactInstance[0].MailingCity}"  />
@@ -330,7 +415,7 @@
 
                                         <div class="form-group row">
                                             <div class="col-sm-3">
-                                                <apex:outputLabel for="state">State</apex:outputLabel>
+                                                <apex:outputLabel for="state">State</apex:outputLabel> <span style="color:red;">*</span>
                                             </div>
                                             <div class="col-sm-6">
                                                 <apex:selectList styleClass="form-control f-state c-select" size="1" id="state" multiselect="false" value="{!contactInstance[0].mailingstate}">
@@ -340,21 +425,21 @@
                                         </div>
 
                                         <div class="form-group row">
-                                                <apex:outputLabel styleClass="col-sm-3" for="zipcode">Postal Code</apex:outputLabel>
+                                                <apex:outputLabel styleClass="col-sm-3" for="zipcode">Postal Code <span style="color:red;font-size:13px;">&nbsp;*</span></apex:outputLabel> 
                                             <div class="col-sm-6">
                                                 <apex:inputText styleClass="form-control postalcode numbers-only" id="zipcode" html-placeholder="00000-0000" maxlength="10" html-minlength="5" value="{!contactInstance[0].mailingpostalcode}"  />
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-3">
-                                                <apex:outputLabel for="county2">County</apex:outputLabel>
+                                                <apex:outputLabel for="county2">County</apex:outputLabel> <span style="color:red;">*</span>
                                             </div>
                                             <div class="col-sm-6">
                                                 <apex:inputText styleClass="form-control county2 required" html-placeholder="County" value="{!contactInstance[0].County__c}" id="coun"/>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                                <apex:outputLabel styleClass="col-sm-3" for="birthmonth">Birth Date</apex:outputLabel>
+                                                <apex:outputLabel styleClass="col-sm-3" for="birthmonth">Birth Date <span style="color:red;font-size:13px;">&nbsp;*</span></apex:outputLabel> 
                                             <div class="col-xs-12 col-sm-6 col-md-6">
                                                 <!-- <apex:inputText styleClass="form-control col-xs-12 col-sm-12 col-md-12" html-placeholder="Month" maxlength="9" value="{!contactInstance[0].Birth_Month__c}"/> -->
                                                 <apex:inputField styleClass="form-control col-xs-12 col-sm-12 col-md-12 c-select bmonth required" id="birthmonth" value="{!contactInstance[0].Birth_Month__c}"/>
@@ -421,9 +506,9 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                           <apex:outputLabel for="PreferredPhone" styleClass="col-sm-3">Preferred Phone Type</apex:outputLabel>
+                                           <apex:outputLabel for="PreferredPhone" styleClass="col-sm-3">Preferred Phone Type <span style="color:red;font-size:13px;">&nbsp;*</span></apex:outputLabel>
                                            <div class="col-sm-6">
-                                                <apex:inputField styleClass="form-control col-xs-12 col-sm-12 c-select sm-list required" id="preferredphonetype" value="{!contactInstance[0].npe01__PreferredPhone__c}" />
+                                                <apex:inputField styleClass="form-control col-xs-12 col-sm-12 c-select sm-list required preferredphonetype" id="preferredphonetype" value="{!contactInstance[0].npe01__PreferredPhone__c}" />
                                            </div>
                                         </div>
                                         <div class="form-group row">
@@ -433,13 +518,13 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <apex:outputLabel for="preferemailtype" styleClass="col-sm-3">Preferred Email Type</apex:outputLabel>
+                                            <apex:outputLabel for="preferemailtype" styleClass="col-sm-3">Preferred Email Type <span style="color:red;font-size:13px;">&nbsp;*</span></apex:outputLabel>
                                             <div class="col-sm-6">
                                                 <apex:inputField styleClass="form-control col-xs-12 col-sm-12 c-select sm-list required preferredemailtype" id="preferredemailtype" value="{!contactInstance[0].npe01__Preferred_Email__c}" />
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <apex:outputLabel for="personalemailaddress" styleClass="col-sm-3">Personal Email Address</apex:outputLabel>
+                                            <apex:outputLabel for="personalemailaddress" styleClass="col-sm-3">Personal Email Address <span style="color:red;font-size:13px;">&nbsp;*</span></apex:outputLabel> 
                                             <div class="col-sm-6">
                                                 <apex:inputText styleClass="form-control f-homeemailaddress personalemailaddress" maxlength="50" id="personalemailaddress" html-placeholder="personal_email@domain.com"  value="{!contactInstance[0].npe01__HomeEmail__c}" />
                                             </div>
@@ -574,7 +659,7 @@
                                 <legend>Language Skills<span>Please fill the fields below.</span></legend>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <div class="col-sm-3"><apex:outputLabel for="lang">Language</apex:outputLabel></div>
+                                        <div class="col-sm-3"><apex:outputLabel for="lang">Language</apex:outputLabel> <span style="color:red;">*</span></div>
                                         <div class="col-sm-6">
                                             <apex:selectList styleClass="form-control c-select multi lang language" value="{!languagesList}" size="1" id="lang" multiselect="true">
                                                 <apex:selectOptions value="{!Languages}" />
@@ -591,7 +676,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <div class="col-sm-3"><label for="read">Read</label></div>
+                                        <div class="col-sm-3"><label for="read">Read</label> <span style="color:red;">*</span></div>
                                         <div class="col-sm-6">
                                             <apex:selectList styleClass="form-control c-select multi language" id="read" multiselect="true" value="{!langToRead}">
                                                 <apex:selectOptions value="{!Languages}" />
@@ -599,7 +684,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-sm-3"><label for="write">Write</label></div>
+                                        <div class="col-sm-3"><label for="write">Write</label> <span style="color:red;">*</span></div>
                                         <div class="col-sm-6">
                                             <apex:selectList styleClass="form-control c-select multi language" id="write" multiselect="true" value="{!langToWrite}">
                                                 <apex:selectOptions value="{!Languages}" />
@@ -607,7 +692,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-sm-3"><label for="speak">Speak</label></div>
+                                        <div class="col-sm-3"><label for="speak">Speak</label> <span style="color:red;">*</span></div>
                                         <div class="col-sm-6">
                                             <apex:selectList styleClass="form-control c-select multi language" id="speak" multiselect="true" value="{!langToSpeak}">
                                                 <apex:selectOptions value="{!Languages}" />
@@ -615,7 +700,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-sm-3"><label for="understand">Understand</label></div>
+                                        <div class="col-sm-3"><label for="understand">Understand</label> <span style="color:red;">*</span></div>
                                         <div class="col-sm-6">
                                             <apex:selectList styleClass="form-control c-select multi language" id="understand" multiselect="true" value="{!langToUndetstand}">
                                                 <apex:selectOptions value="{!Languages}" />
@@ -625,10 +710,125 @@
                                 </div>
                             </fieldset>
 
+                            
+                            <!-- ------------------------------   Employment - input  ------------------------------- -->
+                            
+                            <fieldset>
+                                <legend>Employment<span>Please fill the optional fields below.</span></legend>
+
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="form-group row">
+                                            <apex:outputLabel styleClass="col-sm-3">Employer Name</apex:outputLabel>
+                                        <div class="col-sm-6">
+                                            <apex:inputText styleClass="form-control name-group f-empname" maxlength="50" html-placeholder="Name" value="{!contactInstance[0].Employer__c}" id="empName"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                            <apex:outputLabel styleClass="col-sm-3" for="empphonenumber">Phone Number</apex:outputLabel>
+                                        <div class="col-sm-6">
+                                            <apex:inputText styleClass="form-control f-phone" id="empphonenumber" maxlength="10" html-placeholder="000-000-0000" value="{!contactInstance[0].npe01__WorkPhone__c}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <apex:outputLabel for="address">Street</apex:outputLabel>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <apex:inputText styleClass="form-control f-address" id="empaddress" html-placeholder="0000 NE 00 Ave" maxlength="50"  value="{!contactInstance[0].Street_Employer__c}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <apex:outputLabel for="city">City</apex:outputLabel>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <apex:inputText styleClass="form-control f-city" id="empcity" html-placeholder="City" maxlength="23" value="{!contactInstance[0].City_Employer__c}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <apex:outputLabel for="state">State</apex:outputLabel>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <apex:selectList styleClass="form-control f-state c-select" size="1" id="empstate" multiselect="false" value="{!contactInstance[0].State_Employer__c}">
+                                                <apex:selectOptions value="{!States}" />
+                                            </apex:selectList>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                            <apex:outputLabel styleClass="col-sm-3" for="emppostalcode">Postal Code</apex:outputLabel>
+                                        <div class="col-sm-6">
+                                            <apex:inputText styleClass="form-control f-emppostalcode numbers-only" maxlength="5" id="emppostalcode" html-placeholder="00000" value="{!contactInstance[0].Zip_Employer__c}" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- column 2 (continued) -->
+
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-9">
+                                            <label for="employer-maywecontact" aria-labelledby="Company Interest in Make-A-Wish">May we contact your work?</label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <apex:selectList styleClass="form-control c-select sm-list emp" id="employer-maywecontact" value="{!contactInstance[0].May_We_Contact_You_at_Work__c}" size="1" multiselect="false">
+                                                <apex:selectOptions value="{!ConatctAtWork}" />
+                                            </apex:selectList>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                      <div class="col-sm-9">
+                                        <label for="employer-company-interest" aria-labelledby="Company Interest in Make-A-Wish">Would you like to share the power of a wish<sup>®</sup> at work by learning more about our wishmakers at work<sup>®</sup> program? </label>
+                                      </div>
+                                        <div class="col-sm-3">
+                                            <apex:selectList styleClass="form-control c-select sm-list emp" id="employer-company-interest" value="{!contactInstance[0].Interested_involved_with_Make_A_Wish__c}" size="1" multiselect="false">
+                                                <apex:selectOptions value="{!Make_A_Wish}" />
+                                            </apex:selectList>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                            
+                            <!-- ------------------------------ Emergency Contact - input ------------------------------- -->
+                            
+                            <fieldset>
+                                <legend>Emergency Contact Information<span>Please fill the required fields below.</span></legend>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3"><label for="e-contact" aria-labelledby="Emergency Contact Name">Contact Name</label> <span style="color:red;">*</span></div>
+                                        <div class="col-sm-6">
+                                            <apex:inputText styleClass="form-control fullname" id="e-contact" maxlength="50" value="{!contactInstance[0].Emergency_Contact__c}" html-placeholder="First and Last Name" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-3"><label for="e-relationship" aria-labelledby="Emergency Contact Relationship">Relationship</label></div>
+                                        <div class="col-sm-6">
+                                            <!-- <apex:inputText styleClass="form-control c-select sm-list ec" maxlength="30" id="e-relationship" value="{!contactInstance[0].Relationship__c}" /> -->
+                                            <apex:selectList styleClass="form-control c-select sm-list ec relationship" size="1" id="relationship" multiselect="false" value="{!contactInstance[0].Emergency_Contact_Relationship__c}">
+                                                <apex:selectOptions value="{!RelationShip}" />
+                                            </apex:selectList>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-3"><label for="e-contact-phone" aria-labelledby="Emergency Contact Phone">Contact Phone</label> <span style="color:red;">*</span></div>
+                                        <div class="col-sm-6">
+                                            <apex:inputText styleClass="form-control f-phone phonechk" id="e-contact-phone" maxlength="10" value="{!contactInstance[0].Emergency_Contact_Phone__c}" html-placeholder="(000) 000-0000" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            
+                            
                             <fieldset class="footer">
                                 <div class="form-group row">
                                     <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-6 col-md-push-10">
-                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md btn-p-save" value="Save" action="{!SavePersonalInfo}" />
+                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md btn-p-save" value="Save" action="{!SavePersonalInfo}" onclick="checkState();" />
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-2 col-sm-pull-2 col-md-push-6">
                                         <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md" value="Cancel" action="{!CancelPersonalInfo}" reRender="formId,uiStates" immediate="true" />
@@ -636,9 +836,207 @@
                                     <!-- <input type="submit" value="submit" class="btn-p-save" /> -->
                                 </div>
                             </fieldset>
+                            
                         </apex:outputPanel>
 
+                        <apex:outputpanel rendered="{!employeeInfoSave}">
+                        <!-- ---------------------- Employment - output   ----------------------- -->
+                        <!--<fieldset class="saved">
+                                    <legend>Employment</legend>
 
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Employer: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Employer__c}" id="emp"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Street: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Street_Employer__c}" id="streetEmp"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">City: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].City_Employer__c}" id="cityEmp"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">State: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].State_Employer__c}" id="stateEmp"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Zip: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Zip_Employer__c}" id="zipEmp"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Phone: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].npe01__WorkPhone__c}" id="workPh"/></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-10 col-sm-10">May we contact you at work: </apex:outputLabel>
+                                            <span class="col-xs-2 col-sm-2 text-muted"><apex:outputField value="{!contactInstance[0].May_We_Contact_You_at_Work__c}" id="mayWeContact"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-10 col-sm-10">Would you like to share the power of a wish<sup>®</sup> at work by learning more about our wishmakers at work<sup>®</sup> program? </apex:outputLabel>
+                                            <span class="col-xs-2 col-sm-2 text-muted"><apex:outputField value="{!contactInstance[0].Interested_involved_with_Make_A_Wish__c}" id="interestedMakeWish"/></span>
+                                        </div>
+                                    </div>
+                            </fieldset>-->
+
+                        </apex:outputpanel>
+
+                        <apex:outputpanel rendered="{!employeeInfoEdit}">
+                        
+                        
+                            <!-- ------------------------------   Employment - input  ------------------------------- -->
+                        
+                            <!--<fieldset>
+                                <legend>Employment<span>Please fill the optional fields below.</span></legend>
+
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="form-group row">
+                                            <apex:outputLabel styleClass="col-sm-3">Employer Name</apex:outputLabel>
+                                        <div class="col-sm-6">
+                                            <apex:inputText styleClass="form-control name-group f-empname" maxlength="50" html-placeholder="Name" value="{!contactInstance[0].Employer__c}" id="empName"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                            <apex:outputLabel styleClass="col-sm-3" for="empphonenumber">Phone Number</apex:outputLabel>
+                                        <div class="col-sm-6">
+                                            <apex:inputText styleClass="form-control f-phone" id="empphonenumber" maxlength="10" html-placeholder="000-000-0000" value="{!contactInstance[0].npe01__WorkPhone__c}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <apex:outputLabel for="address">Street</apex:outputLabel>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <apex:inputText styleClass="form-control f-address" id="empaddress" html-placeholder="0000 NE 00 Ave" maxlength="50"  value="{!contactInstance[0].Street_Employer__c}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <apex:outputLabel for="city">City</apex:outputLabel>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <apex:inputText styleClass="form-control f-city" id="empcity" html-placeholder="City" maxlength="23" value="{!contactInstance[0].City_Employer__c}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <apex:outputLabel for="state">State</apex:outputLabel>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <apex:selectList styleClass="form-control f-state c-select" size="1" id="empstate" multiselect="false" value="{!contactInstance[0].State_Employer__c}">
+                                                <apex:selectOptions value="{!States}" />
+                                            </apex:selectList>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                            <apex:outputLabel styleClass="col-sm-3" for="emppostalcode">Postal Code</apex:outputLabel>
+                                        <div class="col-sm-6">
+                                            <apex:inputText styleClass="form-control f-emppostalcode numbers-only" maxlength="5" id="emppostalcode" html-placeholder="00000" value="{!contactInstance[0].Zip_Employer__c}" />
+                                        </div>
+                                    </div>
+                                </div>-->
+
+                                <!-- column 2 (continued) -->
+
+                               <!-- <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-9">
+                                            <label for="employer-maywecontact" aria-labelledby="Company Interest in Make-A-Wish">May we contact your work?</label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <apex:selectList styleClass="form-control c-select sm-list emp" id="employer-maywecontact" value="{!contactInstance[0].May_We_Contact_You_at_Work__c}" size="1" multiselect="false">
+                                                <apex:selectOptions value="{!ConatctAtWork}" />
+                                            </apex:selectList>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                      <div class="col-sm-9">
+                                        <label for="employer-company-interest" aria-labelledby="Company Interest in Make-A-Wish">Would you like to share the power of a wish<sup>®</sup> at work by learning more about our wishmakers at work<sup>®</sup> program? </label>
+                                      </div>
+                                        <div class="col-sm-3">
+                                            <apex:selectList styleClass="form-control c-select sm-list emp" id="employer-company-interest" value="{!contactInstance[0].Interested_involved_with_Make_A_Wish__c}" size="1" multiselect="false">
+                                                <apex:selectOptions value="{!Make_A_Wish}" />
+                                            </apex:selectList>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>-->
+                            </apex:outputpanel>
+                            
+                            <apex:outputpanel rendered="{!emergencyInfoSave}">
+                            <!-- ------------------------------  Emergency Contact - output ------------------------------ -->
+                                    <!--<fieldset class="saved">
+                                    <legend>Emergency Contact</legend>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Name: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Emergency_Contact__c}" id="emergeContact"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Relationship: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Emergency_Contact_Relationship__c}" id="emergeConRelation"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Phone: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Emergency_Contact_Phone__c}" id="emergeContactPh"/></span>
+                                        </div>
+                                    </div>
+                            </fieldset>-->
+                            </apex:outputpanel>
+                            
+                            <apex:outputpanel rendered="{!emergencyInfoEdit}">
+                            <!-- ------------------------------ Emergency Contact - input ------------------------------- -->
+                            
+                            <!--<fieldset>
+                                <legend>Emergency Contact Information<span>Please fill the required fields below.</span></legend>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3"><label for="e-contact" aria-labelledby="Emergency Contact Name">Contact Name</label></div>
+                                        <div class="col-sm-6">
+                                            <apex:inputText styleClass="form-control fullname" id="e-contact" maxlength="50" value="{!contactInstance[0].Emergency_Contact__c}" html-placeholder="First and Last Name" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-3"><label for="e-relationship" aria-labelledby="Emergency Contact Relationship">Relationship</label></div>
+                                        <div class="col-sm-6">
+                                            <apex:inputText styleClass="form-control c-select sm-list ec" maxlength="30" id="e-relationship" value="{!contactInstance[0].Relationship__c}" /> 
+                                            <apex:selectList styleClass="form-control c-select sm-list ec relationship" size="1" id="relationship" multiselect="false" value="{!contactInstance[0].Emergency_Contact_Relationship__c}">
+                                                <apex:selectOptions value="{!RelationShip}" />
+                                            </apex:selectList>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-3"><label for="e-contact-phone" aria-labelledby="Emergency Contact Phone">Contact Phone</label></div>
+                                        <div class="col-sm-6">
+                                            <apex:inputText styleClass="form-control f-phone phonechk" id="e-contact-phone" maxlength="10" value="{!contactInstance[0].Emergency_Contact_Phone__c}" html-placeholder="(000) 000-0000" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            
+                            <fieldset class="footer">
+                                <div class="form-group row">
+                                    <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-6 col-md-push-10">
+                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md btn-e-save" value="Save" action="{!SaveEmergencyInfo}"/>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-2 col-sm-pull-2 col-md-push-6">
+                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md" value="Cancel" action="{!CancelEmergencyInfo}" reRender="formId,uiStates" immediate="true"/>
+                                    </div>
+                                </div>
+                            </fieldset>  -->
+                            </apex:outputPanel>
+                            
+                        
                          <!-- --------------------------- Award and Recognition ---------------------------- -->
                            <apex:pageBlock rendered="{!awardsRecognitionList.size!=0}">
                             <fieldset class="footer">
@@ -726,234 +1124,6 @@
                                 </div>
                             </fieldset>
                         </apex:pageBlock>
-
-                        <apex:outputpanel rendered="{!employeeInfoSave}">
-                            <!-- ---------------------- Employment - output   ----------------------- -->
-
-
-                            <fieldset class="saved">
-                                    <legend>Employment</legend>
-
-                                    <div class="col-xs-12 col-sm-6">
-                                        <div class="row">
-                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Employer: </apex:outputLabel>
-                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Employer__c}" id="emp"/></span>
-                                        </div>
-                                        <div class="row">
-                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Street: </apex:outputLabel>
-                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Street_Employer__c}" id="streetEmp"/></span>
-                                        </div>
-                                        <div class="row">
-                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">City: </apex:outputLabel>
-                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].City_Employer__c}" id="cityEmp"/></span>
-                                        </div>
-                                        <div class="row">
-                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">State: </apex:outputLabel>
-                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].State_Employer__c}" id="stateEmp"/></span>
-                                        </div>
-                                        <div class="row">
-                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Zip: </apex:outputLabel>
-                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Zip_Employer__c}" id="zipEmp"/></span>
-                                        </div>
-                                        <div class="row">
-                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Phone: </apex:outputLabel>
-                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].npe01__WorkPhone__c}" id="workPh"/></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xs-12 col-sm-6">
-                                        <div class="row">
-                                            <apex:outputLabel styleClass="col-xs-10 col-sm-10">May we contact you at work: </apex:outputLabel>
-                                            <span class="col-xs-2 col-sm-2 text-muted"><apex:outputField value="{!contactInstance[0].May_We_Contact_You_at_Work__c}" id="mayWeContact"/></span>
-                                        </div>
-                                        <div class="row">
-                                            <apex:outputLabel styleClass="col-xs-10 col-sm-10">Would you like to share the power of a wish<sup>®</sup> at work by learning more about our wishmakers at work<sup>®</sup> program? </apex:outputLabel>
-                                            <span class="col-xs-2 col-sm-2 text-muted"><apex:outputField value="{!contactInstance[0].Interested_involved_with_Make_A_Wish__c}" id="interestedMakeWish"/></span>
-                                        </div>
-                                    </div>
-                            </fieldset>
-
-                            <fieldset class="footer">
-                                <div class="form-group row">
-                                    <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-4 col-md-push-10">
-                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md edit" value="edit" action="{!EditEmployeeInfo}" reRender="formId,uiStates"/>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </apex:outputpanel>
-
-                        <apex:outputpanel rendered="{!employeeInfoEdit}">
-                            <!-- ------------------------------   Employment - input  ------------------------------- -->
-
-
-                            <fieldset>
-                                <legend>Employment<span>Please fill the optional fields below.</span></legend>
-
-                                <div class="col-xs-12 col-sm-12 col-md-6">
-                                    <div class="form-group row">
-                                            <apex:outputLabel styleClass="col-sm-3">Employer Name</apex:outputLabel>
-                                        <div class="col-sm-6">
-                                            <apex:inputText styleClass="form-control name-group f-empname" maxlength="50" html-placeholder="Name" value="{!contactInstance[0].Employer__c}" id="empName"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                            <apex:outputLabel styleClass="col-sm-3" for="empphonenumber">Phone Number</apex:outputLabel>
-                                        <div class="col-sm-6">
-                                            <apex:inputText styleClass="form-control f-phone" id="empphonenumber" maxlength="10" html-placeholder="000-000-0000" value="{!contactInstance[0].npe01__WorkPhone__c}"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <div class="col-sm-3">
-                                            <apex:outputLabel for="address">Street</apex:outputLabel>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <apex:inputText styleClass="form-control f-address" id="empaddress" html-placeholder="0000 NE 00 Ave" maxlength="50"  value="{!contactInstance[0].Street_Employer__c}" />
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <div class="col-sm-3">
-                                            <apex:outputLabel for="city">City</apex:outputLabel>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <apex:inputText styleClass="form-control f-city" id="empcity" html-placeholder="City" maxlength="23" value="{!contactInstance[0].City_Employer__c}" />
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <div class="col-sm-3">
-                                            <apex:outputLabel for="state">State</apex:outputLabel>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <apex:selectList styleClass="form-control f-state c-select" size="1" id="empstate" multiselect="false" value="{!contactInstance[0].State_Employer__c}">
-                                                <apex:selectOptions value="{!States}" />
-                                            </apex:selectList>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                            <apex:outputLabel styleClass="col-sm-3" for="emppostalcode">Postal Code</apex:outputLabel>
-                                        <div class="col-sm-6">
-                                            <apex:inputText styleClass="form-control f-emppostalcode numbers-only" maxlength="5" id="emppostalcode" html-placeholder="00000" value="{!contactInstance[0].Zip_Employer__c}" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- column 2 (continued) -->
-
-                                <div class="col-xs-12 col-sm-12 col-md-6">
-                                    <div class="form-group row">
-                                        <div class="col-sm-9">
-                                            <label for="employer-maywecontact" aria-labelledby="Company Interest in Make-A-Wish">May we contact your work?</label>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <apex:selectList styleClass="form-control c-select sm-list emp" id="employer-maywecontact" value="{!contactInstance[0].May_We_Contact_You_at_Work__c}" size="1" multiselect="false">
-                                                <apex:selectOptions value="{!ConatctAtWork}" />
-                                            </apex:selectList>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                      <div class="col-sm-9">
-                                        <label for="employer-company-interest" aria-labelledby="Company Interest in Make-A-Wish">Would you like to share the power of a wish<sup>®</sup> at work by learning more about our wishmakers at work<sup>®</sup> program? </label>
-                                      </div>
-                                        <div class="col-sm-3">
-                                            <apex:selectList styleClass="form-control c-select sm-list emp" id="employer-company-interest" value="{!contactInstance[0].Interested_involved_with_Make_A_Wish__c}" size="1" multiselect="false">
-                                                <apex:selectOptions value="{!Make_A_Wish}" />
-                                            </apex:selectList>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </fieldset>
-
-                            <fieldset class="footer">
-                                <div class="form-group row">
-                                    <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-6 col-md-push-10">
-                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md" value="Save" action="{!SaveEmployeeInfo}" reRender="formId,uiStates"/>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-4 col-md-2 col-sm-pull-2 col-md-push-6">
-                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md" value="Cancel" action="{!CancelEmpInfo}" reRender="formId,uiStates" immediate="true"/>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </apex:outputpanel>
-
-                        <apex:outputpanel rendered="{!emergencyInfoSave}">
-                            <!-- ------------------------------  Emergency Contact - output ------------------------------ -->
-
-
-                            <fieldset class="saved">
-                                    <legend>Emergency Contact</legend>
-                                    <div class="col-xs-12 col-sm-6">
-                                        <div class="row">
-                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Name: </apex:outputLabel>
-                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Emergency_Contact__c}" id="emergeContact"/></span>
-                                        </div>
-                                        <div class="row">
-                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Relationship: </apex:outputLabel>
-                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Emergency_Contact_Relationship__c}" id="emergeConRelation"/></span>
-                                        </div>
-                                        <div class="row">
-                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Phone: </apex:outputLabel>
-                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Emergency_Contact_Phone__c}" id="emergeContactPh"/></span>
-                                        </div>
-                                    </div>
-                            </fieldset>
-
-                            <fieldset class="footer">
-                                <div class="form-group row">
-                                    <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-4 col-md-push-10">
-                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md edit" value="edit" action="{!EditEmergencyInfo}" reRender="formId,uiStates"/>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </apex:outputpanel>
-
-                        <apex:outputpanel rendered="{!emergencyInfoEdit}">
-                            <!-- ------------------------------ Emergency Contact - input ------------------------------- -->
-
-
-                            <fieldset>
-                                <legend>Emergency Contact Information<span>Please fill the required fields below.</span></legend>
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <div class="col-sm-3"><label for="e-contact" aria-labelledby="Emergency Contact Name">Contact Name</label></div>
-                                        <div class="col-sm-6">
-                                            <apex:inputText styleClass="form-control fullname" id="e-contact" maxlength="50" value="{!contactInstance[0].Emergency_Contact__c}" html-placeholder="First and Last Name" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-sm-3"><label for="e-relationship" aria-labelledby="Emergency Contact Relationship">Relationship</label></div>
-                                        <div class="col-sm-6">
-                                            <!-- <apex:inputText styleClass="form-control c-select sm-list ec" maxlength="30" id="e-relationship" value="{!contactInstance[0].Relationship__c}" /> -->
-                                            <apex:selectList styleClass="form-control c-select sm-list ec relationship" size="1" id="relationship" multiselect="false" value="{!contactInstance[0].Emergency_Contact_Relationship__c}">
-                                                <apex:selectOptions value="{!RelationShip}" />
-                                            </apex:selectList>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-sm-3"><label for="e-contact-phone" aria-labelledby="Emergency Contact Phone">Contact Phone</label></div>
-                                        <div class="col-sm-6">
-                                            <apex:inputText styleClass="form-control f-phone phonechk" id="e-contact-phone" maxlength="10" value="{!contactInstance[0].Emergency_Contact_Phone__c}" html-placeholder="(000) 000-0000" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <fieldset class="footer">
-                                <div class="form-group row">
-                                    <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-6 col-md-push-10">
-                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md btn-e-save" value="Save" action="{!SaveEmergencyInfo}"/>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-4 col-md-2 col-sm-pull-2 col-md-push-6">
-                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md" value="Cancel" action="{!CancelEmergencyInfo}" reRender="formId,uiStates" immediate="true"/>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </apex:outputpanel>
-
                     </apex:form>
 
                 </section>
@@ -1530,7 +1700,88 @@
             }
           } init();
 
+            function checkState(){
+                var t = $("select[id$='state']").val();
+                var s = '#' + $("select[id$='state']").attr('id') + '_chosen';
+                var ss = s.split(':').join('_');
+                if(t==''){
+                    console.log(ss);
+                    //alert($(ss).offset().top);
+                    $('html, body').animate({ scrollTop: $(ss).offset().top - 500 }, 0);
+                    return false;
+                }
+                
+                var t = $("select[id$='lang']").val();
+                var s = '#' + $("select[id$='lang']").attr('id') + '_chosen';
+                var ss = s.split(':').join('_');
+                var c = $(ss).find('.chosen-choices').children().length;
+                //alert(c);
+                if(c==1){
+                    console.log(ss);
+                    //alert($(ss).offset().top);
+                    $('html, body').animate({ scrollTop: $(ss).offset().top - 500 }, 0);
+                    return false;
+                }
+                
+                var t = $("select[id$='read']").val();
+                var s = '#' + $("select[id$='read']").attr('id') + '_chosen';
+                var ss = s.split(':').join('_');
+                var c = $(ss).find('.chosen-choices').children().length;
+                if(c==1){
+                    console.log(ss);
+                    //alert($(ss).offset().top);
+                    $('html, body').animate({ scrollTop: $(ss).offset().top - 500 }, 0);
+                    return false;
+                }
+                
+                var t = $("select[id$='write']").val();
+                var s = '#' + $("select[id$='write']").attr('id') + '_chosen';
+                var ss = s.split(':').join('_');
+                var c = $(ss).find('.chosen-choices').children().length;
+                if(c==1){
+                    console.log(ss);
+                    //alert($(ss).offset().top);
+                    $('html, body').animate({ scrollTop: $(ss).offset().top - 500 }, 0);
+                    return false;
+                }
+                
+                var t = $("select[id$='speak']").val();
+                var s = '#' + $("select[id$='speak']").attr('id') + '_chosen';
+                var ss = s.split(':').join('_');
+                var c = $(ss).find('.chosen-choices').children().length;
+                if(c==1){
+                    console.log(ss);
+                    //alert($(ss).offset().top);
+                    $('html, body').animate({ scrollTop: $(ss).offset().top - 500 }, 0);
+                    return false;
+                }
+                
+                var t = $("select[id$='understand']").val();
+                var s = '#' + $("select[id$='understand']").attr('id') + '_chosen';
+                var ss = s.split(':').join('_');
+                var c = $(ss).find('.chosen-choices').children().length;
+                if(c==1){
+                    console.log(ss);
+                    //alert($(ss).offset().top);
+                    $('html, body').animate({ scrollTop: $(ss).offset().top - 500 }, 0);
+                    return false;
+                }
+                //alert($(".preferredemailtype").position().top);
+                if($(".preferredphonetype").val() == '' || $(".preferredphonetype").val() == 0)
+                {
+                    $('html, body').animate({ scrollTop: $(".preferredphonetype").offset().top - 1900 }, 0);
+                    return false;
+                }  
+                if($(".preferredemailtype").val() == '' || $(".preferredemailtype").val() == 0)
+                {
+                    $('html, body').animate({ scrollTop: $(".preferredemailtype").offset().top - 1800 }, 0);
+                    return false;
+                }  
+                
+                
+            }
           </script>
         </apex:outputPanel>
+        <div id="div">test</div>
     </body>
 </apex:page>

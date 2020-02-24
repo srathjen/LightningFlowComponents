@@ -27,11 +27,13 @@
     <filter>
         <criteriaItems>
             <column>npe4__Relationship__c$npe4__Contact__c.RecordType</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Wish_Child</value>
         </criteriaItems>
         <criteriaItems>
             <column>npe4__Relationship__c$npe4__Type__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Self,Medical Professional</value>
         </criteriaItems>
@@ -60,6 +62,8 @@
     <reportType>RelationshipWithcontact__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>npe4__Relationship__c$CreatedDate</dateColumn>
         <endDate>2017-10-03</endDate>

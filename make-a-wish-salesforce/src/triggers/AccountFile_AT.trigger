@@ -4,7 +4,7 @@ Created DAte:
 Description: This trigger is used to update the accountfile file path with the attachment stored in Amazon.  
 
 **********************************************************************************************/
-trigger AccountFile_AT on cg__AccountFile__c (After insert) {
+trigger AccountFile_AT on cg__AccountFile__c (after insert) {
     List<Id> accountIds = new List<Id>();
     Map<Id,String> accountFileMap = new Map<Id,String>();
     for(cg__AccountFile__c acc: Trigger.new){

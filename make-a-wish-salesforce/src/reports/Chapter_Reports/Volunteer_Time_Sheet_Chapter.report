@@ -44,6 +44,8 @@
     <reportType>Volunteer_Time_Sheet__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Time_sheet__c$CreatedDate</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

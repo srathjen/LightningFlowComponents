@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>FK_NAME</field>
+    </columns>
+    <columns>
+        <field>Volunteer_Opportunity__c.Wish_Status__c</field>
+    </columns>
+    <columns>
+        <field>Volunteer_Opportunity__c.Status__c</field>
+    </columns>
+    <description>This is a report of Volunteers Opportunities that are in HOLD status wish a Case Wish Status of Completed or Granted (should not occure)</description>
+    <filter>
+        <booleanFilter>(1 OR 2 )AND 3</booleanFilter>
+        <criteriaItems>
+            <column>Volunteer_Opportunity__c.Wish_Status__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Completed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Volunteer_Opportunity__c.Wish_Status__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Granted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Volunteer_Opportunity__c.Status__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Hold</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Vol Opps with Status of Hold/Wis</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Volunteer_Opportunity__c@Volunteer_Opportunity__c.Wish__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Volunteer_Opportunity__c.NWE_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

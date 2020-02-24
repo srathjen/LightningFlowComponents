@@ -13,8 +13,7 @@ createTask method is used to create a 'New Inquiry Task'.
 *************************************************************************************************/    
     
     Public static void createTask(Map<Id,Lead> leadMap){
-        Constant_AC  constant = new Constant_Ac();    
-        Id staffTaskRT = Schema.SObjectType.Task.getRecordTypeInfosByName().get(constant.staffTaskRT).getRecordTypeId();
+        Id staffTaskRT = Constant_AC.STAFF_TASK_RT_ID;
         List<Task> newTaskList = new List<Task>();
         List<Database.SaveResult> srList = new List<Database.SaveResult>();
         

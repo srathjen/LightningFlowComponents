@@ -3,43 +3,106 @@
     <caseValues>
         <caseType>Nominative</caseType>
         <plural>false</plural>
-        <value><!-- Engagement Plan Template --></value>
+        <value>Engagementplan-Vorlage</value>
     </caseValues>
     <caseValues>
         <caseType>Nominative</caseType>
         <plural>true</plural>
-        <value><!-- Engagement Plan Template --></value>
+        <value>Engagementplan-Vorlagen</value>
     </caseValues>
     <caseValues>
         <caseType>Accusative</caseType>
         <plural>false</plural>
-        <value><!-- Engagement Plan Template --></value>
+        <value>Engagementplan-Vorlage</value>
     </caseValues>
     <caseValues>
         <caseType>Accusative</caseType>
         <plural>true</plural>
-        <value><!-- Engagement Plan Template --></value>
+        <value>Engagementplan-Vorlagen</value>
     </caseValues>
     <caseValues>
         <caseType>Genitive</caseType>
         <plural>false</plural>
-        <value><!-- Engagement Plan Template --></value>
+        <value>Engagementplan-Vorlage</value>
     </caseValues>
     <caseValues>
         <caseType>Genitive</caseType>
         <plural>true</plural>
-        <value><!-- Engagement Plan Template --></value>
+        <value>Engagementplan-Vorlagen</value>
     </caseValues>
     <caseValues>
         <caseType>Dative</caseType>
         <plural>false</plural>
-        <value><!-- Engagement Plan Template --></value>
+        <value>Engagementplan-Vorlage</value>
     </caseValues>
     <caseValues>
         <caseType>Dative</caseType>
         <plural>true</plural>
-        <value><!-- Engagement Plan Template --></value>
+        <value>Engagementplan-Vorlagen</value>
     </caseValues>
-    <gender><!-- Neuter --></gender>
-    <nameFieldLabel><!-- Engagement Plan Template Name --></nameFieldLabel>
+    <fieldSets>
+        <label><!-- Manage EP Template FS --></label>
+        <name>npsp__ManageEPTemplateFS</name>
+    </fieldSets>
+    <fields>
+        <help>Berechnet das Fälligkeitsdatum einer untergeordneten Aufgabe anhand des Zeitpunkts neu, an dem die übergeordnete Aufgabe tatsächlich abgeschlossen wurde.</help>
+        <label><!-- Automatically Update Child Task Due Date --></label>
+        <name>npsp__Automatically_Update_Child_Task_Due_Date__c</name>
+    </fields>
+    <fields>
+        <help>Person, der eine Aufgabe standardmäßig zugewiesen wird, wenn das Feld &quot;Zugewiesen zu&quot; einer Engagementplan-Aufgabe leer gelassen wird.</help>
+        <label><!-- Default Assignee --></label>
+        <name>npsp__Default_Assignee__c</name>
+        <picklistValues>
+            <masterLabel>Owner of Object for Engagement Plan</masterLabel>
+            <translation>Eigentümer des Objekts für den Engagementplan</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>User Creating Engagement Plan</masterLabel>
+            <translation>Benutzer, der den Engagementplan erstellt</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>npsp__Description__c</name>
+    </fields>
+    <fields>
+        <help>Gibt an, ob Aufgaben mit einem Fälligkeitsdatum am Wochenende für den Freitag vor dem Wochenende oder den Montag danach geplant werden sollen. Dies gilt nur, wenn &quot;Wochenenden überspringen&quot; ausgewählt ist.</help>
+        <label><!-- Reschedule To --></label>
+        <name>npsp__Reschedule_To__c</name>
+        <picklistValues>
+            <masterLabel>Friday</masterLabel>
+            <translation>Freitag</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Monday</masterLabel>
+            <translation>Montag</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help>Wenn diese Option ausgewählt ist, haben die in diesem Engagementplan erstellten Aufgaben keine Fälligkeitsdaten am Samstag oder Sonntag.</help>
+        <label><!-- Skip Weekends --></label>
+        <name>npsp__Skip_Weekends__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Engagement Plans --></label>
+        <name>npsp__Total_Engagement_Plans__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Tasks --></label>
+        <name>npsp__Total_Tasks__c</name>
+    </fields>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>Engagement Plan Template Layout</layout>
+        <sections>
+            <label>Benutzerdefinierte Links</label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Engagementplan-Vorlagenname</nameFieldLabel>
+    <webLinks>
+        <label><!-- Manage_Template --></label>
+        <name>npsp__Manage_Template</name>
+    </webLinks>
 </CustomObjectTranslation>

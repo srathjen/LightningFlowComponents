@@ -42,32 +42,39 @@
         <fullName>Document_Type__c</fullName>
         <externalId>false</externalId>
         <label>Document Type</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Release Notes</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Product Road Map</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Process Definition</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Meeting Notes</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Other</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Release Notes</fullName>
+                    <default>false</default>
+                    <label>Release Notes</label>
+                </value>
+                <value>
+                    <fullName>Product Road Map</fullName>
+                    <default>false</default>
+                    <label>Product Road Map</label>
+                </value>
+                <value>
+                    <fullName>Process Definition</fullName>
+                    <default>false</default>
+                    <label>Process Definition</label>
+                </value>
+                <value>
+                    <fullName>Meeting Notes</fullName>
+                    <default>false</default>
+                    <label>Meeting Notes</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Subject__c</fullName>

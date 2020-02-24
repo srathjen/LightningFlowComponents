@@ -1,0 +1,15 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="helptextcontent" type="String" />
+
+    <div class="slds-form-element">
+        <div class="slds-form-element__icon slds-align-middle" onmouseover="{!c.display}" onmouseout="{!c.displayOut}">
+            <button class="slds-button slds-button slds-button--icon" aria-describedby="help" title="Help" >
+                <lightning:icon iconName="utility:info" size="xx-small" alternativeText="Help"/>
+                <span class="slds-assistive-text">Help</span>
+            </button>
+        </div>
+    </div>
+    <div class="slds-popover slds-popover--tooltip slds-nubbin--left-top toggle" role="tooltip" id="help" style="position:absolute;top:-4px;left:20px;" aura:id="tooltip">
+        <div class="slds-popover__body">{!v.helptextcontent}</div>
+    </div>  
+</aura:component>

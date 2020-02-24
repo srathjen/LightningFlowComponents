@@ -53,6 +53,7 @@
     <filter>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Opportunity.Donation,Opportunity.Matching_Gift,Opportunity.MajorGift</value>
         </criteriaItems>
@@ -74,6 +75,8 @@
     <reportType>Opportunity</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CLOSE_DATE</dateColumn>
         <interval>INTERVAL_PREVFY</interval>

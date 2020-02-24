@@ -1,0 +1,44 @@
+<aura:component controller="LightningDataTableController">
+    <!-- attributes -->
+    <aura:attribute name="uploadSpinner" type="boolean" default="false"/>
+    <aura:attribute name="wishReqSignRecord" type="Wish_Required_Signature__c" />
+    <aura:attribute name="WRSId" type="String"/>
+    <aura:attribute name="showUploadFileModal" type="Boolean" />
+    <aura:attribute name="errors" type="String"/>
+    
+    <!-- handlers-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+	<aura:registerEvent name="refreshEvent" type="c:refreshDataTable"/>
+    
+    <!-- Body --> 
+    <c:sldsModal aura:id="uploadFileModal"  closeModal="true"  closeAction="{!c.handleFileUploadCancel}">
+        <aura:set attribute="header">
+            Upload File
+        </aura:set>
+        <aura:set attribute="content">
+            <div style="height:250px;" class="slds-is-relative">
+                <aura:if isTrue="{!not(empty(v.WRSId))}">
+                    <aura:if isTrue="{!v.uploadSpinner}">
+                        <lightning:spinner variant="brand" size="medium" aura:id="uploadSpinner" />
+                    </aura:if>
+                    <div class="slds-p-bottom_large slds-p-left_large" style="width:500px">
+                        <lightning:recordEditForm aura:id="recordViewForm"
+                                                  onload="{!c.handleLoad}"
+                                                  recordId="{!v.wishReqSignRecord.Id}"
+                                                  objectApiName="Wish_Required_Signature__c">
+                            <lightning:messages />
+                            <lightning:inputField fieldName="Signed_Date__c" value="{!v.wishReqSignRecord.Signed_Date__c}" />
+                            <lightning:inputField fieldName="Status__c" value="{!v.wishReqSignRecord.Status__c}"/>
+                        </lightning:recordEditForm>
+                        <c:FileUpload parentId="{!v.caseId}" showButton="false" aura:id="fileUpload" refreshCmp="{!v.refreshCmp}"/>
+                    </div>
+                </aura:if>
+            </div>
+        </aura:set>
+        
+        <aura:set attribute="footer">
+            <lightning:button label="Upload" variant="brand" title="Upload action" onclick="{! c.handleUploadFile }" />
+            <lightning:button label="Cancel" title="Cancle action" onclick="{! c.handleFileUploadCancel }" />
+        </aura:set>
+    </c:sldsModal>
+</aura:component>

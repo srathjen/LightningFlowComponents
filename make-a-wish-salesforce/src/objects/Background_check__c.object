@@ -5,7 +5,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -13,7 +33,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -21,7 +61,13 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -29,7 +75,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -37,11 +103,44 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>Tab</actionName>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Background_Check_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <allowInChatterGroups>true</allowInChatterGroups>
@@ -53,6 +152,7 @@
     <enableEnhancedLookup>true</enableEnhancedLookup>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
     <enableReports>true</enableReports>
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
@@ -161,8 +261,9 @@ Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Volunteer__r.A
         <defaultValue>false</defaultValue>
         <description>This field will indicate that record is active record or not. And also active only apply for most recently created record.</description>
         <externalId>false</externalId>
+        <inlineHelpText>This box will be checked when this background check is the most recent on file.</inlineHelpText>
         <label>Current</label>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
@@ -170,9 +271,10 @@ Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Volunteer__r.A
         <fullName>Date_Completed__c</fullName>
         <description>It will capture the background check process completed date.</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date that an approved background check was run.</inlineHelpText>
         <label>Date Completed</label>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Date</type>
     </fields>
@@ -180,9 +282,10 @@ Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Volunteer__r.A
         <fullName>Date_Requested__c</fullName>
         <description>It will capture the requested date for background check</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date background check was requested.</inlineHelpText>
         <label>Date Requested</label>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Date</type>
     </fields>
@@ -192,7 +295,7 @@ Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Volunteer__r.A
         <externalId>false</externalId>
         <label>Expiration Date</label>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Date</type>
     </fields>
@@ -291,13 +394,46 @@ Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Volunteer__r.A
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Notes__c</fullName>
+        <description>Provides a place for staff to collect notes about a particular background check.  Especially those that are out of country.</description>
+        <externalId>false</externalId>
+        <label>Notes</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Order_Id__c</fullName>
+        <description>Received From First Advantage URL</description>
+        <externalId>false</externalId>
+        <label>Order Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Package_Id__c</fullName>
+        <externalId>false</externalId>
+        <label>Package Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Post_Adverse_Action__c</fullName>
         <description>It captures the what dates chapter staff mailed Post Adverse Action.</description>
         <externalId>false</externalId>
         <inlineHelpText>Date when the post-adverse action letter was sent, if necessary.</inlineHelpText>
         <label>Post-Adverse Action</label>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Date</type>
     </fields>
@@ -308,7 +444,7 @@ Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Volunteer__r.A
         <inlineHelpText>Date when the pre-adverse action letter was sent, if necessary.</inlineHelpText>
         <label>Pre-Adverse Action</label>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Date</type>
     </fields>
@@ -365,48 +501,142 @@ Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Volunteer__r.A
         <fullName>Resided_in_US_for_past_7_years__c</fullName>
         <description>It will capture whether the Volunteer Resided US Past 7 Years or not.</description>
         <externalId>false</externalId>
-        <label>Are you residing in US for past 7 years?</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Yes</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>No</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
+        <label>Reside USA Past 7 Yrs</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Status__c</fullName>
         <description>It will tells the final result about the background check.</description>
         <externalId>false</externalId>
         <label>Status</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Rejected</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Approved w/ Conditions</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Manual</fullName>
+                    <default>false</default>
+                    <label>Manual</label>
+                </value>
+                <value>
+                    <fullName>Sent to First Advantage</fullName>
+                    <default>false</default>
+                    <label>Sent to First Advantage</label>
+                </value>
+                <value>
+                    <fullName>Received from First Advantage</fullName>
+                    <default>false</default>
+                    <label>Received from First Advantage</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Approved w/ Conditions</fullName>
+                    <default>false</default>
+                    <label>Approved w/ Conditions</label>
+                </value>
+                <value>
+                    <fullName>Rejected</fullName>
+                    <default>false</default>
+                    <label>Rejected</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Sub_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Sub-Status</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <controllingField>Status__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Pass</fullName>
+                    <default>false</default>
+                    <label>Pass</label>
+                </value>
+                <value>
+                    <fullName>Fail</fullName>
+                    <default>false</default>
+                    <label>Fail</label>
+                </value>
+                <value>
+                    <fullName>Review</fullName>
+                    <default>false</default>
+                    <label>Review</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Received from First Advantage</controllingFieldValue>
+                <valueName>Pass</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Received from First Advantage</controllingFieldValue>
+                <valueName>Fail</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Received from First Advantage</controllingFieldValue>
+                <valueName>Review</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Unique_Record_Count__c</fullName>
+        <description>Enables better record counting functions on reports.</description>
+        <externalId>false</externalId>
+        <formula>1</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Unique Record Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>View_Background_Report__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( OR(ISBLANK(Order_Id__c), ISBLANK(Package_Id__c)),&apos;&apos;, HYPERLINK(&apos;/apex/ViewDocument_VF?id=&apos;&amp;Id, &apos;View Background Report&apos;, &apos;_blank&apos;))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>View Background Report</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>VolunteerRoleOutofCompliance__c</fullName>
@@ -474,6 +704,18 @@ Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Volunteer__r.A
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
+    <fields>
+        <fullName>applicant_Id__c</fullName>
+        <description>Received From First Advantage</description>
+        <externalId>false</externalId>
+        <label>Applicant Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
     <label>Background Check</label>
     <listViews>
         <fullName>All</fullName>
@@ -484,9 +726,51 @@ Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Volunteer__r.A
         <columns>Date_Completed__c</columns>
         <columns>Date__c</columns>
         <columns>Status__c</columns>
-        <columns>Requested_By__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Background_Check_No_to_Question</fullName>
+        <columns>NAME</columns>
+        <columns>Volunteer__c</columns>
+        <columns>Date_Requested__c</columns>
+        <columns>Status__c</columns>
+        <columns>Resided_in_US_for_past_7_years__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>Resided_in_US_for_past_7_years__c</field>
+            <operation>equals</operation>
+            <value>No</value>
+        </filters>
+        <filters>
+            <field>Account_Name__c</field>
+            <operation>contains</operation>
+            <value>Arizona</value>
+        </filters>
+        <label>Background Check - No to Question</label>
+    </listViews>
+    <listViews>
+        <fullName>Background_Check_Received_from_FADV</fullName>
+        <columns>NAME</columns>
+        <columns>Volunteer__c</columns>
+        <columns>Status__c</columns>
+        <columns>Date_Completed__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Received from First Advantage</value>
+        </filters>
+        <filters>
+            <field>Account_Name__c</field>
+            <operation>contains</operation>
+            <value>Arizona</value>
+        </filters>
+        <label>Background Check - Received from FADV</label>
     </listViews>
     <nameField>
         <displayFormat>BC-{000000}</displayFormat>
@@ -513,7 +797,7 @@ Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Volunteer__r.A
         <fullName>BC_Date_Of_Completed_validation</fullName>
         <active>true</active>
         <description>Date of Completed should be mandatory while entering Status .</description>
-        <errorConditionFormula>(Text(Status__c) != null || NOT(ISBLANK( Date__c ))) &amp;&amp; (ISBLANK(Date_Completed__c))&amp;&amp; $Profile.Name  != &apos;Integration&apos;</errorConditionFormula>
+        <errorConditionFormula>(Text(Status__c) != null || NOT(ISBLANK( Date__c ))) &amp;&amp; (ISBLANK(Date_Completed__c))&amp;&amp; $Profile.Name  != &apos;Integration&apos; &amp;&amp;  NOT( ISPICKVAL( Status__c ,&apos;Sent to First Advantage&apos;)) &amp;&amp; NOT( ISPICKVAL( Status__c ,&apos;Received from First Advantage&apos;))</errorConditionFormula>
         <errorMessage>Please enter the value for Date Completed.</errorMessage>
     </validationRules>
     <validationRules>
@@ -523,4 +807,5 @@ Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Volunteer__r.A
         <errorConditionFormula>Text(Status__c) = null &amp;&amp;  Not(ISBLANK(Date_Completed__c)) &amp;&amp; $Profile.Name != &apos;Integration&apos;</errorConditionFormula>
         <errorMessage>Please enter the value for status</errorMessage>
     </validationRules>
+    <visibility>Public</visibility>
 </CustomObject>

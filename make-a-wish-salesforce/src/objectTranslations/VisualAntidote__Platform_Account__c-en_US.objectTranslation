@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- IsActive --></label>
+        <name>VisualAntidote__IsActive__c</name>
+    </fields>
+    <fields>
+        <label><!-- Key --></label>
+        <name>VisualAntidote__Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- ProviderType --></label>
+        <name>VisualAntidote__ProviderType__c</name>
+        <picklistValues>
+            <masterLabel>FormstackDocuments</masterLabel>
+            <translation><!-- FormstackDocuments --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Secret --></label>
+        <name>VisualAntidote__Secret__c</name>
+    </fields>
+</CustomObjectTranslation>

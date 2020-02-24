@@ -11,4 +11,5 @@
 
 The following wish granter is inActive {!Case.InActiveWishGranter__c}</textOnly>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

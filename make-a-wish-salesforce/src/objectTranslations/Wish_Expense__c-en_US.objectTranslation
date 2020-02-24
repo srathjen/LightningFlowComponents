@@ -102,6 +102,10 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Created After Last Approval --></label>
+        <name>Created_After_Last_Approval__c</name>
+    </fields>
+    <fields>
         <label><!-- Department/Division --></label>
         <name>Department_Division__c</name>
     </fields>
@@ -270,6 +274,19 @@
         <name>Transaction__c</name>
     </fields>
     <fields>
+        <label><!-- Transferred from Previous Budget --></label>
+        <name>Transferred_from_Previous_Budget__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unique Record Count --></label>
+        <name>Unique_Record_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Budget --></label>
+        <name>Wish_Budget__c</name>
+        <relationshipLabel><!-- Wish Expenses --></relationshipLabel>
+    </fields>
+    <fields>
         <label><!-- Wish Expense Approval Status --></label>
         <name>Wish_Expense_Approval_Status__c</name>
         <picklistValues>
@@ -316,12 +333,20 @@
             <label><!-- Custom Links --></label>
             <section>Custom Links</section>
         </sections>
+        <sections>
+            <label><!-- Wish Information --></label>
+            <section>Wish Information</section>
+        </sections>
     </layouts>
     <layouts>
         <layout>Wish Expense Layout - Admin</layout>
         <sections>
             <label><!-- Custom Links --></label>
             <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Information --></label>
+            <section>Wish Information</section>
         </sections>
     </layouts>
     <recordTypes>

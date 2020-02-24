@@ -1137,16 +1137,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Child_s_Medical_Summary_received_date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Child_s_Medical_Summary_sent__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Closed_Date__c</field>
             <table>Case</table>
         </columns>
@@ -1262,16 +1252,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Wish_Clearance_Received_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Wish_Clearance_Sent_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Wish_Clearance__c</field>
             <table>Case</table>
         </columns>
@@ -1283,6 +1263,16 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>wish_involves_air_travel__c</field>
+            <table>Case</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Wish_Clearance_Received_Date_Formula__c</field>
+            <table>Case</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Wish_Clearance_Sent_Date_Formula__c</field>
             <table>Case</table>
         </columns>
         <columns>
@@ -1303,11 +1293,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Age__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Budget_Total__c</field>
             <table>Case</table>
         </columns>
         <columns>
@@ -1333,16 +1318,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Wish_granter_2__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Budget_Cash__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Budget_Inkind__c</field>
             <table>Case</table>
         </columns>
         <columns>

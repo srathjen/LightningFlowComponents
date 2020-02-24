@@ -1,11 +1,11 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
 <![CDATA[<p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Target_User.FirstName},<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Thank you for your
 interest in volunteering at Make-A-Wish!<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">The first step to
 becoming a volunteer is completing an orientation session, where you will learn
 more about the work our volunteers do. To register for an upcoming orientation,
-please log in to the&nbsp;<a href="http://make-a-wish.force.com/"><span style="color:blue">Make-A-Wish Volunteer Center</span></a>&nbsp;with the
+please log in to the&nbsp;<span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish Volunteer Center</a></span>&nbsp;with the
 username listed below.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!User.User_email_signature_del__c}<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Username:&nbsp;{!Target_User.Username}<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Once you've logged
 in, click&nbsp;<b>"Become A Volunteer"</b>&nbsp;to register for the
 next available&nbsp;orientation&nbsp;session.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:

@@ -1,0 +1,17 @@
+/**
+ * Created by mnahar on 9/3/2019.
+ */
+.THIS .iframe-container {
+    overflow: hidden;
+padding-top: 56.25%;
+    position: relative;
+}
+
+.THIS .iframe-container iframe {
+    border: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}

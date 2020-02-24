@@ -1,0 +1,60 @@
+<!--
+ - Created by mnahar on 8/20/2019.
+ -->
+
+<aura:component description="NewWishBudget" controller="NewWishBudgetController"
+                implements="lightning:actionOverride,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,lightning:isUrlAddressable"
+                access="global">
+
+    <!-- attributes>-->
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="confirmModal" type="Boolean"/>
+    <aura:attribute name="errorModal" type="Boolean"/>
+    <aura:attribute name="spinner" type="boolean" default="false"/>
+
+    <!-- handlers-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <lightning:workspaceAPI aura:id="workspace"/>
+
+    <!-- Body -->
+    <aura:if isTrue="{!v.spinner}">
+        <lightning:spinner variant="brand" size="medium" aura:id="mySpinner"/>
+    </aura:if>
+
+    <!-- Error Modal displays if wish is already in approval status -->
+    <aura:if isTrue="{!v.errorModal}">
+        <c:sldsModal aura:id="errorModal" closeModal="true" closeAction="{!c.handleCancel}">
+            <aura:set attribute="header">
+                Error
+            </aura:set>
+            <aura:set attribute="content">
+                <div class="slds-text-align--center">
+                    {!$Label.c.Wish_Budget_Error}
+                </div>
+            </aura:set>
+
+            <aura:set attribute="footer">
+                <lightning:button label="Ok" title="Cancel action" onclick="{! c.handleCancel }"/>
+            </aura:set>
+        </c:sldsModal>
+    </aura:if>
+
+    <!-- Confirm Modal displays if there is an active wish budget already -->
+    <aura:if isTrue="{!v.confirmModal}">
+        <c:sldsModal aura:id="confirmModal" closeModal="true" closeAction="{!c.handleCancel}">
+            <aura:set attribute="header">
+                Confirm Action
+            </aura:set>
+            <aura:set attribute="content">
+                <div class="slds-text-align--center">
+                    {!$Label.c.Wish_Budget_Warning}
+                </div>
+            </aura:set>
+
+            <aura:set attribute="footer">
+                <lightning:button label="Yes" variant="brand" title="Yes action" onclick="{! c.handleConfirm }"/>
+                <lightning:button label="No" title="Cancel action" onclick="{! c.handleCancel }"/>
+            </aura:set>
+        </c:sldsModal>
+    </aura:if>
+</aura:component>

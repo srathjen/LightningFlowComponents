@@ -9,6 +9,7 @@
     <filter>
         <criteriaItems>
             <column>npe5__Affiliation__c$npe5__Status__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Prospective</value>
         </criteriaItems>
@@ -22,6 +23,8 @@
     <reportType>Affiliations_with_Volunteers__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>npe5__Affiliation__c$CreatedDate</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

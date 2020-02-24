@@ -5,11 +5,16 @@
     <allowStandardAnswersPages>false</allowStandardAnswersPages>
     <allowStandardIdeasPages>false</allowStandardIdeasPages>
     <allowStandardLookups>false</allowStandardLookups>
+    <allowStandardPortalPages>true</allowStandardPortalPages>
     <allowStandardSearch>false</allowStandardSearch>
     <authorizationRequiredPage>CommunitiesLogin</authorizationRequiredPage>
     <bandwidthExceededPage>ContactChapter_VF</bandwidthExceededPage>
+    <browserXssProtection>false</browserXssProtection>
     <changePasswordPage>ChangePassword</changePasswordPage>
     <clickjackProtectionLevel>SameOriginOnly</clickjackProtectionLevel>
+    <contentSniffingProtection>false</contentSniffingProtection>
+    <cspUpgradeInsecureRequests>false</cspUpgradeInsecureRequests>
+    <enableAuraRequests>true</enableAuraRequests>
     <fileNotFoundPage>ContactChapter_VF</fileNotFoundPage>
     <forgotPasswordPage>ForgotPassword</forgotPasswordPage>
     <genericErrorPage>ContactChapter_VF</genericErrorPage>
@@ -17,10 +22,11 @@
     <inactiveIndexPage>CommunitiesLogin</inactiveIndexPage>
     <indexPage>CommunitiesLanding</indexPage>
     <masterLabel>Wish Volunteer Community</masterLabel>
+    <referrerPolicyOriginWhenCrossOrigin>false</referrerPolicyOriginWhenCrossOrigin>
     <requireHttps>true</requireHttps>
     <requireInsecurePortalAccess>false</requireInsecurePortalAccess>
     <selfRegPage>CommunitiesSelfReg</selfRegPage>
-    <siteAdmin>sathiskumar.s_maw@mstsolutions.com</siteAdmin>
+    <siteAdmin>salesforce@wish.org</siteAdmin>
     <siteType>ChatterNetwork</siteType>
     <subdomain>make-a-wish</subdomain>
 </CustomSite>

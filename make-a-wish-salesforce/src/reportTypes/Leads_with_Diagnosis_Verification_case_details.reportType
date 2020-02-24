@@ -430,6 +430,21 @@
             <field>Will_Child_s_Condition_Deteriorate__c</field>
             <table>Lead</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Paper_DV_Sign_Date__c</field>
+            <table>Lead</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Part_A_Signed__c</field>
+            <table>Lead</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Using_Paper_Process_For_DV__c</field>
+            <table>Lead</table>
+        </columns>
         <masterLabel>Diagnosis Verification</masterLabel>
     </sections>
     <sections>
@@ -876,6 +891,16 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Qualifying_ICD__c</field>
+            <table>Lead</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ChapterName__c.Id</field>
+            <table>Lead</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ChapterName__c.Name</field>
             <table>Lead</table>
         </columns>
         <masterLabel>Leads</masterLabel>

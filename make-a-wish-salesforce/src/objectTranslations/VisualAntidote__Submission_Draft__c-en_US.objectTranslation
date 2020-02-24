@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Document Ids --></label>
+        <name>VisualAntidote__Document_Ids__c</name>
+    </fields>
+    <fields>
+        <label><!-- Email --></label>
+        <name>VisualAntidote__Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form --></label>
+        <name>VisualAntidote__Form__c</name>
+        <relationshipLabel><!-- Submission Drafts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Is Native --></label>
+        <name>VisualAntidote__Is_Native__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submitted Data XML2 --></label>
+        <name>VisualAntidote__Submitted_Data_XML2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submitted Data XML3 --></label>
+        <name>VisualAntidote__Submitted_Data_XML3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submitted Data XML --></label>
+        <name>VisualAntidote__Submitted_Data_XML__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submitted Prefill Obj Id --></label>
+        <name>VisualAntidote__Submitted_Prefill_Obj_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submitted Prefill Obj Info --></label>
+        <name>VisualAntidote__Submitted_Prefill_Obj_Info__c</name>
+    </fields>
+</CustomObjectTranslation>

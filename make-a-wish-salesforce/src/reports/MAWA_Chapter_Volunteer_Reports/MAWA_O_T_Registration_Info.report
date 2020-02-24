@@ -52,6 +52,8 @@
     <reportType>Volunteer_Orientation_Training__c</reportType>
     <scope>organization</scope>
     <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Volunteer_Orientation_Training__c$Class_Offering__c.Date__c</dateColumn>
         <interval>INTERVAL_NEXT90</interval>

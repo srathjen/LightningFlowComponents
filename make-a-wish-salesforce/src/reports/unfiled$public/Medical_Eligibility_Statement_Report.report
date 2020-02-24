@@ -45,6 +45,7 @@
     <filter>
         <criteriaItems>
             <column>FIRST_NAME</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Mannix</value>
         </criteriaItems>
@@ -58,6 +59,8 @@
     <reportType>LeadList</reportType>
     <scope>org</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

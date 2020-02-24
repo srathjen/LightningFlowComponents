@@ -1,10 +1,16 @@
+//Created By: MST
+//This class used to do unit testing for the wishreferralform functionality
 @isTest
 public class WishReferralFormOut_AC_Test {
-    
+    // This method will create the lead record
     @TestSetup static void crateLead()
     {
+        Id accId = OrientationandTrainingUtil.CreateAmericaAccount().Id;
         Lead currLead = new Lead();
         currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
+        currLead.ChapterName__c = accId;
+        currLead.Additional_Parent_First_Name__c = 'Sample';
+        currLead.Communication__c = 'Coomunication';
         currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
         currLead.Any_medical_reason_for_moving_quickly__c  = 'Yes';
         currLead.Relationship_To_Child__c = 'Self';
@@ -41,13 +47,15 @@ public class WishReferralFormOut_AC_Test {
         currLead.Treating_Medical_Professional_Phone__c = '8220708921';
         currLead.Treating_Medical_Professional_Email__c= 'mcavennila@gmail.com';
         currLead.Any_medical_reason_for_moving_quickly__c= 'yes';
+        test.startTest();
         Insert currLead;
+        test.stopTest();
         
     }
-    
+    // This method fecth the one lead recrod and pass the lead id to the WishReferralFormOut_VF
     public static testMethod void testWishReferralFormOut() 
     {
-        Lead currLead = [SELECT id from Lead];
+        Lead currLead = [SELECT id from Lead Limit 1];
         PageReference pageRef = Page.WishReferralFormOut_VF;
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('LeadId',currLead.Id);
@@ -55,10 +63,10 @@ public class WishReferralFormOut_AC_Test {
     }
     
    
-    
+    // This method will query the lead record and pass the lead id to the WishReferralFormOut_VF
     public static testMethod void testexportPDF() 
     {
-        Lead currLead = [SELECT id from Lead];
+        Lead currLead = [SELECT id from Lead Limit 1];
         PageReference pageRef = Page.WishReferralFormOut_VF;
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('LeadId',currLead.Id);
@@ -66,10 +74,13 @@ public class WishReferralFormOut_AC_Test {
         ApexPages.currentPage().getParameters().put('p','df');
         wishreferral.exportPDF();
     }
-    
+    // This method will query the lead record and pass the lead id to the WishReferralFormOut_VF
     public static testMethod void testsubmit() 
     {
-        Lead currLead = [SELECT id from Lead];
+        Lead currLead = [SELECT id, Relationship_to_child__c from Lead limit 1];
+        currLead.Additional_Parent_First_Name__c = NULL;
+        currLead.Relationship_to_child__c = 'Other';
+        update currLead;
         PageReference pageRef = Page.WishReferralFormOut_VF;
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('LeadId',currLead.Id);
@@ -78,7 +89,7 @@ public class WishReferralFormOut_AC_Test {
         ApexPages.currentPage().getParameters().put('p','df');
         
         Account acc=new Account();
-        acc.Name='test Account';
+        acc.Name='Make-A-Wish America';
         acc.Referral_Form_Password__c='12345';
         insert acc;
         wishreferral.accontId = acc.Id;
@@ -89,21 +100,24 @@ public class WishReferralFormOut_AC_Test {
     
     public static testMethod void nonMatchPassword() 
     {
-        Lead currLead = [SELECT id from Lead];
+        Lead currLead = [SELECT id, Relationship_to_child__c from Lead limit 1];
+        currLead.Relationship_to_child__c = 'Other';
+        update currLead;
         PageReference pageRef = Page.WishReferralFormOut_VF;
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('LeadId',currLead.Id);
         WishReferralFormOut_AC wishreferral = new WishReferralFormOut_AC();
         wishreferral.login = true;
         ApexPages.currentPage().getParameters().put('p','df');
-        
+        test.startTest();
         Account acc=new Account();
-        acc.Name='test Account';
+        acc.Name='Make-A-Wish America';
         acc.Referral_Form_Password__c='123455';
         insert acc;
         wishreferral.accontId = acc.Id;
         wishreferral.password='12345';
         wishreferral.submit();
         wishreferral.exportCSV();
+        test.stopTest();
     }
 }

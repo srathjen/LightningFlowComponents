@@ -1,0 +1,43 @@
+<aura:component description="LookupSObjectItem" implements="flexipage:availableForAllPageTypes">
+
+    <!-- Attributes -->
+    <aura:attribute name="lookupId"
+                    type="String"
+                    description="Field id to manage more then one lookup when handling event"/>
+    <aura:attribute name="record"
+                    type="Object"
+                    required="true"
+                    description="This instance of the record"/>
+    <aura:attribute name="iconFullName"
+                    type="String"
+                    required="true"
+                    description="The Lightning Design System name of the icon, eg: standard:contact"/>
+    <aura:attribute name="searchString"
+                    type="String"
+                    required="true"
+                    description="Search string used to match this item (used for emphasis below)"/>
+    <aura:attribute name="filter"
+                    type="Map[]"
+                    description="Filter Fields to return when searching"/>
+
+    <!-- Events -->
+    <aura:registerEvent name="lookupSObjectSelect" type="c:LookupSObjectSelectEvent"/>
+
+    <!-- Markup -->
+    <li role="presentation" class="slds-listbox__item" onclick="{! c.select }">
+        <span class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+              role="option"
+              style="display: list-item">
+            <span class="slds-media__figure">
+                <lightning:icon iconName="{! v.iconFullName }"
+                                size="small"
+                                alternativeText="{! v.record.Description }"/>
+            </span>
+            <span class="slds-media_large"
+                  style="{! (v.searchString == v.record.Description) ? 'font-weight: bold': 'font-weight: normal' }">
+                {! v.record.Description }
+            </span>
+        </span>
+    </li>
+
+</aura:component>

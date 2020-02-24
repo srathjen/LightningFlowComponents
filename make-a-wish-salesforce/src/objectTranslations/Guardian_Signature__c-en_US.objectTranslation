@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Guardian Signature</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Guardian Signatures</value>
+    </caseValues>
+    <fields>
+        <label><!-- Signature --></label>
+        <name>Signature__c</name>
+        <relationshipLabel><!-- Signing on Behalf Of (Guardian Signature) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- To change this field, you must change the Wish Affiliation. --></help>
+        <label><!-- Signee Name --></label>
+        <name>Signee_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Signee Name (text) --></label>
+        <name>Signee_Name_text__c</name>
+    </fields>
+    <fields>
+        <help><!-- To change this field, you must change the &quot;Signature&quot; field. --></help>
+        <label><!-- Signer Name --></label>
+        <name>Signer_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Signing on Behalf Of --></label>
+        <name>Signing_on_Behalf_Of__c</name>
+        <relationshipLabel><!-- Guardian Signatures --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Guardian Signature Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldSets>
+        <label><!-- BDE Entry FS --></label>
+        <name>npsp__BDE_Entry_FS</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- BDE List FS --></label>
+        <name>npsp__BDE_List_FS</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- Manage Household Custom --></label>
+        <name>npsp__Manage_Household_Custom</name>
+    </fieldSets>
     <fields>
         <help><!-- In terms of number of days --></help>
         <label><!-- Alert for Unassigned Wishes --></label>
@@ -91,6 +103,11 @@
     <fields>
         <label><!-- Emergency Contact --></label>
         <name>Emergency_Contact__c</name>
+    </fields>
+    <fields>
+        <label><!-- Event Volunteer Assignment Approver --></label>
+        <name>Event_Volunteer_Assignment_Approver__c</name>
+        <relationshipLabel><!-- Accounts (Event Volunteer Assignment Approver) --></relationshipLabel>
     </fields>
     <fields>
         <help><!-- External RE record Id for upserting --></help>
@@ -234,6 +251,11 @@
         <name>From_Mulesoft__c</name>
     </fields>
     <fields>
+        <label><!-- Wish Form --></label>
+        <name>Hidden_Wish_Form_Id__c</name>
+        <relationshipLabel><!-- Accounts --></relationshipLabel>
+    </fields>
+    <fields>
         <label><!-- Import Id --></label>
         <name>Import_Id__c</name>
     </fields>
@@ -367,6 +389,12 @@
         <label><!-- Primary Contact --></label>
         <name>Primary_Contact__c</name>
         <relationshipLabel><!-- Accounts (Primary Contact) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- The user assigned to a Wish when the Wish Case is initially created. --></help>
+        <label><!-- Qualified Wish Owner --></label>
+        <name>Qualified_Wish_Owner__c</name>
+        <relationshipLabel><!-- Accounts (Qualified Wish Owner) --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- RE Account Description --></label>
@@ -709,6 +737,10 @@
             <masterLabel>(GMT-09:00) Alaska Standard Time (America/Anchorage)</masterLabel>
             <translation><!-- (GMT-09:00) Alaska Standard Time (America/Anchorage) --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Unique Record Count --></label>
+        <name>Unique_Record_Count__c</name>
     </fields>
     <fields>
         <label><!-- Volunteer Manager --></label>
@@ -1506,6 +1538,11 @@
         <relationshipLabel><!-- Accounts (Wish Manager) --></relationshipLabel>
     </fields>
     <fields>
+        <label><!-- Wish Volunteer Assignment Approver --></label>
+        <name>Wish_Volunteer_Assignment_Approver__c</name>
+        <relationshipLabel><!-- Accounts (Wish Volunteer Assignment Approver) --></relationshipLabel>
+    </fields>
+    <fields>
         <label><!-- DEPRECATED - First Donation Date --></label>
         <name>npe01__FirstDonationDate__c</name>
     </fields>
@@ -1814,33 +1851,6 @@
             <section>Address</section>
         </sections>
         <sections>
-            <label><!-- Attachments --></label>
-            <section>Attachments</section>
-        </sections>
-        <sections>
-            <label><!-- Designated Users --></label>
-            <section>Designated Users</section>
-        </sections>
-        <sections>
-            <label><!-- Fields --></label>
-            <section>Fields</section>
-        </sections>
-        <sections>
-            <label><!-- Historic Wish Numbers --></label>
-            <section>Historic Wish Numbers</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Chapters Chapter Staff Layout</layout>
-        <sections>
-            <label><!-- Address --></label>
-            <section>Address</section>
-        </sections>
-        <sections>
-            <label><!-- Attachments --></label>
-            <section>Attachments</section>
-        </sections>
-        <sections>
             <label><!-- Designated Users --></label>
             <section>Designated Users</section>
         </sections>
@@ -1887,21 +1897,17 @@
         </sections>
     </layouts>
     <layouts>
-        <layout>Household Chapter Staff Layout</layout>
+        <layout>Household Layout</layout>
         <sections>
-            <label><!-- Address --></label>
+            <label>Adresse</label>
             <section>Address</section>
-        </sections>
-        <sections>
-            <label><!-- Attachments --></label>
-            <section>Attachments</section>
         </sections>
         <sections>
             <label><!-- Emergency Contact --></label>
             <section>Emergency Contact</section>
         </sections>
         <sections>
-            <label><!-- Fields --></label>
+            <label>Felder</label>
             <section>Fields</section>
         </sections>
     </layouts>
@@ -1936,7 +1942,7 @@
         </sections>
     </layouts>
     <layouts>
-        <layout>In Kind Donors Chapter Staff Layout</layout>
+        <layout>In-Kind Donors - Volunteer</layout>
         <sections>
             <label><!-- Chapter Staff only --></label>
             <section>Chapter Staff only</section>
@@ -1951,31 +1957,13 @@
         </sections>
     </layouts>
     <layouts>
-        <layout>In-Kind Donor</layout>
+        <layout>Organization Layout</layout>
         <sections>
-            <label><!-- Fields --></label>
-            <section>Fields</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>InKind</layout>
-        <sections>
-            <label><!-- Fields --></label>
-            <section>Fields</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Organization Layout Chapter Staff Layout</layout>
-        <sections>
-            <label><!-- Address --></label>
+            <label>Adresse</label>
             <section>Address</section>
         </sections>
         <sections>
-            <label><!-- Attachments --></label>
-            <section>Attachments</section>
-        </sections>
-        <sections>
-            <label><!-- Fields --></label>
+            <label>Folder</label>
             <section>Fields</section>
         </sections>
     </layouts>
@@ -1999,6 +1987,18 @@
         <name>CreateInKindDonorAccount</name>
     </quickActions>
     <quickActions>
+        <label><!-- Emergency Contact --></label>
+        <name>Emergency_Contact</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Family Dynamics --></label>
+        <name>Family_Dynamics</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Log a Call --></label>
+        <name>Log_a_Call_WL</name>
+    </quickActions>
+    <quickActions>
         <label><!-- New Donation --></label>
         <name>New_Donation</name>
     </quickActions>
@@ -2018,23 +2018,32 @@
         <label><!-- New Membership --></label>
         <name>New_Membership</name>
     </quickActions>
+    <quickActions>
+        <label><!-- New Task --></label>
+        <name>New_Task_WL</name>
+    </quickActions>
     <recordTypes>
+        <description><!-- It displays the name of the state in which the account belongs. --></description>
         <label><!-- Chapter --></label>
         <name>Chapter</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- An Account representing a Household containing one or more individuals --></description>
         <label><!-- Household Account --></label>
         <name>HH_Account</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- An Account representing an hospital treatment facility. --></description>
         <label><!-- Hospital Treatment Facility --></label>
         <name>Hospital_Treatment_Facility</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- This record type associated with In Kind Donors page layout --></description>
         <label><!-- In Kind Donors --></label>
         <name>In_Kind_Donors</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- An Account representing an organization --></description>
         <label><!-- Organization --></label>
         <name>Organization</name>
     </recordTypes>

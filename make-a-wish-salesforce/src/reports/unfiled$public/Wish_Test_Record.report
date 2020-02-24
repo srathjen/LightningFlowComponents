@@ -26,16 +26,19 @@
         <filter>
             <criteriaItems>
                 <column>CREATED</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Chandrasekar Nallusamy,Kanagaraj Arjunan,Jose Rathi Francis,Sophiya George,Sudharsan Kumaravel,Furqan Maqbool,Vennila Paramasivam,ChennaReddy UmmaReddy,Kesavakumar Murugesan,Vinodhini Balraj</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.ChapterName__c</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>notEqual</operator>
                 <value>Test Chapter</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Test_Record__c</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
@@ -52,6 +55,8 @@
         </params>
         <reportType>CaseList</reportType>
         <scope>organization</scope>
+        <showGrandTotal>true</showGrandTotal>
+        <showSubTotals>true</showSubTotals>
         <timeFrameFilter>
             <dateColumn>CREATED_DATEONLY</dateColumn>
             <interval>INTERVAL_CUSTOM</interval>
@@ -83,11 +88,13 @@
         <filter>
             <criteriaItems>
                 <column>Case.ChapterName__c</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Make-A-Wish Alabama,Test Chapter</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Test_Record__c</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
@@ -104,6 +111,8 @@
         </params>
         <reportType>CaseHistory</reportType>
         <scope>organization</scope>
+        <showGrandTotal>true</showGrandTotal>
+        <showSubTotals>true</showSubTotals>
         <timeFrameFilter>
             <dateColumn>HLAST_UPDATE</dateColumn>
             <interval>INTERVAL_CUSTOM</interval>

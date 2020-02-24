@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Alabama</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Alabama records sharing</description>
+        <label>Alabama</label>
+        <sharedTo>
+            <role>Alabama_Chapter</role>
+        </sharedTo>
+        <criteriaItems>
+            <field>Chapter__c</field>
+            <operation>equals</operation>
+            <value>Alabama - Chapter,Alabama</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>Alabama_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Alabama - Chapter Staff</description>
+        <label>Alabama - Chapter</label>
+        <sharedTo>
+            <role>Alabama_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Alabama_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Alaska_Washington_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Alaska &amp; Washington - Chapter Staff</description>
+        <label>Alaska &amp; Washington - Chapter</label>
+        <sharedTo>
+            <role>Alaska_Washington_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Alaska_Washington_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Central_California_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Central California - Chapter Staff</description>
+        <label>Central California - Chapter</label>
+        <sharedTo>
+            <role>Central_California_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Central_California_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Central_New_York_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Central New York - Chapter Staff</description>
+        <label>Central New York - Chapter</label>
+        <sharedTo>
+            <role>Central_New_York_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Central_New_York_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Central_Northern_Florida_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Central &amp; Northern Florida - Chapter Staff</description>
+        <label>Central &amp; Northern Florida - Chapter</label>
+        <sharedTo>
+            <role>Central_Northern_Florida_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Central_Northern_Florida_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Central_South_Texas_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Central &amp; South Texas - Chapter Staff</description>
+        <label>Central &amp; South Texas - Chapter</label>
+        <sharedTo>
+            <role>Central_South_Texas_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Central_South_Texas_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Central_Western_North_Carolina_Chapter_Staff</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Central &amp; Western North Carolina - Chapter Staff</description>
+        <label>Central &amp; Western North Carolina - Chapter Staff</label>
+        <sharedTo>
+            <role>Central_Western_North_Carolina_Chapter_Staff</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Central_Western_North_Carolina_Chapter_Staff</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Colorado_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Colorado - Chapter Staff</description>
+        <label>Colorado - Chapter</label>
+        <sharedTo>
+            <role>Colorado_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Colorado_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Connecticut_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Connecticut - Chapter Staff</description>
+        <label>Connecticut - Chapter</label>
+        <sharedTo>
+            <role>Connecticut_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Connecticut_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>East_Tennessee_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to East Tennessee - Chapter Staff</description>
+        <label>East Tennessee - Chapter</label>
+        <sharedTo>
+            <role>East_Tennessee_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>East_Tennessee_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Eastern_North_Carolina_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Eastern North Carolina - Chapter Staff</description>
+        <label>Eastern North Carolina - Chapter</label>
+        <sharedTo>
+            <role>Eastern_North_Carolina_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Eastern_North_Carolina_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Georgia_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Eastern North Carolina - Chapter Staff</description>
+        <label>Georgia - Chapter</label>
+        <sharedTo>
+            <role>Georgia_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Georgia_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Greater_Bay_Area_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Greater Bay Area - Chapter Staff</description>
+        <label>Greater Bay Area - Chapter</label>
+        <sharedTo>
+            <role>Greater_Bay_Area_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Greater_Bay_Area_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Greater_Los_Angeles_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Greater Los Angeles - Chapter Staff</description>
+        <label>Greater Los Angeles - Chapter</label>
+        <sharedTo>
+            <role>Greater_Los_Angeles_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Greater_Los_Angeles_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Greater_Pennsylvania_West_Virginia_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Greater Pennsylvania &amp; West Virginia - Chapter Staff</description>
+        <label>Greater Pennsylvania &amp; West Virginia - Chapter</label>
+        <sharedTo>
+            <role>Greater_Pennsylvania_West_Virginia_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Greater_Pennsylvania_West_Virginia_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Greater_Virginia_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Greater Virginia - Chapter Staff</description>
+        <label>Greater Virginia - Chapter</label>
+        <sharedTo>
+            <role>Greater_Virginia_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Greater_Virginia_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Guam_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Guam - Chapter Staff</description>
+        <label>Guam - Chapter</label>
+        <sharedTo>
+            <role>Guam_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Guam_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Hawaii_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Hawaii - Chapter Staff</description>
+        <label>Hawaii - Chapter</label>
+        <sharedTo>
+            <role>Hawaii_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Hawaii_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Hudson_Valley_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Hudson - Valley - Chapter Staff</description>
+        <label>Hudson - Valley - Chapter</label>
+        <sharedTo>
+            <role>Hudson_Valley_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Hudson_Valley_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Idaho_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Idaho - Chapter Staff</description>
+        <label>Idaho - Chapter</label>
+        <sharedTo>
+            <role>Idaho_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Idaho_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Illinois_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Illinois - Chapter Staff</description>
+        <label>Illinois - Chapter</label>
+        <sharedTo>
+            <role>Illinois_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Illinois_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Iowa_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Iowa- Chapter Staff</description>
+        <label>Iowa- Chapter</label>
+        <sharedTo>
+            <role>Iowa_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Iowa_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Kansas_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Kansas- Chapter Staff</description>
+        <label>Kansas- Chapter</label>
+        <sharedTo>
+            <role>Kansas_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Kansas_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Maine_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Maine- Chapter Staff</description>
+        <label>Maine- Chapter</label>
+        <sharedTo>
+            <role>Maine_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Maine_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Massachusetts_Rhode_Island_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Massachusetts &amp; Rhode Island - Chapter Staff</description>
+        <label>Massachusetts &amp; Rhode Island - Chapter</label>
+        <sharedTo>
+            <role>Massachusetts_Rhode_Island_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Massachusetts_Rhode_Island_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Metro_New_York_Western_New_York_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Metro New York &amp; Western New York - Chapter Staff</description>
+        <label>Metro New York &amp; Western New York - Chapter</label>
+        <sharedTo>
+            <role>Metro_New_York_Western_New_York_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Metro_New_York_Western_New_York_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Michigan_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Michigan - Chapter Staff</description>
+        <label>Michigan - Chapter</label>
+        <sharedTo>
+            <role>Michigan_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Michigan_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Mid_Atlantic_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Mid-Atlantic - Chapter Staff</description>
+        <label>Mid-Atlantic - Chapter</label>
+        <sharedTo>
+            <role>Mid_Atlantic_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Mid_Atlantic_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Mid_South_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Mid-South - Chapter Staff</description>
+        <label>Mid-South - Chapter</label>
+        <sharedTo>
+            <role>Mid_South_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Mid_South_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Middle_Tennessee_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Middle Tennessee - Chapter Staff</description>
+        <label>Middle Tennessee - Chapter</label>
+        <sharedTo>
+            <role>Middle_Tennessee_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Middle_Tennessee_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Minnesota_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Minnesota - Chapter Staff</description>
+        <label>Minnesota - Chapter</label>
+        <sharedTo>
+            <role>Minnesota_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Minnesota_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Mississippi_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Mississippi - Chapter Staff</description>
+        <label>Mississippi - Chapter</label>
+        <sharedTo>
+            <role>Mississippi_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Mississippi_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Missouri_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Missouri- Chapter Staff</description>
+        <label>Missouri- Chapter</label>
+        <sharedTo>
+            <role>Missouri_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Missouri_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Montana_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Montana - Chapter Staff</description>
+        <label>Montana - Chapter</label>
+        <sharedTo>
+            <role>Montana_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Montana_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>National_Staff</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to National- Staff</description>
+        <label>National- Staff</label>
+        <sharedTo>
+            <role>National_Staff</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>National_Staff</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Nebraska_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Nebraska - Chapter Staff</description>
+        <label>Nebraska - Chapter</label>
+        <sharedTo>
+            <role>Nebraska_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Nebraska_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>New_Hampshire_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to New Hampshire- Chapter Staff</description>
+        <label>New Hampshire- Chapter</label>
+        <sharedTo>
+            <role>New_Hampshire_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>New_Hampshire_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>New_Jersey_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to New Jersey - Chapter Staff</description>
+        <label>New Jersey - Chapter</label>
+        <sharedTo>
+            <role>New_Jersey_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>New_Jersey_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>New_Mexico_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to New Mexico - Chapter Staff</description>
+        <label>New Mexico - Chapter</label>
+        <sharedTo>
+            <role>New_Mexico_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>New_Mexico_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>North_Dakota_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to New North Dakota- Chapter Staff</description>
+        <label>North Dakota- Chapter</label>
+        <sharedTo>
+            <role>North_Dakota_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>North_Dakota_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>North_Texas_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to New North Texas - Chapter Staff</description>
+        <label>North Texas - Chapter</label>
+        <sharedTo>
+            <role>North_Texas_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>North_Texas_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Northeast_New_York_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Northeast New York - Chapter Staff</description>
+        <label>Northeast New York - Chapter</label>
+        <sharedTo>
+            <role>Northeast_New_York_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Northeast_New_York_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Northeastern_California_Northern_Nevada_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Northeastern California &amp; Northern Nevada - Chapter Staff</description>
+        <label>Northeastern California &amp; Northern Nevada - Chapter</label>
+        <sharedTo>
+            <role>Northeastern_Central_California_and_Northern_Nevada</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Northeastern_Central_California_and_Northern_Nevada</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Ohio_Kentucky_Indiana_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Ohio, Kentucky &amp; Indiana - Chapter Staff</description>
+        <label>Ohio, Kentucky &amp; Indiana - Chapter</label>
+        <sharedTo>
+            <role>Ohio_Kentucky_Indiana_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Ohio_Kentucky_Indiana_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Oklahoma_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Oklahoma - Chapter Staff</description>
+        <label>Oklahoma - Chapter</label>
+        <sharedTo>
+            <role>Oklahoma_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Oklahoma_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Orange_Country_the_Inland_Empire_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Orange Country &amp; the Inland Empire - Chapter Staff</description>
+        <label>Orange Country &amp; the Inland Empire - Chapter</label>
+        <sharedTo>
+            <role>Orange_Country_the_Inland_Empire_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Orange_Country_the_Inland_Empire_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Oregon_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Oregon - Chapter Staff</description>
+        <label>Oregon - Chapter</label>
+        <sharedTo>
+            <role>Oregon_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Oregon_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Philadelphia_Northern_Delaware_Susquehanna_Valley_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Philadelphia, Northern Delaware &amp; Susquehanna Valley - Chapter Staff</description>
+        <label>Philadelphia, Northern Delaware &amp; Susquehanna Valley - Chapter</label>
+        <sharedTo>
+            <role>Philadelphia_Northern_Delaware_Susquehanna_Valley_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Philadelphia_Northern_Delaware_Susquehanna_Valley_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Puerto_Rico_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Puerto Rico - Chapter Staff</description>
+        <label>Puerto Rico - Chapter</label>
+        <sharedTo>
+            <role>Puerto_Rico_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Puerto_Rico_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Rio_Grande_Valley_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Rio Grande Valley - Chapter Staff</description>
+        <label>Rio Grande Valley - Chapter</label>
+        <sharedTo>
+            <role>Rio_Grande_Valley_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Rio_Grande_Valley_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>San_Diego_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to San Diego- Chapter Staff</description>
+        <label>San Diego- Chapter</label>
+        <sharedTo>
+            <role>San_Diego_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>San_Diego_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>South_Carolina_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to South Carolina- Chapter Staff</description>
+        <label>South Carolina- Chapter</label>
+        <sharedTo>
+            <role>South_Carolina_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>South_Carolina_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>South_Dakota_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to South Dakota - Chapter Staff</description>
+        <label>South Dakota - Chapter</label>
+        <sharedTo>
+            <role>South_Dakota_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>South_Dakota_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Southern_Florida_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Southern Florida - Chapter Staff</description>
+        <label>Southern Florida - Chapter</label>
+        <sharedTo>
+            <role>Southern_Florida_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Southern_Florida_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Southern_Nevada_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Southern Nevada - Chapter Staff</description>
+        <label>Southern Nevada - Chapter</label>
+        <sharedTo>
+            <role>Southern_Nevada_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Southern_Nevada_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Suffolk_County_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Suffolk County- Chapter Staff</description>
+        <label>Suffolk County- Chapter</label>
+        <sharedTo>
+            <role>Suffolk_County_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Suffolk_County_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Texas_Gulf_Coast_Louisiana_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Texas Gulf Coast &amp; Louisiana - Chapter Staff</description>
+        <label>Texas Gulf Coast &amp; Louisiana - Chapter</label>
+        <sharedTo>
+            <role>Texas_Gulf_Coast_Louisiana_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Texas_Gulf_Coast_Louisiana_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Tri_Counties_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Tri-Counties - Chapter Staff</description>
+        <label>Tri-Counties - Chapter</label>
+        <sharedTo>
+            <role>Tri_Counties_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Tri_Counties_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Utah_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Utah - Chapter Staff</description>
+        <label>Utah - Chapter</label>
+        <sharedTo>
+            <role>Utah_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Utah_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Vermont_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Vermont - Chapter Staff</description>
+        <label>Vermont - Chapter</label>
+        <sharedTo>
+            <role>Vermont_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Vermont_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Wisconsin_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Wisconsin - Chapter Staff</description>
+        <label>Wisconsin - Chapter</label>
+        <sharedTo>
+            <role>Wisconsin_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Wisconsin_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Wyoming_Chapter</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Grants Read access to Wyoming - Chapter Staff</description>
+        <label>Wyoming - Chapter</label>
+        <sharedTo>
+            <role>Wyoming_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Wyoming_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

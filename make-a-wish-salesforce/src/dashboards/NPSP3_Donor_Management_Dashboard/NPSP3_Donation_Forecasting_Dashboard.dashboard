@@ -65,6 +65,7 @@
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
             <groupingColumn>CLOSE_DATE</groupingColumn>
+            <groupingSortProperties/>
             <header>Open Payments by Amount</header>
             <legendPosition>Bottom</legendPosition>
             <report>NPSP3_Donor_Management_Reports/NPSP3_Donor_Year_on_Year_Comparison</report>
@@ -92,6 +93,7 @@
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
             <footer>+120 days</footer>
+            <groupingSortProperties/>
             <header>Upcoming Open Opportunities, by Stage</header>
             <legendPosition>Bottom</legendPosition>
             <report>NPSP3_Donor_Management_Reports/NPSP3_Open_Opportunities_Grouped_by_Stage</report>
@@ -118,6 +120,7 @@
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
+            <groupingSortProperties/>
             <header>Open Opportunities by Stage</header>
             <legendPosition>Bottom</legendPosition>
             <report>NPSP3_Donor_Management_Reports/NPSP3_Open_Opportunities_By_Stage</report>

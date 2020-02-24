@@ -17,4 +17,5 @@ Thank you,
 {!Contact.Account_Phone__c}
 {!Contact.Account_Email__c}</textOnly>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

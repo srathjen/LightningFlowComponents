@@ -25,4 +25,5 @@ Thanks,
 {!Target_User.Account_Phone__c}
 {!Target_User.Account_Email__c}</textOnly>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

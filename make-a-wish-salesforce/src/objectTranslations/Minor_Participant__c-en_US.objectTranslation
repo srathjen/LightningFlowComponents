@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Minor Participant</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Minor Participants</value>
+    </caseValues>
+    <fields>
+        <label><!-- Associated Childeren --></label>
+        <name>Associated_Childeren__c</name>
+    </fields>
+    <fields>
+        <label><!-- AttachmentId --></label>
+        <name>AttachmentId__c</name>
+    </fields>
+    <fields>
+        <help><!-- This field is used for storing a title of the uploaded document --></help>
+        <label><!-- Attachment Title --></label>
+        <name>Attachment_Title__c</name>
+    </fields>
+    <fields>
+        <label><!-- Case --></label>
+        <name>Case__c</name>
+        <relationshipLabel><!-- Minor Participants --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Combo Chapter Name --></label>
+        <name>Combo_Chapter_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Email --></label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- File Path --></label>
+        <name>File_Path__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form Name --></label>
+        <name>Form_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Guardian Name --></label>
+        <name>Guardian_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Combo City --></label>
+        <name>Hidden_Combo_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Combo Contact Id --></label>
+        <name>Hidden_Combo_ContactId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Combo DOB --></label>
+        <name>Hidden_Combo_DOB__c</name>
+    </fields>
+    <fields>
+        <label><!-- Combo Email --></label>
+        <name>Hidden_Combo_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Combo Envelop Id --></label>
+        <name>Hidden_Combo_Envelop_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Combo First Name --></label>
+        <name>Hidden_Combo_FirstName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Combo HomePhone --></label>
+        <name>Hidden_Combo_HomePhone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Combo LastName --></label>
+        <name>Hidden_Combo_LastName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Combo Middle Name --></label>
+        <name>Hidden_Combo_MiddleName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Combo MobilePhone --></label>
+        <name>Hidden_Combo_MobilePhone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Combo Participant --></label>
+        <name>Hidden_Combo_Participant__c</name>
+    </fields>
+    <fields>
+        <label><!-- Combo Relationship --></label>
+        <name>Hidden_Combo_Relationship__c</name>
+    </fields>
+    <fields>
+        <label><!-- Combo State --></label>
+        <name>Hidden_Combo_State__c</name>
+    </fields>
+    <fields>
+        <label><!-- Combo Street --></label>
+        <name>Hidden_Combo_Street__c</name>
+    </fields>
+    <fields>
+        <label><!-- Combo TelePhone --></label>
+        <name>Hidden_Combo_TelePhone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Combo Zipcode --></label>
+        <name>Hidden_Combo_Zipcode__c</name>
+    </fields>
+    <fields>
+        <label><!-- Name --></label>
+        <name>Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- SelectedFormat --></label>
+        <name>SelectedFormat__c</name>
+    </fields>
+    <fields>
+        <label><!-- SignedDate --></label>
+        <name>SignedDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Child Name --></label>
+        <name>Wish_Child_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- hiddenFormat --></label>
+        <name>hiddenFormat__c</name>
+    </fields>
+    <layouts>
+        <layout>Combo Form Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Minor Participant Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Wish Clarence Attachment</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Clarence AttachMent --></label>
+            <section>Wish Clarence AttachMent</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Combo Form Attachment --></label>
+        <name>Combo_Form_Attachment</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Form Tracker Attachment --></label>
+        <name>Form_Tracker_Attachment</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Wish Clarence Attachment --></label>
+        <name>Wish_Clarence_Attachment</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

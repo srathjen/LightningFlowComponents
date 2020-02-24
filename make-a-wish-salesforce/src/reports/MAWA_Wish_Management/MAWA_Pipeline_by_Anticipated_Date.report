@@ -55,9 +55,6 @@
         <field>Case.Wish_Type__c</field>
     </columns>
     <columns>
-        <field>Case.Copy_1_Anticipated_Start_Date__c</field>
-    </columns>
-    <columns>
         <field>Case.Start_Date__c</field>
     </columns>
     <columns>
@@ -69,11 +66,13 @@
     <filter>
         <criteriaItems>
             <column>STATUS</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Budget Approval - Submitted,Budget Approval - Approved,Wish Determined,Wish Design,Wish Scheduled</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Assist__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
@@ -96,6 +95,8 @@
     <reportType>CaseList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Case.Anticipated_Start_Date__c</dateColumn>
         <interval>INTERVAL_CURNEXTFY</interval>

@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SecuritySettings xmlns="http://soap.sforce.com/2006/04/metadata">
+    <canUsersGrantLoginAccess>true</canUsersGrantLoginAccess>
+    <enableAdminLoginAsAnyUser>true</enableAdminLoginAsAnyUser>
+    <enableAuditFieldsInactiveOwner>true</enableAuditFieldsInactiveOwner>
+    <enableAuraSecureEvalPref>false</enableAuraSecureEvalPref>
+    <enableRequireHttpsConnection>true</enableRequireHttpsConnection>
+    <isTLSv12Required>true</isTLSv12Required>
+    <isTLSv12RequiredCommunities>false</isTLSv12RequiredCommunities>
     <networkAccess>
         <ipRanges>
             <end>209.67.98.63</end>
@@ -18,17 +25,35 @@
             <start>185.81.100.1</start>
         </ipRanges>
         <ipRanges>
-            <description>Automation</description>
-            <end>182.19.39.173</end>
-            <start>182.19.39.173</start>
+            <description>DocuSign Production NA and Demo</description>
+            <end>162.248.187.254</end>
+            <start>162.248.184.1</start>
         </ipRanges>
         <ipRanges>
             <end>162.248.187.255</end>
             <start>162.248.184.1</start>
         </ipRanges>
         <ipRanges>
+            <description>Automation</description>
+            <end>114.29.239.154</end>
+            <start>114.29.239.154</start>
+        </ipRanges>
+        <ipRanges>
+            <end>103.219.243.4</end>
+            <start>103.219.243.4</start>
+        </ipRanges>
+        <ipRanges>
+            <end>103.219.242.4</end>
+            <start>103.219.242.4</start>
+        </ipRanges>
+        <ipRanges>
             <end>98.186.251.228</end>
             <start>98.186.251.228</start>
+        </ipRanges>
+        <ipRanges>
+            <description>DocuSign Production NA and Demo</description>
+            <end>64.207.219.254</end>
+            <start>64.207.216.1</start>
         </ipRanges>
         <ipRanges>
             <end>54.149.21.90</end>
@@ -39,12 +64,27 @@
             <start>54.69.114.54</start>
         </ipRanges>
         <ipRanges>
+            <description>DocuSign Production NA and Demo</description>
+            <end>52.41.95.219</end>
+            <start>52.41.95.219</start>
+        </ipRanges>
+        <ipRanges>
+            <description>DocuSign Production NA and Demo</description>
+            <end>52.34.155.26</end>
+            <start>52.34.155.26</start>
+        </ipRanges>
+        <ipRanges>
             <end>52.28.168.105</end>
             <start>52.28.168.105</start>
         </ipRanges>
         <ipRanges>
             <end>52.27.126.9</end>
             <start>52.27.126.9</start>
+        </ipRanges>
+        <ipRanges>
+            <description>DocuSign Production NA and Demo</description>
+            <end>52.27.85.20</end>
+            <start>52.27.85.20</start>
         </ipRanges>
         <ipRanges>
             <end>52.26.192.160</end>
@@ -66,9 +106,70 @@
             <end>52.11.152.229</end>
             <start>52.11.152.229</start>
         </ipRanges>
+        <ipRanges>
+            <description>DocuSign Production NA and Demo</description>
+            <end>35.167.67.7</end>
+            <start>35.167.67.7</start>
+        </ipRanges>
+        <ipRanges>
+            <description>DocuSign Production NA and Demo</description>
+            <end>35.164.40.59</end>
+            <start>35.164.40.59</start>
+        </ipRanges>
+        <ipRanges>
+            <description>DocuSign Production NA and Demo</description>
+            <end>34.215.203.190</end>
+            <start>34.215.203.190</start>
+        </ipRanges>
+        <ipRanges>
+            <description>DocuSign Production NA and Demo</description>
+            <end>34.215.142.185</end>
+            <start>34.215.142.185</start>
+        </ipRanges>
+        <ipRanges>
+            <description>DocuSign Production NA and Demo</description>
+            <end>34.215.124.54</end>
+            <start>34.215.124.54</start>
+        </ipRanges>
+        <ipRanges>
+            <description>DocuSign Production NA and Demo</description>
+            <end>34.213.254.17</end>
+            <start>34.213.254.17</start>
+        </ipRanges>
+        <ipRanges>
+            <description>DocuSign Production NA and Demo</description>
+            <end>34.213.201.254</end>
+            <start>34.213.201.254</start>
+        </ipRanges>
+        <ipRanges>
+            <description>DocuSign Production NA and Demo</description>
+            <end>34.212.7.28</end>
+            <start>34.212.7.28</start>
+        </ipRanges>
+        <ipRanges>
+            <description>DocuSign Production AU</description>
+            <end>13.72.249.142</end>
+            <start>13.72.249.142</start>
+        </ipRanges>
+        <ipRanges>
+            <description>DocuSign Production AU</description>
+            <end>13.72.248.93</end>
+            <start>13.72.248.93</start>
+        </ipRanges>
+        <ipRanges>
+            <description>DocuSign Production AU</description>
+            <end>13.70.141.103</end>
+            <start>13.70.141.103</start>
+        </ipRanges>
+        <ipRanges>
+            <description>DocuSign Production AU</description>
+            <end>13.70.136.159</end>
+            <start>13.70.136.159</start>
+        </ipRanges>
     </networkAccess>
     <passwordPolicies>
         <complexity>AlphaNumeric</complexity>
+        <enableSetPasswordInApi>true</enableSetPasswordInApi>
         <expiration>Never</expiration>
         <historyRestriction>0</historyRestriction>
         <lockoutInterval>FifteenMinutes</lockoutInterval>
@@ -79,6 +180,8 @@
         <questionRestriction>DoesNotContainPassword</questionRestriction>
     </passwordPolicies>
     <sessionSettings>
+        <allowUserAuthenticationByCertificate>false</allowUserAuthenticationByCertificate>
+        <canConfirmEmailChangeInLightningCommunities>false</canConfirmEmailChangeInLightningCommunities>
         <disableTimeoutWarning>false</disableTimeoutWarning>
         <enableCSPOnEmail>true</enableCSPOnEmail>
         <enableCSRFOnGet>true</enableCSRFOnGet>
@@ -88,14 +191,36 @@
         <enableClickjackNonsetupUser>false</enableClickjackNonsetupUser>
         <enableClickjackNonsetupUserHeaderless>false</enableClickjackNonsetupUserHeaderless>
         <enableClickjackSetup>true</enableClickjackSetup>
+        <enableContentSniffingProtection>false</enableContentSniffingProtection>
+        <enableLightningLogin>true</enableLightningLogin>
+        <enableLightningLoginOnlyWithUserPerm>false</enableLightningLoginOnlyWithUserPerm>
         <enablePostForSessions>false</enablePostForSessions>
         <enableSMSIdentity>true</enableSMSIdentity>
+        <enableU2F>false</enableU2F>
+        <enableUpgradeInsecureRequests>false</enableUpgradeInsecureRequests>
+        <enableXssProtection>false</enableXssProtection>
         <enforceIpRangesEveryRequest>false</enforceIpRangesEveryRequest>
         <forceLogoutOnSessionTimeout>false</forceLogoutOnSessionTimeout>
         <forceRelogin>false</forceRelogin>
+        <hasRetainedLoginHints>false</hasRetainedLoginHints>
+        <hasUserSwitching>true</hasUserSwitching>
+        <hstsOnForcecomSites>false</hstsOnForcecomSites>
+        <identityConfirmationOnEmailChange>false</identityConfirmationOnEmailChange>
+        <identityConfirmationOnTwoFactorRegistrationEnabled>true</identityConfirmationOnTwoFactorRegistrationEnabled>
         <lockSessionsToDomain>true</lockSessionsToDomain>
         <lockSessionsToIp>false</lockSessionsToIp>
+        <lockerServiceCSP>false</lockerServiceCSP>
+        <lockerServiceFrozenRealm>false</lockerServiceFrozenRealm>
+        <redirectionWarning>false</redirectionWarning>
+        <referrerPolicy>true</referrerPolicy>
+        <requireHttpOnly>false</requireHttpOnly>
+        <requireHttps>true</requireHttps>
         <securityCentralKillSession>true</securityCentralKillSession>
         <sessionTimeout>TwoHours</sessionTimeout>
     </sessionSettings>
+    <singleSignOnSettings>
+        <enableMultipleSamlConfigs>true</enableMultipleSamlConfigs>
+        <enableSamlJitProvisioning>false</enableSamlJitProvisioning>
+        <enableSamlLogin>false</enableSamlLogin>
+    </singleSignOnSettings>
 </SecuritySettings>

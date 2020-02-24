@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Wish Change Request</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Wish Change Requests</value>
+    </caseValues>
+    <fields>
+        <label><!-- Field API for Proposed Change --></label>
+        <name>Field_API_Name_for_Proposed_Change__c</name>
+    </fields>
+    <fields>
+        <label><!-- Field Label for Proposed Change --></label>
+        <name>Field_Label_for_Proposed_Change__c</name>
+    </fields>
+    <fields>
+        <label><!-- New Value --></label>
+        <name>Field_New_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Previous Value --></label>
+        <name>Field_Previous_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record Link --></label>
+        <name>Link_to_Record__c</name>
+    </fields>
+    <fields>
+        <label><!-- My Change Request --></label>
+        <name>My_Change_Request__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object API for Proposed Change --></label>
+        <name>Object_API_Name_for_Proposed_Change__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record Id --></label>
+        <name>Record_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record Name --></label>
+        <name>Record_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Status of the change request --></help>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Proposed</masterLabel>
+            <translation><!-- Proposed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Wish Affiliated Contact Name Text --></label>
+        <name>Wish_Affiliated_Contact_Name_Text__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Affiliated Contact --></label>
+        <name>Wish_Affiliated_Contact__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Affiliation Relationship --></label>
+        <name>Wish_Affiliation_Relationship__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Affiliation --></label>
+        <name>Wish_Affiliation__c</name>
+        <relationshipLabel><!-- Wish Change Requests --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Related Wish Case --></help>
+        <label><!-- Wish Case --></label>
+        <lookupFilter>
+            <errorMessage><!-- Please select a &apos;Wish&apos; case record type. --></errorMessage>
+        </lookupFilter>
+        <name>Wish_Case_Id__c</name>
+        <relationshipLabel><!-- Wish Change Requests --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Wish Child Name --></label>
+        <name>Wish_Child_Name__c</name>
+    </fields>
+    <layouts>
+        <layout>Wish Change Request Layout</layout>
+        <sections>
+            <label><!-- Change Details --></label>
+            <section>Change Details</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Target Information --></label>
+            <section>Target Information</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- Approve and Apply --></label>
+        <name>Approve_and_Apply</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Reject --></label>
+        <name>Reject</name>
+    </quickActions>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

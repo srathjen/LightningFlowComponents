@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <outboundMessages>
+        <fullName>cg__AttachmentSync_Callout</fullName>
+        <apiVersion>29.0</apiVersion>
+        <endpointUrl>https://portal.sdriveapp.com/sync/sdriveSyncV3</endpointUrl>
+        <fields>CreatedDate</fields>
+        <fields>Id</fields>
+        <fields>cg__AttachmentId__c</fields>
+        <fields>cg__AttachmentObjectFileName__c</fields>
+        <fields>cg__AttachmentParentId__c</fields>
+        <fields>cg__AttachmentParentObjectName__c</fields>
+        <fields>cg__AttachmentRelationshipName__c</fields>
+        <fields>cg__FailedMessage__c</fields>
+        <fields>cg__FailedStatus__c</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>salesforce@wish.org</integrationUser>
+        <name>AttachmentSync Callout</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>cg__FileSync_Callout</fullName>
+        <apiVersion>46.0</apiVersion>
+        <endpointUrl>https://portal.sdriveapp.com/sync/sdriveSyncV4</endpointUrl>
+        <fields>CreatedDate</fields>
+        <fields>Id</fields>
+        <fields>cg__AttachmentId__c</fields>
+        <fields>cg__AttachmentObjectFileName__c</fields>
+        <fields>cg__AttachmentParentId__c</fields>
+        <fields>cg__AttachmentParentObjectName__c</fields>
+        <fields>cg__AttachmentRelationshipName__c</fields>
+        <fields>cg__FailedMessage__c</fields>
+        <fields>cg__FailedStatus__c</fields>
+        <fields>cg__Type__c</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>admin@wish.org</integrationUser>
+        <name>FileSync Callout</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>cg__AttachmentSync Callout</fullName>
+        <actions>
+            <name>cg__AttachmentSync_Callout</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2) AND (3 OR 4)</booleanFilter>
+        <criteriaItems>
+            <field>cg__AttachmentSync__c.cg__AttachmentId__c</field>
+            <operation>notEqual</operation>
+            <value>null</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>cg__AttachmentSync__c.cg__FailedStatus__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>cg__AttachmentSync__c.cg__Type__c</field>
+            <operation>equals</operation>
+            <value>Attachment</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>cg__AttachmentSync__c.cg__Type__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>cg__FileSync Callout</fullName>
+        <actions>
+            <name>cg__FileSync_Callout</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2) AND 3</booleanFilter>
+        <criteriaItems>
+            <field>cg__AttachmentSync__c.cg__AttachmentId__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>cg__AttachmentSync__c.cg__FailedStatus__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>cg__AttachmentSync__c.cg__Type__c</field>
+            <operation>equals</operation>
+            <value>File</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

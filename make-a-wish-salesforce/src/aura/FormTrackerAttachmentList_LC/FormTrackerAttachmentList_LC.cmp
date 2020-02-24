@@ -1,0 +1,49 @@
+<aura:component controller="FormTrackerAttachment_AC" implements="force:appHostable,flexipage:availableForRecordHome,force:hasRecordID"
+                access="global">
+    <ltng:require scripts="{!$Resource.CommonJS}" />
+    
+    <aura:attribute name="demodata" type="Object"/>
+    <aura:attribute name="democolumns" type="List"/>
+    
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="showComponent" type="Boolean" default="false"/>
+    
+    <aura:handler event="c:FormTrackerAttachment_LE" action="{!c.handleApplicationEvent}"/>
+    
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    
+    <!--loading spinner start...-->
+    <aura:if isTrue="{!v.Spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    <!-- Loading spinner end-->  
+    <aura:if isTrue="{!v.showComponent}">    
+        <div class="col-sm-12 m-t-2 fieldsetwrapper">
+            <fieldset>
+                <legend>Attachment List</legend>
+                <!--<p align="right">
+                    <a onclick="{!c.navigateToDashboard}" title="Navigate to form tracker page"><lightning:icon class="slds-custom-refresh" alternativeText="View" iconName="standard:dashboard" size="small"  /></a>
+                    &nbsp;&nbsp; <a onclick="{!c.init }" title="refresh"><lightning:icon class="slds-custom-refresh" alternativeText="View" iconName="utility:refresh" size="small"  /></a>
+                </p><br />-->
+                <lightning:card title="Attachments" iconName="standard:process" class="slds-p-around_small" >
+                    <lightning:datatable data="{!v.demodata}" 
+                                         columns="{!v.democolumns}" 
+                                         keyField="id"
+                                         onrowaction="{! c.handleRowAction }"
+                                         hideCheckboxColumn="true"
+                                         onrowselection="{!c.getSelectedAccName}"/>
+                </lightning:card>
+            </fieldset>
+        </div>
+    </aura:if>
+</aura:component>

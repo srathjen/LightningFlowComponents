@@ -5,8 +5,8 @@
     <confirmationTokenRequired>false</confirmationTokenRequired>
     <label>MobileBackgroundCheckFilePage</label>
     <packageVersions>
-        <majorNumber>1</majorNumber>
-        <minorNumber>27</minorNumber>
+        <majorNumber>2</majorNumber>
+        <minorNumber>5</minorNumber>
         <namespace>cg</namespace>
     </packageVersions>
 </ApexPage>

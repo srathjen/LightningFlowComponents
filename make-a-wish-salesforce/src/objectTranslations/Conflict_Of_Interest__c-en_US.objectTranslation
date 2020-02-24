@@ -8,6 +8,10 @@
         <plural>true</plural>
         <value>Conflict Of Interest</value>
     </caseValues>
+    <fieldSets>
+        <label><!-- ConflictOfIntrest --></label>
+        <name>ConflictOfIntrest</name>
+    </fieldSets>
     <fields>
         <label><!-- Hidden Account Email --></label>
         <name>Account_Email__c</name>
@@ -67,6 +71,10 @@
     <fields>
         <label><!-- Signed Date --></label>
         <name>Signed_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unique Record Count --></label>
+        <name>Unique_Record_Count__c</name>
     </fields>
     <fields>
         <label><!-- Volunteer Role(Out of Compliance) --></label>

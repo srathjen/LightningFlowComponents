@@ -75,6 +75,7 @@
     <filter>
         <criteriaItems>
             <column>Lead.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
@@ -98,6 +99,8 @@
     <reportType>LeadList</reportType>
     <scope>user</scope>
     <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Lead.Referred_Date__c</dateColumn>
         <interval>INTERVAL_CURFY</interval>

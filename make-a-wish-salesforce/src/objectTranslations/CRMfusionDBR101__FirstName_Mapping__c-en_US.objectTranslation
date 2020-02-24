@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Formal Name --></label>
+        <name>CRMfusionDBR101__Formal_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Nickname --></label>
+        <name>CRMfusionDBR101__Nickname__c</name>
+    </fields>
+</CustomObjectTranslation>

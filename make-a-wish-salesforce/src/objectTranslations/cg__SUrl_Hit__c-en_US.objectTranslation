@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Browser --></label>
+        <name>cg__Browser__c</name>
+    </fields>
+    <fields>
+        <label><!-- IP Address --></label>
+        <name>cg__IP_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- OS --></label>
+        <name>cg__OS__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referrer --></label>
+        <name>cg__Referrer__c</name>
+    </fields>
+    <fields>
+        <help><!-- S-Drive Short Url --></help>
+        <label><!-- SUrl --></label>
+        <name>cg__SUrl__c</name>
+        <relationshipLabel><!-- SUrl Hits --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- User Agent --></label>
+        <name>cg__User_Agent__c</name>
+    </fields>
+</CustomObjectTranslation>

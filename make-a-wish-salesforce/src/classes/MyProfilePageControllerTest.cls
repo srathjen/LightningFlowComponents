@@ -17,6 +17,7 @@
             controller.edit();
             System.assert(controller.getIsEdit() == true);
             controller.cancel();
+            controller.save();
             System.assert(controller.getIsEdit() == false);
             
             System.assert(Page.ChangePassword.getUrl().equals(controller.changePassword().getUrl()));

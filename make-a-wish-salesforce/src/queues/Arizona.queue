@@ -2,6 +2,13 @@
 <Queue xmlns="http://soap.sforce.com/2006/04/metadata">
     <doesSendEmailToMembers>true</doesSendEmailToMembers>
     <name>Arizona</name>
+    <queueMembers>
+        <users>
+            <user>dsnyder@arizona.wish.org</user>
+            <user>jgonzales@arizona.wish.org</user>
+            <user>kjohnson@arizona.wish.org</user>
+        </users>
+    </queueMembers>
     <queueSobject>
         <sobjectType>Case</sobjectType>
     </queueSobject>
@@ -10,5 +17,8 @@
     </queueSobject>
     <queueSobject>
         <sobjectType>Volunteer_Opportunity__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>Wish_Child_Form__c</sobjectType>
     </queueSobject>
 </Queue>

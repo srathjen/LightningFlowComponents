@@ -79,6 +79,36 @@
         <operation>Literal</operation>
         <protected>false</protected>
     </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Record_Type</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Default</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Update Record Type</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <rules>
+        <fullName>Assign Task to default</fullName>
+        <actions>
+            <name>Update_Record_Type</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>Task.Subject</field>
+            <operation>contains</operation>
+            <value>days Pending Clarification - MAC</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Task.Subject</field>
+            <operation>contains</operation>
+            <value>days Pending Clarification - Chapter</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
     <rules>
         <fullName>Close Task</fullName>
         <actions>
@@ -196,7 +226,7 @@
     </rules>
     <tasks>
         <fullName>Task_ET_Interview_Cancelled</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -208,7 +238,7 @@
     </tasks>
     <tasks>
         <fullName>Task_ET_Interview_Completed</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -220,7 +250,7 @@
     </tasks>
     <tasks>
         <fullName>Task_ET_Interview_Confirmation_Date_and_Venue</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -232,7 +262,7 @@
     </tasks>
     <tasks>
         <fullName>Task_ET_Interview_Task_Rescheduled_for_You</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -244,7 +274,7 @@
     </tasks>
     <tasks>
         <fullName>Task_ET_Interview_scheduled</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -256,7 +286,7 @@
     </tasks>
     <tasks>
         <fullName>Task_ET_Task_ET_Interview_Task_Assigned_for_You</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>

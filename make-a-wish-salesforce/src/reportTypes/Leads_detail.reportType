@@ -434,6 +434,11 @@
             <field>Will_Child_s_Condition_Deteriorate__c</field>
             <table>Lead</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Part_A_Signed__c</field>
+            <table>Lead</table>
+        </columns>
         <masterLabel>Diagnosis Verification</masterLabel>
     </sections>
     <sections>
@@ -820,6 +825,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Rush__c</field>
+            <table>Lead</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Test_Record__c</field>
             <table>Lead</table>
         </columns>
         <masterLabel>Leads</masterLabel>
@@ -1233,5 +1243,53 @@
             <table>Lead</table>
         </columns>
         <masterLabel>Time In stage </masterLabel>
+    </sections>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>DB_Created_Date_without_Time__c</field>
+            <table>Lead</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>DB_Lead_Age__c</field>
+            <table>Lead</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>DNQ_Export_Filename__c</field>
+            <table>Lead</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Qualified_Export_Filename__c</field>
+            <table>Lead</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>From_Mulesoft__c</field>
+            <table>Lead</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ConvertedAccount</field>
+            <table>Lead</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ConvertedContact</field>
+            <table>Lead</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ConvertedOpportunity</field>
+            <table>Lead</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Using_Paper_Process_For_DV__c</field>
+            <table>Lead</table>
+        </columns>
+        <masterLabel>SF Back-end Data</masterLabel>
     </sections>
 </ReportType>

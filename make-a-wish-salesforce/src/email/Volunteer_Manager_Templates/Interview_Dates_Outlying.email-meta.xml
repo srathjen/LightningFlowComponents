@@ -8,4 +8,5 @@
     <style>freeForm</style>
     <subject>Please RSVP for a Screening Interview</subject>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

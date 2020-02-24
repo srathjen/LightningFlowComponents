@@ -27,6 +27,8 @@
     <reportType>ContactList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <sortColumn>CONTACT_OWNER</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>

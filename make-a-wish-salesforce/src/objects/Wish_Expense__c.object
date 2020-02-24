@@ -5,7 +5,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -13,7 +33,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -21,7 +61,13 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -29,7 +75,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -37,15 +103,55 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>Tab</actionName>
         <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Wish_Expense_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
     <allowInChatterGroups>true</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Wish_Expense_Compact_Layout</fullName>
+        <fields>Name</fields>
+        <fields>Wish_Expense_Type__c</fields>
+        <fields>Wish_Budget__c</fields>
+        <label>Wish Expense Compact Layout</label>
+    </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
     <description>This object will be used to store budgeting information</description>
     <enableActivities>true</enableActivities>
@@ -53,6 +159,7 @@
     <enableEnhancedLookup>true</enableEnhancedLookup>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
     <enableReports>true</enableReports>
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
@@ -63,25 +170,30 @@
         <description>It will capture detail description of the account</description>
         <externalId>false</externalId>
         <label>Account Description</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Direct Wish Cash Expense</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Direct Wish In-Kind Goods</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Direct Wish In-kind Service</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Direct Wish Cash Expense</fullName>
+                    <default>false</default>
+                    <label>Direct Wish Cash Expense</label>
+                </value>
+                <value>
+                    <fullName>Direct Wish In-Kind Goods</fullName>
+                    <default>false</default>
+                    <label>Direct Wish In-Kind Goods</label>
+                </value>
+                <value>
+                    <fullName>Direct Wish In-kind Service</fullName>
+                    <default>false</default>
+                    <label>Direct Wish In-kind Service</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Account_Number__c</fullName>
@@ -121,27 +233,33 @@
     </fields>
     <fields>
         <fullName>Budget_Approval_Status__c</fullName>
+        <description>Deprecated 2019-09-11 as per WLP-477. FLS removed from all profiles. Removed from all custom report types.</description>
         <externalId>false</externalId>
         <label>Budget Approval Status</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Submitted</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Rejected</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Submitted</fullName>
+                    <default>false</default>
+                    <label>Submitted</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Rejected</fullName>
+                    <default>false</default>
+                    <label>Rejected</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Budget_Cash__c</fullName>
@@ -182,68 +300,91 @@
     </fields>
     <fields>
         <fullName>Case__c</fullName>
-        <description>It will look up to the case record</description>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The Wish Case for which these expenses are being incurred.</description>
         <externalId>false</externalId>
         <label>Case</label>
         <referenceTo>Case</referenceTo>
         <relationshipLabel>Wish Expenses</relationshipLabel>
         <relationshipName>Wish_Expenses</relationshipName>
-        <relationshipOrder>0</relationshipOrder>
-        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>MasterDetail</type>
-        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Chapter_From__c</fullName>
         <description>It will capture starting place of source information</description>
         <externalId>false</externalId>
         <label>Chapter From</label>
-        <picklist>
-            <picklistValues>
-                <fullName>New York</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Chicago</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Los Angeles</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>New York</fullName>
+                    <default>false</default>
+                    <label>New York</label>
+                </value>
+                <value>
+                    <fullName>Chicago</fullName>
+                    <default>false</default>
+                    <label>Chicago</label>
+                </value>
+                <value>
+                    <fullName>Los Angeles</fullName>
+                    <default>false</default>
+                    <label>Los Angeles</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Chapter_To__c</fullName>
         <description>It will capture place of destination information</description>
         <externalId>false</externalId>
         <label>Chapter To</label>
-        <picklist>
-            <picklistValues>
-                <fullName>New York</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Chicago</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Los Angeles</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>New York</fullName>
+                    <default>false</default>
+                    <label>New York</label>
+                </value>
+                <value>
+                    <fullName>Chicago</fullName>
+                    <default>false</default>
+                    <label>Chicago</label>
+                </value>
+                <value>
+                    <fullName>Los Angeles</fullName>
+                    <default>false</default>
+                    <label>Los Angeles</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Created_After_Last_Approval__c</fullName>
+        <description>Used to identify whether the Wish Expense has been created after the Budget Approval. Referencing both Date and DateTime as DateTime would not be populated for historical data.</description>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(Wish_Budget__r.Budget_Approved_Date_Time__c),
+      IF(ISBLANK(Wish_Budget__r.Budget_Approved_Date__c),
+            FALSE, 
+            Wish_Budget__r.Budget_Approved_Date__c &lt; DATEVALUE(CreatedDate)),
+      Wish_Budget__r.Budget_Approved_Date_Time__c &lt; CreatedDate)</formula>
+        <label>Created After Last Approval</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Department_Division__c</fullName>
@@ -350,25 +491,30 @@
         <fullName>Projected_Approval_Status__c</fullName>
         <externalId>false</externalId>
         <label>Projected Approval Status</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Submitted</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Rejected</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Submitted</fullName>
+                    <default>false</default>
+                    <label>Submitted</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Rejected</fullName>
+                    <default>false</default>
+                    <label>Rejected</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Projected_Cash__c</fullName>
@@ -661,21 +807,25 @@
         <fullName>Transaction_Types__c</fullName>
         <externalId>false</externalId>
         <label>Transaction Types</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Budgeting</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Finance</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Budgeting</fullName>
+                    <default>false</default>
+                    <label>Budgeting</label>
+                </value>
+                <value>
+                    <fullName>Finance</fullName>
+                    <default>false</default>
+                    <label>Finance</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Transaction__c</fullName>
@@ -691,28 +841,73 @@
         <unique>true</unique>
     </fields>
     <fields>
+        <fullName>Transferred_from_Previous_Budget__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>To identify expenses transferred from a previous active Budget</description>
+        <externalId>false</externalId>
+        <label>Transferred from Previous Budget</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Unique_Record_Count__c</fullName>
+        <description>Enables better record counting functions on reports.</description>
+        <externalId>false</externalId>
+        <formula>1</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Unique Record Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Wish_Budget__c</fullName>
+        <description>Looks up to the Wish Budget, which is associated with the Wish Case.</description>
+        <externalId>false</externalId>
+        <label>Wish Budget</label>
+        <referenceTo>Wish_Budget__c</referenceTo>
+        <relationshipLabel>Wish Expenses</relationshipLabel>
+        <relationshipName>Wish_Expenses</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
         <fullName>Wish_Expense_Approval_Status__c</fullName>
         <externalId>false</externalId>
         <label>Wish Expense Approval Status</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Initiated</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Rejected</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Initiated</fullName>
+                    <default>false</default>
+                    <label>Initiated</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Rejected</fullName>
+                    <default>false</default>
+                    <label>Rejected</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Wish_Expense_Transaction_Code__c</fullName>
@@ -732,39 +927,69 @@
         <description>This field will be used to select the wish expense type</description>
         <externalId>false</externalId>
         <label>Wish Expense Type</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Airfare</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Car Rental</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Hotel</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Other</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Airfare</fullName>
+                    <default>false</default>
+                    <label>Airfare</label>
+                </value>
+                <value>
+                    <fullName>Car Rental</fullName>
+                    <default>false</default>
+                    <label>Car Rental</label>
+                </value>
+                <value>
+                    <fullName>Hotel</fullName>
+                    <default>false</default>
+                    <label>Hotel</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <label>Wish Expense</label>
     <listViews>
         <fullName>All</fullName>
+        <columns>Transaction__c</columns>
         <columns>NAME</columns>
         <columns>RECORDTYPE</columns>
         <columns>Wish_Expense_Transaction_Code__c</columns>
         <columns>Case__c</columns>
+        <columns>CREATED_DATE</columns>
         <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Wish_Expense__c.Finance</value>
+        </filters>
         <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Case_Specific</fullName>
+        <columns>NAME</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Wish_Expense_Transaction_Code__c</columns>
+        <columns>Case__c</columns>
+        <columns>Budget_In_Kind__c</columns>
+        <columns>FE_Posted_In_Kind__c</columns>
+        <columns>Actual_In_Kind__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Case__c</field>
+            <operation>equals</operation>
+            <value>00106120</value>
+        </filters>
+        <label>All-Case Specific</label>
     </listViews>
     <listViews>
         <fullName>Migration</fullName>
@@ -783,6 +1008,18 @@
             <value>iuser</value>
         </filters>
         <label>Migration</label>
+    </listViews>
+    <listViews>
+        <fullName>Search</fullName>
+        <columns>NAME</columns>
+        <columns>Case__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Case__c</field>
+            <operation>equals</operation>
+            <value>00104902</value>
+        </filters>
+        <label>__Search</label>
     </listViews>
     <nameField>
         <displayFormat>WE-{00000}</displayFormat>
@@ -1156,4 +1393,5 @@
         <errorConditionFormula>IsChanged(Case__c)</errorConditionFormula>
         <errorMessage>Wish Number cannot be updated.</errorMessage>
     </validationRules>
+    <visibility>Public</visibility>
 </CustomObject>

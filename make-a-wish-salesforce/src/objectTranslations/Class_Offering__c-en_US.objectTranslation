@@ -307,12 +307,20 @@
     <layouts>
         <layout>Class offering Layout</layout>
         <sections>
+            <label><!-- Class Details --></label>
+            <section>Class Details</section>
+        </sections>
+        <sections>
             <label><!-- Custom Links --></label>
             <section>Custom Links</section>
         </sections>
     </layouts>
     <layouts>
         <layout>Virtual Instructor Class offering Layout</layout>
+        <sections>
+            <label><!-- Class Details --></label>
+            <section>Class Details</section>
+        </sections>
         <sections>
             <label><!-- Custom Links --></label>
             <section>Custom Links</section>
@@ -321,19 +329,34 @@
     <layouts>
         <layout>Virtual Self Paced Class offering Layout</layout>
         <sections>
+            <label><!-- Class Details --></label>
+            <section>Class Details</section>
+        </sections>
+        <sections>
             <label><!-- Custom Links --></label>
             <section>Custom Links</section>
         </sections>
     </layouts>
+    <quickActions>
+        <label><!-- Log a Call --></label>
+        <name>Log_a_Call_CO</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New Task --></label>
+        <name>New_Task_CO</name>
+    </quickActions>
     <recordTypes>
+        <description><!-- Class Offering Training for In Person --></description>
         <label><!-- In-Person --></label>
         <name>In_Person</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Class Offering Training for Virtual - Instructor Lead --></description>
         <label><!-- Virtual - Instructor Lead --></label>
         <name>Virtual_Instructor_Lead</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Class Offering Training for Virtual Self Paced --></description>
         <label><!-- Virtual - Self Paced --></label>
         <name>Virtual_Self_Paced</name>
     </recordTypes>

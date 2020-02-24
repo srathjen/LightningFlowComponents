@@ -5,13 +5,20 @@ Public class batch_UpdateVolunteerLastEngageTest
     static testmethod void CreateVolunteerOpportunity()
     {
         String CRON_EXP = '0 0 1 * * ? *';
-        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();   
-        Contact wishChild = OrientationandTrainingUtil.CreateWishChild(); 
+        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+        insert chapterAccount;
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        insert wishChild;
         Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+        insert VolunteerContact;
         Case parentCase = OrientationandTrainingUtil.ParentCasetoAddCaseMember(wishChild.Id);
+        insert parentCase;
         Role__c  roleName = OrientationandTrainingUtil.createRole();
+        insert roleName;
         Chapter_Role__c  chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id,roleName.id);
+        insert chapterRole;
         Non_Wish_Events__c nonWishEvent = OrientationandTrainingUtil.CreateEventRec(chapterRole.Id,chapterAccount.Id);
+        insert nonWishEvent;
         nonWishEvent.Event_Date__c = Date.Today().addDays(-5);
         update nonWishEvent;
         

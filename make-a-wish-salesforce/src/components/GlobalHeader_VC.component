@@ -1,0 +1,13 @@
+<apex:component access="global">
+    <header role="main-header" class="container">
+        <div class="row">
+            <nav class="col-xs-3 col-xs-offset-9 pre-nav" role="top_menubar">
+                <a href="/{!$CurrentPage.parameters.Id}">Return To Wish</a>
+            </nav>
+        </div>
+        <div class="row">
+            <apex:outputLink styleClass="center-block maw-logo" onclick="preventDefault();" html-data-toggle="modal" html-data-target="#exit-alert"><span class="sr-only" aria-label="Make-A-Wish">Make-A-Wish&reg;</span></apex:outputLink>
+        </div>
+        <nav class="navbar navbar-dark sub-nav"></nav>
+    </header>
+</apex:component>

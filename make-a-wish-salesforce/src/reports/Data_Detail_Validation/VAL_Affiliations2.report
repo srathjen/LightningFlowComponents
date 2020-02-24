@@ -39,11 +39,13 @@
     <filter>
         <criteriaItems>
             <column>ACCOUNT.NAME</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>FK_$Contact.External_Id__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value></value>
         </criteriaItems>
@@ -57,6 +59,8 @@
     <reportType>AccountCustomEntity$npe5__Affiliation__c@npe5__Affiliation__c.npe5__Contact__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <sortColumn>npe5__Affiliation__c.External_Id__c</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>

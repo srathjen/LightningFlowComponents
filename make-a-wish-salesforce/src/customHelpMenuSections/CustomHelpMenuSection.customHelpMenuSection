@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomHelpMenuSection xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customHelpMenuItems>
+        <linkUrl>https://make-a-wish.lightning.force.com/resource/icons/IconAlertLegend.pdf</linkUrl>
+        <masterLabel>Icon &amp; Alert Legend</masterLabel>
+        <sortOrder>1</sortOrder>
+    </customHelpMenuItems>
+    <masterLabel>MAW Icons &amp; Alerts</masterLabel>
+</CustomHelpMenuSection>

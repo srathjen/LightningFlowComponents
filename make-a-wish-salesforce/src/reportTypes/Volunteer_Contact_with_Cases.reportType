@@ -158,6 +158,16 @@
             <field>County__c</field>
             <table>Contact</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Test_Record__c</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Wish_Status__c</field>
+            <table>Contact.Volunteer_Opportunities__r</table>
+        </columns>
         <masterLabel>Volunteer Contacts</masterLabel>
     </sections>
     <sections>
@@ -178,6 +188,94 @@
             <field>Role__c</field>
             <table>Contact.Volunteer_Opportunities__r</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Wish__c.Closed_Date__c</field>
+            <table>Contact.Volunteer_Opportunities__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Wish__c.Completed_Date__c</field>
+            <table>Contact.Volunteer_Opportunities__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Wish__c.Id</field>
+            <table>Contact.Volunteer_Opportunities__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>RecordType.DeveloperName</field>
+            <table>Contact.Volunteer_Opportunities__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Wish__c.Type</field>
+            <table>Contact.Volunteer_Opportunities__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Wish__c.Test_Record__c</field>
+            <table>Contact.Volunteer_Opportunities__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Wish__c.RecordType</field>
+            <table>Contact.Volunteer_Opportunities__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Wish__c.RecordType.DeveloperName</field>
+            <table>Contact.Volunteer_Opportunities__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Wish__c.End_Date__c</field>
+            <table>Contact.Volunteer_Opportunities__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Wish__c.Parent.Parent</field>
+            <table>Contact.Volunteer_Opportunities__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Wish__c.Parent.Parent.Parent</field>
+            <table>Contact.Volunteer_Opportunities__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Wish__c.IsparentCaseUp__c</field>
+            <table>Contact.Volunteer_Opportunities__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Unique_Record_Count__c</field>
+            <table>Contact.Volunteer_Opportunities__r</table>
+        </columns>
         <masterLabel>Volunteer Opportunities (Volunteer Name)</masterLabel>
+    </sections>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Account.Name</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Account.Id</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Account.Chapter_Name__c</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Account.Chapter_Id__c</field>
+            <table>Contact</table>
+        </columns>
+        <masterLabel>Contacts</masterLabel>
     </sections>
 </ReportType>

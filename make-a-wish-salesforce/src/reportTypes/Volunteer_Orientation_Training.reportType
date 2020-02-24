@@ -161,6 +161,16 @@
             <field>Class_Offering__c.Chapter_Role_O_T__c.Orientation_Training__c</field>
             <table>Volunteer_Orientation_Training__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Completion_Status__c</field>
+            <table>Volunteer_Orientation_Training__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Date_Cancelled__c</field>
+            <table>Volunteer_Orientation_Training__c</table>
+        </columns>
         <masterLabel>Volunteer Orientation &amp; Trainings</masterLabel>
     </sections>
     <sections>
@@ -196,12 +206,32 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Active_Volunteer__c</field>
+            <table>Volunteer_Orientation_Training__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Volunteer_Status__c</field>
+            <table>Volunteer_Orientation_Training__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Volunteer__c.is_Active_Volunteer__c</field>
             <table>Volunteer_Orientation_Training__c</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Volunteer__c.Volunteer_Role__c</field>
+            <table>Volunteer_Orientation_Training__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>B_C_Expiration_Date__c</field>
+            <table>Volunteer_Orientation_Training__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>COI_Expiration_Date__c</field>
             <table>Volunteer_Orientation_Training__c</table>
         </columns>
         <masterLabel>Volunteer info</masterLabel>

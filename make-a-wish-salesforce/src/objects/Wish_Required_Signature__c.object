@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Wish_Required_Signature_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>WL_Wish_Required_Signature_Compact</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>WL_Wish_Required_Signature_Compact</fullName>
+        <fields>Name</fields>
+        <fields>Status__c</fields>
+        <fields>Type__c</fields>
+        <fields>Wish_Signature_Form__c</fields>
+        <fields>Days_to_Expiry__c</fields>
+        <label>Wish Required Signature Compact Layout</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>The Wish Required Signature stores information about signatures that are required (from a legal and/or logistical standpoint) for a wish to proceed. It is linked to the Wish (Case) and to the person signing the form (Contact). It includes information about the Wish Signature Form. It tracks the life-cycle of each signature: the date it is sent out to be signed, the date it is signed and received, and (if applicable) the date on which the signature changes from valid to invalid.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fieldSets>
+        <fullName>FamilySignatureTracker</fullName>
+        <description>For Wish Required Signature Lightning Component</description>
+        <displayedFields>
+            <field>Wish_Affiliation__r.Contact__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Wish_Case__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Wish_Signature_Form__r.Name</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Status__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Sent_Date__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Signed_Date__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Format__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>FamilySignatureTracker</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>MedicalSignatureTracker</fullName>
+        <description>For Wish Required Signature Lightning Component</description>
+        <displayedFields>
+            <field>Wish_Affiliation__r.Contact__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Wish_Signature_Form__r.Name</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Status__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Sent_Date__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Signed_Date__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Signature_Expiry_Date__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Days_to_Expiry__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Format__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>MedicalSignatureTracker</label>
+    </fieldSets>
+    <fields>
+        <fullName>Days_From_Signature_to_Expiry__c</fullName>
+        <description>Days from Signature Date to Expiry Date, if Status is Signed and Signed Date is completed. Auto-populated from the Wish Signature Form.</description>
+        <externalId>false</externalId>
+        <label>Days From Signature to Expiry</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Days_to_Expiry__c</fullName>
+        <description>This formula shows a number countdown of days from Signature Date to Expiry Date along with an indicator icon. This only shows if Status is Signed and Signed Date has a value.
+Icon made by Smashicons from www.flaticon.com and is licensed by CC 3.0 BY.</description>
+        <externalId>false</externalId>
+        <formula>IF((Text(Status__c)!= &quot;Completed&quot; &amp;&amp; Text(Status__c) != &quot;Signed&quot;) || ISBLANK(Signed_Date__c ),&quot;&quot;,
+IF(Days_From_Signature_to_Expiry__c &lt; 0, &quot; Expired&quot;, 
+IF(Days_From_Signature_to_Expiry__c &lt;= 30, TEXT( Signature_Expiry_Date__c - TODAY() ) &amp; &quot;!&quot;, TEXT( Signature_Expiry_Date__c - TODAY() )
+)
+)
+)</formula>
+        <inlineHelpText>Days until this signature expires. This only shows if Status is Signed and Signed Date has a value.</inlineHelpText>
+        <label>Days to Expiry</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DocuSign_Status__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>DocuSign Status</label>
+        <referenceTo>dsfs__DocuSign_Status__c</referenceTo>
+        <relationshipLabel>Wish Required Signatures</relationshipLabel>
+        <relationshipName>Wish_Required_Signatures</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Expiry_Warning__c</fullName>
+        <description>Displays a warning icon with a yellow indicator when the signature expires in &lt;=30 days, and displays a different warning icon with a red indicator when the signature is expired. Note that these icons are the same as on the Case, but the case icons depend on the difference between the end date of the wish and the expiry date of the signature. This field does not take the wish end date into consideration.</description>
+        <externalId>false</externalId>
+        <formula>IF( ISBLANK( Signature_Expiry_Date__c ) 
+  &amp;&amp;
+  (ISPICKVAL(Wish_Case__r.Status, &apos;Granted&apos;)
+|| ISPICKVAL(Wish_Case__r.Status, &apos;Completed&apos;)
+|| ISPICKVAL(Wish_Case__r.Status, &apos;Closed&apos;)),
+&quot;&quot;, /*Do not show a warning if there is no expiry information on the Wish Required Signature, or if the case status is granted, completed, or closed*/
+
+IF ( Signature_Expiry_Date__c - TODAY() &lt; 0, 
+     IMAGE(&quot;/resource/icons/wish-clearance-expired.png&quot;, &quot;Signature expired&quot;, 48, 48),
+     IF ( Signature_Expiry_Date__c - TODAY() &lt;= 30, 
+          IMAGE(&quot;/resource/icons/wish-clearance-expiring-soon.png&quot;, &quot;Signature expiring soon&quot;, 48, 48) &amp; Days_to_Expiry__c,
+          &quot;&quot;)
+)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Shows warning when this signature expires &lt;=30 days from today, or is already expired.</inlineHelpText>
+        <label>Expiry Warning</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Format__c</fullName>
+        <description>The delivery and signing method of the signature: either a paper form (printed from a PDF that is generated by Drawloop) or an electronic form (generated from DocuSign)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The delivery and signing method of the signature.</inlineHelpText>
+        <label>Format</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>E-Signature</fullName>
+                    <default>false</default>
+                    <label>E-Signature</label>
+                </value>
+                <value>
+                    <fullName>Paper</fullName>
+                    <default>false</default>
+                    <label>Paper</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Include_Fax_Cover_Sheet__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Prompts the inclusion of a fax cover sheet with the Drawloop template.</description>
+        <externalId>false</externalId>
+        <label>Include Fax Cover Sheet</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Clearance__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If checked, the Wish Signature Form associated with this record includes wish clearance. This field is manipulated with a workflow that stamps the value of the Is Clearance formula field onto this field so that this field can be used in rollups.</description>
+        <externalId>false</externalId>
+        <label>Is Clearance</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Medical_Summary__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If checked, the Wish Signature Form associated with this record includes the child&apos;s medical summary. This field is manipulated with a workflow that stamps the corresponding Is Medical Summary value of the Wish Signature Form onto this field so that this field can be used in rollups.</description>
+        <externalId>false</externalId>
+        <label>Is Medical Summary</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Primary_Wish_Required_Signature_Record__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Look ups up to the Primary Wish Required Signature record when multiple signatures are required for a single form.</description>
+        <externalId>false</externalId>
+        <label>Primary Wish Req. Signature</label>
+        <referenceTo>Wish_Required_Signature__c</referenceTo>
+        <relationshipLabel>Linked Wish Required Signatures</relationshipLabel>
+        <relationshipName>Wish_Required_Signatures</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Sent_Date__c</fullName>
+        <description>The date on which this signature was sent to the signer. Auto-populated by DocuSign if sent electronically; auto-populated by system if paper form is generated.</description>
+        <externalId>false</externalId>
+        <label>Sent Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Sent_to_Email_Address__c</fullName>
+        <description>For e-signature forms, the email address to which this form is sent for e-signature. In the Signature Tracker (Required Signatures tab on the Contact), the modal populates this field with the email address of the Contact on the selected Wish Affiliation. This field is editable in the modal, and the value entered in the modal gets saved to the Wish Required Signature record upon completion of the action chosen in the modal.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For e-signature forms, the email address to which this form is sent for signature.</inlineHelpText>
+        <label>Send to Email Address</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Signature_Expiry_Date__c</fullName>
+        <description>The date on which this signature expires. Some forms are only valid for a certain amount of time before needing to be re-signed. This date is calculated by adding the number of days indicated in &quot;Days From Signature to Expiry&quot; to the &quot;Signed Date&quot;.</description>
+        <externalId>false</externalId>
+        <formula>IF( ISBLANK(Days_From_Signature_to_Expiry__c), 
+NULL,
+Signed_Date__c  +  Days_From_Signature_to_Expiry__c
+)</formula>
+        <inlineHelpText>The date on which this signature expires and must be re-signed.  Calculated by adding the number of days in &quot;Days From Signature to Expiry&quot; to the &quot;Signed Date&quot;.</inlineHelpText>
+        <label>Signature Expiry Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Signed_Date__c</fullName>
+        <description>The date on which this signature was signed. Auto-populated by DocuSign if received electronically; auto-populated by system if paper form is uploaded.</description>
+        <externalId>false</externalId>
+        <label>Signed Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Signer__c</fullName>
+        <description>The person who is signing this document, as indicated by the contact on the Wish Affiliation.</description>
+        <externalId>false</externalId>
+        <formula>HYPERLINK (&quot;/&quot; &amp;  Wish_Affiliation__r.Contact__c, Wish_Affiliation__r.Contact__r.FirstName &amp; &quot; &quot; &amp;  Wish_Affiliation__r.Contact__r.LastName 
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>To change this person, you must change the Wish Affiliation.</inlineHelpText>
+        <label>Signer</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <description>The primary statuses for the WRS should be: not sent, sent, signed, voided, and expired. Note that some of these statuses come from DocuSign as per https://support.docusign.com/en/guides/ndse-user-guide-document-status.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Primary statuses are: not sent, sent, signed, voided, and expired; the others are DocuSign statuses.</inlineHelpText>
+        <label>Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Sent</fullName>
+                    <default>false</default>
+                    <label>Not Sent</label>
+                </value>
+                <value>
+                    <fullName>Sent</fullName>
+                    <default>false</default>
+                    <label>Sent</label>
+                </value>
+                <value>
+                    <fullName>Delivered</fullName>
+                    <default>false</default>
+                    <label>Delivered</label>
+                </value>
+                <value>
+                    <fullName>Delivery Failure</fullName>
+                    <default>false</default>
+                    <label>Delivery Failure</label>
+                </value>
+                <value>
+                    <fullName>Voided</fullName>
+                    <default>false</default>
+                    <label>Voided</label>
+                </value>
+                <value>
+                    <fullName>Expired</fullName>
+                    <default>false</default>
+                    <label>Expired</label>
+                </value>
+                <value>
+                    <fullName>Declined</fullName>
+                    <default>false</default>
+                    <label>Declined</label>
+                </value>
+                <value>
+                    <fullName>Completed</fullName>
+                    <default>false</default>
+                    <label>Signed</label>
+                </value>
+                <value>
+                    <fullName>Not Sent - Pending</fullName>
+                    <default>false</default>
+                    <label>Not Sent - Pending</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <description>The type of signature required: medical or family (i.e. from a participant, family member or household member of the Wish Child). Auto-populated from the Wish Signature Form.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Family forms are signed by a family member of the Wish Child or participant. Medical forms are signed by a designated medical professional.</inlineHelpText>
+        <label>Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Medical</fullName>
+                    <default>false</default>
+                    <label>Medical</label>
+                </value>
+                <value>
+                    <fullName>Family</fullName>
+                    <default>false</default>
+                    <label>Family</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Wish_Affiliation__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The related Wish Affiliation record</description>
+        <externalId>false</externalId>
+        <label>Wish Affiliation</label>
+        <referenceTo>Wish_Affiliation__c</referenceTo>
+        <relationshipLabel>Wish Required Signatures</relationshipLabel>
+        <relationshipName>Wish_Required_Signatures</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Wish_Case__c</fullName>
+        <description>The Wish (Case) to which this signature is applied.</description>
+        <externalId>false</externalId>
+        <label>Wish Case</label>
+        <lookupFilter>
+            <active>true</active>
+            <errorMessage>Only Wish cases can be selected (e.g. Diagnosis Verification Review cases cannot be selected).</errorMessage>
+            <filterItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Wish</value>
+            </filterItems>
+            <infoMessage>Select the Wish case to which this signature applies.</infoMessage>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Case</referenceTo>
+        <relationshipLabel>Wish Required Signatures</relationshipLabel>
+        <relationshipName>Wish_Required_Signatures</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Wish_Signature_Form_Name_Text__c</fullName>
+        <description>Stores a record of the Wish Signature Form name, in case the parent is later deleted or updated after the form has been signed.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Stores a record of the Wish Signature Form name, in case the parent is later deleted or updated after the form has been signed.</inlineHelpText>
+        <label>Wish Signature Form Name (Text)</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Wish_Signature_Form__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>The related Wish Signature Form record.</description>
+        <externalId>false</externalId>
+        <label>Wish Signature Form</label>
+        <referenceTo>Wish_Signature_Forms__c</referenceTo>
+        <relationshipLabel>Wish Required Signatures</relationshipLabel>
+        <relationshipName>Wish_Required_Signatures</relationshipName>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Wish Required Signature</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>Wish_Signature_Form__c</columns>
+        <columns>Signer__c</columns>
+        <columns>Wish_Case__c</columns>
+        <columns>Status__c</columns>
+        <columns>Expiry_Warning__c</columns>
+        <columns>Days_to_Expiry__c</columns>
+        <columns>Signature_Expiry_Date__c</columns>
+        <columns>Format__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>WRS-{000000}</displayFormat>
+        <label>Wish Required Signature Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Wish Required Signatures</pluralLabel>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Type__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Wish_Signature_Form__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Signer__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Wish_Case__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Sent_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Signed_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+    <webLinks>
+        <fullName>Run_DDP</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <height>600</height>
+        <linkType>url</linkType>
+        <masterLabel>Run DocGen Package</masterLabel>
+        <openType>sidebar</openType>
+        <protected>false</protected>
+        <url>/apex/loop__looplus?eid={!Wish_Required_Signature__c.Id}&amp;CaseId={!Wish_Required_Signature__c.Wish_CaseId__c}&amp;signer_name={!Wish_Affiliation__c.Contact__c}&amp;signer_email={!Wish_Required_Signature__c.Sent_to_Email_Address__c}&amp;ddpIds=a1a5C000000pmXf&amp;deploy=a1Y5C000000SXGO&amp;autorun=true
+/* as per https://help.nintex.com/en-us/docgen/docservices/docgen-sfdc/Services/setup/ButtonWizardReference.htm */</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Run_DocGen_2</fullName>
+        <availability>online</availability>
+        <description>Em&apos;s Test</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Run DocGen 2</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/apex/loop__looplus?eid={!Wish_Required_Signature__c.Id}&amp;ddpIds=a1a5C000000pmXf&amp;deploy=a1Y5C000000SXGO&amp;autorun=true&amp;parameter_name={!Wish_Required_Signature__c.Wish_Affiliation__c}&amp;parameter_email={!Wish_Required_Signature__c.Sent_to_Email_Address__c}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Send_MAW_Template_Wish_Clearance</fullName>
+        <availability>online</availability>
+        <description>Sends the original Wish Clearance template. The other one references the Case ID as the source id; this one uses the WRS ID.</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Send MAW Template Wish Clearance</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>{!URLFOR(&apos;/apex/dsfs__DocuSign_CreateEnvelope&apos;, null, [ 
+SourceID =   Wish_Required_Signature__c.Id , 
+CCRM = &apos;Email~Wish_Required_Signature__c.Sent_to_Email_Address__c&apos; , 
+CCTM = &apos;Decision Maker~Signer&apos;, 
+DST = &apos;b1cba957-3aad-46d0-8bbf-b4a6a2de6d40&apos;, 
+LA = &apos;0&apos;, 
+LF = &apos;0&apos;, 
+OCO = &apos;Tag&apos; 
+] 
+)}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Wish_Clearance_Test</fullName>
+        <availability>online</availability>
+        <description>DST goes to Wish Clearance Form - designed</description>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Wish Clearance Test</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>{!URLFOR(&apos;/apex/dsfs__DocuSign_CreateEnvelope&apos;, null, [
+SourceID = Wish_Required_Signature__c.Wish_CaseId__c,
+CCRM = &apos;Decision Maker~Signer 1&apos;,
+CCTM = &apos;Decision Maker~Signer&apos;,
+DST = &apos;b1cba957-3aad-46d0-8bbf-b4a6a2de6d40&apos;,
+LA = &apos;0&apos;,
+LF = &apos;0&apos;,
+OCO = &apos;Tag&apos;
+]
+)}</url>
+    </webLinks>
+</CustomObject>

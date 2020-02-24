@@ -155,14 +155,17 @@
         </sections>
     </layouts>
     <recordTypes>
+        <description><!-- Used to hold the task of wish determination case --></description>
         <label><!-- Wish Determination --></label>
         <name>Wish_Determination</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- It holds wish granting tasks --></description>
         <label><!-- Wish Granting --></label>
         <name>Wish_Granting</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Used to hold the task of wish planning case --></description>
         <label><!-- Wish Planning --></label>
         <name>Wish_Planning</name>
     </recordTypes>

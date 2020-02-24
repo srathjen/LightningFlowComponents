@@ -1,96 +1,657 @@
-<apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" docType="html-5.0" controller="VolunteerWelcomePage_AC" title="Make-A-Wish Communities | Welcome">
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" docType="html-5.0"
+           controller="VolunteerWelcomePage_AC" action="{!COICheck}" title="Make-A-Wish Communities | Welcome">
     <head>
-        <apex:include pageName="prospective_head" id="phead" />
+        <apex:include pageName="prospective_head" id="phead"/>
         <style>
-            .imageHide {display:none;}
-            .imageHide1 {height:16px}
-            .textHide{color: #e4dede;height: 16px;font-size: 14px;}
-            .textHide1{height: 16px;font-size: 14px;font-weight: bold;}
-            .not-active {pointer-events: none;cursor: default;}
-            .textHide i {color:#e4dede}
-            i {color:#006bb6}
+            .imageHide {
+                display: none;
+            }
+            .imageHide1 {
+                height: 16px
+            }
+            .textHide {
+                color: #e4dede;
+                height: 16px;
+                font-size: 14px;
+            }
+            .textHide1 {
+                height: 16px;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            .not-active {
+                pointer-events: none;
+                cursor: default;
+            }
+            .textHide i {
+                color: #e4dede
+            }
+            i {
+                color: #006bb6
+            }
+            @media (min-width: 968px) {
+                .modal-dialog {
+                    width: 1000px;
+                    margin: 30px auto;
+                }
+            }
+            .vcp, .vcpactivelogin {
+                overflow: scroll;
+            }
+            .vfHelpText a {
+                position: relative;
+            }
+            .vfHelpText a span {
+                display: none;
+            }
+            .vfHelpText a:hover span {
+                display: block;
+                position: absolute;
+                right: -15em;
+                width: 15em;
+                z-index: 100;
+                border: 1px solid #006b0b;
+                background-color: #FEFDB9;
+                color: black;
+            }
+            .pop-wrap, .pop-wrap-main-message {
+                position: fixed;
+                top: 20%;
+                left: 50%;
+                z-index: 9999;
+                width: 90%;
+                max-width: 35rem;
+            }
+            .custPopup, .custPopup-main-message {
+                font-family: "arial", helvetica, sans-serif;
+                position: relative;
+                background: white;
+                border: 1px solid #006bb6;
+                border-radius: .25rem;
+                top: -20%;
+                left: -50%;
+                padding: 1rem;
+                width: 100%;
+            }
+            .pop-wrap-main-message {
+                top: 1%
+            }
+            .custPopup-main-message {
+                top: 0;
+                padding: 0 1rem 0;
+            }
+            .popupBackground {
+                position: fixed;
+                background: rgba(0, 0, 0, .4);
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 9998
+            }
+            .labelCol {
+                width: 180px;
+            }
+            .errorhideMsg {
+                display: none;
+                color: red;
+                font-size: 15px;
+            }
+            .errorHomePhone, .errormobPhone, .errorPreEmail, .errorEmailField, .errorEmailText, .errorMsg {
+                display: none;
+                color: red;
+                font-size: 15px;
+            }
+            .highlight h3 {
+                text-align: center
+            }
+            .modal-header, .modal-footer {
+                border-top: none;
+            }
+            h1.modal-title {
+                text-align: center;
+                padding-bottom: 0
+            }
+            .modal-header .close {
+                margin-top: -4rem
+            }
+            .modal-footer, .modal-footer span {
+                display: flex;
+                justify-content: center;
+            }
+            .modal-footer .btn-md, .nav-sub-inner .btn-md {
+                max-width: 10rem
+            }
+            .modal-footer .btn-md {
+                min-width: 10rem
+            }
+            @media (min-width: 48em) {
+                .feature {
+                    min-height: 15rem
+                }
+            }
+            .modal-dialog .c-input {
+                font-family: "Lato", Arial, sans-serif;
+            }
+            .modal-dialog .text-muted {
+                font-family: "Lato", Arial, sans-serif;
+            }
+            .popup-note {
+                margin-left: 25px;
+            }
         </style>
     </head>
     <body class="vcp vcpactivelogin full">
-        <apex:include pageName="prospective_header" id="pheader" />
+    <apex:include pageName="prospective_header" id="pheader"/>
 
-        <main role="main" class="container">
-            <div class="row">
-                <!--<div class="checkout-wrap" style="margin-bottom:180px">
-                <ul class="checkout-bar">
-                <li class="{!orientationClass}"><a href="#">ORIENTATION</a></li>
-                <li class="{!applicationClass}"><a href="#">APPLICATION</a></li>
-                <li class="{!interviewClass}"><a href="#">INTERVIEW</a></li>
-                <li class="{!backgroundCheckClass}"><a href="#">BACKGROUND CHECK</a></li>
-                <li class="{!trainingClass}"><a href="#">TRAINING</a></li>
-                </ul>
-                </div>-->
+    <main role="main" class="container">
+        <div class="row">
+            <!--<div class="checkout-wrap" style="margin-bottom:180px">
+            <ul class="checkout-bar">
+            <li class="{!orientationClass}"><a href="#">ORIENTATION</a></li>
+            <li class="{!applicationClass}"><a href="#">APPLICATION</a></li>
+            <li class="{!interviewClass}"><a href="#">INTERVIEW</a></li>
+            <li class="{!backgroundCheckClass}"><a href="#">BACKGROUND CHECK</a></li>
+            <li class="{!trainingClass}"><a href="#">TRAINING</a></li>
+            </ul>
+            </div>-->
 
-                <apex:form >
-                    <div class="messages"></div>
-                    <fieldset>
+            <apex:form >
+                <div class="messages"></div>
+                <fieldset>
                     <apex:pagemessages id="msg"/>
-                        <h1>Welcome {!$User.FirstName},</h1><!-- {!$User.LastName} -->
-                        <p><apex:outputText value="{!welcomText}" escape="false" id="welText"/></p>
+                    <h1>Welcome {!$User.FirstName},</h1><!-- {!$User.LastName} -->
+                    <p>
+                        <apex:outputText value="{!welcomText}" escape="false" id="welText"/>
+                    </p>
 
-                        <h2>How do I become a Volunteer?</h2>
-                        <p><apex:outputText value="{!becomeAVolunteer}" escape="false" id="becomeAVol"/></p>
+                    <h2>How do I become a Volunteer?</h2>
+                    <p>
+                        <apex:outputText value="{!becomeAVolunteer}" escape="false" id="becomeAVol"/>
+                    </p>
 
-                        <!--<div class="form-group row">
-                            <div class="col-xs-12 col-sm-4 col-md-12">
-                            <apex:commandbutton styleClass="col-xs-12 col-sm-12 col-md-3 btn-md" value="Become a Volunteer"  rendered="{!isBecomVolunteer}" action="{!becomeAVolunteer}"/>
-                            </div>
-                        </div>-->
-                        <h2>Volunteer Application Process</h2>
-                        <nav class="row">
-                            <ul class="step status">
-                                <li class="{!if(orientationStatus == 'Completed','textHide1','textHide')}"><i class="fa fa-check-circle" aria-hidden="true"></i> Orientation</li>
-                                <li class="{!if(applicationStatus == 'Completed','textHide1','textHide')}"><i class="fa fa-check-circle" aria-hidden="true"></i> Application</li>
-                                <li class="{!if(interviewStatus == 'Completed','textHide1','textHide')}"><i class="fa fa-check-circle" aria-hidden="true"></i> Interview</li>
-                                <li class="{!if(backgroundCheckStatus == 'Completed','textHide1','textHide')}"><i class="fa fa-check-circle" aria-hidden="true"></i> Background Check</li>
-                                <li class="{!if(trainingStatus == 'Completed','textHide1','textHide')}"><i class="fa fa-check-circle" aria-hidden="true"></i> Training</li>
-                            </ul>
-                        </nav>
-                        <div class="form-group row">
-                            <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
-                                <apex:commandbutton value="Become a Volunteer" styleClass="col-xs-12 btn-md" rendered="{!isBecomVolunteer}" action="{!becomeAVolunteer}" reRender="msg"/>
-                                <apex:commandbutton value="Continue Process" styleClass="col-xs-12 btn-md" rendered="{!continueProcess}" action="{!becomeAVolunteer}" reRender="msg"/>
+                    <!--<div class="form-group row">
+                        <div class="col-xs-12 col-sm-4 col-md-12">
+                        <apex:commandbutton styleClass="col-xs-12 col-sm-12 col-md-3 btn-md" value="Become a Volunteer"  rendered="{!isBecomVolunteer}" action="{!becomeAVolunteer}"/>
+                        </div>
+                    </div>-->
+                    <h2>Volunteer Application Process</h2>
+                    <nav class="row">
+                        <ul class="step status">
+                            <!--
+                            Commented out by Chris Shinnimin, Traction on Demand, see ticket WLP-399 for details
+                            <li class="{!if(orientationStatus == 'Completed','textHide1','textHide')}"><i class="fa fa-check-circle" aria-hidden="true"></i> Orientation</li>
+                            <li class="{!if(applicationStatus == 'Completed','textHide1','textHide')}"><i class="fa fa-check-circle" aria-hidden="true"></i> Application</li>
+                            <li class="{!if(interviewStatus == 'Completed','textHide1','textHide')}"><i class="fa fa-check-circle" aria-hidden="true"></i> Interview</li>
+                            <li class="{!if(backgroundCheckStatus == 'Completed','textHide1','textHide')}"><i class="fa fa-check-circle" aria-hidden="true"></i> Background Check</li>
+                            <li class="{!if(trainingStatus == 'Completed','textHide1','textHide')}"><i class="fa fa-check-circle" aria-hidden="true"></i> Training</li>
+                            -->
+                            <li class="textHide1"><i class="fa fa-check-circle" aria-hidden="true"></i> Sign Up</li>
+                            <li class="{!if(orientationStatus == 'Completed','textHide1','textHide')}"><i
+                                        class="fa fa-check-circle" aria-hidden="true"></i> Orientation
+                            </li>
+                            <li class="{!if(applyForRolesStatus == 'Completed','textHide1','textHide')}"><i
+                                        class="fa fa-check-circle" aria-hidden="true"></i> Apply For Roles
+                            </li>
+                            <li class="{!if(backgroundCheckStatus == 'Completed','textHide1','textHide')}"><i
+                                        class="fa fa-check-circle" aria-hidden="true"></i> Background Check
+                            </li>
+                            <li class="{!if(trainingStatus == 'Completed','textHide1','textHide')}"><i
+                                        class="fa fa-check-circle" aria-hidden="true"></i> Training
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
+                            <!--
+                            <apex:commandbutton value="Become a Volunteer" styleClass="col-xs-12 btn-md" rendered="{!isBecomVolunteer}" action="{!becomeAVolunteer}" reRender="msg"/>
+                            <apex:commandbutton value="Continue Process" styleClass="col-xs-12 btn-md" rendered="{!continueProcess}" action="{!becomeAVolunteer}" reRender="msg"/>
+                            -->
+                            <apex:commandbutton value="Continue Process" styleClass="col-xs-12 btn-md"
+                                                action="{!becomeAVolunteer}" reRender="msg"/>
+                        </div>
+                    </div>
+
+                </fieldset>
+                <!-- annual conflict begin -->
+                <apex:outputPanel layout="block" rendered="{!displayPopupconflict}">
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            $('#annual-conflict').modal('show');
+                        })
+                    </script>
+                    <div class="modal fade" id="annual-conflict" data-backdrop="static" data-keyboard="false"
+                         tabindex="-1" role="dialog" aria-labelledby="bc-msg" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title" id="exit-form">Annual Conflict of Interest</h1>
+                                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                         <span aria-hidden="true">&times;</span>
+                                     </button> -->
+                                </div>
+                                <div class="modal-body">
+                                    <p>
+                                        <apex:outputText value="Your Annual Conflict of Interest and Ethics Statement will expire within the next {!nCOIDays} days. To continue on your path to becoming a volunteer, please click SIGN NOW to electronically sign the form."
+                                                rendered="{!isCOIExpired == false}" id="isCOIExpired1"/>
+                                    </p>
+                                    <p>
+                                        <apex:outputText value="Your Annual Conflict of Interest and Ethics Statement has expired and access to the Volunteer Center has been suspended. To continue on your path to becoming a volunteer with Make-A-Wish, please click SIGN NOW to electronically sign the form."
+                                                rendered="{!isCOIExpired == true}" id="isCOIExpired2"/>
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <apex:commandButton styleClass="btn-md" value="Sign Now"
+                                                        action="{!callConfirmConflict}" reRender="msg"/>&nbsp;&nbsp;&nbsp;
+                                    <apex:commandButton styleClass="btn-md" value="Cancel"
+                                                        rendered="{!flagForCOICancel}" action="{!cancelConflict}"/>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                </apex:outputPanel>
 
-                    </fieldset>
-                </apex:form>
+                <!-- modals begin -->
+                <!-- resided -->
+                <apex:outputPanel layout="block" rendered="{!displayPopUp}">
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            $('#bg-chk1').modal('show');
+                        });
+                    </script>
 
-            </div>
-        </main>
+                    <div class="modal fade" id="bg-chk1" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                         role="dialog" aria-labelledby="bg-chk" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title">Background Check Notice</h1>
+                                </div>
+                                <div class="modal-body">
+                                    <p>
+                                        <apex:outputText value="Your criminal background check will expire within the next {!nBCDays} days. To continue on your path to becoming a volunteer, please verify that your name and contact information is correct (or make any necessary changes) and click INITIATE to request a new criminal background check."
+                                                rendered="{!isExpired == false}" id="criminalBcheck"/>
+                                        <apex:outputText value="Your criminal background check has expired and access to the Volunteer Center has been suspended. We are excited about your interest in volunteering with Make-A-Wish to help us grant life-changing wishes to children with critical illnesses. To continue on your path to becoming a volunteer, please verify that your name and contact information is correct (or make any necessary changes) and click INITIATE to request a new background check."
+                                                id="criminalBcheck1" rendered="{!isExpired == true}"/>
+                                    </p>
+                                    <p>
+                                        <apex:outputText value="If you have any questions regarding the background check process, please contact our office at {!volunteercon.Account.Phone}."
+                                                id="criminalBcheck12" rendered="{!isExpired == true}"/>
+                                    </p>
 
-        <div class="container-fluid calendar">
-            <apex:form styleClass="container">
-                <div class="row">
-                    <h4>Calendar of Events</h4>
-                    <ul class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group row sr-only">
+                                        <label class="col-xs-12 col-sm-3">I have resided in the United States for the
+                                            last seven years.</label>
+                                        <div class="col-xs-12 col-sm-4">
+                                            <apex:selectList styleClass="form-control c-select residStatus"
+                                                             value="{!residingStatus}" size="1" id="residStatus">
+                                                <apex:selectOption itemLabel="Please Select" itemValue="Please Select"/>
+                                                <apex:selectOption itemLabel="Yes" itemvalue="Yes"/>
+                                                <apex:selectOption itemlabel="No" itemvalue="No"/>
+                                            </apex:selectList>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-xs-12">
+                                            <label class="c-input c-checkbox text-muted">
+                                                <apex:inputField value="{!volunteercon.Residing_in_US__c}"/>
+                                                <span class="c-indicator"></span>
+                                                I have resided in the United States for the last seven years.
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <label>Preferred Email</label>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <apex:inputField styleClass="form-control c-select preferred-email"
+                                                                     value="{!volunteercon.npe01__Preferred_Email__c}"/>
+                                                </div>
+                                            </div>
 
-                       <apex:repeat value="{!events}" var="ev">
-                            <li class="col-xs-12 col-sm-6 col-md-3">
-                                <figure class="col-xs-12 col-sm-12 col-md-12">
-                                    <!-- <img class="col-xs-4 col-sm-4 col-md-4" src="https://wish.org/~/media/022-000/News%20and%20Events/Signature%20Events/WAM_Thumbnail.ashx" /> -->
-                                    <apex:outputText value="{!ev.Event_Image__c}" escape="false" id="eventImg"/>
-                                    <figcaption class="col-sm-8">
-                                        <h5><apex:outputText value="{!ev.Event_Name__c}" escape="false" id="eventName"/></h5>
-                                        <span class="date"><apex:outputText value="{0,date,MM/dd/yy}" id="date">
-                                            <apex:param value="{!ev.Event_Date__c}" />
-                                            </apex:outputText></span>
-                                        <p><apex:outputText value="{!ev.Event_Text__c}" escape="false" id="eventText"/></p>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                        </apex:repeat>
+                                            <div class="form-group row">
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <label>Personal Email</label>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <apex:inputField styleClass="form-control Personal-Email"
+                                                                     value="{!volunteercon.npe01__HomeEmail__c}"
+                                                                     html-placeholder="personal_email@domain.com"/>
+                                                </div>
+                                            </div>
 
-                    </ul>
-                </div>
+                                            <div class="form-group row">
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <label>Work Email</label>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <apex:inputField styleClass="form-control Work-Email"
+                                                                     value="{!volunteercon.npe01__WorkEmail__c}"
+                                                                     html-placeholder="work_email@domain.com"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <label>Alternate Email</label>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <apex:inputField styleClass="form-control Alternate-Email"
+                                                                     value="{!volunteercon.npe01__AlternateEmail__c }"
+                                                                     html-placeholder="alternate_email@domain.com"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <label>Home Phone</label>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <apex:inputField type="tel" onblur="formatPhone(this);"
+                                                                     onkeydown="formatPhoneOnEnter(this, event);"
+                                                                     styleClass="form-control homephone"
+                                                                     value="{!volunteercon.HomePhone}"
+                                                                     html-placeholder="(000) 000-0000"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <label>Mobile Phone</label>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <apex:inputField type="tel" onblur="formatPhone(this);"
+                                                                     onkeydown="formatPhoneOnEnter(this, event);"
+                                                                     styleClass="form-control mobilephone"
+                                                                     value="{!volunteercon.MobilePhone}"
+                                                                     html-placeholder="(000) 000-0000"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-xs-12">
+                                            <label class="c-input c-checkbox">
+                                                <apex:inputcheckbox styleClass="confirmChk"
+                                                                    value="{!volunteercon.BackGroundCheckUpdated__c}"/>
+                                                <span class="c-indicator"></span>
+                                                I confirm that the information provided above is correct.
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-xs-12">
+                                            <span class="popup-note">Please note all changes made above will reflect on your Volunteer profile.</span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xs-12">
+                                        <small class="errorhideMsg">Please confirm that your information is correct by
+                                            checking the checkbox directly above.
+                                        </small>
+                                        <small class="errormobPhone">Oops! Phone number should be 10 digits US format.
+                                        </small>
+                                        <small class="errorHomePhone">Oops! Phone number should be 10 digits US
+                                            format.
+                                        </small>
+                                        <small class="errorPreEmail">Oops! Preferred email is required.</small>
+                                        <small class="errorEmailField"></small>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <apex:commandButton value="Initiate" styleClass="btn-md InitiateBtn"
+                                                        action="{!confirmBackGroundCheck}"/>&nbsp;&nbsp;&nbsp;
+                                    <!--<apex:commandButton value="Postpone" styleClass="btn-md" rendered="{!flagForCancel}" action="{!Cancel}" reRender="Landing"/>-->
+                                    <input type="button" value="Postpone" class="btn-md" id="postpone-btn"
+                                           style="display:{!if(flagForCancel,'block','none')};"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </apex:outputPanel>
+
+                <!-- end /resided -->
+                <!-- background check begin -->
+                <apex:outputPanel layout="block" rendered="{!blockNewBG}">
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            $('#bg-chk2').modal({backdrop: 'static', keyboard: false})
+                        })
+                    </script>
+                    <div class="modal fade" id="bg-chk2" tabindex="-1" role="dialog" aria-labelledby="bg-chk"
+                         aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title">Background Check Expired</h1>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="text-muted">Your criminal background check has expired and access to the
+                                        Volunteer Center has been suspended.</p>
+                                    <p class="text-muted">If you have already received and acted upon the email
+                                        requesting additional information for your background check, thank you. We will
+                                        notify you as soon as your background check is completed and reviewed by
+                                        Make-A-Wish staff.</p>
+                                    <p class="text-muted">If you have not yet received an email with a unique link to
+                                        complete your background check, please watch for one. When you receive it,
+                                        please follow the link and provide the required information to allow our vendor
+                                        to conduct its search.</p>
+                                    <p class="text-muted">Thank you for your ongoing support of the Make-A-Wish
+                                        mission.</p>
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </apex:outputPanel>
+
+                <!-- Affiliation Inactive Popup check begin -->
+                <apex:outputPanel layout="block" rendered="{!isInactivePopup}">
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            $('#bg-chk2').modal({backdrop: 'static', keyboard: false})
+                        })
+                    </script>
+                    <div class="modal fade" id="bg-chk2" tabindex="-1" role="dialog" aria-labelledby="bg-chk"
+                         aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title">Contact Chapter for Assistance</h1>
+                                </div>
+                                <div class="modal-body">
+                                    <center><p class="text-muted">Thank you for reaching out to us about volunteering
+                                            with Make-A-Wish. Please contact our office
+                                            at {!volunteercon.Account.Phone}</p>
+                                    </center>
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </apex:outputPanel>
             </apex:form>
-        </div>
 
-        <apex:include pageName="prospective_footer" id="pfooter" />
+        </div>
+    </main>
+
+    <div class="container-fluid calendar">
+        <apex:form styleClass="container">
+            <div class="row">
+                <h4>Calendar of Events</h4>
+                <ul class="col-xs-12 col-sm-12 col-md-12">
+
+                    <apex:repeat value="{!events}" var="ev">
+                        <li class="col-xs-12 col-sm-6 col-md-3">
+                            <figure class="col-xs-12 col-sm-12 col-md-12">
+                                <!-- <img class="col-xs-4 col-sm-4 col-md-4" src="https://wish.org/~/media/022-000/News%20and%20Events/Signature%20Events/WAM_Thumbnail.ashx" /> -->
+                                <apex:outputText value="{!ev.Event_Image__c}" escape="false" id="eventImg"/>
+                                <figcaption class="col-sm-8">
+                                    <h5>
+                                        <apex:outputText value="{!ev.Event_Name__c}" escape="false" id="eventName"/>
+                                    </h5>
+                                    <span class="date"><apex:outputText value="{0,date,MM/dd/yy}" id="date">
+                                            <apex:param value="{!ev.Event_Date__c}"/>
+                                            </apex:outputText></span>
+                                    <p>
+                                        <apex:outputText value="{!ev.Event_Text__c}" escape="false" id="eventText"/>
+                                    </p>
+                                </figcaption>
+                            </figure>
+                        </li>
+                    </apex:repeat>
+
+                </ul>
+            </div>
+        </apex:form>
+    </div>
+
+    <apex:include pageName="prospective_footer" id="pfooter"/>
+    <script>
+        $(document).ready(function () {
+            // correct salesforce's auto-generated html for images by removing, cloning and adding neccesary styles
+            $(".feature").find('img').clone().appendTo('.feature');
+            $(".feature").children('img').attr('style', '').addClass('col-xs-12 col-sm-12 col-md-12');
+            $(".feature").find('span:first').remove();
+            $(".feature").children('.quote').css('z-index', '1');
+
+            //if banner image doesn't exist
+
+
+            // unwrap generated table/spans and apply responsive classes to highlight imgs directly
+            //$('.highlight img').unwrap().unwrap().unwrap().unwrap().unwrap();
+            $('.highlight img').unwrap();
+            $(".highlight img").addClass("col-xs-12").removeAttr('style');
+
+            // apply responsive classes to calendar imgs directly
+            $(".calendar").find('img').addClass('col-xs-4 col-sm-4 col-md-4');
+            $('.InitiateBtn').click(function () {
+                $('.errorhideMsg').hide();
+                $('.errorPreEmail').hide();
+                $('.errorEmailField').hide();
+                $('.errorEmailText').hide();
+                $('.errorHomePhone').hide();
+                $('.errormobPhone').hide();
+                var checkEmail;
+                if ($.trim($(".preferred-email").val()) != '')
+                    checkEmail = $(".preferred-email").val() + '-Email';
+
+                if (($('.confirmChk').is(':checked')) && $.trim($(".preferred-email").val()) == '') {
+                    $('.errorPreEmail').show();
+                    return false;
+                }
+
+                if (($('.confirmChk').is(':checked')) && !ValidateEmail($.trim($(".Personal-Email").val()))) {
+                    $('.errorEmailField').show().html("Oops! Invalid personal email.");
+                    return false;
+                }
+
+                if (($('.confirmChk').is(':checked')) && !ValidateEmail($.trim($(".Work-Email").val()))) {
+                    $('.errorEmailField').show().html("Oops! Invalid work email.");
+                    return false;
+                }
+
+                if (($('.confirmChk').is(':checked')) && !ValidateEmail($.trim($(".Alternate-Email").val()))) {
+                    $('.errorEmailField').show().html("Oops! Invalid alternate email.");
+                    return false;
+                }
+
+                if (($('.confirmChk').is(':checked')) && $.trim($(".Personal-Email").val()) == '' && $.trim($(".Work-Email").val()) == '' && $.trim($(".Alternate-Email").val()) == '') {
+                    $('.errorEmailField').show().html("Please enter at least one email address and phone number.");
+                    return false;
+                }
+
+                if (($('.confirmChk').is(':checked')) && $.trim($(".homephone").val()) == '' && $.trim($(".mobilephone").val()) == '') {
+                    $('.errorHomePhone').show().html("Please enter at least one email address and phone number.");
+                    return false;
+                }
+
+                if (($('.confirmChk').is(':checked')) && $.trim($("." + checkEmail).val()) == '') {
+                    $('.errorEmailField').show().html("Oops! " + $(".preferred-email").val() + " email is required.");
+                    return false;
+                }
+
+                if (($('.confirmChk').is(':checked')) && ($(".homephone").val().replace(/[^0-9]/g, '').length < 10 || $(".homephone").val().replace(/[^0-9]/g, '').length > 10) && $.trim($(".homephone").val()) != '') {
+                    $('.errorHomePhone').show().html("Oops! Home phone number should be 10 digits US format.");
+                    return false;
+                }
+
+                if (($('.confirmChk').is(':checked')) && ($(".mobilephone").val().replace(/[^0-9]/g, '').length < 10 || $(".mobilephone").val().replace(/[^0-9]/g, '').length > 10) && $.trim($(".mobilephone").val()) != '') {
+                    $('.errormobPhone').show().html("Oops! Mobile phone number should be 10 digits US format.");
+                    return false;
+                }
+
+                if (!$('.confirmChk').is(':checked')) {
+                    $('.errorhideMsg').show();
+                    return false;
+                } else {
+                    $(this).hide();
+                }
+            });
+        })
+
+        function closeMyModel() {
+            $('#bg-chk2').modal().hide();
+            $('.modal-backdrop').css("display", "none");
+        }
+
+        $("#postpone-btn").click(function () {
+            $('#bg-chk1').modal().hide();
+            $('.modal-backdrop').css("display", "none");
+        });
+
+        function ValidateEmail(email) {
+            var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+            if (email != '')
+                return expr.test(email);
+            else
+                return true;
+        };
+
+        $(".homephone, .mobilephone").mask("(999) 999-9999").attr('maxlength', '15');
+        $(".homephone, .mobilephone").bind("paste", function (e) {
+            e.preventDefault();
+        });
+        $(".homephone, .mobilephone").on('keypress', function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                return false;
+            }
+            var curchr = $.trim(this.value.length);
+            var curval = $(this).val();
+            if (curchr == 0) {
+                $(this).val(curval + "(");
+            } else if (curchr == 4 || curchr == 5) {
+                $(this).val(curval + ") ");
+            } else if (curchr == 9) {
+                $(this).val(curval + "-");
+            }
+            //$(this).attr('maxlength', '14');
+        });
+
+        $('.chk-residency').on('click', function () {
+            var rs = $('select.residStatus');
+            if ($(this).is(':checked')) {
+                rs.find('option[value="Yes"]').prop('selected', true).change();
+                // console.log('yes')
+            } else if (!$(this).is(':checked')) {
+                rs.find('option[value="No"]').prop('selected', true).change();
+                // console.log('no')
+            }
+        });
+        // on pageload, check checkbox based on saved value if any.
+        if ($('select.residStatus').find('option[value="Yes"]').prop('selected') == true) {
+            $('.chk-residency').trigger('click')
+        } else {
+            $('.chk-residency').removeAttr('checked')
+        }
+    </script>
     </body>
 </apex:page>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Lead$Name</field>
+    </columns>
+    <columns>
+        <field>Lead.Activities$Subject</field>
+    </columns>
+    <columns>
+        <field>Lead$ChapterName__c</field>
+    </columns>
+    <columns>
+        <field>Lead$DOB__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Created_Date_Time__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Activities$CreatedDate</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Lead.Activities$Subject</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Duplicate Referral Submitted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Name</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>test</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>North Texas</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Leads with Dup Referral - North Texas</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Leads_with_Activities__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Lead$ChapterName__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Lead.Activities$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

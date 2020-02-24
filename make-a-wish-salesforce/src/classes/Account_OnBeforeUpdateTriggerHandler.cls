@@ -9,19 +9,18 @@ Description : Account_OnBeforeUpdateTriggerHandler is used to call the Helper cl
               WVC-1884    KANAGARAJ  03/04/2018
               
 *****************************************************************************************************/
-Public class Account_OnBeforeUpdateTriggerHandler{
+public class Account_OnBeforeUpdateTriggerHandler{
     
     /*This onBeforeUpdate() is used to update the billing Address verified field and shipping address verified field
     when Billing address or shipping address field values are update.*/
     public static void onBeforeUpdate(Map<Id,Account> newAccountMap,Map<Id,Account> oldAccountMap){
-         
-        Constant_AC cons = new Constant_AC();
-        Id housHoldAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(cons.HouseholdRT).getRecordTypeId();
-        Id wishChildRT = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(cons.contactWishChildRT).getRecordTypeId();
+
+        Id housHoldAccountRTId = Constant_AC.HOUSEHOLD_RT_ID;
+        Id wishChildRT = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
         Set<Id> accountIdSet = new Set<Id>();
         Map<Id,Id> wishChildMap = new Map<Id,Id>();
         List<Account> primaryContactUpdateList = new List<Account>();
-        
+
         for(Account newAccount : newAccountMap.Values()){
             if(newAccount.RecordTypeId == housHoldAccountRTId && (Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)){
                 accountIdSet.add(newAccount.Id);
@@ -32,10 +31,10 @@ Public class Account_OnBeforeUpdateTriggerHandler{
                 newAccount.BillingStateCode != oldAccountMap.get(newAccount.Id).BillingStateCode ||
                 newAccount.BillingCity != oldAccountMap.get(newAccount.Id).BillingCity ||
                 newAccount.BillingPostalCode != oldAccountMap.get(newAccount.Id).BillingPostalCode)){
-                  
+
                   newAccount.BillingAddressVerified__c = false;
                   newAccount.BillingAddressVerificationAttempted__c = null;
-                  
+
               }
               
               // the shipping address is already marked as verified and one of the shipping address fields changed
@@ -44,10 +43,10 @@ Public class Account_OnBeforeUpdateTriggerHandler{
                 newAccount.ShippingStateCode != oldAccountMap.get(newAccount.Id).ShippingStateCode ||
                 newAccount.ShippingCity != oldAccountMap.get(newAccount.Id).ShippingCity ||
                 newAccount.ShippingPostalCode != oldAccountMap.get(newAccount.Id).ShippingPostalCode)){
-                  
+
                   newAccount.ShippingAddressVerified__c = false;
                   newAccount.ShippingAddressVerificationAttempted__c = null;
-                  
+
               }
         }
         
@@ -63,7 +62,7 @@ Public class Account_OnBeforeUpdateTriggerHandler{
                     newAccount.npe01__One2OneContact__c = wishChildMap.get(newAccount.Id);
                 }
             }
-            
+
         }
     }
 }

@@ -15,6 +15,7 @@
     <filter>
         <criteriaItems>
             <column>dsfs__DocuSign_Status__c.dsfs__Subject__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Signature Required -</value>
         </criteriaItems>
@@ -28,6 +29,8 @@
     <reportType>CustomEntity$dsfs__DocuSign_Status__c@dsfs__DocuSign_Status__c.dsfs__Case__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>dsfs__DocuSign_Status__c.dsfs__Completed_Date_Time__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

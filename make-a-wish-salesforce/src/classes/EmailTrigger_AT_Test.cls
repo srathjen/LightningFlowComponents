@@ -1,9 +1,8 @@
-@isTest
+@IsTest
 public class EmailTrigger_AT_Test {
-    public testmethod static void createCase(){
-        test.startTest();
-        Constant_AC  constant = new Constant_Ac();    
-        Id diagnosisRecType = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.diagnosisRT).getRecordTypeId();
+    public testMethod static void createCase(){
+        Test.startTest();
+        Id diagnosisRecType = Constant_AC.DIAGNOSIS_RT_ID;
         Case currnetCase = new Case();
         currnetCase.Status = 'Qualified';
         currnetCase.Origin = 'Email';
@@ -15,7 +14,6 @@ public class EmailTrigger_AT_Test {
         currnetEmail.ParentId = currnetCase.Id;
         currnetEmail.FromAddress = 'Test@gmail.com';
         insert currnetEmail;
-        test.stopTest();
+        Test.stopTest();
     }
-
 }

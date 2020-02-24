@@ -14,6 +14,8 @@ Public class VolOpportunity_OnAfter_Delete_Handler{
       List<Volunteer_Opportunity__c> nonWishListtoupdatecount = new List<Volunteer_Opportunity__c>();
       List<Volunteer_Opportunity__c> nonwishListRegisteredList = new List<Volunteer_Opportunity__c>();
       Set<id> nonWishRegisteredUpdateSet = new Set<id>();
+      Set<Id> wishIdSet = new Set<Id>();
+      Map<Id,Volunteer_Opportunity__c> deletedVolunteerOpportunityMap = new Map<Id,Volunteer_Opportunity__c>();
       boolean isdelete;  
          for(Volunteer_Opportunity__c oldDbRec : oldVolOppList){
             
@@ -28,6 +30,12 @@ Public class VolOpportunity_OnAfter_Delete_Handler{
                 nonWishRegisteredUpdateSet.add(oldDbRec.id);
                 isdelete = true;
             }
+            /** WVC-2052  ***/
+           /*  If(((oldDbRec.Volunteer_Name__c != Null && oldDbRec.Wish__c != Null && (oldDbRec.Status__c == 'Approved' || oldDbRec.Status__c == 'Pending'  || (oldDbRec.Status__c == 'Inactive' && oldDbRec.Reason_Inactive__c == 'Not Approved' && oldDbRec.Inactive__c == True ))) || (oldDbRec.Volunteer_Name__c == Null && oldDbRec.Wish__c != Null)) &&
+             (oldDbRec.Role__c == 'Wish Granter' || oldDbRec.Role__c == 'Wish Granter Mentor' ||  oldDbRec.Role__c == 'Temporary Wish Granter')){
+               wishIdSet.add(oldDbRec.Wish__c);  
+               deletedVolunteerOpportunityMap .put(oldDbRec.Id,oldDbRec);           
+            }*/
         }
         
         if(nonWishListtoupdatecount.Size() > 0){
@@ -36,5 +44,9 @@ Public class VolOpportunity_OnAfter_Delete_Handler{
         if(nonwishListRegisteredList.size() > 0){
             VolOpportunity_OnAfter_Delete_Hepler.updateVolunteerRegisterdCount(nonwishListRegisteredList,nonWishRegisteredUpdateSet,isdelete);
         }
+        /*** WVC-2052 ***/
+      /*  If(deletedVolunteerOpportunityMap.Size() > 0){
+            VolOpportunity_OnAfter_Update_Helper.updateWishVolunteerWaiting(deletedVolunteerOpportunityMap,wishIdSet);
+        }*/
     }
 }

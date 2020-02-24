@@ -18,11 +18,13 @@
     <filter>
         <criteriaItems>
             <column>Case$RecordType</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Case.Diagnosis_Verification_Review</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case$Parent</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value></value>
         </criteriaItems>
@@ -46,6 +48,8 @@
     <reportType>WishCase__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Case$Actual_Departure_Date__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

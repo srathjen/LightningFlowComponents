@@ -97,6 +97,7 @@
     <filter>
         <criteriaItems>
             <column>Travel_Data__c$Migrated_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
@@ -110,4 +111,6 @@
     <reportType>Travel_Data__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
 </Report>

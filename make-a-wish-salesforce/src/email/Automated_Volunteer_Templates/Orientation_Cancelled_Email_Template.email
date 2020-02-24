@@ -1,12 +1,12 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
 <![CDATA[<p class="MsoNormal"><span style="font-family: Lato, sans-serif;">{!Contact.FirstName},<br>
 <br>
 You have cancelled your registration for the Make-A-Wish Volunteer
 Orientation.<br>
 <br>
-Please visit the&nbsp;</span><span style="font-family:&quot;Lato&quot;,sans-serif"><a href="https://make-a-wish.force.com/"><span style="background:white">Make-A-Wish Volunteer Center</span></a>&nbsp;to register for an alternative orientation date to continue the
+Please visit the&nbsp;</span><span style="font-family:&quot;Lato&quot;,sans-serif"><span style="background:white"><a href="{!$Label.Site_Url}">Make-A-Wish Volunteer Center</a></span>&nbsp;to register for an alternative orientation date to continue the
 process of becoming a Make-A-Wish volunteer.<br>
 <br>
 As always, please let us know of any questions by contacting us directly.<br>

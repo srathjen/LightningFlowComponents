@@ -1,0 +1,6 @@
+<!--
+ - Created by gmayer on 06-Nov-19.
+ -->
+
+<aura:event type="COMPONENT" description="wishAffiliationDesignItemEvent">
+</aura:event>

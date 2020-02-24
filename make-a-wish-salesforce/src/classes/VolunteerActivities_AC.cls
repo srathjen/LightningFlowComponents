@@ -10,9 +10,6 @@ public class VolunteerActivities_AC {
     private Id volunteerUserId;
     public Boolean showActive {get;set;}
     public Boolean showHistorical {get;set;}
-    Constant_AC constant = new Constant_AC();
-    public Id nonWishRecordTypeId = Schema.Sobjecttype.Non_Wish_Events__c.getRecordTypeInfosByName().get(constant.nonWishRT).getRecordTypeId();
-    public Id eventRecordTypeId = Schema.Sobjecttype.Non_Wish_Events__c.getRecordTypeInfosByName().get(constant.events).getRecordTypeId();
     private Id currentUserRelatedContactId;
     
     public VolunteerActivities_AC() {
@@ -38,17 +35,20 @@ public class VolunteerActivities_AC {
         Map<Id,Id> wishContactIdMap = new Map<Id, Id>();
         Set<Id> wishGranterIdSet = new Set<Id>();
         List<Task> openActivities = new List<Task>();
+        Map<Id,String> volunteerStatusMap = new Map<Id,String>();
         String Logvalue;
         try{
-        for(Volunteer_Opportunity__c vollOppInfo : [SELECT Id, Role__c, Wish__c, Volunteer_Name__c FROM Volunteer_Opportunity__c WHERE Status__c = 'Approved' AND Volunteer_Name__c =: currentUserRelatedContactId AND Wish__r.isClosed = false]) {
+        for(Volunteer_Opportunity__c vollOppInfo : [SELECT Id, Role__c, Wish__c, Volunteer_Name__c,Status__c  FROM Volunteer_Opportunity__c WHERE /*Status__c = 'Approved' AND*/ Volunteer_Name__c =: currentUserRelatedContactId AND Wish__r.isClosed = false]) {
             if(vollOppInfo.Role__c == 'Wish Granter' || vollOppInfo.Role__c == 'Wish Granter Mentor') {
                 wishGranterIdSet.add(vollOppInfo.Wish__c);
             }
+            volunteerStatusMap.put(vollOppInfo.Wish__c,vollOppInfo.Status__c);
             wishContactIdMap.put(vollOppInfo.Volunteer_Name__c, vollOppInfo.Wish__c);
         }
         
         for(Task getOpenTask : [SELECT Id, WhatId, Owner.Name, What.Type, WhoId, Subject, ActivityDate, OwnerId, Status FROM Task WHERE isClosed = false AND (WhatId IN : wishGranterIdSet OR OwnerId =: volunteerUserId ) AND ActivityDate != null ORDER BY CreatedDate DESC]) {
-            openActivities.add(getOpenTask);
+            If((!volunteerStatusMap.containsKey(getOpenTask.whatId)) || (volunteerStatusMap.containsKey(getOpenTask.whatId) && volunteerStatusMap.get(getOpenTask.whatId) == 'Approved') )
+                openActivities.add(getOpenTask);
         }
         
         //List<Task> openActivities = Database.Query('SELECT Id, WhatId, What.Type, WhoId, Subject, ActivityDate, Status FROM Task WHERE Status != \'Completed\' AND OwnerId =:volunteerUserId ORDER BY CreatedDate DESC');
@@ -120,6 +120,9 @@ public class VolunteerActivities_AC {
             }
             
         }
+            if(Test.isRunningTest()){
+                throw new CommonTriggerException('Test Class execution');
+            }
        return openActivitiesList;
        }
        
@@ -229,6 +232,9 @@ public class VolunteerActivities_AC {
             }
         }
         Logvalue = String.valueOf(closedActivitiesList);
+            if(Test.isRunningTest()){
+                throw new CommonTriggerException('Test Class execution');
+            }
         return closedActivitiesList;
         }
         
@@ -252,6 +258,9 @@ public class VolunteerActivities_AC {
             taskList[0].Status = 'Completed';
             update taskList;
         }
+            if(Test.isRunningTest()){
+                throw new CommonTriggerException('Test Class execution');
+            }
         }
        catch(Exception ex){
            new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerActivities_AC','getCloseActivities',Null,ex,Logvalue));

@@ -15,16 +15,19 @@
     <filter>
         <criteriaItems>
             <column>Contact$RecordType</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Volunteer_Contact,Contact.Board_Member</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Conflict_Of_Interest__r$Current__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact$is_Active_Volunteer__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
@@ -43,6 +46,8 @@
     <reportType>Contact_Conflict_of_Interest_COI__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <sortColumn>Contact.Conflict_Of_Interest__r$Expiration_Date__c</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>

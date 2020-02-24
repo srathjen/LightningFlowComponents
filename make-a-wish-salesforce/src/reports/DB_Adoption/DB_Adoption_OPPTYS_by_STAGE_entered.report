@@ -31,6 +31,7 @@
     <filter>
         <criteriaItems>
             <column>FROM_OPPORTUNITY_STAGE_NAME</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
@@ -53,6 +54,8 @@
     <reportType>OpportunityHistory</reportType>
     <scope>all</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <sortColumn>LAST_UPDATE</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>

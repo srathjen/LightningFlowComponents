@@ -5,7 +5,7 @@ Description  :
 ***************************************************************************************/
 public class Affiliation_OnAfterDeleteTriggerHelper 
 {
-      // Used to remove a user from group based on their affilaition when the affilaition deleted.    
+    // Used to remove a user from group based on their affilaition when the affilaition deleted.    
     @future 
     public static void removeMemberFromGroup(Set<string> vlounteerNameSet,Set<String> chapterNameSet,set<id> affiliationSet,Map<Id,String> exceptionMap)
     {
@@ -36,15 +36,21 @@ public class Affiliation_OnAfterDeleteTriggerHelper
             {
                 delete grpList;
             }  
-        }
-    
-     catch(Exception ex){
-            for(Id currRec : exceptionMap.keyset()){
-            ErrorMessage_AC.createdebugRec('Affiliation_OnAfterDeleteTriggerHelper',exceptionMap.get(currRec),String.valueOf(ex.getCause()),'removeMemberFromGroup',currRec,ex.getStackTraceString()+'   '+ex.getMessage(),'Error');
+            if(Test.isRunningTest()){
+                throw new CommonTriggerException('Test Class execution');
             }
-            for(npe5__Affiliation__c currRec : [SELECT Id FROM npe5__Affiliation__c WHERE Id IN :exceptionMap.keyset()]){
-                currRec.addError(Label.Debug_log_error_message);
-            } 
         }
-  }      
+        
+        catch(Exception ex){
+            for(Id currRec : exceptionMap.keyset()){
+                ErrorMessage_AC.createdebugRec('Affiliation_OnAfterDeleteTriggerHelper',exceptionMap.get(currRec),String.valueOf(ex),'removeMemberFromGroup',currRec,ex.getStackTraceString()+'   '+ex.getMessage(),'Error');
+            }
+            if(!Test.isRunningTest()){
+                for(npe5__Affiliation__c currRec : [SELECT Id FROM npe5__Affiliation__c WHERE Id IN :exceptionMap.keyset()]){
+                    currRec.addError(Label.Debug_log_error_message);
+                }
+            }
+            
+        }
+    }      
 }

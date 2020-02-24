@@ -1,3 +1,203 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata"/>
-
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Publicity Ok --></label>
+        <name>Add_l_Publicity_Approval__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Age --></label>
+        <name>Age__c</name>
+    </fields>
+    <fields>
+        <label><!-- Chapter Name --></label>
+        <name>Chapter_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Check Requested --></label>
+        <name>Check_Requested__c</name>
+    </fields>
+    <fields>
+        <label><!-- Child Name --></label>
+        <name>Child_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Publicity Notes --></label>
+        <name>Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- County --></label>
+        <name>County__c</name>
+    </fields>
+    <fields>
+        <label><!-- File Path --></label>
+        <name>File_Path__c</name>
+    </fields>
+    <fields>
+        <label><!-- Gender --></label>
+        <name>Gender__c</name>
+    </fields>
+    <fields>
+        <label><!-- In-Kind Recorded --></label>
+        <name>In_Kind_Recorded__c</name>
+    </fields>
+    <fields>
+        <label><!-- My Case File --></label>
+        <name>My_Case_File__c</name>
+    </fields>
+    <fields>
+        <label><!-- Parent Folder Name --></label>
+        <name>Parent_Folder_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Primary Diagnosis --></label>
+        <name>Primary_Diagnosis__c</name>
+    </fields>
+    <fields>
+        <label><!-- Receipt Type --></label>
+        <name>Receipt_Type__c</name>
+        <picklistValues>
+            <masterLabel>In-Kind Donation Receipt</masterLabel>
+            <translation><!-- In-Kind Donation Receipt --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In-Kind Form</masterLabel>
+            <translation><!-- In-Kind Form --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Reimbursement Form</masterLabel>
+            <translation><!-- Reimbursement Form --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Reimbursement Receipt</masterLabel>
+            <translation><!-- Reimbursement Receipt --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Wish Date --></label>
+        <name>Wish_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Type --></label>
+        <name>Wish_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Case --></label>
+        <name>cg__Case__c</name>
+        <relationshipLabel><!-- Case Files --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Content Type --></label>
+        <name>cg__Content_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>cg__Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- File Name --></label>
+        <name>cg__File_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- File Size --></label>
+        <name>cg__File_Size__c</name>
+    </fields>
+    <fields>
+        <label><!-- File Size in Bytes --></label>
+        <name>cg__File_Size_in_Bytes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Deleted --></label>
+        <name>cg__Is_Deleted__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Latest Version --></label>
+        <name>cg__Is_Latest_Version__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Parent Deleted --></label>
+        <name>cg__Is_Parent_Deleted__c</name>
+    </fields>
+    <fields>
+        <label><!-- Key --></label>
+        <name>cg__Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number Of Files --></label>
+        <name>cg__Number_Of_Files__c</name>
+    </fields>
+    <fields>
+        <label><!-- Page Count --></label>
+        <name>cg__Page_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Parent Folder Id --></label>
+        <name>cg__Parent_Folder_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Preview Key --></label>
+        <name>cg__Preview_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Preview Version Id --></label>
+        <name>cg__Preview_Version_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Private --></label>
+        <name>cg__Private__c</name>
+    </fields>
+    <fields>
+        <label><!-- Shortcut --></label>
+        <name>cg__Shortcut__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync Id --></label>
+        <name>cg__Sync_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tags --></label>
+        <name>cg__Tags__c</name>
+    </fields>
+    <fields>
+        <label><!-- Thumbnail Key --></label>
+        <name>cg__Thumbnail_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Thumbnail Version Id --></label>
+        <name>cg__Thumbnail_Version_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Version Description --></label>
+        <name>cg__Version_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Version Id --></label>
+        <name>cg__Version_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- WIP --></label>
+        <name>cg__WIP__c</name>
+    </fields>
+    <layouts>
+        <layout>Case File Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Personal Data --></label>
+        <name>cg__Personal_Data</name>
+    </recordTypes>
+</CustomObjectTranslation>

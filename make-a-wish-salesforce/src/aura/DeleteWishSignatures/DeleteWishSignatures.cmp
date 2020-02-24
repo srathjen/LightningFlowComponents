@@ -1,0 +1,25 @@
+<aura:component controller="LightningDataTableController">
+    <!-- attributes -->
+    <aura:attribute name="WRSId" type="String"/>
+    <aura:attribute name="showDeleteModal" type="Boolean" default="false"/>
+    <aura:attribute name="errors" type="String"/>
+    
+    <!-- handlers-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:registerEvent name="refreshEvent" type="c:refreshDataTable"/>
+    
+    <!-- Body -->  
+    <c:sldsModal aura:id="deleteModal" closeModal="true" closeAction="{!c.handleDeleteCancel}">
+        <aura:set attribute="header">
+            Delete Wish Required Signature
+        </aura:set>
+        <aura:set attribute="content">
+            <div class="slds-text-align_center slds-text-heading_small">Are you sure you want to delete this Wish Required Signature?</div>
+        </aura:set>
+        <aura:set attribute="footer">
+            <lightning:button label="Delete" variant="brand" title="Delete action" onclick="{! c.handleDelete }" />
+            <lightning:button label="Cancel" title="Cancle action" onclick="{! c.handleDeleteCancel }" />
+        </aura:set>
+    </c:sldsModal>
+    
+</aura:component>

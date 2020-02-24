@@ -1,0 +1,100 @@
+<aura:component controller="LightningDataTableController">
+    
+    <!-- attributes -->
+    <aura:attribute name="WRSId" type="String"/>
+    <aura:attribute name="showChangeSignerModal" type="Boolean" default="false"/>
+    <aura:attribute name="selectedLookUpRecord" type="sObject" default="" />
+    <aura:attribute name="typeOfSignature" type="String"/>
+    <aura:attribute name="caseId" type="Id"/>
+    <aura:attribute name="errors" type="String"/>
+    <aura:attribute name="wishAffRecord" type="sObject" />
+    <aura:attribute name="uploadSpinner" type="boolean" default="false"/>
+    
+    
+    <!-- handlers-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.selectedLookUpRecord}" action="{!c.fetchWishAff}" />
+    <aura:registerEvent name="refreshEvent" type="c:refreshDataTable"/>
+    
+    <!-- Body -->  
+    <c:sldsModal aura:id="changeSignerModal"  closeModal="true"  closeAction="{!c.handleChangeSignerCancel}">
+        <aura:set attribute="header">
+            Change Signer
+        </aura:set>
+        <aura:set attribute="content">
+            <div style="height:120px;">
+                <c:customLookup aura:id="FindForms" objectAPIName="Contact" 
+                                disabledAttr="false"
+                                IconName="doctype:gform"
+                                additionalParams=""
+                                componentMessage="conditiondescription"
+                                placeholderText="Enter the name of the signer to search.."
+                                selectedRecord="{!v.selectedLookUpRecord}"
+                                labelClass="slds-form-element__label slds-m-bottom_x-small"
+                                label="Find Signers "
+                                selectedRecordId="{!v.caseId}"
+                                formType = "{!v.typeOfSignature}"/>
+            </div>
+            <aura:if isTrue="{!not(empty(v.selectedLookUpRecord.Id))}">
+                <div class="slds-is-relative">
+                    <aura:if isTrue="{!v.uploadSpinner}">
+                        <lightning:spinner variant="brand" size="medium" aura:id="uploadSpinner" alternativeText="Loading...."/>
+                    </aura:if>
+                    <aura:if isTrue="{!not(empty(v.wishAffRecord.Id))}">
+                        <aura:if isTrue="{!v.typeOfSignature == 'Family'}">
+                            <div class="lds-form-element__label slds-text-title">Additional Information: </div>
+                            <dl class="slds-dl_horizontal">
+                                <dt class="slds-dl_horizontal__label">
+                                    <p class="slds-truncate">Wish Affiliation Type :</p>
+                                </dt>
+                                <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                                    {!v.wishAffRecord.Wish_Affiliation_Type__c}
+                                </dd>
+                                <dt class="slds-dl_horizontal__label">
+                                    <p class="slds-truncate">Relationship Type :</p>
+                                </dt>
+                                <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                                    {!v.wishAffRecord.Relationship_Type__c}
+                                </dd>
+                                <dt class="slds-dl_horizontal__label">
+                                    <p class="slds-truncate">Related To :</p>
+                                </dt>
+                                <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                                    {!v.wishAffRecord.Relationship__r.npe4__Contact__r.FirstName + ' ' + v.wishAffRecord.Relationship__r.npe4__Contact__r.LastName} 
+                                </dd>
+                                <dt class="slds-dl_horizontal__label">
+                                    <p class="slds-truncate">Parent/Legal Guardian :</p>
+                                </dt>
+                                <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                                    <lightning:input type="checkbox" disabled="true" checked="{!v.wishAffRecord.Parent_Legal_Guardian__c}"/>
+                                </dd>
+                            </dl>
+                        </aura:if>
+                        <aura:if isTrue="{!v.typeOfSignature == 'Medical'}">
+                            <div class="slds-form-element__label slds-text-title">Additional Information: </div>
+                            <dl class="slds-dl_horizontal">
+                                <dt class="slds-dl_horizontal__label">
+                                    <p class="slds-truncate" >Best Medical Contact :</p>
+                                </dt>
+                                <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                                    <lightning:input type="checkbox" disabled="true" checked="{!v.wishAffRecord.Best_Medical_Contact__c}"/>
+                                </dd>
+                                <dt class="slds-dl_horizontal__label">
+                                    <p class="slds-truncate" >Send Clearance Forms To :</p>
+                                </dt>
+                                <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                                    <lightning:input type="checkbox" disabled="true" checked="{!v.wishAffRecord.Send_Clearance_Forms_To__c}"/>
+                                </dd>
+                            </dl>
+                        </aura:if>
+                    </aura:if>
+                </div>
+            </aura:if>
+        </aura:set>
+        <aura:set attribute="footer">
+            <lightning:button label="Change" variant="brand" title="Change action" onclick="{! c.handleChangeSigner }" />
+            <lightning:button label="Cancel" title="Cancle action" onclick="{! c.handleChangeSignerCancel }" />
+        </aura:set>
+    </c:sldsModal>
+    
+</aura:component>

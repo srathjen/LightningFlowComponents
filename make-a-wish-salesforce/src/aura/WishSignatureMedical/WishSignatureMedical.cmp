@@ -1,0 +1,114 @@
+<aura:component controller="WishSignatureController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    
+    <!-- attributes -->
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="objectName" type="String" default="Wish_Required_Signature__c"/>
+    <aura:attribute name="fieldsetName" type="String" default="MedicalSignatureTracker"/>
+    <aura:attribute name="typeOfSignature" type="String" default="Medical"/>
+    <aura:attribute name="showModal" type="Boolean" default="false" />
+    <aura:attribute name="selectedLookUpRecord" type="String"  default=""/>
+    <aura:attribute name="medicalProfList" type="object" default=""/>
+    <aura:attribute name="wrapperList" type="object"  default=""/>
+    <aura:attribute name="options" type="List" default="[]"/>
+    
+    <!-- handlers -->
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+
+    <!-- Body -->    
+    <lightning:card title="">
+        <div class="c-container">
+            <lightning:layout>
+                <lightning:layoutItem flexibility="auto" size="10" padding="around-small">
+                    <div class="slds-text-heading_medium">Wish Required Signatures - {!v.typeOfSignature} </div>
+                </lightning:layoutItem>
+                <lightning:layoutItem flexibility="auto" size="1" padding="around-small">
+                    <div class="custom-box">
+                        <lightning:buttonIcon class="slds-float_right" iconName="utility:refresh" variant="border-filled" onclick="{! c.handleRefresh }" alternativeText="Refresh" />
+                    </div>
+                </lightning:layoutItem>
+                <lightning:layoutItem flexibility="auto" size="1" padding="around-small">
+                    <div class="custom-box">
+                        <lightning:button label="New" title="New Wish Signatures" onclick="{! c.handleClick }"  />
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </div>
+        <lightning:layout multipleRows="true">
+            <lightning:layoutItem size="12" flexibility="auto" padding="around-small">
+                <div class="custom-box">
+                        <c:LightningDataTable aura:id="medicalDatatable" objectName="{!v.objectName}" fieldsetName="{!v.fieldsetName}" typeOfSignature="{!v.typeOfSignature}" caseId="{!v.recordId}"/> 
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </lightning:card>
+    
+    
+    <!-- Add Required Signature Modal Begin -->
+    <aura:if isTrue="{!v.showModal}">
+        <c:sldsModal aura:id="addFormModal" closeModal="true"  closeAction="{!c.handleCancel}">
+            <aura:set attribute="header">
+                Add Wish Required Signature
+            </aura:set>
+            <aura:set attribute="content">
+                <lightning:combobox name="FindForms" label="Find Forms" placeholder="Select a Form" options="{! v.options }" onchange="{! c.handleChange }"/>
+                <!--<c:customLookup aura:id="FindForms" objectAPIName="Wish_Signature_Forms__c"
+                                disabledAttr="false"
+                                IconName="doctype:gform"
+                                additionalParams=""
+                                componentMessage="conditiondescription"
+                                placeholderText="Find Wish Forms"
+                                selectedRecord="{!v.selectedLookUpRecord}"
+                                labelClass="slds-form-element__label slds-m-bottom_x-small"
+                                label="Find Forms "
+                                selectedRecordId="{!v.recordId}"
+                                formType = "Medical"/> -->
+                <span class="slds-form-element__label slds-p-top_large">
+                    Choose Signer :  </span>
+                    <lightning:accordion   allowMultipleSectionsOpen="true">
+                        <aura:iteration items="{!v.wrapperList}" var="item">
+                            <lightning:accordionSection name="{!item.con.Id}" label="{!item.con.FirstName + ' ' + item.con.LastName}">
+                                <aura:set attribute="body">
+                                <div class="c-container">
+                                      <lightning:helptext content=""/>
+                                    <span class="slds-text-font_monospace">
+                                        Updates to the below fields can be made in the Wish Affiliations Section only.
+                                    </span>
+                                    <dl class="slds-dl_horizontal">
+                                        <dt class="slds-dl_horizontal__label">
+                                            <p class="slds-truncate" >Best Medical Contact :</p>
+                                        </dt>
+                                        <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                                                 <lightning:input type="checkbox" disabled="true" checked="{!item.wishAff.Best_Medical_Contact__c}"/>
+                                        </dd>
+                                         <dt class="slds-dl_horizontal__label">
+                                            <p class="slds-truncate" >Send Clearance Forms To :</p>
+                                        </dt>
+                                        <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                                             <lightning:input type="checkbox" disabled="true" checked="{!item.wishAff.Send_Clearance_Forms_To__c}"/>
+                                        </dd>
+                                    </dl>
+                                    <lightning:layout multipleRows="true">
+                                        <lightning:layoutItem size="4" padding="around-small">
+                                            <aura:if isTrue="{! equals(item.wishAff.Medical_Professional_Status__c, 'Inactive')}">
+                                                <span class="slds-float_left slds-p-right_small" style="margin-top: -2px;">
+                                                    <lightning:helptext content="The Medical Professional is no longer Active."/>
+                                                </span>
+                                            </aura:if>
+                                            <span class="slds-float_left">
+                                                <lightning:input type="checkbox" disabled="{! equals(item.wishAff.Medical_Professional_Status__c, 'Inactive')}" label="Self" name="{!join(',',item.con.Id,item.wishAff.Id)}" checked="{!item.isSelected}" onchange="{!c.handleCheck}" />
+                                            </span>
+                                        </lightning:layoutItem>
+                                    </lightning:layout>
+                                </div>
+                                </aura:set>
+                            </lightning:accordionSection>
+                        </aura:iteration>
+                    </lightning:accordion>
+            </aura:set>
+            <aura:set attribute="footer">
+                <lightning:button label="Add" variant="brand" title="Save action" onclick="{! c.handleSave }" />
+                <lightning:button label="Cancel" title="Cancle action" onclick="{! c.handleCancel }" />
+            </aura:set>
+        </c:sldsModal>
+    </aura:if>
+</aura:component>
