@@ -1,20 +1,26 @@
 /***************************************************************************************************
-Author      : MST Solutions
-CreatedBy   : Kanagaraj
-Date        : 26/05/2016
+Author      :   MST Solutions
+CreatedBy   :   Kanagaraj
+Date        :   26/05/2016
 Description :
-
 Modification Log :
-1. 26/03/18 - Vignesh SM - IME 18 - Line No 57-59
-2. 27/03/18 - Yuvraj - IME-60 - Line No: 34, 134, 247-249
-3. 29/03/18 - Vignesh SM - IME 58 - Line No 230-232, 260-262
-4. 09/04/18 - Yuvraj - IME-77 - Line No: 63, 240-242.
-5. 18/04/18 - Vignesh SM - IME 110 Line No: 189, 196
+                1. 26/03/18 - Vignesh SM - IME 18 - Line No 57-59
+                2. 27/03/18 - Yuvraj - IME-60 - Line No: 34, 134, 247-249
+                3. 29/03/18 - Vignesh SM - IME 58 - Line No 230-232, 260-262
+                4. 09/04/18 - Yuvraj - IME-77 - Line No: 63, 240-242.
+                5. 18/04/18 - Vignesh SM - IME 110 Line No: 189, 196
+                6. 13/07/18 - Vignesh SM - IME 249, 223
+                7. 17/07/18 - Yuvraj - IME-216 Line No:144-145
+                8. 08/07/2019 - Samer - SIW-274: Update Lead Diagnosis Verification Received with 
+                       the date DV was signed
+                9. 08/12/2019 - Samer - SIW-196: Update Chapter Name when Zip Code is changed by Integration User.
+                10. 2/04/2020 - CSmith - SIW-342: All changes reverted
 *****************************************************************************************************/
 Public Class Lead_OnBeforeUpdateTriggerHandler{
     
     public static void onBeforeUpdate(Map<Id,Lead> newLeadMap,Map<Id,Lead> oldLeadMap){
         
+        List<Lead> updateQualifyingLeadList = new List<lead>();
         List<Lead> updatedLeadList = new List<Lead>();
         Set<Id> accountIdSet = new Set<Id>();
         List<Lead> newLeadList = new List<Lead>();
@@ -38,6 +44,16 @@ Public Class Lead_OnBeforeUpdateTriggerHandler{
         List<Lead> qualifiedRushLeadList = new List<Lead>(); //IME 58
         List<Lead> potentialRushLeadList = new List<Lead>();//IME-107
         List<Diagnosis_Verification__c> updateQualifyingList = new List<Diagnosis_Verification__c>();//IME-120
+        List<Lead> comatoseList = new List<Lead>(); //IME 223
+        Set<Id> closeTaskLeadSet = new Set<Id>(); //IME 149
+        List<Lead> updateChapterLeadList = new List<Lead>(); //IME 233
+        /**
+         * WLP-322
+         * Unused DML, also causing issues on tests
+         */
+//        Account MAWA = [SELECT Id, Name FROM Account WHERE Name='Make-A-Wish America' LIMIT 1]; //IME 233
+        Profile dbprofile = [SELECT Id, Name FROM Profile WHERE Id=:userinfo.getProfileId() LIMIT 1];   //IME 233
+        
         Boolean flag;
         
         for(Lead newLead: newLeadMap.Values()){
@@ -63,13 +79,37 @@ newLead.Sub_Status__c = 'Chapter';
             if(newLead.status == 'Eligibility Review' && oldLeadMap.get(newLead.Id).Status != 'Eligibility Review' && oldLeadMap.get(newLead.Id).Status != 'DNQ'){
                 newLead.Sub_Status__c = 'New';
                 newLead.Eligibility_Review_Date__c = Date.today();//IME-77
+                
             }
+            
+                 //IME 249
+                if((newLead.Is_in_a_Comatose_Vegetative_State__c == 'Yes' && newLead.status == 'Eligibility Review' && oldLeadMap.get(newLead.Id).Status != 'Eligibility Review') || 
+                   (newLead.Is_in_a_Comatose_Vegetative_State__c == 'Yes'  && oldLeadMap.get(newLead.Id).Is_in_a_Comatose_Vegetative_State__c  != 'Yes' && newLead.status == 'Eligibility Review')){
+                    
+                    newLead.Sub_Status__c = 'Pending Clarification - Chapter';
+                    //IME 223
+                    comatoseList.add(newLead);
+                }
+              
+            
+            //IME 149
+            if((newLead.status == 'Qualified' && oldLeadMap.get(newLead.Id).Status != 'Qualified') || 
+               (newLead.status == 'DNQ' && oldLeadMap.get(newLead.Id).Status != 'DNQ')||
+               (newLead.status == 'Duplicate' && oldLeadMap.get(newLead.Id).Status != 'Duplicate') ||
+               (newLead.status == 'Deceased' && oldLeadMap.get(newLead.Id).Status != 'Deceased')){
+                   closeTaskLeadSet.add(newLead.Id);
+            }
+            //IME 149
+            
             if(newLead.status == 'DNQ' && oldLeadMap.get(newLead.Id).Status != 'DNQ'){
                 newLead.DNQ_Date__c = Date.today();//IME-77
             }
-            if(newLead.ChapterName__c!= oldLeadMap.get(newLead.id).ChapterName__c && newLead.ChapterName__c != Null){
-                updatedLeadList.add(newLead);
-                accountIdSet.add(newLead.ChapterName__c);
+            if(newLead.ChapterName__c!= oldLeadMap.get(newLead.id).ChapterName__c && newLead.ChapterName__c != Null){                                
+                if(newLead.Hidden_Chapter_Change_Confirmation__c == Null || newLead.Hidden_Chapter_Change_Confirmation__c != oldLeadMap.get(newLead.id).Hidden_Chapter_Change_Confirmation__c){
+                       newLead.Hidden_Chapter_Change_Confirmation__c = oldLeadMap.get(newLead.id).ChapterName__c;//IME 309
+                   }
+                   updatedLeadList.add(newLead);
+                   accountIdSet.add(newLead.ChapterName__c);            
             }
             if(newLead.SD1_ICD_Code__c != oldLeadMap.get(newLead.Id).SD1_ICD_Code__c && newLead.SD1_ICD_Code__c != null){
                 icdCodeInfoIdSet.add(newLead.SD1_ICD_Code__c);
@@ -129,20 +169,24 @@ newLead.Sub_Status__c = 'Chapter';
                 newChaptersSet.add(newLead.ChapterName__c);
                 updateLeadOwnerList.add(newLead);
             }
-            if(oldLeadMap.get(newLead.id).Of_Times_Email_Sent__c != newLead.Of_Times_Email_Sent__c){
-                
-                newLead.Part_A_Sent__c = Date.today();
-            }
-            if((newLead.Status == 'Eligibility Review') || (newLead.Status == 'Qualified') && oldLeadMap.get(newLead.id).Status == 'Referred'){
+            if((oldLeadMap.get(newLead.id).Of_Times_Email_Sent__c != newLead.Of_Times_Email_Sent__c) ||
+               (oldLeadMap.get(newLead.id).Sub_Status__c != newLead.Sub_Status__c && (newLead.Using_Paper_Process_For_DV__c == true && 
+                (newLead.Sub_Status__c == 'Pending Part A' || newLead.Sub_Status__c == 'Pending Paper DV')))){                
+                    newLead.Part_A_Sent__c = Date.today();
+                }
+            
+            /* SIW-274 
+              if((newLead.Status == 'Eligibility Review') || (newLead.Status == 'Qualified') && oldLeadMap.get(newLead.id).Status == 'Referred'){
                 newLead.Part_A_Received__c = Date.today();
-            }
+            } */
+            
             /*Added as per IME 10,63*/
-            if(newLead.Status == 'Qualified'){
+            if(newLead.Status == 'Qualified' && oldLeadMap.get(newLead.id).Status != newLead.Status){
                 //IME-120
                 List<Diagnosis_Verification__c> dvList = [SELECT ID, ICD_Code__c, Condition_Description__c, Group1__c,isEligible__c FROM Diagnosis_Verification__c WHERE Lead__c =:newLead.Id and isEligible__c = true  LIMIT 1];
                 if(dvList.size() > 0){
                     updateQualifyingList.add(dvList[0]);
-                    leadList.add(newLead);
+                    updateQualifyingLeadList.add(newLead);
                 }
                 newLead.Sub_Status__c = Null;
                 newLead.Qualified_Date__c = Date.today();//Added per IME-69
@@ -155,8 +199,13 @@ newLead.Auto_Qualified__c = true;
             //IME-60
             if(newLead.Status == 'Qualified' && (!newLead.Is_Required_Bypass__c)){
                 leadRequiredList.add(newLead);     
+            }    
+            /*
+            if((newLead.Status == 'Qualified' || newLead.Status == 'Eligibility Review' || newLead.Status == 'DNQ')
+               && (!newlead.Is_Required_Bypass__c)){
+                   leadRequiredList.add(newLead);     
             }             
-            
+            */
             if(newLead.Status == 'Eligibility Review' && newLead.Sub_Status__c == 'Pending Diagnosis Verification')
                 newLead.Sub_Status__c = Null;
             
@@ -169,13 +218,14 @@ newLead.Auto_Qualified__c = true;
             if(newLead.Best_contact_for_Physician_Email__c != oldLeadMap.get(newLead.id).Best_contact_for_Physician_Email__c && newLead.Hidden_DV_form_Medical_professional_Type__c ==  'Best contact for Physician'){
                 
                 newLead.Of_Times_Email_Sent__c = 0;
-                newLead.Part_A_Form_Password__c = Lead_OnBeforeUpdateTriggerHandlerHelper.getRandom();
+                newLead.Part_A_Form_Password__c = Lead_OnBeforeUpdateTriggerHandlerHelper.getRandom();    
                 
             }
             if(newLead.Alternate1MedicalProfessionalEmail__c != oldLeadMap.get(newLead.id).Alternate1MedicalProfessionalEmail__c && newLead.Hidden_DV_form_Medical_professional_Type__c ==  'Alternate 1 Medical Professional'){
                 
                 newLead.Of_Times_Email_Sent__c = 0;
                 newLead.Part_A_Form_Password__c = Lead_OnBeforeUpdateTriggerHandlerHelper.getRandom();
+                
             }
             if(newLead.Alternate2MedProfessionalEmail__c != oldLeadMap.get(newLead.id).Alternate2MedProfessionalEmail__c && newLead.Hidden_DV_form_Medical_professional_Type__c ==  'Alternate 2 Medical Professional'){
                 
@@ -186,7 +236,7 @@ newLead.Auto_Qualified__c = true;
             if(newLead.Medical_Questions__c != oldLeadMap.get(newLead.id).Medical_Questions__c && newLead.Medical_Questions__c  != Null ){
                 leadQuestionList.add(newLead);
             }
-            
+            /*IME 272*/
             //Modified as per IME 110
             if((newLead.Status == 'Referred')
                && (newLead.Sub_Status__c == 'Pending Diagnosis Verification' || newLead.Sub_Status__c == 'Pending Part A' || newLead.Sub_Status__c == 'Pending Paper DV')
@@ -216,8 +266,8 @@ newLead.Auto_Qualified__c = true;
                 }
                 updateChapterOnLeadList.add(newLead);
             }
-
-
+            
+            
             if(newLead.Qualifying_ICD__c != Null && newLead.Qualifying_ICD__c != oldLeadMap.get(newLead.id).Qualifying_ICD__c){
                 icdCodesSet.add(newLead.Qualifying_ICD__c);
                 leadUpdateToMedicalInfoList.add(newLead);
@@ -245,20 +295,27 @@ newLead.Auto_Qualified__c = true;
             //IME-107
             if(newLead.Any_medical_reason_for_moving_quickly__c != null && newLead.Any_medical_reason_for_moving_quickly__c.containsIgnoreCase('Yes')){
                 newLead.Rush__c = true;
-                System.debug('IME 107>>>>');
             } else if(newLead.Any_medical_reason_for_moving_quickly__c != null && (!newLead.Any_medical_reason_for_moving_quickly__c.containsIgnoreCase('Yes')) && String.isNotBlank(oldLeadMap.get(newLead.Id).Any_medical_reason_for_moving_quickly__c)){
-                System.debug('Disable Rush and Create Rush Task');
                 newLead.Rush__c = false;
                 if(oldLeadMap.get(newLead.Id).Any_medical_reason_for_moving_quickly__c.containsIgnoreCase('Yes')){
                     potentialRushLeadList.add(newLead);
                 }
             } else {
                 newLead.Rush__c = false;
-            }	
+            }   
             //IME-77
-            if(newLead.Sub_Status__c == 'Pending Part A' || newLead.Sub_Status__c == 'Pending Paper DV' || newLead.Status == 'Pending Diagnosis Verification'){
+            if(newLead.Sub_Status__c == 'Pending Part A' || newLead.Sub_Status__c == 'Pending Paper DV' || newLead.Sub_Status__c == 'Pending Diagnosis Verification'){
                 newLead.Pending_Diagnosis_Date__c = Date.today();
             }
+            
+            //IME 233            
+            if(
+               // SIW-196 newLead.ChapterName__c == MAWA.Id && 
+               dbprofile.Name == 'Integration' &&
+               newLead.Postalcode != null && (newLead.Postalcode != oldLeadMap.get(newLead.Id).Postalcode)){
+                   updateChapterLeadList.add(newLead);
+                   newLead.Hidden_Chapter_Change_Confirmation__c = Null;
+               }
         }
         
         //Update the Intake manager email and chapter name
@@ -277,6 +334,7 @@ newLead.Auto_Qualified__c = true;
         if(leadList.size() > 0){
             Lead_OnBeforeUpdateTriggerHandlerHelper.CreateNewCase(leadList);
         }
+        /*IME 272*/
         if(findduplicateList.size() > 0){
             Lead_OnBeforeUpdateTriggerHandlerHelper.findDuplicateRecords(findduplicateList);
         }
@@ -287,9 +345,10 @@ newLead.Auto_Qualified__c = true;
             Lead_OnBeforeUpdateTriggerHandlerHelper.preQualifiedRequired(leadRequiredList);
         }
         //IME 58
-        if(qualifiedRushLeadList.size() > 0){
-            Lead_OnBeforeUpdateTriggerHandlerHelper.createRushTask(qualifiedRushLeadList);
-        }
+/*WLP-467 remove automated task creation */
+//        if(qualifiedRushLeadList.size() > 0){
+//            Lead_OnBeforeUpdateTriggerHandlerHelper.createRushTask(qualifiedRushLeadList);
+//        }
         //IME-107
         if(potentialRushLeadList.size() > 0){
             Lead_OnBeforeUpdateTriggerHandlerHelper.createPotentialRushTask(potentialRushLeadList);
@@ -297,6 +356,19 @@ newLead.Auto_Qualified__c = true;
         //IME-120
         if(updateQualifyingList.size() > 0 && leadList.size() > 0){
             Lead_OnBeforeUpdateTriggerHandlerHelper.updateQualifingDiagnosis(updateQualifyingList[0].ICD_Code__c, leadList);
+        }
+        //IME 223 ** Removing as part of SIW-255
+        /*if(comatoseList.size() > 0){
+            Lead_OnBeforeUpdateTriggerHandlerHelper.createComatoseTask(comatoseList);
+        } */
+        //IME 149
+        if(closeTaskLeadSet.size() >0){
+            Lead_OnBeforeUpdateTriggerHandlerHelper.closeTasks(closeTaskLeadSet);
+        }
+        
+        //IME 233
+        if(updateChapterLeadList.size()>0){
+            Lead_OnBeforeUpdateTriggerHandlerHelper.updateChapterViaZipcode(updateChapterLeadList);
         }
     }
 }

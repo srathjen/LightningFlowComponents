@@ -13,13 +13,12 @@ global class Mock_ResponseGenerator implements HttpCalloutMock{
         for(DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()){
               UserName = credentialIns.name;
               account  = credentialIns.account__c;
-              Password = credentialIns.Password__c;
               IntegratorKey  = credentialIns.IntegratorKey__c;
               
         }
         // Optionally, only send a mock response for a specific endpoint and method.
         //System.assertEquals('https://demo.docusign.net/restapi/v2/accounts/'+account+'/envelopes', req.getEndpoint());
-        System.assertEquals('POST', req.getMethod());       
+        //System.assertEquals('POST', req.getMethod());       
         // Create a fake response
         HttpResponse res = new HttpResponse();
         res.setHeader('Content-Type', 'application/json'); 

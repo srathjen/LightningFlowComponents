@@ -1,0 +1,7 @@
+<aura:documentation>
+	<aura:description>Documentation for ChangeForm</aura:description>
+	<aura:example name="ChangeForm" ref="ChangeForm" label="ChangeForm">
+		# Description
+        ChangeForm is a custom component that provides a UI to choose a different Form for a Wish Required Signature record.
+	</aura:example>
+</aura:documentation>

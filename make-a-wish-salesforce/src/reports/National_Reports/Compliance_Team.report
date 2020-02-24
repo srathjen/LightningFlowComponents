@@ -15,6 +15,7 @@
     <filter>
         <criteriaItems>
             <column>Contact$RecordType</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Volunteer_Contact</value>
         </criteriaItems>
@@ -33,6 +34,8 @@
     <reportType>Contact_custom_Report_Type__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Contact$B_C_Expiration_Date__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

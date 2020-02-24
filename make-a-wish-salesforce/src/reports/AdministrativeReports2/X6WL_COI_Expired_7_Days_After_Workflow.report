@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Contact$Email</field>
+    </columns>
+    <columns>
+        <field>Contact$Name</field>
+    </columns>
+    <columns>
+        <field>Contact.Conflict_Of_Interest__r$Name</field>
+    </columns>
+    <columns>
+        <field>Contact$COI_Expiration_Date__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Contact.Conflict_Of_Interest__r$Current__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>6WL- COI:Expired 7 Days After Workflow</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Contact_Conflict_of_Interest_COI__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Contact.Conflict_Of_Interest__r$Expiration_Date__c</dateColumn>
+        <endDate>2019-12-09</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2019-12-06</startDate>
+    </timeFrameFilter>
+</Report>

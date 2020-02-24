@@ -19,6 +19,7 @@
     <filter>
         <criteriaItems>
             <column>ProcessInstance$ProcessDefinition</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Volunteer Contact Process</value>
         </criteriaItems>
@@ -32,6 +33,8 @@
     <reportType>Approval_Application__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>ProcessInstance$CompletedDate</dateColumn>
         <endDate>2017-11-09</endDate>

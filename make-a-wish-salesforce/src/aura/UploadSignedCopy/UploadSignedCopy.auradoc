@@ -1,0 +1,8 @@
+<aura:documentation>
+	<aura:description>Documentation for UploadSignedCopy</aura:description>
+	<aura:example name="UploadSignedCopy" ref="UploadSignedCopy" label="UploadSignedCopy">
+		# Description
+        UploadSignedCopy is a custom component that helps in Uploading a Signed document to the Wish required Signature record.
+		The document then gets uploaded to S-Drive.
+	</aura:example>
+</aura:documentation>

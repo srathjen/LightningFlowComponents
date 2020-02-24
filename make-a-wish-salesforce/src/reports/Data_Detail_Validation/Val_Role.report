@@ -22,6 +22,7 @@
     <filter>
         <criteriaItems>
             <column>Volunteer_Roles__c.Migrated_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
@@ -35,6 +36,8 @@
     <reportType>CustomEntity$Volunteer_Roles__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CUST_CREATED_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

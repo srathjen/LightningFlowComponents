@@ -1,0 +1,33 @@
+<!--
+@description    Displays field sets for a given sObject in a mobile-friendly format
+@author         Mason Buhler, Traction on Demand
+@date           7/25/2019
+ -->
+<aura:component implements="force:lightningQuickActionWithoutHeader,flexipage:availableForRecordHome,force:hasSObjectName,force:hasRecordId,force:appHostable"
+                controller="DisplayMobileFieldSetsCtlr">
+
+    <aura:attribute name="fieldSetsNames" type="String" />
+    <aura:attribute name="fieldSetsList" type="List" />
+
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+
+    <lightning:buttonIcon iconName="utility:back" alternativeText="Back" onclick="{!c.handleClickBack}"/>
+
+    <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="{!v.sObjectName}">
+        <lightning:accordion aura:id="accordion" allowMultipleSectionsOpen="true">
+            <aura:iteration items="{!v.fieldSetsList}" var="fs">
+                <lightning:accordionSection name="{!fs.fieldSetName}" label="{!fs.fieldSetName}">
+                    <lightning:layout multipleRows="true">
+                        <aura:set attribute="body">
+                            <aura:iteration items="{!fs.fieldNames}" var="field">
+                                <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3">
+                                    <lightning:outputField fieldName="{!field}" />
+                                </lightning:layoutItem>
+                            </aura:iteration>
+                        </aura:set>
+                    </lightning:layout>
+                </lightning:accordionSection>
+            </aura:iteration>
+        </lightning:accordion>
+    </lightning:recordViewForm>
+</aura:component>

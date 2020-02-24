@@ -57,21 +57,25 @@
     <filter>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Assist__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>STATUS</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>DNQ</value>
         </criteriaItems>
@@ -89,6 +93,8 @@
     <reportType>CaseList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Case.Qualified_Date__c</dateColumn>
         <interval>INTERVAL_PREVFY</interval>

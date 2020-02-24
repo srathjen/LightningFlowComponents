@@ -61,8 +61,10 @@
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Condition Description Record Page</masterLabel>
-    <pageTemplate>flexipage:recordHomeTemplateDesktop</pageTemplate>
     <parentFlexiPage>flexipage__default_rec_L</parentFlexiPage>
     <sobjectType>Condition_Description__c</sobjectType>
+    <template>
+        <name>flexipage:recordHomeTemplateDesktop</name>
+    </template>
     <type>RecordPage</type>
 </FlexiPage>

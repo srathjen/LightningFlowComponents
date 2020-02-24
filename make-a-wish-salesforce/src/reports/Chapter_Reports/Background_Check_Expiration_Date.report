@@ -28,6 +28,8 @@
     <reportType>Background_Check_Report__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Background_check__c$Date__c</dateColumn>
         <interval>INTERVAL_NEXT30</interval>

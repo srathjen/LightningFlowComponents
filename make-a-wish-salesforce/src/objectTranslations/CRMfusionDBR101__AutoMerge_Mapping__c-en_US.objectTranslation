@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <help><!-- Indicates whether or not this field should be included in the task created from the merge containing data from the original record. --></help>
+        <label><!-- Include in Task --></label>
+        <name>CRMfusionDBR101__Include_in_Task__c</name>
+    </fields>
+    <fields>
+        <label><!-- Key --></label>
+        <name>CRMfusionDBR101__Key__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the action taken for this field when automatically merging a new record into an existing record.  See the documentation for a full description. --></help>
+        <label><!-- Merge Action --></label>
+        <name>CRMfusionDBR101__Merge_Action__c</name>
+        <picklistValues>
+            <masterLabel>Ignore</masterLabel>
+            <translation><!-- Ignore --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Merge Values</masterLabel>
+            <translation><!-- Merge Values --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Overwrite</masterLabel>
+            <translation><!-- Overwrite --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Update if Blank</masterLabel>
+            <translation><!-- Update if Blank --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Select a field to define the merge action and over-ride the default merge action and/or include in task options. --></help>
+        <label><!-- Merge Field --></label>
+        <name>CRMfusionDBR101__Merge_Field_Display__c</name>
+    </fields>
+    <fields>
+        <help><!-- Select a field to define the merge action and over-ride the default merge action and/or include in task options. --></help>
+        <label><!-- Merge Field API Name --></label>
+        <name>CRMfusionDBR101__Merge_Field__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scenario --></label>
+        <name>CRMfusionDBR101__Scenario__c</name>
+        <relationshipLabel><!-- DupeBlocker Auto-Merge Mappings --></relationshipLabel>
+    </fields>
+    <validationRules>
+        <errorMessage><!-- The Merge Action must be specified. --></errorMessage>
+        <name>CRMfusionDBR101__Merge_Action_Not_Null</name>
+    </validationRules>
+</CustomObjectTranslation>

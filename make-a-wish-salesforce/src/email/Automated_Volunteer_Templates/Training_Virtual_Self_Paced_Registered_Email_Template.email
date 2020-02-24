@@ -1,10 +1,10 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
 <![CDATA[<div style=""><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Contact.FirstName},<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">You have successfully
 registered
 for&nbsp;{!Volunteer_Orientation_Training__c.Orientation_Training_Hidden__c}.
-Please log in to the&nbsp;<a href="https://make-a-wish.force.com/"><span style="color:blue;background:white">Make-A-Wish Volunteer Center</span></a>&nbsp;to
+Please log in to the&nbsp;<span style="color:blue;background:white"><a href="{!$Label.Site_Url}">Make-A-Wish Volunteer Center</a></span>&nbsp;to
 complete this training at a time that is convenient for you.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Once you've logged
 in, click&nbsp;<b>"Profile"</b>&nbsp;and then scroll to the training
 section to select&nbsp;<b>"Training"</b>. On the training page,
@@ -13,8 +13,8 @@ clicked&nbsp;<b>"Start Course"</b>, a new tab will open and you will
 be able to watch the training. Once you've completed the course, we will mark
 this training as&nbsp;complete. Please note this process takes about 5 minutes
 to occur and you will need to refresh your browser to see these changes.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">If you need to cancel
-or change this training, please visit the&nbsp;<a href="https://make-a-wish.force.com/communitieslogin"><span style="color:blue;
-background:white">Make-A-Wish Volunteer Center</span></a>.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Thanks,<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+or change this training, please visit the&nbsp;<span style="color:blue;
+background:white"><a href="{!$Label.Site_Url}">Make-A-Wish Volunteer Center</a></span>.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Thanks,<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Volunteer_Orientation_Training__c.Orientation_Training_email_signature__c}<o:p></o:p></span></p><p class="MsoNormal" style="font-size: 12pt; margin-bottom: 0.0001pt;">
 
 

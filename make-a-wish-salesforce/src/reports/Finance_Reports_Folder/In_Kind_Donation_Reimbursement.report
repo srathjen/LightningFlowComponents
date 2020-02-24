@@ -78,6 +78,8 @@
     <reportType>CustomEntity$In_Kind_Donation_Reimbursement__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CUST_CREATED_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

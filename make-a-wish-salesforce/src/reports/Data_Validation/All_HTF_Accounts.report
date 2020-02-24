@@ -30,11 +30,13 @@
     <filter>
         <criteriaItems>
             <column>CREATED</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Integration User</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <isUnlocked>false</isUnlocked>
             <operator>notEqual</operator>
             <value>Account.HH_Account</value>
         </criteriaItems>
@@ -48,6 +50,8 @@
     <reportType>AccountList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <sortColumn>ACCOUNT.NAME</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>

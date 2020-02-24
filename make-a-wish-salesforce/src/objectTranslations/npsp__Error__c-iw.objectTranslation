@@ -20,6 +20,61 @@
         <plural>true</plural>
         <value><!-- הError --></value>
     </caseValues>
+    <fields>
+        <help>ההקשר שיצר את השגיאה, אם ידוע.</help>
+        <label><!-- Context Type --></label>
+        <name>npsp__Context_Type__c</name>
+    </fields>
+    <fields>
+        <help>התאריך והשעה בהם התרחשה השגיאה</help>
+        <label><!-- Datetime --></label>
+        <name>npsp__Datetime__c</name>
+    </fields>
+    <fields>
+        <help>מציין אם נשלחה הודעת דואר אלקטרוני בנוגע לשגיאה.</help>
+        <label><!-- Email Sent --></label>
+        <name>npsp__Email_Sent__c</name>
+    </fields>
+    <fields>
+        <help>סוג השגיאה שהתרחשה</help>
+        <label><!-- Error Type --></label>
+        <name>npsp__Error_Type__c</name>
+    </fields>
+    <fields>
+        <help>הטקסט המלא של הודעת השגיאה</help>
+        <label><!-- Full Message --></label>
+        <name>npsp__Full_Message__c</name>
+    </fields>
+    <fields>
+        <help>סוג האובייקט שבו התרחשה השגיאה, אם ידוע.</help>
+        <label><!-- Object Type --></label>
+        <name>npsp__Object_Type__c</name>
+    </fields>
+    <fields>
+        <help>מציין אם השגיאה פורסמה ב-Chatter.</help>
+        <label><!-- Posted in Chatter --></label>
+        <name>npsp__Posted_in_Chatter__c</name>
+    </fields>
+    <fields>
+        <help>קישור אל הרשומה שבה התרחשה השגיאה, אם זמינה.</help>
+        <label><!-- Record URL --></label>
+        <name>npsp__Record_URL__c</name>
+    </fields>
+    <fields>
+        <help><!-- The Salesforce ID of the record associated with this error. --></help>
+        <label><!-- Related Record ID --></label>
+        <name>npsp__Related_Record_ID__c</name>
+    </fields>
+    <fields>
+        <help><!-- When selected, indicates that the record specified in Related Record ID will be reprocessed in the next scheduled process. If reprocessing succeeds, this field is then deselected. Applies to specific types of errors that occur during scheduled processes. --></help>
+        <label><!-- Retry Pending? --></label>
+        <name>npsp__Retry_Pending__c</name>
+    </fields>
+    <fields>
+        <help>מעקב המחסנית של השגיאה שהתרחשה, אם זמין בזמן הריצה.</help>
+        <label><!-- Stack Trace --></label>
+        <name>npsp__Stack_Trace__c</name>
+    </fields>
     <gender><!-- Masculine --></gender>
     <nameFieldLabel><!-- Error Number --></nameFieldLabel>
 </CustomObjectTranslation>

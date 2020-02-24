@@ -1,0 +1,11 @@
+<!--
+ - Created by gmayer on 7/26/2019.
+ -->
+
+<aura:documentation>
+    <aura:description>Documentation for WishOtherList</aura:description>
+    <aura:example name="WishOtherList" ref="WishOtherList" label="WishOtherList">
+        Wish Other List is a custom component built to retrieve the Wish Affiliation record types belonging to the
+        'Other' category, given a Case record id is provided within the page context that it is put in.
+    </aura:example>
+</aura:documentation>

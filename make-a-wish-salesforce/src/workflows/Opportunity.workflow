@@ -49,7 +49,7 @@
             <type>FieldUpdate</type>
         </actions>
         <active>false</active>
-        <booleanFilter>(1 OR 2) AND 3</booleanFilter>
+        <booleanFilter>(1 OR 2) AND (3 AND 4)</booleanFilter>
         <criteriaItems>
             <field>Opportunity.Amount</field>
             <operation>equals</operation>
@@ -64,7 +64,11 @@
             <operation>notEqual</operation>
             <value>0</value>
         </criteriaItems>
-        <description>Enable this rule if you would like the Fair Market Value copied to the Amount, if the Amount is zero or is blank.</description>
+        <criteriaItems>
+            <field>Opportunity.npsp__Fair_Market_Value__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>Enable this rule to copy the Fair Market Value to the Amount field, when the Amount is zero or blank.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
@@ -82,7 +86,7 @@
             <type>FieldUpdate</type>
         </actions>
         <active>false</active>
-        <description>Emails an acknowledgment to the Primary Contact when Email Acknowledgment is set.</description>
+        <description>Emails an acknowledgement to the Primary Contact for an Opportunity when the Acknowledgement Status is set to Email Acknowledgement Now.</description>
         <formula>TEXT(npsp__Acknowledgment_Status__c) = $Label.npsp__sendAcknowledgmentFireStatus &amp;&amp;  npsp__Primary_Contact__r.Email &lt;&gt; NULL &amp;&amp;  npsp__Primary_Contact__r.npsp__Do_Not_Contact__c &lt;&gt; True &amp;&amp;  npsp__Primary_Contact__r.HasOptedOutOfEmail &lt;&gt; True &amp;&amp;  npsp__Primary_Contact__r.npsp__Deceased__c &lt;&gt; True</formula>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>

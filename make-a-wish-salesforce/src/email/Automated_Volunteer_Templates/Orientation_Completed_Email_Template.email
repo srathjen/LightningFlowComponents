@@ -1,14 +1,14 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
 <![CDATA[<p class="MsoNormal"><span style="font-family: Lato, sans-serif; background: white;">{!Contact.FirstName}</span><span style="font-family: Lato, sans-serif; background: white;">,</span><span style="font-family: Lato, sans-serif;"><br>
 <br>
 <span style="background:white">Thank you for attending the Make-A-Wish Volunteer
 Orientation. Your next step to becoming a volunteer is to submit your volunteer
 application.</span><br>
 <br>
-<span style="background:white">At your convenience, please log in to the&nbsp;</span></span><span style="font-family:&quot;Lato&quot;,sans-serif"><a href="https://make-a-wish.force.com/"><span style="mso-bidi-font-family:Arial;background:white">Make-A-Wish Volunteer
-Center</span></a></span><span style="font-family: Lato, sans-serif; background: white;">&nbsp;and click&nbsp;<b>"Continue Process"</b>&nbsp;to complete our volunteer application. Upon completing
+<span style="background:white">At your convenience, please log in to the&nbsp;</span></span><span style="font-family:&quot;Lato&quot;,sans-serif"><span style="mso-bidi-font-family:Arial;background:white"><a href="{!$Label.Site_Url}">Make-A-Wish Volunteer
+Center</a></span></span><span style="font-family: Lato, sans-serif; background: white;">&nbsp;and click&nbsp;<b>"Continue Process"</b>&nbsp;to complete our volunteer application. Upon completing
 the application, we ask that you also read and electronically sign our Conflict
 of Interest &amp; Ethics Statement.</span><span style="font-family: Lato, sans-serif;"><br>
 <br>

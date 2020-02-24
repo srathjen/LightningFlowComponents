@@ -22,21 +22,25 @@
     <filter>
         <criteriaItems>
             <column>CREATED</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Integration User</value>
         </criteriaItems>
         <criteriaItems>
             <column>field_key</column>
+            <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Status</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
@@ -54,6 +58,8 @@
     <reportType>CaseAuditHistory</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <sortColumn>CREATED_DATE</sortColumn>
     <sortOrder>Desc</sortOrder>
     <timeFrameFilter>

@@ -24,16 +24,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Budget_Cash__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Budget_Inkind__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Id</field>
             <table>Case</table>
         </columns>
@@ -63,11 +53,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Budget_Total__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Age__c</field>
             <table>Case</table>
         </columns>
@@ -90,11 +75,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Actual_Total__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <displayNameOverride>Concept Approved</displayNameOverride>
             <field>Concept_Approval_Date__c</field>
             <table>Case</table>
@@ -103,16 +83,6 @@
             <checkedByDefault>false</checkedByDefault>
             <displayNameOverride>Wish Description</displayNameOverride>
             <field>Description</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Actual_Cash__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Actual_Inkind__c</field>
             <table>Case</table>
         </columns>
         <masterLabel>Cases</masterLabel>
@@ -136,11 +106,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Actual_In_Kind__c</field>
-            <table>Case.Wish_Expenses__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Budget_Approval_Status__c</field>
             <table>Case.Wish_Expenses__r</table>
         </columns>
         <columns>

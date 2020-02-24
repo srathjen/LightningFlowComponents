@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldSets>
+        <label><!-- BDE Entry FS --></label>
+        <name>npsp__BDE_Entry_FS</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- BDE List FS --></label>
+        <name>npsp__BDE_List_FS</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- Contact Merge Found FS --></label>
+        <name>npsp__ContactMergeFoundFS</name>
+    </fieldSets>
     <fields>
         <label><!-- About Me --></label>
         <name>About_Me__c</name>
@@ -49,6 +61,10 @@
         <name>Adult_Emergency_Contact__c</name>
     </fields>
     <fields>
+        <label><!-- Alerts --></label>
+        <name>Alerts__c</name>
+    </fields>
+    <fields>
         <label><!-- Already Wish Granted By MAW/Other Org --></label>
         <name>Already_wish_granted_by_MAW_Other_Org__c</name>
         <picklistValues>
@@ -77,8 +93,16 @@
         <name>Alternate_Phone__c</name>
     </fields>
     <fields>
+        <label><!-- Application Icon --></label>
+        <name>Application_Icon__c</name>
+    </fields>
+    <fields>
         <label><!-- Auto Qualified --></label>
         <name>Auto_Qualified__c</name>
+    </fields>
+    <fields>
+        <label><!-- BC Icon --></label>
+        <name>BC_Icon__c</name>
     </fields>
     <fields>
         <label><!-- B/C Expiration Date --></label>
@@ -217,6 +241,10 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Birth Month # --></label>
+        <name>Birth_Month_Number__c</name>
+    </fields>
+    <fields>
         <label><!-- Birth Month --></label>
         <name>Birth_Month__c</name>
         <picklistValues>
@@ -273,8 +301,20 @@
         <name>Birth_Year__c</name>
     </fields>
     <fields>
+        <label><!-- Birthday this Month or Next --></label>
+        <name>Birthday_this_Month_or_Next__c</name>
+    </fields>
+    <fields>
         <label><!-- Board Agreement Signed --></label>
         <name>Board_Agreement_Signed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Board Member Count --></label>
+        <name>Board_Member_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Board Member Icon --></label>
+        <name>Board_Member_Icon__c</name>
     </fields>
     <fields>
         <label><!-- Board Member --></label>
@@ -299,6 +339,10 @@
     <fields>
         <label><!-- COI Expiration Date --></label>
         <name>COI_Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- COI Icon --></label>
+        <name>COI_Icon__c</name>
     </fields>
     <fields>
         <label><!-- Cake/Candy --></label>
@@ -353,8 +397,20 @@
         <name>Contact_Account_Name__c</name>
     </fields>
     <fields>
+        <label><!-- Contact Owner Dupe Alert --></label>
+        <name>Contact_Owner_Dupe_Alert__c</name>
+    </fields>
+    <fields>
         <label><!-- County --></label>
         <name>County__c</name>
+    </fields>
+    <fields>
+        <label><!-- Created Date Test --></label>
+        <name>Created_Date_Test__c</name>
+    </fields>
+    <fields>
+        <label><!-- Created Date --></label>
+        <name>Created_Date__c</name>
     </fields>
     <fields>
         <help><!-- A &quot;!&quot; indicator will appear if (this wish participant / the wish child) turns 18- - additional signatures may be needed. Check the &quot;Signature obtained&quot; box on the contact record to turn this indicator off. --></help>
@@ -370,6 +426,10 @@
         <name>Current_Conditions__c</name>
     </fields>
     <fields>
+        <label><!-- DOB_Text --></label>
+        <name>DOB_Text__c</name>
+    </fields>
+    <fields>
         <label><!-- Date Of Wish Assigned --></label>
         <name>Date_of_Wish_Assigned__c</name>
     </fields>
@@ -380,6 +440,10 @@
     <fields>
         <label><!-- Deceased Date --></label>
         <name>Deceased_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Deceased Icon --></label>
+        <name>Deceased_Icon__c</name>
     </fields>
     <fields>
         <label><!-- Department --></label>
@@ -528,6 +592,10 @@
     <fields>
         <label><!-- Hidden Other Phone --></label>
         <name>HiddenOtherPhone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Chapter Name --></label>
+        <name>Hidden_Chapter_Name__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Contact Full Name --></label>
@@ -682,6 +750,11 @@
         <name>Hidden_Wish_Child_Id__c</name>
     </fields>
     <fields>
+        <label><!-- Wish Form --></label>
+        <name>Hidden_Wish_Form_Id__c</name>
+        <relationshipLabel><!-- Contacts --></relationshipLabel>
+    </fields>
+    <fields>
         <label><!-- Hidden Work Phone --></label>
         <name>Hidden_Work_Phone__c</name>
     </fields>
@@ -696,6 +769,10 @@
     <fields>
         <label><!-- Hobby --></label>
         <name>Hobby__c</name>
+    </fields>
+    <fields>
+        <label><!-- Household Address --></label>
+        <name>Household_Address__c</name>
     </fields>
     <fields>
         <label><!-- How Did You Hear About Make-A-Wish? --></label>
@@ -738,7 +815,7 @@
         <name>How_did_you_know_MAWA_Other_Notes__c</name>
     </fields>
     <fields>
-        <label><!-- Primary ICD-10 Code --></label>
+        <label><!-- Primary Diagnosis ICD-10 Code --></label>
         <name>ICD_10_Code__c</name>
         <relationshipLabel><!-- Contacts --></relationshipLabel>
     </fields>
@@ -778,6 +855,10 @@ and the date it was or will be granted. --></help>
         <name>Inactivation_Date__c</name>
     </fields>
     <fields>
+        <label><!-- Inactive Medical Professional Count --></label>
+        <name>Inactive_Medical_Professional_Count__c</name>
+    </fields>
+    <fields>
         <label><!-- Inquiry/Referral Method --></label>
         <name>Inquiry_Referral_Method__c</name>
         <picklistValues>
@@ -800,6 +881,11 @@ and the date it was or will be granted. --></help>
             <masterLabel>Phone</masterLabel>
             <translation><!-- Phone --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Intake Manager For Dupe Alert --></label>
+        <name>Intake_Manager_For_Dupe_Alert__c</name>
+        <relationshipLabel><!-- Contacts --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- Would Your Company Be Interested MAW --></label>
@@ -1000,6 +1086,19 @@ and the date it was or will be granted. --></help>
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Medical Professional Count --></label>
+        <name>Medical_Professional_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Medical Professional Icon --></label>
+        <name>Medical_Professional_Icon__c</name>
+    </fields>
+    <fields>
+        <help><!-- To change the status, create or update this contact&apos;s related &apos;Organization Affiliation&apos; records to a status of &apos;Active&apos; or &apos;Inactive&apos;. Note: this is the record or records related to the Chapter not a health treatment facility. --></help>
+        <label><!-- Medical Professional Status --></label>
+        <name>Medical_Professional_Status__c</name>
+    </fields>
+    <fields>
         <label><!-- Middle Name --></label>
         <name>Middle_Name__c</name>
     </fields>
@@ -1074,6 +1173,18 @@ and the date it was or will be granted. --></help>
             <masterLabel>Training</masterLabel>
             <translation><!-- Training --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Orientation Completed Date --></label>
+        <name>Orientation_Completed_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Orientation Icon --></label>
+        <name>Orientation_Icon__c</name>
+    </fields>
+    <fields>
+        <label><!-- Orientation Status --></label>
+        <name>Orientation_Status__c</name>
     </fields>
     <fields>
         <help><!-- Last time USPS verification was attempted --></help>
@@ -1201,7 +1312,7 @@ and the date it was or will be granted. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Provided additional information --></label>
+        <label><!-- MP Provided additional information (DV) --></label>
         <name>Provided_additional_information__c</name>
     </fields>
     <fields>
@@ -1639,10 +1750,6 @@ and the date it was or will be granted. --></help>
         <label><!-- Race/Ethnicity --></label>
         <name>Race_Ethnicity__c</name>
         <picklistValues>
-            <masterLabel>American Indian or Alaska Native</masterLabel>
-            <translation><!-- American Indian or Alaska Native --></translation>
-        </picklistValues>
-        <picklistValues>
             <masterLabel>Asian</masterLabel>
             <translation><!-- Asian --></translation>
         </picklistValues>
@@ -1655,20 +1762,24 @@ and the date it was or will be granted. --></help>
             <translation><!-- Hispanic or Latino --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Native Hawaiian/Other Pacific Islander</masterLabel>
-            <translation><!-- Native Hawaiian/Other Pacific Islander --></translation>
+            <masterLabel>I choose not to self-identify</masterLabel>
+            <translation><!-- I choose not to self-identify --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Not Reported</masterLabel>
-            <translation><!-- Not Reported --></translation>
+            <masterLabel>Native American or Alaska Native</masterLabel>
+            <translation><!-- Native American or Alaska Native --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Other</masterLabel>
-            <translation><!-- Other --></translation>
+            <masterLabel>Native Hawaiian or Other Pacific Islander</masterLabel>
+            <translation><!-- Native Hawaiian or Other Pacific Islander --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>White or Caucasian</masterLabel>
-            <translation><!-- White or Caucasian --></translation>
+            <masterLabel>Two or More Races</masterLabel>
+            <translation><!-- Two or More Races --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>White</masterLabel>
+            <translation><!-- White --></translation>
         </picklistValues>
     </fields>
     <fields>
@@ -1797,6 +1908,10 @@ and the date it was or will be granted. --></help>
         <name>Referrer_Zip__c</name>
     </fields>
     <fields>
+        <label><!-- Referrer --></label>
+        <name>Referrer__c</name>
+    </fields>
+    <fields>
         <label><!-- Chapter Name --></label>
         <name>Region_Chapter__c</name>
         <relationshipLabel><!-- Contacts (Region Chapter) --></relationshipLabel>
@@ -1807,6 +1922,11 @@ and the date it was or will be granted. --></help>
         <label><!-- Region Code --></label>
         <name>Region_Code__c</name>
         <relationshipLabel><!-- Contacts --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Displays date of orientation session. --></help>
+        <label><!-- Registered Orientation Date --></label>
+        <name>Registered_Orientation_Date__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Related Contacts --></label>
@@ -2053,7 +2173,7 @@ and the date it was or will be granted. --></help>
         <name>Self_describe_comment_box__c</name>
     </fields>
     <fields>
-        <label><!-- Short Description --></label>
+        <label><!-- Short Description of Primary Diagnosis --></label>
         <name>Short_Description__c</name>
     </fields>
     <fields>
@@ -2605,6 +2725,10 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Sum of Volunteer Ratings --></label>
+        <name>Sum_of_Volunteer_Ratings__c</name>
+    </fields>
+    <fields>
         <label><!-- TV Show --></label>
         <name>TV_Show__c</name>
     </fields>
@@ -2734,6 +2858,10 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Unique Record Count --></label>
+        <name>Unique_Record_Count__c</name>
+    </fields>
+    <fields>
         <label><!-- Use As Household Address --></label>
         <name>Use_as_Household_Address__c</name>
     </fields>
@@ -2742,8 +2870,20 @@ provide contact information for each site on which you are active. --></help>
         <name>Valid_D_L__c</name>
     </fields>
     <fields>
+        <label><!-- Volunteer Average Rating --></label>
+        <name>Volunteer_Average_Rating__c</name>
+    </fields>
+    <fields>
+        <label><!-- Volunteer Count --></label>
+        <name>Volunteer_Count__c</name>
+    </fields>
+    <fields>
         <label><!-- Volunteer Handbook Received --></label>
         <name>Volunteer_Handbook_Received__c</name>
+    </fields>
+    <fields>
+        <label><!-- Volunteer Icon --></label>
+        <name>Volunteer_Icon__c</name>
     </fields>
     <fields>
         <help><!-- This field should remain blank for Migrated Records. --></help>
@@ -2823,8 +2963,16 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Volunteer Since --></label>
+        <label><!-- Volunteer Since (Deprecated) --></label>
         <name>Volunteer_Since__c</name>
+    </fields>
+    <fields>
+        <label><!-- Volunteer Status --></label>
+        <name>Volunteer_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Volunteer Since --></label>
+        <name>Volunteered_Since_Rollup__c</name>
     </fields>
     <fields>
         <label><!-- WalkMe Engagement Score --></label>
@@ -2895,6 +3043,14 @@ provide contact information for each site on which you are active. --></help>
         <name>When_thinking_some_of_my_wish_ideas_were__c</name>
     </fields>
     <fields>
+        <label><!-- Wish Child Count --></label>
+        <name>Wish_Child_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Child Icon --></label>
+        <name>Wish_Child_Icon__c</name>
+    </fields>
+    <fields>
         <label><!-- Wish Child Id Hidden --></label>
         <name>Wish_Child_Id_Hidden__c</name>
         <relationshipLabel><!-- Contacts --></relationshipLabel>
@@ -2903,6 +3059,14 @@ provide contact information for each site on which you are active. --></help>
         <help><!-- Optimized image size- width: 115px by height: 105px --></help>
         <label><!-- Wish Child Photo --></label>
         <name>Wish_Child_Photo__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Family Count --></label>
+        <name>Wish_Family_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Family Icon --></label>
+        <name>Wish_Family_Icon__c</name>
     </fields>
     <fields>
         <label><!-- Wish Family Type --></label>
@@ -3097,7 +3261,8 @@ provide contact information for each site on which you are active. --></help>
         <name>is_Active_Volunteer__c</name>
     </fields>
     <fields>
-        <label><!-- Hidden is Application --></label>
+        <help><!-- Tracks the status of a volunteer&apos;s Role selection. Previously used to track Application Status (prior to 2020). --></help>
+        <label><!-- Role Selection Status --></label>
         <name>is_Application__c</name>
         <picklistValues>
             <masterLabel>Approved</masterLabel>
@@ -3106,6 +3271,10 @@ provide contact information for each site on which you are active. --></help>
         <picklistValues>
             <masterLabel>Complete</masterLabel>
             <translation><!-- Complete --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DocuSign Pending</masterLabel>
+            <translation><!-- DocuSign Pending --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Fully Submit</masterLabel>
@@ -3587,6 +3756,10 @@ provide contact information for each site on which you are active. --></help>
         <label><!-- Address Override --></label>
         <name>npsp__is_Address_Override__c</name>
     </fields>
+    <fields>
+        <label><!-- # of Feedback Records --></label>
+        <name>of_Feedback_Records__c</name>
+    </fields>
     <layouts>
         <layout>Board Member</layout>
         <sections>
@@ -3627,42 +3800,38 @@ provide contact information for each site on which you are active. --></help>
         </sections>
     </layouts>
     <layouts>
-        <layout>Board Member Chapter Staff Layout</layout>
+        <layout>Contact Layout</layout>
         <sections>
-            <label><!-- Additional Info --></label>
-            <section>Additional Info</section>
+            <label><!-- Contact Details --></label>
+            <section>Contact Details</section>
         </sections>
         <sections>
-            <label><!-- Contact Information --></label>
-            <section>Contact Information</section>
+            <label><!-- Donation Information --></label>
+            <section>Donation Information</section>
         </sections>
         <sections>
-            <label><!-- Emergency Contact Information --></label>
-            <section>Emergency Contact Information</section>
+            <label><!-- Donation Totals --></label>
+            <section>Donation Totals</section>
         </sections>
         <sections>
-            <label><!-- Employment Information --></label>
-            <section>Employment Information</section>
+            <label><!-- Household Address --></label>
+            <section>Household Address</section>
         </sections>
         <sections>
-            <label><!-- Engagement Details --></label>
-            <section>Engagement Details</section>
+            <label><!-- Household Donation Info --></label>
+            <section>Household Donation Info</section>
         </sections>
         <sections>
-            <label><!-- Language Skills --></label>
-            <section>Language Skills</section>
+            <label><!-- Membership Information --></label>
+            <section>Membership Information</section>
         </sections>
         <sections>
-            <label><!-- Professional Skills --></label>
-            <section>Professional Skills</section>
+            <label><!-- Misc --></label>
+            <section>Misc</section>
         </sections>
         <sections>
-            <label><!-- System Information --></label>
-            <section>System Information</section>
-        </sections>
-        <sections>
-            <label><!-- Volunteer Details --></label>
-            <section>Volunteer Details</section>
+            <label><!-- Soft Credit Total --></label>
+            <section>Soft Credit Total</section>
         </sections>
     </layouts>
     <layouts>
@@ -3671,78 +3840,12 @@ provide contact information for each site on which you are active. --></help>
             <label><!-- Contact Details --></label>
             <section>Contact Details</section>
         </sections>
-        <sections>
-            <label><!-- Household Address --></label>
-            <section>Household Address</section>
-        </sections>
     </layouts>
     <layouts>
         <layout>Medical Professional - Volunteer</layout>
         <sections>
             <label><!-- Contact Details --></label>
             <section>Contact Details</section>
-        </sections>
-        <sections>
-            <label><!-- Household Address --></label>
-            <section>Household Address</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Medical Professional Chapter Staff Layout</layout>
-        <sections>
-            <label><!-- Contact Details --></label>
-            <section>Contact Details</section>
-        </sections>
-        <sections>
-            <label><!-- Household Address --></label>
-            <section>Household Address</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Volunteer Contact Chapter Staff Layout</layout>
-        <sections>
-            <label><!-- Additional Info --></label>
-            <section>Additional Info</section>
-        </sections>
-        <sections>
-            <label><!-- Attachments --></label>
-            <section>Attachments</section>
-        </sections>
-        <sections>
-            <label><!-- Contact Information --></label>
-            <section>Contact Information</section>
-        </sections>
-        <sections>
-            <label><!-- Emergency Contact Information --></label>
-            <section>Emergency Contact Information</section>
-        </sections>
-        <sections>
-            <label><!-- Employment Information --></label>
-            <section>Employment Information</section>
-        </sections>
-        <sections>
-            <label><!-- Engagement Details --></label>
-            <section>Engagement Details</section>
-        </sections>
-        <sections>
-            <label><!-- Language Skills --></label>
-            <section>Language Skills</section>
-        </sections>
-        <sections>
-            <label><!-- Professional Skills --></label>
-            <section>Professional Skills</section>
-        </sections>
-        <sections>
-            <label><!-- System Information --></label>
-            <section>System Information</section>
-        </sections>
-        <sections>
-            <label><!-- Volunteer Details --></label>
-            <section>Volunteer Details</section>
-        </sections>
-        <sections>
-            <label><!-- Volunteer Role --></label>
-            <section>Volunteer Role</section>
         </sections>
     </layouts>
     <layouts>
@@ -3759,8 +3862,8 @@ provide contact information for each site on which you are active. --></help>
             <section>Additional Info</section>
         </sections>
         <sections>
-            <label><!-- Attachments --></label>
-            <section>Attachments</section>
+            <label><!-- Address Information --></label>
+            <section>Address Information</section>
         </sections>
         <sections>
             <label><!-- Contact Information --></label>
@@ -3773,10 +3876,6 @@ provide contact information for each site on which you are active. --></help>
         <sections>
             <label><!-- Employment Information --></label>
             <section>Employment Information</section>
-        </sections>
-        <sections>
-            <label><!-- Engagement Details --></label>
-            <section>Engagement Details</section>
         </sections>
         <sections>
             <label><!-- Language Skills --></label>
@@ -3795,8 +3894,8 @@ provide contact information for each site on which you are active. --></help>
             <section>Volunteer Details</section>
         </sections>
         <sections>
-            <label><!-- Volunteer Role --></label>
-            <section>Volunteer Role</section>
+            <label><!-- Volunteer Role &amp; Onboarding Status --></label>
+            <section>Volunteer Role &amp; Onboarding Status</section>
         </sections>
     </layouts>
     <layouts>
@@ -3806,20 +3905,16 @@ provide contact information for each site on which you are active. --></help>
             <section>Additional Info</section>
         </sections>
         <sections>
-            <label><!-- Attachments --></label>
-            <section>Attachments</section>
+            <label><!-- Address Information --></label>
+            <section>Address Information</section>
         </sections>
         <sections>
-            <label><!-- Contact Information --></label>
-            <section>Contact Information</section>
+            <label><!-- Household Address --></label>
+            <section>Household Address</section>
         </sections>
         <sections>
-            <label><!-- Medical Information Section --></label>
-            <section>Medical Information Section</section>
-        </sections>
-        <sections>
-            <label><!-- My Wish --></label>
-            <section>My Wish</section>
+            <label><!-- Preferred Family Contact Information --></label>
+            <section>Preferred Family Contact Information</section>
         </sections>
         <sections>
             <label><!-- Publicity --></label>
@@ -3830,24 +3925,12 @@ provide contact information for each site on which you are active. --></help>
             <section>Race/Ethnicity</section>
         </sections>
         <sections>
-            <label><!-- Referral Source Information --></label>
-            <section>Referral Source Information</section>
+            <label><!-- Wish Child Contact Information --></label>
+            <section>Wish Child Contact Information</section>
         </sections>
         <sections>
             <label><!-- Wish Child Details --></label>
             <section>Wish Child Details</section>
-        </sections>
-        <sections>
-            <label><!-- Wish Child Photo --></label>
-            <section>Wish Child Photo</section>
-        </sections>
-        <sections>
-            <label><!-- Wish Child&apos;s Favorites --></label>
-            <section>Wish Child&apos;s Favorites</section>
-        </sections>
-        <sections>
-            <label><!-- Wish Child&apos;s Other Favorites --></label>
-            <section>Wish Child&apos;s Other Favorites</section>
         </sections>
     </layouts>
     <layouts>
@@ -3865,63 +3948,8 @@ provide contact information for each site on which you are active. --></help>
             <section>Medical Information Section</section>
         </sections>
         <sections>
-            <label><!-- My Wish --></label>
-            <section>My Wish</section>
-        </sections>
-        <sections>
             <label><!-- WIsh Child Details --></label>
             <section>WIsh Child Details</section>
-        </sections>
-        <sections>
-            <label><!-- Wish Child&apos;s Favorites --></label>
-            <section>Wish Child&apos;s Favorites</section>
-        </sections>
-        <sections>
-            <label><!-- Wish Child&apos;s Other Favorites --></label>
-            <section>Wish Child&apos;s Other Favorites</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Wish Child Chapter Staff Layout</layout>
-        <sections>
-            <label><!-- Additional Info --></label>
-            <section>Additional Info</section>
-        </sections>
-        <sections>
-            <label><!-- Attachments --></label>
-            <section>Attachments</section>
-        </sections>
-        <sections>
-            <label><!-- Contact Information --></label>
-            <section>Contact Information</section>
-        </sections>
-        <sections>
-            <label><!-- Medical Information Section --></label>
-            <section>Medical Information Section</section>
-        </sections>
-        <sections>
-            <label><!-- My Wish --></label>
-            <section>My Wish</section>
-        </sections>
-        <sections>
-            <label><!-- Publicity --></label>
-            <section>Publicity</section>
-        </sections>
-        <sections>
-            <label><!-- Race/Ethnicity --></label>
-            <section>Race/Ethnicity</section>
-        </sections>
-        <sections>
-            <label><!-- Referral Source Information --></label>
-            <section>Referral Source Information</section>
-        </sections>
-        <sections>
-            <label><!-- Wish Child Details --></label>
-            <section>Wish Child Details</section>
-        </sections>
-        <sections>
-            <label><!-- Wish Child Photo --></label>
-            <section>Wish Child Photo</section>
         </sections>
         <sections>
             <label><!-- Wish Child&apos;s Favorites --></label>
@@ -3970,42 +3998,156 @@ provide contact information for each site on which you are active. --></help>
             <section>Household Address</section>
         </sections>
     </layouts>
-    <layouts>
-        <layout>Wish Family Chapter Staff Layout</layout>
-        <sections>
-            <label><!-- Contact Details --></label>
-            <section>Contact Details</section>
-        </sections>
-        <sections>
-            <label><!-- Driver Information Section --></label>
-            <section>Driver Information Section</section>
-        </sections>
-        <sections>
-            <label><!-- Employment Information --></label>
-            <section>Employment Information</section>
-        </sections>
-        <sections>
-            <label><!-- Household Address --></label>
-            <section>Household Address</section>
-        </sections>
-    </layouts>
+    <quickActions>
+        <label><!-- Additional Info - BM VC --></label>
+        <name>Additional_Info_BM_VC</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Additional Info - WC --></label>
+        <name>Additional_Info_WC</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Wish Child Fields --></label>
+        <name>Contact_Fields</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Driver Info - WF --></label>
+        <name>Driver_Info_WF</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Emergency Contact Info - BM VC --></label>
+        <name>Emergency_Contact_Info_BM_VC</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Employment Info - BM VC --></label>
+        <name>Employment_Info_BM_VC</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Employment Info - WF --></label>
+        <name>Employment_Info_WF</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Engagement --></label>
+        <name>Engagement</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Engagement Details - BM VC --></label>
+        <name>Engagement_Details_BM_VC</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Language Skills - BM VC --></label>
+        <name>Language_Skills_BM_VC</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Log a Call --></label>
+        <name>Log_a_Call</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Medical --></label>
+        <name>Medical</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Medical Information --></label>
+        <name>Medical_Information</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Medical Professional Info --></label>
+        <name>Medical_Professional_Info</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- My Wish --></label>
+        <name>My_Wish</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New Task --></label>
+        <name>New_Task</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New Volunteer Feedback --></label>
+        <name>New_Volunteer_Feedback</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Onboarding --></label>
+        <name>Onboarding</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Preferred Contact --></label>
+        <name>Preferred_Contact</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Professional Skills - BM VC --></label>
+        <name>Professional_Skills_BM_VC</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Publicity --></label>
+        <name>Publicity</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Race - WC --></label>
+        <name>Race_WC</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Referral Source Information --></label>
+        <name>Referral_Source_Information</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Travel Restriction --></label>
+        <name>Travel_Restriction</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Volunteer Details - BM VC --></label>
+        <name>Volunteer_Details_BM_VC</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Volunteer Engagement Details --></label>
+        <name>Volunteer_Engagement_Details</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Wish Child Information --></label>
+        <name>Wish_Child_Information</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Wish Child Photo --></label>
+        <name>Wish_Child_Photo</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Wish Child&apos;s Favorites --></label>
+        <name>Wish_Child_s_Favorites</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Wish Child&apos;s Other Favorites --></label>
+        <name>Wish_Child_s_Other_Favorites</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Wish Family Info --></label>
+        <name>Wish_Family_Info</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Wish Survey Contact Information --></label>
+        <name>Wish_Survey_Contact_Information</name>
+    </quickActions>
     <recordTypes>
+        <description><!-- It will display the board member information --></description>
         <label><!-- Board Member --></label>
         <name>Board_Member</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- It will display the information about the medical professional. --></description>
         <label><!-- Medical Professional --></label>
         <name>Medical_Professional</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- It will display the information about the volunteer. --></description>
         <label><!-- Volunteer Contact --></label>
         <name>Volunteer_Contact</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- It will display the child related information. --></description>
         <label><!-- Wish Child --></label>
         <name>Wish_Child</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- It will display the wish kid family related information. --></description>
         <label><!-- Wish Family --></label>
         <name>Wish_Family</name>
     </recordTypes>
@@ -4016,6 +4158,10 @@ provide contact information for each site on which you are active. --></help>
     <validationRules>
         <errorMessage><!-- The birthdate entered occurs in the future. Please re-enter the birthdate. --></errorMessage>
         <name>Contact_Birthdate_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please remove the value from Wish Form field. --></errorMessage>
+        <name>Contact_Clone_Validation</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- Please enter a past date for Deceased Date. --></errorMessage>

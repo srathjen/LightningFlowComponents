@@ -3,7 +3,7 @@
     <caseAccessLevel>Read</caseAccessLevel>
     <contactAccessLevel>Edit</contactAccessLevel>
     <mayForecastManagerShare>false</mayForecastManagerShare>
-    <name>Missouri- Chapter</name>
+    <name>Missouri &amp; Kansas - Chapter</name>
     <opportunityAccessLevel>Edit</opportunityAccessLevel>
     <parentRole>National_Staff</parentRole>
 </Role>

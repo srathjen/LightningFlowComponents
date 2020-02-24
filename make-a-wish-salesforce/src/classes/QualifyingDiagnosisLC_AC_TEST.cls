@@ -17,6 +17,7 @@ public class QualifyingDiagnosisLC_AC_TEST {
         insert iCDCode;
         List<Medical_Questions__c> medicalQuestion = OrientationandTrainingUtil.CreateMedicalQuestion(condistionDescription.Id);        
         insert medicalQuestion;  
+		OrientationandTrainingUtil.CreateAmericaAccount();
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
         newLead.PD_ICD_Code__c = iCDCode.Id;
@@ -25,6 +26,8 @@ public class QualifyingDiagnosisLC_AC_TEST {
         Case DVCase = new Case(Lead__c = newLead.Id, Subject = 'Eligibility Review', Status = 'New');
         insert DVCase;
         System.assertEquals(newLead.PD_ICD_Code__c, iCDCode.Id, 'ICD Code doesnot match');
+        QualifyingDiagnosisLC_AC.getIcdCodeInfo(iCDCode.Name);
+        QualifyingDiagnosisLC_AC.getConditionDescInfo('Malignant Melanoma');
         QualifyingDiagnosisLC_AC.getMedicalInformation(DVCase.Id);
         QualifyingDiagnosisLC_AC.updateQualifyingDiagnosis(condistionDescription.Name, iCDCode.Id, newLead.Id,condistionDescription.PR_Diagnosis__c);
     }

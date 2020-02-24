@@ -3,43 +3,72 @@
     <caseValues>
         <caseType>Nominative</caseType>
         <plural>false</plural>
-        <value><!-- Batch --></value>
+        <value>Batch</value>
     </caseValues>
     <caseValues>
         <caseType>Nominative</caseType>
         <plural>true</plural>
-        <value><!-- Batch --></value>
+        <value>Batches</value>
     </caseValues>
     <caseValues>
         <caseType>Accusative</caseType>
         <plural>false</plural>
-        <value><!-- Batch --></value>
+        <value>Batch</value>
     </caseValues>
     <caseValues>
         <caseType>Accusative</caseType>
         <plural>true</plural>
-        <value><!-- Batch --></value>
+        <value>Batches</value>
     </caseValues>
     <caseValues>
         <caseType>Genitive</caseType>
         <plural>false</plural>
-        <value><!-- Batch --></value>
+        <value>Batches</value>
     </caseValues>
     <caseValues>
         <caseType>Genitive</caseType>
         <plural>true</plural>
-        <value><!-- Batch --></value>
+        <value>Batches</value>
     </caseValues>
     <caseValues>
         <caseType>Dative</caseType>
         <plural>false</plural>
-        <value><!-- Batch --></value>
+        <value>Batch</value>
     </caseValues>
     <caseValues>
         <caseType>Dative</caseType>
         <plural>true</plural>
-        <value><!-- Batch --></value>
+        <value>Batches</value>
     </caseValues>
-    <gender><!-- Neuter --></gender>
-    <nameFieldLabel><!-- Batch Name --></nameFieldLabel>
+    <fieldSets>
+        <label><!-- BatchDetailView --></label>
+        <name>npsp__BatchDetailView</name>
+    </fieldSets>
+    <fields>
+        <label><!-- Batch Status --></label>
+        <name>npsp__Batch_Status__c</name>
+        <picklistValues>
+            <masterLabel>Complete</masterLabel>
+            <translation>Abgeleistet</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation>In Bearbeitung</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>npsp__Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Items --></label>
+        <name>npsp__Number_of_Items__c</name>
+    </fields>
+    <fields>
+        <help>API-Name des Objekts, von dem dies ein Batch ist</help>
+        <label><!-- Object Name --></label>
+        <name>npsp__Object_Name__c</name>
+    </fields>
+    <gender>Masculine</gender>
+    <nameFieldLabel>Batchname</nameFieldLabel>
 </CustomObjectTranslation>

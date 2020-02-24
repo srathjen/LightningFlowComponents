@@ -1,0 +1,100 @@
+<aura:component implements="flexipage:availableForAllPageTypes" controller="LightningDataTableController">
+    
+    <!-- attributes -->
+    <aura:attribute name="mydata" type="Object"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="objectName" type="String"/>
+    <aura:attribute name="fieldsetName" type="String"/>
+    <aura:attribute name="typeOfSignature" type="String"/>
+    <aura:attribute name="sortedBy" type="String" default="Name"/>
+    <aura:attribute name="sortedDirection" type="String" default="asc"/>
+    <aura:attribute name="caseId" type="Id"/>
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:attribute name="showChangeFormModal" type="Boolean" default="false" />
+    <aura:attribute name="selectedLookUpRecord" type="sObject" />
+    <aura:attribute name="rowId" type="String" />
+    <aura:attribute name="rowStatus" type="String" />
+    <aura:attribute name="showChangeSignerModal" type="Boolean" default="false" />
+    <aura:attribute name="showUploadFileModal" type="Boolean" default="false" />
+    <aura:attribute name="showESendSignModal" type="Boolean" default="false" />
+    <aura:attribute name="showDeleteModal" type="Boolean" default="false" />
+    <aura:attribute name="errors" type="String" default="xyz"/>
+    <aura:attribute name="wishReqSignRecord" type="Wish_Required_Signature__c" default="{ 'sobjectType': 'Wish_Required_Signature__c', 'Signed_Date__c': '', 'Status__c': 'Signed' }" />
+    <aura:attribute name="showVoidedForms" type="Boolean" default="false"/>
+    <aura:attribute name="wish" type="Case"/>
+    <aura:attribute name="showPrintOfflineModal" type="Boolean" default="false" />
+    
+    <!-- handlers-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:method name="refreshMethod" action="{!c.doInit}" access="PUBLIC"/> 
+    <aura:handler name="change" value="{!v.errors}" action="{!c.handleError}"/>
+    <aura:handler name="change" value="{!v.showVoidedForms}" action="{!c.doInit}" />
+    <aura:handler name="refreshEvent" event="c:refreshDataTable" action="{!c.handleRefresh}"/>
+    <lightning:workspaceAPI aura:id="workspace"/>
+    
+    
+    <!-- Body -->  
+    <aura:if isTrue="{!v.Spinner}">
+        <lightning:spinner variant="brand" size="medium" aura:id="mySpinner"/>
+    </aura:if>
+    <lightning:layout>
+        <lightning:layoutItem flexibility="auto" size="4" padding="around-small">
+            <aura:if isTrue="{!v.typeOfSignature == 'Medical'}">
+                <div class="custom-box slds-float_left">
+                    <span lightning-input_input="" class="slds-text-body_regular slds-form-element__label">Wish Clearance Needed : {!v.wish.Wish_Clearance_Needed__c}</span>
+                </div>
+            </aura:if>
+        </lightning:layoutItem>
+        <lightning:layoutItem flexibility="auto" size="5" padding="around-small">
+        </lightning:layoutItem>
+        <lightning:layoutItem flexibility="auto" size="3" padding="around-small">
+            <div class="custom-box slds-float_right">
+                <lightning:input type="toggle" label="Show Voided Forms" name="input2" checked="{!v.showVoidedForms}" messageToggleActive="" messageToggleInactive="" />
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+    <lightning:datatable data="{! v.mydata }" 
+                         columns="{! v.mycolumns }" 
+                         keyField="Id"
+                         hideCheckboxColumn="true"
+                         onsort="{!c.updateColumnSorting}"
+                         sortedBy="{!v.sortedBy}"  
+                         onrowaction="{! c.handleRowAction }"
+                         sortedDirection="{!v.sortedDirection}"/>
+    
+    <!-- Delete Modal Begin -->
+    <aura:if isTrue="{!v.showDeleteModal}">
+        <c:DeleteWishSignatures WRSId="{!v.rowId}" showDeleteModal="{!v.showDeleteModal}" errors="{!v.errors}"/>
+    </aura:if>
+    
+    
+    <!-- Change Form Modal Begin -->
+    <aura:if isTrue="{!v.showChangeFormModal}">
+        <c:ChangeForm WRSId="{!v.rowId}" showChangeFormModal="{!v.showChangeFormModal}" selectedLookUpRecord="{!v.selectedLookUpRecord}"
+                      typeOfSignature="{!v.typeOfSignature}"  caseId="{!v.caseId}" errors="{!v.errors}" />
+    </aura:if>
+    
+    <!-- Change Signer Modal Begin -->
+    <aura:if isTrue="{!v.showChangeSignerModal}">
+        <c:ChangeSigner WRSId="{!v.rowId}" showChangeSignerModal="{!v.showChangeSignerModal}" selectedLookUpRecord="{!v.selectedLookUpRecord}"
+                        typeOfSignature="{!v.typeOfSignature}"  caseId="{!v.caseId}" errors="{!v.errors}" />
+    </aura:if>
+    
+    <!-- Upload file Modal Begin -->
+    <aura:if isTrue="{!v.showUploadFileModal}">
+        <c:UploadSignedCopy WRSId="{!v.rowId}" showUploadFileModal="{!v.showUploadFileModal}" errors="{!v.errors}" wishReqSignRecord="{!v.wishReqSignRecord}"/>
+    </aura:if>
+    
+     <!-- Send For E-Signature Modal Begin -->
+    <aura:if isTrue="{!v.showESendSignModal}">
+        <c:SendForSignature WRSId="{!v.rowId}" caseId="{!v.caseId}" showESendSignModal="{!v.showESendSignModal}" errors="{!v.errors}" wishReqSignRecord="{!v.wishReqSignRecord}"
+                            rowStatus="{!v.rowStatus}"   selectedLookUpRecord="{!v.selectedLookUpRecord}" typeOfSignature="{!v.typeOfSignature}" />
+    </aura:if>
+
+    <!-- Print for Offline Modal Begin -->
+    <aura:if isTrue="{!v.showPrintOfflineModal}">
+        <c:PrintForOffline WRSId="{!v.rowId}" caseId="{!v.caseId}" showPrintOfflineModal="{!v.showPrintOfflineModal}" errors="{!v.errors}" />
+    </aura:if>
+    
+</aura:component>

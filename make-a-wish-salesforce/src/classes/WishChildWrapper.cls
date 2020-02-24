@@ -2,6 +2,7 @@
 Author      : MST Solutions
 Date        : 
 Description : 
+1. 01/09/2020 - Manoj      - SIW-287 : Added new fields to insert values in lead records upon submission of DV form.
 *******************************************************************************************************************/
 public class WishChildWrapper {
     public String describePatient {get; set;}     
@@ -54,6 +55,12 @@ public class WishChildWrapper {
     Public String wishChildEligibilityNotes {get;set;} 
     public List<String> communicationList {get;set;}
     public String selectedItemValue {get; set;}
+    /*SIW-287 Start*/
+    public String unplannedHospitalAdmission{get;set;}
+    public Integer numberOfHospitalAdmission{get;set;}
+    public String admittingDiagnosis{get;set;}
+    public String ifICUAdmission{get;set;}
+    /*SIW-287 End*/
     public WishChildWrapper(){
         communicationList = new List<String>();       
     }

@@ -169,11 +169,13 @@
     <filter>
         <criteriaItems>
             <column>Case.Migrated_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>
@@ -191,6 +193,8 @@
     <reportType>CaseList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <sortColumn>Case.Closed_Date__c</sortColumn>
     <sortOrder>Desc</sortOrder>
     <timeFrameFilter>

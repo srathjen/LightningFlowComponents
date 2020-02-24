@@ -21,6 +21,8 @@
     <reportType>Affiliations_with_Volunteers__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>npe5__Affiliation__c$CreatedDate</dateColumn>
         <interval>INTERVAL_CURRENT</interval>

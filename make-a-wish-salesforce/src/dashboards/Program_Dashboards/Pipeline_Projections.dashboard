@@ -15,18 +15,6 @@
                 <sortBy>RowLabelAscending</sortBy>
             </dashboardTableColumn>
             <dashboardTableColumn>
-                <aggregateType>Sum</aggregateType>
-                <calculatePercent>false</calculatePercent>
-                <column>Case.Budget_Cash__c</column>
-                <showTotal>true</showTotal>
-            </dashboardTableColumn>
-            <dashboardTableColumn>
-                <aggregateType>Sum</aggregateType>
-                <calculatePercent>false</calculatePercent>
-                <column>Case.Actual_Cash__c</column>
-                <showTotal>true</showTotal>
-            </dashboardTableColumn>
-            <dashboardTableColumn>
                 <calculatePercent>false</calculatePercent>
                 <column>FORMULA1</column>
                 <showTotal>true</showTotal>
@@ -34,6 +22,7 @@
             <displayUnits>Auto</displayUnits>
             <drillEnabled>false</drillEnabled>
             <drillToDetailEnabled>false</drillToDetailEnabled>
+            <groupingSortProperties/>
             <header>Cash Summary</header>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
@@ -52,18 +41,6 @@
                 <sortBy>RowLabelAscending</sortBy>
             </dashboardTableColumn>
             <dashboardTableColumn>
-                <aggregateType>Sum</aggregateType>
-                <calculatePercent>false</calculatePercent>
-                <column>Case.Budget_Inkind__c</column>
-                <showTotal>true</showTotal>
-            </dashboardTableColumn>
-            <dashboardTableColumn>
-                <aggregateType>Sum</aggregateType>
-                <calculatePercent>false</calculatePercent>
-                <column>Case.Actual_Inkind__c</column>
-                <showTotal>true</showTotal>
-            </dashboardTableColumn>
-            <dashboardTableColumn>
                 <calculatePercent>false</calculatePercent>
                 <column>FORMULA2</column>
                 <showTotal>true</showTotal>
@@ -71,6 +48,7 @@
             <displayUnits>Auto</displayUnits>
             <drillEnabled>false</drillEnabled>
             <drillToDetailEnabled>false</drillToDetailEnabled>
+            <groupingSortProperties/>
             <header>In-Kind Summary</header>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
@@ -103,6 +81,7 @@
             <displayUnits>Auto</displayUnits>
             <drillEnabled>false</drillEnabled>
             <drillToDetailEnabled>false</drillToDetailEnabled>
+            <groupingSortProperties/>
             <header>FE Posted Summary</header>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>

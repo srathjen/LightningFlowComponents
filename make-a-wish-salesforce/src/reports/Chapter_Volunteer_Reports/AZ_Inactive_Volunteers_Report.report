@@ -27,21 +27,25 @@
     <filter>
         <criteriaItems>
             <column>CONTACT_RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Volunteer_Contact</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.is_Active_Volunteer__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Region_Chapter__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
@@ -55,6 +59,8 @@
     <reportType>ContactList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

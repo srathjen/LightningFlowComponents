@@ -2,18 +2,19 @@
 <CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
         <fullName>AbsentForm</fullName>
+        <categories>Docusign Template</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>AbsentForm</shortDescription>
-        <value>31f1dad6-3af9-4870-ad5b-aeeafe795f0f</value>
+        <value>88bb7b9f-0767-4a02-8da1-3a8da6ca7426</value>
     </labels>
     <labels>
         <fullName>Active_Volunteer_Profile</fullName>
-        <categories>It holds the Id of Active Volunteer Profile</categories>
+        <categories>The ID of Active Volunteer Profile</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Active Volunteer Profile</shortDescription>
-        <value>00e36000001CMlq</value>
+        <value>00e36000001CMlqAAG</value>
     </labels>
     <labels>
         <fullName>B_C_No_of_days_for_expiration</fullName>
@@ -25,10 +26,11 @@
     </labels>
     <labels>
         <fullName>Bio_Sheet_DDP</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Bio Sheet DDP</shortDescription>
-        <value>a1a360000033dtX</value>
+        <value>a1a360000033dtXAAQ</value>
     </labels>
     <labels>
         <fullName>COI_no_of_expiration_days</fullName>
@@ -40,25 +42,51 @@
     </labels>
     <labels>
         <fullName>Celebritywish</fullName>
+        <categories>Docusign Template</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Celebritywish</shortDescription>
-        <value>358e76db-8f78-421e-b588-9b21a5089cf5</value>
+        <value>256e4c72-e79e-42f5-a476-c891a1f960e3</value>
     </labels>
     <labels>
         <fullName>ChildMedicalSummary</fullName>
-        <categories>Docusign Medical Summary Template Id</categories>
+        <categories>Docusign Template</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Child Medical Summary</shortDescription>
-        <value>ee721421-205d-4822-9586-f2faa4fe686c</value>
+        <value>3b0f8c6b-f469-4018-9d8b-474c711856be</value>
+    </labels>
+    <labels>
+        <fullName>Child_s_Medical_Summary_faxDDP</fullName>
+        <categories>Drawloop</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Child_s_Medical_Summary_faxDDP</shortDescription>
+        <value>a1a36000006VMR3AAO</value>
     </labels>
     <labels>
         <fullName>Combo_CMS_and_WC</fullName>
+        <categories>Docusign Template</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Combo CMS and WC</shortDescription>
-        <value>4b9889a1-fcea-4524-b678-ab372a9939e7</value>
+        <value>de15000e-fc98-4177-9b09-5f58b719d5d0</value>
+    </labels>
+    <labels>
+        <fullName>Combo_Clearance_CMS_faxDDP</fullName>
+        <categories>Drawloop</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Combo Clearance CMS_faxDDP</shortDescription>
+        <value>a1a1R000007bEQkQAM</value>
+    </labels>
+    <labels>
+        <fullName>Combo_Wish_Form</fullName>
+        <categories>Docusign Template</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Combo Wish Form</shortDescription>
+        <value>0122a298-3d78-40d7-b137-286260864fb1</value>
     </labels>
     <labels>
         <fullName>ContactIdValue</fullName>
@@ -69,17 +97,19 @@
     </labels>
     <labels>
         <fullName>DNQ_Letter_DDP</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>DNQ Letter DDP</shortDescription>
-        <value>a1a360000033dtW</value>
+        <value>a1a1R000007bEQaQAM</value>
     </labels>
     <labels>
         <fullName>DNQ_Letter_Spanish_DDP</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>DNQ Letter Spanish DDP</shortDescription>
-        <value>a1a360000033dtY</value>
+        <value>a1a1R000007bEQbQAM</value>
     </labels>
     <labels>
         <fullName>DSProSFUsername</fullName>
@@ -87,21 +117,23 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>DocuSignUserName</shortDescription>
-        <value>2997e370-25da-4c02-aad3-e5c1a0fe663e</value>
+        <value>5a81d5c0-fcaa-4dba-9712-5f206b7f7c13</value>
     </labels>
     <labels>
         <fullName>DV_to_fax</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>DV to fax</shortDescription>
-        <value>a1a0R000000dGpO</value>
+        <value>a1a36000004SPWWAA4</value>
     </labels>
     <labels>
         <fullName>DV_to_fax_w_fax_cover</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>DV to fax w/ fax cover</shortDescription>
-        <value>a1a0R0000008xfy</value>
+        <value>a1a36000004SPWUAA4</value>
     </labels>
     <labels>
         <fullName>Debug_log_error_message</fullName>
@@ -123,14 +155,15 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>DvRetrunUrl</shortDescription>
-        <value>http://wish.force.com/</value>
+        <value>http://devsup-wish.cs45.force.com</value>
     </labels>
     <labels>
         <fullName>Family_Hold_Message</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Family Hold Message DDP</shortDescription>
-        <value>a1a36000004oufC</value>
+        <value>a1a1R000007bEQoQAM</value>
     </labels>
     <labels>
         <fullName>Instance_Url</fullName>
@@ -138,7 +171,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Instance Url</shortDescription>
-        <value>https://make-a-wish.my.salesforce.com</value>
+        <value>https://make-a-wish--devsup.cs45.my.salesforce.com</value>
     </labels>
     <labels>
         <fullName>Interation_User_Profile</fullName>
@@ -148,25 +181,44 @@
         <value>00e36000001CMIeAAO</value>
     </labels>
     <labels>
+        <fullName>Karen</fullName>
+        <categories>Used to assign task to Karen if case has reached more than 30 days in MAC or Chapter.</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Karen</shortDescription>
+        <value>005360000056rbe</value>
+    </labels>
+    <labels>
         <fullName>Lead_DNQ_Letter</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Lead DNQ Letter</shortDescription>
-        <value>a1a3600000346jn</value>
+        <value>a1a3600000346jnAAA</value>
     </labels>
     <labels>
         <fullName>Lead_DNQ_Medical_Professional_DDP</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Lead DNQ Medical Professional DDP</shortDescription>
-        <value>a1a3600000346jp</value>
+        <value>a1a3600000346jpAAA</value>
     </labels>
     <labels>
         <fullName>Lead_DNQ_Spanish_Letter</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Lead DNQ Spanish Letter</shortDescription>
-        <value>a1a3600000346jo</value>
+        <value>a1a3600000346joAAA</value>
+    </labels>
+    <labels>
+        <fullName>Lead_Overview</fullName>
+        <categories>Drawloop</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Lead Overview</shortDescription>
+        <value>a1a360000053EBQAA2</value>
     </labels>
     <labels>
         <fullName>Local_Email_Template_ID</fullName>
@@ -200,26 +252,19 @@
     </labels>
     <labels>
         <fullName>Part_A_fax</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Part A fax</shortDescription>
-        <value>a1a0R000000dGix</value>
-    </labels>
-    <labels>
-        <fullName>Prospective_Volunteer</fullName>
-        <categories>It holds the id of Prospective Volunteer community profile</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Prospective Volunteer Profile</shortDescription>
-        <value>00e36000001CMlr</value>
+        <value>a1a36000004SPWVAA4</value>
     </labels>
     <labels>
         <fullName>Prospective_Volunteer_Profile</fullName>
-        <categories>It holds the site guest user profile id</categories>
+        <categories>The ID of the Prospective Volunteer Profile</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Prospective Volunteer Profile</shortDescription>
-        <value>00e36000000HVbO</value>
+        <value>00e36000001CMlrAAG</value>
     </labels>
     <labels>
         <fullName>QualifyingDiagnosisHeaderLabel</fullName>
@@ -237,25 +282,27 @@
     </labels>
     <labels>
         <fullName>Rush_Child_Summary</fullName>
+        <categories>Docusign Template</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Rush Child Summary</shortDescription>
-        <value>a05f80b9-1207-41ff-83d4-b4189c78427e</value>
+        <value>c9028268-ecf0-4e84-ba71-71794899848a</value>
     </labels>
     <labels>
         <fullName>Rush_Wish_Clearance</fullName>
+        <categories>Docusign Template</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Rush Wish Clearance</shortDescription>
-        <value>5e21ad6b-5470-4936-80a5-bd5128cc8ed4</value>
+        <value>413f6257-990e-4af6-b2c4-68a2aaa5e15e</value>
     </labels>
     <labels>
         <fullName>Rush_Wish_Letter_DDP</fullName>
-        <categories>It will contain the rush wish letter DDP record Id</categories>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Rush Wish Letter DDP</shortDescription>
-        <value>a1a36000004nyeI</value>
+        <value>a1a36000004nyeIAAQ</value>
     </labels>
     <labels>
         <fullName>Salesforce_Support_User_Id</fullName>
@@ -267,17 +314,28 @@
     </labels>
     <labels>
         <fullName>Salesforce_Wish_Assist_Form</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Salesforce Wish Assist Form</shortDescription>
-        <value>a1a36000005VFfh</value>
+        <value>a1a1R000007bEQpQAM</value>
+    </labels>
+    <labels>
+        <fullName>SendForESignatureInstructions</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SendForESignatureInstructions</shortDescription>
+        <value>Double-check the email address.
+Add an optional additional attachment and click Upload.
+Click Generate Document and once the document is generated you can click the link to view it then click Send to Docusign.</value>
     </labels>
     <labels>
         <fullName>Shopping_Spree_DDP</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Shopping_Spree_DDP</shortDescription>
-        <value>a1a360000023L5S</value>
+        <value>a1a360000023L5SAAU</value>
     </labels>
     <labels>
         <fullName>Sigle_Day_Volunteer</fullName>
@@ -288,10 +346,11 @@
     </labels>
     <labels>
         <fullName>SingleForm</fullName>
+        <categories>Docusign Template</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>SingleForm</shortDescription>
-        <value>611633ca-ea99-46f3-9516-7eb0fcdd5046</value>
+        <value>4ff6d164-8be0-4efa-bedd-0e2760c7698e</value>
     </labels>
     <labels>
         <fullName>Site_Url</fullName>
@@ -299,14 +358,15 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Site Url</shortDescription>
-        <value>http://make-a-wish.force.com/</value>
+        <value>http://devsup-make-a-wish.cs45.force.com/</value>
     </labels>
     <labels>
         <fullName>Sneak_Peek_DDP</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Sneak Peek DDP</shortDescription>
-        <value>a1a360000033dtb</value>
+        <value>a1a360000033dtbAAA</value>
     </labels>
     <labels>
         <fullName>Volunteer_Opportunity_Id</fullName>
@@ -316,82 +376,100 @@
         <value>CF00N3600000OtMjl</value>
     </labels>
     <labels>
+        <fullName>Volunteer_Role_Error_Update</fullName>
+        <categories>Volunteer Role</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Role Error Update</shortDescription>
+        <value>Insufficient privilege to update this record. Please contact system administrator.</value>
+    </labels>
+    <labels>
         <fullName>WG_FinalStep_FileClosed</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>WG FinalStep FileClosed</shortDescription>
-        <value>a1a360000034sSZ</value>
+        <value>a1a1R000007bEQcQAM</value>
     </labels>
     <labels>
         <fullName>WG_FinalStep_FileClosed_Spanish</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>WG FinalStep FileClosed Spanish</shortDescription>
-        <value>a1a360000034sSd</value>
+        <value>a1a1R000007bEQgQAM</value>
     </labels>
     <labels>
         <fullName>WG_StepOne_90days</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>WG StepOne 90days</shortDescription>
-        <value>a1a360000034sSa</value>
+        <value>a1a1R000007bEQdQAM</value>
     </labels>
     <labels>
         <fullName>WG_StepOne_90days_Spanish</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>WG StepOne 90days Spanish</shortDescription>
-        <value>a1a360000034sSe</value>
+        <value>a1a1R000007bEQhQAM</value>
     </labels>
     <labels>
         <fullName>WG_StepThree_30days</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>WG StepThree 30days</shortDescription>
-        <value>a1a360000034sSb</value>
+        <value>a1a1R000007bEQeQAM</value>
     </labels>
     <labels>
         <fullName>WG_StepThree_30days_Spanish</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>WG StepThree 30days Spanish</shortDescription>
-        <value>a1a360000034sSg</value>
+        <value>a1a1R000007bEQjQAM</value>
     </labels>
     <labels>
         <fullName>WG_StepTwo_60days</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>WG StepTwo 60days</shortDescription>
-        <value>a1a360000034sSc</value>
+        <value>a1a1R000007bEQfQAM</value>
     </labels>
     <labels>
         <fullName>WG_StepTwo_60days_Spanish</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>WG StepTwo 60days Spanish</shortDescription>
-        <value>a1a360000034sSf</value>
+        <value>a1a1R000007bEQiQAM</value>
     </labels>
     <labels>
         <fullName>Welcome_Letter_DDP</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Welcome Letter DDP</shortDescription>
-        <value>a1a360000024ayM</value>
+        <value>a1a360000024ayMAAQ</value>
     </labels>
     <labels>
         <fullName>Welcome_Letter_Spanish_DDP</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Welcome Letter Spanish DDP</shortDescription>
-        <value>a1a360000033dtZ</value>
+        <value>a1a360000033dtZAAQ</value>
     </labels>
     <labels>
         <fullName>WishClearence</fullName>
-        <categories>Docusign Wish Clearence Template Id</categories>
+        <categories>Docusign Template</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Clearence</shortDescription>
-        <value>1b4e7a1c-ef3a-4365-9a61-1bce182cdb57</value>
+        <value>79a28159-85fc-4bcc-9636-9077741b3940</value>
     </labels>
     <labels>
         <fullName>WishReceiptDocusingDeliverOption</fullName>
@@ -426,53 +504,724 @@
         <value>a1Y36000002GOog</value>
     </labels>
     <labels>
+        <fullName>Wish_Affiliation</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation</shortDescription>
+        <value>Wish Affiliation</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Cancel</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Cancel_Create_Contact</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Cancel Create Contact</shortDescription>
+        <value>Cancel Create Contact</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Contact_Account_Household_Address</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Contact Account Household Address</shortDescription>
+        <value>Household Address of Related Contact</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Contact_Address</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Contact Address</shortDescription>
+        <value>Contact Address</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Contact_Information</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Contact Information</shortDescription>
+        <value>Contact Information</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Contact_Resides_With</fullName>
+        <categories>Wish Affiliation Contact Resides With</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Contact Resides With</shortDescription>
+        <value>Resides with Related Contact</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Create_Contact</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Create Contact</shortDescription>
+        <value>Create Contact</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Household_Account_Address</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Household Account Address</shortDescription>
+        <value>Household Account Address</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Label_Request_As_Participant</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Label - Request As Participant</shortDescription>
+        <value>Request As Participant</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Medical_Professionals</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Medical Professionals</shortDescription>
+        <value>Medical Professionals</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_New</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation New</shortDescription>
+        <value>New</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_New_Medical_Professional</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation New Medical Professional</shortDescription>
+        <value>New Medical Professional</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_New_Other</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation New Other</shortDescription>
+        <value>New Wish Other</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_New_Participant</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation New Participant</shortDescription>
+        <value>New Wish Participant</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_New_Requested_Participant</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation New Requested Participant</shortDescription>
+        <value>New Wish Requested Participant</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Others</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Others</shortDescription>
+        <value>Others</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Participant</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Participant</shortDescription>
+        <value>Participant</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Participants</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Participants</shortDescription>
+        <value>Approved Participants</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Phone</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Phone</shortDescription>
+        <value>Phone Number</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Refresh</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Refresh</shortDescription>
+        <value>Refresh</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Relationship</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Relationship</shortDescription>
+        <value>Relationship</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Relationship_Contact</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Relationship Contact</shortDescription>
+        <value>Related Contact</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Request_Update</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Request Update</shortDescription>
+        <value>Request Update</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Requested_Participant</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Requested Participant</shortDescription>
+        <value>Requested Participant</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Requested_Participants</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Requested Participants</shortDescription>
+        <value>Requested Participants</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Affiliation_Save</fullName>
+        <categories>Wish Affiliation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Affiliation Save</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
         <fullName>Wish_Assist_Form_DDP</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Assist Form DDP</shortDescription>
-        <value>a1a36000005VFgp</value>
+        <value>a1a1R000007bEQqQAM</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Budget_Error</fullName>
+        <categories>Wish Budget</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Budget Error</shortDescription>
+        <value>The current active budget is locked for approval.  Please recall, reject or approve the previous budget before proceeding.</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Budget_Warning</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Budget Warning</shortDescription>
+        <value>You are requesting to create a new Wish Budget.
+This will archive the existing active budget and cannot be undone. Are you sure you want to proceed?</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Change_Request_Error_Date_Format</fullName>
+        <categories>Wish Change Request</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Change Request Error Date Format</shortDescription>
+        <value>Wish Change Request Error Date Format</value>
     </labels>
     <labels>
         <fullName>Wish_Clearance_No_Travel</fullName>
-        <categories>Docusign Wish Clearence No Travel Template Id</categories>
+        <categories>Docusign Template</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Clearance No Travel</shortDescription>
-        <value>adffd346-70e2-4f5b-b127-b3a9003ae219</value>
+        <value>b122863c-ef29-48b0-9a93-cfe1fdcd65d5</value>
     </labels>
     <labels>
         <fullName>Wish_Clearance_No_Travel_Form_Rush_Wish</fullName>
+        <categories>Docusign Template</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Clearance No Travel Form(Rush Wish)</shortDescription>
-        <value>f29da96c-a860-43ea-9543-030c428b7062</value>
+        <value>2a398314-e6f6-446c-829b-3227d590c4f1</value>
     </labels>
     <labels>
         <fullName>Wish_Clearance_No_Travel_Form_Self_describe</fullName>
+        <categories>Docusign Template</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Clearance No Travel Form(Self describe)</shortDescription>
-        <value>0eeb3cfd-cada-4736-aa5e-bfec5c048005</value>
+        <value>89b70fb7-f7e6-4df5-821c-20dd1b6980f2</value>
     </labels>
     <labels>
         <fullName>Wish_Clearance_No_Travel_Rush_Wish_Form_Self_describe</fullName>
+        <categories>Docusign Template</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Clearance No Travel Rush Wish Form(Self describe)</shortDescription>
-        <value>9f4de36d-5b70-464b-aa79-77b83ec1ffb1</value>
+        <value>9906bc41-e049-46f8-91a5-90a3b42bfb03</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Clearance_faxDDP</fullName>
+        <categories>Drawloop</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish_Clearance_faxDDP</shortDescription>
+        <value>a1a1R000007bER2QAM</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Clearance_no_travel_faxDDP</fullName>
+        <categories>Drawloop</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish_Clearance_no_travel_faxDDP</shortDescription>
+        <value>a1a1R000007bER3QAM</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Details_Form_DDP</fullName>
+        <categories>Drawloop</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Details Form DDP</shortDescription>
+        <value>a1a1R000007bEQYQA2</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Details_Form_DDP_DeliveryOption</fullName>
+        <categories>Drawloop</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Details Form DDP DeliveryOption</shortDescription>
+        <value>a1Y1R000003MyLLUA0</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_Additional_Interview_Date</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form Additional Interview Date</shortDescription>
+        <value>Additional Interview Date</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_Detail</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form Detail</shortDescription>
+        <value>Wish Detail</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_Enter</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form Enter</shortDescription>
+        <value>Enter File Description</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_File_Upload</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form File Upload</shortDescription>
+        <value>Upload Attachments</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_File_Upload_Button</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form File Upload Button</shortDescription>
+        <value>Upload</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_File_Upload_Description</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form File Upload Description</shortDescription>
+        <value>Upload files collected during the wish interview.</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_File_Upload_Help</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form File Upload Help</shortDescription>
+        <value>Enter a descriptive name for the file you want to upload, then click the Upload Files button to select the file you want to attach. Be sure to click the red Upload button to complete the upload.</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_File_Uploading</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form File Uploading</shortDescription>
+        <value>Uploading...</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_Interview_Date</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form Interview Date</shortDescription>
+        <value>Interview Date</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_Interviewer_1</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form Interviewer 1</shortDescription>
+        <value>Wish Interviewer 1</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_Interviewer_2</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form Interviewer 2</shortDescription>
+        <value>Wish Interviewer 2</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_Names</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form Names</shortDescription>
+        <value>Names of Make-A-Wish representatives assisting in the completion of the Wish Design Forms.</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_No</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form No</shortDescription>
+        <value>No</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_No_File_Selected</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form No File Selected</shortDescription>
+        <value>No File Selected</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_Return_To_Wish</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form Return To Wish</shortDescription>
+        <value>Return To Wish</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_Save_for_Later</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form Save for Later</shortDescription>
+        <value>Save for Later</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_Select</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form Select</shortDescription>
+        <value>Select the Wish Design Form you would like to complete for</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_Select_File</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form Select File</shortDescription>
+        <value>Select Attachment</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_Submit_Form</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form Submit Form</shortDescription>
+        <value>Submit Form</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_The</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form The</shortDescription>
+        <value>The {0} form has already been submitted for {1}. Are you sure you want to proceed with updating the form?</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_Uploaded_Files</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form Uploaded Files</shortDescription>
+        <value>Uploaded Files:</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_Vision</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form Vision</shortDescription>
+        <value>Wish Vision</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_Welcome_Message</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form Welcome Message</shortDescription>
+        <value>Please use the Wish Design Forms to get to the heart - 
+            the who, what, where, why, when - of the child’s one true wish. 
+            Complete the forms in their entirety and with as much detail as possible.</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_Yes</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form Yes</shortDescription>
+        <value>Yes</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_dates</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form dates</shortDescription>
+        <value>Date(s) that the Wish Interview with {0} took place.</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Form_submit</fullName>
+        <categories>Wish Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Form submit</shortDescription>
+        <value>Are you ready to submit the {0} form for {1}?</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_Add_New_Participant</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant Add New Participant</shortDescription>
+        <value>Add New Participant</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_Add_Participant</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant Add Participant</shortDescription>
+        <value>Add Participant</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_Birthdate</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant Birthdate</shortDescription>
+        <value>Date of Birth</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_Cancel</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant Cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_Count</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant Count</shortDescription>
+        <value>Count of requested participants (including {0}): {1}</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_Email</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant Email</shortDescription>
+        <value>Email</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_Email_Info</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant Email Info</shortDescription>
+        <value>AN EMAIL IS REQUIRED FOR ANY INDIVIDUAL, OVER THE AGE OF 18, SIGNING FORMS ELECTRONICALLY</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_FirstName</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant FirstName</shortDescription>
+        <value>First Name</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_Information</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant Information</shortDescription>
+        <value>Participant Information</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_LastName</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant LastName</shortDescription>
+        <value>Last Name</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_MiddleName</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant MiddleName</shortDescription>
+        <value>Middle Name</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_New</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant New</shortDescription>
+        <value>New Participant</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_Relationship</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant Relationship</shortDescription>
+        <value>Relationship with Wish Child</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_Remove_Participant</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant Remove Participant</shortDescription>
+        <value>Remove Participant</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_Request_Update</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant Request Update</shortDescription>
+        <value>Request Update</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_Required_Field</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant Required Field</shortDescription>
+        <value>This field is required</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_Residing_with_child</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant Residing with child</shortDescription>
+        <value>Residing with Wish Child?</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_Review_Contact</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant Review Contact</shortDescription>
+        <value>Review Contact</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_Save</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant Save</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_ShirtSize</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant ShirtSize</shortDescription>
+        <value>Shirt Size</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Participant_Update_Contact</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant Update Contact</shortDescription>
+        <value>Update Contact</value>
     </labels>
     <labels>
         <fullName>Wish_Receipt_DDP</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Receipt DDP</shortDescription>
-        <value>a1a360000022UI9</value>
+        <value>a1a1R000007bEQlQAM</value>
     </labels>
     <labels>
         <fullName>Wish_Receipt_Spanish</fullName>
+        <categories>Drawloop</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Receipt Spanish DDP</shortDescription>
-        <value>a1a360000033dta</value>
+        <value>a1a1R000007bER0QAM</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Vision_Form_DDP</fullName>
+        <categories>Drawloop</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Vision Form DDP</shortDescription>
+        <value>a1a1R000007bEQZQA2</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Vision_Form_DDP_DeliveryOption</fullName>
+        <categories>Drawloop</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Vision Form DDP DeliveryOption</shortDescription>
+        <value>a1Y1R000003MyLNUA0</value>
     </labels>
 </CustomLabels>

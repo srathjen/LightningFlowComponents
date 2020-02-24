@@ -21,16 +21,19 @@
     <filter>
         <criteriaItems>
             <column>Contact$RecordType</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Volunteer_Contact,Contact.Board_Member</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Background_Checks__r$Current__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact$is_Active_Volunteer__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
@@ -49,6 +52,8 @@
     <reportType>Contacts_and_Background_Checks__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <sortColumn>Contact.Background_Checks__r$Date__c</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>

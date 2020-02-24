@@ -1,6 +1,6 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
 <![CDATA[<table class="MsoNormalTable" border="0" cellspacing="5" cellpadding="0" width="550" style="width:412.5pt;mso-cellspacing:3.7pt;mso-yfti-tbllook:1184;mso-padding-alt:
  3.75pt 3.75pt 3.75pt 3.75pt">
  <tbody><tr style="mso-yfti-irow:0;mso-yfti-firstrow:yes;mso-yfti-lastrow:yes;
@@ -14,8 +14,8 @@
   <span style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">Thank you for working as a
   &nbsp;{!Volunteer_Opportunity__c.Hidden_Chapter_Role_Name__c}&nbsp;on&nbsp;{!Volunteer_Opportunity__c.Name__c}’s
   wish. We hope you’ll consider signing up for another opportunity in the near
-  future. You may do this by visiting the&nbsp;<a href="https://make-a-wish.force.com/communitieslogin"><span style="color:
-  blue">Make-A-Wish Volunteer Center</span></a></span>&nbsp;and reviewing
+  future. You may do this by visiting the&nbsp;<span style="color:
+  blue"><a href="{!$Label.Site_Url}">Make-A-Wish Volunteer Center</a></span></span>&nbsp;and reviewing
   “Volunteer Opportunities” to find an opportunity that may be of interest to
   you!<br>
   <br>

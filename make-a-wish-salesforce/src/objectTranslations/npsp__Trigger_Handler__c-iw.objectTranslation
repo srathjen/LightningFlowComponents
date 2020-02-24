@@ -20,6 +20,74 @@
         <plural>true</plural>
         <value><!-- הTrigger Handler --></value>
     </caseValues>
+    <fields>
+        <help>מציין שמודול זה פעיל</help>
+        <label><!-- Active --></label>
+        <name>npsp__Active__c</name>
+    </fields>
+    <fields>
+        <help>מציין שיש להפעיל מודול זה באופן אסינכרוני בעסקה זו</help>
+        <label><!-- Asynchronous After Events --></label>
+        <name>npsp__Asynchronous__c</name>
+    </fields>
+    <fields>
+        <help>שם המחלקה שיש להפעיל</help>
+        <label><!-- Class --></label>
+        <name>npsp__Class__c</name>
+    </fields>
+    <fields>
+        <help>הסדר שבו יש להפעיל מודול זה, מסייע לשמירה על יחסי תלות במודולים ובנתונים.</help>
+        <label><!-- Load Order --></label>
+        <name>npsp__Load_Order__c</name>
+    </fields>
+    <fields>
+        <help>שם האובייקט שעבורו יש להפעיל מטפל זה</help>
+        <label><!-- Object --></label>
+        <name>npsp__Object__c</name>
+    </fields>
+    <fields>
+        <help>הפעולה שבה מודול זה צריך לפעול</help>
+        <label><!-- Trigger Action --></label>
+        <name>npsp__Trigger_Action__c</name>
+        <picklistValues>
+            <masterLabel>AfterDelete</masterLabel>
+            <translation><!-- AfterDelete --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AfterInsert</masterLabel>
+            <translation><!-- AfterInsert --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AfterUndelete</masterLabel>
+            <translation><!-- AfterUndelete --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AfterUpdate</masterLabel>
+            <translation><!-- AfterUpdate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BeforeDelete</masterLabel>
+            <translation><!-- BeforeDelete --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BeforeInsert</masterLabel>
+            <translation><!-- BeforeInsert --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BeforeUpdate</masterLabel>
+            <translation><!-- BeforeUpdate --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help>סמן אפשרות זו אם בכוונתך לנהל את הרשומה בעצמך. זכור שעדכונים לחבילה לא יעדכנו את הרשומה.</help>
+        <label><!-- User Managed --></label>
+        <name>npsp__User_Managed__c</name>
+    </fields>
+    <fields>
+        <help><!-- Semicolon separated list of Salesforce usernames that this trigger will NOT run for. Leave blank to run for all users. --></help>
+        <label><!-- Usernames to Exclude --></label>
+        <name>npsp__Usernames_to_Exclude__c</name>
+    </fields>
     <gender><!-- Masculine --></gender>
     <nameFieldLabel><!-- Trigger Handler Name --></nameFieldLabel>
 </CustomObjectTranslation>

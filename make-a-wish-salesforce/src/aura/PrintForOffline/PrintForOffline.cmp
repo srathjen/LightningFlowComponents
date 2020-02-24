@@ -1,0 +1,36 @@
+<aura:component controller="LightningDataTableController">
+
+    <!-- attributes -->
+    <aura:attribute name="showPrintOfflineModal" type="Boolean" default="false"/>
+    <aura:attribute name="iframeUrl" type="string" default="" access="private"/>
+    <aura:attribute name="WRSId" type="String"/>
+    <aura:attribute name="errors" type="String"/>
+    <aura:attribute name="caseId" type="Id"/>
+    <aura:attribute name="wishForm" type="Wish_Signature_Forms__c"/>
+
+
+    <!-- handlers-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:registerEvent name="refreshEvent" type="c:refreshDataTable"/>
+
+    <!-- Body -->
+    <c:sldsModal aura:id="PrintOfflineModal" closeModal="true" closeAction="{!c.handlePrintCancel}">
+        <aura:set attribute="header">
+            Print for Offline
+        </aura:set>
+        <aura:set attribute="content">
+            <span class="slds-align_absolute-center slds-text-heading_small">Generate the document for offline printing.</span>
+            <aura:if isTrue="{!not(empty(v.iframeUrl))}">
+                <div style="display:block;" class="slds-is-relative">
+                    <iframe aura:id="iframe" src="{!v.iframeUrl}" scrolling="no"
+                            style="width:100%;height: 126px;border:0"/>
+                </div>
+            </aura:if>
+        </aura:set>
+        <aura:set attribute="footer">
+            <lightning:button label="Generate" variant="brand" title="Generate document action" onclick="{! c.handlePrintOffline }"/>
+            <lightning:button label="Cancel" title="Cancle action" onclick="{! c.handlePrintCancel }"/>
+        </aura:set>
+    </c:sldsModal>
+
+</aura:component>

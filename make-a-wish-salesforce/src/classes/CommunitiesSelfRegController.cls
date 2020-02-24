@@ -15,23 +15,23 @@ public class CommunitiesSelfRegController {
     public String username{get;set;}
     public String password {get; set {password = value == null ? value : value.trim(); } }
     public String confirmPassword {get; set { confirmPassword = value == null ? value : value.trim(); } }
-    public boolean isOver18YearsOld{get;set;}
-    Public boolean showErrorMsg {get;set;}
-    Public string errorMessage {get;set;}
-    Public String chapterRT;
-    Public String nationalRT;
+    public Boolean isOver18YearsOld{get;set;}
+    public Boolean showErrorMsg {get;set;}
+    public String errorMessage {get;set;}
+    public String chapterRT;
+    public Id nationalRT;
     public String userId;
     
     
     Public String signUpNotes{get;set;}
     
     public CommunitiesSelfRegController() {
-        Constant_AC  constant = new Constant_Ac();
-        chapterRT= Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(constant.ChapterRT).getRecordTypeId();
-        nationalRT = Schema.Sobjecttype.Dynamic_Content__c.getRecordTypeInfosByName().get(constant.nationalRT).getRecordTypeId();
+        chapterRT = Constant_AC.CHAPTER_RT_ID;
+        nationalRT = Constant_AC.NATIONAL_RT_ID;
         Dynamic_Content__c signUpContent = new Dynamic_Content__c();
-        signupContent = [SELECT id, Sign_Up_Page__c from Dynamic_Content__c WHERE RecordTypeId = :nationalRT and active__c = true limit 1];
-        if(signupContent != Null)
+        signupContent = [SELECT Id, Sign_Up_Page__c FROM Dynamic_Content__c WHERE RecordTypeId = :nationalRT
+        AND active__c = TRUE LIMIT 1];
+        if(signupContent != null)
             signUpNotes = signUpContent.Sign_Up_Page__c;
     }
     
@@ -193,7 +193,7 @@ public class CommunitiesSelfRegController {
             }
         }
         
-        String profileId = label.Prospective_Volunteer;
+        String profileId = label.Prospective_Volunteer_Profile;
         
         
         List<User> checkExUser = [SELECT id FROM User WHERE Username = :userName];

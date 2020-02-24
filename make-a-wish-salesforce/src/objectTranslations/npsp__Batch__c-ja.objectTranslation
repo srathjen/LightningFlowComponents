@@ -2,7 +2,36 @@
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
-        <value><!-- Batch --></value>
+        <value>バッチ</value>
     </caseValues>
-    <nameFieldLabel><!-- Batch Name --></nameFieldLabel>
+    <fieldSets>
+        <label><!-- BatchDetailView --></label>
+        <name>npsp__BatchDetailView</name>
+    </fieldSets>
+    <fields>
+        <label><!-- Batch Status --></label>
+        <name>npsp__Batch_Status__c</name>
+        <picklistValues>
+            <masterLabel>Complete</masterLabel>
+            <translation>完了</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation>進行中</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>npsp__Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Items --></label>
+        <name>npsp__Number_of_Items__c</name>
+    </fields>
+    <fields>
+        <help>バッチであるオブジェクトの API 参照名。</help>
+        <label><!-- Object Name --></label>
+        <name>npsp__Object_Name__c</name>
+    </fields>
+    <nameFieldLabel>バッチ名</nameFieldLabel>
 </CustomObjectTranslation>

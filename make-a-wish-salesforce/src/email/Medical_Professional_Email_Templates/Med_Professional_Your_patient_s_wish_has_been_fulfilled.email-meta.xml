@@ -8,4 +8,5 @@
     <style>freeForm</style>
     <subject>Your patient&apos;s wish has been fulfilled!</subject>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

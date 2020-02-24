@@ -201,14 +201,17 @@
         </sections>
     </layouts>
     <recordTypes>
+        <description><!-- It will associated with Active Volunteer page layout --></description>
         <label><!-- Chapter Active --></label>
         <name>Chapter_Active</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- It will associated with Prospective Volunteer page layout --></description>
         <label><!-- Chapter Prospective --></label>
         <name>Chapter_Prospective</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- It will associated with National page layout --></description>
         <label><!-- National --></label>
         <name>National</name>
     </recordTypes>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Scheduled System Maintenance alert content for use on WVC login page and login flows for internal users.</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Body_1__c</fullName>
+        <description>Body1 content to be used in Notification alert.</description>
+        <externalId>false</externalId>
+        <label>Body_1</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Body_2__c</fullName>
+        <description>Body2 content to be used in Notification alert.</description>
+        <externalId>false</externalId>
+        <label>Body_2</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Header_1__c</fullName>
+        <description>Heading 1 for Notification Alert.</description>
+        <externalId>false</externalId>
+        <label>Header_1</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Header_2__c</fullName>
+        <description>Heading 2 for Notification Alert.</description>
+        <externalId>false</externalId>
+        <label>Header_2</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>isActiveLockout__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used to control if the user should be prevented from logging into the platform.</description>
+        <externalId>false</externalId>
+        <label>isActiveLockout</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isActive__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used to control if the Alert Notification Head and Body content is displayed.</description>
+        <externalId>false</externalId>
+        <label>isActive</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>MaintenanceAlert</label>
+    <visibility>Public</visibility>
+</CustomObject>

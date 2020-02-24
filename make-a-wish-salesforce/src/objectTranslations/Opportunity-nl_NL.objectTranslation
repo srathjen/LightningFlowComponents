@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldSets>
+        <label><!-- BDE Entry FS v2 --></label>
+        <name>npsp__BDE_Entry_FS_v2</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- New BDE List v2 --></label>
+        <name>npsp__BDE_List_FS_v2</name>
+    </fieldSets>
     <fields>
         <label><!-- DB Competitor --></label>
         <name>DB_Competitor__c</name>
@@ -15,6 +23,10 @@
             <masterLabel>Competitor C</masterLabel>
             <translation><!-- Competitor C --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Unique Record Count --></label>
+        <name>Unique_Record_Count__c</name>
     </fields>
     <fields>
         <help>Formule: Het Bedrag van deze Opportunity minus het betaling afschrijvingsbedrag en betaling ontvangen bedrag</help>
@@ -98,7 +110,7 @@
     <fields>
         <label><!-- Recurring Donation --></label>
         <name>npe03__Recurring_Donation__c</name>
-        <relationshipLabel><!-- Donations --></relationshipLabel>
+        <relationshipLabel><!-- Opportunities --></relationshipLabel>
     </fields>
     <fields>
         <help>Aaneengeschakelde velden worden gebruikt tijdens rollups om de meest recente opportunity te lokaliseren.</help>
@@ -164,6 +176,11 @@
         <name>npsp__Closed_Lost_Reason__c</name>
     </fields>
     <fields>
+        <help>Indien aangevinkt, schakelt dit veld verscheidene aspecten van de automatisering van NPSP-Opportunitycontactpersoonrol uit, wat mogelijk leidt tot onjuiste gegevens of duplicaatgegevens. Raadpleeg de productdocumentatie voor meer informatie.</help>
+        <label><!-- Disable Contact Role Automation --></label>
+        <name>npsp__DisableContactRoleAutomation__c</name>
+    </fields>
+    <fields>
         <help>De Eerlijke Markt Waarde van een in natura gift.</help>
         <label><!-- Fair Market Value --></label>
         <name>npsp__Fair_Market_Value__c</name>
@@ -182,7 +199,7 @@
         </picklistValues>
         <picklistValues>
             <masterLabel>Upgrade</masterLabel>
-            <translation><!-- Upgrade --></translation>
+            <translation>Upgraden</translation>
         </picklistValues>
     </fields>
     <fields>
@@ -379,27 +396,123 @@
             <translation>Gedachtenis</translation>
         </picklistValues>
     </fields>
+    <layouts>
+        <layout>Donation Layout</layout>
+        <sections>
+            <label>Donatie Informatie</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>Gematchte Gift Informatie</label>
+            <section>Matching Gift Information</section>
+        </sections>
+        <sections>
+            <label>Betalingsinformatie</label>
+            <section>Payment Information</section>
+        </sections>
+        <sections>
+            <label>Eerbetoon Informatie</label>
+            <section>Tribute Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Grant Layout</layout>
+        <sections>
+            <label>Donatie Informatie</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>Schenking Informatie</label>
+            <section>Grant Information</section>
+        </sections>
+        <sections>
+            <label>Betalingsinformatie</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>In-Kind Gift Layout</layout>
+        <sections>
+            <label>Donatie Informatie</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>In Natura Informatie</label>
+            <section>In-Kind Information</section>
+        </sections>
+        <sections>
+            <label>Eerbetoon Informatie</label>
+            <section>Tribute Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Major Gift Layout</layout>
+        <sections>
+            <label>Donatie Informatie</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>Grote Gift Informatie</label>
+            <section>Major Gift Information</section>
+        </sections>
+        <sections>
+            <label>Betalingsinformatie</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Matching Gift Layout</layout>
+        <sections>
+            <label>Donatie Informatie</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>Betalingsinformatie</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Membership Layout</layout>
+        <sections>
+            <label>Velden</label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label>Lid Informatie</label>
+            <section>Member Information</section>
+        </sections>
+        <sections>
+            <label>Betalingsinformatie</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
     <recordTypes>
+        <description><!-- Donation Received --></description>
         <label><!-- Donation --></label>
         <name>Donation</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Grant Received --></description>
         <label><!-- Grant --></label>
         <name>Grant</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Goods or Services received as In-Kind --></description>
         <label><!-- In-Kind Gift --></label>
         <name>In_Kind_Gift</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Large Donation from a Major Donor --></description>
         <label><!-- Major Gift --></label>
         <name>MajorGift</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Matching Donation from an Donor&apos;s Employer or other Organization --></description>
         <label><!-- Matching Gift --></label>
         <name>Matching_Gift</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- A membership record type --></description>
         <label><!-- Membership --></label>
         <name>Membership</name>
     </recordTypes>

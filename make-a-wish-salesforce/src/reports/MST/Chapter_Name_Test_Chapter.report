@@ -52,11 +52,13 @@
     <filter>
         <criteriaItems>
             <column>Contact.Region_Chapter__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Test</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
@@ -70,6 +72,8 @@
     <reportType>ContactList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <sortColumn>ADDRESS2_CITY</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>

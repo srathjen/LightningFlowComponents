@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- State Code --></label>
+        <name>CRMfusionDBR101__State_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- State Value --></label>
+        <name>CRMfusionDBR101__State_Value__c</name>
+    </fields>
+</CustomObjectTranslation>

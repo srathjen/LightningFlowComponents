@@ -1,4 +1,4 @@
-trigger CaseFile_AT on cg__CaseFile__c (before insert,after insert) {
+trigger CaseFile_AT on cg__CaseFile__c (before insert,after insert,after update,after delete) {
     
     if(Trigger.isInsert && Trigger.isBefore) {
         Map<Id, cg__CaseFile__c > newFileMap = new Map<Id, cg__CaseFile__c >();
@@ -48,24 +48,37 @@ trigger CaseFile_AT on cg__CaseFile__c (before insert,after insert) {
         Set<Id> caseIdsSet = new Set<Id>();
         Set<Id> ParentIdsSet = new Set<Id>();
         List<cg__CaseFile__c> caseFileList = new List<cg__CaseFile__c>();
+        List<cg__CaseFile__c> caseFileTaskList = new List<cg__CaseFile__c>();
         Map<Id,String> caseFileMap = new Map<Id,String>();
         
         for(cg__CaseFile__c cf: Trigger.new){
             CaseIds.add(cf.Id);
              caseFileMap.put(cf.Id,String.valueOf(cf));
+             caseFileList.add(cf);
             if(cf.cg__Content_Type__c.contains('image') || cf.cg__Content_Type__c.contains('video')){
                 caseIdsSet.add(cf.cg__Case__c);
-                caseFileList.add(cf);
+                caseFileTaskList.add(cf);
             }
-            
-        }
+         }
         
+        if(caseFileList.size() > 0){
+        CaseFileTriggerHandler.updateAttachmentPath(caseFileList);
+        }
         if(CaseIds.size() > 0) {
             AWSFilePath_AC.UpdateCaseFilePath(CaseIds,caseFileMap);
         }
-        if(caseFileList.size() > 0) {
-            String jsontaskListString = json.serialize(caseFileList);
-            AWSFilePath_AC.createAttachmentReviewTask(jsontaskListString, caseIdsSet,caseFileMap);
+        if(caseFileTaskList.size() > 0) {
+            String jsontaskListString = json.serialize(caseFileTaskList);
+            /*WLP-467 remove automated task creation */
+//            AWSFilePath_AC.createAttachmentReviewTask(jsontaskListString, caseIdsSet,caseFileMap);
+             
         }
+    }
+    
+    if(Trigger.isAfter && Trigger.isupdate){
+        CaseFileTriggerHandler_AC.onAfterUpdate(trigger.newMap,trigger.oldMap);
+    }
+    if(Trigger.isAfter && Trigger.isDelete){
+        CaseFileAfterDeleteTriggerHandler_AC.onAfterDelete(trigger.old);
     }
 }

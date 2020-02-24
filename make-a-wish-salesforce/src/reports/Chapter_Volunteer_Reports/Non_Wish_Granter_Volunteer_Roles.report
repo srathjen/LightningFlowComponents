@@ -12,16 +12,19 @@
     <filter>
         <criteriaItems>
             <column>Volunteer_Roles__c.Role_Name__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>wish granter</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Roles__c.Status__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Trained</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Roles__c.Chapter_Name__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>make-a-wish arizona</value>
         </criteriaItems>
@@ -35,6 +38,8 @@
     <reportType>CustomEntity$Volunteer_Roles__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Volunteer_Roles__c.End_Date__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

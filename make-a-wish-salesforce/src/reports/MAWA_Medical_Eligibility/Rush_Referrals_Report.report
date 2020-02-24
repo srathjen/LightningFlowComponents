@@ -22,8 +22,15 @@
     <filter>
         <criteriaItems>
             <column>Lead$Any_medical_reason_for_moving_quickly__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Yes</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
         </criteriaItems>
     </filter>
     <format>Tabular</format>
@@ -35,10 +42,12 @@
     <reportType>Leads_detail__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <sortColumn>Lead$Any_medical_reason_for_moving_quickly__c</sortColumn>
     <sortOrder>Desc</sortOrder>
     <timeFrameFilter>
         <dateColumn>Lead$Referred_Date__c</dateColumn>
-        <interval>INTERVAL_PREV2FY</interval>
+        <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>

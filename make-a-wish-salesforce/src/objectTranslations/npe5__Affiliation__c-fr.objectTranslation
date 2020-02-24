@@ -2,13 +2,210 @@
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
-        <value><!-- Affiliation --></value>
+        <value>Affiliation</value>
     </caseValues>
     <caseValues>
         <plural>true</plural>
-        <value><!-- Affiliation --></value>
+        <value>Affiliations</value>
     </caseValues>
-    <gender><!-- Masculine --></gender>
+    <fieldSets>
+        <label><!-- AffiliationFieldSet --></label>
+        <name>AffiliationFieldSet</name>
+    </fieldSets>
+    <fields>
+        <label><!-- Constituent Code --></label>
+        <name>Constituent_Code__c</name>
+        <picklistValues>
+            <masterLabel>Board Member</masterLabel>
+            <translation><!-- Board Member --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Celebrity</masterLabel>
+            <translation><!-- Celebrity --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Individual</masterLabel>
+            <translation><!-- Individual --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Intern</masterLabel>
+            <translation><!-- Intern --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medical Professional</masterLabel>
+            <translation><!-- Medical Professional --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Referral Source</masterLabel>
+            <translation><!-- Referral Source --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Staff</masterLabel>
+            <translation><!-- Staff --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Volunteer</masterLabel>
+            <translation><!-- Volunteer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Volunteer Leadership</masterLabel>
+            <translation><!-- Volunteer Leadership --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wish Child</masterLabel>
+            <translation><!-- Wish Child --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wish Family</masterLabel>
+            <translation><!-- Wish Family --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- External Id --></label>
+        <name>External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Status Updated --></label>
+        <name>Hidden_Status_Updated__c</name>
+    </fields>
+    <fields>
+        <label><!-- Import Id --></label>
+        <name>Import_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Migrated Record --></label>
+        <name>Migrated_Record__c</name>
+    </fields>
+    <fields>
+        <label><!-- Region Code --></label>
+        <name>Region_Code__c</name>
+        <relationshipLabel><!-- Affiliations --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Sub Status --></label>
+        <name>Sub_Status__c</name>
+        <picklistValues>
+            <masterLabel>Background Check</masterLabel>
+            <translation><!-- Background Check --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chapter</masterLabel>
+            <translation><!-- Chapter --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Interview</masterLabel>
+            <translation><!-- Interview --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Moved</masterLabel>
+            <translation><!-- Moved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Training</masterLabel>
+            <translation><!-- Training --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Volunteer</masterLabel>
+            <translation><!-- Volunteer --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Treating Facility --></label>
+        <name>Treating_Facility__c</name>
+        <picklistValues>
+            <masterLabel>Current</masterLabel>
+            <translation><!-- Current --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Previous</masterLabel>
+            <translation><!-- Previous --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- UAT Data Warning --></label>
+        <name>UAT_Data_Warning__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unique Record Count --></label>
+        <name>Unique_Record_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- User Email Hidden --></label>
+        <name>User_Email_Hidden__c</name>
+    </fields>
+    <fields>
+        <label><!-- User Name Hidden --></label>
+        <name>User_Name_Hidden__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact --></label>
+        <name>npe5__Contact__c</name>
+        <relationshipLabel><!-- Organization Affiliations --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>npe5__Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Date --></label>
+        <name>npe5__EndDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Organization --></label>
+        <name>npe5__Organization__c</name>
+        <relationshipLabel><!-- Affiliated Contacts --></relationshipLabel>
+    </fields>
+    <fields>
+        <help>Si coché, l’organisation de l’affiliation sera stockée sur l’enregistrement du contact.</help>
+        <label><!-- Primary --></label>
+        <name>npe5__Primary__c</name>
+    </fields>
+    <fields>
+        <label><!-- Role --></label>
+        <name>npe5__Role__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>npe5__StartDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>npe5__Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inactive</masterLabel>
+            <translation><!-- Inactive --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Approved</masterLabel>
+            <translation><!-- Not Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Out of Compliance</masterLabel>
+            <translation><!-- Out of Compliance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending</masterLabel>
+            <translation><!-- Pending --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help>Lorsque vous créez une opportunité pour l’organisation de cette affiliation, NSPS assigne ce rôle de contact d’opportunité au contact affilié.</help>
+        <label><!-- Related Opportunity Contact Role --></label>
+        <name>npsp__Related_Opportunity_Contact_Role__c</name>
+        <picklistValues>
+            <masterLabel>Soft Credit</masterLabel>
+            <translation>Crédit indirect</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Solicitor</masterLabel>
+            <translation>Solliciteur</translation>
+        </picklistValues>
+    </fields>
+    <gender>Feminine</gender>
     <layouts>
         <layout>Affiliation Chapter Staff Layout</layout>
         <sections>
@@ -20,6 +217,25 @@
             <section>Custom Links</section>
         </sections>
     </layouts>
-    <nameFieldLabel><!-- Affiliation Name --></nameFieldLabel>
-    <startsWith><!-- Consonant --></startsWith>
+    <layouts>
+        <layout>Affiliation Layout</layout>
+        <sections>
+            <label>Information de l&apos;affiliation</label>
+            <section>Affiliation Information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Nom de l’affiliation</nameFieldLabel>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <errorMessage><!-- Treating Facility can only be entered when the Organization record type is a Hospital Treating Facility. --></errorMessage>
+        <name>Affiliation_Treating_Facility_Hospital</name>
+    </validationRules>
+    <workflowTasks>
+        <name>Affiliation_ET_Welcome_to_the_Make_A_Wish_Volunteer_Center</name>
+        <subject><!-- Affiliation ET : Welcome to the Make-A-Wish Volunteer Center --></subject>
+    </workflowTasks>
 </CustomObjectTranslation>

@@ -13,7 +13,7 @@ The following budget has been assigned to you for approval. Please click the lin
 
 
 Wish Child: {!Case.Hidden_Wish_Child_Full_Name__c}
-Click Here to Review Budget
+Click here to review budget: {!Wish_Budget__c.Link}
 
 Thanks,
 
@@ -21,4 +21,5 @@ Thanks,
 {!User.Title}
 {!Case.Hidden_Chapter_Name__c}</textOnly>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

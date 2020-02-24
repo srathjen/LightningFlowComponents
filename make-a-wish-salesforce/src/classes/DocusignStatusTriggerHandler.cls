@@ -8,9 +8,8 @@ public class DocusignStatusTriggerHandler {
 
     //Used to get Medical Professional signed DV_Form from Docusign Status record and to store that under related Wish Child
     public static void WishChildDVAttachment(Map<Id, Id> contactDocusignMap) {
-        
-        Constant_AC  constant = new Constant_AC();
-        Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
+
+        Id wichChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
         
         List<Attachment> newDVAttachmentList = new List<Attachment>(); //Holds DV_Form which is signed by Medical Professional
         Map<Id, Attachment> docusignAttachmentMap = new Map<Id, Attachment>(); //Holds Docusign Status record attachments

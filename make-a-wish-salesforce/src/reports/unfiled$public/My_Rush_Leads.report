@@ -46,14 +46,15 @@
         <field>Lead.Any_medical_reason_for_moving_quickly__c</field>
     </columns>
     <filter>
-        <booleanFilter>1 AND (2 OR 3)</booleanFilter>
         <criteriaItems>
             <column>STATUS</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Inquiry,Referred,Eligibility Review</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Any_medical_reason_for_moving_quickly__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Yes</value>
         </criteriaItems>
@@ -72,6 +73,8 @@
     <reportType>LeadList</reportType>
     <scope>user</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

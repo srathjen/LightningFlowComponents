@@ -24,4 +24,5 @@ Thanks,
 {!Contact.HomePhone}
 {!Contact.Email}</textOnly>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

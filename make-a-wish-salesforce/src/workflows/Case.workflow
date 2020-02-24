@@ -349,6 +349,25 @@
         <reevaluateOnChange>true</reevaluateOnChange>
     </fieldUpdates>
     <fieldUpdates>
+        <fullName>Case_Clear_Date_Pending_Clarification</fullName>
+        <description>Clear the value in the Date - Pending Clarification field.</description>
+        <field>Date_Pending_Clarification__c</field>
+        <name>Case: Clear Date - Pending Clarification</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Case_Enter_Date_Pending_Clarification</fullName>
+        <description>Enter today&apos;s date in the Date - Pending Clarification field.</description>
+        <field>Date_Pending_Clarification__c</field>
+        <formula>TODAY()</formula>
+        <name>Case: Enter Date - Pending Clarification</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>Case_Uncheck_Presentation_Not_Set</fullName>
         <description>Used to Un Check Presentation Not Check Field in Granting Case</description>
         <field>Hidden_Wish_Presentation_Not_Set__c</field>
@@ -433,6 +452,15 @@
         <protected>false</protected>
     </fieldUpdates>
     <fieldUpdates>
+        <fullName>Update_Temp_Historic_Tracking</fullName>
+        <field>Temp_Historic_Field_Tracking__c</field>
+        <formula>Temp_Field_Tracking__c</formula>
+        <name>Update Temp Historic Tracking</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>Update_Wish_Child_Form</fullName>
         <description>This field will update as True when the user approve the wish.</description>
         <field>Update_Wish_Child_Form_Info__c</field>
@@ -481,7 +509,7 @@
             <name>Case_ET_Abandoned_Wish_Notification</name>
             <type>Task</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <description>This rule will fire when the case sub status is changed as &quot;Abandoned&quot;.</description>
         <formula>AND(ISCHANGED(Sub_Status__c),ISPICKVAL(Sub_Status__c, &apos;Abandoned&apos;), $Profile.Name != &apos;Integration&apos;,RecordType.Name = &apos;Wish&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
@@ -523,7 +551,7 @@
             <name>Case_ET_Wish_Unassigned_Alert</name>
             <type>Task</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <booleanFilter>1 AND (2 OR 3) AND 4 AND 5</booleanFilter>
         <criteriaItems>
             <field>Case.RecordTypeId</field>
@@ -602,6 +630,25 @@
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
+        <fullName>Case%3A Clear Date-Pending Clarification</fullName>
+        <actions>
+            <name>Case_Clear_Date_Pending_Clarification</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>notEqual</operation>
+            <value>Pending Clarification - Chapter</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Date_Pending_Clarification__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>When there is a date in the &quot;Date - Pending Clarification&quot; field but the case status is not &quot;Pending Clarification - Chapter&quot;, then clear the value in the &quot;Date - Pending Clarification&quot; field on the case.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
         <fullName>Case%3A Create NMA Task</fullName>
         <active>true</active>
         <criteriaItems>
@@ -640,6 +687,25 @@
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
+        <fullName>Case%3A Enter Date-Pending Clarification</fullName>
+        <actions>
+            <name>Case_Enter_Date_Pending_Clarification</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Pending Clarification - Chapter</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Date_Pending_Clarification__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <description>If the case status is &quot;pending clarification - chapter&quot;, then stamp today&apos;s date in the Case.Date_Pending_Clarification field.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
         <fullName>Case%3A Updating Description field</fullName>
         <actions>
             <name>Update_Description_feild</name>
@@ -656,7 +722,7 @@
             <name>Wish_Child_Birthday_Reminder</name>
             <type>Task</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <description>Used to create a birthday task when the birthday is lesser that 21 days</description>
         <formula>AND( OR( ISNEW() ,ISCHANGED(Birthdate__c)) , NOT(ISNULL(Birthdate__c)), CurrentDOB__c - Today()  &lt;  21, Migrated_Record__c = false, NOT(ISPICKVAL(Status, &apos;Completed&apos;)), NOT(ISPICKVAL(Status, &apos;Closed&apos;)), NOT(ISPICKVAL(Status, &apos;DNQ&apos;)), NOT(ISPICKVAL(Status, &apos;Granted&apos;)), Contact.npsp__Deceased__c  = false,  RecordType.Name  = &apos;Wish&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
@@ -679,7 +745,7 @@
     </rules>
     <rules>
         <fullName>Case%3AFollow-up on wish clearance</fullName>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Case.Wish_Clearance_Sent_Date__c</field>
             <operation>notEqual</operation>
@@ -843,6 +909,20 @@
         <triggerType>onCreateOnly</triggerType>
     </rules>
     <rules>
+        <fullName>Historic_Field_Tracking_Extender</fullName>
+        <actions>
+            <name>Update_Temp_Historic_Tracking</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Extends Historic Field Tracking using below fields
+
+https://make-a-wish.my.salesforce.com/00N3600000StVJj?setupid=CaseFields
+https://make-a-wish.my.salesforce.com/00N3600000StVJe?setupid=CaseFields</description>
+        <formula>ISCHANGED(Temp_Field_Tracking__c)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
         <fullName>Notification to Development Team Regarding Wish Presentation Rule</fullName>
         <active>false</active>
         <description>This will fire for granting case to send an email alert to dev team when presentation date is set and presentation set check box true</description>
@@ -946,7 +1026,7 @@
             <name>Case_ET_Wish_Granter_is_now_Inactive</name>
             <type>Task</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
         <criteriaItems>
             <field>Case.isEmailWishGranter__c</field>
@@ -1028,7 +1108,7 @@
     </rules>
     <rules>
         <fullName>Wish%3A Task For Family Form Not Submitted</fullName>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Case.RecordTypeId</field>
             <operation>equals</operation>
@@ -1113,7 +1193,7 @@
     </tasks>
     <tasks>
         <fullName>Case_ET_Abandoned_Wish_Notification</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -1125,7 +1205,7 @@
     </tasks>
     <tasks>
         <fullName>Case_ET_Budget_Approval_Request</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -1137,7 +1217,7 @@
     </tasks>
     <tasks>
         <fullName>Case_ET_Interview_Date_Reminder</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -1149,7 +1229,7 @@
     </tasks>
     <tasks>
         <fullName>Case_ET_Rush_Wish_Notification</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -1161,7 +1241,7 @@
     </tasks>
     <tasks>
         <fullName>Case_ET_Wish_Granter_is_now_Inactive</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -1173,7 +1253,7 @@
     </tasks>
     <tasks>
         <fullName>Case_ET_Wish_Paperwork_Packet_Reminder</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -1185,7 +1265,7 @@
     </tasks>
     <tasks>
         <fullName>Case_ET_Wish_Presentation_Date_Reminder</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -1197,7 +1277,7 @@
     </tasks>
     <tasks>
         <fullName>Case_ET_Wish_Presentation_Details</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -1209,7 +1289,7 @@
     </tasks>
     <tasks>
         <fullName>Case_ET_Wish_Unassigned_Alert</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -1221,7 +1301,7 @@
     </tasks>
     <tasks>
         <fullName>Case_ET_Your_patient_decided_on_a_wish</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -1233,7 +1313,7 @@
     </tasks>
     <tasks>
         <fullName>Case_ET_Your_patient_s_wish_has_been_fulfilled</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>

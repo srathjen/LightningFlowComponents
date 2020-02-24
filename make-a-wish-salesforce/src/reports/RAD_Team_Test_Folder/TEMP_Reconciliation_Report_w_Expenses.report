@@ -1,23 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
-    <aggregates>
-        <calculatedFormula>Case.Actual_Cash__c:SUM</calculatedFormula>
-        <datatype>currency</datatype>
-        <developerName>FORMULA1</developerName>
-        <isActive>true</isActive>
-        <isCrossBlock>false</isCrossBlock>
-        <masterLabel>Actual Cash</masterLabel>
-        <scale>2</scale>
-    </aggregates>
-    <aggregates>
-        <calculatedFormula>Case.Actual_Inkind__c:SUM</calculatedFormula>
-        <datatype>currency</datatype>
-        <developerName>FORMULA2</developerName>
-        <isActive>true</isActive>
-        <isCrossBlock>false</isCrossBlock>
-        <masterLabel>Actual In-Kind</masterLabel>
-        <scale>2</scale>
-    </aggregates>
     <columns>
         <field>CASE_ID</field>
     </columns>
@@ -87,31 +69,37 @@
     <filter>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Assist__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>STATUS</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Granted,Completed</value>
         </criteriaItems>
         <criteriaItems>
             <column>CONTACT.NAME</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Nemo Clownfish</value>
         </criteriaItems>
@@ -134,6 +122,8 @@
     <reportType>CaseList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Case.End_Date__c</dateColumn>
         <interval>INTERVAL_PREV1</interval>

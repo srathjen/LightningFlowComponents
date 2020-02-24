@@ -185,8 +185,7 @@ public with sharing class CommunitiesSelfRegControllerTest
     // Sign up with valid details.
     public static testmethod void CreateDupUser() 
     {
-        Constant_AC  constant = new Constant_AC(); 
-        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
         TestClassUtil.createDynamicContent();
       
         Account chapterAccount = TestClassUtil.createChapter();

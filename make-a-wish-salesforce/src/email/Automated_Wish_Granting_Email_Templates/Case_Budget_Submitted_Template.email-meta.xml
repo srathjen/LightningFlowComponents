@@ -9,4 +9,5 @@
     <subject>Budget is submitted for approval.</subject>
     <textOnly>Hi  {!Case.Hidden_Wish_Owner_Manager__c}</textOnly>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

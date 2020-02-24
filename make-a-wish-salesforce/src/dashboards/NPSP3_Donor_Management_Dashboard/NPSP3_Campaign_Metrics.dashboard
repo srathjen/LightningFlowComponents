@@ -22,6 +22,7 @@
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
             <groupingColumn>CAMPAIGN_NAME</groupingColumn>
+            <groupingSortProperties/>
             <header>Return on Investment (ROI)</header>
             <legendPosition>Bottom</legendPosition>
             <report>NPSP3_Donor_Management_Reports/NPSP3_Campaign_Metrics</report>
@@ -44,6 +45,7 @@
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
             <groupingColumn>CAMPAIGN_NAME</groupingColumn>
+            <groupingSortProperties/>
             <header>Net Per Donor</header>
             <legendPosition>Bottom</legendPosition>
             <report>NPSP3_Donor_Management_Reports/NPSP3_Campaign_Metrics</report>
@@ -69,6 +71,7 @@
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
             <groupingColumn>CAMPAIGN_NAME</groupingColumn>
+            <groupingSortProperties/>
             <header>Cost Per Donor (CPD)</header>
             <legendPosition>Bottom</legendPosition>
             <report>NPSP3_Donor_Management_Reports/NPSP3_Campaign_Metrics</report>
@@ -92,6 +95,7 @@
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
             <groupingColumn>CAMPAIGN_NAME</groupingColumn>
+            <groupingSortProperties/>
             <header>Total Donations</header>
             <legendPosition>Bottom</legendPosition>
             <report>NPSP3_Donor_Management_Reports/NPSP3_Campaign_Metrics</report>
@@ -117,6 +121,7 @@
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
             <groupingColumn>CAMPAIGN_NAME</groupingColumn>
+            <groupingSortProperties/>
             <header>Cost Per Dollar Raised</header>
             <legendPosition>Bottom</legendPosition>
             <report>NPSP3_Donor_Management_Reports/NPSP3_Campaign_Metrics</report>

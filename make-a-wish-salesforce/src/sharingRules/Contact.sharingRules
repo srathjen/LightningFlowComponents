@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>Alabama_Chapter</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Grants Read and Write access to Alabama Chapter Staff</description>
+        <label>Alabama - Chapter</label>
+        <sharedTo>
+            <role>Alabama_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Alabama_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Alaska_Washington_Chapter</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Grants Read and Write access to Alaska &amp; Washington Chapter Staff</description>
+        <label>Alaska &amp; Washington - Chapter</label>
+        <sharedTo>
+            <role>Alaska_Washington_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Alaska_Washington_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Arizona_chapter</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Grants Read and Write access to Arizona Chapter Staff</description>
+        <label>Arizona-chapter</label>
+        <sharedTo>
+            <role>Arizona_Chapter</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>Arizona_Chapter</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>National_Staff_Chapter</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>National Staff -Chapter</label>
+        <sharedTo>
+            <role>National_Staff</role>
+        </sharedTo>
+        <sharedFrom>
+            <role>National_Staff</role>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

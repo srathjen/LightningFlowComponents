@@ -1,14 +1,14 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
 <![CDATA[<p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Volunteer_Opportunity__c.Hidden_Volunteer_FirstName__c},<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Thank you for
 requesting a new volunteer opportunity. You have been approved and the
 following opportunity has been added to your current assignments:<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Opportunity:&nbsp;{!Volunteer_Opportunity__c.Hidden_Non_Wish_Event_Name__c}<br>
 Role:&nbsp;{!Volunteer_Opportunity__c.Hidden_Chapter_Role_Name__c}<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">&nbsp;</span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Please visit
-the&nbsp;<a href="https://make-a-wish.force.com/"><span style="color:blue;
-background:white">Make-A-Wish Volunteer Center</span></a>&nbsp;to view
+the&nbsp;<span style="color:blue;
+background:white"><a href="{!$Label.Site_Url}">Make-A-Wish Volunteer Center</a></span>&nbsp;to view
 additional details&nbsp;regarding&nbsp;your upcoming opportunity. Once logged
 in, click&nbsp;<b>“My Assignments”</b>&nbsp;and then&nbsp;<b>"View"</b>&nbsp;to
 see specific assignment details.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">Should

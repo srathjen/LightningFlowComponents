@@ -25,11 +25,13 @@
     <filter>
         <criteriaItems>
             <column>Volunteer_Roles__c.Status__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Out of Compliance,Former - Chapter</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Roles__c.Chapter_Name__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
@@ -48,6 +50,8 @@
     <reportType>CustomEntityAuditHistory$Volunteer_Roles__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
         <interval>INTERVAL_LAST60</interval>

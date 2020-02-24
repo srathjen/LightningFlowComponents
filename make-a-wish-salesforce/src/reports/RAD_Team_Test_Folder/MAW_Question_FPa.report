@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Lead$ChapterName__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Name</field>
+    </columns>
+    <columns>
+        <field>Lead$Status</field>
+    </columns>
+    <columns>
+        <field>Lead$Id</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Lead$Migrated_Record__c</field>
+    </columns>
+    <columns>
+        <field>Lead$How_Did_you_hear_about_Make_A_Wish__c</field>
+    </columns>
+    <description>Migrated Records mapping check</description>
+    <filter>
+        <criteriaItems>
+            <column>Lead$Migrated_Record__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>MAW Question</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Leads_detail__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead$Referred_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

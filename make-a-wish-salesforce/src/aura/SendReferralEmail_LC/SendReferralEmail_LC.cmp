@@ -1,0 +1,44 @@
+<aura:component implements="force:appHostable,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader"               
+                controller="SendReferralEmailLC_AC"
+                access="global">
+    <!--Attributes-->
+    <aura:attribute name="officeData" type="Office__c[]" />
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="email" type="String"/>
+    <aura:attribute name="recordId" type="String"/> 
+    <aura:attribute name="msg" type="String"/>
+    <aura:attribute name="isNonOnBoarded" type="Boolean"/>
+     
+    <!--Events-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <!--body-->
+    <div class="slds-text-title_caps slds-text-heading_large">Send Referral Email</div>
+    <aura:if isTrue="{!v.msg}">
+        <div class="slds-m-top_medium slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info" role="alert">
+            {!v.msg}
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!v.isNonOnBoarded}">
+        <div class="slds-m-top_medium slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+            This chapter is Onboarded. Non-Onboarded referral email cannot be sent to this chapter.
+        </div>
+      
+    </aura:if>
+    <aura:if isTrue="{!v.officeData.length > 1}">
+        <div class="slds-m-top_medium">
+            <lightning:datatable
+                                 columns="{! v.columns }"
+                                 data="{! v.officeData }"
+                                 keyField="Id"
+                                 maxRowSelection="1"
+                                 onrowselection="{! c.updateSelectedEmail }"
+                                 />
+        </div>
+        <lightning:button variant="brand" class="slds-float_right slds-m-top_medium" label="Send Email" title="Send Email" onclick="{! c.handleEmail }" />
+    </aura:if>
+    <aura:if isTrue="{!!v.isNonOnBoarded}">
+        
+    </aura:if>
+    <lightning:button variant="Neutral" class="slds-float_right slds-m-top_medium slds-m-right_x-small" label="Cancel" title="Cancel" onclick="{! c.goBack }" />    
+</aura:component>

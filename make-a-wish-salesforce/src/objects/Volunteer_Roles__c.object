@@ -5,7 +5,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -13,7 +33,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -21,7 +61,13 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -29,7 +75,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -37,11 +103,41 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>Tab</actionName>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <allowInChatterGroups>true</allowInChatterGroups>
@@ -53,6 +149,7 @@
     <enableEnhancedLookup>true</enableEnhancedLookup>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
     <enableReports>true</enableReports>
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
@@ -88,6 +185,31 @@
         </displayedFields>
         <label>Volunteer Role Field Set</label>
     </fieldSets>
+    <fields>
+        <fullName>BC_Expiration_Date__c</fullName>
+        <description>The expiration date of the background check associated with the volunteer (Contact) who is attached to this Volunteer Role record. Note that the expiration date on the B/C is updated via code, not via rollup.</description>
+        <externalId>false</externalId>
+        <formula>Volunteer_Name__r.B_C_Expiration_Date__c</formula>
+        <inlineHelpText>The date on which the background check expires.</inlineHelpText>
+        <label>BC Expiration Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>COI_Expiration_Date__c</fullName>
+        <description>The expiration date of the conflict of interest associated with the volunteer (Contact) who is attached to this Volunteer Role record. Note that the expiration date on the COI is updated via code, not via rollup.</description>
+        <externalId>false</externalId>
+        <formula>Volunteer_Name__r.COI_Expiration_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The date on which the volunteer&apos;s Conflict of Interest expires.</inlineHelpText>
+        <label>COI Expiration Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
     <fields>
         <fullName>Chapter_Name__c</fullName>
         <description>It store the chapter name.</description>
@@ -137,6 +259,30 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_Previous_Status__c</fullName>
+        <description>It holds the previous status value when the status is updated to OOC.</description>
+        <externalId>false</externalId>
+        <label>Hidden Previous Status</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_Previous_Sub_Status__c</fullName>
+        <description>It holds the sub status value when the volunteer role status goes to OOC.</description>
+        <externalId>false</externalId>
+        <label>Hidden Previous Sub Status</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Migrated_Record__c</fullName>
@@ -260,41 +406,92 @@
         <description>It will indicate the volunteer role that volunteer has completed the training for that chapter role or not.</description>
         <externalId>false</externalId>
         <label>Status</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Trained</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Pending Training</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Chapter Review</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Former - Chapter</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Former - Volunteer</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Not Approved</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Out of Compliance</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Pending</fullName>
+                    <default>false</default>
+                    <label>Pending</label>
+                </value>
+                <value>
+                    <fullName>Former</fullName>
+                    <default>false</default>
+                    <label>Former</label>
+                </value>
+                <value>
+                    <fullName>Not Approved</fullName>
+                    <default>false</default>
+                    <label>Not Approved</label>
+                </value>
+                <value>
+                    <fullName>Out of Compliance</fullName>
+                    <default>false</default>
+                    <label>Out of Compliance</label>
+                </value>
+                <value>
+                    <fullName>Active</fullName>
+                    <default>false</default>
+                    <label>Active</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Sub_status__c</fullName>
+        <externalId>false</externalId>
+        <label>Sub-status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Status__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Missing Requirement</fullName>
+                    <default>false</default>
+                    <label>Missing Requirement</label>
+                </value>
+                <value>
+                    <fullName>Under Chapter Review</fullName>
+                    <default>false</default>
+                    <label>Under Chapter Review</label>
+                </value>
+                <value>
+                    <fullName>Chapter</fullName>
+                    <default>false</default>
+                    <label>Chapter</label>
+                </value>
+                <value>
+                    <fullName>Volunteer</fullName>
+                    <default>false</default>
+                    <label>Volunteer</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Pending</controllingFieldValue>
+                <valueName>Missing Requirement</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Pending</controllingFieldValue>
+                <valueName>Under Chapter Review</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Former</controllingFieldValue>
+                <valueName>Chapter</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Former</controllingFieldValue>
+                <valueName>Volunteer</valueName>
+            </valueSettings>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Volunteer_Name__c</fullName>
@@ -304,10 +501,16 @@
         <label>Volunteer Name</label>
         <lookupFilter>
             <active>true</active>
+            <booleanFilter>1 OR 2</booleanFilter>
             <filterItems>
                 <field>Contact.RecordTypeId</field>
                 <operation>equals</operation>
                 <value>Volunteer Contact</value>
+            </filterItems>
+            <filterItems>
+                <field>Contact.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Board Member</value>
             </filterItems>
             <isOptional>false</isOptional>
         </lookupFilter>
@@ -344,6 +547,38 @@
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
+    <listViews>
+        <fullName>Volunteers_Recently_Trained</fullName>
+        <columns>NAME</columns>
+        <columns>Volunteer_Name__c</columns>
+        <columns>Role_Name__c</columns>
+        <columns>Status__c</columns>
+        <columns>End_Date__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Pending</value>
+        </filters>
+        <label>Volunteers Pending Approval</label>
+    </listViews>
+    <listViews>
+        <fullName>Volunteers_with_Expired_BC_COI</fullName>
+        <columns>NAME</columns>
+        <columns>Volunteer_Name__c</columns>
+        <columns>Role_Name__c</columns>
+        <columns>Status__c</columns>
+        <columns>End_Date__c</columns>
+        <columns>BC_Expiration_Date__c</columns>
+        <columns>COI_Expiration_Date__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Out of Compliance</value>
+        </filters>
+        <label>Volunteers with Expired BC COI</label>
+    </listViews>
     <nameField>
         <displayFormat>VR-{000000}</displayFormat>
         <label>Volunteer Roles ID</label>
@@ -360,4 +595,5 @@
         <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
 </CustomObject>

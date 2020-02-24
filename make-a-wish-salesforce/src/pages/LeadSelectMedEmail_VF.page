@@ -36,7 +36,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="slds-text-title_caps">
+                     <tr class="slds-text-title_caps">
                             <td><input type="radio" data-type="Treating Medical Professional" data-email="{!currLead.Treating_Medical_Professional_Email__c}" name="rec" class="selVal"/></td>
                             <td>{!currLead.Treating_Medical_Professional_First_Name__c}</td>
                             <td>{!currLead.Treating_Medical_Professional_Last_Name__c}</td>
@@ -69,8 +69,7 @@
                             <td>{!currLead.Alternate2MedProfessionalLastName__c}</td>
                             <td>{!currLead.Alternate2MedProfessionalEmail__c}</td>
                             <td>Alternate 2 Medical Professional</td>
-                        </tr>
-                        
+                        </tr>    
                     </tbody>
                 </table>
             </div>
@@ -87,7 +86,7 @@
                     </div>
                     <!-- Added per IME-59 -->
                     <div class="slds-notify slds-notify--alert slds-theme--error slds-theme--alert-texture alert-danger-email" style="float:left">
-                        Please provide Treating Medical Professional Email or check the box for Using Paper Process for DV.
+                        Please provide the Email for selected Medical Professional or Using Paper Process for DV.
                     </div>
                     <input type="button" value="Cancel" class="slds-button slds-button--neutral btn-process" onClick="Cancel();"/>
                     <input type="button" value="Send Diagnosis Verification" onClick="PassEmailVal();" class="slds-button slds-button--brand btn-process" style="margin-right:5px"/>
@@ -99,6 +98,19 @@
                 <apex:param id="resetValue" name="sendOrRest" value=""  />
             </apex:actionFunction>
             <script>
+            //IME 231
+            $( document ).ready(function() {
+                var availableContacts = [];
+                $('.selVal').each(function() {
+                    if(!$(this).parent().parent().hasClass('hideBlock')) { 
+                        availableContacts.push($(this));
+                    }
+                });
+                if(availableContacts.length == 1){
+                    availableContacts[0][0].checked = true;
+                }
+            });
+            //IME 231
             function PassEmailVal() { 
                 var emailTo = ''; 
                 var sendEmail = false; 

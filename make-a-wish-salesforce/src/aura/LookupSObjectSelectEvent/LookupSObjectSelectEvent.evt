@@ -1,0 +1,5 @@
+<aura:event type="COMPONENT" description="LookupSObjectSelectEvent">
+    <aura:attribute name="lookupId" type="String" required="false" description="The name field that generated the event"/>
+    <aura:attribute name="recordId" type="Id" required="true" description="The id of the selected item"/>
+    <aura:attribute name="recordName" type="String" required="true" description="The name of the selected item"/>
+</aura:event>

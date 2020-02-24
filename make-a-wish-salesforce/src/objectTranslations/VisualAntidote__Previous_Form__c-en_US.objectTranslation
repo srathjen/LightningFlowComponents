@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Active --></label>
+        <name>VisualAntidote__Active__c</name>
+    </fields>
+    <fields>
+        <label><!-- AdminEmail --></label>
+        <name>VisualAntidote__AdminEmail__c</name>
+    </fields>
+    <fields>
+        <label><!-- Context Type --></label>
+        <name>VisualAntidote__Context_Type__c</name>
+        <picklistValues>
+            <masterLabel>Admin</masterLabel>
+            <translation><!-- Admin --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>User</masterLabel>
+            <translation><!-- User --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Disable Lookup Visible Warning --></label>
+        <name>VisualAntidote__Disable_Lookup_Visible_Warning__c</name>
+    </fields>
+    <fields>
+        <label><!-- Disable Save for later warning --></label>
+        <name>VisualAntidote__Disable_Save_for_later_warning__c</name>
+    </fields>
+    <fields>
+        <label><!-- Draft Form --></label>
+        <name>VisualAntidote__Draft_Form__c</name>
+        <relationshipLabel><!-- Templates --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Draft Status --></label>
+        <name>VisualAntidote__Draft_Status__c</name>
+        <picklistValues>
+            <masterLabel>Published</masterLabel>
+            <translation><!-- Published --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unpublished</masterLabel>
+            <translation><!-- Unpublished --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Dynamic Prefill Enabled --></label>
+        <name>VisualAntidote__Dynamic_Prefill_Enabled__c</name>
+    </fields>
+    <fields>
+        <help><!-- Text for Email Template --></help>
+        <label><!-- EmailDraft --></label>
+        <name>VisualAntidote__EmailDraft__c</name>
+    </fields>
+    <fields>
+        <label><!-- EmailTemplateConfigFields --></label>
+        <name>VisualAntidote__EmailTemplateConfigFields__c</name>
+    </fields>
+    <fields>
+        <label><!-- EmailToNotify --></label>
+        <name>VisualAntidote__EmailToNotify__c</name>
+    </fields>
+    <fields>
+        <label><!-- EnableEmailNotifications --></label>
+        <name>VisualAntidote__EnableEmailNotifications__c</name>
+    </fields>
+    <fields>
+        <label><!-- ExportLinksData --></label>
+        <name>VisualAntidote__ExportLinksData__c</name>
+    </fields>
+    <fields>
+        <label><!-- FormstackID --></label>
+        <name>VisualAntidote__FastFormID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fast Prefill Info --></label>
+        <name>VisualAntidote__Fast_Prefill_Info__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fields Object xml --></label>
+        <name>VisualAntidote__Fields_Object_xml__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fields xml --></label>
+        <name>VisualAntidote__Fields_xml__c</name>
+    </fields>
+    <fields>
+        <label><!-- FormType --></label>
+        <name>VisualAntidote__FormType__c</name>
+        <picklistValues>
+            <masterLabel>ClassicLightning</masterLabel>
+            <translation><!-- ClassicLightning --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ClassicRegular</masterLabel>
+            <translation><!-- ClassicRegular --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NativeLightning</masterLabel>
+            <translation><!-- NativeLightning --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NativeRegular</masterLabel>
+            <translation><!-- NativeRegular --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Form Final Html --></label>
+        <name>VisualAntidote__Form_Final_Html__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form Html --></label>
+        <name>VisualAntidote__Form_Html__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form ID --></label>
+        <name>VisualAntidote__Form_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form Number --></label>
+        <name>VisualAntidote__Form_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form Options --></label>
+        <name>VisualAntidote__Form_Options__c</name>
+    </fields>
+    <fields>
+        <label><!-- Deprecated Form Type --></label>
+        <name>VisualAntidote__Form_Type__c</name>
+        <picklistValues>
+            <masterLabel>ClassicLightning</masterLabel>
+            <translation><!-- ClassicLightning --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ClassicRegular</masterLabel>
+            <translation><!-- ClassicRegular --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NativeRegular</masterLabel>
+            <translation><!-- NativeRegular --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Email has  draft --></help>
+        <label><!-- HasEmailDraft --></label>
+        <name>VisualAntidote__HasEmailDraft__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Related Object --></label>
+        <name>VisualAntidote__Hidden_Related_Object__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Secondary Object --></label>
+        <name>VisualAntidote__Hidden_Secondary_Object__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hide Popup --></label>
+        <name>VisualAntidote__Hide_Popup__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hosted Form ID --></label>
+        <name>VisualAntidote__Hosted_Form_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Fast Prefill Enabled --></label>
+        <name>VisualAntidote__Is_Fast_Prefill_Enabled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Native --></label>
+        <name>VisualAntidote__Is_Native__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Simple Web Interface Form --></label>
+        <name>VisualAntidote__Is_Simple_Web_Interface_Form__c</name>
+    </fields>
+    <fields>
+        <label><!-- JSCode --></label>
+        <name>VisualAntidote__JSCode__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object Name --></label>
+        <name>VisualAntidote__Object_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- PDF Confirmation Chatter --></label>
+        <name>VisualAntidote__PDF_Confirmation_Chatter__c</name>
+    </fields>
+    <fields>
+        <label><!-- PDF Confirmation Record --></label>
+        <name>VisualAntidote__PDF_Confirmation_Record__c</name>
+    </fields>
+    <fields>
+        <label><!-- PDF Name --></label>
+        <name>VisualAntidote__PDF_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- PDF Required --></label>
+        <name>VisualAntidote__PDF_Required__c</name>
+    </fields>
+    <fields>
+        <label><!-- PDF Send To Email --></label>
+        <name>VisualAntidote__PDF_Send_To_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- PDF Send To --></label>
+        <name>VisualAntidote__PDF_Send_To__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prefill Configuration --></label>
+        <name>VisualAntidote__Prefill_Configuration__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prefill Key --></label>
+        <name>VisualAntidote__Prefill_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prefill Object Info --></label>
+        <name>VisualAntidote__Prefill_Object_Info__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prefill Object list --></label>
+        <name>VisualAntidote__Prefill_Object_list__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prefill Secret Key --></label>
+        <name>VisualAntidote__Prefill_Secret_Key__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name for trigger - prefix FFPrefill_ --></help>
+        <label><!-- Prefill Trigger Name --></label>
+        <name>VisualAntidote__Prefill_Trigger_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prefill URL --></label>
+        <name>VisualAntidote__Prefill_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Related Object Info --></label>
+        <name>VisualAntidote__Related_Object_Info__c</name>
+    </fields>
+    <fields>
+        <label><!-- Related Object --></label>
+        <name>VisualAntidote__Related_Object__c</name>
+    </fields>
+    <fields>
+        <label><!-- Secondary Object --></label>
+        <name>VisualAntidote__Secondary_Object__c</name>
+    </fields>
+    <fields>
+        <label><!-- Theme --></label>
+        <name>VisualAntidote__Theme__c</name>
+        <relationshipLabel><!-- Templates --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- TrackingEnabled --></label>
+        <name>VisualAntidote__TrackingEnabled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Url Param Str --></label>
+        <name>VisualAntidote__Url_Param_Str__c</name>
+    </fields>
+    <fields>
+        <label><!-- Use REST API --></label>
+        <name>VisualAntidote__Use_REST_API__c</name>
+    </fields>
+    <layouts>
+        <layout>Custom Template Info Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

@@ -99,6 +99,7 @@
     <filter>
         <criteriaItems>
             <column>In_Kind_Donation_Reimbursement__c$RecordType</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>In_Kind_Donation_Reimbursement__c.Reimbursement</value>
         </criteriaItems>
@@ -112,6 +113,8 @@
     <reportType>Reimbursement_Files__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>In_Kind_Donation_Reimbursement__c$CreatedDate</dateColumn>
         <interval>INTERVAL_CURRENT</interval>

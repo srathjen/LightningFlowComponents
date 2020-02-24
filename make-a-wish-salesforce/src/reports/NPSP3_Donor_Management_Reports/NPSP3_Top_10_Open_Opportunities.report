@@ -38,6 +38,8 @@
     <rowLimit>10</rowLimit>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <sortColumn>EXP_AMOUNT</sortColumn>
     <sortOrder>Desc</sortOrder>
     <timeFrameFilter>

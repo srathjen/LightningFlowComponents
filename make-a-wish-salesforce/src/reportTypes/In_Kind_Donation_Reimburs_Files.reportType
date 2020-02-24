@@ -1307,11 +1307,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Budget_Total__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Region__c</field>
             <table>Case</table>
         </columns>
@@ -1333,16 +1328,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Wish_granter_2__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Budget_Cash__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Budget_Inkind__c</field>
             <table>Case</table>
         </columns>
         <columns>

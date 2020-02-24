@@ -1,0 +1,12 @@
+<!--
+ - Created by mnahar on 11/13/2019.
+ -->
+
+<aura:documentation>
+    <aura:description>Documentation for wishAffiliationDesignList</aura:description>
+    <aura:example name="wishAffiliationDesignList" ref="wishAffiliationDesignList" label="wishAffiliationDesignList">
+        # Description
+        wishAffiliationDesignList shows details of a wish Participants in a Card form and provides
+        buttons to review/update participant information or Remove existing participants.
+    </aura:example>
+</aura:documentation>

@@ -27,7 +27,7 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <componentInstances>
-            <componentName>sfa:activityPanel</componentName>
+            <componentName>runtime_sales_activities:activityPanel</componentName>
         </componentInstances>
         <name>facet-74057b9a-a901-412e-894d-4ddbd5e02345</name>
         <type>Facet</type>
@@ -99,8 +99,10 @@
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Medical Question Page</masterLabel>
-    <pageTemplate>flexipage:recordHomeTemplateDesktop</pageTemplate>
     <parentFlexiPage>flexipage__default_rec_L</parentFlexiPage>
     <sobjectType>Medical_Questions__c</sobjectType>
+    <template>
+        <name>flexipage:recordHomeTemplateDesktop</name>
+    </template>
     <type>RecordPage</type>
 </FlexiPage>

@@ -1,3 +1,8 @@
 Hi {!Lead.OwnerFullName},
 
-Chapter has been changed.
+The chapter assigned to {!Lead.Name}'s Lead record has changed.
+
+The Lead record was previously assigned to {!Lead.Hidden_OldChapterName__c}.
+The new chapter assigned is {!Lead.Hidden_Chapter_Name__c}.
+
+If you believe this change has been made in error, please contact help@wish.org.

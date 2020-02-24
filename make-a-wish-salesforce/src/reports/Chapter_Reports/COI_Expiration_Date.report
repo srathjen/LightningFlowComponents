@@ -22,6 +22,7 @@
     <filter>
         <criteriaItems>
             <column>Conflict_Of_Interest__c$Volunteer_Contact__c.is_Active_Volunteer__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
@@ -35,6 +36,8 @@
     <reportType>COI_Record_Type__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Conflict_Of_Interest__c$Expiration_Date__c</dateColumn>
         <interval>INTERVAL_NEXT30</interval>

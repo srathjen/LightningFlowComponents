@@ -1,6 +1,6 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
 <![CDATA[<p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Contact.FirstName},<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">You have successfully
 registered for an orientation to learn more about volunteering with
 Make-A-Wish. Details&nbsp;regarding&nbsp;the upcoming orientation are listed
@@ -11,8 +11,8 @@ Start Time: {!Volunteer_Orientation_Training__c.Start_Time__c}<o:p></o:p></span>
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">End Time:
 {!Volunteer_Orientation_Training__c.End_Time__c}<br>
 Location:&nbsp;{!Volunteer_Orientation_Training__c.Location__c}<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;"><br>
-If you need to cancel or change this orientation, please visit the&nbsp;<a href="https://make-a-wish.force.com/"><span style="color:blue">Make-A-Wish
-Volunteer Center</span></a>.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">We look forward to
+If you need to cancel or change this orientation, please visit the&nbsp;<span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish
+Volunteer Center</a></span>.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">We look forward to
 seeing you soon.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Volunteer_Orientation_Training__c.Orientation_Training_email_signature__c}<o:p></o:p></span></p><p class="MsoNormal" style="font-size: 12pt; margin-bottom: 0.0001pt;">
 

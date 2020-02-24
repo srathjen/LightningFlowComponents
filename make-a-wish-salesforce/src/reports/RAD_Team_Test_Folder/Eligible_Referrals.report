@@ -58,21 +58,25 @@
     <filter>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Assist__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
@@ -90,6 +94,8 @@
     <reportType>CaseList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <sortColumn>STATUS</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>

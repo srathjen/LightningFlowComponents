@@ -14,4 +14,5 @@ This below case is on hold status on past 6 months. Please take an action.
 
 {!Case.Link}</textOnly>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

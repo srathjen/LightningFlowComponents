@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="Refresh LighntingDataTable component">
+    <aura:attribute type="Boolean" name="isRefresh"/>
+    <aura:attribute type="Aura.Component[]" name="childCmp"/>
+</aura:event>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Volunteer Feedback</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Volunteer Feedback</value>
+    </caseValues>
+    <fields>
+        <label><!-- Non-Wish &amp; Events --></label>
+        <name>Non_Wish_Events__c</name>
+        <relationshipLabel><!-- Volunteer Feedback --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Notes --></label>
+        <name>Notes__c</name>
+    </fields>
+    <fields>
+        <help><!-- 1-5 (5 is good) --></help>
+        <label><!-- Rating --></label>
+        <name>Rating__c</name>
+    </fields>
+    <fields>
+        <label><!-- Role --></label>
+        <name>Role__c</name>
+        <relationshipLabel><!-- Volunteer Feedback --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Source --></label>
+        <name>Source__c</name>
+        <picklistValues>
+            <masterLabel>Donor</masterLabel>
+            <translation><!-- Donor --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Staff</masterLabel>
+            <translation><!-- Staff --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Volunteer</masterLabel>
+            <translation><!-- Volunteer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wish Family</masterLabel>
+            <translation><!-- Wish Family --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- The staff member who provided this feedback. --></help>
+        <label><!-- Staff Member --></label>
+        <name>Staff_Member__c</name>
+        <relationshipLabel><!-- Volunteer Feedback --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Volunteer Contact --></label>
+        <name>Volunteer_Contact__c</name>
+        <relationshipLabel><!-- Volunteer Feedback --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Wish --></label>
+        <name>Wish__c</name>
+        <relationshipLabel><!-- Volunteer Feedback --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Volunteer Feedback Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Feedback Information --></label>
+            <section>Feedback Information</section>
+        </sections>
+        <sections>
+            <label><!-- Feedback Source --></label>
+            <section>Feedback Source</section>
+        </sections>
+        <sections>
+            <label><!-- Wish or Event --></label>
+            <section>Wish or Event</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Please Select a Rating between 1 and 5 --></errorMessage>
+        <name>Rating_between_1_and_5</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Select either a Wish OR a Non Wish Event.  Feedback cannot be provide for both at the same time.  Please create one record per event or wish. --></errorMessage>
+        <name>Select_either_Wish_OR_Non_Wish_Event</name>
+    </validationRules>
+</CustomObjectTranslation>

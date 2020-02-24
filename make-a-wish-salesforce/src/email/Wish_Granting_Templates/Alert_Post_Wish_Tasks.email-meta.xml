@@ -8,4 +8,5 @@
     <style>freeForm</style>
     <subject>Alert: Post Wish Tasks</subject>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

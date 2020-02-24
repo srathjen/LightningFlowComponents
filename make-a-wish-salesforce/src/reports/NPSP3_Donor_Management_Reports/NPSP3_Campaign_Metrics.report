@@ -82,6 +82,7 @@
     <filter>
         <criteriaItems>
             <column>ACTUAL_COST</column>
+            <isUnlocked>false</isUnlocked>
             <operator>greaterThan</operator>
             <value>0</value>
         </criteriaItems>
@@ -104,4 +105,6 @@
     <reportType>CampaignList</reportType>
     <scope>orgAll</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
 </Report>

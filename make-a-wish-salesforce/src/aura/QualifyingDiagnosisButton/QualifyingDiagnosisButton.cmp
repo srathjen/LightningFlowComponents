@@ -1,0 +1,40 @@
+<aura:component extensible="true" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction,lightning:actionOverride" access="global" >
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <aura:attribute name="modalStyle" type="String" />
+    <aura:unescapedHtml value="{!v.modalStyle}"/>
+    
+    <aura:handler name="onchange" event="c:callParentMethod" action="{!c.closeModal}"/>
+    
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid"></div>
+        <div class="slds-card__body slds-card__body_inner">
+            <button class="slds-button slds-align_absolute-center slds-button--brand" onclick="{!c.openmodal}">Qualifying Diagnosis</button>  
+        </div>
+        <footer class="slds-card__footer"></footer>
+        
+    </article>    
+    <!--###### MODAL BOX Start From Here ######--> 
+    <div class="demo-only">
+        <section role="dialog" aura:id="Modalbox"  tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-modal_large">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button onclick="{!c.closeModal}" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning:icon class="slds-white" iconName="utility:close" size="small" />
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{!$Label.c.QualifyingDiagnosisHeaderLabel}</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <c:QualifyingDiagnosis_LC aura:id="childComp" recId="{!v.recordId}" />
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick="{!c.closeModal}" >Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick="{!c.handleParent}">Save</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop " aura:id="Modalbackdrop"></div>   
+    </div>
+    <!--###### MODAL BOX Part END Here ######-->
+    
+</aura:component>

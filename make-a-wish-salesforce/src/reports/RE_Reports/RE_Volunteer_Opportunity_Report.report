@@ -22,6 +22,7 @@
     <filter>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Migrated_Record__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
@@ -40,6 +41,8 @@
     <reportType>CustomEntity$Volunteer_Opportunity__c</reportType>
     <scope>user</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Volunteer_Opportunity__c.NWE_Date__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

@@ -1,0 +1,7 @@
+<!--
+ - Created by gmayer on 7/17/2019.
+ -->
+
+<aura:event type="COMPONENT" description="LookupSObjectClearEvent">
+    <aura:attribute name="lookupId" type="String" required="false" description="The name field that generated the event"/>
+</aura:event>

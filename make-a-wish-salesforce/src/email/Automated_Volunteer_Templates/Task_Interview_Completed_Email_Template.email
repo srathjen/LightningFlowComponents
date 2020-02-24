@@ -1,6 +1,6 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
 <![CDATA[<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Contact.FirstName},<br>
 <br>
@@ -9,8 +9,8 @@ skills.<br>
 <br>
 Your volunteer role requires the completion of a criminal background check
 every three years. To request your criminal background check, please log in to
-the&nbsp;<a href="https://make-a-wish.force.com/"><span style="color:blue">Make-A-Wish
-Volunteer Center</span></a>&nbsp;and click&nbsp;<b>"Continue Process"</b>.</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+the&nbsp;<span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish
+Volunteer Center</a></span>&nbsp;and click&nbsp;<b>"Continue Process"</b>.</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;"><br>
 We look forward to answering any questions you may have about this part of the
 volunteer application process.<br>

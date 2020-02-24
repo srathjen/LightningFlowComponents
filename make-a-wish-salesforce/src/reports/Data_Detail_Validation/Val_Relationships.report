@@ -58,6 +58,7 @@
     <filter>
         <criteriaItems>
             <column>Contact.Migrated_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
@@ -71,6 +72,8 @@
     <reportType>ContactCustomEntity$npe4__Relationship__c@npe4__Relationship__c.npe4__RelatedContact__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>LAST_ACTIVITY</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

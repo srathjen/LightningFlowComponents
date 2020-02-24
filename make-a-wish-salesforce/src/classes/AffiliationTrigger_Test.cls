@@ -1,9 +1,10 @@
+//This method is used to verify the fucntionality like unit testing
+//This method will create the Affiliation record. 
 @isTest
 public class AffiliationTrigger_Test {
 	static testmethod void affiliationCreation() {
-        Constant_AC  constant = new Constant_Ac();
-        Id chapterRecordTypeId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(constant.chapterRT).getRecordTypeId();
-        
+        Id chapterRecordTypeId = Constant_AC.CHAPTER_RT_ID;
+
         Account newAccount = new Account();
         newAccount.Name = 'Alabama - Chapter';
         newAccount.RecordTypeId = chapterRecordTypeId;

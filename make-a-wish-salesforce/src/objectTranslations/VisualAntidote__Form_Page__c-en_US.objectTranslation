@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- FieldsObjectXml --></label>
+        <name>VisualAntidote__FieldsObjectXml__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fields xml --></label>
+        <name>VisualAntidote__Fields_xml__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form --></label>
+        <name>VisualAntidote__Form__c</name>
+        <relationshipLabel><!-- Form Pages --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Html --></label>
+        <name>VisualAntidote__Html__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Hidden --></label>
+        <name>VisualAntidote__Is_Hidden__c</name>
+    </fields>
+    <fields>
+        <label><!-- Page Order --></label>
+        <name>VisualAntidote__Page_Order__c</name>
+    </fields>
+    <fields>
+        <label><!-- Page Title --></label>
+        <name>VisualAntidote__Page_Title__c</name>
+    </fields>
+    <layouts>
+        <layout>Form Page Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

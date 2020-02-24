@@ -1,0 +1,8 @@
+<aura:documentation>
+	<aura:description>Documentation for WishSignatureMedical</aura:description>
+	<aura:example name="WishSignatureMedical" ref="WishSignatureMedical" label="WishSignatureMedical">
+		# Description
+        WishSignatureMedical is a custom component to show all the Medical type Wish Required Signature records of the Wish.
+		It also gives the flexibiltiy to add new Wish Required Signature records.
+	</aura:example>
+</aura:documentation>

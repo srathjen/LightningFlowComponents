@@ -1,3 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata"/>
-
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- CTA image path --></label>
+        <name>WM4SF3__CTA_image_path__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Name --></label>
+        <name>WM4SF3__Customer_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Extension Guid --></label>
+        <name>WM4SF3__Extension_Guid__c</name>
+    </fields>
+    <fields>
+        <label><!-- Extension Profile --></label>
+        <name>WM4SF3__Extension_Profile__c</name>
+    </fields>
+    <fields>
+        <label><!-- QA Mode --></label>
+        <name>WM4SF3__QA_Mode__c</name>
+    </fields>
+</CustomObjectTranslation>

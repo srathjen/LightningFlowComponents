@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Case</entityName>
+    <fieldName>Status</fieldName>
+    <masterLabel>Wish Stages</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>Sub_Status__c</fieldNames>
+        <picklistValueName>Closed</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Adoptable__c</fieldNames>
+        <fieldNames>Adopted__c</fieldNames>
+        <fieldNames>Adopted_By__c</fieldNames>
+        <info>&lt;p&gt;High fives all around!! The wish has been granted and the financials have been reconciled. Great job, partner.&lt;/p&gt;</info>
+        <picklistValueName>Completed</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Adoptable__c</fieldNames>
+        <fieldNames>Adopted__c</fieldNames>
+        <fieldNames>Adopted_By__c</fieldNames>
+        <info>&lt;p&gt;Woohoo! The wish has been granted. Now it’s time to tie up any loose ends so you can close out the wish file.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;&lt;u&gt;Next Steps Include:&lt;/u&gt;&lt;/i&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Prompt volunteers to submit their reimbursement requests and in-kind documentation&lt;/li&gt;&lt;li&gt;Record all actual cash and in-kind costs and reconcile financials within 3 months of the wish – you got this!&lt;/li&gt;&lt;li&gt;Engage family post-wish and document any feedback you receive&lt;/li&gt;&lt;li&gt;Survey family and volunteers, recording the information in the record &lt;/li&gt;&lt;li&gt;Update the record to &lt;b&gt;Completed &lt;/b&gt;once the actuals and financials match&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Granted</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Sub_Status__c</fieldNames>
+        <fieldNames>Hold_Date__c</fieldNames>
+        <fieldNames>Est_Hold_End_Date__c</fieldNames>
+        <fieldNames>Wish_Delay_Comments__c</fieldNames>
+        <info>&lt;p&gt;This wish is currently on hold, or in the process of being closed.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Hold – Elective: the wish can be on elective hold for up to 1 year at the family’s request&lt;/li&gt;&lt;li&gt;Hold – Medical: the wish can be on medical hold as long as the child’s medical team deems necessary&lt;/li&gt;&lt;li&gt;Closing – Loss of Contact: this wish is in the process of being closed due to lack of response from the family&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;&lt;u&gt;Next Steps Include:&lt;/u&gt;&lt;/i&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Document holds in notes&lt;/li&gt;&lt;li&gt;Create tasks for routine follow up&lt;/li&gt;&lt;li&gt;Document all communication attempts if in the 90/60/30-day process&lt;/li&gt;&lt;li&gt;Update to &lt;b&gt;Closed – Family Delay&lt;/b&gt; if the wish family exceeds the time limits established in our national family delay policy&lt;/li&gt;&lt;li&gt;Update to &lt;b&gt;Closed – Loss of Contact &lt;/b&gt;if the wish family does not respond during the 90-day process&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Inactive</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Budget_Submitted_Date__c</fieldNames>
+        <fieldNames>Budget_Approved_Date__c</fieldNames>
+        <fieldNames>Wish_Clearance_Needed__c</fieldNames>
+        <fieldNames>Wish_Clearance_Sent_Date__c</fieldNames>
+        <fieldNames>Wish_Clearance_Received_Date__c</fieldNames>
+        <info>&lt;p&gt;The child’s wish is awaiting budget approval and/or medical approval. &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;&lt;u&gt;Next Steps Include:&lt;/u&gt;&lt;/i&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Follow up with the medical professional if medical paperwork isn’t returned within 2 weeks&lt;/li&gt;&lt;li&gt;Update to &lt;b&gt;Wish Design&lt;/b&gt; once budget and medical approval are received&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Pending Approval</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Welcome_Call_Date__c</fieldNames>
+        <info>&lt;p&gt;This child has qualified for a wish! Let’s make some magic.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;&lt;u&gt;Next Steps Include:&lt;/u&gt;&lt;/i&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Conduct the family welcome call&lt;/li&gt;&lt;li&gt;Update wish child and family information&lt;/li&gt;&lt;li&gt;Send welcome email/mail – with parent handbook&lt;/li&gt;&lt;li&gt;Send Wish Consent forms&lt;/li&gt;&lt;li&gt;Update the wish to &lt;b&gt;Ready to Assign&lt;/b&gt; once the Wish Consent forms have been signed&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Qualified</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Sub_Status__c</fieldNames>
+        <fieldNames>Region__c</fieldNames>
+        <info>&lt;p&gt;Now that the Wish Consent forms have been signed, this wish child is ready for assignment! Update the sub status to “In Portal” if you would like the opportunities to be available to volunteers in the portal. Utilize the sub status of “Non-viewable” if you are assigning volunteers manually.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;&lt;u&gt;Next Steps Include:&lt;/u&gt;&lt;/i&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Approve or assign volunteers to the wish&lt;/li&gt;&lt;li&gt;Update to &lt;b&gt;Ready for Interview&lt;/b&gt; once two Make-A-Wish representatives are assigned to the wish&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Ready to Assign</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Sub_Status__c</fieldNames>
+        <fieldNames>Interview_date__c</fieldNames>
+        <fieldNames>Additional_Interview_Date1__c</fieldNames>
+        <fieldNames>Additional_Interview_date2__c</fieldNames>
+        <fieldNames>Wish_Vision_Interview_Notes__c</fieldNames>
+        <info>&lt;p&gt;This child is ready to discuss their wish ideas! Encourage the volunteers/staff to schedule the wish visit within 2 weeks of being assigned to the wish so that we keep the wish moving.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;&lt;u&gt;Next Steps Include:&lt;/u&gt;&lt;/i&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Wish Visit scheduled with family&lt;/li&gt;&lt;li&gt;Wish Design forms should be completed and returned&lt;/li&gt;&lt;li&gt;Update to &lt;b&gt;Wish Determined&lt;/b&gt; once the completed Wish Design forms are received and reviewed&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Ready to Interview</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>AnticipatedStart_Date__c</fieldNames>
+        <fieldNames>Extended_Start_Date__c</fieldNames>
+        <fieldNames>End_Date__c</fieldNames>
+        <fieldNames>Extended_End_Date__c</fieldNames>
+        <info>&lt;p&gt;This wish is now approved and it’s time to start planning the wish!&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;&lt;u&gt;Next Steps Include:&lt;/u&gt;&lt;/i&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Determine the wish dates with family and the assisting chapter as necessary&lt;/li&gt;&lt;li&gt;Confirm all wish details with volunteers and family&lt;/li&gt;&lt;li&gt;Submit the wish assist request and/or celebrity request paperwork&lt;/li&gt;&lt;li&gt;Confirm vendors for wish&lt;/li&gt;&lt;li&gt;Update the wish to &lt;b&gt;Wish Scheduled&lt;/b&gt; when the wish dates are official and you are ready to make the wish arrangements&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Wish Design</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Wish_Determined_Date__c</fieldNames>
+        <fieldNames>MY_WISH_IS_TO__c</fieldNames>
+        <fieldNames>Wish_Type__c</fieldNames>
+        <fieldNames>Description</fieldNames>
+        <fieldNames>Wish_Clearance_Needed__c</fieldNames>
+        <info>&lt;p&gt;The wish child has determined their wish!&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;&lt;u&gt;Next Steps Include:&lt;/u&gt;&lt;/i&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Review any Wish Change Requests from volunteers&lt;/li&gt;&lt;li&gt;Review participant requests&lt;/li&gt;&lt;li&gt;Confirm necessary participant paperwork has been received&lt;/li&gt;&lt;li&gt;Determine the medical and/or logistical needs of the wish&lt;/li&gt;&lt;li&gt;Research the wish and review &lt;a href=&quot;https://dailywish.wish.org/Interact/Pages/Content/Document.aspx?id=29322&quot; target=&quot;_blank&quot;&gt;Performance Standards&lt;/a&gt;&lt;/li&gt;&lt;li&gt;Create and submit the budget—consider in-kind resources, local and national&lt;/li&gt;&lt;li&gt;Send the Wish Clearance form and/or Child’s Medical Summary as necessary&lt;/li&gt;&lt;li&gt;Update to &lt;b&gt;Pending Approval&lt;/b&gt; once you have submitted the budget and/or Wish Clearance&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Wish Determined</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>AnticipatedStart_Date__c</fieldNames>
+        <fieldNames>Extended_Start_Date__c</fieldNames>
+        <fieldNames>End_Date__c</fieldNames>
+        <fieldNames>Extended_End_Date__c</fieldNames>
+        <fieldNames>Presentation_Date__c</fieldNames>
+        <info>&lt;p&gt;The dates are confirmed for this wish and arrangements are being made!&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;&lt;u&gt;Next Steps Include:&lt;/u&gt;&lt;/i&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Make all wish arrangements&lt;/li&gt;&lt;li&gt;Request medical equipment&lt;/li&gt;&lt;li&gt;Submit wish assist, if not already completed&lt;/li&gt;&lt;li&gt;Submit all paperwork to GKTW (if applicable)&lt;/li&gt;&lt;li&gt;Update Medical Clearance (if applicable)&lt;/li&gt;&lt;li&gt;Submit BBVA/Check request for per diem&lt;/li&gt;&lt;li&gt;Prepare and send the itinerary&lt;/li&gt;&lt;li&gt;Update your PR department if the wish child is a good candidate for publicity!&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Wish Scheduled</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>Wish</recordTypeName>
+</PathAssistant>

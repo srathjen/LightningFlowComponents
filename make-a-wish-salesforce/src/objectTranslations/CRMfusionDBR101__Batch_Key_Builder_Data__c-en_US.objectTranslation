@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <help><!-- Combination of Rebuild Number and Object Type to create a unique key for the row to prevent corruption from multiple jobs being started simultaneously. Format: &lt;Rebuild Number&gt;_&lt;Object Name&gt;. --></help>
+        <label><!-- Batch Set Row Key --></label>
+        <name>CRMfusionDBR101__Batch_Set_Row_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Batches Done --></label>
+        <name>CRMfusionDBR101__Batches_Done__c</name>
+    </fields>
+    <fields>
+        <label><!-- Completed --></label>
+        <name>CRMfusionDBR101__Completed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Current Batch Started --></label>
+        <name>CRMfusionDBR101__Current_Batch_Started__c</name>
+    </fields>
+    <fields>
+        <label><!-- Job ID --></label>
+        <name>CRMfusionDBR101__Job_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Batch Size --></label>
+        <name>CRMfusionDBR101__Last_Batch_Size__c</name>
+    </fields>
+    <fields>
+        <label><!-- Max Batch Size --></label>
+        <name>CRMfusionDBR101__Max_Batch_Size__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object Type --></label>
+        <name>CRMfusionDBR101__Object_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rebuild Number --></label>
+        <name>CRMfusionDBR101__Rebuild_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rebuild Order --></label>
+        <name>CRMfusionDBR101__Rebuild_Order__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scenario IDs --></label>
+        <name>CRMfusionDBR101__Scenario_Ids__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Batches --></label>
+        <name>CRMfusionDBR101__Total_Batches__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Duration --></label>
+        <name>CRMfusionDBR101__Total_Duration__c</name>
+    </fields>
+</CustomObjectTranslation>

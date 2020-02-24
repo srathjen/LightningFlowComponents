@@ -22,17 +22,22 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <componentInstances>
-            <componentName>forceChatter:recordFeedContainer</componentName>
+            <componentInstanceProperties>
+                <name>relatedListComponentOverride</name>
+                <value>NONE</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>rowsToDisplay</name>
+                <value>10</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>showActionBar</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentName>force:relatedListContainer</componentName>
         </componentInstances>
         <mode>Replace</mode>
         <name>feedTabContent</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <componentInstances>
-            <componentName>sfa:activityPanel</componentName>
-        </componentInstances>
-        <name>facet-fa129055-d1ae-40eb-9dbe-aea9ec04e3f2</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -62,18 +67,7 @@
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>title</name>
-                <value>Standard.Tab.collaborate</value>
-            </componentInstanceProperties>
-            <componentName>flexipage:tab</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>body</name>
-                <value>facet-fa129055-d1ae-40eb-9dbe-aea9ec04e3f2</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>title</name>
-                <value>Standard.Tab.activity</value>
+                <value>Standard.Tab.relatedLists</value>
             </componentInstanceProperties>
             <componentName>flexipage:tab</componentName>
         </componentInstances>
@@ -95,22 +89,96 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <componentInstances>
-            <componentName>QualifyingDiagnosisButton</componentName>
+            <componentName>forceChatter:recordFeedContainer</componentName>
+        </componentInstances>
+        <name>Facet-44b0eec0-f094-4098-ae90-49b6c6c1ea15</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
+            <componentName>runtime_sales_activities:activityPanel</componentName>
+        </componentInstances>
+        <name>Facet-cc7ef8e3-142b-4ae8-a0ec-dc6a112bb12d</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>active</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>body</name>
+                <value>Facet-44b0eec0-f094-4098-ae90-49b6c6c1ea15</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>title</name>
+                <value>Actions</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:tab</componentName>
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
-                <name>relatedListComponentOverride</name>
-                <value>NONE</value>
+                <name>body</name>
+                <value>Facet-cc7ef8e3-142b-4ae8-a0ec-dc6a112bb12d</value>
             </componentInstanceProperties>
-            <componentName>force:relatedListContainer</componentName>
+            <componentInstanceProperties>
+                <name>title</name>
+                <value>Standard.Tab.activity</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:tab</componentName>
+        </componentInstances>
+        <name>Facet-2564a029-3cac-484e-a74f-a832815dbcba</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
+            <componentName>QualifyingDiagnosisButton</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND (2 OR 3) AND (4 OR 5)</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.RecordType.Name}</leftValue>
+                    <operator>EQUAL</operator>
+                    <rightValue>Diagnosis Verification Review</rightValue>
+                </criteria>
+                <criteria>
+                    <leftValue>{!$User.Profile.Name}</leftValue>
+                    <operator>EQUAL</operator>
+                    <rightValue>Full Access National Staff</rightValue>
+                </criteria>
+                <criteria>
+                    <leftValue>{!$User.Profile.Name}</leftValue>
+                    <operator>EQUAL</operator>
+                    <rightValue>System Administrator</rightValue>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Status}</leftValue>
+                    <operator>NE</operator>
+                    <rightValue>Approved - National Medical Review</rightValue>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Status}</leftValue>
+                    <operator>NE</operator>
+                    <rightValue>Approved - National MAC Review</rightValue>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>tabs</name>
+                <value>Facet-2564a029-3cac-484e-a74f-a832815dbcba</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:tabset</componentName>
         </componentInstances>
         <mode>Replace</mode>
         <name>sidebar</name>
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Case Record Page</masterLabel>
-    <pageTemplate>flexipage:recordHomeTemplateDesktop</pageTemplate>
     <parentFlexiPage>sfa__Case_rec_L</parentFlexiPage>
     <sobjectType>Case</sobjectType>
+    <template>
+        <name>flexipage:recordHomeTemplateDesktop</name>
+    </template>
     <type>RecordPage</type>
 </FlexiPage>

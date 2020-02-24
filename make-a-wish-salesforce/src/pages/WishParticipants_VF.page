@@ -32,9 +32,18 @@
                     <th>Medical Needs</th>
                     <th>Non-Comped</th>
                 </tr>
+                <apex:variable value="{!0}" var="rowNum"/>
                 <apex:repeat value="{!ParticipantsConList}" var="Participant">
                     <tr class="border_top">
-                        <td><div class = "fontcolor" ><a href="/{!Participant.npe4__RelatedContact__c}" target="_blank" class = "fontcolor">View</a></div></td>
+                        <td><div class = "fontcolor" >
+                            <apex:outputPanel rendered="{!IF(rowNum == 0,true,false)}">
+                                <div class = "fontcolor" ><a href="/{!Participant.npe4__RelatedContact__c}" target="_blank" class = "fontcolor" >View</a> / <a href="/{!Participant.npe4__RelatedContact__c}/e" target="_blank" class = "fontcolor">Edit</a></div>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!IF(rowNum != 0,true,false)}">
+                                <div class = "fontcolor" ><a href="/{!Participant.id}" target="_blank" class = "fontcolor" >View</a> / <a href="/{!Participant.id}/e" target="_blank" class = "fontcolor">Edit</a></div>
+                            </apex:outputPanel>
+                            </div></td>
+                        <!-- <td><div class = "fontcolor" ><a href="/{!Participant.npe4__RelatedContact__c}" target="_blank" class = "fontcolor">View</a></div></td> -->
                         <td>{!Participant.npe4__RelatedContact__r.FirstName}</td>
                         <td>{!Participant.npe4__RelatedContact__r.Middle_Name__c}</td>
                         <td>{!Participant.npe4__RelatedContact__r.LastName}</td>
@@ -52,6 +61,7 @@
                         <!-- <td>{!Participant.Non_Comped__c }</td> -->
                         <td><apex:outputField value="{!Participant.Non_Comped__c }"/></td> 
                     </tr>
+                    <apex:variable var="rowNum" value="{!rowNum + 1}"/>
                 </apex:repeat>
                 
             </table>    

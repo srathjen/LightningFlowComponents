@@ -2,12 +2,20 @@
 public class WishParticipants_Test{
     @isTest static void createRelationship(){
         Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
+        insert chapterAccount;
+
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
-        contact wishFamily = OrientationandTrainingUtil.CreateWishFamily();
+        Contact wishFamily = OrientationandTrainingUtil.CreateWishFamily();
+        insert new List<Contact>{
+                wishChild, wishFamily
+        };
+
         Case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        insert wish;
+
         npe4__Relationship__c relationship = OrientationandTrainingUtil.CreateRelationshipRec(wishChild.Id,wishFamily.Id);
         relationship.npe4__Type__c = 'Family';
-        Update relationship;
+        insert relationship;
         PageReference pageRef = Page.WishParticipants_VF;
         Test.setCurrentPage(pageRef);
          ApexPages.StandardController stdController = new ApexPages.StandardController(wish);

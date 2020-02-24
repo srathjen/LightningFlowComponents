@@ -34,6 +34,14 @@
                 <behavior>Edit</behavior>
                 <field>Close_Task__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>IsReminderSet</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Description</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

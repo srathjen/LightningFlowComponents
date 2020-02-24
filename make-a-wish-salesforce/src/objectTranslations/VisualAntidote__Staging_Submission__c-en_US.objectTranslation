@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Batch Status --></label>
+        <name>VisualAntidote__Batch_Status__c</name>
+        <picklistValues>
+            <masterLabel>Error</masterLabel>
+            <translation><!-- Error --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NA</masterLabel>
+            <translation><!-- NA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Started</masterLabel>
+            <translation><!-- Not Started --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Processed</masterLabel>
+            <translation><!-- Processed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Updated</masterLabel>
+            <translation><!-- Updated --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Detail --></label>
+        <name>VisualAntidote__Detail__c</name>
+    </fields>
+    <fields>
+        <label><!-- Execution Order --></label>
+        <name>VisualAntidote__Execution_Order__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form --></label>
+        <name>VisualAntidote__Form__c</name>
+        <relationshipLabel><!-- Staging Submissions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- IP Address --></label>
+        <name>VisualAntidote__IP_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Native --></label>
+        <name>VisualAntidote__Is_Native__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object Order --></label>
+        <name>VisualAntidote__Object_Order__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object --></label>
+        <name>VisualAntidote__Object__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference Field Name --></label>
+        <name>VisualAntidote__Reference_Field_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reference Record Id --></label>
+        <name>VisualAntidote__Reference_Record_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Repeat Index --></label>
+        <name>VisualAntidote__Repeat_Index__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>VisualAntidote__Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submission --></label>
+        <name>VisualAntidote__Submission__c</name>
+        <relationshipLabel><!-- Staging Submissions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Submitted Data XML --></label>
+        <name>VisualAntidote__Submitted_Data_XML__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unique Object Id --></label>
+        <name>VisualAntidote__Unique_Object_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Upsert Fields --></label>
+        <name>VisualAntidote__Upsert_Fields__c</name>
+    </fields>
+    <fields>
+        <label><!-- User Content ID --></label>
+        <name>VisualAntidote__User_Content_ID__c</name>
+    </fields>
+    <layouts>
+        <layout>Staging Submission Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

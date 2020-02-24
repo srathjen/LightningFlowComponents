@@ -11,11 +11,10 @@ Description : Contact_OnBeforeInsertTriggerHandler is used assign the values to 
 *****************************************************************************************************/
 
 Public class Contact_OnBeforeInsertTriggerHandler{
-    
-    static Constant_AC  constant = new Constant_AC();
-    static Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
-    static Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
-    static Id familyContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
+
+    static Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
+    static Id wichChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
+    static Id familyContactRecordTypeId = Constant_AC.WISH_FAMILY_RT_ID;
    
    /*This onBeforeInsert method is used to assign the values to Relationship_Type__c field based on the record type */
     public static void onBeforeInsert(List<Contact> newContactList){
@@ -49,7 +48,7 @@ Public class Contact_OnBeforeInsertTriggerHandler{
                 }
             }
             if(newContact.RecordTypeId == wichChildRecordTypeId){
-                newContact.Relationship_Type__c = 'Wish Child';
+                newContact.Relationship_Type__c = Constant_AC.CONTACT_WISH_CHILD_RT_LABEL;
             }
             if(newContact.RecordTypeId == familyContactRecordTypeId ){
                 newContact.Relationship_Type__c = 'Parent/Legal Guardian';

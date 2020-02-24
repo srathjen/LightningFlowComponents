@@ -1,0 +1,68 @@
+<table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
+<tr valign="top" height="400" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;">Dear Family of&nbsp;{!Contact.Name},<o:p></o:p></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><o:p>&nbsp;</o:p></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><o:p>&nbsp;</o:p></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;">Welcome to your child’s wish experience! We are excited to
+meet your child soon and look forward to creating a wish that will bring your
+family unforgettable memories.<o:p></o:p></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><o:p>&nbsp;</o:p></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;">Studies have shown that a wish is powerful medicine for
+children who are living with the day-to-day realities of a critical illness. A
+wish can be life-changing, offering your child the opportunity to think beyond
+their illness and embrace hope. <o:p></o:p></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><o:p>&nbsp;</o:p></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;">Here is what you can expect as we begin your child’s wish
+journey:<o:p></o:p></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><o:p>&nbsp;</o:p></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><ul><li>In the next week, please review and complete our wish family
+paperwork. This paperwork will allow&nbsp;{!Case.ChapterName__c} to grant your child’s wish.
+Please complete forms as soon as possible.</li></ul><o:p></o:p></p>
+
+<blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;"><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;">Our paperwork will be emailed from our Wish &amp; Volunteer
+Center (WVC) via DocuSign to <span style="background:yellow;mso-highlight:yellow">both
+of your emails</span> with the following subject line(s): </p></blockquote><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><o:p></o:p></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><o:p>&nbsp;</o:p></p>
+
+<blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;"><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;">“Signature Required - Wish Consent and Liability/Publicity
+Release” </p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="background:yellow;mso-highlight:yellow">“Signature
+Required - Absent Parent Form”</span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="background:yellow;mso-highlight:yellow">“Signature
+Required – Single Parent Form”</span></p></blockquote><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><o:p></o:p></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><o:p></o:p></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><o:p></o:p></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><o:p>&nbsp;</o:p></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><ul><li>Your family orientation phone call is scheduled for <span style="background:yellow;mso-highlight:yellow"><b>[insert date] at [insert time]</b></span>.
+This orientation is for caregivers only. Please review the enclosed family
+orientation handbook. A volunteer will call you to go over this handbook and
+answer your questions.</li></ul></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><ul><li>In the coming month your child’s volunteer wish granters
+will call you to schedule your child’s initial interview, preferably in your
+home. Wish granters will be your primary points of contact throughout your
+child’s wish journey. </li></ul><o:p></o:p></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><br></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;">Please do not hesitate to contact me if you have questions.
+I am happy to help!<o:p></o:p></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><o:p>&nbsp;</o:p></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;">Best wishes,<o:p></o:p></p>
+
+<font face="arial">{!Case.OwnerFullName}</font>]]></td>
+</tr>
+</table>

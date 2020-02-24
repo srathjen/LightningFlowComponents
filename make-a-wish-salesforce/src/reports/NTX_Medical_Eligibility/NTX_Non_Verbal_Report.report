@@ -27,8 +27,15 @@
     <filter>
         <criteriaItems>
             <column>Lead$ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish North Texas</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>
@@ -45,8 +52,10 @@
     <reportType>Leads_detail__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
-        <dateColumn>Lead$Inquiry_Date__c</dateColumn>
-        <interval>INTERVAL_CURRENT</interval>
+        <dateColumn>Lead$Referred_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>

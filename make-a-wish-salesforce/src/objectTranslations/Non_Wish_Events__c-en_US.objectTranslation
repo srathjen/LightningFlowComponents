@@ -538,19 +538,8 @@
             <section>Custom Links</section>
         </sections>
         <sections>
-            <label><!-- Volunteer Related Details --></label>
-            <section>Volunteer Related Details</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Event Layout Chapter Staff Layout</layout>
-        <sections>
-            <label><!-- Add Volunteer Role --></label>
-            <section>Add Volunteer Role</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
+            <label><!-- Event Details --></label>
+            <section>Event Details</section>
         </sections>
         <sections>
             <label><!-- Volunteer Related Details --></label>
@@ -566,20 +555,6 @@
         <sections>
             <label><!-- Volunteer Role --></label>
             <section>Volunteer Role</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Non Wish</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Non Wish Chapter Staff Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
         </sections>
     </layouts>
     <layouts>
@@ -600,6 +575,10 @@
             <section>Custom Links</section>
         </sections>
         <sections>
+            <label><!-- Event Details --></label>
+            <section>Event Details</section>
+        </sections>
+        <sections>
             <label><!-- Volunteer Related Details --></label>
             <section>Volunteer Related Details</section>
         </sections>
@@ -608,11 +587,21 @@
             <section>Volunteer Role</section>
         </sections>
     </layouts>
+    <quickActions>
+        <label><!-- Log a Call --></label>
+        <name>Log_a_Call_NWE</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New Task --></label>
+        <name>New_Task_NWE</name>
+    </quickActions>
     <recordTypes>
+        <description><!-- It will hold the Chapter Event details --></description>
         <label><!-- Events --></label>
         <name>Events</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- It will hold the non wish record details --></description>
         <label><!-- Non Wish --></label>
         <name>Non_Wish</name>
     </recordTypes>

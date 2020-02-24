@@ -1,0 +1,487 @@
+<!--
+ - Created by gmayer on 7/26/2019.
+ -->
+<aura:component controller="WishAffiliation_AC"
+                implements="force:appHostable,flexipage:availableForRecordHome,force:hasRecordID,flexipage:availableForAllPageTypes,lightning:availableForFlowScreens"
+                access="global"
+                description="WishMedicalProfessionalList">
+
+    <!-- Handlers -->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:handler name="lookupSObjectSelect" event="c:LookupSObjectSelectEvent"
+                  action="{!c.handleLookupSelectedEvent}"/>
+    <aura:handler name="lookupSObjectClear" event="c:LookupSObjectClearEvent"
+                  action="{!c.handleLookupClearedEvent}"/>
+    <aura:handler name="customToastClose" event="c:CustomToastCloseEvent"
+                  action="{!c.handleCustomToastCloseEvent}"/>
+
+    <!-- Methods-->
+    <aura:method name="reInit" action="{!c.doInit}" description="Runs the init method again"/>
+    <aura:method name="refresh" action="{!c.refresh}"/>
+    <aura:method name="onChangeValidate" action="{!c.onChangeValidate}"/>
+    <aura:method name="openCloseModal" action="{!c.openCloseModal}"/>
+    <aura:method name="closeToast" action="{!c.closeToast}"/>
+    <aura:method name="initializeNewWishAffiliation" action="{!c.initializeNewWishAffiliation}"/>
+
+    <!-- Attributes -->
+    <aura:attribute name="recordId" type="String" access="global"/>
+    <aura:attribute name="wishCaseRecordId" type="String" access="global"/>
+    <aura:attribute name="wishChildContactId" type="String" access="global"/>
+    <aura:attribute name="wishFamilyRecordTypeId" type="Id" access="private"/>
+    <aura:attribute name="wishMedicalProfessionals" type="Object[]" default="[]"/>
+    <aura:attribute name="newWishMedicalProfessional" type="Object"/>
+    <aura:attribute name="states" type="Object[]" default="[]"/>
+    <aura:attribute name="countries" type="Object[]" default="[]"/>
+    <aura:attribute name="preferredPhoneOptions" type="Object[]" default="[]"/>
+    <aura:attribute name="relationshipTypes" type="Object[]" default="[]"/>
+    <aura:attribute name="wishAffiliationTypes" type="Object[]" default="[]"/>
+    <aura:attribute name="wishAffiliationTypesOfCategory" type="Object[]" default="[]"/>
+    <aura:attribute name="wishAffiliationTypesOfCategoryDefault" type="String"/>
+    <aura:attribute name="modalContactLookupRecordId" type="String"/>
+    <aura:attribute name="isUserProfileAllowedToUpdateWishAffiliation" type="Boolean"/>
+    <aura:attribute name="showModal" type="Boolean" default="false" access="private"/>
+    <aura:attribute name="showCreateContact" type="Boolean" default="false" access="private"/>
+    <aura:attribute name="wishAffiliationLabels" type="Map" default="{}"/>
+    <aura:attribute name="contactLabels" type="Map" default="{}"/>
+    <aura:attribute name="relationshipLabels" type="Map" default="{}"/>
+    <aura:attribute name="accountLabels" type="Map" default="{}"/>
+    <aura:attribute name="medicalProviderTypes" type="Object[]" default="[]"/>
+    <aura:attribute name="showSpinner" type="Boolean" default="true"/>
+
+    <!-- Validation Attributes for fields -->
+    <aura:attribute name="isValidData" type="Boolean" default="true" access="private"/>
+    <aura:attribute name="isValidFirstName" type="Boolean" default="true" access="private"/>
+    <aura:attribute name="isValidLastName" type="Boolean" default="true" access="private"/>
+    <aura:attribute name="isValidCountry" type="Boolean" default="true" access="private"/>
+    <aura:attribute name="isValidRelationshipType" type="Boolean" default="true" access="private"/>
+    <aura:attribute name="isValidWishAffiliationType" type="Boolean" default="true" access="private"/>
+    <aura:attribute name="isValidWishMedicalProfessionalListContactLookup" type="Boolean" default="true"
+                    access="private"/>
+    <aura:attribute name="isValidWishMedicalProfessionalListRelatedContactLookup" type="Boolean" default="true"
+                    access="private"/>
+    <aura:attribute name="showToast" type="Boolean" default="false"/>
+    <aura:attribute name="toastMessage" type="String" default=""/>
+    <aura:attribute name="toastMessageType" type="String" default=""/>
+    <aura:attribute name="isHide" type="Boolean" default="false"/>
+
+    <!-- Spinner -->
+    <aura:renderIf isTrue="{!v.showSpinner}">
+        <lightning:spinner size="large" variant="brand" class="spinner"/>
+    </aura:renderIf>
+
+    <!-- Header Card -->
+    <div class="slds-card__header slds-grid">
+        <div class="slds-media__body slds-media_center slds-text-heading_medium">
+            <span>{!$Label.c.Wish_Affiliation_Medical_Professionals + ' (' +  v.wishMedicalProfessionals.length + ')'}</span>
+        </div>
+        <div class="slds-no-flex">
+            <aura:renderIf isTrue="{!v.isUserProfileAllowedToUpdateWishAffiliation}">
+                <lightning:button label="{!$Label.c.Wish_Affiliation_Refresh}" variant="neutral" name="refresh"
+                                  onclick="{!c.refresh}"/>
+            </aura:renderIf>
+            <aura:renderIf isTrue="{!v.isUserProfileAllowedToUpdateWishAffiliation}">
+                <lightning:button label="{!$Label.c.Wish_Affiliation_New}" variant="neutral" name="new"
+                                  onclick="{!c.openCloseModal}"/>
+            </aura:renderIf>
+        </div>
+    </div>
+    <aura:renderIf isTrue="{!!empty(!v.wishMedicalProfessionals)}">
+        <div>
+            <table class="slds-table slds-box slds-no-row-hover slds-max-medium-table_stacked-horizontal"
+                   role="grid">
+                <thead>
+                <tr class="slds-line-height_reset">
+                    <th scope="col">
+                        <div></div>
+                    </th>
+                    <th scope="col" title="{!v.contactLabels.provider_type__c}">
+                        <div class="slds-cell-wrap">
+                            <span id="tableHeaderText">{!v.contactLabels.provider_type__c}</span>
+                        </div>
+                    </th>
+                    <th scope="col" title="{!v.contactLabels.name}">
+                        <div class="slds-cell-wrap">
+                            <span id="tableHeaderText">{!v.contactLabels.name}</span>
+                        </div>
+                    </th>
+                    <th scope="col" title="{!v.relationshipLabels.qualifying_medical_professional__c}">
+                        <div class="slds-cell-wrap">
+                            <span id="tableHeaderText">{!v.relationshipLabels.qualifying_medical_professional__c}</span>
+                        </div>
+                    </th>
+                    <th scope="col" title="{!v.relationshipLabels.treating_hcp__c}">
+                        <div class="slds-cell-wrap">
+                            <span id="tableHeaderText">{!v.relationshipLabels.treating_hcp__c}</span>
+                        </div>
+                    </th>
+                    <th scope="col" title="{!v.relationshipLabels.best_contact__c}">
+                        <div class="slds-cell-wrap">
+                            <span id="tableHeaderText">{!v.relationshipLabels.best_contact__c}</span>
+                        </div>
+                    </th>
+                    <th scope="col" title="{!v.wishAffiliationLabels.send_clearance_forms_to__c}">
+                        <div class="slds-cell-wrap">
+                            <span id="tableHeaderText">{!v.wishAffiliationLabels.send_clearance_forms_to__c}</span>
+                        </div>
+                    </th>
+                    <th scope="col" title="{!v.wishAffiliationLabels.health_treatment_facility__c}">
+                        <div class="slds-cell-wrap">
+                            <span id="tableHeaderText">{!v.wishAffiliationLabels.health_treatment_facility__c}</span>
+                        </div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <aura:iteration items="{!v.wishMedicalProfessionals}" var="MedicalProfessional" indexVar="index">
+                    <c:WishMedicalProfessionalListItem
+                            preferredPhoneOptions="{!v.preferredPhoneOptions}"
+                            countries="{!v.countries}"
+                            states="{!v.states}"
+                            relationshipTypes="{!v.relationshipTypes}"
+                            wishMedicalProfessional="{!MedicalProfessional}"
+                            isUserProfileAllowedToUpdateWishAffiliation="{!v.isUserProfileAllowedToUpdateWishAffiliation}"
+                            wishAffiliationTypes="{!v.wishAffiliationTypes}"
+                            wishAffiliationLabels="{!v.wishAffiliationLabels}"
+                            contactLabels="{!v.contactLabels}"
+                            relationshipLabels="{!v.relationshipLabels}"
+                            accountLabels="{!v.accountLabels}"
+                            medicalProviderTypes="{!v.medicalProviderTypes}"/>
+                </aura:iteration>
+                </tbody>
+            </table>
+        </div>
+    </aura:renderIf>
+    <!-- Wish Affiliation Modal code block for Creating a Wish Affiliation -->
+    <aura:if isTrue="{!v.showModal}">
+        <div>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                     aria-describedby="modal-content-id-1"
+                     class="{!v.showModal ? 'slds-modal slds-fade-in-open' : ''}">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+                            {!$Label.c.Wish_Affiliation_New_Medical_Professional}
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <div class="slds-grid slds-gutters slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-text-heading_small slds-p-top_medium">
+                                <h3 class="slds-section__title slds-theme--shade primaryPaletteBorder test-id__section-header-container">
+                                    <span class="test-id__section-header-title section-header-title slds-p-horizontal--small slds-truncate">
+                                        {!$Label.c.Wish_Affiliation}
+                                    </span>
+                                </h3>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12">
+                                <div class="{! !v.isValidWishAffiliationType ? 'slds-has-error' : ''}">
+                                    <lightning:select label="{!v.wishAffiliationLabels.wish_affiliation_type__c}"
+                                                      name="wishAffiliationType"
+                                                      value="{!v.newWishMedicalProfessional.Wish_Affiliation_Type__c}"
+                                                      onchange="{!c.onChangeValidate}">
+                                        <option value=""></option>
+                                        <aura:iteration items="{!v.wishAffiliationTypesOfCategory}"
+                                                        var="wishAffiliationTypeOfCategory">
+                                            <option value="{!wishAffiliationTypeOfCategory}">
+                                                {!wishAffiliationTypeOfCategory}
+                                            </option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                    <aura:if isTrue="{! !v.isValidWishAffiliationType}">
+                                        <div class="slds-form-element__help" id="error-01">This field is required</div>
+                                    </aura:if>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12">
+                                <c:LookupSObject
+                                        lookupId="wishMedicalProfessionalListHealthTreatmentFacilityAccountLookup"
+                                        sObjectAPIName="Account"
+                                        recordId="{!v.newWishMedicalProfessional.Health_Treatment_Facility__c}"
+                                        label="{!v.wishAffiliationLabels.health_treatment_facility__c}"
+                                        pluralHint=""
+                                        fieldsToReturn="Name"
+                                        formattedOutput="{0}"
+                                        iconFullName="standard:account"
+                                        disabled="{!v.isAffiliationTypeWishChild}"/>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12">
+                                <lightning:input type="checkbox"
+                                                 label="{!v.wishAffiliationLabels.send_clearance_forms_to__c}"
+                                                 name="wishAffiliationSendClearanceFormsTo"
+                                                 checked="{!v.newWishMedicalProfessional.Send_Clearance_Forms_To__c}"
+                                                 class="slds-p-top_medium"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_medium">
+                                <lightning:textarea label="{!v.wishAffiliationLabels.details__c}"
+                                                    name="wishAffiliationDetails"
+                                                    value="{!v.newWishMedicalProfessional.Details__c}"
+                                                    maxlength="255"
+                                                    class="slds-textarea"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-text-heading_small slds-p-top_medium">
+                                <h3 class="slds-section__title slds-theme--shade primaryPaletteBorder test-id__section-header-container">
+                                    <span class="test-id__section-header-title section-header-title slds-p-horizontal--small slds-truncate">
+                                        {!$Label.c.Wish_Affiliation_Relationship}
+                                    </span>
+                                </h3>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12">
+                                <div class="{! !v.isValidRelationshipType ? 'slds-has-error' : ''}">
+                                    <lightning:select aura:id="relationshipType"
+                                                      label="{!v.relationshipLabels.npe4__type__c}"
+                                                      name="relationshipType"
+                                                      value="{!v.newWishMedicalProfessional.Relationship__r.npe4__Type__c}"
+                                                      onchange="{!c.onChangeValidate}">
+                                        <option value=""></option>
+                                        <aura:iteration items="{!v.relationshipTypes}"
+                                                        var="relationshipType">
+                                            <option value="{!relationshipType}">
+                                                {!relationshipType}
+                                            </option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                    <aura:if isTrue="{! !v.isValidRelationshipType}">
+                                        <div class="slds-form-element__help" id="error-01">This field is required</div>
+                                    </aura:if>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12">
+                                <div class="{! !v.isValidWishMedicalProfessionalListRelatedContactLookup ? 'slds-has-error' : ''}">
+                                    <c:LookupSObject
+                                            aura:id="wishMedicalProfessionalListRelatedContactLookup"
+                                            lookupId="wishMedicalProfessionalListRelatedContactLookup"
+                                            sObjectAPIName="Contact"
+                                            recordId="{!v.newWishMedicalProfessional.Relationship__r.npe4__Contact__c}"
+                                            label="{!v.relationshipLabels.npe4__contact__c}"
+                                            pluralHint=""
+                                            fieldsToReturn="Name"
+                                            formattedOutput="{0}"
+                                            iconFullName="standard:contact"
+                                            disabled="{!v.isAffiliationTypeWishChild}"/>
+                                    <aura:if isTrue="{! !v.isValidWishMedicalProfessionalListRelatedContactLookup}">
+                                        <div class="slds-form-element__help" id="error-01">This field is required</div>
+                                    </aura:if>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12">
+                                <lightning:input type="checkbox"
+                                                 label="{!v.relationshipLabels.qualifying_medical_professional__c}"
+                                                 name="relationshipQualifyingMedicalProfessional"
+                                                 checked="{!v.newWishMedicalProfessional.Relationship__r.Qualifying_Medical_Professional__c}"
+                                                 class="slds-p-top_small"/>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12">
+                                <lightning:input type="checkbox"
+                                                 label="{!v.relationshipLabels.treating_hcp__c}"
+                                                 name="relationshipTreatingHcp"
+                                                 checked="{!v.newWishMedicalProfessional.Relationship__r.Treating_HCP__c}"
+                                                 class="slds-p-top_small"/>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12">
+                                <lightning:input type="checkbox"
+                                                 label="{!v.relationshipLabels.best_contact__c}"
+                                                 name="relationshipBestContact"
+                                                 checked="{!v.newWishMedicalProfessional.Relationship__r.Best_Contact__c}"
+                                                 class="slds-p-top_small"/>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12">
+                                <lightning:input type="checkbox"
+                                                 label="{!v.relationshipLabels.referring_medical_professional__c}"
+                                                 name="relationshipBestContact"
+                                                 checked="{!v.newWishMedicalProfessional.Relationship__r.Referring_Medical_Professional__c}"
+                                                 class="slds-p-top_small"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-text-heading_small slds-p-top_medium">
+                                <h3 class="slds-section__title slds-theme--shade primaryPaletteBorder test-id__section-header-container">
+                                    <span class="test-id__section-header-title section-header-title slds-p-horizontal--small slds-truncate">
+                                        {!$Label.c.Wish_Affiliation_Contact_Information}
+                                    </span>
+                                </h3>
+                            </div>
+                            <aura:if isTrue="{! !v.showCreateContact}">
+                                <div class="slds-col slds-size_6-of-12">
+                                    <div class="{! !v.isValidWishMedicalProfessionalListContactLookup ? 'slds-has-error' : ''}">
+                                        <c:LookupSObject
+                                                aura:id="wishMedicalProfessionalListContactLookup"
+                                                lookupId="wishMedicalProfessionalListContactLookup"
+                                                sObjectAPIName="Contact"
+                                                recordId="{!v.modalContactLookupRecordId}"
+                                                label="{!v.contactLabels.contact__c}"
+                                                pluralHint=""
+                                                fieldsToReturn="Name"
+                                                formattedOutput="{0}"
+                                                iconFullName="standard:contact"/>
+                                        <aura:if isTrue="{! !v.isValidWishMedicalProfessionalListContactLookup}">
+                                            <div class="slds-form-element__help" id="error-01">This field is required
+                                            </div>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                                    <lightning:button label="{!$Label.c.Wish_Affiliation_Create_Contact}"
+                                                      variant="neutral"
+                                                      name="createContact"
+                                                      value="createContact"
+                                                      onclick="{!c.showCreateContact}"/>
+                                </div>
+                            </aura:if>
+                            <aura:if isTrue="{!v.showCreateContact}">
+                                <div class="slds-col slds-size_6-of-12">
+                                    <div class="{! !v.isValidFirstName ? 'slds-has-error' : ''}">
+                                        <lightning:input label="{!v.contactLabels.firstname}"
+                                                         name="contactFirstName"
+                                                         value="{!v.newWishMedicalProfessional.Contact__r.FirstName}"
+                                                         onchange="{!c.onChangeValidate}"/>
+                                        <aura:if isTrue="{! !v.isValidFirstName}">
+                                            <div class="slds-form-element__help" id="error-01">This field is required
+                                            </div>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <div class="{! !v.isValidLastName ? 'slds-has-error' : ''}">
+                                        <lightning:input label="{!v.contactLabels.lastname}"
+                                                         name="contactLastName"
+                                                         value="{!v.newWishMedicalProfessional.Contact__r.LastName}"
+                                                         onchange="{!c.onChangeValidate}"/>
+                                        <aura:if isTrue="{! !v.isValidLastName}">
+                                            <div class="slds-form-element__help" id="error-01">This field is
+                                                required
+                                            </div>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <lightning:select label="{!v.contactLabels.provider_type__c}"
+                                                      name="contactProviderType"
+                                                      value="{!v.newWishMedicalProfessional.Contact__r.Provider_Type__c}">
+                                        <option value=""></option>
+                                        <aura:iteration items="{!v.medicalProviderTypes}"
+                                                        var="medicalProviderType">
+                                            <option value="{!medicalProviderType}">
+                                                {!medicalProviderType}
+                                            </option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <lightning:input label="{!v.contactLabels.npe01__workemail__c}"
+                                                     name="contactWorkEmail"
+                                                     value="{!v.newWishMedicalProfessional.Contact__r.npe01__WorkEmail__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <lightning:select label="{!v.contactLabels.npe01__preferredphone__c}"
+                                                      name="contactPreferredPhone"
+                                                      value="{!v.newWishMedicalProfessional.Contact__r.npe01__PreferredPhone__c}">
+                                        <option value=""></option>
+                                        <aura:iteration items="{!v.preferredPhoneOptions}"
+                                                        var="preferredPhoneOption">
+                                            <option value="{!preferredPhoneOption}">
+                                                {!preferredPhoneOption}
+                                            </option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <lightning:input type="tel"
+                                                     label="{!v.contactLabels.fax}"
+                                                     name="contactFax"
+                                                     value="{!v.newWishMedicalProfessional.Contact__r.Fax}"/>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <lightning:input type="tel"
+                                                     label="{!$Label.c.Wish_Affiliation_Phone}"
+                                                     name="contactPhone"
+                                                     value="{!v.newWishMedicalProfessional.Contact__r.Phone}"/>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <lightning:input aura:id="contactDeceased"
+                                                     type="checkbox"
+                                                     label="{!v.contactLabels.npsp__deceased__c}"
+                                                     name="contactDeceased"
+                                                     checked="{!v.newWishMedicalProfessional.Contact__r.npsp__Deceased__c}"
+                                                     class="slds-p-top_large"/>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-text-heading_small slds-p-top_medium">
+                                    <h3 class="slds-section__title slds-theme--shade primaryPaletteBorder test-id__section-header-container">
+                                    <span class="test-id__section-header-title section-header-title slds-p-horizontal--small slds-truncate">
+                                        {!$Label.c.Wish_Affiliation_Contact_Address}
+                                    </span>
+                                    </h3>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <lightning:input label="{!v.contactLabels.mailingstreet}"
+                                                     name="contactMailingStreet"
+                                                     value="{!v.newWishMedicalProfessional.Contact__r.MailingStreet}"/>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <lightning:input label="{!v.contactLabels.mailingcity}"
+                                                     name="contactMailingCity"
+                                                     value="{!v.newWishMedicalProfessional.Contact__r.MailingCity}"/>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <lightning:select label="{!v.contactLabels.mailingstate}"
+                                                      name="contactMailingState"
+                                                      value="{!v.newWishMedicalProfessional.Contact__r.MailingState}"
+                                                      onchange="{!c.onChangeValidate}">
+                                        <option value=""></option>
+                                        <aura:iteration items="{!v.states}" var="state">
+                                            <option value="{!state}">
+                                                {!state}
+                                            </option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <lightning:input label="{!v.contactLabels.mailingpostalcode}"
+                                                     name="contactMailingPostalCode"
+                                                     value="{!v.newWishMedicalProfessional.Contact__r.MailingPostalCode}"/>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <div class="{! !v.isValidCountry ? 'slds-has-error' : ''}">
+                                        <lightning:select label="{!v.contactLabels.mailingcountry}"
+                                                          name="contactMailingCountry"
+                                                          value="{!v.newWishMedicalProfessional.Contact__r.MailingCountry}"
+                                                          onchange="{!c.onChangeValidate}">
+                                            <option value=""></option>
+                                            <aura:iteration items="{!v.countries}" var="ctry">
+                                                <option value="{!ctry}">
+                                                    {!ctry}
+                                                </option>
+                                            </aura:iteration>
+                                        </lightning:select>
+                                        <aura:if isTrue="{! !v.isValidCountry}">
+                                            <div class="slds-form-element__help" id="error-01">This field is
+                                                required
+                                            </div>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-align-bottom slds-p-top_medium">
+                                    <lightning:button label="{!$Label.c.Wish_Affiliation_Cancel_Create_Contact}"
+                                                      variant="neutral"
+                                                      name="cancelCreateContact"
+                                                      value="cancelCreateContact"
+                                                      onclick="{!c.showCreateContact}"/>
+                                </div>
+                            </aura:if>
+                            <aura:if isTrue="{!v.showToast}">
+                                <div class="slds-col slds-size_1-of-1 slds-grid_vertical-align-center slds-cell-wrap slds-text-align_center">
+                                    <c:CustomToast message="{!v.toastMessage}" messageType="{!v.toastMessageType}"/>
+                                </div>
+                            </aura:if>
+                            <div class="slds-col slds-size_1-of-1 slds-align_absolute-center slds-p-top_medium">
+                                <lightning:button label="{!$Label.c.Wish_Affiliation_Save}" variant="brand" name="save"
+                                                  disabled="{!v.isHide}"
+                                                  onclick="{!c.createNewWishAffiliationAction}"/>
+                                <lightning:button label="{!$Label.c.Wish_Affiliation_Cancel}" variant="neutral"
+                                                  name="cancel"
+                                                  onclick="{!c.openCloseModal}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="{!v.showModal ? 'slds-backdrop slds-backdrop_open' : ''}"></div>
+        </div>
+    </aura:if>
+</aura:component>

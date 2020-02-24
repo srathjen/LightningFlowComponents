@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Used in the volunteer onboarding process to control which version of the volunteer application the user is routed to: either the historical Application_VF or the new (as of Fall 2019) ApplyForRoles_VF</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>User_Created_Date_Cutoff__c</fullName>
+        <description>This date should be the date when the new VolunteerSignUp_VF was put into use.  Any users created before this date will still need to complete the full version of the historical Application_VF instead of the new ApplyForRoles_VF.  Implemented as a custom setting so that we can test various profiles and users against different dates.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This date should be the date when the new VolunteerSignUp_VF was put into use.  Any users created before this date will still need to complete the full version of the historical Application_VF instead of the new ApplyForRoles_VF.</inlineHelpText>
+        <label>User Created Date Cutoff</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <label>Volunteer New Application Control</label>
+    <visibility>Public</visibility>
+</CustomObject>

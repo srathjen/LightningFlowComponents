@@ -7,15 +7,14 @@ Description : Contact_OnAfterUpdateTriggerHandler is used to call the Helper cla
               Modification Log
               ------------------
               WVC-1884    KANAGARAJ  04/04/2018
-              
+              WVC-2174    KANAGARAJ  08/15/2018 //Line 50 to 58
 *****************************************************************************************************/
 public class Contact_OnAfterUpdateTriggerHandler{
-    
-    static Constant_AC  constant = new Constant_AC();
-    static Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
-    static Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
-    static Id MedicalProfContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
-    static Id familyContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
+
+    static Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
+    static Id wichChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
+    static Id MedicalProfContactRecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+    static Id familyContactRecordTypeId = Constant_AC.WISH_FAMILY_RT_ID;
     
     /* This method is used to call the corresponding helper class method when the contact record gets 
     updated.*/
@@ -23,7 +22,7 @@ public class Contact_OnAfterUpdateTriggerHandler{
         
         List<Contact> conList = new List<Contact>();
         Map<Id, Contact> primaryDiagnosisChangesMap = new Map<Id, Contact>();
-        set<Id> volunteercontactSet = new Set<Id>();
+        Set<Id> volunteercontactSet = new Set<Id>();
         Set<Id> rejectedApplicationIds = new Set<Id>();
         Map<Id, Contact> diagnosisConMap = new map<Id, Contact>();
         Set<Id>  MedicalProfContactSet = new Set<Id>();
@@ -37,11 +36,40 @@ public class Contact_OnAfterUpdateTriggerHandler{
         Map<Id, Contact> contactOldMap = new Map<Id, Contact>();
         Map<Id,Contact> wishFamilyContacMap = new Map<Id,Contact>();
         Map<String,List<Contact>> contactMapforSharing = new Map<String,List<Contact>>();
-        
+        List<Contact> wishFormContactList = new List<Contact>();
+        List<Contact> wishFormFamilyContactList = new List<Contact>();
+        Map<String,Contact> comboWishFamilyMap = new Map<String,Contact>();
+        Map<String,String> comboEnvelopMap = new Map<String,String>();
+        set<Id> comboWishChildIdSet = new Set<Id>();
         for(Contact newContact : newContactMap.Values()){
             if(newContact.recordTypeId == volunteerRecordTypeId && oldConatcMap.get(newContact.Id).recordTypeId != volunteerRecordTypeId){
                 conList.add(newContact);    
             }
+            if(newContact.RecordTypeId == wichChildRecordTypeId && newContact.Hidden_Wish_Form_Id__c != Null){
+                wishFormContactList.add(newContact);
+            }
+            if(newContact.RecordTypeId == familyContactRecordTypeId && newContact.Hidden_Wish_Form_Id__c != Null && 
+               ((newContact.FirstName != oldConatcMap.get(newContact.Id).FirstName) || 
+               (newContact.Middle_Name__c!= oldConatcMap.get(newContact.Id).Middle_Name__c) ||  
+               (newContact.LastName != oldConatcMap.get(newContact.Id).LastName) || 
+               (newContact.BirthDate != oldConatcMap.get(newContact.Id).BirthDate) || 
+               (newContact.MobilePhone != oldConatcMap.get(newContact.Id).MobilePhone) ||
+               (newContact.Email != oldConatcMap.get(newContact.Id).Email) || 
+               (newContact.T_Shirt_Size__c != oldConatcMap.get(newContact.Id).T_Shirt_Size__c) ||
+               (newContact.MailingStreet != oldConatcMap.get(newContact.Id).MailingStreet) || 
+               (newContact.MailingState != oldConatcMap.get(newContact.Id).MailingState) ||
+               (newContact.MailingCity != oldConatcMap.get(newContact.Id).MailingCity) || 
+               (newContact.MailingPostalCode != oldConatcMap.get(newContact.Id).MailingPostalCode)||
+               (newContact.Gender__c != oldConatcMap.get(newContact.Id).Gender__c) || 
+               (newContact.Residing_with_Wish_child__c != oldConatcMap.get(newContact.Id).Residing_with_Wish_child__c) || 
+               (newContact.HomePhone != oldConatcMap.get(newContact.Id).HomePhone) || 
+               (newContact.Relationship__c != oldConatcMap.get(newContact.Id).Relationship__c) || 
+               (newContact.npe01__WorkPhone__c != oldConatcMap.get(newContact.Id).npe01__WorkPhone__c)))
+               {
+                
+                wishFormFamilyContactList.add(newContact);
+               
+               }
             if(newContact.Diagnosis__c != oldConatcMap.get(newContact.Id).Diagnosis__c || newContact.FirstName != oldConatcMap.get(newContact.Id).FirstName || newContact.LastName != oldConatcMap.get(newContact.Id).LastName || newContact.Preferred_Name__c != oldConatcMap.get(newContact.Id).Preferred_Name__c || newContact.Middle_Name__c != oldConatcMap.get(newContact.Id).Middle_Name__c || newContact.Gender__c != oldConatcMap.get(newContact.Id).Gender__c || newContact.Birthdate != oldConatcMap.get(newContact.Id).Birthdate || oldConatcMap.get(newContact.id).County__c != newContact.County__c
                || newContact.MobilePhone != oldConatcMap.get(newContact.Id).MobilePhone || newContact.npe01__HomeEmail__c != oldConatcMap.get(newContact.Id).npe01__HomeEmail__c || newContact.mailingstreet != oldConatcMap.get(newContact.Id).mailingstreet || newContact.mailingcity != oldConatcMap.get(newContact.Id).mailingcity || newContact.mailingstate != oldConatcMap.get(newContact.Id).mailingstate || newContact.mailingpostalcode != oldConatcMap.get(newContact.Id).mailingpostalcode || newContact.mailingcountry != oldConatcMap.get(newContact.Id).mailingcountry) {
                    primaryDiagnosisChangesMap.put(newContact.Id, newContact);
@@ -97,6 +125,8 @@ public class Contact_OnAfterUpdateTriggerHandler{
             if(newContact.RecordTypeId == familyContactRecordTypeId && newContact.Relationship__c != oldConatcMap.get(newContact.id).Relationship__c){
                 wishFamilyContacMap.put(newContact.Id,newContact);
             }
+            
+           
          }
          
          for(Contact conCurrRec: [SELECT Id,OwnerId,migrated_record__c, AccountId,RecordTypeId,owner.UserRole.Name,Region_Chapter__c,Hidden_Hospital_Account__c, 
@@ -144,5 +174,14 @@ public class Contact_OnAfterUpdateTriggerHandler{
         if(conList.Size() > 0){
             Contact_OnAfterUpdateTriggerHepler.CreateAffliation(conList);
         }
+        
+        if(wishFormContactList.size() > 0){
+            Contact_OnAfterUpdateTriggerHepler.updateWishFormRec(wishFormContactList);
+        }
+        if(wishFormFamilyContactList.size() > 0){
+        Contact_OnAfterUpdateTriggerHepler.updateWishFormRec(wishFormFamilyContactList);
+        }
+        
+        
     }
 }

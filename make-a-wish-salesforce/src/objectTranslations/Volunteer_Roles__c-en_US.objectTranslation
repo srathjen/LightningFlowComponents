@@ -8,6 +8,20 @@
         <plural>true</plural>
         <value>Volunteer Roles</value>
     </caseValues>
+    <fieldSets>
+        <label><!-- Volunteer Role Field Set --></label>
+        <name>Volunteer_Role_Field_Set</name>
+    </fieldSets>
+    <fields>
+        <help><!-- The date on which the background check expires. --></help>
+        <label><!-- BC Expiration Date --></label>
+        <name>BC_Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date on which the volunteer&apos;s Conflict of Interest expires. --></help>
+        <label><!-- COI Expiration Date --></label>
+        <name>COI_Expiration_Date__c</name>
+    </fields>
     <fields>
         <label><!-- Chapter Name --></label>
         <name>Chapter_Name__c</name>
@@ -24,6 +38,14 @@
     <fields>
         <label><!-- External Id --></label>
         <name>External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Previous Status --></label>
+        <name>Hidden_Previous_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Previous Sub Status --></label>
+        <name>Hidden_Previous_Sub_Status__c</name>
     </fields>
     <fields>
         <label><!-- Migrated Record --></label>
@@ -69,16 +91,12 @@
         <label><!-- Status --></label>
         <name>Status__c</name>
         <picklistValues>
-            <masterLabel>Chapter Review</masterLabel>
-            <translation><!-- Chapter Review --></translation>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Former - Chapter</masterLabel>
-            <translation><!-- Former - Chapter --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Former - Volunteer</masterLabel>
-            <translation><!-- Former - Volunteer --></translation>
+            <masterLabel>Former</masterLabel>
+            <translation><!-- Former --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Not Approved</masterLabel>
@@ -89,12 +107,28 @@
             <translation><!-- Out of Compliance --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Pending Training</masterLabel>
-            <translation><!-- Pending Training --></translation>
+            <masterLabel>Pending</masterLabel>
+            <translation><!-- Pending --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sub-status --></label>
+        <name>Sub_status__c</name>
+        <picklistValues>
+            <masterLabel>Chapter</masterLabel>
+            <translation><!-- Chapter --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Trained</masterLabel>
-            <translation><!-- Trained --></translation>
+            <masterLabel>Missing Requirement</masterLabel>
+            <translation><!-- Missing Requirement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Under Chapter Review</masterLabel>
+            <translation><!-- Under Chapter Review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Volunteer</masterLabel>
+            <translation><!-- Volunteer --></translation>
         </picklistValues>
     </fields>
     <fields>

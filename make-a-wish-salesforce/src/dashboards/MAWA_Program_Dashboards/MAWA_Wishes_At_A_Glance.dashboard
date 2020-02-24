@@ -22,6 +22,7 @@
             <displayUnits>Auto</displayUnits>
             <drillEnabled>false</drillEnabled>
             <drillToDetailEnabled>false</drillToDetailEnabled>
+            <groupingSortProperties/>
             <header>Inquiry and Referral Leads</header>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
@@ -44,6 +45,7 @@
             <displayUnits>Auto</displayUnits>
             <drillEnabled>false</drillEnabled>
             <drillToDetailEnabled>false</drillToDetailEnabled>
+            <groupingSortProperties/>
             <header>Wish Pipeline</header>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
@@ -63,6 +65,7 @@
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
+            <groupingSortProperties/>
             <header>Anticipated Start Dates</header>
             <legendPosition>Bottom</legendPosition>
             <report>MAWA_Wish_Management/MAWA_Pipeline_by_Anticipated_Date</report>
@@ -81,6 +84,7 @@
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
+            <groupingSortProperties/>
             <header>Wish Pipeline Wishes Grouped by National Type</header>
             <legendPosition>Bottom</legendPosition>
             <report>MAWA_Wish_Management/MAWA_Wish_Pipeline_Grouped_by_Wish_Type</report>
@@ -99,6 +103,7 @@
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
+            <groupingSortProperties/>
             <header>Eligible Referrals Current Fiscal Year</header>
             <legendPosition>Bottom</legendPosition>
             <report>MAWA_Wish_Management/MAWA_Eligible_Referrals_FYTD</report>
@@ -120,6 +125,7 @@
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
+            <groupingSortProperties/>
             <header>Wishes Scheduled by Month</header>
             <legendPosition>Bottom</legendPosition>
             <report>MAWA_Wish_Management/DRAFT_MAWA_CFY_Wishes_Sch_by_Month</report>
@@ -144,6 +150,7 @@
             <expandOthers>false</expandOthers>
             <groupingColumn>Case.End_Date__c</groupingColumn>
             <groupingColumn>STATUS</groupingColumn>
+            <groupingSortProperties/>
             <header>Completed and Granted Wishes FYTD</header>
             <legendPosition>Bottom</legendPosition>
             <report>MAWA_Wish_Management/MAWA_Completed_Wishes_FYTD</report>
@@ -167,6 +174,7 @@
             <expandOthers>false</expandOthers>
             <groupingColumn>Lead.Referred_Date__c</groupingColumn>
             <groupingColumn>STATUS</groupingColumn>
+            <groupingSortProperties/>
             <header>Current Open Leads by Referred Date</header>
             <legendPosition>Bottom</legendPosition>
             <report>MAWA_Wish_Management/MAWA_Lead_Status_Current_FY_No_Qualified</report>
@@ -184,6 +192,7 @@
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
+            <groupingSortProperties/>
             <header>DNQ Referrals Current Fiscal Year</header>
             <legendPosition>Bottom</legendPosition>
             <report>MAWA_Wish_Management/MAWA_DNQ_Leads_Current_Fiscal_Year</report>

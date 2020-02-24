@@ -1,0 +1,12 @@
+<!--
+ - Created by gmayer on 7/26/2019.
+ -->
+
+<aura:documentation>
+    <aura:description>Documentation for WishMedicalProfessionalListItem</aura:description>
+    <aura:example name="WishMedicalProfessionalListItem" ref="WishMedicalProfessionalListItem"
+                  label="WishMedicalProfessionalListItem">
+        Wish Medical Professional List Item is a custom component built to display each Wish Affiliation's medical professional record
+        detail.
+    </aura:example>
+</aura:documentation>

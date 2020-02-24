@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CASE_ID</field>
+    </columns>
+    <columns>
+        <field>PARENT_CASE_NUMBER</field>
+    </columns>
+    <columns>
+        <field>RECORDTYPE</field>
+    </columns>
+    <columns>
+        <field>STATUS</field>
+    </columns>
+    <columns>
+        <field>OWNER</field>
+    </columns>
+    <columns>
+        <field>CONTACT.NAME</field>
+    </columns>
+    <columns>
+        <field>SUBJECT</field>
+    </columns>
+    <columns>
+        <field>CONTACT.ACCOUNT</field>
+    </columns>
+    <columns>
+        <field>Case.ChapterName__c</field>
+    </columns>
+    <columns>
+        <field>CREATED_DATE</field>
+    </columns>
+    <columns>
+        <field>CREATED</field>
+    </columns>
+    <description>This report is to be used to change Case ownership from one user to another. Modify the Case Owner Filter include the Case Owner that the records need to be transferred from.</description>
+    <filter>
+        <criteriaItems>
+            <column>Case.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>OWNER</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Jennifer Rosvall</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>STATUS</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Qualified,Ready to Assign,Ready to Interview,Wish Determined,Budget Approval - Submitted,Budget Approval - Approved,Wish Design,Wish Scheduled,Hold,Inactive,Granted,Escalated,In Progress,Medical,New,Open,Pending Clarification - Chapter,Pending Clarification - MAC,Approved - National Medical Review,Approved - National MAC Review,Pending Clarification - MAC Consult Req</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Case Owner Transfer Report</name>
+    <params>
+        <name>units</name>
+        <value>h</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CaseList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Contact.Timesheet_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

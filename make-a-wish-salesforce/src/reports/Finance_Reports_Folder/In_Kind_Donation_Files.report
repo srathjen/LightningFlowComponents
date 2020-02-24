@@ -85,6 +85,7 @@
     <filter>
         <criteriaItems>
             <column>Case.In_Kind_Donation_Reimbursement__r$RecordType</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>In_Kind_Donation_Reimbursement__c.In_Kind_Donation</value>
         </criteriaItems>
@@ -98,6 +99,8 @@
     <reportType>In_Kind_Donation_Reimburs_Files__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Case.In_Kind_Donation_Reimbursement__r$CreatedDate</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

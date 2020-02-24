@@ -71,7 +71,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                             <tbody>
                                                 <apex:repeat value="{!VolunteerAssignedWishEvents}" var="con1">
                                                     
-                                                    <apex:outputPanel rendered="{!AND(visibilityMap[con1.Id],OR(con1.Role__c == 'Wish Granter',con1.Role__c == 'Wish Granter Mentor'))}">
+                                                    <apex:outputPanel rendered="{!AND(visibilityMap[con1.Id],OR(con1.Role__c == 'Wish Granter',con1.Role__c == 'Wish Granter Mentor',con1.Role__c == 'Temporary Wish Granter'))}">
                                                         
                                                         <tr>
                                                             <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.MyAssignmentsWish}" var="fieldValue">
@@ -82,14 +82,17 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                                         <apex:outputText id="rejected" rendered="{!con1.Status__c == 'Inactive' && con1.Reason_Inactive__c == 'Not Approved'}">Not Approved</apex:outputText>
                                                                         <apex:outputText id="inactive" rendered="{!con1.Status__c == 'Inactive' && con1.Reason_Inactive__c != 'Not Approved'}">Inactive</apex:outputText>
                                                                         <apex:outputText id="pending" rendered="{!con1.Status__c == 'Pending'}">Pending Approval</apex:outputText>
-                                                                        <apex:outputLink value="/{!con1.Id}" id="approved" rendered="{!con1.Status__c == 'Approved' && con1.Role__c != 'Wish Granter' && con1.Role__c != 'Wish Granter Mentor'}">View</apex:outputLink>
-                                                                        <apex:outputLink value="/{!con1.Wish__c}" id="approved1" rendered="{!con1.Status__c == 'Approved' && con1.Role__c == 'Wish Granter' || con1.Role__c == 'Wish Granter Mentor'}">View</apex:outputLink>
+                                                                        <apex:outputLink value="/{!con1.Id}" id="approved" rendered="{!con1.Status__c == 'Approved' && con1.Role__c != 'Wish Granter' && con1.Role__c != 'Wish Granter Mentor' && con1.Role__c !=  'Temporary Wish Granter'}">View</apex:outputLink>
+                                                                        <apex:outputLink value="/{!con1.Wish__c}" id="approved1" rendered="{!con1.Status__c == 'Approved' && (con1.Role__c == 'Wish Granter' || con1.Role__c == 'Wish Granter Mentor' || con1.Role__c ==   'Temporary Wish Granter')}">View</apex:outputLink>
                                                                     </td>
                                                                 </apex:outputpanel>
-                                                                <apex:outputpanel rendered="{!fieldValue.label != 'Record ID'  && fieldValue.label != 'About Me' && fieldValue.label != 'Hobbies' && fieldValue.label != 'Waiting Since' && fieldValue.label  != 'In Progress'}">
+                                                                <apex:outputpanel rendered="{!fieldValue.label != 'Distance From Me' && fieldValue.label != 'Record ID'  && fieldValue.label != 'About Me' && fieldValue.label != 'Hobbies' && fieldValue.label != 'Waiting Since' && fieldValue.label  != 'In Progress'}">
                                                                     
                                                                     <td>{!con1[fieldValue]}</td>
                                                                     
+                                                                </apex:outputpanel>
+                                                                <apex:outputpanel rendered="{!fieldValue.label  == 'Distance From Me' }">
+                                                                    <td data-order="{!IF(contains(con1[fieldValue],'-'),LEFT(con1[fieldValue], FIND('-', con1[fieldValue])-1),IF(contains(con1[fieldValue],'+'),LEFT(con1[fieldValue], FIND('+', con1[fieldValue])-1),IF(contains(con1[fieldValue],' '),LEFT(con1[fieldValue], FIND(' ', con1[fieldValue])-1),'')))}">{!con1[fieldValue]}</td>
                                                                 </apex:outputpanel>
                                                                 <!-- apex:outputpanel rendered="{!fieldValue.label  == 'In Progress' }">
                                                             <td>{!if(!con1[fieldValue],"True","False")}</td>
@@ -127,7 +130,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                             <tbody>
                                                 <apex:repeat value="{!VolunteerAssignedWishEvents}" var="con1">
                                                     <apex:outputPanel rendered=""></apex:outputPanel>
-                                                    <apex:outputPanel rendered="{!AND(visibilityMap[con1.Id],AND(con1.Role__c != 'Wish Granter',con1.Role__c != 'Wish Granter Mentor'))}">
+                                                    <apex:outputPanel rendered="{!AND(visibilityMap[con1.Id],AND(con1.Role__c != 'Wish Granter',con1.Role__c != 'Wish Granter Mentor',con1.Role__c != 'Temporary Wish Granter'))}">
                                                         
                                                         <tr>
                                                             <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.MyAssignmentsWish}" var="fieldValue">
@@ -138,14 +141,17 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                                         <apex:outputText id="rejected" rendered="{!con1.Status__c == 'Inactive' && con1.Reason_Inactive__c == 'Not Approved'}">Not Approved</apex:outputText>
                                                                         <apex:outputText id="inactive" rendered="{!con1.Status__c == 'Inactive' && con1.Reason_Inactive__c != 'Not Approved'}">Inactive</apex:outputText>
                                                                         <apex:outputText id="pending" rendered="{!con1.Status__c == 'Pending'}">Pending Approval</apex:outputText>
-                                                                        <apex:outputLink value="/{!con1.Id}" id="approved" rendered="{!con1.Status__c == 'Approved' && con1.Role__c != 'Wish Granter' && con1.Role__c != 'Wish Granter Mentor'}">View</apex:outputLink>
-                                                                        <apex:outputLink value="/{!con1.Wish__c}" id="approved1" rendered="{!con1.Status__c == 'Approved' && con1.Role__c == 'Wish Granter' || con1.Role__c == 'Wish Granter Mentor'}">View</apex:outputLink>
+                                                                        <apex:outputLink value="/{!con1.Id}" id="approved" rendered="{!con1.Status__c == 'Approved' && con1.Role__c != 'Wish Granter' && con1.Role__c != 'Wish Granter Mentor' && con1.Role__c != 'Temporary Wish Granter'}">View</apex:outputLink>
+                                                                        <apex:outputLink value="/{!con1.Wish__c}" id="approved1" rendered="{!con1.Status__c == 'Approved' && con1.Role__c == 'Wish Granter' || con1.Role__c == 'Wish Granter Mentor' && con1.Role__c == 'Temporary Wish Granter'}">View</apex:outputLink>
                                                                     </td>
                                                                 </apex:outputpanel>
-                                                                <apex:outputpanel rendered="{!fieldValue.label != 'Record ID'  && fieldValue.label != 'About Me' && fieldValue.label != 'Hobbies' && fieldValue.label != 'Waiting Since' && fieldValue.label  != 'In Progress'}">
+                                                               <apex:outputpanel rendered="{!fieldValue.label  != 'Distance From Me' && fieldValue.label != 'Record ID'  && fieldValue.label != 'About Me' && fieldValue.label != 'Hobbies' && fieldValue.label != 'Waiting Since' && fieldValue.label  != 'In Progress'}">
                                                                     
                                                                     <td>{!con1[fieldValue]}</td>
                                                                     
+                                                                </apex:outputpanel>
+                                                                <apex:outputpanel rendered="{!fieldValue.label  == 'Distance From Me' }">
+                                                                    <td data-order="{!IF(contains(con1[fieldValue],'-'),LEFT(con1[fieldValue], FIND('-', con1[fieldValue])-1),IF(contains(con1[fieldValue],'+'),LEFT(con1[fieldValue], FIND('+', con1[fieldValue])-1),IF(contains(con1[fieldValue],' '),LEFT(con1[fieldValue], FIND(' ', con1[fieldValue])-1),'')))}">{!con1[fieldValue]}</td>
                                                                 </apex:outputpanel>
                                                                 <!-- apex:outputpanel rendered="{!fieldValue.label  == 'In Progress' }">
                                                             <td>{!if(!con1[fieldValue],"True","False")}</td>
@@ -240,7 +246,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                             </thead>
                                             <tbody>
                                                 <apex:repeat value="{!ClosedWish}" var="con1">
-                                                <apex:outputpanel rendered="{!OR(con1.Role__c == 'Wish Granter',con1.Role__c == 'Wish Granter Mentor')}" >
+                                                <apex:outputpanel rendered="{!OR(con1.Role__c == 'Wish Granter',con1.Role__c == 'Wish Granter Mentor',con1.Role__c == 'Temporary Wish Granter')}" >
                                                     <tr>
                                                         
                                                         <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.MyAssignmentsClosedWish}" var="fieldValue">
@@ -286,7 +292,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                             </thead>
                                             <tbody>
                                                 <apex:repeat value="{!ClosedWish}" var="con1">
-                                                <apex:outputpanel rendered="{!AND(con1.Role__c != 'Wish Granter',con1.Role__c != 'Wish Granter Mentor')}" >
+                                                <apex:outputpanel rendered="{!AND(con1.Role__c != 'Wish Granter',con1.Role__c != 'Wish Granter Mentor',con1.Role__c != 'Temporary Wish Granter')}" >
                                                     <tr>
                                                         
                                                         <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.MyAssignmentsClosedWish}" var="fieldValue">

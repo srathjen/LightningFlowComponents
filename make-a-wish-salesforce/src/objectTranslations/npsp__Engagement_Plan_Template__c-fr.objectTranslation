@@ -2,13 +2,76 @@
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
-        <value><!-- Engagement Plan Template --></value>
+        <value>Modèle de plan d&apos;engagement</value>
     </caseValues>
     <caseValues>
         <plural>true</plural>
-        <value><!-- Engagement Plan Template --></value>
+        <value>Modèles de plan d&apos;engagement</value>
     </caseValues>
-    <gender><!-- Masculine --></gender>
-    <nameFieldLabel><!-- Engagement Plan Template Name --></nameFieldLabel>
-    <startsWith><!-- Consonant --></startsWith>
+    <fieldSets>
+        <label><!-- Manage EP Template FS --></label>
+        <name>npsp__ManageEPTemplateFS</name>
+    </fieldSets>
+    <fields>
+        <help>Recalcule la date d’échéance d’une tâche enfant en fonction de la date à laquelle la tâche parente a été terminée effectivement.</help>
+        <label><!-- Automatically Update Child Task Due Date --></label>
+        <name>npsp__Automatically_Update_Child_Task_Due_Date__c</name>
+    </fields>
+    <fields>
+        <help>Lorsque le champ « Attribué à » d’une tâche de plan d’engagement est laissé vide, à qui la tâche doit-elle être attribuée ?</help>
+        <label><!-- Default Assignee --></label>
+        <name>npsp__Default_Assignee__c</name>
+        <picklistValues>
+            <masterLabel>Owner of Object for Engagement Plan</masterLabel>
+            <translation>Détenteur de l’objet pour le plan d’engagement</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>User Creating Engagement Plan</masterLabel>
+            <translation>Utilisateur créant le plan d’engagement</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>npsp__Description__c</name>
+    </fields>
+    <fields>
+        <help>Les tâches ayant une date d’échéance pendant un week-end doivent-elles être replanifiées pour le vendredi précédent ou le lundi suivant ? Ceci ne s’applique que si « Éviter les week-ends » est sélectionné.</help>
+        <label><!-- Reschedule To --></label>
+        <name>npsp__Reschedule_To__c</name>
+        <picklistValues>
+            <masterLabel>Friday</masterLabel>
+            <translation>Vendredi</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Monday</masterLabel>
+            <translation>Lundi</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help>Si sélectionné, les tâches créées dans ce plan d’engagement n’auront pas leur date d’échéance un samedi ni un dimanche.</help>
+        <label><!-- Skip Weekends --></label>
+        <name>npsp__Skip_Weekends__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Engagement Plans --></label>
+        <name>npsp__Total_Engagement_Plans__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Tasks --></label>
+        <name>npsp__Total_Tasks__c</name>
+    </fields>
+    <gender>Masculine</gender>
+    <layouts>
+        <layout>Engagement Plan Template Layout</layout>
+        <sections>
+            <label>Liens personnalisés</label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Nom du modèle de plan d’engagement</nameFieldLabel>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- Manage_Template --></label>
+        <name>npsp__Manage_Template</name>
+    </webLinks>
 </CustomObjectTranslation>

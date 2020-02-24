@@ -28,4 +28,5 @@ Thanks,
 {!Volunteer_Orientation_Training__c.Account_Phone__c}
 {!Volunteer_Orientation_Training__c.Account_Email__c}</textOnly>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

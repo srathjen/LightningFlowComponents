@@ -53,6 +53,10 @@
         <name>From_Mulesoft__c</name>
     </fields>
     <fields>
+        <label><!-- Send Email --></label>
+        <name>GETGSI__Send_Email__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Email --></label>
         <name>Hidden_Email__c</name>
     </fields>
@@ -153,6 +157,22 @@
         <label><!-- DSProSFUsername --></label>
         <name>dsfs__DSProSFUsername__c</name>
     </fields>
+    <layouts>
+        <layout>Community Member Layout</layout>
+        <layoutType>CommunityMemberLayout</layoutType>
+        <sections>
+            <label><!-- Basic Information --></label>
+            <section>Basic Information</section>
+        </sections>
+        <sections>
+            <label><!-- Chatter Settings --></label>
+            <section>Chatter Settings</section>
+        </sections>
+        <sections>
+            <label><!-- Language And Locale Settings --></label>
+            <section>Language And Locale Settings</section>
+        </sections>
+    </layouts>
     <layouts>
         <layout>User Layout</layout>
         <sections>

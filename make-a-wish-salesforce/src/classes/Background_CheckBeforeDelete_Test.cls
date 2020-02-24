@@ -1,3 +1,5 @@
+//This method is used to verify the fucntionality like unit testing
+//This method will create the chapter account and volunteer contact. 
 @isTest
 private class Background_CheckBeforeDelete_Test{
     

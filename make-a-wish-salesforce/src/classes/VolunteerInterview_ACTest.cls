@@ -5,32 +5,33 @@ Created Date : 07/23/2016.
 Description : This test class created for VolunteerInterview_Ac and Performing Unit Test for the Volunter Interview
 Task Functionality.
 ***************************************************************************/
-@isTest
-Public class VolunteerInterview_ACTest
+@IsTest
+public class VolunteerInterview_ACTest
 { 
 
    // Creating Interview Task.
    static testmethod void createInterviewTask()
     {   
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
+        insert acc;
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+        insert con;
          OrientationandTrainingUtil.createAffiliation(con.id);
-         User currUser;
+
+        User currUser;
          System.RunAs(new User(Id = UserInfo.getUserId()))
           {
               currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
           }
-         System.RunAs(currUser)
+        System.RunAs(new User(Id = UserInfo.getUserId()))
          { 
               TestClassUtil.createDynamicContent();
-              PageReference pageRef = Page.VolunteerInterview_VF; 
-             
-              Constant_AC  constant = new Constant_Ac();
-              Id interviewRT= Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
+              PageReference pageRef = Page.VolunteerInterview_VF;
+              Id interviewRT= Constant_AC.INTERVIEW_RT_ID;
               // Confirmation Task
              Task confirmationTask = new Task();
              confirmationTask.Subject = 'Interview Task';
-             confirmationTask.RecordTypeId = interviewRT;
+//             confirmationTask.RecordTypeId = interviewRT;
              confirmationTask.Available_Date1__c = Date.Today();
              confirmationTask.Available_Time1__c = '5 pm';
              confirmationTask.Available_Date2__c = Date.Today();
@@ -44,11 +45,10 @@ Public class VolunteerInterview_ACTest
              confirmationTask.Venue__c = 'Test';
              confirmationTask.Status = 'Scheduled';
              Update confirmationTask;
-             
-             
+
              Task newTask = new Task();
              newTask.Subject = 'Interview Task';
-             newTask.RecordTypeId = interviewRT;
+//             newTask.RecordTypeId = interviewRT;
              newTask.Available_Date1__c = Date.Today();
              newTask.Available_Time1__c = '5 pm';
              newTask.Available_Date2__c = Date.Today();
@@ -56,8 +56,7 @@ Public class VolunteerInterview_ACTest
              newTask.Status = 'Not Started';
              newTask.whoId = con.id;
              insert newTask;
-             
-           
+
              Test.setCurrentPage(pageRef);
              VolunteerInterview_AC controller = new VolunteerInterview_AC();
            
@@ -66,13 +65,14 @@ Public class VolunteerInterview_ACTest
              controller.hidePopup();
              controller.getTimes();
          }
-          
     }  
     // Entering Interview details with Blank AvailableDateandTime 1 Blank.
     public testmethod static void availableDateandTime1Blank()
     {   
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
+        insert acc;
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+        insert con;
          OrientationandTrainingUtil.createAffiliation(con.id);
          User currUser;
        
@@ -81,15 +81,12 @@ Public class VolunteerInterview_ACTest
              currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
           }
         // Dynamic Content.
-         System.RunAs(currUser)
+        System.RunAs(new User(Id = UserInfo.getUserId()))
          {
             TestClassUtil.createDynamicContent();
             PageReference pageRef = Page.VolunteerInterview_VF; 
             Test.setCurrentPage(pageRef);
             VolunteerInterview_AC controller = new VolunteerInterview_AC();
-            Constant_AC  constant = new Constant_Ac();
-            Id interviewRT= Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
-            // Confirmation Task
             controller.currTask.Available_Date2__c  = Date.Today().addDays(-2);
             controller.currTask.Available_Time2__c  = '7 pm';
             controller.currTask.Available_Date3__c  = Date.Today().addDays(-2);
@@ -103,23 +100,23 @@ Public class VolunteerInterview_ACTest
     public testmethod static void availableDateandTime2Blank()
     {   
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
+        insert acc;
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+        insert con;
          OrientationandTrainingUtil.createAffiliation(con.id);
+
          User currUser;
          System.RunAs(new User(Id = UserInfo.getUserId()))
           {
               currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
           }
         // Dynamic Content.
-        System.RunAs(currUser)
+        System.RunAs(new User(Id = UserInfo.getUserId()))
         {
             TestClassUtil.createDynamicContent();
             PageReference pageRef = Page.VolunteerInterview_VF; 
             Test.setCurrentPage(pageRef);
             VolunteerInterview_AC controller = new VolunteerInterview_AC();
-            Constant_AC  constant = new Constant_Ac();
-            Id interviewRT= Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
-            // Confirmation Task
             controller.currTask.Available_Date1__c  = Date.Today().addDays(-2);
             controller.currTask.Available_Time1__c  = '7 pm';
             controller.currTask.Available_Date3__c  = Date.Today().addDays(-2);
@@ -134,7 +131,9 @@ Public class VolunteerInterview_ACTest
     public testmethod static void availableDateandTime3Blank()
     {   
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
+        insert acc;
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+        insert con;
          OrientationandTrainingUtil.createAffiliation(con.id);
          User currUser;
          System.RunAs(new User(Id = UserInfo.getUserId()))
@@ -142,15 +141,12 @@ Public class VolunteerInterview_ACTest
               currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
           }
         // Dynamic Content.
-        System.RunAs(currUser)
+        System.RunAs(new User(Id = UserInfo.getUserId()))
         {
             TestClassUtil.createDynamicContent();
             PageReference pageRef = Page.VolunteerInterview_VF; 
             Test.setCurrentPage(pageRef);
             VolunteerInterview_AC controller = new VolunteerInterview_AC();
-            Constant_AC  constant = new Constant_Ac();
-            Id interviewRT= Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
-            // Confirmation Task
             controller.currTask.Available_Date2__c  = Date.Today().addDays(-2);
             controller.currTask.Available_Time2__c  = '7 pm';
             controller.currTask.Available_Date1__c  = Date.Today().addDays(-2);
@@ -166,23 +162,23 @@ Public class VolunteerInterview_ACTest
     public testmethod static void createInterviewTask1()
     {   
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
+        insert acc;
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+        insert con;
          OrientationandTrainingUtil.createAffiliation(con.id);
+
          User currUser;
          System.RunAs(new User(Id = UserInfo.getUserId()))
           {
                currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
           }
         // Dynamic Content.
-        System.RunAs(currUser)
+        System.RunAs(new User(Id = UserInfo.getUserId()))
         {
             TestClassUtil.createDynamicContent();
             PageReference pageRef = Page.VolunteerInterview_VF; 
             Test.setCurrentPage(pageRef);
             VolunteerInterview_AC controller = new VolunteerInterview_AC();
-            Constant_AC  constant = new Constant_Ac();
-            Id interviewRT= Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
-            // Confirmation Task
             controller.currTask.Available_Date1__c  = Date.Today().addDays(-2);
             controller.currTask.Available_Time1__c  = '6 pm';
             controller.currTask.Available_Date2__c  = Date.Today().addDays(-2);
@@ -199,7 +195,9 @@ Public class VolunteerInterview_ACTest
     public testmethod static void createTaskforSameAvailability()
     {   
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
+        insert acc;
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+        insert con;
          OrientationandTrainingUtil.createAffiliation(con.id);
          User currUser;
          System.RunAs(new User(Id = UserInfo.getUserId()))
@@ -207,16 +205,12 @@ Public class VolunteerInterview_ACTest
                currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
           }
         // Dynamic Content.
-        System.RunAs(currUser)
+        System.RunAs(new User(Id = UserInfo.getUserId()))
         {
             TestClassUtil.createDynamicContent();
             PageReference pageRef = Page.VolunteerInterview_VF; 
             Test.setCurrentPage(pageRef);
             VolunteerInterview_AC controller = new VolunteerInterview_AC();
-            Constant_AC  constant = new Constant_Ac();
-            Id interviewRT= Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
-            // Confirmation Task
-           
             controller.currTask.Available_Date1__c  = Date.Today().addDays(2);
             controller.currTask.Available_Time1__c  = '7 pm';
             controller.currTask.Available_Date2__c  = Date.Today().addDays(2);
@@ -232,7 +226,9 @@ Public class VolunteerInterview_ACTest
    public testmethod static void createInterviewTask3()
     {   
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
+        insert acc;
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+        insert con;
          OrientationandTrainingUtil.createAffiliation(con.id);
          User currUser;
          System.RunAs(new User(Id = UserInfo.getUserId()))
@@ -241,16 +237,12 @@ Public class VolunteerInterview_ACTest
           }
         
         // Dynamic Content.
-        System.RunAs(currUser)
+        System.RunAs(new User(Id = UserInfo.getUserId()))
         {
             TestClassUtil.createDynamicContent();
             PageReference pageRef = Page.VolunteerInterview_VF; 
             Test.setCurrentPage(pageRef);
             VolunteerInterview_AC controller = new VolunteerInterview_AC();
-            Constant_AC  constant = new Constant_Ac();
-            Id interviewRT= Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
-            // Confirmation Task
-           
             controller.currTask.Available_Date1__c  = Date.Today().addDays(2);
             controller.currTask.Available_Time1__c  = '7 pm';
             controller.currTask.Available_Date2__c  = Date.Today().addDays(2);
@@ -266,7 +258,9 @@ Public class VolunteerInterview_ACTest
     public testmethod static void createInterviewTask4()
     {   
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
+        insert acc;
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+        insert con;
          OrientationandTrainingUtil.createAffiliation(con.id);
          User currUser;
          System.RunAs(new User(Id = UserInfo.getUserId()))
@@ -274,16 +268,12 @@ Public class VolunteerInterview_ACTest
                currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
           }
         // Dynamic Content.
-        System.RunAs(currUser)
+        System.RunAs(new User(Id = UserInfo.getUserId()))
         {
             TestClassUtil.createDynamicContent();
             PageReference pageRef = Page.VolunteerInterview_VF; 
             Test.setCurrentPage(pageRef);
             VolunteerInterview_AC controller = new VolunteerInterview_AC();
-            Constant_AC  constant = new Constant_Ac();
-            Id interviewRT= Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
-            // Confirmation Task
-           
             controller.currTask.Available_Date1__c  = Date.Today().addDays(2);
             controller.currTask.Available_Time1__c  = '7 pm';
             controller.currTask.Available_Date2__c  = Date.Today().addDays(2);
@@ -300,24 +290,22 @@ Public class VolunteerInterview_ACTest
     public testmethod static void createInterviewTask5()
     {   
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
+        insert acc;
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
-         OrientationandTrainingUtil.createAffiliation(con.id);
+        insert con;
+        OrientationandTrainingUtil.createAffiliation(con.id);
          User currUser;
          System.RunAs(new User(Id = UserInfo.getUserId()))
           {
                currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
           }
         // Dynamic Content.
-        System.RunAs(currUser)
+        System.RunAs(new User(Id = UserInfo.getUserId()))
         {
             TestClassUtil.createDynamicContent();
             PageReference pageRef = Page.VolunteerInterview_VF; 
             Test.setCurrentPage(pageRef);
             VolunteerInterview_AC controller = new VolunteerInterview_AC();
-            Constant_AC  constant = new Constant_Ac();
-            Id interviewRT= Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
-            // Confirmation Task
-           
             controller.currTask.Available_Date1__c  = Date.Today().addDays(2);
             controller.currTask.Available_Time1__c  = '7 pm';
             controller.currTask.Available_Date2__c  = Date.Today().addDays(2);
@@ -334,7 +322,9 @@ Public class VolunteerInterview_ACTest
     public testmethod static void withOtherDetails()
     {   
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
+        insert acc;
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+        insert con;
          OrientationandTrainingUtil.createAffiliation(con.id);
          User currUser;
          System.RunAs(new User(Id = UserInfo.getUserId()))
@@ -342,15 +332,12 @@ Public class VolunteerInterview_ACTest
                currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
           }
         // Dynamic Content.
-        System.RunAs(currUser)
+        System.RunAs(new User(Id = UserInfo.getUserId()))
         {
             TestClassUtil.createDynamicContent();
             PageReference pageRef = Page.VolunteerInterview_VF; 
             Test.setCurrentPage(pageRef);
             VolunteerInterview_AC controller = new VolunteerInterview_AC();
-            Constant_AC  constant = new Constant_Ac();
-            Id interviewRT= Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
-            // Confirmation Task
             controller.currTask.Available_Date2__c  = Date.Today().addDays(2);
             controller.currTask.Available_Time2__c  = '7 pm';
             controller.currTask.Available_Date1__c  = Date.Today().addDays(2);
@@ -366,7 +353,9 @@ Public class VolunteerInterview_ACTest
     public testmethod static void createTask()
     {   
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
+        insert acc;
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+        insert con;
          OrientationandTrainingUtil.createAffiliation(con.id);
          User currUser;
          System.RunAs(new User(Id = UserInfo.getUserId()))
@@ -374,15 +363,13 @@ Public class VolunteerInterview_ACTest
               currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
           }
         // Dynamic Content.
-        System.RunAs(currUser)
+        System.RunAs(new User(Id = UserInfo.getUserId()))
         {
             TestClassUtil.createDynamicContent();
             PageReference pageRef = Page.VolunteerInterview_VF; 
             Test.setCurrentPage(pageRef);
             VolunteerInterview_AC controller = new VolunteerInterview_AC();
-            Constant_AC  constant = new Constant_Ac();
-            Id interviewRT= Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
-            // Confirmation Task
+            Id interviewRT = Constant_AC.INTERVIEW_RT_ID;
             controller.currTask.Available_Date2__c  = Date.Today().addDays(2);
             controller.currTask.Available_Time2__c  = '7 pm';
             controller.currTask.Available_Date1__c  = Date.Today().addDays(2);

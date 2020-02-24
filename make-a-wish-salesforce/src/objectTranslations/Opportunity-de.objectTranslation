@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldSets>
+        <label><!-- BDE Entry FS v2 --></label>
+        <name>npsp__BDE_Entry_FS_v2</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- New BDE List v2 --></label>
+        <name>npsp__BDE_List_FS_v2</name>
+    </fieldSets>
     <fields>
         <label><!-- DB Competitor --></label>
         <name>DB_Competitor__c</name>
@@ -15,6 +23,10 @@
             <masterLabel>Competitor C</masterLabel>
             <translation><!-- Competitor C --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Unique Record Count --></label>
+        <name>Unique_Record_Count__c</name>
     </fields>
     <fields>
         <help>Formel: Der Betrag dieser Opportunity minus des Betrags der Zahlungsabschreibung und des empfangenen Zahlungsbetrags</help>
@@ -47,11 +59,11 @@
         <name>npe01__Member_Level__c</name>
         <picklistValues>
             <masterLabel>Bronze</masterLabel>
-            <translation><!-- Bronze --></translation>
+            <translation>Bronze</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Gold</masterLabel>
-            <translation><!-- Gold --></translation>
+            <translation>Gold</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Silver</masterLabel>
@@ -98,7 +110,7 @@
     <fields>
         <label><!-- Recurring Donation --></label>
         <name>npe03__Recurring_Donation__c</name>
-        <relationshipLabel><!-- Donations --></relationshipLabel>
+        <relationshipLabel><!-- Opportunities --></relationshipLabel>
     </fields>
     <fields>
         <help>Verkettete Felder, die während des Rollups zum Suchen der neuesten Opportunity verwendet werden</help>
@@ -106,7 +118,7 @@
         <name>npo02__CombinedRollupFieldset__c</name>
     </fields>
     <fields>
-        <help><!-- Controls if Household contact roles are created for Opportunities.  DEPRECATED.  Replaced by custom settings. --></help>
+        <help>Steuert, ob Haushalt-Kontaktrollen für Opportunities erstellt werden. ERSETZT. Ersetzt durch benutzerdefinierte Einstellungen.</help>
         <label><!-- _SYSTEM: HOUSEHOLD CONTACT ROLEPROCESSOR --></label>
         <name>npo02__systemHouseholdContactRoleProcessor__c</name>
         <picklistValues>
@@ -162,6 +174,11 @@
         <help>Gibt an, warum der Spendenaufruf nicht erfolgreich war.</help>
         <label><!-- Closed Lost Reason --></label>
         <name>npsp__Closed_Lost_Reason__c</name>
+    </fields>
+    <fields>
+        <help>Wenn dieses Kontrollkästchen aktiviert ist, werden mit diesem Feld mehrere Aspekte der NPSP-Opportunity-Kontaktrollen-Automatisierung deaktiviert, was ggf. zu falschen oder doppelten Daten führen kann. Nähere Einzelheiten enthält die Produktdokumentation.</help>
+        <label><!-- Disable Contact Role Automation --></label>
+        <name>npsp__DisableContactRoleAutomation__c</name>
     </fields>
     <fields>
         <help>Der mittlere Marktwert eines Sachgeschenks</help>
@@ -244,7 +261,7 @@
         </picklistValues>
         <picklistValues>
             <masterLabel>Services</masterLabel>
-            <translation><!-- Services --></translation>
+            <translation>Services</translation>
         </picklistValues>
     </fields>
     <fields>
@@ -379,27 +396,123 @@
             <translation>Gedenken</translation>
         </picklistValues>
     </fields>
+    <layouts>
+        <layout>Donation Layout</layout>
+        <sections>
+            <label>Spendeninformationen</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>Zugewiesenes Geschenk Details</label>
+            <section>Matching Gift Information</section>
+        </sections>
+        <sections>
+            <label>Zahlungsinformationen</label>
+            <section>Payment Information</section>
+        </sections>
+        <sections>
+            <label>Informationen des Begünstigten</label>
+            <section>Tribute Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Grant Layout</layout>
+        <sections>
+            <label>Spendeninformationen</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>Unterstützungsinformationen</label>
+            <section>Grant Information</section>
+        </sections>
+        <sections>
+            <label>Zahlungsinformationen</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>In-Kind Gift Layout</layout>
+        <sections>
+            <label>Spendeninformationen</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>Sachgeschenkinformationen</label>
+            <section>In-Kind Information</section>
+        </sections>
+        <sections>
+            <label>Informationen zur Anerkennung</label>
+            <section>Tribute Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Major Gift Layout</layout>
+        <sections>
+            <label>Spendeninformationen</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>Informationen zum Hauptgeschenk</label>
+            <section>Major Gift Information</section>
+        </sections>
+        <sections>
+            <label>Zahlungsinformationen</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Matching Gift Layout</layout>
+        <sections>
+            <label>Spendeninformationen</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>Zahlungsinformationen</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Membership Layout</layout>
+        <sections>
+            <label>Felder</label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label>Mitgliederinformationen</label>
+            <section>Member Information</section>
+        </sections>
+        <sections>
+            <label>Zahlungsinformationen</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
     <recordTypes>
+        <description><!-- Donation Received --></description>
         <label><!-- Donation --></label>
         <name>Donation</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Grant Received --></description>
         <label><!-- Grant --></label>
         <name>Grant</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Goods or Services received as In-Kind --></description>
         <label><!-- In-Kind Gift --></label>
         <name>In_Kind_Gift</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Large Donation from a Major Donor --></description>
         <label><!-- Major Gift --></label>
         <name>MajorGift</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Matching Donation from an Donor&apos;s Employer or other Organization --></description>
         <label><!-- Matching Gift --></label>
         <name>Matching_Gift</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- A membership record type --></description>
         <label><!-- Membership --></label>
         <name>Membership</name>
     </recordTypes>

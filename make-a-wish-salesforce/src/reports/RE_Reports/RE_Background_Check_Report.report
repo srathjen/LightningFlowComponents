@@ -13,6 +13,7 @@
     <filter>
         <criteriaItems>
             <column>Background_check__c.Migrated_Record__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
@@ -26,6 +27,8 @@
     <reportType>CustomEntity$Background_check__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Background_check__c.Date_Completed__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

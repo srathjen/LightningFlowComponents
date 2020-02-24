@@ -51,6 +51,7 @@ public class TravelAlgorithmWrapper {
     public List<String> travelAgroithmList {get;set;}
     public Set<String> travelSet;
      public String algList;
+    public boolean travelRestriction{get;set;} //SIW-379 : Added field in wrapper
     Public TravelAlgorithmWrapper(){
         infectious = false;
         airborne = false;
@@ -88,6 +89,7 @@ public class TravelAlgorithmWrapper {
         notApplicable = false;
         noneApply = false;
         iamNotSure = false;
+        travelRestriction = false;
         ventilatorText = '';
         phtText = '';
         pulmonaryHypertensionString = '';

@@ -57,13 +57,21 @@
     <filter>
         <criteriaItems>
             <column>Lead$Status</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>DNQ</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead$ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>
@@ -80,10 +88,10 @@
     <reportType>Leads_with_Diagnosis_Verification_case_details__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
-        <dateColumn>Lead$Inquiry_Date__c</dateColumn>
-        <endDate>2018-05-31</endDate>
+        <dateColumn>Lead$Referred_Date__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
-        <startDate>2017-04-02</startDate>
     </timeFrameFilter>
 </Report>

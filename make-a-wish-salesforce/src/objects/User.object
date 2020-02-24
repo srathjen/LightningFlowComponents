@@ -5,7 +5,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>CallHighlightAction</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CallHighlightAction</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -13,7 +33,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>DeleteBannerPhotoAction</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>DeleteBannerPhotoAction</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>EditUserAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EditUserAction</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EditUserAction</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -21,7 +61,13 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
+        <actionName>EmailHighlightAction</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EmailHighlightAction</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -29,7 +75,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>FreezeUserAction</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>FreezeUserAction</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>LinkToSetupUserDetailAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>LinkToSetupUserDetailAction</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>LinkToSetupUserDetailAction</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -37,7 +103,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>ManagePermSetsAction</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ManagePermSetsAction</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>PasswordUnlockAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>PasswordUnlockAction</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>PasswordUnlockAction</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -45,7 +131,41 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>ResetPasswordAction</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ResetPasswordAction</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SmsHighlightAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SmsHighlightAction</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SmsHighlightAction</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -53,7 +173,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>UpdateBannerPhotoAction</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>UpdateBannerPhotoAction</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>UserActivationAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>UserActivationAction</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>UserActivationAction</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <compactLayoutAssignment>User_layout</compactLayoutAssignment>
@@ -155,38 +295,53 @@
         <description>This is a field that is installed by and used with the Adoption Dashboard AppExchange package. If your org already has a similar field, you can change the reports that are part of the Adoption Dashboard package to use your custom field and then delete this field.</description>
         <externalId>false</externalId>
         <label>DB Region</label>
-        <picklist>
-            <picklistValues>
-                <fullName>NA</fullName>
-                <color>#009900</color>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>EMEA</fullName>
-                <color>#3333FF</color>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>APAC</fullName>
-                <color>#CC6600</color>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>LA</fullName>
-                <color>#990000</color>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>NA</fullName>
+                    <color>#009900</color>
+                    <default>false</default>
+                    <label>NA</label>
+                </value>
+                <value>
+                    <fullName>EMEA</fullName>
+                    <color>#3333FF</color>
+                    <default>false</default>
+                    <label>EMEA</label>
+                </value>
+                <value>
+                    <fullName>APAC</fullName>
+                    <color>#CC6600</color>
+                    <default>false</default>
+                    <label>APAC</label>
+                </value>
+                <value>
+                    <fullName>LA</fullName>
+                    <color>#990000</color>
+                    <default>false</default>
+                    <label>LA</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>From_Mulesoft__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>From Mulesoft</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>GETGSI__Send_Email__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Send Email</label>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Checkbox</type>
     </fields>
@@ -362,24 +517,29 @@
         <fullName>Volunteer_Orientation_Status__c</fullName>
         <externalId>false</externalId>
         <label>Volunteer Orientation Status</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Registered</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Cancelled</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>First Registeration</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Registered</fullName>
+                    <default>false</default>
+                    <label>Registered</label>
+                </value>
+                <value>
+                    <fullName>Cancelled</fullName>
+                    <default>false</default>
+                    <label>Cancelled</label>
+                </value>
+                <value>
+                    <fullName>First Registeration</fullName>
+                    <default>false</default>
+                    <label>First Registeration</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Year_of_Inactive__c</fullName>
@@ -426,6 +586,27 @@
         <unique>false</unique>
     </fields>
     <listViews>
+        <fullName>ActiveAdminUsers</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.PROFILE.NAME</field>
+            <operation>equals</operation>
+            <value>System Administrator</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>Admin Users - Active</label>
+    </listViews>
+    <listViews>
         <fullName>ActiveUsers</fullName>
         <columns>FULL_NAME</columns>
         <columns>CORE.USERS.ALIAS</columns>
@@ -452,11 +633,12 @@
         <columns>CORE.USERS.ACTIVE</columns>
         <columns>CORE.PROFILE.NAME</columns>
         <columns>MANAGER</columns>
+        <columns>CREATED_DATE</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>CORE.PROFILE.NAME</field>
             <operation>contains</operation>
-            <value>volunteer</value>
+            <value>Active Volunteer</value>
         </filters>
         <filters>
             <field>CORE.PROFILE.NAME</field>
@@ -487,6 +669,7 @@
         <columns>CORE.USERS.LAST_LOGIN</columns>
         <columns>CORE.USER_ROLE.NAME</columns>
         <columns>CORE.USERS.ACTIVE</columns>
+        <columns>dsfs__DSProSFUsername__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>CORE.PROFILE.NAME</field>
@@ -527,6 +710,40 @@
         <label>Arizona Users</label>
     </listViews>
     <listViews>
+        <fullName>Chatter_Free_License_Users</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>MANAGER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>User_License__c</field>
+            <operation>equals</operation>
+            <value>Chatter Free</value>
+        </filters>
+        <label>Chatter Free License Users</label>
+    </listViews>
+    <listViews>
+        <fullName>MSTAdminUsers</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.PROFILE.NAME</field>
+            <operation>equals</operation>
+            <value>MST Admin</value>
+        </filters>
+        <label>MST Admin Users</label>
+    </listViews>
+    <listViews>
         <fullName>National_Staff</fullName>
         <columns>FULL_NAME</columns>
         <columns>CORE.USERS.ALIAS</columns>
@@ -542,7 +759,35 @@
             <operation>contains</operation>
             <value>National Staff</value>
         </filters>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
         <label>National Staff</label>
+    </listViews>
+    <listViews>
+        <fullName>National_Staff_by_Role</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>MANAGER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USER_ROLE.NAME</field>
+            <operation>contains</operation>
+            <value>National Staff</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>National Staff by Role</label>
     </listViews>
     <listViews>
         <fullName>Program_staff_user</fullName>
@@ -615,8 +860,6 @@
     <searchLayouts>
         <lookupDialogsAdditionalFields>FULL_NAME</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>CORE.USER_ROLE.NAME</lookupDialogsAdditionalFields>
-        <lookupFilterFields>FULL_NAME</lookupFilterFields>
-        <lookupFilterFields>CORE.USER_ROLE.NAME</lookupFilterFields>
         <lookupPhoneDialogsAdditionalFields>FULL_NAME</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>CORE.USER_ROLE.NAME</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>CORE.USERS.PHONE</lookupPhoneDialogsAdditionalFields>

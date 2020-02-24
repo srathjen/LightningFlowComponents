@@ -14,10 +14,10 @@ global class CommunitiesLoginController {
     
     global PageReference login() {
         String startUrl = System.currentPageReference().getParameters().get('startURL');
-        List<User> getUserDetails = [SELECT Id,Profile.name,ContactId from User WHERE Username = :username limit 1];
+        List<User> getUserDetails = [SELECT Id,Profile.name,Profile.id,ContactId from User WHERE Username = :username limit 1];
         if(getUserDetails.size() > 0){
             // If Prospective Volunteer, then they will be landed to Propective Volunteer Welcome Page.
-            if(getUserDetails[0].Profile.name == 'Prospective Volunteer (Login)' || getUserDetails[0].Profile.name == 'Prospective Volunteer (Member)') {
+            if(getUserDetails[0].Profile.id == label.Prospective_Volunteer_Profile) {
                 return Site.login(username, password, '/apex/VolunteerWelcomePage_VF');
             }
             else {
@@ -43,7 +43,13 @@ global class CommunitiesLoginController {
                     }
                 }
                 if(!String.isEmpty(startUrl)) {
-                    return Site.login(username, password, startUrl);
+                    Date todayDate = system.today();                   
+                    List<Conflict_Of_Interest__c> conflictIns = [SELECT Id,Name,Expiration_Date__c,Signed_Date__c,current__c,Volunteer_Contact__c FROM  Conflict_Of_Interest__c WHERE Volunteer_Contact__c  =: getUserDetails.get(0).ContactId AND Expiration_Date__c != NULL AND current__c = TRUE  AND Expiration_Date__c < TODAY ORDER BY CreatedDate DESC LIMIT 1]; 
+                    List<Background_check__c> dbBackGround = [SELECT Id,CreatedDate,Hidden_Display_Popup__c,Volunteer__c,Status__c FROM Background_check__c WHERE Volunteer__c =: getUserDetails.get(0).ContactId AND Date__c < TODAY AND Current__c = True order by createdDate DESC Limit 1];
+                    If(conflictIns.Size() > 0 || dbBackGround.Size() > 0)
+                        return Site.login(username, password, '/apex/VolunteerLanding_VF');
+                     else
+                        return Site.login(username, password, startUrl);
                 } else {
                     return Site.login(username, password, '/apex/VolunteerLanding_VF');
                 }

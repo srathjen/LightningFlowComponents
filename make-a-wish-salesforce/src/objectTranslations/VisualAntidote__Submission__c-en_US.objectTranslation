@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Context Id --></label>
+        <name>VisualAntidote__Context_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Context Type --></label>
+        <name>VisualAntidote__Context_Type__c</name>
+        <picklistValues>
+            <masterLabel>Admin</masterLabel>
+            <translation><!-- Admin --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>User</masterLabel>
+            <translation><!-- User --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Document Ids --></label>
+        <name>VisualAntidote__Document_Ids__c</name>
+    </fields>
+    <fields>
+        <label><!-- E-Sign --></label>
+        <name>VisualAntidote__E_Sign__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form Type --></label>
+        <name>VisualAntidote__Form_Type__c</name>
+        <picklistValues>
+            <masterLabel>ClassicLightning</masterLabel>
+            <translation><!-- ClassicLightning --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ClassicRegular</masterLabel>
+            <translation><!-- ClassicRegular --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NativeLightning</masterLabel>
+            <translation><!-- NativeLightning --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NativeRegular</masterLabel>
+            <translation><!-- NativeRegular --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Form --></label>
+        <name>VisualAntidote__Form__c</name>
+        <relationshipLabel><!-- Forms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- IP Address --></label>
+        <name>VisualAntidote__IP_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Native --></label>
+        <name>VisualAntidote__Is_Native__c</name>
+    </fields>
+    <fields>
+        <label><!-- Objects_XML --></label>
+        <name>VisualAntidote__Objects_XML__c</name>
+    </fields>
+    <fields>
+        <label><!-- Objects --></label>
+        <name>VisualAntidote__Objects__c</name>
+    </fields>
+    <fields>
+        <label><!-- Primary Object --></label>
+        <name>VisualAntidote__Primary_Object__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record Created/Updated --></label>
+        <name>VisualAntidote__Record_Created_Updated__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>VisualAntidote__Status__c</name>
+        <picklistValues>
+            <masterLabel>Declined</masterLabel>
+            <translation><!-- Declined --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Failed</masterLabel>
+            <translation><!-- Failed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending</masterLabel>
+            <translation><!-- Pending --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>StagingReady</masterLabel>
+            <translation><!-- StagingReady --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Successful</masterLabel>
+            <translation><!-- Successful --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Submission Date --></label>
+        <name>VisualAntidote__Submission_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submitted Data XML2 --></label>
+        <name>VisualAntidote__Submitted_Data_XML2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submitted Data XML3 --></label>
+        <name>VisualAntidote__Submitted_Data_XML3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submitted Data XML --></label>
+        <name>VisualAntidote__Submitted_Data_XML__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submitted Html --></label>
+        <name>VisualAntidote__Submitted_Html__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submitted Prefill Obj Id --></label>
+        <name>VisualAntidote__Submitted_Prefill_Obj_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submitted Prefill Obj Info --></label>
+        <name>VisualAntidote__Submitted_Prefill_Obj_Info__c</name>
+    </fields>
+    <fields>
+        <label><!-- User Content ID --></label>
+        <name>VisualAntidote__User_Content_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Verification Emails --></label>
+        <name>VisualAntidote__Verification_Emails__c</name>
+    </fields>
+    <layouts>
+        <layout>Submission Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

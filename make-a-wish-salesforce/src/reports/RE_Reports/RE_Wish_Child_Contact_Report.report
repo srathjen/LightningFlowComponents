@@ -4,6 +4,7 @@
     <filter>
         <criteriaItems>
             <column>Contact$RecordType.DeveloperName</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Wish_Child</value>
         </criteriaItems>
@@ -17,6 +18,8 @@
     <reportType>Contacts__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Contact$CreatedDate</dateColumn>
         <interval>INTERVAL_CURRENT</interval>

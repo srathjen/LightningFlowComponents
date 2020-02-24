@@ -1,0 +1,40 @@
+<aura:component controller="LightningDataTableController">
+    
+    <!-- attributes -->
+    <aura:attribute name="WRSId" type="String"/>
+    <aura:attribute name="showChangeFormModal" type="Boolean" default="false"/>
+    <aura:attribute name="selectedLookUpRecord" type="sObject" />
+    <aura:attribute name="typeOfSignature" type="String"/>
+    <aura:attribute name="caseId" type="Id"/>
+    <aura:attribute name="errors" type="String"/>
+    
+    <!-- handlers-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:registerEvent name="refreshEvent" type="c:refreshDataTable"/>
+    
+    <!-- Body -->  
+    <c:sldsModal aura:id="changeFormModal"  closeModal="true"  closeAction="{!c.handleChangeSignerCancel}">
+        <aura:set attribute="header">
+            Change Form
+        </aura:set>
+        <aura:set attribute="content">
+            <div style="height:120px;">
+                <c:customLookup aura:id="FindForms" objectAPIName="Wish_Signature_Forms__c" 
+                                disabledAttr="false"
+                                IconName="doctype:gform"
+                                additionalParams=""
+                                componentMessage="conditiondescription"
+                                placeholderText="Find Wish Forms"
+                                selectedRecord="{!v.selectedLookUpRecord}"
+                                labelClass="slds-form-element__label slds-m-bottom_x-small"
+                                label="Find Forms "
+                                selectedRecordId="{!v.caseId}"
+                                formType = "{!v.typeOfSignature}"/>
+            </div>
+        </aura:set>
+        <aura:set attribute="footer">
+            <lightning:button label="Change" variant="brand" title="Change action" onclick="{! c.handleChangeForm }" />
+            <lightning:button label="Cancel" title="Cancle action" onclick="{! c.handleChangeSignerCancel }" />
+        </aura:set>
+    </c:sldsModal>
+</aura:component>

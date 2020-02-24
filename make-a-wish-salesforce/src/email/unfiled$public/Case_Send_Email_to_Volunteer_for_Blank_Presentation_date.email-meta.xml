@@ -8,4 +8,5 @@
     <style>freeForm</style>
     <subject>Wish Presentation Date Reminder</subject>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

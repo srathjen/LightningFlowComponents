@@ -18,30 +18,28 @@
     <columns>
         <field>Case.Completed_Date__c</field>
     </columns>
-    <columns>
-        <field>Case.Actual_Cash__c</field>
-    </columns>
-    <columns>
-        <field>Case.Actual_Inkind__c</field>
-    </columns>
     <filter>
         <criteriaItems>
             <column>Case.Wish_Assist__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>STATUS</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Granted,Completed</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-WIsh Arizona</value>
         </criteriaItems>
@@ -59,6 +57,8 @@
     <reportType>CaseList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Case.End_Date__c</dateColumn>
         <interval>INTERVAL_CURFY</interval>

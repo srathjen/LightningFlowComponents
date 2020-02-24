@@ -1,0 +1,772 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Wish_Affiliation_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>Wish_Affiliation_Compact_Layout</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Wish_Affiliation_Compact_Layout</fullName>
+        <fields>Name</fields>
+        <fields>Contact__c</fields>
+        <fields>Wish__c</fields>
+        <fields>Wish_Affiliation_Type__c</fields>
+        <label>Wish Affiliation Compact Layout</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A junction object between the Wish (Case) and Contacts to track individuals related to a particular Wish.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fieldSets>
+        <fullName>DesignFields</fullName>
+        <description>Wish Design Form Component</description>
+        <displayedFields>
+            <field>Contact__r.FirstName</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Contact__r.Middle_Name__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Contact__r.LastName</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Contact__r.Birthdate</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Contact__r.Email</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Contact__r.T_Shirt_Size__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Relationship__r.npe4__Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Residing_with_Wish_child__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Wish_Affiliation_Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>DesignFields</label>
+    </fieldSets>
+    <fields>
+        <fullName>Added_Through_Interview_Flow__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used to determine whether the volunteer has selected to add this Wish Affiliation during the wish design interview flow.  Not intended to be displayed to users.</description>
+        <externalId>false</externalId>
+        <label>Added Through Interview Flow</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Best_Medical_Contact__c</fullName>
+        <description>Displays TRUE if the Best Medical contact is ticked TRUE on the related Relationship record</description>
+        <externalId>false</externalId>
+        <formula>Relationship__r.Best_Contact__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Best Medical Contact</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <description>A Wish Affiliation&apos;s related Contact.</description>
+        <externalId>false</externalId>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Wish Affiliations</relationshipLabel>
+        <relationshipName>Wish_Affiliations</relationshipName>
+        <relationshipOrder>1</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Created_Via_Lead_Convert__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates that the Wish Affiliation was generated from the Lead Convert process.</description>
+        <externalId>false</externalId>
+        <label>Created Via Lead Convert</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Date_Participant_Removed__c</fullName>
+        <description>Date stamped via a workflow rule when the Affiliation Type is changed from Approved or Requested Participant to another value.  Used for reporting purposes as detail objects cannot show reports on field history tracking.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The last date the participant was changed from either Approved or Requested to another value.</inlineHelpText>
+        <label>Date Participant Removed</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Date_of_Birth__c</fullName>
+        <description>Formula used for populating data into templates or reports.</description>
+        <externalId>false</externalId>
+        <formula>Contact__r.Birthdate</formula>
+        <label>Date of Birth</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Details__c</fullName>
+        <description>Captures additional details related to Wish Affiliation records.</description>
+        <externalId>false</externalId>
+        <label>Details</label>
+        <length>32000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>6</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Full_Name__c</fullName>
+        <description>Displays the Full Name of the Wish Affiliations Primary Contact and a Hyperlink link to their Salesforce record.</description>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(&quot;/&quot; &amp; Contact__r.Id,  Contact__r.FirstName &amp; &quot; &quot; &amp;  Contact__r.LastName , &quot;_self&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Full Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Health_Treatment_Facility__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>A Wish Affiliation&apos;s related &quot;Health Treatment Facility&quot; account.</description>
+        <externalId>false</externalId>
+        <label>Hospital Treatment Facility</label>
+        <lookupFilter>
+            <active>true</active>
+            <errorMessage>The Account record type must be of the type &quot;Hospital Treatment Facility&quot;</errorMessage>
+            <filterItems>
+                <field>Account.RecordType.Name</field>
+                <operation>equals</operation>
+                <value>Hospital Treatment Facility</value>
+            </filterItems>
+            <infoMessage>The Account record type must be of the type &quot;Hospital Treatment Facility&quot;</infoMessage>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Wish Affiliations</relationshipLabel>
+        <relationshipName>Wish_Affiliations</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Hide_from_Restricted_Users__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used with custom setting Wish_Affiliation_Security_Settings field Restrict_Access to control which Wish Affiliation records are visible to users/profiles with Restrict_Access.  The primary use case is Volunteers.  The long term goal is to implement Apex Sharing for Contacts based on the Wish Affiliation, and this field can be leveraged for that also.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Selecting this option will hide this Wish Affiliation from restricted users, such as Volunteers.</inlineHelpText>
+        <label>Hide from Restricted Users</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Medical_Needs__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates that a wish participant requires medical needs.</description>
+        <externalId>false</externalId>
+        <label>Medical Needs</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Medical_Professional_Status__c</fullName>
+        <description>Uses the status of a Medical Professional&apos;s Affiliation to the chapter to determine their status.</description>
+        <externalId>false</externalId>
+        <formula>Contact__r.Medical_Professional_Status__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>To change the status, create or update this contact&apos;s related &apos;Organization Affiliation&apos; records (on the contact) to a status of &apos;Active&apos; or &apos;Inactive&apos;. Note: this is the record or records related to the Chapter not a health treatment facility.</inlineHelpText>
+        <label>Medical Professional Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>My_Wish_Affiliation__c</fullName>
+        <description>True when the user viewing the record is also the related Wish Case&apos;s Owner</description>
+        <externalId>false</externalId>
+        <formula>IF($User.Id = Wish__r.OwnerId, TRUE, FALSE)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>My Wish Affiliation</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Non_Comped__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used to denote when a contact has decided to participate in the wish at their own expense ie Make a Wish is not &apos;Comp&apos;ing their expenses.</description>
+        <externalId>false</externalId>
+        <label>Non-Comped</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Parent_Legal_Guardian__c</fullName>
+        <description>Displays the Parent Legal Guardian status of the related Relationship record</description>
+        <externalId>false</externalId>
+        <formula>Relationship__r.Parent_Legal_Guardian__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Parent Legal Guardian</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Participant_Turning_18__c</fullName>
+        <description>The date when this contact turns 18. Used to create related Wish Required Signatures by Batch class</description>
+        <externalId>false</externalId>
+        <formula>ADDMONTHS( Contact__r.Birthdate ,216)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Participant Turning 18</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Qualifying_Medical_Team_Member__c</fullName>
+        <description>True if the related relationship record&apos;s &apos;Qualifying Medical Team Member&apos; field is True.</description>
+        <externalId>false</externalId>
+        <formula>Relationship__r.Qualifying_Medical_Professional__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Qualifying Medical Team Member</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Referral_Source__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates the contact who originated the wish referral.</description>
+        <externalId>false</externalId>
+        <label>Referral Source</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Related_To__c</fullName>
+        <description>If there is a related relationship record it displays the name of the related contact, and a Hyperlink link to their Salesforce record.</description>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(&quot;/&quot; &amp; Relationship__r.npe4__Contact__r.Id,  Relationship__r.npe4__Contact__r.FirstName &amp; &quot; &quot; &amp; Relationship__r.npe4__Contact__r.LastName , &quot;_self&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Related To</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Relationship_Type__c</fullName>
+        <description>If linked to an existing relationship record displays the type of relationship</description>
+        <externalId>false</externalId>
+        <formula>Text( Relationship__r.npe4__Type__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Relationship Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Relationship__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>A Wish Affiliation&apos;s related Relationship record.</description>
+        <externalId>false</externalId>
+        <label>Relationship</label>
+        <referenceTo>npe4__Relationship__c</referenceTo>
+        <relationshipLabel>Wish Affiliations</relationshipLabel>
+        <relationshipName>Wish_Affiliations</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Residing_with_Wish_child__c</fullName>
+        <description>It will define wish child residing with wish child or not.</description>
+        <externalId>false</externalId>
+        <label>Residing with Wish child</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Send_Clearance_Forms_To__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Allows the user to designate which Medical Professional should receive medical clearance forms.</description>
+        <externalId>false</externalId>
+        <label>Send Clearance Forms To</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Survey_Recipient__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Denoted the participant who should receive the survey following the completion of the wish.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Note: Only one survey receipt per wish can be selected.  If this contact is selected, any existing survey recipient (for this wish) will be deselected.</inlineHelpText>
+        <label>Survey Recipient</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Treating_HCP__c</fullName>
+        <description>True if the related relationships record&apos;s &apos;Treating Health Care Professional&apos; field is True.</description>
+        <externalId>false</externalId>
+        <formula>Relationship__r.Treating_HCP__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Treating Healthcare Provider</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Under_18__c</fullName>
+        <description>&apos;Yes&apos; if the related contact is less than 18 years old.</description>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(Contact__r.Birthdate), &quot;No Birthdate Recorded&quot;,
+IF(Contact__r.Birthdate &gt; ADDMONTHS(TODAY(),-216), &quot;Yes&quot;, &quot;No&quot;))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Under 18 Years of Age</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Validated_in_Interview__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used to track whether the information for this Wish Affiliation has been validated as part of the Wish Interview.  Data is leveraged by, and populated by, a custom lightning component and is mapped in custom metadata.</description>
+        <externalId>false</externalId>
+        <label>Validated in Interview</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Wish_Affiliation_Type__c</fullName>
+        <description>Captures the type/status of the Wish Affiliated contact.</description>
+        <externalId>false</externalId>
+        <label>Wish Affiliation Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Approved Participant</fullName>
+                    <default>false</default>
+                    <label>Approved Participant</label>
+                </value>
+                <value>
+                    <fullName>Requested Participant</fullName>
+                    <default>false</default>
+                    <label>Requested Participant</label>
+                </value>
+                <value>
+                    <fullName>Declined Participant</fullName>
+                    <default>false</default>
+                    <label>Declined Participant</label>
+                </value>
+                <value>
+                    <fullName>Medical Professional</fullName>
+                    <default>false</default>
+                    <label>Medical Professional</label>
+                </value>
+                <value>
+                    <fullName>Guardian of Minor Participant</fullName>
+                    <default>false</default>
+                    <label>Guardian of Minor Participant</label>
+                </value>
+                <value>
+                    <fullName>Wish Child</fullName>
+                    <default>false</default>
+                    <label>Wish Child</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Wish__c</fullName>
+        <description>The Wish Affiliation&apos;s related Wish.</description>
+        <externalId>false</externalId>
+        <label>Wish</label>
+        <lookupFilter>
+            <active>true</active>
+            <errorMessage>The Wish (case) record type must be of the type &apos;Wish&apos;.</errorMessage>
+            <filterItems>
+                <field>Case.RecordType.Name</field>
+                <operation>equals</operation>
+                <value>Wish</value>
+            </filterItems>
+            <infoMessage>The Wish (Case) record type must be of the type &apos;Wish&apos;.</infoMessage>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Case</referenceTo>
+        <relationshipLabel>Wish Affiliations</relationshipLabel>
+        <relationshipName>Wish_Affiliations</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Work_Email__c</fullName>
+        <description>Displays the related contact&apos;s work email address</description>
+        <externalId>false</externalId>
+        <formula>Contact__r.npe01__WorkEmail__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Work Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Work_Phone__c</fullName>
+        <description>Displays the related contact&apos;s work phone number</description>
+        <externalId>false</externalId>
+        <formula>Contact__r.npe01__WorkPhone__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Work Phone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Wish Affiliation</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Added_Through_Interview_Flow__c</columns>
+        <columns>Best_Medical_Contact__c</columns>
+        <columns>Contact__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>Created_Via_Lead_Convert__c</columns>
+        <columns>Full_Name__c</columns>
+        <columns>Details__c</columns>
+        <columns>Related_To__c</columns>
+        <columns>Relationship__c</columns>
+        <columns>Relationship_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Removed_Participants_My_Wishes</fullName>
+        <columns>Wish__c</columns>
+        <columns>Contact__c</columns>
+        <columns>Relationship_Type__c</columns>
+        <columns>Related_To__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Wish_Affiliation_Type__c</field>
+            <operation>notEqual</operation>
+            <value>Approved Participant,Requested Participant,Medical Professional,Wish Child</value>
+        </filters>
+        <filters>
+            <field>My_Wish_Affiliation__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Date_Participant_Removed__c</field>
+            <operation>equals</operation>
+            <value>LAST_N_DAYS:7</value>
+        </filters>
+        <label>Recent Removed Participants (My Wishes)</label>
+    </listViews>
+    <listViews>
+        <fullName>Request_Participants_My_Wishes</fullName>
+        <columns>Wish__c</columns>
+        <columns>Contact__c</columns>
+        <columns>Relationship_Type__c</columns>
+        <columns>Related_To__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Wish_Affiliation_Type__c</field>
+            <operation>equals</operation>
+            <value>Requested Participant</value>
+        </filters>
+        <filters>
+            <field>My_Wish_Affiliation__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>Requested Participants (My Wishes)</label>
+    </listViews>
+    <nameField>
+        <displayFormat>WA-{00000}</displayFormat>
+        <label>Wish Affiliation Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Wish Affiliations</pluralLabel>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Contact__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Wish__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Wish_Affiliation_Type__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Parent_Legal_Guardian__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Related_To__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Relationship_Type__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Health_Treatment_Facility__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Med_Profs_must_be_linked_to_a_HTF_Acc</fullName>
+        <active>true</active>
+        <description>All Medical Professionals must be linked to a HTF Account before you can save the record.</description>
+        <errorConditionFormula>Relationship_Type__c = &quot;Medical Professional&quot;
+&amp;&amp;
+ISBLANK(Health_Treatment_Facility__c)
+&amp;&amp;
+Created_Via_Lead_Convert__c = false</errorConditionFormula>
+        <errorDisplayField>Health_Treatment_Facility__c</errorDisplayField>
+        <errorMessage>All Medical Professionals must be linked to a Health Treatment Facility Account.  Please populate the HTF Account lookup field.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Non_Med_Profs_cant_have_a_HTF_Acc</fullName>
+        <active>true</active>
+        <description>Only Relationship Types of &apos;Medical Professional&apos; can be linked to a HTF Account</description>
+        <errorConditionFormula>Relationship_Type__c != &quot;Medical Professional&quot;
+&amp;&amp;
+ISBLANK(Health_Treatment_Facility__c )=FALSE</errorConditionFormula>
+        <errorMessage>Only Medical Professionals can be linked to a Health Treatment Facility Account.  Please keep the HTF Account lookup blank, or update the Relationship Type to &apos;Medical Professional&apos;.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Wish_Child_Cannot_Be_Hidden</fullName>
+        <active>true</active>
+        <description>The Wish Child&apos;s Wish Affiliation cannot be set to &quot;Hide from Restricted Users&quot; as much functionality is dependent on users being able to see the wish child and their data.</description>
+        <errorConditionFormula>ISPICKVAL( Wish_Affiliation_Type__c , &quot;Wish Child&quot;)
+&amp;&amp;
+Hide_from_Restricted_Users__c</errorConditionFormula>
+        <errorDisplayField>Hide_from_Restricted_Users__c</errorDisplayField>
+        <errorMessage>Hide From Restricted Users cannot be selected for the Wish Child.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

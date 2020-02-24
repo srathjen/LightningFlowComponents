@@ -61,7 +61,15 @@
         <field>Case.Wish_Clearance_Received_Date__c</field>
     </columns>
     <columns>
-        <field>Case.Budget_Approved_Date__c</field>
+        <field>Case.Budget_Approved_Date_from_Budget__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case.Actual_Cash_from_Budget__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case.Actual_In_Kind_from_Budget__c</field>
     </columns>
     <columns>
         <field>Case.Start_Date__c</field>
@@ -69,45 +77,46 @@
     <columns>
         <field>Case.Completed_Date__c</field>
     </columns>
-    <columns>
-        <field>Case.Actual_Cash__c</field>
-    </columns>
-    <columns>
-        <field>Case.Actual_Inkind__c</field>
-    </columns>
     <filter>
         <criteriaItems>
             <column>Case.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-WIsh Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>
         <criteriaItems>
             <column>STATUS</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Granted,Completed</value>
         </criteriaItems>
         <criteriaItems>
             <column>CONTACT.NAME</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Nemo Clownfish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Assist__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
@@ -125,6 +134,8 @@
     <reportType>CaseList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <sortColumn>STATUS</sortColumn>
     <sortOrder>Desc</sortOrder>
     <timeFrameFilter>

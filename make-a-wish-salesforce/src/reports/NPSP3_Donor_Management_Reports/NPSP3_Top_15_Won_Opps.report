@@ -39,6 +39,8 @@
     <rowLimit>15</rowLimit>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <sortColumn>AMOUNT</sortColumn>
     <sortOrder>Desc</sortOrder>
     <timeFrameFilter>

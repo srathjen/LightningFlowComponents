@@ -2,12 +2,48 @@
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
-        <value><!-- Partial Soft Credit --></value>
+        <value>Crédito blando parcial</value>
     </caseValues>
     <caseValues>
         <plural>true</plural>
-        <value><!-- Partial Soft Credit --></value>
+        <value>Créditos blandos parciales</value>
     </caseValues>
-    <gender><!-- Feminine --></gender>
-    <nameFieldLabel><!-- Partial Soft Credit Name --></nameFieldLabel>
+    <fields>
+        <help>El monto que será asignado como crédito blando.</help>
+        <label><!-- Amount --></label>
+        <name>npsp__Amount__c</name>
+    </fields>
+    <fields>
+        <help>Nombre completo del contacto</help>
+        <label><!-- Contact Name --></label>
+        <name>npsp__Contact_Name__c</name>
+    </fields>
+    <fields>
+        <help>La función del contacto en la oportunidad a la que este crédito blando aplica.</help>
+        <label><!-- Contact Role ID --></label>
+        <name>npsp__Contact_Role_ID__c</name>
+    </fields>
+    <fields>
+        <help>El contacto que recibirá crédito blando.</help>
+        <label><!-- Contact --></label>
+        <name>npsp__Contact__c</name>
+        <relationshipLabel><!-- Partial Soft Credits --></relationshipLabel>
+    </fields>
+    <fields>
+        <help>La oportunidad a la que este crédito blando aplica.</help>
+        <label><!-- Opportunity --></label>
+        <name>npsp__Opportunity__c</name>
+        <relationshipLabel><!-- Partial Soft Credits --></relationshipLabel>
+    </fields>
+    <fields>
+        <help>La función de este crédito blando.</help>
+        <label><!-- Role Name --></label>
+        <name>npsp__Role_Name__c</name>
+    </fields>
+    <gender>Masculine</gender>
+    <nameFieldLabel>Nombre de crédito blando parcial</nameFieldLabel>
+    <webLinks>
+        <label><!-- Manage_Soft_Credits --></label>
+        <name>npsp__Manage_Soft_Credits</name>
+    </webLinks>
 </CustomObjectTranslation>

@@ -26,6 +26,21 @@
                     <li><a href="/_ui/core/chatter/ui/ChatterPage">Chatter</a></li>
                 </ul>
             </div>
-        </nav>
-    </header>
+                    </nav>
+                    
+    
+    
+    			<!--Walkme Extension Script - PRODUCTION Snippet - START -->
+    
+                        <script type="text/javascript">
+                        (function() {var walkme = document.createElement('script');
+                                     walkme.type = 'text/javascript'; walkme.async = true;
+                                     walkme.src = 'https://cdn.walkme.com/users/12ce3d1ce46b47b1931d30135493da28/walkme_12ce3d1ce46b47b1931d30135493da28_https.js';
+                                     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(walkme, s);
+                                     window._walkmeConfig = {smartLoad:true}; })();
+                        </script>
+
+				<!--Walkme Extension Script - PRODUCTION Snippet - END -->
+    
+</header>
 </apex:page>

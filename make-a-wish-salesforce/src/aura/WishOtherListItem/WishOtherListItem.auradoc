@@ -1,0 +1,11 @@
+<!--
+ - Created by gmayer on 7/26/2019.
+ -->
+
+<aura:documentation>
+    <aura:description>Documentation for WishOtherListItem</aura:description>
+    <aura:example name="WishOtherListItem" ref="WishOtherListItem" label="WishOtherListItem">
+        Wish Other List Item is a custom component built to display each Wish Affiliation's 'other' record
+        detail.
+    </aura:example>
+</aura:documentation>

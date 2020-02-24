@@ -1,3 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata"/>
-
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Error Count --></label>
+        <name>cg__Error_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Error Message --></label>
+        <name>cg__Error_Message__c</name>
+    </fields>
+    <fields>
+        <label><!-- File Key --></label>
+        <name>cg__File_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- File Name --></label>
+        <name>cg__File_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- File Object Id --></label>
+        <name>cg__File_Object_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- File Object Type --></label>
+        <name>cg__File_Object_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- File Size --></label>
+        <name>cg__File_Size__c</name>
+    </fields>
+    <fields>
+        <label><!-- File Url --></label>
+        <name>cg__File_Url__c</name>
+    </fields>
+    <fields>
+        <label><!-- Preview Key --></label>
+        <name>cg__Preview_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Preview Name --></label>
+        <name>cg__Preview_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Preview State --></label>
+        <name>cg__Preview_State__c</name>
+    </fields>
+    <fields>
+        <label><!-- S3 Signature --></label>
+        <name>cg__S3_Signature__c</name>
+    </fields>
+    <fields>
+        <label><!-- Thumbnail Key --></label>
+        <name>cg__Thumbnail_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Thumbnail Name --></label>
+        <name>cg__Thumbnail_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Thumbnail State --></label>
+        <name>cg__Thumbnail_State__c</name>
+    </fields>
+    <webLinks>
+        <label><!-- Delete --></label>
+        <name>cg__Delete</name>
+    </webLinks>
+</CustomObjectTranslation>

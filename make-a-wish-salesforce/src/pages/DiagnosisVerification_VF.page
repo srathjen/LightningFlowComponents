@@ -3,6 +3,18 @@ Description : This page is used to collect medical condition about wish child fr
 
 Modification Log:
 1. 06/04/2018 - Vignesh SM - IME 133 - Line no. 652
+2. 12/07/2018 - Vignesh SM - IME 248
+3. 01/18/2019 - Abhinand   - SIW-29  commented Lines 250-255
+4. 06/27/2019 - Samer      - SIW-231 Added Referrer Name and Relationship to Child fields
+5. 07/01/2019 - Chris      - SIW-232 Added Read-only Treating Med Professional Name, Created new section for individual filling out the DV to complete personal information, and moved Hospital or Treatment Facility field.
+6. 06/28/2019 - Samer      - SIW-233 Verbiage changes.
+7. 07/19/2019 - Samer      - SIW-232 Make two changes to the HTF field:
+                             1. HTF data is pulled from the Treating Medical Professional rather than the recipient of the form.
+                             2. Make the HTF field not editable.
+8. 01/02/2020 - Manoj      - SIW-288 : Updated Question verbiage and help text on DV question.
+9. 01/09/2020 - Manoj      - SIW-287 : Added Question verbiage and modified help text for additional section on DV question.
+10.04/02/2020 - Manoj      - SIW-413 : Modified text as per the ticket.
+11.04/02/2020 - Manoj      - SIW-379 : Added 'I am not sure' and 'Medically fragile/medically complex' checkbox in DV form.
 *********************************************************************************************************************************** -->
 <apex:page controller="DiagnosisVerification_AC" applyBodyTag="false" sidebar="false" showHeader="false" docType="html-5.0" standardStylesheets="false" title="Make-A-Wish | Diagnosis Verification Form" cache="false">
     <script>
@@ -80,6 +92,7 @@ Modification Log:
         .icd > .diagnosis-link:before {visibility:hidden;}
         .icd:hover > .diagnosis-link {visibility:visible}
         }
+        .m-b-0{margin-bottom:0px;}
     </style>
     <body class="vcp">
         
@@ -149,10 +162,11 @@ Modification Log:
                                         <label class="col-md-3">Gender</label>
                                         <div class="col-md-4 text-muted">{!currLead.Gender__c}</div>
                                     </div>
+                                    <!-- Commenting the Age feild, SIW-87
                                     <div class="form-group row">
                                         <label class="col-md-3">Age</label>
                                         <div class="col-md-4 text-muted">{!currLead.Child_Age__c}</div>
-                                    </div>
+                                    </div>-->
                                     <div class="form-group row">
                                         <label class="col-md-3">DOB</label>
                                         <div class="col-md-4 text-muted">
@@ -162,9 +176,25 @@ Modification Log:
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-md-3">Parent Name</label>
+                                        <label class="col-md-3">Parent/Guardian Name</label> <!-- SIW-233 -->
                                         <div class="col-md-4 text-muted">{!currLead.Parent_First_Name__c} {!currLead.Parent_Last_Name__c}</div>
                                     </div>
+                                    
+                                    <!-- SIW-231 Start -->
+                                    <div class="form-group row">
+                                        <label class="col-md-3">Referrer Name</label>
+                                        <div class="col-md-4 text-muted">{!currLead.Referrer_FirstName__c} {!currLead.Referrer_Last_Name__c}</div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-3">Referrer Relationship</label>
+                                        <apex:outputPanel rendered="{!If(currLead.Relationship_to_child__c != 'Other', true, false)}">
+                                             <div class="col-md-4 text-muted">{!currLead.Relationship_to_child__c}</div>
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!If(currLead.Relationship_to_child__c != 'Other', false, true)}">
+                                             <div class="col-md-4 text-muted">{!currLead.Other_Relationship_To_Child__c}</div>
+                                        </apex:outputPanel>
+                                    </div>
+                                    <!-- SIW-231 End -->
                                     
                                     <div class="form-group row">
                                         <label class="col-md-3">Diagnosis Given By Referrer</label>
@@ -189,18 +219,29 @@ Modification Log:
                                 <!-- provider -->
                                 <fieldset>
                                     <legend>Provider Information</legend>
-                                    
-                                    <input type="hidden" class="wish-Status" value="{!wishStatus}"/>
+                                    <!-- SIW-232 Start -->
+                                    <div class="form-group row">
+                                        <label class="col-md-3">Name</label> 
+                                        <div class="col-md-4 text-muted">{!currLead.Treating_Medical_Professional_First_Name__c} {!currLead.Treating_Medical_Professional_Last_Name__c}</div>
+                                    </div>
+                                   <input type="hidden" class="wish-Status" value="{!wishStatus}"/>
                                     <apex:outputPanel rendered="{!if(wishChildWrapperIns.medProfTypeHid == 'Treating Medical Professional', true, false)}">
-                                        <!--- Treating Med Prof Block Starts --->
+                                    <!-- Treating Med Prof Block Starts -->
                                         <div class="form-group row">
-                                            <div class="col-md-3"><label>Name</label></div>
+                                            <label class="col-md-3">Hospital or Treatment Facility</label>
+                                            <!-- SIW-232 <div class="col-md-6"> --> 
+                                            <!-- SIW-232 <apex:inputText value="{!wishChildWrapperIns.treatingHospital}" styleClass="form-control requiredField" maxlength="50" html-placeholder="Hospital/Facility Name"/> --> <!-- SIW-232 -->
+                                            <div class="col-md-6 text-muted">{!currLead.Hospital_Treatment_Facility_Treating__c}</div>
+                                        </div>
+                                        <legend>Your Information</legend>
+                                        <div class="form-group row">
+                                            <div class="col-md-3"><label>First Name</label></div>
                                             <div class="col-md-6">
                                                 <apex:inputText value="{!wishChildWrapperIns.treatingFName}" styleClass="form-control requiredField" html-placeholder="First Name" />
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="col-md-3"><label class="sr-only">Last Name</label></div>
+                                            <div class="col-md-3"><label>Last Name</label></div>
                                             <div class="col-md-6">
                                                 <apex:inputText value="{!wishChildWrapperIns.treatingLName}" styleClass="form-control requiredField" html-placeholder="Last Name"/>
                                             </div>
@@ -210,72 +251,85 @@ Modification Log:
                                             <div class="col-md-6">
                                                 <apex:inputText value="{!wishChildWrapperIns.treatingPhone}" id="pphone" styleClass="form-control phonemask requiredField" html-placeholder="(000) 000-0000"/>
                                             </div>
-                                        </div>
+                                        </div> <!-- SIW-232 -->
                                         <div class="form-group row">
                                             <div class="col-md-3"><label>Email</label></div>
                                             <div class="col-md-6">
                                                 <apex:inputText value="{!wishChildWrapperIns.treatingEmail}" id="pemail" styleClass="form-control requiredField" html-placeholder="your_email@domain.com"/>
                                             </div>
                                         </div>
-                                        <div class="form-group row seperator-top" style="padding-top:1rem">
+                                        <!-- div class="form-group row seperator-top" style="padding-top:1rem">
                                             <label class="col-md-12">Hospital or Treatment Facility</label>
                                             <div class="col-md-6">
                                                 <apex:inputText value="{!wishChildWrapperIns.treatingHospital}" styleClass="form-control requiredField" maxlength="50" html-placeholder="Hospital/Facility Name"/>
-                                                
                                             </div>
-                                        </div>
-                                        <!--- Treating Med Prof Block Ends --->
+                                        </div> --> <!-- SIW-233 -->
+                                        <!-- Treating Med Prof Block Ends -->
                                     </apex:outputPanel>
-                                    
-                                    
-                                    
-                                    
                                     <apex:outputPanel rendered="{!if(wishChildWrapperIns.medProfTypeHid == 'Best contact for Physician', true, false)}">
-                                        <!--- Best Phy Block Starts --->
+                                        <!-- Best Phy Block Starts -->
+                                        
                                         <div class="form-group row">
-                                            <div class="col-md-3"><label>Name</label></div>
+                                            <label class="col-md-3">Hospital or Treatment Facility</label>
+                                            <!-- SIW-232 <div class="col-md-6">
+                                                <apex:inputText value="{!wishChildWrapperIns.treatingHospital}" styleClass="form-control requiredField" maxlength="50" html-placeholder="Hospital/Facility Name"/>
+                                            </div> -->
+                                            <div class="col-md-6 text-muted">{!currLead.Hospital_Treatment_Facility_Treating__c}</div>
+                                        </div> 
+                                        <legend>Your Information</legend>
+                                        <div class="form-group row">
+                                            <div class="col-md-3"><label>First Name</label></div>
                                             <div class="col-md-6">
                                                 <apex:inputText value="{!wishChildWrapperIns.bestPhyFname}" styleClass="form-control requiredField" html-placeholder="First Name" />
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="col-md-3"><label class="sr-only">Last Name</label></div>
+                                            <div class="col-md-3"><label>Last Name</label></div>
                                             <div class="col-md-6">
                                                 <apex:inputText value="{!wishChildWrapperIns.bestPhyLname}" styleClass="form-control requiredField" html-placeholder="Last Name"/>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
+                                        <!-- div class="form-group row">
                                             <div class="col-md-3"><label>Phone</label></div>
                                             <div class="col-md-6">
                                                 <apex:inputText value="{!wishChildWrapperIns.treatingPhone}" id="phypphone" styleClass="form-control phonemask requiredField" html-placeholder="(000) 000-0000"/>
                                             </div>
-                                        </div>
+                                        </div -->
                                         <div class="form-group row">
                                             <div class="col-md-3"><label>Email</label></div>
                                             <div class="col-md-6">
                                                 <apex:inputText value="{!wishChildWrapperIns.bestPhyEmail}" id="phypemail" styleClass="form-control requiredField" html-placeholder="your_email@domain.com"/>
                                             </div>
                                         </div>
-                                        <div class="form-group row seperator-top" style="padding-top:1rem">
+                                        <!-- div class="form-group row seperator-top" style="padding-top:1rem">
                                             <label class="col-md-12">Hospital or Treatment Facility</label>
                                             <div class="col-md-6">
                                                 <apex:inputText value="{!wishChildWrapperIns.treatingHospital}" styleClass="form-control requiredField" maxlength="50" html-placeholder="Hospital/Facility Name"/>
                                             </div>
-                                        </div>
-                                        <!--- Best Phy Block Starts --->
+                                        </div>--> <!-- SIW-232 -->
+                                        <!-- Best Phy Block Starts -->
                                     </apex:outputPanel>
                                     
                                     
                                     <apex:outputPanel rendered="{!if(wishChildWrapperIns.medProfTypeHid == 'Alternate 1 Medical Professional', true, false)}">
-                                        <!--- Alt1 Med Block Starts --->
+                                        <!-- Alt1 Med Block Starts -->
                                         <div class="form-group row">
-                                            <div class="col-md-3"><label>Name</label></div>
+                                            <label class="col-md-3">Hospital or Treatment Facility</label>
+                                            <!-- SIW-232 <div class="col-md-6">
+                                                <apex:inputText value="{!wishChildWrapperIns.alt1MedHosp}" styleClass="form-control requiredField" maxlength="50" html-placeholder="Hospital/Facility Name"/>
+                                                <input type="hidden" class="wish-Status" value="{!wishStatus}"/>
+                                            </div> -->
+                                            <div class="col-md-6 text-muted">{!currLead.Hospital_Treatment_Facility_Treating__c}</div>
+                                        </div>
+                                        <legend>Your Information</legend>
+                                        <div class="form-group row">
+                                            <div class="col-md-3"><label>First Name</label></div>
                                             <div class="col-md-6">
                                                 <apex:inputText value="{!wishChildWrapperIns.alt1MedFname}" styleClass="form-control requiredField" html-placeholder="First Name" />
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="col-md-3"><label class="sr-only">Last Name</label></div>
+                                            <div class="col-md-3"><label>Last Name</label></div>
                                             <div class="col-md-6">
                                                 <apex:inputText value="{!wishChildWrapperIns.alt1MedLname}" styleClass="form-control requiredField" html-placeholder="Last Name"/>
                                             </div>
@@ -292,28 +346,34 @@ Modification Log:
                                                 <apex:inputText value="{!wishChildWrapperIns.alt1MedEmail}" id="alt1phypemail" styleClass="form-control requiredField" html-placeholder="your_email@domain.com"/>
                                             </div>
                                         </div>
-                                        <div class="form-group row seperator-top" style="padding-top:1rem">
+                                        <!--div class="form-group row seperator-top" style="padding-top:1rem">
                                             <label class="col-md-12">Hospital or Treatment Facility</label>
                                             <div class="col-md-6">
                                                 <apex:inputText value="{!wishChildWrapperIns.alt1MedHosp}" styleClass="form-control requiredField" maxlength="50" html-placeholder="Hospital/Facility Name"/>
                                                 <input type="hidden" class="wish-Status" value="{!wishStatus}"/>
                                             </div>
-                                        </div>
-                                        <!--- Alt Med1 Block Starts --->
+                                        </div> -->
+                                        <!-- Alt Med1 Block Starts -->
                                     </apex:outputPanel>
                                     
-                                    
-                                    
                                     <apex:outputPanel rendered="{!if(wishChildWrapperIns.medProfTypeHid == 'Alternate 2 Medical Professional', true, false)}">
-                                        <!--- Alt Med2 Block Starts --->
+                                        <!-- Alt Med2 Block Starts -->
                                         <div class="form-group row">
-                                            <div class="col-md-3"><label>Name</label></div>
+                                            <label class="col-md-3">Hospital or Treatment Facility</label>
+                                            <!-- SIW-232 <div class="col-md-6">
+                                                <apex:inputText value="{!wishChildWrapperIns.alt2MedHosp}" styleClass="form-control requiredField" maxlength="50" html-placeholder="Hospital/Facility Name"/>
+                                            </div> -->
+                                            <div class="col-md-6 text-muted">{!currLead.Hospital_Treatment_Facility_Treating__c}</div>
+                                        </div>
+                                        <legend>Your Information</legend>
+                                        <div class="form-group row">
+                                            <div class="col-md-3"><label>First Name</label></div>
                                             <div class="col-md-6">
                                                 <apex:inputText value="{!wishChildWrapperIns.alt2MedFname}" styleClass="form-control requiredField" html-placeholder="First Name" />
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="col-md-3"><label class="sr-only">Last Name</label></div>
+                                            <div class="col-md-3"><label>Last Name</label></div>
                                             <div class="col-md-6">
                                                 <apex:inputText value="{!wishChildWrapperIns.alt2MedLname}" styleClass="form-control requiredField" html-placeholder="Last Name"/>
                                             </div>
@@ -330,19 +390,14 @@ Modification Log:
                                                 <apex:inputText value="{!wishChildWrapperIns.alt2MedEmail}" id="alt2phypemail" styleClass="form-control requiredField" html-placeholder="your_email@domain.com"/>
                                             </div>
                                         </div>
-                                        <div class="form-group row seperator-top" style="padding-top:1rem">
+                                        <!-- div class="form-group row seperator-top" style="padding-top:1rem">
                                             <label class="col-md-12">Hospital or Treatment Facility</label>
                                             <div class="col-md-6">
                                                 <apex:inputText value="{!wishChildWrapperIns.alt2MedHosp}" styleClass="form-control requiredField" maxlength="50" html-placeholder="Hospital/Facility Name"/>
                                             </div>
-                                        </div>
-                                        <!--- Alt Med2 Block Starts --->
+                                        </div> -->
+                                        <!-- Alt Med2 Block Starts -->
                                     </apex:outputPanel>
-                                    
-                                    
-                                    
-                                    
-                                    
                                     
                                     <div class="form-group row">
                                         <label class="col-md-12">I am recognized by my state to practice as a</label>
@@ -361,22 +416,38 @@ Modification Log:
                                             </apex:selectList>
                                         </div>
                                     </div>
-                                    
-                                </fieldset>
+                                   
+                                   <!-- SIW-232 End -->
+                                
+                                </fieldset>                                                                                             
                                 <!-- about -->
                                 <fieldset>
-                                    <legend>About {!currLead.FirstName} {!currLead.LastName}</legend>
+                                    <legend class="m-b-0">About {!currLead.FirstName} {!currLead.LastName}</legend>
+                                    <!-- Comatose state IME 248-->
+                                    <div class="form-group row">
+                                        <div class="col-md-12"><label>Is {!currLead.FirstName} {!currLead.LastName} in a comatose or vegetative state?</label></div>
+                                        <div class="col-md-6 vegitative">
+                                            <!--<apex:selectList value="{!wishChildWrapperIns.vegetativeState}" multiselect="false" size="1" styleClass="comatose form-control c-select VegetativePick requiredField" >-->
+                                            <apex:selectList value="{!wishChildWrapperIns.vegetativeState}" multiselect="false" size="1" styleClass="form-control c-select requiredField" >
+                                                <apex:selectOption itemlabel="Please Select" itemvalue=""/>
+                                                <apex:selectOption itemlabel="Yes" itemvalue="Yes" />
+                                                <apex:selectOption itemLabel="No" itemValue="No"/>
+                                            </apex:selectList>
+                                        </div>
+                                    </div>
+                                    <!-- Comatose state IME 248-->
                                     <apex:outputPanel id="radioButtonBlock">
                                         <div class="form-group row">
                                             <div class="col-md-12"><label>Please choose the one statement that best describes your patient:</label></div>
                                             <div class="col-md-12 statement-desc-patient">
                                                 <apex:selectRadio value="{!wishChildWrapperIns.describePatient}" layout="pageDirection" id="describePatient" label="Please describe about patient" onchange="doMore(this.value);" styleClass="StatementPat requiredField">
-                                                    <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} responds to standard treatment which approximates normal health (e.g., diabetes, asthma, uncomplicated epilepsy)" itemValue="7"/>
-                                                    <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has a non-progressive condition that may have a risk of complications and/or risk of a shortened life expectancy (e.g., cerebral palsy, quadriplegia, hemophilia)" itemValue="6"/>
+                                                    <!--Commented first 2 statements as per SIW-376 -->
+                                                    <!--apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} responds to standard treatment which approximates normal health (e.g., diabetes, asthma, uncomplicated epilepsy)" itemValue="7"/>
+                                                    <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has a non-progressive condition that may have a risk of complications and/or risk of a shortened life expectancy (e.g., cerebral palsy, quadriplegia, hemophilia)" itemValue="6"/-->
                                                     <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition for which curative treatment may be feasible but can fail; non-adherence is not included as a treatment failure. (e.g., cancer, irreversible organ failure)" itemValue="2"/>
-                                                    <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition where a significantly shortened life expectancy is probable, but frequent and/or long periods of intensive treatment may prolong and allow participation in normal activities (e.g., cystic fibrosis, solid organ transplant)" itemValue="3"/>
-                                                    <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition without curative treatment options in which debilitation may extend over many years (e.g., severe treatment resistant epilepsy, metabolic disease)" itemValue="4"/>
-                                                    <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has an irreversible but non-progressive condition with severe disability and is experiencing multiple health complications that increase the probability of a significantly shortened life expectancy (e.g., anoxic brain injury, severe cerebral palsy)" itemValue="5"/>
+                                                    <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition with a known history of a significantly shortened life expectancy, but frequent and/or long periods of intensive treatment may prolong life and allow participation in normal activities (e.g., cystic fibrosis, solid organ transplant)" itemValue="3"/>
+                                                    <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition without curative treatment options in which debilitation may extend over many years (e.g., severe treatment-resistant epilepsy, some metabolic diseases)" itemValue="4"/>
+                                                    <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has an irreversible but non-progressive condition with life-threatening comorbidities and a known history of a significantly shortened life expectancy (e.g. anoxic brain injury, severe cerebral palsy)" itemValue="5"/>
                                                     <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition for which there is no reasonable hope of cure and from which children or young people will experience a significantly shortened life expectancy (e.g., Duchenne muscular dystrophy or neurodegenerative disease)" itemValue="1"/>
                                                     <apex:selectOption itemLabel="None of these statements describe {!currLead.FirstName} {!currLead.LastName}" itemValue="8"/>
                                                     <apex:actionFunction name="start" action="{!changePatientValue}" reRender="none">
@@ -558,24 +629,57 @@ Modification Log:
                                         
                                         <div class="seperator-top" style="padding-top:1rem">
                                             
+                                            <!--SIW-287 Start : Added new questions-->
+                                            <div class="form-group row">
+                                                <div class="col-md-12"><label>Has {!currLead.FirstName} {!currLead.LastName} had any unplanned hospital admissions in the past 12 months?</label></div>
+                                                <div class="col-md-6">
+                                                    <apex:selectList value="{!wishChildWrapperIns.unplannedHospitalAdmission}" multiselect="false" size="1" styleClass="form-control c-select exped-Process" id="unplannedHospital">
+                                                        <apex:selectOption itemlabel="Please Select" itemvalue="" html-selected="selected"/>
+                                                        <apex:selectOption itemlabel="Yes" itemvalue="Yes" />
+                                                        <apex:selectOption itemLabel="No" itemValue="No"/>                                                        
+                                                    </apex:selectList>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row unplanned-admission fadein-alert">
+                                                <div class="col-md-12"><label>How many times has the child been admitted?</label></div>
+                                                <div class="col-md-6" id="admBox"><apex:inputText styleClass="form-control requiredField" maxlength="3"  value="{!wishChildWrapperIns.numberOfHospitalAdmission}" onkeyup="decimalOnly(this);"/>
+                                                <div id="admError" style="display:none;">
+                                                    <label style="color:red">Please enter no more than three digits.</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12"><label>What was the admitting diagnosis?</label></div>
+                                                <div class="col-md-6"><apex:inputTextarea styleClass="form-control unplanned-text requiredField" html-maxlength="10000" value="{!wishChildWrapperIns.admittingDiagnosis}" /></div>
+                                                <div class="col-md-12"><label>Did any of the hospitalizations include admission into the ICU?</label></div>
+                                                <div class="col-md-6">
+                                                    <apex:selectList value="{!wishChildWrapperIns.ifICUAdmission}" multiselect="false" size="1" styleClass="form-control c-select exped-Process requiredField" id="ICUAdmission">
+                                                        <apex:selectOption itemlabel="Please Select" itemvalue="" html-selected="selected"/>
+                                                        <apex:selectOption itemlabel="Yes" itemvalue="Yes" />
+                                                        <apex:selectOption itemLabel="No" itemValue="No"/>                                                        
+                                                    </apex:selectList>
+                                                </div>
+                                            </div>                                          
+                                            <!--SIW-287 End-->
+                                            
                                             <apex:outputPanel id="notEligibleWishDesc">
                                                 <apex:outputPanel rendered="{!wishStatus != 'Qualified'}">
                                                     <div class="form-group row">
-                                                        <div class="col-md-12"><label>Why do you feel {!currLead.FirstName} {!currLead.LastName} would be eligible for a wish?</label></div>
+                                                        <!--div class="col-md-12"><label>Why do you feel {!currLead.FirstName} {!currLead.LastName} would be eligible for a wish?</label></div-->
+                                                        <div class="col-md-12"><label>Please provide additional clinical details outlining how {!currLead.FirstName} {!currLead.LastName} may meet Make-A-Wish medical eligibility criteria (a condition currently placing the child's life in jeopardy).</label></div><!--SIW-288 : Updated Question Verbiage as per 288-->
                                                         <div class="col-md-6">
                                                             <apex:inputTextarea value="{!wishChildWrapperIns.stillEligibile}" id="description" styleClass="form-control requiredField"/>
                                                         </div>
                                                         <div class="col-md-12">
-                                                            <span class="text-muted">(e.g., complications, acuity, multiple hospitalizations in the past 12 months, contributing health conditions, treatment, treatment failures, dependence on medical equipment. You also have the option to add notes and/or attach a medical summary below) </span>
+                                                            <!--span class="text-muted">(e.g., complications, acuity, multiple hospitalizations in the past 12 months, contributing health conditions, treatment, treatment failures, dependence on medical equipment. You also have the option to add notes and/or attach a medical summary below.) </span--> <!-- SIW-233 -->
+                                                            <span class="text-muted">(e.g., current complications placing life in jeopardy, acuity, contributing health conditions, treatment, treatment failures, dependence on medical equipment or specialists involved in care. You also have the option to add notes and/or attach a medical summary below.) </span> <!-- SIW-288 : Updated help text as per 288 -->
                                                         </div>
                                                     </div>
                                                 </apex:outputPanel>
                                             </apex:outputPanel>
-                                            
+                                            <!-- IME 248
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Is {!currLead.FirstName} {!currLead.LastName} in a comatose or vegetative state?</label></div>
                                                 <div class="col-md-6 vegitative">
-                                                    <!--<apex:selectList value="{!wishChildWrapperIns.vegetativeState}" multiselect="false" size="1" styleClass="comatose form-control c-select VegetativePick requiredField" >-->
+                                                    <!--<apex:selectList value="{!wishChildWrapperIns.vegetativeState}" multiselect="false" size="1" styleClass="comatose form-control c-select VegetativePick requiredField" >
                                                     <apex:selectList value="{!wishChildWrapperIns.vegetativeState}" multiselect="false" size="1" styleClass="form-control c-select requiredField" >
                                                         <apex:selectOption itemlabel="Please Select" itemvalue=""/>
                                                         <apex:selectOption itemlabel="Yes" itemvalue="Yes" />
@@ -583,7 +687,7 @@ Modification Log:
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-                                            
+                                            -->
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Is there a medical reason we would need to expedite the process?</label></div>
                                                 <div class="col-md-6">
@@ -634,7 +738,8 @@ Modification Log:
                                             <!-- <apex:outputPanel rendered="{!wishStatus != 'Qualified'}">-->
                                             
                                             <div class="form-group row">
-                                                <div class="col-md-12"><label>Medical Summary</label></div>
+                                                <!--div class="col-md-12"><label>Medical Summary</label></div--><!--Commented as part of SIW-413-->
+                                                <div class="col-md-12"><label>Medical Summary (Recent Echo/MRI Reports may also be helpful, depending on diagnosis)</label></div><!--Modified Text as part of SIW-413-->
                                                 <apex:outputPanel id="attachmentSection">
                                                     <div class="col-xs-12">
                                                         <div class="upload-loader"></div>
@@ -652,6 +757,12 @@ Modification Log:
                                                 <!-- Modified as per IME 133 -->
                                                 <apex:inputTextarea value="{!wishChildWrapperIns.additionalInfo}" styleClass="form-control" id="additonalinfo" html-placeholder="Please enter additional information here" />
                                             </div>
+                                            <!-- SIW-233 Start -->
+                                            <div class="col-md-12">
+                                                <!--span class="text-muted">(e.g., current complications placing life in jeopardy; unplanned hospitalizations in the past 12 months, including reasons for hospitalization, and number that included admission to the ICU; other specialists involved in the child’s care) </span--> 
+                                                <span class="text-muted">(e.g., additional information that will help us make an eligibility determination for conditions that require review on a case-by-case basis)</span><!--SIW-287 : Updated text--> 
+                                            </div>
+                                            <!-- SIW-233 End -->
                                         </div>
                                         
                                         <!--<div class="form-group row">
@@ -928,13 +1039,7 @@ Modification Log:
                                             <div class="travel-wrap">
                                                 <div class="form-group row">
                                                     <div class="col-md-12"><label>Does {!currLead.FirstName} {!currLead.LastName} have any of the following conditions?</label> <span class="text-muted">(Please select all that apply)</span></div>
-                                                </div>
-                                                <div class="form-group row checkContainer">
-                                                    <div class="col-md-12"><label class="form-check-label inline-block">
-                                                        <apex:inputCheckbox value="{!travelAlgorithmWrapperIns.iamNotSure}" styleClass="check_checkbox"/>I am not sure</label>
-                                                    </div>
-                                                </div>
-                                                
+                                                </div>                                
                                                 
                                                 <div class="form-group row seperator-top">
                                                     <label>Respiratory System</label>
@@ -1183,6 +1288,17 @@ Modification Log:
                                                         <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.surgeryinTwoMonths}" styleClass="check_checkbox"/>Surgery in the past 2 months</label>
                                                     </div>
                                                 </div>
+                                                <!--Added 'I am not sure' and 'Medically fragile/medically complex' checkbox here as part of SIW-379 -->
+                                                 <div class="form-group row checkContainer">
+                                                    <div class="col-md-12">
+                                                        <label class="form-check-label"><apex:inputCheckbox value="{!travelAlgorithmWrapperIns.travelRestriction}" styleClass="check_checkbox"/>Medically fragile/medically complex</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row checkContainer">
+                                                    <div class="col-md-12">
+                                                        <label class="form-check-label"><apex:inputCheckbox value="{!travelAlgorithmWrapperIns.iamNotSure}" styleClass="check_checkbox"/>I am not sure</label>
+                                                    </div>
+                                                </div>
                                                 
                                                 <div class="form-group row checkContainer seperator-top">
                                                     <div class="col-md-12" style="padding:0"><label class="form-check-label inline-block">
@@ -1200,10 +1316,13 @@ Modification Log:
                                     <!-------------------------- Button block Starts ---------------------------->
                                     
                                     <fieldset class="footer row">
+                                        <!-- SIW-198 Added Instructional text to end of form  START -->
+                                        <div class="col-md-12"><label style="font-size:14px;line-height:1.5;display:inherit;color:#4C4C4C;padding-bottom:20px;">To sign and submit this Diagnosis Verification form, please click SAVE &amp; NEXT, which will take you to the DocuSign form for signature.</label></div>
+                                         <!-- SIW-198 Added Instructional text to end of form  END -->
                                         <div class="col-md-12">
                                             <!--<apex:commandButton value="Save" style="border-right:1px solid #fff" styleClass="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md saveMedicalInfoBtn" action="{!SaveMedicalInformation}" rerender="diagonsisLoop,findAndReplace,notEligible" onClick="checkfunction();" onComplete="ShowSuccessMsg();"/>-->
                                             <input type="button" style="border-right:1px solid #fff" class="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md saveMedicalInfoBtn" value="Save" onClick="checkfunction();"/>
-                                            <input type="button" class="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md SS-btn" value="Submit & Sign"/>
+                                            <input type="button" class="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md SS-btn" value="Save & Next"/>
                                         </div>
                                     </fieldset>
                                     <script>
@@ -1259,6 +1378,18 @@ Modification Log:
                                         }
                                         
                                     }
+                                    //SIW-287 Start : Created method to restrict number field to accept only numbers
+                                    function decimalOnly(e){
+                                        e.value = e.value.replace(/[^0-9\.]/g,'');
+                                        if(e.value.split('.').length>2) e.value = e.value.replace(/\.+$/,"");
+                                        if(e.value.length > 3){
+                                            document.getElementById('admError').style.display = 'block';                                            
+                                        }
+                                        else{
+                                            document.getElementById('admError').style.display = 'none'; 
+                                        }
+                                    };
+                                    //SIW-287 End
                                     </script>
                                     
                                 </div>
@@ -1410,6 +1541,29 @@ Modification Log:
                                                 $(".plz-Exp").addClass("requiredField");
                                             }
                                         }
+                                        //SIW-287 Start : Added CSS to hide and display questions on DV form
+                                        // hide unplanned hospital admission textbox onload
+                                        $('.unplanned-admission').prop('hidden', true);
+                                        // show/hide unplanned hospital admission textbox
+                                        $('[id$=unplannedHospital]').on('change', function() {
+                                            if(this.value == 'Yes') {
+                                                $('.unplanned-admission').prop('hidden', false);
+                                                $(".unplanned-text").addClass("requiredField");
+                                            } else if(this.value == 'No') {
+                                                $('.unplanned-text').val("");
+                                                $(".unplanned-text").removeClass("requiredField");
+                                                $('.unplanned-admission').prop('hidden', true);
+                                                
+                                            }
+                                        });
+                                        //display unplanned hospital admission if there is a value in expediteprocess on page load
+                                        if ($('[id$=unplannedHospital]').val() != null){
+                                            if ($('[id$=unplannedHospital]').val().indexOf('Yes') != -1){
+                                                $('.unplanned-admission').prop('hidden', false);
+                                                $(".unplanned-text").addClass("requiredField");
+                                            }
+                                        }
+                                        //SIW-287 End
                                         // hide condition deteriorate explain textbox onload
                                         $('.condition-deteriorate-explain').prop('hidden', true);
                                         // show/hide condition deteriorate textbox
@@ -1552,9 +1706,27 @@ Modification Log:
         $(document).delegate('.SS-btn','click',function(){
             var isError_Free = true;
             var myElem = document.getElementById('dvupload');
-            $('.requiredField').each(function() {
-                $(this).css('border','');
-                if($(this).val() == '' && $(this).is(":visible")){
+            $('.requiredField').each(function() {                
+                var b =document.getElementById('admBox').getElementsByTagName('input');                          
+                $(this).css('border','');              
+                if(b[0].value.length > 3){
+                    isError_Free = false;
+                    document.getElementById('admError').style.display = 'block';
+                    document.getElementById('admBox').getElementsByTagName('input')[0].style.border = '#FF0000 1px solid';
+                    if($(this).val() == '' && $(this).is(":visible")){
+                     $(this).css({ "border": '#FF0000 1px solid'});
+                        }
+                    swal({
+                        title: '',
+                        text: 'Please fill required fields',
+                        type: "error",
+                        confirmButtonColor: '#0057B8',
+                        timer: 3000
+                    })
+                    
+                }
+               else if($(this).val() == '' && $(this).is(":visible")){
+                    isError_Free = false;                    
                     $(this).css({ "border": '#FF0000 1px solid'});
                     swal({
                         title: '',
@@ -1563,9 +1735,10 @@ Modification Log:
                         confirmButtonColor: '#0057B8',
                         timer: 3000
                     })
-                    isError_Free = false;
+                    
                 }
             });
+            //287            
             $('.multiCom').each(function() {
                 if($(this).hasClass('requiredField')){
                     swal({
@@ -1754,7 +1927,7 @@ Modification Log:
         }
         
         
-        //Used to redirect to docusign page after saving the form when "Submit & Sign" button clicked
+        //Used to redirect to docusign page after saving the form when "Save & Next" button clicked
         function docusignPageRedirect() {
             docusign();
         }
@@ -1765,7 +1938,7 @@ Modification Log:
         
         //Used to display success message when the form is successfully saved
         function ShowSuccessMsg() {
-            $('body').append('<div class="notification"><div><h6>Your form has been successfully saved. </br></br>Please note: Click \'Submit & Sign\' to complete Diagnosis Verification.</h6></div></div>').fadeIn();
+            $('body').append('<div class="notification"><div><h6>Your form has been successfully saved. </br></br>Please note: Click \'Save & Next\' to complete Diagnosis Verification.</h6></div></div>').fadeIn();
             $('.notification').delay(4000).fadeOut();
             delay(function() {
                 $('.notification').remove();

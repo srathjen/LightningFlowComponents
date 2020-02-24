@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <help><!-- This field is deprecated. --></help>
+        <label><!-- ID --></label>
+        <name>VisualAntidote__ClientID__c</name>
+    </fields>
+    <fields>
+        <help><!-- This field is deprecated. --></help>
+        <label><!-- Secret --></label>
+        <name>VisualAntidote__ClientSecret__c</name>
+    </fields>
+    <fields>
+        <help><!-- For formstack use only. --></help>
+        <label><!-- Environment --></label>
+        <name>VisualAntidote__Environment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Formstack Site Url --></label>
+        <name>VisualAntidote__FastFormsSiteUrl__c</name>
+    </fields>
+</CustomObjectTranslation>

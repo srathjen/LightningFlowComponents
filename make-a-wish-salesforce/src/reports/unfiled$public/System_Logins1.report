@@ -48,6 +48,7 @@
     <filter>
         <criteriaItems>
             <column>Contact.Region_Chapter__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
@@ -69,6 +70,8 @@
     </params>
     <reportType>User</reportType>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>LAST_LOGIN</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

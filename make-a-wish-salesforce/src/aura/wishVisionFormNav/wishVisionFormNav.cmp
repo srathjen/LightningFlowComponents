@@ -1,0 +1,100 @@
+<!-- @author Shannon Paderes, @date 6/13/2019 -->
+<!-- @description Navigation screen Component for Wish Design Form Master Flow -->
+
+<aura:component implements="lightning:availableForFlowScreens,force:hasRecordId" access="global">
+    <!-- Get the wish vision screen select script text and wish child name from the flow -->
+    <aura:attribute name="scriptText" type="String" required="true"/>
+    <aura:attribute name="wishChildFirstName" type="String"/>
+    <aura:attribute name="wishChildLastName" type="String"/>
+    <aura:attribute name="wishChildFullName" type="String"/>
+    <!-- Get wish favorites completed variable from the flow to determine if the form is complete -->
+    <aura:attribute name="wishFavComplete" type="Boolean"/>
+    <aura:attribute name="DetailsCompleted" type="Boolean"/>
+    <!-- Get wish granter names variable from the flow -->
+    <aura:attribute name="wishGranter1" type="String"/>
+    <aura:attribute name="wishGranter2" type="String"/>
+    <!-- Get wish interview dates the flow -->
+    <aura:attribute name="interviewDate1" type="date"/>
+    <aura:attribute name="interviewDate2" type="date"/>
+    <!-- Pass the value of the selected form button back to the flow -->
+    <aura:attribute name="formValue" type="String"/>
+    <!--buttonicon stateful-->
+    <aura:attribute name="buttonstate" type="Boolean" default="false"/>
+
+    <div class="flowContainer">
+        <p class="slds-form-element__label legend slds-p-bottom_small">
+            <span>{!$Label.c.Wish_Form_Welcome_Message}</span></p>
+        <legend class="slds-form-element__label legend slds-p-bottom_x-small">
+            {!format($Label.c.Wish_Form_dates,v.wishChildFullName)}
+        </legend>
+        <div class="slds-grid slds-gutters slds-wrap">
+            <div class=" slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_3-of-12 slds-p-bottom_small">
+                <span>
+                    <lightning:input type="date" label="{!$Label.c.Wish_Form_Interview_Date}" aura:id="input"
+                                     class="slds-form-element__control slds-form-element slds-input--small"
+                                     value="{!v.interviewDate1}" required="true"
+                                     messageWhenValueMissing="This field is required."/>
+                </span>
+            </div>
+            <div class=" slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_3-of-12 slds-p-bottom_small">
+                <span>
+                    <lightning:input type="date" label="{!$Label.c.Wish_Form_Additional_Interview_Date}"
+                                     UId="date-input-2"
+                                     class="slds-form-element__control slds-form-element slds-input--small"
+                                     value="{!v.interviewDate2}"/>
+                </span>
+            </div>
+        </div>
+        <legend class="slds-form-element__label legend slds-p-bottom_x-small">{!$Label.c.Wish_Form_Names}</legend>
+        <div class="slds-grid slds-gutters slds-wrap">
+            <div class=" slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_3-of-12 slds-p-right_large slds-p-bottom_small">
+                <span>
+                    <lightning:input type="text" aura:id="input" label="{!$Label.c.Wish_Form_Interviewer_1}"
+                                     placeholder="Wish Granter Name" value="{!v.wishGranter1}" required="true"
+                                     class="slds-form-element__control slds-form-element slds-input--small"
+                                     messageWhenValueMissing="This field is required."/>
+                </span>
+            </div>
+            <div class=" slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_3-of-12 slds-p-right_large slds-p-bottom_small">
+                <span>
+                    <lightning:input type="text" aura:id="input" label="{!$Label.c.Wish_Form_Interviewer_2}"
+                                     placeholder="Wish Granter Name" value="{!v.wishGranter2}"
+                                     class="slds-form-element__control slds-form-element slds-input--small"/>
+                </span>
+            </div>
+        </div>
+        <legend class="slds-form-element__label legend slds-p-bottom_small slds-p-top_small">
+            <ui:outputRichText class="script" value="{!v.scriptText}"/>
+        </legend>
+        <div class="slds-grid slds-gutters slds-wrap">
+            <ul class="slds-button-group-row slds-m-left_small">
+                <li class="slds-button-group-item slds-p-bottom_small">
+                    <aura:if isTrue="{!v.wishFavComplete}">
+                        <lightning:button label="{!$Label.c.Wish_Form_Vision}" aura:id="wishVisionUpdate"
+                                          variant="neutral"
+                                          iconName="utility:check" iconPosition="left" onclick="{!c.handleChange}"
+                                          class="btn"/>
+                        <aura:set attribute="else">
+                            <lightning:button label="{!$Label.c.Wish_Form_Vision}" class="btn slds-button_stretch btn"
+                                              aura:id="wishVision"
+                                              variant="brand" onclick="{!c.handleChange}"/>
+                        </aura:set>
+                    </aura:if>
+                </li>
+                <li class="slds-button-group-item slds-p-bottom_small">
+                    <aura:if isTrue="{!v.DetailsCompleted}">
+                        <lightning:button label="{!$Label.c.Wish_Form_Detail}" aura:id="WishDetailsUpdate"
+                                          variant="neutral"
+                                          iconName="utility:check" iconPosition="left" onclick="{!c.handleChange}"
+                                          class="btn slds-button_stretch btn"/>
+                        <aura:set attribute="else">
+                            <lightning:button label="{!$Label.c.Wish_Form_Detail}" class="btn slds-button_stretch btn"
+                                              aura:id="WishDetails"
+                                              variant="brand" onclick="{!c.handleChange}"/>
+                        </aura:set>
+                    </aura:if>
+                </li>
+            </ul>
+        </div>
+    </div>
+</aura:component>

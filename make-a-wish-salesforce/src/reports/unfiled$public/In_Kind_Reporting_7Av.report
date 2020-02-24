@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>Case.Total_FE_Posted_In_Kind__c:SUM / Case.Total_FE_Posted_Costs__c:SUM</calculatedFormula>
+        <datatype>percent</datatype>
+        <description>Percentage of the total value of the wish that is in-kind.</description>
+        <developerName>FORMULA1</developerName>
+        <isActive>true</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>In Kind Per Total</masterLabel>
+        <scale>2</scale>
+    </aggregates>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case.Total_FE_Posted_In_Kind__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case.Total_FE_Posted_Costs__c</field>
+    </columns>
+    <description>In-kind value per total value for a wish</description>
+    <filter>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.Wish</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Total_FE_Posted_Costs__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>greaterThan</operator>
+            <value>0</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>CASE_NUMBER</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>In Kind Reporting</name>
+    <params>
+        <name>units</name>
+        <value>h</value>
+    </params>
+    <params>
+        <name>co</name>
+        <value>0</value>
+    </params>
+    <reportType>CaseList</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATEONLY</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

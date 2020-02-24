@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
-    <active>true</active>
+    <active>false</active>
     <allowRecall>true</allowRecall>
     <allowedSubmitters>
         <type>owner</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>Arizona_Chapter</submitter>
+        <type>role</type>
     </allowedSubmitters>
     <approvalPageFields>
         <field>CaseNumber</field>

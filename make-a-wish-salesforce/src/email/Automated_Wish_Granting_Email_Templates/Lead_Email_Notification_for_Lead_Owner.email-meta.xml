@@ -5,6 +5,7 @@
     <encodingKey>ISO-8859-1</encodingKey>
     <name>Lead: Email Notification for Lead Owner</name>
     <style>none</style>
-    <subject>Chapter has been changed.</subject>
+    <subject>Lead Update - {!Lead.Name}&apos;s chapter has been changed.</subject>
     <type>text</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

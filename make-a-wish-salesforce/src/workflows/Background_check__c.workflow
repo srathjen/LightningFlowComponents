@@ -399,19 +399,6 @@
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
             <actions>
-                <name>Bc_Expiring_Before_30_Days_Email_Alert</name>
-                <type>Alert</type>
-            </actions>
-            <actions>
-                <name>BC_ET_Background_Check_Expiring_30_Days</name>
-                <type>Task</type>
-            </actions>
-            <offsetFromField>Background_check__c.Date__c</offsetFromField>
-            <timeLength>-30</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-        <workflowTimeTriggers>
-            <actions>
                 <name>Bc_Expiring_Before_2_Days_Email_Alert</name>
                 <type>Alert</type>
             </actions>
@@ -467,10 +454,23 @@
             <timeLength>-23</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Bc_Expiring_Before_30_Days_Email_Alert</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>BC_ET_Background_Check_Expiring_30_Days</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Background_check__c.Date__c</offsetFromField>
+            <timeLength>-30</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
     </rules>
     <tasks>
         <fullName>BC_ET_Background_Check_Completed</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -482,7 +482,7 @@
     </tasks>
     <tasks>
         <fullName>BC_ET_Background_Check_Expired_7_Days</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -494,7 +494,7 @@
     </tasks>
     <tasks>
         <fullName>BC_ET_Background_Check_Expiring</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -505,7 +505,7 @@
     </tasks>
     <tasks>
         <fullName>BC_ET_Background_Check_Expiring_16_Days</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -517,7 +517,7 @@
     </tasks>
     <tasks>
         <fullName>BC_ET_Background_Check_Expiring_23_Days</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -529,7 +529,7 @@
     </tasks>
     <tasks>
         <fullName>BC_ET_Background_Check_Expiring_2_Days</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -541,7 +541,7 @@
     </tasks>
     <tasks>
         <fullName>BC_ET_Background_Check_Expiring_30_Days</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -553,7 +553,7 @@
     </tasks>
     <tasks>
         <fullName>BC_ET_Background_Check_Expiring_9_Days</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>

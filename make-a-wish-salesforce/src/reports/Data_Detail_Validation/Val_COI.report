@@ -16,6 +16,7 @@
     <filter>
         <criteriaItems>
             <column>Conflict_Of_Interest__c$Migrated_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
@@ -29,6 +30,8 @@
     <reportType>COI_Record_Type__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Conflict_Of_Interest__c$CreatedDate</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

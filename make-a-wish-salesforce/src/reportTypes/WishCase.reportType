@@ -28,27 +28,12 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Actual_Cash__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Actual_Departure_Date__c</field>
             <table>Case</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Actual_Inkind__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Actual_Return_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Actual_Total__c</field>
             <table>Case</table>
         </columns>
         <columns>
@@ -173,16 +158,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Budget_Cash__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Budget_Inkind__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Budget_Notes__c</field>
             <table>Case</table>
         </columns>
@@ -194,11 +169,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Budget_Submitted_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Budget_Total__c</field>
             <table>Case</table>
         </columns>
         <columns>
@@ -259,16 +229,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>CheckedInFamily__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Child_s_Medical_Summary_received_date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Child_s_Medical_Summary_sent__c</field>
             <table>Case</table>
         </columns>
         <columns>
@@ -344,246 +304,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Contact</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Anticipated_Start_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Assigned_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Budget_Approved_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Closed_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Completed_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Concept_Approval_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Diagnosis_Ver_Rec_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_End_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Hold_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Inactive_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Interview_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Qualified_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Ready_to_Assign_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Referral_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Start_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_1_Wish_Determined_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Anticipated_Start_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Assigned_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Budget_Approved_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Closed_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Completed_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Concept_Approval_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Diagnosis_Ver_Rec_Dat__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_End_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Hold_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Inactive_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Interview_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Qualified_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Ready_to_Assign_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Referral_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Start_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_2_Wish_Determined_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Anticipated_Start_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Assigned_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Budget_Approved_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Closed_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Completed_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Concept_Approval_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Diagnosis_Ver_Rec_Dat__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_End_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Hold_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Inactive_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Interview_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Qualified_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Ready_to_Assign_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Referral_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Start_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Copy_3_Wish_Determined_Date__c</field>
             <table>Case</table>
         </columns>
         <columns>
@@ -1003,11 +723,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Hidden_Publicity_Notes__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Hidden_Publicity_OK__c</field>
             <table>Case</table>
         </columns>
@@ -1259,6 +974,16 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Medical_Summary_Attachments__c</field>
+            <table>Case</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Medical_Summary_Received_Date_Formula__c</field>
+            <table>Case</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Medical_Summary_Sent_Date_Formula__c</field>
             <table>Case</table>
         </columns>
         <columns>
@@ -1713,7 +1438,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Survey_Sent__c</field>
+            <field>Impact_Survey_Status__c</field>
             <table>Case</table>
         </columns>
         <columns>
@@ -1853,12 +1578,12 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Wish_Clearance_Received_Date__c</field>
+            <field>Wish_Clearance_Received_Date_Formula__c</field>
             <table>Case</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Wish_Clearance_Sent_Date__c</field>
+            <field>Wish_Clearance_Sent_Date_Formula__c</field>
             <table>Case</table>
         </columns>
         <columns>

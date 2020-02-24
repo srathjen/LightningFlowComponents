@@ -2,7 +2,70 @@
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
-        <value><!-- Engagement Plan Template --></value>
+        <value>エンゲージメント計画テンプレート</value>
     </caseValues>
-    <nameFieldLabel><!-- Engagement Plan Template Name --></nameFieldLabel>
+    <fieldSets>
+        <label><!-- Manage EP Template FS --></label>
+        <name>npsp__ManageEPTemplateFS</name>
+    </fieldSets>
+    <fields>
+        <help>親 ToDo が実際にいつ完了したかに基づいて、子 ToDo の期日を再計算します。</help>
+        <label><!-- Automatically Update Child Task Due Date --></label>
+        <name>npsp__Automatically_Update_Child_Task_Due_Date__c</name>
+    </fields>
+    <fields>
+        <help>エンゲージメント計画 ToDo の [割り当て先] 項目が空白の場合、ToDo を誰に割り当てる必要がありますか?</help>
+        <label><!-- Default Assignee --></label>
+        <name>npsp__Default_Assignee__c</name>
+        <picklistValues>
+            <masterLabel>Owner of Object for Engagement Plan</masterLabel>
+            <translation>エンゲージメント計画のオブジェクトの所有者</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>User Creating Engagement Plan</masterLabel>
+            <translation>エンゲージメント計画を作成しているユーザ</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>npsp__Description__c</name>
+    </fields>
+    <fields>
+        <help>週末の期日を持つ ToDo を週末の前の金曜日または週末の後の月曜日にスケジュールする必要がありますか? これは、[週末をスキップ] が選択されている場合にのみ適用されます。</help>
+        <label><!-- Reschedule To --></label>
+        <name>npsp__Reschedule_To__c</name>
+        <picklistValues>
+            <masterLabel>Friday</masterLabel>
+            <translation>金曜日</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Monday</masterLabel>
+            <translation>月曜日</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help>選択した場合、エンゲージメント計画の期日が土曜日または日曜日になりることはありません。</help>
+        <label><!-- Skip Weekends --></label>
+        <name>npsp__Skip_Weekends__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Engagement Plans --></label>
+        <name>npsp__Total_Engagement_Plans__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Tasks --></label>
+        <name>npsp__Total_Tasks__c</name>
+    </fields>
+    <layouts>
+        <layout>Engagement Plan Template Layout</layout>
+        <sections>
+            <label>カスタムリンク</label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>エンゲージメント計画テンプレート名</nameFieldLabel>
+    <webLinks>
+        <label><!-- Manage_Template --></label>
+        <name>npsp__Manage_Template</name>
+    </webLinks>
 </CustomObjectTranslation>

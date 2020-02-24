@@ -32,16 +32,19 @@
         <filter>
             <criteriaItems>
                 <column>Lead.ChapterName__c</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Make-A-Wish Alabama,Test Chapter</value>
             </criteriaItems>
             <criteriaItems>
                 <column>CONVERTED</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Lead.Test_Record__c</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
@@ -54,6 +57,8 @@
         </params>
         <reportType>LeadList</reportType>
         <scope>org</scope>
+        <showGrandTotal>true</showGrandTotal>
+        <showSubTotals>true</showSubTotals>
         <timeFrameFilter>
             <dateColumn>CREATED_DATE</dateColumn>
             <interval>INTERVAL_CUSTOM</interval>
@@ -85,16 +90,19 @@
         <filter>
             <criteriaItems>
                 <column>CREATED</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Chandrasekar Nallusamy,Kanagaraj Arjunan,Jose Rathi Francis,Sophiya George,Sudharsan Kumaravel,Furqan Maqbool,Vennila Paramasivam,ChennaReddy UmmaReddy,Kesavakumar Murugesan,Vinodhini Balraj</value>
             </criteriaItems>
             <criteriaItems>
                 <column>CONVERTED</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Lead.Test_Record__c</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
@@ -107,6 +115,8 @@
         </params>
         <reportType>LeadList</reportType>
         <scope>org</scope>
+        <showGrandTotal>true</showGrandTotal>
+        <showSubTotals>true</showSubTotals>
         <timeFrameFilter>
             <dateColumn>CREATED_DATE</dateColumn>
             <interval>INTERVAL_CUSTOM</interval>

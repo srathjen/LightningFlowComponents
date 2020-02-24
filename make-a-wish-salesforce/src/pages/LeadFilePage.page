@@ -4,5 +4,7 @@
  enableAttachFromSDriveFolders="false" 
  customObjectName="Lead"
  customObjectFileName="Lead_File__c"
+ fileNamespacePrefix="cg__"
+ relationshipName="Lead__r"
  objectId="{!Lead.Id}" />
 </apex:page>

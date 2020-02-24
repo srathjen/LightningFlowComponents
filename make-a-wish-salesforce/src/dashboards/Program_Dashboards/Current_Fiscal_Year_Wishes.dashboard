@@ -17,6 +17,7 @@
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Grouped by Anticipated Start Date Month</footer>
+            <groupingSortProperties/>
             <header>Pipeline by Anticipated Start Date</header>
             <legendPosition>Bottom</legendPosition>
             <report>Wish_Management/CFY_Pipeline_by_Anticipated_St_Date</report>
@@ -39,6 +40,7 @@
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Grouped by End Date Month</footer>
+            <groupingSortProperties/>
             <header>Wishes Scheduled by Month</header>
             <legendPosition>Bottom</legendPosition>
             <report>Wish_Management/Wishes_Scheduled_by_Month</report>

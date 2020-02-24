@@ -354,31 +354,23 @@
         </picklistValues>
     </fields>
     <layouts>
-        <layout>Orientation</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Orientation &amp; Training Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Training</layout>
+        <layout>Orientation &amp; Training &amp; Interview Layout</layout>
         <sections>
             <label><!-- Custom Links --></label>
             <section>Custom Links</section>
         </sections>
     </layouts>
     <recordTypes>
+        <label><!-- Interview --></label>
+        <name>Interview</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- This record type associated with orientation page layout --></description>
         <label><!-- Orientation --></label>
         <name>Orientation</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- This record type associated with training page layout --></description>
         <label><!-- Training --></label>
         <name>Training</name>
     </recordTypes>

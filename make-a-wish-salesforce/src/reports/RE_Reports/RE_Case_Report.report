@@ -73,6 +73,7 @@
     <filter>
         <criteriaItems>
             <column>Case.Migrated_Record__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
@@ -95,6 +96,8 @@
     <reportType>CaseList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CREATED_DATEONLY</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

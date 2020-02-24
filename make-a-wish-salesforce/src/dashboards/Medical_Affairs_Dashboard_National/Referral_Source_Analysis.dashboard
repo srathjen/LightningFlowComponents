@@ -17,6 +17,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Time Frame can be adjusted in the source report.</footer>
+            <groupingSortProperties/>
             <header>Current Fiscal Year Referrals</header>
             <legendPosition>Bottom</legendPosition>
             <report>Medical_Affairs_National/DRAFT_All_Referrals</report>
@@ -39,6 +40,7 @@
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Timeframe can be adjusted in source report</footer>
+            <groupingSortProperties/>
             <header>Referrals by Med. Prof Current FY</header>
             <legendPosition>Bottom</legendPosition>
             <report>Medical_Affairs_National/DRAFT_Medical_Professional_Referrals</report>

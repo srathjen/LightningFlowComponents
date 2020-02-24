@@ -11,11 +11,13 @@
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
             <componentType>Metric</componentType>
             <displayUnits>Auto</displayUnits>
+            <groupingSortProperties/>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
             <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
             <metricLabel>New LEADS (Last 30 Days)</metricLabel>
             <report>DB_Adoption/DB_Adoption_New_Leads_Last_30_Days</report>
+            <showRange>false</showRange>
         </components>
         <components>
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
@@ -27,6 +29,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Are users leveraging all channels to bring LEADS into the pipeline?</footer>
+            <groupingSortProperties/>
             <header>New LEAD Trend by Source</header>
             <legendPosition>Right</legendPosition>
             <report>DB_Adoption/DB_Adoption_New_Leads_Trend</report>
@@ -40,11 +43,13 @@
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
             <componentType>Metric</componentType>
             <displayUnits>Auto</displayUnits>
+            <groupingSortProperties/>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
             <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
             <metricLabel>Count of LEADS (All)</metricLabel>
             <report>DB_Adoption/DB_Adoption_Count_of_LEADS</report>
+            <showRange>false</showRange>
         </components>
         <components>
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
@@ -56,6 +61,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Are users adding valuable LEAD data that can be used to successful ly qualify and convert a lead?</footer>
+            <groupingSortProperties/>
             <header>LEADS w/out Key Fields Populated</header>
             <legendPosition>Bottom</legendPosition>
             <report>DB_Adoption/DB_Adoption_PROSPECT_w_Fields_Populated</report>
@@ -74,6 +80,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Is our marketing team managing the LEAD capture-to-close process?</footer>
+            <groupingSortProperties/>
             <header>LEAD Funnel Load Rate</header>
             <legendPosition>Right</legendPosition>
             <report>DB_Adoption/DB_Adoption_Funnel_Load_Rate</report>
@@ -93,6 +100,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Are sales and marketing managing the LEAD capture-to-close process?</footer>
+            <groupingSortProperties/>
             <header>LEADS Created &amp; Converted</header>
             <legendPosition>Bottom</legendPosition>
             <report>DB_Adoption/DB_Adoption_Leads_Converted_Last_365</report>
@@ -109,11 +117,13 @@
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
             <componentType>Metric</componentType>
             <displayUnits>Auto</displayUnits>
+            <groupingSortProperties/>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
             <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
             <metricLabel>New OPPORTUNITIES (Last 30 Days)</metricLabel>
             <report>DB_Adoption/DB_Adoption_New_OPPORTUNITIES_last_30</report>
+            <showRange>false</showRange>
         </components>
         <components>
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
@@ -125,6 +135,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Does our OPPORTUNITY pipeline support  performance targets?</footer>
+            <groupingSortProperties/>
             <header>New OPPORTUNITIES Trend</header>
             <legendPosition>Bottom</legendPosition>
             <report>DB_Adoption/DB_Adoption_OPPORTUNITIES_Trend</report>
@@ -137,11 +148,13 @@
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
             <componentType>Metric</componentType>
             <displayUnits>Auto</displayUnits>
+            <groupingSortProperties/>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
             <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
             <metricLabel>Count of OPPORTUNITIES (All)</metricLabel>
             <report>DB_Adoption/DB_Adoption_Count_of_OPPTYS</report>
+            <showRange>false</showRange>
         </components>
         <components>
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
@@ -153,6 +166,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Are users using Salesforce to better mange the opportunity lifecycle and provide realistic status&apos; on their  OPPORTUNITIES?</footer>
+            <groupingSortProperties/>
             <header>Open OPPS w/out Key Fields Populated</header>
             <legendPosition>Bottom</legendPosition>
             <report>DB_Adoption/DB_Adoption_OPPTYS_wo_Fields_Populated</report>
@@ -171,6 +185,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Are users using Salesforce to better mange the OPPORTUNITY lifecycle and provide visibility to what they are selling?</footer>
+            <groupingSortProperties/>
             <header>OPPORTUNITIES w/No Opp Products</header>
             <legendPosition>Bottom</legendPosition>
             <report>DB_Adoption/DB_Adoption_OPPTYS_w_No_Opp_Product</report>
@@ -190,6 +205,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Are sales and marketing managing the LEAD capture-to-close process?</footer>
+            <groupingSortProperties/>
             <header>LEADS Abandoned</header>
             <legendPosition>Right</legendPosition>
             <report>DB_Adoption/DB_Adoption_Lead_Abandonment</report>
@@ -209,6 +225,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Are users leveraging the EMAIL marketing features?</footer>
+            <groupingSortProperties/>
             <header>MASS EMAILS Created</header>
             <legendPosition>Bottom</legendPosition>
             <report>DB_Adoption/DB_Adoption_Mass_Emails_Created</report>
@@ -225,11 +242,13 @@
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
             <componentType>Metric</componentType>
             <displayUnits>Auto</displayUnits>
+            <groupingSortProperties/>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
             <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
             <metricLabel>NEW OPPORTUNITIES (Last 365 Days)</metricLabel>
             <report>DB_Adoption/DB_Adoption_Count_of_OPPTYS_last_365</report>
+            <showRange>false</showRange>
         </components>
         <components>
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
@@ -241,6 +260,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Are users actively managing their funnel and does it support  our sales goals?</footer>
+            <groupingSortProperties/>
             <header>New OPPORTUNITY Trend by Owner</header>
             <legendPosition>Right</legendPosition>
             <report>DB_Adoption/DB_Adoption_OPPORTUNITY_Trend_Owner</report>
@@ -272,6 +292,7 @@
             <drillEnabled>false</drillEnabled>
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <footer>Are users adding quality OPPORTUNITIES and driving the necessary activites to bring them to closure?</footer>
+            <groupingSortProperties/>
             <header>Neglected OPPORTUNITIES</header>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
@@ -291,6 +312,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Are users using Salesforce to better mange the OPPORTUNITY lifecycle and provide visibility to their OPPORTUNITIES from the start?</footer>
+            <groupingSortProperties/>
             <header>OPPORTUNITIES by Stage Entered</header>
             <legendPosition>Bottom</legendPosition>
             <report>DB_Adoption/DB_Adoption_OPPTYS_by_STAGE_entered</report>
@@ -304,11 +326,13 @@
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
             <componentType>Metric</componentType>
             <displayUnits>Auto</displayUnits>
+            <groupingSortProperties/>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
             <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
             <metricLabel>New CAMPAIGNS (Last 30 Days)</metricLabel>
             <report>DB_Adoption/DB_Adoption_Campaigns_Last_30_Days</report>
+            <showRange>false</showRange>
         </components>
         <components>
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
@@ -320,6 +344,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Is marketing  consistently leveraging CAMPAIGNS to track customer touch points?</footer>
+            <groupingSortProperties/>
             <header>New CAMPAIGN Trend</header>
             <legendPosition>Bottom</legendPosition>
             <report>DB_Adoption/DB_Adoption_Campaigns</report>
@@ -339,6 +364,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Is marketing consistently leveraging CAMPAIGNS to track customer touch points?</footer>
+            <groupingSortProperties/>
             <header>New CAMPAIGN Trend by Status</header>
             <legendPosition>Bottom</legendPosition>
             <report>DB_Adoption/DB_Adoption_Campaigns_by_Status</report>

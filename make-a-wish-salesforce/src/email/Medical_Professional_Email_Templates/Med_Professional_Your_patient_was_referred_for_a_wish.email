@@ -5,15 +5,14 @@
 normal;background:white"><span style="font-size: 12pt; font-family: Lato, serif;">Wish child name:&nbsp;{!Lead.Name}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal;background:white"><span style="font-size: 12pt; font-family: Lato, serif;">Primary diagnosis:&nbsp;{!Lead.PD_Condition_Description__c}</span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
 white"><span style="font-family: Lato, serif;">Additional diagnosis: N/A</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
-white"><span style="font-family: Lato, serif;">Dear&nbsp;{!Lead.Treating_Medical_Professional_First_Name__c}&nbsp;{!Lead.Treating_Medical_Professional_Last_Name__c},&nbsp;</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
-white"><span style="font-family: Lato, serif;">After reviewing the information
+white"><span style="font-family: Lato, serif; font-size: 12pt;">After reviewing the information
 submitted on the Diagnosis Verification Form, we have concluded your patient
 does not meet our medical eligibility criteria at this time. If you feel
 additional medical information can be provided to support wish eligibility,
 please
 contact&nbsp;{!Lead.OwnerFullName}&nbsp;at&nbsp;&nbsp;{!Lead.Phone}&nbsp;or
 at&nbsp;{!Lead.OwnerEmail}. Should&nbsp;{!Lead.FirstName}’s medical condition
-change in the future, please contact us again for a reevaluation.&nbsp;</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
+change in the future, please contact us again for a reevaluation.&nbsp;</span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
 white"><span style="font-family: Lato, serif;">Thank you for your diligent care for
 this child and remaining a strong advocate for pediatric health. If you have
 any further questions regarding eligibility criteria or this decision, please

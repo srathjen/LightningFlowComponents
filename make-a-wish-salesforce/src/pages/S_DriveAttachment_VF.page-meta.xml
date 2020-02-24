@@ -6,8 +6,8 @@
     <description>This page is used as inline vf page in an In-Kind Donation &amp; Reimbursement page layout</description>
     <label>S_DriveAttachment_VF</label>
     <packageVersions>
-        <majorNumber>1</majorNumber>
-        <minorNumber>28</minorNumber>
+        <majorNumber>2</majorNumber>
+        <minorNumber>5</minorNumber>
         <namespace>cg</namespace>
     </packageVersions>
 </ApexPage>

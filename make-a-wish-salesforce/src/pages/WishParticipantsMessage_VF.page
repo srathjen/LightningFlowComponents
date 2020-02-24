@@ -1,0 +1,12 @@
+<apex:page standardController="Case">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css"/>
+        <link rel="stylesheet" href="{!URLFOR($Resource.wishcloudstyles, 'wishcloudstyles/core.css')}" />
+<style>
+        .progressbar { content: "Since Start"; position: absolute; font-size: 1.5rem; font-size: .8vw; top: 42%; right: 6%; border-top: 1px solid #fff; padding-top: 1%; }
+        </style>
+
+<h1 style="color: #205081;height:50px;width:800px;"><font size="4">To view Wish Participants, click the <b>'View Wish Participants'</b> button at the top of the page.
+</font></h1>
+
+</apex:page>

@@ -1,0 +1,12 @@
+.THIS .slds-modal__container {
+    width: 65% !important;
+    max-width: 75rem !important;
+}
+
+.THIS .slds-white .slds-icon-text-default{
+    fill:rgb(255, 255, 255);
+}
+
+.THIS .slds-modal__content{
+    min-height:300px !important;
+}

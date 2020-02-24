@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Captures how the &apos;Wish Affiliation Type&apos; field maps to the Wish Affiliation UI Components</description>
+    <fields>
+        <fullName>Category__c</fullName>
+        <description>Lists the Wish Affiliation category that the &apos;Wish affiliation type&apos; should relate to for display in custom UI components.</description>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Category</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Participant</fullName>
+                    <default>true</default>
+                    <label>Participant</label>
+                </value>
+                <value>
+                    <fullName>Medical Professional</fullName>
+                    <default>false</default>
+                    <label>Medical Professional</label>
+                </value>
+                <value>
+                    <fullName>Requested Participant</fullName>
+                    <default>false</default>
+                    <label>Requested Participant</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Is_Default_for_Category__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Default value for Wish Affiliation Type when creating a new Wish Affiliation record using the custom component / flow</description>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Is Default for Category</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Sort_Order__c</fullName>
+        <description>To maintain the Order in which Affiliations are displayed in the participant selection component of the Wish Design Forms, categorized by the Category Field</description>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Sort Order</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <description>Displays the Wish affiliation&apos;s type for mapping to the category.</description>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Type</label>
+        <length>50</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Wish Affiliation Category</label>
+    <pluralLabel>Wish Affiliation Categories</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

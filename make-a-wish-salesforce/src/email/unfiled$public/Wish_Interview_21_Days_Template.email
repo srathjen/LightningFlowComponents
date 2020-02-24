@@ -1,12 +1,12 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
 <![CDATA[<p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Wish Granters,<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Thank you for
 volunteering for&nbsp;{!Case.Hidden_Wish_Child_FirstName__c}’s wish. Please
 take a moment to enter the initial interview date for this wish child into the
 Make-A-Wish Volunteer Center&nbsp;as soon as you are able.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">To find this wish
-child's record, log in to the&nbsp;<a href="https://make-a-wish.force.com/communitieslogin"><span style="color:blue;
-background:white">Make-A-Wish Volunteer Center</span></a>&nbsp;and click&nbsp;<b>"My
+child's record, log in to the&nbsp;<span style="color:blue;
+background:white"><a href="{!$Label.Site_Url}">Make-A-Wish Volunteer Center</a></span>&nbsp;and click&nbsp;<b>"My
 Assignments"</b>. Then click&nbsp;<b>"View"</b>&nbsp;on
 the&nbsp;appropriate&nbsp;wish child to access the record. Scroll to the
 Important Date section and enter the date for the initial interview. Scroll to

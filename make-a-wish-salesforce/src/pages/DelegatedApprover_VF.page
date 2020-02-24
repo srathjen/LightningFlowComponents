@@ -8,6 +8,8 @@
     <apex:includeScript value="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.dataTables.min.js')}"/>
     <apex:includeScript value="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"/>
     <apex:includeScript value="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"/>
+    <apex:includeScript value="https://code.jquery.com/ui/1.12.1/jquery-ui.js"/>
+    <apex:stylesheet value="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
     <style>
         th {background-color:#f9f9f9 !important; border-top:1px solid black}
         .slds-scope{border:none; padding: 30px; font-size:16px;}
@@ -18,18 +20,45 @@
         .slds-scope body, .slds-scope:not(html) {font-size:11px !important}
         .bd, .slds-form-element__label {font-size:11px !important}
         #myTable {width:100% !important}
-        tr td:last-child {word-break:break-all !important; min-width:80px !important}
+        #myTable tr td:last-child {word-break:break-all !important; min-width:80px !important}
     </style>
     
     <body class="slds-scope slds-box">
+        <div class="row">
+            
+            <nav aria-label="..." class="col-sm-2 col-md-2">
+                <ul class="pager">
+                    <li class="previous"><a href="#" class="slds-button slds-button_brand bd" onClick="goBack();" style="margin-top: 10px;"><span aria-hidden="true">&larr;</span> Go Back</a></li>
+                </ul>
+            </nav>
+        </div> 
+        <br/>
+        <br/>
+        <form class="slds-form--inline">
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="name">From</label>
+                <div class="slds-form-element__control">
+                    <input id="from" class="slds-input" type="text" />
+                </div>
+            </div>
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="email">To</label>
+                <div class="slds-form-element__control">
+                    <input id="to" class="slds-input" type="text" />
+                </div>
+            </div>
+            <div class="slds-form-element">
+                <button type="button" class="slds-button slds-button--brand" onClick="GetDateFilterValue();" >Go</button>
+            </div>
+        </form>
+        
+        <br/>
+        <br/>
+        
         <apex:outputPanel >
             <div class="row">
-                <nav aria-label="..." class="col-sm-2 col-md-2">
-                    <ul class="pager">
-                        <li class="previous"><a href="#" class="slds-button slds-button_brand bd" onClick="goBack();"><span aria-hidden="true">&larr;</span> Go Back</a></li>
-                    </ul>
-                </nav>
-                <div class="col-sm-8 col-md-8">
+               
+                <div class="col-sm-12 col-md-12">
                     <Center><h3 class="slds-text-heading_large">Approval Process Report</h3></Center>
                     
                 </div>
@@ -61,11 +90,57 @@
     <script>
     var oTable;
     $(document).ready(function() {
+        $( function() {
+            var dateFormat = "mm/dd/yy",
+                from = $( "#from" )
+            .datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 1
+            })
+            .on( "change", function() {
+                to.datepicker( "option", "minDate", getDate( this ) );
+                var maxTo = getDate(this);
+                maxTo.setMonth(maxTo.getMonth()+3);
+                
+                to.datepicker( "option", "maxDate", maxTo);
+            }),
+                to = $( "#to" ).datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 1
+                })
+            .on( "change", function() {
+                from.datepicker( "option", "maxDate", getDate( this ) );
+            });
+            
+            function getDate( element ) {
+                var date;
+                try {
+                    date = $.datepicker.parseDate( dateFormat, element.value );
+                } catch( error ) {
+                    date = null;
+                }
+                
+                return date;
+            }
+        } );
+        var toDate = new Date();
+        toDate =   toDate.getFullYear() + '-' + (toDate.getMonth() + 1) +'-' + toDate.getDate();
+        var x = 3;
+        var CurrentDate = new Date(toDate);
+        CurrentDate.setMonth(CurrentDate.getMonth()-3);
+        var fromDate = CurrentDate.getFullYear() + '-' + (CurrentDate.getMonth() + 1) +'-' + CurrentDate.getDate();
+        retriveData(fromDate,toDate);
+    });
+    
+    function retriveData(fromDate, toDate) {
+        
         var data = [];
         var table;
-        var header1 = 'Chapter Name';
+        
         Visualforce.remoting.Manager.invokeAction(
-            '{!$RemoteAction.DelegatedApproverController_AC.getAppList}',
+            '{!$RemoteAction.DelegatedApproverController_AC.getAppList}',fromDate,toDate,
             function(result, event){
                 if(event.type == 'exception') {
                     alert(event.message);
@@ -76,6 +151,7 @@
                     for (var i = 0; i < obj.length; i++) {
                         data.push( [ obj[i].processName, obj[i].chapterName, obj[i].recordName, obj[i].wishChild, obj[i].status, obj[i].createdBy, obj[i].submittedBy, obj[i].approvedBy, obj[i].assignedTo, obj[i].submittedDate, obj[i].completedDate, obj[i].objectType]);
                     }
+                    
                     oTable =  $('#myTable').dataTable( {
                         data:           data,
                         processing: true,
@@ -88,6 +164,7 @@
                             dataSrc: 0
                         },
                         initComplete: function () {
+                            $('#MyFilter').empty();
                             this.api().columns('.select-filter').every( function () {
                                 var column = this;
                                 var header = column.header().innerHTML;
@@ -126,7 +203,8 @@
         );
         $('.group label').css('display','block');
         $('input[type="search"]').keyup(function(){displayHidden()});  
-    });
+        
+    }
     function ss() {
         $('.sorting_1').each(function() {
             alert($(this).text());
@@ -136,7 +214,7 @@
     $(document).delegate('.paginate_button', 'click', function() {
         displayHidden();
     });
-    $('#myTable thead').on( 'click', 'th', function () {         
+    $('#myTable thead').on( 'click', 'th', function () {      
         displayHidden();
     });
     function displayHidden() {
@@ -144,6 +222,31 @@
     }
     function goBack() {
         window.history.back();
+    }
+    function FilterData(retriveData) {
+        
+    }
+    
+    function GetDateFilterValue() {
+        var toDate = document.getElementById('from').value;
+        var fromDate = document.getElementById('to').value;
+        if(toDate.length > 0 && fromDate.length > 0) {
+            var day = toDate.split("/")[2];
+            var month = toDate.split("/")[0];
+            var year = toDate.split("/")[1];
+            toDate =day + '-' + month +'-' + year;
+            var fromDate = document.getElementById('to').value;
+            var day1 = fromDate.split("/")[2];
+            var month1 = fromDate.split("/")[0];
+            var year1 = fromDate.split("/")[1];
+            fromDate =day1 + '-' + month1 +'-' + year1;
+           
+                $('#myTable').dataTable().fnDestroy();
+                retriveData(toDate,fromDate);
+            
+        } else {
+            alert('Please enter date value');
+        }
     }
     </script>
 </apex:page>

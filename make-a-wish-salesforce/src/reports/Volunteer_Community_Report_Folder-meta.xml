@@ -5,5 +5,15 @@
         <sharedTo>AllCustomerPortalUsers</sharedTo>
         <sharedToType>AllCspUsers</sharedToType>
     </folderShares>
+    <folderShares>
+        <accessLevel>EditAllContents</accessLevel>
+        <sharedTo>hrabold@wish.org</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
+    <folderShares>
+        <accessLevel>EditAllContents</accessLevel>
+        <sharedTo>skilen@arizona.wish.org</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
     <name>Volunteer Community Report Folder</name>
 </ReportFolder>

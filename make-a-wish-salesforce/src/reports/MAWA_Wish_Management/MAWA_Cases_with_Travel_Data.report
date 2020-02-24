@@ -56,6 +56,8 @@
     <reportType>Cases_with_Travel_Data__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <sortColumn>Case.Travel_Data__r$Arrival_Time__c</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>npe5__Affiliation__c$npe5__Contact__c</field>
+    </columns>
+    <columns>
+        <field>npe5__Affiliation__c$npe5__Contact__c.Onboarding_Status__c</field>
+    </columns>
+    <columns>
+        <field>npe5__Affiliation__c$npe5__Contact__c.Email</field>
+    </columns>
+    <columns>
+        <field>npe5__Affiliation__c$npe5__Contact__c.MobilePhone</field>
+    </columns>
+    <columns>
+        <field>npe5__Affiliation__c$LastModifiedDate</field>
+    </columns>
+    <columns>
+        <field>npe5__Affiliation__c$LastModifiedBy</field>
+    </columns>
+    <description>FOR HELEN TO APPROVE - Report to replace &apos;Prospective and Pending Volunteers with Outstanding Items&apos; report in Chapter Reports folder following removal of &apos;prospective&apos; volunteer status.</description>
+    <filter>
+        <criteriaItems>
+            <column>npe5__Affiliation__c$npe5__Status__c</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Prospective,Pending</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>npe5__Affiliation__c$npe5__Contact__c.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>npe5__Affiliation__c$npe5__Organization__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Make-A-Wish Arizona</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>npe5__Affiliation__c$npe5__Status__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Pending Volunteers Outstanding Items_New</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Affiliations_with_Volunteers__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>npe5__Affiliation__c$npe5__Contact__c.Onboarding_Status__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>npe5__Affiliation__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

@@ -2,15 +2,371 @@
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
-        <value><!-- Relationship --></value>
+        <value>Relatie</value>
     </caseValues>
     <caseValues>
         <plural>true</plural>
-        <value><!-- Relationship --></value>
+        <value>Relaties</value>
     </caseValues>
-    <gender><!-- Neuter --></gender>
+    <fieldSets>
+        <label><!-- MedicalRelationships --></label>
+        <name>MedicalRelationships</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- Relationship Field Set --></label>
+        <name>Relationship_Field_Set</name>
+    </fieldSets>
+    <fields>
+        <label><!-- Adult Emergency Contact --></label>
+        <name>Adult_Emergency_Contact__c</name>
+    </fields>
+    <fields>
+        <help><!-- Best Contact for Treating Healthcare Provider --></help>
+        <label><!-- Best Contact for Treating Healthcare Pro --></label>
+        <name>Best_Contact__c</name>
+    </fields>
+    <fields>
+        <help><!-- This field can be updated on the individual&apos;s Contact Record. --></help>
+        <label><!-- Deceased --></label>
+        <name>Decead__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish End Date --></label>
+        <name>End_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- External Id --></label>
+        <name>External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Preferred Contact --></label>
+        <name>Hidden_Preferred_Contact__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden isparentFirst --></label>
+        <name>Hidden_isparentFirst__c</name>
+    </fields>
+    <fields>
+        <label><!-- Import Id --></label>
+        <name>Import_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Medical Needs --></label>
+        <name>Medical_Needs__c</name>
+    </fields>
+    <fields>
+        <label><!-- Migrated Record --></label>
+        <name>Migrated_Record__c</name>
+    </fields>
+    <fields>
+        <label><!-- Non-Comped --></label>
+        <name>Non_Comped__c</name>
+    </fields>
+    <fields>
+        <label><!-- Parent/Legal Guardian --></label>
+        <name>Parent_Legal_Guardian__c</name>
+    </fields>
+    <fields>
+        <label><!-- Qualifying Medical Team Member --></label>
+        <name>Qualifying_Medical_Professional__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referral Source --></label>
+        <name>Referring_Medical_Professional__c</name>
+    </fields>
+    <fields>
+        <label><!-- Related Contact Record Type --></label>
+        <name>Related_Contact_Record_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Residing with Wish child --></label>
+        <name>Residing_with_Wish_child__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Send Wish Forms to --></label>
+        <name>Send_Wish_Forms__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Start Date --></label>
+        <name>Start_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Treating Healthcare Provider --></label>
+        <name>Treating_HCP__c</name>
+    </fields>
+    <fields>
+        <label><!-- UAT Data Warning --></label>
+        <name>UAT_Data_Warning__c</name>
+    </fields>
+    <fields>
+        <label><!-- Under 18 --></label>
+        <name>Under_18__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unique Record Count --></label>
+        <name>Unique_Record_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Wish End  Date --></label>
+        <name>Wish_End_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Participant --></label>
+        <name>Wish_Participant__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Wish Start Date --></label>
+        <name>Wish_Start_Date__c</name>
+    </fields>
+    <fields>
+        <help>Gerelateerde Contactpersonen is dit Contact&apos;s_______</help>
+        <label><!-- Contact --></label>
+        <name>npe4__Contact__c</name>
+        <relationshipLabel><!-- Relationships --></relationshipLabel>
+    </fields>
+    <fields>
+        <help>Extra informatie over deze Relatie</help>
+        <label><!-- Description --></label>
+        <name>npe4__Description__c</name>
+    </fields>
+    <fields>
+        <help>Systeem veld die de twee kanten van de relatie samen linkt. Dit veld moet niet worden aangepast. De wederkerige relatie heeft de het tegenovergestelde type, indien beschikbaar, van deze relatie.</help>
+        <label><!-- Reciprocal Relationship --></label>
+        <name>npe4__ReciprocalRelationship__c</name>
+        <relationshipLabel><!-- Relationships --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Related Contact --></label>
+        <name>npe4__RelatedContact__c</name>
+        <relationshipLabel><!-- Hidden Relationships List --></relationshipLabel>
+    </fields>
+    <fields>
+        <help>Tekst formule die een zin maakt die de relatie uitlegt tussen twee contactpersonen.</help>
+        <label><!-- Relationship Explanation --></label>
+        <name>npe4__Relationship_Explanation__c</name>
+    </fields>
+    <fields>
+        <help>Systeem veld dat aangeeft of de relatie automatisch was gemaakt als de wederhelft van en ander relatie.</help>
+        <label><!-- _SYSTEM: SystemCreated --></label>
+        <name>npe4__SYSTEM_SystemCreated__c</name>
+    </fields>
+    <fields>
+        <help>Status van de Relatie</help>
+        <label><!-- Status --></label>
+        <name>npe4__Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Active Treating</masterLabel>
+            <translation><!-- Active Treating --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inactive</masterLabel>
+            <translation><!-- Inactive --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help>Veld die beschrijft hoe de gerelateerde contactpersoon is verwant aan de contactpersoon</help>
+        <label><!-- Type --></label>
+        <name>npe4__Type__c</name>
+        <picklistValues>
+            <masterLabel>Aunt</masterLabel>
+            <translation>Tante</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Brother</masterLabel>
+            <translation><!-- Brother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cousin</masterLabel>
+            <translation>Neef/Nicht</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Coworker</masterLabel>
+            <translation>Collega</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Daughter</masterLabel>
+            <translation>Dochter</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Employee</masterLabel>
+            <translation>Werknemer</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Employer</masterLabel>
+            <translation>Werkgever</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family</masterLabel>
+            <translation>Familie</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Father</masterLabel>
+            <translation>Vader</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Brother</masterLabel>
+            <translation><!-- Foster Brother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Father</masterLabel>
+            <translation><!-- Foster Father --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Mother</masterLabel>
+            <translation><!-- Foster Mother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Sister</masterLabel>
+            <translation><!-- Foster Sister --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Friend</masterLabel>
+            <translation>Vriend</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Granddaughter</masterLabel>
+            <translation>Kleindochter</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Grandfather</masterLabel>
+            <translation>Grootvader</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Grandmother</masterLabel>
+            <translation>Grootmoeder</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Grandson</masterLabel>
+            <translation>Kleinzoon</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Half Brother</masterLabel>
+            <translation><!-- Half Brother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Half Sister</masterLabel>
+            <translation><!-- Half Sister --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Husband</masterLabel>
+            <translation>Echtgenoot</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Legal Guardian</masterLabel>
+            <translation><!-- Legal Guardian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medical Professional</masterLabel>
+            <translation><!-- Medical Professional --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mother</masterLabel>
+            <translation>Moeder</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Neighbor</masterLabel>
+            <translation><!-- Neighbor --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Parent</masterLabel>
+            <translation>Ouder</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Partner</masterLabel>
+            <translation>Partner</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sibling</masterLabel>
+            <translation><!-- Sibling --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sister</masterLabel>
+            <translation><!-- Sister --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Son</masterLabel>
+            <translation>Zoon</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Step Brother</masterLabel>
+            <translation><!-- Step Brother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Step Sister</masterLabel>
+            <translation><!-- Step Sister --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Stepfather</masterLabel>
+            <translation><!-- Stepfather --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Stepmother</masterLabel>
+            <translation><!-- Stepmother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Uncle</masterLabel>
+            <translation>Oom</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wife</masterLabel>
+            <translation>Echtgenote</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wish Child(Self)</masterLabel>
+            <translation><!-- Wish Child(Self) --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help>Wanneer u een Opportunity maakt voor de Contactpersoon in deze Relatie, wijst NPSP deze Opportunitycontactpersoonrol toe aan de Gerelateerde Contactpersoon.</help>
+        <label><!-- Related Opportunity Contact Role --></label>
+        <name>npsp__Related_Opportunity_Contact_Role__c</name>
+        <picklistValues>
+            <masterLabel>Soft Credit</masterLabel>
+            <translation>Soft Credit</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Solicitor</masterLabel>
+            <translation>Aanvrager</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tribute</masterLabel>
+            <translation>Eerbetoon</translation>
+        </picklistValues>
+    </fields>
+    <gender>Feminine</gender>
     <layouts>
-        <layout>Relationship Chapter Staff Layout</layout>
+        <layout>Relationship Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Medical Contact Details --></label>
+            <section>Medical Contact Details</section>
+        </sections>
+        <sections>
+            <label>Relatie Informatie</label>
+            <section>Relationship Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Relationship Layout - Volunteer</layout>
         <sections>
             <label><!-- Custom Links --></label>
             <section>Custom Links</section>
@@ -20,5 +376,9 @@
             <section>Relationship Information</section>
         </sections>
     </layouts>
-    <nameFieldLabel><!-- Relationship Number --></nameFieldLabel>
+    <nameFieldLabel>Relatienummer</nameFieldLabel>
+    <validationRules>
+        <errorMessage><!-- Rather than change the contacts in an existing relationship, delete this relationship and create a new on between the new contacts --></errorMessage>
+        <name>npe4__Related_Contact_Do_Not_Change</name>
+    </validationRules>
 </CustomObjectTranslation>

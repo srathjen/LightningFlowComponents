@@ -1,6 +1,6 @@
 <apex:page id="loginPage" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" docType="html-5.0" controller="CommunitiesLoginController" title="Make-A-Wish Communities | Log In">
 <head>
-  	<apex:include pageName="prospective_head" id="phead" />
+    <apex:include pageName="prospective_head" id="phead" />
 </head>
 <body class="vcp vcplogin">  
   <apex:include pageName="prospective_header" id="pheader" />
@@ -9,6 +9,28 @@
     <div class="row">
       <h1 class="col-md-12">Volunteer Log In</h1>
     </div>
+      
+       <!-- Display MaintenanceAlert content if the custom setting is isActive -->  
+      <apex:outputPanel id="MaintenanceAlert" rendered="{!$Setup.MaintenanceAlert__c.isActive__c}"> 
+          <div class="row"> 
+              <section class= "{!IF($Setup.MaintenanceAlert__c.isActiveLockout__c == False, 'col-md-8', 'col-md-12')}"> 
+                  <fieldset style="padding: 1rem;border: 1px solid #e2e2e2;">           
+                      <apex:outputText style="color: crimson;font-weight: bold;font-size: 1.15rem;" value="{!$Setup.MaintenanceAlert__c.Header_1__c}" />    
+                        <br/>   
+                      <apex:outputText style="color: crimson;" value="{!$Setup.MaintenanceAlert__c.Header_2__c}" /> 
+                        <apex:outputText escape="false" value="<br/>" rendered="{!$Setup.MaintenanceAlert__c.Header_2__c !=''}" />  
+                      <apex:outputText style="font-size:small;" value="{!$Setup.MaintenanceAlert__c.Body_1__c}" />  
+                        <apex:outputText escape="false" value="<br/>" rendered="{!$Setup.MaintenanceAlert__c.Body_2__c !=''}" />    
+                      <apex:outputText style="font-size:small;"  escape="false" value="{!$Setup.MaintenanceAlert__c.Body_2__c}"/>   
+                  </fieldset>   
+              </section>    
+          </div>    
+      </apex:outputPanel>    
+      
+     
+      <!-- Hide Volunteer Login Form and Sign Up link if the MaintenanceAlert custom setting is isActiveLockout --> 
+      <apex:outputPanel id="MaintenanceLockout" rendered="{!IF($Setup.MaintenanceAlert__c.isActiveLockout__c == False, true, false)}">    
+          
     <div class="row">
       <section class="col-md-8">
         <apex:form id="form-vcp-login" styleClass="portal form-vcp-login">
@@ -31,23 +53,24 @@
           </fieldset>
           <fieldset class="footer">
               <apex:commandbutton styleClass="col-xs-12 col-sm-12 col-md-4 col-md-push-8 btn-md" id="submit_login" value="Log In" action="{!login}" />
-            <span class="col-xs-12 col-sm-12 col-md-8 col-md-pull-4"><apex:outputLink value="CommunitiesSelfReg">New Volunteer Sign Up</apex:outputLink></span>
+            <span class="col-xs-12 col-sm-12 col-md-8 col-md-pull-4"><apex:outputLink value="{!$Page.VolunteerSignUp_VF}">New Volunteer Sign Up</apex:outputLink></span>
           </fieldset>
         </apex:form>
       </section>
     </div>
+      </apex:outputPanel>
   </main>
 
   <apex:include pageName="prospective_footer" id="pfooter" />
   <!-- validate form -->
   <script src="{!URLFOR($Resource.prospective_assets,'web/js/jquery.validate.min.js')}"></script>
   <script>
-  		$.validator.setDefaults({
-	  		submitHandler: function () {
+        $.validator.setDefaults({
+            submitHandler: function () {
                 //alert( "Form validates and will be submitted." );
-            	form.submit();
-			}
-  		});
+                form.submit();
+            }
+        });
     
     $( document ).ready( function () {
         // $(".f-username").attr('name','username');

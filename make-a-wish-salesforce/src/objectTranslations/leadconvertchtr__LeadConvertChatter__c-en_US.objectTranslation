@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Account --></label>
+        <name>leadconvertchtr__Account__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact --></label>
+        <name>leadconvertchtr__Contact__c</name>
+    </fields>
+    <fields>
+        <label><!-- Move Posts on Merge --></label>
+        <name>leadconvertchtr__MergeLeadContact__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>leadconvertchtr__Opportunity__c</name>
+    </fields>
+</CustomObjectTranslation>

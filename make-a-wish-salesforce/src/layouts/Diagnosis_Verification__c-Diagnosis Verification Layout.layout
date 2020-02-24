@@ -86,12 +86,12 @@
         <relatedList>RelatedFileList</relatedList>
     </relatedLists>
     <relatedLists>
-        <fields>Medical_Question__c</fields>
+        <fields>Question__c</fields>
         <fields>Medical_Question_Answer__c</fields>
-        <fields>Epilepsy_Value__c</fields>
         <fields>Comment__c</fields>
+        <fields>Epilepsy_Value__c</fields>
         <fields>NAME</fields>
-        <fields>isEligible__c</fields>
+        <fields>Medical_Question__c</fields>
         <relatedList>DiagnosisMedicalQuestions__c.Diagnosis_Verification__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>

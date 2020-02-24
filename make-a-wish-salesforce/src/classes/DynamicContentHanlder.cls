@@ -8,11 +8,9 @@ If the user tries to activate the record, if that chapter already has active rec
 to update duplicate active record.
 ************************************************************************************************/
 
-Public class DynamicContentHanlder
-{
+public class DynamicContentHanlder {
 
-      static Constant_AC constant = new Constant_AC();
-      Static String nationalRT = Schema.Sobjecttype.Dynamic_Content__c.getRecordTypeInfosByName().get(constant.nationalRT).getRecordTypeId();
+      static Id nationalRT = Constant_AC.NATIONAL_RT_ID;
       
    // Updating Active flag as False for existing records.
     public static void UpdateActiveFlagAsFalse(Set<Id> recordIdsSet,Set<String> chaptersSet,Set<String> recordTypesSet)

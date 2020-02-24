@@ -3,43 +3,126 @@
     <caseValues>
         <caseType>Nominative</caseType>
         <plural>false</plural>
-        <value><!-- Payment --></value>
+        <value>Zahlung</value>
     </caseValues>
     <caseValues>
         <caseType>Nominative</caseType>
         <plural>true</plural>
-        <value><!-- Payment --></value>
+        <value>Zahlungen</value>
     </caseValues>
     <caseValues>
         <caseType>Accusative</caseType>
         <plural>false</plural>
-        <value><!-- Payment --></value>
+        <value>Zahlung</value>
     </caseValues>
     <caseValues>
         <caseType>Accusative</caseType>
         <plural>true</plural>
-        <value><!-- Payment --></value>
+        <value>Zahlungen</value>
     </caseValues>
     <caseValues>
         <caseType>Genitive</caseType>
         <plural>false</plural>
-        <value><!-- Payment --></value>
+        <value>Zahlung</value>
     </caseValues>
     <caseValues>
         <caseType>Genitive</caseType>
         <plural>true</plural>
-        <value><!-- Payment --></value>
+        <value>Zahlungen</value>
     </caseValues>
     <caseValues>
         <caseType>Dative</caseType>
         <plural>false</plural>
-        <value><!-- Payment --></value>
+        <value>Zahlung</value>
     </caseValues>
     <caseValues>
         <caseType>Dative</caseType>
         <plural>true</plural>
-        <value><!-- Payment --></value>
+        <value>Zahlungen</value>
     </caseValues>
-    <gender><!-- Neuter --></gender>
-    <nameFieldLabel><!-- Payment Number --></nameFieldLabel>
+    <fieldSets>
+        <label><!-- Payment Wizard FS --></label>
+        <name>npsp__Payment_WizardFS</name>
+    </fieldSets>
+    <fields>
+        <label><!-- Check/Reference Number --></label>
+        <name>npe01__Check_Reference_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Custom Payment Field --></label>
+        <name>npe01__Custom_Payment_Field__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>npe01__Opportunity__c</name>
+        <relationshipLabel><!-- Payments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Paid --></label>
+        <name>npe01__Paid__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Amount --></label>
+        <name>npe01__Payment_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Date --></label>
+        <name>npe01__Payment_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Method --></label>
+        <name>npe01__Payment_Method__c</name>
+        <picklistValues>
+            <masterLabel>Cash</masterLabel>
+            <translation>Bar</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Check</masterLabel>
+            <translation>Scheck</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Credit Card</masterLabel>
+            <translation>Kreditkarte</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Scheduled Date --></label>
+        <name>npe01__Scheduled_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Written Off --></label>
+        <name>npe01__Written_Off__c</name>
+    </fields>
+    <fields>
+        <help>Bestätigungsdatum</help>
+        <label><!-- Payment Acknowledged Date --></label>
+        <name>npsp__Payment_Acknowledged_Date__c</name>
+    </fields>
+    <fields>
+        <help>Status der Bestätigung dieser Zahlung</help>
+        <label><!-- Payment Acknowledgment Status --></label>
+        <name>npsp__Payment_Acknowledgment_Status__c</name>
+        <picklistValues>
+            <masterLabel>Acknowledged</masterLabel>
+            <translation>Bestätigt</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Do Not Acknowledge</masterLabel>
+            <translation>Nicht bestätigen</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>To Be Acknowledged</masterLabel>
+            <translation>Zu bestätigen</translation>
+        </picklistValues>
+    </fields>
+    <gender>Feminine</gender>
+    <nameFieldLabel>Zahlungsnummer</nameFieldLabel>
+    <webLinks>
+        <label><!-- Schedule_Payments --></label>
+        <name>npe01__Schedule_Payments</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Writeoff_Payments --></label>
+        <name>npe01__Writeoff_Payments</name>
+    </webLinks>
 </CustomObjectTranslation>

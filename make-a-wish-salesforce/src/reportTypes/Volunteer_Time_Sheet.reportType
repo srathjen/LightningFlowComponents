@@ -125,6 +125,11 @@
             <field>Volunteer_Opportunity__c.Wish__c.Contact</field>
             <table>Time_sheet__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Volunteer_Opportunity__c.Chapter_Name__c</field>
+            <table>Time_sheet__c</table>
+        </columns>
         <masterLabel>Volunteer Opportunity</masterLabel>
     </sections>
 </ReportType>

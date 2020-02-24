@@ -8,7 +8,7 @@
     <caseValues>
         <caseType>Nominative</caseType>
         <plural>true</plural>
-        <value>Engagementpläne</value>
+        <value>Engagementplan</value>
     </caseValues>
     <caseValues>
         <caseType>Accusative</caseType>
@@ -40,6 +40,64 @@
         <plural>true</plural>
         <value>Engagementplänen</value>
     </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>npsp__Account__c</name>
+        <relationshipLabel><!-- Engagement Plans --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Campaign --></label>
+        <name>npsp__Campaign__c</name>
+        <relationshipLabel><!-- Engagement Plans --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Case --></label>
+        <name>npsp__Case__c</name>
+        <relationshipLabel><!-- Engagement Plans --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Completed Tasks --></label>
+        <name>npsp__Completed_Tasks__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact --></label>
+        <name>npsp__Contact__c</name>
+        <relationshipLabel><!-- Engagement Plans --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Engagement Plan Template --></label>
+        <name>npsp__Engagement_Plan_Template__c</name>
+        <relationshipLabel><!-- Engagement Plans --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>npsp__Opportunity__c</name>
+        <relationshipLabel><!-- Engagement Plans --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Recurring Donation --></label>
+        <name>npsp__Recurring_Donation__c</name>
+        <relationshipLabel><!-- Engagement Plans --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>npsp__Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total EP Tasks --></label>
+        <name>npsp__Total_EP_Tasks__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Tasks --></label>
+        <name>npsp__Total_Tasks__c</name>
+    </fields>
     <gender>Masculine</gender>
-    <nameFieldLabel>Engagementplan</nameFieldLabel>
+    <layouts>
+        <layout>Engagement Plan Layout</layout>
+        <sections>
+            <label>Benutzerdefinierte Links</label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Engagementplan-Nummer</nameFieldLabel>
 </CustomObjectTranslation>

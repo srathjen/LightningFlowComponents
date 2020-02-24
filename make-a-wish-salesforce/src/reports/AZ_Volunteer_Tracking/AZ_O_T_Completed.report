@@ -46,36 +46,48 @@
     </columns>
     <description>Volunteers who have completed Orientation and/or Wish Granter Training.</description>
     <filter>
-        <booleanFilter>(((1 AND (2 OR 3)) AND 4) AND 5) AND 6</booleanFilter>
+        <booleanFilter>(((1 AND (2 OR 3)) AND 4) AND 5) AND 6 AND 7</booleanFilter>
         <criteriaItems>
             <column>Volunteer_Orientation_Training__c$Class_Offering__c.Chapter__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Orientation_Training__c$Class_Offering__c.Date__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>greaterThan</operator>
             <value>4/1/2017</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Orientation_Training__c$Class_Offering__c.RecordType</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Class_Offering__c.Virtual_Self_Paced</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Orientation_Training__c$Orientation_Training_Hidden__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>orientation,wish granter training</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Orientation_Training__c$Volunteer_Attendance__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Completed</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Orientation_Training__c$Migrated_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Volunteer_Orientation_Training__c$Completion_Status__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Not Approved,Follow-up Requested</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>
@@ -97,6 +109,8 @@
     <reportType>Volunteer_Orientation_Training__c</reportType>
     <scope>organization</scope>
     <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Volunteer_Orientation_Training__c$CreatedDate</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

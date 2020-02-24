@@ -1,14 +1,14 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
 <![CDATA[<div style=""><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
 white"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Background_check__c.Volunteer_FirstName__c},<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
 white"><span style="font-size: 12pt; font-family: Lato, sans-serif;">We have reviewed the
 results of your criminal background check and are excited to welcome you to
 register for the required training for your selected volunteer role.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
 white"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Please log in to
-the&nbsp;<a href="https://make-a-wish.force.com/"><span style="color:blue">Make-A-Wish
-Volunteer Center</span></a>&nbsp;and click&nbsp;<b>"Continue Process"</b>&nbsp;to
+the&nbsp;<span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish
+Volunteer Center</a></span>&nbsp;and click&nbsp;<b>"Continue Process"</b>&nbsp;to
 register for the next available training.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
 white"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Thank you for your
 support!<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
