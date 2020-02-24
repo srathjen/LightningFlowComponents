@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>FA Account Numbers</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>FA Account Numbers</value>
+    </caseValues>
+    <fields>
+        <label><!-- Active Vol Account ID --></label>
+        <name>Chapter_Account_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Chapter Package --></label>
+        <name>Chapter_Package__c</name>
+    </fields>
+    <fields>
+        <label><!-- Chapter Paid --></label>
+        <name>Chapter_Paid__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pros Vol Account ID --></label>
+        <name>Volunteer_Account_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Volunteer Package --></label>
+        <name>Volunteer_Package__c</name>
+    </fields>
+    <fields>
+        <label><!-- Volunteer Paid --></label>
+        <name>Volunteer_Paid__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

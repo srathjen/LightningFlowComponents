@@ -9,8 +9,17 @@
         <value>Chapter Roles</value>
     </caseValues>
     <fields>
+        <help><!-- If checked, a Volunteer Role will be added to a Volunteer when he/she signs up for any other role. --></help>
+        <label><!-- Add to New Volunteers Automatically --></label>
+        <name>Add_to_New_Volunteers_Automatically__c</name>
+    </fields>
+    <fields>
         <label><!-- Background Check Required --></label>
         <name>Background_Check_Required__c</name>
+    </fields>
+    <fields>
+        <label><!-- COI Required --></label>
+        <name>COI_Required__c</name>
     </fields>
     <fields>
         <label><!-- Chapter Name --></label>
@@ -27,14 +36,11 @@
         <name>Role__c</name>
     </fields>
     <layouts>
-        <layout>Chapter Role Chapter Staff Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
-    <layouts>
         <layout>Chapter Role Layout</layout>
+        <sections>
+            <label><!-- Chapter Requirements for Role --></label>
+            <section>Chapter Requirements for Role</section>
+        </sections>
         <sections>
             <label><!-- Custom Links --></label>
             <section>Custom Links</section>

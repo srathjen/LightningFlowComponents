@@ -3,13 +3,13 @@ Description : When User clicks [Create New Wish] button on Parent Wish, It will 
 Wish granters from the current wish and also it will create a task for Volunteer Manager for  reviewing previous case.
 *****************************************************************************/
 
-global class CreateNewWish_AC 
+global class CreateNewWish_AC
 {
     webservice static String createCase(Id caseId)
     {
      
         Case currCase = [SELECT id,Subject,Description,Priority,AccountId,RecordTypeId,ChapterName__r.Volunteer_Manager__c,ContactId,ContactMobile,
-                         ContactPhone,Type,Birthdate__c,ChapterName__c
+                         ContactPhone,Type,ChapterName__c
                         FROM Case WHERE Id = :caseId];
                         
         Map<Id,Case> newCaseMap = new Map<Id,Case>();        
@@ -21,15 +21,16 @@ global class CreateNewWish_AC
         if(currCase.ChapterName__c!= Null && currCase.ChapterName__r.Volunteer_Manager__c != Null)
            newCase.OwnerId = currCase.ChapterName__r.Volunteer_Manager__c;
         insert newCase;
-        
-        Task newTask = new Task();
-        newTask.WhatId = newCase.id;
-        if(currCase.ChapterName__r.Volunteer_Manager__c != Null)
-           newTask.ownerId = currCase.ChapterName__r.Volunteer_Manager__c;
-        newTask.Subject = 'Review previous wish, confirm and reassign volunteers';
-        newTask.ActivityDate = Date.Today().addDays(1);
-        newTask.Priority = 'High';
-        insert newTask;
+
+/*WLP-467 remove automated task creation */
+//        Task newTask = new Task();
+//        newTask.WhatId = newCase.id;
+//        if(currCase.ChapterName__r.Volunteer_Manager__c != Null)
+//           newTask.ownerId = currCase.ChapterName__r.Volunteer_Manager__c;
+//        newTask.Subject = 'Review previous wish, confirm and reassign volunteers';
+//        newTask.ActivityDate = Date.Today().addDays(1);
+//        newTask.Priority = 'High';
+//        insert newTask;
         
         if(newCase.id != Null)
         {

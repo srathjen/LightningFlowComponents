@@ -94,11 +94,13 @@
     <filter>
         <criteriaItems>
             <column>Contact.npo02__LastMembershipAmount__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>greaterThan</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.npo02__MembershipEndDate__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>greaterThan</operator>
             <value>TODAY</value>
         </criteriaItems>
@@ -117,6 +119,8 @@
     <reportType>ContactList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

@@ -12,16 +12,19 @@
     <filter>
         <criteriaItems>
             <column>Volunteer_Opportunity__c$Migrated_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Opportunity__c$Volunteer_Role_Name__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Wish Granter</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Opportunity__c$Wish__c.Status</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Qualified,Ready to Assign</value>
         </criteriaItems>
@@ -40,6 +43,8 @@
     <reportType>Wish_Related_Volunteer_Opportunities__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Volunteer_Opportunity__c$Date_Time__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

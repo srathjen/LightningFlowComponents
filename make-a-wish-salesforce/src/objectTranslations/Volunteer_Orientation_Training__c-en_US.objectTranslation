@@ -8,6 +8,10 @@
         <plural>true</plural>
         <value>Volunteer Orientation &amp; Trainings</value>
     </caseValues>
+    <fieldSets>
+        <label><!-- VolunteerO&amp;T Feld set --></label>
+        <name>VolunteerO_T_Feld_set</name>
+    </fieldSets>
     <fields>
         <label><!-- Hidden Account Email --></label>
         <name>Account_Email__c</name>
@@ -21,6 +25,25 @@
         <name>Account_Phone__c</name>
     </fields>
     <fields>
+        <help><!-- Edit via the Volunteer&apos;s contact record --></help>
+        <label><!-- Active Volunteer --></label>
+        <name>Active_Volunteer__c</name>
+    </fields>
+    <fields>
+        <help><!-- Edited via the volunteer&apos;s contact record. --></help>
+        <label><!-- B/C Expiration Date --></label>
+        <name>B_C_Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Edited via the volunteer&apos;s contact record. --></help>
+        <label><!-- COI Expiration Date --></label>
+        <name>COI_Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Class Date --></label>
+        <name>Class_Date__c</name>
+    </fields>
+    <fields>
         <label><!-- Class Offering --></label>
         <name>Class_Offering__c</name>
         <relationshipLabel><!-- Volunteer Orientation &amp; Trainings --></relationshipLabel>
@@ -28,6 +51,22 @@
     <fields>
         <label><!-- Completed Date --></label>
         <name>Completed_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Completion Status --></label>
+        <name>Completion_Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Follow-up Requested</masterLabel>
+            <translation><!-- Follow-up Requested --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Approved</masterLabel>
+            <translation><!-- Not Approved --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- Date Cancelled --></label>
@@ -170,6 +209,10 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Volunteer Status --></label>
+        <name>Volunteer_Status__c</name>
+    </fields>
+    <fields>
         <label><!-- Volunteer --></label>
         <name>Volunteer__c</name>
         <relationshipLabel><!-- Volunteer Orientation &amp; Trainings --></relationshipLabel>
@@ -187,8 +230,28 @@
             <label><!-- Custom Links --></label>
             <section>Custom Links</section>
         </sections>
+        <sections>
+            <label><!-- Date Information --></label>
+            <section>Date Information</section>
+        </sections>
+        <sections>
+            <label><!-- Orientation &amp; Training Information --></label>
+            <section>Orientation &amp; Training Information</section>
+        </sections>
+        <sections>
+            <label><!-- Volunteer Status Information --></label>
+            <section>Volunteer Status Information</section>
+        </sections>
     </layouts>
+    <quickActions>
+        <label><!-- Update Status --></label>
+        <name>Update_Status</name>
+    </quickActions>
     <startsWith>Vowel</startsWith>
+    <validationRules>
+        <errorMessage><!-- Volunteer Attendance must be set to &apos;Completed&apos; to leverage the &apos;Completion Status&apos; field. --></errorMessage>
+        <name>Complete_to_Use_Completion_Status</name>
+    </validationRules>
     <validationRules>
         <errorMessage><!-- There is no available seats for this training --></errorMessage>
         <name>Restrict_no_available_seats</name>

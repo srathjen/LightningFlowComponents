@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>When a lead child in Inquiry turns 2.5, it will send an email to Lead Owner.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Lead: Email Notification for Lead Owner of Lead Age 2.5</name>
+    <style>none</style>
+    <subject>Lead Update - {!Lead.Name} has turned 2.5.</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

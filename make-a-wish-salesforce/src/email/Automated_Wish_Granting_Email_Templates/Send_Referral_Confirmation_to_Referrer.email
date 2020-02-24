@@ -1,0 +1,103 @@
+<table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
+<tr valign="top" height="400" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;"><span style="font-family: Lato, serif;" times="" new=""><br></span></p><p class="MsoNormal" style="margin-bottom: 0.0001pt;line-height: normal;font-family: lato, serif;"><span style="font-family: Lato, serif;" times="" new="">We have received your information and forwarded it to your local chapter to begin the wish-referral process. If you have questions, please contact your local Make-A-Wish® chapter. <a href="https://wish.org/local-chapters">Click here for a local chapter directory</a>.&nbsp;</span></p><table class="MsoNormalTable" border="0" cellpadding="0" width="720" style="font-family: lato, serif;width: 7.5in;">
+ <tbody><tr>
+  <td nowrap="" colspan="2" style="padding:.75pt .75pt .75pt .75pt">
+  <p class="MsoNormal" style="
+  margin-bottom:0in;
+  margin-bottom:.0001pt;
+  line-height:
+  normal;
+  "><span style="
+  font-family: lato, serif;
+  mso-fareast-font-family:
+  &quot;Times New Roman&quot;;
+  ">&nbsp;<o:p></o:p></span></p>
+  <table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;mso-yfti-tbllook:1184;mso-padding-alt:0in 0in 0in 0in">
+   <tbody><tr style="mso-yfti-irow:0;mso-yfti-firstrow:yes;height:13.35pt">
+    <td width="177" valign="top" style="
+    width:132.45pt;
+    border:solid black 1.0pt;
+    padding:0in 5.4pt 0in 5.4pt;
+    height:13.35pt;
+    font-family: lato, serif;
+    ">Date submitted:
+    </td><td width="492" valign="top" style="
+    width:368.75pt;
+    border:solid windowtext 1.0pt;
+    border-left:none;
+    padding:0in 5.4pt 0in 5.4pt;
+    height:13.35pt;
+    font-family: lato, serif;
+    ">{!Lead.CreatedDate}
+    </td>
+   </tr>
+   <tr style="mso-yfti-irow:1;height:14.1pt">
+    <td width="177" valign="top" style="
+    width:132.45pt;
+    border:solid windowtext 1.0pt;
+    border-top:none;
+    padding:0in 5.4pt 0in 5.4pt;
+    height:14.1pt;
+    font-family: lato, serif;
+    ">
+    Name of child:
+    </td>
+    <td width="492" valign="top" style="
+    width:368.75pt;
+    border-top:none;
+    border-left:
+    none;
+    border-bottom:solid windowtext 1.0pt;
+    border-right:solid windowtext 1.0pt;
+    padding:0in 5.4pt 0in 5.4pt;
+    height:14.1pt;
+    font-family: lato, serif;
+    ">{!Lead.FirstName} {!Lead.Hidden_Wish_Child_Last_Initial__c}.</td>
+   </tr>
+   <tr style="mso-yfti-irow:2;height:13.35pt">
+    <td width="177" valign="top" style="
+    width:132.45pt;
+    border:solid windowtext 1.0pt;
+    border-top:none;
+    padding:0in 5.4pt 0in 5.4pt;
+    height:13.35pt;
+    font-family: lato, serif;
+    ">
+    Referrer's name:
+    </td>
+    <td width="492" valign="top" style="
+    width:368.75pt;
+    border-top:none;
+    border-left:
+    none;
+    border-bottom:solid windowtext 1.0pt;
+    border-right:solid windowtext 1.0pt;
+    padding:0in 5.4pt 0in 5.4pt;
+    height: 14.1pt;
+    font-family: lato, serif;
+    ">{!Lead.Referrer_FirstName__c} {!Lead.Referrer_Last_Name__c}</td>
+   </tr>
+   <tr style="mso-yfti-irow:3;height:14.1pt">
+    <td width="177" valign="top" style="
+    width:132.45pt;
+    border:solid windowtext 1.0pt;
+    border-top:none;
+    padding:0in 5.4pt 0in 5.4pt;
+    height:14.1pt;
+    font-family: lato, serif;
+    ">Relationship to child:</td><td width="492" valign="top" style="
+    width:368.75pt;
+    border-top:none;
+    border-left:
+    none;
+    border-bottom:solid windowtext 1.0pt;
+    border-right:solid windowtext 1.0pt;
+    padding:0in 5.4pt 0in 5.4pt;
+    height:14.1pt;
+    font-family: lato, serif;
+    ">{!Lead.Relationship_to_child__c}</td></tr>
+  </tbody></table></td></tr></tbody></table><span times="" new="" style="font-family: Lato, serif;"><br></span><div><span style="font-size: 12pt; font-family: Lato, serif;">Learn more about Make-A-Wish® at&nbsp;<a href="http://www.wish.org/">www.wish.org</a>.</span><p style="font-family: arial; font-size: 12pt;"></p></div>]]></td>
+</tr>
+</table>

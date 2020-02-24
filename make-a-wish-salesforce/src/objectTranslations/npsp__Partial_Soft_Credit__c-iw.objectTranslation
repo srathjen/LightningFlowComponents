@@ -20,6 +20,42 @@
         <plural>true</plural>
         <value><!-- הPartial Soft Credit --></value>
     </caseValues>
+    <fields>
+        <help>הסכום שעבורו יוענק קרדיט.</help>
+        <label><!-- Amount --></label>
+        <name>npsp__Amount__c</name>
+    </fields>
+    <fields>
+        <help>השם המלא של איש הקשר.</help>
+        <label><!-- Contact Name --></label>
+        <name>npsp__Contact_Name__c</name>
+    </fields>
+    <fields>
+        <help>OpportunityContactRole שעליו יחול קרדיט זה.</help>
+        <label><!-- Contact Role ID --></label>
+        <name>npsp__Contact_Role_ID__c</name>
+    </fields>
+    <fields>
+        <help>אישר הקשר שיקבל את הקרדיט.</help>
+        <label><!-- Contact --></label>
+        <name>npsp__Contact__c</name>
+        <relationshipLabel><!-- Partial Soft Credits --></relationshipLabel>
+    </fields>
+    <fields>
+        <help>ההזדמנות שעליה יחול קרדיט זה.</help>
+        <label><!-- Opportunity --></label>
+        <name>npsp__Opportunity__c</name>
+        <relationshipLabel><!-- Partial Soft Credits --></relationshipLabel>
+    </fields>
+    <fields>
+        <help>התפקיד של קרדיט זה.</help>
+        <label><!-- Role Name --></label>
+        <name>npsp__Role_Name__c</name>
+    </fields>
     <gender><!-- Masculine --></gender>
     <nameFieldLabel><!-- Partial Soft Credit Name --></nameFieldLabel>
+    <webLinks>
+        <label><!-- Manage_Soft_Credits --></label>
+        <name>npsp__Manage_Soft_Credits</name>
+    </webLinks>
 </CustomObjectTranslation>

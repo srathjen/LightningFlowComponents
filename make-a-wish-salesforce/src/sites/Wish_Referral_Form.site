@@ -5,19 +5,25 @@
     <allowStandardAnswersPages>false</allowStandardAnswersPages>
     <allowStandardIdeasPages>false</allowStandardIdeasPages>
     <allowStandardLookups>false</allowStandardLookups>
+    <allowStandardPortalPages>true</allowStandardPortalPages>
     <allowStandardSearch>false</allowStandardSearch>
     <authorizationRequiredPage>ContactChapter_VF</authorizationRequiredPage>
     <bandwidthExceededPage>ContactChapter_VF</bandwidthExceededPage>
+    <browserXssProtection>false</browserXssProtection>
     <clickjackProtectionLevel>AllowAllFraming</clickjackProtectionLevel>
+    <contentSniffingProtection>false</contentSniffingProtection>
+    <cspUpgradeInsecureRequests>false</cspUpgradeInsecureRequests>
+    <enableAuraRequests>true</enableAuraRequests>
     <fileNotFoundPage>ContactChapter_VF</fileNotFoundPage>
     <genericErrorPage>ContactChapter_VF</genericErrorPage>
     <inMaintenancePage>ContactChapter_VF</inMaintenancePage>
     <inactiveIndexPage>InMaintenance</inactiveIndexPage>
     <indexPage>WishReferralForm_VF</indexPage>
     <masterLabel>Wish Referral Form</masterLabel>
+    <referrerPolicyOriginWhenCrossOrigin>false</referrerPolicyOriginWhenCrossOrigin>
     <requireHttps>true</requireHttps>
     <requireInsecurePortalAccess>false</requireInsecurePortalAccess>
-    <siteAdmin>sathiskumar.s_maw@mstsolutions.com</siteAdmin>
+    <siteAdmin>salesforce@wish.org</siteAdmin>
     <siteTemplate>SiteTemplate</siteTemplate>
     <siteType>Visualforce</siteType>
     <subdomain>wish</subdomain>

@@ -42,6 +42,7 @@
     <filter>
         <criteriaItems>
             <column>CONTACT_CREATED</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Integration User</value>
         </criteriaItems>
@@ -60,6 +61,8 @@
     <reportType>ContactList</reportType>
     <scope>organization</scope>
     <showDetails>false</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

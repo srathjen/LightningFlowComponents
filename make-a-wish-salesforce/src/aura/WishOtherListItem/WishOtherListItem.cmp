@@ -1,0 +1,959 @@
+<!--
+- Created by gmayer on 6/28/2019.
+-->
+<aura:component controller="WishAffiliation_AC"
+                implements="force:appHostable,force:lightningQuickAction"
+                access="global"
+                description="WishOtherListItem">
+
+    <!-- Handlers -->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:handler name="lookupSObjectSelect" event="c:LookupSObjectSelectEvent"
+                  action="{!c.handleLookupSelectedEvent}"/>
+    <aura:handler name="lookupSObjectClear" event="c:LookupSObjectClearEvent"
+                  action="{!c.handleLookupClearedEvent}"/>
+    <aura:handler name="customToastClose" event="c:CustomToastCloseEvent"
+                  action="{!c.handleCustomToastCloseEvent}"/>
+    <lightning:workspaceAPI aura:id="workspace"/>
+
+    <!-- Methods-->
+    <aura:method name="onChangeValidate" action="{!c.onChangeValidate}"/>
+    <aura:method name="cancelAction" action="{!c.cancelAction}"/>
+
+    <!-- Attributes -->
+    <aura:attribute name="wishOther" type="Object" access="public"/>
+    <aura:attribute name="wishOtherBackup" type="Object" access="private"/>
+    <aura:attribute name="states" type="Object[]" default="[]"/>
+    <aura:attribute name="countries" type="Object[]" default="[]"/>
+    <aura:attribute name="preferredPhoneOptions" type="Object[]" default="[]"/>
+    <aura:attribute name="residingWithChildOptions" type="Object[]" default="[]"/>
+    <aura:attribute name="relationshipTypes" type="Object[]" default="[]"/>
+    <aura:attribute name="wishAffiliationTypes" type="Object[]" default="[]"/>
+    <aura:attribute name="wishAffiliationLabels" type="Map" default="{}"/>
+    <aura:attribute name="contactLabels" type="Map" default="{}"/>
+    <aura:attribute name="relationshipLabels" type="Map" default="{}"/>
+    <aura:attribute name="collapsed" type="Boolean" default="false" access="private"/>
+    <aura:attribute name="editMode" type="Boolean" default="false" access="private"/>
+    <aura:attribute name="requestParticipant" type="Boolean"/>
+    <aura:attribute name="requestParticipantPrevious" type="Boolean" default="{!v.wishOther.Wish_Affiliation_Type__c == 'Wish Child'
+                                                                            || v.wishOther.Wish_Affiliation_Type__c == 'Approved Participant'
+                                                                            || v.wishOther.Wish_Affiliation_Type__c == 'Requested Participant'}"/>
+    <aura:attribute name="isPhone" type="Boolean" default="{! $Browser.isPhone}" access="private"/>
+    <aura:attribute name="showSpinner" type="Boolean" default="false"/>
+
+    <!-- Validation Attributes for fields -->
+    <aura:attribute name="isValidFirstName" type="Boolean" default="true" access="private"/>
+    <aura:attribute name="isValidLastName" type="Boolean" default="true" access="private"/>
+    <aura:attribute name="isValidCountry" type="Boolean" default="true" access="private"/>
+    <aura:attribute name="isValidRelationshipType" type="Boolean" default="true" access="private"/>
+    <aura:attribute name="isValidResidingWithWishChild" type="Boolean" default="true" access="private"/>
+    <aura:attribute name="isUserProfileAllowedToUpdateWishAffiliation" type="Boolean"/>
+    <aura:attribute name="isAffiliationTypeWishChild" type="Boolean" default="false" access="private"/>
+    <aura:attribute name="isValidWishOtherListItemRelatedContactLookup" type="Boolean" default="true"/>
+    <aura:attribute name="isValidWishOtherListItemHealthTreatmentFacilityAccountLookup" type="Boolean" default="true"/>
+    <aura:attribute name="isWishAffiliationConvertingToMedicalProfessional" type="Boolean" default="false"/>
+    <aura:attribute name="showToast" type="Boolean" default="false"/>
+    <aura:attribute name="toastMessage" type="String" default=""/>
+    <aura:attribute name="toastMessageType" type="String" default=""/>
+
+    <!-- Spinner -->
+    <aura:renderIf isTrue="{!v.showSpinner}">
+        <lightning:spinner size="large" variant="brand" class="spinner"/>
+    </aura:renderIf>
+
+    <!-- Row columns -->
+    <tr class="slds-hint-parent slds-table--bordered item">
+        <td role="gridcell">
+            <aura:renderIf isTrue="{! !v.isPhone}">
+                <div class="slds-m-top--xx-small slds-m-bottom--xx-small">
+                    <button class="{! (!v.collapsed ? 'slds-show' : 'slds-hide') + ' slds-button slds-button_icon slds-m-left_none' }" onclick="{!c.showItemDetails}">
+                        <lightning:icon iconName="utility:chevronright" size="x-small"/>
+                    </button>
+                    <button class="{! (v.collapsed ? 'slds-show' : 'slds-hide') + ' slds-button slds-button_icon slds-m-left_none' }" onclick="{!c.showItemDetails}">
+                        <lightning:icon iconName="utility:chevrondown" size="x-small"/>
+                    </button>
+                </div>
+            </aura:renderIf>
+        </td>
+        <td role="gridcell" data-label="{!v.wishAffiliationLabels.wish_affiliation_type__c}">
+            <div class="">{!v.wishOther.Wish_Affiliation_Type__c}</div>
+        </td>
+        <td role="gridcell" data-label="{!v.contactLabels.name}">
+            <div id="tableHeader" class="">{!v.wishOther.Contact__r.Name}</div>
+        </td>
+        <td role="gridcell" data-label="{!v.contactLabels.current_age__c}">
+            <div class="">{!v.wishOther.Contact__r.Current_Age__c}</div>
+        </td>
+        <td role="gridcell" data-label="{!v.relationshipLabels.npe4__type__c}">
+            <div class="">{!v.wishOther.Relationship__r.npe4__Type__c}</div>
+        </td>
+        <td role="gridcell" data-label="{!v.relationshipLabels.parent_legal_guardian__c}">
+            <div class="text-align-left" >
+                <lightning:input type="checkbox"
+                                 name="relationshipParentGuardian"
+                                 checked="{!v.wishOther.Relationship__r.Parent_Legal_Guardian__c}"
+                                 disabled="true"/>
+            </div>
+        </td>
+        <aura:renderIf isTrue="{!v.isUserProfileAllowedToUpdateWishAffiliation}">
+            <td role="gridcell" data-label="{!v.wishAffiliationLabels.non_comped__c}">
+                <div class="text-align-left" >
+                    <lightning:input type="checkbox"
+                                     name="wishAffiliationNonComp"
+                                     checked="{!v.wishOther.Non_Comped__c}"
+                                     disabled="true"/>
+                </div>
+            </td>
+            <td role="gridcell" data-label="{!v.contactLabels.npsp__do_not_contact__c}">
+                <div class="text-align-left" >
+                    <lightning:input type="checkbox"
+                                     name="contactDoNotContact"
+                                     checked="{!v.wishOther.Contact__r.npsp__Do_Not_Contact__c}"
+                                     disabled="true"/>
+                </div>
+            </td>
+        </aura:renderIf>
+        <aura:renderIf isTrue="{! v.isPhone}">
+            <div class="slds-m-top--xx-small slds-m-bottom--xx-small">
+                <button class="{! (!v.collapsed ? 'slds-show' : 'slds-hide') + ' slds-button slds-button_icon slds-m-left_none button-center' }" onclick="{!c.showItemDetails}">
+                    <lightning:icon iconName="utility:chevrondown" size="x-small"/>
+                </button>
+                <button class="{! (v.collapsed ? 'slds-show' : 'slds-hide') + ' slds-button slds-button_icon slds-m-left_none button-center' }" onclick="{!c.showItemDetails}">
+                    <lightning:icon iconName="utility:chevronup" size="x-small"/>
+                </button>
+            </div>
+        </aura:renderIf>
+    </tr>
+    <!-- View only section -->
+    <aura:if isTrue="{!and(v.collapsed, !v.editMode)}">
+        <tr class="item">
+            <td role="gridcell" colspan="8">
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <!-- Wish Affiliation Info -->
+                    <aura:renderIf isTrue="{!v.isUserProfileAllowedToUpdateWishAffiliation}">
+                        <div class="slds-col slds-size_1-of-1 slds-text-heading_small slds-p-top_medium">
+                            <h3 class="slds-section__title slds-theme--shade primaryPaletteBorder test-id__section-header-container">
+                        <span class="test-id__section-header-title section-header-title slds-p-horizontal--small slds-truncate">
+                            {!$Label.c.Wish_Affiliation}: <a
+                                    onclick="{!c.openWishAffiliationTab}">{!v.wishOther.Name}</a>
+                        </span>
+                            </h3>
+                        </div>
+                        <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                            <div class="slds-hint-parent slds-form-element">
+                                <label class="slds-form-element__label"
+                                       for="text-input-id-1">{!v.wishAffiliationLabels.wish_affiliation_type__c}</label>
+                                <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                    <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                          iconName="utility:edit"
+                                                          onclick="{!c.onClickEdit}"/>
+                                    <aura:if isTrue="{!empty(v.wishOther.Wish_Affiliation_Type__c)}">
+                                        <br/>
+                                        <aura:set attribute="else">
+                                            <span id="text-input-id-1">{!v.wishOther.Wish_Affiliation_Type__c}</span>
+                                        </aura:set>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                    </aura:renderIf>
+                    <div class="slds-col slds-medium-size_1-of-1 slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="slds-hint-parent slds-form-element">
+                            <label class="slds-form-element__label"
+                                   for="text-input-id-1">{!v.wishAffiliationLabels.residing_with_wish_child__c}</label>
+                            <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                      iconName="utility:edit"
+                                                      onclick="{!c.onClickEdit}"/>
+                                <aura:if
+                                        isTrue="{!empty(v.wishOther.Residing_with_Wish_child__c)}">
+                                    <br/>
+                                    <aura:set attribute="else">
+                                        <span id="text-input-id-1">{!v.wishOther.Residing_with_Wish_child__c}</span>
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </div>
+                    <aura:renderIf isTrue="{!v.isUserProfileAllowedToUpdateWishAffiliation}">
+                        <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                            <div class="slds-hint-parent slds-form-element">
+                                <label class="slds-form-element__label" for="text-input-id-1"></label>
+                                <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                    <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                          iconName="utility:edit"
+                                                          onclick="{!c.onClickEdit}"/>
+                                    <span id="text-input-id-1"><lightning:input type="checkbox"
+                                                                                label="{!v.wishAffiliationLabels.non_comped__c}"
+                                                                                disabled="true"
+                                                                                checked="{!v.wishOther.Non_Comped__c}"/></span>
+                                </div>
+                            </div>
+                        </div>
+                        <aura:set attribute="else">
+                            <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                                <div class="slds-hint-parent slds-form-element">
+                                    <label class="slds-form-element__label" for="text-input-id-1"></label>
+                                    <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                        <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                              iconName="utility:edit"
+                                                              onclick="{!c.onClickEdit}"/>
+                                        <span id="text-input-id-1"><lightning:input type="checkbox"
+                                                                                    label="{!$Label.c.Wish_Affiliation_Label_Request_As_Participant}"
+                                                                                    disabled="true"
+                                                                                    checked="{!v.requestParticipant}"/></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </aura:set>
+                        <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                            <div class="slds-hint-parent slds-form-element">
+                                <label class="slds-form-element__label" for="text-input-id-1"></label>
+                                <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                    <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                          iconName="utility:edit"
+                                                          onclick="{!c.onClickEdit}"/>
+                                    <span id="text-input-id-1"><lightning:input type="checkbox"
+                                                                                label="{!v.wishAffiliationLabels.medical_needs__c}"
+                                                                                disabled="true"
+                                                                                checked="{!v.wishOther.Medical_Needs__c}"/></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                            <div class="slds-hint-parent slds-form-element">
+                                <label class="slds-form-element__label" for="text-input-id-1"></label>
+                                <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                    <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                          iconName="utility:edit"
+                                                          onclick="{!c.onClickEdit}"/>
+                                    <span id="text-input-id-1"><lightning:input type="checkbox"
+                                                                                label="{!v.wishAffiliationLabels.survey_recipient__c}"
+                                                                                disabled="true"
+                                                                                checked="{!v.wishOther.Survey_Recipient__c}"/></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                            <div class="slds-hint-parent slds-form-element">
+                                <label class="slds-form-element__label"
+                                       for="text-input-id-1">{!v.wishAffiliationLabels.details__c}</label>
+                                <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                    <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                          iconName="utility:edit"
+                                                          onclick="{!c.onClickEdit}"/>
+                                    <aura:if isTrue="{!empty(v.wishOther.Details__c)}">
+                                        <br/>
+                                        <aura:set attribute="else">
+                                            <span id="text-input-id-1">{!v.wishOther.Details__c}</span>
+                                        </aura:set>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                    </aura:renderIf>
+                    <!-- Relationship Info -->
+                    <div class="slds-col slds-size_1-of-1 slds-text-heading_small slds-p-top_medium">
+                        <h3 class="slds-section__title slds-theme--shade primaryPaletteBorder test-id__section-header-container">
+                        <span class="test-id__section-header-title section-header-title slds-p-horizontal--small slds-truncate">
+                            {!$Label.c.Wish_Affiliation_Relationship}
+                            <aura:renderIf isTrue="{! !v.isUserProfileAllowedToUpdateWishAffiliation}">
+                             to {!v.wishOther.Relationship__r.npe4__Contact__r.Name}
+                            </aura:renderIf>
+                        </span>
+                        </h3>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="slds-hint-parent slds-form-element">
+                            <label class="slds-form-element__label"
+                                   for="text-input-id-1">{!v.relationshipLabels.npe4__type__c}</label>
+                            <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                      iconName="utility:edit"
+                                                      onclick="{!c.onClickEdit}"/>
+                                <aura:if isTrue="{!empty(v.wishOther.Relationship__r.npe4__Type__c)}">
+                                    <br/>
+                                    <aura:set attribute="else">
+                                        <span id="text-input-id-1">{!v.wishOther.Relationship__r.npe4__Type__c}</span>
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </div>
+                    <aura:renderIf isTrue="{!v.isUserProfileAllowedToUpdateWishAffiliation}">
+                        <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                            <div class="slds-hint-parent slds-form-element">
+                                <label class="slds-form-element__label"
+                                       for="text-input-id-1">{!v.relationshipLabels.npe4__contact__c}</label>
+                                <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                    <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                          iconName="utility:edit"
+                                                          onclick="{!c.onClickEdit}"/>
+                                    <aura:if
+                                            isTrue="{!empty(v.wishOther.Relationship__r.npe4__Contact__r.Name)}">
+                                        <br/>
+                                        <aura:set attribute="else">
+                                        <span id="text-input-id-1">
+                                            {!v.wishOther.Relationship__r.npe4__Contact__r.Name}
+                                        </span>
+                                        </aura:set>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                    </aura:renderIf>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="slds-hint-parent slds-form-element">
+                            <label class="slds-form-element__label" for="text-input-id-1"></label>
+                            <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                      iconName="utility:edit"
+                                                      onclick="{!c.onClickEdit}"/>
+                                <span id="text-input-id-1"><lightning:input type="checkbox"
+                                                                            label="{!v.relationshipLabels.parent_legal_guardian__c}"
+                                                                            disabled="true"
+                                                                            checked="{!v.wishOther.Relationship__r.Parent_Legal_Guardian__c}"/></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Contact Info -->
+                    <div class="slds-col slds-size_1-of-1 slds-text-heading_small slds-p-top_medium">
+                        <h3 class="slds-section__title slds-theme--shade primaryPaletteBorder test-id__section-header-container">
+                        <span class="test-id__section-header-title section-header-title slds-p-horizontal--small slds-truncate">
+                            {!$Label.c.Wish_Affiliation_Contact_Information}
+                        </span>
+                        </h3>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="slds-hint-parent slds-form-element">
+                            <label class="slds-form-element__label"
+                                   for="text-input-id-1">{!v.contactLabels.firstname}</label>
+                            <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                      iconName="utility:edit"
+                                                      onclick="{!c.onClickEdit}"/>
+                                <aura:if isTrue="{!empty(v.wishOther.Contact__r.FirstName)}">
+                                    <br/>
+                                    <aura:set attribute="else">
+                                        <span id="text-input-id-1">{!v.wishOther.Contact__r.FirstName}</span>
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="slds-hint-parent slds-form-element">
+                            <label class="slds-form-element__label"
+                                   for="text-input-id-1">{!v.contactLabels.lastname}</label>
+                            <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                      iconName="utility:edit"
+                                                      onclick="{!c.onClickEdit}"/>
+                                <aura:if isTrue="{!empty(v.wishOther.Contact__r.LastName)}">
+                                    <br/>
+                                    <aura:set attribute="else">
+                                        <span id="text-input-id-1">{!v.wishOther.Contact__r.LastName}</span>
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="slds-hint-parent slds-form-element">
+                            <label class="slds-form-element__label"
+                                   for="text-input-id-1">{!v.contactLabels.birthdate}</label>
+                            <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                      iconName="utility:edit"
+                                                      onclick="{!c.onClickEdit}"/>
+                                <aura:if isTrue="{!empty(v.wishOther.Contact__r.Birthdate)}">
+                                    <br/>
+                                    <aura:set attribute="else">
+                                        <ui:outputDate value="{!v.wishOther.Contact__r.Birthdate}" format="M/dd/yyyy"/>
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="slds-hint-parent slds-form-element">
+                            <label class="slds-form-element__label"
+                                   for="text-input-id-1">{!v.contactLabels.npe01__homeemail__c}</label>
+                            <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                      iconName="utility:edit"
+                                                      onclick="{!c.onClickEdit}"/>
+                                <aura:if isTrue="{!empty(v.wishOther.Contact__r.npe01__HomeEmail__c)}">
+                                    <br/>
+                                    <aura:set attribute="else">
+                                        <span id="text-input-id-1">{!v.wishOther.Contact__r.npe01__HomeEmail__c}</span>
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="slds-hint-parent slds-form-element">
+                            <label class="slds-form-element__label"
+                                   for="text-input-id-1">{!$Label.c.Wish_Affiliation_Phone}</label>
+                            <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                      iconName="utility:edit"
+                                                      onclick="{!c.onClickEdit}"/>
+                                <aura:if isTrue="{!empty(v.wishOther.Contact__r.Phone)}">
+                                    <br/>
+                                    <aura:set attribute="else">
+                                        <div id="text-input-id-1">
+                                            <lightning:formattedPhone
+                                                    value="{!v.wishOther.Contact__r.Phone}"/>
+                                        </div>
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </div>
+                    <aura:renderIf isTrue="{!v.isUserProfileAllowedToUpdateWishAffiliation}">
+                        <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                            <div class="slds-hint-parent slds-form-element">
+                                <label class="slds-form-element__label" for="text-input-id-1"></label>
+                                <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                    <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                          iconName="utility:edit"
+                                                          onclick="{!c.onClickEdit}"/>
+                                    <span id="text-input-id-1"><lightning:input type="checkbox"
+                                                                                label="{!v.contactLabels.npsp__do_not_contact__c}"
+                                                                                disabled="true"
+                                                                                checked="{!v.wishOther.Contact__r.npsp__Do_Not_Contact__c}"/></span>
+                                </div>
+                            </div>
+                        </div>
+                    </aura:renderIf>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="slds-hint-parent slds-form-element">
+                            <label class="slds-form-element__label"
+                                   for="text-input-id-1">{!v.contactLabels.npe01__preferredphone__c}</label>
+                            <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                      iconName="utility:edit"
+                                                      onclick="{!c.onClickEdit}"/>
+                                <aura:if
+                                        isTrue="{!empty(v.wishOther.Contact__r.npe01__PreferredPhone__c)}">
+                                    <br/>
+                                    <aura:set attribute="else">
+                                        <span id="text-input-id-1">{!v.wishOther.Contact__r.npe01__PreferredPhone__c}</span>
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </div>
+                    <aura:renderIf isTrue="{!v.isUserProfileAllowedToUpdateWishAffiliation}">
+                        <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left ">
+                            <div class="slds-hint-parent slds-form-element ">
+                                <label class="slds-form-element__label"
+                                       for="text-input-id-1">{!v.contactLabels.do_not_contact_notes__c}</label>
+                                <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right ">
+                                    <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                          iconName="utility:edit"
+                                                          onclick="{!c.onClickEdit}"/>
+                                    <aura:if
+                                            isTrue="{!empty(v.wishOther.Contact__r.Do_Not_Contact_Notes__c)}">
+                                        <br/>
+                                        <aura:set attribute="else">
+                                            <div id="text-input-id-1">{!v.wishOther.Contact__r.Do_Not_Contact_Notes__c}</div>
+                                        </aura:set>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                            <div class="slds-hint-parent slds-form-element">
+                                <label class="slds-form-element__label" for="text-input-id-1"></label>
+                                <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                    <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                          iconName="utility:edit"
+                                                          onclick="{!c.onClickEdit}"/>
+                                    <span id="text-input-id-1"><lightning:input type="checkbox"
+                                                                                label="{!v.contactLabels.npsp__deceased__c}"
+                                                                                disabled="true"
+                                                                                checked="{!v.wishOther.Contact__r.npsp__Deceased__c}"/></span>
+                                </div>
+                            </div>
+                        </div>
+                    </aura:renderIf>
+                    <!-- Contact Address -->
+                    <div class="slds-col slds-size_1-of-1 slds-text-heading_small slds-p-top_medium">
+                        <h3 class="slds-section__title slds-theme--shade primaryPaletteBorder test-id__section-header-container">
+                        <span class="test-id__section-header-title section-header-title slds-p-horizontal--small slds-truncate">
+                            {!$Label.c.Wish_Affiliation_Contact_Address}
+                        </span>
+                        </h3>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="slds-hint-parent slds-form-element">
+                            <label class="slds-form-element__label"
+                                   for="text-input-id-1">{!v.contactLabels.mailingstreet}</label>
+                            <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                      iconName="utility:edit"
+                                                      onclick="{!c.onClickEdit}"/>
+                                <aura:if isTrue="{!empty(v.wishOther.Contact__r.MailingStreet)}">
+                                    <br/>
+                                    <aura:set attribute="else">
+                                        <span id="text-input-id-1">{!v.wishOther.Contact__r.MailingStreet}</span>
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="slds-hint-parent slds-form-element">
+                            <label class="slds-form-element__label"
+                                   for="text-input-id-1">{!v.contactLabels.mailingcity}</label>
+                            <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                      iconName="utility:edit"
+                                                      onclick="{!c.onClickEdit}"/>
+                                <aura:if isTrue="{!empty(v.wishOther.Contact__r.MailingCity)}">
+                                    <br/>
+                                    <aura:set attribute="else">
+                                        <span id="text-input-id-1">{!v.wishOther.Contact__r.MailingCity}</span>
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="slds-hint-parent slds-form-element">
+                            <label class="slds-form-element__label"
+                                   for="text-input-id-1">{!v.contactLabels.mailingstate}</label>
+                            <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                      iconName="utility:edit"
+                                                      onclick="{!c.onClickEdit}"/>
+                                <aura:if isTrue="{!empty(v.wishOther.Contact__r.MailingState)}">
+                                    <br/>
+                                    <aura:set attribute="else">
+                                        <span id="text-input-id-1">{!v.wishOther.Contact__r.MailingState}</span>
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="slds-hint-parent slds-form-element">
+                            <label class="slds-form-element__label"
+                                   for="text-input-id-1">{!v.contactLabels.mailingpostalcode}</label>
+                            <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                      iconName="utility:edit"
+                                                      onclick="{!c.onClickEdit}"/>
+                                <aura:if isTrue="{!empty(v.wishOther.Contact__r.MailingPostalCode)}">
+                                    <br/>
+                                    <aura:set attribute="else">
+                                        <span id="text-input-id-1">{!v.wishOther.Contact__r.MailingPostalCode}</span>
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="slds-hint-parent slds-form-element">
+                            <label class="slds-form-element__label"
+                                   for="text-input-id-1">{!v.contactLabels.mailingcountry}</label>
+                            <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                      iconName="utility:edit"
+                                                      onclick="{!c.onClickEdit}"/>
+                                <aura:if isTrue="{!empty(v.wishOther.Contact__r.MailingCountry)}">
+                                    <br/>
+                                    <aura:set attribute="else">
+                                        <span id="text-input-id-1">{!v.wishOther.Contact__r.MailingCountry}</span>
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </aura:if>
+    <!-- Edit section -->
+    <aura:if isTrue="{!and(v.collapsed, v.editMode)}">
+        <tr>
+            <td role="gridcell" colspan="8">
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <!-- Wish Affiliation Info -->
+                    <aura:renderIf isTrue="{!v.isUserProfileAllowedToUpdateWishAffiliation}">
+                        <div class="slds-col slds-size_1-of-1 slds-text-heading_small slds-p-top_medium">
+                            <h3 class="slds-section__title slds-theme--shade primaryPaletteBorder test-id__section-header-container">
+                        <span class="test-id__section-header-title section-header-title slds-p-horizontal--small slds-truncate">
+                            {!$Label.c.Wish_Affiliation}: <a
+                                    onclick="{!c.openWishAffiliationTab}">{!v.wishOther.Name}</a>
+                        </span>
+                            </h3>
+                        </div>
+                        <aura:if isTrue="{!v.isAffiliationTypeWishChild}">
+                            <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                                <lightning:select label="{!v.wishAffiliationLabels.wish_affiliation_type__c}"
+                                                  name="wishAffiliationType"
+                                                  disabled="{!v.isAffiliationTypeWishChild}">
+                                    <option value="Wish Child">
+                                        {!v.wishOther.Wish_Affiliation_Type__c}
+                                    </option>
+                                </lightning:select>
+                            </div>
+                            <aura:set attribute="else">
+                                <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                                    <lightning:select label="{!v.wishAffiliationLabels.wish_affiliation_type__c}"
+                                                      name="wishAffiliationType"
+                                                      value="{!v.wishOther.Wish_Affiliation_Type__c}"
+                                                      onchange="{!c.onChangeValidate}">
+                                        <aura:iteration items="{!v.wishAffiliationTypes}"
+                                                        var="wishAffiliationType">
+                                            <option value="{!wishAffiliationType}">
+                                                {!wishAffiliationType}
+                                            </option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                            </aura:set>
+                        </aura:if>
+                    </aura:renderIf>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="{! !v.isValidResidingWithWishChild ? 'slds-has-error' : ''}">
+                            <lightning:select aura:id="residingWithWishChild"
+                                              label="{!v.wishAffiliationLabels.residing_with_wish_child__c}"
+                                              name="residingWithWishChild"
+                                              value="{!v.wishOther.Residing_with_Wish_child__c}"
+                                              onchange="{!c.onChangeValidate}">
+                                <option value=""></option>
+                                <aura:iteration items="{!v.residingWithChildOptions}"
+                                                var="residingWithChild">
+                                    <option value="{!residingWithChild}">
+                                        {!residingWithChild}
+                                    </option>
+                                </aura:iteration>
+                            </lightning:select>
+                            <aura:if isTrue="{! !v.isValidResidingWithWishChild}">
+                                <div class="slds-form-element__help" id="error-01">This field is required</div>
+                            </aura:if>
+                        </div>
+                    </div>
+                    <aura:renderIf isTrue="{!v.isUserProfileAllowedToUpdateWishAffiliation}">
+                        <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                            <lightning:input type="checkbox"
+                                             label="{!v.wishAffiliationLabels.non_comped__c}"
+                                             name="wishAffiliationNonComp"
+                                             checked="{!v.wishOther.Non_Comped__c}"
+                                             class="slds-p-top_small"/>
+                        </div>
+                        <aura:set attribute="else">
+                            <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                                <lightning:input type="checkbox"
+                                                 class="slds-p-top_small"
+                                                 label="{!$Label.c.Wish_Affiliation_Label_Request_As_Participant}"
+                                                 disabled="{!v.wishOther.Wish_Affiliation_Type__c == 'Wish Child'}"
+                                                 checked="{!v.requestParticipant}"/>
+                            </div>
+                        </aura:set>
+                        <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                            <lightning:input type="checkbox"
+                                             label="{!v.wishAffiliationLabels.medical_needs__c}"
+                                             name="wishAffiliationMedicalNeeds"
+                                             checked="{!v.wishOther.Medical_Needs__c}"
+                                             class="slds-p-top_small"/>
+                        </div>
+                        <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                            <lightning:input type="checkbox"
+                                             label="{!v.wishAffiliationLabels.survey_recipient__c}"
+                                             name="wishAffiliationSurveyRecipient"
+                                             checked="{!v.wishOther.Survey_Recipient__c}"
+                                             class="slds-p-top_small"/>
+                        </div>
+                    </aura:renderIf>
+                    <!-- When Affiliation Type is converted to a Medical Professional show HTF Account field -->
+                    <aura:if isTrue="{!v.isWishAffiliationConvertingToMedicalProfessional}">
+                        <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                            <div class="{! !v.isValidWishOtherListItemHealthTreatmentFacilityAccountLookup ? 'slds-has-error' : ''}">
+                                <c:LookupSObject
+                                        lookupId="wishOtherListItemHealthTreatmentFacilityAccountLookup"
+                                        sObjectAPIName="Account"
+                                        recordId="{!v.wishOther.Health_Treatment_Facility__c}"
+                                        label="{!v.wishAffiliationLabels.health_treatment_facility__c}"
+                                        pluralHint=""
+                                        fieldsToReturn="Name"
+                                        formattedOutput="{0}"
+                                        iconFullName="standard:account"/>
+                                <aura:if isTrue="{! !v.isValidWishOtherListItemHealthTreatmentFacilityAccountLookup}">
+                                    <div class="slds-form-element__help" id="error-01">This field is required</div>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </aura:if>
+                    <aura:renderIf isTrue="{!v.isUserProfileAllowedToUpdateWishAffiliation}">
+                        <div class="slds-col slds-size_1-of-1 slds-p-top_medium">
+                            <lightning:textarea label="{!v.wishAffiliationLabels.details__c}"
+                                                name="wishAffiliationDetails"
+                                                value="{!v.wishOther.Details__c}"
+                                                maxlength="255"
+                                                class="slds-textarea"/>
+                        </div>
+                    </aura:renderIf>
+                    <!-- Relationship Info -->
+                    <div class="slds-col slds-size_1-of-1 slds-text-heading_small slds-p-top_medium">
+                        <h3 class="slds-section__title slds-theme--shade primaryPaletteBorder test-id__section-header-container">
+                        <span class="test-id__section-header-title section-header-title slds-p-horizontal--small slds-truncate">
+                            {!$Label.c.Wish_Affiliation_Relationship}
+                            <aura:renderIf isTrue="{! !v.isUserProfileAllowedToUpdateWishAffiliation}">
+                             to {!v.wishOther.Relationship__r.npe4__Contact__r.Name}
+                            </aura:renderIf>
+                        </span>
+                        </h3>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="{! !v.isValidRelationshipType ? 'slds-has-error' : ''}">
+                            <lightning:select aura:id="relationshipType"
+                                              label="{!v.relationshipLabels.npe4__type__c}"
+                                              name="relationshipType"
+                                              value="{!v.wishOther.Relationship__r.npe4__Type__c}"
+                                              onchange="{!c.onChangeValidate}"
+                                              disabled="{!v.isAffiliationTypeWishChild}">
+                                <option value=""></option>
+                                <aura:iteration items="{!v.relationshipTypes}"
+                                                var="relationshipType">
+                                    <option value="{!relationshipType}">
+                                        {!relationshipType}
+                                    </option>
+                                </aura:iteration>
+                            </lightning:select>
+                            <aura:if isTrue="{! !v.isValidRelationshipType}">
+                                <div class="slds-form-element__help" id="error-01">This field is required</div>
+                            </aura:if>
+                        </div>
+                    </div>
+                    <aura:renderIf isTrue="{!v.isUserProfileAllowedToUpdateWishAffiliation}">
+                        <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                            <div class="{! !v.isValidWishOtherListItemRelatedContactLookup ? 'slds-has-error' : ''}">
+                                <c:LookupSObject
+                                        aura:id="c"
+                                        lookupId="wishOtherListItemRelatedContactLookup"
+                                        sObjectAPIName="Contact"
+                                        recordId="{!v.wishOther.Relationship__r.npe4__Contact__c}"
+                                        label="{!v.relationshipLabels.npe4__contact__c}"
+                                        pluralHint=""
+                                        fieldsToReturn="Name"
+                                        formattedOutput="{0}"
+                                        iconFullName="standard:contact"
+                                        disabled="{!v.isAffiliationTypeWishChild}"/>
+                                <aura:if isTrue="{! !v.isValidWishOtherListItemRelatedContactLookup}">
+                                    <div class="slds-form-element__help" id="error-01">This field is required</div>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </aura:renderIf>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <lightning:input type="checkbox"
+                                         label="{!v.relationshipLabels.parent_legal_guardian__c}"
+                                         name="relationshipParentGuardian"
+                                         checked="{!v.wishOther.Relationship__r.Parent_Legal_Guardian__c}"
+                                         class="slds-p-top_medium"
+                                         disabled="{!v.isAffiliationTypeWishChild}"/>
+                    </div>
+                    <!-- Contact Info -->
+                    <div class="slds-col slds-size_1-of-1 slds-text-heading_small slds-p-top_medium">
+                        <h3 class="slds-section__title slds-theme--shade primaryPaletteBorder test-id__section-header-container">
+                        <span class="test-id__section-header-title section-header-title slds-p-horizontal--small slds-truncate">
+                            {!$Label.c.Wish_Affiliation_Contact_Information}
+                        </span>
+                        </h3>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="{! !v.isValidFirstName ? 'slds-has-error' : ''}">
+                            <lightning:input label="{!v.contactLabels.firstname}"
+                                             name="contactFirstName"
+                                             value="{!v.wishOther.Contact__r.FirstName}"/>
+                            <aura:if isTrue="{! !v.isValidFirstName}">
+                                <div class="slds-form-element__help" id="error-01">This field is required</div>
+                            </aura:if>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="{! !v.isValidLastName ? 'slds-has-error' : ''}">
+                            <lightning:input label="{!v.contactLabels.lastname}"
+                                             name="contactLastName"
+                                             value="{!v.wishOther.Contact__r.LastName}"/>
+                            <aura:if isTrue="{! !v.isValidLastName}">
+                                <div class="slds-form-element__help" id="error-01">This field is required</div>
+                            </aura:if>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <lightning:input type="date"
+                                         dateStyle="short"
+                                         label="{!v.contactLabels.birthdate}"
+                                         name="contactBirthdate"
+                                         value="{!v.wishOther.Contact__r.Birthdate}"/>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <lightning:input label="{!v.contactLabels.npe01__homeemail__c}"
+                                         name="contactEmail"
+                                         value="{!v.wishOther.Contact__r.npe01__HomeEmail__c}"/>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <lightning:input type="tel"
+                                         label="{!$Label.c.Wish_Affiliation_Phone}"
+                                         name="contactPhone"
+                                         value="{!v.wishOther.Contact__r.Phone}"/>
+                    </div>
+                    <aura:renderIf isTrue="{!v.isUserProfileAllowedToUpdateWishAffiliation}">
+                        <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                            <lightning:input aura:id="contactDoNotContact"
+                                             type="checkbox"
+                                             label="{!v.contactLabels.npsp__do_not_contact__c}"
+                                             name="contactDoNotContact"
+                                             checked="{!v.wishOther.Contact__r.npsp__Do_Not_Contact__c}"
+                                             class="slds-p-top_medium"/>
+                        </div>
+                    </aura:renderIf>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <lightning:select label="{!v.contactLabels.npe01__preferredphone__c}"
+                                          name="contactPreferredPhone"
+                                          value="{!v.wishOther.Contact__r.npe01__PreferredPhone__c}">
+                            <option value=""></option>
+                            <aura:iteration items="{!v.preferredPhoneOptions}"
+                                            var="preferredPhoneOption">
+                                <option value="{!preferredPhoneOption}">
+                                    {!preferredPhoneOption}
+                                </option>
+                            </aura:iteration>
+                        </lightning:select>
+                    </div>
+                    <aura:renderIf isTrue="{!v.isUserProfileAllowedToUpdateWishAffiliation}">
+                        <div class="slds-col slds-size_1-of-1 slds-p-top_medium">
+                            <lightning:textarea label="{!v.contactLabels.do_not_contact_notes__c}"
+                                                name="contactDoNotContactNotes"
+                                                value="{!v.wishOther.Contact__r.Do_Not_Contact_Notes__c}"
+                                                maxlength="255"
+                                                class="slds-textarea"/>
+                        </div>
+                        <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                            <lightning:input aura:id="contactDeceased"
+                                             type="checkbox"
+                                             label="{!v.contactLabels.npsp__deceased__c}"
+                                             name="contactDeceased"
+                                             checked="{!v.wishOther.Contact__r.npsp__Deceased__c}"
+                                             class="slds-p-top_medium"/>
+                        </div>
+                    </aura:renderIf>
+                    <!-- Contact Address -->
+                    <div class="slds-col slds-size_1-of-1 slds-text-heading_small slds-p-top_medium">
+                        <h3 class="slds-section__title slds-theme--shade primaryPaletteBorder test-id__section-header-container">
+                        <span class="test-id__section-header-title section-header-title slds-p-horizontal--small slds-truncate">
+                            {!$Label.c.Wish_Affiliation_Contact_Address}
+                        </span>
+                        </h3>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <lightning:input label="{!v.contactLabels.mailingstreet}"
+                                         name="contactMailingStreet"
+                                         value="{!v.wishOther.Contact__r.MailingStreet}"/>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <lightning:input label="{!v.contactLabels.mailingcity}"
+                                         name="contactMailingCity"
+                                         value="{!v.wishOther.Contact__r.MailingCity}"/>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <lightning:select label="{!v.contactLabels.mailingstate}"
+                                          name="contactMailingState"
+                                          value="{!v.wishOther.Contact__r.MailingState}"
+                                          onchange="{!c.onChangeValidate}">
+                            <option value=""></option>
+                            <aura:iteration items="{!v.states}" var="state">
+                                <option value="{!state}">
+                                    {!state}
+                                </option>
+                            </aura:iteration>
+                        </lightning:select>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <lightning:input label="{!v.contactLabels.mailingpostalcode}"
+                                         name="contactMailingPostalCode"
+                                         value="{!v.wishOther.Contact__r.MailingPostalCode}"/>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="{! !v.isValidCountry ? 'slds-has-error' : ''}">
+                            <lightning:select label="{!v.contactLabels.mailingcountry}"
+                                              name="contactMailingCountry"
+                                              value="{!v.wishOther.Contact__r.MailingCountry}"
+                                              onchange="{!c.onChangeValidate}">
+                                <option value=""></option>
+                                <aura:iteration items="{!v.countries}" var="ctry">
+                                    <option value="{!ctry}">
+                                        {!ctry}
+                                    </option>
+                                </aura:iteration>
+                            </lightning:select>
+                            <aura:if isTrue="{! !v.isValidCountry}">
+                                <div class="slds-form-element__help" id="error-01">This field is required</div>
+                            </aura:if>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-align_absolute-center slds-p-top_medium">
+                        <div class="slds-align_absolute-center">
+                            <aura:renderIf isTrue="{!v.isUserProfileAllowedToUpdateWishAffiliation}">
+                                <lightning:button label="{!$Label.c.Wish_Affiliation_Save}" variant="brand" name="save"
+                                                  onclick="{!c.saveAction}"/>
+                                <aura:set attribute="else">
+                                    <lightning:button label="{!$Label.c.Wish_Affiliation_Request_Update}"
+                                                      variant="brand"
+                                                      name="requestChange"
+                                                      onclick="{!c.requestChangeAction}"/>
+                                </aura:set>
+                            </aura:renderIf>
+                            <lightning:button label="{!$Label.c.Wish_Affiliation_Cancel}" variant="neutral"
+                                              name="cancel"
+                                              onclick="{!c.cancelAction}"/>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </aura:if>
+    <!-- Toast -->
+    <aura:if isTrue="{!v.showToast}">
+        <tr>
+            <td role="gridcell" colspan="8">
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-1 slds-grid_vertical-align-center slds-cell-wrap slds-text-align_center">
+                        <c:CustomToast message="{!v.toastMessage}" messageType="{!v.toastMessageType}"/>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </aura:if>
+</aura:component>

@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Condition_Description__c$Group1__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Condition_Description__c$isEligible__c</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c$Code_To_Use__c</field>
+    </columns>
+    <columns>
         <field>Condition_Description__c.Medical_Questions__r$Question__c</field>
     </columns>
     <columns>
@@ -11,6 +22,9 @@
     </columns>
     <columns>
         <field>Condition_Description__c.Medical_Questions__r$Epilepsy_picklist__c</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c.Medical_Questions__r$Data_Type__c</field>
     </columns>
     <description>Summary report listing medical questions for condition descriptions</description>
     <format>Summary</format>
@@ -27,6 +41,8 @@
     <reportType>Condition_Description_with_Medical_Questions__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <sortColumn>Condition_Description__c.Medical_Questions__r$Sort_Order__c</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>

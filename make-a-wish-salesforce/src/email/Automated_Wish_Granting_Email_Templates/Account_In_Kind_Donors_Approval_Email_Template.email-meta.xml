@@ -11,4 +11,5 @@
 
 You received an account {!Account.Name} for your approval.Please click the below link {!Account.Link}.</textOnly>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

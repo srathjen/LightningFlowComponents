@@ -2,12 +2,52 @@
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
-        <value><!-- DEPRECATED-Schedulable --></value>
+        <value>VEROUDERD-Planbaar item</value>
     </caseValues>
     <caseValues>
         <plural>true</plural>
-        <value><!-- DEPRECATED-Schedulable --></value>
+        <value>VEROUDERD-Planbare items</value>
     </caseValues>
-    <gender><!-- Neuter --></gender>
-    <nameFieldLabel><!-- Job Name --></nameFieldLabel>
+    <fields>
+        <help>Bepaald of de baan actief is of niet</help>
+        <label><!-- Active --></label>
+        <name>npsp__Active__c</name>
+    </fields>
+    <fields>
+        <help>Klasse die wordt gepland om te draaien op een bepaalde frequentie.</help>
+        <label><!-- Class Name --></label>
+        <name>npsp__Class_Name__c</name>
+    </fields>
+    <fields>
+        <help>Hoe vaak de baan moet worden uitgevoerd</help>
+        <label><!-- Frequency --></label>
+        <name>npsp__Frequency__c</name>
+        <picklistValues>
+            <masterLabel>Daily</masterLabel>
+            <translation><!-- Daily --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hourly</masterLabel>
+            <translation><!-- Hourly --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Monthly</masterLabel>
+            <translation><!-- Monthly --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Quarterly</masterLabel>
+            <translation><!-- Quarterly --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weekly</masterLabel>
+            <translation><!-- Weekly --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help>Laatste keer dat de baan werd uitgevoerd</help>
+        <label><!-- Last Time Run --></label>
+        <name>npsp__Last_Time_Run__c</name>
+    </fields>
+    <gender>Neuter</gender>
+    <nameFieldLabel>Naam van Opdracht</nameFieldLabel>
 </CustomObjectTranslation>

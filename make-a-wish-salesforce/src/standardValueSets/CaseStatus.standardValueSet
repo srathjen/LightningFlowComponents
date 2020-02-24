@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Inactive</fullName>
+        <default>false</default>
+        <label>Inactive</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Qualified</fullName>
+        <default>true</default>
+        <label>Qualified</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Ready to Assign</fullName>
+        <default>false</default>
+        <label>Ready to Assign</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Ready to Interview</fullName>
+        <default>false</default>
+        <label>Ready to Interview</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Wish Determined</fullName>
+        <default>false</default>
+        <label>Wish Determined</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Pending Approval</fullName>
+        <default>false</default>
+        <label>Pending Approval</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Wish Design</fullName>
+        <default>false</default>
+        <label>Wish Design</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Wish Scheduled</fullName>
+        <default>false</default>
+        <label>Wish Scheduled</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Granted</fullName>
+        <default>false</default>
+        <label>Granted</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Completed</fullName>
+        <default>false</default>
+        <label>Completed</label>
+        <closed>true</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Closed</fullName>
+        <default>false</default>
+        <label>Closed</label>
+        <closed>true</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Denied</fullName>
+        <default>false</default>
+        <label>Denied</label>
+        <closed>true</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Escalated</fullName>
+        <default>false</default>
+        <label>Escalated</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>In Progress</fullName>
+        <default>false</default>
+        <label>In Progress</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Medical</fullName>
+        <default>false</default>
+        <label>Medical</label>
+        <closed>true</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>New</fullName>
+        <default>false</default>
+        <label>New</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Open</fullName>
+        <default>false</default>
+        <label>Open</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Pending Clarification - Chapter</fullName>
+        <default>false</default>
+        <label>Pending Clarification - Chapter</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Pending Clarification - MAC</fullName>
+        <default>false</default>
+        <label>Pending Clarification - MAC</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Approved - National Medical Review</fullName>
+        <default>false</default>
+        <label>Approved - National Medical Review</label>
+        <closed>true</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Approved - National MAC Review</fullName>
+        <default>false</default>
+        <label>Approved - National MAC Review</label>
+        <closed>true</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>DNQ - National Medical Review</fullName>
+        <default>false</default>
+        <label>DNQ - National Medical Review</label>
+        <closed>true</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>DNQ - National MAC Review</fullName>
+        <default>false</default>
+        <label>DNQ - National MAC Review</label>
+        <closed>true</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Pending Clarification - MAC Consult Req</fullName>
+        <default>false</default>
+        <label>Pending Clarification - MAC Consult Req</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Additional Information for Review</fullName>
+        <default>false</default>
+        <label>Additional Information for Review</label>
+        <closed>false</closed>
+    </standardValue>
+</StandardValueSet>

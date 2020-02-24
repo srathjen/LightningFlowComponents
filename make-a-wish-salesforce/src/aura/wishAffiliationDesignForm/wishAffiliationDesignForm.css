@@ -1,0 +1,25 @@
+/**
+ * Created by gmayer on 04-Nov-19.
+ */
+
+.THIS .cardAffiliation {
+    min-height: 180px !important;
+}
+
+.THIS .addIconBtn {
+    height: 75px;
+    width: 80px;
+}
+
+.THIS .addIconBtn svg,
+.THIS .addIconBtn:hover svg {
+    fill: #0057B8;
+}
+
+.THIS .testBtn {
+    fill: lightcyan;
+}
+
+.THIS .testBtn svg {
+    fill: lightgreen;
+}

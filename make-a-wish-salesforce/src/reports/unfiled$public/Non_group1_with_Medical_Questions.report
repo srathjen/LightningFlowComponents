@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Condition_Description__c.Medical_Questions__r$Name</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c$Code_To_Use__c</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c$Group1__c</field>
+    </columns>
+    <description>List of Condition Description records with Unchecked Group1 and at least one Medical Question</description>
+    <filter>
+        <criteriaItems>
+            <column>Condition_Description__c$Group1__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Condition_Description__c$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Non-group1 with Medical Questions</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Condition_Description_with_Medical_Questions__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Condition_Description__c$Code_To_Use__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Condition_Description__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

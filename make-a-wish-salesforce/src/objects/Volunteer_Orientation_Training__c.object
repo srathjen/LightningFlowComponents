@@ -5,7 +5,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -13,7 +33,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -21,7 +61,13 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -29,7 +75,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -37,15 +103,57 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>Tab</actionName>
         <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Volunteer_Orientation_Training_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
     <allowInChatterGroups>true</allowInChatterGroups>
-    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <compactLayoutAssignment>Orientation_And_Training</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Orientation_And_Training</fullName>
+        <fields>Name</fields>
+        <fields>Volunteer__c</fields>
+        <fields>Class_Offering__c</fields>
+        <fields>Type__c</fields>
+        <fields>Volunteer_Attendance__c</fields>
+        <label>Orientation And Training</label>
+    </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
     <description>It is a junction object for volunteer and Orientation &amp; Training  object. It will capture the volunteer and his completed  training information details</description>
     <enableActivities>true</enableActivities>
@@ -53,6 +161,7 @@
     <enableEnhancedLookup>true</enableEnhancedLookup>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
     <enableReports>true</enableReports>
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
@@ -122,6 +231,54 @@
         <type>Phone</type>
     </fields>
     <fields>
+        <fullName>Active_Volunteer__c</fullName>
+        <description>Display&apos;s the Volunteer&apos;s Active Status</description>
+        <externalId>false</externalId>
+        <formula>Volunteer__r.is_Active_Volunteer__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Edit via the Volunteer&apos;s contact record</inlineHelpText>
+        <label>Active Volunteer</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>B_C_Expiration_Date__c</fullName>
+        <description>Displays the Volunteer&apos;s BC Expiration Date</description>
+        <externalId>false</externalId>
+        <formula>Volunteer__r.B_C_Expiration_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Edited via the volunteer&apos;s contact record.</inlineHelpText>
+        <label>B/C Expiration Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>COI_Expiration_Date__c</fullName>
+        <description>Displays the Volunteer&apos;s COI Expiration Date</description>
+        <externalId>false</externalId>
+        <formula>Volunteer__r.COI_Expiration_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Edited via the volunteer&apos;s contact record.</inlineHelpText>
+        <label>COI Expiration Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Class_Date__c</fullName>
+        <description>Date of related Class Offering</description>
+        <externalId>false</externalId>
+        <label>Class Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Class_Offering__c</fullName>
         <description>It will hold the training details.</description>
         <externalId>false</externalId>
@@ -147,6 +304,37 @@
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Completion_Status__c</fullName>
+        <description>Captures the status of a volunteer&apos;s training or orientation.</description>
+        <externalId>false</externalId>
+        <label>Completion Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Not Approved</fullName>
+                    <default>false</default>
+                    <label>Not Approved</label>
+                </value>
+                <value>
+                    <fullName>Follow-up Requested</fullName>
+                    <default>false</default>
+                    <label>Follow-up Requested</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Date_Cancelled__c</fullName>
@@ -233,26 +421,31 @@
         <description>This field is update as cancel when the volunteer training is canceled.</description>
         <externalId>false</externalId>
         <label>Hidden Volunteer Training Status</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Volunteer Cancelled</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Registered</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Completed</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Volunteer Cancelled</fullName>
+                    <default>false</default>
+                    <label>Volunteer Cancelled</label>
+                </value>
+                <value>
+                    <fullName>Registered</fullName>
+                    <default>false</default>
+                    <label>Registered</label>
+                </value>
+                <value>
+                    <fullName>Completed</fullName>
+                    <default>false</default>
+                    <label>Completed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Hidden_Volunteer_User_Name__c</fullName>
@@ -441,22 +634,26 @@ Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:U
         <description>It will capture information about whether it is a orientation or training</description>
         <externalId>false</externalId>
         <label>Type</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Orientation</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Training</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Orientation</fullName>
+                    <default>false</default>
+                    <label>Orientation</label>
+                </value>
+                <value>
+                    <fullName>Training</fullName>
+                    <default>false</default>
+                    <label>Training</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>VolunteerHidden_Email__c</fullName>
@@ -474,38 +671,60 @@ Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:U
         <description>It will capture whether the volunteer registered or completed the session</description>
         <externalId>false</externalId>
         <label>Volunteer Attendance</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Registered</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Completed</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Volunteer Cancelled</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Chapter Cancelled</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>No Show</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Cancelled</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Registered</fullName>
+                    <default>false</default>
+                    <label>Registered</label>
+                </value>
+                <value>
+                    <fullName>Completed</fullName>
+                    <default>false</default>
+                    <label>Completed</label>
+                </value>
+                <value>
+                    <fullName>Volunteer Cancelled</fullName>
+                    <default>false</default>
+                    <label>Volunteer Cancelled</label>
+                </value>
+                <value>
+                    <fullName>Chapter Cancelled</fullName>
+                    <default>false</default>
+                    <label>Chapter Cancelled</label>
+                </value>
+                <value>
+                    <fullName>No Show</fullName>
+                    <default>false</default>
+                    <label>No Show</label>
+                </value>
+                <value>
+                    <fullName>Cancelled</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Cancelled</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Volunteer_Status__c</fullName>
+        <description>Displays the Volunteer Status Icons for COI and BC Expiries</description>
+        <externalId>false</externalId>
+        <formula>Volunteer__r.Volunteer_Status__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Volunteer Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Volunteer__c</fullName>
@@ -535,14 +754,51 @@ Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:U
     <listViews>
         <fullName>All</fullName>
         <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>Orientation_Training_Hidden__c</columns>
         <columns>Volunteer__c</columns>
         <columns>Registered_Date__c</columns>
-        <columns>Start_Time__c</columns>
-        <columns>End_Time__c</columns>
         <columns>Completed_Date__c</columns>
         <columns>Volunteer_Attendance__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>UPDATEDBY_USER</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All_volunteers_for_Today_s_Classes</fullName>
+        <columns>Volunteer__c</columns>
+        <columns>Volunteer_Attendance__c</columns>
+        <columns>NAME</columns>
+        <columns>Class_Offering__c</columns>
+        <columns>Date_Cancelled__c</columns>
+        <columns>Registered_Date__c</columns>
+        <columns>Type__c</columns>
+        <columns>Location__c</columns>
+        <columns>Class_Date__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Class_Date__c</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </filters>
+        <label>All Volunteers for Today&apos;s Classes</label>
+    </listViews>
+    <listViews>
+        <fullName>All_volunteers_for_a_class_offering</fullName>
+        <columns>Volunteer__c</columns>
+        <columns>Volunteer_Attendance__c</columns>
+        <columns>NAME</columns>
+        <columns>Class_Offering__c</columns>
+        <columns>Date_Cancelled__c</columns>
+        <columns>Registered_Date__c</columns>
+        <columns>Type__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>LMS_Enrollment_Id__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>Location__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All volunteers for a class offering</label>
     </listViews>
     <nameField>
         <displayFormat>VOT-{00000}</displayFormat>
@@ -557,13 +813,25 @@ Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:U
         <customTabListAdditionalFields>End_Time__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Type__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Volunteer_Attendance__c</customTabListAdditionalFields>
+        <massQuickActions>Update_Status</massQuickActions>
     </searchLayouts>
     <sharingModel>ControlledByParent</sharingModel>
     <startsWith>Vowel</startsWith>
+    <validationRules>
+        <fullName>Complete_to_Use_Completion_Status</fullName>
+        <active>true</active>
+        <description>A Volunteer Orientation and Training Record must be &apos;Complete&apos; to Use &apos;Completion Status&apos; field.</description>
+        <errorConditionFormula>!ISPICKVAL( Volunteer_Attendance__c , &quot;Completed&quot;)
+&amp;&amp;
+!ISBLANK(TEXT(Completion_Status__c))</errorConditionFormula>
+        <errorDisplayField>Volunteer_Attendance__c</errorDisplayField>
+        <errorMessage>Volunteer Attendance must be set to &apos;Completed&apos; to leverage the &apos;Completion Status&apos; field.</errorMessage>
+    </validationRules>
     <validationRules>
         <fullName>Restrict_no_available_seats</fullName>
         <active>false</active>
         <errorConditionFormula>OR(ISNEW() &amp;&amp; (00N3600000MqwNY.00N3600000MqwOw &lt;= 0)  &amp;&amp; ISPICKVAL(Volunteer_Attendance__c ,&apos;Registered&apos;),( 00N3600000MqwNY.00N3600000MqwOw &lt;= 0)&amp;&amp; ISPICKVAL(Volunteer_Attendance__c ,&apos;Registered&apos;) )</errorConditionFormula>
         <errorMessage>There is no available seats for this training</errorMessage>
     </validationRules>
+    <visibility>Public</visibility>
 </CustomObject>

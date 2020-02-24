@@ -31,6 +31,7 @@
     <filter>
         <criteriaItems>
             <column>ACTIVE</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
@@ -52,6 +53,8 @@
     </params>
     <reportType>User</reportType>
     <showDetails>false</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>LAST_LOGIN</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

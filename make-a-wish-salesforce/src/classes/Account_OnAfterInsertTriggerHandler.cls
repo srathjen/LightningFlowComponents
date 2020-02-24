@@ -14,9 +14,8 @@ Public class Account_OnAfterInsertTriggerHandler{
     /*This OnAfterInsert() is used to when the chapter account or inkind account record is created then 
     it will store that record into collection then it will pass that collection to another Account_OnAfterInsertTriggerHelper.shareAccountrecord()*/
     public static void OnAfterInsert(List<Account> newAccountList){
-    Constant_AC cons = new Constant_AC();
-    Id inKindDonorsAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get('In Kind Donors').getRecordTypeId();
-    Id chapterAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(cons.chapterRT).getRecordTypeId();
+    Id inKindDonorsAccountRTId = Constant_AC.IN_KIND_ACCOUNT_ID;
+    Id chapterAccountRTId = Constant_AC.CHAPTER_RT_ID;
     Set<Id> inKindDonorAccountSet = new Set<Id>();
     Set<Id> chaptterAccountIdSet = new Set<Id> ();
     Set<String> chapterIds = new Set<String>();
@@ -30,8 +29,6 @@ Public class Account_OnAfterInsertTriggerHandler{
                     chaptterAccountIdSet.add(inKindAccount.Chapter_Name__c);
                     inKindDonorAccountSet.add(inKindAccount.Id);
                 }
-                
-                
             }
             
             if(inKindAccount.RecordTypeId == chapterAccountRTId)

@@ -5,9 +5,9 @@ Description : This page is used to collect medical summary attachment about wish
     <apex:include pageName="prospective_head" id="phead"/>
     <apex:outputPanel rendered="{!isSaved}">
         <script>
-        window.onload=function () {                
+        window.onload=function () {
             parent.loader();
-            parent.alertClass();              
+            parent.alertClass();
         }
         </script>
     </apex:outputPanel>
@@ -69,7 +69,7 @@ Description : This page is used to collect medical summary attachment about wish
                                         <apex:param name="deleteFile" value="{!attachment.Id}" assignTo="{!attachmentId}"/>
                                     </apex:commandLink>
                                 </td>
-                                <td>{!attachment.File_Name__c} </td>
+                                <td>{!attachment.cg__File_Name__c} </td>
                                 <!-- <td style="width:40%"> {!attachment.Description__c}</td>-->
                             </tr>
                         </apex:repeat>

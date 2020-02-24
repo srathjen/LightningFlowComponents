@@ -6,10 +6,11 @@
     <loginUrl>https://makeawish.okta.com/app/salesforce/exk865hdrw54w4InN0x7/sso/saml</loginUrl>
     <logoutUrl>https://makeawish.okta.com</logoutUrl>
     <name>Okta Production</name>
-    <oauthTokenEndpoint>https://make-a-wish.my.salesforce.com/services/oauth2/token?so=00D36000000orF0</oauthTokenEndpoint>
+    <oauthTokenEndpoint>https://make-a-wish--devsup.my.salesforce.com/services/oauth2/token?so=00D8A0000005Y3t</oauthTokenEndpoint>
     <redirectBinding>false</redirectBinding>
     <requestSignatureMethod>0</requestSignatureMethod>
-    <salesforceLoginUrl>https://make-a-wish.my.salesforce.com?so=00D36000000orF0</salesforceLoginUrl>
+    <requestSigningCertId>0P11R000002W7II</requestSigningCertId>
+    <salesforceLoginUrl>https://make-a-wish--devsup.my.salesforce.com?so=00D8A0000005Y3t</salesforceLoginUrl>
     <samlEntityId>https://saml.salesforce.com</samlEntityId>
     <samlVersion>SAML2_0</samlVersion>
     <userProvisioning>false</userProvisioning>

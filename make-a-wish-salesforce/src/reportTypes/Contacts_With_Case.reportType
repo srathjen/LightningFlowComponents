@@ -2195,27 +2195,12 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Actual_Total__c</field>
-            <table>Contact.Cases</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Actual_Inkind__c</field>
-            <table>Contact.Cases</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Account</field>
             <table>Contact.Cases</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Status</field>
-            <table>Contact.Cases</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Actual_Cash__c</field>
             <table>Contact.Cases</table>
         </columns>
         <columns>
@@ -2271,6 +2256,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Unique_Wish_Record_Identifier__c</field>
+            <table>Contact.Cases</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Start_Date__c</field>
             <table>Contact.Cases</table>
         </columns>
         <columns>

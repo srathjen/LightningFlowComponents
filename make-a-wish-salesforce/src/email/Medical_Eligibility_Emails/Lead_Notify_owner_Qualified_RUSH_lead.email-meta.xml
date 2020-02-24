@@ -15,4 +15,5 @@ Thank you,
 
 {!Lead.Hidden_Chapter_Information__c}</textOnly>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

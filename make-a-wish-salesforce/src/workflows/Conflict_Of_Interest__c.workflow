@@ -265,19 +265,6 @@
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
             <actions>
-                <name>COI_Expiring_Before_30_Days_Email_Alert</name>
-                <type>Alert</type>
-            </actions>
-            <actions>
-                <name>COI_ET_COI_Expiring_30_Days</name>
-                <type>Task</type>
-            </actions>
-            <offsetFromField>Conflict_Of_Interest__c.Expiration_Date__c</offsetFromField>
-            <timeLength>-30</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-        <workflowTimeTriggers>
-            <actions>
                 <name>COI_Expiring_Before_9_Days_Email_Alert</name>
                 <type>Alert</type>
             </actions>
@@ -333,10 +320,23 @@
             <timeLength>-23</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>COI_Expiring_Before_30_Days_Email_Alert</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>COI_ET_COI_Expiring_30_Days</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Conflict_Of_Interest__c.Expiration_Date__c</offsetFromField>
+            <timeLength>-30</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
     </rules>
     <tasks>
         <fullName>COI_ET_COI_Expired_7_Days</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -348,7 +348,7 @@
     </tasks>
     <tasks>
         <fullName>COI_ET_COI_Expiring</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -359,7 +359,7 @@
     </tasks>
     <tasks>
         <fullName>COI_ET_COI_Expiring_16_Days</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -371,7 +371,7 @@
     </tasks>
     <tasks>
         <fullName>COI_ET_COI_Expiring_23_Days</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -383,7 +383,7 @@
     </tasks>
     <tasks>
         <fullName>COI_ET_COI_Expiring_2_Days</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -395,7 +395,7 @@
     </tasks>
     <tasks>
         <fullName>COI_ET_COI_Expiring_30_Days</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -407,7 +407,7 @@
     </tasks>
     <tasks>
         <fullName>COI_ET_COI_Expiring_9_Days</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>

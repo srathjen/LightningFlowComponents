@@ -1,0 +1,36 @@
+<aura:component controller="FileUploadController">
+     <!-- attributes -->
+    <!-- 'parentId' Aura Attribute for store the Id for Parent Record where we attach our file --> 
+    <aura:attribute name="parentId" type="Id" />
+    <!-- 'showButton' Aura Attribute to hide or show Save & Cancel buttons -->  
+    <aura:attribute name="showButton" type="Boolean" default="true" />
+    <!-- 'fileName' attribute for display the selected file name --> 
+    <aura:attribute name="fileName" type="String" default="No File Selected.." />
+    <aura:attribute name="refreshCmp" type="Integer"/>
+    <aura:attribute name="attachmentId" type="Id" />
+    <aura:attribute name="buttonLabel" type="String" default="Upload File"/>
+    
+     <!-- handlers-->
+    <aura:method name="handleSaveFromParentMethod" action="{!c.handleSave}" access="public" >
+        <aura:attribute name="wrsRecord" type="Wish_Required_Signature__c" default=""/>
+    </aura:method>
+    <aura:registerEvent name="refreshEvent" type="c:refreshDataTable"/>
+    
+    <!-- Lightning Input with file type and on file change call the 'handleFilesChange' controller -->
+    <div class="c-container">
+        <lightning:layout>
+            <lightning:layoutItem flexibility="auto" padding="around-small">
+                <lightning:input aura:id="fuploader" onchange="{!c.handleFilesChange}" type="file" name="file" label="{!v.buttonLabel}" multiple="false"/>
+                <div class="slds-text-body_small slds-text-color_weak slds-text-font_monospace">{!v.fileName} </div>
+            </lightning:layoutItem>
+            
+            <lightning:layoutItem flexibility="auto" padding="around-small" class="slds-m-top_x-small" >
+                <aura:if isTrue="{!v.showButton}">
+                    <!-- <lightning:button label="Cancel" onclick="{!c.handleCancel}" class="slds-m-top_medium" /> -->
+                    <lightning:button label="Upload File" onclick="{!c.handleSave}"
+                                      variant="brand" class="slds-m-top--medium"/>
+                </aura:if>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>

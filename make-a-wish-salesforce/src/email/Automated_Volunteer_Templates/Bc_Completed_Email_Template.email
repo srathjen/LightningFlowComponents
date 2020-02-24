@@ -1,6 +1,6 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
 <![CDATA[<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><table class="MsoNormalTable" border="0" cellspacing="5" cellpadding="0" width="550" style="width:412.5pt;mso-cellspacing:3.7pt;mso-yfti-tbllook:1184;mso-padding-alt:
  3.75pt 3.75pt 3.75pt 3.75pt">
  <tbody><tr style="mso-yfti-irow:0;mso-yfti-firstrow:yes;mso-yfti-lastrow:yes;
@@ -11,7 +11,7 @@
   normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">Hi&nbsp;{!Background_check__c.Volunteer__c},<br>
   <br>
   </span><span style="font-size: 12pt; font-family: Lato, sans-serif;">We<span style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">&nbsp;have&nbsp;received&nbsp;the&nbsp;results&nbsp;of&nbsp;your&nbsp;criminal&nbsp;background&nbsp;check.&nbsp;You&nbsp;are&nbsp;welcome&nbsp;to&nbsp;visit&nbsp;the
-  &nbsp;</span></span><span style="font-size: 12pt; font-family: Lato, sans-serif; color: blue; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;"><a href="https://make-a-wish.force.com/"><span style="color:blue">Make-A-Wish Volunteer Center</span></a></span><span style="font-size: 12pt; font-family: Lato, sans-serif; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">&nbsp;to
+  &nbsp;</span></span><span style="font-size: 12pt; font-family: Lato, sans-serif; color: blue; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;"><span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish Volunteer Center</a></span></span><span style="font-size: 12pt; font-family: Lato, sans-serif; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">&nbsp;to
   register for your role-specific training.<br>
   <br>
   Thanks,<br>

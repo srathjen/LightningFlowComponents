@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Not Started</fullName>
+        <default>true</default>
+        <label>Not Started</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>In Progress</fullName>
+        <default>false</default>
+        <label>In Progress</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Completed</fullName>
+        <default>false</default>
+        <label>Completed</label>
+        <closed>true</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Waiting on someone else</fullName>
+        <default>false</default>
+        <label>Waiting on someone else</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Deferred</fullName>
+        <default>false</default>
+        <label>Deferred</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Approved</fullName>
+        <default>false</default>
+        <label>Approved</label>
+        <closed>true</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Declined</fullName>
+        <default>false</default>
+        <label>Declined</label>
+        <closed>true</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Rescheduled</fullName>
+        <default>false</default>
+        <label>Rescheduled</label>
+        <closed>true</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Scheduled</fullName>
+        <default>false</default>
+        <label>Scheduled</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Abandoned</fullName>
+        <default>false</default>
+        <label>Abandoned</label>
+        <closed>true</closed>
+    </standardValue>
+</StandardValueSet>

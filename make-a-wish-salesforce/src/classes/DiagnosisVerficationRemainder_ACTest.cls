@@ -1,6 +1,12 @@
+// This class used to do the unit testing and code coverage
+// It will create the lead record
 @isTest
 public class DiagnosisVerficationRemainder_ACTest
 {
+    @testSetup static void methodName() {
+        Account makeAWish = OrientationandTrainingUtil.CreateAmericaAccount();
+    }
+    
     public static String CRON_EXP = '0 0 0 15 3 ? 2022';
     
     @TestSetup static void createLead() { 
@@ -82,14 +88,14 @@ public class DiagnosisVerficationRemainder_ACTest
         
         // Verify the expressions are the same
         System.assertEquals(CRON_EXP, 
-                            ct.CronExpression);
+                            ct.CronExpression,'Does not match');
         
         // Verify the job has not run
-        System.assertEquals(0, ct.TimesTriggered);
+        System.assertEquals(0, ct.TimesTriggered,'Does not match');
         
         // Verify the next time the job will run
         System.assertEquals('2022-03-15 00:00:00', 
-                            String.valueOf(ct.NextFireTime));
+                            String.valueOf(ct.NextFireTime),'Does not match');
         
         Test.startTest();
         DiagnosisVerficationRemainder_AC batchAffiliation = new DiagnosisVerficationRemainder_AC();
@@ -124,14 +130,14 @@ public class DiagnosisVerficationRemainder_ACTest
         
         // Verify the expressions are the same
         System.assertEquals(CRON_EXP, 
-                            ct.CronExpression);
+                            ct.CronExpression, 'Does not match');
         
         // Verify the job has not run
-        System.assertEquals(0, ct.TimesTriggered);
+        System.assertEquals(0, ct.TimesTriggered,'Does not match');
         
         // Verify the next time the job will run
         System.assertEquals('2022-03-15 00:00:00', 
-                            String.valueOf(ct.NextFireTime));
+                            String.valueOf(ct.NextFireTime),'Does not match');
         
         Test.startTest();
         DiagnosisVerficationRemainder_AC batchAffiliation = new DiagnosisVerficationRemainder_AC();
@@ -143,7 +149,7 @@ public class DiagnosisVerficationRemainder_ACTest
     {
         
        
-        Lead currLead = [SELECT id FROM Lead];
+        Lead currLead = [SELECT id FROM Lead LIMIT 1];
         Lead updateLead = new Lead();
         updateLead.id = currLead.id;
         updateLead.Part_A_Sent__c = Date.Today().addDays(-21);
@@ -165,14 +171,14 @@ public class DiagnosisVerficationRemainder_ACTest
         
         // Verify the expressions are the same
         System.assertEquals(CRON_EXP, 
-                            ct.CronExpression);
+                            ct.CronExpression,'Does not match');
         
         // Verify the job has not run
-        System.assertEquals(0, ct.TimesTriggered);
+        System.assertEquals(0, ct.TimesTriggered,'Does not match');
         
         // Verify the next time the job will run
         System.assertEquals('2022-03-15 00:00:00', 
-                            String.valueOf(ct.NextFireTime));
+                            String.valueOf(ct.NextFireTime),'Does not match');
         
         Test.startTest();
         DiagnosisVerficationRemainder_AC batchAffiliation = new DiagnosisVerficationRemainder_AC();
@@ -208,14 +214,14 @@ public class DiagnosisVerficationRemainder_ACTest
         
         // Verify the expressions are the same
         System.assertEquals(CRON_EXP, 
-                            ct.CronExpression);
+                            ct.CronExpression,'Does not match');
         
         // Verify the job has not run
-        System.assertEquals(0, ct.TimesTriggered);
+        System.assertEquals(0, ct.TimesTriggered,'Does not match');
         
         // Verify the next time the job will run
         System.assertEquals('2022-03-15 00:00:00', 
-                            String.valueOf(ct.NextFireTime));
+                            String.valueOf(ct.NextFireTime),'Does not match');
         
         Test.startTest();
         DiagnosisVerficationRemainder_AC batchAffiliation = new DiagnosisVerficationRemainder_AC();

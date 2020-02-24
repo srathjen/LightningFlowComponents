@@ -8,6 +8,10 @@
         <plural>true</plural>
         <value>Background Checks</value>
     </caseValues>
+    <fieldSets>
+        <label><!-- BackgroundCheck --></label>
+        <name>BackgroundCheck</name>
+    </fieldSets>
     <fields>
         <label><!-- Hidden Account Email --></label>
         <name>Account_Email__c</name>
@@ -25,14 +29,17 @@
         <name>Background_Check_Email_signature__c</name>
     </fields>
     <fields>
+        <help><!-- This box will be checked when this background check is the most recent on file. --></help>
         <label><!-- Current --></label>
         <name>Current__c</name>
     </fields>
     <fields>
+        <help><!-- Date that an approved background check was run. --></help>
         <label><!-- Date Completed --></label>
         <name>Date_Completed__c</name>
     </fields>
     <fields>
+        <help><!-- Date background check was requested. --></help>
         <label><!-- Date Requested --></label>
         <name>Date_Requested__c</name>
     </fields>
@@ -77,6 +84,18 @@
         <name>Migrated_Record__c</name>
     </fields>
     <fields>
+        <label><!-- Notes --></label>
+        <name>Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Order Id --></label>
+        <name>Order_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Package Id --></label>
+        <name>Package_Id__c</name>
+    </fields>
+    <fields>
         <help><!-- Date when the post-adverse action letter was sent, if necessary. --></help>
         <label><!-- Post-Adverse Action --></label>
         <name>Post_Adverse_Action__c</name>
@@ -104,7 +123,7 @@
         <relationshipLabel><!-- Background Checks --></relationshipLabel>
     </fields>
     <fields>
-        <label><!-- Are you residing in US for past 7 years? --></label>
+        <label><!-- Reside USA Past 7 Yrs --></label>
         <name>Resided_in_US_for_past_7_years__c</name>
         <picklistValues>
             <masterLabel>No</masterLabel>
@@ -127,9 +146,45 @@
             <translation><!-- Approved w/ Conditions --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Manual</masterLabel>
+            <translation><!-- Manual --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Received from First Advantage</masterLabel>
+            <translation><!-- Received from First Advantage --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Rejected</masterLabel>
             <translation><!-- Rejected --></translation>
         </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent to First Advantage</masterLabel>
+            <translation><!-- Sent to First Advantage --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sub-Status --></label>
+        <name>Sub_Status__c</name>
+        <picklistValues>
+            <masterLabel>Fail</masterLabel>
+            <translation><!-- Fail --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pass</masterLabel>
+            <translation><!-- Pass --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Review</masterLabel>
+            <translation><!-- Review --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Unique Record Count --></label>
+        <name>Unique_Record_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- View Background Report --></label>
+        <name>View_Background_Report__c</name>
     </fields>
     <fields>
         <label><!-- Volunteer Role(Out of Compliance) --></label>
@@ -155,6 +210,10 @@
         <label><!-- Hidden Volunteer is Inactive --></label>
         <name>Volunteer_is_Inactive__c</name>
     </fields>
+    <fields>
+        <label><!-- Applicant Id --></label>
+        <name>applicant_Id__c</name>
+    </fields>
     <layouts>
         <layout>Background check Chapter Staff Layout</layout>
         <sections>
@@ -169,12 +228,12 @@
     <layouts>
         <layout>Background check Layout</layout>
         <sections>
-            <label><!-- Attachments --></label>
-            <section>Attachments</section>
-        </sections>
-        <sections>
             <label><!-- Custom Links --></label>
             <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Notes --></label>
+            <section>Notes</section>
         </sections>
     </layouts>
     <sharingReasons>

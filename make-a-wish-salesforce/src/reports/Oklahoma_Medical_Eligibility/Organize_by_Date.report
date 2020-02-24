@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Lead$Name</field>
+    </columns>
+    <columns>
+        <field>Lead$Any_medical_reason_for_moving_quickly__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Status</field>
+    </columns>
+    <columns>
+        <field>Lead$Referred_Date__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Hospital_Treatment_Facility__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Department__c</field>
+    </columns>
+    <columns>
+        <field>Lead$DNQ_Date__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Qualified_Date__c</field>
+    </columns>
+    <description>Oklahoma</description>
+    <filter>
+        <criteriaItems>
+            <column>Lead$ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Make-A-Wish Oklahoma</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Organize by Date</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Leads_detail__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead$Referred_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

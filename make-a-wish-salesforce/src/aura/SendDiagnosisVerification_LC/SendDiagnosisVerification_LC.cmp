@@ -1,0 +1,46 @@
+<!--
+Author      : MST Solutions
+CreatedBy   : Vignesh SM
+Date        : 13/03/2018
+Description : Lightning component for recreating send diagnosis verification functionality in lightning experience
+-->
+<aura:component implements="force:appHostable,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" 
+                controller="SendDiagnosisVerficationLC_AC"
+                access="global" >
+    
+    <!--Attributes-->
+    <aura:attribute name="leadData" type="Lead" />
+    <aura:attribute name="showLoader" type="Boolean" default="true" />
+    <aura:attribute name="showCancelBtn" type="Boolean" default="true" />
+    <aura:attribute name="dispMsg" type="String" />
+    
+    <!--Events-->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <!--Body-->
+    <div class="slds-text-title_caps slds-text-heading_large">Diagnosis Verification Process</div>
+    <aura:if isTrue="{!v.showLoader}">
+        <div class="demo-only" style="height: 6rem;">
+            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+        <aura:set attribute="else">
+            <div class="slds-grid slds-grid_align-center slds-m-top_medium slds-grid_vertical-align-center" style="height:210px;">
+                <div class="slds-col">
+                    <lightning:icon class="slds-align_absolute-center" iconName="utility:info_alt" size="large" alternativeText="" variant="warning"/>
+                    <div class="slds-text-heading_medium slds-m-top_medium slds-text-align_center">{!v.dispMsg}</div>
+                    <div class=" slds-m-top_large slds-align_absolute-center">
+                        <lightning:button class="btn-spacing" variant="brand" label="OK" onclick="{! c.confirmAction }" />
+                        <aura:if isTrue="{!v.showCancelBtn}">
+                            <lightning:button class="btn-spacing" variant="neutral" label="Cancel" onclick="{! c.closeComponent }" />                                                
+                        </aura:if>                        
+                    </div>                    
+                </div>
+            </div>
+        </aura:set>
+    </aura:if> 
+    
+</aura:component>

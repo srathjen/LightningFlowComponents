@@ -15,6 +15,7 @@
     <filter>
         <criteriaItems>
             <column>CREATED</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Chandrasekar Nallusamy,Kanagaraj Arjunan,Jose Rathi Francis,Sophiya George,Sudharsan Kumaravel,Furqan Maqbool,Vennila Paramasivam,ChennaReddy UmmaReddy,Kesavakumar Murugesan</value>
         </criteriaItems>
@@ -28,6 +29,8 @@
     <reportType>AccountList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

@@ -33,6 +33,7 @@
     <filter>
         <criteriaItems>
             <column>CASE_NUMBER</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>00074464,00075020,00077190,00077344</value>
         </criteriaItems>
@@ -50,6 +51,8 @@
     <reportType>CaseList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CREATED_DATEONLY</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

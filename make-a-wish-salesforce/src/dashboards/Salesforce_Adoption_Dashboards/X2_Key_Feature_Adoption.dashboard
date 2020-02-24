@@ -11,11 +11,13 @@
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
             <componentType>Metric</componentType>
             <displayUnits>Auto</displayUnits>
+            <groupingSortProperties/>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
             <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
             <metricLabel>New ACCOUNTS (Last 30 Days)</metricLabel>
             <report>DB_Adoption/DB_Adoption_New_Accounts_Last_30_Days</report>
+            <showRange>false</showRange>
         </components>
         <components>
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
@@ -27,6 +29,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>How many and what types of ACCOUNTS are being created?  Is there growth?</footer>
+            <groupingSortProperties/>
             <header>New ACCOUNTS Trend by Type</header>
             <legendPosition>Right</legendPosition>
             <report>DB_Adoption/DB_Adoption_New_Accounts_Trend</report>
@@ -40,11 +43,13 @@
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
             <componentType>Metric</componentType>
             <displayUnits>Auto</displayUnits>
+            <groupingSortProperties/>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
             <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
             <metricLabel>Count of ACCOUNTS (All)</metricLabel>
             <report>DB_Adoption/DB_Adoption_Count_of_Accounts</report>
+            <showRange>false</showRange>
         </components>
         <components>
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
@@ -56,6 +61,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Are users adding valuable ACCOUNT data?</footer>
+            <groupingSortProperties/>
             <header>ACCOUNTS w/out Key Fields Populated</header>
             <legendPosition>Right</legendPosition>
             <maxValuesDisplayed>5</maxValuesDisplayed>
@@ -81,6 +87,7 @@
             <drillEnabled>false</drillEnabled>
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <footer>Are users  tracking activities with their CUSTOMERS?</footer>
+            <groupingSortProperties/>
             <header>Neglected CUSTOMER Accounts</header>
             <indicatorHighColor>#C25454</indicatorHighColor>
             <indicatorLowColor>#54C254</indicatorLowColor>
@@ -100,6 +107,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Are users leveraging custom reporting capabilities to create visibility to valuable data?</footer>
+            <groupingSortProperties/>
             <header>REPORTS By Last Run Date</header>
             <legendPosition>Bottom</legendPosition>
             <report>DB_Adoption/DB_Adoption_Last_Run_Reports</report>
@@ -116,11 +124,13 @@
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
             <componentType>Metric</componentType>
             <displayUnits>Auto</displayUnits>
+            <groupingSortProperties/>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
             <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
             <metricLabel>New CONTACTS (Last 30 Days)</metricLabel>
             <report>DB_Adoption/DB_Adoption</report>
+            <showRange>false</showRange>
         </components>
         <components>
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
@@ -132,6 +142,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>How many and what types of CONTACTS are being created?  Is there growth?</footer>
+            <groupingSortProperties/>
             <header>New CONTACTS Trend by Type</header>
             <legendPosition>Right</legendPosition>
             <report>DB_Adoption/DB_Adoption_New_Contacts_Trend</report>
@@ -145,11 +156,13 @@
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
             <componentType>Metric</componentType>
             <displayUnits>Auto</displayUnits>
+            <groupingSortProperties/>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
             <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
             <metricLabel>Count of CONTACTS (All)</metricLabel>
             <report>DB_Adoption/DB_Adoption_Count_of_all_CONTACTS</report>
+            <showRange>false</showRange>
         </components>
         <components>
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
@@ -161,6 +174,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>Are users adding valuable CONTACT data?</footer>
+            <groupingSortProperties/>
             <header>CONTACTS w/out Key Fields Populated</header>
             <legendPosition>Bottom</legendPosition>
             <report>DB_Adoption/DB_Adoption_CONTACTS_wO_Fields_Populated</report>
@@ -186,6 +200,7 @@
             <drillEnabled>false</drillEnabled>
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <footer>Are users  tracking activities with their PROSPECTS?</footer>
+            <groupingSortProperties/>
             <header>Neglected PROSPECT Accounts</header>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
@@ -202,11 +217,13 @@
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
             <componentType>Metric</componentType>
             <displayUnits>Auto</displayUnits>
+            <groupingSortProperties/>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
             <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
             <metricLabel>New ACTIVITIES (Last 30 Days)</metricLabel>
             <report>DB_Adoption/DB_Adoption_New_ACTIVITIES_last_30_Days</report>
+            <showRange>false</showRange>
         </components>
         <components>
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
@@ -218,6 +235,7 @@
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
             <footer>How many and what types of ACTIVITIES are being created?  Do they support company goals?</footer>
+            <groupingSortProperties/>
             <header>New ACTIVITIES Trend by Type</header>
             <legendPosition>Right</legendPosition>
             <report>DB_Adoption/DB_Adoption_New_ACTIVITIES_Trend</report>
@@ -231,11 +249,13 @@
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
             <componentType>Metric</componentType>
             <displayUnits>Auto</displayUnits>
+            <groupingSortProperties/>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
             <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
             <metricLabel>Count of ACTIVITIES (Last 30 Days)</metricLabel>
             <report>DB_Adoption/DB_Adoption_New_ACTIVITIES_last_30_Days</report>
+            <showRange>false</showRange>
         </components>
         <components>
             <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
@@ -244,6 +264,7 @@
             <drillEnabled>false</drillEnabled>
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <footer>Are your users leveraging Salesforce to stay on task?</footer>
+            <groupingSortProperties/>
             <header>ACTIVITY Wall of Fame</header>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
@@ -261,6 +282,7 @@
             <drillEnabled>false</drillEnabled>
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <footer>Are your users leveraging Salesforce to stay on task?</footer>
+            <groupingSortProperties/>
             <header>ACTIVITY Wall of Shame</header>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>

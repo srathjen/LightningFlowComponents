@@ -49,13 +49,9 @@
     <filter>
         <criteriaItems>
             <column>Contact.Region_Chapter__c</column>
-            <operator>equals</operator>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
             <value>Alabama</value>
-        </criteriaItems>
-        <criteriaItems>
-            <column>Contact.Test_Record__c</column>
-            <operator>equals</operator>
-            <value>0</value>
         </criteriaItems>
     </filter>
     <format>Tabular</format>
@@ -67,6 +63,8 @@
     <reportType>ContactList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <sortColumn>ADDRESS2_CITY</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>

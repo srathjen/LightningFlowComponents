@@ -28,6 +28,7 @@
     <filter>
         <criteriaItems>
             <column>Awards_Recognition__c.Migrated_Record__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
@@ -41,6 +42,8 @@
     <reportType>CustomEntity$Awards_Recognition__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Awards_Recognition__c.Date_Field__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

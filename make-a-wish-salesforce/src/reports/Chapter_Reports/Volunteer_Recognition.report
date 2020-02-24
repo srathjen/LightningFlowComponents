@@ -18,6 +18,7 @@
     <filter>
         <criteriaItems>
             <column>Awards_Recognition__c$Volunteer_Contact__c.Hidden_Status__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Active</value>
         </criteriaItems>
@@ -36,6 +37,8 @@
     <reportType>Volunteer_Recognition__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Awards_Recognition__c$CreatedDate</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

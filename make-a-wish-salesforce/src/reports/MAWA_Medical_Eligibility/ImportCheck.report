@@ -40,56 +40,67 @@
         <booleanFilter>1 AND ((6 AND ((2 AND 3) OR (4 AND 5))) OR (7 AND (8 AND 9) OR (10 AND 11)))</booleanFilter>
         <criteriaItems>
             <column>Lead.ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Alaska &amp; Washington,Make-A-Wish North Texas</value>
         </criteriaItems>
         <criteriaItems>
             <column>STATUS</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Qualified</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Qualified_Export_Filename__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
         <criteriaItems>
             <column>STATUS</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>DNQ</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.DNQ_Export_Filename__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Migrated_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Migrated_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.DNQ_Date__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>greaterThan</operator>
             <value>5/4/2018</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.DNQ_Export_Filename__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Qualified_Date__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>greaterThan</operator>
             <value>5/4/2018</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Qualified_Export_Filename__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
@@ -103,6 +114,8 @@
     <reportType>LeadList</reportType>
     <scope>org</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <sortColumn>Lead.Migrated_Record__c</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>

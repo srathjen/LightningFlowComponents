@@ -1,0 +1,184 @@
+<!-- @author Shannon Paderes, @date 6/13/2019 -->
+<!-- @description Visualforce page to launch Wish Design Form Master Flow from Case button -->
+
+<apex:page id="WishVisionFormChild" standardController="Case"
+           standardStylesheets="false" lightningStylesheets="true"
+           showHeader="false" sideBar="false">
+    <apex:form >
+        <html>
+            <head>
+                <meta charset="utf-8" />
+                <meta http-equiv="x-ua-compatible" content="ie=edge" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                
+                <apex:includeLightning />
+                <apex:slds />
+                
+                <style>
+                    
+                    .body {
+                    margin-left: 1rem;
+                    margin-right: 1rem;
+                    }
+                    .slds-scope .slds-p-around_small,  .uiLabel.flowruntimeInputWrapper {
+                    padding: 0;
+                    padding-bottom: 1rem;
+                    }
+                    .slds-p-around_small.slds-col {
+                    padding: .75rem;
+                    margin-left: 1.5rem;
+                    }
+                    div#flowContainer {
+                    padding-top: 1rem;
+                    }
+                    .uiInput {
+                    background-color: rgb(255, 255, 255);
+                    border: 1px solid rgb(217, 219, 221);
+                    border-radius: .25rem;
+                    <!--width: 100%;-->
+                    transition: border .1s linear,background-color .1s linear;
+                    display: inline-block;
+                    padding: 0 1rem 0 .75rem;
+                    line-height: 1.875rem;
+                    min-height: calc(1.875rem + (1px * 2));
+                    }
+                    .slds-m-bottom_large.flowruntimeRichTextWrapper {
+                    margin-bottom: 1rem;
+                    }
+                    b, b u {
+                    color: #3a3a3a;
+                    font-family: Salesforce Sans,Arial,sans-serif;
+                    font-size: 16px;
+                    font-size: 100%;
+                    }
+                    <!--
+.slds-scope .slds-grow {
+width: calc(65% - .5rem - .5rem);
+}-->
+                    lightning-input.slds-form-element.flowruntimePhone,lightning-input.slds-form-element.flowruntimeEmail {
+                    max-width: 455px;
+                    }
+                    
+                    hr {
+                    display: block;
+                    margin: 1rem 0;
+                    border-top: 1px solid rgb(217, 219, 221);
+                    height: 1px;
+                    clear: both;
+                    }
+                    .content {
+                    margin-left: .25em;
+                    }
+                    #flowHead {
+                    margin-left: 1.5rem;
+                    margin-right: 1.5rem;
+                    margin-top: 1.5rem;
+                    }
+                    @media only screen and (max-width: 30em) {
+                    .slds-scope:not(html), .slds-scope body {
+                    font-size: .75rem;
+                    }
+                    .slds-scope .slds-text-heading_medium, .slds-scope .slds-text-heading--medium {
+                    font-size: 1rem; 
+                    padding-top: 1rem;
+                    }
+                    }
+                    @media only screen and (min-width: 64em) {
+                    .slds-scope .slds-large-size_3-of-12, .slds-scope .slds-large-size--3-of-12 {
+                    width: 325px;
+                    }}
+                    
+                    body input[type="text"] {
+                    min-width: 65%;}
+                    
+                    body textarea {
+                    min-width: 85%;
+                    }
+                    .slds-form-element.slds-dropdown-trigger.slds-dropdown-trigger_click.slds-size_1-of-1 {
+                    max-width: 455px;
+                    }    
+                    .flowruntimeErrorText.errorText {
+                    padding-bottom: 0px;
+                    }
+                    .uiBlock, .uiBlock .bBody {
+                    overflow: unset;
+                    vertical-align: top;
+                    }
+                    
+                </style>
+                
+                <!--Walkme Extension Script - PRODUCTION Snippet - START -->
+                        <script type="text/javascript">
+                        (function() {var walkme = document.createElement('script');
+                                     walkme.type = 'text/javascript'; walkme.async = true;
+                                     walkme.src = 'https://cdn.walkme.com/users/12ce3d1ce46b47b1931d30135493da28/walkme_12ce3d1ce46b47b1931d30135493da28_https.js';
+                                     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(walkme, s);
+                                     window._walkmeConfig = {smartLoad:true}; })();
+                        </script>
+				<!--Walkme Extension Script - PRODUCTION Snippet - END -->
+
+            </head>
+            
+            <body> 
+                <div class="slds-scope">
+                    
+                    <div id="flowHead">
+                        <div class="slds-grid slds-wrap">
+                            
+                            <div class="slds-col slds-small-order--1 slds-size--1-of-3 slds-small-size--1-of-3 slds-medium-size--2-of-6">
+                                <div class="slds-text-align_left slds-p-left_small">
+                                    <img src="{!$Resource.prospective_assets + '/web/img/global/logo_maw_blue.png'}"/>  </div>
+                            </div>
+                            
+                            <div class="slds-col slds-small-order--2 slds-size--2-of-3 slds-small-size--2-of-3 slds-medium-size--4-of-6 slds-col_bump-left">
+                                <!--   <apex:commandButton value="Return to Case" onclick="window.open('/{!Case.id}')" styleClass="slds-page-header__control slds-float--right slds-button slds-button--neutral slds-not-selected" />-->
+                               <apex:outputLink value="/{!Case.Id}" styleClass="slds-page-header__control slds-float--right slds-p-right_small slds-text-heading_small slds-button slds-button_outline-brand">{!$Label.Wish_Form_Return_To_Wish}</apex:outputLink>
+                            </div>
+                            
+                            <div class="slds-col slds-small-order--3 slds-size--1-of-1 slds-small-size--1-of-1 slds-medium-size--1-of-1 ">
+                                <div class="slds-text-align_center slds-align-top slds-text-heading_medium slds-p-bottom_small slds-border_bottom" >
+                                    <span><b>Wish Design Forms</b></span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div id="flowContainer" />
+                    
+                    <script>
+                    
+                    var flowInput = [
+                        {name: "recordId", type: "String", value: "{!case.Id}"}
+                    ];
+                    
+                    $Lightning.use("c:WishVisionFormChildApp", function () {
+                        $Lightning.createComponent(
+                            "lightning:flow",
+                            {},
+                            "flowContainer",
+                            function (component) {
+                                component.startFlow("Wish_Design_Forms", flowInput);
+                            });
+                    },
+                                   "{!$Site.BaseUrl}");
+                    
+                    //$Lightning.use("c:WishVisionFormChildApp", function () {
+                    //$Lightning.createComponent(
+                    //    "c:wishVisionFormHead",
+                    //    {},
+                    //    "flowHead",
+                    //    function (component) {
+                    //    });
+                    //},);
+                    
+                    $('input#input-6.slds-input').placeholder='wg name';
+
+                    </script>
+                    
+                </div>
+            </body>
+            
+        </html>
+    </apex:form>
+</apex:page>

@@ -8,4 +8,5 @@
     <style>freeForm</style>
     <subject>Interview Date Reminder</subject>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

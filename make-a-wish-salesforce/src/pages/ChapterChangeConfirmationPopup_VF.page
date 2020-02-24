@@ -1,0 +1,52 @@
+<apex:page standardController="Lead" extensions="ChapterChangeConfirmationPopup_AC" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    
+    <apex:outputPanel rendered="{!AND(OR(Lead.Hidden_Chapter_Change_Confirmation__c != Null, Lead.Hidden_Chapter_Change_Confirmation__c != ''), Lead.Hidden_Chapter_Change_Confirmation__c != Lead.ChapterName__c)}">        
+        <script>
+        
+        $(document).ready(function() {
+        var myUserContext = "{!$User.UITheme}";
+        setTimeout(function(){ 
+            var isConfirm = confirm("Are you sure you want to reassign this lead to a new chapter?");
+            if (isConfirm) {
+                debugger;
+                ChapterChangeConfirmationPopup_AC.updateLeadChapter('accept','{!lead.id}', function(result,event){ 
+                    if(event.type == 'exception'){
+                        alert(event.message);
+                    } else{
+                        if(result &&  {!!lead.Is_Chapter_Active__c}){  
+                            if (myUserContext == 'Theme4t' || myUserContext == 'Theme4d' || myUserContext == 'Theme4u') {                                
+                                sforce.one.navigateToURL('/apex/SendReferralEmail_VF?Id=' + '{!lead.id}', true);
+                            } else if (myUserContext == 'Theme3') {                                
+                               window.top.location = '/apex/SendReferralEmail_VF?Id=' + '{!lead.id}';
+                            } 
+                            
+                        }                           
+                    }                    
+                });
+                
+                return false;
+            } 
+            else{
+                debugger;
+                ChapterChangeConfirmationPopup_AC.updateLeadChapter('revert','{!lead.id}', function(result,event){ 
+                    if(event.type == 'exception'){
+                        alert(event.message);
+                    }else{
+                        
+                        if(result){    
+                            if (myUserContext == 'Theme4t' || myUserContext == 'Theme4d' || myUserContext == 'Theme4u') {                                
+                                 sforce.one.navigateToURL('/' + '{!lead.id}', true);
+                            } else if (myUserContext == 'Theme3') {                                
+                                window.top.location = '/' + '{!lead.id}';
+                            }                             
+                        }                           
+                    }                       
+                });
+                return false;
+            }
+        }, 2000);                             
+    }); 
+    </script>
+</apex:outputpanel> 
+</apex:page>

@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <content>NewWishBudget</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>LightningComponent</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Wish_Budget</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>Wish_Budget_Compact_Layout</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Wish_Budget_Compact_Layout</fullName>
+        <fields>Budget_Description__c</fields>
+        <label>Wish Budget Compact Layout</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>The Wish Budget captures all anticipated expenses for the Wish.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Actual_Cash__c</fullName>
+        <description>Roll-up Summary of Wish Expense: Actual Cash</description>
+        <externalId>false</externalId>
+        <label>Actual Cash</label>
+        <summarizedField>Wish_Expense__c.Actual_Cash__c</summarizedField>
+        <summaryForeignKey>Wish_Expense__c.Wish_Budget__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Actual_In_Kind__c</fullName>
+        <description>The total of the Actual In Kind values on the related Wish Expense.</description>
+        <externalId>false</externalId>
+        <label>Actual In Kind</label>
+        <summarizedField>Wish_Expense__c.Actual_In_Kind__c</summarizedField>
+        <summaryForeignKey>Wish_Expense__c.Wish_Budget__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Actual_Total__c</fullName>
+        <description>Sum of Actual Cash and Actual In Kind, rolled up from the respective amounts on the Wish Expenses related to this Wish Budget.</description>
+        <externalId>false</externalId>
+        <formula>Actual_Cash__c +  Actual_In_Kind__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Actual Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Budget_Approval_Status__c</fullName>
+        <description>This field is populated by the approval process.</description>
+        <externalId>false</externalId>
+        <label>Budget Approval Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Submitted</fullName>
+                    <default>false</default>
+                    <label>Submitted</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Rejected</fullName>
+                    <default>false</default>
+                    <label>Rejected</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Budget_Approved_Date_Time__c</fullName>
+        <description>Captures the date and time the budget was approved for use in the wish expense management user interface.  Exists in addition to the Budget Approved Date because historical data does not contain a time stamp.  Populated for records going forward via the approval process.</description>
+        <externalId>false</externalId>
+        <label>Budget Approved Date Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Budget_Approved_Date__c</fullName>
+        <description>The date on which the budget is approved. This field is populated by the approval process.</description>
+        <externalId>false</externalId>
+        <label>Budget Approved Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Budget_Cash__c</fullName>
+        <description>The total of the budgeted Cash values on the related Wish Expenses.</description>
+        <externalId>false</externalId>
+        <label>Budget Cash</label>
+        <summarizedField>Wish_Expense__c.Budget_Cash__c</summarizedField>
+        <summaryForeignKey>Wish_Expense__c.Wish_Budget__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Budget_Description__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(  Is_Active_Budget__c  ,&quot;Active Budget&quot;,&quot;Archived Budget&quot;)+ &quot; &quot; + 
+Name + &quot; for &quot; + 
+ Wish_Child__c 
++ 
+IF(!ISBLANK(TEXT( Budget_Approval_Status__c )),&quot; - &quot; + TEXT( Budget_Approval_Status__c ),&quot;&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Budget Description</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Budget_In_Kind__c</fullName>
+        <description>The total of the budgeted In Kind values on the related Wish Expenses.</description>
+        <externalId>false</externalId>
+        <label>Budget In Kind</label>
+        <summarizedField>Wish_Expense__c.Budget_In_Kind__c</summarizedField>
+        <summaryForeignKey>Wish_Expense__c.Wish_Budget__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Budget_Notes__c</fullName>
+        <externalId>false</externalId>
+        <label>Budget Notes</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Budget_Submitted_Date__c</fullName>
+        <description>The date on which the budget is submitted for approval. This field is populated by the approval process.</description>
+        <externalId>false</externalId>
+        <label>Budget Submitted Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Budget_Total__c</fullName>
+        <description>Sum of Budget Cash and Budget In Kind, rolled up from the respective amounts on the Wish Expenses related to this Wish Budget.</description>
+        <externalId>false</externalId>
+        <formula>Budget_Cash__c +  Budget_In_Kind__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Budget Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>GKTW_In_Kind_Value__c</fullName>
+        <description>The total of all Budget In Kind amounts for the related Wish Expenses, where the Wish Expense Type is &quot;Give Kids The World&quot;.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Budget In Kind total for Give Kids The World expenses.</inlineHelpText>
+        <label>GKTW In Kind Value</label>
+        <summarizedField>Wish_Expense__c.Budget_In_Kind__c</summarizedField>
+        <summaryFilterItems>
+            <field>Wish_Expense__c.Hidden_Wish_Expense_Type__c</field>
+            <operation>equals</operation>
+            <value>Give Kids The World</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Wish_Expense__c.Wish_Budget__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>High_Cost_Wish_Explanation__c</fullName>
+        <description>Captures information explaining why a particular wish cost is higher that usual.</description>
+        <externalId>false</externalId>
+        <label>High-Cost Wish Explanation</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Is_Active_Budget__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Only one budget may be active per wish. Defaults to True as this assumes that whenever a new budget is created, that budget supersedes any older ones.</description>
+        <externalId>false</externalId>
+        <label>Is Active Budget</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Total_FE_Posted_Cash__c</fullName>
+        <description>The sum of FE Posted Cash amounts from the associated Wish Expenses.</description>
+        <externalId>false</externalId>
+        <label>Total FE Posted Cash</label>
+        <summarizedField>Wish_Expense__c.FE_Posted_Cash__c</summarizedField>
+        <summaryForeignKey>Wish_Expense__c.Wish_Budget__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_FE_Posted_In_Kind__c</fullName>
+        <description>The sum of FE Posted In Kind amounts from the associated Wish Expenses.</description>
+        <externalId>false</externalId>
+        <label>Total FE Posted In Kind</label>
+        <summarizedField>Wish_Expense__c.FE_Posted_In_Kind__c</summarizedField>
+        <summaryForeignKey>Wish_Expense__c.Wish_Budget__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_FE_Posted_In_Kind_to_Cash_Ratio__c</fullName>
+        <description>Provides the percentage of In-Kind relative to the total of all In-Kind and Cash expenses.</description>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(Total_FE_Posted_Cash__c) &amp;&amp; ISBLANK(Total_FE_Posted_In_Kind__c), NULL,
+IF(!ISBLANK(Total_FE_Posted_Cash__c) &amp;&amp; ISBLANK(Total_FE_Posted_In_Kind__c), 0,
+IF(ISBLANK(Total_FE_Posted_Cash__c) = NULL &amp;&amp; !ISBLANK(Total_FE_Posted_In_Kind__c), 1,
+IF(!ISBLANK(Total_FE_Posted_Cash__c) &amp;&amp; !ISBLANK(Total_FE_Posted_In_Kind__c), (Total_FE_Posted_In_Kind__c / (Total_FE_Posted_Cash__c + Total_FE_Posted_In_Kind__c)),NULL))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total FE Posted In-Kind to Cash Ratio</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Wish_Case__c</fullName>
+        <externalId>false</externalId>
+        <label>Wish Case</label>
+        <referenceTo>Case</referenceTo>
+        <relationshipLabel>Wish Budget</relationshipLabel>
+        <relationshipName>Wish_Budget</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Wish_Child__c</fullName>
+        <externalId>false</externalId>
+        <formula>Wish_Case__r.Contact.FirstName + &quot; &quot; + Wish_Case__r.Contact.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Wish Child</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Wish Budget</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>Budget_Approval_Status__c</columns>
+        <columns>Budget_Approved_Date__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>WBN-{0}</displayFormat>
+        <label>Wish Budget Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Wish Budgets</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Inactivate_Budget</fullName>
+        <active>true</active>
+        <errorConditionFormula>!ISNEW() &amp;&amp; ISCHANGED(Is_Active_Budget__c) &amp;&amp; Is_Active_Budget__c</errorConditionFormula>
+        <errorMessage>Budgets cannot be set to Active once Inactivated</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

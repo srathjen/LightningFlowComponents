@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Created Time --></label>
+        <name>VisualAntidote__Created_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Detail --></label>
+        <name>VisualAntidote__Detail__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object Info --></label>
+        <name>VisualAntidote__Object_Info__c</name>
+    </fields>
+    <fields>
+        <label><!-- Process --></label>
+        <name>VisualAntidote__Process__c</name>
+        <picklistValues>
+            <masterLabel>FormResubmissions</masterLabel>
+            <translation><!-- FormResubmissions --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FormSubmissions</masterLabel>
+            <translation><!-- FormSubmissions --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>InitialRender</masterLabel>
+            <translation><!-- InitialRender --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>InitialSubmission</masterLabel>
+            <translation><!-- InitialSubmission --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ProcessSObject</masterLabel>
+            <translation><!-- ProcessSObject --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SubmissionProcess</masterLabel>
+            <translation><!-- SubmissionProcess --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Source --></label>
+        <name>VisualAntidote__Source__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>VisualAntidote__Type__c</name>
+        <picklistValues>
+            <masterLabel>Debug</masterLabel>
+            <translation><!-- Debug --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Error</masterLabel>
+            <translation><!-- Error --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Info</masterLabel>
+            <translation><!-- Info --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Warning</masterLabel>
+            <translation><!-- Warning --></translation>
+        </picklistValues>
+    </fields>
+</CustomObjectTranslation>

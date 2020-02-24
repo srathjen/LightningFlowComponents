@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Wish Budget</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Wish Budgets</value>
+    </caseValues>
+    <fields>
+        <label><!-- Actual Cash --></label>
+        <name>Actual_Cash__c</name>
+    </fields>
+    <fields>
+        <label><!-- Actual In Kind --></label>
+        <name>Actual_In_Kind__c</name>
+    </fields>
+    <fields>
+        <label><!-- Actual Total --></label>
+        <name>Actual_Total__c</name>
+    </fields>
+    <fields>
+        <label><!-- Budget Approval Status --></label>
+        <name>Budget_Approval_Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Submitted</masterLabel>
+            <translation><!-- Submitted --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Budget Approved Date Time --></label>
+        <name>Budget_Approved_Date_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Budget Approved Date --></label>
+        <name>Budget_Approved_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Budget Cash --></label>
+        <name>Budget_Cash__c</name>
+    </fields>
+    <fields>
+        <label><!-- Budget Description --></label>
+        <name>Budget_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Budget In Kind --></label>
+        <name>Budget_In_Kind__c</name>
+    </fields>
+    <fields>
+        <label><!-- Budget Notes --></label>
+        <name>Budget_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Budget Submitted Date --></label>
+        <name>Budget_Submitted_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Budget Total --></label>
+        <name>Budget_Total__c</name>
+    </fields>
+    <fields>
+        <help><!-- Budget In Kind total for Give Kids The World expenses. --></help>
+        <label><!-- GKTW In Kind Value --></label>
+        <name>GKTW_In_Kind_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- High-Cost Wish Explanation --></label>
+        <name>High_Cost_Wish_Explanation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Active Budget --></label>
+        <name>Is_Active_Budget__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total FE Posted Cash --></label>
+        <name>Total_FE_Posted_Cash__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total FE Posted In Kind --></label>
+        <name>Total_FE_Posted_In_Kind__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total FE Posted In-Kind to Cash Ratio --></label>
+        <name>Total_FE_Posted_In_Kind_to_Cash_Ratio__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Case --></label>
+        <name>Wish_Case__c</name>
+        <relationshipLabel><!-- Wish Budget --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Wish Child --></label>
+        <name>Wish_Child__c</name>
+    </fields>
+    <layouts>
+        <layout>Wish Budget Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- Budget Notes --></label>
+        <name>Budget_Notes</name>
+    </quickActions>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Budgets cannot be set to Active once Inactivated --></errorMessage>
+        <name>Inactivate_Budget</name>
+    </validationRules>
+    <workflowTasks>
+        <name>Wish_Budget_needs_to_be_revised</name>
+        <subject><!-- Wish Budget needs to be revised --></subject>
+    </workflowTasks>
+</CustomObjectTranslation>

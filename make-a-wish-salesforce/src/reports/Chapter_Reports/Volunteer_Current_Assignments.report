@@ -33,11 +33,13 @@
     <filter>
         <criteriaItems>
             <column>Contact$RecordType</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Volunteer_Contact</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact$is_Active_Volunteer__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
@@ -51,6 +53,8 @@
     <reportType>Volunteer_Contact_with_Cases__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Contact$CreatedDate</dateColumn>
         <interval>INTERVAL_CURRENT</interval>

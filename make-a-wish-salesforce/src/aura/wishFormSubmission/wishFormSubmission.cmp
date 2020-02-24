@@ -1,0 +1,29 @@
+<!-- @author Shannon Paderes, @date 7/12/2019 -->
+<!-- @description Wish Form Submission screen Component for Wish Design Forms Flow -->
+
+<aura:component implements="lightning:availableForFlowScreens" access="global">
+    <!-- Get values from the flow -->
+    <aura:attribute name="formName" type="String"/>
+    <aura:attribute name="wishChildFullName" type="String"/>
+    <!-- Pass the value of the selected button to the flow -->
+    <aura:attribute name="actionValue" type="String"/>
+    <!--buttonicon stateful-->
+    <aura:attribute name="buttonstate" type="Boolean" default="false"/>
+    <div class="flowContainer">
+        <div class="slds-text-heading_medium slds-align_absolute-center slds-p-bottom_medium slds-p-top_large"
+             id="submitHead">
+            {!format($Label.c.Wish_Form_submit,v.formName,v.wishChildFullName)}
+        </div>
+        <div class="slds-grid slds-gutters slds-grid_vertical-align-center slds-grid_align-center">
+            <div class="slds-col">
+                <lightning:button label="{!$Label.c.Wish_Form_Save_for_Later}" class="btn" aura:id="saveForLater"
+                                  variant="brand" onclick="{!c.handleChange}"/>
+            </div>
+            <div class="slds-col">
+                <lightning:button label="{!$Label.c.Wish_Form_Submit_Form}" class="btn" aura:id="submitForm"
+                                  variant="brand" onclick="{!c.handleChange}"/>
+            </div>
+        </div>
+
+    </div>
+</aura:component>

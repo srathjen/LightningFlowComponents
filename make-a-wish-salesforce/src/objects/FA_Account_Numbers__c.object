@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>It hold the chapter package values.</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Chapter_Account_ID__c</fullName>
+        <description>Chapter paid account id</description>
+        <externalId>false</externalId>
+        <label>Active Vol Account ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Chapter_Package__c</fullName>
+        <externalId>false</externalId>
+        <label>Chapter Package</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Chapter_Paid__c</fullName>
+        <description>Chapter paid package value</description>
+        <externalId>false</externalId>
+        <label>Chapter Paid</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Volunteer_Account_ID__c</fullName>
+        <description>Volunteer paid account ID</description>
+        <externalId>false</externalId>
+        <label>Pros Vol Account ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Volunteer_Package__c</fullName>
+        <externalId>false</externalId>
+        <label>Volunteer Package</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Volunteer_Paid__c</fullName>
+        <description>Volunteer paid package value</description>
+        <externalId>false</externalId>
+        <label>Volunteer Paid</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>FA Account Numbers</label>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -24,6 +24,21 @@
         <template>Automated_Wish_Granting_Email_Templates/Contact_Rush_Wish_Reminder_Alerts</template>
     </alerts>
     <alerts>
+        <fullName>Duplicate_Contact_Referral_Inquiry_Alert</fullName>
+        <description>Duplicate Contact Referral / Inquiry Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <type>campaignMemberDerivedOwner</type>
+        </recipients>
+        <recipients>
+            <field>Intake_Manager_For_Dupe_Alert__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Medical_Eligibility_Emails/Duplicate_on_Referral_Inquiry_Email</template>
+    </alerts>
+    <alerts>
         <fullName>Send_Email_When_OT_Cancelled_have_Registered_and_No_Completed_OT</fullName>
         <description>Send Email When OT Cancelled ,have Registered and No Completed OT</description>
         <protected>false</protected>
@@ -108,6 +123,15 @@
         <template>Automated_Volunteer_Templates/Task_Interview_Completed_Email_Template</template>
     </alerts>
     <fieldUpdates>
+        <fullName>Populate_Date_of_Birth_Contact</fullName>
+        <field>DOB_Text__c</field>
+        <formula>Text(Birthdate)</formula>
+        <name>Populate Date of Birth- Contact</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>Recall_Update_Contact_Info</fullName>
         <description>This field update is used to update when the IsRecall Contact info field</description>
         <field>IsRecall_Contact_Info__c</field>
@@ -126,6 +150,16 @@
         <notifyAssignee>false</notifyAssignee>
         <operation>Literal</operation>
         <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Untick_Duplicate_Referral_Email</fullName>
+        <field>Contact_Owner_Dupe_Alert__c</field>
+        <literalValue>0</literalValue>
+        <name>Untick Duplicate Referral Email</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
     </fieldUpdates>
     <fieldUpdates>
         <fullName>Update_Contact_Info</fullName>
@@ -375,6 +409,36 @@ OtherPhone
         <triggerType>onCreateOnly</triggerType>
     </rules>
     <rules>
+        <fullName>Populate Date of Birth-Contact</fullName>
+        <actions>
+            <name>Populate_Date_of_Birth_Contact</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>SIW-147 This supports Duplication check: Capture information when a duplicate referral is submitted- matching rules currently do not support date fields</description>
+        <formula>NOT(ISBLANK(Birthdate))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Send Duplicate Referral Email Alert</fullName>
+        <actions>
+            <name>Duplicate_Contact_Referral_Inquiry_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Untick_Duplicate_Referral_Email</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Contact.Contact_Owner_Dupe_Alert__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Send Duplicate Referral Email Alert if Duplicate Contact Found</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
         <fullName>Send Email When OT Cancelled %2Chave Registered and No Completed OT</fullName>
         <actions>
             <name>Send_Email_When_OT_Cancelled_have_Registered_and_No_Completed_OT</name>
@@ -501,7 +565,7 @@ OtherPhone
     </rules>
     <rules>
         <fullName>Volunteer%3A Interview Date Not Set After Application Completed 7_30_Days Workflow</fullName>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Contact.is_Application__c</field>
             <operation>equals</operation>
@@ -550,6 +614,7 @@ OtherPhone
             <type>FieldUpdate</type>
         </actions>
         <active>true</active>
+        <description>If the standard Email field is newly entered or changed AND the Preferred Email picklist is set to Alternate THEN Salesforce will fill in the Alternate Email field with the email address entered in the standard Email field.</description>
         <formula>AND(      ISPICKVAL( npe01__Preferred_Email__c ,&quot;Alternate&quot;),      OR(           AND(                ISNEW(),                LEN(Email)&gt;0           ),           ISCHANGED( Email )      ) )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
@@ -560,6 +625,7 @@ OtherPhone
             <type>FieldUpdate</type>
         </actions>
         <active>true</active>
+        <description>If the standard Email field is newly entered or changed AND the Preferred Email picklist is set to Personal or Home THEN Salesforce will fill in the Personal Email field with the email address entered in the standard Email field.</description>
         <formula>AND(     OR( ISPICKVAL( npe01__Preferred_Email__c ,&quot;Personal&quot;),ISPICKVAL( npe01__Preferred_Email__c ,&quot;Home&quot;)),      OR(           AND(                ISNEW(),                LEN(Email)&gt;0           ),           ISCHANGED( Email )      ) )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
@@ -570,6 +636,7 @@ OtherPhone
             <type>FieldUpdate</type>
         </actions>
         <active>true</active>
+        <description>If the standard Email field is newly entered or changed AND the Preferred Email picklist is set to Work THEN Salesforce will fill in the Work Email field with the email address entered in the standard Email field.</description>
         <formula>AND(      ISPICKVAL( npe01__Preferred_Email__c ,&quot;Work&quot;),      OR(           AND(                ISNEW(),                LEN(Email)&gt;0           ),           ISCHANGED( Email )      ) )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
@@ -580,6 +647,7 @@ OtherPhone
             <type>FieldUpdate</type>
         </actions>
         <active>true</active>
+        <description>If the standard Phone field is newly entered or changed AND the Preferred Phone picklist is set to Home THEN Salesforce will fill in the Home Phone field with the phone number entered in the standard Phone field.</description>
         <formula>AND(      ISPICKVAL( npe01__PreferredPhone__c ,&quot;Home&quot;),      OR(           AND(                ISNEW(),                LEN(Phone)&gt;0           ),           ISCHANGED( Phone )      ) )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
@@ -590,6 +658,7 @@ OtherPhone
             <type>FieldUpdate</type>
         </actions>
         <active>true</active>
+        <description>If the standard Phone field is newly entered or changed AND the Preferred Phone picklist is set to Mobile THEN Salesforce will fill in the Mobile Phone field with the phone number entered in the standard Phone field.</description>
         <formula>AND(      ISPICKVAL( npe01__PreferredPhone__c ,&quot;Mobile&quot;),      OR(           AND(                ISNEW(),                LEN(Phone)&gt;0           ),           ISCHANGED( Phone )      ) )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
@@ -600,6 +669,7 @@ OtherPhone
             <type>FieldUpdate</type>
         </actions>
         <active>true</active>
+        <description>If the standard Phone field is newly entered or changed AND the Preferred Phone picklist is set to Other THEN Salesforce will fill in the Other Phone field with the phone number entered in the standard Phone field.</description>
         <formula>AND(      ISPICKVAL( npe01__PreferredPhone__c ,&quot;Other&quot;),      OR(           AND(                ISNEW(),                LEN(Phone)&gt;0           ),           ISCHANGED( Phone )      ) )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
@@ -610,6 +680,7 @@ OtherPhone
             <type>FieldUpdate</type>
         </actions>
         <active>true</active>
+        <description>If the standard Phone field is newly entered or changed AND the Preferred Phone picklist is set to Work THEN Salesforce will fill in the Work Phone field with the phone number entered in the standard Phone field.</description>
         <formula>AND(      ISPICKVAL( npe01__PreferredPhone__c ,&quot;Work&quot;),      OR(           AND(                ISNEW(),                LEN(Phone)&gt;0           ),           ISCHANGED( Phone )      ) )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
@@ -666,7 +737,7 @@ OtherPhone
             <field>Contact.npe01__WorkEmail__c</field>
             <operation>equals</operation>
         </criteriaItems>
-        <description>If there is a value in Email but no values in any email fields or Preferred Email</description>
+        <description>If there is a value in the standard Email field AND no values in any NPSP email fields or Preferred Email, then Salesforce updates two fields: Work Email is updated with the email address in the standard Email field and Preferred Email is set to Work.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
@@ -705,7 +776,7 @@ OtherPhone
             <field>Contact.OtherPhone</field>
             <operation>equals</operation>
         </criteriaItems>
-        <description>A new phone value is added to the Phone field and there is no preferred Phone</description>
+        <description>If there is a value in the standard Phone field AND no values in any NPSP phone fields or Preferred Phone, then Salesforce updates two fields: Work Phone is updated with the phone number in the standard Phone field and Preferred Phone is set to Work.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
@@ -717,7 +788,7 @@ OtherPhone
     </rules>
     <tasks>
         <fullName>Contact_ET_Application_Approved</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -729,7 +800,7 @@ OtherPhone
     </tasks>
     <tasks>
         <fullName>Contact_ET_Application_Completed</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -741,7 +812,7 @@ OtherPhone
     </tasks>
     <tasks>
         <fullName>Contact_ET_Application_Status_Incomplete</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -753,7 +824,7 @@ OtherPhone
     </tasks>
     <tasks>
         <fullName>Contact_ET_Application_Status_Incomplete_After_30_Days</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -765,7 +836,7 @@ OtherPhone
     </tasks>
     <tasks>
         <fullName>Contact_ET_Volunteer_Interview_Date_Set_Remainder_30_Days</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -776,7 +847,7 @@ OtherPhone
     </tasks>
     <tasks>
         <fullName>Contact_ET_Volunteer_Interview_Date_Set_Remainder_7_Days</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -787,7 +858,7 @@ OtherPhone
     </tasks>
     <tasks>
         <fullName>Task_ET_Interview_Completed</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>

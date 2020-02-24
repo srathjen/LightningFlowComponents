@@ -1,3 +1,10 @@
+<!--
+Modification Logs:
+------------ ----
+
+IME-232 Yuvraj Line Number: 390-395, 425-437
+
+-->
 <apex:page id="ReferralForm" renderAs="{!renderpdf}" controller="WishReferralFormOut_AC" applyHtmlTag="true" showHeader="false" applyBodyTag="false" sidebar="false" standardStylesheets="false" cache="false">
     
     
@@ -206,10 +213,10 @@
                                     <div class="divTableCell">Gender:</div>
                                     <div class="divTableCell">{!currLead.Gender__c }</div>
                                 </div>
-                                
+                                <!-- modified as per IME-232 -->                                
                                 <apex:outputPanel layout="none" rendered="{!if(currLead.Gender__c == 'Self-describe', True, false)}">
                                     <div class="divTableRow">
-                                        <div class="divTableCell">Self describe:</div>
+                                        <div class="divTableCell">Gender Description:</div>
                                         <div class="divTableCell">{!currLead.Self_describe_comment_box__c }</div>
                                     </div>
                                     
@@ -275,7 +282,7 @@
                                 </div>
                                 <div class="divTableRow">
                                     <div class="divTableCell">What is the family's primary spoken language?</div>
-                                    <div class="divTableCell">{!currLead.What_is_the_family_s_primary_spoken_lang__c }</div>
+                                    <div class="divTableCell">{!currLead.What_is_the_family_s_primary_spoken_lang__c}</div>
                                 </div>
                                 <hr style="width:200%"/>
                                 
@@ -316,20 +323,20 @@
                                         <div class="divTableCell">{!currLead.Additional_Parent_Phone__c}</div>
                                     </div>
                                     <hr style="width:200%"/>
-                                </apex:outputPanel> 
-                                
-                                <apex:outputPanel layout="none" rendered="{!if(currLead.of_Siblings__c != null, True, false)}">
-                                    <div class="divTableRow">
-                                        <div class="divTableCell">Number of Siblings:</div>
-                                        <div class="divTableCell">{!currLead.of_Siblings__c }</div>
-                                    </div>
+                                </apex:outputPanel>                       
+
                                     
-                                </apex:outputPanel>
                                 <apex:outputPanel layout="none" rendered="{!if(sibList.size !=0, True, false)}">
                                     <div class="divTableRow">
                                         <b class="hdr-bld">Sibling Details</b>
                                     </div>
                                 </apex:outputPanel> 
+                                <apex:outputPanel layout="none" rendered="{!if(currLead.of_Siblings__c != null, True, false)}">
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">Number of Siblings:</div>
+                                        <div class="divTableCell">{!currLead.of_Siblings__c }</div>
+                                    </div>                                    
+                                </apex:outputPanel>
                                 <apex:outputPanel layout="none" rendered="{!if(sibList.size !=0, True, false)}">
                                     <apex:repeat value="{!sibList}" var="sb">
                                         <div class="divTableRow">
@@ -345,9 +352,10 @@
                                             <div class="divTableCell">{!sb.age}</div>
                                         </div>
                                     </apex:repeat>
-                                    <hr style="width:200%"/>
                                 </apex:outputPanel>
-                              
+
+                              <hr style="width:200%"/>
+
                                 <div class="divTableRow">
                                     <b style="padding-left:1.5%; font-weight:bold">Medical Information</b>
                                 </div>
@@ -378,8 +386,15 @@
                                     <div class="divTableCell">Is there a medical reason why we need to move quickly?</div>
                                     <div class="divTableCell">{!currLead.Any_medical_reason_for_moving_quickly__c }</div>
                                 </div>
-                                
-                                
+
+                                <!-- IME-232 Starts -->
+                                <apex:outputPanel layout="none" rendered="{!IF(currLead.Medical_Provider_Category__c != null , TRUE, FALSE)}">
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">Additional Information</div>
+                                        <div class="divTableCell">{!currLead.ReferralComment__c}</div>
+                                    </div>
+                                </apex:outputPanel>
+                                <!-- IME-232 Ends -->                           
                                 
                                 <hr style="width:200%"/>
                                 
@@ -404,9 +419,10 @@
                                     <div class="divTableCell">Hospital or Treatment Facility:</div>
                                     <div class="divTableCell">{!currLead.Hospital_Treatment_Facility_Treating__c }</div>
                                 </div>
-                                
+
+
                                 <div class="divTableRow">
-                                    <b class="hdr-bld">Best Physician Information</b>
+                                    <b class="hdr-bld">Best Contact for Physician</b>
                                 </div>
                                 <div class="divTableRow">
                                     <div class="divTableCell">Name:</div>

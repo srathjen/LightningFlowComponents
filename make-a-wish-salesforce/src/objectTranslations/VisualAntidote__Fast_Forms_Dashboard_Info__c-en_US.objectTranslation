@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Fields List --></label>
+        <name>VisualAntidote__Fields_List__c</name>
+    </fields>
+    <fields>
+        <label><!-- Page Size --></label>
+        <name>VisualAntidote__Page_Size__c</name>
+    </fields>
+</CustomObjectTranslation>

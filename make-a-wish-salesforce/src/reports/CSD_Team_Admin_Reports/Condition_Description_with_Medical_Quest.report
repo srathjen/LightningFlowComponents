@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Condition_Description__c.Medical_Questions__r$Name</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c$Code_To_Use__c</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c.Medical_Questions__r$Data_Type__c</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c.Medical_Questions__r$Question__c</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c.Medical_Questions__r$Recommendation_to_Chapter__c</field>
+    </columns>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Condition_Description__c$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Condition Description with Medical Quest</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Condition_Description_with_Medical_Questions__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Condition_Description__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

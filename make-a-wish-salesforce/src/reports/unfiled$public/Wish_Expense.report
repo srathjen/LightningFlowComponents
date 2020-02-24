@@ -34,6 +34,7 @@
     <filter>
         <criteriaItems>
             <column>Wish_Expense_Type__c.Wish_Expense_Transaction_Codes__r.Wish_Expenses__r$Case__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>00001436</value>
         </criteriaItems>
@@ -47,6 +48,8 @@
     <reportType>Wish_Expense__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <sortColumn>Wish_Expense_Type__c.Wish_Expense_Transaction_Codes__r.Wish_Expenses__r$Budget_Cash__c</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>

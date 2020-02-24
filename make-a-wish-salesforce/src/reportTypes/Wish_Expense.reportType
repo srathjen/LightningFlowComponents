@@ -117,11 +117,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Budget_Approval_Status__c</field>
-            <table>Wish_Expense_Type__c.Wish_Expense_Transaction_Codes__r.Wish_Expenses__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Budget_Cash__c</field>
             <table>Wish_Expense_Type__c.Wish_Expense_Transaction_Codes__r.Wish_Expenses__r</table>
         </columns>

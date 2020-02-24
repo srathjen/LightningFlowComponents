@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Active --></label>
+        <name>VisualAntidote__Active__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form --></label>
+        <name>VisualAntidote__Form__c</name>
+        <relationshipLabel><!-- Form Rules --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Rule Order --></label>
+        <name>VisualAntidote__Rule_Order__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rule Script --></label>
+        <name>VisualAntidote__Rule_Script__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rule XML --></label>
+        <name>VisualAntidote__Rule_XML__c</name>
+    </fields>
+</CustomObjectTranslation>

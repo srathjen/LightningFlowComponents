@@ -4,7 +4,10 @@ CreatedBy   : Pavithra
 Created Date : 08/11/2016
 Description  : This class is used as handler to AffiliationReviewTrigger_AT for updating 
                Primary as True when affiliation record is creating for contact as a first record
-               and used to add user to chatter group when the user becomes active for the chapter
+               and used to add user to chatter group when the user becomes active for the chapter.
+Modification Log
+1. WVC-2205 - Kanagaraj A -08/08/2018 // Line 56 Previously the affilliation status was "Prospective".
+                                         Now we have updated as "Pending".
 *****************************************************************************************************/
 Public Class Affiliation_OnBeforeInsertTriggerHandler{
    /********************************************************************************************** 
@@ -16,10 +19,9 @@ Public Class Affiliation_OnBeforeInsertTriggerHandler{
     {
         Set<Id> contactIds = new Set<Id>();
         Map<String,Integer> contactsMap = new Map<String,Integer>();
-        Map<Id,String> contactMap=new Map<Id,String>();
-        Constant_Ac  constant = new constant_Ac();
+        Map<Id,String> contactMap = new Map<Id,String>();
         Map<Id,Contact> getContactRecType = new Map<Id,Contact>();
-        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
         
         for(npe5__Affiliation__c currRec : beforeInsertList) 
         {
@@ -51,7 +53,7 @@ Public Class Affiliation_OnBeforeInsertTriggerHandler{
                 if(getContactRecType.get(currRec.npe5__Contact__c).RecordTypeId != volunteerRecordTypeId) {
                     currRec.npe5__Status__c = 'Active';
                 } else {
-                    currRec.npe5__Status__c = 'Prospective';
+                    currRec.npe5__Status__c = 'Pending';
                 }
                     
             }

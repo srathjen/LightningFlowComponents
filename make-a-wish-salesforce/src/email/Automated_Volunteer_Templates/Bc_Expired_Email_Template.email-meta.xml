@@ -19,4 +19,5 @@ Thanks,
 {!Background_check__c.Account_Phone__c}
 {!Background_check__c.Account_Email__c}</textOnly>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

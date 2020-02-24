@@ -16,6 +16,7 @@
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <enableHover>false</enableHover>
             <expandOthers>true</expandOthers>
+            <groupingSortProperties/>
             <legendPosition>Bottom</legendPosition>
             <report>National_Reports/Way_to_hear_MAW</report>
             <showPercentage>true</showPercentage>
@@ -35,6 +36,7 @@
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
+            <groupingSortProperties/>
             <legendPosition>Bottom</legendPosition>
             <report>National_Reports/Way_to_hear_MAW</report>
             <showPercentage>false</showPercentage>
@@ -54,6 +56,7 @@
             <drillToDetailEnabled>true</drillToDetailEnabled>
             <enableHover>true</enableHover>
             <expandOthers>false</expandOthers>
+            <groupingSortProperties/>
             <legendPosition>Bottom</legendPosition>
             <report>National_Reports/way_to_hear_MAW_with_Chapter</report>
             <showPercentage>false</showPercentage>
@@ -62,7 +65,7 @@
             <useReportChart>false</useReportChart>
         </components>
     </rightSection>
-    <runningUser>kesavakumar_maw@mstsolutions.com</runningUser>
+    <runningUser>admin@wish.org</runningUser>
     <textColor>#000000</textColor>
     <title>Way to hear the MAW</title>
     <titleColor>#000000</titleColor>

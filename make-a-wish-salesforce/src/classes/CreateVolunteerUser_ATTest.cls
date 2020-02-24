@@ -3,14 +3,11 @@ Description : Test class for CreateVolunteerUser_AT Trigger
 *****************************************************/
 
 @isTest
-public class CreateVolunteerUser_ATTest
-{
+public class CreateVolunteerUser_ATTest {
 
-    static  testmethod void CreateVolunteerUser()
-    {
+    static testmethod void CreateVolunteerUser() {
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccountwithVolunteerManager();
-        Constant_AC  constant = new Constant_AC();
-        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        insert chapterAccount;
         
         Contact volunteerCon = new Contact();
         volunteerCon.Firstname = 'Test';
@@ -24,19 +21,16 @@ public class CreateVolunteerUser_ATTest
         volunteerCon.mailingstatecode = 'AZ';
         volunteerCon.MobilePhone= '9003910426';
         volunteerCon.Migrated_Record__c = True;
-        volunteerCon.RecordTypeId = volunteerRecordTypeId;
+        volunteerCon.RecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
         volunteerCon.AccountId = chapterAccount.id;
         
         insert volunteerCon;
-    
     }
     
-    static  testmethod void CreateVolunteerUserContatUpdated()
-    {
-     /*   Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
-        Constant_AC  constant = new Constant_AC();
-        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
-        Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
+    static testmethod void CreateVolunteerUserContatUpdated() {
+        /*
+        Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
+        insert chapterAccount;
         
         Contact wishCon = new Contact();
         wishCon.Firstname = 'Test';
@@ -50,16 +44,12 @@ public class CreateVolunteerUser_ATTest
         wishCon.mailingstatecode = 'AZ';
         wishCon.MobilePhone= '9003910426';
         wishCon.Migrated_Record__c = True;
-        wishCon.RecordTypeId = wichChildRecordTypeId ;
+        wishCon.RecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
         wishCon.AccountId = chapterAccount.id;
         insert wishCon;
         
-        wishCon.RecordTypeId = volunteerRecordTypeId;
-        update wishCon;*/
-        
-    
+        wishCon.RecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
+        update wishCon;
+        */
     }
-    
-
-
 }

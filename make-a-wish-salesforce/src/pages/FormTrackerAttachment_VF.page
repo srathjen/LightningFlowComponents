@@ -1,0 +1,100 @@
+<!-- ******************************************************************************************************************************
+Author      : MST Solutions
+Date        : 03/26/2018
+Description : This page is used to upload the attachemnt to the wish.
+*********************************************************************************************************************************** -->
+<apex:page id="fta" sidebar="false" showHeader="false"  applyBodyTag="false" docType="html-5.0" standardStylesheets="false" cache="false">
+     <!-- start page header -->
+        <head>
+              <title>Make-A-Wish | Wish Form Tracker</title> 
+            <c:headCore_VC />
+     <!-- end page header  -->
+    <style>
+        .fieldsetwrapper{
+            border: 1px solid #e2e2e2;
+            border-radius: 2px;
+        }
+        .fieldsetwrapper fieldset {
+            border: none;
+            border-bottom: 1px solid #e2e2e2;
+            padding: 1rem;
+            }
+            
+        .fieldsetwrapper fieldset legend{   
+            font-family: "Lato", Arial, sans-serif;
+            font-weight: 900;
+            font-size: 1rem;
+            color: #4c4c4c;
+            text-transform: uppercase;
+            padding: 1rem;
+            padding-left: 0;
+        }
+</style>
+</head>
+
+    <body class="vcp" onkeydown="return ( (event.which || event.keyCode) != 116)">
+     <!-- start page header -->
+        <c:GlobalHeader_VC />
+     <!-- end page header  -->
+
+     <!-- start body content -->
+        <main role="main" class="container">
+            <!-- start upload attachment section -->
+                        <div id="FileUploadContainer" />
+                             <script>
+                                 var attrslist = {
+                                         currentpageName : '{!$CurrentPage.parameters.currentpageName}',
+                                         MinorparticipantName : '{!$CurrentPage.parameters.MinorparticipantName}',
+                                         MinorparticipantEmail : '{!$CurrentPage.parameters.MinorparticipantEmail}',
+                                         FormName : '{!$CurrentPage.parameters.FormName}',
+                                         associated: '{!$CurrentPage.parameters.associated}',
+                                         recordId : '{!$CurrentPage.parameters.Id}',
+                                         documentTitle : '{!$CurrentPage.parameters.documentTitle}',
+                                         selectedFormat :  '{!$CurrentPage.parameters.selectedFormat}',
+                                         pageSrc : '{!$CurrentPage.parameters.pageSrc}'
+                                 };
+                                 var pageSrc = '{!$CurrentPage.parameters.pageSrc}';
+                                 if(pageSrc == 'upload'){
+                                    attrslist.minorparticipantrecId  = '{!$CurrentPage.parameters.minorparticipantrecId}';
+                                 }
+                                 
+                                 $Lightning.use("c:FormTrackerFileUpload_LA", function() {
+                                     $Lightning.createComponent("c:FileUpload_LC",
+                                     { 
+                                         queryParams : attrslist
+                                     },
+                                     "FileUploadContainer",
+                                     function(cmp) {
+                                         console.log('Component created, do something cool here');
+                                     });
+                                });
+                            </script>
+            <!-- end upload attachment section -->
+                
+            <!-- start display the attached files section -->
+            <!-- <div class="col-sm-12 m-t-2 fieldsetwrapper">
+                <fieldset>
+                        <legend>Attachments Lists</legend> -->
+                        <div id="AttachmentListController" />
+                             <script>
+                                 $Lightning.use("c:FormTrackerFileUpload_LA", function() {
+                                     $Lightning.createComponent("c:FormTrackerAttachmentList_LC",
+                                     { 
+                                         recordId : '{!$CurrentPage.parameters.Id}'
+                                     },
+                                     "AttachmentListController",
+                                     function(cmp) {
+                                         console.log('Component created, do something cool here');
+                                     });
+                                });
+                            </script>
+                    <!--</fieldset>
+            </div>-->
+             <!-- end display the attached files section -->
+        </main>
+     <!-- end body content -->
+      <!-- start page header -->
+        <c:GlobalFooter_VC />
+     <!-- end page header  -->
+    </body>
+</apex:page>

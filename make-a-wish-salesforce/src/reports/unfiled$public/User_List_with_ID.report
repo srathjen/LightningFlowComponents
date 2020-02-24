@@ -21,6 +21,7 @@
     <filter>
         <criteriaItems>
             <column>ROLE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Arizona - Chapter</value>
         </criteriaItems>
@@ -37,6 +38,8 @@
     </params>
     <reportType>User</reportType>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>LAST_LOGIN</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

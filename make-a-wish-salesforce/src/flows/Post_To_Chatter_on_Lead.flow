@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Post_Chatter_on_14th_day</name>
+        <label>Post Chatter on 14th day</label>
+        <locationX>668</locationX>
+        <locationY>363</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>VarLeadId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>Taskfor14days</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>Post_Chatter_on_60th_day</name>
+        <label>Post Chatter on 60th day</label>
+        <locationX>429</locationX>
+        <locationY>435</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>VarLeadId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>Taskfor60days</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>Post_To_Chatter_on_30th_day</name>
+        <label>Post To Chatter on 30th day</label>
+        <locationX>170</locationX>
+        <locationY>352</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>VarLeadId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>Taskfor30days</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <decisions>
+        <name>Days_Decision</name>
+        <label>Days Decision</label>
+        <locationX>423</locationX>
+        <locationY>71</locationY>
+        <defaultConnectorLabel>[Default Outcome]</defaultConnectorLabel>
+        <rules>
+            <name>Decision_based_on_days</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>noOfDays</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>noOfDays</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <numberValue>14.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Search_Lead_Owner_Record</targetReference>
+            </connector>
+            <label>Decision based on 14days</label>
+        </rules>
+        <rules>
+            <name>Decision_based_on_30days</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>noOfDays</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>noOfDays</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <numberValue>30.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Search_Lead_Read_for_Owner_Id</targetReference>
+            </connector>
+            <label>Decision based on 30days</label>
+        </rules>
+        <rules>
+            <name>Decision_based_on_60days</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>noOfDays</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>noOfDays</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <numberValue>60.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Search_Lead_Owner</targetReference>
+            </connector>
+            <label>Decision based on 60days</label>
+        </rules>
+    </decisions>
+    <interviewLabel>Post To Chatter on Lead {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Post To Chatter on Lead</label>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Search_Lead_Owner</name>
+        <label>Search Lead Owner</label>
+        <locationX>426</locationX>
+        <locationY>297</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Post_Chatter_on_60th_day</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>VarLeadId</elementReference>
+            </value>
+        </filters>
+        <object>Lead</object>
+        <outputAssignments>
+            <assignToReference>leadOwnerId</assignToReference>
+            <field>OwnerId</field>
+        </outputAssignments>
+    </recordLookups>
+    <recordLookups>
+        <name>Search_Lead_Owner_Record</name>
+        <label>Search Lead Owner</label>
+        <locationX>665</locationX>
+        <locationY>204</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Post_Chatter_on_14th_day</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>VarLeadId</elementReference>
+            </value>
+        </filters>
+        <object>Lead</object>
+        <outputAssignments>
+            <assignToReference>leadOwnerId</assignToReference>
+            <field>OwnerId</field>
+        </outputAssignments>
+    </recordLookups>
+    <recordLookups>
+        <name>Search_Lead_Read_for_Owner_Id</name>
+        <label>Search Lead Read for Owner Id</label>
+        <locationX>167</locationX>
+        <locationY>219</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Post_To_Chatter_on_30th_day</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>VarLeadId</elementReference>
+            </value>
+        </filters>
+        <object>Lead</object>
+        <outputAssignments>
+            <assignToReference>leadOwnerId</assignToReference>
+            <field>OwnerId</field>
+        </outputAssignments>
+    </recordLookups>
+    <startElementReference>Days_Decision</startElementReference>
+    <status>Active</status>
+    <textTemplates>
+        <description>Post to chatter When the case status is in Pending Clarification Chapter for 14 days</description>
+        <name>Taskfor14days</name>
+        <text>Hello @[{!leadOwnerId}],
+
+This record has been pending for 14 days. If you have received any feedback from the provider on this child, please update the record. Thanks so much!
+
+Please note: This is an automatically generated message.</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Post to chatter When the case status is in Pending Clarification Chapter for 30 days</description>
+        <name>Taskfor30days</name>
+        <text>Hello @[{!leadOwnerId}],
+
+This record has been pending for 30 days. If you haven’t done so already, please contact the healthcare team again to see if they are able to provide us with the additional information we need to determine eligibility. If we aren’t able to get the additional information within the next 30 days, we will need to close this record due to lack of contact with the healthcare team. Thank you!
+
+Please note: This is an automatically generated message.</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Post to chatter When the case status is in Pending Clarification Chapter for 60 days</description>
+        <name>Taskfor60days</name>
+        <text>Hello @[{!leadOwnerId}], 
+
+This record has been pending for 60 days. There is not enough information provided currently to make a determination of eligibility. This record will be changed to a DNQ status by the National Medical Affairs Team. Please respond to this chatter with any questions.
+
+Please note: This is an automatically generated message.</text>
+    </textTemplates>
+    <variables>
+        <name>LeadOwner</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Lead</objectType>
+    </variables>
+    <variables>
+        <name>leadOwnerId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue></stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>noOfDays</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <scale>0</scale>
+    </variables>
+    <variables>
+        <name>VarCaseId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue></stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>VarLeadId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

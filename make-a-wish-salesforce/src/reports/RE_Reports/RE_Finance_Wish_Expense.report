@@ -76,11 +76,13 @@
     <filter>
         <criteriaItems>
             <column>Wish_Expense__c$Migrated_Record__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Wish_Expense__c$RecordType</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Wish_Expense__c.Finance</value>
         </criteriaItems>
@@ -94,6 +96,8 @@
     <reportType>RE_Wish_Expense__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Wish_Expense__c$CreatedDate</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

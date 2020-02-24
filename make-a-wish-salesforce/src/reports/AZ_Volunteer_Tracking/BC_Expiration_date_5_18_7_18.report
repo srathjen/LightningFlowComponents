@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>Background_check__c.Volunteer__c</field>
+    </columns>
+    <columns>
+        <field>Background_check__c.Date_Requested__c</field>
+    </columns>
+    <columns>
+        <field>Background_check__c.Date_Completed__c</field>
+    </columns>
+    <columns>
+        <field>Background_check__c.Status__c</field>
+    </columns>
+    <format>Tabular</format>
+    <name>BC- Expiration date 5/18 - 7/18</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Background_check__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Background_check__c.Date__c</dateColumn>
+        <endDate>2019-07-18</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2019-05-18</startDate>
+    </timeFrameFilter>
+</Report>

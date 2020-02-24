@@ -16,6 +16,7 @@
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
+            <groupingSortProperties/>
             <legendPosition>Bottom</legendPosition>
             <report>Chapter_Volunteer_Reports/Active_AZ_Volunteers_by_Gender</report>
             <showPercentage>false</showPercentage>
@@ -36,6 +37,7 @@
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
+            <groupingSortProperties/>
             <legendPosition>Bottom</legendPosition>
             <report>Chapter_Volunteer_Reports/Active_AZ_Volunteers_by_Ethnicity</report>
             <showPercentage>false</showPercentage>
@@ -56,6 +58,7 @@
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
+            <groupingSortProperties/>
             <legendPosition>Bottom</legendPosition>
             <report>Chapter_Volunteer_Reports/Active_AZ_Volunteers_by_Language</report>
             <showPercentage>false</showPercentage>

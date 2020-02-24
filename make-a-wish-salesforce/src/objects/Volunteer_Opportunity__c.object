@@ -5,7 +5,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -13,7 +33,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -21,7 +61,13 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -29,7 +75,27 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -37,15 +103,56 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>Tab</actionName>
         <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Volunteer_Opportunity_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
     <allowInChatterGroups>true</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Volunteer_Opportunity_Compact_Layout</fullName>
+        <fields>Volunteer_Role_Name__c</fields>
+        <fields>Volunteer_Name__c</fields>
+        <fields>Role__c</fields>
+        <fields>Status__c</fields>
+        <label>Volunteer Opportunity Compact Layout</label>
+    </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
     <description>It holds the related Case, Event, User and Role Name</description>
     <enableActivities>true</enableActivities>
@@ -53,6 +160,7 @@
     <enableEnhancedLookup>true</enableEnhancedLookup>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
     <enableReports>true</enableReports>
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
@@ -560,34 +668,51 @@
         <description>It is used to identify the status of the record</description>
         <externalId>false</externalId>
         <label>Approval Status</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Initiated</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Rejected</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Rejection Notification</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Not Assigned</fullName>
-                <default>true</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Initiated</fullName>
+                    <default>false</default>
+                    <label>Initiated</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Rejected</fullName>
+                    <default>false</default>
+                    <label>Rejected</label>
+                </value>
+                <value>
+                    <fullName>Rejection Notification</fullName>
+                    <default>false</default>
+                    <label>Rejection Notification</label>
+                </value>
+                <value>
+                    <fullName>Not Assigned</fullName>
+                    <default>true</default>
+                    <label>Not Assigned</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Approved_Date__c</fullName>
+        <description>Populated with today&apos;s date the first time the Volunteer Opportunity has a volunteer assigned and they are set to an &apos;Approved&apos; status.</description>
+        <externalId>false</externalId>
+        <label>Approved Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
     </fields>
     <fields>
         <fullName>Case_Owner__c</fullName>
@@ -743,205 +868,255 @@ GEOLOCATION(  Wish__r.Contact.Address_Latitude__c ,  Wish__r.Contact.Address_Lon
         <fullName>End_Time__c</fullName>
         <externalId>false</externalId>
         <label>End Time</label>
-        <picklist>
-            <picklistValues>
-                <fullName>12:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>12:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>1:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>1:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>2:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>2:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>3:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>3:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>4:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>4:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>5:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>5:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>6:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>6:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>7:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>7:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>8:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>8:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>9:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>9:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>10:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>10:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>11:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>11:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>12:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>12:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>1:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>1:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>2:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>2:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>3:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>3:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>4:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>4:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>5:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>5:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>6:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>6:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>7:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>7:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>8:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>8:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>9:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>9:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>10:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>10:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>11:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>11:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>12:00 AM</fullName>
+                    <default>false</default>
+                    <label>12:00 AM</label>
+                </value>
+                <value>
+                    <fullName>12:30 AM</fullName>
+                    <default>false</default>
+                    <label>12:30 AM</label>
+                </value>
+                <value>
+                    <fullName>1:00 AM</fullName>
+                    <default>false</default>
+                    <label>1:00 AM</label>
+                </value>
+                <value>
+                    <fullName>1:30 AM</fullName>
+                    <default>false</default>
+                    <label>1:30 AM</label>
+                </value>
+                <value>
+                    <fullName>2:00 AM</fullName>
+                    <default>false</default>
+                    <label>2:00 AM</label>
+                </value>
+                <value>
+                    <fullName>2:30 AM</fullName>
+                    <default>false</default>
+                    <label>2:30 AM</label>
+                </value>
+                <value>
+                    <fullName>3:00 AM</fullName>
+                    <default>false</default>
+                    <label>3:00 AM</label>
+                </value>
+                <value>
+                    <fullName>3:30 AM</fullName>
+                    <default>false</default>
+                    <label>3:30 AM</label>
+                </value>
+                <value>
+                    <fullName>4:00 AM</fullName>
+                    <default>false</default>
+                    <label>4:00 AM</label>
+                </value>
+                <value>
+                    <fullName>4:30 AM</fullName>
+                    <default>false</default>
+                    <label>4:30 AM</label>
+                </value>
+                <value>
+                    <fullName>5:00 AM</fullName>
+                    <default>false</default>
+                    <label>5:00 AM</label>
+                </value>
+                <value>
+                    <fullName>5:30 AM</fullName>
+                    <default>false</default>
+                    <label>5:30 AM</label>
+                </value>
+                <value>
+                    <fullName>6:00 AM</fullName>
+                    <default>false</default>
+                    <label>6:00 AM</label>
+                </value>
+                <value>
+                    <fullName>6:30 AM</fullName>
+                    <default>false</default>
+                    <label>6:30 AM</label>
+                </value>
+                <value>
+                    <fullName>7:00 AM</fullName>
+                    <default>false</default>
+                    <label>7:00 AM</label>
+                </value>
+                <value>
+                    <fullName>7:30 AM</fullName>
+                    <default>false</default>
+                    <label>7:30 AM</label>
+                </value>
+                <value>
+                    <fullName>8:00 AM</fullName>
+                    <default>false</default>
+                    <label>8:00 AM</label>
+                </value>
+                <value>
+                    <fullName>8:30 AM</fullName>
+                    <default>false</default>
+                    <label>8:30 AM</label>
+                </value>
+                <value>
+                    <fullName>9:00 AM</fullName>
+                    <default>false</default>
+                    <label>9:00 AM</label>
+                </value>
+                <value>
+                    <fullName>9:30 AM</fullName>
+                    <default>false</default>
+                    <label>9:30 AM</label>
+                </value>
+                <value>
+                    <fullName>10:00 AM</fullName>
+                    <default>false</default>
+                    <label>10:00 AM</label>
+                </value>
+                <value>
+                    <fullName>10:30 AM</fullName>
+                    <default>false</default>
+                    <label>10:30 AM</label>
+                </value>
+                <value>
+                    <fullName>11:00 AM</fullName>
+                    <default>false</default>
+                    <label>11:00 AM</label>
+                </value>
+                <value>
+                    <fullName>11:30 AM</fullName>
+                    <default>false</default>
+                    <label>11:30 AM</label>
+                </value>
+                <value>
+                    <fullName>12:00 PM</fullName>
+                    <default>false</default>
+                    <label>12:00 PM</label>
+                </value>
+                <value>
+                    <fullName>12:30 PM</fullName>
+                    <default>false</default>
+                    <label>12:30 PM</label>
+                </value>
+                <value>
+                    <fullName>1:00 PM</fullName>
+                    <default>false</default>
+                    <label>1:00 PM</label>
+                </value>
+                <value>
+                    <fullName>1:30 PM</fullName>
+                    <default>false</default>
+                    <label>1:30 PM</label>
+                </value>
+                <value>
+                    <fullName>2:00 PM</fullName>
+                    <default>false</default>
+                    <label>2:00 PM</label>
+                </value>
+                <value>
+                    <fullName>2:30 PM</fullName>
+                    <default>false</default>
+                    <label>2:30 PM</label>
+                </value>
+                <value>
+                    <fullName>3:00 PM</fullName>
+                    <default>false</default>
+                    <label>3:00 PM</label>
+                </value>
+                <value>
+                    <fullName>3:30 PM</fullName>
+                    <default>false</default>
+                    <label>3:30 PM</label>
+                </value>
+                <value>
+                    <fullName>4:00 PM</fullName>
+                    <default>false</default>
+                    <label>4:00 PM</label>
+                </value>
+                <value>
+                    <fullName>4:30 PM</fullName>
+                    <default>false</default>
+                    <label>4:30 PM</label>
+                </value>
+                <value>
+                    <fullName>5:00 PM</fullName>
+                    <default>false</default>
+                    <label>5:00 PM</label>
+                </value>
+                <value>
+                    <fullName>5:30 PM</fullName>
+                    <default>false</default>
+                    <label>5:30 PM</label>
+                </value>
+                <value>
+                    <fullName>6:00 PM</fullName>
+                    <default>false</default>
+                    <label>6:00 PM</label>
+                </value>
+                <value>
+                    <fullName>6:30 PM</fullName>
+                    <default>false</default>
+                    <label>6:30 PM</label>
+                </value>
+                <value>
+                    <fullName>7:00 PM</fullName>
+                    <default>false</default>
+                    <label>7:00 PM</label>
+                </value>
+                <value>
+                    <fullName>7:30 PM</fullName>
+                    <default>false</default>
+                    <label>7:30 PM</label>
+                </value>
+                <value>
+                    <fullName>8:00 PM</fullName>
+                    <default>false</default>
+                    <label>8:00 PM</label>
+                </value>
+                <value>
+                    <fullName>8:30 PM</fullName>
+                    <default>false</default>
+                    <label>8:30 PM</label>
+                </value>
+                <value>
+                    <fullName>9:00 PM</fullName>
+                    <default>false</default>
+                    <label>9:00 PM</label>
+                </value>
+                <value>
+                    <fullName>9:30 PM</fullName>
+                    <default>false</default>
+                    <label>9:30 PM</label>
+                </value>
+                <value>
+                    <fullName>10:00 PM</fullName>
+                    <default>false</default>
+                    <label>10:00 PM</label>
+                </value>
+                <value>
+                    <fullName>10:30 PM</fullName>
+                    <default>false</default>
+                    <label>10:30 PM</label>
+                </value>
+                <value>
+                    <fullName>11:00 PM</fullName>
+                    <default>false</default>
+                    <label>11:00 PM</label>
+                </value>
+                <value>
+                    <fullName>11:30 PM</fullName>
+                    <default>false</default>
+                    <label>11:30 PM</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Event_Date__c</fullName>
@@ -1188,6 +1363,16 @@ GEOLOCATION(  Wish__r.Contact.Address_Latitude__c ,  Wish__r.Contact.Address_Lon
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_allow_Hold_status__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>It marked as true when the status is updated hold by the system.</description>
+        <externalId>false</externalId>
+        <label>Hidden allow Hold status</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Hobbies__c</fullName>
@@ -1461,6 +1646,7 @@ IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Saturday&quot;), &qu
         <externalId>false</externalId>
         <formula>Text(Wish__r.Contact.Non_Verbal__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Note: Wish Granters require additional training prior to working with Non-Verbal wish children.</inlineHelpText>
         <label>Non - Verbal</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -1481,6 +1667,36 @@ IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Saturday&quot;), &qu
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Number_Of_Active_Wishes_For_This_Vol__c</fullName>
+        <description>The number of active wishes logged in this Contact&apos;s record. Note that this field is updated on the Contact record via code.</description>
+        <externalId>false</externalId>
+        <formula>Volunteer_Name__r.Number_of_wishes_active__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Number Of Active Wishes For This Vol</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_Of_Wishes_Granted_By_This_Vol__c</fullName>
+        <description>The number of wishes granted by this Volunteer Contact. Note that this field is updated on the Contact record via code.</description>
+        <externalId>false</externalId>
+        <formula>Volunteer_Name__r.Number_of_wishes_granted__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Number Of Wishes Granted By This Vol</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>RE_Created_Date__c</fullName>
@@ -1559,74 +1775,90 @@ RECIP_RELATION_CODE&quot;</description>
         <description>This field is get the values when the volunteer contact is removed form the volunteer Name field.</description>
         <externalId>false</externalId>
         <label>Reason Inactive</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Moved</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Non-responsive</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Inactivated</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Requested</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Deceased</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Not Approved</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Error</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Moved</fullName>
+                    <default>false</default>
+                    <label>Moved</label>
+                </value>
+                <value>
+                    <fullName>Non-responsive</fullName>
+                    <default>false</default>
+                    <label>Non-responsive</label>
+                </value>
+                <value>
+                    <fullName>Inactivated</fullName>
+                    <default>false</default>
+                    <label>Inactivated</label>
+                </value>
+                <value>
+                    <fullName>Requested</fullName>
+                    <default>false</default>
+                    <label>Requested</label>
+                </value>
+                <value>
+                    <fullName>Deceased</fullName>
+                    <default>false</default>
+                    <label>Deceased</label>
+                </value>
+                <value>
+                    <fullName>Not Approved</fullName>
+                    <default>false</default>
+                    <label>Not Approved</label>
+                </value>
+                <value>
+                    <fullName>Error</fullName>
+                    <default>false</default>
+                    <label>Error</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Required_Forms_for_Volunteers__c</fullName>
         <description>This pick list is used to differentiate the forms for volunteer</description>
         <externalId>false</externalId>
         <label>Required Forms for Volunteers</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Single Day Event Volunteers Fact Sheet</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Volunteer Application Fact Sheet</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Annual Conflict of Interest &amp; Ethics Assurance Statement Fact Sheet</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>First Advantage Fact Sheet</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Associates Database: How to Guide</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Single Day Event Volunteers Fact Sheet</fullName>
+                    <default>false</default>
+                    <label>Single Day Event Volunteers Fact Sheet</label>
+                </value>
+                <value>
+                    <fullName>Volunteer Application Fact Sheet</fullName>
+                    <default>false</default>
+                    <label>Volunteer Application Fact Sheet</label>
+                </value>
+                <value>
+                    <fullName>Annual Conflict of Interest &amp; Ethics Assurance Statement Fact Sheet</fullName>
+                    <default>false</default>
+                    <label>Annual Conflict of Interest &amp; Ethics Assurance Statement Fact Sheet</label>
+                </value>
+                <value>
+                    <fullName>First Advantage Fact Sheet</fullName>
+                    <default>false</default>
+                    <label>First Advantage Fact Sheet</label>
+                </value>
+                <value>
+                    <fullName>Associates Database: How to Guide</fullName>
+                    <default>false</default>
+                    <label>Associates Database: How to Guide</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Role__c</fullName>
@@ -1645,238 +1877,300 @@ RECIP_RELATION_CODE&quot;</description>
         <fullName>Start_Time__c</fullName>
         <externalId>false</externalId>
         <label>Start Time</label>
-        <picklist>
-            <picklistValues>
-                <fullName>12:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>12:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>1:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>1:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>2:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>2:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>3:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>3:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>4:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>4:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>5:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>5:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>6:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>6:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>7:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>7:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>8:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>8:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>9:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>9:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>10:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>10:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>11:00 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>11:30 AM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>12:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>12:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>1:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>1:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>2:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>2:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>3:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>3:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>4:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>4:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>5:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>5:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>6:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>6:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>7:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>7:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>8:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>8:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>9:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>9:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>10:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>10:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>11:00 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>11:30 PM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>12:00 AM</fullName>
+                    <default>false</default>
+                    <label>12:00 AM</label>
+                </value>
+                <value>
+                    <fullName>12:30 AM</fullName>
+                    <default>false</default>
+                    <label>12:30 AM</label>
+                </value>
+                <value>
+                    <fullName>1:00 AM</fullName>
+                    <default>false</default>
+                    <label>1:00 AM</label>
+                </value>
+                <value>
+                    <fullName>1:30 AM</fullName>
+                    <default>false</default>
+                    <label>1:30 AM</label>
+                </value>
+                <value>
+                    <fullName>2:00 AM</fullName>
+                    <default>false</default>
+                    <label>2:00 AM</label>
+                </value>
+                <value>
+                    <fullName>2:30 AM</fullName>
+                    <default>false</default>
+                    <label>2:30 AM</label>
+                </value>
+                <value>
+                    <fullName>3:00 AM</fullName>
+                    <default>false</default>
+                    <label>3:00 AM</label>
+                </value>
+                <value>
+                    <fullName>3:30 AM</fullName>
+                    <default>false</default>
+                    <label>3:30 AM</label>
+                </value>
+                <value>
+                    <fullName>4:00 AM</fullName>
+                    <default>false</default>
+                    <label>4:00 AM</label>
+                </value>
+                <value>
+                    <fullName>4:30 AM</fullName>
+                    <default>false</default>
+                    <label>4:30 AM</label>
+                </value>
+                <value>
+                    <fullName>5:00 AM</fullName>
+                    <default>false</default>
+                    <label>5:00 AM</label>
+                </value>
+                <value>
+                    <fullName>5:30 AM</fullName>
+                    <default>false</default>
+                    <label>5:30 AM</label>
+                </value>
+                <value>
+                    <fullName>6:00 AM</fullName>
+                    <default>false</default>
+                    <label>6:00 AM</label>
+                </value>
+                <value>
+                    <fullName>6:30 AM</fullName>
+                    <default>false</default>
+                    <label>6:30 AM</label>
+                </value>
+                <value>
+                    <fullName>7:00 AM</fullName>
+                    <default>false</default>
+                    <label>7:00 AM</label>
+                </value>
+                <value>
+                    <fullName>7:30 AM</fullName>
+                    <default>false</default>
+                    <label>7:30 AM</label>
+                </value>
+                <value>
+                    <fullName>8:00 AM</fullName>
+                    <default>false</default>
+                    <label>8:00 AM</label>
+                </value>
+                <value>
+                    <fullName>8:30 AM</fullName>
+                    <default>false</default>
+                    <label>8:30 AM</label>
+                </value>
+                <value>
+                    <fullName>9:00 AM</fullName>
+                    <default>false</default>
+                    <label>9:00 AM</label>
+                </value>
+                <value>
+                    <fullName>9:30 AM</fullName>
+                    <default>false</default>
+                    <label>9:30 AM</label>
+                </value>
+                <value>
+                    <fullName>10:00 AM</fullName>
+                    <default>false</default>
+                    <label>10:00 AM</label>
+                </value>
+                <value>
+                    <fullName>10:30 AM</fullName>
+                    <default>false</default>
+                    <label>10:30 AM</label>
+                </value>
+                <value>
+                    <fullName>11:00 AM</fullName>
+                    <default>false</default>
+                    <label>11:00 AM</label>
+                </value>
+                <value>
+                    <fullName>11:30 AM</fullName>
+                    <default>false</default>
+                    <label>11:30 AM</label>
+                </value>
+                <value>
+                    <fullName>12:00 PM</fullName>
+                    <default>false</default>
+                    <label>12:00 PM</label>
+                </value>
+                <value>
+                    <fullName>12:30 PM</fullName>
+                    <default>false</default>
+                    <label>12:30 PM</label>
+                </value>
+                <value>
+                    <fullName>1:00 PM</fullName>
+                    <default>false</default>
+                    <label>1:00 PM</label>
+                </value>
+                <value>
+                    <fullName>1:30 PM</fullName>
+                    <default>false</default>
+                    <label>1:30 PM</label>
+                </value>
+                <value>
+                    <fullName>2:00 PM</fullName>
+                    <default>false</default>
+                    <label>2:00 PM</label>
+                </value>
+                <value>
+                    <fullName>2:30 PM</fullName>
+                    <default>false</default>
+                    <label>2:30 PM</label>
+                </value>
+                <value>
+                    <fullName>3:00 PM</fullName>
+                    <default>false</default>
+                    <label>3:00 PM</label>
+                </value>
+                <value>
+                    <fullName>3:30 PM</fullName>
+                    <default>false</default>
+                    <label>3:30 PM</label>
+                </value>
+                <value>
+                    <fullName>4:00 PM</fullName>
+                    <default>false</default>
+                    <label>4:00 PM</label>
+                </value>
+                <value>
+                    <fullName>4:30 PM</fullName>
+                    <default>false</default>
+                    <label>4:30 PM</label>
+                </value>
+                <value>
+                    <fullName>5:00 PM</fullName>
+                    <default>false</default>
+                    <label>5:00 PM</label>
+                </value>
+                <value>
+                    <fullName>5:30 PM</fullName>
+                    <default>false</default>
+                    <label>5:30 PM</label>
+                </value>
+                <value>
+                    <fullName>6:00 PM</fullName>
+                    <default>false</default>
+                    <label>6:00 PM</label>
+                </value>
+                <value>
+                    <fullName>6:30 PM</fullName>
+                    <default>false</default>
+                    <label>6:30 PM</label>
+                </value>
+                <value>
+                    <fullName>7:00 PM</fullName>
+                    <default>false</default>
+                    <label>7:00 PM</label>
+                </value>
+                <value>
+                    <fullName>7:30 PM</fullName>
+                    <default>false</default>
+                    <label>7:30 PM</label>
+                </value>
+                <value>
+                    <fullName>8:00 PM</fullName>
+                    <default>false</default>
+                    <label>8:00 PM</label>
+                </value>
+                <value>
+                    <fullName>8:30 PM</fullName>
+                    <default>false</default>
+                    <label>8:30 PM</label>
+                </value>
+                <value>
+                    <fullName>9:00 PM</fullName>
+                    <default>false</default>
+                    <label>9:00 PM</label>
+                </value>
+                <value>
+                    <fullName>9:30 PM</fullName>
+                    <default>false</default>
+                    <label>9:30 PM</label>
+                </value>
+                <value>
+                    <fullName>10:00 PM</fullName>
+                    <default>false</default>
+                    <label>10:00 PM</label>
+                </value>
+                <value>
+                    <fullName>10:30 PM</fullName>
+                    <default>false</default>
+                    <label>10:30 PM</label>
+                </value>
+                <value>
+                    <fullName>11:00 PM</fullName>
+                    <default>false</default>
+                    <label>11:00 PM</label>
+                </value>
+                <value>
+                    <fullName>11:30 PM</fullName>
+                    <default>false</default>
+                    <label>11:30 PM</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Status__c</fullName>
         <description>It indicate different status of the volunteer opportunity.</description>
         <externalId>false</externalId>
         <label>Status</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Pending</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Inactive</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Completed</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Out of Compliance</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Pending</fullName>
+                    <default>false</default>
+                    <label>Pending</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Inactive</fullName>
+                    <default>false</default>
+                    <label>Inactive</label>
+                </value>
+                <value>
+                    <fullName>Completed</fullName>
+                    <default>false</default>
+                    <label>Completed</label>
+                </value>
+                <value>
+                    <fullName>Out of Compliance</fullName>
+                    <default>false</default>
+                    <label>Out of Compliance</label>
+                </value>
+                <value>
+                    <fullName>Hold</fullName>
+                    <default>false</default>
+                    <label>Hold</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Total_Hours__c</fullName>
@@ -1894,6 +2188,21 @@ RECIP_RELATION_CODE&quot;</description>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Unique_Record_Count__c</fullName>
+        <description>Enables better record counting functions on reports.</description>
+        <externalId>false</externalId>
+        <formula>1</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Unique Record Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Volunteer_Contact__c</fullName>
@@ -1970,93 +2279,115 @@ RECIP_RELATION_CODE&quot;</description>
         <description>This field indicate about  the Volunteer role.</description>
         <externalId>false</externalId>
         <label>Volunteer Role Name</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Advisory Committee, non-voting Board Member</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Airport Greeter</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Board Member</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Celebrity Host</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Fundraising Volunteer</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Medical Advisor</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Medical Outreach Volunteer</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Office Volunteer</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Regional Champion</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Single Day Event Volunteer</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Speaker&apos;s Bureau</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Special Events - Committee Member</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Special Events - Day of Volunteer</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Translator &amp; Interpreter</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Volunteer Manager</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Wish Assist Phone Greeter</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Wish Assist Volunteer</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Wish Coordinator</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Wish Granter</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Wish Granter Mentor</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Advisory Committee, non-voting Board Member</fullName>
+                    <default>false</default>
+                    <label>Advisory Committee, non-voting Board Member</label>
+                </value>
+                <value>
+                    <fullName>Airport Greeter</fullName>
+                    <default>false</default>
+                    <label>Airport Greeter</label>
+                </value>
+                <value>
+                    <fullName>Board Member</fullName>
+                    <default>false</default>
+                    <label>Board Member</label>
+                </value>
+                <value>
+                    <fullName>Celebrity Host</fullName>
+                    <default>false</default>
+                    <label>Celebrity Host</label>
+                </value>
+                <value>
+                    <fullName>Fundraising Volunteer</fullName>
+                    <default>false</default>
+                    <label>Fundraising Volunteer</label>
+                </value>
+                <value>
+                    <fullName>Medical Advisor</fullName>
+                    <default>false</default>
+                    <label>Medical Advisor</label>
+                </value>
+                <value>
+                    <fullName>Medical Outreach Volunteer</fullName>
+                    <default>false</default>
+                    <label>Medical Outreach Volunteer</label>
+                </value>
+                <value>
+                    <fullName>Office Volunteer</fullName>
+                    <default>false</default>
+                    <label>Office Volunteer</label>
+                </value>
+                <value>
+                    <fullName>Regional Champion</fullName>
+                    <default>false</default>
+                    <label>Regional Champion</label>
+                </value>
+                <value>
+                    <fullName>Single Day Event Volunteer</fullName>
+                    <default>false</default>
+                    <label>Single Day Event Volunteer</label>
+                </value>
+                <value>
+                    <fullName>Speaker&apos;s Bureau</fullName>
+                    <default>false</default>
+                    <label>Speaker&apos;s Bureau</label>
+                </value>
+                <value>
+                    <fullName>Special Events - Committee Member</fullName>
+                    <default>false</default>
+                    <label>Special Events - Committee Member</label>
+                </value>
+                <value>
+                    <fullName>Special Events - Day of Volunteer</fullName>
+                    <default>false</default>
+                    <label>Special Events - Day of Volunteer</label>
+                </value>
+                <value>
+                    <fullName>Translator &amp; Interpreter</fullName>
+                    <default>false</default>
+                    <label>Translator &amp; Interpreter</label>
+                </value>
+                <value>
+                    <fullName>Volunteer Manager</fullName>
+                    <default>false</default>
+                    <label>Volunteer Manager</label>
+                </value>
+                <value>
+                    <fullName>Wish Assist Phone Greeter</fullName>
+                    <default>false</default>
+                    <label>Wish Assist Phone Greeter</label>
+                </value>
+                <value>
+                    <fullName>Wish Assist Volunteer</fullName>
+                    <default>false</default>
+                    <label>Wish Assist Volunteer</label>
+                </value>
+                <value>
+                    <fullName>Wish Coordinator</fullName>
+                    <default>false</default>
+                    <label>Wish Coordinator</label>
+                </value>
+                <value>
+                    <fullName>Wish Granter</fullName>
+                    <default>false</default>
+                    <label>Wish Granter</label>
+                </value>
+                <value>
+                    <fullName>Wish Granter Mentor</fullName>
+                    <default>false</default>
+                    <label>Wish Granter Mentor</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Waiting_Since__c</fullName>
@@ -2069,6 +2400,19 @@ RECIP_RELATION_CODE&quot;</description>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Wish_Child_Name__c</fullName>
+        <description>The name of the Contact associated with the Wish Case; i.e., the name of the Wish Child.</description>
+        <externalId>false</externalId>
+        <formula>Wish__r.Contact.FirstName + &quot; &quot; +  Wish__r.Contact.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Wish Child Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Wish_Child__c</fullName>
@@ -2154,6 +2498,21 @@ RECIP_RELATION_CODE&quot;</description>
         <type>Text</type>
         <unique>false</unique>
     </fields>
+    <fields>
+        <fullName>of_Days_until_Approved__c</fullName>
+        <description>Displays the Number of days between the &apos;Created&apos; Date and &apos;Approved&apos; Date</description>
+        <externalId>false</externalId>
+        <formula>IF(Isblank(Approved_Date__c)=FALSE,Approved_Date__c - Datevalue(CreatedDate),NULL)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label># of Days until Approved</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
     <label>Volunteer Opportunity</label>
     <listViews>
         <fullName>Alabama_Volunteer_Opportunity</fullName>
@@ -2174,10 +2533,64 @@ RECIP_RELATION_CODE&quot;</description>
         </sharedTo>
     </listViews>
     <listViews>
-        <fullName>Arizona_Volunteer_Opportunity</fullName>
-        <columns>OWNER.FIRST_NAME</columns>
-        <columns>OWNER.LAST_NAME</columns>
+        <fullName>Arizona_Recently_Approved</fullName>
         <columns>NAME</columns>
+        <columns>Wish__c</columns>
+        <columns>Volunteer_Name__c</columns>
+        <columns>Role__c</columns>
+        <columns>Wish_Child_Name__c</columns>
+        <columns>Approved_Date__c</columns>
+        <columns>Status__c</columns>
+        <columns>Wish_Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Chapter_Name__c</field>
+            <operation>equals</operation>
+            <value>Make-A-Wish Arizona</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Approved</value>
+        </filters>
+        <filters>
+            <field>Approved_Date__c</field>
+            <operation>equals</operation>
+            <value>LAST_N_DAYS:30</value>
+        </filters>
+        <label>Arizona - Recently Approved</label>
+    </listViews>
+    <listViews>
+        <fullName>Arizona_Requested</fullName>
+        <columns>NAME</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>Volunteer_Name__c</columns>
+        <columns>Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Chapter_Name__c</field>
+            <operation>equals</operation>
+            <value>Make-A-Wish Arizona</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Volunteer_Opportunity__c.Volunteer_Registered_Wish</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Pending</value>
+        </filters>
+        <label>Volunteer Requested Wishes (Pending)</label>
+    </listViews>
+    <listViews>
+        <fullName>Arizona_Volunteer_Opportunity</fullName>
+        <columns>NAME</columns>
+        <columns>Volunteer_Role_Name__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>Volunteer_Name__c</columns>
+        <columns>Status__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>Chapter_Name__c</field>
@@ -2426,7 +2839,7 @@ RECIP_RELATION_CODE&quot;</description>
     <listViews>
         <fullName>Mid_South_Volunteer_Opportunity</fullName>
         <filterScope>Queue</filterScope>
-        <label>Mid-South</label>
+        <label>MidSouth</label>
         <queue>Mid_South</queue>
         <sharedTo>
             <allInternalUsers></allInternalUsers>
@@ -2497,7 +2910,7 @@ RECIP_RELATION_CODE&quot;</description>
     <listViews>
         <fullName>NE_California_N_Nevada_Volunteer_Opportunity</fullName>
         <filterScope>Queue</filterScope>
-        <label>NE California &amp; N Nevada</label>
+        <label>Northeastern CA &amp; NNV</label>
         <queue>NE_California_N_Nevada</queue>
         <sharedTo>
             <allInternalUsers></allInternalUsers>
@@ -2602,7 +3015,7 @@ RECIP_RELATION_CODE&quot;</description>
     <listViews>
         <fullName>Orange_County_the_Inland_Empire_Volunteer_Opportunity</fullName>
         <filterScope>Queue</filterScope>
-        <label>Orange County &amp; the Inland Empire</label>
+        <label>Orange Country &amp; Inland Empire</label>
         <queue>Orange_County_the_Inland_Empire</queue>
         <sharedTo>
             <allInternalUsers></allInternalUsers>
@@ -2620,7 +3033,7 @@ RECIP_RELATION_CODE&quot;</description>
     <listViews>
         <fullName>Philadelphia_N_Delaware_Susquehanna_Volunteer_Opportunity</fullName>
         <filterScope>Queue</filterScope>
-        <label>Philadelphia, N Delaware &amp; Susquehanna</label>
+        <label>Philadelphia, DE &amp; SV</label>
         <queue>Philadelphia_N_Delaware_Susquehanna</queue>
         <sharedTo>
             <allInternalUsers></allInternalUsers>
@@ -2710,7 +3123,7 @@ RECIP_RELATION_CODE&quot;</description>
     <listViews>
         <fullName>Tri_Counties_Volunteer_Opportunity</fullName>
         <filterScope>Queue</filterScope>
-        <label>Tri-Counties</label>
+        <label>TriCounties</label>
         <queue>Tri_Counties</queue>
         <sharedTo>
             <allInternalUsers></allInternalUsers>
@@ -2733,6 +3146,44 @@ RECIP_RELATION_CODE&quot;</description>
         <sharedTo>
             <allInternalUsers></allInternalUsers>
         </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Volunteers_with_Hold_Status</fullName>
+        <columns>Chapter_Name__c</columns>
+        <columns>Volunteer_Name__c</columns>
+        <columns>NAME</columns>
+        <columns>Status__c</columns>
+        <columns>Role__c</columns>
+        <columns>NameLink__c</columns>
+        <columns>Wish_Status__c</columns>
+        <columns>Case_Owner__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Hold</value>
+        </filters>
+        <filters>
+            <field>Chapter_Name__c</field>
+            <operation>contains</operation>
+            <value>Arizona</value>
+        </filters>
+        <filters>
+            <field>Wish_Status__c</field>
+            <operation>notContain</operation>
+            <value>Completed</value>
+        </filters>
+        <filters>
+            <field>Wish_Status__c</field>
+            <operation>notContain</operation>
+            <value>Granted</value>
+        </filters>
+        <filters>
+            <field>Wish_Status__c</field>
+            <operation>notContain</operation>
+            <value>Closed</value>
+        </filters>
+        <label>Volunteers with Hold Status</label>
     </listViews>
     <listViews>
         <fullName>Wisconsin_Volunteer_Opportunity</fullName>
@@ -2861,6 +3312,10 @@ RECIP_RELATION_CODE&quot;</description>
             </values>
             <values>
                 <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hold</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -3435,6 +3890,10 @@ RECIP_RELATION_CODE&quot;</description>
                 <default>false</default>
             </values>
             <values>
+                <fullName>Hold</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Inactive</fullName>
                 <default>false</default>
             </values>
@@ -3621,6 +4080,10 @@ RECIP_RELATION_CODE&quot;</description>
             </values>
             <values>
                 <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hold</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -3813,6 +4276,10 @@ RECIP_RELATION_CODE&quot;</description>
                 <default>false</default>
             </values>
             <values>
+                <fullName>Hold</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Inactive</fullName>
                 <default>false</default>
             </values>
@@ -3931,6 +4398,12 @@ RECIP_RELATION_CODE&quot;</description>
         <errorMessage>You cannot create volunteer opportunity for closed wish.</errorMessage>
     </validationRules>
     <validationRules>
+        <fullName>Volunteer_Opp_Hold_Status</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(ISCHANGED( Status__c ), NOT(Hidden_allow_Hold_status__c), ISPICKVAL(Status__c , &apos;Hold&apos;) )</errorConditionFormula>
+        <errorMessage>Hold is a system-generated status and cannot be manually assigned.</errorMessage>
+    </validationRules>
+    <validationRules>
         <fullName>Volunteer_Opp_Inactive_Status</fullName>
         <active>true</active>
         <description>This validation will fire when the Volunteer Opportunity status is &apos;Inactive&apos; and Inactive field is unchecked.</description>
@@ -3944,6 +4417,7 @@ RECIP_RELATION_CODE&quot;</description>
         <errorConditionFormula>AND(Inactive__c = true,ISBLANK(TEXT(Reason_Inactive__c )))</errorConditionFormula>
         <errorMessage>Please enter the value for Reason Inactive</errorMessage>
     </validationRules>
+    <visibility>Public</visibility>
     <webLinks>
         <fullName>Move_to_Historical</fullName>
         <availability>online</availability>

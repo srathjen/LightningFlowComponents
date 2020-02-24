@@ -1,0 +1,7 @@
+<aura:documentation>
+	<aura:description>Documentation for DeleteWishSignatures</aura:description>
+	<aura:example name="DeleteWishSignatures" ref="DeleteWishSignatures" label="DeleteWishSignatures">
+		# Description
+        DeleteWishSignatures is a custom component that deletes the choosen Wish Required Signature record.
+	</aura:example>
+</aura:documentation>

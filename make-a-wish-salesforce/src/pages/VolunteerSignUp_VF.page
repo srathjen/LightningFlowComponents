@@ -1,0 +1,859 @@
+<!--
+    Visualforce page that will serve as the replacement for CommunitiesSelfReg.page
+
+    This page will combine the data collection of the previous CommunitiesSelfReg.page AND Application_VF.page pages
+    and will serve as the new first step in the volunteer application process. This page is a temporary solution
+    that will be replaced in a future project and as such the two existing forms were combined and refactoring
+    and redesign were not primary concerns.
+
+    See Jira ticket WLP-398 for more details.
+
+    @author Chris Shinnimin, Traction on Demand
+    @date 2019-08-22
+-->
+<apex:page id="volunteerSignUpPage" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" docType="html-5.0" controller="VolunteerSignUp_AC" title="Make-A-Wish | Volunteer Sign Up">
+    <head>
+        <apex:include pageName="prospective_head" id="phead" />
+        <style type="text/css">
+            .matched-contact-radio-options tbody tr td label {
+                margin-right: 10px;
+            }
+            .alert {
+                padding: 0;
+            }
+
+            @media (min-width: 544px){
+                .col-sm-1 {
+                    width: 21%;
+                }
+                .col-sm-5 {
+                    width: 29%;
+                }
+            }
+        </style>
+    </head>
+    <apex:define name="body">
+        <body class="vcp vcpsignup">
+        <apex:include pageName="prospective_header" id="pheader" />
+
+        <main role="main" class="container">
+            <div class="row">
+                <h1 class="col-md-12">Volunteer Sign Up</h1>
+            </div>
+            <div class="row">
+                <section class="col-md-12">
+                    <apex:form id="theForm" styleClass="portal form-vcp-signup" forceSSL="true" >
+                        <!--<apex:pagemessages ></apex:pagemessages>-->
+                        <apex:messages />
+                        <apex:outputPanel rendered="{!showErrorMsg}" styleclass="alert alert-danger fade in col-sm-12">
+                            <apex:outputText escape="false" value="{!errorMessage}" id="errorMsg"/>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!NOT(ISBLANK(matchedContacts))}" styleclass="alert alert-warning fade in col-sm-12">
+                            <apex:outputText escape="false" value="We detected the following contacts in our system with the email address you specified. Are you one of these contacts?" id="matchedContactMsg"/>
+                            <apex:selectRadio value="{!confirmedContactId}" id="confirmedContactId" styleClass="matched-contact-radio-options" layout="pageDirection">
+                                <apex:selectOptions value="{!matchedContactOptions}"></apex:selectOptions>
+                            </apex:selectRadio>
+                        </apex:outputPanel>
+                        <fieldset>
+                            <legend>Your Information<span>We value your privacy and will not share your personal information.</span></legend>
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <label for="title">Title</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <apex:selectList styleclass="form-control col-xs-12 col-sm-12 sm-list" id="title" size="1" multiselect="false" value="{!title}">
+                                            <apex:selectOptions value="{!Titles}" />
+                                        </apex:selectList>
+                                    </div>
+                                </div>
+                                <div class="form-group row fullname">
+                                    <div class="col-sm-3"><label for="volunteerSignUpPage:theForm:firstname" class="firstname" aria-labelledby="first_name">Name<span style="color:red;font-size: 150%"> *</span></label></div>
+                                    <div class="col-sm-5">
+                                        <apex:inputText styleClass="form-control name-group f-firstname" maxlength="40" id="firstname" html-placeholder="First Name" required="true" value="{!firstName}" />
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <label for="volunteerSignUpPage:theForm:middleinitial" class="sr-only" aria-label="Middle Name">Middle Initial</label>
+                                        <apex:inputText styleClass="form-control" maxlength="1" id="middleinitial" html-placeholder="Middle Initial" value="{!middleName}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <label for="volunteerSignUpPage:theForm:lastname" class="sr-only" aria-label="last_name">Last Name</label>
+                                    </div>
+                                    <div class="col-sm-6 lastname">
+                                        <apex:inputText styleClass="form-control name-group f-lastname" maxlength="40" id="lastname" html-placeholder="Last Name" required="true" value="{!lastName}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-6 nickname">
+                                        <apex:inputText styleClass="form-control name-group f-nickname" maxlength="40" id="nickname" html-placeholder="Nickname (Optional)" required="false" value="{!nickname}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="volunteerSignUpPage:theForm:phonenumber" aria-labelledby="phone_number">Mobile Phone<span style="color:red;font-size: 150%"> *</span></label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputText styleClass="form-control f-phone" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="14" id="phonenumber" html-placeholder="(000) 000-0000" value="{!phone}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="volunteerSignUpPage:theForm:homePhone" aria-labelledby="home_phone">Home Phone</label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputText styleClass="form-control f-phone" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="14" id="homePhone" html-placeholder="(000) 000-0000" value="{!homePhone}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="volunteerSignUpPage:theForm:otherPhone" aria-labelledby="other_phone">Other Phone</label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputText styleClass="form-control f-phone" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="14" id="otherPhone" html-placeholder="(000) 000-0000" value="{!otherPhone}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="preferredphonetype" class="col-sm-3" aria-labelledby="Preferred Phone Type">Preferred Phone<span style="color:red;font-size: 150%"> *</span></label>
+                                    <div class="col-sm-6">
+                                        <apex:selectList styleclass="form-control col-xs-12 col-sm-12 preferedType sm-list required" required="true" value="{!preferredPhoneType}" size="1" id="preferredPhoneType" multiselect="false" >
+                                            <apex:selectOptions value="{!PreferredPhoneTypes}" />
+                                        </apex:selectList>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="volunteerSignUpPage:theForm:emailaddress" aria-labelledby="email address">Email Address<span style="color:red;font-size: 150%"> *</span></label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputText styleClass="form-control f-emailaddress" maxlength="50" id="emailaddress" html-placeholder="your_email@domain.com" required="true" value="{!email}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="confirmemail" aria-labelledby="confirm email address">Confirm Email Address<span style="color:red;font-size: 150%"> *</span></label></div>
+                                    <div class="col-sm-6">
+                                        <input type="email" class="form-control f-confirmemail" maxlength="50" id="confirmemail" name="confirmemail" placeholder="your_email@domain.com" required="true" />
+                                        <small class="text-muted">Please confirm your email address</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="street" aria-labelledby="street">Street Address<span style="color:red;font-size: 150%"> *</span></label></div>
+                                    <div class="col-sm-6 street">
+                                        <apex:inputText styleClass="form-control name-group address" maxlength="50" id="street" html-placeholder="Unit #111 - 123 Somewhere St." value="{!street}" required="true" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="volunteerSignUpPage:theForm:City" aria-labelledby="city">City<span style="color:red;font-size: 150%"> *</span></label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputText styleClass="form-control f-city" maxlength="50" id="city" html-placeholder="City" value="{!city}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="volunteerSignUpPage:theForm:state" aria-labelledby="state">State<span style="color:red;font-size: 150%"> *</span></label></div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <apex:selectList styleClass="form-control col-xs-12 col-sm-12 f-state" id="state" size="1" multiselect="false" value="{!state}">
+                                            <apex:selectOptions value="{!States}"/>
+                                        </apex:selectList>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="county" aria-labelledby="county">County<span style="color:red;font-size: 150%"> *</span></label></div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <apex:inputText styleClass="form-control name-group county required" maxlength="40" id="County" html-placeholder="County" value="{!county}"  />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="volunteerSignUpPage:theForm:postalcode" aria-labelledby="Your postal code">Postal Code<span style="color:red;font-size: 150%"> *</span></label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputText styleClass="form-control f-postalcode numbers-only" maxlength="5" id="postalcode" html-placeholder="00000" required="true" value="{!zipcode}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <label for="birthdate">Birth Date<span style="color:red;font-size: 150%"> *</span></label>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:selectList onChange="birthMonthChanged(this.value);" styleClass="form-control col-xs-12 col-sm-12 f-birthmonth required" id="birthMonth" size="1" multiselect="false" value="{!birthMonth}">
+                                            <apex:selectOptions value="{!BirthMonths}"/>
+                                        </apex:selectList>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3 bday-wrap3">
+                                        <apex:selectList styleClass="form-control col-xs-12 col-sm-12 f-birthday" id="birthDay" size="1" multiselect="false" value="{!birthDay}">
+                                            <apex:selectOptions value="{!BirthDays}"/>
+                                        </apex:selectList>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="linkedin" class="col-sm-3">I am on LinkedIn<span style="color:red;font-size: 150%"> *</span></label>
+                                    <div class="col-sm-6">
+                                        <apex:selectList styleClass="form-control col-xs-12 col-sm-12 sm-list" value="{!onLinkedIn}" size="1" id="onLinkedIn" multiselect="false" required="true" >
+                                            <apex:selectOptions value="{!OnLinkedInOptions}" />
+                                        </apex:selectList>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="howHearAboutMAW" class="col-md-3" aria-label="howHearAboutMAW">How did you hear about Make-A-Wish?<span style="color:red;font-size: 150%"> *</span></label>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <apex:selectList required="true" styleClass="form-control col-xs-12 col-sm-12 multi f-mawdiscovery mawdisc required" id="howHearAboutMAW" multiselect="true" value="{!howHearAboutMAW}" >
+                                            <apex:selectOptions value="{!HearAboutMAWOptions}"/>
+                                        </apex:selectList>
+                                    </div>
+                                </div>
+                                <div class="form-group sr-only row mawdiscoveryother">
+                                    <div class="col-sm-3"><label for="mawdiscoveryother" aria-labelledby="Other">Other</label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputTextarea styleClass="form-control mawdisc-textarea" id="otherHowHearAboutMAW" value="{!otherHowHearAboutMAW}" html-placeholder="Other ways you've heard about Make-A-Wish"  />
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Employment Information<span>Please fill the optional fields below.</span></legend>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="employer" aria-labelledby="Employer Name">Employer</label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputText styleClass="form-control" id="employer" value="{!employer}" html-placeholder="Employer Name"></apex:inputText>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="employerPosition" aria-labelledby="Employer Position">Position</label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputText styleClass="form-control" id="employerPosition" value="{!employerPosition}" html-placeholder="Position"></apex:inputText>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="employerStreet" aria-labelledby="Employer Street">Street Address</label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputText styleClass="form-control" id="employerStreet" value="{!employerStreet}" html-placeholder="Unit #111 - 123 Somewhere St."></apex:inputText>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="employerCity" aria-labelledby="Employer City">City</label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputText styleClass="form-control" id="employerCity" value="{!employerCity}" html-placeholder="City"></apex:inputText>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="employerState" aria-labelledby="Employer State">State</label></div>
+                                    <div class="col-sm-6">
+                                        <apex:selectList styleClass="form-control col-xs-12 col-sm-12" size="1" id="employerState" value="{!employerState}">
+                                            <apex:selectOptions value="{!States}" />
+                                        </apex:selectList>
+                                    </div>
+                                </div>
+                                <div class="form-group row postalcode">
+                                    <div class="col-sm-3"><label for="employerZip" aria-labelledby="Employer Zip">Zip</label></div>
+                                    <div class="col-sm-6 ">
+                                        <apex:inputText styleClass="form-control numbers-only postalcode1 notrquired" id="employerZip" value="{!employerZip}" html-placeholder="00000-0000" maxlength="10" html-minlength="5"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="employerPhone" aria-labelledby="Employer Phone">Phone</label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputText onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="14" styleClass="form-control f-phone" id="employerPhone" html-placeholder="(000) 000-0000" value="{!employerPhone}" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <div class="col-sm-9">
+                                        <label for="employerContactAtWork" aria-labelledby="Contact At Work?">May We Contact You at Work?</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <apex:selectList styleClass="form-control c-select sm-list" id="employerContactAtWork" value="{!employerContactAtWork}" size="1" multiselect="false" >
+                                            <apex:selectOptions value="{!ContactAtWorkOptions}" />
+                                        </apex:selectList>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-9">
+                                        <label for="employerSharePower" aria-labelledby="Company Interest in Make-A-Wish">WOULD YOU LIKE TO <i>SHARE THE POWER OF A WISH</i><sup>®</sup> AT WORK BY LEARNING MORE ABOUT OUR WISHMAKERS AT WORK<sup>®</sup> PROGRAM?</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <apex:selectList styleClass="form-control c-select sm-list" id="employerSharePower" value="{!employerSharePower}" size="1" multiselect="false" >
+                                            <apex:selectOptions value="{!EmployerSharePowerOptions}" />
+                                        </apex:selectList>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Emergency Contact Information<span>Please fill the fields below.</span></legend>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label for="emergencyName" class="col-sm-3" aria-labelledby="Emergency Contact Name">Emergency Contact Name<span style="color:red;font-size: 150%"> *</span></label>
+                                    <div class="col-sm-6">
+                                        <apex:inputText styleClass="form-control fullname" id="emergencyName" required="true" value="{!emergencyName}" html-placeholder="First and Last Name" ></apex:inputText>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="emergencyRelationship" class="col-sm-3" aria-labelledby="emergencyRelationship">Relationship<span style="color:red;font-size: 150%"> *</span></label>
+                                    <div class="col-sm-6">
+                                        <apex:selectList styleclass="form-control col-xs-12 col-sm-12 emergencyRelationship sm-list required" required="true" value="{!emergencyRelationship}" size="1" id="emergencyRelationship" multiselect="false" >
+                                            <apex:selectOptions value="{!EmergencyRelationships}" />
+                                        </apex:selectList>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="emergencyPhone" class="col-sm-3" aria-labelledby="Emergency Contact Phone">Emergency Contact Phone<span style="color:red;font-size: 150%"> *</span></label>
+                                    <div class="col-sm-6">
+                                        <apex:inputText styleClass="form-control f-phone phonechk" maxLength="14" id="emergencyPhone" value="{!emergencyPhone}" html-placeholder="(000) 000-0000" ></apex:inputText>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Language Skills<span>Please select all that apply below.</span></legend>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="language">Language<span style="color:red;font-size: 150%"> *</span></label></div>
+                                    <div class="col-sm-6">
+                                        <apex:selectList styleClass="form-control multi lang language required" required="true" id="language" multiselect="true" value="{!language}" >
+                                            <apex:selectOptions value="{!Languages}" />
+                                        </apex:selectList>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="languageNote">Language Note</label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputTextarea styleClass="form-control lang-note" id="languageNote" value="{!languageNote}" html-placeholder="Additional details (Optional)" />
+                                    </div>
+                                    <div class="col-sm-3 sr-only"><i class="text-muted text-opt">Optional</i></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="languagesRead">Read<span style="color:red;font-size: 150%"> *</span></label></div>
+                                    <div class="col-sm-6">
+                                        <apex:selectList styleClass="form-control multi language required" id="languagesRead" multiselect="true" value="{!languagesRead}" >
+                                            <apex:selectOptions value="{!Languages}" />
+                                        </apex:selectList>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="languagesWritten">Write<span style="color:red;font-size: 150%"> *</span></label></div>
+                                    <div class="col-sm-6">
+                                        <apex:selectList styleClass="form-control multi language required" id="languagesWritten" multiselect="true" value="{!languagesWritten}" >
+                                            <apex:selectOptions value="{!Languages}" />
+                                        </apex:selectList>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="languagesSpoken">Speak<span style="color:red;font-size: 150%"> *</span></label></div>
+                                    <div class="col-sm-6">
+                                        <apex:selectList styleClass="form-control multi language required" id="languagesSpoken" multiselect="true" value="{!languagesSpoken}" >
+                                            <apex:selectOptions value="{!Languages}" />
+                                        </apex:selectList>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="languagesUnderstood">Understand<span style="color:red;font-size: 150%"> *</span></label></div>
+                                    <div class="col-sm-6">
+                                        <apex:selectList styleClass="form-control multi language required" id="languagesUnderstood" multiselect="true" value="{!languagesUnderstood}" >
+                                            <apex:selectOptions value="{!Languages}" />
+                                        </apex:selectList>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Professional Skills<span>Please select all that apply in the optional field below.</span></legend>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-4" for="skills">Professional Skills</label>
+                                    <div class="col-sm-6">
+                                        <apex:selectList styleClass="form-control multi prof-skills" value="{!skills}" size="1" id="skills" multiselect="true">
+                                            <apex:selectOptions value="{!ProfessionalSkills}" />
+                                        </apex:selectList>
+                                    </div>
+                                </div>
+                                <div class="form-group row sr-only prof-skills-other">
+                                    <div class="col-sm-4"><label for="otherSkills" aria-labelledby="Professional Skills Other">Other</label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputTextarea styleClass="form-control" id="otherSkills" value="{!otherSkills}" html-placeholder="Please list other skills here" />
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Create a Username and Password</legend>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="username" aria-label="username">Username<span style="color:red;font-size: 150%"> *</span></label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputText styleClass="form-control f-username" maxlength="40" id="username" html-placeholder="your_email@domain.com" required="true" value="{!userName}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="volunteerSignUpPage:theForm:password" aria-label="Create a Password">Password<span style="color:red;font-size: 150%"> *</span></label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputSecret styleClass="form-control f-password" maxlength="50" id="password" html-placeholder="Minimum of 8 characters containing 1 letter and 1 number" required="true" value="{!password}" />
+                                        <meter max="4" id="password-strength-meter"></meter>
+                                        <p id="password-strength-text" class="text-muted"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label for="volunteerSignUpPage:theForm:confirmpassword" aria-label="Confirm Password">Confirm Password<span style="color:red;font-size: 150%"> *</span></label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputSecret styleClass="form-control f-confirmpassword" maxlength="50" id="confirmpassword" html-placeholder="Please re-type your password" required="true" value="{!confirmPassword}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Age Confirmation</legend>
+                            <label class="c-input c-checkbox" for="volunteerSignUpPage:theForm:over18" aria-label="Over 18">
+                                <apex:inputcheckbox id="over18" styleClass="f-over18 required" value="{!over18}" required="true" />
+                                <span class="c-indicator"></span>
+                                I am 18 years of age or over.<span style="color:red;font-size: 150%"> *</span>
+                            </label>
+                        </fieldset>
+                        <fieldset class="fs">
+                            <legend>Form Security</legend>
+                            <div class="form-group row">
+                                <!-- <label for="form-security" class="sr-only" aria-label="form-security">Form Security</label> -->
+                                <div class="col-sm-6">
+                                    <label class="c-input c-checkbox" for="6Lci5yITAAAAAJPB5cxQOi7CFAS6d4W5W8okrnAt">
+                                        <input type="checkbox" id="6Lci5yITAAAAAJPB5cxQOi7CFAS6d4W5W8okrnAt" name="6Lci5yITAAAAAJPB5cxQOi7CFAS6d4W5W8okrnAt" />
+                                        <span class="c-indicator"></span>
+                                        If you are human, <strong>do not</strong> check this.
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3"><label for="2-6Lci5yITAAAAAJPB5cxQOi7CFAS6d4W5W8okrnAt">Security Input</label></div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control 2-6Lci5yITAAAAAJPB5cxQOi7CFAS6d4W5W8okrnAt" maxlength="50" name="88hE!joP" id="2-6Lci5yITAAAAAJPB5cxQOi7CFAS6d4W5W8okrnAt" placeholder="If you see this, you might be a bot" value="88hE!joP" />
+                                    <small class="text-muted">Do not change this field</small>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="footer">
+                            <apex:commandbutton styleClass="col-xs-12 col-sm-12 col-md-4 col-md-push-8 btn-md" id="submit_signup" value="Sign Up" action="{!registerUser}" />
+                            <span class="col-xs-12 col-sm-12 col-md-8 col-md-pull-4">Already a Volunteer?&nbsp;<apex:outputLink value="CommunitiesLogin">Log In</apex:outputLink></span>
+                        </fieldset>
+                    </apex:form>
+                </section>
+
+                <!--
+                <aside class="col-md-4 page-info" role="page-info">
+                    <h2 aria-labelledby="Volunteering">Volunteering</h2>
+                    <p><apex:outputText value="{!signUpNotes}" id="signupNote" escape="false"/></p>
+                </aside>
+                -->
+            </div>
+        </main>
+
+        <apex:include pageName="prospective_footer" id="pfooter" />
+        <script>
+            //set page title
+            (function ($, root, undefined) {
+                $('head').prepend("<title>Make-A-Wish® Communities | Sign Up</title>");
+            })(jQuery);
+        </script>
+        <!-- chosen select -->
+        <script src="{!URLFOR($Resource.prospective_assets,'web/js/chosen.jquery.min.js')}"></script>
+        <!-- validate forms -->
+        <script src="{!URLFOR($Resource.prospective_assets,'web/js/jquery.validate.min.js')}"></script>
+        <!-- validate form (additional methods) -->
+        <script src="{!URLFOR($Resource.prospective_assets,'web/js/additional-methods.min.js')}"></script>
+
+        <script>
+            // hide form security from bots (suck it bots)
+            $('.fs').hide();
+            // form validation
+            $.validator.setDefaults({
+                submitHandler: function () {
+                    // honeypot check
+                    if($('#6Lci5yITAAAAAJPB5cxQOi7CFAS6d4W5W8okrnAt').is(':checked') == true || $('#2-6Lci5yITAAAAAJPB5cxQOi7CFAS6d4W5W8okrnAt').val() !== '88hE!joP') {
+                        onsubmit: false
+                    } else {
+                        $('#volunteerSignUpPage\\:theForm\\:submit_signup').css({'opacity':'.5','cursor':'wait'}).prop('disabled',true).attr('title','Your form is submitting.');
+                        form.submit();
+                    }
+                },
+                // required for chosen.js
+                ignore: ":hidden:not(.c-select)"
+            });
+
+            $.validator.addMethod("oneletterdigit", function (value) {
+                return /[a-z].*[0-9]|[0-9].*[a-z]/i.test(value);
+            }, 'Your input must contain at least 1 letter and 1 number');
+
+            $( document ).ready(function() {
+                $(".f-password").attr('autocomplete','new-password');
+
+                $( ".form-vcp-signup" ).validate({
+                    rules: {
+                        "volunteerSignUpPage:theForm:firstname": {
+                            //require_from_group: [1, ".name-group"],
+                            required: true,
+                            minlength: 2,
+                            maxlength: 40
+                        },
+                        "volunteerSignUpPage:theForm:lastname": {
+                            //require_from_group: [2, ".name-group"],
+                            required: true,
+                            minlength: 2,
+                            maxlength: 40
+                        },
+                        "volunteerSignUpPage:theForm:birthMonth": {
+                            required: true
+                        },
+                        "volunteerSignUpPage:theForm:birthDay": {
+                            required: true
+                        },
+                        "volunteerSignUpPage:theForm:onLinkedIn": {
+                            required: true
+                        },
+                        "volunteerSignUpPage:theForm:howHearAboutMAW": {
+                            required: true
+                        },
+                        "volunteerSignUpPage:theForm:middleinitial": {
+                            required: false,
+                            minlength: 1,
+                            maxlength: 1
+                        },
+                        "volunteerSignUpPage:theForm:phonenumber": {
+                            required: true,
+                            phoneUS: true,
+                            minlength: 10,
+                            maxlength: 14
+                        },
+                        "volunteerSignUpPage:theForm:homePhone": {
+                            required: false,
+                            phoneUS: true,
+                            minlength: 10,
+                            maxlength: 14
+                        },
+                        "volunteerSignUpPage:theForm:otherPhone": {
+                            required: false,
+                            phoneUS: true,
+                            minlength: 10,
+                            maxlength: 14
+                        },
+                        "volunteerSignUpPage:theForm:employerPhone": {
+                            required: false,
+                            phoneUS: true,
+                            minlength: 10,
+                            maxlength: 14
+                        },
+                        "volunteerSignUpPage:theForm:emergencyPhone": {
+                            required: true,
+                            phoneUS: true,
+                            minlength: 10,
+                            maxlength: 14
+                        },
+                        "volunteerSignUpPage:theForm:emailaddress": {
+                            required: true,
+                            email: true
+                        },
+                        confirmemail: {
+                            required: true,
+                            email: true,
+                            equalTo: ".f-emailaddress"
+                        },
+                        "volunteerSignUpPage:theForm:city": {
+                            required: true,
+                            minlength: 3,
+                            maxlength: 22
+                        },
+                        "volunteerSignUpPage:theForm:state": {
+                            required: true
+                        },
+                        "volunteerSignUpPage:theForm:postalcode": {
+                            required: true,
+                            digits: true,
+                            minlength: 5,
+                            maxlength: 9
+                        },
+                        "volunteerSignUpPage:theForm:username": {
+                            required: true,
+                            email: true
+                        },
+                        "volunteerSignUpPage:theForm:password": {
+                            required: true,
+                            oneletterdigit: true,
+                            minlength: 8,
+                            maxlength: 50
+                        },
+                        "volunteerSignUpPage:theForm:confirmpassword": {
+                            required: true,
+                            equalTo: ".f-password"
+                        },
+                        "volunteerSignUpPage:theForm:over18": {
+                            required: true
+                        }
+                    },
+                    messages: {
+                        "volunteerSignUpPage:theForm:firstname": {
+                            minlength: "Your first name must have more than 2 letters",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        },
+                        "volunteerSignUpPage:theForm:lastname": {
+                            minlength: "Your last name must have more than 2 letters",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        },
+                        "volunteerSignUpPage:theForm:middleinitial": {
+                            minlength: "Your middle name must have 1 letter",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        },
+                        "volunteerSignUpPage:theForm:phonenumber": {
+                            phoneUS: "Must be a valid US number",
+                            number: "Only numbers are accepted",
+                            minlength: "Please enter at least 10 digits",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        },
+                        "volunteerSignUpPage:theForm:homePhone": {
+                            phoneUS: "Must be a valid US number",
+                            number: "Only numbers are accepted",
+                            minlength: "Please enter at least 10 digits",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        },
+                        "volunteerSignUpPage:theForm:otherPhone": {
+                            phoneUS: "Must be a valid US number",
+                            number: "Only numbers are accepted",
+                            minlength: "Please enter at least 10 digits",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        },
+                        "volunteerSignUpPage:theForm:employerPhone": {
+                            phoneUS: "Must be a valid US number",
+                            number: "Only numbers are accepted",
+                            minlength: "Please enter at least 10 digits",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        },
+                        "volunteerSignUpPage:theForm:emergencyPhone": {
+                            phoneUS: "Must be a valid US number",
+                            number: "Only numbers are accepted",
+                            minlength: "Please enter at least 10 digits",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        },
+                        "volunteerSignUpPage:theForm:emailaddress": {
+                        },
+                        "volunteerSignUpPage:theForm:birthMonth": {
+                        },
+                        "volunteerSignUpPage:theForm:birthDay": {
+                        },
+                        "volunteerSignUpPage:theForm:howHearAboutMAW": {
+                        },
+                        confirmemail: {
+                            equalTo: "The email you've entered does not match"
+                        },
+                        "volunteerSignUpPage:theForm:city": {
+                            minlength: "Please enter at least 3 characters",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        },
+                        "volunteerSignUpPage:theForm:state": {
+                        },
+                        "volunteerSignUpPage:theForm:postalcode": {
+                            digits: "Please only enter digits",
+                            minlength: "Please enter a minimum of 5 digits",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        },
+                        "volunteerSignUpPage:theForm:username": {
+                            minlength: "Please enter a minimum of 5 letters or numbers",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        },
+                        "volunteerSignUpPage:theForm:password": {
+                            oneletterdigit: "Your password must contain at least 1 letter and 1 number",
+                            minlength: "Your password must have a minimum of 8 characters",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        },
+                        "volunteerSignUpPage:theForm:confirmpassword": {
+                            equalTo: "The password you've entered does not match"
+                        },
+                        "volunteerSignUpPage:theForm:over18": {
+                            required: "Thank you for your interest in volunteering with Make-A-Wish. Most volunteer opportunities are designed for individuals over the age of 18. If you are under the age of 18, please contact your local chapter to discuss whether any opportunities are currently available."
+                        }
+                    },
+                    errorElement: "em",
+                    errorPlacement: function ( error, element ) {
+                        // Add the `help-block` class to the error element
+                        error.addClass( "help-block" );
+                        // Add `has-feedback` class to the parent div.form-group in order to add icons to inputs
+                        element.parents( ".col-sm-6" ).addClass( "has-feedback" );
+
+                        if ( element.prop( "type" ) === "checkbox" ) {
+                            error.insertAfter( element.parent( "label" ) );
+                        } else if ( element.hasClass("c-select") ){
+                            var selectParent = $( element ).parents(".col-sm-6").children(".chosen-container-single");
+                            error.insertAfter( selectParent );
+                        } else {
+                            error.insertAfter( element );
+                        }
+                    },
+                    highlight: function ( element, errorClass, validClass ) {
+                        var elementParents = $( element ).parents( ".col-sm-6, .col-sm-5, .col-sm-3" );
+                        $(elementParents).children( "input, select" ).css('border','1px solid red');
+                        $(elementParents).children(".chosen-container-single").children( ".chosen-single" ).css('border','1px solid red');
+                        $(elementParents).children(".chosen-container-multi").children( ".chosen-choices" ).css('border','1px solid red');
+                    },
+                    unhighlight: function ( element, errorClass, validClass ) {
+                        var elementParents = $( element ).parents( ".col-sm-6, .col-sm-5, .col-sm-3, .col-sm-1" );
+                        $(elementParents).removeClass( "has-error" ).prev( "label" ).css('color','');
+                        $(elementParents).children( "input, select" ).css('border','');
+                        $(elementParents).children( ".help-block" ).remove();
+                        $(elementParents).children(".chosen-container-multi").children( ".chosen-choices" ).css('border','');
+                    },
+                    ignore: ':hidden:not(.multi)'
+                });
+
+                $('.multi').on('change', function() {
+                    var elementParents = $( this ).parents( ".col-sm-6, .col-sm-5, .col-sm-3, .col-sm-1" );
+                    $(elementParents).children(".chosen-container-multi").children( ".chosen-choices" ).css('border','');
+                    $(elementParents).children( ".help-block" ).remove();
+                });
+                $('.f-state').on('change', function() {
+                    var stateParents = $( this ).parents(".col-sm-6");
+                    $(stateParents).removeClass( "has-error" ).prev( "label" ).css('color','');
+                    $(stateParents).children(".chosen-container-single").children( ".chosen-single" ).css('border','');
+                    $(stateParents).children( ".help-block" ).remove();
+                });
+                // inputs: numbers only
+                $(".numbers-only").keydown(function (e) {
+                    // Allow: backspace, delete, tab, escape and enter
+                    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+                        // Allow: Ctrl+A
+                        (e.keyCode == 65 && e.ctrlKey === true) ||
+                        // Allow: Ctrl+C
+                        (e.keyCode == 67 && e.ctrlKey === true) ||
+                        // Allow: Ctrl+X
+                        (e.keyCode == 88 && e.ctrlKey === true) ||
+                        // Allow: home, end, left, right
+                        (e.keyCode >= 35 && e.keyCode <= 39)) {
+                        // let it happen, don't do anything
+                        return;
+                    }
+                    // Ensure that it is a number and stop the keypress
+                    else if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105 || (e.keyCode == 191) )) {
+                        e.preventDefault();
+                    }
+                });
+                // auto format phone
+                $(".f-phone").keydown(function(e){
+                    if (($(this).val().length == 0) && (e.keyCode != 8)){
+                        $(this).val($(this).val() + "(");
+                    } else if(($(this).val().length == 4) && (e.keyCode != 8)){
+                        $(this).val($(this).val() + ") ");
+                    } else if (($(this).val().length == 9) && (e.keyCode != 8)){
+                        $(this).val($(this).val() + "-");
+                    }
+                    // if backspace or tab is pressed on certain lengths
+                    if ( (($(this).val().length == 2 || $(this).val().length == 11) && e.keyCode == 8) || (($(this).val().length == 2) && e.keyCode == 9) ){
+                        // remove dash or parenthesis
+                        $(this).val($(this).val().substring(0, $(this).val().length - 1));
+                    }
+                    // if backspace is pressed on deletion of digit before space
+                    if (($(this).val().length == 7) && (e.keyCode == 8)){
+                        // remove space and parenthesis
+                        $(this).val($(this).val().substring(0, $(this).val().length - 2));
+                    }
+                    // if full phone number isn't entered and tab is pressed
+                    if ( ($(this).val().length) != 14 && (e.keyCode == 9 ) ){
+                        $(this).val('')
+                    }
+                });
+
+                //show textarea fields on pageload if "other" was selected
+                if ($('.f-mawdiscovery').val() != null){
+                    if ($('.f-mawdiscovery').val().indexOf('Other, please specify') != -1){
+                        $('.mawdiscoveryother').removeClass('sr-only');
+                        $('.mawdisc-textarea').addClass('required');
+                    }
+                }
+                // maw discovery show/hide "other" textbox
+                $('.f-mawdiscovery').on('change', function() {
+                    if($(this).val() != null){
+                        if ($(this).val().indexOf('Other, please specify') != -1){
+                            $('.mawdiscoveryother').removeClass('sr-only');
+                            $('.mawdisc-textarea').addClass('required');
+                        } else {
+                            $('.mawdiscoveryother').addClass('sr-only');
+                            $('.mawdisc-textarea').val('').removeClass('required');
+                            $('.mawdisc-textarea').valid();
+                        }
+                    }
+                });
+                // prof skills show/hide "other" textbox
+                function checkProfSkill(cmp){
+                    if($(cmp).val() != null){
+                        if ($(cmp).val().indexOf('Other') != -1){
+
+                            $('.prof-skills-other').removeClass('sr-only');
+                        } else {
+                            $('.prof-skills-other').addClass('sr-only');
+                            $('.prof-skills-other').children('.col-sm-6').children('textarea').val('');
+                        }
+                    }
+                }
+                $('.prof-skills').on('change', function() {
+                    checkProfSkill($(this));
+                });
+                checkProfSkill($('.prof-skills'));
+
+                $('.lang').on('change', function() {
+                    if($(this).val() != null){
+                        if ($(this).val().indexOf('Other') != -1){
+                            $('.lang-note').attr('placeholder', "Please specify other language(s)").addClass('required');
+                        } else {
+                            $('.lang-note').attr('placeholder', "Additional details (Optional)").val('').removeClass('required');
+                            $('.lang-note').valid();
+                        }
+                    }
+                });
+
+                $(".multi").chosen({disable_search:"true", placeholder_text_single: "Select a method", width:"100%"});
+            });
+
+            function birthMonthChanged(month) {
+                if (month == '') {
+                    $(".f-birthday option").prop("disabled", true).css({'background-color': '#e0e0e0'});
+                    $(".f-birthday").val('');
+                } else {
+                    $(".f-birthday option").prop("disabled", false).css({'background-color': '#FFFFFF'});
+                    if (["February", "April", "June", "September", "November"].includes(month)) {
+                        $(".f-birthday option:contains('31')").attr("disabled", "disabled").css({'background-color': '#e0e0e0'});
+                        if ($(".f-birthday option:selected").text() == '31') {
+                            $(".f-birthday").val('');
+                        }
+                    }
+                    if (month == "February") {
+                        $(".f-birthday option:contains('30')").attr("disabled", "disabled").css({'background-color': '#e0e0e0'});
+                        if ($(".f-birthday option:selected").text() == '30') {
+                            $(".f-birthday").val('');
+                        }
+                    }
+                }
+            }
+        </script>
+        <!-- zxcvbn -->
+        <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets,"web/js/zxcvbn.js")}"><\/script>')</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.3.0/zxcvbn.js"></script>
+        <script>
+            var strength = {0: "Weakest - Please enter more characters.", 1: "Weak - A little bit better.", 2: "Okay - You're on the right track.", 3: "Good - This is solid.", 4: "Terrific!"}
+            var password = document.getElementById('volunteerSignUpPage\:theForm\:password');
+            var meter = document.getElementById('password-strength-meter');
+            var text = document.getElementById('password-strength-text');
+
+            password.addEventListener('input', function() {
+                var val = password.value;
+                var result = zxcvbn(val);
+
+                // Update the password strength meter
+                meter.value = result.score;
+
+                // Update the text indicator
+                if (val !== "") {
+                    text.innerHTML = "<strong>Strength:</strong> " + strength[result.score];
+                } else {
+                    text.innerHTML = "";
+                }
+            });
+        </script>
+        </body>
+    </apex:define>
+</apex:page>

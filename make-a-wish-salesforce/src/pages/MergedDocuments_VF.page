@@ -28,7 +28,7 @@ Description : This vf page contains all the custom links in one section on the p
         <apex:messages />
         <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"/>
         
-        <apex:outputPanel rendered="{!$Profile.Name !='Active Volunteer (Member)' && $Profile.Name != 'Active Volunteer (Login)'}" layout="block" style="margin-top:10px;">
+        <apex:outputPanel rendered="{!$Profile.Id != $Label.Active_Volunteer_Profile}" layout="block" style="margin-top:10px;">
             <table style="width:70%; font-size:14px" cellpadding="10" class="tbl">
                 <tr style="width:100%">
                     <th align="center" colspan="3"><div style="font-size: 20px; color: #333"><center>Merged Documents</center></div></th>
@@ -94,6 +94,18 @@ Description : This vf page contains all the custom links in one section on the p
                 </tr>
                 <tr style="width:100%">
                     <td><div><apex:outputLink target="_blank" value="{!salesforceWishAssistFormMessage}"> Salesforce Wish Assist Form</apex:outputLink></div></td>
+                </tr>
+                <tr style="width:100%">
+                    <td><div><apex:outputLink target="_blank" value="{!Combo_Clearance_CMS_faxMessage}"> Faxable Combo Clearance CMS</apex:outputLink></div></td>
+                </tr>                
+                <tr style="width:100%">
+                    <td><div><apex:outputLink target="_blank" value="{!Child_s_Medical_Summary_faxMessage}"> Faxable Child Medical Summary</apex:outputLink></div></td>
+                </tr>
+                <tr style="width:100%">
+                    <td><div><apex:outputLink target="_blank" value="{!Wish_Clearance_faxMessage}"> Faxable Wish Clearance</apex:outputLink></div></td>
+                </tr>
+                <tr style="width:100%">
+                    <td><div><apex:outputLink target="_blank" value="{!Wish_Clearance_no_travel_faxMessage}"> Faxable Wish Clearance No Travel</apex:outputLink></div></td>
                 </tr>
             </table>
         </apex:outputPanel>

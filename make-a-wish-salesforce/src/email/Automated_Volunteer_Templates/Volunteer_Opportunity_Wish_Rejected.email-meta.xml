@@ -17,4 +17,5 @@ Thanks,
 {!Volunteer_Opportunity__c.Hidden_Chapter_Phone__c}
 {!Volunteer_Opportunity__c.Hidden_Chapter_Email__c}</textOnly>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

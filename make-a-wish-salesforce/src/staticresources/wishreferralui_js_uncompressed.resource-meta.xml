@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">
     <cacheControl>Private</cacheControl>
-    <contentType>application/javascript</contentType>
+    <contentType>text/javascript</contentType>
     <description>UI logic for Wish referral form. This file is strictly for developmental purposes, later to be compressed into wishreferralui_js</description>
 </StaticResource>

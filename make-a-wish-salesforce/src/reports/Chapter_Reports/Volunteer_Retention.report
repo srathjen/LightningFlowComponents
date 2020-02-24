@@ -13,16 +13,19 @@
         <booleanFilter>1 AND 2 AND 3</booleanFilter>
         <criteriaItems>
             <column>User$Profile.UserLicense.Name</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Customer Community Plus</value>
         </criteriaItems>
         <criteriaItems>
             <column>User$IsActive</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>User$Contact.Hidden_Status__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Active,Inactive</value>
         </criteriaItems>
@@ -41,6 +44,8 @@
     <reportType>Volunteer_Retention__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>User$ChatterAdoptionStageModifiedDate</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

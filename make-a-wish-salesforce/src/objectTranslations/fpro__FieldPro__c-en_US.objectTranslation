@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <help><!-- Unique API name for this field in SF. --></help>
+        <label><!-- API Name --></label>
+        <name>fpro__API_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- set to True if the analysis call is completed (used in VF page) --></help>
+        <label><!-- Call 1 Completed? --></label>
+        <name>fpro__Call_1_Completed__c</name>
+    </fields>
+    <fields>
+        <help><!-- set to True if the analysis call is completed (used in VF page) --></help>
+        <label><!-- Call 2 Completed? --></label>
+        <name>fpro__Call_2_Completed__c</name>
+    </fields>
+    <fields>
+        <help><!-- set to True if the analysis call is completed (used in VF page) --></help>
+        <label><!-- Call 3 Completed? --></label>
+        <name>fpro__Call_3_Completed__c</name>
+    </fields>
+    <fields>
+        <help><!-- set to True if the analysis call is completed (used in VF page) --></help>
+        <label><!-- Call 4 Completed? --></label>
+        <name>fpro__Call_4_Completed__c</name>
+    </fields>
+    <fields>
+        <help><!-- Lookup to the user who created this field in SF. --></help>
+        <label><!-- Created By --></label>
+        <name>fpro__Created_By__c</name>
+        <relationshipLabel><!-- FieldPro (Created By) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Date when this field was created in SF. --></help>
+        <label><!-- Created Date --></label>
+        <name>fpro__Created_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Optionally override the default 365 days, when calculating the field usage for this field. --></help>
+        <label><!-- Created In Last X Days --></label>
+        <name>fpro__Created_In_Last_X_Days__c</name>
+    </fields>
+    <fields>
+        <help><!-- Add custom notes when making changes to the field properties, or when/how this field is updated etc. --></help>
+        <label><!-- Custom Admin Notes --></label>
+        <name>fpro__Custom_Admin_Notes__c</name>
+    </fields>
+    <fields>
+        <help><!-- If specified, represents the default value of the field. --></help>
+        <label><!-- Default Value --></label>
+        <name>fpro__Default_Value__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description on the field in SF. --></help>
+        <label><!-- Description --></label>
+        <name>fpro__Description__c</name>
+    </fields>
+    <fields>
+        <help><!-- Error recorded while parsing apex. --></help>
+        <label><!-- Error Code --></label>
+        <name>fpro__Error_Code__c</name>
+    </fields>
+    <fields>
+        <help><!-- Error recorded while performing DML statement in the apex. --></help>
+        <label><!-- Error DML --></label>
+        <name>fpro__Error_DML__c</name>
+    </fields>
+    <fields>
+        <help><!-- Error recorded while getting the field data. --></help>
+        <label><!-- Error Field Data --></label>
+        <name>fpro__Error_Field_Data__c</name>
+    </fields>
+    <fields>
+        <help><!-- Error recorded while calculating the field usage. --></help>
+        <label><!-- Error Populated --></label>
+        <name>fpro__Error_Populated__c</name>
+    </fields>
+    <fields>
+        <help><!-- Roughly calculated score for this salesforce field using other parameters like field usage, apex/metadata references etc. Score 0 means the field is a potential candidate for deletion, as probably not being used anywhere. --></help>
+        <label><!-- Field Score --></label>
+        <name>fpro__Field_Score__c</name>
+    </fields>
+    <fields>
+        <help><!-- Indicates the field type for the field in SF. Fetched using Tooling API. --></help>
+        <label><!-- Field Type (Tooling) --></label>
+        <name>fpro__Field_Type_Tooling__c</name>
+    </fields>
+    <fields>
+        <help><!-- Indicates the field type for the field in SF. Returns one of the DisplayType enum values, depending on the type of field. Fetched using DescribeFieldResult. --></help>
+        <label><!-- Field Type --></label>
+        <name>fpro__Field_Type__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula value for this field in SF. --></help>
+        <label><!-- Formula Value --></label>
+        <name>fpro__Formula_Value__c</name>
+    </fields>
+    <fields>
+        <help><!-- Inline Help Text on the field in SF. --></help>
+        <label><!-- Inline Help Text --></label>
+        <name>fpro__Inline_Help_Text__c</name>
+    </fields>
+    <fields>
+        <help><!-- Indicates whether the field is a custom field (true) or not (false). --></help>
+        <label><!-- Is Custom Field? --></label>
+        <name>fpro__Is_Custom_Field__c</name>
+    </fields>
+    <fields>
+        <help><!-- Indicates whether the field is deleted from Salesforce (true) or not (false). --></help>
+        <label><!-- Is Deleted? --></label>
+        <name>fpro__Is_Deleted__c</name>
+    </fields>
+    <fields>
+        <help><!-- Is this field an External Id on that object? --></help>
+        <label><!-- Is External Id? --></label>
+        <name>fpro__Is_External_Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Indicates whether the field is a custom formula field (true) or not (false). --></help>
+        <label><!-- Is Formula Field? --></label>
+        <name>fpro__Is_Formula_Field__c</name>
+    </fields>
+    <fields>
+        <help><!-- Indicates whether the field requires a value on creation (true) or not (false). --></help>
+        <label><!-- Is Required? --></label>
+        <name>fpro__Is_Required__c</name>
+    </fields>
+    <fields>
+        <help><!-- Indicates whether the field is unique (true) or not (false). --></help>
+        <label><!-- Is Unique? --></label>
+        <name>fpro__Is_Unique__c</name>
+    </fields>
+    <fields>
+        <help><!-- Label for the field in SF. --></help>
+        <label><!-- Label --></label>
+        <name>fpro__Label__c</name>
+    </fields>
+    <fields>
+        <help><!-- Lookup to the user who last modified this field in SF. --></help>
+        <label><!-- Last Modified By --></label>
+        <name>fpro__Last_Modified_By__c</name>
+        <relationshipLabel><!-- FieldPro (Last Modified By) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Date when this field was last modified in SF. --></help>
+        <label><!-- Last Modified Date --></label>
+        <name>fpro__Last_Modified_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Timestamp of when the field analysis was last run. --></help>
+        <label><!-- Last Refresh Date --></label>
+        <name>fpro__Last_Refresh_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Length of the field in SF. --></help>
+        <label><!-- Length --></label>
+        <name>fpro__Length__c</name>
+    </fields>
+    <fields>
+        <help><!-- Indicates the manageable state of the specified component that is contained in a package. --></help>
+        <label><!-- ManageableState --></label>
+        <name>fpro__ManageableState__c</name>
+    </fields>
+    <fields>
+        <help><!-- The namespace of the custom field. A custom field can be in an extension namespace different than the object. --></help>
+        <label><!-- NamespacePrefix --></label>
+        <name>fpro__NamespacePrefix__c</name>
+    </fields>
+    <fields>
+        <help><!-- FIeld Object API name in SF. --></help>
+        <label><!-- Object API Name --></label>
+        <name>fpro__Object_API_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- FIeld Object label in SF. --></help>
+        <label><!-- Object Label --></label>
+        <name>fpro__Object_Label__c</name>
+    </fields>
+    <fields>
+        <help><!-- Picklist values on the field in SF. --></help>
+        <label><!-- Picklist Values --></label>
+        <name>fpro__Picklist_Values__c</name>
+    </fields>
+    <fields>
+        <help><!-- Percentage of records this field is populated on in last X months. --></help>
+        <label><!-- Populate Percentage --></label>
+        <name>fpro__Populate_Percentage__c</name>
+    </fields>
+    <fields>
+        <help><!-- Count of records this field is populated on in last X months. --></help>
+        <label><!-- Populated On --></label>
+        <name>fpro__Populated_On__c</name>
+    </fields>
+    <fields>
+        <help><!-- The precision for number values. Precision is the number of digits in a number. For example, the number 256.99 has a precision of 5. --></help>
+        <label><!-- Precision --></label>
+        <name>fpro__Precision__c</name>
+    </fields>
+    <fields>
+        <help><!-- If specified, indicates a reference this field has to another object. --></help>
+        <label><!-- Reference To --></label>
+        <name>fpro__Reference_To__c</name>
+    </fields>
+    <fields>
+        <help><!-- # of field references found on this metadata type (Apex Class). --></help>
+        <label><!-- References (Apex Class) Count --></label>
+        <name>fpro__References_Apex_Class_Count__c</name>
+    </fields>
+    <fields>
+        <help><!-- List of apex classes this field is referenced on. --></help>
+        <label><!-- References (Apex Class) --></label>
+        <name>fpro__References_Apex_Class__c</name>
+    </fields>
+    <fields>
+        <help><!-- # of field references found on this metadata type (Apex Trigger). --></help>
+        <label><!-- References (Apex Trigger) Count --></label>
+        <name>fpro__References_Apex_Trigger_Count__c</name>
+    </fields>
+    <fields>
+        <help><!-- List of apex triggers this field is referenced on. --></help>
+        <label><!-- References (Apex Trigger) --></label>
+        <name>fpro__References_Apex_Trigger__c</name>
+    </fields>
+    <fields>
+        <help><!-- # of field references found on this metadata type (Formula Fields). --></help>
+        <label><!-- References (Formula Fields) Count --></label>
+        <name>fpro__References_Formula_Fields_Count__c</name>
+    </fields>
+    <fields>
+        <help><!-- List of formula fields this field is referenced in. --></help>
+        <label><!-- References (Formula Fields) --></label>
+        <name>fpro__References_Formula_Fields__c</name>
+    </fields>
+    <fields>
+        <help><!-- # of field references found on this metadata type (Page Layouts). --></help>
+        <label><!-- References (Page Layouts) Count --></label>
+        <name>fpro__References_Page_Layouts_Count__c</name>
+    </fields>
+    <fields>
+        <help><!-- List of page layouts this field is referenced on. --></help>
+        <label><!-- References (Page Layouts) --></label>
+        <name>fpro__References_Page_Layouts__c</name>
+    </fields>
+    <fields>
+        <help><!-- # of field references found on this metadata type (Profile Visibility). --></help>
+        <label><!-- References (Profile Visibility) Count --></label>
+        <name>fpro__References_Profile_Visibility_Count__c</name>
+    </fields>
+    <fields>
+        <help><!-- List of profiles this field is visible to. --></help>
+        <label><!-- References (Profile Visibility) --></label>
+        <name>fpro__References_Profile_Visibility__c</name>
+    </fields>
+    <fields>
+        <help><!-- # of field references found on this metadata type (Validation Rules). --></help>
+        <label><!-- References (Validation Rules) Count --></label>
+        <name>fpro__References_Validation_Rules_Count__c</name>
+    </fields>
+    <fields>
+        <help><!-- List of validation rules this field is referenced in. --></help>
+        <label><!-- References (Validation Rules) --></label>
+        <name>fpro__References_Validation_Rules__c</name>
+    </fields>
+    <fields>
+        <help><!-- # of field references found on this metadata type (Visualforce Components). --></help>
+        <label><!-- References (Visualforce Component) Count --></label>
+        <name>fpro__References_Visualforce_Components_Count__c</name>
+    </fields>
+    <fields>
+        <help><!-- List of vf components this field is referenced on. --></help>
+        <label><!-- References (Visualforce Components) --></label>
+        <name>fpro__References_Visualforce_Components__c</name>
+    </fields>
+    <fields>
+        <help><!-- # of field references found on this metadata type (Visualforce Page). --></help>
+        <label><!-- References (Visualforce Page) Count --></label>
+        <name>fpro__References_Visualforce_Page_Count__c</name>
+    </fields>
+    <fields>
+        <help><!-- List of vf pages this field is referenced on. --></help>
+        <label><!-- References (Visualforce Page) --></label>
+        <name>fpro__References_Visualforce_Page__c</name>
+    </fields>
+    <fields>
+        <help><!-- # of field references found on this metadata type (Workflow Field Updates). --></help>
+        <label><!-- References (Workflow Field Update) Count --></label>
+        <name>fpro__References_Workflow_Field_Updates_Count__c</name>
+    </fields>
+    <fields>
+        <help><!-- List of workflow field updates this field is getting updated by. --></help>
+        <label><!-- References (Workflow Field Updates) --></label>
+        <name>fpro__References_Workflow_Field_Updates__c</name>
+    </fields>
+    <fields>
+        <help><!-- # of field references found on this metadata type (Workflow Rules). --></help>
+        <label><!-- References (Workflow Rules) Count --></label>
+        <name>fpro__References_Workflow_Rules_Count__c</name>
+    </fields>
+    <fields>
+        <help><!-- List of workflow rules this field is referenced in (rule criteria/formula evaluation). --></help>
+        <label><!-- References (Workflow Rules) --></label>
+        <name>fpro__References_Workflow_Rules__c</name>
+    </fields>
+    <fields>
+        <help><!-- Label for the relationship. --></help>
+        <label><!-- Relationship Label --></label>
+        <name>fpro__Relationship_Label__c</name>
+    </fields>
+    <fields>
+        <help><!-- If specified, indicates the value for one-to-many relationships. For example, in the object MyObject that had a relationship to YourObject, the relationship name might be YourObjects. --></help>
+        <label><!-- Relationship Name --></label>
+        <name>fpro__Relationship_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Keep track of analysis results (used in VF page to check the status of results viewed by user) --></help>
+        <label><!-- Run Status --></label>
+        <name>fpro__Run_Status__c</name>
+        <picklistValues>
+            <masterLabel>Results Viewed</masterLabel>
+            <translation><!-- Results Viewed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Run Started</masterLabel>
+            <translation><!-- Run Started --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Unique salesforce id of this field. --></help>
+        <label><!-- Salesforce Id --></label>
+        <name>fpro__Salesforce_Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Represents the field on the detail row that is being summarized. --></help>
+        <label><!-- Summarized Field --></label>
+        <name>fpro__Summarized_Field__c</name>
+    </fields>
+    <fields>
+        <help><!-- Represents the master-detail field on the child that defines the relationship between the parent and the child. --></help>
+        <label><!-- Summary Foreign Key --></label>
+        <name>fpro__Summary_Foreign_Key__c</name>
+    </fields>
+    <fields>
+        <help><!-- Represents the sum operation to be performed. --></help>
+        <label><!-- Summary Operation --></label>
+        <name>fpro__Summary_Operation__c</name>
+    </fields>
+    <fields>
+        <help><!-- Total count of records created in last X months. --></help>
+        <label><!-- Total Count --></label>
+        <name>fpro__Total_Count__c</name>
+    </fields>
+    <fields>
+        <help><!-- Indicates whether history tracking is enabled for the field (true) or not (false). --></help>
+        <label><!-- Track History? --></label>
+        <name>fpro__Track_History__c</name>
+    </fields>
+    <fields>
+        <help><!-- Field API name + Object API name. --></help>
+        <label><!-- Unique Id --></label>
+        <name>fpro__Unique_Id__c</name>
+    </fields>
+    <layouts>
+        <layout>Fielderr Layout</layout>
+        <sections>
+            <label><!-- Analysis Run Status --></label>
+            <section>Analysis Run Status</section>
+        </sections>
+        <sections>
+            <label><!-- Apex (Referencing this field) --></label>
+            <section>Apex (Referencing this field)</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Admin Notes --></label>
+            <section>Custom Admin Notes</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Other Metadata References --></label>
+            <section>Other Metadata References</section>
+        </sections>
+        <sections>
+            <label><!-- Populated (Default: Created in last 365 days) --></label>
+            <section>Populated (Default: Created in last 365 days)</section>
+        </sections>
+        <sections>
+            <label><!-- Recorded Errors --></label>
+            <section>Recorded Errors</section>
+        </sections>
+        <sections>
+            <label><!-- References Counts --></label>
+            <section>References Counts</section>
+        </sections>
+        <sections>
+            <label><!-- Standard Salesforce Data (Read Only) --></label>
+            <section>Standard Salesforce Data (Read Only)</section>
+        </sections>
+    </layouts>
+    <webLinks>
+        <label><!-- PDF --></label>
+        <name>fpro__PDF</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Reset --></label>
+        <name>fpro__Reset</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Run_Analysis --></label>
+        <name>fpro__Run_Analysis</name>
+    </webLinks>
+</CustomObjectTranslation>

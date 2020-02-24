@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <block>
+        <blockInfo>
+            <blockId>B1</blockId>
+            <joinTable>Condition_Description__c</joinTable>
+        </blockInfo>
+        <columns>
+            <field>Condition_Description__c.Medical_Questions__r$Name</field>
+        </columns>
+        <filter>
+            <criteriaItems>
+                <column>Condition_Description__c.Medical_Questions__r$Id</column>
+                <isUnlocked>true</isUnlocked>
+                <operator>equals</operator>
+                <value></value>
+            </criteriaItems>
+            <criteriaItems>
+                <column>Condition_Description__c$Group1__c</column>
+                <isUnlocked>true</isUnlocked>
+                <operator>equals</operator>
+                <value>1</value>
+            </criteriaItems>
+        </filter>
+        <format>Summary</format>
+        <name>Condition Description w/ or w/ou block 1</name>
+        <params>
+            <name>co</name>
+            <value>1</value>
+        </params>
+        <reportType>CD_with_or_without_Med_questions__c</reportType>
+        <scope>organization</scope>
+        <showGrandTotal>true</showGrandTotal>
+        <showSubTotals>true</showSubTotals>
+        <sortColumn>Condition_Description__c.Medical_Questions__r$Name</sortColumn>
+        <sortOrder>Asc</sortOrder>
+        <timeFrameFilter>
+            <dateColumn>Condition_Description__c$CreatedDate</dateColumn>
+            <interval>INTERVAL_CUSTOM</interval>
+        </timeFrameFilter>
+    </block>
+    <block>
+        <blockInfo>
+            <blockId>B0</blockId>
+            <joinTable>Condition_Description__c</joinTable>
+        </blockInfo>
+        <columns>
+            <field>Condition_Description__c.ICD_Codes__r$Name</field>
+        </columns>
+        <filter>
+            <criteriaItems>
+                <column>Condition_Description__c.ICD_Codes__r$Group1__c</column>
+                <isUnlocked>true</isUnlocked>
+                <operator>equals</operator>
+                <value>1</value>
+            </criteriaItems>
+        </filter>
+        <format>Summary</format>
+        <name>Condition Description ICD block 2</name>
+        <params>
+            <name>co</name>
+            <value>1</value>
+        </params>
+        <reportType>Condition_Description__c</reportType>
+        <scope>organization</scope>
+        <showGrandTotal>true</showGrandTotal>
+        <showSubTotals>true</showSubTotals>
+        <sortColumn>Condition_Description__c.ICD_Codes__r$Name</sortColumn>
+        <sortOrder>Asc</sortOrder>
+        <timeFrameFilter>
+            <dateColumn>Condition_Description__c$CreatedDate</dateColumn>
+            <interval>INTERVAL_CUSTOM</interval>
+        </timeFrameFilter>
+    </block>
+    <blockInfo>
+        <blockId xsi:nil="true"/>
+        <joinTable>Condition_Description__c</joinTable>
+    </blockInfo>
+    <description>Auto Qualifying ICD Codes without Medical Questions</description>
+    <format>MultiBlock</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Condition_Description__c$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Condition_Description__c$Group1__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Copy of AutoQualifying ICD Codes w/out M</name>
+    <reportType>CD_with_or_without_Med_questions__c</reportType>
+    <showDetails>true</showDetails>
+</Report>

@@ -1,0 +1,12 @@
+<!--
+ - Created by gmayer on 7/26/2019.
+ -->
+
+<aura:documentation>
+    <aura:description>Documentation for WishRequestedParticipantListItem</aura:description>
+    <aura:example name="WishRequestedParticipantListItem" ref="WishRequestedParticipantListItem"
+                  label="WishRequestedParticipantListItem">
+        Wish Request Participant List Item is a custom component built to display each Wish Affiliation's requested participant record
+        detail.
+    </aura:example>
+</aura:documentation>

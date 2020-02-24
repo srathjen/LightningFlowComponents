@@ -12,14 +12,14 @@ Description : Contact_OnAfterInsertTriggerHandler is used to call the Helper cla
 
 public class Contact_OnAfterInsertTriggerHandler{
     // This method is used to call ContactSharing and CreateAffliation methods when the contact record is created.
+
     public static void OnAfterInsert(List<Contact> newContactList){
-        Constant_AC constant = new Constant_AC();
-        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
         Set<id> conId=new Set<Id>();
         List<Contact> conList = new List<Contact>();
         Map<Id,Contact> contactAccountIdMap = new Map<Id,Contact>();
         Map<String,List<Contact>> contactMapforSharing = new Map<String,List<Contact>>();
-        
+        List<Contact> wishFormContactList = new List<Contact>();
          for(Contact conCurrRec: newContactList){
             if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null){
                 conList.Add(conCurrRec);
@@ -35,6 +35,7 @@ public class Contact_OnAfterInsertTriggerHandler{
              {
                  conId.add(conCurrRec.id);   
              }
+            wishFormContactList.add(conCurrRec);
          }
         if(contactMapforSharing.size() > 0){
             ChapterStaffRecordSharing_AC.ContactSharing(contactMapforSharing);
@@ -44,6 +45,9 @@ public class Contact_OnAfterInsertTriggerHandler{
         }
         if(conId.size()>0){
         VolunteerContactHandler.createUser(conId);
+       }
+       if(wishFormContactList.size() > 0){
+           Contact_OnAfterInsertTriggerHelper.updateWishFormId(wishFormContactList);
        }
        } 
     }

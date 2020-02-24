@@ -9,4 +9,5 @@
     <subject>Email to MAC Team [{!Case.Thread_Id}]</subject>
     <textOnly>{!Case.Case_Comment__c}</textOnly>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

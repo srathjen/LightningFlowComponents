@@ -17,4 +17,5 @@ Best wishes,
 {!Task.Account_Phone__c}
 {!Task.Account_Email__c}</textOnly>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

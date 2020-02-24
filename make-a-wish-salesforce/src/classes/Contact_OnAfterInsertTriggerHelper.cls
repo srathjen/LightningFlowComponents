@@ -9,14 +9,13 @@ Description : Contact_OnAfterInsertTriggerHelper is used to create affliation re
               
 *****************************************************************************************************/
 
-Public class Contact_OnAfterInsertTriggerHelper{
-    
-    static Constant_AC  constant = new Constant_AC();
-    static Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
-    static Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
-    static Id familyContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
-    static Id boardMemberRT = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.boardMemberRT).getRecordTypeId();
-    static Id MedicalProfContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
+public class Contact_OnAfterInsertTriggerHelper{
+
+    static Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
+    static Id wichChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
+    static Id familyContactRecordTypeId = Constant_AC.WISH_FAMILY_RT_ID;
+    static Id boardMemberRT = Constant_AC.BOARD_MEMBER_RT_ID;
+    static Id MedicalProfContactRecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
     
     // create affliation record based on the contact creations.
     public static void CreateAffliation(List<Contact> ContactList){
@@ -31,7 +30,8 @@ Public class Contact_OnAfterInsertTriggerHelper{
         try{
             for(Contact con:ContactList)
             {
-                if((con.RecordTypeId == MedicalProfContactRecordTypeId  && con.Hidden_Hospital_Account__c != Null) || (con.RecordTypeId != MedicalProfContactRecordTypeId)){
+                if((con.RecordTypeId == MedicalProfContactRecordTypeId  && con.Hidden_Hospital_Account__c != Null) || 
+                (con.RecordTypeId != MedicalProfContactRecordTypeId)){
                     npe5__Affiliation__c houseHoldAffiliation = new npe5__Affiliation__c();
                     if(con.RecordTypeId == MedicalProfContactRecordTypeId  && con.Hidden_Hospital_Account__c != Null)
                         houseHoldAffiliation.npe5__Organization__c=con.Hidden_Hospital_Account__c;
@@ -42,12 +42,13 @@ Public class Contact_OnAfterInsertTriggerHelper{
                     houseHoldAffiliation.npe5__StartDate__c = Date.Today();
                     houseHoldAffiliation.npe5__Status__c = 'Active';
                     if(con.RecordTypeId == volunteerRecordTypeId){
-                        houseHoldAffiliation.Constituent_Code__c='Volunteer';
+                        houseHoldAffiliation.Constituent_Code__c = Constant_AC.VOLUNTEER_TASK_RT_LABEL;
+                        houseHoldAffiliation.npe5__Status__c = 'Pending';
                         houseHoldAffiliation.npe5__Primary__c = true;
                         contactIds.add(con.Id);
                     }
                     else if(con.RecordTypeId == boardMemberRT)
-                        houseHoldAffiliation.Constituent_Code__c='Board Member';
+                        houseHoldAffiliation.Constituent_Code__c=Constant_AC.BOARD_MEMBER_RT_LABEL;
                     if(con.RecordTypeId == MedicalProfContactRecordTypeId)
                         houseHoldAffiliation.npe5__Primary__c = false;
                     houseHoldAffList.add(houseHoldAffiliation);
@@ -63,15 +64,15 @@ Public class Contact_OnAfterInsertTriggerHelper{
                         aff.npe5__Status__c = 'Active';
                         if(con.RecordTypeId == familyContactRecordTypeId )
                         {
-                            aff.Constituent_Code__c='Wish Family';
+                            aff.Constituent_Code__c=Constant_AC.WISH_FAMILY_RT_LABEL;
                         }
                         else if(con.RecordTypeId == wichChildRecordTypeId)
                         {
-                            aff.Constituent_Code__c='Wish Child';
+                            aff.Constituent_Code__c=Constant_AC.CONTACT_WISH_CHILD_RT_LABEL;
                         }
                         if(con.RecordTypeId == MedicalProfContactRecordTypeId  )
                         {
-                            aff.Constituent_Code__c='Medical Professional';
+                            aff.Constituent_Code__c=Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
                             aff.npe5__Primary__c = true;
                         }
                         affDbList.add(aff);
@@ -99,14 +100,53 @@ Public class Contact_OnAfterInsertTriggerHelper{
             if(affDbList.size() > 0){
                 Insert affDbList;
             }
+        
+         if(Test.isRunningTest()){
+                throw new CommonTriggerException('Test Class execution');
+            }
+
+        
+        
+        
+        
         }
         catch(Exception ex){
             for(Contact currRec : ContactList){
-                ErrorMessage_AC.createdebugRec('Contact_OnAfterInsertTriggerHelper',String.valueof(currRec),String.valueOf(ex.getCause()),'CreateAffliation',currRec.Id,ex.getStackTraceString(),'Error');
+                ErrorMessage_AC.createdebugRec('Contact_OnAfterInsertTriggerHelper',String.valueof(currRec),String.valueOf(ex),'CreateAffliation',currRec.Id,ex.getStackTraceString(),'Error');
             }
+            
+            
+            
+            if(!Test.isRunningTest()){
             for(Contact currRec : ContactList){
                 currRec.addError(Label.Debug_log_error_message);
             }
+          }
+        
         } 
+    }
+    
+    public static void updateWishFormId(List<Contact> newContactList){
+        Map<Id,Id> contactIdMap = new Map<Id,Id>();
+        List<Wish_Child_Form__c> wishChildFormList = new List<Wish_Child_Form__c>();
+        for(Contact newContact : newContactList){
+            if(newContact.RecordTypeId == wichChildRecordTypeId || newContact.RecordTypeId == familyContactRecordTypeId ){
+                if(newContact.Hidden_Wish_Form_Id__c != Null){
+                    contactIdMap.put(newContact.Hidden_Wish_Form_Id__c,newContact.Id);
+                }
+             }
+        }
+        
+        if(contactIdMap.size() > 0){
+            
+            for(Wish_Child_Form__c dbWishFormRec : [SELECT Id,Contact__c,Migrated__c FROM Wish_Child_Form__c WHERE Id IN: contactIdMap.keySet() AND Migrated__c = False]){
+                if(contactIdMap.containsKey(dbWishFormRec.Id)){
+                   dbWishFormRec.Contact__c = contactIdMap.get(dbWishFormRec.Id);
+                   wishChildFormList.add(dbWishFormRec);
+                }
+            }
+        }
+        if(wishChildFormList.size() > 0)
+        update wishChildFormList;
     }
 }

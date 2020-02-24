@@ -5,11 +5,20 @@
     <allowedSubmitters>
         <type>owner</type>
     </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>National_Staff</submitter>
+        <type>roleSubordinates</type>
+    </allowedSubmitters>
     <approvalPageFields>
         <field>Name</field>
         <field>Owner</field>
         <field>Volunteer_Name__c</field>
+        <field>Wish_Child_Name__c</field>
+        <field>Role__c</field>
         <field>Wish__c</field>
+        <field>Number_Of_Active_Wishes_For_This_Vol__c</field>
+        <field>City__c</field>
+        <field>Number_Of_Wishes_Granted_By_This_Vol__c</field>
     </approvalPageFields>
     <approvalStep>
         <allowDelegate>true</allowDelegate>
@@ -26,6 +35,10 @@
         <formula>OR(AND(Volunteer_Name__c != Null, TEXT( Status__c ) = &apos;&apos; ,Wish__c!= Null, Non_Wish_Event__c = Null),AND(Volunteer_Name__c != Null, TEXT( Status__c ) = &apos;&apos;, Wish__c == Null, Non_Wish_Event__c != Null))</formula>
     </entryCriteria>
     <finalApprovalActions>
+        <action>
+            <name>Set_Approved_Date_as_Today</name>
+            <type>FieldUpdate</type>
+        </action>
         <action>
             <name>VO_ChangeStatusAsApproved</name>
             <type>FieldUpdate</type>

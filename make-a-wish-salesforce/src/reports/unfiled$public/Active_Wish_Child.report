@@ -33,16 +33,19 @@
     <filter>
         <criteriaItems>
             <column>Contact$RecordType</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Wish_Child</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Cases$RecordType</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Cases$Status</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Hold,Inactive,Granted,Completed,Closed,DNQ,Denied</value>
         </criteriaItems>
@@ -56,6 +59,8 @@
     <reportType>Contacts_With_Case__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Contact$B_C_Expiration_Date__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

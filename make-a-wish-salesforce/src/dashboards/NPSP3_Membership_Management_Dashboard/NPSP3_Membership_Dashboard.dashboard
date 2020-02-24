@@ -16,6 +16,7 @@
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
+            <groupingSortProperties/>
             <header>All Current Members</header>
             <legendPosition>Bottom</legendPosition>
             <report>NPSP3_Membership_Management_Reports/NPSP3_Current_Membership</report>
@@ -36,6 +37,7 @@
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
+            <groupingSortProperties/>
             <header>Lapsed Members</header>
             <legendPosition>Bottom</legendPosition>
             <maxValuesDisplayed>40</maxValuesDisplayed>
@@ -54,6 +56,7 @@
             <displayUnits>Auto</displayUnits>
             <drillEnabled>false</drillEnabled>
             <drillToDetailEnabled>false</drillToDetailEnabled>
+            <groupingSortProperties/>
             <header>Members Coming Up for Renewal</header>
             <indicatorHighColor>#54C254</indicatorHighColor>
             <indicatorLowColor>#C25454</indicatorLowColor>
@@ -76,6 +79,7 @@
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
             <groupingColumn>Contact.npo02__MembershipEndDate__c</groupingColumn>
+            <groupingSortProperties/>
             <legendPosition>Bottom</legendPosition>
             <report>NPSP3_Membership_Management_Reports/NPSP3_Membership_End_Dates_by_Month</report>
             <showPercentage>false</showPercentage>

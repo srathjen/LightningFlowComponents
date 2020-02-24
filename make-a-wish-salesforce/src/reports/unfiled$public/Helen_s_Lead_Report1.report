@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>Lead.Referred_Date__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Part_A_Received__c</field>
+    </columns>
+    <description>Lead qual date 5/2/18</description>
+    <filter>
+        <criteriaItems>
+            <column>Lead.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Helen&apos;s Lead Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadList</reportType>
+    <scope>org</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead.Qualified_Date__c</dateColumn>
+        <endDate>2018-05-02</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2018-05-02</startDate>
+    </timeFrameFilter>
+</Report>

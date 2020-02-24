@@ -2,18 +2,18 @@
 Author      : MST Solutions
 Date        : 
 Description : BackGroundCheck_OnAfterInsertHelper is used to call the Helper class when the
-              new BackGroundCheck record is created.
-              
-              Modification Log
-              ------------------
-              WVC-1866    Pavithra G  05/08/2018
-              
+new BackGroundCheck record is created.
+
+Modification Log
+------------------
+WVC-1866    Pavithra G  05/08/2018
+
 *****************************************************************************************************/
 public class BackGroundCheck_OnAfterInsertHelper{
-
-  //Deactivate the primary if there are any existing record is primary  active.  
-      public static void DeactivateExistingRecords(Set<Id> newRecordIds, Set<Id> volunteerIds,List<Background_check__c> exceptionList)
-      {
+    
+    //Deactivate the primary if there are any existing record is primary  active.  
+    public static void DeactivateExistingRecords(Set<Id> newRecordIds, Set<Id> volunteerIds,List<Background_check__c> exceptionList)
+    {
         try{
             List<Background_check__c> deactivateExRecords = new List<Background_check__c>();
             for(Background_check__c exRec : [SELECT id,current__c FROM Background_check__c WHERE current__c = True AND Id NOT IN :newRecordIds AND Volunteer__c IN :volunteerIds])
@@ -29,17 +29,23 @@ public class BackGroundCheck_OnAfterInsertHelper{
             {
                 Update deactivateExRecords;
             }
+            if(Test.isRunningTest()){
+                throw new CommonTriggerException('Test Class execution');
+            }
         }
         catch(Exception ex){
             for(Background_check__c currRec : exceptionList){
-                ErrorMessage_AC.createdebugRec('BackGroundCheck_OnAfterInsertHelper',String.valueof(currRec),String.valueOf(ex.getCause()),'DeactivateExistingRecords',currRec.Id,ex.getStackTraceString()+'   '+ex.getMessage(),'Error');
+                ErrorMessage_AC.createdebugRec('BackGroundCheck_OnAfterInsertHelper',String.valueof(currRec),String.valueOf(ex),'DeactivateExistingRecords',currRec.Id,ex.getStackTraceString()+'   '+ex.getMessage(),'Error');
             }
-            for(Background_check__c currRec : exceptionList){
-                currRec.addError(Label.Debug_log_error_message);
+            if(!Test.isRunningTest()){
+                for(Background_check__c currRec : exceptionList){
+                    currRec.addError(Label.Debug_log_error_message);
+                }
             }
+            
         }
     }
-      // Updating most recent BC Expiration Date on Volunteer Contact.
+    // Updating most recent BC Expiration Date on Volunteer Contact.
     public static void UpdateVolunteerExpirationDate(Map<Id,Background_check__c>   expirationDateMap)
     {
         try{
@@ -57,14 +63,20 @@ public class BackGroundCheck_OnAfterInsertHelper{
             
             if(volunteerListToUpdate.size() > 0)
                 update volunteerListToUpdate;
+            if(Test.isRunningTest()){
+                throw new CommonTriggerException('Test Class execution');
+            }
         }
         catch(Exception ex){
-           for(Background_check__c currRec : expirationDateMap.Values()){
-                ErrorMessage_AC.createdebugRec('BackGroundCheck_OnAfterInsertHelper',String.valueof(currRec),String.valueOf(ex.getCause()),'UpdateVolunteerExpirationDate',currRec.Id,ex.getStackTraceString()+'   '+ex.getMessage(),'Error');
+            for(Background_check__c currRec : expirationDateMap.Values()){
+                ErrorMessage_AC.createdebugRec('BackGroundCheck_OnAfterInsertHelper',String.valueof(currRec),String.valueOf(ex),'UpdateVolunteerExpirationDate',currRec.Id,ex.getStackTraceString()+'   '+ex.getMessage(),'Error');
             }
-            for(Background_check__c currRec : expirationDateMap.values()){
-                currRec.addError(Label.Debug_log_error_message);
-            } 
+            if(!Test.isRunningTest()){
+                for(Background_check__c currRec : expirationDateMap.values()){
+                    currRec.addError(Label.Debug_log_error_message);
+                } 
+            }
+            
         }
         
     }

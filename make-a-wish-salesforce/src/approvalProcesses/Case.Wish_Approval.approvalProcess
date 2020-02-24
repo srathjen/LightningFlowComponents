@@ -5,6 +5,10 @@
     <allowedSubmitters>
         <type>owner</type>
     </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>Arizona_Chapter</submitter>
+        <type>role</type>
+    </allowedSubmitters>
     <approvalPageFields>
         <field>CaseNumber</field>
         <field>Owner</field>
@@ -201,6 +205,6 @@
     <finalApprovalRecordLock>false</finalApprovalRecordLock>
     <finalRejectionRecordLock>false</finalRejectionRecordLock>
     <label>Wish Approval</label>
-    <recordEditability>AdminOnly</recordEditability>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
     <showApprovalHistory>false</showApprovalHistory>
 </ApprovalProcess>

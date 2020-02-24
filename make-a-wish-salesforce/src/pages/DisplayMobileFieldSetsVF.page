@@ -1,0 +1,20 @@
+<!-- @author Steve Doucette, Traction on Demand, @date 8/19/2019 -->
+<apex:page id="DisplayMobileFieldSetsVF" standardController="Case">
+    <apex:includeLightning />
+
+    <div id="lightning"/>
+
+    <script>
+        $Lightning.use("c:DisplayMobileFieldSetsApp", function () {
+            $Lightning.createComponent("c:DisplayMobileFieldSets",
+                {
+                    sObjectName: "Case",
+                    recordId: "{!Case.Id}"
+                },
+                "lightning",
+                function (cmp) {
+                }
+            );
+        });
+    </script>
+</apex:page>

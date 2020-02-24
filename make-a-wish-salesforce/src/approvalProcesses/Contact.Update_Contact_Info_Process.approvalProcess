@@ -5,6 +5,10 @@
     <allowedSubmitters>
         <type>owner</type>
     </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>Arizona_Chapter</submitter>
+        <type>roleSubordinates</type>
+    </allowedSubmitters>
     <approvalPageFields>
         <field>Name</field>
         <field>Owner</field>

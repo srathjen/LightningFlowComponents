@@ -1,0 +1,35 @@
+<apex:component access="global">
+    <footer class="container-fluid" style="margin-top:5%">
+        <div class="container">
+            <section class="row">
+                <div class="col-md-8">
+                    <a href="" class="btn-lg">
+                        <figure class="featured row" style="margin:0">
+                            <apex:image styleClass="center-block col-xs-6 col-sm-6" value="{!$Resource.MAWAcommunityfooter}" alt="Make-A-Wish Child Photo"></apex:image>
+                            <p class="col-xs-12 col-sm-6 col-md-6">Every 35 minutes, across the United States, a child’s wish is granted. Behind each one of those wishes are volunteers who donate their time to make that child’s one true wish come true. THANK YOU to all of our volunteers for changing the lives of children in your community!</p>
+                        </figure>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a class="btn-md donate" href="https://secure2.wish.org/site/SPageServer?pagename=donate_now&chid=100-000">Donate</a>
+                    <a class="btn-md cnt" href="https://wish.org/wishes/stay-in-touch">
+                        <div class="col-xs-8 rich-text">
+                            <span class="title">Stay In Touch!</span>
+                            <span class="detail">Sign up to receive email from Make-A-Wish.</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+            <section class="row legal">
+                <span class="col-sm-1 col-md-2 col-lg-1"><a class="bbb" href="http://wish.org/about-us/making-a-difference/managing-funds/better-business-bureau"><span class="sr-only">Better Business Bureau</span></a></span>
+                <div class="col-sm-11 col-md-10 col-lg-11">
+                    <p>&copy;2006-<span class="current-year"></span> Make-A-Wish Foundation of America<br/>
+                        Make-A-Wish Foundation of America is an Arizona nonprofit corporation exempt from federal income tax under Section 501(c)(3) of the Internal Revenue Code.<br/>
+                        <a href="https://wish.org/content/terms-and-policy">Privacy Policy &amp; Terms</a> | <a href="https://wish.org/content/faq">FAQ</a></p>
+                </div>
+            </section>
+        </div>
+    </footer>
+     
+    
+</apex:component>

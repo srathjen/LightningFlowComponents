@@ -1,0 +1,13 @@
+<!--
+ - Created by mnahar on 11/13/2019.
+ -->
+
+<aura:documentation>
+    <aura:description>Documentation for wishAffiliationDesignForm</aura:description>
+    <aura:example name="wishAffiliationDesignForm" ref="wishAffiliationDesignForm" label="wishAffiliationDesignForm">
+        # Description
+        wishDetailFormSchedule is a part of Wish Interview process and provides an interface to list all
+        Participants(Wish Affiliations) of a Wish as well as provides the functionality to add new Participants and
+        update participant information.
+    </aura:example>
+</aura:documentation>

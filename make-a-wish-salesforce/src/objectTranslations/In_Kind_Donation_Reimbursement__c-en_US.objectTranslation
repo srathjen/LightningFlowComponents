@@ -8,6 +8,10 @@
         <plural>true</plural>
         <value>In-Kind Donation &amp; Reimbursement</value>
     </caseValues>
+    <fieldSets>
+        <label><!-- InkindDonationFieldSet --></label>
+        <name>InkindDonationFieldSet</name>
+    </fieldSets>
     <fields>
         <label><!-- Acknowledge --></label>
         <name>Acknowledge__c</name>
@@ -934,10 +938,12 @@ If this is a volunteer donor, gift subtype should begin with DRPS --></help>
         </sections>
     </layouts>
     <recordTypes>
+        <description><!-- Use this record type when submitting an In Kind donation. --></description>
         <label><!-- In-Kind Donation --></label>
         <name>In_Kind_Donation</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Use this record type when submitting a request for reimbursement. --></description>
         <label><!-- Reimbursement --></label>
         <name>Reimbursement</name>
     </recordTypes>

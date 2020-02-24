@@ -3,43 +3,98 @@
     <caseValues>
         <caseType>Nominative</caseType>
         <plural>false</plural>
-        <value><!-- Error --></value>
+        <value>Fehler</value>
     </caseValues>
     <caseValues>
         <caseType>Nominative</caseType>
         <plural>true</plural>
-        <value><!-- Error --></value>
+        <value>Fehler</value>
     </caseValues>
     <caseValues>
         <caseType>Accusative</caseType>
         <plural>false</plural>
-        <value><!-- Error --></value>
+        <value>Fehler</value>
     </caseValues>
     <caseValues>
         <caseType>Accusative</caseType>
         <plural>true</plural>
-        <value><!-- Error --></value>
+        <value>Fehler</value>
     </caseValues>
     <caseValues>
         <caseType>Genitive</caseType>
         <plural>false</plural>
-        <value><!-- Error --></value>
+        <value>Fehlers</value>
     </caseValues>
     <caseValues>
         <caseType>Genitive</caseType>
         <plural>true</plural>
-        <value><!-- Error --></value>
+        <value>Fehler</value>
     </caseValues>
     <caseValues>
         <caseType>Dative</caseType>
         <plural>false</plural>
-        <value><!-- Error --></value>
+        <value>Fehler</value>
     </caseValues>
     <caseValues>
         <caseType>Dative</caseType>
         <plural>true</plural>
-        <value><!-- Error --></value>
+        <value>Fehlern</value>
     </caseValues>
-    <gender><!-- Neuter --></gender>
-    <nameFieldLabel><!-- Error Number --></nameFieldLabel>
+    <fields>
+        <help>Kontext, der den Fehler verursacht hat, falls bekannt</help>
+        <label><!-- Context Type --></label>
+        <name>npsp__Context_Type__c</name>
+    </fields>
+    <fields>
+        <help>Datum und Uhrzeit bei Auftreten des Fehlers</help>
+        <label><!-- Datetime --></label>
+        <name>npsp__Datetime__c</name>
+    </fields>
+    <fields>
+        <help>Gibt an, ob zu diesem Fehler eine E-Mail-Benachrichtigung gesendet wurde</help>
+        <label><!-- Email Sent --></label>
+        <name>npsp__Email_Sent__c</name>
+    </fields>
+    <fields>
+        <help>Typ des aufgetretenen Fehlers</help>
+        <label><!-- Error Type --></label>
+        <name>npsp__Error_Type__c</name>
+    </fields>
+    <fields>
+        <help>Vollständiger Text der Fehlermeldung</help>
+        <label><!-- Full Message --></label>
+        <name>npsp__Full_Message__c</name>
+    </fields>
+    <fields>
+        <help>Objekttyp, zu dem der Fehler aufgetreten ist, falls bekannt</help>
+        <label><!-- Object Type --></label>
+        <name>npsp__Object_Type__c</name>
+    </fields>
+    <fields>
+        <help>Gibt an, ob der Fehler in Chatter gepostet wurde</help>
+        <label><!-- Posted in Chatter --></label>
+        <name>npsp__Posted_in_Chatter__c</name>
+    </fields>
+    <fields>
+        <help>Link zum Datensatz, der den Fehler verursacht hat, falls verfügbar.</help>
+        <label><!-- Record URL --></label>
+        <name>npsp__Record_URL__c</name>
+    </fields>
+    <fields>
+        <help><!-- The Salesforce ID of the record associated with this error. --></help>
+        <label><!-- Related Record ID --></label>
+        <name>npsp__Related_Record_ID__c</name>
+    </fields>
+    <fields>
+        <help><!-- When selected, indicates that the record specified in Related Record ID will be reprocessed in the next scheduled process. If reprocessing succeeds, this field is then deselected. Applies to specific types of errors that occur during scheduled processes. --></help>
+        <label><!-- Retry Pending? --></label>
+        <name>npsp__Retry_Pending__c</name>
+    </fields>
+    <fields>
+        <help>Stapel-Trace für den ausgegebenen Fehler, falls bei Laufzeit verfügbar</help>
+        <label><!-- Stack Trace --></label>
+        <name>npsp__Stack_Trace__c</name>
+    </fields>
+    <gender>Masculine</gender>
+    <nameFieldLabel>Fehlernummer</nameFieldLabel>
 </CustomObjectTranslation>

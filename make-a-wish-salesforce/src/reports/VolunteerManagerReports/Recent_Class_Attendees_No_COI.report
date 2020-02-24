@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>EMAIL</field>
+    </columns>
+    <columns>
+        <field>FK_$Class_Offering__c.Course_Name__c</field>
+    </columns>
+    <columns>
+        <field>FK_$Class_Offering__c.Date__c</field>
+    </columns>
+    <columns>
+        <field>Volunteer_Orientation_Training__c.Volunteer_Attendance__c</field>
+    </columns>
+    <columns>
+        <field>Contact.COI_Expiration_Date__c</field>
+    </columns>
+    <description>Contacts who attended a Class Offering (orientation or training) within the last 14 days who do not have a current COI.</description>
+    <filter>
+        <booleanFilter>1 AND 2 AND (3 OR 4)</booleanFilter>
+        <criteriaItems>
+            <column>FK_$Class_Offering__c.Date__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>LAST_N_DAYS:14</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>FK_$Class_Offering__c.Chapter__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Make-A-Wish Arizona</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.COI_Expiration_Date__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.COI_Expiration_Date__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>lessThan</operator>
+            <value>TODAY</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Recent Class Attendees, No COI</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>ContactCustomEntity$Volunteer_Orientation_Training__c@Volunteer_Orientation_Training__c.Class_Offering__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>LAST_ACTIVITY</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

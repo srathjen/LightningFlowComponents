@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sent to volunteers who have attended an orientation session.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Make_a_Wish_America</letterhead>
+    <name>Volunteer Attended Orientation</name>
+    <style>freeForm</style>
+    <subject>Thank you for attending volunteer orientation</subject>
+    <textOnly>{!Contact.FirstName},
+
+Thank you for recently attending our volunteer orientation. We are excited to have you join the Make-A-Wish family!
+
+The next step in the process is to have you select the volunteer role(s) that interest you. At your convenience, please log in to the Make-A-Wish Volunteer Center at https://make-a-wish.force.com/communitieslogin and click &quot;Continue Process&quot; to do so. After selecting your roles you will have the opportunity to read and electronically sign our Conflict of Interest &amp; Ethics Statement.
+
+Should you have any questions regarding this part of the volunteer process, please contact us directly.
+
+Best wishes,
+{!Contact.OwnerFullName}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

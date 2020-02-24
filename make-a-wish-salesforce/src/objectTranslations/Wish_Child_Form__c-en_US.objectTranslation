@@ -8,6 +8,14 @@
         <plural>true</plural>
         <value>Wish Forms</value>
     </caseValues>
+    <fieldSets>
+        <label><!-- Wish Child Contact Map --></label>
+        <name>Wish_Child_Contact_Map</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- Wish Child Form --></label>
+        <name>Wish_Child_Form</name>
+    </fieldSets>
     <fields>
         <label><!-- Actor/Actress --></label>
         <name>Actor_Actress__c</name>
@@ -15,6 +23,10 @@
     <fields>
         <label><!-- Additional Requests --></label>
         <name>Additional_Requests__c</name>
+    </fields>
+    <fields>
+        <label><!-- Age --></label>
+        <name>Age__c</name>
     </fields>
     <fields>
         <label><!-- Already wish granted by MAW/Other Org --></label>
@@ -110,6 +122,11 @@
         <name>Color__c</name>
     </fields>
     <fields>
+        <label><!-- Contact --></label>
+        <name>Contact__c</name>
+        <relationshipLabel><!-- Wish Forms --></relationshipLabel>
+    </fields>
+    <fields>
         <label><!-- Delivered Hidden Envelop Id --></label>
         <name>Delivered_Hidden_Envelop_Id__c</name>
     </fields>
@@ -190,6 +207,10 @@
         <name>Driver_Information__c</name>
     </fields>
     <fields>
+        <label><!-- Driver License Number --></label>
+        <name>Driver_License_Number__c</name>
+    </fields>
+    <fields>
         <label><!-- Driver Name --></label>
         <name>Driver_Name__c</name>
     </fields>
@@ -222,8 +243,12 @@
         <name>Emergency_Mobilephone__c</name>
     </fields>
     <fields>
-        <label><!-- Emergency Relationship --></label>
+        <label><!-- Relationship --></label>
         <name>Emergency_Relationship__c</name>
+        <picklistValues>
+            <masterLabel>Brother</masterLabel>
+            <translation><!-- Brother --></translation>
+        </picklistValues>
         <picklistValues>
             <masterLabel>Child</masterLabel>
             <translation><!-- Child --></translation>
@@ -253,6 +278,10 @@
             <translation><!-- Parent --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Sister</masterLabel>
+            <translation><!-- Sister --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Spouse</masterLabel>
             <translation><!-- Spouse --></translation>
         </picklistValues>
@@ -260,6 +289,10 @@
     <fields>
         <label><!-- Hidden Envelop Id --></label>
         <name>Envelop_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Expiration Date --></label>
+        <name>Expiration_Date__c</name>
     </fields>
     <fields>
         <label><!-- First Name --></label>
@@ -338,6 +371,10 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Hidden Combo Envelop Id --></label>
+        <name>Hidden_Combo_Envelop_Id__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Contact Name --></label>
         <name>Hidden_Contact_Name__c</name>
     </fields>
@@ -412,6 +449,15 @@
     <fields>
         <label><!-- Hobby --></label>
         <name>Hobby__c</name>
+    </fields>
+    <fields>
+        <label><!-- Home Phone --></label>
+        <name>Home_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- House Hold Account Id --></label>
+        <name>House_Hold_Account_Id__c</name>
+        <relationshipLabel><!-- Wish Forms --></relationshipLabel>
     </fields>
     <fields>
         <help><!-- If already wish granted, please indicate the organization&apos;s name, the wish, 
@@ -522,6 +568,14 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Middle Name --></label>
         <name>Middle_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Migrated New --></label>
+        <name>Migrated_New__c</name>
+    </fields>
+    <fields>
+        <label><!-- Migrated --></label>
+        <name>Migrated__c</name>
     </fields>
     <fields>
         <label><!-- Movie --></label>
@@ -812,6 +866,10 @@ and the date it was or will be granted. --></help>
         <name>Restaurant__c</name>
     </fields>
     <fields>
+        <label><!-- Self --></label>
+        <name>Self__c</name>
+    </fields>
+    <fields>
         <label><!-- Self describe comment box --></label>
         <name>Self_describe_comment_box__c</name>
     </fields>
@@ -868,6 +926,10 @@ provide contact information for each site on which you are active. --></help>
     <fields>
         <label><!-- T-Shirt Size --></label>
         <name>T_Shirt_Size__c</name>
+    </fields>
+    <fields>
+        <label><!-- TelePhone --></label>
+        <name>TelePhone__c</name>
     </fields>
     <fields>
         <label><!-- This is my wish because --></label>
@@ -1044,21 +1106,70 @@ provide contact information for each site on which you are active. --></help>
             <section>Custom Links</section>
         </sections>
         <sections>
-            <label><!-- Hidden Section --></label>
-            <section>Hidden Section</section>
-        </sections>
-        <sections>
             <label><!-- Wish Child Form --></label>
             <section>Wish Child Form</section>
         </sections>
+    </layouts>
+    <layouts>
+        <layout>Wish Form Determination Case</layout>
         <sections>
-            <label><!-- Wish Family Info --></label>
-            <section>Wish Family Info</section>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
         </sections>
         <sections>
             <label><!-- Wish Information Info --></label>
             <section>Wish Information Info</section>
         </sections>
     </layouts>
+    <layouts>
+        <layout>Wish Form Driver Information</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Wish Form Emergency Contact</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Emergency Contact --></label>
+            <section>Emergency Contact</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Wish Form Family Contact</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <description><!-- This record type will have the wish child contact information. --></description>
+        <label><!-- Wish Child --></label>
+        <name>Wish_Child</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- This record type will have the determination case information. --></description>
+        <label><!-- Wish Form Determination Case --></label>
+        <name>Wish_Form_Determination_Case</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- This record type will have the drive information details --></description>
+        <label><!-- Wish Form Driver Information --></label>
+        <name>Wish_Form_Driver_Information</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- This record type will have the Emergency contact information --></description>
+        <label><!-- Wish Form Emergency Contact --></label>
+        <name>Wish_Form_Emergency_Contact</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- This record type will have the wish family contact information. --></description>
+        <label><!-- Wish Form Family --></label>
+        <name>Wish_Form_Family</name>
+    </recordTypes>
     <startsWith>Consonant</startsWith>
 </CustomObjectTranslation>

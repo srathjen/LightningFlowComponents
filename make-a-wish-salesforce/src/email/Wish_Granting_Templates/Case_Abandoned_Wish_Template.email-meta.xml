@@ -20,4 +20,5 @@ The wish has been closed.
 {!Case.Hidden_Wish_Child_Country_Code__c}
 {!Case.Hidden_Wish_Child_Postalcode__c}</textOnly>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

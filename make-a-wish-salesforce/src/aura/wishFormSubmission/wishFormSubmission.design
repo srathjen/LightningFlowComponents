@@ -1,0 +1,12 @@
+<design:component>
+    
+    <design:attribute name="actionValue" label="actionValue" 
+                      description="Selected Button Value" />
+    
+	<design:attribute name="formName" label="formName" 
+                      description="Current Wish Form Name" />
+    
+    <design:attribute name="wishChildFullName" label="wishChild FullName" 
+                      description="wishChild FullName" />
+    
+</design:component>

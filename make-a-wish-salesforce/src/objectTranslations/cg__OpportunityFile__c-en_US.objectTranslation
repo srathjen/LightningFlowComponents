@@ -1,3 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata"/>
-
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Content Type --></label>
+        <name>cg__Content_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>cg__Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- File Name --></label>
+        <name>cg__File_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- File Size --></label>
+        <name>cg__File_Size__c</name>
+    </fields>
+    <fields>
+        <label><!-- File Size in Bytes --></label>
+        <name>cg__File_Size_in_Bytes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Deleted --></label>
+        <name>cg__Is_Deleted__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Latest Version --></label>
+        <name>cg__Is_Latest_Version__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Parent Deleted --></label>
+        <name>cg__Is_Parent_Deleted__c</name>
+    </fields>
+    <fields>
+        <label><!-- Key --></label>
+        <name>cg__Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>cg__Opportunity__c</name>
+        <relationshipLabel><!-- Opportunity Files --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Page Count --></label>
+        <name>cg__Page_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Parent Folder Id --></label>
+        <name>cg__Parent_Folder_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Preview Key --></label>
+        <name>cg__Preview_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Preview Version Id --></label>
+        <name>cg__Preview_Version_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Private --></label>
+        <name>cg__Private__c</name>
+    </fields>
+    <fields>
+        <label><!-- Shortcut --></label>
+        <name>cg__Shortcut__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync Id --></label>
+        <name>cg__Sync_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tags --></label>
+        <name>cg__Tags__c</name>
+    </fields>
+    <fields>
+        <label><!-- Thumbnail Key --></label>
+        <name>cg__Thumbnail_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Thumbnail Version Id --></label>
+        <name>cg__Thumbnail_Version_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Version Description --></label>
+        <name>cg__Version_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Version Id --></label>
+        <name>cg__Version_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- WIP --></label>
+        <name>cg__WIP__c</name>
+    </fields>
+</CustomObjectTranslation>

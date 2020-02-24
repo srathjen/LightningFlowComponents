@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Wish Interview Form Maps</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>DocGen Maps</value>
+    </caseValues>
+    <fields>
+        <help><!-- When editing a knowledge article, you can specify a friendly URL name like &quot;Wish-Interview-Form&quot; --></help>
+        <label><!-- Blank Interview Form Knowledge URL Name --></label>
+        <name>Blank_Interview_Form_Knowledge_URL_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Details Form Attach Delivery Id --></label>
+        <name>Wish_Details_Form_Attach_Delivery_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Details Form DDP Id --></label>
+        <name>Wish_Details_Form_DDP_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Details Form Download Delivery Id --></label>
+        <name>Wish_Details_Form_Download_Delivery_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Vision Form Attach Delivery Id --></label>
+        <name>Wish_Vision_Form_Attach_Delivery_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Vision Form DDP Id --></label>
+        <name>Wish_Vision_Form_DDP_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Vision Form Download Delivery Id --></label>
+        <name>Wish_Vision_Form_Download_Delivery_Id__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

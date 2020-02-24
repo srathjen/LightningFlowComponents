@@ -40,31 +40,37 @@
         <booleanFilter>((((1 AND 2 AND 4) OR (1 AND 2 AND 3 AND 4))) AND 5) AND 6</booleanFilter>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Inactive__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>CUST_RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Volunteer_Opportunity__c.Wish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Volunteer_Name__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Role__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Wish Granter</value>
         </criteriaItems>
         <criteriaItems>
             <column>FK_$Case.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Hidden_Chapter_Name__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
@@ -86,6 +92,8 @@
     <reportType>CustomEntity$Volunteer_Opportunity__c@Volunteer_Opportunity__c.Wish__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Volunteer_Opportunity__c.Date__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

@@ -6,7 +6,9 @@
     public static void testForgotPasswordController() {
         // Instantiate a new controller with all parameters in the page
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
+         insert acc;
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+         insert con;
         OrientationandTrainingUtil.createAffiliation(con.id);
         User currUser = OrientationandTrainingUtil.createActiveVolunteerUser(con.id);
         ForgotPasswordController controller = new ForgotPasswordController();
@@ -19,7 +21,9 @@
     public static void InvalidUser() {
         // Instantiate a new controller with all parameters in the page
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
+         insert acc;
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+         insert con;
         OrientationandTrainingUtil.createAffiliation(con.id);
         User currUser = OrientationandTrainingUtil.createActiveVolunteerUser(con.id);
         ForgotPasswordController controller = new ForgotPasswordController();

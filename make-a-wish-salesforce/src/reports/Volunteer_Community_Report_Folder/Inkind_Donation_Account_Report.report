@@ -38,6 +38,8 @@
     <reportType>Custom_Inkind_Account_Report_Type__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Account$CreatedDate</dateColumn>
         <interval>INTERVAL_CURRENT</interval>

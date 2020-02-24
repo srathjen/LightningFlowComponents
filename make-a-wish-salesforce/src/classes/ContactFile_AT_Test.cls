@@ -5,27 +5,21 @@ Description : This class contains test method for Contact object
 *******************************************************************************************************************/
 @isTest
 public class ContactFile_AT_Test {
-    @testSetup 
-    static void setup() 
-    {
-        Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
-        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
-        cg__ContactFile__c newFileRecord = OrientationandTrainingUtil.createContactFileRecord(wishChild.Id);
-        
-    }
-    static testmethod void createContactFile() {
-        Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
-        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
-        cg__ContactFile__c newFileRecord = OrientationandTrainingUtil.createContactFileRecord(wishChild.Id);
-        cg__ContactFile__c newFileRecord1 = OrientationandTrainingUtil.createContactFileRecord(wishChild.Id);
-    }
-    
-    static testmethod void createContactDocumentFile() {
-        Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
-        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
-       // cg__ContactFile__c newFileRecord = OrientationandTrainingUtil.createContactDocumentFileRecord(wishChild.Id);
-        //cg__ContactFile__c newFileRecord1 = OrientationandTrainingUtil.createContactDocumentFileRecord(wishChild.Id);
+	static testmethod void createContactFile() {
+		trac_TriggerHandlerBase.blockTrigger = true;
 
-    }
-    
+		Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
+		insert chapterAccount;
+
+		Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
+		insert wishChild;
+
+		cg__ContactFile__c newFileRecord = OrientationandTrainingUtil.createContactFileRecord(wishChild.Id);
+		cg__ContactFile__c newFileRecord1 = OrientationandTrainingUtil.createContactFileRecord(wishChild.Id);
+		insert new List<cg__ContactFile__c>{
+				newFileRecord, newFileRecord1
+		};
+
+		trac_TriggerHandlerBase.blockTrigger = false;
+	}
 }

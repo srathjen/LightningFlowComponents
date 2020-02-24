@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Dataset --></label>
+        <name>VisualAntidote__Dataset__c</name>
+    </fields>
+    <fields>
+        <label><!-- Field Name --></label>
+        <name>VisualAntidote__Field_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Field Type --></label>
+        <name>VisualAntidote__Field_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object Name --></label>
+        <name>VisualAntidote__Object_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object Type --></label>
+        <name>VisualAntidote__Object_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- SF Org Instance ID --></label>
+        <name>VisualAntidote__SF_Org_Instance_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Salesforce ID --></label>
+        <name>VisualAntidote__Salesforce_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>VisualAntidote__Type__c</name>
+    </fields>
+</CustomObjectTranslation>

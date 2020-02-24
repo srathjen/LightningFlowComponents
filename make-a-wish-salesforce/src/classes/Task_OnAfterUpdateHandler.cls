@@ -6,27 +6,18 @@ then it will assign the value to the corresponding fields and then it will the m
 class based on the collection size().
 *******************************************************************************************************************/
 
-Public class Task_OnAfterUpdateHandler{
-    
-    Static Constant_AC  constant = new Constant_Ac();
-    Static String wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
-    Static String backrgroundcheckTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.backgroundRT).getRecordTypeId();
-    Static String contactUpdateTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.updateContactRT).getRecordTypeId();
-    Static String  planningTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
-    Static String determinationTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
-    Static String volunteerTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.volunteerTaskRT).getRecordTypeId();
-    Static String chapterRT = Schema.SObjectType.Task.getRecordTypeInfosByName().get(constant.staffTaskRT).getRecordTypeId();
-    Static String DefaultTask= Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.taskRT).getRecordTypeId();
-    Static String interviewTask = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
-    Static String wishEffectRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishEffectRT).getRecordTypeId();
-    Static String diagnosisVerificationRT = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.diagnosisRT).getRecordTypeId();
-    Static String wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();     
-    Static String wishPlanningRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();    
-    Static String wishAssistRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishAssistRT).getRecordTypeId();
-    Static String wishGrantRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
-    Static String parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
-    Static String taskInterviewRecordType = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
-    Static String triainingRecordTypeId = Schema.Sobjecttype.Orientation_Training__c.getRecordTypeInfosByName().get(constant.trainingRT).getRecordTypeId();
+public class Task_OnAfterUpdateHandler{
+
+    private final static Id wishGrantTaskRT = Constant_AC.GRANT_TASK_RT_ID;
+    private final static Id backgroundCheckTaskRT = Constant_AC.BACKGROUND_RT_ID;
+    private final static Id contactUpdateTaskRT = Constant_AC.UPDATE_CONTACT_RT_ID;
+    private final static Id planningTaskRT = Constant_AC.PLANNING_ANTICIPATION_TASK_RT_ID;
+    private final static Id determinationTaskRT = Constant_AC.DETERMINATION_TASK_RT_ID;
+    private final static Id volunteerTaskRT = Constant_AC.VOLUNTEER_TASK_RT_ID;
+    private final static Id chapterRT = Constant_AC.STAFF_TASK_RT_ID;
+    private final static Id DefaultTask = Constant_AC.TASK_RT_ID;
+    private final static Id interviewTask = Constant_AC.INTERVIEW_RT_ID;
+    private final static Id taskInterviewRecordType = Constant_AC.INTERVIEW_RT_ID;
     
     /*********************************************************************************************************************
     This method is used to assign the value to the corresponding fields and then it will the methods in Task_OnAfterUpdateHandlerHelper
@@ -53,7 +44,7 @@ class based on the collection size().
         Set<Id> interviewTaskVolunteerIdsSet = new Set<Id>();
         
         for(Task newTask : newCaseMap.values()){
-            if(newTask.RecordTypeId == wishGrantTaskRT || newTask.RecordTypeId == planningTaskRT || newTask.RecordTypeId == determinationTaskRT || newTask.RecordTypeId == volunteerTaskRT || newTask.RecordTypeId == chapterRT || newTask.RecordTypeId == backrgroundcheckTaskRT 
+            if(newTask.RecordTypeId == wishGrantTaskRT || newTask.RecordTypeId == planningTaskRT || newTask.RecordTypeId == determinationTaskRT || newTask.RecordTypeId == volunteerTaskRT || newTask.RecordTypeId == chapterRT || newTask.RecordTypeId == backgroundCheckTaskRT
                || newTask.RecordTypeId == contactUpdateTaskRT || newTask.RecordTypeId == DefaultTask || newTask.RecordTypeId == interviewTask){ 
                    if(newTask.Status == 'Completed' && oldCaseMap.get(newTask.Id).Status != newTask.Status && newTask.subject == 'Volunteer wish follow-up activities not complete') {
                        followUpTaskMap.put(newTask.WhatId, newTask);
@@ -113,12 +104,16 @@ class based on the collection size().
                    }
                }
         }
-        
-        if(interviewTaskVolunteerIdsSet.size() > 0){
-            Task_OnAfterInsertHelper.updateVolunteerInterviewDate(interviewTaskVolunteerIdsSet, 'update');
-        }
+
+        /**
+         * WLP-434
+         * Deprecate Interview Fields on Contact
+         */
+//        if(interviewTaskVolunteerIdsSet.size() > 0){
+//            Task_OnAfterInsertHelper.updateVolunteerInterviewDate(interviewTaskVolunteerIdsSet, 'update');
+//        }
         if(followUpTaskMap.size() > 0) {
-            Task_OnAfterUpdateHelper.checkFollowUpTask(followUpTaskMap, followUpTaskOwnerIdSet);
+            Task_OnAfterUpdateHelper.checkFollowUpTask(followUpTaskMap);
         }
         if(taskMap.size() > 0){
             Task_OnAfterUpdateHelper.updateVolunteerRecord(taskMap,taskOwnerIds,caseIds);
@@ -126,9 +121,10 @@ class based on the collection size().
         if(wishGrantTaskWhatIdSet.size() > 0) {
             Task_OnAfterUpdateHelper.checkWishGrantTask(wishGrantTaskWhatIdSet);
         }
-        if(createCheckinTaskList.size() > 0 && checkinTaskIdSet.size() > 0) {
-            Task_OnAfterUpdateHelper.createCheckinRecurrenceTask(createCheckinTaskList, checkinTaskIdSet);
-        }
+        /*WLP-467 remove automated task creation */
+//        if(createCheckinTaskList.size() > 0 && checkinTaskIdSet.size() > 0) {
+//            Task_OnAfterUpdateHelper.createCheckinRecurrenceTask(createCheckinTaskList, checkinTaskIdSet);
+//        }
         if(declinedTaskVolunteerIds.size() > 0){
             Task_OnAfterUpdateHelper.UpdateAffiliationStatusAsDeclined(declinedTaskVolunteerIds);
         }
@@ -141,7 +137,7 @@ class based on the collection size().
         if(validateTaskList.size() > 0 && completedTaskParentIdSet.size() > 0) {
             Task_OnAfterUpdateHelper.autoCloseTask(validateTaskList,completedTaskParentIdSet);
         }
-        if(leadIdList.Size() > 0){
+        if(leadIdList.size() > 0){
             Task_OnAfterUpdateHelper.updateLeadCloseDate(leadIdList);
         }
     }

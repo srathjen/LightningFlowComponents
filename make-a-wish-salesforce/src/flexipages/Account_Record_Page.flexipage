@@ -22,17 +22,140 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <componentInstances>
-            <componentName>forceChatter:recordFeedContainer</componentName>
+            <componentInstanceProperties>
+                <name>componentId</name>
+                <value>1</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>customObjectFileName</name>
+                <value>AccountFile__c</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>disableCutCopyPaste</name>
+                <value>false</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>enableChatter</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>enableCompactView</name>
+                <value>false</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>enableCopyUrl</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>enableDelete</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>enableDownload</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>enableEdit</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>enableEmail</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>enableField</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>enableFolders</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>enableUpload</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>fileNamespacePrefix</name>
+                <value>cg__</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>isDropzoneEnabled</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>isPublicShareEnabled</name>
+                <value>false</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>isShortcutEnabled</name>
+                <value>false</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>logo</name>
+                <value>false</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>openWhenClickedOnFile</name>
+                <value>false</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>pageSize</name>
+                <value>100</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>privateEnabled</name>
+                <value>false</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>relationshipName</name>
+                <value>cg__Account__c</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>showBreadcrumb</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>showFolderTree</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>sortField</name>
+                <value>cg__File_Name__c</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>sortOrder</name>
+                <value>asc</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>title</name>
+                <value>S-Drive</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>viewType</name>
+                <value>list</value>
+            </componentInstanceProperties>
+            <componentName>cg:SDrive</componentName>
         </componentInstances>
-        <mode>Replace</mode>
-        <name>relatedTabContent</name>
+        <name>Facet-50576d26-e4e2-4abc-a899-05acbe3a0160</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
         <componentInstances>
-            <componentName>sfa:activityPanel</componentName>
+            <componentInstanceProperties>
+                <name>relatedListComponentOverride</name>
+                <value>NONE</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>rowsToDisplay</name>
+                <value>10</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>showActionBar</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentName>force:relatedListContainer</componentName>
         </componentInstances>
-        <name>facet-134c80c2-8f0b-4834-a8c5-df4726719292</name>
+        <name>Facet-4d98fb40-81f9-4eee-95cf-66238b9818fe</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -53,27 +176,23 @@
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
-                <name>active</name>
-                <value>false</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
                 <name>body</name>
-                <value>relatedTabContent</value>
+                <value>Facet-50576d26-e4e2-4abc-a899-05acbe3a0160</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>title</name>
-                <value>Standard.Tab.collaborate</value>
+                <value>S-Drive</value>
             </componentInstanceProperties>
             <componentName>flexipage:tab</componentName>
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
                 <name>body</name>
-                <value>facet-134c80c2-8f0b-4834-a8c5-df4726719292</value>
+                <value>Facet-4d98fb40-81f9-4eee-95cf-66238b9818fe</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>title</name>
-                <value>Standard.Tab.activity</value>
+                <value>Related</value>
             </componentInstanceProperties>
             <componentName>flexipage:tab</componentName>
         </componentInstances>
@@ -95,49 +214,65 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <componentInstances>
+            <componentName>runtime_sales_activities:activityPanel</componentName>
+        </componentInstances>
+        <name>Facet-7f2c7aa2-b84a-4f32-86ae-9368f230199b</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
+            <componentName>forceChatter:recordFeedContainer</componentName>
+        </componentInstances>
+        <name>Facet-29751fd6-f8f3-427f-95ca-526efae7b731</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
             <componentInstanceProperties>
-                <name>relatedListComponentOverride</name>
-                <value>NONE</value>
+                <name>active</name>
+                <value>true</value>
             </componentInstanceProperties>
-            <componentName>force:relatedListContainer</componentName>
+            <componentInstanceProperties>
+                <name>body</name>
+                <value>Facet-7f2c7aa2-b84a-4f32-86ae-9368f230199b</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>title</name>
+                <value>Standard.Tab.activity</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:tab</componentName>
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
-                <name>parentFieldApiName</name>
-                <value>Account.Id</value>
+                <name>body</name>
+                <value>Facet-29751fd6-f8f3-427f-95ca-526efae7b731</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
-                <name>relatedListApiName</name>
-                <value>OpenActivities</value>
+                <name>title</name>
+                <value>Standard.Tab.collaborate</value>
             </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>relatedListComponentOverride</name>
-                <value>NONE</value>
-            </componentInstanceProperties>
-            <componentName>force:relatedListSingleContainer</componentName>
+            <componentName>flexipage:tab</componentName>
         </componentInstances>
+        <name>Facet-e7151038-d8fe-4a11-8b6e-743d51dbf8bc</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
         <componentInstances>
             <componentInstanceProperties>
-                <name>parentFieldApiName</name>
-                <value>Account.Id</value>
+                <name>tabs</name>
+                <value>Facet-e7151038-d8fe-4a11-8b6e-743d51dbf8bc</value>
             </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>relatedListApiName</name>
-                <value>ActivityHistories</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>relatedListComponentOverride</name>
-                <value>NONE</value>
-            </componentInstanceProperties>
-            <componentName>force:relatedListSingleContainer</componentName>
+            <componentName>flexipage:tabset</componentName>
         </componentInstances>
         <mode>Replace</mode>
         <name>sidebar</name>
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Account Record Page</masterLabel>
-    <pageTemplate>flexipage:recordHomeTemplateDesktop</pageTemplate>
     <parentFlexiPage>sfa__Account_rec_L</parentFlexiPage>
     <sobjectType>Account</sobjectType>
+    <template>
+        <name>flexipage:recordHomeTemplateDesktop</name>
+    </template>
     <type>RecordPage</type>
 </FlexiPage>

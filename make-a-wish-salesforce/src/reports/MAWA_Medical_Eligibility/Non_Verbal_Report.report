@@ -25,6 +25,14 @@
         <field>Lead$ICD_Given_By_Referrer__c</field>
     </columns>
     <description>Non Verbal leads</description>
+    <filter>
+        <criteriaItems>
+            <column>Lead$Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+    </filter>
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
@@ -39,8 +47,10 @@
     <reportType>Leads_detail__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
-        <dateColumn>Lead$Inquiry_Date__c</dateColumn>
-        <interval>INTERVAL_CURRENT</interval>
+        <dateColumn>Lead$Referred_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>

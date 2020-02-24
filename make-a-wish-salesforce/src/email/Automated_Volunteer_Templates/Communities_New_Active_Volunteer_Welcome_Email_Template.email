@@ -1,14 +1,14 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
 <![CDATA[<p class="MsoNormal" style="margin-top:7.5pt;margin-right:0in;margin-bottom:0in;
 margin-left:0in;margin-bottom:.0001pt;line-height:normal;background:white"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Contact.FirstName},<br>
 <br>
 Congratulations on completing the process to become a Make-A-Wish volunteer! We
 are excited to welcome you!<br>
 <br>
-To get started in your role, please visit the&nbsp;<a href="https://make-a-wish.force.com/"><span style="color:blue">Make-A-Wish
-Volunteer Center</span></a>&nbsp;with the username below.<br>
+To get started in your role, please visit the&nbsp;<span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish
+Volunteer Center</a></span>&nbsp;with the username below.<br>
 <br>
 Username:&nbsp;{!npe5__Affiliation__c.User_Name_Hidden__c}<br>
 <br>

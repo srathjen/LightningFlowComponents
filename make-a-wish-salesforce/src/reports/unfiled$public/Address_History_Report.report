@@ -33,6 +33,8 @@
     <reportType>ContactAuditHistory</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <sortColumn>CREATED_DATE</sortColumn>
     <sortOrder>Desc</sortOrder>
     <timeFrameFilter>

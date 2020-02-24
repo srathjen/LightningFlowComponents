@@ -27,28 +27,8 @@
     <rules>
         <fullName>Send Email After 7 Days and 30 Days If Volunteer Orientation Not Registered</fullName>
         <active>true</active>
-        <booleanFilter>1 AND( 2 OR 3)AND 4</booleanFilter>
-        <criteriaItems>
-            <field>User.Migrated_User__c</field>
-            <operation>equals</operation>
-            <value>False</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>equals</operation>
-            <value>Prospective Volunteer (Login)</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>equals</operation>
-            <value>Prospective Volunteer (Member)</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.Volunteer_Orientation_Status__c</field>
-            <operation>notEqual</operation>
-            <value>Registered</value>
-        </criteriaItems>
         <description>Send Email After 7 Days and 30 Days If Volunteer Orientation Not Registered</description>
+        <formula>Migrated_User__c = FALSE &amp;&amp; TEXT( Volunteer_Orientation_Status__c ) &lt;&gt; &quot;Registered&quot; &amp;&amp;  ProfileId = $Label.Prospective_Volunteer_Profile</formula>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
             <actions>
@@ -74,23 +54,8 @@
             <type>Alert</type>
         </actions>
         <active>true</active>
-        <booleanFilter>1 AND( 2 OR 3)</booleanFilter>
-        <criteriaItems>
-            <field>User.Migrated_User__c</field>
-            <operation>equals</operation>
-            <value>False</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>equals</operation>
-            <value>Prospective Volunteer (Login)</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>equals</operation>
-            <value>Prospective Volunteer (Member)</value>
-        </criteriaItems>
         <description>Used to send welcome email for new prospective volunteer user</description>
+        <formula>AND( Migrated_User__c = FALSE,  ProfileId = $Label.Prospective_Volunteer_Profile )</formula>
         <triggerType>onCreateOnly</triggerType>
     </rules>
 </Workflow>

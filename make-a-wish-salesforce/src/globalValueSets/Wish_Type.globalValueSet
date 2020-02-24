@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Animal</fullName>
+        <default>false</default>
+        <label>Animal</label>
+    </customValue>
+    <customValue>
+        <fullName>Celebrity - Domestic Travel</fullName>
+        <default>false</default>
+        <label>Celebrity - Domestic Travel</label>
+    </customValue>
+    <customValue>
+        <fullName>Celebrity - Local</fullName>
+        <default>false</default>
+        <label>Celebrity - Local</label>
+    </customValue>
+    <customValue>
+        <fullName>Celebrity - International Travel</fullName>
+        <default>false</default>
+        <label>Celebrity - International Travel</label>
+    </customValue>
+    <customValue>
+        <fullName>Computer</fullName>
+        <default>false</default>
+        <label>Computer</label>
+    </customValue>
+    <customValue>
+        <fullName>Construction</fullName>
+        <default>false</default>
+        <label>Construction</label>
+    </customValue>
+    <customValue>
+        <fullName>Cruise - Celebrity/Royal</fullName>
+        <default>false</default>
+        <label>Cruise - Celebrity/Royal</label>
+    </customValue>
+    <customValue>
+        <fullName>Cruise - Disney</fullName>
+        <default>false</default>
+        <label>Cruise - Disney</label>
+    </customValue>
+    <customValue>
+        <fullName>Cruise - Other</fullName>
+        <default>false</default>
+        <label>Cruise - Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Disney - Aulani</fullName>
+        <default>false</default>
+        <label>Disney - Aulani</label>
+    </customValue>
+    <customValue>
+        <fullName>Disney World</fullName>
+        <default>false</default>
+        <label>Disney World</label>
+    </customValue>
+    <customValue>
+        <fullName>Disneyland</fullName>
+        <default>false</default>
+        <label>Disneyland</label>
+    </customValue>
+    <customValue>
+        <fullName>Education</fullName>
+        <default>false</default>
+        <label>Education</label>
+    </customValue>
+    <customValue>
+        <fullName>Electronics International - Sports</fullName>
+        <default>false</default>
+        <label>Electronics International - Sports</label>
+    </customValue>
+    <customValue>
+        <fullName>I wish to be…</fullName>
+        <default>false</default>
+        <label>I wish to be…</label>
+    </customValue>
+    <customValue>
+        <fullName>Medical Bed/Chair/Wheelchair</fullName>
+        <default>false</default>
+        <label>Medical Bed/Chair/Wheelchair</label>
+    </customValue>
+    <customValue>
+        <fullName>Motor Vehicle Customization</fullName>
+        <default>false</default>
+        <label>Motor Vehicle Customization</label>
+    </customValue>
+    <customValue>
+        <fullName>Motorized Vehicle</fullName>
+        <default>false</default>
+        <label>Motorized Vehicle</label>
+    </customValue>
+    <customValue>
+        <fullName>Musical Instrument/Music Related</fullName>
+        <default>false</default>
+        <label>Musical Instrument/Music Related</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Party</fullName>
+        <default>false</default>
+        <label>Party</label>
+    </customValue>
+    <customValue>
+        <fullName>Philanthropic</fullName>
+        <default>false</default>
+        <label>Philanthropic</label>
+    </customValue>
+    <customValue>
+        <fullName>Playhouse/Playset</fullName>
+        <default>false</default>
+        <label>Playhouse/Playset</label>
+    </customValue>
+    <customValue>
+        <fullName>Room Redecoration/Furniture</fullName>
+        <default>false</default>
+        <label>Room Redecoration/Furniture</label>
+    </customValue>
+    <customValue>
+        <fullName>Shopping Spree - Local</fullName>
+        <default>false</default>
+        <label>Shopping Spree - Local</label>
+    </customValue>
+    <customValue>
+        <fullName>Shopping Spree - Travel</fullName>
+        <default>false</default>
+        <label>Shopping Spree - Travel</label>
+    </customValue>
+    <customValue>
+        <fullName>Spa/Hot Tub</fullName>
+        <default>false</default>
+        <label>Spa/Hot Tub</label>
+    </customValue>
+    <customValue>
+        <fullName>Sports/Camping Equipment</fullName>
+        <default>false</default>
+        <label>Sports/Camping Equipment</label>
+    </customValue>
+    <customValue>
+        <fullName>Sports-Domestic Travel</fullName>
+        <default>false</default>
+        <label>Sports-Domestic Travel</label>
+    </customValue>
+    <customValue>
+        <fullName>Sports-International Travel</fullName>
+        <default>false</default>
+        <label>Sports-International Travel</label>
+    </customValue>
+    <customValue>
+        <fullName>Sports - Local</fullName>
+        <default>false</default>
+        <label>Sports - Local</label>
+    </customValue>
+    <customValue>
+        <fullName>Swimming Pool</fullName>
+        <default>false</default>
+        <label>Swimming Pool</label>
+    </customValue>
+    <customValue>
+        <fullName>Toys/Books</fullName>
+        <default>false</default>
+        <label>Toys/Books</label>
+    </customValue>
+    <customValue>
+        <fullName>Trailer/Camper</fullName>
+        <default>false</default>
+        <label>Trailer/Camper</label>
+    </customValue>
+    <customValue>
+        <fullName>Travel - Hawai</fullName>
+        <default>false</default>
+        <label>Travel - Hawai</label>
+    </customValue>
+    <customValue>
+        <fullName>Travel - International</fullName>
+        <default>false</default>
+        <label>Travel - International</label>
+    </customValue>
+    <customValue>
+        <fullName>Travel - Other</fullName>
+        <default>false</default>
+        <label>Travel - Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Travel – Hawai</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Travel – Hawai</label>
+    </customValue>
+    <customValue>
+        <fullName>Shopping Spree – Travel</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Shopping Spree – Travel</label>
+    </customValue>
+    <customValue>
+        <fullName>Celebrity- Domestic Travel</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Celebrity- Domestic Travel</label>
+    </customValue>
+    <customValue>
+        <fullName>Celebrity- Local</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Celebrity- Local</label>
+    </customValue>
+    <customValue>
+        <fullName>Celebrity-International Travel</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Celebrity-International Travel</label>
+    </customValue>
+    <customValue>
+        <fullName>Cruise – Celebrity/Royal</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Cruise – Celebrity/Royal</label>
+    </customValue>
+    <customValue>
+        <fullName>Sports-Local</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Sports-Local</label>
+    </customValue>
+    <customValue>
+        <fullName>Travel – International</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Travel – International</label>
+    </customValue>
+    <customValue>
+        <fullName>Disney – Aulani</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Disney – Aulani</label>
+    </customValue>
+    <customValue>
+        <fullName>Travel – Other</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Travel – Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Shopping Spree – Local</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Shopping Spree – Local</label>
+    </customValue>
+    <customValue>
+        <fullName>Cruise – Other</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Cruise – Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Cruise – Disney</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Cruise – Disney</label>
+    </customValue>
+    <masterLabel>Wish Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

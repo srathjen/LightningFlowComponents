@@ -17,14 +17,15 @@ global class Batch_ClosePresentationTask_AC implements Database.Batchable<sObjec
     
     //Used to update the status of the record to 'Completed'
     global void execute(Database.BatchableContext BC, List<Task> taskList) {
-        List<Task> closeTaskList = new List<Task>();
-        for(Task closeTask : taskList) {
-            closeTask.status = 'Completed';
-            closeTaskList.add(closeTask);
-        }
-        if(closeTaskList.size() > 0) {
-            update closeTaskList;
-        }
+        /*WLP-467 remove automated task creation */
+//        List<Task> closeTaskList = new List<Task>();
+//        for(Task closeTask : taskList) {
+//            closeTask.status = 'Completed';
+//            closeTaskList.add(closeTask);
+//        }
+//        if(closeTaskList.size() > 0) {
+//            update closeTaskList;
+//        }
     }   
     
     global void finish(Database.BatchableContext BC) {

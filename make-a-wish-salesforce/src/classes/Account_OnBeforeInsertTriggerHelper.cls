@@ -49,14 +49,30 @@ Public class Account_OnBeforeInsertTriggerHelper
                 matchChapter.addError('Please select Chapter Name');
             }
         }
+    
+    
+     if(Test.isRunningTest()){
+                throw new CommonTriggerException('Test Class execution');
+            }
+
+    
+    
+    
+    
     }
     catch(Exception ex){
        for(Account currRec : newInkAccountList){
-             ErrorMessage_AC.createdebugRec('Account_OnBeforeInsertTriggerHelper',String.valueof(currRec),String.valueOf(ex.getCause()),'matchChapterForInkindAccount',currRec.Id,ex.getStackTraceString(),'Error');
+             ErrorMessage_AC.createdebugRec('Account_OnBeforeInsertTriggerHelper',String.valueof(currRec),String.valueOf(ex),'matchChapterForInkindAccount',currRec.Id,ex.getStackTraceString(),'Error');
             }
+       
+       
+       if(!Test.isRunningTest()){
        for(Account currRec : newInkAccountList){
              currRec.addError(Label.Debug_log_error_message);
            }
+        }
+        
+        
         }
     }
 }

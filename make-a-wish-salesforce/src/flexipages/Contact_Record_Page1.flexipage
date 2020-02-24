@@ -30,7 +30,7 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <componentInstances>
-            <componentName>sfa:activityPanel</componentName>
+            <componentName>runtime_sales_activities:activityPanel</componentName>
         </componentInstances>
         <name>facet-3eeb32f8-e9f4-4fb2-ae93-25bbd19f858f</name>
         <type>Facet</type>
@@ -136,8 +136,10 @@
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Contact Record Page</masterLabel>
-    <pageTemplate>flexipage:recordHomeTemplateDesktop</pageTemplate>
     <parentFlexiPage>sfa__Contact_rec_L</parentFlexiPage>
     <sobjectType>Contact</sobjectType>
+    <template>
+        <name>flexipage:recordHomeTemplateDesktop</name>
+    </template>
     <type>RecordPage</type>
 </FlexiPage>

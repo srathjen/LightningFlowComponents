@@ -1,13 +1,13 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
 <![CDATA[<p class="MsoNormal"><span style="font-family: Lato, sans-serif; background: white;">Hi
 {!Volunteer_Opportunity__c.Hidden_Volunteer_Contact_Name__c},</span><span style="font-family: Lato, sans-serif;"><br>
 <br>
 <span style="background:white">We are reaching out to you as we need volunteers who can help
 us grant&nbsp;{!Volunteer_Opportunity__c.Name__c}’s wish. At your earliest
 opportunity, please visit the&nbsp;</span></span><span style="font-family:
-&quot;Lato&quot;,sans-serif"><a href="https://make-a-wish.force.com/communitieslogin"><span style="background:white">Make-A-Wish Volunteer Center&nbsp;</span></a><span style="background: white;">and look under “Volunteer Opportunities” to request to work
+&quot;Lato&quot;,sans-serif"><span style="background:white"><a href="{!$Label.Site_Url}">Make-A-Wish Volunteer Center</a>&nbsp;</span><span style="background: white;">and look under “Volunteer Opportunities” to request to work
 with&nbsp;{!Volunteer_Opportunity__c.Name__c}&nbsp;or another child in your
 community!</span><br>
 <br>

@@ -1,0 +1,211 @@
+<!--
+ - Created by mnahar on 10/31/2019.
+ -->
+<aura:component description="wishAffiliationDesignForm" controller="WishAffiliationDesign_AC"
+                implements="force:appHostable,flexipage:availableForRecordHome,force:hasRecordID,flexipage:availableForAllPageTypes,lightning:availableForFlowScreens"
+                access="global">
+    <!-- Handlers -->
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <!-- Attributes -->
+    <aura:attribute name="recordId" type="String" access="global"/>
+    <aura:attribute name="wishCaseRecordId" type="String" access="global"/>
+    <aura:attribute name="wishAffiliationList" type="Object" access="global"/>
+    <aura:attribute name="relationshipTypes" type="Object[]" default="[]"/>
+    <aura:attribute name="residingWithChildOptions" type="Object[]" default="[]"/>
+    <aura:attribute name="isUserProfileAllowedToUpdateWishAffiliation" type="Boolean"/>
+    <aura:attribute name="newWishAffiliation" type="Object"/>
+    <aura:attribute name="showModal" type="Boolean" default="false"/>
+    <aura:attribute name="wishChildFirstName" type="String" default=""/>
+    <aura:attribute name="countsOfRequestedParticipants" type="String" default=""/>
+    <aura:attribute name="isButtonDisabled" type="Boolean" default="false"/>
+    <!-- Attributes for Custom Toast -->
+    <aura:attribute name="showToast" type="Boolean" default="false"/>
+    <aura:attribute name="toastMessage" type="String" default=""/>
+    <aura:attribute name="toastMessageType" type="String" default=""/>
+    <!-- Attributes for Validation fields -->
+    <aura:attribute name="isValidData" type="Boolean" default="true" access="private"/>
+    <aura:attribute name="isValidRelationshipType" type="Boolean" default="true" access="private"/>
+    <aura:attribute name="isValidFirstName" type="Boolean" default="true" access="private"/>
+    <aura:attribute name="isValidLastName" type="Boolean" default="true" access="private"/>
+    <aura:attribute name="isValidBirthdate" type="Boolean" default="true" access="private"/>
+    <aura:attribute name="isValidResidingWithWishChild" type="Boolean" default="true" access="private"/>
+    <!-- Methods-->
+    <aura:method name="initializeNewWishAffiliation" action="{!c.initializeNewWishAffiliation}"/>
+    <aura:method name="resetFieldValidation" action="{!c.resetFieldValidation}"/>
+    <aura:method name="onChangeValidate" action="{!c.onChangeValidate}"/>
+    <aura:method name="reInit" action="{!c.doInit}" description="Runs the init method again"/>
+    <!-- Event Listener Handler -->
+    <aura:handler name="wishAffiliationDesignItemEvent" event="c:wishAffiliationDesignItemEvent"
+                  action="{!c.handleWishAffiliationDesignItemEvent}"/>
+    <!-- Body -->
+    <div class="slds-grid slds-gutters_xx-small slds-wrap">
+        <aura:iteration items="{!v.wishAffiliationList}" var="affiliation" indexVar="index">
+            <div class="slds-col slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-4 slds-m-bottom_small">
+                <c:wishAffiliationDesignList wishAffiliation="{!affiliation}"
+                                             residingWithChildOptions="{!v.residingWithChildOptions}"
+                                             isUserProfileAllowedToUpdateWishAffiliation="{!v.isUserProfileAllowedToUpdateWishAffiliation}"
+                                             relationshipTypes="{!v.relationshipTypes}"/>
+            </div>
+        </aura:iteration>
+        <div class="slds-col slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-4 slds-m-bottom_small">
+            <div class="cardAffiliation slds-col slds-card slds-card_boundary
+            slds-p-top_small slds-p-left_small slds-p-right_small slds-grid slds-grid_vertical">
+                <!-- Card Header-->
+                <div class="cardType slds-col slds-text-heading_small slds-align_absolute-center">
+                    <span>{!$Label.c.Wish_Participant_Add_New_Participant}</span>
+                </div>
+                <footer class="slds-card__footer" style="border-top: 2px solid lightgrey;">
+                    <div class="slds-card__footer-action"></div>
+                </footer>
+                <!-- Card Body-->
+                <!-- Card Footer -->
+                <div class="cardAction slds-grid slds-wrap slds-p-top_small slds-align-bottom slds-align_absolute-center slds-show">
+                    <lightning:buttonIcon iconName="utility:add"
+                                          alternativeText="{!$Label.c.Wish_Participant_Add_New_Participant}"
+                                          value="addNewParticipant"
+                                          onclick="{! c.handleAddNewParticipant }"
+                                          class="addIconBtn slds-button slds-m-bottom_small"/>
+                </div>
+            </div>
+        </div>
+        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-align--absolute-center ">
+            <span class="slds-text-align_center slds-text-heading_medium slds-text-title_bold">
+               {!format($Label.c.Wish_Participant_Count, v.wishChildFirstName, v.countsOfRequestedParticipants)}
+            </span>
+        </div>
+    </div>
+    <!--
+        New Participant Information Modal Begin
+    -->
+    <aura:if isTrue="{!v.showModal}">
+        <c:sldsModal aura:id="newParticipantModal"
+                     closeModal="true"
+                     closeAction="{!c.handleCancel}">
+            <aura:set attribute="header">
+                {!$Label.c.Wish_Participant_New}
+            </aura:set>
+            <aura:set attribute="content">
+                <!-- Toast -->
+                <aura:if isTrue="{!v.showToast}">
+                    <div class="cardHeading slds-text-title_bold slds-col slds-size_1-of-1
+                    slds-grid_vertical-align-center slds-cell-wrap slds-text-align_center">
+                        <c:CustomToast message="{!v.toastMessage}" messageType="{!v.toastMessageType}"/>
+                    </div>
+                </aura:if>
+                <!-- Relationship Type -->
+                <div class="slds-col slds-size_1-of-1">
+                    <div class="{! !v.isValidRelationshipType ? 'slds-has-error' : ''}">
+                        <lightning:select aura:id="relationshipType"
+                                          label="{!$Label.c.Wish_Participant_Relationship}"
+                                          name="relationshipType"
+                                          value="{!v.newWishAffiliation.RelationshipType}"
+                                          onchange="{!c.onChangeValidate}">
+                            <option value=""></option>
+                            <aura:iteration items="{!v.relationshipTypes}"
+                                            var="relationshipType">
+                                <option value="{!relationshipType}">
+                                    {!relationshipType}
+                                </option>
+                            </aura:iteration>
+                        </lightning:select>
+                        <aura:if isTrue="{! !v.isValidRelationshipType}">
+                            <div class="slds-form-element__help"
+                                 id="error-01">{!$Label.c.Wish_Participant_Required_Field}</div>
+                        </aura:if>
+                    </div>
+                </div>
+                <!-- Contact First Name -->
+                <div class="slds-col slds-size_1-of-1">
+                    <div class="{! !v.isValidFirstName ? 'slds-has-error' : ''}">
+                        <lightning:input autocomplete="off" aura:id="firstName"
+                                         label="{!$Label.c.Wish_Participant_FirstName}"
+                                         value="{!v.newWishAffiliation.ContactFirstName}"
+                                         onchange="{!c.onChangeValidate}"/>
+                        <aura:if isTrue="{! !v.isValidFirstName}">
+                            <div class="slds-form-element__help"
+                                 id="error-01">{!$Label.c.Wish_Participant_Required_Field}</div>
+                        </aura:if>
+                    </div>
+                </div>
+                <!-- Contact Middle Name -->
+                <div class="slds-col slds-size_1-of-1">
+                    <lightning:input autocomplete="off" aura:id="middleName"
+                                     label="{!$Label.c.Wish_Participant_MiddleName}"
+                                     value="{!v.newWishAffiliation.ContactMiddleName}"
+                                     onchange="{!c.onChangeValidate}"/>
+                </div>
+                <!-- Contact Last Name -->
+                <div class="slds-col slds-size_1-of-1">
+                    <div class="{! !v.isValidLastName ? 'slds-has-error' : ''}">
+                        <lightning:input autocomplete="off" aura:id="lastName"
+                                         label="{!$Label.c.Wish_Participant_LastName}"
+                                         value="{!v.newWishAffiliation.ContactLastName}"
+                                         onchange="{!c.onChangeValidate}"/>
+                        <aura:if isTrue="{! !v.isValidLastName}">
+                            <div class="slds-form-element__help"
+                                 id="error-01">{!$Label.c.Wish_Participant_Required_Field}</div>
+                        </aura:if>
+                    </div>
+                </div>
+                <!-- Contact Birthdate -->
+                <div class="slds-col slds-size_1-of-1">
+                    <div class="{! !v.isValidBirthdate ? 'slds-has-error' : ''}">
+                        <lightning:input autocomplete="off" aura:id="dateOfBirth" dateStyle="short" type="date"
+                                         label="{!$Label.c.Wish_Participant_Birthdate}"
+                                         value="{!v.newWishAffiliation.ContactBirthdate}"
+                                         onchange="{!c.onChangeValidate}"/>
+                        <aura:if isTrue="{! !v.isValidBirthdate}">
+                            <div class="slds-form-element__help"
+                                 id="error-01">{!$Label.c.Wish_Participant_Required_Field}</div>
+                        </aura:if>
+                    </div>
+                </div>
+                <!-- Wish Affiliation Residing With Wish Child -->
+                <div class="slds-col slds-size_1-of-1">
+                    <div class="{! !v.isValidResidingWithWishChild ? 'slds-has-error' : ''}">
+                        <lightning:select aura:id="residingWithWishChild"
+                                          label="{!$Label.c.Wish_Participant_Residing_with_child}"
+                                          name="residingWithWishChild"
+                                          value="{!v.newWishAffiliation.WishAffiliationResidingWithWishChild}"
+                                          onchange="{!c.onChangeValidate}">
+                            <option value=""></option>
+                            <aura:iteration items="{!v.residingWithChildOptions}"
+                                            var="residingWithChild">
+                                <option value="{!residingWithChild}">
+                                    {!residingWithChild}
+                                </option>
+                            </aura:iteration>
+                        </lightning:select>
+                        <aura:if isTrue="{! !v.isValidResidingWithWishChild}">
+                            <div class="slds-form-element__help"
+                                 id="error-01">{!$Label.c.Wish_Participant_Required_Field}</div>
+                        </aura:if>
+                    </div>
+                </div>
+                <!-- Contact T Shirt Size -->
+                <div class="slds-col slds-size_1-of-1">
+                    <lightning:input autocomplete="off" aura:id="shirtSize"
+                                     label="{!$Label.c.Wish_Participant_ShirtSize}"
+                                     value="{!v.newWishAffiliation.ContactTShirtSize}"
+                                     onchange="{!c.onChangeValidate}"/>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-p-top_small">
+                    <span class="slds-text-body_small slds-text-title_bold" style="color: grey;">
+                        {!$Label.c.Wish_Participant_Email_Info}
+                    </span>
+                    <lightning:input autocomplete="off" aura:id="email" label="{!$Label.c.Wish_Participant_Email}"
+                                     value="{!v.newWishAffiliation.ContactEmail}"
+                                     onchange="{!c.onChangeValidate}"/>
+                </div>
+            </aura:set>
+            <aura:set attribute="footer">
+                <lightning:button label="{!$Label.c.Wish_Participant_Save}" variant="brand" title="Save"
+                                  disabled="{!v.isButtonDisabled}"
+                                  onclick="{! c.handleSave }"/>
+                <lightning:button label="{!$Label.c.Wish_Participant_Cancel}" title="Cancel"
+                                  disabled="{!v.isButtonDisabled}"
+                                  onclick="{!c.handleCancel}"/>
+            </aura:set>
+        </c:sldsModal>
+    </aura:if>
+</aura:component>

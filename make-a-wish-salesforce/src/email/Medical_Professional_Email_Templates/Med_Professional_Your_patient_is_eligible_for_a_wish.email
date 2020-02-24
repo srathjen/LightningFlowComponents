@@ -1,38 +1,26 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<div style="text-align: left;"><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 12pt; line-height: normal; background: white;"></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
-normal;background:white"><span style="font-size: 12pt; font-family: Lato, serif;">Wish child name:&nbsp;{!Lead.Name}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
-normal;background:white">
+<![CDATA[<div style="text-align: left;"><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 12pt; line-height: normal; background: white;"></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal; background: white;"><span style="font-size: 12pt; font-family: Lato, serif;">Wish child name:&nbsp;{!Lead.Name}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal; background: white;">
 
-</p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
-normal;background:white"><span style="font-size: 12pt; font-family: Lato, serif;">Primary diagnosis:&nbsp;{!Lead.PD_Condition_Description__c}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
-normal;background:white"><span style="font-size: 12pt; font-family: Lato, serif;"><br></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
-white"><span style="font-family: Lato, serif;">Dear&nbsp;{!Lead.Treating_Medical_Professional_First_Name__c}
-{!Lead.Treating_Medical_Professional_Last_Name__c},&nbsp;</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
-white"><span style="font-family: Lato, serif;">We are happy to inform you that your
+</p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal; background: white;"><span style="font-size: 12pt; font-family: Lato, serif;">Primary diagnosis:&nbsp;{!Lead.PD_Condition_Description__c}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal; background: white;"><br></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 12pt; line-height: normal; background: white;"><span style="font-family: Lato, serif;">We are happy to inform you that your
 patient {!Lead.FirstName}{!Lead.Child_Middle_Initial__c} has
 been referred to Make-A-Wish® and is medically eligible to receive a
 wish! {!Lead.FirstName}&nbsp;and {!Lead.FirstName}'s&nbsp;family will be
 contacted soon to set-up an initial visit with the wish granting team. We
 encourage the medical team to speak with the family about the upcoming wish
 meeting and provide guidance if there are any foreseeable wish
-restrictions.&nbsp;</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
-white"><span style="font-family: Lato, serif;">Our goal is to provide a wish
+restrictions.&nbsp;</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 12pt; line-height: normal; background: white;"><span style="font-family: Lato, serif;">Our goal is to provide a wish
 experience to impact {!Lead.FirstName} and {!Lead.FirstName}'s&nbsp;family for
-years to come. We find is beneficial to the child and family to explore what
-brings the child the most hope, strength, and joy to ensure a meaningful and
-unforgettable wish experience.</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
-white"><span style="font-family: Lato, serif;">Thank you for your diligent care
+years to come. We find it is beneficial to the child and family to explore what
+brings the child the most hope, strength and joy to ensure a meaningful and
+unforgettable wish experience.</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 12pt; line-height: normal; background: white;"><span style="font-family: Lato, serif;">Thank you for your diligent care
 of&nbsp;{!Lead.FirstName}. We are looking forward to a long-lasting
 relationship with&nbsp;{!Lead.FirstName}'s&nbsp;family, you, and your medical
 team. If you have any questions, comments, or concerns, please contact us at
-any point during the wish process.</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
-white"><span style="font-family: Lato, serif;">Warmly,</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
-normal;background:white"><span style="font-family: Lato, serif;">{!Lead.OwnerFullName}</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
-normal;background:white"><span style="font-family: Lato, serif;">{!Lead.OwnerTitle}<br>
+any point during the wish process.</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 12pt; line-height: normal; background: white;"><span style="font-family: Lato, serif;">Warmly,</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal; background: white;"><span style="font-family: Lato, serif;">{!Lead.OwnerFullName}</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal; background: white;"><span style="font-family: Lato, serif;">{!Lead.OwnerTitle}<br>
 {!Lead.ChapterName__c}<br>
 {!Lead.OwnerEmail}<br>
-{!Lead.OwnerPhone}</span></p><p></p></div>]]></td>
+{!Lead.OwnerPhone}</span></p><p style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"></p></div>]]></td>
 </tr>
 </table>

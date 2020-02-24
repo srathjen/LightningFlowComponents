@@ -11,23 +11,27 @@ Description : BackGroundCheck_OnBeforeUpdateHandler is used to call the Helper c
 *****************************************************************************************************/
 public class BackGroundCheck_OnBeforeUpdateHandler{
 
-     public static void OnBeforeUpdate(List<Background_check__c> newBCList,Map<Id,Background_check__c> oldBCMap){
+     public static void onBeforeUpdate(List<Background_check__c> newBCList,Map<Id,Background_check__c> oldBCMap){
         Set<Id> newRecordIds = new Set<Id>();
         Set<Id> volContactIdSet = new Set<Id>();
         Set<Id> volunteerIds = new Set<Id>();
         for(Background_check__c currRec : newBCList)
         {   
             volunteerIds.add(currRec.volunteer__c);
-            if(currRec.Date_Completed__c != null && currRec.Date_Completed__c != oldBCMap.get(currRec.id).Date_Completed__c )
-            {
+            
+            //SIW-238 Used to populate the completed date when status is updated to 'Received from First Advantage'
+            if(currRec.Status__c == 'Received from First Advantage' && currRec.Status__c != oldBCMap.get(currRec.Id).Status__c) {
+                currRec.Date_Completed__c = Date.today();
+            } else if((currRec.Status__c == 'Approved' || currRec.Status__c ==  'Approved w/ Conditions') && (oldBCMap.get(currRec.Id).Status__c != currRec.Status__c)) {
                 currRec.Date__c = currRec.Date_Completed__c.addYears(3);
+                currRec.Current__c = true;
             }
             
-            if((currRec.Date_Completed__c != null && CurrRec.Date_Completed__c != oldBCMap.get(currRec.id).Date_Completed__c) 
+            /*if((currRec.Date_Completed__c != null && CurrRec.Date_Completed__c != oldBCMap.get(currRec.id).Date_Completed__c) 
                && (currRec.Status__c != Null) && currRec.Status__c != oldBCMap.get(currRec.id).status__c)
             {
                 currRec.current__c = True;
-            }
+            }*/
             
             
             if(currRec.current__c == True && oldBCMap.get(currRec.id).current__c == false)

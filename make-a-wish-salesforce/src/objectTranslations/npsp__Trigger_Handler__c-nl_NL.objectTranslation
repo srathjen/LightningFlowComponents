@@ -2,12 +2,80 @@
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
-        <value><!-- Trigger Handler --></value>
+        <value>Triggerhandler</value>
     </caseValues>
     <caseValues>
         <plural>true</plural>
-        <value><!-- Trigger Handler --></value>
+        <value>Triggerhandlers</value>
     </caseValues>
-    <gender><!-- Neuter --></gender>
-    <nameFieldLabel><!-- Trigger Handler Name --></nameFieldLabel>
+    <fields>
+        <help>Geeft aan dat deze module actief is.</help>
+        <label><!-- Active --></label>
+        <name>npsp__Active__c</name>
+    </fields>
+    <fields>
+        <help>Geeft aan dat deze module asynchroon uitgevoerd moet worden in deze transactie.</help>
+        <label><!-- Asynchronous After Events --></label>
+        <name>npsp__Asynchronous__c</name>
+    </fields>
+    <fields>
+        <help>Naam van de klasse die uitgevoerd moet worden.</help>
+        <label><!-- Class --></label>
+        <name>npsp__Class__c</name>
+    </fields>
+    <fields>
+        <help>Volgorde waarin deze module uitgevoerd moet worden, helpt met onderhouden van afhankelijkheden in de modules en data.</help>
+        <label><!-- Load Order --></label>
+        <name>npsp__Load_Order__c</name>
+    </fields>
+    <fields>
+        <help>Naam van het object waar deze handler uitgevoerd moet worden.</help>
+        <label><!-- Object --></label>
+        <name>npsp__Object__c</name>
+    </fields>
+    <fields>
+        <help>Trigger Actie wanneer deze module afgevuurd moet worden.</help>
+        <label><!-- Trigger Action --></label>
+        <name>npsp__Trigger_Action__c</name>
+        <picklistValues>
+            <masterLabel>AfterDelete</masterLabel>
+            <translation>NaVerwijderen</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AfterInsert</masterLabel>
+            <translation>NaInvoegen</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AfterUndelete</masterLabel>
+            <translation>NaHerstellen</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AfterUpdate</masterLabel>
+            <translation>NaUpdaten</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BeforeDelete</masterLabel>
+            <translation>VoorVerwijderen</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BeforeInsert</masterLabel>
+            <translation>VoorInvoegen</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BeforeUpdate</masterLabel>
+            <translation>VoorUpdaten</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help>Vink aan als je het record zelf wilt beheren. Let op dat updates van het pakket het record niet updaten.</help>
+        <label><!-- User Managed --></label>
+        <name>npsp__User_Managed__c</name>
+    </fields>
+    <fields>
+        <help>Puntkomma gescheiden lijst van SF gebruikersnamen waar deze trigger niet voor wordt afgevuurd. Laat leeg om te gebruiken voor alle gebruikers.</help>
+        <label><!-- Usernames to Exclude --></label>
+        <name>npsp__Usernames_to_Exclude__c</name>
+    </fields>
+    <gender>Feminine</gender>
+    <nameFieldLabel>Naam van Triggerhandler</nameFieldLabel>
 </CustomObjectTranslation>

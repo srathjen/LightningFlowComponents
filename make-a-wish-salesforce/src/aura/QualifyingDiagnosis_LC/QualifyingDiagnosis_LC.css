@@ -1,0 +1,48 @@
+.THIS .slds-modal__container{
+    max-width: 70rem !important;
+    width:70% !important;
+}
+.THIS .slds-form-element__value {
+    display: inline;
+    vertical-align: middle;
+    font-size: .8125rem;
+    color: rgb(112, 110, 107);
+    line-height: 1.5;
+    margin-right: .75rem;
+    margin-bottom: .125rem;
+}
+.THIS .slds-radio__label .slds-form-element__label{
+    font-weight:bold;
+}
+
+.THIS .dashed {
+    border-bottom: 1px dotted #747678;
+    text-align: center;
+    height: 10px;
+}
+
+.THIS .dashed span {
+    background: #fff;
+    padding: 0 5px;
+}
+.THIS .field-word-seperator {
+    font-family: arial;
+    font-size: .7rem;
+    display: block;
+    border-top: 1px dotted #747678;
+    color: #747678;
+}
+.THIS .field-word-seperator::after {
+    content: "OR";
+    background: #fff;
+    padding: 0 1rem;
+    position: absolute;
+ 	left: 21%;
+    top: 12.5rem;
+    text-align: center;
+    z-index: 1;
+}
+
+.THIS .slds-modal__content{
+    min-height:180px;
+}

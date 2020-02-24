@@ -49,6 +49,15 @@
         <template>Automated_Volunteer_Templates/Volunteer_Opportunity_Wish_Rejected</template>
     </alerts>
     <fieldUpdates>
+        <fullName>Set_Approved_Date_as_Today</fullName>
+        <field>Approved_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Set Approved Date as Today</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>VO_ChangeRFIAsNotApproved</fullName>
         <field>Reason_Inactive__c</field>
         <literalValue>Not Approved</literalValue>
@@ -81,6 +90,15 @@
         <reevaluateOnChange>true</reevaluateOnChange>
     </fieldUpdates>
     <fieldUpdates>
+        <fullName>Volunteer_OPP_Update_allow_Hold_Status</fullName>
+        <field>Hidden_allow_Hold_status__c</field>
+        <literalValue>0</literalValue>
+        <name>Volunteer Opp Update allow Hold Status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>Volunteer_Opportunity</fullName>
         <description>This field update is used to update the Status field as Pending  When the volunteer registers for the Volunteer Opportunity from the community.</description>
         <field>Status__c</field>
@@ -96,16 +114,6 @@
         <field>Approval_Status__c</field>
         <literalValue>Initiated</literalValue>
         <name>Volunteer Opportunity:Approval Initiated</name>
-        <notifyAssignee>false</notifyAssignee>
-        <operation>Literal</operation>
-        <protected>false</protected>
-    </fieldUpdates>
-    <fieldUpdates>
-        <fullName>Volunteer_Opportunity_Approved</fullName>
-        <description>Volunteer Opportunity is approved for volunteer</description>
-        <field>Approval_Status__c</field>
-        <literalValue>Approved</literalValue>
-        <name>Volunteer Opportunity : Approved</name>
         <notifyAssignee>false</notifyAssignee>
         <operation>Literal</operation>
         <protected>false</protected>
@@ -156,6 +164,20 @@
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
+        <fullName>Volunteer Opportunity %3A Update Hidden Hold Status</fullName>
+        <actions>
+            <name>Volunteer_OPP_Update_allow_Hold_Status</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Volunteer_Opportunity__c.Hidden_allow_Hold_status__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
         <fullName>Volunteer Opportunity %3A Wish Approved</fullName>
         <active>false</active>
         <description>This Work flow rule will fire when the Volunteer opportunity Wish is Approved by the chapter staff.</description>
@@ -195,7 +217,7 @@
     </rules>
     <tasks>
         <fullName>VO_ET_Volunteer_Opportunity_Approved_NW</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -207,7 +229,7 @@
     </tasks>
     <tasks>
         <fullName>VO_ET_Volunteer_Opportunity_Not_Approved</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -219,7 +241,7 @@
     </tasks>
     <tasks>
         <fullName>VO_ET_Volunteer_Opportunity_Not_Approved_NW</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -231,7 +253,7 @@
     </tasks>
     <tasks>
         <fullName>VO_ET_Volunteer_Opportunity_Wish_Approved</fullName>
-        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedTo>salesforce@wish.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>

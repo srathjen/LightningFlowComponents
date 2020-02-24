@@ -28,6 +28,7 @@
     <filter>
         <criteriaItems>
             <column>STAGE_NAME</column>
+            <isUnlocked>false</isUnlocked>
             <operator>notEqual</operator>
             <value>Closed Won,Closed Lost</value>
         </criteriaItems>
@@ -54,6 +55,8 @@
     <reportType>Opportunity</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

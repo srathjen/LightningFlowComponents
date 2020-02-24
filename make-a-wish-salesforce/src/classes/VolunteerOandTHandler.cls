@@ -13,7 +13,7 @@ Public class VolunteerOandTHandler
     @future
     public static void updateUser(Set<Id> userIds)
     {
-       String prospectiveProfileId = label.Prospective_Volunteer;
+       String prospectiveProfileId = label.Prospective_Volunteer_Profile;
        List<User> updateUserList = new List<User>();
        for(User currUser : [SELECT Id, ProfileId FROM User WHERE contactId IN :userIds AND ProfileId = :prospectiveProfileId])
        {

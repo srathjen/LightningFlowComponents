@@ -1,0 +1,48 @@
+/**
+ * Created by gmayer on 7/17/2019.
+ */
+@media (max-width: 320px) {
+    .THIS.item {
+        width: 250px;
+    }
+}
+
+.THIS #tableHeader {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.THIS #text-input-id-1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 500px;
+}
+
+.THIS #text-input-id-2 {
+    white-space: pre-wrap;
+    width: 1000px;
+}
+
+.THIS .buttonIcon {
+    color: #ecebea;
+}
+
+.THIS .eachField.narrowRegion {
+    width: 100%;
+}
+
+.THIS .eachField {
+    width: 50%;
+    display: inline-block;
+}
+
+.THIS .text-align-left {
+    text-align: left;
+}
+
+.THIS.spinner {
+    z-index: 99999999;
+    position: fixed;
+}

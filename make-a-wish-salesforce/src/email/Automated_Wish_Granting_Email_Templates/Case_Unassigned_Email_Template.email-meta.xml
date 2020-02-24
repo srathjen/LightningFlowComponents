@@ -12,4 +12,5 @@
 Still wish granter is not assigned for this case {!Case.CaseNumber},
 please refer this link {!Case.Link}</textOnly>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

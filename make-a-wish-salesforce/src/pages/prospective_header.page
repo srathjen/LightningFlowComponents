@@ -10,9 +10,9 @@
         </div>
         
         <div class="row">
-            <apex:outputLink styleClass="center-block maw-logo newuser" value="CommunitiesSelfReg"><span class="sr-only" aria-label="Make-A-Wish">Make-A-Wish&reg;</span></apex:outputLink>            
+            <apex:outputLink styleClass="center-block maw-logo newuser" value="VolunteerSignUp_VF"><span class="sr-only" aria-label="Make-A-Wish">Make-A-Wish&reg;</span></apex:outputLink>
             <apex:outputLink styleClass="center-block maw-logo loggedin" value="VolunteerWelcomePage_VF"><span class="sr-only" aria-label="Make-A-Wish">Make-A-Wish&reg;</span></apex:outputLink>    
-            <apex:outputLink styleClass="btn btn-primary btn-md" value="CommunitiesSelfReg">Sign Up</apex:outputLink>
+            <apex:outputLink value="!$Page.VolunteerSignUp_VF" rendered="{!IF($Setup.MaintenanceAlert__c.isActiveLockout__c == False, true, false)}">Sign Up</apex:outputLink>
         </div>
         <nav class="navbar navbar-dark sub-nav">
             <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar">

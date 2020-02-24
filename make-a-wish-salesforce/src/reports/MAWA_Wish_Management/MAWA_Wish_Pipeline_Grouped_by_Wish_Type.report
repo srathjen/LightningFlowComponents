@@ -55,10 +55,7 @@
         <field>Case.Concept_Approval_Date__c</field>
     </columns>
     <columns>
-        <field>Case.Budget_Approved_Date__c</field>
-    </columns>
-    <columns>
-        <field>Case.Anticipated_Start_Date__c</field>
+        <field>Case.Budget_Approved_Date_from_Budget__c</field>
     </columns>
     <columns>
         <field>Case.Start_Date__c</field>
@@ -69,11 +66,13 @@
     <filter>
         <criteriaItems>
             <column>STATUS</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Wish Determined,Budget Approval - Submitted,Budget Approval - Approved,Wish Design,Wish Scheduled,Hold,Inactive</value>
         </criteriaItems>
         <criteriaItems>
             <column>CREATED_ALIAS</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>iuser</value>
         </criteriaItems>
@@ -96,6 +95,8 @@
     <reportType>CaseList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CREATED_DATEONLY</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

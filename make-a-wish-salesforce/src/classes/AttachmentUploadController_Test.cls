@@ -9,6 +9,8 @@ This method is attach the image to wish child record.
     public static testmethod void insertAttachment(){
         //Create the wish child contact record.
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        insert wishChild;
+
         Attachment newAttachment = new Attachment();
         newAttachment.Name = 'test';
         newAttachment.Body = blob.valueOf('Hi Welcome to body text');

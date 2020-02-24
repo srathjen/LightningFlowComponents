@@ -31,28 +31,25 @@
         <field>EMAIL</field>
     </columns>
     <columns>
-        <field>Contact.is_Active_Volunteer__c</field>
-    </columns>
-    <columns>
-        <field>Contact.Active_Wish_Granter__c</field>
-    </columns>
-    <columns>
         <field>Contact.Number_of_wishes_active__c</field>
     </columns>
     <description>Active Wish Granters with their contact information and Number of Active Wishes</description>
     <filter>
         <criteriaItems>
             <column>CONTACT_RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Volunteer_Contact</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.is_Active_Volunteer__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Active_Wish_Granter__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
@@ -66,6 +63,8 @@
     <reportType>ContactList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

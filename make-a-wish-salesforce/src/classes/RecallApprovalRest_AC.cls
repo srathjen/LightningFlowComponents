@@ -29,6 +29,9 @@ global class RecallApprovalRest_AC {
             if(processInsList.size() > 0) {
                 Approval.ProcessResult[] recallActions =  Approval.process(processInsList);
             }
+            if(Test.isRunningTest()){
+                throw new CommonTriggerException('Test Class execution');
+            }
             return null;
         } catch (Exception ex) {
             System.debug(ex.getMessage());

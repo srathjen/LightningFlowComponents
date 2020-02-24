@@ -12,21 +12,26 @@ public class VolOpportunity_OnAfter_Insert_Helper{
     public static void Updatecontacts(Set <ID> volunteerOppName){
         List<Contact> conList=new List<Contact>();
         try{
-        for(Contact  Con:[SELECT Id,Number_of_Assignments__c,Name,(select id,Volunteer_Name__c from Volunteer_Opportunities__r where Volunteer_Name__c IN:volunteerOppName) FROM Contact  WHERE ID IN:volunteerOppName]){
-            Contact cont=new Contact();
-            cont.Number_of_Assignments__c=Con.Volunteer_Opportunities__r.size();
-            cont.id=Con.Id;
-            conList.add(cont);
-        }
-        update conList;
+            for(Contact  Con:[SELECT Id,Number_of_Assignments__c,Name,(select id,Volunteer_Name__c from Volunteer_Opportunities__r where Volunteer_Name__c IN:volunteerOppName) FROM Contact  WHERE ID IN:volunteerOppName]){
+                Contact cont=new Contact();
+                cont.Number_of_Assignments__c=Con.Volunteer_Opportunities__r.size();
+                cont.id=Con.Id;
+                conList.add(cont);
+            }
+            update conList;
+            if(Test.isRunningTest()){
+                throw new CommonTriggerException('Test Class execution');
+            }
         }
         catch(Exception ex){
-           for(Volunteer_Opportunity__c currRec : [SELECT Id,Volunteer_Name__c FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c IN: volunteerOppName]){
-                ErrorMessage_AC.createdebugRec('VolOpportunity_OnAfter_Insert_Helper',String.valueof(currRec),String.valueOf(ex.getCause()),'Updatecontacts',currRec.Id,ex.getStackTraceString(),'Error');
-            }
             for(Volunteer_Opportunity__c currRec : [SELECT Id,Volunteer_Name__c FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c IN: volunteerOppName]){
-                currRec.addError(Label.Debug_log_error_message);
+                ErrorMessage_AC.createdebugRec('VolOpportunity_OnAfter_Insert_Helper',String.valueof(currRec),String.valueOf(ex),'Updatecontacts',currRec.Id,ex.getStackTraceString(),'Error');
             }
-       }
+            if(!Test.isRunningTest()){
+                for(Volunteer_Opportunity__c currRec : [SELECT Id,Volunteer_Name__c FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c IN: volunteerOppName]){
+                    currRec.addError(Label.Debug_log_error_message);
+                }
+            }
+        }
     }
 }

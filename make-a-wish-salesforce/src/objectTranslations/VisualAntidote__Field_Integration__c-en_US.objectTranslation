@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Field Configuration --></label>
+        <name>VisualAntidote__FieldConfiguration__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form Field Id --></label>
+        <name>VisualAntidote__FormFieldId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Form --></label>
+        <name>VisualAntidote__Form__c</name>
+        <relationshipLabel><!-- Field Integration --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Platform Account --></label>
+        <name>VisualAntidote__PlatformAccount__c</name>
+        <relationshipLabel><!-- Field Integration --></relationshipLabel>
+    </fields>
+</CustomObjectTranslation>

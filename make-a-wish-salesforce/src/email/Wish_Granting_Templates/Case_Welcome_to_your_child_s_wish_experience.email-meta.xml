@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sent to the child&apos;s family to welcome them to MAW; includes first steps and family packet.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Make_a_Wish_America</letterhead>
+    <name>Case: Welcome to your child&apos;s wish experience</name>
+    <style>freeForm</style>
+    <subject>Welcome to your child&apos;s wish experience!</subject>
+    <textOnly>Dear Family of {!Contact.Name},
+
+
+
+Welcome to your child’s wish experience! We are excited to meet your child soon and look forward to creating a wish that will bring your family unforgettable memories.
+
+
+Studies have shown that a wish is powerful medicine for children who are living with the day-to-day realities of a critical illness. A wish can be life-changing, offering your child the opportunity to think beyond their illness and embrace hope.
+
+
+Here is what you can expect as we begin your child’s wish journey:
+
+
+
+In the next week, please review and complete our wish family paperwork. This paperwork will allow {!Case.ChapterName__c} to grant your child’s wish. Please complete forms as soon as possible.
+
+
+Our paperwork will be emailed from our Wish &amp; Volunteer Center (WVC) via DocuSign to both of your emails with the following subject line(s):
+
+
+
+“Signature Required - Wish Consent and Liability/Publicity Release”
+
+“Signature Required - Absent Parent Form”
+
+“Signature Required – Single Parent Form”
+
+
+
+Your family orientation phone call is scheduled for [insert date] at [insert time]. This orientation is for caregivers only. Please review the enclosed family orientation handbook. A volunteer will call you to go over this handbook and answer your questions.
+
+
+
+In the coming month your child’s volunteer wish granters will call you to schedule your child’s initial interview, preferably in your home. Wish granters will be your primary points of contact throughout your child’s wish journey.
+
+
+
+
+Please do not hesitate to contact me if you have questions. I am happy to help!
+
+
+Best wishes,
+
+{!Case.OwnerFullName}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,39 @@
+<apex:page applyBodyTag="false" sidebar="false" docType="html-5.0" standardController="Lead" standardStylesheets="false" title="Send Referral Email" cache="false">
+    <head> 
+        <title>Make-A-Wish | Send Referral Email</title> 
+        <apex:includeLightning />
+    </head>
+    <body>
+        <div id="lightning" />
+         
+        <script>
+        var recordId = '{!$CurrentPage.parameters.Id}';
+        var myUserContext = "{!$User.UITheme}";
+        $Lightning.use("c:SendReferralEmailApp", function() {
+            $Lightning.createComponent("c:SendReferralEmail_LC",
+                                       {// Set Lightning Component Attributes Property before creating Lightning Component In Visualforce page 
+                                           recordId : '{!$CurrentPage.parameters.Id}',
+                                           textColor : "Red",
+                                           currentUserName : '{!$User.FirstName} {!$User.LastName}' },
+                                       "lightning",
+                                       function(component) {
+                                           $A.eventService.addHandler({
+                                               event: 'force:navigateToSObject',
+                                               handler: function(event) {                                               
+                                                   if (myUserContext == 'Theme4t' || myUserContext == 'Theme4d' || myUserContext == 'Theme4u') {
+                                                       // The Visualforce page is in S1 or Lightning Experience
+                                                       //sforce.one.navigateToSObject(event.getParams().recordId);
+                                                       sforce.one.navigateToURL('/' + event.getParams().recordId, true);
+                                                   } else if (myUserContext == 'Theme3') {
+                                                       // The Visualforce page is  running in Classic
+                                                       window.parent.location = '/' + event.getParams().recordId;
+                                                   } else {
+                                                       console.log("Unsupported theme");   
+                                                   }
+                                               }
+                                           });
+                                       });
+        });
+        </script>
+    </body>
+</apex:page>

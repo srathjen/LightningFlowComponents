@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>40.0</apiVersion>
+    <availableInTouch>true</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Used on the Volunteer Case layout created for the Wish Lighting Project. Displays the words &quot;To view Wish Participants, click the &apos;View Wish Participants&apos; button at the top of the page.&quot;</description>
+    <label>WishParticipantsMessage_VF</label>
+</ApexPage>

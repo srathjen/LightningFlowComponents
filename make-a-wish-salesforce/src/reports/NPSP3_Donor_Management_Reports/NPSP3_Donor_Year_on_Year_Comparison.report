@@ -104,6 +104,7 @@
     <filter>
         <criteriaItems>
             <column>CLOSE_DATE</column>
+            <isUnlocked>false</isUnlocked>
             <operator>greaterOrEqual</operator>
             <value>LAST_N_YEARS:3</value>
         </criteriaItems>
@@ -135,6 +136,8 @@
     <reportType>Opportunity</reportType>
     <scope>organization</scope>
     <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CLOSE_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

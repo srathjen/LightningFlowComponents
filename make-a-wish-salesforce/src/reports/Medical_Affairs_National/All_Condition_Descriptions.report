@@ -27,6 +27,8 @@
     <reportType>Condition_Descriptions__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Condition_Description__c$CreatedDate</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

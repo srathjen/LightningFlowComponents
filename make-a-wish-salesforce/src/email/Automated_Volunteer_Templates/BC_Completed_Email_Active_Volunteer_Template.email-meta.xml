@@ -18,4 +18,5 @@ To sign up for a new volunteer opportunity, review your current assignments, or 
 {!Background_check__c.Account_Phone__c}
 {!Background_check__c.Account_Email__c}</textOnly>
     <type>html</type>
+    <uiType>Aloha</uiType>
 </EmailTemplate>

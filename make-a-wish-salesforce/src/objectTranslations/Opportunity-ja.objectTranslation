@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldSets>
+        <label><!-- BDE Entry FS v2 --></label>
+        <name>npsp__BDE_Entry_FS_v2</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- New BDE List v2 --></label>
+        <name>npsp__BDE_List_FS_v2</name>
+    </fieldSets>
     <fields>
         <label><!-- DB Competitor --></label>
         <name>DB_Competitor__c</name>
@@ -15,6 +23,10 @@
             <masterLabel>Competitor C</masterLabel>
             <translation><!-- Competitor C --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Unique Record Count --></label>
+        <name>Unique_Record_Count__c</name>
     </fields>
     <fields>
         <help>数式: この支援から取消支払金額と受取支払金額を差し引いた金額。</help>
@@ -98,7 +110,7 @@
     <fields>
         <label><!-- Recurring Donation --></label>
         <name>npe03__Recurring_Donation__c</name>
-        <relationshipLabel><!-- Donations --></relationshipLabel>
+        <relationshipLabel><!-- Opportunities --></relationshipLabel>
     </fields>
     <fields>
         <help>最新の支援を見つけるために積み上げ集計中に使用される連結項目。</help>
@@ -106,7 +118,7 @@
         <name>npo02__CombinedRollupFieldset__c</name>
     </fields>
     <fields>
-        <help><!-- Controls if Household contact roles are created for Opportunities.  DEPRECATED.  Replaced by custom settings. --></help>
+        <help>支援に世帯の個人の役割を作成するかどうかを制御します。廃止。カスタム設定に置き換えられました。</help>
         <label><!-- _SYSTEM: HOUSEHOLD CONTACT ROLEPROCESSOR --></label>
         <name>npo02__systemHouseholdContactRoleProcessor__c</name>
         <picklistValues>
@@ -162,6 +174,11 @@
         <help>支援の質問が成功しなかった理由に関するメモ。</help>
         <label><!-- Closed Lost Reason --></label>
         <name>npsp__Closed_Lost_Reason__c</name>
+    </fields>
+    <fields>
+        <help>選択すると、一部の支援個人の役割の自動化が無効になり、不正なデータや重複データが発生することがあります。詳細は、商品ドキュメントを参照してください。</help>
+        <label><!-- Disable Contact Role Automation --></label>
+        <name>npsp__DisableContactRoleAutomation__c</name>
     </fields>
     <fields>
         <help>現物支援の公正な時価。</help>
@@ -379,27 +396,123 @@
             <translation>追悼</translation>
         </picklistValues>
     </fields>
+    <layouts>
+        <layout>Donation Layout</layout>
+        <sections>
+            <label>支援情報</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>マッチング支援情報</label>
+            <section>Matching Gift Information</section>
+        </sections>
+        <sections>
+            <label>お支払い情報</label>
+            <section>Payment Information</section>
+        </sections>
+        <sections>
+            <label>敬意/追悼情報</label>
+            <section>Tribute Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Grant Layout</layout>
+        <sections>
+            <label>支援情報</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>助成金情報</label>
+            <section>Grant Information</section>
+        </sections>
+        <sections>
+            <label>お支払い情報</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>In-Kind Gift Layout</layout>
+        <sections>
+            <label>支援情報</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>現物情報</label>
+            <section>In-Kind Information</section>
+        </sections>
+        <sections>
+            <label>敬意/追悼情報</label>
+            <section>Tribute Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Major Gift Layout</layout>
+        <sections>
+            <label>支援情報</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>大口支援情報</label>
+            <section>Major Gift Information</section>
+        </sections>
+        <sections>
+            <label>お支払い情報</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Matching Gift Layout</layout>
+        <sections>
+            <label>支援情報</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>お支払い情報</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Membership Layout</layout>
+        <sections>
+            <label>項目</label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label>メンバー情報</label>
+            <section>Member Information</section>
+        </sections>
+        <sections>
+            <label>お支払い情報</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
     <recordTypes>
+        <description><!-- Donation Received --></description>
         <label><!-- Donation --></label>
         <name>Donation</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Grant Received --></description>
         <label><!-- Grant --></label>
         <name>Grant</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Goods or Services received as In-Kind --></description>
         <label><!-- In-Kind Gift --></label>
         <name>In_Kind_Gift</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Large Donation from a Major Donor --></description>
         <label><!-- Major Gift --></label>
         <name>MajorGift</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Matching Donation from an Donor&apos;s Employer or other Organization --></description>
         <label><!-- Matching Gift --></label>
         <name>Matching_Gift</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- A membership record type --></description>
         <label><!-- Membership --></label>
         <name>Membership</name>
     </recordTypes>

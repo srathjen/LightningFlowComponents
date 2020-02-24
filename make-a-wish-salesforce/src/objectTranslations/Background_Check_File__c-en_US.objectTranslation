@@ -33,12 +33,24 @@
         <name>File_Size_in_Bytes__c</name>
     </fields>
     <fields>
+        <label><!-- Is Deleted --></label>
+        <name>Is_Deleted__c</name>
+    </fields>
+    <fields>
         <label><!-- Is Latest Version --></label>
         <name>Is_Latest_Version__c</name>
     </fields>
     <fields>
+        <label><!-- Is Parent Deleted --></label>
+        <name>Is_Parent_Deleted__c</name>
+    </fields>
+    <fields>
         <label><!-- Key --></label>
         <name>Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Page Count --></label>
+        <name>Page_Count__c</name>
     </fields>
     <fields>
         <label><!-- Parent Folder Id --></label>
@@ -60,6 +72,18 @@
     <fields>
         <label><!-- Private --></label>
         <name>Private__c</name>
+    </fields>
+    <fields>
+        <label><!-- Shortcut --></label>
+        <name>Shortcut__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync Id --></label>
+        <name>Sync_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tags --></label>
+        <name>Tags__c</name>
     </fields>
     <fields>
         <label><!-- Thumbnail Key --></label>

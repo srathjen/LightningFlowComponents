@@ -43,6 +43,7 @@
     <filter>
         <criteriaItems>
             <column>Account.Migrated_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
@@ -56,6 +57,8 @@
     <reportType>AccountCustomEntity$npe5__Affiliation__c@npe5__Affiliation__c.npe5__Contact__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>DUE_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

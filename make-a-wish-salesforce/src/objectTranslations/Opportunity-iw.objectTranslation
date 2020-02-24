@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldSets>
+        <label><!-- BDE Entry FS v2 --></label>
+        <name>npsp__BDE_Entry_FS_v2</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- New BDE List v2 --></label>
+        <name>npsp__BDE_List_FS_v2</name>
+    </fieldSets>
     <fields>
         <label><!-- DB Competitor --></label>
         <name>DB_Competitor__c</name>
@@ -15,6 +23,10 @@
             <masterLabel>Competitor C</masterLabel>
             <translation><!-- Competitor C --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Unique Record Count --></label>
+        <name>Unique_Record_Count__c</name>
     </fields>
     <fields>
         <help>נוסחה: הסכום של הזדמנות זו פחות סכום מחיקת התשלום וסכום התשלום שהתקבל.</help>
@@ -98,7 +110,7 @@
     <fields>
         <label><!-- Recurring Donation --></label>
         <name>npe03__Recurring_Donation__c</name>
-        <relationshipLabel><!-- Donations --></relationshipLabel>
+        <relationshipLabel><!-- Opportunities --></relationshipLabel>
     </fields>
     <fields>
         <help>שדות משורשרים המשמשים במהלך סיכומים לאיתור ההזדמנות האחרונה.</help>
@@ -162,6 +174,11 @@
         <help>הערות המסבירות מדוע בקשת התרומה לא הניבה הצלחה.</help>
         <label><!-- Closed Lost Reason --></label>
         <name>npsp__Closed_Lost_Reason__c</name>
+    </fields>
+    <fields>
+        <help><!-- When selected, this field disables several aspects of NPSP Opportunity Contact Role automation, potentially resulting in incorrect or duplicate data. Refer to the product documentation for more details. --></help>
+        <label><!-- Disable Contact Role Automation --></label>
+        <name>npsp__DisableContactRoleAutomation__c</name>
     </fields>
     <fields>
         <help>ערך השוק ההוגן של תרומה שוות-ערך.</help>
@@ -379,27 +396,123 @@
             <translation>זיכרון</translation>
         </picklistValues>
     </fields>
+    <layouts>
+        <layout>Donation Layout</layout>
+        <sections>
+            <label>פרטי תרומה</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label><!-- Matching Gift Information --></label>
+            <section>Matching Gift Information</section>
+        </sections>
+        <sections>
+            <label>פרטי תשלום</label>
+            <section>Payment Information</section>
+        </sections>
+        <sections>
+            <label><!-- Tribute Information --></label>
+            <section>Tribute Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Grant Layout</layout>
+        <sections>
+            <label>פרטי תרומה</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>פרטי מענק</label>
+            <section>Grant Information</section>
+        </sections>
+        <sections>
+            <label>פרטי תשלום</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>In-Kind Gift Layout</layout>
+        <sections>
+            <label>פרטי תרומה</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>פרטי שווה-ערך</label>
+            <section>In-Kind Information</section>
+        </sections>
+        <sections>
+            <label>פרטי הוקרה</label>
+            <section>Tribute Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Major Gift Layout</layout>
+        <sections>
+            <label>פרטי תרומה</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>פרטי תרומה גדולה</label>
+            <section>Major Gift Information</section>
+        </sections>
+        <sections>
+            <label>פרטי תשלום</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Matching Gift Layout</layout>
+        <sections>
+            <label>פרטי תרומה</label>
+            <section>Donation Information</section>
+        </sections>
+        <sections>
+            <label>פרטי תשלום</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Membership Layout</layout>
+        <sections>
+            <label>שדות</label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label>פרטי חבר</label>
+            <section>Member Information</section>
+        </sections>
+        <sections>
+            <label>פרטי תשלום</label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
     <recordTypes>
+        <description><!-- Donation Received --></description>
         <label><!-- Donation --></label>
         <name>Donation</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Grant Received --></description>
         <label><!-- Grant --></label>
         <name>Grant</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Goods or Services received as In-Kind --></description>
         <label><!-- In-Kind Gift --></label>
         <name>In_Kind_Gift</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Large Donation from a Major Donor --></description>
         <label><!-- Major Gift --></label>
         <name>MajorGift</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- Matching Donation from an Donor&apos;s Employer or other Organization --></description>
         <label><!-- Matching Gift --></label>
         <name>Matching_Gift</name>
     </recordTypes>
     <recordTypes>
+        <description><!-- A membership record type --></description>
         <label><!-- Membership --></label>
         <name>Membership</name>
     </recordTypes>

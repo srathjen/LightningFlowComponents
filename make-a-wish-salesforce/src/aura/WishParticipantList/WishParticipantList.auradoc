@@ -1,0 +1,12 @@
+<!--
+ - Created by gmayer on 7/26/2019.
+ -->
+
+<aura:documentation>
+    <aura:description>Documentation for WishParticipantList</aura:description>
+    <aura:example name="WishParticipantList" ref="WishParticipantList"
+                  label="WishParticipantList">
+        Wish Participant List is a custom component built to retrieve the Wish Affiliation record types belonging to the
+        Participant category, given a Case record id is provided within the page context that it is put in.
+    </aura:example>
+</aura:documentation>

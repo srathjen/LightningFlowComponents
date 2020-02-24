@@ -18,7 +18,7 @@ Public class DocusignRecipient_OnAfterInsertHandler{
     Set<String> deliveredNameStringSet = new Set<String>();
     Set<Id> completedIdSet = new Set<Id>();
     Map<Id,String> envelopMap = new Map<Id,String>();
-    
+    List<dsfs__DocuSign_Recipient_Status__c> DSrecipientList = new List<dsfs__DocuSign_Recipient_Status__c>();
     for(dsfs__DocuSign_Recipient_Status__c dsfs : recipientList){
          if(dsfs.dsfs__Parent_Status_Record__c != Null && dsfs.dsfs__Recipient_Status__c == 'Completed' ){
                 dsfsStatusSet.add(dsfs.dsfs__Parent_Status_Record__c);
@@ -38,16 +38,17 @@ Public class DocusignRecipient_OnAfterInsertHandler{
             
             if(dsfs.dsfs__Parent_Status_Record__c != Null){
                 envelopMap.put(dsfs.dsfs__Parent_Status_Record__c,dsfs.Name);
+                DSrecipientList.add(dsfs);
             }
             
       }
       if(dsfsStatusSet.size() > 0 || deliveredSet.size() > 0 || completedIdSet.size() > 0 || nameMap.size() > 0){
-      DocusignRecipient_OnAfterInsertHelper.UpdateCompletedRecipient(dsfsStatusSet,deliveredSet,completedIdSet,completedNameString,nameMap);
+      DocusignRecipient_OnAfterInsertHelper.UpdateCompletedRecipient(dsfsStatusSet,deliveredSet,completedIdSet,completedNameString,nameMap,recipientList);
       }
       
       if(envelopMap.size() > 0){
       
-      DocusignRecipient_OnAfterInsertHelper.UpdateStatusRecord(envelopMap);
+      DocusignRecipient_OnAfterInsertHelper.UpdateStatusRecord(envelopMap,DSrecipientList);
       }
     }
 }

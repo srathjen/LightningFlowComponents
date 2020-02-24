@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <help><!-- It holds wheter the action is active or not? --></help>
+        <label><!-- Active --></label>
+        <name>cg__Active__c</name>
+    </fields>
+    <fields>
+        <help><!-- Select display settings for the action. Hidden: for actions has no any visual interaction. Display: for actions that has visual interactions which opened within an iframe. Redirect: for actions that page is redirected with file Id paramter in Url. --></help>
+        <label><!-- Display --></label>
+        <name>cg__Display__c</name>
+        <picklistValues>
+            <masterLabel>Display</masterLabel>
+            <translation><!-- Display --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hidden</masterLabel>
+            <translation><!-- Hidden --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lightning Component</masterLabel>
+            <translation><!-- Lightning Component --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Redirect</masterLabel>
+            <translation><!-- Redirect --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Write file extensions seperated with comma that action is active for. If it is empty, action will active for all file types. (i.e. jpg,png,gif,Folder,pdf) --></help>
+        <label><!-- File Types --></label>
+        <name>cg__File_Types__c</name>
+    </fields>
+    <fields>
+        <help><!-- Which interface is action for? --></help>
+        <label><!-- Interface Type --></label>
+        <name>cg__Interface_Type__c</name>
+        <picklistValues>
+            <masterLabel>Both</masterLabel>
+            <translation><!-- Both --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Classic</masterLabel>
+            <translation><!-- Classic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lightning</masterLabel>
+            <translation><!-- Lightning --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Action&apos;s label which displayed on menus and toolbar. --></help>
+        <label><!-- Label --></label>
+        <name>cg__Label__c</name>
+    </fields>
+    <fields>
+        <help><!-- It defines whether action can be fired for more than one file or not. --></help>
+        <label><!-- Multiple --></label>
+        <name>cg__Multiple__c</name>
+    </fields>
+    <fields>
+        <help><!-- Object Names that action is active for. Names should be seperated by comma (i.e. cg__AccountFile__c, My_Custom_Object_File__c) If the field is empty, action is active for all objects. --></help>
+        <label><!-- Objects --></label>
+        <name>cg__Objects__c</name>
+    </fields>
+    <fields>
+        <help><!-- Path of custom action file. For VF Pages it is &quot;/apex/[PageName]&quot;. For Static Resource scripts it is &quot;/resources/[SourceName]/[PageName]&quot;. For Lightning component it is &quot;[OrganizationPrefix]:[ComponentName]&quot; if there is no &quot;OrganizationPrefix&quot; it is &quot;c&quot;. --></help>
+        <label><!-- Url --></label>
+        <name>cg__Url__c</name>
+    </fields>
+    <fields>
+        <help><!-- Users that action is active for. IDs should be seperated by comma. --></help>
+        <label><!-- Users --></label>
+        <name>cg__Users__c</name>
+    </fields>
+</CustomObjectTranslation>

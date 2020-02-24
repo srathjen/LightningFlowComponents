@@ -1,0 +1,6 @@
+<apex:page standardController="Background_check__c" extensions="DocumentController_AC" action="{!redirect}" showHeader="false" sidebar="false">
+    <apex:slds />
+    <apex:pageMessage severity="Error" summary="Order Id and Package Id does not have a value" strength="1"></apex:pageMessage>
+    
+    
+</apex:page>

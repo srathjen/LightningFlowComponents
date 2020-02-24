@@ -31,6 +31,10 @@
         <relationshipLabel><!-- DiagnosisMedicalQuestions --></relationshipLabel>
     </fields>
     <fields>
+        <label><!-- Question --></label>
+        <name>Question__c</name>
+    </fields>
+    <fields>
         <label><!-- isEligible --></label>
         <name>isEligible__c</name>
     </fields>

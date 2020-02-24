@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Boolean Value --></label>
+        <name>CRMfusionDBR101__Boolean_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Numeric Value --></label>
+        <name>CRMfusionDBR101__Numeric_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- String Value --></label>
+        <name>CRMfusionDBR101__String_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>CRMfusionDBR101__Type__c</name>
+    </fields>
+</CustomObjectTranslation>

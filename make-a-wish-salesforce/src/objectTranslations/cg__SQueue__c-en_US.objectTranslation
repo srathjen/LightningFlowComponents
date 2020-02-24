@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Error Count --></label>
+        <name>cg__Error_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Error Message --></label>
+        <name>cg__Error_Message__c</name>
+    </fields>
+    <fields>
+        <label><!-- Execution Date --></label>
+        <name>cg__Execution_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Completed --></label>
+        <name>cg__Is_Completed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payload --></label>
+        <name>cg__Payload__c</name>
+    </fields>
+    <fields>
+        <label><!-- Process --></label>
+        <name>cg__Process__c</name>
+    </fields>
+</CustomObjectTranslation>

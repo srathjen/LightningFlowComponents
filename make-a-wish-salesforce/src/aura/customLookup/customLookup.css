@@ -1,0 +1,17 @@
+.THIS .leftPaddingClass {
+    padding-left: 2rem;
+}
+
+.THIS .pillSize{
+    width:100%;
+}
+
+.THIS .pillDisabled{
+    background-color: rgb(236, 235, 234);
+    border-color: #a8b7c7;
+    cursor: not-allowed;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

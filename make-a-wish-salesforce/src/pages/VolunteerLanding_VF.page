@@ -105,9 +105,12 @@ Description : This page is used to display the welcome message, open events , ch
                                           <h1 class="modal-title">Background Check Notice</h1>
                                       </div>
                                       <div class="modal-body">
-                                        <p><apex:outputText value="Your criminal background check will expire within the next {!nBCDays} days. To continue volunteering, please verify that your name and contact information is correct (or make any necessary changes) and click INITIATE to request a new criminal background check." rendered="{!isExpired == false}" id="criminalBcheck"/>
+                                        <p><apex:outputText value="Your criminal background check will expire within the next {!nBCDays} days. To continue volunteering, please verify that your name and contact information is correct (or make any necessary changes) and click INITIATE to request a new criminal background check." rendered="{!isExpired == false && isExpirednew == false}" id="criminalBcheck"/>
                                           <apex:outputText value="Your criminal background check has expired and access to the Volunteer Center has been suspended. We truly appreciate having you as a volunteer, and hope that you'll continue helping us grant life-changing wishes to children with critical illnesses. To continue volunteering, please verify that your name and contact information is correct (or make any necessary changes) and click INITIATE to request a new criminal background check." id="criminalBcheck1" rendered="{!isExpired == true}" /></p>
+                                         
+                                          <apex:outputText escape="False" value="Welcome to the Wish & Volunteer Center! One of your volunteer roles requires the completion of a background check.<br /><br />
 
+To proceed with your background check, please verify that your name and contact information is correct (or make any necessary changes) and click INITIATE to request a background check. Click POSTPONE to be prompted to complete your background check next time you log in." id="criminalBcheck2" rendered="{!isExpirednew == true}" />
                                           <div class="form-group row sr-only">
                                             <label class="col-xs-12 col-sm-3">I have resided in the United States for the last seven years.</label>
                                             <div class="col-xs-12 col-sm-4">
@@ -299,7 +302,7 @@ Description : This page is used to display the welcome message, open events , ch
                                             <p><apex:outputText value="Your Annual Conflict of Interest and Ethics Statement has expired and access to the Volunteer Center has been suspended. To continue volunteering with Make-A-Wish, please click SIGN NOW to electronically sign the form." rendered="{!isCOIExpired == true}" id="isCOIExpired2" /></p>
                                         </div>
                                         <div class="modal-footer">
-                                            <apex:commandButton styleClass="btn-md" value="Sign Now" action="{!confirmConflict}" reRender="msg"/>&nbsp;&nbsp;&nbsp;
+                                            <apex:commandButton styleClass="btn-md" value="Sign Now" action="{!callConfirmConflict}" reRender="msg"/>&nbsp;&nbsp;&nbsp;
                                             <apex:commandButton styleClass="btn-md" value="Cancel" rendered="{!flagForCOICancel}" action="{!cancelConflict}"/>
                                         </div>
                                     </div>
@@ -336,25 +339,7 @@ Description : This page is used to display the welcome message, open events , ch
                             </div>
                         </apex:outputPanel>
 
-                        <!-- <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayBCMsg}"/>
-<apex:outputPanel layout="block" rendered="{!displayBCMsg}">
-
-<div class="pop-wrap">
-<div class="custPopup">
-<div class="container">
-<div class="row">
-<div class="col-xs-12 col-sm-12 col-md-12">
-<p><apex:outputText value="{!broadCaseMsg}" /></p>
-<apex:commandButton value="Ok" styleClass="col-sm-offset-3 col-md-offset-4 col-xs-12 col-sm-6 col-md-4 btn-md" action="{!broadCastCancel}"/>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-</apex:outputPanel>
-</apex:outputPanel> -->
-                        <!-- end /broadcast msg -->
+                     
 
                         <!-- training details begin -->
                         <apex:outputPanel layout="block" rendered="{!displayTrainingDetails}">
@@ -370,18 +355,55 @@ Description : This page is used to display the welcome message, open events , ch
                                             <h1 class="modal-title" id="exit-form" style="font-family:'Lato';">Training Details</h1>
                                         </div>
                                         <div class="modal-body">
-                                            <p class="text-muted col-xs-12" style="text-align:center;font-family:'Lato';">A new training course has been assigned to you. To remain an active volunteer, please click REGISTER and sign up for the training date that works for your schedule.</p>
+                                        <apex:outputPanel rendered="{!NOT(displayTrainingnewDetails)}">
+                                        <p class="text-muted col-xs-12" style="text-align:center;font-family:'Lato';">A new training course has been assigned to you. To remain an active volunteer, please click REGISTER and sign up for the training date that works for your schedule.</p>
                                             <div class="col-xs-12" style="font-family:'Lato';"> <strong>Training Name:</strong> <p class="text-muted" style="display:inline-block"><apex:outputText style="font-family:'Lato';" value=" {!trainingName}" id="trainingName" /></p> </div>
+                                        </apex:outputPanel>
+                                        
+                                        <apex:outputPanel rendered="{!displayTrainingnewDetails}">
+                                        <p class="text-muted col-xs-12" style="text-align:center;font-family:'Lato';">Your background check has been processed and the next step is to sign up for a training! Please click VIEW TRAININGS to access the trainings available for your role, or click POSTPONE to be prompted to view the trainings next time you log in.</p>
+                                           <!-- <div class="col-xs-12" style="font-family:'Lato';"> <strong>Training Name:</strong> <p class="text-muted" style="display:inline-block"><apex:outputText style="font-family:'Lato';" value=" {!trainingName}" id="newtrainingName" /></p> </div> -->
+                                        </apex:outputPanel>
+                                            <!--<p class="text-muted col-xs-12" style="text-align:center;font-family:'Lato';">A new training course has been assigned to you. To remain an active volunteer, please click REGISTER and sign up for the training date that works for your schedule.</p>
+                                            <div class="col-xs-12" style="font-family:'Lato';"> <strong>Training Name:</strong> <p class="text-muted" style="display:inline-block"><apex:outputText style="font-family:'Lato';" value=" {!trainingName}" id="newtrainingName" /></p> </div> -->
                                         </div>
                                         <div class="modal-footer">
+                                        <apex:outputPanel rendered="{!NOT(displayTrainingnewDetails)}">
                                             <apex:commandButton action="{!Register}" style="font-family:'Lato';" value="Register" styleClass="btn-md" reRender="msg" />
+                                        </apex:outputPanel>
+                                         <apex:outputPanel rendered="{!displayTrainingnewDetails}">
+                                            <apex:commandButton action="{!Register}" style="font-family:'Lato';" value="VIEW TRAININGS" styleClass="btn-md" reRender="msg" />&nbsp;&nbsp;&nbsp;
+                                            <input type="button" value="Postpone" class="btn-md" id="postpone-btnt" style="display:{!if(flagForCancel,'block','none')};" />
+                                        </apex:outputPanel>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </apex:outputPanel>
 
-
+                         <!-- Affiliation Inactive Popup check begin -->
+                        <apex:outputPanel layout="block" rendered="{!isInactivePopup}">
+                            <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                                $('#bg-chk2').modal({backdrop: 'static', keyboard: false})
+                            })
+                            </script>
+                            <div class="modal fade" id="bg-chk2" tabindex="-1" role="dialog" aria-labelledby="bg-chk" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title">Contact Chapter for Assistance</h1>
+                                        </div>
+                                        <div class="modal-body">
+                                          <center><p class="text-muted">Thank you for reaching out to us about volunteering with Make-A-Wish. Please contact our office at {!volunteercon.Account.Phone}</p></center>
+                                        </div>
+                                        <div class="modal-footer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </apex:outputPanel>
+                        
                         <!-- registered training begin -->
                         <apex:outputPanel layout="block" rendered="{!displayTrainingAck}">
                             <script>
@@ -408,37 +430,8 @@ Description : This page is used to display the welcome message, open events , ch
                                 </div>
                             </div>
                         </apex:outputPanel>
-
-                        <!-- <apex:outputPanel id="trainingACK">
-<apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayTrainingAck}"/>
-<apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayTrainingAck}">
-
-<div class="pop-wrap">
-<div class="custPopup">
-<div class="container">
-<div class="row">
-<div class="col-xs-12 col-sm-12 col-md-12">
-<p>You have registered for Training. Please check your&nbsp;<apex:outputLink value="VolunteerProfile_VF">profile</apex:outputLink> to complete it.</p>
-</div>
-<div class="row">
-<div class="col-xs-12 col-sm-12 col-md-12">
-<apex:commandButton value="Ok" styleClass="col-sm-offset-3 col-md-offset-4 col-xs-12 col-sm-6 col-md-4 btn-md" action="{!TrainingAckCancel}"/> <br/><br/><br/><br/><br/><br/>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-</apex:outputPanel>
-</apex:outputPanel> -->
-                        <!-- end /training details -->
-
-                        <!-- end modals -->
-
-                    </apex:form>
-
-                </section>
+                        </apex:form>
+                    </section>
             </div>
         </main>
 
@@ -554,7 +547,10 @@ Description : This page is used to display the welcome message, open events , ch
             $('#bg-chk2').modal().hide();
             $('.modal-backdrop').css("display", "none");
         }       
-        
+        $("#postpone-btnt").click(function () {
+            $('#training-details').modal().hide();
+            $('.modal-backdrop').css("display", "none");
+        });
         $("#postpone-btn").click(function () {
             $('#bg-chk1').modal().hide();
             $('.modal-backdrop').css("display", "none");

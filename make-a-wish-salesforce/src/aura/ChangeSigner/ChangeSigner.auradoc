@@ -1,0 +1,7 @@
+<aura:documentation>
+	<aura:description>Documentation for ChangeSigner</aura:description>
+	<aura:example name="ChangeSigner" ref="ChangeSigner" label="ChangeSigner">
+		# Description
+		ChangeSigner is a custom component that provides the functionality to change the Signer for a Wish Required Siganture record.
+	</aura:example>
+</aura:documentation>

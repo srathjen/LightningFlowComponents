@@ -23,6 +23,10 @@
         <relationshipLabel><!-- Diagnosis Verification --></relationshipLabel>
     </fields>
     <fields>
+        <label><!-- DV Present --></label>
+        <name>DV_Present__c</name>
+    </fields>
+    <fields>
         <label><!-- Epilepsy Value --></label>
         <name>Epilepsy_Value__c</name>
     </fields>
@@ -71,6 +75,10 @@
     <fields>
         <label><!-- Short Description --></label>
         <name>Short_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unique Record Count --></label>
+        <name>Unique_Record_Count__c</name>
     </fields>
     <fields>
         <label><!-- Hidden isEligible --></label>

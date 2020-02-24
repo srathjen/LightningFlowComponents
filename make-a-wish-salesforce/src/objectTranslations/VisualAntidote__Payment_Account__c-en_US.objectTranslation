@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Account Type --></label>
+        <name>VisualAntidote__Account_Type__c</name>
+        <picklistValues>
+            <masterLabel>AuthorizeNet</masterLabel>
+            <translation><!-- AuthorizeNet --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IATS</masterLabel>
+            <translation><!-- IATS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PayPal Pro</masterLabel>
+            <translation><!-- PayPal Pro --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Stripe</masterLabel>
+            <translation><!-- Stripe --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Cardinal API Identifier --></label>
+        <name>VisualAntidote__Cardinal_API_Identifier__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cardinal API Key --></label>
+        <name>VisualAntidote__Cardinal_API_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cardinal Merchant ID --></label>
+        <name>VisualAntidote__Cardinal_Merchant_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cardinal OrgUnit ID --></label>
+        <name>VisualAntidote__Cardinal_OrgUnit_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cardinal Processor ID --></label>
+        <name>VisualAntidote__Cardinal_Processor_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Sandbox --></label>
+        <name>VisualAntidote__Is_Sandbox__c</name>
+    </fields>
+    <fields>
+        <label><!-- DEPRECATED --></label>
+        <name>VisualAntidote__Password__c</name>
+    </fields>
+    <fields>
+        <label><!-- DEPRECATED --></label>
+        <name>VisualAntidote__Signature__c</name>
+    </fields>
+    <fields>
+        <label><!-- DEPRECATED --></label>
+        <name>VisualAntidote__Username__c</name>
+    </fields>
+</CustomObjectTranslation>

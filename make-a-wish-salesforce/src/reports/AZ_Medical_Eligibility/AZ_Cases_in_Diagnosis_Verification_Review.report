@@ -52,13 +52,21 @@
     <filter>
         <criteriaItems>
             <column>Lead.Cases__r$RecordType</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Diagnosis_Verification_Review</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead$ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
         </criteriaItems>
     </filter>
     <format>Tabular</format>
@@ -70,8 +78,10 @@
     <reportType>Leads_with_Diagnosis_Verification_case_details__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Lead$Referred_Date__c</dateColumn>
-        <interval>INTERVAL_CURRENT</interval>
+        <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>

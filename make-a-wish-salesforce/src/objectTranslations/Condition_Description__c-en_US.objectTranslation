@@ -17,6 +17,10 @@
         <name>Group1__c</name>
     </fields>
     <fields>
+        <label><!-- InActive --></label>
+        <name>InActive__c</name>
+    </fields>
+    <fields>
         <help><!-- This would appear when the smart search does not match with the condition description. --></help>
         <label><!-- Not Listed --></label>
         <name>Not_Listed__c</name>

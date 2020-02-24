@@ -20,9 +20,365 @@
         <plural>true</plural>
         <value><!-- הRelationship --></value>
     </caseValues>
+    <fieldSets>
+        <label><!-- MedicalRelationships --></label>
+        <name>MedicalRelationships</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- Relationship Field Set --></label>
+        <name>Relationship_Field_Set</name>
+    </fieldSets>
+    <fields>
+        <label><!-- Adult Emergency Contact --></label>
+        <name>Adult_Emergency_Contact__c</name>
+    </fields>
+    <fields>
+        <help><!-- Best Contact for Treating Healthcare Provider --></help>
+        <label><!-- Best Contact for Treating Healthcare Pro --></label>
+        <name>Best_Contact__c</name>
+    </fields>
+    <fields>
+        <help><!-- This field can be updated on the individual&apos;s Contact Record. --></help>
+        <label><!-- Deceased --></label>
+        <name>Decead__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish End Date --></label>
+        <name>End_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- External Id --></label>
+        <name>External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Preferred Contact --></label>
+        <name>Hidden_Preferred_Contact__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden isparentFirst --></label>
+        <name>Hidden_isparentFirst__c</name>
+    </fields>
+    <fields>
+        <label><!-- Import Id --></label>
+        <name>Import_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Medical Needs --></label>
+        <name>Medical_Needs__c</name>
+    </fields>
+    <fields>
+        <label><!-- Migrated Record --></label>
+        <name>Migrated_Record__c</name>
+    </fields>
+    <fields>
+        <label><!-- Non-Comped --></label>
+        <name>Non_Comped__c</name>
+    </fields>
+    <fields>
+        <label><!-- Parent/Legal Guardian --></label>
+        <name>Parent_Legal_Guardian__c</name>
+    </fields>
+    <fields>
+        <label><!-- Qualifying Medical Team Member --></label>
+        <name>Qualifying_Medical_Professional__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referral Source --></label>
+        <name>Referring_Medical_Professional__c</name>
+    </fields>
+    <fields>
+        <label><!-- Related Contact Record Type --></label>
+        <name>Related_Contact_Record_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Residing with Wish child --></label>
+        <name>Residing_with_Wish_child__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Send Wish Forms to --></label>
+        <name>Send_Wish_Forms__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Start Date --></label>
+        <name>Start_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Treating Healthcare Provider --></label>
+        <name>Treating_HCP__c</name>
+    </fields>
+    <fields>
+        <label><!-- UAT Data Warning --></label>
+        <name>UAT_Data_Warning__c</name>
+    </fields>
+    <fields>
+        <label><!-- Under 18 --></label>
+        <name>Under_18__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unique Record Count --></label>
+        <name>Unique_Record_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Wish End  Date --></label>
+        <name>Wish_End_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Participant --></label>
+        <name>Wish_Participant__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Wish Start Date --></label>
+        <name>Wish_Start_Date__c</name>
+    </fields>
+    <fields>
+        <help>איש הקשר הקשור הוא ה______ של איש קשר זה.</help>
+        <label><!-- Contact --></label>
+        <name>npe4__Contact__c</name>
+        <relationshipLabel><!-- Relationships --></relationshipLabel>
+    </fields>
+    <fields>
+        <help>מידע נוסף על קשר זה</help>
+        <label><!-- Description --></label>
+        <name>npe4__Description__c</name>
+    </fields>
+    <fields>
+        <help>שדה מערכת המקשר אל שני הצדדים של הקשר.  אין לבצע בשדה זה שינויים באופן ישיר.  הקשר ההדדי יקבל את הסוג ההפוך, אם זמין, של קשר זה.</help>
+        <label><!-- Reciprocal Relationship --></label>
+        <name>npe4__ReciprocalRelationship__c</name>
+        <relationshipLabel><!-- Relationships --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Related Contact --></label>
+        <name>npe4__RelatedContact__c</name>
+        <relationshipLabel><!-- Hidden Relationships List --></relationshipLabel>
+    </fields>
+    <fields>
+        <help>נוסחת טקסט המרכיבה משפט המסביר את הקשר בין שני אנשי הקשר</help>
+        <label><!-- Relationship Explanation --></label>
+        <name>npe4__Relationship_Explanation__c</name>
+    </fields>
+    <fields>
+        <help>שדה מערכת המציין אם קשר זה נוצר באופן אוטומטי בתור ההופכי לקשרים אחרים.</help>
+        <label><!-- _SYSTEM: SystemCreated --></label>
+        <name>npe4__SYSTEM_SystemCreated__c</name>
+    </fields>
+    <fields>
+        <help>מצב הקשר.</help>
+        <label><!-- Status --></label>
+        <name>npe4__Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Active Treating</masterLabel>
+            <translation><!-- Active Treating --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inactive</masterLabel>
+            <translation><!-- Inactive --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help>שדה המתאר כיצד שני אנשי הקשר קשורים זה לזה.</help>
+        <label><!-- Type --></label>
+        <name>npe4__Type__c</name>
+        <picklistValues>
+            <masterLabel>Aunt</masterLabel>
+            <translation>דודה</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Brother</masterLabel>
+            <translation><!-- Brother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cousin</masterLabel>
+            <translation>בן/ת דוד</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Coworker</masterLabel>
+            <translation>עמית/ה לעבודה</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Daughter</masterLabel>
+            <translation>בת</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Employee</masterLabel>
+            <translation>עובד/ת</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Employer</masterLabel>
+            <translation>מעסיק/ה</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family</masterLabel>
+            <translation>משפחה</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Father</masterLabel>
+            <translation>אב</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Brother</masterLabel>
+            <translation><!-- Foster Brother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Father</masterLabel>
+            <translation><!-- Foster Father --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Mother</masterLabel>
+            <translation><!-- Foster Mother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Sister</masterLabel>
+            <translation><!-- Foster Sister --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Friend</masterLabel>
+            <translation>חבר/ה</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Granddaughter</masterLabel>
+            <translation>נכדה</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Grandfather</masterLabel>
+            <translation>סבא</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Grandmother</masterLabel>
+            <translation>סבתא</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Grandson</masterLabel>
+            <translation>נכד</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Half Brother</masterLabel>
+            <translation><!-- Half Brother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Half Sister</masterLabel>
+            <translation><!-- Half Sister --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Husband</masterLabel>
+            <translation>בעל</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Legal Guardian</masterLabel>
+            <translation><!-- Legal Guardian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medical Professional</masterLabel>
+            <translation><!-- Medical Professional --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mother</masterLabel>
+            <translation>אם</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Neighbor</masterLabel>
+            <translation><!-- Neighbor --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Parent</masterLabel>
+            <translation>אב</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Partner</masterLabel>
+            <translation>שותף</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sibling</masterLabel>
+            <translation><!-- Sibling --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sister</masterLabel>
+            <translation><!-- Sister --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Son</masterLabel>
+            <translation>בן</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Step Brother</masterLabel>
+            <translation><!-- Step Brother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Step Sister</masterLabel>
+            <translation><!-- Step Sister --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Stepfather</masterLabel>
+            <translation><!-- Stepfather --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Stepmother</masterLabel>
+            <translation><!-- Stepmother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Uncle</masterLabel>
+            <translation>דוד</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wife</masterLabel>
+            <translation>רעיה</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wish Child(Self)</masterLabel>
+            <translation><!-- Wish Child(Self) --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- When you create an Opportunity for the Contact in this Relationship, NPSP assigns this Opportunity Contact Role to the Related Contact. --></help>
+        <label><!-- Related Opportunity Contact Role --></label>
+        <name>npsp__Related_Opportunity_Contact_Role__c</name>
+        <picklistValues>
+            <masterLabel>Soft Credit</masterLabel>
+            <translation><!-- Soft Credit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Solicitor</masterLabel>
+            <translation><!-- Solicitor --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tribute</masterLabel>
+            <translation><!-- Tribute --></translation>
+        </picklistValues>
+    </fields>
     <gender><!-- Masculine --></gender>
     <layouts>
-        <layout>Relationship Chapter Staff Layout</layout>
+        <layout>Relationship Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Medical Contact Details --></label>
+            <section>Medical Contact Details</section>
+        </sections>
+        <sections>
+            <label>פרטי קשר</label>
+            <section>Relationship Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Relationship Layout - Volunteer</layout>
         <sections>
             <label><!-- Custom Links --></label>
             <section>Custom Links</section>
@@ -33,4 +389,8 @@
         </sections>
     </layouts>
     <nameFieldLabel><!-- Relationship Number --></nameFieldLabel>
+    <validationRules>
+        <errorMessage><!-- Rather than change the contacts in an existing relationship, delete this relationship and create a new on between the new contacts --></errorMessage>
+        <name>npe4__Related_Contact_Do_Not_Change</name>
+    </validationRules>
 </CustomObjectTranslation>

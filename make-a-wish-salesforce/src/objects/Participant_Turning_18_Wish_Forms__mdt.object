@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>The list of  Wish Signature Forms to send when a participant on a Wish turns 18.</description>
+    <fields>
+        <fullName>Days_From_Signature_to_Expiry__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Days From Signature to Expiry</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Wish_Signature_Form_Id__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Wish Signature Form Id</label>
+        <length>20</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Participant Turning 18 Wish Forms</label>
+    <pluralLabel>Participant Turning 18 Wish Forms</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

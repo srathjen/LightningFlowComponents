@@ -1,0 +1,10 @@
+<design:component>
+    <design:attribute name="parentId" label="parentId" 
+                      description="Case Id" />
+    
+    <design:attribute name="descriptionPlaceholder" label="descriptionPlaceholder" 
+                      description="File Description Placeholder" />
+
+    <design:attribute name="descriptionToolTip" label="X" 
+                      description="X" />
+</design:component>

@@ -9,7 +9,7 @@ public with sharing class CommunitiesLandingController {
     public PageReference forwardToStartPage() {
         String startUrl = System.currentPageReference().getParameters().get('startURL');
         
-        if(userProfileName.size()>0 && (userProfileName[0].Name == 'Active Volunteer (Login)' || userProfileName[0].Name == 'Active Volunteer (Member)')) {
+        if(userProfileName.size()>0 && (userProfileName[0].Id == label.Active_Volunteer_Profile)) {
             if(!String.isEmpty(startUrl)) {
                 PageReference landingPage = new PageReference(startUrl);
                 return landingPage;
@@ -17,7 +17,7 @@ public with sharing class CommunitiesLandingController {
                 return page.VolunteerLanding_VF;
             }
             //return page.VolunteerLanding_VF;
-        } else if(userProfileName.size()>0 && (userProfileName[0].Name == 'Prospective Volunteer (Login)' || userProfileName[0].Name == 'Prospective Volunteer (Member)')) {
+        } else if(userProfileName.size()>0 && (userProfileName[0].Id == label.Prospective_Volunteer_Profile)) {
             return page.VolunteerWelcomePage_VF;
         } else {
             return page.CommunitiesLogin;

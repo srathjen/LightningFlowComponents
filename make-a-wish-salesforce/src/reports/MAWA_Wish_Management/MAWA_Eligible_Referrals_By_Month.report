@@ -11,7 +11,7 @@
         <chartType>HorizontalBar</chartType>
         <enableHoverLabels>false</enableHoverLabels>
         <expandOthers>true</expandOthers>
-        <groupingColumn>Case.Copy_3_Referral_Date__c</groupingColumn>
+        <groupingColumn>Case.Referral_Date__c</groupingColumn>
         <location>CHART_TOP</location>
         <showAxisLabels>false</showAxisLabels>
         <showPercentage>false</showPercentage>
@@ -31,9 +31,6 @@
         <field>STATUS</field>
     </columns>
     <columns>
-        <field>Case.Copy_1_Referral_Date__c</field>
-    </columns>
-    <columns>
         <field>Case.Medical_Condition__c</field>
     </columns>
     <columns>
@@ -48,11 +45,13 @@
     <filter>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
@@ -61,16 +60,6 @@
     <groupingsDown>
         <dateGranularity>FiscalYear</dateGranularity>
         <field>Case.Referral_Date__c</field>
-        <sortOrder>Asc</sortOrder>
-    </groupingsDown>
-    <groupingsDown>
-        <dateGranularity>FiscalQuarter</dateGranularity>
-        <field>Case.Copy_2_Referral_Date__c</field>
-        <sortOrder>Asc</sortOrder>
-    </groupingsDown>
-    <groupingsDown>
-        <dateGranularity>Month</dateGranularity>
-        <field>Case.Copy_3_Referral_Date__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <name>MAWA Eligible Referrals By Month</name>
@@ -85,6 +74,8 @@
     <reportType>CaseList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Case.Referral_Date__c</dateColumn>
         <interval>INTERVAL_CURFY</interval>

@@ -28,11 +28,13 @@
     <filter>
         <criteriaItems>
             <column>OWNER</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Wish Referral Form Site Guest User</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notContain</operator>
             <value>arizona</value>
         </criteriaItems>
@@ -46,6 +48,8 @@
     <reportType>LeadList</reportType>
     <scope>org</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Lead.Created_Date_Time__c</dateColumn>
         <endDate>2018-05-02</endDate>

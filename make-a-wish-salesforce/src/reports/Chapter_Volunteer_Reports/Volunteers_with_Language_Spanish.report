@@ -37,21 +37,25 @@
     <filter>
         <criteriaItems>
             <column>Contact$RecordType</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Volunteer_Contact</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact$Language__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>includes</operator>
             <value>Spanish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact$is_Active_Volunteer__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact$MailingStateCode</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>AZ</value>
         </criteriaItems>
@@ -70,6 +74,8 @@
     <reportType>Volunteer_Contact__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <sortColumn>Contact$is_Active_Volunteer__c</sortColumn>
     <sortOrder>Desc</sortOrder>
     <timeFrameFilter>

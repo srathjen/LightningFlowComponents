@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Participant Turning 18 Wish Forms</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Participant Turning 18 Wish Forms</value>
+    </caseValues>
+    <fields>
+        <label><!-- Days From Signature to Expiry --></label>
+        <name>Days_From_Signature_to_Expiry__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Signature Form Id --></label>
+        <name>Wish_Signature_Form_Id__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

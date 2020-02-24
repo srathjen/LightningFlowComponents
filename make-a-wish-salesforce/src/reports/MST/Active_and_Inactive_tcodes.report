@@ -22,6 +22,8 @@
     <reportType>Wish_expense_types_transaction_codes__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Wish_Expense_Type__c$CreatedDate</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
