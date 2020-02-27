@@ -24,16 +24,6 @@ global class batch_leadChildAge implements Database.Batchable<SObject> {
 
 	global void execute(Database.BatchableContext bc, List<Lead> leads) {
 		List<Lead> updateLeads = new List<Lead>();
-        // SIW-252 Start
-        //*******************************************************************************************************
-        //                                F O R   T E S T I N G   O N L Y
-        //           WHEN WE GO TO PRODUCTION, COMMENT OUT LINE 32 (runDate ASSIGNMENT STATEMENT)
-        // OVERRIDE SYSTEM DATE WITH A SIMULATED RUN DATE
-        //runDate = Date.parse('06/30/2019');                 // COMMENT OUT WHEN GOING TO PRODUCTION
-        //*******************************************************************************************************
-        // Calculate DOB of children who have turned 2.5 years old today
-        // if Today is the last day of the month, and If daysInCurrentMonth is less than daysInSixthMonth,
-        // we use date range to check if the DOB falls between them
         // Get last day of the current month
         Integer lastDayOfRunDateMonth = Date.daysInMonth(runDate.year(), runDate.month());
         // Subtract 2 years and 6 months from current date
@@ -54,7 +44,7 @@ global class batch_leadChildAge implements Database.Batchable<SObject> {
             else if (twoAndHalfYearsAgoBeforeRunDate.isSameDay(leadRecord.DOB__c)) {
 				leadRecord.Age_Requirement_Met__c = true;
 				updateLeads.add(leadRecord);
-			} // SIW-252 End
+			}
 		}
 		if (updateLeads.size() > 0) {
 			update updateLeads;
