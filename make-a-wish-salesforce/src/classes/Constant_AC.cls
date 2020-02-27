@@ -10,41 +10,16 @@ public class Constant_AC {
 	public final static String CONTACT_WISH_CHILD_RT_LABEL = 'Wish Child';
 	public final static Id CONTACT_WISH_CHILD_RT_ID = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName().get('Wish_Child').getRecordTypeId();
 	public final static Id IN_KIND_ACCOUNT_ID = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('In_Kind_Donors').getRecordTypeId();
-	/**
-	 * WLP-286 Case record type conversion from Wish Determination label to Wish, therefore label is now deactivated
-	 */
-	// public final static String WISH_DETERMINATION_LABEL = 'Wish Determination';
-	/**
-	 *  WLP-286 Case record type conversion from Wish Determination (Wish_Determination) to Wish, therefore record type is now deactivated
-	 */
-	// public final static Id WISH_DETERMINATION_RT_ID = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Wish_Determination').getRecordTypeId();
 	public final static Id DETERMINATION_TASK_RT_ID = Schema.SObjectType.Task.getRecordTypeInfosByDeveloperName().get('Wish_Determination').getRecordTypeId();
 	public final static Id DETERMINATION_CHAPTER_ACTION_RT_ID = Schema.SObjectType.Chapter_Action_Track__c.getRecordTypeInfosByDeveloperName().get('Wish_Determination').getRecordTypeId();
-	/**
-	 *  WLP-286 Case record type conversion from Wish Planning (Wish_Planning_Anticipation) to Wish, therefore record type is now deactivated
-	 */
-	// public final static Id WISH_PLANNING_ANTICIPATION_RT_ID = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Wish_Planning_Anticipation').getRecordTypeId();
 	public final static Id PLANNING_ANTICIPATION_CHAPTER_ACTION_RT_ID = Schema.SObjectType.Chapter_Action_Track__c.getRecordTypeInfosByDeveloperName().get('Wish_Planning').getRecordTypeId();
 	public final static Id PLANNING_ANTICIPATION_TASK_RT_ID = Schema.SObjectType.Task.getRecordTypeInfosByDeveloperName().get('Wish_Planning').getRecordTypeId();
 	public final static String WISH_ASSIST_RT_LABEL = 'Wish Assist';
 	public final static Id WISH_ASSIST_RT_ID = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Wish_Assist').getRecordTypeId();
-	/**
-	 * WLP-286 Case record type conversion from Wish Granting label to Wish, therefore label is now deactivated
-	 */
-	// public final static String WISH_GRANT_RT_LABEL = 'Wish Granting';
-	/**
-	 *  WLP-286 Case record type conversion from Wish Granting ('Wish_Granted') to Wish, therefore record type is now deactivated
-	 */
-	// public final static Id WISH_GRANT_RT_ID = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Wish_Granted').getRecordTypeId();
 	public final static Id GRANT_CHAPTER_ACTION_RT_ID = Schema.SObjectType.Chapter_Action_Track__c.getRecordTypeInfosByDeveloperName().get('Wish_Granting').getRecordTypeId();
 	public final static Id GRANT_TASK_RT_ID = Schema.SObjectType.Task.getRecordTypeInfosByDeveloperName().get('Wish_Granting').getRecordTypeId();
-	/**
-	 *  WLP-286 Case record type conversion from Wish Impact ('Wish_Effect') to Wish, therefore record type is now deactivated
-	 */
-	// public final static Id WISH_EFFECT_RT_ID = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Wish_Effect').getRecordTypeId();
 	public final static Id WISH_FAMILY_RT_ID = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName().get('Wish_Family').getRecordTypeId();
 	public final static String WISH_FAMILY_RT_LABEL = 'Wish Family';
-	public final static String WISH_RT_LABEL = 'Wish';
 	public final static Id WISH_RT_ID = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Wish').getRecordTypeId();
 	public final static Id MEDICAL_PROFESSIONAL_RT_ID = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName().get('Medical_Professional').getRecordTypeId();
 	public final static String MEDICAL_PROFESSIONAL_RT_LABEL = 'Medical Professional';
@@ -106,6 +81,9 @@ public class Constant_AC {
 	public static final String LEAD_DV_FORM_TYPE_BEST_CONTACT = 'Best contact for Physician';
 	public static final String LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL = 'Alternate 1 Medical Professional';
 	public static final String LEAD_DV_FORM_TYPE_ALTERNATE_2_MEDICAL_PROFESSIONAL = 'Alternate 2 Medical Professional';
+	public static final String LEAD_STATUS_QUALIFIED = 'Qualified';
+	public static final String LEAD_STATUS_INQUIRY = 'Inquiry';
+	public static final String LEAD_CHILD_AGE_UNDER_2_5 = 'Under 2.5';
 	/**
 	 * Case Constants
 	 */
@@ -135,16 +113,12 @@ public class Constant_AC {
 	public static final String CASE_STATUS_PENDING_CLARIFICATION_MAC = 'Pending Clarification - MAC';
 	public static final String CASE_STATUS_PENDING_CLARIFICATION_MAC_CONSULT_REQ = 'Pending Clarification - MAC Consult Req';
 	public static final String CASE_STATUS_PENDING_CLARIFICATION_CHAPTER = 'Pending Clarification - Chapter';
-
 	public static final String CASE_SUB_STATUS_PENDING = 'Pending';
 	public static final String CASE_SUB_STATUS_ABANDONED = 'Abandoned';
 	public static final String CASE_SUB_STATUS_DNQ_MEDICAL = 'DNQ - Medical';
-
 	public static final String CASE_WISH_CLEARANCE_APPROPRIATE = 'Appropriate';
 	public static final String CASE_WISH_CLEARANCE_NOT_APPROPRIATE = 'Not Appropriate';
-
 	public static final String MEET_PWL_CRITERIA_YES = 'Yes';
-
 	public static final String CASE_WISH_TYPE_CELEBRITY_DOMESTIC_TRAVEL = 'Celebrity-Domestic Travel';
 	public static final String CASE_WISH_TYPE_CELEBRITY_LOCAL = 'Celebrity-Local';
 	public static final String CASE_WISH_TYPE_CELEBRITY_INTERNATIONAL_TRAVEL = 'Celebrity-International Travel';
@@ -155,7 +129,6 @@ public class Constant_AC {
 	public static final String CASE_WISH_TYPE_TRAVEL_OTHER = 'Travel-Other';
 	public static final String CASE_WISH_TYPE_TRAVEL_INTERNATIONAL = 'Travel-International';
 	public static final String CASE_WISH_TYPE_TRAVEL_HAWAII = 'Travel-Hawaii';
-
 	public static final String CASE_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
 	/**
 	 * Wish Affiliation Constants
@@ -227,20 +200,10 @@ public class Constant_AC {
 	public static final String WISH_CHANGE_REQUEST_STATUS_REJECTED = 'Rejected';
 
 	/**
-	 * Relationships
-	 */
-	public static final String RELATIONSHIP_TYPE_SIBLING = 'Sibling';
-
-	/**
 	 * Wish Required Signature
 	 */
 	public static final String WISH_REQUIRED_SIGNATURE_STATUS_EXPIRED = 'Expired';
 	public static final String WISH_REQUIRED_SIGNATURE_STATUS_SIGNED = 'Signed';
 	public static final String WISH_REQUIRED_SIGNATURE_STATUS_VOIDED = 'Voided';
 	public static final String WISH_REQUIRED_SIGNATURE_STATUS_SENT = 'Sent';
-
-	/**
-	 * Lead Status
-	 */
-	public static final String LEAD_STATUS_QUALIFIED = 'Qualified';
 }
