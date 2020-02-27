@@ -360,7 +360,7 @@ Update Lead status when diagnosis verification Case status is updated.
             else if (updatedDnqLeadInfoSet.contains(currentLead.Id)) {
                 currentLead.Status = 'DNQ';
 //SIW-524 hotfix                currentLead.Sub_Status__c = 'Medical';
-                currentLead.Sub_Status__c = 'Medical Reviewed';
+                currentLead.Sub_Status__c = Label.Wish_Lead_Status_Medical_Reviewed;//Added custom label to remove hardcoded value
                 // Added 'Sub_Status__c' as per IME-18
 //              currentLead.Status = CASE_STATUS_CLOSED;
 //              currentLead.Sub_Status__c = CASE_SUB_STATUS_DNQ_MEDICAL;

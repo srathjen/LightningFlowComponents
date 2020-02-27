@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
         <fullName>AbsentForm</fullName>
         <categories>Docusign Template</categories>
@@ -1023,6 +1022,14 @@ This will archive the existing active budget and cannot be undone. Are you sure 
         <protected>false</protected>
         <shortDescription>Wish Form submit</shortDescription>
         <value>Are you ready to submit the {0} form for {1}?</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Lead_Status_Medical_Reviewed</fullName>
+        <categories>Lead field value</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Lead Status Medical Reviewed</shortDescription>
+        <value>Medical Reviewed</value>
     </labels>
     <labels>
         <fullName>Wish_Participant_Add_New_Participant</fullName>
