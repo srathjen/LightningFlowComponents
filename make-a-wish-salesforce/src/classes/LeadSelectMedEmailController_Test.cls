@@ -10,9 +10,11 @@ public class LeadSelectMedEmailController_Test {
 		account.Name = 'Make-A-Wish Arizona';
 		account.RecordTypeId = CHAPTER_RECORD_TYPE_ID;
 		insert accounts;
+
 		List<ICD_Codes__c> icdCodesDataFactory = TestDataFactory.createIcdCode(1);
 		ICD_Codes__c icdCode = icdCodesDataFactory.get(0);
 		insert icdCode;
+
 		List<Lead> leads = TestDataFactory.createLead(2);
 		Lead lead = leads.get(0);
 		lead.ChapterName__c = accounts[0].Id;
@@ -79,6 +81,7 @@ public class LeadSelectMedEmailController_Test {
 		lead2.PD_ICD_Code__c = icdCode.Id;
 		lead2.Company = 'MAW';
 		insert leads;
+
 		List<Contact> contacts = TestDataFactory.createContact(1);
 		Contact wishChildContact1 = contacts.get(0);
 		wishChildContact1.AccountId = account.Id;
@@ -92,6 +95,7 @@ public class LeadSelectMedEmailController_Test {
 		wishChildContact1.MailingState = 'Arizona';
 		wishChildContact1.MailingCity = 'Phoenix';
 		insert contacts;
+
 		List<Case> cases = TestDataFactory.createCase(1);
 		Case wish = cases.get(0);
 		wish.Lead__c = lead.Id;
@@ -109,12 +113,15 @@ public class LeadSelectMedEmailController_Test {
 		wish.Budget_Approved_Date__c = System.today();
 		wish.Update_Wish_Child_Form_Info__c = true;
 		insert cases;
+
 		List<dsfs__DocuSign_Status__c> docuSignStatuses = TestDataFactory.createDocusignStatus(1);
 		dsfs__DocuSign_Status__c docuSignStatus = docuSignStatuses.get(0);
 		docuSignStatus.dsfs__Lead__c = lead.Id;
 		insert docuSignStatuses;
+
 		List<Attachment> attachments = TestDataFactory.createAttachments(1, docuSignStatus.Id);
 		insert attachments;
+
 		List<cg__Lead_File__c> leadFilesDataFactory = TestDataFactory.createLeadFile(1);
 		cg__Lead_File__c leadFile = leadFilesDataFactory.get(0);
 		leadFile.cg__Lead__c = lead.Id;
