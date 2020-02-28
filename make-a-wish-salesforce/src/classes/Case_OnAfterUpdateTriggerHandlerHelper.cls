@@ -13,10 +13,6 @@ public class Case_OnAfterUpdateTriggerHandlerHelper {
     private static final Id wishRecordTypeId = Constant_AC.WISH_RT_ID;
     private static final Id volunteerOppWishRecordTypeId = Constant_AC.WISH_VOLUNTEER_OPPORTUNITY_ID;
     private static final Id chapterRecordTypeId = Constant_AC.CHAPTER_RT_ID;
-//  private static final Id volunteerTaskRT = Constant_AC.VOLUNTEER_TASK_RT_ID;
-//  private static final Id wishGrantTaskRT = Constant_AC.GRANT_CHAPTER_ACTION_RT_ID;
-//  private static final Id determinationChapterActionRT = Constant_AC.DETERMINATION_CHAPTER_ACTION_RT_ID;
-//  static List<Approval.ProcessSubmitRequest> approvalReqList = new List<Approval.ProcessSubmitRequest>();
     static Set<Id> contactIds = new Set<Id>();
     static Map<Id, Contact> contactMap = new Map<Id, Contact>();
 //  static Set<Id> newWishClearanceSet = new Set<Id>();
@@ -360,7 +356,7 @@ Update Lead status when diagnosis verification Case status is updated.
             else if (updatedDnqLeadInfoSet.contains(currentLead.Id)) {
                 currentLead.Status = 'DNQ';
 //SIW-524 hotfix                currentLead.Sub_Status__c = 'Medical';
-                currentLead.Sub_Status__c = 'Medical Reviewed';
+                currentLead.Sub_Status__c = Label.Wish_Lead_Status_Medical_Reviewed;//Added custom label to remove hardcoded value
                 // Added 'Sub_Status__c' as per IME-18
 //              currentLead.Status = CASE_STATUS_CLOSED;
 //              currentLead.Sub_Status__c = CASE_SUB_STATUS_DNQ_MEDICAL;
