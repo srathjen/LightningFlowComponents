@@ -83,7 +83,13 @@ public class Constant_AC {
 	public static final String LEAD_DV_FORM_TYPE_ALTERNATE_2_MEDICAL_PROFESSIONAL = 'Alternate 2 Medical Professional';
 	public static final String LEAD_STATUS_QUALIFIED = 'Qualified';
 	public static final String LEAD_STATUS_INQUIRY = 'Inquiry';
+	public static final String LEAD_STATUS_REFERRED = 'Referred';
 	public static final String LEAD_CHILD_AGE_UNDER_2_5 = 'Under 2.5';
+	public static final String LEAD_SUB_STATUS_PENDING_DIAGNOSIS_VERIFICATION = 'Pending Diagnosis Verification';
+	/**
+	 * Lead File Constants
+	 */
+	public static final String LEAD_FILE_CONTENT_TYPE_FOLDER = 'Folder';
 	/**
 	 * Case Constants
 	 */
@@ -130,6 +136,7 @@ public class Constant_AC {
 	public static final String CASE_WISH_TYPE_TRAVEL_INTERNATIONAL = 'Travel-International';
 	public static final String CASE_WISH_TYPE_TRAVEL_HAWAII = 'Travel-Hawaii';
 	public static final String CASE_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
+	public static final String CASE_RECORD_TYPE_DIAGNOSIS_VERIFICATION_REVIEW = 'Diagnosis Verification Review';
 	/**
 	 * Wish Affiliation Constants
 	 */
