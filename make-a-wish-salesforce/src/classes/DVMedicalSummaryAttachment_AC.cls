@@ -55,12 +55,6 @@ public class DVMedicalSummaryAttachment_AC {
 	}
 
 	/**
-	 * Used to refresh the block
-	 */
-	public void Refresh() {
-	}
-
-	/**
 	 * Delete Lead File
 	 * @return Page Reference
 	 */

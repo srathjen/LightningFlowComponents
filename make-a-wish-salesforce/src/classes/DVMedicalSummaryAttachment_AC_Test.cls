@@ -74,7 +74,6 @@ public class DVMedicalSummaryAttachment_AC_Test {
 		attach.Body = bodyBlob;
 		currDiagnosisVerificationDupe.newAttachment = attach;
 		currDiagnosisVerificationDupe.save();
-		currDiagnosisVerificationDupe.Refresh();
 		currDiagnosisVerificationDupe.attachmentId = leadFile[0].Id;
 		currDiagnosisVerificationDupe.removeAttachment();
 		Test.stopTest();
@@ -106,7 +105,6 @@ public class DVMedicalSummaryAttachment_AC_Test {
         attach.Body = bodyBlob;
         currDiagnosisVerificationDupe.newAttachment = attach;
         currDiagnosisVerificationDupe.save();
-        currDiagnosisVerificationDupe.Refresh();
         currDiagnosisVerificationDupe.attachmentId = leadFile[0].Id;
         currDiagnosisVerificationDupe.removeAttachment();
         Test.stopTest();
