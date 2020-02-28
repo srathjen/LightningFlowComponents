@@ -14,4 +14,18 @@ public with sharing class CaseService {
 	public static Boolean userHasRestrictedPermissionOnCase() {
 		return Closed_Case_Editing_Security_Settings__c.getInstance().Restrict_Access__c;
 	}
+
+	/**
+	 *  Delete Case found by Lead Id and Record Type Name
+	 * @param leadId
+	 * @param caseRecordTypeNames
+	 */
+	public static void deleteByLeadIdAndRecordTypeNames(Id leadId, List<String> caseRecordTypeNames) {
+		delete [
+				SELECT Id, Lead__c
+				FROM Case
+				WHERE Lead__c = :leadId
+				AND RecordType.Name IN :caseRecordTypeNames
+		];
+	}
 }

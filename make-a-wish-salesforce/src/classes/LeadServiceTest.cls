@@ -1,14 +1,22 @@
+/**
+ * @description Lead Service Test
+ * @author Gustavo Mayer, Traction on Demand
+ * @createdDate 2/27/2020
+ */
 @IsTest
-public class LeadSelectMedEmailController_Test {
+public class LeadServiceTest {
 
 	private final static Id CHAPTER_RECORD_TYPE_ID = Constant_AC.CHAPTER_RT_ID;
 
 	@TestSetup
 	public static void setup() {
-		List<Account> accounts = TestDataFactory.createAccount(1);
-		Account account = accounts.get(0);
-		account.Name = 'Make-A-Wish Arizona';
-		account.RecordTypeId = CHAPTER_RECORD_TYPE_ID;
+		List<Account> accounts = TestDataFactory.createAccount(2);
+		Account account1 = accounts.get(0);
+		account1.Name = 'Make-A-Wish Arizona';
+		account1.RecordTypeId = CHAPTER_RECORD_TYPE_ID;
+		Account account2 = accounts.get(1);
+		account2.Name = 'Make-A-Wish New York';
+		account2.RecordTypeId = CHAPTER_RECORD_TYPE_ID;
 		insert accounts;
 
 		List<ICD_Codes__c> icdCodesDataFactory = TestDataFactory.createIcdCode(1);
@@ -17,9 +25,10 @@ public class LeadSelectMedEmailController_Test {
 
 		List<Lead> leads = TestDataFactory.createLead(2);
 		Lead lead = leads.get(0);
-		lead.ChapterName__c = accounts[0].Id;
+		lead.ChapterName__c = account1.Id;
 		lead.FirstName = 'Jack';
 		lead.LastName = 'Smith';
+		lead.Hidden_Chapter_Change_Confirmation__c = account2.Id;
 		lead.Diagnosis_Given_By_Referrer__c = 'Test Diagnosis';
 		lead.PD_ICD_Code__c = icdCode.Id;
 		lead.Phone = '9600467559';
@@ -75,88 +84,70 @@ public class LeadSelectMedEmailController_Test {
 		lead2.ChapterName__c = accounts[0].Id;
 		lead2.FirstName = 'Mark';
 		lead2.LastName = 'Smith';
-		lead2.Hidden_Chapter_Change_Confirmation__c = account.Id;
 		lead2.is_Family_Aware_of_Referral__c = 'Yes';
 		lead2.Diagnosis_Given_By_Referrer__c = 'Test Diagnosis';
 		lead2.PD_ICD_Code__c = icdCode.Id;
 		lead2.Company = 'MAW';
 		insert leads;
-
-		List<Contact> contacts = TestDataFactory.createContact(1);
-		Contact wishChildContact1 = contacts.get(0);
-		wishChildContact1.AccountId = account.Id;
-		wishChildContact1.FirstName = 'Will';
-		wishChildContact1.LastName = 'Smith';
-		wishChildContact1.ICD_10_Code__c = icdCode.Id;
-		wishChildContact1.Birthdate = Date.today().addYears(-10);
-		wishChildContact1.MailingPostalCode = '12345-9876';
-		wishChildContact1.MailingStreet = 'Mark Street';
-		wishChildContact1.MailingCountry = 'United States';
-		wishChildContact1.MailingState = 'Arizona';
-		wishChildContact1.MailingCity = 'Phoenix';
-		insert contacts;
-
-		List<Case> cases = TestDataFactory.createCase(1);
-		Case wish = cases.get(0);
-		wish.Lead__c = lead.Id;
-		wish.RecordTypeId = Constant_AC.DIAGNOSIS_RT_ID;
-		wish.ChapterName__c = accounts.get(0).Id;
-		wish.Subject = 'Wish1';
-		wish.Interview_date__c = System.today();
-		wish.Wish_Type__c = 'Hawaii';
-		wish.Start_Date__c = System.today();
-		wish.End_Date__c = System.today();
-		wish.ContactId = wishChildContact1.Id;
-		wish.Status = 'New';
-		wish.Start_Date__c = System.today();
-		wish.Budget_Submitted_Date__c = System.today();
-		wish.Budget_Approved_Date__c = System.today();
-		wish.Update_Wish_Child_Form_Info__c = true;
-		insert cases;
-
-		List<dsfs__DocuSign_Status__c> docuSignStatuses = TestDataFactory.createDocusignStatus(1);
-		dsfs__DocuSign_Status__c docuSignStatus = docuSignStatuses.get(0);
-		docuSignStatus.dsfs__Lead__c = lead.Id;
-		insert docuSignStatuses;
-
-		List<Attachment> attachments = TestDataFactory.createAttachments(1, docuSignStatus.Id);
-		insert attachments;
-
-		List<cg__Lead_File__c> leadFilesDataFactory = TestDataFactory.createLeadFile(1);
-		cg__Lead_File__c leadFile = leadFilesDataFactory.get(0);
-		leadFile.cg__Lead__c = lead.Id;
-		leadFile.cg__Content_Type__c = 'Text';
-		insert leadFilesDataFactory;
 	}
 
 	@IsTest
-	public static void sendDVFormToBestPhysician() {
-		Lead lead = [
+	public static void shouldRevertChapterName() {
+		Account oldChapter = [
 				SELECT Id
+				FROM Account
+				WHERE Name IN ('Make-A-Wish New York')
+		];
+		Lead lead = [
+				SELECT Id, ChapterName__c
 				FROM Lead
 				WHERE Name = 'Jack Smith'
 		];
-		PageReference pageRef = Page.LeadSelectMedEmail_VF;
-		Test.setCurrentPage(pageRef);
-		ApexPages.currentPage().getParameters().put('id', lead.Id);
-		LeadSelectMedEmailController_AC selectLead = new LeadSelectMedEmailController_AC();
-		ApexPages.currentPage().getParameters().put('sendOrRest', 'Reset');
-		selectLead.updateLead();
-		selectLead.GoToLeadViewPage();
+		List<Id> leadIds = new List<Id>();
+		leadIds.add(lead.Id);
+
+		Test.startTest();
+		Map<Id, Lead> leadMap = LeadService.revertChapterNameChange(leadIds);
+		Test.stopTest();
+
+		System.assertEquals(oldChapter.Id, leadMap.get(lead.Id).ChapterName__c);
+		System.assertEquals(oldChapter.Id, leadMap.get(lead.Id).Hidden_Chapter_Change_Confirmation__c);
 	}
 
 	@IsTest
-	public static void shouldNotResetLeadValuesWhenInvalidLead() {
-		Lead invalidLead = [
+	public static void shouldBackupChapterName() {
+		Account newChapter = [
 				SELECT Id
-				FROM Lead
-				WHERE Name = 'Mark Smith'
+				FROM Account
+				WHERE Name IN ('Make-A-Wish Arizona')
 		];
-		PageReference pageRef = Page.LeadSelectMedEmail_VF;
-		Test.setCurrentPage(pageRef);
-		ApexPages.currentPage().getParameters().put('id', invalidLead.Id);
-		LeadSelectMedEmailController_AC selectLead = new LeadSelectMedEmailController_AC();
-		selectLead.resetDVValues();
-		System.assert(!selectLead.success);
+		Lead lead = [
+				SELECT Id, ChapterName__c
+				FROM Lead
+				WHERE Name = 'Jack Smith'
+		];
+		List<Id> leadIds = new List<Id>();
+		leadIds.add(lead.Id);
+
+		Test.startTest();
+		Map<Id, Lead> leadMap = LeadService.backupChapterNameChange(leadIds);
+		Test.stopTest();
+
+		System.assertEquals(newChapter.Id, leadMap.get(lead.Id).Hidden_Chapter_Change_Confirmation__c);
+	}
+
+	@IsTest
+	public static void shouldResetLeadFields() {
+		Lead lead = [
+				SELECT Id, ChapterName__c
+				FROM Lead
+				WHERE Name = 'Jack Smith'
+		];
+
+		Test.startTest();
+		Lead updatedLead = LeadService.resetLead(lead.Id);
+		Test.stopTest();
+
+		System.assertEquals(Constant_AC.LEAD_STATUS_REFERRED, updatedLead.Status);
 	}
 }
