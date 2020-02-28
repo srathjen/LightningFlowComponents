@@ -6,8 +6,6 @@
 @IsTest
 public class LeadFileServiceTest {
 
-	private final static Id CHAPTER_RECORD_TYPE_ID = Constant_AC.CHAPTER_RT_ID;
-
 	@TestSetup
 	public static void setup() {
 		List<cg__Lead_File__c> leadFilesDataFactory = TestDataFactory.createLeadFile(1);
@@ -23,7 +21,9 @@ public class LeadFileServiceTest {
 				FROM cg__Lead_File__c
 				WHERE cg__Description__c = 'Attachment01'
 		];
-		List<Id> leadFileIds = new List<Id>{leadFile.Id};
+		List<Id> leadFileIds = new List<Id>{
+				leadFile.Id
+		};
 
 		Test.startTest();
 		Map<Id, Database.DeleteResult> mapDeleteResults = LeadFileService.deleteById(leadFileIds);

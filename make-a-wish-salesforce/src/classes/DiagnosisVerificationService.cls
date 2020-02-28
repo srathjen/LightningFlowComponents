@@ -10,13 +10,10 @@ public class DiagnosisVerificationService {
 	 * @param leadId
 	 */
 	public static void deleteByLeadId(Id leadId){
-		List<Diagnosis_Verification__c> diagnosisVerifications = [
+		delete [
 				SELECT Id
 				FROM Diagnosis_Verification__c
 				WHERE Lead__c = :leadId
 		];
-		if(!diagnosisVerifications.isEmpty()){
-			delete diagnosisVerifications;
-		}
 	}
 }

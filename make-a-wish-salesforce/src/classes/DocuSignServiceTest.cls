@@ -18,9 +18,11 @@ public class DocuSignServiceTest {
 		account2.Name = 'Make-A-Wish New York';
 		account2.RecordTypeId = CHAPTER_RECORD_TYPE_ID;
 		insert accounts;
+
 		List<ICD_Codes__c> icdCodesDataFactory = TestDataFactory.createIcdCode(1);
 		ICD_Codes__c icdCode = icdCodesDataFactory.get(0);
 		insert icdCode;
+
 		List<Lead> leadsDataFactory = TestDataFactory.createLead(1);
 		Lead lead = leadsDataFactory.get(0);
 		lead.ChapterName__c = accounts[0].Id;
@@ -32,10 +34,12 @@ public class DocuSignServiceTest {
 		lead.PD_ICD_Code__c = icdCode.Id;
 		lead.Company = 'MAWA';
 		insert lead;
+
 		List<dsfs__DocuSign_Status__c> docuSignStatuses = TestDataFactory.createDocusignStatus(1);
 		dsfs__DocuSign_Status__c docuSignStatus = docuSignStatuses.get(0);
 		docuSignStatus.dsfs__Lead__c = lead.Id;
 		insert docuSignStatuses;
+
 		List<Attachment> attachments = TestDataFactory.createAttachments(1, docuSignStatus.Id);
 		Attachment attachment = attachments.get(0);
 		attachment.ContentType = 'Text';

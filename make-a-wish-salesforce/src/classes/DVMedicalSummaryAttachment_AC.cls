@@ -18,11 +18,11 @@ public class DVMedicalSummaryAttachment_AC {
 		newAttachment = new Attachment();
 		recId = ApexPages.currentPage().getParameters().get('id');
 		if (ApexPages.currentPage().getParameters().get('saved') != null
-                && ApexPages.currentPage().getParameters().get('saved') == 'true') {
+				&& ApexPages.currentPage().getParameters().get('saved') == 'true') {
 			isSaved = true;
 		}
 		if (ApexPages.currentPage().getParameters().get('deleted') != null
-                && ApexPages.currentPage().getParameters().get('deleted') == 'true') {
+				&& ApexPages.currentPage().getParameters().get('deleted') == 'true') {
 			isDeleted = true;
 		}
 	}
@@ -32,12 +32,11 @@ public class DVMedicalSummaryAttachment_AC {
 	 * @return Lead Files
 	 */
 	public List<cg__Lead_File__c> getAttachments() {
-		List<cg__Lead_File__c> attachmentList = [
-                SELECT Id, cg__Lead__c, File_Path__c, cg__Description__c, cg__File_Name__c
+		return [
+				SELECT Id, cg__Lead__c, File_Path__c, cg__Description__c, cg__File_Name__c
 				FROM cg__Lead_File__c
 				WHERE cg__Lead__c = :recId
 		];
-		return attachmentList;
 	}
 
 	/**

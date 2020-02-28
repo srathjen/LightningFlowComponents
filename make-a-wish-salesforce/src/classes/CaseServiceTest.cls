@@ -12,6 +12,7 @@ public with sharing class CaseServiceTest {
 		Account account1 = accounts.get(0);
 		Account account2 = accounts.get(1);
 		insert accounts;
+
 		List<Contact> contacts = TestDataFactory.createContact(2);
 		Contact contact1 = contacts.get(0);
 		contact1.FirstName = 'Test1';
@@ -22,8 +23,10 @@ public with sharing class CaseServiceTest {
 		contact2.LastName = 'User3';
 		contact2.AccountId = account2.Id;
 		insert contacts;
+
 		List<ICD_Codes__c> icdCodes = TestDataFactory.createIcdCode(1);
 		insert icdCodes;
+
 		List<Lead> leads = TestDataFactory.createLead(1);
 		Lead lead = leads.get(0);
 		lead.ChapterName__c = account2.Id;
@@ -35,6 +38,7 @@ public with sharing class CaseServiceTest {
 		lead.PD_ICD_Code__c = icdCodes.get(0).Id;
 		lead.Company = 'MAW';
 		insert lead;
+
 		List<Case> cases = TestDataFactory.createCase(1);
 		Case wish = cases.get(0);
 		wish.Lead__c = lead.Id;
@@ -159,7 +163,9 @@ public with sharing class CaseServiceTest {
 
 		Test.startTest();
 		CaseService.deleteByLeadIdAndRecordTypeNames(lead.Id,
-				new List<String>{Constant_AC.CASE_RECORD_TYPE_DIAGNOSIS_VERIFICATION_REVIEW});
+				new List<String>{
+						Constant_AC.CASE_RECORD_TYPE_DIAGNOSIS_VERIFICATION_REVIEW
+				});
 		Test.stopTest();
 
 		List<Case> cases = [

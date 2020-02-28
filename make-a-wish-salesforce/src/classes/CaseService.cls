@@ -20,15 +20,12 @@ public with sharing class CaseService {
 	 * @param leadId
 	 * @param caseRecordTypeNames
 	 */
-	public static void deleteByLeadIdAndRecordTypeNames(Id leadId, List<String> caseRecordTypeNames){
-		List<Case> cases = [
+	public static void deleteByLeadIdAndRecordTypeNames(Id leadId, List<String> caseRecordTypeNames) {
+		delete [
 				SELECT Id, Lead__c
 				FROM Case
 				WHERE Lead__c = :leadId
 				AND RecordType.Name IN :caseRecordTypeNames
 		];
-		if (!cases.isEmpty()) {
-			delete cases;
-		}
 	}
 }

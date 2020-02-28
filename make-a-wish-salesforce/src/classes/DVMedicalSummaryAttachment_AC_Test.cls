@@ -26,8 +26,10 @@ public class DVMedicalSummaryAttachment_AC_Test {
         account.Volunteer_Manager__c = currUser.Id;
         account.Alert_for_Unassigned_Wishes__c = 1;
         insert accounts;
+
         List<ICD_Codes__c> icdCodes = TestDataFactory.createIcdCode(1);
         insert icdCodes;
+
         List<Lead> leadsDataFactory = TestDataFactory.createLead(1);
         Lead lead = leadsDataFactory.get(0);
         lead.ChapterName__c = accounts[0].Id;
@@ -37,8 +39,9 @@ public class DVMedicalSummaryAttachment_AC_Test {
         lead.is_Family_Aware_of_Referral__c = 'Yes';
         lead.Diagnosis_Given_By_Referrer__c = 'Test Diagnosis';
         lead.PD_ICD_Code__c = icdCodes[0].Id;
-        lead.Company = 'MAWA';
+        lead.Company = 'MAW';
         insert leadsDataFactory;
+
         List<cg__Lead_File__c> leadFilesDataFactory = TestDataFactory.createLeadFile(1);
         cg__Lead_File__c leadFile = leadFilesDataFactory.get(0);
         leadFile.cg__Lead__c = lead.Id;

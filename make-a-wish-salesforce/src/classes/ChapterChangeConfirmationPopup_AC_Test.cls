@@ -18,9 +18,11 @@ public class ChapterChangeConfirmationPopup_AC_Test {
 		account2.Name = 'Make-A-Wish New York';
 		account2.RecordTypeId = CHAPTER_RECORD_TYPE_ID;
 		insert accounts;
+
 		List<ICD_Codes__c> icdCodesDataFactory = TestDataFactory.createIcdCode(1);
 		ICD_Codes__c icdCode = icdCodesDataFactory.get(0);
 		insert icdCode;
+
 		List<Lead> leadsDataFactory = TestDataFactory.createLead(1);
 		Lead lead = leadsDataFactory.get(0);
 		lead.ChapterName__c = accounts[0].Id;
@@ -80,7 +82,6 @@ public class ChapterChangeConfirmationPopup_AC_Test {
 
 		System.assertEquals(newChapter.Id, hiddenChapterName);
 	}
-
 
 	@IsTest
 	public static void shouldCallClassConstructor() {

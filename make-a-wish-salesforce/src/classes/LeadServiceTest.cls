@@ -18,9 +18,11 @@ public class LeadServiceTest {
 		account2.Name = 'Make-A-Wish New York';
 		account2.RecordTypeId = CHAPTER_RECORD_TYPE_ID;
 		insert accounts;
+
 		List<ICD_Codes__c> icdCodesDataFactory = TestDataFactory.createIcdCode(1);
 		ICD_Codes__c icdCode = icdCodesDataFactory.get(0);
 		insert icdCode;
+
 		List<Lead> leads = TestDataFactory.createLead(2);
 		Lead lead = leads.get(0);
 		lead.ChapterName__c = account1.Id;
