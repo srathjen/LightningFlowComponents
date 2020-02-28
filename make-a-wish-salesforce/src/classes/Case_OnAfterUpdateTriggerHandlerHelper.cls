@@ -13,10 +13,6 @@ public class Case_OnAfterUpdateTriggerHandlerHelper {
     private static final Id wishRecordTypeId = Constant_AC.WISH_RT_ID;
     private static final Id volunteerOppWishRecordTypeId = Constant_AC.WISH_VOLUNTEER_OPPORTUNITY_ID;
     private static final Id chapterRecordTypeId = Constant_AC.CHAPTER_RT_ID;
-//  private static final Id volunteerTaskRT = Constant_AC.VOLUNTEER_TASK_RT_ID;
-//  private static final Id wishGrantTaskRT = Constant_AC.GRANT_CHAPTER_ACTION_RT_ID;
-//  private static final Id determinationChapterActionRT = Constant_AC.DETERMINATION_CHAPTER_ACTION_RT_ID;
-//  static List<Approval.ProcessSubmitRequest> approvalReqList = new List<Approval.ProcessSubmitRequest>();
     static Set<Id> contactIds = new Set<Id>();
     static Map<Id, Contact> contactMap = new Map<Id, Contact>();
 //  static Set<Id> newWishClearanceSet = new Set<Id>();
