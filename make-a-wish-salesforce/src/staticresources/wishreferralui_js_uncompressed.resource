@@ -303,13 +303,13 @@ function resetSelect() {
 function formLogic() {
     var link = '<a href="https://wish.org/local-chapters#sm.000001nnnt2f0tf0tux692bqfeli5" target="_blank">Click here for a local chapter directory</a>',
         familyAwareError = 'Please make sure the family is aware of this referral before you proceed. If you have additional questions please reach out to your local chapter. ',
-        referralDiscussedError = 'We recommend that you discuss potential eligibility with the childâ€™s treating healthcare provider before you proceed.If you have additional questions please reach out to your local chapter.',//SIW-487 : Added error message
+        referralDiscussedError = 'We recommend that you discuss potential eligibility with the child\'s treating healthcare provider before you proceed. If you have additional questions please reach out to your local chapter. ',//SIW-487 : Added error message
 		labels = [' Self', ' Medical Professional', ' Parent/Guardian', ' Family Member/Relative', ' Other'],
         rerender = [' Self', ' Parent/Guardian', ' Family Member/Relative'],
         medicalProviders = ["Nurse Practitioner", "Physician Assistant", "Physician"],
         childAgesEligible = ['2.5', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'],
         fieldClasses = ['firstname', 'lastname', 'phonechk', 'email', 'city', 'state-chk', 'address', 'postalcode', 'family-aware-chk', 'medprovider', 'r2c-manual-input', 'wcgender', 'wcage', 'wcdob', 'wcreceivedwish', 'language', 'siblings-chk', 'icd', 'pdiagnosis', 'facility', 'urgency', 'sibage'],
-        eligibleMsg = 'To be eligible, children must be older than 2Â½ years old and younger than 18 years old.',
+        eligibleMsg = 'To be eligible, children must be older than 2½ years old and younger than 18 years old.',
     guardianPermissionMsg = "Please confirm that you have received your parent or guardians permission to complete this form.";
     // To display error message when no is selected in is family aware input field
     $('.familyAware').on('change', function() {
