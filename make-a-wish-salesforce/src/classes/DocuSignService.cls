@@ -5,6 +5,10 @@
  */
 public class DocuSignService {
 
+	/**
+	 * Delete DocuSign Status and Attachments found by Lead Id
+	 * @param leadId
+	 */
 	public static void deleteByLeadIdAndDeleteRelatedAttachments(Id leadId){
 		Map<Id, dsfs__DocuSign_Status__c> docuSignMap = new Map<Id, dsfs__DocuSign_Status__c>();
 		for (dsfs__DocuSign_Status__c docuSign : [

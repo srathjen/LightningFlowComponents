@@ -46,6 +46,11 @@ public class LeadService {
 		return leadUpdateMap;
 	}
 
+	/**
+	 * Reset Lead fields
+	 * @param leadId
+	 * @return Lead
+	 */
 	public static Lead resetLead(Id leadId) {
 		Lead lead = [
 				SELECT Id,Hidden_Potential_Rush__c,

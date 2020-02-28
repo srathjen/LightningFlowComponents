@@ -15,6 +15,11 @@ public with sharing class CaseService {
 		return Closed_Case_Editing_Security_Settings__c.getInstance().Restrict_Access__c;
 	}
 
+	/**
+	 *  Delete Case found by Lead Id and Record Type Name
+	 * @param leadId
+	 * @param caseRecordTypeNames
+	 */
 	public static void deleteByLeadIdAndRecordTypeNames(Id leadId, List<String> caseRecordTypeNames){
 		List<Case> cases = [
 				SELECT Id, Lead__c

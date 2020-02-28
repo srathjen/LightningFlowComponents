@@ -5,6 +5,10 @@
  */
 public class DiagnosisVerificationService {
 
+	/**
+	 * Delete Diagnosis Verifications found by Lead Id
+	 * @param leadId
+	 */
 	public static void deleteByLeadId(Id leadId){
 		List<Diagnosis_Verification__c> diagnosisVerifications = [
 				SELECT Id

@@ -5,6 +5,11 @@
  */
 public class LeadFileService {
 
+	/**
+	 * Delete Lead File found by Lead Id
+	 * @param leadFileIds
+	 * @return map of Delete Results
+	 */
 	public static Map<Id, Database.DeleteResult> deleteById(List<Id> leadFileIds) {
 		List<cg__Lead_File__c> leadFiles = [
 				SELECT Id
@@ -19,6 +24,10 @@ public class LeadFileService {
 		return mapDeleteResults;
 	}
 
+	/**
+	 * Delete Non Folder Lead Files found by Lead Id
+	 * @param leadId
+	 */
 	public static void deleteNonFolderByLeadId(Id leadId){
 		List<cg__Lead_File__c> leadFiles = [
 				SELECT Id

@@ -36,7 +36,9 @@ public class LeadSelectMedEmailController_AC {
 		];
 	}
 
-	//Update the Lead medical professional type.
+	/**
+	 * Update Lead medical professional type
+	 */
 	public void updateLead() {
 		try {
 			URLToRedirect = Label.Instance_Url + '/' + currLead.Id;
@@ -66,6 +68,9 @@ public class LeadSelectMedEmailController_AC {
 		}
 	}
 
+	/**
+	 * Reset Lead fields and delete Diagnosis Verifications, Case, DocusSignStatus with Attachments and Lead Files
+	 */
 	 public void resetDVValues() {
 		try {
 			LeadService.resetLead(currLead.Id);
@@ -86,7 +91,10 @@ public class LeadSelectMedEmailController_AC {
 		}
 	}
 
-	//Go to the lead detail page.
+	/**
+	 * Redirect to Lead detail page.
+	 * @return Page Reference
+	 */
 	public PageReference GoToLeadViewPage() {
 		PageReference page = new PageReference('/' + currLead.Id);
 		return page;

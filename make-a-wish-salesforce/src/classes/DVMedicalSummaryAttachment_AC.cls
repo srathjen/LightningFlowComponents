@@ -27,7 +27,10 @@ public class DVMedicalSummaryAttachment_AC {
 		}
 	}
 
-	//Used to display medical summary attachment to diagnosis verification form
+	/**
+	 * Display medical summary attachment to diagnosis verification form
+	 * @return Lead Files
+	 */
 	public List<cg__Lead_File__c> getAttachments() {
 		List<cg__Lead_File__c> attachmentList = [
                 SELECT Id, cg__Lead__c, File_Path__c, cg__Description__c, cg__File_Name__c
@@ -37,7 +40,10 @@ public class DVMedicalSummaryAttachment_AC {
 		return attachmentList;
 	}
 
-	//Used to save new attachment theat attached from diagnosis verification form
+	/**
+	 * Save new attachment from diagnosis verification form
+	 * @return Page Reference
+	 */
 	public PageReference save() {
 		if (newAttachment.Body != null) {
 			newAttachment.ParentId = recId;
@@ -49,11 +55,16 @@ public class DVMedicalSummaryAttachment_AC {
 		return redirect;
 	}
 
-	//Used to refresh the block
+	/**
+	 * Used to refresh the block
+	 */
 	public void Refresh() {
 	}
 
-	//Used to delete the attachment from diagnosis verification form
+	/**
+	 * Delete Lead File
+	 * @return Page Reference
+	 */
 	public PageReference removeAttachment() {
 		List<Id> leadFilesToDelete = new List<Id>();
 		leadFilesToDelete.add(attachmentId);
