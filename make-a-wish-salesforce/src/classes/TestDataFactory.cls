@@ -300,4 +300,15 @@ public class TestDataFactory {
 		}
 		return diagnosisVerifications;
 	}
+
+	public static List<cg__Lead_File__c> createLeadFile(Integer num) {
+		List<cg__Lead_File__c> leadFiles = new List<cg__Lead_File__c>();
+		for (Integer i = 0; i < num; i++) {
+			cg__Lead_File__c leadFile = new cg__Lead_File__c();
+			leadFile.cg__File_Name__c = 'MedicalSummary.txt';
+			leadFile.cg__Content_Type__c = 'text/plain';
+			leadFiles.add(leadFile);
+		}
+		return leadFiles;
+	}
 }
