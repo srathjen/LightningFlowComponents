@@ -16,49 +16,46 @@ Modification Log:
 2. 04/02/2020 - Manoj      - SIW-379 : Mapped 'Travel_Restriction__c' field in lead records based on user selection.
 *******************************************************************************************************************/
 public class DiagnosisVerification_AC {
-    private transient Map<String, List<Medical_Questions__c>> condDesMedicalQuestionMap;
-    public list<DiagnosisWrapper> diagnosisVerificationWrapperLst { get; set; }
-    public TravelAlgorithmWrapper travelAlgorithmWrapperIns { get; set; }
-    public WishChildWrapper wishChildWrapperIns { get; set; }
-    private transient Map<Id, Medical_Questions__c> medicalQuestionMap;
-    //public String currentCondition {get; set;}
-    public Lead currlead { get; set; }
-    public string pluHypTxt { get; set; }
-    private String leadId;
-    private Set<String> uniqueCurrentConditionSet;
-    public DiagnosisWrapper wrapCls { get; set; }
-    private String icdOrPcd;
     private Integer diagnosisBlockNum;
-    private String medicalResponse;
-    public boolean showAddAnotherDiagnosisBtn { get; set; }
-    public String otherDiagnosisBlock { get; set; }
-    public String wishStatus { get; set; }
+    private String leadId, icdOrPcd, medicalResponse;
+    private Set<String> uniqueCurrentConditionSet;
     private List<Diagnosis_Verification__c> diagnosisVerificationLst;
-    private Map<String, String> travelVal;
-    private Map<String, String> travelLabel;
+    private Map<String, String> travelVal, travelLabel, travelAlgorithmMap;
+
     private transient Map<String, String> travelMap;
-    private Map<String, String> travelAlgorithmMap;
+    private transient Map<Id, Medical_Questions__c> medicalQuestionMap;
+    private transient Map<String, List<Medical_Questions__c>> condDesMedicalQuestionMap;
+
+    public String pluHypTxt { get; set; }
+    public String wishStatus { get; set; }
+    public String otherDiagnosisBlock { get; set; }
+    public Boolean showAddAnotherDiagnosisBtn { get; set; }
+    public Lead currlead { get; set; }
+    public DiagnosisWrapper wrapCls { get; set; }
+    public WishChildWrapper wishChildWrapperIns { get; set; }
+    public TravelAlgorithmWrapper travelAlgorithmWrapperIns { get; set; }
+    public List<DiagnosisWrapper> diagnosisVerificationWrapperLst { get; set; }
+
     public DiagnosisVerification_AC() {
         pluHypTxt = '';
-        wishChildWrapperIns = new WishChildWrapper();
-        uniqueCurrentConditionSet = new Set<String>();
-        wishChildWrapperIns.login = false;
         wishStatus = null;
-        wrapCls = new DiagnosisWrapper();
         currlead = new Lead();
+        uniqueCurrentConditionSet = new Set<String>();
+        wrapCls = new DiagnosisWrapper();
+        wishChildWrapperIns = new WishChildWrapper();
+        wishChildWrapperIns.login = false;
+
         leadId = ApexPages.currentPage().getParameters().get('leadId');
-        if (leadId != Null && leadId.length() > 0) {
+        if (leadId != null && leadId.length() > 0) {
             loadData();
         }
-
     }
 
-    //Used to fill Child Information, Medical Professional Information & Diagnosis Information when the form is loaded
+    /*
+     * @description     Fill in Child Information, Medical Professional Information & Diagnosis Information
+     *                  when the form is loaded.
+     */
     public void loadData() {
-        String LogValue;
-        String recId;
-        List<string> LstLog = new List<string>();
-        // try{
         medicalQuestionMap = new Map<Id, Medical_Questions__c>();
         condDesMedicalQuestionMap = new Map<String, List<Medical_Questions__c>>();
         diagnosisVerificationWrapperLst = new list<DiagnosisWrapper>();
@@ -70,210 +67,66 @@ public class DiagnosisVerification_AC {
         travelAlgorithmMap = new Map<String, String>();
         travelAlgorithmWrapperIns.travelSet = new Set<String>();
 
-        String query = 'SELECT FirstName,Provided_additional_information__c,Hidden_Proto_Pulmonary_Hypertension__c,Diagnosis_Given_By_Referrer__c, ICD_Given_By_Referrer__c, ICD_Given_By_Referrer__r.Name, RFI_Form_Info_Hidden__c, Override_Dupe_Check__c, isConverted, Please_Explain_Deteriorate__c, LastName ,Email, Phone, Name, id, ';
-        for (Schema.FieldSetMember currField : getPartAFields()) {
-            query += currField.getFieldPath() + ',';
-        }
-        query = query.removeEnd(',');
-        query += ' FROM Lead WHERE Id =:leadId LIMIT 50000';
-        currLead = Database.query(query);
-        LstLog.add(string.valueOf(currLead));
-
-        wishChildWrapperIns.additionalInfo = currLead.Provided_additional_information__c;
+        currlead = getCurrLead(leadId);
         currLead.Current_Condition_Label__c = currLead.Travel_algorithm__c;
-        wishChildWrapperIns.medProfTypeHid = currLead.Hidden_DV_form_Medical_professional_Type__c;
-        wishChildWrapperIns.stillEligibile = currLead.Why_do_you_feel_would_be_eligible_Wish__c;
-        wishChildWrapperIns.treatingFName = currLead.Treating_Medical_Professional_First_Name__c;
-        wishChildWrapperIns.treatingLName = currLead.Treating_Medical_Professional_Last_Name__c;
-        wishChildWrapperIns.treatingPhone = currLead.Treating_Medical_Professional_Phone__c;
-        wishChildWrapperIns.treatingEmail = currLead.Treating_Medical_Professional_Email__c;
-        wishChildWrapperIns.treatingHospital = currLead.Hospital_Treatment_Facility_Treating__c;
+
         wishStatus = currLead.RFI_Form_Info_Hidden__c;
-        wishChildWrapperIns.recognizationPickValSelected = currLead.I_am_Recognized_To_Practice_As_a__c;
-        wishChildWrapperIns.healthCareWork = currLead.I_m_Part_of_The_Treating_HealthCare_Team__c;
-        wishChildWrapperIns.vegetativeState = currLead.Is_in_a_Comatose_Vegetative_State__c;
-        wishChildWrapperIns.explainDeteriorate = currLead.Please_Explain_Deteriorate__c;
-        //wishChildWrapperIns.expediteTheProcess = currLead.Is_We_Need_To_Expedite_The_Process__c;//Commented as per IME-107
-        wishChildWrapperIns.expediteTheProcess = currLead.Any_medical_reason_for_moving_quickly__c;//Added as per IME-107
-        wishChildWrapperIns.conditioDeteriorate = currLead.Will_Child_s_Condition_Deteriorate__c;
-        wishChildWrapperIns.wishChildEligibilityNotes = currLead.Why_do_you_feel_would_be_eligible_Wish__c;
-        wishChildWrapperIns.plzExplain = currLead.Please_Explain__c;
-        wishChildWrapperIns.bestPhyFname = currLead.Best_Contact_for_Physician_First_Name__c;
-        wishChildWrapperIns.bestPhyLname = currLead.Best_Contact_for_Physician_Last_Name__c;
-        wishChildWrapperIns.bestPhyEmail = currLead.Best_contact_for_Physician_Email__c;
-        wishChildWrapperIns.alt1MedFname = currLead.Alternate1MedProfessionalFirstName__c;
-        wishChildWrapperIns.alt1MedLname = currLead.Alternate1MedProfessionalLastName__c;
-        wishChildWrapperIns.alt1MedEmail = currLead.Alternate1MedicalProfessionalEmail__c;
-        wishChildWrapperIns.alt1MedPhone = currLead.Alternate1MedProfessionalPhone__c;
-        wishChildWrapperIns.alt1MedHosp = currLead.Alternate1HospitalTreatmentFacility__c;
-        wishChildWrapperIns.alt2MedFname = currLead.Alternate2MedProfessionalFirstName__c;
-        wishChildWrapperIns.alt2MedLname = currLead.Alternate2MedProfessionalLastName__c;
-        wishChildWrapperIns.alt2MedEmail = currLead.Alternate2MedProfessionalEmail__c;
-        wishChildWrapperIns.alt2MedPhone = currLead.Alternate2MedProfessionalPhone__c;
-        wishChildWrapperIns.alt2MedHosp = currLead.Alternate2HospitalTreatmentFacility__c;  
-        //SIW-287 Start : Mapping fields value
-            wishChildWrapperIns.unplannedHospitalAdmission = currLead.Unplanned_hospital_admissions__c;
-            wishChildWrapperIns.numberOfHospitalAdmission =  Integer.valueOf(currLead.Number_hospital_admissions__c);
-            wishChildWrapperIns.admittingDiagnosis = currLead.Admitting_diagnosis__c;
-            wishChildWrapperIns.ifICUAdmission = currLead.ICU_Admissions__c;
-            //SIW-287 End
-        if (currLead.Child_will_ultimately_die_prematurely__c == true) {
-            wishChildWrapperIns.describePatient = '1';
-        } else if (currLead.Treatment_may_be_feasible_but_can_fail__c == true) {
-            wishChildWrapperIns.describePatient = '2';
-        } else if (currLead.Treatment_may_prolong_normal_activities__c == true) {
-            wishChildWrapperIns.describePatient = '3';
-        } else if (currLead.Debilitation_may_extend_over_many_years__c == true) {
-            wishChildWrapperIns.describePatient = '4';
-        } else if (currLead.Increased_probability_of_premature_death__c == true) {
-            wishChildWrapperIns.describePatient = '5';
-        } else if (currLead.Risk_of_complications_premature_death__c == true) {
-            wishChildWrapperIns.describePatient = '6';
-        } else if (currLead.Responds_to_treatment_with_normal_health__c == true) {
-            wishChildWrapperIns.describePatient = '7';
-        } else if (currLead.None_of_these_statements_describes_Child__c == true) {
-            wishChildWrapperIns.describePatient = '8';
-        }
-        if (currLead.Communication__c != null || String.isNotBlank(currLead.Communication__c)) {
-            for (String com : currLead.Communication__c.split(';')) {
-                wishChildWrapperIns.communicationList.add(com);
-            }
-        }
-        LstLog.add(string.valueOf(wishChildWrapperIns));
-        for (Medical_Questions__c medicalQuestions : [
-                SELECT ID,Condition_Description__c,Condition_Description__r.Name,Current_Condition__c,Data_Type__c,Epilepsy_picklist__c,Picklist_values__c,Question__c,Recommendation_to_Chapter__c,Sort_Order__c,Wrapper_Variable__c
-                FROM Medical_Questions__c
-                order by Sort_Order__c ASC
-                LIMIT 50000
-        ]) {
-            LstLog.add(String.valueOf(medicalQuestions));
-            if (medicalQuestions.Question__c != null) {
-                medicalQuestions.Question__c = medicalQuestions.Question__c.replace('[child\'s name]', ' ' + currLead.FirstName + ' ' + currLead.LastName).replace(' (child\'s name) ', currLead.FirstName + ' ' + currLead.LastName).replace('[Insert child\'s name]', currLead.FirstName + ' ' + currLead.LastName);
+
+        populateWishChildWrapper();
+
+        List<Medical_Questions__c> medicalQuestions = getMedicalQuestions();
+        for (Medical_Questions__c medicalQuestion : medicalQuestions) {
+            if (medicalQuestion.Question__c != null) {
+                medicalQuestion.Question__c = medicalQuestion.Question__c.replace('[child\'s name]', ' ' + currLead.FirstName + ' ' + currLead.LastName).replace(' (child\'s name) ', currLead.FirstName + ' ' + currLead.LastName).replace('[Insert child\'s name]', currLead.FirstName + ' ' + currLead.LastName);
             } else {
-                travelAlgorithmMap.put(medicalQuestions.Current_Condition__c, medicalQuestions.Recommendation_to_Chapter__c);
+                travelAlgorithmMap.put(medicalQuestion.Current_Condition__c, medicalQuestion.Recommendation_to_Chapter__c);
             }
-            medicalQuestionMap.put(medicalQuestions.id, medicalQuestions);
-            if (medicalQuestions.Condition_Description__c != Null) {
-                if (condDesMedicalQuestionMap.containsKey(medicalQuestions.Condition_Description__c)) {
-                    condDesMedicalQuestionMap.get(medicalQuestions.Condition_Description__c).add(medicalQuestions);
+
+            medicalQuestionMap.put(medicalQuestion.Id, medicalQuestion);
+
+            if (medicalQuestion.Condition_Description__c != null) {
+                if (condDesMedicalQuestionMap.containsKey(medicalQuestion.Condition_Description__c)) {
+                    condDesMedicalQuestionMap.get(medicalQuestion.Condition_Description__c).add(medicalQuestion);
                 } else {
-                    condDesMedicalQuestionMap.put(medicalQuestions.Condition_Description__c, new List<Medical_Questions__c>{
-                            medicalQuestions
-                    });
+                    condDesMedicalQuestionMap.put(medicalQuestion.Condition_Description__c, new List<Medical_Questions__c>{medicalQuestion});
                 }
             }
         }
 
-        //Wrapping the Diagnosis Verification records and Medical Questions of the lead to the DiagnosisWrapper
-        diagnosisVerificationLst = new List<Diagnosis_Verification__c>();
-        // SIW-235 diagnosisVerificationLst = [SELECT id,Group1__c,ICD_Code__c,Lead__c,Primary_Diagnosis__c,PCD_ICD__c,Order__c,Short_Description__c,Condition_Description__c,isEligible__c,(SELECT  Medical_Question__c,Epilepsy_Value__c,Medical_Question_Answer__c,isEligible__c,Comment__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c = :leadId order by Order__c LIMIT 50000];
-        diagnosisVerificationLst = [
-                SELECT id,Group1__c,ICD_Code__c,Lead__c,Primary_Diagnosis__c, PCD_ICD__c,Order__c,Short_Description__c,Condition_Description__c,Condition_Description__r.Name,isEligible__c, (
-                        SELECT Medical_Question__c,Epilepsy_Value__c,Medical_Question_Answer__c,isEligible__c,Comment__c
-                        FROM DiagnosisMedicalQuestions__r
-                )
-                FROM Diagnosis_Verification__c
-                WHERE Lead__c = :leadId
-                order by Order__c
-                LIMIT 50000
-        ];
-        if (diagnosisVerificationLst.size() > 0) {
-            for (Diagnosis_Verification__c buildWrapper : diagnosisVerificationLst) {
-                DiagnosisWrapper diagonsisWrapper = new DiagnosisWrapper();
-                diagonsisWrapper.icdCode = buildWrapper.ICD_Code__c;
-                //diagonsisWrapper.icdCode = buildWrapper.ICD_Code__r.Name;
-                diagonsisWrapper.pcdOrIcd = buildWrapper.PCD_ICD__c;
-                diagonsisWrapper.isGroup1Rec = buildWrapper.Group1__c;
-                if (buildWrapper.PCD_ICD__c == 'ICD') {
-                    diagonsisWrapper.valueSelectedICD = 'value-selected';
-                    // diagonsisWrapper.valueSelectedPCD = 'value-selected';
-                } else if (buildWrapper.PCD_ICD__c == 'PCD') {
-                    diagonsisWrapper.valueSelectedPCD = 'value-selected';
-                }
-                diagonsisWrapper.shortDescription = buildWrapper.Short_Description__c;
-                diagonsisWrapper.isEligible = buildWrapper.isEligible__c;
-                // SIW-235 diagonsisWrapper.conditionDescription = buildWrapper.Primary_Diagnosis__c;
-                diagonsisWrapper.conditionDescription = (String) buildWrapper.Condition_Description__r.Name;
-                diagonsisWrapper.conditionDescriptionObject = (String) buildWrapper.Condition_Description__c;
-                Map<Id, DiagnosisMedicalQuestions__c> diagnosisQuestionMap = new Map<Id, DiagnosisMedicalQuestions__c>();
-                if (buildWrapper.DiagnosisMedicalQuestions__r.size() > 0) {
-                    for (DiagnosisMedicalQuestions__c currDiagnosisMedicalQuestion : buildWrapper.DiagnosisMedicalQuestions__r) {
-                        diagnosisQuestionMap.put(currDiagnosisMedicalQuestion.Medical_Question__c, currDiagnosisMedicalQuestion);
-                    }
-                }
-                if (condDesMedicalQuestionMap.containsKey(buildWrapper.Condition_Description__c)) {
-                    for (Medical_Questions__c currMedicalQuestion : condDesMedicalQuestionMap.get(buildWrapper.Condition_Description__c)) {
-                        DiagnosisWrapper.MedicalWrapper medicalWrapperItem = new DiagnosisWrapper.MedicalWrapper();
-                        medicalWrapperItem.medicalQuestion = currMedicalQuestion;
-                        if (diagnosisQuestionMap.containsKey(currMedicalQuestion.id)) {
-                            medicalWrapperItem.isEligible = diagnosisQuestionMap.get(currMedicalQuestion.id).isEligible__c;
-                        }
+        // wrapping the Diagnosis Verification records and Medical Questions of the Lead to the DiagnosisWrapper
+        diagnosisVerificationLst = getDiagnosisVerifications(leadId);
 
-                        if (currMedicalQuestion.Picklist_values__c != null) {
-                            List<SelectOption> pickVals = new List<SelectOption>();
-                            pickVals.add(new SelectOption('', 'Please Select'));
-                            for (String currString : currMedicalQuestion.Picklist_values__c.split(',')) {
-                                pickVals.add(new SelectOption(currString, currString));
-                            }
-                            medicalWrapperItem.pickVals = pickVals;
-                            if (diagnosisQuestionMap.containsKey(currMedicalQuestion.id)) {
-                                medicalWrapperItem.selectedPickVal = diagnosisQuestionMap.get(currMedicalQuestion.id).Medical_Question_Answer__c;
-                            }
-                        }
-                        if (currMedicalQuestion.Epilepsy_picklist__c != null) {
-                            List<SelectOption> epilepsyPickVals = new List<SelectOption>();
-                            epilepsyPickVals.add(new SelectOption('', 'Please Select'));
-                            for (String currString : currMedicalQuestion.Epilepsy_picklist__c.split(',')) {
-                                epilepsyPickVals.add(new SelectOption(currString, currString));
-                            }
-                            medicalWrapperItem.epilepsyPickVals = epilepsyPickVals;
-                            if (diagnosisQuestionMap.containsKey(currMedicalQuestion.id) && diagnosisQuestionMap.get(currMedicalQuestion.id).Epilepsy_Value__c != Null) {
-                                medicalWrapperItem.epilepsySelectedPickVal = diagnosisQuestionMap.get(currMedicalQuestion.id).Epilepsy_Value__c;
-                            }
-                        }
-                        if (currMedicalQuestion.Data_Type__c == 'Comment box') {
-                            if (diagnosisQuestionMap.containsKey(currMedicalQuestion.id)) {
-                                medicalWrapperItem.reasonForNeed = diagnosisQuestionMap.get(currMedicalQuestion.id).comment__c;
-                            }
+        populateDiagnosisVerificationWrappers();
 
-                        }
-                        diagonsisWrapper.medicalWrapperList.add(medicalWrapperItem);
-                    }
-                }
-                diagnosisVerificationWrapperLst.add(diagonsisWrapper);
-            }
-            Integer lastElement = diagnosisVerificationWrapperLst.size();
-            if (wishStatus != 'Qualified' && diagnosisVerificationWrapperLst.size() < 5 && (diagnosisVerificationWrapperLst[lastelement - 1].iCDCode != Null || diagnosisVerificationWrapperLst[lastelement - 1].conditionDescription != Null) && diagnosisVerificationWrapperLst[lastelement - 1].medicalWrapperList.size() == diagnosisVerificationLst[lastelement - 1].DiagnosisMedicalQuestions__r.size()) {
-                showAddAnotherDiagnosisBtn = true;
-            }
-        } else {
-            diagnosisVerificationWrapperLst.add(new DiagnosisWrapper());
+        Integer lastElement = diagnosisVerificationWrapperLst.size();
+        if (wishStatus != 'Qualified' && diagnosisVerificationWrapperLst.size() < 5 && (diagnosisVerificationWrapperLst[lastelement - 1].iCDCode != Null || diagnosisVerificationWrapperLst[lastelement - 1].conditionDescription != Null) && diagnosisVerificationWrapperLst[lastelement - 1].medicalWrapperList.size() == diagnosisVerificationLst[lastelement - 1].DiagnosisMedicalQuestions__r.size()) {
+            showAddAnotherDiagnosisBtn = true;
         }
 
-        //Travel Algorithm
-        Id algorithmRecordTypeId = Constant_AC.TRAVEL_ALGM_RT_ID;
-        for (Medical_Questions__c currRec : [
-                SELECT Current_Condition__c,Recommendation_to_Chapter__c,Wrapper_Variable__c
-                FROM Medical_Questions__c
-                WHERE RecordtypeId = :algorithmRecordTypeId
-                LIMIT 50000
-        ]) {
-            if (currRec.Wrapper_Variable__c != Null) {
-                travelLabel.put(currRec.Wrapper_Variable__c, currRec.Current_Condition__c);
-                travelVal.put(currRec.Wrapper_Variable__c, currRec.Recommendation_to_Chapter__c);
+        // travel algorithm
+        for (Medical_Questions__c medicalQuestion : medicalQuestions) {
+            if (medicalQuestion.RecordTypeId != Constant_AC.TRAVEL_ALGM_RT_ID) {
+                continue;
             }
-            if (currRec.Current_Condition__c != Null)
-                travelMap.put(currRec.Current_Condition__c, currRec.Wrapper_Variable__c);
+
+            if (medicalQuestion.Wrapper_Variable__c != null) {
+                travelLabel.put(medicalQuestion.Wrapper_Variable__c, medicalQuestion.Current_Condition__c);
+                travelVal.put(medicalQuestion.Wrapper_Variable__c, medicalQuestion.Recommendation_to_Chapter__c);
+            }
+
+            if (medicalQuestion.Current_Condition__c != null) {
+                travelMap.put(medicalQuestion.Current_Condition__c, medicalQuestion.Wrapper_Variable__c);
+            }
         }
 
-        String jsonString = json.serialize(travelAlgorithmWrapperIns);
+        String jsonString = JSON.serialize(travelAlgorithmWrapperIns);
         Map<String, Object> wrapClsMap = new Map<String, Object>();
-        wrapClsMap = (Map<String, Object>) json.deserializeuntyped(jsonString);
-        if (currLead.Pulmonary_Hypertension__c != Null) {
+        wrapClsMap = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
+        if (currLead.Pulmonary_Hypertension__c != null) {
             pluHypTxt = currLead.Pulmonary_Hypertension__c;
         }
 
-        if (currLead.Travel_algorithm__c != Null) {
+        if (currLead.Travel_algorithm__c != null) {
             for (String currVal : (currLead.Travel_algorithm__c.split(';'))) {
                 if (travelMap.containsKey(currVal)) {
                     String fieldName = travelMap.get(currVal);
@@ -282,60 +135,15 @@ public class DiagnosisVerification_AC {
                     }
                 }
             }
-            String jsonStringLoad = json.serialize(wrapClsMap);
-            travelAlgorithmWrapperIns = (travelAlgorithmWrapper) json.deserialize(jsonStringLoad, travelAlgorithmWrapper.class);
-        }
-        if (currLead.Chronic_Hepatitis__c != Null)
-            travelAlgorithmWrapperIns.chronicHepatitisString = currLead.Chronic_Hepatitis__c;
 
-        if (currLead.Strokes__c != Null)
-            travelAlgorithmWrapperIns.strokesType = currLead.Strokes__c;
+            String jsonStringLoad = JSON.serialize(wrapClsMap);
+            travelAlgorithmWrapperIns = (TravelAlgorithmWrapper) JSON.deserialize(jsonStringLoad, TravelAlgorithmWrapper.class);
+        }
 
-        if (currLead.Hidden_Proto_Pulmonary_Hypertension__c != Null) {
-            travelAlgorithmWrapperIns.pulmonaryHypertensionString = currLead.Hidden_Proto_Pulmonary_Hypertension__c;
-        }
-        if (currLead.Convulsive_Disorders__c != Null) {
-            for (String currVal : currLead.Convulsive_Disorders__c.split(';')) {
-                travelAlgorithmWrapperIns.convulsiveDisorders.add(currVal);
-            }
-        }
-        if (currLead.Congenital_Heart_Disease__c != Null) {
-            for (String currVal : currLead.Congenital_Heart_Disease__c.split(';')) {
-                travelAlgorithmWrapperIns.congenitalHeartDiseaseString.add(currVal);
-            }
-        }
-        if (currLead.Chronic_Heart_Failure__c != Null) {
-            for (String currVal : currLead.Chronic_Heart_Failure__c.split(';')) {
-                travelAlgorithmWrapperIns.chronicHeartFailureString.add(currVal);
-            }
-        }
-        if (currLead.Heart_Failure__c != Null) {
-            for (String currVal : currLead.Heart_Failure__c.split(';')) {
-                travelAlgorithmWrapperIns.heartFailureString.add(currVal);
-            }
-        }
-        if (currLead.Arrhythmia__c != Null) {
-            for (String currVal : currLead.Arrhythmia__c.split(';')) {
-                travelAlgorithmWrapperIns.ArrhythmiaString.add(currVal);
-            }
-        }
-        if (currLead.Ventilator__c != Null) {
-            travelAlgorithmWrapperIns.ventilatorText = currLead.Ventilator__c;
-        }
-        if (currLead.Angina__c != Null) {
-            for (String currVal : currLead.Angina__c.split(';')) {
-                travelAlgorithmWrapperIns.anginaString.add(currVal);
-            }
-        }
-        if (currLead.Lung_Disease__c != Null) {
-            for (String currVal : currLead.Lung_Disease__c.split(';')) {
-                travelAlgorithmWrapperIns.lungDiseaseString.add(currVal);
-            }
-        }
-        LstLog.add(string.valueOf(currLead));
+        populateTravelAlgorithmWrapper();
     }
 
-    //Used to clear the diagnosis information for removed block
+    // used to clear the diagnosis information for removed block
     public void ResetDiagnosis() {
         diagnosisBlockNum = Integer.valueOf(ApexPages.currentPage().getParameters().get('diagnosisBlockNum'));
 
@@ -365,14 +173,11 @@ public class DiagnosisVerification_AC {
 
     //Used to remove Diagnosis Block
     public void RemoveDiagnosisBlock() {
-        String LogValue;
-        String recId;
-        //  try{
         diagnosisBlockNum = Integer.valueOf(ApexPages.currentPage().getParameters().get('diagnosisBlockNum')); // Used to hold the Diagnosis block number
         List<Diagnosis_Verification__c> removeDiagnosisVerificationList = [
-                SELECT Id, Order__c
-                FROM Diagnosis_Verification__c
-                WHERE Order__c = :diagnosisBlockNum
+            SELECT Id, Order__c
+            FROM Diagnosis_Verification__c
+            WHERE Order__c = :diagnosisBlockNum
         ];
 
         diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = Null;
@@ -387,11 +192,11 @@ public class DiagnosisVerification_AC {
         if (diagnosisVerificationWrapperLst.size() < 5 && (diagnosisVerificationWrapperLst[diagnosisBlockNum - 1].icdCode.length() > 0 || diagnosisVerificationWrapperLst[diagnosisBlockNum - 1].conditionDescription.length() > 0)) {
             showAddAnotherDiagnosisBtn = true;
         }
-        setWishStatus();
 
+        setWishStatus();
     }
 
-    //Used to add another diagnosis block
+    // Used to add another diagnosis block
     public void addDiagnosisVerification() {
         if (diagnosisVerificationWrapperLst.size() < 5) {
             diagnosisVerificationWrapperLst.add(new DiagnosisWrapper());
@@ -407,7 +212,6 @@ public class DiagnosisVerification_AC {
         String LogValue;
         String recId;
         try {
-            //List<ICD_Codes__c> icdCodes = Database.query('SELECT Id, Name,Condition_Description__c, Condition_Description__r.Name, Short_Description__c FROM ICD_Codes__c WHERE Name LIKE \'%' + String.escapeSingleQuotes(searchTerm) + '%\' AND Hidden_ICD_Code__c = false LIMIT 50000');
             List<ICD_Codes__c> icdCodes = Database.query('SELECT Id, Name,Condition_Description__c, Condition_Description__r.InActive__c, Condition_Description__r.Name, Short_Description__c FROM ICD_Codes__c WHERE Condition_Description__r.InActive__c != true and Name LIKE \'%' + String.escapeSingleQuotes(searchTerm) + '%\' AND Hidden_ICD_Code__c = false LIMIT 50000');
             Logvalue = string.valueof(icdCodes);
             return icdCodes;
@@ -424,15 +228,13 @@ public class DiagnosisVerification_AC {
     public static List<Condition_Description__c> searchCondition(String searchTerm) {
         String LogValue;
         String recId;
-        // try{
-        //List<Condition_Description__c> conditionDescriptions = Database.query('Select Id, Name, Code_To_Use__c from Condition_Description__c where Name like \'%' + String.escapeSingleQuotes(searchTerm) + '%\' LIMIT 50000');
         List<Condition_Description__c> conditionDescriptions = Database.query('Select Id, Name, Code_To_Use__c, InActive__c from Condition_Description__c where InActive__c != true and Name like \'%' + String.escapeSingleQuotes(searchTerm) + '%\' LIMIT 50000');
         if (!(conditionDescriptions.size() > 0)) {
             conditionDescriptions = [
-                    Select Id, Name, Code_To_Use__c
-                    from Condition_Description__c
-                    WHERE Not_Listed__c = True
-                    LIMIT 50000
+                Select Id, Name, Code_To_Use__c
+                from Condition_Description__c
+                WHERE Not_Listed__c = True
+                LIMIT 50000
             ];
             Logvalue = string.valueof(conditionDescriptions);
         }
@@ -441,19 +243,19 @@ public class DiagnosisVerification_AC {
     }
 
     //Used to check login credentials and whether document is already signed
-    public pagereference submit() {
+    public PageReference submit() {
         if (currLead.isSign__c == true) {
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'Document already reviewed, Please contact chapter staff for access');
             ApexPages.addMessage(myMsg);
         } else if (currLead.isConverted == true) {
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'You cannot review this document');
-            ApexPages.addMessage(myMsg);  
+            ApexPages.addMessage(myMsg);
         } else if (wishChildWrapperIns.password != currLead.Part_A_Form_Password__c) {
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'Incorrect password');
             ApexPages.addMessage(myMsg);
         } else if (wishChildWrapperIns.password == currLead.Part_A_Form_Password__c) {
             wishChildWrapperIns.login = true;
-        }  
+        }
 
         return null;
     }
@@ -489,19 +291,19 @@ public class DiagnosisVerification_AC {
                 //diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription = Null;
                 //List<ICD_Codes__c> icdCodeInfo = [SELECT Id, Name, Skip_Medical_Question__c, Condition_Description__c, Short_Description__c,Condition_Description__r.Name, Condition_Description__r.isEligible__c, Group1__c FROM ICD_Codes__c WHERE Name =: diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode AND Hidden_ICD_Code__c = false];
                 List<ICD_Codes__c> icdCodeInfo = [
-                        SELECT Id, Name, Skip_Medical_Question__c, Condition_Description__c, Short_Description__c,Condition_Description__r.Name, Condition_Description__r.isEligible__c, Group1__c
-                        FROM ICD_Codes__c
-                        WHERE Name = :diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode
-                        LIMIT 50000
+                    SELECT Id, Name, Skip_Medical_Question__c, Condition_Description__c, Short_Description__c,Condition_Description__r.Name, Condition_Description__r.isEligible__c, Group1__c
+                    FROM ICD_Codes__c
+                    WHERE Name = :diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode
+                    LIMIT 50000
                 ];
                 if (icdCodeInfo.size() > 0) {
                     List<Medical_Questions__c> medicalQuestionList = new List<Medical_Questions__c>();
                     medicalQuestionList = [
-                            SELECT ID,Condition_Description__c,Condition_Description__r.Name,Current_Condition__c,Data_Type__c,Epilepsy_picklist__c,Picklist_values__c,Question__c,Recommendation_to_Chapter__c,Sort_Order__c,Wrapper_Variable__c
-                            FROM Medical_Questions__c
-                            WHERE Condition_Description__c = :icdCodeInfo[0].Condition_Description__c
-                            order by Sort_Order__c ASC
-                            LIMIT 50000
+                        SELECT ID,Condition_Description__c,Condition_Description__r.Name,Current_Condition__c,Data_Type__c,Epilepsy_picklist__c,Picklist_values__c,Question__c,Recommendation_to_Chapter__c,Sort_Order__c,Wrapper_Variable__c
+                        FROM Medical_Questions__c
+                        WHERE Condition_Description__c = :icdCodeInfo[0].Condition_Description__c
+                        order by Sort_Order__c ASC
+                        LIMIT 50000
                     ];
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = icdCodeInfo[0].Short_Description__c;
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isGroup1Rec = icdCodeInfo[0].Group1__c;
@@ -522,20 +324,20 @@ public class DiagnosisVerification_AC {
                     showAddAnotherDiagnosisBtn = true;
                 }
                 List<Condition_Description__c> conditionDescriptionInfo = [
-                        SELECT Id, Name, isEligible__c, Group1__c, Code_To_Use__c
-                        FROM Condition_Description__c
-                        WHERE Name = :diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription
-                        LIMIT 50000
+                    SELECT Id, Name, isEligible__c, Group1__c, Code_To_Use__c
+                    FROM Condition_Description__c
+                    WHERE Name = :diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription
+                    LIMIT 50000
                 ];
                 if (conditionDescriptionInfo.size() > 0) {
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isGroup1Rec = conditionDescriptionInfo[0].Group1__c;
                     List<Medical_Questions__c> medicalQuestionList = new List<Medical_Questions__c>();
                     medicalQuestionList = [
-                            SELECT ID,Condition_Description__c,Condition_Description__r.Name,Current_Condition__c,Data_Type__c,Epilepsy_picklist__c,Picklist_values__c,Question__c,Recommendation_to_Chapter__c,Sort_Order__c,Wrapper_Variable__c
-                            FROM Medical_Questions__c
-                            WHERE Condition_Description__c = :conditionDescriptionInfo[0].id
-                            order by Sort_Order__c ASC
-                            LIMIT 50000
+                        SELECT ID,Condition_Description__c,Condition_Description__r.Name,Current_Condition__c,Data_Type__c,Epilepsy_picklist__c,Picklist_values__c,Question__c,Recommendation_to_Chapter__c,Sort_Order__c,Wrapper_Variable__c
+                        FROM Medical_Questions__c
+                        WHERE Condition_Description__c = :conditionDescriptionInfo[0].id
+                        order by Sort_Order__c ASC
+                        LIMIT 50000
                     ];
                     //Condition Description categories like Epilepsy, Cardiomyopathy with group 1 records are considered as eligible without asking Medical Questions
                     //Those questions are identified by using isEligible__c field
@@ -550,10 +352,10 @@ public class DiagnosisVerification_AC {
                         if (!String.isEmpty(conditionDescriptionInfo[0].Code_To_Use__c)) {
                             //List<ICD_Codes__c> icdCodeInfo = [SELECT Id, Name, Skip_Medical_Question__c, Condition_Description__c, Short_Description__c,Condition_Description__r.Name, Group1__c FROM ICD_Codes__c WHERE Name =: conditionDescriptionInfo[0].Code_To_Use__c AND Hidden_ICD_Code__c = false];
                             List<ICD_Codes__c> icdCodeInfo = [
-                                    SELECT Id, Name, Skip_Medical_Question__c, Condition_Description__c, Short_Description__c,Condition_Description__r.Name, Group1__c
-                                    FROM ICD_Codes__c
-                                    WHERE Name = :conditionDescriptionInfo[0].Code_To_Use__c
-                                    LIMIT 50000
+                                SELECT Id, Name, Skip_Medical_Question__c, Condition_Description__c, Short_Description__c,Condition_Description__r.Name, Group1__c
+                                FROM ICD_Codes__c
+                                WHERE Name = :conditionDescriptionInfo[0].Code_To_Use__c
+                                LIMIT 50000
                             ];
                             if (icdCodeInfo.size() > 0) {
                                 diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedICD = 'value-selected';
@@ -606,9 +408,9 @@ public class DiagnosisVerification_AC {
             //if(!String.isEmpty(conditionDescription) && condDesMedicalQuestionMap.containsKey(conditionDescription)) {
             //medicalQuestionList
             List<Condition_Description__c> conditionDesc = [
-                    SELECT Id, Name
-                    FROM Condition_Description__c
-                    WHERE Id = :conditionDescription
+                SELECT Id, Name
+                FROM Condition_Description__c
+                WHERE Id = :conditionDescription
             ];
             if (!String.isEmpty(conditionDescription) && medicalQuestions.size() > 0) {
                 if (conditionDesc.size() > 0 && conditionDesc[0].Name == 'Arteriovenus Malformation (AVM)') {
@@ -699,17 +501,17 @@ public class DiagnosisVerification_AC {
                     currLead.Qualifying_Diagnosis__c = diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription;
                     if (currLead.Qualifying_Diagnosis__c != Null) {
                         List<Condition_Description__c> descriptionList = [
-                                SELECT Id, PR_Diagnosis__c
-                                FROM Condition_Description__c
-                                WHERE Name = :currLead.Qualifying_Diagnosis__c
-                                limit 1
+                            SELECT Id, PR_Diagnosis__c
+                            FROM Condition_Description__c
+                            WHERE Name = :currLead.Qualifying_Diagnosis__c
+                            limit 1
                         ];
                         currLead.PR_Diagnosis__c = (descriptionList.size() > 0) ? descriptionList[0].PR_Diagnosis__c : '';
                     }
                     List<ICD_Codes__c> icdCodeInfo = [
-                            SELECT Id
-                            FROM ICD_Codes__c
-                            WHERE Name = :diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode
+                        SELECT Id
+                        FROM ICD_Codes__c
+                        WHERE Name = :diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode
                     ];
                     if (icdCodeInfo.size() > 0)
                         currLead.Qualifying_ICD__c = icdCodeInfo[0].Id;
@@ -774,9 +576,9 @@ try{*/
 
         try {
             Delete [
-                    SELECT Id
-                    FROM cg__Lead_File__c
-                    WHERE ID = :attachmentId
+                SELECT Id
+                FROM cg__Lead_File__c
+                WHERE ID = :attachmentId
             ];
             recId = attachmentId;
             if (Test.isRunningTest()) {
@@ -826,7 +628,7 @@ try{*/
             currLead.Responds_to_treatment_with_normal_health__c = false;
             //SIW-287 Start : Mapping fields value
             currLead.Unplanned_hospital_admissions__c = wishChildWrapperIns.unplannedHospitalAdmission;
-            currLead.Number_hospital_admissions__c =  wishChildWrapperIns.numberOfHospitalAdmission;
+            currLead.Number_hospital_admissions__c = wishChildWrapperIns.numberOfHospitalAdmission;
             currLead.Admitting_diagnosis__c = wishChildWrapperIns.admittingDiagnosis;
             currLead.ICU_Admissions__c = wishChildWrapperIns.ifICUAdmission;
             //SIW-287 End
@@ -874,9 +676,9 @@ try{*/
                 icdCodeSet.add(diagnosisVerificationItem.iCDCode);
             }
             for (ICD_Codes__c icdInfo : [
-                    SELECT Id, Name
-                    FROM ICD_Codes__c
-                    WHERE Name IN :icdCodeSet
+                SELECT Id, Name
+                FROM ICD_Codes__c
+                WHERE Name IN :icdCodeSet
             ]) {
                 icdInfoMap.put(icdInfo.Name, icdInfo.Id);
             }
@@ -1040,7 +842,7 @@ try{*/
                 }
             }
 
-            uniqueCurrentConditionSet.clear();           
+            uniqueCurrentConditionSet.clear();
             if (!String.isEmpty(currentConditionChosenString)) {
                 for (String currCon : currentConditionChosenString.split(';')) {
                     if (travelAlgorithmMap.containsKey(currCon)) {
@@ -1055,8 +857,7 @@ try{*/
 
             currLead.Travel_Restriction__c = '';
             //Added condition to change text in 'Travel_Restriction__c' field on Lead as per SIW - 379
-            if(travelAlgorithmWrapperIns.travelRestriction) currLead.Travel_Restriction__c = 'Travel Careful Consideration - Very High Risk of Complications';
-            else if (uniqueCurrentConditionSet.size() > 0) {
+            if (travelAlgorithmWrapperIns.travelRestriction) currLead.Travel_Restriction__c = 'Travel Careful Consideration - Very High Risk of Complications'; else if (uniqueCurrentConditionSet.size() > 0) {
                 Integer i = 1;
                 for (String condition : uniqueCurrentConditionSet) {
                     currLead.Travel_Restriction__c += i + '. ' + condition + ';' + '\n';
@@ -1229,47 +1030,47 @@ try{*/
             }
             LstLog.add(string.valueOf(documentPDF));
             String body = '{' +
-                    '  "status":"sent",' +
-                    '  "enableWetSign": "false",' +
-                    '  "emailBlurb":"",' +
-                    '  "emailSubject": "Diagnosis Verification Form",' +
-                    '  "enforceSignerVisibility":"True",' +
-                    '  "documents": [{' +
-                    '      "name": "document.pdf",' +
-                    '      "documentId":"1",' +
-                    '      "order":"1",' +
-                    '      "documentBase64":"' + documentPDF + '"' +
-                    '  }],' +
-                    '"recipients": {' +
-                    '    "signers" : [{' +
-                    '      "email": "' + myEmail + '",' +
-                    '      "name": "' + mySenderName + '",' +
-                    '      "recipientId":"1",' +
-                    '      "clientUserId":"1",' +
-                    '      "tabs": {' +
-                    '                "signHereTabs": [{' +
-                    '                    "anchorString": "~s1",' +
-                    '                    "anchorXOffset": "0.1",' +
-                    '                    "anchorYOffset": "0.1",' +
-                    '                    "anchorIgnoreIfNotPresent": "false",' +
-                    '                    "anchorUnits": "inches"' +
-                    '                }],' +
-                    '                "dateSignedTabs": [{' +
-                    '                      "anchorString": "~date1",' +
-                    '                       "anchorXOffset": "0",' +
-                    '                       "fontSize":      "Size12",' +
-                    '                       "fontColor":     "Black",' +
-                    '                       "fonttype":     "Helvetica",' +
-                    '                        "anchorYOffset": "0",' +
-                    '                        "anchorIgnoreIfNotPresent": "false",' +
-                    '                        "xPosition": "100",' +
-                    '                        "yPosition": "72",' +
-                    '                        "anchorUnits": "inches"' +
-                    '                    }]' +
-                    '            }' +
-                    '    }]' +
-                    '  }' +
-                    '}';
+                '  "status":"sent",' +
+                '  "enableWetSign": "false",' +
+                '  "emailBlurb":"",' +
+                '  "emailSubject": "Diagnosis Verification Form",' +
+                '  "enforceSignerVisibility":"True",' +
+                '  "documents": [{' +
+                '      "name": "document.pdf",' +
+                '      "documentId":"1",' +
+                '      "order":"1",' +
+                '      "documentBase64":"' + documentPDF + '"' +
+                '  }],' +
+                '"recipients": {' +
+                '    "signers" : [{' +
+                '      "email": "' + myEmail + '",' +
+                '      "name": "' + mySenderName + '",' +
+                '      "recipientId":"1",' +
+                '      "clientUserId":"1",' +
+                '      "tabs": {' +
+                '                "signHereTabs": [{' +
+                '                    "anchorString": "~s1",' +
+                '                    "anchorXOffset": "0.1",' +
+                '                    "anchorYOffset": "0.1",' +
+                '                    "anchorIgnoreIfNotPresent": "false",' +
+                '                    "anchorUnits": "inches"' +
+                '                }],' +
+                '                "dateSignedTabs": [{' +
+                '                      "anchorString": "~date1",' +
+                '                       "anchorXOffset": "0",' +
+                '                       "fontSize":      "Size12",' +
+                '                       "fontColor":     "Black",' +
+                '                       "fonttype":     "Helvetica",' +
+                '                        "anchorYOffset": "0",' +
+                '                        "anchorIgnoreIfNotPresent": "false",' +
+                '                        "xPosition": "100",' +
+                '                        "yPosition": "72",' +
+                '                        "anchorUnits": "inches"' +
+                '                    }]' +
+                '            }' +
+                '    }]' +
+                '  }' +
+                '}';
 
             String header = '--' + boundary + '\nContent-Type: application/json\nContent-Disposition: form-data';
             String jsonBody = header + '\n\n' + body + '\n\n--' + boundary + '--';
@@ -1315,13 +1116,13 @@ try{*/
                     request.setEndpoint('Callout:Docusign_Credential/accounts/' + account + '/envelopes/' + env + '/views/recipient');
                     string jsonPayload;
                     jsonPayload = '{' +
-                            '    "userName": "' + mySenderName + '",' +
-                            '    "email": "' + myEmail + '",' +
-                            '    "recipientId": "1",' +
-                            '    "clientUserId": "1",' +
-                            '    "authenticationMethod": "None",' +
-                            '    "returnUrl": "' + label.DvRetrunUrl + '/verification_success' + '"' +
-                            '}';
+                        '    "userName": "' + mySenderName + '",' +
+                        '    "email": "' + myEmail + '",' +
+                        '    "recipientId": "1",' +
+                        '    "clientUserId": "1",' +
+                        '    "authenticationMethod": "None",' +
+                        '    "returnUrl": "' + label.DvRetrunUrl + '/verification_success' + '"' +
+                        '}';
                     request.setBody(jsonPayload);
                     if (!Test.isRunningTest()) {
                         response = httprequest.send(request);
@@ -1364,4 +1165,358 @@ try{*/
         return reference;
     }
 
+    /*
+     * @description     Private function to select the Lead for the verification form.
+     *                  This was moved out of loadData() to reduce the size of that function and improve readability.
+     *
+     * @param           Id leadId
+     *
+     * @return          Lead
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-02-28
+     */
+    private Lead getCurrLead(Id leadId) {
+        String query = 'SELECT ';
+
+        final List<String> FIELDS_TO_SELECT = new List<String> {
+            'Id',
+            'Name',
+            'FirstName',
+            'LastName',
+            'Email',
+            'Phone',
+            'Provided_additional_information__c',
+            'Hidden_Proto_Pulmonary_Hypertension__c',
+            'Diagnosis_Given_By_Referrer__c',
+            'ICD_Given_By_Referrer__c',
+            'ICD_Given_By_Referrer__r.Name',
+            'RFI_Form_Info_Hidden__c',
+            'Override_Dupe_Check__c',
+            'isConverted',
+            'Please_Explain_Deteriorate__c'
+        };
+
+        for (String field : FIELDS_TO_SELECT) {
+            query += field + ',';
+        }
+
+        for (Schema.FieldSetMember currField : getPartAFields()) {
+            query += currField.getFieldPath() + ',';
+        }
+
+        query = query.removeEnd(',');
+        query += ' FROM Lead WHERE Id = :leadId';
+
+        return Database.query(query);
+    }
+
+    /*
+     * @description     Private function to populate the WishChildWrapper based on the Lead
+     *                  This was moved out of loadData() to reduce the size of that function and improve readability.
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-02-28
+     */
+    private void populateWishChildWrapper() {
+        wishChildWrapperIns.additionalInfo = currLead.Provided_additional_information__c;
+        wishChildWrapperIns.medProfTypeHid = currLead.Hidden_DV_form_Medical_professional_Type__c;
+        wishChildWrapperIns.stillEligibile = currLead.Why_do_you_feel_would_be_eligible_Wish__c;
+        wishChildWrapperIns.treatingFName = currLead.Treating_Medical_Professional_First_Name__c;
+        wishChildWrapperIns.treatingLName = currLead.Treating_Medical_Professional_Last_Name__c;
+        wishChildWrapperIns.treatingPhone = currLead.Treating_Medical_Professional_Phone__c;
+        wishChildWrapperIns.treatingEmail = currLead.Treating_Medical_Professional_Email__c;
+        wishChildWrapperIns.treatingHospital = currLead.Hospital_Treatment_Facility_Treating__c;
+        wishChildWrapperIns.recognizationPickValSelected = currLead.I_am_Recognized_To_Practice_As_a__c;
+        wishChildWrapperIns.healthCareWork = currLead.I_m_Part_of_The_Treating_HealthCare_Team__c;
+        wishChildWrapperIns.vegetativeState = currLead.Is_in_a_Comatose_Vegetative_State__c;
+        wishChildWrapperIns.explainDeteriorate = currLead.Please_Explain_Deteriorate__c;
+        wishChildWrapperIns.expediteTheProcess = currLead.Any_medical_reason_for_moving_quickly__c; //Added as per IME-107
+        wishChildWrapperIns.conditioDeteriorate = currLead.Will_Child_s_Condition_Deteriorate__c;
+        wishChildWrapperIns.wishChildEligibilityNotes = currLead.Why_do_you_feel_would_be_eligible_Wish__c;
+        wishChildWrapperIns.plzExplain = currLead.Please_Explain__c;
+        wishChildWrapperIns.bestPhyFname = currLead.Best_Contact_for_Physician_First_Name__c;
+        wishChildWrapperIns.bestPhyLname = currLead.Best_Contact_for_Physician_Last_Name__c;
+        wishChildWrapperIns.bestPhyEmail = currLead.Best_contact_for_Physician_Email__c;
+        wishChildWrapperIns.alt1MedFname = currLead.Alternate1MedProfessionalFirstName__c;
+        wishChildWrapperIns.alt1MedLname = currLead.Alternate1MedProfessionalLastName__c;
+        wishChildWrapperIns.alt1MedEmail = currLead.Alternate1MedicalProfessionalEmail__c;
+        wishChildWrapperIns.alt1MedPhone = currLead.Alternate1MedProfessionalPhone__c;
+        wishChildWrapperIns.alt1MedHosp = currLead.Alternate1HospitalTreatmentFacility__c;
+        wishChildWrapperIns.alt2MedFname = currLead.Alternate2MedProfessionalFirstName__c;
+        wishChildWrapperIns.alt2MedLname = currLead.Alternate2MedProfessionalLastName__c;
+        wishChildWrapperIns.alt2MedEmail = currLead.Alternate2MedProfessionalEmail__c;
+        wishChildWrapperIns.alt2MedPhone = currLead.Alternate2MedProfessionalPhone__c;
+        wishChildWrapperIns.alt2MedHosp = currLead.Alternate2HospitalTreatmentFacility__c;
+        wishChildWrapperIns.unplannedHospitalAdmission = currLead.Unplanned_hospital_admissions__c;
+        wishChildWrapperIns.numberOfHospitalAdmission = Integer.valueOf(currLead.Number_hospital_admissions__c);
+        wishChildWrapperIns.admittingDiagnosis = currLead.Admitting_diagnosis__c;
+        wishChildWrapperIns.ifICUAdmission = currLead.ICU_Admissions__c;
+
+        wishChildWrapperIns.describePatient = getDescribePatientCode(currlead);
+
+        if (currLead.Communication__c != null || String.isNotBlank(currLead.Communication__c)) {
+            for (String com : currLead.Communication__c.split(';')) {
+                wishChildWrapperIns.communicationList.add(com);
+            }
+        }
+    }
+
+    /*
+     * @description     Private function to translate condition related checkboxes on Lead to a status code.
+     *                  This was moved out of loadData() to reduce the size of that function and improve readability.
+     *
+     * @param           Lead lead
+     *
+     * @return          String
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-02-28
+     */
+    private String getDescribePatientCode(Lead lead) {
+        if (currLead.Child_will_ultimately_die_prematurely__c == true) {
+            return '1';
+        } else if (currLead.Treatment_may_be_feasible_but_can_fail__c == true) {
+            return '2';
+        } else if (currLead.Treatment_may_prolong_normal_activities__c == true) {
+            return '3';
+        } else if (currLead.Debilitation_may_extend_over_many_years__c == true) {
+            return '4';
+        } else if (currLead.Increased_probability_of_premature_death__c == true) {
+            return '5';
+        } else if (currLead.Risk_of_complications_premature_death__c == true) {
+            return '6';
+        } else if (currLead.Responds_to_treatment_with_normal_health__c == true) {
+            return '7';
+        } else if (currLead.None_of_these_statements_describes_Child__c == true) {
+            return '8';
+        } else {
+            return '8';
+        }
+    }
+
+    /*
+     * @description     Private function to return a list of Medical Questions.
+     *                  This was moved out of loadData() to reduce the size of that function and improve readability.
+     *
+     * @return          List<Medical_Questions__c>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-02-28
+     */
+    private List<Medical_Questions__c> getMedicalQuestions() {
+        return [
+            SELECT
+                Id,
+                RecordTypeId,
+                Condition_Description__c,
+                Condition_Description__r.Name,
+                Current_Condition__c,
+                Data_Type__c,
+                Epilepsy_picklist__c,
+                Picklist_values__c,
+                Question__c,
+                Recommendation_to_Chapter__c,
+                Sort_Order__c,
+                Wrapper_Variable__c
+            FROM Medical_Questions__c
+            ORDER BY Sort_Order__c ASC
+            LIMIT 50000
+        ];
+    }
+
+    /*
+     * @description     Private function to return a list of Diagnosis Verifications for a given Lead.
+     *                  This was moved out of loadData() to reduce the size of that function and improve readability.
+     *
+     * @param           Id leadId
+     *
+     * @return          List<Diagnosis_Verification__c>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-02-28
+     */
+    private List<Diagnosis_Verification__c> getDiagnosisVerifications(Id leadId) {
+        return [
+            SELECT
+                Id,
+                Group1__c,
+                ICD_Code__c,
+                Lead__c,
+                Primary_Diagnosis__c,
+                PCD_ICD__c,
+                Order__c,
+                Short_Description__c,
+                Condition_Description__c,
+                Condition_Description__r.Name,
+                IsEligible__c,
+            (
+                SELECT
+                    Medical_Question__c,
+                    Epilepsy_Value__c,
+                    Medical_Question_Answer__c,
+                    IsEligible__c,
+                    Comment__c
+                FROM DiagnosisMedicalQuestions__r
+            )
+            FROM Diagnosis_Verification__c
+            WHERE Lead__c = :leadId
+            ORDER BY Order__c
+            LIMIT 50000
+        ];
+    }
+
+    /*
+     * @description     Private function to populate the Diagnosis Verification Wrappers
+     *                  This was moved out of loadData() to reduce the size of that function and improve readability.
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-02-28
+     */
+    private void populateDiagnosisVerificationWrappers() {
+        if (diagnosisVerificationLst.size() == 0) {
+            diagnosisVerificationWrapperLst.add(new DiagnosisWrapper());
+            return;
+        }
+
+        for (Diagnosis_Verification__c diagnosisVerification : diagnosisVerificationLst) {
+            DiagnosisWrapper diagonsisWrapper = new DiagnosisWrapper();
+
+            diagonsisWrapper.icdCode = diagnosisVerification.ICD_Code__c;
+            diagonsisWrapper.pcdOrIcd = diagnosisVerification.PCD_ICD__c;
+            diagonsisWrapper.isGroup1Rec = diagnosisVerification.Group1__c;
+
+            if (diagnosisVerification.PCD_ICD__c == 'ICD') {
+                diagonsisWrapper.valueSelectedICD = 'value-selected';
+            } else if (diagnosisVerification.PCD_ICD__c == 'PCD') {
+                diagonsisWrapper.valueSelectedPCD = 'value-selected';
+            }
+
+            diagonsisWrapper.shortDescription = diagnosisVerification.Short_Description__c;
+            diagonsisWrapper.isEligible = diagnosisVerification.isEligible__c;
+            diagonsisWrapper.conditionDescription = (String) diagnosisVerification.Condition_Description__r.Name;
+            diagonsisWrapper.conditionDescriptionObject = (String) diagnosisVerification.Condition_Description__c;
+
+            Map<Id, DiagnosisMedicalQuestions__c> diagnosisQuestionMap = new Map<Id, DiagnosisMedicalQuestions__c>();
+            if (diagnosisVerification.DiagnosisMedicalQuestions__r.size() > 0) {
+                for (DiagnosisMedicalQuestions__c currDiagnosisMedicalQuestion : diagnosisVerification.DiagnosisMedicalQuestions__r) {
+                    diagnosisQuestionMap.put(currDiagnosisMedicalQuestion.Medical_Question__c, currDiagnosisMedicalQuestion);
+                }
+            }
+
+            if (condDesMedicalQuestionMap.containsKey(diagnosisVerification.Condition_Description__c)) {
+                for (Medical_Questions__c currMedicalQuestion : condDesMedicalQuestionMap.get(diagnosisVerification.Condition_Description__c)) {
+                    DiagnosisWrapper.MedicalWrapper medicalWrapperItem = new DiagnosisWrapper.MedicalWrapper();
+
+                    medicalWrapperItem.medicalQuestion = currMedicalQuestion;
+
+                    if (diagnosisQuestionMap.containsKey(currMedicalQuestion.Id)) {
+                        medicalWrapperItem.isEligible = diagnosisQuestionMap.get(currMedicalQuestion.id).isEligible__c;
+                    }
+
+                    if (currMedicalQuestion.Picklist_values__c != null) {
+                        List<SelectOption> pickVals = new List<SelectOption>();
+                        pickVals.add(new SelectOption('', 'Please Select'));
+                        for (String currString : currMedicalQuestion.Picklist_values__c.split(',')) {
+                            pickVals.add(new SelectOption(currString, currString));
+                        }
+                        medicalWrapperItem.pickVals = pickVals;
+                        if (diagnosisQuestionMap.containsKey(currMedicalQuestion.id)) {
+                            medicalWrapperItem.selectedPickVal = diagnosisQuestionMap.get(currMedicalQuestion.id).Medical_Question_Answer__c;
+                        }
+                    }
+
+                    if (currMedicalQuestion.Epilepsy_picklist__c != null) {
+                        List<SelectOption> epilepsyPickVals = new List<SelectOption>();
+                        epilepsyPickVals.add(new SelectOption('', 'Please Select'));
+                        for (String currString : currMedicalQuestion.Epilepsy_picklist__c.split(',')) {
+                            epilepsyPickVals.add(new SelectOption(currString, currString));
+                        }
+                        medicalWrapperItem.epilepsyPickVals = epilepsyPickVals;
+                        if (diagnosisQuestionMap.containsKey(currMedicalQuestion.id) && diagnosisQuestionMap.get(currMedicalQuestion.id).Epilepsy_Value__c != Null) {
+                            medicalWrapperItem.epilepsySelectedPickVal = diagnosisQuestionMap.get(currMedicalQuestion.id).Epilepsy_Value__c;
+                        }
+                    }
+
+                    if (currMedicalQuestion.Data_Type__c == 'Comment box') {
+                        if (diagnosisQuestionMap.containsKey(currMedicalQuestion.id)) {
+                            medicalWrapperItem.reasonForNeed = diagnosisQuestionMap.get(currMedicalQuestion.id).comment__c;
+                        }
+
+                    }
+
+                    diagonsisWrapper.medicalWrapperList.add(medicalWrapperItem);
+                }
+            }
+
+            diagnosisVerificationWrapperLst.add(diagonsisWrapper);
+        }
+    }
+
+    /*
+     * @description     Private function to populate the Travel Algorithm Wrappers
+     *                  This was moved out of loadData() to reduce the size of that function and improve readability.
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-02-28
+     */
+    private void populateTravelAlgorithmWrapper() {
+        if (currLead.Chronic_Hepatitis__c != null) {
+            travelAlgorithmWrapperIns.chronicHepatitisString = currLead.Chronic_Hepatitis__c;
+        }
+
+        if (currLead.Strokes__c != null) {
+            travelAlgorithmWrapperIns.strokesType = currLead.Strokes__c;
+        }
+
+        if (currLead.Hidden_Proto_Pulmonary_Hypertension__c != null) {
+            travelAlgorithmWrapperIns.pulmonaryHypertensionString = currLead.Hidden_Proto_Pulmonary_Hypertension__c;
+        }
+
+        if (currLead.Convulsive_Disorders__c != null) {
+            for (String currVal : currLead.Convulsive_Disorders__c.split(';')) {
+                travelAlgorithmWrapperIns.convulsiveDisorders.add(currVal);
+            }
+        }
+
+        if (currLead.Congenital_Heart_Disease__c != null) {
+            for (String currVal : currLead.Congenital_Heart_Disease__c.split(';')) {
+                travelAlgorithmWrapperIns.congenitalHeartDiseaseString.add(currVal);
+            }
+        }
+
+        if (currLead.Chronic_Heart_Failure__c != null) {
+            for (String currVal : currLead.Chronic_Heart_Failure__c.split(';')) {
+                travelAlgorithmWrapperIns.chronicHeartFailureString.add(currVal);
+            }
+        }
+
+        if (currLead.Heart_Failure__c != null) {
+            for (String currVal : currLead.Heart_Failure__c.split(';')) {
+                travelAlgorithmWrapperIns.heartFailureString.add(currVal);
+            }
+        }
+
+        if (currLead.Arrhythmia__c != null) {
+            for (String currVal : currLead.Arrhythmia__c.split(';')) {
+                travelAlgorithmWrapperIns.ArrhythmiaString.add(currVal);
+            }
+        }
+
+        if (currLead.Ventilator__c != null) {
+            travelAlgorithmWrapperIns.ventilatorText = currLead.Ventilator__c;
+        }
+
+        if (currLead.Angina__c != null) {
+            for (String currVal : currLead.Angina__c.split(';')) {
+                travelAlgorithmWrapperIns.anginaString.add(currVal);
+            }
+        }
+
+        if (currLead.Lung_Disease__c != null) {
+            for (String currVal : currLead.Lung_Disease__c.split(';')) {
+                travelAlgorithmWrapperIns.lungDiseaseString.add(currVal);
+            }
+        }
+    }
 }
