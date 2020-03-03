@@ -74,7 +74,7 @@ public class DiagnosisVerification_AC {
 
         populateWishChildWrapper();
 
-        List<Medical_Questions__c> medicalQuestions = getMedicalQuestions();
+        List<Medical_Questions__c> medicalQuestions = getMedicalQuestions(null, null);
         for (Medical_Questions__c medicalQuestion : medicalQuestions) {
             if (medicalQuestion.Question__c != null) {
                 medicalQuestion.Question__c = medicalQuestion.Question__c.replace('[child\'s name]', ' ' + currLead.FirstName + ' ' + currLead.LastName).replace(' (child\'s name) ', currLead.FirstName + ' ' + currLead.LastName).replace('[Insert child\'s name]', currLead.FirstName + ' ' + currLead.LastName);
@@ -147,20 +147,22 @@ public class DiagnosisVerification_AC {
     public void ResetDiagnosis() {
         diagnosisBlockNum = Integer.valueOf(ApexPages.currentPage().getParameters().get('diagnosisBlockNum'));
 
-        diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = Null;
-        diagnosisVerificationWrapperLst[diagnosisBlockNum].pcdOrIcd = Null;
-        diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedICD = Null;
-        diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedPCD = Null;
+        diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = null;
+        diagnosisVerificationWrapperLst[diagnosisBlockNum].pcdOrIcd = null;
+        diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedICD = null;
+        diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedPCD = null;
         diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = false;
+
         if (diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList.size() > 0) {
             diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList.clear();
         }
+
         for (Integer i = 0; i < diagnosisVerificationWrapperLst.size(); i++) {
             if (String.isEmpty(diagnosisVerificationWrapperLst[i].iCDCode) && String.isEmpty(diagnosisVerificationWrapperLst[i].conditionDescription) && i != diagnosisBlockNum) {
-                diagnosisVerificationWrapperLst[i].shortDescription = Null;
-                diagnosisVerificationWrapperLst[i].pcdOrIcd = Null;
-                diagnosisVerificationWrapperLst[i].valueSelectedICD = Null;
-                diagnosisVerificationWrapperLst[i].valueSelectedPCD = Null;
+                diagnosisVerificationWrapperLst[i].shortDescription = null;
+                diagnosisVerificationWrapperLst[i].pcdOrIcd = null;
+                diagnosisVerificationWrapperLst[i].valueSelectedICD = null;
+                diagnosisVerificationWrapperLst[i].valueSelectedPCD = null;
                 diagnosisVerificationWrapperLst[i].isEligible = false;
                 if (diagnosisVerificationWrapperLst[i].medicalWrapperList.size() > 0) {
                     diagnosisVerificationWrapperLst[i].medicalWrapperList.clear();
@@ -168,6 +170,7 @@ public class DiagnosisVerification_AC {
                 diagnosisVerificationWrapperLst.remove(i);
             }
         }
+
         setWishStatus();
     }
 
@@ -180,15 +183,18 @@ public class DiagnosisVerification_AC {
             WHERE Order__c = :diagnosisBlockNum
         ];
 
-        diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = Null;
-        diagnosisVerificationWrapperLst[diagnosisBlockNum].pcdOrIcd = Null;
-        diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedICD = Null;
-        diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedPCD = Null;
+        diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = null;
+        diagnosisVerificationWrapperLst[diagnosisBlockNum].pcdOrIcd = null;
+        diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedICD = null;
+        diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedPCD = null;
         diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = false;
+
         if (diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList.size() > 0) {
             diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList.clear();
         }
+
         diagnosisVerificationWrapperLst.remove(diagnosisBlockNum);
+
         if (diagnosisVerificationWrapperLst.size() < 5 && (diagnosisVerificationWrapperLst[diagnosisBlockNum - 1].icdCode.length() > 0 || diagnosisVerificationWrapperLst[diagnosisBlockNum - 1].conditionDescription.length() > 0)) {
             showAddAnotherDiagnosisBtn = true;
         }
@@ -203,6 +209,7 @@ public class DiagnosisVerification_AC {
             showAddAnotherDiagnosisBtn = false;
             otherDiagnosisBlock = null;
         }
+
         setWishStatus();
     }
 
@@ -212,10 +219,10 @@ public class DiagnosisVerification_AC {
         String LogValue;
         String recId;
         try {
-            List<ICD_Codes__c> icdCodes = Database.query('SELECT Id, Name,Condition_Description__c, Condition_Description__r.InActive__c, Condition_Description__r.Name, Short_Description__c FROM ICD_Codes__c WHERE Condition_Description__r.InActive__c != true and Name LIKE \'%' + String.escapeSingleQuotes(searchTerm) + '%\' AND Hidden_ICD_Code__c = false LIMIT 50000');
+            List<ICD_Codes__c> icdCodes = Database.query('SELECT Id, Name, Condition_Description__c, Condition_Description__r.InActive__c, Condition_Description__r.Name, Short_Description__c FROM ICD_Codes__c WHERE Condition_Description__r.InActive__c != true AND Name LIKE \'%' + String.escapeSingleQuotes(searchTerm) + '%\' AND Hidden_ICD_Code__c = false LIMIT 50000');
             Logvalue = string.valueof(icdCodes);
             return icdCodes;
-        } Catch (Exception ex) {
+        } catch (Exception ex) {
             new ApexDebugLog().createLog(new ApexDebugLog.Error('DiagnosisVerification_AC', 'searchDiagnosis', recId, ex, Logvalue));
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
             ApexPages.addMessage(myMsg);
@@ -223,29 +230,30 @@ public class DiagnosisVerification_AC {
         }
     }
 
-    // Auto Complete the Dianosis field value.
+    // Auto Complete the Diagnosis field value.
     @RemoteAction
     public static List<Condition_Description__c> searchCondition(String searchTerm) {
         String LogValue;
         String recId;
-        List<Condition_Description__c> conditionDescriptions = Database.query('Select Id, Name, Code_To_Use__c, InActive__c from Condition_Description__c where InActive__c != true and Name like \'%' + String.escapeSingleQuotes(searchTerm) + '%\' LIMIT 50000');
+        List<Condition_Description__c> conditionDescriptions = Database.query('SELECT Id, Name, Code_To_Use__c, InActive__c from Condition_Description__c where InActive__c != true and Name LIKE \'%' + String.escapeSingleQuotes(searchTerm) + '%\' LIMIT 50000');
         if (!(conditionDescriptions.size() > 0)) {
             conditionDescriptions = [
-                Select Id, Name, Code_To_Use__c
-                from Condition_Description__c
-                WHERE Not_Listed__c = True
+                SELECT Id, Name, Code_To_Use__c
+                FROM Condition_Description__c
+                WHERE Not_Listed__c = true
                 LIMIT 50000
             ];
+
             Logvalue = string.valueof(conditionDescriptions);
         }
-        return conditionDescriptions;
 
+        return conditionDescriptions;
     }
 
-    //Used to check login credentials and whether document is already signed
+    // Used to check login credentials and whether document is already signed
     public PageReference submit() {
         if (currLead.isSign__c == true) {
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'Document already reviewed, Please contact chapter staff for access');
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'Document already reviewed, please contact chapter staff for access');
             ApexPages.addMessage(myMsg);
         } else if (currLead.isConverted == true) {
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'You cannot review this document');
@@ -260,22 +268,21 @@ public class DiagnosisVerification_AC {
         return null;
     }
 
-    //Used to hold the describe patient value
+    // Used to hold the describe patient value
     public void changePatientValue() {
         wishChildWrapperIns.describePatient = wishChildWrapperIns.selectedItemValue;
     }
 
-    //To check whether Wish Child is eligible based on ICD & Condition Description provided
+    // To check whether Wish Child is eligible based on ICD & Condition Description provided
     public void WishChildEligibilityCheck() {
         String LogValue;
         String recId;
         try {
-            icdOrPcd = ApexPages.currentPage().getParameters().get('icdOrPcd'); //Used to hold the given auto complete input is ICD Code or Condition Description
+            icdOrPcd = ApexPages.currentPage().getParameters().get('icdOrPcd'); // Used to hold the given auto complete input is ICD Code or Condition Description
             diagnosisBlockNum = Integer.valueOf(ApexPages.currentPage().getParameters().get('diagnosisBlockNum')); // Used to hold the Diagnosis block number
-            diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = Null;
+            diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = null;
             if (icdOrPcd == 'ICD') {
                 diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedICD = 'value-selected';
-                //diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedPCD = 'value-selected';
             } else if (icdOrPcd == 'PCD') {
                 diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedPCD = 'value-selected';
             }
@@ -286,59 +293,37 @@ public class DiagnosisVerification_AC {
             if (diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList.size() > 0) {
                 diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList.clear();
             }
-            //ICD code
+
+            // ICD code
             if (icdOrPcd == 'ICD') {
-                //diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription = Null;
-                //List<ICD_Codes__c> icdCodeInfo = [SELECT Id, Name, Skip_Medical_Question__c, Condition_Description__c, Short_Description__c,Condition_Description__r.Name, Condition_Description__r.isEligible__c, Group1__c FROM ICD_Codes__c WHERE Name =: diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode AND Hidden_ICD_Code__c = false];
-                List<ICD_Codes__c> icdCodeInfo = [
-                    SELECT Id, Name, Skip_Medical_Question__c, Condition_Description__c, Short_Description__c,Condition_Description__r.Name, Condition_Description__r.isEligible__c, Group1__c
-                    FROM ICD_Codes__c
-                    WHERE Name = :diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode
-                    LIMIT 50000
-                ];
+                List<ICD_Codes__c> icdCodeInfo = getIcdCodeInfo(diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode);
                 if (icdCodeInfo.size() > 0) {
-                    List<Medical_Questions__c> medicalQuestionList = new List<Medical_Questions__c>();
-                    medicalQuestionList = [
-                        SELECT ID,Condition_Description__c,Condition_Description__r.Name,Current_Condition__c,Data_Type__c,Epilepsy_picklist__c,Picklist_values__c,Question__c,Recommendation_to_Chapter__c,Sort_Order__c,Wrapper_Variable__c
-                        FROM Medical_Questions__c
-                        WHERE Condition_Description__c = :icdCodeInfo[0].Condition_Description__c
-                        order by Sort_Order__c ASC
-                        LIMIT 50000
-                    ];
+                    List<Medical_Questions__c> medicalQuestionList = getMedicalQuestions('Condition_Description__c', icdCodeInfo[0].Condition_Description__c);
+
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = icdCodeInfo[0].Short_Description__c;
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isGroup1Rec = icdCodeInfo[0].Group1__c;
-                    //Condition Description categories like Epilepsy, Cardiomyopathy with group 1 records are considered as eligible without asking Medical Questions
-                    //Those questions are identified by using isEligible__c field
+
+                    // Condition Description categories like Epilepsy, Cardiomyopathy with group 1 records are considered as eligible without asking Medical Questions
+                    // Those questions are identified by using isEligible__c field
                     if (!String.isEmpty(icdCodeInfo[0].Condition_Description__r.Name) && icdCodeInfo[0].Condition_Description__r.Name == 'Total Parenteral Nutrition (TPN)') {
                         showAddAnotherDiagnosisBtn = true;
-                    }
-
-                    else {
+                    }  else {
                         MediacalQuestions(icdCodeInfo[0].Name, icdCodeInfo[0].Condition_Description__c, icdCodeInfo[0].Group1__c, icdOrPcd, diagnosisBlockNum, medicalQuestionList, icdCodeInfo[0].Skip_Medical_Question__c);
                     }
                 }
-                //Conition Description
+
+                // Condition Description
             } else if (icdOrPcd == 'PCD') {
-                //diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode = Null;
                 if (diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription == 'Total Parenteral Nutrition (TPN)') {
                     showAddAnotherDiagnosisBtn = true;
                 }
-                List<Condition_Description__c> conditionDescriptionInfo = [
-                    SELECT Id, Name, isEligible__c, Group1__c, Code_To_Use__c
-                    FROM Condition_Description__c
-                    WHERE Name = :diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription
-                    LIMIT 50000
-                ];
+
+                List<Condition_Description__c> conditionDescriptionInfo = getConditionDescriptionInfo(diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription);
                 if (conditionDescriptionInfo.size() > 0) {
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isGroup1Rec = conditionDescriptionInfo[0].Group1__c;
-                    List<Medical_Questions__c> medicalQuestionList = new List<Medical_Questions__c>();
-                    medicalQuestionList = [
-                        SELECT ID,Condition_Description__c,Condition_Description__r.Name,Current_Condition__c,Data_Type__c,Epilepsy_picklist__c,Picklist_values__c,Question__c,Recommendation_to_Chapter__c,Sort_Order__c,Wrapper_Variable__c
-                        FROM Medical_Questions__c
-                        WHERE Condition_Description__c = :conditionDescriptionInfo[0].id
-                        order by Sort_Order__c ASC
-                        LIMIT 50000
-                    ];
+
+                    List<Medical_Questions__c> medicalQuestionList = getMedicalQuestions('Condition_Description__c', conditionDescriptionInfo[0].Id);
+
                     //Condition Description categories like Epilepsy, Cardiomyopathy with group 1 records are considered as eligible without asking Medical Questions
                     //Those questions are identified by using isEligible__c field
                     if (conditionDescriptionInfo[0].isEligible__c == true) {
@@ -348,15 +333,10 @@ public class DiagnosisVerification_AC {
                             showAddAnotherDiagnosisBtn = true;
                         }
                     } else {
-                        //Medical question inputs for given Condition Description if the ICD Code is not null
                         if (!String.isEmpty(conditionDescriptionInfo[0].Code_To_Use__c)) {
-                            //List<ICD_Codes__c> icdCodeInfo = [SELECT Id, Name, Skip_Medical_Question__c, Condition_Description__c, Short_Description__c,Condition_Description__r.Name, Group1__c FROM ICD_Codes__c WHERE Name =: conditionDescriptionInfo[0].Code_To_Use__c AND Hidden_ICD_Code__c = false];
-                            List<ICD_Codes__c> icdCodeInfo = [
-                                SELECT Id, Name, Skip_Medical_Question__c, Condition_Description__c, Short_Description__c,Condition_Description__r.Name, Group1__c
-                                FROM ICD_Codes__c
-                                WHERE Name = :conditionDescriptionInfo[0].Code_To_Use__c
-                                LIMIT 50000
-                            ];
+                            // medical question inputs for given Condition Description if the ICD Code is not null
+                            List<ICD_Codes__c> icdCodeInfo = getIcdCodeInfo(conditionDescriptionInfo[0].Code_To_Use__c);
+
                             if (icdCodeInfo.size() > 0) {
                                 diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedICD = 'value-selected';
                                 diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = icdCodeInfo[0].Short_Description__c;
@@ -365,23 +345,23 @@ public class DiagnosisVerification_AC {
                                 diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedICD = 'value-selected';
                                 MediacalQuestions(conditionDescriptionInfo[0].Code_To_Use__c, conditionDescriptionInfo[0].Id, conditionDescriptionInfo[0].Group1__c, icdOrPcd, diagnosisBlockNum, medicalQuestionList, icdCodeInfo[0].Skip_Medical_Question__c);
                             }
-                            //Medical question inputs for given Condition Description if the ICD Code is null
                         } else {
+                            // medical question inputs for given Condition Description if the ICD Code is null
                             MediacalQuestions(conditionDescriptionInfo[0].Code_To_Use__c, conditionDescriptionInfo[0].Id, conditionDescriptionInfo[0].Group1__c, icdOrPcd, diagnosisBlockNum, medicalQuestionList, false);
                         }
                     }
                 }
             }
+
             setWishStatus();
             if (Test.isRunningTest()) {
                 throw new CommonTriggerException('Test Class execution');
             }
-        } Catch (Exception ex) {
+        } catch (Exception ex) {
             Logvalue = string.valueof(currLead);
             new ApexDebugLog().createLog(new ApexDebugLog.Error('DiagnosisVerification_AC', 'WishChildEligibilityCheck', currLead.Id, ex, Logvalue));
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
             ApexPages.addMessage(myMsg);
-
         }
     }
 
@@ -1304,25 +1284,37 @@ try{*/
      * @author          Chris Shinnimin, Traction on Demand
      * @createdDate     2020-02-28
      */
-    private List<Medical_Questions__c> getMedicalQuestions() {
-        return [
-            SELECT
-                Id,
-                RecordTypeId,
-                Condition_Description__c,
-                Condition_Description__r.Name,
-                Current_Condition__c,
-                Data_Type__c,
-                Epilepsy_picklist__c,
-                Picklist_values__c,
-                Question__c,
-                Recommendation_to_Chapter__c,
-                Sort_Order__c,
-                Wrapper_Variable__c
-            FROM Medical_Questions__c
-            ORDER BY Sort_Order__c ASC
-            LIMIT 50000
-        ];
+    private List<Medical_Questions__c> getMedicalQuestions(String whereClauseField, String whereClauseValue) {
+        String query = 'SELECT ';
+
+        final List<String> FIELDS_TO_SELECT = new List<String> {
+            'Id',
+            'RecordTypeId',
+            'Condition_Description__c',
+            'Condition_Description__r.Name',
+            'Current_Condition__c',
+            'Data_Type__c',
+            'Epilepsy_picklist__c',
+            'Picklist_values__c',
+            'Question__c',
+            'Recommendation_to_Chapter__c',
+            'Sort_Order__c',
+            'Wrapper_Variable__c'
+        };
+
+        for (String field : FIELDS_TO_SELECT) {
+            query += field + ',';
+        }
+
+        query = query.removeEnd(',');
+        query += ' FROM Medical_Questions__c ';
+        if (!String.isBlank(whereClauseField)) {
+            query += 'WHERE ' + whereClauseField + ' = :whereClauseValue';
+        }
+        query += ' ORDER BY Sort_Order__c ASC ';
+        query += 'LIMIT 50000';
+
+        return Database.query(query);
     }
 
     /*
@@ -1365,6 +1357,66 @@ try{*/
             LIMIT 50000
         ];
     }
+
+    /*
+     * @description     Private function to return a list of ICD Codes with a given ICD Code Name.
+     *                  This was moved out of WishChildEligibilityCheck() to reduce the size of that function and improve readability.
+     *                  Note that it is not clear why this function returns a List and not an individual ICD_Code__c.
+     *                  The calling function only references element 0 of the returned array. Consider refactoring
+     *                  this function to return a single ICD_Codes__c record.
+     *
+     * @param           String nameString
+     *
+     * @return          List<ICD_Codes__c>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-03-02
+     */
+    private List<ICD_Codes__c> getIcdCodeInfo(String nameString) {
+        return [
+            SELECT
+                Id,
+                Name,
+                Skip_Medical_Question__c,
+                Condition_Description__c,
+                Short_Description__c,
+                Condition_Description__r.Name,
+                Condition_Description__r.isEligible__c,
+                Group1__c
+            FROM ICD_Codes__c
+            WHERE Name = :nameString
+            LIMIT 50000
+        ];
+    }
+
+    /*
+     * @description     Private function to return a list of Condition Descriptions with a given Name.
+     *                  This was moved out of WishChildEligibilityCheck() to reduce the size of that function and improve readability.
+     *                  Note that it is not clear why this function returns a List and not an individual Condition_Description__c.
+     *                  The calling function only references element 0 of the returned array. Consider refactoring
+     *                  this function to return a single Condition_Description__c record.
+     *
+     * @param           String nameString
+     *
+     * @return          List<Condition_Description__c>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-03-02
+     */
+    private List<Condition_Description__c> getConditionDescriptionInfo(String nameString) {
+        return [
+            SELECT
+                Id,
+                Name,
+                isEligible__c,
+                Group1__c,
+                Code_To_Use__c
+            FROM Condition_Description__c
+            WHERE Name = :nameString
+            LIMIT 50000
+        ];
+    }
+
 
     /*
      * @description     Private function to populate the Diagnosis Verification Wrappers
