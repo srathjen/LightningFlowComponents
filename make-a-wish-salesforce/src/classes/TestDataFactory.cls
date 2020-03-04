@@ -311,4 +311,13 @@ public class TestDataFactory {
 		}
 		return leadFiles;
 	}
+
+	public static List<Volunteer_Opportunity__c> createVolunteerOpportunity(Integer num) {
+		List<Volunteer_Opportunity__c> volunteerOpportunities = new List<Volunteer_Opportunity__c>();
+		for (Integer i = 0; i < num; i++) {
+			Volunteer_Opportunity__c volunteerOpportunity = new Volunteer_Opportunity__c();
+			volunteerOpportunities.add(volunteerOpportunity);
+		}
+		return volunteerOpportunities;
+	}
 }

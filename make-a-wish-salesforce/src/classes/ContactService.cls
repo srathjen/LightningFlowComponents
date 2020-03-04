@@ -11,7 +11,12 @@ public with sharing class ContactService {
 	private final static String CHAPTER_ROLE_WISH_GRANTER = 'Wish Granter';
 	private final static String CHAPTER_ROLE_WISH_GRANTER_MENTOR = 'Wish Granter Mentor';
 
-	public static void setVolunteerContactActive(Map<Id, Contact> contactMap) {
+	/**
+	 * Activate Volunteer Contact Role
+	 * @param contactMap
+	 * @return Contact Map
+	 */
+	public static Map<Id, Contact> setVolunteerContactActive(Map<Id, Contact> contactMap) {
 		Set<Id> activeConIdSet = new Set<Id>();
 		Map<Id, String> affiliationStatusMap = new Map<Id, String>();
 		// Find Affiliations
@@ -139,5 +144,92 @@ public with sharing class ContactService {
 		if (!updateContactMap.isEmpty()) {
 			update updateContactMap.values();
 		}
+		return updateContactMap;
+	}
+
+	/**
+	 * Find Duplicated Contacts
+	 * @param firstName
+	 * @param lastName
+	 * @param phone
+	 * @param email
+	 * @param recordTypes
+	 * @return List of Contacts
+	 */
+	public static List<Contact> findDuplicatedContacts(String firstName, String lastName,
+			String phone, String email, List<Id> recordTypes) {
+		return [
+				SELECT Id, FirstName,Name, LastName, Email, Phone, MailingCity, Birthdate,
+						MailingState, MailingPostalCode
+				FROM Contact
+				WHERE FirstName = :firstName
+				AND LastName = :lastName
+				AND (Phone = :phone OR Email = :email)
+				AND RecordTypeId IN :recordTypes
+		];
+	}
+
+	/**
+	 * Find Family Duplicated Contacts
+	 * @param firstName
+	 * @param lastName
+	 * @param phone
+	 * @param email
+	 * @param street
+	 * @param city
+	 * @param state
+	 * @param postalCode
+	 * @param recordTypes
+	 * @return List of Contacts
+	 */
+	public static List<Contact> findFamilyDuplicatedContacts(String firstName, String lastName,
+			String phone, String email, String street, String city, String state, String postalCode,
+			List<Id> recordTypes) {
+		return [
+				SELECT Id, FirstName,Name, LastName, Email, Phone, MailingCity, Birthdate,
+						MailingState, MailingPostalCode
+				FROM Contact
+				WHERE (FirstName = :firstName AND LastName = :lastName
+				AND (((Email = :email OR Phone = :phone) AND (MailingStreet = :street
+				AND MailingState = :state AND MailingPostalCode = :postalCode AND MailingCity = :city))
+				OR ((Phone = :phone OR (MailingStreet = :street AND MailingState = :state
+				AND MailingPostalCode = :postalCode AND MailingCity = :city)) AND Email = :email)
+				OR (((MailingStreet = :street AND MailingState = :state AND MailingPostalCode = :postalCode
+				AND MailingCity = :city) OR (Email = :email)) AND Phone = :phone)))
+				AND RecordTypeId IN :recordTypes
+		];
+	}
+
+	/**
+	 * Find Child Contact Duplicated Contacts
+	 * @param firstName
+	 * @param lastName
+	 * @param phone
+	 * @param email
+	 * @param street
+	 * @param city
+	 * @param state
+	 * @param postalCode
+	 * @param dateOfBirth
+	 * @param recordTypes
+	 * @return List of Contacts
+	 */
+	public static List<Contact> findChildDuplicatedContacts(String firstName, String lastName,
+			String phone, String email, String street, String city, String state, String postalCode,
+			Date dateOfBirth, List<Id> recordTypes) {
+		return [
+				SELECT Id, FirstName,Name, LastName, Email, Phone, MailingCity, Birthdate,
+						MailingState, MailingPostalCode,Region_Chapter__r.Name
+				FROM Contact
+				WHERE ((LastName = :lastName AND FirstName = :firstName)
+				OR (LastName = :lastName AND ((MailingState = :state AND MailingCity = :city AND MailingStreet = :street
+				AND MailingPostalCode = :postalCode) OR (Email != '' AND Email = :email)))
+				OR (FirstName = :firstName AND ((MailingState = :state AND MailingCity = :city AND MailingStreet = :street
+				AND MailingPostalCode = :postalCode) OR Phone = :phone OR (Email != '' AND Email = :email)))
+				OR (Birthdate = :dateOfBirth AND ((MailingState = :state AND MailingCity = :city
+				AND MailingStreet = :street AND MailingPostalCode = :postalCode) OR (Email != '' AND Email = :email)))
+				OR (Birthdate = :dateOfBirth AND (LastName = :lastName OR FirstName = :firstName)))
+				AND RecordTypeId IN :recordTypes
+		];
 	}
 }
