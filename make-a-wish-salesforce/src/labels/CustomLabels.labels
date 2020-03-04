@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
         <fullName>AbsentForm</fullName>
         <categories>Docusign Template</categories>
@@ -150,11 +151,51 @@
         <value>kanagumca_jcet@hotmail.com</value>
     </labels>
     <labels>
+        <fullName>Duplicate_Lead_Message_1</fullName>
+        <categories>Lead</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Duplicate Lead Message 1</shortDescription>
+        <value>&apos;You can either choose &quot;No duplicate Found&quot; or any lead(s) under Select Existing Leads.&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Duplicate_Lead_Message_2</fullName>
+        <categories>Lead</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Duplicate Lead Message 2</shortDescription>
+        <value>Please select an existing lead to merge or check &quot;No Duplicate Found&quot; if the leads displayed are not duplicates.</value>
+    </labels>
+    <labels>
+        <fullName>Duplicate_Lead_Message_3</fullName>
+        <categories>Lead</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Duplicate Lead Message 3</shortDescription>
+        <value>Please select 2 leads for merging</value>
+    </labels>
+    <labels>
+        <fullName>Duplicate_Record</fullName>
+        <categories>Record</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Duplicate Record</shortDescription>
+        <value>There might be a duplicate {0}. Please click [OK] to review the duplicates.</value>
+    </labels>
+    <labels>
         <fullName>DvRetrunUrl</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>DvRetrunUrl</shortDescription>
         <value>http://devsup-wish.cs45.force.com</value>
+    </labels>
+    <labels>
+        <fullName>Existing_Record</fullName>
+        <categories>Record</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Existing Record</shortDescription>
+        <value>There might be an existing {0}. Please click [OK] to review the existing record.</value>
     </labels>
     <labels>
         <fullName>Family_Hold_Message</fullName>

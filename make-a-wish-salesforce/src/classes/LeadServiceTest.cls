@@ -10,6 +10,7 @@ public class LeadServiceTest {
 
 	@TestSetup
 	public static void setup() {
+		trac_TriggerHandlerBase.blockTrigger = true;
 		List<Account> accounts = TestDataFactory.createAccount(2);
 		Account account1 = accounts.get(0);
 		account1.Name = 'Make-A-Wish Arizona';
@@ -89,6 +90,7 @@ public class LeadServiceTest {
 		lead2.PD_ICD_Code__c = icdCode.Id;
 		lead2.Company = 'MAW';
 		insert leads;
+		trac_TriggerHandlerBase.blockTrigger = false;
 	}
 
 	@IsTest
@@ -149,5 +151,107 @@ public class LeadServiceTest {
 		Test.stopTest();
 
 		System.assertEquals(Constant_AC.LEAD_STATUS_REFERRED, updatedLead.Status);
+	}
+
+	@IsTest
+	public static void shouldResetLeadDvMedicalSummary() {
+		Lead lead = [
+				SELECT Id, ChapterName__c
+				FROM Lead
+				WHERE Name = 'Jack Smith'
+		];
+
+		Test.startTest();
+		Lead updatedLead = LeadService.resetLeadDvMedicalSummary(lead.Id);
+		Test.stopTest();
+
+		System.assertEquals(Constant_AC.LEAD_STATUS_REFERRED, updatedLead.Status);
+	}
+
+	@IsTest
+	public static void shouldMergeLeads() {
+		List<Lead> leads = [
+				SELECT Id, ChapterName__c
+				FROM Lead
+				WHERE LastName = 'Smith'
+		];
+
+		Test.startTest();
+		Boolean result = LeadService.mergeLeads(leads[0], new List<Lead>{leads[1]});
+		Test.stopTest();
+
+		System.assertEquals(true, result);
+	}
+
+	@IsTest
+	public static void shouldLeadDuplicates() {
+		String firstName = 'Mark';
+		String lastName = 'Smith';
+		String email = 'ms@email.com';
+		String phone = '12345678';
+		Date dateOfBirth = Date.today().addYears(-10);
+		String street = 'Mark Street';
+		String state = 'Arizona';
+		String city = 'Phoenix';
+		String postalCode = '12345-9876';
+
+		Test.startTest();
+		List<Lead> result = LeadService.findLeadDuplicates(
+				firstName, lastName, phone, email, street,
+				city, state, postalCode, dateOfBirth,
+				new List<Id>{}
+		);
+		Test.stopTest();
+		System.assertEquals(1, result.size());
+	}
+
+	@IsTest
+	public static void shouldLeadDuplicatesWithChapter() {
+		Account newChapter = [
+				SELECT Id
+				FROM Account
+				WHERE Name IN ('Make-A-Wish Arizona')
+		];
+		String firstName = 'Mark';
+		String lastName = 'Smith';
+		String email = 'ms@email.com';
+		String phone = '12345678';
+		Date dateOfBirth = Date.today().addYears(-10);
+		String street = 'Mark Street';
+		String state = 'Arizona';
+		String city = 'Phoenix';
+		String postalCode = '12345-9876';
+
+		Test.startTest();
+		List<Lead> result = LeadService.findLeadDuplicatesWithChapter(
+				firstName, lastName, phone, email, street,
+				city, state, postalCode, dateOfBirth,
+				new List<Id>{}, newChapter.Id
+		);
+		Test.stopTest();
+		System.assertEquals(1, result.size());
+	}
+
+	@IsTest
+	public static void shouldCheckIfSameMedicalProfessional() {
+		String firstName1 = 'Mark';
+		String firstName2 = 'Mark';
+		String lastName1 = 'Smith';
+		String lastName2 = 'Smith';
+		String email1 = 'ms@email.com';
+		String email2 = 'ms@email.com';
+		String phone1 = '12345678';
+		String phone2 = '12345678';
+
+		Test.startTest();
+		Boolean result = LeadService.isSameMedicalProfessional(
+				firstName1, firstName2,
+				lastName1, lastName2,
+				email1, email2,
+				phone1, phone2
+		);
+		Test.stopTest();
+
+		System.assertEquals(true, result);
 	}
 }
