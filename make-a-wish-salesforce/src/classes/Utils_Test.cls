@@ -50,4 +50,22 @@ public class Utils_Test {
 		System.assertEquals(month, result2.month());
 		System.assertEquals(day, result2.day());
 	}
+
+	@IsTest
+	private static void generateRandomNumber(){
+		Integer numberLength = 3;
+
+		String result = Utils.generateRandomNumber(numberLength);
+
+		System.assertEquals(3, result.length());
+	}
+
+	@IsTest
+	private static void generateRandomNumberWhenInvalidLength(){
+		Integer numberLength = null;
+
+		String result = Utils.generateRandomNumber(numberLength);
+
+		System.assertEquals(6, result.length());
+	}
 }

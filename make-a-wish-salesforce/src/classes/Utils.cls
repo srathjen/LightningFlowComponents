@@ -100,4 +100,23 @@ public class Utils {
 
 	public class UtilsException extends Exception {
 	}
+
+	/**
+	 * Generate random number
+	 * @return
+	 */
+	public static String generateRandomNumber(Integer length) {
+		if (length == null) {
+			length = 6;
+		} else if (length <= 0) {
+			length = 6;
+		}
+		final String chars = '0123456789';
+		String randStr = '';
+		while (randStr.length() < length) {
+			Integer idx = Math.mod(Math.abs(Crypto.getRandomInteger()), chars.length());
+			randStr += chars.substring(idx, idx + 1);
+		}
+		return randStr;
+	}
 }
