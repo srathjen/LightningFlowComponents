@@ -22,6 +22,7 @@ public class ContactServiceTest {
 		arizonaChapter.Name = 'Make-A-Wish Arizona';
 		arizonaChapter.RecordTypeId = CHAPTER_RECORD_TYPE_ID;
 		insert accounts;
+
 		List<Contact> contacts = TestDataFactory.createContact(2);
 		Contact volunteerArizona = contacts.get(0);
 		volunteerArizona.RecordTypeId = VOLUNTEER_RECORD_TYPE_ID;
@@ -50,12 +51,14 @@ public class ContactServiceTest {
 		volunteerNewYork.MailingState = 'New York';
 		volunteerNewYork.MailingCity = 'New York';
 		insert contacts;
+
 		List<Role__c> roles = TestDataFactory.createRole(2, true);
 		Role__c wishGranterRole = roles.get(0);
 		wishGranterRole.Name = 'Wish Granter';
 		Role__c wishGranterMentorRole = roles.get(1);
 		wishGranterMentorRole.Name = 'Wish Granter Mentor';
 		insert roles;
+
 		List<Chapter_Role__c> chapterRoles = TestDataFactory.createChapterRole(3);
 		Chapter_Role__c wishGranterArizonaRole = chapterRoles.get(0);
 		wishGranterArizonaRole.Chapter_Name__c = arizonaChapter.Id;
@@ -73,6 +76,7 @@ public class ContactServiceTest {
 		wishGranterMentorChapterRole.Background_Check_Required__c = false;
 		wishGranterMentorChapterRole.COI_Required__c = false;
 		insert chapterRoles;
+
 		List<Volunteer_Roles__c> volunteerRoles = TestDataFactory.createVolunteerRole(2);
 		Volunteer_Roles__c volunteerRoleArizonaPending = volunteerRoles.get(0);
 		volunteerRoleArizonaPending.Chapter_Role__c = wishGranterArizonaRole.Id;
@@ -83,12 +87,14 @@ public class ContactServiceTest {
 		volunteerRoleActive.Volunteer_Name__c = volunteerArizona.Id;
 		volunteerRoleActive.Status__c = 'Active';
 		insert volunteerRoles;
+
 		List<Orientation_Training__c> orientationTrainings = TestDataFactory.createOrientationTraining(2);
 		Orientation_Training__c orientation = orientationTrainings.get(0);
 		orientation.RecordTypeId = VOLUNTEER_ORIENTATION_RECORD_TYPE_ID;
 		Orientation_Training__c training = orientationTrainings.get(1);
 		training.RecordTypeId = VOLUNTEER_TRAINING_RECORD_TYPE_ID;
 		insert orientationTrainings;
+
 		List<Chapter_Role_O_T__c> chapterRoleOTs = TestDataFactory.createChapterRoleOrientationAndTraining(2);
 		Chapter_Role_O_T__c chapterRoleOTOrientation = chapterRoleOTs.get(0);
 		chapterRoleOTOrientation.Orientation_Training__c = orientation.Id;
@@ -99,12 +105,14 @@ public class ContactServiceTest {
 		chapterRoleOTTraining.Chapter_Role__c = wishGranterMentorChapterRole.Id;
 		chapterRoleOTTraining.Required__c = true;
 		insert chapterRoleOTs;
+
 		List<Conflict_Of_Interest__c> conflictOfInterests = TestDataFactory.createConflictOfInterest(1);
 		Conflict_Of_Interest__c conflictOfInterest = conflictOfInterests.get(0);
 		conflictOfInterest.Current__c = true;
 		conflictOfInterest.Account_Name__c = arizonaChapter.Name;
 		conflictOfInterest.Volunteer_Contact__c = volunteerArizona.Id;
 		insert conflictOfInterests;
+
 		List<Background_check__c> backgroundChecks = TestDataFactory.createBackgroundCheck(1);
 		Background_check__c backgroundCheck = backgroundChecks.get(0);
 		backgroundCheck.Current__c = true;
@@ -112,6 +120,7 @@ public class ContactServiceTest {
 		backgroundCheck.Status__c = BACKGROUND_CHECK_STATUS_APPROVED;
 		backgroundCheck.Date_Completed__c = Date.today();
 		insert backgroundChecks;
+
 		List<Class_Offering__c> classOfferings = TestDataFactory.createClassOffering(2);
 		Class_Offering__c classOfferingOrientation = classOfferings.get(0);
 		classOfferingOrientation.Chapter_Role_O_T__c = chapterRoleOTOrientation.Id;
@@ -122,6 +131,7 @@ public class ContactServiceTest {
 		classOfferingTraining.Date__c = System.today() + 10;
 		classOfferingTraining.RecordTypeId = CLASS_OFFERING_RECORD_TYPE_ID;
 		insert classOfferings;
+
 		List<Volunteer_Orientation_Training__c> volunteerOrientationTrainings = TestDataFactory.createVolunteerOrientationAndTraining(2);
 		Volunteer_Orientation_Training__c volunteerOrientation = volunteerOrientationTrainings.get(0);
 		volunteerOrientation.Volunteer_Attendance__c = VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED;
@@ -132,6 +142,7 @@ public class ContactServiceTest {
 		volunteerTraining.Volunteer__c = volunteerArizona.Id;
 		volunteerTraining.Class_Offering__c = classOfferingTraining.Id;
 		insert volunteerOrientationTrainings;
+
 		List<Volunteer_Opportunity__c> volunteerOpportunities = TestDataFactory.createVolunteerOpportunity(1);
 		Volunteer_Opportunity__c volunteerOpportunity = volunteerOpportunities.get(0);
 		volunteerOpportunity.Volunteer_Name__c = volunteerArizona.Id;
