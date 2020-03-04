@@ -106,9 +106,7 @@ public class Utils {
 	 * @return
 	 */
 	public static String generateRandomNumber(Integer length) {
-		if (length == null) {
-			length = 6;
-		} else if (length <= 0) {
+		if (length == null || length <= 0) {
 			length = 6;
 		}
 		final String chars = '0123456789';
