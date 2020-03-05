@@ -6,6 +6,10 @@
  * @update Modified code to use Apex Date methods when calculating age, and added code for End-of-Month date calculation exceptions
  */
 global class batch_leadChildAge implements Database.Batchable<SObject> {
+
+	@TestVisible
+	private Date runDate;
+
 	global Database.QueryLocator start(Database.BatchableContext bc) {
 		return Database.getQueryLocator([
 				SELECT Id,DOB__c, Child_Age__c, Status, Age_Requirement_Met__c
