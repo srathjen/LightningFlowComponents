@@ -48,37 +48,49 @@ public class DiagnosisVerification_AC_Helper {
      * @author          Chris Shinnimin, Traction on Demand
      * @createdDate     2020-02-28
      */
-    public static List<Medical_Questions__c> getMedicalQuestions(String whereClauseField, String whereClauseValue) {
-        String query = 'SELECT ';
+    public static List<Medical_Questions__c> getMedicalQuestions() {
+        return [
+            SELECT
+                Id,
+                RecordTypeId,
+                Condition_Description__c,
+                Condition_Description__r.Name,
+                Current_Condition__c,
+                Data_Type__c,
+                Epilepsy_picklist__c,
+                Picklist_values__c,
+                Question__c,
+                Recommendation_to_Chapter__c,
+                Sort_Order__c,
+                Wrapper_Variable__c
+            FROM Medical_Questions__c
+            ORDER BY Sort_Order__c
+        ];
+    }
 
-        final List<String> FIELDS_TO_SELECT = new List<String> {
-            'Id',
-            'RecordTypeId',
-            'Condition_Description__c',
-            'Condition_Description__r.Name',
-            'Current_Condition__c',
-            'Data_Type__c',
-            'Epilepsy_picklist__c',
-            'Picklist_values__c',
-            'Question__c',
-            'Recommendation_to_Chapter__c',
-            'Sort_Order__c',
-            'Wrapper_Variable__c'
-        };
+    /*
+     * @description     Function to create a Map<String,List<Medical_Questions__c>> from a List<Medical_Questions__c>
+     *                  with Medical_Questions__c.Condition_Description__c as the key.
+     *
+     * @param           List<Medical_Questions__c>
+     *
+     * @return          Map<String,List<Medical_Questions__c>>>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-03-04
+     */
+    public static Map<String,List<Medical_Questions__c>> createMapOfMedicalQuestionsByDescription(List<Medical_Questions__c> medicalQuestions) {
+        Map<String,List<Medical_Questions__c>> mapOfMedicalQuestionsByDescription = new Map<String,List<Medical_Questions__c>>();
 
-        for (String field : FIELDS_TO_SELECT) {
-            query += field + ',';
+        for (Medical_Questions__c medicalQuestion : medicalQuestions) {
+            if (!mapOfMedicalQuestionsByDescription.containsKey(medicalQuestion.Condition_Description__c)) {
+                mapOfMedicalQuestionsByDescription.put(medicalQuestion.Condition_Description__c, new List<Medical_Questions__c>());
+            }
+
+            mapOfMedicalQuestionsByDescription.get(medicalQuestion.Condition_Description__c).add(medicalQuestion);
         }
 
-        query = query.removeEnd(',');
-        query += ' FROM Medical_Questions__c ';
-        if (!String.isBlank(whereClauseField)) {
-            query += 'WHERE ' + whereClauseField + ' = :whereClauseValue';
-        }
-        query += ' ORDER BY Sort_Order__c ASC ';
-        query += 'LIMIT 50000';
-
-        return Database.query(query);
+        return mapOfMedicalQuestionsByDescription;
     }
 
     /*
@@ -154,7 +166,7 @@ public class DiagnosisVerification_AC_Helper {
     }
 
     /*
-     * @description     Function to return a list of Condition Descriptions with a given Name.
+     * @description     Function to return a List of Condition Descriptions with a given Name.
      *                  This was moved out of WishChildEligibilityCheck() to reduce the size of that function and improve readability.
      *
      *
@@ -166,36 +178,65 @@ public class DiagnosisVerification_AC_Helper {
      * @author          Chris Shinnimin, Traction on Demand
      * @createdDate     2020-03-02
      */
-    public static List<Condition_Description__c> getConditionDescriptionInfo(String whereClauseField, String whereClauseValue, Boolean isLiteralValue) {
-        String query = 'SELECT ';
+    public static List<Condition_Description__c> getConditionDescriptionInfo() {
+        return [
+            SELECT
+                Id,
+                Name,
+                isEligible__c,
+                Group1__c,
+                Code_To_Use__c,
+                InActive__c,
+                Not_Listed__c
+            FROM Condition_Description__c
+        ];
+    }
 
-        final List<String> FIELDS_TO_SELECT = new List<String> {
-            'Id',
-            'Name',
-            'isEligible__c',
-            'Group1__c',
-            'Code_To_Use__c',
-            'InActive__c'
-        };
+    /*
+     * @description     Function to create a Map<String,List<Condition_Description__c>> from a List<Condition_Description__c>
+     *                  with Condition_Description__c.Name as the key.
+     *
+     * @param           List<Condition_Description__c>
+     *
+     * @return          Map<String,List<Condition_Description__c>>>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-03-04
+     */
+    public static Map<String,List<Condition_Description__c>> createMapOfConditionDescriptionsByName(List<Condition_Description__c> conditionDescriptions) {
+        Map<String,List<Condition_Description__c>> mapOfConditionDescriptionsByName = new Map<String,List<Condition_Description__c>>();
 
-        for (String field : FIELDS_TO_SELECT) {
-            query += field + ',';
+        for (Condition_Description__c conditionDescription : conditionDescriptions) {
+            if (!mapOfConditionDescriptionsByName.containsKey(conditionDescription.Name)) {
+                mapOfConditionDescriptionsByName.put(conditionDescription.Name, new List<Condition_Description__c>());
+            }
+
+            mapOfConditionDescriptionsByName.get(conditionDescription.Name).add(conditionDescription);
         }
 
-        query = query.removeEnd(',');
-        query += ' FROM Condition_Description__c ';
-        if (!String.isBlank(whereClauseField)) {
-            query += 'WHERE ' + whereClauseField + ' = ';
-            if (isLiteralValue) {
-                query += whereClauseValue;
-            } else {
-                query += ':whereClauseValue';
+        return mapOfConditionDescriptionsByName;
+    }
+
+    /*
+     * @description     Function to filter a List<Condition_Description__c>, containing only records where
+     *                  Condition_Description__c.Not_Listed__c = true.
+     *
+     * @param           List<Condition_Description__c>
+     *
+     * @return          List<Condition_Description__c>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-03-04
+     */
+    public static List<Condition_Description__c> createListOfDefaultDescriptions(List<Condition_Description__c> conditionDescriptions) {
+        List<Condition_Description__c> filteredList = new List<Condition_Description__c>();
+
+        for (Condition_Description__c conditionDescription : conditionDescriptions) {
+            if (conditionDescription.Not_Listed__c) {
+                filteredList.add(conditionDescription);
             }
         }
-        query += ' LIMIT 50000';
 
-        System.debug(query);
-
-        return Database.query(query);
+        return filteredList;
     }
 }

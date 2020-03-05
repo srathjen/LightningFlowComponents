@@ -30,19 +30,31 @@ public class DiagnosisVerification_AC {
     public String wishStatus { get; set; }
     public String otherDiagnosisBlock { get; set; }
     public Boolean showAddAnotherDiagnosisBtn { get; set; }
-    public Lead currlead { get; set; }
+    public Lead currLead { get; set; }
     public DiagnosisWrapper wrapCls { get; set; }
     public WishChildWrapper wishChildWrapperIns { get; set; }
     public TravelAlgorithmWrapper travelAlgorithmWrapperIns { get; set; }
     public List<DiagnosisWrapper> diagnosisVerificationWrapperLst { get; set; }
 
-    private static List<Condition_Description__c> defaultConditionDescriptions =
-        DiagnosisVerification_AC_Helper.getConditionDescriptionInfo('Not_Listed__c', 'true', true);
+    private static final List<Medical_Questions__c> ALL_MEDICAL_QUESTIONS =
+        DiagnosisVerification_AC_Helper.getMedicalQuestions();
+    private static final Map<String,List<Medical_Questions__c>> MAP_OF_MEDICAL_QUESTIONS_BY_DESCRIPTION =
+        DiagnosisVerification_AC_Helper.createMapOfMedicalQuestionsByDescription(ALL_MEDICAL_QUESTIONS);
+    private static final List<Condition_Description__c> ALL_CONDITION_DESCRIPTIONS =
+        DiagnosisVerification_AC_Helper.getConditionDescriptionInfo();
+    private static final List<Condition_Description__c> DEFAULT_CONDITION_DESCRIPTIONS =
+        DiagnosisVerification_AC_Helper.createListOfDefaultDescriptions(ALL_CONDITION_DESCRIPTIONS);
+    private static final Map<String,List<Condition_Description__c>> MAP_OF_CONDITION_DESCRIPTIONS_BY_NAME =
+        DiagnosisVerification_AC_Helper.createMapOfConditionDescriptionsByName(ALL_CONDITION_DESCRIPTIONS);
+    private static final Map<Id,Condition_Description__c> MAP_OF_CONDITION_DESCRIPTIONS_BY_ID =
+        new Map<Id,Condition_Description__c>(ALL_CONDITION_DESCRIPTIONS);
+
+
 
     public DiagnosisVerification_AC() {
         pluHypTxt = '';
         wishStatus = null;
-        currlead = new Lead();
+        currLead = new Lead();
         uniqueCurrentConditionSet = new Set<String>();
         wrapCls = new DiagnosisWrapper();
         wishChildWrapperIns = new WishChildWrapper();
@@ -64,7 +76,7 @@ public class DiagnosisVerification_AC {
     public void loadData() {
         medicalQuestionMap = new Map<Id, Medical_Questions__c>();
         condDesMedicalQuestionMap = new Map<String, List<Medical_Questions__c>>();
-        diagnosisVerificationWrapperLst = new list<DiagnosisWrapper>();
+        diagnosisVerificationWrapperLst = new List<DiagnosisWrapper>();
         travelAlgorithmWrapperIns = new TravelAlgorithmWrapper();
         travelAlgorithmWrapperIns.travelAgroithmList = new List<String>();
         travelVal = new Map<String, String>();
@@ -73,15 +85,14 @@ public class DiagnosisVerification_AC {
         travelAlgorithmMap = new Map<String, String>();
         travelAlgorithmWrapperIns.travelSet = new Set<String>();
 
-        currlead = getCurrLead(leadId);
+        currLead = getCurrLead(leadId);
         currLead.Current_Condition_Label__c = currLead.Travel_algorithm__c;
 
         wishStatus = currLead.RFI_Form_Info_Hidden__c;
 
         populateWishChildWrapper();
 
-        List<Medical_Questions__c> medicalQuestions = DiagnosisVerification_AC_Helper.getMedicalQuestions(null, null);
-        for (Medical_Questions__c medicalQuestion : medicalQuestions) {
+        for (Medical_Questions__c medicalQuestion : ALL_MEDICAL_QUESTIONS) {
             if (medicalQuestion.Question__c != null) {
                 medicalQuestion.Question__c = medicalQuestion.Question__c.replace('[child\'s name]', ' ' + currLead.FirstName + ' ' + currLead.LastName).replace(' (child\'s name) ', currLead.FirstName + ' ' + currLead.LastName).replace('[Insert child\'s name]', currLead.FirstName + ' ' + currLead.LastName);
             } else {
@@ -100,17 +111,20 @@ public class DiagnosisVerification_AC {
         }
 
         // wrapping the Diagnosis Verification records and Medical Questions of the Lead to the DiagnosisWrapper
-        diagnosisVerificationLst = DiagnosisVerification_AC_Helper.getDiagnosisVerifications(leadId);
+        diagnosisVerificationLst = DiagnosisVerification_AC_Helper.getDiagnosisVerifications((Id) leadId);
 
         populateDiagnosisVerificationWrappers();
 
         Integer lastElement = diagnosisVerificationWrapperLst.size();
-        if (wishStatus != 'Qualified' && diagnosisVerificationWrapperLst.size() < 5 && (diagnosisVerificationWrapperLst[lastelement - 1].iCDCode != Null || diagnosisVerificationWrapperLst[lastelement - 1].conditionDescription != Null) && diagnosisVerificationWrapperLst[lastelement - 1].medicalWrapperList.size() == diagnosisVerificationLst[lastelement - 1].DiagnosisMedicalQuestions__r.size()) {
+        if (wishStatus != 'Qualified' && diagnosisVerificationWrapperLst.size() < 5 &&
+            (diagnosisVerificationWrapperLst[lastElement - 1].icdCode != null  || diagnosisVerificationWrapperLst[lastElement - 1].conditionDescription != null) &&
+            diagnosisVerificationWrapperLst[lastElement - 1].medicalWrapperList.size() == diagnosisVerificationLst[lastElement - 1].DiagnosisMedicalQuestions__r.size()) {
+
             showAddAnotherDiagnosisBtn = true;
         }
 
         // travel algorithm
-        for (Medical_Questions__c medicalQuestion : medicalQuestions) {
+        for (Medical_Questions__c medicalQuestion : ALL_MEDICAL_QUESTIONS) {
             if (medicalQuestion.RecordTypeId != Constant_AC.TRAVEL_ALGM_RT_ID) {
                 continue;
             }
@@ -169,7 +183,7 @@ public class DiagnosisVerification_AC {
         }
 
         for (Integer i = 0; i < diagnosisVerificationWrapperLst.size(); i++) {
-            if (String.isEmpty(diagnosisVerificationWrapperLst[i].iCDCode) && String.isEmpty(diagnosisVerificationWrapperLst[i].conditionDescription) && i != diagnosisBlockNum) {
+            if (String.isEmpty(diagnosisVerificationWrapperLst[i].icdCode) && String.isEmpty(diagnosisVerificationWrapperLst[i].conditionDescription) && i != diagnosisBlockNum) {
                 diagnosisVerificationWrapperLst[i].shortDescription = null;
                 diagnosisVerificationWrapperLst[i].pcdOrIcd = null;
                 diagnosisVerificationWrapperLst[i].valueSelectedICD = null;
@@ -260,8 +274,10 @@ public class DiagnosisVerification_AC {
         query = query.removeEnd(',');
         query += ' FROM ICD_Codes__c ';
         query += ' WHERE Condition_Description__r.InActive__c != true AND ';
-        query += ' Hidden_ICD_Code__c = false AND ';
-        query += ' Name LIKE \'%' + String.escapeSingleQuotes(searchTerm) + '%\'';
+        query += ' Hidden_ICD_Code__c = false ';
+        if (!String.isBlank(searchTerm)) {
+            query += ' AND Name LIKE \'%' + String.escapeSingleQuotes(searchTerm) + '%\'';
+        }
         query += ' LIMIT 50000';
 
         List<ICD_Codes__c> icdCodes = Database.query(query);
@@ -271,44 +287,22 @@ public class DiagnosisVerification_AC {
     /*
      * @description     Auto Complete the Diagnosis field value.
      *
-     * @author          unknown
-     * @date            unknown
+     * @param           String searchTerm
+     *
+     * @return          List<Condition_Description__c>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @date            2020-03-04
      */
     @RemoteAction
     public static List<Condition_Description__c> searchCondition(String searchTerm) {
-        // NOTE: This function is executed each time there is a keypress in the Diagnosis textbox, performing a SOQL
-        // query each time. Previously, the function would then also perform a second query on the same object to get
-        // the default list if no match was found. The class was improved to only query for the default list once.
-        // However, it may wish to be considered to also only query for the entire list of descriptions once as well,
-        // if there is a limited number of records. It is a question of whether we want to save memory or queries.
-        //
-        // Chris Shinnimin, Traction on Demand, 2020-03-03
+        List<Condition_Description__c> conditionDescriptions = new List<Condition_Description__c>();
+        Pattern pattern = Pattern.compile('(?i).*' + String.escapeSingleQuotes(searchTerm) + '.*');
 
-        String query = 'SELECT ';
-
-        final List<String> FIELDS_TO_SELECT = new List<String> {
-            'Id',
-            'Name',
-            'isEligible__c',
-            'Group1__c',
-            'Code_To_Use__c',
-            'InActive__c'
-        };
-
-        for (String field : FIELDS_TO_SELECT) {
-            query += field + ',';
-        }
-
-        query = query.removeEnd(',');
-        query += ' FROM Condition_Description__c ';
-        query += ' WHERE InActive__c != true AND ';
-        query += ' Name LIKE \'%' + String.escapeSingleQuotes(searchTerm) + '%\'';
-        query += ' LIMIT 50000';
-
-        List<Condition_Description__c> conditionDescriptions = Database.query(query);
-
-        if (!(conditionDescriptions.size() > 0)) {
-            conditionDescriptions = defaultConditionDescriptions;
+        for (String cdName : MAP_OF_CONDITION_DESCRIPTIONS_BY_NAME.keySet()) {
+            if (pattern.matcher(cdName).matches()) {
+                conditionDescriptions.addAll(MAP_OF_CONDITION_DESCRIPTIONS_BY_NAME.get(cdName));
+            }
         }
 
         return conditionDescriptions;
@@ -322,13 +316,13 @@ public class DiagnosisVerification_AC {
      */
     public PageReference submit() {
         if (currLead.isSign__c == true) {
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'Document already reviewed, please contact chapter staff for access');
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.DiagnosisVerification_Already_Reviewed);
             ApexPages.addMessage(myMsg);
-        } else if (currLead.isConverted == true) {
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'You cannot review this document');
+        } else if (currLead.IsConverted == true) {
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.DiagnosisVerification_Cannot_Review);
             ApexPages.addMessage(myMsg);
         } else if (wishChildWrapperIns.password != currLead.Part_A_Form_Password__c) {
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'Incorrect password');
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.DiagnosisVerification_Incorrect_Password);
             ApexPages.addMessage(myMsg);
         } else if (wishChildWrapperIns.password == currLead.Part_A_Form_Password__c) {
             wishChildWrapperIns.login = true;
@@ -354,8 +348,6 @@ public class DiagnosisVerification_AC {
      * @date            unknown
      */
     public void WishChildEligibilityCheck() {
-        String LogValue;
-        String recId;
         try {
             icdOrPcd = ApexPages.currentPage().getParameters().get('icdOrPcd'); // Used to hold the given auto complete input is ICD Code or Condition Description
             diagnosisBlockNum = Integer.valueOf(ApexPages.currentPage().getParameters().get('diagnosisBlockNum')); // Used to hold the Diagnosis block number
@@ -375,9 +367,10 @@ public class DiagnosisVerification_AC {
 
             // ICD code
             if (icdOrPcd == 'ICD') {
-                List<ICD_Codes__c> icdCodeInfo = DiagnosisVerification_AC_Helper.getIcdCodeInfo(diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode);
+                List<ICD_Codes__c> icdCodeInfo = DiagnosisVerification_AC_Helper.getIcdCodeInfo(diagnosisVerificationWrapperLst[diagnosisBlockNum].icdCode);
                 if (icdCodeInfo.size() > 0) {
-                    List<Medical_Questions__c> medicalQuestionList = DiagnosisVerification_AC_Helper.getMedicalQuestions('Condition_Description__c', icdCodeInfo[0].Condition_Description__c);
+                    //List<Medical_Questions__c> medicalQuestionList = DiagnosisVerification_AC_Helper.getMedicalQuestions('Condition_Description__c', icdCodeInfo[0].Condition_Description__c);
+                    List<Medical_Questions__c> medicalQuestionList = MAP_OF_MEDICAL_QUESTIONS_BY_DESCRIPTION.get(icdCodeInfo[0].Condition_Description__c);
 
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = icdCodeInfo[0].Short_Description__c;
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isGroup1Rec = icdCodeInfo[0].Group1__c;
@@ -397,12 +390,12 @@ public class DiagnosisVerification_AC {
                     showAddAnotherDiagnosisBtn = true;
                 }
 
-                List<Condition_Description__c> conditionDescriptionInfo = DiagnosisVerification_AC_Helper.getConditionDescriptionInfo('Name', diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription, false);
+                List<Condition_Description__c> conditionDescriptionInfo = MAP_OF_CONDITION_DESCRIPTIONS_BY_NAME.get(diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription);
 
                 if (conditionDescriptionInfo.size() > 0) {
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isGroup1Rec = conditionDescriptionInfo[0].Group1__c;
 
-                    List<Medical_Questions__c> medicalQuestionList = DiagnosisVerification_AC_Helper.getMedicalQuestions('Condition_Description__c', conditionDescriptionInfo[0].Id);
+                    List<Medical_Questions__c> medicalQuestionList = MAP_OF_MEDICAL_QUESTIONS_BY_DESCRIPTION.get(conditionDescriptionInfo[0].Id);
 
                     //Condition Description categories like Epilepsy, Cardiomyopathy with group 1 records are considered as eligible without asking Medical Questions
                     //Those questions are identified by using isEligible__c field
@@ -439,8 +432,6 @@ public class DiagnosisVerification_AC {
                 throw new CommonTriggerException('Test Class execution');
             }
         } catch (Exception ex) {
-            Logvalue = string.valueof(currLead);
-            new ApexDebugLog().createLog(new ApexDebugLog.Error('DiagnosisVerification_AC', 'WishChildEligibilityCheck', currLead.Id, ex, Logvalue));
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
             ApexPages.addMessage(myMsg);
         }
@@ -473,14 +464,14 @@ public class DiagnosisVerification_AC {
      */
     @TestVisible
     private List<DiagnosisWrapper.MedicalWrapper> MedicalQuestions(String icdCode, String conditionDescription, Boolean isGroup1, String icdOrPcd, Integer diagnosisBlockNum, List<Medical_Questions__c> medicalQuestions, Boolean skipMedQues) {
-        String LogValue;
         try {
+            Condition_Description__c conditionDesc;
             diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescriptionObject = conditionDescription;
 
-            List<Condition_Description__c> conditionDesc = DiagnosisVerification_AC_Helper.getConditionDescriptionInfo('Id', conditionDescription, false);
+            if (MAP_OF_CONDITION_DESCRIPTIONS_BY_ID.containsKey(conditionDescription) &&  medicalQuestions.size() > 0) {
+                conditionDesc = MAP_OF_CONDITION_DESCRIPTIONS_BY_ID.get(conditionDescription);
 
-            if (!String.isEmpty(conditionDescription) && medicalQuestions.size() > 0) {
-                if (conditionDesc.size() > 0 && conditionDesc[0].Name == 'Arteriovenus Malformation (AVM)') {
+                if (conditionDesc.Name == 'Arteriovenus Malformation (AVM)') {
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = true;
                 }
 
@@ -492,15 +483,15 @@ public class DiagnosisVerification_AC {
                         DiagnosisWrapper.MedicalWrapper medicalWrapperItem = new DiagnosisWrapper.MedicalWrapper();
                         medicalWrapperItem.medicalQuestion = medicalQuestion;
 
-                        medicalWrapperItem.pickVals = DiagnosisWrapper.picklistStringToOptions(medicalQuestion.Picklist_values__c);
-                        medicalWrapperItem.epilepsyPickVals = DiagnosisWrapper.picklistStringToOptions(medicalQuestion.Epilepsy_picklist__c);
+                        medicalWrapperItem.pickVals = Utils.picklistStringToOptions(medicalQuestion.Picklist_values__c);
+                        medicalWrapperItem.epilepsyPickVals = Utils.picklistStringToOptions(medicalQuestion.Epilepsy_picklist__c);
 
                         diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList.add(medicalWrapperItem);
                     }
                 } else if (isGroup1 == true) {
                     if (wishChildWrapperIns.describePatient != '7' && wishChildWrapperIns.describePatient != '8' && wishChildWrapperIns.describePatient != '6') {
                         diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = true;
-                        diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode = icdCode;
+                        diagnosisVerificationWrapperLst[diagnosisBlockNum].icdCode = icdCode;
                     } else {
                         showAddAnotherDiagnosisBtn = true;
                     }
@@ -515,7 +506,7 @@ public class DiagnosisVerification_AC {
             } else if (isGroup1 == true) {
                 if (wishChildWrapperIns.describePatient != '7' && wishChildWrapperIns.describePatient != '8' && wishChildWrapperIns.describePatient != '6') {
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = true;
-                    diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode = icdCode;
+                    diagnosisVerificationWrapperLst[diagnosisBlockNum].icdCode = icdCode;
                 } else {
                     showAddAnotherDiagnosisBtn = true;
                 }
@@ -534,8 +525,6 @@ public class DiagnosisVerification_AC {
                 throw new CommonTriggerException('Test Class execution');
             }
         } catch (Exception ex) {
-            Logvalue = string.valueof(currLead);
-            new ApexDebugLog().createLog(new ApexDebugLog.Error('DiagnosisVerification_AC', 'MedicalQuestions', currLead.id, ex, Logvalue));
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
             ApexPages.addMessage(myMsg);
         }
@@ -550,7 +539,6 @@ public class DiagnosisVerification_AC {
      * @date            unknown
      */
     public void MedicalResponse() {
-        String LogValue;
         try {
             medicalResponse = ApexPages.currentPage().getParameters().get('medicalResponse'); // used to hold the Medical Question response
             diagnosisBlockNum = Integer.valueOf(ApexPages.currentPage().getParameters().get('diagnosisBlockNum')); // used to hold the Diagnosis block number
@@ -564,11 +552,11 @@ public class DiagnosisVerification_AC {
                     currLead.Qualifying_Diagnosis__c = diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription;
 
                     if (currLead.Qualifying_Diagnosis__c != null) {
-                        List<Condition_Description__c> descriptionList = DiagnosisVerification_AC_Helper.getConditionDescriptionInfo('Name', currLead.Qualifying_Diagnosis__c, false);
+                        List<Condition_Description__c> descriptionList = MAP_OF_CONDITION_DESCRIPTIONS_BY_NAME.get(currLead.Qualifying_Diagnosis__c);
                         currLead.PR_Diagnosis__c = (descriptionList.size() > 0) ? descriptionList[0].PR_Diagnosis__c : '';
                     }
 
-                    List<ICD_Codes__c> icdCodeInfo = DiagnosisVerification_AC_Helper.getIcdCodeInfo(diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode);
+                    List<ICD_Codes__c> icdCodeInfo = DiagnosisVerification_AC_Helper.getIcdCodeInfo(diagnosisVerificationWrapperLst[diagnosisBlockNum].icdCode);
 
                     if (icdCodeInfo.size() > 0) {
                         currLead.Qualifying_ICD__c = icdCodeInfo[0].Id;
@@ -578,7 +566,6 @@ public class DiagnosisVerification_AC {
                 if (diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList[questionNumber].isEligible) {
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = false;
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList[questionNumber].isEligible = false;
-                    //IME-120
                     currLead.Qualifying_Diagnosis__c = '';
                     currLead.Qualifying_ICD__c = null;
                     currLead.Is_Required_Bypass__c = true;
@@ -593,7 +580,7 @@ public class DiagnosisVerification_AC {
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList[questionNumber].isEligible = false;
                     //IME-120
                     currLead.Qualifying_Diagnosis__c = '';
-                    currLead.Qualifying_ICD__c = NULL;
+                    currLead.Qualifying_ICD__c = null;
                     currLead.Is_Required_Bypass__c = true;
                     currLead.PR_Diagnosis__c = '';
                 }
@@ -605,8 +592,6 @@ public class DiagnosisVerification_AC {
                 throw new CommonTriggerException('Test Class execution');
             }
         } catch (Exception ex) {
-            Logvalue = string.valueof(currLead);
-            new ApexDebugLog().createLog(new ApexDebugLog.Error('DiagnosisVerification_AC', 'MedicalResponse', currLead.Id, ex, Logvalue));
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
             ApexPages.addMessage(myMsg);
         }
@@ -637,8 +622,6 @@ public class DiagnosisVerification_AC {
      * @date            unknown
      */
     public void deleteLeadFile() {
-        String LogValue;
-        String recId;
         String attachmentId = ApexPages.currentPage().getParameters().get('attachmentId'); // Used to hold the Diagnosis block number
 
         try {
@@ -647,13 +630,11 @@ public class DiagnosisVerification_AC {
                 FROM cg__Lead_File__c
                 WHERE Id = :attachmentId
             ];
-            recId = attachmentId;
+
             if (Test.isRunningTest()) {
                 throw new CommonTriggerException('Test Class execution');
             }
         } catch (Exception ex) {
-            Logvalue = string.valueof(currLead);
-            new ApexDebugLog().createLog(new ApexDebugLog.Error('DiagnosisVerification_AC', 'deleteLeadFile', recId, ex, Logvalue));
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
             ApexPages.addMessage(myMsg);
         }
@@ -699,8 +680,8 @@ public class DiagnosisVerification_AC {
                 currLead.Communication__c = communications.removeEnd(';');
             }
 
-            List<Diagnosis_Verification__c> diagnosisVerificationLstForInsert = new list<Diagnosis_Verification__c>();
-            List<DiagnosisMedicalQuestions__c> diagnosisMedicalQuestionLst = new list<DiagnosisMedicalQuestions__c>();
+            List<Diagnosis_Verification__c> diagnosisVerificationLstForInsert = new List<Diagnosis_Verification__c>();
+            List<DiagnosisMedicalQuestions__c> diagnosisMedicalQuestionLst = new List<DiagnosisMedicalQuestions__c>();
             Integer order = 0;
 
             currLead.PD_Condition_Description__c = currLead.Diagnosis_Given_By_Referrer__c;
@@ -719,7 +700,7 @@ public class DiagnosisVerification_AC {
             Set<String> icdCodeSet = new Set<String>();
             Map<String, Id> icdInfoMap = new Map<String, Id>();
             for (DiagnosisWrapper diagnosisVerificationItem : diagnosisVerificationWrapperLst) {
-                icdCodeSet.add(diagnosisVerificationItem.iCDCode);
+                icdCodeSet.add(diagnosisVerificationItem.icdCode);
             }
 
             for (ICD_Codes__c icdInfo : [
@@ -731,68 +712,71 @@ public class DiagnosisVerification_AC {
             }
 
             for (DiagnosisWrapper diagnosisVerificationItem : diagnosisVerificationWrapperLst) {
-                if (!orderSet.contains(order) && (!String.isEmpty(diagnosisVerificationItem.iCDCode) || !String.isEmpty(diagnosisVerificationItem.conditionDescription))) {
+                if (!orderSet.contains(order) && (!String.isEmpty(diagnosisVerificationItem.icdCode) || !String.isEmpty(diagnosisVerificationItem.conditionDescription))) {
                     Diagnosis_Verification__c diagnosisVerification = new Diagnosis_Verification__c();
                     diagnosisVerification.Order__c = order;
                     diagnosisVerification.Group1__c = diagnosisVerificationItem.isGroup1Rec;
                     diagnosisVerification.Lead__c = leadId;
                     diagnosisVerification.isEligible__c = diagnosisVerificationItem.isEligible;
 
-                    diagnosisVerification.ICD_Code__c = diagnosisVerificationItem.iCDCode;
+                    diagnosisVerification.ICD_Code__c = diagnosisVerificationItem.icdCode;
                     diagnosisVerification.PCD_ICD__c = diagnosisVerificationItem.pcdOrIcd;
                     diagnosisVerification.Condition_Description__c = diagnosisVerificationItem.conditionDescriptionObject;
                     diagnosisVerification.Short_Description__c = diagnosisVerificationItem.shortDescription;
                     diagnosisVerificationItem.externalId = Math.random();
-                    diagnosisVerification.Eternal_Id__c = string.valueof(diagnosisVerificationItem.externalId);
+                    diagnosisVerification.Eternal_Id__c = String.valueOf(diagnosisVerificationItem.externalId);
                     diagnosisVerificationLstForInsert.add(diagnosisVerification);
 
                     if (order == 0) {
                         currLead.PD_Condition_Description__c = diagnosisVerificationItem.conditionDescription;
 
-                        if (icdInfoMap.containsKey(diagnosisVerificationItem.iCDCode)) {
-                            currLead.PD_ICD_Code__c = icdInfoMap.get(diagnosisVerificationItem.iCDCode);
+                        if (icdInfoMap.containsKey(diagnosisVerificationItem.icdCode)) {
+                            currLead.PD_ICD_Code__c = icdInfoMap.get(diagnosisVerificationItem.icdCode);
                         }
 
                     }
                     if (order == 1) {
                         currLead.SD1_Condition_Description__c = diagnosisVerificationItem.conditionDescription;
-                        if (icdInfoMap.containsKey(diagnosisVerificationItem.iCDCode)) {
-                            currLead.SD1_ICD_Code__c = icdInfoMap.get(diagnosisVerificationItem.iCDCode);
+                        if (icdInfoMap.containsKey(diagnosisVerificationItem.icdCode)) {
+                            currLead.SD1_ICD_Code__c = icdInfoMap.get(diagnosisVerificationItem.icdCode);
                         }
                     }
                     if (order == 2) {
                         currLead.SD2_Condition_Description__c = diagnosisVerificationItem.conditionDescription;
-                        if (icdInfoMap.containsKey(diagnosisVerificationItem.iCDCode)) {
-                            currLead.SD2_ICD_Code__c = icdInfoMap.get(diagnosisVerificationItem.iCDCode);
+                        if (icdInfoMap.containsKey(diagnosisVerificationItem.icdCode)) {
+                            currLead.SD2_ICD_Code__c = icdInfoMap.get(diagnosisVerificationItem.icdCode);
                         }
                     }
                     if (order == 3) {
                         currLead.SD3_Condition_Description__c = diagnosisVerificationItem.conditionDescription;
-                        if (icdInfoMap.containsKey(diagnosisVerificationItem.iCDCode)) {
-                            currLead.SD3_ICD_Code__c = icdInfoMap.get(diagnosisVerificationItem.iCDCode);
+                        if (icdInfoMap.containsKey(diagnosisVerificationItem.icdCode)) {
+                            currLead.SD3_ICD_Code__c = icdInfoMap.get(diagnosisVerificationItem.icdCode);
                         }
                     }
                     if (order == 4) {
                         currLead.SD4_Condition_Description__c = diagnosisVerificationItem.conditionDescription;
-                        if (icdInfoMap.containsKey(diagnosisVerificationItem.iCDCode)) {
-                            currLead.SD4_ICD_Code__c = icdInfoMap.get(diagnosisVerificationItem.iCDCode);
+                        if (icdInfoMap.containsKey(diagnosisVerificationItem.icdCode)) {
+                            currLead.SD4_ICD_Code__c = icdInfoMap.get(diagnosisVerificationItem.icdCode);
                         }
                     }
+
                     orderSet.add(order);
                 }
+
                 order++;
             }
+
             for (DiagnosisWrapper diagnosisVerificationItem : diagnosisVerificationWrapperLst) {
-                if ((diagnosisVerificationItem.iCDCode != Null && diagnosisVerificationItem.iCDCode.length() > 0) || (diagnosisVerificationItem.conditionDescription != Null && diagnosisVerificationItem.conditionDescription.length() > 0)) {
-                    Diagnosis_Verification__c diagnosisVerificationReference = new Diagnosis_Verification__c(Eternal_Id__c = string.valueof(diagnosisVerificationItem.externalId));
+                if ((diagnosisVerificationItem.icdCode != null && diagnosisVerificationItem.icdCode.length() > 0) || (diagnosisVerificationItem.conditionDescription != null && diagnosisVerificationItem.conditionDescription.length() > 0)) {
+                    Diagnosis_Verification__c diagnosisVerificationReference = new Diagnosis_Verification__c(Eternal_Id__c = String.valueOf(diagnosisVerificationItem.externalId));
                     for (DiagnosisWrapper.MedicalWrapper medicalWrapperItem : diagnosisVerificationItem.medicalWrapperList) {
-                        if ((medicalWrapperItem.selectedPickVal != Null && medicalWrapperItem.selectedPickVal.length() > 0) || (medicalWrapperItem.reasonForNeed != Null && medicalWrapperItem.reasonForNeed.length() > 0)) {
+                        if ((medicalWrapperItem.selectedPickVal != null && medicalWrapperItem.selectedPickVal.length() > 0) || (medicalWrapperItem.reasonForNeed != null && medicalWrapperItem.reasonForNeed.length() > 0)) {
                             DiagnosisMedicalQuestions__c diagnosisQuestion = new DiagnosisMedicalQuestions__c();
                             diagnosisQuestion.Diagnosis_Verification__r = diagnosisVerificationReference;
                             diagnosisQuestion.Epilepsy_Value__c = medicalWrapperItem.epilepsySelectedPickVal;
                             diagnosisQuestion.Comment__c = medicalWrapperItem.reasonForNeed;
                             diagnosisQuestion.Medical_Question_Answer__c = medicalWrapperItem.selectedPickVal;
-                            diagnosisQuestion.Medical_Question__c = medicalWrapperItem.medicalQuestion.id;
+                            diagnosisQuestion.Medical_Question__c = medicalWrapperItem.medicalQuestion.Id;
                             diagnosisQuestion.isEligible__c = medicalWrapperItem.isEligible;
                             diagnosisMedicalQuestionLst.add(diagnosisQuestion);
                         }
@@ -802,9 +786,9 @@ public class DiagnosisVerification_AC {
 
             Set<String> travelValuesSet = new Set<String>();
             Set<String> travelValuesLabel = new Set<String>();
-            String jsonString = json.serialize(travelAlgorithmWrapperIns);
+            String jsonString = JSON.serialize(travelAlgorithmWrapperIns);
             Map<String, Object> wrapClsMap = new Map<String, Object>();
-            wrapClsMap = (Map<String, Object>) json.deserializeuntyped(jsonString);
+            wrapClsMap = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
 
             for (String currString : travelVal.keySet()) {
                 if (wrapClsMap.get(currString) == True) {
@@ -813,16 +797,16 @@ public class DiagnosisVerification_AC {
                 }
             }
 
-            currLead.Current_Condition_label__c = '';
+            currLead.Current_Condition_Label__c = '';
             for (String currVal : travelValuesLabel) {
-                currLead.Current_Condition_label__c += currVal + ';';
+                currLead.Current_Condition_Label__c += currVal + ';';
             }
 
-            if (travelAlgorithmWrapperIns.chronicHepatitisString != Null) {
+            if (travelAlgorithmWrapperIns.chronicHepatitisString != null) {
                 currLead.Chronic_Hepatitis__c = travelAlgorithmWrapperIns.chronicHepatitisString;
             }
 
-            if (pluHypTxt != Null) {
+            if (pluHypTxt != null) {
                 if (pluHypTxt == 'NYHA Class IV1') {
                     currLead.Pulmonary_Hypertension__c = 'NYHA Class IV';
                 } else {
@@ -831,51 +815,51 @@ public class DiagnosisVerification_AC {
 
             }
 
-            if (travelAlgorithmWrapperIns.strokesType != Null) {
+            if (travelAlgorithmWrapperIns.strokesType != null) {
                 currLead.Strokes__c = travelAlgorithmWrapperIns.strokesType ;
             }
 
-            if (travelAlgorithmWrapperIns.pulmonaryHypertensionString != Null) {
+            if (travelAlgorithmWrapperIns.pulmonaryHypertensionString != null) {
                 currLead.Hidden_Proto_Pulmonary_Hypertension__c = travelAlgorithmWrapperIns.pulmonaryHypertensionString ;
             }
 
             currLead.Convulsive_Disorders__c = '';
-            if (travelAlgorithmWrapperIns.convulsiveDisorders != Null) {
+            if (travelAlgorithmWrapperIns.convulsiveDisorders != null) {
                 for (String currVal : travelAlgorithmWrapperIns.convulsiveDisorders) {
                     currLead.Convulsive_Disorders__c += currVal + ';';
                 }
             }
 
             currLead.Congenital_Heart_Disease__c = '';
-            if (travelAlgorithmWrapperIns.congenitalHeartDiseaseString != Null) {
+            if (travelAlgorithmWrapperIns.congenitalHeartDiseaseString != null) {
                 for (String currVal : travelAlgorithmWrapperIns.congenitalHeartDiseaseString) {
                     currLead.Congenital_Heart_Disease__c += currVal + ';';
                 }
             }
 
             currLead.Chronic_Heart_Failure__c = '';
-            if (travelAlgorithmWrapperIns.chronicHeartFailureString != Null) {
+            if (travelAlgorithmWrapperIns.chronicHeartFailureString != null) {
                 for (String currVal : travelAlgorithmWrapperIns.chronicHeartFailureString) {
                     currLead.Chronic_Heart_Failure__c += currVal + ';';
                 }
             }
 
             currLead.Heart_Failure__c = '';
-            if (travelAlgorithmWrapperIns.heartFailureString != Null) {
+            if (travelAlgorithmWrapperIns.heartFailureString != null) {
                 for (String currVal : travelAlgorithmWrapperIns.heartFailureString) {
                     currLead.Heart_Failure__c += currVal + ';';
                 }
             }
 
             currLead.Arrhythmia__c = '';
-            if (travelAlgorithmWrapperIns.ArrhythmiaString != Null) {
+            if (travelAlgorithmWrapperIns.ArrhythmiaString != null) {
                 for (String currVal : travelAlgorithmWrapperIns.ArrhythmiaString) {
                     currLead.Arrhythmia__c += currVal + ';';
                 }
             }
 
             currLead.Angina__c = '';
-            if (travelAlgorithmWrapperIns.anginaString != Null) {
+            if (travelAlgorithmWrapperIns.anginaString != null) {
                 for (String currVal : travelAlgorithmWrapperIns.anginaString) {
                     currLead.Angina__c += currVal + ';';
                 }
@@ -883,10 +867,10 @@ public class DiagnosisVerification_AC {
 
             currLead.Ventilator__c = travelAlgorithmWrapperIns.ventilatorText;
 
-            currLead.lung_disease__c = '';
-            if (travelAlgorithmWrapperIns.lungDiseaseString != Null) {
+            currLead.Lung_Disease__c = '';
+            if (travelAlgorithmWrapperIns.lungDiseaseString != null) {
                 for (String currVal : travelAlgorithmWrapperIns.lungDiseaseString) {
-                    currLead.lung_disease__c += currVal + ';';
+                    currLead.Lung_Disease__c += currVal + ';';
                 }
             }
 
@@ -904,8 +888,9 @@ public class DiagnosisVerification_AC {
             }
 
             currLead.Travel_Restriction__c = '';
-            //Added condition to change text in 'Travel_Restriction__c' field on Lead as per SIW - 379
-            if (travelAlgorithmWrapperIns.travelRestriction) currLead.Travel_Restriction__c = 'Travel Careful Consideration - Very High Risk of Complications'; else if (uniqueCurrentConditionSet.size() > 0) {
+            if (travelAlgorithmWrapperIns.travelRestriction) {
+                currLead.Travel_Restriction__c = 'Travel Careful Consideration - Very High Risk of Complications';
+            } else if (uniqueCurrentConditionSet.size() > 0) {
                 Integer i = 1;
                 for (String condition : uniqueCurrentConditionSet) {
                     currLead.Travel_Restriction__c += i + '. ' + condition + ';' + '\n';
@@ -942,11 +927,11 @@ public class DiagnosisVerification_AC {
             insert diagnosisVerificationLstForInsert;
             insert diagnosisMedicalQuestionLst;
             if (diagnosisVerificationLst.size() > 0) {
-
-                Delete diagnosisVerificationLst;
+                delete diagnosisVerificationLst;
             }
 
             loadData();
+
             if (Test.isRunningTest()) {
                 throw new CommonTriggerException('Test');
             }
@@ -972,13 +957,11 @@ public class DiagnosisVerification_AC {
      * @author          unknown
      * @date            unknown
      */
-    public pageReference SubmitSign() {
-        List<string> LstLog = new List<string>();
+    public PageReference SubmitSign() {
         String mySenderName = '';
         String myEmail = '';
-        String recId;
-        String Logvalue;
         PageReference reference;
+
         try {
             if (wishChildWrapperIns.medProfTypeHid == 'Treating Medical Professional') {
                 mySenderName = currLead.Treating_Medical_Professional_First_Name__c + ' ' + currLead.Treating_Medical_Professional_Last_Name__c;
@@ -996,21 +979,21 @@ public class DiagnosisVerification_AC {
                 mySenderName = currLead.Treating_Medical_Professional_First_Name__c + ' ' + currLead.Treating_Medical_Professional_Last_Name__c;
                 myEmail = currLead.Treating_Medical_Professional_Email__c;
             }
+
             String account;
             String IntegratorKey;
             Map<String, DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
-            String currentRequestURL = 'http://qa-wish.cs94.force.com/';
 
             for (DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()) {
                 account = credentialIns.account__c;
                 IntegratorKey = credentialIns.IntegratorKey__c;
             }
 
-            String authorizationHeader = '<DocuSignCredentials><Username>{!$Credential.Username}</Username><Password>{!$Credential.Password}</Password><IntegratorKey>' + IntegratorKey + '</IntegratorKey></DocuSignCredentials>';
+            String authorizationHeader = '<DocuSignCredentials><Username>{!$Credential.Username}</Username><Password>{!$Credential.Password}</Password><IntegratorKey>';
+            authorizationHeader += IntegratorKey + '</IntegratorKey></DocuSignCredentials>';
 
             String boundary = 'AAA';
-            recId = currLead.Id;
-            Pagereference PDF = Page.LeadPartA_ApprovalForm_VF_PDF;
+            PageReference PDF = Page.LeadPartA_ApprovalForm_VF_PDF;
             PDF.getParameters().put('leadId', leadId);
 
             String documentPDF;
@@ -1020,7 +1003,7 @@ public class DiagnosisVerification_AC {
             } else {
                 EncodingUtil.base64Encode(Blob.valueOf('Test'));
             }
-            LstLog.add(string.valueOf(documentPDF));
+
             String body = '{' +
                 '  "status":"sent",' +
                 '  "enableWetSign": "false",' +
@@ -1066,8 +1049,7 @@ public class DiagnosisVerification_AC {
 
             String header = '--' + boundary + '\nContent-Type: application/json\nContent-Disposition: form-data';
             String jsonBody = header + '\n\n' + body + '\n\n--' + boundary + '--';
-            system.debug(jsonBody);
-            //Callout to Docusign.
+
             HttpRequest req = new HttpRequest();
             req.setHeader('X-DocuSign-Authentication', authorizationHeader);
             req.setHeader('Accept', 'application/json');
@@ -1078,7 +1060,7 @@ public class DiagnosisVerification_AC {
             req.setMethod('POST');
             req.setBody(jsonBody);
             Http http = new Http();
-            HTTPResponse res = new HttpResponse();
+            HttpResponse res = new HttpResponse();
 
             if (!Test.isRunningTest()) {
                 res = http.send(req);
@@ -1086,9 +1068,8 @@ public class DiagnosisVerification_AC {
                 res.setStatusCode(200);
                 res.setBody('{"envelopeId":"Test"}');
             }
-            system.debug('@@@@ res @@@@' + res);
-            if (res.getstatusCode() != 200 && res.getstatusCode() != 201) {
-                new ApexDebugLog().createLog(new ApexDebugLog.Error('DiagnosisVerification_AC', 'SubmitSign', recId, null, res.getBody()));
+
+            if (res.getStatusCode() != 200 && res.getStatusCode() != 201) {
                 ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
                 ApexPages.addMessage(myMsg);
                 return null;
@@ -1104,9 +1085,10 @@ public class DiagnosisVerification_AC {
                     request.setHeader('Content-Type', 'application/json');
                     request.setMethod('POST');
                     Http httprequest = new Http();
-                    HTTPResponse response = new HttpResponse();
+                    HttpResponse response = new HttpResponse();
                     request.setEndpoint('Callout:Docusign_Credential/accounts/' + account + '/envelopes/' + env + '/views/recipient');
-                    string jsonPayload;
+
+                    String jsonPayload;
                     jsonPayload = '{' +
                         '    "userName": "' + mySenderName + '",' +
                         '    "email": "' + myEmail + '",' +
@@ -1115,30 +1097,29 @@ public class DiagnosisVerification_AC {
                         '    "authenticationMethod": "None",' +
                         '    "returnUrl": "' + label.DvRetrunUrl + '/verification_success' + '"' +
                         '}';
+
                     request.setBody(jsonPayload);
+
                     if (!Test.isRunningTest()) {
                         response = httprequest.send(request);
                     } else {
                         response.setStatusCode(200);
                         response.setBody('{"envelopeId":"Test"}');
                     }
-                    system.debug('@@@@ response @@@@' + response);
+
                     if (response.getstatusCode() != 200 && res.getstatusCode() != 201) {
-                        new ApexDebugLog().createLog(new ApexDebugLog.Error('DiagnosisVerification_AC', 'SubmitSign', recId, null, response.getBody()));
                         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
                         ApexPages.addMessage(myMsg);
                         return null;
                     } else {
                         results = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
                         if ((String) results.get('url') != '' || (String) results.get('url') != null) {
-                            recId = currLead.Id;
-                            Logvalue = string.valueof(currLead);
                             dsfs__DocuSign_Status__c dsfs = NEW dsfs__DocuSign_Status__c();
                             dsfs.dsfs__DocuSign_Envelope_ID__c = env;
                             dsfs.dsfs__Lead__c = currLead.Id;
-                            LstLog.add('Docusign Envid: ' + dsfs.dsfs__DocuSign_Envelope_ID__c);
-                            LstLog.add('Lead ID: ' + dsfs.dsfs__Lead__c);
-                            Insert dsfs;
+
+                            insert dsfs;
+
                             reference = new PageReference((String) results.get('url'));
                             return reference;
                         }
@@ -1149,7 +1130,6 @@ public class DiagnosisVerification_AC {
                 throw new CommonTriggerException('Test Class execution');
             }
         } catch (Exception ex) {
-            new ApexDebugLog().createLog(new ApexDebugLog.Error('DiagnosisVerification_AC', 'SubmitSign', recId, ex, Logvalue));
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
             ApexPages.addMessage(myMsg);
             return null;
