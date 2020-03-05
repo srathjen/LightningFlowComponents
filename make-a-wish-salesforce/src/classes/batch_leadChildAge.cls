@@ -1,16 +1,14 @@
-/******************************************************************************
-Author : MAWA
-Created Date: 4/25/2019
-Description:  This class is used to set the Age_Requirement_Met__c field to 
-              True on lead when a wish child turns 2.5 years old.
-Modification: 05/20/2019 - Samer - SIW-252
-              Modified code to use Apex Date methods when calculating age, and
-              added code for End-of-Month date calculation exceptions 
-*******************************************************************************/
+/**
+ * @description This class is used to set the Age_Requirement_Met__c field to True on lead when a wish child turns 2.5 years old.
+ * @author MAWA
+ * @createdDate 4/25/2019
+ * @updatedDate 05/20/2019 - Samer - SIW-252
+ * @update Modified code to use Apex Date methods when calculating age, and added code for End-of-Month date calculation exceptions
+ */
 global class batch_leadChildAge implements Database.Batchable<SObject> {
 
 	@TestVisible
-	private Date runDate = Date.today();
+	private Date runDate;
 
 	global Database.QueryLocator start(Database.BatchableContext bc) {
 		return Database.getQueryLocator([
@@ -22,28 +20,23 @@ global class batch_leadChildAge implements Database.Batchable<SObject> {
 		]);
 	}
 
-	global void execute(Database.BatchableContext bc, List<Lead> leads) {
+	global void execute(Database.BatchableContext bc, List<Lead> scope) {
 		List<Lead> updateLeads = new List<Lead>();
-        // Get last day of the current month
-        Integer lastDayOfRunDateMonth = Date.daysInMonth(runDate.year(), runDate.month());
-        // Subtract 2 years and 6 months from current date
-        Date twoAndHalfYearsAgoBeforeRunDate = runDate.addYears(-2).addMonths(-6);
-        // Get last day of DOB month
-        Integer daysInSixthMonth = Date.daysInMonth(twoAndHalfYearsAgoBeforeRunDate.year(), twoAndHalfYearsAgoBeforeRunDate.month());
-        // Is today the last day of the current month
-        Date fromDate = twoAndHalfYearsAgoBeforeRunDate;
-        Date toDate = fromDate.addDays(daysInSixthMonth - lastDayOfRunDateMonth);
-		for (Lead leadRecord : leads) {
-			if ((runDate.day() == lastDayOfRunDateMonth) && (lastDayOfRunDateMonth < daysInSixthMonth)) {
-				if ((leadRecord.DOB__c >= fromDate) && (leadRecord.DOB__c <= toDate)) {
-					leadRecord.Age_Requirement_Met__c = true;
-					updateLeads.add(leadRecord);
+		for (Lead leads : scope) {
+			Date runDate = Date.today();
+			Integer daysInCurrentMonth = Date.daysInMonth(runDate.year(), runDate.month());
+			Date twoAndHalfToday = runDate.addYears(-2).addMonths(-6);
+			Integer daysInSixthMonth = Date.daysInMonth(twoAndHalfToday.year(), twoAndHalfToday.month());
+			if ((runDate.day() == daysInCurrentMonth) && (daysInCurrentMonth < daysInSixthMonth)) {
+				Date fromDate = twoAndHalfToday;
+				Date toDate = fromDate.addDays(daysInSixthMonth - daysInCurrentMonth);
+				if ((leads.DOB__c >= fromDate) && (leads.DOB__c <= toDate)) {
+					leads.Age_Requirement_Met__c = true;
+					updateLeads.add(leads);
 				}
-			}
-            // Compare Lead's DOB to twoAndHalfToday
-            else if (twoAndHalfYearsAgoBeforeRunDate.isSameDay(leadRecord.DOB__c)) {
-				leadRecord.Age_Requirement_Met__c = true;
-				updateLeads.add(leadRecord);
+			} else if (twoAndHalfToday.isSameDay(leads.DOB__c)) {
+				leads.Age_Requirement_Met__c = true;
+				updateLeads.add(leads);
 			}
 		}
 		if (updateLeads.size() > 0) {

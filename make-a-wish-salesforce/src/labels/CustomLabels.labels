@@ -96,6 +96,27 @@
         <value>0033600000Z3S0Z</value>
     </labels>
     <labels>
+        <fullName>DiagnosisVerification_Already_Reviewed</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DiagnosisVerification_Already_Reviewed</shortDescription>
+        <value>Document already reviewed, please contact chapter staff for access.</value>
+    </labels>
+    <labels>
+        <fullName>DiagnosisVerification_Cannot_Review</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DiagnosisVerification_Cannot_Review</shortDescription>
+        <value>You cannot review this document.</value>
+    </labels>
+    <labels>
+        <fullName>DiagnosisVerification_Incorrect_Password</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DiagnosisVerification_Incorrect_Password</shortDescription>
+        <value>Incorrect password.</value>
+    </labels>
+    <labels>
         <fullName>DNQ_Letter_DDP</fullName>
         <categories>Drawloop</categories>
         <language>en_US</language>

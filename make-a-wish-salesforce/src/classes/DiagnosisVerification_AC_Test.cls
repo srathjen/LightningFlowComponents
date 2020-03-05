@@ -62,17 +62,17 @@ public class DiagnosisVerification_AC_Test {
     //This method is used to check the validate primary diagnosis in DV form.
     public static testmethod void checkDiadnosisVerificationFormForValidDiagnosisAtPrimaryDiagnosis() {
         Lead newLead = [
-                SELECT ID
-                FROM Lead
-                LIMIT 50000
+            SELECT ID
+            FROM Lead
+            LIMIT 50000
         ];
         newLead.Treatment_may_be_feasible_but_can_fail__c = true;
         update newLead;
 
         Condition_Description__c condistionDescription = [
-                SELECT ID,Name,Code_To_Use__c
-                FROM Condition_Description__c
-                LIMIT 50000
+            SELECT ID,Name,Code_To_Use__c
+            FROM Condition_Description__c
+            LIMIT 50000
         ];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
@@ -106,13 +106,13 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.MedicalResponse();
         currDiagnosisVerificationDupe.SaveMedicalInformation();
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-                SELECT ID,isEligible__c, (
-                        SELECT isEligible__c
-                        FROM DiagnosisMedicalQuestions__r
-                )
-                FROM Diagnosis_Verification__c
-                WHERE Lead__c = :newLead.Id
-                LIMIT 50000
+            SELECT ID,isEligible__c, (
+                SELECT isEligible__c
+                FROM DiagnosisMedicalQuestions__r
+            )
+            FROM Diagnosis_Verification__c
+            WHERE Lead__c = :newLead.Id
+            LIMIT 50000
         ];
         Test.stopTest();
     }
@@ -120,17 +120,17 @@ public class DiagnosisVerification_AC_Test {
     //This method is used to check the invalidate primary diagnosis in DV form.
     public static testmethod void checkDiadnosisVerificationFormForInValidDiagnosisAtPrimaryDiagnosis() {
         Lead newLead = [
-                SELECT ID
-                FROM Lead
-                LIMIT 50000
+            SELECT ID
+            FROM Lead
+            LIMIT 50000
         ];
         newLead.Treatment_may_prolong_normal_activities__c = true;
         update newLead;
 
         Condition_Description__c condistionDescription = [
-                SELECT ID,Name,Code_To_Use__c
-                FROM Condition_Description__c
-                LIMIT 50000
+            SELECT ID,Name,Code_To_Use__c
+            FROM Condition_Description__c
+            LIMIT 50000
         ];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
@@ -153,13 +153,13 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('uniqueCurrentConditionSet', 'test3');
         currDiagnosisVerificationDupe.SaveMedicalInformation();
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-                SELECT ID,isEligible__c, (
-                        SELECT isEligible__c
-                        FROM DiagnosisMedicalQuestions__r
-                )
-                FROM Diagnosis_Verification__c
-                WHERE Lead__c = :newLead.Id
-                LIMIT 50000
+            SELECT ID,isEligible__c, (
+                SELECT isEligible__c
+                FROM DiagnosisMedicalQuestions__r
+            )
+            FROM Diagnosis_Verification__c
+            WHERE Lead__c = :newLead.Id
+            LIMIT 50000
         ];
         Test.stopTest();
         System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode, 'Id dose nit match');
@@ -168,17 +168,17 @@ public class DiagnosisVerification_AC_Test {
     //This method is used to check the validate secondary diagnosis in DV form.
     public static testmethod void checkDiadnosisVerificationFormWithSecondaryDiagnosis() {
         Lead newLead = [
-                SELECT ID
-                FROM Lead
-                LIMIT 50000
+            SELECT ID
+            FROM Lead
+            LIMIT 50000
         ];
         newLead.Debilitation_may_extend_over_many_years__c = true;
         update newLead;
-        
+
         Condition_Description__c condistionDescription = [
-                SELECT ID,Name,Code_To_Use__c
-                FROM Condition_Description__c
-                LIMIT 50000
+            SELECT ID,Name,Code_To_Use__c
+            FROM Condition_Description__c
+            LIMIT 50000
         ];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
@@ -237,13 +237,13 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.MedicalResponse();
         currDiagnosisVerificationDupe.SaveMedicalInformation();
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-                SELECT ID,isEligible__c, (
-                        SELECT isEligible__c
-                        FROM DiagnosisMedicalQuestions__r
-                )
-                FROM Diagnosis_Verification__c
-                WHERE Lead__c = :newLead.Id
-                LIMIT 50000
+            SELECT ID,isEligible__c, (
+                SELECT isEligible__c
+                FROM DiagnosisMedicalQuestions__r
+            )
+            FROM Diagnosis_Verification__c
+            WHERE Lead__c = :newLead.Id
+            LIMIT 50000
         ];
         Test.stopTest();
 //      System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].iCDCode, 'Id dose nit match');
@@ -252,16 +252,16 @@ public class DiagnosisVerification_AC_Test {
     //This method is used to check the remove diagnosis in DV form.
     public static testmethod void checkDiadnosisVerificationFormRemoveDiagnosisFunction() {
         Lead newLead = [
-                SELECT ID
-                FROM Lead
-                LIMIT 50000
+            SELECT ID
+            FROM Lead
+            LIMIT 50000
         ];
         newLead.Increased_probability_of_premature_death__c = true;
         update newLead;
         Condition_Description__c condistionDescription = [
-                SELECT ID,Name,Code_To_Use__c
-                FROM Condition_Description__c
-                LIMIT 50000
+            SELECT ID,Name,Code_To_Use__c
+            FROM Condition_Description__c
+            LIMIT 50000
         ];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
@@ -295,13 +295,13 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.RemoveDiagnosisBlock();
         currDiagnosisVerificationDupe.SaveMedicalInformation();
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-                SELECT ID,isEligible__c, (
-                        SELECT isEligible__c
-                        FROM DiagnosisMedicalQuestions__r
-                )
-                FROM Diagnosis_Verification__c
-                WHERE Lead__c = :newLead.Id
-                LIMIT 50000
+            SELECT ID,isEligible__c, (
+                SELECT isEligible__c
+                FROM DiagnosisMedicalQuestions__r
+            )
+            FROM Diagnosis_Verification__c
+            WHERE Lead__c = :newLead.Id
+            LIMIT 50000
         ];
         Test.stopTest();
         System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode, 'Value does not match');
@@ -310,15 +310,15 @@ public class DiagnosisVerification_AC_Test {
     //This method is used to check the diagnosis verification in DV form.
     public static testmethod void checkDiadnosisVerificationFormWithDiagnosisVerficationData() {
         Lead newLead = [
-                SELECT ID
-                FROM Lead
+            SELECT ID
+            FROM Lead
         ];
         newLead.Risk_of_complications_premature_death__c = true;
         update newLead;
         Condition_Description__c condistionDescription = [
-                SELECT ID,Name,Code_To_Use__c
-                FROM Condition_Description__c
-                LIMIT 50000
+            SELECT ID,Name,Code_To_Use__c
+            FROM Condition_Description__c
+            LIMIT 50000
         ];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
@@ -350,13 +350,13 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.MedicalResponse();
         currDiagnosisVerificationDupe.SaveMedicalInformation();
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-                SELECT ID,isEligible__c, (
-                        SELECT isEligible__c
-                        FROM DiagnosisMedicalQuestions__r
-                )
-                FROM Diagnosis_Verification__c
-                WHERE Lead__c = :newLead.Id
-                LIMIT 50000
+            SELECT ID,isEligible__c, (
+                SELECT isEligible__c
+                FROM DiagnosisMedicalQuestions__r
+            )
+            FROM Diagnosis_Verification__c
+            WHERE Lead__c = :newLead.Id
+            LIMIT 50000
         ];
         PageReference pageRefUpdate = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRefUpdate);
@@ -372,15 +372,15 @@ public class DiagnosisVerification_AC_Test {
     //This method is used to check the diagnosis verification with medical question in DV form.
     public static testmethod void checkDiadnosisVerificationFormWithDiagnosisVerficationDataandMedicalQuestion() {
         Lead newLead = [
-                SELECT ID
-                FROM Lead
+            SELECT ID
+            FROM Lead
         ];
         newLead.Responds_to_treatment_with_normal_health__c = true;
         update newLead;
         Condition_Description__c condistionDescription = [
-                SELECT ID,Name,Code_To_Use__c
-                FROM Condition_Description__c
-                LIMIT 50000
+            SELECT ID,Name,Code_To_Use__c
+            FROM Condition_Description__c
+            LIMIT 50000
         ];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
@@ -408,13 +408,13 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.deleteLeadFile();
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-                SELECT ID,isEligible__c, (
-                        SELECT isEligible__c
-                        FROM DiagnosisMedicalQuestions__r
-                )
-                FROM Diagnosis_Verification__c
-                WHERE Lead__c = :newLead.Id
-                LIMIT 50000
+            SELECT ID,isEligible__c, (
+                SELECT isEligible__c
+                FROM DiagnosisMedicalQuestions__r
+            )
+            FROM Diagnosis_Verification__c
+            WHERE Lead__c = :newLead.Id
+            LIMIT 50000
         ];
         PageReference pageRefUpdate = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRefUpdate);
@@ -427,21 +427,21 @@ public class DiagnosisVerification_AC_Test {
     //This method is used to check the diagnosis verification without medical question in DV form.
     public static testmethod void checkDiadnosisVerificationFormWithDiagnosisVerficationDataandWithoutMedicalQuestion() {
         List<Medical_Questions__c> medicalQuestion = [
-                SELECT Id
-                FROM Medical_Questions__c
-                LIMIT 50000
+            SELECT Id
+            FROM Medical_Questions__c
+            LIMIT 50000
         ];
         //medicalQuestion.clear();
         Lead newLead = [
-                SELECT ID
-                FROM Lead
+            SELECT ID
+            FROM Lead
         ];
         newLead.None_of_these_statements_describes_Child__c = true;
         update newLead;
         Condition_Description__c condistionDescription = [
-                SELECT ID,Name,Code_To_Use__c
-                FROM Condition_Description__c
-                LIMIT 50000
+            SELECT ID,Name,Code_To_Use__c
+            FROM Condition_Description__c
+            LIMIT 50000
         ];
         condistionDescription.Name = 'Arteriovenus Malformation (AVM)';
         update condistionDescription;
@@ -483,13 +483,13 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.MedicalQuestions(null, condistionDescription.Id, true, null, 0, medicalQuestion, true);
         currDiagnosisVerificationDupe.MedicalQuestions(null, condistionDescription.Id, false, null, 0, medicalQuestion, true);
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-                SELECT ID,isEligible__c, (
-                        SELECT isEligible__c
-                        FROM DiagnosisMedicalQuestions__r
-                )
-                FROM Diagnosis_Verification__c
-                WHERE Lead__c = :newLead.Id
-                LIMIT 50000
+            SELECT ID,isEligible__c, (
+                SELECT isEligible__c
+                FROM DiagnosisMedicalQuestions__r
+            )
+            FROM Diagnosis_Verification__c
+            WHERE Lead__c = :newLead.Id
+            LIMIT 50000
         ];
         PageReference pageRefUpdate = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRefUpdate);
@@ -515,20 +515,20 @@ public class DiagnosisVerification_AC_Test {
     //This method is used to check the diagnosis verification without medical question in DV form.
     public static testmethod void checkDiadnosisVerificationFormWithDiagnosisVerficationDataandWithoutMedicalQuestions() {
         List<Medical_Questions__c> medicalQuestion = [
-                SELECT Id
-                FROM Medical_Questions__c
-                LIMIT 50000
+            SELECT Id
+            FROM Medical_Questions__c
+            LIMIT 50000
         ];
         medicalQuestion.clear();
         Lead newLead = [
-                SELECT ID
-                FROM Lead
+            SELECT ID
+            FROM Lead
         ];
         //newLead.Increased_probability_of_premature_death__c = true;
         Condition_Description__c condistionDescription = [
-                SELECT ID,Name,Code_To_Use__c
-                FROM Condition_Description__c
-                LIMIT 50000
+            SELECT ID,Name,Code_To_Use__c
+            FROM Condition_Description__c
+            LIMIT 50000
         ];
         Diagnosis_Verification__c dia = OrientationandTrainingUtil.createDiagnosis(newLead.Id);
         insert dia;
@@ -583,13 +583,13 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.submit();
         currDiagnosisVerificationDupe.MedicalQuestions(null, null, false, null, 0, null, false);
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-                SELECT ID,isEligible__c, (
-                        SELECT isEligible__c
-                        FROM DiagnosisMedicalQuestions__r
-                )
-                FROM Diagnosis_Verification__c
-                WHERE Lead__c = :newLead.Id
-                LIMIT 50000
+            SELECT ID,isEligible__c, (
+                SELECT isEligible__c
+                FROM DiagnosisMedicalQuestions__r
+            )
+            FROM Diagnosis_Verification__c
+            WHERE Lead__c = :newLead.Id
+            LIMIT 50000
         ];
         PageReference pageRefUpdate = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRefUpdate);
@@ -614,26 +614,26 @@ public class DiagnosisVerification_AC_Test {
 
     public static testmethod void checkDiadnosisVerificationForm() {
         Lead newLead = [
-                SELECT ID
-                FROM Lead
-                LIMIT 50000
+            SELECT ID
+            FROM Lead
+            LIMIT 50000
         ];
         newLead.Child_will_ultimately_die_prematurely__c = true;
         newLead.Travel_algorithm__c = 'Some Condition';
         newLead.Hidden_Proto_Pulmonary_Hypertension__c = 'Tension';
         update newLead;
         Condition_Description__c condistionDescription = [
-                SELECT ID,Name,Code_To_Use__c
-                FROM Condition_Description__c
-                LIMIT 1
+            SELECT ID,Name,Code_To_Use__c
+            FROM Condition_Description__c
+            LIMIT 1
         ];
         Diagnosis_Verification__c dv = OrientationandTrainingUtil.createDiagnosisRec(newLead.Id, condistionDescription.Id);
         dv.PCD_ICD__c = 'ICD';
         insert dv;
         Medical_Questions__c mQuestion = [
-                SELECT Id, Condition_Description__c,Question__c,Current_Condition__c,Recommendation_to_Chapter__c
-                FROM Medical_Questions__c
-                LIMIT 1
+            SELECT Id, Condition_Description__c,Question__c,Current_Condition__c,Recommendation_to_Chapter__c
+            FROM Medical_Questions__c
+            LIMIT 1
         ];
         mQuestion.Question__c = null;
         mQuestion.Current_Condition__c = 'Some Condition';
@@ -669,13 +669,13 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('uniqueCurrentConditionSet', 'test3');
         currDiagnosisVerificationDupe.SaveMedicalInformation();
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-                SELECT ID,isEligible__c, (
-                        SELECT isEligible__c
-                        FROM DiagnosisMedicalQuestions__r
-                )
-                FROM Diagnosis_Verification__c
-                WHERE Lead__c = :newLead.Id
-                LIMIT 50000
+            SELECT ID,isEligible__c, (
+                SELECT isEligible__c
+                FROM DiagnosisMedicalQuestions__r
+            )
+            FROM Diagnosis_Verification__c
+            WHERE Lead__c = :newLead.Id
+            LIMIT 50000
         ];
         Test.stopTest();
         System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode, 'Id dose nit match');
