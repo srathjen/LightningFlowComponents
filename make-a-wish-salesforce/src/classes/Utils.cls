@@ -5,6 +5,9 @@
  */
 public class Utils {
 
+	public class UtilsException extends Exception {
+	}
+
 	public static final String DATE_FORMAT_MDDYYYY = 'M/dd/yyyy';
 	/**
 	 * Find Picklist Labels
@@ -98,7 +101,21 @@ public class Utils {
 		throw new UtilsException('Unsupported format');
 	}
 
-	public class UtilsException extends Exception {
+	/**
+	 * Generate random number
+	 * @return
+	 */
+	public static String generateRandomNumber(Integer length) {
+		if (length == null || length <= 0) {
+			length = 6;
+		}
+		final String chars = '0123456789';
+		String randStr = '';
+		while (randStr.length() < length) {
+			Integer idx = Math.mod(Math.abs(Crypto.getRandomInteger()), chars.length());
+			randStr += chars.substring(idx, idx + 1);
+		}
+		return randStr;
 	}
 
 	/*
