@@ -1,4 +1,4 @@
-global class DiagnosisVerficationRemainder_AC implements Database.Batchable<sObject> {
+global class DiagnosisVerficationRemainder_AC implements Database.Batchable<sObject>, Schedulable {
      @TestVisible
      private Date todayDate = Date.today();
 
@@ -39,6 +39,10 @@ global class DiagnosisVerficationRemainder_AC implements Database.Batchable<sObj
      }
 
      global void finish(Database.BatchableContext BC) {
+     }
+
+     global void execute(SchedulableContext SC) {
+          Database.executeBatch(new DiagnosisVerficationRemainder_AC(), 25);
      }
 
      //Create task as reminder to complete diagnosis verification
