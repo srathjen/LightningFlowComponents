@@ -5,6 +5,9 @@
  */
 public class Utils {
 
+	public class UtilsException extends Exception {
+	}
+
 	public static final String DATE_FORMAT_MDDYYYY = 'M/dd/yyyy';
 	/**
 	 * Find Picklist Labels
@@ -98,9 +101,6 @@ public class Utils {
 		throw new UtilsException('Unsupported format');
 	}
 
-	public class UtilsException extends Exception {
-	}
-
 	/**
 	 * Generate random number
 	 * @return
@@ -116,5 +116,30 @@ public class Utils {
 			randStr += chars.substring(idx, idx + 1);
 		}
 		return randStr;
+	}
+
+	/*
+     * Static function to convert a comma separated String to a List<SelectOption>
+     *
+     * @param String picklistString
+     *
+     * @return List<SelectOption>
+     *
+     * @author Chris Shinnimin, Traction on Demand
+     * @date 2020-03-03
+    */
+	public static List<SelectOption> picklistStringToOptions(String picklistString) {
+		List<SelectOption> selectOptions = new List<SelectOption>();
+
+		if (String.isBlank(picklistString)) {
+			return selectOptions;
+		}
+
+		selectOptions.add(new SelectOption('', 'Please Select'));
+		for (String currString : picklistString.split(',')) {
+			selectOptions.add(new SelectOption(currString, currString));
+		}
+
+		return selectOptions;
 	}
 }
