@@ -25,6 +25,10 @@
     <name>CustomLabels</name>
   </types>
   <types>
+    <members>Lead</members>
+    <name>CustomObject</name>
+  </types>
+  <types>
     <members>*</members>
     <name>Flow</name>
   </types>
@@ -35,6 +39,70 @@
   <types>
     <members>*</members>
     <name>LightningComponentBundle</name>
+  </types>
+  <types>
+    <members>Access_to_Wish_Expense_Object</members>
+    <members>Action_Track</members>
+    <members>APEX_Data_Loader</members>
+    <members>APEX_Debug_Log</members>
+    <members>AZ_Intake_Manager</members>
+    <members>BC_File_Access</members>
+    <members>Broadcast</members>
+    <members>Chapter_Action_Track_Full_Access_Permission</members>
+    <members>Chapter_Action_Track_Read_Permission</members>
+    <members>Create_Communities_Chatter_Group</members>
+    <members>DataLoader</members>
+    <members>Delete_Eligibility_Review_Case</members>
+    <members>Disable_Switch_to_Classic</members>
+    <members>Docusign_User_who_uses_Lead_Convert</members>
+    <members>Dynamic_Content_Full_Access</members>
+    <members>Dynamic_Content_Read_Permission</members>
+    <members>Easy_Describe_Application_Access</members>
+    <members>Edit_Donations</members>
+    <members>Edit_Donations_and_Payments</members>
+    <members>Field_Trip_Field_Trip_Analysis_Access</members>
+    <members>Form_Tracker_Access_permission</members>
+    <members>ICD_Related_Objects</members>
+    <members>IT_Support</members>
+    <members>Login_to_Community_as_User</members>
+    <members>Manage_List_Views</members>
+    <members>Manage_Reports_and_Dashboard_Folders</members>
+    <members>Medical_Diagnosis_Objects_Read_Permission</members>
+    <members>Program_Supervisor</members>
+    <members>RapidApproval_App_Visibility</members>
+    <members>Reporting</members>
+    <members>View_and_Edit_Back_Ground_Check_Files</members>
+    <members>View_and_Edit_Converted_Leads</members>
+    <members>View_Donations</members>
+    <members>View_Setup_Menu</members>
+    <members>Wish_Budget_and_Wish_Expenses</members>
+    <name>PermissionSet</name>
+  </types>
+  <types>
+    <members>Admin</members>
+    <members>Chapter Dev%2FFin Staff</members>
+    <members>Clone-System Admin</members>
+    <members>ContractManager</members>
+    <members>Executive Management</members>
+    <members>Full Access National Staff</members>
+    <members>Full Access National Staff - with View All</members>
+    <members>Fundraising and Development</members>
+    <members>Intake Manager</members>
+    <members>Integration</members>
+    <members>Intern</members>
+    <members>MarketingProfile</members>
+    <members>MST Admin</members>
+    <members>Office Staff</members>
+    <members>Program Staff</members>
+    <members>Read Only - IME</members>
+    <members>Read Only - Program Staff</members>
+    <members>Read Only National Staff</members>
+    <members>ReadOnly</members>
+    <members>SolutionManager</members>
+    <members>Standard</members>
+    <members>Volunteer</members>
+    <members>Volunteer Staff</members>
+    <name>Profile</name>
   </types>
   <types>
     <members>*</members>
