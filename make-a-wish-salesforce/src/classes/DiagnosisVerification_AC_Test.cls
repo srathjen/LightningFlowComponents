@@ -59,101 +59,6 @@ public class DiagnosisVerification_AC_Test {
 //        System.assert(newLead.Id == newFile.Parent__c, 'value does not match');
     }
 
-    //This methods covers for partawrapper class
-    public static testmethod void partawrapper_test() {
-        PartAFormWrapper pw = new PartAFormWrapper();
-        pw.getchronicHeartFailureList();
-        pw.getcongenitalHeartDiseaseList();
-        pw.getconvulsiveDisorderList();
-        pw.getStrokeValues();
-        pw.getPulmonaryHypertensionValues();
-        pw.getHepatitisValues();
-        pw.getheartFailureList();
-        pw.getArrhythmiaList();
-        pw.getanginaList();
-        pw.getventilatorList();
-        pw.getLungDiseaseList();
-        pw.age = '23';
-        pw.yesNoPickListVal = 'Yes';
-        pw.yesNoOtherPickListVal = 'Yes';
-        pw.cardioPckListVal = 'Cardio';
-        pw.convulsionsPicklistVal = 'Convlusion';
-        pw.healthCareWork = 'health care';
-        pw.vegetativeState = 'Vegita';
-        pw.treatingFName = 'Tfname';
-        pw.treatingLName = 'TLname';
-        pw.treatingPhone = 'Tphone';
-        pw.treatingEmail = 'email@email.com';
-        pw.treatingHospital = 'CC Hosp';
-        pw.expediteTheProcess = 'Expid';
-        pw.plzExplain = 'Exp';
-        pw.conditioDeteriorate = 'Cond';
-        pw.communication = 'Communication';
-        pw.gender = 'Male';
-        pw.recognizationPickValSelected = 'Test';
-        pw.diagnosisFilter = 'Test';
-        pw.otherDiagnosisFilter = 'Test';
-        pw.selectedPrimaryDiagnosis = 'Test';
-        pw.describePatient = 'Test';
-        pw.test1 = 'Test';
-        pw.test2 = 'Test';
-        pw.algorithmCheckList = 'Test';
-        pw.diagnosisFilter1 = 'Test';
-        pw.diagnosisFilter2 = 'Test';
-        pw.diagnosisFilter3 = 'Test';
-        pw.diagnosisFilter4 = 'Test';
-        pw.diagnosisFilterVal1 = 'Test';
-        pw.diagnosisFilterVal2 = 'Test';
-        pw.diagnosisFilterVal3 = 'Test';
-        pw.diagnosisFilterVal4 = 'Test';
-        pw.optionValue = 'Test';
-        pw.offsetCount = 1;
-        pw.ansForQes = 'Test';
-        pw.ansForQes1 = 'Test';
-        pw.ansForQes2 = 'Test';
-        pw.ansForQes3 = 'Test';
-        pw.ansForQes4 = 'Test';
-        pw.travelSet = new Set<String>();
-        pw.algList = 'Test';
-        pw.leadDetails = new List<Lead>();
-        pw.fileSection = True;
-        pw.otherDiagnosis = True;
-        pw.eligibleForWish = True;
-        pw.notEligibleForWish = True;
-        pw.recognizePopup = True;
-        pw.isHelthCareTeam = True;
-        pw.isComatose = True;
-        pw.travelAgroithmList = new List<String>();
-        pw.displayMedicalQuestion = True;
-        pw.searchDiagnosisValue = 'Test';
-        pw.displayMedicalQuestion1 = True;
-        pw.displayMedicalQuestion2 = True;
-        pw.displayMedicalQuestion3 = True;
-        pw.displayMedicalQuestion4 = True;
-        pw.otherDiagnosis1 = True;
-        pw.otherDiagnosis2 = True;
-        pw.otherDiagnosis3 = True;
-        pw.otherDiagnosis4 = True;
-        pw.showSecoundaryDagnosis = True;
-        pw.parentNutrition = True;
-        pw.monthPickList = 'Test';
-        pw.yearPickList = 'Test';
-        pw.reasonForNeed = 'Test';
-        pw.dateOfBirth = Date.today();
-        pw.chronicHepatitisString = 'Test';
-        pw.pulmonaryHypertensionString = 'Test';
-        pw.strokesType = 'Test';
-        pw.convulsiveDisorders = new List<String>();
-        pw.congenitalHeartDiseaseString = new List<String>();
-        pw.chronicHeartFailureString = new List<String>();
-        pw.heartFailureString = new List<String>();
-        pw.ArrhythmiaString = new List<String>();
-        pw.anginaString = new List<String>();
-        pw.ventilatorString = new List<String>();
-        pw.lungDiseaseString = new List<String>();
-        pw.ventilatorText = 'Test';
-    }
-
     //This method is used to check the validate primary diagnosis in DV form.
     public static testmethod void checkDiadnosisVerificationFormForValidDiagnosisAtPrimaryDiagnosis() {
         Lead newLead = [
@@ -174,36 +79,6 @@ public class DiagnosisVerification_AC_Test {
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('leadId', newLead.Id);
         DiagnosisVerification_AC currDiagnosisVerificationDupe = new DiagnosisVerification_AC();
-        PartAFormWrapper pw = new PartAFormWrapper();
-        pw.getchronicHeartFailureList();
-        pw.getcongenitalHeartDiseaseList();
-        pw.getconvulsiveDisorderList();
-        pw.getStrokeValues();
-        pw.getPulmonaryHypertensionValues();
-        pw.getHepatitisValues();
-        pw.getheartFailureList();
-        pw.getArrhythmiaList();
-        pw.getanginaList();
-        pw.getventilatorList();
-        pw.getLungDiseaseList();
-        pw.age = '23';
-        pw.yesNoPickListVal = 'Yes';
-        pw.yesNoOtherPickListVal = 'Yes';
-        pw.cardioPckListVal = 'Cardio';
-        pw.convulsionsPicklistVal = 'Convlusion';
-        pw.healthCareWork = 'health care';
-        pw.vegetativeState = 'Vegita';
-        pw.treatingFName = 'Tfname';
-        pw.treatingLName = 'TLname';
-        pw.treatingPhone = 'Tphone';
-        pw.treatingEmail = 'email@email.com';
-        pw.treatingHospital = 'CC Hosp';
-        pw.expediteTheProcess = 'Expid';
-        pw.plzExplain = 'Exp';
-        pw.conditioDeteriorate = 'Cond';
-        pw.communication = 'Communication';
-        pw.gender = 'Male';
-
         Test.setMock(HttpCalloutMock.class, new Mock_ResponseGenerator());
         currDiagnosisVerificationDupe.wishChildWrapperIns.medProfTypeHid = 'Treating Medical Professional';
         currDiagnosisVerificationDupe.SubmitSign();
@@ -240,9 +115,8 @@ public class DiagnosisVerification_AC_Test {
                 LIMIT 50000
         ];
         Test.stopTest();
-        System.assertEquals('23', pw.age, 'Id dose nit match');
-        System.assert(pw.age == '23', 'value does not match');
     }
+    
     //This method is used to check the invalidate primary diagnosis in DV form.
     public static testmethod void checkDiadnosisVerificationFormForInValidDiagnosisAtPrimaryDiagnosis() {
         Lead newLead = [
@@ -599,15 +473,15 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].conditionDescription = Null;
         currDiagnosisVerificationDupe.ResetDiagnosis();
         currDiagnosisVerificationDupe.changePatientValue();
-        currDiagnosisVerificationDupe.submit();
-        currDiagnosisVerificationDupe.MediacalQuestions(null, null, false, null, 0, medicalQuestion, false);
-        currDiagnosisVerificationDupe.MediacalQuestions(null, null, true, null, 0, medicalQuestion, false);
-        currDiagnosisVerificationDupe.MediacalQuestions(null, null, true, null, 0, medicalQuestion, true);
-        currDiagnosisVerificationDupe.MediacalQuestions(null, null, false, null, 0, medicalQuestion, true);
-        currDiagnosisVerificationDupe.MediacalQuestions(null, condistionDescription.Id, false, null, 0, medicalQuestion, false);
-        currDiagnosisVerificationDupe.MediacalQuestions(null, condistionDescription.Id, true, null, 0, medicalQuestion, false);
-        currDiagnosisVerificationDupe.MediacalQuestions(null, condistionDescription.Id, true, null, 0, medicalQuestion, true);
-        currDiagnosisVerificationDupe.MediacalQuestions(null, condistionDescription.Id, false, null, 0, medicalQuestion, true);
+        currDiagnosisVerificationDupe.submit(); 
+        currDiagnosisVerificationDupe.MedicalQuestions(null, null, false, null, 0, medicalQuestion, false);
+        currDiagnosisVerificationDupe.MedicalQuestions(null, null, true, null, 0, medicalQuestion, false);
+        currDiagnosisVerificationDupe.MedicalQuestions(null, null, true, null, 0, medicalQuestion, true);
+        currDiagnosisVerificationDupe.MedicalQuestions(null, null, false, null, 0, medicalQuestion, true);
+        currDiagnosisVerificationDupe.MedicalQuestions(null, condistionDescription.Id, false, null, 0, medicalQuestion, false);
+        currDiagnosisVerificationDupe.MedicalQuestions(null, condistionDescription.Id, true, null, 0, medicalQuestion, false);
+        currDiagnosisVerificationDupe.MedicalQuestions(null, condistionDescription.Id, true, null, 0, medicalQuestion, true);
+        currDiagnosisVerificationDupe.MedicalQuestions(null, condistionDescription.Id, false, null, 0, medicalQuestion, true);
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
                 SELECT ID,isEligible__c, (
                         SELECT isEligible__c
@@ -707,7 +581,7 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.submit();
         currDiagnosisVerificationDupe.currLead = new Lead(Part_A_Form_Password__c = 'Test2');
         currDiagnosisVerificationDupe.submit();
-        currDiagnosisVerificationDupe.MediacalQuestions(null, null, false, null, 0, null, false);
+        currDiagnosisVerificationDupe.MedicalQuestions(null, null, false, null, 0, null, false);
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
                 SELECT ID,isEligible__c, (
                         SELECT isEligible__c
