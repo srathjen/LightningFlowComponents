@@ -1,7 +1,7 @@
 // This class used to do the unit testing and code coverage
 // It will create the lead record
 @isTest
-private class DiagnosisVerficationRemainder_ACTest {
+private class DiagnosisVerificationReminder_ACTest {
     private static Date todayDate = Date.today();
 
     @testSetup
@@ -76,7 +76,7 @@ private class DiagnosisVerficationRemainder_ACTest {
             lead.Dup_Check__c = Constant_AC.LEAD_DUP_CHECK_BLOCK_LEAD_DUP;
         }
         update leadsBeforeUpdate;
-        DiagnosisVerficationRemainder_AC batchAffiliation = new DiagnosisVerficationRemainder_AC();
+        DiagnosisVerificationReminder_AC batchAffiliation = new DiagnosisVerificationReminder_AC();
         Database.executeBatch(batchAffiliation, 200);
         Test.stopTest();
     }
@@ -98,7 +98,7 @@ private class DiagnosisVerficationRemainder_ACTest {
             lead.Dup_Check__c = Constant_AC.LEAD_DUP_CHECK_BLOCK_LEAD_DUP;
         }
         update leadsBeforeUpdate;
-        DiagnosisVerficationRemainder_AC batchAffiliation = new DiagnosisVerficationRemainder_AC();
+        DiagnosisVerificationReminder_AC batchAffiliation = new DiagnosisVerificationReminder_AC();
         Database.executeBatch(batchAffiliation, 200);
         Test.stopTest();
     }
@@ -120,7 +120,7 @@ private class DiagnosisVerficationRemainder_ACTest {
             lead.Dup_Check__c = Constant_AC.LEAD_DUP_CHECK_BLOCK_LEAD_DUP;
         }
         update leadsBeforeUpdate;
-        DiagnosisVerficationRemainder_AC batchAffiliation = new DiagnosisVerficationRemainder_AC();
+        DiagnosisVerificationReminder_AC batchAffiliation = new DiagnosisVerificationReminder_AC();
         Database.executeBatch(batchAffiliation, 200);
         Test.stopTest(); 
     }
@@ -142,7 +142,7 @@ private class DiagnosisVerficationRemainder_ACTest {
             lead.Dup_Check__c = Constant_AC.LEAD_DUP_CHECK_BLOCK_LEAD_DUP;
         }
         update leadsBeforeUpdate;
-        DiagnosisVerficationRemainder_AC batchAffiliation = new DiagnosisVerficationRemainder_AC();
+        DiagnosisVerificationReminder_AC batchAffiliation = new DiagnosisVerificationReminder_AC();
         Database.executeBatch(batchAffiliation, 200);
         Test.stopTest();
     }
@@ -154,7 +154,7 @@ private class DiagnosisVerficationRemainder_ACTest {
         //Schedule the test job
         String jobId = System.schedule('testJob1',
                                        CRON_EXP, 
-                                       new DiagnosisVerficationRemainder_AC());
+                                       new DiagnosisVerificationReminder_AC());
         //Get the information from the CronTrigger API object
         CronTrigger ct = [SELECT Id, CronExpression, TimesTriggered, 
                           NextFireTime
