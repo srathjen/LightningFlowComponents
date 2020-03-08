@@ -7,29 +7,30 @@ Description : It will capture the lead from Referral form.
 // 07/29/2019 -Brittany - SIW-147 Comment out entire duplicate block logic (including Notifications) to support Potential Duplicates Functionality
 // 06/02/2020 - Manoj - SIW-275 Mapped 'Medical reason' text value to field 'Referrer Rush Reason' on Lead
 global Class WishReferralForm_AC {
-    public string remailOne {get;set;}
-    public string remailTwo {get;set;}
+    public String remailOne {get;set;}
+    public String remailTwo {get;set;}
     public Lead currLead {get;set;}
-    public string diagnosisFilter {get;set;}
+    public String diagnosisFilter {get;set;}
     public String selectedDiagnosis {get;set;}
-    public boolean displayChildFrm {get;set;}
+    public Boolean displayChildFrm {get;set;}
     public String lastName {get;set;}
-    public boolean displayAckMsg {get;set;}
+    public Boolean displayAckMsg {get;set;}
     public List<siblingWrapper> currList;
     public String warningMsg {get;set;}
-    public boolean displayWarningPopup {get;set;}
-    public boolean copyReferrerInfo {get;set;}
-    public boolean copyReferrerInfoToWish {get;set;}
-    public string currState {get;set;}
-    public string diagnosisMonth {get;set;}
-    public string diagnosisYear {get;set;}
-    public List<string> communictionList {get;set;}
+    public Boolean displayWarningPopup {get;set;}
+    public Boolean copyReferrerInfo {get;set;}
+    public Boolean copyReferrerInfoToWish {get;set;}
+    public String currState {get;set;}
+    public String diagnosisMonth {get;set;}
+    public String diagnosisYear {get;set;}
+    public List<String> communictionList {get;set;}
     public List<String> languageList {get;set;}
-    public string additionalParentState {get;set;}
-    public static string icdOrPcd;
-    public string refChildFormParent {get;set;}
-    public string referralComment {get;set;}
-    public string referralRush {get;set;}
+    public String additionalParentState {get;set;}
+    public static String icdOrPcd;
+    public String refChildFormParent {get;set;}
+    public String referralComment {get;set;}
+    public String referralRush {get;set;}
+    public final String YES {get;set;}
 
     public WishReferralForm_AC() {
         communictionList = new List<String>();
@@ -39,6 +40,7 @@ global Class WishReferralForm_AC {
         copyReferrerInfo = false;
         icdOrPcd = '';
         displayChildFrm = false;
+        YES = 'Yes';
         if(ApexPages.currentPage().getParameters().get('isSuccess') != null) {
             displayAckMsg = Boolean.valueOf(ApexPages.currentPage().getParameters().get('isSuccess'));
         }
@@ -82,7 +84,7 @@ global Class WishReferralForm_AC {
             if(currLead.Has_this_child_ever_received_prior_wish__c != null) {
                 currLead.Has_this_child_ever_received_prior_wish__c = currLead.Has_this_child_ever_received_prior_wish__c.trim();
             }
-            if(currLead.Any_medical_reason_for_moving_quickly__c == 'Yes') {
+            if(currLead.Any_medical_reason_for_moving_quickly__c == YES) {
                 currLead.Any_medical_reason_for_moving_quickly__c = '<font color="Red">' + currLead.Any_medical_reason_for_moving_quickly__c + '</font>';
                 currLead.Rush__c = true;
                 currLead.Referrer_Rush_Reason__c = referralRush;
@@ -90,7 +92,7 @@ global Class WishReferralForm_AC {
             if(currLead.Any_medical_reason_for_moving_quickly__c != null) {
                 currLead.Hidden_Potential_Rush__c = currLead.Any_medical_reason_for_moving_quickly__c;
             }
-            if(currLead.Has_this_child_ever_received_prior_wish__c == 'Yes') {
+            if(currLead.Has_this_child_ever_received_prior_wish__c == YES) {
                 currLead.Has_this_child_ever_received_prior_wish__c = '<font color="Red">' + currLead.Has_this_child_ever_received_prior_wish__c + '</font>';
             }
             if(currLead.Relationship_to_child__c == null || currLead.Relationship_to_child__c == '') {
@@ -204,13 +206,13 @@ global Class WishReferralForm_AC {
                 }
                 currLead.What_is_the_family_s_primary_spoken_lang__c = languages;
                 lstLog = (createLogList(currLead, zipCode, diagnosisMonth, diagnosisYear));
-                boolean redirection;
+                Boolean redirection;
                 insert currLead;
                 if(currLead.Id != null) {
                     redirection = true;
                 }
                 if(redirection == true) {
-                    string arg;
+                    String arg;
                     if(ApexPages.currentPage().getParameters().get('alt') == 't') {
                         arg = '&alt=t';
                     }
@@ -232,27 +234,27 @@ global Class WishReferralForm_AC {
     private static List<ICD_Codes__c> getIcdCodes(String diagnosisFilter) {
         List<ICD_Codes__c> icdCodes = new List<ICD_Codes__c>();
         icdCodes = [SELECT Id, Long_Description__c, Condition_Description__r.PR_Diagnosis__c,Group1__c,
-                        Condition_Description__c, Condition_Description__r.Code_to_Use__c
-                        FROM ICD_Codes__c
-                        WHERE Name = :diagnosisFilter];
+                    Condition_Description__c, Condition_Description__r.Code_to_Use__c
+                    FROM ICD_Codes__c
+                    WHERE Name = :diagnosisFilter];
         return icdCodes; 
     }
 	
     //Return chapter zipcode
     private static List<Zip_Code__c> getChapterZipcode(String zipCode) {
         List<Zip_Code__c> zipCodes = new List<Zip_Code__c>();
-        zipCodes = [SELECT Id, Office__c, Office__r.Chapter__c,Office__r.Chapter__r.Intake_Manager__c 
-                        FROM Zip_Code__c
-                        WHERE Name = :zipCode];
+        zipCodes = [SELECT Id, Office__c, Office__r.Chapter__c, Office__r.Chapter__r.Intake_Manager__c 
+                    FROM Zip_Code__c
+                    WHERE Name = :zipCode];
         return zipCodes;
     }
 
     //Return MAW account
     private static List<Account> getMawAccount() {
         List<Account> account = new List<Account>();
-        account = [SELECT Id, Intake_Manager__c
-                        FROM Account
-                        WHERE Name = :Constant_AC.ACCOUNT_NAME_MAW_AMERICA];
+        account = [SELECT Id, Intake_Manager__c 
+                   FROM Account
+                   WHERE Name = :Constant_AC.ACCOUNT_NAME_MAW_AMERICA];
         return account;
     }
     
@@ -292,8 +294,8 @@ global Class WishReferralForm_AC {
     //Auto complete the ICD code values
     @RemoteAction
     global static List<ICD_Codes__c> searchDiagnosis(String searchTerm) {
-        string recId;
-        string logValue;
+        String recId;
+        String logValue;
         try {
             icdOrPcd = 'ICD';
             List<ICD_Codes__c> icdCodes = Database.query('SELECT Id, Name, Condition_Description__c, Short_Description__c, Condition_Description__r.Name, Condition_Description__r.InActive__c FROM ICD_Codes__c WHERE Condition_Description__r.InActive__c != true and Name like \'%' + String.escapeSingleQuotes(searchTerm) + '%\' AND Hidden_ICD_Code__c = false');
@@ -310,8 +312,8 @@ global Class WishReferralForm_AC {
     //Auto complete the diagnosis field value
     @RemoteAction
     global static List<Condition_Description__c> searchCondition(String searchTerm) {
-        string recId;
-        string logValue;
+        String recId;
+        String logValue;
         try {
             icdOrPcd = 'PCD';
             List<Condition_Description__c> conditionDescriptions = Database.query('SELECT Id, Name, Code_To_Use__c, InActive__c FROM Condition_Description__c WHERE InActive__c != true and Name like \'%' + String.escapeSingleQuotes(searchTerm) + '%\'');
@@ -322,7 +324,7 @@ global Class WishReferralForm_AC {
                         WHERE Not_Listed__c = true
                 ];
             }
-            logValue = string.valueOf(conditionDescriptions);
+            logValue = String.valueOf(conditionDescriptions);
             return conditionDescriptions;
         } catch (Exception ex) {
             new ApexDebugLog().createLog(new ApexDebugLog.Error('WishReferralForm_AC', 'searchCondition', recId, ex, logValue));
@@ -336,8 +338,8 @@ global Class WishReferralForm_AC {
 	*Return relationship picklist values from and displaying as a radio button
 	*/
     public List<SelectOption> getRelationships() {
-        string recId;
-        string logValue;
+        String recId;
+        String logValue;
         try {
             List<SelectOption> options = new List<SelectOption>();
             Schema.DescribeFieldResult fieldResult = Lead.Relationship_To_Child__c.getDescribe();
@@ -345,7 +347,7 @@ global Class WishReferralForm_AC {
             for (Schema.PicklistEntry currVal : picklistValues) {
                 options.add(new SelectOption(currVal.getLabel(), currVal.getValue()));
             }
-            logValue = string.valueOf(options);
+            logValue = String.valueOf(options);
             if(Test.isRunningTest()) {
                 throw new DmlException('Test');
             }
@@ -359,18 +361,18 @@ global Class WishReferralForm_AC {
     }
 
     /**
-	*Child form renders based on 'Is Family Aware of Referral'
+	*Render child form
 	*/
     public void displayChildForm() {
         if(currLead.Relationship_To_Child__c != Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL) {
             currLead.Medical_Provider_Category__c = '';
             copyReferrerInfo = false;
         }
-        if(currLead.Relationship_To_Child__c == Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_SELF && currLead.is_Family_Aware_of_Referral__c == 'Yes') {
+        if(currLead.Relationship_To_Child__c == Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_SELF && currLead.is_Family_Aware_of_Referral__c == YES) {
             currLead.FirstName = currLead.Referrer_FirstName__c;
             lastName = currLead.Referrer_Last_Name__c;
         }
-        if(currLead.Relationship_To_Child__c == Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN && currLead.is_Family_Aware_of_Referral__c == 'Yes') {
+        if(currLead.Relationship_To_Child__c == Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN && currLead.is_Family_Aware_of_Referral__c == YES) {
             currLead.Parent_First_Name__c = currLead.Referrer_FirstName__c;
             currLead.Parent_Last_Name__c = currLead.Referrer_Last_Name__c;
             currLead.City = currLead.Referrer_City__c;
@@ -383,7 +385,7 @@ global Class WishReferralForm_AC {
                 && currLead.Medical_Provider_Category__c != Constant_AC.LEAD_MEDICAL_PROVIDER_PHYSICIAN_ASSISTANT) {
                     copyReferrerInfo = false;
         }
-        if(currLead.of_Siblings__c != null && currLead.of_Siblings__c != '0' && currLead.Of_Siblings__c != 'Unknown') {
+        if(currLead.of_Siblings__c != null && currLead.of_Siblings__c != '0' && currLead.Of_Siblings__c != Constant_AC.LEAD_NUMBER_OF_SIBLINGS_UNKNOWN) {
             getSiblingList();
         }
     }
@@ -391,7 +393,7 @@ global Class WishReferralForm_AC {
     /** 
     *Copy referrer details to medical provider section if referrer and medical provider the same
     */
-    public void CopyReferralInfo() {
+    public void copyReferralInfo() {
         if(currLead.Relationship_To_Child__c != Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_SELF && copyReferrerInfo == true) {
             currLead.Treating_Medical_Professional_First_Name__c = currLead.Referrer_FirstName__c;
             currLead.Treating_Medical_Professional_Last_Name__c = currLead.Referrer_Last_Name__c;
@@ -417,14 +419,12 @@ global Class WishReferralForm_AC {
      * Display data entry table based on number of siblings
      */
     public List<siblingWrapper> getSiblingList() {
-        string logValue;
         currList = new List<siblingWrapper>();
         if(currLead.of_Siblings__c != null && currLead.Of_Siblings__c != Constant_AC.LEAD_NUMBER_OF_SIBLINGS_UNKNOWN) {
             for (integer i = 0; i < integer.valueOf(currLead.of_Siblings__c); i++) {
                 currList.add(new siblingWrapper());
             }
         }
-        logValue = string.valueOf(currList);
         return currList;
     }
     
@@ -432,16 +432,7 @@ global Class WishReferralForm_AC {
      * Return list of states
     */
     public List<SelectOption> getStates() {
-        List<SelectOption> options = new List<SelectOption>();
-        Schema.DescribeFieldResult fieldResult = Lead.State_Picklist__c.getDescribe();
-        options.add(new SelectOption('', 'Select an option'));
-        List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
-        for (Schema.PicklistEntry currVal : picklistValues) {
-            if(currVal.isActive()) {
-                options.add(new SelectOption(currVal.getLabel(), currVal.getValue()));
-            }
-        }
-        String logValue = string.valueOf(options);
+        List<SelectOption> options = new List<SelectOption>(getPicklistValues('State_Picklist__c'));
         return options;
     }
 
@@ -449,16 +440,7 @@ global Class WishReferralForm_AC {
      * Return relationship to child picklist values
      */
     public List<SelectOption> getRelationshipsToChild() {
-        List<SelectOption> options = new List<SelectOption>();
-        Schema.DescribeFieldResult fieldResult = Lead.Parent_Relationship_to_Child__c.getDescribe();
-        options.add(new SelectOption('', 'Select an option'));
-        List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
-        for (Schema.PicklistEntry currVal : picklistValues) {
-            if(currVal.isActive()) {
-                options.add(new SelectOption(currVal.getLabel(), currVal.getValue()));
-            }
-        }
-        String logValue = string.valueOf(options);
+        List<SelectOption> options = new List<SelectOption>(getPicklistValues('Parent_Relationship_to_Child__c'));
         return options;
     }
 
@@ -466,17 +448,7 @@ global Class WishReferralForm_AC {
      * Return how did you hear about MAW picklist values
      */
     public List<SelectOption> getHereAboutMAW() {
-        string recId;
-        List<SelectOption> options = new List<SelectOption>();
-        Schema.DescribeFieldResult fieldResult = Lead.How_Did_you_hear_about_Make_A_Wish__c.getDescribe();
-        options.add(new SelectOption('', 'Select an option'));
-        List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
-        for (Schema.PicklistEntry currVal : picklistValues) {
-            if(currVal.isActive()) {
-                options.add(new SelectOption(currVal.getLabel(), currVal.getValue()));
-            }
-        }
-        String logValue = string.valueOf(options);
+        List<SelectOption> options = new List<SelectOption>(getPicklistValues('How_Did_you_hear_about_Make_A_Wish__c'));
         return options;
     }
 
@@ -484,16 +456,7 @@ global Class WishReferralForm_AC {
      * Return communication picklist values
      */
     public List<SelectOption> getCommunication() {
-        List<SelectOption> options = new List<SelectOption>();
-        Schema.DescribeFieldResult fieldResult = Lead.Communication__c.getDescribe();
-        options.add(new SelectOption('', 'Select an option'));
-        List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
-        for (Schema.PicklistEntry currVal : picklistValues) {
-            if(currVal.isActive()) {
-                options.add(new SelectOption(currVal.getLabel(), currVal.getValue()));
-            }
-        }
-        String logValue = string.valueOf(options);
+        List<SelectOption> options = new List<SelectOption>(getPicklistValues('Communication__c'));
         return options;
     }
     
@@ -501,16 +464,7 @@ global Class WishReferralForm_AC {
      * Return language picklist values
      */
     public List<SelectOption> getlanguage() {
-        List<SelectOption> options = new List<SelectOption>();
-        Schema.DescribeFieldResult fieldResult = Lead.What_is_the_family_s_primary_spoken_lang__c.getDescribe();
-        options.add(new SelectOption('', 'Select an option'));
-        List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
-        for (Schema.PicklistEntry currVal : picklistValues) {
-            if(currVal.isActive()) {
-                options.add(new SelectOption(currVal.getLabel(), currVal.getValue()));
-            }
-        }
-        String logValue = string.valueOf(options);
+        List<SelectOption> options = new List<SelectOption>(getPicklistValues('What_is_the_family_s_primary_spoken_lang__c'));
         return options;
     }
 
@@ -523,7 +477,6 @@ global Class WishReferralForm_AC {
         for (Integer i = Date.Today().Year(); i >= Date.Today().Year() - 18; i--) {
             options.add(new SelectOption(String.valueOf(i), String.valueOf(i)));
         }
-        String logValue = string.valueOf(options);
         return options;
     }
 
@@ -531,35 +484,43 @@ global Class WishReferralForm_AC {
      * Return number of siblings picklist values
      */
     public List<SelectOption> getNoOfSiblings() {
+        List<SelectOption> options = new List<SelectOption>(getPicklistValues('of_Siblings__c'));
+        return options;
+    }
+    
+    /**
+     * Return list of picklist values based on field passed in
+     */
+    public List<SelectOption> getPicklistValues(String fieldApiName) {
+        Map<String, Schema.SObjectField> leadFieldsMap = new Map<String, Schema.SObjectField>();
+        leadFieldsMap = Schema.SObjectType.Lead.Fields.getMap();
+        List<Schema.PicklistEntry> picklistValues = leadFieldsMap.get(fieldApiName).getDescribe().getPicklistValues();
         List<SelectOption> options = new List<SelectOption>();
-        Schema.DescribeFieldResult fieldResult = Lead.of_Siblings__c.getDescribe();
-        options.add(new SelectOption('', 'Please Select'));
-        List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
-        for (Schema.PicklistEntry currVal : picklistValues) {
-            if(currVal.isActive()) {
-            	options.add(new SelectOption(currVal.getLabel(), currVal.getValue()));
+        options.add(new SelectOption('', 'Select an option'));
+        for (Schema.PicklistEntry value : picklistValues) {
+            if(value.isActive()) {
+                options.add(new SelectOption(value.getLabel(), value.getValue()));
             }
         }
-        String logValue = string.valueOf(options);
         return options;
     }
 
     /**
-     * Self Fieldset, it holds the mandatory fields of Self relationship
+     * Self field set contains the mandatory fields of self relationship
      */
     public List<Schema.FieldSetMember> getSelfRequiredFields() {
         return SObjectType.Lead.FieldSets.Self_Required_Fields.getFields();
     }
     
     /**
-     * Medical Referral Field set contains the mandatory fields of Medical Professional
+     * Medical referral field set contains the mandatory fields of medical professional
      */
     public List<Schema.FieldSetMember> getNonMedicalReqFields() {
         return SObjectType.Lead.FieldSets.Non_Medical_Referral_Required_Fields.getFields();
     }
     
     /**
-     * Non Medical Referral field set contains the mandatory fields of Non Medical Professional
+     * Non-medical referral field set contains the mandatory fields of non-medical professional
      */
     public List<Schema.FieldSetMember> getMedicalRequiredFields() {
         return SObjectType.Lead.FieldSets.Medical_Referral_Required_Form.getFields();
@@ -567,9 +528,9 @@ global Class WishReferralForm_AC {
 
     //Create task
     private static Task createTask(Id whoId, Id ownerId, Id whatId, String subject, Id recordTypeId) {
-        List<string> lstLog = new List<string>();
-        string logValue;
-        string recId;
+        List<String> lstLog = new List<String>();
+        String logValue;
+        String recId;
         Task newTask = new Task();
         try {
             Id taskRT = Constant_AC.TASK_RT_ID;
@@ -597,7 +558,7 @@ global Class WishReferralForm_AC {
             }
             return newTask;
         } catch (Exception ex) {
-            logValue = string.join(lstLog, ', ');
+            logValue = String.join(lstLog, ', ');
             new ApexDebugLog().createLog(new ApexDebugLog.Error('WishReferralForm_AC', 'createTask', whoId, ex, logValue));
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
             ApexPages.addMessage(myMsg);
@@ -612,8 +573,8 @@ global Class WishReferralForm_AC {
      * Wrapper for capturing n number of sibling details
      */
     public class siblingWrapper {
-        public string fName {get;set;}
-        public string lName {get;set;}
-        public string age {get;set;}
+        public String fName {get;set;}
+        public String lName {get;set;}
+        public String age {get;set;}
     }
 }
