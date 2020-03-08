@@ -39,7 +39,7 @@ public class WishReferralForm_AC_Test {
 		controller.currLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
 		controller.currLead.Relationship_To_Child__c = 'Self';
 		controller.CreateLead();
-		controller.CopyReferralInfo();
+		controller.copyReferralInfo();
 		controller.currLead.Child_Age__c = '5';
 
 	}
@@ -105,7 +105,7 @@ public class WishReferralForm_AC_Test {
 		controller.currList[0].lName = 'Test';
 		controller.currList[0].age = '10';
 		controller.CreateLead();
-		controller.CopyReferralInfo();
+		controller.copyReferralInfo();
 
 	}
 
@@ -153,7 +153,7 @@ public class WishReferralForm_AC_Test {
 		controller.diagnosisYear = '2000';
 		controller.diagnosisMonth = '01';
 		controller.CreateLead();
-		controller.CopyReferralInfo();
+		controller.copyReferralInfo();
 	}
 
 	public static testMethod void relationshipSelf3() {
@@ -221,7 +221,7 @@ public class WishReferralForm_AC_Test {
 				dupeLead, dupeLead2, dupeLead3
 		};
 		controller.CreateLead();
-		controller.CopyReferralInfo();
+		controller.copyReferralInfo();
 	}
 
 	public static testMethod void relationshipOther() {
@@ -291,7 +291,7 @@ public class WishReferralForm_AC_Test {
 		controller.CreateLead();
 		controller.getStates();
 		controller.copyReferrerInfo = True;
-		controller.CopyReferralInfo();
+		controller.copyReferralInfo();
 		controller.getRelationships();
 		controller.getNoOfSiblings();
 		WishReferralForm_AC.searchDiagnosis('c00');
@@ -317,7 +317,7 @@ public class WishReferralForm_AC_Test {
 		controller.CreateLead();
 		controller.getStates();
 		controller.copyReferrerInfo = True;
-		controller.CopyReferralInfo();
+		controller.copyReferralInfo();
 		controller.getRelationships();
 		controller.getNoOfSiblings();
 		WishReferralForm_AC.searchDiagnosis('c00');
