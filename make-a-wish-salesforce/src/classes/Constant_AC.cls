@@ -71,6 +71,7 @@ public class Constant_AC {
 	 * Account Constants
 	 */
 	public static final String ACCOUNT_NAME_MAW_AMERICA = 'Make-A-Wish America';
+	public static final String FAMILY_HOUSEHOLD_NAME_APPEND = ' ' + ' & ' + ' ' + 'Family Household';
 	/**
 	 * Lead Constants
 	 */
@@ -81,11 +82,22 @@ public class Constant_AC {
 	public static final String LEAD_STATUS_QUALIFIED = 'Qualified';
 	public static final String LEAD_STATUS_INQUIRY = 'Inquiry';
 	public static final String LEAD_STATUS_REFERRED = 'Referred';
+	public static final String LEAD_STATUS_ELIGIBILITY_REVIEW = 'Eligibility Review';
 	public static final String LEAD_CHILD_AGE_UNDER_2_5 = 'Under 2.5';
 	public static final String LEAD_SUB_STATUS_PENDING_DIAGNOSIS_VERIFICATION = 'Pending Diagnosis Verification';
 	public static final String LEAD_SUB_STATUS_MEDICAL_REVIEWED = 'Medical Reviewed'; //SIW-524 DNQ-Medical Lead Sub-Status Changes
 	public static final String LEAD_DUP_CHECK_BLOCK_LEAD_DUP = 'Block Lead Dup';
 	public static final String LEAD_DUP_CHECK_BLOCK_CONTACT_DUP = 'Block Contact Dup';
+	public static final String LEAD_COUNTRY_UNITED_STATES = 'United States';
+	public static final String LEAD_COMPANY_MAKE_A_WISH = 'Make-A-Wish';
+	public static final String LEAD_SOURCE_ONLINE = 'Online';
+	public static final String LEAD_RELATIONSHIP_TO_CHILD_OTHER = 'Other';
+	public static final String LEAD_RELATIONSHIP_TO_CHILD_SELF = 'Self';
+	public static final String LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN = 'Parent/Guardian';
+	public static final String LEAD_MEDICAL_PROVIDER_NURSE_PRACTITIONER = 'Nurse Practitioner';
+	public static final String LEAD_MEDICAL_PROVIDER_PHYSICIAN_ASSISTANT = 'Physician Assistant';
+	public static final String LEAD_MEDICAL_PROVIDER_PHYSICIAN = 'Physician';
+	public static final String LEAD_NUMBER_OF_SIBLINGS_UNKNOWN = 'Unknown';
 	/**
 	 * Lead File Constants
 	 */
@@ -219,6 +231,7 @@ public class Constant_AC {
 	 */
 	public static final String TASK_PRIORITY_NORMAL = 'Normal';
 	public static final String TASK_STATUS_NOT_STARTED = 'Not Started';
+	public static final String TASK_STATUS_COMPLETED = 'Completed';
 	public static final String TASK_SUBJECT_SEND_DIAGNOSIS_VERIFICATION = 'Send Diagnosis Verification';
 	public static final String TASK_SUBJECT_REMINDER_FOR_DIAGNOSIS_VERIFICATION = 'days reminder for Diagnosis Verification';
 	public static final String TASK_SUBJECT_NEW_INQUIRY_SUBMITTED = 'New Inquiry Submitted';

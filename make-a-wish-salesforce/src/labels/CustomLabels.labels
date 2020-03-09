@@ -41,6 +41,14 @@
         <value>30</value>
     </labels>
     <labels>
+        <fullName>Cancel_Label</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cancel Label</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
         <fullName>Celebritywish</fullName>
         <categories>Docusign Template</categories>
         <language>en_US</language>
@@ -89,6 +97,14 @@
         <value>0122a298-3d78-40d7-b137-286260864fb1</value>
     </labels>
     <labels>
+        <fullName>Confirm_Label</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Confirm Label</shortDescription>
+        <value>Confirm</value>
+    </labels>
+    <labels>
         <fullName>ContactIdValue</fullName>
         <language>en_US</language>
         <protected>false</protected>
@@ -96,25 +112,12 @@
         <value>0033600000Z3S0Z</value>
     </labels>
     <labels>
-        <fullName>DiagnosisVerification_Already_Reviewed</fullName>
+        <fullName>Continue_Label</fullName>
+        <categories>Wish Referral</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>DiagnosisVerification_Already_Reviewed</shortDescription>
-        <value>Document already reviewed, please contact chapter staff for access.</value>
-    </labels>
-    <labels>
-        <fullName>DiagnosisVerification_Cannot_Review</fullName>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>DiagnosisVerification_Cannot_Review</shortDescription>
-        <value>You cannot review this document.</value>
-    </labels>
-    <labels>
-        <fullName>DiagnosisVerification_Incorrect_Password</fullName>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>DiagnosisVerification_Incorrect_Password</shortDescription>
-        <value>Incorrect password.</value>
+        <shortDescription>Continue Label</shortDescription>
+        <value>Continue</value>
     </labels>
     <labels>
         <fullName>DNQ_Letter_DDP</fullName>
@@ -164,6 +167,27 @@
         <value>An unexpected error has occurred. The system administrator has been alerted.</value>
     </labels>
     <labels>
+        <fullName>DiagnosisVerification_Already_Reviewed</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DiagnosisVerification_Already_Reviewed</shortDescription>
+        <value>Document already reviewed, please contact chapter staff for access.</value>
+    </labels>
+    <labels>
+        <fullName>DiagnosisVerification_Cannot_Review</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DiagnosisVerification_Cannot_Review</shortDescription>
+        <value>You cannot review this document.</value>
+    </labels>
+    <labels>
+        <fullName>DiagnosisVerification_Incorrect_Password</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DiagnosisVerification_Incorrect_Password</shortDescription>
+        <value>Incorrect password.</value>
+    </labels>
+    <labels>
         <fullName>Dummy_Email</fullName>
         <categories>It holds the hiiden email value for the contact</categories>
         <language>en_US</language>
@@ -177,7 +201,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Duplicate Lead Message 1</shortDescription>
-        <value>&apos;You can either choose &quot;No duplicate Found&quot; or any lead(s) under Select Existing Leads.&apos;</value>
+        <value>&#39;You can either choose &quot;No duplicate Found&quot; or any lead(s) under Select Existing Leads.&#39;</value>
     </labels>
     <labels>
         <fullName>Duplicate_Lead_Message_2</fullName>
@@ -382,6 +406,22 @@
         <value>a1a1R000007bEQpQAM</value>
     </labels>
     <labels>
+        <fullName>Select_Option_No</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Option No</shortDescription>
+        <value>No</value>
+    </labels>
+    <labels>
+        <fullName>Select_Option_Yes</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Option Yes</shortDescription>
+        <value>Yes</value>
+    </labels>
+    <labels>
         <fullName>SendForESignatureInstructions</fullName>
         <language>en_US</language>
         <protected>false</protected>
@@ -428,6 +468,14 @@ Click Generate Document and once the document is generated you can click the lin
         <protected>false</protected>
         <shortDescription>Sneak Peek DDP</shortDescription>
         <value>a1a360000033dtbAAA</value>
+    </labels>
+    <labels>
+        <fullName>Submit_Label</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Submit Label</shortDescription>
+        <value>Submit</value>
     </labels>
     <labels>
         <fullName>Volunteer_Opportunity_Id</fullName>
@@ -1276,6 +1324,622 @@ This will archive the existing active budget and cannot be undone. Are you sure 
         <protected>false</protected>
         <shortDescription>Wish Receipt Spanish DDP</shortDescription>
         <value>a1a1R000007bER0QAM</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Add_Parent_Legal_Guardian</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Add Parent/Legal Guardian</shortDescription>
+        <value>Add Parent/Legal Guardian</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Additional_Information</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Additional Information</shortDescription>
+        <value>Additional Information</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Address</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Address</shortDescription>
+        <value>Address</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Age</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Age</shortDescription>
+        <value>Age</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Age_Requirement</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Age Requirement</shortDescription>
+        <value>Age Requirement</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Approximate_Diagnosis_Date</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Approximate Diagnosis Date</shortDescription>
+        <value>Approximate Diagnosis Date</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Child_Had_Prior_Wish</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Child Had Prior Wish</shortDescription>
+        <value>Has this child ever received a prior wish from Make-A-Wish or any other wish-granting organizations?</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_City</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral City</shortDescription>
+        <value>City</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Date_of_Birth</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Date of Birth</shortDescription>
+        <value>Date of Birth</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Diagnosis_Not_In_Database</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Diagnosis Not In Database</shortDescription>
+        <value>The diagnosis is not in the database, please enter the diagnosis details</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Discussed_Healthcare_Provider</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Discussed Healthcare Provider</shortDescription>
+        <value>Has the referral been discussed with the child&#39;s healthcare provider?</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Email</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Email</shortDescription>
+        <value>Email</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Facilitate_Communication</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Facilitate Communication</shortDescription>
+        <value>In order to facilitate communication, please select all that apply to the child you are referring</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Family_Information</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Family Information</shortDescription>
+        <value>Family Information</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Gender</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Gender</shortDescription>
+        <value>Gender</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Gender_Description</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Gender Description</shortDescription>
+        <value>Gender Description</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Gender_Self_Describe</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Gender Self Describe</shortDescription>
+        <value>(Self-Describe Selected)</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Hear_About_Make_A_Wish</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Hear About Make A Wish</shortDescription>
+        <value>How did you hear about Make-A-Wish?</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Hospital_or_Treatment_Facility</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Hospital or Treatment Facility</shortDescription>
+        <value>Hospital or Treatment Facility</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_ICD_Code</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral ICD Code</shortDescription>
+        <value>ICD Code</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_If_Applicable</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral If Applicable</shortDescription>
+        <value>(if applicable)</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Is_Family_Aware_of_Referral</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Is Family Aware of Referral</shortDescription>
+        <value>Is Family Aware of Referral?</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Last_Name</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Last Name</shortDescription>
+        <value>Last Name</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Medical_Information</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Medical Information</shortDescription>
+        <value>Medical Information</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Medical_Professional_Category</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Medical Professional Category</shortDescription>
+        <value>Medical Professional Category</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Medical_Reason</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Medical Reason</shortDescription>
+        <value>Medical Reason</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Medical_Reason_Move_Quickly</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Medical Reason Move Quickly</shortDescription>
+        <value>Is there a medical reason why we need to move quickly?</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Middle_Initial</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Middle Initial</shortDescription>
+        <value>Middle Initial</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Month</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Month</shortDescription>
+        <value>Month</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Month_April</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Month April</shortDescription>
+        <value>April</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Month_August</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Month August</shortDescription>
+        <value>August</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Month_December</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Month December</shortDescription>
+        <value>December</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Month_February</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Month February</shortDescription>
+        <value>February</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Month_January</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Month January</shortDescription>
+        <value>January</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Month_July</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Month July</shortDescription>
+        <value>July</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Month_June</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Month June</shortDescription>
+        <value>June</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Month_March</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Month March</shortDescription>
+        <value>March</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Month_May</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Month May</shortDescription>
+        <value>May</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Month_November</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Month November</shortDescription>
+        <value>November</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Month_October</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Month October</shortDescription>
+        <value>October</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Month_September</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Month September</shortDescription>
+        <value>September</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Name</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Name</shortDescription>
+        <value>Name</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Number_of_Siblings</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Number of Siblings</shortDescription>
+        <value>Number of Siblings</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Option_Not_Sure</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Option Not Sure</shortDescription>
+        <value>Not Sure</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Other_Diagnosis</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Other Diagnosis</shortDescription>
+        <value>(Other/Not Listed Diagnosis Selected)</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Other_Language</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Other Language</shortDescription>
+        <value>Other Language</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Other_Medical_Professional_Category</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Other Medical Professional Category</shortDescription>
+        <value>Other Medical Professional Category</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Other_Treating_Medical_Professional</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Other Treating Medical Professional</shortDescription>
+        <value>Please provide the best person in the Treating Medical Professional&#39;s Office to contact if different than the Treating Medical Professional</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Parent_or_Guardian</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Parent or Guardian</shortDescription>
+        <value>Parent or Guardian</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Phone</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Phone</shortDescription>
+        <value>Phone</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Placeholder_Additional_Medical_Information</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Placeholder Additional Medical Information</shortDescription>
+        <value>Please enter any additional medical information that you may have.</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Placeholder_Describe_Medical_Reason</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Placeholder Describe Medical Reason</shortDescription>
+        <value>Please describe the medical reason.</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Placeholder_Description_Self_Describe</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Placeholder Description Self Describe</shortDescription>
+        <value>Please enter a description pertaining to &#39;Self-describe&#39;.</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Placeholder_Diagnosis_Example</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Placeholder Diagnosis Example</shortDescription>
+        <value>example: Malignant Neoplasm</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Placeholder_Example_Friend_Friend_of_family</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Placeholder Example: Friend, Friend of family</shortDescription>
+        <value>example: Friend, Friend of family</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Placeholder_First_Name</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Placeholder First Name</shortDescription>
+        <value>First Name</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Placeholder_Hospital_Facility_Name</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Placeholder Hospital Facility Name</shortDescription>
+        <value>Hospital/Facility Name</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Placeholder_Other_Medical_Professional_Category</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Placeholder Other Medical Professional Category</shortDescription>
+        <value>Please specify other Medical Professional category</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Placeholder_Please_Enter_Other_Language</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Placeholder Please Enter Other Language</shortDescription>
+        <value>Please enter other language</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Postal_Code</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Postal Code</shortDescription>
+        <value>Postal Code</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Primary_Diagnosis</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Primary Diagnosis</shortDescription>
+        <value>Primary Diagnosis</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Primary_Diagnosis_Description</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Primary Diagnosis Description</shortDescription>
+        <value>Primary Diagnosis Description</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Primary_Language_Spoken</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Primary Language Spoken</shortDescription>
+        <value>What is the family’s primary spoken language?</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Primary_Number</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Primary Number</shortDescription>
+        <value>Primary Number</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Provide_Relationship_to_Child</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Provide Relationship to Child</shortDescription>
+        <value>Provide Your Relationship to the Child</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Referrer_Information</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Referrer Information</shortDescription>
+        <value>Referrer Information</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Relationship_to_Child</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Relationship to Child</shortDescription>
+        <value>Relationship to Child</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Remove_Parent_Guardian</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Remove Parent/Guardian</shortDescription>
+        <value>Remove if no Parent/Guardian</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Return_to_Home_Site</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Return to Home Site</shortDescription>
+        <value>Return to Home Site</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Same_Address_as_Parent_or_Guardian</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Same Address as Parent or Guardian</shortDescription>
+        <value>Same Address as Parent or Guardian</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Same_as_Referrer_Information</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Same as Referrer Information</shortDescription>
+        <value>Same as Referrer Information</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Sibling_Information</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Sibling Information</shortDescription>
+        <value>Sibling Information</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_State</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral State</shortDescription>
+        <value>State</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Submit_Another_Referral</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Submit Another Referral</shortDescription>
+        <value>Submit Another Referral</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Thank_You_For_Submitting</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Thank You For Submitting</shortDescription>
+        <value>Thank you for submitting a referral. Chapter staff will be in contact soon if additional information is required.</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Treating_Medical_Professional_Information</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Treating Medical Professional Information</shortDescription>
+        <value>Treating Medical Professional Information</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Wish_Child_Information</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Wish Child Information</shortDescription>
+        <value>Wish Child Information</value>
     </labels>
     <labels>
         <fullName>Wish_Vision_Form_DDP</fullName>
