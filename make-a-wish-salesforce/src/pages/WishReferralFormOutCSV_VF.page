@@ -1,3 +1,0 @@
-<apex:page controller="WishReferralFormOut_AC" action="{!exportCSV}" contentType="text/csv#{!fileName}.csv" showHeader="false" sidebar="false" standardStylesheets="false">
-  {!csv}
-</apex:page>
