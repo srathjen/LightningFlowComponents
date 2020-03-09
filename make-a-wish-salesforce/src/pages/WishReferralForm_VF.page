@@ -148,7 +148,7 @@
                 <fieldset>
                     <apex:pagemessages id="msg"/>
                     <apex:inputText value="{!refChildFormParent}" id="childToParent" styleClass="chid-value" style="display:none" />
-                    <legend>Relationship to Child</legend>
+                    <legend>{!$Label.Wish_Referral_Relationship_to_Child}</legend>
                     <div class="row" style="margin-bottom:2rem">
                         <div class="form-group r2c mySelect23 radioClickable radioSection">
                             <apex:selectRadio value="{!currLead.Relationship_to_child__c}" id="relationToChild" layout="pageDirection" onchange="changeRelationship(this.id, this.value)" styleClass="relationToChildClass">
@@ -157,7 +157,7 @@
                         </div>
                     </div>
                     <div class="form-group row" style="display: none;" id="healthProvider">
-                        <label class="col-sm-3">Has the referral been discussed with the child's healthcare provider?</label>
+                        <label class="col-sm-3">{!$Label.Wish_Referral_Discussed_Healthcare_Provider}</label>
                         <div class="col-sm-6">
                             <apex:inputField value="{!currLead.is_Family_Aware_of_Referral__c}"  styleClass="form-control col-xs-12 c-select required discussedProvider searchField" id="discussed-with-provider" onchange="getInputValue();">
                             </apex:inputField>
@@ -165,7 +165,7 @@
                         </div>
                     </div>
                     <div class="form-group row" style="display: none;">
-                        <label class="col-sm-3">Is Family Aware of Referral?</label>
+                        <label class="col-sm-3">{!$Label.Wish_Referral_Is_Family_Aware_of_Referral}</label>
                         <div class="col-sm-6">
                             <apex:inputField value="{!currLead.is_Family_Aware_of_Referral__c}"  styleClass="form-control col-xs-12 c-select familyAware searchField" id="aware-of-referral" onchange="getInputValue();">
                             </apex:inputField>
@@ -173,25 +173,25 @@
                         </div>
                     </div>
                     <div class="form-group row medicalProvider">
-                        <label class="col-sm-3">Medical Professional Category</label>
+                        <label class="col-sm-3">{!$Label.Wish_Referral_Medical_Professional_Category}</label>
                         <div class="col-sm-6">
                             <apex:inputField value="{!currLead.Medical_Provider_Category__c}" styleClass="form-control col-xs-12 col-sm-12 c-select medProvCat" id="medprov" />
                         </div>
                     </div>
                     <div class="form-group row other">
-                        <label class="col-sm-3">Provide Your Relationship to the Child</label>
+                        <label class="col-sm-3">{!$Label.Wish_Referral_Provide_Relationship_to_Child}</label>
                         <div class="col-sm-6">
-                            <apex:inputField value="{!currLead.Other_Relationship_To_Child__c}" styleClass="form-control col-xs-12 col-sm-12" id="r2cManualInput" html-placeholder="example: Friend, Friend of family"/>
+                            <apex:inputField value="{!currLead.Other_Relationship_To_Child__c}" styleClass="form-control col-xs-12 col-sm-12" id="r2cManualInput" html-placeholder="{!$Label.Wish_Referral_Placeholder_Example_Friend_Friend_of_family}"/>
                         </div>
                     </div>
                     <div class="form-group row medprovcat-other-wrap">
-                        <label class="col-sm-3">Other Medical Professional Category</label>
+                        <label class="col-sm-3">{!$Label.Wish_Referral_Other_Medical_Professional_Category}</label>
                         <div class="col-sm-6">
-                            <apex:inputField styleClass="form-control medprovcat-other" id="medprovcat" html-maxlength="100" html-placeholder="Please specify other Medical Professional category" value="{!currLead.Other_Medical_Provider_Category__c}" />
+                            <apex:inputField styleClass="form-control medprovcat-other" id="medprovcat" html-maxlength="100" html-placeholder="{!$Label.Wish_Referral_Placeholder_Other_Medical_Professional_Category}" value="{!currLead.Other_Medical_Provider_Category__c}" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3">How did you hear about Make-A-Wish?</label>
+                        <label class="col-sm-3">{!$Label.Wish_Referral_Hear_About_Make_A_Wish}</label>
                         <div class="col-sm-6">
                             <apex:inputField value="{!currLead.How_Did_you_hear_about_Make_A_Wish__c}" styleClass="form-control col-xs-12 c-select required" id="referred-by" />
                         </div>
@@ -202,31 +202,31 @@
                     <!-- referrer info -->
                     <fieldset>
                         <apex:pagemessages id="msg1"/>
-                        <legend>Referrer Information</legend>
+                        <legend>{!$Label.Wish_Referral_Referrer_Information}</legend>
                         <div class="referrerInfo">
                             <div class="refToParent">
                                 <div class="refToRepeat">
                                     <div class="form-group row">
-                                        <div class="col-sm-3"><label>Name</label></div>
+                                        <div class="col-sm-3"><label>{!$Label.Wish_Referral_Name}</label></div>
                                         <div class="col-sm-6">
-                                            <apex:inputText value="{!currLead.Referrer_FirstName__c}" styleClass="form-control name-group rfirstname" html-placeholder="First Name" id="rfirstname" maxlength="40" />
+                                            <apex:inputText value="{!currLead.Referrer_FirstName__c}" styleClass="form-control name-group rfirstname" html-placeholder="{!$Label.Wish_Referral_Placeholder_First_Name}" id="rfirstname" maxlength="40" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-sm-3"><label class="sr-only" aria-label="last_name">Last Name</label></div>
+                                        <div class="col-sm-3"><label class="sr-only" aria-label="last_name">{!$Label.Wish_Referral_Last_Name}</label></div>
                                         <div class="col-sm-6 lastname">
-                                            <apex:inputText value="{!currLead.Referrer_Last_Name__c}" styleClass="form-control name-group rlastname" html-placeholder="Last Name" id="rlastname" maxlength="40"  />
+                                            <apex:inputText value="{!currLead.Referrer_Last_Name__c}" styleClass="form-control name-group rlastname" html-placeholder="{!$Label.Wish_Referral_Last_Name}" id="rlastname" maxlength="40"  />
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-sm-3"><label>Phone</label></div>
+                                        <div class="col-sm-3"><label>{!$Label.Wish_Referral_Phone}</label></div>
                                         <div class="col-sm-6">
                                             <apex:inputText value="{!currLead.Referrer_Phone__c}" styleClass="form-control rphone phonemask numbers-only phonechk-std" html-placeholder="(000) 000-0000" id="rphone" html-pattern=".{10,14}" maxlength="14" />
                                         </div>
                                     </div>
                                     
                                     <div class="row" id="remaildiv">
-                                        <div class="col-sm-3"><label>Email</label></div>
+                                        <div class="col-sm-3"><label>{!$Label.Wish_Referral_Email}</label></div>
                                         <div class="form-group col-sm-6">
                                             <apex:inputText value="{!remailOne}" styleClass="form-control remail email-std" html-placeholder="your_email@domain.com" id="remail" maxlength="80"  />
                                             
@@ -234,7 +234,7 @@
                                     </div>
                                     
                                     <div class="row" id="remail1div">
-                                        <div class="col-sm-3"><label>Email</label></div>
+                                        <div class="col-sm-3"><label>{!$Label.Wish_Referral_Email}</label></div>
                                         <div class="form-group col-sm-6">
                                             <apex:inputText value="{!remailTwo}" styleClass="form-control remail1 email-std" html-placeholder="your_email@domain.com" id="remail1" maxlength="80" />
                                             
@@ -242,13 +242,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-3"><label>City</label></div>
+                                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_City}</label></div>
                                     <div class="col-sm-6">
-                                        <apex:inputText value="{!currLead.Referrer_City__c}" styleClass="form-control rcity alpha-only" html-placeholder="City" id="rcity" maxlength="50"  />
+                                        <apex:inputText value="{!currLead.Referrer_City__c}" styleClass="form-control rcity alpha-only" html-placeholder="{!$Label.Wish_Referral_City}" id="rcity" maxlength="50"  />
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-3"><label>Postal Code</label></div>
+                                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_Postal_Code}</label></div>
                                     <div class="col-sm-6">
                                         <apex:inputText value="{!currLead.Referrer_Zip__c}" styleClass="form-control rpostalcode postalcode numbers-only" html-placeholder="00000" maxlength="5" id="rpostalcode"  />
                                     </div>
@@ -259,39 +259,39 @@
                     <!-- wish child info -->
                     <fieldset>
                         <apex:pagemessages id="msg2"/>
-                        <legend>Wish Child Information</legend>
+                        <legend>{!$Label.Wish_Referral_Wish_Child_Information}</legend>
                         <div class="childToRepeat">
                             <div class="form-group row fullname">
-                                <div class="col-sm-3"><label aria-labelledby="first_name">Name</label></div>
+                                <div class="col-sm-3"><label aria-labelledby="first_name">{!$Label.Wish_Referral_Name}</label></div>
                                 <div class="col-xs-8 col-sm-4">
-                                    <apex:inputText value="{!currLead.FirstName}" styleClass="form-control name-group wcfirstname" id="wcfirstname" html-placeholder="First Name" maxlength="40"  />
+                                    <apex:inputText value="{!currLead.FirstName}" styleClass="form-control name-group wcfirstname" id="wcfirstname" html-placeholder="{!$Label.Wish_Referral_Placeholder_First_Name}" maxlength="40"  />
                                 </div>
                                 <div class="col-xs-4 col-sm-2">
-                                    <label class="sr-only" aria-label="Middle Name">Middle Initial</label>
+                                    <label class="sr-only" aria-label="Middle Name">{!$Label.Wish_Referral_Middle_Initial}</label>
                                     <apex:inputText value="{!currLead.Child_Middle_Initial__c}" styleClass="form-control middleinitial" maxlength="1" id="wcmiddleinitial" html-placeholder="M.I." title="Middle Initial" />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-3"><label class="sr-only" aria-label="last_name">Last Name</label></div>
+                                <div class="col-sm-3"><label class="sr-only" aria-label="last_name">{!$Label.Wish_Referral_Last_Name}</label></div>
                                 <div class="col-sm-6 lastname">
-                                    <apex:inputText value="{!lastName}" styleClass="form-control name-group wclastname" html-placeholder="Last Name" id="wclastname" maxlength="40"  />
+                                    <apex:inputText value="{!lastName}" styleClass="form-control name-group wclastname" html-placeholder="{!$Label.Wish_Referral_Last_Name}" id="wclastname" maxlength="40"  />
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-3"><label>Gender</label></div>
+                            <div class="col-sm-3"><label>{!$Label.Wish_Referral_Gender}</label></div>
                             <div class="col-sm-6">
                                 <apex:inputField value="{!currLead.Gender__c}" id="wcgender" styleClass="form-control col-xs-12 c-select chosen single" />
                             </div>
                         </div>
                         <div class="form-group row self-desc" hidden="hidden">
-                            <div class="col-sm-3"><label for="j_id0:frm:self-desc" aria-labelledby="Self-Describe">Gender Description <span>(Self-Describe selected)</span></label></div>
+                            <div class="col-sm-3"><label for="j_id0:frm:self-desc" aria-labelledby="Self-Describe">{!$Label.Wish_Referral_Gender_Description} <span>{!$Label.Wish_Referral_Gender_Self_Describe}</span></label></div>
                             <div class="col-sm-6">
-                                <apex:inputTextarea styleClass="form-control self-desc-field" value="{!currLead.Self_describe_comment_box__c}" id="self-desc-tbox" html-placeholder="Please enter a description pertaining to 'Self-describe'." />
+                                <apex:inputTextarea styleClass="form-control self-desc-field" value="{!currLead.Self_describe_comment_box__c}" id="self-desc-tbox" html-placeholder="{!$Label.Wish_Referral_Placeholder_Description_Self_Describe}" />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-3"><label>Age</label></div>
+                            <div class="col-sm-3"><label>{!$Label.Wish_Referral_Age}</label></div>
                             <div class="col-sm-6">
                                 <apex:inputField value="{!currLead.Child_Age__c}" id="wcage" styleClass="form-control col-xs-12 c-select childAge wcage">
                                     <!--  <apex:actionSupport event="onchange" action="{!birthDateValidation}" />-->
@@ -299,24 +299,24 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-3"><label>Date of Birth</label></div>
+                            <div class="col-sm-3"><label>{!$Label.Wish_Referral_Date_of_Birth}</label></div>
                             <div class="col-sm-6">
                                 <apex:inputField value="{!currLead.DOB__c}" styleClass="form-control date-std" id="wcdob" html-placeholder="mm/dd/yyyy" />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3">Has this child ever received a prior wish from Make-A-Wish or any other wish-granting organizations?</label>
+                            <label class="col-sm-3">{!$Label.Wish_Referral_Child_Had_Prior_Wish}</label>
                             <div class="col-sm-6">
                                 <apex:selectList value="{!currLead.Has_this_child_ever_received_prior_wish__c}" id="priorWish" size="1" multiselect="false" styleClass="form-control col-xs-12 c-select chosen single" >
                                     <apex:selectOption itemLabel="--None--" itemValue="" />
-                                    <apex:selectOption itemLabel="Yes" itemValue="Yes" />
-                                    <apex:selectOption itemLabel="No" itemValue="No" />
-                                    <apex:selectOption itemLabel="Not Sure" itemValue="Not Sure" /> <!--  Added as per IME-218 -->
+                                    <apex:selectOption itemLabel="{!$Label.Select_Option_Yes}" itemValue="{!$Label.Select_Option_Yes}" />
+                                    <apex:selectOption itemLabel="{!$Label.Select_Option_No}" itemValue="{!$Label.Select_Option_No}" />
+                                    <apex:selectOption itemLabel="{!$Label.Wish_Referral_Option_Not_Sure}" itemValue="{!$Label.Wish_Referral_Option_Not_Sure}" />
                                 </apex:selectList>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3">In order to facilitate communication, please select all that apply to the child you are referring</label>
+                            <label class="col-sm-3">{!$Label.Wish_Referral_Facilitate_Communication}</label>
                             <div class="col-sm-6">
                                 <apex:selectList value="{!communictionList}" size="4" id="communication" multiselect="true" styleClass="form-control col-xs-12 c-select multi" >
                                     <apex:selectOptions value="{!communication}" />
@@ -328,9 +328,9 @@
                         <!-- family info -->
                         <fieldset>
                             <apex:pagemessages id="msg3"/>
-                            <legend>Family Information <span class="text-muted">Parent or Guardian 1</span></legend>
+                            <legend>{!$Label.Wish_Referral_Family_Information} <span class="text-muted">{!$Label.Wish_Referral_Parent_or_Guardian} 1</span></legend>
                             <div class="form-group row">
-                                <div class="col-sm-3"><label>Relationship to Child</label></div>
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Relationship_to_Child}</label></div>
                                 <div class="col-sm-6">
                                     <apex:selectList size="1" id="p-r2c-1" value="{!currLead.Parent_Relationship_to_Child__c}" styleClass="form-control col-xs-12 c-select">
                                         <apex:selectOptions value="{!RelationshipsToChild}" />
@@ -338,31 +338,31 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-3"><label>Name</label></div>
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Name}</label></div>
                                 <div class="col-sm-6">
-                                    <apex:inputText value="{!currLead.Parent_First_Name__c}" styleClass="form-control name-group pfirstname pfirstname1 alpha-only" id="pfirstname" html-placeholder="First Name" maxlength="40" />
+                                    <apex:inputText value="{!currLead.Parent_First_Name__c}" styleClass="form-control name-group pfirstname pfirstname1 alpha-only" id="pfirstname" html-placeholder="{!$Label.Wish_Referral_Placeholder_First_Name}" maxlength="40" />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-3"><label class="sr-only" aria-label="last_name">Last Name</label></div>
+                                <div class="col-sm-3"><label class="sr-only" aria-label="last_name">{!$Label.Wish_Referral_Last_Name}</label></div>
                                 <div class="col-sm-6 lastname">
-                                    <apex:inputText value="{!currLead.Parent_Last_Name__c}" styleClass="form-control name-group plastname plastname1 alpha-only" html-placeholder="Last Name" id="plastname" maxlength="40"  />
+                                    <apex:inputText value="{!currLead.Parent_Last_Name__c}" styleClass="form-control name-group plastname plastname1 alpha-only" html-placeholder="{!$Label.Wish_Referral_Last_Name}" id="plastname" maxlength="40"  />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-3"><label>Address</label></div>
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Address}</label></div>
                                 <div class="col-sm-6">
                                     <apex:inputText value="{!currLead.Street}" styleClass="form-control" html-placeholder="0000 NE 00 Ave" id="paddress" maxlength="40" />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-3"><label>City</label></div>
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_City}</label></div>
                                 <div class="col-sm-6">
-                                    <apex:inputText value="{!currLead.City}" styleClass="form-control pcity pcity1 alpha-only" html-placeholder="City" id="pcity" maxlength="40"  />
+                                    <apex:inputText value="{!currLead.City}" styleClass="form-control pcity pcity1 alpha-only" html-placeholder="{!$Label.Wish_Referral_City}" id="pcity" maxlength="40"  />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-3"><label>State</label></div>
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_State}</label></div>
                                 <div class="col-sm-6">
                                     <apex:selectList size="1" id="p-state" value="{!currState}" styleClass="form-control col-xs-12 c-select state" >
                                         <apex:selectOptions value="{!States}" />
@@ -370,44 +370,44 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-3"><label>Postal Code</label></div>
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Postal_Code}</label></div>
                                 <div class="col-sm-6">
                                     <apex:inputText value="{!currLead.PostalCode}" styleClass="form-control ppostalcode ppostalcode1 postalcode numbers-only" html-placeholder="00000" maxlength="5" id="ppostalcode"  />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-3"><label aria-labelledby="email address">Email Address</label></div>
+                                <div class="col-sm-3"><label aria-labelledby="email address">{!$Label.Wish_Referral_Email} {!$Label.Wish_Referral_Address}</label></div>
                                 <div class="col-sm-6">
                                     <apex:inputText value="{!currLead.Email}" styleClass="form-control pemailaddress pemailaddress1 email-std" id="pemailaddress" maxlength="80" html-placeholder="guardian_email@domain.com"  />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-3"><label aria-labelledby="phone number">Primary Number</label></div>
+                                <div class="col-sm-3"><label aria-labelledby="phone number">{!$Label.Wish_Referral_Primary_Number}</label></div>
                                 <div class="col-sm-6">
                                     <apex:inputText value="{!currLead.Phone}" styleClass="form-control pphone pphone1 phonemask numbers-only" id="pphonenumber" html-pattern=".{10,15}" maxlength="14" html-placeholder="(000) 000-0000" />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3">What is the family’s primary spoken language?</label>
+                                <label class="col-sm-3">{!$Label.Wish_Referral_Primary_Language_Spoken}</label>
                                 <div class="col-sm-6">
                                     <!-- IME-157 Starts -->
-                                    <apex:selectList value="{!languageList}" size="4" id="language" multiselect="true" styleClass="form-control col-xs-12 c-select multi" onchange="languageselection(this.id);" >
+                                    <apex:selectList value="{!languageList}" size="4" id="language" multiselect="true" styleClass="form-control col-xs-12 c-select multi required" onchange="languageselection(this.id);" >
                                         <apex:selectOptions value="{!language}" />
                                     </apex:selectList>
                                     <!-- IME-157 Ends -->
                                 </div>
                             </div>
                             <div class="form-group row" id="otherlanguagediv" style="display:none;">
-                                <div class="col-sm-3"><label aria-labelledby="other language">Other Language</label></div>
+                                <div class="col-sm-3"><label aria-labelledby="other language">{!$Label.Wish_Referral_Other_Language}</label></div>
                                 <div class="col-sm-6">
-                                    <apex:inputText value="{!currLead.OtherLanguage__c}" styleClass="form-control alpha-only otherlanguageclass" html-placeholder="Please enter other language" id="otherlanguage" />
+                                    <apex:inputText value="{!currLead.OtherLanguage__c}" styleClass="form-control alpha-only otherlanguageclass" html-placeholder="{!$Label.Wish_Referral_Placeholder_Please_Enter_Other_Language}" id="otherlanguage" />
                                 </div>
                             </div>
                             
                             <apex:outputPanel id="rr">
                                 <apex:actionRegion >
                                     <div class="form-group row">
-                                        <div class="col-sm-3"><label>Number of Siblings</label></div>
+                                        <div class="col-sm-3"><label>{!$Label.Wish_Referral_Number_of_Siblings}</label></div>
                                         <div class="col-sm-6">
                                             <apex:selectList value="{!currLead.of_Siblings__c}" id="nSib" size="1" multiselect="false" styleClass="form-control col-xs-12 c-select chosen single">
                                                 <apex:selectOptions value="{!NoOfSiblings}" />
@@ -418,18 +418,18 @@
                                     <div class="form-group row sibInfo">
                                         <apex:outputPanel id="table">
                                             <apex:outputPanel rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
-                                                <label class="col-md-12">Sibling Information</label>
+                                                <label class="col-md-12">{!$Label.Wish_Referral_Sibling_Information}</label>
                                             </apex:outputPanel>
                                             <div class="col-md-12 sib-tablewrap">
                                                 <apex:dataTable value="{!SiblingList}" var="currsibling"  styleClass="table table-maw table-hover">
                                                     <apex:column >
-                                                        <apex:inputText value="{!currsibling.fName}" styleClass="form-control" html-placeholder="First Name" id="psibfirstname" />
+                                                        <apex:inputText value="{!currsibling.fName}" styleClass="form-control" html-placeholder="{!$Label.Wish_Referral_Placeholder_First_Name}" id="psibfirstname" />
                                                     </apex:column>
                                                     <apex:column >
-                                                        <apex:inputText value="{!currsibling.lName}" styleClass="form-control" html-placeholder="Last Name" id="psiblastname" />
+                                                        <apex:inputText value="{!currsibling.lName}" styleClass="form-control" html-placeholder="{!$Label.Wish_Referral_Last_Name}" id="psiblastname" />
                                                     </apex:column>
                                                     <apex:column >
-                                                        <apex:inputText value="{!currsibling.age}" styleClass="form-control" html-placeholder="Age" id="psibage" />
+                                                        <apex:inputText value="{!currsibling.age}" styleClass="form-control" html-placeholder="{!$Label.Wish_Referral_Age}" id="psibage" />
                                                     </apex:column>
                                                 </apex:dataTable>
                                             </div>
@@ -441,15 +441,15 @@
                         <fieldset class="connected">
                             <apex:pagemessages id="msg4"/>
                             <div class="form-group row">
-                                <div class="col-md-12"><a href="#" class="text-muted add-guardian">+ Add Parent/Legal Guardian</a></div>
+                                <div class="col-md-12"><a href="#" class="text-muted add-guardian">+ {!$Label.Wish_Referral_Add_Parent_Legal_Guardian}</a></div>
                             </div>
                         </fieldset>
                         <!-- parent/guardian 2 -->
                         <fieldset class="guardian-2 connected-haslegend fadein-alert">
-                            <legend class="m-b-3"><span class="text-muted">Parent or Guardian 2 (if applicable)</span></legend>
-                            <a href="#" class="text-muted remove-block">- Remove if no Parent/Guardian 2</a>
+                            <legend class="m-b-3"><span class="text-muted">{!$Label.Wish_Referral_Parent_or_Guardian} 2 {!$Label.Wish_Referral_If_Applicable}</span></legend>
+                            <a href="#" class="text-muted remove-block">- {!$Label.Wish_Referral_Remove_Parent_Guardian} 2</a>
                             <div class="form-group row">
-                                <div class="col-sm-3"><label>Relationship to Child</label></div>
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Relationship_to_Child}</label></div>
                                 <div class="col-sm-6">
                                     <apex:selectList size="1" id="p-r2c-2" value="{!currLead.Additional_Parent_Relationship_to_Child__c}" styleClass="form-control col-xs-12 c-select">
                                         <apex:selectOptions value="{!RelationshipsToChild}" />
@@ -457,15 +457,15 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-3"><label>Name</label></div>
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Name}</label></div>
                                 <div class="col-sm-6">
-                                    <apex:inputText value="{!currLead.Additional_Parent_First_Name__c}" styleClass="form-control name-group pfirstname alpha-only" id="pfirstname2" html-placeholder="First Name" maxlength="40" />
+                                    <apex:inputText value="{!currLead.Additional_Parent_First_Name__c}" styleClass="form-control name-group pfirstname alpha-only" id="pfirstname2" html-placeholder="{!$Label.Wish_Referral_Placeholder_First_Name}" maxlength="40" />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-3"><label class="sr-only" aria-label="last_name">Last Name</label></div>
+                                <div class="col-sm-3"><label class="sr-only" aria-label="last_name">{!$Label.Wish_Referral_Last_Name}</label></div>
                                 <div class="col-sm-6 lastname">
-                                    <apex:inputText value="{!currLead.Additional_Parent_Last_Name__c}" styleClass="form-control name-group plastname alpha-only" html-placeholder="Last Name" id="plastname2" maxlength="40"  />
+                                    <apex:inputText value="{!currLead.Additional_Parent_Last_Name__c}" styleClass="form-control name-group plastname alpha-only" html-placeholder="{!$Label.Wish_Referral_Last_Name}" id="plastname2" maxlength="40"  />
                                 </div>
                             </div>
                             <div class="form-group row clone-guardian-1">
@@ -473,25 +473,25 @@
                                     <label class="c-input c-checkbox">
                                         <input type="checkbox"/>
                                         <span class="c-indicator sas"></span>
-                                        Same Address as Parent or Guardian 1
+                                        {!$Label.Wish_Referral_Same_Address_as_Parent_or_Guardian} 1
                                     </label>
                                 </div>
                             </div>
                             <span class="guardian-2-address-fields">
                                 <div class="form-group row">
-                                    <div class="col-sm-3"><label>Address</label></div>
+                                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_Address}</label></div>
                                     <div class="col-sm-6">
                                         <apex:inputText value="{!currLead.Additional_Parent_Street__c}" styleClass="form-control" html-placeholder="0000 NE 00 Ave" id="paddress2" maxlength="40" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-3"><label>City</label></div>
+                                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_City}</label></div>
                                     <div class="col-sm-6">
-                                        <apex:inputText value="{!currLead.Additional_Parent_City__c}" styleClass="form-control pcity alpha-only" html-placeholder="City" id="pcity2" maxlength="40"  />
+                                        <apex:inputText value="{!currLead.Additional_Parent_City__c}" styleClass="form-control pcity alpha-only" html-placeholder="{!$Label.Wish_Referral_City}" id="pcity2" maxlength="40"  />
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-3"><label>State</label></div>
+                                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_State}</label></div>
                                     <div class="col-sm-6">
                                         <apex:selectList size="1" id="p-state2" value="{!additionalParentState}" styleClass="form-control col-xs-12 c-select state">
                                             <apex:selectOptions value="{!States}" />
@@ -499,20 +499,20 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-3"><label>Postal Code</label></div>
+                                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_Postal_Code}</label></div>
                                     <div class="col-sm-6">
                                         <apex:inputText value="{!currLead.Additional_Parent_Postal_Code__c}" styleClass="form-control ppostalcode postalcode numbers-only" html-placeholder="00000" maxlength="5" id="ppostalcode2"  />
                                     </div>
                                 </div>
                             </span>
                             <div class="form-group row">
-                                <div class="col-sm-3"><label aria-labelledby="email address">Email Address</label></div>
+                                <div class="col-sm-3"><label aria-labelledby="email address">{!$Label.Wish_Referral_Email} {!$Label.Wish_Referral_Address}</label></div>
                                 <div class="col-sm-6">
                                     <apex:inputText value="{!currLead.Additional_Parent_Email__c}" styleClass="form-control pemailaddress email-std" id="pemailaddress2" maxlength="80" html-placeholder="guardian_email@domain.com"  />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-3"><label aria-labelledby="phone number">Primary Number</label></div>
+                                <div class="col-sm-3"><label aria-labelledby="phone number">{!$Label.Wish_Referral_Primary_Number}</label></div>
                                 <div class="col-sm-6">
                                     <apex:inputText value="{!currLead.Additional_Parent_Phone__c}" styleClass="form-control pphone phonemask numbers-only" id="pphonenumber2" html-pattern=".{10,15}" maxlength="14" html-placeholder="(000) 000-0000" />
                                 </div>
@@ -522,18 +522,18 @@
                     <!-- medical and physician info -->
                     <fieldset>
                         <apex:pagemessages id="msg5"/>
-                        <legend>Medical Information</legend>
+                        <legend>{!$Label.Wish_Referral_Medical_Information}</legend>
                         <div class="form-group row primaryDiagnosis">
-                            <div class="col-sm-3"><label>Primary Diagnosis</label></div>
+                            <div class="col-sm-3"><label>{!$Label.Wish_Referral_Primary_Diagnosis}</label></div>
                             <div class="col-sm-6">
-                                <apex:inputText id="searchDiagnosisId" styleClass="placeHolder form-control" html-placeholder="example: Malignant Neoplasm" />
+                                <apex:inputText id="searchDiagnosisId" styleClass="placeHolder form-control" html-placeholder="{!$Label.Wish_Referral_Placeholder_Diagnosis_Example}" />
                                 <apex:inputText id="sDiagnosisId" styleClass="searchDiagnosisId" value="{!selectedDiagnosis}" style="display:none" />
                             </div>
                         </div>
                         <div class="form-group row primary-diagnosis-other" hidden="hidden">
-                            <div class="col-sm-3"><label>Primary Diagnosis Description<span>(Other/Not Listed Diagnosis Selected)</span></label></div>
+                            <div class="col-sm-3"><label>{!$Label.Wish_Referral_Primary_Diagnosis_Description}<span>{!$Label.Wish_Referral_Other_Diagnosis}</span></label></div>
                             <div class="col-sm-6">
-                                <apex:inputTextarea id="searchDiagnosisOther" styleClass="form-control" value="{!currLead.Other_diagnosis__c}" html-placeholder="The diagnosis is not in the database, please enter the diagnosis details"  html-maxlength="1100" />
+                                <apex:inputTextarea id="searchDiagnosisOther" styleClass="form-control" value="{!currLead.Other_diagnosis__c}" html-placeholder="{!$Label.Wish_Referral_Diagnosis_Not_In_Database}"  html-maxlength="1100" />
                             </div>
                         </div>
                         <div class="form-group row">
@@ -541,7 +541,7 @@
                             <div class="col-sm-6"><span class="field-word-seperator"></span></div>
                         </div>
                         <div class="form-group form-group-seperator row">
-                            <div class="col-sm-3"><label>ICD Code</label></div>
+                            <div class="col-sm-3"><label>{!$Label.Wish_Referral_ICD_Code}</label></div>
                             <div class="col-sm-6">
                                 <apex:inputText id="diagnosisTextId"  styleClass="diagnosisText placeHolder form-control" html-placeholder="example: C00" />
                                 <apex:outputText id="shortTextId" styleClass="shortTextId text-muted"/>
@@ -549,23 +549,23 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-3"><label>Approximate Diagnosis Date</label></div>
+                            <div class="col-sm-3"><label>{!$Label.Wish_Referral_Approximate_Diagnosis_Date}</label></div>
                             <div class="col-xs-6 col-sm-3">
                                 <apex:selectList size="1" multiselect="false" value="{!diagnosisMonth}" styleclass="form-control col-xs-12 c-select" id="diagnosisMonth">
-                                    <apex:selectoption itemValue="Month" itemLabel="Month" />
-                                    <apex:selectoption itemValue="January" itemLabel="January" />
-                                    <apex:selectoption itemValue="February" itemLabel="February" />
-                                    <apex:selectoption itemValue="March" itemLabel="March" />
-                                    <apex:selectoption itemValue="April" itemLabel="April" />
-                                    <apex:selectoption itemValue="May" itemLabel="May" />
-                                    <apex:selectoption itemValue="June" itemLabel="June" />
-                                    <apex:selectoption itemValue="July" itemLabel="July" />
-                                    <apex:selectoption itemValue="August" itemLabel="August" />
-                                    <apex:selectoption itemValue="September" itemLabel="September" />
-                                    <apex:selectoption itemValue="October" itemLabel="October" />
-                                    <apex:selectoption itemValue="November" itemLabel="November" />
-                                    <apex:selectoption itemValue="December" itemLabel="December" />
-                                    <apex:selectoption itemValue="Not Sure" itemLabel="Not Sure" />
+                                    <apex:selectoption itemValue="{!$Label.Wish_Referral_Month}" itemLabel="{!$Label.Wish_Referral_Month}" />
+                                    <apex:selectoption itemValue="{!$Label.Wish_Referral_Month_January}" itemLabel="{!$Label.Wish_Referral_Month_January}" />
+                                    <apex:selectoption itemValue="{!$Label.Wish_Referral_Month_February}" itemLabel="{!$Label.Wish_Referral_Month_February}" />
+                                    <apex:selectoption itemValue="{!$Label.Wish_Referral_Month_March}" itemLabel="{!$Label.Wish_Referral_Month_March}" />
+                                    <apex:selectoption itemValue="{!$Label.Wish_Referral_Month_April}" itemLabel="{!$Label.Wish_Referral_Month_April}" />
+                                    <apex:selectoption itemValue="{!$Label.Wish_Referral_Month_May}" itemLabel="{!$Label.Wish_Referral_Month_May}" />
+                                    <apex:selectoption itemValue="{!$Label.Wish_Referral_Month_June}" itemLabel="{!$Label.Wish_Referral_Month_June}" />
+                                    <apex:selectoption itemValue="{!$Label.Wish_Referral_Month_July}" itemLabel="{!$Label.Wish_Referral_Month_July}" />
+                                    <apex:selectoption itemValue="{!$Label.Wish_Referral_Month_August}" itemLabel="{!$Label.Wish_Referral_Month_August}" />
+                                    <apex:selectoption itemValue="{!$Label.Wish_Referral_Month_September}" itemLabel="{!$Label.Wish_Referral_Month_September}" />
+                                    <apex:selectoption itemValue="{!$Label.Wish_Referral_Month_October}" itemLabel="{!$Label.Wish_Referral_Month_October}" />
+                                    <apex:selectoption itemValue="{!$Label.Wish_Referral_Month_November}" itemLabel="{!$Label.Wish_Referral_Month_November}" />
+                                    <apex:selectoption itemValue="{!$Label.Wish_Referral_Month_December}" itemLabel="{!$Label.Wish_Referral_Month_December}" />
+                                    <apex:selectoption itemValue="{!$Label.Wish_Referral_Option_Not_Sure}" itemLabel="{!$Label.Wish_Referral_Option_Not_Sure}" />
                                 </apex:selectList>
                             </div>
                             <div class="col-xs-6 col-sm-3">
@@ -575,89 +575,89 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3">Is there a medical reason why we need to move quickly?</label>
+                            <label class="col-sm-3">{!$Label.Wish_Referral_Medical_Reason_Move_Quickly}</label>
                             <div class="col-sm-6">
                                 <apex:selectList value="{!currLead.Any_medical_reason_for_moving_quickly__c}" size="1" multiselect="false" styleClass="form-control col-xs-12 c-select chosen single" id="urgency">
                                     <apex:selectOption itemLabel="Please Select" itemValue="" html-selected="true" html-disabled="true" />
-                                    <apex:selectOption itemLabel="Yes" itemValue="Yes" />
-                                    <apex:selectOption itemLabel="No" itemValue="No" />
-                                    <apex:selectOption itemLabel="Not Sure" itemValue="Not Sure" /><!--SIW-275 : Added this new option-->
+                                    <apex:selectOption itemLabel="{!$Label.Select_Option_Yes}" itemValue="{!$Label.Select_Option_Yes}" />
+                                    <apex:selectOption itemLabel="{!$Label.Select_Option_No}" itemValue="{!$Label.Select_Option_No}" />
+                                    <apex:selectOption itemLabel="{!$Label.Wish_Referral_Option_Not_Sure}" itemValue="{!$Label.Wish_Referral_Option_Not_Sure}" /><!--SIW-275 : Added this new option-->
                                 </apex:selectList>
                             </div>
                         </div>
                         <!--SIW-275 : Added when response is selected as Yes in above question-->
                         <div class="form-group row urgency-expand fadein-alert">
-                            <div class="col-sm-3"><label>Medical Reason</label></div>
+                            <div class="col-sm-3"><label>{!$Label.Wish_Referral_Medical_Reason}</label></div>
                             <div class="col-sm-6">
-                                <apex:inputTextarea id="medicalReasonInfo" value="{!referralRush}" styleClass="form-control required" html-placeholder="Please describe the medical reason." />
+                                <apex:inputTextarea id="medicalReasonInfo" value="{!referralRush}" styleClass="form-control required" html-placeholder="{!$Label.Wish_Referral_Placeholder_Describe_Medical_Reason}" />
                             </div>
                         </div>
                         <div class="form-group row medical-additional-info">
-                            <div class="col-sm-3"><label>Additional Information</label></div>
+                            <div class="col-sm-3"><label>{!$Label.Wish_Referral_Additional_Information}</label></div>
                             <div class="col-sm-6">
-                                <apex:inputTextarea id="medicalAdditonalInfo" value="{!referralComment}" styleClass="form-control" html-placeholder="Please enter any additional medical information that you may have." />
+                                <apex:inputTextarea id="medicalAdditonalInfo" value="{!referralComment}" styleClass="form-control" html-placeholder="{!$Label.Wish_Referral_Placeholder_Additional_Medical_Information}" />
                             </div>
                         </div>
                     </fieldset>
                     <fieldset>
-                        <legend>Treating Medical Professional Information</legend>
+                        <legend>{!$Label.Wish_Referral_Treating_Medical_Professional_Information}</legend>
                         <div class="form-group row repeatMedProf">
                             <div class="col-sm-12 offset-sm-3">
                                 <label class="c-input c-checkbox">
                                     <apex:inputCheckbox value="{!copyReferrerInfo}"/>
                                     <span class="c-indicator sas"></span>
-                                    Same as Referrer Information
+                                    {!$Label.Wish_Referral_Same_as_Referrer_Information}
                                 </label>
                             </div>
                         </div>
                         <div class="medToRepeat">
                             <div class="form-group row">
-                                <div class="col-sm-3"><label>Name</label></div>
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Name}</label></div>
                                 <div class="col-sm-6">
-                                    <apex:inputText value="{!currLead.Treating_Medical_Professional_First_Name__c}" styleClass="form-control name-group mfirstname" html-placeholder="First Name" id="mpfirstname" maxlength="40" />
+                                    <apex:inputText value="{!currLead.Treating_Medical_Professional_First_Name__c}" styleClass="form-control name-group mfirstname" html-placeholder="{!$Label.Wish_Referral_Placeholder_First_Name}" id="mpfirstname" maxlength="40" />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-3"><label class="sr-only" aria-label="last_name">Last Name</label></div>
+                                <div class="col-sm-3"><label class="sr-only" aria-label="last_name">{!$Label.Wish_Referral_Last_Name}</label></div>
                                 <div class="col-sm-6 lastname">
-                                    <apex:inputText value="{!currLead.Treating_Medical_Professional_Last_Name__c}" styleClass="form-control name-group mlastname" html-placeholder="Last Name" id="mplastname" maxlength="40"  />
+                                    <apex:inputText value="{!currLead.Treating_Medical_Professional_Last_Name__c}" styleClass="form-control name-group mlastname" html-placeholder="{!$Label.Wish_Referral_Last_Name}" id="mplastname" maxlength="40"  />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-3"><label>Phone</label></div>
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Phone}</label></div>
                                 <div class="col-sm-6">
                                     <apex:inputText value="{!currLead.Treating_Medical_Professional_Phone__c}" styleClass="form-control mphone phonemask numbers-only" html-placeholder="(000) 000-0000" id="mpphone" html-pattern=".{10,14}" maxlength="10" />
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-3"><label>Email</label></div>
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Email}</label></div>
                                 <div class="form-group col-sm-6">
                                     <apex:inputText value="{!currLead.Treating_Medical_Professional_Email__c}" styleClass="form-control memail email-std" html-placeholder="medicalprofessional_email@domain.com" id="mpemail" maxlength="80" />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3">Hospital or Treatment Facility</label>
+                                <label class="col-sm-3">{!$Label.Wish_Referral_Hospital_or_Treatment_Facility}</label>
                                 <div class="col-sm-6">
-                                    <apex:inputText value="{!currLead.Hospital_Treatment_Facility_Treating__c}" styleClass="form-control" id="mphospitalname" maxlength="50" html-placeholder="Hospital/Facility Name" />
+                                    <apex:inputText value="{!currLead.Hospital_Treatment_Facility_Treating__c}" styleClass="form-control" id="mphospitalname" maxlength="50" html-placeholder="{!$Label.Wish_Referral_Placeholder_Hospital_Facility_Name}" />
                                 </div>
                             </div>
                         </div>
                     </fieldset>
                     <fieldset class="connected main-office-contact">
                         <div class="form-group row">
-                            <label class="col-sm-3">Please provide the best person in the Treating Medical Professional's Office to contact if different than the Treating Medical Professional</label>
+                            <label class="col-sm-3">{!$Label.Wish_Referral_Other_Treating_Medical_Professional}</label>
                             <div class="col-sm-6">
-                                <apex:inputText value="{!currLead.Best_Contact_for_Physician_First_Name__c}" styleClass="form-control" id="mpmaincontactfirstname" maxlength="50" html-placeholder="First Name" />
+                                <apex:inputText value="{!currLead.Best_Contact_for_Physician_First_Name__c}" styleClass="form-control" id="mpmaincontactfirstname" maxlength="50" html-placeholder="{!$Label.Wish_Referral_Placeholder_First_Name}" />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-3"><label class="sr-only">Last Name</label></div>
+                            <div class="col-sm-3"><label class="sr-only">{!$Label.Wish_Referral_Last_Name}e</label></div>
                             <div class="col-sm-6">
-                                <apex:inputText value="{!currLead.Best_Contact_for_Physician_Last_Name__c}" styleClass="form-control" id="mpmaincontactlastname" maxlength="50" html-placeholder="Last Name" />
+                                <apex:inputText value="{!currLead.Best_Contact_for_Physician_Last_Name__c}" styleClass="form-control" id="mpmaincontactlastname" maxlength="50" html-placeholder="{!$Label.Wish_Referral_Last_Name}" />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-3"><label class="sr-only">Email</label></div>
+                            <div class="col-sm-3"><label class="sr-only">{!$Label.Wish_Referral_Email}</label></div>
                             <div class="col-sm-6">
                                 <apex:inputText value="{!currLead.Best_contact_for_Physician_Email__c}" styleClass="form-control bemail email-std notqualto" html-placeholder="email@domain.com" id="mpmaincontactemail" maxlength="80" />
                             </div>
@@ -684,16 +684,16 @@
                         </div>
                     </fieldset>
                     <fieldset class="footer">
-                        <apex:commandbutton value="Submit" action="{!createLead}" styleClass="submitBtn col-xs-12 col-sm-4 col-sm-4 col-sm-push-8 push-sm-8 btn-md submit"/>
+                        <apex:commandbutton value="{!$Label.Submit_Label}" action="{!createLead}" styleClass="submitBtn col-xs-12 col-sm-4 col-sm-4 col-sm-push-8 push-sm-8 btn-md submit"/>
                     </fieldset>
                 </div>
             </apex:outputpanel>
             <apex:outputpanel rendered="{!displayAckMsg == True}">
                 <div class="col-sm-12" style="margin-top:2rem">
-                    <p class="text-center">Thank you for submitting a referral. Chapter staff will be in contact soon if additional information is required.</p>
+                    <p class="text-center">{!$Label.Wish_Referral_Thank_You_For_Submitting}</p>
                     <div class="text-center">
-                        <button type="button" onClick="window.location.href=document.referrer" class="btn-md m-r-1" aria-label="Submit another referral"><span aria-hidden="true">Submit Another Referral</span></button>
-                        <button type="button" onclick="window.parent.postMessage('home', '*');" class="btn-md" aria-label="Return to wish"><span aria-hidden="true">Return to Home Site</span></button>
+                        <button type="button" onClick="window.location.href=document.referrer" class="btn-md m-r-1" aria-label="Submit another referral"><span aria-hidden="true">{!$Label.Wish_Referral_Submit_Another_Referral}</span></button>
+                        <button type="button" onclick="window.parent.postMessage('home', '*');" class="btn-md" aria-label="Return to wish"><span aria-hidden="true">{!$Label.Wish_Referral_Return_to_Home_Site}</span></button>
                     </div>
                 </div>
             </apex:outputpanel>
@@ -703,13 +703,13 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title" id="exit-form">Age Requirement</h1>
+                        <h1 class="modal-title" id="exit-form">{!$Label.Wish_Referral_Age_Requirement}</h1>
                     </div>
                     <div class="modal-body">
                         <p class="text-muted col-xs-12 alertMsg" style="text-align:center"></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" style="font-family:'Lato', Arial, sans-serif; color:#fff; border:none; text-transform:uppercase; height:4rem;" class="btn-md" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Continue</span></button>
+                        <button type="button" style="font-family:'Lato', Arial, sans-serif; color:#fff; border:none; text-transform:uppercase; height:4rem;" class="btn-md" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">{!$Label.Continue_Label}</span></button>
                     </div>
                 </div>
             </div>
@@ -718,14 +718,14 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title" id="exit-form">Age Requirement</h1>
+                        <h1 class="modal-title" id="exit-form">{!$Label.Wish_Referral_Age_Requirement}</h1>
                     </div>
                     <div class="modal-body">
                         <p class="text-muted col-xs-12 alertMsg" style="text-align:center"></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" style="font-family:'Lato', Arial, sans-serif; color:#fff; border:none; text-transform:uppercase; height:4rem; margin-right:1px" class="btn-md" data-dismiss="modal" aria-label="cancel" onclick="window.location.reload();"><span aria-hidden="true">Cancel</span></button>
-                        <button type="button" style="font-family:'Lato', Arial, sans-serif; color:#fff; border:none; text-transform:uppercase; height:4rem;" class="btn-md" data-dismiss="modal" aria-label="confirm"><span aria-hidden="true">Confirm</span></button>
+                        <button type="button" style="font-family:'Lato', Arial, sans-serif; color:#fff; border:none; text-transform:uppercase; height:4rem; margin-right:1px" class="btn-md" data-dismiss="modal" aria-label="cancel" onclick="window.location.reload();"><span aria-hidden="true">{!$Label.Cancel_Label}</span></button>
+                        <button type="button" style="font-family:'Lato', Arial, sans-serif; color:#fff; border:none; text-transform:uppercase; height:4rem;" class="btn-md" data-dismiss="modal" aria-label="confirm"><span aria-hidden="true">{!$Label.Confirm_Label}</span></button>
                     </div>
                 </div>
             </div>
@@ -779,19 +779,21 @@
             </script>
             <!-- iframe resizer -->
             <!-- previous version. updated with new version below per R.Anderson - <script async="async" src="//ssl.wish.org/javascript/iframeResizer.contentWindow.min.js"></script> -->
-            <script async="async" src="//ssl.wish.org/javascript/iframeResizer.contentWindow.js"></script>
-            <!-- chosen select -->
+<script async="async" src="//ssl.wish.org/javascript/iframeResizer.contentWindow.js"></script>
+<!-- chosen select -->
             <script src="{!URLFOR($Resource.prospective_assets, 'web/js/chosen.jquery.min.js')}"></script>
             <!-- masked input -->
-            <script async="async" src="{!URLFOR($Resource.prospective_assets, 'web/js/jq.maskedinput.min.js')}"></script>
+                <script async="async" src="{!URLFOR($Resource.prospective_assets, 'web/js/jq.maskedinput.min.js')}"></script>
             <!-- validate forms -->
             <script async="async" src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.validate.min.js')}"></script>
             <!-- validate form (additional methods) -->
-            <script async="async" src="{!URLFOR($Resource.prospective_assets, 'web/js/additional-methods.min.js')}"></script>
+                <script async="async" src="{!URLFOR($Resource.prospective_assets, 'web/js/additional-methods.min.js')}"></script>
             <!-- diagnosis/ICD, form validation, form ui interactions -->
+            
             <script async="async" src="{!URLFOR($Resource.wishreferralui_js)}"></script>
+            
             <!-- Persist chid to receipt -->
-            <script>$('.chid-value').val(getQueryVariable('chid'));</script>
+                <script>$('.chid-value').val(getQueryVariable('chid'));</script>
             <!-- //DATA COLLECTOR -->
             <script language="javascript" type="text/livescript">
             var _mawData = {
