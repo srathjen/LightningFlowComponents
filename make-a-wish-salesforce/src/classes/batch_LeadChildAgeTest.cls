@@ -12,15 +12,19 @@ public class batch_LeadChildAgeTest {
 		trac_TriggerHandlerBase.blockTrigger = true;
 		Account chapterAccount = OrientationandTrainingUtil.CreateAmericaAccount();
 		insert chapterAccount;
+
 		Condition_Description__c descrip = OrientationandTrainingUtil.createConditionDesCription();
 		insert descrip;
+
 		ICD_Codes__c icdCode = OrientationandTrainingUtil.createICDCode(descrip.Id);
 		insert icdCode;
+
 		Date runDate = Date.today();
 		Date childDOB = runDate.addYears(-1).addMonths(-6);      // age 1.5
 		Date childDOB2 = runDate.addYears(-2).addMonths(-6);     // age 2.5
 		List<Lead> leadList = new List<Lead>();
 		List<Lead> leadListNeg = new List<Lead>();
+
 		//insert wish child leads where child age is 2.5 years old today and the field for Age Requirement should update
 		for (Integer i = 0; i < 10; i++) {
 			leadList.add(new Lead(FirstName = 'Walter' + i, LastName = 'LastName' + i, Child_Age__c = 'Under 2.5',
@@ -59,15 +63,15 @@ public class batch_LeadChildAgeTest {
 					ChapterName__c = chapterAccount.Id, Street = '125' + i + 'N Market St', PostalCode = '85016',
 					City = 'Phoenix', Age_Requirement_Met__c = false));
 		}
-
+		leadList.addAll(leadListNeg);
 		insert leadList;
-		insert leadListNeg;
 		trac_TriggerHandlerBase.blockTrigger = false;
 	}
 
 	@IsTest
 	static void testBatchLeadChildAgeWhenRunDateIsToday() {
 		Test.startTest();
+
 		// Verify none of the leads entering the batch have the Age requirement field marked as true
 		Lead[] leadsBeforeUpdateList = [
 				SELECT Id, Age_Requirement_Met__c
@@ -83,6 +87,7 @@ public class batch_LeadChildAgeTest {
 				FROM Lead
 				WHERE Age_Requirement_Met__c = TRUE
 		];
+
 		//Assert that number of the leads that should have been updated have been updated
 		System.assertEquals(true, leadsUpdatedList[0].Age_Requirement_Met__c);
 		System.assertEquals(10, leadsUpdatedList.size());
@@ -91,6 +96,7 @@ public class batch_LeadChildAgeTest {
 	@IsTest
 	static void testBatchLeadChildAgeWhenRunDateLastDayOfMonth() {
 		Test.startTest();
+
 		// Verify none of the leads entering the batch have the Age requirement field marked as true
 		Lead[] leadsBeforeUpdateList = [
 				SELECT Id, Age_Requirement_Met__c
@@ -107,6 +113,7 @@ public class batch_LeadChildAgeTest {
 				FROM Lead
 				WHERE Age_Requirement_Met__c = TRUE
 		];
+
 		//Assert that number of the leads that should have been updated have been updated
 		System.assertEquals(0, leadsUpdatedList.size());
 	}
@@ -114,6 +121,7 @@ public class batch_LeadChildAgeTest {
 	@IsTest
 	static void testBatchScheduler() {
 		Test.startTest();
+
 		// Cron Expression setting at 13:00:00 every day
 		String cronExpression = '0 0 13 * * ?';
 		batch_LeadChildAgeSchedule reminder = new batch_LeadChildAgeSchedule();
@@ -123,6 +131,7 @@ public class batch_LeadChildAgeTest {
 				FROM CronTrigger
 				WHERE Id = :jobId
 		];
+		
 		System.assertEquals(cronExpression, ct.CronExpression);
 		System.assertEquals(0, ct.TimesTriggered);
 		Test.stopTest();
