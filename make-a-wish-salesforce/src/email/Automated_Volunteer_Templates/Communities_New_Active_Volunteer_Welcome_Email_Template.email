@@ -7,7 +7,7 @@ margin-left:0in;margin-bottom:.0001pt;line-height:normal;background:white"><span
 Congratulations on completing the process to become a Make-A-Wish volunteer! We
 are excited to welcome you!<br>
 <br>
-To get started in your role, please visit the&nbsp;<span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish
+To get started in your role, please visit the&nbsp;<span style="color:blue"><a href="{!$Setup.Endpoints__c.Site_URL__c}">Make-A-Wish
 Volunteer Center</a></span>&nbsp;with the username below.<br>
 <br>
 Username:&nbsp;{!npe5__Affiliation__c.User_Name_Hidden__c}<br>

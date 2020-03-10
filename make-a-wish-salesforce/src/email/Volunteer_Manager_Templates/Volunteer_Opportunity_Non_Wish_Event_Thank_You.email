@@ -7,7 +7,7 @@
 <span style="font-family: Lato, sans-serif;">Thank you for recently
 volunteering as a&nbsp;<span style="background:white">{!Volunteer_Opportunity__c.Hidden_Chapter_Role_Name__c}</span>.
 We hope you’ll consider signing up for another opportunity in the near future.
-You may do this by visiting the&nbsp;<a href="{!$Label.Site_Url}">Make-A-Wish Volunteer Center</a></span><span style="font-family: Lato, sans-serif;">&nbsp;and reviewing
+You may do this by visiting the&nbsp;<a href="{!$Setup.Endpoints__c.Site_URL__c}">Make-A-Wish Volunteer Center</a></span><span style="font-family: Lato, sans-serif;">&nbsp;and reviewing
 “Volunteer Opportunities” to find an opportunity that may be of interest to you!<br>
 <br>
 Thanks,<br>

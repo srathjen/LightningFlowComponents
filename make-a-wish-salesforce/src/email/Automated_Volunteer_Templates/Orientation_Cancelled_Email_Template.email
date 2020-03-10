@@ -6,7 +6,7 @@
 You have cancelled your registration for the Make-A-Wish Volunteer
 Orientation.<br>
 <br>
-Please visit the&nbsp;</span><span style="font-family:&quot;Lato&quot;,sans-serif"><span style="background:white"><a href="{!$Label.Site_Url}">Make-A-Wish Volunteer Center</a></span>&nbsp;to register for an alternative orientation date to continue the
+Please visit the&nbsp;</span><span style="font-family:&quot;Lato&quot;,sans-serif"><span style="background:white"><a href="{!$Setup.Endpoints__c.Site_URL__c}">Make-A-Wish Volunteer Center</a></span>&nbsp;to register for an alternative orientation date to continue the
 process of becoming a Make-A-Wish volunteer.<br>
 <br>
 As always, please let us know of any questions by contacting us directly.<br>

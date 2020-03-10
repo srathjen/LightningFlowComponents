@@ -5,7 +5,7 @@
 <br>
 Thank you for volunteering for&nbsp;<span style="background:white">{!Case.Contact}</span>’s wish. The wish end date is approaching and there
 are&nbsp;tasks that have not been marked as complete.&nbsp; Please take a
-moment to review and update open tasks&nbsp;for this wish child in the&nbsp;</span><span style="font-family:&quot;Lato&quot;,sans-serif"><a href="{!$Label.Site_Url}">Wish &amp; Volunteer
+moment to review and update open tasks&nbsp;for this wish child in the&nbsp;</span><span style="font-family:&quot;Lato&quot;,sans-serif"><a href="{!$Setup.Endpoints__c.Site_URL__c}">Wish &amp; Volunteer
 Center</a></span><span style="font-family: Lato, sans-serif;">&nbsp;as soon as you are able. You can find this particular
 wish child’s record by visiting the Make-A-Wish Volunteer Center and looking
 under “My Assignments”.<br>

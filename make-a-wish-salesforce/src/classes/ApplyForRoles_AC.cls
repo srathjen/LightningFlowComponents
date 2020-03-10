@@ -329,7 +329,7 @@ public class ApplyForRoles_AC {
 							'    "recipientId": "1",' +
 							'    "clientUserId": "1",' +
 							'    "authenticationMethod": "None",' +
-							'    "returnUrl": "' + label.Site_Url + '/ApplyForRoles_VF"' +
+							'    "returnUrl": "' + Endpoints__c.getInstance().Site_URL__c + '/ApplyForRoles_VF"' +
 							'}';
 					request.setBody(jsonPayload);
 					response = httprequest.send(request);

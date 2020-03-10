@@ -8,7 +8,7 @@ normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Opportunit
 Role:&nbsp;{!Volunteer_Opportunity__c.Hidden_Chapter_Role_Name__c}<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">&nbsp;</span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Please visit
 the&nbsp;<span style="color:blue;
-background:white"><a href="{!$Label.Site_Url}">Make-A-Wish Volunteer Center</a></span>&nbsp;to view
+background:white"><a href="{!$Setup.Endpoints__c.Site_URL__c}">Make-A-Wish Volunteer Center</a></span>&nbsp;to view
 additional details&nbsp;regarding&nbsp;your upcoming opportunity. Once logged
 in, click&nbsp;<b>“My Assignments”</b>&nbsp;and then&nbsp;<b>"View"</b>&nbsp;to
 see specific assignment details.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">Should

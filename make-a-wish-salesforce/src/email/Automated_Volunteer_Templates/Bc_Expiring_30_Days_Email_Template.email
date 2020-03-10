@@ -10,7 +10,7 @@ years ago. Make-A-Wish requires all staff, board members, and volunteers who
 information, or access to chapter funds" to submit to a criminal
 background check every three years.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;"><br>
-Please log in to the&nbsp;<u><span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish
+Please log in to the&nbsp;<u><span style="color:blue"><a href="{!$Setup.Endpoints__c.Site_URL__c}">Make-A-Wish
 Volunteer Center</a></span></u>&nbsp;to request your background check and
 complete the requested information by {!Background_check__c.Date__c} to retain
 your&nbsp;"<b>ACTIVE"&nbsp;</b>volunteer status.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:

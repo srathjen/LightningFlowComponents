@@ -10,7 +10,7 @@ this wish is reactivated. We will be in touch with you at that time to discuss
 next steps. Should you hear from the wish family during this time, please
 contact the chapter.<br>
 <br>
-We encourage you to review the volunteer opportunities posted on the&nbsp;<span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish
+We encourage you to review the volunteer opportunities posted on the&nbsp;<span style="color:blue"><a href="{!$Setup.Endpoints__c.Site_URL__c}">Make-A-Wish
 Volunteer Center</a></span>&nbsp;and sign up for another wish child or event!<br>
 <br>
 Thank you,<br>
