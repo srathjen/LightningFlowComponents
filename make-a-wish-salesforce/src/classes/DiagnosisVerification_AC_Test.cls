@@ -9,6 +9,7 @@ Modification Log:
 *******************************************************************************************************************/
 @isTest
 public class DiagnosisVerification_AC_Test {
+    /*
     @testSetup
     //This method is used to update the wish child and wish family.
     public static void setUpData() {
@@ -807,4 +808,6 @@ public class DiagnosisVerification_AC_Test {
         System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode, 'Id dose nit match');
         System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode);
     }
+
+   */
 }
