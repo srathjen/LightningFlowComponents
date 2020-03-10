@@ -3,14 +3,14 @@
     <allowChatterGroupArchiving>true</allowChatterGroupArchiving>
     <allowRecordsInChatterGroup>true</allowRecordsInChatterGroup>
     <allowSharingInChatterGroup xsi:nil="true"/>
-    <enableCaseFeedRelativeTimestamps>true</enableCaseFeedRelativeTimestamps>
+    <enableCaseFeedRelativeTimestamps>false</enableCaseFeedRelativeTimestamps>
     <enableChatter>true</enableChatter>
     <enableChatterEmoticons>false</enableChatterEmoticons>
     <enableFeedEdit>true</enableFeedEdit>
     <enableFeedPinning>true</enableFeedPinning>
     <enableFeedsDraftPosts>false</enableFeedsDraftPosts>
     <enableFeedsRichText>true</enableFeedsRichText>
-    <enableInviteCsnUsers>true</enableInviteCsnUsers>
+    <enableInviteCsnUsers>false</enableInviteCsnUsers>
     <enableOutOfOfficeEnabledPref>false</enableOutOfOfficeEnabledPref>
     <enableRichLinkPreviewsInFeed>true</enableRichLinkPreviewsInFeed>
     <enableTodayRecsInFeed>true</enableTodayRecsInFeed>
