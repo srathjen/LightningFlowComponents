@@ -830,7 +830,6 @@ public class DiagnosisVerification_AC {
             currLead.I_m_Part_of_The_Treating_HealthCare_Team__c = wishChildWrapperIns.healthCareWork;
             currLead.Is_in_a_Comatose_Vegetative_State__c = wishChildWrapperIns.vegetativeState;
             currLead.RFI_Form_Info_Hidden__c = wishStatus;
-            System.debug(wishStatus);
             currLead.Any_medical_reason_for_moving_quickly__c = wishChildWrapperIns.expediteTheProcess;//Added as per IME-107
             currLead.Please_Explain_Deteriorate__c = wishChildWrapperIns.explainDeteriorate;
             currLead.Please_Explain__c = wishChildWrapperIns.plzExplain;
