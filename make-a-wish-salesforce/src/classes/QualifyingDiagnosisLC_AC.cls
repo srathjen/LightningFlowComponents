@@ -4,10 +4,8 @@ CreatedBy   : Pradeep Kumar
 Date        : 20/03/2018
 Description : Class contains AURA enbaled utility methods used by the QualifyingDiagnosis component
 *****************************************************************************************************/
-
 public class QualifyingDiagnosisLC_AC {
-
-	/********************************************************************************************
+/********************************************************************************************
 Get the neccessary lead information for further process of sending diagnosis verfication    
 ***********************************************************************************************/
 	@AuraEnabled
@@ -28,15 +26,14 @@ Get the neccessary lead information for further process of sending diagnosis ver
 				WHERE Id = :caseId
 				LIMIT 1
 		];
-
 		return data;
 	}
 
-	/********************************************************************************************
+/********************************************************************************************
 Get the neccessary lead information for further process of sending diagnosis verfication    
 ***********************************************************************************************/
 	@AuraEnabled
-	public static String updateQualifyingDiagnosis(String Qualifying_Diagnosis, Id Qualifying_ICD, Id leadId, String mawName) {
+	public static String updateQualifyingDiagnosis(String qualifyingDiagnosis, Id qualifyingICD, Id leadId, String mawName) {
 		String result;
 		Lead data = [
 				SELECT Id,
@@ -57,9 +54,8 @@ Get the neccessary lead information for further process of sending diagnosis ver
 				WHERE Id = :leadId
 				LIMIT 1
 		];
-
-		data.Qualifying_Diagnosis__c = Qualifying_Diagnosis;
-		data.Qualifying_ICD__c = Qualifying_ICD;
+		data.Qualifying_Diagnosis__c = qualifyingDiagnosis;
+		data.Qualifying_ICD__c = qualifyingICD;
 		data.PR_Diagnosis__c = mawName;
 		update data;
 		result = 'UPDATED';
@@ -77,24 +73,21 @@ Get the neccessary icd code information for further process
 				WHERE Name = :icdCodeName
 				LIMIT 1
 		].Id;
-
 	}
 
 /********************************************************************************************
 Get the neccessary condition description information for further process  
 ***********************************************************************************************/
 	@AuraEnabled
-	public static String getConditionDescInfo(String qc_Diagnosis) {
+	public static String getConditionDescInfo(String qcDiagnosis) {
 		String mawName;
 		List<Condition_Description__c> descriptionList = [
 				SELECT Id, PR_Diagnosis__c
 				FROM Condition_Description__c
-				WHERE Name = :qc_Diagnosis
-				limit 1
+				WHERE Name = :qcDiagnosis
+				LIMIT 1
 		];
 		mawName = (descriptionList.size() > 0) ? descriptionList[0].PR_Diagnosis__c : '';
 		return mawName;
-
 	}
-
 }
