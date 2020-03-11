@@ -8,7 +8,7 @@
 global class batch_leadChildAge implements Database.Batchable<SObject> {
 
 	@TestVisible
-	private Date runDate;
+	private Date runDate = Date.today();
 
 	global Database.QueryLocator start(Database.BatchableContext bc) {
 		return Database.getQueryLocator([
@@ -23,7 +23,6 @@ global class batch_leadChildAge implements Database.Batchable<SObject> {
 	global void execute(Database.BatchableContext bc, List<Lead> scope) {
 		List<Lead> updateLeads = new List<Lead>();
 		for (Lead leads : scope) {
-			Date runDate = Date.today();
 			Integer daysInCurrentMonth = Date.daysInMonth(runDate.year(), runDate.month());
 			Date twoAndHalfToday = runDate.addYears(-2).addMonths(-6);
 			Integer daysInSixthMonth = Date.daysInMonth(twoAndHalfToday.year(), twoAndHalfToday.month());

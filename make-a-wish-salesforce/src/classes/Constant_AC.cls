@@ -149,6 +149,9 @@ public class Constant_AC {
 	public static final String CASE_WISH_TYPE_TRAVEL_HAWAII = 'Travel-Hawaii';
 	public static final String CASE_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
 	public static final String CASE_RECORD_TYPE_DIAGNOSIS_VERIFICATION_REVIEW = 'Diagnosis Verification Review';
+	public static final String CASE_ORIGIN_WEB = 'Web';
+	public static final String CASE_RUSH_TIME_FRAME = 'Select timeframe';
+	public static final String CASE_UWI_SOURCE_LEAD = 'Lead';
 	/**
 	 * Wish Affiliation Constants
 	 */
@@ -172,6 +175,11 @@ public class Constant_AC {
 	public static final String CONTACT_NPE01_PREFERREDPHONE_API_NAME = 'npe01__PreferredPhone__c';
 	public static final String CONTACT_PHONE_API_NAME = 'Phone';
 	public static final String CONTACT_NPE01_HOMEEMAIL_API_NAME = 'npe01__HomeEmail__c';
+	public static final String CONTACT_TYPE_SIBLING = 'Sibling';
+	/**
+	 * Contact File Constants
+	 */
+	public final static String CONTACT_FILE_NAME_DOCUMENTS = 'Documents';
 	/**
 	 * Relationship Constants
 	 */
@@ -201,6 +209,11 @@ public class Constant_AC {
 	 * Contact Application Status
 	 */
 	public static final String CONTACT_APPLICATION_STATUS_APPROVED = 'Approved';
+	/**
+	 * Docusign  Status
+	 */
+	public static final String DOCUSIGN_ENVELOPE_STATUS_COMPLETED = 'Completed';
+	public static final String DOCUSIGN_SUBJECT_DIAGNOSIS_VERIFICATION_FORM = 'Diagnosis Verification Form';
 	/**
 	* Wish Affiliation Types
 	*/
@@ -235,5 +248,5 @@ public class Constant_AC {
 	public static final String TASK_SUBJECT_SEND_DIAGNOSIS_VERIFICATION = 'Send Diagnosis Verification';
 	public static final String TASK_SUBJECT_REMINDER_FOR_DIAGNOSIS_VERIFICATION = 'days reminder for Diagnosis Verification';
 	public static final String TASK_SUBJECT_NEW_INQUIRY_SUBMITTED = 'New Inquiry Submitted';
-    public static final String TASK_SUBJECT_NEW_REFERRAL_SUBMITTED = 'New Referral Submitted';
+	public static final String TASK_SUBJECT_NEW_REFERRAL_SUBMITTED = 'New Referral Submitted';
 }
