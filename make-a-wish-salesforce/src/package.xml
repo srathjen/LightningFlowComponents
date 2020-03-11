@@ -21,7 +21,7 @@
     <name>AuraDefinitionBundle</name>
   </types>
   <types>
-    <members>*</members>
+    <members>CustomLabels</members>
     <name>CustomLabels</name>
   </types>
   <types>
