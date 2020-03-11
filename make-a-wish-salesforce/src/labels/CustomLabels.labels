@@ -227,6 +227,13 @@
         <shortDescription>Duplicate Record</shortDescription>
         <value>There might be a duplicate {0}. Please click [OK] to review the duplicates.</value>
     </labels>
+    <labels>	
+        <fullName>DvRetrunUrl</fullName>	
+        <language>en_US</language>	
+        <protected>false</protected>	
+        <shortDescription>DvRetrunUrl</shortDescription>	
+        <value>http://devsup-wish.cs45.force.com</value>	
+    </labels>
     <labels>
         <fullName>Existing_Record</fullName>
         <categories>Record</categories>
@@ -242,6 +249,14 @@
         <protected>false</protected>
         <shortDescription>Family Hold Message DDP</shortDescription>
         <value>a1a1R000007bEQoQAM</value>
+    </labels>
+    <labels>	
+        <fullName>Instance_Url</fullName>	
+        <categories>It will hold the instance url</categories>	
+        <language>en_US</language>	
+        <protected>false</protected>	
+        <shortDescription>Instance Url</shortDescription>	
+        <value>https://make-a-wish--devsup.cs45.my.salesforce.com</value>	
     </labels>
     <labels>
         <fullName>Interation_User_Profile</fullName>
@@ -437,6 +452,14 @@ Click Generate Document and once the document is generated you can click the lin
         <protected>false</protected>
         <shortDescription>SingleForm</shortDescription>
         <value>4ff6d164-8be0-4efa-bedd-0e2760c7698e</value>
+    </labels>
+    <labels>	
+        <fullName>Site_Url</fullName>	
+        <categories>It holds the volunteer portal url.</categories>	
+        <language>en_US</language>	
+        <protected>false</protected>	
+        <shortDescription>Site Url</shortDescription>	
+        <value>http://devsup-make-a-wish.cs45.force.com/</value>	
     </labels>
     <labels>
         <fullName>Sneak_Peek_DDP</fullName>
