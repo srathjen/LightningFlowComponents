@@ -21,11 +21,11 @@
     <name>AuraDefinitionBundle</name>
   </types>
   <types>
-    <members>CustomLabels</members>
+    <members>*</members>
     <name>CustomLabels</name>
   </types>
   <types>
-    <members>Lead</members>
+    <members>*</members>
     <name>CustomObject</name>
   </types>
   <types>
