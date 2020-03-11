@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <description>This gives the View and Edit Converted leads to the users.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>View and Edit Converted Leads</label>
     <fieldPermissions>
         <editable>false</editable>
         <field>Account.AccountNumber</field>
@@ -9118,12 +9119,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Lead.Alternate_1_Med_Professional_Type_Other__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Lead.Alternate_1_Medical_Professional_Special__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Lead.Alternate_1_Medical_Professional_Type__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Alternate_2_Med_Professional_Type_Other__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -9844,6 +9855,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Lead.Primary_Medical_Professional_Subspecialt__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Primary_Medical_Professional_Type_Other__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -23906,8 +23922,6 @@
         <field>npsp__Trigger_Handler__c.npsp__Usernames_to_Exclude__c</field>
         <readable>false</readable>
     </fieldPermissions>
-    <hasActivationRequired>false</hasActivationRequired>
-    <label>View and Edit Converted Leads</label>
     <userPermissions>
         <enabled>true</enabled>
         <name>AllowViewEditConvertedLeads</name>

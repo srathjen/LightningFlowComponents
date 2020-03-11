@@ -45,16 +45,16 @@ public without sharing class SendDiagnosisVerficationLC_AC {
     ***********************************************************************************************/
     @AuraEnabled
     public static String resetDVMedicalSummary(Id leadId){
-        String result = LeadWishFamilyDupe.resetDVMedicalSummary(leadId);
+        String result = LeadDuplicateService.resetDVMedicalSummary(leadId);
         return result;
     }
     
     /********************************************************************************************
-    Wrapper method to call Find Lead Dupe  
+    Wrapper method to call Find Lead Dupe
     ***********************************************************************************************/
     @AuraEnabled
     public static String findLeadDupe(Id leadId){
-        String result = LeadWishFamilyDupe.FindLeadDupe(leadId);
+        String result = LeadDuplicateService.FindLeadDupe(leadId);
         return result;
     }
     
@@ -63,7 +63,7 @@ public without sharing class SendDiagnosisVerficationLC_AC {
     ***********************************************************************************************/
     @AuraEnabled
     public static String findFamilyContactDupe(Id leadId){
-        String result = LeadWishFamilyDupe.FindFamilyContactDupe(leadId);
+        String result = LeadDuplicateService.FindFamilyContactDupe(leadId);
         return result;
     }
     
