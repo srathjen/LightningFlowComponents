@@ -9,7 +9,7 @@ skills.<br>
 <br>
 Your volunteer role requires the completion of a criminal background check
 every three years. To request your criminal background check, please log in to
-the&nbsp;<span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish
+the&nbsp;<span style="color:blue"><a href="{!$Setup.Endpoints__c.Site_URL__c}">Make-A-Wish
 Volunteer Center</a></span>&nbsp;and click&nbsp;<b>"Continue Process"</b>.</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;"><br>
 We look forward to answering any questions you may have about this part of the

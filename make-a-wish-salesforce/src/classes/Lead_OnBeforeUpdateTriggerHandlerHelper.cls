@@ -15,6 +15,8 @@ Modification Log:
 *****************************************************************************************************/
 public class Lead_OnBeforeUpdateTriggerHandlerHelper {
 
+    private static final String INSTANCE_URL = Endpoints__c.getInstance().Instance_URL__c;
+
     /****************************************************************************************
 Used to update the hidden chapter name value.
 ******************************************************************************************/
@@ -376,7 +378,6 @@ It will display error message if any duplicate wishchild or wish family or medic
         Set<String> exemailsSet = new Set<String>();
         List<lead> noDupLeadRec = new List<Lead>();
         Id wishChild = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
-        String instanceUrl = label.Instance_Url;
         String errorType = 'Classic';
         If (Userinfo.getUiTheme() == 'Theme4d' || Userinfo.getUiTheme() == 'Theme4u') {
             errorType = 'Lightning';
@@ -440,33 +441,33 @@ It will display error message if any duplicate wishchild or wish family or medic
                             isDuplicate = True;
                             if (errorType == 'Lightning') //Modified as per IME 110
                                 currLead.addError('There might be a duplicate Wish Child. Please click Send Diagnosis Verification button to review the duplicates.', false); else
-                                    currLead.addError('There might be a duplicate Wish Child. Please click <a href=' + instanceUrl + '/apex/LeadDuplicate_VF?id=' + currLead.id + '>here </a> to review the duplicates.', false);
+                                    currLead.addError('There might be a duplicate Wish Child. Please click <a href=' + INSTANCE_URL + '/apex/LeadDuplicate_VF?id=' + currLead.id + '>here </a> to review the duplicates.', false);
                         } else if (currLead.FirstName == exLead.FirstName &&
                                 ((currLead.Street == exLead.Street && currLead.State == exLead.State && currLead.City == exLead.City && currLead.PostalCode == exLead.PostalCode)
                                         || currLead.Phone == exLead.Phone || currLead.Email == exLead.Email)) {
                             isDuplicate = True;
                             if (errorType == 'Lightning') //Modified as per IME 110
                                 currLead.addError('There might be a duplicate Wish Child. Please click Send Diagnosis Verification button to review the duplicates.', false); else
-                                    currLead.addError('There might be a duplicate Wish Child. Please click <a href=' + instanceUrl + '/apex/LeadDuplicate_VF?id=' + currLead.id + '>here </a> to review the duplicates.', false);
-                           } else if ((currLead.LastName == exLead.LastName) &&
+                                    currLead.addError('There might be a duplicate Wish Child. Please click <a href=' + INSTANCE_URL + '/apex/LeadDuplicate_VF?id=' + currLead.id + '>here </a> to review the duplicates.', false);
+                        } else if ((currLead.LastName == exLead.LastName) &&
                                 ((currLead.Street == exLead.Street && currLead.State == exLead.State && currLead.City == exLead.City && currLead.PostalCode == exLead.PostalCode)
-                                         || currLead.Email == exLead.Email)) {
+                                        || currLead.Email == exLead.Email)) {
                             isDuplicate = True;
                             if (errorType == 'Lightning') //Modified as per IME 110
                                 currLead.addError('There might be a duplicate Wish Child. Please click Send Diagnosis Verification button to review the duplicates.', false); else
-                                    currLead.addError('There might be a duplicate Wish Child. Please click <a href=' + instanceUrl + '/apex/LeadDuplicate_VF?id=' + currLead.id + '>here </a> to review the duplicates.', false);
+                                    currLead.addError('There might be a duplicate Wish Child. Please click <a href=' + INSTANCE_URL + '/apex/LeadDuplicate_VF?id=' + currLead.id + '>here </a> to review the duplicates.', false);
                         } else if ((currLead.DOB__c == exLead.DOB__c) &&
                                 ((currLead.Street == exLead.Street && currLead.State == exLead.State && currLead.City == exLead.City && currLead.PostalCode == exLead.PostalCode)
-                                         || currLead.Email == exLead.Email)) {
+                                        || currLead.Email == exLead.Email)) {
                             isDuplicate = True;
                             if (errorType == 'Lightning') //Modified as per IME 110
                                 currLead.addError('There might be a duplicate Wish Child. Please click Send Diagnosis Verification button to review the duplicates.', false); else
-                                    currLead.addError('There might be a duplicate Wish Child. Please click <a href=' + instanceUrl + '/apex/LeadDuplicate_VF?id=' + currLead.id + '>here </a> to review the duplicates.', false);
+                                    currLead.addError('There might be a duplicate Wish Child. Please click <a href=' + INSTANCE_URL + '/apex/LeadDuplicate_VF?id=' + currLead.id + '>here </a> to review the duplicates.', false);
                         } else if ((currLead.DOB__c == exLead.DOB__c) && (currLead.FirstName == exLead.FirstName || currLead.LastName == exLead.LastName)) {
                             isDuplicate = True;
                             if (errorType == 'Lightning') //Modified as per IME 110
                                 currLead.addError('There might be a duplicate Wish Child. Please click Send Diagnosis Verification button to review the duplicates.', false); else
-                                    currLead.addError('There might be a duplicate Wish Child. Please click <a href=' + instanceUrl + '/apex/LeadDuplicate_VF?id=' + currLead.id + '>here </a> to review the duplicates.', false);
+                                    currLead.addError('There might be a duplicate Wish Child. Please click <a href=' + INSTANCE_URL + '/apex/LeadDuplicate_VF?id=' + currLead.id + '>here </a> to review the duplicates.', false);
                         }
                     }
                 }
@@ -476,26 +477,26 @@ It will display error message if any duplicate wishchild or wish family or medic
                             isDuplicate = True;
                             if (errorType == 'Lightning') //Modified as per IME 110
                                 currLead.addError('There might be a duplicate Wish Child. Please click Send Diagnosis Verification button to review the duplicates.', false); else
-                                    currLead.addError('There might be a duplicate Wish Child. Please click <a href=' + instanceUrl + '/apex/LeadDuplicate_VF?id=' + currLead.id + '>here </a> to review the duplicates.', false);
+                                    currLead.addError('There might be a duplicate Wish Child. Please click <a href=' + INSTANCE_URL + '/apex/LeadDuplicate_VF?id=' + currLead.id + '>here </a> to review the duplicates.', false);
                         } else if ((currLead.FirstName == exCon.FirstName || currLead.LastName == exCon.LastName) &&
                                 ((currLead.Street == exCon.MailingStreet && currLead.State == exCon.MailingState && currLead.City == exCon.MailingCity && currLead.PostalCode == exCon.MailingPostalCode)
                                         || currLead.Phone == exCon.Phone || currLead.Email == exCon.Email)) {
                             isDuplicate = True;
                             if (errorType == 'Lightning') //Modified as per IME 110
                                 currLead.addError('There might be a duplicate Wish Child. Please click Send Diagnosis Verification button to review the duplicates.', false); else
-                                    currLead.addError('There might be a duplicate Wish Child. Please click <a href=' + instanceUrl + '/apex/LeadDuplicate_VF?id=' + currLead.id + '>here </a> to review the duplicates.', false);
+                                    currLead.addError('There might be a duplicate Wish Child. Please click <a href=' + INSTANCE_URL + '/apex/LeadDuplicate_VF?id=' + currLead.id + '>here </a> to review the duplicates.', false);
                         } else if ((currLead.DOB__c == exCon.BirthDate) &&
                                 ((currLead.Street == exCon.MailingStreet && currLead.State == exCon.MailingState && currLead.City == exCon.MailingCity && currLead.PostalCode == exCon.MailingPostalCode)
                                         || currLead.Phone == exCon.Phone || currLead.Email == exCon.Email)) {
                             isDuplicate = True;
                             if (errorType == 'Lightning') //Modified as per IME 110
                                 currLead.addError('There might be a duplicate Wish Child. Please click Send Diagnosis Verification button to review the duplicates.', false); else
-                                    currLead.addError('There might be a duplicate Wish Child. Please click <a href=' + instanceUrl + '/apex/LeadDuplicate_VF?id=' + currLead.id + '>here </a> to review the duplicates.', false);
+                                    currLead.addError('There might be a duplicate Wish Child. Please click <a href=' + INSTANCE_URL + '/apex/LeadDuplicate_VF?id=' + currLead.id + '>here </a> to review the duplicates.', false);
                         } else if ((currLead.DOB__c == exCon.BirthDate) && (currLead.FirstName == exCon.FirstName || currLead.LastName == exCon.LastName)) {
                             isDuplicate = True;
                             if (errorType == 'Lightning') //Modified as per IME 110
                                 currLead.addError('There might be a duplicate Wish Child. Please click Send Diagnosis Verification button to review the duplicates.', false); else
-                                    currLead.addError('There might be a duplicate Wish Child. Please click <a href=' + instanceUrl + '/apex/LeadDuplicate_VF?id=' + currLead.id + '>here </a> to review the duplicates.', false);
+                                    currLead.addError('There might be a duplicate Wish Child. Please click <a href=' + INSTANCE_URL + '/apex/LeadDuplicate_VF?id=' + currLead.id + '>here </a> to review the duplicates.', false);
                         }
                     }
                 }
@@ -552,7 +553,6 @@ It will display error message if any duplicate wishchild or wish family or medic
         Set<String> stateSet = new Set<String>();
         Set<Id> leadIds = new Set<Id>();
         Set<String> chaptersSet = new Set<String>();
-        String instanceUrl = label.Instance_Url;
         User u = [
                 Select ID,UserPreferencesLightningExperiencePreferred
                 from User
@@ -693,25 +693,25 @@ It will display error message if any duplicate wishchild or wish family or medic
                 if ((medicalFlag == True || treatingFlag == True || physicianFlag == True) && (familyFlag == True || dupAdditionalFamilyContacts.size() > 0)) {
                     if (errorType == 'Lightning') //Modified as per IME 110
                         newLead.addError('There might be an existing Wish Family and Medical Professional. Please click Send Diagnosis Verification button to review the existing record.', false); else
-                            newLead.addError('There might be an existing Wish Family and Medical Professional.Please click <a href=' + instanceUrl + '/apex/LeadDuplicate_VF?id=' + newlead.id + '&wishFamily=true&manual=true' + '>here </a> to review the existing record.', false);
+                            newLead.addError('There might be an existing Wish Family and Medical Professional.Please click <a href=' + INSTANCE_URL + '/apex/LeadDuplicate_VF?id=' + newlead.id + '&wishFamily=true&manual=true' + '>here </a> to review the existing record.', false);
                 } else if (medicalFlag == True || treatingFlag == True) {
                     if (errorType == 'Lightning') //Modified as per IME 110
                         newLead.addError('There might be an existing Medical Professional. Please click Send Diagnosis Verification button to review the existing record.', false); else
-                            newLead.addError('There might be an existing Medical Professional. Please click <a href=' + instanceUrl + '/apex/LeadDuplicate_VF?id=' + newlead.id + '&wishFamily=true&manual=true' + '>here </a> to review the existing record.', false);
+                            newLead.addError('There might be an existing Medical Professional. Please click <a href=' + INSTANCE_URL + '/apex/LeadDuplicate_VF?id=' + newlead.id + '&wishFamily=true&manual=true' + '>here </a> to review the existing record.', false);
                 }
 
                 else if (physicianFlag) {
                     if (errorType == 'Lightning') //Modified as per IME 110
                         newLead.addError('There might be an existing Best Physician Contact. Please click Send Diagnosis Verification button to review the existing record.', false); else
-                            newLead.addError('There might be an existing Best Physician Contact. Please click <a href=' + instanceUrl + '/apex/LeadDuplicate_VF?id=' + newlead.id + '&wishFamily=true&manual=true' + '>here </a> to review the existing record.', false);
+                            newLead.addError('There might be an existing Best Physician Contact. Please click <a href=' + INSTANCE_URL + '/apex/LeadDuplicate_VF?id=' + newlead.id + '&wishFamily=true&manual=true' + '>here </a> to review the existing record.', false);
                 } else if (familyFlag == True) {
                     if (errorType == 'Lightning') //Modified as per IME 110
                         newLead.addError('There might be an existing Wish Family. Please click Send Diagnosis Verification button to review the existing record.', false); else
-                            newLead.addError('There might be an existing Wish Family.Please click <a href=' + instanceUrl + '/apex/LeadDuplicate_VF?id=' + newlead.id + '&wishFamily=true&manual=true' + '>here </a> to review the existing record.', false);
+                            newLead.addError('There might be an existing Wish Family.Please click <a href=' + INSTANCE_URL + '/apex/LeadDuplicate_VF?id=' + newlead.id + '&wishFamily=true&manual=true' + '>here </a> to review the existing record.', false);
                 } else if (dupAdditionalFamilyContacts.size() > 0) {
                     if (errorType == 'Lightning') //Modified as per IME 110
                         newLead.addError('There might be an existing Additional Parent/Guardian. Please click Send Diagnosis Verification button to review the existing record.', false); else
-                            newLead.addError('There might be an existing Additional Parent/Guardian. Please click <a href=' + instanceUrl + '/apex/LeadDuplicate_VF?id=' + newlead.id + '&wishFamily=true&manual=true' + '>here </a> to review the existing record.', false);
+                            newLead.addError('There might be an existing Additional Parent/Guardian. Please click <a href=' + INSTANCE_URL + '/apex/LeadDuplicate_VF?id=' + newlead.id + '&wishFamily=true&manual=true' + '>here </a> to review the existing record.', false);
                 }
             }
         }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Hiearchy setting to store cutom urls</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>DVReturn_URL__c</fullName>
+        <description>Return URL for DV&apos;s</description>
+        <externalId>false</externalId>
+        <label>DV Return URL</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Instance_URL__c</fullName>
+        <description>Holds this orgs instance url</description>
+        <externalId>false</externalId>
+        <label>Instance URL</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Site_URL__c</fullName>
+        <description>Volunteer portal URL</description>
+        <externalId>false</externalId>
+        <label>Site URL</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Endpoints</label>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -1178,6 +1178,8 @@ public class DiagnosisVerification_AC {
 
             String authorizationHeader = '<DocuSignCredentials><Username>{!$Credential.Username}</Username><Password>{!$Credential.Password}</Password><IntegratorKey>' + IntegratorKey + '</IntegratorKey></DocuSignCredentials>';
 
+            System.debug(JSON.serializePretty(authorizationHeader));
+
             String boundary = 'AAA';
             PageReference PDF = Page.LeadPartA_ApprovalForm_VF_PDF;
             PDF.getParameters().put('leadId', leadId);
@@ -1247,6 +1249,8 @@ public class DiagnosisVerification_AC {
             req.setBody(jsonBody);
             Http http = new Http();
             HttpResponse res = new HttpResponse();
+
+            System.debug(req);
 
             if (!Test.isRunningTest()) {
                 res = http.send(req);

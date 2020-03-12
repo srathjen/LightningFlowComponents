@@ -201,7 +201,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Duplicate Lead Message 1</shortDescription>
-        <value>&#39;You can either choose &quot;No duplicate Found&quot; or any lead(s) under Select Existing Leads.&#39;</value>
+        <value>&apos;You can either choose &quot;No duplicate Found&quot; or any lead(s) under Select Existing Leads.&apos;</value>
     </labels>
     <labels>
         <fullName>Duplicate_Lead_Message_2</fullName>
@@ -228,13 +228,6 @@
         <value>There might be a duplicate {0}. Please click [OK] to review the duplicates.</value>
     </labels>
     <labels>
-        <fullName>DvRetrunUrl</fullName>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>DvRetrunUrl</shortDescription>
-        <value>http://devsup-wish.cs45.force.com</value>
-    </labels>
-    <labels>
         <fullName>Existing_Record</fullName>
         <categories>Record</categories>
         <language>en_US</language>
@@ -249,14 +242,6 @@
         <protected>false</protected>
         <shortDescription>Family Hold Message DDP</shortDescription>
         <value>a1a1R000007bEQoQAM</value>
-    </labels>
-    <labels>
-        <fullName>Instance_Url</fullName>
-        <categories>It will hold the instance url</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Instance Url</shortDescription>
-        <value>https://make-a-wish--devsup.cs45.my.salesforce.com</value>
     </labels>
     <labels>
         <fullName>Interation_User_Profile</fullName>
@@ -452,14 +437,6 @@ Click Generate Document and once the document is generated you can click the lin
         <protected>false</protected>
         <shortDescription>SingleForm</shortDescription>
         <value>4ff6d164-8be0-4efa-bedd-0e2760c7698e</value>
-    </labels>
-    <labels>
-        <fullName>Site_Url</fullName>
-        <categories>It holds the volunteer portal url.</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Site Url</shortDescription>
-        <value>http://devsup-make-a-wish.cs45.force.com/</value>
     </labels>
     <labels>
         <fullName>Sneak_Peek_DDP</fullName>
@@ -1411,7 +1388,7 @@ This will archive the existing active budget and cannot be undone. Are you sure 
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Referral Discussed Healthcare Provider</shortDescription>
-        <value>Has the referral been discussed with the child&#39;s healthcare provider?</value>
+        <value>Has the referral been discussed with the child&apos;s healthcare provider?</value>
     </labels>
     <labels>
         <fullName>Wish_Referral_Email</fullName>
@@ -1707,7 +1684,7 @@ This will archive the existing active budget and cannot be undone. Are you sure 
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Referral Other Treating Medical Professional</shortDescription>
-        <value>Please provide the best person in the Treating Medical Professional&#39;s Office to contact if different than the Treating Medical Professional</value>
+        <value>Please provide the best person in the Treating Medical Professional&apos;s Office to contact if different than the Treating Medical Professional</value>
     </labels>
     <labels>
         <fullName>Wish_Referral_Parent_or_Guardian</fullName>
@@ -1747,7 +1724,7 @@ This will archive the existing active budget and cannot be undone. Are you sure 
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Referral Placeholder Description Self Describe</shortDescription>
-        <value>Please enter a description pertaining to &#39;Self-describe&#39;.</value>
+        <value>Please enter a description pertaining to &apos;Self-describe&apos;.</value>
     </labels>
     <labels>
         <fullName>Wish_Referral_Placeholder_Diagnosis_Example</fullName>

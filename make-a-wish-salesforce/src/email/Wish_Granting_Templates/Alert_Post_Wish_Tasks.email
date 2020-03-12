@@ -9,7 +9,7 @@ normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Hello Wish
 their reaction to the wish and capture any relevant information or quotes that
 they may offer. All receipts related to a wish cost that you want to have
 reimbursed or to donate as an in-kind donation should be received to our office
-within two weeks of this email. Please visit the&nbsp;<span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish
+within two weeks of this email. Please visit the&nbsp;<span style="color:blue"><a href="{!$Setup.Endpoints__c.Site_URL__c}">Make-A-Wish
 Volunteer Center</a></span>&nbsp;to see the final steps for this wish and the
 tasks assigned to you.<br>
 <br>

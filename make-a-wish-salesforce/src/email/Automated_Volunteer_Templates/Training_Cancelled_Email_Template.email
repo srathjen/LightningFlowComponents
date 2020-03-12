@@ -5,7 +5,7 @@
 your registration for the
 upcoming&nbsp;{!Volunteer_Orientation_Training__c.Orientation_Training_Hidden__c}&nbsp;scheduled
 on {!Volunteer_Orientation_Training__c.Date__c}.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Please visit
-the&nbsp;<span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish
+the&nbsp;<span style="color:blue"><a href="{!$Setup.Endpoints__c.Site_URL__c}">Make-A-Wish
 Volunteer Center</a></span>&nbsp;to register for an alternative training date.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">As always, please let
 us know of any questions by contacting us directly.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">{!Volunteer_Orientation_Training__c.Orientation_Training_email_signature__c}</span><span style="font-size: 12pt; font-family: Lato, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom: 0.0001pt;">

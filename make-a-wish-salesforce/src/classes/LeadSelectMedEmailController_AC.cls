@@ -41,7 +41,7 @@ public class LeadSelectMedEmailController_AC {
 	 */
 	public void updateLead() {
 		try {
-			URLToRedirect = Label.Instance_Url + '/' + currLead.Id;
+			URLToRedirect = Endpoints__c.getInstance().Instance_URL__c + '/' + currLead.Id;
 			currLead.Hidden_DV_form_Medical_professional_Type__c = ApexPages.currentPage().getParameters().get('type');
 			currLead.HiddenMedicalProfessionalEmail__c = ApexPages.currentPage().getParameters().get('email');
 			currLead.Sub_Status__c = Constant_AC.LEAD_SUB_STATUS_PENDING_DIAGNOSIS_VERIFICATION;
@@ -50,7 +50,7 @@ public class LeadSelectMedEmailController_AC {
 			}
 			currLead.Pending_Diagnosis_Date__c = Date.today();
 			if (ApexPages.currentPage().getParameters().get('sendOrRest') == 'Reset') {
-				currLead.Part_A_Form_Password__c = Lead_OnBeforeInsertTriggerHandler.getRandom();
+				currLead.Part_A_Form_Password__c = Utils.generateRandomNumber(6);
 				resetDVValues();
 				currLead.Part_A_Received__c = null;
 			}

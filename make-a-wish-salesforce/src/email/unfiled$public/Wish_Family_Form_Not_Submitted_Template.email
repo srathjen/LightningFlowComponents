@@ -8,7 +8,7 @@ Granters,<br>
 volunteering for&nbsp;{!Case.Hidden_Wish_Child_FirstName__c}’s wish.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">According to the wish
 child’s record, the date for the initial interview has taken place. However, we
 have not received the completed wish forms for approval.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">To submit the forms,
-please visit the&nbsp;<span style="color:blue;background:white"><a href="{!$Label.Site_Url}">Make-A-Wish Volunteer Center</a></span>,&nbsp;click<b>&nbsp;"My
+please visit the&nbsp;<span style="color:blue;background:white"><a href="{!$Setup.Endpoints__c.Site_URL__c}">Make-A-Wish Volunteer Center</a></span>,&nbsp;click<b>&nbsp;"My
 Assignments"</b>, and then click&nbsp;<b>"View"</b>&nbsp;to
 access the wish child's record.&nbsp;You can access the forms by scrolling to
 the Wish Related Forms section and clicking on the form name to complete the

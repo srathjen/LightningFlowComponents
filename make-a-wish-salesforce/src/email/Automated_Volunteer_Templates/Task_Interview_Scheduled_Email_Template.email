@@ -8,7 +8,7 @@ Time: {!Task.Confirmed_Time__c}<br>
 Notes: {!Task.Venue__c}<br>
 </span><br>
 If you need to cancel or change your interview date/time, please visit
-the&nbsp;<span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish
+the&nbsp;<span style="color:blue"><a href="{!$Setup.Endpoints__c.Site_URL__c}">Make-A-Wish
 Volunteer Center</a>.</span><br>
 <br>
 Should you have any questions, please feel free to reach out to us directly.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Thanks,<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
