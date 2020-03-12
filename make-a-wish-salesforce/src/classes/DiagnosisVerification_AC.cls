@@ -477,7 +477,7 @@ public class DiagnosisVerification_AC {
         if (conditionDescriptions.isEmpty()) {
             conditionDescriptions = DEFAULT_CONDITION_DESCRIPTIONS;
         }
-      
+
         return conditionDescriptions;
     }
 
@@ -1138,15 +1138,6 @@ public class DiagnosisVerification_AC {
         }
     }
 
-     * @description     Self Fieldset, it holds the mandatory fields of Self relationship.
-     *
-     * @author          unknown
-     * @date            unknown
-     */
-    public List<Schema.FieldSetMember> getPartAFields() {
-        return SObjectType.Lead.FieldSets.Diagnosis_Verfication_Fieldset.getFields();
-    }
-
     /*
      * @description     Used to place sign signature in the docusign page
      *
@@ -1186,8 +1177,6 @@ public class DiagnosisVerification_AC {
             }
 
             String authorizationHeader = '<DocuSignCredentials><Username>{!$Credential.Username}</Username><Password>{!$Credential.Password}</Password><IntegratorKey>' + IntegratorKey + '</IntegratorKey></DocuSignCredentials>';
-
-            System.debug(JSON.serializePretty(authorizationHeader));
 
             String boundary = 'AAA';
             PageReference PDF = Page.LeadPartA_ApprovalForm_VF_PDF;
@@ -1258,8 +1247,6 @@ public class DiagnosisVerification_AC {
             req.setBody(jsonBody);
             Http http = new Http();
             HttpResponse res = new HttpResponse();
-
-            System.debug(req);
 
             if (!Test.isRunningTest()) {
                 res = http.send(req);
@@ -1374,7 +1361,7 @@ public class DiagnosisVerification_AC {
             query += field + ',';
         }
 
-        for (Schema.FieldSetMember currField : Utils.getPartAFields()) {
+        for (Schema.FieldSetMember currField : Utils.getPartAFields()) { 
             query += currField.getFieldPath() + ',';
         }
 
