@@ -26,6 +26,7 @@
   </types>
   <types>
     <members>Endpoints__c</members>
+    <members>Lead</members>
     <name>CustomObject</name>
   </types>
   <types>
