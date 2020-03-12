@@ -25,6 +25,10 @@
     <name>CustomLabels</name>
   </types>
   <types>
+    <members>Endpoints__c</members>
+    <name>CustomObject</name>
+  </types>
+  <types>
     <members>Automated_Volunteer_Templates/BC_Completed_Email_Active_Volunteer_Template</members>
     <members>Automated_Volunteer_Templates/Bc_Completed_Email_Pending_Volunteer_Training_Required_Template</members>
     <members>Automated_Volunteer_Templates/Bc_Completed_Email_Template</members>
