@@ -5,10 +5,12 @@ Description : When a new case record is created or updated then it will call the
 *******************************************************************************************************************/
 
 trigger CaseTrigger_AT on Case (after insert, after update,before update, after delete,before insert) {
-    
+    trac_TriggerHandlerBase.triggerHandler(new CaseDomain());
+
+    /*
     if((trigger.isBefore && trigger.isUpdate && RecursiveTriggerHandler.blockBeforeUpdate == true) || (trigger.isAfter && trigger.isUpdate && RecursiveTriggerHandler.blockAfterUpdate)){
         return;
-    } 
+    }
     if(Trigger.isInsert && Trigger.isBefore){
         Case_OnBeforeInsertTriggerHandler.OnBeforeInsert(trigger.new);
     }
@@ -18,7 +20,8 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
     if(Trigger.isInsert && Trigger.isAfter) {
        Case_OnAfterInsertTriggerHandler.OnAfterInsert(trigger.new);
     }
-    if(Trigger.isUpdate && Trigger.isAfter && RecursiveTriggerHandler.blockAfterUpdate == false) {  
+    if(Trigger.isUpdate && Trigger.isAfter && RecursiveTriggerHandler.blockAfterUpdate == false) {
         Case_OnAfterUpdateTriggerHandler.onAfterUpdate(trigger.newMap,trigger.oldMap);
     }
+    */
 }
