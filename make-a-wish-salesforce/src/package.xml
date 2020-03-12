@@ -21,12 +21,58 @@
     <name>AuraDefinitionBundle</name>
   </types>
   <types>
-    <members>CustomLabels</members>
+    <members>*</members>
     <name>CustomLabels</name>
   </types>
   <types>
-    <members>Lead</members>
+    <members>Endpoints__c</members>
     <name>CustomObject</name>
+  </types>
+  <types>
+    <members>Automated_Volunteer_Templates/BC_Completed_Email_Active_Volunteer_Template</members>
+    <members>Automated_Volunteer_Templates/Bc_Completed_Email_Pending_Volunteer_Training_Required_Template</members>
+    <members>Automated_Volunteer_Templates/Bc_Completed_Email_Template</members>
+    <members>Automated_Volunteer_Templates/Bc_Expired_Email_Template</members>
+    <members>Automated_Volunteer_Templates/Bc_Expiring_30_Days_Email_Template</members>
+    <members>Automated_Volunteer_Templates/COI_Expired_Email_Template</members>
+    <members>Automated_Volunteer_Templates/COI_Expiring_30_Days_Email_Template</members>
+    <members>Automated_Volunteer_Templates/Communities_New_Active_Volunteer_Welcome_Email_Template</members>
+    <members>Automated_Volunteer_Templates/Communities_New_Prospective_Volunteer_Welcome_Email_Template</members>
+    <members>Automated_Volunteer_Templates/Orientation_Cancelled_Email_Template</members>
+    <members>Automated_Volunteer_Templates/Orientation_Completed_Email_Template</members>
+    <members>Automated_Volunteer_Templates/Orientation_Registered_Email_Template</members>
+    <members>Automated_Volunteer_Templates/Orientation_Virtual_Self_Paced_Registered_Email_Template</members>
+    <members>Automated_Volunteer_Templates/Task_AZ_Available_Interview_Times</members>
+    <members>Automated_Volunteer_Templates/Task_Interview_Cancelled_Email_Template</members>
+    <members>Automated_Volunteer_Templates/Task_Interview_Completed_Email_Template</members>
+    <members>Automated_Volunteer_Templates/Task_Interview_Scheduled_Email_Template</members>
+    <members>Automated_Volunteer_Templates/Task_Interview_Task_Email_Template</members>
+    <members>Automated_Volunteer_Templates/Training_Cancelled_Email_Template</members>
+    <members>Automated_Volunteer_Templates/Training_Pending_Volunteer_Virtual_Self_Paced_Registered_Email_Template</members>
+    <members>Automated_Volunteer_Templates/Training_Registered_Email_Template</members>
+    <members>Automated_Volunteer_Templates/Training_Virtual_Self_Paced_Registered_Email_Template</members>
+    <members>Automated_Volunteer_Templates/Volunteer_Application_Approved_Email_Template</members>
+    <members>Automated_Volunteer_Templates/Volunteer_Application_Incompleted_Email_Template</members>
+    <members>Automated_Volunteer_Templates/Volunteer_Opportunity_Non_Wish_Approved</members>
+    <members>Automated_Volunteer_Templates/Volunteer_Opportunity_Non_Wish_Rejected</members>
+    <members>Automated_Volunteer_Templates/Volunteer_Opportunity_Wish_Approved</members>
+    <members>Automated_Volunteer_Templates/Volunteer_Opportunity_Wish_Rejected</members>
+    <members>Automated_Wish_Granting_Email_Templates/Case_Email_alert_to_wish_granters</members>
+    <members>Automated_Wish_Granting_Email_Templates/Send_Wish_Referral_Form_to_Non_Active_Chapter_Office</members>
+    <members>Automated_Wish_Granting_Email_Templates/Wish_Form_Email_Notification_for_Salesforce_Team_when_Wish_Form_is_Edited</members>
+    <members>unfiled$public/Case_Send_Email_to_Volunteer_for_Blank_Presentation_date</members>
+    <members>unfiled$public/Part_A_Form_Email_Template</members>
+    <members>unfiled$public/Send_Notification_to_Case_Owner_before_a_month_from_18_Age</members>
+    <members>unfiled$public/Send_Notification_to_Case_Owner_Child_Age_is_18</members>
+    <members>unfiled$public/Wish_Family_Form_Not_Submitted_Template</members>
+    <members>unfiled$public/Wish_Interview_21_Days_Template</members>
+    <members>Volunteer_Manager_Templates/Volunteer_Opportunity_Non_Wish_Event_Thank_You</members>
+    <members>Volunteer_Manager_Templates/Volunteer_Opportunity_Wish_Assistance_Needed</members>
+    <members>Volunteer_Manager_Templates/Volunteer_Opportunity_Wish_Thank_You</members>
+    <members>Wish_Granting_Templates/Alert_Post_Wish_Tasks</members>
+    <members>Wish_Granting_Templates/Alert_Wish_Approved</members>
+    <members>Wish_Granting_Templates/Alert_Wish_Moving_to_HOLD</members>
+    <name>EmailTemplate</name>
   </types>
   <types>
     <members>Case_Wish_Lightning</members>

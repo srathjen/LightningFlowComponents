@@ -44,7 +44,7 @@ normal"><span style="font-family: &quot;Times New Roman&quot;, serif; font-size:
   border-top:none;padding:0in 5.4pt 0in 5.4pt">
   <p class="MsoNormal" align="center" style="margin-bottom:0in;margin-bottom:.0001pt;
   text-align:center;line-height:normal"><span style="font-size:12.0pt;
-  font-family:&quot;Times New Roman&quot;,serif;color:black;background:white"><a href="{!$Label.Instance_Url}/{!Wish_Child_Form__c.Id}">{!Wish_Child_Form__c.Name}</a></span><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+  font-family:&quot;Times New Roman&quot;,serif;color:black;background:white"><a href="{!$Setup.Endpoints__c.Instance_URL__c}/{!Wish_Child_Form__c.Id}">{!Wish_Child_Form__c.Name}</a></span><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
   &quot;Times New Roman&quot;"><o:p></o:p></span></p>
   </td>
   <td width="208" valign="top" style="width:155.85pt;border-top:none;border-left:
@@ -52,7 +52,7 @@ normal"><span style="font-family: &quot;Times New Roman&quot;, serif; font-size:
   padding:0in 5.4pt 0in 5.4pt">
   <p class="MsoNormal" align="center" style="margin-bottom:0in;margin-bottom:.0001pt;
   text-align:center;line-height:normal"><span style="font-size:12.0pt;
-  font-family:&quot;Times New Roman&quot;,serif;color:black;background:white"><a href="{!$Label.Instance_Url}/{!Wish_Child_Form__c.ContactId__c}">{!Wish_Child_Form__c.Contact__c}</a></span><b style="mso-bidi-font-weight:normal"><span style="font-size:12.0pt;font-family:
+  font-family:&quot;Times New Roman&quot;,serif;color:black;background:white"><a href="{!$Setup.Endpoints__c.Instance_URL__c}/{!Wish_Child_Form__c.ContactId__c}">{!Wish_Child_Form__c.Contact__c}</a></span><b style="mso-bidi-font-weight:normal"><span style="font-size:12.0pt;font-family:
   &quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;"><o:p></o:p></span></b></p>
   </td>
   <td width="208" valign="top" style="width:155.85pt;border-top:none;border-left:
@@ -60,7 +60,7 @@ normal"><span style="font-family: &quot;Times New Roman&quot;, serif; font-size:
   padding:0in 5.4pt 0in 5.4pt">
   <p class="MsoNormal" align="center" style="margin-bottom:0in;margin-bottom:.0001pt;
   text-align:center;line-height:normal"><span style="font-size:12.0pt;
-  font-family:&quot;Times New Roman&quot;,serif;color:black;background:white"><a href="{!$Label.Instance_Url}/{!Wish_Child_Form__c.CaseId__c}">{!Wish_Child_Form__c.Case__c}</a></span><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+  font-family:&quot;Times New Roman&quot;,serif;color:black;background:white"><a href="{!$Setup.Endpoints__c.Instance_URL__c}/{!Wish_Child_Form__c.CaseId__c}">{!Wish_Child_Form__c.Case__c}</a></span><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
   &quot;Times New Roman&quot;"><o:p></o:p></span></p>
   </td>
  </tr>
@@ -77,7 +77,7 @@ Wish Form Information:&nbsp;</span><o:p></o:p></span></p>
 
 <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="background-color: white; font-family: &quot;Times New Roman&quot;, serif; font-size: 12pt;"><br></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
-normal"><span style="background-color: white; font-family: &quot;Times New Roman&quot;, serif; font-size: 12pt;"><a href="{!$Label.Instance_Url}/00O1R000007us6nUAA">Wish
+normal"><span style="background-color: white; font-family: &quot;Times New Roman&quot;, serif; font-size: 12pt;"><a href="{!$Setup.Endpoints__c.Instance_URL__c}/00O1R000007us6nUAA">Wish
 Form - Wish Child Report</a></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="font-family: &quot;Times New Roman&quot;, serif; font-size: 12pt;">&nbsp;</span></p>
 

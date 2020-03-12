@@ -15,7 +15,7 @@
   &nbsp;{!Volunteer_Opportunity__c.Hidden_Chapter_Role_Name__c}&nbsp;on&nbsp;{!Volunteer_Opportunity__c.Name__c}’s
   wish. We hope you’ll consider signing up for another opportunity in the near
   future. You may do this by visiting the&nbsp;<span style="color:
-  blue"><a href="{!$Label.Site_Url}">Make-A-Wish Volunteer Center</a></span></span>&nbsp;and reviewing
+  blue"><a href="{!$Setup.Endpoints__c.Site_URL__c}">Make-A-Wish Volunteer Center</a></span></span>&nbsp;and reviewing
   “Volunteer Opportunities” to find an opportunity that may be of interest to
   you!<br>
   <br>

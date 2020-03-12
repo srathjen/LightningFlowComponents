@@ -13,7 +13,7 @@ Date:&nbsp;<span style="background:white">{!Volunteer_Orientation_Training__c.Da
 End Time:&nbsp;</span>{!Volunteer_Orientation_Training__c.End_Time__c}<br>
 <span style="background:white">Location:&nbsp;</span>{!Volunteer_Orientation_Training__c.Location__c}<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">&nbsp;</span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">If you need to cancel
-or&nbsp;change your training,&nbsp;please visit&nbsp;the&nbsp;<span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish
+or&nbsp;change your training,&nbsp;please visit&nbsp;the&nbsp;<span style="color:blue"><a href="{!$Setup.Endpoints__c.Site_URL__c}">Make-A-Wish
 Volunteer Center</a></span>.<br>
 <br>
 We look forward to seeing you soon.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:

@@ -7,7 +7,7 @@ wish to&nbsp;</span><span style="font-size:12.0pt;font-family:&quot;Lato&quot;,s
 mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:Arial;
 color:#C00000">&lt;INSERT WISH DESCRIPTION&gt;&nbsp;</span><span style="font-size: 12pt; font-family: Lato, sans-serif;">has been fully approved!&nbsp;&nbsp;
 Please contact the family and share this exciting news with them! Please visit
-the&nbsp;<span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish Volunteer Center</a></span>&nbsp;to see the next
+the&nbsp;<span style="color:blue"><a href="{!$Setup.Endpoints__c.Site_URL__c}">Make-A-Wish Volunteer Center</a></span>&nbsp;to see the next
 steps and tasks assigned to you!<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">&nbsp;<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Thank you,<br>

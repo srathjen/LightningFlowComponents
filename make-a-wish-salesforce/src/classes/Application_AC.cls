@@ -50,8 +50,6 @@ public class Application_AC {
 	public Application_AC() {
 		List<string> LstLog = new List<string>();
 		string Logvalue;
-		// try
-		//  {
 		List<User> userIns = [
 				SELECT Id, ContactId
 				FROM User
@@ -110,31 +108,6 @@ public class Application_AC {
 			if (currentVolunteer.Birth_Day__c != Null)
 				currentVolunteer.Birth_Day__c = currentVolunteer.Birth_Day__c;
 			contactName = currentVolunteer.Name;
-			/*   if(currentVolunteer.npe01__PreferredPhone__c == 'Home' && currentVolunteer.Alternate_Phone_Type__c == 'Mobile'){
-currentVolunteer.HomePhone =   currentVolunteer.HomePhone;
-currentVolunteer.MobilePhone  = currentVolunteer.MobilePhone ;
-
-}
-if(currentVolunteer.npe01__PreferredPhone__c == 'Mobile' && currentVolunteer.Alternate_Phone_Type__c == 'Home'){
-String mobileNo = currentVolunteer.MobilePhone;
-currentVolunteer.MobilePhone = currentVolunteer.HomePhone;
-currentVolunteer.HomePhone = mobileNo;
-
-}
-
-
-if(currentVolunteer.npe01__PreferredPhone__c == 'Home' && currentVolunteer.Alternate_Phone_Type__c == 'Home'){
-currentVolunteer.HomePhone = currentVolunteer.HomePhone;
-currentVolunteer.MobilePhone = currentVolunteer.OtherPhone;
-
-
-}
-
-if(currentVolunteer.npe01__PreferredPhone__c == 'Mobile' && currentVolunteer.Alternate_Phone_Type__c == 'Mobile'){
-currentVolunteer.HomePhone = currentVolunteer.OtherPhone;
-currentVolunteer.MobilePhone = currentVolunteer.MobilePhone;
-
-} */
 
 			if (currentVolunteer.volunteer_role__c != Null) {
 				for (String role : currentVolunteer.volunteer_role__c.split(';')) {
@@ -234,14 +207,6 @@ currentVolunteer.MobilePhone = currentVolunteer.MobilePhone;
 				LstLog.add(string.valueOf('applicationDynamicContent: ' + applicationDynamicContent));
 			}
 		}
-		/*  }
-catch(Exception ex)      
-{
-Logvalue = string.valueOf(currentVolunteer);
-new ApexDebugLog().createLog(new ApexDebugLog.Error('Application_AC','Application_AC',currentVolunteer.Id,ex,Logvalue));
-ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-ApexPages.addMessage(myMsg);
-}*/
 	}
 
 	/* this saveRec() method is used to update the current volunteer contact information.*/
@@ -342,33 +307,6 @@ ApexPages.addMessage(myMsg);
 			LstLog.add(string.valueOf('currentVolunteer: ' + currentVolunteer));
 			update currentVolunteer;
 
-			/*  if(currentVolunteer.npe01__PreferredPhone__c == 'Home' && currentVolunteer.Alternate_Phone_Type__c == 'Mobile'){
-currentVolunteer.HomePhone =   currentVolunteer.HomePhone;
-currentVolunteer.MobilePhone  = currentVolunteer.MobilePhone ;
-currentVolunteer.OtherPhone = Null;
-}
-if(currentVolunteer.npe01__PreferredPhone__c == 'Mobile' && currentVolunteer.Alternate_Phone_Type__c == 'Home'){
-String mobileNo = currentVolunteer.MobilePhone;
-currentVolunteer.MobilePhone = currentVolunteer.HomePhone;
-currentVolunteer.HomePhone = mobileNo;
-currentVolunteer.OtherPhone = Null;
-}
-
-
-if(currentVolunteer.npe01__PreferredPhone__c == 'Home' && currentVolunteer.Alternate_Phone_Type__c == 'Home'){
-currentVolunteer.HomePhone = currentVolunteer.HomePhone;
-currentVolunteer.OtherPhone = currentVolunteer.MobilePhone;
-currentVolunteer.MobilePhone = Null;
-
-}
-
-if(currentVolunteer.npe01__PreferredPhone__c == 'Mobile' && currentVolunteer.Alternate_Phone_Type__c == 'Mobile'){
-currentVolunteer.HomePhone = currentVolunteer.HomePhone;
-currentVolunteer.MobilePhone = currentVolunteer.MobilePhone;
-currentVolunteer.OtherPhone = currentVolunteer.HomePhone;
-currentVolunteer.HomePhone = Null;
-} */
-
 			if (!displaySignNowPopup) {
 				pr = new PageReference('/apex/Application_VF?showeditMode=true' + '&bgRequired=' + bgTabPermission + '&trainingRequired=' + trainingTabVisible);
 				pr.setRedirect(true);
@@ -389,8 +327,6 @@ currentVolunteer.HomePhone = Null;
 
 	public pageReference confirmSign() {
 		string Logvalue;
-		// try
-		//  {
 		List<ProcessInstance> approvalIns = [
 				SELECT TargetObjectId,Status,ProcessDefinitionId,ProcessDefinition.Name
 				FROM ProcessInstance
@@ -404,16 +340,6 @@ currentVolunteer.HomePhone = Null;
 			saveRec();
 		}
 		return null;
-		/* }
-catch(Exception ex)      
-{
-Logvalue = string.valueof(currentVolunteer);
-new ApexDebugLog().createLog(new ApexDebugLog.Error('Application_AC','confirmSign',currentVolunteer.Id,ex,Logvalue));
-ex.setMessage(Label.Debug_log_error_message); 
-ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, ex.getmessage());
-ApexPages.addMessage(myMsg);
-return null;
-}*/
 	}
 
 	/*This SubmitAndSign() method is used when the volunteer fill all the required field then it will redirect docusign page
@@ -533,7 +459,7 @@ Once the user sign the document then it create new conflict of interest record a
 							'    "recipientId": "1",' +
 							'    "clientUserId": "1",' +
 							'    "authenticationMethod": "None",' +
-							'    "returnUrl": "' + label.Site_Url + '/Application_VF"' +
+							'    "returnUrl": "' + Endpoints__c.getInstance().Site_URL__c + '/Application_VF"' +
 							'}';
 					request.setBody(jsonPayload);
 					response = httprequest.send(request);
@@ -595,8 +521,6 @@ Once the user sign the document then it create new conflict of interest record a
 	/*To display the state value of current logged in volunteer contact in community.*/
 	public List<SelectOption> getStates() {
 		string Logvalue;
-		// try
-		//{
 		List<SelectOption> options = new List<SelectOption>();
 		Schema.DescribeFieldResult fieldResult = Lead.State_Picklist__c.getDescribe();
 		List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
@@ -606,41 +530,21 @@ Once the user sign the document then it create new conflict of interest record a
 
 		}
 		return options;
-		/*  }
-catch(Exception ex)      
-{   Logvalue = string.valueOf(currentVolunteer);
-new ApexDebugLog().createLog(new ApexDebugLog.Error('Application_AC','getStates',currentVolunteer.Id,ex,Logvalue));
-ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-ApexPages.addMessage(myMsg);
-return null;
-}*/
 	}
 	/*To display the date value of birth day for current logged in volunteer contact in community.*/
 	public List<SelectOption> getDays() {
 		string Logvalue;
-		// try
-		// {
 		List<SelectOption> options = new List<SelectOption>();
 		options.add(new SelectOption('Day', 'Day'));
 		for (integer i = 0; i <= 31; i++) {
 			options.add(new SelectOption(String.valueOf(i), String.valueOf(i)));
 		}
 		return options;
-		/*  }
-catch(Exception ex)      
-{   
-Logvalue = string.valueOf(currentVolunteer);
-new ApexDebugLog().createLog(new ApexDebugLog.Error('Application_AC','getDays',currentVolunteer.id,ex,Logvalue));
-ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-ApexPages.addMessage(myMsg);
-return null;
-}*/
 	}
+
 	/*To display the month value of birth month for current logged in volunteer contact in community.*/
 	public List<SelectOption> getMonths() {
 		string Logvalue;
-		//  try
-		// {
 		List<SelectOption> options = new List<SelectOption>();
 		options.add(new SelectOption('Month', 'Month'));
 		options.add(new SelectOption('January', 'January'));
@@ -656,21 +560,10 @@ return null;
 		options.add(new SelectOption('November', 'November'));
 		options.add(new SelectOption('December', 'December'));
 		return options;
-		/*  }
-catch(Exception ex)      
-{   
-Logvalue = string.valueOf(currentVolunteer);
-new ApexDebugLog().createLog(new ApexDebugLog.Error('Application_AC','getMonths',currentVolunteer.id,ex,Logvalue));
-ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-ApexPages.addMessage(myMsg);
-return null;
-}*/
 	}
 	/*To display the Language values of current logged in volunteer contact in community.*/
 	public List<SelectOption> getLanguages() {
 		string Logvalue;
-		// try
-		// {
 		List<SelectOption> options = new List<SelectOption>();
 		Schema.DescribeFieldResult fieldResult = Contact.Language__c.getDescribe();
 		List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
@@ -679,21 +572,10 @@ return null;
 
 		}
 		return options;
-		/* }
-catch(Exception ex)      
-{   
-Logvalue = string.valueOf(currentVolunteer);
-new ApexDebugLog().createLog(new ApexDebugLog.Error('Application_AC','getLanguages',currentVolunteer.id,ex,Logvalue));
-ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-ApexPages.addMessage(myMsg);
-return null;
-}*/
 	}
 	/*To display value of HowdidyouhearaboutMakeAWish for current logged in volunteer contact in community.*/
 	public List<SelectOption> getHowdidyouhearaboutMakeAWish() {
 		string Logvalue;
-		//  try
-		// {
 		List<SelectOption> options = new List<SelectOption>();
 		Schema.DescribeFieldResult fieldResult = Contact.How_did_you_hear_about_Make_A_Wish__c.getDescribe();
 		List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
@@ -702,21 +584,10 @@ return null;
 
 		}
 		return options;
-		/* }
-catch(Exception ex)      
-{   
-Logvalue = string.valueOf(currentVolunteer);
-new ApexDebugLog().createLog(new ApexDebugLog.Error('Application_AC','getHowdidyouhearaboutMakeAWish',currentVolunteer.Id,ex,Logvalue));
-ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-ApexPages.addMessage(myMsg);
-return null;
-}*/
 	}
 	/*To display ProfessionalSKills values for current logged in volunteer contact in community.*/
 	public List<SelectOption> getProfessionalSKills() {
 		String Logvalue;
-		// try
-		// {
 		List<SelectOption> options = new List<SelectOption>();
 		Schema.DescribeFieldResult fieldResult = Contact.Professional_Skills__c.getDescribe();
 		List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
@@ -725,22 +596,11 @@ return null;
 
 		}
 		return options;
-		/* }
-catch(Exception ex)      
-{   
-Logvalue = string.valueOf(currentVolunteer);
-new ApexDebugLog().createLog(new ApexDebugLog.Error('Application_AC','getProfessionalSKills',currentVolunteer.id,ex,Logvalue));
-ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-ApexPages.addMessage(myMsg);
-return null;
-}*/
 	}
 	/*To display Role values for current logged in volunteer contact in community.*/
 	public List<SelectOption> getRoles() {
 		List<string> LstLog = new List<string>();
 		string Logvalue;
-		// try
-		// {
 		List<SelectOption> options = new List<SelectOption>();
 
 		for (Chapter_Role__c currRole : [
@@ -755,21 +615,10 @@ return null;
 		}
 		options.sort();
 		return options;
-		/* }
-catch(Exception ex)      
-{
-Logvalue = string.valueOf(currentVolunteer);
-new ApexDebugLog().createLog(new ApexDebugLog.Error('Application_AC','getRoles',currentVolunteer.Id,ex,Logvalue));
-ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-ApexPages.addMessage(myMsg);
-return null;
-}*/
 	}
 	/*To display AlternatePhoneType values for current logged in volunteer contact in community.*/
 	public List<SelectOption> getAlternatePhoneType() {
 		String Logvalue;
-		// try
-		//  {
 		List<SelectOption> options = new List<SelectOption>();
 		Schema.DescribeFieldResult fieldResult = Contact.Alternate_Phone_Type__c.getDescribe();
 		List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
@@ -779,20 +628,10 @@ return null;
 
 		}
 		return options;
-		/*   }
-catch(Exception ex)      
-{
-new ApexDebugLog().createLog(new ApexDebugLog.Error('Application_AC','getAlternatePhoneType',Null,ex,Logvalue));
-ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-ApexPages.addMessage(myMsg);
-return null;
-}*/
 	}
 	/*To display PreferedPhoneType values for current logged in volunteer contact in community.*/
 	public List<SelectOption> getPreferedPhoneType() {
 		String Logvalue;
-		// try
-		// {
 		List<SelectOption> options = new List<SelectOption>();
 		Schema.DescribeFieldResult fieldResult = Contact.npe01__PreferredPhone__c.getDescribe();
 		List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
@@ -802,21 +641,10 @@ return null;
 
 		}
 		return options;
-		/*  }
-catch(Exception ex)      
-{
-Logvalue = string.valueOf(currentVolunteer);
-new ApexDebugLog().createLog(new ApexDebugLog.Error('Application_AC','getPreferedPhoneType',currentVolunteer.Id,ex,Logvalue));
-ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-ApexPages.addMessage(myMsg);
-return null;
-}*/
 	}
 	/*To display IamOnLinkedIn values for current logged in volunteer contact in community.*/
 	public List<SelectOption> getIamOnLinkedIn() {
 		String Logvalue;
-		// try
-		// {
 		List<SelectOption> options = new List<SelectOption>();
 		Schema.DescribeFieldResult fieldResult = Contact.I_m_on_LinkedIn__c.getDescribe();
 		List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
@@ -826,21 +654,10 @@ return null;
 
 		}
 		return options;
-		/* }
-catch(Exception ex)      
-{
-Logvalue = string.valueOf(currentVolunteer);
-new ApexDebugLog().createLog(new ApexDebugLog.Error('Application_AC','getIamOnLinkedIn',currentVolunteer.Id,ex,Logvalue));
-ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-ApexPages.addMessage(myMsg);
-return null;
-}*/
 	}
 	/*To display ContactAtWorks values for current logged in volunteer contact in community.*/
 	public List<SelectOption> getContactAtWorks() {
 		String Logvalue;
-		// try
-		// {
 		List<SelectOption> options = new List<SelectOption>();
 		Schema.DescribeFieldResult fieldResult = Contact.May_We_Contact_You_at_Work__c.getDescribe();
 		List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
@@ -850,21 +667,10 @@ return null;
 
 		}
 		return options;
-		/*  }
-catch(Exception ex)      
-{
-Logvalue = string.valueOf(currentVolunteer);
-new ApexDebugLog().createLog(new ApexDebugLog.Error('Application_AC','getContactAtWorks',currentVolunteer.id,ex,Logvalue));
-ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-ApexPages.addMessage(myMsg);
-return null;
-}*/
 	}
 	/*To display Interested involved with Make wish values for current logged in volunteer contact in community.*/
 	public List<SelectOption> getInterstedList() {
 		String Logvalue;
-		//  try
-		//   {
 		List<SelectOption> options = new List<SelectOption>();
 		Schema.DescribeFieldResult fieldResult = Contact.Interested_involved_with_Make_A_Wish__c.getDescribe();
 		List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
@@ -874,21 +680,10 @@ return null;
 
 		}
 		return options;
-		/*    }
-catch(Exception ex)      
-{
-Logvalue = string.valueOf(currentVolunteer);
-new ApexDebugLog().createLog(new ApexDebugLog.Error('Application_AC','getInterstedList',currentVolunteer.id,ex,Logvalue));
-ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-ApexPages.addMessage(myMsg);
-return null;
-}*/
 	}
 	/*To display title values for current logged in volunteer contact in community.*/
 	public List<SelectOption> getTitles() {
 		String Logvalue;
-		// try
-		//   {
 		List<SelectOption> options = new List<SelectOption>();
 		options.add(new SelectOption('', 'Please Select Title'));
 		options.add(new SelectOption('Mr.', 'Mr.'));
@@ -899,33 +694,13 @@ return null;
 		options.add(new SelectOption('Dr.', 'Dr.'));
 		options.add(new SelectOption('Prof.', 'Prof.'));
 		return options;
-		/*   }
-catch(Exception ex)      
-{
-Logvalue = string.valueOf(currentVolunteer);
-new ApexDebugLog().createLog(new ApexDebugLog.Error('Application_AC','getTitles',currentVolunteer.id,ex,Logvalue));
-ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-ApexPages.addMessage(myMsg);
-return null;
-}*/
 	}
 	/*To display Country values for current logged in volunteer contact in community.*/
 	public List<SelectOption> getCountries() {
 		String Logvalue;
-		//  try
-		// {
 		List<SelectOption> options = new List<SelectOption>();
 		options.add(new SelectOption('United States', 'United States'));
 		return options;
-		/* }
-catch(Exception ex)      
-{
-Logvalue = string.valueOf(currentVolunteer);
-new ApexDebugLog().createLog(new ApexDebugLog.Error('Application_AC','getCountries',currentVolunteer.id,ex,Logvalue));
-ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-ApexPages.addMessage(myMsg);
-return null;
-}*/
 	}
 
 	// Displaying the Role Description on the Application Page.

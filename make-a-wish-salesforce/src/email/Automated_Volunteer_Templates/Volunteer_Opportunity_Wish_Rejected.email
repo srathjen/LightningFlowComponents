@@ -6,7 +6,7 @@
 Thank you for requesting a new volunteer opportunity. Unfortunately, we are
 unable to fulfill your request to volunteer for the following opportunity:<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Wish Child:&nbsp;<span style="background:white">{!Volunteer_Opportunity__c.Name__c}</span><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">Role:&nbsp;{!Volunteer_Opportunity__c.Hidden_Chapter_Role_Name__c}</span><span style="font-size: 12pt; font-family: Lato, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">We hope that you will
-consider another assignment. Please visit the&nbsp;<span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish
+consider another assignment. Please visit the&nbsp;<span style="color:blue"><a href="{!$Setup.Endpoints__c.Site_URL__c}">Make-A-Wish
 Volunteer Center</a></span>&nbsp;and click&nbsp;<b>"Volunteer
 Opportunities"</b>&nbsp;to review additional opportunities that may be of
 interest to you.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Should you have any
