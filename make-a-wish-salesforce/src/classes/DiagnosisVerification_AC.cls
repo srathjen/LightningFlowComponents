@@ -477,7 +477,7 @@ public class DiagnosisVerification_AC {
         if (conditionDescriptions.isEmpty()) {
             conditionDescriptions = DEFAULT_CONDITION_DESCRIPTIONS;
         }
-
+      
         return conditionDescriptions;
     }
 
@@ -1136,6 +1136,15 @@ public class DiagnosisVerification_AC {
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
             ApexPages.addMessage(myMsg);
         }
+    }
+
+     * @description     Self Fieldset, it holds the mandatory fields of Self relationship.
+     *
+     * @author          unknown
+     * @date            unknown
+     */
+    public List<Schema.FieldSetMember> getPartAFields() {
+        return SObjectType.Lead.FieldSets.Diagnosis_Verfication_Fieldset.getFields();
     }
 
     /*

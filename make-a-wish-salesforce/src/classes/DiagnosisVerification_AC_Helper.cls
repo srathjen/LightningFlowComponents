@@ -5,49 +5,15 @@
  * @date            2020-03-03
  */
 public class DiagnosisVerification_AC_Helper {
-
     /*
-     * @description     Function to translate condition related checkboxes on Lead to a status code.
-     *                  This was moved out of loadData() to reduce the size of that function and improve readability.
-     *
-     * @param           Lead lead
-     *
-     * @return          String
-     *
-     * @author          Chris Shinnimin, Traction on Demand
-     * @createdDate     2020-02-28
-     */
-    public static String getDescribePatientCode(Lead lead) {
-        if (lead.Child_will_ultimately_die_prematurely__c == true) {
-            return '1';
-        } else if (lead.Treatment_may_be_feasible_but_can_fail__c == true) {
-            return '2';
-        } else if (lead.Treatment_may_prolong_normal_activities__c == true) {
-            return '3';
-        } else if (lead.Debilitation_may_extend_over_many_years__c == true) {
-            return '4';
-        } else if (lead.Increased_probability_of_premature_death__c == true) {
-            return '5';
-        } else if (lead.Risk_of_complications_premature_death__c == true) {
-            return '6';
-        } else if (lead.Responds_to_treatment_with_normal_health__c == true) {
-            return '7';
-        } else if (lead.None_of_these_statements_describes_Child__c == true) {
-            return '8';
-        } else {
-            return '8';
-        }
-    }
-
-    /*
-     * @description     Function to return a list of Medical Questions.
-     *                  This was moved out of loadData() to reduce the size of that function and improve readability.
-     *
-     * @return          List<Medical_Questions__c>
-     *
-     * @author          Chris Shinnimin, Traction on Demand
-     * @createdDate     2020-02-28
-     */
+      * @description     Function to return a list of Medical Questions.
+      *                  This was moved out of loadData() to reduce the size of that function and improve readability.
+      *
+      * @return          List<Medical_Questions__c>
+      *
+      * @author          Chris Shinnimin, Traction on Demand
+      * @createdDate     2020-02-28
+      */
     public static List<Medical_Questions__c> getMedicalQuestions() {
         return [
             SELECT
@@ -187,7 +153,8 @@ public class DiagnosisVerification_AC_Helper {
                 Group1__c,
                 Code_To_Use__c,
                 InActive__c,
-                Not_Listed__c
+                Not_Listed__c,
+                PR_Diagnosis__c
             FROM Condition_Description__c
         ];
     }
