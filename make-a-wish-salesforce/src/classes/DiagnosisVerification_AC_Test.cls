@@ -9,7 +9,6 @@ Modification Log:
 *******************************************************************************************************************/
 @isTest
 public class DiagnosisVerification_AC_Test {
-    /*
     @testSetup
     //This method is used to update the wish child and wish family.
     public static void setUpData() {
@@ -117,7 +116,7 @@ public class DiagnosisVerification_AC_Test {
         ];
         Test.stopTest();
     }
-    
+
     //This method is used to check the invalidate primary diagnosis in DV form.
     public static testmethod void checkDiadnosisVerificationFormForInValidDiagnosisAtPrimaryDiagnosis() {
         Lead newLead = [
@@ -474,7 +473,7 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].conditionDescription = Null;
         currDiagnosisVerificationDupe.ResetDiagnosis();
         currDiagnosisVerificationDupe.changePatientValue();
-        currDiagnosisVerificationDupe.submit(); 
+        currDiagnosisVerificationDupe.submit();
         currDiagnosisVerificationDupe.MedicalQuestions(null, null, false, null, 0, medicalQuestion, false);
         currDiagnosisVerificationDupe.MedicalQuestions(null, null, true, null, 0, medicalQuestion, false);
         currDiagnosisVerificationDupe.MedicalQuestions(null, null, true, null, 0, medicalQuestion, true);
@@ -682,6 +681,4 @@ public class DiagnosisVerification_AC_Test {
         System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode, 'Id dose nit match');
         System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode);
     }
-
-   */
 }
