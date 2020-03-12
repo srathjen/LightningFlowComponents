@@ -21,6 +21,10 @@
     <name>AuraDefinitionBundle</name>
   </types>
   <types>
+    <members>Lead.Primary_Medical_Professional_Type_Other__c</members>
+    <name>CustomField</name>
+   </types>
+  <types>
     <members>*</members>
     <name>CustomLabels</name>
   </types>
