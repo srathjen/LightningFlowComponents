@@ -142,4 +142,18 @@ public class Utils {
 
 		return selectOptions;
 	}
+
+	/*
+	 * @description		"Self Fieldset, it holds the mandatory fields of Self relationship."
+	 * 					This function was noticed duplicated in multiple classes, so pulled out
+	 * 					during code cleanup (Chris Shinnimin, Traction on Demand).
+	 *
+	 * @return			List<Schema.FieldSetMember>
+	 *
+	 * @date			unknown
+	 * @author			MST Solutions
+	 */
+	public static List<Schema.FieldSetMember> getPartAFields() {
+		return SObjectType.Lead.FieldSets.Diagnosis_Verfication_Fieldset.getFields();
+	}
 }
