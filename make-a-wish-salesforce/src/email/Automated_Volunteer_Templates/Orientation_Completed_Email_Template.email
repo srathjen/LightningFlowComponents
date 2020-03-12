@@ -7,7 +7,7 @@
 Orientation. Your next step to becoming a volunteer is to submit your volunteer
 application.</span><br>
 <br>
-<span style="background:white">At your convenience, please log in to the&nbsp;</span></span><span style="font-family:&quot;Lato&quot;,sans-serif"><span style="mso-bidi-font-family:Arial;background:white"><a href="{!$Label.Site_Url}">Make-A-Wish Volunteer
+<span style="background:white">At your convenience, please log in to the&nbsp;</span></span><span style="font-family:&quot;Lato&quot;,sans-serif"><span style="mso-bidi-font-family:Arial;background:white"><a href="{!$Setup.Endpoints__c.Site_URL__c}">Make-A-Wish Volunteer
 Center</a></span></span><span style="font-family: Lato, sans-serif; background: white;">&nbsp;and click&nbsp;<b>"Continue Process"</b>&nbsp;to complete our volunteer application. Upon completing
 the application, we ask that you also read and electronically sign our Conflict
 of Interest &amp; Ethics Statement.</span><span style="font-family: Lato, sans-serif;"><br>

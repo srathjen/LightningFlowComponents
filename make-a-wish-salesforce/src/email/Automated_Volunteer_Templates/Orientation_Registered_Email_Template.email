@@ -11,7 +11,7 @@ Start Time: {!Volunteer_Orientation_Training__c.Start_Time__c}<o:p></o:p></span>
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">End Time:
 {!Volunteer_Orientation_Training__c.End_Time__c}<br>
 Location:&nbsp;{!Volunteer_Orientation_Training__c.Location__c}<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;"><br>
-If you need to cancel or change this orientation, please visit the&nbsp;<span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish
+If you need to cancel or change this orientation, please visit the&nbsp;<span style="color:blue"><a href="{!$Setup.Endpoints__c.Site_URL__c}">Make-A-Wish
 Volunteer Center</a></span>.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">We look forward to
 seeing you soon.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Volunteer_Orientation_Training__c.Orientation_Training_email_signature__c}<o:p></o:p></span></p><p class="MsoNormal" style="font-size: 12pt; margin-bottom: 0.0001pt;">

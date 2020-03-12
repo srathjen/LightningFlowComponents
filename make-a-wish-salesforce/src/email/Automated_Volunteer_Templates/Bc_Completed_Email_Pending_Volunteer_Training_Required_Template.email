@@ -7,7 +7,7 @@ white"><span style="font-size: 12pt; font-family: Lato, sans-serif;">We have rev
 results of your criminal background check and are excited to welcome you to
 register for the required training for your selected volunteer role.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
 white"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Please log in to
-the&nbsp;<span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish
+the&nbsp;<span style="color:blue"><a href="{!$Setup.Endpoints__c.Site_URL__c}">Make-A-Wish
 Volunteer Center</a></span>&nbsp;and click&nbsp;<b>"Continue Process"</b>&nbsp;to
 register for the next available training.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
 white"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Thank you for your

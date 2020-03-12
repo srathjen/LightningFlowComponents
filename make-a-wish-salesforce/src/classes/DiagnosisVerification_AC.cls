@@ -1215,6 +1215,8 @@ try{*/
 
             String authorizationHeader = '<DocuSignCredentials><Username>{!$Credential.Username}</Username><Password>{!$Credential.Password}</Password><IntegratorKey>' + IntegratorKey + '</IntegratorKey></DocuSignCredentials>';
 
+            System.debug(JSON.serializePretty(authorizationHeader));
+
             String boundary = 'AAA';
             recId = currLead.Id;
             Pagereference PDF = Page.LeadPartA_ApprovalForm_VF_PDF;
@@ -1287,6 +1289,8 @@ try{*/
             Http http = new Http();
             HTTPResponse res = new HttpResponse();
 
+            System.debug(req);
+
             if (!Test.isRunningTest()) {
                 res = http.send(req);
             } else {
@@ -1320,7 +1324,7 @@ try{*/
                         '    "recipientId": "1",' +
                         '    "clientUserId": "1",' +
                         '    "authenticationMethod": "None",' +
-                        '    "returnUrl": "' + label.DvRetrunUrl + '/verification_success' + '"' +
+                        '    "returnUrl": "' + Endpoints__c.getInstance().DVReturn_URL__c + '/verification_success' + '"' +
                         '}';
                     request.setBody(jsonPayload);
                     if (!Test.isRunningTest()) {

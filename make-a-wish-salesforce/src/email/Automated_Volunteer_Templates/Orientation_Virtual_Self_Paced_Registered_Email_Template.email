@@ -5,7 +5,7 @@
 <br>
 You have successfully registered for an orientation to learn more about
 volunteering with&nbsp;</span>Make-A-Wish<span style="background:white">.
-Please log in to the&nbsp;</span><span style="color:blue"><a href="{!$Label.Site_Url}">Make-A-Wish
+Please log in to the&nbsp;</span><span style="color:blue"><a href="{!$Setup.Endpoints__c.Site_URL__c}">Make-A-Wish
 Volunteer Center</a></span>&nbsp;<span style="background:white">using your
 username listed below to complete this orientation.</span><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">Username:&nbsp;</span><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!User.Email}<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">Once
 you've logged in, click&nbsp;<b>"Become A Volunteer"</b>&nbsp;and

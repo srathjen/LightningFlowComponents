@@ -203,7 +203,6 @@ public class VolunteerLanding_AC {
 			return page;
 		} catch (Exception ex) {
 			new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerLanding_AC', 'EnterchapterPage', recId, ex, Logvalue));
-			//ex.setMessage(Label.Debug_log_error_message);
 			ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
 			ApexPages.addMessage(myMsg);
 			return null;
@@ -313,7 +312,6 @@ public class VolunteerLanding_AC {
 			}
 		} catch (Exception ex) {
 			new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerLanding_AC', 'COICheck', recId, ex, Logvalue));
-			//ex.setMessage(Label.Debug_log_error_message);
 			ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
 			ApexPages.addMessage(myMsg);
 		}
@@ -326,7 +324,6 @@ public class VolunteerLanding_AC {
 		String Logvalue, recId;
 		try {
 			String volunteerTaskRtLabel = Constant_AC.VOLUNTEER_TASK_RT_LABEL;
-//			Integer bcDays = Integer.valueOf(Label.B_C_No_of_days_for_expiration);
 			User currUser = [
 					SELECT ContactId
 					FROM User
@@ -428,7 +425,6 @@ public class VolunteerLanding_AC {
 			}
 		} catch (Exception ex) {
 			new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerLanding_AC', 'BackgroundCheck', recId, ex, Logvalue));
-			//ex.setMessage(Label.Debug_log_error_message);
 			ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
 			ApexPages.addMessage(myMsg);
 
@@ -486,7 +482,6 @@ public class VolunteerLanding_AC {
 			}
 		} catch (Exception ex) {
 			new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerLanding_AC', 'DisplayBroadCast', recId, ex, Logvalue));
-			//ex.setMessage(Label.Debug_log_error_message);
 			ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
 			ApexPages.addMessage(myMsg);
 		}
@@ -606,7 +601,6 @@ public class VolunteerLanding_AC {
 			}
 		} catch (Exception ex) {
 			new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerLanding_AC', 'DisplayTraining', recId, ex, Logvalue));
-			//ex.setMessage(Label.Debug_log_error_message);
 			ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
 			ApexPages.addMessage(myMsg);
 		}
@@ -722,7 +716,6 @@ public class VolunteerLanding_AC {
 			return page;
 		} catch (Exception ex) {
 			new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerLanding_AC', 'confirmBackGroundCheck', recId, ex, Logvalue));
-			//ex.setMessage(Label.Debug_log_error_message);
 			ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
 			ApexPages.addMessage(myMsg);
 			return null;
@@ -767,7 +760,6 @@ public class VolunteerLanding_AC {
 				}
 			} catch (Exception ex) {
 				new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerLanding_AC', 'broadCastCancel', null, ex, Logvalue));
-				//ex.setMessage(Label.Debug_log_error_message);
 				ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
 				ApexPages.addMessage(myMsg);
 			}
@@ -909,7 +901,7 @@ public class VolunteerLanding_AC {
 						'    "recipientId": "1",' +
 						'    "clientUserId": "1",' +
 						'    "authenticationMethod": "None",' +
-						'    "returnUrl": "' + Label.Site_Url + '/' + pageName + '"' +
+						'    "returnUrl": "' + Endpoints__c.getInstance().Site_URL__c + '/' + pageName + '"' +
 						'}';
 				request.setBody(jsonPayload);
 				Logvalue = String.valueOf(request);
@@ -944,7 +936,6 @@ public class VolunteerLanding_AC {
 			return null;
 		} catch (Exception ex) {
 			new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerLanding_AC', 'confirmConflict', recId, ex, Logvalue));
-			//ex.setMessage(Label.Debug_log_error_message);
 			ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
 			ApexPages.addMessage(myMsg);
 			return null;
@@ -1003,7 +994,6 @@ public class VolunteerLanding_AC {
 			}
 		} catch (Exception ex) {
 			new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerLanding_AC', 'hidePopup', recId, ex, Logvalue));
-			//ex.setMessage(Label.Debug_log_error_message);
 			ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
 			ApexPages.addMessage(myMsg);
 		}
