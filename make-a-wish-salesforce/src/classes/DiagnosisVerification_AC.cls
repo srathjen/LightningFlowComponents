@@ -1,4 +1,4 @@
-/****************************************************************************************************************
+/*****************************************************************************************************************
 Author      : MST Solutions
 Date        : 10/4/2016
 Description : This form is for Medical Professionals to fill up the Medical Summary Reports about the Wish child
@@ -14,7 +14,7 @@ Modification Log:
               01/02/2020 - CSmith - SIW-342 All changes reverted.
 1. 01/09/2020 - Manoj      - SIW-287 : Mapped newly created fields to insert values in lead records upon submission of DV form.
 2. 04/02/2020 - Manoj      - SIW-379 : Mapped 'Travel_Restriction__c' field in lead records based on user selection.
-******************************************************************************************************************/
+*******************************************************************************************************************/
 public class DiagnosisVerification_AC {
     private transient Map<String, List<Medical_Questions__c>> condDesMedicalQuestionMap;
     public list<DiagnosisWrapper> diagnosisVerificationWrapperLst { get; set; }
