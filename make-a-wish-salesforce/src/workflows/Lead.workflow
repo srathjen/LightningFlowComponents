@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
     <alerts>
         <fullName>Diagnosis_Form_Email_Alert</fullName>
         <description>Diagnosis Form Email Alert</description>
@@ -8,8 +7,7 @@
             <field>HiddenMedicalProfessionalEmail__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>wvc@wish.org</senderAddress>
-        <senderType>OrgWideEmailAddress</senderType>
+        <senderType>CurrentUser</senderType>
         <template>unfiled$public/Part_A_Form_Email_Template</template>
     </alerts>
     <alerts>
@@ -20,8 +18,7 @@
             <field>Best_contact_for_Physician_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>wvc@wish.org</senderAddress>
-        <senderType>OrgWideEmailAddress</senderType>
+        <senderType>CurrentUser</senderType>
         <template>unfiled$public/Part_A_Form_Email_Template</template>
     </alerts>
     <alerts>
@@ -142,19 +139,19 @@
         <fullName>Additional_Parent_Guardian_Phone</fullName>
         <field>Additional_Parent_Phone__c</field>
         <formula>IF(
-LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;))= 11,
-&quot;(&quot;&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),2,3)&amp;
-&quot;) &quot;&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),5,3)&amp;
-&quot;-&quot;&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),8,4),
-&quot;(&quot;&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),1,3)&amp;
-&quot;) &quot;&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),4,3)&amp;
-&quot;-&quot;&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),7,4)
+LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""))= 11,
+"("&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),2,3)&amp;
+") "&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),5,3)&amp;
+"-"&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),8,4),
+"("&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),1,3)&amp;
+") "&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),4,3)&amp;
+"-"&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),7,4)
 )</formula>
         <name>Additional Parent/Guardian Phone</name>
         <notifyAssignee>false</notifyAssignee>
@@ -165,19 +162,19 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot
         <fullName>Alt_Phone_Update</fullName>
         <field>Alternate1MedProfessionalPhone__c</field>
         <formula>IF(
-LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;))= 11,
-&quot;(&quot;&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),2,3)&amp;
-&quot;) &quot;&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),5,3)&amp;
-&quot;-&quot;&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),8,4),
-&quot;(&quot;&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),1,3)&amp;
-&quot;) &quot;&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),4,3)&amp;
-&quot;-&quot;&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),7,4)
+LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""))= 11,
+"("&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),2,3)&amp;
+") "&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),5,3)&amp;
+"-"&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),8,4),
+"("&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),1,3)&amp;
+") "&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),4,3)&amp;
+"-"&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),7,4)
 )</formula>
         <name>Alt Phone Update</name>
         <notifyAssignee>false</notifyAssignee>
@@ -189,19 +186,19 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot
         <description>SIW-147 this is to support the duplicate check to match with custom duplicate rules - format standard lead phone to (XXX) XXX-XXXX</description>
         <field>Phone</field>
         <formula>IF(
-LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;))= 11,
-&quot;(&quot;&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),2,3)&amp;
-&quot;) &quot;&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),5,3)&amp;
-&quot;-&quot;&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),8,4),
-&quot;(&quot;&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),1,3)&amp;
-&quot;) &quot;&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),4,3)&amp;
-&quot;-&quot;&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),7,4)
+LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""))= 11,
+"("&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),2,3)&amp;
+") "&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),5,3)&amp;
+"-"&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),8,4),
+"("&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),1,3)&amp;
+") "&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),4,3)&amp;
+"-"&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),7,4)
 )</formula>
         <name>Update Standard Lead Phone</name>
         <notifyAssignee>false</notifyAssignee>
@@ -292,7 +289,7 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot
         </actions>
         <active>true</active>
         <description>This is in place to update the phone to a standard phone format for Duplicate Rule Matching</description>
-        <formula>AND(   NOT(     AND(       LEN(Phone) == 14,       LEFT(Phone,1) == &apos;(&apos;,       ISNUMBER(LEFT(RIGHT(Phone,13),3)),       LEFT(RIGHT(Phone,10),1) == &apos;)&apos;,       LEFT(RIGHT(Phone,9),1) == &apos; &apos;,       ISNUMBER(LEFT(RIGHT(Phone,8),3)),       LEFT(RIGHT(Phone,5),1) == &apos;-&apos;,       ISNUMBER(RIGHT(Phone,4))     )   ),    ISNUMBER(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;)),    OR(     LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone ,&quot;.&quot;,&apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;))=10,     AND(       LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone,&quot;.&quot;,&apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;))=11,       LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone ,&quot;.&quot;,&apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),1)=&quot;1&quot;     )   ) )</formula>
+        <formula>AND(   NOT(     AND(       LEN(Phone) == 14,       LEFT(Phone,1) == '(',       ISNUMBER(LEFT(RIGHT(Phone,13),3)),       LEFT(RIGHT(Phone,10),1) == ')',       LEFT(RIGHT(Phone,9),1) == ' ',       ISNUMBER(LEFT(RIGHT(Phone,8),3)),       LEFT(RIGHT(Phone,5),1) == '-',       ISNUMBER(RIGHT(Phone,4))     )   ),    ISNUMBER(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone , ".", ''),"-",""),"+","")),    OR(     LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone ,".",''),"-",""),"+",""))=10,     AND(       LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone,".",''),"-",""),"+",""))=11,       LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone ,".",''),"-",""),"+",""),1)="1"     )   ) )</formula>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
@@ -307,7 +304,7 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot
         </actions>
         <active>true</active>
         <description>Whenever chapter updates based on the Postal Code, It will send an email notification to Lead Owner.</description>
-        <formula>ISCHANGED(Hidden_Chapter_Change_Confirmation__c) &amp;&amp; NOT(ISCHANGED(ChapterName__c)) &amp;&amp; $Profile.Name != &apos;Integration&apos;</formula>
+        <formula>ISCHANGED(Hidden_Chapter_Change_Confirmation__c) &amp;&amp; NOT(ISCHANGED(ChapterName__c)) &amp;&amp; $Profile.Name != 'Integration'</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -331,7 +328,7 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot
             <operation>notEqual</operation>
             <value>Integration</value>
         </criteriaItems>
-        <description>Notify the lead owner whenever a lead is created with Is there a medical reason to move quickly field equal to &apos;Yes&apos;</description>
+        <description>Notify the lead owner whenever a lead is created with Is there a medical reason to move quickly field equal to 'Yes'</description>
         <triggerType>onCreateOnly</triggerType>
     </rules>
     <rules>
@@ -473,7 +470,7 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot
         <priority>Normal</priority>
         <protected>false</protected>
         <status>Completed</status>
-        <subject>Lead ET : We&apos;ve Received your Referral Inquiry</subject>
+        <subject>Lead ET : We've Received your Referral Inquiry</subject>
     </tasks>
     <tasks>
         <fullName>Lead_ET_Your_patient_is_eligible_for_a_wish</fullName>
