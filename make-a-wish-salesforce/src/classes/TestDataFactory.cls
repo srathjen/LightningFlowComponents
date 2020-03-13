@@ -17,7 +17,7 @@ public class TestDataFactory {
                         LIMIT 1
                 ];
             }
-			return adminUser;
+            return adminUser;
         }
         set;
     }
@@ -191,13 +191,20 @@ public class TestDataFactory {
     }
 
     public static List<User> createCommunityUser(Integer num) {
-        // Community users require associated contact
-        List<User> users = createUser(num);
-        List<Contact> contacts = createContact(num);
-        insert contacts;
-
         // Must run as admin to create community user
+        List<User> users = createUser(num);
         System.runAs (adminUser) {
+            // Community users require associated contact/account
+            List<Account> accounts = createAccount(num);
+            insert accounts;
+
+            List<Contact> contacts = createContact(num);
+            for (Integer i = 0; i < num; i++) {
+                contacts[i].AccountId = accounts[i].Id;
+            }
+            insert contacts;
+
+            // Create customer portal user
             UserRole userRole = [
                     SELECT PortalType, PortalAccountId
                     FROM UserRole
@@ -211,10 +218,10 @@ public class TestDataFactory {
                     LIMIT 1
             ];
             for (Integer i = 0; i < num; i++) {
-                User u = users.get(i);
+                User u = users[i];
                 u.UserRoleId = userRole.Id;
                 u.ProfileId = profile.Id;
-                u.ContactId = contacts.get(i).Id;
+                u.ContactId = contacts[i].Id;
             }
         }
         return users;
