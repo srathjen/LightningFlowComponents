@@ -219,7 +219,7 @@ public class TestDataFactory {
             ];
             for (Integer i = 0; i < num; i++) {
                 User u = users[i];
-                u.UserRoleId = userRole.Id;
+                //u.UserRoleId = userRole.Id;
                 u.ProfileId = profile.Id;
                 u.ContactId = contacts[i].Id;
                 u.PortalRole = 'Manager';
