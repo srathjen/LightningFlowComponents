@@ -12,7 +12,8 @@ public class TestDataFactory {
                 adminUser = [
                         SELECT Id
                         FROM User
-                        WHERE Profile.Name = 'System Administrator' AND IsActive = TRUE
+                        WHERE Profile.Name = 'System Administrator' AND UserRole.Name != NULL AND UserRole.Name != 'CustomerPortal'
+                        AND IsActive = TRUE
                         LIMIT 1
                 ];
             }
