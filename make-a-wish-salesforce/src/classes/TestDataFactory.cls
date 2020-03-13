@@ -222,6 +222,7 @@ public class TestDataFactory {
                 u.UserRoleId = userRole.Id;
                 u.ProfileId = profile.Id;
                 u.ContactId = contacts[i].Id;
+                u.PortalRole = 'Manager';
             }
         }
         return users;
