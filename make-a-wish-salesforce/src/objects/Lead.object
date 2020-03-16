@@ -7387,11 +7387,6 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Child_Age__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
             <field>DOB__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
