@@ -299,6 +299,9 @@
         <label>myDecision</label>
         <locationX>50</locationX>
         <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myDecision13</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>default</defaultConnectorLabel>
         <rules>
             <name>myRule_1</name>
@@ -619,7 +622,35 @@
             <label>Check Case Fields Are Changed</label>
         </rules>
     </decisions>
-    <description>update BirthDate, Child Name,  Primary Diagnosis, Wish Date, Wish Type fields in Case File when these fields changed on Case.</description>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision13</name>
+        <label>myDecision13</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_14</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_14</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_14_A1</targetReference>
+            </connector>
+            <label>Subject Edited</label>
+        </rules>
+    </decisions>
+    <description>update BirthDate, Child Name,  Primary Diagnosis, Wish Date, Wish Type fields in Case File when these fields changed on Case. Change Subject to First + Last Name if user edits the Subject.</description>
     <formulas>
         <processMetadataValues>
             <name>originalFormula</name>
@@ -629,7 +660,7 @@
 TEXT(YEAR(TODAY()) - YEAR([Case].Contact.Birthdate  ) )</stringValue>
             </value>
         </processMetadataValues>
-        <name>formula_11_myRule_1_A1_3522669567</name>
+        <name>formula_11_myRule_1_A1_5419035873</name>
         <dataType>String</dataType>
         <expression>
 
@@ -642,11 +673,33 @@ TEXT(YEAR(TODAY()) - YEAR({!myVariable_current.Contact.Birthdate}  ) )</expressi
                 <stringValue> TEXT([Case].Start_Date__c) </stringValue>
             </value>
         </processMetadataValues>
-        <name>formula_12_myRule_1_A1_8898709910</name>
+        <name>formula_12_myRule_1_A1_2262956265</name>
         <dataType>String</dataType>
         <expression> TEXT({!myVariable_current.Start_Date__c})</expression>
     </formulas>
-    <interviewLabel>Case_Fields_update_on_Case_File-11_InterviewLabel</interviewLabel>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>[Case].Contact.FirstName + &apos; &apos; + [Case].Contact.LastName + &apos; &apos; + [Case].Unique_Wish_Record_Identifier__c </stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_15_myRule_14_A1_2513508655</name>
+        <dataType>String</dataType>
+        <expression>{!myVariable_current.Contact.FirstName} + &apos; &apos; + {!myVariable_current.Contact.LastName} + &apos; &apos; + {!myVariable_current.Unique_Wish_Record_Identifier__c}</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>NOT(ISNEW()) &amp;&amp; ISCHANGED([Case].Subject)  &amp;&amp; [Case].RecordType.Name = &apos;Wish&apos;</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_14</name>
+        <dataType>Boolean</dataType>
+        <expression>NOT(ISNEW()) &amp;&amp; ISCHANGED({!myVariable_current.Subject})  &amp;&amp; {!myVariable_current.RecordType.Name} = &apos;Wish&apos;</expression>
+    </formulas>
+    <interviewLabel>Case_Fields_update_on_Case_File-10_InterviewLabel</interviewLabel>
     <label>Case Fields update on Case File</label>
     <processMetadataValues>
         <name>ObjectType</name>
@@ -677,6 +730,86 @@ TEXT(YEAR(TODAY()) - YEAR({!myVariable_current.Contact.Birthdate}  ) )</expressi
         <processMetadataValues>
             <name>evaluationType</name>
             <value>
+                <stringValue>always</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>extraTypeInfo</name>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>isChildRelationship</name>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>reference</name>
+            <value>
+                <stringValue>[Case]</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>referenceTargetField</name>
+        </processMetadataValues>
+        <name>myRule_14_A1</name>
+        <label>Set Case Subject to default</label>
+        <locationX>1400</locationX>
+        <locationY>200</locationY>
+        <filters>
+            <processMetadataValues>
+                <name>implicit</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </processMetadataValues>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>Subject</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideReferenceTo</name>
+                <value>
+                    <stringValue></stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Formula</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>Subject</field>
+            <value>
+                <elementReference>formula_15_myRule_14_A1_2513508655</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <recordUpdates>
+        <processMetadataValues>
+            <name>evaluationType</name>
+            <value>
                 <stringValue>criteria</stringValue>
             </value>
         </processMetadataValues>
@@ -702,6 +835,9 @@ TEXT(YEAR(TODAY()) - YEAR({!myVariable_current.Contact.Birthdate}  ) )</expressi
         <label>Update Case File Fields</label>
         <locationX>100</locationX>
         <locationY>200</locationY>
+        <connector>
+            <targetReference>myDecision13</targetReference>
+        </connector>
         <filters>
             <processMetadataValues>
                 <name>implicit</name>
@@ -815,7 +951,7 @@ TEXT(YEAR(TODAY()) - YEAR({!myVariable_current.Contact.Birthdate}  ) )</expressi
             </processMetadataValues>
             <field>Age__c</field>
             <value>
-                <elementReference>formula_11_myRule_1_A1_3522669567</elementReference>
+                <elementReference>formula_11_myRule_1_A1_5419035873</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -995,7 +1131,7 @@ TEXT(YEAR(TODAY()) - YEAR({!myVariable_current.Contact.Birthdate}  ) )</expressi
             </processMetadataValues>
             <field>Wish_Date__c</field>
             <value>
-                <elementReference>formula_12_myRule_1_A1_8898709910</elementReference>
+                <elementReference>formula_12_myRule_1_A1_2262956265</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -1031,7 +1167,7 @@ TEXT(YEAR(TODAY()) - YEAR({!myVariable_current.Contact.Birthdate}  ) )</expressi
         <object>cg__CaseFile__c</object>
     </recordUpdates>
     <startElementReference>isChangedDecision2_myRule_1_Birthdate</startElementReference>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>myVariable_current</name>
         <dataType>SObject</dataType>
