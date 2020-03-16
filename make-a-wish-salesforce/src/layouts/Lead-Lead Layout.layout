@@ -75,6 +75,10 @@
                 <showScrollbars>false</showScrollbars>
                 <width>0</width>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Debug__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -388,10 +392,6 @@
                 <field>Primary_Medical_Professional_Type_Other__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
-                <field>Hospital_Treatment_Facility_Treating__c</field>
-            </layoutItems>
-            <layoutItems>
                 <emptySpace>true</emptySpace>
             </layoutItems>
             <layoutItems>
@@ -423,6 +423,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Department__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Required</behavior>
+                <field>Hospital_Treatment_Facility_Treating__c</field>
             </layoutItems>
             <layoutItems>
                 <emptySpace>true</emptySpace>
