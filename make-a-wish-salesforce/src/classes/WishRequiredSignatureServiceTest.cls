@@ -25,9 +25,11 @@ public class WishRequiredSignatureServiceTest {
 		accountsDataFactory[1].Intake_Manager__c = UserInfo.getUserId();
 		accountsDataFactory[1].Qualified_Wish_Owner__c = UserInfo.getUserId();
 		insert accountsDataFactory;
+
 		ICD_Codes__c icdCode = new ICD_Codes__c();
 		icdCode.Name = 'Q917';
 		insert icdCode;
+
 		List<Contact> contactsDataFactory = TestDataFactory.createContact(4);
 		contactsDataFactory[0].RecordTypeId = WISH_CHILD_RECORD_TYPE_ID;
 		contactsDataFactory[0].ICD_10_Code__c = icdCode.Id;
@@ -41,6 +43,7 @@ public class WishRequiredSignatureServiceTest {
 		contactsDataFactory[3].Birthdate = System.today().addYears(-18);
 		contactsDataFactory[3].OwnerId = UserInfo.getUserId();
 		insert contactsDataFactory;
+
 		List<Case> casesDataFactory = TestDataFactory.createCase(1);
 		casesDataFactory[0].RecordTypeId = WISH_RECORD_TYPE_ID;
 		casesDataFactory[0].ChapterName__c = accountsDataFactory[1].Id;
@@ -50,6 +53,7 @@ public class WishRequiredSignatureServiceTest {
 		casesDataFactory[0].Status = 'Qualified';
 		casesDataFactory[0].OwnerId = UserInfo.getUserId();
 		insert casesDataFactory;
+
 		List<Wish_Affiliation__c> wishAffiliationsDataFactory = TestDataFactory.createWishAffiliation(2);
 		wishAffiliationsDataFactory[0].Contact__c = contactsDataFactory[1].Id;
 		wishAffiliationsDataFactory[0].Wish_Affiliation_Type__c = 'Approved Participant' ;
@@ -58,6 +62,7 @@ public class WishRequiredSignatureServiceTest {
 		wishAffiliationsDataFactory[1].Wish_Affiliation_Type__c = 'Approved Participant' ;
 		wishAffiliationsDataFactory[1].Wish__c = casesDataFactory[0].Id;
 		insert wishAffiliationsDataFactory;
+
 		List<Wish_Signature_Forms__c> wishSignFormsDataFactory = TestDataFactory.createWishSignatureForm(1);
 		wishSignFormsDataFactory[0].Form_Type__c = 'Medical';
 		wishSignFormsDataFactory[0].Auto_add_for_Participant__c = true;
@@ -66,6 +71,7 @@ public class WishRequiredSignatureServiceTest {
 		wishSignFormsDataFactory[0].Auto_add_for_Wish_Child_Guardian__c = true;
 		wishSignFormsDataFactory[0].Diagnosis_Verification_for_Lead_Convert__c = true;
 		insert wishSignFormsDataFactory;
+
 		List<Wish_Signature_Chapter_Form__c> wishSignChapFormsDataFactory = TestDataFactory.createWishSignatureChapterForm(1);
 		wishSignChapFormsDataFactory[0].Chapter_Account__c = accountsDataFactory[1].Id;
 		wishSignChapFormsDataFactory[0].Wish_Signature_Form__c = wishSignFormsDataFactory[0].Id;
