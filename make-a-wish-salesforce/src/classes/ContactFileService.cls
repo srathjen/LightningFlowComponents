@@ -5,10 +5,10 @@
  */
 public class ContactFileService {
 
-    private final static String CONTACT_FILE_CONTENT_TYPE_FOLDER = Constant_AC.CONTACT_FILE_CONTENT_TYPE_FOLDER;
-    private final static String CONTACT_DOCUMENTS_FOLDER = Constant_AC.CONTACT_FILE_NAME_DOCUMENTS;
-    private static final String CONTACT_PHOTOS_FOLDER = Constant_AC.CONTACT_FILE_NAME_PHOTOS;
-    private static final String CONTACT_VIDEOS_FOLDER = Constant_AC.CONTACT_FILE_NAME_VIDEOS;
+    private final static String CONTACT_FILE_CONTENT_TYPE_FOLDER = Constant_AC.FILE_CONTENT_TYPE_FOLDER;
+    private final static String CONTACT_DOCUMENTS_FOLDER = Constant_AC.FILE_NAME_DOCUMENTS;
+    private static final String CONTACT_PHOTOS_FOLDER = Constant_AC.FILE_NAME_PHOTOS;
+    private static final String CONTACT_VIDEOS_FOLDER = Constant_AC.FILE_NAME_VIDEOS;
 
     public static List<cg__ContactFile__c> buildFileFoldersLeadConvert(Id contactId) {
         List<cg__ContactFile__c> leadConvertFileFolders = new List<cg__ContactFile__c>();

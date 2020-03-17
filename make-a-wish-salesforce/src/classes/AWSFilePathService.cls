@@ -8,8 +8,7 @@ Modification Log:
 *******************************************************************************************************************/
 public without sharing class AWSFilePathService {
 
-    private static final String DEFAULT_FILEPATH =
-            'https://s3-us-west-2.amazonaws.com/mawafilesfullcopy/00Q5B000001s3bt/a1U5B0000000Df1UAE/MedicalSummaryReport.txt?response-content-disposition=attachment&filename=MedicalSummaryReport.txt&AWSAccessKeyId=AKIAIEYUJRAAMNE7W7NA&Expires=1509032442&Signature=Yx0UX2ADZxo9GbbDFH+q7opBzwU=';
+    private static final String DEFAULT_FILEPATH = Label.AWSDefaultFilePathPrefix;
 
     private static final Integer DEFAULT_TIME_VALUE = 365 * 24 * 60 * 60; // Years worth in seconds
 
@@ -29,7 +28,7 @@ public without sharing class AWSFilePathService {
             List<Wish_Required_Signature_File__c > wishSignFiles = [
                     SELECT Id, Wish_Required_Signature__c, File_Name__c, File_Path__c
                     FROM Wish_Required_Signature_File__c
-                    WHERE Wish_Required_Signature_File__c.Content_Type__c != 'Folder' AND Wish_Required_Signature_File__c.Id IN :fileRecordIds
+                    WHERE Wish_Required_Signature_File__c.Content_Type__c != :Constant_AC.FILE_CONTENT_TYPE_FOLDER AND Wish_Required_Signature_File__c.Id IN :fileRecordIds
             ];
 
             for (Wish_Required_Signature_File__c dbWishSignFileRec : wishSignFiles) {
@@ -81,7 +80,7 @@ public without sharing class AWSFilePathService {
             List<cg__AccountFile__c> accountFiles = [
                     SELECT Id, cg__Account__c, cg__File_Name__c, File_Path__c
                     FROM cg__AccountFile__c
-                    WHERE cg__AccountFile__c.cg__Content_Type__c != 'Folder' AND cg__AccountFile__c.Id IN :fileRecordIds
+                    WHERE cg__AccountFile__c.cg__Content_Type__c != :Constant_AC.FILE_CONTENT_TYPE_FOLDER AND cg__AccountFile__c.Id IN :fileRecordIds
             ];
 
             for (cg__AccountFile__c dbAccountFileRec : accountFiles) {
@@ -127,7 +126,7 @@ public without sharing class AWSFilePathService {
             List<cg__ContactFile__c> contactFiles = [
                     SELECT Id, cg__Contact__c, cg__File_Name__c, File_Path__c
                     FROM cg__ContactFile__c
-                    WHERE cg__Content_Type__c != 'Folder' AND cg__ContactFile__c.Id IN :fileRecordIds
+                    WHERE cg__Content_Type__c != :Constant_AC.FILE_CONTENT_TYPE_FOLDER AND cg__ContactFile__c.Id IN :fileRecordIds
             ];
 
             for (cg__ContactFile__c dbContactFileRec : contactFiles) {
@@ -173,7 +172,7 @@ public without sharing class AWSFilePathService {
             List<cg__CaseFile__c> caseFiles = [
                     SELECT Id, cg__Case__c, cg__File_Name__c, File_Path__c
                     FROM cg__CaseFile__c
-                    WHERE cg__CaseFile__c.cg__Content_Type__c != 'Folder' AND cg__CaseFile__c.Id IN :fileRecordIds
+                    WHERE cg__CaseFile__c.cg__Content_Type__c != :Constant_AC.FILE_CONTENT_TYPE_FOLDER AND cg__CaseFile__c.Id IN :fileRecordIds
             ];
 
             for (cg__CaseFile__c dbCaseFileRec : caseFiles) {
@@ -219,7 +218,7 @@ public without sharing class AWSFilePathService {
             List<Background_Check_File__c> bcFiles = [
                     SELECT Id, Parent__c, File_Name__c, File_Path__c
                     FROM Background_Check_File__c
-                    WHERE Background_Check_File__c.Content_Type__c != 'Folder' AND Background_Check_File__c.Id IN :fileRecordIds
+                    WHERE Background_Check_File__c.Content_Type__c != :Constant_AC.FILE_CONTENT_TYPE_FOLDER AND Background_Check_File__c.Id IN :fileRecordIds
             ];
 
             for (Background_Check_File__c dbbcFileRec : bcFiles) {
@@ -265,7 +264,7 @@ public without sharing class AWSFilePathService {
             List<InkindDon_reimburseFile__c> drFiles = [
                     SELECT Id, Parent__c, File_Name__c, File_Path__c
                     FROM InkindDon_reimburseFile__c
-                    WHERE InkindDon_reimburseFile__c.Content_Type__c != 'Folder' AND InkindDon_reimburseFile__c.Id IN :fileRecordIds
+                    WHERE InkindDon_reimburseFile__c.Content_Type__c != :Constant_AC.FILE_CONTENT_TYPE_FOLDER AND InkindDon_reimburseFile__c.Id IN :fileRecordIds
             ];
 
             for (InkindDon_reimburseFile__c dbdrFileRec : drFiles) {

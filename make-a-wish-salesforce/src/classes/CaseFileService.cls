@@ -24,9 +24,9 @@ public with sharing class CaseFileService {
             for (cg__CaseFile__c caseFile : [
                     SELECT Id, cg__Content_Type__c, cg__File_Name__c, cg__Case__c, cg__Case__r.CaseNumber, cg__Parent_Folder_Id__c
                     FROM cg__CaseFile__c
-                    WHERE cg__Case__c IN :caseId AND cg__Content_Type__c = :Constant_AC.CASE_FILE_CONTENT_TYPE_FOLDER
+                    WHERE cg__Case__c IN :caseId AND cg__Content_Type__c = :Constant_AC.FILE_CONTENT_TYPE_FOLDER
             ]) {
-                if (caseFile.cg__File_Name__c == Constant_AC.CASE_FILE_NAME_DOCUMENTS) {
+                if (caseFile.cg__File_Name__c == Constant_AC.FILE_NAME_DOCUMENTS) {
                     caseFileMap.put(caseFile.cg__Case__c, caseFile.Id);
                 }
                 folderIdsMap.put(caseFile.Id, caseFile);
@@ -40,7 +40,7 @@ public with sharing class CaseFileService {
                 List<cg__CaseFile__c> updateCaseFileList = new List<cg__CaseFile__c>();
                 for (cg__CaseFile__c newCaseFile : newFileMap.values()) {
                     if (caseFileMap.containsKey(newCaseFile.cg__Case__c)) {
-                        if (newCaseFile.cg__Content_Type__c != Constant_AC.CASE_FILE_CONTENT_TYPE_FOLDER) {
+                        if (newCaseFile.cg__Content_Type__c != Constant_AC.FILE_CONTENT_TYPE_FOLDER) {
                             newCaseFile.cg__Parent_Folder_Id__c = caseFileMap.get(newCaseFile.cg__Case__c);
                             updateCaseFileList.add(newCaseFile);
                         }

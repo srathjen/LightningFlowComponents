@@ -118,11 +118,6 @@ public class Constant_AC {
 	public static final String LEAD_MEDICAL_REASON_FOR_MOVING_QUICKLY_YES = 'Yes';
 
 	/**
-	 * Lead File Constants
-	 */
-	public static final String LEAD_FILE_CONTENT_TYPE_FOLDER = 'Folder';
-
-	/**
 	 * Case Constants
 	 */
 	public static final String CASE_STATUS_WISH_DETERMINED = 'Wish Determined';
@@ -213,20 +208,6 @@ public class Constant_AC {
 	public static final String CONTACT_GENDER_MALE = 'Male';
 	public static final String CONTACT_GENDER_FEMALE = 'Female';
 	public static final String CONTACT_NAME_UNKNOWN = 'Unknown';
-
-	/**
-	 * Case File Constants
-	 */
-	public final static String CASE_FILE_CONTENT_TYPE_FOLDER = 'Folder';
-	public final static String CASE_FILE_NAME_DOCUMENTS = 'Documents';
-
-	/**
-	 * Contact File Constants
-	 */
-	public final static String CONTACT_FILE_CONTENT_TYPE_FOLDER = 'Folder';
-	public final static String CONTACT_FILE_NAME_DOCUMENTS = 'Documents';
-	public static final String CONTACT_FILE_NAME_PHOTOS = 'Photos';
-	public static final String CONTACT_FILE_NAME_VIDEOS = 'Videos';
 
 	/*
 	 * In Kind Reimbursement File Constants
@@ -332,4 +313,12 @@ public class Constant_AC {
 	 * Role Constants
 	 */
 	public static final String ROLE_NATIONAL_STAFF = 'National Staff';
+
+	/**
+	 * File Constants
+	 */
+	public static final String FILE_CONTENT_TYPE_FOLDER = 'Folder';
+	public static final String FILE_NAME_DOCUMENTS = 'Documents';
+	public static final String FILE_NAME_PHOTOS = 'Photos';
+	public static final String FILE_NAME_VIDEOS = 'Videos';
 }
