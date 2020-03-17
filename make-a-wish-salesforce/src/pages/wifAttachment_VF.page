@@ -4,7 +4,6 @@
     <apex:outputPanel rendered="{!isSaved}">
         <script>
             window.onload = function () {
-
                 parent.loader();
             }
         </script>
