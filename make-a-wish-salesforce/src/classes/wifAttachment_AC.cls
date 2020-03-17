@@ -28,14 +28,15 @@ public class wifAttachment_AC {
         for (cg__CaseFile__c caseFileFolders : [
                 SELECT Id
                 FROM cg__CaseFile__c
-                WHERE cg__Case__c = :recId AND cg__Content_Type__c = 'Folder' AND (cg__File_Name__c = 'Staff - Private' OR cg__File_Name__c = 'Financials')
+                WHERE cg__Case__c = :recId AND cg__Content_Type__c = :Constant_AC.FILE_CONTENT_TYPE_FOLDER
+                AND (cg__File_Name__c = :Constant_AC.FILE_NAME_STAFF_PRIVATE OR cg__File_Name__c = :Constant_AC.FILE_NAME_FINANCIALS)
         ]) {
             folderIdSet.add(caseFileFolders.Id);
         }
         List<cg__CaseFile__c> attachmentList = [
                 SELECT Id, cg__Case__c, File_Path__c, cg__Description__c, cg__File_Name__c
                 FROM cg__CaseFile__c
-                WHERE cg__Case__c = :recId AND cg__Content_Type__c != 'Folder' AND cg__Parent_Folder_Id__c NOT IN :folderIdSet
+                WHERE cg__Case__c = :recId AND cg__Content_Type__c != :Constant_AC.FILE_CONTENT_TYPE_FOLDER AND cg__Parent_Folder_Id__c NOT IN :folderIdSet
         ];
         return attachmentList;
     }
@@ -47,7 +48,9 @@ public class wifAttachment_AC {
             insert newAttachment;
             newAttachment = new Attachment();
         }
-        PageReference redirect = new PageReference('/apex/wifAttachment_VF?id=' + recId + '&saved=true');
+        PageReference redirect = Page.wifAttachment_VF;
+        redirect.getParameters().put('id', recId);
+        redirect.getParameters().put('saved' , 'true');
         redirect.setRedirect(true);
         return redirect;
     }
@@ -59,7 +62,8 @@ public class wifAttachment_AC {
         } catch (Exception ex) {
             System.debug('Exception ex' + ex.getMessage());
         }
-        PageReference redirect = new PageReference('/apex/wifAttachment_VF?id=' + recId);
+        PageReference redirect = Page.wifAttachment_VF;
+        redirect.getParameters().put('id', recId);
         redirect.setRedirect(true);
         return redirect;
     }
