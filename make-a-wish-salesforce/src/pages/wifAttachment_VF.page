@@ -167,9 +167,7 @@
         </div>
         <apex:actionRegion>
             <script>
-
                 parent.resizeIframe(obj).querySelectorAll('wifupload');
-
             </script>
             <apex:outputPanel id="refreshBlck" rendered="{!If(Attachments.size != 0, true, false)}">
                 <table class="table table-maw table-hover">
