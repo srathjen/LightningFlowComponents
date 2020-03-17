@@ -33,7 +33,7 @@ public class LeadFileService {
 				SELECT Id
 				FROM cg__Lead_File__c
 				WHERE cg__Lead__c = :leadId
-				AND cg__Content_Type__c != :Constant_AC.LEAD_FILE_CONTENT_TYPE_FOLDER
+				AND cg__Content_Type__c != :Constant_AC.FILE_CONTENT_TYPE_FOLDER
 		];
 	}
 }
