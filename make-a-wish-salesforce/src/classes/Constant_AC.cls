@@ -319,6 +319,8 @@ public class Constant_AC {
 	 */
 	public static final String FILE_CONTENT_TYPE_FOLDER = 'Folder';
 	public static final String FILE_NAME_DOCUMENTS = 'Documents';
+	public static final String FILE_NAME_STAFF_PRIVATE = 'Staff - Private';
+	public static final String FILE_NAME_FINANCIALS = 'Financials';
 	public static final String FILE_NAME_PHOTOS = 'Photos';
 	public static final String FILE_NAME_VIDEOS = 'Videos';
 }
