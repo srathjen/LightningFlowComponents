@@ -57,7 +57,6 @@ public class wifAttachment_AC_Test {
         attach.Body = bodyBlob;
         wishFile.newAttachment = attach;
         wishFile.save();
-        wishFile.Refresh();
         wishFile.attachmentId = caseFile[0].Id;
         wishFile.RemoveAttachment();
         Test.stopTest();
