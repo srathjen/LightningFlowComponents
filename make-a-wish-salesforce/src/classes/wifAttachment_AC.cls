@@ -52,10 +52,6 @@ public class wifAttachment_AC {
         return redirect;
     }
 
-    //Used to refresh the block
-    public void Refresh() {
-    }
-
     //Used to delete the attachment from diagnosis verification form
     public PageReference RemoveAttachment() {
         try {
