@@ -4,7 +4,7 @@
 * @Date 2019-06-29
 */
 
-@isTest
+@IsTest
 private class WishSignatureControllerTest {
 
     private final static Id CHAPTER_RECORD_TYPE_ID = Constant_AC.CHAPTER_RT_ID;
@@ -28,10 +28,10 @@ private class WishSignatureControllerTest {
         contactsDataFactory[0].RecordTypeId = WISH_CHILD_RECORD_TYPE_ID;
         contactsDataFactory[0].ICD_10_Code__c = obj.Id;
         contactsDataFactory[1].RecordTypeId = WISH_FAMILY_RECORD_TYPE_ID;
-        contactsDataFactory[1].BirthDate = System.today().addYears(-20);
+        contactsDataFactory[1].Birthdate = System.today().addYears(-20);
         contactsDataFactory[2].RecordTypeId = MEDICAL_PROF_RECORD_TYPE_ID;
         contactsDataFactory[3].RecordTypeId = WISH_FAMILY_RECORD_TYPE_ID;
-        contactsDataFactory[3].BirthDate = System.today().addYears(-10);
+        contactsDataFactory[3].Birthdate = System.today().addYears(-10);
         insert contactsDataFactory;
 
         List<Case> casesDataFactory = TestDataFactory.createCase(1);
@@ -65,35 +65,35 @@ private class WishSignatureControllerTest {
         insert wishSignChapFormsDataFactory;
     }
 
-    @isTest
-    public static void testgetWishAffiliations() {
+    @IsTest
+    public static void testGetWishAffiliations() {
         Test.startTest();
         Case wishCase = [
                 SELECT Id
                 FROM Case
                 LIMIT 1
         ];
-        system.assertEquals(true, wishCase != null);
+        System.assertEquals(true, wishCase != null);
         List<WishSignatureController.childWrapper> wrapperList = WishSignatureController.getWishAffiliations(wishCase.Id);
-        system.assertEquals(false, wrapperList.isEmpty());
+        System.assertEquals(false, wrapperList.isEmpty());
         Test.stopTest();
     }
 
-    @isTest
-    public static void testgetWishAffiliationsMeds() {
+    @IsTest
+    public static void testGetWishAffiliationsMeds() {
         Test.startTest();
         Case wishCase = [
                 SELECT Id
                 FROM Case
                 LIMIT 1
         ];
-        system.assertEquals(true, wishCase != null);
+        System.assertEquals(true, wishCase != null);
         List<WishSignatureController.childWrapper> wrapperList = WishSignatureController.getWishAffiliationsMedical(wishCase.Id);
-        system.assertEquals(false, wrapperList.isEmpty());
+        System.assertEquals(false, wrapperList.isEmpty());
         Test.stopTest();
     }
 
-    @isTest
+    @IsTest
     public static void testSaveMedicalWishSignatures() {
         Test.startTest();
         Case wishCase = [
@@ -101,25 +101,25 @@ private class WishSignatureControllerTest {
                 FROM Case
                 LIMIT 1
         ];
-        system.assertEquals(true, wishCase != null);
+        System.assertEquals(true, wishCase != null);
 
         Wish_Signature_Forms__c wishForm = [
                 SELECT Id
                 FROM Wish_Signature_Forms__c
                 LIMIT 1
         ];
-        system.assertEquals(true, wishForm != null);
+        System.assertEquals(true, wishForm != null);
 
         Contact wishAdult = [
                 SELECT Id
-                From Contact
-                Where Current_Age__c > 18
+                FROM Contact
+                WHERE Current_Age__c > 18
         ];
-        system.assertEquals(true, wishAdult != null);
+        System.assertEquals(true, wishAdult != null);
         Wish_Affiliation__c wishAff = [
                 SELECT Id
-                From Wish_Affiliation__c
-                Where Contact__c = :wishAdult.Id
+                FROM Wish_Affiliation__c
+                WHERE Contact__c = :wishAdult.Id
         ];
 
         WishSignatureController.AdultWrapData wrapperData = new WishSignatureController.AdultWrapData();
@@ -131,11 +131,11 @@ private class WishSignatureControllerTest {
                 SELECT Id
                 FROM Wish_Required_Signature__c
         ];
-        system.assertEquals(false, wrsList.isEmpty());
+        System.assertEquals(false, wrsList.isEmpty());
         Test.stopTest();
     }
 
-    @isTest
+    @IsTest
     public static void testSaveFamilyWishSignatures() {
         Test.startTest();
         Case wishCase = [
@@ -143,25 +143,25 @@ private class WishSignatureControllerTest {
                 FROM Case
                 LIMIT 1
         ];
-        system.assertEquals(true, wishCase != null);
+        System.assertEquals(true, wishCase != null);
 
         Wish_Signature_Forms__c wishForm = [
                 SELECT Id
                 FROM Wish_Signature_Forms__c
                 LIMIT 1
         ];
-        system.assertEquals(true, wishForm != null);
+        System.assertEquals(true, wishForm != null);
 
         Contact wishAdult = [
                 SELECT Id
-                From Contact
-                Where Current_Age__c > 18
+                FROM Contact
+                WHERE Current_Age__c > 18
         ];
-        system.assertEquals(true, wishAdult != null);
+        System.assertEquals(true, wishAdult != null);
         Wish_Affiliation__c wishAff = [
                 SELECT Id
-                From Wish_Affiliation__c
-                Where Contact__c = :wishAdult.Id
+                FROM Wish_Affiliation__c
+                WHERE Contact__c = :wishAdult.Id
         ];
 
         WishSignatureController.AdultWrapData wrapperData = new WishSignatureController.AdultWrapData();
@@ -170,8 +170,8 @@ private class WishSignatureControllerTest {
 
         Contact wishChild = [
                 SELECT Id
-                From Contact
-                Where Current_Age__c < 18
+                FROM Contact
+                WHERE Current_Age__c < 18
         ];
         WishSignatureController.AdultMinorWrapData childWrapperData = new WishSignatureController.AdultMinorWrapData();
         childWrapperData.adult = String.valueOf(wishAdult.Id);
@@ -183,11 +183,11 @@ private class WishSignatureControllerTest {
                 SELECT Id
                 FROM Wish_Required_Signature__c
         ];
-        system.assertEquals(false, wrsList.isEmpty());
+        System.assertEquals(false, wrsList.isEmpty());
         Test.stopTest();
     }
 
-    @isTest
+    @IsTest
     public static void testGetSignatureForms() {
         Test.startTest();
         Case wishCase = [
@@ -195,9 +195,9 @@ private class WishSignatureControllerTest {
                 FROM Case
                 LIMIT 1
         ];
-        system.assertEquals(true, wishCase != null);
+        System.assertEquals(true, wishCase != null);
         List<Wish_Signature_Forms__c> wishForm = WishSignatureController.getWishSignatureForms(wishCase.Id, 'Medical');
         Test.stopTest();
-        system.assertEquals(true, wishForm != null);
+        System.assertEquals(true, wishForm != null);
     }
 }

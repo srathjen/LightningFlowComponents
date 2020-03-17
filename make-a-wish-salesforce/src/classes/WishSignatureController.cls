@@ -128,7 +128,7 @@ public without sharing class WishSignatureController {
             List<Wish_Affiliation__c> wishAffiliations = [
                     SELECT Id, Contact__r.Email
                     FROM Wish_Affiliation__c
-                    WHERE Id In:wishAffIdSet
+                    WHERE Id IN :wishAffIdSet
             ];
             wrsToInsert = createWRSRecord('Medical', wishAffiliations, caseId, formId);
             if (!wrsToInsert.isEmpty()) {
@@ -199,13 +199,12 @@ public without sharing class WishSignatureController {
             for (Wish_Affiliation__c wishAffiliation : [
                     SELECT Id, Contact__c, Contact__r.Email
                     FROM Wish_Affiliation__c
-                    WHERE Contact__c In :adultsIds
+                    WHERE Contact__c IN :adultsIds
             ]) {
                 adultToWishAff.put(wishAffiliation.Contact__c, wishAffiliation);
             }
             //Create Wish Required Signature records and Insert them
             Map<Id, Id> mapWishAffToWRS = new Map<Id, Id>();
-            Set<Id> wishAffIdSet = new Set<Id>();
             List<Wish_Required_Signature__c> wrsToInsert = new List<Wish_Required_Signature__c>();
             wrsToInsert = createWRSRecord('Family', adultToWishAff.values(), caseId, formId);
             if (!wrsToInsert.isEmpty()) {
@@ -216,7 +215,7 @@ public without sharing class WishSignatureController {
                 for (Wish_Required_Signature__c wishReqSigns : [
                         SELECT Id,Wish_Affiliation__c,Wish_Affiliation__r.Contact__c
                         FROM Wish_Required_Signature__c
-                        WHERE Id In :wrsToInsert
+                        WHERE Id IN :wrsToInsert
                 ]) {
                     mapWishAffToWRS.put(wishReqSigns.Wish_Affiliation__r.Contact__c, wishReqSigns.Id);
                 }
@@ -271,11 +270,5 @@ public without sharing class WishSignatureController {
         public String adult;
         public String minor;
         public String wishAffMinor;
-    }
-
-    //Wrapper class to hold Signature Forms data
-    public class FormOptionsData {
-        public String label;
-        public Id value;
     }
 }
