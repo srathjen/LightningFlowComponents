@@ -4,30 +4,24 @@
  * @createdDate 2/27/2020
  */
 public class ContactFileService {
-
-    private final static String CONTACT_FILE_CONTENT_TYPE_FOLDER = Constant_AC.FILE_CONTENT_TYPE_FOLDER;
-    private final static String CONTACT_DOCUMENTS_FOLDER = Constant_AC.FILE_NAME_DOCUMENTS;
-    private static final String CONTACT_PHOTOS_FOLDER = Constant_AC.FILE_NAME_PHOTOS;
-    private static final String CONTACT_VIDEOS_FOLDER = Constant_AC.FILE_NAME_VIDEOS;
-
     public static List<cg__ContactFile__c> buildFileFoldersLeadConvert(Id contactId) {
         List<cg__ContactFile__c> leadConvertFileFolders = new List<cg__ContactFile__c>();
         cg__ContactFile__c picFolder = new cg__ContactFile__c();
         picFolder.cg__Contact__c = contactId;
-        picFolder.cg__Content_Type__c = CONTACT_FILE_CONTENT_TYPE_FOLDER;
-        picFolder.cg__File_Name__c = CONTACT_PHOTOS_FOLDER;
+        picFolder.cg__Content_Type__c = Constant_AC.FILE_CONTENT_TYPE_FOLDER;
+        picFolder.cg__File_Name__c = Constant_AC.FILE_NAME_PHOTOS;
         picFolder.cg__WIP__c = false;
         leadConvertFileFolders.add(picFolder);
         cg__ContactFile__c docFolder = new cg__ContactFile__c();
         docFolder.cg__Contact__c = contactId;
-        docFolder.cg__Content_Type__c = CONTACT_FILE_CONTENT_TYPE_FOLDER;
-        docFolder.cg__File_Name__c = CONTACT_DOCUMENTS_FOLDER;
+        docFolder.cg__Content_Type__c = Constant_AC.FILE_CONTENT_TYPE_FOLDER;
+        docFolder.cg__File_Name__c = Constant_AC.FILE_NAME_DOCUMENTS;
         docFolder.cg__WIP__c = false;
         leadConvertFileFolders.add(docFolder);
         cg__ContactFile__c videosFolder = new cg__ContactFile__c();
         videosFolder.cg__Contact__c = contactId;
-        videosFolder.cg__Content_Type__c = CONTACT_FILE_CONTENT_TYPE_FOLDER;
-        videosFolder.cg__File_Name__c = CONTACT_VIDEOS_FOLDER;
+        videosFolder.cg__Content_Type__c = Constant_AC.FILE_CONTENT_TYPE_FOLDER;
+        videosFolder.cg__File_Name__c = Constant_AC.FILE_NAME_VIDEOS;
         videosFolder.cg__WIP__c = false;
         leadConvertFileFolders.add(videosFolder);
         return leadConvertFileFolders;
@@ -50,7 +44,7 @@ public class ContactFileService {
         for (cg__ContactFile__c contactFile : [
                 SELECT Id, cg__Contact__c
                 FROM cg__ContactFile__c
-                WHERE cg__File_Name__c = :CONTACT_DOCUMENTS_FOLDER
+                WHERE cg__File_Name__c = :Constant_AC.FILE_NAME_DOCUMENTS
                 AND cg__Contact__c IN :wishChildIds
         ]) {
             docFolderContactsMAP.put(contactFile.cg__Contact__c, contactFile.Id);
@@ -100,42 +94,42 @@ public class ContactFileService {
      * @param newAccountFiles
      */
     public static void updateContactFileFolderId(List<cg__ContactFile__c> newContactFiles) {
-		Map<Id, cg__ContactFile__c> newFileMap = new Map<Id, cg__ContactFile__c>();
-		Map<Id, Id> contactFileMap = new Map<Id, Id>();
-		Set<Id> conId = new Set<Id>();
-		Map<Id, cg__ContactFile__c > folderIdsMap = new Map<Id, cg__ContactFile__c>();
-		for (cg__ContactFile__c conFile : newContactFiles) {
-			newFileMap.put(conFile.Id, conFile);
-			conId.add(conFile.cg__Contact__c);
-		}
+        Map<Id, cg__ContactFile__c> newFileMap = new Map<Id, cg__ContactFile__c>();
+        Map<Id, Id> contactFileMap = new Map<Id, Id>();
+        Set<Id> conId = new Set<Id>();
+        Map<Id, cg__ContactFile__c > folderIdsMap = new Map<Id, cg__ContactFile__c>();
+        for (cg__ContactFile__c conFile : newContactFiles) {
+            newFileMap.put(conFile.Id, conFile);
+            conId.add(conFile.cg__Contact__c);
+        }
 
-		if (conId.size() > 0) {
-			for (cg__ContactFile__c contactFile : [
-					SELECT Id, cg__Content_Type__c, cg__File_Name__c, cg__Contact__c, cg__Contact__r.Name, cg__Parent_Folder_Id__c
-					FROM cg__ContactFile__c
-					WHERE cg__Contact__c IN :conId AND cg__Content_Type__c = :Constant_AC.CONTACT_FILE_CONTENT_TYPE_FOLDER
-			]) {
-				if (contactFile.cg__File_Name__c == Constant_AC.CONTACT_FILE_NAME_DOCUMENTS) {
-					contactFileMap.put(contactFile.cg__Contact__c, contactFile.Id);
-				}
-				folderIdsMap.put(contactFile.Id, contactFile);
-			}
-			for (cg__ContactFile__c conFile1 : newContactFiles) {
-				if (folderIdsMap.containsKey(conFile1.cg__Parent_Folder_Id__c)) {
-					conFile1.Parent_Folder_Name__c = folderIdsMap.get(conFile1.cg__Parent_Folder_Id__c).cg__File_Name__c;
-				}
-			}
-			if (contactFileMap.size() > 0) {
-				List<cg__ContactFile__c> updateContactFileList = new List<cg__ContactFile__c>();
-				for (cg__ContactFile__c newConFile : newFileMap.values()) {
-					if (contactFileMap.containsKey(newConFile.cg__Contact__c)) {
-						if (newConFile.cg__Content_Type__c != Constant_AC.CONTACT_FILE_CONTENT_TYPE_FOLDER) {
-							newConFile.cg__Parent_Folder_Id__c = contactFileMap.get(newConFile.cg__Contact__c);
-							updateContactFileList.add(newConFile);
-						}
-					}
-				}
-			}
-		}
+        if (conId.size() > 0) {
+            for (cg__ContactFile__c contactFile : [
+                    SELECT Id, cg__Content_Type__c, cg__File_Name__c, cg__Contact__c, cg__Contact__r.Name, cg__Parent_Folder_Id__c
+                    FROM cg__ContactFile__c
+                    WHERE cg__Contact__c IN :conId AND cg__Content_Type__c = :Constant_AC.FILE_CONTENT_TYPE_FOLDER
+            ]) {
+                if (contactFile.cg__File_Name__c == Constant_AC.FILE_NAME_DOCUMENTS) {
+                    contactFileMap.put(contactFile.cg__Contact__c, contactFile.Id);
+                }
+                folderIdsMap.put(contactFile.Id, contactFile);
+            }
+            for (cg__ContactFile__c conFile1 : newContactFiles) {
+                if (folderIdsMap.containsKey(conFile1.cg__Parent_Folder_Id__c)) {
+                    conFile1.Parent_Folder_Name__c = folderIdsMap.get(conFile1.cg__Parent_Folder_Id__c).cg__File_Name__c;
+                }
+            }
+            if (contactFileMap.size() > 0) {
+                List<cg__ContactFile__c> updateContactFileList = new List<cg__ContactFile__c>();
+                for (cg__ContactFile__c newConFile : newFileMap.values()) {
+                    if (contactFileMap.containsKey(newConFile.cg__Contact__c)) {
+                        if (newConFile.cg__Content_Type__c != Constant_AC.FILE_CONTENT_TYPE_FOLDER) {
+                            newConFile.cg__Parent_Folder_Id__c = contactFileMap.get(newConFile.cg__Contact__c);
+                            updateContactFileList.add(newConFile);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
