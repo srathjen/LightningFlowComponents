@@ -306,6 +306,13 @@
         <value>Please attach all In-kind receipts or documentation below or select Documentation as Not Available.</value>
     </labels>
     <labels>
+        <fullName>InKind_Insufficient_Privilege</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>InKind_Insufficient_Privilege</shortDescription>
+        <value>Insufficient privilege to update this record. Please contact system administrator.</value>
+    </labels>
+    <labels>
         <fullName>InKind_Return_Message</fullName>
         <language>en_US</language>
         <protected>false</protected>
