@@ -17,17 +17,7 @@ public with sharing class InKindDonationReimburseService {
      * @date            unknown
      */
     public static void validateChapterRole(List<In_Kind_Donation_Reimbursement__c> newIkdReimbursements, Map<Id, In_Kind_Donation_Reimbursement__c> newIkdReimbursementsMap) {
-        List<User> currUser = [
-            SELECT
-                Id,
-                UserRole.Name,
-                Chapter_Name__c,
-                Profile.Name,
-                Profile.Id
-            FROM User
-            WHERE Id = :UserInfo.getUserId()
-            LIMIT 1
-        ];
+        User currUser = Utils.currentUser;
 
         Set<String> chapterNamesSet = new Set<String>();
         Map<Id, String> chapterNameMap = new Map<Id, String>();
@@ -49,8 +39,8 @@ public with sharing class InKindDonationReimburseService {
             chapterRoleMap = ChapterStaffRecordSharing_AC.FindChapterRole(chapterNamesSet);
 
             for (In_Kind_Donation_Reimbursement__c currRec : newIkdReimbursements) {
-                if (chapterRoleMap.get(chapterNameMap.get(currRec.Id)) != currUser[0].UserRole.Name && currUser[0].UserRole.Name != 'National Staff' && Bypass_Triggers__c.getValues(userInfo.getUserId()) == null
-                    && currUser[0].Profile.Name != 'System Administrator' && currUser[0].Chapter_Name__c != (chapterNameMap.get(currRec.Id)) && currUser[0].Profile.Id != Label.Active_Volunteer_Profile) {
+                if (chapterRoleMap.get(chapterNameMap.get(currRec.Id)) != currUser.UserRole.Name && currUser.UserRole.Name != 'National Staff' && Bypass_Triggers__c.getValues(userInfo.getUserId()) == null
+                    && currUser.Profile.Name != 'System Administrator' && currUser.Chapter_Name__c != (chapterNameMap.get(currRec.Id)) && currUser.Profile.Id != Label.Active_Volunteer_Profile) {
                     currRec.addError(Label.InKind_Insufficient_Privilege);
                 }
             }

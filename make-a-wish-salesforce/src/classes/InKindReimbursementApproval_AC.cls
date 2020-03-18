@@ -35,9 +35,9 @@ global class InKindReimbursementApproval_AC {
             req.setComments('Submitting request for approval');
             req.setObjectId(inKindId);
 
-            if (recordType == 'In-Kind Donation') {
+            if (recordType == Constant_AC.IN_KIND_DONATION_RT_LABEL) {
                 req.setProcessDefinitionNameOrId('In_Kind_Donation_Reimbursement_Approval');
-            } else if (recordType == 'Reimbursement') {
+            } else if (recordType == Constant_AC.IN_KIND_REIMBURSEMENT_RT_LABEL) {
                 req.setProcessDefinitionNameOrId('Reimbursement_Approval_To_Wish_Owner');
             }
 
