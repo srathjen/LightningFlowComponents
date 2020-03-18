@@ -29,7 +29,7 @@ public with sharing class CaseService {
 	}
 
 	/**
-	 *  Delete Case found by Lead Id and Record Type Name
+	 * Delete Case found by Lead Id and Record Type Name
 	 * @param leadId
 	 * @param caseRecordTypeNames
 	 */
@@ -62,6 +62,7 @@ public with sharing class CaseService {
 			}
 			caseMap.put(caseRecord.Id, caseRecord);
 		}
+		System.debug('caseMapz ' + caseMap);
 		update caseMap.values();
 		return caseMap;
 	}
@@ -103,6 +104,12 @@ public with sharing class CaseService {
 		return insertCaseMap;
 	}
 
+	/**
+	 * Build Qualified Case
+	 * @param lead
+	 * @param hasContactConverted
+	 * @return Case
+	 */
 	public static Case buildQualifiedCaseFromLead(Lead lead, Boolean hasContactConverted) {
 		Case newCase = new Case();
 		newCase.RecordTypeId = WISH_RECORD_TYPE_ID;

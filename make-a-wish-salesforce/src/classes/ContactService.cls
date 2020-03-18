@@ -319,6 +319,17 @@ public class ContactService {
 		return wishChild;
 	}
 
+	/**
+	 * Build Sibling
+	 * @param firstName
+	 * @param lastName
+	 * @param age
+	 * @param wishChildId
+	 * @param accountId
+	 * @param regionChapterId
+	 * @param language
+	 * @return Contact
+	 */
 	public static Contact buildSibling(String firstName, String lastName, String age,
 			Id wishChildId, Id accountId, Id regionChapterId, String language) {
 		Contact newFamily = new Contact();
