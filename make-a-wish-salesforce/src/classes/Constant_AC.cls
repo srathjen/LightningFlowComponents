@@ -61,6 +61,10 @@ public class Constant_AC {
 	public final static Id FORM_TRACKER_ATTACHMENT_ID = Schema.SObjectType.Minor_Participant__c.getRecordTypeInfosByDeveloperName().get('Form_Tracker_Attachment').getRecordTypeId();
 	public final static Id COMBO_RECORD_ID = Schema.SObjectType.Minor_Participant__c.getRecordTypeInfosByDeveloperName().get('Combo_Form_Attachment').getRecordTypeId();
 	public final static Id WISH_EXPENSE_RT_FINANCE = Schema.SObjectType.Wish_Expense__c.getRecordTypeInfosByDeveloperName().get('Finance').getRecordTypeId();
+	public static final String TYPE_LIGHTNING = 'Lightning';
+	public static final String TYPE_CLASSIC = 'Classic';
+	public static final String THEME_4D = 'Theme4d';
+	public static final String THEME_4U = 'Theme4u';
 
 	/**
 	* sObject Api Names and Labels
@@ -116,6 +120,17 @@ public class Constant_AC {
 	public static final String LEAD_NUMBER_OF_SIBLINGS_UNKNOWN = 'Unknown';
 	public static final String LEAD_COMATOSE_VEGETATIVE_STATE_YES = 'Yes';
 	public static final String LEAD_MEDICAL_REASON_FOR_MOVING_QUICKLY_YES = 'Yes';
+	public static final String LEAD_ERROR_WISH_CHILD = 'Wish Child';
+	public static final String LEAD_ERROR_WISH_ADDITIONAL_PARENT_GUARDIAN = 'Additional Parent/Guardian';
+	public static final String LEAD_ERROR_WISH_FAMILY = 'Wish Family';
+	public static final String LEAD_ERROR_BEST = 'Best Physician Contact';
+	public static final String LEAD_ERROR_MEDICAL_PROFESSIONAL = 'Medical Professional';
+	public static final String LEAD_ERROR_WISH_FAMILY_AND_MEDICAL_PROFESSIONAL = 'Wish Family and Medical Professional';
+
+	/**
+	 * Lead File Constants
+	 */
+	public static final String LEAD_FILE_CONTENT_TYPE_FOLDER = 'Folder';
 
 	/**
 	 * Case Constants
@@ -209,10 +224,13 @@ public class Constant_AC {
 	public static final String CONTACT_GENDER_FEMALE = 'Female';
 	public static final String CONTACT_NAME_UNKNOWN = 'Unknown';
 
-	/*
-	 * In Kind Reimbursement File Constants
+	/**
+	 * Contact File Constants
 	 */
-	public final static String INKIND_REIMBURSEMENT_FILE_DOCUMENTATION = 'Not Available';
+	public final static String CONTACT_CONTENT_FILE_TYPE_FOLDER = 'Folder';
+	public final static String CONTACT_FILE_NAME_DOCUMENTS = 'Documents';
+	public static final String CONTACT_FILE_NAME_PHOTOS = 'Photos';
+	public static final String CONTACT_FILE_NAME_VIDEOS = 'Videos';
 
 	/**
 	 * Chapter Role File Constants
@@ -271,8 +289,8 @@ public class Constant_AC {
 	public static final String WISH_AFFILIATION_TYPE_DECLINED_PARTICIPANT = 'Declined Participant';
 	public static final String WISH_AFFILIATION_TYPE_MEDICAL_PROFESSIONAL = 'Medical Professional';
 	public static final String WISH_AFFILIATION_TYPE_GUARDIAN_OF_MINOR_PARTICIPANT = 'Guardian of Minor Participant';
-	public static final String WISH_AFFILIATION_TYPE_OTHER = 'Other';
 
+	public static final String WISH_AFFILIATION_TYPE_OTHER = 'Other';
 	/**
 	* Wish Change Request Status
 	*/
@@ -313,14 +331,4 @@ public class Constant_AC {
 	 * Role Constants
 	 */
 	public static final String ROLE_NATIONAL_STAFF = 'National Staff';
-
-	/**
-	 * File Constants
-	 */
-	public static final String FILE_CONTENT_TYPE_FOLDER = 'Folder';
-	public static final String FILE_NAME_DOCUMENTS = 'Documents';
-	public static final String FILE_NAME_STAFF_PRIVATE = 'Staff - Private';
-	public static final String FILE_NAME_FINANCIALS = 'Financials';
-	public static final String FILE_NAME_PHOTOS = 'Photos';
-	public static final String FILE_NAME_VIDEOS = 'Videos';
 }
