@@ -14,6 +14,17 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>File_Download_URL__c</fullName>
+        <description>Base URL for File Download</description>
+        <externalId>false</externalId>
+        <label>File Download URL</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>In_Kind_Form_PDF__c</fullName>
         <description>Id of the In-Kind Form PDF document</description>
         <externalId>false</externalId>

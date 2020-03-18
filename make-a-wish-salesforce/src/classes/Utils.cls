@@ -156,4 +156,28 @@ public class Utils {
 	public static List<Schema.FieldSetMember> getPartAFields() {
 		return SObjectType.Lead.FieldSets.Diagnosis_Verfication_Fieldset.getFields();
 	}
+
+	/*
+	 * @description 		Retrieve information about the current user.
+	 *
+	 * @author				Chris Shinnimin, Traction on Demand
+	 * @date				2020-03-18
+	 */
+	public static User currentUser { get {
+		if (currentUser == null) {
+			currentUser = [
+				SELECT
+					Id,
+					UserRole.Name,
+					Chapter_Name__c,
+					Profile.Name,
+					Profile.Id
+				FROM User
+				WHERE Id = :UserInfo.getUserId()
+				LIMIT 1
+			];
+		}
+
+		return currentUser;
+	} set; }
 }

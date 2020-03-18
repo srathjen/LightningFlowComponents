@@ -40,6 +40,8 @@ public class Constant_AC {
 	public final static Id CLASS_OFFERING_RECORD_TYPE_ID = Schema.SObjectType.Class_Offering__c.getRecordTypeInfosByDeveloperName().get('Virtual_Self_Paced').getRecordTypeId();
 	public final static Id TRAVEL_ALGM_RT_ID = Schema.SObjectType.Medical_Questions__c.getRecordTypeInfosByDeveloperName().get('Travel_Algorithm').getRecordTypeId();
 	public final static Id BUDGETING_RT_ID = Schema.SObjectType.Wish_Expense__c.getRecordTypeInfosByDeveloperName().get('Budgeting').getRecordTypeId();
+	public final static String IN_KIND_DONATION_RT_LABEL = 'In-Kind Donation';
+	public final static String IN_KIND_REIMBURSEMENT_RT_LABEL = 'Reimbursement';
 	public final static Id IN_KIND_ID = Schema.SObjectType.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByDeveloperName().get('In_Kind_Donation').getRecordTypeId();
 	public final static Id REIMBURSEMENT_ID = Schema.SObjectType.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByDeveloperName().get('Reimbursement').getRecordTypeId();
 	public final static Id DIAGNOSIS_RT_ID = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Diagnosis_Verification_Review').getRecordTypeId();
