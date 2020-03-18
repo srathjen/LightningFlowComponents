@@ -17,6 +17,14 @@
         <value>00e36000001CMlqAAG</value>
     </labels>
     <labels>
+        <fullName>AWSDefaultFilePathPrefix</fullName>
+        <categories>SDrive</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AWS default file path prefix</shortDescription>
+        <value>TEST</value>
+    </labels>
+    <labels>
         <fullName>B_C_No_of_days_for_expiration</fullName>
         <categories>It holds the expiration duration for Background check.</categories>
         <language>en_US</language>

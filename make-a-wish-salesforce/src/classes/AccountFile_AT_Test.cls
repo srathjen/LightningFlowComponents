@@ -5,7 +5,8 @@ Description : This class contains test method for Account object
 *******************************************************************************************************************/
 @IsTest
 public class AccountFile_AT_Test {
-	static testMethod void createAccountFile() {
+	@IsTest
+	static void createAccountFile() {
 		Test.startTest();
 		Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
 		insert chapterAccount;
@@ -13,8 +14,8 @@ public class AccountFile_AT_Test {
 		cg__AccountFile__c accountFile = OrientationandTrainingUtil.createAccountFileRecord(chapterAccount.Id);
 		insert accountFile;
 
-		System.assertEquals(chapterAccount.id, accountFile.cg__Account__c, 'Id dose not match');
-		System.assert(chapterAccount.id == accountFile.cg__Account__c, 'The value of chapterAccount.id is: ' + chapterAccount.id + ' and the value of accountFile.cg__Account__c is: ' + accountFile.cg__Account__c);
+		System.assertEquals(chapterAccount.Id, accountFile.cg__Account__c, 'Id dose not match');
+		System.assert(chapterAccount.Id == accountFile.cg__Account__c, 'The value of chapterAccount.Id is: ' + chapterAccount.Id + ' and the value of accountFile.cg__Account__c is: ' + accountFile.cg__Account__c);
 		Test.stopTest();
 	}
 }

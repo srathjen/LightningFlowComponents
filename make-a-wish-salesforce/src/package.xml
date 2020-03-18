@@ -23,7 +23,7 @@
   <types>
     <members>Lead.Primary_Medical_Professional_Type_Other__c</members>
     <name>CustomField</name>
-   </types>
+  </types>
   <types>
     <members>*</members>
     <name>CustomLabels</name>
@@ -162,6 +162,7 @@
   </types>
   <types>
     <members>Chatter</members>
+    <members>EmailAdministration</members>
     <name>Settings</name>
   </types>
   <types>
@@ -352,6 +353,10 @@
     <members>Wish_Budget__c.Inactivate_Budget</members>
     <members>Wish_Expense__c.WE_Do_not_update_case</members>
     <name>ValidationRule</name>
+  </types>
+  <types>
+    <members>Lead</members>
+    <name>Workflow</name>
   </types>
   <version>47.0</version>
 </Package>
