@@ -5,7 +5,7 @@
  */
 public class ContactFileService {
 
-	private final static String CONTACT_CONTENT_FILE_TYPE_FOLDER = Constant_AC.CONTACT_CONTENT_FILE_TYPE_FOLDER;
+	private final static String FILE_CONTENT_TYPE_FOLDER = Constant_AC.FILE_CONTENT_TYPE_FOLDER;
 	private final static String CONTACT_DOCUMENTS_FOLDER = Constant_AC.CONTACT_FILE_NAME_DOCUMENTS;
 	private static final String CONTACT_PHOTOS_FOLDER = Constant_AC.CONTACT_FILE_NAME_PHOTOS;
 	private static final String CONTACT_VIDEOS_FOLDER = Constant_AC.CONTACT_FILE_NAME_VIDEOS;
@@ -14,19 +14,19 @@ public class ContactFileService {
 		List<cg__ContactFile__c> leadConvertFileFolders = new List<cg__ContactFile__c>();
 		cg__ContactFile__c picFolder = new cg__ContactFile__c();
 		picFolder.cg__Contact__c = contactId;
-		picFolder.cg__Content_Type__c = CONTACT_CONTENT_FILE_TYPE_FOLDER;
+		picFolder.cg__Content_Type__c = FILE_CONTENT_TYPE_FOLDER;
 		picFolder.cg__File_Name__c = CONTACT_PHOTOS_FOLDER;
 		picFolder.cg__WIP__c = false;
 		leadConvertFileFolders.add(picFolder);
 		cg__ContactFile__c docFolder = new cg__ContactFile__c();
 		docFolder.cg__Contact__c = contactId;
-		docFolder.cg__Content_Type__c = CONTACT_CONTENT_FILE_TYPE_FOLDER;
+		docFolder.cg__Content_Type__c = FILE_CONTENT_TYPE_FOLDER;
 		docFolder.cg__File_Name__c = CONTACT_DOCUMENTS_FOLDER;
 		docFolder.cg__WIP__c = false;
 		leadConvertFileFolders.add(docFolder);
 		cg__ContactFile__c videosFolder = new cg__ContactFile__c();
 		videosFolder.cg__Contact__c = contactId;
-		videosFolder.cg__Content_Type__c = CONTACT_CONTENT_FILE_TYPE_FOLDER;
+		videosFolder.cg__Content_Type__c = FILE_CONTENT_TYPE_FOLDER;
 		videosFolder.cg__File_Name__c = CONTACT_VIDEOS_FOLDER;
 		videosFolder.cg__WIP__c = false;
 		leadConvertFileFolders.add(videosFolder);

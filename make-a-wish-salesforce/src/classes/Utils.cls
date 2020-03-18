@@ -5,9 +5,6 @@
  */
 public class Utils {
 
-	public class UtilsException extends Exception {
-	}
-
 	public static final String DATE_FORMAT_MDDYYYY = 'M/dd/yyyy';
 	/**
 	 * Find Picklist Labels
@@ -101,6 +98,8 @@ public class Utils {
 		throw new UtilsException('Unsupported format');
 	}
 
+	public class UtilsException extends Exception {}
+
 	/**
 	 * Generate random number
 	 * @return
@@ -143,6 +142,21 @@ public class Utils {
 		return selectOptions;
 	}
 
+	/**
+	* Phone fields are currently String type fields and are being used in comparision,
+	* but when compared they are coming formatted and some are not causing the if statetment to fail
+	* e.g: (555)555-5555 is not equal to 5555555555
+	* Creating a method to remove special characters and alphabet
+	* @param field
+	* @return String
+	*/
+	public static String removeFormatNumberField(String field) {
+		if (String.isNotEmpty(field)) {
+			return field.replaceAll('[^0-9]', '');
+		}
+		return field;
+	}
+
 	/*
 	 * @description		"Self Fieldset, it holds the mandatory fields of Self relationship."
 	 * 					This function was noticed duplicated in multiple classes, so pulled out
@@ -155,5 +169,27 @@ public class Utils {
 	 */
 	public static List<Schema.FieldSetMember> getPartAFields() {
 		return SObjectType.Lead.FieldSets.Diagnosis_Verfication_Fieldset.getFields();
+	}
+
+	/*
+	 * @description 		Retrieve information about the current user.
+	 *
+	 * @return				User
+	 *
+	 * @author				Chris Shinnimin, Traction on Demand
+	 * @date				2020-03-18
+	 */
+	public static User getCurrentUserInfo() {
+		return [
+			SELECT
+				Id,
+				UserRole.Name,
+				Chapter_Name__c,
+				Profile.Name,
+				Profile.Id
+			FROM User
+			WHERE Id = :UserInfo.getUserId()
+			LIMIT 1
+		];
 	}
 }

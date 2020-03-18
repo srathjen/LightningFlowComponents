@@ -130,11 +130,6 @@ public class Constant_AC {
 	public static final String LEAD_ERROR_WISH_FAMILY_AND_MEDICAL_PROFESSIONAL = 'Wish Family and Medical Professional';
 
 	/**
-	 * Lead File Constants
-	 */
-	public static final String LEAD_FILE_CONTENT_TYPE_FOLDER = 'Folder';
-
-	/**
 	 * Case Constants
 	 */
 	public static final String CASE_STATUS_WISH_DETERMINED = 'Wish Determined';
@@ -229,7 +224,6 @@ public class Constant_AC {
 	/**
 	 * Contact File Constants
 	 */
-	public final static String CONTACT_CONTENT_FILE_TYPE_FOLDER = 'Folder';
 	public final static String CONTACT_FILE_NAME_DOCUMENTS = 'Documents';
 	public static final String CONTACT_FILE_NAME_PHOTOS = 'Photos';
 	public static final String CONTACT_FILE_NAME_VIDEOS = 'Videos';
