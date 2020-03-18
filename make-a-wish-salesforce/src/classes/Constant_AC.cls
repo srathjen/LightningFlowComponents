@@ -130,11 +130,6 @@ public class Constant_AC {
 	public static final String LEAD_ERROR_WISH_FAMILY_AND_MEDICAL_PROFESSIONAL = 'Wish Family and Medical Professional';
 
 	/**
-	 * Lead File Constants
-	 */
-	public static final String LEAD_FILE_CONTENT_TYPE_FOLDER = 'Folder';
-
-	/**
 	 * Case Constants
 	 */
 	public static final String CASE_STATUS_WISH_DETERMINED = 'Wish Determined';
@@ -227,14 +222,6 @@ public class Constant_AC {
 	public static final String CONTACT_NAME_UNKNOWN = 'Unknown';
 
 	/**
-	 * Contact File Constants
-	 */
-	public final static String CONTACT_CONTENT_FILE_TYPE_FOLDER = 'Folder';
-	public final static String CONTACT_FILE_NAME_DOCUMENTS = 'Documents';
-	public static final String CONTACT_FILE_NAME_PHOTOS = 'Photos';
-	public static final String CONTACT_FILE_NAME_VIDEOS = 'Videos';
-
-	/**
 	 * Chapter Role File Constants
 	 */
 	public final static String CHAPTER_ROLE_SINGLE_DAY_EVENT_VOLUNTEER = 'Single Day Event Volunteer';
@@ -293,6 +280,7 @@ public class Constant_AC {
 	public static final String WISH_AFFILIATION_TYPE_GUARDIAN_OF_MINOR_PARTICIPANT = 'Guardian of Minor Participant';
 
 	public static final String WISH_AFFILIATION_TYPE_OTHER = 'Other';
+
 	/**
 	* Wish Change Request Status
 	*/
@@ -333,9 +321,14 @@ public class Constant_AC {
 	 * Role Constants
 	 */
 	public static final String ROLE_NATIONAL_STAFF = 'National Staff';
-    
-    /**
-     * File Constants
+
+	/**
+	 * File Constants
 	 */
-    public static final String FILE_CONTENT_TYPE_FOLDER = 'Folder';
+	public static final String FILE_CONTENT_TYPE_FOLDER = 'Folder';
+	public static final String FILE_NAME_DOCUMENTS = 'Documents';
+	public static final String FILE_NAME_STAFF_PRIVATE = 'Staff - Private';
+	public static final String FILE_NAME_FINANCIALS = 'Financials';
+	public static final String FILE_NAME_PHOTOS = 'Photos';
+	public static final String FILE_NAME_VIDEOS = 'Videos';
 }
