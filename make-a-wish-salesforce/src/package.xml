@@ -31,11 +31,8 @@
   <types>
     <members>Endpoints__c</members>
     <members>Lead</members>
+    <members>Inkind_Donation_PDFs__c</members>
     <name>CustomObject</name>
-  </types>
-  <types>
-    <members>*</members>
-    <name>Inkind_Donation_PDFs__c</name>
   </types>
   <types>
     <members>Automated_Volunteer_Templates/BC_Completed_Email_Active_Volunteer_Template</members>
