@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Check_Request_PDF__c</fullName>
+        <description>Check Request PDF Document ID</description>
+        <externalId>false</externalId>
+        <label>Check Request PDF</label>
+        <length>15</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>File_Download_URL__c</fullName>
+        <description>Base URL for File Download</description>
+        <externalId>false</externalId>
+        <label>File Download URL</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>In_Kind_Form_PDF__c</fullName>
+        <description>Id of the In-Kind Form PDF document</description>
+        <externalId>false</externalId>
+        <label>In-Kind Form PDF</label>
+        <length>15</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Inkind Donation PDFs</label>
+    <visibility>Public</visibility>
+</CustomObject>
