@@ -30,8 +30,8 @@
   </types>
   <types>
     <members>Endpoints__c</members>
-    <members>Lead</members>
     <members>Inkind_Donation_PDFs__c</members>
+    <members>Lead</members>
     <name>CustomObject</name>
   </types>
   <types>
