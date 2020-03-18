@@ -4,7 +4,7 @@
 * @createdDate 3-13-2020
 */
 public with sharing class AccountDomain extends trac_TriggerHandlerBase {
-    //add to constants class
+
     private final static Id HOUSEHOLD_RECORD_TYPE_ID = Constant_AC.HOUSEHOLD_RT_ID;
     private final static Id CHAPTER_RECORD_TYPE_ID = Constant_AC.CHAPTER_RT_ID;
     private final static Id IN_KIND_RECORD_TYPE_ID = Constant_AC.IN_KIND_ACCOUNT_ID;
@@ -21,7 +21,7 @@ public with sharing class AccountDomain extends trac_TriggerHandlerBase {
     /**
     * Before insert of account
     */
-	public override void handleBeforeInsert() {
+    public override void handleBeforeInsert() {
         Set<Id> ownerIdSet = new Set<Id>();
         List<Account> inKindAccountList = new List<Account>();
         for(Account newAccount : newAccountsList) {
@@ -39,8 +39,8 @@ public with sharing class AccountDomain extends trac_TriggerHandlerBase {
     }
     
     /**
-	* Before update of account
-	*/
+    * Before update of account
+    */
     public override void handleBeforeUpdate() {
         Map<Id, Account> houseHoldAccountMap = new Map<Id, Account>();
         for(Account newAccount : newAccountsMap.values()) {
@@ -73,16 +73,16 @@ public with sharing class AccountDomain extends trac_TriggerHandlerBase {
     }
     
     /**
-	* After insert of account
-	*/
+    * After insert of account
+    */
     public override void handleAfterInsert() {
         Set<Id> inKindChapterAccountIdSet = new Set<Id>();
         Set<Id> chapterAccountIdSet = new Set<Id>();
         List<Account> inKindAccountsList = new List<Account>();
         Set<Id> accountIdSet = (new Map<Id, Account>(newAccountsList)).keySet();
         Map<Id,Id> wishCoordinatorMap = new Map<Id,Id>();
-		Map<Id, String> chapterNameMap = new Map<Id, String>();
-		Map<String, Id> publicGroupMap = new Map<String,Id>();
+        Map<Id, String> chapterNameMap = new Map<Id, String>();
+        Map<String, Id> publicGroupMap = new Map<String,Id>();
         List<Account> accountsToShareList = new List<Account>();
         List<String> chapterNameList = new List<String>();
         
@@ -135,8 +135,8 @@ public with sharing class AccountDomain extends trac_TriggerHandlerBase {
     }
     
     /**
-	* After update of account
-	*/
+    * After update of account
+    */
     public override void handleAfterUpdate() {
         Set<Id> chapterIdsSet = new Set<Id>();
         Set<Id> houseHoldAccountIdsSet = new Set<Id>();

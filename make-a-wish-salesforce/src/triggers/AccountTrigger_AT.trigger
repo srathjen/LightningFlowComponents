@@ -9,6 +9,7 @@ Description : AccountTrigger_AT is used to call the Account trigger Handler clas
               WVC-1884    KANAGARAJ  03/04/2018
               
 *****************************************************************************************************/
-trigger AccountTrigger_AT on Account (before insert, after insert, after update, before update) {
+trigger AccountTrigger_AT on Account (before insert, before update, before delete, after insert, after update,
+                                        after delete, after undelete) {
     trac_TriggerHandlerBase.triggerHandler(new AccountDomain());
 }

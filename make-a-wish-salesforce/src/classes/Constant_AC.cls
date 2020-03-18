@@ -40,6 +40,8 @@ public class Constant_AC {
 	public final static Id CLASS_OFFERING_RECORD_TYPE_ID = Schema.SObjectType.Class_Offering__c.getRecordTypeInfosByDeveloperName().get('Virtual_Self_Paced').getRecordTypeId();
 	public final static Id TRAVEL_ALGM_RT_ID = Schema.SObjectType.Medical_Questions__c.getRecordTypeInfosByDeveloperName().get('Travel_Algorithm').getRecordTypeId();
 	public final static Id BUDGETING_RT_ID = Schema.SObjectType.Wish_Expense__c.getRecordTypeInfosByDeveloperName().get('Budgeting').getRecordTypeId();
+	public final static String IN_KIND_DONATION_RT_LABEL = 'In-Kind Donation';
+	public final static String IN_KIND_REIMBURSEMENT_RT_LABEL = 'Reimbursement';
 	public final static Id IN_KIND_ID = Schema.SObjectType.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByDeveloperName().get('In_Kind_Donation').getRecordTypeId();
 	public final static Id REIMBURSEMENT_ID = Schema.SObjectType.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByDeveloperName().get('Reimbursement').getRecordTypeId();
 	public final static Id DIAGNOSIS_RT_ID = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Diagnosis_Verification_Review').getRecordTypeId();
@@ -61,6 +63,10 @@ public class Constant_AC {
 	public final static Id FORM_TRACKER_ATTACHMENT_ID = Schema.SObjectType.Minor_Participant__c.getRecordTypeInfosByDeveloperName().get('Form_Tracker_Attachment').getRecordTypeId();
 	public final static Id COMBO_RECORD_ID = Schema.SObjectType.Minor_Participant__c.getRecordTypeInfosByDeveloperName().get('Combo_Form_Attachment').getRecordTypeId();
 	public final static Id WISH_EXPENSE_RT_FINANCE = Schema.SObjectType.Wish_Expense__c.getRecordTypeInfosByDeveloperName().get('Finance').getRecordTypeId();
+	public static final String TYPE_LIGHTNING = 'Lightning';
+	public static final String TYPE_CLASSIC = 'Classic';
+	public static final String THEME_4D = 'Theme4d';
+	public static final String THEME_4U = 'Theme4u';
 
 	/**
 	* sObject Api Names and Labels
@@ -116,6 +122,12 @@ public class Constant_AC {
 	public static final String LEAD_NUMBER_OF_SIBLINGS_UNKNOWN = 'Unknown';
 	public static final String LEAD_COMATOSE_VEGETATIVE_STATE_YES = 'Yes';
 	public static final String LEAD_MEDICAL_REASON_FOR_MOVING_QUICKLY_YES = 'Yes';
+	public static final String LEAD_ERROR_WISH_CHILD = 'Wish Child';
+	public static final String LEAD_ERROR_WISH_ADDITIONAL_PARENT_GUARDIAN = 'Additional Parent/Guardian';
+	public static final String LEAD_ERROR_WISH_FAMILY = 'Wish Family';
+	public static final String LEAD_ERROR_BEST = 'Best Physician Contact';
+	public static final String LEAD_ERROR_MEDICAL_PROFESSIONAL = 'Medical Professional';
+	public static final String LEAD_ERROR_WISH_FAMILY_AND_MEDICAL_PROFESSIONAL = 'Wish Family and Medical Professional';
 
 	/**
 	 * Lead File Constants
@@ -215,23 +227,12 @@ public class Constant_AC {
 	public static final String CONTACT_NAME_UNKNOWN = 'Unknown';
 
 	/**
-	 * Case File Constants
-	 */
-	public final static String CASE_FILE_CONTENT_TYPE_FOLDER = 'Folder';
-	public final static String CASE_FILE_NAME_DOCUMENTS = 'Documents';
-
-	/**
 	 * Contact File Constants
 	 */
-	public final static String CONTACT_FILE_CONTENT_TYPE_FOLDER = 'Folder';
+	public final static String CONTACT_CONTENT_FILE_TYPE_FOLDER = 'Folder';
 	public final static String CONTACT_FILE_NAME_DOCUMENTS = 'Documents';
 	public static final String CONTACT_FILE_NAME_PHOTOS = 'Photos';
 	public static final String CONTACT_FILE_NAME_VIDEOS = 'Videos';
-
-	/*
-	 * In Kind Reimbursement File Constants
-	 */
-	public final static String INKIND_REIMBURSEMENT_FILE_DOCUMENTATION = 'Not Available';
 
 	/**
 	 * Chapter Role File Constants
@@ -290,8 +291,8 @@ public class Constant_AC {
 	public static final String WISH_AFFILIATION_TYPE_DECLINED_PARTICIPANT = 'Declined Participant';
 	public static final String WISH_AFFILIATION_TYPE_MEDICAL_PROFESSIONAL = 'Medical Professional';
 	public static final String WISH_AFFILIATION_TYPE_GUARDIAN_OF_MINOR_PARTICIPANT = 'Guardian of Minor Participant';
-	public static final String WISH_AFFILIATION_TYPE_OTHER = 'Other';
 
+	public static final String WISH_AFFILIATION_TYPE_OTHER = 'Other';
 	/**
 	* Wish Change Request Status
 	*/
@@ -332,4 +333,9 @@ public class Constant_AC {
 	 * Role Constants
 	 */
 	public static final String ROLE_NATIONAL_STAFF = 'National Staff';
+    
+    /**
+     * File Constants
+	 */
+    public static final String FILE_CONTENT_TYPE_FOLDER = 'Folder';
 }
