@@ -4,17 +4,17 @@
     <enableEmailConsentManagement>false</enableEmailConsentManagement>
     <enableEmailSenderIdCompliance>false</enableEmailSenderIdCompliance>
     <enableEmailSpfCompliance>true</enableEmailSpfCompliance>
-    <enableEmailToSalesforce>false</enableEmailToSalesforce>
+    <enableEmailToSalesforce>true</enableEmailToSalesforce>
     <enableEmailWorkflowApproval>true</enableEmailWorkflowApproval>
     <enableEnhancedEmailEnabled>true</enableEnhancedEmailEnabled>
     <enableHandleBouncedEmails>true</enableHandleBouncedEmails>
     <enableHtmlEmail>true</enableHtmlEmail>
     <enableListEmailLogActivities>false</enableListEmailLogActivities>
-    <enableResendBouncedEmails>false</enableResendBouncedEmails>
+    <enableResendBouncedEmails>true</enableResendBouncedEmails>
     <enableRestrictTlsToDomains>false</enableRestrictTlsToDomains>
     <enableSendViaExchangePref>false</enableSendViaExchangePref>
     <enableSendViaGmailPref>false</enableSendViaGmailPref>
-    <enableSetMatchingEmailsOnBounce>false</enableSetMatchingEmailsOnBounce>
+    <enableSetMatchingEmailsOnBounce>true</enableSetMatchingEmailsOnBounce>
     <enableUseOrgFootersForExtTrans>false</enableUseOrgFootersForExtTrans>
     <sendEmailsEvenWhenAutomationUpdatesSameRecord>false</sendEmailsEvenWhenAutomationUpdatesSameRecord>
     <sendMassEmailNotification>false</sendMassEmailNotification>

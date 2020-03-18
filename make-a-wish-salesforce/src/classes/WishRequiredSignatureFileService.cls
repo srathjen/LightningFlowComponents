@@ -16,6 +16,6 @@ public with sharing class WishRequiredSignatureFileService {
 			wishSignIds.add(wishSign.Id);
 			wishSignFileMap.put(wishSign.Id, String.valueOf(wishSign));
 		}
-		AWSFilePath_AC.UpdateWishRequiredSignatureFilePath(wishSignIds, wishSignFileMap);
+		AWSFilePathService.updateWishRequiredSignatureFilePath(wishSignIds, wishSignFileMap);
 	}
 }
