@@ -228,6 +228,11 @@ public class Constant_AC {
 	public final static String CHAPTER_ROLE_WISH_GRANTER = 'Wish Granter';
 	public final static String CHAPTER_ROLE_WISH_GRANTER_MENTOR = 'Wish Granter Mentor';
 
+	/*
+	 * In Kind Reimbursement File Constants
+	 */
+	public final static String INKIND_REIMBURSEMENT_FILE_DOCUMENTATION = 'Not Available';
+
 	/**
 	 * Relationship Constants
 	 */
@@ -278,7 +283,6 @@ public class Constant_AC {
 	public static final String WISH_AFFILIATION_TYPE_DECLINED_PARTICIPANT = 'Declined Participant';
 	public static final String WISH_AFFILIATION_TYPE_MEDICAL_PROFESSIONAL = 'Medical Professional';
 	public static final String WISH_AFFILIATION_TYPE_GUARDIAN_OF_MINOR_PARTICIPANT = 'Guardian of Minor Participant';
-
 	public static final String WISH_AFFILIATION_TYPE_OTHER = 'Other';
 
 	/**
@@ -331,4 +335,11 @@ public class Constant_AC {
 	public static final String FILE_NAME_FINANCIALS = 'Financials';
 	public static final String FILE_NAME_PHOTOS = 'Photos';
 	public static final String FILE_NAME_VIDEOS = 'Videos';
+    
+    /**
+	 * Record Share Constants
+	 */
+    public static final String RECORD_SHARE_READ = 'Read';
+    public static final String RECORD_SHARE_EDIT = 'Edit';
+    public static final String RECORD_SHARE_NONE = 'None';
 }

@@ -12,6 +12,9 @@ public class AccountService {
     private final static Id CONTACT_WISH_CHILD_RECORD_TYPE_ID = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
     private final static Id WISH_FORM_CHILD_EMERGENCY_ID = Constant_AC.WISH_FORM_CHILD_EMERGENCY_ID;
     private final static String WISH_FAMILY_RECORD_TYPE_LABEL = Constant_AC.WISH_FAMILY_RT_LABEL;
+    private final static String READ = Constant_AC.RECORD_SHARE_READ;
+    private final static String EDIT = Constant_AC.RECORD_SHARE_EDIT;
+    private final static String NONE = Constant_AC.RECORD_SHARE_NONE;
     private final static String RECORD_NAME_REMOVE_SUBSTRING_MAW = 'Make-A-Wish ';
     private final static String CHAPTER_SUBSTRING = ' - Chapter';
     private final static String USER_ROLE_NAME_NATIONAL_STAFF = 'National Staff';
@@ -248,10 +251,10 @@ public class AccountService {
                 groupId = publicGroupMap.get(accountChapterNameMap.get(accountRecord.Chapter_Name__c));
                 AccountShare accountShare = new AccountShare();
                 accountShare.AccountId = accountRecord.Id;
-                accountShare.Accountaccesslevel = 'Read';
-                accountShare.CaseAccessLevel = 'None';
-                accountShare.ContactAccessLevel = 'None';
-                accountShare.OpportunityAccessLevel = 'None';
+                accountShare.Accountaccesslevel = READ;
+                accountShare.CaseAccessLevel = NONE;
+                accountShare.ContactAccessLevel = NONE;
+                accountShare.OpportunityAccessLevel = NONE;
                 accountShare.UserOrGroupId = groupId;
                 accountShareList.add(accountShare);
             }
@@ -300,10 +303,10 @@ public class AccountService {
                             AccountShare accountShare = new AccountShare();
                             accountShare.accountId = account.Id;
                             accountShare.UserOrGroupId = user.Id;
-                            accountShare.accountAccessLevel = 'Edit';
-                            accountShare.OpportunityAccessLevel = 'Read';
-                            accountShare.CaseAccessLevel = 'Edit';
-                            accountShare.ContactAccessLevel = 'Edit';
+                            accountShare.accountAccessLevel = EDIT;
+                            accountShare.OpportunityAccessLevel = READ;
+                            accountShare.CaseAccessLevel = EDIT;
+                            accountShare.ContactAccessLevel = EDIT;
                             accountShare.RowCause = Schema.AccountShare.RowCause.Manual;
                             accountShareEditList.add(accountShare);
                         }
