@@ -30,8 +30,8 @@
   </types>
   <types>
     <members>Endpoints__c</members>
-    <members>Lead</members>
     <members>Inkind_Donation_PDFs__c</members>
+    <members>Lead</members>
     <name>CustomObject</name>
   </types>
   <types>
@@ -95,6 +95,10 @@
   <types>
     <members>*</members>
     <name>LightningComponentBundle</name>
+  </types>
+  <types>
+    <members>Wish_Stages</members>
+    <name>PathAssistant</name>
   </types>
   <types>
     <members>Access_to_Wish_Expense_Object</members>

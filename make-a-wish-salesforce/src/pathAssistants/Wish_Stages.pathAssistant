@@ -6,6 +6,7 @@
     <masterLabel>Wish Stages</masterLabel>
     <pathAssistantSteps>
         <fieldNames>Sub_Status__c</fieldNames>
+        <fieldNames>Closed_Date__c</fieldNames>
         <picklistValueName>Closed</picklistValueName>
     </pathAssistantSteps>
     <pathAssistantSteps>
@@ -31,11 +32,9 @@
         <picklistValueName>Inactive</picklistValueName>
     </pathAssistantSteps>
     <pathAssistantSteps>
-        <fieldNames>Budget_Submitted_Date__c</fieldNames>
-        <fieldNames>Budget_Approved_Date__c</fieldNames>
         <fieldNames>Wish_Clearance_Needed__c</fieldNames>
-        <fieldNames>Wish_Clearance_Sent_Date__c</fieldNames>
-        <fieldNames>Wish_Clearance_Received_Date__c</fieldNames>
+        <fieldNames>Budget_Approval_Status_from_Budget__c</fieldNames>
+        <fieldNames>Budget_Approved_Date_from_Budget__c</fieldNames>
         <info>&lt;p&gt;The child’s wish is awaiting budget approval and/or medical approval. &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;&lt;u&gt;Next Steps Include:&lt;/u&gt;&lt;/i&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Follow up with the medical professional if medical paperwork isn’t returned within 2 weeks&lt;/li&gt;&lt;li&gt;Update to &lt;b&gt;Wish Design&lt;/b&gt; once budget and medical approval are received&lt;/li&gt;&lt;/ul&gt;</info>
         <picklistValueName>Pending Approval</picklistValueName>
     </pathAssistantSteps>
@@ -60,8 +59,7 @@
         <picklistValueName>Ready to Interview</picklistValueName>
     </pathAssistantSteps>
     <pathAssistantSteps>
-        <fieldNames>AnticipatedStart_Date__c</fieldNames>
-        <fieldNames>Extended_Start_Date__c</fieldNames>
+        <fieldNames>Start_Date__c</fieldNames>
         <fieldNames>End_Date__c</fieldNames>
         <fieldNames>Extended_End_Date__c</fieldNames>
         <info>&lt;p&gt;This wish is now approved and it’s time to start planning the wish!&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;&lt;u&gt;Next Steps Include:&lt;/u&gt;&lt;/i&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Determine the wish dates with family and the assisting chapter as necessary&lt;/li&gt;&lt;li&gt;Confirm all wish details with volunteers and family&lt;/li&gt;&lt;li&gt;Submit the wish assist request and/or celebrity request paperwork&lt;/li&gt;&lt;li&gt;Confirm vendors for wish&lt;/li&gt;&lt;li&gt;Update the wish to &lt;b&gt;Wish Scheduled&lt;/b&gt; when the wish dates are official and you are ready to make the wish arrangements&lt;/li&gt;&lt;/ul&gt;</info>
@@ -77,8 +75,7 @@
         <picklistValueName>Wish Determined</picklistValueName>
     </pathAssistantSteps>
     <pathAssistantSteps>
-        <fieldNames>AnticipatedStart_Date__c</fieldNames>
-        <fieldNames>Extended_Start_Date__c</fieldNames>
+        <fieldNames>Start_Date__c</fieldNames>
         <fieldNames>End_Date__c</fieldNames>
         <fieldNames>Extended_End_Date__c</fieldNames>
         <fieldNames>Presentation_Date__c</fieldNames>
