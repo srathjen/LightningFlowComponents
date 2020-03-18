@@ -335,4 +335,11 @@ public class Constant_AC {
 	public static final String FILE_NAME_FINANCIALS = 'Financials';
 	public static final String FILE_NAME_PHOTOS = 'Photos';
 	public static final String FILE_NAME_VIDEOS = 'Videos';
+    
+    /**
+	 * Record Share Constants
+	 */
+    public static final String RECORD_SHARE_READ = 'Read';
+    public static final String RECORD_SHARE_EDIT = 'Edit';
+    public static final String RECORD_SHARE_NONE = 'None';
 }
