@@ -85,6 +85,7 @@ public class Constant_AC {
 	 * Affiliation Constants
 	 */
 	public final static String ORG_AFFILIATION_STATUS_ACTIVE = 'Active';
+	public final static String ORG_AFFILIATION_STATUS_INACTIVE = 'Inactive';
 	public final static String ORG_AFFILIATION_TREATING_FACILITY_CURRENT = 'Current';
 
 	/**
@@ -284,7 +285,7 @@ public class Constant_AC {
 	public static final String WISH_AFFILIATION_TYPE_MEDICAL_PROFESSIONAL = 'Medical Professional';
 	public static final String WISH_AFFILIATION_TYPE_GUARDIAN_OF_MINOR_PARTICIPANT = 'Guardian of Minor Participant';
 	public static final String WISH_AFFILIATION_TYPE_OTHER = 'Other';
-	
+
 	/**
 	* Wish Change Request Status
 	*/
