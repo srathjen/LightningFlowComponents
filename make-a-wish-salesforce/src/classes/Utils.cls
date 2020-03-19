@@ -22,6 +22,7 @@ public class Utils {
                 currentUser = [
                         SELECT
                                 Id,
+                                Name,
                                 UserRole.Name,
                                 Chapter_Name__c,
                                 Profile.Name,
