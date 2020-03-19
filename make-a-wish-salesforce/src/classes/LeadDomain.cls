@@ -192,7 +192,7 @@ public with sharing class LeadDomain extends trac_TriggerHandlerBase {
 			} else if (String.isNotBlank(newLead.Any_medical_reason_for_moving_quickly__c)
 					&& (!newLead.Any_medical_reason_for_moving_quickly__c.containsIgnoreCase(MEDICAL_REASON_MOVING_QUICKLY_YES))) {
 				newLead.Rush__c = false;
-				if (oldLead.Any_medical_reason_for_moving_quickly__c.containsIgnoreCase(MEDICAL_REASON_MOVING_QUICKLY_YES)) {
+				if (newLead.Any_medical_reason_for_moving_quickly__c.containsIgnoreCase(MEDICAL_REASON_MOVING_QUICKLY_YES)) {
 					potentialRushLeads.add(newLead);
 				}
 			} else {
