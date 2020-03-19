@@ -9,7 +9,7 @@ public class DiagnosisVerificationService {
 	 * Find Diagnosis Verifications by Lead Id
 	 * @param leadId
 	 */
-	public static Diagnosis_Verification__c findByLeadId(Id leadId) {
+	public static List<Diagnosis_Verification__c> findByLeadId(Id leadId) {
 		return [
 				SELECT Id, ICD_Code__c, Condition_Description__c, Group1__c, isEligible__c
 				FROM Diagnosis_Verification__c

@@ -146,10 +146,7 @@ public with sharing class LeadDomain extends trac_TriggerHandlerBase {
 				newLead.Part_A_Sent__c = Date.today();
 			}
 			if (isLeadQualified(newLead, oldLead)) {
-				Diagnosis_Verification__c diagnosisVerification = DiagnosisVerificationService.findByLeadId(newLead.Id);
-				if (diagnosisVerification != null) {
-					diagnosisVerifications.add(diagnosisVerification);
-				}
+				diagnosisVerifications = DiagnosisVerificationService.findByLeadId(newLead.Id);
 				newLead.Sub_Status__c = null;
 				newLead.Qualified_Date__c = Date.today();//Added per IME-69
 			}
