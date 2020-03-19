@@ -169,7 +169,7 @@ public class Utils {
 
         return selectOptions;
     }
-
+  
     /**
     * Phone fields are currently String type fields and are being used in comparision,
     * but when compared they are coming formatted and some are not causing the if statetment to fail

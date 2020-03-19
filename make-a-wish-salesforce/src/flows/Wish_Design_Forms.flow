@@ -211,8 +211,8 @@
     <assignments>
         <name>Add_to_Create_Collection_0_0_0_0_0_0_0_0_0</name>
         <label>Add to Create Collection</label>
-        <locationX>4662</locationX>
-        <locationY>2422</locationY>
+        <locationX>4410</locationX>
+        <locationY>2319</locationY>
         <assignmentItems>
             <assignToReference>Change_Requests_To_Create</assignToReference>
             <operator>Add</operator>
@@ -1041,8 +1041,8 @@
     <assignments>
         <name>AssignEmergencyContactValues</name>
         <label>AssignEmergencyContactValues</label>
-        <locationX>2171</locationX>
-        <locationY>2146</locationY>
+        <locationX>2796</locationX>
+        <locationY>3113</locationY>
         <assignmentItems>
             <assignToReference>Wish_Child_D.Social_Media_Link__c</assignToReference>
             <operator>Assign</operator>
@@ -2839,8 +2839,8 @@
     <assignments>
         <name>Update_Mobile_Change_Request</name>
         <label>Blank Mobile Update</label>
-        <locationX>3784</locationX>
-        <locationY>2317</locationY>
+        <locationX>3821</locationX>
+        <locationY>2312</locationY>
         <assignmentItems>
             <assignToReference>Wish_Child_D.MobilePhone</assignToReference>
             <operator>Assign</operator>
@@ -2917,8 +2917,8 @@
     <assignments>
         <name>Update_MS_Change_Request_0_0_0_0_0_0_0_0</name>
         <label>Update MS CR</label>
-        <locationX>4515</locationX>
-        <locationY>2322</locationY>
+        <locationX>4110</locationX>
+        <locationY>2149</locationY>
         <assignmentItems>
             <assignToReference>ChangeRequesttoUpdate_Single.Field_New_Value__c</assignToReference>
             <operator>Assign</operator>
@@ -4399,8 +4399,8 @@
     <decisions>
         <name>Navigate_Decision_0_0_0</name>
         <label>Navigate Decision</label>
-        <locationX>1968</locationX>
-        <locationY>2273</locationY>
+        <locationX>1438</locationX>
+        <locationY>3233</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Next_0_0_0</name>
@@ -4451,8 +4451,8 @@
     <decisions>
         <name>Navigate_Decision_0_0_0_0</name>
         <label>Navigate Decision</label>
-        <locationX>1718</locationX>
-        <locationY>2270</locationY>
+        <locationX>3310</locationX>
+        <locationY>2233</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Next_0_0_0_0</name>
@@ -5034,8 +5034,8 @@
     <decisions>
         <name>Required_Picklist</name>
         <label>Required Picklist</label>
-        <locationX>2075</locationX>
-        <locationY>2157</locationY>
+        <locationX>1602</locationX>
+        <locationY>2859</locationY>
         <defaultConnector>
             <targetReference>Navigate_Decision_0_0</targetReference>
         </defaultConnector>
@@ -5433,7 +5433,7 @@
             <label>Submit</label>
         </rules>
     </decisions>
-    <description>Wish Vision and Wish Design forms completed during the Wish Interview by Wish Granter volunteers. Bug fixes from WLP 610 &amp; 617 &amp; 738. 19/11/20. SIW-475</description>
+    <description>Wish Vision and Wish Design forms completed during the Wish Interview by Wish Granter volunteers. Bug fixes from WLP 610 &amp; 617 &amp; 738. 19/11/20</description>
     <dynamicChoiceSets>
         <name>childPriorWish_Choices</name>
         <dataType>String</dataType>
@@ -7541,8 +7541,8 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
         <description>Updates the Wish Case after completing the Wish Detail arm of the flow</description>
         <name>UpdateWishCase2</name>
         <label>UpdateWishCase</label>
-        <locationX>1309</locationX>
-        <locationY>1247</locationY>
+        <locationX>1099</locationX>
+        <locationY>1057</locationY>
         <connector>
             <targetReference>Get_Case_Summary_Screen_Vision_0</targetReference>
         </connector>
@@ -7677,8 +7677,8 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
         <description>Used when clicking Save on the Wish Details arm of the flow</description>
         <name>UpdateWishChild2_0</name>
         <label>UpdateWishChild</label>
-        <locationX>2473</locationX>
-        <locationY>2454</locationY>
+        <locationX>2447</locationX>
+        <locationY>2321</locationY>
         <connector>
             <targetReference>updateWishCase3_0</targetReference>
         </connector>
@@ -8152,8 +8152,8 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
     <screens>
         <name>emergencyContactPriorWishScreen</name>
         <label>emergencyContactPriorWishScreen</label>
-        <locationX>2178</locationX>
-        <locationY>2008</locationY>
+        <locationX>2164</locationX>
+        <locationY>2336</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -8459,6 +8459,12 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
                 <name>isLEX</name>
                 <value>
                     <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>navigationType</name>
+                <value>
+                    <stringValue>back</stringValue>
                 </value>
             </inputParameters>
             <isRequired>true</isRequired>
@@ -9091,10 +9097,6 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
             <fieldType>InputField</fieldType>
             <helpText>&lt;p&gt;Enter MONTH/YEAR&lt;/p&gt;</helpText>
             <isRequired>false</isRequired>
-            <validationRule>
-                <errorMessage>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0); font-size: 13px;&quot;&gt;Please enter a time period in the correct format (Month/Year). Additional notes can be added in the Interview Notes field below.&lt;/span&gt;&lt;/p&gt;</errorMessage>
-                <formulaExpression>LEN({!Availability1})&lt;=20</formulaExpression>
-            </validationRule>
         </fields>
         <fields>
             <name>Availability2</name>
@@ -9106,10 +9108,6 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
             <fieldType>InputField</fieldType>
             <helpText>&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;Enter MONTH/YEAR&lt;/span&gt;&lt;/p&gt;</helpText>
             <isRequired>false</isRequired>
-            <validationRule>
-                <errorMessage>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;Please enter a time period in the correct format (Month/Year). Additional notes can be added in the Interview Notes field below.&lt;/span&gt;&lt;/p&gt;</errorMessage>
-                <formulaExpression>LEN({!Availability2})&lt;=20</formulaExpression>
-            </validationRule>
         </fields>
         <fields>
             <name>Availability3</name>
@@ -9121,10 +9119,6 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
             <fieldType>InputField</fieldType>
             <helpText>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;Enter MONTH/YEAR&lt;/span&gt;&lt;/p&gt;</helpText>
             <isRequired>false</isRequired>
-            <validationRule>
-                <errorMessage>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;Please enter a time period in the correct format (Month/Year). Additional notes can be added in the Interview Notes field below.&lt;/span&gt;&lt;/p&gt;</errorMessage>
-                <formulaExpression>LEN({!Availability3})&lt;=20</formulaExpression>
-            </validationRule>
         </fields>
         <fields>
             <name>DetailsAboutImpact</name>
@@ -9626,6 +9620,10 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
             <fieldText>Game</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
+            <validationRule>
+                <errorMessage>&lt;p&gt;There is a 100 character field limit&lt;/p&gt;</errorMessage>
+                <formulaExpression>Len({!Wish_Child_V.Game__c}) &lt;= 100</formulaExpression>
+            </validationRule>
         </fields>
         <fields>
             <name>WishChildScreenFieldMovie</name>
@@ -10674,7 +10672,7 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
             <targetReference>Get_Wish_Case</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <textTemplates>
         <name>BaseForNewLine</name>
         <text>~~~

@@ -88,43 +88,41 @@ private class Lead_Trigger_Test {
 		}
 
 		update convertedLeads;
-
-		Lead_OnAfterUpdateTriggerHandlerHelper.dupeCheckonAccount(new Set<Id>(new Map<Id, Lead>(convertedLeads).keySet()));
 	}
 
-	@IsTest
-	static void coverPrivateMethods() {
-		trac_TriggerHandlerBase.blockTrigger = true;
-		Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
-		insert chapterAccount;
-
-		Lead wishChild = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
-		wishChild.Hidden_Potential_Rush__c = 'yes';
-		wishChild.I_am_Recognized_To_Practice_As_a__c = 'Doctor';
-		wishChild.Any_medical_reason_for_moving_quickly__c = 'yes';
-		insert wishChild;
-		wishChild.Sub_Status__c = 'Pending Diagnosis Verification';
-		update wishChild;
-
-		dsfs__DocuSign_Status__c status = OrientationandTrainingUtil.createDocusignStatus(wishChild.Id);
-		status.dsfs__Subject__c = 'Diagnosis Verification Form';
-		insert status;
-		trac_TriggerHandlerBase.blockTrigger = false;
-
-		Lead_OnAfterUpdateTriggerHandlerHelper.leadConvertion(new Map<Id, Lead>{
-				wishChild.Id => wishChild
-		});
-
-		Set<Id> chapterAccountIds = new Set<Id>{
-				chapterAccount.Id
-		};
-
-		Lead_OnAfterUpdateTriggerHandlerHelper.updateLeadConvertedAccounts(chapterAccountIds, chapterAccountIds, wishChild.Id, new Map<Id, Account>(), new Map<Id, Lead>{
-				chapterAccount.Id => wishChild
-		}, new List<Account>());
-		wishChild.FirstName = null;
-		Lead_OnAfterUpdateTriggerHandlerHelper.updateLeadConvertedAccounts(chapterAccountIds, chapterAccountIds, wishChild.Id, new Map<Id, Account>(), new Map<Id, Lead>{
-				chapterAccount.Id => wishChild
-		}, new List<Account>());
-	}
+//	@IsTest
+//	static void coverPrivateMethods() {
+//		trac_TriggerHandlerBase.blockTrigger = true;
+//		Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
+//		insert chapterAccount;
+//
+//		Lead wishChild = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
+//		wishChild.Hidden_Potential_Rush__c = 'yes';
+//		wishChild.I_am_Recognized_To_Practice_As_a__c = 'Doctor';
+//		wishChild.Any_medical_reason_for_moving_quickly__c = 'yes';
+//		insert wishChild;
+//		wishChild.Sub_Status__c = 'Pending Diagnosis Verification';
+//		update wishChild;
+//
+//		dsfs__DocuSign_Status__c status = OrientationandTrainingUtil.createDocusignStatus(wishChild.Id);
+//		status.dsfs__Subject__c = 'Diagnosis Verification Form';
+//		insert status;
+//		trac_TriggerHandlerBase.blockTrigger = false;
+//
+//		LeadConvertService.convertLead(new Map<Id, Lead>{
+//				wishChild.Id => wishChild
+//		});
+//
+//		Set<Id> chapterAccountIds = new Set<Id>{
+//				chapterAccount.Id
+//		};
+//
+//		AccountService.setHouseholdFields(chapterAccountIds, chapterAccountIds, wishChild.Id, new Map<Id, Account>(), new Map<Id, Lead>{
+//				chapterAccount.Id => wishChild
+//		}, new List<Account>());
+//		wishChild.FirstName = null;
+//		AccountService.setHouseholdFields(chapterAccountIds, chapterAccountIds, wishChild.Id, new Map<Id, Account>(), new Map<Id, Lead>{
+//				chapterAccount.Id => wishChild
+//		}, new List<Account>());
+//	}
 }
