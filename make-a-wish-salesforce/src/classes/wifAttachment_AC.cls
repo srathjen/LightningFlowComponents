@@ -5,6 +5,11 @@ Description : This form is used as IFrame inside the  Diagnosis Verification for
 *******************************************************************************************************************/
 public class wifAttachment_AC {
 
+    @TestVisible private static final String URL_PARAMETER_SAVED = 'saved';
+    @TestVisible private static final String URL_PARAMETER_DELETED = 'deleted';
+    @TestVisible private static final String URL_PARAMETER_ID = 'id';
+    @TestVisible private static final String URL_VALUE_TRUE = 'true';
+
     public Id attachmentId { get; set; }
     public Attachment newAttachment { get; set; }
     public Id recId;
@@ -13,11 +18,11 @@ public class wifAttachment_AC {
 
     public wifAttachment_AC() {
         newAttachment = new Attachment();
-        recId = ApexPages.currentPage().getParameters().get('id');
-        if (ApexPages.currentPage().getParameters().get('saved') != null && ApexPages.currentPage().getParameters().get('saved') == 'true') {
+        recId = ApexPages.currentPage().getParameters().get(URL_PARAMETER_ID);
+        if (ApexPages.currentPage().getParameters().get(URL_PARAMETER_SAVED) != null && ApexPages.currentPage().getParameters().get(URL_PARAMETER_SAVED) == URL_VALUE_TRUE) {
             isSaved = true;
         }
-        if (ApexPages.currentPage().getParameters().get('deleted') != null && ApexPages.currentPage().getParameters().get('deleted') == 'true') {
+        if (ApexPages.currentPage().getParameters().get(URL_PARAMETER_DELETED) != null && ApexPages.currentPage().getParameters().get(URL_PARAMETER_DELETED) == URL_VALUE_TRUE) {
             isDeleted = true;
         }
     }
@@ -49,8 +54,8 @@ public class wifAttachment_AC {
             newAttachment = new Attachment();
         }
         PageReference redirect = Page.wifAttachment_VF;
-        redirect.getParameters().put('id', recId);
-        redirect.getParameters().put('saved' , 'true');
+        redirect.getParameters().put(URL_PARAMETER_ID, recId);
+        redirect.getParameters().put(URL_PARAMETER_SAVED, URL_VALUE_TRUE);
         redirect.setRedirect(true);
         return redirect;
     }
@@ -63,7 +68,7 @@ public class wifAttachment_AC {
             System.debug('Exception ex' + ex.getMessage());
         }
         PageReference redirect = Page.wifAttachment_VF;
-        redirect.getParameters().put('id', recId);
+        redirect.getParameters().put(URL_PARAMETER_ID, recId);
         redirect.setRedirect(true);
         return redirect;
     }
