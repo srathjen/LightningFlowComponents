@@ -5,6 +5,9 @@ Description : This test class used to perform unit testing for the DV Medical Su
 *******************************************************************************************************************/
 @IsTest
 public class wifAttachment_AC_Test {
+
+    private static final String ATTACHMENT_NAME_WISH_FAMILY_FORM = 'Wish Family Form';
+
     /************************************************************
     Globally create a chapter account and Wish child.
     **************************************************************/
@@ -47,20 +50,20 @@ public class wifAttachment_AC_Test {
         Test.startTest();
         PageReference pageRef = Page.wifAttachment_VF;
         Test.setCurrentPage(pageRef);
-        ApexPages.currentPage().getParameters().put('id', newCase.Id);
-        ApexPages.currentPage().getParameters().put('saved', 'true');
+        ApexPages.currentPage().getParameters().put(wifAttachment_AC.URL_PARAMETER_ID, newCase.Id);
+        ApexPages.currentPage().getParameters().put(wifAttachment_AC.URL_PARAMETER_SAVED, wifAttachment_AC.URL_VALUE_TRUE);
         wifAttachment_AC wishFile = new wifAttachment_AC();
         wishFile.getAttachments();
         Attachment attach = new Attachment();
-        attach.Name = 'Wish Family Form';
-        Blob bodyBlob = Blob.valueOf('Wish Family Form');
+        attach.Name = ATTACHMENT_NAME_WISH_FAMILY_FORM;
+        Blob bodyBlob = Blob.valueOf(ATTACHMENT_NAME_WISH_FAMILY_FORM);
         attach.Body = bodyBlob;
         wishFile.newAttachment = attach;
         wishFile.save();
         wishFile.attachmentId = caseFile[0].Id;
         wishFile.RemoveAttachment();
         Test.stopTest();
-        System.assertEquals(attach.Name, 'Wish Family Form', 'Attachment does not have a matched file name');
+        System.assertEquals(attach.Name, ATTACHMENT_NAME_WISH_FAMILY_FORM, 'Attachment does not have a matched file name');
         System.assert(caseFile[0].cg__Case__c == newCase.Id, 'A wish doest not have Attachment');
         System.assertEquals(0, [
                 SELECT Id
