@@ -81,6 +81,7 @@
     <name>EmailTemplate</name>
   </types>
   <types>
+    <members>Account_Record_Page</members>
     <members>Case_Wish_Lightning</members>
     <name>FlexiPage</name>
   </types>
