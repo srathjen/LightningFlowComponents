@@ -342,4 +342,18 @@ public class Constant_AC {
     public static final String RECORD_SHARE_READ = 'Read';
     public static final String RECORD_SHARE_EDIT = 'Edit';
     public static final String RECORD_SHARE_NONE = 'None';
+
+	/*
+	 * Wish Expense Constants
+	 */
+	public static final String WISH_EXPENSE_BUDGET_APPROVAL_STATUS_SUBMITTED = 'Submitted';
+	public static final String WISH_EXPENSE_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
+	public static final String WISH_EXPENSE_BUDGET_APPROVAL_STATUS_REJECTED = 'Rejected';
+
+	/*
+	 * Wish Budget Constants
+	 */
+	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_SUBMITTED = 'Submitted';
+	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
+	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_REJECTED = 'Rejected';
 }
