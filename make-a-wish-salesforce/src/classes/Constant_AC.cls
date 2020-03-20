@@ -3,7 +3,7 @@
  * @author		Gustavo Mayer, Traction on Demand
  * @createdDate	6-19-2019
  */
-public class Constant_AC {
+public class Constant_AC { 
 	public final static String CONTACT_WISH_CHILD_RT_LABEL = 'Wish Child';
 	public final static Id CONTACT_WISH_CHILD_RT_ID = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName().get('Wish_Child').getRecordTypeId();
 	public final static Id IN_KIND_ACCOUNT_ID = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('In_Kind_Donors').getRecordTypeId();
