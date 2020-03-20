@@ -1172,13 +1172,13 @@
                             </apex:outputPanel>
                         </div>
                         <div class="pull-right" style="margin-right: 2%;margin-top: 2%; margin-bottom:1%">
-                            <apex:commandButton value="Save" action="{!SaveExpenses}" styleclass="btn btn-info"
+                            <apex:commandButton value="Save" action="{!saveExpenses}" styleclass="btn btn-info"
                                                 rendered="{! !(budget.Budget_Approval_Status__c == 'Submitted' && !isApprover)}"/>
                         </div>
                         <apex:actionFunction name="submitForApproval" action="{!submitForApproval}" rerender="none"
                                              oncomplete="decisionWindow('{!approvalProcessRequestStatus}');"
                         />
-                        <apex:actionFunction name="ReloadPage" action="{!ReloadPage}" rerender="none"/>
+                        <apex:actionFunction name="ReloadPage" action="{!reloadPage}" rerender="none"/>
                     </apex:pageBlock>
                 </div>
             </div>

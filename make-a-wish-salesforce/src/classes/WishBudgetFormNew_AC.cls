@@ -83,7 +83,7 @@ public class WishBudgetFormNew_AC {
 		budget = getPlanningAnticipationCase[0];
 		recordId = budget.Id;
 		caseApproverStatus = getPlanningAnticipationCase.get(0).Budget_Approval_Status__c;
-		if (caseApproverStatus == 'Submitted') {
+		if (caseApproverStatus == Constant_AC.WISH_EXPENSE_BUDGET_APPROVAL_STATUS_SUBMITTED) {
 			approvalBtnVisibility = false;
 		} else {
 			approvalBtnVisibility = true;
@@ -293,7 +293,7 @@ public class WishBudgetFormNew_AC {
 			} else {
 				wishExpensewrap.get(expense.Wish_Expense_Transaction_Code__r.Wish_Expense_Type__r.Name).add(expense);
 			}
-			if (expense.Wish_Budget__r.Budget_Approval_Status__c == 'Approved') {
+			if (expense.Wish_Budget__r.Budget_Approval_Status__c == Constant_AC.WISH_BUDGET_BUDGET_APPROVAL_STATUS_APPROVED) {
 				isbudgetApprovalExist = true;
 			}
 		}
@@ -699,15 +699,21 @@ public class WishBudgetFormNew_AC {
 		return options;
 	}
 
-	/* This method is used to submit wish budget form for approval to Wish Coordinator. If Projected Cash and Projected Inkind are blank then we will
-    assign Budget Cash and Budget InKind to Projected Cash and Projected InKind before records goes for approval. Once the form is submitted for approval
-    them we will make all fields as Read Only except T-Code and Projected fields.*/
+	/*
+     * @description     This method is used to submit wish budget form for approval to Wish Coordinator.
+     *                  If Projected Cash and Projected Inkind are blank then we will assign Budget Cash
+     *                  and Budget InKind to Projected Cash and Projected InKind before records goes for
+     *                  approval. Once the form is submitted for approval we will make all fields as
+     *                  Read Only except T-Code and Projected fields.
+     *
+     * @author          MST Solutions
+     * @date            unknown
+     */
 	public void submitForApproval() {
-//		List<Case> casebudgetapprovals = new List<Case>();
 		Set<Id> approvedCaseIds = new Set<Id>();
-		String budgetStatus = '';
-		String projectedStatus = '';
+
 		saveWishExpenses();
+
 		List<Wish_Expense__c> recordApprovalStatusUpdateList = new List<Wish_Expense__c>();
 		for (Wish_Expense__c updateWishExpenseStatus : [
 			SELECT Id, Case__c, Wish_Budget__r.Budget_Approval_Status__c,Projected_Approval_Status__c,
@@ -715,22 +721,17 @@ public class WishBudgetFormNew_AC {
 			FROM Wish_Expense__c
 			WHERE Wish_Budget__c = :budgetId
 		]) {
-			//updateWishExpenseStatus.Wish_Expense_Approval_Status__c = 'Initiated';
-			if (updateWishExpenseStatus.Wish_Budget__r.Budget_Approval_Status__c == 'Approved') {
-				budgetStatus = 'Approved';
-			} else if (updateWishExpenseStatus.Wish_Budget__r.Budget_Approval_Status__c != 'Approved') {
-				updateWishExpenseStatus.Wish_Budget__r.Budget_Approval_Status__c = 'Submitted';
-				if (budgetStatus != 'Approved') {
-					budgetStatus = 'Submitted';
+			if (updateWishExpenseStatus.Wish_Budget__r.Budget_Approval_Status__c != Constant_AC.WISH_BUDGET_BUDGET_APPROVAL_STATUS_APPROVED) {
+				updateWishExpenseStatus.Wish_Budget__r.Budget_Approval_Status__c = Constant_AC.WISH_BUDGET_BUDGET_APPROVAL_STATUS_SUBMITTED;
+			}
+
+			if ((isbudgetApprovalExist == true && updateWishExpenseStatus.Wish_Budget__r.Budget_Approval_Status__c == Constant_AC.WISH_BUDGET_BUDGET_APPROVAL_STATUS_SUBMITTED)
+				|| updateWishExpenseStatus.Wish_Budget__r.Budget_Approval_Status__c == Constant_AC.WISH_BUDGET_BUDGET_APPROVAL_STATUS_APPROVED) {
+				if (updateWishExpenseStatus.Projected_Approval_Status__c != Constant_AC.WISH_EXPENSE_BUDGET_APPROVAL_STATUS_APPROVED) {
+					updateWishExpenseStatus.Projected_Approval_Status__c = Constant_AC.WISH_EXPENSE_BUDGET_APPROVAL_STATUS_SUBMITTED;
 				}
 			}
-			if ((isbudgetApprovalExist == true && updateWishExpenseStatus.Wish_Budget__r.Budget_Approval_Status__c == 'Submitted')
-				|| updateWishExpenseStatus.Wish_Budget__r.Budget_Approval_Status__c == 'Approved') {
-				if (updateWishExpenseStatus.Projected_Approval_Status__c != 'Approved') {
-					updateWishExpenseStatus.Projected_Approval_Status__c = 'Submitted';
-					projectedStatus = 'Submitted';
-				}
-			}
+
 			recordApprovalStatusUpdateList.add(updateWishExpenseStatus);
 			if (!approvedCaseIds.contains(updateWishExpenseStatus.Case__c)) {
 				approvedCaseIds.add(updateWishExpenseStatus.Case__c);
@@ -742,79 +743,82 @@ public class WishBudgetFormNew_AC {
 		}
 
 		if (approverId != null && getPlanningAnticipationCase.get(0).Id != null && !approvalProcessStart) {
-
 			try {
 				Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
-				/*if(budgetNotes.length()>0){
-                    req.setComments(budgetNotes);
-                }
-                else{
-                    req.setComments('Approval for Wish Budget form');
-                }*/
+
 				req.setSubmitterId(UserInfo.getUserId());
-				req.setComments('Approval for Wish Budget form');
+				req.setComments(Label.WishBudgetForm_Approval_Comments);
 				req.setObjectId(getPlanningAnticipationCase.get(0).Id);
 				req.setProcessDefinitionNameOrId('Wish_Budget_Approval');
 				req.setSkipEntryCriteria(false);
 				req.setNextApproverIds(new Id[]{
 					approverId
 				});
+
 				Approval.process(req);
 				Approval.unlock(getPlanningAnticipationCase.get(0).Id, false);
+
 				displayPopup = true;
 				approvalProcessStart = true;
-				approvalProcessRequestStatus = 'Your request has been submitted successfully.';
+				approvalProcessRequestStatus = Label.WishBudgetForm_Approval_Success;
 			} catch (Exception e) {
-				approvalProcessRequestStatus = 'Budget inactive, unable to send for approval';
+				approvalProcessRequestStatus = Label.WishBudgetForm_Approval_Failure;
 				displayPopup = true;
 				approvalProcessStart = true;
 			}
 		}
+
 		if (approvalProcessStart) {
 			displayPopup = false;
-			ReloadPage();
+			reloadPage();
 		}
-
-		/*if (getPlanningAnticipationCase.size() > 0) {
-            Case updateCase = new Case();
-            updateCase.id = getPlanningAnticipationCase.get(0).Wish_Case__c;
-            updateCase.Budget_Submitted_Date__c = Date.Today();
-            updateCase.Budget_Approval_Status__c = 'Submitted';
-            update updateCase;
-        }
-
-        if (budgetStatus == 'Submitted' || projectedStatus == 'Submitted') {
-            for (Id tempId : approvedCaseIds) {
-                Case approvedCase = new Case();
-                approvedCase.Id = tempId;
-                if (budgetStatus == 'Submitted')
-                    approvedCase.Budget_Status__c = budgetStatus;
-                if (projectedStatus == 'Submitted')
-                    approvedCase.Projected_Status__c = projectedStatus;
-                casebudgetapprovals.add(approvedCase);
-            }
-            update casebudgetapprovals;
-        }*/
 	}
 
-	public PageReference SaveExpenses() {
+	/*
+    * @description     Function to save expenses.
+    *
+    * @return          PageReference
+    *
+    * @author          MST Solutions
+    * @createdDate     unknown
+    */
+	public PageReference saveExpenses() {
 		saveWishExpenses();
 		loadData();
 		summary();
 		totalSummary();
+
 		PageReference pageRef = new PageReference('/apex/WishBudgetFormNew_VF?CaseId='
 			+ caseId + '&BudgetId=' + budgetId);
 		pageRef.setRedirect(true);
+
 		return pageRef;
 	}
 
-	public PageReference ReloadPage() {
+	/*
+    * @description     Function to reload page.
+    *
+    * @return          PageReference
+    *
+    * @author          MST Solutions
+    * @createdDate     unknown
+    */
+	public PageReference reloadPage() {
 		PageReference pageRef = new PageReference('/apex/WishBudgetFormNew_VF?CaseId='
 			+ caseId + '&BudgetId=' + budgetId);
 		pageRef.setRedirect(true);
+
 		return pageRef;
 	}
 
+	/*
+    * @description     Function to save wish expenses.
+    *
+    * @return          PageReference
+    *
+    * @author          MST Solutions
+    * @createdDate     unknown
+    */
 	public void saveWishExpenses() {
 		List<Wish_Expense__c> wrappers = new List<Wish_Expense__c>();
 		for (String type : wishExpensewrap.keySet()) {
@@ -822,26 +826,26 @@ public class WishBudgetFormNew_AC {
 		}
 		List<Wish_Expense__c> wishexpenses = new List<Wish_Expense__c>();
 
-		/*case caseNotes = new Case();
-        caseNotes.Id = caseId;
-        caseNotes.Budget_Notes_from_Budget__c = budgetNotes;
-        update caseNotes;*/
 		for (Wish_Expense__c wrapper : wrappers) {
 			Wish_Expense__c expense = new Wish_Expense__c();
+
 			if (wrapper.Id != null) {
 				expense.Id = wrapper.Id;
 			} else {
 				expense.RecordTypeId = budgetingRecordTypeId;
 			}
+
 			expense.Case__c = caseId;
 			expense.Wish_Budget__c = budgetId;
 			expense.Wish_Expense_Transaction_Code__c = wrapper.Wish_Expense_Transaction_Code__c ;
+
 			if (wrapper.Account_Description__c != '--None--') {
 				expense.Account_Description__c = wrapper.Account_Description__c ;
 			}
 			if (wrapper.Department_Division__c != '--None--') {
 				expense.Department_Division__c = wrapper.Department_Division__c;
 			}
+
 			expense.Account_Number__c = wrapper.Account_Number__c ;
 			expense.Post_Date__c = wrapper.Post_Date__c ;
 			expense.Transaction__c = wrapper.Transaction__c ;
@@ -854,22 +858,27 @@ public class WishBudgetFormNew_AC {
 			expense.Actual_In_Kind__c = wrapper.Actual_In_Kind__c;
 			expense.FE_Posted_Cash__c = wrapper.FE_Posted_Cash__c;
 			expense.FE_Posted_In_Kind__c = wrapper.FE_Posted_In_Kind__c;
-			//expense.Wish_Budget__r.Budget_Approval_Status__c = wrapper.Budget_Approval_Status__c;
 			expense.Projected_Approval_Status__c = wrapper.Projected_Approval_Status__c;
-			//if(expense.Budget_Cash__c != 0 || expense.Budget_In_Kind__c != 0 || expense.Projected_Cash__c != 0
-			//   || expense.Projected_In_Kind__c != 0 || expense.Actual_Cash__c != 0 || expense.Actual_In_Kind__c != 0)
-			//{
+
 			wishexpenses.add(expense);
-			// }
 		}
+
 		if (wishexpenses.size() > 0) {
 			upsert wishexpenses;
 		}
 	}
 
+	/*
+    * @description     Function to calculate and set SumExpensewrappers.
+    *
+    * @return          PageReference
+    *
+    * @author          MST Solutions
+    * @createdDate     unknown
+    */
 	public void summary() {
-//		List<Wish_Expense__c> wrappers = new List<Wish_Expense__c>();
 		SumExpensewrappers = new Map<String, expenseSummarywrapper>();
+
 		Decimal totalBudCash = 0;
 		Decimal totalProjcash = 0;
 		Decimal totalActCash = 0;
@@ -879,6 +888,7 @@ public class WishBudgetFormNew_AC {
 		Decimal totalFEPCash = 0;
 		Decimal totalFEPInKind = 0;
 		Double Decrease;
+
 		for (String type : wishExpensewrap.keySet()) {
 			expenseSummarywrapper sumWrap = new expenseSummarywrapper();
 			for (Wish_Expense__c wrapper : wishExpensewrap.get(type)) {
@@ -906,12 +916,14 @@ public class WishBudgetFormNew_AC {
 				if (wrapper.FE_Posted_In_Kind__c == null) {
 					wrapper.FE_Posted_In_Kind__c = 0;
 				}
+
 				sumWrap.sumBudgetCash = sumWrap.sumBudgetCash + wrapper.Budget_Cash__c;
 				sumWrap.sumBudgetInKind = sumWrap.sumBudgetInKind + wrapper.Budget_In_Kind__c;
 				sumWrap.sumProjectedCash = sumWrap.sumProjectedCash + wrapper.Projected_Cash__c;
 				sumWrap.sumProjectedInkind = sumWrap.sumProjectedInkind + wrapper.Projected_In_Kind__c;
 				sumWrap.sumActualCash = sumWrap.sumActualCash + wrapper.Actual_Cash__c;
 				sumWrap.sumActualInKind = sumWrap.sumActualInKind + wrapper.Actual_In_Kind__c ;
+
 				if (wrapper.FE_Posted_Cash__c != null) {
 					sumWrap.sumFEPostedCash = sumWrap.sumFEPostedCash + wrapper.FE_Posted_Cash__c;
 				}
@@ -919,6 +931,7 @@ public class WishBudgetFormNew_AC {
 					sumWrap.sumFEPostedInKind = sumWrap.sumFEPostedInKind + wrapper.FE_Posted_In_Kind__c;
 				}
 			}
+
 			totalBudCash = sumWrap.sumBudgetCash;
 			totalProjcash = sumWrap.sumProjectedCash;
 			totalActCash = sumWrap.sumActualCash;
@@ -927,39 +940,41 @@ public class WishBudgetFormNew_AC {
 			totalProjInKind = sumWrap.sumProjectedInkind;
 			totalActInKind = sumWrap.sumActualInKind;
 			totalFEPInKind = sumWrap.sumFEPostedInKind;
+
 			if (totalBudCash + totalBudInKind > 0 && totalProjcash + totalProjInKind > 0) {
 				Decrease = (totalProjcash + totalProjInKind) - (totalBudCash + totalBudInKind);
 				Decrease = (Decrease / (totalBudCash + totalBudInKind)) * 100;
 				sumWrap.sumBtoPDiff = Decrease.round();
 			}
-			/*if(totalProjcash+ totalProjInKind>0 && totalFEPCash+ totalFEPInKind>0)
-            {
-               Decrease=  (totalActCash+ totalActInKind) -(totalProjcash+ totalProjInKind) ;
-               Decrease= (Decrease/ (totalActCash+ totalActInKind))*100;
-               sumWrap.sumAtoFEPDiff=Decrease.round();
-            }*/
-			//sumWrap.sumBtoPDiff = (totalBudCash + totalBudInKind) - (totalProjcash + totalProjInKind);
+
 			sumWrap.sumAtoFEPDiff = (totalFEPCash + totalFEPInKind) - (totalActCash + totalActInKind);
 			SumExpensewrappers.put(type, sumWrap);
 		}
 	}
 
+	/*
+    * @description     Function to remove expenses.
+    *
+    * @return          PageReference
+    *
+    * @author          MST Solutions
+    * @createdDate     unknown
+    */
 	public PageReference removeExpense() {
 		WEtypeExpand = null;
 		Integer indexVal = Integer.valueOf(System.currentPageReference().getParameters().get('index'));
 		String expenType = System.currentPageReference().getParameters().get('expenType');
-		//List<Wish_Expense__c> expenseList = new List<Wish_Expense__c>();
 		expenseList = wishExpensewrap.get(expenType);
 
-		//Remove the contact from the table
-		// expenseList.remove(indexVal);
 		if (expenseList.size() > 0 && expenseList[indexVal].Id != null) {
 			delete expenseList[indexVal];
 		} else {
 			expenseList[indexVal].clear();
 		}
+
 		PageReference pageRef = new PageReference('/apex/WishBudgetFormNew_VF?CaseId=' + caseId + '&BudgetId=' + budgetId);
 		pageRef.setRedirect(true);
+
 		return pageRef;
 	}
 

@@ -61,7 +61,7 @@ public with sharing class WishBudgetFormNew_AC_Test {
 		wishBudget.showDeptDiv();
 		wishBudget.closePopup();
 		wishBudget.closePopup1();
-		wishBudget.ReloadPage();
+		wishBudget.reloadPage();
 
 		List<Wish_Expense_Transaction_Code__c> transactionCodes = wishBudget.transactionCodes;
 		List<Wish_Expense_Type_Tempate__c> ExpenseTypeTempList = wishBudget.ExpenseTypeTempList;
@@ -123,8 +123,8 @@ This methos is used to cover the unit test and incease the code coverage for add
 		wishBudget.getAccountDescs();
 		wishBudget.getUserListForApproval();
 		wishBudget.submitForApproval();
-		wishBudget.SaveExpenses();
-		wishBudget.ReloadPage();
+		wishBudget.saveExpenses();
+		wishBudget.reloadPage();
 // wishBudget.removeExpense();
 		wishBudget.closePopup();
 		wishBudget.closePopup1();
@@ -343,7 +343,7 @@ This methos is used to cover the unit test and incease the code coverage for sav
 			expenseData
 		});
 		wishBudget.expenseType = 'Airfare';
-		wishBudget.SaveExpenses();
+		wishBudget.saveExpenses();
 		Test.stopTest();
 		System.assertEquals(wishBudget.expenseType, 'Airfare', 'Wish expese type is mismatched');
 		System.assert(expenseData.Budget_Cash__c != 20, 'Expense data is mismatched');
