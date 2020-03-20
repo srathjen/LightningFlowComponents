@@ -978,6 +978,12 @@ public class WishBudgetFormNew_AC {
 		return pageRef;
 	}
 
+	/*
+    * @description     Function to calculate and set TotalExpensewrappers.
+    *
+    * @author          MST Solutions
+    * @createdDate     unknown
+    */
 	@TestVisible
 	private void totalSummary() {
 		Decimal totalBudCash = 0;
@@ -989,11 +995,13 @@ public class WishBudgetFormNew_AC {
 		Decimal totalFEPCash = 0;
 		Decimal totalFEPInKind = 0;
 		Double Decrease;
+
 		expenseSummarywrapper sumWrap = new expenseSummarywrapper();
 		List<Wish_Expense__c> wrappers = new List<Wish_Expense__c>();
 		for (String type : wishExpensewrap.keySet()) {
 			wrappers.addAll(wishExpensewrap.get(type));
 		}
+
 		for (Wish_Expense__c wrapper : wrappers) {
 			if (wrapper.Budget_Cash__c == null) {
 				wrapper.Budget_Cash__c = 0;
@@ -1019,12 +1027,14 @@ public class WishBudgetFormNew_AC {
 			if (wrapper.FE_Posted_In_Kind__c == null) {
 				wrapper.FE_Posted_In_Kind__c = 0;
 			}
+
 			sumWrap.sumBudgetCash = sumWrap.sumBudgetCash + wrapper.Budget_Cash__c;
 			sumWrap.sumBudgetInKind = sumWrap.sumBudgetInKind + wrapper.Budget_In_Kind__c;
 			sumWrap.sumProjectedCash = sumWrap.sumProjectedCash + wrapper.Projected_Cash__c;
 			sumWrap.sumProjectedInkind = sumWrap.sumProjectedInkind + wrapper.Projected_In_Kind__c ;
 			sumWrap.sumActualCash = sumWrap.sumActualCash + wrapper.Actual_Cash__c;
 			sumWrap.sumActualInKind = sumWrap.sumActualInKind + wrapper.Actual_In_Kind__c ;
+
 			if (wrapper.FE_Posted_Cash__c != null) {
 				sumWrap.sumFEPostedCash = sumWrap.sumFEPostedCash + wrapper.FE_Posted_Cash__c;
 			}
@@ -1032,6 +1042,7 @@ public class WishBudgetFormNew_AC {
 				sumWrap.sumFEPostedInKind = sumWrap.sumFEPostedInKind + wrapper.FE_Posted_In_Kind__c;
 			}
 		}
+
 		totalBudCash = sumWrap.sumBudgetCash;
 		totalProjcash = sumWrap.sumProjectedCash;
 		totalActCash = sumWrap.sumActualCash;
@@ -1039,23 +1050,26 @@ public class WishBudgetFormNew_AC {
 		totalBudInKind = sumWrap.sumBudgetInKind;
 		totalProjInKind = sumWrap.sumProjectedInkind;
 		totalActInKind = sumWrap.sumActualInKind;
-		totalFEPInKind = sumWrap.sumFEPostedInKind ;
+		totalFEPInKind = sumWrap.sumFEPostedInKind;
+
 		if (totalBudCash + totalBudInKind > 0 && totalProjcash + totalProjInKind > 0) {
 			Decrease = (totalProjcash + totalProjInKind) - (totalBudCash + totalBudInKind);
 			Decrease = (Decrease / (totalBudCash + totalBudInKind)) * 100;
 			sumWrap.sumBtoPDiff = Decrease.round();
 		}
-		/*if(totalProjcash+ totalProjInKind>0 && totalActCash+ totalActInKind >0)
-        {
-            Decrease=  (totalActCash+ totalActInKind) -(totalProjcash+ totalProjInKind) ;
-            Decrease= (Decrease/ (totalActCash+ totalActInKind))*100;
-            sumWrap.sumAtoFEPDiff=Decrease.round();
-        }*/
-		//sumWrap.sumBtoPDiff=(totalBudCash + totalBudInKind) - (totalProjcash+ totalProjInKind) ;
+
 		sumWrap.sumAtoFEPDiff = (totalFEPCash + totalFEPInKind) - (totalActCash + totalActInKind);
 		TotalExpensewrappers = sumWrap;
 	}
 
+	/*
+    * @description     Function to generate an ApprovalList.
+    *
+    * @return          ApprovalList
+    *
+    * @author          MST Solutions
+    * @createdDate     unknown
+    */
 	ApprovalList generateData() {
 		ApprovalList approvalResultForObject = new ApprovalList();
 		List<ApprovalStepWrapper> aSW = new List<ApprovalStepWrapper>();
@@ -1071,8 +1085,8 @@ public class WishBudgetFormNew_AC {
 		if (!processInstances.isEmpty() && !processInstances[0].StepsAndWorkitems.isEmpty() && processInstances[0].StepsAndWorkitems[0].ActorId == UserInfo.getUserId()) {
 			isApprover = true;
 		}
+
 		for (ProcessInstance pI : processInstances) {
-//			Map<Id, List<ProcessInstanceHistory>> mapOfProcessNodeIdAndProcessInstanceHistory = new Map<Id, List<ProcessInstanceHistory>>();
 			Set<Id> processNodeId = new Set<Id>();
 			for (ProcessInstanceHistory sWI : pI.StepsAndWorkitems) {
 				if (processNodeId.size() == 0) {
@@ -1091,6 +1105,7 @@ public class WishBudgetFormNew_AC {
 					isApprover = true;
 				}
 			}
+
 			for (Id pNId : processNodeId) {
 				ApprovalStepWrapper aSWr = new ApprovalStepWrapper();
 				for (ProcessInstanceHistory sWI : pI.StepsAndWorkitems) {
@@ -1108,13 +1123,25 @@ public class WishBudgetFormNew_AC {
 				aSW.add(aSWr);
 			}
 		}
+
 		approvalResultForObject.approvals = aSW;
 		approvalResultForObject.recordId = recordId;
 		approvalResultForObject.isSubmitForApproval = isSubmitForApproval;
 		approvalResultForObject.recallApprovalProcessLink = recallApprovalProcessLink;
+
 		return approvalResultForObject;
 	}
 
+	/*
+    * @description     Function to return a process history map.
+    *
+    * @param           Id objectId
+    *
+    * @return          Map<Id, ProcessInstance>
+    *
+    * @author          MST Solutions
+    * @createdDate     unknown
+    */
 	public Map<Id, ProcessInstance> getProcessHistory(Id objectId) {
 		return new Map<Id, ProcessInstance>([
 			SELECT Id, (
@@ -1181,6 +1208,7 @@ public class WishBudgetFormNew_AC {
 
 	public String temp { get; set; }
 	public Boolean temp1 { get; set; }
+
 	public void showDeptDiv() {
 		if (temp == '--None--') {
 			temp1 = true;
@@ -1192,6 +1220,7 @@ public class WishBudgetFormNew_AC {
 	public void closePopup() {
 		displayPopup = false;
 	}
+
 	public PageReference closePopup1() {
 		return new PageReference('javascript:window.close()');
 	}
