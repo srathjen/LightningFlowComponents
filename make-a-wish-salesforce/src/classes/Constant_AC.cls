@@ -3,7 +3,7 @@
  * @author		Gustavo Mayer, Traction on Demand
  * @createdDate	6-19-2019
  */
-public class Constant_AC {
+public class Constant_AC { 
 	public final static String CONTACT_WISH_CHILD_RT_LABEL = 'Wish Child';
 	public final static Id CONTACT_WISH_CHILD_RT_ID = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName().get('Wish_Child').getRecordTypeId();
 	public final static Id IN_KIND_ACCOUNT_ID = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('In_Kind_Donors').getRecordTypeId();
@@ -85,6 +85,7 @@ public class Constant_AC {
 	 * Affiliation Constants
 	 */
 	public final static String ORG_AFFILIATION_STATUS_ACTIVE = 'Active';
+	public final static String ORG_AFFILIATION_STATUS_INACTIVE = 'Inactive';
 	public final static String ORG_AFFILIATION_TREATING_FACILITY_CURRENT = 'Current';
 
 	/**
@@ -284,7 +285,7 @@ public class Constant_AC {
 	public static final String WISH_AFFILIATION_TYPE_MEDICAL_PROFESSIONAL = 'Medical Professional';
 	public static final String WISH_AFFILIATION_TYPE_GUARDIAN_OF_MINOR_PARTICIPANT = 'Guardian of Minor Participant';
 	public static final String WISH_AFFILIATION_TYPE_OTHER = 'Other';
-	
+
 	/**
 	* Wish Change Request Status
 	*/
@@ -342,7 +343,6 @@ public class Constant_AC {
     public static final String RECORD_SHARE_READ = 'Read';
     public static final String RECORD_SHARE_EDIT = 'Edit';
     public static final String RECORD_SHARE_NONE = 'None';
-
 	/*
 	 * Wish Expense Constants
 	 */

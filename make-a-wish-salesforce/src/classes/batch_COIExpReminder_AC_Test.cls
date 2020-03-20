@@ -1,51 +1,78 @@
-/***************************************************************************
-Author : MST Solutions
-Created Date : 11/16/2017
-Description : This class is used to cover unit test for batch_COIExpReminder_AC.
-1. wvc-2205 Kanagaraj A - 08/08/2018  //line 17 previously the affiliation status was "Prospective".
-                                        Now we have updated as "Pending"
-****************************************************************************/
-@isTest(seeAllData=False)
+/**
+ * @description Test
+ * @author MST
+ * @createdDate 11/16/2017
+ */
+@IsTest(SeeAllData=false)
 public class batch_COIExpReminder_AC_Test {
 
-	private final static String VOLUNTEER_ROLE_STATUS_ACTIVE = Constant_AC.VOLUNTEER_ROLE_STATUS_ACTIVE;
+	private final static Id VOLUNTEER_RECORD_TYPE_ID = Constant_AC.VOLUNTEER_RT_ID;
 
-	//COI not initiated
-	static testmethod void coiExpired() {
-		Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
-		insert volunteerAccount;
+	@TestSetup
+	public static void setup(){
+		trac_TriggerHandlerBase.blockTrigger = true;
+		List<Account> accounts = TestDataFactory.createAccount(2);
+		Account arizonaChapter = accounts.get(0);
+		arizonaChapter.Name = 'Make-A-Wish Arizona';
+		arizonaChapter.RecordTypeId = Constant_AC.CHAPTER_RT_ID;
+		arizonaChapter.Phone = '555555555';
+		arizonaChapter.Email__c = 'maw@email.com';
+		insert accounts;
 
-		Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(volunteerAccount.id);
-		insert volunteerContact;
+		List<Contact> contacts = TestDataFactory.createContact(1);
+		Contact volunteerArizona = contacts.get(0);
+		volunteerArizona.RecordTypeId = VOLUNTEER_RECORD_TYPE_ID;
+		volunteerArizona.is_Application__c = 'Approved';
+		volunteerArizona.AccountId = arizonaChapter.Id;
+		volunteerArizona.FirstName = 'Mark';
+		volunteerArizona.LastName = 'Smith';
+		volunteerArizona.Birthdate = Date.today().addYears(-10);
+		volunteerArizona.MailingPostalCode = '12345-9876';
+		volunteerArizona.MailingStreet = 'Mark Street';
+		volunteerArizona.MailingCountry = 'United States';
+		volunteerArizona.MailingState = 'Arizona';
+		volunteerArizona.MailingCity = 'Phoenix';
+		volunteerArizona.Email = 'ms@email.com';
+		insert contacts;
 
-		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c (npe5__Contact__c = volunteerContact.id,
-				npe5__Organization__c = TestClassUtil.createVolunteerAccount().Id, npe5__Primary__c = true,
-				npe5__Status__c = 'Pending', Constituent_code__c = Constant_AC.VOLUNTEER_TASK_RT_LABEL, Hidden_Status_Updated__c = false);
+		List<npe5__Affiliation__c> affiliations = TestDataFactory.createAffiliation(1);
+		npe5__Affiliation__c affiliation = affiliations.get(0);
+		affiliation.npe5__Contact__c = volunteerArizona.Id;
+		affiliation.npe5__Organization__c = arizonaChapter.Id;
+		affiliation.npe5__Primary__c = true;
+		affiliation.npe5__Status__c = 'Pending';
+		affiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
+		insert affiliations;
 
-		Volunteer_Roles__c volunteerRole = new Volunteer_Roles__c(Status__c = VOLUNTEER_ROLE_STATUS_ACTIVE, Volunteer_Name__c = volunteerContact .id);
-		System.assertEquals(volunteerRole.status__c, VOLUNTEER_ROLE_STATUS_ACTIVE);
-		insert volunteerRole ;
+		List<Conflict_Of_Interest__c> conflictOfInterests = TestDataFactory.createConflictOfInterest(2);
+		Conflict_Of_Interest__c coi1 = conflictOfInterests.get(0);
+		coi1.Volunteer_Contact__c = volunteerArizona.Id;
+		coi1.Expiration_Date__c = Date.today().addDays(-5);
+		coi1.Volunteer_is_Inactive__c = true;
+		coi1.Current__c = true;
+		Conflict_Of_Interest__c coi2 = conflictOfInterests.get(1);
+		coi2.Volunteer_Contact__c = volunteerArizona.Id;
+		coi2.Expiration_Date__c = Date.today().addDays(-5);
+		coi2.Volunteer_is_Inactive__c = false;
+		coi2.Current__c = true;
+		insert conflictOfInterests;
 
-		Background_check__c createBackCheck = OrientationandTrainingUtil.createBackgroundCheckFasleRec(volunteerContact.id);
-		insert createBackCheck;
-		Conflict_Of_Interest__c createCOI = OrientationandTrainingUtil.createCOI(volunteerContact.id);
-		createCOI.Current__c = true;
-		createCOI.Expiration_Date__c = Date.today().addDays(2);
-		insert createCOI;
+		trac_TriggerHandlerBase.blockTrigger = false;
+	}
 
+	@IsTest
+	static void coiExpired() {
 		Test.startTest();
-		DataBase.executeBatch(new batch_COIExpReminder_AC());
+		Database.executeBatch(new batch_COIExpReminder_AC());
 		Test.stopTest();
 	}
 
-	//Used to test schedule method
-	static testmethod void testschedule() {
+	@IsTest
+	static void testSchedule() {
 		Test.startTest();
-		batch_COIExpReminderSchedule_AC reminder = new batch_COIExpReminderSchedule_AC();
+		batch_COIExpReminder_AC reminder = new batch_COIExpReminder_AC();
 		String sch = '0 0 13 * * ?';
-		//String jobID = System.schedule('COI Expiration Reminder', sch, reminder);
-		reminder.execute(Null);
-		List<Background_check__c> objectList = new List<Background_check__c>();
+		System.schedule('Conflict of Interest Expired Batch', sch, reminder);
 		Test.stopTest();
 	}
 }

@@ -404,6 +404,15 @@ public class TestDataFactory {
         return accountFiles;
     }
 
+	public static List<npe5__Affiliation__c> createAffiliation(Integer num) {
+		List<npe5__Affiliation__c> affiliations = new List<npe5__Affiliation__c>();
+		for (Integer i = 0; i < num; i++) {
+			npe5__Affiliation__c a = new npe5__Affiliation__c();
+			affiliations.add(a);
+		}
+		return affiliations;
+	}
+
 	public static Lead createQualifiedLead(Id accountId, Id icdCodeId){
 		Lead lead = new Lead();
 		lead.Additional_Parent_City__c = 'Phoenix';
