@@ -97,7 +97,7 @@ public with sharing class Wish_BudgetService {
 		String projectedStatus = '';
 
 		for (Wish_Budget__c currentBudget : newBudgets) {
-			if (currentBudget.Budget_Approval_Status__c == 'Approved') {
+			if (currentBudget.Budget_Approval_Status__c == Constant_AC.WISH_BUDGET_BUDGET_APPROVAL_STATUS_APPROVED) {
 				approvedBudgets.add(currentBudget);
 			}
 		}
@@ -115,9 +115,9 @@ public with sharing class Wish_BudgetService {
 			if (childExpense.Projected_In_Kind__c == 0) {
 				childExpense.Projected_In_Kind__c = childExpense.Budget_In_Kind__c;
 			}
-			if (childExpense.Projected_Approval_Status__c == 'Submitted') {
-				childExpense.Projected_Approval_Status__c = 'Approved';
-				projectedStatus = 'Approved';
+			if (childExpense.Projected_Approval_Status__c == Constant_AC.WISH_EXPENSE_BUDGET_APPROVAL_STATUS_SUBMITTED) {
+				childExpense.Projected_Approval_Status__c = Constant_AC.WISH_EXPENSE_BUDGET_APPROVAL_STATUS_APPROVED;
+				projectedStatus = Constant_AC.WISH_EXPENSE_BUDGET_APPROVAL_STATUS_APPROVED;
 			}
 
 			updateExpenses.add(childExpense);
@@ -126,7 +126,7 @@ public with sharing class Wish_BudgetService {
 				Case updateCase = new Case();
 				updateCase.Id = childExpense.Case__c;
 
-				if (projectedStatus == 'Approved') {
+				if (projectedStatus == Constant_AC.WISH_EXPENSE_BUDGET_APPROVAL_STATUS_APPROVED) {
 					updateCase.Projected_Status__c = projectedStatus;
 				}
 				if (!updateCaseList.contains(updateCase)) {
