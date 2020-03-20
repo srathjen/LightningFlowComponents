@@ -5,6 +5,7 @@
  */
 public with sharing class Wish_ExpenseDomain extends trac_TriggerHandlerBase {
 	private List<Wish_Expense__c> newWishExpensesList = (List<Wish_Expense__c>) newRecordsList;
+	private List<Wish_Expense__c> oldWishExpensesList = (List<Wish_Expense__c>) oldRecordsList;
 	private Map<Id, Wish_Expense__c> newWishExpensesMap = (Map<Id, Wish_Expense__c>) newRecordsMap;
 	private Map<Id, Wish_Expense__c> oldWishExpensesMap = (Map<Id, Wish_Expense__c>) oldRecordsMap;
 
