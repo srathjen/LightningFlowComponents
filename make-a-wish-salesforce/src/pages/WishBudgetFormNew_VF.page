@@ -452,11 +452,11 @@
                  style="Overflow:auto;font-size:12px !important">
                 <div class="slds-card__header slds-grid ">
                     <apex:outputPanel rendered="{! !(budget.Budget_Approval_Status__c == 'Submitted' && !isApprover)}"
-                            style="width:50%">
+                                      style="width:50%">
                         <div>
                             <apex:selectList id="WishExpenceType" value="{!newExpenseType}" size="1"
                                              styleClass="form-control col-lg-2 new-expType" style="width:350px">
-                                <apex:selectOptions value="{!WishExpenceTypes}"/>
+                                <apex:selectOptions value="{!wishExpenseTypes}"/>
                             </apex:selectList>
                         </div>
                         <div style="float:left">
@@ -571,7 +571,7 @@
                                         <apex:outputPanel rendered="{!expense.RecordType.Name == 'Finance'}">
                                             <td>
                                                 <apex:outputText value="{!expense.Wish_Expense_Transaction_Code__r.Name }"
-                                                        id="expenseTransactionCode" style="width:200px"/>
+                                                                 id="expenseTransactionCode" style="width:200px"/>
                                             </td>
                                             <td class="slds-cell-wrap slds-text-align--right" style="width:60px;">
                                                 <apex:outputText value="{!expense.Account_Description__c }"
@@ -651,7 +651,7 @@
                                                     || (expense.Wish_Budget__r.Budget_Approval_Status__c == 'Approved' && !expense.Created_After_Last_Approval__c)}">
                                                 <td>
                                                     <apex:outputText value="{!expense.Wish_Expense_Transaction_Code__r.Name }"
-                                                            id="expenseWishTransactionCode" style="width:200px"/>
+                                                                     id="expenseWishTransactionCode" style="width:200px"/>
                                                 </td>
                                                 <td class="slds-cell-wrap slds-text-align--right" style="width:60px;">
                                                     <apex:outputText value="{!expense.Account_Description__c }"
@@ -1172,13 +1172,13 @@
                             </apex:outputPanel>
                         </div>
                         <div class="pull-right" style="margin-right: 2%;margin-top: 2%; margin-bottom:1%">
-                            <apex:commandButton value="Save" action="{!SaveExpenses}" styleclass="btn btn-info"
+                            <apex:commandButton value="Save" action="{!saveExpenses}" styleclass="btn btn-info"
                                                 rendered="{! !(budget.Budget_Approval_Status__c == 'Submitted' && !isApprover)}"/>
                         </div>
                         <apex:actionFunction name="submitForApproval" action="{!submitForApproval}" rerender="none"
                                              oncomplete="decisionWindow('{!approvalProcessRequestStatus}');"
-                                            />
-                        <apex:actionFunction name="ReloadPage" action="{!ReloadPage}" rerender="none"/>
+                        />
+                        <apex:actionFunction name="ReloadPage" action="{!reloadPage}" rerender="none"/>
                     </apex:pageBlock>
                 </div>
             </div>
@@ -1225,7 +1225,7 @@
                                     <td class="slds-cell-wrap">
                                         <apex:outputText rendered="{!step.stepstatus == 'Pending'}" id="stpStatus">
                                             <a href="{!s.workItemReassignLink}" target="_parent">Reassign</a> | <a
-                                                    href="{!s.workItemApproveOrRejectLink}" target="_parent"> Approve /
+                                                href="{!s.workItemApproveOrRejectLink}" target="_parent"> Approve /
                                                 Reject</a>
                                         </apex:outputText>
                                     </td>

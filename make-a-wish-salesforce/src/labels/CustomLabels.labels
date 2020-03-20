@@ -658,6 +658,34 @@ Click Generate Document and once the document is generated you can click the lin
         <value>a1a360000033dtZAAQ</value>
     </labels>
     <labels>
+        <fullName>WishBudgetForm_Approval_Comments</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>WishBudgetForm_Approval_Comments</shortDescription>
+        <value>Approval for Wish Budget form</value>
+    </labels>
+    <labels>
+        <fullName>WishBudgetForm_Approval_Failure</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>WishBudgetForm_Approval_Failure</shortDescription>
+        <value>Budget inactive, unable to send for approval.</value>
+    </labels>
+    <labels>
+        <fullName>WishBudgetForm_Approval_Success</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>WishBudgetForm_Approval_Success</shortDescription>
+        <value>Your request has been submitted successfully.</value>
+    </labels>
+    <labels>
+        <fullName>WishBudgetForm_No_Trans_Code</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>WishBudgetForm_No_Trans_Code</shortDescription>
+        <value>There is no active transaction code available for expense type:</value>
+    </labels>
+    <labels>
         <fullName>WishClearence</fullName>
         <categories>Docusign Template</categories>
         <language>en_US</language>
