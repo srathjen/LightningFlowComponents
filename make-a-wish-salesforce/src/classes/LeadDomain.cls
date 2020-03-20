@@ -146,10 +146,7 @@ public with sharing class LeadDomain extends trac_TriggerHandlerBase {
 				newLead.Part_A_Sent__c = Date.today();
 			}
 			if (isLeadQualified(newLead, oldLead)) {
-				Diagnosis_Verification__c diagnosisVerification = DiagnosisVerificationService.findByLeadId(newLead.Id);
-				if (diagnosisVerification != null) {
-					diagnosisVerifications.add(diagnosisVerification);
-				}
+				diagnosisVerifications = DiagnosisVerificationService.findByLeadId(newLead.Id);
 				newLead.Sub_Status__c = null;
 				newLead.Qualified_Date__c = Date.today();//Added per IME-69
 			}
@@ -192,7 +189,7 @@ public with sharing class LeadDomain extends trac_TriggerHandlerBase {
 			} else if (String.isNotBlank(newLead.Any_medical_reason_for_moving_quickly__c)
 					&& (!newLead.Any_medical_reason_for_moving_quickly__c.containsIgnoreCase(MEDICAL_REASON_MOVING_QUICKLY_YES))) {
 				newLead.Rush__c = false;
-				if (oldLead.Any_medical_reason_for_moving_quickly__c.containsIgnoreCase(MEDICAL_REASON_MOVING_QUICKLY_YES)) {
+				if (newLead.Any_medical_reason_for_moving_quickly__c.containsIgnoreCase(MEDICAL_REASON_MOVING_QUICKLY_YES)) {
 					potentialRushLeads.add(newLead);
 				}
 			} else {
