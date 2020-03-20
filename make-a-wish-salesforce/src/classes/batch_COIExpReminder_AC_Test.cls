@@ -70,7 +70,7 @@ public class batch_COIExpReminder_AC_Test {
 	@IsTest
 	static void testSchedule() {
 		Test.startTest();
-		batch_COIExpReminderSchedule_AC reminder = new batch_COIExpReminderSchedule_AC();
+		batch_COIExpReminder_AC reminder = new batch_COIExpReminder_AC();
 		String sch = '0 0 13 * * ?';
 		System.schedule('Conflict of Interest Expired Batch', sch, reminder);
 		Test.stopTest();

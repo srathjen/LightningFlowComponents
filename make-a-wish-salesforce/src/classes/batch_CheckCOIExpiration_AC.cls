@@ -3,7 +3,7 @@
  * @author MST
  * @createdDate
  */
-global class batch_CheckCOIExpiration_AC implements Database.Batchable<SObject> {
+global class batch_CheckCOIExpiration_AC implements Database.Batchable<SObject>, Schedulable {
 
 	global Database.QueryLocator start(Database.BatchableContext BC) {
 		return Database.getQueryLocator([
@@ -25,5 +25,9 @@ global class batch_CheckCOIExpiration_AC implements Database.Batchable<SObject> 
 	}
 
 	global void finish(Database.BatchableContext BC) {
+	}
+
+	global void execute(SchedulableContext schedulableContext) {
+		Database.executeBatch(new batch_CheckCOIExpiration_AC(), 200);
 	}
 }

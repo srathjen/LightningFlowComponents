@@ -70,7 +70,7 @@ public class batch_CheckCOIExpiration_AC_Test {
 	@IsTest
 	static void testSchedule() {
 		Test.startTest();
-		batch_CheckCOIExpirationSchedule_AC reminder = new batch_CheckCOIExpirationSchedule_AC();
+		batch_CheckCOIExpiration_AC reminder = new batch_CheckCOIExpiration_AC();
 		String sch = '0 0 13 * * ?';
 		System.schedule('Volunteer Opportunity Out of Compliance on Background Check Expiration', sch, reminder);
 		Test.stopTest();

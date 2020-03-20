@@ -3,7 +3,7 @@
  * @author MST
  * @createdDate 11/16/2017
  */
-global class batch_COIExpReminder_AC implements Database.Batchable<sObject> {
+global class batch_COIExpReminder_AC implements Database.Batchable<SObject>, Schedulable {
 	global Database.QueryLocator start(Database.BatchableContext BC) {
 		return Database.getQueryLocator([
 				SELECT Id, Expiration_Date__c, Current__c, Volunteer_Contact__c, Volunteer_Contact__r.Name
@@ -31,5 +31,9 @@ global class batch_COIExpReminder_AC implements Database.Batchable<sObject> {
 	}
 
 	global void finish(Database.BatchableContext BC) {
+	}
+
+	global void execute(SchedulableContext schedulableContext) {
+		Database.executeBatch(new batch_CheckCOIExpiration_AC(), 200);
 	}
 }
