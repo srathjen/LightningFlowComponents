@@ -105,7 +105,7 @@ public with sharing class ConflictOfInterestDomain extends trac_TriggerHandlerBa
 			ConflictOfInterestService.updateNonCurrentConflictOfInterest(volunteerIdCoiMap);
 		}
 		if (!volunteerContactIdSet.isEmpty()) {
-			BackGroundCheck_OnAfterUpdateHelper.UpdateVOppAndVRoleStatus(volunteerContactIdSet, 'COI', coiList);
+			BackgroundCheckService.updateVolunteerRoleHiddenStatus(volunteerContactIdSet, 'COI', coiList);
 		}
 		if (!volunteerIdCoiMap.isEmpty()) {
 			VolunteerJourneyService.processVolunteersChapterRequirements(volunteerIdCoiMap.keySet());

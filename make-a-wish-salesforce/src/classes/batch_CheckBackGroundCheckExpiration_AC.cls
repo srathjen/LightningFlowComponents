@@ -19,7 +19,7 @@ global class batch_CheckBackGroundCheckExpiration_AC implements Database.Batchab
         }
         
         if(volContactIdSet.size() > 0) {
-            BackGroundCheck_OnAfterUpdateHelper.UpdateVOppAndVRoleStatus(volContactIdSet, 'backgroundcheck',backGroundCheckExpiredList);
+            BackgroundCheckService.updateVolunteerRoleHiddenStatus(volContactIdSet, 'backgroundcheck',backGroundCheckExpiredList);
         }
         
     }   
