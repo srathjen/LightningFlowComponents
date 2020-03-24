@@ -3,7 +3,7 @@
  * @author		Gustavo Mayer, Traction on Demand
  * @createdDate	6-19-2019
  */
-public class Constant_AC { 
+public class Constant_AC {
 	public final static String CONTACT_WISH_CHILD_RT_LABEL = 'Wish Child';
 	public final static Id CONTACT_WISH_CHILD_RT_ID = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName().get('Wish_Child').getRecordTypeId();
 	public final static Id IN_KIND_ACCOUNT_ID = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('In_Kind_Donors').getRecordTypeId();
@@ -87,6 +87,7 @@ public class Constant_AC {
 	public final static String ORG_AFFILIATION_STATUS_ACTIVE = 'Active';
 	public final static String ORG_AFFILIATION_STATUS_INACTIVE = 'Inactive';
 	public final static String ORG_AFFILIATION_TREATING_FACILITY_CURRENT = 'Current';
+	public final static String ORG_AFFILIATION_STATUS_NOT_APPROVED = 'Not Approved';
 
 	/**
 	 * Lead Constants
@@ -221,6 +222,7 @@ public class Constant_AC {
 	public static final String CONTACT_GENDER_MALE = 'Male';
 	public static final String CONTACT_GENDER_FEMALE = 'Female';
 	public static final String CONTACT_NAME_UNKNOWN = 'Unknown';
+	public static final String CONTACT_STATUS_ROLE_SPECIFIC_TRAINING_AVAILABLE = 'Role Specific Training Available';
 
 	/**
 	 * Chapter Role File Constants
@@ -316,11 +318,13 @@ public class Constant_AC {
 	public static final String TASK_SUBJECT_SEND_WELCOME_LETTER = 'Send Welcome Letter/Make Welcome Call';
 	public static final String TASK_SUBJECT_RUSH_QUALIFIED = 'Lead ET : New Rush Qualified';
 	public static final String TASK_SUBJECT_RUSH_MODIFIED_NO = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary';
+	public static final String TASK_SUBJECT_REVIEW_BACKGROUND_CHECK = 'Review Background Check';
 
 	/**
 	 * Profile Constants
 	 */
 	public static final String PROFILE_INTEGRATION = 'Integration';
+    public static final String PROFILE_SYSTEM_ADMINISTRATOR = 'System Administrator';
 
 	/**
 	 * Role Constants
@@ -341,8 +345,18 @@ public class Constant_AC {
 	 * Record Share Constants
 	 */
     public static final String RECORD_SHARE_READ = 'Read';
-    public static final String RECORD_SHARE_EDIT = 'Edit';
-    public static final String RECORD_SHARE_NONE = 'None';
+	public static final String RECORD_SHARE_EDIT = 'Edit';
+	public static final String RECORD_SHARE_NONE = 'None';
+	
+	/**
+	 * Background Check Constants
+	 */
+	public static final String BACKGROUND_CHECK_STATUS_APPROVED = 'Approved';
+	public static final String BACKGROUND_CHECK_STATUS_APPROVED_WITH_CONDITIONS = 'Approved w/ Conditions';
+	public static final String BACKGROUND_CHECK_STATUS_REJECTED = 'Rejected';
+	public static final String BACKGROUND_CHECK_STATUS_FIRST_ADVANTAGE = 'Received from First Advantage';
+    public static final String BACKGROUND_CHECK_STATUS_MANUAL = 'Manual';
+
 	/*
 	 * Wish Expense Constants
 	 */

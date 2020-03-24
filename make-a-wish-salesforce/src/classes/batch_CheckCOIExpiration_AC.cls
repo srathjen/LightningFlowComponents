@@ -20,7 +20,7 @@ global class batch_CheckCOIExpiration_AC implements Database.Batchable<SObject>,
 			contactIds.add(coiExpired.Volunteer_Contact__c);
 		}
 		if (contactIds.size() > 0) {
-			BackGroundCheck_OnAfterUpdateHelper.UpdateVOppAndVRoleStatus(contactIds, 'COI', coiExpiredList);
+			BackgroundCheckService.updateVolunteerRoleHiddenStatus(contactIds, 'COI', coiExpiredList);
 		}
 	}
 
