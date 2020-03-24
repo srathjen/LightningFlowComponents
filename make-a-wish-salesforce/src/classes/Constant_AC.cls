@@ -69,6 +69,11 @@ public class Constant_AC {
 	public static final String THEME_4U = 'Theme4u';
 
 	/**
+	* Test Related Constants
+	*/
+	public static final String TEST_EXCEPTION_ERROR = 'Test Class execution';
+
+	/**
 	* sObject Api Names and Labels
 	*/
 	public final static String WISH_AFFILIATION_API_NAME = Schema.SObjectType.Wish_Affiliation__c.getName();
