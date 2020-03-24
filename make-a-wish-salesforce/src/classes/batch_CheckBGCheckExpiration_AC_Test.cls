@@ -36,7 +36,7 @@ public class batch_CheckBGCheckExpiration_AC_Test {
 	//Used to test schedule method
 	static testmethod void testschedule() {
 		Test.startTest();
-		batch_CheckBGCheckExpirationSchedule_AC reminder = new batch_CheckBGCheckExpirationSchedule_AC();
+		batch_CheckBackGroundCheckExpiration_AC reminder = new batch_CheckBackGroundCheckExpiration_AC();
 		String sch = '0 0 13 * * ?';
 		String jobID = System.schedule('VolOpp Out of Comp on Bc Expiration', sch, reminder);
 		List<Background_check__c> objectList = new List<Background_check__c>();

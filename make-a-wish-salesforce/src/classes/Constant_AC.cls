@@ -86,6 +86,7 @@ public class Constant_AC {
 	 */
 	public final static String ORG_AFFILIATION_STATUS_ACTIVE = 'Active';
 	public final static String ORG_AFFILIATION_STATUS_INACTIVE = 'Inactive';
+	public final static String ORG_AFFILIATION_STATUS_PENDING = 'Pending';
 	public final static String ORG_AFFILIATION_TREATING_FACILITY_CURRENT = 'Current';
 	public final static String ORG_AFFILIATION_STATUS_NOT_APPROVED = 'Not Approved';
 
@@ -223,6 +224,7 @@ public class Constant_AC {
 	public static final String CONTACT_GENDER_FEMALE = 'Female';
 	public static final String CONTACT_NAME_UNKNOWN = 'Unknown';
 	public static final String CONTACT_STATUS_ROLE_SPECIFIC_TRAINING_AVAILABLE = 'Role Specific Training Available';
+    public static final String CONTACT_ONBOARDING_STATUS_BACKGROUND_CHECK = 'Background Check';
 
 	/**
 	 * Chapter Role File Constants
@@ -319,6 +321,8 @@ public class Constant_AC {
 	public static final String TASK_SUBJECT_RUSH_QUALIFIED = 'Lead ET : New Rush Qualified';
 	public static final String TASK_SUBJECT_RUSH_MODIFIED_NO = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary';
 	public static final String TASK_SUBJECT_REVIEW_BACKGROUND_CHECK = 'Review Background Check';
+    public static final String TASK_SUBJECT_BACKGROUND_CHECK = 'Background Check';
+    public static final String TASK_TYPE_EMAIL = 'Email';
 
 	/**
 	 * Profile Constants
@@ -370,4 +374,9 @@ public class Constant_AC {
 	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_SUBMITTED = 'Submitted';
 	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
 	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_REJECTED = 'Rejected';
+
+	/*
+	 * Group Constants
+	 */
+	public static final String GROUP_TYPE_REGULAR = 'Regular';
 }
