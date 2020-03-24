@@ -14,48 +14,46 @@ public with sharing class AffiliationDomain extends trac_TriggerHandlerBase {
      * Before insert of Affiliation
      */
     public override void handleBeforeInsert() {
-        // Whenever first Affiliation record has fallen under contact, assigning that record as primary.
-        Affiliation_OnBeforeInsertTriggerHandler.OnBeforeInsert(newList);
+        AffiliationService.setStatusAndPrimary(newList);
     }
 
     /**
      * Before update of Affiliation
      */
     public override void handleBeforeUpdate() {
-        //This used to get affiliation's corresponding username and email to merge in active user welcome email template
-        if (RecursiveTriggerHandler.blockBeforeUpdate == false) {
-            Affiliation_BeforeUpdateTriggerHandler.OnBeforeUpdate(newList, oldMap);
-        }
+        AffiliationService.setHiddenUserFields(newList, oldMap);
     }
 
     /**
      * After insert of Affiliation
      */
     public override void handleAfterInsert() {
-        // After insert trigger is used to add the user to the public group to access the approved In-Kind donor
-        // account record based on the affiliation record
-        Affiliation_OnAfterUpdateTriggerHandler.OnAfterUpsert(newList, oldMap);
+        AffiliationService.addToPublicGroup(newList);
     }
 
     /**
      * After update of Affiliation
      */
     public override void handleAfterUpdate() {
-        if (!RecursiveTriggerHandler.blockAfterUpdate) {
-            //Used to add user to chatter group when a user becomes active to particular chapter
-            Affiliation_OnAfterUpdateTriggerHandler.OnAfterUpdate(newList, oldMap);
-            if (RecursiveTriggerHandler.blockAfterUpdate == false) {
-                Affiliation_OnAfterUpdateTriggerHandler.OnAfterUpsert(newList, oldMap);
-            }
-        }
+        AffiliationService.addToChatterGroup(newList, oldMap);
+        AffiliationService.addToPublicGroup(newList, oldMap);
     }
 
     /**
      * After update of Affiliation
      */
     public override void handleAfterDelete() {
-        // After delete trigger is used to remove the user to the public group to restrict the approved
-        // In-Kind donor account record based on the affiliation record
-        Affiliation_OnAfterDeleteTriggerHandler.OnAfterDelete(oldList);
+        Set<String> volunteerNameSet = new Set<String>();
+        Set<String> chapterNameSet = new Set<String>();
+        Map<Id, String> affiliationRecMap = new Map<Id, String>();
+        for (npe5__Affiliation__c currentRecord : oldList) {
+            volunteerNameSet.add(currentRecord.npe5__Contact__c);
+            chapterNameSet.add(currentRecord.npe5__Organization__c);
+            affiliationRecMap.put(currentRecord.Id, String.valueOf(currentRecord));
+        }
+
+        if (volunteerNameSet.size() > 0 && chapterNameSet.size() > 0) {
+            AffiliationService.removeMemberFromGroup(volunteerNameSet, chapterNameSet, affiliationRecMap);
+        }
     }
 }
