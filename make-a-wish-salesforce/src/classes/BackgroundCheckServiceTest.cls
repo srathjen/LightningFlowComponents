@@ -5,6 +5,7 @@
  */
 @isTest
 private class BackgroundCheckServiceTest {
+    
     private final static Id VOLUNTEER_RT_ID = Constant_AC.VOLUNTEER_RT_ID;
     private final static Id CHAPTER_RT_ID = Constant_AC.CHAPTER_RT_ID;
     private final static String AFFILIATION_STATUS_INACTIVE = Constant_AC.ORG_AFFILIATION_STATUS_INACTIVE;
@@ -13,6 +14,9 @@ private class BackgroundCheckServiceTest {
     private final static String VOLUNTEER_ROLE_STATUS_FORMER = Constant_AC.VOLUNTEER_ROLE_STATUS_FORMER;
     private final static String VOLUNTEER_ROLE_STATUS_ACTIVE = Constant_AC.VOLUNTEER_ROLE_STATUS_ACTIVE;
     private final static String BACKGROUND_CHECK_STATUS_MANUAL = Constant_AC.BACKGROUND_CHECK_STATUS_MANUAL;
+    private final static String BACKGROUND_CHECK_STATUS_RECEIVED_FROM_FIRST_ADVANTAGE = Constant_AC.BACKGROUND_CHECK_STATUS_FIRST_ADVANTAGE;
+    private final static String BACKGROUND_CHECK_STATUS_APPROVED = Constant_AC.BACKGROUND_CHECK_STATUS_APPROVED;
+    private final static String BACKGROUND_CHECK_STATUS_REJECTED = Constant_AC.BACKGROUND_CHECK_STATUS_REJECTED;
     private final static String TASK_SUBJECT_REVIEW_BACKGROUND_CHECK = Constant_AC.TASK_SUBJECT_REVIEW_BACKGROUND_CHECK;
     
     @TestSetup
@@ -33,7 +37,7 @@ private class BackgroundCheckServiceTest {
         contact1.AccountId = accounts.get(0).Id;
         insert contactList;
         
-        List<Background_check__c> backgroundCheckList = TestDataFactory.createBackgroundCheck(2);
+        List<Background_check__c> backgroundCheckList = TestDataFactory.createBackgroundCheck(3);
         Background_check__c check1 = backgroundCheckList.get(0);
         check1.Current__c = true;
         check1.Status__c = BACKGROUND_CHECK_STATUS_MANUAL;
@@ -43,6 +47,9 @@ private class BackgroundCheckServiceTest {
         Background_check__c check2 = backgroundCheckList.get(1);
         check2.Current__c = true;
         check2.Volunteer__c = contactList.get(0).Id;
+        Background_check__c check3 = backgroundCheckList.get(2);
+        check3.Volunteer__c = contactList.get(0).Id;
+        check3.Status__c = BACKGROUND_CHECK_STATUS_RECEIVED_FROM_FIRST_ADVANTAGE;
         insert backgroundCheckList;
         
         List<npe5__Affiliation__c> affiliationList = TestDataFactory.createAffiliation(1);
@@ -112,23 +119,20 @@ private class BackgroundCheckServiceTest {
     @isTest
     private static void validateDeactivateBackgroundCheck() {
         Test.startTest();
-        Map<Id, Contact> contactMap = new Map<Id, Contact>([SELECT Id 
-                                                            FROM Contact 
-                                                            WHERE Name = 'Joe Marco']);
         List<Background_check__c> backgroundCheckList = [SELECT Id, Current__c, Volunteer__c
                                                          FROM Background_check__c 
                                                          WHERE Current__c = true 
-                                                         AND Volunteer__c IN :contactMap.keySet() 
+                                                         AND Volunteer__r.Name = 'Joe Marco' 
                                                          ORDER BY CreatedDate DESC];
-        Set<Id> backgroundCheckIds = new Set<Id>();        
-        backgroundCheckIds.add(backgroundCheckList[0].Id);
         System.assert(backgroundCheckList.size() > 1);
-        BackgroundCheckService.deactivateBackgroundCheck(backgroundCheckIds, contactMap.keySet());
+        Map<Id, Id> backgroundCheckVolunteerMap = new Map<Id, Id>();
+        backgroundCheckVolunteerMap.put(backgroundCheckList[0].Id, backgroundCheckList[0].Volunteer__c);
+        BackgroundCheckService.deactivateBackgroundCheck(backgroundCheckVolunteerMap);
         Test.stopTest();
         List<Background_check__c> backgroundCheckUpdated = [SELECT Id, Current__c, Volunteer__c
                                                             FROM Background_check__c 
                                                             WHERE Current__c = true 
-                                                            AND Volunteer__c IN :contactMap.keySet()];
+                                                            AND Volunteer__r.Name = 'Joe Marco'];
         System.assert(backgroundCheckUpdated.size() == 1);
     }
     
@@ -138,12 +142,13 @@ private class BackgroundCheckServiceTest {
         Contact contact = [SELECT Id 
                            FROM Contact 
                            WHERE Name = 'Joe Marco'];
-        Map<Id, Background_check__c> backgroundCheckMap = new Map<Id, Background_check__c>([SELECT Id, Date__c, Volunteer__c 
-                                                                                            FROM Background_check__c 
-                                                                                            WHERE Date__c != null 
-                                                                                            AND Volunteer__c = :contact.Id]);
+        List<Background_check__c> backgroundCheckList = [SELECT Id, Current__c, Date__c, Volunteer__c 
+                                                         FROM Background_check__c 
+                                                         WHERE Current__c = true 
+                                                         AND Date__c != null 
+                                                         AND Volunteer__c = :contact.Id];
         
-        BackgroundCheckService.updateVolunteerExpirationDate(backgroundCheckMap);
+        BackgroundCheckService.updateVolunteerExpirationDate(backgroundCheckList);
         Test.stopTest();
         Contact contactUpdated = [SELECT Id, 
                                   B_C_Expiration_Date__c 
@@ -157,15 +162,23 @@ private class BackgroundCheckServiceTest {
         Map<Id, Contact> contactMap = new Map<Id, Contact>([SELECT Id 
                                                             FROM Contact 
                                                             WHERE Name = 'Joe Marco']);
-        List<Background_check__c> backgroundCheckList = [SELECT Id 
+        List<Background_check__c> backgroundCheckList = [SELECT Id, Status__c, Volunteer__c
                                                          FROM Background_check__c 
-                                                         WHERE Volunteer__c IN :contactMap.keySet()];
+                                                         WHERE Volunteer__c IN :contactMap.keySet() 
+                                                         AND Status__c != :BACKGROUND_CHECK_STATUS_REJECTED];
+        Map<Id, Background_check__c> oldBackgroundCheckMap = new Map<Id, Background_check__c>();
+        for(Background_check__c bc: backgroundCheckList) {
+            Background_check__c oldbc = new Background_check__c(Id = bc.Id);
+            oldbc.Status__c = bc.Status__c;
+            oldBackgroundCheckMap.put(oldbc.Id, oldbc);
+            bc.Status__c = BACKGROUND_CHECK_STATUS_REJECTED;
+        }
         List<npe5__Affiliation__c> affiliation = [SELECT Id
                                                   FROM npe5__Affiliation__c 
                                                   WHERE npe5__Contact__c IN :contactMap.keySet() 
                                                   AND npe5__Status__c = :AFFILIATION_STATUS_NOT_APPROVED];
         System.assert(affiliation.isEmpty());
-        BackgroundCheckService.updateAffiliationStatusNotApproved(contactMap.keySet(), backgroundCheckList);
+        BackgroundCheckService.updateAffiliationStatusNotApproved(backgroundCheckList, oldBackgroundCheckMap);
         Test.stopTest();
         affiliation = [SELECT Id
                        FROM npe5__Affiliation__c 
@@ -201,11 +214,21 @@ private class BackgroundCheckServiceTest {
                                                             FROM Contact 
                                                             WHERE Name = 'Joe Marco']);
         List<Contact> contactList = contactMap.values();
-        List<Background_check__c> backgroundCheckList = ([SELECT Id 
-                                                          FROM Background_check__c
-                                                          WHERE Volunteer__c IN :contactMap.keySet()]);
         System.assert(contactList[0].Hidden_Volunteer_OT_Status__c == null);
-        BackgroundCheckService.updateVolunteerOrientationStatus(contactMap.keySet(), backgroundCheckList);
+        List<Background_check__c> backgroundCheckList = new List<Background_check__c>();
+        Map<Id, Background_check__c> oldBackgroundCheckMap = new Map<Id, Background_check__c>();
+        for(Background_check__c bc : [SELECT Id, Current__c, Status__c, Volunteer__c
+                                      FROM Background_check__c
+                                      WHERE Volunteer__c IN :contactMap.keySet() 
+                                      AND Current__c = false]) {
+            oldBackgroundCheckMap.put(bc.Id, bc);
+            Background_check__c newBc = new Background_check__c(Id = bc.Id);
+            newBc.Status__c = BACKGROUND_CHECK_STATUS_APPROVED;
+            newBc.Current__c = true;
+            newBc.Volunteer__c = bc.Volunteer__c;
+            backgroundCheckList.add(newBc);
+        }
+        BackgroundCheckService.updateVolunteerOrientationStatus(backgroundCheckList, oldBackgroundCheckMap);
         Test.stopTest();
         List<Contact> updatedContactList = [SELECT Id, Hidden_Volunteer_OT_Status__c 
                                             FROM Contact 
@@ -238,8 +261,9 @@ private class BackgroundCheckServiceTest {
     @isTest
     private static void validateCreateBackgroundCheckReviewTask() {
         test.startTest();
-        Map<Id, Background_check__c> backgroundCheckMap = new Map<Id, Background_check__c>([SELECT Id, Volunteer__c, OwnerId 
-                                                                                            FROM Background_check__c]);
+        Map<Id, Background_check__c> backgroundCheckMap = new Map<Id, Background_check__c>([SELECT Id, Volunteer__c, OwnerId, Status__c
+                                                                                            FROM Background_check__c 
+                                                                                            WHERE Status__c = :BACKGROUND_CHECK_STATUS_RECEIVED_FROM_FIRST_ADVANTAGE]);
         BackgroundCheckService.createBackgroundCheckReviewTask(backgroundCheckMap.values());
         test.stopTest();
         List<Task> taskList = [SELECT Id FROM Task 
