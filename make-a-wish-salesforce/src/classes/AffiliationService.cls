@@ -186,6 +186,36 @@ public class AffiliationService {
      * @param newList
      */
     public static void addToPublicGroup(List<npe5__Affiliation__c> newList) {
+        // Only runs on insert
+        Set<String> volunteerNameSet = new Set<String>();
+        Set<String> chapterNameSet = new Set<String>();
+        Set<Id> affiliationSet = new Set<Id>();
+        Map<Id, String> affiliationRecMap = new Map<Id, String>();
+        for (npe5__Affiliation__c currRec : newList) {
+            if (currRec.npe5__Contact__c != null && currRec.npe5__Organization__c != null) {
+                volunteerNameSet.add(currRec.npe5__Contact__c);
+                chapterNameSet.add(currRec.npe5__Organization__c);
+                affiliationSet.add(currRec.Id);
+                affiliationRecMap.put(currRec.Id, String.valueOf(currRec));
+            }
+        }
+
+        Boolean createUserGroup;
+        if (volunteerNameSet.isEmpty() && chapterNameSet.isEmpty() && affiliationSet.isEmpty()) {
+            for (Contact dbVolunteerContact : [
+                    SELECT Id, RecordTypeId, Name
+                    FROM Contact
+                    WHERE Id IN :volunteerNameSet AND RecordTypeId = :VOLUNTEER_RECORD_TYPE_ID
+            ]) {
+                if (dbVolunteerContact.Id != null) {
+                    createUserGroup = true;
+                    break;
+                }
+            }
+            if (createUserGroup) {
+                insertGroupMember(volunteerNameSet, chapterNameSet, affiliationSet, affiliationRecMap);
+            }
+        }
         addToPublicGroup(newList, null);
     }
 
@@ -201,10 +231,6 @@ public class AffiliationService {
 
         Map<Id, npe5__Affiliation__c> affiliationMap = new Map<Id, npe5__Affiliation__c>();
         Set<Id> affiliationIds = new Set<Id>();
-        Set<String> volunteerNameSet = new Set<String>();
-        Set<String> chapterNameSet = new Set<String>();
-        Set<Id> affiliationSet = new Set<Id>();
-        Map<Id, String> affiliationRecMap = new Map<Id, String>();
         for (npe5__Affiliation__c currRec : newList) {
             if (oldMap == null
                     || currRec.npe5__Status__c != oldMap.get(currRec.Id).npe5__Status__c
@@ -212,33 +238,8 @@ public class AffiliationService {
                 affiliationMap.put(currRec.npe5__Contact__c, currRec);
                 affiliationIds.add(currRec.npe5__Organization__c);
             }
-
-            // Only runs on insert
-            if (oldMap == null && currRec.npe5__Contact__c != null && currRec.npe5__Organization__c != null) {
-                volunteerNameSet.add(currRec.npe5__Contact__c);
-                chapterNameSet.add(currRec.npe5__Organization__c);
-                affiliationSet.add(currRec.Id);
-                affiliationRecMap.put(currRec.Id, String.valueOf(currRec));
-            }
         }
         updateContact(affiliationMap, affiliationIds, newList);
-
-        Boolean createUserGroup;
-        if (volunteerNameSet.size() > 0 && chapterNameSet.size() > 0 && affiliationSet.size() > 0) {
-            for (Contact dbVolunteerContact : [
-                    SELECT Id, RecordTypeId, Name
-                    FROM Contact
-                    WHERE Id IN :volunteerNameSet AND RecordTypeId = :VOLUNTEER_RECORD_TYPE_ID
-            ]) {
-                if (dbVolunteerContact.Id != null) {
-                    createUserGroup = true;
-                    break;
-                }
-            }
-            if (createUserGroup == true) {
-                insertGroupMember(volunteerNameSet, chapterNameSet, affiliationSet, affiliationRecMap);
-            }
-        }
     }
 
     /**
@@ -276,7 +277,7 @@ public class AffiliationService {
             }
 
             Map<String, Id> chatterGroupNameIdsMap = new Map<String, Id>();
-            if (chapterNamesSet.size() > 0) {
+            if (chapterNamesSet.isEmpty()) {
                 // Used to get the group name based on the chapter names
                 for (CollaborationGroup collaborationGroup : [
                         SELECT Id, Name
