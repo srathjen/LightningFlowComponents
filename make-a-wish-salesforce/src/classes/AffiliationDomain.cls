@@ -52,7 +52,7 @@ public with sharing class AffiliationDomain extends trac_TriggerHandlerBase {
             affiliationRecMap.put(currentRecord.Id, String.valueOf(currentRecord));
         }
 
-        if (volunteerNameSet.isEmpty() && chapterNameSet.isEmpty()) {
+        if (!volunteerNameSet.isEmpty() && !chapterNameSet.isEmpty()) {
             AffiliationService.removeMemberFromGroup(volunteerNameSet, chapterNameSet, affiliationRecMap);
         }
     }

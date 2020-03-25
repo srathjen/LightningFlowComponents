@@ -201,7 +201,7 @@ public class AffiliationService {
         }
 
         Boolean createUserGroup;
-        if (volunteerNameSet.isEmpty() && chapterNameSet.isEmpty() && affiliationSet.isEmpty()) {
+        if (!volunteerNameSet.isEmpty() && !chapterNameSet.isEmpty() && !affiliationSet.isEmpty()) {
             for (Contact dbVolunteerContact : [
                     SELECT Id, RecordTypeId, Name
                     FROM Contact
@@ -277,7 +277,7 @@ public class AffiliationService {
             }
 
             Map<String, Id> chatterGroupNameIdsMap = new Map<String, Id>();
-            if (chapterNamesSet.isEmpty()) {
+            if (!chapterNamesSet.isEmpty()) {
                 // Used to get the group name based on the chapter names
                 for (CollaborationGroup collaborationGroup : [
                         SELECT Id, Name
