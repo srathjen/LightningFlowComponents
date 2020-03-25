@@ -21,12 +21,14 @@ public class Utils {
             if (currentUser == null) {
                 currentUser = [
                         SELECT
-                                Id,
-                                Name,
-                                UserRole.Name,
-                                Chapter_Name__c,
-                                Profile.Name,
-                                Profile.Id
+                        Id,
+                        Name,
+                        UserRole.Name,
+                        Chapter_Name__c,
+                        Profile.Name,
+                        Profile.Id, ContactId, 
+                        Contact.Account.Volunteer_Manager__c, 
+                        Contact.OwnerId
                         FROM User
                         WHERE Id = :UserInfo.getUserId()
                         LIMIT 1
@@ -170,7 +172,7 @@ public class Utils {
 
         return selectOptions;
     }
-  
+
     /**
     * Phone fields are currently String type fields and are being used in comparision,
     * but when compared they are coming formatted and some are not causing the if statetment to fail

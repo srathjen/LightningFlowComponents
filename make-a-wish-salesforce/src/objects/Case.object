@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -857,7 +856,7 @@
     </fields>
     <fields>
         <fullName>Air_Travel_Details__c</fullName>
-        <description>This field is used to hold the wish child&apos;s air travel details</description>
+        <description>This field is used to hold the wish child's air travel details</description>
         <externalId>false</externalId>
         <inlineHelpText>Select the statement that applies to this wish.</inlineHelpText>
         <label>Air Travel Details</label>
@@ -903,7 +902,7 @@
         <fullName>Alerts__c</fullName>
         <description>Displays various Alert Icons for the Wish</description>
         <externalId>false</externalId>
-        <formula>Rush_Icon__c &amp; &quot; &quot; &amp; Publicity_OK__c &amp; &quot; &quot; &amp; Contact.Deceased_Icon__c &amp; &quot; &quot; &amp; Missing_Signatures__c &amp; &quot; &quot; &amp;  Medical_Clearance_Expiry_Warning__c</formula>
+        <formula>Rush_Icon__c &amp; " " &amp; Publicity_OK__c &amp; " " &amp; Contact.Deceased_Icon__c &amp; " " &amp; Missing_Signatures__c &amp; " " &amp;  Medical_Clearance_Expiry_Warning__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Alerts</label>
         <required>false</required>
@@ -915,11 +914,11 @@
     <fields>
         <fullName>AllPrimaryDiagnosis__c</fullName>
         <externalId>false</externalId>
-        <formula>IF(ISBLANK( Contact.Diagnosis__c ) , &apos;&apos;, Contact.Diagnosis__c+&apos;, &apos; ) + 
-IF(ISBLANK( Contact.SD1_Condition_Description__c ) , &apos;&apos;, Contact.SD1_Condition_Description__c+&apos;, &apos;) + 
-IF(ISBLANK( Contact.SD2_Condition_Description__c ) , &apos;&apos;, Contact.SD2_Condition_Description__c+&apos;, &apos;) + 
-IF(ISBLANK( Contact.SD3_Condition_Description__c ) , &apos;&apos;, Contact.SD3_Condition_Description__c+&apos;, &apos;) + 
-IF(ISBLANK( Contact.SD4_Condition_Description__c ) , &apos;&apos;, Contact.SD4_Condition_Description__c)</formula>
+        <formula>IF(ISBLANK( Contact.Diagnosis__c ) , '', Contact.Diagnosis__c+', ' ) + 
+IF(ISBLANK( Contact.SD1_Condition_Description__c ) , '', Contact.SD1_Condition_Description__c+', ') + 
+IF(ISBLANK( Contact.SD2_Condition_Description__c ) , '', Contact.SD2_Condition_Description__c+', ') + 
+IF(ISBLANK( Contact.SD3_Condition_Description__c ) , '', Contact.SD3_Condition_Description__c+', ') + 
+IF(ISBLANK( Contact.SD4_Condition_Description__c ) , '', Contact.SD4_Condition_Description__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden All Primary Diagnosis</label>
         <required>false</required>
@@ -983,7 +982,7 @@ IF(ISBLANK( Contact.SD4_Condition_Description__c ) , &apos;&apos;, Contact.SD4_C
     </fields>
     <fields>
         <fullName>AnticipatedStart_Date__c</fullName>
-        <description>This field  will have the same value as it&apos;s Parent&apos;s Start date</description>
+        <description>This field  will have the same value as it's Parent's Start date</description>
         <externalId>false</externalId>
         <formula>Parent.Start_Date__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -1134,7 +1133,7 @@ for fulfilment  the wish.</description>
     </fields>
     <fields>
         <fullName>Birthdate_Wish_Child__c</fullName>
-        <description>Displays the Wish Child&apos;s Birthdate</description>
+        <description>Displays the Wish Child's Birthdate</description>
         <externalId>false</externalId>
         <formula>Contact.Birthdate</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -1200,15 +1199,15 @@ This field is used to capture the status of the budget page</description>
     </fields>
     <fields>
         <fullName>Budget_Approval_Status_from_Budget__c</fullName>
-        <description>If the Budget Approval Date is populated, this field says &quot;Approved&quot;; otherwise, if the Budget Submitted Date is populated, this field says &quot;Submitted&quot;; otherwise, it is blank.</description>
+        <description>If the Budget Approval Date is populated, this field says "Approved"; otherwise, if the Budget Submitted Date is populated, this field says "Submitted"; otherwise, it is blank.</description>
         <externalId>false</externalId>
         <formula>IF ( NOT(ISBLANK( Budget_Approved_Date_from_Budget__c )),
-&quot;Approved&quot;,
+"Approved",
 
 
 IF ( NOT(ISBLANK(Budget_Submitted_Date_from_Budget__c)),
-&quot;Submitted&quot;,
-&quot;&quot;)
+"Submitted",
+"")
 )</formula>
         <label>Budget Approval Status</label>
         <required>false</required>
@@ -1451,7 +1450,7 @@ It is used to capture the submitted date of the budget</description>
     <fields>
         <fullName>Case_ThreadId__c</fullName>
         <externalId>false</externalId>
-        <formula>&quot;ref:_&quot; &amp; LEFT($Organization.Id,5) &amp; SUBSTITUTE(RIGHT($Organization.Id,10), &quot;0&quot;, &quot;&quot; )&amp; &quot;._&quot; &amp; LEFT(Id,5) &amp; SUBSTITUTE(Left(RIGHT(Id,10), 5), &quot;0&quot;, &quot;&quot;) &amp; RIGHT(Id,5) &amp; &quot;:ref&quot;</formula>
+        <formula>"ref:_" &amp; LEFT($Organization.Id,5) &amp; SUBSTITUTE(RIGHT($Organization.Id,10), "0", "" )&amp; "._" &amp; LEFT(Id,5) &amp; SUBSTITUTE(Left(RIGHT(Id,10), 5), "0", "") &amp; RIGHT(Id,5) &amp; ":ref"</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Case ThreadId</label>
         <required>false</required>
@@ -1464,13 +1463,13 @@ It is used to capture the submitted date of the budget</description>
         <fullName>Case_email_signature__c</fullName>
         <description>This is Email template signature.</description>
         <externalId>false</externalId>
-        <formula>IF(Owner:User.Account_Name__c=&quot;&quot;&amp;&amp;Owner:User.Phone=&quot;&quot;,Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Email,
-IF(Owner:User.Account_Name__c=&quot;&quot;&amp;&amp;Owner:User.Email=&quot;&quot;,Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Phone,
-IF(Owner:User.Phone=&quot;&quot;&amp;&amp;Owner:User.Email=&quot;&quot;,Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Account_Name__c,
-IF(Owner:User.Account_Name__c=&quot;&quot;,Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Phone+BR()+Owner:User.Email,
-IF(Owner:User.Phone=&quot;&quot;,Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Account_Name__c+BR()+Owner:User.Email ,
-IF(Owner:User.Email=&quot;&quot;,Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Account_Name__c+BR()+Owner:User.Phone,
-Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Account_Name__c+BR()+Owner:User.Phone+BR()+Owner:User.Email))))))</formula>
+        <formula>IF(Owner:User.Account_Name__c=""&amp;&amp;Owner:User.Phone="",Owner:User.FirstName+' '+Owner:User.LastName+BR()+Owner:User.Email,
+IF(Owner:User.Account_Name__c=""&amp;&amp;Owner:User.Email="",Owner:User.FirstName+' '+Owner:User.LastName+BR()+Owner:User.Phone,
+IF(Owner:User.Phone=""&amp;&amp;Owner:User.Email="",Owner:User.FirstName+' '+Owner:User.LastName+BR()+Owner:User.Account_Name__c,
+IF(Owner:User.Account_Name__c="",Owner:User.FirstName+' '+Owner:User.LastName+BR()+Owner:User.Phone+BR()+Owner:User.Email,
+IF(Owner:User.Phone="",Owner:User.FirstName+' '+Owner:User.LastName+BR()+Owner:User.Account_Name__c+BR()+Owner:User.Email ,
+IF(Owner:User.Email="",Owner:User.FirstName+' '+Owner:User.LastName+BR()+Owner:User.Account_Name__c+BR()+Owner:User.Phone,
+Owner:User.FirstName+' '+Owner:User.LastName+BR()+Owner:User.Account_Name__c+BR()+Owner:User.Phone+BR()+Owner:User.Email))))))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Case email signature</label>
         <required>false</required>
@@ -1562,7 +1561,7 @@ Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Account_N
     <fields>
         <fullName>Child_s_Medical_Summary_Form__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>It is used to identify the child&apos;s medical summary form</description>
+        <description>It is used to identify the child's medical summary form</description>
         <externalId>false</externalId>
         <label>Child’s Medical Summary Form</label>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1575,7 +1574,7 @@ Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Account_N
         <description>It is used to capture the medical summary received date. Populated via code based on the DocuSign subject line. Code deprecated as part of Wish Lightning (October 2019).</description>
         <externalId>false</externalId>
         <inlineHelpText>Date when the CMS is received from the Medical Professional</inlineHelpText>
-        <label>Child&apos;s Med Summary Rec&apos;d DateHistorical</label>
+        <label>Child's Med Summary Rec'd DateHistorical</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
@@ -1587,7 +1586,7 @@ Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Account_N
         <description>Medical summary sent date. Populated via code based on the DocuSign subject line. Code deprecated as part of Wish Lightning (October 2019).</description>
         <externalId>false</externalId>
         <inlineHelpText>Date when the CMS is sent to Medical Professional</inlineHelpText>
-        <label>Child&apos;s Medical Summary Sent(Historical)</label>
+        <label>Child's Medical Summary Sent(Historical)</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -1754,9 +1753,9 @@ Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Account_N
     <fields>
         <fullName>Current_Age__c</fullName>
         <externalId>false</externalId>
-        <formula>IF( Contact.Current_Age__c == 18 &amp;&amp; NOT( Contact.Signature_Obtained_wish_Child__c),TEXT(Contact.Current_Age__c)+IMAGE(&quot;/resource/1521043629000/Red_Indicator&quot;, &quot;red&quot;, 15, 15), TEXT(Contact.Current_Age__c))</formula>
+        <formula>IF( Contact.Current_Age__c == 18 &amp;&amp; NOT( Contact.Signature_Obtained_wish_Child__c),TEXT(Contact.Current_Age__c)+IMAGE("/resource/1521043629000/Red_Indicator", "red", 15, 15), TEXT(Contact.Current_Age__c))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>A &quot;!&quot; indicator will appear if (this wish participant / the wish child) turns 18--additional signatures may be needed. Check the &quot;Signature obtained&quot; box on the contact record to turn this indicator off.</inlineHelpText>
+        <inlineHelpText>A "!" indicator will appear if (this wish participant / the wish child) turns 18--additional signatures may be needed. Check the "Signature obtained" box on the contact record to turn this indicator off.</inlineHelpText>
         <label>Current Age</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -1801,9 +1800,9 @@ Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Account_N
     </fields>
     <fields>
         <fullName>Date_Pending_Clarification__c</fullName>
-        <description>Date on which this case entered the status &quot;Pending Clarification&quot;.</description>
+        <description>Date on which this case entered the status "Pending Clarification".</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date on which this case entered the status &quot;Pending Clarification&quot;.</inlineHelpText>
+        <inlineHelpText>Date on which this case entered the status "Pending Clarification".</inlineHelpText>
         <label>Date - Pending Clarification</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1970,16 +1969,16 @@ Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Account_N
     </fields>
     <fields>
         <fullName>Days_Pending_Clarification_Icon__c</fullName>
-        <description>Indicates the number of days the case has been in &quot;pending clarification&quot; status via colored icons.</description>
+        <description>Indicates the number of days the case has been in "pending clarification" status via colored icons.</description>
         <externalId>false</externalId>
         <formula>IF(
   Days_Pending_Clarification_Status__c  &gt;= 0 &amp;&amp; Days_Pending_Clarification_Status__c &lt; 30,
-  IMAGE(&quot;/resource/icons/3-green-clock.png&quot;,&quot;&quot;,32,32), 
+  IMAGE("/resource/icons/3-green-clock.png","",32,32), 
   IF (Days_Pending_Clarification_Status__c &gt;= 30 &amp;&amp; Days_Pending_Clarification_Status__c &lt; 60, 
-  IMAGE(&quot;/resource/icons/2-yellow-clock.png&quot;,&quot;&quot;,32,32), 
-    IF (Days_Pending_Clarification_Status__c &gt;= 60, IMAGE(&quot;/resource/icons/1-red-clock.png&quot;,&quot;&quot;,32,32), &quot;&quot;))
+  IMAGE("/resource/icons/2-yellow-clock.png","",32,32), 
+    IF (Days_Pending_Clarification_Status__c &gt;= 60, IMAGE("/resource/icons/1-red-clock.png","",32,32), ""))
 )</formula>
-        <inlineHelpText>If days in &quot;pending clarification&quot; is 0-29, green; if 30-59, yellow; if 60+, red.</inlineHelpText>
+        <inlineHelpText>If days in "pending clarification" is 0-29, green; if 30-59, yellow; if 60+, red.</inlineHelpText>
         <label>Days Pending Clarification Icon</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -1989,10 +1988,10 @@ Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Account_N
     </fields>
     <fields>
         <fullName>Days_Pending_Clarification_Status__c</fullName>
-        <description>Number of days between today&apos;s date and the date on which this case entered the status &quot;pending clarification&quot;.</description>
+        <description>Number of days between today's date and the date on which this case entered the status "pending clarification".</description>
         <externalId>false</externalId>
         <formula>TODAY() -  Date_Pending_Clarification__c</formula>
-        <inlineHelpText>Number of days between today&apos;s date and the date on which this case entered the status &quot;pending clarification&quot;.</inlineHelpText>
+        <inlineHelpText>Number of days between today's date and the date on which this case entered the status "pending clarification".</inlineHelpText>
         <label>Days Pending Clarification Status</label>
         <precision>18</precision>
         <required>false</required>
@@ -2390,7 +2389,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     </fields>
     <fields>
         <fullName>Emergency_Contact__c</fullName>
-        <description>Captures the emergency contact&apos;s Name</description>
+        <description>Captures the emergency contact's Name</description>
         <externalId>false</externalId>
         <label>Emergency Contact</label>
         <length>255</length>
@@ -2496,7 +2495,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     </fields>
     <fields>
         <fullName>Favorite_Parts__c</fullName>
-        <description>This field holds information from the wish family&apos;s post-wish impact survey. This data may be paraphrased from the survey, or it may be a direct quote from the survey recipient. This response is from the survey question: What were the wish family’s favorite parts of the wish experience?</description>
+        <description>This field holds information from the wish family's post-wish impact survey. This data may be paraphrased from the survey, or it may be a direct quote from the survey recipient. This response is from the survey question: What were the wish family’s favorite parts of the wish experience?</description>
         <externalId>false</externalId>
         <inlineHelpText>What were the wish family’s favorite parts of the wish experience?</inlineHelpText>
         <label>Favorite Parts</label>
@@ -2509,9 +2508,9 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     </fields>
     <fields>
         <fullName>Feedback_on_staff_volunteers__c</fullName>
-        <description>This field holds information from the wish family&apos;s post-wish impact survey. This data may be paraphrased from the survey, or it may be a direct quote from the survey recipient. This response is from the survey question: Did your volunteer wish granter or a MAW staff member go above and beyond to make your wish kid&apos;s wish come true?</description>
+        <description>This field holds information from the wish family's post-wish impact survey. This data may be paraphrased from the survey, or it may be a direct quote from the survey recipient. This response is from the survey question: Did your volunteer wish granter or a MAW staff member go above and beyond to make your wish kid's wish come true?</description>
         <externalId>false</externalId>
-        <inlineHelpText>Did your volunteer wish granter or a MAW staff member go above and beyond to make your wish kid&apos;s wish come true?</inlineHelpText>
+        <inlineHelpText>Did your volunteer wish granter or a MAW staff member go above and beyond to make your wish kid's wish come true?</inlineHelpText>
         <label>Feedback on staff/volunteers</label>
         <length>1000</length>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2606,7 +2605,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     </fields>
     <fields>
         <fullName>GKTW_In_Kind_Value_from_Budget__c</fullName>
-        <description>The total of all Budget In Kind values for the related Wish Expenses related to the currently active Wish Budget where the Wish Expense Type is &quot;Give Kids The World&quot;.</description>
+        <description>The total of all Budget In Kind values for the related Wish Expenses related to the currently active Wish Budget where the Wish Expense Type is "Give Kids The World".</description>
         <externalId>false</externalId>
         <inlineHelpText>Budget In Kind total for Give Kids The World expenses.</inlineHelpText>
         <label>GKTW In Kind</label>
@@ -2740,7 +2739,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>HiddenAnticipatedDate__c</fullName>
         <description>This field is used for docusign purpose.</description>
         <externalId>false</externalId>
-        <formula>text(MONTH(Start_Date__c)) +&apos;/&apos;+ text(DAY(Start_Date__c)) +&apos;/&apos;+ text(YEAR(Start_Date__c))</formula>
+        <formula>text(MONTH(Start_Date__c)) +'/'+ text(DAY(Start_Date__c)) +'/'+ text(YEAR(Start_Date__c))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Anticipated Date</label>
         <required>false</required>
@@ -2807,7 +2806,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <fullName>Hidden_Case_Owner_Title__c</fullName>
         <externalId>false</externalId>
-        <formula>If(Owner:User.Phone != Null &amp;&amp; Owner:User.Title != Null,Owner:User.FirstName+&apos; &apos;+ Owner:User.LastName +&apos; | &apos;+ Owner:User.Phone +&apos; | &apos;+ Owner:User.Title,If(Owner:User.Phone != Null &amp;&amp; Owner:User.Title == Null,Owner:User.FirstName+&apos; &apos;+ Owner:User.LastName +&apos; | &apos;+ Owner:User.Phone,If(Owner:User.Phone == Null &amp;&amp; Owner:User.Title != Null,Owner:User.FirstName+&apos; &apos;+ Owner:User.LastName +&apos; | &apos;+ Owner:User.Title,Owner:User.FirstName+&apos; &apos;+ Owner:User.LastName)))</formula>
+        <formula>If(Owner:User.Phone != Null &amp;&amp; Owner:User.Title != Null,Owner:User.FirstName+' '+ Owner:User.LastName +' | '+ Owner:User.Phone +' | '+ Owner:User.Title,If(Owner:User.Phone != Null &amp;&amp; Owner:User.Title == Null,Owner:User.FirstName+' '+ Owner:User.LastName +' | '+ Owner:User.Phone,If(Owner:User.Phone == Null &amp;&amp; Owner:User.Title != Null,Owner:User.FirstName+' '+ Owner:User.LastName +' | '+ Owner:User.Title,Owner:User.FirstName+' '+ Owner:User.LastName)))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Case Owner Title</label>
         <required>false</required>
@@ -2820,7 +2819,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Hidden_Chapter_Email__c</fullName>
         <description>This field is used to store the chapter email.</description>
         <externalId>false</externalId>
-        <formula>IF(  RecordType.Name = &apos;Wish&apos;, ChapterName__r.Email__c,  Parent.ChapterName__r.Email__c)</formula>
+        <formula>IF(  RecordType.Name = 'Wish', ChapterName__r.Email__c,  Parent.ChapterName__r.Email__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Chapter Email</label>
         <required>false</required>
@@ -2833,7 +2832,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Hidden_Chapter_Name__c</fullName>
         <description>This Hidden field is used to store the Chapter Name value.</description>
         <externalId>false</externalId>
-        <formula>IF(  RecordType.Name = &apos;Wish&apos;, ChapterName__r.Name,  Parent.ChapterName__r.Name)</formula>
+        <formula>IF(  RecordType.Name = 'Wish', ChapterName__r.Name,  Parent.ChapterName__r.Name)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Chapter Name</label>
         <required>false</required>
@@ -2846,7 +2845,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Hidden_Chapter_Phone__c</fullName>
         <description>This field is used to store the chapter phone value</description>
         <externalId>false</externalId>
-        <formula>IF(  RecordType.Name = &apos;Wish&apos;, ChapterName__r.Phone,  Parent.ChapterName__r.Phone )</formula>
+        <formula>IF(  RecordType.Name = 'Wish', ChapterName__r.Phone,  Parent.ChapterName__r.Phone )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Chapter Phone</label>
         <required>false</required>
@@ -2947,7 +2946,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Hidden_Lead_Name__c</fullName>
         <description>This field is used to store the Lead Name</description>
         <externalId>false</externalId>
-        <formula>Lead__r.FirstName+ &apos; &apos;+ &apos; &apos;+Lead__r.LastName</formula>
+        <formula>Lead__r.FirstName+ ' '+ ' '+Lead__r.LastName</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Lead Name</label>
         <required>false</required>
@@ -2959,7 +2958,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <fullName>Hidden_Lead_firstname_lastname_initial__c</fullName>
         <externalId>false</externalId>
-        <formula>LEFT(Hidden_Lead_Name__c  , FIND( &quot; &quot;, Hidden_Lead_Name__c  ) -1 )+&apos; &apos;+ MID(Hidden_Lead_Name__c , FIND(&quot; &quot;, Hidden_Lead_Name__c ),3)</formula>
+        <formula>LEFT(Hidden_Lead_Name__c  , FIND( " ", Hidden_Lead_Name__c  ) -1 )+' '+ MID(Hidden_Lead_Name__c , FIND(" ", Hidden_Lead_Name__c ),3)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Lead First + Last Initial</label>
         <required>false</required>
@@ -3159,7 +3158,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <fullName>Hidden_Wish_Child_FirstName__c</fullName>
         <externalId>false</externalId>
-        <formula>IF( RecordType.Name =&apos;Wish&apos;, Contact.FirstName,Parent.Contact.FirstName)</formula>
+        <formula>IF( RecordType.Name ='Wish', Contact.FirstName,Parent.Contact.FirstName)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Wish Child FirstName</label>
         <required>false</required>
@@ -3170,9 +3169,9 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     </fields>
     <fields>
         <fullName>Hidden_Wish_Child_Full_Name__c</fullName>
-        <description>This Hidden field is created for send an email when when the case sub status is &quot;Abandoned&quot;.</description>
+        <description>This Hidden field is created for send an email when when the case sub status is "Abandoned".</description>
         <externalId>false</externalId>
-        <formula>IF( RecordType.Name=&apos;Wish&apos;, Contact.FirstName + &apos; &apos; +  Contact.LastName , Parent.Contact.FirstName + &apos; &apos; +  Parent.Contact.LastName )</formula>
+        <formula>IF( RecordType.Name='Wish', Contact.FirstName + ' ' +  Contact.LastName , Parent.Contact.FirstName + ' ' +  Parent.Contact.LastName )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Wish Child Full Name</label>
         <required>false</required>
@@ -3343,7 +3342,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     </fields>
     <fields>
         <fullName>Home_Phone__c</fullName>
-        <description>Displays the Wish Child&apos;s Home Phone</description>
+        <description>Displays the Wish Child's Home Phone</description>
         <externalId>false</externalId>
         <formula>Contact.HomePhone</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -3387,7 +3386,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     </fields>
     <fields>
         <fullName>Impact_on_wish_child__c</fullName>
-        <description>This field holds information from the wish family&apos;s post-wish impact survey. This data may be paraphrased from the survey, or it may be a direct quote from the survey recipient. This response is from the survey question: In what specific ways did the wish experience impact your child?</description>
+        <description>This field holds information from the wish family's post-wish impact survey. This data may be paraphrased from the survey, or it may be a direct quote from the survey recipient. This response is from the survey question: In what specific ways did the wish experience impact your child?</description>
         <externalId>false</externalId>
         <inlineHelpText>In what specific ways did the wish experience impact your child?</inlineHelpText>
         <label>Impact on wish child</label>
@@ -3476,7 +3475,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     </fields>
     <fields>
         <fullName>Interested_in_future_events_comments__c</fullName>
-        <description>This field holds information gleaned from the wish family&apos;s post-wish impact survey. This data may be paraphrased from the survey, or it may be a direct quote from the survey recipient. This response is from the survey question: Would you be willing to share additional information about your wish experience in the future?</description>
+        <description>This field holds information gleaned from the wish family's post-wish impact survey. This data may be paraphrased from the survey, or it may be a direct quote from the survey recipient. This response is from the survey question: Would you be willing to share additional information about your wish experience in the future?</description>
         <externalId>false</externalId>
         <inlineHelpText>Would you be willing to share additional information about your wish experience in the future? (e.g. sharing wish story at fundraising events)</inlineHelpText>
         <label>Interested in future events - comments</label>
@@ -3535,7 +3534,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <fullName>IsLocked__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>This check box is used to lock the record when the sub status is &quot;Abandoned&quot;.</description>
+        <description>This check box is used to lock the record when the sub status is "Abandoned".</description>
         <externalId>false</externalId>
         <label>Hidden IsLocked</label>
         <trackFeedHistory>false</trackFeedHistory>
@@ -3568,7 +3567,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <fullName>Is_In_A_Comatose_Vegetative_State__c</fullName>
         <externalId>false</externalId>
-        <formula>ISPICKVAL(Lead__r.Is_in_a_Comatose_Vegetative_State__c , &apos;Yes&apos;)</formula>
+        <formula>ISPICKVAL(Lead__r.Is_in_a_Comatose_Vegetative_State__c , 'Yes')</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Is In A Comatose/Vegetative State?</label>
         <trackHistory>false</trackHistory>
@@ -3862,26 +3861,26 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     </fields>
     <fields>
         <fullName>Medical_Clearance_Expiry_Warning__c</fullName>
-        <description>Displays a warning icon for cases when the case is open (but not &quot;Granted&quot;, &quot;Completed&quot; or &quot;Closed&quot;) and Wish Clearance is either &quot;yes&quot; or &quot;depends&quot;. Shows one warning icon for when the expiry date is within the next 30 days, and shows a expired icon when the expiry date is in the past.</description>
+        <description>Displays a warning icon for cases when the case is open (but not "Granted", "Completed" or "Closed") and Wish Clearance is either "yes" or "depends". Shows one warning icon for when the expiry date is within the next 30 days, and shows a expired icon when the expiry date is in the past.</description>
         <externalId>false</externalId>
         <formula>/* Do not display the warning if the case is closed, or clearance is not needed */ 
-IF( RecordType.Name = &quot;Wish&quot; &amp;&amp; (ISPICKVAL(Status, &quot;Granted&quot;) || ISPICKVAL(Status, &quot;Completed&quot;) || ISPICKVAL(Status, &quot;Closed&quot;) || ISPICKVAL(Wish_Clearance_Needed__c, &quot;No&quot;) || (Wish_Clearance_Received_Date__c + 180) - TODAY() &gt; 30), &quot;&quot;,  
+IF( RecordType.Name = "Wish" &amp;&amp; (ISPICKVAL(Status, "Granted") || ISPICKVAL(Status, "Completed") || ISPICKVAL(Status, "Closed") || ISPICKVAL(Wish_Clearance_Needed__c, "No") || (Wish_Clearance_Received_Date__c + 180) - TODAY() &gt; 30), "",  
 
 /* Wish Clearance has Expired */        
 IF((Medical_Clearance_Expiry_Date__c - TODAY() &lt; 0) || ((Wish_Clearance_Received_Date__c + 180) - TODAY() &lt; 0)  , 
-IMAGE(&quot;/resource/icons/wish-clearance-expired.png&quot;, &quot;Wish Clearance expired&quot;, 48, 48), 
+IMAGE("/resource/icons/wish-clearance-expired.png", "Wish Clearance expired", 48, 48), 
 
 /* Wish Clearance is Expiring in 30 days or less */        
 IF((Medical_Clearance_Expiry_Date__c - TODAY() &lt;=30 &amp;&amp; Medical_Clearance_Expiry_Date__c - TODAY() &gt;=0) || ((Wish_Clearance_Received_Date__c + 180) - TODAY() &lt;=30 &amp;&amp; (Wish_Clearance_Received_Date__c + 180) - TODAY() &gt;=0)  , 
-IMAGE(&quot;/resource/icons/wish-clearance-expiring-soon.png&quot;, &quot;Wish Clearance expired&quot;, 48, 48), 
+IMAGE("/resource/icons/wish-clearance-expiring-soon.png", "Wish Clearance expired", 48, 48), 
 
 /*No signed wish clearance is available but one might be required*/
-IF((ISBLANK(Medical_Clearance_Expiry_Date__c) &amp;&amp; (ISPICKVAL(Wish_Clearance_Needed__c, &quot;Yes&quot;) || ISPICKVAL(Wish_Clearance_Needed__c, &quot;Depends&quot;)) || (!ISBLANK(Wish_Clearance_Sent_Date__c) &amp;&amp; ISBLANK( Wish_Clearance_Received_Date__c)) ), 
-IMAGE(&quot;/resource/icons/wish-clearance-missing.png&quot;, &quot;Wish Clearance missing&quot;, 48, 48), 
+IF((ISBLANK(Medical_Clearance_Expiry_Date__c) &amp;&amp; (ISPICKVAL(Wish_Clearance_Needed__c, "Yes") || ISPICKVAL(Wish_Clearance_Needed__c, "Depends")) || (!ISBLANK(Wish_Clearance_Sent_Date__c) &amp;&amp; ISBLANK( Wish_Clearance_Received_Date__c)) ), 
+IMAGE("/resource/icons/wish-clearance-missing.png", "Wish Clearance missing", 48, 48), 
 
 
 
-&quot;&quot;))))</formula>
+""))))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Medical Clearance Expiry Warning</label>
         <required>false</required>
@@ -4156,9 +4155,9 @@ IMAGE(&quot;/resource/icons/wish-clearance-missing.png&quot;, &quot;Wish Clearan
     </fields>
     <fields>
         <fullName>Missing_Signatures_Family__c</fullName>
-        <description>Counts the number of Wish Required Signatures associated with this wish that have a status of Not Sent or Sent (but not Signed) and type &quot;Family&quot;.</description>
+        <description>Counts the number of Wish Required Signatures associated with this wish that have a status of Not Sent or Sent (but not Signed) and type "Family".</description>
         <externalId>false</externalId>
-        <inlineHelpText>Wish Required Signatures that have a status of &quot;Not Sent&quot; or &quot;Sent&quot; and type &quot;Family&quot;.</inlineHelpText>
+        <inlineHelpText>Wish Required Signatures that have a status of "Not Sent" or "Sent" and type "Family".</inlineHelpText>
         <label>Missing Signatures - Family</label>
         <summaryFilterItems>
             <field>Wish_Required_Signature__c.Type__c</field>
@@ -4178,9 +4177,9 @@ IMAGE(&quot;/resource/icons/wish-clearance-missing.png&quot;, &quot;Wish Clearan
     </fields>
     <fields>
         <fullName>Missing_Signatures_Medical__c</fullName>
-        <description>Counts the number of Wish Required Signatures associated with this wish that have a status of Not Sent or Sent (but not Signed) and type &quot;Medical&quot;.</description>
+        <description>Counts the number of Wish Required Signatures associated with this wish that have a status of Not Sent or Sent (but not Signed) and type "Medical".</description>
         <externalId>false</externalId>
-        <inlineHelpText>Wish Required Signatures associated with this wish that have a status of Not Sent or Sent (but not Signed) and type &quot;Medical&quot;.</inlineHelpText>
+        <inlineHelpText>Wish Required Signatures associated with this wish that have a status of Not Sent or Sent (but not Signed) and type "Medical".</inlineHelpText>
         <label>Missing Signatures - Medical</label>
         <summaryFilterItems>
             <field>Wish_Required_Signature__c.Status__c</field>
@@ -4203,17 +4202,17 @@ IMAGE(&quot;/resource/icons/wish-clearance-missing.png&quot;, &quot;Wish Clearan
         <description>Shows an Adult-with-Child icon if the number of sent/not sent family Wish Required Signatures is &gt;0.</description>
         <externalId>false</externalId>
         <formula>/* Do not display the warning if the case is closed, or clearance is no needed */
-IF( RecordType.Name = &quot;Wish&quot; &amp;&amp; (ISPICKVAL(Status, &quot;Granted&quot;) || ISPICKVAL(Status, &quot;Completed&quot;) || ISPICKVAL(Status, &quot;Closed&quot;)), &quot;&quot;,
+IF( RecordType.Name = "Wish" &amp;&amp; (ISPICKVAL(Status, "Granted") || ISPICKVAL(Status, "Completed") || ISPICKVAL(Status, "Closed")), "",
 
 
 IF( Missing_Signatures_Family__c &gt;0,
-IMAGE(&quot;/resource/icons/MAW-Icon_People-AdultWithChild_RGB.png&quot;, &quot;Missing Family Signatures&quot;, 48, 48),&quot;&quot;)
+IMAGE("/resource/icons/MAW-Icon_People-AdultWithChild_RGB.png", "Missing Family Signatures", 48, 48),"")
 &amp;
-IF((ISBLANK(Medical_Clearance_Expiry_Date__c) &amp;&amp; (ISPICKVAL(Wish_Clearance_Needed__c, &quot;Yes&quot;) || ISPICKVAL(Wish_Clearance_Needed__c, &quot;Depends&quot;)) || (!ISBLANK(Wish_Clearance_Sent_Date__c) &amp;&amp; ISBLANK( Wish_Clearance_Received_Date__c)) ),
-&quot;&quot;,
+IF((ISBLANK(Medical_Clearance_Expiry_Date__c) &amp;&amp; (ISPICKVAL(Wish_Clearance_Needed__c, "Yes") || ISPICKVAL(Wish_Clearance_Needed__c, "Depends")) || (!ISBLANK(Wish_Clearance_Sent_Date__c) &amp;&amp; ISBLANK( Wish_Clearance_Received_Date__c)) ),
+"",
 IF( Missing_Signatures_Medical__c &gt;0 ,
-IMAGE(&quot;/resource/icons/MAW-Icon_Additional-Health-Icon-2_RGB.png&quot;, &quot;Missing Medical Signatures&quot;, 48, 48),
-&quot;&quot;)))</formula>
+IMAGE("/resource/icons/MAW-Icon_Additional-Health-Icon-2_RGB.png", "Missing Medical Signatures", 48, 48),
+"")))</formula>
         <inlineHelpText>Shows a people icon if there are any unsigned Family signatures, and shows a medical sheet icon if there are unsigned Medical signatures.</inlineHelpText>
         <label>Missing Signatures</label>
         <required>false</required>
@@ -4224,7 +4223,7 @@ IMAGE(&quot;/resource/icons/MAW-Icon_Additional-Health-Icon-2_RGB.png&quot;, &qu
     </fields>
     <fields>
         <fullName>Mobile_Phone__c</fullName>
-        <description>Displays the Wish Child&apos;s Mobile Phone</description>
+        <description>Displays the Wish Child's Mobile Phone</description>
         <externalId>false</externalId>
         <formula>Contact.MobilePhone</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -4336,7 +4335,7 @@ IMAGE(&quot;/resource/icons/MAW-Icon_Additional-Health-Icon-2_RGB.png&quot;, &qu
         <fullName>Offline_Form_Msg__c</fullName>
         <description>Offline Form Message for WL Volunteer Case Layout</description>
         <externalId>false</externalId>
-        <formula>&quot;Select from the links below:&quot;</formula>
+        <formula>"Select from the links below:"</formula>
         <label>.</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -4807,7 +4806,7 @@ IMAGE(&quot;/resource/icons/MAW-Icon_Additional-Health-Icon-2_RGB.png&quot;, &qu
         <fullName>Permission_to_Grant_Wish_Received_Date__c</fullName>
         <description>The date on which all parents and legal guardians (and the wish child, if the child is over 18) have signed and returned all forms that give Make-A-Wish permission to grant a wish to the wish child. This field is managed by users (i.e. not through code).</description>
         <externalId>false</externalId>
-        <inlineHelpText>The wish child&apos;s parents/guardians have signed all appropriate forms to give MAW permission to grant a wish to this child.</inlineHelpText>
+        <inlineHelpText>The wish child's parents/guardians have signed all appropriate forms to give MAW permission to grant a wish to this child.</inlineHelpText>
         <label>Permission to Grant Wish Received Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4886,7 +4885,7 @@ IMAGE(&quot;/resource/icons/MAW-Icon_Additional-Health-Icon-2_RGB.png&quot;, &qu
         <fullName>Please_Explain__c</fullName>
         <description>It is used to capture detail explanatiion</description>
         <externalId>false</externalId>
-        <inlineHelpText>Not Appropriate:  I am familiar with the patient&apos;s physical condition and certify the wish is not medically appropriate at this time.</inlineHelpText>
+        <inlineHelpText>Not Appropriate:  I am familiar with the patient's physical condition and certify the wish is not medically appropriate at this time.</inlineHelpText>
         <label>If Not Appropriate, Please Explain</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -5138,11 +5137,11 @@ IMAGE(&quot;/resource/icons/MAW-Icon_Additional-Health-Icon-2_RGB.png&quot;, &qu
     </fields>
     <fields>
         <fullName>Publicity_OK__c</fullName>
-        <description>Displays an icon when the publicity preference is set to &apos;no&apos; on the wish child&apos;s contact record.</description>
+        <description>Displays an icon when the publicity preference is set to 'no' on the wish child's contact record.</description>
         <externalId>false</externalId>
-        <formula>IF(ISPICKVAL(Contact.Publicity_OK__c,&quot;No&quot;), IMAGE(&quot;/resource/icons/NoPublicity.png&quot;,&quot;&quot;,48,48), 
-IF(ISPICKVAL(Contact.Publicity_OK__c,&quot;Yes&quot;), IMAGE(&quot;/resource/icons/GreenCheck.png&quot;,&quot;&quot;,48,48), 
-&quot;&quot;))</formula>
+        <formula>IF(ISPICKVAL(Contact.Publicity_OK__c,"No"), IMAGE("/resource/icons/NoPublicity.png","",48,48), 
+IF(ISPICKVAL(Contact.Publicity_OK__c,"Yes"), IMAGE("/resource/icons/GreenCheck.png","",48,48), 
+""))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Publicity OK</label>
         <required>false</required>
@@ -5207,7 +5206,7 @@ NULL)</formula>
     </fields>
     <fields>
         <fullName>Quotes_from_family__c</fullName>
-        <description>This field holds relevant quotes from the wish family&apos;s post-wish impact survey.</description>
+        <description>This field holds relevant quotes from the wish family's post-wish impact survey.</description>
         <externalId>false</externalId>
         <label>Quotes from family</label>
         <length>1000</length>
@@ -5219,7 +5218,7 @@ NULL)</formula>
     </fields>
     <fields>
         <fullName>Quotes_from_volunteers__c</fullName>
-        <description>This field holds relevant quotes from wish volunteers&apos; post-wish impact survey.</description>
+        <description>This field holds relevant quotes from wish volunteers' post-wish impact survey.</description>
         <externalId>false</externalId>
         <label>Quotes from volunteers</label>
         <length>1000</length>
@@ -5363,7 +5362,7 @@ NULL)</formula>
         <fullName>RE_FE_Description__c</fullName>
         <description>RE-FE Description</description>
         <externalId>false</externalId>
-        <formula>Contact.LastName + &apos; &apos; +Contact.FirstName + &apos; &apos; + IF(!ISNULL(Contact.Birthdate),(TEXT(MONTH(Contact.Birthdate)) &amp; &quot;-&quot; &amp; TEXT(DAY(Contact.Birthdate)) &amp; &quot;-&quot; &amp; TEXT(YEAR(Contact.Birthdate))), &apos;&apos;)</formula>
+        <formula>Contact.LastName + ' ' +Contact.FirstName + ' ' + IF(!ISNULL(Contact.Birthdate),(TEXT(MONTH(Contact.Birthdate)) &amp; "-" &amp; TEXT(DAY(Contact.Birthdate)) &amp; "-" &amp; TEXT(YEAR(Contact.Birthdate))), '')</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>RE-FE Description</label>
         <required>false</required>
@@ -5387,8 +5386,8 @@ NULL)</formula>
     </fields>
     <fields>
         <fullName>RE_Import_Id__c</fullName>
-        <description>&quot;MAWWISHDATAID, IMPORTID
-&quot;</description>
+        <description>"MAWWISHDATAID, IMPORTID
+"</description>
         <externalId>false</externalId>
         <label>RE Import Id</label>
         <length>255</length>
@@ -5686,9 +5685,9 @@ NULL)</formula>
     </fields>
     <fields>
         <fullName>Rush_Icon__c</fullName>
-        <description>Displays the Rush wish icon when the &apos;Rush&apos; checkbox is marked as TRUE.</description>
+        <description>Displays the Rush wish icon when the 'Rush' checkbox is marked as TRUE.</description>
         <externalId>false</externalId>
-        <formula>IF( Rush__c = TRUE, IMAGE(&quot;/resource/icons/RushWish.png&quot;,&quot;&quot;,48,48),&quot;&quot;)</formula>
+        <formula>IF( Rush__c = TRUE, IMAGE("/resource/icons/RushWish.png","",48,48),"")</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Rush Icon</label>
         <required>false</required>
@@ -5873,7 +5872,7 @@ on airplane</description>
     </fields>
     <fields>
         <fullName>Staying_engaged_comments__c</fullName>
-        <description>This field holds information from the wish family&apos;s post-wish impact survey. This data may be paraphrased from the survey, or it may be a direct quote from the survey recipient. This response is from the survey question: Would you like to stay involved with MAW?</description>
+        <description>This field holds information from the wish family's post-wish impact survey. This data may be paraphrased from the survey, or it may be a direct quote from the survey recipient. This response is from the survey question: Would you like to stay involved with MAW?</description>
         <externalId>false</externalId>
         <inlineHelpText>Would you like to stay involved with MAW? (e.g. newsletter, email list for freebies, post-wish community organized by chapter)</inlineHelpText>
         <label>Staying engaged - comments</label>
@@ -6112,7 +6111,7 @@ on airplane</description>
     </fields>
     <fields>
         <fullName>Suggestions__c</fullName>
-        <description>This field holds information from the wish family&apos;s post-wish impact survey. This data may be paraphrased from the survey, or it may be a direct quote from the survey recipient. This response is from the survey question: What would you suggest be done differently for future wishes?</description>
+        <description>This field holds information from the wish family's post-wish impact survey. This data may be paraphrased from the survey, or it may be a direct quote from the survey recipient. This response is from the survey question: What would you suggest be done differently for future wishes?</description>
         <externalId>false</externalId>
         <inlineHelpText>What would you suggest be done differently for future wishes?</inlineHelpText>
         <label>Suggestions</label>
@@ -6157,7 +6156,7 @@ on airplane</description>
         <deleteConstraint>SetNull</deleteConstraint>
         <description>Denotes the contact who should receive the Wish Survey</description>
         <externalId>false</externalId>
-        <inlineHelpText>To update this contact, please edit the &apos;Survey Recipient&apos; field on the Wish Affiliation record.</inlineHelpText>
+        <inlineHelpText>To update this contact, please edit the 'Survey Recipient' field on the Wish Affiliation record.</inlineHelpText>
         <label>Survey Recipient</label>
         <referenceTo>Contact</referenceTo>
         <relationshipLabel>Wishes (Survey Recipient)</relationshipLabel>
@@ -6171,10 +6170,10 @@ on airplane</description>
     <fields>
         <fullName>Temp_Field_Tracking__c</fullName>
         <externalId>false</externalId>
-        <formula>&apos;Diagnosis Verification Received: &apos;&amp; TEXT(Diagnosis_Verification_Receive_Date__c)&amp; BR()	&amp;
-&apos;Diagnosis Verification Sent: &apos;&amp; TEXT(Diagnosis_Verification_Sent_Date__c)&amp; BR()&amp;
-&apos;Qualified Date: &apos; &amp; TEXT(Qualified_Date__c)&amp; BR() &amp;
-&apos;Referral Date: &apos; &amp; TEXT(Referral_Date__c)</formula>
+        <formula>'Diagnosis Verification Received: '&amp; TEXT(Diagnosis_Verification_Receive_Date__c)&amp; BR()	&amp;
+'Diagnosis Verification Sent: '&amp; TEXT(Diagnosis_Verification_Sent_Date__c)&amp; BR()&amp;
+'Qualified Date: ' &amp; TEXT(Qualified_Date__c)&amp; BR() &amp;
+'Referral Date: ' &amp; TEXT(Referral_Date__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Temp. Field Tracking</label>
         <required>false</required>
@@ -6989,7 +6988,7 @@ TO BE LEFT OFF PAGE LAYOUTS</description>
         <fullName>Wish_Clearance_Received_Date_Rollup__c</fullName>
         <description>Looks up the most recent Signed Date of any Wish Required Signature where the parent Wish Signature Form has Is Clearance = True. Populated via DocuSign Connect if sent via DocuSign; populated by user if uploaded as a paper form.</description>
         <externalId>false</externalId>
-        <inlineHelpText>The date on which the Wish Clearance was received as &quot;completed&quot;.</inlineHelpText>
+        <inlineHelpText>The date on which the Wish Clearance was received as "completed".</inlineHelpText>
         <label>Wish Clearance Received Date Rollup</label>
         <summarizedField>Wish_Required_Signature__c.Signed_Date__c</summarizedField>
         <summaryFilterItems>
@@ -7653,9 +7652,9 @@ If yes,  # of hours, agency and phone number information</description>
     </fields>
     <fields>
         <fullName>Wish_date_interfere_with_treatment_plan__c</fullName>
-        <description>Does this wish date interfere with the wish child&apos;s treatment plan? Submitted by the signer of the Wish Clearance (or Combo) form.</description>
+        <description>Does this wish date interfere with the wish child's treatment plan? Submitted by the signer of the Wish Clearance (or Combo) form.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Does this wish date interfere with the wish child&apos;s treatment plan?</inlineHelpText>
+        <inlineHelpText>Does this wish date interfere with the wish child's treatment plan?</inlineHelpText>
         <label>Wish date interfere with treatment plan</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -7694,7 +7693,7 @@ If yes,  # of hours, agency and phone number information</description>
     </fields>
     <fields>
         <fullName>Wish_participant_have_medical_needs__c</fullName>
-        <description>It will capture the &quot;Does a requested wish participant have medical needs?&quot; or not</description>
+        <description>It will capture the "Does a requested wish participant have medical needs?" or not</description>
         <externalId>false</externalId>
         <label>Medical Needs</label>
         <required>false</required>
@@ -7814,7 +7813,7 @@ arrangements/unique circumstances for any requested wish participant not residin
     </fields>
     <fields>
         <fullName>of_Approved_Participants__c</fullName>
-        <description>Counts the number of &apos;Approved&apos; Wish Affiliations.</description>
+        <description>Counts the number of 'Approved' Wish Affiliations.</description>
         <externalId>false</externalId>
         <inlineHelpText>The number of approved and requested participants (including the wish child), minus any non-comped participants.</inlineHelpText>
         <label># of Potential Participants</label>
@@ -8017,7 +8016,7 @@ NULL)</formula>
     </fields>
     <fields>
         <fullName>of_Proposed_Change_Requests__c</fullName>
-        <description>Counts the Number of &apos;Proposed&apos; change requests.</description>
+        <description>Counts the Number of 'Proposed' change requests.</description>
         <externalId>false</externalId>
         <label># of Proposed Change Requests</label>
         <summaryFilterItems>
@@ -13220,11 +13219,11 @@ NULL)</formula>
 &amp;&amp;
 ISCHANGED(ContactId)
 &amp;&amp;
-RecordType.Name = &apos;Wish&apos;
+RecordType.Name = 'Wish'
 &amp;&amp;
-$Profile.Name != &apos;Integration&apos; 
+$Profile.Name != 'Integration' 
 &amp;&amp; 
-$Profile.Name != &apos;System Administrator&apos; 
+$Profile.Name != 'System Administrator' 
 &amp;&amp; 
 $Permission.Program_Supervisor != TRUE</errorConditionFormula>
         <errorMessage>You do not have permission to remove or change the Wish Child on the Wish Case.</errorMessage>
@@ -13233,7 +13232,7 @@ $Permission.Program_Supervisor != TRUE</errorConditionFormula>
         <fullName>Case_Adoptable_Validation</fullName>
         <active>true</active>
         <description>Used to check the adopted by field is empty when adopted checkbox is true</description>
-        <errorConditionFormula>ISBLANK( Adopted_By__c ) &amp;&amp; Adopted__c = true &amp;&amp; $RecordType.Name = &quot;Wish&quot;</errorConditionFormula>
+        <errorConditionFormula>ISBLANK( Adopted_By__c ) &amp;&amp; Adopted__c = true &amp;&amp; $RecordType.Name = "Wish"</errorConditionFormula>
         <errorDisplayField>Adopted_By__c</errorDisplayField>
         <errorMessage>Adopted By cannot be Blank when Adopted is checked.</errorMessage>
     </validationRules>
@@ -13243,13 +13242,13 @@ $Permission.Program_Supervisor != TRUE</errorConditionFormula>
         <description>1. Since Budget Approval-Approved is an automatic status update, users should not be allowed to update to this status manually.
 2. Once changed to Budget Approval-Approved, user can only go to Wish Design.
 3. Once changed to Budget Approval-Approve</description>
-        <errorConditionFormula>AND($Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,ISCHANGED(Status),NOT(Wish_Assist__c),NOT(Rush__c),OR(
+        <errorConditionFormula>AND($Profile.Name != 'Integration',$RecordType.Name = "Wish",ISCHANGED(Status),NOT(Wish_Assist__c),NOT(Rush__c),OR(
  
-AND(NOT(ISPICKVAL(Status,&apos;Wish Design&apos;)),NOT(ISPICKVAL(Status,&apos;Hold&apos;)),NOT(ISPICKVAL(Status,&apos;DNQ&apos;)),NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),NOT(ISPICKVAL(Status,&apos;Closed&apos;)),
-ISPICKVAL(PRIORVALUE(Status),&apos;Budget Approval - Approved&apos;),NOT($Permission.Program_Supervisor),NOT(ISPICKVAL(Status,&apos;Wish Scheduled&apos;))), 
+AND(NOT(ISPICKVAL(Status,'Wish Design')),NOT(ISPICKVAL(Status,'Hold')),NOT(ISPICKVAL(Status,'DNQ')),NOT(ISPICKVAL(Status,'Inactive')),NOT(ISPICKVAL(Status,'Closed')),
+ISPICKVAL(PRIORVALUE(Status),'Budget Approval - Approved'),NOT($Permission.Program_Supervisor),NOT(ISPICKVAL(Status,'Wish Scheduled'))), 
 
-AND(ISPICKVAL(PRIORVALUE(Status),&apos;Budget Approval - Approved&apos;),AND(NOT(ISPICKVAL(Status,&apos;Wish Design&apos;)),NOT(ISPICKVAL(Status,&apos;Hold&apos;)),NOT(ISPICKVAL(Status,&apos;DNQ&apos;)),
-NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),NOT(ISPICKVAL(Status,&apos;Closed&apos;)),NOT(ISPICKVAL(Status,&apos;Ready to Interview&apos;)),NOT(ISPICKVAL(Status,&apos;Wish Determined&apos;))),$Permission.Program_Supervisor,NOT(ISPICKVAL(Status,&apos;Wish Scheduled&apos;)))))</errorConditionFormula>
+AND(ISPICKVAL(PRIORVALUE(Status),'Budget Approval - Approved'),AND(NOT(ISPICKVAL(Status,'Wish Design')),NOT(ISPICKVAL(Status,'Hold')),NOT(ISPICKVAL(Status,'DNQ')),
+NOT(ISPICKVAL(Status,'Inactive')),NOT(ISPICKVAL(Status,'Closed')),NOT(ISPICKVAL(Status,'Ready to Interview')),NOT(ISPICKVAL(Status,'Wish Determined'))),$Permission.Program_Supervisor,NOT(ISPICKVAL(Status,'Wish Scheduled')))))</errorConditionFormula>
         <errorMessage>From Budget Approval - Approved, the status can only be changed to Wish Design, Wish Scheduled, On-Hold, Inactive, DNQ, Closed (or Ready to Interview &amp; Wish Determined with Program Supervisor permission set).</errorMessage>
     </validationRules>
     <validationRules>
@@ -13257,19 +13256,19 @@ NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),NOT(ISPICKVAL(Status,&apos;Closed&ap
         <active>false</active>
         <description>1. Since BudgetApproval-Submitted is an automatic status update, users not  allowed to update to this status manually.
 2. Once changed to Budget Approval-Submitted, only  Program Supervisor permission set can change the status to ReadyToInterview/WishDet</description>
-        <errorConditionFormula>AND($Profile.Name != &apos;Integration&apos;,NOT(Wish_Assist__c),NOT(Rush__c),$RecordType.Name = &quot;Wish&quot;,NOT(ISPICKVAL(PRIORVALUE(Status),&apos;Inactive&apos;)),NOT(ISPICKVAL(PRIORVALUE(Status),&apos;Hold&apos;)), 
+        <errorConditionFormula>AND($Profile.Name != 'Integration',NOT(Wish_Assist__c),NOT(Rush__c),$RecordType.Name = "Wish",NOT(ISPICKVAL(PRIORVALUE(Status),'Inactive')),NOT(ISPICKVAL(PRIORVALUE(Status),'Hold')), 
 
 OR( 
 
-AND(ISPICKVAL(PRIORVALUE(Status),&apos;Budget Approval - Submitted&apos;), 
-$Permission.Program_Supervisor,AND(NOT(ISPICKVAL(Status,&apos;Ready to Interview&apos;)), 
-NOT(ISPICKVAL(Status,&apos;Wish Determined&apos;)),NOT(ISPICKVAL(Status,&apos;Budget Approval - approved&apos;)),ISCHANGED(Status))), 
+AND(ISPICKVAL(PRIORVALUE(Status),'Budget Approval - Submitted'), 
+$Permission.Program_Supervisor,AND(NOT(ISPICKVAL(Status,'Ready to Interview')), 
+NOT(ISPICKVAL(Status,'Wish Determined')),NOT(ISPICKVAL(Status,'Budget Approval - approved')),ISCHANGED(Status))), 
 
-AND(ISPICKVAL(PRIORVALUE(Status),&apos;Budget Approval - Submitted&apos;),ISCHANGED(Status),NOT($Permission.Program_Supervisor), OR(AND(ISNULL( Budget_Approved_Date__c ), 
-ISPICKVAL(Status,&apos;Budget Approval - approved&apos;)),NOT(ISPICKVAL(Status,&apos;Budget Approval - approved&apos;)))), 
+AND(ISPICKVAL(PRIORVALUE(Status),'Budget Approval - Submitted'),ISCHANGED(Status),NOT($Permission.Program_Supervisor), OR(AND(ISNULL( Budget_Approved_Date__c ), 
+ISPICKVAL(Status,'Budget Approval - approved')),NOT(ISPICKVAL(Status,'Budget Approval - approved')))), 
 
-AND(ISPICKVAL(PRIORVALUE(Status),&apos;Budget Approval - Submitted&apos;),ISNULL( Budget_Approved_Date__c ), 
-ISCHANGED(Status),ISPICKVAL(Status,&apos;Budget Approval - approved&apos;) 
+AND(ISPICKVAL(PRIORVALUE(Status),'Budget Approval - Submitted'),ISNULL( Budget_Approved_Date__c ), 
+ISCHANGED(Status),ISPICKVAL(Status,'Budget Approval - approved') 
 ) 
 
 ))</errorConditionFormula>
@@ -13279,14 +13278,14 @@ ISCHANGED(Status),ISPICKVAL(Status,&apos;Budget Approval - approved&apos;)
         <fullName>Case_Check_Expedite_Validation</fullName>
         <active>true</active>
         <description>This rules is used to check the Please expedite field is provided or not.</description>
-        <errorConditionFormula>IF(AND($Profile.Name != &apos;Integration&apos;,RecordType.Name == &apos;Diagnosis Verification Review&apos;,OR(CONTAINS(Lead__r.Any_medical_reason_for_moving_quickly__c, &apos;Yes&apos;),CONTAINS(Lead__r.Any_medical_reason_for_moving_quickly__c, &apos;yes&apos;)),ISBLANK(Lead__r.Please_Explain__c), OR(ISPICKVAL( Status , &apos;Approved - National Medical Review&apos;),ISPICKVAL( Status , &apos;Approved - National MAC Review&apos;)) ), true, false)</errorConditionFormula>
+        <errorConditionFormula>IF(AND($Profile.Name != 'Integration',RecordType.Name == 'Diagnosis Verification Review',OR(CONTAINS(Lead__r.Any_medical_reason_for_moving_quickly__c, 'Yes'),CONTAINS(Lead__r.Any_medical_reason_for_moving_quickly__c, 'yes')),ISBLANK(Lead__r.Please_Explain__c), OR(ISPICKVAL( Status , 'Approved - National Medical Review'),ISPICKVAL( Status , 'Approved - National MAC Review')) ), true, false)</errorConditionFormula>
         <errorMessage>Please explain reason to expedite the process in Please Explain Expedite field in Lead.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_ChildCaseOwnerChangeValidation</fullName>
         <active>false</active>
         <description>Used to restrict user to change the owner of the sub cases</description>
-        <errorConditionFormula>AND(OR(RecordType.Name == &apos;Wish Determination&apos;,RecordType.Name == &apos;Wish Planning&apos;,RecordType.Name == &apos;Wish Impact&apos;, RecordType.Name == &apos;Wish Granting&apos;, RecordType.Name == &apos;Wish Assist&apos;) , OwnerId &lt;&gt; Parent.OwnerId,$Profile.Name != &apos;Integration&apos;,ISCHANGED(OwnerId))</errorConditionFormula>
+        <errorConditionFormula>AND(OR(RecordType.Name == 'Wish Determination',RecordType.Name == 'Wish Planning',RecordType.Name == 'Wish Impact', RecordType.Name == 'Wish Granting', RecordType.Name == 'Wish Assist') , OwnerId &lt;&gt; Parent.OwnerId,$Profile.Name != 'Integration',ISCHANGED(OwnerId))</errorConditionFormula>
         <errorDisplayField>Absent_Parent_Form__c</errorDisplayField>
         <errorMessage>You cannot change the owner of the subcase</errorMessage>
     </validationRules>
@@ -13294,66 +13293,66 @@ ISCHANGED(Status),ISPICKVAL(Status,&apos;Budget Approval - approved&apos;)
         <fullName>Case_Close_Date_Referral_Date_Validation</fullName>
         <active>true</active>
         <description>Closed date on case must be later than referral date</description>
-        <errorConditionFormula>OR(ISCHANGED( Closed_Date__c ),ISCHANGED( Referral_Date__c )) &amp;&amp; Closed_Date__c &lt; Referral_Date__c &amp;&amp; $Profile.Name != &apos;Integration&apos;&amp;&amp; $RecordType.Name = &quot;Wish&quot;</errorConditionFormula>
+        <errorConditionFormula>OR(ISCHANGED( Closed_Date__c ),ISCHANGED( Referral_Date__c )) &amp;&amp; Closed_Date__c &lt; Referral_Date__c &amp;&amp; $Profile.Name != 'Integration'&amp;&amp; $RecordType.Name = "Wish"</errorConditionFormula>
         <errorMessage>The closed date cannot occur before the referral date. Please enter a valid closed date, or re-enter the referral date.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Closed_Date_Change_Validation</fullName>
         <active>true</active>
         <description>When the case is closed, there must be entered a closed date value and program supervisor only able to edit the closed date value.</description>
-        <errorConditionFormula>AND(NOT($Permission.Program_Supervisor ), NOT(ISBLANK( PRIORVALUE(Closed_Date__c ))),$RecordType.Name = &quot;Wish&quot;,$Profile.Name != &apos;Integration&apos;,ISCHANGED(Closed_Date__c ) )</errorConditionFormula>
+        <errorConditionFormula>AND(NOT($Permission.Program_Supervisor ), NOT(ISBLANK( PRIORVALUE(Closed_Date__c ))),$RecordType.Name = "Wish",$Profile.Name != 'Integration',ISCHANGED(Closed_Date__c ) )</errorConditionFormula>
         <errorDisplayField>Closed_Date__c</errorDisplayField>
         <errorMessage>You do not have permission to edit this record. Please contact your program supervisor to edit the date</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Closed_Date_Validation</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>When the case is closed, there must be entered a closed date value and program supervisor only able to edit the closed date value.</description>
-        <errorConditionFormula>AND(ISBLANK(Closed_Date__c ),$RecordType.Name = &quot;Wish&quot;,$Profile.Name != &apos;Integration&apos;,OR(ISPICKVAL( Status,&apos;DNQ&apos;),ISPICKVAL( Status,&apos;Closed&apos;),ISPICKVAL( Status,&apos;Denied&apos;),ISPICKVAL( Status,&apos;Medical&apos;)))</errorConditionFormula>
+        <errorConditionFormula>AND(ISBLANK(Closed_Date__c ),$RecordType.Name = "Wish",$Profile.Name != 'Integration',OR(ISPICKVAL( Status,'DNQ'),ISPICKVAL( Status,'Closed'),ISPICKVAL( Status,'Denied'),ISPICKVAL( Status,'Medical')))</errorConditionFormula>
         <errorDisplayField>Closed_Date__c</errorDisplayField>
-        <errorMessage>Before the case is closed, a closed date value must be entered.</errorMessage>
+        <errorMessage>Before the case is closed, a closed date value must be entered. Deactivated for SIW-490. This blocks the save prior to being able to prompt user for a Closed Date.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Closed_Status</fullName>
         <active>true</active>
         <description>Only Program Supervisor permission set can change from Closed to the previous status.</description>
-        <errorConditionFormula>AND($Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,ISCHANGED(Status),NOT(ISNEW()),NOT(Wish_Assist__c),NOT(Rush__c),
-AND(NOT($Permission.Program_Supervisor),ISPICKVAL(PRIORVALUE(Status),&quot;Closed&quot;)))</errorConditionFormula>
+        <errorConditionFormula>AND($Profile.Name != 'Integration',$RecordType.Name = "Wish",ISCHANGED(Status),NOT(ISNEW()),NOT(Wish_Assist__c),NOT(Rush__c),
+AND(NOT($Permission.Program_Supervisor),ISPICKVAL(PRIORVALUE(Status),"Closed")))</errorConditionFormula>
         <errorMessage>Only Program Supervisor permission set can change from Closed to any other status.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Completed</fullName>
         <active>true</active>
-        <description>1. Once it&apos;s in Completed, it cannot be changed to any other status.</description>
-        <errorConditionFormula>AND(ISPICKVAL(PRIORVALUE(Status),&apos;Completed&apos;),ISCHANGED(Status),NOT(ISNEW()),NOT(Wish_Assist__c),NOT(Rush__c),
-$Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,NOT($Permission.Program_Supervisor))</errorConditionFormula>
+        <description>1. Once it's in Completed, it cannot be changed to any other status.</description>
+        <errorConditionFormula>AND(ISPICKVAL(PRIORVALUE(Status),'Completed'),ISCHANGED(Status),NOT(ISNEW()),NOT(Wish_Assist__c),NOT(Rush__c),
+$Profile.Name != 'Integration',$RecordType.Name = "Wish",NOT($Permission.Program_Supervisor))</errorConditionFormula>
         <errorMessage>Only Program Supervisor permission set can change from Complete to any other status.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Completed_Date_Validation</fullName>
         <active>true</active>
         <description>This validation rule is used to prevent the date you have entered in the completed date field if the value is before the Referral date.</description>
-        <errorConditionFormula>AND(Completed_Date__c  &lt;  Referral_Date__c,$Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;)</errorConditionFormula>
+        <errorConditionFormula>AND(Completed_Date__c  &lt;  Referral_Date__c,$Profile.Name != 'Integration',$RecordType.Name = "Wish")</errorConditionFormula>
         <errorMessage>The completed date cannot occur before the referral date. Please enter a valid completed date, or re-enter the referral date.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_DNQ_Status</fullName>
         <active>true</active>
         <description>Only Program Supervisor permission set can change from DNQ to the previous status.</description>
-        <errorConditionFormula>AND($Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,ISCHANGED(Status),NOT(ISNEW()),NOT(Wish_Assist__c),NOT(Rush__c),
-ISPICKVAL(PRIORVALUE(Status),&quot;DNQ&quot;),NOT($Permission.Program_Supervisor))</errorConditionFormula>
-        <errorMessage>Only Program Supervisor permission set can change from &quot;DNQ&quot; to any other status.</errorMessage>
+        <errorConditionFormula>AND($Profile.Name != 'Integration',$RecordType.Name = "Wish",ISCHANGED(Status),NOT(ISNEW()),NOT(Wish_Assist__c),NOT(Rush__c),
+ISPICKVAL(PRIORVALUE(Status),"DNQ"),NOT($Permission.Program_Supervisor))</errorConditionFormula>
+        <errorMessage>Only Program Supervisor permission set can change from "DNQ" to any other status.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Est_Hold_End_Date_Validation</fullName>
         <active>true</active>
         <description>When a case is moved to Inactive &gt; Hold-Elective or Inactive &gt; Hold-Medical, an Estimated Hold End Date must be entered.</description>
         <errorConditionFormula>AND(
-RecordType.Name == &apos;Wish&apos;,
-$Profile.Name != &apos;Integration&apos;, 
-AND(ISPICKVAL(Status , &apos;Inactive&apos;), 
-    OR( ISPICKVAL(Sub_Status__c, &apos;Hold - Elective&apos;), 
-        ISPICKVAL(Sub_Status__c, &apos;Hold - Medical&apos;))
+RecordType.Name == 'Wish',
+$Profile.Name != 'Integration', 
+AND(ISPICKVAL(Status , 'Inactive'), 
+    OR( ISPICKVAL(Sub_Status__c, 'Hold - Elective'), 
+        ISPICKVAL(Sub_Status__c, 'Hold - Medical'))
    ),
 ISBLANK(Est_Hold_End_Date__c),
 OR(ISCHANGED(Status), 
@@ -13365,20 +13364,20 @@ OR(ISCHANGED(Status),
         <active>true</active>
         <description>Once a Case is Granted: i) the status can only be changed to Completed or Inactive, or ii) if the user has the Program Supervisor permission, then the user can change the status to Inactive, Wish Scheduled, or Closed&gt;DNQ</description>
         <errorConditionFormula>AND(
- ISPICKVAL(PRIORVALUE(Status),&apos;Granted&apos;),
- NOT(ISPICKVAL(Status,&apos;Completed&apos;)),
- NOT(ISPICKVAL(Status , &apos;Inactive&apos;)),
+ ISPICKVAL(PRIORVALUE(Status),'Granted'),
+ NOT(ISPICKVAL(Status,'Completed')),
+ NOT(ISPICKVAL(Status , 'Inactive')),
  ISCHANGED(Status),
  NOT(ISNEW()),
  NOT(Rush__c),
  NOT( Wish_Assist__c ),
- $Profile.Name != &apos;Integration&apos;,
- $RecordType.Name = &quot;Wish&quot;, 
+ $Profile.Name != 'Integration',
+ $RecordType.Name = "Wish", 
  IF($Permission.Program_Supervisor 
     &amp;&amp; 
-    OR(ISPICKVAL(Status,&apos;Inactive&apos;),
-       ISPICKVAL(Status,&apos;Wish Scheduled&apos;),
-       ISPICKVAL(Status,&apos;Closed&apos;)
+    OR(ISPICKVAL(Status,'Inactive'),
+       ISPICKVAL(Status,'Wish Scheduled'),
+       ISPICKVAL(Status,'Closed')
       ),
     False,
     True)
@@ -13389,8 +13388,8 @@ OR(ISCHANGED(Status),
         <fullName>Case_Hold_Rule</fullName>
         <active>false</active>
         <description>From Hold, they can only go back to the previous status.</description>
-        <errorConditionFormula>AND($Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,ISCHANGED(Status),NOT(ISNEW()), 
-AND(ISPICKVAL(PRIORVALUE(Status),&quot;Hold&quot;),NOT(ISBLANK(Hidden_Hold_Status_Value__c)), 
+        <errorConditionFormula>AND($Profile.Name != 'Integration',$RecordType.Name = "Wish",ISCHANGED(Status),NOT(ISNEW()), 
+AND(ISPICKVAL(PRIORVALUE(Status),"Hold"),NOT(ISBLANK(Hidden_Hold_Status_Value__c)), 
 OR(Migrated_Record__c = true,Migrated_Record__c =false),TEXT(Status) != Hidden_Hold_Status_Value__c),NOT(Wish_Assist__c),NOT(Rush__c))</errorConditionFormula>
         <errorMessage>From Hold, they can only go back to the previous status.</errorMessage>
     </validationRules>
@@ -13398,15 +13397,15 @@ OR(Migrated_Record__c = true,Migrated_Record__c =false),TEXT(Status) != Hidden_H
         <fullName>Case_Inactive_Date_Validation</fullName>
         <active>true</active>
         <description>This validation rule is used to prevent the date you have entered in the Inactive date field if the value is before the Referral Date.</description>
-        <errorConditionFormula>AND(Inactive_Date__c &lt;  Referral_Date__c,$Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;)</errorConditionFormula>
+        <errorConditionFormula>AND(Inactive_Date__c &lt;  Referral_Date__c,$Profile.Name != 'Integration',$RecordType.Name = "Wish")</errorConditionFormula>
         <errorMessage>The inactive date cannot occur before the referral date. Please enter a valid inactive date, or re-enter the referral date.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Inactive_Rule</fullName>
         <active>false</active>
         <description>From Inactive, they can only go back to the previous status.</description>
-        <errorConditionFormula>AND($Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,ISCHANGED(Status),NOT(ISNEW()),
-AND(ISPICKVAL(PRIORVALUE(Status),&quot;Inactive&quot;),NOT(ISBLANK(Hidden_Hold_Status_Value__c)), 
+        <errorConditionFormula>AND($Profile.Name != 'Integration',$RecordType.Name = "Wish",ISCHANGED(Status),NOT(ISNEW()),
+AND(ISPICKVAL(PRIORVALUE(Status),"Inactive"),NOT(ISBLANK(Hidden_Hold_Status_Value__c)), 
 OR(Migrated_Record__c = true,Migrated_Record__c =false),TEXT(Status) != Hidden_Hold_Status_Value__c),NOT(Wish_Assist__c),NOT(Rush__c))</errorConditionFormula>
         <errorMessage>From Inactive, they can only go back to the previous status.</errorMessage>
     </validationRules>
@@ -13414,45 +13413,45 @@ OR(Migrated_Record__c = true,Migrated_Record__c =false),TEXT(Status) != Hidden_H
         <fullName>Case_Inquiry_and_Birth_Date_Validation</fullName>
         <active>true</active>
         <description>This validation rule is used to prevent the date you have entered in the Inquiry Date field if the value is before the wish child birthday date.</description>
-        <errorConditionFormula>AND(Inquiry_Date__c &lt;  Contact.Birthdate ,$Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;)</errorConditionFormula>
-        <errorMessage>The inquiry date entered occurs before the wish child&apos;s date of birth. Please enter a valid inquiry date, or re-enter the wish child&apos;s birthdate.</errorMessage>
+        <errorConditionFormula>AND(Inquiry_Date__c &lt;  Contact.Birthdate ,$Profile.Name != 'Integration',$RecordType.Name = "Wish")</errorConditionFormula>
+        <errorMessage>The inquiry date entered occurs before the wish child's date of birth. Please enter a valid inquiry date, or re-enter the wish child's birthdate.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Inquiry_and_Referr_Date_Validation</fullName>
         <active>true</active>
         <description>This validation rule is used to prevent the date you have entered in the Inquiry Date field if the value is after the referral date.</description>
-        <errorConditionFormula>AND(Inquiry_Date__c &gt;  Referral_Date__c,$Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;)</errorConditionFormula>
+        <errorConditionFormula>AND(Inquiry_Date__c &gt;  Referral_Date__c,$Profile.Name != 'Integration',$RecordType.Name = "Wish")</errorConditionFormula>
         <errorMessage>The inquiry date must occur on or before the referral date. Please enter a valid inquiry date, or re-enter the date of referral.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Meet_PWL_Criteria_Validation</fullName>
         <active>true</active>
-        <description>When Meet PWL Criteria field value is no then it force to enter the value for the &apos;Comment for PWL Not Met &apos; field</description>
-        <errorConditionFormula>AND(ISPICKVAL(Meet_PWL_Criteria__c ,&apos;No&apos;), ISBLANK(Comment_for_PWL_Not_Met__c), $RecordType.Name = &quot;Wish&quot;,$Profile.Name  != &apos;Integration&apos;)</errorConditionFormula>
+        <description>When Meet PWL Criteria field value is no then it force to enter the value for the 'Comment for PWL Not Met ' field</description>
+        <errorConditionFormula>AND(ISPICKVAL(Meet_PWL_Criteria__c ,'No'), ISBLANK(Comment_for_PWL_Not_Met__c), $RecordType.Name = "Wish",$Profile.Name  != 'Integration')</errorConditionFormula>
         <errorDisplayField>Comment_for_PWL_Not_Met__c</errorDisplayField>
-        <errorMessage>Please enter an explanation why &apos;No&apos; is selected for &apos;Meet PWL Criteria&apos;</errorMessage>
+        <errorMessage>Please enter an explanation why 'No' is selected for 'Meet PWL Criteria'</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Pending_Approval</fullName>
         <active>true</active>
-        <description>&quot;1. Once changed to Pending Approval, only the Program Supervisor permission set can change the status to Wish Determined.
-2. Once changed to Pending Approval, user can only go to Wish Design.&quot;
+        <description>"1. Once changed to Pending Approval, only the Program Supervisor permission set can change the status to Wish Determined.
+2. Once changed to Pending Approval, user can only go to Wish Design."
 Cloned from Case_Wish_Determined.</description>
         <errorConditionFormula>AND( 
 ISCHANGED(Status), 
 NOT(ISNEW()), 
-ISPICKVAL(PRIORVALUE(Status),&quot;Pending Approval&quot;), 
+ISPICKVAL(PRIORVALUE(Status),"Pending Approval"), 
 
-NOT(ISPICKVAL(Status,&apos;Wish Design&apos;)), 
-NOT(ISPICKVAL(Status,&apos;Closed&apos;)), 
-NOT(ISPICKVAL(Status,&apos;Inactive&apos;)), 
+NOT(ISPICKVAL(Status,'Wish Design')), 
+NOT(ISPICKVAL(Status,'Closed')), 
+NOT(ISPICKVAL(Status,'Inactive')), 
 
-IF($Permission.Program_Supervisor &amp;&amp; ISPICKVAL(Status,&apos;Wish Determined&apos;), 
+IF($Permission.Program_Supervisor &amp;&amp; ISPICKVAL(Status,'Wish Determined'), 
 False, 
 True), 
 
-$Profile.Name != &apos;Integration&apos;, 
-$RecordType.Name = &quot;Wish&quot;, 
+$Profile.Name != 'Integration', 
+$RecordType.Name = "Wish", 
 NOT(Wish_Assist__c), 
 NOT(Rush__c) 
 )</errorConditionFormula>
@@ -13462,7 +13461,7 @@ NOT(Rush__c)
         <fullName>Case_Presentation_Date_Validation</fullName>
         <active>true</active>
         <description>Used to check whether the give date is past</description>
-        <errorConditionFormula>ISCHANGED(Presentation_Date__c ) &amp;&amp; Presentation_Date__c  &lt; Today()  &amp;&amp; $Profile.Name  != &apos;Integration&apos; &amp;&amp; $RecordType.Name = &quot;Wish&quot;</errorConditionFormula>
+        <errorConditionFormula>ISCHANGED(Presentation_Date__c ) &amp;&amp; Presentation_Date__c  &lt; Today()  &amp;&amp; $Profile.Name  != 'Integration' &amp;&amp; $RecordType.Name = "Wish"</errorConditionFormula>
         <errorDisplayField>Presentation_Date__c</errorDisplayField>
         <errorMessage>Presentation date should not be lesser than today</errorMessage>
     </validationRules>
@@ -13475,7 +13474,7 @@ OR(ISCHANGED( Presentation_Date__c ),Wish_Presentation_Set__c = true),
 Wish_Presentation_Set__c = true,
 Migrated_Record__c = false,
 OR(ISBLANK( Presentation_Date__c ),ISBLANK(Time__c), ISBLANK(Location_Address__c), ISBLANK(Name_of_Location__c)),
-$Profile.Name != &apos;Integration&apos;, $RecordType.Name = &quot;Wish&quot;
+$Profile.Name != 'Integration', $RecordType.Name = "Wish"
 )</errorConditionFormula>
         <errorMessage>Wish Presentation Date, Time, Location Address and Name of Location cannot be blank when Wish Presentation Set is checked.</errorMessage>
     </validationRules>
@@ -13485,17 +13484,17 @@ $Profile.Name != &apos;Integration&apos;, $RecordType.Name = &quot;Wish&quot;
         <description>From Qualified, the status can only be changed to Ready to Assign, Inactive, or Closed.</description>
         <errorConditionFormula>AND(
  ISCHANGED(Status),
- ISPICKVAL(PRIORVALUE(Status),&quot;Qualified&quot;),
+ ISPICKVAL(PRIORVALUE(Status),"Qualified"),
 
- NOT(ISPICKVAL(Status,&apos;Ready to Assign&apos;)),
- NOT(ISPICKVAL(Status,&apos;Closed&apos;)),
- NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),
+ NOT(ISPICKVAL(Status,'Ready to Assign')),
+ NOT(ISPICKVAL(Status,'Closed')),
+ NOT(ISPICKVAL(Status,'Inactive')),
 
- $RecordType.Name = &quot;Wish&quot;,
+ $RecordType.Name = "Wish",
  NOT(Wish_Assist__c),
  NOT(Rush__c), 
  NOT(ISNEW()),
- $Profile.Name != &apos;Integration&apos;
+ $Profile.Name != 'Integration'
 )</errorConditionFormula>
         <errorMessage>From Qualified, the status can only be changed to Ready to Assign, Inactive, or Closed.</errorMessage>
     </validationRules>
@@ -13503,7 +13502,7 @@ $Profile.Name != &apos;Integration&apos;, $RecordType.Name = &quot;Wish&quot;
         <fullName>Case_Qualified_Date_Validation</fullName>
         <active>false</active>
         <description>This validation rule is used to prevent the date you have entered in the Qualified Date field if the value is before the referral date.</description>
-        <errorConditionFormula>AND(Qualified_Date__c  &lt;  Referral_Date__c,$Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;)</errorConditionFormula>
+        <errorConditionFormula>AND(Qualified_Date__c  &lt;  Referral_Date__c,$Profile.Name != 'Integration',$RecordType.Name = "Wish")</errorConditionFormula>
         <errorMessage>The qualified date cannot occur before the referral date. Please enter a valid qualified date, or re-enter the referral date.</errorMessage>
     </validationRules>
     <validationRules>
@@ -13512,20 +13511,20 @@ $Profile.Name != &apos;Integration&apos;, $RecordType.Name = &quot;Wish&quot;
         <description>From Ready To Interview, the status can only be changed to Wish Determined, Inactive, Closed, or Ready to Assign, unless this wish is a Rush wish.</description>
         <errorConditionFormula>AND(
 
-	ISPICKVAL(PRIORVALUE(Status),&quot;Ready to Interview&quot;),
+	ISPICKVAL(PRIORVALUE(Status),"Ready to Interview"),
 
-	!ISPICKVAL(Status,&apos;Ready to Assign&apos;),
-	!ISPICKVAL(Status,&apos;Wish Determined&apos;),
-	!ISPICKVAL(Status,&apos;Closed&apos;), 
-	!ISPICKVAL(Status,&apos;Inactive&apos;),
+	!ISPICKVAL(Status,'Ready to Assign'),
+	!ISPICKVAL(Status,'Wish Determined'),
+	!ISPICKVAL(Status,'Closed'), 
+	!ISPICKVAL(Status,'Inactive'),
 
 	!ISNEW(),
 
 	ISCHANGED(Status),
 
-	$Profile.Name != &apos;Integration&apos;,
+	$Profile.Name != 'Integration',
 
-	$RecordType.Name = &quot;Wish&quot;,
+	$RecordType.Name = "Wish",
 
 	!Wish_Assist__c,
 
@@ -13546,22 +13545,22 @@ Except: Wish Assist or Rush</description>
 
 	ISCHANGED(Status),
 
-	ISPICKVAL(PRIORVALUE(Status),&quot;Ready to Assign&quot;),
+	ISPICKVAL(PRIORVALUE(Status),"Ready to Assign"),
 
 	!ISNEW(),
 
 	OR(
-	        ISPICKVAL(Status,&apos;Qualified&apos;),
-		ISPICKVAL(Status,&apos;Wish Design&apos;),
-		ISPICKVAL(Status,&apos;Pending Approval&apos;),
-		ISPICKVAL(Status,&apos;Wish Scheduled&apos;),
-		ISPICKVAL(Status,&apos;Completed&apos;),
-		ISPICKVAL(Status,&apos;Granted&apos;)
+	        ISPICKVAL(Status,'Qualified'),
+		ISPICKVAL(Status,'Wish Design'),
+		ISPICKVAL(Status,'Pending Approval'),
+		ISPICKVAL(Status,'Wish Scheduled'),
+		ISPICKVAL(Status,'Completed'),
+		ISPICKVAL(Status,'Granted')
 		),
 
-	$Profile.Name != &apos;Integration&apos;,
+	$Profile.Name != 'Integration',
 	
-	$RecordType.Name = &quot;Wish&quot;,
+	$RecordType.Name = "Wish",
 	
 	NOT(Wish_Assist__c),
 	
@@ -13574,7 +13573,7 @@ Except: Wish Assist or Rush</description>
         <fullName>Case_Ready_to_Assign_Validation</fullName>
         <active>true</active>
         <description>When the case status is Ready to Assign the sub status should have value</description>
-        <errorConditionFormula>Text(Status) == &apos;Ready to Assign&apos; &amp;&amp; Text(Sub_Status__c) == Null &amp;&amp; $RecordType.Name = &quot;Wish&quot;</errorConditionFormula>
+        <errorConditionFormula>Text(Status) == 'Ready to Assign' &amp;&amp; Text(Sub_Status__c) == Null &amp;&amp; $RecordType.Name = "Wish"</errorConditionFormula>
         <errorDisplayField>Sub_Status__c</errorDisplayField>
         <errorMessage>You should enter value for sub status when status having values as Ready to Assign</errorMessage>
     </validationRules>
@@ -13582,35 +13581,35 @@ Except: Wish Assist or Rush</description>
         <fullName>Case_Referral_Date_Validation</fullName>
         <active>true</active>
         <description>This validation rule is used to prevent the date you have entered in the Referred Date field if the value is before the inquiry date.</description>
-        <errorConditionFormula>AND(Referral_Date__c  &lt; Inquiry_Date__c,$Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;)</errorConditionFormula>
+        <errorConditionFormula>AND(Referral_Date__c  &lt; Inquiry_Date__c,$Profile.Name != 'Integration',$RecordType.Name = "Wish")</errorConditionFormula>
         <errorMessage>The referral date must occur on or after the inquiry date. Please enter a valid referral date, or re-enter the inquiry date.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Rush_Validation</fullName>
         <active>true</active>
         <description>This validation rule will fire if the Rush Timeframe &amp; Rush Explanation fields are not having values when the Rush is checked</description>
-        <errorConditionFormula>AND(Rush__c = TRUE,$RecordType.Name = &quot;Wish&quot;,
+        <errorConditionFormula>AND(Rush__c = TRUE,$RecordType.Name = "Wish",
     OR(Text(Rush_Timeframe__c) == Null,
      ISBLANK(Rush_Explanation__c))
 )</errorConditionFormula>
-        <errorMessage>Please enter values to &apos;Rush Explanation &amp; Rush Timeframe&apos;  fields in order  to check Rush.</errorMessage>
+        <errorMessage>Please enter values to 'Rush Explanation &amp; Rush Timeframe'  fields in order  to check Rush.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Status_Restrict_on_Additional</fullName>
         <active>false</active>
-        <description>Value restriction on &quot;Additional Information for Review&quot; to be selected on corresponding Lead record by Intake Manager</description>
+        <description>Value restriction on "Additional Information for Review" to be selected on corresponding Lead record by Intake Manager</description>
         <errorConditionFormula>AND( 
-$Profile.Name != &apos;System Administrator&apos;,
-$Profile.Name != &apos;Intake Manager&apos;,  
-ISPICKVAL(Status,&apos;Additional Information for Review&apos;) 
+$Profile.Name != 'System Administrator',
+$Profile.Name != 'Intake Manager',  
+ISPICKVAL(Status,'Additional Information for Review') 
 )</errorConditionFormula>
-        <errorMessage>Case status of &quot;&apos;Additional Information for Review&apos;&quot; can only be selected on corresponding Lead record by Intake Manager</errorMessage>
+        <errorMessage>Case status of "'Additional Information for Review'" can only be selected on corresponding Lead record by Intake Manager</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Timeframe_Validation</fullName>
         <active>false</active>
         <description>To check for valid timeframe</description>
-        <errorConditionFormula>AND( ISPICKVAL(Status, &quot;Ready to Assign&quot;), Rush__c = TRUE, NOT Migrated_Record__c, OR(OR(Text(Rush_Timeframe__c) == Null,Text(Rush_Timeframe__c) == &apos;Select timeframe&apos;), ISBLANK(Rush_Explanation__c)) )</errorConditionFormula>
+        <errorConditionFormula>AND( ISPICKVAL(Status, "Ready to Assign"), Rush__c = TRUE, NOT Migrated_Record__c, OR(OR(Text(Rush_Timeframe__c) == Null,Text(Rush_Timeframe__c) == 'Select timeframe'), ISBLANK(Rush_Explanation__c)) )</errorConditionFormula>
         <errorMessage>Please select valid timeframe</errorMessage>
     </validationRules>
     <validationRules>
@@ -13620,17 +13619,17 @@ ISPICKVAL(Status,&apos;Additional Information for Review&apos;)
         <errorConditionFormula>AND(
 ISCHANGED(Status),
 NOT(ISNEW()),
-ISPICKVAL(PRIORVALUE(Status),&quot;Wish Design&quot;),
+ISPICKVAL(PRIORVALUE(Status),"Wish Design"),
 
-NOT(ISPICKVAL(Status,&apos;Ready to Interview&apos;)), 
-NOT(ISPICKVAL(Status,&apos;Wish Determined&apos;)), 
-NOT(ISPICKVAL(Status,&apos;Pending Approval&apos;)), 
-NOT(ISPICKVAL(Status,&apos;Wish Scheduled&apos;)),
-NOT(ISPICKVAL(Status,&apos;Closed&apos;)),
-NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),
+NOT(ISPICKVAL(Status,'Ready to Interview')), 
+NOT(ISPICKVAL(Status,'Wish Determined')), 
+NOT(ISPICKVAL(Status,'Pending Approval')), 
+NOT(ISPICKVAL(Status,'Wish Scheduled')),
+NOT(ISPICKVAL(Status,'Closed')),
+NOT(ISPICKVAL(Status,'Inactive')),
 
-$Profile.Name != &apos;Integration&apos;,
-$RecordType.Name = &quot;Wish&quot;,
+$Profile.Name != 'Integration',
+$RecordType.Name = "Wish",
 NOT(Wish_Assist__c),
 NOT(Rush__c)
 )</errorConditionFormula>
@@ -13643,18 +13642,18 @@ NOT(Rush__c)
         <errorConditionFormula>AND(
 ISCHANGED(Status),
 NOT(ISNEW()),
-ISPICKVAL(PRIORVALUE(Status),&quot;Wish Determined&quot;),
+ISPICKVAL(PRIORVALUE(Status),"Wish Determined"),
 
-NOT(ISPICKVAL(Status,&apos;Pending Approval&apos;)),
-NOT(ISPICKVAL(Status,&apos;Closed&apos;)),
-NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),
+NOT(ISPICKVAL(Status,'Pending Approval')),
+NOT(ISPICKVAL(Status,'Closed')),
+NOT(ISPICKVAL(Status,'Inactive')),
 
-IF($Permission.Program_Supervisor &amp;&amp; ISPICKVAL(Status,&apos;Ready to Interview&apos;),
+IF($Permission.Program_Supervisor &amp;&amp; ISPICKVAL(Status,'Ready to Interview'),
 False, 
 True),
 
-$Profile.Name != &apos;Integration&apos;,
-$RecordType.Name = &quot;Wish&quot;,
+$Profile.Name != 'Integration',
+$RecordType.Name = "Wish",
 NOT(Wish_Assist__c),
 NOT(Rush__c)
 )</errorConditionFormula>
@@ -13664,8 +13663,8 @@ NOT(Rush__c)
         <fullName>Case_Wish_Determined_Status_Validation</fullName>
         <active>false</active>
         <description>This validation will fire when the case status is wish determined and Meet PWL Criteria is empty</description>
-        <errorConditionFormula>AND(ISPICKVAL( Status ,&apos;Wish Determined&apos;), 
-ISBLANK(TEXT(Meet_PWL_Criteria__c)), ISPICKVAL(Sub_Status__c,&apos;Within Policy&apos;))</errorConditionFormula>
+        <errorConditionFormula>AND(ISPICKVAL( Status ,'Wish Determined'), 
+ISBLANK(TEXT(Meet_PWL_Criteria__c)), ISPICKVAL(Sub_Status__c,'Within Policy'))</errorConditionFormula>
         <errorDisplayField>Meet_PWL_Criteria__c</errorDisplayField>
         <errorMessage>Meet PWL Criteria needs to be present when wish status is Wish Determined</errorMessage>
     </validationRules>
@@ -13673,7 +13672,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)), ISPICKVAL(Sub_Status__c,&apos;Within Policy
         <fullName>Case_Wish_Determined_Validation</fullName>
         <active>false</active>
         <description>When the case status is Wish Determined the sub status should have value</description>
-        <errorConditionFormula>Text(Status) == &apos;Wish Determined&apos; &amp;&amp; Text(Sub_Status__c) == Null &amp;&amp; $Profile.Name != &apos;Integration&apos; &amp;&amp; $RecordType.Name = &quot;Wish&quot;</errorConditionFormula>
+        <errorConditionFormula>Text(Status) == 'Wish Determined' &amp;&amp; Text(Sub_Status__c) == Null &amp;&amp; $Profile.Name != 'Integration' &amp;&amp; $RecordType.Name = "Wish"</errorConditionFormula>
         <errorDisplayField>Sub_Status__c</errorDisplayField>
         <errorMessage>You should enter value for sub status when the status is Wish Determined.</errorMessage>
     </validationRules>
@@ -13684,24 +13683,24 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)), ISPICKVAL(Sub_Status__c,&apos;Within Policy
         <errorConditionFormula>AND(
 ISCHANGED(Status),
 NOT(ISNEW()),
-ISPICKVAL(PRIORVALUE(Status),&apos;Wish Scheduled&apos;),
+ISPICKVAL(PRIORVALUE(Status),'Wish Scheduled'),
 
-NOT(ISPICKVAL(Status,&apos;Wish Design&apos;)),
-NOT(ISPICKVAL(Status,&apos;Granted&apos;)),
-NOT(ISPICKVAL(Status,&apos;Closed&apos;)),
-NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),
+NOT(ISPICKVAL(Status,'Wish Design')),
+NOT(ISPICKVAL(Status,'Granted')),
+NOT(ISPICKVAL(Status,'Closed')),
+NOT(ISPICKVAL(Status,'Inactive')),
 
 IF(
 AND($Permission.Program_Supervisor, 
-    OR(ISPICKVAL(Status,&apos;Ready to Interview&apos;),
-       ISPICKVAL(Status,&apos;Wish Determined&apos;)
+    OR(ISPICKVAL(Status,'Ready to Interview'),
+       ISPICKVAL(Status,'Wish Determined')
       )
     ),
 False, 
 True),
 
-$Profile.Name != &apos;Integration&apos;,
-$RecordType.Name = &quot;Wish&quot;,
+$Profile.Name != 'Integration',
+$RecordType.Name = "Wish",
 NOT(Wish_Assist__c),
 NOT(Rush__c)
 )</errorConditionFormula>
@@ -13721,7 +13720,7 @@ NOT(Rush__c)
     <validationRules>
         <fullName>Chapter_Medical_Advisor_Validation</fullName>
         <active>true</active>
-        <errorConditionFormula>AND(ISPICKVAL(Status, &apos;Escalated&apos;),$RecordType.Name = &quot;Diagnosis Verification Review&quot;,Local_MCA_Team__c = NULL, ISCHANGED(Status))</errorConditionFormula>
+        <errorConditionFormula>AND(ISPICKVAL(Status, 'Escalated'),$RecordType.Name = "Diagnosis Verification Review",Local_MCA_Team__c = NULL, ISCHANGED(Status))</errorConditionFormula>
         <errorMessage>Please fill the Chapter Medical Advisor Name.</errorMessage>
     </validationRules>
     <validationRules>
@@ -13743,7 +13742,7 @@ NOT(Rush__c)
     <validationRules>
         <fullName>Diagnosis_Verification_Received_Date</fullName>
         <active>true</active>
-        <errorConditionFormula>AND(ISPICKVAL(Status,&apos;Completed&apos;),ISBLANK(  Diagnosis_Verification_Receive_Date__c ),$RecordType.Name = &quot;Wish&quot;)</errorConditionFormula>
+        <errorConditionFormula>AND(ISPICKVAL(Status,'Completed'),ISBLANK(  Diagnosis_Verification_Receive_Date__c ),$RecordType.Name = "Wish")</errorConditionFormula>
         <errorDisplayField>Absent_Parent_Form__c</errorDisplayField>
         <errorMessage>Diagnosis Verification Received Date should not be Blank.</errorMessage>
     </validationRules>
@@ -13774,10 +13773,10 @@ NOT(Rush__c)
     <validationRules>
         <fullName>National_type_editable</fullName>
         <active>false</active>
-        <description>When the status is Wish Determined, only someone with the permission set &quot;National Type Editable&quot; can change the Wish National Type.</description>
+        <description>When the status is Wish Determined, only someone with the permission set "National Type Editable" can change the Wish National Type.</description>
         <errorConditionFormula>AND(
-ISPICKVAL( Status , &apos;Wish Determined&apos;),
-$RecordType.Name = &quot;Wish&quot;,
+ISPICKVAL( Status , 'Wish Determined'),
+$RecordType.Name = "Wish",
 ISCHANGED( Wish_Type__c ),
 NOT(ISBLANK(TEXT(PRIORVALUE(Wish_Type__c )))), 
 NOT($Permission.National_Type_editable),
@@ -13798,7 +13797,7 @@ NOT(ISCHANGED(Status))
         <active>true</active>
         <description>This validation rule will fire when the required forms are checked and corresponding date value is null.</description>
         <errorConditionFormula>AND(
-$Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,Text(Sub_Status__c)!=&quot;Abandoned&quot;,Text(Status)!=&quot;Closed&quot;,Text(Status)!=&quot;DNQ&quot;,ISPICKVAL(Status,&apos;Closed&apos;),
+$Profile.Name != 'Integration',$RecordType.Name = "Wish",Text(Sub_Status__c)!="Abandoned",Text(Status)!="Closed",Text(Status)!="DNQ",ISPICKVAL(Status,'Closed'),
 OR(
 AND(Communication_Profile__c = True,ISNULL(Date_Received_for_Communication_Profile__c)),
 AND(Wish_Safety_Authorization_Part_B_Form__c = True,ISNULL(Date_Received_for_Wish_Safety_Authorizat__c)),
@@ -13812,23 +13811,23 @@ ISCHANGED(Status)
         <fullName>Prevent_Case_Budget_Approval_Approved</fullName>
         <active>false</active>
         <description>This validation will fire when the status is changed from DNQ,Hold,Inactive,Closed to Budget Approval Approved.</description>
-        <errorConditionFormula>AND($Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,NOT(Wish_Assist__c),NOT(Rush__c),OR(
+        <errorConditionFormula>AND($Profile.Name != 'Integration',$RecordType.Name = "Wish",NOT(Wish_Assist__c),NOT(Rush__c),OR(
 
-AND(ISPICKVAL(PRIORVALUE(Status),&apos;Budget Approval - Approved&apos;),
-NOT($Permission.Program_Supervisor),NOT(ISPICKVAL(Status,&apos;Wish Design&apos;)),NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),NOT(ISPICKVAL(Status,&apos;Wish Scheduled&apos;)),
-NOT(ISPICKVAL(Status,&apos;DNQ&apos;)),NOT(ISPICKVAL(Status,&apos;Hold&apos;)),NOT(ISPICKVAL(Status,&apos;Closed&apos;))),
+AND(ISPICKVAL(PRIORVALUE(Status),'Budget Approval - Approved'),
+NOT($Permission.Program_Supervisor),NOT(ISPICKVAL(Status,'Wish Design')),NOT(ISPICKVAL(Status,'Inactive')),NOT(ISPICKVAL(Status,'Wish Scheduled')),
+NOT(ISPICKVAL(Status,'DNQ')),NOT(ISPICKVAL(Status,'Hold')),NOT(ISPICKVAL(Status,'Closed'))),
 
-AND(ISPICKVAL(PRIORVALUE(Status),&apos;Budget Approval - Approved&apos;),NOT(ISPICKVAL(Status,&apos;Wish Design&apos;)),NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),
-NOT(ISPICKVAL(Status,&apos;DNQ&apos;)),NOT(ISPICKVAL(Status,&apos;Hold&apos;)),NOT(ISPICKVAL(Status,&apos;Closed&apos;)),NOT(ISPICKVAL(Status,&apos;Ready to interview&apos;)),
-NOT(ISPICKVAL(Status,&apos;Wish Determined&apos;)),$Permission.Program_Supervisor,NOT(ISPICKVAL(Status,&apos;Wish Scheduled&apos;)))),ISCHANGED(Status))</errorConditionFormula>
+AND(ISPICKVAL(PRIORVALUE(Status),'Budget Approval - Approved'),NOT(ISPICKVAL(Status,'Wish Design')),NOT(ISPICKVAL(Status,'Inactive')),
+NOT(ISPICKVAL(Status,'DNQ')),NOT(ISPICKVAL(Status,'Hold')),NOT(ISPICKVAL(Status,'Closed')),NOT(ISPICKVAL(Status,'Ready to interview')),
+NOT(ISPICKVAL(Status,'Wish Determined')),$Permission.Program_Supervisor,NOT(ISPICKVAL(Status,'Wish Scheduled')))),ISCHANGED(Status))</errorConditionFormula>
         <errorMessage>The status cannot be changed manually from this status</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Prevent_Case_Budget_Approval_Submitted</fullName>
         <active>false</active>
         <description>This validation will fire when the status is changed from DNQ,Hold,Inactive,Closed to Budget Approval Submitted.</description>
-        <errorConditionFormula>AND(ISPICKVAL(Status,&apos;Budget Approval - Submitted&apos;),ISCHANGED(Status),$Profile.Name  != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,OR(ISPICKVAL(PRIORVALUE(Status),&apos;DNQ&apos;),
-ISPICKVAL(PRIORVALUE(Status),&apos;Hold&apos;),ISPICKVAL(PRIORVALUE(Status),&apos;Inactive&apos;),ISPICKVAL(PRIORVALUE(Status),&apos;Closed&apos;)),NOT(ISNEW()),
+        <errorConditionFormula>AND(ISPICKVAL(Status,'Budget Approval - Submitted'),ISCHANGED(Status),$Profile.Name  != 'Integration',$RecordType.Name = "Wish",OR(ISPICKVAL(PRIORVALUE(Status),'DNQ'),
+ISPICKVAL(PRIORVALUE(Status),'Hold'),ISPICKVAL(PRIORVALUE(Status),'Inactive'),ISPICKVAL(PRIORVALUE(Status),'Closed')),NOT(ISNEW()),
 NOT($Permission.Program_Supervisor))</errorConditionFormula>
         <errorMessage>The status cannot be changed manually from this status.</errorMessage>
     </validationRules>
@@ -13836,30 +13835,30 @@ NOT($Permission.Program_Supervisor))</errorConditionFormula>
         <fullName>Qualifying_Validation</fullName>
         <active>true</active>
         <errorConditionFormula>AND(
-	$Profile.Name != &apos;Integration&apos;,
-		OR(ISPICKVAL(Status, &apos;Approved - National Medical Review&apos;),ISPICKVAL(Status, &apos;Approved - National MAC Review&apos;))
-		, $RecordType.Name== &apos;Diagnosis Verification Review&apos;, AND(ISBLANK(Lead__r.Qualifying_ICD__c),ISBLANK(Lead__r.Qualifying_Diagnosis__c)) )</errorConditionFormula>
+	$Profile.Name != 'Integration',
+		OR(ISPICKVAL(Status, 'Approved - National Medical Review'),ISPICKVAL(Status, 'Approved - National MAC Review'))
+		, $RecordType.Name== 'Diagnosis Verification Review', AND(ISBLANK(Lead__r.Qualifying_ICD__c),ISBLANK(Lead__r.Qualifying_Diagnosis__c)) )</errorConditionFormula>
         <errorMessage>Please enter qualifying diagnosis</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Referral_date_Validation</fullName>
         <active>true</active>
-        <errorConditionFormula>AND(ISPICKVAL(Status,&apos;Completed&apos;),ISBLANK(Referral_Date__c),$RecordType.Name = &quot;Wish&quot;)</errorConditionFormula>
+        <errorConditionFormula>AND(ISPICKVAL(Status,'Completed'),ISBLANK(Referral_Date__c),$RecordType.Name = "Wish")</errorConditionFormula>
         <errorMessage>Referral date should not be Blank.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Restrict_Program_and_Volunteer_staff</fullName>
         <active>true</active>
         <description>This validation rule is used to restrict edit access to Program Staff and Volunteer Staff</description>
-        <errorConditionFormula>IF(AND( RecordType.Name = &apos;Diagnosis Verification Review&apos; , OR($Profile.Name = &apos;Volunteer Staff&apos;,$Profile.Name = &apos;Program Staff&apos;)), true, false)</errorConditionFormula>
+        <errorConditionFormula>IF(AND( RecordType.Name = 'Diagnosis Verification Review' , OR($Profile.Name = 'Volunteer Staff',$Profile.Name = 'Program Staff')), true, false)</errorConditionFormula>
         <errorMessage>You do not have the access to edit the record. Please reach out to the National Medical Advisor.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Restrict_Wish_Close</fullName>
         <active>true</active>
-        <description>Restrict &apos;Intern&apos; Profile Users to closing a wish</description>
-        <errorConditionFormula>AND($Profile.Name = &apos;Intern&apos;,ISPICKVAL( Status , &apos;Closed&apos;),$RecordType.Name = &quot;Wish&quot;)</errorConditionFormula>
-        <errorMessage>You don&apos;t have access to close the wish</errorMessage>
+        <description>Restrict 'Intern' Profile Users to closing a wish</description>
+        <errorConditionFormula>AND($Profile.Name = 'Intern',ISPICKVAL( Status , 'Closed'),$RecordType.Name = "Wish")</errorConditionFormula>
+        <errorMessage>You don't have access to close the wish</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Single_Parent_Form_Validation</fullName>
@@ -13889,7 +13888,7 @@ NOT($Permission.Program_Supervisor))</errorConditionFormula>
         <fullName>Wish_Completed_Status_Validation</fullName>
         <active>true</active>
         <description>There should be value on End Date when wish status is Completed.</description>
-        <errorConditionFormula>AND(ISPICKVAL(Status,&apos;Completed&apos;),ISBLANK(End_Date__c),$RecordType.Name = &quot;Wish&quot;)</errorConditionFormula>
+        <errorConditionFormula>AND(ISPICKVAL(Status,'Completed'),ISBLANK(End_Date__c),$RecordType.Name = "Wish")</errorConditionFormula>
         <errorDisplayField>End_Date__c</errorDisplayField>
         <errorMessage>There should be a value for End date when wish status is Completed</errorMessage>
     </validationRules>
@@ -13921,7 +13920,7 @@ NOT($Permission.Program_Supervisor))</errorConditionFormula>
         <fullName>Wish_Scheduled_Status_Validation</fullName>
         <active>true</active>
         <description>This rule will be fire when wish status is wish scheduled and start is is empty</description>
-        <errorConditionFormula>AND(ISPICKVAL( Status ,&apos;Wish Scheduled&apos;), ISBLANK(Start_Date__c),$RecordType.Name = &quot;Wish&quot;)</errorConditionFormula>
+        <errorConditionFormula>AND(ISPICKVAL( Status ,'Wish Scheduled'), ISBLANK(Start_Date__c),$RecordType.Name = "Wish")</errorConditionFormula>
         <errorDisplayField>Start_Date__c</errorDisplayField>
         <errorMessage>There should be a value for start date when wish status is wish scheduled</errorMessage>
     </validationRules>
@@ -13934,7 +13933,7 @@ NOT($Permission.Program_Supervisor))</errorConditionFormula>
         <masterLabel>Add In-Kind Donor</masterLabel>
         <openType>onClickJavaScript</openType>
         <protected>false</protected>
-        <url>window.open(&apos;/001/o&apos;,&apos;_blank&apos;);</url>
+        <url>window.open('/001/o','_blank');</url>
     </webLinks>
     <webLinks>
         <fullName>Avis</fullName>
@@ -13965,40 +13964,40 @@ NOT($Permission.Program_Supervisor))</errorConditionFormula>
         <masterLabel>Create New Case</masterLabel>
         <openType>onClickJavaScript</openType>
         <protected>false</protected>
-        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
-{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)} 
+        <url>{!REQUIRESCRIPT("/soap/ajax/24.0/connection.js")} 
+{!REQUIRESCRIPT("/soap/ajax/24.0/apex.js")} 
 
-var currCase = new sforce.SObject(&quot;Case&quot;); 
+var currCase = new sforce.SObject("Case"); 
 
 
 var permissionResult = 
     sforce.connection.query(
-        &quot;SELECT Id &quot; +
-        &quot;FROM PermissionSetAssignment &quot; +
-        &quot;WHERE PermissionSet.Name = &apos;Program_Supervisor&apos;&quot; +
-        &quot;AND AssigneeId = &apos;{!$User.Id}&apos;&quot;
+        "SELECT Id " +
+        "FROM PermissionSetAssignment " +
+        "WHERE PermissionSet.Name = 'Program_Supervisor'" +
+        "AND AssigneeId = '{!$User.Id}'"
     );
 
-   var psAssignment = permissionResult.getArray(&quot;records&quot;);
+   var psAssignment = permissionResult.getArray("records");
    if(psAssignment.length === 0){ 
-      alert(&apos;You dont have access to this functionality.&apos;); 
+      alert('You dont have access to this functionality.'); 
       window.location.reload();
    }
 else
 {
 
-var result =&apos;&apos;; 
+var result =''; 
 
-result = sforce.apex.execute(&quot;CreateNewWish_AC&quot;,&quot;CreateCase&quot;, {caseId:&apos;{!Case.Id}&apos;}); 
+result = sforce.apex.execute("CreateNewWish_AC","CreateCase", {caseId:'{!Case.Id}'}); 
 
 if(result != null)
 {
-     alert(&apos;Case Created Successfully&apos;);
-     window.location.href = &apos;/&apos;+result; 
+     alert('Case Created Successfully');
+     window.location.href = '/'+result; 
 }
 else
 {
-   alert(&apos;Case Creation Failed&apos;);
+   alert('Case Creation Failed');
    window.location.reload();
 }
 }</url>
@@ -14054,7 +14053,7 @@ else
         <height>600</height>
         <isResizable>true</isResizable>
         <linkType>url</linkType>
-        <masterLabel>GKTW/WGO&apos;s</masterLabel>
+        <masterLabel>GKTW/WGO's</masterLabel>
         <openType>newWindow</openType>
         <position>none</position>
         <protected>false</protected>
@@ -14070,7 +14069,7 @@ else
         <masterLabel>InKind Donation Report</masterLabel>
         <openType>onClickJavaScript</openType>
         <protected>false</protected>
-        <url>window.open(&apos;/00O36000006aUmV&apos;,&apos;_blank&apos;);</url>
+        <url>window.open('/00O36000006aUmV','_blank');</url>
     </webLinks>
     <webLinks>
         <fullName>InKind_Donors_Report</fullName>
@@ -14092,7 +14091,7 @@ else
         <masterLabel>In-Kind/Reimbursement</masterLabel>
         <openType>onClickJavaScript</openType>
         <protected>false</protected>
-        <url>window.open(&apos;/apex/InkindandReimbursement_VF?recId={!Case.Id}&apos;,&apos;_self&apos;);</url>
+        <url>window.open('/apex/InkindandReimbursement_VF?recId={!Case.Id}','_self');</url>
     </webLinks>
     <webLinks>
         <fullName>In_Kind_Reimbursements</fullName>
@@ -14196,21 +14195,21 @@ else
         <masterLabel>Medical Eligibility Review</masterLabel>
         <openType>onClickJavaScript</openType>
         <protected>false</protected>
-        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/29.0/connection.js&quot;)} 
-var record = new sforce.SObject(&quot;Case&quot;); 
-record.Id = &quot;{!Case.Id}&quot;; 
-var localTeam = &quot;{!Case.Local_MCA_Team__c}&quot; 
-var caseStatus = &quot;{!Case.Status}&quot; 
+        <url>{!REQUIRESCRIPT("/soap/ajax/29.0/connection.js")} 
+var record = new sforce.SObject("Case"); 
+record.Id = "{!Case.Id}"; 
+var localTeam = "{!Case.Local_MCA_Team__c}" 
+var caseStatus = "{!Case.Status}" 
 if(localTeam.length &lt; 1){ 
-alert(&apos;Please Select Medical Eligibility Reviewer&apos;) 
+alert('Please Select Medical Eligibility Reviewer') 
 } 
-else if(caseStatus == &quot;Escalated&quot;){ 
-alert(&apos;The case is transferred to National MAC team &apos;) 
+else if(caseStatus == "Escalated"){ 
+alert('The case is transferred to National MAC team ') 
 } 
 else{ 
 record.isEmail__c = true; 
 var result = sforce.connection.update([record]); 
-alert(&apos;Email has been sent!&apos;); 
+alert('Email has been sent!'); 
 window.location.reload(); 
 }</url>
     </webLinks>
@@ -14222,7 +14221,7 @@ window.location.reload();
         <masterLabel>New Time Sheet</masterLabel>
         <openType>onClickJavaScript</openType>
         <protected>false</protected>
-        <url>window.open(&apos;{!$Site.BaseUrl}/VolunteerOpportunitySelection_VF?caseRecId={!Case.Id}&apos;,&apos;_blank&apos;);</url>
+        <url>window.open('{!$Site.BaseUrl}/VolunteerOpportunitySelection_VF?caseRecId={!Case.Id}','_blank');</url>
     </webLinks>
     <webLinks>
         <fullName>Publicity_Form</fullName>
@@ -14264,52 +14263,52 @@ window.location.reload();
         <masterLabel>Send Email to Chapter Medical Advisor</masterLabel>
         <openType>onClickJavaScript</openType>
         <protected>false</protected>
-        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/30.0/connection.js&quot;)}
-{!REQUIRESCRIPT(&quot;/soap/ajax/30.0/apex.js&quot;)}
+        <url>{!REQUIRESCRIPT("/soap/ajax/30.0/connection.js")}
+{!REQUIRESCRIPT("/soap/ajax/30.0/apex.js")}
 
-var caseStatus = &quot;{!Case.Status}&quot;
-var chapterMedicalAdvisar = &quot;{!Case.Local_MCA_Team__c}&quot;
-var chapterMedicalAdvisarEmail = &quot;{!Case.Medical_Advisor_Email__c}&quot;
+var caseStatus = "{!Case.Status}"
+var chapterMedicalAdvisar = "{!Case.Local_MCA_Team__c}"
+var chapterMedicalAdvisarEmail = "{!Case.Medical_Advisor_Email__c}"
 
-if(chapterMedicalAdvisar.lenth &lt; 1 || chapterMedicalAdvisar == &apos;&apos;){
-   alert(&apos;Please select Chapter Medical Advisor &apos;)
+if(chapterMedicalAdvisar.lenth &lt; 1 || chapterMedicalAdvisar == ''){
+   alert('Please select Chapter Medical Advisor ')
 }
-else if(chapterMedicalAdvisarEmail.lenth &lt; 1 || chapterMedicalAdvisarEmail == &apos;&apos;){
-   alert(&apos;Please select Chapter Medical Advisor email&apos;)
+else if(chapterMedicalAdvisarEmail.lenth &lt; 1 || chapterMedicalAdvisarEmail == ''){
+   alert('Please select Chapter Medical Advisor email')
 }
 else{
-if(caseStatus == &quot;Escalated&quot;){
-alert(&apos;The case is transferred to National MAC team &apos;)
+if(caseStatus == "Escalated"){
+alert('The case is transferred to National MAC team ')
 } else{
-var record = new sforce.SObject(&quot;Case&quot;);
-var resultEmailProcess = sforce.apex.execute(&quot;SendEmailToMacTeam_AC&quot;,&quot;sendEmailToMac&quot;,{caseOwnerId:&quot;{!Case.Local_MCA_TeamId__c}&quot;, leadId:&quot;{!Case.LeadId__c}&quot;, caseId:&quot;{!Case.Id}&quot;, caseStatus:&quot;Local&quot;, Email:&quot;{!Case.Medical_Advisor_Email__c}&quot;}); 
-record.Id = &quot;{!Case.Id}&quot;
-record.Status = &apos;Open&apos;;
+var record = new sforce.SObject("Case");
+var resultEmailProcess = sforce.apex.execute("SendEmailToMacTeam_AC","sendEmailToMac",{caseOwnerId:"{!Case.Local_MCA_TeamId__c}", leadId:"{!Case.LeadId__c}", caseId:"{!Case.Id}", caseStatus:"Local", Email:"{!Case.Medical_Advisor_Email__c}"}); 
+record.Id = "{!Case.Id}"
+record.Status = 'Open';
 record.isEmail__c = true
 var result = sforce.connection.update([record]);
 window.location.reload();
-alert(&apos;Email sucessfully sent&apos;);
+alert('Email sucessfully sent');
 }
 }</url>
     </webLinks>
     <webLinks>
         <fullName>Send_Test_Medical_Clearance</fullName>
         <availability>online</availability>
-        <description>Test button by Victoria to send the &quot;Wish Clearance Form - designed&quot; template from Docusign. Following instructions at https://support.docusign.com/en/articles/DFS-URL-buttons-for-Lightning-basic-setup-limitations. 2019-07-22</description>
+        <description>Test button by Victoria to send the "Wish Clearance Form - designed" template from Docusign. Following instructions at https://support.docusign.com/en/articles/DFS-URL-buttons-for-Lightning-basic-setup-limitations. 2019-07-22</description>
         <displayType>link</displayType>
         <encodingKey>UTF-8</encodingKey>
         <linkType>url</linkType>
         <masterLabel>Send Test Medical Clearance</masterLabel>
         <openType>replace</openType>
         <protected>false</protected>
-        <url>{!URLFOR(&apos;/apex/dsfs__DocuSign_CreateEnvelope&apos;, null, [
+        <url>{!URLFOR('/apex/dsfs__DocuSign_CreateEnvelope', null, [
 SourceID =  Case.Id ,
-CCRM = &apos;Decision Maker~Signer 1&apos;,
-CCTM = &apos;Decision Maker~Signer&apos;,
-DST = &apos;b1cba957-3aad-46d0-8bbf-b4a6a2de6d40&apos;,
-LA = &apos;0&apos;,
-LF = &apos;0&apos;,
-OCO = &apos;Tag&apos;
+CCRM = 'Decision Maker~Signer 1',
+CCTM = 'Decision Maker~Signer',
+DST = 'b1cba957-3aad-46d0-8bbf-b4a6a2de6d40',
+LA = '0',
+LF = '0',
+OCO = 'Tag'
 ]
 )}</url>
     </webLinks>
@@ -14385,26 +14384,26 @@ OCO = &apos;Tag&apos;
         <masterLabel>Update Contact Info</masterLabel>
         <openType>onClickJavaScript</openType>
         <protected>false</protected>
-        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
-{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)}
+        <url>{!REQUIRESCRIPT("/soap/ajax/24.0/connection.js")} 
+{!REQUIRESCRIPT("/soap/ajax/24.0/apex.js")}
 
-var conId = &apos;{!$User.ContactId}&apos;;
-var profName = &apos;{!$Profile.Name}&apos;;
+var conId = '{!$User.ContactId}';
+var profName = '{!$Profile.Name}';
 
 if(conId.length == 0){
-    var CaseOwner = sforce.connection.query(&quot;SELECT Owner.UserRole.Name from Case where id =&apos;{!Case.Id}&apos; limit 1&quot;);
-    records = CaseOwner.getArray(&quot;records&quot;);
+    var CaseOwner = sforce.connection.query("SELECT Owner.UserRole.Name from Case where id ='{!Case.Id}' limit 1");
+    records = CaseOwner.getArray("records");
     var ownerRole = records[0].Owner.UserRole.Name;
-    var CurrentUser = sforce.connection.query(&quot;SELECT UserRole.Name from User where id =&apos;{!User.Id}&apos; limit 1&quot;);
-    records = CurrentUser.getArray(&quot;records&quot;);
+    var CurrentUser = sforce.connection.query("SELECT UserRole.Name from User where id ='{!User.Id}' limit 1");
+    records = CurrentUser.getArray("records");
     var currentUserRole = records[0].UserRole.Name;
-    if(currentUserRole != ownerRole &amp;&amp; currentUserRole != &apos;National Staff&apos; &amp;&amp; profName != &apos;System Administrator&apos;){
-        alert(&quot;You have no permission to edit this record.&quot;);
+    if(currentUserRole != ownerRole &amp;&amp; currentUserRole != 'National Staff' &amp;&amp; profName != 'System Administrator'){
+        alert("You have no permission to edit this record.");
     }else{
-        window.open(&apos;/apex/RelationshipsViewer_VF?recId={!Case.Id}&apos;,&apos;_self&apos;);
+        window.open('/apex/RelationshipsViewer_VF?recId={!Case.Id}','_self');
     }
 }else{
-    window.open(&apos;/apex/RelationshipsViewer_VF?recId={!Case.Id}&apos;,&apos;_self&apos;);
+    window.open('/apex/RelationshipsViewer_VF?recId={!Case.Id}','_self');
 }</url>
     </webLinks>
     <webLinks>
@@ -14447,18 +14446,18 @@ if(conId.length == 0){
         <masterLabel>Wish Expense</masterLabel>
         <openType>onClickJavaScript</openType>
         <protected>false</protected>
-        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
-{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)} 
-var parentCase = sforce.connection.query(&quot;SELECT ID,ParentId,Parent.Wish_Type__c FROM Case WHERE ID = &apos;{!Case.Id}&apos; LIMIT 1&quot;); 
-records = parentCase.getArray(&quot;records&quot;); 
+        <url>{!REQUIRESCRIPT("/soap/ajax/24.0/connection.js")} 
+{!REQUIRESCRIPT("/soap/ajax/24.0/apex.js")} 
+var parentCase = sforce.connection.query("SELECT ID,ParentId,Parent.Wish_Type__c FROM Case WHERE ID = '{!Case.Id}' LIMIT 1"); 
+records = parentCase.getArray("records"); 
 
 var accDate = records[0].Parent.Wish_Type__c; 
 //if(accDate != null){ 
-window.open(&apos;/apex/WishBudgetForm_VF?CaseId={!Case.ParentId}&apos;); 
+window.open('/apex/WishBudgetForm_VF?CaseId={!Case.ParentId}'); 
 /*} 
 else 
 { 
-alert(&apos;The budget page cannot be launched until the National Wish Type is selected&apos;); 
+alert('The budget page cannot be launched until the National Wish Type is selected'); 
 
 } */</url>
     </webLinks>
