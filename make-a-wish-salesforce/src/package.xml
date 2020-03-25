@@ -29,6 +29,7 @@
     <name>CustomLabels</name>
   </types>
   <types>
+    <members>Case</members>
     <members>Endpoints__c</members>
     <members>Inkind_Donation_PDFs__c</members>
     <members>Lead</members>
