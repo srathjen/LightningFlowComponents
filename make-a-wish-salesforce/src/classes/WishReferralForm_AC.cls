@@ -6,7 +6,8 @@ Description : It will capture the lead from Referral form.
 ***********************************************************/
 // 07/29/2019 -Brittany - SIW-147 Comment out entire duplicate block logic (including Notifications) to support Potential Duplicates Functionality
 // 06/02/2020 - Manoj - SIW-275 Mapped 'Medical reason' text value to field 'Referrer Rush Reason' on Lead
-global Class WishReferralForm_AC {
+// 03/25/2020 - Gus Mayer - SCC-151 Assigning Lead Record Type to Wish Child
+global class WishReferralForm_AC {
     public String remailOne {get;set;}
     public String remailTwo {get;set;}
     public Lead currLead {get;set;}
@@ -60,7 +61,6 @@ global Class WishReferralForm_AC {
         String recId;
         List<String> lstLog = new List<String>();
         try {
-            Id staffTaskRT = Constant_AC.STAFF_TASK_RT_ID;
             currLead.PCD_ICD__c = icdOrPcd;
             if(currLead.Relationship_to_child__c != null) {
                 currLead.Relationship_to_child__c = currLead.Relationship_to_child__c.trim();
@@ -112,8 +112,8 @@ global Class WishReferralForm_AC {
                 }
             }
             if(flag == true) {
-                if(currLead.Postalcode != null && currLead.Postalcode != '') {
-                    zipCode = currLead.Postalcode;
+                if(currLead.PostalCode != null && currLead.PostalCode != '') {
+                    zipCode = currLead.PostalCode;
                 } else {
                     zipCode = currLead.Referrer_Zip__c;
                 }
@@ -145,7 +145,7 @@ global Class WishReferralForm_AC {
                     List<Zip_Code__c> findChapterviaZipCode = new List<Zip_Code__c>(getChapterZipcode(zipCode));
                     if(findChapterviaZipCode.size() > 0) {
                         if(findChapterviaZipCode[0].Office__c != null && findChapterviaZipCode[0].Office__r.Chapter__c != null) {
-                            currLead.chapterName__c = findChapterviaZipCode[0].Office__r.Chapter__c;
+                            currLead.ChapterName__c = findChapterviaZipCode[0].Office__r.Chapter__c;
                             if(findChapterviaZipCode[0].Office__r.Chapter__r.Intake_Manager__c != null) {
                                 currLead.OwnerId = findChapterviaZipCode[0].Office__r.Chapter__r.Intake_Manager__c;
                                 intakeManagerId = findChapterviaZipCode[0].Office__r.Chapter__r.Intake_Manager__c;
@@ -155,26 +155,26 @@ global Class WishReferralForm_AC {
                 } else {
                     List<Account> currAccount = getMawAccount();
                     if(currAccount.size() > 0) {
-                        currLead.chapterName__c = currAccount[0].Id;
+                        currLead.ChapterName__c = currAccount[0].Id;
                         if(currAccount[0].Intake_Manager__c != null) {
                             currLead.OwnerId = currAccount[0].Intake_Manager__c;
                             intakeManagerId = currAccount[0].Intake_Manager__c;
                         }
                     }
                 }
-                if(currLead.Relationship_To_child__c == Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_OTHER || currLead.Child_Age__c == Constant_AC.LEAD_CHILD_AGE_UNDER_2_5) {
+                if(currLead.Relationship_to_child__c == Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_OTHER || currLead.Child_Age__c == Constant_AC.LEAD_CHILD_AGE_UNDER_2_5) {
                     currLead.Status = Constant_AC.LEAD_STATUS_INQUIRY;
                     currLead.RFI_Form_Info_Hidden__c = Constant_AC.LEAD_STATUS_INQUIRY;
                 } else {
                     currLead.Status = Constant_AC.LEAD_STATUS_REFERRED;
                     currLead.RFI_Form_Info_Hidden__c = Constant_AC.LEAD_STATUS_REFERRED;
                 }
-                if(currLead.Relationship_To_Child__c == Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL) {
+                if(currLead.Relationship_to_child__c == Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL) {
                     currLead.ReferralComment__c = referralComment;
                 } else {
                     currLead.ReferralComment__c = '';
                 }
-                if(currLead.Relationship_To_Child__c == Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL 
+                if(currLead.Relationship_to_child__c == Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL
                         && (currLead.Medical_Provider_Category__c == Constant_AC.LEAD_MEDICAL_PROVIDER_NURSE_PRACTITIONER 
                         || currLead.Medical_Provider_Category__c == Constant_AC.LEAD_MEDICAL_PROVIDER_PHYSICIAN_ASSISTANT
                         || currLead.Medical_Provider_Category__c == Constant_AC.LEAD_MEDICAL_PROVIDER_PHYSICIAN)) {
@@ -197,7 +197,7 @@ global Class WishReferralForm_AC {
                         communications += s + ';';
                     }
                 }
-                currLead.communication__c = communications;
+                currLead.Communication__c = communications;
                 String languages = '';
                 if(languageList != null) {
                     for (String l : languageList) {
@@ -207,6 +207,7 @@ global Class WishReferralForm_AC {
                 currLead.What_is_the_family_s_primary_spoken_lang__c = languages;
                 lstLog = (createLogList(currLead, zipCode, diagnosisMonth, diagnosisYear));
                 Boolean redirection;
+                currLead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
                 insert currLead;
                 if(currLead.Id != null) {
                     redirection = true;
@@ -234,7 +235,7 @@ global Class WishReferralForm_AC {
     private static List<ICD_Codes__c> getIcdCodes(String diagnosisFilter) {
         List<ICD_Codes__c> icdCodes = new List<ICD_Codes__c>();
         icdCodes = [SELECT Id, Long_Description__c, Condition_Description__r.PR_Diagnosis__c,Group1__c,
-                    Condition_Description__c, Condition_Description__r.Code_to_Use__c
+                    Condition_Description__c, Condition_Description__r.Code_To_Use__c
                     FROM ICD_Codes__c
                     WHERE Name = :diagnosisFilter];
         return icdCodes; 
@@ -321,7 +322,7 @@ global Class WishReferralForm_AC {
                 conditionDescriptions = [
                         SELECT Id, Name, Code_To_Use__c
                         FROM Condition_Description__c
-                        WHERE Not_Listed__c = true
+                        WHERE Not_Listed__c = TRUE
                 ];
             }
             logValue = String.valueOf(conditionDescriptions);
@@ -364,15 +365,15 @@ global Class WishReferralForm_AC {
 	*Render child form
 	*/
     public void displayChildForm() {
-        if(currLead.Relationship_To_Child__c != Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL) {
+        if(currLead.Relationship_to_child__c != Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL) {
             currLead.Medical_Provider_Category__c = '';
             copyReferrerInfo = false;
         }
-        if(currLead.Relationship_To_Child__c == Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_SELF && currLead.is_Family_Aware_of_Referral__c == YES) {
+        if(currLead.Relationship_to_child__c == Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_SELF && currLead.is_Family_Aware_of_Referral__c == YES) {
             currLead.FirstName = currLead.Referrer_FirstName__c;
             lastName = currLead.Referrer_Last_Name__c;
         }
-        if(currLead.Relationship_To_Child__c == Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN && currLead.is_Family_Aware_of_Referral__c == YES) {
+        if(currLead.Relationship_to_child__c == Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN && currLead.is_Family_Aware_of_Referral__c == YES) {
             currLead.Parent_First_Name__c = currLead.Referrer_FirstName__c;
             currLead.Parent_Last_Name__c = currLead.Referrer_Last_Name__c;
             currLead.City = currLead.Referrer_City__c;
@@ -385,7 +386,7 @@ global Class WishReferralForm_AC {
                 && currLead.Medical_Provider_Category__c != Constant_AC.LEAD_MEDICAL_PROVIDER_PHYSICIAN_ASSISTANT) {
                     copyReferrerInfo = false;
         }
-        if(currLead.of_Siblings__c != null && currLead.of_Siblings__c != '0' && currLead.Of_Siblings__c != Constant_AC.LEAD_NUMBER_OF_SIBLINGS_UNKNOWN) {
+        if(currLead.of_Siblings__c != null && currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != Constant_AC.LEAD_NUMBER_OF_SIBLINGS_UNKNOWN) {
             getSiblingList();
         }
     }
@@ -394,7 +395,7 @@ global Class WishReferralForm_AC {
     *Copy referrer details to medical provider section if referrer and medical provider the same
     */
     public void copyReferralInfo() {
-        if(currLead.Relationship_To_Child__c != Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_SELF && copyReferrerInfo == true) {
+        if(currLead.Relationship_to_child__c != Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_SELF && copyReferrerInfo == true) {
             currLead.Treating_Medical_Professional_First_Name__c = currLead.Referrer_FirstName__c;
             currLead.Treating_Medical_Professional_Last_Name__c = currLead.Referrer_Last_Name__c;
             currLead.Treating_Medical_Professional_Phone__c = currLead.Referrer_Phone__c;
@@ -420,8 +421,8 @@ global Class WishReferralForm_AC {
      */
     public List<siblingWrapper> getSiblingList() {
         currList = new List<siblingWrapper>();
-        if(currLead.of_Siblings__c != null && currLead.Of_Siblings__c != Constant_AC.LEAD_NUMBER_OF_SIBLINGS_UNKNOWN) {
-            for (integer i = 0; i < integer.valueOf(currLead.of_Siblings__c); i++) {
+        if(currLead.of_Siblings__c != null && currLead.of_Siblings__c != Constant_AC.LEAD_NUMBER_OF_SIBLINGS_UNKNOWN) {
+            for (Integer i = 0; i < Integer.valueOf(currLead.of_Siblings__c); i++) {
                 currList.add(new siblingWrapper());
             }
         }
@@ -474,7 +475,7 @@ global Class WishReferralForm_AC {
     public List<SelectOption> getdiaYear() {
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('', 'Year'));
-        for (Integer i = Date.Today().Year(); i >= Date.Today().Year() - 18; i--) {
+        for (Integer i = Date.today().year(); i >= Date.today().year() - 18; i--) {
             options.add(new SelectOption(String.valueOf(i), String.valueOf(i)));
         }
         return options;
@@ -493,7 +494,7 @@ global Class WishReferralForm_AC {
      */
     public List<SelectOption> getPicklistValues(String fieldApiName) {
         Map<String, Schema.SObjectField> leadFieldsMap = new Map<String, Schema.SObjectField>();
-        leadFieldsMap = Schema.SObjectType.Lead.Fields.getMap();
+        leadFieldsMap = Schema.SObjectType.Lead.fields.getMap();
         List<Schema.PicklistEntry> picklistValues = leadFieldsMap.get(fieldApiName).getDescribe().getPicklistValues();
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('', 'Select an option'));
@@ -509,66 +510,23 @@ global Class WishReferralForm_AC {
      * Self field set contains the mandatory fields of self relationship
      */
     public List<Schema.FieldSetMember> getSelfRequiredFields() {
-        return SObjectType.Lead.FieldSets.Self_Required_Fields.getFields();
+        return SObjectType.Lead.fieldSets.Self_Required_Fields.getFields();
     }
     
     /**
      * Medical referral field set contains the mandatory fields of medical professional
      */
     public List<Schema.FieldSetMember> getNonMedicalReqFields() {
-        return SObjectType.Lead.FieldSets.Non_Medical_Referral_Required_Fields.getFields();
+        return SObjectType.Lead.fieldSets.Non_Medical_Referral_Required_Fields.getFields();
     }
     
     /**
      * Non-medical referral field set contains the mandatory fields of non-medical professional
      */
     public List<Schema.FieldSetMember> getMedicalRequiredFields() {
-        return SObjectType.Lead.FieldSets.Medical_Referral_Required_Form.getFields();
+        return SObjectType.Lead.fieldSets.Medical_Referral_Required_Form.getFields();
     }
 
-    //Create task
-    private static Task createTask(Id whoId, Id ownerId, Id whatId, String subject, Id recordTypeId) {
-        List<String> lstLog = new List<String>();
-        String logValue;
-        String recId;
-        Task newTask = new Task();
-        try {
-            Id taskRT = Constant_AC.TASK_RT_ID;
-            newTask.Subject = subject;
-            newTask.SystemGeneratedTask__c = TRUE;
-            newTask.RecordTypeId = recordTypeId;
-            newTask.OwnerId = UserInfo.getUserId();
-            newTask.whoId = whoId;
-            newTask.Status = Constant_AC.TASK_STATUS_NOT_STARTED;
-            newTask.activityDate = Date.Today() + 10;
-            if(ownerId != null) {
-                newTask.OwnerId = ownerId;
-            }
-            newTask.RecordTypeId = taskRT;
-            lstLog.add('Subject: ' + newTask.Subject);
-            lstLog.add('RecordTypeId: ' + newTask.RecordTypeId);
-            lstLog.add('OwnerId: ' + newTask.OwnerId);
-            lstLog.add('whoId: ' + newTask.whoId);
-            lstLog.add('Status: ' + newTask.Status);
-            lstLog.add('activityDate: ' + newTask.activityDate);
-            lstLog.add('OwnerId: ' + ownerId);
-            insert newTask;
-            if(Test.isRunningTest()) {
-                throw new DmlException('Test');
-            }
-            return newTask;
-        } catch (Exception ex) {
-            logValue = String.join(lstLog, ', ');
-            new ApexDebugLog().createLog(new ApexDebugLog.Error('WishReferralForm_AC', 'createTask', whoId, ex, logValue));
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
-            ApexPages.addMessage(myMsg);
-            if(Test.isRunningTest()) {
-                return newTask;
-            }
-            return null;
-        }
-    }
-    
     /**
      * Wrapper for capturing n number of sibling details
      */
