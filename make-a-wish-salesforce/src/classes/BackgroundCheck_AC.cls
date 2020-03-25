@@ -22,9 +22,7 @@ public class BackgroundCheck_AC {
     public String areYouinUS7Yrs{get;set;}
     
     public BackgroundCheck_AC() {
-        currUser = [SELECT Id, ContactId, Contact.Account.Volunteer_Manager__c, Contact.OwnerId 
-                    FROM User 
-                    WHERE Id = :userInfo.getUserId()];
+        currUser = Utils.currentUser;
         backGroundCheck = new Background_check__c();
         existingBGCheckRecList = [SELECT Id, Resided_in_US_for_past_7_years__c 
                                   FROM Background_check__c 

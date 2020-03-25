@@ -15,14 +15,12 @@ global class batch_CheckBackGroundCheckExpiration_AC implements Database.Batchab
         ]);
     }
     
-    global void execute(Database.BatchableContext BC, List<Background_check__c> backGroundCheckExpiredList)  {
+    global void execute(Database.BatchableContext BC, List<Background_check__c> backGroundCheckExpiredList) {
         Set<Id> volContactIdSet = new Set<Id>();
         for(Background_check__c bcExpired : backGroundCheckExpiredList) {
             volContactIdSet.add(bcExpired.Volunteer__c);
         }
-        if(!volContactIdSet.isEmpty()) {
-            BackgroundCheckService.updateVolunteerRoleHiddenStatus(volContactIdSet, 'backgroundcheck', backGroundCheckExpiredList);
-        }
+        BackgroundCheckService.updateVolunteerRoleHiddenStatus(volContactIdSet, 'backgroundcheck', backGroundCheckExpiredList);
     }   
     
     global void finish(Database.BatchableContext BC) {
