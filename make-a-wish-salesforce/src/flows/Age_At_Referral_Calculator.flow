@@ -81,7 +81,7 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Iterator_to_151</name>
+        <name>Iterator_to_15</name>
         <label>Iterator to 15</label>
         <locationX>1099</locationX>
         <locationY>59</locationY>
@@ -260,7 +260,7 @@
         <description>Sets the Age At Referral value to Under 2.5</description>
         <name>Set_Age_At_Referral_Under_2_5</name>
         <label>Set Age At Referral Under 2.5</label>
-        <locationX>419</locationX>
+        <locationX>454</locationX>
         <locationY>391</locationY>
         <assignmentItems>
             <assignToReference>Wish_Kid_Lead.Child_Age__c</assignToReference>
@@ -537,13 +537,6 @@
         <locationX>297</locationX>
         <locationY>229</locationY>
         <assignmentItems>
-            <assignToReference>leadCreatedDate</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>Wish_Kid_Lead.CreatedDate</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
             <assignToReference>dateOfBirth</assignToReference>
             <operator>Assign</operator>
             <value>
@@ -555,6 +548,20 @@
             <operator>Assign</operator>
             <value>
                 <elementReference>Wish_Kid_Lead.Child_Age__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>inquiryDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Wish_Kid_Lead.Inquiry_Date__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>referralDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Wish_Kid_Lead.Referred_Date__c</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -717,7 +724,7 @@
         <locationX>1037</locationX>
         <locationY>228</locationY>
         <defaultConnector>
-            <targetReference>Iterator_to_151</targetReference>
+            <targetReference>Iterator_to_15</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>
@@ -991,7 +998,7 @@
         <description>The number of days that passed between the child&apos;s date of birth and the referral/created date.</description>
         <name>daysSinceBorn</name>
         <dataType>Number</dataType>
-        <expression>{!leadCreatedDate} - {!dateOfBirth}</expression>
+        <expression>if(IsBlank({!referralDate}), {!inquiryDate} - {!dateOfBirth}, {!referralDate} - {!dateOfBirth})</expression>
         <scale>0</scale>
     </formulas>
     <formulas>
@@ -1033,7 +1040,7 @@
         <description>To retrieve the record sent to us to launch the Flow</description>
         <name>Wish_Kid_Lead</name>
         <label>Wish Kid Lead</label>
-        <locationX>175</locationX>
+        <locationX>176</locationX>
         <locationY>229</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -1051,7 +1058,8 @@
         <queriedFields>Id</queriedFields>
         <queriedFields>DOB__c</queriedFields>
         <queriedFields>Child_Age__c</queriedFields>
-        <queriedFields>CreatedDate</queriedFields>
+        <queriedFields>Referred_Date__c</queriedFields>
+        <queriedFields>Inquiry_Date__c</queriedFields>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
@@ -1090,16 +1098,6 @@
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <name>ageFound</name>
-        <dataType>Boolean</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <value>
-            <booleanValue>false</booleanValue>
-        </value>
-    </variables>
-    <variables>
         <description>To hold the Leads DOB value.</description>
         <name>dateOfBirth</name>
         <dataType>Date</dataType>
@@ -1108,8 +1106,7 @@
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <description>The date that the Lead was created is the date of the Referral.</description>
-        <name>leadCreatedDate</name>
+        <name>inquiryDate</name>
         <dataType>Date</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
@@ -1122,6 +1119,13 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <scale>0</scale>
+    </variables>
+    <variables>
+        <name>referralDate</name>
+        <dataType>Date</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
     </variables>
     <variables>
         <description>The ID of the Lead representing the Wish Kid in question.</description>
