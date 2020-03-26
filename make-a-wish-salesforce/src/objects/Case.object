@@ -4167,7 +4167,7 @@ IMAGE("/resource/icons/wish-clearance-missing.png", "Wish Clearance missing", 48
         <summaryFilterItems>
             <field>Wish_Required_Signature__c.Status__c</field>
             <operation>equals</operation>
-            <value>Not Sent, Sent</value>
+            <value>Not Sent, Sent, Delivered</value>
         </summaryFilterItems>
         <summaryForeignKey>Wish_Required_Signature__c.Wish_Case__c</summaryForeignKey>
         <summaryOperation>count</summaryOperation>
