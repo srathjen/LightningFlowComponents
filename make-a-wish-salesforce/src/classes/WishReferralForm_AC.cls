@@ -103,7 +103,7 @@ global class WishReferralForm_AC {
                     return null;
                 }
             }
-            if(flag == false) {
+            if(!flag) {
                 if(label != '' || Test.isRunningTest()) {
                     label = label.removeEnd(',');
                     ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR, 'Please complete following mandatory fields : ' + label);
@@ -111,7 +111,7 @@ global class WishReferralForm_AC {
                     return null;
                 }
             }
-            if(flag == true) {
+            if(flag) {
                 if(currLead.PostalCode != null && currLead.PostalCode != '') {
                     zipCode = currLead.PostalCode;
                 } else {
