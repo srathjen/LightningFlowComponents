@@ -191,6 +191,7 @@ public class Constant_AC {
 	public static final String CASE_ORIGIN_EMAIL = 'Email';
 	public static final String CASE_RUSH_TIME_FRAME = 'Select timeframe';
 	public static final String CASE_UWI_SOURCE_LEAD = 'Lead';
+	public static final String CASE_SUBJECT_ELIGIBILITY_REVIEW = 'Eligibility Review';
 
 	/**
 	 * Wish Affiliation Constants
@@ -233,6 +234,7 @@ public class Constant_AC {
 	public static final String CONTACT_NAME_UNKNOWN = 'Unknown';
 	public static final String CONTACT_STATUS_ROLE_SPECIFIC_TRAINING_AVAILABLE = 'Role Specific Training Available';
     public static final String CONTACT_ONBOARDING_STATUS_BACKGROUND_CHECK = 'Background Check';
+	public static final String CONTACT_PUBLICITY_YES = 'Yes';
 
 	/**
 	 * Chapter Role File Constants
@@ -282,7 +284,7 @@ public class Constant_AC {
 	public static final String CONTACT_APPLICATION_STATUS_APPROVED = 'Approved';
 
 	/**
-	 * Docusign  Status
+	 * Docusign Status
 	 */
 	public static final String DOCUSIGN_ENVELOPE_STATUS_COMPLETED = 'Completed';
 	public static final String DOCUSIGN_SUBJECT_DIAGNOSIS_VERIFICATION_FORM = 'Diagnosis Verification Form';
@@ -294,6 +296,7 @@ public class Constant_AC {
 	 */
 	public static final String DOCUSIGN_RECIPIENT_STATUS_COMPLETED = 'Completed';
 	public static final String DOCUSIGN_RECIPIENT_STATUS_DELIVERED = 'Delivered';
+	public static final String DOCUSIGN_RECIPIENT_STATUS_SENT = 'Sent';
 
 	/**
 	* Wish Affiliation Types
