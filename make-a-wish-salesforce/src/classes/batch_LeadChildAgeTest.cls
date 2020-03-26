@@ -41,7 +41,7 @@ public class batch_LeadChildAgeTest {
 					Referrer_Zip__c = '85016', Status = 'Inquiry', PD_ICD_Code__c = icdCode.Id,
 					ICD_Given_By_Referrer__c = icdCode.Id, Diagnosis_Given_By_Referrer__c = 'Test',
 					ChapterName__c = chapterAccount.Id, Street = '12' + i + 'Market St', PostalCode = '85016',
-					City = 'Phoenix', Age_Requirement_Met__c = false));
+					City = 'Phoenix', Age_Requirement_Met__c = false, RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD));
 		}
 
 		// Insert wish child leads where child age is 1.5 years old and the field for Age Requirement should not update
@@ -61,7 +61,7 @@ public class batch_LeadChildAgeTest {
 					Referrer_Zip__c = '85016', Status = 'Inquiry', PD_ICD_Code__c = icdCode.Id,
 					ICD_Given_By_Referrer__c = icdCode.Id, Diagnosis_Given_By_Referrer__c = 'Test',
 					ChapterName__c = chapterAccount.Id, Street = '125' + i + 'N Market St', PostalCode = '85016',
-					City = 'Phoenix', Age_Requirement_Met__c = false));
+					City = 'Phoenix', Age_Requirement_Met__c = false, RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD));
 		}
 		leadList.addAll(leadListNeg);
 		insert leadList;
@@ -131,7 +131,7 @@ public class batch_LeadChildAgeTest {
 				FROM CronTrigger
 				WHERE Id = :jobId
 		];
-		
+
 		System.assertEquals(cronExpression, ct.CronExpression);
 		System.assertEquals(0, ct.TimesTriggered);
 		Test.stopTest();
