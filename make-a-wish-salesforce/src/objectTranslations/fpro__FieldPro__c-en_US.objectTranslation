@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <help><!-- Unique API name for this field in SF. --></help>
@@ -360,45 +360,7 @@
         <label><!-- Unique Id --></label>
         <name>fpro__Unique_Id__c</name>
     </fields>
-    <layouts>
-        <layout>Fielderr Layout</layout>
-        <sections>
-            <label><!-- Analysis Run Status --></label>
-            <section>Analysis Run Status</section>
-        </sections>
-        <sections>
-            <label><!-- Apex (Referencing this field) --></label>
-            <section>Apex (Referencing this field)</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Admin Notes --></label>
-            <section>Custom Admin Notes</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Other Metadata References --></label>
-            <section>Other Metadata References</section>
-        </sections>
-        <sections>
-            <label><!-- Populated (Default: Created in last 365 days) --></label>
-            <section>Populated (Default: Created in last 365 days)</section>
-        </sections>
-        <sections>
-            <label><!-- Recorded Errors --></label>
-            <section>Recorded Errors</section>
-        </sections>
-        <sections>
-            <label><!-- References Counts --></label>
-            <section>References Counts</section>
-        </sections>
-        <sections>
-            <label><!-- Standard Salesforce Data (Read Only) --></label>
-            <section>Standard Salesforce Data (Read Only)</section>
-        </sections>
-    </layouts>
+    
     <webLinks>
         <label><!-- PDF --></label>
         <name>fpro__PDF</name>

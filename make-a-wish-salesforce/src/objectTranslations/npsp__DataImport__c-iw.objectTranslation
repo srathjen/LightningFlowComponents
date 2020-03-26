@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <article>None</article>
@@ -619,37 +619,7 @@
         </picklistValues>
     </fields>
     <gender><!-- Masculine --></gender>
-    <layouts>
-        <layout>Data Import Layout</layout>
-        <sections>
-            <label><!-- Account1 Information --></label>
-            <section>Account1 Information</section>
-        </sections>
-        <sections>
-            <label><!-- Account2 Information --></label>
-            <section>Account2 Information</section>
-        </sections>
-        <sections>
-            <label>פרטי Contact1</label>
-            <section>Contact1 Information</section>
-        </sections>
-        <sections>
-            <label>פרטי Contact2</label>
-            <section>Contact2 Information</section>
-        </sections>
-        <sections>
-            <label>פרטי תרומה</label>
-            <section>Donation Information</section>
-        </sections>
-        <sections>
-            <label>כתובת בבית</label>
-            <section>Home Address</section>
-        </sections>
-        <sections>
-            <label><!-- Household Information --></label>
-            <section>Household Information</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel><!-- Data Import ID --></nameFieldLabel>
     <webLinks>
         <label><!-- Delete_All_Data_Import_Records --></label>

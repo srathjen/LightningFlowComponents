@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <help><!-- Active general accounting units are available for selection on allocations. Inactive general accounting units can&apos;t have new allocations to them. --></help>
@@ -85,17 +85,7 @@
         <label><!-- Total Number of Allocations --></label>
         <name>npsp__Total_Number_of_Allocations__c</name>
     </fields>
-    <layouts>
-        <layout>General Accounting Unit Layout</layout>
-        <sections>
-            <label><!-- Allocation Information --></label>
-            <section>Allocation Information</section>
-        </sections>
-        <sections>
-            <label><!-- Allocation Totals --></label>
-            <section>Allocation Totals</section>
-        </sections>
-    </layouts>
+    
     <webLinks>
         <label><!-- Recalculate_Rollups --></label>
         <name>npsp__Recalculate_Rollups</name>

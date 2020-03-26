@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -69,7 +69,7 @@
         <name>npsp__Send_Email__c</name>
     </fields>
     <fields>
-        <help>El estado de la tarea. Tareas dependientes se establecen con estado &quot;Esperando a tarea principal&quot; hasta que la tarea principal se completa.</help>
+        <help>El estado de la tarea. Tareas dependientes se establecen con estado "Esperando a tarea principal" hasta que la tarea principal se completa.</help>
         <label><!-- Status --></label>
         <name>npsp__Status__c</name>
         <picklistValues>
@@ -115,12 +115,6 @@
         </picklistValues>
     </fields>
     <gender>Feminine</gender>
-    <layouts>
-        <layout>Engagement Plan Task Layout</layout>
-        <sections>
-            <label>Vínculos personalizados</label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel>Asunto</nameFieldLabel>
 </CustomObjectTranslation>

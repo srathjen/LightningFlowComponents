@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <help><!-- The Data Import Field Mapping Set containing this field mapping. --></help>
@@ -40,11 +40,5 @@
         <name>npsp__Target_Object_Mapping__c</name>
         <relationshipLabel><!-- Data Import Field Mappings --></relationshipLabel>
     </fields>
-    <layouts>
-        <layout>Data Import Field Mapping Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
 </CustomObjectTranslation>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- Diagnosis Verfication Fieldset --></label>
@@ -28,18 +28,7 @@
         <label><!-- BDE List FS --></label>
         <name>npsp__BDE_List_FS</name>
     </fieldSets>
-    <fields>
-        <caseValues>
-            <plural>false</plural>
-            <value>Inquiry/Referral Method</value>
-        </caseValues>
-        <caseValues>
-            <plural>true</plural>
-            <value>Inquiry/Referral Methods</value>
-        </caseValues>
-        <name>lead_source</name>
-        <startsWith>Consonant</startsWith>
-    </fields>
+    
     <fields>
         <label><!-- Additional Parent/Guardian City --></label>
         <name>Additional_Parent_City__c</name>
@@ -1163,7 +1152,7 @@
         <label><!-- How Did you hear about Make-A-Wish? --></label>
         <name>How_Did_you_hear_about_Make_A_Wish__c</name>
         <picklistValues>
-            <masterLabel>Brochure at the Doctor&apos;s Office</masterLabel>
+            <masterLabel>Brochure at the Doctor's Office</masterLabel>
             <translation><!-- Brochure at the Doctor&apos;s Office --></translation>
         </picklistValues>
         <picklistValues>
@@ -2908,45 +2897,7 @@
         <label><!-- Unique Wish Identifier --></label>
         <name>unique_wish_identifier__c</name>
     </fields>
-    <layouts>
-        <layout>Lead Layout</layout>
-        <sections>
-            <label><!-- Alternate Medical Professionals --></label>
-            <section>Alternate Medical Professionals</section>
-        </sections>
-        <sections>
-            <label><!-- Attachments --></label>
-            <section>Attachments</section>
-        </sections>
-        <sections>
-            <label><!-- Diagnosis Verification --></label>
-            <section>Diagnosis Verification</section>
-        </sections>
-        <sections>
-            <label><!-- Family Information --></label>
-            <section>Family Information</section>
-        </sections>
-        <sections>
-            <label><!-- Important Dates --></label>
-            <section>Important Dates</section>
-        </sections>
-        <sections>
-            <label><!-- Inquiry/Referral --></label>
-            <section>Inquiry/Referral</section>
-        </sections>
-        <sections>
-            <label><!-- Medical Information --></label>
-            <section>Medical Information</section>
-        </sections>
-        <sections>
-            <label><!-- Medical Professionals --></label>
-            <section>Medical Professionals</section>
-        </sections>
-        <sections>
-            <label><!-- Referral Source Information --></label>
-            <section>Referral Source Information</section>
-        </sections>
-    </layouts>
+    
     <quickActions>
         <label><!-- Log a Call --></label>
         <name>Log_a_Call_Lead</name>

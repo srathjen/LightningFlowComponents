@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -199,21 +199,7 @@
         <name>npsp__Number_of_Household_Members__c</name>
     </fields>
     <gender>Masculine</gender>
-    <layouts>
-        <layout>Household Layout</layout>
-        <sections>
-            <label>Informations sur les dons</label>
-            <section>Donation Information</section>
-        </sections>
-        <sections>
-            <label>Totaux des dons</label>
-            <section>Donation Totals</section>
-        </sections>
-        <sections>
-            <label>Information du Foyer</label>
-            <section>Household Information</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel>Nom du foyer</nameFieldLabel>
     <startsWith>Consonant</startsWith>
     <webLinks>

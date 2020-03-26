@@ -84,6 +84,7 @@
   <types>
     <members>Account_Record_Page</members>
     <members>Case_Wish_Lightning</members>
+    <members>Lead_Record_Page</members>
     <name>FlexiPage</name>
   </types>
   <types>
@@ -99,6 +100,8 @@
     <name>LightningComponentBundle</name>
   </types>
   <types>
+    <members>Lead_Default</members>
+    <members>Lead_Wish_Child</members>
     <members>Wish_Stages</members>
     <name>PathAssistant</name>
   </types>
@@ -141,21 +144,32 @@
     <name>PermissionSet</name>
   </types>
   <types>
+    <members>Active Volunteer %28Login%29</members>
+    <members>Active Volunteer %28Member%29</members>
     <members>Admin</members>
     <members>Chapter Dev%2FFin Staff</members>
+    <members>Chatter External User</members>
+    <members>Chatter Free User</members>
+    <members>Chatter Moderator User</members>
     <members>Clone-System Admin</members>
     <members>ContractManager</members>
+    <members>Customer Community Plus Login User</members>
+    <members>Customer Community Plus User</members>
     <members>Executive Management</members>
     <members>Full Access National Staff</members>
     <members>Full Access National Staff - with View All</members>
     <members>Fundraising and Development</members>
+    <members>Guest License User</members>
     <members>Intake Manager</members>
     <members>Integration</members>
     <members>Intern</members>
+    <members>Knowledge Only User</members>
     <members>MarketingProfile</members>
     <members>MST Admin</members>
     <members>Office Staff</members>
     <members>Program Staff</members>
+    <members>Prospective Volunteer %28Login%29</members>
+    <members>Prospective Volunteer %28Member%29</members>
     <members>Read Only - IME</members>
     <members>Read Only - Program Staff</members>
     <members>Read Only National Staff</members>
@@ -164,12 +178,18 @@
     <members>Standard</members>
     <members>Volunteer</members>
     <members>Volunteer Staff</members>
+    <members>Wish Referral Form Profile</members>
+    <members>Wish Volunteer Community Profile</members>
     <name>Profile</name>
   </types>
   <types>
     <members>Chatter</members>
     <members>EmailAdministration</members>
     <name>Settings</name>
+  </types>
+  <types>
+    <members>LeadStatus</members>
+    <name>StandardValueSet</name>
   </types>
   <types>
     <members>*</members>
