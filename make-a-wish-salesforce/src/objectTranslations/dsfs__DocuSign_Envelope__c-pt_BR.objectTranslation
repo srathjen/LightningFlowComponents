@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -188,7 +188,7 @@
         <name>dsfs__DocumentID__c</name>
     </fields>
     <fields>
-        <help>Esta é uma lista de documentos PDF localizados na &quot;Guia de documentos&quot; na Salesforce da sua organização.  Para enviar com DocYouSign, você deve adicionar um PDF a qualquer uma das pastas dentro da Guia de documentos em Salesforce.  Para enviar em outros formatos, clique em &quot;Saiba mais&quot;.</help>
+        <help>Esta é uma lista de documentos PDF localizados na "Guia de documentos" na Salesforce da sua organização.  Para enviar com DocYouSign, você deve adicionar um PDF a qualquer uma das pastas dentro da Guia de documentos em Salesforce.  Para enviar em outros formatos, clique em "Saiba mais".</help>
         <label><!-- Document Name --></label>
         <name>dsfs__Document_Name__c</name>
     </fields>
@@ -254,13 +254,7 @@
         <name>dsfs__Source_Object__c</name>
     </fields>
     <gender><!-- Feminine --></gender>
-    <layouts>
-        <layout>DocuSign Envelope Layout</layout>
-        <sections>
-            <label>Links personalizados</label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel><!-- DocuSign Envelope --></nameFieldLabel>
     <webLinks>
         <label><!-- Learn_More --></label>

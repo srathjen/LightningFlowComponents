@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- BDE Entry FS --></label>
@@ -3076,7 +3076,7 @@ provide contact information for each site on which you are active. --></help>
         <label><!-- How Did you hear about Make-A-Wish? --></label>
         <name>Wish_How_Did_you_hear_about_Make_A_Wish__c</name>
         <picklistValues>
-            <masterLabel>Brochure at the doctor&apos;s office</masterLabel>
+            <masterLabel>Brochure at the doctor's office</masterLabel>
             <translation><!-- Brochure at the doctor&apos;s office --></translation>
         </picklistValues>
         <picklistValues>
@@ -3799,41 +3799,7 @@ provide contact information for each site on which you are active. --></help>
             <section>Volunteer Details</section>
         </sections>
     </layouts>
-    <layouts>
-        <layout>Contact Layout</layout>
-        <sections>
-            <label>個人の詳細</label>
-            <section>Contact Details</section>
-        </sections>
-        <sections>
-            <label>支援情報</label>
-            <section>Donation Information</section>
-        </sections>
-        <sections>
-            <label>支援総額</label>
-            <section>Donation Totals</section>
-        </sections>
-        <sections>
-            <label>世帯の住所</label>
-            <section>Household Address</section>
-        </sections>
-        <sections>
-            <label>世帯の支援情報</label>
-            <section>Household Donation Info</section>
-        </sections>
-        <sections>
-            <label>会員情報</label>
-            <section>Membership Information</section>
-        </sections>
-        <sections>
-            <label>その他</label>
-            <section>Misc</section>
-        </sections>
-        <sections>
-            <label><!-- Soft Credit Total --></label>
-            <section>Soft Credit Total</section>
-        </sections>
-    </layouts>
+    
     <layouts>
         <layout>Medical Professional</layout>
         <sections>
@@ -3953,11 +3919,11 @@ provide contact information for each site on which you are active. --></help>
         </sections>
         <sections>
             <label><!-- Wish Child&apos;s Favorites --></label>
-            <section>Wish Child&apos;s Favorites</section>
+            <section>Wish Child's Favorites</section>
         </sections>
         <sections>
             <label><!-- Wish Child&apos;s Other Favorites --></label>
-            <section>Wish Child&apos;s Other Favorites</section>
+            <section>Wish Child's Other Favorites</section>
         </sections>
     </layouts>
     <layouts>

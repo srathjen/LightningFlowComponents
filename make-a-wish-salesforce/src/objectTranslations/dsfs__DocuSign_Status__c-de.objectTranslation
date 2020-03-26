@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <caseType>Nominative</caseType>
@@ -248,25 +248,7 @@
         <name>isConflict__c</name>
     </fields>
     <gender>Feminine</gender>
-    <layouts>
-        <layout>DocuSign Status With View Button</layout>
-        <sections>
-            <label>Benutzerdefinierte Links</label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label>Informationen</label>
-            <section>Information</section>
-        </sections>
-        <sections>
-            <label>Zugehörige Objekte</label>
-            <section>Related Objects</section>
-        </sections>
-        <sections>
-            <label>Systeminformationen</label>
-            <section>System Information</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel>Umschlagnummer</nameFieldLabel>
     <webLinks>
         <label><!-- CorrectInDocuSign --></label>

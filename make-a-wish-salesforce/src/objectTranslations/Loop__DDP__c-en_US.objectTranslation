@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <label><!-- AdHoc Apex Class --></label>
@@ -874,198 +874,22 @@ Use Shift or Ctrl to select multiple options. Use Ctrl to deselect. --></help>
         <label><!-- WorkspaceName --></label>
         <name>Loop__WorkspaceName__c</name>
     </fields>
-    <layouts>
-        <layout>API DDP Layout</layout>
-        <sections>
-            <label><!-- Availability Options --></label>
-            <section>Availability Options</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>API Document Package Layout</layout>
-        <sections>
-            <label><!-- Availability Options --></label>
-            <section>Availability Options</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Case DDP Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Options --></label>
-            <section>Options</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Case Document Package Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Options --></label>
-            <section>Options</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Custom Object DDP Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Options --></label>
-            <section>Options</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Custom Object Document Package Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Options --></label>
-            <section>Options</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>DDP Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Details --></label>
-            <section>Details</section>
-        </sections>
-        <sections>
-            <label><!-- Options --></label>
-            <section>Options</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Document Package Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Details --></label>
-            <section>Details</section>
-        </sections>
-        <sections>
-            <label><!-- Options --></label>
-            <section>Options</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Form DDP Layout</layout>
-        <sections>
-            <label><!-- Availability Options --></label>
-            <section>Availability Options</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Form Document Package Layout</layout>
-        <sections>
-            <label><!-- Availability Options --></label>
-            <section>Availability Options</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Nintex Form DDP Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Fields --></label>
-            <section>Fields</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Nintex Form Document Package Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Fields --></label>
-            <section>Fields</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Quote DDP Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Options --></label>
-            <section>Options</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Quote Document Package Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Options --></label>
-            <section>Options</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Report DDP Layout</layout>
-        <sections>
-            <label><!-- Attach Options --></label>
-            <section>Attach Options</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Report Options --></label>
-            <section>Report Options</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Report Document Package Layout</layout>
-        <sections>
-            <label><!-- Attach Options --></label>
-            <section>Attach Options</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Report Options --></label>
-            <section>Report Options</section>
-        </sections>
-    </layouts>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <recordTypes>
         <label><!-- API --></label>
         <name>Loop__API</name>
