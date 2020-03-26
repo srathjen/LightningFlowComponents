@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <categoryGroupVisibilities>
         <dataCategoryGroup>Chapter_Specific</dataCategoryGroup>
         <visibility>ALL</visibility>
@@ -679,7 +678,6 @@
     <classAccesses>
         <apexClass>InkindandReimbursement_Test</apexClass>
         <enabled>false</enabled>
-<<<<<<< HEAD
     </classAccesses>
     <classAccesses>
         <apexClass>LMSCourse</apexClass>
@@ -689,18 +687,10 @@
         <apexClass>LMSCourseSync</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-=======
-        <flow>Wish_Form_Email_Alert_on_Wish_Form_Create_Edit</flow>
-    </flowAccesses>
-    <userLicense>Salesforce</userLicense>
-    
-    
->>>>>>> SCC_142_Update_Active_Validation_Rules_and_Cleanup
     <classAccesses>
         <apexClass>LMSCourseSyncMockImpl</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-<<<<<<< HEAD
     <classAccesses>
         <apexClass>LMSCourse_Test</apexClass>
         <enabled>true</enabled>
@@ -729,15 +719,6 @@
         <apexClass>LMSOrientationRegistrationResponse_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-=======
-    
-    
-    
-    
-    
-    
-    
->>>>>>> SCC_142_Update_Active_Validation_Rules_and_Cleanup
     <classAccesses>
         <apexClass>LMSOrientationUpdateRequest</apexClass>
         <enabled>true</enabled>
@@ -876,7 +857,6 @@
         <apexClass>MyProfilePageControllerTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-<<<<<<< HEAD
     <classAccesses>
         <apexClass>NewWishBudgetController</apexClass>
         <enabled>false</enabled>
@@ -909,15 +889,6 @@
         <apexClass>OTUB_UpdateVolUserStatusOnBGCOI_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-=======
-    
-    
-    
-    
-    
-    
-    
->>>>>>> SCC_142_Update_Active_Validation_Rules_and_Cleanup
     <classAccesses>
         <apexClass>OrientationTraining_ATTest</apexClass>
         <enabled>true</enabled>
@@ -942,7 +913,6 @@
         <apexClass>ParentGuardianJSON2Apex</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-<<<<<<< HEAD
     <classAccesses>
         <apexClass>PartAFormWrapper</apexClass>
         <enabled>true</enabled>
@@ -955,11 +925,6 @@
         <apexClass>ProcessDdpExt</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-=======
-    
-    
-    
->>>>>>> SCC_142_Update_Active_Validation_Rules_and_Cleanup
     <classAccesses>
         <apexClass>QualifyingDiagnosisLC_AC</apexClass>
         <enabled>false</enabled>
@@ -1032,7 +997,6 @@
         <apexClass>SendDiagnosisVerficationLC_ACTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-<<<<<<< HEAD
     <classAccesses>
         <apexClass>SendReferralEmailLC_AC</apexClass>
         <enabled>true</enabled>
@@ -1067,19 +1031,10 @@
         <apexClass>SurveyRecipientServiceTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-=======
-    
-    
-    
-    
-    
-    
->>>>>>> SCC_142_Update_Active_Validation_Rules_and_Cleanup
     <classAccesses>
         <apexClass>TaskTrigger_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-<<<<<<< HEAD
     <classAccesses>
         <apexClass>Task_OnAfterInsertHandler</apexClass>
         <enabled>false</enabled>
@@ -1100,13 +1055,6 @@
         <apexClass>Task_OnBeforeInsertHandler</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-=======
-    
-    
-    
-    
-    
->>>>>>> SCC_142_Update_Active_Validation_Rules_and_Cleanup
     <classAccesses>
         <apexClass>Task_OnBeforeInsertHelper</apexClass>
         <enabled>false</enabled>
@@ -1167,7 +1115,6 @@
         <apexClass>UpdatAffiliationAsInactiveBatch_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-<<<<<<< HEAD
     <classAccesses>
         <apexClass>UpdatAffiliationAsInactiveSchedule_AC</apexClass>
         <enabled>true</enabled>
@@ -1196,15 +1143,6 @@
         <apexClass>User_OnAfterInsertHelper_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-=======
-    
-    
-    
-    
-    
-    
-    
->>>>>>> SCC_142_Update_Active_Validation_Rules_and_Cleanup
     <classAccesses>
         <apexClass>User_OnAfterUpdateHandler_AC</apexClass>
         <enabled>false</enabled>
@@ -1445,7 +1383,6 @@
         <apexClass>WishAffiliationService</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-<<<<<<< HEAD
     <classAccesses>
         <apexClass>WishAffiliationServiceTest</apexClass>
         <enabled>false</enabled>
@@ -1454,10 +1391,6 @@
         <apexClass>WishAffiliation_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-=======
-    
-    
->>>>>>> SCC_142_Update_Active_Validation_Rules_and_Cleanup
     <classAccesses>
         <apexClass>WishAffiliation_AC_Test</apexClass>
         <enabled>false</enabled>
@@ -1501,7 +1434,6 @@
         <apexClass>WishRequiredSignatureFileDomain</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-<<<<<<< HEAD
     <classAccesses>
         <apexClass>WishRequiredSignatureFileService</apexClass>
         <enabled>false</enabled>
@@ -1514,11 +1446,6 @@
         <apexClass>WishRequiredSignatureService</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-=======
-    
-    
-    
->>>>>>> SCC_142_Update_Active_Validation_Rules_and_Cleanup
     <classAccesses>
         <apexClass>WishRequiredSignatureServiceTest</apexClass>
         <enabled>false</enabled>
@@ -1619,7 +1546,6 @@
     </classAccesses>
     
     
-<<<<<<< HEAD
     
     <classAccesses>
         <apexClass>batch_LeadChildAgeSchedule</apexClass>
@@ -1629,8 +1555,6 @@
         <apexClass>batch_LeadChildAgeTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-=======
->>>>>>> SCC_142_Update_Active_Validation_Rules_and_Cleanup
     <classAccesses>
         <apexClass>batch_UpdatAffiliationStatus</apexClass>
         <enabled>false</enabled>
@@ -1708,114 +1632,7 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-<<<<<<< HEAD
         <apexClass>batch_sendAgeNotification_Test</apexClass>
-=======
-        <apexClass>LMSOrientationRegistrationRequest_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LMSOrientationRegistrationResponse</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LMSOrientationRegistrationResponse_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LMSOrientationUpdateRequest</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LMSOrientationUpdateRequest_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LMSSSORespose</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LMSSSORespose_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LMSUserRequest</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LMSUserRequest_test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LMSUserResponse</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LMSUserResponse_test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LeadDomain</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LeadDuplicate_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LeadDuplicate_ACTest</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LeadFile_AT_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LeadSelectMedEmailController_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LeadSelectMedEmailController_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LeadTriggerHandler_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LeadTrigger_AT_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <classAccesses>
-        <apexClass>Lead_Trigger_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LightningDataTableController</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LightningDataTableControllerTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LookupSObjectCtlr</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LookupSObjectCtrlTest</apexClass>
->>>>>>> SCC_142_Update_Active_Validation_Rules_and_Cleanup
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -1829,7 +1646,6 @@
     </classAccesses>
     
     
-<<<<<<< HEAD
     <classAccesses>
         <apexClass>wishBudgetsController</apexClass>
         <enabled>false</enabled>
@@ -1842,9 +1658,6 @@
         <apexClass>wishFormFileUpload_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-=======
-    
->>>>>>> SCC_142_Update_Active_Validation_Rules_and_Cleanup
     <classAccesses>
         <apexClass>wishFormFileUpload_AC_Test</apexClass>
         <enabled>false</enabled>
@@ -1920,7 +1733,6 @@
     </customSettingAccesses>
     <customSettingAccesses>
         <enabled>true</enabled>
-<<<<<<< HEAD
         <name>Bypass_Triggers__c</name>
     </customSettingAccesses>
     <customSettingAccesses>
@@ -1932,17 +1744,6 @@
         <name>CRMfusionDBR101__Convert_Display_Field__c</name>
     </customSettingAccesses>
     <customSettingAccesses>
-=======
-    </classAccesses>
-    <classAccesses>
-        <apexClass>SendReferralEmailLC_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    
-    
-    <classAccesses>
-        <apexClass>SiteLoginController</apexClass>
->>>>>>> SCC_142_Update_Active_Validation_Rules_and_Cleanup
         <enabled>true</enabled>
         <name>CRMfusionDBR101__Country_Mapping__c</name>
     </customSettingAccesses>
@@ -2092,7 +1893,6 @@
     </customSettingAccesses>
     <customSettingAccesses>
         <enabled>true</enabled>
-<<<<<<< HEAD
         <name>cg__ViewSettings__c</name>
     </customSettingAccesses>
     <customSettingAccesses>
@@ -2104,70 +1904,11 @@
         <name>cwbtool__Record_Process__c</name>
     </customSettingAccesses>
     <customSettingAccesses>
-=======
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishAffiliationDesign_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishAffiliationDesign_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishAffiliationParticipantService</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishAffiliationService</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishAffiliationServiceTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishAffiliation_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishAffiliation_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishBudgetFormNew_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishBudgetFormNew_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishChildWrapper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishExpenseHandlerTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishExpenseHandler_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    
-    
-    
-    
-    
-    <classAccesses>
-        <apexClass>WishReferralForm_AC</apexClass>
->>>>>>> SCC_142_Update_Active_Validation_Rules_and_Cleanup
         <enabled>true</enabled>
         <name>fpro__FieldPro_IncludeFields__c</name>
     </customSettingAccesses>
     <customSettingAccesses>
         <enabled>true</enabled>
-<<<<<<< HEAD
         <name>leadconvertchtr__LeadConvertChatter__c</name>
     </customSettingAccesses>
     <customSettingAccesses>
@@ -2267,130 +2008,6 @@
         <name>p0pFD__ObjectsToDump__c</name>
     </customSettingAccesses>
     <flowAccesses>
-=======
-    </classAccesses>
-    
-    
-    <classAccesses>
-        <apexClass>WishRequiredSignatureFileDomain</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishRequiredSignatureFileService</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishRequiredSignatureFileTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishRequiredSignatureService</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishRequiredSignatureServiceTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishSignatureController</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishSignatureControllerTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Wish_AffiliationDomain</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Wish_BudgetDomain</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Wish_BudgetService</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Wish_BudgetTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Wish_Change_RequestDomain</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Wish_Change_RequestService</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Wish_Change_RequestServiceTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Wish_ExpenseDomain</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    
-    
-    
-    <classAccesses>
-        <apexClass>batch_BGCExpReminder_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_BGCExpReminder_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_BUpdateAffiliation_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_BUpdateAffiliation_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    
-    <classAccesses>
-        <apexClass>batch_COIExpReminder_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_COIExpReminder_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_CaseTeamMemberUpdate</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_CaseTeamMemberUpdateTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    
-    <classAccesses>
-        <apexClass>batch_CheckBGCheckExpiration_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_CheckBackGroundCheckExpiration_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    
-    <classAccesses>
-        <apexClass>batch_CheckCOIExpiration_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_CheckCOIExpiration_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    
-    
-    
-    <classAccesses>
-        <apexClass>batch_LeadChildAgeSchedule</apexClass>
->>>>>>> SCC_142_Update_Active_Validation_Rules_and_Cleanup
         <enabled>false</enabled>
         <flow>Background_Check_Email_Update</flow>
     </flowAccesses>
@@ -2456,7 +2073,6 @@
     </flowAccesses>
     <flowAccesses>
         <enabled>false</enabled>
-<<<<<<< HEAD
         <flow>Post_To_Chatter_on_Lead</flow>
     </flowAccesses>
     <flowAccesses>
@@ -2472,18 +2088,6 @@
         <flow>Update_Task_Interview_Completed_Date</flow>
     </flowAccesses>
     <flowAccesses>
-=======
-    </classAccesses>
-    
-    <classAccesses>
-        <apexClass>trac_TriggerHandlerBase</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    
-    
-    <classAccesses>
-        <apexClass>wishBudgetsController</apexClass>
->>>>>>> SCC_142_Update_Active_Validation_Rules_and_Cleanup
         <enabled>false</enabled>
         <flow>Update_Wish_Change_Requests</flow>
     </flowAccesses>
