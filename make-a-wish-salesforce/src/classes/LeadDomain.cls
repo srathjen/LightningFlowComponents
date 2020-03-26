@@ -1,11 +1,13 @@
 /**
  * @description Domain class for the Lead trigger
  * @author	Mason Buhler, Traction on Demand
- * @createdDate	7-26-2019
+ * @createdDate	7/26/2019
+ * @update 3/25/2020 - SCC-155 New Lead Record types introduced
  */
 public with sharing class LeadDomain extends trac_TriggerHandlerBase {
 
 	private final static Id DIAGNOSIS_RECORD_TYPE_ID = Constant_AC.DIAGNOSIS_RT_ID;
+	private final static Id LEAD_RT_WISH_CHILD = Constant_AC.LEAD_RT_WISH_CHILD;
 	private final static String CASE_PENDING_CLARIFICATION = Constant_AC.CASE_STATUS_PENDING_CLARIFICATION_CHAPTER;
 	private final static String LEAD_NEW = Constant_AC.LEAD_STATUS_NEW;
 	private final static String LEAD_DUPLICATE = Constant_AC.LEAD_STATUS_DUPLICATE;
@@ -43,51 +45,53 @@ public with sharing class LeadDomain extends trac_TriggerHandlerBase {
 		Map<Id, Lead> accountIdLeadMap = new Map<Id, Lead>();
 		Map<String, Lead> zipCodeLeadMap = new Map<String, Lead>();
 		for (Lead newLead : newLeadsList) {
-			initializeFields(newLead);
-			accountIdLeadMap.put(newLead.ChapterName__c, newLead);
-			if (Bypass_Triggers__c.getValues(UserInfo.getUserId()) == null) {
-				if (newLead.Status == LEAD_INQUIRY) {
-					Boolean referred = true;
-					newLead.Inquiry_Date__c = System.today();
-					if (newLead.City == null
-							|| newLead.StateCode == null
-							|| newLead.PostalCode == null
-							|| newLead.Street == null) {
-						referred = false;
-					}
-					for (Schema.FieldSetMember f : SObjectType.Lead.fieldSets.Non_Medical_Referral_Required_Fields.getFields()) {
-						if (newLead.get(f.getFieldPath()) == null) {
+			if (LEAD_RT_WISH_CHILD.equals(newLead.RecordTypeId)) {
+				initializeFields(newLead);
+				accountIdLeadMap.put(newLead.ChapterName__c, newLead);
+				if (Bypass_Triggers__c.getValues(UserInfo.getUserId()) == null) {
+					if (newLead.Status == LEAD_INQUIRY) {
+						Boolean referred = true;
+						newLead.Inquiry_Date__c = System.today();
+						if (newLead.City == null
+								|| newLead.StateCode == null
+								|| newLead.PostalCode == null
+								|| newLead.Street == null) {
 							referred = false;
 						}
+						for (Schema.FieldSetMember f : SObjectType.Lead.fieldSets.Non_Medical_Referral_Required_Fields.getFields()) {
+							if (newLead.get(f.getFieldPath()) == null) {
+								referred = false;
+							}
+						}
+						if (referred == true) {
+							newLead.Status = LEAD_REFERRED;
+						}
 					}
-					if (referred == true) {
-						newLead.Status = LEAD_REFERRED;
+					if (newLead.RFI_Form_Info_Hidden__c == null
+							&& newLead.Override_Dupe_Check__c == false
+							&& (newLead.Status == LEAD_INQUIRY || newLead.Status == LEAD_REFERRED)) {
+						inquiryReferredLeads.add(newLead);
+					}
+					if (newLead.Status == LEAD_REFERRED) {
+						newLead.Inquiry_Date__c = Date.today();
+						newLead.Referred_Date__c = Date.today();
 					}
 				}
-				if (newLead.RFI_Form_Info_Hidden__c == null
-						&& newLead.Override_Dupe_Check__c == false
-						&& (newLead.Status == LEAD_INQUIRY || newLead.Status == LEAD_REFERRED)) {
-					inquiryReferredLeads.add(newLead);
+				if (newLead.PostalCode != null) {
+					zipCodeLeadMap.put(newLead.PostalCode, newLead);
+				} else {
+					zipCodeLeadMap.put(newLead.Referrer_Zip__c, newLead);
 				}
-				if (newLead.Status == LEAD_REFERRED) {
-					newLead.Inquiry_Date__c = Date.today();
-					newLead.Referred_Date__c = Date.today();
+				if (!accountIdLeadMap.isEmpty()) {
+					LeadService.setRegionCode(accountIdLeadMap);
+				}
+				if (!zipCodeLeadMap.isEmpty()) {
+					LeadService.updateChapterFields(zipCodeLeadMap);
+				}
+				if (!accountIdLeadMap.isEmpty()) {
+					LeadService.setHiddenChapterName(accountIdLeadMap);
 				}
 			}
-			if (newLead.PostalCode != null) {
-				zipCodeLeadMap.put(newLead.PostalCode, newLead);
-			} else {
-				zipCodeLeadMap.put(newLead.Referrer_Zip__c, newLead);
-			}
-		}
-		if (!accountIdLeadMap.isEmpty()) {
-			LeadService.setRegionCode(accountIdLeadMap);
-		}
-		if (!zipCodeLeadMap.isEmpty()) {
-			LeadService.updateChapterFields(zipCodeLeadMap);
-		}
-		if (!accountIdLeadMap.isEmpty()) {
-			LeadService.setHiddenChapterName(accountIdLeadMap);
 		}
 	}
 
@@ -111,181 +115,183 @@ public with sharing class LeadDomain extends trac_TriggerHandlerBase {
 		List<Diagnosis_Verification__c> diagnosisVerifications = new List<Diagnosis_Verification__c>();
 		Set<Id> completedTaskLeadSet = new Set<Id>();
 		for (Lead newLead : newLeadsMap.values()) {
-			Lead oldLead = oldLeadsMap.get(newLead.Id);
-			if (Bypass_Triggers__c.getValues(UserInfo.getUserId()) == null && hasLeadAddressChanged(newLead, oldLead)) {
-				newLead.AddressVerified__c = false;
-				newLead.AddressVerificationAttempted__c = null;
-				newLead.County__c = null;
-			}
-			if (isLeadNew(newLead, oldLead)) {
-				newLead.Sub_Status__c = LEAD_NEW;
-				newLead.Eligibility_Review_Date__c = Date.today();
-			}
-			if (isLeadEligibilityReviewComatoseVegState(newLead, oldLead)) {
-				newLead.Sub_Status__c = LEAD_SUB_STATUS_PENDING_CLARIFICATION_CHAPTER;
-			}
-			if (canLeadCompleteTask(newLead, oldLead)) {
-				completedTaskLeadSet.add(newLead.Id);
-			}
-			if (isLeadDNQ(newLead, oldLead)) {
-				newLead.DNQ_Date__c = Date.today();
-			}
-			if (hasLeadChangedChapter(newLead, oldLead)) {
-				if (hasLeadChapterBackupChanged(newLead, oldLead)) {
-					newLead.Hidden_Chapter_Change_Confirmation__c = oldLead.ChapterName__c;
+			if (LEAD_RT_WISH_CHILD.equals(newLead.RecordTypeId)) {
+				Lead oldLead = oldLeadsMap.get(newLead.Id);
+				if (Bypass_Triggers__c.getValues(UserInfo.getUserId()) == null && hasLeadAddressChanged(newLead, oldLead)) {
+					newLead.AddressVerified__c = false;
+					newLead.AddressVerificationAttempted__c = null;
+					newLead.County__c = null;
 				}
-				accountIdLeadMap.put(newLead.ChapterName__c, newLead);
-			}
-			if (hasLeadTreatingMedicalEmailChanged(newLead, oldLead)) {
-				newLead.HiddenMedicalProfessionalEmail__c = newLead.Treating_Medical_Professional_Email__c;
-			}
-			if (isLeadReferred(newLead, oldLead)) {
-				newLead.Referred_Date__c = Date.today();
-			}
-			if (hasLeadPartASent(newLead, oldLead)) {
-				newLead.Part_A_Sent__c = Date.today();
-			}
-			if (isLeadQualified(newLead, oldLead)) {
-				diagnosisVerifications = DiagnosisVerificationService.findByLeadId(newLead.Id);
-				newLead.Sub_Status__c = null;
-				newLead.Qualified_Date__c = Date.today();//Added per IME-69
-			}
-			if (isLeadQualifiedRequiredFieldValidation(newLead)) {
-				qualifiedLeadsFieldValidation.add(newLead);
-			}
-			if (isLeadEligibilityReviewPendingChapterClarification(newLead)) {
-				newLead.Sub_Status__c = null;
-			}
-			if (hasLeadMedicalProfessionalChanged(newLead, oldLead)) {
-				newLead.Of_Times_Email_Sent__c = 0;
-				newLead.Part_A_Form_Password__c = Utils.generateRandomNumber(6);
-			}
-			if (hasLeadReferredPotentialDuplicates(newLead, oldLead)) {
-				potentialReferredLeadDuplicates.add(newLead);
-				if (newLead.Contact_Dup_Check__c != LEAD_DUP_CHECK_BLOCK_CONTACT_DUP) {
-					potentialReferredLeadContactDuplicates.add(newLead);
+				if (isLeadNew(newLead, oldLead)) {
+					newLead.Sub_Status__c = LEAD_NEW;
+					newLead.Eligibility_Review_Date__c = Date.today();
 				}
-			}
-			if (hasLeadQualifyingIcdCodeChanged(newLead, oldLead)) {
-				updatedQualifyingIcdCode.add(newLead.Qualifying_ICD__c);
-				updatedDiagnosisLeads.add(newLead);
-			} else if (newLead.Qualifying_ICD__c == null) {
-				newLead.PR_Diagnosis__c = EMPTY;
-			}
-			if (hasLeadQualifyingDiagnosisChanged(newLead, oldLead)) {
-				updatedQualifyingDiagnoses.add(newLead.Qualifying_Diagnosis__c);
-				updatedDiagnosisLeads.add(newLead);
-			} else if (isLeadQualifyingDiagnosisNull(newLead, oldLead)) {
-				newLead.PR_Diagnosis__c = EMPTY;
-			}
-			if (isLeadEligibilityReview(newLead, oldLead)) {
-				eligibilityReviewLeads.add(newLead);
-			}
-			if (hasLeadMedicalReasonMoveQuickly(newLead) && isLeadQualified(newLead, oldLead)) {
-				qualifiedRushLeads.add(newLead);
-			}
-			if (hasLeadMedicalReasonMoveQuickly(newLead)) {
-				newLead.Rush__c = true;
-			} else if (String.isNotBlank(newLead.Any_medical_reason_for_moving_quickly__c)
-					&& (!newLead.Any_medical_reason_for_moving_quickly__c.containsIgnoreCase(MEDICAL_REASON_MOVING_QUICKLY_YES))) {
-				newLead.Rush__c = false;
-				if (newLead.Any_medical_reason_for_moving_quickly__c.containsIgnoreCase(MEDICAL_REASON_MOVING_QUICKLY_YES)) {
-					potentialRushLeads.add(newLead);
+				if (isLeadEligibilityReviewComatoseVegState(newLead, oldLead)) {
+					newLead.Sub_Status__c = LEAD_SUB_STATUS_PENDING_CLARIFICATION_CHAPTER;
 				}
-			} else {
-				newLead.Rush__c = false;
-			}
-			if (isLeadPending(newLead)) {
-				newLead.Pending_Diagnosis_Date__c = Date.today();
-			}
-			if (hasLeadZipCodeChangedByIntegrationUser(newLead, oldLead)) {
-				updateChapterLeadList.add(newLead);
-				newLead.Hidden_Chapter_Change_Confirmation__c = null;
-			}
-			if (newLead.SD1_ICD_Code__c != oldLead.SD1_ICD_Code__c && newLead.SD1_ICD_Code__c != null) {
-				icdCodeLeadMap.put(newLead.SD1_ICD_Code__c, newLead);
-				if (icdCodeDescriptionMatchMap.containsKey(newLead.Id)) {
-					icdCodeDescriptionMatchMap.get(newLead.Id).add(1);
+				if (canLeadCompleteTask(newLead, oldLead)) {
+					completedTaskLeadSet.add(newLead.Id);
+				}
+				if (isLeadDNQ(newLead, oldLead)) {
+					newLead.DNQ_Date__c = Date.today();
+				}
+				if (hasLeadChangedChapter(newLead, oldLead)) {
+					if (hasLeadChapterBackupChanged(newLead, oldLead)) {
+						newLead.Hidden_Chapter_Change_Confirmation__c = oldLead.ChapterName__c;
+					}
+					accountIdLeadMap.put(newLead.ChapterName__c, newLead);
+				}
+				if (hasLeadTreatingMedicalEmailChanged(newLead, oldLead)) {
+					newLead.HiddenMedicalProfessionalEmail__c = newLead.Treating_Medical_Professional_Email__c;
+				}
+				if (isLeadReferred(newLead, oldLead)) {
+					newLead.Referred_Date__c = Date.today();
+				}
+				if (hasLeadPartASent(newLead, oldLead)) {
+					newLead.Part_A_Sent__c = Date.today();
+				}
+				if (isLeadQualified(newLead, oldLead)) {
+					diagnosisVerifications = DiagnosisVerificationService.findByLeadId(newLead.Id);
+					newLead.Sub_Status__c = null;
+					newLead.Qualified_Date__c = Date.today();//Added per IME-69
+				}
+				if (isLeadQualifiedRequiredFieldValidation(newLead)) {
+					qualifiedLeadsFieldValidation.add(newLead);
+				}
+				if (isLeadEligibilityReviewPendingChapterClarification(newLead)) {
+					newLead.Sub_Status__c = null;
+				}
+				if (hasLeadMedicalProfessionalChanged(newLead, oldLead)) {
+					newLead.Of_Times_Email_Sent__c = 0;
+					newLead.Part_A_Form_Password__c = Utils.generateRandomNumber(6);
+				}
+				if (hasLeadReferredPotentialDuplicates(newLead, oldLead)) {
+					potentialReferredLeadDuplicates.add(newLead);
+					if (newLead.Contact_Dup_Check__c != LEAD_DUP_CHECK_BLOCK_CONTACT_DUP) {
+						potentialReferredLeadContactDuplicates.add(newLead);
+					}
+				}
+				if (hasLeadQualifyingIcdCodeChanged(newLead, oldLead)) {
+					updatedQualifyingIcdCode.add(newLead.Qualifying_ICD__c);
+					updatedDiagnosisLeads.add(newLead);
+				} else if (newLead.Qualifying_ICD__c == null) {
+					newLead.PR_Diagnosis__c = EMPTY;
+				}
+				if (hasLeadQualifyingDiagnosisChanged(newLead, oldLead)) {
+					updatedQualifyingDiagnoses.add(newLead.Qualifying_Diagnosis__c);
+					updatedDiagnosisLeads.add(newLead);
+				} else if (isLeadQualifyingDiagnosisNull(newLead, oldLead)) {
+					newLead.PR_Diagnosis__c = EMPTY;
+				}
+				if (isLeadEligibilityReview(newLead, oldLead)) {
+					eligibilityReviewLeads.add(newLead);
+				}
+				if (hasLeadMedicalReasonMoveQuickly(newLead) && isLeadQualified(newLead, oldLead)) {
+					qualifiedRushLeads.add(newLead);
+				}
+				if (hasLeadMedicalReasonMoveQuickly(newLead)) {
+					newLead.Rush__c = true;
+				} else if (String.isNotBlank(newLead.Any_medical_reason_for_moving_quickly__c)
+						&& (!newLead.Any_medical_reason_for_moving_quickly__c.containsIgnoreCase(MEDICAL_REASON_MOVING_QUICKLY_YES))) {
+					newLead.Rush__c = false;
+					if (newLead.Any_medical_reason_for_moving_quickly__c.containsIgnoreCase(MEDICAL_REASON_MOVING_QUICKLY_YES)) {
+						potentialRushLeads.add(newLead);
+					}
 				} else {
-					icdCodeDescriptionMatchMap.put(newLead.Id, new Set<Integer>{
-							1
-					});
+					newLead.Rush__c = false;
+				}
+				if (isLeadPending(newLead)) {
+					newLead.Pending_Diagnosis_Date__c = Date.today();
+				}
+				if (hasLeadZipCodeChangedByIntegrationUser(newLead, oldLead)) {
+					updateChapterLeadList.add(newLead);
+					newLead.Hidden_Chapter_Change_Confirmation__c = null;
+				}
+				if (newLead.SD1_ICD_Code__c != oldLead.SD1_ICD_Code__c && newLead.SD1_ICD_Code__c != null) {
+					icdCodeLeadMap.put(newLead.SD1_ICD_Code__c, newLead);
+					if (icdCodeDescriptionMatchMap.containsKey(newLead.Id)) {
+						icdCodeDescriptionMatchMap.get(newLead.Id).add(1);
+					} else {
+						icdCodeDescriptionMatchMap.put(newLead.Id, new Set<Integer>{
+								1
+						});
+					}
+				}
+				if (newLead.SD2_ICD_Code__c != oldLead.SD2_ICD_Code__c && newLead.SD2_ICD_Code__c != null) {
+					icdCodeLeadMap.put(newLead.SD2_ICD_Code__c, newLead);
+					if (icdCodeDescriptionMatchMap.containsKey(newLead.Id)) {
+						icdCodeDescriptionMatchMap.get(newLead.Id).add(2);
+					} else {
+						icdCodeDescriptionMatchMap.put(newLead.Id, new Set<Integer>{
+								2
+						});
+					}
+				}
+				if (newLead.SD3_ICD_Code__c != oldLead.SD3_ICD_Code__c && newLead.SD3_ICD_Code__c != null) {
+					icdCodeLeadMap.put(newLead.SD3_ICD_Code__c, newLead);
+					if (icdCodeDescriptionMatchMap.containsKey(newLead.Id)) {
+						icdCodeDescriptionMatchMap.get(newLead.Id).add(3);
+					} else {
+						icdCodeDescriptionMatchMap.put(newLead.Id, new Set<Integer>{
+								3
+						});
+					}
+				}
+				if (newLead.SD4_ICD_Code__c != oldLead.SD4_ICD_Code__c && newLead.SD4_ICD_Code__c != null) {
+					icdCodeLeadMap.put(newLead.SD4_ICD_Code__c, newLead);
+					if (icdCodeDescriptionMatchMap.containsKey(newLead.Id)) {
+						icdCodeDescriptionMatchMap.get(newLead.Id).add(4);
+					} else {
+						icdCodeDescriptionMatchMap.put(newLead.Id, new Set<Integer>{
+								4
+						});
+					}
+				}
+				if (newLead.ICD_Given_By_Referrer__c != oldLead.ICD_Given_By_Referrer__c && newLead.ICD_Given_By_Referrer__c != null) {
+					icdCodeLeadMap.put(newLead.ICD_Given_By_Referrer__c, newLead);
+					if (icdCodeDescriptionMatchMap.containsKey(newLead.Id)) {
+						icdCodeDescriptionMatchMap.get(newLead.Id).add(5);
+					} else {
+						icdCodeDescriptionMatchMap.put(newLead.Id, new Set<Integer>{
+								5
+						});
+					}
 				}
 			}
-			if (newLead.SD2_ICD_Code__c != oldLead.SD2_ICD_Code__c && newLead.SD2_ICD_Code__c != null) {
-				icdCodeLeadMap.put(newLead.SD2_ICD_Code__c, newLead);
-				if (icdCodeDescriptionMatchMap.containsKey(newLead.Id)) {
-					icdCodeDescriptionMatchMap.get(newLead.Id).add(2);
-				} else {
-					icdCodeDescriptionMatchMap.put(newLead.Id, new Set<Integer>{
-							2
-					});
-				}
+			if (!accountIdLeadMap.isEmpty()) {
+				LeadService.setHiddenChapterName(accountIdLeadMap);
+				LeadService.updateLeadOwner(accountIdLeadMap);
 			}
-			if (newLead.SD3_ICD_Code__c != oldLead.SD3_ICD_Code__c && newLead.SD3_ICD_Code__c != null) {
-				icdCodeLeadMap.put(newLead.SD3_ICD_Code__c, newLead);
-				if (icdCodeDescriptionMatchMap.containsKey(newLead.Id)) {
-					icdCodeDescriptionMatchMap.get(newLead.Id).add(3);
-				} else {
-					icdCodeDescriptionMatchMap.put(newLead.Id, new Set<Integer>{
-							3
-					});
-				}
+			if (!icdCodeDescriptionMatchMap.isEmpty()) {
+				LeadService.matchConditionDescription(icdCodeDescriptionMatchMap, icdCodeLeadMap);
 			}
-			if (newLead.SD4_ICD_Code__c != oldLead.SD4_ICD_Code__c && newLead.SD4_ICD_Code__c != null) {
-				icdCodeLeadMap.put(newLead.SD4_ICD_Code__c, newLead);
-				if (icdCodeDescriptionMatchMap.containsKey(newLead.Id)) {
-					icdCodeDescriptionMatchMap.get(newLead.Id).add(4);
-				} else {
-					icdCodeDescriptionMatchMap.put(newLead.Id, new Set<Integer>{
-							4
-					});
-				}
+			if (!updatedDiagnosisLeads.isEmpty()) {
+				LeadService.setMedicalInfo(updatedQualifyingDiagnoses, updatedQualifyingIcdCode, updatedDiagnosisLeads);
 			}
-			if (newLead.ICD_Given_By_Referrer__c != oldLead.ICD_Given_By_Referrer__c && newLead.ICD_Given_By_Referrer__c != null) {
-				icdCodeLeadMap.put(newLead.ICD_Given_By_Referrer__c, newLead);
-				if (icdCodeDescriptionMatchMap.containsKey(newLead.Id)) {
-					icdCodeDescriptionMatchMap.get(newLead.Id).add(5);
-				} else {
-					icdCodeDescriptionMatchMap.put(newLead.Id, new Set<Integer>{
-							5
-					});
-				}
+			if (!eligibilityReviewLeads.isEmpty()) {
+				CaseService.createEligibilityReview(eligibilityReviewLeads);
 			}
-		}
-		if (!accountIdLeadMap.isEmpty()) {
-			LeadService.setHiddenChapterName(accountIdLeadMap);
-			LeadService.updateLeadOwner(accountIdLeadMap);
-		}
-		if (!icdCodeDescriptionMatchMap.isEmpty()) {
-			LeadService.matchConditionDescription(icdCodeDescriptionMatchMap, icdCodeLeadMap);
-		}
-		if (!updatedDiagnosisLeads.isEmpty()) {
-			LeadService.setMedicalInfo(updatedQualifyingDiagnoses, updatedQualifyingIcdCode, updatedDiagnosisLeads);
-		}
-		if (!eligibilityReviewLeads.isEmpty()) {
-			CaseService.createEligibilityReview(eligibilityReviewLeads);
-		}
-		if (!potentialReferredLeadDuplicates.isEmpty()) {
-			LeadService.findDuplicateLeads(potentialReferredLeadDuplicates);
-		}
-		if (!potentialReferredLeadContactDuplicates.isEmpty()) {
-			LeadService.findDuplicateContacts(potentialReferredLeadContactDuplicates);
-		}
-		if (!qualifiedLeadsFieldValidation.isEmpty()) {
-			LeadService.validateQualifiedRequiredFields(qualifiedLeadsFieldValidation);
-		}
-		if (!potentialRushLeads.isEmpty()) {
-			TaskService.createRushTask(potentialRushLeads);
-		}
-		if (!diagnosisVerifications.isEmpty() && !eligibilityReviewLeads.isEmpty()) {
-			LeadService.setQualifyingDiagnosis(diagnosisVerifications[0].ICD_Code__c, eligibilityReviewLeads);
-		}
-		if (!completedTaskLeadSet.isEmpty()) {
-			TaskService.updateCompleted(completedTaskLeadSet);
-		}
-		if (!updateChapterLeadList.isEmpty()) {
-			LeadService.setChapterViaZipCode(updateChapterLeadList);
+			if (!potentialReferredLeadDuplicates.isEmpty()) {
+				LeadService.findDuplicateLeads(potentialReferredLeadDuplicates);
+			}
+			if (!potentialReferredLeadContactDuplicates.isEmpty()) {
+				LeadService.findDuplicateContacts(potentialReferredLeadContactDuplicates);
+			}
+			if (!qualifiedLeadsFieldValidation.isEmpty()) {
+				LeadService.validateQualifiedRequiredFields(qualifiedLeadsFieldValidation);
+			}
+			if (!potentialRushLeads.isEmpty()) {
+				TaskService.createRushTask(potentialRushLeads);
+			}
+			if (!diagnosisVerifications.isEmpty() && !eligibilityReviewLeads.isEmpty()) {
+				LeadService.setQualifyingDiagnosis(diagnosisVerifications[0].ICD_Code__c, eligibilityReviewLeads);
+			}
+			if (!completedTaskLeadSet.isEmpty()) {
+				TaskService.updateCompleted(completedTaskLeadSet);
+			}
+			if (!updateChapterLeadList.isEmpty()) {
+				LeadService.setChapterViaZipCode(updateChapterLeadList);
+			}
 		}
 	}
 
@@ -295,9 +301,11 @@ public with sharing class LeadDomain extends trac_TriggerHandlerBase {
 	public override void handleBeforeDelete() {
 		Set<Id> ids = new Set<Id>();
 		Set<Id> leadIdSet = new Set<Id>();
-		for (Lead obj : oldLeadsList) {
-			if (Bypass_Triggers__c.getValues(UserInfo.getUserId()) == null) {
-				ids.add(obj.Id);
+		for (Lead lead : oldLeadsList) {
+			if (LEAD_RT_WISH_CHILD.equals(lead.RecordTypeId)) {
+				if (Bypass_Triggers__c.getValues(UserInfo.getUserId()) == null) {
+					ids.add(lead.Id);
+				}
 			}
 		}
 		if (!ids.isEmpty()) {
@@ -324,25 +332,27 @@ public with sharing class LeadDomain extends trac_TriggerHandlerBase {
 		Map<Id, Lead> newLeadMap = new Map<Id, Lead>();
 		Map<String, List<Lead>> leadMap = new Map<String, List<Lead>>();
 		for (Lead newLead : newLeadsList) {
-			if (Bypass_Triggers__c.getValues(UserInfo.getUserId()) == null) {
-				newLeadMap.put(newLead.Id, newLead);
-			}
-			if (newLead.ChapterName__c != null
-					&& newLead.Owner.UserRole.Name == ROLE_NATIONAL_STAFF) {
-				if (leadMap.containsKey(newLead.ChapterName__r.Name)) {
-					leadMap.get(newLead.ChapterName__r.Name).add(newLead);
-				} else {
-					leadMap.put(newLead.ChapterName__r.Name, new List<Lead>{
-							newLead
-					});
+			if (LEAD_RT_WISH_CHILD.equals(newLead.RecordTypeId)) {
+				if (Bypass_Triggers__c.getValues(UserInfo.getUserId()) == null) {
+					newLeadMap.put(newLead.Id, newLead);
+				}
+				if (newLead.ChapterName__c != null
+						&& newLead.Owner.UserRole.Name == ROLE_NATIONAL_STAFF) {
+					if (leadMap.containsKey(newLead.ChapterName__r.Name)) {
+						leadMap.get(newLead.ChapterName__r.Name).add(newLead);
+					} else {
+						leadMap.put(newLead.ChapterName__r.Name, new List<Lead>{
+								newLead
+						});
+					}
 				}
 			}
-		}
-		if (!newLeadMap.isEmpty()) {
-			TaskService.createLeadTask(newLeadMap.keySet());
-		}
-		if (!leadMap.isEmpty()) {
-			ChapterStaffRecordSharing_AC.LeadSharing(leadMap);
+			if (!newLeadMap.isEmpty()) {
+				TaskService.createLeadTask(newLeadMap.keySet());
+			}
+			if (!leadMap.isEmpty()) {
+				ChapterStaffRecordSharing_AC.LeadSharing(leadMap);
+			}
 		}
 	}
 
@@ -367,29 +377,31 @@ public with sharing class LeadDomain extends trac_TriggerHandlerBase {
 		]);
 		if (RecursiveTriggerHandler.isFirstTime == true) {
 			for (Lead newLead : newLeadsMap.values()) {
-				Lead oldLead = oldLeadsMap.get(newLead.Id);
-				if (!newLead.IsConverted && newLead.Status == LEAD_QUALIFIED
-						&& oldLead.Status != LEAD_QUALIFIED
-						&& (!chapterAccountMap.containsKey(newLead.ChapterName__c))) {
-					qualifiedLeadMap.put(newLead.Id, newLead);
-				}
-				if ((newLead.Is_in_a_Comatose_Vegetative_State__c == COMATOSE_VEGETATIVE_STATE_YES
-						&& newLead.Status == LEAD_ELIGIBILITY_REVIEW
-						&& oldLead.Status != LEAD_ELIGIBILITY_REVIEW)
-						|| (newLead.Is_in_a_Comatose_Vegetative_State__c == COMATOSE_VEGETATIVE_STATE_YES
-						&& oldLead.Is_in_a_Comatose_Vegetative_State__c != COMATOSE_VEGETATIVE_STATE_YES
-						&& newLead.Status == LEAD_ELIGIBILITY_REVIEW)) {
-					LeadIdSet.add(newLead.Id);
-				}
-				String medicalReason = newLead.Any_medical_reason_for_moving_quickly__c;
-				String oldMedicalReason = oldLead.Any_medical_reason_for_moving_quickly__c;
-				if (medicalReason != null && newLead.Status == LEAD_ELIGIBILITY_REVIEW) {
-					if (medicalReason.contains(MEDICAL_REASON_MOVING_QUICKLY_YES)
-							&& (oldMedicalReason == null || !oldMedicalReason.contains(MEDICAL_REASON_MOVING_QUICKLY_YES))) {
-						rushLeadMap.put(newLead.Id, true);
-					} else if (!medicalReason.contains(MEDICAL_REASON_MOVING_QUICKLY_YES)
-							&& (oldMedicalReason == null || oldMedicalReason.contains(MEDICAL_REASON_MOVING_QUICKLY_YES))) {
-						rushLeadMap.put(newLead.Id, false);
+				if (LEAD_RT_WISH_CHILD.equals(newLead.RecordTypeId)) {
+					Lead oldLead = oldLeadsMap.get(newLead.Id);
+					if (!newLead.IsConverted && newLead.Status == LEAD_QUALIFIED
+							&& oldLead.Status != LEAD_QUALIFIED
+							&& (!chapterAccountMap.containsKey(newLead.ChapterName__c))) {
+						qualifiedLeadMap.put(newLead.Id, newLead);
+					}
+					if ((newLead.Is_in_a_Comatose_Vegetative_State__c == COMATOSE_VEGETATIVE_STATE_YES
+							&& newLead.Status == LEAD_ELIGIBILITY_REVIEW
+							&& oldLead.Status != LEAD_ELIGIBILITY_REVIEW)
+							|| (newLead.Is_in_a_Comatose_Vegetative_State__c == COMATOSE_VEGETATIVE_STATE_YES
+							&& oldLead.Is_in_a_Comatose_Vegetative_State__c != COMATOSE_VEGETATIVE_STATE_YES
+							&& newLead.Status == LEAD_ELIGIBILITY_REVIEW)) {
+						LeadIdSet.add(newLead.Id);
+					}
+					String medicalReason = newLead.Any_medical_reason_for_moving_quickly__c;
+					String oldMedicalReason = oldLead.Any_medical_reason_for_moving_quickly__c;
+					if (medicalReason != null && newLead.Status == LEAD_ELIGIBILITY_REVIEW) {
+						if (medicalReason.contains(MEDICAL_REASON_MOVING_QUICKLY_YES)
+								&& (oldMedicalReason == null || !oldMedicalReason.contains(MEDICAL_REASON_MOVING_QUICKLY_YES))) {
+							rushLeadMap.put(newLead.Id, true);
+						} else if (!medicalReason.contains(MEDICAL_REASON_MOVING_QUICKLY_YES)
+								&& (oldMedicalReason == null || oldMedicalReason.contains(MEDICAL_REASON_MOVING_QUICKLY_YES))) {
+							rushLeadMap.put(newLead.Id, false);
+						}
 					}
 				}
 			}
