@@ -69,6 +69,11 @@ public class Constant_AC {
 	public static final String THEME_4U = 'Theme4u';
 
 	/**
+	* Test Related Constants
+	*/
+	public static final String TEST_EXCEPTION_ERROR = 'Test Class execution';
+
+	/**
 	* sObject Api Names and Labels
 	*/
 	public final static String WISH_AFFILIATION_API_NAME = Schema.SObjectType.Wish_Affiliation__c.getName();
@@ -86,12 +91,16 @@ public class Constant_AC {
 	 */
 	public final static String ORG_AFFILIATION_STATUS_ACTIVE = 'Active';
 	public final static String ORG_AFFILIATION_STATUS_INACTIVE = 'Inactive';
+	public final static String ORG_AFFILIATION_STATUS_PENDING = 'Pending';
 	public final static String ORG_AFFILIATION_TREATING_FACILITY_CURRENT = 'Current';
 	public final static String ORG_AFFILIATION_STATUS_NOT_APPROVED = 'Not Approved';
 
 	/**
 	 * Lead Constants
 	 */
+	public static final Id LEAD_RT_DEFAULT = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Default').getRecordTypeId();
+	public static final Id LEAD_RT_MASTER = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Master').getRecordTypeId();
+	public static final Id LEAD_RT_WISH_CHILD = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Wish_Child').getRecordTypeId();
 	public static final String LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL = 'Treating Medical Professional';
 	public static final String LEAD_DV_FORM_TYPE_BEST_CONTACT = 'Best contact for Physician';
 	public static final String LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL = 'Alternate 1 Medical Professional';
@@ -223,6 +232,7 @@ public class Constant_AC {
 	public static final String CONTACT_GENDER_FEMALE = 'Female';
 	public static final String CONTACT_NAME_UNKNOWN = 'Unknown';
 	public static final String CONTACT_STATUS_ROLE_SPECIFIC_TRAINING_AVAILABLE = 'Role Specific Training Available';
+    public static final String CONTACT_ONBOARDING_STATUS_BACKGROUND_CHECK = 'Background Check';
 
 	/**
 	 * Chapter Role File Constants
@@ -276,6 +286,14 @@ public class Constant_AC {
 	 */
 	public static final String DOCUSIGN_ENVELOPE_STATUS_COMPLETED = 'Completed';
 	public static final String DOCUSIGN_SUBJECT_DIAGNOSIS_VERIFICATION_FORM = 'Diagnosis Verification Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_LIABILITY = 'Signature Required - Liability And Publicity Release Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_WISH_FORM_AND_LIABILITY = 'Signature Required - Wish Form & Liability And Publicity Release Form';
+
+	/**
+	 * Docusign Recipient Constants
+	 */
+	public static final String DOCUSIGN_RECIPIENT_STATUS_COMPLETED = 'Completed';
+	public static final String DOCUSIGN_RECIPIENT_STATUS_DELIVERED = 'Delivered';
 
 	/**
 	* Wish Affiliation Types
@@ -319,6 +337,8 @@ public class Constant_AC {
 	public static final String TASK_SUBJECT_RUSH_QUALIFIED = 'Lead ET : New Rush Qualified';
 	public static final String TASK_SUBJECT_RUSH_MODIFIED_NO = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary';
 	public static final String TASK_SUBJECT_REVIEW_BACKGROUND_CHECK = 'Review Background Check';
+    public static final String TASK_SUBJECT_BACKGROUND_CHECK = 'Background Check';
+    public static final String TASK_TYPE_EMAIL = 'Email';
 
 	/**
 	 * Profile Constants
@@ -370,4 +390,9 @@ public class Constant_AC {
 	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_SUBMITTED = 'Submitted';
 	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
 	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_REJECTED = 'Rejected';
+
+	/*
+	 * Group Constants
+	 */
+	public static final String GROUP_TYPE_REGULAR = 'Regular';
 }
