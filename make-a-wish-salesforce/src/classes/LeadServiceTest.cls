@@ -259,7 +259,7 @@ public class LeadServiceTest {
 
 	@IsTest
 	public static void UpdateStatusDNQ(){
-		User currUser = [SELECT Id FROM User WHERE Id = :Userinfo.getUserId() LIMIT 1];
+		User currUser = Utils.currentUser;
 		User nationalStaff;
 		RecursiveTriggerHandler.isFirstTime = True;
 		System.RunAs(currUser) {
