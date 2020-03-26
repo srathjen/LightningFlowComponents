@@ -200,7 +200,7 @@ public class AffiliationService {
             }
         }
 
-        Boolean createUserGroup;
+        Boolean createUserGroup = false;
         if (!volunteerNameSet.isEmpty() && !chapterNameSet.isEmpty() && !affiliationSet.isEmpty()) {
             for (Contact dbVolunteerContact : [
                     SELECT Id, RecordTypeId, Name
