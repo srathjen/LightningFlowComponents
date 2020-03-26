@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <article>None</article>
@@ -56,7 +56,7 @@
         <name>npsp__Ambiguous__c</name>
     </fields>
     <fields>
-        <help>מציין את מחוז הקונגרס (בארה&quot;ב) שאליו שייכת הכתובת.</help>
+        <help>מציין את מחוז הקונגרס (בארה"ב) שאליו שייכת הכתובת.</help>
         <label><!-- Congressional District --></label>
         <name>npsp__Congressional_District__c</name>
     </fields>
@@ -493,17 +493,17 @@
         </picklistValues>
     </fields>
     <fields>
-        <help>מחוז המדינה התחתון (מחוז בחירה בארה&quot;ב, כגון מחוז מועצת המדינה) שאליו שייכת כתובת זו.</help>
+        <help>מחוז המדינה התחתון (מחוז בחירה בארה"ב, כגון מחוז מועצת המדינה) שאליו שייכת כתובת זו.</help>
         <label><!-- State Lower District --></label>
         <name>npsp__State_Lower_District__c</name>
     </fields>
     <fields>
-        <help>מחוז המדינה העליון (מחוז בחירה בארה&quot;ב, כגון מחוז הסנאט של מדינה) שאליו שייכת כתובת זו.</help>
+        <help>מחוז המדינה העליון (מחוז בחירה בארה"ב, כגון מחוז הסנאט של מדינה) שאליו שייכת כתובת זו.</help>
         <label><!-- State Upper District --></label>
         <name>npsp__State_Upper_District__c</name>
     </fields>
     <fields>
-        <help>אם כתובת זו מחייבת אימות, לחץ על &apos;אמת כתובת&apos; בראש דף זה. עיין במסמכי העזרה ב-Power of Us Hub לקבלת מידע נוסף.</help>
+        <help>אם כתובת זו מחייבת אימות, לחץ על 'אמת כתובת' בראש דף זה. עיין במסמכי העזרה ב-Power of Us Hub לקבלת מידע נוסף.</help>
         <label><!-- Verification Status --></label>
         <name>npsp__Verification_Status__c</name>
     </fields>
@@ -513,13 +513,7 @@
         <name>npsp__Verified__c</name>
     </fields>
     <gender><!-- Masculine --></gender>
-    <layouts>
-        <layout>Address Layout</layout>
-        <sections>
-            <label>פרטים עונתיים</label>
-            <section>Seasonal Information</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel><!-- Address ID --></nameFieldLabel>
     <webLinks>
         <label><!-- Verify_Address --></label>

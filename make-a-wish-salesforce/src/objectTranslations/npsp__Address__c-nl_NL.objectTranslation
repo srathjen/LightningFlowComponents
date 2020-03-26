@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -481,7 +481,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <help>Het lager staatsdistrict (bijvoorbeeld het &quot;state assembly district&quot;) waar dit adres bij hoort</help>
+        <help>Het lager staatsdistrict (bijvoorbeeld het "state assembly district") waar dit adres bij hoort</help>
         <label><!-- State Lower District --></label>
         <name>npsp__State_Lower_District__c</name>
     </fields>
@@ -491,7 +491,7 @@
         <name>npsp__State_Upper_District__c</name>
     </fields>
     <fields>
-        <help>Als dit adres verificatie nodig heeft, Klikt u op de adres verificatie knop boven aan de pagina. Raadpleeg de Help Documentatie in de &quot;power of us&quot; HUB for meer informatie</help>
+        <help>Als dit adres verificatie nodig heeft, Klikt u op de adres verificatie knop boven aan de pagina. Raadpleeg de Help Documentatie in de "power of us" HUB for meer informatie</help>
         <label><!-- Verification Status --></label>
         <name>npsp__Verification_Status__c</name>
     </fields>
@@ -501,13 +501,7 @@
         <name>npsp__Verified__c</name>
     </fields>
     <gender>Neuter</gender>
-    <layouts>
-        <layout>Address Layout</layout>
-        <sections>
-            <label>Seizoensinformatie</label>
-            <section>Seasonal Information</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel>Adres-ID</nameFieldLabel>
     <webLinks>
         <label><!-- Verify_Address --></label>

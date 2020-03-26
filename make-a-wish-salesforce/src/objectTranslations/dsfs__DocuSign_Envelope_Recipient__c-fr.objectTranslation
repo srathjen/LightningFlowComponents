@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -9,12 +9,12 @@
         <value><!-- Destinataire de l&apos;enveloppe DocuSign --></value>
     </caseValues>
     <fields>
-        <help>CODE D&apos;ACCÈS</help>
+        <help>CODE D'ACCÈS</help>
         <label><!-- Access Code --></label>
         <name>dsfs__Access_Code__c</name>
     </fields>
     <fields>
-        <help>IDENTIFIANT CONTACT DU DESTINATAIRE DE L&apos;ENVELOPPE DOCUSIGN</help>
+        <help>IDENTIFIANT CONTACT DU DESTINATAIRE DE L'ENVELOPPE DOCUSIGN</help>
         <label><!-- Contact --></label>
         <name>dsfs__DSER_ContactID__c</name>
         <relationshipLabel><!-- DocuSign Envelope Recipient --></relationshipLabel>
@@ -36,19 +36,19 @@
         <name>dsfs__DSER_CustomName__c</name>
     </fields>
     <fields>
-        <help>IDENTIFIANT DIRECTION DU DESTINATAIRE DE L&apos;ENVELOPPE DOCUSIGN</help>
+        <help>IDENTIFIANT DIRECTION DU DESTINATAIRE DE L'ENVELOPPE DOCUSIGN</help>
         <label><!-- Lead --></label>
         <name>dsfs__DSER_LeadID__c</name>
         <relationshipLabel><!-- DocuSign Envelope Recipient --></relationshipLabel>
     </fields>
     <fields>
-        <help>IDENTIFIANT UTILISATEUR DU DESTINATAIRE DE L&apos;ENVELOPPE DOCUSIGN</help>
+        <help>IDENTIFIANT UTILISATEUR DU DESTINATAIRE DE L'ENVELOPPE DOCUSIGN</help>
         <label><!-- User --></label>
         <name>dsfs__DSER_UserID__c</name>
         <relationshipLabel><!-- DocuSign Envelope Recipient --></relationshipLabel>
     </fields>
     <fields>
-        <help> IDENTIFIANT DE L&apos;ENVELOPPE DOCUSIGN</help>
+        <help> IDENTIFIANT DE L'ENVELOPPE DOCUSIGN</help>
         <label><!-- DocuSign Envelope --></label>
         <name>dsfs__DocuSign_EnvelopeID__c</name>
         <relationshipLabel><!-- DocuSign Envelope Recipient --></relationshipLabel>
@@ -97,7 +97,7 @@
         </picklistValues>
         <picklistValues>
             <masterLabel>Manage envelope</masterLabel>
-            <translation>GÉRER L&apos;ENVELOPPE</translation>
+            <translation>GÉRER L'ENVELOPPE</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Sign in person</masterLabel>
@@ -117,7 +117,7 @@
         <name>dsfs__Email_Subject__c</name>
     </fields>
     <fields>
-        <help>$VÉRIFICATION D&apos;IDENTITÉ</help>
+        <help>$VÉRIFICATION D'IDENTITÉ</help>
         <label><!-- ID Check --></label>
         <name>dsfs__ID_Check__c</name>
     </fields>
@@ -152,7 +152,7 @@
         <name>dsfs__RoleName__c</name>
     </fields>
     <fields>
-        <help>VALEUR ASSOCIÉE AU RÔLE DU DESTINATAIRE DOCUSIGN. CETTE VALEUR SERT À DIRIGER VERS LES BALISES D&apos;ANCRAGE PAR DÉFAUT AU SEIN DES DOCUMENTS.</help>
+        <help>VALEUR ASSOCIÉE AU RÔLE DU DESTINATAIRE DOCUSIGN. CETTE VALEUR SERT À DIRIGER VERS LES BALISES D'ANCRAGE PAR DÉFAUT AU SEIN DES DOCUMENTS.</help>
         <label><!-- RoleValue --></label>
         <name>dsfs__RoleValue__c</name>
     </fields>
@@ -204,13 +204,7 @@
         <name>dsfs__Validation_Message__c</name>
     </fields>
     <gender><!-- Masculine --></gender>
-    <layouts>
-        <layout>DocuSign Envelope Recipient Layout</layout>
-        <sections>
-            <label>Liens personnalisés</label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel><!-- DocuSign Envelope Recipient Name --></nameFieldLabel>
     <startsWith><!-- Consonant --></startsWith>
 </CustomObjectTranslation>

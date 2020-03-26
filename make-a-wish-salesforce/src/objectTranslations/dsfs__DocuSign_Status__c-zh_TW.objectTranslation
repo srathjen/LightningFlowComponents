@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -211,25 +211,7 @@
         <label><!-- isConflict --></label>
         <name>isConflict__c</name>
     </fields>
-    <layouts>
-        <layout>DocuSign Status With View Button</layout>
-        <sections>
-            <label>自訂連結</label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label>資訊</label>
-            <section>Information</section>
-        </sections>
-        <sections>
-            <label>相關物件</label>
-            <section>Related Objects</section>
-        </sections>
-        <sections>
-            <label>系統資訊</label>
-            <section>System Information</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel>信封號碼</nameFieldLabel>
     <webLinks>
         <label><!-- CorrectInDocuSign --></label>
