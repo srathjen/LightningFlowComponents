@@ -6,7 +6,6 @@ Modification: 07/09/2019 - Samer - SIW-246
 *******************************************************************************************/
 @IsTest
 public class batch_LeadChildAgeTest {
-
 	@TestSetup
 	static void setup() {
 		trac_TriggerHandlerBase.blockTrigger = true;
