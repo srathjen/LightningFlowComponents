@@ -15189,7 +15189,9 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <fullName>Family_Dynamics_Validation</fullName>
         <active>true</active>
         <description>FamilyDynamicsNotes should not be blank when 'Other' is selected on "Family Dynamics"</description>
-        <errorConditionFormula>AND(ISPICKVAL(Family_Dynamics__c, 'Other'), Family_Dynamics_Notes__c = NULL,$Profile.Name != 'Integration')</errorConditionFormula>
+        <errorConditionFormula>AND(ISPICKVAL(Family_Dynamics__c, 'Other'), Family_Dynamics_Notes__c = NULL,$Profile.Name != 'Integration')
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>Family_Dynamics_Notes__c</errorDisplayField>
         <errorMessage>Please fill the Family Dynamics Notes</errorMessage>
     </validationRules>
@@ -15197,51 +15199,36 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <fullName>Lead_Address_Phone_and_Gender_Validation</fullName>
         <active>true</active>
         <errorConditionFormula>AND(OR((Street == Null || City == Null || PostalCode == Null || State == Null  ),
-(Text(Gender__c) == Null),Phone== Null),$Profile.Name != 'Integration',(Text(Status) == 'Referred'),(Text(RFI_Form_Info_Hidden__c) == Null || Id != Null))</errorConditionFormula>
+(Text(Gender__c) == Null),Phone== Null),$Profile.Name != 'Integration',(Text(Status) == 'Referred'),(Text(RFI_Form_Info_Hidden__c) == Null || Id != Null))
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>Please Enter Full Address (City, State, Street and Postal Code), Phone Number  and Gender.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Address_Validation</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Referred status,Address  is mandatory</description>
-        <errorConditionFormula>(Street == Null || City == Null || PostalCode == Null || State == Null) &amp;&amp; (Text(Status) == 'Referred') &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
-        <errorMessage>Please Enter Full Address (City, State, Street and Postal Code)</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_BirthDay_Date_Validation</fullName>
         <active>true</active>
         <description>This validation rule is used to prevent the date you have entered in the birthday date field if the value is today or greater than today.</description>
-        <errorConditionFormula>AND(DOB__c &gt; TODAY(),$Profile.Name != 'Integration')</errorConditionFormula>
+        <errorConditionFormula>AND(DOB__c &gt; TODAY(),$Profile.Name != 'Integration')
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>The birthdate entered occurs in the future. Please re-enter the birthdate.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Chapter_Validation</fullName>
-        <active>false</active>
-        <description>if users chapter !=chapter of lead make unique wish identifier required</description>
-        <errorConditionFormula>($User.Account_Name__c !=  ChapterName__r.Name) &amp;&amp; (unique_wish_identifier__c ==null || Len(unique_wish_identifier__c )&lt;1)  &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false &amp;&amp;  $Profile.Name != 'Wish Referral Form Profile'</errorConditionFormula>
-        <errorDisplayField>unique_wish_identifier__c</errorDisplayField>
-        <errorMessage>if users chapter and chapter of lead is not equal then unique wish identifier is required.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Check_Expedite_Explanation</fullName>
         <active>true</active>
         <description>Please Explain Expedite field is required when Do We Need To Expedite The Process? field is Yes</description>
-        <errorConditionFormula>AND( CONTAINS(Any_medical_reason_for_moving_quickly__c , 'Yes'),ISBLANK(Please_Explain__c),  ISPICKVAL( Status , 'Qualified'), $Profile.Name != 'Integration')</errorConditionFormula>
+        <errorConditionFormula>AND( CONTAINS(Any_medical_reason_for_moving_quickly__c , 'Yes'),ISBLANK(Please_Explain__c),  ISPICKVAL( Status , 'Qualified'), $Profile.Name != 'Integration')
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>Please explain reason to expedite the process in Please Explain Expedite field.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Child_Age_Validation</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Inquiry status, child age is mandatory.</description>
-        <errorConditionFormula>Text(Child_Age__c) == Null &amp;&amp; Text(Status) == 'Inquiry' &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp;  Migrated_Record__c == false</errorConditionFormula>
-        <errorDisplayField>Child_Age__c</errorDisplayField>
-        <errorMessage>Please Enter Child Age</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_DOB_Referral_Validation</fullName>
         <active>true</active>
         <description>When lead is changed to Referred, DOB is mandatory.</description>
-        <errorConditionFormula>Text(Status) == 'Referred' &amp;&amp;  DOB__c == Null &amp;&amp;   (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != 'Integration'</errorConditionFormula>
+        <errorConditionFormula>Text(Status) == 'Referred' &amp;&amp;  DOB__c == Null &amp;&amp;   (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != 'Integration'
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>DOB__c</errorDisplayField>
         <errorMessage>Please Enter DOB</errorMessage>
     </validationRules>
@@ -15257,7 +15244,9 @@ ISBLANK (DOB__c ),
 ISPICKVAL(PRIORVALUE(Status),'Referred'), 
 ISPICKVAL(PRIORVALUE(Status),'Inquiry')) 
 ) 
-)</errorConditionFormula>
+)
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>Please enter the child's date of birth in the DOB field before changing the status to "Eligibility Review"</errorMessage>
     </validationRules>
     <validationRules>
@@ -15276,7 +15265,9 @@ $Profile.Name = 'Program Staff')
 ISPICKVAL(PRIORVALUE(Status),'Referred'),
 ISPICKVAL(PRIORVALUE(Status),'Inquiry'))
 )
-)</errorConditionFormula>
+)
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>Part_A_Received__c</errorDisplayField>
         <errorMessage>Please enter the Diagnosis Verification Received Date before changing the status to "Eligibility Review"</errorMessage>
     </validationRules>
@@ -15284,7 +15275,9 @@ ISPICKVAL(PRIORVALUE(Status),'Inquiry'))
         <fullName>Lead_Diagnosis_Validation</fullName>
         <active>true</active>
         <description>Used to prevent wish child record when there is no Primary Diagnosis</description>
-        <errorConditionFormula>AND(ISBLANK(PD_Condition_Description__c), ISBLANK( PD_ICD_Code__c ),$Profile.Name != 'Integration', $Profile.Name != 'Wish Referral Form Profile' )</errorConditionFormula>
+        <errorConditionFormula>AND(ISBLANK(PD_Condition_Description__c), ISBLANK( PD_ICD_Code__c ),$Profile.Name != 'Integration', $Profile.Name != 'Wish Referral Form Profile' )
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>Please provide the ICD Code or Primary Diagnosis.</errorMessage>
     </validationRules>
     <validationRules>
@@ -15303,14 +15296,18 @@ ISPICKVAL(PRIORVALUE(Status),'Inquiry'))
 CONTAINS (UPPER(Any_medical_reason_for_moving_quickly__c), "YES")
 
 &amp;&amp;
-ISBLANK (Please_Explain__c )</errorConditionFormula>
+ISBLANK (Please_Explain__c )
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>Please explain the reason to expedite the process in the Please Explain Expedite field before changing the status to "Eligibility Review".</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Family_Referral_Validation</fullName>
         <active>true</active>
         <description>When lead is changed to Referred, is Family Aware of Referral is mandatory.</description>
-        <errorConditionFormula>Text(Status) == 'Referred' &amp;&amp;  Text(is_Family_Aware_of_Referral__c) == Null &amp;&amp;    (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name != 'Integration'</errorConditionFormula>
+        <errorConditionFormula>Text(Status) == 'Referred' &amp;&amp;  Text(is_Family_Aware_of_Referral__c) == Null &amp;&amp;    (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name != 'Integration'
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>is_Family_Aware_of_Referral__c</errorDisplayField>
         <errorMessage>Please fill the is Famil Aware of Referral field.</errorMessage>
     </validationRules>
@@ -15318,7 +15315,9 @@ ISBLANK (Please_Explain__c )</errorConditionFormula>
         <fullName>Lead_FirstName_Validation</fullName>
         <active>true</active>
         <description>Whenever lead is created/updated with Inquiry status,First Name is mandatory.</description>
-        <errorConditionFormula>FirstName == Null &amp;&amp; (Text(Status) == 'Inquiry') &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp;  $Profile.Name != 'Integration'</errorConditionFormula>
+        <errorConditionFormula>FirstName == Null &amp;&amp; (Text(Status) == 'Inquiry') &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp;  $Profile.Name != 'Integration'
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>FirstName</errorDisplayField>
         <errorMessage>Please Enter First Name</errorMessage>
     </validationRules>
@@ -15326,23 +15325,19 @@ ISBLANK (Please_Explain__c )</errorConditionFormula>
         <fullName>Lead_FirstName_Validation_Referred</fullName>
         <active>true</active>
         <description>Whenever lead is created/updated with Inquiry status,First Name is mandatory.</description>
-        <errorConditionFormula>FirstName == Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != 'Integration'</errorConditionFormula>
+        <errorConditionFormula>FirstName == Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != 'Integration'
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>FirstName</errorDisplayField>
         <errorMessage>Please Enter First Name</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Gender_Validation</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Referred status, Gender is mandatory</description>
-        <errorConditionFormula>Text(Gender__c)  == Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
-        <errorDisplayField>Gender__c</errorDisplayField>
-        <errorMessage>Please Enter Gender</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Hospital_or_Treartment_Validation</fullName>
         <active>true</active>
         <description>Whenever lead is created/updated with Referred status, Hospital or Treatment Facility is mandatory</description>
-        <errorConditionFormula>Hospital_Treatment_Facility_Treating__c == Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != 'Integration'</errorConditionFormula>
+        <errorConditionFormula>Hospital_Treatment_Facility_Treating__c == Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != 'Integration'
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>Hospital_Treatment_Facility_Treating__c</errorDisplayField>
         <errorMessage>Please Enter Hospital_Treatment_Facility</errorMessage>
     </validationRules>
@@ -15350,83 +15345,37 @@ ISBLANK (Please_Explain__c )</errorConditionFormula>
         <fullName>Lead_Inquiry_and_Birth_Date_Validation</fullName>
         <active>true</active>
         <description>This validation rule is used to prevent the date you have entered in the Inquiry Date field if the value is before the wish child birthday date.</description>
-        <errorConditionFormula>AND(Inquiry_Date__c &lt; DOB__c,$Profile.Name != 'Integration')</errorConditionFormula>
+        <errorConditionFormula>AND(Inquiry_Date__c &lt; DOB__c,$Profile.Name != 'Integration')
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>The inquiry date entered occurs before the wish child's date of birth. Please enter a valid inquiry date, or re-enter the wish child's birthdate.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Inquiry_and_Referr_Date_Validation</fullName>
         <active>true</active>
         <description>This validation rule is used to prevent the date you have entered in the Inquiry Date field if the value is after the referral date.</description>
-        <errorConditionFormula>AND(Inquiry_Date__c &gt; Referred_Date__c,$Profile.Name != 'Integration')</errorConditionFormula>
+        <errorConditionFormula>AND(Inquiry_Date__c &gt; Referred_Date__c,$Profile.Name != 'Integration')
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>The inquiry date must occur on or before the referral date. Please enter a valid inquiry date, or re-enter the date of referral.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Parent_FirstName_Validation</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Inquiry status,Parent First Name is mandatory.</description>
-        <errorConditionFormula>Parent_First_Name__c == Null &amp;&amp; (Text(Status) == 'Inquiry') &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
-        <errorDisplayField>Parent_First_Name__c</errorDisplayField>
-        <errorMessage>Please Enter Parent First Name</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Parent_FirstName_Validation_Referre</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Inquiry status,Parent First Name is mandatory.</description>
-        <errorConditionFormula>Parent_First_Name__c == Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
-        <errorDisplayField>Parent_First_Name__c</errorDisplayField>
-        <errorMessage>Please Enter Parent First Name</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Parent_LastName_Validation</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Inquiry status,Parent Last Name is mandatory.</description>
-        <errorConditionFormula>Parent_Last_Name__c == Null &amp;&amp; (Text(Status) == 'Inquiry') &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
-        <errorDisplayField>Parent_Last_Name__c</errorDisplayField>
-        <errorMessage>Please Enter Parent Last Name</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Parent_LastName_Validation_Referred</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Inquiry status,Parent Last Name is mandatory.</description>
-        <errorConditionFormula>Parent_Last_Name__c == Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp;  (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
-        <errorDisplayField>Parent_Last_Name__c</errorDisplayField>
-        <errorMessage>Please Enter Parent Last Name</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Phone_Number_Validation</fullName>
-        <active>false</active>
-        <description>Lead_Phone_Number_Validation</description>
-        <errorConditionFormula>(OR(NOT(REGEX(Medical_Professional_Phone__c,"(\\D?[0-9]{3}\\D?)[\\s][0-9]{3}-[0-9]{4}")),NOT(REGEX(Treating_Medical_Professional_Phone__c,"(\\D?[0-9]{3}\\D?)[\\s][0-9]{3}-[0-9]{4}")))) &amp;&amp;  Migrated_Record__c = false</errorConditionFormula>
-        <errorMessage>Phone numbers should be in this format: (999) 999-9999.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Physician_LastName_Validation</fullName>
         <active>true</active>
         <description>Whenever lead is created/updated with Referred status, Physician Lastname  is mandatory</description>
-        <errorConditionFormula>Treating_Medical_Professional_Last_Name__c == Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp;  (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != 'Integration'</errorConditionFormula>
+        <errorConditionFormula>Treating_Medical_Professional_Last_Name__c == Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp;  (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != 'Integration'
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>Treating_Medical_Professional_Last_Name__c</errorDisplayField>
         <errorMessage>Please Enter Treating Medical Professional Last Name</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Primary_Diagnosis_Validation</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Referred status, Primary Diagnosis is mandatory</description>
-        <errorConditionFormula>PD_Condition_Description__c == Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
-        <errorMessage>Please Enter Primary Diagnosis</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Primary_Phone_Validation</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Referred status, Primary Phone is mandatory</description>
-        <errorConditionFormula>Phone== Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp;  (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
-        <errorDisplayField>Phone</errorDisplayField>
-        <errorMessage>Please Enter Phone</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Qualified_Date_Validation</fullName>
         <active>true</active>
         <description>This validation rule is used to prevent the date you have entered in the Qualified Date field if the value is before the referral date.</description>
-        <errorConditionFormula>AND(Qualified_Date__c &lt;  Referred_Date__c,$Profile.Name != 'Integration')</errorConditionFormula>
+        <errorConditionFormula>AND(Qualified_Date__c &lt;  Referred_Date__c,$Profile.Name != 'Integration')
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>The qualified date cannot occur before the referral date. Please enter a valid qualified date, or re-enter the referral date.</errorMessage>
     </validationRules>
     <validationRules>
@@ -15441,107 +15390,35 @@ ISBLANK(TEXT(I_am_Recognized_To_Practice_As_a__c )),
 ISPICKVAL(PRIORVALUE(Status),'Referred'), 
 ISPICKVAL(PRIORVALUE(Status),'Inquiry')) 
 ) 
-)</errorConditionFormula>
+)
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>Please specify "I am recognized to practice as a" before changing the status to "Eligibility Review".</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Referral_Date_Validation</fullName>
         <active>true</active>
         <description>This validation rule is used to prevent the date you have entered in the Referred Date field if the value is before the inquiry date.</description>
-        <errorConditionFormula>AND(Referred_Date__c &lt; Inquiry_Date__c,$Profile.Name != 'Integration')</errorConditionFormula>
+        <errorConditionFormula>AND(Referred_Date__c &lt; Inquiry_Date__c,$Profile.Name != 'Integration')
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>The referral date must occur on or after the inquiry date. Please enter a valid referral date, or re-enter the inquiry date.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Referrer_City_Validation</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Inquiry status, Referrer City is mandatory.</description>
-        <errorConditionFormula>Referrer_City__c == Null &amp;&amp; Text(Status) == 'Inquiry' &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
-        <errorDisplayField>Referrer_City__c</errorDisplayField>
-        <errorMessage>Please Enter Referrer City</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Referrer_Diagnosis_Validation</fullName>
         <active>true</active>
         <description>Used to prevent wish child record when there is no Primary Diagnosis</description>
-        <errorConditionFormula>AND(ISBLANK(Diagnosis_Given_By_Referrer__c), ISBLANK( ICD_Given_By_Referrer__c),$Profile.Name != 'Integration', $Profile.Name != 'Wish Referral Form Profile' )</errorConditionFormula>
+        <errorConditionFormula>AND(ISBLANK(Diagnosis_Given_By_Referrer__c), ISBLANK( ICD_Given_By_Referrer__c),$Profile.Name != 'Integration', $Profile.Name != 'Wish Referral Form Profile' )
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>Please provide the ICD or Diagnosis given by referrer.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Referrer_Email_Validation</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Inquiry status, Referrer Email is mandatory.</description>
-        <errorConditionFormula>Referrer_Email__c == Null &amp;&amp; (Text(Status) == 'Inquiry') &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
-        <errorDisplayField>Referrer_Email__c</errorDisplayField>
-        <errorMessage>Please Enter Referrer Email</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Referrer_Email_Validation_Referred</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Inquiry status, Referrer Email is mandatory.</description>
-        <errorConditionFormula>Referrer_Email__c == Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp;  (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
-        <errorDisplayField>Referrer_Email__c</errorDisplayField>
-        <errorMessage>Please Enter Referrer Email</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Referrer_First_Name_Validation</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Inquiry status, Referrer First Name is mandatory.</description>
-        <errorConditionFormula>Referrer_FirstName__c == Null &amp;&amp; (Text(Status) == 'Inquiry') &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
-        <errorDisplayField>Referrer_FirstName__c</errorDisplayField>
-        <errorMessage>Please Enter Referrer FirstName</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Referrer_First_Name_Validation_Ref</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Inquiry status, Referrer First Name is mandatory.</description>
-        <errorConditionFormula>Referrer_FirstName__c == Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
-        <errorDisplayField>Referrer_FirstName__c</errorDisplayField>
-        <errorMessage>Please Enter Referrer FirstName</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Referrer_Last_Name_Validation</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Inquiry status, Referrer First Name is mandatory.</description>
-        <errorConditionFormula>Referrer_Last_Name__c == Null &amp;&amp; (Text(Status) == 'Inquiry') &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
-        <errorDisplayField>Referrer_Last_Name__c</errorDisplayField>
-        <errorMessage>Please Enter Referrer LastName</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Referrer_Last_Name_Validation_Ref</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Inquiry status, Referrer First Name is mandatory.</description>
-        <errorConditionFormula>Referrer_Last_Name__c == Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
-        <errorDisplayField>Referrer_Last_Name__c</errorDisplayField>
-        <errorMessage>Please Enter Referrer LastName</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Referrer_Phone_Validation</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Inquiry status, Referrer Phone is mandatory.</description>
-        <errorConditionFormula>Referrer_Phone__c == Null &amp;&amp; (Text(Status) == 'Inquiry') &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
-        <errorDisplayField>Referrer_Phone__c</errorDisplayField>
-        <errorMessage>Please Enter Referrer Phone</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Referrer_Phone_Validation_Ref</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Inquiry status, Referrer Phone is mandatory.</description>
-        <errorConditionFormula>Referrer_Phone__c == Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp;  (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
-        <errorDisplayField>Referrer_Phone__c</errorDisplayField>
-        <errorMessage>Please Enter Referrer Phone</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Lead_Referrer_PostalCode_Validation</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Inquiry status, Referrer City is mandatory.</description>
-        <errorConditionFormula>Referrer_Zip__c== Null &amp;&amp; Text(Status) == 'Inquiry' &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
-        <errorDisplayField>Referrer_Zip__c</errorDisplayField>
-        <errorMessage>Please Enter Referrer Zip</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Status_QualifiedOrEligib_Validation</fullName>
         <active>true</active>
-        <errorConditionFormula>AND(ISCHANGED(Status),AND(NOT(OR(ISPICKVAL(PRIORVALUE(Sub_Status__c),'Pending Diagnosis Verification'), ISPICKVAL(PRIORVALUE(Sub_Status__c), 'Pending Part A'),ISPICKVAL(PRIORVALUE(Sub_Status__c),'Pending Paper DV'))), NOT(ISPICKVAL(PRIORVALUE(Status), 'Eligibility Review')), ISPICKVAL(Status ,'Qualified'))) &amp;&amp; $Profile.Name != 'Integration' &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
+        <errorConditionFormula>AND(ISCHANGED(Status),AND(NOT(OR(ISPICKVAL(PRIORVALUE(Sub_Status__c),'Pending Diagnosis Verification'), ISPICKVAL(PRIORVALUE(Sub_Status__c), 'Pending Part A'),ISPICKVAL(PRIORVALUE(Sub_Status__c),'Pending Paper DV'))), NOT(ISPICKVAL(PRIORVALUE(Status), 'Eligibility Review')), ISPICKVAL(Status ,'Qualified'))) &amp;&amp; $Profile.Name != 'Integration' &amp;&amp; Migrated_Record__c == false
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>The status can be updated to Eligibility Review or Qualified only when the previous Sub Status is Pending Diagnosis Verification or Pending Part A or Pending Paper DV.</errorMessage>
     </validationRules>
     <validationRules>
@@ -15559,7 +15436,9 @@ CASE(Sub_Status__c,
 "Pending Part A",1,
 "Pending Paper DV",1,
 0)=0 
-)</errorConditionFormula>
+)
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>Status</errorDisplayField>
         <errorMessage>Only the National Medical Advisor can change the Lead Status when a Lead is in Eligibility Review. Please reach out to the National Medical Advisor through Chatter on the Lead if the Lead Status needs to change.</errorMessage>
     </validationRules>
@@ -15576,6 +15455,8 @@ ISPICKVAL(Status,'Inquiry'),
 ISPICKVAL(Status,'DNQ'),
 ISPICKVAL(Status,'Qualified')
 )
+&amp;&amp;
+RecordType.Name ="Wish Child"
 )</errorConditionFormula>
         <errorDisplayField>Status</errorDisplayField>
         <errorMessage>Only the National Medical Advisor can change the Lead Status when a Lead is in Eligibility Review. Please reach out to the National Medical Advisor through Chatter on the Lead if the Lead Status needs to change.</errorMessage>
@@ -15591,7 +15472,9 @@ ISPICKVAL(Status,'Qualified')
    ),
    ISPICKVAL(Sub_Status__c,''),
    $Profile.Name != 'Integration'
-)</errorConditionFormula>
+)
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>Sub_Status__c</errorDisplayField>
         <errorMessage>Please Enter Sub Status</errorMessage>
     </validationRules>
@@ -15599,14 +15482,18 @@ ISPICKVAL(Status,'Qualified')
         <fullName>Lead_Wish_Aware_Validation</fullName>
         <active>true</active>
         <description>It will thrown an error when the is Family Aware of Referral? filed value is not yes at the time of lead creation</description>
-        <errorConditionFormula>Text(is_Family_Aware_of_Referral__c) != 'Yes' &amp;&amp; Text(Status) == 'Inquiry' &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; $Profile.Name  != 'Integration'</errorConditionFormula>
+        <errorConditionFormula>Text(is_Family_Aware_of_Referral__c) != 'Yes' &amp;&amp; Text(Status) == 'Inquiry' &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; $Profile.Name  != 'Integration'
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>is_Family_Aware_of_Referral__c</errorDisplayField>
         <errorMessage>Please Enter is Family Aware of Referral? value as Yes</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_sub_Status_Validation</fullName>
         <active>true</active>
-        <errorConditionFormula>AND(ISNEW(), ISPICKVAL( Sub_Status__c , 'Pending Diagnosis Verification')) &amp;&amp; $Profile.Name  != 'Integration'</errorConditionFormula>
+        <errorConditionFormula>AND(ISNEW(), ISPICKVAL( Sub_Status__c , 'Pending Diagnosis Verification')) &amp;&amp; $Profile.Name  != 'Integration'
+&amp;&amp;
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>Sub_Status__c</errorDisplayField>
         <errorMessage>Please save the record before updating the sub status as Pending Diagnosis Verification.</errorMessage>
     </validationRules>
