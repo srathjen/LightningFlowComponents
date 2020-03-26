@@ -10,10 +10,43 @@ public with sharing class DocusignRecipientDomain extends trac_TriggerHandlerBas
     Map<Id, dsfs__DocuSign_Recipient_Status__c> oldMap = (Map<Id, dsfs__DocuSign_Recipient_Status__c>) oldRecordsMap;
 
     public override void handleAfterInsert() {
-        DocusignRecipient_OnAfterInsertHandler.OnAfterInsert(newList);
+        Set<Id> dsfsIdSet = new Set<Id>();
+        Map<String, String> nameMap = new Map<String, String>();
+        Set<Id> deliveredSet = new Set<Id>();
+        Map<Id, String> envelopMap = new Map<Id, String>();
+        List<dsfs__DocuSign_Recipient_Status__c> dsRecipientList = new List<dsfs__DocuSign_Recipient_Status__c>();
+        for (dsfs__DocuSign_Recipient_Status__c dsfs : newList) {
+            if (dsfs.dsfs__Parent_Status_Record__c != null) {
+                envelopMap.put(dsfs.dsfs__Parent_Status_Record__c, dsfs.Name);
+                dsRecipientList.add(dsfs);
+                if (dsfs.dsfs__Recipient_Status__c == Constant_AC.DOCUSIGN_RECIPIENT_STATUS_COMPLETED) {
+                    dsfsIdSet.add(dsfs.dsfs__Parent_Status_Record__c);
+                    nameMap.put(dsfs.Name, dsfs.dsfs__DocuSign_Recipient_Email__c);
+                } else if (dsfs.dsfs__Recipient_Status__c == Constant_AC.DOCUSIGN_RECIPIENT_STATUS_DELIVERED) {
+                    dsfsIdSet.add(dsfs.dsfs__Parent_Status_Record__c);
+                }
+            }
+        }
+        DocusignRecipientService.updateCompletedRecipient(dsfsIdSet, nameMap, newList);
+        DocusignRecipientService.updateStatusRecord(envelopMap, dsRecipientList);
     }
 
     public override void handleAfterUpdate() {
-        DocusignRecipient_OnAfterUpdateHandler.OnAfterUpdate(newMap, oldMap);
+        Set<String> completedNameString = new Set<String>();
+        Set<Id> completedIdSet = new Set<Id>();
+        Set<String> recipientstatusSet = new Set<String>();
+        List<dsfs__DocuSign_Recipient_Status__c> dsRecipientList = new List<dsfs__DocuSign_Recipient_Status__c>();
+        for (dsfs__DocuSign_Recipient_Status__c dsfs : newMap.values()) {
+            if (dsfs.dsfs__Parent_Status_Record__c != null
+                    && (dsfs.dsfs__Recipient_Status__c == Constant_AC.DOCUSIGN_RECIPIENT_STATUS_COMPLETED
+                    && (oldMap.get(dsfs.Id).dsfs__Recipient_Status__c == Constant_AC.DOCUSIGN_RECIPIENT_STATUS_DELIVERED || oldMap.get(dsfs.Id).dsfs__Recipient_Status__c == Constant_AC.DOCUSIGN_RECIPIENT_STATUS_SENT))) {
+                completedIdSet.add(dsfs.dsfs__Parent_Status_Record__c);
+                completedNameString.add(dsfs.Name);
+                recipientstatusSet.add(oldMap.get(dsfs.Id).dsfs__Recipient_Status__c);
+                dsRecipientList.add(dsfs);
+            }
+        }
+        DocusignRecipientService.updateRecipientName(completedIdSet, completedNameString, dsRecipientList);
+        DocusignRecipientService.updateAttachmentId(completedIdSet, dsRecipientList);
     }
 }
