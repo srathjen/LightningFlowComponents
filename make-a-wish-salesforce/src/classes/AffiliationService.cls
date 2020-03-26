@@ -364,6 +364,9 @@ public class AffiliationService {
      */
     @Future
     public static void removeMemberFromGroup(Set<String> volunteerNameSet, Set<String> chapterNameSet, Map<Id, String> exceptionMap) {
+        if (volunteerNameSet.isEmpty() || chapterNameSet.isEmpty()) {
+            return;
+        }
         try {
             Map<Id, String> groupNameMap = new Map<Id, String>();
             for (Account chapterName : [

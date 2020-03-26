@@ -51,9 +51,6 @@ public with sharing class AffiliationDomain extends trac_TriggerHandlerBase {
             chapterNameSet.add(currentRecord.npe5__Organization__c);
             affiliationRecMap.put(currentRecord.Id, String.valueOf(currentRecord));
         }
-
-        if (!volunteerNameSet.isEmpty() && !chapterNameSet.isEmpty()) {
-            AffiliationService.removeMemberFromGroup(volunteerNameSet, chapterNameSet, affiliationRecMap);
-        }
+        AffiliationService.removeMemberFromGroup(volunteerNameSet, chapterNameSet, affiliationRecMap);
     }
 }
