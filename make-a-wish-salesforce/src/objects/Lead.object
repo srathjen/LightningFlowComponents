@@ -15897,27 +15897,19 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
         <description>Lead Process for 'Default' Leads</description>
         <isActive>true</isActive>
         <values>
-            <fullName>Closed</fullName>
+            <fullName>Closed - Converted</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>DNQ</fullName>
+            <fullName>Closed - Not Converted</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Eligibility Review</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Inquiry</fullName>
+            <fullName>Open - Not Contacted</fullName>
             <default>true</default>
         </values>
         <values>
-            <fullName>Qualified</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Referred</fullName>
+            <fullName>Working - Contacted</fullName>
             <default>false</default>
         </values>
     </businessProcesses>

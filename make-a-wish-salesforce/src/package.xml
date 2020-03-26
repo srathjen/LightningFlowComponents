@@ -84,6 +84,7 @@
   <types>
     <members>Account_Record_Page</members>
     <members>Case_Wish_Lightning</members>
+    <members>Lead_Record_Page</members>
     <name>FlexiPage</name>
   </types>
   <types>
@@ -99,6 +100,8 @@
     <name>LightningComponentBundle</name>
   </types>
   <types>
+    <members>Lead_Default</members>
+    <members>Lead_Wish_Child</members>
     <members>Wish_Stages</members>
     <name>PathAssistant</name>
   </types>
