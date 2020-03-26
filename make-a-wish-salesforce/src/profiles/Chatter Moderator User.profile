@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
-=======
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Profile xmlns="http://soap.sforce.com/2006/04/metadata">
->>>>>>> SCC_142_Update_Active_Validation_Rules_and_Cleanup
     <applicationVisibilities>
         <application>CRMfusionDBR101__DupeBlocker</application>
         <default>false</default>
