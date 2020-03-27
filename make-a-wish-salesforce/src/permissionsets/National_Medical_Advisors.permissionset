@@ -86,7 +86,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
-    <label>National Medical Advisors</label>
+    <label>National Medical Affairs</label>
     <license>Salesforce</license>
     <objectPermissions>
         <allowCreate>true</allowCreate>
