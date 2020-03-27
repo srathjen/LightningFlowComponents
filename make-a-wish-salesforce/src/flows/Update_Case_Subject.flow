@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Sends and Email to salesforce@wish.org with content of error.</description>
+        <name>Send_Error_Email</name>
+        <label>Send Error Email</label>
+        <locationX>364</locationX>
+        <locationY>347</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>faultEmailBody</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <stringValue>salesforce@wish.org</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderAddress</name>
+            <value>
+                <stringValue>salesforce@wish.org</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>Flow Error in Update Case Subject</stringValue>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <assignments>
+        <description>Only used to generate a fault path from Update Wish Case</description>
+        <name>Clear_ID_field</name>
+        <label>Clear ID field</label>
+        <locationX>627</locationX>
+        <locationY>61</locationY>
+        <assignmentItems>
+            <assignToReference>contactID</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Update_Case_Subject</name>
+        <label>Update Case Subject</label>
+        <locationX>367</locationX>
+        <locationY>126</locationY>
+        <assignmentItems>
+            <assignToReference>Get_Wish_Case.Subject</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>caseSubjectAsFormula</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Wish_Casae</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Is_Contact_Wish_Child</name>
+        <label>Is Wish Case?</label>
+        <locationX>237</locationX>
+        <locationY>63</locationY>
+        <defaultConnector>
+            <targetReference>Clear_ID_field</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>isWishCase</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Wish_Case.RecordType.Name</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Wish</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Case_Subject</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <description>Updates the Wish Case record&apos;s subject. Is called from Process Builder on Contact and needs to be sent the Contact record&apos;s id.</description>
+    <formulas>
+        <name>caseSubjectAsFormula</name>
+        <dataType>String</dataType>
+        <expression>{!Get_Wish_Case.Contact.FirstName} + &apos; &apos; + {!Get_Wish_Case.Contact.LastName} + &apos; - &apos; + {!Get_Wish_Case.Unique_Wish_Record_Identifier__c}</expression>
+    </formulas>
+    <interviewLabel>Update Case Subject {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Update Case Subject</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Retrieves the Wish Child&apos;s Wish Case Record based on the Contact ID.</description>
+        <name>Get_Wish_Case</name>
+        <label>Get Wish Case</label>
+        <locationX>142</locationX>
+        <locationY>61</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Is_Contact_Wish_Child</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Send_Error_Email</targetReference>
+        </faultConnector>
+        <filters>
+            <field>ContactId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>contactID</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Unique_Wish_Record_Identifier__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Case</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Wish_Casae</name>
+        <label>Update Wish Casae</label>
+        <locationX>499</locationX>
+        <locationY>126</locationY>
+        <connector>
+            <targetReference>Clear_ID_field</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Send_Error_Email</targetReference>
+        </faultConnector>
+        <inputReference>Get_Wish_Case</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>22</locationX>
+        <locationY>61</locationY>
+        <connector>
+            <targetReference>Get_Wish_Case</targetReference>
+        </connector>
+    </start>
+    <status>Draft</status>
+    <textTemplates>
+        <name>faultEmailBody</name>
+        <text>&lt;p&gt;Error: {!$Flow.FaultMessage}&lt;/p&gt;&lt;p&gt;At {!$Flow.CurrentDateTime}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;ID of Contact: {!contactID}&lt;/p&gt;</text>
+    </textTemplates>
+    <variables>
+        <description>To receive the ID of the Wish Child&apos;s contact record.</description>
+        <name>contactID</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>
