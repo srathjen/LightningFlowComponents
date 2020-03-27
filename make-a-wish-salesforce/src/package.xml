@@ -133,6 +133,7 @@
     <members>Manage_List_Views</members>
     <members>Manage_Reports_and_Dashboard_Folders</members>
     <members>Medical_Diagnosis_Objects_Read_Permission</members>
+    <members>National_Medical_Advisors</members>
     <members>Program_Supervisor</members>
     <members>RapidApproval_App_Visibility</members>
     <members>Reporting</members>
