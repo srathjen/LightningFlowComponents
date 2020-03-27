@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <article>None</article>
@@ -30,7 +30,7 @@
         <name>npsp__Automatically_Update_Child_Task_Due_Date__c</name>
     </fields>
     <fields>
-        <help>כאשר השדה &apos;הוקצה ל-&apos; של משימת תוכנית מעורבות נשאר ריק, למי יש להפנות את המשימה?</help>
+        <help>כאשר השדה 'הוקצה ל-' של משימת תוכנית מעורבות נשאר ריק, למי יש להפנות את המשימה?</help>
         <label><!-- Default Assignee --></label>
         <name>npsp__Default_Assignee__c</name>
         <picklistValues>
@@ -47,7 +47,7 @@
         <name>npsp__Description__c</name>
     </fields>
     <fields>
-        <help>האם משימות שתאריך היעד שלהן בסוף השבוע צריכות להיות מתוזמנות ליום שישי שלפני סוף השבוע, או ליום שני שאחריו? אפשרות זו תקפה רק אם האפשרות &apos;דלג על סופי שבוע&apos; מסומנת.</help>
+        <help>האם משימות שתאריך היעד שלהן בסוף השבוע צריכות להיות מתוזמנות ליום שישי שלפני סוף השבוע, או ליום שני שאחריו? אפשרות זו תקפה רק אם האפשרות 'דלג על סופי שבוע' מסומנת.</help>
         <label><!-- Reschedule To --></label>
         <name>npsp__Reschedule_To__c</name>
         <picklistValues>
@@ -73,13 +73,7 @@
         <name>npsp__Total_Tasks__c</name>
     </fields>
     <gender><!-- Masculine --></gender>
-    <layouts>
-        <layout>Engagement Plan Template Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel><!-- Engagement Plan Template Name --></nameFieldLabel>
     <webLinks>
         <label><!-- Manage_Template --></label>

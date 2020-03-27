@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- MedicalRelationships --></label>
@@ -341,21 +341,7 @@
             <translation><!-- Tribute --></translation>
         </picklistValues>
     </fields>
-    <layouts>
-        <layout>Relationship Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Medical Contact Details --></label>
-            <section>Medical Contact Details</section>
-        </sections>
-        <sections>
-            <label><!-- Relationship Information --></label>
-            <section>Relationship Information</section>
-        </sections>
-    </layouts>
+    
     <layouts>
         <layout>Relationship Layout - Volunteer</layout>
         <sections>

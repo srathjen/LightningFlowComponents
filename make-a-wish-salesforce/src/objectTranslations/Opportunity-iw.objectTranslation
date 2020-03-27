@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- BDE Entry FS v2 --></label>
@@ -54,7 +54,7 @@
         <name>npe01__Is_Opp_From_Individual__c</name>
     </fields>
     <fields>
-        <help>קובעת את הערך של איש הקשר או החשבון בשדה &apos;רמת חברות אחרונה&apos;.</help>
+        <help>קובעת את הערך של איש הקשר או החשבון בשדה 'רמת חברות אחרונה'.</help>
         <label><!-- Member Level --></label>
         <name>npe01__Member_Level__c</name>
         <picklistValues>
@@ -369,7 +369,7 @@
         <name>npsp__Qualified_Date__c</name>
     </fields>
     <fields>
-        <help>שם תשלום להכללה במתן השם להזדמנות. מציג את מספר התשלום במירכאות עבור תרומות חוזרות עם סיום פתוח, או את מספר התשלום מתוך הסה&quot;כ עבור תרומות חוזרות שהוגדר עבורן מספר תשלומים.</help>
+        <help>שם תשלום להכללה במתן השם להזדמנות. מציג את מספר התשלום במירכאות עבור תרומות חוזרות עם סיום פתוח, או את מספר התשלום מתוך הסה"כ עבור תרומות חוזרות שהוגדר עבורן מספר תשלומים.</help>
         <label><!-- Recurring Donation Installment Name --></label>
         <name>npsp__Recurring_Donation_Installment_Name__c</name>
     </fields>
@@ -396,96 +396,12 @@
             <translation>זיכרון</translation>
         </picklistValues>
     </fields>
-    <layouts>
-        <layout>Donation Layout</layout>
-        <sections>
-            <label>פרטי תרומה</label>
-            <section>Donation Information</section>
-        </sections>
-        <sections>
-            <label><!-- Matching Gift Information --></label>
-            <section>Matching Gift Information</section>
-        </sections>
-        <sections>
-            <label>פרטי תשלום</label>
-            <section>Payment Information</section>
-        </sections>
-        <sections>
-            <label><!-- Tribute Information --></label>
-            <section>Tribute Information</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Grant Layout</layout>
-        <sections>
-            <label>פרטי תרומה</label>
-            <section>Donation Information</section>
-        </sections>
-        <sections>
-            <label>פרטי מענק</label>
-            <section>Grant Information</section>
-        </sections>
-        <sections>
-            <label>פרטי תשלום</label>
-            <section>Payment Information</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>In-Kind Gift Layout</layout>
-        <sections>
-            <label>פרטי תרומה</label>
-            <section>Donation Information</section>
-        </sections>
-        <sections>
-            <label>פרטי שווה-ערך</label>
-            <section>In-Kind Information</section>
-        </sections>
-        <sections>
-            <label>פרטי הוקרה</label>
-            <section>Tribute Information</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Major Gift Layout</layout>
-        <sections>
-            <label>פרטי תרומה</label>
-            <section>Donation Information</section>
-        </sections>
-        <sections>
-            <label>פרטי תרומה גדולה</label>
-            <section>Major Gift Information</section>
-        </sections>
-        <sections>
-            <label>פרטי תשלום</label>
-            <section>Payment Information</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Matching Gift Layout</layout>
-        <sections>
-            <label>פרטי תרומה</label>
-            <section>Donation Information</section>
-        </sections>
-        <sections>
-            <label>פרטי תשלום</label>
-            <section>Payment Information</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Membership Layout</layout>
-        <sections>
-            <label>שדות</label>
-            <section>Fields</section>
-        </sections>
-        <sections>
-            <label>פרטי חבר</label>
-            <section>Member Information</section>
-        </sections>
-        <sections>
-            <label>פרטי תשלום</label>
-            <section>Payment Information</section>
-        </sections>
-    </layouts>
+    
+    
+    
+    
+    
+    
     <recordTypes>
         <description><!-- Donation Received --></description>
         <label><!-- Donation --></label>

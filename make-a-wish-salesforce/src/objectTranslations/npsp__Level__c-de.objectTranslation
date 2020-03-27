@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <caseType>Nominative</caseType>
@@ -99,17 +99,7 @@
         </picklistValues>
     </fields>
     <gender>Feminine</gender>
-    <layouts>
-        <layout>Level Layout</layout>
-        <sections>
-            <label>Benutzerdefinierte Links</label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label>Abschnitt für langen Text</label>
-            <section>long text section</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel> Name der Ebene</nameFieldLabel>
     <validationRules>
         <errorMessage><!-- Target is a required field on Level.  Please specify the Target object for this Level. --></errorMessage>

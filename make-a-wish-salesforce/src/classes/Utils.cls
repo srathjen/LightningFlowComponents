@@ -20,8 +20,7 @@ public class Utils {
         get {
             if (currentUser == null) {
                 currentUser = [
-                        SELECT
-                                Id, Name, Chapter_Name__c,
+                        SELECT  Id, Name, Chapter_Name__c,
                                 UserRole.Name,
                                 Profile.Id, Profile.Name, ContactId,
                                 Contact.Account.Volunteer_Manager__c, Contact.OwnerId

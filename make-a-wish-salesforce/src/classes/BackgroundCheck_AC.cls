@@ -6,7 +6,7 @@ Description : This controller referred in the BackgroundCheck_Vf page. Volunteer
 verification.When Volunteer submits Background check, It will create Background check record as well
 as Background check task for the chatper staff.
 *******************************************************************************************************************/
-public class BackgroundCheck_AC{
+public class BackgroundCheck_AC {
     
     public Contact con{get;set;}
     public Background_check__c backGroundCheck{get;set;}
@@ -21,95 +21,72 @@ public class BackgroundCheck_AC{
     public Boolean trainingTabVisible{get;set;}
     public String areYouinUS7Yrs{get;set;}
     
-    public BackgroundCheck_AC()
-    {
-        List<string> LstLog = new List<string>();
-        string Logvalue;
-        // try
-        // {
-        currUser=  [SELECT Id,ContactId,contact.account.volunteer_manager__c,Contact.OwnerId FROM User WHERE Id =: userInfo.getUserId() Limit 1];
-        LstLog.add(string.valueOf(currUser));
-        //  sysAdmin = [SELECT Id,Name,Email FROM User WHERE Email =: 'furqan@mstsolutions.com' Limit 1];
+    public BackgroundCheck_AC() {
+        currUser = Utils.currentUser;
         backGroundCheck = new Background_check__c();
-        existingBGCheckRecList = [SELECT Id,Resided_in_US_for_past_7_years__c FROM Background_check__c WHERE VOLUNTEER__c = :currUser.contactId order by CreatedDate DESC];
-        if(existingBGCheckRecList.size() > 0) {
+        existingBGCheckRecList = [SELECT Id, Resided_in_US_for_past_7_years__c 
+                                  FROM Background_check__c 
+                                  WHERE VOLUNTEER__c = :currUser.ContactId 
+                                  ORDER BY CreatedDate DESC];
+        if(!existingBGCheckRecList.isEmpty()) {
             isBGFinished = true;
             residingInPast7Years = existingBGCheckRecList[0].Resided_in_US_for_past_7_years__c;
-            LstLog.add(string.valueOf(residingInPast7Years));
         }
-
         Id nationalRT = Constant_AC.NATIONAL_RT_ID;
-        List<Dynamic_Content__c> currContent = [SELECT Id, Why_Need_Background_Check__c FROM Dynamic_Content__c 
-                                                WHERE RecordTypeId = :nationalRT AND Active__c = TRUE LIMIT 1];
-        System.debug('currContent+++++++++++++++++++++++++++ ' + currContent);
-        LstLog.add(string.valueOf(currContent));
-        if(currContent.size() > 0)
-            whyNeedBGCheck =currContent[0].Why_Need_Background_Check__c;
-        // Based on the parameter value, It would display Background tab.
-        if(ApexPages.currentPage().getParameters().get('bgRequired') != Null)
+        List<Dynamic_Content__c> currContent = [SELECT Id, Why_Need_Background_Check__c 
+                                                FROM Dynamic_Content__c 
+                                                WHERE RecordTypeId = :nationalRT 
+                                                AND Active__c = true];
+        if(!currContent.isEmpty())
+            whyNeedBGCheck = currContent[0].Why_Need_Background_Check__c;
+        if(ApexPages.currentPage().getParameters().get('bgRequired') != null)
             bgTabPermission = Boolean.valueOf(ApexPages.currentPage().getParameters().get('bgRequired'));     
-        if(ApexPages.currentPage().getParameters().get('trainingRequired') != Null)
-            trainingTabVisible = Boolean.valueOf(ApexPages.currentPage().getParameters().get('trainingRequired'));
-        /*  }
-catch(Exception ex)      
-{
-Logvalue = string.join(LstLog,', ');
-new ApexDebugLog().createLog(new ApexDebugLog.Error('BackgroundCheck_AC','BackgroundCheck_AC',con.Id,ex,Logvalue));
-ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-ApexPages.addMessage(myMsg);
-}*/
-        
+        if(ApexPages.currentPage().getParameters().get('trainingRequired') != null)
+            trainingTabVisible = Boolean.valueOf(ApexPages.currentPage().getParameters().get('trainingRequired'));   
     }
     
-    //This method used to create backgroundcheck and task record under the current logged in user contact
-    public PageReference saveRec()
-    {
+    /**
+    * Create background check for logged in volunteer and task for volunteer manager
+    * @return
+    */
+    public PageReference saveRec() {
         List<string> LstLog = new List<string>();
-        String Logvalue;
-        String recId;
-        try
-       {
-            backGroundCheck.Date_Requested__c = system.today();
+        try {
+            backGroundCheck.Date_Requested__c = System.today();
             backGroundCheck.Volunteer__c = currUser.ContactId; 
-            //  backGroundCheck.Requested_By__c = sysAdmin.Id;
             backGroundCheck.Resided_in_US_for_past_7_years__c = areYouinUS7Yrs;
-            backGroundCheck.OwnerId = currUser.contact.OwnerId;
-            if(backGroundCheck.Resided_in_US_for_past_7_years__c == Null) {
-                ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL,'Please select a value for: Have you resided in the US for the past 7 years?'));
-            }
-            else{
+            backGroundCheck.OwnerId = currUser.Contact.OwnerId;
+            if(backGroundCheck.Resided_in_US_for_past_7_years__c == null) {
+                ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL, 'Please select a value for: Have you resided in the US for the past 7 years?'));
+            } else {
                 statusValue = true;
-                if(backGroundCheck.id <> NULL)
-                    backGroundCheck.id = NULL;
+                if(backGroundCheck.Id != null) {
+                    backGroundCheck.Id = null;
+                }
                 LstLog.add(string.valueOf(backGroundCheck));
                 insert backGroundCheck;
-
+                
                 taskRecordTypeId = Constant_AC.BACKGROUND_RT_ID;
-              //  If(backGroundCheck.Resided_in_US_for_past_7_years__c != 'Yes'){
-                    Task newBGTask = new Task();
-                    newBGTask.Type = 'Email';
-                    newBGTask.Description = ''; 
-                    if(currUser.contact.account != Null)
-                    {
-                        if(currUser.contact.account.volunteer_manager__c != Null)
-                            newBGTask.OwnerId = currUser.contact.account.volunteer_manager__c;
-                    }
-                    else
-                        newBGTask.OwnerId = currUser.Contact.OwnerId;
-                    
-                    newBGTask.WhoId = currUser.ContactId; 
-                    newBGTask.whatId = backGroundCheck.id;
-                    newBGTask.Subject = 'Background Check';
-                    newBGTask.SystemGeneratedTask__c = true;
-                    newBGTask.RecordTypeId = taskRecordTypeId;
-                    LstLog.add(string.valueOf(newBGTask));
-                    if(!Test.isRunningTest())
-                        insert newBGTask;
-               // }
+                Task newBGTask = new Task();
+                newBGTask.Type = Constant_AC.TASK_TYPE_EMAIL;
+                newBGTask.Description = ''; 
+                if(currUser.Contact.Account != null 
+                   && currUser.Contact.Account.Volunteer_Manager__c != null) {
+                    newBGTask.OwnerId = currUser.Contact.Account.Volunteer_Manager__c;
+                } else {
+                    newBGTask.OwnerId = currUser.Contact.OwnerId;
+                }
+                newBGTask.WhoId = currUser.ContactId; 
+                newBGTask.WhatId = backGroundCheck.Id;
+                newBGTask.Subject = Constant_AC.TASK_SUBJECT_BACKGROUND_CHECK;
+                newBGTask.SystemGeneratedTask__c = true;
+                newBGTask.RecordTypeId = taskRecordTypeId;
+                LstLog.add(string.valueOf(newBGTask));
+                insert newBGTask;
+                
                 Contact updateContact = new Contact();
-                updateContact.id = currUser.contactId;
-                updateContact.Onboarding_Status__c = 'Background Check';
-                recId = updateContact.id;
+                updateContact.Id = currUser.ContactId;
+                updateContact.Onboarding_Status__c = Constant_AC.CONTACT_ONBOARDING_STATUS_BACKGROUND_CHECK;
                 LstLog.add(string.valueOf(updateContact));
                 update updateContact;
                 
@@ -119,49 +96,30 @@ ApexPages.addMessage(myMsg);
                 pageRef.setRedirect(true);
                 return pageRef;
             }
-            if(Test.isRunningTest()){
-                throw new CommonTriggerException('Test Class execution');
-            }
             return null;
-       }
-        catch(Exception ex)      
-        {
-            Logvalue = string.join(LstLog,', ');
-            system.debug(''+ex.getMessage());
-            if(!Test.isRunningTest()){
-                new ApexDebugLog().createLog(new ApexDebugLog.Error('BackgroundCheck_AC','saveRec',con.Id,ex,Logvalue));
+        } catch(Exception ex) {
+            String Logvalue = string.join(LstLog,', ');
+            if(!Test.isRunningTest()) {
+                new ApexDebugLog().createLog(new ApexDebugLog.Error('BackgroundCheck_AC', 'saveRec', con.Id, ex, Logvalue));
             }
-            
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
             ApexPages.addMessage(myMsg);
             return null;
         }
     }
-    
-    public List<SelectOption> getResidedValues(){
-        String Logvalue;
-        String recId;
-        //  try
-        //{
+        
+    /**
+    * Returns list of picklist values for Resided_in_US_for_past_7_years__c
+    * @return
+    */
+    public List<SelectOption> getResidedValues() {
         List<SelectOption> options = new List<SelectOption>();
         Schema.DescribeFieldResult fieldResult =  BackGround_Check__c.Resided_in_US_for_past_7_years__c.getDescribe();
         List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
         options.add(new SelectOption('', 'Select')); 
-        for( Schema.PicklistEntry currVal : picklistValues)
-        {      options.add(new SelectOption(currVal.getLabel(), currVal.getValue())); 
-         
+        for(Schema.PicklistEntry currVal : picklistValues) {      
+            options.add(new SelectOption(currVal.getLabel(), currVal.getValue())); 
         }
-        Logvalue = string.valueof(options);  
         return options;
-        /*  }
-catch(Exception ex)      
-{
-// Logvalue = string.join(LstLog,', ');
-new ApexDebugLog().createLog(new ApexDebugLog.Error('BackgroundCheck_AC','getResidedValues',con.Id,ex,Logvalue));
-ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-ApexPages.addMessage(myMsg);
-return null;
-}*/
     }   
-    
 }

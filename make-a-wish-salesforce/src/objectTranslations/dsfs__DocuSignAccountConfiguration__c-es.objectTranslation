@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -367,12 +367,6 @@
         <name>dsfs__UseSendOnBehalfOf__c</name>
     </fields>
     <gender>Feminine</gender>
-    <layouts>
-        <layout>DocuSignAccountConfiguration Layout</layout>
-        <sections>
-            <label>Vínculos personalizados</label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel>Configuración de cuenta de DocuSign</nameFieldLabel>
 </CustomObjectTranslation>
