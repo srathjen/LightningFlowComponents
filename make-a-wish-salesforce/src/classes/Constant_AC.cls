@@ -139,6 +139,8 @@ public class Constant_AC {
 	public static final String LEAD_ERROR_BEST = 'Best Physician Contact';
 	public static final String LEAD_ERROR_MEDICAL_PROFESSIONAL = 'Medical Professional';
 	public static final String LEAD_ERROR_WISH_FAMILY_AND_MEDICAL_PROFESSIONAL = 'Wish Family and Medical Professional';
+	public static final String LEAD_RFI_FORM_INFO_QUALIFIED = 'Qualified';
+	public static final String LEAD_RFI_FORM_INFO_NOT_QUALIFIED = 'NotQualified';
 
 	/**
 	 * Case Constants
@@ -290,6 +292,18 @@ public class Constant_AC {
 	public static final String DOCUSIGN_SUBJECT_DIAGNOSIS_VERIFICATION_FORM = 'Diagnosis Verification Form';
 	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_LIABILITY = 'Signature Required - Liability And Publicity Release Form';
 	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_WISH_FORM_AND_LIABILITY = 'Signature Required - Wish Form & Liability And Publicity Release Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_ABSENT_PARENT_LIABILITY = 'Signature Required - Absent Parent Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_SINGLE_PARENT_LIABILITY = 'Signature Required - Single Parent Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_COMBO_FAMILY_LIABILITY = 'Signature Required - Combo Family Form & Liability/Publicity Release Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_CHILD_MEDICAL_FORM = 'Signature Required – Make-A-Wish Child\'s Medical Summary Form:';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_RUSH_CHILD_MEDICAL_FORM = 'Signature Required – Make-A-Wish Rush Child\'s Medical Summary Form:';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_WISH_CLEARANCE_FORM = 'Signature Required – Make-A-Wish Wish Clearance Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_RUSH_WISH_CLEARANCE_FORM = 'Signature Required – Make-A-Wish Rush Wish Clearance Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_WISH_CLEARANCE_NO_TRAVEL_FORM = 'Signature Required – Make-A-Wish Wish Clearance No Travel Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_RUSH_WISH_CLEARANCE_NO_TRAVEL_FORM = 'Signature Required – Make-A-Wish Rush Wish Clearance No Travel Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_WISH_CLEARANCE_CHILD_MEDICAL_FORM = 'Signature Required – Make-A-Wish Wish Clearance, Child\'s Medical Summary:';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_RUSH_WISH_CLEARANCE_CHILD_MEDICAL_FORM = 'Signature Required – Make-A-Wish Rush Wish Clearance, Child\'s Medical Summary:';
+	public static final String DOCUSIGN_STATUS_ENVELOPE_STATUS_SENT = 'Sent';
 
 	/**
 	 * Docusign Recipient Constants
@@ -323,6 +337,7 @@ public class Constant_AC {
 	public static final String WISH_REQUIRED_SIGNATURE_STATUS_SIGNED = 'Signed';
 	public static final String WISH_REQUIRED_SIGNATURE_STATUS_VOIDED = 'Voided';
 	public static final String WISH_REQUIRED_SIGNATURE_STATUS_SENT = 'Sent';
+	public static final String WISH_REQUIRED_SIGNATURE_FORMAT_ESIGNATURE = 'E-Signature';
 
 	/**
 	 * Task Constants
