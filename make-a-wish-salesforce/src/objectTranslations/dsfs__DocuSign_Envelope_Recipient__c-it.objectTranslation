@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -152,7 +152,7 @@
         <name>dsfs__RoleName__c</name>
     </fields>
     <fields>
-        <help>VALORE ASSOCIATO AL RUOLO DEL DESTINATARIO DOCUSIGN. QUESTO VALORE VIENE UTILIZZATO PER L&apos;ASSOCIAZIONE CON I TAG DI ANCORAGGIO PREDEFINITI NEI DOCUMENTI.</help>
+        <help>VALORE ASSOCIATO AL RUOLO DEL DESTINATARIO DOCUSIGN. QUESTO VALORE VIENE UTILIZZATO PER L'ASSOCIAZIONE CON I TAG DI ANCORAGGIO PREDEFINITI NEI DOCUMENTI.</help>
         <label><!-- RoleValue --></label>
         <name>dsfs__RoleValue__c</name>
     </fields>
@@ -204,13 +204,7 @@
         <name>dsfs__Validation_Message__c</name>
     </fields>
     <gender><!-- Masculine --></gender>
-    <layouts>
-        <layout>DocuSign Envelope Recipient Layout</layout>
-        <sections>
-            <label>Collegamento personalizzati</label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel><!-- DocuSign Envelope Recipient Name --></nameFieldLabel>
     <startsWith><!-- Consonant --></startsWith>
 </CustomObjectTranslation>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- Diagnosis Verfication Fieldset --></label>
@@ -28,18 +28,7 @@
         <label><!-- BDE List FS --></label>
         <name>npsp__BDE_List_FS</name>
     </fieldSets>
-    <fields>
-        <caseValues>
-            <plural>false</plural>
-            <value>Inquiry/Referral Method</value>
-        </caseValues>
-        <caseValues>
-            <plural>true</plural>
-            <value>Inquiry/Referral Methods</value>
-        </caseValues>
-        <name>lead_source</name>
-        <startsWith>Consonant</startsWith>
-    </fields>
+    
     <fields>
         <label><!-- Additional Parent/Guardian City --></label>
         <name>Additional_Parent_City__c</name>
@@ -1163,7 +1152,7 @@
         <label><!-- How Did you hear about Make-A-Wish? --></label>
         <name>How_Did_you_hear_about_Make_A_Wish__c</name>
         <picklistValues>
-            <masterLabel>Brochure at the Doctor&apos;s Office</masterLabel>
+            <masterLabel>Brochure at the Doctor's Office</masterLabel>
             <translation><!-- Brochure at the Doctor&apos;s Office --></translation>
         </picklistValues>
         <picklistValues>

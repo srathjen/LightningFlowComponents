@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- BDE Entry FS --></label>
@@ -3076,7 +3076,7 @@ provide contact information for each site on which you are active. --></help>
         <label><!-- How Did you hear about Make-A-Wish? --></label>
         <name>Wish_How_Did_you_hear_about_Make_A_Wish__c</name>
         <picklistValues>
-            <masterLabel>Brochure at the doctor&apos;s office</masterLabel>
+            <masterLabel>Brochure at the doctor's office</masterLabel>
             <translation><!-- Brochure at the doctor&apos;s office --></translation>
         </picklistValues>
         <picklistValues>
@@ -3319,12 +3319,12 @@ provide contact information for each site on which you are active. --></help>
         <name>npe01__Lifetime_Giving_History_Amount__c</name>
     </fields>
     <fields>
-        <help>נוסחה: לפי סדר העדפות, השדה SYSTEM_AccountType, השדה &apos;סוג חשבון&apos; ו&apos;ארגון&apos;.</help>
+        <help>נוסחה: לפי סדר העדפות, השדה SYSTEM_AccountType, השדה 'סוג חשבון' ו'ארגון'.</help>
         <label><!-- Organization Type --></label>
         <name>npe01__Organization_Type__c</name>
     </fields>
     <fields>
-        <help>נוסחה: אם סוג הכתובת הראשית הוא &apos;אחר&apos;, הכתובת למשלוח דואר.  אם סוג הכתובת המשנית הוא &apos;אחר&apos;, הכתובת האחרת.</help>
+        <help>נוסחה: אם סוג הכתובת הראשית הוא 'אחר', הכתובת למשלוח דואר.  אם סוג הכתובת המשנית הוא 'אחר', הכתובת האחרת.</help>
         <label><!-- Other Address --></label>
         <name>npe01__Other_Address__c</name>
     </fields>
@@ -3384,7 +3384,7 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <help>מניעת הכללה של איש קשר זה בעיבוד חשבון &apos;אחד לאחד&apos; או Bucket.</help>
+        <help>מניעת הכללה של איש קשר זה בעיבוד חשבון 'אחד לאחד' או Bucket.</help>
         <label><!-- Private --></label>
         <name>npe01__Private__c</name>
     </fields>
@@ -3406,7 +3406,7 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <help>מציין איזה מודל קובע את ההתנהגות של קשרי חשבונות: אישי (Bucket) או &apos;אחד לאחד&apos;</help>
+        <help>מציין איזה מודל קובע את ההתנהגות של קשרי חשבונות: אישי (Bucket) או 'אחד לאחד'</help>
         <label><!-- DEPRECATED - _SYSTEM: ACCOUNT PROCESSOR --></label>
         <name>npe01__SystemAccountProcessor__c</name>
         <picklistValues>
@@ -3424,7 +3424,7 @@ provide contact information for each site on which you are active. --></help>
         <name>npe01__SystemIsIndividual__c</name>
     </fields>
     <fields>
-        <help>נוסחה: &apos;אישי&apos; או &apos;ארגוני&apos; בהתאם להגדרת החשבון.</help>
+        <help>נוסחה: 'אישי' או 'ארגוני' בהתאם להגדרת החשבון.</help>
         <label><!-- Type of Account --></label>
         <name>npe01__Type_of_Account__c</name>
     </fields>
@@ -3439,7 +3439,7 @@ provide contact information for each site on which you are active. --></help>
         <name>npe01__WorkPhone__c</name>
     </fields>
     <fields>
-        <help>נוסחה: אם סוג הכתובת הראשית הוא &apos;עבודה&apos;, הכתובת למשלוח דואר.  אם סוג הכתובת המשנית הוא &apos;עבודה&apos;, הכתובת האחרת.</help>
+        <help>נוסחה: אם סוג הכתובת הראשית הוא 'עבודה', הכתובת למשלוח דואר.  אם סוג הכתובת המשנית הוא 'עבודה', הכתובת האחרת.</help>
         <label><!-- Work Address --></label>
         <name>npe01__Work_Address__c</name>
     </fields>
@@ -3634,7 +3634,7 @@ provide contact information for each site on which you are active. --></help>
         <name>npo02__Total_Household_Gifts__c</name>
     </fields>
     <fields>
-        <help>אם כתובת זו מחייבת אימות, לחץ על &apos;אמת כתובת&apos; בראש דף הכתובת. עיין במסמכי העזרה ב-Power of Us Hub לקבלת מידע נוסף.</help>
+        <help>אם כתובת זו מחייבת אימות, לחץ על 'אמת כתובת' בראש דף הכתובת. עיין במסמכי העזרה ב-Power of Us Hub לקבלת מידע נוסף.</help>
         <label><!-- Address Verification Status --></label>
         <name>npsp__Address_Verification_Status__c</name>
     </fields>
@@ -3799,41 +3799,7 @@ provide contact information for each site on which you are active. --></help>
             <section>Volunteer Details</section>
         </sections>
     </layouts>
-    <layouts>
-        <layout>Contact Layout</layout>
-        <sections>
-            <label>פרטי איש קשר</label>
-            <section>Contact Details</section>
-        </sections>
-        <sections>
-            <label>פרטי תרומה</label>
-            <section>Donation Information</section>
-        </sections>
-        <sections>
-            <label>סכומי תרומה כוללים</label>
-            <section>Donation Totals</section>
-        </sections>
-        <sections>
-            <label>כתובת משק הבית</label>
-            <section>Household Address</section>
-        </sections>
-        <sections>
-            <label>פרטי תרומת משק הבית</label>
-            <section>Household Donation Info</section>
-        </sections>
-        <sections>
-            <label>פרטי חברות</label>
-            <section>Membership Information</section>
-        </sections>
-        <sections>
-            <label>שונות</label>
-            <section>Misc</section>
-        </sections>
-        <sections>
-            <label><!-- Soft Credit Total --></label>
-            <section>Soft Credit Total</section>
-        </sections>
-    </layouts>
+    
     <layouts>
         <layout>Medical Professional</layout>
         <sections>
@@ -3953,11 +3919,11 @@ provide contact information for each site on which you are active. --></help>
         </sections>
         <sections>
             <label><!-- Wish Child&apos;s Favorites --></label>
-            <section>Wish Child&apos;s Favorites</section>
+            <section>Wish Child's Favorites</section>
         </sections>
         <sections>
             <label><!-- Wish Child&apos;s Other Favorites --></label>
-            <section>Wish Child&apos;s Other Favorites</section>
+            <section>Wish Child's Other Favorites</section>
         </sections>
     </layouts>
     <layouts>

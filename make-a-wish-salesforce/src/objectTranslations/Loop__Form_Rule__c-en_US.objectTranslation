@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <label><!-- Actions --></label>
@@ -17,11 +17,5 @@
         <name>Loop__DDP__c</name>
         <relationshipLabel><!-- Form Rules --></relationshipLabel>
     </fields>
-    <layouts>
-        <layout>Form Action Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
 </CustomObjectTranslation>

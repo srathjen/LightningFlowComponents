@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -110,12 +110,6 @@
             <translation>その他</translation>
         </picklistValues>
     </fields>
-    <layouts>
-        <layout>Engagement Plan Task Layout</layout>
-        <sections>
-            <label>カスタムリンク</label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel>件名</nameFieldLabel>
 </CustomObjectTranslation>

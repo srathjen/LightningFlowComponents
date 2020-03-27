@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <label><!-- Advanced Filter Conditions --></label>
@@ -50,15 +50,5 @@
         <name>Loop__Text_Snippet__c</name>
         <relationshipLabel><!-- Component Groups --></relationshipLabel>
     </fields>
-    <layouts>
-        <layout>Component Group Component Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Filter Info --></label>
-            <section>Filter Info</section>
-        </sections>
-    </layouts>
+    
 </CustomObjectTranslation>

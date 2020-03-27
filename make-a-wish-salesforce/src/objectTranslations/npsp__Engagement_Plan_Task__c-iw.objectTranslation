@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <article>None</article>
@@ -21,7 +21,7 @@
         <value><!-- הEngagement Plan Task --></value>
     </caseValues>
     <fields>
-        <help>שדה זה ממפה אל השדה &apos;הוקצה ל-&apos; של המשימה. אם הוא ריק, המשימה תוקצה לפי כלל ההקצאה הריקה של התבנית.</help>
+        <help>שדה זה ממפה אל השדה 'הוקצה ל-' של המשימה. אם הוא ריק, המשימה תוקצה לפי כלל ההקצאה הריקה של התבנית.</help>
         <label><!-- Assigned To --></label>
         <name>npsp__Assigned_To__c</name>
         <relationshipLabel><!-- Engagement Plan Tasks --></relationshipLabel>
@@ -76,12 +76,12 @@
         <name>npsp__Reminder__c</name>
     </fields>
     <fields>
-        <help>אפשרות זו קובעת אם דואר אלקטרוני יישלח אל המשתמש הרשום בשדה &apos;הוקצה ל-&apos; של המשימה, כאשר המשימה תהפוך לפעילה. משימות תלויות הופכות לפעילות כאשר משימת האב שלהם מושלמת.</help>
+        <help>אפשרות זו קובעת אם דואר אלקטרוני יישלח אל המשתמש הרשום בשדה 'הוקצה ל-' של המשימה, כאשר המשימה תהפוך לפעילה. משימות תלויות הופכות לפעילות כאשר משימת האב שלהם מושלמת.</help>
         <label><!-- Send Email --></label>
         <name>npsp__Send_Email__c</name>
     </fields>
     <fields>
-        <help>מצב המשימה. משימות תלויות נמצאות במצב &apos;המתנה למשימת אב&apos; עד להשלמת משימת האב שלהן.</help>
+        <help>מצב המשימה. משימות תלויות נמצאות במצב 'המתנה למשימת אב' עד להשלמת משימת האב שלהן.</help>
         <label><!-- Status --></label>
         <name>npsp__Status__c</name>
         <picklistValues>
@@ -127,12 +127,6 @@
         </picklistValues>
     </fields>
     <gender><!-- Masculine --></gender>
-    <layouts>
-        <layout>Engagement Plan Task Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel><!-- Subject --></nameFieldLabel>
 </CustomObjectTranslation>
