@@ -17,6 +17,7 @@ global class batch_leadChildAge implements Database.Batchable<SObject> {
 				WHERE Status = :Constant_AC.LEAD_STATUS_INQUIRY
 				AND Age_Requirement_Met__c = FALSE
 				AND Child_Age__c = :Constant_AC.LEAD_CHILD_AGE_UNDER_2_5
+				AND RecordTypeId = :Constant_AC.LEAD_RT_WISH_CHILD
 		]);
 	}
 
