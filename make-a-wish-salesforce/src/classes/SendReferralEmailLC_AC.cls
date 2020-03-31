@@ -12,16 +12,7 @@ public without sharing class SendReferralEmailLC_AC {
 	 */
 	@AuraEnabled
 	public static Lead getLeadInformation(String leadId) {
-		Lead processLead = [
-				SELECT
-						Id,
-						ChapterName__c,
-						Is_Chapter_Active__c
-				FROM Lead
-				WHERE Id = :leadId
-				AND RecordTypeId = :Constant_AC.LEAD_RT_WISH_CHILD
-		];
-		return processLead;
+		return getWishChildLeadInformationById(leadId);
 	}
 
 	/*
@@ -33,18 +24,7 @@ public without sharing class SendReferralEmailLC_AC {
 	 */
 	@AuraEnabled
 	public static List<Office__c> getOfficeViaChapter(String chapterId) {
-		List<Office__c> officeList = [
-				SELECT
-						Id,
-						Name,
-						Referral_Email_Address__c,
-						Chapter__r.Onboarded_on_SF__c,
-						Chapter__c
-				FROM Office__c
-				WHERE Chapter__c = :chapterId
-				LIMIT 50000
-		];
-		return officeList;
+		return getOfficeInformationByChapterId(chapterId);
 	}
 
 	/*
@@ -56,7 +36,7 @@ public without sharing class SendReferralEmailLC_AC {
 	 */
 	@AuraEnabled
 	public static List<Office__c> getOfficeViaLead(String leadId) {
-		Lead processLead = getLeadInformation(leadId);
+		Lead processLead = getWishChildLeadInformationById(leadId);
 		return SendReferralEmailLC_AC.getOfficeViaChapter(processLead.ChapterName__c);
 	}
 
@@ -71,19 +51,37 @@ public without sharing class SendReferralEmailLC_AC {
 	 */
 	@AuraEnabled
 	public static String triggerEmail(String leadId, String emailId) {
-		Lead processLead = [
-				SELECT
-						Id,
+		Lead processLead = getWishChildLeadInformationById(leadId);
+		Lead updateLead = new Lead(Id = processLead.Id);
+		updateLead.Office_Referral_Email__c = emailId;
+		updateLead.Hidden_Trigger_Referral_Email__c = !processLead.Hidden_Trigger_Referral_Email__c;
+		update updateLead;
+		return 'success';
+	}
+
+	private static Lead getWishChildLeadInformationById(Id leadId) {
+		return [
+				SELECT Id,
+						ChapterName__c,
+						Is_Chapter_Active__c,
 						Office_Referral_Email__c,
 						Hidden_Trigger_Referral_Email__c
 				FROM Lead
 				WHERE Id = :leadId
 				AND RecordTypeId = :Constant_AC.LEAD_RT_WISH_CHILD
 		];
-		Lead updateLead = new Lead(Id = processLead.Id);
-		updateLead.Office_Referral_Email__c = emailId;
-		updateLead.Hidden_Trigger_Referral_Email__c = !processLead.Hidden_Trigger_Referral_Email__c;
-		update updateLead;
-		return 'success';
+	}
+
+	private static List<Office__c> getOfficeInformationByChapterId(Id chapterId) {
+		return [
+				SELECT
+						Id,
+						Name,
+						Referral_Email_Address__c,
+						Chapter__r.Onboarded_on_SF__c,
+						Chapter__c
+				FROM Office__c
+				WHERE Chapter__c = :chapterId
+		];
 	}
 }
