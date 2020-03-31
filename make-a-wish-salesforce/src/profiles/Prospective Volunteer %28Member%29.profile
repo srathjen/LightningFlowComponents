@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+﻿<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <applicationVisibilities>
         <application>CRMfusionDBR101__DupeBlocker</application>
         <default>false</default>
@@ -84,11 +83,6 @@
         <application>dsfs__DocuSign_For_Salesforce</application>
         <default>false</default>
         <visible>false</visible>
-    </applicationVisibilities>
-    <applicationVisibilities>
-        <application>leadconvertchtr__Lead_Convert_Chatter</application>
-        <default>false</default>
-        <visible>true</visible>
     </applicationVisibilities>
     <applicationVisibilities>
         <application>npsp__Nonprofit_CRM</application>
@@ -265,34 +259,13 @@
         <apexClass>BackGroundCheck_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>BackGroundCheck_OnAfterInsertHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>BackGroundCheck_OnAfterInsertHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>BackGroundCheck_OnAfterUpdateHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>BackGroundCheck_OnAfterUpdateHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>BackGroundCheck_OnBeforeInsertHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>BackGroundCheck_OnBeforeInsertHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>BackGroundCheck_OnBeforeUpdateHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>BackgroundCheck_AC</apexClass>
         <enabled>false</enabled>
@@ -392,30 +365,12 @@
         <apexClass>Broadcast_OnBeforeUpdateTriggerHandler</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>COI_OnAfterInsertTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>COI_OnAfterInsertTriggerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>COI_OnAfterUpdateTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>COI_OnBeforeInsertTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>COI_OnBeforeInsertTriggerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>COI_OnBeforeUpdateTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>CaseCommentTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
@@ -1686,15 +1641,9 @@
         <apexClass>Wish_ExpenseDomain</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>WrapperDocuSign</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
     
-    <classAccesses>
-        <apexClass>batch_BGCExpReminderSchedule_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
     <classAccesses>
         <apexClass>batch_BGCExpReminder_AC</apexClass>
         <enabled>false</enabled>
@@ -1711,10 +1660,7 @@
         <apexClass>batch_BUpdateAffiliation_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>batch_COIExpReminderSchedule_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>batch_COIExpReminder_AC</apexClass>
         <enabled>false</enabled>
@@ -1731,10 +1677,7 @@
         <apexClass>batch_CaseTeamMemberUpdateTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>batch_CheckBGCheckExpirationSchedule_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>batch_CheckBGCheckExpiration_AC_Test</apexClass>
         <enabled>false</enabled>
@@ -1743,10 +1686,7 @@
         <apexClass>batch_CheckBackGroundCheckExpiration_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>batch_CheckCOIExpirationSchedule_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>batch_CheckCOIExpiration_AC</apexClass>
         <enabled>false</enabled>
@@ -1855,14 +1795,8 @@
         <apexClass>trac_TriggerHandlerBase</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>wifAttachment_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>wifAttachment_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
     <classAccesses>
         <apexClass>wishBudgetsController</apexClass>
         <enabled>false</enabled>
@@ -2123,10 +2057,6 @@
     <customSettingAccesses>
         <enabled>true</enabled>
         <name>fpro__FieldPro_IncludeFields__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>leadconvertchtr__LeadConvertChatter__c</name>
     </customSettingAccesses>
     <customSettingAccesses>
         <enabled>true</enabled>
@@ -26876,7 +26806,15 @@
         <layout>InkindDon_reimburseFile__c-In Kind Donation %26 Reimbursement File Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Lead-Lead Layout</layout>
+        <layout>Lead-Wish Child Lead Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Lead-Wish Child Lead Layout</layout>
+        <recordType>Lead.Default</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Lead-Wish Child Lead Layout</layout>
+        <recordType>Lead.Wish_Child</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Lead_File__c-Lead File Layout</layout>
@@ -28399,6 +28337,16 @@
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>false</default>
+        <recordType>Lead.Default</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Lead.Wish_Child</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
         <recordType>Loop__DDP_Integration_Option__c.Loop__Attach</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
@@ -29120,10 +29068,6 @@
     <tabVisibilities>
         <tab>fpro__FieldPro</tab>
         <visibility>Hidden</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
-        <tab>leadconvertchtr__Chatter_Lead_Convert_Setup</tab>
-        <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
         <tab>npe01__Contact_Merge</tab>

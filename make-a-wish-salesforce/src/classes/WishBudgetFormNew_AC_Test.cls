@@ -16,7 +16,7 @@ public with sharing class WishBudgetFormNew_AC_Test {
 		Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
 		Contact wishFamily = OrientationandTrainingUtil.CreateWishFamilyForRelationship();
 		insert new List<Contact>{
-				wishChild, wishFamily
+			wishChild, wishFamily
 		};
 
 		Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
@@ -55,13 +55,13 @@ public with sharing class WishBudgetFormNew_AC_Test {
 		ApexPages.StandardController sc = new ApexPages.StandardController(expenseList[0]);
 		WishBudgetFormNew_AC wishBudget = new WishBudgetFormNew_AC(sc);
 		wishBudget.DeptDiv = '10,20,30';
-		wishBudget.getWishExpenceTypes();
+		wishBudget.getWishExpenseTypes();
 		wishBudget.getDeptDivisions();
 		wishBudget.getAccountDescs();
 		wishBudget.showDeptDiv();
 		wishBudget.closePopup();
 		wishBudget.closePopup1();
-		wishBudget.ReloadPage();
+		wishBudget.reloadPage();
 
 		List<Wish_Expense_Transaction_Code__c> transactionCodes = wishBudget.transactionCodes;
 		List<Wish_Expense_Type_Tempate__c> ExpenseTypeTempList = wishBudget.ExpenseTypeTempList;
@@ -114,17 +114,17 @@ This methos is used to cover the unit test and incease the code coverage for add
 		insert newExpenseTypeTem;
 
 		wishBudget.TransCodesWrap.put('Airfare', new List<Wish_Expense_Transaction_Code__c>{
-				currtransactionCode
+			currtransactionCode
 		});
 		wishBudget.newExpenseType = wishExpenseType.Id;
 		wishBudget.addExpenseType();
-		wishBudget.getWishExpenceTypes();
+		wishBudget.getWishExpenseTypes();
 		wishBudget.getDeptDivisions();
 		wishBudget.getAccountDescs();
 		wishBudget.getUserListForApproval();
 		wishBudget.submitForApproval();
-		wishBudget.SaveExpenses();
-		wishBudget.ReloadPage();
+		wishBudget.saveExpenses();
+		wishBudget.reloadPage();
 // wishBudget.removeExpense();
 		wishBudget.closePopup();
 		wishBudget.closePopup1();
@@ -167,14 +167,14 @@ This methos is used to cover the unit test and incease the code coverage for add
 		insert currtransactionCode;
 
 		wishBudget.TransCodesWrap.put('Airfare', new List<Wish_Expense_Transaction_Code__c>{
-				currtransactionCode
+			currtransactionCode
 		});
 		Wish_Expense__c expenseData = new Wish_Expense__c();
 		expenseData.Wish_Expense_Transaction_Code__c = currtransactionCode.Id;
 		expenseData.Budget_Cash__c = 10;
 		expenseData.Budget_In_Kind__c = 20;
 		wishBudget.wishExpensewrap.put('Airfare', new List<Wish_Expense__c>{
-				expenseData
+			expenseData
 		});
 		wishBudget.expenseType = 'Airfare';
 		wishBudget.addExpense();
@@ -183,7 +183,7 @@ This methos is used to cover the unit test and incease the code coverage for add
 		wishBudget.TransCodesWrap.put(wishBudget.expenseType, null);
 		wishBudget.addExpense();
 		wishBudget.TransCodesWrap.put('Airfare', new List<Wish_Expense_Transaction_Code__c>{
-				currtransactionCode
+			currtransactionCode
 		});
 		wishBudget.newExpenseType = 'Airfare';
 		wishBudget.addExpenseType();
@@ -222,14 +222,14 @@ This methos is used to cover the unit test and incease the code coverage for sub
 		insert currtransactionCode;
 
 		wishBudget.TransCodesWrap.put('Airfare', new List<Wish_Expense_Transaction_Code__c>{
-				currtransactionCode
+			currtransactionCode
 		});
 		Wish_Expense__c expenseData = new Wish_Expense__c();
 		expenseData.Wish_Expense_Transaction_Code__c = currtransactionCode.Id;
 		expenseData.Budget_Cash__c = 10;
 		expenseData.Budget_In_Kind__c = 20;
 		wishBudget.wishExpensewrap.put('Airfare', new List<Wish_Expense__c>{
-				expenseData
+			expenseData
 		});
 		wishBudget.expenseType = 'Airfare';
 //User userInfo=OrientationandTrainingUtil.createrSystemAdminUser();
@@ -297,9 +297,9 @@ This methos is used to cover the unit test and incease the code coverage for loa
 		insert currtransactionCode;
 
 		wishBudget.TransCodesWrap.put('Airfare', new List<Wish_Expense_Transaction_Code__c>{
-				currtransactionCode
+			currtransactionCode
 		});
-		wishBudget.LoadTemplates();
+		wishBudget.loadTemplates();
 		Test.stopTest();
 		System.assertEquals(wishBudget.CaseId, parentCase.Id, 'Budget form does not equal to wish');
 		System.assert(wishBudget.CaseId == parentCase.Id, 'Budget form does not equal to wish');
@@ -333,17 +333,17 @@ This methos is used to cover the unit test and incease the code coverage for sav
 		insert currtransactionCode;
 
 		wishBudget.TransCodesWrap.put('Airfare', new List<Wish_Expense_Transaction_Code__c>{
-				currtransactionCode
+			currtransactionCode
 		});
 		Wish_Expense__c expenseData = new Wish_Expense__c();
 		expenseData.Wish_Expense_Transaction_Code__c = currtransactionCode.id;
 		expenseData.Budget_Cash__c = expenseData.Projected_Cash__c = 10;
 		expenseData.Budget_In_Kind__c = expenseData.Projected_In_Kind__c = 20;
 		wishBudget.wishExpensewrap.put('Airfare', new List<Wish_Expense__c>{
-				expenseData
+			expenseData
 		});
 		wishBudget.expenseType = 'Airfare';
-		wishBudget.SaveExpenses();
+		wishBudget.saveExpenses();
 		Test.stopTest();
 		System.assertEquals(wishBudget.expenseType, 'Airfare', 'Wish expese type is mismatched');
 		System.assert(expenseData.Budget_Cash__c != 20, 'Expense data is mismatched');
@@ -369,7 +369,7 @@ This methos is used to cover the unit test and incease the code coverage for rem
 		req.setObjectId(budgetList[0].Id);
 		req.setSkipEntryCriteria(true);
 		req.setNextApproverIds(new Id[]{
-				UserInfo.getUserId()
+			UserInfo.getUserId()
 		});
 		Approval.ProcessResult result = Approval.process(req);
 		Approval.UnlockResult urList = Approval.Unlock(budgetList[0].Id, false);
@@ -389,20 +389,20 @@ This methos is used to cover the unit test and incease the code coverage for rem
 		Wish_Expense_Transaction_Code__c currtransactionCode = OrientationandTrainingUtil.CreateWishExpenseTransactionCodeRecord(wishExpenseType.Id);
 		insert currtransactionCode;
 		wishBudget.TransCodesWrap.put('Airfare', new List<Wish_Expense_Transaction_Code__c>{
-				currtransactionCode
+			currtransactionCode
 		});
 		Wish_Expense__c expenseData = new Wish_Expense__c();
 		expenseData.Wish_Expense_Transaction_Code__c = currtransactionCode.Id;
 		expenseData.Budget_Cash__c = expenseData.Budget_In_Kind__c
-				= expenseData.Projected_Cash__c = expenseData.Projected_In_Kind__c
-						= expenseData.Actual_Cash__c = expenseData.Actual_In_Kind__c
-								= expenseData.FE_Posted_Cash__c = expenseData.FE_Posted_In_Kind__c
-										= null;
+			= expenseData.Projected_Cash__c = expenseData.Projected_In_Kind__c
+				= expenseData.Actual_Cash__c = expenseData.Actual_In_Kind__c
+					= expenseData.FE_Posted_Cash__c = expenseData.FE_Posted_In_Kind__c
+						= null;
 		wishBudget.wishExpensewrap.put('Airfare', new List<Wish_Expense__c>{
-				expenseData
+			expenseData
 		});
 		wishBudget.expenseList = wishBudget.wishExpensewrap.get('Airfare');
-		wishBudget.Totalsummary();
+		wishBudget.totalSummary();
 		wishBudget.removeExpense();
 		Test.stopTest();
 		System.assert(currtransactionCode.Wish_Expense_Type__c == wishExpenseType.Id, 'Wish Expense Type is mismatched in Wish Expense Transaction Code');

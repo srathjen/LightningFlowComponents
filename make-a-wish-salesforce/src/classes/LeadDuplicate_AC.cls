@@ -486,6 +486,7 @@ public class LeadDuplicate_AC {
 						SELECT Id
 						FROM Lead
 						WHERE Id IN :allContacts
+						AND RecordTypeId = :Constant_AC.LEAD_RT_WISH_CHILD
 						FOR UPDATE
 				];
 				if (lock == null || lock.size() != allContacts.size()) {
@@ -524,6 +525,7 @@ public class LeadDuplicate_AC {
 									ChapterName__r.Name, ChapterName__c
 							FROM Lead
 							WHERE Id = :master.Id
+							AND RecordTypeId = :Constant_AC.LEAD_RT_WISH_CHILD
 					];
 					// Checking duplicates again.
 					List<Lead> duplicateLeadList = LeadService.findLeadDuplicatesWithChapter(
@@ -666,7 +668,7 @@ public class LeadDuplicate_AC {
 				// Adding some non-updateable system fields which we need to add to the record diff table.
 				query += 'createdby.name, createddate, LastModifiedBy.name, LastModifiedDate';
 				// Finally completing the query by appending the table name and the filter clause
-				query += ' from Lead where id IN :mergeCandidates';
+				query += ' from Lead where id IN :mergeCandidates and RecordTypeId = :Constant_AC.LEAD_RT_WISH_CHILD';
 				List<Lead> leads;
 				try {
 					leads = Database.query(query); // Query the records
@@ -896,6 +898,7 @@ public class LeadDuplicate_AC {
 						Treating_Medical_Professional_Email__c
 				FROM Lead
 				WHERE Id = :leadId
+				AND RecordTypeId = :Constant_AC.LEAD_RT_WISH_CHILD
 		];
 	}
 
