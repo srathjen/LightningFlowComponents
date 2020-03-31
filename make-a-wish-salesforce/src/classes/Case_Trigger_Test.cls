@@ -36,7 +36,7 @@ private class Case_Trigger_Test {
 				wish.ChapterName__c
 		}, Constant_AC.WISH_RT_ID);
 
-		Case_OnAfterInsertTriggerHandlerHelper.CaseTeamInTakeManager(new Map<Id, Case>{
+		Case_OnAfterInsertTriggerHandlerHelper.caseTeamInTakeManager(new Map<Id, Case>{
 				wish.Id => wish
 		});
 

@@ -7,11 +7,12 @@ Modification Log:
 23/03/2018 - Sankar - WVC-1835
 *******************************************************************************************************************/
 public class Case_OnBeforeInsertTriggerHandler {
-
-	/******************************************************************************************************************
-	This method is called when ever a new case record is created then the value is assigned to the corresponding
-	fields in case record.
-	******************************************************************************************************************/
+	/*
+     * @description		OnBeforeInsert trigger handler for the Case object
+     *
+     * @author 			MST Solutions
+     * @createdDate		2018-03-23
+     */
 	public static void OnBeforeInsert(List<Case> beforeInsertCaseList) {
 		Id wishRecordTypeId = Constant_AC.WISH_RT_ID;
 		Set<Id> wishOwnerIdSet = new Set<Id>();
@@ -37,11 +38,11 @@ public class Case_OnBeforeInsertTriggerHandler {
 
 		if (wishOwnerIdSet.size() > 0) {
 			for (User wishOwner : [
-					SELECT Id,ManagerId,Manager.Name,Manager.Email
-					FROM User
-					WHERE Id IN:wishOwnerIdSet
-					AND ManagerId != NULL
-					LIMIT 50000
+				SELECT Id,ManagerId,Manager.Name,Manager.Email
+				FROM User
+				WHERE Id IN:wishOwnerIdSet
+				AND ManagerId != NULL
+				LIMIT 50000
 			]) {
 				wishOwnerMap.put(wishOwner.Id, wishOwner);
 			}
@@ -55,13 +56,5 @@ public class Case_OnBeforeInsertTriggerHandler {
 				}
 			}
 		}
-		/**
-		 * JIRA: WLP-286
-		 * Author: Gustavo Mayer
-		 * Update: Method is called but does not do anything, is this an existing bug?
-		 */
-//		if (caseMap.size() > 0) {
-//			Case_OnBeforeInsertTriggerHandlerHelper.updateCaseDevEmail(caseMap, wishRecordTypeId);
-//		}
 	}
 }
