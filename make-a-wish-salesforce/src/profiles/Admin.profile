@@ -1905,10 +1905,6 @@
     </customSettingAccesses>
     <customSettingAccesses>
         <enabled>true</enabled>
-        <name>leadconvertchtr__LeadConvertChatter__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
         <name>npe01__Contacts_And_Orgs_Settings__c</name>
     </customSettingAccesses>
     <customSettingAccesses>
@@ -2573,11 +2569,6 @@
     </applicationVisibilities>
     <applicationVisibilities>
         <application>dsfs__DocuSign_For_Salesforce</application>
-        <default>false</default>
-        <visible>true</visible>
-    </applicationVisibilities>
-    <applicationVisibilities>
-        <application>leadconvertchtr__Lead_Convert_Chatter</application>
         <default>false</default>
         <visible>true</visible>
     </applicationVisibilities>
@@ -30839,10 +30830,6 @@
     </tabVisibilities>
     <tabVisibilities>
         <tab>fpro__FieldPro</tab>
-        <visibility>DefaultOn</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
-        <tab>leadconvertchtr__Chatter_Lead_Convert_Setup</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
