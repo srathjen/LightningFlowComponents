@@ -3,7 +3,7 @@
     <actionCalls>
         <name>Wish_Vision_PDF</name>
         <label>Wish Vision PDF</label>
-        <locationX>661</locationX>
+        <locationX>660</locationX>
         <locationY>883</locationY>
         <actionName>Loop__RunDocGenAsync</actionName>
         <actionType>apex</actionType>
