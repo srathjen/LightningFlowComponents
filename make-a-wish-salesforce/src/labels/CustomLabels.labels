@@ -49,6 +49,76 @@
         <value>Cancel</value>
     </labels>
     <labels>
+        <fullName>CaseTrigger_Add_County</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CaseTrigger_Add_County</shortDescription>
+        <value>Please add county on the wish child&apos;s contact record.</value>
+    </labels>
+    <labels>
+        <fullName>CaseTrigger_Add_Region</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CaseTrigger_Add_Region</shortDescription>
+        <value>Please add region on the wish child&apos;s contact record.</value>
+    </labels>
+    <labels>
+        <fullName>CaseTrigger_Add_Region_County</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CaseTrigger_Add_Region_County</shortDescription>
+        <value>Please add region and county on the wish child&apos;s contact record.</value>
+    </labels>
+    <labels>
+        <fullName>CaseTrigger_Air_Travel_Aware</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CaseTrigger_Air_Travel_Aware</shortDescription>
+        <value>I am fully aware of the medical research regarding air travel and feel it is appropriate for this child. I will make any necessary adjustments to the medical treatment plan prior to their travel dates.</value>
+    </labels>
+    <labels>
+        <fullName>CaseTrigger_Budget_Posted_Match</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CaseTrigger_Budget_Posted_Match</shortDescription>
+        <value>The Wish Budget Actual and FE Posted total values should match.</value>
+    </labels>
+    <labels>
+        <fullName>CaseTrigger_Enter_Received_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CaseTrigger_Enter_Received_Date</shortDescription>
+        <value>Please enter the received date for the following forms:</value>
+    </labels>
+    <labels>
+        <fullName>CaseTrigger_Enter_Wish_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CaseTrigger_Enter_Wish_Type</shortDescription>
+        <value>Please enter a value for Wish Type</value>
+    </labels>
+    <labels>
+        <fullName>CaseTrigger_Permission_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CaseTrigger_Permission_Error</shortDescription>
+        <value>You do not have permission to edit this record.</value>
+    </labels>
+    <labels>
+        <fullName>CaseTrigger_Permission_Error_Abandoned</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CaseTrigger_Permission_Error_Abandoned</shortDescription>
+        <value>You do not have permission to update the granted case as abandoned.</value>
+    </labels>
+    <labels>
+        <fullName>CaseTrigger_Provide_Values</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CaseTrigger_Provide_Values</shortDescription>
+        <value>Please provide values for the following fields:</value>
+    </labels>
+    <labels>
         <fullName>Celebritywish</fullName>
         <categories>Docusign Template</categories>
         <language>en_US</language>
