@@ -68,7 +68,6 @@ public class Case_OnAfterUpdateTriggerHandler {
 		Set<String> newWishTypeSet = new Set<String>();
 		Set<String> updatedApprovedLeadInfoSet = new Set<String>();
 		Set<String> updatedDnqLeadInfoSet = new Set<String>();
-		Map<Id, Case> UpdateAllOpenTasks = new Map<Id, Case>();
 		Set<Id> caseTeamMemberParentIdSet = new Set<Id>();
 		Set<Id> revokingContactIdSet = new Set<Id>();
 		Set<Id> presentationCloseTaskIdsSet = new Set<Id>();
@@ -79,7 +78,6 @@ public class Case_OnAfterUpdateTriggerHandler {
 		Map<Id, Case> wishClearanceMap = new Map<Id, Case>();
 		Map<Id, String> approvedBudgetStatus = new Map<Id, String>();
 		Set<Id> wishIds = new Set<Id>();
-		Map<Id, Case> updateWishChildInfo = new Map<Id, Case>();
 		List<Case> PartAWishList = new List<Case>();
 		Map<Id, Case> removeAnticipationTaskMap = new Map<Id, Case>();
 		Map<Id, Case> updateAnticipationTaskMap = new Map<Id, Case>();
@@ -403,9 +401,13 @@ public class Case_OnAfterUpdateTriggerHandler {
 		if (caseTeamMemberParentIdSet.size() > 0 && revokingContactIdSet.size() > 0) {
 			Case_OnAfterUpdateTriggerHandlerHelper.revokeWishPermissionForVolunteers(caseTeamMemberParentIdSet, revokingContactIdSet);
 		}
-		if (PartAWishList.size() > 0) {
-			Case_OnAfterUpdateTriggerHandlerHelper.updateLeadStatus(PartAWishList);
-		}
+		/*
+         * SCC-75:	Case_OnAfterUpdateTriggerHandlerHelper.updateLeadStatus(List<Case> caseList) is found to do nothing.
+         * Chris Shinnimin, Traction on Demand
+        if (PartAWishList.size() > 0) {
+            Case_OnAfterUpdateTriggerHandlerHelper.updateLeadStatus(PartAWishList);
+        }
+        */
 		if (wishIds.size() > 0) {
 			Case_OnAfterUpdateTriggerHandlerHelper.grantedWishCount(wishIds);
 		}

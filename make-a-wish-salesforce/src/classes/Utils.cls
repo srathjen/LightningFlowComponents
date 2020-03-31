@@ -156,4 +156,30 @@ public class Utils {
 	public static List<Schema.FieldSetMember> getPartAFields() {
 		return SObjectType.Lead.FieldSets.Diagnosis_Verfication_Fieldset.getFields();
 	}
+
+	/*
+     * @description 		Create a Map of sObject labels by Schema.SObjectFields.
+     *
+     * @param               Schema.DescribeSObjectResult describe: the sObject type
+     *
+     * @return              Map<Schema.SObjectField,String>
+     *
+     * @author				Chris Shinnimin, Traction on Demand
+     * @date				2020-03-30
+    */
+	public static Map<Schema.SObjectField,String> mapOfSObjectLabelsByFields(Schema.DescribeSObjectResult describe) {
+		Map<Schema.SObjectField,String> mapOfSObjectLabelsByFields = new Map<Schema.SObjectField,String>();
+
+		Map<String, Schema.SObjectType> schemaMap = Schema.getGlobalDescribe();
+		Schema.SObjectType leadSchema = schemaMap.get(describe.Name);
+		Map<String, Schema.SObjectField> fieldMap = leadSchema.getDescribe().fields.getMap();
+
+		List<Schema.SObjectField> allFields = (describe.fields.getMap()).values();
+
+		for (Schema.SObjectField field : allFields) {
+			mapOfSObjectLabelsByFields.put(field, fieldMap.get(String.valueOf(field)).getDescribe().getLabel());
+		}
+
+		return mapOfSObjectLabelsByFields;
+	}
 }

@@ -9,39 +9,11 @@ public class Case_OnAfterUpdateTriggerHandlerHelper {
     private static final Id WISH_VOLUNTEER_OPPORTUNITY_RECORDTYPE_ID = Constant_AC.WISH_VOLUNTEER_OPPORTUNITY_ID;
     private static final Id CHAPTER_RECORDTYPE_ID = Constant_AC.CHAPTER_RT_ID;
 
+    private static final Map<Schema.SObjectField,String> MAP_OF_LEAD_LABELS_BY_FIELDS =
+        Utils.mapOfSObjectLabelsByFields(Schema.SObjectType.Lead);
+
     static Set<Id> contactIds = new Set<Id>();
     static Map<Id, Contact> contactMap = new Map<Id, Contact>();
-
-    /*
-     * @description 		Map of Lead labels by SObjectFields.
-     *
-     * @author				Chris Shinnimin, Traction on Demand
-     * @date				2020-03-30
-    */
-    private static final Set<Schema.SObjectField> LEAD_FIELDS_TO_LABEL_MAP = new Set<Schema.SObjectField>{
-        Lead.DOB__c,
-        Lead.Any_medical_reason_for_moving_quickly__c,
-        Lead.Part_A_Received__c,
-        Lead.I_am_Recognized_To_Practice_As_a__c
-    };
-    private static Map<Schema.SObjectField, String> mapOfLeadLabelsByFields {
-        get {
-            if (mapOfLeadLabelsByFields == null) {
-                mapOfLeadLabelsByFields = new Map<Schema.SObjectField, String>();
-
-                Map<String, Schema.SObjectType> schemaMap = Schema.getGlobalDescribe();
-                Schema.SObjectType leadSchema = schemaMap.get('Lead');
-                Map<String, Schema.SObjectField> fieldMap = leadSchema.getDescribe().fields.getMap();
-
-                for (Schema.SObjectField field : LEAD_FIELDS_TO_LABEL_MAP) {
-                    mapOfLeadLabelsByFields.put(field, fieldMap.get(String.valueOf(field)).getDescribe().getLabel());
-                }
-            }
-
-            return mapOfLeadLabelsByFields;
-        }
-        set;
-    }
 
     /*
      * @description     Delete all the system generated tasks when the wish assist is updated to true in parent Case.
@@ -163,7 +135,7 @@ public class Case_OnAfterUpdateTriggerHandlerHelper {
                             message = message + ', ';
                         }
 
-                        message += mapOfLeadLabelsByFields.get(Lead.DOB__c);
+                        message += MAP_OF_LEAD_LABELS_BY_FIELDS.get(Lead.DOB__c);
                     }
 
                     if (currentLead.Any_medical_reason_for_moving_quickly__c == null) {
@@ -171,7 +143,7 @@ public class Case_OnAfterUpdateTriggerHandlerHelper {
                             message = message + ', ';
                         }
 
-                        message += mapOfLeadLabelsByFields.get(Lead.Any_medical_reason_for_moving_quickly__c);
+                        message += MAP_OF_LEAD_LABELS_BY_FIELDS.get(Lead.Any_medical_reason_for_moving_quickly__c);
                     }
 
                     if (currentLead.Part_A_Received__c == null) {
@@ -179,7 +151,7 @@ public class Case_OnAfterUpdateTriggerHandlerHelper {
                             message = message + ', ';
                         }
 
-                        message += ', ' + mapOfLeadLabelsByFields.get(Lead.Part_A_Received__c);
+                        message += ', ' + MAP_OF_LEAD_LABELS_BY_FIELDS.get(Lead.Part_A_Received__c);
                     }
 
                     if (currentLead.I_am_Recognized_To_Practice_As_a__c == null) {
@@ -187,7 +159,7 @@ public class Case_OnAfterUpdateTriggerHandlerHelper {
                             message = message + ', ';
                         }
 
-                        message += ', ' + mapOfLeadLabelsByFields.get(Lead.I_am_Recognized_To_Practice_As_a__c);
+                        message += ', ' + MAP_OF_LEAD_LABELS_BY_FIELDS.get(Lead.I_am_Recognized_To_Practice_As_a__c);
                     }
                 }
             } else if (updatedDnqLeadInfoSet.contains(currentLead.Id)) {
@@ -315,7 +287,7 @@ public class Case_OnAfterUpdateTriggerHandlerHelper {
         List<CaseTeamMember> readyToAssignCaseTeamMemberList = new List<CaseTeamMember>();
 
         for (Chapter_Role__c currentChapterRole : [
-            SELECT ID, Chapter_Name__c, Chapter_Name__r.Name, Role_Name__r.Name
+            SELECT Id, Chapter_Name__c, Chapter_Name__r.Name, Role_Name__r.Name
             FROM Chapter_Role__c
             WHERE Role_Name__r.Name = :Constant_AC.CHAPTER_ROLE_WISH_GRANTER
             AND Chapter_Name__c IN :readyToAssignChapterIdSet
