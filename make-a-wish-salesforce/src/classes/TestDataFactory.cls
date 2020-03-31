@@ -392,16 +392,35 @@ public class TestDataFactory {
         }
         return groups;
     }
-    
-    public static List<cg__accountFile__c> createAccountFile(Integer num) {
-        List<cg__accountFile__c> accountFiles = new List<cg__accountFile__c>();
+
+    public static List<cg__AccountFile__c> createAccountFile(Integer num) {
+        List<cg__AccountFile__c> accountFiles = new List<cg__AccountFile__c>();
         for (Integer i = 0; i < num; i++) {
-            cg__accountFile__c accountFile = new cg__accountFile__c();
+			cg__AccountFile__c accountFile = new cg__AccountFile__c();
             accountFile.cg__File_Name__c = 'MedicalSummary.txt';
             accountFile.cg__Content_Type__c = 'text/plain';
             accountFiles.add(accountFile);
         }
         return accountFiles;
+    }
+
+    public static List<Condition_Description__c> createConditionDescription(Integer num) {
+        List<Condition_Description__c> conditionDescriptions = new List<Condition_Description__c>();
+        for (Integer i = 0; i < num; i++) {
+			Condition_Description__c conditionDescription = new Condition_Description__c();
+            conditionDescriptions.add(conditionDescription);
+        }
+        return conditionDescriptions;
+    }
+
+
+    public static List<Medical_Questions__c> createMedicalQuestions(Integer num) {
+        List<Medical_Questions__c> medicalQuestions = new List<Medical_Questions__c>();
+        for (Integer i = 0; i < num; i++) {
+			Medical_Questions__c medicalQuestion = new Medical_Questions__c();
+			medicalQuestions.add(medicalQuestion);
+        }
+        return medicalQuestions;
     }
 
 	public static List<npe5__Affiliation__c> createAffiliation(Integer num) {

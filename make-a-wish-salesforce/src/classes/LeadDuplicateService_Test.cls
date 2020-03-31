@@ -54,6 +54,7 @@ public class LeadDuplicateService_Test {
 
 		List<Lead> leads = TestDataFactory.createLead(2);
 		Lead lead = leads.get(0);
+		lead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
 		lead.FirstName = 'Jack';
 		lead.LastName = 'Smith';
 		lead.Phone = '123456789';
