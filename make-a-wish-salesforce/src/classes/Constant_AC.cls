@@ -189,11 +189,11 @@ public class Constant_AC {
 	public static final String CASE_WISH_TYPE_TRAVEL_HAWAII = 'Travel-Hawaii';
 	public static final String CASE_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
 	public static final String CASE_RECORD_TYPE_DIAGNOSIS_VERIFICATION_REVIEW = 'Diagnosis Verification Review';
-	public static final String CASE_ORIGIN_WEB = 'Web';
-	public static final String CASE_ORIGIN_EMAIL = 'Email';
-	public static final String CASE_RUSH_TIME_FRAME = 'Select timeframe';
-	public static final String CASE_UWI_SOURCE_LEAD = 'Lead';
-	public static final String CASE_SUBJECT_ELIGIBILITY_REVIEW = 'Eligibility Review';
+    public static final String CASE_ORIGIN_WEB = 'Web';
+    public static final String CASE_ORIGIN_EMAIL = 'Email';
+    public static final String CASE_RUSH_TIME_FRAME = 'Select timeframe';
+    public static final String CASE_UWI_SOURCE_LEAD = 'Lead';
+    public static final String CASE_SUBJECT_ELIGIBILITY_REVIEW = 'Eligibility Review';
 
 	/**
 	 * Wish Affiliation Constants
@@ -279,6 +279,9 @@ public class Constant_AC {
 	public static final String VOLUNTEER_OPPORTUNITY_ROLE_WISH_GRANTER = 'Wish Granter';
 	public static final String VOLUNTEER_OPPORTUNITY_ROLE_WISH_GRANTER_MENTOR = 'Wish Granter Mentor';
 	public static final String VOLUNTEER_OPPORTUNITY_ROLE_TEMPORARY_WISH_GRANTER = 'Temporary Wish Granter';
+	public static final String VOLUNTEER_OPPORTUNITY_STATUS_CLOSED = 'Closed';
+	public static final String VOLUNTEER_OPPORTUNITY_STATUS_COMPLETED = 'Completed';
+	public static final String VOLUNTEER_OPPORTUNITY_STATUS_INACTIVE = 'Inactive';
 
 	/**
 	 * Contact Application Status
@@ -428,4 +431,8 @@ public class Constant_AC {
 	 * Case Team Role Constants
 	 */
 	public static final String CASE_TEAM_ROLE_INTAKE_MANAGER = 'Intake Manager';
+	public static final String CASE_TEAM_ROLE_VOLUNTEER_MANAGER = 'Volunteer Manager';
+	public static final String CASE_TEAM_ROLE_VOLUNTEER_MANAGER_INACTIVE = 'Volunteer Manager (Inactive)';
+	public static final String CASE_TEAM_ROLE_WISH_COORDINATOR_INACTIVE = 'Wish Coordinator (Inactive)';
+	public static final String CASE_TEAM_ROLE_WISH_COORDINATOR = 'Wish Coordinator';
 }
