@@ -174,6 +174,7 @@ public class Constant_AC {
 	public static final String CASE_SUB_STATUS_PENDING = 'Pending';
 	public static final String CASE_SUB_STATUS_ABANDONED = 'Abandoned';
 	public static final String CASE_SUB_STATUS_DNQ_MEDICAL = 'DNQ - Medical';
+	public static final String CASE_SUB_STATUS_NON_VIEWABLE = 'Non-Viewable';
 	public static final String CASE_WISH_CLEARANCE_APPROPRIATE = 'Appropriate';
 	public static final String CASE_WISH_CLEARANCE_NOT_APPROPRIATE = 'Not Appropriate';
 	public static final String MEET_PWL_CRITERIA_YES = 'Yes';
