@@ -8110,7 +8110,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
     </fieldSets>
     <listViews>
         <fullName>ALL_SCRANTON</fullName>
-        <booleanFilter>1 AND 2 AND 3 AND 4 and 5</booleanFilter>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5</booleanFilter>
         <columns>Region_Code__c</columns>
         <columns>FULL_NAME</columns>
         <columns>LEAD.LAST_NAME</columns>
