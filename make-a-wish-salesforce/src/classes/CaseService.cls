@@ -16,6 +16,7 @@ public with sharing class CaseService {
 	private static final String LEAD_MEDICAL_REASON_FOR_MOVING_QUICKLY_YES = Constant_AC.LEAD_MEDICAL_REASON_FOR_MOVING_QUICKLY_YES;
 	private static final String SPACE = ' ';
 	private static final String APPEND_ELIGIBILITY_REVIEW = ' - Eligibility Review';
+<<<<<<< HEAD
 
 	private static final Id WISH_RECORDTYPE_ID = Constant_AC.WISH_RT_ID;
 	private static final Id WISH_CHILD_RECORDTYPE_ID = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
@@ -27,6 +28,8 @@ public with sharing class CaseService {
 		Utils.mapOfSObjectLabelsByFields(Schema.SObjectType.Case);
 	private static final Map<Schema.SObjectField,String> MAP_OF_LEAD_LABELS_BY_FIELDS =
 		Utils.mapOfSObjectLabelsByFields(Schema.SObjectType.Lead);
+=======
+>>>>>>> master
 
 	/**
 	* Check if the User or the User's profile has permissions on Case
@@ -128,7 +131,11 @@ public with sharing class CaseService {
 		newCase.Qualified_Date__c = lead.Qualified_Date__c;
 		newCase.Migrated_Record__c = lead.Migrated_Record__c;
 		newCase.Qualifying_Medical_Professional_Name__c = lead.Treating_Medical_Professional_First_Name__c
+<<<<<<< HEAD
 			+ SPACE + lead.Treating_Medical_Professional_Last_Name__c;
+=======
+				+ SPACE + lead.Treating_Medical_Professional_Last_Name__c;
+>>>>>>> master
 		newCase.Qualifying_Medical_Professional_Email__c = lead.Treating_Medical_Professional_Email__c;
 		newCase.AccountId = lead.ConvertedAccountId;
 		newCase.Status = STATUS_QUALIFIED;
@@ -179,7 +186,10 @@ public with sharing class CaseService {
 	 * @param LeadList
 	 */
 	public static void createEligibilityReview(List<Lead> LeadList) {
+<<<<<<< HEAD
 		System.debug('Debugz createEligibilityReview' + LeadList);
+=======
+>>>>>>> master
 		List<Case> newCaseList = new List<Case>();
 		Set<Id> accountIdSet = new Set<Id>();
 		Map<Id, String> emailMap = new Map<Id, String>();
@@ -187,9 +197,15 @@ public with sharing class CaseService {
 		Id partARecordTypeId = Constant_AC.DIAGNOSIS_RT_ID;
 		String nationalAdviser = System.Label.MedicalAdviser;
 		Id nationAdvisorQueueId = [
+<<<<<<< HEAD
 			SELECT Id
 			FROM Group
 			WHERE Name = :nationalAdviser
+=======
+				SELECT Id
+				FROM Group
+				WHERE Name = :nationalAdviser
+>>>>>>> master
 		].Id;
 		try {
 			for (Lead process : LeadList) {
@@ -197,9 +213,15 @@ public with sharing class CaseService {
 			}
 			if (!accountIdSet.isEmpty()) {
 				for (Account dbChapterAcc : [
+<<<<<<< HEAD
 					SELECT Id,MAC_Email_del__c,RecordTypeId
 					FROM Account
 					WHERE Id IN:accountIdSet AND RecordTypeId = :chapterRecordTypeId
+=======
+						SELECT Id,MAC_Email_del__c,RecordTypeId
+						FROM Account
+						WHERE Id IN:accountIdSet AND RecordTypeId = :chapterRecordTypeId
+>>>>>>> master
 				]) {
 					emailMap.put(dbChapterAcc.Id, dbChapterAcc.MAC_Email_del__c);
 				}
@@ -235,8 +257,11 @@ public with sharing class CaseService {
 				}
 				newCaseList.add(newCase);
 			}
+<<<<<<< HEAD
 
 			System.debug('Debugz createEligibilityReview' + newCaseList);
+=======
+>>>>>>> master
 			if (!newCaseList.isEmpty()) {
 				insert newCaseList;
 			}
@@ -245,9 +270,15 @@ public with sharing class CaseService {
 			}
 		} catch (Exception ex) {
 			for (Lead currRec : LeadList) {
+<<<<<<< HEAD
 				ErrorMessage_AC.createdebugRec('Case Service',
 					String.valueOf(currRec), String.valueOf(ex), 'createEligibilityReview',
 					currRec.Id, ex.getStackTraceString(), 'Error');
+=======
+				ErrorMessage_AC.createdebugRec('Lead_OnBeforeUpdateTriggerHandlerHelper',
+						String.valueOf(currRec), String.valueOf(ex), 'CreateNewCase',
+						currRec.Id, ex.getStackTraceString(), 'Error');
+>>>>>>> master
 			}
 			if (!Test.isRunningTest()) {
 				for (Lead currRec : LeadList) {
@@ -265,11 +296,19 @@ public with sharing class CaseService {
 	public static void updateGrantingCaseDevStaffEmail(Map<Id, String> chapterEmailMap) {
 		List<Case> updateCaseList = new List<Case>();
 		for (Case wishCase : [
+<<<<<<< HEAD
 			SELECT Id, RecordTypeId, ParentId, Parent.ChapterName__c, Dev_Staff_Email__c
 			FROM Case
 			WHERE Parent.ChapterName__c IN :chapterEmailMap.keySet()
 			AND RecordTypeId = :Constant_AC.WISH_RT_ID
 			AND IsClosed = FALSE
+=======
+				SELECT Id, RecordTypeId, ParentId, Parent.ChapterName__c, Dev_Staff_Email__c
+				FROM Case
+				WHERE Parent.ChapterName__c IN :chapterEmailMap.keySet()
+				AND RecordTypeId = :Constant_AC.WISH_RT_ID
+				AND IsClosed = FALSE
+>>>>>>> master
 		]) {
 			if (chapterEmailMap.containsKey(wishCase.Parent.ChapterName__c)) {
 				wishCase.Dev_Staff_Email__c = chapterEmailMap.get(wishCase.Parent.ChapterName__c);
@@ -280,6 +319,7 @@ public with sharing class CaseService {
 			update updateCaseList;
 		}
 	}
+<<<<<<< HEAD
 
 	/*
      * @description     Update DEV Staff Email field for wish granting case based on chapter account
@@ -1826,4 +1866,6 @@ public with sharing class CaseService {
 			update updateLeadList;
 		}
 	}
+=======
+>>>>>>> master
 }

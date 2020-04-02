@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- BDE Entry FS --></label>
@@ -3076,7 +3076,7 @@ provide contact information for each site on which you are active. --></help>
         <label><!-- How Did you hear about Make-A-Wish? --></label>
         <name>Wish_How_Did_you_hear_about_Make_A_Wish__c</name>
         <picklistValues>
-            <masterLabel>Brochure at the doctor&apos;s office</masterLabel>
+            <masterLabel>Brochure at the doctor's office</masterLabel>
             <translation><!-- Brochure at the doctor&apos;s office --></translation>
         </picklistValues>
         <picklistValues>
@@ -3319,7 +3319,7 @@ provide contact information for each site on which you are active. --></help>
         <name>npe01__Lifetime_Giving_History_Amount__c</name>
     </fields>
     <fields>
-        <help>Formule: In volgorde van voorkeur, het SYSTEEM_AccountType veld, het Account Type veld, en &quot;Organisatie&quot;.</help>
+        <help>Formule: In volgorde van voorkeur, het SYSTEEM_AccountType veld, het Account Type veld, en "Organisatie".</help>
         <label><!-- Organization Type --></label>
         <name>npe01__Organization_Type__c</name>
     </fields>
@@ -3424,7 +3424,7 @@ provide contact information for each site on which you are active. --></help>
         <name>npe01__SystemIsIndividual__c</name>
     </fields>
     <fields>
-        <help>Formule: &quot;Individueel&quot; of &quot;Organisatie&quot; hangt af van Account instellingen.</help>
+        <help>Formule: "Individueel" of "Organisatie" hangt af van Account instellingen.</help>
         <label><!-- Type of Account --></label>
         <name>npe01__Type_of_Account__c</name>
     </fields>
@@ -3434,7 +3434,7 @@ provide contact information for each site on which you are active. --></help>
         <name>npe01__WorkEmail__c</name>
     </fields>
     <fields>
-        <help>Zie &apos;Voorkeur Telefoon&apos; veld.</help>
+        <help>Zie 'Voorkeur Telefoon' veld.</help>
         <label><!-- Work Phone --></label>
         <name>npe01__WorkPhone__c</name>
     </fields>
@@ -3634,7 +3634,7 @@ provide contact information for each site on which you are active. --></help>
         <name>npo02__Total_Household_Gifts__c</name>
     </fields>
     <fields>
-        <help>Als dit adres verificatie vereist, klik de Verifieer Adres knop bovenin de Adres pagina. Zie de Help documentatie in de &quot;Power of Us Hub&quot; voor meer informatie</help>
+        <help>Als dit adres verificatie vereist, klik de Verifieer Adres knop bovenin de Adres pagina. Zie de Help documentatie in de "Power of Us Hub" voor meer informatie</help>
         <label><!-- Address Verification Status --></label>
         <name>npsp__Address_Verification_Status__c</name>
     </fields>
@@ -3799,41 +3799,7 @@ provide contact information for each site on which you are active. --></help>
             <section>Volunteer Details</section>
         </sections>
     </layouts>
-    <layouts>
-        <layout>Contact Layout</layout>
-        <sections>
-            <label>Contactpersoon Details</label>
-            <section>Contact Details</section>
-        </sections>
-        <sections>
-            <label>Donatie Informatie</label>
-            <section>Donation Information</section>
-        </sections>
-        <sections>
-            <label>Donatie Totalen</label>
-            <section>Donation Totals</section>
-        </sections>
-        <sections>
-            <label>Huishouden Adres</label>
-            <section>Household Address</section>
-        </sections>
-        <sections>
-            <label>Huishouden Donatie Informatie</label>
-            <section>Household Donation Info</section>
-        </sections>
-        <sections>
-            <label>Lidmaatschap Informatie</label>
-            <section>Membership Information</section>
-        </sections>
-        <sections>
-            <label>Overige</label>
-            <section>Misc</section>
-        </sections>
-        <sections>
-            <label><!-- Soft Credit Total --></label>
-            <section>Soft Credit Total</section>
-        </sections>
-    </layouts>
+    
     <layouts>
         <layout>Medical Professional</layout>
         <sections>
@@ -3953,11 +3919,11 @@ provide contact information for each site on which you are active. --></help>
         </sections>
         <sections>
             <label><!-- Wish Child&apos;s Favorites --></label>
-            <section>Wish Child&apos;s Favorites</section>
+            <section>Wish Child's Favorites</section>
         </sections>
         <sections>
             <label><!-- Wish Child&apos;s Other Favorites --></label>
-            <section>Wish Child&apos;s Other Favorites</section>
+            <section>Wish Child's Other Favorites</section>
         </sections>
     </layouts>
     <layouts>

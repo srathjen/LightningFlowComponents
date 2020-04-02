@@ -12,11 +12,12 @@ public class TestDataFactory {
                 adminUser = [
                         SELECT Id
                         FROM User
-                        WHERE Profile.Name = 'System Administrator' AND IsActive = TRUE
+                        WHERE Profile.Name = 'System Administrator' AND UserRole.Name != NULL AND UserRole.Name != 'CustomerPortal'
+                        AND IsActive = TRUE
                         LIMIT 1
                 ];
             }
-			return adminUser;
+            return adminUser;
         }
         set;
     }
@@ -190,13 +191,20 @@ public class TestDataFactory {
     }
 
     public static List<User> createCommunityUser(Integer num) {
-        // Community users require associated contact
-        List<User> users = createUser(num);
-        List<Contact> contacts = createContact(num);
-        insert contacts;
-
         // Must run as admin to create community user
+        List<User> users = createUser(num);
         System.runAs (adminUser) {
+            // Community users require associated contact/account
+            List<Account> accounts = createAccount(num);
+            insert accounts;
+
+            List<Contact> contacts = createContact(num);
+            for (Integer i = 0; i < num; i++) {
+                contacts[i].AccountId = accounts[i].Id;
+            }
+            insert contacts;
+
+            // Create customer portal user
             UserRole userRole = [
                     SELECT PortalType, PortalAccountId
                     FROM UserRole
@@ -210,10 +218,10 @@ public class TestDataFactory {
                     LIMIT 1
             ];
             for (Integer i = 0; i < num; i++) {
-                User u = users.get(i);
-                u.UserRoleId = userRole.Id;
+                User u = users[i];
                 u.ProfileId = profile.Id;
-                u.ContactId = contacts.get(i).Id;
+                u.ContactId = contacts[i].Id;
+                u.PortalRole = 'Manager';
             }
         }
         return users;
@@ -374,4 +382,196 @@ public class TestDataFactory {
         }
         return tasks;
     }
+    
+    public static List<Group> createGroup(Integer num) {
+        List<Group> groups = new List<Group>();
+        for(Integer i = 0; i < num; i++) {
+            Group g = new Group();
+            g.Name = 'Group ' + i;
+            groups.add(g);
+        }
+        return groups;
+    }
+
+    public static List<cg__AccountFile__c> createAccountFile(Integer num) {
+        List<cg__AccountFile__c> accountFiles = new List<cg__AccountFile__c>();
+        for (Integer i = 0; i < num; i++) {
+			cg__AccountFile__c accountFile = new cg__AccountFile__c();
+            accountFile.cg__File_Name__c = 'MedicalSummary.txt';
+            accountFile.cg__Content_Type__c = 'text/plain';
+            accountFiles.add(accountFile);
+        }
+        return accountFiles;
+    }
+
+    public static List<Condition_Description__c> createConditionDescription(Integer num) {
+        List<Condition_Description__c> conditionDescriptions = new List<Condition_Description__c>();
+        for (Integer i = 0; i < num; i++) {
+			Condition_Description__c conditionDescription = new Condition_Description__c();
+            conditionDescriptions.add(conditionDescription);
+        }
+        return conditionDescriptions;
+    }
+
+
+    public static List<Medical_Questions__c> createMedicalQuestions(Integer num) {
+        List<Medical_Questions__c> medicalQuestions = new List<Medical_Questions__c>();
+        for (Integer i = 0; i < num; i++) {
+			Medical_Questions__c medicalQuestion = new Medical_Questions__c();
+			medicalQuestions.add(medicalQuestion);
+        }
+        return medicalQuestions;
+    }
+
+	public static List<npe5__Affiliation__c> createAffiliation(Integer num) {
+		List<npe5__Affiliation__c> affiliations = new List<npe5__Affiliation__c>();
+		for (Integer i = 0; i < num; i++) {
+			npe5__Affiliation__c a = new npe5__Affiliation__c();
+			affiliations.add(a);
+		}
+		return affiliations;
+	}
+
+	public static Lead createQualifiedLead(Id accountId, Id icdCodeId){
+		Lead lead = new Lead();
+		lead.Additional_Parent_City__c = 'Phoenix';
+		lead.Additional_Parent_Email__c = 'additionalParent@email.com';
+		lead.Additional_Parent_First_Name__c = 'Mother';
+		lead.Additional_Parent_Last_Name__c = 'Smith';
+		lead.Additional_Parent_Phone__c = '5555555555';
+		lead.Additional_Parent_Postal_Code__c = '85020';
+		lead.Additional_Parent_Relationship_to_Child__c = 'Mother';
+		lead.Additional_Parent_State__c = 'Arizona';
+		lead.Additional_Parent_Street__c = '123 St';
+		lead.AddressVerified__c = false;
+		lead.Age_Requirement_Met__c = false;
+		lead.Alternate_1_Medical_Professional_Type__c = 'Physician';
+		lead.Alternate_2_Medical_Professional_Type__c = 'Physician';
+		lead.Alternate1HospitalTreatmentFacility__c = 'Banner Hospital';
+		lead.Alternate1MedicalProfessionalEmail__c = 'alt1MedicalProfessional@email.com';
+		lead.Alternate1MedProfessionalFirstName__c = 'Alt1MedicalProfessional';
+		lead.Alternate1MedProfessionalLastName__c = 'Johnson';
+		lead.Alternate1MedProfessionalPhone__c = '5555555555';
+		lead.Alternate2HospitalTreatmentFacility__c = 'Banner Hospital';
+		lead.Alternate2MedProfessionalEmail__c = 'alt2MedicalProfessional@email.com';
+		lead.Alternate2MedProfessionalFirstName__c = 'Alt2MedicalProfessional';
+		lead.Alternate2MedProfessionalLastName__c = 'Johnson';
+		lead.Alternate2MedProfessionalPhone__c = '5555555555';
+		lead.Any_medical_reason_for_moving_quickly__c = 'No';
+		lead.Auto_Qualified__c = true;
+		lead.Best_contact_for_Physician_Email__c = 'bestMedicalProfessional@email.com';
+		lead.Best_Contact_for_Physician_First_Name__c = 'Best';
+		lead.Best_Contact_for_Physician_Last_Name__c = 'Johnson';
+		lead.ChapterName__c = accountId;
+		lead.Child_Age__c = '6';
+		lead.Child_will_ultimately_die_prematurely__c = false;
+		lead.City = 'Phoenix';
+		lead.Communication__c = 'This child is developmentally on target for chronological age';
+		lead.Company = 'Make-A-Wish';
+		lead.Country = 'United States';
+		lead.CountryCode = 'US';
+		lead.CreatedDate = Date.today();
+		lead.Current_Condition_Label__c = '1.I am not sure;';
+		lead.Debilitation_may_extend_over_many_years__c = false;
+		lead.Diagnosis_Given_By_Referrer__c = 'Neoplasm';
+		lead.DOB__c = Date.today() - 1435;
+		lead.DOB_Text__c = '2013-05-05';
+		lead.DoNotCall = false;
+		lead.Dup_Check__c = 'Block Lead Dup';
+		lead.DV_Present__c = true;
+		lead.Email = 'parentLegalGuardian@email.com';
+		lead.FirstName = 'Mark';
+		lead.From_Mulesoft__c = false;
+		lead.Gender__c = 'Male';
+		lead.Has_this_child_ever_received_prior_wish__c = 'No';
+		lead.HasOptedOutOfEmail = false;
+		lead.HasOptedOutOfFax = false;
+		lead.Hidden_DV_form_Medical_professional_Type__c = 'Treating Medical Professional';
+		lead.Hidden_Field__c = false;
+		lead.Hidden_Potential_Rush__c = 'No';
+		lead.Hidden_Trigger_Referral_Email__c = false;
+		lead.HiddenMedicalProfessionalEmail__c = 'treatingMedicalProfessional@email.com';
+		lead.Hospital_Treatment_Facility__c = 'Banner Hospital';
+		lead.Hospital_Treatment_Facility_Treating__c = 'Banner Hospital';
+		lead.How_Did_you_hear_about_Make_A_Wish__c = 'Physician';
+		lead.I_am_Recognized_To_Practice_As_a__c = 'Physician';
+		lead.I_m_Part_of_The_Treating_HealthCare_Team__c = 'Yes';
+		lead.ICD_Given_By_Referrer__c = icdCodeId;
+		lead.Increased_probability_of_premature_death__c = false;
+		lead.Inquiry_Date__c = Date.today();
+		lead.Is_Chapter_Active__c = false;
+		lead.is_Family_Aware_of_Referral__c = 'Yes';
+		lead.Is_in_a_Comatose_Vegetative_State__c = 'No';
+		lead.Is_Required_Bypass__c = true;
+		lead.isApprove__c = false;
+		lead.IsConverted = false;
+		lead.isSign__c = true;
+		lead.IsUnreadByOwner = true;
+		lead.LastModifiedDate = Date.today();
+		lead.LastName = 'Smith';
+		lead.Lead_Owner_Dupe_Alert__c = false;
+		lead.LeadSource = 'Online';
+		lead.Medical_Professional_Email__c = 'referringMedicalProfessional@email.com';
+		lead.Medical_Professional_Last_Name__c = 'Johnson';
+		lead.Medical_Professional_Phone__c = '5555555555';
+		lead.Medical_Provider_Category__c = 'Physician';
+		lead.Migrated_Record__c = false;
+		lead.None_of_these_statements_describes_Child__c = false;
+		lead.Number_hospital_admissions__c = 0;
+		lead.of_Siblings__c = '2';
+		lead.Of_Times_Email_Sent__c = 1;
+		lead.Office_Referral_Email__c = 'test.referrals@arizona.wish.org';
+		lead.Out_of_Territory__c = false;
+		lead.Override_Dupe_Check__c = true;
+		lead.Parent_First_Name__c = 'Father';
+		lead.Parent_Last_Name__c = 'Smith';
+		lead.Parent_Relationship_to_Child__c = 'Father';
+		lead.Part_A_DV_Recipient__c = 'TreatingMedicalProfessional Johnson';
+		lead.Part_A_Form_Password__c = '383639';
+		lead.Part_A_Received__c = Date.today();
+		lead.Part_A_Sent__c = Date.today();
+		lead.PD_Condition_Description__c = 'Neoplasm';
+		lead.PD_ICD_Code__c = icdCodeId;
+		lead.Pending_Diagnosis_Date__c = Date.today();
+		lead.Phone = '5555555555';
+		lead.PostalCode = '85001';
+		lead.Provided_additional_information__c = 'Abcdefg';
+		lead.Provider_Signature__c = 'TreatingMedicalProfessional Johnson';
+		lead.Qualified_Date__c = Date.today();
+		lead.Qualifying_Diagnosis__c = 'Neoplasm';
+		lead.Qualifying_ICD__c = icdCodeId;
+		lead.ReferralComment__c = 'Abcdefg';
+		lead.Referred_Date__c = Date.today();
+		lead.Referrer_City__c = 'Phoenix';
+		lead.Referrer_Email__c = 'referer@email.com';
+		lead.Referrer_FirstName__c = 'Referrer';
+		lead.Referrer_Last_Name__c = 'Johnson';
+		lead.Referrer_Phone__c = '5555555555';
+		lead.Referrer_Zip__c = '85001';
+		lead.Relationship_to_child__c = 'Medical Professional';
+		lead.Responds_to_treatment_with_normal_health__c = false;
+		lead.RFI_Form_Info_Hidden__c = 'Qualified';
+		lead.Risk_of_complications_premature_death__c = false;
+		lead.Rush__c = false;
+		lead.Sibling_Detail__c = 'Sib1 | Smith | 2<br>Sib2 | Smith | 4<br>';
+		lead.State = 'Arizona';
+		lead.StateCode = 'AZ';
+		lead.Status = 'Qualified';
+		lead.Street = '123 St';
+		lead.Test_Record__c = false;
+		lead.Travel_algorithm__c = 'I am not sure;';
+		lead.Travel_Restriction__c = '1. I am not sure';
+		lead.Treating_Medical_Professional_Email__c = 'treatingMedicalProfessional@email.com';
+		lead.Treating_Medical_Professional_First_Name__c = 'TreatingMedicalProfessional';
+		lead.Treating_Medical_Professional_Last_Name__c = 'Johnson';
+		lead.Treating_Medical_Professional_Phone__c = '5555555555';
+		lead.Treatment_may_be_feasible_but_can_fail__c = false;
+		lead.Treatment_may_prolong_normal_activities__c = true;
+		lead.Unplanned_hospital_admissions__c = 'No';
+		lead.Using_Paper_Process_For_DV__c = false;
+		lead.VisualAntidote__Fast_Forms_Auto_Assign__c = false;
+		lead.VisualAntidote__Fast_Forms_Autoresponse__c = false;
+		lead.Will_Child_s_Condition_Deteriorate__c = 'Not Sure';
+		return lead;
+	}
 }

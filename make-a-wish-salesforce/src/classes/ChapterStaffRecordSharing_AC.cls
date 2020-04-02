@@ -210,7 +210,7 @@ casesToShare.add(currSharing);
 			insert bgcToShare;
 	}
 
-	public static void COIRecordSharing(Map<String, List<Conflict_Of_Interest__c>> coiRecordMap) {
+	public static List<Conflict_Of_Interest__Share> COIRecordSharing(Map<String, List<Conflict_Of_Interest__c>> coiRecordMap) {
 		Map<String, String> ChapterRoleMap = FindChapterRole(coiRecordMap.keySet());
 		Map<String, List<User>> userMap = userRecMap(ChapterRoleMap.values());
 		List<Conflict_Of_Interest__Share> coiToShare = new List<Conflict_Of_Interest__Share>();
@@ -233,6 +233,8 @@ casesToShare.add(currSharing);
 
 		if (coiToShare.size() > 0)
 			insert coiToShare;
+
+		return coiToShare;
 	}
 
 	public static void broadRecordSharing(Map<String, List<Broadcast__c>> boradRecordMap) {

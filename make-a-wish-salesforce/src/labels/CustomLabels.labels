@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
+        <fullName>AWSDefaultFilePathPrefix</fullName>
+        <categories>SDrive</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AWS default file path prefix</shortDescription>
+        <value>TEST</value>
+    </labels>
+    <labels>
+        <fullName>AWSFilePathPrefix</fullName>
+        <categories>SDrive</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AWS default file path prefix</shortDescription>
+        <value>https://s3-us-west-2.amazonaws.com/mawafilesfullcopy/00Q5B000001s3bt/a1U5B0000000Df1UAE/MedicalSummaryReport.txt?response-content-disposition=attachment&amp;filename=MedicalSummaryReport.txt&amp;AWSAccessKeyId=AKIAIEYUJRAAMNE7W7NA&amp;Expires=1509032442&amp;Signature=Yx0UX2ADZxo9GbbDFH+q7opBzwU=</value>
+    </labels>
+    <labels>
         <fullName>AbsentForm</fullName>
         <categories>Docusign Template</categories>
         <language>en_US</language>
@@ -258,6 +274,30 @@
         <value>Incorrect password.</value>
     </labels>
     <labels>
+        <fullName>Diagnosis_Verification_Contact_Duplicates</fullName>
+        <categories>Lead</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Diagnosis Verification Contact Duplicates</shortDescription>
+        <value>There might be an existing {0}. Please click Send Diagnosis Verification button to review the existing record.</value>
+    </labels>
+    <labels>
+        <fullName>Diagnosis_Verification_Duplicates</fullName>
+        <categories>Lead</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Diagnosis Verification Duplicates</shortDescription>
+        <value>There might be a duplicate {0}. Please click Send Diagnosis Verification button to review the duplicates.</value>
+    </labels>
+    <labels>
+        <fullName>Diagnosis_Verification_Lead_Duplicates</fullName>
+        <categories>Lead</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Diagnosis Verification Lead Duplicates</shortDescription>
+        <value>There might be a duplicate {0}. Please click Send Diagnosis Verification button to review the duplicates.</value>
+    </labels>
+    <labels>
         <fullName>Dummy_Email</fullName>
         <categories>It holds the hiiden email value for the contact</categories>
         <language>en_US</language>
@@ -298,6 +338,14 @@
         <value>There might be a duplicate {0}. Please click [OK] to review the duplicates.</value>
     </labels>
     <labels>
+        <fullName>Existing_Files_Attached</fullName>
+        <categories>Lead File</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Existing Files Attached</shortDescription>
+        <value>There are files attached to object. You need to first delete files manually and then delete the object!</value>
+    </labels>
+    <labels>
         <fullName>Existing_Record</fullName>
         <categories>Record</categories>
         <language>en_US</language>
@@ -312,6 +360,34 @@
         <protected>false</protected>
         <shortDescription>Family Hold Message DDP</shortDescription>
         <value>a1a1R000007bEQoQAM</value>
+    </labels>
+    <labels>
+        <fullName>InKind_Already_Submitted</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>InKind_Already_Submitted</shortDescription>
+        <value>This record has already been submitted for approval and cannot be submitted again.</value>
+    </labels>
+    <labels>
+        <fullName>InKind_Attach_Receipts</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>InKind_Attach_Receipts</shortDescription>
+        <value>Please attach all In-kind receipts or documentation below or select Documentation as Not Available.</value>
+    </labels>
+    <labels>
+        <fullName>InKind_Insufficient_Privilege</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>InKind_Insufficient_Privilege</shortDescription>
+        <value>Insufficient privilege to update this record. Please contact system administrator.</value>
+    </labels>
+    <labels>
+        <fullName>InKind_Return_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>InKind_Return_Message</shortDescription>
+        <value>Please click OK to return to the In-Kind Donation &amp; Reimbursement Page.</value>
     </labels>
     <labels>
         <fullName>Interation_User_Profile</fullName>
@@ -399,12 +475,44 @@
         <value>a1a36000004SPWVAA4</value>
     </labels>
     <labels>
+        <fullName>Potential_Existing_Contact_Records</fullName>
+        <categories>Lead</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Potential Existing Contact Records</shortDescription>
+        <value>There might be an existing {0}. Please click &lt;a href={1}/apex/LeadDuplicate_VF?id={2}&amp;wishFamily=true&amp;manual=true&gt;here&lt;/a&gt; to review the existing record.</value>
+    </labels>
+    <labels>
+        <fullName>Potential_Existing_Lead_Records</fullName>
+        <categories>Lead</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Potential Existing Lead Records</shortDescription>
+        <value>There might be a duplicate {0}. Please click &lt;a href={1}/apex/LeadDuplicate_VF?id={2}&gt;here&lt;/a&gt; to review the duplicates.</value>
+    </labels>
+    <labels>
+        <fullName>Potential_Existing_Records</fullName>
+        <categories>Lead</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Potential Existing Records</shortDescription>
+        <value>There might be a duplicate {0}. Please click &lt;a href={1}/apex/LeadDuplicate_VF?id={2}&gt;here&lt;/a&gt; to review the duplicates.</value>
+    </labels>
+    <labels>
         <fullName>Prospective_Volunteer_Profile</fullName>
         <categories>The ID of the Prospective Volunteer Profile</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Prospective Volunteer Profile</shortDescription>
         <value>00e36000001CMlrAAG</value>
+    </labels>
+    <labels>
+        <fullName>Qualified_Fields_Missing</fullName>
+        <categories>Lead</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Qualified Fields Missing</shortDescription>
+        <value>Please enter the values for the following fields -</value>
     </labels>
     <labels>
         <fullName>QualifyingDiagnosisHeaderLabel</fullName>
@@ -618,6 +726,34 @@ Click Generate Document and once the document is generated you can click the lin
         <protected>false</protected>
         <shortDescription>Welcome Letter Spanish DDP</shortDescription>
         <value>a1a360000033dtZAAQ</value>
+    </labels>
+    <labels>
+        <fullName>WishBudgetForm_Approval_Comments</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>WishBudgetForm_Approval_Comments</shortDescription>
+        <value>Approval for Wish Budget form</value>
+    </labels>
+    <labels>
+        <fullName>WishBudgetForm_Approval_Failure</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>WishBudgetForm_Approval_Failure</shortDescription>
+        <value>Budget inactive, unable to send for approval.</value>
+    </labels>
+    <labels>
+        <fullName>WishBudgetForm_Approval_Success</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>WishBudgetForm_Approval_Success</shortDescription>
+        <value>Your request has been submitted successfully.</value>
+    </labels>
+    <labels>
+        <fullName>WishBudgetForm_No_Trans_Code</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>WishBudgetForm_No_Trans_Code</shortDescription>
+        <value>There is no active transaction code available for expense type:</value>
     </labels>
     <labels>
         <fullName>WishClearence</fullName>

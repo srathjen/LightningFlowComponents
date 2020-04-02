@@ -30,6 +30,7 @@ private class Lead_Trigger_Test {
 		insert icdCode;
 
 		Lead convertedLead = new Lead();
+		convertedLead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
 		convertedLead.FirstName = 'TestFirst';
 		convertedLead.LastName = 'TestLast';
 		convertedLead.ChapterName__c = hospital.Id;
@@ -88,8 +89,6 @@ private class Lead_Trigger_Test {
 		}
 
 		update convertedLeads;
-
-		Lead_OnAfterUpdateTriggerHandlerHelper.dupeCheckonAccount(new Set<Id>(new Map<Id, Lead>(convertedLeads).keySet()));
 	}
 
 	@IsTest
@@ -99,6 +98,7 @@ private class Lead_Trigger_Test {
 		insert chapterAccount;
 
 		Lead wishChild = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
+		wishChild.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
 		wishChild.Hidden_Potential_Rush__c = 'yes';
 		wishChild.I_am_Recognized_To_Practice_As_a__c = 'Doctor';
 		wishChild.Any_medical_reason_for_moving_quickly__c = 'yes';
@@ -111,20 +111,15 @@ private class Lead_Trigger_Test {
 		insert status;
 		trac_TriggerHandlerBase.blockTrigger = false;
 
-		Lead_OnAfterUpdateTriggerHandlerHelper.leadConvertion(new Map<Id, Lead>{
+		LeadConvertService.convertLead(new Map<Id, Lead>{
 				wishChild.Id => wishChild
 		});
 
-		Set<Id> chapterAccountIds = new Set<Id>{
-				chapterAccount.Id
-		};
+		Map<Id, Lead> convertedAccountMap = new Map<Id, Lead>();
+		convertedAccountMap.put(chapterAccount.Id, wishChild);
 
-		Lead_OnAfterUpdateTriggerHandlerHelper.updateLeadConvertedAccounts(chapterAccountIds, chapterAccountIds, wishChild.Id, new Map<Id, Account>(), new Map<Id, Lead>{
-				chapterAccount.Id => wishChild
-		}, new List<Account>());
+		AccountService.setHouseholdFields(convertedAccountMap);
 		wishChild.FirstName = null;
-		Lead_OnAfterUpdateTriggerHandlerHelper.updateLeadConvertedAccounts(chapterAccountIds, chapterAccountIds, wishChild.Id, new Map<Id, Account>(), new Map<Id, Lead>{
-				chapterAccount.Id => wishChild
-		}, new List<Account>());
+		AccountService.setHouseholdFields(convertedAccountMap);
 	}
 }

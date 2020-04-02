@@ -6,6 +6,21 @@
 public class LeadService {
 
 	private static final String INSTANCE_URL = Endpoints__c.getInstance().Instance_URL__c;
+	private static final String ERROR_WISH_CHILD = Constant_AC.LEAD_ERROR_WISH_CHILD;
+	private static final String ERROR_WISH_ADDITIONAL_PARENT_GUARDIAN = Constant_AC.LEAD_ERROR_WISH_ADDITIONAL_PARENT_GUARDIAN;
+	private static final String ERROR_WISH_FAMILY = Constant_AC.LEAD_ERROR_WISH_FAMILY;
+	private static final String ERROR_BEST = Constant_AC.LEAD_ERROR_BEST;
+	private static final String ERROR_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_ERROR_MEDICAL_PROFESSIONAL;
+	private static final String ERROR_WISH_FAMILY_AND_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_ERROR_WISH_FAMILY_AND_MEDICAL_PROFESSIONAL;
+	private static final String TYPE_LIGHTNING = Constant_AC.TYPE_LIGHTNING;
+	private static final String TYPE_CLASSIC = Constant_AC.TYPE_CLASSIC;
+	private static final String THEME_4D = Constant_AC.THEME_4D;
+	private static final String THEME_4U = Constant_AC.THEME_4U;
+	private static final String EMPTY = '';
+	private static final String DASH = '-';
+	private static final String PERIOD = '.';
+	private static final String COMMA_SPACE = ', ';
+	private static final String TREATING_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL;
 
 	/**
 	 * Revert Chapter Name Change
@@ -14,14 +29,14 @@ public class LeadService {
 	 */
 	public static Map<Id, Lead> revertChapterNameChange(List<Id> leadIds) {
 		Map<Id, Lead> leadUpdateMap = new Map<Id, Lead>();
-		for (Lead processLead : [
+		for (Lead lead : [
 				SELECT Id, ChapterName__c, Hidden_Chapter_Change_Confirmation__c
 				FROM Lead
 				WHERE Id IN :leadIds
 		]) {
-			Lead updateLead = new Lead(Id = processLead.Id);
-			updateLead.ChapterName__c = processLead.Hidden_Chapter_Change_Confirmation__c;
-			updateLead.Hidden_Chapter_Change_Confirmation__c = processLead.Hidden_Chapter_Change_Confirmation__c;
+			Lead updateLead = new Lead(Id = lead.Id);
+			updateLead.ChapterName__c = lead.Hidden_Chapter_Change_Confirmation__c;
+			updateLead.Hidden_Chapter_Change_Confirmation__c = lead.Hidden_Chapter_Change_Confirmation__c;
 			leadUpdateMap.put(updateLead.Id, updateLead);
 		}
 		update leadUpdateMap.values();
@@ -35,13 +50,13 @@ public class LeadService {
 	 */
 	public static Map<Id, Lead> backupChapterNameChange(List<Id> leadIds) {
 		Map<Id, Lead> leadUpdateMap = new Map<Id, Lead>();
-		for (Lead processLead : [
+		for (Lead lead : [
 				SELECT Id, ChapterName__c, Hidden_Chapter_Change_Confirmation__c
 				FROM Lead
 				WHERE Id IN :leadIds
 		]) {
-			Lead updateLead = new Lead(Id = processLead.Id);
-			updateLead.Hidden_Chapter_Change_Confirmation__c = processLead.ChapterName__c;
+			Lead updateLead = new Lead(Id = lead.Id);
+			updateLead.Hidden_Chapter_Change_Confirmation__c = lead.ChapterName__c;
 			leadUpdateMap.put(updateLead.Id, updateLead);
 		}
 		update leadUpdateMap.values();
@@ -62,28 +77,28 @@ public class LeadService {
 				FROM Lead
 				WHERE Id = :leadId
 		];
-		lead.Admitting_diagnosis__c = '';
-		lead.Angina__c = '';
+		lead.Admitting_diagnosis__c = EMPTY;
+		lead.Angina__c = EMPTY;
 		lead.Any_medical_reason_for_moving_quickly__c = lead.Hidden_Potential_Rush__c;
-		lead.Arrhythmia__c = '';
+		lead.Arrhythmia__c = EMPTY;
 		lead.Child_will_ultimately_die_prematurely__c = false;
-		lead.Chronic_Heart_Failure__c = '';
-		lead.Chronic_Hepatitis__c = '';
-		lead.Congenital_Heart_Disease__c = '';
-		lead.Convulsive_Disorders__c = '';
-		lead.Current_Condition_Label__c = '';
-		lead.Current_Condition_Label__c = '';
-		lead.Current_Condition_Label__c = '';
+		lead.Chronic_Heart_Failure__c = EMPTY;
+		lead.Chronic_Hepatitis__c = EMPTY;
+		lead.Congenital_Heart_Disease__c = EMPTY;
+		lead.Convulsive_Disorders__c = EMPTY;
+		lead.Current_Condition_Label__c = EMPTY;
+		lead.Current_Condition_Label__c = EMPTY;
+		lead.Current_Condition_Label__c = EMPTY;
 		lead.Debilitation_may_extend_over_many_years__c = false;
 		lead.DV_Present__c = false;
-		lead.Heart_Failure__c = '';
-		lead.I_am_Recognized_To_Practice_As_a__c = '';
-		lead.I_m_Part_of_The_Treating_HealthCare_Team__c = '';
-		lead.ICU_Admissions__c = '';
+		lead.Heart_Failure__c = EMPTY;
+		lead.I_am_Recognized_To_Practice_As_a__c = EMPTY;
+		lead.I_m_Part_of_The_Treating_HealthCare_Team__c = EMPTY;
+		lead.ICU_Admissions__c = EMPTY;
 		lead.Increased_probability_of_premature_death__c = false;
-		lead.Is_in_a_Comatose_Vegetative_State__c = '';
+		lead.Is_in_a_Comatose_Vegetative_State__c = EMPTY;
 		lead.isSign__c = false;
-		lead.Lung_Disease__c = '';
+		lead.Lung_Disease__c = EMPTY;
 		lead.None_of_these_statements_describes_Child__c = false;
 		lead.Number_hospital_admissions__c = null;
 		lead.Part_A_Received__c = null;
@@ -91,36 +106,36 @@ public class LeadService {
 		lead.PD_Condition_Description__c = lead.Diagnosis_Given_By_Referrer__c;
 		lead.PD_ICD_Code__c = lead.ICD_Given_By_Referrer__c;
 		lead.Pending_Diagnosis_Date__c = Date.today();
-		lead.Please_Explain__c = '';
-		lead.Please_Explain_Deteriorate__c = '';
-		lead.PR_Diagnosis__c = '';
-		lead.Provided_additional_information__c = '';
-		lead.Provider_Signature__c = '';
-		lead.Pulmonary_Hypertension__c = '';
+		lead.Please_Explain__c = EMPTY;
+		lead.Please_Explain_Deteriorate__c = EMPTY;
+		lead.PR_Diagnosis__c = EMPTY;
+		lead.Provided_additional_information__c = EMPTY;
+		lead.Provider_Signature__c = EMPTY;
+		lead.Pulmonary_Hypertension__c = EMPTY;
 		lead.Responds_to_treatment_with_normal_health__c = false;
 		lead.RFI_Form_Info_Hidden__c = lead.Status;
 		lead.Risk_of_complications_premature_death__c = false;
 		lead.Rush__c = false;
-		lead.SD1_Condition_Description__c = '';
+		lead.SD1_Condition_Description__c = EMPTY;
 		lead.SD1_ICD_Code__c = null;
-		lead.SD2_Condition_Description__c = '';
+		lead.SD2_Condition_Description__c = EMPTY;
 		lead.SD2_ICD_Code__c = null;
-		lead.SD3_Condition_Description__c = '';
+		lead.SD3_Condition_Description__c = EMPTY;
 		lead.SD3_ICD_Code__c = null;
-		lead.SD4_Condition_Description__c = '';
+		lead.SD4_Condition_Description__c = EMPTY;
 		lead.SD4_ICD_Code__c = null;
 		lead.Status = Constant_AC.LEAD_STATUS_REFERRED;
-		lead.Strokes__c = '';
+		lead.Strokes__c = EMPTY;
 		lead.Sub_Status__c = Constant_AC.LEAD_SUB_STATUS_PENDING_DIAGNOSIS_VERIFICATION;
-		lead.This_Statement_Describes_My_Patient__c = '';
-		lead.Travel_algorithm__c = '';
-		lead.Travel_Restriction__c = '';
+		lead.This_Statement_Describes_My_Patient__c = EMPTY;
+		lead.Travel_algorithm__c = EMPTY;
+		lead.Travel_Restriction__c = EMPTY;
 		lead.Treatment_may_be_feasible_but_can_fail__c = false;
 		lead.Treatment_may_prolong_normal_activities__c = false;
-		lead.Unplanned_hospital_admissions__c = '';
-		lead.Ventilator__c = '';
-		lead.Why_do_you_feel_would_be_eligible_Wish__c = '';
-		lead.Will_Child_s_Condition_Deteriorate__c = '';
+		lead.Unplanned_hospital_admissions__c = EMPTY;
+		lead.Ventilator__c = EMPTY;
+		lead.Why_do_you_feel_would_be_eligible_Wish__c = EMPTY;
+		lead.Will_Child_s_Condition_Deteriorate__c = EMPTY;
 		update lead;
 		return lead;
 	}
@@ -143,28 +158,28 @@ public class LeadService {
 		if (lead.Of_Times_Email_Sent__c == null) {
 			lead.Of_Times_Email_Sent__c = 0;
 		}
-		lead.Admitting_diagnosis__c = '';
-		lead.Angina__c = '';
+		lead.Admitting_diagnosis__c = EMPTY;
+		lead.Angina__c = EMPTY;
 		lead.Any_medical_reason_for_moving_quickly__c = lead.Hidden_Potential_Rush__c;
-		lead.Arrhythmia__c = '';
+		lead.Arrhythmia__c = EMPTY;
 		lead.Child_will_ultimately_die_prematurely__c = false;
-		lead.Chronic_Heart_Failure__c = '';
-		lead.Chronic_Hepatitis__c = '';
-		lead.Congenital_Heart_Disease__c = '';
-		lead.Convulsive_Disorders__c = '';
-		lead.Current_Condition_Label__c = '';
-		lead.Current_Condition_Label__c = '';
-		lead.Current_Condition_Label__c = '';
+		lead.Chronic_Heart_Failure__c = EMPTY;
+		lead.Chronic_Hepatitis__c = EMPTY;
+		lead.Congenital_Heart_Disease__c = EMPTY;
+		lead.Convulsive_Disorders__c = EMPTY;
+		lead.Current_Condition_Label__c = EMPTY;
+		lead.Current_Condition_Label__c = EMPTY;
+		lead.Current_Condition_Label__c = EMPTY;
 		lead.Debilitation_may_extend_over_many_years__c = false;
 		lead.DV_Present__c = false;
-		lead.Heart_Failure__c = '';
-		lead.I_am_Recognized_To_Practice_As_a__c = '';
-		lead.I_m_Part_of_The_Treating_HealthCare_Team__c = '';
-		lead.ICU_Admissions__c = '';
+		lead.Heart_Failure__c = EMPTY;
+		lead.I_am_Recognized_To_Practice_As_a__c = EMPTY;
+		lead.I_m_Part_of_The_Treating_HealthCare_Team__c = EMPTY;
+		lead.ICU_Admissions__c = EMPTY;
 		lead.Increased_probability_of_premature_death__c = false;
-		lead.Is_in_a_Comatose_Vegetative_State__c = '';
+		lead.Is_in_a_Comatose_Vegetative_State__c = EMPTY;
 		lead.isSign__c = false;
-		lead.Lung_Disease__c = '';
+		lead.Lung_Disease__c = EMPTY;
 		lead.None_of_these_statements_describes_Child__c = false;
 		lead.Number_hospital_admissions__c = null;
 		lead.Part_A_Received__c = null;
@@ -172,37 +187,37 @@ public class LeadService {
 		lead.PD_Condition_Description__c = lead.Diagnosis_Given_By_Referrer__c;
 		lead.PD_ICD_Code__c = lead.ICD_Given_By_Referrer__c;
 		lead.Pending_Diagnosis_Date__c = Date.today();
-		lead.Please_Explain__c = '';
-		lead.Please_Explain_Deteriorate__c = '';
-		lead.PR_Diagnosis__c = '';
-		lead.Provided_additional_information__c = '';
-		lead.Provider_Signature__c = '';
-		lead.Pulmonary_Hypertension__c = '';
+		lead.Please_Explain__c = EMPTY;
+		lead.Please_Explain_Deteriorate__c = EMPTY;
+		lead.PR_Diagnosis__c = EMPTY;
+		lead.Provided_additional_information__c = EMPTY;
+		lead.Provider_Signature__c = EMPTY;
+		lead.Pulmonary_Hypertension__c = EMPTY;
 		lead.Responds_to_treatment_with_normal_health__c = false;
 		lead.RFI_Form_Info_Hidden__c = lead.Status;
 		lead.Risk_of_complications_premature_death__c = false;
 		lead.Rush__c = false;
-		lead.SD1_Condition_Description__c = '';
+		lead.SD1_Condition_Description__c = EMPTY;
 		lead.SD1_ICD_Code__c = null;
-		lead.SD2_Condition_Description__c = '';
+		lead.SD2_Condition_Description__c = EMPTY;
 		lead.SD2_ICD_Code__c = null;
-		lead.SD3_Condition_Description__c = '';
+		lead.SD3_Condition_Description__c = EMPTY;
 		lead.SD3_ICD_Code__c = null;
-		lead.SD4_Condition_Description__c = '';
+		lead.SD4_Condition_Description__c = EMPTY;
 		lead.SD4_ICD_Code__c = null;
 		lead.Status = Constant_AC.LEAD_STATUS_REFERRED;
-		lead.Strokes__c = '';
+		lead.Strokes__c = EMPTY;
 		lead.Sub_Status__c = Constant_AC.LEAD_SUB_STATUS_PENDING_DIAGNOSIS_VERIFICATION;
-		lead.This_Statement_Describes_My_Patient__c = '';
-		lead.Travel_algorithm__c = '';
-		lead.Travel_Restriction__c = '';
+		lead.This_Statement_Describes_My_Patient__c = EMPTY;
+		lead.Travel_algorithm__c = EMPTY;
+		lead.Travel_Restriction__c = EMPTY;
 		lead.Treatment_may_be_feasible_but_can_fail__c = false;
 		lead.Treatment_may_prolong_normal_activities__c = false;
-		lead.Unplanned_hospital_admissions__c = '';
-		lead.Ventilator__c = '';
-		lead.Why_do_you_feel_would_be_eligible_Wish__c = '';
-		lead.Will_Child_s_Condition_Deteriorate__c = '';
-		lead.Hidden_DV_form_Medical_professional_Type__c = 'Treating Medical Professional';
+		lead.Unplanned_hospital_admissions__c = EMPTY;
+		lead.Ventilator__c = EMPTY;
+		lead.Why_do_you_feel_would_be_eligible_Wish__c = EMPTY;
+		lead.Will_Child_s_Condition_Deteriorate__c = EMPTY;
+		lead.Hidden_DV_form_Medical_professional_Type__c = TREATING_MEDICAL_PROFESSIONAL;
 		lead.HiddenMedicalProfessionalEmail__c = lead.Treating_Medical_Professional_Email__c;
 		lead.Of_Times_Email_Sent__c = 0;
 		lead.Of_Times_Email_Sent__c = lead.Of_Times_Email_Sent__c + 1;
@@ -258,11 +273,11 @@ public class LeadService {
 				FROM Lead
 				WHERE ((LastName = :lastName AND FirstName = :firstName)
 				OR (LastName = :lastName AND ((State = :state AND City = :city AND Street = :street
-				AND PostalCode = :postalCode) OR (Email != '' AND Email = :email)))
+				AND PostalCode = :postalCode) OR (Email != :EMPTY AND Email = :email)))
 				OR (FirstName = :firstName AND ((State = :state AND City = :city AND Street = :street
-				AND PostalCode = :postalCode) OR Phone = :phone OR (Email != '' AND Email = :email)))
+				AND PostalCode = :postalCode) OR Phone = :phone OR (Email != :EMPTY AND Email = :email)))
 				OR (DOB__c = :dateOfBirth AND ((State = :state AND City = :city
-				AND Street = :street AND PostalCode = :postalCode) OR (Email != '' AND Email = :email)))
+				AND Street = :street AND PostalCode = :postalCode) OR (Email != :EMPTY AND Email = :email)))
 				OR (DOB__c = :dateOfBirth AND (LastName = :lastName OR FirstName = :firstName)))
 				AND Id NOT IN :leadsFilterOut
 				AND IsConverted = FALSE
@@ -332,14 +347,18 @@ public class LeadService {
 		}
 	}
 
-	public static void populateRegionCode(Map<Id, Lead> leadMap, Set<Id> leadChapterSet) {
+	/**
+	 * Set Region Code
+	 * @param accountIdLeadMap
+	 */
+	public static void setRegionCode(Map<Id, Lead> accountIdLeadMap) {
 		Set<Id> chapterRegionSet = new Set<Id>();
 		try {
 			for (AggregateResult aggr : [
 					SELECT COUNT(Id) cnt,Chapter_Name__c cName
 					FROM Regions__c
 					WHERE Chapter_Name__c != NULL
-					AND Chapter_Name__c IN :leadChapterSet
+					AND Chapter_Name__c IN :accountIdLeadMap.keySet()
 					GROUP BY Chapter_Name__c
 			]) {
 				chapterRegionSet.add((Id) aggr.get('cName'));
@@ -350,7 +369,7 @@ public class LeadService {
 					WHERE Chapter_Name__c = NULL
 					LIMIT 1
 			];
-			for (Lead leadUpdate : leadMap.values()) {
+			for (Lead leadUpdate : accountIdLeadMap.values()) {
 				if (!chapterRegionSet.contains(leadUpdate.ChapterName__c)) {
 					if (!regionCodeList.isEmpty()) {
 						leadUpdate.Region_Code__c = regionCodeList.get(0).Id;
@@ -361,53 +380,53 @@ public class LeadService {
 				throw new CommonTriggerException('Test Class Execution');
 			}
 		} catch (Exception ex) {
-			for (Lead currRec : leadMap.values()) {
-				ErrorMessage_AC.createdebugRec('Lead_OnBeforeInsertTriggerHandlerHelper',
-						String.valueOf(currRec), String.valueOf(ex), 'populateRegionCode',
+			for (Lead lead : accountIdLeadMap.values()) {
+				ErrorMessage_AC.createdebugRec('LeadService',
+						String.valueOf(lead), String.valueOf(ex), 'populateRegionCode',
 						'Null', ex.getStackTraceString(), 'Error');
 			}
 			if (!Test.isRunningTest()) {
-				for (Lead currRec : leadMap.values()) {
-					currRec.addError(Label.Debug_log_error_message);
+				for (Lead lead : accountIdLeadMap.values()) {
+					lead.addError(Label.Debug_log_error_message);
 				}
 			}
-
 		}
 	}
 
-	public static void updateChapterFields(Set<String> postalCodesSet, List<Lead> updateChapterOnLeadList) {
+	/**
+	 * Update Chapter Fields
+	 * @param zipCodeLeadMap
+	 */
+	public static void updateChapterFields(Map<String, Lead> zipCodeLeadMap) {
 		Map<String, String> zipCodeChapterMap = new Map<String, String>();
 		Map<String, String> zipCodeReferralMap = new Map<String, String>();
 		Map<String, Boolean> chapterActiveMap = new Map<String, Boolean>();
-
 		try {
-			for (Zip_Code__c currZipCode : [
+			for (Zip_Code__c zipCode : [
 					SELECT Id, Name,Office__r.Chapter__c, Office__r.Referral_Email_Address__c
 					FROM Zip_Code__c
-					WHERE Name IN :postalCodesSet
-					LIMIT 50000
+					WHERE Name IN :zipCodeLeadMap.keySet()
 			]) {
-				zipCodeChapterMap.put(currZipCode.Name, currZipCode.Office__r.Chapter__c);
-				zipCodeReferralMap.put(currZipCode.Name, currZipCode.Office__r.Referral_Email_Address__c);
+				zipCodeChapterMap.put(zipCode.Name, zipCode.Office__r.Chapter__c);
+				zipCodeReferralMap.put(zipCode.Name, zipCode.Office__r.Referral_Email_Address__c);
 			}
 			for (Account account : [
 					SELECT Id, Onboarded_on_SF__c,Intake_Manager__r.Email
 					FROM Account
 					WHERE Id IN :zipCodeChapterMap.values()
-					LIMIT 50000
 			]) {
 				chapterActiveMap.put(account.Id, account.Onboarded_on_SF__c);
 			}
-			for (Lead currLead : updateChapterOnLeadList) {
-				if (zipCodeReferralMap.containsKey(currLead.PostalCode)) {
-					currLead.Office_Referral_Email__c = zipCodeReferralMap.get(currLead.PostalCode);
-				} else if (zipCodeReferralMap.containsKey(currLead.Referrer_Zip__c)) {
-					currLead.Office_Referral_Email__c = zipCodeReferralMap.get(currLead.Referrer_Zip__c);
+			for (Lead lead : zipCodeLeadMap.values()) {
+				if (zipCodeReferralMap.containsKey(lead.PostalCode)) {
+					lead.Office_Referral_Email__c = zipCodeReferralMap.get(lead.PostalCode);
+				} else if (zipCodeReferralMap.containsKey(lead.Referrer_Zip__c)) {
+					lead.Office_Referral_Email__c = zipCodeReferralMap.get(lead.Referrer_Zip__c);
 				} else {
-					currLead.Office_Referral_Email__c = null;
+					lead.Office_Referral_Email__c = null;
 				}
-				if (chapterActiveMap.containsKey(currLead.ChapterName__c)) {
-					currLead.Is_Chapter_Active__c = chapterActiveMap.get(currLead.ChapterName__c);
+				if (chapterActiveMap.containsKey(lead.ChapterName__c)) {
+					lead.Is_Chapter_Active__c = chapterActiveMap.get(lead.ChapterName__c);
 				}
 			}
 			if (Test.isRunningTest()) {
@@ -416,76 +435,85 @@ public class LeadService {
 		}
 
 		catch (Exception ex) {
-			for (Lead currRec : updateChapterOnLeadList) {
-				ErrorMessage_AC.createdebugRec('Lead_OnBeforeInsertTriggerHandlerHelper',
-						String.valueOf(currRec), String.valueOf(ex), 'updateChapterFields',
+			for (Lead lead : zipCodeLeadMap.values()) {
+				ErrorMessage_AC.createdebugRec('LeadService',
+						String.valueOf(lead), String.valueOf(ex), 'updateChapterFields',
 						'Null', ex.getStackTraceString(), 'Error');
 			}
 			if (!Test.isRunningTest()) {
-				for (Lead currRec : updateChapterOnLeadList) {
-					currRec.addError(Label.Debug_log_error_message);
+				for (Lead lead : zipCodeLeadMap.values()) {
+					lead.addError(Label.Debug_log_error_message);
 				}
 			}
 
 		}
 	}
 
-	public static void updateHiddenChapterName(Set<Id> accountIdSet, List<Lead> leadList) {
+	/**
+	 * Update Chapter Name
+	 * @param accountIdLeadMap
+	 */
+	public static void setHiddenChapterName(Map<Id, Lead> accountIdLeadMap) {
 		Map<Id, Account> accountNameMap = new Map<Id, Account>();
 		try {
-			for (Account currAcc : [
+			for (Account account : [
 					SELECT Id,Name,Intake_Manager__r.Email,Intake_Manager__c
 					FROM Account
-					WHERE Id IN :accountIdSet
+					WHERE Id IN :accountIdLeadMap.keySet()
 					LIMIT 50000
 			]) {
-				accountNameMap.put(currAcc.Id, currAcc);
+				accountNameMap.put(account.Id, account);
 			}
-			for (Lead currLead : leadList) {
-				if (accountNameMap.containsKey(currLead.ChapterName__c)) {
-					currLead.Hidden_OldChapterName__c = currLead.Hidden_Chapter_Name__c;
-					currLead.Hidden_Chapter_Name__c = accountNameMap.get(currLead.ChapterName__c).Name;
+			for (Lead lead : accountIdLeadMap.values()) {
+				if (accountNameMap.containsKey(lead.ChapterName__c)) {
+					lead.Hidden_OldChapterName__c = lead.Hidden_Chapter_Name__c;
+					lead.Hidden_Chapter_Name__c = accountNameMap.get(lead.ChapterName__c).Name;
 				}
 			}
 			if (Test.isRunningTest()) {
 				throw new CommonTriggerException('Test Class execution');
 			}
 		} catch (Exception ex) {
-			for (Lead currRec : leadList) {
-				ErrorMessage_AC.createdebugRec('Lead_OnBeforeInsertTriggerHandlerHelper',
-						String.valueOf(currRec), String.valueOf(ex), 'updateHiddenchapterName',
+			for (Lead lead : accountIdLeadMap.values()) {
+				ErrorMessage_AC.createdebugRec('LeadService',
+						String.valueOf(lead), String.valueOf(ex), 'setHiddenChapterName',
 						'Null', ex.getStackTraceString(), 'Error');
 			}
 			if (!Test.isRunningTest()) {
-				for (Lead currRec : leadList) {
-					currRec.addError(Label.Debug_log_error_message);
+				for (Lead lead : accountIdLeadMap.values()) {
+					lead.addError(Label.Debug_log_error_message);
 				}
 			}
 		}
 	}
 
-	public static void MatchConditionDescription(Map<Id, Set<Integer>> icdInfoMap, List<Lead> leadRecList, Set<Id> icdCodeRecSet) {
+	/**
+	 * Match Icd Codes with Condition Description
+	 * @param icdInfoMap
+	 * @param icdCodeLeadMap
+	 */
+	public static void matchConditionDescription(Map<Id, Set<Integer>> icdInfoMap, Map<Id, Lead> icdCodeLeadMap) {
 		Map<Id, ICD_Codes__c> icdCodeDetails = new Map<Id, ICD_Codes__c>();
 		try {
 			for (ICD_Codes__c icdInfo : [
 					SELECT Id, Name, Group1__c,
 							Condition_Description__c, Condition_Description__r.Code_To_Use__c, Condition_Description__r.Name
 					FROM ICD_Codes__c
-					WHERE Id IN :icdCodeRecSet
+					WHERE Id IN :icdCodeLeadMap.keySet()
 			]) {
 				icdCodeDetails.put(icdInfo.Id, icdInfo);
 			}
-			for (Lead updatePD : leadRecList) {
-				if (icdInfoMap.containsKey(updatePD.Id)) {
-					for (Integer icdField : icdInfoMap.get(updatePD.Id)) {
-						if (icdField == 1 && icdCodeDetails.containsKey(updatePD.SD1_ICD_Code__c)) {
-							updatePD.SD1_Condition_Description__c = icdCodeDetails.get(updatePD.SD1_ICD_Code__c).Condition_Description__r.Name;
-						} if (icdField == 2 && icdCodeDetails.containsKey(updatePD.SD2_ICD_Code__c)) {
-							updatePD.SD2_Condition_Description__c = icdCodeDetails.get(updatePD.SD2_ICD_Code__c).Condition_Description__r.Name;
-						} if (icdField == 3 && icdCodeDetails.containsKey(updatePD.SD3_ICD_Code__c)) {
-							updatePD.SD3_Condition_Description__c = icdCodeDetails.get(updatePD.SD3_ICD_Code__c).Condition_Description__r.Name;
-						} if (icdField == 4 && icdCodeDetails.containsKey(updatePD.SD4_ICD_Code__c)) {
-							updatePD.SD4_Condition_Description__c = icdCodeDetails.get(updatePD.SD4_ICD_Code__c).Condition_Description__r.Name;
+			for (Lead lead : icdCodeLeadMap.values()) {
+				if (icdInfoMap.containsKey(lead.Id)) {
+					for (Integer icdField : icdInfoMap.get(lead.Id)) {
+						if (icdField == 1 && icdCodeDetails.containsKey(lead.SD1_ICD_Code__c)) {
+							lead.SD1_Condition_Description__c = icdCodeDetails.get(lead.SD1_ICD_Code__c).Condition_Description__r.Name;
+						} if (icdField == 2 && icdCodeDetails.containsKey(lead.SD2_ICD_Code__c)) {
+							lead.SD2_Condition_Description__c = icdCodeDetails.get(lead.SD2_ICD_Code__c).Condition_Description__r.Name;
+						} if (icdField == 3 && icdCodeDetails.containsKey(lead.SD3_ICD_Code__c)) {
+							lead.SD3_Condition_Description__c = icdCodeDetails.get(lead.SD3_ICD_Code__c).Condition_Description__r.Name;
+						} if (icdField == 4 && icdCodeDetails.containsKey(lead.SD4_ICD_Code__c)) {
+							lead.SD4_Condition_Description__c = icdCodeDetails.get(lead.SD4_ICD_Code__c).Condition_Description__r.Name;
 						}
 					}
 				}
@@ -493,132 +521,125 @@ public class LeadService {
 			if (Test.isRunningTest()) {
 				throw new CommonTriggerException('Test Class execution');
 			}
-		}
-
-		catch (Exception ex) {
-
-			for (Lead currRec : leadRecList) {
-				ErrorMessage_AC.createdebugRec('Lead_OnBeforeUpdateTriggerHandlerHelper',
-						String.valueOf(currRec), String.valueOf(ex), 'MatchConditionDescription',
-						currRec.Id, ex.getStackTraceString(), 'Error');
+		} catch (Exception ex) {
+			for (Lead lead : icdCodeLeadMap.values()) {
+				ErrorMessage_AC.createdebugRec('LeadService',
+						String.valueOf(lead), String.valueOf(ex), 'matchConditionDescription',
+						lead.Id, ex.getStackTraceString(), 'Error');
 			}
 			if (!Test.isRunningTest()) {
-				for (Lead currRec : leadRecList) {
-					currRec.addError(Label.Debug_log_error_message);
+				for (Lead lead : icdCodeLeadMap.values()) {
+					lead.addError(Label.Debug_log_error_message);
 				}
-			}
-
-		}
-	}
-
-	public static void updateLeadOwner(List<Lead> leadsToUpdateList, Set<String> chaptersSet) {
-		Map<Id, Account> chapterMap = new Map<Id, Account>([
-				SELECT Id,Intake_Manager__c,Onboarded_on_SF__c
-				FROM Account
-				WHERE Id IN :chaptersSet
-				LIMIT 50000
-		]);
-		Set<String> zipSet = new Set<String>();
-		try {
-			for (Lead currLead : leadsToUpdateList) {
-				if (chapterMap.containsKey(currLead.ChapterName__c)) {
-					if (chapterMap.get(currLead.ChapterName__c).Intake_Manager__c != null) {
-						currLead.OwnerId = chapterMap.get(currLead.ChapterName__c).Intake_Manager__c;
-					} else {
-						currLead.OwnerId = Label.Salesforce_Support_User_Id;
-					}
-					if (chapterMap.get(currLead.ChapterName__c).Onboarded_on_SF__c != null) {
-						currLead.Is_Chapter_Active__c = chapterMap.get(currLead.ChapterName__c).Onboarded_on_SF__c;
-					}
-				}
-			}
-			for (Lead processLead : leadsToUpdateList) {
-				zipSet.add(processLead.PostalCode);
-			}
-			List<Zip_Code__c> officeZipList = [
-					SELECT Id,Name, Office__c,Office__r.Chapter__c, Office__r.Referral_Email_Address__c
-					FROM Zip_Code__c
-					WHERE Name IN :zipSet AND Office__r.Chapter__c IN :chaptersSet
-			];
-			if (!officeZipList.isEmpty()) {
-				for (Lead processLead : leadsToUpdateList) {
-					for (Zip_Code__c zipInfo : officeZipList) {
-						if (processLead.PostalCode == zipInfo.Name
-								&& processLead.ChapterName__c == zipInfo.Office__r.Chapter__c) {
-							if (zipInfo.Office__r.Referral_Email_Address__c != null) {
-								processLead.Office_Referral_Email__c = zipInfo.Office__r.Referral_Email_Address__c;
-							}
-						}
-					}
-				}
-			}
-		}
-
-		catch (Exception ex) {
-
-			for (Lead currRec : leadsToUpdateList) {
-				ErrorMessage_AC.createdebugRec('Lead_OnBeforeUpdateTriggerHandlerHelper',
-						String.valueOf(currRec), String.valueOf(ex), 'updateLeadOwner',
-						currRec.Id, ex.getStackTraceString(), 'Error');
-			}
-			for (Lead currRec : leadsToUpdateList) {
-				currRec.addError(Label.Debug_log_error_message);
 			}
 		}
 	}
 
 	/**
-	 * Update the Chapter Name on Medical Professional Contact. If the Zip Code value is updated.
+	 * Update Lead Owner
+	 * @param accountIdLeadMap
+	 */
+	public static void updateLeadOwner(Map<Id, Lead> accountIdLeadMap) {
+		Map<Id, Account> chapterMap = new Map<Id, Account>([
+				SELECT Id,Intake_Manager__c,Onboarded_on_SF__c
+				FROM Account
+				WHERE Id IN :accountIdLeadMap.keySet()
+		]);
+		try {
+			Set<String> zipSet = new Set<String>();
+			for (Lead lead : accountIdLeadMap.values()) {
+				if (chapterMap.containsKey(lead.ChapterName__c)) {
+					if (chapterMap.get(lead.ChapterName__c).Intake_Manager__c != null) {
+						lead.OwnerId = chapterMap.get(lead.ChapterName__c).Intake_Manager__c;
+					} else {
+						lead.OwnerId = Label.Salesforce_Support_User_Id;
+					}
+					if (chapterMap.get(lead.ChapterName__c).Onboarded_on_SF__c != null) {
+						lead.Is_Chapter_Active__c = chapterMap.get(lead.ChapterName__c).Onboarded_on_SF__c;
+					}
+				}
+				zipSet.add(lead.PostalCode);
+			}
+			List<Zip_Code__c> officeZipList = [
+					SELECT Id,Name, Office__c,Office__r.Chapter__c, Office__r.Referral_Email_Address__c
+					FROM Zip_Code__c
+					WHERE Name IN :zipSet AND Office__r.Chapter__c IN :accountIdLeadMap.keySet()
+			];
+			if (!officeZipList.isEmpty()) {
+				for (Lead lead : accountIdLeadMap.values()) {
+					for (Zip_Code__c zipInfo : officeZipList) {
+						if (lead.PostalCode == zipInfo.Name
+								&& lead.ChapterName__c == zipInfo.Office__r.Chapter__c) {
+							if (zipInfo.Office__r.Referral_Email_Address__c != null) {
+								lead.Office_Referral_Email__c = zipInfo.Office__r.Referral_Email_Address__c;
+							}
+						}
+					}
+				}
+			}
+		} catch (Exception ex) {
+			for (Lead lead : accountIdLeadMap.values()) {
+				ErrorMessage_AC.createdebugRec('LeadService',
+						String.valueOf(lead), String.valueOf(ex), 'updateLeadOwner',
+						lead.Id, ex.getStackTraceString(), 'Error');
+			}
+			for (Lead lead : accountIdLeadMap.values()) {
+				lead.addError(Label.Debug_log_error_message);
+			}
+		}
+	}
+
+	/**
+	 * Set the Chapter Name on Medical Professional Contact. If the Zip Code value is updated.
 	 * @param conditionDescriptionsSet
 	 * @param icdCodesSet
 	 * @param leadUpdateToMedicalInfoList
 	 */
-	public static void ToUpdateMedicalInfo(Set<String> conditionDescriptionsSet, Set<String> icdCodesSet, List<Lead> leadUpdateToMedicalInfoList) {
+	public static void setMedicalInfo(Set<String> conditionDescriptionsSet, Set<String> icdCodesSet, List<Lead> leadUpdateToMedicalInfoList) {
 		Set<Id> conditionDescriptionIdSet = new Set<Id>();
 		Map<String, ICD_Codes__c> icdCodesMap = new Map<String, ICD_Codes__c>();
 		try {
 			if (!icdCodesSet.isEmpty()) {
-
-				for (ICD_Codes__c currRec : [
+				for (ICD_Codes__c icdCode : [
 						SELECT Id,Name, Condition_Description__r.PR_Diagnosis__c,Group1__c,
 								Condition_Description__c, Condition_Description__r.Code_To_Use__c,Condition_Description__r.Name
 						FROM ICD_Codes__c
 						WHERE Id IN :icdCodesSet
 				]) {
-					icdCodesMap.put(currRec.Id, currRec);
-					if (currRec.Condition_Description__c != null) {
-						conditionDescriptionIdSet.add(currRec.Condition_Description__c);
+					icdCodesMap.put(icdCode.Id, icdCode);
+					if (icdCode.Condition_Description__c != null) {
+						conditionDescriptionIdSet.add(icdCode.Condition_Description__c);
 					}
 				}
-				Map<Id, Set<Id>> iCDforCondionDescMap = new Map<Id, Set<Id>>();
+				Map<Id, Set<Id>> icdConditionDescriptionMap = new Map<Id, Set<Id>>();
 				for (ICD_Codes__c icdInfo : [
 						SELECT Id, Condition_Description__c
 						FROM ICD_Codes__c
 						WHERE Condition_Description__c IN :conditionDescriptionIdSet
 				]) {
-					if (iCDforCondionDescMap.containsKey(icdInfo.Condition_Description__c)) {
-						iCDforCondionDescMap.get(icdInfo.Condition_Description__c).add(icdInfo.Id);
+					if (icdConditionDescriptionMap.containsKey(icdInfo.Condition_Description__c)) {
+						icdConditionDescriptionMap.get(icdInfo.Condition_Description__c).add(icdInfo.Id);
 					} else {
-						iCDforCondionDescMap.put(icdInfo.Condition_Description__c, new Set<Id>{
+						icdConditionDescriptionMap.put(icdInfo.Condition_Description__c, new Set<Id>{
 								icdInfo.Id
 						});
 					}
 				}
-				for (Lead currLead : leadUpdateToMedicalInfoList) {
-					if (icdCodesMap.containsKey(currLead.Qualifying_ICD__c)) {
-						if (icdCodesMap.get(currLead.Qualifying_ICD__c).Condition_Description__c != null) {
-							currLead.Qualifying_Diagnosis__c = icdCodesMap.get(currLead.Qualifying_ICD__c).Condition_Description__r.Name;
+				for (Lead lead : leadUpdateToMedicalInfoList) {
+					if (icdCodesMap.containsKey(lead.Qualifying_ICD__c)) {
+						if (icdCodesMap.get(lead.Qualifying_ICD__c).Condition_Description__c != null) {
+							lead.Qualifying_Diagnosis__c = icdCodesMap.get(lead.Qualifying_ICD__c).Condition_Description__r.Name;
 						} else {
-							currLead.Qualifying_Diagnosis__c = '';
+							lead.Qualifying_Diagnosis__c = EMPTY;
 						}
 					}
-					if (currLead.Qualifying_ICD__c != null) {
-						if (icdCodesMap.containsKey(currLead.Qualifying_ICD__c)
-								&& icdCodesMap.get(currLead.Qualifying_ICD__c).Condition_Description__c != null) {
-							currLead.PR_Diagnosis__c = icdCodesMap.get(currLead.Qualifying_ICD__c).Condition_Description__r.PR_Diagnosis__c;
-							if (iCDforCondionDescMap.containsKey(icdCodesMap.get(currLead.Qualifying_ICD__c).Condition_Description__c)) {
-								if (iCDforCondionDescMap.get(icdCodesMap.get(currLead.Qualifying_ICD__c).Condition_Description__c).contains(currLead.Qualifying_ICD__c)) {
-									currLead.Qualifying_Diagnosis__c = icdCodesMap.get(currLead.Qualifying_ICD__c).Condition_Description__r.Name;
+					if (lead.Qualifying_ICD__c != null) {
+						if (icdCodesMap.containsKey(lead.Qualifying_ICD__c)
+								&& icdCodesMap.get(lead.Qualifying_ICD__c).Condition_Description__c != null) {
+							lead.PR_Diagnosis__c = icdCodesMap.get(lead.Qualifying_ICD__c).Condition_Description__r.PR_Diagnosis__c;
+							if (icdConditionDescriptionMap.containsKey(icdCodesMap.get(lead.Qualifying_ICD__c).Condition_Description__c)) {
+								if (icdConditionDescriptionMap.get(icdCodesMap.get(lead.Qualifying_ICD__c).Condition_Description__c).contains(lead.Qualifying_ICD__c)) {
+									lead.Qualifying_Diagnosis__c = icdCodesMap.get(lead.Qualifying_ICD__c).Condition_Description__r.Name;
 								}
 							}
 						}
@@ -627,16 +648,16 @@ public class LeadService {
 			}
 			if (!conditionDescriptionsSet.isEmpty()) {
 				Map<String, Condition_Description__c> descriptionMap = new Map<String, Condition_Description__c>();
-				for (Condition_Description__c currRec : [
+				for (Condition_Description__c lead : [
 						SELECT Id, PR_Diagnosis__c, Name
 						FROM Condition_Description__c
 						WHERE Name IN :conditionDescriptionsSet
 				]) {
-					descriptionMap.put(currRec.Name, currRec);
+					descriptionMap.put(lead.Name, lead);
 				}
-				for (Lead currLead : leadUpdateToMedicalInfoList) {
-					if (descriptionMap.containsKey(currLead.Qualifying_Diagnosis__c)) {
-						currLead.PR_Diagnosis__c = descriptionMap.get(currLead.Qualifying_Diagnosis__c).PR_Diagnosis__c;
+				for (Lead lead : leadUpdateToMedicalInfoList) {
+					if (descriptionMap.containsKey(lead.Qualifying_Diagnosis__c)) {
+						lead.PR_Diagnosis__c = descriptionMap.get(lead.Qualifying_Diagnosis__c).PR_Diagnosis__c;
 					}
 				}
 			}
@@ -644,166 +665,80 @@ public class LeadService {
 				throw new CommonTriggerException('Test Class execution');
 			}
 		} catch (Exception ex) {
-			for (Lead currRec : leadUpdateToMedicalInfoList) {
-				ErrorMessage_AC.createdebugRec('Lead_OnBeforeUpdateTriggerHandlerHelper',
-						String.valueOf(currRec), String.valueOf(ex), 'ToUpdateMedicalInfo',
-						currRec.Id, ex.getStackTraceString(), 'Error');
+			for (Lead lead : leadUpdateToMedicalInfoList) {
+				ErrorMessage_AC.createdebugRec('LeadService',
+						String.valueOf(lead), String.valueOf(ex), 'setMedicalInfo',
+						lead.Id, ex.getStackTraceString(), 'Error');
 			}
 			if (!Test.isRunningTest()) {
-				for (Lead currRec : leadUpdateToMedicalInfoList) {
-					currRec.addError(Label.Debug_log_error_message);
-				}
-			}
-
-		}
-	}
-
-	/**
-	 * This CreateNewCase method is used to create a new eligibility review case when the lead status is updated
-	 * as elegibility review.
-	 * @param LeadList
-	 */
-	public static void CreateNewCase(List<Lead> LeadList) {
-		List<Case> newCaseList = new List<Case>();
-		Set<Id> accountIdSet = new Set<Id>();
-		Map<Id, String> emailMap = new Map<Id, String>();
-		Id chapterRecordTypeId = Constant_AC.CHAPTER_RT_ID;
-		Id partARecordTypeId = Constant_AC.DIAGNOSIS_RT_ID;
-		String nationalAdviser = System.Label.MedicalAdviser;
-		Id nationAdvisorQueueId = [
-				SELECT Id
-				FROM Group
-				WHERE Name = :nationalAdviser
-		].Id;
-		try {
-			for (Lead process : LeadList) {
-				accountIdSet.add(process.ChapterName__c);
-			}
-			if (!accountIdSet.isEmpty()) {
-				for (Account dbChapterAcc : [
-						SELECT Id,MAC_Email_del__c,RecordTypeId
-						FROM Account
-						WHERE Id IN:accountIdSet AND RecordTypeId = :chapterRecordTypeId
-				]) {
-					emailMap.put(dbChapterAcc.Id, dbChapterAcc.MAC_Email_del__c);
-				}
-			}
-			for (Lead processLead : LeadList) {
-				Case newCase = new Case();
-				newCase.Status = 'New';
-				if (processLead.Is_in_a_Comatose_Vegetative_State__c == 'Yes') {
-					newCase.Status = 'Pending Clarification - Chapter';
-				}
-				newCase.Origin = 'Email';
-				newCase.Subject = processLead.FirstName + ' ' + processLead.LastName + ' - Eligibility Review';
-				newCase.RecordTypeId = partARecordTypeId;
-				newCase.OwnerId = nationAdvisorQueueId;
-				newCase.Hidden_Why_do_you_feel__c = processLead.Why_do_you_feel_would_be_eligible_Wish__c;
-				if (emailMap.containsKey(processLead.ChapterName__c)) {
-					newCase.MAC_Email__c = emailMap.get(processLead.ChapterName__c);
-				}
-				newCase.Lead__c = processLead.Id;
-				newCase.AccountId = processLead.ChapterName__c;
-				newCase.ChapterName__c = processLead.ChapterName__c;
-				if (processLead.Any_medical_reason_for_moving_quickly__c == 'Yes') {
-					newCase.Rush__c = true;
-					newCase.Rush_Explanation__c = processLead.Please_Explain__c;
-					newCase.Rush_Timeframe__c = 'Select timeframe';
-					newCase.Diagnosis_Verification_Receive_Date__c = processLead.Part_A_Received__c;
-				}
-				if (processLead.Any_medical_reason_for_moving_quickly__c != null) {
-					String medicalReason = processLead.Any_medical_reason_for_moving_quickly__c;
-					if (medicalReason.contains('Yes')) {
-						newCase.Rush__c = true;
-					}
-				}
-				newCaseList.add(newCase);
-			}
-			if (!newCaseList.isEmpty()) {
-				insert newCaseList;
-			}
-			if (Test.isRunningTest()) {
-				throw new CommonTriggerException('Test Class execution');
-			}
-		} catch (Exception ex) {
-			for (Lead currRec : LeadList) {
-				ErrorMessage_AC.createdebugRec('Lead_OnBeforeUpdateTriggerHandlerHelper',
-						String.valueOf(currRec), String.valueOf(ex), 'CreateNewCase',
-						currRec.Id, ex.getStackTraceString(), 'Error');
-			}
-			if (!Test.isRunningTest()) {
-				for (Lead currRec : LeadList) {
-					currRec.addError(Label.Debug_log_error_message);
+				for (Lead lead : leadUpdateToMedicalInfoList) {
+					lead.addError(Label.Debug_log_error_message);
 				}
 			}
 		}
 	}
 
 	/**
-	 * This findDuplicateRecords() method is fire if the lead status is "Reffered" and sub status is "Pending dignose verification".
-	 * It will display error message if any duplicate wishchild or wish family or medical proff contact is there.
+	 * Find Duplicate Leads for Referred Leads with sub status "Pending Diagnosis Verification"
+	 * and display error message if any duplicate Wish Child or Wish Family or Medical Professional Contact are found.
 	 * @param leadList
 	 */
-	public static void findDuplicateRecords(List<Lead> leadList) {
+	public static void findDuplicateLeads(List<Lead> leadList) {
 		Set<String> leadFNamesSet = new Set<String>();
 		Set<String> leadLNamesSet = new Set<String>();
-		Set<Date> leadbDaysSet = new Set<Date>();
-		Set<String> AddressSet = new Set<String>();
+		Set<Date> birthdateSet = new Set<Date>();
+		Set<String> addressSet = new Set<String>();
 		Set<String> phoneSet = new Set<String>();
 		Set<String> zipCodesSet = new Set<String>();
 		Set<String> citySet = new Set<String>();
-		Set<String> emailsSet = new Set<String>();
+		Set<String> emailSet = new Set<String>();
 		Set<String> stateSet = new Set<String>();
 		Set<Id> leadIds = new Set<Id>();
 		Set<String> chaptersSet = new Set<String>();
 		List<Lead> noDupLeadRec = new List<Lead>();
 		Id wishChild = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
-		String errorType = 'Classic';
-		if (UserInfo.getUiTheme() == 'Theme4d' || UserInfo.getUiTheme() == 'Theme4u') {
-			errorType = 'Lightning';
+		String errorType = TYPE_CLASSIC;
+		if (UserInfo.getUiTheme() == THEME_4D || UserInfo.getUiTheme() == THEME_4U) {
+			errorType = TYPE_LIGHTNING;
 		}
-		User u = [
-				SELECT Id, UserPreferencesLightningExperiencePreferred
-				FROM User
-				WHERE Id = :UserInfo.getUserId()
-				LIMIT 1
-		];
 		try {
-			for (Lead currLead : leadList) {
-				if (currLead.FirstName != null) {
-					leadFNamesSet.add(currLead.FirstName);
+			for (Lead lead : leadList) {
+				if (lead.FirstName != null) {
+					leadFNamesSet.add(lead.FirstName);
 				}
-				if (currLead.LastName != null) {
-					leadLNamesSet.add(currLead.LastName);
+				if (lead.LastName != null) {
+					leadLNamesSet.add(lead.LastName);
 				}
-				if (currLead.DOB__c != null)
-					leadbDaysSet.add(currLead.DOB__c);
-				addressSet.add(currLead.City + '-' + currLead.State + '-' + currLead.PostalCode);
-				if (currLead.PostalCode != null) {
-					zipCodesSet.add(currLead.PostalCode);
+				if (lead.DOB__c != null) {
+					birthdateSet.add(lead.DOB__c);
 				}
-				if (currLead.City != null) {
-					citySet.add(currLead.City);
+				if (lead.PostalCode != null) {
+					zipCodesSet.add(lead.PostalCode);
 				}
-				if (currLead.State != null) {
-					stateSet.add(currLead.State);
+				if (lead.City != null) {
+					citySet.add(lead.City);
 				}
-				if (currLead.Phone != null) {
-					phoneSet.add(currLead.Phone);
+				if (lead.State != null) {
+					stateSet.add(lead.State);
 				}
-				if (currLead.Email != null)
-					emailsSet.add(currLead.Email);
-				chaptersSet.add(currLead.ChapterName__c);
-				if (currLead.Id != null) {
-					leadIds.add(currLead.Id);
+				if (lead.Phone != null) {
+					phoneSet.add(lead.Phone);
 				}
+				if (lead.Email != null) {
+					emailSet.add(lead.Email);
+				}
+				if (lead.Id != null) {
+					leadIds.add(lead.Id);
+				}
+				chaptersSet.add(lead.ChapterName__c);
+				addressSet.add(lead.City + DASH + lead.State + DASH + lead.PostalCode);
 			}
 			List<Lead> exLeads = [
 					SELECT Id,LastName,Street,FirstName, Email, ChapterName__c,Phone, DOB__c,
 							City,State,PostalCode
 					FROM Lead
-					WHERE (LastName IN :leadLNamesSet OR FirstName IN :leadFNamesSet OR DOB__c IN :leadbDaysSet
-					OR Phone IN :phoneSet OR Email IN :emailsSet OR (State IN :stateSet
+					WHERE (LastName IN :leadLNamesSet OR FirstName IN :leadFNamesSet OR DOB__c IN :birthdateSet
+					OR Phone IN :phoneSet OR Email IN :emailSet OR (State IN :stateSet
 					AND PostalCode IN :zipCodesSet AND City IN :citySet))
 					AND Id NOT IN :leadIds AND IsConverted = FALSE
 			];
@@ -811,162 +746,169 @@ public class LeadService {
 					SELECT Id, LastName,AccountId,MailingStreet,FirstName, Email, Phone, Birthdate,Region_Chapter__r.Name,
 							MailingCity, MailingState, MailingPostalCode
 					FROM Contact
-					WHERE (LastName IN :leadLNamesSet OR FirstName IN :leadFNamesSet OR Birthdate IN :leadbDaysSet
+					WHERE (LastName IN :leadLNamesSet OR FirstName IN :leadFNamesSet OR Birthdate IN :birthdateSet
 					OR ((MailingState IN :stateSet AND MailingPostalCode IN :zipCodesSet
-					AND MailingCity IN :citySet) OR Phone IN :phoneSet OR Email IN :emailsSet))
+					AND MailingCity IN :citySet) OR Phone IN :phoneSet OR Email IN :emailSet))
 					AND Region_Chapter__c = :chaptersSet AND RecordTypeId = :wishChild
 			];
-			for (Lead currLead : leadList) {
+			for (Lead lead : leadList) {
 				Boolean isDuplicate = false;
 				for (Lead exLead : exLeads) {
-					{
-						if (currLead.FirstName == exLead.FirstName && currLead.LastName == exLead.LastName) {
-							isDuplicate = true;
-							if (errorType == 'Lightning') {
-								currLead.addError('There might be a duplicate Wish Child. Please click Send Diagnosis Verification button to review the duplicates.', false);
-							} else {
-								currLead.addError('There might be a duplicate Wish Child. Please click <a href='
-										+ INSTANCE_URL + '/apex/LeadDuplicate_VF?id='
-										+ currLead.Id + '>here </a> to review the duplicates.',
-										false);
-							}
-						} else if (currLead.FirstName == exLead.FirstName
-								&& ((currLead.Street == exLead.Street && currLead.State == exLead.State && currLead.City == exLead.City && currLead.PostalCode == exLead.PostalCode)
-								|| currLead.Phone == exLead.Phone || currLead.Email == exLead.Email)) {
-							isDuplicate = true;
-							if (errorType == 'Lightning') {
-								currLead.addError('There might be a duplicate Wish Child. Please click Send Diagnosis Verification button to review the duplicates.', false);
-							} else {
-								currLead.addError('There might be a duplicate Wish Child. Please click <a href='
-										+ INSTANCE_URL + '/apex/LeadDuplicate_VF?id='
-										+ currLead.Id + '>here </a> to review the duplicates.',
-										false);
-							}
-						} else if ((currLead.LastName == exLead.LastName) &&
-								((currLead.Street == exLead.Street && currLead.State == exLead.State && currLead.City == exLead.City && currLead.PostalCode == exLead.PostalCode)
-										|| currLead.Email == exLead.Email)) {
-							isDuplicate = true;
-							if (errorType == 'Lightning') {
-								currLead.addError('There might be a duplicate Wish Child. Please click Send Diagnosis Verification button to review the duplicates.', false);
-							} else {
-								currLead.addError('There might be a duplicate Wish Child. Please click <a href='
-										+ INSTANCE_URL + '/apex/LeadDuplicate_VF?id='
-										+ currLead.Id + '>here </a> to review the duplicates.',
-										false);
-							}
-						} else if ((currLead.DOB__c == exLead.DOB__c)
-								&& ((currLead.Street == exLead.Street
-								&& currLead.State == exLead.State
-								&& currLead.City == exLead.City
-								&& currLead.PostalCode == exLead.PostalCode)
-								|| currLead.Email == exLead.Email)) {
-							isDuplicate = true;
-							if (errorType == 'Lightning') {
-								currLead.addError('There might be a duplicate Wish Child. Please click Send Diagnosis Verification button to review the duplicates.', false);
-							} else {
-								currLead.addError('There might be a duplicate Wish Child. Please click <a href='
-										+ INSTANCE_URL + '/apex/LeadDuplicate_VF?id='
-										+ currLead.Id + '>here </a> to review the duplicates.',
-										false);
-							}
-						} else if ((currLead.DOB__c == exLead.DOB__c)
-								&& (currLead.FirstName == exLead.FirstName
-								|| currLead.LastName == exLead.LastName)) {
-							isDuplicate = true;
-							if (errorType == 'Lightning') {
-								currLead.addError('There might be a duplicate Wish Child. Please click Send Diagnosis Verification button to review the duplicates.', false);
-							} else {
-								currLead.addError('There might be a duplicate Wish Child. Please click <a href='
-										+ INSTANCE_URL + '/apex/LeadDuplicate_VF?id='
-										+ currLead.Id + '>here </a> to review the duplicates.',
-										false);
-							}
+					if (lead.FirstName == exLead.FirstName && lead.LastName == exLead.LastName) {
+						isDuplicate = true;
+						if (errorType == TYPE_LIGHTNING) {
+							lead.addError(String.format(Label.Diagnosis_Verification_Lead_Duplicates, new List<String>{
+									ERROR_WISH_CHILD
+							}), false);
+						} else {
+							lead.addError(String.format(Label.Potential_Existing_Lead_Records, new List<String>{
+									ERROR_WISH_CHILD, INSTANCE_URL, lead.Id
+							}), false);
+						}
+					} else if (lead.FirstName == exLead.FirstName
+							&& ((lead.Street == exLead.Street && lead.State == exLead.State && lead.City == exLead.City && lead.PostalCode == exLead.PostalCode)
+							|| lead.Phone == exLead.Phone || lead.Email == exLead.Email)) {
+						isDuplicate = true;
+						if (errorType == TYPE_LIGHTNING) {
+							lead.addError(String.format(Label.Diagnosis_Verification_Lead_Duplicates, new List<String>{
+									ERROR_WISH_CHILD
+							}), false);
+						} else {
+							lead.addError(String.format(Label.Potential_Existing_Lead_Records, new List<String>{
+									ERROR_WISH_CHILD, INSTANCE_URL, lead.Id
+							}), false);
+						}
+					} else if ((lead.LastName == exLead.LastName) &&
+							((lead.Street == exLead.Street && lead.State == exLead.State && lead.City == exLead.City && lead.PostalCode == exLead.PostalCode)
+									|| lead.Email == exLead.Email)) {
+						isDuplicate = true;
+						if (errorType == TYPE_LIGHTNING) {
+							lead.addError(String.format(Label.Diagnosis_Verification_Lead_Duplicates, new List<String>{
+									ERROR_WISH_CHILD
+							}), false);
+						} else {
+							lead.addError(String.format(Label.Potential_Existing_Lead_Records, new List<String>{
+									ERROR_WISH_CHILD, INSTANCE_URL, lead.Id
+							}), false);
+						}
+					} else if ((lead.DOB__c == exLead.DOB__c)
+							&& ((lead.Street == exLead.Street
+							&& lead.State == exLead.State
+							&& lead.City == exLead.City
+							&& lead.PostalCode == exLead.PostalCode)
+							|| lead.Email == exLead.Email)) {
+						isDuplicate = true;
+						if (errorType == TYPE_LIGHTNING) {
+							lead.addError(String.format(Label.Diagnosis_Verification_Lead_Duplicates, new List<String>{
+									ERROR_WISH_CHILD
+							}), false);
+						} else {
+							lead.addError(String.format(Label.Potential_Existing_Lead_Records, new List<String>{
+									ERROR_WISH_CHILD, INSTANCE_URL, lead.Id
+							}), false);
+						}
+					} else if ((lead.DOB__c == exLead.DOB__c)
+							&& (lead.FirstName == exLead.FirstName
+							|| lead.LastName == exLead.LastName)) {
+						isDuplicate = true;
+						if (errorType == TYPE_LIGHTNING) {
+							lead.addError(String.format(Label.Diagnosis_Verification_Lead_Duplicates, new List<String>{
+									ERROR_WISH_CHILD
+							}), false);
+						} else {
+							lead.addError(String.format(Label.Potential_Existing_Lead_Records, new List<String>{
+									ERROR_WISH_CHILD, INSTANCE_URL, lead.Id
+							}), false);
 						}
 					}
 				}
 				for (Contact exCon : exContacts) {
-					if (currLead.ChapterName__c == exCon.Region_Chapter__c) {
-						if (currLead.FirstName == exCon.FirstName && currLead.LastName == exCon.LastName) {
+					if (lead.ChapterName__c == exCon.Region_Chapter__c) {
+						if (lead.FirstName == exCon.FirstName && lead.LastName == exCon.LastName) {
 							isDuplicate = true;
-							if (errorType == 'Lightning') {
-								currLead.addError('There might be a duplicate Wish Child. Please click Send Diagnosis Verification button to review the duplicates.', false);
+							if (errorType == TYPE_LIGHTNING) {
+								lead.addError(String.format(Label.Diagnosis_Verification_Lead_Duplicates, new List<String>{
+										ERROR_WISH_CHILD
+								}), false);
 							} else {
-								currLead.addError('There might be a duplicate Wish Child. Please click <a href='
-										+ INSTANCE_URL + '/apex/LeadDuplicate_VF?id='
-										+ currLead.Id + '>here </a> to review the duplicates.',
-										false);
+								lead.addError(String.format(Label.Potential_Existing_Lead_Records, new List<String>{
+										ERROR_WISH_CHILD, INSTANCE_URL, lead.Id
+								}), false);
 							}
-						} else if ((currLead.FirstName == exCon.FirstName || currLead.LastName == exCon.LastName)
-								&& ((currLead.Street == exCon.MailingStreet && currLead.State == exCon.MailingState
-								&& currLead.City == exCon.MailingCity && currLead.PostalCode == exCon.MailingPostalCode)
-								|| currLead.Phone == exCon.Phone || currLead.Email == exCon.Email)) {
+						} else if ((lead.FirstName == exCon.FirstName || lead.LastName == exCon.LastName)
+								&& ((lead.Street == exCon.MailingStreet && lead.State == exCon.MailingState
+								&& lead.City == exCon.MailingCity && lead.PostalCode == exCon.MailingPostalCode)
+								|| lead.Phone == exCon.Phone || lead.Email == exCon.Email)) {
 							isDuplicate = true;
-							if (errorType == 'Lightning') {
-								currLead.addError('There might be a duplicate Wish Child. Please click Send Diagnosis Verification button to review the duplicates.', false);
+							if (errorType == TYPE_LIGHTNING) {
+								lead.addError(String.format(Label.Diagnosis_Verification_Lead_Duplicates, new List<String>{
+										ERROR_WISH_CHILD
+								}), false);
 							} else {
-								currLead.addError('There might be a duplicate Wish Child. Please click <a href='
-										+ INSTANCE_URL + '/apex/LeadDuplicate_VF?id='
-										+ currLead.Id + '>here </a> to review the duplicates.',
-										false);
+								lead.addError(String.format(Label.Potential_Existing_Lead_Records, new List<String>{
+										ERROR_WISH_CHILD, INSTANCE_URL, lead.Id
+								}), false);
 							}
-						} else if ((currLead.DOB__c == exCon.Birthdate)
-								&& ((currLead.Street == exCon.MailingStreet
-								&& currLead.State == exCon.MailingState
-								&& currLead.City == exCon.MailingCity
-								&& currLead.PostalCode == exCon.MailingPostalCode)
-								|| currLead.Phone == exCon.Phone || currLead.Email == exCon.Email)) {
+						} else if ((lead.DOB__c == exCon.Birthdate)
+								&& ((lead.Street == exCon.MailingStreet
+								&& lead.State == exCon.MailingState
+								&& lead.City == exCon.MailingCity
+								&& lead.PostalCode == exCon.MailingPostalCode)
+								|| lead.Phone == exCon.Phone || lead.Email == exCon.Email)) {
 							isDuplicate = true;
-							if (errorType == 'Lightning') {
-								currLead.addError('There might be a duplicate Wish Child. Please click Send Diagnosis Verification button to review the duplicates.', false);
+							if (errorType == TYPE_LIGHTNING) {
+								lead.addError(String.format(Label.Diagnosis_Verification_Lead_Duplicates, new List<String>{
+										ERROR_WISH_CHILD
+								}), false);
 							} else {
-								currLead.addError('There might be a duplicate Wish Child. Please click <a href='
-										+ INSTANCE_URL + '/apex/LeadDuplicate_VF?id='
-										+ currLead.Id + '>here </a> to review the duplicates.',
-										false);
+								lead.addError(String.format(Label.Potential_Existing_Lead_Records, new List<String>{
+										ERROR_WISH_CHILD, INSTANCE_URL, lead.Id
+								}), false);
 							}
-						} else if ((currLead.DOB__c == exCon.Birthdate)
-								&& (currLead.FirstName == exCon.FirstName
-								|| currLead.LastName == exCon.LastName)) {
+						} else if ((lead.DOB__c == exCon.Birthdate)
+								&& (lead.FirstName == exCon.FirstName
+								|| lead.LastName == exCon.LastName)) {
 							isDuplicate = true;
-							if (errorType == 'Lightning') {
-								currLead.addError('There might be a duplicate Wish Child. Please click Send Diagnosis Verification button to review the duplicates.', false);
+							if (errorType == TYPE_LIGHTNING) {
+								lead.addError(String.format(Label.Diagnosis_Verification_Lead_Duplicates, new List<String>{
+										ERROR_WISH_CHILD
+								}), false);
 							} else {
-								currLead.addError('There might be a duplicate Wish Child. Please click <a href='
-										+ INSTANCE_URL + '/apex/LeadDuplicate_VF?id='
-										+ currLead.Id + '>here </a> to review the duplicates.',
-										false);
+								lead.addError(String.format(Label.Potential_Existing_Lead_Records, new List<String>{
+										ERROR_WISH_CHILD, INSTANCE_URL, lead.Id
+								}), false);
 							}
 						}
 					}
 				}
 				if (isDuplicate == false) {
-					noDupLeadRec.add(currLead);
+					noDupLeadRec.add(lead);
 				}
 			}
 			if (!noDupLeadRec.isEmpty()) {
-				FindDupContacts(noDupLeadRec);
+				findDuplicateContacts(noDupLeadRec);
 			}
 		} catch (Exception ex) {
-			for (Lead currRec : leadList) {
-				ErrorMessage_AC.createdebugRec('Lead_OnBeforeUpdateTriggerHandlerHelper',
-						String.valueOf(currRec), String.valueOf(ex), 'findDuplicateRecords',
-						currRec.Id, ex.getStackTraceString(), 'Error');
+			for (Lead lead : leadList) {
+				ErrorMessage_AC.createdebugRec('LeadService',
+						String.valueOf(lead), String.valueOf(ex), 'findDuplicateLeads',
+						lead.Id, ex.getStackTraceString(), 'Error');
 			}
-			for (Lead currRec : leadList) {
-				currRec.addError(Label.Debug_log_error_message);
+			for (Lead lead : leadList) {
+				lead.addError(Label.Debug_log_error_message);
 			}
 		}
 	}
 
 	/**
-	 * If the lead status is "Reffered" and sub status is "Pending dignose verification".
-	 * It will display error message if any duplicate wishchild or wish family or medical proff contact is there.
-	 * @param leadRecords
+	 * Find Duplicate Leads for Referred Leads with sub status "Pending Diagnosis Verification"
+	 * and display error message if any duplicate Wish Child or Wish Family or Medical Professional Contact are found.
+	 * @param leadList
 	 */
-	public static void FindDupContacts(List<Lead> leadRecords) {
-		String errorType = 'Classic';
-		if (UserInfo.getUiTheme() == 'Theme4d' || UserInfo.getUiTheme() == 'Theme4u') {
-			errorType = 'Lightning';
+	public static void findDuplicateContacts(List<Lead> leadRecords) {
+		String errorType = TYPE_CLASSIC;
+		if (UserInfo.getUiTheme() == THEME_4D || UserInfo.getUiTheme() == THEME_4U) {
+			errorType = TYPE_LIGHTNING;
 		}
 		Id wishFamilyRT = Constant_AC.WISH_FAMILY_RT_ID;
 		Id medicalProfessionalRT = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
@@ -990,15 +932,7 @@ public class LeadService {
 		Set<String> citySet = new Set<String>();
 		Set<String> emailsSet = new Set<String>();
 		Set<String> stateSet = new Set<String>();
-		Set<Id> leadIds = new Set<Id>();
 		Set<String> chaptersSet = new Set<String>();
-		User u = [
-				SELECT Id, UserPreferencesLightningExperiencePreferred
-				FROM User
-				WHERE Id = :UserInfo.getUserId()
-				LIMIT 1
-		];
-
 		try {
 			for (Lead newLead : leadRecords) {
 				mProfessionalFName.add(newLead.Medical_Professional_First_Name__c);
@@ -1131,102 +1065,106 @@ public class LeadService {
 				];
 				if ((medicalFlag == true || treatingFlag == true || physicianFlag == true) && (familyFlag == true
 						|| !dupAdditionalFamilyContacts.isEmpty())) {
-					if (errorType == 'Lightning') {
-						newLead.addError('There might be an existing Wish Family and Medical Professional. Please click Send Diagnosis Verification button to review the existing record.', false);
+					if (errorType == TYPE_LIGHTNING) {
+						newLead.addError(String.format(Label.Diagnosis_Verification_Contact_Duplicates, new List<String>{
+								ERROR_WISH_FAMILY_AND_MEDICAL_PROFESSIONAL
+						}), false);
 					} else {
-						newLead.addError('There might be an existing Wish Family and Medical Professional.Please click <a href='
-								+ INSTANCE_URL
-								+ '/apex/LeadDuplicate_VF?id=' + newLead.Id
-								+ '&wishFamily=true&manual=true' + '>here </a> to review the existing record.',
-								false);
+						newLead.addError(String.format(Label.Potential_Existing_Contact_Records, new List<String>{
+								ERROR_WISH_FAMILY_AND_MEDICAL_PROFESSIONAL, INSTANCE_URL, newLead.Id
+						}), false);
 					}
 				} else if (medicalFlag == true || treatingFlag == true) {
-					if (errorType == 'Lightning') {
-						newLead.addError('There might be an existing Medical Professional. Please click Send Diagnosis Verification button to review the existing record.', false);
+					if (errorType == TYPE_LIGHTNING) {
+						newLead.addError(String.format(Label.Diagnosis_Verification_Contact_Duplicates, new List<String>{
+								ERROR_MEDICAL_PROFESSIONAL
+						}), false);
 					} else {
-						newLead.addError('There might be an existing Medical Professional. Please click <a href='
-								+ INSTANCE_URL + '/apex/LeadDuplicate_VF?id='
-								+ newLead.Id + '&wishFamily=true&manual=true' + '>here </a> to review the existing record.',
-								false);
+						newLead.addError(String.format(Label.Potential_Existing_Contact_Records, new List<String>{
+								ERROR_MEDICAL_PROFESSIONAL, INSTANCE_URL, newLead.Id
+						}), false);
 					}
 				} else if (physicianFlag) {
-					if (errorType == 'Lightning') {
-						newLead.addError('There might be an existing Best Physician Contact. Please click Send Diagnosis Verification button to review the existing record.', false);
+					if (errorType == TYPE_LIGHTNING) {
+						newLead.addError(String.format(Label.Diagnosis_Verification_Contact_Duplicates, new List<String>{
+								ERROR_BEST
+						}), false);
 					} else {
-						newLead.addError('There might be an existing Best Physician Contact. Please click <a href='
-								+ INSTANCE_URL + '/apex/LeadDuplicate_VF?id='
-								+ newLead.Id + '&wishFamily=true&manual=true' + '>here </a> to review the existing record.',
-								false);
+						newLead.addError(String.format(Label.Potential_Existing_Contact_Records, new List<String>{
+								ERROR_BEST, INSTANCE_URL, newLead.Id
+						}), false);
 					}
 				} else if (familyFlag == true) {
-					if (errorType == 'Lightning') {
-						newLead.addError('There might be an existing Wish Family. Please click Send Diagnosis Verification button to review the existing record.', false);
+					if (errorType == TYPE_LIGHTNING) {
+						newLead.addError(String.format(Label.Diagnosis_Verification_Contact_Duplicates, new List<String>{
+								ERROR_WISH_FAMILY
+						}), false);
 					} else {
-						newLead.addError('There might be an existing Wish Family.Please click <a href='
-								+ INSTANCE_URL + '/apex/LeadDuplicate_VF?id='
-								+ newLead.Id + '&wishFamily=true&manual=true' + '>here </a> to review the existing record.',
-								false);
+						newLead.addError(String.format(Label.Potential_Existing_Contact_Records, new List<String>{
+								ERROR_WISH_FAMILY, INSTANCE_URL, newLead.Id
+						}), false);
 					}
 				} else if (!dupAdditionalFamilyContacts.isEmpty()) {
-					if (errorType == 'Lightning') {
-						newLead.addError('There might be an existing Additional Parent/Guardian. Please click Send Diagnosis Verification button to review the existing record.', false);
+					if (errorType == TYPE_LIGHTNING) {
+						newLead.addError(String.format(Label.Diagnosis_Verification_Contact_Duplicates, new List<String>{
+								ERROR_WISH_ADDITIONAL_PARENT_GUARDIAN
+						}), false);
 					} else {
-						newLead.addError('There might be an existing Additional Parent/Guardian. Please click <a href='
-								+ INSTANCE_URL + '/apex/LeadDuplicate_VF?id='
-								+ newLead.Id + '&wishFamily=true&manual=true' + '>here </a> to review the existing record.',
-								false);
+						newLead.addError(String.format(Label.Potential_Existing_Contact_Records, new List<String>{
+								ERROR_WISH_ADDITIONAL_PARENT_GUARDIAN, INSTANCE_URL, newLead.Id
+						}), false);
 					}
 				}
 			}
 		} catch (Exception ex) {
-			for (Lead currRec : leadRecords) {
-				ErrorMessage_AC.createdebugRec('Lead_OnBeforeUpdateTriggerHandlerHelper',
-						String.valueOf(currRec), String.valueOf(ex), 'FindDupContacts',
-						currRec.Id, ex.getStackTraceString(), 'Error');
+			for (Lead lead : leadRecords) {
+				ErrorMessage_AC.createdebugRec('LeadService',
+						String.valueOf(lead), String.valueOf(ex), 'findDuplicateContacts',
+						lead.Id, ex.getStackTraceString(), 'Error');
 			}
-			for (Lead currRec : leadRecords) {
-				currRec.addError(Label.Debug_log_error_message);
+			for (Lead lead : leadRecords) {
+				lead.addError(Label.Debug_log_error_message);
 			}
 		}
 	}
 
 	/**
-	 * This method will fire to check the specific fields are null/blank if the lead status changed to "Qualified"
-	 * @param leadList
+	 *  Validate Qualified lead fields
+	 *  @param leadList
 	 */
-	public static void preQualifiedRequired(List<Lead> leadList) {
-		String message = '';
+	public static void validateQualifiedRequiredFields(List<Lead> leadList) {
+		String message = EMPTY;
 		for (Lead le : leadList) {
 			if (le.FirstName == null) {
-				if (message == '' || message == null) {
-					message = 'First Name';
+				if (String.isEmpty(message)) {
+					message = Schema.SObjectType.Lead.fields.FirstName.label;
 				}
 			}
 			if (le.DOB__c == null) {
-				if (message == '' || message == null) {
-					message = 'DOB';
+				if (String.isEmpty(message)) {
+					message = Schema.SObjectType.Lead.fields.DOB__c.label;
 				} else {
-					message = message + ', ' + 'DOB';
+					message = message + COMMA_SPACE + Schema.SObjectType.Lead.fields.DOB__c.label;
 				}
 			}
 			if (le.Any_medical_reason_for_moving_quickly__c == null) {
-				if (message == '' || message == null) {
-					message = 'Potential Rush';
+				if (String.isEmpty(message)) {
+					message = Schema.SObjectType.Lead.fields.Any_medical_reason_for_moving_quickly__c.label;
 				} else {
-					message = message + ', ' + 'Potential Rush';
+					message = message + COMMA_SPACE + Schema.SObjectType.Lead.fields.Any_medical_reason_for_moving_quickly__c.label;
 				}
 			}
 			if (le.I_am_Recognized_To_Practice_As_a__c == null) {
-				if (message == '' || message == null) {
-					message = 'I Am Recognized To Practice As A';
+				if (String.isEmpty(message)) {
+					message = Schema.SObjectType.Lead.fields.I_am_Recognized_To_Practice_As_a__c.label;
 				} else {
-					message = message + ', ' + 'I Am Recognized To Practice As A';
+					message = message + COMMA_SPACE + Schema.SObjectType.Lead.fields.I_am_Recognized_To_Practice_As_a__c.label;
 				}
 			}
-			if (!String.isBlank(message)) {
+			if (String.isNotBlank(message)) {
 				for (Lead leadTemp : leadList) {
 					if (Bypass_Triggers__c.getValues(UserInfo.getUserId()) == null) {
-						leadTemp.addError('Please enter the values for the following fields - ' + message + '.');
+						leadTemp.addError(Label.Qualified_Fields_Missing + message + PERIOD);
 					}
 				}
 			}
@@ -1235,82 +1173,40 @@ public class LeadService {
 
 	/**
 	 *
-	 *
+	 * @param diagnosisVerificationIcdCode
 	 * @param leadList
 	 */
-	public static void createPotentialRushTask(List<Lead> leadList) {
-		List<Task> newTaskList = new List<Task>();
-		for (Lead processLead : leadList) {
-			Task newRushTask = new Task(Priority = 'Normal',
-					Status = 'Not Started',
-					Subject = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary',
-					OwnerId = processLead.OwnerId,
-					ActivityDate = System.today() + 3,
-					SystemGeneratedTask__c = true,
-					WhoId = processLead.Id);
-			newTaskList.add(newRushTask);
-		}
-		if (!newTaskList.isEmpty()) {
-			insert newTaskList;
-		}
-	}
-
-	/**
-	 *
-	 * @param ICDCode
-	 * @param leadList
-	 */
-	public static void updateQualifingDiagnosis(String ICDCode, List<Lead> leadList) {
-		List<ICD_Codes__c> icdCodeSet = [
+	public static void setQualifyingDiagnosis(String diagnosisVerificationIcdCode, List<Lead> leadList) {
+		ICD_Codes__c icdCode = [
 				SELECT Id,Name,Condition_Description__r.Name,
 						Condition_Description__r.PR_Diagnosis__c
 				FROM ICD_Codes__c
-				WHERE Name = :ICDCode AND Group1__c = TRUE
+				WHERE Name = :diagnosisVerificationIcdCode
+				AND Group1__c = TRUE
 				LIMIT 1
 		];
-		if (!icdCodeSet.isEmpty()) {
+		if (icdCode != null) {
 			for (Lead newLead : leadList) {
-				newLead.Qualifying_ICD__c = icdCodeSet[0].Id;
-				newLead.Qualifying_Diagnosis__c = icdCodeSet[0].Condition_Description__r.Name;
-				newLead.PR_Diagnosis__c = icdCodeSet[0].Condition_Description__r.PR_Diagnosis__c;
+				newLead.Qualifying_ICD__c = icdCode.Id;
+				newLead.Qualifying_Diagnosis__c = icdCode.Condition_Description__r.Name;
+				newLead.PR_Diagnosis__c = icdCode.Condition_Description__r.PR_Diagnosis__c;
 			}
 		}
 	}
 
 	/**
-	 *
-	 * @param leadIds
-	 */
-	public static void closeTasks(Set<Id> leadIds) {
-		List<Task> taskList = [
-				SELECT Id,Status
-				FROM Task
-				WHERE WhoId IN :leadIds AND Status != 'Completed'
-				LIMIT 50000
-		];
-		List<Task> updateTask = new List<Task>();
-		for (Task processTask : taskList) {
-			processTask.Status = 'Completed';
-			updateTask.add(processTask);
-		}
-		if (!updateTask.isEmpty()) {
-			update updateTask;
-		}
-	}
-
-	/**
-	 *
+	 * Sets Chapter information on Lead found by Zip Code
 	 * @param updateChapterLeadList
 	 */
-	public static void updateChapterViaZipcode(List<Lead> updateChapterLeadList) {
+	public static void setChapterViaZipCode(List<Lead> updateChapterLeadList) {
 		Set<String> zipSet = new Set<String>();
 		Map<Id, String> codeMap = new Map<Id, String>();
-		for (Lead processLead : updateChapterLeadList) {
-			String postCode = processLead.PostalCode;
+		for (Lead lead : updateChapterLeadList) {
+			String postCode = lead.PostalCode;
 			if (postCode.length() > 5) {
 				postCode = postCode.substring(0, 5);
 			}
-			codeMap.put(processLead.Id, postCode);
+			codeMap.put(lead.Id, postCode);
 			zipSet.add(postCode);
 		}
 		List<Zip_Code__c> officeZipList = [
@@ -1320,29 +1216,29 @@ public class LeadService {
 				WHERE Name IN :zipSet
 		];
 		if (!officeZipList.isEmpty()) {
-			for (Lead processLead : updateChapterLeadList) {
+			for (Lead lead : updateChapterLeadList) {
 				for (Zip_Code__c zipInfo : officeZipList) {
-					if (codeMap.get(processLead.Id) == zipInfo.Name) {
+					if (codeMap.get(lead.Id) == zipInfo.Name) {
 						if (zipInfo.Office__c != null && zipInfo.Office__r.Chapter__c != null) {
-							processLead.ChapterName__c = zipInfo.Office__r.Chapter__c;
+							lead.ChapterName__c = zipInfo.Office__r.Chapter__c;
 						}
 						if (zipInfo.Office__r.Chapter__r.Onboarded_on_SF__c) {
 							if (zipInfo.Office__r.Chapter__c != null
 									&& zipInfo.Office__r.Chapter__r.Intake_Manager__c != null) {
-								processLead.OwnerId = zipInfo.Office__r.Chapter__r.Intake_Manager__c;
+								lead.OwnerId = zipInfo.Office__r.Chapter__r.Intake_Manager__c;
 							} else {
-								processLead.OwnerId = Label.Salesforce_Support_User_Id;
+								lead.OwnerId = Label.Salesforce_Support_User_Id;
 							}
 						}
 						if (zipInfo.Office__r.Referral_Email_Address__c != null) {
-							processLead.Office_Referral_Email__c = zipInfo.Office__r.Referral_Email_Address__c;
+							lead.Office_Referral_Email__c = zipInfo.Office__r.Referral_Email_Address__c;
 							if (!zipInfo.Office__r.Chapter__r.Onboarded_on_SF__c) {
-								processLead.Hidden_Trigger_Referral_Email__c = !processLead.Hidden_Trigger_Referral_Email__c;
+								lead.Hidden_Trigger_Referral_Email__c = !lead.Hidden_Trigger_Referral_Email__c;
 							}
 						}
 						if (zipInfo.Office__r.Chapter__r != null
 								&& zipInfo.Office__r.Chapter__r.Onboarded_on_SF__c != null) {
-							processLead.Is_Chapter_Active__c = zipInfo.Office__r.Chapter__r.Onboarded_on_SF__c;
+							lead.Is_Chapter_Active__c = zipInfo.Office__r.Chapter__r.Onboarded_on_SF__c;
 						}
 					}
 				}

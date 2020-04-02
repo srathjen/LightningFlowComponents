@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <label><!-- Alert Type --></label>
@@ -113,11 +113,5 @@
         <label><!-- To --></label>
         <name>VisualAntidote__To__c</name>
     </fields>
-    <layouts>
-        <layout>Alert Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
 </CustomObjectTranslation>

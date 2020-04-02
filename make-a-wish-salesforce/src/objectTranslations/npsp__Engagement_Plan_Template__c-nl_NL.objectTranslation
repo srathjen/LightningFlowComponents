@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -18,7 +18,7 @@
         <name>npsp__Automatically_Update_Child_Task_Due_Date__c</name>
     </fields>
     <fields>
-        <help>Wanneer het Betrokkenheid Plan &quot;Taak toegewezen aan&quot; veld is leeg gelaten, aan wie zou de taak moeten worden toegewezen?</help>
+        <help>Wanneer het Betrokkenheid Plan "Taak toegewezen aan" veld is leeg gelaten, aan wie zou de taak moeten worden toegewezen?</help>
         <label><!-- Default Assignee --></label>
         <name>npsp__Default_Assignee__c</name>
         <picklistValues>
@@ -61,13 +61,7 @@
         <name>npsp__Total_Tasks__c</name>
     </fields>
     <gender>Feminine</gender>
-    <layouts>
-        <layout>Engagement Plan Template Layout</layout>
-        <sections>
-            <label>Aangepaste Koppelingen</label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel>Sjabloonnaam van Betrokkenheidsplan</nameFieldLabel>
     <webLinks>
         <label><!-- Manage_Template --></label>

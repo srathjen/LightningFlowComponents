@@ -1,147 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+﻿<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <categoryGroupVisibilities>
         <dataCategoryGroup>Chapter_Specific</dataCategoryGroup>
         <visibility>ALL</visibility>
     </categoryGroupVisibilities>
-    <custom>true</custom>
-    <description>This profile is giving full access permission for National Staff users.</description>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Background_Check_Email_Update</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Capture_Inactivation_Date</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Case_Create_NMA_Task</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Case_Fields_Tagging_on_Case_File</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Case_Fields_update_on_Case_File</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Case_Set_Interview_Date</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Close_DV_Case_when_Lead_is_Duplicate_or_DNQ</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Completed_Signed_DV</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Contact_Out_OF_Compliance_Task_Creation</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Distance_between_Volunteer_and_Wishchild</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Docusign_Electronic_Validation</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Instance_Email_Alert_for_Missed_Referrer</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Lead_Case_Status_Process_Flow</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Lead_Notify_Intake_Manager</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Login_Flow_Scheduled_Maintenance</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Part_A_Form_Process_Rule</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Post_To_Chatter_on_Lead</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Send_Email_Notification_to_Case_Owner</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Send_Email_With_Wish_Referral_Form_To_Office_referral_Email</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Update_Task_Interview_Completed_Date</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Update_Wish_Change_Requests</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Wish_Affiliations_for_Mobile</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Wish_Design_Forms</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Wish_Form_Email_Alert_on_Wish_Form_Create_Edit</flow>
-    </flowAccesses>
-    <userLicense>Salesforce</userLicense>
-    <classAccesses>
-        <apexClass>AWSFilePath_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>AccountFile_AT_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
+    
+    
     <classAccesses>
         <apexClass>AccountTrigger_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>Account_OnAfterInsertTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Account_OnAfterInsertTriggerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Account_OnAfterUpdateTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Account_OnAfterUpdateTriggerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Account_OnBeforeInsertTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Account_OnBeforeInsertTriggerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Account_OnBeforeUpdateTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>AddVolunteerRole_AC</apexClass>
         <enabled>true</enabled>
@@ -234,34 +108,13 @@
         <apexClass>BackGroundCheck_AT_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>BackGroundCheck_OnAfterInsertHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>BackGroundCheck_OnAfterInsertHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>BackGroundCheck_OnAfterUpdateHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>BackGroundCheck_OnAfterUpdateHelper</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>BackGroundCheck_OnBeforeInsertHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>BackGroundCheck_OnBeforeInsertHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>BackGroundCheck_OnBeforeUpdateHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>BackgroundCheck_AC</apexClass>
         <enabled>true</enabled>
@@ -286,18 +139,9 @@
         <apexClass>BatchRelationshipRecUpdate_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>Batch_ClosePresentationTask_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Batch_ClosePresentationTask_AC_Schedule</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Batch_ClosePresentationTask_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
     <classAccesses>
         <apexClass>Batch_UpdateChildCaseOwner_AC</apexClass>
         <enabled>false</enabled>
@@ -370,54 +214,21 @@
         <apexClass>Broadcast_OnBeforeUpdateTriggerHandler</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>COI_OnAfterInsertTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>COI_OnAfterInsertTriggerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>COI_OnAfterUpdateTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>COI_OnBeforeInsertTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>COI_OnBeforeInsertTriggerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>COI_OnBeforeUpdateTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>CaseCommentTrigger_AT_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>CaseFileAfterDeleteTriggerHandler_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>CaseFileAfterDeleteTriggerHelper_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>CaseFileTriggerHandler</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>CaseFileTriggerHandler_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>CaseFileTriggerHelper_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>CaseFile_AT_Test</apexClass>
         <enabled>true</enabled>
@@ -482,34 +293,13 @@
         <apexClass>ChangePasswordControllerTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>ChapterActionTrack_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ChapterActionTrack_onAfterInsertHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ChapterActionTrack_onAfterInsertHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ChapterActionTrack_onAfterUpdateHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ChapterActionTrack_onBeforeInsertHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ChapterActionTrack_onBeforeInsertHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ChapterActionTrack_onBeforeUpdateHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>ChapterChangeConfirmationPopup_AC</apexClass>
         <enabled>true</enabled>
@@ -706,14 +496,8 @@
         <apexClass>CreateVolunteerUser_ATTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>CreateWishFormRecords_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>CreateWishFormRecords_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
     <classAccesses>
         <apexClass>CustomLookUpController_Test</apexClass>
         <enabled>false</enabled>
@@ -750,18 +534,9 @@
         <apexClass>DeleteApexDebugLogRecords_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>DiagnosisVerficationRemainder_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DiagnosisVerficationRemainder_ACTest</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DiagnosisVerficationReminderSchedule_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
+    
+    
+    
     <classAccesses>
         <apexClass>DiagnosisVerification_AC</apexClass>
         <enabled>true</enabled>
@@ -854,14 +629,8 @@
         <apexClass>ForgotPasswordControllerTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>FormTrackerAttachment_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>FormTrackerAttachment_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
     <classAccesses>
         <apexClass>FutureHandler</apexClass>
         <enabled>true</enabled>
@@ -1014,50 +783,17 @@
         <apexClass>LeadTrigger_AT_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>LeadWishFamilyDupe</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LeadWishFamilyDupe_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Lead_OnAfterInsertTriggerHandler</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Lead_OnAfterInsertTriggerHandlerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Lead_OnAfterUpdateTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Lead_OnAfterUpdateTriggerHandlerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Lead_OnBeforeDeleteTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Lead_OnBeforeInsertTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Lead_OnBeforeInsertTriggerHandlerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Lead_OnBeforeUpdateTriggerHandler</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Lead_OnBeforeUpdateTriggerHandlerHelper</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>Lead_Trigger_Test</apexClass>
         <enabled>false</enabled>
@@ -1086,18 +822,9 @@
         <apexClass>MedicalRelationships_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>MinorParticipantTrigger_Handler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>MinorParticipantTrigger_Helper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>MinorParticipant_AT_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
     <classAccesses>
         <apexClass>MockHttpResponseGenerator</apexClass>
         <enabled>false</enabled>
@@ -1278,14 +1005,8 @@
         <apexClass>SendReferralEmailLC_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>ShoppingSpree_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ShoppingSpree_AC_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
+    
+    
     <classAccesses>
         <apexClass>SiteLoginController</apexClass>
         <enabled>true</enabled>
@@ -1694,26 +1415,11 @@
         <apexClass>WishExpenseHandler_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>WishPaperPacket_AT_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishParticipants_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishParticipants_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishReferralFormOut_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishReferralFormOut_AC_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>WishReferralForm_AC</apexClass>
         <enabled>true</enabled>
@@ -1722,14 +1428,8 @@
         <apexClass>WishReferralForm_AC_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>WishRelatedLinks_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishRelatedLinks_AC_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
+    
+    
     <classAccesses>
         <apexClass>WishRequiredSignatureFileDomain</apexClass>
         <enabled>true</enabled>
@@ -1790,18 +1490,9 @@
         <apexClass>Wish_ExpenseDomain</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>WrapperDocuSign</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>bat</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_BGCExpReminderSchedule_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
     <classAccesses>
         <apexClass>batch_BGCExpReminder_AC</apexClass>
         <enabled>false</enabled>
@@ -1818,10 +1509,7 @@
         <apexClass>batch_BUpdateAffiliation_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>batch_COIExpReminderSchedule_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>batch_COIExpReminder_AC</apexClass>
         <enabled>false</enabled>
@@ -1838,10 +1526,7 @@
         <apexClass>batch_CaseTeamMemberUpdateTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>batch_CheckBGCheckExpirationSchedule_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>batch_CheckBGCheckExpiration_AC_Test</apexClass>
         <enabled>false</enabled>
@@ -1850,10 +1535,7 @@
         <apexClass>batch_CheckBackGroundCheckExpiration_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>batch_CheckCOIExpirationSchedule_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>batch_CheckCOIExpiration_AC</apexClass>
         <enabled>false</enabled>
@@ -1862,18 +1544,9 @@
         <apexClass>batch_CheckCOIExpiration_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>batch_CreateBirthdayTaskSchedule_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_CreateBirthdayTask_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_CreateBirthdayTask_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
     <classAccesses>
         <apexClass>batch_LeadChildAgeSchedule</apexClass>
         <enabled>false</enabled>
@@ -1966,22 +1639,13 @@
         <apexClass>customLookUpController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>duplicateMerge_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>trac_TriggerHandlerBase</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>wifAttachment_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>wifAttachment_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
     <classAccesses>
         <apexClass>wishBudgetsController</apexClass>
         <enabled>false</enabled>
@@ -1998,6 +1662,104 @@
         <apexClass>wishFormFileUpload_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
+    <custom>true</custom>
+    <description>This profile is giving full access permission for National Staff users.</description>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Background_Check_Email_Update</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Capture_Inactivation_Date</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Case_Create_NMA_Task</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Case_Fields_Tagging_on_Case_File</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Case_Fields_update_on_Case_File</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Case_Set_Interview_Date</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Close_DV_Case_when_Lead_is_Duplicate_or_DNQ</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Completed_Signed_DV</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Contact_Out_OF_Compliance_Task_Creation</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Distance_between_Volunteer_and_Wishchild</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Docusign_Electronic_Validation</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Instance_Email_Alert_for_Missed_Referrer</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Lead_Case_Status_Process_Flow</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Lead_Notify_Intake_Manager</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Login_Flow_Scheduled_Maintenance</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Part_A_Form_Process_Rule</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Post_To_Chatter_on_Lead</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Send_Email_Notification_to_Case_Owner</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Send_Email_With_Wish_Referral_Form_To_Office_referral_Email</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Update_Task_Interview_Completed_Date</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Update_Wish_Change_Requests</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Wish_Affiliations_for_Mobile</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Wish_Design_Forms</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Wish_Form_Email_Alert_on_Wish_Form_Create_Edit</flow>
+    </flowAccesses>
     <pageAccesses>
         <apexPage>AddVolunteerRole_VF</apexPage>
         <enabled>true</enabled>
@@ -14495,11 +14257,7 @@
         <field>Loop__Insert_Update__c.Loop__Use_Admin_Credentials__c</field>
         <readable>true</readable>
     </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Loop__Metrics__mdt.Loop__MetricsApiKey__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
+    
     <fieldPermissions>
         <editable>false</editable>
         <field>Loop__PDF_Stamp__c.Loop__Background_Color__c</field>
@@ -17470,21 +17228,9 @@
         <field>VisualAntidote__Field_Integration__c.VisualAntidote__PlatformAccount__c</field>
         <readable>false</readable>
     </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>VisualAntidote__FormMetadata__mdt.VisualAntidote__Active__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>VisualAntidote__FormMetadata__mdt.VisualAntidote__Description__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>VisualAntidote__FormMetadata__mdt.VisualAntidote__Value__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
+    
+    
+    
     <fieldPermissions>
         <editable>false</editable>
         <field>VisualAntidote__Form_Migration__c.VisualAntidote__ApprovedBy__c</field>
@@ -17690,11 +17436,7 @@
         <field>VisualAntidote__Form_Submission__c.VisualAntidote__Verification_Emails__c</field>
         <readable>false</readable>
     </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>VisualAntidote__FormsRemoteEndpoint__mdt.VisualAntidote__Endpoint__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
+    
     <fieldPermissions>
         <editable>false</editable>
         <field>VisualAntidote__Formstack_User_License__c.VisualAntidote__One_Primary_User__c</field>
@@ -22730,16 +22472,8 @@
         <field>cwbtool__AnalysisSummary__c.cwbtool__Total_Process_Batch__c</field>
         <readable>false</readable>
     </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>cwbtool__CWB_API__mdt.cwbtool__Client_Secret__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>cwbtool__CWB_API__mdt.cwbtool__Consumer_Key__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
+    
+    
     <fieldPermissions>
         <editable>false</editable>
         <field>cwbtool__Connection__c.cwbtool__Current_Org__c</field>
@@ -24350,96 +24084,24 @@
         <field>dsfs__EnvelopeLocalization__c.dsfs__Locale__c</field>
         <readable>true</readable>
     </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__Localization__mdt.dsfs__ChatterEnvelopeCompleted__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__Localization__mdt.dsfs__ChatterEnvelopeDeclined__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__Localization__mdt.dsfs__ChatterEnvelopeDelivered__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__Localization__mdt.dsfs__ChatterEnvelopeSent__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__Localization__mdt.dsfs__ChatterEnvelopeVoided__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__Localization__mdt.dsfs__ChatterRecipientAuthenticationFailure__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__Localization__mdt.dsfs__ChatterRecipientCompleted__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__Localization__mdt.dsfs__ChatterRecipientDeclined__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__Localization__mdt.dsfs__ChatterRecipientDelivered__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__Localization__mdt.dsfs__ChatterRecipientDeliveryFailed__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__Localization__mdt.dsfs__ChatterRecipientSent__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__Localization__mdt.dsfs__ChatterRecipientSigned__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__Localization__mdt.dsfs__EmailMessage__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__Localization__mdt.dsfs__EmailSubject__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__Organization__mdt.dsfs__DistributorCode__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__Organization__mdt.dsfs__DistributorPassword__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__Organization__mdt.dsfs__IntegratorKey__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__Organization__mdt.dsfs__NotificationEmail__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <fieldPermissions>
         <editable>true</editable>
         <field>dsfs__Recipient__c.dsfs__AccessCode__c</field>
@@ -27220,7 +26882,15 @@
         <layout>InkindDon_reimburseFile__c-In Kind Donation %26 Reimbursement File Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Lead-Lead Layout</layout>
+        <layout>Lead-Wish Child Lead Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Lead-Default Lead Layout</layout>
+        <recordType>Lead.Default</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Lead-Wish Child Lead Layout</layout>
+        <recordType>Lead.Wish_Child</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Lead_File__c-Lead File Layout</layout>
@@ -29037,6 +28707,16 @@
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>false</default>
+        <recordType>Lead.Default</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>true</default>
+        <recordType>Lead.Wish_Child</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
         <recordType>Loop__DDP_Integration_Option__c.Loop__Attach</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
@@ -30093,6 +29773,7 @@
         <tab>standard-report</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
+    <userLicense>Salesforce</userLicense>
     <userPermissions>
         <enabled>true</enabled>
         <name>ActivitiesAccess</name>

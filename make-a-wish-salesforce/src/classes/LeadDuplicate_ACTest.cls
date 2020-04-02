@@ -42,6 +42,7 @@ public class LeadDuplicate_ACTest {
 
 		List<Lead> leads = TestDataFactory.createLead(2);
 		Lead lead = leads.get(0);
+		lead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
 		lead.ChapterName__c = account1.Id;
 		lead.FirstName = 'Jack';
 		lead.LastName = 'Smith';
@@ -109,6 +110,7 @@ public class LeadDuplicate_ACTest {
 		lead.Travel_algorithm__c = 'Test1;Test2;';
 
 		Lead lead2 = leads.get(1);
+		lead2.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
 		lead2.ChapterName__c = accounts[0].Id;
 		lead2.FirstName = 'Jack';
 		lead2.LastName = 'Smith';

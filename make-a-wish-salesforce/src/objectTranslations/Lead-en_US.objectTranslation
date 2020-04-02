@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- Diagnosis Verfication Fieldset --></label>
@@ -28,18 +28,7 @@
         <label><!-- BDE List FS --></label>
         <name>npsp__BDE_List_FS</name>
     </fieldSets>
-    <fields>
-        <caseValues>
-            <plural>false</plural>
-            <value>Inquiry/Referral Method</value>
-        </caseValues>
-        <caseValues>
-            <plural>true</plural>
-            <value>Inquiry/Referral Methods</value>
-        </caseValues>
-        <name>lead_source</name>
-        <startsWith>Consonant</startsWith>
-    </fields>
+    
     <fields>
         <label><!-- Additional Parent/Guardian City --></label>
         <name>Additional_Parent_City__c</name>
@@ -1163,7 +1152,7 @@
         <label><!-- How Did you hear about Make-A-Wish? --></label>
         <name>How_Did_you_hear_about_Make_A_Wish__c</name>
         <picklistValues>
-            <masterLabel>Brochure at the Doctor&apos;s Office</masterLabel>
+            <masterLabel>Brochure at the Doctor's Office</masterLabel>
             <translation><!-- Brochure at the Doctor&apos;s Office --></translation>
         </picklistValues>
         <picklistValues>
@@ -2908,45 +2897,7 @@
         <label><!-- Unique Wish Identifier --></label>
         <name>unique_wish_identifier__c</name>
     </fields>
-    <layouts>
-        <layout>Lead Layout</layout>
-        <sections>
-            <label><!-- Alternate Medical Professionals --></label>
-            <section>Alternate Medical Professionals</section>
-        </sections>
-        <sections>
-            <label><!-- Attachments --></label>
-            <section>Attachments</section>
-        </sections>
-        <sections>
-            <label><!-- Diagnosis Verification --></label>
-            <section>Diagnosis Verification</section>
-        </sections>
-        <sections>
-            <label><!-- Family Information --></label>
-            <section>Family Information</section>
-        </sections>
-        <sections>
-            <label><!-- Important Dates --></label>
-            <section>Important Dates</section>
-        </sections>
-        <sections>
-            <label><!-- Inquiry/Referral --></label>
-            <section>Inquiry/Referral</section>
-        </sections>
-        <sections>
-            <label><!-- Medical Information --></label>
-            <section>Medical Information</section>
-        </sections>
-        <sections>
-            <label><!-- Medical Professionals --></label>
-            <section>Medical Professionals</section>
-        </sections>
-        <sections>
-            <label><!-- Referral Source Information --></label>
-            <section>Referral Source Information</section>
-        </sections>
-    </layouts>
+    
     <quickActions>
         <label><!-- Log a Call --></label>
         <name>Log_a_Call_Lead</name>
@@ -2971,26 +2922,17 @@
         <errorMessage><!-- Please Enter Full Address (City, State, Street and Postal Code), Phone Number  and Gender. --></errorMessage>
         <name>Lead_Address_Phone_and_Gender_Validation</name>
     </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please Enter Full Address (City, State, Street and Postal Code) --></errorMessage>
-        <name>Lead_Address_Validation</name>
-    </validationRules>
+    
     <validationRules>
         <errorMessage><!-- The birthdate entered occurs in the future. Please re-enter the birthdate. --></errorMessage>
         <name>Lead_BirthDay_Date_Validation</name>
     </validationRules>
-    <validationRules>
-        <errorMessage><!-- if users chapter and chapter of lead is not equal then unique wish identifier is required. --></errorMessage>
-        <name>Lead_Chapter_Validation</name>
-    </validationRules>
+    
     <validationRules>
         <errorMessage><!-- Please explain reason to expedite the process in Please Explain Expedite field. --></errorMessage>
         <name>Lead_Check_Expedite_Explanation</name>
     </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please Enter Child Age --></errorMessage>
-        <name>Lead_Child_Age_Validation</name>
-    </validationRules>
+    
     <validationRules>
         <errorMessage><!-- Please Enter DOB --></errorMessage>
         <name>Lead_DOB_Referral_Validation</name>
@@ -3023,10 +2965,7 @@
         <errorMessage><!-- Please Enter First Name --></errorMessage>
         <name>Lead_FirstName_Validation_Referred</name>
     </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please Enter Gender --></errorMessage>
-        <name>Lead_Gender_Validation</name>
-    </validationRules>
+    
     <validationRules>
         <errorMessage><!-- Please Enter Hospital_Treatment_Facility --></errorMessage>
         <name>Lead_Hospital_or_Treartment_Validation</name>
@@ -3039,38 +2978,17 @@
         <errorMessage><!-- The inquiry date must occur on or before the referral date. Please enter a valid inquiry date, or re-enter the date of referral. --></errorMessage>
         <name>Lead_Inquiry_and_Referr_Date_Validation</name>
     </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please Enter Parent First Name --></errorMessage>
-        <name>Lead_Parent_FirstName_Validation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please Enter Parent First Name --></errorMessage>
-        <name>Lead_Parent_FirstName_Validation_Referre</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please Enter Parent Last Name --></errorMessage>
-        <name>Lead_Parent_LastName_Validation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please Enter Parent Last Name --></errorMessage>
-        <name>Lead_Parent_LastName_Validation_Referred</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- Phone numbers should be in this format: (999) 999-9999. --></errorMessage>
-        <name>Lead_Phone_Number_Validation</name>
-    </validationRules>
+    
+    
+    
+    
+    
     <validationRules>
         <errorMessage><!-- Please Enter Treating Medical Professional Last Name --></errorMessage>
         <name>Lead_Physician_LastName_Validation</name>
     </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please Enter Primary Diagnosis --></errorMessage>
-        <name>Lead_Primary_Diagnosis_Validation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please Enter Phone --></errorMessage>
-        <name>Lead_Primary_Phone_Validation</name>
-    </validationRules>
+    
+    
     <validationRules>
         <errorMessage><!-- The qualified date cannot occur before the referral date. Please enter a valid qualified date, or re-enter the referral date. --></errorMessage>
         <name>Lead_Qualified_Date_Validation</name>
@@ -3083,50 +3001,20 @@
         <errorMessage><!-- The referral date must occur on or after the inquiry date. Please enter a valid referral date, or re-enter the inquiry date. --></errorMessage>
         <name>Lead_Referral_Date_Validation</name>
     </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please Enter Referrer City --></errorMessage>
-        <name>Lead_Referrer_City_Validation</name>
-    </validationRules>
+    
     <validationRules>
         <errorMessage><!-- Please provide the ICD or Diagnosis given by referrer. --></errorMessage>
         <name>Lead_Referrer_Diagnosis_Validation</name>
     </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please Enter Referrer Email --></errorMessage>
-        <name>Lead_Referrer_Email_Validation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please Enter Referrer Email --></errorMessage>
-        <name>Lead_Referrer_Email_Validation_Referred</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please Enter Referrer FirstName --></errorMessage>
-        <name>Lead_Referrer_First_Name_Validation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please Enter Referrer FirstName --></errorMessage>
-        <name>Lead_Referrer_First_Name_Validation_Ref</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please Enter Referrer LastName --></errorMessage>
-        <name>Lead_Referrer_Last_Name_Validation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please Enter Referrer LastName --></errorMessage>
-        <name>Lead_Referrer_Last_Name_Validation_Ref</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please Enter Referrer Phone --></errorMessage>
-        <name>Lead_Referrer_Phone_Validation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please Enter Referrer Phone --></errorMessage>
-        <name>Lead_Referrer_Phone_Validation_Ref</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please Enter Referrer Zip --></errorMessage>
-        <name>Lead_Referrer_PostalCode_Validation</name>
-    </validationRules>
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <validationRules>
         <errorMessage><!-- The status can be updated to Eligibility Review or Qualified only when the previous Sub Status is Pending Diagnosis Verification or Pending Part A or Pending Paper DV. --></errorMessage>
         <name>Lead_Status_QualifiedOrEligib_Validation</name>

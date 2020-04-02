@@ -5,22 +5,21 @@
 */
 @isTest
 public class WishRequiredSignatureFileTest {
-    
-   private final static Id CHAPTER_RECORD_TYPE_ID = Constant_AC.CHAPTER_RT_ID;
+
+    private final static Id CHAPTER_RECORD_TYPE_ID = Constant_AC.CHAPTER_RT_ID;
     private final static Id WISH_RECORD_TYPE_ID = Constant_AC.WISH_RT_ID;
     private final static Id WISH_FAMILY_RECORD_TYPE_ID = Constant_AC.WISH_FAMILY_RT_ID;
     private final static Id HOUSEHOLD_RECORD_TYPE_ID = Constant_AC.HOUSEHOLD_RT_ID;
     private final static Id WISH_CHILD_RECORD_TYPE_ID = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
     private final static Id MEDICAL_PROF_RECORD_TYPE_ID = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
-    
-    
+
     @TestSetup
     private static void insertTestData() {
         List<Account> accountsDataFactory = TestDataFactory.createAccount(2);
         accountsDataFactory[0].RecordTypeId = HOUSEHOLD_RECORD_TYPE_ID;
-        accountsDataFactory[1].RecordTypeId = CHAPTER_RECORD_TYPE_ID  ;  
+        accountsDataFactory[1].RecordTypeId = CHAPTER_RECORD_TYPE_ID ;
         insert accountsDataFactory;
-        
+
         ICD_Codes__c obj = new ICD_Codes__c();
         obj.Name = 'Q917';
         insert obj;
@@ -32,17 +31,17 @@ public class WishRequiredSignatureFileTest {
         contactsDataFactory[2].RecordTypeId = MEDICAL_PROF_RECORD_TYPE_ID;
         contactsDataFactory[3].RecordTypeId = WISH_FAMILY_RECORD_TYPE_ID;
         contactsDataFactory[3].BirthDate = System.today().addYears(-10);
-        insert  contactsDataFactory;
-        
+        insert contactsDataFactory;
+
         List<Case> casesDataFactory = TestDataFactory.createCase(1);
         casesDataFactory[0].RecordTypeId = WISH_RECORD_TYPE_ID;
-        casesDataFactory[0].ChapterName__c =  accountsDataFactory[1].Id;
-        casesDataFactory[0].AccountId =  accountsDataFactory[0].Id;
-        casesDataFactory[0].ContactId =  contactsDataFactory[0].Id;
+        casesDataFactory[0].ChapterName__c = accountsDataFactory[1].Id;
+        casesDataFactory[0].AccountId = accountsDataFactory[0].Id;
+        casesDataFactory[0].ContactId = contactsDataFactory[0].Id;
         casesDataFactory[0].Origin = 'Email';
         casesDataFactory[0].Status = 'Qualified';
         insert casesDataFactory;
-        
+
         List<Wish_Affiliation__c> wishAffiliationsDataFactory = TestDataFactory.createWishAffiliation(3);
         wishAffiliationsDataFactory[0].Contact__c = contactsDataFactory[1].Id;
         wishAffiliationsDataFactory[0].Wish_Affiliation_Type__c = 'Approved Participant' ;
@@ -54,16 +53,16 @@ public class WishRequiredSignatureFileTest {
         wishAffiliationsDataFactory[2].Wish_Affiliation_Type__c = 'Medical Professional' ;
         wishAffiliationsDataFactory[2].Wish__c = casesDataFactory[0].Id;
         insert wishAffiliationsDataFactory;
-        
-        List<Wish_Signature_Forms__c> wishSignFormsDataFactory  = TestDataFactory.createWishSignatureForm(1);
+
+        List<Wish_Signature_Forms__c> wishSignFormsDataFactory = TestDataFactory.createWishSignatureForm(1);
         wishSignFormsDataFactory[0].Form_Type__c = 'Medical';
         insert wishSignFormsDataFactory;
-        
+
         List<Wish_Signature_Chapter_Form__c> wishSignChapFormsDataFactory = TestDataFactory.createWishSignatureChapterForm(1);
         wishSignChapFormsDataFactory[0].Chapter_Account__c = accountsDataFactory[1].Id;
         wishSignChapFormsDataFactory[0].Wish_Signature_Form__c = wishSignFormsDataFactory[0].Id;
         insert wishSignChapFormsDataFactory;
-        
+
         List<Wish_Required_Signature__c> wishReqSignsDataFactory = TestDataFactory.createWishRequiredSignature(1);
         wishReqSignsDataFactory[0].Wish_Case__c = casesDataFactory[0].Id;
         wishReqSignsDataFactory[0].Wish_Signature_Form__c = wishSignFormsDataFactory[0].Id;
@@ -72,16 +71,20 @@ public class WishRequiredSignatureFileTest {
         wishReqSignsDataFactory[0].Wish_Affiliation__c = wishAffiliationsDataFactory[0].Id;
         insert wishReqSignsDataFactory;
     }
-    
+
     @isTest
-    public static void createWishRequiredSignatureFile(){
+    public static void createWishRequiredSignatureFile() {
         test.startTest();
-        Wish_Required_Signature__c wishSign = [SELECT Id FROM Wish_Required_Signature__c LIMIT 1];
+        Wish_Required_Signature__c wishSign = [
+                SELECT Id
+                FROM Wish_Required_Signature__c
+                LIMIT 1
+        ];
         system.assertEquals(false, wishSign == null);
         Wish_Required_Signature_File__c wrsFile = TestDataFactory.createWRSFileRecord(wishSign.Id);
         insert wrsFile;
         System.assertEquals(wishSign.id, wrsFile.Wish_Required_Signature__c, 'Id dose not match');
-        System.assert(wishSign.id == wrsFile.Wish_Required_Signature__c, 'The value of wishSign.id is: ' +wishSign.id + ' and the value of wrsFile.Wish_Required_Signature__c is: ' + wrsFile.Wish_Required_Signature__c);
+        System.assert(wishSign.id == wrsFile.Wish_Required_Signature__c, 'The value of wishSign.id is: ' + wishSign.id + ' and the value of wrsFile.Wish_Required_Signature__c is: ' + wrsFile.Wish_Required_Signature__c);
         test.stopTest();
     }
 }

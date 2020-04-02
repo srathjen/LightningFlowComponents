@@ -2,6 +2,8 @@
 12/30/2019 - Chris Smith - SIW-294 
 // 06/02/2020 - Manoj /- SIW-275 Added New response option for question 'IS THERE A MEDICAL REASON WHY WE NEED TO MOVE QUICKLY?' and one more question when response is selected as Yes in this question
 // 06/02/2020 - Manoj - SIW-487 Added One New question as mentioned in ticket.
+// 31/03/2020 - Manoj - SIW-487 Allowing users to proceed with form when relationship is Parent\Guardin and option has been selected 'No, I wish to proceed'.
+// 31/03/2020 - Manoj - SIW-370 Make Primary language as required field
 -->
 
 <apex:page controller="WishReferralForm_AC" showHeader="false" applyBodyTag="false" sidebar="false" standardStylesheets="false" docType="html-5.0" cache="false">
@@ -124,6 +126,21 @@
             document.getElementsByClassName('otherlanguageclass')[0].value='';
             document.getElementById('otherlanguagediv').style.display='none';
         }
+         //SIW-370 changed to display and hide primary language input box red or grey
+        var elemsDiv = document.querySelectorAll('[id$="plang_chosen"]');
+        var elems = document.querySelectorAll('[id$="plang"]');        
+        var e = document.querySelectorAll('[id$="langError"]');
+        var lab = document.querySelectorAll('[id$="langLabel"]');                
+        if(elems[0].value == ''){                    
+            e[0].style.display = "block";
+            lab[0].style.color = "red";
+            elemsDiv[0].firstElementChild.style.border = "1px solid red";
+        }
+        else{
+            e[0].style.display = "none";
+            lab[0].style.color = "#75787B";
+            elemsDiv[0].firstElementChild.style.border = "1px solid rgba(0,0,0,.15)";
+        }
     }
     </script>
     
@@ -159,7 +176,7 @@
                     <div class="form-group row" style="display: none;" id="healthProvider">
                         <label class="col-sm-3">{!$Label.Wish_Referral_Discussed_Healthcare_Provider}</label>
                         <div class="col-sm-6">
-                            <apex:inputField value="{!currLead.is_Family_Aware_of_Referral__c}"  styleClass="form-control col-xs-12 c-select required discussedProvider searchField" id="discussed-with-provider" onchange="getInputValue();">
+                            <apex:inputField value="{!currLead.is_Family_Aware_of_Referral__c}"  styleClass="form-control col-xs-12 c-select required discussedProvider searchField" id="discussed-with-provider" onchange="getInputValue();"><!--SIW-487: Added new field to capture the response-->
                             </apex:inputField>
                             <span class="discussedProviderError text-muted" id="hhh"></span>
                         </div>
@@ -387,15 +404,22 @@
                                     <apex:inputText value="{!currLead.Phone}" styleClass="form-control pphone pphone1 phonemask numbers-only" id="pphonenumber" html-pattern=".{10,15}" maxlength="14" html-placeholder="(000) 000-0000" />
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3">{!$Label.Wish_Referral_Primary_Language_Spoken}</label>
+                            <div class="form-group row language-required">
+                                <label class="col-sm-3" id="langLabel">{!$Label.Wish_Referral_Primary_Language_Spoken}</label>
                                 <div class="col-sm-6">
                                     <!-- IME-157 Starts -->
-                                    <apex:selectList value="{!languageList}" size="4" id="language" multiselect="true" styleClass="form-control col-xs-12 c-select multi required" onchange="languageselection(this.id);" >
+                                    <apex:selectList value="{!languageList}" size="4" id="plang" multiselect="true" styleClass="form-control col-xs-12 c-select multi" onchange="languageselection(this.id);updateLang();" >
                                         <apex:selectOptions value="{!language}" />
                                     </apex:selectList>
                                     <!-- IME-157 Ends -->
+                                    <!--SIE-370 Added error message in case primary language is not selected-->
+                                    <em id="langError"  style="display:none;padding-top: 0.35rem;">Oops! Please enter a language</em>
+                                    <!-- IME-157 Ends -->
+                                </div>                               
+                                <div  style="opacity: 0;pointer-events: none;" >
+                                    <apex:inputText id="langI"/>
                                 </div>
+                                
                             </div>
                             <div class="form-group row" id="otherlanguagediv" style="display:none;">
                                 <div class="col-sm-3"><label aria-labelledby="other language">{!$Label.Wish_Referral_Other_Language}</label></div>
@@ -684,7 +708,7 @@
                         </div>
                     </fieldset>
                     <fieldset class="footer">
-                        <apex:commandbutton value="{!$Label.Submit_Label}" action="{!createLead}" styleClass="submitBtn col-xs-12 col-sm-4 col-sm-4 col-sm-push-8 push-sm-8 btn-md submit"/>
+                        <apex:commandbutton value="{!$Label.Submit_Label}" action="{!createLead}" styleClass="submitBtn col-xs-12 col-sm-4 col-sm-4 col-sm-push-8 push-sm-8 btn-md submit" onclick="checkPrimLangRequired()"/>
                     </fieldset>
                 </div>
             </apex:outputpanel>
@@ -763,6 +787,8 @@
             });
             //SIW-275 Start : Added CSS to hide and display questions on DV form
             // hide Medical reason textbox onload
+            $('.language-required').prop('hidden', false);
+            $(".language-required").addClass("requiredField");
             $('.urgency-expand').prop('hidden', true);
             // show/hide Medical reason textbox
             $('[id$=urgency]').on('change', function() {
@@ -869,6 +895,36 @@
                     }
                 }
             }
+            //SIW-370 starts : Added 2 methods to display error message for Primary Language field
+            function checkPrimLangRequired(){
+                var a = document.querySelectorAll('[id$="langI"]');
+                a[0].required = true;
+                var elems = document.querySelectorAll('[id$="plang"]');                 
+                var elemsDiv = document.querySelectorAll('[id$="plang_chosen"]');
+                var e = document.querySelectorAll('[id$="langError"]');
+                var lab = document.querySelectorAll('[id$="langLabel"]'); 
+                if(elems[0].value == ''){
+                    e[0].style.display = "block";
+                    lab[0].style.color = "red";
+                    elems[0].style.border = "1px solid red";
+                    elemsDiv[0].firstElementChild.style.border = "1px solid red";
+                }
+                else{
+                    e[0].style.display = "none";
+                    lab[0].style.color = "#75787B";
+                    elemsDiv[0].firstElementChild.style.border = "1px solid rgba(0,0,0,.15)";                    
+                }
+            }
+            
+            function updateLang(){                
+                var elems = document.querySelectorAll('[id$="plang"]');
+                var val = '';
+                for (var i = 0; i < elems.length; i++){
+                    val = val + elems[i].value;                                              
+                }   
+                document.querySelectorAll('[id$="langI"]')[0].value=val;                
+            }            
+            //SIW-370 Ends
             </script>
         </body>
     </apex:page>

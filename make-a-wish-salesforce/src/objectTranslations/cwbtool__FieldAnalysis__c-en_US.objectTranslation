@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <label><!-- IsCustom --></label>
@@ -29,11 +29,5 @@
         <label><!-- Type --></label>
         <name>cwbtool__Type__c</name>
     </fields>
-    <layouts>
-        <layout>Field Analysis Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
 </CustomObjectTranslation>

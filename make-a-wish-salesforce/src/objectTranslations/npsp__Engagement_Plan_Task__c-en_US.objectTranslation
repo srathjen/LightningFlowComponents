@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <help><!-- This field maps to the Task&apos;s Assigned To field. If left blank, the task will be assigned based on the template&apos;s Blank Assignment Rule. --></help>
@@ -106,11 +106,5 @@
             <translation><!-- Other --></translation>
         </picklistValues>
     </fields>
-    <layouts>
-        <layout>Engagement Plan Task Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
 </CustomObjectTranslation>

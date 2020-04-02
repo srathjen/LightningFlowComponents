@@ -18,6 +18,7 @@ public virtual class trac_TriggerHandlerBase {
 	public static Boolean blockTrigger = (Bypass_Triggers__c.getValues(UserInfo.getUserId()) == null ? false : true);
 
 	protected List<SObject> newRecordsList;
+	protected List<SObject> oldRecordsList;
 	protected Map<Id, SObject> oldRecordsMap;
 	protected Map<Id, SObject> newRecordsMap;
 
@@ -25,6 +26,7 @@ public virtual class trac_TriggerHandlerBase {
 		oldRecordsMap = Trigger.oldMap;
 		newRecordsMap = Trigger.newMap;
 		newRecordsList = Trigger.new;
+		oldRecordsList = Trigger.old;
 	}
 
 	public static void triggerHandler(trac_TriggerHandlerBase triggerHandler) {
