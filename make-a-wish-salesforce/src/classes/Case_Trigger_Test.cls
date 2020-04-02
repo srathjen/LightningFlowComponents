@@ -30,19 +30,19 @@ private class Case_Trigger_Test {
 	static void testInsert() {
 		Case wish = getWish();
 
-		Case_OnAfterInsertTriggerHandlerHelper.UpdateWishRecordIdentifier(new Set<Id>{
+		CaseService.UpdateWishRecordIdentifier(new Set<Id>{
 				wish.Id
 		}, new Set<Id>{
 				wish.ChapterName__c
 		}, Constant_AC.WISH_RT_ID);
 
-		Case_OnAfterInsertTriggerHandlerHelper.caseTeamInTakeManager(new Map<Id, Case>{
+		CaseService.caseTeamInTakeManager(new Map<Id, Case>{
 				wish.Id => wish
 		});
 
 		insert new Task(Subject = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary', WhoId = wish.ContactId);
 
-		Case_OnAfterInsertTriggerHandlerHelper.reParentDvTask(new Set<Id>{
+		CaseService.reParentDvTask(new Set<Id>{
 				wish.Id
 		});
 	}
@@ -58,7 +58,7 @@ private class Case_Trigger_Test {
 				wish
 		};
 
-		Case_OnAfterUpdateTriggerHandlerHelper.updateLeadStatus(leadSet, leadSet, caseList);
+		CaseService.updateLeadStatus(leadSet, leadSet, caseList);
 
 		Lead child = [
 				SELECT Id, DOB__c, Any_medical_reason_for_moving_quickly__c, Part_A_Received__c, I_am_Recognized_To_Practice_As_a__c
@@ -75,10 +75,10 @@ private class Case_Trigger_Test {
 		update child;
 
 		// Cover error messages
-		Case_OnAfterUpdateTriggerHandlerHelper.updateLeadStatus(leadSet, leadSet, caseList);
+		CaseService.updateLeadStatus(leadSet, leadSet, caseList);
 
 		// Cover where where lead is in second set but not first
-		Case_OnAfterUpdateTriggerHandlerHelper.updateLeadStatus(new Set<String>(), leadSet, caseList);
+		CaseService.updateLeadStatus(new Set<String>(), leadSet, caseList);
 	}
 
 	private static Case getWish() {

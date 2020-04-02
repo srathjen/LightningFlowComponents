@@ -48,7 +48,7 @@ Increase the coverage when the case is updated with interview date.
             Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
             Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
             insert new List<Account>{
-                    chapterAccount, chapterAmericaAccount
+                chapterAccount, chapterAmericaAccount
             };
 
             Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -76,10 +76,10 @@ Increase the coverage when the case is updated with interview date.
              * Update: Sub case conversion to the single Wish Case, no need to update
              * as there is no longer the concept of parent case.
              */
-//          Case_OnAfterUpdateTriggerHandlerHelper.UpdateSubCaseStatus(caseId, newCaseList);
-//          Case_OnAfterUpdateTriggerHandlerHelper.UpdateWishRecipetItems(wishReceiptMap, newCaseList);
-            Case_OnAfterUpdateTriggerHandlerHelper.changeAccessPermission(caseContactMap, newCaseList);
-            Case_OnAfterUpdateTriggerHandlerHelper.updateVolunteerOpportunityStatus(caseId, newCaseList);
+//          CaseService.UpdateSubCaseStatus(caseId, newCaseList);
+//          CaseService.UpdateWishRecipetItems(wishReceiptMap, newCaseList);
+            CaseService.changeAccessPermission(caseContactMap, newCaseList);
+            CaseService.updateVolunteerOpportunityStatus(caseId, newCaseList);
             createTask('Procure Icebreaker Gift', parentCase.id);
             parentCase.interview_Date__c = Date.Today().addDays(5);
             Test.startTest();
@@ -99,7 +99,7 @@ Create a  Complete/upload wish family packet task for parent case.
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -126,7 +126,7 @@ Update the case team member count is two iin parent case.
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -149,7 +149,7 @@ This method is usedd to increase the code coverage when the case is updated the 
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -182,13 +182,13 @@ Update the case status as granted.
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Contact volunterCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
         insert new List<Contact>{
-                wishChild, volunterCon
+            wishChild, volunterCon
         };
 
         volunterCon.Number_of_wishes_active__c = 0;
@@ -203,10 +203,10 @@ Update the case status as granted.
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         insert parentCase;
         CaseTeamRole roleRec = [
-                SELECT Id
-                FROM CaseTeamRole
-                WHERE Name = 'Wish Granter'
-                Limit 1
+            SELECT Id
+            FROM CaseTeamRole
+            WHERE Name = 'Wish Granter'
+            Limit 1
         ];
         CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id, volunterUser.id, roleRec.id);
         insert caseTeamMeber;
@@ -235,7 +235,7 @@ Create the granted case and updaetd with the prsentation date.
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -277,7 +277,7 @@ Create the granted case and updaetd with the Prsentation Date ,Location, and Tim
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -322,7 +322,7 @@ Create the granted case and updaetd with the Prsentation Date ,Location, and Tim
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -369,7 +369,7 @@ The case status is updated to Ready to Assign.
         chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Regions__c regionRec = OrientationandTrainingUtil.createRegion(chapterAccount.Id);
@@ -387,10 +387,10 @@ The case status is updated to Ready to Assign.
         insert parentCase;
 
         CaseTeamRole roleRec = [
-                SELECT Id
-                FROM CaseTeamRole
-                WHERE Name = 'Wish Coordinator'
-                Limit 1
+            SELECT Id
+            FROM CaseTeamRole
+            WHERE Name = 'Wish Coordinator'
+            Limit 1
         ];
 
         Contact volunterCon = OrientationandTrainingUtil.createVolunteerContact(parentCase.ChapterName__c);
@@ -422,7 +422,7 @@ The case status is updated to Ready to Assign.
         chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -458,7 +458,7 @@ The case status is updated to Ready to Assign.
         chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -490,7 +490,7 @@ The case status is updated to Ready to Assign.
         chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         WishDeterminationSubCaseTaskList__c newTask = new WishDeterminationSubCaseTaskList__c();
@@ -502,7 +502,7 @@ The case status is updated to Ready to Assign.
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Contact volunterCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
         insert new List<Contact>{
-                wishChild, volunterCon
+            wishChild, volunterCon
         };
 
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
@@ -515,10 +515,10 @@ The case status is updated to Ready to Assign.
             insert volunterUser;
         }
         CaseTeamRole roleRec = [
-                SELECT Id
-                FROM CaseTeamRole
-                WHERE Name = 'Wish Granter'
-                Limit 1
+            SELECT Id
+            FROM CaseTeamRole
+            WHERE Name = 'Wish Granter'
+            Limit 1
         ];
 
         CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id, volunterUser.id, roleRec.id);
@@ -546,7 +546,7 @@ This method is increase the code coverage  when the wish type is changed in pare
         chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -616,7 +616,7 @@ This method is increase the code coverage  when the case status is changed to DN
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -638,7 +638,7 @@ This method is increase the code coverage  when the case status is changed to Ab
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -669,7 +669,7 @@ This method is increase the code coverage  when the case status is changed to Cl
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -695,7 +695,7 @@ This method is increase the code coverage  when the case status is changed to Cl
         app.setProcessDefinitionNameOrId('Volunteer_Role_Approval_Process');
         app.setSkipEntryCriteria(true);
         app.setNextApproverIds(new Id[]{
-                userInfo.getUserId()
+            userInfo.getUserId()
         });
         Approval.ProcessResult result = Approval.process(app);
 
@@ -717,7 +717,7 @@ This method is increase the code coverage  when the case status is changed to on
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -740,7 +740,7 @@ This method is increase the code coverage  when the case status is changed to in
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -763,7 +763,7 @@ This method is increase the code coverage  when the flag is added to the wish ch
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -799,7 +799,7 @@ This method is increase the code coverage  when the parent case status is change
         Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
         Account acc = OrientationandTrainingUtil.MakeAWishAmericaAcc();
         insert new List<Account>{
-                chapterAccount, acc
+            chapterAccount, acc
         };
 
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
@@ -853,7 +853,7 @@ This method is increase the code coverage  when the Part A case status is change
         Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
         Account acc = OrientationandTrainingUtil.MakeAWishAmericaAcc();
         insert new List<Account>{
-                chapterAccount, acc
+            chapterAccount, acc
         };
 
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
@@ -885,7 +885,7 @@ This method is increase the code coverage  when the wish Granted case is created
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -918,10 +918,10 @@ This method is increase the code coverage  when the wish Granted case is created
         }
 
         CaseTeamRole roleRec = [
-                SELECT Id
-                FROM CaseTeamRole
-                WHERE Name = 'Wish Granter'
-                Limit 1
+            SELECT Id
+            FROM CaseTeamRole
+            WHERE Name = 'Wish Granter'
+            Limit 1
         ];
 
         CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id, volunterUser.id, roleRec.id);
@@ -942,7 +942,7 @@ This method is increase the code coverage  when the wish Granted case is created
         chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -1005,7 +1005,7 @@ This method is increase the code coverage  when the Diagnosis VerificationReview
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -1015,10 +1015,10 @@ This method is increase the code coverage  when the Diagnosis VerificationReview
         insert parentCase;
 
         List<User> currUser = [
-                SELECT Id,Email
-                FROM User
-                WHERE email = 'testmawa@gmail.com'
-                Limit 1
+            SELECT Id,Email
+            FROM User
+            WHERE email = 'testmawa@gmail.com'
+            Limit 1
         ];
 
         Case anticipationCase = parentCase.clone();
@@ -1046,16 +1046,16 @@ This method is increase the code coverage  when the case Team Member is added.
         insert parentCase;
 
         CaseTeamRole volunteerManager = [
-                SELECT Id
-                FROM CaseTeamRole
-                WHERE Name = 'Volunteer Manager'
-                Limit 1
+            SELECT Id
+            FROM CaseTeamRole
+            WHERE Name = 'Volunteer Manager'
+            Limit 1
         ];
         List<User> currUser = [
-                SELECT Id,Email
-                FROM User
-                WHERE email = 'testmawa@gmail.com'
-                Limit 1
+            SELECT Id,Email
+            FROM User
+            WHERE email = 'testmawa@gmail.com'
+            Limit 1
         ];
 
         Case updateCaseStat = new Case();
@@ -1121,7 +1121,7 @@ This method is increase the code coverage  when the Aniticipation is created und
         chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -1177,10 +1177,10 @@ This method is increase the code coverage  when the Aniticipation is created und
         }
 
         CaseTeamRole roleRec = [
-                SELECT Id
-                FROM CaseTeamRole
-                WHERE Name = 'Wish Granter'
-                Limit 1
+            SELECT Id
+            FROM CaseTeamRole
+            WHERE Name = 'Wish Granter'
+            Limit 1
         ];
         Id determinationChapterActionRT = Constant_AC.DETERMINATION_CHAPTER_ACTION_RT_ID;
         Chapter_Action_Track__c newActionTrack = new Chapter_Action_Track__c();
@@ -1236,7 +1236,7 @@ This method is increase the code coverage  when the status is updated to closed.
 
         System.assertEquals(parentCase.Status, 'New');
         Task volunteerFollowup = new Task(Subject = 'Volunteer wish follow-up activities not complete', Status = 'New',
-                Task_Type__c = 'Wish Granting', WhoId = wishChild.Id, WhatId = parentCase.Id, SystemGeneratedTask__c = true);
+            Task_Type__c = 'Wish Granting', WhoId = wishChild.Id, WhatId = parentCase.Id, SystemGeneratedTask__c = true);
         insert volunteerFollowup;
         parentCase.Status = 'Closed';
         parentCase.Closed_Date__c = System.Today();
@@ -1255,7 +1255,7 @@ This method is increase the code coverage  when the status is updated to closed.
         chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -1287,7 +1287,7 @@ This method is increase the code coverage  when the status is updated to closed.
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
         insert new List<Contact>{
-                wishChild, volunteerContact
+            wishChild, volunteerContact
         };
 
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
@@ -1327,7 +1327,7 @@ This method is increase the code coverage  when the status is updated to closed.
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
         insert new List<Contact>{
-                wishChild, volunteerContact
+            wishChild, volunteerContact
         };
 
         Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithTravel(wishChild.Id);
@@ -1349,7 +1349,7 @@ This method is increase the code coverage  when the status is updated to closed.
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
         insert new List<Contact>{
-                wishChild, volunteerContact
+            wishChild, volunteerContact
         };
 
         Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithTravel(wishChild.Id);
@@ -1367,7 +1367,7 @@ This method is increase the code coverage  when the status is updated to closed.
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
         insert new List<Contact>{
-                wishChild, volunteerContact
+            wishChild, volunteerContact
         };
         Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithTravel(wishChild.Id);
         //parentCase.Comment_2__c = 'Updated Test Comment';
@@ -1394,7 +1394,7 @@ This method is increase the code coverage  when the wish Granted case is created
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -1441,10 +1441,10 @@ This method is increase the code coverage  when the wish Granted case is created
         }
 
         CaseTeamRole roleRec = [
-                SELECT Id
-                FROM CaseTeamRole
-                WHERE Name = 'Wish Granter'
-                Limit 1
+            SELECT Id
+            FROM CaseTeamRole
+            WHERE Name = 'Wish Granter'
+            Limit 1
         ];
         CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id, volunterUser.id, roleRec.id);
         insert caseTeamMeber;
@@ -1482,9 +1482,9 @@ This method is increase the code coverage  when the wish Granted case is created
         insert newLead;
 
         Lead updatedLead = [
-                SELECT ID, Status, Sub_status__c
-                FROM Lead
-                WHERE ID = :newLead.Id
+            SELECT ID, Status, Sub_status__c
+            FROM Lead
+            WHERE ID = :newLead.Id
         ];
         updatedLead.status = 'Eligibility Review';
         update updatedLead;
@@ -1505,7 +1505,7 @@ This method is increase the code coverage  when the wish Granted case is created
         insert newDvCase;
 
         caseToLeadSubStatusUpdate.put(newDvCase.id, newDvCase.Status);
-        Case_OnAfterUpdateTriggerHandlerHelper.updateCaseToLeadSubStatus('Pending Clarification - MAC', caseToLeadSubStatusUpdate);
+        CaseService.updateCaseToLeadSubStatus('Pending Clarification - MAC', caseToLeadSubStatusUpdate);
     }
 
     static testMethod void createVOlunteerOpportunityTest() {
@@ -1518,7 +1518,7 @@ This method is increase the code coverage  when the wish Granted case is created
         insert newParentCase;
 
         insert new List<Account>{
-                chapterAccount, chapterAmericaAccount
+            chapterAccount, chapterAmericaAccount
         };
         Role__c roleName = OrientationandTrainingUtil.createRole();
         insert roleName;
@@ -1530,17 +1530,17 @@ This method is increase the code coverage  when the wish Granted case is created
         insert volunterCon;
 
 //        System.runAs(new User(Id = UserInfo.getUserId())) {
-            User volunterUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunterCon.id);
-            insert volunterUser;
+        User volunterUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunterCon.id);
+        insert volunterUser;
 //        }
 
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         insert parentCase;
         CaseTeamRole roleRec = [
-                SELECT Id
-                FROM CaseTeamRole
-                WHERE Name = 'Wish Granter'
-                Limit 1
+            SELECT Id
+            FROM CaseTeamRole
+            WHERE Name = 'Wish Granter'
+            Limit 1
         ];
         CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id, volunterUser.id, roleRec.id);
         insert caseTeamMeber;
@@ -1551,7 +1551,7 @@ This method is increase the code coverage  when the wish Granted case is created
         Set<Id> readtToAssignChapterIdSet = new Set<ID>();
         readyToAssignParentCaseMap.put(newParentCase.id, newParentCase);
         readtToAssignChapterIdSet.add(newParentCase.ChapterName__c);
-        Case_OnAfterUpdateTriggerHandlerHelper.createVolunteerOpportunity(readyToAssignParentCaseMap, readtToAssignChapterIdSet);
+        CaseService.createVolunteerOpportunity(readyToAssignParentCaseMap, readtToAssignChapterIdSet);
     }
 
     static testMethod void updatinterviewDate() {
