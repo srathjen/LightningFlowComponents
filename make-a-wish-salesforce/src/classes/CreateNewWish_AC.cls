@@ -41,10 +41,6 @@ global class CreateNewWish_AC {
             Case_OnAfterUpdateTriggerHandlerHelper.createVolunteerOpportunity(newCaseMap, accountIds);
         }
 
-        if (newCase.Id != null) {
-            return newCase.Id;
-        } else {
-            return null;
-        }
+        return newCase.Id;
     }
 }

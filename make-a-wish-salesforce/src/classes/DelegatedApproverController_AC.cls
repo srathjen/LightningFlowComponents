@@ -4,6 +4,8 @@ Description : This class referred in the DelegatedApprover_VF. It display the al
 This will allow chapter staff to see visibility into their colleagues approval's needed when they are covering for each other.
 ****************************************************************************************/
 global class DelegatedApproverController_AC {
+	private static final String PROCESS_DEFINITION_NOT_NAME = 'KBWorkflow';
+
 	/*
      * @description		Used to collect the list of approval process records.
      *
@@ -41,7 +43,7 @@ global class DelegatedApproverController_AC {
 				LIMIT 1
 			)
 			FROM ProcessInstance
-			WHERE ProcessDefinition.Name != 'KBWorkflow' AND CreatedDate > :fromDate AND CreatedDate <= :toDate
+			WHERE ProcessDefinition.Name != :PROCESS_DEFINITION_NOT_NAME AND CreatedDate > :fromDate AND CreatedDate <= :toDate
 			ORDER BY CreatedDate DESC
 		]) {
 			ApprovalWrapper wrap = new ApprovalWrapper();
