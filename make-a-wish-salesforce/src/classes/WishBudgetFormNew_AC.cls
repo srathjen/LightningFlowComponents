@@ -309,7 +309,7 @@ public class WishBudgetFormNew_AC {
     * @author          MST Solutions
     * @createdDate     unknown
     */
-	public List<SelectOption> getWishExpenseTypes() {
+	public List<SelectOption> getWishExpenceTypes() {
 		List<SelectOption> options = new List<SelectOption>();
 		options.add(new SelectOption('', '--- None ---'));
 		for (String tcode : TransCodesWrap.keySet()) {
