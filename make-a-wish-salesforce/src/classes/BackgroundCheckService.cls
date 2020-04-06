@@ -1,7 +1,8 @@
 /**
- * @description Background Check Service, centralizes Background Check business rules
+ * Background Check Service, centralizes Background Check business rules
+ *
  * @author Michelle Cominotto, Make-A-Wish
- * @createdDate 3/18/2020
+@createdDate 3/18/2020
  */
 public with sharing class BackgroundCheckService {
 
@@ -23,8 +24,10 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Updates hidden email field and owner of background check to match related volunteer record
+     *
      * @param volunteerIds
      * @param newBackgroundChecksList
+     *
      * @return
      */
     public static List<Background_check__c> updateHiddenEmailAndOwner(Set<Id> volunteerIds, List<Background_check__c> newBackgroundChecksList) {
@@ -45,7 +48,9 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Returns map of user Id and user role based on owner of background check
-     * @param backgroundChecksList
+     *
+     * @param newBackgroundChecksList
+     *
      * @return
      */
     public static Map<Id, String> getOwnerUserRole(List<Background_check__c> newBackgroundChecksList) {
@@ -59,6 +64,7 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Deactivate previous background checks for a volunteer if a new, current one is active
+     *
      * @param backgroundCheckVolunteersMap
      */
     public static void deactivateBackgroundCheck(Map<Id, Id> backgroundCheckVolunteersMap) {
@@ -84,6 +90,7 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Update background check expiration date on volunteer contact
+     *
      * @param backgroundCheckList
      */
     public static void updateVolunteerExpirationDate(List<Background_check__c> backgroundCheckList) {
@@ -109,17 +116,17 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Alert user of insufficient permissions to edit background check record
+     *
      * @param chapterNameMap
      * @param newBackgroundChecksList
      * @param oldBackgroundChecksMap
      */
     public static void checkUpdatePrivilege(Map<Id, String> chapterNameMap, List<Background_check__c> newBackgroundChecksList, Map<Id, Background_check__c> oldBackgroundChecksMap) {
-        String userRoleName = getUserRoleName();
-        if (userRoleName != 'bypass') {
+        if (isValidUserRole()) {
             Set<String> chapterNameSet = new Set<String>(chapterNameMap.values());
-            Map<String, String> chapterRoleMap = ChapterStaffRecordSharing_AC.FindChapterRole(chapterNameSet);
+            Map<String, String> chapterRoleMap = ChapterStaffRecordSharing_AC.findChapterRole(chapterNameSet);
             for (Background_check__c backgroundCheck : newBackgroundChecksList) {
-                if ((chapterRoleMap.get(chapterNameMap.get(backgroundCheck.Id)) != userRoleName
+                if ((chapterRoleMap.get(chapterNameMap.get(backgroundCheck.Id)) != Utils.currentUser.UserRole.Name
                         || backgroundCheck.Account_Name__c != oldBackgroundChecksMap.get(backgroundCheck.Id).Account_Name__c)
                         && !Test.isRunningTest()) {
                     backgroundCheck.addError('Insufficient privilege to update this record. Please contact system administrator.');
@@ -128,19 +135,16 @@ public with sharing class BackgroundCheckService {
         }
     }
 
-    //Return user role name
-    private static String getUserRoleName() {
+    private static Boolean isValidUserRole() {
         User currentUser = Utils.currentUser;
-        if (currentUser.UserRole.Name != ROLE_NATIONAL_STAFF && currentUser.Profile.Name != PROFILE_SYSTEM_ADMINISTRATOR
+        return currentUser.UserRole.Name != ROLE_NATIONAL_STAFF && currentUser.Profile.Name != PROFILE_SYSTEM_ADMINISTRATOR
                 && currentUser.Profile.Name != PROFILE_INTEGRATION && currentUser.Profile.Id != Label.Active_Volunteer_Profile
-                && currentUser.Profile.Id != Label.Prospective_Volunteer_Profile) {
-            return currentUser.UserRole.Name;
-        }
-        return 'bypass';
+                && currentUser.Profile.Id != Label.Prospective_Volunteer_Profile
     }
 
     /**
      * Update volunteer affiliation record status to not approved
+     *
      * @param newBackgroundChecksList
      * @param oldBackgroundChecksMap
      */
@@ -175,6 +179,7 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Update volunteer role status
+     *
      * @param approvedVolunteerIds
      * @param newBackgroundChecksList
      */
@@ -218,8 +223,10 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Update volunteer hidden orientation status
+     *
      * @param newBackgroundChecksList
      * @param oldBackgroundChecksMap
+     *
      * @return
      */
     public static Set<Id> updateVolunteerOrientationStatus(List<Background_check__c> newBackgroundChecksList, Map<Id, Background_check__c> oldBackgroundChecksMap) {
@@ -278,6 +285,7 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Update volunteer roles status fields
+     *
      * @param volunteerIds
      * @param objectName
      * @param exceptionList
@@ -318,6 +326,7 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Create task to review background check
+     *
      * @param newBackgroundChecksList
      */
     public static void createBackgroundCheckReviewTask(List<Background_check__c> newBackgroundChecksList) {
@@ -347,9 +356,10 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Create debug log when error occurs
+     *
      * @param exceptionList
      * @param methodName
-     * @param exception
+     * @param ex
      */
     public static void createBackgroundCheckDebugLog(List<SObject> exceptionList, String methodName, Exception ex) {
         for (SObject record : exceptionList) {
