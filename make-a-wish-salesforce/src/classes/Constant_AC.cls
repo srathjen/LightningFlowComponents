@@ -98,6 +98,9 @@ public class Constant_AC {
 	/**
 	 * Lead Constants
 	 */
+	public static final Id LEAD_RT_DEFAULT = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Default').getRecordTypeId();
+	public static final Id LEAD_RT_MASTER = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Master').getRecordTypeId();
+	public static final Id LEAD_RT_WISH_CHILD = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Wish_Child').getRecordTypeId();
 	public static final String LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL = 'Treating Medical Professional';
 	public static final String LEAD_DV_FORM_TYPE_BEST_CONTACT = 'Best contact for Physician';
 	public static final String LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL = 'Alternate 1 Medical Professional';
@@ -136,6 +139,8 @@ public class Constant_AC {
 	public static final String LEAD_ERROR_BEST = 'Best Physician Contact';
 	public static final String LEAD_ERROR_MEDICAL_PROFESSIONAL = 'Medical Professional';
 	public static final String LEAD_ERROR_WISH_FAMILY_AND_MEDICAL_PROFESSIONAL = 'Wish Family and Medical Professional';
+	public static final String LEAD_RFI_FORM_INFO_QUALIFIED = 'Qualified';
+	public static final String LEAD_RFI_FORM_INFO_NOT_QUALIFIED = 'Not Qualified';
 
 	/**
 	 * Case Constants
@@ -169,6 +174,7 @@ public class Constant_AC {
 	public static final String CASE_SUB_STATUS_PENDING = 'Pending';
 	public static final String CASE_SUB_STATUS_ABANDONED = 'Abandoned';
 	public static final String CASE_SUB_STATUS_DNQ_MEDICAL = 'DNQ - Medical';
+	public static final String CASE_SUB_STATUS_NON_VIEWABLE = 'Non-Viewable';
 	public static final String CASE_WISH_CLEARANCE_APPROPRIATE = 'Appropriate';
 	public static final String CASE_WISH_CLEARANCE_NOT_APPROPRIATE = 'Not Appropriate';
 	public static final String MEET_PWL_CRITERIA_YES = 'Yes';
@@ -188,6 +194,7 @@ public class Constant_AC {
 	public static final String CASE_ORIGIN_EMAIL = 'Email';
 	public static final String CASE_RUSH_TIME_FRAME = 'Select timeframe';
 	public static final String CASE_UWI_SOURCE_LEAD = 'Lead';
+	public static final String CASE_SUBJECT_ELIGIBILITY_REVIEW = 'Eligibility Review';
 
 	/**
 	 * Wish Affiliation Constants
@@ -230,6 +237,7 @@ public class Constant_AC {
 	public static final String CONTACT_NAME_UNKNOWN = 'Unknown';
 	public static final String CONTACT_STATUS_ROLE_SPECIFIC_TRAINING_AVAILABLE = 'Role Specific Training Available';
   public static final String CONTACT_ONBOARDING_STATUS_BACKGROUND_CHECK = 'Background Check';
+	public static final String CONTACT_PUBLICITY_YES = 'Yes';
 
 	/**
 	 * Chapter Role File Constants
@@ -279,10 +287,31 @@ public class Constant_AC {
 	public static final String CONTACT_APPLICATION_STATUS_APPROVED = 'Approved';
 
 	/**
-	 * Docusign  Status
+	 * Docusign Status
 	 */
 	public static final String DOCUSIGN_ENVELOPE_STATUS_COMPLETED = 'Completed';
 	public static final String DOCUSIGN_SUBJECT_DIAGNOSIS_VERIFICATION_FORM = 'Diagnosis Verification Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_LIABILITY = 'Signature Required - Liability And Publicity Release Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_WISH_FORM_AND_LIABILITY = 'Signature Required - Wish Form & Liability And Publicity Release Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_ABSENT_PARENT_LIABILITY = 'Signature Required - Absent Parent Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_SINGLE_PARENT_LIABILITY = 'Signature Required - Single Parent Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_COMBO_FAMILY_LIABILITY = 'Signature Required - Combo Family Form & Liability/Publicity Release Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_CHILD_MEDICAL_FORM = 'Signature Required – Make-A-Wish Child\'s Medical Summary Form:';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_RUSH_CHILD_MEDICAL_FORM = 'Signature Required – Make-A-Wish Rush Child\'s Medical Summary Form:';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_WISH_CLEARANCE_FORM = 'Signature Required – Make-A-Wish Wish Clearance Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_RUSH_WISH_CLEARANCE_FORM = 'Signature Required – Make-A-Wish Rush Wish Clearance Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_WISH_CLEARANCE_NO_TRAVEL_FORM = 'Signature Required – Make-A-Wish Wish Clearance No Travel Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_RUSH_WISH_CLEARANCE_NO_TRAVEL_FORM = 'Signature Required – Make-A-Wish Rush Wish Clearance No Travel Form';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_WISH_CLEARANCE_CHILD_MEDICAL_FORM = 'Signature Required – Make-A-Wish Wish Clearance, Child\'s Medical Summary:';
+	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_RUSH_WISH_CLEARANCE_CHILD_MEDICAL_FORM = 'Signature Required – Make-A-Wish Rush Wish Clearance, Child\'s Medical Summary:';
+	public static final String DOCUSIGN_STATUS_ENVELOPE_STATUS_SENT = 'Sent';
+
+	/**
+	 * Docusign Recipient Constants
+	 */
+	public static final String DOCUSIGN_RECIPIENT_STATUS_COMPLETED = 'Completed';
+	public static final String DOCUSIGN_RECIPIENT_STATUS_DELIVERED = 'Delivered';
+	public static final String DOCUSIGN_RECIPIENT_STATUS_SENT = 'Sent';
 
 	/**
 	* Wish Affiliation Types
@@ -309,6 +338,7 @@ public class Constant_AC {
 	public static final String WISH_REQUIRED_SIGNATURE_STATUS_SIGNED = 'Signed';
 	public static final String WISH_REQUIRED_SIGNATURE_STATUS_VOIDED = 'Voided';
 	public static final String WISH_REQUIRED_SIGNATURE_STATUS_SENT = 'Sent';
+	public static final String WISH_REQUIRED_SIGNATURE_FORMAT_ESIGNATURE = 'E-Signature';
 
 	/**
 	 * Task Constants
@@ -328,7 +358,12 @@ public class Constant_AC {
 	public static final String TASK_SUBJECT_REVIEW_BACKGROUND_CHECK = 'Review Background Check';
   public static final String TASK_SUBJECT_BACKGROUND_CHECK = 'Background Check';
   public static final String TASK_TYPE_EMAIL = 'Email';
-  
+
+	/*
+	 * User Constants
+	 */
+	public static final String INTEGRATION_USER = 'Integration User';
+
 	/**
 	 * Profile Constants
 	 */
@@ -381,7 +416,17 @@ public class Constant_AC {
 	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_REJECTED = 'Rejected';
   
 	/*
+	 * Wish Form (Wish_Child_Form__c) Constants
+	 */
+	public static final String WISH_CHILD_FORM_EMERGENCY_RELATIONSHIP_STATUS_SELF = 'Self';
+
+	/*
 	 * Group Constants
 	 */
 	public static final String GROUP_TYPE_REGULAR = 'Regular';
+
+	/*
+	 * Case Team Role Constants
+	 */
+	public static final String CASE_TEAM_ROLE_INTAKE_MANAGER = 'Intake Manager';
 }

@@ -1,5 +1,5 @@
 /*****************************************************************************************************************
-Author     : MST Solutions
+Author      : MST Solutions
 
 Modification Log
 1. WVC-2205 - Kanagaraj - 08/08/2018 // line 1580,1594 previously the affilliation status was "Prospective" Now
@@ -8,7 +8,6 @@ We have updated as "Pending"
 *******************************************************************************************************************/
 @IsTest
 public class OrientationandTrainingUtil {
-
 	private final static Id chapterRecordTypeId = Constant_AC.CHAPTER_RT_ID;
 	private final static Id householdRecordTypeId = Constant_AC.HOUSEHOLD_RT_ID;
 	private final static Id inKindDonorsAccountRecordTypeId = Constant_AC.IN_KIND_ACCOUNT_ID;
@@ -156,13 +155,6 @@ public class OrientationandTrainingUtil {
 		newchapterAccount.RecordTypeId = hospitalTreatmentRecordTypeId;
 		newchapterAccount.MAC_Email_del__c = 'testMAC@gmail.com';
 		return newchapterAccount;
-	}
-
-	public static void createChapterList() {
-		/* Chapter_List__c newChapter = new Chapter_List__c();
-        newChapter.Name = '35004';
-        newChapter.chapter_name__c= 'Alabama';
-        insert newChapter;*/
 	}
 
 	public static Contact createVolunteerContact(Id AccountId) {
@@ -432,32 +424,6 @@ public class OrientationandTrainingUtil {
 		return wishChildCon;
 	}
 
-	public static List<contact> CreateWishFamilyList(integer count) {
-		List<Contact> wishFamilyConList = new List<Contact>();
-		for (integer I = 0; i <= count; i++) {
-			Contact wishFamilyCon = new Contact();
-			wishFamilyCon.Region_Chapter__c = createchapterAccount().id;
-			wishFamilyCon.FirstName = 'MAWAFirstName';
-			wishFamilyCon.LastName = 'MAWALastName' + i;
-			wishFamilyCon.Email = 'kanagaraj@mstsolutions.com';
-			wishFamilyCon.Phone = '9600467559';
-			wishFamilyCon.MailingStreet = 'KuttaiKarai Street';
-			wishFamilyCon.MailingCity = 'Trichy';
-			wishFamilyCon.MailingStateCode = 'AZ';
-			wishFamilyCon.MailingPostalCode = '6201717';
-			wishFamilyCon.MailingCountryCode = 'US';
-			if (I == 0) {
-				wishFamilyCon.IsParentGuardian__c = 'ParentGuardian';
-
-			}
-			wishFamilyCon.IsParentGuardian__c = 'Participant';
-			wishFamilyCon.RecordTypeId = wishFamilyRecordTypeId ;
-			wishFamilyConList.add(wishFamilyCon);
-
-		}
-		return wishFamilyConList;
-	}
-
 	public static Contact CreateWishChildwithAcc(Id accId) {
 		ICD_Codes__c obj = new ICD_Codes__c();
 		obj.Name = 'Q917';
@@ -470,69 +436,6 @@ public class OrientationandTrainingUtil {
 		newWishChild.Diagnosis__c = 'Test';
 		newWishChild.ICD_10_Code__c = obj.id;
 		newWishChild.AccountId = accId;
-		return newWishChild;
-	}
-
-	public static contact CreateTreatingMedicalProfContactforMerge() {
-		Contact treatingProfContact = new Contact();
-		treatingProfContact.FirstName = 'Steveone';
-		treatingProfContact.LastName = 'Waughone';
-		treatingProfContact.Email = 'testmawa2@gmail.com';
-		treatingProfContact.Phone = '9600467554';
-		treatingProfContact.MailingStreet = 'KuttaiKarai Street';
-		treatingProfContact.MailingCity = 'Trichy';
-		treatingProfContact.MailingStateCode = 'AZ';
-		treatingProfContact.MailingPostalCode = '6201717';
-		treatingProfContact.MailingCountryCode = 'US';
-		treatingProfContact.RecordTypeId = medicalProfessionalRecordTypeId;
-		return treatingProfContact;
-	}
-
-	public static contact CreateWishChildConwithNull() {
-		Contact wishChildCon = new Contact();
-		wishChildCon.FirstName = 'moss';
-		wishChildCon.LastName = 'Smith Household';
-		wishChildCon.Email = Null;
-		wishChildCon.Phone = Null;
-		wishChildCon.OtherPhone = Null;
-		wishChildCon.MobilePhone = Null;
-		wishChildCon.MailingStreet = Null;
-		wishChildCon.MailingCity = Null;
-		wishChildCon.MailingState = Null;
-		//wishChildCon.MailingStateCode = 'AZ';
-		wishChildCon.MailingPostalCode = Null;
-		//wishChildCon.MailingCountryCode = 'US';
-		wishChildCon.RecordTypeId = wishChildRecordTypeId;
-		wishChildCon.MobilePhone = '9900220022';
-		wishChildCon.Primary_Diagnosis_Condition_Description__c = 'Test';
-		wishChildCon.Diagnosis__c = 'test';
-		return wishChildCon;
-	}
-
-	public static contact CreateWishFamilywithNull() {
-		Contact wishFamilyCon = new Contact();
-		wishFamilyCon.FirstName = 'MAWAFirstName';
-		wishFamilyCon.LastName = 'MAWALastName';
-		wishFamilyCon.Email = Null;
-		wishFamilyCon.Phone = Null;
-		wishFamilyCon.OtherPhone = Null;
-		wishFamilyCon.MobilePhone = Null;
-		wishFamilyCon.MailingStreet = Null;
-		wishFamilyCon.MailingCity = Null;
-		wishFamilyCon.MailingState = Null;
-		//wishChildCon.MailingStateCode = 'AZ';
-		wishFamilyCon.MailingPostalCode = Null;
-		//wishFamilyCon.MailingCountryCode = 'US';
-		wishFamilyCon.RecordTypeId = wishFamilyRecordTypeId;
-		wishFamilyCon.Region_Chapter__c = createchapterAccount().id;
-		return wishFamilyCon ;
-	}
-
-	public static Contact CreateWishChildContact() {
-		ICD_Codes__c obj = new ICD_Codes__c(Name = 'Q917');
-		insert obj;
-		Contact newWishChild = new Contact(FirstName = 'Chandrasekar', LastName = 'Nallusamy',
-				Parent_Guardian_Name__c = 'Jonathan Edwards', RecordTypeId = wishChildRecordTypeId, ICD_10_Code__c = obj.Id);
 		return newWishChild;
 	}
 
@@ -554,7 +457,6 @@ public class OrientationandTrainingUtil {
 	}
 
 	public static Lead createTestLeadRec(Id chapterAccountId) {
-
 		Lead newLead = new Lead();
 		newLead.FirstName = 'moss';
 		newLead.LastName = 'Smith Household';
@@ -568,7 +470,6 @@ public class OrientationandTrainingUtil {
 		newLead.DOB__c = System.today() - 1435;
 		newLead.company = 'MAWA';
 		newLead.Status = 'Inquiry';
-		// newLead.Sub_Status__c = 'Pending Diagnosis Verification';
 		newLead.Gender__c = 'Male';
 		newLead.ChapterName__c = chapterAccountId;
 		newLead.Referrer_FirstName__c = 'Sudhar';
@@ -615,136 +516,7 @@ public class OrientationandTrainingUtil {
 		return newLead;
 	}
 
-	public static Lead createTestLeadRecwithDupe(Id chapterAccountId) {
-
-		Lead newLead = new Lead();
-		newLead.FirstName = 'moss';
-		newLead.LastName = 'Smith Household';
-		newLead.Phone = '9600467559';
-		newLead.Email = 'testmawa@gmail.com';
-		newLead.Street = 'KuttaiKarai Street';
-		newLead.StateCode = 'AZ';
-		newLead.city = 'Trichy';
-		newLead.Postalcode = '6201717';
-		newLead.CountryCode = 'US';
-		newLead.DOB__c = System.today() - 1435;
-		newLead.company = 'MAWA';
-		newLead.Status = 'Inquiry';
-		// newLead.Sub_Status__c = 'Pending Diagnosis Verification';
-		newLead.Gender__c = 'Male';
-		newLead.ChapterName__c = chapterAccountId;
-		newLead.Referrer_FirstName__c = 'SteveJune';
-		newLead.Referrer_Last_Name__c = 'Waughone';
-		newLead.Referrer_Email__c = 'testmawa2d@gmail.com';
-		newLead.Referrer_Phone__c = '9600467578';
-		newLead.Referrer_City__c = 'Trichy';
-		newLead.Referrer_Zip__c = '6210';
-		newLead.Sibling_Detail__c = 'aa | aaab | 14 bbb | bbbc | 15';
-		newLead.PD_Condition_Description__c = 'Test Diagnosis';
-		newLead.Parent_First_Name__c = 'MAWAFirstJune';
-		newLead.Parent_Last_Name__c = 'MAWALastJune';
-		newLead.Medical_Professional_First_Name__c = 'SteveJune';
-		newLead.Medical_Professional_Last_Name__c = 'Waughone';
-		newLead.Medical_Professional_Phone__c = '9600467578';
-		newLead.Medical_Professional_Email__c = 'testmawa2d@gmail.com';
-		newLead.Hospital_Treatment_Facility__c = 'Steve Smith AC';
-		newLead.Treating_Medical_Professional_First_Name__c = 'SteveJune';
-		newLead.Treating_Medical_Professional_Last_Name__c = 'Waughone';
-		newLead.Treating_Medical_Professional_Phone__c = '9600467578';
-		newLead.Treating_Medical_Professional_Email__c = 'testmawa2d@gmail.com';
-		newLead.Hospital_Treatment_Facility_Treating__c = 'Steve Smith AC';
-		newLead.Best_Contact_for_Physician_First_Name__c = 'SteveJune';
-		newLead.Best_Contact_for_Physician_Last_Name__c = 'Waughone';
-		newLead.Best_contact_for_Physician_Email__c = 'testmawa2d@gmail.com';
-		newLead.is_Family_Aware_of_Referral__c = 'Yes';
-		newLead.Medical_Questions__c = 'Test Diagnosis';
-		//newLead.PD_ICD_Code__c  = 'C12.0';
-		newLead.Lung_Disease__c = 'Test1;Test2';
-		newLead.Angina__c = 'Test1;Test2';
-		newLead.Ventilator__c = 'Test1;Test2';
-		newLead.Arrhythmia__c = 'Test1;Test2';
-		newLead.Heart_Failure__c = 'Test1;Test2';
-		newLead.Congenital_Heart_Disease__c = 'Test1;Test2';
-		newLead.Chronic_Hepatitis__c = 'Test1;Test2';
-		newLead.Convulsive_Disorders__c = 'Test1;Test2';
-		newLead.Pulmonary_Hypertension__c = 'Test1;Test2';
-		newLead.Strokes__c = 'Test1;Test2';
-		newLead.Chronic_Heart_Failure__c = 'Test1;Test2';
-		newLead.isSign__c = true;
-
-		//newLead.Communication__c = 'Non-Verbal';
-		newLead.Travel_algorithm__c = 'Test1;Test2;';
-		return newLead;
-	}
-
-	public static Lead createAdditionalParentLead(Id chapterAccountId) {
-
-		Lead newLead = new Lead();
-		newLead.FirstName = 'moss';
-		newLead.LastName = 'Smith Household';
-		newLead.Phone = '9600467559';
-		newLead.Email = 'testmawa@gmail.com';
-		newLead.Street = 'KuttaiKarai Street';
-		newLead.StateCode = 'AZ';
-		newLead.city = 'Trichy';
-		newLead.Postalcode = '6201717';
-		newLead.CountryCode = 'US';
-		newLead.DOB__c = System.today() - 1435;
-		newLead.company = 'MAWA';
-		newLead.Status = 'Inquiry';
-		// newLead.Sub_Status__c = 'Pending Diagnosis Verification';
-		newLead.Gender__c = 'Male';
-		newLead.ChapterName__c = chapterAccountId;
-		newLead.Referrer_FirstName__c = 'SteveJune';
-		newLead.Referrer_Last_Name__c = 'Waughone';
-		newLead.Referrer_Email__c = 'testmawa2d@gmail.com';
-		newLead.Referrer_Phone__c = '9600467578';
-		newLead.Referrer_City__c = 'Trichy';
-		newLead.Referrer_Zip__c = '6201717';
-		newLead.Sibling_Detail__c = 'aa | aaab | 14 bbb | bbbc | 15';
-		newLead.PD_Condition_Description__c = 'Test Diagnosis';
-		newLead.Parent_First_Name__c = 'MAWAFirstJune';
-		newLead.Parent_Last_Name__c = 'MAWALastJune';
-		newLead.Medical_Professional_First_Name__c = 'SteveJune';
-		newLead.Medical_Professional_Last_Name__c = 'Waughone';
-		newLead.Medical_Professional_Phone__c = '9600467578';
-		newLead.Medical_Professional_Email__c = 'testmawa2d@gmail.com';
-		newLead.Hospital_Treatment_Facility__c = 'Steve Smith AC';
-		newLead.Treating_Medical_Professional_First_Name__c = 'SteveJune';
-		newLead.Treating_Medical_Professional_Last_Name__c = 'Waughone';
-		newLead.Treating_Medical_Professional_Phone__c = '9600467578';
-		newLead.Treating_Medical_Professional_Email__c = 'testmawa2d@gmail.com';
-		newLead.Hospital_Treatment_Facility_Treating__c = 'Steve Smith AC';
-		newLead.Best_Contact_for_Physician_First_Name__c = 'SteveJune';
-		newLead.Best_Contact_for_Physician_Last_Name__c = 'Waughone';
-		newLead.Best_contact_for_Physician_Email__c = 'testmawa2d@gmail.com';
-		newLead.is_Family_Aware_of_Referral__c = 'Yes';
-		newLead.Medical_Questions__c = 'Test Diagnosis';
-
-		newLead.Lung_Disease__c = 'Test1;Test2';
-		newLead.Angina__c = 'Test1;Test2';
-		newLead.Ventilator__c = 'Test1;Test2';
-		newLead.Arrhythmia__c = 'Test1;Test2';
-		newLead.Heart_Failure__c = 'Test1;Test2';
-		newLead.Congenital_Heart_Disease__c = 'Test1;Test2';
-		newLead.Chronic_Hepatitis__c = 'Test1;Test2';
-		newLead.Convulsive_Disorders__c = 'Test1;Test2';
-		newLead.Pulmonary_Hypertension__c = 'Test1;Test2';
-		newLead.Strokes__c = 'Test1;Test2';
-		newLead.Chronic_Heart_Failure__c = 'Test1;Test2';
-		newLead.isSign__c = true;
-		newLead.Travel_algorithm__c = 'Test1;Test2;';
-		newLead.Additional_Parent_First_Name__c = 'MAWAFirstJune';
-		newLead.Additional_Parent_Last_Name__c = 'MAWALastJune';
-		newLead.Additional_Parent_Phone__c = '9600467559';
-		newLead.Additional_Parent_Email__c = 'testmawa@gmail.com';
-		newLead.Additional_Parent_City__c = 'Trichy';
-		newLead.Additional_Parent_Postal_Code__c = '6201717';
-		return newLead;
-	}
-
 	public static Lead createSameMedicalLead(Id chapterAccountId) {
-
 		Lead newLead = new Lead();
 		newLead.FirstName = 'moss';
 		newLead.LastName = 'Smith Household';
@@ -950,29 +722,6 @@ public class OrientationandTrainingUtil {
 		return newDeterminationtWish;
 	}
 
-	public static case createWishPlanningCase(Id wishChildId, Id parentCaseId) {
-		Account alabamaAccount = CreateAlabamaAccount();
-		insert alabamaAccount;
-		Case newPlanningtWish = new Case();
-		newPlanningtWish.RecordTypeId = wishRecordTypeId;
-		newPlanningtWish.ChapterName__c = alabamaAccount.Id;
-		newPlanningtWish.Subject = 'Wish Planning & Anticipation';
-		newPlanningtWish.ParentId = parentCaseId;
-		newPlanningtWish.ContactId = wishChildId;
-		return newPlanningtWish;
-	}
-
-	public static case createWishAssistCase(Id wishChildId, Id parentCaseId) {
-		Account alabamaAccount = CreateAlabamaAccount();
-		insert alabamaAccount;
-		Case newAssistWish = new Case();
-		newAssistWish.RecordTypeId = assistWishRecordTypeId;
-		newAssistWish.ChapterName__c = alabamaAccount.Id;
-		newAssistWish.Subject = 'Wish Assist';
-		newAssistWish.ContactId = wishChildId;
-		return newAssistWish;
-	}
-
 	public static case createWishGrantCase(Id wishChildId, Id parentCaseId) {
 		Account alabamaAccount = CreateAlabamaAccount();
 		insert alabamaAccount;
@@ -997,32 +746,6 @@ public class OrientationandTrainingUtil {
 		return newParentWish;
 	}
 
-	public static case CreateParentCaseWitiDate(Id wishChildId) {
-		Account alabamaAccount = CreateAlabamaAccount();
-		insert alabamaAccount;
-		Case newParentWish = new Case();
-		newParentWish.RecordTypeId = wishRecordTypeId;
-		newParentWish.ChapterName__c = alabamaAccount.Id;
-		newParentWish.Subject = 'Parent Wish';
-		newParentWish.Interview_date__c = System.today();
-		newParentWish.Wish_Type__c = 'Disney World';
-		newParentWish.Start_Date__c = System.today();
-		newParentWish.End_Date__c = System.today();
-		newParentWish.ContactId = wishChildId;
-		// newParentWish.Update_Wish_Child_Form_Info__c  = false;
-		newParentWish.Status = 'New';
-		newParentWish.Start_Date__c = System.today();
-		newParentWish.LiabilitySignerMapKeyPair__c = 'Vennila';
-		newParentWish.Budget_Submitted_Date__c = system.today();
-		newParentWish.Budget_Approved_Date__c = system.today();
-		//newParentWish.Update_Wish_Child_Form_Info__c = true;
-		//newParentWish.Birthdate__c = Date.today().addDays(+21);
-		newParentWish.Qualified_Date__c = system.today();
-		newParentWish.Referral_Date__c = system.today();
-		//newParentWish.Birthdate__c = newParentWish.Birthdate__c.addYears(-3);
-		return newParentWish;
-	}
-
 	public static case CreateParentCaseWithClosedStatus(Id wishChildId) {
 		Account alabamaAccount = CreateAlabamaAccount();
 		insert alabamaAccount;
@@ -1035,34 +758,18 @@ public class OrientationandTrainingUtil {
 		newParentWish.Start_Date__c = System.today();
 		newParentWish.End_Date__c = System.today();
 		newParentWish.ContactId = wishChildId;
-		//newParentWish.Update_Wish_Child_Form_Info__c = false;
 		newParentWish.Status = 'Closed';
 		newParentWish.Start_Date__c = System.today();
 		newParentWish.LiabilitySignerMapKeyPair__c = 'Vennila';
 		newParentWish.Budget_Submitted_Date__c = system.today();
 		newParentWish.Budget_Approved_Date__c = system.today();
 		newParentWish.Closed_Date__c = System.Today();
-		//newParentWish.Update_Wish_Child_Form_Info__c = true;
-		return newParentWish;
-	}
-
-	public static case parentWishWithConChapter(Id wishChildId, Id chapterAccId) {
-		Case newParentWish = new Case(RecordTypeId = wishRecordTypeId, ChapterName__c = chapterAccId,
-				Subject = 'Parent Wish', ContactId = wishChildId, status = 'Qualified');
 		return newParentWish;
 	}
 
 	public static case childWishWithConChapter(Id parentWishId) {
 		Case newParentWish = new Case(RecordTypeId = wishRecordTypeId, Subject = 'Child Wish', ParentId = parentWishId);
 		return newParentWish;
-	}
-
-	public static case CreatePartAWish(Id LeadId) {
-		case newPartACase = new Case();
-		newPartACase.Origin = 'Email';
-		newPartACase.Lead__c = LeadId;
-		newPartACase.Status = 'Open';
-		return newPartACase;
 	}
 
 	public static case CreatePartAWishRec() {
@@ -1147,17 +854,6 @@ public class OrientationandTrainingUtil {
 		return newOffering;
 	}
 
-	public static Class_Offering__c createClassOfferingDup(String chapRoleandId) {
-		Class_Offering__c newOffering = new Class_Offering__c();
-		newOffering.Chapter_Role_O_T__c = chapRoleandId;
-		newOffering.Date__c = System.Today() + 10;
-		newOffering.Start_Time__c = '12:00 AM';
-		newOffering.End_Time__c = '1:00 AM';
-		newOffering.max_capacity__c = 100;
-		newOffering.Location__c = 'Test';
-		return newOffering;
-	}
-
 	public static User createUser() {
 		Profile sysAdminProfile = [
 				SELECT Id
@@ -1183,13 +879,11 @@ public class OrientationandTrainingUtil {
 	}
 
 	public static User createUserWithRole(Id roleId) {
-
 		Profile volunteerSystemAdministrator = [
 				SELECT Id
 				FROM Profile
 				WHERE Name = 'System Administrator'
 		];
-
 		User newPvolunteerSystemAdministratorUser = new User(firstname = 'JonJesu', lastName = 'EdwardsJo', email = 'jonemail@gma111il.com', Username = 'jonsamp0@gma11il.com',
 				EmailEncodingKey = 'ISO-8859-1', Alias = 'jone', TimeZoneSidKey = 'America/Los_Angeles', LocaleSidKey = 'en_US',
 				LanguageLocaleKey = 'en_US', UserRoleId = roleId, ProfileId = volunteerSystemAdministrator.Id, isActive = true, Statecode = 'AZ');
@@ -1197,8 +891,6 @@ public class OrientationandTrainingUtil {
 	}
 
 	public static User createProspectiveVolunteerUser(Id contactId) {
-
-		//  Profile volunteerProspectiveProfile = [SELECT Id FROM Profile WHERE Name = 'Prospective Volunteer'];
 		String prospectiveProfileId = label.Prospective_Volunteer_Profile;
 		UserRole portalRole = [
 				Select Id
@@ -1228,61 +920,15 @@ public class OrientationandTrainingUtil {
 		return newProspectiveVolunteerUser;
 	}
 
-	public static User createProspectiveVolunteerUserWithContact() {
-
-		/*Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
-		contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
-
-		//  Profile volunteerProspectiveProfile = [SELECT Id FROM Profile WHERE Name = 'Prospective Volunteer'];
-
-		String prospectiveProfileId = label.Prospective_Volunteer_Profile;
-
-		User newProspectiveVolunteerUser = new User(firstname = 'Jonathanan', lastName = 'Edward', email = 'jonathanEdwards@gmail.com', Username = 'joathanedwards@gmail.com',
-				EmailEncodingKey = 'ISO-8859-1', Alias = 'jone', TimeZoneSidKey = 'America/Los_Angeles', LocaleSidKey = 'en_US',
-				LanguageLocaleKey = 'en_US', created_from_portal__c = true, ProfileId = prospectiveProfileId, ContactId = volunteerContact.Id, isActive = true, Statecode = 'AZ');
-		return newProspectiveVolunteerUser;*/
-		return createProspectiveVolunteerUser(null);
-	}
-
-	public static User createUserWithOutContact() {
-
-		//Profile volunteerProspectiveProfile = [SELECT Id FROM Profile WHERE Name = 'Prospective Volunteer'];
-		/*String prospectiveProfileId = Label.Prospective_Volunteer_Profile;
-
-		User newProspectiveVolunteerUser = new User(firstname = 'Jonathan', lastName = 'Edwards', email = 'jonathan@gmail.com', Username = 'joathanedwards@gmail.com',
-				EmailEncodingKey = 'ISO-8859-1', Alias = 'jone', TimeZoneSidKey = 'America/Los_Angeles', LocaleSidKey = 'en_US',
-				LanguageLocaleKey = 'en_US', created_from_portal__c = true, ProfileId = prospectiveProfileId, isActive = true, Statecode = 'AZ');
-		return newProspectiveVolunteerUser;*/
-		return createProspectiveVolunteerUser(null);
-	}
-
 	public static User CreateActiveVolunteerUser(Id contactId) {
-		//Profile volunteerActiveProfile = [SELECT Id FROM Profile WHERE Name = 'Active Volunteer'];
-
 		String activeProfileId = label.Active_Volunteer_Profile;
-		/*UserRole portalRole = [
-				Select Id
-				From UserRole
-				Where Name = 'Make-A-Wish Arizona Customer User'
-				Limit 1
-		];
-		User newActiveVolunteerUser = new User(firstname = 'Jonathan', lastName = 'Edwards', email = 'jonathan@gmail.com', Username = 'joathanedwards@gmail.com',
-				EmailEncodingKey = 'ISO-8859-1', Alias = 'jone', TimeZoneSidKey = 'America/Los_Angeles', LocaleSidKey = 'en_US', UserRoleId = portalRole.Id,
-				LanguageLocaleKey = 'en_US', created_from_portal__c = true, ProfileId = activeProfileId, ContactId = contactId, isActive = true, Hidden_Role_Name_Id__c = 'Test');
-
-		return newActiveVolunteerUser;*/
 		User newUser = createProspectiveVolunteerUser(null);
 		newUser.ProfileId = activeProfileId;
 		return newUser;
 	}
 
 	public static User CreateActiveVolunteerUserWithPS(Id contactId) {
-		//Profile volunteerActiveProfile = [SELECT Id FROM Profile WHERE Name = 'Active Volunteer'];
 		String activeProfileId = label.Active_Volunteer_Profile;
-		/*User newActiveVolunteerUser = new User(firstname = 'Jonathan', lastName = 'Edwards', email = 'jonathan@gmail.com', Username = 'joathanedwards@gmail.com',
-				EmailEncodingKey = 'ISO-8859-1', Alias = 'jone', TimeZoneSidKey = 'America/Los_Angeles', LocaleSidKey = 'en_US',
-				LanguageLocaleKey = 'en_US', created_from_portal__c = true, ProfileId = activeProfileId, ContactId = contactId, isActive = true, Hidden_Role_Name_Id__c = 'Test');
-		return newActiveVolunteerUser;*/
 		User newUser = createProspectiveVolunteerUser(null);
 		newUser.ProfileId = activeProfileId;
 		return newUser;
@@ -1384,19 +1030,6 @@ public class OrientationandTrainingUtil {
 	}
 
 	public static User createVolunteerUser(Id contactId) {
-		//Profile volunteerProspectiveProfile = [SELECT Id FROM Profile WHERE Name = 'Prospective Volunteer'];
-
-		/*String profileId = label.Prospective_Volunteer_Profile;
-		UserRole portalRole = [
-				Select Id
-				From UserRole
-				Where Name = 'Make-A-Wish Arizona Customer User'
-				Limit 1
-		];
-		User newProspectiveVolunteerUser = new User(firstname = 'Jonathan1', created_from_portal__c = true, lastName = 'Edwards1', email = 'jonathan@gmail1.com', Username = 'joathanedwards1@gmail.com',
-				EmailEncodingKey = 'ISO-8859-1', Alias = 'jone', TimeZoneSidKey = 'America/Los_Angeles', LocaleSidKey = 'en_US', UserRoleId = portalRole.Id,
-				LanguageLocaleKey = 'en_US', ProfileId = profileId, ContactId = contactId, isActive = true, Statecode = 'AZ');
-		return newProspectiveVolunteerUser;*/
 		return createProspectiveVolunteerUser(null);
 	}
 
@@ -1413,34 +1046,10 @@ public class OrientationandTrainingUtil {
 	}
 
 	public static User createActVolunteerUser(Id contactId) {
-		//Profile volunteerActiveProfile = [SELECT Id FROM Profile WHERE Name = 'Active Volunteer'];
-
 		String activeProfileId = label.Active_Volunteer_Profile;
-		/*UserRole portalRole = [
-				Select Id
-				From UserRole
-				Where Name = 'Make-A-Wish Arizona Customer User'
-				Limit 1
-		];
-		User newActiveVolunteerUser = new User(firstname = 'Jonathan', lastName = 'Edwards', email = 'jonathan@gmail.com', Username = 'joathanedwards@gmail.com',
-				EmailEncodingKey = 'ISO-8859-1', Alias = 'jone', TimeZoneSidKey = 'America/Los_Angeles', LocaleSidKey = 'en_US', UserRoleId = portalRole.Id,
-				LanguageLocaleKey = 'en_US', created_from_portal__c = true, ProfileId = activeProfileId, ContactId = contactId, isActive = true);
-		return newActiveVolunteerUser;*/
 		User newUser = createProspectiveVolunteerUser(null);
 		newUser.ProfileId = activeProfileId;
 		return newUser;
-	}
-
-	public static User createIntegrationUser() {
-		Profile volunteerIntegration = [
-				SELECT Id
-				FROM Profile
-				WHERE Name = 'Integration'
-		];
-		User newPvolunteerSystemAdministratorUser = new User(firstname = 'Yohan', lastName = 'Blake', email = 'blake@yohan.com', Username = 'yohanblake@100m.com',
-				EmailEncodingKey = 'ISO-8859-1', Alias = 'jone', TimeZoneSidKey = 'America/Los_Angeles', LocaleSidKey = 'en_US',
-				LanguageLocaleKey = 'en_US', ProfileId = volunteerIntegration.Id, isActive = true, Statecode = 'AZ');
-		return newPvolunteerSystemAdministratorUser ;
 	}
 
 	public static Background_check__c createBackgroundCheck(Id ContactId) {
@@ -1480,13 +1089,6 @@ public class OrientationandTrainingUtil {
 		backCheck.current__c = true;
 		backCheck.Date_Completed__c = system.today() + 9;
 		return backCheck;
-	}
-
-	public static Background_check__c createBackgroundRecord(Id volunteerId) {
-		Background_check__c newBackground = new Background_check__c();
-		newBackground.Volunteer__c = volunteerId;
-		newBackground.Resided_in_US_for_past_7_years__c = 'Yes';
-		return newBackground;
 	}
 
 	public static Awards_Recognition__c CreateAwardRecognition(Id chapterAccountId, Id volContactId) {
@@ -1531,14 +1133,6 @@ public class OrientationandTrainingUtil {
 		return neworgAffiliation;
 	}
 
-	public static npe5__Affiliation__c CreateAffiliationwithNullStatus(Id AccountId, Id contactId) {
-		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
-		neworgAffiliation.npe5__Contact__c = contactId;
-		neworgAffiliation.npe5__Organization__c = AccountId;
-		neworgAffiliation.npe5__Primary__c = true;
-		return neworgAffiliation;
-	}
-
 	public static Volunteer_Orientation_Training__c createVolTraining(Id OrienationId, Id ClassOfferingId, Id volunteer, string status) {
 		Volunteer_Orientation_Training__c createNewVol = new Volunteer_Orientation_Training__c();
 		createNewVol.class_offering__c = ClassOfferingId;
@@ -1557,25 +1151,6 @@ public class OrientationandTrainingUtil {
 		createNewVol.Hidden_O_T_Id__c = OrienationId;
 		createNewVol.Registered_Date__c = Date.Today();
 		createNewVol.Volunteer__c = volunteer;
-		createNewVol.Volunteer_Attendance__c = status;
-		createNewVol.Type__c = 'Orientation';
-		return createNewVol;
-	}
-
-	public static Volunteer_Orientation_Training__c createVolWithoutOrientation(Id ClassOfferingId, Id volunteer, string status) {
-		Volunteer_Orientation_Training__c createNewVol = new Volunteer_Orientation_Training__c();
-		createNewVol.class_offering__c = ClassOfferingId;
-		createNewVol.Registered_Date__c = Date.Today();
-		createNewVol.Volunteer__c = volunteer;
-		createNewVol.Volunteer_Attendance__c = status;
-		createNewVol.Type__c = 'Orientation';
-		return createNewVol;
-	}
-
-	public static Volunteer_Orientation_Training__c updateVolWithoutOrientation(Id volOrientation, string status) {
-		Volunteer_Orientation_Training__c createNewVol = new Volunteer_Orientation_Training__c();
-		createNewVol.Registered_Date__c = Date.Today();
-		createNewVol.Id = volOrientation;
 		createNewVol.Volunteer_Attendance__c = status;
 		createNewVol.Type__c = 'Orientation';
 		return createNewVol;
@@ -1681,6 +1256,14 @@ public class OrientationandTrainingUtil {
 		return newNonWishOpportunity;
 	}
 
+	public static List<Volunteer_Opportunity__c> createVolunteerOpportunities(Integer num){
+		List<Volunteer_Opportunity__c> retList = new List<Volunteer_Opportunity__c>();
+		for(Integer i = 0; i < num; i++){
+			retList.add(new Volunteer_Opportunity__c());
+		}
+		return retList;
+	}
+
 	public static List<Volunteer_Opportunity__c> NewWishVolunteerOpportunityList(Id chapterId, Id roleId, Id wishId, Integer count) {
 		List<Volunteer_Opportunity__c> volunteerOpportunityList = new List<Volunteer_Opportunity__c>();
 		for (Integer i = 0; i <= count; i++) {
@@ -1737,34 +1320,11 @@ public class OrientationandTrainingUtil {
 		return volunteerOpportunityList;
 	}
 
-	public static List<Volunteer_Opportunity__c> NewApprovedWishVolunteerOpportunityList(Id chapterId, Id roleId, Id wishId, Integer count, Id volunteerConId) {
-		List<Volunteer_Opportunity__c> volunteerOpportunityList = new List<Volunteer_Opportunity__c>();
-		for (Integer i = 0; i <= count; i++) {
-			Volunteer_Opportunity__c newWishOpportunity = new Volunteer_Opportunity__c();
-			newWishOpportunity.Chapter_Role_Opportunity__c = roleId;
-			newWishOpportunity.Wish__c = wishId;
-			newWishOpportunity.Chapter_Name__c = chapterId;
-			newWishOpportunity.Volunteer_Name__c = volunteerConId;
-			newWishOpportunity.Status__c = 'Approved';
-			newWishOpportunity.RecordTypeId = wishVolunteerOpportunityRecordTypeId;
-			volunteerOpportunityList.add(newWishOpportunity);
-		}
-		return volunteerOpportunityList;
-	}
-
 	public static Volunteer_Opportunity__c NewnonWishVolunteerOpportunity(Id chapterId, Id contactId) {
 		Volunteer_Opportunity__c newWishOpportunity = new Volunteer_Opportunity__c();
 		newWishOpportunity.Chapter_Name__c = chapterId;
 		newWishOpportunity.RecordTypeId = wishVolunteerOpportunityRecordTypeId;
 		newWishOpportunity.Volunteer_Name__c = contactId;
-		return newWishOpportunity;
-	}
-
-	public static Volunteer_Opportunity__c newVolunteerOpportunityWithCaseandVolunteer(id wishId, id VolunteerId) {
-		Volunteer_Opportunity__c newWishOpportunity = new Volunteer_Opportunity__c();
-		newWishOpportunity.Wish__C = wishId;
-		newWishOpportunity.RecordTypeId = wishVolunteerOpportunityRecordTypeId;
-		newWishOpportunity.Volunteer_Name__c = VolunteerId;
 		return newWishOpportunity;
 	}
 
@@ -1838,24 +1398,12 @@ public class OrientationandTrainingUtil {
 		Group leadalabamaGroup = new Group(Type = 'Regular', Name = 'Arizona');
 	}
 
-	public static Group createChatterGroup() {
-		Group alabamaGroup = new Group();
-		alabamaGroup.Name = 'Make-A-Wish Alabama';
-		alabamaGroup.DeveloperName = 'ABC';
-		return alabamaGroup;
-	}
-
 	public static Chapter_Action_Track__c createChapterActionTrack() {
 		Chapter_Action_Track__c newChapterAction = new Chapter_Action_Track__c();
-		//newChapterAction.Assigned_To__c = 'Volunteer Manager';
-		//newChapterAction.Case_Type_Stage__c = 'Wish Determination';
-
 		newChapterAction.Task_Name__c = 'Planning';
 		newChapterAction.Sort_Order__c = 1;
 		newChapterAction.Wish_type__c = 'Standard';
-		// newChapterAction.Recurring__c = true;
 		newChapterAction.Wish_Type__c = 'Disney World';
-		//newChapterAction.Recurring_Frequency__c = 1;
 		newChapterAction.Months__c = 2;
 		newChapterAction.Weeks__c = 2;
 		return newChapterAction;
@@ -1863,15 +1411,10 @@ public class OrientationandTrainingUtil {
 
 	public static Chapter_Action_Track__c otherActionTrack() {
 		Chapter_Action_Track__c newChapterAction = new Chapter_Action_Track__c();
-		//newChapterAction.Assigned_To__c = 'Volunteer Manager';
-		//newChapterAction.Case_Type_Stage__c = 'Wish Determination';
-
 		newChapterAction.Task_Name__c = 'Planning';
 		newChapterAction.Sort_Order__c = 1;
 		newChapterAction.Wish_type__c = 'Standard';
-		// newChapterAction.Recurring__c = true;
 		newChapterAction.Wish_Type__c = 'Other';
-		// newChapterAction.Recurring_Frequency__c = 1;
 		newChapterAction.Months__c = 2;
 		newChapterAction.Weeks__c = 2;
 		return newChapterAction;
@@ -1882,14 +1425,6 @@ public class OrientationandTrainingUtil {
 		caseMember.ParentId = parentId;
 		caseMember.memberId = wishId;
 		caseMember.TeamRoleId = roleId;
-		return caseMember;
-	}
-
-	public static CaseTeamMember createWishTeamMember(Id parentId, Id wishId) {
-		CaseTeamMember caseMember = new CaseTeamMember();
-		caseMember.ParentId = parentId;
-		caseMember.memberId = wishId;
-		//caseMember.TeamRoleId = roleId;
 		return caseMember;
 	}
 
@@ -1906,13 +1441,6 @@ public class OrientationandTrainingUtil {
 		newGroup.name = chapterName;
 		newGroup.CollaborationType = 'Public';
 		return newGroup;
-	}
-
-	public static CollaborationGroupMember createCollabrationGroupMember(Id collabrationId, Id sysUserId) {
-		CollaborationGroupMember newGroupMember = new CollaborationGroupMember();
-		newGroupMember.CollaborationGroupId = collabrationId;
-		newGroupMember.MemberId = sysUserId;
-		return newGroupMember;
 	}
 
 	public static Office__c createOffice(Id AccountId) {
@@ -2060,22 +1588,6 @@ public class OrientationandTrainingUtil {
 		return dsfs;
 	}
 
-	/* public static Lead_File__c createLeadFileRec(Id LeadId);
-
-Lead_File__c  newLeadFile = new Lead_File__c ();
-//newLeadFile.Content_Type__c = text/plain;
-//newLeadFile.Description__c =
-//newLeadFile.File_Name__c = 'Tes2.txt';
-//newLeadFile.File_Size_in_Bytes__c =
-//newLeadFile.Is_Latest_Version__c =
-//newLeadFile.Key__c = '00Q11000008CXBp/a1Q11000001HtJ9EAK/Tes2.txt';
-newLeadFile.Parent__c = LeadId;
-//newLeadFile.Private__c =
-//newLeadFile.Version_Description__c =
-//newLeadFile.Version_Id__c =
-//newLeadFile.WIP__c =
-insert newLeadFile;
-retrun newLeadFile;*/
 	//This method is used to create reimbursement record with record type of reimbursement
 	public static In_Kind_Donation_Reimbursement__c createReImbursementRecord() {
 		In_Kind_Donation_Reimbursement__c newReimbursement = new In_Kind_Donation_Reimbursement__c();
@@ -2106,18 +1618,6 @@ retrun newLeadFile;*/
 		newinkindRecord.Gift_Type__c = 'Goods';
 		newinkindRecord.Gift_Value__c = 123456;
 		newinkindRecord.Documentation__c = 'Not available';
-		newinkindRecord.RecordTypeId = inKindRecordTypeId;
-		newinkindRecord.Make_check_payable_to_me__c = true;
-		return newinkindRecord;
-	}
-
-	//This method is used to create inkind  record without any attachment
-	public static In_Kind_Donation_Reimbursement__c CreateInkindRecordWithOutAttachment() {
-		In_Kind_Donation_Reimbursement__c newinkindRecord = new In_Kind_Donation_Reimbursement__c();
-		newinkindRecord.Date_of_Gift__c = system.today() + 2;
-		newinkindRecord.Gift_Type__c = 'Goods';
-		newinkindRecord.Gift_Value__c = 123456;
-		newinkindRecord.Documentation__c = 'Will Attach';
 		newinkindRecord.RecordTypeId = inKindRecordTypeId;
 		newinkindRecord.Make_check_payable_to_me__c = true;
 		return newinkindRecord;
@@ -2169,20 +1669,6 @@ retrun newLeadFile;*/
 		return checkinTask;
 	}
 
-	//Used to create checkin task for wish child family.
-	public static List<Task> CreateObtainitinerary(Id parentWishId) {
-		List<Task> taskList = new List<Task>();
-		for (Integer i = 0; i < 10; i++) {
-			Task itinerary = new Task();
-			itinerary.ActivityDate = Date.today().addDays(i);
-			itinerary.Subject = 'Obtain itinerary and/or wish packet';
-			itinerary.Status = 'Not Started';
-			itinerary.WhatId = parentWishId;
-			taskList.add(itinerary);
-		}
-		return taskList;
-	}
-
 	//Used to create Flights booked task for wish child family.
 	public static Task createFightBookingTask(Id parentWishId) {
 		Task checkinTask = new Task();
@@ -2213,27 +1699,6 @@ retrun newLeadFile;*/
 		return checkinTask;
 	}
 
-	//Used to create followup activities task
-	public static Task createFollupActivitiesTask(Id ParentWishId, Id OwnerId) {
-		Task checkinTask = new Task();
-		checkinTask.ActivityDate = System.today() + 30;
-		checkinTask.Subject = 'Volunteer wish follow-up activities not complete';
-		checkinTask.Status = 'Not Started';
-		checkinTask.WhatId = parentWishId;
-		checkinTask.OwnerId = OwnerId;
-		return checkinTask;
-	}
-
-	//Used to create followup activities task
-	public static Task reviewPhotos(Id ParentWishId) {
-		Task checkinTask = new Task();
-		checkinTask.ActivityDate = System.today() + 30;
-		checkinTask.Subject = 'Review photos/videos';
-		checkinTask.Status = 'Not Started';
-		checkinTask.WhatId = parentWishId;
-		return checkinTask;
-	}
-
 	public static Task passportRequestTask(Id parentWishId) {
 		Task checkinTask = new Task();
 		checkinTask.ActivityDate = System.today() + 30;
@@ -2241,37 +1706,6 @@ retrun newLeadFile;*/
 		checkinTask.Status = 'Not Started';
 		checkinTask.WhatId = parentWishId;
 		return checkinTask;
-	}
-
-	//Wish Presentation Date not set
-	public static Task presentationTask(Id parentWishId) {
-		Task checkinTask = new Task();
-		checkinTask.ActivityDate = System.today() + 30;
-		checkinTask.Subject = 'wish presentation date entered';
-		checkinTask.Status = 'Not Started';
-		checkinTask.WhatId = parentWishId;
-		return checkinTask;
-	}
-
-	//Wish granted Task
-	public static Task wishGrantedTask(Id parentWishId) {
-		Task checkinTask = new Task();
-		checkinTask.ActivityDate = System.today() + 30;
-		checkinTask.Subject = 'Granted Task';
-		checkinTask.Status = 'Not Started';
-		checkinTask.WhatId = parentWishId;
-		checkinTask.RecordTypeId = wishGrantTaskRecordTypeId;
-		return checkinTask;
-	}
-
-	//Wish concept approval task creation
-	public static Task wishConceptApproval(Id parentWishId) {
-		Task concept = new Task();
-		concept.ActivityDate = System.today() + 30;
-		concept.Subject = 'Wish concept approval';
-		concept.Status = 'Not Started';
-		concept.WhatId = parentWishId;
-		return concept;
 	}
 
 	//Wish presentation not set
@@ -2282,16 +1716,6 @@ retrun newLeadFile;*/
 		presentation.Status = 'Not Started';
 		presentation.WhatId = parentWishId;
 		return presentation;
-	}
-
-	//Wish not closed
-	public static Task wishNotClosed(Id parentWishId) {
-		Task notClosed = new Task();
-		notClosed.ActivityDate = System.today() + 30;
-		notClosed.Subject = 'Wish not closed';
-		notClosed.Status = 'Not Started';
-		notClosed.WhatId = parentWishId;
-		return notClosed;
 	}
 
 	public static npe4__Relationship__c CreateRelationshipRec(Id wishChildId, Id wishFamilyId) {
@@ -2323,39 +1747,6 @@ retrun newLeadFile;*/
 		return newRelationForm;
 	}
 
-	/**
-	 * JIRA: WLP-291
-	 * Author: Gustavo Mayer
-	 * Update: Non_Comped, Medical_Needs, Send_Wish_Forms__c and Residing_with_Wish_child__c
-	 * to reside on Wish Affiliation object and to be removed from npe4__Relationship__c.
-	 */
-	public static npe4__Relationship__c CreateMedicalProfessionalRelationshipRec(Id wishChildId, Id medicalProfessionalId) {
-		npe4__Relationship__c newRelationShip = new npe4__Relationship__c();
-		newRelationShip.npe4__Contact__c = wishChildId;
-		newRelationShip.npe4__RelatedContact__c = medicalProfessionalId;
-		newRelationShip.npe4__Status__c = 'Active';
-		newRelationShip.npe4__Type__c = medicalProfessionalRecordTypeLabel;
-		newRelationShip.Qualifying_Medical_Professional__c = TRUE;
-		return newRelationShip;
-	}
-
-	/**
-	 * JIRA: WLP-291
-	 * Author: Gustavo Mayer
-	 * Update: Non_Comped, Medical_Needs, Send_Wish_Forms__c and Residing_with_Wish_child__c
-	 * to reside on Wish Affiliation object and to be removed from npe4__Relationship__c.
-	 */
-	public static npe4__Relationship__c CreateMedicalProfessionalRelationshipRecord(Id wishChildId, Id medicalProfessionalId) {
-		npe4__Relationship__c newRelationShip = new npe4__Relationship__c();
-		newRelationShip.npe4__Contact__c = wishChildId;
-		newRelationShip.npe4__RelatedContact__c = medicalProfessionalId;
-		newRelationShip.npe4__Status__c = 'Active';
-		newRelationShip.npe4__Type__c = medicalProfessionalRecordTypeLabel;
-		//newRelationShip.Qualifying_Medical_Professional__c =TRUE;
-//		newRelationShip.Send_Wish_Forms__c = true;
-		return newRelationShip;
-	}
-
 	public static npe4__Relationship__c ParentLegualGuardianRelation(Id wishChildId, Id wishFamilyId) {
 		npe4__Relationship__c newRelationShip = new npe4__Relationship__c();
 		newRelationShip.npe4__Contact__c = wishChildId;
@@ -2377,29 +1768,9 @@ retrun newLeadFile;*/
 		return newRelationShip;
 	}
 
-	public Static List<npe4__Relationship__c> relationshipChildList(List<Contact> FamilyContactIdList, id ChildContactid, Integer count) {
-		List<npe4__Relationship__c> relationShipList = new List<npe4__Relationship__c>();
-		for (Integer i = 0; i <= count; i++) {
-			npe4__Relationship__c newRelationForm = new npe4__Relationship__c();
-			newRelationForm.npe4__Contact__c = ChildContactid;
-			newRelationForm.npe4__RelatedContact__c = FamilyContactIdList.get(i).Id;
-			newRelationForm.Parent_Legal_Guardian__c = true;
-			relationShipList.add(newRelationForm);
-		}
-		return relationShipList;
-	}
-
 	public static CaseTeamRole CreateCaseTeamRole() {
 		CaseTeamRole newRole = new CaseTeamRole();
 		newRole.Name = 'Wish Granter';
-		newRole.PreferencesVisibleInCSP = true;
-		newRole.AccessLevel = 'Edit';
-		return newRole;
-	}
-
-	public static CaseTeamRole CreateCaseTeamRoleChangeName() {
-		CaseTeamRole newRole = new CaseTeamRole();
-		newRole.Name = 'Wish';
 		newRole.PreferencesVisibleInCSP = true;
 		newRole.AccessLevel = 'Edit';
 		return newRole;
@@ -2428,74 +1799,6 @@ retrun newLeadFile;*/
 		newContactFile.cg__Content_Type__c = 'text/plain';
 		return newContactFile;
 	}
-	public static Wish_Budget__c createWishBudgetRecord(Id caseId) {
-		Wish_Budget__c wishBudget = new Wish_Budget__c();
-		wishBudget.Wish_Case__c = caseId;
-		return wishBudget;
-	}
-	public static Wish_Expense__c createWishExpenceRecord(Id parentCaseId, Id budgetId) {
-		Wish_Expense__c newExpence = new Wish_Expense__c();
-		newExpence.Case__c = parentCaseId;
-		newExpence.Wish_Budget__c = budgetId;
-		return newExpence;
-	}
-
-	public static List<WishDeterminationSubCaseTaskList__c> createDeterminationTask(Integer n) {
-		List<WishDeterminationSubCaseTaskList__c> wishDeterminationTaskList = new List<WishDeterminationSubCaseTaskList__c>();
-		for (Integer i = 1; i < n; i++) {
-			if (i == 1) {
-				WishDeterminationSubCaseTaskList__c wishDetermination = new WishDeterminationSubCaseTaskList__c();
-				wishDetermination.Name = 'Task' + i;
-				wishDetermination.Due_Date__c = 100 + i;
-				wishDetermination.Task_Subject__c = 'Contact Wish Partner & coordinate for wish visit';
-				wishDeterminationTaskList.add(wishDetermination);
-			} else if (i == 2) {
-				WishDeterminationSubCaseTaskList__c wishDetermination = new WishDeterminationSubCaseTaskList__c();
-				wishDetermination.Name = 'Task' + i;
-				wishDetermination.Due_Date__c = 100 + i;
-				wishDetermination.Task_Subject__c = 'Contact Wish Family to Schedule Initial Visit (interview)';
-				wishDeterminationTaskList.add(wishDetermination);
-			} else if (i == 3) {
-				WishDeterminationSubCaseTaskList__c wishDetermination = new WishDeterminationSubCaseTaskList__c();
-				wishDetermination.Name = 'Task' + i;
-				wishDetermination.Due_Date__c = 100 + i;
-				wishDetermination.Task_Subject__c = 'Enter interview date';
-				wishDeterminationTaskList.add(wishDetermination);
-			} else if (i == 4) {
-				WishDeterminationSubCaseTaskList__c wishDetermination = new WishDeterminationSubCaseTaskList__c();
-				wishDetermination.Name = 'Task' + i;
-				wishDetermination.Due_Date__c = 100 + i;
-				wishDetermination.Task_Subject__c = 'Procure Icebreaker Gift';
-				wishDeterminationTaskList.add(wishDetermination);
-			} else if (i == 5) {
-				WishDeterminationSubCaseTaskList__c wishDetermination = new WishDeterminationSubCaseTaskList__c();
-				wishDetermination.Name = 'Task' + i;
-				wishDetermination.Due_Date__c = 100 + i;
-				wishDetermination.Task_Subject__c = 'Conduct Interview';
-				wishDeterminationTaskList.add(wishDetermination);
-			} else if (i == 6) {
-				WishDeterminationSubCaseTaskList__c wishDetermination = new WishDeterminationSubCaseTaskList__c();
-				wishDetermination.Name = 'Task' + i;
-				wishDetermination.Due_Date__c = 100 + i;
-				wishDetermination.Task_Subject__c = 'Complete /upload wish family packet';
-				wishDeterminationTaskList.add(wishDetermination);
-			} else if (i == 7) {
-				WishDeterminationSubCaseTaskList__c wishDetermination = new WishDeterminationSubCaseTaskList__c();
-				wishDetermination.Name = 'Task' + i;
-				wishDetermination.Due_Date__c = 100 + i;
-				wishDetermination.Task_Subject__c = 'Submit wish family packet to chapter approval';
-				wishDeterminationTaskList.add(wishDetermination);
-			} else if (i == 8) {
-				WishDeterminationSubCaseTaskList__c wishDetermination = new WishDeterminationSubCaseTaskList__c();
-				wishDetermination.Name = 'Task' + i;
-				wishDetermination.Due_Date__c = 100 + i;
-				wishDetermination.Task_Subject__c = 'Check in with the family every 30 days';
-				wishDeterminationTaskList.add(wishDetermination);
-			}
-			i++;
-		}
-		return wishDeterminationTaskList;
-	}
 
 	public Static Case createParentCase() {
 		Case newCase = new Case();
@@ -2507,17 +1810,6 @@ retrun newLeadFile;*/
 		newdsfs.dsfs__Parent_Status_Record__c = dsfsStatusId;
 		newdsfs.dsfs__DocuSign_Recipient_Email__c = 'testmawa@gmail.com';
 		newdsfs.Name = 'Vennila';
-		newdsfs.dsfs__DocuSign_Recipient_Id__c = '98D97010-2A0B-4714-B9AE-494B74BD287F';
-		newdsfs.dsfs__Envelope_Id__c = '0204C9DD-B8B3-4D7D-B9C5-F88B921E1511';
-		newdsfs.dsfs__Recipient_Status__c = 'Completed';
-		return newdsfs;
-	}
-
-	public Static dsfs__DocuSign_Recipient_Status__c CreatedsfsReccompleted(Id dsfsStatusId) {
-		dsfs__DocuSign_Recipient_Status__c newdsfs = new dsfs__DocuSign_Recipient_Status__c();
-		newdsfs.dsfs__Parent_Status_Record__c = dsfsStatusId;
-		newdsfs.dsfs__DocuSign_Recipient_Email__c = 'testmawa@gmail.com';
-		newdsfs.Name = 'Sankar';
 		newdsfs.dsfs__DocuSign_Recipient_Id__c = '98D97010-2A0B-4714-B9AE-494B74BD287F';
 		newdsfs.dsfs__Envelope_Id__c = '0204C9DD-B8B3-4D7D-B9C5-F88B921E1511';
 		newdsfs.dsfs__Recipient_Status__c = 'Completed';
@@ -2546,22 +1838,6 @@ retrun newLeadFile;*/
 		return newdsfs;
 	}
 
-	public static cg__accountFile__c createAccountFileRecord(Id accountId) {
-		cg__AccountFile__c newAccountFile = new cg__AccountFile__c();
-		newAccountFile.cg__File_Name__c = 'MedicalSummary.txt';
-		newAccountFile.cg__Account__c = accountId;
-		newAccountFile.cg__Content_Type__c = 'text/plain';
-		return newAccountFile;
-	}
-
-	public static Background_Check_File__c createBackgroundFileRecord(Id backgrounId) {
-		Background_Check_File__c newBackground = new Background_Check_File__c();
-		newBackground.Parent__c = backgrounId;
-		newBackground.File_Name__c = 'MedicalSummary.txt';
-		newBackground.Content_Type__c = 'text/plain';
-		return newBackground;
-	}
-
 	// public static In_Kind_Donation_Reimbursement_File__c  createInkindDonaReimbFileRecord(Id ikdrId) {
 	public static InkindDon_reimburseFile__c createInkindDonaReimbFileRecord(Id ikdrId) {
 		//In_Kind_Donation_Reimbursement_File__c  newikdrFile = new In_Kind_Donation_Reimbursement_File__c  ();
@@ -2584,15 +1860,6 @@ retrun newLeadFile;*/
 		currtransactionCode.Wish_Expense_Type__c = wishtypeId;
 		currtransactionCode.Is_Active__c = true;
 		return currtransactionCode;
-	}
-
-	public static Attachment CreateAttachmentRecord() {
-		dsfs__DocuSign_Status__c newDocusign = CreateDocusignRecord();
-		Attachment newAttachment = new Attachment();
-		newAttachment.ParentId = newDocusign.id;
-		newAttachment.Name = 'Attachment1';
-		newAttachment.Body = blob.valueOf('Hi Welcome to body text');
-		return newAttachment;
 	}
 
 	public static Attachment CreateAttachmentRecordWishChild(Id ParentId) {
@@ -2624,14 +1891,6 @@ retrun newLeadFile;*/
 		createRec.Role_Name__c = 'Arizona - Chapter';
 		createRec.Name = 'Make-A-Wish Arizona';
 		return createRec;
-	}
-
-	public static void checkGovernorLimits() {
-		System.assert(Limits.getDMLRows() * 100 / Limits.getLimitDMLRows() < 50);
-		System.assert(Limits.getDMLStatements() * 100 / Limits.getLimitDMLStatements() < 50);
-		System.assert(Limits.getAggregateQueries() * 100 / Limits.getLimitAggregateQueries() < 50);
-		System.assert(Limits.getQueries() * 100 / Limits.getLimitQueries() < 70);
-		System.assert(Limits.getQueryRows() * 100 / Limits.getLimitQueryRows() < 50);
 	}
 
 	public static List<Wish_Child_Form__c> createWishChildForm(Id ParentWishId, Contact wishChildContact, Contact parentGurdian, Contact participant) {
@@ -2791,186 +2050,5 @@ retrun newLeadFile;*/
 		WishFormList.add(driverInfoone);
 
 		return WishFormList;
-	}
-
-	public Static List<Wish_Child_Form__c> createWishChildFormRec(Id ParentWishId, Contact wishChildContact, Contact parentGurdian, Contact participant) {
-		List<Wish_Child_Form__c> WishFormList = new List<Wish_Child_Form__c>();
-		Wish_Child_Form__c currWishChild = new Wish_Child_Form__c();
-		currWishChild.FirstName__c = wishChildContact.FirstName;
-		currWishChild.LastName__c = wishChildContact.LastName;
-		currWishChild.Middle_Name__c = wishChildContact.Middle_Name__c;
-		currWishChild.BirthDate__c = system.today() - 70556;
-		currWishChild.Diagnosis__c = wishChildContact.Diagnosis__c;
-		currWishChild.Gender__c = wishChildContact.Gender__c;
-		currWishChild.Self_describe_comment_box__c = wishChildContact.Self_describe_comment_box__c;
-		currWishChild.mobilePhone__c = wishChildContact.MobilePhone;
-		currWishChild.Case__c = ParentWishId;
-		currWishChild.Email__c = wishChildContact.Email;
-		currWishChild.T_Shirt_Size__c = wishChildContact.T_Shirt_Size__c;
-		currWishChild.Street__c = wishChildContact.MailingStreet;
-		currWishChild.State__c = wishChildContact.MailingState;
-		currWishChild.city__c = wishChildContact.MailingCity;
-		currWishChild.Zip_code__c = wishChildContact.MailingPostalCode;
-//		currWishChild.RecordTypeId = wishChildRecordTypeId;
-		currWishChild.Contact__c = wishChildContact.Id;
-		currWishChild.Preferred_Name__c = wishChildContact.Preferred_Name__c;
-		WishFormList.add(currWishChild);
-
-		Wish_Child_Form__c familyCon = new Wish_Child_Form__c();
-		familyCon.FirstName__c = parentGurdian.FirstName;
-		familyCon.LastName__c = parentGurdian.LastName;
-		familyCon.Middle_Name__c = parentGurdian.Middle_Name__c;
-		familyCon.BirthDate__c = system.today() - 70556;
-		familyCon.Diagnosis__c = parentGurdian.Diagnosis__c;
-		familyCon.Gender__c = parentGurdian.Gender__c;
-		familyCon.Self_describe_comment_box__c = parentGurdian.Self_describe_comment_box__c;
-		familyCon.mobilePhone__c = parentGurdian.MobilePhone;
-		familyCon.Case__c = ParentWishId;
-		familyCon.Email__c = parentGurdian.Email;
-		familyCon.T_Shirt_Size__c = parentGurdian.T_Shirt_Size__c;
-		familyCon.Street__c = parentGurdian.MailingStreet;
-		familyCon.State__c = parentGurdian.MailingState;
-		familyCon.city__c = parentGurdian.MailingCity;
-		familyCon.Zip_code__c = parentGurdian.MailingPostalCode;
-		familyCon.RecordTypeId = familyContactRecordTypeId;
-		familyCon.Contact__c = parentGurdian.Id;
-		familyCon.Preferred_Name__c = parentGurdian.Preferred_Name__c;
-		familyCon.IsParticipant__c = false;
-		WishFormList.add(familyCon);
-
-		Wish_Child_Form__c participantCon = new Wish_Child_Form__c();
-		participantCon.FirstName__c = participant.FirstName;
-		participantCon.LastName__c = participant.LastName;
-		participantCon.Middle_Name__c = participant.Middle_Name__c;
-		participantCon.BirthDate__c = system.today() - 70556;
-		participantCon.Diagnosis__c = participant.Diagnosis__c;
-		participantCon.Gender__c = participant.Gender__c;
-		participantCon.Self_describe_comment_box__c = participant.Self_describe_comment_box__c;
-		participantCon.mobilePhone__c = participant.MobilePhone;
-		participantCon.Case__c = ParentWishId;
-		participantCon.Email__c = participant.Email;
-		participantCon.T_Shirt_Size__c = participant.T_Shirt_Size__c;
-		participantCon.Street__c = participant.MailingStreet;
-		participantCon.State__c = participant.MailingState;
-		participantCon.city__c = participant.MailingCity;
-		participantCon.Zip_code__c = participant.MailingPostalCode;
-		participantCon.RecordTypeId = familyContactRecordTypeId;
-		participantCon.Contact__c = participant.Id;
-		participantCon.Preferred_Name__c = participant.Preferred_Name__c;
-		participantCon.IsParticipant__c = true;
-		WishFormList.add(participantCon);
-
-		Wish_Child_Form__c emergencyContact = new Wish_Child_Form__c();
-		emergencyContact.Emergency_Relationship__c = 'Employee';
-		emergencyContact.Emergency_First_Name__c = 'TestEmployee';
-		emergencyContact.Emergency_Last_Name__c = 'TestLastEmployee';
-		emergencyContact.Emergency_Mobilephone__c = '9600467559';
-		emergencyContact.Race_Ethnicity__c = 'American Indian or Alaska Native';
-		emergencyContact.Case_Team_Member1__c = 'Test Chandru';
-		emergencyContact.Case_Team_Member2__c = 'Test Kesav';
-		emergencyContact.RecordTypeId = familyContactRecordTypeId;
-		emergencyContact.Driver_Information__c = '{"type":"","state":"Alabama","licenseNum":"Test","expirationDate":"2019-10-02","driverName":"Father - Chandr Sek"}]';
-		emergencyContact.Case__c = ParentWishId;
-		emergencyContact.RecordTypeId = emergencyContactRecordTypeId;
-		WishFormList.add(emergencyContact);
-
-		Wish_Child_Form__c driverInfo = new Wish_Child_Form__c();
-		driverInfo.Driver_Name__c = 'Test Driver';
-		driverInfo.State__c = 'Alabama';
-		driverInfo.Expiration_Date__c = system.today() + 120;
-		driverInfo.Driver_License_Number__c = 'ERTE234';
-		driverInfo.RecordTypeId = driverContactRecordTypeId;
-		driverInfo.Case__c = ParentWishId;
-		WishFormList.add(driverInfo);
-
-		Wish_Child_Form__c determinationcase = new Wish_Child_Form__c();
-		determinationcase.Details_about_Impact__c = 'Test Data';
-		determinationcase.Participant_require_oxygen_how_often__c = 'Yes';
-		determinationcase.Participant_require_oxygen_Note__c = 'Test - Data';
-		determinationcase.Participant_dietary_restrictions__c = 'Yes';
-		determinationcase.Participant_dietary_restrictions_Note__c = 'Test-Data';
-		determinationcase.Participant_have_allergies_to_food__c = 'Yes';
-		determinationcase.Participant_have_allergies_to_food_Note__c = 'Test - Data';
-		determinationcase.Medication_require_refrigeration__c = 'Yes';
-		determinationcase.Medication_require_refrigeration_Note__c = 'Test - Data';
-		determinationcase.Wish_child_receive_nursing_care__c = 'Yes';
-		determinationcase.Participant_require_medical_supplies__c = 'Yes';
-		determinationcase.Participant_require_medical_suppliesNote__c = 'Test - Data';
-		determinationcase.Participant_require_a_wheelchair__c = 'Yes';
-		determinationcase.Participant_require_a_wheelchair_Note__c = 'Test - Data';
-		determinationcase.Will_your_family_bring_wheelchair__c = 'Yes';
-		determinationcase.Will_your_family_bring_wheelchair_Note__c = 'Test - Data';
-		determinationcase.Is_the_wheelchair_collapsible__c = 'Yes';
-		determinationcase.Is_the_wheelchair_collapsible_Note__c = 'Test - Data';
-		determinationcase.Is_the_wheelchair_power__c = 'Yes';
-		determinationcase.Is_the_wheelchair_power_Note__c = 'Test - Data';
-		determinationcase.Has_your_family_flown_before__c = 'Yes';
-		determinationcase.Has_your_family_flown__c = 'Test - Data';
-		determinationcase.Will_an_interpreter_be_needed__c = 'Yes';
-		determinationcase.Will_an_interpreter_be_needed_Details__c = 'Test - Data';
-		determinationcase.Will_a_rental_car_seat_s_be_needed__c = 'Yes';
-		determinationcase.Will_a_rental_car_seat_s_Details__c = 'Test - Data';
-		determinationcase.Sit_up_takeoff_landing_on_airplane__c = 'Yes';
-		determinationcase.Are_all_requested_participants_Details__c = 'Test - Data';
-		determinationcase.Will_a_rental_stroller_be_needed__c = 'Yes';
-		determinationcase.Will_a_rental_stroller_Details__c = 'Test - Data';
-		determinationcase.Handicap_accommodations_be_required__c = 'Yes';
-		determinationcase.Will_handicap_accessible_Details__c = 'Test - Data';
-		determinationcase.Participant_have_valid_passports__c = 'Yes';
-		determinationcase.Does_each_requested_participant_Details__c = 'Test - Data';
-		determinationcase.Does_participant_have_valid_photo_ID__c = 'Yes';
-		determinationcase.Does_each_requested_participan__c = 'Test - Data';
-		determinationcase.Does_Your_Medical_Insurance_Include__c = 'Yes';
-		determinationcase.Does_Your_Medical_Insurance_Details__c = 'Test - Data';
-		determinationcase.Does_your_family_have_a_credit_card__c = 'Yes';
-		determinationcase.Does_your_family_Details__c = 'Test - Data';
-		//determinationcase.Driver_Information__c = driverdetails;
-		determinationcase.Information_Provided__c = True;
-		determinationcase.RecordTypeId = wishDeterminationCaseRecordTypeId;
-		determinationcase.Case__c = ParentWishId;
-		//determinationcase.Contact__c  = determinationcaseInfo.Contact__c;
-		determinationcase.Have_current_automobile_insurance__c = 'Yes';
-		determinationcase.Automobile_insurance_provide_coverage__c = 'Test - Data';
-		determinationcase.Is_your_family_comfortable_in_rendal_car__c = 'Yes';
-		determinationcase.Is_a_wheelchair_accessible_vehicle_neede__c = 'Yes';
-		determinationcase.Wish_child_receive_nursing_care_Note__c = 'Test - Data';
-		determinationcase.Availability_Time_Period_1__c = 'Jan/2022';
-		determinationcase.Availability_Time_Period_2__c = 'Feb/2019';
-		determinationcase.Availability_Time_Period_3__c = 'Mar/2019';
-
-		WishFormList.add(determinationcase);
-
-		Wish_Child_Form__c driverInfoone = new Wish_Child_Form__c();
-		driverInfoone.Driver_Name__c = 'Test Driver One';
-		driverInfoone.State__c = 'Alabama';
-		driverInfoone.Expiration_Date__c = system.today() + 130;
-		driverInfoone.Driver_License_Number__c = 'ERTETE234';
-		driverInfoone.RecordTypeId = driverContactRecordTypeId;
-		driverInfoone.Case__c = ParentWishId;
-		WishFormList.add(driverInfoone);
-		return WishFormList;
-	}
-
-	public static Minor_Participant__c createMinorParticipanRec(Id caseId) {
-		Minor_Participant__c newMinorRec = new Minor_Participant__c();
-		newMinorRec.Name__c = 'Jam';
-		newMinorRec.Associated_Childeren__c = 'TD 1 Rathi MST;Nandy Jio;James Daney;Ruby Celin;Self';
-		newMinorRec.Case__c = caseId;
-		newMinorRec.Email__c = 'jam@gmail.com';
-		newMinorRec.RecordTypeId = formTrackerAttachmentRecordTypeId;
-		newMinorRec.Guardian_Name__c = 'Not listed';
-		newMinorRec.Form_Name__c = 'Combo Family Form & Liability/Publicity Release Form';
-		newMinorRec.SelectedFormat__c = 'Paper';
-		newMinorRec.AttachmentId__c = 'MedicalSummary.txt';
-		return newMinorRec;
-	}
-
-	public static cg__CaseFile__c wishFormCaseFileRecord(Id caseId) {
-		cg__CaseFile__c newCaseFile = new cg__CaseFile__c();
-		newCaseFile.cg__File_Name__c = 'MedicalSummary.txt';
-		newCaseFile.cg__Case__c = caseId;
-		newCaseFile.cg__Content_Type__c = 'image';
-		newCaseFile.cg__Parent_Folder_Id__c = PARENT_FOLDER_ID;
-		return newCaseFile;
 	}
 }

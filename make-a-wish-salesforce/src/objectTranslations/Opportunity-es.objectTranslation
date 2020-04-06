@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- BDE Entry FS v2 --></label>
@@ -396,96 +396,12 @@
             <translation>En memoria</translation>
         </picklistValues>
     </fields>
-    <layouts>
-        <layout>Donation Layout</layout>
-        <sections>
-            <label>Información de la donación</label>
-            <section>Donation Information</section>
-        </sections>
-        <sections>
-            <label>Información donación complementraria</label>
-            <section>Matching Gift Information</section>
-        </sections>
-        <sections>
-            <label>Información de los pagos</label>
-            <section>Payment Information</section>
-        </sections>
-        <sections>
-            <label>Información del tributo</label>
-            <section>Tribute Information</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Grant Layout</layout>
-        <sections>
-            <label>Información de la donación</label>
-            <section>Donation Information</section>
-        </sections>
-        <sections>
-            <label>Información del grant</label>
-            <section>Grant Information</section>
-        </sections>
-        <sections>
-            <label>Información del pago</label>
-            <section>Payment Information</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>In-Kind Gift Layout</layout>
-        <sections>
-            <label>Información de la donación</label>
-            <section>Donation Information</section>
-        </sections>
-        <sections>
-            <label>Información del regalo en especie</label>
-            <section>In-Kind Information</section>
-        </sections>
-        <sections>
-            <label>Información del tributo</label>
-            <section>Tribute Information</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Major Gift Layout</layout>
-        <sections>
-            <label>Información de la donación</label>
-            <section>Donation Information</section>
-        </sections>
-        <sections>
-            <label>Información de regalo importante</label>
-            <section>Major Gift Information</section>
-        </sections>
-        <sections>
-            <label>Información del pago</label>
-            <section>Payment Information</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Matching Gift Layout</layout>
-        <sections>
-            <label>Información de la donación</label>
-            <section>Donation Information</section>
-        </sections>
-        <sections>
-            <label>Información del pago</label>
-            <section>Payment Information</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Membership Layout</layout>
-        <sections>
-            <label>Campos</label>
-            <section>Fields</section>
-        </sections>
-        <sections>
-            <label>Información de la membresía</label>
-            <section>Member Information</section>
-        </sections>
-        <sections>
-            <label>Información del pago</label>
-            <section>Payment Information</section>
-        </sections>
-    </layouts>
+    
+    
+    
+    
+    
+    
     <recordTypes>
         <description><!-- Donation Received --></description>
         <label><!-- Donation --></label>

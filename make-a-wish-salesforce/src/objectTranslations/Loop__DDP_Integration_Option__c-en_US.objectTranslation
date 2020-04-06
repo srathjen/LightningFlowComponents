@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <help><!-- If left blank, the file name of the PDF will be used. --></help>
@@ -558,219 +558,21 @@
         <label><!-- Template Id --></label>
         <name>Loop__dsTemplateId__c</name>
     </fields>
-    <layouts>
-        <layout>Adobe Sign Layout</layout>
-        <sections>
-            <label><!-- Agreement Detail --></label>
-            <section>Agreement Detail</section>
-        </sections>
-        <sections>
-            <label><!-- Agreement Options --></label>
-            <section>Agreement Options</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Recipients --></label>
-            <section>Recipients</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Attach Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Content Delivery Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Fields --></label>
-            <section>Fields</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>DocuSign Layout</layout>
-        <sections>
-            <label><!-- Custom Fields --></label>
-            <section>Custom Fields</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Email Options --></label>
-            <section>Email Options</section>
-        </sections>
-        <sections>
-            <label><!-- Remind and Expire --></label>
-            <section>Remind and Expire</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Document Queue Layout</layout>
-        <sections>
-            <label><!-- Attach Options --></label>
-            <section>Attach Options</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Download Layout</layout>
-        <sections>
-            <label><!-- Attach Options --></label>
-            <section>Attach Options</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>EchoSign Layout</layout>
-        <sections>
-            <label><!-- Agreement Detail --></label>
-            <section>Agreement Detail</section>
-        </sections>
-        <sections>
-            <label><!-- Agreement Options --></label>
-            <section>Agreement Options</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Recipients --></label>
-            <section>Recipients</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Email Layout</layout>
-        <sections>
-            <label><!-- Attach Options --></label>
-            <section>Attach Options</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>HTTP Layout</layout>
-        <sections>
-            <label><!-- Attach Options --></label>
-            <section>Attach Options</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- HTTP Options --></label>
-            <section>HTTP Options</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Lob Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>OneSpan Sign Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Email Options --></label>
-            <section>Email Options</section>
-        </sections>
-        <sections>
-            <label><!-- Remind and Expire --></label>
-            <section>Remind and Expire</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>SMTP Layout</layout>
-        <sections>
-            <label><!-- Attach Options --></label>
-            <section>Attach Options</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Email Body --></label>
-            <section>Email Body</section>
-        </sections>
-        <sections>
-            <label><!-- Email Options --></label>
-            <section>Email Options</section>
-        </sections>
-        <sections>
-            <label><!-- Fields --></label>
-            <section>Fields</section>
-        </sections>
-        <sections>
-            <label><!-- System Information --></label>
-            <section>System Information</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Sertifi Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- EContract Detail --></label>
-            <section>EContract Detail</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>SignNow Layout</layout>
-        <sections>
-            <label><!-- Custom Fields --></label>
-            <section>Custom Fields</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Email Options --></label>
-            <section>Email Options</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>e-SignLive Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Email Options --></label>
-            <section>Email Options</section>
-        </sections>
-        <sections>
-            <label><!-- Remind and Expire --></label>
-            <section>Remind and Expire</section>
-        </sections>
-    </layouts>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <recordTypes>
         <description><!-- Allows you to run a DocGen Package to be attached to a record. --></description>
         <label><!-- Attach --></label>

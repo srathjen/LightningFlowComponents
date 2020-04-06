@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <label><!-- Unique Record Count --></label>
@@ -180,7 +180,7 @@
         <name>dsfs__DocumentID__c</name>
     </fields>
     <fields>
-        <help>This is a list of PDF Documents located in your Organization&apos;s Salesforce &quot;Documents Tab&quot;.  In order to send with DocuSign you must add a PDF to any of the folders within your Documents Tab in Salesforce.  To Send with other Formats click &quot;Learn More&apos;.</help>
+        <help>This is a list of PDF Documents located in your Organization's Salesforce "Documents Tab".  In order to send with DocuSign you must add a PDF to any of the folders within your Documents Tab in Salesforce.  To Send with other Formats click "Learn More'.</help>
         <label><!-- Document Name --></label>
         <name>dsfs__Document_Name__c</name>
     </fields>
@@ -245,13 +245,7 @@
         <label><!-- Source Object --></label>
         <name>dsfs__Source_Object__c</name>
     </fields>
-    <layouts>
-        <layout>DocuSign Envelope Layout</layout>
-        <sections>
-            <label>Custom Links</label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
     <webLinks>
         <label><!-- Learn_More --></label>
         <name>dsfs__Learn_More</name>

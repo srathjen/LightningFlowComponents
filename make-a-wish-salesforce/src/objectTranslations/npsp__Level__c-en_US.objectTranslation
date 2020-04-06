@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- LevelEdit --></label>
@@ -58,17 +58,7 @@
             <translation><!-- Contact --></translation>
         </picklistValues>
     </fields>
-    <layouts>
-        <layout>Level Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- long text section --></label>
-            <section>long text section</section>
-        </sections>
-    </layouts>
+    
     <validationRules>
         <errorMessage><!-- Target is a required field on Level.  Please specify the Target object for this Level. --></errorMessage>
         <name>npsp__Target_Required</name>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -126,12 +126,12 @@
         <name>dsfs__DefaultRepeatReminderNDays__c</name>
     </fields>
     <fields>
-        <help>I nomi dei ruoli dei destinatari che corrispondono ai valori dei ruoli dei destinatari quando si esegue l&apos;invio con DocuSign.</help>
+        <help>I nomi dei ruoli dei destinatari che corrispondono ai valori dei ruoli dei destinatari quando si esegue l'invio con DocuSign.</help>
         <label><!-- DefaultRoleNames --></label>
         <name>dsfs__DefaultRoleNames__c</name>
     </fields>
     <fields>
-        <help>I valori dei ruoli dei destinatari che corrispondono ai nomi dei ruoli dei destinatari quando si esegue l&apos;invio con DocuSign</help>
+        <help>I valori dei ruoli dei destinatari che corrispondono ai nomi dei ruoli dei destinatari quando si esegue l'invio con DocuSign</help>
         <label><!-- DefaultRoleValues --></label>
         <name>dsfs__DefaultRoleValues__c</name>
     </fields>
@@ -144,12 +144,12 @@
         <name>dsfs__Default_Apex_Timeout__c</name>
     </fields>
     <fields>
-        <help>Impostare la pagina di firma di persona di DocuSign in modo che venga visualizzata in una finestra separata, invece che all&apos;interno dell&apos;intestazione e/o della barra laterale di Salesforce.</help>
+        <help>Impostare la pagina di firma di persona di DocuSign in modo che venga visualizzata in una finestra separata, invece che all'interno dell'intestazione e/o della barra laterale di Salesforce.</help>
         <label><!-- Display InPerson Signing In Own Window --></label>
         <name>dsfs__DisplayInPersonSigningInOwnWindow__c</name>
     </fields>
     <fields>
-        <help>Impostare il tagger di DocuSign in modo che venga visualizzato in una finestra separata, anziché nell&apos;intestazione e/o nella barra laterale di Salesforce.</help>
+        <help>Impostare il tagger di DocuSign in modo che venga visualizzato in una finestra separata, anziché nell'intestazione e/o nella barra laterale di Salesforce.</help>
         <label><!-- Display Tagger In Own Window --></label>
         <name>dsfs__DisplayTaggerInOwnWindow__c</name>
     </fields>
@@ -237,57 +237,57 @@
         <name>dsfs__EmailBody_zh_CN__c</name>
     </fields>
     <fields>
-        <help>Modificare il testo predefinito per l&apos;oggetto dell&apos;e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
+        <help>Modificare il testo predefinito per l'oggetto dell'e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
         <label><!-- EmailSubject --></label>
         <name>dsfs__EmailSubject__c</name>
     </fields>
     <fields>
-        <help>Modificare il testo predefinito per l&apos;oggetto dell&apos;e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
+        <help>Modificare il testo predefinito per l'oggetto dell'e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
         <label><!-- EmailSubject_de --></label>
         <name>dsfs__EmailSubject_de__c</name>
     </fields>
     <fields>
-        <help>Modificare il testo predefinito per l&apos;oggetto dell&apos;e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
+        <help>Modificare il testo predefinito per l'oggetto dell'e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
         <label><!-- EmailSubject_es --></label>
         <name>dsfs__EmailSubject_es__c</name>
     </fields>
     <fields>
-        <help>Modificare il testo predefinito per l&apos;oggetto dell&apos;e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
+        <help>Modificare il testo predefinito per l'oggetto dell'e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
         <label><!-- EmailSubject_fr --></label>
         <name>dsfs__EmailSubject_fr__c</name>
     </fields>
     <fields>
-        <help>Modificare il testo predefinito per l&apos;oggetto dell&apos;e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
+        <help>Modificare il testo predefinito per l'oggetto dell'e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
         <label><!-- EmailSubject_it --></label>
         <name>dsfs__EmailSubject_it__c</name>
     </fields>
     <fields>
-        <help>Modificare il testo predefinito per l&apos;oggetto dell&apos;e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
+        <help>Modificare il testo predefinito per l'oggetto dell'e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
         <label><!-- EmailSubject_ja --></label>
         <name>dsfs__EmailSubject_ja__c</name>
     </fields>
     <fields>
-        <help>Modificare il testo predefinito per l&apos;oggetto dell&apos;e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
+        <help>Modificare il testo predefinito per l'oggetto dell'e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
         <label><!-- EmailSubject_ko --></label>
         <name>dsfs__EmailSubject_ko__c</name>
     </fields>
     <fields>
-        <help>Modificare il testo predefinito per l&apos;oggetto dell&apos;e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
+        <help>Modificare il testo predefinito per l'oggetto dell'e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
         <label><!-- EmailSubject_nl --></label>
         <name>dsfs__EmailSubject_nl__c</name>
     </fields>
     <fields>
-        <help>Modificare il testo predefinito per l&apos;oggetto dell&apos;e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
+        <help>Modificare il testo predefinito per l'oggetto dell'e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
         <label><!-- EmailSubject_pt_BR --></label>
         <name>dsfs__EmailSubject_pt_BR__c</name>
     </fields>
     <fields>
-        <help>Modificare il testo predefinito per l&apos;oggetto dell&apos;e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
+        <help>Modificare il testo predefinito per l'oggetto dell'e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
         <label><!-- EmailSubject_ru --></label>
         <name>dsfs__EmailSubject_ru__c</name>
     </fields>
     <fields>
-        <help>Modificare il testo predefinito per l&apos;oggetto dell&apos;e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
+        <help>Modificare il testo predefinito per l'oggetto dell'e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
         <label><!-- EmailSubject_zh_CN --></label>
         <name>dsfs__EmailSubject_zh_CN__c</name>
     </fields>
@@ -296,7 +296,7 @@
         <name>dsfs__EnableNewMobileTaggingUI__c</name>
     </fields>
     <fields>
-        <help>Supporta buste DocuSign di grandi dimensioni mediante l&apos;invio di buste a DocuSign senza dati dei documenti e consentendo a DocuSign di recuperare i dati in base alle necessità. Attivare questa opzione solo se l&apos;invio di buste supera i limiti di chiamate di Salesforce.</help>
+        <help>Supporta buste DocuSign di grandi dimensioni mediante l'invio di buste a DocuSign senza dati dei documenti e consentendo a DocuSign di recuperare i dati in base alle necessità. Attivare questa opzione solo se l'invio di buste supera i limiti di chiamate di Salesforce.</help>
         <label><!-- Fetch Documents --></label>
         <name>dsfs__FetchDocuments__c</name>
     </fields>
@@ -367,13 +367,7 @@
         <name>dsfs__UseSendOnBehalfOf__c</name>
     </fields>
     <gender>Masculine</gender>
-    <layouts>
-        <layout>DocuSignAccountConfiguration Layout</layout>
-        <sections>
-            <label>Collegamento personalizzati</label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel>Configurazione account DocuSign</nameFieldLabel>
     <startsWith>Consonant</startsWith>
 </CustomObjectTranslation>

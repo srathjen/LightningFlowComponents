@@ -1,5 +1,6 @@
 <!-- ******************************************************************************************************************************
 Description : This page is used to collect medical summary attachment about wish child from the medical professional
+WVCSIW-529 : Commented 'download' button option as per Req #3
 *********************************************************************************************************************************** -->
 <apex:page controller="DVMedicalSummaryAttachment_AC" sidebar="false" showHeader="false" docType="html-5.0" standardStylesheets="false" cache="false">
     <apex:include pageName="prospective_head" id="phead"/>
@@ -45,7 +46,7 @@ Description : This page is used to collect medical summary attachment about wish
             <div class="col-xs-12 col-md-6">
                 <apex:inputFile value="{!newAttachment.body}" filename="{!newAttachment.name}" styleClass="upload"/>
                 <!--onclick="parent.loader();parent.alertClass()"-->
-                <apex:commandButton value="Upload" action="{!save}"   styleClass="col-md-3 col-md-push-6 btn-md" />
+                <apex:commandButton value="Upload" action="{!save}"   styleClass="col-md-3 col-md-push-6 btn-md"  />
             </div>
         </div>
         <input type="hidden" class="medAtt-size" value="{!Attachments.size}"/>
@@ -62,9 +63,9 @@ Description : This page is used to collect medical summary attachment about wish
                         </tr>
                     </thead>
                     <tbody>
-                        <apex:repeat value="{!Attachments}" var="attachment">
+                        <apex:repeat value="{!attachments}" var="attachment"  id="theRepeat">                           
                             <tr>
-                                <td><a href="{!attachment.File_Path__c}" target="_blank">Download</a> |&nbsp;
+                                <td><!--a href="{!attachment.File_Path__c}" target="_blank">Download</a |&nbsp;--> <!--Commented as part of WVCSIW-529: Req #3-->
                                     <apex:commandLink value="Delete" action="{!RemoveAttachment}"  rerender="refreshBlck">
                                         <apex:param name="deleteFile" value="{!attachment.Id}" assignTo="{!attachmentId}"/>
                                     </apex:commandLink>

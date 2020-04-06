@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <caseType>Nominative</caseType>
@@ -126,17 +126,7 @@
         <name>npsp__Total_Number_of_Allocations__c</name>
     </fields>
     <gender>Feminine</gender>
-    <layouts>
-        <layout>General Accounting Unit Layout</layout>
-        <sections>
-            <label>Zuordnungsinformationen</label>
-            <section>Allocation Information</section>
-        </sections>
-        <sections>
-            <label>Zuordnungen gesamt</label>
-            <section>Allocation Totals</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel>Name der allgemeinen Verrechnungseinheit</nameFieldLabel>
     <webLinks>
         <label><!-- Recalculate_Rollups --></label>

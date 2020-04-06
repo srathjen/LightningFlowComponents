@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <help><!-- If the Match on Insert Action is set to &quot;Do Not Insert&quot; and an insert is blocked, users will have the option to bypass the block if all blocking scenarios have this option enabled. --></help>
@@ -259,44 +259,8 @@ Unchecked:  All keys are up-to-date, no action necessary. --></help>
         <label><!-- VisualForce Redirection Page --></label>
         <name>CRMfusionDBR101__VisualForce_Handler__c</name>
     </fields>
-    <layouts>
-        <layout>DupeBlocker Scenario Admin Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- DupeBlocker Statistics --></label>
-            <section>DupeBlocker Statistics</section>
-        </sections>
-        <sections>
-            <label><!-- Error Message --></label>
-            <section>Error Message</section>
-        </sections>
-        <sections>
-            <label><!-- Information --></label>
-            <section>Information</section>
-        </sections>
-        <sections>
-            <label><!-- System Information --></label>
-            <section>System Information</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>DupeBlocker Scenario End User Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- DupeBlocker Statistics --></label>
-            <section>DupeBlocker Statistics</section>
-        </sections>
-        <sections>
-            <label><!-- Error Message --></label>
-            <section>Error Message</section>
-        </sections>
-    </layouts>
+    
+    
     <validationRules>
         <errorMessage><!-- If the Match on Insert Action or Match on Update Action is set to &quot;Custom Apex Code&quot; then an Apex class must be selected. --></errorMessage>
         <name>CRMfusionDBR101__Custom_Apex_Handler</name>

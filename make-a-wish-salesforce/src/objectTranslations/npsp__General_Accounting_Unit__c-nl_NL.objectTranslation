@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -6,7 +6,7 @@
     </caseValues>
     <caseValues>
         <plural>true</plural>
-        <value>GAU&apos;s</value>
+        <value>GAU's</value>
     </caseValues>
     <fields>
         <help>Actieve standaard accounting units zijn beschikbaar bij allocaties. Inactieve standaard accounting units kunnen geen nieuwe allocaties hebben.</help>
@@ -94,17 +94,7 @@
         <name>npsp__Total_Number_of_Allocations__c</name>
     </fields>
     <gender>Feminine</gender>
-    <layouts>
-        <layout>General Accounting Unit Layout</layout>
-        <sections>
-            <label>Allocatie Informatie</label>
-            <section>Allocation Information</section>
-        </sections>
-        <sections>
-            <label>Allocatie Totalen</label>
-            <section>Allocation Totals</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel>Naam GAU</nameFieldLabel>
     <webLinks>
         <label><!-- Recalculate_Rollups --></label>

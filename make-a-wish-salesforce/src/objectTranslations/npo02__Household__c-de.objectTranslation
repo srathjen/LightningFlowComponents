@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <caseType>Nominative</caseType>
@@ -231,21 +231,7 @@
         <name>npsp__Number_of_Household_Members__c</name>
     </fields>
     <gender>Masculine</gender>
-    <layouts>
-        <layout>Household Layout</layout>
-        <sections>
-            <label>Spendeninformationen</label>
-            <section>Donation Information</section>
-        </sections>
-        <sections>
-            <label>Spendenbeträge gesamt</label>
-            <section>Donation Totals</section>
-        </sections>
-        <sections>
-            <label>Informationen zum Haushalt</label>
-            <section>Household Information</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel>Haushalt-Name</nameFieldLabel>
     <webLinks>
         <label><!-- Copy_Household_Address_to_Contacts --></label>

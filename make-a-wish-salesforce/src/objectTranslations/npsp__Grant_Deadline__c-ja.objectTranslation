@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -42,12 +42,6 @@
             <translation>LOI</translation>
         </picklistValues>
     </fields>
-    <layouts>
-        <layout>Grant Deadline Layout</layout>
-        <sections>
-            <label>助成金の提出書類要件</label>
-            <section>Grant Deliverable Requirements</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel>提出書類名</nameFieldLabel>
 </CustomObjectTranslation>

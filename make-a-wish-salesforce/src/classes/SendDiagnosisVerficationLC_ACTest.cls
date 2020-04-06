@@ -4,58 +4,72 @@ CreatedBy   : Vignesh SM
 Date        : 13/03/2018
 Description : Class contains test method for SendDiagnosisVerficationLC_AC.apxc component
 *****************************************************************************************************/
-
-@isTest
+@IsTest
 public class SendDiagnosisVerficationLC_ACTest {
-    
-    /********************************************************************************************
-    Test method for getLeadInformation method    
-    ***********************************************************************************************/
-    @isTest
+
+    private final static Id CHAPTER_RECORD_TYPE_ID = Constant_AC.CHAPTER_RT_ID;
+
+    @TestSetup
+    public static void setup() {
+        List<Account> accounts = TestDataFactory.createAccount(1);
+        Account account1 = accounts.get(0);
+        account1.Name = 'Make-A-Wish Arizona';
+        account1.RecordTypeId = CHAPTER_RECORD_TYPE_ID;
+        insert accounts;
+
+        List<ICD_Codes__c> icdCodes = TestDataFactory.createIcdCode(1);
+        ICD_Codes__c icdCode = icdCodes.get(0);
+        insert icdCode;
+
+        List<Lead> leadsDataFactory = TestDataFactory.createLead(1);
+        Lead lead = leadsDataFactory.get(0);
+        lead.ChapterName__c = accounts[0].Id;
+        lead.FirstName = 'Jack';
+        lead.LastName = 'Smith';
+        lead.Hidden_Chapter_Change_Confirmation__c = account1.Id;
+        lead.is_Family_Aware_of_Referral__c = 'Yes';
+        lead.Diagnosis_Given_By_Referrer__c = 'Test Diagnosis';
+        lead.PD_ICD_Code__c = icdCode.Id;
+        lead.Company = 'MAW';
+        insert lead;
+    }
+
+    @IsTest
     static void getLeadInformation_test(){
-        Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
-        Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
-        Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
-        
-        insert newLead;
-        Lead retreiveLead = SendDiagnosisVerficationLC_AC.getLeadInformation(newLead.Id);
-        System.assertEquals(newLead.Id, retreiveLead.Id);       
+        Lead lead = [
+                SELECT Id
+                FROM Lead
+                WHERE Name = 'Jack Smith'
+        ];
+        Lead retreiveLead = SendDiagnosisVerficationLC_AC.getLeadInformation(lead.Id);
+        System.assertEquals(lead.Id, retreiveLead.Id);
     }
     
-    /********************************************************************************************
-    Test method for resetDVMedicalSummary, findLeadDupe, findFamilyContactDupe  method    
-    ***********************************************************************************************/
-    @isTest
+    @IsTest
     static void utilityMethods_test(){
-        Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
-        Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
-        Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
-        
-        insert newLead;
-        SendDiagnosisVerficationLC_AC.resetDVMedicalSummary(newLead.Id);
-        SendDiagnosisVerficationLC_AC.findLeadDupe(newLead.Id);
-        SendDiagnosisVerficationLC_AC.findFamilyContactDupe(newLead.Id);
+        Lead lead = [
+                SELECT Id
+                FROM Lead
+                WHERE Name = 'Jack Smith'
+        ];
+        SendDiagnosisVerficationLC_AC.resetDVMedicalSummary(lead.Id);
+        SendDiagnosisVerficationLC_AC.findLeadDupe(lead.Id);
+        SendDiagnosisVerficationLC_AC.findFamilyContactDupe(lead.Id);
         System.assert(true);
     }
     
-    /********************************************************************************************
-    Test method for updateLead method    
-    ***********************************************************************************************/
-    @isTest
+    @IsTest
     static void updateLead_test(){
-        Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
-        Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
-        Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
-//SIW-342        newLead.Sub_Status__c = 'Pending Part A';
-//insert to appease validation rule
-        insert newLead;
-        
-        newLead.Sub_Status__c = 'Pending Diagnosis Verification';
-        update newLead;
-//End SIW-342
-        
-        String result = SendDiagnosisVerficationLC_AC.updateLead(newLead.Id, 'Treating Medical Professional', 0, newLead.Treating_Medical_Professional_Email__c,newLead.Sub_Status__c);
+        Lead lead = [
+                SELECT Id
+                FROM Lead
+                WHERE Name = 'Jack Smith'
+        ];
+        lead.Sub_Status__c = 'Pending Diagnosis Verification';
+        update lead;
+        String result = SendDiagnosisVerficationLC_AC.updateLead(lead.Id,
+                'Treating Medical Professional', 0,
+                lead.Treating_Medical_Professional_Email__c, lead.Sub_Status__c);
         System.assertEquals('UPDATED', result);
     }
-   
 }
