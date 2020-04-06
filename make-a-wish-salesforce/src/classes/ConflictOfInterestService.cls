@@ -145,4 +145,49 @@ public class ConflictOfInterestService {
 		}
 		return conflictOfInterestShares;
 	}
+
+	/*
+     * @description     Toggle the ConflictOfInterest.Volunteer_is_Inactive__c flag.
+     *
+     * @param           Set<Id> inactiveVolunteerIdSet
+     * @param           Boolean isInactiveVolunteer
+     *
+     * @author          MST Solutions
+     * @createdDate     unknown
+     */
+	@future
+	public static void toggleConflictOfInterestInactiveFlag(Set<Id> inactiveVolunteerIdSet, Boolean isInactiveVolunteer) {
+		try {
+			List<Conflict_Of_Interest__c> updateCOIList = New List<Conflict_Of_Interest__c>();
+
+			for (Conflict_Of_Interest__c currCOI : [
+				SELECT Id, Volunteer_is_Inactive__c
+				FROM Conflict_Of_Interest__c
+				WHERE Volunteer_Contact__c IN :inactiveVolunteerIdSet AND Volunteer_is_Inactive__c != :isInactiveVolunteer
+			]) {
+				currCOI.Volunteer_is_Inactive__c = isInactiveVolunteer;
+				updateCOIList.add(currCOI);
+			}
+
+			if (updateCOIList.size() > 0) {
+				update updateCOIList;
+			}
+
+			if (Test.isRunningTest()) {
+				throw new CommonTriggerException('Test Class execution');
+			}
+		} catch (Exception ex) {
+			if (!Test.isRunningTest()) {
+				for (User currRec : [
+					SELECT
+						Id, FirstName, LastName, Email, MobilePhone, ContactId,
+						Street, City, State, PostalCode, Country, Fax
+					FROM User
+					WHERE ContactId IN :inactiveVolunteerIdSet
+				]) {
+					ErrorMessage_AC.createdebugRec('ConflictOfInterestService', String.valueOf(currRec), String.valueOf(ex), 'toggleConflictOfInterestInactiveFlag', currRec.Id, ex.getStackTraceString() + '   ' + ex.getMessage(), 'Error');
+				}
+			}
+		}
+	}
 }

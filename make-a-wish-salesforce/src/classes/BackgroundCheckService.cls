@@ -343,4 +343,49 @@ public with sharing class BackgroundCheckService {
             record.addError(Label.Debug_log_error_message);
         }
     }
+
+    /*
+     * @description     Toggle the BackgroundCheck.Volunteer_is_Inactive__c flag.
+     *
+     * @param           Set<Id> inactiveVolunteerIdSet
+     * @param           Boolean isInactiveVolunteer
+     *
+     * @author          MST Solutions
+     * @createdDate     unknown
+     */
+    @future
+    public static void toggleBackgroundCheckInactiveFlag(Set<Id> inactiveVolunteerIdSet, Boolean isInactiveVolunteer) {
+        try {
+            List<Background_check__c> updateBCList = new List<Background_check__c>();
+
+            for (Background_check__c backgroundCheck : [
+                SELECT Id, Volunteer_is_Inactive__c
+                FROM Background_check__c
+                WHERE Volunteer__c IN :inactiveVolunteerIdSet AND Volunteer_is_Inactive__c != :isInactiveVolunteer
+            ]) {
+                backgroundCheck.Volunteer_is_Inactive__c = isInactiveVolunteer;
+                updateBCList.add(backgroundCheck);
+            }
+
+            if (updateBCList.size() > 0) {
+                update updateBCList;
+            }
+
+            if (Test.isRunningTest()) {
+                throw new CommonTriggerException('Test Class execution');
+            }
+        } catch (Exception ex) {
+            if (!Test.isRunningTest()) {
+                for (User currRec : [
+                    SELECT
+                        Id, FirstName, LastName, Email, MobilePhone, ContactId,
+                        Street, City, State, PostalCode, Country, Fax
+                    FROM User
+                    WHERE ContactId IN :inactiveVolunteerIdSet
+                ]) {
+                    ErrorMessage_AC.createdebugRec('BackgroundCheckService', String.valueOf(currRec), String.valueOf(ex), 'toggleBackgroundCheckInactiveFlag', currRec.Id, ex.getStackTraceString() + '   ' + ex.getMessage(), 'Error');
+                }
+            }
+        }
+    }
 }

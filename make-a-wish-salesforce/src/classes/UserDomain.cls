@@ -143,8 +143,8 @@ public with sharing class UserDomain extends trac_TriggerHandlerBase {
         }
 
         if (inactiveUserSet.size() > 0 && inactiveUserSet != null) {
-            InactiveVolunteerHandler.createTaskforVolunteerManager(inactiveUserSet);
-            InactiveVolunteerHandler.updateBCandCOIVolunteerInactive(inactiveUserSet, true);
+            BackgroundCheckService.toggleBackgroundCheckInactiveFlag(inactiveUserSet, true);
+            ConflictOfInterestService.toggleConflictOfInterestInactiveFlag(inactiveUserSet, true);
         }
 
         if (activeUserSet.size() > 0) {
@@ -161,7 +161,8 @@ public with sharing class UserDomain extends trac_TriggerHandlerBase {
             }
 
             if (activeVolunteerIdSet.size() > 0) {
-                InactiveVolunteerHandler.updateBCandCOIVolunteerInactive(activeVolunteerIdSet, false);
+                BackgroundCheckService.toggleBackgroundCheckInactiveFlag(activeVolunteerIdSet, false);
+                ConflictOfInterestService.toggleConflictOfInterestInactiveFlag(activeVolunteerIdSet, false);
             }
 
         }
