@@ -191,7 +191,7 @@
         <defaultConnectorLabel>default</defaultConnectorLabel>
         <rules>
             <name>myRule_1</name>
-            <conditionLogic>(1 AND 2  ) AND 3 AND 4</conditionLogic>
+            <conditionLogic>(1 AND 2  ) AND 3 AND 4 AND 5</conditionLogic>
             <conditions>
                 <processMetadataValues>
                     <name>inputDataType</name>
@@ -316,6 +316,37 @@
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <processMetadataValues>
+                    <name>inputDataType</name>
+                    <value>
+                        <stringValue>String</stringValue>
+                    </value>
+                </processMetadataValues>
+                <processMetadataValues>
+                    <name>leftHandSideType</name>
+                    <value>
+                        <stringValue>String</stringValue>
+                    </value>
+                </processMetadataValues>
+                <processMetadataValues>
+                    <name>operatorDataType</name>
+                    <value>
+                        <stringValue>String</stringValue>
+                    </value>
+                </processMetadataValues>
+                <processMetadataValues>
+                    <name>rightHandSideType</name>
+                    <value>
+                        <stringValue>String</stringValue>
+                    </value>
+                </processMetadataValues>
+                <leftValueReference>myVariable_current.RecordType.Name</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Wish Child</stringValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>myRule_1_A1</targetReference>
             </connector>
@@ -430,6 +461,37 @@
                     <stringValue>Best contact for Physician</stringValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <processMetadataValues>
+                    <name>inputDataType</name>
+                    <value>
+                        <stringValue>String</stringValue>
+                    </value>
+                </processMetadataValues>
+                <processMetadataValues>
+                    <name>leftHandSideType</name>
+                    <value>
+                        <stringValue>String</stringValue>
+                    </value>
+                </processMetadataValues>
+                <processMetadataValues>
+                    <name>operatorDataType</name>
+                    <value>
+                        <stringValue>String</stringValue>
+                    </value>
+                </processMetadataValues>
+                <processMetadataValues>
+                    <name>rightHandSideType</name>
+                    <value>
+                        <stringValue>String</stringValue>
+                    </value>
+                </processMetadataValues>
+                <leftValueReference>myVariable_current.RecordType.Name</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Wish Child</stringValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>myRule_7_A1</targetReference>
             </connector>
@@ -444,7 +506,7 @@
                 <stringValue>&quot;Diagnosis Verification sent to  &quot; &amp; [Lead].Hidden_DV_Form_Name__c &amp; &quot;.&quot;</stringValue>
             </value>
         </processMetadataValues>
-        <name>formula_10_myRule_7_A1_3783922758</name>
+        <name>formula_10_myRule_7_A1_6917575887</name>
         <dataType>String</dataType>
         <expression>&quot;Diagnosis Verification sent to  &quot; &amp; {!myVariable_current.Hidden_DV_Form_Name__c} &amp; &quot;.&quot;</expression>
     </formulas>
@@ -455,7 +517,7 @@
                 <stringValue>$Label.Salesforce_Support_User_Id </stringValue>
             </value>
         </processMetadataValues>
-        <name>formula_11_myRule_7_A1_0922617407</name>
+        <name>formula_11_myRule_7_A1_5410597156</name>
         <dataType>String</dataType>
         <expression>{!$Label.Salesforce_Support_User_Id}</expression>
     </formulas>
@@ -466,7 +528,7 @@
                 <stringValue>&quot;Diagnosis Verification sent to  &quot; &amp; [Lead].Hidden_DV_Form_Name__c &amp; &quot;.&quot;</stringValue>
             </value>
         </processMetadataValues>
-        <name>formula_4_myRule_1_A2_2227912536</name>
+        <name>formula_4_myRule_1_A2_6595080276</name>
         <dataType>String</dataType>
         <expression>&quot;Diagnosis Verification sent to  &quot; &amp; {!myVariable_current.Hidden_DV_Form_Name__c} &amp; &quot;.&quot;</expression>
     </formulas>
@@ -477,11 +539,11 @@
                 <stringValue>$Label.Salesforce_Support_User_Id </stringValue>
             </value>
         </processMetadataValues>
-        <name>formula_5_myRule_1_A2_2866448283</name>
+        <name>formula_5_myRule_1_A2_2969003267</name>
         <dataType>String</dataType>
         <expression>{!$Label.Salesforce_Support_User_Id}</expression>
     </formulas>
-    <interviewLabel>Part_A_Form_Process_Rule-13_InterviewLabel</interviewLabel>
+    <interviewLabel>Part_A_Form_Process_Rule-14_InterviewLabel</interviewLabel>
     <label>Part A Form Process Rule</label>
     <processMetadataValues>
         <name>ObjectType</name>
@@ -549,7 +611,7 @@
             </processMetadataValues>
             <field>Description</field>
             <value>
-                <elementReference>formula_4_myRule_1_A2_2227912536</elementReference>
+                <elementReference>formula_4_myRule_1_A2_6595080276</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -579,7 +641,7 @@
             </processMetadataValues>
             <field>OwnerId</field>
             <value>
-                <elementReference>formula_5_myRule_1_A2_2866448283</elementReference>
+                <elementReference>formula_5_myRule_1_A2_2969003267</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -745,7 +807,7 @@
             </processMetadataValues>
             <field>Description</field>
             <value>
-                <elementReference>formula_10_myRule_7_A1_3783922758</elementReference>
+                <elementReference>formula_10_myRule_7_A1_6917575887</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -775,7 +837,7 @@
             </processMetadataValues>
             <field>OwnerId</field>
             <value>
-                <elementReference>formula_11_myRule_7_A1_0922617407</elementReference>
+                <elementReference>formula_11_myRule_7_A1_5410597156</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>

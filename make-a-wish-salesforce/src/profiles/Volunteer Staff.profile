@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+﻿<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     
     
     <classAccesses>
@@ -1905,10 +1905,6 @@
     </customSettingAccesses>
     <customSettingAccesses>
         <enabled>true</enabled>
-        <name>leadconvertchtr__LeadConvertChatter__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
         <name>npe01__Contacts_And_Orgs_Settings__c</name>
     </customSettingAccesses>
     <customSettingAccesses>
@@ -2576,11 +2572,6 @@
         <application>dsfs__DocuSign_For_Salesforce</application>
         <default>false</default>
         <visible>false</visible>
-    </applicationVisibilities>
-    <applicationVisibilities>
-        <application>leadconvertchtr__Lead_Convert_Chatter</application>
-        <default>false</default>
-        <visible>true</visible>
     </applicationVisibilities>
     <applicationVisibilities>
         <application>npsp__Nonprofit_CRM</application>
@@ -29742,10 +29733,6 @@
     <tabVisibilities>
         <tab>fpro__FieldPro</tab>
         <visibility>Hidden</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
-        <tab>leadconvertchtr__Chatter_Lead_Convert_Setup</tab>
-        <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
         <tab>npe01__Contact_Merge</tab>

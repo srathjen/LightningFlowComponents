@@ -32,7 +32,7 @@ Modification Log:
 						Additional_Parent_Postal_Code__c,Additional_Parent_State__c,Additional_Parent_Street__c
 				FROM Lead
 				WHERE Id = :leadId
-				LIMIT 1
+				AND RecordTypeId = :Constant_AC.LEAD_RT_WISH_CHILD
 		];
 		LogValue = String.valueOf(currLead);
 		List<Contact> dupMedicalContacts = ContactService.findDuplicatedContacts(
@@ -143,6 +143,7 @@ Modification Log:
 					FROM Lead
 					WHERE Id = :leadId
 					AND IsConverted = FALSE
+					AND RecordTypeId = :Constant_AC.LEAD_RT_WISH_CHILD
 			];
 			LogValue = String.valueOf(leadList);
 			List<Lead> exLeads = [
@@ -154,6 +155,7 @@ Modification Log:
 					OR Email = :leadList[0].Email OR (State = :leadList[0].State
 					AND PostalCode = :leadList[0].PostalCode AND City = :leadList[0].City))
 					AND Id != :leadList[0].Id AND IsConverted = FALSE
+					AND RecordTypeId = :Constant_AC.LEAD_RT_WISH_CHILD
 			];
 			List<Contact> exContacts = [
 					SELECT Id, LastName,AccountId,MailingStreet,FirstName, Email, Phone, Birthdate,Region_Chapter__r.Name,
