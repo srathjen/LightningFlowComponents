@@ -236,7 +236,7 @@ public class Constant_AC {
 	public static final String CONTACT_GENDER_FEMALE = 'Female';
 	public static final String CONTACT_NAME_UNKNOWN = 'Unknown';
 	public static final String CONTACT_STATUS_ROLE_SPECIFIC_TRAINING_AVAILABLE = 'Role Specific Training Available';
-    public static final String CONTACT_ONBOARDING_STATUS_BACKGROUND_CHECK = 'Background Check';
+  public static final String CONTACT_ONBOARDING_STATUS_BACKGROUND_CHECK = 'Background Check';
 	public static final String CONTACT_PUBLICITY_YES = 'Yes';
 
 	/**

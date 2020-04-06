@@ -4,20 +4,20 @@ CreatedBy   : Kanagaraj
 Date        : 28/06/2016
 Description : DocusignStatusTrigger_AT_Test is used to increase the code coverage for Application_AC controller.
 *****************************************************************************************************/
-@isTest
+@IsTest
 public class DocusignStatusTrigger_AT_Test {
-    @testSetup static void methodName() {
+    @TestSetup static void methodName() {
         Account makeAWish = OrientationandTrainingUtil.CreateAmericaAccount();
         insert makeAWish;
     }
 
-    /*This method is used to update the isConfilict status as true when the envelop status is completed.*/
-
-    public testmethod static void updateisConfilicttoTrue() {
+    /*This method is used to update the isConflict status as true when the envelop status is completed.*/
+    @IsTest
+    public static void updateisConfilicttoTrue() {
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
         insert chapterAccount;
 
-        Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+        Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
         insert VolunteerContact;
 
         dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.createDocusignStatuswithCon(VolunteerContact.Id);
@@ -25,53 +25,54 @@ public class DocusignStatusTrigger_AT_Test {
 
         Conflict_Of_Interest__c coi = new Conflict_Of_Interest__c();
         coi.current__c = true;
-        coi.Volunteer_Contact__c = VolunteerContact.id;
+        coi.Volunteer_Contact__c = VolunteerContact.Id;
         insert coi;
 
         Conflict_Of_Interest__c conOfInt = new Conflict_Of_Interest__c();
         conOfInt.current__c = true;
-        conOfInt.Volunteer_Contact__c = VolunteerContact.id;
+        conOfInt.Volunteer_Contact__c = VolunteerContact.Id;
         insert conOfInt;
 
         dsfs__DocuSign_Status__c dbdsfs = new dsfs__DocuSign_Status__c ();
-        dbdsfs.dsfs__Envelope_Status__c = 'Completed';
+        dbdsfs.dsfs__Envelope_Status__c = Constant_AC.DOCUSIGN_ENVELOPE_STATUS_COMPLETED;
         dbdsfs.Id = dsfs.Id;
-        dbdsfs.Docusign_Hidden_Contact__c = VolunteerContact.id;
+        dbdsfs.Docusign_Hidden_Contact__c = VolunteerContact.Id;
         dbdsfs.isConflict__c = true;
         update dbdsfs;
     }
 
     /*This method is used to update the isConfilict status as false when the envelop status is completed.*/
-    public testmethod static void updateisConfilicttoFalse() {
+    @IsTest
+    public static void updateisConfilicttoFalse() {
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
-        chapterAccount.Volunteer_Manager__c = Userinfo.getUserId();
+        chapterAccount.Volunteer_Manager__c = UserInfo.getUserId();
         insert chapterAccount;
 
-        Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+        Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
         insert VolunteerContact;
 
         dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.createDocusignStatuswithCon(VolunteerContact.Id);
-        dsfs.dsfs__Contact__c = VolunteerContact.id;
-        dsfs.Docusign_Hidden_Contact__c = volunteerContact.id;
-        dsfs.dsfs__Subject__c = 'Diagnosis Verification Form';
+        dsfs.dsfs__Contact__c = VolunteerContact.Id;
+        dsfs.Docusign_Hidden_Contact__c = volunteerContact.Id;
+        dsfs.dsfs__Subject__c = Constant_AC.DOCUSIGN_SUBJECT_DIAGNOSIS_VERIFICATION_FORM;
         upsert dsfs;
 
         dsfs__DocuSign_Status__c dbdsfs = new dsfs__DocuSign_Status__c ();
-        dbdsfs.dsfs__Envelope_Status__c = 'Completed';
+        dbdsfs.dsfs__Envelope_Status__c = Constant_AC.DOCUSIGN_ENVELOPE_STATUS_COMPLETED;
         dbdsfs.Id = dsfs.Id;
-        //dbdsfs.Docusign_Hidden_Contact__c  = volunteerContact.id;
+        //dbdsfs.Docusign_Hidden_Contact__c  = volunteerContact.Id;
         dbdsfs.isConflict__c = false;
         update dbdsfs;
 
         Conflict_Of_Interest__c coi = new Conflict_Of_Interest__c();
         coi.current__c = true;
-        coi.Volunteer_Contact__c = VolunteerContact.id;
+        coi.Volunteer_Contact__c = VolunteerContact.Id;
         insert coi;
     }
 
     /*This method is used to convert the lead when the docusign status is completed.*/
-
-    public testmethod static void convertlead() {
+    @IsTest
+    public static void convertlead() {
         //Below two lines are related to Part B
         //Constant_AC  constant = new Constant_AC();
         //Id diManualProcessRT = Schema.SObjectType.Diagnosis_Verification__c.getRecordTypeInfosByName().get(constant.diAutomatedProcess).getRecordTypeId();
@@ -101,16 +102,17 @@ public class DocusignStatusTrigger_AT_Test {
         //Diagnosis_Verification__c newDiagnosisInformation = new Diagnosis_Verification__c(Lead__c = updateLead.Id ,ICD_Code__c = newICDCode.Id, Active__c = TRUE, RecordTypeId = diManualProcessRT, Type__c = 'Qualifying Diagnosis');
         //insert newDiagnosisInformation;
         dsfs__DocuSign_Status__c dbdsfs = new dsfs__DocuSign_Status__c ();
-        dbdsfs.dsfs__Envelope_Status__c = 'Completed';
+        dbdsfs.dsfs__Envelope_Status__c = Constant_AC.DOCUSIGN_ENVELOPE_STATUS_COMPLETED;
         dbdsfs.Id = dsfs.Id;
-        dsfs.dsfs__Subject__c = 'Diagnosis Verification Form';
-        dbdsfs.dsfs__Lead__c = newLead.id;
+        dsfs.dsfs__Subject__c = Constant_AC.DOCUSIGN_SUBJECT_DIAGNOSIS_VERIFICATION_FORM;
+        dbdsfs.dsfs__Lead__c = newLead.Id;
         update dbdsfs;
         Test.stopTest();
 
     }
 
-    public testmethod static void convertleadStatusNotQualified() {
+    @IsTest
+    public static void convertleadStatusNotQualified() {
         Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
         insert chapterAccount;
 
@@ -138,13 +140,14 @@ public class DocusignStatusTrigger_AT_Test {
         Test.stopTest();
 
         dsfs__DocuSign_Status__c dbdsfs = new dsfs__DocuSign_Status__c ();
-        dbdsfs.dsfs__Envelope_Status__c = 'Completed';
+        dbdsfs.dsfs__Envelope_Status__c = Constant_AC.DOCUSIGN_ENVELOPE_STATUS_COMPLETED;
         dbdsfs.Id = dsfs.Id;
-        dbdsfs.dsfs__Lead__c = newLead.id;
+        dbdsfs.dsfs__Lead__c = newLead.Id;
         //update dbdsfs;
     }
 
-    public testmethod static void updateDocusignStatus() {
+    @IsTest
+    public static void updateDocusignStatus() {
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
         insert chapterAccount;
 
@@ -154,13 +157,14 @@ public class DocusignStatusTrigger_AT_Test {
         dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.CreateDocusignRecord();
         insert dsfs;
 
-        Attachment attch = OrientationandTrainingUtil.CreateAttachmentRecordWishChild(dsfs.id);
-        dsfs.dsfs__Subject__c = 'Diagnosis Verification Form';
-        dsfs.dsfs__Contact__c = wishChildContact.id;
+        Attachment attch = OrientationandTrainingUtil.CreateAttachmentRecordWishChild(dsfs.Id);
+        dsfs.dsfs__Subject__c = Constant_AC.DOCUSIGN_SUBJECT_DIAGNOSIS_VERIFICATION_FORM;
+        dsfs.dsfs__Contact__c = wishChildContact.Id;
         update dsfs;
     }
 
-    public testmethod static void sendChildMedicalSummary() {
+    @IsTest
+    public static void sendChildMedicalSummary() {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         insert chapterAccount;
 
@@ -173,12 +177,14 @@ public class DocusignStatusTrigger_AT_Test {
         String subject = 'Signature Required – Make-A-Wish Rush Child' + '\'s' + ' ' + 'Medical Summary Form: ' + wishChild.FirstName;
         dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.CreateDocusignRecord();
         dsfs.dsfs__Subject__c = subject;
-        dsfs.dsfs__Case__c = parentCase.id;
+        dsfs.dsfs__Case__c = parentCase.Id;
         insert dsfs;
-        dsfs.dsfs__Envelope_Status__c = 'Completed';
+        dsfs.dsfs__Envelope_Status__c = Constant_AC.DOCUSIGN_ENVELOPE_STATUS_COMPLETED;
         update dsfs;
     }
-    public testmethod static void sendAbsentparentform() {
+
+    @IsTest
+    public static void sendAbsentparentform() {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         insert chapterAccount;
 
@@ -191,13 +197,12 @@ public class DocusignStatusTrigger_AT_Test {
         String subject = 'Signature Required – Make-A-Wish Wish Clearance Form';
         dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.createDocusignStatuswithCase(parentCase.Id);
         insert dsfs;
-        // dsfs.dsfs__Subject__c = subject;
-        //dsfs.dsfs__Case__c = parentCase.id;
-        // update dsfs;
-        dsfs.dsfs__Envelope_Status__c = 'Completed';
+        dsfs.dsfs__Envelope_Status__c = Constant_AC.DOCUSIGN_ENVELOPE_STATUS_COMPLETED;
         update dsfs;
     }
-    public testmethod static void sendWishClearance() {
+
+    @IsTest
+    public static void sendWishClearance() {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         insert chapterAccount;
 
@@ -210,9 +215,8 @@ public class DocusignStatusTrigger_AT_Test {
         String subject = 'Signature Required – Make-A-Wish Wish Clearance Form';
         dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.createDocusignStatuswithCase(parentCase.Id);
         dsfs.dsfs__Subject__c = subject;
-        //dsfs.dsfs__Case__c = parentCase.id;
         insert dsfs;
-        dsfs.dsfs__Envelope_Status__c = 'Completed';
+        dsfs.dsfs__Envelope_Status__c = Constant_AC.DOCUSIGN_ENVELOPE_STATUS_COMPLETED;
         update dsfs;
     }
 }
