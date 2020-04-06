@@ -17,7 +17,6 @@ public with sharing class UserDomain extends trac_TriggerHandlerBase {
      * @createdDate		2018-07-31
      */
     public override void handleBeforeInsert() {
-        //User_OnBeforeInsertHandler_AC.OnBeforeInsert(newUsersList);
         String DocuSignUserid = Label.DSProSFUsername;
         for (User newUser : newUsersList) {
             if (newUser.IsActive == true) {
@@ -33,7 +32,6 @@ public with sharing class UserDomain extends trac_TriggerHandlerBase {
      * @createdDate		2018-07-31
      */
     public override void handleBeforeUpdate() {
-        //User_OnBeforeUpdateHandler_AC.OnBeforeUpdate(newUsersList, oldUsersMap);
         for (User newUser : newUsersList) {
             if (Bypass_Triggers__c.getValues(Utils.currentUser.Id) == null) {
                 if (newUser.IsActive == false && oldUsersMap.get(newUser.Id).IsActive == true) {
@@ -56,7 +54,6 @@ public with sharing class UserDomain extends trac_TriggerHandlerBase {
      * @createdDate		2018-07-31
      */
     public override void handleAfterInsert() {
-        //User_OnAfterInsertHandler_AC.OnAfterInsert(newUsersList);
         Map<Id, Id> newUserRoleIdMap = new Map<Id, Id>();
         Set<String> userIdsSet = new Set<String>();
         Map<Id, User> prospectiveUserMap = new Map<Id, User>();
@@ -80,17 +77,21 @@ public with sharing class UserDomain extends trac_TriggerHandlerBase {
         }
 
         if (prospectiveUserMap.size() > 0) {
-            User_OnAfterInsertHelper_AC.UpdateVolunteerInfo(prospectiveUserMap);
+            UserService.updateVolunteerInfo(prospectiveUserMap);
         }
 
         if (newUserRoleIdMap.size() > 0) {
-            User_OnAfterInsertHelper_AC.AddInternalUserToChatterGroup(newUserRoleIdMap);
+            UserService.addInternalUserToChatterGroup(newUserRoleIdMap);
         }
     }
 
-
+    /*
+     * @description		OnAfterUpdate trigger handler for the User object
+     *
+     * @author 			MST Solutions
+     * @createdDate		2018-07-31
+     */
     public override void handleAfterUpdate() {
-        //User_OnAfterUpdateHandler_AC.OnAfterUpdate(newUsersList, oldUsersMap);
         Set<Id> inActiveUserIdSet = new Set<Id>();
         Set<Id> inactiveUserSet = new Set<Id>();
         Set<Id> activeUserSet = new Set<Id>();
@@ -138,7 +139,7 @@ public with sharing class UserDomain extends trac_TriggerHandlerBase {
         }
 
         if (inActiveUserIdSet.size() > 0) {
-            User_OnAfterUpdateHelper_AC.updateUser(inActiveUserIdSet);
+            UserService.updateUser(inActiveUserIdSet);
         }
 
         if (inactiveUserSet.size() > 0 && inactiveUserSet != null) {
@@ -166,14 +167,14 @@ public with sharing class UserDomain extends trac_TriggerHandlerBase {
         }
 
         if (newUserRoleIdMap.size() > 0) {
-            User_OnAfterInsertHelper_AC.AddInternalUserToChatterGroup(newUserRoleIdMap);
+            UserService.addInternalUserToChatterGroup(newUserRoleIdMap);
         }
 
         if (oldUserRoleIdMap.size() > 0) {
-            User_OnAfterUpdateHelper_AC.RemoveInternalUserToChatterGroup(oldUserRoleIdMap);
+            UserService.removeInternalUserToChatterGroup(oldUserRoleIdMap);
         }
         if (contactUserIdMap.size() > 0) {
-            User_OnAfterUpdateHelper_AC.updateConatcEmail(contactUserIdMap);
+            UserService.updateContactEmail(contactUserIdMap);
         }
     }
 }
