@@ -1,8 +1,7 @@
 /**
- * Background Check Service, centralizes Background Check business rules
- *
+ * @description Background Check Service, centralizes Background Check business rules
  * @author Michelle Cominotto, Make-A-Wish
-@createdDate 3/18/2020
+ * @createdDate 3/18/2020
  */
 public with sharing class BackgroundCheckService {
 
@@ -24,10 +23,8 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Updates hidden email field and owner of background check to match related volunteer record
-     *
      * @param volunteerIds
      * @param newBackgroundChecksList
-     *
      * @return
      */
     public static List<Background_check__c> updateHiddenEmailAndOwner(Set<Id> volunteerIds, List<Background_check__c> newBackgroundChecksList) {
@@ -48,9 +45,7 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Returns map of user Id and user role based on owner of background check
-     *
-     * @param newBackgroundChecksList
-     *
+     * @param backgroundChecksList
      * @return
      */
     public static Map<Id, String> getOwnerUserRole(List<Background_check__c> newBackgroundChecksList) {
@@ -64,7 +59,6 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Deactivate previous background checks for a volunteer if a new, current one is active
-     *
      * @param backgroundCheckVolunteersMap
      */
     public static void deactivateBackgroundCheck(Map<Id, Id> backgroundCheckVolunteersMap) {
@@ -90,7 +84,6 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Update background check expiration date on volunteer contact
-     *
      * @param backgroundCheckList
      */
     public static void updateVolunteerExpirationDate(List<Background_check__c> backgroundCheckList) {
@@ -116,7 +109,6 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Alert user of insufficient permissions to edit background check record
-     *
      * @param chapterNameMap
      * @param newBackgroundChecksList
      * @param oldBackgroundChecksMap
@@ -137,14 +129,13 @@ public with sharing class BackgroundCheckService {
 
     private static Boolean isValidUserRole() {
         User currentUser = Utils.currentUser;
-        return currentUser.UserRole.Name != ROLE_NATIONAL_STAFF && currentUser.Profile.Name != PROFILE_SYSTEM_ADMINISTRATOR
-                && currentUser.Profile.Name != PROFILE_INTEGRATION && currentUser.Profile.Id != Label.Active_Volunteer_Profile
-                && currentUser.Profile.Id != Label.Prospective_Volunteer_Profile
+        return currentUser.UserRole.Name != ROLE_NATIONAL_STAFF
+                && currentUser.Profile.Name != PROFILE_SYSTEM_ADMINISTRATOR && currentUser.Profile.Name != PROFILE_INTEGRATION
+                && currentUser.Profile.Id != Label.Active_Volunteer_Profile && currentUser.Profile.Id != Label.Prospective_Volunteer_Profile;
     }
 
     /**
      * Update volunteer affiliation record status to not approved
-     *
      * @param newBackgroundChecksList
      * @param oldBackgroundChecksMap
      */
@@ -179,7 +170,6 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Update volunteer role status
-     *
      * @param approvedVolunteerIds
      * @param newBackgroundChecksList
      */
@@ -223,10 +213,8 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Update volunteer hidden orientation status
-     *
      * @param newBackgroundChecksList
      * @param oldBackgroundChecksMap
-     *
      * @return
      */
     public static Set<Id> updateVolunteerOrientationStatus(List<Background_check__c> newBackgroundChecksList, Map<Id, Background_check__c> oldBackgroundChecksMap) {
@@ -285,7 +273,6 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Update volunteer roles status fields
-     *
      * @param volunteerIds
      * @param objectName
      * @param exceptionList
@@ -326,7 +313,6 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Create task to review background check
-     *
      * @param newBackgroundChecksList
      */
     public static void createBackgroundCheckReviewTask(List<Background_check__c> newBackgroundChecksList) {
@@ -356,16 +342,60 @@ public with sharing class BackgroundCheckService {
 
     /**
      * Create debug log when error occurs
-     *
      * @param exceptionList
      * @param methodName
-     * @param ex
+     * @param exception
      */
     public static void createBackgroundCheckDebugLog(List<SObject> exceptionList, String methodName, Exception ex) {
         for (SObject record : exceptionList) {
             ErrorMessage_AC.createDebugRec('BackgroundCheckService', String.valueOf(record), String.valueOf(ex),
                     methodName, record.Id, ex.getStackTraceString() + ' ' + ex.getMessage(), 'Error');
             record.addError(Label.Debug_log_error_message);
+        }
+    }
+
+    /*
+     * @description     Toggle the BackgroundCheck.Volunteer_is_Inactive__c flag.
+     *
+     * @param           Set<Id> inactiveVolunteerIdSet
+     * @param           Boolean isInactiveVolunteer
+     *
+     * @author          MST Solutions
+     * @createdDate     unknown
+     */
+    @future
+    public static void toggleBackgroundCheckInactiveFlag(Set<Id> inactiveVolunteerIdSet, Boolean isInactiveVolunteer) {
+        try {
+            List<Background_check__c> updateBCList = new List<Background_check__c>();
+
+            for (Background_check__c backgroundCheck : [
+                SELECT Id, Volunteer_is_Inactive__c
+                FROM Background_check__c
+                WHERE Volunteer__c IN :inactiveVolunteerIdSet AND Volunteer_is_Inactive__c != :isInactiveVolunteer
+            ]) {
+                backgroundCheck.Volunteer_is_Inactive__c = isInactiveVolunteer;
+                updateBCList.add(backgroundCheck);
+            }
+
+            if (updateBCList.size() > 0) {
+                update updateBCList;
+            }
+
+            if (Test.isRunningTest()) {
+                throw new CommonTriggerException('Test Class execution');
+            }
+        } catch (Exception ex) {
+            if (!Test.isRunningTest()) {
+                for (User currRec : [
+                    SELECT
+                        Id, FirstName, LastName, Email, MobilePhone, ContactId,
+                        Street, City, State, PostalCode, Country, Fax
+                    FROM User
+                    WHERE ContactId IN :inactiveVolunteerIdSet
+                ]) {
+                    ErrorMessage_AC.createdebugRec('BackgroundCheckService', String.valueOf(currRec), String.valueOf(ex), 'toggleBackgroundCheckInactiveFlag', currRec.Id, ex.getStackTraceString() + '   ' + ex.getMessage(), 'Error');
+                }
+            }
         }
     }
 }
