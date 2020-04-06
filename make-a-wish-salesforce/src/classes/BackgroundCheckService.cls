@@ -114,7 +114,7 @@ public with sharing class BackgroundCheckService {
      * @param oldBackgroundChecksMap
      */
     public static void checkUpdatePrivilege(Map<Id, String> chapterNameMap, List<Background_check__c> newBackgroundChecksList, Map<Id, Background_check__c> oldBackgroundChecksMap) {
-        if (isValidUserRole()) {
+        if (isValidUserRoleAndProfile()) {
             Set<String> chapterNameSet = new Set<String>(chapterNameMap.values());
             Map<String, String> chapterRoleMap = ChapterStaffRecordSharing_AC.findChapterRole(chapterNameSet);
             for (Background_check__c backgroundCheck : newBackgroundChecksList) {
@@ -127,7 +127,7 @@ public with sharing class BackgroundCheckService {
         }
     }
 
-    private static Boolean isValidUserRole() {
+    private static Boolean isValidUserRoleAndProfile() {
         User currentUser = Utils.currentUser;
         return currentUser.UserRole.Name != ROLE_NATIONAL_STAFF
                 && currentUser.Profile.Name != PROFILE_SYSTEM_ADMINISTRATOR && currentUser.Profile.Name != PROFILE_INTEGRATION
