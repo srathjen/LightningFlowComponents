@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -496,13 +496,7 @@
         <label><!-- Verified --></label>
         <name>npsp__Verified__c</name>
     </fields>
-    <layouts>
-        <layout>Address Layout</layout>
-        <sections>
-            <label>季節性情報</label>
-            <section>Seasonal Information</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel>住所 ID</nameFieldLabel>
     <webLinks>
         <label><!-- Verify_Address --></label>

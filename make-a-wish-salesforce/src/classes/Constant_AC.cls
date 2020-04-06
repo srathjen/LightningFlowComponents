@@ -140,7 +140,7 @@ public class Constant_AC {
 	public static final String LEAD_ERROR_MEDICAL_PROFESSIONAL = 'Medical Professional';
 	public static final String LEAD_ERROR_WISH_FAMILY_AND_MEDICAL_PROFESSIONAL = 'Wish Family and Medical Professional';
 	public static final String LEAD_RFI_FORM_INFO_QUALIFIED = 'Qualified';
-	public static final String LEAD_RFI_FORM_INFO_NOT_QUALIFIED = 'NotQualified';
+	public static final String LEAD_RFI_FORM_INFO_NOT_QUALIFIED = 'Not Qualified';
 
 	/**
 	 * Case Constants
@@ -174,6 +174,7 @@ public class Constant_AC {
 	public static final String CASE_SUB_STATUS_PENDING = 'Pending';
 	public static final String CASE_SUB_STATUS_ABANDONED = 'Abandoned';
 	public static final String CASE_SUB_STATUS_DNQ_MEDICAL = 'DNQ - Medical';
+	public static final String CASE_SUB_STATUS_NON_VIEWABLE = 'Non-Viewable';
 	public static final String CASE_WISH_CLEARANCE_APPROPRIATE = 'Appropriate';
 	public static final String CASE_WISH_CLEARANCE_NOT_APPROPRIATE = 'Not Appropriate';
 	public static final String MEET_PWL_CRITERIA_YES = 'Yes';
@@ -235,7 +236,7 @@ public class Constant_AC {
 	public static final String CONTACT_GENDER_FEMALE = 'Female';
 	public static final String CONTACT_NAME_UNKNOWN = 'Unknown';
 	public static final String CONTACT_STATUS_ROLE_SPECIFIC_TRAINING_AVAILABLE = 'Role Specific Training Available';
-    public static final String CONTACT_ONBOARDING_STATUS_BACKGROUND_CHECK = 'Background Check';
+  public static final String CONTACT_ONBOARDING_STATUS_BACKGROUND_CHECK = 'Background Check';
 	public static final String CONTACT_PUBLICITY_YES = 'Yes';
 
 	/**
@@ -358,6 +359,11 @@ public class Constant_AC {
     public static final String TASK_SUBJECT_BACKGROUND_CHECK = 'Background Check';
     public static final String TASK_TYPE_EMAIL = 'Email';
 
+	/*
+	 * User Constants
+	 */
+	public static final String INTEGRATION_USER = 'Integration User';
+
 	/**
 	 * Profile Constants
 	 */
@@ -410,7 +416,17 @@ public class Constant_AC {
 	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_REJECTED = 'Rejected';
 
 	/*
+	 * Wish Form (Wish_Child_Form__c) Constants
+	 */
+	public static final String WISH_CHILD_FORM_EMERGENCY_RELATIONSHIP_STATUS_SELF = 'Self';
+
+	/*
 	 * Group Constants
 	 */
 	public static final String GROUP_TYPE_REGULAR = 'Regular';
+
+	/*
+	 * Case Team Role Constants
+	 */
+	public static final String CASE_TEAM_ROLE_INTAKE_MANAGER = 'Intake Manager';
 }

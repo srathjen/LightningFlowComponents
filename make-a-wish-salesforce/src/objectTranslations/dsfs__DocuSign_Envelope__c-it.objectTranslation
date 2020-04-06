@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -153,7 +153,7 @@
         <name>dsfs__Custom_Field_3__c</name>
     </fields>
     <fields>
-        <help>Indica i numeri di giorni prima della scadenza di un&apos;e-mail per avvisare i destinatari di un termine di completamento. Viene inviato solo ai destinatari che non hanno ancora completato la transazione.</help>
+        <help>Indica i numeri di giorni prima della scadenza di un'e-mail per avvisare i destinatari di un termine di completamento. Viene inviato solo ai destinatari che non hanno ancora completato la transazione.</help>
         <label><!-- Warn of expiration in N day(s) prior --></label>
         <name>dsfs__Day_Prior_to_Warn_of_expiration__c</name>
     </fields>
@@ -168,7 +168,7 @@
         <name>dsfs__DocuSign_Email_Message__c</name>
     </fields>
     <fields>
-        <help>Modificare il testo predefinito per l&apos;oggetto dell&apos;e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
+        <help>Modificare il testo predefinito per l'oggetto dell'e-mail da visualizzare come oggetto nella notifica per la firma inviata ai destinatari DocuSign.</help>
         <label><!-- DocuSign Email Subject --></label>
         <name>dsfs__DocuSign_Email_Subject__c</name>
     </fields>
@@ -188,7 +188,7 @@
         <name>dsfs__DocumentID__c</name>
     </fields>
     <fields>
-        <help>Questo è un elenco dei documenti PDF presenti nella &quot;scheda Documenti&quot; Salesforce dell&apos;organizzazione.  Per inviare con DocuSign è necessario aggiungere un PDF a una cartella all&apos;interno della scheda Documenti in Salesforce.  Per inviare con altri formati, fare clic su &quot;Ulteriori informazioni&quot;.</help>
+        <help>Questo è un elenco dei documenti PDF presenti nella "scheda Documenti" Salesforce dell'organizzazione.  Per inviare con DocuSign è necessario aggiungere un PDF a una cartella all'interno della scheda Documenti in Salesforce.  Per inviare con altri formati, fare clic su "Ulteriori informazioni".</help>
         <label><!-- Document Name --></label>
         <name>dsfs__Document_Name__c</name>
     </fields>
@@ -235,12 +235,12 @@
         <name>dsfs__Reminder_Repeat_Interval_in_Days__c</name>
     </fields>
     <fields>
-        <help>Selezionare questa casella di controllo per inviare un promemoria tramite e-mail ai destinatari della busta che non hanno ancora completato l&apos;attività.</help>
+        <help>Selezionare questa casella di controllo per inviare un promemoria tramite e-mail ai destinatari della busta che non hanno ancora completato l'attività.</help>
         <label><!-- Remind signers via email --></label>
         <name>dsfs__Send_Reminder__c</name>
     </fields>
     <fields>
-        <help>Questo è il nome dell&apos;utente Salesforce che ha creato la transazione DocuSign.</help>
+        <help>Questo è il nome dell'utente Salesforce che ha creato la transazione DocuSign.</help>
         <label><!-- Sender --></label>
         <name>dsfs__Sender__c</name>
     </fields>
@@ -249,18 +249,12 @@
         <name>dsfs__Source_Object_Parent__c</name>
     </fields>
     <fields>
-        <help>Oggetto d&apos;origine</help>
+        <help>Oggetto d'origine</help>
         <label><!-- Source Object --></label>
         <name>dsfs__Source_Object__c</name>
     </fields>
     <gender><!-- Masculine --></gender>
-    <layouts>
-        <layout>DocuSign Envelope Layout</layout>
-        <sections>
-            <label>Collegamento personalizzati</label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel><!-- DocuSign Envelope --></nameFieldLabel>
     <startsWith><!-- Consonant --></startsWith>
     <webLinks>

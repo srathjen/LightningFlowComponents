@@ -3,10 +3,15 @@ Author : MST Solutions
 Description : This class referred in the DelegatedApprover_VF. It display the all record approval processes . 
 This will allow chapter staff to see visibility into their colleagues approval's needed when they are covering for each other.
 ****************************************************************************************/
-
 global class DelegatedApproverController_AC {
+	private static final String PROCESS_DEFINITION_NOT_NAME = 'KBWorkflow';
 
-	// Used to collect the list of approval process records
+	/*
+     * @description		Used to collect the list of approval process records.
+     *
+     * @author			MST Solutions
+     * @dateCreated		unknown
+     */
 	@RemoteAction
 	@ReadOnly
 	public static String getAppList(String toDate1, String fromDate1) {
@@ -29,19 +34,20 @@ global class DelegatedApproverController_AC {
 		List<ApprovalWrapper> approvalWrapperList = new List<ApprovalWrapper>();
 		Map<Id, ApprovalWrapper> approvalWrapperMap = new Map<Id, ApprovalWrapper>();
 		for (ProcessInstance process : [
-				SELECT Id, Status, ProcessDefinition.Name, TargetObject.Name, TargetObject.Id, SubmittedBy.UserRole.Name,
-						TargetObject.Type,CreatedBy.Name,SubmittedBy.Account.Name,SubmittedBy.Name,CompletedDate,CreatedDate
-						, (
-						SELECT Id,Actor.Name,OriginalActor.Name,ActorId
-						FROM StepsAndWorkitems
-						ORDER BY Id DESC
-						LIMIT 1
-				)
-				FROM ProcessInstance
-				WHERE ProcessDefinition.Name != 'KBWorkflow' AND CreatedDate > :fromDate AND CreatedDate <= :toDate
-				ORDER BY CreatedDate DESC
+			SELECT Id, Status, ProcessDefinition.Name, TargetObject.Name, TargetObject.Id, SubmittedBy.UserRole.Name,
+				TargetObject.Type,CreatedBy.Name,SubmittedBy.Account.Name,SubmittedBy.Name,CompletedDate,CreatedDate
+				, (
+				SELECT Id,Actor.Name,OriginalActor.Name,ActorId
+				FROM StepsAndWorkitems
+				ORDER BY Id DESC
+				LIMIT 1
+			)
+			FROM ProcessInstance
+			WHERE ProcessDefinition.Name != :PROCESS_DEFINITION_NOT_NAME AND CreatedDate > :fromDate AND CreatedDate <= :toDate
+			ORDER BY CreatedDate DESC
 		]) {
 			ApprovalWrapper wrap = new ApprovalWrapper();
+
 			wrap.processName = process.ProcessDefinition.Name;
 			wrap.targetObjectId = process.TargetObject.Id;
 			wrap.recordName = process.TargetObject.Name;
@@ -81,9 +87,9 @@ global class DelegatedApproverController_AC {
 
 		// Used to get Wish Child Name and Chapter Name for the the approval records
 		for (Contact conInfo : [
-				SELECT Id, RecordTypeId, Account.Name, Region_Chapter__r.Name
-				FROM Contact
-				WHERE Id IN :conIdSet
+			SELECT Id, RecordTypeId, Account.Name, Region_Chapter__r.Name
+			FROM Contact
+			WHERE Id IN :conIdSet
 		]) {
 			if (conInfo.RecordTypeId == volunteerRecordTypeId) {
 				if (conInfo.Account.Name != null) {
@@ -99,9 +105,9 @@ global class DelegatedApproverController_AC {
 
 		// Used to get the wish child name and Chapter name for the volunteer Opportunity object related records
 		for (Volunteer_Opportunity__c volOpp : [
-				SELECT Id, Chapter_Name__r.Name,Wish__c,Wish__r.Contact.Name
-				FROM Volunteer_Opportunity__c
-				WHERE Id IN :volOppIdSet
+			SELECT Id, Chapter_Name__r.Name,Wish__c,Wish__r.Contact.Name
+			FROM Volunteer_Opportunity__c
+			WHERE Id IN :volOppIdSet
 		]) {
 
 			if (volOpp.Chapter_Name__r.Name != null) {
@@ -114,22 +120,10 @@ global class DelegatedApproverController_AC {
 
 		// Used to collecct the wish child name and the chapter name form the case object
 		for (Case caseInfo : [
-				SELECT Id, ChapterName__r.Name, Parent.ChapterName__r.Name,Contact.Name,Parent.Contact.Name,RecordTypeId
-				FROM Case
-				WHERE Id IN :caseIdSet
+			SELECT Id, ChapterName__r.Name, Parent.ChapterName__r.Name,Contact.Name,Parent.Contact.Name,RecordTypeId
+			FROM Case
+			WHERE Id IN :caseIdSet
 		]) {
-			/**
-			 * JIRA: WLP-286
-			 * Author: Gustavo Mayer
-			 * Update: Sub case conversion to the single Wish Case, no need to check for sub case
-			 * as there is no longer the concept of parent case.
-			 */
-//			if (caseInfo.RecordTypeId == wishPlanningRecordTypeId) {
-//				if (caseInfo.Parent.ChapterName__r.Name != null) {
-//					chapterMap.put(caseInfo.Id, caseInfo.Parent.ChapterName__r.Name);
-//				}
-//				wishChildNameMap.put(caseInfo.Id, caseInfo.Parent.Contact.Name);
-//			} else
 			if (caseInfo.RecordTypeId == wishRecordTypeId) {
 				if (caseInfo.ChapterName__r.Name != null) {
 					chapterMap.put(caseInfo.Id, caseInfo.ChapterName__r.Name);
@@ -139,9 +133,9 @@ global class DelegatedApproverController_AC {
 		}
 
 		for (Account inkaccinfo : [
-				SELECT Id, Chapter_Name__r.Name
-				FROM Account
-				WHERE Id IN :accIdSet
+			SELECT Id, Chapter_Name__r.Name
+			FROM Account
+			WHERE Id IN :accIdSet
 		]) {
 			if (inkaccinfo.Chapter_Name__r.Name != null && inkaccinfo.RecordTypeId == inKindDonorsAccountRecordTypeId) {
 				chapterMap.put(inkaccinfo.Id, inkaccinfo.Chapter_Name__r.Name);
@@ -149,9 +143,9 @@ global class DelegatedApproverController_AC {
 		}
 
 		for (In_Kind_Donation_Reimbursement__c ikRemInfo : [
-				SELECT Id, Wish__c,Wish__r.Contact.Name, Wish__r.ChapterName__r.Name
-				FROM In_Kind_Donation_Reimbursement__c
-				WHERE Id IN :inKindSet
+			SELECT Id, Wish__c,Wish__r.Contact.Name, Wish__r.ChapterName__r.Name
+			FROM In_Kind_Donation_Reimbursement__c
+			WHERE Id IN :inKindSet
 		]) {
 			if (ikRemInfo.Wish__r.ChapterName__r.Name != null) {
 				chapterMap.put(ikRemInfo.Id, ikRemInfo.Wish__r.ChapterName__r.Name);
@@ -169,6 +163,7 @@ global class DelegatedApproverController_AC {
 				approvalWrapperMap.get(apprvalWrapper.targetObjectId).chapterName = chapterMap.get(apprvalWrapper.targetObjectId);
 			}
 		}
+
 		String s = JSON.serialize(approvalWrapperMap.values());
 		return s;
 	}

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <label><!-- Account1 Import Status --></label>
@@ -598,37 +598,7 @@
             <translation><!-- Imported --></translation>
         </picklistValues>
     </fields>
-    <layouts>
-        <layout>Data Import Layout</layout>
-        <sections>
-            <label><!-- Account1 Information --></label>
-            <section>Account1 Information</section>
-        </sections>
-        <sections>
-            <label><!-- Account2 Information --></label>
-            <section>Account2 Information</section>
-        </sections>
-        <sections>
-            <label><!-- Contact1 Information --></label>
-            <section>Contact1 Information</section>
-        </sections>
-        <sections>
-            <label><!-- Contact2 Information --></label>
-            <section>Contact2 Information</section>
-        </sections>
-        <sections>
-            <label><!-- Donation Information --></label>
-            <section>Donation Information</section>
-        </sections>
-        <sections>
-            <label><!-- Home Address --></label>
-            <section>Home Address</section>
-        </sections>
-        <sections>
-            <label><!-- Household Information --></label>
-            <section>Household Information</section>
-        </sections>
-    </layouts>
+    
     <webLinks>
         <label><!-- Delete_All_Data_Import_Records --></label>
         <name>npsp__Delete_All_Data_Import_Records</name>

@@ -227,7 +227,25 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),7,4)
         <reevaluateOnChange>true</reevaluateOnChange>
     </fieldUpdates>
     <rules>
-        <fullName>Email Notification to Referrer</fullName>
+        <fullName>Lead %28Wish Child%29%3A Email Notification for Wish Child Lead Owner</fullName>
+        <actions>
+            <name>Lead_Email_Alert_for_Lead_Owner_Regarding_Chapter_Update</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Lead_ET_Chapter_has_been_changed</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <description>Whenever chapter updates based on the Postal Code, It will send an email notification to the Wish Child Lead Owner.</description>
+        <formula>(ISCHANGED(Hidden_Chapter_Change_Confirmation__c) &amp;&amp; NOT(ISCHANGED(ChapterName__c)) &amp;&amp; 
+$Profile.Name != 'Integration')
+&amp;&amp;
+RecordType.Name = "Wish Child"</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Lead %28Wish Child%29%3A Email Notification to Referrer</fullName>
         <actions>
             <name>Lead_Referral_Confirmation_Email_Sent_to_Referrer</name>
             <type>Alert</type>
@@ -249,17 +267,21 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),7,4)
             <field>Lead.Referrer_Email__c</field>
             <operation>notEqual</operation>
         </criteriaItems>
+        <criteriaItems>
+            <field>Lead.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Wish Child</value>
+        </criteriaItems>
         <description>Send email confirmation of referral form submission to Referrer.</description>
         <triggerType>onCreateOnly</triggerType>
     </rules>
     <rules>
-        <fullName>Email Notification when Wish Child turns 2%2E5</fullName>
+        <fullName>Lead %28Wish Child%29%3A Email Notification when Wish Child turns 2%2E5</fullName>
         <actions>
             <name>Lead_Send_Email_to_Lead_Owner_when_Child_turns_2_5</name>
             <type>Alert</type>
         </actions>
         <active>true</active>
-        <booleanFilter>1 AND 2</booleanFilter>
         <criteriaItems>
             <field>Lead.Status</field>
             <operation>equals</operation>
@@ -270,11 +292,16 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),7,4)
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Lead.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Wish Child</value>
+        </criteriaItems>
         <description>When a wish child turns 2.5, a batch job leadChildAge will update the lead hidden AgeRequirementMet checkbox to TRUE for Leads in the Inquiry status it will send an email notification to the lead owner.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
-        <fullName>Lead Phone Number format</fullName>
+        <fullName>Lead %28Wish Child%29%3A Lead Phone Number format</fullName>
         <actions>
             <name>Additional_Parent_Guardian_Phone</name>
             <type>FieldUpdate</type>
@@ -288,27 +315,28 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),7,4)
             <type>FieldUpdate</type>
         </actions>
         <active>true</active>
-        <description>This is in place to update the phone to a standard phone format for Duplicate Rule Matching</description>
-        <formula>AND(   NOT(     AND(       LEN(Phone) == 14,       LEFT(Phone,1) == '(',       ISNUMBER(LEFT(RIGHT(Phone,13),3)),       LEFT(RIGHT(Phone,10),1) == ')',       LEFT(RIGHT(Phone,9),1) == ' ',       ISNUMBER(LEFT(RIGHT(Phone,8),3)),       LEFT(RIGHT(Phone,5),1) == '-',       ISNUMBER(RIGHT(Phone,4))     )   ),    ISNUMBER(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone , ".", ''),"-",""),"+","")),    OR(     LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone ,".",''),"-",""),"+",""))=10,     AND(       LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone,".",''),"-",""),"+",""))=11,       LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone ,".",''),"-",""),"+",""),1)="1"     )   ) )</formula>
+        <description>This is in place to update the phone to a standard phone format for Duplicate Rule Matching
+Converts this: 6043458787 --&gt;  (604) 345-8787</description>
+        <formula>(AND
+(NOT(AND(LEN(Phone) == 14,
+LEFT(Phone,1) == '(',       
+ISNUMBER(LEFT(RIGHT(Phone,13),3)),       
+LEFT(RIGHT(Phone,10),1) == ')',       
+LEFT(RIGHT(Phone,9),1) == ' ',       
+ISNUMBER(LEFT(RIGHT(Phone,8),3)),       
+LEFT(RIGHT(Phone,5),1) == '-',       
+ISNUMBER(RIGHT(Phone,4))     )   ),    
+ISNUMBER(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone , ".", ''),"-",""),"+","")),    
+OR(     
+LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone ,".",''),"-",""),"+",""))=10,     
+AND(LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone,".",''),"-",""),"+",""))=11,       
+LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone ,".",''),"-",""),"+",""),1)="1"     )   ) )) 
+&amp;&amp;  
+RecordType.Name = "Wish Child"</formula>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
-        <fullName>Lead%3A Email Notification for Lead Owner</fullName>
-        <actions>
-            <name>Lead_Email_Alert_for_Lead_Owner_Regarding_Chapter_Update</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>Lead_ET_Chapter_has_been_changed</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
-        <description>Whenever chapter updates based on the Postal Code, It will send an email notification to Lead Owner.</description>
-        <formula>ISCHANGED(Hidden_Chapter_Change_Confirmation__c) &amp;&amp; NOT(ISCHANGED(ChapterName__c)) &amp;&amp; $Profile.Name != 'Integration'</formula>
-        <triggerType>onAllChanges</triggerType>
-    </rules>
-    <rules>
-        <fullName>Lead%3A Notify new RUSH lead</fullName>
+        <fullName>Lead %28Wish Child%29%3A Notify new RUSH lead</fullName>
         <actions>
             <name>Lead_Notify_owner_new_RUSH_lead</name>
             <type>Alert</type>
@@ -328,11 +356,16 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),7,4)
             <operation>notEqual</operation>
             <value>Integration</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Lead.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Wish Child</value>
+        </criteriaItems>
         <description>Notify the lead owner whenever a lead is created with Is there a medical reason to move quickly field equal to 'Yes'</description>
         <triggerType>onCreateOnly</triggerType>
     </rules>
     <rules>
-        <fullName>Lead%3A Notify owner Qualified RUSH Lead</fullName>
+        <fullName>Lead %28Wish Child%29%3A Notify owner Qualified RUSH Lead</fullName>
         <actions>
             <name>Lead_Notify_owner_Qualified_RUSH_lead</name>
             <type>Alert</type>
@@ -353,31 +386,27 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),7,4)
             <operation>notEqual</operation>
             <value>Integration</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Lead.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Wish Child</value>
+        </criteriaItems>
         <description>Notify the lead owner when a RUSH lead is qualified</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
-        <fullName>Lead%3AQualifying Medical Professional when child is NOT eligible</fullName>
+        <fullName>Lead %28Wish Child%29%3A Populate Date of Birth- Lead</fullName>
         <actions>
-            <name>Send_DNQ_Notification_to_Qualifying_Medical_Professional</name>
-            <type>Task</type>
+            <name>Populate_Date_of_Birth_Lead</name>
+            <type>FieldUpdate</type>
         </actions>
-        <active>false</active>
-        <criteriaItems>
-            <field>Lead.Status</field>
-            <operation>equals</operation>
-            <value>DNQ</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>notEqual</operation>
-            <value>Integration</value>
-        </criteriaItems>
-        <description>It send a email notification to Qualifying Medical Professional when child is NOT eligible.</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <active>true</active>
+        <description>SIW-147 This supports Duplication check: Capture Information when a duplicate referral is submitted- matching rules do not support date fields.</description>
+        <formula>OR(ISNEW(), ISCHANGED(DOB__c)) &amp;&amp;  RecordType.Name = "Wish Child"</formula>
+        <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
-        <fullName>Lead%3AQualifying Medical Professional when child is eligible</fullName>
+        <fullName>Lead %28Wish Child%29%3A Qualifying Medical Professional when child is eligible</fullName>
         <actions>
             <name>Lead_Email_Alert_to_Qualifying_Medical_Professional_when_child_is_eligible</name>
             <type>Alert</type>
@@ -401,22 +430,16 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),7,4)
             <field>Lead.unique_wish_identifier__c</field>
             <operation>equals</operation>
         </criteriaItems>
+        <criteriaItems>
+            <field>Lead.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Wish Child</value>
+        </criteriaItems>
         <description>It send a email notification to  Qualifying Medical Professional when child is eligible</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
-        <fullName>Populate Date of Birth- Lead</fullName>
-        <actions>
-            <name>Populate_Date_of_Birth_Lead</name>
-            <type>FieldUpdate</type>
-        </actions>
-        <active>true</active>
-        <description>SIW-147 This supports Duplication check: Capture Information when a duplicate referral is submitted- matching rules do not support date fields</description>
-        <formula>OR(ISNEW(), ISCHANGED(DOB__c))</formula>
-        <triggerType>onAllChanges</triggerType>
-    </rules>
-    <rules>
-        <fullName>Send Duplicate Referral Email Alert</fullName>
+        <fullName>Lead %28Wish Child%29%3A Send Duplicate Referral Email Alert</fullName>
         <actions>
             <name>Duplicate_Lead_Referral_Inquiry_Alert</name>
             <type>Alert</type>
@@ -431,7 +454,32 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),7,4)
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Lead.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Wish Child</value>
+        </criteriaItems>
         <description>Send Duplicate Referral Email Alert if Duplicate Lead Found</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Lead%3AQualifying Medical Professional when child is NOT eligible</fullName>
+        <actions>
+            <name>Send_DNQ_Notification_to_Qualifying_Medical_Professional</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Lead.Status</field>
+            <operation>equals</operation>
+            <value>DNQ</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
+        </criteriaItems>
+        <description>It send a email notification to Qualifying Medical Professional when child is NOT eligible.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <tasks>

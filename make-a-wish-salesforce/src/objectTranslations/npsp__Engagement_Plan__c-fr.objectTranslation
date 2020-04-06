@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
-        <value>Plan d&apos;engagement</value>
+        <value>Plan d'engagement</value>
     </caseValues>
     <caseValues>
         <plural>true</plural>
-        <value>Plans d&apos;engagement</value>
+        <value>Plans d'engagement</value>
     </caseValues>
     <fields>
         <label><!-- Account --></label>
@@ -60,13 +60,7 @@
         <name>npsp__Total_Tasks__c</name>
     </fields>
     <gender>Masculine</gender>
-    <layouts>
-        <layout>Engagement Plan Layout</layout>
-        <sections>
-            <label>Liens personnalisés</label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel>Numéro du plan d’engagement</nameFieldLabel>
     <startsWith>Consonant</startsWith>
 </CustomObjectTranslation>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- BDE Entry FS --></label>
@@ -1020,7 +1020,7 @@
             <translation><!-- Enhancements/Icebreakers Build-A-Bear --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Enhancements/Icebreakers Dick&apos;s Sporting Goods</masterLabel>
+            <masterLabel>Enhancements/Icebreakers Dick's Sporting Goods</masterLabel>
             <translation><!-- Enhancements/Icebreakers Dick&apos;s Sporting Goods --></translation>
         </picklistValues>
         <picklistValues>
@@ -1052,7 +1052,7 @@
             <translation><!-- Furniture Ashley Furniture --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Furniture BJ&apos;s</masterLabel>
+            <masterLabel>Furniture BJ's</masterLabel>
             <translation><!-- Furniture BJ&apos;s --></translation>
         </picklistValues>
         <picklistValues>
@@ -1076,7 +1076,7 @@
             <translation><!-- Furniture Rooms To Go --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Furniture Sam&apos;s Club</masterLabel>
+            <masterLabel>Furniture Sam's Club</masterLabel>
             <translation><!-- Furniture Sam&apos;s Club --></translation>
         </picklistValues>
         <picklistValues>
@@ -1188,7 +1188,7 @@
             <translation><!-- Luggage Purchase Amazon --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Luggage Purchase BJ&apos;s</masterLabel>
+            <masterLabel>Luggage Purchase BJ's</masterLabel>
             <translation><!-- Luggage Purchase BJ&apos;s --></translation>
         </picklistValues>
         <picklistValues>
@@ -1200,7 +1200,7 @@
             <translation><!-- Luggage Purchase Other --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Luggage Purchase Sam&apos;s Club</masterLabel>
+            <masterLabel>Luggage Purchase Sam's Club</masterLabel>
             <translation><!-- Luggage Purchase Sam&apos;s Club --></translation>
         </picklistValues>
         <picklistValues>
@@ -1276,7 +1276,7 @@
             <translation><!-- Misc/Other Other --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Misc/Other Sports Equipment Dick&apos;s Sporting Goods</masterLabel>
+            <masterLabel>Misc/Other Sports Equipment Dick's Sporting Goods</masterLabel>
             <translation><!-- Misc/Other Sports Equipment Dick&apos;s Sporting Goods --></translation>
         </picklistValues>
         <picklistValues>
@@ -1288,7 +1288,7 @@
             <translation><!-- Misc/Other Toys &amp; Books Amazon --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Misc/Other Toys &amp; Books BJ&apos;s</masterLabel>
+            <masterLabel>Misc/Other Toys &amp; Books BJ's</masterLabel>
             <translation><!-- Misc/Other Toys &amp; Books BJ&apos;s --></translation>
         </picklistValues>
         <picklistValues>
@@ -1300,7 +1300,7 @@
             <translation><!-- Misc/Other Toys &amp; Books Other --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Misc/Other Toys &amp; Books Sam&apos;s Club</masterLabel>
+            <masterLabel>Misc/Other Toys &amp; Books Sam's Club</masterLabel>
             <translation><!-- Misc/Other Toys &amp; Books Sam&apos;s Club --></translation>
         </picklistValues>
         <picklistValues>
@@ -1344,7 +1344,7 @@
             <translation><!-- Playset/Playground Amazon --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Playset/Playground BJ&apos;s</masterLabel>
+            <masterLabel>Playset/Playground BJ's</masterLabel>
             <translation><!-- Playset/Playground BJ&apos;s --></translation>
         </picklistValues>
         <picklistValues>
@@ -1368,7 +1368,7 @@
             <translation><!-- Playset/Playground PPG Paint Store --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Playset/Playground Sam&apos;s Club</masterLabel>
+            <masterLabel>Playset/Playground Sam's Club</masterLabel>
             <translation><!-- Playset/Playground Sam&apos;s Club --></translation>
         </picklistValues>
         <picklistValues>
@@ -1412,7 +1412,7 @@
             <translation><!-- Room Make-Over Amazon --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Room Make-Over BJ&apos;s</masterLabel>
+            <masterLabel>Room Make-Over BJ's</masterLabel>
             <translation><!-- Room Make-Over BJ&apos;s --></translation>
         </picklistValues>
         <picklistValues>
@@ -1436,7 +1436,7 @@
             <translation><!-- Room Make-Over PPG Paint Store --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Room Make-Over Sam&apos;s Club</masterLabel>
+            <masterLabel>Room Make-Over Sam's Club</masterLabel>
             <translation><!-- Room Make-Over Sam&apos;s Club --></translation>
         </picklistValues>
         <picklistValues>
@@ -1468,7 +1468,7 @@
             <translation><!-- Shopping Spree Best Buy --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Shopping Spree Dick&apos;s Sporting Goods</masterLabel>
+            <masterLabel>Shopping Spree Dick's Sporting Goods</masterLabel>
             <translation><!-- Shopping Spree Dick&apos;s Sporting Goods --></translation>
         </picklistValues>
         <picklistValues>
@@ -1896,21 +1896,7 @@
             <section>Fields</section>
         </sections>
     </layouts>
-    <layouts>
-        <layout>Household Layout</layout>
-        <sections>
-            <label>Adresse</label>
-            <section>Address</section>
-        </sections>
-        <sections>
-            <label><!-- Emergency Contact --></label>
-            <section>Emergency Contact</section>
-        </sections>
-        <sections>
-            <label>Champs</label>
-            <section>Fields</section>
-        </sections>
-    </layouts>
+    
     <layouts>
         <layout>Household Layout - Volunteers</layout>
         <sections>
@@ -1956,17 +1942,7 @@
             <section>Location</section>
         </sections>
     </layouts>
-    <layouts>
-        <layout>Organization Layout</layout>
-        <sections>
-            <label>Adresse</label>
-            <section>Address</section>
-        </sections>
-        <sections>
-            <label>Champs</label>
-            <section>Fields</section>
-        </sections>
-    </layouts>
+    
     <layouts>
         <layout>Volunteer In-Kind Donor</layout>
         <sections>

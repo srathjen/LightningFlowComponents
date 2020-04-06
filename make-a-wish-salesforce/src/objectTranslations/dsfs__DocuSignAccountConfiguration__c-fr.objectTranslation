@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -126,12 +126,12 @@
         <name>dsfs__DefaultRepeatReminderNDays__c</name>
     </fields>
     <fields>
-        <help>Noms de rôles de destinataire correspondant aux valeurs de rôles de destinataire en cas d&apos;envois avec DocuSign.</help>
+        <help>Noms de rôles de destinataire correspondant aux valeurs de rôles de destinataire en cas d'envois avec DocuSign.</help>
         <label><!-- DefaultRoleNames --></label>
         <name>dsfs__DefaultRoleNames__c</name>
     </fields>
     <fields>
-        <help>Valeurs de rôles de destinataire correspondant aux noms de rôles de destinataire en cas d&apos;envois avec DocuSign</help>
+        <help>Valeurs de rôles de destinataire correspondant aux noms de rôles de destinataire en cas d'envois avec DocuSign</help>
         <label><!-- DefaultRoleValues --></label>
         <name>dsfs__DefaultRoleValues__c</name>
     </fields>
@@ -144,12 +144,12 @@
         <name>dsfs__Default_Apex_Timeout__c</name>
     </fields>
     <fields>
-        <help>Configurer la page de signature en personne DocuSign pour qu&apos;elle s&apos;affiche dans sa propre fenêtre plutôt que d&apos;être intégrée à l&apos;en-tête et/ou la barre latérale Salesforce.</help>
+        <help>Configurer la page de signature en personne DocuSign pour qu'elle s'affiche dans sa propre fenêtre plutôt que d'être intégrée à l'en-tête et/ou la barre latérale Salesforce.</help>
         <label><!-- Display InPerson Signing In Own Window --></label>
         <name>dsfs__DisplayInPersonSigningInOwnWindow__c</name>
     </fields>
     <fields>
-        <help>Configurer le balisage DocuSign pour qu&apos;il s&apos;affiche dans sa propre fenêtre plutôt que d&apos;être intégré à l&apos;en-tête et/ou la barre latérale Salesforce.</help>
+        <help>Configurer le balisage DocuSign pour qu'il s'affiche dans sa propre fenêtre plutôt que d'être intégré à l'en-tête et/ou la barre latérale Salesforce.</help>
         <label><!-- Display Tagger In Own Window --></label>
         <name>dsfs__DisplayTaggerInOwnWindow__c</name>
     </fields>
@@ -182,112 +182,112 @@
         </picklistValues>
     </fields>
     <fields>
-        <help>Modifier cet e-mail (jusqu&apos;à 2 000 caractères) pour qu&apos;il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
+        <help>Modifier cet e-mail (jusqu'à 2 000 caractères) pour qu'il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
         <label><!-- EmailBody --></label>
         <name>dsfs__EmailBody__c</name>
     </fields>
     <fields>
-        <help>Modifier cet e-mail (jusqu&apos;à 2 000 caractères) pour qu&apos;il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
+        <help>Modifier cet e-mail (jusqu'à 2 000 caractères) pour qu'il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
         <label><!-- EmailBody_de --></label>
         <name>dsfs__EmailBody_de__c</name>
     </fields>
     <fields>
-        <help>Modifier cet e-mail (jusqu&apos;à 2 000 caractères) pour qu&apos;il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
+        <help>Modifier cet e-mail (jusqu'à 2 000 caractères) pour qu'il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
         <label><!-- EmailBody_es --></label>
         <name>dsfs__EmailBody_es__c</name>
     </fields>
     <fields>
-        <help>Modifier cet e-mail (jusqu&apos;à 2 000 caractères) pour qu&apos;il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
+        <help>Modifier cet e-mail (jusqu'à 2 000 caractères) pour qu'il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
         <label><!-- EmailBody_fr --></label>
         <name>dsfs__EmailBody_fr__c</name>
     </fields>
     <fields>
-        <help>Modifier cet e-mail (jusqu&apos;à 2 000 caractères) pour qu&apos;il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
+        <help>Modifier cet e-mail (jusqu'à 2 000 caractères) pour qu'il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
         <label><!-- EmailBody_it --></label>
         <name>dsfs__EmailBody_it__c</name>
     </fields>
     <fields>
-        <help>Modifier cet e-mail (jusqu&apos;à 2 000 caractères) pour qu&apos;il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
+        <help>Modifier cet e-mail (jusqu'à 2 000 caractères) pour qu'il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
         <label><!-- EmailBody_ja --></label>
         <name>dsfs__EmailBody_ja__c</name>
     </fields>
     <fields>
-        <help>Modifier cet e-mail (jusqu&apos;à 2 000 caractères) pour qu&apos;il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
+        <help>Modifier cet e-mail (jusqu'à 2 000 caractères) pour qu'il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
         <label><!-- EmailBody_ko --></label>
         <name>dsfs__EmailBody_ko__c</name>
     </fields>
     <fields>
-        <help>Modifier cet e-mail (jusqu&apos;à 2 000 caractères) pour qu&apos;il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
+        <help>Modifier cet e-mail (jusqu'à 2 000 caractères) pour qu'il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
         <label><!-- EmailBody_nl --></label>
         <name>dsfs__EmailBody_nl__c</name>
     </fields>
     <fields>
-        <help>Modifier cet e-mail (jusqu&apos;à 2 000 caractères) pour qu&apos;il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
+        <help>Modifier cet e-mail (jusqu'à 2 000 caractères) pour qu'il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
         <label><!-- EmailBody_pt_BR --></label>
         <name>dsfs__EmailBody_pt_BR__c</name>
     </fields>
     <fields>
-        <help>Modifier cet e-mail (jusqu&apos;à 2 000 caractères) pour qu&apos;il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
+        <help>Modifier cet e-mail (jusqu'à 2 000 caractères) pour qu'il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
         <label><!-- EmailBody_ru --></label>
         <name>dsfs__EmailBody_ru__c</name>
     </fields>
     <fields>
-        <help>Modifier cet e-mail (jusqu&apos;à 2 000 caractères) pour qu&apos;il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
+        <help>Modifier cet e-mail (jusqu'à 2 000 caractères) pour qu'il apparaisse dans la notification à signer par le destinataire DocuSign.</help>
         <label><!-- EmailBody_zh_CN --></label>
         <name>dsfs__EmailBody_zh_CN__c</name>
     </fields>
     <fields>
-        <help>Modifier cet objet d&apos;e-mail par défaut pour qu&apos;il apparaisse dans le champ d&apos;objet de la notification à signer par les destinataires DocuSign.</help>
+        <help>Modifier cet objet d'e-mail par défaut pour qu'il apparaisse dans le champ d'objet de la notification à signer par les destinataires DocuSign.</help>
         <label><!-- EmailSubject --></label>
         <name>dsfs__EmailSubject__c</name>
     </fields>
     <fields>
-        <help>Modifier cet objet d&apos;e-mail par défaut pour qu&apos;il apparaisse dans le champ d&apos;objet de la notification à signer par les destinataires DocuSign.</help>
+        <help>Modifier cet objet d'e-mail par défaut pour qu'il apparaisse dans le champ d'objet de la notification à signer par les destinataires DocuSign.</help>
         <label><!-- EmailSubject_de --></label>
         <name>dsfs__EmailSubject_de__c</name>
     </fields>
     <fields>
-        <help>Modifier cet objet d&apos;e-mail par défaut pour qu&apos;il apparaisse dans le champ d&apos;objet de la notification à signer par les destinataires DocuSign.</help>
+        <help>Modifier cet objet d'e-mail par défaut pour qu'il apparaisse dans le champ d'objet de la notification à signer par les destinataires DocuSign.</help>
         <label><!-- EmailSubject_es --></label>
         <name>dsfs__EmailSubject_es__c</name>
     </fields>
     <fields>
-        <help>Modifier cet objet d&apos;e-mail par défaut pour qu&apos;il apparaisse dans le champ d&apos;objet de la notification à signer par les destinataires DocuSign.</help>
+        <help>Modifier cet objet d'e-mail par défaut pour qu'il apparaisse dans le champ d'objet de la notification à signer par les destinataires DocuSign.</help>
         <label><!-- EmailSubject_fr --></label>
         <name>dsfs__EmailSubject_fr__c</name>
     </fields>
     <fields>
-        <help>Modifier cet objet d&apos;e-mail par défaut pour qu&apos;il apparaisse dans le champ d&apos;objet de la notification à signer par les destinataires DocuSign.</help>
+        <help>Modifier cet objet d'e-mail par défaut pour qu'il apparaisse dans le champ d'objet de la notification à signer par les destinataires DocuSign.</help>
         <label><!-- EmailSubject_it --></label>
         <name>dsfs__EmailSubject_it__c</name>
     </fields>
     <fields>
-        <help>Modifier cet objet d&apos;e-mail par défaut pour qu&apos;il apparaisse dans le champ d&apos;objet de la notification à signer par les destinataires DocuSign.</help>
+        <help>Modifier cet objet d'e-mail par défaut pour qu'il apparaisse dans le champ d'objet de la notification à signer par les destinataires DocuSign.</help>
         <label><!-- EmailSubject_ja --></label>
         <name>dsfs__EmailSubject_ja__c</name>
     </fields>
     <fields>
-        <help>Modifier cet objet d&apos;e-mail par défaut pour qu&apos;il apparaisse dans le champ d&apos;objet de la notification à signer par les destinataires DocuSign.</help>
+        <help>Modifier cet objet d'e-mail par défaut pour qu'il apparaisse dans le champ d'objet de la notification à signer par les destinataires DocuSign.</help>
         <label><!-- EmailSubject_ko --></label>
         <name>dsfs__EmailSubject_ko__c</name>
     </fields>
     <fields>
-        <help>Modifier cet objet d&apos;e-mail par défaut pour qu&apos;il apparaisse dans le champ d&apos;objet de la notification à signer par les destinataires DocuSign.</help>
+        <help>Modifier cet objet d'e-mail par défaut pour qu'il apparaisse dans le champ d'objet de la notification à signer par les destinataires DocuSign.</help>
         <label><!-- EmailSubject_nl --></label>
         <name>dsfs__EmailSubject_nl__c</name>
     </fields>
     <fields>
-        <help>Modifier cet objet d&apos;e-mail par défaut pour qu&apos;il apparaisse dans le champ d&apos;objet de la notification à signer par les destinataires DocuSign.</help>
+        <help>Modifier cet objet d'e-mail par défaut pour qu'il apparaisse dans le champ d'objet de la notification à signer par les destinataires DocuSign.</help>
         <label><!-- EmailSubject_pt_BR --></label>
         <name>dsfs__EmailSubject_pt_BR__c</name>
     </fields>
     <fields>
-        <help>Modifier cet objet d&apos;e-mail par défaut pour qu&apos;il apparaisse dans le champ d&apos;objet de la notification à signer par les destinataires DocuSign.</help>
+        <help>Modifier cet objet d'e-mail par défaut pour qu'il apparaisse dans le champ d'objet de la notification à signer par les destinataires DocuSign.</help>
         <label><!-- EmailSubject_ru --></label>
         <name>dsfs__EmailSubject_ru__c</name>
     </fields>
     <fields>
-        <help>Modifier cet objet d&apos;e-mail par défaut pour qu&apos;il apparaisse dans le champ d&apos;objet de la notification à signer par les destinataires DocuSign.</help>
+        <help>Modifier cet objet d'e-mail par défaut pour qu'il apparaisse dans le champ d'objet de la notification à signer par les destinataires DocuSign.</help>
         <label><!-- EmailSubject_zh_CN --></label>
         <name>dsfs__EmailSubject_zh_CN__c</name>
     </fields>
@@ -358,7 +358,7 @@
         <name>dsfs__UpgradeHelper__c</name>
     </fields>
     <fields>
-        <help>Lorsque les paramètres de rappel et d&apos;expiration sont activés, vous pouvez définir les valeurs par défaut pour les rappels et expirations dans DocuSign for Salesforce. Ces paramètres remplacent les paramètres par défaut de votre compte DocuSign pour les rappels et expirations.</help>
+        <help>Lorsque les paramètres de rappel et d'expiration sont activés, vous pouvez définir les valeurs par défaut pour les rappels et expirations dans DocuSign for Salesforce. Ces paramètres remplacent les paramètres par défaut de votre compte DocuSign pour les rappels et expirations.</help>
         <label><!-- Use Account Notification Defaults --></label>
         <name>dsfs__UseAccountNotificationDefaults__c</name>
     </fields>
@@ -367,13 +367,7 @@
         <name>dsfs__UseSendOnBehalfOf__c</name>
     </fields>
     <gender>Masculine</gender>
-    <layouts>
-        <layout>DocuSignAccountConfiguration Layout</layout>
-        <sections>
-            <label>Liens personnalisés</label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
     <nameFieldLabel>Configuration du compte DocuSign</nameFieldLabel>
     <startsWith>Consonant</startsWith>
 </CustomObjectTranslation>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- BDE Entry FS --></label>
@@ -3076,7 +3076,7 @@ provide contact information for each site on which you are active. --></help>
         <label><!-- How Did you hear about Make-A-Wish? --></label>
         <name>Wish_How_Did_you_hear_about_Make_A_Wish__c</name>
         <picklistValues>
-            <masterLabel>Brochure at the doctor&apos;s office</masterLabel>
+            <masterLabel>Brochure at the doctor's office</masterLabel>
             <translation><!-- Brochure at the doctor&apos;s office --></translation>
         </picklistValues>
         <picklistValues>
@@ -3299,7 +3299,7 @@ provide contact information for each site on which you are active. --></help>
         <name>npe01__AlternateEmail__c</name>
     </fields>
     <fields>
-        <help>Siehe Feld &quot;Bevorzugte E-Mail-Adresse&quot;.</help>
+        <help>Siehe Feld "Bevorzugte E-Mail-Adresse".</help>
         <label><!-- Personal Email --></label>
         <name>npe01__HomeEmail__c</name>
     </fields>
@@ -3319,12 +3319,12 @@ provide contact information for each site on which you are active. --></help>
         <name>npe01__Lifetime_Giving_History_Amount__c</name>
     </fields>
     <fields>
-        <help>Formel: In der Reihenfolge der Einstellung: das Feld &quot;SYSTEM_AccountTyp&quot;, das Feld &quot;Account-Typ&quot; und &quot;Organisation&quot;</help>
+        <help>Formel: In der Reihenfolge der Einstellung: das Feld "SYSTEM_AccountTyp", das Feld "Account-Typ" und "Organisation"</help>
         <label><!-- Organization Type --></label>
         <name>npe01__Organization_Type__c</name>
     </fields>
     <fields>
-        <help>Formel: Die Postanschrift, wenn der primäre Adresstyp &quot;Sonstige&quot; lautet  Die Adresse unter &quot;Sonstige&quot;, wenn der sekundäre Adresstyp &quot;Sonstige&quot; lautet</help>
+        <help>Formel: Die Postanschrift, wenn der primäre Adresstyp "Sonstige" lautet  Die Adresse unter "Sonstige", wenn der sekundäre Adresstyp "Sonstige" lautet</help>
         <label><!-- Other Address --></label>
         <name>npe01__Other_Address__c</name>
     </fields>
@@ -3424,22 +3424,22 @@ provide contact information for each site on which you are active. --></help>
         <name>npe01__SystemIsIndividual__c</name>
     </fields>
     <fields>
-        <help>Formel: &quot;Einzelperson&quot; oder &quot;Organisation&quot; je nach Einstellung unter Account</help>
+        <help>Formel: "Einzelperson" oder "Organisation" je nach Einstellung unter Account</help>
         <label><!-- Type of Account --></label>
         <name>npe01__Type_of_Account__c</name>
     </fields>
     <fields>
-        <help>Siehe Feld &quot;Bevorzugte E-Mail-Adresse&quot;.</help>
+        <help>Siehe Feld "Bevorzugte E-Mail-Adresse".</help>
         <label><!-- Work Email --></label>
         <name>npe01__WorkEmail__c</name>
     </fields>
     <fields>
-        <help>Siehe Feld &quot;Bevorzugte Telefonnummer&quot;.</help>
+        <help>Siehe Feld "Bevorzugte Telefonnummer".</help>
         <label><!-- Work Phone --></label>
         <name>npe01__WorkPhone__c</name>
     </fields>
     <fields>
-        <help>Formel: Die Postanschrift, wenn der primäre Adresstyp &quot;Büro&quot; lautet  Die Adresse unter &quot;Sonstige&quot;, wenn der sekundäre Adresstyp &quot;Büro&quot; lautet</help>
+        <help>Formel: Die Postanschrift, wenn der primäre Adresstyp "Büro" lautet  Die Adresse unter "Sonstige", wenn der sekundäre Adresstyp "Büro" lautet</help>
         <label><!-- Work Address --></label>
         <name>npe01__Work_Address__c</name>
     </fields>
@@ -3596,7 +3596,7 @@ provide contact information for each site on which you are active. --></help>
         <name>npo02__Soft_Credit_This_Year__c</name>
     </fields>
     <fields>
-        <help>Gesamtbetrag der weichen Kredite während der Laufzeit dieses Kontakts Definiert in der Registerkarte &quot;Haushalt-Einstellungen&quot;</help>
+        <help>Gesamtbetrag der weichen Kredite während der Laufzeit dieses Kontakts Definiert in der Registerkarte "Haushalt-Einstellungen"</help>
         <label><!-- Soft Credit Total --></label>
         <name>npo02__Soft_Credit_Total__c</name>
     </fields>
@@ -3634,7 +3634,7 @@ provide contact information for each site on which you are active. --></help>
         <name>npo02__Total_Household_Gifts__c</name>
     </fields>
     <fields>
-        <help>Klicken Sie oben auf der Seite &quot;Adresse&quot; auf die Schaltfläche &quot;Adresse überprüfen&quot;, falls diese Adresse überprüft werden muss. Weitere Informationen finden Sie in der Hilfedokumentation im &quot;Power of Us&quot;-Hub.</help>
+        <help>Klicken Sie oben auf der Seite "Adresse" auf die Schaltfläche "Adresse überprüfen", falls diese Adresse überprüft werden muss. Weitere Informationen finden Sie in der Hilfedokumentation im "Power of Us"-Hub.</help>
         <label><!-- Address Verification Status --></label>
         <name>npsp__Address_Verification_Status__c</name>
     </fields>
@@ -3799,41 +3799,7 @@ provide contact information for each site on which you are active. --></help>
             <section>Volunteer Details</section>
         </sections>
     </layouts>
-    <layouts>
-        <layout>Contact Layout</layout>
-        <sections>
-            <label>Kontaktdetails</label>
-            <section>Contact Details</section>
-        </sections>
-        <sections>
-            <label>Spendeninformationen</label>
-            <section>Donation Information</section>
-        </sections>
-        <sections>
-            <label>Spendenbeträge gesamt</label>
-            <section>Donation Totals</section>
-        </sections>
-        <sections>
-            <label>Adresse des Haushalts</label>
-            <section>Household Address</section>
-        </sections>
-        <sections>
-            <label>Informationen zur Spende des Haushalts</label>
-            <section>Household Donation Info</section>
-        </sections>
-        <sections>
-            <label>Mitgliedschaftsinformationen</label>
-            <section>Membership Information</section>
-        </sections>
-        <sections>
-            <label>Sonstiges</label>
-            <section>Misc</section>
-        </sections>
-        <sections>
-            <label><!-- Soft Credit Total --></label>
-            <section>Soft Credit Total</section>
-        </sections>
-    </layouts>
+    
     <layouts>
         <layout>Medical Professional</layout>
         <sections>
@@ -3953,11 +3919,11 @@ provide contact information for each site on which you are active. --></help>
         </sections>
         <sections>
             <label><!-- Wish Child&apos;s Favorites --></label>
-            <section>Wish Child&apos;s Favorites</section>
+            <section>Wish Child's Favorites</section>
         </sections>
         <sections>
             <label><!-- Wish Child&apos;s Other Favorites --></label>
-            <section>Wish Child&apos;s Other Favorites</section>
+            <section>Wish Child's Other Favorites</section>
         </sections>
     </layouts>
     <layouts>

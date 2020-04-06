@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <label><!-- Child Object Letter --></label>
@@ -115,13 +115,7 @@
         <label><!-- Verification_Emails --></label>
         <name>VisualAntidote__Verification_Emails__c</name>
     </fields>
-    <layouts>
-        <layout>Form Submission Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
+    
     <webLinks>
         <label><!-- Resubmit --></label>
         <name>VisualAntidote__Resubmit</name>

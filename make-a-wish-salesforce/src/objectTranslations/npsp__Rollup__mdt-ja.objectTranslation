@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -125,19 +125,5 @@
         <label><!-- Use Fiscal Year --></label>
         <name>npsp__Use_Fiscal_Year__c</name>
     </fields>
-    <layouts>
-        <layout>Rollup Layout</layout>
-        <sections>
-            <label>カスタムリンク</label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label>新規セクション</label>
-            <section>New Section</section>
-        </sections>
-        <sections>
-            <label>積み上げ集計詳細</label>
-            <section>Rollup Details</section>
-        </sections>
-    </layouts>
+    
 </CustomObjectTranslation>
