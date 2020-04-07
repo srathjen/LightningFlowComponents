@@ -76,8 +76,6 @@ Increase the coverage when the case is updated with interview date.
              * Update: Sub case conversion to the single Wish Case, no need to update
              * as there is no longer the concept of parent case.
              */
-//          CaseService.UpdateSubCaseStatus(caseId, newCaseList);
-//          CaseService.UpdateWishRecipetItems(wishReceiptMap, newCaseList);
             CaseService.changeAccessPermission(caseContactMap, newCaseList);
             CaseService.updateVolunteerOpportunityStatus(caseId, newCaseList);
             createTask('Procure Icebreaker Gift', parentCase.id);
@@ -358,12 +356,6 @@ Create the granted case and updaetd with the Prsentation Date ,Location, and Tim
 The case status is updated to Ready to Assign.
 ************************************************************************** */
     static testMethod void updateStatusasRTA() {
-//        CaseTeamRole xpto = new CaseTeamRole();
-//        xpto.Name = 'Wish Coordinator';
-//        xpto.PreferencesVisibleInCSP = true;
-//        xpto.AccessLevel = 'Edit';
-//
-//        insert xpto;
 
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
@@ -404,10 +396,6 @@ The case status is updated to Ready to Assign.
         parentCase.Sub_Status__c = 'Testing';
         Test.StartTest();
         update parentCase;
-
-
-//        roleName.Name = 'Wish Coordinator';
-//        update roleName;
 
         Test.stopTest();
         System.assertEquals('Ready To Assign', parentCase.Status, 'Parent case status should be Ready to Assign');

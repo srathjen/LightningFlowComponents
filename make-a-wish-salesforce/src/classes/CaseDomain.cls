@@ -16,16 +16,16 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
 
     // Sets used to make conditionals in handleBeforeUpdate more readable:
 
-    private static final Set<Id> WISH_OWNER_CHECK_RECORD_TYPE_IDS = new Set<Id>
-    {Constant_AC.WISH_RT_ID, Constant_AC.WISH_ASSIST_RT_ID, Constant_AC.DIAGNOSIS_RT_ID};
+    private static final Set<Id> WISH_OWNER_CHECK_RECORD_TYPE_IDS =
+        new Set<Id> {Constant_AC.WISH_RT_ID, Constant_AC.WISH_ASSIST_RT_ID, Constant_AC.DIAGNOSIS_RT_ID};
     private static final Set<String> DNQ_DATE_STATUSES = new Set<String>{
         Constant_AC.CASE_STATUS_DNQ_NATIONAL_STAFF,
         Constant_AC.CASE_STATUS_DNQ_NATIONAL_MEDICAL_COUNCIL,
         Constant_AC.CASE_STATUS_DNQ_CHAPTER_STAFF,
         Constant_AC.CASE_STATUS_DNQ_CHAPTER_MEDICAL_ADVISOR
     };
-    private static final Set<String> IS_LOCKED_STATUSES = new Set<String>
-    {Constant_AC.CASE_STATUS_DNQ, Constant_AC.CASE_STATUS_COMPLETED, Constant_AC.CASE_STATUS_CLOSED};
+    private static final Set<String> IS_LOCKED_STATUSES =
+        new Set<String>{Constant_AC.CASE_STATUS_DNQ, Constant_AC.CASE_STATUS_COMPLETED, Constant_AC.CASE_STATUS_CLOSED};
 
     // Sets used to make conditionals in handleAfterUpdate more readable:
 
@@ -77,23 +77,22 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
      * @createdDate		2018-03-23
      */
     public override void handleBeforeInsert() {
-        Id wishRecordTypeId = Constant_AC.WISH_RT_ID;
         Set<Id> wishOwnerIdSet = new Set<Id>();
         Map<Id, User> wishOwnerMap = new Map<Id, User>();
         Map<Id, Case> caseMap = new Map<Id, Case>();
         Set<Id> chapterSet = new Set<Id>();
 
         for (Case newCase : newCasesList) {
-            if (Bypass_Triggers__c.getValues(UserInfo.getUserId()) == null && newCase.RecordTypeId == wishRecordTypeId) {
+            if (Bypass_Triggers__c.getValues(UserInfo.getUserId()) == null && newCase.RecordTypeId == WISH_RECORDTYPE_ID) {
                 wishOwnerIdSet.add(newCase.OwnerId);
             }
-            if (newCase.RecordTypeId == wishRecordTypeId && newCase.ParentId != null) {
+            if (newCase.RecordTypeId == WISH_RECORDTYPE_ID && newCase.ParentId != null) {
                 caseMap.put(newCase.Id, newCase);
             }
-            if (newCase.RecordTypeId == wishRecordTypeId) {
+            if (newCase.RecordTypeId == WISH_RECORDTYPE_ID) {
                 chapterSet.add(newCase.ChapterName__c);
             }
-            if (!newCase.Rush__c && newCase.RecordTypeId == wishRecordTypeId) {
+            if (!newCase.Rush__c && newCase.RecordTypeId == WISH_RECORDTYPE_ID) {
                 newCase.Rush_Timeframe__c = null;
                 newCase.Rush_Explanation__c = null;
             }
@@ -111,7 +110,7 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
         }
 
         for (Case newCase : newCasesList) {
-            if (wishOwnerMap.containsKey(newCase.OwnerId) && newCase.RecordTypeId == wishRecordTypeId) {
+            if (wishOwnerMap.containsKey(newCase.OwnerId) && newCase.RecordTypeId == WISH_RECORDTYPE_ID) {
                 if (wishOwnerMap.get(newCase.OwnerId).ManagerId != null) {
                     newCase.Hidden_Wish_Owner_Manager__c = wishOwnerMap.get(newCase.OwnerId).Manager.Name;
                     newCase.Hidden_Wish_Owner_Email__c = wishOwnerMap.get(newCase.OwnerId).Manager.Email;
@@ -134,13 +133,11 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
             return;
         }
 
-        Id wishRecordTypeId = Constant_AC.WISH_RT_ID;
         Id chapterRecordTypeId = Constant_AC.CHAPTER_RT_ID;
         Id diagnosisVerificationRT = Constant_AC.DIAGNOSIS_RT_ID;
         Id wishAssistRecordTypeId = Constant_AC.WISH_ASSIST_RT_ID;
         UserSetting__c usc = UserSetting__c.getValues(UserInfo.getUserId());
         List<Case> budgetCaseList = new List<Case>();
-        List<Case> receiveDateCaseList = new List<Case>();
         Set<Id> wishOwnerIdSet = new Set<Id>();
         Map<Id, Case> caseMap = new Map<Id, Case>();
         Map<Id, Case> parentCaseMap = new Map<Id, Case>();
@@ -171,7 +168,7 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
 
             if ((Constant_AC.CASE_STATUS_READY_TO_ASSIGN.equals(currentCase.Status))
                 && !Constant_AC.CASE_STATUS_READY_TO_ASSIGN.equals(oldCasesMap.get(currentCase.Id).Status)
-                && currentCase.RecordTypeId == wishRecordTypeId) {
+                && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
                 caseMap.put(currentCase.ChapterName__c, currentCase);
                 currentCase.Ready_to_Assign_Date__c = Date.today();
@@ -181,7 +178,7 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
 
             if (Constant_AC.CASE_STATUS_READY_TO_INTERVIEW.equals(currentCase.Status)
                 && Constant_AC.CASE_STATUS_READY_TO_ASSIGN.equals(oldCasesMap.get(currentCase.Id).Status)
-                && currentCase.RecordTypeId == wishRecordTypeId) {
+                && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
                 currentCase.Sub_Status__c = Constant_AC.CASE_SUB_STATUS_PENDING;
             }
@@ -195,24 +192,24 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
             }
 
             if (currentCase.Comment_1__c != oldCasesMap.get(currentCase.Id).Comment_1__c
-                && currentCase.RecordTypeId == wishRecordTypeId) {
+                && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
                 currentCase.Air_Travel_Details__c = Label.CaseTrigger_Air_Travel_Aware;
             }
 
             if (currentCase.Appropriate_Comments__c != oldCasesMap.get(currentCase.Id).Appropriate_Comments__c
-                && currentCase.RecordTypeId == wishRecordTypeId) {
+                && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
                 currentCase.Wish_Clearance__c = Constant_AC.CASE_WISH_CLEARANCE_APPROPRIATE;
             }
 
             if (currentCase.Please_Explain__c != oldCasesMap.get(currentCase.Id).Please_Explain__c
-                && currentCase.RecordTypeId == wishRecordTypeId) {
+                && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
                 currentCase.Wish_Clearance__c = Constant_AC.CASE_WISH_CLEARANCE_NOT_APPROPRIATE;
             }
 
-            if (currentCase.RecordTypeId == wishRecordTypeId
+            if (currentCase.RecordTypeId == WISH_RECORDTYPE_ID
                 && Bypass_Triggers__c.getValues(UserInfo.getUserId()) == null
                 && Constant_AC.CASE_STATUS_WISH_DETERMINED.equals(currentCase.Status)
                 && currentCase.Wish_Type__c == null) {
@@ -220,7 +217,7 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
                 currentCase.Wish_Type__c.addError(Label.CaseTrigger_Enter_Wish_Type);
             }
 
-            if (currentCase.RecordTypeId == wishRecordTypeId
+            if (currentCase.RecordTypeId == WISH_RECORDTYPE_ID
                 && Constant_AC.CASE_STATUS_WISH_DETERMINED.equals(currentCase.Status)
                 && currentCase.Wish_Type__c != null) {
 
@@ -228,7 +225,7 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
             }
 
             //Update the wish clearance needed when the wish national type is changed.
-            if (currentCase.RecordTypeId == wishRecordTypeId
+            if (currentCase.RecordTypeId == WISH_RECORDTYPE_ID
                 && currentCase.Wish_Type__c != null
                 && currentCase.Wish_Type__c != oldCasesMap.get(currentCase.Id).Wish_Type__c) {
 
@@ -238,7 +235,7 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
             /* Used to close the wish determine case and open the new planning and Granting and Impact sub cases will open. */
             if (Constant_AC.CASE_STATUS_WISH_DETERMINED.equals(currentCase.Status)
                 && currentCase.Wish_Type__c != null
-                && currentCase.RecordTypeId == wishRecordTypeId) {
+                && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
                 currentCase.Meet_PWL_Criteria__c = Constant_AC.MEET_PWL_CRITERIA_YES;
                 currentCase.Concept_Approval_Date__c = Date.today();
@@ -246,12 +243,12 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
 
             if (Constant_AC.CASE_STATUS_WISH_DETERMINED.equals(currentCase.Status)
                 && !Constant_AC.CASE_STATUS_WISH_DETERMINED.equals(oldCasesMap.get(currentCase.Id).Status)
-                && currentCase.RecordTypeId == wishRecordTypeId) {
+                && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
                 currentCase.Wish_Determined_Date__c = System.today();
             }
 
-            if (currentCase.RecordTypeId == wishRecordTypeId
+            if (currentCase.RecordTypeId == WISH_RECORDTYPE_ID
                 && (Constant_AC.CASE_STATUS_PENDING_APPROVAL.equals(currentCase.Status)
                 && !Constant_AC.CASE_STATUS_PENDING_APPROVAL.equals(oldCasesMap.get(currentCase.Id).Status))) {
 
@@ -274,23 +271,13 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
 
             if ((Constant_AC.CASE_STATUS_COMPLETED.equals(currentCase.Status))
                 && (!Constant_AC.CASE_STATUS_COMPLETED.equals(oldCasesMap.get(currentCase.Id).Status))
-                && currentCase.RecordTypeId == wishRecordTypeId) {
+                && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
                 budgetCaseList.add(currentCase);
             }
 
-            if (currentCase.RecordTypeId == wishRecordTypeId
-                && currentCase.Status != oldCasesMap.get(currentCase.Id).Status
-                && ((Constant_AC.CASE_STATUS_GRANTED.equals(currentCase.Status)
-                && (Constant_AC.CASE_STATUS_WISH_SCHEDULED.equals(oldCasesMap.get(currentCase.Id).Status)))
-                || ((Constant_AC.CASE_STATUS_COMPLETED.equals(currentCase.Status))
-                && (!Constant_AC.CASE_STATUS_COMPLETED.equals(oldCasesMap.get(currentCase.Id).Status))))) {
-
-                receiveDateCaseList.add(currentCase);
-            }
-
             if (IS_LOCKED_STATUSES.contains(currentCase.Status)
-                && currentCase.RecordTypeId == wishRecordTypeId) {
+                && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
                 currentCase.IsLocked__c = true;
             }
@@ -303,13 +290,13 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
                 && Constant_AC.CASE_STATUS_CLOSED.equals(oldCasesMap.get(currentCase.Id).Status))
                 || (currentCase.IsClosed == false
                 && oldCasesMap.get(currentCase.Id).IsClosed == true) &&
-                currentCase.RecordTypeId == wishRecordTypeId) {
+                currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
                 currentCase.IsLocked__c = false;
             }
 
             Boolean userHasRestrictedPermissionOnCase = CaseService.userHasRestrictedPermissionOnCase();
-            if ((currentCase.RecordTypeId == wishRecordTypeId || currentCase.RecordTypeId == wishAssistRecordTypeId
+            if ((currentCase.RecordTypeId == WISH_RECORDTYPE_ID || currentCase.RecordTypeId == wishAssistRecordTypeId
                 || currentCase.ParentId != null) && userHasRestrictedPermissionOnCase) {
 
                 parentIdSet.add(currentCase.ParentId);
@@ -321,7 +308,7 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
                 if (usc.All_Closed_Cases_except_Abandoned__c == false
                     && currentCase.IsClosed == true
                     && userHasRestrictedPermissionOnCase
-                    && currentCase.RecordTypeId == wishRecordTypeId
+                    && currentCase.RecordTypeId == WISH_RECORDTYPE_ID
                     && (!(Constant_AC.CASE_STATUS_COMPLETED.equals(currentCase.Status)
                     && (currentCase.Adoptable__c != oldCasesMap.get(currentCase.Id).Adoptable__c
                     || currentCase.Adopted__c != oldCasesMap.get(currentCase.Id).Adopted__c
@@ -333,14 +320,14 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
                 if (usc.Edit_Abandoned_Cases__c == false
                     && currentCase.IsClosed == true
                     && userHasRestrictedPermissionOnCase
-                    && currentCase.RecordTypeId == wishRecordTypeId) {
+                    && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
                     currentCase.addError(Label.CaseTrigger_Permission_Error);
                 }
             } else if (currentCase.IsLocked__c == true
                 && oldCasesMap.get(currentCase.Id).IsLocked__c == true
                 && userHasRestrictedPermissionOnCase
-                && currentCase.RecordTypeId == wishRecordTypeId
+                && currentCase.RecordTypeId == WISH_RECORDTYPE_ID
                 && (!(Constant_AC.CASE_STATUS_COMPLETED.equals(currentCase.Status)
                 && (currentCase.Adoptable__c != oldCasesMap.get(currentCase.Id).Adoptable__c
                 || currentCase.Adopted__c != oldCasesMap.get(currentCase.Id).Adopted__c
@@ -353,14 +340,14 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
                 && Constant_AC.CASE_STATUS_GRANTED.equals(oldCasesMap.get(currentCase.Id).Status)
                 && usc == null
                 && Bypass_Triggers__c.getValues(UserInfo.getUserId()) == null
-                && currentCase.RecordTypeId == wishRecordTypeId) {
+                && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
                 currentCase.addError(Label.CaseTrigger_Permission_Error_Abandoned);
             } else if (Constant_AC.CASE_SUB_STATUS_ABANDONED.equals(currentCase.Sub_Status__c)
                 && Constant_AC.CASE_STATUS_GRANTED.equals(oldCasesMap.get(currentCase.Id).Status)
                 && usc != null
                 && Bypass_Triggers__c.getValues(UserInfo.getUserId()) == null
-                && currentCase.RecordTypeId == wishRecordTypeId) {
+                && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
                 if (usc.Abandon_the_Granted_case__c == false) {
 
                     currentCase.addError(Label.CaseTrigger_Permission_Error_Abandoned);
@@ -369,19 +356,19 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
 
             if (Constant_AC.CASE_STATUS_INACTIVE.equals(currentCase.Status)
                 && !Constant_AC.CASE_STATUS_INACTIVE.equals(oldCasesMap.get(currentCase.Id).Status)
-                && currentCase.RecordTypeId == wishRecordTypeId) {
+                && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
                 currentCase.Inactive_Date__c = Date.today();
             } else if ((Constant_AC.CASE_STATUS_CLOSED.equals(currentCase.Status)
                 || Constant_AC.CASE_STATUS_COMPLETED.equals(currentCase.Status))
                 && Constant_AC.CASE_STATUS_GRANTED.equals(oldCasesMap.get(currentCase.Id).Status)
-                && currentCase.RecordTypeId == wishRecordTypeId) {
+                && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
                 currentCase.Completed_Date__c = Date.today();
             }
             if (Constant_AC.CASE_SUB_STATUS_ABANDONED.equals(currentCase.Sub_Status__c)
                 && !Constant_AC.CASE_SUB_STATUS_ABANDONED.equals(currentCase.Sub_Status__c)
-                && currentCase.RecordTypeId == wishRecordTypeId) {
+                && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
                 currentCase.Closed_Date__c = Date.today();
             }
@@ -404,7 +391,7 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
                 FROM Case
                 WHERE Status = :Constant_AC.CASE_STATUS_COMPLETED
                 AND Id IN :parentIdSet
-                AND RecordTypeId = :wishRecordTypeId
+                AND RecordTypeId = :WISH_RECORDTYPE_ID
                 LIMIT 50000
             ]) {
                 compltedParentIdSet.add(parentCase.Id);
@@ -413,7 +400,7 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
 
         for (Case newCase : newCasesMap.values()) {
             if (wishOwnerMap.containsKey(newCase.OwnerId)) {
-                if (wishOwnerMap.get(newCase.OwnerId).ManagerId != null && newCase.RecordTypeId == wishRecordTypeId) {
+                if (wishOwnerMap.get(newCase.OwnerId).ManagerId != null && newCase.RecordTypeId == WISH_RECORDTYPE_ID) {
                     newCase.Hidden_Wish_Owner_Manager__c = wishOwnerMap.get(newCase.OwnerId).Manager.Name;
                     newCase.Hidden_Wish_Owner_Email__c = wishOwnerMap.get(newCase.OwnerId).Manager.Email;
                 }
@@ -442,12 +429,30 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
         if (parentCaseMap.size() > 0) {
             CaseService.wishChildRegionValidation(parentCaseMap, contactSet);
         }
+
         if (budgetCaseList.size() > 0) {
             CaseService.checkBudgetActuals(budgetCaseList);
         }
-        if (receiveDateCaseList.size() > 0) {
-            CaseService.checkReceivedDates(receiveDateCaseList);
+
+        CaseService.checkReceivedDates(getCheckReceivedDatesCases());
+    }
+
+    private List<Case> getCheckReceivedDatesCases() {
+        List<Case> checkReceivedDatesCases = new List<Case>();
+
+        for (Case aCase : newCasesList) {
+            if (aCase.RecordTypeId == WISH_RECORDTYPE_ID
+                && aCase.Status != oldCasesMap.get(aCase.Id).Status
+                && ((Constant_AC.CASE_STATUS_GRANTED.equals(aCase.Status)
+                && (Constant_AC.CASE_STATUS_WISH_SCHEDULED.equals(oldCasesMap.get(aCase.Id).Status)))
+                || ((Constant_AC.CASE_STATUS_COMPLETED.equals(aCase.Status))
+                && (!Constant_AC.CASE_STATUS_COMPLETED.equals(oldCasesMap.get(aCase.Id).Status))))) {
+
+                checkReceivedDatesCases.add(aCase);
+            }
         }
+
+        return checkReceivedDatesCases;
     }
 
     // BEFORE DELETE
