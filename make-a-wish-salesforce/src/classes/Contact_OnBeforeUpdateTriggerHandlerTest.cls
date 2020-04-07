@@ -85,9 +85,9 @@ private class Contact_OnBeforeUpdateTriggerHandlerTest {
 		insert c;
 
 		npe4__Relationship__c newRlet = new npe4__Relationship__c();
-		newRlet.npe4__RelatedContact__c = c.id;
+		newRlet.npe4__RelatedContact__c = c.Id;
 		newRlet.npe4__Status__c = 'Active';
-		newRlet.npe4__Contact__c = c.id;
+		newRlet.npe4__Contact__c = c.Id;
 		insert newRlet;
 
 		c.Hidden_First_Name__c = 'FirstTest';
