@@ -20,13 +20,14 @@ public class Utils {
         get {
             if (currentUser == null) {
                 currentUser = [
-                        SELECT  Id, Name, Chapter_Name__c,
-                                UserRole.Name,
-                                Profile.Id, Profile.Name, ContactId,
-                                Contact.Account.Volunteer_Manager__c, Contact.OwnerId
-                        FROM User
-                        WHERE Id = :UserInfo.getUserId()
-                        LIMIT 1
+                    SELECT
+                        Id, Name, Chapter_Name__c,
+                        UserRole.Name,
+                        Profile.Id, Profile.Name, ContactId,
+                        Contact.Account.Volunteer_Manager__c, Contact.OwnerId
+                    FROM User
+                    WHERE Id = :UserInfo.getUserId()
+                    LIMIT 1
                 ];
             }
             return currentUser;
@@ -38,8 +39,7 @@ public class Utils {
      * Find Picklist Labels
      * @param sObjectApiName
      * @param fieldApiName
-     *
-     * @return
+     * @return List of Picklist Options
      */
     public static List<String> getPicklistLabels(String sObjectApiName, String fieldApiName) {
         List<String> pickListLabels = new List<String>();
@@ -58,10 +58,30 @@ public class Utils {
     }
 
     /**
+     * Find Field Paths
+     * @param sObjectApiName
+     * @param fieldApiName
+     * @return List of Field Paths
+     */
+    public static List<String> getFieldPaths(String sObjectApiName, String fieldApiName) {
+        List<String> fieldPaths = new List<String>();
+        try {
+            Map<String, FieldSet> fieldSetMap = Schema.getGlobalDescribe().get(sObjectApiName).getDescribe().fieldSets.getMap();
+            List<FieldSetMember> fieldSetMembers = fieldSetMap.get(fieldApiName).getFields();
+
+            for (Schema.FieldSetMember fieldPath : fieldSetMembers) {
+                fieldPaths.add(fieldPath.getFieldPath());
+            }
+        } catch (Exception e) {
+            System.debug('Error in get field set labels: line' + e.getLineNumber() + ', ' + e.getMessage());
+        }
+        return fieldPaths;
+    }
+
+    /**
      * Find field labels
      * @param sObjectApiName
-     *
-     * @return
+     * @return Map of Picklist Options
      */
     public static Map<String, String> getFieldLabels(String sObjectApiName) {
         Map<String, String> fieldLabelsMap = new Map<String, String>();
@@ -79,7 +99,6 @@ public class Utils {
 
     /**
      * Format a Date field
-     *
      * @param date
      * @param format
      * @return Formatted String Date
@@ -95,7 +114,6 @@ public class Utils {
 
     /**
      * Parse a String to a Date
-     *
      * @param date
      * @param currentFormat
      * @return Date
@@ -195,5 +213,31 @@ public class Utils {
      */
     public static List<Schema.FieldSetMember> getPartAFields() {
         return SObjectType.Lead.FieldSets.Diagnosis_Verfication_Fieldset.getFields();
+    }
+
+    /*
+     * @description 		Create a Map of sObject labels by Schema.SObjectFields.
+     *
+     * @param               Schema.DescribeSObjectResult describe: the sObject type
+     *
+     * @return              Map<Schema.SObjectField,String>
+     *
+     * @author				Chris Shinnimin, Traction on Demand
+     * @date				2020-03-30
+    */
+    public static Map<Schema.SObjectField,String> mapOfSObjectLabelsByFields(Schema.DescribeSObjectResult describe) {
+        Map<Schema.SObjectField,String> mapOfSObjectLabelsByFields = new Map<Schema.SObjectField,String>();
+
+        Map<String, Schema.SObjectType> schemaMap = Schema.getGlobalDescribe();
+        Schema.SObjectType leadSchema = schemaMap.get(describe.Name);
+        Map<String, Schema.SObjectField> fieldMap = leadSchema.getDescribe().fields.getMap();
+
+        List<Schema.SObjectField> allFields = (describe.fields.getMap()).values();
+
+        for (Schema.SObjectField field : allFields) {
+            mapOfSObjectLabelsByFields.put(field, fieldMap.get(String.valueOf(field)).getDescribe().getLabel());
+        }
+
+        return mapOfSObjectLabelsByFields;
     }
 }
