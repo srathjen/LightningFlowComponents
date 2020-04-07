@@ -9,7 +9,7 @@ public class BackGroundCheck_AT_Test {
 
 	/*This method is used to update the background check record to approved*/
 	@IsTest
-	public static void UpdateBackGroundChecktoApproved() {
+	public static void updateBackGroundChecktoApproved() {
 		Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert volunteerAccount;
 
