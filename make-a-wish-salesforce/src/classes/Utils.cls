@@ -5,8 +5,8 @@
  */
 public class Utils {
 
-	public class UtilsException extends Exception {
-	}
+    public class UtilsException extends Exception {
+    }
 
     public static final String DATE_FORMAT_MDDYYYY = 'M/dd/yyyy';
 
@@ -20,15 +20,10 @@ public class Utils {
         get {
             if (currentUser == null) {
                 currentUser = [
-                        SELECT
-                        Id,
-                        Name,
-                        UserRole.Name,
-                        Chapter_Name__c,
-                        Profile.Name,
-                        Profile.Id, ContactId, 
-                        Contact.Account.Volunteer_Manager__c, 
-                        Contact.OwnerId
+                        SELECT  Id, Name, Chapter_Name__c,
+                                UserRole.Name,
+                                Profile.Id, Profile.Name, ContactId,
+                                Contact.Account.Volunteer_Manager__c, Contact.OwnerId
                         FROM User
                         WHERE Id = :UserInfo.getUserId()
                         LIMIT 1
