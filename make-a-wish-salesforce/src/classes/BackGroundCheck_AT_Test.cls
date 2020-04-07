@@ -51,7 +51,7 @@ public class BackGroundCheck_AT_Test {
 	/*This method is used to update the background check record to Rejected*/
 
 	@IsTest
-	public static void UpdateBackGroundChecktoRejected() {
+	public static void updateBackGroundChecktoRejected() {
 		Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert volunteerAccount;
 
