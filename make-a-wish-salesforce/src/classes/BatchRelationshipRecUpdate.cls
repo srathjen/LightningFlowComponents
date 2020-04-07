@@ -76,9 +76,7 @@ global class BatchRelationshipRecUpdate implements Database.Batchable<SObject> {
 				wishFormList.add(newWishFormRec);
 			}
 		}
-		if (!wishFormList.isEmpty()) {
-			insert wishFormList;
-		}
+		insert wishFormList;
 	}
 
 	global void finish(Database.BatchableContext BC) {
