@@ -1,12 +1,13 @@
 /**
- * @description Utility methods, standardizing and providing reuse
+ * Utility methods, standardizing and providing reuse
+ *
  * @author Gustavo Mayer, Traction on Demand
- * @createdDate 7/15/2019
+@createdDate 7/15/2019
  */
 public class Utils {
 
-	public class UtilsException extends Exception {
-	}
+    public class UtilsException extends Exception {
+    }
 
     public static final String DATE_FORMAT_MDDYYYY = 'M/dd/yyyy';
 
@@ -21,14 +22,10 @@ public class Utils {
             if (currentUser == null) {
                 currentUser = [
                         SELECT
-                        Id,
-                        Name,
-                        UserRole.Name,
-                        Chapter_Name__c,
-                        Profile.Name,
-                        Profile.Id, ContactId, 
-                        Contact.Account.Volunteer_Manager__c, 
-                        Contact.OwnerId
+                                Id, Name, Chapter_Name__c,
+                                UserRole.Name,
+                                Profile.Id, Profile.Name,
+                                ContactId, Contact.Account.Volunteer_Manager__c, Contact.OwnerId
                         FROM User
                         WHERE Id = :UserInfo.getUserId()
                         LIMIT 1
@@ -41,10 +38,11 @@ public class Utils {
 
     /**
      * Find Picklist Labels
+     *
      * @param sObjectApiName
      * @param fieldApiName
      *
-     * @return
+     * @return List of Picklist Options
      */
     public static List<String> getPicklistLabels(String sObjectApiName, String fieldApiName) {
         List<String> pickListLabels = new List<String>();
@@ -63,10 +61,34 @@ public class Utils {
     }
 
     /**
+     * Find Field Paths
+     *
+     * @param sObjectApiName
+     * @param fieldApiName
+     *
+     * @return List of Field Paths
+     */
+    public static List<String> getFieldPaths(String sObjectApiName, String fieldApiName) {
+        List<String> fieldPaths = new List<String>();
+        try {
+            Map<String, FieldSet> fieldSetMap = Schema.getGlobalDescribe().get(sObjectApiName).getDescribe().fieldSets.getMap();
+            List<FieldSetMember> fieldSetMembers = fieldSetMap.get(fieldApiName).getFields();
+
+            for (Schema.FieldSetMember fieldPath : fieldSetMembers) {
+                fieldPaths.add(fieldPath.getFieldPath());
+            }
+        } catch (Exception e) {
+            System.debug('Error in get field set labels: line' + e.getLineNumber() + ', ' + e.getMessage());
+        }
+        return fieldPaths;
+    }
+
+    /**
      * Find field labels
+     *
      * @param sObjectApiName
      *
-     * @return
+     * @return Map of Picklist Options
      */
     public static Map<String, String> getFieldLabels(String sObjectApiName) {
         Map<String, String> fieldLabelsMap = new Map<String, String>();
@@ -85,8 +107,9 @@ public class Utils {
     /**
      * Format a Date field
      *
-     * @param date
+     * @param d
      * @param format
+     *
      * @return Formatted String Date
      */
     public static String formatDate(Date d, String format) {
@@ -101,8 +124,9 @@ public class Utils {
     /**
      * Parse a String to a Date
      *
-     * @param date
+     * @param d
      * @param currentFormat
+     *
      * @return Date
      */
     public static Date parseDate(String d, String currentFormat) {
@@ -133,6 +157,9 @@ public class Utils {
 
     /**
      * Generate random number
+     *
+     * @param length
+     *
      * @return
      */
     public static String generateRandomNumber(Integer length) {
@@ -174,13 +201,15 @@ public class Utils {
     }
 
     /**
-    * Phone fields are currently String type fields and are being used in comparision,
-    * but when compared they are coming formatted and some are not causing the if statetment to fail
-    * e.g: (555)555-5555 is not equal to 5555555555
-    * Creating a method to remove special characters and alphabet
-    * @param field
-    * @return String
-    */
+     * Phone fields are currently String type fields and are being used in comparision,
+     * but when compared they are coming formatted and some are not causing the if statetment to fail
+     * e.g: (555)555-5555 is not equal to 5555555555
+     * Creating a method to remove special characters and alphabet
+     *
+     * @param field
+     *
+     * @return String
+     */
     public static String removeFormatNumberField(String field) {
         if (String.isNotEmpty(field)) {
             return field.replaceAll('[^0-9]', '');
@@ -200,5 +229,31 @@ public class Utils {
      */
     public static List<Schema.FieldSetMember> getPartAFields() {
         return SObjectType.Lead.FieldSets.Diagnosis_Verfication_Fieldset.getFields();
+    }
+
+    /*
+     * @description 		Create a Map of sObject labels by Schema.SObjectFields.
+     *
+     * @param               Schema.DescribeSObjectResult describe: the sObject type
+     *
+     * @return              Map<Schema.SObjectField,String>
+     *
+     * @author				Chris Shinnimin, Traction on Demand
+     * @date				2020-03-30
+    */
+    public static Map<Schema.SObjectField, String> mapOfSObjectLabelsByFields(Schema.DescribeSObjectResult describe) {
+        Map<Schema.SObjectField, String> mapOfSObjectLabelsByFields = new Map<Schema.SObjectField, String>();
+
+        Map<String, Schema.SObjectType> schemaMap = Schema.getGlobalDescribe();
+        Schema.SObjectType leadSchema = schemaMap.get(describe.Name);
+        Map<String, Schema.SObjectField> fieldMap = leadSchema.getDescribe().fields.getMap();
+
+        List<Schema.SObjectField> allFields = (describe.fields.getMap()).values();
+
+        for (Schema.SObjectField field : allFields) {
+            mapOfSObjectLabelsByFields.put(field, fieldMap.get(String.valueOf(field)).getDescribe().getLabel());
+        }
+
+        return mapOfSObjectLabelsByFields;
     }
 }
