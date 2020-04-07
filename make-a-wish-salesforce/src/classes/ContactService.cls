@@ -38,12 +38,12 @@ public class ContactService {
     private static final String GENDER_FEMALE = Constant_AC.CONTACT_GENDER_FEMALE;
     private static final String UNKNOWN = Constant_AC.CONTACT_NAME_UNKNOWN;
     private static final String WORK_EMAIL = Constant_AC.CONTACT_PREFERRED_EMAIL_WORK;
-    private static final String DASH = '-';
-    private static final String EMPTY = '';
     private static final String AFFILIATION_STATUS_ACTIVE = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
     private static final String AFFILIATION_STATUS_PENDING = Constant_AC.ORG_AFFILIATION_STATUS_PENDING;
     private final static String ACCOUNT_NAME_MAW_AMERICA = Constant_AC.ACCOUNT_NAME_MAW_AMERICA;
     private final static String ROLE_NATIONAL_STAFF = Constant_AC.ROLE_NATIONAL_STAFF;
+    private static final String DASH = '-';
+    private static final String EMPTY = '';
     private final static String REMOVE = 'Remove';
     private final static String PHONE_PLACEHOLDER = '9912121313';
     private final static String ZIP_PLACEHOLDER = '11111';
@@ -665,7 +665,7 @@ public class ContactService {
         for(Contact contact : contactList) {
             if((contact.RecordTypeId == MEDICAL_PROFESSIONAL_RECORD_TYPE_ID 
                 && contact.Hidden_Hospital_Account__c != null) 
-               || contact.RecordTypeId != MEDICAL_PROFESSIONAL_RECORD_TYPE_ID) {
+                || contact.RecordTypeId != MEDICAL_PROFESSIONAL_RECORD_TYPE_ID) {
                    npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
                    if(contact.RecordTypeId == MEDICAL_PROFESSIONAL_RECORD_TYPE_ID) {
                        affiliation.npe5__Primary__c = false;
@@ -692,7 +692,7 @@ public class ContactService {
             if((contact.RecordTypeId == MEDICAL_PROFESSIONAL_RECORD_TYPE_ID 
                 || contact.RecordTypeId == WISH_FAMILY_RECORD_TYPE_ID 
                 || contact.RecordTypeId == WISH_CHILD_RECORD_TYPE_ID) 
-               && contact.Region_Chapter__c != null) {
+                && contact.Region_Chapter__c != null) {
                    npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
                    if(contact.RecordTypeId == MEDICAL_PROFESSIONAL_RECORD_TYPE_ID) {
                        affiliation.Constituent_Code__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
@@ -709,17 +709,12 @@ public class ContactService {
                    insertAffiliationList.add(affiliation);
                }
         }
-        if(!contactIdSet.isEmpty()) {
-            updateContactAffiliation(contactIdSet);
-        }
-        
-        if(!insertAffiliationList.isEmpty()) {
-            try {
-                insert insertAffiliationList;
-            } catch(Exception e) {
-                createContactDebugLog(insertAffiliationList, 'createAffiliation', e);
-            }
-        }
+        updateContactAffiliation(contactIdSet);
+        try {
+            insert insertAffiliationList;
+        } catch(Exception e) {
+            createContactDebugLog(insertAffiliationList, 'createAffiliation', e);
+        }        
     }
 
     /**
@@ -728,16 +723,16 @@ public class ContactService {
     */
     public static void updateContactAffiliation(Set<Id> contactIds) {
         List<npe5__Affiliation__c> affiliationList = new List<npe5__Affiliation__c>();
-        for(npe5__Affiliation__c  affiliation : [
-            SELECT Id, npe5__Primary__c 
-            FROM npe5__Affiliation__c
-            WHERE npe5__Contact__c IN :contactIds
-            AND npe5__Primary__c = true
-        ]) {
-            affiliation.npe5__Primary__c = false;
-            affiliationList.add(affiliation);
-        }
-        if(!affiliationList.isEmpty()) {
+        if(!contactIds.isEmpty()) { 
+            for(npe5__Affiliation__c  affiliation : [
+                SELECT Id, npe5__Primary__c 
+                FROM npe5__Affiliation__c
+                WHERE npe5__Contact__c IN :contactIds
+                AND npe5__Primary__c = true
+            ]) {
+                affiliation.npe5__Primary__c = false;
+                affiliationList.add(affiliation);
+            }
             try {
                 update affiliationList;
             } catch(Exception e) {
@@ -760,250 +755,277 @@ public class ContactService {
                     contactIdMap.put(contact.Hidden_Wish_Form_Id__c, contact.Id);
                 }
         }
-        for(Wish_Child_Form__c wishForm : [
-            SELECT Id, Contact__c
-            FROM Wish_Child_Form__c
-            WHERE Id IN: contactIdMap.keySet()
-            AND Migrated__c = false
-        ]) {
-            if(contactIdMap.containsKey(wishForm.Id)) {
-                wishForm.Contact__c = contactIdMap.get(wishForm.Id);
-                wishChildFormList.add(wishForm);
+        if(!contactIdMap.isEmpty()) {
+            for(Wish_Child_Form__c wishForm : [
+                SELECT Id, Contact__c
+                FROM Wish_Child_Form__c
+                WHERE Id IN: contactIdMap.keySet()
+                AND Migrated__c = false
+            ]) {
+                if(contactIdMap.containsKey(wishForm.Id)) {
+                    wishForm.Contact__c = contactIdMap.get(wishForm.Id);
+                    wishChildFormList.add(wishForm);
+                }
             }
-        }
-        if(!wishChildFormList.isEmpty()) {
-            update wishChildFormList;
+            try {
+                update wishChildFormList;
+            } catch(Exception e) {
+                createContactDebugLog(contactList, 'updateWishFormContact', e);
+            }
         }
     }
 	
     /**
     * Update family contact information
     * @param wishChildIdSet
-    * @param contactList
-    * @param contactList
+    * @param newContactsList
     */
-    public static void updateFamilyContactDetails(Set<Id> wishChildIdSet, Map<Id, Contact> contactRelationshipMap, Set<Id> contactRemoveSet) {
+    public static void updateFamilyContactDetails(Set<Id> wishChildIdSet, List<Contact> newContactsList) {
         List<npe4__Relationship__c> updateRelationshipList = new List<npe4__Relationship__c>();
         Map<Id, Id> relationshipContactIdMap = new Map<Id, Id>();
         Set<Id> wishFamilySet = new Set<Id>();
         Map<Id, Contact> wishFamilyMap = new Map<Id, Contact>();
-        Map<Id, Contact> wishChildCaseIdMap = new Map<Id, Contact>();
         Map<Id, Account> houseHoldAccountMap = new Map<Id, Account>();
         String dummyValue = Label.Dummy_Email;
-        try {
-            if(RecursiveTriggerHandler.accountRecursive == true) {
-                RecursiveTriggerHandler.accountRecursive = false;
-                for (npe4__Relationship__c relationship : [
-                    SELECT Id, npe4__Contact__c, npe4__RelatedContact__c, npe4__RelatedContact__r.Name, 
-                    Hidden_Preferred_Contact__c, npe4__Type__c, npe4__RelatedContact__r.Phone, npe4__RelatedContact__r.HomePhone, 
-                    npe4__RelatedContact__r.MobilePhone, npe4__RelatedContact__r.npe01__PreferredPhone__c,
-                    npe4__RelatedContact__r.OtherPhone, npe4__RelatedContact__r.npe01__WorkPhone__c
-                    FROM npe4__Relationship__c
-                    WHERE (npe4__Contact__c IN :wishChildIdSet OR Id IN :contactRelationshipMap.keySet())
-                    AND npe4__RelatedContact__r.RecordTypeId = :WISH_FAMILY_RECORD_TYPE_ID
-                ]) {
-                    if(contactRemoveSet.contains(relationship.npe4__Contact__c) && (!contactRelationshipMap.containsKey(relationship.Id)) && relationship.Hidden_Preferred_Contact__c == true) {
-                        relationship.Hidden_Preferred_Contact__c = false;
-                        updateRelationshipList.add(relationship);
-                    }
-                    if(!contactRelationshipMap.isEmpty()) {
-                        if(contactRelationshipMap.containsKey(relationship.Id)) {
-                            contactRelationshipMap.get(relationship.Id).Preferred_Contact_Name__c = relationship.npe4__RelatedContact__r.Name;
-                            relationshipContactIdMap.put(relationship.npe4__RelatedContact__c, relationship.Id);
-                            contactRelationshipMap.get(relationship.Id).Preferred_Contact_Relationship__c = relationship.npe4__Type__c;
-                            if(relationship.npe4__RelatedContact__r.npe01__PreferredPhone__c == 'Home' || relationship.npe4__RelatedContact__r.npe01__PreferredPhone__c != null) {
-                                contactRelationshipMap.get(relationship.Id).Preferred_Contact_Number__c = relationship.npe4__RelatedContact__r.HomePhone; 
-                            } else if (relationship.npe4__RelatedContact__r.npe01__PreferredPhone__c == 'Mobile') {
-                                contactRelationshipMap.get(relationship.Id).Preferred_Contact_Number__c = relationship.npe4__RelatedContact__r.MobilePhone;
-                            } else if (relationship.npe4__RelatedContact__r.npe01__PreferredPhone__c == 'Other') {
-                                contactRelationshipMap.get(relationship.Id).Preferred_Contact_Number__c = relationship.npe4__RelatedContact__r.OtherPhone; 
-                            } else if (relationship.npe4__RelatedContact__r.npe01__PreferredPhone__c == 'Work') {
-                                contactRelationshipMap.get(relationship.Id).Preferred_Contact_Number__c = relationship.npe4__RelatedContact__r.npe01__WorkPhone__c;
-                            }
-                            relationship.Hidden_Preferred_Contact__c = true;
+        Map<Id, Contact> contactRelationshipMap = new Map<Id, Contact>();
+        Set<Id> contactRemoveSet = new Set<Id>();
+
+        for(Contact newContact : newContactsList) {
+            if(newContact.RecordTypeId == WISH_CHILD_RECORD_TYPE_ID && newContact.IsContactInfoUpdated__c == true) {
+                if(newContact.Hidden_Preferred_Contact_Rel_Id__c != null && newContact.Hidden_Preferred_Contact_Rel_Id__c != REMOVE) {
+                    contactRelationshipMap.put(newContact.Hidden_Preferred_Contact_Rel_Id__c, newContact);
+                    contactRemoveSet.add(newContact.Id);
+                }
+                if(newContact.Hidden_Preferred_Contact_Rel_Id__c == REMOVE) {
+                    contactRemoveSet.add(newContact.Id);
+                } 
+                if((newContact.Hidden_Current_Pref_Con_Rel_Id__c != null && newContact.Hidden_Current_Pref_Con_Rel_Id__c != '') 
+                   && newContact.Hidden_Preferred_Contact_Rel_Id__c != REMOVE) {
+                       contactRelationshipMap.put(newContact.Hidden_Current_Pref_Con_Rel_Id__c, newContact);
+                }
+            }
+        }
+        if(!wishChildIdSet.isEmpty() || !contactRelationshipMap.isEmpty()) {
+            try {
+                if(RecursiveTriggerHandler.accountRecursive == true) {
+                    RecursiveTriggerHandler.accountRecursive = false;
+                    for (npe4__Relationship__c relationship : [
+                        SELECT Id, npe4__Contact__c, npe4__RelatedContact__c, npe4__RelatedContact__r.Name, 
+                        Hidden_Preferred_Contact__c, npe4__Type__c, npe4__RelatedContact__r.Phone, npe4__RelatedContact__r.HomePhone, 
+                        npe4__RelatedContact__r.MobilePhone, npe4__RelatedContact__r.npe01__PreferredPhone__c,
+                        npe4__RelatedContact__r.OtherPhone, npe4__RelatedContact__r.npe01__WorkPhone__c
+                        FROM npe4__Relationship__c
+                        WHERE (npe4__Contact__c IN :wishChildIdSet OR Id IN :contactRelationshipMap.keySet())
+                        AND npe4__RelatedContact__r.RecordTypeId = :WISH_FAMILY_RECORD_TYPE_ID
+                    ]) {
+                        if(contactRemoveSet.contains(relationship.npe4__Contact__c) && (!contactRelationshipMap.containsKey(relationship.Id)) && relationship.Hidden_Preferred_Contact__c == true) {
+                            relationship.Hidden_Preferred_Contact__c = false;
                             updateRelationshipList.add(relationship);
                         }
-                    }
-                    wishFamilySet.add(relationship.npe4__RelatedContact__c);
-                }
-            }
-            if(wishFamilySet.size() > 0) {
-                for (Contact wishFamilyContact : [
-                    SELECT Id,Name,FirstName,LastName,Phone,Homephone,Email,MailingStreet,MailingCity,AccountId,Account.npe01__SYSTEM_AccountType__c,Hidden_Use_as_Household_Address__c,Use_as_Household_Address__c,MailingState,MailingCountry,MailingPostalCode,Hidden_First_Name__c,
-                    Hidden_Last_Name__c,Hidden_Street__c,Hidden_Phone__c,Hidden_Email__c,Hidden_city__c,npe01__WorkPhone__c,Hidden_Work_Phone__c,npe01__PreferredPhone__c,Hidden_Preferred_Phone_Types__c,
-                    Hidden_State__c,Hidden_Country__c,Hidden_Zip_Code__c,Same_as_Household_Address__c,Hidden_Same_Address__c,OtherPhone,MobilePhone,HiddenMobilePhone__c,HiddenOtherPhone__c
-                    FROM Contact
-                    WHERE Id IN :wishFamilySet
-                ]) {
-                    if(wishFamilyContact.Hidden_First_Name__c != null) {
-                        wishFamilyContact.FirstName = wishFamilyContact.Hidden_First_Name__c;
-                        wishFamilyContact.Hidden_First_Name__c = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.Hidden_Last_Name__c != null) {
-                        wishFamilyContact.LastName = wishFamilyContact.Hidden_Last_Name__c;
-                        wishFamilyContact.Hidden_Last_Name__c = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.Hidden_Phone__c != null && wishFamilyContact.Hidden_Phone__c != PHONE_PLACEHOLDER) {
-                        wishFamilyContact.HomePhone = wishFamilyContact.Hidden_Phone__c;
-                        wishFamilyContact.Hidden_Phone__c = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.Hidden_Phone__c == PHONE_PLACEHOLDER) {
-                        wishFamilyContact.HomePhone = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.HiddenMobilePhone__c != null && wishFamilyContact.HiddenMobilePhone__c != PHONE_PLACEHOLDER) {
-                        wishFamilyContact.MobilePhone = wishFamilyContact.HiddenMobilePhone__c;
-                        wishFamilyContact.HiddenMobilePhone__c = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.HiddenMobilePhone__c == PHONE_PLACEHOLDER) {
-                        wishFamilyContact.MobilePhone = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.Hidden_Work_Phone__c != null && wishFamilyContact.Hidden_Work_Phone__c != PHONE_PLACEHOLDER) {
-                        wishFamilyContact.npe01__WorkPhone__c = wishFamilyContact.Hidden_Work_Phone__c;
-                        wishFamilyContact.Hidden_Work_Phone__c = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.Hidden_Work_Phone__c == PHONE_PLACEHOLDER) {
-                        wishFamilyContact.npe01__WorkPhone__c = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.HiddenOtherPhone__c != null && wishFamilyContact.HiddenOtherPhone__c != PHONE_PLACEHOLDER) {
-                        wishFamilyContact.otherPhone = wishFamilyContact.HiddenOtherPhone__c;
-                        wishFamilyContact.HiddenOtherPhone__c = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.HiddenOtherPhone__c == PHONE_PLACEHOLDER) {
-                        wishFamilyContact.otherPhone = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.Hidden_Email__c != null && wishFamilyContact.Hidden_Email__c != dummyValue) {
-                        wishFamilyContact.Email = wishFamilyContact.Hidden_Email__c;
-                        wishFamilyContact.Hidden_Email__c = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.Hidden_Email__c == dummyValue) {
-                        wishFamilyContact.Email = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.Hidden_Preferred_Phone_Types__c != null && wishFamilyContact.Hidden_Preferred_Phone_Types__c != dummyValue) {
-                        wishFamilyContact.npe01__PreferredPhone__c = wishFamilyContact.Hidden_Preferred_Phone_Types__c;
-                        wishFamilyContact.Hidden_Preferred_Phone_Types__c = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.Hidden_Preferred_Phone_Types__c == dummyValue) {
-                        wishFamilyContact.npe01__PreferredPhone__c = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.Hidden_Street__c != null && wishFamilyContact.Hidden_Street__c != dummyValue) {
-                        wishFamilyContact.MailingStreet = wishFamilyContact.Hidden_Street__c;
-                        wishFamilyContact.Hidden_Street__c = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.Hidden_Street__c == dummyValue) {
-                        wishFamilyContact.MailingStreet = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(relationshipContactIdMap.size() > 0 && contactRelationshipMap.size() > 0) {
-                        if(relationshipContactIdMap.containsKey(wishFamilyContact.Id)) {
-                            if(wishFamilyContact.npe01__PreferredPhone__c == 'Home') {
-                                contactRelationshipMap.get(relationshipContactIdMap.get(wishFamilyContact.Id)).Preferred_Contact_Number__c = wishFamilyContact.HomePhone; 
-                            } else if (wishFamilyContact.npe01__PreferredPhone__c == 'Mobile') {
-                                contactRelationshipMap.get(relationshipContactIdMap.get(wishFamilyContact.Id)).Preferred_Contact_Number__c = wishFamilyContact.MobilePhone;
-                            } else if (wishFamilyContact.npe01__PreferredPhone__c == 'Other') {
-                                contactRelationshipMap.get(relationshipContactIdMap.get(wishFamilyContact.Id)).Preferred_Contact_Number__c = wishFamilyContact.OtherPhone; 
-                            } else if (wishFamilyContact.npe01__PreferredPhone__c == 'Work') {
-                                contactRelationshipMap.get(relationshipContactIdMap.get(wishFamilyContact.Id)).Preferred_Contact_Number__c = wishFamilyContact.npe01__WorkPhone__c;
+                        if(!contactRelationshipMap.isEmpty()) {
+                            if(contactRelationshipMap.containsKey(relationship.Id)) {
+                                contactRelationshipMap.get(relationship.Id).Preferred_Contact_Name__c = relationship.npe4__RelatedContact__r.Name;
+                                relationshipContactIdMap.put(relationship.npe4__RelatedContact__c, relationship.Id);
+                                contactRelationshipMap.get(relationship.Id).Preferred_Contact_Relationship__c = relationship.npe4__Type__c;
+                                if(relationship.npe4__RelatedContact__r.npe01__PreferredPhone__c == 'Home' || relationship.npe4__RelatedContact__r.npe01__PreferredPhone__c != null) {
+                                    contactRelationshipMap.get(relationship.Id).Preferred_Contact_Number__c = relationship.npe4__RelatedContact__r.HomePhone; 
+                                } else if (relationship.npe4__RelatedContact__r.npe01__PreferredPhone__c == 'Mobile') {
+                                    contactRelationshipMap.get(relationship.Id).Preferred_Contact_Number__c = relationship.npe4__RelatedContact__r.MobilePhone;
+                                } else if (relationship.npe4__RelatedContact__r.npe01__PreferredPhone__c == 'Other') {
+                                    contactRelationshipMap.get(relationship.Id).Preferred_Contact_Number__c = relationship.npe4__RelatedContact__r.OtherPhone; 
+                                } else if (relationship.npe4__RelatedContact__r.npe01__PreferredPhone__c == 'Work') {
+                                    contactRelationshipMap.get(relationship.Id).Preferred_Contact_Number__c = relationship.npe4__RelatedContact__r.npe01__WorkPhone__c;
+                                }
+                                relationship.Hidden_Preferred_Contact__c = true;
+                                updateRelationshipList.add(relationship);
                             }
-                            wishChildCaseIdMap.put(contactRelationshipMap.get(relationshipContactIdMap.get(wishFamilyContact.Id)).Id, contactRelationshipMap.get(relationshipContactIdMap.get(wishFamilyContact.Id)));
+                        }
+                        wishFamilySet.add(relationship.npe4__RelatedContact__c);
+                    }
+                }
+                if(!wishFamilySet.isEmpty()) {
+                    for (Contact wishFamilyContact : [
+                        SELECT Id,Name,FirstName,LastName,Phone,Homephone,Email,MailingStreet,MailingCity,AccountId,Account.npe01__SYSTEM_AccountType__c,Hidden_Use_as_Household_Address__c,Use_as_Household_Address__c,MailingState,MailingCountry,MailingPostalCode,Hidden_First_Name__c,
+                        Hidden_Last_Name__c,Hidden_Street__c,Hidden_Phone__c,Hidden_Email__c,Hidden_city__c,npe01__WorkPhone__c,Hidden_Work_Phone__c,npe01__PreferredPhone__c,Hidden_Preferred_Phone_Types__c,
+                        Hidden_State__c,Hidden_Country__c,Hidden_Zip_Code__c,Same_as_Household_Address__c,Hidden_Same_Address__c,OtherPhone,MobilePhone,HiddenMobilePhone__c,HiddenOtherPhone__c
+                        FROM Contact
+                        WHERE Id IN :wishFamilySet
+                    ]) {
+                        if(wishFamilyContact.Hidden_First_Name__c != null) {
+                            wishFamilyContact.FirstName = wishFamilyContact.Hidden_First_Name__c;
+                            wishFamilyContact.Hidden_First_Name__c = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_Last_Name__c != null) {
+                            wishFamilyContact.LastName = wishFamilyContact.Hidden_Last_Name__c;
+                            wishFamilyContact.Hidden_Last_Name__c = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_Phone__c != null && wishFamilyContact.Hidden_Phone__c != PHONE_PLACEHOLDER) {
+                            wishFamilyContact.HomePhone = wishFamilyContact.Hidden_Phone__c;
+                            wishFamilyContact.Hidden_Phone__c = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_Phone__c == PHONE_PLACEHOLDER) {
+                            wishFamilyContact.HomePhone = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.HiddenMobilePhone__c != null && wishFamilyContact.HiddenMobilePhone__c != PHONE_PLACEHOLDER) {
+                            wishFamilyContact.MobilePhone = wishFamilyContact.HiddenMobilePhone__c;
+                            wishFamilyContact.HiddenMobilePhone__c = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.HiddenMobilePhone__c == PHONE_PLACEHOLDER) {
+                            wishFamilyContact.MobilePhone = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_Work_Phone__c != null && wishFamilyContact.Hidden_Work_Phone__c != PHONE_PLACEHOLDER) {
+                            wishFamilyContact.npe01__WorkPhone__c = wishFamilyContact.Hidden_Work_Phone__c;
+                            wishFamilyContact.Hidden_Work_Phone__c = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_Work_Phone__c == PHONE_PLACEHOLDER) {
+                            wishFamilyContact.npe01__WorkPhone__c = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.HiddenOtherPhone__c != null && wishFamilyContact.HiddenOtherPhone__c != PHONE_PLACEHOLDER) {
+                            wishFamilyContact.otherPhone = wishFamilyContact.HiddenOtherPhone__c;
+                            wishFamilyContact.HiddenOtherPhone__c = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.HiddenOtherPhone__c == PHONE_PLACEHOLDER) {
+                            wishFamilyContact.otherPhone = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_Email__c != null && wishFamilyContact.Hidden_Email__c != dummyValue) {
+                            wishFamilyContact.Email = wishFamilyContact.Hidden_Email__c;
+                            wishFamilyContact.Hidden_Email__c = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_Email__c == dummyValue) {
+                            wishFamilyContact.Email = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_Preferred_Phone_Types__c != null && wishFamilyContact.Hidden_Preferred_Phone_Types__c != dummyValue) {
+                            wishFamilyContact.npe01__PreferredPhone__c = wishFamilyContact.Hidden_Preferred_Phone_Types__c;
+                            wishFamilyContact.Hidden_Preferred_Phone_Types__c = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_Preferred_Phone_Types__c == dummyValue) {
+                            wishFamilyContact.npe01__PreferredPhone__c = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_Street__c != null && wishFamilyContact.Hidden_Street__c != dummyValue) {
+                            wishFamilyContact.MailingStreet = wishFamilyContact.Hidden_Street__c;
+                            wishFamilyContact.Hidden_Street__c = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_Street__c == dummyValue) {
+                            wishFamilyContact.MailingStreet = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(relationshipContactIdMap.size() > 0 && contactRelationshipMap.size() > 0) {
+                            if(relationshipContactIdMap.containsKey(wishFamilyContact.Id)) {
+                                if(wishFamilyContact.npe01__PreferredPhone__c == 'Home') {
+                                    contactRelationshipMap.get(relationshipContactIdMap.get(wishFamilyContact.Id)).Preferred_Contact_Number__c = wishFamilyContact.HomePhone; 
+                                } else if (wishFamilyContact.npe01__PreferredPhone__c == 'Mobile') {
+                                    contactRelationshipMap.get(relationshipContactIdMap.get(wishFamilyContact.Id)).Preferred_Contact_Number__c = wishFamilyContact.MobilePhone;
+                                } else if (wishFamilyContact.npe01__PreferredPhone__c == 'Other') {
+                                    contactRelationshipMap.get(relationshipContactIdMap.get(wishFamilyContact.Id)).Preferred_Contact_Number__c = wishFamilyContact.OtherPhone; 
+                                } else if (wishFamilyContact.npe01__PreferredPhone__c == 'Work') {
+                                    contactRelationshipMap.get(relationshipContactIdMap.get(wishFamilyContact.Id)).Preferred_Contact_Number__c = wishFamilyContact.npe01__WorkPhone__c;
+                                }
+                            }
+                        }
+                        if(wishFamilyContact.Hidden_city__c != null && wishFamilyContact.Hidden_city__c != dummyValue) {
+                            wishFamilyContact.MailingCity = wishFamilyContact.Hidden_city__c;
+                            wishFamilyContact.Hidden_city__c = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_city__c == dummyValue) {
+                            wishFamilyContact.MailingCity = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_State__c != null && wishFamilyContact.Hidden_State__c != dummyValue) {
+                            wishFamilyContact.MailingState = wishFamilyContact.Hidden_State__c;
+                            wishFamilyContact.Hidden_State__c = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_State__c == dummyValue) {
+                            wishFamilyContact.MailingState = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_Country__c != null && wishFamilyContact.Hidden_Country__c != dummyValue) {
+                            wishFamilyContact.MailingCountry = wishFamilyContact.Hidden_Country__c;
+                            wishFamilyContact.Hidden_Country__c = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_Country__c == dummyValue) {
+                            wishFamilyContact.MailingCountry = 'United States';
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_Zip_Code__c != null && wishFamilyContact.Hidden_Zip_Code__c != ZIP_PLACEHOLDER) {
+                            wishFamilyContact.MailingPostalCode = wishFamilyContact.Hidden_Zip_Code__c;
+                            wishFamilyContact.Hidden_Zip_Code__c = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_Zip_Code__c == ZIP_PLACEHOLDER) {
+                            wishFamilyContact.MailingPostalCode = null;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_Use_as_Household_Address__c == true) {
+                            wishFamilyContact.Use_as_Household_Address__c = true;
+                            Account newAcc = new Account();
+                            newAcc.Id = wishFamilyContact.AccountId;
+                            newAcc.BillingStreet = wishFamilyContact.MailingStreet;
+                            newAcc.BillingCity = wishFamilyContact.MailingCity;
+                            newAcc.BillingState = wishFamilyContact.MailingState;
+                            newAcc.BillingCountry = wishFamilyContact.MailingCountry;
+                            newAcc.BillingPostalCode = wishFamilyContact.MailingPostalCode;
+                            houseHoldAccountMap.put(newAcc.Id, newAcc);
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        } else if (wishFamilyContact.Hidden_Use_as_Household_Address__c == false) {
+                            wishFamilyContact.Use_as_Household_Address__c = false;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        if(wishFamilyContact.Hidden_Same_Address__c == false) {
+                            wishFamilyContact.Same_as_Household_Address__c = false;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                        }
+                        else if(wishFamilyContact.Hidden_Same_Address__c == true) {
+                            wishFamilyContact.Same_as_Household_Address__c = true;
+                            wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
                         }
                     }
-                    if(wishFamilyContact.Hidden_city__c != null && wishFamilyContact.Hidden_city__c != dummyValue) {
-                        wishFamilyContact.MailingCity = wishFamilyContact.Hidden_city__c;
-                        wishFamilyContact.Hidden_city__c = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                    if(!wishFamilyMap.isEmpty()) {
+                        update wishFamilyMap.values();
                     }
-                    if(wishFamilyContact.Hidden_city__c == dummyValue) {
-                        wishFamilyContact.MailingCity = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                    if(!houseHoldAccountMap.isEmpty()) {
+                        update houseHoldAccountMap.values();
                     }
-                    if(wishFamilyContact.Hidden_State__c != null && wishFamilyContact.Hidden_State__c != dummyValue) {
-                        wishFamilyContact.MailingState = wishFamilyContact.Hidden_State__c;
-                        wishFamilyContact.Hidden_State__c = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.Hidden_State__c == dummyValue) {
-                        wishFamilyContact.MailingState = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.Hidden_Country__c != null && wishFamilyContact.Hidden_Country__c != dummyValue) {
-                        wishFamilyContact.MailingCountry = wishFamilyContact.Hidden_Country__c;
-                        wishFamilyContact.Hidden_Country__c = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.Hidden_Country__c == dummyValue) {
-                        wishFamilyContact.MailingCountry = 'United States';
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.Hidden_Zip_Code__c != null && wishFamilyContact.Hidden_Zip_Code__c != ZIP_PLACEHOLDER) {
-                        wishFamilyContact.MailingPostalCode = wishFamilyContact.Hidden_Zip_Code__c;
-                        wishFamilyContact.Hidden_Zip_Code__c = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.Hidden_Zip_Code__c == ZIP_PLACEHOLDER) {
-                        wishFamilyContact.MailingPostalCode = null;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.Hidden_Use_as_Household_Address__c == true) {
-                        wishFamilyContact.Use_as_Household_Address__c = true;
-                        Account newAcc = new Account();
-                        newAcc.Id = wishFamilyContact.AccountId;
-                        newAcc.BillingStreet = wishFamilyContact.MailingStreet;
-                        newAcc.BillingCity = wishFamilyContact.MailingCity;
-                        newAcc.BillingState = wishFamilyContact.MailingState;
-                        newAcc.BillingCountry = wishFamilyContact.MailingCountry;
-                        newAcc.BillingPostalCode = wishFamilyContact.MailingPostalCode;
-                        houseHoldAccountMap.put(newAcc.Id, newAcc);
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    } else if (wishFamilyContact.Hidden_Use_as_Household_Address__c == false) {
-                        wishFamilyContact.Use_as_Household_Address__c = false;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    if(wishFamilyContact.Hidden_Same_Address__c == false) {
-                        wishFamilyContact.Same_as_Household_Address__c = false;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
-                    }
-                    else if(wishFamilyContact.Hidden_Same_Address__c == true) {
-                        wishFamilyContact.Same_as_Household_Address__c = true;
-                        wishFamilyMap.put(wishFamilyContact.Id, wishFamilyContact);
+                    if(!updateRelationshipList.isEmpty()) {
+                        update updateRelationshipList;
                     }
                 }
-                if(!wishFamilyMap.isEmpty()) {
-                    update wishFamilyMap.values();
-                }
-                if(!houseHoldAccountMap.isEmpty()) {
-                    update houseHoldAccountMap.Values();
-                }
-                if(!updateRelationshipList.isEmpty()) {
-                    update updateRelationshipList;
-                }
+            } catch(Exception ex) {
+                createContactDebugLog(contactRelationshipMap.values(), 'updateFamilyContactDetails', ex);
             }
-        } catch(Exception ex) {
-            createContactDebugLog(contactRelationshipMap.values(), 'updateFamilyContactDetails', ex);
         }
     }
 
     /**
     * Updates hidden contact fields of wish family
-    * @param recallWishIdSet
+    * @param newContactList
     */
-    public static void updateContactHiddenFields(Set<Id> recallWishIdSet) {
+    public static void updateContactHiddenFields(List<Contact> newContactList) {
         Set<Id> wishFamilySet = new Set<Id>();
-        List<Contact> contactFamilyList = new List<Contact>();
+        Set<Id> recallWishIdSet = new Set<Id>();
+        for(Contact newContact : newContactList) {
+            if(newContact.RecordTypeId == WISH_CHILD_RECORD_TYPE_ID && newContact.IsContactInfoUpdated__c == true 
+                && (newContact.IsRejected_Contact_Info__c == true || newContact.isRecall_Contact_Info__c == true)) {
+                    recallWishIdSet.add(newContact.Id);
+            }
+        }
         if(!recallWishIdSet.isEmpty()) {
             for(npe4__Relationship__c relationship : [
                 SELECT Id, npe4__Contact__c, npe4__RelatedContact__c
@@ -1042,115 +1064,199 @@ public class ContactService {
                        dbWishFamily.Hidden_Preferred_Phone_Types__c = null;
                        dbWishFamily.Hidden_Work_Phone__c = null;
                        dbWishFamily.Hidden_Use_as_Household_Address__c = false;
-                       contactFamilyList.add(dbWishFamily);
                    }
             }
-        }
-        if(!contactFamilyList.isEmpty()) {
             try {
-                update contactFamilyList;
+                update contactList;
             } catch(Exception e) {
-                createContactDebugLog(contactFamilyList, 'updateContactHiddenFields', e);
+                createContactDebugLog(contactList, 'updateContactHiddenFields', e);
             }
         }
     }
 
     /**
     * Populate condition description based on ICD Code Values
-    * @param icdInfoMap
-    * @param contactList
-    * @param icdCodeRecSet
+    * @param newContactsList
+    * @param oldContactsMap
     */
-    public static List<Contact> matchConditionDescription(Map<Id, Set<Integer>> icdInfoMap, List<Contact> contactList, Set<Id> icdCodeRecSet) {
+    public static List<Contact> matchConditionDescription(List<Contact> newContactsList, Map<Id, Contact> oldContactsMap) {
+        Set<Id> icdCodeRecSet = new Set<Id>();
+        List<Contact> contactIcdList = new List<Contact>();
+        Map<Id, Set<Integer>> icdInfoMap = new Map<Id, Set<Integer>>();
         Map<Id, ICD_Codes__c> icdCodeDetails = new Map<Id, ICD_Codes__c>();
-        for(ICD_Codes__c icdInfo : [
-            SELECT Id, Name, Group1__c,
-            Condition_Description__c, Condition_Description__r.Code_to_Use__c, Condition_Description__r.Name
-            FROM ICD_Codes__c
-            WHERE Id IN :icdCodeRecSet
-        ]) {
-            icdCodeDetails.put(icdInfo.Id, icdInfo);
+
+        for(Contact newContact : newContactsList) {
+            Contact oldContact = oldContactsMap.get(newContact.Id);
+            if(newContact.SD1_ICD_Code__c != oldContact.SD1_ICD_Code__c && newContact.SD1_ICD_Code__c != null) {
+                icdCodeRecSet.add(newContact.SD1_ICD_Code__c);
+                contactIcdList.add(newContact);
+                if(icdInfoMap.containsKey(newContact.Id)) {
+                    icdInfoMap.get(newContact.Id).add(1);
+                } else {
+                    icdInfoMap.put(newContact.Id, new Set<Integer>{
+                        1
+                            });
+                }
+            }
+            if(newContact.SD2_ICD_Code__c != oldContact.SD2_ICD_Code__c && newContact.SD2_ICD_Code__c != null) {
+                icdCodeRecSet.add(newContact.SD2_ICD_Code__c);
+                contactIcdList.add(newContact);
+                if(icdInfoMap.containsKey(newContact.Id)) {
+                    icdInfoMap.get(newContact.Id).add(2);
+                } else {
+                    icdInfoMap.put(newContact.Id, new Set<Integer>{
+                        2
+                            });
+                }
+            }
+            if(newContact.SD3_ICD_Code__c != oldContact.SD3_ICD_Code__c && newContact.SD3_ICD_Code__c != null) {
+                icdCodeRecSet.add(newContact.SD3_ICD_Code__c);
+                contactIcdList.add(newContact);
+                if(icdInfoMap.containsKey(newContact.Id)) {
+                    icdInfoMap.get(newContact.Id).add(3);
+                } else {
+                    icdInfoMap.put(newContact.Id, new Set<Integer>{
+                        3
+                            });
+                }
+            }
+            if(newContact.SD4_ICD_Code__c != oldContact.SD4_ICD_Code__c && newContact.SD4_ICD_Code__c != null) {
+                icdCodeRecSet.add(newContact.SD4_ICD_Code__c);
+                contactIcdList.add(newContact);
+                if(icdInfoMap.containsKey(newContact.Id)) {
+                    icdInfoMap.get(newContact.Id).add(4);
+                } else {
+                    icdInfoMap.put(newContact.Id, new Set<Integer>{
+                        4
+                            });
+                }
+            }
+            if(newContact.ICD_10_Code__c != oldContact.ICD_10_Code__c && newContact.ICD_10_Code__c != null) {
+                icdCodeRecSet.add(newContact.ICD_10_Code__c);
+                contactIcdList.add(newContact);
+                if(icdInfoMap.containsKey(newContact.Id)) {
+                    icdInfoMap.get(newContact.Id).add(5);
+                } else {
+                    icdInfoMap.put(newContact.Id, new Set<Integer>{
+                        5
+                            });
+                }
+            }
         }
-        for(Contact updatePD : contactList) {
-            if(icdInfoMap.containsKey(updatePD.Id)) {
-                for(Integer icdField : icdInfoMap.get(updatePD.Id)) {
-                    if(icdField == 1 && icdCodeDetails.containsKey(updatePD.SD1_ICD_Code__c)) {
-                        updatePD.SD1_Condition_Description__c = icdCodeDetails.get(updatePD.SD1_ICD_Code__c).Condition_Description__r.Name;
-                    } if(icdField == 2 && icdCodeDetails.containsKey(updatePD.SD2_ICD_Code__c)) {
-                        updatePD.SD2_Condition_Description__c = icdCodeDetails.get(updatePD.SD2_ICD_Code__c).Condition_Description__r.Name;
-                    } if(icdField == 3 && icdCodeDetails.containsKey(updatePD.SD3_ICD_Code__c)) {
-                        updatePD.SD3_Condition_Description__c = icdCodeDetails.get(updatePD.SD3_ICD_Code__c).Condition_Description__r.Name;
-                    } if(icdField == 4 && icdCodeDetails.containsKey(updatePD.SD4_ICD_Code__c)) {
-                        updatePD.SD4_Condition_Description__c = icdCodeDetails.get(updatePD.SD4_ICD_Code__c).Condition_Description__r.Name;
-                    } if(icdField == 5 && icdCodeDetails.containsKey(updatePD.ICD_10_Code__c)) {
-                        updatePD.Diagnosis__c = icdCodeDetails.get(updatePD.ICD_10_Code__c).Condition_Description__r.Name;
+        if(!icdCodeRecSet.isEmpty()) {
+            for(ICD_Codes__c icdInfo : [
+                SELECT Id, Name, Group1__c,
+                Condition_Description__c, Condition_Description__r.Code_to_Use__c, Condition_Description__r.Name
+                FROM ICD_Codes__c
+                WHERE Id IN :icdCodeRecSet
+            ]) {
+                icdCodeDetails.put(icdInfo.Id, icdInfo);
+            }
+            for(Contact updatePD : contactIcdList) {
+                if(icdInfoMap.containsKey(updatePD.Id)) {
+                    for(Integer icdField : icdInfoMap.get(updatePD.Id)) {
+                        if(icdField == 1 && icdCodeDetails.containsKey(updatePD.SD1_ICD_Code__c)) {
+                            updatePD.SD1_Condition_Description__c = icdCodeDetails.get(updatePD.SD1_ICD_Code__c).Condition_Description__r.Name;
+                        } if(icdField == 2 && icdCodeDetails.containsKey(updatePD.SD2_ICD_Code__c)) {
+                            updatePD.SD2_Condition_Description__c = icdCodeDetails.get(updatePD.SD2_ICD_Code__c).Condition_Description__r.Name;
+                        } if(icdField == 3 && icdCodeDetails.containsKey(updatePD.SD3_ICD_Code__c)) {
+                            updatePD.SD3_Condition_Description__c = icdCodeDetails.get(updatePD.SD3_ICD_Code__c).Condition_Description__r.Name;
+                        } if(icdField == 4 && icdCodeDetails.containsKey(updatePD.SD4_ICD_Code__c)) {
+                            updatePD.SD4_Condition_Description__c = icdCodeDetails.get(updatePD.SD4_ICD_Code__c).Condition_Description__r.Name;
+                        } if(icdField == 5 && icdCodeDetails.containsKey(updatePD.ICD_10_Code__c)) {
+                            updatePD.Diagnosis__c = icdCodeDetails.get(updatePD.ICD_10_Code__c).Condition_Description__r.Name;
+                        }
                     }
                 }
             }
         }
-        return contactList;
+        return contactIcdList;
     }
 
     /**
     * Update affiliation status based on contact application status
-    * @param contactMap
+    * @param newContactsList
+    * @param oldContactsMap
     */
-    public static void updateOrgAffiliationStatus(Map<Id, Contact> contactMap) {
-        List<npe5__Affiliation__c> affiliationList = new List<npe5__Affiliation__c>();
-        for (npe5__Affiliation__c dbAffiliationRec : [
-            SELECT Id, npe5__Contact__c, npe5__Primary__c, npe5__Status__c, npe5__Organization__c
-            FROM npe5__Affiliation__c
-            WHERE npe5__Contact__c IN :contactMap.keySet() AND npe5__Status__c != 'Active'
-        ]) {
-            if(contactMap.containsKey(dbAffiliationRec.npe5__Contact__c)) {
-                npe5__Affiliation__c updateAffiliation = new npe5__Affiliation__c();
-                updateAffiliation.Id = dbAffiliationRec.Id;
-                if(contactMap.get(dbAffiliationRec.npe5__Contact__c).is_Application__c == 'Complete') {
-                    updateAffiliation.npe5__Status__c = 'Pending';
-                } else if(contactMap.get(dbAffiliationRec.npe5__Contact__c).is_Application__c == 'Rejected') {
-                    updateAffiliation.npe5__Status__c = 'Not Approved';
-                }
-                affiliationList.add(updateAffiliation);
+    public static void updateOrgAffiliationStatus(List<Contact> newContactsList, Map<Id, Contact> oldContactsMap) {
+        Map<Id, Contact> contactMap = new Map<Id, Contact>();
+        for(Contact newContact : newContactsList) {
+            if(newContact.is_Application__c != oldContactsMap.get(newContact.Id).is_Application__c) {
+                contactMap.put(newContact.Id, newContact);   
             }
         }
-        if(!affiliationList.isEmpty()) {
-            update affiliationList;
+        if(!contactMap.isEmpty()) {
+            List<npe5__Affiliation__c> affiliationList = new List<npe5__Affiliation__c>();
+            for (npe5__Affiliation__c dbAffiliationRec : [
+                SELECT Id, npe5__Contact__c, npe5__Primary__c, npe5__Status__c, npe5__Organization__c
+                FROM npe5__Affiliation__c
+                WHERE npe5__Contact__c IN :contactMap.keySet() AND npe5__Status__c != 'Active'
+            ]) {
+                if(contactMap.containsKey(dbAffiliationRec.npe5__Contact__c)) {
+                    npe5__Affiliation__c updateAffiliation = new npe5__Affiliation__c();
+                    updateAffiliation.Id = dbAffiliationRec.Id;
+                    if(contactMap.get(dbAffiliationRec.npe5__Contact__c).is_Application__c == 'Complete') {
+                        updateAffiliation.npe5__Status__c = 'Pending';
+                    } else if(contactMap.get(dbAffiliationRec.npe5__Contact__c).is_Application__c == 'Rejected') {
+                        updateAffiliation.npe5__Status__c = 'Not Approved';
+                    }
+                    affiliationList.add(updateAffiliation);
+                }
+            }
+            try {
+                update affiliationList;
+            } catch(Exception e) {
+                createContactDebugLog(affiliationList, 'updateOrgAffiliationStatus', e);
+            }
         }
     }
 	
     /**
     * Update medical professional contact information on wish child record
-    * @param medicalProfContactSet
+    * @param newContactsList
+    * @param oldContactsMap
     */
-    public static void updateMedicalProfessional(Set<Id> medicalProfContactSet) {
-        Map<Id, npe4__Relationship__c > childContactMap = new Map<Id, npe4__Relationship__c >();
-        List<Contact> updateChildContactList = new List<Contact>();
-        for(npe4__Relationship__c dbMedicalRelationShipRec : [
-            SELECT Id, npe4__RelatedContact__c, npe4__RelatedContact__r.Name, npe4__RelatedContact__r.Email, 
-            npe4__Contact__c
-            FROM npe4__Relationship__c
-            WHERE npe4__RelatedContact__c IN :medicalProfContactSet 
-            AND Qualifying_Medical_Professional__c = true 
-            AND npe4__Status__c = 'Active'
-        ]) {
-            childContactMap.put(dbMedicalRelationShipRec.npe4__Contact__c, dbMedicalRelationShipRec);
+    public static void updateMedicalProfessional(List<Contact> newContactsList, Map<Id, Contact> oldContactsMap) {
+        Set<Id> medicalProfContactSet = new Set<Id>();
+        for(Contact newContact : newContactsList) {
+            if(newContact.RecordTypeId == MEDICAL_PROFESSIONAL_RECORD_TYPE_ID 
+               && (newContact.Name != oldContactsMap.get(newContact.Id).Name || newContact.Email != oldContactsMap.get(newContact.Id).Email)) {
+                medicalProfContactSet.add(newContact.Id);
+            }
         }
-        
-        for(Contact dbChildContact : [
-            SELECT Id, Hidden_Medical_Physician__c, Hidden_Medical_Physician_Email__c
-            FROM Contact
-            WHERE Id IN :childContactMap.keySet() 
-            AND RecordTypeId = :WISH_CHILD_RECORD_TYPE_ID
-        ]) {
-            Contact updateChildContact = new contact();
-            updateChildContact.Id = dbChildContact.Id;
-            updateChildContact.Hidden_Medical_Physician__c = childContactMap.get(dbChildContact.Id).npe4__RelatedContact__r.Name;
-            updateChildContact.Hidden_Medical_Physician_Email__c = childContactMap.get(dbChildContact.Id).npe4__RelatedContact__r.Email;
-            updateChildContactList.add(updateChildContact);
-            
-        }
-        if(!updateChildContactList.isEmpty()) {
-            update updateChildContactList;
+        if(!medicalProfContactSet.isEmpty()) {
+            Map<Id, npe4__Relationship__c > childContactMap = new Map<Id, npe4__Relationship__c >();
+            List<Contact> updateChildContactList = new List<Contact>();
+            for(npe4__Relationship__c dbMedicalRelationShipRec : [
+                SELECT Id, npe4__RelatedContact__c, npe4__RelatedContact__r.Name, 
+                npe4__RelatedContact__r.Email, npe4__Contact__c
+                FROM npe4__Relationship__c
+                WHERE npe4__RelatedContact__c IN :medicalProfContactSet 
+                AND Qualifying_Medical_Professional__c = true 
+                AND npe4__Status__c = 'Active'
+            ]) {
+                childContactMap.put(dbMedicalRelationShipRec.npe4__Contact__c, dbMedicalRelationShipRec);
+            }
+            if(!childContactMap.isEmpty()) {
+                for(Contact dbChildContact : [
+                    SELECT Id, Hidden_Medical_Physician__c, Hidden_Medical_Physician_Email__c
+                    FROM Contact
+                    WHERE Id IN :childContactMap.keySet() 
+                    AND RecordTypeId = :WISH_CHILD_RECORD_TYPE_ID
+                ]) {
+                    Contact updateChildContact = new contact();
+                    updateChildContact.Id = dbChildContact.Id;
+                    updateChildContact.Hidden_Medical_Physician__c = childContactMap.get(dbChildContact.Id).npe4__RelatedContact__r.Name;
+                    updateChildContact.Hidden_Medical_Physician_Email__c = childContactMap.get(dbChildContact.Id).npe4__RelatedContact__r.Email;
+                    updateChildContactList.add(updateChildContact);
+                    
+                }
+                try {
+                    update updateChildContactList;
+                } catch(Exception e) {
+                    createContactDebugLog(updateChildContactList, 'updateMedicalProfessional', e);
+                }
+            }
         }
     }
 	
@@ -1230,12 +1336,10 @@ public class ContactService {
                     }
                 }    
             }
-            if(!volunteerRoleList.isEmpty()) {
-                try{
-                    insert volunteerRoleList;
-                } catch(Exception e) {
-                    createContactDebugLog(volunteerRoleList, 'createVolunteerRoles', e);
-                }
+            try{
+                insert volunteerRoleList;
+            } catch(Exception e) {
+                createContactDebugLog(volunteerRoleList, 'createVolunteerRoles', e);
             }
         }
 	}
@@ -1317,12 +1421,10 @@ public class ContactService {
                     }
                 }
             }
-            if(!newTaskList.isEmpty()) {
-                try {
-                    insert newTaskList;
-                } catch(Exception e) {
-                    createContactDebugLog(newTaskList, 'createZipcodeUpdateTask', e);
-                }
+            try {
+                insert newTaskList;
+            } catch(Exception e) {
+                createContactDebugLog(newTaskList, 'createZipcodeUpdateTask', e);
             }
         }
     }
@@ -1395,16 +1497,17 @@ public class ContactService {
         Set<Id> dbFamilyAccountIdSet = new Set<Id>();
         List<Contact> updateFamilyContactList = new List<Contact>();
         Map<Id, Account> houseHoldAccountMap = new Map<Id, Account>();
-        
-        for(Contact familyContact : [
-            SELECT Id, AccountId, MailingStreet, MailingCity, MailingState,
-            MailingCountry, MailingPostalCode, Same_as_Household_Address__c
-            FROM Contact
-            WHERE Id IN :addressSet
-        ]) {
-            if(familyContact.Same_as_Household_Address__c == true) {
-                dbFamilyAccountIdSet.add(familyContact.AccountId);
-                dbFamilyContact.add(familyContact);
+        if(!addressSet.isEmpty()) {
+            for(Contact familyContact : [
+                SELECT Id, AccountId, MailingStreet, MailingCity, MailingState,
+                MailingCountry, MailingPostalCode, Same_as_Household_Address__c
+                FROM Contact
+                WHERE Id IN :addressSet
+            ]) {
+                if(familyContact.Same_as_Household_Address__c == true) {
+                    dbFamilyAccountIdSet.add(familyContact.AccountId);
+                    dbFamilyContact.add(familyContact);
+                }
             }
         }
         if(!dbFamilyAccountIdSet.isEmpty()) {
@@ -1426,9 +1529,6 @@ public class ContactService {
                     updateFamilyContactList.add(familyContact);
                 }
             }
-            
-        }
-        if(!updateFamilyContactList.isEmpty()) {
             try {
                 update updateFamilyContactList;
             } catch(Exception e) {
@@ -1532,21 +1632,29 @@ public class ContactService {
 
     /**
     * Update relationship type when contact is updated
-    * @param contactMap
+    * @param newContactsList
+    * @param oldContactsMap
     */
-    public static void updateRelationship(Map<Id, Contact> contactMap) {
-        List<npe4__Relationship__c> updateRelationshipList = new List<npe4__Relationship__c>();
-        for(npe4__Relationship__c dbRelationShip : [
-            SELECT Id, npe4__Contact__c, npe4__RelatedContact__c, npe4__Type__c
-            FROM npe4__Relationship__c
-            WHERE npe4__RelatedContact__c IN :contactMap.keySet()
-        ]) {
-            if(contactMap.containsKey(dbRelationShip.npe4__RelatedContact__c)) {
-                dbRelationShip.npe4__Type__c = contactMap.get(dbRelationShip.npe4__RelatedContact__c).Relationship__c;
-                updateRelationshipList.add(dbRelationShip);
+    public static void updateRelationship(List<Contact> newContactsList, Map<Id, Contact> oldContactsMap) {
+        Map<Id, Contact> contactMap = new Map<Id, Contact>();
+        for(Contact newContact : newContactsList) {
+            if(newContact.RecordTypeId == WISH_FAMILY_RECORD_TYPE_ID 
+                && newContact.Relationship__c != oldContactsMap.get(newContact.Id).Relationship__c) {
+                    contactMap.put(newContact.Id, newContact);
             }
         }
-        if(!updateRelationshipList.isEmpty()) {
+        if(!contactMap.isEmpty()) {
+            List<npe4__Relationship__c> updateRelationshipList = new List<npe4__Relationship__c>();
+            for(npe4__Relationship__c dbRelationShip : [
+                SELECT Id, npe4__Contact__c, npe4__RelatedContact__c, npe4__Type__c
+                FROM npe4__Relationship__c
+                WHERE npe4__RelatedContact__c IN :contactMap.keySet()
+            ]) {
+                if(contactMap.containsKey(dbRelationShip.npe4__RelatedContact__c)) {
+                    dbRelationShip.npe4__Type__c = contactMap.get(dbRelationShip.npe4__RelatedContact__c).Relationship__c;
+                    updateRelationshipList.add(dbRelationShip);
+                }
+            }
             try {
                 update updateRelationshipList;
             } catch(Exception e) {
@@ -1584,22 +1692,38 @@ public class ContactService {
 
     /**
     * Update wish form details with contact details
-    * @param updatedContactList
+    * @param newContactsList
+    * @param oldContactsMap
     */
-    public static void updateWishFormRecord(List<Contact> updatedContactList) {
+    public static void updateWishFormRecord(List<Contact> newContactsList, Map<Id, Contact> oldContactsMap) {
         Map<Id, Contact> wishChildContactMap = new Map<Id, Contact>();
         Map<Id, Contact> wishFamilyContactMap = new Map<Id, Contact>();
-        Id WishFormfamilyContactRecordTypeId = Constant_AC.WISH_FORM_FAMILY_ID;
-        Id wichChildRecordTypeId = Constant_AC.WISH_FORM_CHILD_ID;
-        Id wichChildcontactRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
-        Id familyContactRecordTypeId = Constant_AC.WISH_FAMILY_RT_ID;
         List<Wish_Child_Form__c> updateWishFormList = new List<Wish_Child_Form__c>();
-        
-        for(Contact dbProcessedContact : updatedContactList) {
-            if(dbProcessedContact.RecordTypeId == WISH_CHILD_RECORD_TYPE_ID && dbProcessedContact.Hidden_Wish_Form_Id__c != null) {
-                wishChildContactMap.put(dbProcessedContact.Hidden_Wish_Form_Id__c, dbProcessedContact);
-            } else if(dbProcessedContact.RecordTypeId == WISH_FAMILY_RECORD_TYPE_ID && dbProcessedContact.Hidden_Wish_Form_Id__c != null) {
-                wishFamilyContactMap.put(dbProcessedContact.Hidden_Wish_Form_Id__c, dbProcessedContact);
+        for(Contact newContact : newContactsList) {
+            Contact oldContact = oldContactsMap.get(newContact.Id);
+            if(newContact.RecordTypeId == WISH_CHILD_RECORD_TYPE_ID && newContact.Hidden_Wish_Form_Id__c != null) {
+                wishChildContactMap.put(newContact.Hidden_Wish_Form_Id__c, newContact);
+            } else if(newContact.RecordTypeId == WISH_FAMILY_RECORD_TYPE_ID && newContact.Hidden_Wish_Form_Id__c != null 
+                && ((newContact.FirstName != oldContact.FirstName 
+                    || newContact.Middle_Name__c!= oldContact.Middle_Name__c 
+                    || newContact.LastName != oldContact.LastName 
+                    || newContact.Preferred_Name__c != oldContact.Preferred_Name__c)
+                || (newContact.MailingStreet != oldContact.MailingStreet 
+                    || newContact.MailingCity != oldContact.MailingCity 
+                    || newContact.MailingState != oldContact.MailingState 
+                    || newContact.MailingStateCode != oldContact.MailingStateCode 
+                    || newContact.MailingPostalCode != oldContact.MailingPostalCode)
+                || (newContact.Email != oldContact.Email 
+                    || newContact.T_Shirt_Size__c != oldContact.T_Shirt_Size__c
+                    || newContact.Residing_with_Wish_child__c != oldContact.Residing_with_Wish_child__c 
+                    || newContact.HomePhone != oldContact.HomePhone 
+                    || newContact.Relationship__c != oldContact.Relationship__c 
+                    || newContact.npe01__WorkPhone__c != oldContact.npe01__WorkPhone__c 
+                    || newContact.Birthdate != oldContact.Birthdate
+                    || newContact.MobilePhone != oldContact.MobilePhone 
+                    || newContact.Gender__c != oldContact.Gender__c
+                    || newContact.MailingCountry != oldContact.MailingCountry))) {
+                        wishFamilyContactMap.put(newContact.Hidden_Wish_Form_Id__c, newContact);
             }
         }
         if(!wishChildContactMap.isEmpty()) {
@@ -1695,14 +1819,17 @@ public class ContactService {
                 }
             }
         }
-        if(!updateWishFormList.isEmpty()) {
+        try {
             update updateWishFormList;
+        } catch(Exception e) {
+            createContactDebugLog(updateWishFormList, 'updateWishFormRecord', e);
         }
     }
 	
     /**
     * Update hidden case fields
-    * @param updatedContactList
+    * @param contactList
+    * @param oldContactsMap
     */
     public static void updateHiddenCaseFields(List<Contact> contactList, Map<Id, Contact> oldContactsMap) {
         RecursiveTriggerHandler.allowToEditRecord = true;
@@ -1739,13 +1866,11 @@ public class ContactService {
                            caseRecord.Hidden_Contact_Gender__c = updatedContact.get(caseRecord.ContactId).Gender__c;
                            caseUpdateList.add(caseRecord);
                        }
-                }
-            if(!caseUpdateList.isEmpty()) {
-                try {
-                    update caseUpdateList;
-                } catch(Exception e) {
-                    createContactDebugLog(updatedContact.values(), 'updatePrimaryDiagnosis', e);
-                }
+            }
+            try {
+                update caseUpdateList;
+            } catch(Exception e) {
+                createContactDebugLog(updatedContact.values(), 'updateHiddenCaseFields', e);
             }
             RecursiveTriggerHandler.allowToEditRecord = false;
         }
@@ -1757,21 +1882,21 @@ public class ContactService {
     */
     public static void updateAffiliationPrimaryStatus(Map<Id, Contact> contactMap) {
         List<npe5__Affiliation__c> updateAffiliationList = new List<npe5__Affiliation__c>();
-        for(npe5__Affiliation__c affiliation : [
-            SELECT Id, Constituent_Code__c, npe5__Contact__c, npe5__Contact__r.RecordTypeId
-            FROM npe5__Affiliation__c
-            WHERE npe5__Contact__c IN :contactMap.keySet()
-        ]) {
-            npe5__Affiliation__c aff = new npe5__Affiliation__c();
-            aff.Id = affiliation.Id;
-            aff.npe5__Primary__c = false;
-            updateAffiliationList.add(aff);
-        }
-        if(!updateAffiliationList.isEmpty()) {
+        if(!contactMap.isEmpty()) {
+            for(npe5__Affiliation__c affiliation : [
+                SELECT Id, Constituent_Code__c, npe5__Contact__c, npe5__Contact__r.RecordTypeId
+                FROM npe5__Affiliation__c
+                WHERE npe5__Contact__c IN :contactMap.keySet()
+            ]) {
+                npe5__Affiliation__c aff = new npe5__Affiliation__c();
+                aff.Id = affiliation.Id;
+                aff.npe5__Primary__c = false;
+                updateAffiliationList.add(aff);
+            }
             try {
                 update updateAffiliationList;
             } catch(Exception e) {
-                createContactDebugLog(contactMap.values(), 'updateAffiliationPrimaryStatus', e);
+                createContactDebugLog(updateAffiliationList, 'updateAffiliationPrimaryStatus', e);
             }
         }
     }
@@ -1781,22 +1906,21 @@ public class ContactService {
     * @param contactMap
     */
     public static void validateContact(Map<Id, Contact> contactMap) {
-        Set<Id> contactSetId = new Set<Id>();
-        for (Lead lead : [
-            SELECT Id, Hidden_Best_Contact_Person_Id__c, Medical_Professional_ContactId__c, 
-            Treating_Medical_Professional_Contact_Id__c, Hidden_Additional_Parent_Id__c, Wish_Family_ContactId__c
-            FROM Lead
-            WHERE Hidden_Best_Contact_Person_Id__c IN :contactMap.keySet() 
-            OR Medical_Professional_ContactId__c IN :contactMap.keySet() 
-            OR Treating_Medical_Professional_Contact_Id__c IN :contactMap.keySet() 
-            OR Hidden_Additional_Parent_Id__c IN :contactMap.keySet() 
-            OR Wish_Family_ContactId__c IN :contactMap.keySet()
-        ]) {
-            contactSetId.add(lead.Id);
-        }
-        if(!contactSetId.isEmpty()) {
-            for(Contact dbContact : contactMap.values()) {
-                dbContact.addError('You cannot delete this Contact as it is associated with a Lead');
+        if(!contactMap.isEmpty()) {
+            List<Lead> leadList = new List<Lead>([
+                SELECT Id, Hidden_Best_Contact_Person_Id__c, Medical_Professional_ContactId__c, 
+                Treating_Medical_Professional_Contact_Id__c, Hidden_Additional_Parent_Id__c, Wish_Family_ContactId__c
+                FROM Lead
+                WHERE Hidden_Best_Contact_Person_Id__c IN :contactMap.keySet() 
+                OR Medical_Professional_ContactId__c IN :contactMap.keySet() 
+                OR Treating_Medical_Professional_Contact_Id__c IN :contactMap.keySet() 
+                OR Hidden_Additional_Parent_Id__c IN :contactMap.keySet() 
+                OR Wish_Family_ContactId__c IN :contactMap.keySet()
+            ]);
+            if(!leadList.isEmpty()) {
+                for(Contact dbContact : contactMap.values()) {
+                    dbContact.addError('You cannot delete this Contact as it is associated with a Lead');
+                }
             }
         }
     }
@@ -1807,7 +1931,7 @@ public class ContactService {
     */
     public static void deleteWishForm(Set<Id> wishFormIdSet) {
         if(!wishFormIdSet.isEmpty()) {
-            delete [SELECT Id,Contact__c,RecordTypeId,Migrated__c
+            delete [SELECT Id
                     FROM Wish_Child_Form__c
                     WHERE Id IN :wishFormIdSet
                     AND RecordTypeId = :WISH_FORM_FAMILY_ID
@@ -1965,24 +2089,25 @@ public class ContactService {
     }
 
     /**
-    * Update hidden contact fields to empty/null
+    * Update hidden contact fields to empty/null if wish child record has been updated
     * @param contactList
-    * @return contactList
     */
-    public static List<Contact> clearHiddenFields(List<Contact> contactList) {
+    public static void clearHiddenFields(List<Contact> contactList) {
         for(Contact newContact : contactList) {
-            if(newContact.Hidden_First_Name__c != null 
-               || newContact.Hidden_Last_Name__c != null 
-               || newContact.Hidden_Phone__c != null 
-               || newContact.Hidden_Email__c != null 
-               || newContact.Hidden_Street__c != null 
-               || newContact.Hidden_State__c != null 
-               || newContact.HiddenOtherPhone__c != null 
-               || newContact.HiddenMobilePhone__c != null 
-               || newContact.Hidden_Country__c != null 
-               || newContact.Hidden_Zip_Code__c != null 
-               || newContact.Hidden_city__c != null 
-               || newContact.Hidden_Preferred_Contact_Rel_Id__c != null) {
+            if(newContact.RecordTypeId == WISH_CHILD_RECORD_TYPE_ID && newContact.IsContactInfoUpdated__c == true 
+                && (newContact.IsRejected_Contact_Info__c == true || newContact.isRecall_Contact_Info__c == true) 
+                && (newContact.Hidden_First_Name__c != null 
+                || newContact.Hidden_Last_Name__c != null 
+                || newContact.Hidden_Phone__c != null 
+                || newContact.Hidden_Email__c != null 
+                || newContact.Hidden_Street__c != null 
+                || newContact.Hidden_State__c != null 
+                || newContact.HiddenOtherPhone__c != null 
+                || newContact.HiddenMobilePhone__c != null 
+                || newContact.Hidden_Country__c != null 
+                || newContact.Hidden_Zip_Code__c != null 
+                || newContact.Hidden_city__c != null 
+                || newContact.Hidden_Preferred_Contact_Rel_Id__c != null)) {
                    newContact.Hidden_First_Name__c = null;
                    newContact.Hidden_Last_Name__c = null;
                    newContact.Hidden_Phone__c = null;
@@ -1999,7 +2124,6 @@ public class ContactService {
             newContact.IsRejected_Contact_Info__c = false;
             newContact.isRecall_Contact_Info__c = false;
         }
-        return contactList;
     }
 
     /**
@@ -2032,50 +2156,52 @@ public class ContactService {
         timeZoneMap.put('(GMT-09:00) Alaska Standard Time (America/Anchorage)','America/Anchorage');
         List<User> userList = new List<User>();
         String profileId = label.Active_Volunteer_Profile;
-        for(Contact contact : [
-            SELECT Id, FirstName, Middle_Name__c, LastName, Account.Timezone__c, Email
-            FROM Contact
-            WHERE Id IN :contactIds 
-            AND RecordTypeId = :VOLUNTEER_RT_ID
-            AND Do_Not_Create_User__c = false
-            AND Migrated_Record__c = true
-            AND Email != null
-        ]) {
-            User user = new User();
-            user.FirstName = contact.FirstName;
-            user.LastName = contact.LastName;
-            user.ContactId = contact.Id;
-            user.CommunityNickname = contact.Email;
-            user.ProfileId = profileId;
-            user.Email = contact.Email;
-            user.Username = contact.Email;
-            if(contact.LastName != null) { 
-                if(contact.LastName.length() > 7) {
-                    user.Alias = (contact.LastName).subString(0, 7);
-                } else {
-                    user.Alias = contact.LastName;
+        if(!contactIds.isEmpty()) {
+            for(Contact contact : [
+                SELECT Id, FirstName, Middle_Name__c, LastName, Account.Timezone__c, Email
+                FROM Contact
+                WHERE Id IN :contactIds 
+                AND RecordTypeId = :VOLUNTEER_RT_ID
+                AND Do_Not_Create_User__c = false
+                AND Migrated_Record__c = true
+                AND Email != null
+            ]) {
+                User user = new User();
+                user.FirstName = contact.FirstName;
+                user.LastName = contact.LastName;
+                user.ContactId = contact.Id;
+                user.CommunityNickname = contact.Email;
+                user.ProfileId = profileId;
+                user.Email = contact.Email;
+                user.Username = contact.Email;
+                if(contact.LastName != null) { 
+                    if(contact.LastName.length() > 7) {
+                        user.Alias = (contact.LastName).subString(0, 7);
+                    } else {
+                        user.Alias = contact.LastName;
+                    }
                 }
-            }
-            if(contact.Middle_Name__c != null) { 
-                if(contact.Middle_Name__c.length() > 7) {
-                    user.Alias = (contact.Middle_Name__c).subString(0, 7);
-                } else {
-                    user.Alias = contact.Middle_Name__c;
+                if(contact.Middle_Name__c != null) { 
+                    if(contact.Middle_Name__c.length() > 7) {
+                        user.Alias = (contact.Middle_Name__c).subString(0, 7);
+                    } else {
+                        user.Alias = contact.Middle_Name__c;
+                    }
                 }
-            }
-            if(timeZoneMap.containsKey(contact.Account.Timezone__c)) {
-                user.TimeZoneSidKey = timeZoneMap.get(contact.Account.Timezone__c);
-            } else {
-                user.TimeZoneSidKey = 'America/Los_Angeles';
-            }
-            user.LocaleSidKey = 'en_US';
-            user.EmailEncodingKey = 'ISO-8859-1';
-            user.LanguageLocaleKey = 'en_US';
-            user.IsActive = true;
-            user.migrated_user__c = true;
-            userList.add(user);
-            if(!userList.isEmpty()) {
-                Database.insert(userList, false);
+                if(timeZoneMap.containsKey(contact.Account.Timezone__c)) {
+                    user.TimeZoneSidKey = timeZoneMap.get(contact.Account.Timezone__c);
+                } else {
+                    user.TimeZoneSidKey = 'America/Los_Angeles';
+                }
+                user.LocaleSidKey = 'en_US';
+                user.EmailEncodingKey = 'ISO-8859-1';
+                user.LanguageLocaleKey = 'en_US';
+                user.IsActive = true;
+                user.migrated_user__c = true;
+                userList.add(user);
+                if(!userList.isEmpty()) {
+                    Database.insert(userList, false);
+                }
             }
         }
     }

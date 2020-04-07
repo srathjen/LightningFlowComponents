@@ -552,9 +552,8 @@ public class ContactTrigger_AT_Test {
 		npe4__Relationship__c npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id, childFamily.Id);
 		insert npcr;
 		set<Id> wishChildIdSet = new set<Id>();
-		Map<Id, Contact> ConrelationshipIdMap = new Map<Id, Contact>();
-		set<Id> removePrefIdSet = new set<Id>();
 		String dummyValue = Label.Dummy_Email;
+        List<Contact> contactList = new List<Contact>();
 		Contact updateCon = new Contact();
 		updateCon.Hidden_First_Name__c = 'Chandra';
 		updateCon.Hidden_Last_Name__c = 'Sekar';
@@ -575,11 +574,10 @@ public class ContactTrigger_AT_Test {
 		updateCon.HiddenMobilePhone__c = '9912121313';
 		updateCon.Id = childFamily.Id;
 		wishChildIdSet.add(childCon.id);
-		removePrefIdSet.add(childCon.id);
-		ConrelationshipIdMap.put(childCon.id, childCon);
 		update updateCon;
 		update childCon;
-        ContactService.updateFamilyContactDetails(wishChildIdSet, ConrelationshipIdMap, removePrefIdSet);
+        contactList.add(updateCon);
+        ContactService.updateFamilyContactDetails(wishChildIdSet, contactList);
 		System.assertEquals(updateCon.IsContactInfoUpdated__c, True);
 	}
 
@@ -593,6 +591,7 @@ public class ContactTrigger_AT_Test {
 		Map<Id, Contact> ConrelationshipIdMap = new Map<Id, Contact>();
 		set<Id> removePrefIdSet = new set<Id>();
 		String dummyValue = Label.Dummy_Email;
+        List<Contact> contactList = new List<Contact>();
 		Contact updateCon = new Contact();
 		updateCon.Hidden_First_Name__c = 'Chandra';
 		updateCon.Hidden_Last_Name__c = 'Sekar';
@@ -617,7 +616,8 @@ public class ContactTrigger_AT_Test {
 		ConrelationshipIdMap.put(childCon.id, childCon);
 		update updateCon;
 		update childCon;
-        ContactService.updateFamilyContactDetails(wishChildIdSet, ConrelationshipIdMap, removePrefIdSet);
+        contactList.add(updateCon);
+        ContactService.updateFamilyContactDetails(wishChildIdSet, contactList);
 		System.assertEquals(updateCon.IsContactInfoUpdated__c, True);
 	}
 

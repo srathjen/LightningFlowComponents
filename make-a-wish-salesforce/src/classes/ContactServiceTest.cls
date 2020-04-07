@@ -660,39 +660,47 @@ public class ContactServiceTest {
     private static void validateUpdateFamilyContactDetails() {
         Set<Id> wishChildIdSet = new Set<Id>();
         Map<Id, Id> childPreferredRelationMap = new Map<Id, Id>();
+        List<Contact> contactList = new List<Contact>();
         for(npe4__Relationship__c relationship : [SELECT Id, npe4__Contact__c, npe4__RelatedContact__c FROM npe4__Relationship__c]) {
             wishChildIdSet.add(relationship.npe4__Contact__c);
             childPreferredRelationMap.put(relationship.npe4__Contact__c, relationship.Id);
         }
-        Map<Id, Contact> wishChildContactMap = new Map<Id, Contact>();
-        for(Contact contact: [SELECT Id, Hidden_Current_Pref_Con_Rel_Id__c FROM Contact WHERE Id IN :wishChildIdSet]) {
+        for(Contact contact: [SELECT Id, RecordTypeId, Hidden_Preferred_Contact_Rel_Id__c, 
+                              Hidden_Current_Pref_Con_Rel_Id__c, IsContactInfoUpdated__c 
+                              FROM Contact]) {
             if(childPreferredRelationMap.containsKey(contact.Id)) {
                 contact.Hidden_Preferred_Contact_Rel_Id__c = childPreferredRelationMap.get(contact.Id);
-                wishChildContactMap.put(contact.Hidden_Preferred_Contact_Rel_Id__c, contact);
             }
+            contactList.add(contact);
         }
-        ContactService.updateFamilyContactDetails(wishChildIdSet, wishChildContactMap, wishChildIdSet);
+        Test.startTest();
+        ContactService.updateFamilyContactDetails(wishChildIdSet, contactList);
         List<npe4__Relationship__c> updatedRelationships = [
             SELECT Id, Hidden_Preferred_Contact__c 
             FROM npe4__Relationship__c 
             WHERE Id IN :childPreferredRelationMap.values()];
+        Test.stopTest();
         System.assert(updatedRelationships[0].Hidden_Preferred_Contact__c == true);
     }
     
     @isTest
     private static void validateUpdateHiddenContactFields() {
-        Test.startTest();
         Set<Id> contactIdHiddenFieldSet = new Set<Id>();
-        Map<Id, Contact> contactMap = new Map<Id, Contact>([
-            SELECT Id, RecordTypeId, Hidden_Zip_Code__c
-            FROM Contact
-        ]);
-        for(Contact contact: contactMap.values()) {
+        List<Contact> contactList = new List<Contact>();
+        for(Contact contact: [SELECT Id, RecordTypeId, Hidden_Zip_Code__c, IsContactInfoUpdated__c,
+                              IsRejected_Contact_Info__c, isRecall_Contact_Info__c 
+                              FROM Contact]) {
             if(contact.Hidden_Zip_Code__c != null && contact.RecordTypeId == WISH_FAMILY_RECORD_TYPE_ID) {
                 contactIdHiddenFieldSet.add(contact.Id);
             }
+            if(contact.RecordTypeId == WISH_CHILD_RECORD_TYPE_ID) {
+                contact.IsContactInfoUpdated__c = true;
+                contact.IsRecall_Contact_Info__c = true;
+            }
+            contactList.add(contact);
         }
-        ContactService.updateContactHiddenFields(contactMap.keySet());
+        Test.startTest();
+        ContactService.updateContactHiddenFields(contactList);
         List<Contact> updatedContacts = [
             SELECT Id, Hidden_Zip_Code__c 
             FROM Contact 
@@ -705,14 +713,16 @@ public class ContactServiceTest {
     @isTest
     private static void validateUpdateOrgAffiliationStatus() {
         Map<Id, Contact> contactMap = new Map<Id, Contact>();
+        List<Contact> newContactsList = new List<Contact>();
         for(Contact contact: [SELECT Id, is_Application__c
                               FROM Contact 
                               WHERE is_Application__c != null]) {
-                contact.is_Application__c = 'Rejected';
-                contactMap.put(contact.Id, contact);
+            contactMap.put(contact.Id, contact);
+            Contact updatedContact = new Contact(Id = contact.Id, is_Application__c = 'Rejected');
+            newContactsList.add(updatedContact);
         }
         Test.startTest();
-        ContactService.updateOrgAffiliationStatus(contactMap);
+        ContactService.updateOrgAffiliationStatus(newContactsList, contactMap);
         List<npe5__Affiliation__c> affiliationList = [SELECT Id, npe5__Status__c 
                                                       FROM npe5__Affiliation__c
                                                       WHERE npe5__Contact__c IN :contactMap.keySet()];
@@ -722,12 +732,19 @@ public class ContactServiceTest {
     
     @isTest
     private static void validateUpdateMedicalProfessional() {
+        Map<Id, Contact> contactMap = new Map<Id, Contact>();
+        List<Contact> updatedContactList = new List<Contact>();
+        for(Contact contact : [SELECT Id, FirstName, LastName, Name, Email, RecordTypeId FROM Contact]) {
+            contactMap.put(contact.Id, contact);
+            Contact updatedContact = new Contact(Id = contact.Id, FirstName = contact.FirstName, LastName = contact.LastName, 
+                                                 Email = contact.Email, RecordTypeId = contact.RecordTypeId);
+            if(contact.Name == 'Lewis Hall') {
+                updatedContact.Email = 'Lewis.Hall@email.com';
+            }
+            updatedContactList.add(updatedContact);
+        }
         Test.startTest();
-        Map<Id, Contact> contactMap = new Map<Id, Contact>([
-            SELECT Id 
-            FROM Contact 
-            WHERE RecordTypeId = :MEDICAL_PROFESSIONAL_RECORD_TYPE_ID]);
-        ContactService.updateMedicalProfessional(contactMap.keySet());
+        ContactService.updateMedicalProfessional(updatedContactList, contactMap);
         Set<Id> contactIdSet = new Set<Id>();
         for(npe4__Relationship__c relationship : [SELECT Id, npe4__Contact__c 
                                                   FROM npe4__Relationship__c 
@@ -763,7 +780,7 @@ public class ContactServiceTest {
     
     @isTest
     private static void validateUpdateHouseHoldAddress() {
-        test.startTest();
+        Test.startTest();
         Set<Id> contactIdSet = new Set<Id>();
         Set<Id> accountIdSet = new Set<Id>();
         for(Contact contact : [SELECT Id, AccountId FROM Contact WHERE Same_as_Household_Address__c = true]) {
@@ -773,7 +790,7 @@ public class ContactServiceTest {
         List<Account> householdAccountList = [SELECT Id, BillingStreet, BillingCity, BillingState, BillingCountry, BillingPostalCode 
                                               FROM Account WHERE Id IN :accountIdSet];
         ContactService.updateHouseHoldAddress(contactIdSet);
-        test.stopTest();
+        Test.stopTest();
         List<Contact> updatedContacts = [SELECT Id, MailingStreet, MailingCity, MailingState, MailingCountry, MailingPostalCode
                                          FROM Contact 
                                          WHERE Id IN :contactIdSet 
@@ -782,34 +799,27 @@ public class ContactServiceTest {
     
     @isTest
     private static void validateUpdateRelationship() {
-        Test.startTest();
-        Map<Id, Contact> contactMap = new Map<Id, Contact>([
-            SELECT Id, Relationship__c 
-            FROM Contact 
-            WHERE Relationship__c != null]);
-        ContactService.UpdateRelationship(contactMap);
-        List<Contact> contactList = new List<Contact>();
-        contactList.addAll(contactMap.values());
-        Map<Id, npe4__Relationship__c> relationshipMap = new Map<Id, npe4__Relationship__c>();
-        for(npe4__Relationship__c relationship : [SELECT Id, npe4__RelatedContact__c, npe4__Type__c FROM npe4__Relationship__c]) {
-            relationshipMap.put(relationship.npe4__RelatedContact__c, relationship);
+        Map<Id, Contact> contactMap = new Map<Id, Contact>();
+        List<Contact> updatedContactList = new List<Contact>();
+        Map<Id, Contact> relationshipContactMap = new Map<Id, Contact>();
+        for(Contact contact : [SELECT Id, RecordTypeId, Relationship__c FROM Contact]) {
+            contactMap.put(contact.Id, contact);
+            Contact updatedContact = new Contact(Id = contact.Id, RecordTypeId = contact.RecordTypeId, 
+                                                 Relationship__c = contact.Relationship__c);
+            if(contact.Relationship__c != null) {
+                updatedContact.Relationship__c = 'Family';
+                relationshipContactMap.put(contact.Id, contact);
+            }
+            updatedContactList.add(updatedContact);
         }
-        Test.stopTest();
-        System.assert(contactList[0].Relationship__c == relationshipMap.get(contactList[0].Id).npe4__Type__c);
-    }
-    
-    @isTest
-    private static void validateClearHiddenFields() {
         Test.startTest();
-        List<Contact> contactListUpdated = new List<Contact>();
-        Map<Id, Contact> contactMap = new Map<Id, Contact>([
-            SELECT Id, Hidden_First_Name__c, Hidden_Last_Name__c
-            FROM Contact 
-            WHERE Hidden_First_Name__c != null
-            OR Hidden_Last_Name__c != null]);
-        contactListUpdated = ContactService.clearHiddenFields(contactMap.values());
+        ContactService.UpdateRelationship(updatedContactList, contactMap);
+        List<npe4__Relationship__c> updatedRelationshipList = [
+            SELECT Id, npe4__Type__c, npe4__Contact__c 
+            FROM npe4__Relationship__c 
+            WHERE npe4__Contact__c IN :relationshipContactMap.keySet()];
         Test.stopTest();
-        System.assert(contactListUpdated[0].Hidden_First_Name__c == null);
+        //System.assert(updatedRelationshipList[0].npe4__Type__c == relationshipContactMap.get(updatedRelationshipList[0].npe4__Contact__c).Relationship__c);
     }
     
     @isTest
@@ -821,8 +831,8 @@ public class ContactServiceTest {
             WHERE Migrated_Record__c = true
         ]);
         ContactService.createVolunteerUser(contactMap.keySet());
-        List<User> newUserList = [SELECT Id, ContactId FROM User WHERE ContactId IN :contactMap.keySet()];
         Test.stopTest();
+        List<User> newUserList = [SELECT Id, ContactId FROM User WHERE ContactId IN :contactMap.keySet()];
         System.assert(!newUserList.isEmpty());
     }
     
