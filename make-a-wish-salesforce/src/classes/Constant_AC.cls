@@ -59,6 +59,7 @@ public class Constant_AC {
 	public final static Id WISH_FORM_DETERMINATION_ID = Schema.SObjectType.Wish_Child_Form__c.getRecordTypeInfosByDeveloperName().get('Wish_Form_Determination_Case').getRecordTypeId();
 	public final static Id WISH_FORM_CHILD_EMERGENCY_ID = Schema.SObjectType.Wish_Child_Form__c.getRecordTypeInfosByDeveloperName().get('Wish_Form_Emergency_Contact').getRecordTypeId();
 	public final static Id WISH_FORM_CHILD_DRIVER_ID = Schema.SObjectType.Wish_Child_Form__c.getRecordTypeInfosByDeveloperName().get('Wish_Form_Driver_Information').getRecordTypeId();
+	public final static String WISH_FORM_FAMILY_LABEL = Schema.SObjectType.Wish_Child_Form__c.getRecordTypeInfosByDeveloperName().get('Wish_Form_Family').getName();
 	public final static Id WISH_CLEARANCE_ATTACHMENT_ID = Schema.SObjectType.Minor_Participant__c.getRecordTypeInfosByDeveloperName().get('Wish_Clarence_Attachment').getRecordTypeId();
 	public final static Id FORM_TRACKER_ATTACHMENT_ID = Schema.SObjectType.Minor_Participant__c.getRecordTypeInfosByDeveloperName().get('Form_Tracker_Attachment').getRecordTypeId();
 	public final static Id COMBO_RECORD_ID = Schema.SObjectType.Minor_Participant__c.getRecordTypeInfosByDeveloperName().get('Combo_Form_Attachment').getRecordTypeId();
@@ -92,6 +93,7 @@ public class Constant_AC {
 	public final static String ORG_AFFILIATION_STATUS_ACTIVE = 'Active';
 	public final static String ORG_AFFILIATION_STATUS_INACTIVE = 'Inactive';
 	public final static String ORG_AFFILIATION_STATUS_PENDING = 'Pending';
+	public final static String ORG_AFFILIATION_STATUS_CURRENT = 'Current';
 	public final static String ORG_AFFILIATION_TREATING_FACILITY_CURRENT = 'Current';
 	public final static String ORG_AFFILIATION_STATUS_NOT_APPROVED = 'Not Approved';
 
@@ -190,11 +192,12 @@ public class Constant_AC {
 	public static final String CASE_WISH_TYPE_TRAVEL_HAWAII = 'Travel-Hawaii';
 	public static final String CASE_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
 	public static final String CASE_RECORD_TYPE_DIAGNOSIS_VERIFICATION_REVIEW = 'Diagnosis Verification Review';
-	public static final String CASE_ORIGIN_WEB = 'Web';
-	public static final String CASE_ORIGIN_EMAIL = 'Email';
-	public static final String CASE_RUSH_TIME_FRAME = 'Select timeframe';
-	public static final String CASE_UWI_SOURCE_LEAD = 'Lead';
-	public static final String CASE_SUBJECT_ELIGIBILITY_REVIEW = 'Eligibility Review';
+	public static final String CASE_RECORD_TYPE_WISH = 'Wish';
+    public static final String CASE_ORIGIN_WEB = 'Web';
+    public static final String CASE_ORIGIN_EMAIL = 'Email';
+    public static final String CASE_RUSH_TIME_FRAME = 'Select timeframe';
+    public static final String CASE_UWI_SOURCE_LEAD = 'Lead';
+    public static final String CASE_SUBJECT_ELIGIBILITY_REVIEW = 'Eligibility Review';
 
 	/**
 	 * Wish Affiliation Constants
@@ -236,7 +239,7 @@ public class Constant_AC {
 	public static final String CONTACT_GENDER_FEMALE = 'Female';
 	public static final String CONTACT_NAME_UNKNOWN = 'Unknown';
 	public static final String CONTACT_STATUS_ROLE_SPECIFIC_TRAINING_AVAILABLE = 'Role Specific Training Available';
-  public static final String CONTACT_ONBOARDING_STATUS_BACKGROUND_CHECK = 'Background Check';
+    public static final String CONTACT_ONBOARDING_STATUS_BACKGROUND_CHECK = 'Background Check';
 	public static final String CONTACT_PUBLICITY_YES = 'Yes';
 
 	/**
@@ -280,6 +283,9 @@ public class Constant_AC {
 	public static final String VOLUNTEER_OPPORTUNITY_ROLE_WISH_GRANTER = 'Wish Granter';
 	public static final String VOLUNTEER_OPPORTUNITY_ROLE_WISH_GRANTER_MENTOR = 'Wish Granter Mentor';
 	public static final String VOLUNTEER_OPPORTUNITY_ROLE_TEMPORARY_WISH_GRANTER = 'Temporary Wish Granter';
+	public static final String VOLUNTEER_OPPORTUNITY_STATUS_CLOSED = 'Closed';
+	public static final String VOLUNTEER_OPPORTUNITY_STATUS_COMPLETED = 'Completed';
+	public static final String VOLUNTEER_OPPORTUNITY_STATUS_INACTIVE = 'Inactive';
 
 	/**
 	 * Contact Application Status
@@ -356,8 +362,8 @@ public class Constant_AC {
 	public static final String TASK_SUBJECT_RUSH_QUALIFIED = 'Lead ET : New Rush Qualified';
 	public static final String TASK_SUBJECT_RUSH_MODIFIED_NO = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary';
 	public static final String TASK_SUBJECT_REVIEW_BACKGROUND_CHECK = 'Review Background Check';
-  public static final String TASK_SUBJECT_BACKGROUND_CHECK = 'Background Check';
-  public static final String TASK_TYPE_EMAIL = 'Email';
+    public static final String TASK_SUBJECT_BACKGROUND_CHECK = 'Background Check';
+    public static final String TASK_TYPE_EMAIL = 'Email';
 
 	/*
 	 * User Constants
@@ -414,7 +420,7 @@ public class Constant_AC {
 	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_SUBMITTED = 'Submitted';
 	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
 	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_REJECTED = 'Rejected';
-  
+
 	/*
 	 * Wish Form (Wish_Child_Form__c) Constants
 	 */
@@ -426,7 +432,12 @@ public class Constant_AC {
 	public static final String GROUP_TYPE_REGULAR = 'Regular';
 
 	/*
-	 * Case Team Role Constants
+	 * Case Team Member Role Constants
 	 */
 	public static final String CASE_TEAM_ROLE_INTAKE_MANAGER = 'Intake Manager';
+	public static final String CASE_TEAM_ROLE_VOLUNTEER_MANAGER = 'Volunteer Manager';
+	public static final String CASE_TEAM_ROLE_VOLUNTEER_MANAGER_INACTIVE = 'Volunteer Manager (Inactive)';
+	public static final String CASE_TEAM_ROLE_WISH_COORDINATOR_INACTIVE = 'Wish Coordinator (Inactive)';
+	public static final String CASE_TEAM_ROLE_WISH_COORDINATOR = 'Wish Coordinator';
+	public static final String CASE_TEAM_ROLE_WISH_GRANTER = 'Wish Granter';
 }
