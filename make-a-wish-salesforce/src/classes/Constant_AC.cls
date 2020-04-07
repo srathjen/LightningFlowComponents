@@ -360,8 +360,8 @@ public class Constant_AC {
 	public static final String TASK_SUBJECT_RUSH_QUALIFIED = 'Lead ET : New Rush Qualified';
 	public static final String TASK_SUBJECT_RUSH_MODIFIED_NO = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary';
 	public static final String TASK_SUBJECT_REVIEW_BACKGROUND_CHECK = 'Review Background Check';
-    public static final String TASK_SUBJECT_BACKGROUND_CHECK = 'Background Check';
-    public static final String TASK_TYPE_EMAIL = 'Email';
+	public static final String TASK_SUBJECT_BACKGROUND_CHECK = 'Background Check';
+	public static final String TASK_TYPE_EMAIL = 'Email';
 
 	/*
 	 * User Constants
