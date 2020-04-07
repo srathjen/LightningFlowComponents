@@ -12,6 +12,10 @@ public with sharing class UserService {
      * @createdDate     unknown
      */
     public static void updateVolunteerInfo(Map<Id, User> prospectiveUserMap) {
+        if (prospectiveUserMap == null || prospectiveUserMap.isEmpty()) {
+            return;
+        }
+
         try {
             List<Contact> updateContactList = new List<Contact>();
             List<npe5__Affiliation__c> updateAffiliationList = new List<npe5__Affiliation__c>();
@@ -97,6 +101,10 @@ public with sharing class UserService {
      */
     @future
     public static void addInternalUserToChatterGroup(Map<Id,Id> newUserRoleIdMap) {
+        if (newUserRoleIdMap == null || newUserRoleIdMap.isEmpty()) {
+            return;
+        }
+
         try {
             Set<String> userRoleName = new Set<String>(); //Used to hold chapter name after removal of '- Chapter' form Name
             Map<Id,String> groupInfoMap = new Map<Id,String>(); // Used to hold the group Id and Name
@@ -159,6 +167,10 @@ public with sharing class UserService {
      */
     @future
     public static void removeInternalUserToChatterGroup(Map<Id,Id> oldUserRoleIdMap) {
+        if (oldUserRoleIdMap == null || oldUserRoleIdMap.isEmpty()) {
+            return;
+        }
+
         try {
             Set<String> userRoleName = new Set<String>(); //Used to hold chapter name after removal of '- Chapter' form Name
             List<CollaborationGroupMember> chatterGroupMembersList = new List<CollaborationGroupMember>();
@@ -221,6 +233,10 @@ public with sharing class UserService {
      */
     @future
     public static void updateUser(Set<Id> inactiveUserIdSet) {
+        if (inactiveUserIdSet == null || inactiveUserIdSet.isEmpty()) {
+            return;
+        }
+
         try {
             List<Case> dbcaseList = new List<Case>();
             Map<Id, String> caseTeamMemberMap = new Map<Id, String>();
@@ -276,7 +292,11 @@ public with sharing class UserService {
      * @createdDate     unknown
      */
     @future
-    public static void updateContactEmail(Map<Id, Id> contactIdMap) {
+    public static void updateContactEmail(Map<Id,Id> contactIdMap) {
+        if (contactIdMap == null || contactIdMap.isEmpty()) {
+            return;
+        }
+
         try {
             Map<Id, User> contactUserMap = new Map<Id, User>();
 

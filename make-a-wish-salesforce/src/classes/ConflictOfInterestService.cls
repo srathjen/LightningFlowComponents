@@ -157,6 +157,10 @@ public class ConflictOfInterestService {
      */
 	@future
 	public static void toggleConflictOfInterestInactiveFlag(Set<Id> inactiveVolunteerIdSet, Boolean isInactiveVolunteer) {
+		if (inactiveVolunteerIdSet == null || inactiveVolunteerIdSet.isEmpty()) {
+			return;
+		}
+
 		try {
 			List<Conflict_Of_Interest__c> updateCOIList = New List<Conflict_Of_Interest__c>();
 
@@ -169,9 +173,7 @@ public class ConflictOfInterestService {
 				updateCOIList.add(currCOI);
 			}
 
-			if (updateCOIList.size() > 0) {
-				update updateCOIList;
-			}
+			update updateCOIList;
 
 			if (Test.isRunningTest()) {
 				throw new CommonTriggerException('Test Class execution');

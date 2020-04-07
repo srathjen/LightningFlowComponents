@@ -55,7 +55,6 @@ public with sharing class UserDomain extends trac_TriggerHandlerBase {
      */
     public override void handleAfterInsert() {
         Map<Id, Id> newUserRoleIdMap = new Map<Id, Id>();
-        Set<String> userIdsSet = new Set<String>();
         Map<Id, User> prospectiveUserMap = new Map<Id, User>();
 
         for (User newUser : newUsersList) {
@@ -63,6 +62,7 @@ public with sharing class UserDomain extends trac_TriggerHandlerBase {
                 if ((newUser.ProfileId == Label.Prospective_Volunteer_Profile ||
                     newUser.ProfileId == String.valueOf(Label.Active_Volunteer_Profile).trim())
                     && (newUser.ContactId != null)) {
+
                     prospectiveUserMap.put(newUser.ContactId, newUser);
                 }
 
@@ -70,17 +70,13 @@ public with sharing class UserDomain extends trac_TriggerHandlerBase {
                     newUserRoleIdMap.put(newUser.Id, newUser.UserRoleId);
                 }
             }
-
-            if (newUser.Migrated_User__c == false && newUser.UserRoleId != null) {
-                userIdsSet.add(newUser.Id);
-            }
         }
 
-        if (prospectiveUserMap.size() > 0) {
+        if (prospectiveUserMap.size() > 0) { // avoid @future call if possible
             UserService.updateVolunteerInfo(prospectiveUserMap);
         }
 
-        if (newUserRoleIdMap.size() > 0) {
+        if (newUserRoleIdMap.size() > 0) { // avoid @future call if possible
             UserService.addInternalUserToChatterGroup(newUserRoleIdMap);
         }
     }
@@ -98,7 +94,6 @@ public with sharing class UserDomain extends trac_TriggerHandlerBase {
         Map<Id, Id> newUserRoleIdMap = new Map<Id, Id>();
         Map<Id, Id> oldUserRoleIdMap = new Map<Id, Id>();
         Map<Id, Id> contactUserIdMap = new Map<Id, Id>();
-        Set<String> userIdsSet = new Set<String>();
 
         for (User newUser : newUsersList) {
             if (Bypass_Triggers__c.getValues(Utils.currentUser.Id) == null) {
@@ -110,9 +105,6 @@ public with sharing class UserDomain extends trac_TriggerHandlerBase {
                 }
                 if (newUser.ContactId != null && newUser.IsActive == true && oldUsersMap.get(newUser.Id).IsActive == false) {
                     activeUserSet.add(newUser.ContactId);
-                }
-                if (newUser.UserRoleId != null && newUser.UserRoleId != oldUsersMap.get(newUser.Id).UserRoleId) {
-                    userIdsSet.add(newUser.Id);
                 }
 
                 if ((newUser.ContactId != null) &&
@@ -138,11 +130,11 @@ public with sharing class UserDomain extends trac_TriggerHandlerBase {
             }
         }
 
-        if (inActiveUserIdSet.size() > 0) {
+        if (inActiveUserIdSet.size() > 0) { // avoid @future call if possible
             UserService.updateUser(inActiveUserIdSet);
         }
 
-        if (inactiveUserSet.size() > 0 && inactiveUserSet != null) {
+        if (inactiveUserSet.size() > 0) { // avoid @future call if possible
             BackgroundCheckService.toggleBackgroundCheckInactiveFlag(inactiveUserSet, true);
             ConflictOfInterestService.toggleConflictOfInterestInactiveFlag(inactiveUserSet, true);
         }
@@ -160,21 +152,21 @@ public with sharing class UserDomain extends trac_TriggerHandlerBase {
                 }
             }
 
-            if (activeVolunteerIdSet.size() > 0) {
+            if (activeVolunteerIdSet.size() > 0) { // avoid @future call if possible
                 BackgroundCheckService.toggleBackgroundCheckInactiveFlag(activeVolunteerIdSet, false);
                 ConflictOfInterestService.toggleConflictOfInterestInactiveFlag(activeVolunteerIdSet, false);
             }
 
         }
 
-        if (newUserRoleIdMap.size() > 0) {
+        if (newUserRoleIdMap.size() > 0) { // avoid @future call if possible
             UserService.addInternalUserToChatterGroup(newUserRoleIdMap);
         }
 
-        if (oldUserRoleIdMap.size() > 0) {
+        if (oldUserRoleIdMap.size() > 0) { // avoid @future call if possible
             UserService.removeInternalUserToChatterGroup(oldUserRoleIdMap);
         }
-        if (contactUserIdMap.size() > 0) {
+        if (contactUserIdMap.size() > 0) { // avoid @future call if possible
             UserService.updateContactEmail(contactUserIdMap);
         }
     }
