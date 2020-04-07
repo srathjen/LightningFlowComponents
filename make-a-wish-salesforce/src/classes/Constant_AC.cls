@@ -192,11 +192,11 @@ public class Constant_AC {
 	public static final String CASE_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
 	public static final String CASE_RECORD_TYPE_DIAGNOSIS_VERIFICATION_REVIEW = 'Diagnosis Verification Review';
 	public static final String CASE_RECORD_TYPE_WISH = 'Wish';
-    public static final String CASE_ORIGIN_WEB = 'Web';
-    public static final String CASE_ORIGIN_EMAIL = 'Email';
-    public static final String CASE_RUSH_TIME_FRAME = 'Select timeframe';
-    public static final String CASE_UWI_SOURCE_LEAD = 'Lead';
-    public static final String CASE_SUBJECT_ELIGIBILITY_REVIEW = 'Eligibility Review';
+	public static final String CASE_ORIGIN_WEB = 'Web';
+	public static final String CASE_ORIGIN_EMAIL = 'Email';
+	public static final String CASE_RUSH_TIME_FRAME = 'Select timeframe';
+	public static final String CASE_UWI_SOURCE_LEAD = 'Lead';
+	public static final String CASE_SUBJECT_ELIGIBILITY_REVIEW = 'Eligibility Review';
 
 	/**
 	 * Wish Affiliation Constants
