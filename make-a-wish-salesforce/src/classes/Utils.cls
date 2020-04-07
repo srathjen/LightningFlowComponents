@@ -24,7 +24,7 @@ public class Utils {
                         SELECT
                                 Id, Name, Chapter_Name__c,
                                 UserRole.Name,
-                                Profile.Id, Profile.Name,
+                                ProfileId, Profile.Id, Profile.Name,
                                 ContactId, Contact.Account.Volunteer_Manager__c, Contact.OwnerId
                         FROM User
                         WHERE Id = :UserInfo.getUserId()
