@@ -309,7 +309,7 @@ public class WishBudgetFormNew_AC {
     * @author          MST Solutions
     * @createdDate     unknown
     */
-	public List<SelectOption> getWishExpenseTypes() {
+	public List<SelectOption> getWishExpenceTypes() {
 		List<SelectOption> options = new List<SelectOption>();
 		options.add(new SelectOption('', '--- None ---'));
 		for (String tcode : TransCodesWrap.keySet()) {
@@ -657,42 +657,39 @@ public class WishBudgetFormNew_AC {
     * @createdDate     unknown
     */
 	public List<SelectOption> getUserListForApproval() {
-		Set<Id> userIdsSet = new Set<Id>();
-		Set<Id> userDupCheck = new Set<Id>();
-		String userType = Schema.SObjectType.User.getKeyPrefix();
-		String chapterGroup;
-
-		if (wishChapterName != null) {
-			chapterGroup = wishChapterName.removeStart('Make-A-Wish ');
-
-			for (GroupMember getGroupUsers : [
-				SELECT Id, UserOrGroupId
-				FROM GroupMember
-				WHERE Group.Name = :chapterGroup
-			]) {
-				if (((String) getGroupUsers.UserOrGroupId).startsWith(userType)) {
-					userIdsSet.add(getGroupUsers.UserOrGroupId);
-				}
-			}
-
-			userList = [
-				SELECT Id,Name, Profile.Name, UserRole.Name
-				FROM User
-				WHERE Id IN :userIdsSet
-				AND ContactId = NULL
-				AND IsActive = TRUE
-				LIMIT 50000
-			];
-		}
-
 		List<SelectOption> options = new List<SelectOption>();
 		options.add(new SelectOption('', 'Select Approver'));
-		options.add(new SelectOption(UserInfo.getUserId(), UserInfo.getName()));
-		userDupCheck.add(UserInfo.getUserId());
+		options.add(new SelectOption(Utils.currentUser.Id, Utils.currentUser.Name));
 
-		for (User approvalUser : userList) {
-			if (!userDupCheck.contains(approvalUser.Id)) {
-				options.add(new SelectOption(approvalUser.Id, approvalUser.Name));
+		if (wishChapterName != null) {
+			String chapterGroupName = wishChapterName.removeStart('Make-A-Wish ');
+
+			List<Wish_Budget_Approver_Filter__c> wbaList = [
+				SELECT SetupOwnerId
+				FROM Wish_Budget_Approver_Filter__c
+				WHERE Restrict__c = TRUE
+			];
+
+			Set<Id> profileIdsToOmit = new Set<Id>();
+			for (Wish_Budget_Approver_Filter__c wba : wbaList) {
+				profileIdsToOmit.add(wba.SetupOwnerId);
+			}
+
+			User[] users = [
+				SELECT User.Id, User.Name
+				FROM User
+				WHERE Id IN (
+					SELECT UserOrGroupId
+					FROM GroupMember
+					WHERE Group.Name = :chapterGroupName
+				)
+				AND User.Profile.Id NOT IN :profileIdsToOmit
+			];
+
+			for (User user : users) {
+				if (user.Id != Utils.currentUser.Id) {
+					options.add(new SelectOption(user.Id, user.Name));
+				}
 			}
 		}
 
