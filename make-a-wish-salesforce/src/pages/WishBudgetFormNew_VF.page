@@ -456,7 +456,7 @@
                         <div>
                             <apex:selectList id="WishExpenseType" value="{!newExpenseType}" size="1"
                                              styleClass="form-control col-lg-2 new-expType" style="width:350px">
-                                <apex:selectOptions value="{!wishExpenceTypes}"/>
+                                <apex:selectOptions value="{!wishExpenseTypes}"/>
                             </apex:selectList>
                         </div>
                         <div style="float:left">
