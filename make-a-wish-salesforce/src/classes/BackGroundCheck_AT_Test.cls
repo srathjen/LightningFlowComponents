@@ -45,7 +45,6 @@ public class BackGroundCheck_AT_Test {
 		backgroundcheck.Current__c = true;
 		backgroundcheck.Date_Completed__c = System.today();
 		update backgroundcheck;
-
 	}
 
 	/*This method is used to update the background check record to Rejected*/
