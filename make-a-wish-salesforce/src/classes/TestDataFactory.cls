@@ -13,7 +13,7 @@ public class TestDataFactory {
                         SELECT Id
                         FROM User
                         WHERE Profile.Name = 'System Administrator' AND UserRole.Name != NULL AND UserRole.Name != 'CustomerPortal'
-                        AND IsActive = TRUE
+                        AND IsActive = TRUE AND Id != :UserInfo.getUserId()
                         LIMIT 1
                 ];
             }
@@ -413,7 +413,6 @@ public class TestDataFactory {
         return conditionDescriptions;
     }
 
-
     public static List<Medical_Questions__c> createMedicalQuestions(Integer num) {
         List<Medical_Questions__c> medicalQuestions = new List<Medical_Questions__c>();
         for (Integer i = 0; i < num; i++) {
@@ -431,6 +430,15 @@ public class TestDataFactory {
 		}
 		return affiliations;
 	}
+    
+    public static List<Wish_Child_Form__c> createWishForm(Integer num) {
+        List<Wish_Child_Form__c> wishForms = new List<Wish_Child_Form__c>();
+        for(Integer i = 0; i < num; i++) {
+            Wish_Child_Form__c wishForm = new Wish_Child_Form__c();
+            wishForms.add(wishForm);
+        }
+        return wishForms;
+    }
 
 	public static Lead createQualifiedLead(Id accountId, Id icdCodeId){
 		Lead lead = new Lead();
