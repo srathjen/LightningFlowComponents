@@ -315,7 +315,6 @@ public class WishBudgetFormNew_AC {
         for (String tcode : TransCodesWrap.keySet()) {
             options.add(new SelectOption(tcode, tcode));
         }
-
         return options;
     }
 

@@ -639,8 +639,8 @@ public class ContactTrigger_AT_Test {
 		ConrelationshipIdMap.put(childCon.Id, childCon);
 		update updateCon;
 		update childCon;
-        contactList.add(updateCon);
-        ContactService.updateFamilyContactDetails(wishChildIdSet, contactList);
+    contactList.add(updateCon);
+    ContactService.updateFamilyContactDetails(wishChildIdSet, contactList);
 		System.assertEquals(updateCon.IsContactInfoUpdated__c, True);
 	}
 
