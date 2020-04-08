@@ -2,7 +2,7 @@
  * Utility methods, standardizing and providing reuse
  *
  * @author Gustavo Mayer, Traction on Demand
-@createdDate 7/15/2019
+ * @createdDate 7/15/2019
  */
 public class Utils {
 
