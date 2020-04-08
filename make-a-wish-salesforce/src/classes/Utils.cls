@@ -41,7 +41,6 @@ public class Utils {
      *
      * @param sObjectApiName
      * @param fieldApiName
-     *
      * @return List of Picklist Options
      */
     public static List<String> getPicklistLabels(String sObjectApiName, String fieldApiName) {
