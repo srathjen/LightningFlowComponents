@@ -87,47 +87,6 @@ public class BackGroundCheck_AT_Test {
 
 	}
 
-	/*This method is used to create background check record to Active*/
-	/*@IsTest
-	public static void updateBackgroundChecktoActive() {
-		Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
-		insert volunteerAccount;
-
-		Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(volunteerAccount.Id);
-		insert volunteerContact;
-
-		Background_check__c backgroundcheck = OrientationandTrainingUtil.createBackgroundCheckActiveRec(volunteerContact.Id);
-		Background_check__c backgroundcheckfalse = OrientationandTrainingUtil.createBackgroundCheckFasleRec(volunteerContact.Id);
-		insert new List<Background_check__c>{
-				backgroundcheck, backgroundcheckfalse
-		};
-		backgroundcheckfalse.Current__c = true;
-		backgroundcheckfalse.Date_Completed__c = System.today() + 9;
-		Database.SaveResult result = Database.update(backgroundcheckfalse, false);
-		System.assertEquals('Active Background Check Already Exist',result.getErrors()[0].getMessage());
-	}*/
-
-	/*This method is used to create background check exisiting background record is Active or not*/
-	/*@IsTest
-	public static void CheckExisitingRecordtoActive() {
-		Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
-		insert volunteerAccount;
-
-		Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(volunteerAccount.Id);
-		insert volunteerContact;
-
-		Background_check__c backgroundcheck = OrientationandTrainingUtil.createBackgroundCheckActiveRec(volunteerContact.Id);
-		Background_check__c backgroundcheckActive = OrientationandTrainingUtil.createBackgroundCheckActiveRec(volunteerContact.Id);
-		Background_check__c backgroundcheckfalse = OrientationandTrainingUtil.createBackgroundCheckFasleRec(volunteerContact.Id);
-		insert new List<Background_check__c>{
-				backgroundcheck, backgroundcheckActive, backgroundcheckfalse
-		};
-		backgroundcheckfalse.Current__c = true;
-		backgroundcheckfalse.Date_Completed__c = System.today() + 9;
-		Database.SaveResult result = Database.update(backgroundcheckfalse, false);
-		System.assertEquals('Active Background Check Already Exist',result.getErrors()[0].getMessage());
-	}*/
-
 	@IsTest
 	private static void createBackgroundCheckNationalStaff() {
 		User currUser = [
