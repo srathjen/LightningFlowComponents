@@ -16,7 +16,7 @@ public with sharing class WishBudgetFormNew_AC_Test {
 		Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
 		Contact wishFamily = OrientationandTrainingUtil.CreateWishFamilyForRelationship();
 		insert new List<Contact>{
-			wishChild, wishFamily
+				wishChild, wishFamily
 		};
 
 		Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
@@ -114,7 +114,7 @@ This methos is used to cover the unit test and incease the code coverage for add
 		insert newExpenseTypeTem;
 
 		wishBudget.TransCodesWrap.put('Airfare', new List<Wish_Expense_Transaction_Code__c>{
-			currtransactionCode
+				currtransactionCode
 		});
 		wishBudget.newExpenseType = wishExpenseType.Id;
 		wishBudget.addExpenseType();
@@ -167,14 +167,14 @@ This methos is used to cover the unit test and incease the code coverage for add
 		insert currtransactionCode;
 
 		wishBudget.TransCodesWrap.put('Airfare', new List<Wish_Expense_Transaction_Code__c>{
-			currtransactionCode
+				currtransactionCode
 		});
 		Wish_Expense__c expenseData = new Wish_Expense__c();
 		expenseData.Wish_Expense_Transaction_Code__c = currtransactionCode.Id;
 		expenseData.Budget_Cash__c = 10;
 		expenseData.Budget_In_Kind__c = 20;
 		wishBudget.wishExpensewrap.put('Airfare', new List<Wish_Expense__c>{
-			expenseData
+				expenseData
 		});
 		wishBudget.expenseType = 'Airfare';
 		wishBudget.addExpense();
@@ -183,7 +183,7 @@ This methos is used to cover the unit test and incease the code coverage for add
 		wishBudget.TransCodesWrap.put(wishBudget.expenseType, null);
 		wishBudget.addExpense();
 		wishBudget.TransCodesWrap.put('Airfare', new List<Wish_Expense_Transaction_Code__c>{
-			currtransactionCode
+				currtransactionCode
 		});
 		wishBudget.newExpenseType = 'Airfare';
 		wishBudget.addExpenseType();
@@ -222,14 +222,14 @@ This methos is used to cover the unit test and incease the code coverage for sub
 		insert currtransactionCode;
 
 		wishBudget.TransCodesWrap.put('Airfare', new List<Wish_Expense_Transaction_Code__c>{
-			currtransactionCode
+				currtransactionCode
 		});
 		Wish_Expense__c expenseData = new Wish_Expense__c();
 		expenseData.Wish_Expense_Transaction_Code__c = currtransactionCode.Id;
 		expenseData.Budget_Cash__c = 10;
 		expenseData.Budget_In_Kind__c = 20;
 		wishBudget.wishExpensewrap.put('Airfare', new List<Wish_Expense__c>{
-			expenseData
+				expenseData
 		});
 		wishBudget.expenseType = 'Airfare';
 //User userInfo=OrientationandTrainingUtil.createrSystemAdminUser();
@@ -297,7 +297,7 @@ This methos is used to cover the unit test and incease the code coverage for loa
 		insert currtransactionCode;
 
 		wishBudget.TransCodesWrap.put('Airfare', new List<Wish_Expense_Transaction_Code__c>{
-			currtransactionCode
+				currtransactionCode
 		});
 		wishBudget.loadTemplates();
 		Test.stopTest();
@@ -333,14 +333,14 @@ This methos is used to cover the unit test and incease the code coverage for sav
 		insert currtransactionCode;
 
 		wishBudget.TransCodesWrap.put('Airfare', new List<Wish_Expense_Transaction_Code__c>{
-			currtransactionCode
+				currtransactionCode
 		});
 		Wish_Expense__c expenseData = new Wish_Expense__c();
 		expenseData.Wish_Expense_Transaction_Code__c = currtransactionCode.id;
 		expenseData.Budget_Cash__c = expenseData.Projected_Cash__c = 10;
 		expenseData.Budget_In_Kind__c = expenseData.Projected_In_Kind__c = 20;
 		wishBudget.wishExpensewrap.put('Airfare', new List<Wish_Expense__c>{
-			expenseData
+				expenseData
 		});
 		wishBudget.expenseType = 'Airfare';
 		wishBudget.saveExpenses();
@@ -369,7 +369,7 @@ This methos is used to cover the unit test and incease the code coverage for rem
 		req.setObjectId(budgetList[0].Id);
 		req.setSkipEntryCriteria(true);
 		req.setNextApproverIds(new Id[]{
-			UserInfo.getUserId()
+				UserInfo.getUserId()
 		});
 		Approval.ProcessResult result = Approval.process(req);
 		Approval.UnlockResult urList = Approval.Unlock(budgetList[0].Id, false);
@@ -389,17 +389,17 @@ This methos is used to cover the unit test and incease the code coverage for rem
 		Wish_Expense_Transaction_Code__c currtransactionCode = OrientationandTrainingUtil.CreateWishExpenseTransactionCodeRecord(wishExpenseType.Id);
 		insert currtransactionCode;
 		wishBudget.TransCodesWrap.put('Airfare', new List<Wish_Expense_Transaction_Code__c>{
-			currtransactionCode
+				currtransactionCode
 		});
 		Wish_Expense__c expenseData = new Wish_Expense__c();
 		expenseData.Wish_Expense_Transaction_Code__c = currtransactionCode.Id;
 		expenseData.Budget_Cash__c = expenseData.Budget_In_Kind__c
-			= expenseData.Projected_Cash__c = expenseData.Projected_In_Kind__c
-				= expenseData.Actual_Cash__c = expenseData.Actual_In_Kind__c
-					= expenseData.FE_Posted_Cash__c = expenseData.FE_Posted_In_Kind__c
-						= null;
+				= expenseData.Projected_Cash__c = expenseData.Projected_In_Kind__c
+						= expenseData.Actual_Cash__c = expenseData.Actual_In_Kind__c
+								= expenseData.FE_Posted_Cash__c = expenseData.FE_Posted_In_Kind__c
+										= null;
 		wishBudget.wishExpensewrap.put('Airfare', new List<Wish_Expense__c>{
-			expenseData
+				expenseData
 		});
 		wishBudget.expenseList = wishBudget.wishExpensewrap.get('Airfare');
 		wishBudget.totalSummary();
