@@ -13,7 +13,7 @@ public class TestDataFactory {
                         SELECT Id
                         FROM User
                         WHERE Profile.Name = 'System Administrator' AND UserRole.Name != NULL AND UserRole.Name != 'CustomerPortal'
-                        AND IsActive = TRUE AND Id != :UserInfo.getUserId() 
+                        AND IsActive = TRUE AND Id != :UserInfo.getUserId()
                         LIMIT 1
                 ];
             }
