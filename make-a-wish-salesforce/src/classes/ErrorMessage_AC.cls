@@ -1,15 +1,16 @@
-/***************************************************************************************************
-Author      : MST Solutions
-CreatedBy   : Kanagaraj
-Date        : 02/22/2018
-Description : ErrorMessage_AC is invoked when an exception is occured in apex trigger and visualforce page.
-*****************************************************************************************************/
 public class ErrorMessage_AC {
-    //This method is used to create a record in ErrorMessage__e object when an exception is occured Apex trigger.
-    public static void createDebugRec(string className, string devMesg, string msg, string methodName, string recId, string stackTrace, string type) {
-
-        List<ErrorMessage__e> errorMessageList = new List<ErrorMessage__e>();
-
+    /**
+     * This method is used to create a record in ErrorMessage__e object when an exception occurs in Apex
+     *
+     * @param className
+     * @param devMesg
+     * @param msg
+     * @param methodName
+     * @param recId
+     * @param stackTrace
+     * @param type
+     */
+    public static void createDebugRec(String className, String devMesg, String msg, String methodName, String recId, String stackTrace, String type) {
         ErrorMessage__e newsEvent = new ErrorMessage__e();
         newsEvent.Apex_Class__c = className;
         newsEvent.Developer_Message__c = devMesg;
@@ -18,16 +19,13 @@ public class ErrorMessage_AC {
         newsEvent.Record_Id__c = recId;
         newsEvent.Stack_Trace__c = stackTrace;
         newsEvent.Type__c = type;
-        errorMessageList.add(newsEvent);
-        List<Database.SaveResult> results = EventBus.publish(errorMessageList);
+        Database.SaveResult result = EventBus.publish(newsEvent);
 
-        for (Database.SaveResult sr : results) {
-            if (sr.isSuccess()) {
-                System.debug('Successfully published event.');
-            } else {
-                for (Database.Error err : sr.getErrors()) {
-                    System.debug('Error returned: ' + err.getStatusCode() + ' - ' + err.getMessage());
-                }
+        if (result.isSuccess()) {
+            System.debug('Successfully published event.');
+        } else {
+            for (Database.Error err : result.getErrors()) {
+                System.debug('Error returned: ' + err.getStatusCode() + ' - ' + err.getMessage());
             }
         }
     }

@@ -8,8 +8,9 @@ Modification Log
 **************************************************************************/
 @IsTest
 public class Affiliation_AT_Test {
-	//Used to verify the status of the Affiliation is set to prospective when it gets created.
-	static testMethod void updateContact() {
+
+	@IsTest//Used to verify the status of the Affiliation is set to prospective when it gets created.
+	static void updateContact() {
 		Test.startTest();
 		Id volunteerRecordTypeId = Constant_AC.BOARD_MEMBER_RT_ID;
 		Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
@@ -20,30 +21,30 @@ public class Affiliation_AT_Test {
 		insert volunteerContact;
 
 		System.assertEquals(volunteerContact.RecordTypeId, volunteerRecordTypeId, 'Recordtype doesnot match');
-		Map<id, npe5__Affiliation__c> contactMap = new Map<id, npe5__Affiliation__c>();
+		Map<Id, npe5__Affiliation__c> contactMap = new Map<Id, npe5__Affiliation__c>();
 		Set<Id> affiliationIds = new Set<Id>();
 		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
 		neworgAffiliation.npe5__Contact__c = volunteerContact.Id;
 		neworgAffiliation.npe5__Organization__c = volunteerAccount.Id;
 		neworgAffiliation.npe5__Primary__c = true;
 		neworgAffiliation.Constituent_Code__c = Constant_AC.VOLUNTEER_TASK_RT_LABEL;
-		neworgAffiliation.npe5__Status__c = 'Active';
+		neworgAffiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
 		insert neworgAffiliation;
 
 		contactMap.put(neworgAffiliation.npe5__Contact__c, neworgAffiliation);
 		affiliationIds.add(neworgAffiliation.npe5__Organization__c);
-		//AffiliationTriggerHandler_AC.updateContact(contactMap,affiliationIds);
-		System.assertEquals('Active', neworgAffiliation.npe5__Status__c, 'Incorrect Affiliation Status');
+		System.assertEquals(Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE, neworgAffiliation.npe5__Status__c, 'Incorrect Affiliation Status');
 		neworgAffiliation.Id = neworgAffiliation.Id;
 		neworgAffiliation.npe5__Status__c = 'Pending';
-		neworgAffiliation.Constituent_code__c = Constant_AC.VOLUNTEER_TASK_RT_LABEL;
+		neworgAffiliation.Constituent_Code__c = Constant_AC.VOLUNTEER_TASK_RT_LABEL;
 		update neworgAffiliation;
 		System.assertEquals('Pending', neworgAffiliation.npe5__Status__c, 'Incorrect Affiliation Status');
 		Test.stopTest();
 	}
 
 	//Used to create volunteer account, contact and affilation with status active for volunteer user.
-	static testmethod void affiliationUpdateWithActive() {
+	@IsTest
+	static void affiliationUpdateWithActive() {
 		Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert volunteerAccount;
 
@@ -56,11 +57,11 @@ public class Affiliation_AT_Test {
 		}
 
 		Background_check__c bgRecord = OrientationandTrainingUtil.createBackgroundCheckActiveRec(volunteerContact.Id);
-		bgRecord.Volunteer_is_Inactive__c = True;
+		bgRecord.Volunteer_is_Inactive__c = true;
 		insert bgRecord;
 
 		Conflict_Of_Interest__c coiRecord = OrientationandTrainingUtil.createCOI(volunteerContact.Id);
-		coiRecord.Volunteer_is_Inactive__c = True;
+		coiRecord.Volunteer_is_Inactive__c = true;
 		insert coiRecord;
 
 		Group alabamaGroup = new Group();
@@ -75,8 +76,8 @@ public class Affiliation_AT_Test {
 				FROM npe5__Affiliation__c
 				WHERE npe5__Contact__c = :volunteerContact.Id
 		];
-		volunteerAffiliationList[0].npe5__Status__c = 'Active';
-		volunteerAffiliationList[1].npe5__Status__c = 'Inactive';
+		volunteerAffiliationList[0].npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+		volunteerAffiliationList[1].npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_INACTIVE;
 		update volunteerAffiliationList;
 
 		List<npe5__Affiliation__c> updatedAfflList = [
@@ -85,77 +86,18 @@ public class Affiliation_AT_Test {
 				WHERE ID IN :volunteerAffiliationList
 		];
 
-		System.assertEquals('Inactive', volunteerAffiliationList[1].npe5__Status__c, 'Status is not Inactive');
+		System.assertEquals(Constant_AC.ORG_AFFILIATION_STATUS_INACTIVE, volunteerAffiliationList[1].npe5__Status__c, 'Status is not Inactive');
 
-		volunteerAffiliationList[0].npe5__Status__c = 'Inactive';
-		volunteerAffiliationList[1].npe5__Status__c = 'Active';
+		volunteerAffiliationList[0].npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_INACTIVE;
+		volunteerAffiliationList[1].npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
 		update volunteerAffiliationList;
 
-		System.assertEquals('Active', volunteerAffiliationList[1].npe5__Status__c, 'Status is Active');
+		System.assertEquals(Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE, volunteerAffiliationList[1].npe5__Status__c, 'Status is Active');
 	}
 
-	//Used to create volunteer account, contact and affilation with status active for volunteer user and update the volunteer status as inactive.
-	/*static testmethod void affiliationUpdateWithStatus(){
-
-		try{
-			Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
-			Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(volunteerAccount.id);
-
-			User activeVolunteerUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunteerContact.Id);
-			User prospectiveVolunteerUser = OrientationandTrainingUtil.createActVolunteerUser(volunteerContact.Id);
-
-			Background_check__c bgRecord = OrientationandTrainingUtil.createBackgroundCheckActiveRec(volunteerContact.Id);
-			bgRecord.Volunteer_is_Inactive__c = True;
-			update bgRecord;
-
-			Conflict_Of_Interest__c coiRecord = OrientationandTrainingUtil.createCOI(volunteerContact.Id);
-			coiRecord.Volunteer_is_Inactive__c = True;
-			update coiRecord;
-
-			Group alabamaGroup = new Group();
-			alabamaGroup.Name = 'Make-A-Wish Alabama';
-			alabamaGroup.DeveloperName = 'ABC';
-			insert alabamaGroup;
-
-			List<npe5__Affiliation__c> volunteerAffiliationList =  [SELECT Id, npe5__Status__c FROM npe5__Affiliation__c WHERE npe5__Contact__c =: volunteerContact.Id ];
-			volunteerAffiliationList[0].npe5__Status__c = 'Active';
-			volunteerAffiliationList[1].npe5__Status__c = 'Inactive';
-			update volunteerAffiliationList;
-		}catch(Exception ex){
-		}
-
-
-	}*/
-
-	//Assigning volunteer contact to collaboration group when user become active.
-	/*static testmethod void affiliationCreationWithStatusNull(){
-
-		Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
-		Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(volunteerAccount.id);
-		User prospectiveVolunteerUser = OrientationandTrainingUtil.createActVolunteerUser(volunteerContact.Id);
-
-		Background_check__c bgRecord = OrientationandTrainingUtil.createBackgroundCheckActiveRec(volunteerContact.Id);
-		bgRecord.Volunteer_is_Inactive__c = True;
-		update bgRecord;
-
-		Conflict_Of_Interest__c coiRecord = OrientationandTrainingUtil.createCOI(volunteerContact.Id);
-		coiRecord.Volunteer_is_Inactive__c = True;
-		update coiRecord;
-
-		CollaborationGroup collabGroup = OrientationandTrainingUtil.createCollaborationGroup(volunteerAccount.Name);
-		//CollaborationGroupMember groupMem = OrientationandTrainingUtil.createCollabrationGroupMember(collabGroup.Id, prospectiveVolunteer.Id);
-		npe5__Affiliation__c affiliationId = OrientationandTrainingUtil.CreateAffiliationwithNullStatus(volunteerAccount.Id,volunteerContact.Id);
-
-		npe5__Affiliation__c volunteerAffiliation =  [SELECT Id, npe5__Status__c FROM npe5__Affiliation__c WHERE Id =:affiliationId.Id LIMIT 1];
-		volunteerAffiliation.npe5__Status__c = 'Active';
-		update volunteerAffiliation;
-
-		System.assertEquals('Active', volunteerAffiliation.npe5__Status__c,'Status is not Active');
-
-	}*/
-
 	//Remove volunteer from public group when affilaition deleted.
-	static testmethod void affiliationDelete() {
+	@IsTest
+	static void affiliationDelete() {
 		Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert volunteerAccount;
 
@@ -180,11 +122,12 @@ public class Affiliation_AT_Test {
 				FROM npe5__Affiliation__c
 				LIMIT 1
 		];
-		volunteerAffiliation.npe5__Status__c = 'InActive';
+		volunteerAffiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_INACTIVE;
 		delete volunteerAffiliation;
 	}
 
-	static testMethod void createTaskforVolunteerManager() {
+	@IsTest
+	static void createTaskforVolunteerManager() {
 		Account volunteerAcc = OrientationandTrainingUtil.createVolunteerAccountwithVolunteerManager();
 		insert volunteerAcc;
 
@@ -197,17 +140,18 @@ public class Affiliation_AT_Test {
 
 		npe5__Affiliation__c affiliationRec = OrientationandTrainingUtil.CreateAffiliationwithAccount(volunteerCon.Id, volunteerAcc.Id);
 
-		affiliationRec.npe5__Status__c = 'Inactive';
+		affiliationRec.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_INACTIVE;
 		insert affiliationRec;
 
 		System.assertEquals(0, [
 				SELECT Id, Subject, WhoId
 				FROM Task
-				WHERE whoId = :volunteerCon.Id and Subject = 'Inactive Volunteer - review volunteer opportunities'
+				WHERE WhoId = :volunteerCon.Id AND Subject = 'Inactive Volunteer - review volunteer opportunities'
 		].size());
 	}
 
-	static testMethod void addUserToChaptterGroup() {
+	@IsTest
+	static void addUserToChapterGroup() {
 		Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert volunteerAccount;
 
@@ -230,19 +174,19 @@ public class Affiliation_AT_Test {
 		List<npe5__Affiliation__c> updatedAfflList = new List<npe5__Affiliation__c>();
 
 		for (npe5__Affiliation__c newAffiliate : affiliatedList) {
-			newAffiliate.npe5__Status__c = 'Inactive';
+			newAffiliate.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_INACTIVE;
 			updatedAfflList.add(newAffiliate);
 		}
 		if (updatedAfflList.size() > 0) {
 			update updatedAfflList;
 		}
-		npe5__Affiliation__c newaffiliated = [
+		npe5__Affiliation__c newAffiliation = [
 				SELECT Id, npe5__Status__c, npe5__Organization__r.Name
 				FROM npe5__Affiliation__c
 				WHERE npe5__Contact__c = :volunteerContact.Id
 				LIMIT 1
 		];
-		newaffiliated.npe5__Status__c = 'Active';
-		update newaffiliated;
+		newAffiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+		update newAffiliation;
 	}
 }

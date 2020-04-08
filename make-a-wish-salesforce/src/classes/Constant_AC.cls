@@ -59,6 +59,7 @@ public class Constant_AC {
 	public final static Id WISH_FORM_DETERMINATION_ID = Schema.SObjectType.Wish_Child_Form__c.getRecordTypeInfosByDeveloperName().get('Wish_Form_Determination_Case').getRecordTypeId();
 	public final static Id WISH_FORM_CHILD_EMERGENCY_ID = Schema.SObjectType.Wish_Child_Form__c.getRecordTypeInfosByDeveloperName().get('Wish_Form_Emergency_Contact').getRecordTypeId();
 	public final static Id WISH_FORM_CHILD_DRIVER_ID = Schema.SObjectType.Wish_Child_Form__c.getRecordTypeInfosByDeveloperName().get('Wish_Form_Driver_Information').getRecordTypeId();
+	public final static String WISH_FORM_FAMILY_LABEL = Schema.SObjectType.Wish_Child_Form__c.getRecordTypeInfosByDeveloperName().get('Wish_Form_Family').getName();
 	public final static Id WISH_CLEARANCE_ATTACHMENT_ID = Schema.SObjectType.Minor_Participant__c.getRecordTypeInfosByDeveloperName().get('Wish_Clarence_Attachment').getRecordTypeId();
 	public final static Id FORM_TRACKER_ATTACHMENT_ID = Schema.SObjectType.Minor_Participant__c.getRecordTypeInfosByDeveloperName().get('Form_Tracker_Attachment').getRecordTypeId();
 	public final static Id COMBO_RECORD_ID = Schema.SObjectType.Minor_Participant__c.getRecordTypeInfosByDeveloperName().get('Combo_Form_Attachment').getRecordTypeId();
@@ -191,11 +192,12 @@ public class Constant_AC {
 	public static final String CASE_WISH_TYPE_TRAVEL_HAWAII = 'Travel-Hawaii';
 	public static final String CASE_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
 	public static final String CASE_RECORD_TYPE_DIAGNOSIS_VERIFICATION_REVIEW = 'Diagnosis Verification Review';
-    public static final String CASE_ORIGIN_WEB = 'Web';
-    public static final String CASE_ORIGIN_EMAIL = 'Email';
-    public static final String CASE_RUSH_TIME_FRAME = 'Select timeframe';
-    public static final String CASE_UWI_SOURCE_LEAD = 'Lead';
-    public static final String CASE_SUBJECT_ELIGIBILITY_REVIEW = 'Eligibility Review';
+	public static final String CASE_RECORD_TYPE_WISH = 'Wish';
+	public static final String CASE_ORIGIN_WEB = 'Web';
+	public static final String CASE_ORIGIN_EMAIL = 'Email';
+	public static final String CASE_RUSH_TIME_FRAME = 'Select timeframe';
+	public static final String CASE_UWI_SOURCE_LEAD = 'Lead';
+	public static final String CASE_SUBJECT_ELIGIBILITY_REVIEW = 'Eligibility Review';
 
 	/**
 	 * Wish Affiliation Constants
