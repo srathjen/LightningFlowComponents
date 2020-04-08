@@ -38,7 +38,6 @@ public class MedicalRelationships_AC {
 			for (npe4__Relationship__c currRec : Database.query(queryString)) {
 				relationships.add(currRec);
 			}
-			
 			if (Test.isRunningTest()) {
 				throw new CommonTriggerException('Test Class execution');
 			}
