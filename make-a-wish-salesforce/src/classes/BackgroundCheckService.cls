@@ -365,6 +365,9 @@ public with sharing class BackgroundCheckService {
      */
     @future
     public static void toggleBackgroundCheckInactiveFlag(Set<Id> inactiveVolunteerIdSet, Boolean isInactiveVolunteer) {
+        if (inactiveVolunteerIdSet == null || inactiveVolunteerIdSet.isEmpty()) {
+            return;
+        }
         try {
             List<Background_check__c> updateBCList = new List<Background_check__c>();
 
@@ -377,9 +380,7 @@ public with sharing class BackgroundCheckService {
                 updateBCList.add(backgroundCheck);
             }
 
-            if (updateBCList.size() > 0) {
-                update updateBCList;
-            }
+            update updateBCList;
 
             if (Test.isRunningTest()) {
                 throw new CommonTriggerException('Test Class execution');
