@@ -102,12 +102,7 @@ public class OrientationandTrainingUtil {
 	}
 
 	public static Account createVolunteerAccount() {
-		User currUser = [
-				SELECT id
-				from User
-				where id = :Userinfo.getUserId()
-				limit 1
-		];
+		User currUser = Utils.currentUser;
 		Account newAccount = new Account();
 		newAccount.Name = 'Make-A-Wish Alabama';
 		newAccount.RecordTypeId = chapterRecordTypeId;
