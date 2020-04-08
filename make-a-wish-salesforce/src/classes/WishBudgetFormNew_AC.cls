@@ -1,5 +1,6 @@
 /**
- * @description Wish Budget Form Controller, exposes methods for the front end components(cloned from WishBudgetForm_AC with minor refactoring for new data model)
+ * Wish Budget Form Controller, exposes methods for the front end components(cloned from WishBudgetForm_AC with minor refactoring for new data model)
+ *
  * @author Mitali Nahar, Traction on Demand
  * @createdDate 8/21/2019
  */
@@ -76,9 +77,9 @@ public class WishBudgetFormNew_AC {
          * reference Id instead of ParentId
          */
         getPlanningAnticipationCase = [
-            SELECT Id, Wish_Case__c,Budget_Submitted_Date__c, Budget_Approval_Status__c
-            FROM Wish_Budget__c
-            WHERE Id = :budgetId
+                SELECT Id, Wish_Case__c,Budget_Submitted_Date__c, Budget_Approval_Status__c
+                FROM Wish_Budget__c
+                WHERE Id = :budgetId
         ];
         budget = getPlanningAnticipationCase[0];
         recordId = budget.Id;
@@ -99,19 +100,19 @@ public class WishBudgetFormNew_AC {
         // Check if user has a modify all permission
         if (!isApprover) {
             isApprover = [
-                SELECT AssigneeId, Assignee.Name
-                FROM PermissionSetAssignment
-                WHERE PermissionSet.PermissionsModifyAllData = TRUE AND AssigneeId = :UserInfo.getUserId()
+                    SELECT AssigneeId, Assignee.Name
+                    FROM PermissionSetAssignment
+                    WHERE PermissionSet.PermissionsModifyAllData = TRUE AND AssigneeId = :UserInfo.getUserId()
             ].size() > 0;
         }
 
         // To check whether budget approval form is approved
         List<Case> caseList = [
-            SELECT Id, Contact.FirstName, Contact.LastName, Description, Contact.Middle_Name__c,
-                Start_Date__c, isApprove__c, ChapterName__r.Name, Wish_Type__c, Budget_Notes__c
-            FROM Case
-            WHERE Id = :caseId
-            LIMIT 50000
+                SELECT Id, Contact.FirstName, Contact.LastName, Description, Contact.Middle_Name__c,
+                        Start_Date__c, isApprove__c, ChapterName__r.Name, Wish_Type__c, Budget_Notes__c
+                FROM Case
+                WHERE Id = :caseId
+                LIMIT 50000
         ];
         if (caseList.size() > 0) {
             wishChapterName = caseList.get(0).ChapterName__r.Name;
@@ -120,12 +121,12 @@ public class WishBudgetFormNew_AC {
             wishType = caseList.get(0).Wish_Type__c;
             AntWishDate = caseList.get(0).Start_Date__c;
             childName = caseList.get(0).Contact.FirstName + ' ' +
-                (caseList.get(0).Contact.Middle_Name__c != null ? caseList.get(0).Contact.Middle_Name__c : '') + ' '
-                + caseList.get(0).Contact.LastName;
+                    (caseList.get(0).Contact.Middle_Name__c != null ? caseList.get(0).Contact.Middle_Name__c : '') + ' '
+                    + caseList.get(0).Contact.LastName;
             List<Account> accountList = [
-                SELECT Id,Department_Division__c
-                FROM Account
-                WHERE Name = :wishChapterName
+                    SELECT Id,Department_Division__c
+                    FROM Account
+                    WHERE Name = :wishChapterName
             ];
             DeptDiv = accountList.get(0).Department_Division__c;
         }
@@ -137,10 +138,10 @@ public class WishBudgetFormNew_AC {
          */
         if (caseList[0].ContactId != null) {
             for (npe4__Relationship__c currrentRlationShip : [
-                SELECT Id,npe4__Contact__c,npe4__RelatedContact__c,Wish_Participant__c
-                FROM npe4__Relationship__c
-                WHERE npe4__Contact__c = :caseList[0].ContactId
-                AND Wish_Participant__c = TRUE
+                    SELECT Id,npe4__Contact__c,npe4__RelatedContact__c,Wish_Participant__c
+                    FROM npe4__Relationship__c
+                    WHERE npe4__Contact__c = :caseList[0].ContactId
+                    AND Wish_Participant__c = TRUE
             ]) {
 
                 participentSet.add(currrentRlationShip.npe4__RelatedContact__c);
@@ -149,12 +150,12 @@ public class WishBudgetFormNew_AC {
                 NoOfWishParts = participentSet.size();
             }
             List<Wish_Child_Form__c> wishChild = [
-                SELECT Id,Hidden_Same_as_Family__c,Migrated__c,RecordTypeId
-                FROM Wish_Child_Form__c
-                WHERE Case__c = :caseList[0].Id
-                AND RecordTypeId = :wishChildRecordTypeId
-                AND Migrated__c = :FALSE
-                LIMIT 1
+                    SELECT Id,Hidden_Same_as_Family__c,Migrated__c,RecordTypeId
+                    FROM Wish_Child_Form__c
+                    WHERE Case__c = :caseList[0].Id
+                    AND RecordTypeId = :wishChildRecordTypeId
+                    AND Migrated__c = :FALSE
+                    LIMIT 1
             ];
             if ((wishChild.size() > 0 && wishChild[0].Hidden_Same_as_Family__c == true) || (wishChild.size() == 0)) {
                 NoOfWishParts += 1;
@@ -211,21 +212,21 @@ public class WishBudgetFormNew_AC {
         }
 
         for (Wish_Expense_Type__c types : [
-            SELECT Id,Name
-            FROM Wish_Expense_Type__c
+                SELECT Id,Name
+                FROM Wish_Expense_Type__c
         ]) {
             wishExpenseTypeIds.put(types.Name, types.Id);
         }
 
         for (Wish_Expense_Transaction_Code__c currtransactionCode : [
-            SELECT Id, Name,Wish_Expense_Type__r.Name
-            FROM Wish_Expense_Transaction_Code__c
-            WHERE Is_Active__c = TRUE
-            ORDER BY Name
+                SELECT Id, Name,Wish_Expense_Type__r.Name
+                FROM Wish_Expense_Transaction_Code__c
+                WHERE Is_Active__c = TRUE
+                ORDER BY Name
         ]) {
             if (!TransCodesWrap.containsKey(currtransactionCode.Wish_Expense_Type__r.Name)) {
                 TransCodesWrap.put(currtransactionCode.Wish_Expense_Type__r.Name, new List<Wish_Expense_Transaction_Code__c >{
-                    currtransactionCode
+                        currtransactionCode
                 });
             } else {
                 TransCodesWrap.get(currtransactionCode.Wish_Expense_Type__r.Name).add(currtransactionCode);
@@ -236,7 +237,7 @@ public class WishBudgetFormNew_AC {
                 obj = new SelectOption(currtransactionCode.Id, currtransactionCode.Name);
 
                 TransCodeOptionsMap.put(currtransactionCode.Wish_Expense_Type__r.Name, new List<SelectOption>{
-                    obj
+                        obj
                 });
             } else {
                 obj = new SelectOption(currtransactionCode.Id, currtransactionCode.Name);
@@ -245,27 +246,27 @@ public class WishBudgetFormNew_AC {
         }
 
         wishExpenseList = [
-            SELECT Id, Wish_Expense_Transaction_Code__r.Wish_Expense_Type__r.Name,
-                Wish_Expense_Transaction_Code__c,
-                Wish_Expense_Transaction_Code__r.Name,
-                Post_Date__c,
-                Transaction__c,
-                Account_Number__c,
-                Account_Description__c,
-                Department_Division__c,
-                Journal_Reference__c,
-                Budget_Cash__c,
-                Budget_In_Kind__c,
-                Projected_Cash__c,
-                Projected_In_Kind__c,
-                Actual_Cash__c,RecordType.Name,
-                Actual_In_Kind__c,Wish_Expense_Approval_Status__c,Wish_Budget__r.Budget_Approval_Status__c,Projected_Approval_Status__c,
-                FE_Posted_Cash__c,
-                FE_Posted_In_Kind__c,
-                Case__c, Created_After_Last_Approval__c
-            FROM Wish_Expense__c
-            WHERE Wish_Budget__c = :budgetId
-            ORDER BY Wish_Expense_Transaction_Code__r.Wish_Expense_Type__r.Name, RecordType.Name, CreatedDate
+                SELECT Id, Wish_Expense_Transaction_Code__r.Wish_Expense_Type__r.Name,
+                        Wish_Expense_Transaction_Code__c,
+                        Wish_Expense_Transaction_Code__r.Name,
+                        Post_Date__c,
+                        Transaction__c,
+                        Account_Number__c,
+                        Account_Description__c,
+                        Department_Division__c,
+                        Journal_Reference__c,
+                        Budget_Cash__c,
+                        Budget_In_Kind__c,
+                        Projected_Cash__c,
+                        Projected_In_Kind__c,
+                        Actual_Cash__c,RecordType.Name,
+                        Actual_In_Kind__c,Wish_Expense_Approval_Status__c,Wish_Budget__r.Budget_Approval_Status__c,Projected_Approval_Status__c,
+                        FE_Posted_Cash__c,
+                        FE_Posted_In_Kind__c,
+                        Case__c, Created_After_Last_Approval__c
+                FROM Wish_Expense__c
+                WHERE Wish_Budget__c = :budgetId
+                ORDER BY Wish_Expense_Transaction_Code__r.Wish_Expense_Type__r.Name, RecordType.Name, CreatedDate
         ];
 
         Boolean matchedExpenseType = false;
@@ -274,9 +275,9 @@ public class WishBudgetFormNew_AC {
                 wishExpenseIdSet.add(expenseType.Wish_Expense_Transaction_Code__r.Wish_Expense_Type__c);
             }
             for (Wish_Expense_Type_Tempate__c expenseType : [
-                SELECT Id,Wish_Expense_Type__r.Name,Wish_Type__c
-                FROM Wish_Expense_Type_Tempate__c
-                WHERE Wish_Expense_Type__c IN :wishExpenseIdSet
+                    SELECT Id,Wish_Expense_Type__r.Name,Wish_Type__c
+                    FROM Wish_Expense_Type_Tempate__c
+                    WHERE Wish_Expense_Type__c IN :wishExpenseIdSet
             ]) {
                 if (expenseType.Wish_Type__c == wishType) {
                     matchedExpenseType = true;
@@ -288,7 +289,7 @@ public class WishBudgetFormNew_AC {
             wishExpenseTypes.add(expense.Wish_Expense_Transaction_Code__r.Wish_Expense_Type__r.Name);
             if (!wishExpensewrap.containsKey(expense.Wish_Expense_Transaction_Code__r.Wish_Expense_Type__r.Name)) {
                 wishExpensewrap.put(expense.Wish_Expense_Transaction_Code__r.Wish_Expense_Type__r.Name, new List<Wish_Expense__c>{
-                    expense
+                        expense
                 });
             } else {
                 wishExpensewrap.get(expense.Wish_Expense_Transaction_Code__r.Wish_Expense_Type__r.Name).add(expense);
@@ -309,7 +310,7 @@ public class WishBudgetFormNew_AC {
     * @author          MST Solutions
     * @createdDate     unknown
     */
-    public List<SelectOption> getWishExpenceTypes() {
+    public List<SelectOption> getWishExpenseTypes() {
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('', '--- None ---'));
         for (String tcode : TransCodesWrap.keySet()) {
@@ -372,10 +373,10 @@ public class WishBudgetFormNew_AC {
         WEtypeExpand = null;
         if (newExpenseType != null) {
             List<Wish_Expense_Type_Tempate__c> wishExpenseTempList = [
-                SELECT Id, Name, Wish_Expense_Type__r.Name
-                FROM Wish_Expense_Type_Tempate__c
-                WHERE Wish_Expense_Type__c = :newExpenseType
-                ORDER BY Wish_Expense_Type__r.Name
+                    SELECT Id, Name, Wish_Expense_Type__r.Name
+                    FROM Wish_Expense_Type_Tempate__c
+                    WHERE Wish_Expense_Type__c = :newExpenseType
+                    ORDER BY Wish_Expense_Type__r.Name
             ];
             if (wishExpenseTempList.size() > 0) {
                 for (Wish_Expense_Type_Tempate__c template : wishExpenseTempList) {
@@ -397,7 +398,7 @@ public class WishBudgetFormNew_AC {
 
                     if (!wishExpensewrap.containsKey(template.Wish_Expense_Type__r.Name)) {
                         wishExpensewrap.put(template.Wish_Expense_Type__r.Name, new List<Wish_Expense__c>{
-                            curExpense
+                                curExpense
                         });
                     } else {
                         wishExpensewrap.get(template.Wish_Expense_Type__r.Name).add(curExpense);
@@ -420,7 +421,7 @@ public class WishBudgetFormNew_AC {
 
                 if (!wishExpensewrap.containsKey(newExpenseType)) {
                     wishExpensewrap.put(newExpenseType, new List<Wish_Expense__c>{
-                        curExpense
+                            curExpense
                     });
                 } else {
                     wishExpensewrap.get(newExpenseType).add(curExpense);
@@ -460,8 +461,8 @@ public class WishBudgetFormNew_AC {
         Set<Id> matchedExpenseIdSet = new Set<Id>();
 
         for (Wish_Expense_Type_Tempate__c expenseType : [
-            SELECT Id,Wish_Expense_Type__r.Name,Wish_Type__c
-            FROM Wish_Expense_Type_Tempate__c
+                SELECT Id,Wish_Expense_Type__r.Name,Wish_Type__c
+                FROM Wish_Expense_Type_Tempate__c
         ]) {
             if (expenseType.Wish_Type__c == wishType) {
                 beforeTemp = true;
@@ -470,27 +471,27 @@ public class WishBudgetFormNew_AC {
         }
 
         wishExpenseList = [
-            SELECT Id, Wish_Expense_Transaction_Code__r.Wish_Expense_Type__r.Name,
-                Wish_Expense_Transaction_Code__c,
-                Wish_Expense_Transaction_Code__r.Name,
-                Post_Date__c,
-                Transaction__c,
-                Account_Number__c,
-                Account_Description__c,
-                Department_Division__c,
-                Journal_Reference__c,
-                Budget_Cash__c,
-                Budget_In_Kind__c,
-                Projected_Cash__c,
-                Projected_In_Kind__c,
-                Actual_Cash__c,RecordType.Name,
-                Actual_In_Kind__c,Wish_Expense_Approval_Status__c,Wish_Budget__r.Budget_Approval_Status__c,Projected_Approval_Status__c,
-                FE_Posted_Cash__c,
-                FE_Posted_In_Kind__c,
-                Case__c
-            FROM Wish_Expense__c
-            WHERE Wish_Budget__c = :budgetId
-            ORDER BY Wish_Expense_Transaction_Code__r.Wish_Expense_Type__r.Name, RecordType.Name, CreatedDate
+                SELECT Id, Wish_Expense_Transaction_Code__r.Wish_Expense_Type__r.Name,
+                        Wish_Expense_Transaction_Code__c,
+                        Wish_Expense_Transaction_Code__r.Name,
+                        Post_Date__c,
+                        Transaction__c,
+                        Account_Number__c,
+                        Account_Description__c,
+                        Department_Division__c,
+                        Journal_Reference__c,
+                        Budget_Cash__c,
+                        Budget_In_Kind__c,
+                        Projected_Cash__c,
+                        Projected_In_Kind__c,
+                        Actual_Cash__c,RecordType.Name,
+                        Actual_In_Kind__c,Wish_Expense_Approval_Status__c,Wish_Budget__r.Budget_Approval_Status__c,Projected_Approval_Status__c,
+                        FE_Posted_Cash__c,
+                        FE_Posted_In_Kind__c,
+                        Case__c
+                FROM Wish_Expense__c
+                WHERE Wish_Budget__c = :budgetId
+                ORDER BY Wish_Expense_Transaction_Code__r.Wish_Expense_Type__r.Name, RecordType.Name, CreatedDate
         ];
 
         if (wishExpenseList.size() > 0) {
@@ -507,9 +508,9 @@ public class WishBudgetFormNew_AC {
 
         if (matchedExpenseType == false) {
             for (Wish_Expense_Type_Tempate__c template : [
-                SELECT Id,Wish_Type__c, Name, Wish_Expense_Type__r.Name
-                FROM Wish_Expense_Type_Tempate__c
-                ORDER BY Wish_Expense_Type__r.Name
+                    SELECT Id,Wish_Type__c, Name, Wish_Expense_Type__r.Name
+                    FROM Wish_Expense_Type_Tempate__c
+                    ORDER BY Wish_Expense_Type__r.Name
             ]) {
                 if (template.Wish_Type__c == wishType) {
                     TempalateisAvailable = true;
@@ -530,7 +531,7 @@ public class WishBudgetFormNew_AC {
 
                     if (!wishExpensewrap.containsKey(template.Wish_Expense_Type__r.Name)) {
                         wishExpensewrap.put(template.Wish_Expense_Type__r.Name, new List<Wish_Expense__c>{
-                            curExpense
+                                curExpense
                         });
                     } else {
                         wishExpensewrap.get(template.Wish_Expense_Type__r.Name).add(curExpense);
@@ -573,7 +574,7 @@ public class WishBudgetFormNew_AC {
 
             if (!wishExpensewrap.containsKey(wishType)) {
                 wishExpensewrap.put(wishType, new List<Wish_Expense__c>{
-                    curExpense
+                        curExpense
                 });
             } else {
                 wishExpensewrap.get(wishType).add(curExpense);
@@ -607,7 +608,7 @@ public class WishBudgetFormNew_AC {
         List<Wish_Expense_Transaction_Code__c> transListW = TransCodesWrap.get(expenseType);
         if (transListW == null) {
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,
-                Label.WishBudgetForm_No_Trans_Code + expenseType);
+                    Label.WishBudgetForm_No_Trans_Code + expenseType);
             ApexPages.addMessage(myMsg);
             return null;
         }
@@ -628,7 +629,7 @@ public class WishBudgetFormNew_AC {
 
         if (!wishExpensewrap.containsKey(expenseType)) {
             wishExpensewrap.put(expenseType, new List<Wish_Expense__c>{
-                curExpense
+                    curExpense
             });
         } else {
             wishExpensewrap.get(expenseType).add(curExpense);
@@ -666,9 +667,9 @@ public class WishBudgetFormNew_AC {
             chapterGroup = wishChapterName.removeStart('Make-A-Wish ');
 
             for (GroupMember getGroupUsers : [
-                SELECT Id, UserOrGroupId
-                FROM GroupMember
-                WHERE Group.Name = :chapterGroup
+                    SELECT Id, UserOrGroupId
+                    FROM GroupMember
+                    WHERE Group.Name = :chapterGroup
             ]) {
                 if (((String) getGroupUsers.UserOrGroupId).startsWith(userType)) {
                     userIdsSet.add(getGroupUsers.UserOrGroupId);
@@ -676,12 +677,12 @@ public class WishBudgetFormNew_AC {
             }
 
             userList = [
-                SELECT Id,Name, Profile.Name, UserRole.Name
-                FROM User
-                WHERE Id IN :userIdsSet
-                AND ContactId = NULL
-                AND IsActive = TRUE
-                LIMIT 50000
+                    SELECT Id,Name, Profile.Name, UserRole.Name
+                    FROM User
+                    WHERE Id IN :userIdsSet
+                    AND ContactId = NULL
+                    AND IsActive = TRUE
+                    LIMIT 50000
             ];
         }
 
@@ -716,17 +717,17 @@ public class WishBudgetFormNew_AC {
 
         List<Wish_Expense__c> recordApprovalStatusUpdateList = new List<Wish_Expense__c>();
         for (Wish_Expense__c updateWishExpenseStatus : [
-            SELECT Id, Case__c, Wish_Budget__r.Budget_Approval_Status__c,Projected_Approval_Status__c,
-                Wish_Expense_Approval_Status__c
-            FROM Wish_Expense__c
-            WHERE Wish_Budget__c = :budgetId
+                SELECT Id, Case__c, Wish_Budget__r.Budget_Approval_Status__c,Projected_Approval_Status__c,
+                        Wish_Expense_Approval_Status__c
+                FROM Wish_Expense__c
+                WHERE Wish_Budget__c = :budgetId
         ]) {
             if (updateWishExpenseStatus.Wish_Budget__r.Budget_Approval_Status__c != Constant_AC.WISH_BUDGET_BUDGET_APPROVAL_STATUS_APPROVED) {
                 updateWishExpenseStatus.Wish_Budget__r.Budget_Approval_Status__c = Constant_AC.WISH_BUDGET_BUDGET_APPROVAL_STATUS_SUBMITTED;
             }
 
             if ((isbudgetApprovalExist == true && updateWishExpenseStatus.Wish_Budget__r.Budget_Approval_Status__c == Constant_AC.WISH_BUDGET_BUDGET_APPROVAL_STATUS_SUBMITTED)
-                || updateWishExpenseStatus.Wish_Budget__r.Budget_Approval_Status__c == Constant_AC.WISH_BUDGET_BUDGET_APPROVAL_STATUS_APPROVED) {
+                    || updateWishExpenseStatus.Wish_Budget__r.Budget_Approval_Status__c == Constant_AC.WISH_BUDGET_BUDGET_APPROVAL_STATUS_APPROVED) {
                 if (updateWishExpenseStatus.Projected_Approval_Status__c != Constant_AC.WISH_EXPENSE_BUDGET_APPROVAL_STATUS_APPROVED) {
                     updateWishExpenseStatus.Projected_Approval_Status__c = Constant_AC.WISH_EXPENSE_BUDGET_APPROVAL_STATUS_SUBMITTED;
                 }
@@ -752,7 +753,7 @@ public class WishBudgetFormNew_AC {
                 req.setProcessDefinitionNameOrId('Wish_Budget_Approval');
                 req.setSkipEntryCriteria(false);
                 req.setNextApproverIds(new Id[]{
-                    approverId
+                        approverId
                 });
 
                 Approval.process(req);
@@ -789,7 +790,7 @@ public class WishBudgetFormNew_AC {
         totalSummary();
 
         PageReference pageRef = new PageReference('/apex/WishBudgetFormNew_VF?CaseId='
-            + caseId + '&BudgetId=' + budgetId);
+                + caseId + '&BudgetId=' + budgetId);
         pageRef.setRedirect(true);
 
         return pageRef;
@@ -805,7 +806,7 @@ public class WishBudgetFormNew_AC {
     */
     public PageReference reloadPage() {
         PageReference pageRef = new PageReference('/apex/WishBudgetFormNew_VF?CaseId='
-            + caseId + '&BudgetId=' + budgetId);
+                + caseId + '&BudgetId=' + budgetId);
         pageRef.setRedirect(true);
 
         return pageRef;
@@ -1144,18 +1145,18 @@ public class WishBudgetFormNew_AC {
     */
     public Map<Id, ProcessInstance> getProcessHistory(Id objectId) {
         return new Map<Id, ProcessInstance>([
-            SELECT Id, (
-                SELECT Id, ProcessNodeId,
-                    StepStatus,Comments,TargetObjectId,ActorId,CreatedById,IsDeleted,IsPending
-                    ,OriginalActorId,ProcessInstanceId,RemindersSent,CreatedDate, Actor.Name,
-                    OriginalActor.Name, ProcessNode.Name
-                FROM StepsAndWorkitems
-                ORDER BY CreatedDate DESC, StepStatus
-            )
-            FROM ProcessInstance
-            WHERE TargetObjectId = :objectId
-            ORDER BY CreatedDate DESC
-            LIMIT 50000
+                SELECT Id, (
+                        SELECT Id, ProcessNodeId,
+                                StepStatus,Comments,TargetObjectId,ActorId,CreatedById,IsDeleted,IsPending
+                                ,OriginalActorId,ProcessInstanceId,RemindersSent,CreatedDate, Actor.Name,
+                                OriginalActor.Name, ProcessNode.Name
+                        FROM StepsAndWorkitems
+                        ORDER BY CreatedDate DESC, StepStatus
+                )
+                FROM ProcessInstance
+                WHERE TargetObjectId = :objectId
+                ORDER BY CreatedDate DESC
+                LIMIT 50000
         ]);
     }
 
