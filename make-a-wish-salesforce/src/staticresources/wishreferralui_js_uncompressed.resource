@@ -16,7 +16,9 @@
 //                
 //                02/12/2019 - Manoj - SIW-487
 //                Referral: Prevent referrers submitting without consulting with their medical team
-//                
+//
+//                04/08/2020 - Manoj - SIW-555
+//                Added custom email validation rule               
 //
 // format phone/date fields
 // target desktop
@@ -1292,6 +1294,10 @@ jQuery.extend(jQuery.validator.messages, {
 $.validator.addMethod("zipcode", function(value, element) {
     return this.optional(element) || /^\d{5}(?:-\d{4})?$/.test(value);
 }, "Oops! Please enter a valid US postal code");
+//SIW : 555 - Added custom email validation rule
+$.validator.addMethod("laxEmail", function(value, element) {
+    return this.optional(element) || /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)
+}, "Oops! You've entered an invalid email address");
 // custom not-equalto validation rule
 $.validator.addMethod("notEqual", function(value, element) {
     return this.optional(element) || ($('.memail').val() != $('.bemail').val())
@@ -1442,6 +1448,7 @@ function formValidationRules() {
         $(this).rules("add", {
             required: false,
             email: true,
+			laxEmail : true,
             messages: {
                 email: "Oops! You've entered an invalid email address"
             }
@@ -1451,6 +1458,7 @@ function formValidationRules() {
         $(this).rules("add", {
             required: true,
             email: true,
+			laxEmail : true,
             messages: {
                 required: "Oops! Please enter a valid email address",
                 email: "Oops! You've entered an invalid email address"
