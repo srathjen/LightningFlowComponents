@@ -10,14 +10,21 @@ public class Utils_Test {
 	private static void getPicklistLabels() {
 		List<String> opportunityStages = Utils.getPicklistLabels('Opportunity', 'StageName');
 
-		System.assert(opportunityStages.size() > 0, 'Picklist Labels should be available');
+		System.assert(!opportunityStages.isEmpty(), 'Picklist Labels should be available');
 	}
 
 	@IsTest
 	private static void getFieldLabels() {
 		Map<String, String> opportunityStages = Utils.getFieldLabels('Opportunity');
 
-		System.assert(opportunityStages.size() > 0, 'Picklist Labels should be available');
+		System.assert(!opportunityStages.isEmpty(), 'Picklist Labels should be available');
+	}
+
+	@IsTest
+	private static void getFieldPaths() {
+		List<String> relationshipMedicalRelationships = Utils.getFieldPaths('npe4__Relationship__c', 'MedicalRelationships');
+
+		System.assert(!relationshipMedicalRelationships.isEmpty(), 'Picklist Labels should be available');
 	}
 
 	@IsTest
@@ -67,5 +74,14 @@ public class Utils_Test {
 		String result = Utils.generateRandomNumber(numberLength);
 
 		System.assertEquals(6, result.length());
+	}
+
+	@IsTest
+	private static void removeNonNumericCharacters(){
+		String alpanumericString = '(555)555-5555';
+
+		String result = Utils.removeFormatNumberField(alpanumericString);
+
+		System.assertEquals('5555555555', result);
 	}
 }
