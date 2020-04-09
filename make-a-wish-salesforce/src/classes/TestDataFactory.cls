@@ -439,6 +439,15 @@ public class TestDataFactory {
         }
         return wishForms;
     }
+    
+    public static List<Non_Wish_Events__c> createNonwishEvent(Integer num) {
+        List<Non_Wish_Events__c> nonWishEvents = new List<Non_Wish_Events__c>();
+        for(Integer i = 0; i < num; i++) {
+            Non_Wish_Events__c nonWishEvent = new Non_Wish_Events__c();
+            nonWishEvents.add(nonWishEvent);
+        }
+        return nonWishEvents;
+    }
 
 	public static Lead createQualifiedLead(Id accountId, Id icdCodeId){
 		Lead lead = new Lead();
