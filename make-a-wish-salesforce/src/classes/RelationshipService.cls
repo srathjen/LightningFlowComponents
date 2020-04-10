@@ -281,7 +281,7 @@ public class RelationshipService {
 	 * @param relationShipList
 	 */
 	public static void updatePhysicianDetails(Set<Id> relatedContactId, List<npe4__Relationship__c> relationShipList) {
-		if (relatedContactId.isEmpty() && !RecursiveTriggerHandler.isFirstTime) {
+		if (relatedContactId.isEmpty() || !RecursiveTriggerHandler.isFirstTime) {
 			return;
 		}
 		RecursiveTriggerHandler.isFirstTime = false;
