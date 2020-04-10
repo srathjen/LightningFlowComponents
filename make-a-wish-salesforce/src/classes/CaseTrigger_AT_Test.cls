@@ -76,8 +76,8 @@ Increase the coverage when the case is updated with interview date.
              * Update: Sub case conversion to the single Wish Case, no need to update
              * as there is no longer the concept of parent case.
              */
-            CaseService.changeAccessPermission(caseContactMap, newCaseList);
-            CaseService.updateVolunteerOpportunityStatus(caseId, newCaseList);
+            //CaseService.changeAccessPermission(caseContactMap);
+            CaseService.updateVolunteerOpportunityStatus(caseId);
             createTask('Procure Icebreaker Gift', parentCase.id);
             parentCase.interview_Date__c = Date.Today().addDays(5);
             Test.startTest();

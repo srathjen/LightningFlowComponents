@@ -23,26 +23,26 @@ public with sharing class CaseService {
 	private static final Id WISH_VOLUNTEER_OPPORTUNITY_RECORDTYPE_ID = Constant_AC.WISH_VOLUNTEER_OPPORTUNITY_ID;
 	private static final Id CHAPTER_RECORDTYPE_ID = Constant_AC.CHAPTER_RT_ID;
 
-	private static final Map<Schema.SObjectField,String> MAP_OF_CASE_LABELS_BY_FIELDS =
+	private static final Map<Schema.SObjectField, String> MAP_OF_CASE_LABELS_BY_FIELDS =
 		Utils.mapOfSObjectLabelsByFields(Schema.SObjectType.Case);
-	private static final Map<Schema.SObjectField,String> MAP_OF_LEAD_LABELS_BY_FIELDS =
+	private static final Map<Schema.SObjectField, String> MAP_OF_LEAD_LABELS_BY_FIELDS =
 		Utils.mapOfSObjectLabelsByFields(Schema.SObjectType.Lead);
 
 	/**
-	* Check if the User or the User's profile has permissions on Case
-	* @param userId
-	* @param userProfileId
-	* @return Boolean
-	*/
+    * Check if the User or the User's profile has permissions on Case
+    * @param userId
+    * @param userProfileId
+    * @return Boolean
+    */
 	public static Boolean userHasRestrictedPermissionOnCase() {
 		return Closed_Case_Editing_Security_Settings__c.getInstance().Restrict_Access__c;
 	}
 
 	/**
-	 * Delete Case found by Lead Id and Record Type Name
-	 * @param leadId
-	 * @param caseRecordTypeNames
-	 */
+     * Delete Case found by Lead Id and Record Type Name
+     * @param leadId
+     * @param caseRecordTypeNames
+     */
 	public static void deleteByLeadIdAndRecordTypeNames(Id leadId, List<String> caseRecordTypeNames) {
 		delete [
 			SELECT Id, Lead__c
@@ -53,12 +53,12 @@ public with sharing class CaseService {
 	}
 
 	/**
-	 * Update Status on Case by Lead and Record Type
-	 * @param leadIds
-	 * @param recordTypeIds
-	 * @param targetCaseStatus
-	 * @return Map of Cases
-	 */
+     * Update Status on Case by Lead and Record Type
+     * @param leadIds
+     * @param recordTypeIds
+     * @param targetCaseStatus
+     * @return Map of Cases
+     */
 	public static Map<Id, Case> updateStatusByLeadAndRecordType(Set<Id> leadIds, Set<Id> recordTypeIds, String targetCaseStatus) {
 		Map<Id, Case> caseMap = new Map<Id, Case>();
 		for (Case caseRecord : [
@@ -78,11 +78,11 @@ public with sharing class CaseService {
 	}
 
 	/**
-	 * Update Rush on Case by Rush Lead Map and Record Type
-	 * Rush is true when any medical reason is true
-	 * @param rushLeadMap
-	 * @param recordTypesIds
-	 */
+     * Update Rush on Case by Rush Lead Map and Record Type
+     * Rush is true when any medical reason is true
+     * @param rushLeadMap
+     * @param recordTypesIds
+     */
 	public static Map<Id, Case> updateRushByLeadAndRecordType(Map<Id, Boolean> rushLeadMap, Set<Id> recordTypesIds) {
 		Map<Id, Case> caseMap = new Map<Id, Case>();
 		for (Case caseRecord : [
@@ -99,9 +99,9 @@ public with sharing class CaseService {
 	}
 
 	/**
-	 * Set Diagnosis Verification Receive Date on DocuSign Status by Converted Lead Ids
-	 * @param leadId
-	 */
+     * Set Diagnosis Verification Receive Date on DocuSign Status by Converted Lead Ids
+     * @param leadId
+     */
 	public static Map<Id, Case> setDVReceiveDate(List<dsfs__DocuSign_Status__c> docuSignStatuses, Map<Id, Case> insertCaseMap) {
 		for (dsfs__DocuSign_Status__c docuSignStatus : docuSignStatuses) {
 			if (insertCaseMap.containsKey(docuSignStatus.dsfs__Lead__c) && docuSignStatus.dsfs__Completed_Date_Time__c != null) {
@@ -115,11 +115,11 @@ public with sharing class CaseService {
 	}
 
 	/**
-	 * Build Qualified Case
-	 * @param lead
-	 * @param hasContactConverted
-	 * @return Case
-	 */
+     * Build Qualified Case
+     * @param lead
+     * @param hasContactConverted
+     * @return Case
+     */
 	public static Case buildQualifiedCaseFromLead(Lead lead, Boolean hasContactConverted) {
 		Case newCase = new Case();
 		newCase.RecordTypeId = WISH_RECORD_TYPE_ID;
@@ -175,9 +175,9 @@ public with sharing class CaseService {
 	}
 
 	/**
-	 * Create a new eligibility review case when the lead status is updated as elegibility review.
-	 * @param LeadList
-	 */
+     * Create a new eligibility review case when the lead status is updated as elegibility review.
+     * @param LeadList
+     */
 	public static void createEligibilityReview(List<Lead> LeadList) {
 		System.debug('Debugz createEligibilityReview' + LeadList);
 		List<Case> newCaseList = new List<Case>();
@@ -258,10 +258,10 @@ public with sharing class CaseService {
 	}
 
 	/**
-	 * JIRA: WLP-286
-	 * Author: Gustavo Mayer
-	 * Update: Granting sub case conversion to the single Wish Case
-	 */
+     * JIRA: WLP-286
+     * Author: Gustavo Mayer
+     * Update: Granting sub case conversion to the single Wish Case
+     */
 	public static void updateGrantingCaseDevStaffEmail(Map<Id, String> chapterEmailMap) {
 		List<Case> updateCaseList = new List<Case>();
 		for (Case wishCase : [
@@ -293,11 +293,12 @@ public with sharing class CaseService {
 
 		if (parentChildCaseMap.size() > 0) {
 			for (Case parentCase : [
-				SELECT Id ,ChapterName__c, ChapterName__r.DevStaffEmail__c, RecordTypeId
+				SELECT Id,ChapterName__c, ChapterName__r.DevStaffEmail__c, RecordTypeId
 				FROM Case
 				WHERE Id IN :parentChildCaseMap.keySet()
 				AND RecordTypeId = :parentWishRecordTypeId
-				LIMIT 50000]
+				LIMIT 50000
+			]
 			) {
 				parentCaseMap.put(parentCase.Id, parentCase.ChapterName__r.DevStaffEmail__c);
 			}
@@ -316,7 +317,15 @@ public with sharing class CaseService {
      * @author          MST Solutions
      * @createdDate     unknown
     */
-	public static void wishChildRegionValidation(Map<Id, Case> parentCaseMap, Set<Id> contactSet) {
+	public static void wishChildRegionValidation(List<Case> parentCases, Set<Id> contactSet) {
+		if (parentCases == null || parentCases.isEmpty()) {
+			return;
+		}
+
+		if (contactSet == null || contactSet.isEmpty()) {
+			return;
+		}
+
 		Map<Id, Contact> wishChildMap = new Map<Id, Contact>();
 
 		if (contactSet.size() > 0) {
@@ -325,7 +334,6 @@ public with sharing class CaseService {
 				FROM Contact
 				WHERE RecordTypeId = :WISH_CHILD_RECORDTYPE_ID
 				AND Id IN :contactSet
-				LIMIT 50000
 			]) {
 				if (wishChild.Region_Code__c == null || wishChild.County__c == null) {
 					wishChildMap.put(wishChild.Id, wishChild);
@@ -333,7 +341,7 @@ public with sharing class CaseService {
 			}
 
 			if (wishChildMap.size() > 0) {
-				for (Case parentCase : parentCaseMap.values()) {
+				for (Case parentCase : parentCases) {
 					if (wishChildMap.containsKey(parentCase.ContactId)) {
 						if (wishChildMap.get(parentCase.ContactId).Region_Code__c == null
 							&& wishChildMap.get(parentCase.ContactId).County__c == null
@@ -349,7 +357,6 @@ public with sharing class CaseService {
 
 							parentCase.addError(Label.CaseTrigger_Add_County);
 						}
-
 					}
 				}
 			}
@@ -363,6 +370,10 @@ public with sharing class CaseService {
      * @createdDate     unknown
     */
 	public static void checkBudgetActuals(List<Case> budgetCaseList) {
+		if (budgetCaseList == null || budgetCaseList.isEmpty()) {
+			return;
+		}
+
 		Set<Id> ActualsMatch = new Set<Id>();
 		Set<Id> budgetIds = new Set<Id>();
 		Map<Id, List<String>> pandaCase = new Map<Id, List<String>>();
@@ -480,6 +491,10 @@ public with sharing class CaseService {
 			return;
 		}
 
+		if (cases == null || cases.isEmpty()) {
+			return;
+		}
+
 		String message = '';
 		List<Case> budgetCases = new List<Case>();
 
@@ -514,7 +529,7 @@ public with sharing class CaseService {
      * @author          MST Solutions
      * @createdDate     unknown
     */
-	public static void updateWishClearanceNeeded(Map<Id, Case> changedNationaltypeCaseMap) {
+	public static void updateWishClearanceNeeded(List<Case> changedNationalTypeCases) {
 		Map<String, String> wishclearanceMap = new Map<String, String>();
 
 		for (Wish_Clearance_Needed_and_National_type__mdt nationaltype : [
@@ -525,7 +540,7 @@ public with sharing class CaseService {
 			wishclearanceMap.put(nationaltype.MasterLabel, nationaltype.Wish_Clearance_Needed__c);
 		}
 
-		for (Case currCase : changedNationaltypeCaseMap.values()) {
+		for (Case currCase : changedNationalTypeCases) {
 			if (wishclearanceMap.containsKey(currCase.Wish_Type__c)) {
 				currCase.Wish_Clearance_Needed__c = wishclearanceMap.get(currCase.Wish_Type__c);
 			}
@@ -539,7 +554,8 @@ public with sharing class CaseService {
      * @author 			MST Solutions
      * @createdDate		unknown
      */
-	public static void UpdateWishRecordIdentifier(Set<Id> parentIds, Set<Id> chapterIds, Id recTypeId) {
+	//public static void UpdateWishRecordIdentifier(Set<Id> parentIds, Set<Id> chapterIds, Id recTypeId) {
+	public static void updateWishRecordIdentifier(List<Case> cases) {
 		Integer increment;
 		Boolean isFyChanged = false;
 		Datetime fyDate = Datetime.now();
@@ -547,6 +563,23 @@ public with sharing class CaseService {
 		Integer fyYear = Integer.valueOf(dateOutput);
 		Map<String, Office__c> accountOfficeMap = new Map<String, Office__c>();
 		List<Case> parentWishesList;
+
+		Set<Id> chapterIds = new Set<Id>();
+		Set<Id> parentIds = new Set<Id>();
+		for (Case aCase : cases) {
+			if (aCase.RecordTypeId == Constant_AC.DIAGNOSIS_RT_ID || aCase.RecordTypeId == WISH_RECORDTYPE_ID || aCase.RecordTypeId == Constant_AC.WISH_ASSIST_RT_ID) {
+				if (aCase.RecordTypeId == Constant_AC.WISH_ASSIST_RT_ID) {
+					if (aCase.IsClosed != true && aCase.Status != Constant_AC.CASE_STATUS_COMPLETED) {
+						parentIds.add(aCase.ParentId);
+					}
+				} else if (aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
+					if (aCase.IsClosed != true) {
+						parentIds.add(aCase.Id);
+						chapterIds.add(aCase.ChapterName__c);
+					}
+				}
+			}
+		}
 
 		try {
 			List<Period> financialPeriod = [
@@ -588,7 +621,7 @@ public with sharing class CaseService {
 					ChapterName__r.Name
 				FROM Case
 				WHERE Id IN :parentIds
-				AND RecordTypeId = :recTypeId
+				AND RecordTypeId = :Constant_AC.WISH_RT_ID
 				ORDER BY CreatedDate DESC
 				LIMIT 50000
 			];
@@ -596,7 +629,7 @@ public with sharing class CaseService {
 			List<Case> lastParentWishOfRecordType = [
 				SELECT Id, Unique_Wish_Record_Identifier__c, ChapterName__c, ChapterName__r.Name
 				FROM Case
-				WHERE RecordTypeId = :recTypeId
+				WHERE RecordTypeId = :Constant_AC.WISH_RT_ID
 				AND Unique_Wish_Record_Identifier__c != NULL
 				AND CreatedBy.Name != :Constant_AC.INTEGRATION_USER
 				AND Lead__r.unique_wish_identifier__c = NULL
@@ -660,11 +693,22 @@ public with sharing class CaseService {
     * @author 			MST Solutions
     * @createdDate		unknown
     */
-	public static void caseTeamInTakeManager(Map<Id, Case> parentCaseIntakeOwnerMap) {
+	public static void caseTeamInTakeManager(List<Case> cases) {
 		Map<Id, String> teamRoleNameMap = new Map<Id, String>();
 		Map<String, Id> teamRoleIdMap = new Map<String, Id>();
 		Set<Id> chapterSet = new Set<Id>();
 		Map<Id, Set<Id>> checkMemMap = new Map<Id, Set<Id>>();
+		Map<Id, Case> parentCaseIntakeOwnerMap = new Map<Id, Case>();
+
+		for (Case newWish : cases) {
+			if (newWish.IsClosed != true && (
+				newWish.RecordTypeId == Constant_AC.DIAGNOSIS_RT_ID
+					|| newWish.RecordTypeId == Constant_AC.WISH_RT_ID
+					|| newWish.RecordTypeId == Constant_AC.WISH_ASSIST_RT_ID
+			)) {
+				parentCaseIntakeOwnerMap.put(newWish.Id, newWish);
+			}
+		}
 
 		try {
 			for (Case CaseInfo : parentCaseIntakeOwnerMap.values()) {
@@ -811,102 +855,59 @@ public with sharing class CaseService {
 	}
 
 	/*
-    * @description		Insert a Wish Child Form.
-    *
     * @author 			MST Solutions
     * @createdDate		unknown
     */
-	public static void wishFormChildRec(Set<Id> caseIds) {
-		List<Wish_Child_Form__c> wishFormList = new List<Wish_Child_Form__c>();
-
-		for (Case currCase : [
-			SELECT Id,RecordTypeId,ContactId,Contact.FirstName,Contact.LastName,Contact.Middle_Name__c,
-				Contact.Birthdate,Contact.Diagnosis__c,Contact.Gender__c,Contact.Self_describe_comment_box__c,
-				Contact.MobilePhone,Contact.Email,Contact.T_Shirt_Size__c,Contact.MailingStreet,
-				Contact.MailingState,Contact.MailingCity,Contact.MailingPostalCode,Contact.Preferred_Name__c
-			FROM Case
-			WHERE Id IN:caseIds
-		]) {
-			Wish_Child_Form__c currWishChild = new Wish_Child_Form__c();
-
-			currWishChild.FirstName__c = currCase.Contact.FirstName;
-			currWishChild.LastName__c = currCase.Contact.LastName;
-			currWishChild.Middle_Name__c = currCase.Contact.Middle_Name__c;
-			currWishChild.Diagnosis__c = currCase.Contact.Diagnosis__c;
-			currWishChild.Gender__c = currCase.Contact.Gender__c;
-			currWishChild.Self_describe_comment_box__c = currCase.Contact.Self_describe_comment_box__c;
-			currWishChild.Wish_Determination_Case_Id__c = currCase.ContactId;
-			currWishChild.mobilePhone__c = currCase.Contact.MobilePhone;
-			currWishChild.Case__c = currCase.Id;
-			currWishChild.Email__c = currCase.Contact.Email;
-			currWishChild.T_Shirt_Size__c = currCase.Contact.T_Shirt_Size__c;
-			currWishChild.Street__c = currCase.Contact.MailingStreet;
-			currWishChild.State__c = currCase.Contact.MailingState;
-			currWishChild.City__c = currCase.Contact.MailingCity;
-			currWishChild.Zip_Code__c = currCase.Contact.MailingPostalCode;
-			currWishChild.Wish_Determination_Case_Id__c = currCase.ContactId;
-			currWishChild.RecordTypeId = WISH_FORM_CHILD_ID;
-			currWishChild.Contact__c = currCase.ContactId;
-			currWishChild.Emergency_Relationship__c = Constant_AC.WISH_CHILD_FORM_EMERGENCY_RELATIONSHIP_STATUS_SELF;
-			currWishChild.Preferred_Name__c = currCase.Contact.Preferred_Name__c;
-
-			wishFormList.add(currWishChild);
+	//public static void reParentDvTask(Set<Id> caseIds) {
+	public static void reParentDvTask(List<Case> cases) {
+		if (cases == null || cases.isEmpty()) {
+			return;
 		}
 
-		if (wishFormList.size() > 0) {
-			insert wishFormList;
-		}
-	}
-
-	/*
-    * @author 			MST Solutions
-    * @createdDate		unknown
-    */
-	public static void reParentDvTask(Set<Id> caseIds) {
 		Map<Id, Id> leadCaseMap = new Map<Id, Id>();
 
-		for (Case currCase : [
-			SELECT Id, ContactId, Hidden_Lead_Id__c
-			FROM Case
-			WHERE Id IN :caseIds AND RecordTypeId = :WISH_RECORDTYPE_ID
-		]) {
-			leadCaseMap.put(currCase.ContactId, currCase.Id);
+		for (Case aCase : cases) {
+			if (aCase.RecordTypeId == Constant_AC.WISH_RT_ID) {
+				leadCaseMap.put(aCase.ContactId, aCase.Id);
+			}
 		}
 
-		if (leadCaseMap.size() > 0) {
-			Map<Id, List<Task>> dvTaskMap = new Map<Id, List<Task>>();
+		if (leadCaseMap.isEmpty()) {
+			return;
+		}
 
-			for (Task dvTask : [
-				SELECT Id, Subject, WhoId
-				FROM Task
-				WHERE Subject = :Constant_AC.TASK_SUBJECT_RUSH_MODIFIED_NO AND WhoId IN :leadCaseMap.keySet()
-			]) {
-				if (dvTaskMap.containsKey(dvTask.WhoId)) {
-					dvTaskMap.get(dvTask.WhoId).add(dvTask);
-				} else {
-					dvTaskMap.put(dvTask.WhoId, new List<Task>{
-						dvTask
-					});
+		Map<Id, List<Task>> dvTaskMap = new Map<Id, List<Task>>();
+
+		for (Task dvTask : [
+			SELECT Id, Subject, WhoId
+			FROM Task
+			WHERE Subject = :Constant_AC.TASK_SUBJECT_RUSH_MODIFIED_NO AND WhoId IN :leadCaseMap.keySet()
+		]) {
+			if (dvTaskMap.containsKey(dvTask.WhoId)) {
+				dvTaskMap.get(dvTask.WhoId).add(dvTask);
+			} else {
+				dvTaskMap.put(dvTask.WhoId, new List<Task>{
+					dvTask
+				});
+			}
+		}
+
+		if (dvTaskMap.size() > 0) {
+			List<Task> CaseTaskList = new List<Task>();
+
+			for (Id leadId : dvTaskMap.keySet()) {
+				for (Task updateTask : dvTaskMap.get(leadId)) {
+					if (leadCaseMap.containsKey(updateTask.WhoId)) {
+						Task updateTaskWhatId = new Task();
+						updateTaskWhatId.Id = updateTask.Id;
+						updateTaskWhatId.WhatId = leadCaseMap.get(updateTask.WhoId);
+						CaseTaskList.add(updateTaskWhatId);
+					}
 				}
 			}
 
-			if (dvTaskMap.size() > 0) {
-				List<Task> CaseTaskList = new List<Task>();
-
-				for (Id leadId : dvTaskMap.keySet()) {
-					for (Task updateTask : dvTaskMap.get(leadId)) {
-						if (leadCaseMap.containsKey(updateTask.WhoId)) {
-							Task updateTaskWhatId = new Task();
-							updateTaskWhatId.Id = updateTask.Id;
-							updateTaskWhatId.WhatId = leadCaseMap.get(updateTask.WhoId);
-							CaseTaskList.add(updateTaskWhatId);
-						}
-					}
-				}
-
-				if (CaseTaskList.size() > 0) {
-					update CaseTaskList;
-				}
+			if (CaseTaskList.size() > 0) {
+				update CaseTaskList;
 			}
 		}
 	}
@@ -1085,22 +1086,26 @@ public with sharing class CaseService {
      * @author          MST Solutions
      * @createdDate     unknown
     */
-	public static void updateVolunteerOpp(Set<Id> volunteerOppCaseIdSet, Boolean bool, List<Case> CaseList) {
+	//public static void updateVolunteerOpp(Set<Id> volunteerOppCaseIdSet, Boolean bool) {
+	public static void updateVolunteerOpp(Map<Id,Boolean> volunteerOppCaseIdMap) {
+		if (volunteerOppCaseIdMap == null || volunteerOppCaseIdMap.isEmpty()) {
+			return;
+		}
+
 		RecursiveTriggerHandler.blockCaseLockRecursive = false;
 		List<Volunteer_Opportunity__c> updateVolOppList = new List<Volunteer_Opportunity__c>();
 
 		for (Volunteer_Opportunity__c currRec : [
 			SELECT Id, Wish__c
 			FROM Volunteer_Opportunity__c
-			WHERE Wish__c IN :volunteerOppCaseIdSet
-			LIMIT 50000
+			WHERE Wish__c IN :volunteerOppCaseIdMap.keySet()
 		]) {
 			Volunteer_Opportunity__c newVolOpp = new Volunteer_Opportunity__c();
 			newVolOpp.Id = currRec.Id;
 
-			if (bool == true) {
+			if (volunteerOppCaseIdMap.get(currRec.Id)) {
 				newVolOpp.In_Progress__c = true;
-			} else if (bool == false) {
+			} else {
 				newVolOpp.In_Progress__c = false;
 			}
 
@@ -1119,6 +1124,10 @@ public with sharing class CaseService {
      * @createdDate     unknown
     */
 	public static void updateGrantedDate(List<Case> wishGrantedIdList) {
+		if (wishGrantedIdList == null || wishGrantedIdList.isEmpty()) {
+			return;
+		}
+
 		List<Contact> updateContactList = new List<Contact>();
 
 		for (Case dbCase : wishGrantedIdList) {
@@ -1187,7 +1196,6 @@ public with sharing class CaseService {
 			FROM Chapter_Role__c
 			WHERE Role_Name__r.Name = :Constant_AC.CHAPTER_ROLE_WISH_GRANTER
 			AND Chapter_Name__c IN :readyToAssignChapterIdSet
-			LIMIT 50000
 		]) {
 			chapterRoleMap.put(currentChapterRole.Chapter_Name__c, currentChapterRole);
 		}
@@ -1196,7 +1204,6 @@ public with sharing class CaseService {
 			SELECT Id, Name, Volunteer_Manager__c, RecordTypeId
 			FROM Account
 			WHERE RecordTypeId = :CHAPTER_RECORDTYPE_ID AND Id IN :readyToAssignChapterIdSet AND Volunteer_Manager__c != NULL
-			LIMIT 50000
 		]) {
 			accountVolunteerManagerMap.put(chapterAccountInfo.Id, chapterAccountInfo.Volunteer_Manager__c);
 		}
@@ -1204,7 +1211,6 @@ public with sharing class CaseService {
 		for (CaseTeamRole caseTeamRoleInfo : [
 			SELECT Id, Name
 			FROM CaseTeamRole
-			LIMIT 50000
 		]) {
 			CaseTeamRoleNameMap.put(caseTeamRoleInfo.Id, caseTeamRoleInfo.Name);
 			CaseTeamRoleIdMap.put(caseTeamRoleInfo.Name, caseTeamRoleInfo.Id);
@@ -1252,6 +1258,10 @@ public with sharing class CaseService {
      * @createdDate     unknown
     */
 	public static void createAndUpdateUserCaseTeamRole(Map<Id, Case> updateVolunteerManagerCaseTeamMap, Set<Id> volunteerManagerIdSet, Set<Id> wishCoordinatorIdSet) {
+		if (updateVolunteerManagerCaseTeamMap == null || updateVolunteerManagerCaseTeamMap.isEmpty()) {
+			return;
+		}
+
 		RecursiveTriggerHandler.blockCaseLockRecursive = false;
 
 		Map<Id, String> teamRoleNameMap = new Map<Id, String>();
@@ -1444,7 +1454,11 @@ public with sharing class CaseService {
      * @author          MST Solutions
      * @createdDate     unknown
     */
-	public static void changeAccessPermission(Map<Id, Id> CaseContactMap, List<Case> newCaseList) {
+	public static void changeAccessPermission(Map<Id,Id> caseContactMap) {
+		if (caseContactMap == null || caseContactMap.isEmpty()) {
+			return;
+		}
+
 		RecursiveTriggerHandler.blockCaseLockRecursive = false;
 
 		Map<Id, String> CaseTeamRoleFilteredMap = new Map<Id, String>();
@@ -1466,7 +1480,7 @@ public with sharing class CaseService {
 			FROM Case
 			WHERE ParentId = :NULL
 			AND RecordTypeId = :WISH_RECORDTYPE_ID
-			AND Id IN:CaseContactMap.keySet()
+			AND Id IN :caseContactMap.keySet()
 			LIMIT 50000
 		]);
 
@@ -1474,7 +1488,7 @@ public with sharing class CaseService {
 		for (CaseTeamMember caseTeamMemberInfo : [
 			SELECT Id, MemberId, TeamRoleId, ParentId
 			FROM CaseTeamMember
-			WHERE ParentId IN :CaseContactMap.keySet()
+			WHERE ParentId IN :caseContactMap.keySet()
 			LIMIT 50000
 		]) {
 			if (caseTeamMemberMap.containsKey(caseTeamMemberInfo.ParentId)) {
@@ -1490,7 +1504,7 @@ public with sharing class CaseService {
 			List<CaseTeamMember> updateRoleList = new List<CaseTeamMember>();
 			List<ContactShare> contactToShareList = new List<ContactShare>();
 
-			for (Id CaseId : CaseContactMap.keySet()) {
+			for (Id CaseId : caseContactMap.keySet()) {
 				if (caseTeamMemberMap.containsKey(CaseId)) {
 					for (CaseTeamMember CaseTeamRoleUpdate : caseTeamMemberMap.get(CaseId)) {
 						if (CaseTeamRoleFilteredMap.containsKey(CaseTeamRoleUpdate.TeamRoleId)) {
@@ -1503,7 +1517,7 @@ public with sharing class CaseService {
 									ContactShare shareContact = new ContactShare();
 
 									shareContact.ContactAccessLevel = 'Read';
-									shareContact.ContactId = CaseContactMap.get(CaseId);
+									shareContact.ContactId = caseContactMap.get(CaseId);
 									shareContact.UserOrGroupId = CaseTeamRoleUpdate.MemberId;
 
 									contactToShareList.add(shareContact);
@@ -1544,7 +1558,6 @@ public with sharing class CaseService {
 		for (CaseTeamRole CaseRole : [
 			SELECT Id, Name
 			FROM CaseTeamRole
-			LIMIT 50000
 		]) {
 			if (CaseRole.Name.contains('Wish Closed')) {
 				CaseTeamRoleMap.put(CaseRole.Name, CaseRole.Id);
@@ -1555,7 +1568,6 @@ public with sharing class CaseService {
 			SELECT Id, ParentId, MemberId, TeamRole.Name, TeamRoleId
 			FROM CaseTeamMember
 			WHERE (ParentId IN :parentWishIds)
-			LIMIT 50000
 		];
 
 		if (caseTeamMemberList.size() > 0) {
@@ -1569,7 +1581,6 @@ public with sharing class CaseService {
 					FROM User
 					WHERE ContactId != NULL
 					AND Id IN :memberIdSet
-					LIMIT 50000
 				]) {
 					volunteerUsersSet.add(getVolunteerUser.Id);
 				}
@@ -1586,7 +1597,6 @@ public with sharing class CaseService {
 				FROM CaseTeamMember
 				WHERE (ParentId IN :parentWishIds)
 				AND (Member.IsActive = TRUE)
-				LIMIT 50000
 			]) {
 				String roleName = getCaseTeamMember.TeamRole.Name + ' (Wish Closed)';
 				if (CaseTeamRoleMap.size() > 0 && CaseTeamRoleMap.containsKey(roleName) && volunteerUsersSet.contains(getCaseTeamMember.MemberId)) {
@@ -1606,7 +1616,6 @@ public with sharing class CaseService {
 			SELECT Id, UserOrGroupId, ContactId
 			FROM ContactShare
 			WHERE ContactId IN :revokingContactIdSet
-			LIMIT 50000
 		]) {
 			if (userIdSet.contains(conShare.UserOrGroupId) && volunteerUsersSet.contains(conShare.UserOrGroupId)) {
 				removeContactShareList.add(conShare);
@@ -1624,17 +1633,20 @@ public with sharing class CaseService {
      * @author          MST Solutions
      * @createdDate     unknown
     */
-	public static void updateVolunteerOpportunityStatus(Set<Id> CaseId, List<Case> CaseList) {
-		List<Volunteer_Opportunity__c> volunteerOppList = new List<Volunteer_Opportunity__c >();
+	public static void updateVolunteerOpportunityStatus(Set<Id> caseIds) {
+		if (caseIds == null || caseIds.isEmpty()) {
+			return;
+		}
+
+		List<Volunteer_Opportunity__c> volunteerOppList = new List<Volunteer_Opportunity__c>();
 		Set<Id> recallApprovalSet = new Set<Id>();
 
 		for (Volunteer_Opportunity__c currRec : [
 			SELECT Id, Status__c, Wish__c, Wish__r.RecordTypeId
 			FROM Volunteer_Opportunity__c
-			WHERE Wish__c IN:CaseId
+			WHERE Wish__c IN :caseIds
 			AND Wish__c != NULL
 			AND Wish__r.RecordTypeId = :WISH_RECORDTYPE_ID
-			LIMIT 50000
 		]) {
 			if (currRec.Status__c != Constant_AC.VOLUNTEER_OPPORTUNITY_STATUS_COMPLETED) {
 				currRec.Status__c = Constant_AC.VOLUNTEER_OPPORTUNITY_STATUS_COMPLETED;
@@ -1659,7 +1671,11 @@ public with sharing class CaseService {
      * @author          MST Solutions
      * @createdDate     unknown
     */
-	public static void updateVolunteerOpportunityasInactive(Set<Id> closedCaseIdSet, List<Case> CaseList) {
+	public static void updateVolunteerOpportunityAsInactive(Set<Id> closedCaseIdSet) {
+		if (closedCaseIdSet == null || closedCaseIdSet.isEmpty()) {
+			return;
+		}
+
 		List<Volunteer_Opportunity__c> updateVO_List = new List<Volunteer_Opportunity__c>();
 
 		for (Volunteer_Opportunity__c updateVO : [
@@ -1669,7 +1685,6 @@ public with sharing class CaseService {
 			AND Volunteer_Name__c = NULL
 			AND Inactive__c = FALSE
 			AND Migrated_Record__c = FALSE
-			LIMIT 50000
 		]) {
 			updateVO.Inactive__c = true;
 			updateVO.Reason_Inactive__c = 'inactivated';
@@ -1688,10 +1703,14 @@ public with sharing class CaseService {
      * @createdDate     unknown
     */
 	public static void grantedWishCount(Set<Id> wishIdsSet) {
+		if (wishIdsSet == null || wishIdsSet.isEmpty()) {
+			return;
+		}
+
 		Set<Id> volunteerIdsSet = new Set<Id>();
 
 		for (Volunteer_Opportunity__c currentVolOpp : [
-			SELECT Id, Wish__c,Wish__r.Status, Volunteer_Name__c, Status__c
+			SELECT Id, Wish__c, Wish__r.Status, Volunteer_Name__c, Status__c
 			FROM Volunteer_Opportunity__c
 			WHERE Wish__c IN :wishIdsSet AND Volunteer_Name__c != NULL
 			LIMIT 50000
@@ -1757,42 +1776,6 @@ public with sharing class CaseService {
 		}
 
 		update volunteerOpportunityList;
-	}
-
-	/*
-     * @description     Update wish clearance form.
-     *
-     * @author          MST Solutions
-     * @createdDate     unknown
-    */
-	public static void updateWishClearanceForm(Map<Id, Case> parentWishClearanceMap) {
-		List<Case> updatePlanningCaseList = new List<Case>();
-		Case updateCase;
-
-		for (Case currCase : [
-			SELECT Id, Wish_Safety_Authorization_Part_B_Form__c, ParentId
-			FROM Case
-			WHERE Id IN :parentWishClearanceMap.keySet()
-			AND RecordTypeId = :WISH_RECORDTYPE_ID
-			LIMIT 50000
-		]) {
-			if (parentWishClearanceMap.containsKey(currCase.ParentId)) {
-				updateCase = new Case();
-				updateCase.Id = currCase.Id;
-
-				if (parentWishClearanceMap.get(currCase.ParentId).Wish_Clearance_Needed__c == 'Yes') {
-					updateCase.Wish_Safety_Authorization_Part_B_Form__c = true;
-				} else {
-					updateCase.Wish_Safety_Authorization_Part_B_Form__c = false;
-				}
-
-				updatePlanningCaseList.add(updateCase);
-			}
-		}
-
-		if (updatePlanningCaseList.size() > 0) {
-			update updatePlanningCaseList;
-		}
 	}
 
 	/*

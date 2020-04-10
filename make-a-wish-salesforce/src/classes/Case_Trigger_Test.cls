@@ -30,20 +30,16 @@ private class Case_Trigger_Test {
 	static void testInsert() {
 		Case wish = getWish();
 
-		CaseService.UpdateWishRecordIdentifier(new Set<Id>{
-				wish.Id
-		}, new Set<Id>{
-				wish.ChapterName__c
-		}, Constant_AC.WISH_RT_ID);
+		CaseService.updateWishRecordIdentifier(new List<Case>{wish});
 
-		CaseService.caseTeamInTakeManager(new Map<Id, Case>{
-				wish.Id => wish
+		CaseService.CaseTeamInTakeManager(new Map<Id, Case>{
+			wish.Id => wish
 		});
 
 		insert new Task(Subject = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary', WhoId = wish.ContactId);
 
 		CaseService.reParentDvTask(new Set<Id>{
-				wish.Id
+			wish.Id
 		});
 	}
 
@@ -52,17 +48,17 @@ private class Case_Trigger_Test {
 		Case wish = getWish();
 
 		Set<String> leadSet = new Set<String>{
-				wish.Lead__c
+			wish.Lead__c
 		};
 		List<Case> caseList = new List<Case>{
-				wish
+			wish
 		};
 
 		CaseService.updateLeadStatus(leadSet, leadSet, caseList);
 
 		Lead child = [
-				SELECT Id, DOB__c, Any_medical_reason_for_moving_quickly__c, Part_A_Received__c, I_am_Recognized_To_Practice_As_a__c
-				FROM Lead
+			SELECT Id, DOB__c, Any_medical_reason_for_moving_quickly__c, Part_A_Received__c, I_am_Recognized_To_Practice_As_a__c
+			FROM Lead
 		];
 
 		child.DOB__c = null;
@@ -83,8 +79,8 @@ private class Case_Trigger_Test {
 
 	private static Case getWish() {
 		return [
-				SELECT Id, ChapterName__c, RecordTypeId, Lead__c, ContactId
-				FROM Case
+			SELECT Id, ChapterName__c, RecordTypeId, Lead__c, ContactId, IsClosed
+			FROM Case
 		];
 	}
 }

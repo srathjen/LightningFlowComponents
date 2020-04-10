@@ -13,6 +13,7 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
     private static final Id WISH_RECORDTYPE_ID = Constant_AC.WISH_RT_ID;
     private static final Id DIAGNOSIS_VERIFICATION_RECORDTYPE_ID = Constant_AC.DIAGNOSIS_RT_ID;
     private static final Id WISH_ASSIST_RECORDTYPE_ID = Constant_AC.WISH_ASSIST_RT_ID;
+    private static final Boolean USER_HAS_RESTRICTED_PERMISSIONS_ON_CASE = CaseService.userHasRestrictedPermissionOnCase();
 
     // Sets used to make conditionals in handleBeforeUpdate more readable:
 
@@ -135,21 +136,10 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
 
         Id chapterRecordTypeId = Constant_AC.CHAPTER_RT_ID;
         Id diagnosisVerificationRT = Constant_AC.DIAGNOSIS_RT_ID;
-        Id wishAssistRecordTypeId = Constant_AC.WISH_ASSIST_RT_ID;
         UserSetting__c usc = UserSetting__c.getValues(UserInfo.getUserId());
-        List<Case> budgetCaseList = new List<Case>();
-        Set<Id> wishOwnerIdSet = new Set<Id>();
-        Map<Id, Case> caseMap = new Map<Id, Case>();
-        Map<Id, Case> parentCaseMap = new Map<Id, Case>();
-        Set<Id> contactSet = new Set<Id>();
-        Set<Id> parentIdSet = new Set<Id>();
-        Map<Id, User> wishOwnerMap = new Map<Id, User>();
-        Set<Id> compltedParentIdSet = new Set<Id>();
-        Map<Id, Account> managerUserMap = new Map<Id, Account>();
-        Map<Id, Case> changedNationalTypeCaseMap = new Map<Id, Case>();
 
         List<Account> dbAccountList = [
-            SELECT Id,MAC_Email_del__c,Name,RecordTypeId
+            SELECT MAC_Email_del__c
             FROM Account
             WHERE Name = :Constant_AC.ACCOUNT_NAME_MAW_AMERICA
             AND RecordTypeId = :chapterRecordTypeId
@@ -158,9 +148,6 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
 
         for (Case currentCase : newCasesMap.values()) {
             if (WISH_OWNER_CHECK_RECORD_TYPE_IDS.contains(currentCase.RecordTypeId)) {
-                if (currentCase.OwnerId != null && currentCase.OwnerId != oldCasesMap.get(currentCase.Id).OwnerId) {
-                    wishOwnerIdSet.add(currentCase.OwnerId);
-                }
                 if (currentCase.Comment_1__c != null && oldCasesMap.get(currentCase.Id).Comment_1__c != currentCase.Comment_1__c) {
                     currentCase.Comment__c = currentCase.Comment_1__c;
                 }
@@ -170,10 +157,7 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
                 && !Constant_AC.CASE_STATUS_READY_TO_ASSIGN.equals(oldCasesMap.get(currentCase.Id).Status)
                 && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
-                caseMap.put(currentCase.ChapterName__c, currentCase);
                 currentCase.Ready_to_Assign_Date__c = Date.today();
-                parentCaseMap.put(currentCase.Id, currentCase);
-                contactSet.add(currentCase.ContactId);
             }
 
             if (Constant_AC.CASE_STATUS_READY_TO_INTERVIEW.equals(currentCase.Status)
@@ -217,22 +201,6 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
                 currentCase.Wish_Type__c.addError(Label.CaseTrigger_Enter_Wish_Type);
             }
 
-            if (currentCase.RecordTypeId == WISH_RECORDTYPE_ID
-                && Constant_AC.CASE_STATUS_WISH_DETERMINED.equals(currentCase.Status)
-                && currentCase.Wish_Type__c != null) {
-
-                caseMap.put(currentCase.ChapterName__c, currentCase);
-            }
-
-            //Update the wish clearance needed when the wish national type is changed.
-            if (currentCase.RecordTypeId == WISH_RECORDTYPE_ID
-                && currentCase.Wish_Type__c != null
-                && currentCase.Wish_Type__c != oldCasesMap.get(currentCase.Id).Wish_Type__c) {
-
-                changedNationalTypeCaseMap.put(currentCase.Id, currentCase);
-            }
-
-            /* Used to close the wish determine case and open the new planning and Granting and Impact sub cases will open. */
             if (Constant_AC.CASE_STATUS_WISH_DETERMINED.equals(currentCase.Status)
                 && currentCase.Wish_Type__c != null
                 && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
@@ -269,13 +237,6 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
                 currentCase.DNQ_Date__c = Date.today();
             }
 
-            if ((Constant_AC.CASE_STATUS_COMPLETED.equals(currentCase.Status))
-                && (!Constant_AC.CASE_STATUS_COMPLETED.equals(oldCasesMap.get(currentCase.Id).Status))
-                && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
-
-                budgetCaseList.add(currentCase);
-            }
-
             if (IS_LOCKED_STATUSES.contains(currentCase.Status)
                 && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
@@ -295,19 +256,12 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
                 currentCase.IsLocked__c = false;
             }
 
-            Boolean userHasRestrictedPermissionOnCase = CaseService.userHasRestrictedPermissionOnCase();
-            if ((currentCase.RecordTypeId == WISH_RECORDTYPE_ID || currentCase.RecordTypeId == wishAssistRecordTypeId
-                || currentCase.ParentId != null) && userHasRestrictedPermissionOnCase) {
-
-                parentIdSet.add(currentCase.ParentId);
-            }
-
             if (currentCase.IsLocked__c == true
                 && oldCasesMap.get(currentCase.Id).IsLocked__c == true
                 && usc != null) {
                 if (usc.All_Closed_Cases_except_Abandoned__c == false
                     && currentCase.IsClosed == true
-                    && userHasRestrictedPermissionOnCase
+                    && USER_HAS_RESTRICTED_PERMISSIONS_ON_CASE
                     && currentCase.RecordTypeId == WISH_RECORDTYPE_ID
                     && (!(Constant_AC.CASE_STATUS_COMPLETED.equals(currentCase.Status)
                     && (currentCase.Adoptable__c != oldCasesMap.get(currentCase.Id).Adoptable__c
@@ -319,14 +273,14 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
 
                 if (usc.Edit_Abandoned_Cases__c == false
                     && currentCase.IsClosed == true
-                    && userHasRestrictedPermissionOnCase
+                    && USER_HAS_RESTRICTED_PERMISSIONS_ON_CASE
                     && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
                     currentCase.addError(Label.CaseTrigger_Permission_Error);
                 }
             } else if (currentCase.IsLocked__c == true
                 && oldCasesMap.get(currentCase.Id).IsLocked__c == true
-                && userHasRestrictedPermissionOnCase
+                && USER_HAS_RESTRICTED_PERMISSIONS_ON_CASE
                 && currentCase.RecordTypeId == WISH_RECORDTYPE_ID
                 && (!(Constant_AC.CASE_STATUS_COMPLETED.equals(currentCase.Status)
                 && (currentCase.Adoptable__c != oldCasesMap.get(currentCase.Id).Adoptable__c
@@ -366,93 +320,33 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
 
                 currentCase.Completed_Date__c = Date.today();
             }
+
             if (Constant_AC.CASE_SUB_STATUS_ABANDONED.equals(currentCase.Sub_Status__c)
                 && !Constant_AC.CASE_SUB_STATUS_ABANDONED.equals(currentCase.Sub_Status__c)
                 && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
                 currentCase.Closed_Date__c = Date.today();
             }
-        }
 
-        if (wishOwnerIdSet.size() > 0) {
-            for (User wishOwner : [
-                SELECT Id,ManagerId,Manager.Name,Manager.Email,Email
-                FROM User
-                WHERE Id IN :wishOwnerIdSet AND ManagerId != NULL
-                LIMIT 50000
-            ]) {
-                wishOwnerMap.put(wishOwner.Id, wishOwner);
-            }
-        }
+            if (currentCase.Wish_Clearance_Needed__c != oldCasesMap.get(currentCase.Id).Wish_Clearance_Needed__c
+                && currentCase.RecordTypeId == WISH_RECORDTYPE_ID
+                && currentCase.Wish_Clearance_Needed__c != null) {
 
-        if (parentIdSet.size() > 0) {
-            for (Case parentCase : [
-                SELECT Id,Status
-                FROM Case
-                WHERE Status = :Constant_AC.CASE_STATUS_COMPLETED
-                AND Id IN :parentIdSet
-                AND RecordTypeId = :WISH_RECORDTYPE_ID
-                LIMIT 50000
-            ]) {
-                compltedParentIdSet.add(parentCase.Id);
-            }
-        }
-
-        for (Case newCase : newCasesMap.values()) {
-            if (wishOwnerMap.containsKey(newCase.OwnerId)) {
-                if (wishOwnerMap.get(newCase.OwnerId).ManagerId != null && newCase.RecordTypeId == WISH_RECORDTYPE_ID) {
-                    newCase.Hidden_Wish_Owner_Manager__c = wishOwnerMap.get(newCase.OwnerId).Manager.Name;
-                    newCase.Hidden_Wish_Owner_Email__c = wishOwnerMap.get(newCase.OwnerId).Manager.Email;
+                if (currentCase.Wish_Clearance_Needed__c == 'Yes') {
+                    currentCase.Wish_Safety_Authorization_Part_B_Form__c = true;
+                } else {
+                    currentCase.Wish_Safety_Authorization_Part_B_Form__c = false;
                 }
             }
-
-            if (compltedParentIdSet.contains(newCase.ParentId)) {
-                newCase.addError(Label.CaseTrigger_Permission_Error);
-            }
         }
 
-        // Case Owner Old Logic
-        if (caseMap.size() > 0) {
-            for (Account currentAccount : [
-                SELECT Id,Volunteer_Manager__c,Wish_Co_ordinator__c
-                FROM Account
-                WHERE Id IN:caseMap.keySet()
-                LIMIT 50000
-            ]) {
-                managerUserMap.put(currentAccount.Id, currentAccount);
-            }
-        }
+        populateHiddenWishOwnerFields();
 
-        if (changedNationalTypeCaseMap.size() > 0) {
-            CaseService.updateWishClearanceNeeded(changedNationalTypeCaseMap);
-        }
-        if (parentCaseMap.size() > 0) {
-            CaseService.wishChildRegionValidation(parentCaseMap, contactSet);
-        }
-
-        if (budgetCaseList.size() > 0) {
-            CaseService.checkBudgetActuals(budgetCaseList);
-        }
-
+        CaseService.updateWishClearanceNeeded(getWishChildRegionValidationCases());
+        CaseService.wishChildRegionValidation(getWishChildRegionValidationParentCases(),
+            getWishChildRegionValidationContactIds());
+        CaseService.checkBudgetActuals(getCheckBudgetActualsCases());
         CaseService.checkReceivedDates(getCheckReceivedDatesCases());
-    }
-
-    private List<Case> getCheckReceivedDatesCases() {
-        List<Case> checkReceivedDatesCases = new List<Case>();
-
-        for (Case aCase : newCasesList) {
-            if (aCase.RecordTypeId == WISH_RECORDTYPE_ID
-                && aCase.Status != oldCasesMap.get(aCase.Id).Status
-                && ((Constant_AC.CASE_STATUS_GRANTED.equals(aCase.Status)
-                && (Constant_AC.CASE_STATUS_WISH_SCHEDULED.equals(oldCasesMap.get(aCase.Id).Status)))
-                || ((Constant_AC.CASE_STATUS_COMPLETED.equals(aCase.Status))
-                && (!Constant_AC.CASE_STATUS_COMPLETED.equals(oldCasesMap.get(aCase.Id).Status))))) {
-
-                checkReceivedDatesCases.add(aCase);
-            }
-        }
-
-        return checkReceivedDatesCases;
     }
 
     // BEFORE DELETE
@@ -467,56 +361,10 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
      * @createdDate		2016-05-26
      */
     public override void handleAfterInsert() {
-        List<Case> eligibilityReviewCaseList = new List<Case>();
-        Set<Id> parentIdsSet = new Set<Id>();
-        Map<Id, Case> parentCaseIntakeOwnerMap = new Map<Id, Case>();
-        Set<Id> chapterNames = new Set<Id>();
-        Set<Id> wishFormCaseIdSet = new Set<Id>();
-        List<Case> newCaseFileList = new List<Case>();
-        List<Case> potentialRushList = new List<Case>();
-
-        for (Case newWish : newCasesList) {
-            if (newWish.RecordTypeId == DIAGNOSIS_VERIFICATION_RECORDTYPE_ID || newWish.RecordTypeId == WISH_RECORDTYPE_ID || newWish.RecordTypeId == WISH_ASSIST_RECORDTYPE_ID) {
-                if (newWish.RecordTypeId == DIAGNOSIS_VERIFICATION_RECORDTYPE_ID && newWish.Subject == Constant_AC.CASE_SUBJECT_ELIGIBILITY_REVIEW) {
-                    eligibilityReviewCaseList.add(newWish);
-                }
-
-                if (newWish.RecordTypeId == WISH_ASSIST_RECORDTYPE_ID) {
-                    if (newWish.IsClosed != true && newWish.Status != Constant_AC.CASE_STATUS_COMPLETED) {
-                        parentIdsSet.add(newWish.ParentId);
-                    }
-                } else if (newWish.RecordTypeId == WISH_RECORDTYPE_ID) {
-                    wishFormCaseIdSet.add(newWish.Id);
-                    if (newWish.IsClosed != true) {
-                        parentCaseIntakeOwnerMap.put(newWish.Id, newWish);
-                        parentIdsSet.add(newWish.Id);
-                        chapterNames.add(newWish.ChapterName__c);
-                    }
-
-                    if (!newWish.Rush__c) {
-                        potentialRushList.add(newWish);
-                    }
-                }
-            }
-            newCaseFileList.add(newWish);
-        }
-
-        if (parentIdsSet.size() > 0 && chapterNames.size() > 0) {
-            CaseService.UpdateWishRecordIdentifier(parentIdsSet, chapterNames, WISH_RECORDTYPE_ID);
-        }
-
-        if (parentCaseIntakeOwnerMap.size() > 0) {
-            CaseService.caseTeamInTakeManager(parentCaseIntakeOwnerMap);
-        }
-
-        if (newCaseFileList.size() > 0) {
-            CaseService.createCaseFile(newCaseFileList);
-        }
-
-        if (wishFormCaseIdSet.size() > 0) {
-            CaseService.wishFormChildRec(wishFormCaseIdSet);
-            CaseService.reParentDvTask(wishFormCaseIdSet);
-        }
+        CaseService.updateWishRecordIdentifier(newCasesList);
+        CaseService.caseTeamInTakeManager(newCasesList);
+        CaseService.createCaseFile(newCasesList);
+        CaseService.reParentDvTask(newCasesList);
     }
 
     /*
@@ -536,17 +384,10 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
         Set<Id> newWishClearanceSet = new Set<Id>();
         Set<Id> closeTaskParentIdSet = new Set<Id>();
         Set<Id> caseIdSetForVolOpp = new Set<Id>();
-        Map<Id, Case> updateVolunteerManagerCaseTeamMap = new Map<Id, Case>();
-        Set<Id> volunteerManagerIdSet = new Set<Id>();
-        Set<Id> wishCoordinatorIdSet = new Set<Id>();
-        Map<Id, Id> caseContactMap = new Map<Id, Id>();
-        Set<Id> volunteerCaseIdSet = new Set<Id>();
         Map<Id, Case> caseIdsMap = new Map<Id, Case>();
         Set<String> newWishTypeSet = new Set<String>();
         Set<String> updatedApprovedLeadInfoSet = new Set<String>();
         Set<String> updatedDnqLeadInfoSet = new Set<String>();
-        Set<Id> caseTeamMemberParentIdSet = new Set<Id>();
-        Set<Id> revokingContactIdSet = new Set<Id>();
         Set<Id> presentationCloseTaskIdsSet = new Set<Id>();
         Map<Id, Case> presentationCloseTaskParentIdMap = new Map<Id, Case>();
         Set<Id> presentationOpenTaskIdsSet = new Set<Id>();
@@ -554,296 +395,185 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
         Set<Id> newMedicalSummarySet = new Set<Id>();
         Map<Id, Case> wishClearanceMap = new Map<Id, Case>();
         Map<Id, String> approvedBudgetStatus = new Map<Id, String>();
-        Set<Id> wishIds = new Set<Id>();
         List<Case> PartAWishList = new List<Case>();
         Map<Id, Case> removeAnticipationTaskMap = new Map<Id, Case>();
         Map<Id, Case> updateAnticipationTaskMap = new Map<Id, Case>();
         Set<String> wishTypes = new Set<String>();
-        Set<Id> inProgressUnCheckCaseIdsSet = new Set<Id>();
-        Map<Id, Case> readyToAssignParentCaseMap = new Map<Id, Case>();
-        Set<Id> readyToAssignChapterIdSet = new Set<Id>();
-        List<Case> wishGrantedIdList = new List<Case>();
         Set<Id> parentWishIdSet = new Set<Id>();
-        Set<Id> closedCaseIdSet = new Set<Id>();
-        Set<Id> completedCaseIdSet = new Set<Id>();
         List<Case> exceptionList = new List<Case>();
         Set<Id> wishGrantedSet = new Set<Id>();
-        Map<Id, Case> parentWishClearanceMap = new Map<Id, Case>();
-        Map<Id, String> caseToLeadSubStatusUpdate = new Map<Id, String>();
         Set<Id> closeBirthDayTaskSet = new Set<Id>();
 
-        for (Case caseMemberCheck : newCasesMap.values()) {
-            if (CASE_MEMBER_CHECK_IDS.contains(caseMemberCheck.RecordTypeId)) {
+        for (Case aCase : newCasesMap.values()) {
+            if (CASE_MEMBER_CHECK_IDS.contains(aCase.RecordTypeId)) {
 
-                if (caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID && caseMemberCheck.Wish_Assist__c == true
-                    && oldCasesMap.get(caseMemberCheck.Id).Wish_Assist__c != true) {
+                if (aCase.RecordTypeId == WISH_RECORDTYPE_ID && aCase.Wish_Assist__c == true
+                    && oldCasesMap.get(aCase.Id).Wish_Assist__c != true) {
 
-                    closeTaskParentIdSet.add(caseMemberCheck.Id);
+                    closeTaskParentIdSet.add(aCase.Id);
                 }
 
-                if ((Constant_AC.CASE_STATUS_CLOSED.equals(caseMemberCheck.Status))
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID
-                    && caseMemberCheck.Status != oldCasesMap.get(caseMemberCheck.Id).Status) {
+                if ((Constant_AC.CASE_STATUS_CLOSED.equals(aCase.Status))
+                    && aCase.RecordTypeId == WISH_RECORDTYPE_ID
+                    && aCase.Status != oldCasesMap.get(aCase.Id).Status) {
 
-                    caseIdSetForVolOpp.add(caseMemberCheck.Id);
+                    caseIdSetForVolOpp.add(aCase.Id);
                 }
 
-                if ((Constant_AC.CASE_STATUS_GRANTED.equals(caseMemberCheck.Status)
-                    || Constant_AC.CASE_STATUS_CLOSED.equals(caseMemberCheck.Status))
-                    && caseMemberCheck.Status != oldCasesMap.get(caseMemberCheck.Id).Status
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID) {
+                if ((Constant_AC.CASE_STATUS_GRANTED.equals(aCase.Status)
+                    || Constant_AC.CASE_STATUS_CLOSED.equals(aCase.Status))
+                    && aCase.Status != oldCasesMap.get(aCase.Id).Status
+                    && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
-                    wishGrantedSet.add(caseMemberCheck.Id);
+                    wishGrantedSet.add(aCase.Id);
                 }
 
-                if (Constant_AC.CASE_STATUS_READY_TO_ASSIGN.equals(caseMemberCheck.Status)
-                    && caseMemberCheck.Status != oldCasesMap.get(caseMemberCheck.Id).Status
-                    && RecursiveTriggerHandler.blockCaseLockRecursive == true
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID) {
 
-                    updateVolunteerManagerCaseTeamMap.put(caseMemberCheck.Id, caseMemberCheck);
-                    volunteerManagerIdSet.add(caseMemberCheck.Id);
-                } else if ((Constant_AC.CASE_STATUS_READY_TO_ASSIGN.equals(caseMemberCheck.Status)
-                    || Constant_AC.CASE_STATUS_READY_TO_INTERVIEW.equals(caseMemberCheck.Status))
-                    && caseMemberCheck.OwnerId != oldCasesMap.get(caseMemberCheck.Id).OwnerId
-                    && RecursiveTriggerHandler.blockCaseLockRecursive == true
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID) {
 
-                    updateVolunteerManagerCaseTeamMap.put(caseMemberCheck.Id, caseMemberCheck);
-                    volunteerManagerIdSet.add(caseMemberCheck.Id);
+
+
+
+
+                if (oldCasesMap.get(aCase.Id).Wish_Type__c != aCase.Wish_Type__c
+                    && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
+
+                    caseIdsMap.put(aCase.Id, aCase);
+                    newWishTypeSet.add(aCase.Wish_Type__c);
                 }
 
-                if (caseMemberCheck.Status != oldCasesMap.get(caseMemberCheck.Id).Status
-                    && Constant_AC.CASE_STATUS_WISH_DETERMINED.equals(caseMemberCheck.Status)
-                    && RecursiveTriggerHandler.blockCaseLockRecursive == true
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID) {
+                if ((Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MEDICAL_REVIEW.equals(aCase.Status)
+                    && !Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MEDICAL_REVIEW.equals(oldCasesMap.get(aCase.Id).Status))
+                    || (Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MAC_REVIEW.equals(aCase.Status)
+                    && !Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MAC_REVIEW.equals(oldCasesMap.get(aCase.Id).Status))
+                    && aCase.RecordTypeId == DIAGNOSIS_VERIFICATION_RECORDTYPE_ID) {
 
-                    updateVolunteerManagerCaseTeamMap.put(caseMemberCheck.Id, caseMemberCheck);
-                    wishCoordinatorIdSet.add(caseMemberCheck.Id);
-                } else if ((caseMemberCheck.OwnerId != oldCasesMap.get(caseMemberCheck.Id).OwnerId
-                    && RecursiveTriggerHandler.blockCaseLockRecursive == true)
-                    && WISH_COORDINATOR_ID_CHECK_STATUSES.contains(caseMemberCheck.Status)
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID) {
+                    updatedApprovedLeadInfoSet.add(aCase.Lead__c);
+                } else if ((Constant_AC.CASE_STATUS_DNQ_NATIONAL_MEDICAL_REVIEW.equals(aCase.Status)
+                    || Constant_AC.CASE_STATUS_DNQ_NATIONAL_MAC_REVIEW.equals(aCase.Status))
+                    && aCase.RecordTypeId == DIAGNOSIS_VERIFICATION_RECORDTYPE_ID
+                    && oldCasesMap.get(aCase.Id).Status != aCase.Status) {
 
-                    updateVolunteerManagerCaseTeamMap.put(caseMemberCheck.Id, caseMemberCheck);
-                    wishCoordinatorIdSet.add(caseMemberCheck.Id);
+                    updatedDnqLeadInfoSet.add(aCase.Lead__c);
                 }
 
-                if ((!Constant_AC.CASE_STATUS_CLOSED.equals(caseMemberCheck.Status)
-                    && !Constant_AC.CASE_STATUS_COMPLETED.equals(caseMemberCheck.Status)
-                    && RecursiveTriggerHandler.blockCaseLockRecursive == true)
-                    && (Constant_AC.CASE_STATUS_CLOSED.equals(oldCasesMap.get(caseMemberCheck.Id))
-                    || Constant_AC.CASE_STATUS_COMPLETED.equals(oldCasesMap.get(caseMemberCheck.Id)))
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID) {
+                if (CLOSE_BIRTHDAY_TASK_SET_STATUSES.contains(aCase.Status)
+                    && (oldCasesMap.get(aCase.Id).Status != aCase.Status
+                    && aCase.RecordTypeId == WISH_RECORDTYPE_ID)) {
 
-                    caseContactMap.put(caseMemberCheck.Id, caseMemberCheck.ContactId);
-                }
-
-                if (VOLUNTEER_CASE_ID_CHECK_HAS_STATUS.contains(caseMemberCheck.Status)
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID
-                    && RecursiveTriggerHandler.blockCaseLockRecursive == true
-                    && !VOLUNTEER_CASE_ID_CHECK_NOT_HAS_STATUSES.contains(oldCasesMap.get(caseMemberCheck.Id).Status)) {
-
-                    volunteerCaseIdSet.add(caseMemberCheck.Id);
-                }
-
-                if (oldCasesMap.get(caseMemberCheck.Id).Wish_Type__c != caseMemberCheck.Wish_Type__c
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID) {
-
-                    caseIdsMap.put(caseMemberCheck.Id, caseMemberCheck);
-                    newWishTypeSet.add(caseMemberCheck.Wish_Type__c);
-                }
-
-                if ((Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MEDICAL_REVIEW.equals(caseMemberCheck.Status)
-                    && !Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MEDICAL_REVIEW.equals(oldCasesMap.get(caseMemberCheck.Id).Status))
-                    || (Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MAC_REVIEW.equals(caseMemberCheck.Status)
-                    && !Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MAC_REVIEW.equals(oldCasesMap.get(caseMemberCheck.Id).Status))
-                    && caseMemberCheck.RecordTypeId == DIAGNOSIS_VERIFICATION_RECORDTYPE_ID) {
-
-                    updatedApprovedLeadInfoSet.add(caseMemberCheck.Lead__c);
-                } else if ((Constant_AC.CASE_STATUS_DNQ_NATIONAL_MEDICAL_REVIEW.equals(caseMemberCheck.Status)
-                    || Constant_AC.CASE_STATUS_DNQ_NATIONAL_MAC_REVIEW.equals(caseMemberCheck.Status))
-                    && caseMemberCheck.RecordTypeId == DIAGNOSIS_VERIFICATION_RECORDTYPE_ID
-                    && oldCasesMap.get(caseMemberCheck.Id).Status != caseMemberCheck.Status) {
-
-                    updatedDnqLeadInfoSet.add(caseMemberCheck.Lead__c);
-                }
-
-                if ((Constant_AC.CASE_STATUS_COMPLETED.equals(caseMemberCheck.Status)
-                    || Constant_AC.CASE_STATUS_CLOSED.equals(caseMemberCheck.Status))
-                    && (oldCasesMap.get(caseMemberCheck.Id).Status != caseMemberCheck.Status
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID)) {
-
-                    caseTeamMemberParentIdSet.add(caseMemberCheck.Id);
-                    revokingContactIdSet.add(caseMemberCheck.ContactId);
-                }
-
-                if (CLOSE_BIRTHDAY_TASK_SET_STATUSES.contains(caseMemberCheck.Status)
-                    && (oldCasesMap.get(caseMemberCheck.Id).Status != caseMemberCheck.Status
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID)) {
-
-                    closeBirthDayTaskSet.add(caseMemberCheck.Id);
+                    closeBirthDayTaskSet.add(aCase.Id);
                 }
 
                 // Wish Granted task
-                if (caseMemberCheck.End_Date__c != null
-                    && oldCasesMap.get(caseMemberCheck.Id).End_Date__c
-                    != caseMemberCheck.End_Date__c
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID) {
+                if (aCase.End_Date__c != null
+                    && oldCasesMap.get(aCase.Id).End_Date__c
+                    != aCase.End_Date__c
+                    && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
-                    endDateIdSet.add(caseMemberCheck.Id);
-                    presentationCloseTaskIdsSet.add(caseMemberCheck.Id);
-                    presentationCloseTaskParentIdMap.put(caseMemberCheck.Id, caseMemberCheck);
+                    endDateIdSet.add(aCase.Id);
+                    presentationCloseTaskIdsSet.add(aCase.Id);
+                    presentationCloseTaskParentIdMap.put(aCase.Id, aCase);
                 }
 
                 // New medical summary needed
-                if ((caseMemberCheck.Start_Date__c != oldCasesMap.get(caseMemberCheck.Id).Start_Date__c)
-                    && CASE_MEMBER_WISH_TYPE_CHECK.contains(caseMemberCheck.Wish_Type__c)
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID) {
+                if ((aCase.Start_Date__c != oldCasesMap.get(aCase.Id).Start_Date__c)
+                    && CASE_MEMBER_WISH_TYPE_CHECK.contains(aCase.Wish_Type__c)
+                    && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
-                    if ((caseMemberCheck.Start_Date__c == null) || ((caseMemberCheck.Start_Date__c != null))) {
-                        newMedicalSummarySet.add(caseMemberCheck.Id);
-                        wishClearanceMap.put(caseMemberCheck.Id, caseMemberCheck);
+                    if ((aCase.Start_Date__c == null) || ((aCase.Start_Date__c != null))) {
+                        newMedicalSummarySet.add(aCase.Id);
+                        wishClearanceMap.put(aCase.Id, aCase);
                     }
                 }
 
                 // New wish clearance needed
-                if (caseMemberCheck.End_Date__c != null
-                    && caseMemberCheck.End_Date__c != oldCasesMap.get(caseMemberCheck.Id).End_Date__c
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID) {
+                if (aCase.End_Date__c != null
+                    && aCase.End_Date__c != oldCasesMap.get(aCase.Id).End_Date__c
+                    && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
-                    if ((caseMemberCheck.Wish_Clearance_Received_Date__c == null)
-                        || (Date.today().monthsBetween(caseMemberCheck.Wish_Clearance_Received_Date__c) > 6)) {
-                        newWishClearanceSet.add(caseMemberCheck.Id);
-                        wishClearanceMap.put(caseMemberCheck.Id, caseMemberCheck);
+                    if ((aCase.Wish_Clearance_Received_Date__c == null)
+                        || (Date.today().monthsBetween(aCase.Wish_Clearance_Received_Date__c) > 6)) {
+                        newWishClearanceSet.add(aCase.Id);
+                        wishClearanceMap.put(aCase.Id, aCase);
                     }
                 }
 
-                if (caseMemberCheck.End_Date__c == null
-                    && oldCasesMap.get(caseMemberCheck.Id).End_Date__c != caseMemberCheck.End_Date__c
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID) {
+                if (aCase.End_Date__c == null
+                    && oldCasesMap.get(aCase.Id).End_Date__c != aCase.End_Date__c
+                    && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
-                    endDateIdSet.add(caseMemberCheck.Id);
-                    if (caseMemberCheck.Wish_Assist__c == false) {
-                        presentationOpenTaskIdsSet.add(caseMemberCheck.Id);
+                    endDateIdSet.add(aCase.Id);
+                    if (aCase.Wish_Assist__c == false) {
+                        presentationOpenTaskIdsSet.add(aCase.Id);
                     }
 
-                    presentationCloseTaskParentIdMap.put(caseMemberCheck.Id, caseMemberCheck);
+                    presentationCloseTaskParentIdMap.put(aCase.Id, aCase);
                 }
 
-                if (Constant_AC.CASE_BUDGET_APPROVAL_STATUS_APPROVED.equals(caseMemberCheck.Budget_Approval_Status__c)
-                    && caseMemberCheck.Budget_Approval_Status__c != oldCasesMap.get(caseMemberCheck.Id).Budget_Approval_Status__c
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID) {
+                if (Constant_AC.CASE_BUDGET_APPROVAL_STATUS_APPROVED.equals(aCase.Budget_Approval_Status__c)
+                    && aCase.Budget_Approval_Status__c != oldCasesMap.get(aCase.Id).Budget_Approval_Status__c
+                    && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
-                    approvedBudgetStatus.put(caseMemberCheck.Id, caseMemberCheck.Budget_Approval_Status__c);
+                    approvedBudgetStatus.put(aCase.Id, aCase.Budget_Approval_Status__c);
                 }
 
-                if (Constant_AC.CASE_STATUS_GRANTED.equals(caseMemberCheck.Status)
-                    && (!Constant_AC.CASE_STATUS_GRANTED.equals(oldCasesMap.get(caseMemberCheck.Id).Status)
-                    && !Constant_AC.CASE_STATUS_COMPLETED.equals(oldCasesMap.get(caseMemberCheck.Id).Status)
-                    && !Constant_AC.CASE_STATUS_CLOSED.equals(oldCasesMap.get(caseMemberCheck.Id).Status))
-                    && WISH_RECORDTYPE_ID == caseMemberCheck.RecordTypeId) {
 
-                    wishIds.add(caseMemberCheck.Id);
-                }
 
-                if (caseMemberCheck.Status != oldCasesMap.get(caseMemberCheck.Id).Status
-                    && caseMemberCheck.RecordTypeId == DIAGNOSIS_VERIFICATION_RECORDTYPE_ID
-                    && caseMemberCheck.Lead__c != null) {
+                if (aCase.Status != oldCasesMap.get(aCase.Id).Status
+                    && aCase.RecordTypeId == DIAGNOSIS_VERIFICATION_RECORDTYPE_ID
+                    && aCase.Lead__c != null) {
 
-                    if (Constant_AC.CASE_STATUS_OPEN.equals(caseMemberCheck.Status)
-                        || Constant_AC.CASE_STATUS_ESCALATED.equals(caseMemberCheck.Status)) {
+                    if (Constant_AC.CASE_STATUS_OPEN.equals(aCase.Status)
+                        || Constant_AC.CASE_STATUS_ESCALATED.equals(aCase.Status)) {
 
-                        PartAWishList.add(caseMemberCheck);
+                        PartAWishList.add(aCase);
                     }
                 }
 
-                if (caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID
-                    && caseMemberCheck.Start_Date__c == null
-                    && oldCasesMap.get(caseMemberCheck.Id).Start_Date__c != null) {
+                if (aCase.RecordTypeId == WISH_RECORDTYPE_ID
+                    && aCase.Start_Date__c == null
+                    && oldCasesMap.get(aCase.Id).Start_Date__c != null) {
 
-                    removeAnticipationTaskMap.put(caseMemberCheck.Id, caseMemberCheck);
-                } else if (caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID
-                    && caseMemberCheck.Start_Date__c != null
-                    && caseMemberCheck.Start_Date__c != oldCasesMap.get(caseMemberCheck.Id).Start_Date__c) {
+                    removeAnticipationTaskMap.put(aCase.Id, aCase);
+                } else if (aCase.RecordTypeId == WISH_RECORDTYPE_ID
+                    && aCase.Start_Date__c != null
+                    && aCase.Start_Date__c != oldCasesMap.get(aCase.Id).Start_Date__c) {
 
-                    updateAnticipationTaskMap.put(caseMemberCheck.Id, caseMemberCheck);
-                    wishTypes.add(caseMemberCheck.Wish_Type__c);
+                    updateAnticipationTaskMap.put(aCase.Id, aCase);
+                    wishTypes.add(aCase.Wish_Type__c);
                 }
 
 
-                if (IN_PROGRESS_UNCHECK_HAS_STATUS.contains(caseMemberCheck.Status)
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID
-                    && !IN_PROGRESS_UNCHECK_NOT_HAS_STATUSES.contains(oldCasesMap.get(caseMemberCheck.Id).Status)) {
 
-                    inProgressUnCheckCaseIdsSet.add(caseMemberCheck.Id);
-                }
 
-                // For creating 2 volunteer opportunity record when the case status changed to "Ready to Assign" from "Qualified".
-                if ((Constant_AC.CASE_STATUS_READY_TO_ASSIGN.equals(caseMemberCheck.Status))
-                    && Constant_AC.CASE_STATUS_QUALIFIED.equals(oldCasesMap.get(caseMemberCheck.Id).Status)
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID
-                    && caseMemberCheck.Wish_Assist__c == false) {
-                    if (RecursiveTriggerHandler.isFirstTime == true) {
 
-                        readyToAssignParentCaseMap.put(caseMemberCheck.Id, caseMemberCheck);
-                        readyToAssignChapterIdSet.add(caseMemberCheck.ChapterName__c);
-                    }
-                }
 
                 // if Status is 'Granted' then populate the hiddengranteddate in Contact
-                if (Constant_AC.CASE_STATUS_GRANTED.equals(caseMemberCheck.Status)
-                    && !Constant_AC.CASE_STATUS_GRANTED.equals(oldCasesMap.get(caseMemberCheck.Id).Status)
-                    && caseMemberCheck.ContactId != null
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID) {
 
-                    wishGrantedIdList.add(caseMemberCheck);
-                }
 
-                if (caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID
-                    && PARENT_WISH_ID_SET_STATUSES.contains(caseMemberCheck.Status)
-                    && oldCasesMap.get(caseMemberCheck.Id).Status != caseMemberCheck.Status
+                if (aCase.RecordTypeId == WISH_RECORDTYPE_ID
+                    && PARENT_WISH_ID_SET_STATUSES.contains(aCase.Status)
+                    && oldCasesMap.get(aCase.Id).Status != aCase.Status
                     && RecursiveTriggerHandler.blockCaseLockRecursive == true) {
 
-                    parentWishIdSet.add(caseMemberCheck.Id);
+                    parentWishIdSet.add(aCase.Id);
                 }
 
-                if (Constant_AC.CASE_STATUS_COMPLETED.equals(caseMemberCheck.Status)
-                    && !Constant_AC.CASE_STATUS_COMPLETED.equals(oldCasesMap.get(caseMemberCheck.Id).Status)
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID) {
 
-                    completedCaseIdSet.add(caseMemberCheck.Id);
-                }
-                if (!Constant_AC.CASE_STATUS_CLOSED.equals(oldCasesMap.get(caseMemberCheck.Id).Status)
-                    && Constant_AC.CASE_STATUS_CLOSED.equals(caseMemberCheck.Status)
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID) {
 
-                    closedCaseIdSet.add(caseMemberCheck.Id);
-                }
 
-                if (caseMemberCheck.Wish_Clearance_Needed__c != oldCasesMap.get(caseMemberCheck.Id).Wish_Clearance_Needed__c
-                    && caseMemberCheck.RecordTypeId == WISH_RECORDTYPE_ID
-                    && caseMemberCheck.Wish_Clearance_Needed__c != null) {
-
-                    parentWishClearanceMap.put(caseMemberCheck.Id, caseMemberCheck);
-                }
-
-                exceptionList.add(caseMemberCheck);
+                exceptionList.add(aCase);
             }
 
-            if (caseMemberCheck.RecordTypeId == DIAGNOSIS_VERIFICATION_RECORDTYPE_ID
-                && ((Constant_AC.CASE_STATUS_NEW.equals(caseMemberCheck.Status)
-                && !Constant_AC.CASE_STATUS_NEW.equals(oldCasesMap.get(caseMemberCheck.Id).Status))
-                || (Constant_AC.CASE_STATUS_PENDING_CLARIFICATION_MAC.equals(caseMemberCheck.Status)
-                && !Constant_AC.CASE_STATUS_PENDING_CLARIFICATION_MAC.equals(oldCasesMap.get(caseMemberCheck.Id).Status))
-                || (Constant_AC.CASE_STATUS_PENDING_CLARIFICATION_MAC_CONSULT_REQ.equals(caseMemberCheck.Status)
-                && !Constant_AC.CASE_STATUS_PENDING_CLARIFICATION_MAC_CONSULT_REQ.equals(oldCasesMap.get(caseMemberCheck.Id).Status))
-                || (Constant_AC.CASE_STATUS_PENDING_CLARIFICATION_CHAPTER.equals(caseMemberCheck.Status)
-                && !Constant_AC.CASE_STATUS_PENDING_CLARIFICATION_CHAPTER.equals(oldCasesMap.get(caseMemberCheck.Id).Status)))) {
 
-                caseToLeadSubStatusUpdate.put(caseMemberCheck.Lead__c, caseMemberCheck.Status);
-            }
         }
+
+        /*
+		 * SCC-75:	CaseService.updateLeadStatus(List<Case> caseList) is found to do nothing.
+		 * Chris Shinnimin, Traction on Demand
+		if (PartAWishList.size() > 0) {
+			CaseService.updateLeadStatus(PartAWishList);
+		}
+		*/
 
         if (wishGrantedSet.size() > 0) {
             CaseService.populateEndDate(wishGrantedSet);
@@ -860,48 +590,515 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
         if (updatedApprovedLeadInfoSet.size() > 0 || updatedDnqLeadInfoSet.size() > 0) {
             CaseService.updateLeadStatus(updatedApprovedLeadInfoSet, updatedDnqLeadInfoSet, exceptionList);
         }
-        if (volunteerCaseIdSet.size() > 0) {
-            CaseService.updateVolunteerOpp(volunteerCaseIdSet, true, exceptionList);
+
+
+
+
+        CreateAndUpdateUserCaseTeamRoleWrapper uctrWrapper =
+            prepareCreateAndUpdateUserCaseTeamRoleWrapper();
+
+        Map<Id,Id> revokeWishPermissionForVolunteersIdsAndContactIds =
+            getRevokeWishPermissionForVolunteersIdsAndContactIds();
+
+        Set<Id> readyToAssignChapterIdSet = new Set<Id>();
+        Map<Id,Case> createVolunteerOpportunityCaseMap = getCreateVolunteerOpportunityCaseMap();
+        for (Case aCase : createVolunteerOpportunityCaseMap.values()) {
+            readyToAssignChapterIdSet.add(aCase.ChapterName__c);
         }
-        if (inProgressUnCheckCaseIdsSet.size() > 0) {
-            CaseService.updateVolunteerOpp(inProgressUnCheckCaseIdsSet, false, exceptionList);
+
+        CaseService.updateVolunteerOpp(getUpdateVolunteerOppMap());
+        CaseService.updateGrantedDate(getUpdateGrantedDateCases());
+        CaseService.createAndUpdateUserCaseTeamRole(uctrWrapper.updateVolunteerManagerCaseTeamMap,
+            uctrWrapper.volunteerManagerIdSet, uctrWrapper.wishCoordinatorIdSet);
+        CaseService.changeAccessPermission(getChangeAccessPermissionMap());
+        CaseService.revokeWishPermissionForVolunteers(revokeWishPermissionForVolunteersIdsAndContactIds.keySet(),
+            new Set<Id>(revokeWishPermissionForVolunteersIdsAndContactIds.values()));
+        CaseService.grantedWishCount(getGrantedWishCountCaseIds());
+        CaseService.updateVolunteerOpportunityStatus(getUpdateVolunteerOpportunityStatusCaseIds());
+        CaseService.createVolunteerOpportunity(createVolunteerOpportunityCaseMap, readyToAssignChapterIdSet);
+        CaseService.updateVolunteerOpportunityAsInactive(getUpdateVolunteerOpportunityAsInactiveCaseIds());
+        CaseService.updateCaseToLeadSubStatus(Constant_AC.LEAD_STATUS_ELIGIBILITY_REVIEW, getMapOfCaseStatusesByLeadId());
+    }
+
+    /**
+     * @description     Private function to prepare Map of Boolean by VolunteerOpportunity Id for CaseService.updateVolunteerOpp
+     *
+     * @return          Map<Id,Boolean>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-04-09
+     */
+    private Map<Id,Boolean> getUpdateVolunteerOppMap() {
+        Map<Id,Boolean> updateVolunteerOppMap = new Map<Id,Boolean>();
+
+        for (Case aCase : newCasesList) {
+            if (!CASE_MEMBER_CHECK_IDS.contains(aCase.RecordTypeId)) {
+                continue;
+            }
+
+            if (VOLUNTEER_CASE_ID_CHECK_HAS_STATUS.contains(aCase.Status)
+                && aCase.RecordTypeId == WISH_RECORDTYPE_ID
+                && RecursiveTriggerHandler.blockCaseLockRecursive == true
+                && !VOLUNTEER_CASE_ID_CHECK_NOT_HAS_STATUSES.contains(oldCasesMap.get(aCase.Id).Status)) {
+
+                updateVolunteerOppMap.put(aCase.Id, true);
+            }
+
+            if (IN_PROGRESS_UNCHECK_HAS_STATUS.contains(aCase.Status)
+                && aCase.RecordTypeId == WISH_RECORDTYPE_ID
+                && !IN_PROGRESS_UNCHECK_NOT_HAS_STATUSES.contains(oldCasesMap.get(aCase.Id).Status)) {
+
+                updateVolunteerOppMap.put(aCase.Id, false);
+            }
         }
-        if (wishGrantedIdList.size() > 0) {
-            CaseService.updateGrantedDate(wishGrantedIdList);
+
+        return updateVolunteerOppMap;
+    }
+
+    /**
+     * @description     Private function to prepare List of Cases for CaseService.updateGrantedDate
+     *
+     * @return          List<Case>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-04-09
+     */
+    private List<Case> getUpdateGrantedDateCases() {
+        List<Case> updateGrantedDateCases = new List<Case>();
+
+        for (Case aCase : newCasesList) {
+            if (CASE_MEMBER_CHECK_IDS.contains(aCase.RecordTypeId)
+                && Constant_AC.CASE_STATUS_GRANTED.equals(aCase.Status)
+                && !Constant_AC.CASE_STATUS_GRANTED.equals(oldCasesMap.get(aCase.Id).Status)
+                && aCase.ContactId != null
+                && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
+
+                updateGrantedDateCases.add(aCase);
+            }
         }
-        if (updateVolunteerManagerCaseTeamMap.size() > 0) {
-            CaseService.createAndUpdateUserCaseTeamRole(updateVolunteerManagerCaseTeamMap, volunteerManagerIdSet, wishCoordinatorIdSet);
+
+        return updateGrantedDateCases;
+    }
+
+    /**
+     * @description     Private function to prepare a wrapper object for CaseService.createAndUpdateUserCaseTeamRole
+     *
+     * @return          CreateAndUpdateUserCaseTeamRoleWrapper
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-04-09
+     */
+    private CreateAndUpdateUserCaseTeamRoleWrapper prepareCreateAndUpdateUserCaseTeamRoleWrapper() {
+        CreateAndUpdateUserCaseTeamRoleWrapper wrapper = new CreateAndUpdateUserCaseTeamRoleWrapper();
+
+        wrapper.updateVolunteerManagerCaseTeamMap = new Map<Id,Case>();
+        wrapper.volunteerManagerIdSet = new Set<Id>();
+        wrapper.wishCoordinatorIdSet = new Set<Id>();
+
+        for (Case aCase : newCasesList) {
+            if (!CASE_MEMBER_CHECK_IDS.contains(aCase.RecordTypeId)) {
+                continue;
+            }
+
+            if (Constant_AC.CASE_STATUS_READY_TO_ASSIGN.equals(aCase.Status)
+                && aCase.Status != oldCasesMap.get(aCase.Id).Status
+                && RecursiveTriggerHandler.blockCaseLockRecursive == true
+                && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
+
+                wrapper.updateVolunteerManagerCaseTeamMap.put(aCase.Id, aCase);
+                wrapper.volunteerManagerIdSet.add(aCase.Id);
+            } else if ((Constant_AC.CASE_STATUS_READY_TO_ASSIGN.equals(aCase.Status)
+                || Constant_AC.CASE_STATUS_READY_TO_INTERVIEW.equals(aCase.Status))
+                && aCase.OwnerId != oldCasesMap.get(aCase.Id).OwnerId
+                && RecursiveTriggerHandler.blockCaseLockRecursive == true
+                && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
+
+                wrapper.updateVolunteerManagerCaseTeamMap.put(aCase.Id, aCase);
+                wrapper.volunteerManagerIdSet.add(aCase.Id);
+            }
+
+            if (aCase.Status != oldCasesMap.get(aCase.Id).Status
+                && Constant_AC.CASE_STATUS_WISH_DETERMINED.equals(aCase.Status)
+                && RecursiveTriggerHandler.blockCaseLockRecursive == true
+                && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
+
+                wrapper.updateVolunteerManagerCaseTeamMap.put(aCase.Id, aCase);
+                wrapper.wishCoordinatorIdSet.add(aCase.Id);
+            } else if ((aCase.OwnerId != oldCasesMap.get(aCase.Id).OwnerId
+                && RecursiveTriggerHandler.blockCaseLockRecursive == true)
+                && WISH_COORDINATOR_ID_CHECK_STATUSES.contains(aCase.Status)
+                && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
+
+                wrapper.updateVolunteerManagerCaseTeamMap.put(aCase.Id, aCase);
+                wrapper.wishCoordinatorIdSet.add(aCase.Id);
+            }
         }
-        if (caseContactMap.size() > 0) {
-            CaseService.changeAccessPermission(caseContactMap, exceptionList);
+
+        return wrapper;
+    }
+
+    private class CreateAndUpdateUserCaseTeamRoleWrapper {
+        public Map<Id,Case> updateVolunteerManagerCaseTeamMap;
+        public Set<Id> volunteerManagerIdSet;
+        public Set<Id> wishCoordinatorIdSet;
+    }
+
+    /**
+     * @description     Private function to prepare Map of Contact Ids by Case Id for CaseService.changeAccessPermission
+     *
+     * @return          Map<Id,Id>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-04-09
+     */
+    private Map<Id,Id> getChangeAccessPermissionMap() {
+        Map<Id,Id> changeAccessPermissionMap = new Map<Id,Id>();
+
+        for (Case aCase : newCasesList) {
+            if (CASE_MEMBER_CHECK_IDS.contains(aCase.RecordTypeId)
+                && (!Constant_AC.CASE_STATUS_CLOSED.equals(aCase.Status)
+                && !Constant_AC.CASE_STATUS_COMPLETED.equals(aCase.Status)
+                && RecursiveTriggerHandler.blockCaseLockRecursive == true)
+                && (Constant_AC.CASE_STATUS_CLOSED.equals(oldCasesMap.get(aCase.Id))
+                || Constant_AC.CASE_STATUS_COMPLETED.equals(oldCasesMap.get(aCase.Id)))
+                && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
+
+                changeAccessPermissionMap.put(aCase.Id, aCase.ContactId);
+            }
         }
-        if (caseTeamMemberParentIdSet.size() > 0 && revokingContactIdSet.size() > 0) {
-            CaseService.revokeWishPermissionForVolunteers(caseTeamMemberParentIdSet, revokingContactIdSet);
+
+        return changeAccessPermissionMap;
+    }
+
+    /**
+     * @description     Private function to prepare a Set<Id> of Case Ids and a Set<Id> of Contact Ids for CaseService.grantedWishCount
+     *
+     * @return          Map<Id,Id>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-04-09
+     */
+    private Map<Id,Id> getRevokeWishPermissionForVolunteersIdsAndContactIds() {
+        Map<Id,Id> revokeWishPermissionForVolunteers = new Map<Id,Id>();
+
+        for (Case aCase : newCasesList) {
+            if (CASE_MEMBER_CHECK_IDS.contains(aCase.RecordTypeId)
+                && (Constant_AC.CASE_STATUS_COMPLETED.equals(aCase.Status)
+                || Constant_AC.CASE_STATUS_CLOSED.equals(aCase.Status))
+                && (oldCasesMap.get(aCase.Id).Status != aCase.Status
+                && aCase.RecordTypeId == WISH_RECORDTYPE_ID)) {
+
+                revokeWishPermissionForVolunteers.put(aCase.Id, aCase.ContactId);
+            }
         }
-        /*
-		 * SCC-75:	CaseService.updateLeadStatus(List<Case> caseList) is found to do nothing.
-		 * Chris Shinnimin, Traction on Demand
-		if (PartAWishList.size() > 0) {
-			CaseService.updateLeadStatus(PartAWishList);
-		}
-		*/
-        if (wishIds.size() > 0) {
-            CaseService.grantedWishCount(wishIds);
+
+        return revokeWishPermissionForVolunteers;
+    }
+
+    /**
+     * @description     Private function to prepare Set of Case Ids for CaseService.grantedWishCount
+     *
+     * @return          Set<Id>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-04-09
+     */
+    private Set<Id> getGrantedWishCountCaseIds() {
+        Set<Id> grantedWishCountCaseIds = new Set<Id>();
+
+        for (Case aCase : newCasesList) {
+            if (CASE_MEMBER_CHECK_IDS.contains(aCase.RecordTypeId)
+                && Constant_AC.CASE_STATUS_GRANTED.equals(aCase.Status)
+                && (!Constant_AC.CASE_STATUS_GRANTED.equals(oldCasesMap.get(aCase.Id).Status)
+                && !Constant_AC.CASE_STATUS_COMPLETED.equals(oldCasesMap.get(aCase.Id).Status)
+                && !Constant_AC.CASE_STATUS_CLOSED.equals(oldCasesMap.get(aCase.Id).Status))
+                && WISH_RECORDTYPE_ID == aCase.RecordTypeId) {
+
+                grantedWishCountCaseIds.add(aCase.Id);
+            }
         }
-        if (completedCaseIdSet.size() > 0 && completedCaseIdSet != null) {
-            CaseService.updateVolunteerOpportunityStatus(completedCaseIdSet, exceptionList);
+
+        return grantedWishCountCaseIds;
+    }
+
+    /**
+     * @description     Private function to prepare Set of Case Ids for CaseService.updateVolunteerOpportunityStatus
+     *
+     * @return          Set<Id>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-04-09
+     */
+    private Set<Id> getUpdateVolunteerOpportunityStatusCaseIds() {
+        Set<Id> updateVolunteerOpportunityStatusCaseIds = new Set<Id>();
+
+        for (Case aCase : newCasesList) {
+            if (CASE_MEMBER_CHECK_IDS.contains(aCase.RecordTypeId)
+                && Constant_AC.CASE_STATUS_COMPLETED.equals(aCase.Status)
+                && !Constant_AC.CASE_STATUS_COMPLETED.equals(oldCasesMap.get(aCase.Id).Status)
+                && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
+
+                updateVolunteerOpportunityStatusCaseIds.add(aCase.Id);
+            }
         }
-        if (readyToAssignParentCaseMap.size() > 0 && readyToAssignChapterIdSet.size() > 0) {
-            CaseService.createVolunteerOpportunity(readyToAssignParentCaseMap, readyToAssignChapterIdSet);
+
+        return updateVolunteerOpportunityStatusCaseIds;
+    }
+
+    /**
+     * @description     Private function to prepare Map of Cases by Id for CaseService.createVolunteerOpportunity
+     *
+     * @return          Map<Id,Case>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-04-09
+     */
+    private Map<Id,Case> getCreateVolunteerOpportunityCaseMap() {
+        Map<Id,Case> createVolunteerOpportunityCaseMap = new Map<Id,Case>();
+
+        if (RecursiveTriggerHandler.isFirstTime == true) {
+            return createVolunteerOpportunityCaseMap;
         }
-        if (closedCaseIdSet.size() > 0) {
-            CaseService.updateVolunteerOpportunityasInactive(closedCaseIdSet, exceptionList);
+
+        for (Case aCase : newCasesList) {
+            if (CASE_MEMBER_CHECK_IDS.contains(aCase.RecordTypeId)
+                && (Constant_AC.CASE_STATUS_READY_TO_ASSIGN.equals(aCase.Status))
+                && Constant_AC.CASE_STATUS_QUALIFIED.equals(oldCasesMap.get(aCase.Id).Status)
+                && aCase.RecordTypeId == WISH_RECORDTYPE_ID
+                && aCase.Wish_Assist__c == false) {
+
+                createVolunteerOpportunityCaseMap.put(aCase.Id, aCase);
+            }
         }
-        if (parentWishClearanceMap.size() > 0) {
-            CaseService.updateWishClearanceForm(parentWishClearanceMap);
+
+        return createVolunteerOpportunityCaseMap;
+    }
+
+    /**
+     * @description     Private function to prepare Set of Case Ids for CaseService.updateVolunteerOpportunityAsInactive
+     *
+     * @return          Set<Id>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-04-09
+     */
+    private Set<Id> getUpdateVolunteerOpportunityAsInactiveCaseIds() {
+        Set<Id> updateVolunteerOpportunityAsInactiveCaseIds = new Set<Id>();
+
+        for (Case aCase : newCasesList) {
+            if (CASE_MEMBER_CHECK_IDS.contains(aCase.RecordTypeId)
+                && !Constant_AC.CASE_STATUS_CLOSED.equals(oldCasesMap.get(aCase.Id).Status)
+                && Constant_AC.CASE_STATUS_CLOSED.equals(aCase.Status)
+                && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
+
+                updateVolunteerOpportunityAsInactiveCaseIds.add(aCase.Id);
+            }
         }
-        if (caseToLeadSubStatusUpdate.size() > 0) {
-            CaseService.updateCaseToLeadSubStatus(Constant_AC.LEAD_STATUS_ELIGIBILITY_REVIEW, caseToLeadSubStatusUpdate);
+
+        return updateVolunteerOpportunityAsInactiveCaseIds;
+    }
+
+    /**
+     * @description     Private function to prepare Map of Case Statuses by Lead Id for CaseService.updateCaseToLeadSubStatus
+     *
+     * @return          Map<Id,String>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-04-09
+     */
+    private Map<Id,String> getMapOfCaseStatusesByLeadId() {
+        Map<Id,String> mapOfCaseStatusesByLeadId = new Map<Id,String>();
+
+        for (Case aCase : newCasesList) {
+            if (CASE_MEMBER_CHECK_IDS.contains(aCase.RecordTypeId)
+                && aCase.RecordTypeId == DIAGNOSIS_VERIFICATION_RECORDTYPE_ID
+                && ((Constant_AC.CASE_STATUS_NEW.equals(aCase.Status)
+                && !Constant_AC.CASE_STATUS_NEW.equals(oldCasesMap.get(aCase.Id).Status))
+                || (Constant_AC.CASE_STATUS_PENDING_CLARIFICATION_MAC.equals(aCase.Status)
+                && !Constant_AC.CASE_STATUS_PENDING_CLARIFICATION_MAC.equals(oldCasesMap.get(aCase.Id).Status))
+                || (Constant_AC.CASE_STATUS_PENDING_CLARIFICATION_MAC_CONSULT_REQ.equals(aCase.Status)
+                && !Constant_AC.CASE_STATUS_PENDING_CLARIFICATION_MAC_CONSULT_REQ.equals(oldCasesMap.get(aCase.Id).Status))
+                || (Constant_AC.CASE_STATUS_PENDING_CLARIFICATION_CHAPTER.equals(aCase.Status)
+                && !Constant_AC.CASE_STATUS_PENDING_CLARIFICATION_CHAPTER.equals(oldCasesMap.get(aCase.Id).Status)))) {
+
+                mapOfCaseStatusesByLeadId.put(aCase.Lead__c, aCase.Status);
+            }
         }
+
+        return mapOfCaseStatusesByLeadId;
+    }
+
+
+
+    /**
+     * @description     Private function used by handleOnBeforeUpdate to populate hidden wish owner fields
+     *                  and add errors to parent cases with restriceted permissions.
+     *                  Moved to private function by Chris Shinnimin, Traction on Demand, 2020-04-09.
+     *
+     * @author          MST Solutions
+     * @createdDate     unknown
+     */
+    private void populateHiddenWishOwnerFields() {
+        Set<Id> wishOwnerIdSet = new Set<Id>();
+        Map<Id,User> wishOwnerMap = new Map<Id,User>();
+        Set<Id> parentIdSet = new Set<Id>();
+
+        for (Case aCase : newCasesList) {
+            if (WISH_OWNER_CHECK_RECORD_TYPE_IDS.contains(aCase.RecordTypeId)) {
+                if (aCase.OwnerId != null && aCase.OwnerId != oldCasesMap.get(aCase.Id).OwnerId) {
+                    wishOwnerIdSet.add(aCase.OwnerId);
+                }
+            }
+
+            if ((aCase.RecordTypeId == WISH_RECORDTYPE_ID || aCase.RecordTypeId == WISH_ASSIST_RECORDTYPE_ID
+                || aCase.ParentId != null) && USER_HAS_RESTRICTED_PERMISSIONS_ON_CASE) {
+
+                if (aCase.Status == Constant_AC.CASE_STATUS_COMPLETED && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
+                    parentIdSet.add(aCase.ParentId);
+                }
+            }
+        }
+
+        if (wishOwnerIdSet.size() > 0) {
+            for (User wishOwner : [
+                SELECT Id, ManagerId, Manager.Name, Manager.Email, Email
+                FROM User
+                WHERE Id IN :wishOwnerIdSet AND ManagerId != NULL
+                LIMIT 50000
+            ]) {
+                wishOwnerMap.put(wishOwner.Id, wishOwner);
+            }
+        }
+
+        for (Case aCase : newCasesList) {
+            if (wishOwnerMap.containsKey(aCase.OwnerId)) {
+                if (wishOwnerMap.get(aCase.OwnerId).ManagerId != null && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
+                    aCase.Hidden_Wish_Owner_Manager__c = wishOwnerMap.get(aCase.OwnerId).Manager.Name;
+                    aCase.Hidden_Wish_Owner_Email__c = wishOwnerMap.get(aCase.OwnerId).Manager.Email;
+                }
+            }
+
+            if (parentIdSet.contains(aCase.ParentId)) {
+                aCase.addError(Label.CaseTrigger_Permission_Error);
+            }
+        }
+    }
+
+    /**
+     * @description     Private function to prepare List of Cases for CaseService.updateWishClearanceNeeded
+     *
+     * @return          List<Case>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-04-08
+     */
+    private List<Case> getWishChildRegionValidationCases() {
+        List<Case> changedNationalTypeCases = new List<Case>();
+
+        for (Case aCase : newCasesList) {
+            if (aCase.RecordTypeId == WISH_RECORDTYPE_ID
+                && aCase.Wish_Type__c != null
+                && aCase.Wish_Type__c != oldCasesMap.get(aCase.Id).Wish_Type__c) {
+
+                changedNationalTypeCases.add(aCase);
+            }
+        }
+
+        return changedNationalTypeCases;
+    }
+
+    /**
+     * @description     Private function to prepare List of Cases for CaseService.wishChildRegionValidation
+     *
+     * @return          List<Case>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-04-08
+     */
+    private List<Case> getWishChildRegionValidationParentCases() {
+        List<Case> parentCases = new List<Case>();
+
+        for (Case aCase : newCasesList) {
+            if ((Constant_AC.CASE_STATUS_READY_TO_ASSIGN.equals(aCase.Status))
+                && !Constant_AC.CASE_STATUS_READY_TO_ASSIGN.equals(oldCasesMap.get(aCase.Id).Status)
+                && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
+
+                parentCases.add(aCase);
+            }
+        }
+
+        return parentCases;
+    }
+
+    /**
+     * @description     Private function to prepare Set of Contacts for CaseService.wishChildRegionValidation
+     *
+     * @return          Set<Id>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-04-08
+     */
+    private Set<Id> getWishChildRegionValidationContactIds() {
+        Set<Id> contactIds = new Set<Id>();
+
+        for (Case aCase : newCasesList) {
+            if ((Constant_AC.CASE_STATUS_READY_TO_ASSIGN.equals(aCase.Status))
+                && !Constant_AC.CASE_STATUS_READY_TO_ASSIGN.equals(oldCasesMap.get(aCase.Id).Status)
+                && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
+
+                contactIds.add(aCase.ContactId);
+            }
+        }
+
+        return contactIds;
+    }
+
+    /**
+     * @description     Private function to prepare List of Cases for CaseService.checkBudgetActuals
+     *
+     * @return          List<Case>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-04-08
+     */
+    private List<Case> getCheckBudgetActualsCases() {
+        List<Case> checkBudgetActualsCases = new List<Case>();
+
+        for (Case aCase : newCasesList) {
+            if ((Constant_AC.CASE_STATUS_COMPLETED.equals(aCase.Status))
+                && (!Constant_AC.CASE_STATUS_COMPLETED.equals(oldCasesMap.get(aCase.Id).Status))
+                && aCase.RecordTypeId == WISH_RECORDTYPE_ID) {
+
+                checkBudgetActualsCases.add(aCase);
+            }
+        }
+
+        return checkBudgetActualsCases;
+    }
+
+    /**
+     * @description     Private function to prepare List of Cases for CaseService.checkReceivedDates
+     *
+     * @return          List<Case>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-04-07
+     */
+    private List<Case> getCheckReceivedDatesCases() {
+        List<Case> checkReceivedDatesCases = new List<Case>();
+
+        for (Case aCase : newCasesList) {
+            if (aCase.RecordTypeId == WISH_RECORDTYPE_ID
+                && aCase.Status != oldCasesMap.get(aCase.Id).Status
+                && ((Constant_AC.CASE_STATUS_GRANTED.equals(aCase.Status)
+                && (Constant_AC.CASE_STATUS_WISH_SCHEDULED.equals(oldCasesMap.get(aCase.Id).Status)))
+                || ((Constant_AC.CASE_STATUS_COMPLETED.equals(aCase.Status))
+                && (!Constant_AC.CASE_STATUS_COMPLETED.equals(oldCasesMap.get(aCase.Id).Status))))) {
+
+                checkReceivedDatesCases.add(aCase);
+            }
+        }
+
+        return checkReceivedDatesCases;
     }
 }
