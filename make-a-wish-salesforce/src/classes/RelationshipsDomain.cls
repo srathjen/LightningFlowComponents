@@ -23,9 +23,7 @@ public with sharing class RelationshipsDomain extends trac_TriggerHandlerBase {
 	public override void handleAfterInsert() {
 		Set<Id> qualifyingMedicalProfessionalContactIds =
 				RelationshipService.buildQualifyingMedProfessionalRelationshipMap(newRelationshipsList);
-		if (!qualifyingMedicalProfessionalContactIds.isEmpty() && RecursiveTriggerHandler.isFirstTime || Test.isRunningTest()) {
-			RelationshipService.updatePhysicianDetails(qualifyingMedicalProfessionalContactIds, newRelationshipsList);
-		}
+		RelationshipService.updatePhysicianDetails(qualifyingMedicalProfessionalContactIds, newRelationshipsList);
 		Map<Id, Id> relationshipMap = RelationshipService.buildNonMedicalRelationshipMap(newRelationshipsList);
 		RelationshipService.updateRelationshipType(relationshipMap);
 		Map<Id, Id> contactMap = RelationshipService.buildContactMap(newRelationshipsList);
@@ -37,11 +35,12 @@ public with sharing class RelationshipsDomain extends trac_TriggerHandlerBase {
 	 * After update of Lead
 	 */
 	public override void handleAfterUpdate() {
-		if (!RecursiveTriggerHandler.blockAfterUpdate) {
-			RelationshipService.updateWishChildForm(newRelationshipsMap, oldRelationshipsMap);
-			Map<Id, Id> contactMap = RelationshipService.buildContactMap(newRelationshipsMap, oldRelationshipsMap);
-			RelationshipService.createWishChildForm(contactMap);
-			WishRequiredSignatureService.createChildGuardianSignatures(newRelationshipsList, oldRelationshipsMap);
+		if (RecursiveTriggerHandler.blockAfterUpdate) {
+			return;
 		}
+		RelationshipService.updateWishChildForm(newRelationshipsMap, oldRelationshipsMap);
+		Map<Id, Id> contactMap = RelationshipService.buildContactMap(newRelationshipsMap, oldRelationshipsMap);
+		RelationshipService.createWishChildForm(contactMap);
+		WishRequiredSignatureService.createChildGuardianSignatures(newRelationshipsList, oldRelationshipsMap);
 	}
 }

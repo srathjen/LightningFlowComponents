@@ -281,35 +281,40 @@ public class RelationshipService {
 	 * @param relationShipList
 	 */
 	public static void updatePhysicianDetails(Set<Id> relatedContactId, List<npe4__Relationship__c> relationShipList) {
+		if (relatedContactId.isEmpty() && (!RecursiveTriggerHandler.isFirstTime || !Test.isRunningTest())) {
+			return;
+		}
 		RecursiveTriggerHandler.isFirstTime = false;
 		Map<Id, Contact> medicalProfContactMap = new Map<Id, Contact>();
 		Map<Id, Contact> updateContactMap = new Map<Id, Contact>();
 		try {
-			if (!relatedContactId.isEmpty()) {
-				for (Contact dbWishChildCon : [
-						SELECT Id,Name,Email,RecordTypeId
-						FROM Contact
-						WHERE Id IN:relatedContactId
-						AND RecordTypeId = :MEDICAL_PROFESSIONAL_ID
-				]) {
-					medicalProfContactMap.put(dbWishChildCon.Id, dbWishChildCon);
+			if (relatedContactId.isEmpty()) {
+				return;
+			}
+			for (Contact dbWishChildCon : [
+					SELECT Id,Name,Email,RecordTypeId
+					FROM Contact
+					WHERE Id IN:relatedContactId
+					AND RecordTypeId = :MEDICAL_PROFESSIONAL_ID
+			]) {
+				medicalProfContactMap.put(dbWishChildCon.Id, dbWishChildCon);
+			}
+			if (medicalProfContactMap.isEmpty()) {
+				return;
+			}
+			for (npe4__Relationship__c newRecord : relationShipList) {
+				if (medicalProfContactMap.containsKey(newRecord.npe4__RelatedContact__c)) {
+					Contact newContact = new Contact();
+					newContact.Id = newRecord.npe4__Contact__c;
+					newContact.Hidden_Medical_Physician__c = medicalProfContactMap.get(newRecord.npe4__RelatedContact__c).Name;
+					newContact.Hidden_Medical_Physician_Email__c = medicalProfContactMap.get(newRecord .npe4__RelatedContact__c).Email;
+					updateContactMap.put(newContact.Id, newContact);
 				}
 			}
-			if (!medicalProfContactMap.isEmpty()) {
-				for (npe4__Relationship__c newRecord : relationShipList) {
-					if (medicalProfContactMap.containsKey(newRecord.npe4__RelatedContact__c)) {
-						Contact newContact = new Contact();
-						newContact.Id = newRecord.npe4__Contact__c;
-						newContact.Hidden_Medical_Physician__c = medicalProfContactMap.get(newRecord.npe4__RelatedContact__c).Name;
-						newContact.Hidden_Medical_Physician_Email__c = medicalProfContactMap.get(newRecord .npe4__RelatedContact__c).Email;
-						updateContactMap.put(newContact.Id, newContact);
-					}
-				}
+			if (updateContactMap.isEmpty()) {
+				return;
 			}
-			if (!updateContactMap.isEmpty()) {
-				RecursiveTriggerHandler.isFirstTime = false;
-				update updateContactMap.values();
-			}
+			update updateContactMap.values();
 			if (Test.isRunningTest()) {
 				throw new CommonTriggerException('Test Class execution');
 			}
@@ -337,17 +342,14 @@ public class RelationshipService {
 		}
 		List<Contact> familyContactList = new List<Contact>();
 		try {
-			if (!relationshipMap.isEmpty()) {
-				for (Contact dbContact : [
-						SELECT Id,Name,Relationship_Type__c,RecordTypeId
-						FROM Contact
-						WHERE Id IN:relationshipMap.keySet() AND RecordTypeId = :WISH_FAMILY_ID
-						LIMIT 50000
-				]) {
-					if (relationshipMap.containsKey(dbContact.Id)) {
-						dbContact.Relationship_Type__c = relationshipMap.get(dbContact.Id);
-						familyContactList.add(dbContact);
-					}
+			for (Contact dbContact : [
+					SELECT Id,Name,Relationship_Type__c,RecordTypeId
+					FROM Contact
+					WHERE Id IN:relationshipMap.keySet() AND RecordTypeId = :WISH_FAMILY_ID
+			]) {
+				if (relationshipMap.containsKey(dbContact.Id)) {
+					dbContact.Relationship_Type__c = relationshipMap.get(dbContact.Id);
+					familyContactList.add(dbContact);
 				}
 			}
 			update familyContactList;
@@ -363,13 +365,7 @@ public class RelationshipService {
 				ErrorMessage_AC.createDebugRec('RelationshipService',
 						String.valueOf(relationship), String.valueOf(ex),
 						'updateRelationshipType', relationship.Id, ex.getStackTraceString(), 'Error');
-			}
-			if (!Test.isRunningTest()) {
-				for (npe4__Relationship__c relationship : [
-						SELECT Id,npe4__Contact__c,npe4__Type__c
-						FROM npe4__Relationship__c
-						WHERE npe4__Contact__c IN:relationshipMap.keySet()
-				]) {
+				if (!Test.isRunningTest()) {
 					relationship.addError(Label.Debug_log_error_message);
 				}
 			}
@@ -457,25 +453,25 @@ public class RelationshipService {
 			}
 		}
 		insert wishFormList;
-
-		if (!parentGuardianMap.isEmpty()) {
-			List<Contact> updateContactList = new List<Contact>();
-			for (Contact contact : [
-					SELECT Id,Name,Parent_Legal_Guardian__c
-					FROM Contact
-					WHERE Id IN:parentGuardianMap.keySet()
-			]) {
-				if (parentGuardianMap.containsKey(contact.Id)) {
-					if (contact.Parent_Legal_Guardian__c == null) {
-						contact.Parent_Legal_Guardian__c = parentGuardianMap.get(contact.Id);
-					} else {
-						contact.Parent_Legal_Guardian__c = contact.Parent_Legal_Guardian__c
-								+ ', ' + parentGuardianMap.get(contact.Id);
-					}
-					updateContactList.add(contact);
+		if (parentGuardianMap.isEmpty()) {
+			return;
+		}
+		List<Contact> updateContactList = new List<Contact>();
+		for (Contact contact : [
+				SELECT Id,Name,Parent_Legal_Guardian__c
+				FROM Contact
+				WHERE Id IN:parentGuardianMap.keySet()
+		]) {
+			if (parentGuardianMap.containsKey(contact.Id)) {
+				if (contact.Parent_Legal_Guardian__c == null) {
+					contact.Parent_Legal_Guardian__c = parentGuardianMap.get(contact.Id);
+				} else {
+					contact.Parent_Legal_Guardian__c = contact.Parent_Legal_Guardian__c
+							+ ', ' + parentGuardianMap.get(contact.Id);
 				}
-				update updateContactList;
+				updateContactList.add(contact);
 			}
+			update updateContactList;
 		}
 	}
 
@@ -518,25 +514,26 @@ public class RelationshipService {
 				}
 			}
 		}
-		if (!parentGuardianMap.isEmpty()) {
-			List<Contact> contacts = new List<Contact>();
-			for (Contact contact : [
-					SELECT Id,Name,Parent_Legal_Guardian__c,RecordTypeId
-					FROM Contact
-					WHERE Id IN:parentGuardianMap.keySet()
-					AND RecordTypeId = :CONTACT_WISH_CHILD_RT_ID
-			]) {
-				if (parentGuardianMap.containsKey(contact.Id)) {
-					if (String.isNotEmpty(contact.Parent_Legal_Guardian__c)) {
-						contact.Parent_Legal_Guardian__c = parentGuardianMap.get(contact.Id);
-					} else {
-						contact.Parent_Legal_Guardian__c = contact.Parent_Legal_Guardian__c + ', '
-								+ parentGuardianMap.get(contact.Id);
-					}
-					contacts.add(contact);
+		if (parentGuardianMap.isEmpty()) {
+			return;
+		}
+		List<Contact> contacts = new List<Contact>();
+		for (Contact contact : [
+				SELECT Id,Name,Parent_Legal_Guardian__c,RecordTypeId
+				FROM Contact
+				WHERE Id IN:parentGuardianMap.keySet()
+				AND RecordTypeId = :CONTACT_WISH_CHILD_RT_ID
+		]) {
+			if (parentGuardianMap.containsKey(contact.Id)) {
+				if (String.isNotEmpty(contact.Parent_Legal_Guardian__c)) {
+					contact.Parent_Legal_Guardian__c = parentGuardianMap.get(contact.Id);
+				} else {
+					contact.Parent_Legal_Guardian__c = contact.Parent_Legal_Guardian__c + ', '
+							+ parentGuardianMap.get(contact.Id);
 				}
-				update contacts;
+				contacts.add(contact);
 			}
+			update contacts;
 		}
 	}
 
@@ -560,36 +557,37 @@ public class RelationshipService {
 		}
 		List<Wish_Child_Form__c> updateWishFormRec = new List<Wish_Child_Form__c >();
 		List<Wish_Child_Form__c> deleteWishFormList = new List<Wish_Child_Form__c>();
-		if (!relationshipMap.isEmpty()) {
-			for (Wish_Child_Form__c wishChildForm : [
-					SELECT Id,Contact__c,Emergency_Relationship__c,Residing_With_Wish_Child__c,
-							RecordTypeId,Hidden_Same_as_Family__c,Migrated__c,IsParticipant__c
-					FROM Wish_Child_Form__c
-					WHERE Contact__c IN:relationshipMap.keySet()
-					AND RecordTypeId = :WISH_FORM_FAMILY_ID
-					AND Migrated__c = FALSE
-			]) {
-				if (relationshipMap.containsKey(wishChildForm.Contact__c)) {
-					wishChildForm.Id = wishChildForm.Id;
-					wishChildForm.Emergency_Relationship__c = relationshipMap.get(wishChildForm.Contact__c).npe4__Type__c;
-					if (relationshipMap.get(wishChildForm.Contact__c).Parent_Legal_Guardian__c
-							&& relationshipMap.get(wishChildForm.Contact__c).Wish_Participant__c) {
-						wishChildForm.Hidden_Same_as_Family__c = true;
-						wishChildForm.IsParticipant__c = false;
-					} else if (relationshipMap.get(wishChildForm.Contact__c).Parent_Legal_Guardian__c
-							&& !relationshipMap.get(wishChildForm.Contact__c).Wish_Participant__c) {
-						wishChildForm.Hidden_Same_as_Family__c = false;
-						wishChildForm.IsParticipant__c = false;
-					} else if (!relationshipMap.get(wishChildForm.Contact__c).Parent_Legal_Guardian__c
-							&& relationshipMap.get(wishChildForm.Contact__c).Wish_Participant__c) {
-						wishChildForm.Hidden_Same_as_Family__c = false;
-						wishChildForm.IsParticipant__c = true;
-					} else if (!relationshipMap.get(wishChildForm.Contact__c).Parent_Legal_Guardian__c
-							&& !relationshipMap.get(wishChildForm.Contact__c).Wish_Participant__c) {
-						deleteWishFormList.add(wishChildForm);
-					}
-					updateWishFormRec.add(wishChildForm);
+		if (relationshipMap.isEmpty()) {
+			return;
+		}
+		for (Wish_Child_Form__c wishChildForm : [
+				SELECT Id,Contact__c,Emergency_Relationship__c,Residing_With_Wish_Child__c,
+						RecordTypeId,Hidden_Same_as_Family__c,Migrated__c,IsParticipant__c
+				FROM Wish_Child_Form__c
+				WHERE Contact__c IN:relationshipMap.keySet()
+				AND RecordTypeId = :WISH_FORM_FAMILY_ID
+				AND Migrated__c = FALSE
+		]) {
+			if (relationshipMap.containsKey(wishChildForm.Contact__c)) {
+				wishChildForm.Id = wishChildForm.Id;
+				wishChildForm.Emergency_Relationship__c = relationshipMap.get(wishChildForm.Contact__c).npe4__Type__c;
+				if (relationshipMap.get(wishChildForm.Contact__c).Parent_Legal_Guardian__c
+						&& relationshipMap.get(wishChildForm.Contact__c).Wish_Participant__c) {
+					wishChildForm.Hidden_Same_as_Family__c = true;
+					wishChildForm.IsParticipant__c = false;
+				} else if (relationshipMap.get(wishChildForm.Contact__c).Parent_Legal_Guardian__c
+						&& !relationshipMap.get(wishChildForm.Contact__c).Wish_Participant__c) {
+					wishChildForm.Hidden_Same_as_Family__c = false;
+					wishChildForm.IsParticipant__c = false;
+				} else if (!relationshipMap.get(wishChildForm.Contact__c).Parent_Legal_Guardian__c
+						&& relationshipMap.get(wishChildForm.Contact__c).Wish_Participant__c) {
+					wishChildForm.Hidden_Same_as_Family__c = false;
+					wishChildForm.IsParticipant__c = true;
+				} else if (!relationshipMap.get(wishChildForm.Contact__c).Parent_Legal_Guardian__c
+						&& !relationshipMap.get(wishChildForm.Contact__c).Wish_Participant__c) {
+					deleteWishFormList.add(wishChildForm);
 				}
+				updateWishFormRec.add(wishChildForm);
 			}
 		}
 		update updateWishFormRec;
@@ -608,29 +606,29 @@ public class RelationshipService {
 		for (npe4__Relationship__c relationship : relationships) {
 			contactIds.add(relationship.npe4__RelatedContact__c);
 		}
-		if (!contactIds.isEmpty()) {
-			List<Wish_Child_Form__c> wishFormList = new List<Wish_Child_Form__c>();
-			for (Wish_Child_Form__c wishChildForm : [
-					SELECT Id,Contact__c,RecordTypeId,Migrated__c
-					FROM Wish_Child_Form__c
-					WHERE Contact__c IN:contactIds
-					AND RecordTypeId = :WISH_FORM_FAMILY_ID
-					AND Migrated__c = :FALSE
-			]) {
-				wishFormList.add(wishChildForm);
-			}
-			List<Contact> contacts = new List<Contact>();
-			for (Contact contact : [
-					SELECT Id,Hidden_Wish_Form_Id__c
-					FROM Contact
-					WHERE Id IN:contactIds
-			]) {
-				contact.Hidden_Wish_Form_Id__c = null;
-				contacts.add(contact);
-			}
-			update contacts;
-			delete wishFormList;
+		if (contactIds.isEmpty()) {
 		}
+		List<Wish_Child_Form__c> wishFormList = new List<Wish_Child_Form__c>();
+		for (Wish_Child_Form__c wishChildForm : [
+				SELECT Id,Contact__c,RecordTypeId,Migrated__c
+				FROM Wish_Child_Form__c
+				WHERE Contact__c IN:contactIds
+				AND RecordTypeId = :WISH_FORM_FAMILY_ID
+				AND Migrated__c = :FALSE
+		]) {
+			wishFormList.add(wishChildForm);
+		}
+		List<Contact> contacts = new List<Contact>();
+		for (Contact contact : [
+				SELECT Id,Hidden_Wish_Form_Id__c
+				FROM Contact
+				WHERE Id IN:contactIds
+		]) {
+			contact.Hidden_Wish_Form_Id__c = null;
+			contacts.add(contact);
+		}
+		update contacts;
+		delete wishFormList;
 	}
 
 	/**
