@@ -6894,6 +6894,53 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
             </valueSetDefinition>
         </valueSet>
     </fields>
+	<fields>
+	<fullName>Expedite_timeframe__c</fullName>
+    <description>Used to hold &#39;ideal timeframe for wish&#39; values</description>
+    <externalId>false</externalId>
+    <label>Expedite timeframe</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>&lt; 1 month</fullName>
+                <default>false</default>
+                <label>&lt; 1 month</label>
+            </value>
+            <value>
+                <fullName>1-3 months</fullName>
+                <default>false</default>
+                <label>1-3 months</label>
+            </value>
+            <value>
+                <fullName>3-6 months</fullName>
+                <default>false</default>
+                <label>3-6 months</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+	</fields>
+	<fields>
+	<fullName>Other_expedite_timeframe_comments__c</fullName>
+    <description>Used to get ideal time frame description value</description>
+    <externalId>false</externalId>
+    <label>Other expedite timeframe comments</label>
+    <length>32768</length>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+	</fields>
     <fields>
         <fullName>unique_wish_identifier__c</fullName>
         <caseSensitive>false</caseSensitive>
@@ -21021,3 +21068,4 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
         </picklistValues>
     </recordTypes>
 </CustomObject>
+

@@ -1,7 +1,8 @@
 <!-- ******************************************************************************************************************************
 1. 01/09/2020 - Manoj      - SIW-287 : Added newly created fields in UI to display in Docusign and PDF document.
 2. 01/02/2020 - Manoj      - SIW-288 : Updated Question verbiage and help text on DV question.
-3. 11/02/2020 - Manoj      - SIW-376 :  Commented first 2 statements as per SIW-376
+3. 11/02/2020 - Manoj      - SIW-376 : Commented first 2 statements as per SIW-376
+4. 09/04/2020 - Manoj      - SIW-355 : Changed the placement of one question as mentiond in the ticket, changed question verbiage for one question
 *********************************************************************************************************************************** -->
 <apex:page showHeader="false" renderAs="pdf" sidebar="false" applyHtmlTag="false" standardStylesheets="false" controller="PARTAPDF" applyBodyTag="false" cache="false">
     <head>
@@ -435,23 +436,10 @@
                                     </div>
                                 </apex:outputpanel>
                                 
-                                <apex:outputpanel rendered="{!currLead.Any_medical_reason_for_moving_quickly__c!=Null}">
-                                    <div class="container" style="width:100%;">
-                                        <div class="left-col"> Is there a medical reason we would need to expedite the process?</div>
-                                        <div class="left-col"> {!currLead.Any_medical_reason_for_moving_quickly__c}</div>
-                                    </div>
-                                </apex:outputpanel>
-                                
-                                <apex:outputpanel rendered="{!currLead.Please_Explain__c!=Null}">
-                                    <div class="container" style="width:100%;">
-                                        <div class="left-col"> Please explain :</div>
-                                        <div class="left-col"> {!currLead.Please_Explain__c}</div>
-                                    </div>
-                                </apex:outputpanel>
-                                
+                                <!--SIW-355 Start: Changed placement of below question -->
                                 <apex:outputpanel rendered="{!currLead.Will_Child_s_Condition_Deteriorate__c!=Null}">
                                     <div class="container" style="width:100%;">
-                                        <div class="left-col"> Do you expect this childs condition will significantly deteriorate in the next 3-6 months? </div>
+                                        <div class="left-col"> Do you expect this child's condition will significantly deteriorate in the next 3-6 months? </div>
                                         <div class="left-col"> {!currLead.Will_Child_s_Condition_Deteriorate__c}</div>
                                     </div>
                                 </apex:outputpanel>
@@ -462,7 +450,38 @@
                                         <div class="left-col"> {!currLead.Please_Explain_Deteriorate__c}</div>
                                     </div>
                                 </apex:outputpanel>
+                                <!--SIW-355 End: Changed placement of below question -->
+
+                                <apex:outputpanel rendered="{!currLead.Any_medical_reason_for_moving_quickly__c!=Null}">
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Is there a medical necessity to expedite the process?</div><!--SIW-355 changed verbiage-->
+                                        <div class="left-col"> {!currLead.Any_medical_reason_for_moving_quickly__c}</div>
+                                    </div>
+                                </apex:outputpanel>
                                 
+                                <apex:outputpanel rendered="{!currLead.Please_Explain__c!=Null}">
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Please provide medical reason for request</div>
+                                        <div class="left-col"> {!currLead.Please_Explain__c}</div>
+                                    </div>
+                                </apex:outputpanel>
+
+                                <!--SIW-355 start : Added new question-->
+                                <apex:outputpanel rendered="{!currLead.Expedite_timeframe__c != null}">
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Please provide ideal timeframe for wish, if eligible</div>
+                                        <div class="left-col"> {!currLead.Expedite_timeframe__c}</div>
+                                    </div>
+                                </apex:outputpanel>
+
+                                <apex:outputpanel rendered="{!currLead.Other_expedite_timeframe_comments__c != null}">
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Ideal timeframe for wish - Other</div>
+                                        <div class="left-col"> {!currLead.Other_expedite_timeframe_comments__c}</div>
+                                    </div>
+                                </apex:outputpanel>
+                                <!--SIW-355 End : Added new question-->
+
                                 <apex:outputpanel rendered="{!currLead.Provided_additional_information__c!=Null}">
                                     <div class="container" style="width:100%;">
                                         <div class="left-col"> Is there additional information you would like to provide?</div>
