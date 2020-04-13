@@ -24,7 +24,7 @@ public with sharing class RelationshipsDomain extends trac_TriggerHandlerBase {
 		Set<Id> qualifyingMedicalProfessionalContactIds =
 				RelationshipService.buildQualifyingMedProfessionalRelationshipMap(newRelationshipsList);
 		RelationshipService.updatePhysicianDetails(qualifyingMedicalProfessionalContactIds, newRelationshipsList);
-		Map<Id, Id> relationshipMap = RelationshipService.buildNonMedicalRelationshipMap(newRelationshipsList);
+		Map<Id, String> relationshipMap = RelationshipService.buildNonMedicalRelationshipMap(newRelationshipsList);
 		RelationshipService.updateRelationshipType(relationshipMap);
 		Map<Id, Id> contactMap = RelationshipService.buildContactMap(newRelationshipsList);
 		RelationshipService.populateGuardianName(contactMap);
