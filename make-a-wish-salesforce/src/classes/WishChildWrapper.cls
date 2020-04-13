@@ -3,6 +3,7 @@ Author      : MST Solutions
 Date        : 
 Description : 
 1. 01/09/2020 - Manoj      - SIW-287 : Added new fields to insert values in lead records upon submission of DV form.
+2. 09/04/2020 - Manoj      - SIW-355 : Added 2 new field in wrapper - timeFrameValue, idealtimeFrameValue
 *******************************************************************************************************************/
 public class WishChildWrapper {
     public String describePatient {get; set;}     
@@ -61,6 +62,10 @@ public class WishChildWrapper {
     public String admittingDiagnosis{get;set;}
     public String ifICUAdmission{get;set;}
     /*SIW-287 End*/
+    /*SIW-355 Start*/
+    public String timeFrameValue{get;set;}
+    public String idealtimeFrameValue{get;set;}
+    /*SIW-355 End*/
     public WishChildWrapper(){
         communicationList = new List<String>();       
     }
