@@ -33,6 +33,7 @@
     <members>Endpoints__c</members>
     <members>Inkind_Donation_PDFs__c</members>
     <members>Lead</members>
+    <members>Wish_Budget_Approver_Filter__c</members>
     <name>CustomObject</name>
   </types>
   <types>
