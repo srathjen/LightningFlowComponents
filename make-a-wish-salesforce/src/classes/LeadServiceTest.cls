@@ -1,8 +1,7 @@
 /**
  * Lead Service Test
- *
  * @author Gustavo Mayer, Traction on Demand
-@createdDate 2/27/2020
+ * @createdDate 2/27/2020
  */
 @IsTest
 public class LeadServiceTest {
