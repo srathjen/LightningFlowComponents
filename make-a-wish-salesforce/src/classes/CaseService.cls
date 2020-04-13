@@ -27,6 +27,8 @@ public with sharing class CaseService {
 		Utils.mapOfSObjectLabelsByFields(Schema.SObjectType.Case);
 	private static final Map<Schema.SObjectField, String> MAP_OF_LEAD_LABELS_BY_FIELDS =
 		Utils.mapOfSObjectLabelsByFields(Schema.SObjectType.Lead);
+	private static final Set<Id> CASE_MEMBER_CHECK_IDS = new Set<Id>
+	{Constant_AC.WISH_RT_ID, Constant_AC.WISH_ASSIST_RT_ID, Constant_AC.DIAGNOSIS_RT_ID};
 
 	/**
     * Check if the User or the User's profile has permissions on Case
@@ -1001,6 +1003,19 @@ public with sharing class CaseService {
      * @createdDate     unknown
     */
 	public static void updateLeadStatus(Set<String> updatedApprovedLeadInfoSet, Set<String> updatedDnqLeadInfoSet, List<Case> newCaseList) {
+		if ((updatedApprovedLeadInfoSet == null || updatedApprovedLeadInfoSet.isEmpty())
+			&&(updatedDnqLeadInfoSet == null || updatedDnqLeadInfoSet.isEmpty())){
+
+			return;
+		}
+
+		List<Case> exceptionList = new List<Case>();
+		for (Case aCase : newCaseList) {
+			if (CASE_MEMBER_CHECK_IDS.contains(aCase.RecordTypeId)) {
+				exceptionList.add(aCase);
+			}
+		}
+
 		List<Lead> updatedLeadList = new List<Lead>();
 		String message = '';
 		Boolean showError;
@@ -1067,7 +1082,7 @@ public with sharing class CaseService {
 			}
 
 			if (!String.isBlank(message)) {
-				for (Case currCase : newCaseList) {
+				for (Case currCase : exceptionList) {
 					currCase.addError(Label.CaseTrigger_Provide_Values + ' ' + message + '.');
 				}
 			}

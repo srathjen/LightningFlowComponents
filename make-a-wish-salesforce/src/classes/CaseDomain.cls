@@ -386,8 +386,6 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
         Set<Id> caseIdSetForVolOpp = new Set<Id>();
         Map<Id, Case> caseIdsMap = new Map<Id, Case>();
         Set<String> newWishTypeSet = new Set<String>();
-        Set<String> updatedApprovedLeadInfoSet = new Set<String>();
-        Set<String> updatedDnqLeadInfoSet = new Set<String>();
         Set<Id> presentationCloseTaskIdsSet = new Set<Id>();
         Map<Id, Case> presentationCloseTaskParentIdMap = new Map<Id, Case>();
         Set<Id> presentationOpenTaskIdsSet = new Set<Id>();
@@ -441,20 +439,7 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
                     newWishTypeSet.add(aCase.Wish_Type__c);
                 }
 
-                if ((Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MEDICAL_REVIEW.equals(aCase.Status)
-                    && !Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MEDICAL_REVIEW.equals(oldCasesMap.get(aCase.Id).Status))
-                    || (Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MAC_REVIEW.equals(aCase.Status)
-                    && !Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MAC_REVIEW.equals(oldCasesMap.get(aCase.Id).Status))
-                    && aCase.RecordTypeId == DIAGNOSIS_VERIFICATION_RECORDTYPE_ID) {
 
-                    updatedApprovedLeadInfoSet.add(aCase.Lead__c);
-                } else if ((Constant_AC.CASE_STATUS_DNQ_NATIONAL_MEDICAL_REVIEW.equals(aCase.Status)
-                    || Constant_AC.CASE_STATUS_DNQ_NATIONAL_MAC_REVIEW.equals(aCase.Status))
-                    && aCase.RecordTypeId == DIAGNOSIS_VERIFICATION_RECORDTYPE_ID
-                    && oldCasesMap.get(aCase.Id).Status != aCase.Status) {
-
-                    updatedDnqLeadInfoSet.add(aCase.Lead__c);
-                }
 
                 if (CLOSE_BIRTHDAY_TASK_SET_STATUSES.contains(aCase.Status)
                     && (oldCasesMap.get(aCase.Id).Status != aCase.Status
@@ -587,12 +572,9 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
         if (caseIdSetForVolOpp.size() > 0) {
             CaseService.closeVolOpp(caseIdSetForVolOpp, exceptionList);
         }
-        if (updatedApprovedLeadInfoSet.size() > 0 || updatedDnqLeadInfoSet.size() > 0) {
-            CaseService.updateLeadStatus(updatedApprovedLeadInfoSet, updatedDnqLeadInfoSet, exceptionList);
-        }
 
-
-
+        List<Set<String>> updateLeadStatusApprovedAndDnqLeadIds =
+            getUpdateLeadStatusApprovedAndDnqLeadIds();
 
         CreateAndUpdateUserCaseTeamRoleWrapper uctrWrapper =
             prepareCreateAndUpdateUserCaseTeamRoleWrapper();
@@ -606,6 +588,8 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
             readyToAssignChapterIdSet.add(aCase.ChapterName__c);
         }
 
+        CaseService.updateLeadStatus(updateLeadStatusApprovedAndDnqLeadIds[0],
+            updateLeadStatusApprovedAndDnqLeadIds[1], newCasesList);
         CaseService.updateVolunteerOpp(getUpdateVolunteerOppMap());
         CaseService.updateGrantedDate(getUpdateGrantedDateCases());
         CaseService.createAndUpdateUserCaseTeamRole(uctrWrapper.updateVolunteerManagerCaseTeamMap,
@@ -618,6 +602,39 @@ public with sharing class CaseDomain extends trac_TriggerHandlerBase {
         CaseService.createVolunteerOpportunity(createVolunteerOpportunityCaseMap, readyToAssignChapterIdSet);
         CaseService.updateVolunteerOpportunityAsInactive(getUpdateVolunteerOpportunityAsInactiveCaseIds());
         CaseService.updateCaseToLeadSubStatus(Constant_AC.LEAD_STATUS_ELIGIBILITY_REVIEW, getMapOfCaseStatusesByLeadId());
+    }
+
+    /**
+     * @description     Private function to prepare a List<Set<String>> of Lead Ids for CaseService.updateLeadStatus
+     *
+     * @return          List<Set<String>>
+     *
+     * @author          Chris Shinnimin, Traction on Demand
+     * @createdDate     2020-04-13
+     */
+    private List<Set<String>> getUpdateLeadStatusApprovedAndDnqLeadIds() {
+        List<Set<String>> updateLeadStatusApprovedAndDnqLeadIds = new List<Set<String>>();
+        updateLeadStatusApprovedAndDnqLeadIds[0] = new Set<String>(); // updated leads
+        updateLeadStatusApprovedAndDnqLeadIds[1] = new Set<String>(); // dnq leads
+
+        for (Case aCase : newCasesList) {
+            if ((Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MEDICAL_REVIEW.equals(aCase.Status)
+                && !Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MEDICAL_REVIEW.equals(oldCasesMap.get(aCase.Id).Status))
+                || (Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MAC_REVIEW.equals(aCase.Status)
+                && !Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MAC_REVIEW.equals(oldCasesMap.get(aCase.Id).Status))
+                && aCase.RecordTypeId == DIAGNOSIS_VERIFICATION_RECORDTYPE_ID) {
+
+                updateLeadStatusApprovedAndDnqLeadIds[0].add(aCase.Lead__c);
+            } else if ((Constant_AC.CASE_STATUS_DNQ_NATIONAL_MEDICAL_REVIEW.equals(aCase.Status)
+                || Constant_AC.CASE_STATUS_DNQ_NATIONAL_MAC_REVIEW.equals(aCase.Status))
+                && aCase.RecordTypeId == DIAGNOSIS_VERIFICATION_RECORDTYPE_ID
+                && oldCasesMap.get(aCase.Id).Status != aCase.Status) {
+
+                updateLeadStatusApprovedAndDnqLeadIds[1].add(aCase.Lead__c);
+            }
+        }
+
+        return updateLeadStatusApprovedAndDnqLeadIds;
     }
 
     /**
