@@ -22,6 +22,7 @@
   </types>
   <types>
     <members>Lead.Primary_Medical_Professional_Type_Other__c</members>
+	<members>Lead.Child_Age__c</members> 
     <name>CustomField</name>
   </types>
   <types>
