@@ -48,12 +48,7 @@ public class ApplyForRoles_AC {
 	private static final String PROCESS_INSTANCE_STATUS_PENDING = Constant_AC.PROCESS_INSTANCE_STATUS_PENDING;
 
 	public ApplyForRoles_AC() {
-		List<User> userIns = [
-				SELECT Id, ContactId
-				FROM User
-				WHERE Id = :UserInfo.getUserId()
-		];
-		contactId = userIns[0].ContactId;
+		contactId = Utils.currentUser.ContactId;
 		showSubmitandSign = false;
 		displaySignNowPopup = false;
 		Boolean showEdit = false;
@@ -153,7 +148,7 @@ public class ApplyForRoles_AC {
 					FROM Dynamic_Content__c
 					WHERE Active__c = TRUE AND RecordTypeId = :nationalRT
 			];
-			if (dynamicContent.size() > 0) {
+			if (!dynamicContent.isEmpty()) {
 				applicationDynamicContent = dynamicContent[0].Application_Overview__c;
 			}
 		}
@@ -214,7 +209,7 @@ public class ApplyForRoles_AC {
 				WHERE TargetObjectId = :currentVolunteer.Id
 				AND Status = :PROCESS_INSTANCE_STATUS_PENDING
 		];
-		if (approvalIns.size() > 0) {
+		if (!approvalIns.isEmpty()) {
 			ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.FATAL,
 					' This record is already in approval process'));
 		} else {
