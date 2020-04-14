@@ -644,6 +644,10 @@ public class DiagnosisVerification_AC {
      */
     @TestVisible
     private List<DiagnosisWrapper.MedicalWrapper> MedicalQuestions(String icdCode, String conditionDescription, Boolean isGroup1, String icdOrPcd, Integer diagnosisBlockNum, List<Medical_Questions__c> medicalQuestions, Boolean skipMedQues) {
+        if (medicalQuestions == null) {
+            medicalQuestions = new List<Medical_Questions__c>();
+        }
+
         try {
             Condition_Description__c conditionDesc;
             diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescriptionObject = conditionDescription;
@@ -1372,7 +1376,7 @@ public class DiagnosisVerification_AC {
             query += field + ',';
         }
 
-        for (Schema.FieldSetMember currField : Utils.getPartAFields()) { 
+        for (Schema.FieldSetMember currField : Utils.getPartAFields()) {
             query += currField.getFieldPath() + ',';
         }
 
