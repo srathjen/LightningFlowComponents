@@ -32,15 +32,11 @@ private class Case_Trigger_Test {
 
 		CaseService.updateWishRecordIdentifier(new List<Case>{wish});
 
-		CaseService.CaseTeamInTakeManager(new Map<Id, Case>{
-			wish.Id => wish
-		});
+		CaseService.caseTeamInTakeManager(new List<Case>{wish});
 
 		insert new Task(Subject = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary', WhoId = wish.ContactId);
 
-		CaseService.reParentDvTask(new Set<Id>{
-			wish.Id
-		});
+		CaseService.reParentDvTask(new List<Case>{wish});
 	}
 
 	@IsTest
