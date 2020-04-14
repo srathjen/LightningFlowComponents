@@ -20,13 +20,14 @@ public class Utils {
         get {
             if (currentUser == null) {
                 currentUser = [
-                        SELECT  Id, Name, Chapter_Name__c,
-                                UserRole.Name,
-                                ProfileId, Profile.Id, Profile.Name, 
-                                ContactId, Contact.Account.Volunteer_Manager__c, Contact.OwnerId
-                        FROM User
-                        WHERE Id = :UserInfo.getUserId()
-                        LIMIT 1
+                    SELECT
+                        Id, Name, Chapter_Name__c,
+                        UserRole.Name,
+                        Profile.Id, Profile.Name, ContactId,
+                        Contact.Account.Volunteer_Manager__c, Contact.OwnerId
+                    FROM User
+                    WHERE Id = :UserInfo.getUserId()
+                    LIMIT 1
                 ];
             }
             return currentUser;
@@ -38,8 +39,7 @@ public class Utils {
      * Find Picklist Labels
      * @param sObjectApiName
      * @param fieldApiName
-     *
-     * @return
+     * @return List of Picklist Options
      */
     public static List<String> getPicklistLabels(String sObjectApiName, String fieldApiName) {
         List<String> pickListLabels = new List<String>();
@@ -58,10 +58,53 @@ public class Utils {
     }
 
     /**
+     * Find Picklist Select Options
+     * @param sObjectApiName
+     * @param fieldApiName
+     * @return List of Picklist Options
+     */
+    public static List<SelectOption> getPicklistSelectOptions(String sObjectApiName, String fieldApiName, String optionalPlaceholderOption) {
+        List<SelectOption> selectOptions = new List<SelectOption>();
+        try {
+            Map<String, Schema.SObjectField> fieldsByName = Schema.getGlobalDescribe().get(sObjectApiName).getDescribe().fields.getMap();
+            List<Schema.PicklistEntry> picklistEntries = fieldsByName.get(fieldApiName).getDescribe().getPicklistValues();
+            if (String.isNotEmpty(optionalPlaceholderOption)) {
+                selectOptions.add(new SelectOption('', optionalPlaceholderOption));
+            }
+            for (Schema.PicklistEntry pickListValue : picklistEntries) {
+                selectOptions.add(new SelectOption(pickListValue.getLabel(), pickListValue.getValue()));
+            }
+        } catch (Exception e) {
+            System.debug('Error in get picklist select options: line' + e.getLineNumber() + ', ' + e.getMessage());
+        }
+        return selectOptions;
+    }
+
+    /**
+     * Find Field Paths
+     * @param sObjectApiName
+     * @param fieldApiName
+     * @return List of Field Paths
+     */
+    public static List<String> getFieldPaths(String sObjectApiName, String fieldApiName) {
+        List<String> fieldPaths = new List<String>();
+        try {
+            Map<String, FieldSet> fieldSetMap = Schema.getGlobalDescribe().get(sObjectApiName).getDescribe().fieldSets.getMap();
+            List<FieldSetMember> fieldSetMembers = fieldSetMap.get(fieldApiName).getFields();
+
+            for (Schema.FieldSetMember fieldPath : fieldSetMembers) {
+                fieldPaths.add(fieldPath.getFieldPath());
+            }
+        } catch (Exception e) {
+            System.debug('Error in get field set labels: line' + e.getLineNumber() + ', ' + e.getMessage());
+        }
+        return fieldPaths;
+    }
+
+    /**
      * Find field labels
      * @param sObjectApiName
-     *
-     * @return
+     * @return Map of Picklist Options
      */
     public static Map<String, String> getFieldLabels(String sObjectApiName) {
         Map<String, String> fieldLabelsMap = new Map<String, String>();
@@ -79,7 +122,6 @@ public class Utils {
 
     /**
      * Format a Date field
-     *
      * @param date
      * @param format
      * @return Formatted String Date
@@ -95,7 +137,6 @@ public class Utils {
 
     /**
      * Parse a String to a Date
-     *
      * @param date
      * @param currentFormat
      * @return Date
@@ -207,8 +248,8 @@ public class Utils {
      * @author				Chris Shinnimin, Traction on Demand
      * @date				2020-03-30
     */
-    public static Map<Schema.SObjectField,String> mapOfSObjectLabelsByFields(Schema.DescribeSObjectResult describe) {
-        Map<Schema.SObjectField,String> mapOfSObjectLabelsByFields = new Map<Schema.SObjectField,String>();
+    public static Map<Schema.SObjectField, String> mapOfSObjectLabelsByFields(Schema.DescribeSObjectResult describe) {
+        Map<Schema.SObjectField, String> mapOfSObjectLabelsByFields = new Map<Schema.SObjectField, String>();
 
         Map<String, Schema.SObjectType> schemaMap = Schema.getGlobalDescribe();
         Schema.SObjectType leadSchema = schemaMap.get(describe.Name);

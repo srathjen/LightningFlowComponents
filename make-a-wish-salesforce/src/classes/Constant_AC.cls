@@ -1,7 +1,7 @@
 /**
  * @description Constants class
- * @author		Gustavo Mayer, Traction on Demand
- * @createdDate	6-19-2019
+ * @author      Gustavo Mayer, Traction on Demand
+ * @createdDate 6-19-2019
  */
 public class Constant_AC {
 	public final static String CONTACT_WISH_CHILD_RT_LABEL = 'Wish Child';
@@ -59,6 +59,7 @@ public class Constant_AC {
 	public final static Id WISH_FORM_DETERMINATION_ID = Schema.SObjectType.Wish_Child_Form__c.getRecordTypeInfosByDeveloperName().get('Wish_Form_Determination_Case').getRecordTypeId();
 	public final static Id WISH_FORM_CHILD_EMERGENCY_ID = Schema.SObjectType.Wish_Child_Form__c.getRecordTypeInfosByDeveloperName().get('Wish_Form_Emergency_Contact').getRecordTypeId();
 	public final static Id WISH_FORM_CHILD_DRIVER_ID = Schema.SObjectType.Wish_Child_Form__c.getRecordTypeInfosByDeveloperName().get('Wish_Form_Driver_Information').getRecordTypeId();
+	public final static String WISH_FORM_FAMILY_LABEL = Schema.SObjectType.Wish_Child_Form__c.getRecordTypeInfosByDeveloperName().get('Wish_Form_Family').getName();
 	public final static Id WISH_CLEARANCE_ATTACHMENT_ID = Schema.SObjectType.Minor_Participant__c.getRecordTypeInfosByDeveloperName().get('Wish_Clarence_Attachment').getRecordTypeId();
 	public final static Id FORM_TRACKER_ATTACHMENT_ID = Schema.SObjectType.Minor_Participant__c.getRecordTypeInfosByDeveloperName().get('Form_Tracker_Attachment').getRecordTypeId();
 	public final static Id COMBO_RECORD_ID = Schema.SObjectType.Minor_Participant__c.getRecordTypeInfosByDeveloperName().get('Combo_Form_Attachment').getRecordTypeId();
@@ -69,35 +70,36 @@ public class Constant_AC {
 	public static final String THEME_4U = 'Theme4u';
 
 	/**
-	* Test Related Constants
-	*/
+    * Test Related Constants
+    */
 	public static final String TEST_EXCEPTION_ERROR = 'Test Class execution';
 
 	/**
-	* sObject Api Names and Labels
-	*/
+    * sObject Api Names and Labels
+    */
 	public final static String WISH_AFFILIATION_API_NAME = Schema.SObjectType.Wish_Affiliation__c.getName();
 	public final static String CONTACT_API_NAME = Schema.SObjectType.Contact.getName();
 	public final static String RELATIONSHIP_API_NAME = Schema.SObjectType.npe4__Relationship__c.getName();
 
 	/**
-	 * Account Constants
-	 */
+     * Account Constants
+     */
 	public static final String ACCOUNT_NAME_MAW_AMERICA = 'Make-A-Wish America';
 	public static final String FAMILY_HOUSEHOLD_NAME_APPEND = ' ' + ' & ' + ' ' + 'Family Household';
 
 	/**
-	 * Affiliation Constants
-	 */
+     * Affiliation Constants
+     */
 	public final static String ORG_AFFILIATION_STATUS_ACTIVE = 'Active';
 	public final static String ORG_AFFILIATION_STATUS_INACTIVE = 'Inactive';
 	public final static String ORG_AFFILIATION_STATUS_PENDING = 'Pending';
+	public final static String ORG_AFFILIATION_STATUS_CURRENT = 'Current';
 	public final static String ORG_AFFILIATION_TREATING_FACILITY_CURRENT = 'Current';
 	public final static String ORG_AFFILIATION_STATUS_NOT_APPROVED = 'Not Approved';
 
 	/**
-	 * Lead Constants
-	 */
+     * Lead Constants
+     */
 	public static final Id LEAD_RT_DEFAULT = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Default').getRecordTypeId();
 	public static final Id LEAD_RT_MASTER = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Master').getRecordTypeId();
 	public static final Id LEAD_RT_WISH_CHILD = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Wish_Child').getRecordTypeId();
@@ -143,8 +145,8 @@ public class Constant_AC {
 	public static final String LEAD_RFI_FORM_INFO_NOT_QUALIFIED = 'Not Qualified';
 
 	/**
-	 * Case Constants
-	 */
+     * Case Constants
+     */
 	public static final String CASE_STATUS_WISH_DETERMINED = 'Wish Determined';
 	public static final String CASE_STATUS_WISH_DESIGN = 'Wish Design';
 	public static final String CASE_STATUS_WISH_SCHEDULED = 'Wish Scheduled';
@@ -190,6 +192,7 @@ public class Constant_AC {
 	public static final String CASE_WISH_TYPE_TRAVEL_HAWAII = 'Travel-Hawaii';
 	public static final String CASE_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
 	public static final String CASE_RECORD_TYPE_DIAGNOSIS_VERIFICATION_REVIEW = 'Diagnosis Verification Review';
+	public static final String CASE_RECORD_TYPE_WISH = 'Wish';
 	public static final String CASE_ORIGIN_WEB = 'Web';
 	public static final String CASE_ORIGIN_EMAIL = 'Email';
 	public static final String CASE_RUSH_TIME_FRAME = 'Select timeframe';
@@ -197,14 +200,14 @@ public class Constant_AC {
 	public static final String CASE_SUBJECT_ELIGIBILITY_REVIEW = 'Eligibility Review';
 
 	/**
-	 * Wish Affiliation Constants
-	 */
+     * Wish Affiliation Constants
+     */
 	public static final String WISH_AFFILIATION_WISH_AFFILIATION_TYPE_API_NAME = 'Wish_Affiliation_Type__c';
 	public static final String WISH_AFFILIATION_RESIDING_WITH_WISH_CHILD_API_NAME = 'Residing_with_Wish_child__c';
 
 	/**
-	 * Contact Constants
-	 */
+     * Contact Constants
+     */
 	public static final String CONTACT_PHONE_HOME = 'Home';
 	public static final String CONTACT_PHONE_MOBILE = 'Mobile';
 	public static final String CONTACT_PHONE_OTHER = 'Other';
@@ -236,47 +239,47 @@ public class Constant_AC {
 	public static final String CONTACT_GENDER_FEMALE = 'Female';
 	public static final String CONTACT_NAME_UNKNOWN = 'Unknown';
 	public static final String CONTACT_STATUS_ROLE_SPECIFIC_TRAINING_AVAILABLE = 'Role Specific Training Available';
-  public static final String CONTACT_ONBOARDING_STATUS_BACKGROUND_CHECK = 'Background Check';
+	public static final String CONTACT_ONBOARDING_STATUS_BACKGROUND_CHECK = 'Background Check';
 	public static final String CONTACT_PUBLICITY_YES = 'Yes';
 
 	/**
-	 * Chapter Role File Constants
-	 */
+     * Chapter Role File Constants
+     */
 	public final static String CHAPTER_ROLE_SINGLE_DAY_EVENT_VOLUNTEER = 'Single Day Event Volunteer';
 	public final static String CHAPTER_ROLE_WISH_GRANTER = 'Wish Granter';
 	public final static String CHAPTER_ROLE_WISH_GRANTER_MENTOR = 'Wish Granter Mentor';
 
 	/*
-	 * In Kind Reimbursement File Constants
-	 */
+     * In Kind Reimbursement File Constants
+     */
 	public final static String INKIND_REIMBURSEMENT_FILE_DOCUMENTATION = 'Not Available';
 
 	/**
-	 * Relationship Constants
-	 */
+     * Relationship Constants
+     */
 	public static final String RELATIONSHIP_NPE4_TYPE_API_NAME = 'npe4__Type__c';
 	public static final String RELATIONSHIP_PARENT_LEGAL_GUARDIAN_API_NAME = 'Parent_Legal_Guardian__c';
 	public static final String RELATIONSHIP_STATUS_ACTIVE = 'Active';
 
 	/**
-	 * Volunteer Roles Constants
-	 */
+     * Volunteer Roles Constants
+     */
 	public static final String VOLUNTEER_ROLE_STATUS_ACTIVE = 'Active';
 	public static final String VOLUNTEER_ROLE_STATUS_OUT_OF_COMPLIANCE = 'Out of Compliance';
 	public static final String VOLUNTEER_ROLE_STATUS_FORMER = 'Former';
 	public static final String VOLUNTEER_ROLE_STATUS_NOT_APPROVED = 'Not Approved';
 
 	/**
-	 * Volunteer Orientation Training Constants
-	 */
+     * Volunteer Orientation Training Constants
+     */
 	public static final String VOLUNTEER_ORIENTATION_TRAINING_TYPE_TRAINING = 'Training';
 	public static final String VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED = 'Completed';
 	public static final String VOLUNTEER_ORIENTATION_TRAINING_COMPLETION_NOT_APPROVED = 'Not Approved';
 	public static final String VOLUNTEER_ORIENTATION_TRAINING_COMPLETION_FOLLOW_UP_REQUESTED = 'Follow-up Requested';
 
 	/**
-	 * Volunteer Opportunities Constants
-	 */
+     * Volunteer Opportunities Constants
+     */
 	public static final String VOLUNTEER_OPPORTUNITY_ROLE_WISH_GRANTER = 'Wish Granter';
 	public static final String VOLUNTEER_OPPORTUNITY_ROLE_WISH_GRANTER_MENTOR = 'Wish Granter Mentor';
 	public static final String VOLUNTEER_OPPORTUNITY_ROLE_TEMPORARY_WISH_GRANTER = 'Temporary Wish Granter';
@@ -285,13 +288,20 @@ public class Constant_AC {
 	public static final String VOLUNTEER_OPPORTUNITY_STATUS_INACTIVE = 'Inactive';
 
 	/**
-	 * Contact Application Status
-	 */
+     * Contact Application Status
+     */
 	public static final String CONTACT_APPLICATION_STATUS_APPROVED = 'Approved';
+	public static final String CONTACT_APPLICATION_STATUS_COMPLETE = 'Complete';
+	public static final String CONTACT_APPLICATION_STATUS_DOCUSIGN_PENDING = 'DocuSign Pending';
+	public static final String CONTACT_APPLICATION_STATUS_SUBMIT = 'Submit';
+	public static final String CONTACT_APPLICATION_STATUS_FULLY_SUBMIT = 'Fully Submit';
+	public static final String CONTACT_APPLICATION_STATUS_PARTIAL_SUBMIT = 'Partial Submit';
+	public static final String CONTACT_APPLICATION_STATUS_REJECTED = 'Rejected';
+	public static final String CONTACT_ONBOARDING_STATUS_APPLICATION = 'Application';
 
 	/**
-	 * Docusign Status
-	 */
+     * Docusign Status
+     */
 	public static final String DOCUSIGN_ENVELOPE_STATUS_COMPLETED = 'Completed';
 	public static final String DOCUSIGN_SUBJECT_DIAGNOSIS_VERIFICATION_FORM = 'Diagnosis Verification Form';
 	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_LIABILITY = 'Signature Required - Liability And Publicity Release Form';
@@ -310,15 +320,15 @@ public class Constant_AC {
 	public static final String DOCUSIGN_STATUS_ENVELOPE_STATUS_SENT = 'Sent';
 
 	/**
-	 * Docusign Recipient Constants
-	 */
+     * Docusign Recipient Constants
+     */
 	public static final String DOCUSIGN_RECIPIENT_STATUS_COMPLETED = 'Completed';
 	public static final String DOCUSIGN_RECIPIENT_STATUS_DELIVERED = 'Delivered';
 	public static final String DOCUSIGN_RECIPIENT_STATUS_SENT = 'Sent';
 
 	/**
-	* Wish Affiliation Types
-	*/
+    * Wish Affiliation Types
+    */
 	public static final String WISH_AFFILIATION_TYPE_WISH_CHILD = 'Wish Child';
 	public static final String WISH_AFFILIATION_TYPE_APPROVED_PARTICIPANT = 'Approved Participant';
 	public static final String WISH_AFFILIATION_TYPE_REQUESTED_PARTICIPANT = 'Requested Participant';
@@ -328,15 +338,15 @@ public class Constant_AC {
 	public static final String WISH_AFFILIATION_TYPE_OTHER = 'Other';
 
 	/**
-	* Wish Change Request Status
-	*/
+    * Wish Change Request Status
+    */
 	public static final String WISH_CHANGE_REQUEST_STATUS_PROPOSED = 'Proposed';
 	public static final String WISH_CHANGE_REQUEST_STATUS_APPROVED = 'Approved';
 	public static final String WISH_CHANGE_REQUEST_STATUS_REJECTED = 'Rejected';
 
 	/**
-	 * Wish Required Signature
-	 */
+     * Wish Required Signature
+     */
 	public static final String WISH_REQUIRED_SIGNATURE_STATUS_EXPIRED = 'Expired';
 	public static final String WISH_REQUIRED_SIGNATURE_STATUS_SIGNED = 'Signed';
 	public static final String WISH_REQUIRED_SIGNATURE_STATUS_VOIDED = 'Voided';
@@ -344,8 +354,8 @@ public class Constant_AC {
 	public static final String WISH_REQUIRED_SIGNATURE_FORMAT_ESIGNATURE = 'E-Signature';
 
 	/**
-	 * Task Constants
-	 */
+     * Task Constants
+     */
 	public static final String TASK_PRIORITY_NORMAL = 'Normal';
 	public static final String TASK_STATUS_NOT_STARTED = 'Not Started';
 	public static final String TASK_STATUS_COMPLETED = 'Completed';
@@ -359,28 +369,28 @@ public class Constant_AC {
 	public static final String TASK_SUBJECT_RUSH_QUALIFIED = 'Lead ET : New Rush Qualified';
 	public static final String TASK_SUBJECT_RUSH_MODIFIED_NO = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary';
 	public static final String TASK_SUBJECT_REVIEW_BACKGROUND_CHECK = 'Review Background Check';
-  public static final String TASK_SUBJECT_BACKGROUND_CHECK = 'Background Check';
-  public static final String TASK_TYPE_EMAIL = 'Email';
+	public static final String TASK_SUBJECT_BACKGROUND_CHECK = 'Background Check';
+	public static final String TASK_TYPE_EMAIL = 'Email';
 
 	/*
-	 * User Constants
-	 */
+     * User Constants
+     */
 	public static final String INTEGRATION_USER = 'Integration User';
 
 	/**
-	 * Profile Constants
-	 */
+     * Profile Constants
+     */
 	public static final String PROFILE_INTEGRATION = 'Integration';
 	public static final String PROFILE_SYSTEM_ADMINISTRATOR = 'System Administrator';
 
 	/**
-	 * Role Constants
-	 */
+     * Role Constants
+     */
 	public static final String ROLE_NATIONAL_STAFF = 'National Staff';
 
 	/**
-	 * File Constants
-	 */
+     * File Constants
+     */
 	public static final String FILE_CONTENT_TYPE_FOLDER = 'Folder';
 	public static final String FILE_NAME_DOCUMENTS = 'Documents';
 	public static final String FILE_NAME_STAFF_PRIVATE = 'Staff - Private';
@@ -396,44 +406,50 @@ public class Constant_AC {
 	public static final String RECORD_SHARE_NONE = 'None';
 
 	/**
-	 * Background Check Constants
-	 */
+     * Background Check Constants
+     */
 	public static final String BACKGROUND_CHECK_STATUS_APPROVED = 'Approved';
 	public static final String BACKGROUND_CHECK_STATUS_APPROVED_WITH_CONDITIONS = 'Approved w/ Conditions';
 	public static final String BACKGROUND_CHECK_STATUS_REJECTED = 'Rejected';
 	public static final String BACKGROUND_CHECK_STATUS_FIRST_ADVANTAGE = 'Received from First Advantage';
 	public static final String BACKGROUND_CHECK_STATUS_MANUAL = 'Manual';
 
-	/*
-	 * Wish Expense Constants
-	 */
+	/**
+     * Wish Expense Constants
+     */
 	public static final String WISH_EXPENSE_BUDGET_APPROVAL_STATUS_SUBMITTED = 'Submitted';
 	public static final String WISH_EXPENSE_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
 	public static final String WISH_EXPENSE_BUDGET_APPROVAL_STATUS_REJECTED = 'Rejected';
 
-	/*
-	 * Wish Budget Constants
-	 */
+	/**
+     * Wish Budget Constants
+     */
 	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_SUBMITTED = 'Submitted';
 	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
 	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_REJECTED = 'Rejected';
-  
-	/*
-	 * Wish Form (Wish_Child_Form__c) Constants
-	 */
+
+	/**
+     * Wish Form (Wish_Child_Form__c) Constants
+     */
 	public static final String WISH_CHILD_FORM_EMERGENCY_RELATIONSHIP_STATUS_SELF = 'Self';
 
-	/*
-	 * Group Constants
-	 */
+	/**
+     * Group Constants
+     */
 	public static final String GROUP_TYPE_REGULAR = 'Regular';
 
-	/*
-	 * Case Team Role Constants
-	 */
+	/**
+     * Case Team Member Role Constants
+     */
 	public static final String CASE_TEAM_ROLE_INTAKE_MANAGER = 'Intake Manager';
 	public static final String CASE_TEAM_ROLE_VOLUNTEER_MANAGER = 'Volunteer Manager';
 	public static final String CASE_TEAM_ROLE_VOLUNTEER_MANAGER_INACTIVE = 'Volunteer Manager (Inactive)';
 	public static final String CASE_TEAM_ROLE_WISH_COORDINATOR_INACTIVE = 'Wish Coordinator (Inactive)';
 	public static final String CASE_TEAM_ROLE_WISH_COORDINATOR = 'Wish Coordinator';
+	public static final String CASE_TEAM_ROLE_WISH_GRANTER = 'Wish Granter';
+
+	/**
+     * Process Instance Constants
+     */
+	public static final String PROCESS_INSTANCE_STATUS_PENDING = 'Pending';
 }

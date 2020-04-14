@@ -36,7 +36,6 @@ public class ContactTrigger_AT_Test {
 	}
 
 	/*This method is used to update the application status to complete*/
-
 	public testmethod static void UpdateApplicationStatustoComplete() {
 		Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
 		user systemAdmin = [
@@ -68,7 +67,6 @@ public class ContactTrigger_AT_Test {
 	}
 
 	/*This method is used to update the application status to reject*/
-
 	public testmethod static void UpdateApplicationStatustoReject() {
 		Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
 		user systemAdmin = [
@@ -104,7 +102,6 @@ public class ContactTrigger_AT_Test {
 	}
 
 	/*This method is used to create a task record when zipcode is update*/
-
 	public testmethod static void CreateZipcodeUpdateTask() {
 		user systemAdmin = [
 				select id
@@ -134,7 +131,6 @@ public class ContactTrigger_AT_Test {
 					WHERE Id = :volunteerContact.Id
 			];
 			dbContact.MailingPostalCode = '35004';
-			// update dbContact;
 			System.assertEquals(dbcontact .MailingPostalCode, '35004');
 
 		}
@@ -172,8 +168,6 @@ public class ContactTrigger_AT_Test {
 			dbcontact.FirstName = 'Smith';
 			dbcontact.MobilePhone = '9003910427';
 			dbcontact.Email = 'Smith@gmail.com';
-			//   dbcontact.Same_as_Household_Address__c = True;
-			//  update dbcontact;
 			System.assertEquals(dbcontact .Email, 'Smith@gmail.com');
 		}
 
@@ -194,7 +188,6 @@ public class ContactTrigger_AT_Test {
 		newCon.LastName = 'Test';
 		newCon.ICD_10_Code__c = newICD.Id;
 		newCon.Diagnosis__c = 'Malignant Neoplasm';
-		//newCon.Short_Description__c  = 'Test';
 		newCon.Non_Verbal__c = 'No';
 		newCon.accountid = newAcc.id;
 		newCon.Region_Chapter__c = chapterAcc.Id;
@@ -217,7 +210,6 @@ public class ContactTrigger_AT_Test {
 		newCon.LastName = 'Test';
 		newCon.ICD_10_Code__c = newICD.Id;
 		newCon.Diagnosis__c = 'Malignant Neoplasm';
-		//newCon.Short_Description__c  = 'Test';
 		newCon.Non_Verbal__c = 'No';
 		newCon.accountid = newAcc.id;
 		newCon.recordTypeId = wichChildRecordTypeId;
@@ -225,7 +217,6 @@ public class ContactTrigger_AT_Test {
 
 		Contact newMedCon = new Contact();
 		newMedCon.LastName = 'Test';
-		// newMedCon.accountid = newAcc.id;
 		newMedCon.recordTypeId = MedicalProfContactRecordTypeId;
 		insert newMedCon;
 
@@ -294,7 +285,6 @@ public class ContactTrigger_AT_Test {
 	}
 
 	/*This method is used to update the application status to submit*/
-
 	public testmethod static void UpdateApplicationStatustoSubmit() {
 		Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
 		user systemAdmin = [
@@ -323,32 +313,6 @@ public class ContactTrigger_AT_Test {
 			System.assertEquals(dbcontact.is_Application__c, 'Submit');
 		}
 	}
-
-	//This method is used to update the medical professional contact.
-	/*public testmethod static void updateMedicalProfContact(){
-Constant_AC  constant = new Constant_AC(); 
-Test.startTest();
-Id medicalProfessionalRecordTypeId = Schema.SobjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
-Contact medicalProfessionalcon=OrientationandTrainingUtil.createMedicalProfContact();
-Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
-childCon.email = 'demoemaild@demo.com';
-update childCon;
-Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
-npe4__Relationship__c relationship1 = new npe4__Relationship__c();
-relationship1.Parent_Legal_Guardian__c = True;
-relationship1.npe4__Contact__c = childFamily.Id;
-relationship1.npe4__RelatedContact__c = childCon.Id;
-relationship1.npe4__Status__c = 'Active';
-relationship1.npe4__Type__c = 'Father';
-Insert relationship1; 
-
-npe4__Relationship__c relationship=OrientationandTrainingUtil.CreateMedicalProfessionalRelationshipRec(medicalProfessionalcon.Id,childCon.Id);
-Contact UpdateMedicalProfessional=[SELECT id,FirstName FROM Contact WHERE RecordTypeId =:medicalProfessionalRecordTypeId Limit 1];
-UpdateMedicalProfessional.FirstName='Smith';
-update UpdateMedicalProfessional;
-System.assertEquals(UpdateMedicalProfessional.FirstName,'Smith');  
-Test.stopTest();
-}*/
 
 	public testMethod static void createwishfamilyContact() {
 		Contact wishChildFamily = OrientationandTrainingUtil.CreateWishFamily();
@@ -417,33 +381,6 @@ Test.stopTest();
 		System.assertEquals(updateCon.Hidden_city__c, 'Chennai');
 	}
 
-	/*This Method is used to update the relationship type in wish family contact.
-public testmethod static void  updateRelationship(){
-Test.startTest();
-Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
-Contact wishchildCon = OrientationandTrainingUtil.CreateWishChildCon();
-Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
-npe4__Relationship__c  newRelationShip= OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id,childFamily.Id); 
-
-Contact updateCon = new Contact();
-updateCon.Id = childFamily.Id;
-updateCon.Relationship__c = 'Brother';
-updateCon.Email = 'Test@msil.com';
-
-Update updateCon;
-System.assert(updateCon.Email!= Null);
-
-Contact wishchildFamily = OrientationandTrainingUtil.CreateWishFamily();
-npe4__Relationship__c   relationship = new npe4__Relationship__c();
-newRelationShip.Parent_Legal_Guardian__c = True;
-relationship.npe4__Contact__c = wishchildCon.Id;
-relationship.npe4__RelatedContact__c = wishchildFamily.Id;
-relationship.npe4__Status__c = 'Active';
-relationship.npe4__Type__c = 'Father';
-Insert relationship; 
-Test.stopTest();        
-}
-*/
 	public testmethod static void deleteContact() {
 		Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
 		insert childCon;
@@ -615,9 +552,8 @@ Test.stopTest();
 		npe4__Relationship__c npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id, childFamily.Id);
 		insert npcr;
 		set<Id> wishChildIdSet = new set<Id>();
-		Map<Id, Contact> ConrelationshipIdMap = new Map<Id, Contact>();
-		set<Id> removePrefIdSet = new set<Id>();
 		String dummyValue = Label.Dummy_Email;
+        List<Contact> contactList = new List<Contact>();
 		Contact updateCon = new Contact();
 		updateCon.Hidden_First_Name__c = 'Chandra';
 		updateCon.Hidden_Last_Name__c = 'Sekar';
@@ -638,11 +574,10 @@ Test.stopTest();
 		updateCon.HiddenMobilePhone__c = '9912121313';
 		updateCon.Id = childFamily.Id;
 		wishChildIdSet.add(childCon.id);
-		removePrefIdSet.add(childCon.id);
-		ConrelationshipIdMap.put(childCon.id, childCon);
 		update updateCon;
 		update childCon;
-		Contact_OnBeforeUpdateTriggerHelper.updateFamilyConInfo(wishChildIdSet, ConrelationshipIdMap, removePrefIdSet);
+        contactList.add(updateCon);
+        ContactService.updateFamilyContactDetails(wishChildIdSet, contactList);
 		System.assertEquals(updateCon.IsContactInfoUpdated__c, True);
 	}
 
@@ -656,6 +591,7 @@ Test.stopTest();
 		Map<Id, Contact> ConrelationshipIdMap = new Map<Id, Contact>();
 		set<Id> removePrefIdSet = new set<Id>();
 		String dummyValue = Label.Dummy_Email;
+        List<Contact> contactList = new List<Contact>();
 		Contact updateCon = new Contact();
 		updateCon.Hidden_First_Name__c = 'Chandra';
 		updateCon.Hidden_Last_Name__c = 'Sekar';
@@ -680,7 +616,8 @@ Test.stopTest();
 		ConrelationshipIdMap.put(childCon.id, childCon);
 		update updateCon;
 		update childCon;
-		Contact_OnBeforeUpdateTriggerHelper.updateFamilyConInfo(wishChildIdSet, ConrelationshipIdMap, removePrefIdSet);
+        contactList.add(updateCon);
+        ContactService.updateFamilyContactDetails(wishChildIdSet, contactList);
 		System.assertEquals(updateCon.IsContactInfoUpdated__c, True);
 	}
 
@@ -733,6 +670,6 @@ Test.stopTest();
 		update childCon;
 		update medCon;
 		conList.add(medCon);
-		Contact_OnAfterUpdateTriggerHepler.CreateAffliation(conList);
+		ContactService.createAffiliation(conList);
 	}
 }
