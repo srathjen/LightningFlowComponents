@@ -54,6 +54,9 @@ public class ContactService {
 	 * @return Contact Map
 	 */
 	public static Map<Id, Contact> setVolunteerContactActive(Map<Id, Contact> contactMap) {
+        if(contactMap.isEmpty()) {
+            return contactMap;
+        }
 		Set<Id> activeConIdSet = new Set<Id>();
 		Map<Id, String> affiliationStatusMap = new Map<Id, String>();
 		// Find Affiliations
@@ -1484,6 +1487,18 @@ public class ContactService {
                     createContactDebugLog(updateEmailContactMap.values(), 'updateEmailAddress', e);
                 }
             }
+        }
+    }
+    
+    public static void updateHouseHoldAddress(List<Contact> contactList, Map<Id, Contact> oldContactsMap) {
+        Set<Id> contactHouseholdSet = new Set<Id>();
+        for(Contact newContact : contactList) {
+            if(newContact.Same_as_Household_Address__c && !oldContactsMap.get(newContact.Id).Same_as_Household_Address__c) {
+                contactHouseholdSet.add(newContact.Id);
+            }
+        }
+        if(!contactHouseholdSet.isEmpty()) {
+            updateHouseHoldAddress(contactHouseholdSet);
         }
     }
 
