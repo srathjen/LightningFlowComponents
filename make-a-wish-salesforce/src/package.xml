@@ -21,6 +21,7 @@
     <name>AuraDefinitionBundle</name>
   </types>
 	<types>
+	<members>Lead.Child_Age__c</members> 
 	<members>Lead.Primary_Medical_Professional_Type_Other__c</members>
 	<members>Lead.Other_expedite_timeframe_comments__c</members>
 	<members>Lead.Expedite_timeframe__c</members>
