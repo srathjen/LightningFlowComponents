@@ -11,24 +11,16 @@ public with sharing class RelationshipsDomain extends trac_TriggerHandlerBase {
 	Map<Id, npe4__Relationship__c> oldRelationshipsMap = (Map<Id, npe4__Relationship__c>) oldRecordsMap;
 
 	/**
-	 * Before delete of Lead
-	 */
-	public override void handleBeforeDelete() {
-		RelationshipService.deleteWishChildForm(oldRelationshipsList);
-	}
-
-	/**
 	 * After insert of Lead
 	 */
 	public override void handleAfterInsert() {
 		Set<Id> qualifyingMedicalProfessionalContactIds =
 				RelationshipService.buildQualifyingMedProfessionalRelationshipMap(newRelationshipsList);
 		RelationshipService.updatePhysicianDetails(qualifyingMedicalProfessionalContactIds, newRelationshipsList);
-		Map<Id, Id> relationshipMap = RelationshipService.buildNonMedicalRelationshipMap(newRelationshipsList);
+		Map<Id, String> relationshipMap = RelationshipService.buildNonMedicalRelationshipMap(newRelationshipsList);
 		RelationshipService.updateRelationshipType(relationshipMap);
 		Map<Id, Id> contactMap = RelationshipService.buildContactMap(newRelationshipsList);
 		RelationshipService.populateGuardianName(contactMap);
-		RelationshipService.createWishChildForm(contactMap);
 	}
 
 	/**
@@ -38,9 +30,6 @@ public with sharing class RelationshipsDomain extends trac_TriggerHandlerBase {
 		if (RecursiveTriggerHandler.blockAfterUpdate) {
 			return;
 		}
-		RelationshipService.updateWishChildForm(newRelationshipsMap, oldRelationshipsMap);
-		Map<Id, Id> contactMap = RelationshipService.buildContactMap(newRelationshipsMap, oldRelationshipsMap);
-		RelationshipService.createWishChildForm(contactMap);
 		WishRequiredSignatureService.createChildGuardianSignatures(newRelationshipsList, oldRelationshipsMap);
 	}
 }

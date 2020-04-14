@@ -20,17 +20,21 @@
     <members>*</members>
     <name>AuraDefinitionBundle</name>
   </types>
-  <types>
-    <members>Lead.Primary_Medical_Professional_Type_Other__c</members>
+	<types>
 	<members>Lead.Child_Age__c</members> 
-    <name>CustomField</name>
-  </types>
+	<members>Lead.Primary_Medical_Professional_Type_Other__c</members>
+	<members>Lead.Other_expedite_timeframe_comments__c</members>
+	<members>Lead.Expedite_timeframe__c</members>
+	<members>Contact.Other_expedite_timeframe_comments__c</members>
+	<members>Contact.Expedite_timeframe__c</members>
+	<name>CustomField</name>
+	</types>
   <types>
     <members>*</members>
     <name>CustomLabels</name>
   </types>
   <types>
-    <members>Case</members>
+    <members>Case</members>			
     <members>Endpoints__c</members>
     <members>Inkind_Donation_PDFs__c</members>
     <members>Lead</members>
