@@ -299,7 +299,6 @@ public with sharing class CaseService {
 				FROM Case
 				WHERE Id IN :parentChildCaseMap.keySet()
 				AND RecordTypeId = :parentWishRecordTypeId
-				LIMIT 50000
 			]
 			) {
 				parentCaseMap.put(parentCase.Id, parentCase.ChapterName__r.DevStaffEmail__c);
@@ -390,7 +389,6 @@ public with sharing class CaseService {
 				Actual_Cash__c,Actual_In_Kind__c,FE_Posted_Cash__c, FE_Posted_In_Kind__c, Case__c
 			FROM Wish_Expense__c
 			WHERE Case__c IN :budgetIds
-			LIMIT 50000
 		];
 
 		for (Id caseId : budgetIds) {
@@ -537,7 +535,6 @@ public with sharing class CaseService {
 		for (Wish_Clearance_Needed_and_National_type__mdt nationaltype : [
 			SELECT MasterLabel,Wish_Clearance_Needed__c
 			FROM Wish_Clearance_Needed_and_National_type__mdt
-			LIMIT 50000
 		]) {
 			wishclearanceMap.put(nationaltype.MasterLabel, nationaltype.Wish_Clearance_Needed__c);
 		}
@@ -588,7 +585,6 @@ public with sharing class CaseService {
 				SELECT StartDate, EndDate, IsForecastPeriod, Type
 				FROM Period
 				WHERE Type = 'Year' AND StartDate <= TODAY AND EndDate >= TODAY
-				LIMIT 50000
 			];
 
 			if (financialPeriod.size() > 0) {
@@ -607,7 +603,6 @@ public with sharing class CaseService {
 				SELECT Office_Id__c, Chapter__r.Name, Chapter__c
 				FROM Office__c
 				WHERE Chapter__c IN :chapterIds
-				LIMIT 50000
 			]) {
 				accountOfficeMap.put(currOffice.Chapter__r.Name, currOffice);
 			}
@@ -625,7 +620,6 @@ public with sharing class CaseService {
 				WHERE Id IN :parentIds
 				AND RecordTypeId = :Constant_AC.WISH_RT_ID
 				ORDER BY CreatedDate DESC
-				LIMIT 50000
 			];
 
 			List<Case> lastParentWishOfRecordType = [
@@ -720,7 +714,6 @@ public with sharing class CaseService {
 			for (CaseTeamRole CaseTeamRoleInfo : [
 				SELECT Id, Name
 				FROM CaseTeamRole
-				LIMIT 50000
 			]) {
 				teamRoleNameMap.put(CaseTeamRoleInfo.Id, CaseTeamRoleInfo.Name);
 				teamRoleIdMap.put(CaseTeamRoleInfo.Name, CaseTeamRoleInfo.Id);
@@ -730,7 +723,6 @@ public with sharing class CaseService {
 				SELECT Id, MemberId, ParentId
 				FROM CaseTeamMember
 				WHERE ParentId IN :parentCaseIntakeOwnerMap.keySet()
-				LIMIT 50000
 			]) {
 				if (checkMemMap.containsKey(CaseInfo.ParentId)) {
 					checkMemMap.get(CaseInfo.ParentId).add(CaseInfo.MemberId);
@@ -920,7 +912,11 @@ public with sharing class CaseService {
      * @author          MST Solutions
      * @createdDate     unknown
     */
-	public static void deleteWishAssistTask(Set<Id> parentIdSet, List<Case> newCaseList) {
+	public static void deleteWishAssistTask(Set<Id> parentIdSet) {
+		if (parentIdSet == null || parentIdSet.isEmpty()) {
+			return;
+		}
+
 		List<Task> deleteTaskList = new List<Task>();
 
 		deleteTaskList = [
@@ -929,12 +925,9 @@ public with sharing class CaseService {
 			WHERE WhatId IN :parentIdSet
 			AND SystemGeneratedTask__c = TRUE
 			AND What.RecordTypeId = :WISH_RECORDTYPE_ID
-			LIMIT 50000
 		];
 
-		if (deleteTaskList.size() > 0) {
-			delete deleteTaskList;
-		}
+		delete deleteTaskList;
 	}
 
 	/*
@@ -943,7 +936,11 @@ public with sharing class CaseService {
      * @author          MST Solutions
      * @createdDate     unknown
     */
-	public static void deleteUnassignedVolunteerOpp(Set<Id> parentWishIdSet, List<Case> newCaseList) {
+	public static void deleteUnassignedVolunteerOpp(Set<Id> parentWishIdSet) {
+		if (parentWishIdSet == null || parentWishIdSet.isEmpty()) {
+			return;
+		}
+
 		RecursiveTriggerHandler.blockCaseLockRecursive = false;
 		List<Volunteer_Opportunity__c> deleteVolOppList = new List<Volunteer_Opportunity__c>();
 
@@ -953,7 +950,6 @@ public with sharing class CaseService {
 			WHERE Wish__c IN :parentWishIdSet
 			AND Volunteer_Name__c = :NULL
 			AND RecordTypeId = :WISH_VOLUNTEER_OPPORTUNITY_RECORDTYPE_ID
-			LIMIT 50000
 		];
 
 		if (deleteVolOppList.size() > 0) {
@@ -967,17 +963,20 @@ public with sharing class CaseService {
      * @author          MST Solutions
      * @createdDate     unknown
     */
-	public static void closeVolOpp(Set<Id> CaseIdSetForVolOpp, List<Case> newCaseList) {
+	public static void closeVolOpp(Set<Id> caseIdSetForVolOpp) {
+		if (caseIdSetForVolOpp == null || caseIdSetForVolOpp.isEmpty()) {
+			return;
+		}
+
 		List<Volunteer_Opportunity__c> closeVollOppList = new List<Volunteer_Opportunity__c>();
 		Set<Id> recallApprovalSet = new Set<Id>();
 
 		for (Volunteer_Opportunity__c closeVolOpp : [
 			SELECT Id, Wish__c,Status__c
 			FROM Volunteer_Opportunity__c
-			WHERE Wish__c IN :CaseIdSetForVolOpp
+			WHERE Wish__c IN :caseIdSetForVolOpp
 			AND Wish__c != NULL
 			AND Wish__r.RecordTypeId = :WISH_RECORDTYPE_ID
-			LIMIT 50000
 		]) {
 			if (closeVolOpp.Status__c != Constant_AC.VOLUNTEER_OPPORTUNITY_STATUS_CLOSED) {
 				closeVolOpp.Status__c = Constant_AC.VOLUNTEER_OPPORTUNITY_STATUS_CLOSED;
@@ -1028,7 +1027,6 @@ public with sharing class CaseService {
 			FROM Lead
 			WHERE (Id IN :updatedApprovedLeadInfoSet OR Id IN :updatedDnqLeadInfoSet)
 			AND IsConverted = :FALSE
-			LIMIT 50000
 		]) {
 			if (updatedApprovedLeadInfoSet.contains(currentLead.Id)) {
 				if (currentLead.I_am_Recognized_To_Practice_As_a__c != null
@@ -1158,39 +1156,6 @@ public with sharing class CaseService {
 	}
 
 	/*
-     * @description     When the Case status is updated, update the the corresponding Lead status.
-     *
-     * @author          MST Solutions
-     * @createdDate     unknown
-    */
-	public static void updateLeadStatus(List<Case> caseList) {
-		Map<Id, Case> caseMap = new Map<Id, Case>();
-		List<Lead> updateLeadList = new List<Lead>();
-
-		for (Case processedCaseList : caseList) {
-			if (processedCaseList.Status == Constant_AC.CASE_STATUS_OPEN || processedCaseList.Status == Constant_AC.CASE_STATUS_ESCALATED) {
-				caseMap.put(processedCaseList.Lead__c, processedCaseList);
-			}
-		}
-
-		if (caseMap.size() > 0) {
-			for (Lead dbLeads : [
-				SELECT Id, Status, Sub_Status__c, IsConverted
-				FROM Lead
-				WHERE Id IN :caseMap.keySet() AND IsConverted = FALSE
-				LIMIT 50000
-			]) {
-				updateLeadList.add(dbLeads);
-			}
-
-		}
-
-		if (updateLeadList.size() > 0) {
-			update updateLeadList;
-		}
-	}
-
-	/*
      * @description     Used to create two volunteer opportunities when the Case status is changed to 'Ready to Assign'
      *                  and to add Case related chapter volunteer manager into Case team with role name 'Volunteer manager'
      *
@@ -1292,7 +1257,6 @@ public with sharing class CaseService {
 			SELECT Id, ManagerId
 			FROM User
 			WHERE Id IN :caseOwnerIdSet
-			LIMIT 50000
 		]) {
 			ownerManagerMap.put(userManagerInfo.Id, userManagerInfo.ManagerId);
 		}
@@ -1300,7 +1264,6 @@ public with sharing class CaseService {
 		for (CaseTeamRole caseTeamRoleInfo : [
 			SELECT Id, Name
 			FROM CaseTeamRole
-			LIMIT 50000
 		]) {
 			teamRoleNameMap.put(caseTeamRoleInfo.Id, caseTeamRoleInfo.Name);
 			teamRoleIdMap.put(caseTeamRoleInfo.Name, caseTeamRoleInfo.Id);
@@ -1326,7 +1289,6 @@ public with sharing class CaseService {
 				FROM CaseTeamMember
 				WHERE TeamRole.Name IN :teamRoles
 				AND ParentId IN :updateVolunteerManagerCaseTeamMap.keySet()
-				LIMIT 50000
 			]) {
 				if (CaseTeamInfo.TeamRole.Name == Constant_AC.CASE_TEAM_ROLE_VOLUNTEER_MANAGER ||
 					CaseTeamInfo.TeamRole.Name == Constant_AC.CASE_TEAM_ROLE_WISH_COORDINATOR) {
@@ -1496,7 +1458,6 @@ public with sharing class CaseService {
 			WHERE ParentId = :NULL
 			AND RecordTypeId = :WISH_RECORDTYPE_ID
 			AND Id IN :caseContactMap.keySet()
-			LIMIT 50000
 		]);
 
 		Map<Id, List<CaseTeamMember>> caseTeamMemberMap = new Map<Id, List<CaseTeamMember>>();
@@ -1504,7 +1465,6 @@ public with sharing class CaseService {
 			SELECT Id, MemberId, TeamRoleId, ParentId
 			FROM CaseTeamMember
 			WHERE ParentId IN :caseContactMap.keySet()
-			LIMIT 50000
 		]) {
 			if (caseTeamMemberMap.containsKey(caseTeamMemberInfo.ParentId)) {
 				caseTeamMemberMap.get(caseTeamMemberInfo.ParentId).add(caseTeamMemberInfo);
@@ -1728,7 +1688,6 @@ public with sharing class CaseService {
 			SELECT Id, Wish__c, Wish__r.Status, Volunteer_Name__c, Status__c
 			FROM Volunteer_Opportunity__c
 			WHERE Wish__c IN :wishIdsSet AND Volunteer_Name__c != NULL
-			LIMIT 50000
 		]) {
 			volunteerIdsSet.add(currentVolOpp.Volunteer_Name__c);
 		}
@@ -1775,7 +1734,6 @@ public with sharing class CaseService {
 			WHERE Wish__c IN :wishIdSet
 			AND Inactive__c = :FALSE
 			AND Status__c != :Constant_AC.VOLUNTEER_OPPORTUNITY_STATUS_INACTIVE
-			LIMIT 50000
 		]) {
 			if (dbVolunteerOppRec.Wish__r.Status == Constant_AC.CASE_STATUS_GRANTED) {
 				dbVolunteerOppRec.Wish_End_Date__c = dbVolunteerOppRec.Wish__r.End_Date__c;
@@ -1806,7 +1764,6 @@ public with sharing class CaseService {
 			SELECT Id, Status, Sub_Status__c
 			FROM Lead
 			WHERE Id IN :leadIds
-			LIMIT 50000
 		];
 
 		List<Lead> updateLeadList = new List<Lead>();
