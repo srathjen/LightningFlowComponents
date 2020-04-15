@@ -96,12 +96,14 @@ public class Constant_AC {
     public final static String ORG_AFFILIATION_STATUS_CURRENT = 'Current';
     public final static String ORG_AFFILIATION_TREATING_FACILITY_CURRENT = 'Current';
     public final static String ORG_AFFILIATION_STATUS_NOT_APPROVED = 'Not Approved';
+    public final static String ORG_AFFILIATION_STATUS_OUT_OF_COMPLIANCE = 'Out of Compliance';
+    public final static String ORG_AFFILIATION_STATUS_PROSPECTIVE = 'Prospective';
 
     /**
      * Lead Constants
      */
-	public static final Id LEAD_RT_DEFAULT = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Default').getRecordTypeId();
-	public static final Id LEAD_RT_MASTER = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Master').getRecordTypeId();
+    public static final Id LEAD_RT_DEFAULT = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Default').getRecordTypeId();
+    public static final Id LEAD_RT_MASTER = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Master').getRecordTypeId();
     public static final Id LEAD_RT_WISH_CHILD = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Wish_Child').getRecordTypeId();
     public static final String LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL = 'Treating Medical Professional';
     public static final String LEAD_DV_FORM_TYPE_BEST_CONTACT = 'Best contact for Physician';
@@ -268,6 +270,7 @@ public class Constant_AC {
     public static final String VOLUNTEER_ROLE_STATUS_OUT_OF_COMPLIANCE = 'Out of Compliance';
     public static final String VOLUNTEER_ROLE_STATUS_FORMER = 'Former';
     public static final String VOLUNTEER_ROLE_STATUS_NOT_APPROVED = 'Not Approved';
+    public static final String VOLUNTEER_ROLE_STATUS_PENDING = 'Pending';
 
     /**
      * Volunteer Orientation Training Constants
@@ -397,14 +400,14 @@ public class Constant_AC {
     public static final String FILE_NAME_FINANCIALS = 'Financials';
     public static final String FILE_NAME_PHOTOS = 'Photos';
     public static final String FILE_NAME_VIDEOS = 'Videos';
-    
+
     /**
      * Record Share Constants
      */
     public static final String RECORD_SHARE_READ = 'Read';
     public static final String RECORD_SHARE_EDIT = 'Edit';
     public static final String RECORD_SHARE_NONE = 'None';
-    
+
     /**
      * Background Check Constants
      */

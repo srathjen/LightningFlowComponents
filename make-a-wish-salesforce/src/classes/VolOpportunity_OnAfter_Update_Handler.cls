@@ -162,7 +162,7 @@ public class VolOpportunity_OnAfter_Update_Handler {
 		}
 
 		if (recallApprovalIdSet.size() > 0) {
-			Case_OnAfterUpdateTriggerHandlerHelper.recallVolOppApproval(recallApprovalIdSet);
+			CaseService.recallVolOppApproval(recallApprovalIdSet);
 		}
 		if (caseIdSet.size() > 0 && voluOppIdSet.size() > 0) {
 			if (RecursiveTriggerHandler.isFirstTime == true) {

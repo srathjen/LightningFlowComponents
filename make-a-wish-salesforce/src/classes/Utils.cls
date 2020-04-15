@@ -20,14 +20,14 @@ public class Utils {
 		get {
 			if (currentUser == null) {
 				currentUser = [
-						SELECT
-								Id, Name, Chapter_Name__c,
-								UserRole.Name,
-								Profile.Id, Profile.Name, ContactId,
-								Contact.Account.Volunteer_Manager__c, Contact.OwnerId
-						FROM User
-						WHERE Id = :UserInfo.getUserId()
-						LIMIT 1
+					SELECT
+						Id, Name, Chapter_Name__c,
+						UserRole.Name,
+						ProfileId, Profile.Id, Profile.Name,
+						ContactId, Contact.Account.Volunteer_Manager__c, Contact.OwnerId
+					FROM User
+					WHERE Id = :UserInfo.getUserId()
+					LIMIT 1
 				];
 			}
 			return currentUser;
