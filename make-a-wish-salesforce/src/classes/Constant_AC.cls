@@ -455,4 +455,9 @@ public class Constant_AC {
      * Process Instance Constants
      */
     public static final String PROCESS_INSTANCE_STATUS_PENDING = 'Pending';
+
+    /*
+     * Access Token Lists (Custom Metadata) Constants
+     */
+    public static final String ACCESS_TOKEN_LISTS_FIRST_ADVANTAGE = 'First Advantage';
 }
