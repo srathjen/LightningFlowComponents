@@ -298,6 +298,13 @@
         <value>There might be a duplicate {0}. Please click Send Diagnosis Verification button to review the duplicates.</value>
     </labels>
     <labels>
+        <fullName>DocumentController_OrderAndPackageIdNoValue</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DocumentController_OrderAndPackageIdNoValue</shortDescription>
+        <value>Order Id and Package Id do not have values.</value>
+    </labels>
+    <labels>
         <fullName>Dummy_Email</fullName>
         <categories>It holds the hiiden email value for the contact</categories>
         <language>en_US</language>
@@ -360,6 +367,13 @@
         <protected>false</protected>
         <shortDescription>Family Hold Message DDP</shortDescription>
         <value>a1a1R000007bEQoQAM</value>
+    </labels>
+    <labels>
+        <fullName>ForgotPasswordController_Username_Not_Exists</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ForgotPasswordController_Username_Not_Exists</shortDescription>
+        <value>Username not found in system.</value>
     </labels>
     <labels>
         <fullName>InKind_Already_Submitted</fullName>
