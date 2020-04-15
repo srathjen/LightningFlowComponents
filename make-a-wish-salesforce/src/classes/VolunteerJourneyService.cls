@@ -36,6 +36,10 @@ public /*SIW-488 with sharing */ class VolunteerJourneyService {
      * @param volunteerContactIds
      */
     public static Map<Id, Boolean> processVolunteersChapterRequirements(Set<Id> volunteerContactIds) {
+        Map<Id, Boolean> activeVolunteersMap = new Map<Id, Boolean>();
+        if(volunteerContactIds.isEmpty()){
+            return activeVolunteersMap;
+        }
         /**
          * Find the chapter names from the Volunteers to reduce the search on chapter by role requirements
          */
@@ -56,6 +60,7 @@ public /*SIW-488 with sharing */ class VolunteerJourneyService {
                 volunteerByVolunteerRoles.put(volRole.Volunteer_Name__c, volunteerRoles);
             }
         }
+
         /**
         * Map Chapters to Chapter Roles, and Chapter Roles to the requirements:
         * - Conflict Of Interest
@@ -133,7 +138,6 @@ public /*SIW-488 with sharing */ class VolunteerJourneyService {
         /**
          * Return a map of Volunteers that are now Active
          */
-        Map<Id, Boolean> activeVolunteersMap = new Map<Id, Boolean>();
         for (npe5__Affiliation__c affiliation : activeAffiliations) {
             if (affiliation.npe5__Status__c == ORG_AFFILIATION_STATUS_STATUS_ACTIVE) {
                 activeVolunteersMap.put(affiliation.npe5__Contact__c, true);
@@ -149,6 +153,10 @@ public /*SIW-488 with sharing */ class VolunteerJourneyService {
      * @param volunteerContactIdByChapterIdWithActiveRoleMap
      */
     public static Map<Id, Boolean> processVolunteersRoleActiveBypass(Map<Id, Set<String>> volunteerContactIdByChapterIdWithActiveRoleMap) {
+        Map<Id, Boolean> activeVolunteersMap = new Map<Id, Boolean>();
+        if(volunteerContactIdByChapterIdWithActiveRoleMap.isEmpty()){
+            return activeVolunteersMap;
+        }
         //Run User update Asynchronously to avoid Mixed Dml Operation Exception
         setVolunteerUserToActive(volunteerContactIdByChapterIdWithActiveRoleMap.keySet());
         List<npe5__Affiliation__c> activeAffiliations = setVolunteerAffiliationToActive(volunteerContactIdByChapterIdWithActiveRoleMap);
@@ -165,7 +173,6 @@ public /*SIW-488 with sharing */ class VolunteerJourneyService {
         /**
          * Return a map of Volunteers that are now Active
          */
-        Map<Id, Boolean> activeVolunteersMap = new Map<Id, Boolean>();
         for (npe5__Affiliation__c affiliation : activeAffiliations) {
             if (ORG_AFFILIATION_STATUS_STATUS_ACTIVE.equals(affiliation.npe5__Status__c)) {
                 activeVolunteersMap.put(affiliation.npe5__Contact__c, true);
