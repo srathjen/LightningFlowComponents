@@ -5,7 +5,11 @@
  */
 public class ConflictOfInterestService {
 
-	private static String EMPTY = '';
+	private final static String VOLUNTEER_TRAINING_NO_CHECK_OUT_OF_COMPLIANCE = Constant_AC.VOLUNTEER_TRAINING_NO_CHECK_OUT_OF_COMPLIANCE;
+	private final static String VOLUNTEER_OUT_OF_COMPLIANCE_NO_CHECK_TRAINING = Constant_AC.VOLUNTEER_OUT_OF_COMPLIANCE_NO_CHECK_TRAINING;
+	private final static String VOLUNTEER_NONE_OUTSTANDING = Constant_AC.VOLUNTEER_NONE_OUTSTANDING;
+	private final static String VOLUNTEER_OUT_OF_COMPLIANCE_NONE_TRAINING = Constant_AC.VOLUNTEER_OUT_OF_COMPLIANCE_NONE_TRAINING;
+	private final static String VOLUNTEER_TRAINING_NONE_OUT_OF_COMPLIANCE = Constant_AC.VOLUNTEER_TRAINING_NONE_OUT_OF_COMPLIANCE;
 
 	/**
 	 * Set Account details on Conflict Of Interest
@@ -126,7 +130,7 @@ public class ConflictOfInterestService {
 				}
 			}
 			if (coiMap.size() > 0) {
-				conflictOfInterestShares = ChapterStaffRecordSharing_AC.COIRecordSharing(coiMap);
+				ChapterStaffRecordSharing_AC.COIRecordSharing(coiMap);
 			}
 			if (Test.isRunningTest()) {
 				throw new CommonTriggerException('Test Class execution');
@@ -147,27 +151,22 @@ public class ConflictOfInterestService {
 	}
 
 	/*
-     * @description     Toggle the ConflictOfInterest.Volunteer_is_Inactive__c flag.
-     *
-     * @param           Set<Id> inactiveVolunteerIdSet
-     * @param           Boolean isInactiveVolunteer
-     *
-     * @author          MST Solutions
-     * @createdDate     unknown
-     */
-	@future
+	 * @description     Toggle the ConflictOfInterest.Volunteer_is_Inactive__c flag.
+	 * @param           Set<Id> inactiveVolunteerIdSet
+	 * @param           Boolean isInactiveVolunteer
+	 * @createdDate     unknown
+	 */
+	@Future
 	public static void toggleConflictOfInterestInactiveFlag(Set<Id> inactiveVolunteerIdSet, Boolean isInactiveVolunteer) {
 		if (inactiveVolunteerIdSet == null || inactiveVolunteerIdSet.isEmpty()) {
 			return;
 		}
-
 		try {
 			List<Conflict_Of_Interest__c> updateCOIList = New List<Conflict_Of_Interest__c>();
-
 			for (Conflict_Of_Interest__c currCOI : [
-				SELECT Id, Volunteer_is_Inactive__c
-				FROM Conflict_Of_Interest__c
-				WHERE Volunteer_Contact__c IN :inactiveVolunteerIdSet AND Volunteer_is_Inactive__c != :isInactiveVolunteer
+					SELECT Id, Volunteer_is_Inactive__c
+					FROM Conflict_Of_Interest__c
+					WHERE Volunteer_Contact__c IN :inactiveVolunteerIdSet AND Volunteer_is_Inactive__c != :isInactiveVolunteer
 			]) {
 				currCOI.Volunteer_is_Inactive__c = isInactiveVolunteer;
 				updateCOIList.add(currCOI);
@@ -181,15 +180,49 @@ public class ConflictOfInterestService {
 		} catch (Exception ex) {
 			if (!Test.isRunningTest()) {
 				for (User currRec : [
-					SELECT
-						Id, FirstName, LastName, Email, MobilePhone, ContactId,
-						Street, City, State, PostalCode, Country, Fax
-					FROM User
-					WHERE ContactId IN :inactiveVolunteerIdSet
+						SELECT
+								Id, FirstName, LastName, Email, MobilePhone, ContactId,
+								Street, City, State, PostalCode, Country, Fax
+						FROM User
+						WHERE ContactId IN :inactiveVolunteerIdSet
 				]) {
-					ErrorMessage_AC.createdebugRec('ConflictOfInterestService', String.valueOf(currRec), String.valueOf(ex), 'toggleConflictOfInterestInactiveFlag', currRec.Id, ex.getStackTraceString() + '   ' + ex.getMessage(), 'Error');
+					ErrorMessage_AC.createDebugRec('ConflictOfInterestService',
+							String.valueOf(currRec), String.valueOf(ex), 'toggleConflictOfInterestInactiveFlag',
+							currRec.Id, ex.getStackTraceString() + '   ' + ex.getMessage(), 'Error');
 				}
 			}
 		}
+	}
+
+	/**
+	 * Update Volunteer Background Check Compliance / Trained
+	 * @param volunteerIds
+	 * @param status
+	 * @return Updated list of Background Checks
+	 */
+	public static List<Conflict_Of_Interest__c> updateConflictOfInterestByVolunteers(Set<Id> volunteerIdsSet, String status) {
+		List<Conflict_Of_Interest__c> updateConflictList = new List<Conflict_Of_Interest__c>();
+		for (Conflict_Of_Interest__c currCOI : [
+				SELECT Id,Current__c,Volunteer_Contact__c
+				FROM Conflict_Of_Interest__c
+				WHERE Volunteer_Contact__c IN:volunteerIdsSet
+				AND Current__c = TRUE
+		]) {
+			if (VOLUNTEER_TRAINING_NO_CHECK_OUT_OF_COMPLIANCE.equals(status)) {
+				currCOI.VolunteerRoleTrainedTpendChapReview__c = true;
+			} else if (VOLUNTEER_OUT_OF_COMPLIANCE_NO_CHECK_TRAINING.equals(status)) {
+				currCOI.VolunteerRoleOutofCompliance__c = true;
+			} else if (VOLUNTEER_NONE_OUTSTANDING.equals(status)) {
+				currCOI.VolunteerRoleTrainedTpendChapReview__c = false;
+				currCOI.VolunteerRoleOutofCompliance__c = false;
+			} else if (VOLUNTEER_OUT_OF_COMPLIANCE_NONE_TRAINING.equals(status)) {
+				currCOI.VolunteerRoleTrainedTpendChapReview__c = false;
+			} else if (VOLUNTEER_TRAINING_NONE_OUT_OF_COMPLIANCE.equals(status)) {
+				currCOI.VolunteerRoleOutofCompliance__c = false;
+			}
+			updateConflictList.add(currCOI);
+		}
+		update updateConflictList;
+		return updateConflictList;
 	}
 }

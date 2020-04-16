@@ -102,8 +102,8 @@ public class Constant_AC {
     /**
      * Lead Constants
      */
-    public static final Id LEAD_RT_DEFAULT = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Default').getRecordTypeId();
-    public static final Id LEAD_RT_MASTER = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Master').getRecordTypeId();
+	public static final Id LEAD_RT_DEFAULT = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Default').getRecordTypeId();
+	public static final Id LEAD_RT_MASTER = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Master').getRecordTypeId();
     public static final Id LEAD_RT_WISH_CHILD = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Wish_Child').getRecordTypeId();
     public static final String LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL = 'Treating Medical Professional';
     public static final String LEAD_DV_FORM_TYPE_BEST_CONTACT = 'Best contact for Physician';
@@ -251,7 +251,7 @@ public class Constant_AC {
     public final static String CHAPTER_ROLE_WISH_GRANTER = 'Wish Granter';
     public final static String CHAPTER_ROLE_WISH_GRANTER_MENTOR = 'Wish Granter Mentor';
 
-    /*
+    /**
      * In Kind Reimbursement File Constants
      */
     public final static String INKIND_REIMBURSEMENT_FILE_DOCUMENTATION = 'Not Available';
@@ -264,6 +264,15 @@ public class Constant_AC {
     public static final String RELATIONSHIP_STATUS_ACTIVE = 'Active';
 
     /**
+     * Volunteer Status Processor Background Check and Conflict Of Interest
+     */
+    public final static String VOLUNTEER_TRAINING_NO_CHECK_OUT_OF_COMPLIANCE = 'TRAINING_NO_CHECK_OUT_OF_COMPLIANCE';
+    public final static String VOLUNTEER_OUT_OF_COMPLIANCE_NO_CHECK_TRAINING = 'OUT_OF_COMPLIANCE_NO_CHECK_TRAINING';
+    public final static String VOLUNTEER_NONE_OUTSTANDING = 'NONE_OUTSTANDING';
+    public final static String VOLUNTEER_OUT_OF_COMPLIANCE_NONE_TRAINING = 'OUT_OF_COMPLIANCE_NONE_TRAINING';
+    public final static String VOLUNTEER_TRAINING_NONE_OUT_OF_COMPLIANCE = 'TRAINING_NONE_OUT_OF_COMPLIANCE';
+
+    /**
      * Volunteer Roles Constants
      */
     public static final String VOLUNTEER_ROLE_STATUS_ACTIVE = 'Active';
@@ -271,6 +280,7 @@ public class Constant_AC {
     public static final String VOLUNTEER_ROLE_STATUS_FORMER = 'Former';
     public static final String VOLUNTEER_ROLE_STATUS_NOT_APPROVED = 'Not Approved';
     public static final String VOLUNTEER_ROLE_STATUS_PENDING = 'Pending';
+    public final static String VOLUNTEER_ROLE_STATUS_PENDING_TRAINING = 'Pending Training';
 
     /**
      * Volunteer Orientation Training Constants
@@ -289,6 +299,9 @@ public class Constant_AC {
     public static final String VOLUNTEER_OPPORTUNITY_STATUS_CLOSED = 'Closed';
     public static final String VOLUNTEER_OPPORTUNITY_STATUS_COMPLETED = 'Completed';
     public static final String VOLUNTEER_OPPORTUNITY_STATUS_INACTIVE = 'Inactive';
+    public static final String VOLUNTEER_OPPORTUNITY_STATUS_OUT_OF_COMPLIANCE = 'Out of Compliance';
+    public static final String VOLUNTEER_OPPORTUNITY_STATUS_APPROVED = 'Approved';
+    public static final String VOLUNTEER_OPPORTUNITY_STATUS_HOLD = 'Hold';
 
     /**
      * Contact Application Status
@@ -400,14 +413,14 @@ public class Constant_AC {
     public static final String FILE_NAME_FINANCIALS = 'Financials';
     public static final String FILE_NAME_PHOTOS = 'Photos';
     public static final String FILE_NAME_VIDEOS = 'Videos';
-
+    
     /**
      * Record Share Constants
      */
     public static final String RECORD_SHARE_READ = 'Read';
     public static final String RECORD_SHARE_EDIT = 'Edit';
     public static final String RECORD_SHARE_NONE = 'None';
-
+    
     /**
      * Background Check Constants
      */
@@ -455,9 +468,4 @@ public class Constant_AC {
      * Process Instance Constants
      */
     public static final String PROCESS_INSTANCE_STATUS_PENDING = 'Pending';
-
-    /*
-     * Access Token Lists (Custom Metadata) Constants
-     */
-    public static final String ACCESS_TOKEN_LISTS_FIRST_ADVANTAGE = 'First Advantage';
 }
