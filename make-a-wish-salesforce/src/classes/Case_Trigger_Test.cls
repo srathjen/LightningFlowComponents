@@ -30,21 +30,13 @@ private class Case_Trigger_Test {
 	static void testInsert() {
 		Case wish = getWish();
 
-		Case_OnAfterInsertTriggerHandlerHelper.UpdateWishRecordIdentifier(new Set<Id>{
-				wish.Id
-		}, new Set<Id>{
-				wish.ChapterName__c
-		}, Constant_AC.WISH_RT_ID);
+		CaseService.updateWishRecordIdentifier(new List<Case>{wish});
 
-		Case_OnAfterInsertTriggerHandlerHelper.CaseTeamInTakeManager(new Map<Id, Case>{
-				wish.Id => wish
-		});
+		CaseService.caseTeamInTakeManager(new List<Case>{wish});
 
 		insert new Task(Subject = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary', WhoId = wish.ContactId);
 
-		Case_OnAfterInsertTriggerHandlerHelper.reParentDvTask(new Set<Id>{
-				wish.Id
-		});
+		CaseService.reParentDvTask(new List<Case>{wish});
 	}
 
 	@IsTest
@@ -52,17 +44,17 @@ private class Case_Trigger_Test {
 		Case wish = getWish();
 
 		Set<String> leadSet = new Set<String>{
-				wish.Lead__c
+			wish.Lead__c
 		};
 		List<Case> caseList = new List<Case>{
-				wish
+			wish
 		};
 
-		Case_OnAfterUpdateTriggerHandlerHelper.updateLeadStatus(leadSet, leadSet, caseList);
+		CaseService.updateLeadStatus(leadSet, leadSet, caseList);
 
 		Lead child = [
-				SELECT Id, DOB__c, Any_medical_reason_for_moving_quickly__c, Part_A_Received__c, I_am_Recognized_To_Practice_As_a__c
-				FROM Lead
+			SELECT Id, DOB__c, Any_medical_reason_for_moving_quickly__c, Part_A_Received__c, I_am_Recognized_To_Practice_As_a__c
+			FROM Lead
 		];
 
 		child.DOB__c = null;
@@ -75,16 +67,16 @@ private class Case_Trigger_Test {
 		update child;
 
 		// Cover error messages
-		Case_OnAfterUpdateTriggerHandlerHelper.updateLeadStatus(leadSet, leadSet, caseList);
+		CaseService.updateLeadStatus(leadSet, leadSet, caseList);
 
 		// Cover where where lead is in second set but not first
-		Case_OnAfterUpdateTriggerHandlerHelper.updateLeadStatus(new Set<String>(), leadSet, caseList);
+		CaseService.updateLeadStatus(new Set<String>(), leadSet, caseList);
 	}
 
 	private static Case getWish() {
 		return [
-				SELECT Id, ChapterName__c, RecordTypeId, Lead__c, ContactId
-				FROM Case
+			SELECT Id, ChapterName__c, RecordTypeId, Lead__c, ContactId, IsClosed
+			FROM Case
 		];
 	}
 }

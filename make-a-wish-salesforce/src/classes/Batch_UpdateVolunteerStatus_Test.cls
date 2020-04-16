@@ -6,87 +6,104 @@ Description :Batch_UpdateVolunteerStatus_Test is used to increase the code cover
 *************************************************************************************************************************************************/
 
 @isTest
-public class Batch_UpdateVolunteerStatus_Test {
-
-	static testmethod void updateVolunteerStatus() {
-		Account chapterAc = OrientationandTrainingUtil.createchapterAccount();
-        insert chapterAc;
-		Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAc.Id);
-        insert volunteerContact;
-		npe5__Affiliation__c affiliation = OrientationandTrainingUtil.CreateAffiliation(volunteerContact.Id);
-        insert affiliation;
-		affiliation.npe5__Status__c = 'Active';
-		Update affiliation;
-		Background_check__c bc = OrientationandTrainingUtil.createBackgroundCheckRec(volunteerContact.Id);
-        insert bc;
-		Conflict_Of_Interest__c conOfIntrest = OrientationandTrainingUtil.createCOI(volunteerContact.Id);
-        insert conOfIntrest;
-		Role__c wishGranterRole = OrientationandTrainingUtil.createRole();
-        insert wishGranterRole;
-		Role__c nonWishRole = OrientationandTrainingUtil.createNonWishRole();
-        insert nonWishRole;
-		Role__C boardMemberRole = OrientationandTrainingUtil.createRole();
-        insert boardMemberRole;
-		boardMemberRole.Name = Constant_AC.BOARD_MEMBER_RT_LABEL;
-		Update boardMemberRole;
-
-		Chapter_Role__c wishGranterChapterRole = OrientationandTrainingUtil.createChapter(chapterAc.Id, wishGranterRole.Id);
-        insert wishGranterChapterRole;
-		Chapter_Role__c nonWishChapterRole = OrientationandTrainingUtil.createChapter(chapterAc.Id, nonWishRole.Id);
-        insert nonWishChapterRole;
-		Chapter_Role__c boardMemberChapterRole = OrientationandTrainingUtil.createChapter(chapterAc.Id, boardMemberRole.Id);
-        insert boardMemberChapterRole;
-
-        Volunteer_Roles__c wishGranterVolRole = OrientationandTrainingUtil.createVolRole(volunteerContact.Id, wishGranterChapterRole.Id);
-        insert wishGranterVolRole;
-        Volunteer_Roles__c nonWishVolRole = OrientationandTrainingUtil.createVolRole(volunteerContact.Id, nonWishChapterRole.Id);
-        insert nonWishVolRole;
-		Volunteer_Roles__c boardMemberVolRole = OrientationandTrainingUtil.createVolRole(volunteerContact.Id, boardMemberChapterRole.Id);
-        insert boardMemberVolRole;
-		Database.executeBatch(new Batch_UpdateVolunteerStatus_AC());
-		system.assertEquals(boardMemberRole.Name, Constant_AC.BOARD_MEMBER_RT_LABEL, 'Role is not board member');
-		system.assert(affiliation.npe5__Status__c == 'Active', 'status updated incorrectly');
-	}
-	
-	static testmethod void updateVolunteerSingleActiveStatus() {
-		Account chapterAc = OrientationandTrainingUtil.createchapterAccount();
-        insert chapterAc;
-		Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAc.Id);
-        insert volunteerContact;
-		npe5__Affiliation__c affiliation = OrientationandTrainingUtil.CreateAffiliation(volunteerContact.Id);
-        insert affiliation;
-		affiliation.npe5__Status__c = 'Active';
-		Update affiliation;
-		//Chapter_Role__c singleDayChapterRole = OrientationandTrainingUtil.createChapter(chapterAc.Id,wishGranterRole.Id);
-		Role__C singleDayEventRole = OrientationandTrainingUtil.createRole();
-        insert singleDayEventRole;
-		singleDayEventRole.Name = 'Single Day Event Volunteer';
-		Update singleDayEventRole;
-
-		Chapter_Role__c singleDayChapterRole = OrientationandTrainingUtil.createChapter(chapterAc.Id, singleDayEventRole.Id);
-        insert singleDayChapterRole;
-		Volunteer_Roles__c singleDayVolRole = OrientationandTrainingUtil.createVolRole(volunteerContact.Id, singleDayChapterRole.Id);
-        insert singleDayVolRole;
-		Non_Wish_Events__c event = OrientationandTrainingUtil.CreateEventRec(singleDayChapterRole.Id, chapterAc.Id);
-        insert event;
-		Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
-        insert wishChild;
-		Case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-        insert wish;
-		Volunteer_Opportunity__c wishVolOpp = OrientationandTrainingUtil.CreateNewWishVolunteerOpportunity(chapterAc.Id, singleDayChapterRole.Id, wish.Id);
-        insert wishVolOpp;
-        wishVolOpp.Volunteer_Name__c = volunteerContact.Id;
-        update wishVolOpp;
-		Volunteer_Opportunity__c nonWishVolOpp = OrientationandTrainingUtil.CreateNonWishVolunteerOpportunity(chapterAc.Id, singleDayChapterRole.Id, event.Id);
-        insert nonWishVolOpp;
-        nonWishVolOpp.Volunteer_Name__c = volunteerContact.Id;
-        update nonWishVolOpp;
-		List<Volunteer_Opportunity__c> volOppList = new List<Volunteer_Opportunity__c>();
-		volOppList.add(wishVolOpp);
-		volOppList.add(nonWishVolOpp);
-//		insert volOppList;
-		Database.executeBatch(new Batch_UpdateVolunteerStatus_AC());
-		system.assertEquals(volOppList[0].Volunteer_Name__c, volunteerContact.Id, 'Contact id does not match');
-		system.assert(singleDayEventRole.Name == 'Single Day Event Volunteer', 'Role name does not match');
-	}
+private class Batch_UpdateVolunteerStatus_Test {
+    
+    private final static Id CHAPTER_RT_ID = Constant_AC.CHAPTER_RT_ID;
+    private final static Id VOLUNTEER_RT_ID = Constant_AC.VOLUNTEER_RT_ID;
+    private final static String VOLUNTEER_ROLE_STATUS_ACTIVE = Constant_AC.VOLUNTEER_ROLE_STATUS_ACTIVE;
+    private final static String CHAPTER_ROLE_WISH_GRANTER = Constant_AC.CHAPTER_ROLE_WISH_GRANTER;
+    private final static String BACKGROUND_CHECK_STATUS_APPROVED = Constant_AC.BACKGROUND_CHECK_STATUS_APPROVED;
+    private final static String AFFILIATION_STATUS_ACTIVE = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+    private final static Date todayDate = Date.today();
+    private final static Date sixtyDays = Date.today().addDays(60);
+    
+    @TestSetup
+    private static void setup() {
+        trac_TriggerHandlerBase.blockTrigger = true;
+        
+        List<Account> accounts = TestDataFactory.createAccount(1);
+        Account accountAzChapter = accounts.get(0);
+        accountAzChapter.Name = 'Make-A-Wish Arizona';
+        accountAzChapter.RecordTypeId = CHAPTER_RT_ID;
+        insert accounts;
+        
+        List<Contact> contactList = TestDataFactory.createContact(1);
+        Contact volunteerJoe = contactList.get(0);
+        volunteerJoe.FirstName = 'Joe';
+        volunteerJoe.LastName = 'Smith';
+        volunteerJoe.Email = 'joe.smith@testmail.com';
+        volunteerJoe.RecordTypeId = VOLUNTEER_RT_ID;
+        volunteerJoe.AccountId = accountAzChapter.Id;
+        volunteerJoe.B_C_Expiration_Date__c = sixtyDays;
+        volunteerJoe.COI_Expiration_Date__c = sixtyDays;
+        volunteerJoe.Active_Wish_Granter__c = false;
+        insert contactList;
+        
+        List<npe5__Affiliation__c> affiliationList = TestDataFactory.createAffiliation(1);
+        npe5__Affiliation__c affiliationJoe = affiliationList.get(0);
+        affiliationJoe.npe5__Contact__c = volunteerJoe.Id;
+        affiliationJoe.npe5__Organization__c = accountAzChapter.Id;
+        affiliationJoe.npe5__Status__c = AFFILIATION_STATUS_ACTIVE;
+        insert affiliationList;
+        
+        List<Background_check__c> backgroundCheckList = TestDataFactory.createBackgroundCheck(1);
+        Background_check__c joeBackgroundCheck = backgroundCheckList.get(0);
+        joeBackgroundCheck.Current__c = true;
+        joeBackgroundCheck.Volunteer__c = volunteerJoe.Id;
+        joeBackgroundCheck.Status__c = BACKGROUND_CHECK_STATUS_APPROVED;
+        joeBackgroundCheck.Current__c = true;
+        joeBackgroundCheck.Date_Completed__c = todayDate;
+        joeBackgroundCheck.Date__c = sixtyDays;
+        insert backgroundCheckList;
+        
+        List<Conflict_Of_Interest__c> conflictOfInterestList = TestDataFactory.createConflictOfInterest(1);
+        Conflict_Of_Interest__c joeConflict = conflictOfInterestList.get(0);
+        joeConflict.Volunteer_Contact__c = volunteerJoe.Id;
+        joeConflict.Expiration_Date__c = sixtyDays;
+        insert conflictOfInterestList;
+        
+        List<Role__c> wishRolesList = TestDataFactory.createRole(1, true);
+        Role__c wishGranter = wishRolesList.get(0);
+        wishGranter.Name = CHAPTER_ROLE_WISH_GRANTER;
+        insert wishRolesList;
+        
+        List<Chapter_Role__c> chapterRoleList = TestDataFactory.createChapterRole(1);
+        Chapter_Role__c chapterRoleWishGranter = chapterRoleList.get(0);
+        chapterRoleWishGranter.Chapter_Name__c = accountAzChapter.Id;
+        chapterRoleWishGranter.Role_Name__c = wishGranter.Id;
+        chapterRoleWishGranter.Background_Check_Required__c = true;
+        insert chapterRoleList;
+        
+        List<Volunteer_Roles__c> volunteerRolesList = TestDataFactory.createVolunteerRole(1);
+        Volunteer_Roles__c wishGranterVolRole = volunteerRolesList.get(0);
+        wishGranterVolRole.Chapter_Role__c = chapterRoleWishGranter.Id;
+        wishGranterVolRole.Volunteer_Name__c = volunteerJoe.Id;
+        wishGranterVolRole.Status__c = VOLUNTEER_ROLE_STATUS_ACTIVE;
+        insert volunteerRolesList;
+        
+        trac_TriggerHandlerBase.blockTrigger = false;
+    }
+    
+    @isTest
+    private static void testBatchUpdate() {
+        test.startTest();
+        Database.executeBatch(new Batch_UpdateVolunteerStatus_AC());
+        test.stopTest();
+        Contact joeContactUpdated = [SELECT Id, Active_Wish_Granter__c FROM Contact WHERE Name = 'Joe Smith'];
+        system.assert(joeContactUpdated.Active_Wish_Granter__c == true);
+    }
+    
+    @isTest
+    private static void testScheduler() {
+        test.startTest();
+        String CRON_EXP = '0 0 22 * * ? *';
+        System.schedule('testJob1', CRON_EXP, new Batch_UpdateVolunteerStatus_AC());
+        test.stopTest();
+        List<AsyncApexJob> batchJobs = [
+            SELECT Id, ApexClass.Name 
+            FROM AsyncApexJob 
+            WHERE JobType = 'ScheduledApex'
+            AND ApexClass.Name = 'Batch_UpdateVolunteerStatus_AC'];
+        system.assert(!batchJobs.isEmpty());
+    }
 }

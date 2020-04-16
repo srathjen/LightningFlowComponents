@@ -7,6 +7,9 @@ public class RelationshipService {
 
 	private final static Id WISH_FAMILY_ID = Constant_AC.WISH_FAMILY_RT_ID;
 	private final static Id MEDICAL_PROFESSIONAL_ID = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+	private final static Id WISH_RT_ID = Constant_AC.WISH_RT_ID;
+	private final static Id WISH_FORM_FAMILY_ID = Constant_AC.WISH_FORM_FAMILY_ID;
+	private final static Id CONTACT_WISH_CHILD_RT_ID = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
 	private final static String MEDICAL_PROFESSIONAL_LABEL = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
 	private static final String LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL;
 	private static final String LEAD_DV_FORM_TYPE_BEST_CONTACT = Constant_AC.LEAD_DV_FORM_TYPE_BEST_CONTACT;
@@ -200,7 +203,7 @@ public class RelationshipService {
 	 * @return Relationship
 	 */
 	public static npe4__Relationship__c buildLeadConvertRelationship(Id wishChildContactId, Contact contact,
-			Map<String, Boolean> qualifyingMap, Map<String, String> relationshipTypeMap, Set<String> parentGuardianNameSet){
+			Map<String, Boolean> qualifyingMap, Map<String, String> relationshipTypeMap, Set<String> parentGuardianNameSet) {
 		npe4__Relationship__c newRelationship = new npe4__Relationship__c();
 		newRelationship.npe4__Contact__c = wishChildContactId;
 		if (contact.RecordTypeId == MEDICAL_PROFESSIONAL_ID) {
@@ -270,5 +273,217 @@ public class RelationshipService {
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * Update the medical physician name and email value into contact record.
+	 * @param relatedContactId
+	 * @param relationShipList
+	 */
+	public static void updatePhysicianDetails(Set<Id> relatedContactId, List<npe4__Relationship__c> relationShipList) {
+		if (relatedContactId.isEmpty() || !RecursiveTriggerHandler.isFirstTime) {
+			return;
+		}
+		RecursiveTriggerHandler.isFirstTime = false;
+		Map<Id, Contact> medicalProfContactMap = new Map<Id, Contact>();
+		Map<Id, Contact> updateContactMap = new Map<Id, Contact>();
+		try {
+			if (relatedContactId.isEmpty()) {
+				return;
+			}
+			for (Contact dbWishChildCon : [
+					SELECT Id,Name,Email,RecordTypeId
+					FROM Contact
+					WHERE Id IN:relatedContactId
+					AND RecordTypeId = :MEDICAL_PROFESSIONAL_ID
+			]) {
+				medicalProfContactMap.put(dbWishChildCon.Id, dbWishChildCon);
+			}
+			if (medicalProfContactMap.isEmpty()) {
+				return;
+			}
+			for (npe4__Relationship__c newRecord : relationShipList) {
+				if (medicalProfContactMap.containsKey(newRecord.npe4__RelatedContact__c)) {
+					Contact newContact = new Contact();
+					newContact.Id = newRecord.npe4__Contact__c;
+					newContact.Hidden_Medical_Physician__c = medicalProfContactMap.get(newRecord.npe4__RelatedContact__c).Name;
+					newContact.Hidden_Medical_Physician_Email__c = medicalProfContactMap.get(newRecord .npe4__RelatedContact__c).Email;
+					updateContactMap.put(newContact.Id, newContact);
+				}
+			}
+			if (updateContactMap.isEmpty()) {
+				return;
+			}
+			update updateContactMap.values();
+			if (Test.isRunningTest()) {
+				throw new CommonTriggerException('Test Class execution');
+			}
+		} catch (Exception ex) {
+			for (npe4__Relationship__c relationship : relationShipList) {
+				ErrorMessage_AC.createDebugRec('RelationshipService',
+						String.valueOf(relationship), String.valueOf(ex), 'updatePhysicianDetails',
+						relationship.Id, ex.getStackTraceString(), 'Error');
+			}
+			if (!Test.isRunningTest()) {
+				for (npe4__Relationship__c currRec : relationShipList) {
+					currRec.addError(Label.Debug_log_error_message);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Update the type of relationship in contact record.
+	 * @param relationshipMap
+	 */
+	public static void updateRelationshipType(Map<Id, String> relationshipMap) {
+		if (relationshipMap.isEmpty()) {
+			return;
+		}
+		List<Contact> familyContactList = new List<Contact>();
+		try {
+			for (Contact dbContact : [
+					SELECT Id,Name,Relationship_Type__c,RecordTypeId
+					FROM Contact
+					WHERE Id IN:relationshipMap.keySet() AND RecordTypeId = :WISH_FAMILY_ID
+			]) {
+				if (relationshipMap.containsKey(dbContact.Id)) {
+					dbContact.Relationship_Type__c = relationshipMap.get(dbContact.Id);
+					familyContactList.add(dbContact);
+				}
+			}
+			update familyContactList;
+			if (Test.isRunningTest()) {
+				throw new CommonTriggerException('Test Class execution');
+			}
+		} catch (Exception ex) {
+			for (npe4__Relationship__c relationship : [
+					SELECT Id,npe4__Contact__c,npe4__Type__c
+					FROM npe4__Relationship__c
+					WHERE npe4__Contact__c IN:relationshipMap.keySet()
+			]) {
+				ErrorMessage_AC.createDebugRec('RelationshipService',
+						String.valueOf(relationship), String.valueOf(ex),
+						'updateRelationshipType', relationship.Id, ex.getStackTraceString(), 'Error');
+				if (!Test.isRunningTest()) {
+					relationship.addError(Label.Debug_log_error_message);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Populate Guargian Name
+	 * @param contactMap
+	 */
+	public static void populateGuardianName(Map<Id, Id> contactMap) {
+		if (contactMap.isEmpty()) {
+			return;
+		}
+		String parentGuardianName;
+		Map<Id, String> parentGuardianMap = new Map<Id, String>();
+		Set<String> names = new Set<String>();
+		for (npe4__Relationship__c relationship : [
+				SELECT Id,npe4__RelatedContact__c, npe4__RelatedContact__r.Name, npe4__RelatedContact__r.FirstName,
+						npe4__RelatedContact__r.LastName, npe4__Contact__c, npe4__RelatedContact__r.Email,
+						Hidden_isparentFirst__c, npe4__RelatedContact__r.Phone, npe4__RelatedContact__r.Middle_Name__c,
+						npe4__RelatedContact__r.MailingCity, npe4__RelatedContact__r.MailingStreet,
+						npe4__RelatedContact__r.MailingState, npe4__RelatedContact__r.MailingPostalCode,
+						npe4__Type__c,npe4__RelatedContact__r.HomePhone,npe4__RelatedContact__r.npe01__WorkPhone__c,
+						npe4__RelatedContact__r.MobilePhone,npe4__RelatedContact__r.T_Shirt_Size__c,
+						npe4__RelatedContact__r.Hidden_Wish_Form_Id__c,Parent_Legal_Guardian__c,Wish_Participant__c
+				FROM npe4__Relationship__c
+				WHERE npe4__RelatedContact__c = :contactMap.keySet()
+				AND npe4__RelatedContact__r.RecordTypeId = :WISH_FAMILY_ID
+				AND (Parent_Legal_Guardian__c = TRUE OR Wish_Participant__c = TRUE)
+				AND npe4__RelatedContact__r.Hidden_Wish_Form_Id__c != NULL
+		]) {
+			if (contactMap.containsKey(relationship.npe4__RelatedContact__c) && relationship.Id != null) {
+				if (relationship.Parent_Legal_Guardian__c == true) {
+					if (String.isEmpty(parentGuardianName) && (!names.contains(relationship.npe4__RelatedContact__c))) {
+						parentGuardianName = relationship.npe4__RelatedContact__r.Name;
+						names.add(relationship.npe4__RelatedContact__c);
+					} else if (!names.contains(relationship.npe4__RelatedContact__c)) {
+						parentGuardianName = parentGuardianName + ', ' + relationship.npe4__RelatedContact__r.Name;
+						names.add(relationship.npe4__RelatedContact__c);
+					}
+					parentGuardianMap.put(relationship.npe4__Contact__c, parentGuardianName);
+				}
+			}
+		}
+		if (parentGuardianMap.isEmpty()) {
+			return;
+		}
+		List<Contact> contacts = new List<Contact>();
+		for (Contact contact : [
+				SELECT Id,Name,Parent_Legal_Guardian__c,RecordTypeId
+				FROM Contact
+				WHERE Id IN:parentGuardianMap.keySet()
+				AND RecordTypeId = :CONTACT_WISH_CHILD_RT_ID
+		]) {
+			if (parentGuardianMap.containsKey(contact.Id)) {
+				if (String.isNotEmpty(contact.Parent_Legal_Guardian__c)) {
+					contact.Parent_Legal_Guardian__c = parentGuardianMap.get(contact.Id);
+				} else {
+					contact.Parent_Legal_Guardian__c = contact.Parent_Legal_Guardian__c + ', '
+							+ parentGuardianMap.get(contact.Id);
+				}
+				contacts.add(contact);
+			}
+			update contacts;
+		}
+	}
+
+	/**
+	 * Build Contact Set from new Relationships
+	 * @param newRelationshipsList
+	 * @return Set of npe4__RelatedContact__c
+	 */
+	public static Set<Id> buildQualifyingMedProfessionalRelationshipMap(List<npe4__Relationship__c> newRelationshipsList) {
+		Set<Id> qualifyingMedicalProfessionalContactIds = new Set<Id>();
+		for (npe4__Relationship__c newRecord : newRelationshipsList) {
+			if (Bypass_Triggers__c.getValues(UserInfo.getUserId()) == null) {
+				if (newRecord.npe4__Contact__c != null
+						&& newRecord.npe4__Type__c == Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL
+						&& newRecord.Qualifying_Medical_Professional__c
+						&& RELATIONSHIP_ACTIVE.equals(newRecord.npe4__Status__c)) {
+					qualifyingMedicalProfessionalContactIds.add(newRecord.npe4__RelatedContact__c);
+				}
+			}
+		}
+		return qualifyingMedicalProfessionalContactIds;
+	}
+
+	/**
+	 * Build Relationship Map from new Relationships
+	 * @param newRelationshipsList
+	 * @return Map of npe4__RelatedContact__c and npe4__Contact__c
+	 */
+	public static Map<Id, String> buildNonMedicalRelationshipMap(List<npe4__Relationship__c> newRelationshipsList) {
+		Map<Id, String> relationshipMap = new Map<Id, String>();
+		for (npe4__Relationship__c newRecord : newRelationshipsList) {
+			if (newRecord.npe4__Contact__c != null
+					&& newRecord.npe4__RelatedContact__c != null
+					&& newRecord.npe4__Type__c != Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL) {
+				relationshipMap.put(newRecord.npe4__RelatedContact__c, newRecord.npe4__Type__c);
+			}
+		}
+		return relationshipMap;
+	}
+
+	/**
+	 * Build Contact Map from new Relationships
+	 * @param newRelationshipsList
+	 * @return Map of npe4__RelatedContact__c and npe4__Contact__c
+	 */
+	public static Map<Id, Id> buildContactMap(List<npe4__Relationship__c> newRelationshipsList) {
+		Map<Id, Id> contactMap = new Map<Id, Id>();
+		for (npe4__Relationship__c newRecord : newRelationshipsList) {
+			if (newRecord.npe4__Contact__c != null
+					&& newRecord.npe4__RelatedContact__c != null) {
+				contactMap.put(newRecord.npe4__RelatedContact__c, newRecord.npe4__Contact__c);
+			}
+		}
+		return contactMap;
 	}
 }

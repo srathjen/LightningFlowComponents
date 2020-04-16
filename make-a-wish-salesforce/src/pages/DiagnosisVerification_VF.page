@@ -15,6 +15,7 @@ Modification Log:
 9. 01/09/2020 - Manoj      - SIW-287 : Added Question verbiage and modified help text for additional section on DV question.
 10.04/02/2020 - Manoj      - SIW-413 : Modified text as per the ticket.
 11.04/02/2020 - Manoj      - SIW-379 : Added 'I am not sure' and 'Medically fragile/medically complex' checkbox in DV form.
+12.09/04/2020 - Manoj      - SIW-355 : Added 2 new questions. Also changed the placement of one question as mentiond in the ticket.
 *********************************************************************************************************************************** -->
 <apex:page controller="DiagnosisVerification_AC" applyBodyTag="false" sidebar="false" showHeader="false" docType="html-5.0" standardStylesheets="false" title="Make-A-Wish | Diagnosis Verification Form" cache="false">
     <script>
@@ -688,25 +689,9 @@ Modification Log:
                                                 </div>
                                             </div>
                                             -->
+                                            <!--SIW-355: Changed placement of below question -->
                                             <div class="form-group row">
-                                                <div class="col-md-12"><label>Is there a medical reason we would need to expedite the process?</label></div>
-                                                <div class="col-md-6">
-                                                    <apex:selectList value="{!wishChildWrapperIns.expediteTheProcess}" multiselect="false" size="1" styleClass="form-control c-select exped-Process requiredField" id="expediteprocess">
-                                                        <apex:selectOption itemlabel="Please Select" itemvalue="" html-selected="selected"/>
-                                                        <apex:selectOption itemlabel="Yes" itemvalue="Yes" />
-                                                        <apex:selectOption itemLabel="No" itemValue="No"/>
-                                                        <apex:selectOption itemLabel="Not Sure" itemValue="Not Sure"/>
-                                                    </apex:selectList>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row expedite-explain fadein-alert">
-                                                <div class="col-md-12"><label>Please provide timeframe and details</label></div>
-                                                <div class="col-md-6"><apex:inputTextarea styleClass="form-control plz-Exp " html-maxlength="10000" value="{!wishChildWrapperIns.plzExplain}" /></div>
-                                            </div>
-                                            
-                                            
-                                            <div class="form-group row">
-                                                <div class="col-md-12"><label>Do you expect this child's condition will significantly deteriorate in the next 3-6 months? </label></div>
+                                                <div class="col-md-12"><label>Do you expect this child's condition will significantly deteriorate in the next 3-6 months?</label></div>
                                                 <div class="col-md-6">
                                                     <apex:selectList value="{!wishChildWrapperIns.conditioDeteriorate}" multiselect="false" size="1" styleClass="form-control c-select detor-Proc requiredField" id="conditiondeteriorate">
                                                         <apex:selectOption itemlabel="Please Select" itemvalue="" html-selected="selected"/>
@@ -720,6 +705,39 @@ Modification Log:
                                                 <div class="col-md-12"><label class="fadein-alert">Please explain</label></div>
                                                 <div class="col-md-6"><apex:inputTextarea styleClass="form-control fadein-alert detex " html-maxlength="10000" value="{!wishChildWrapperIns.explainDeteriorate}" /></div>
                                             </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-md-12"><label>Is there a medical necessity to expedite the process?</label></div><!--SIW-355 changed verbiage-->
+                                                <div class="col-md-6">
+                                                    <apex:selectList value="{!wishChildWrapperIns.expediteTheProcess}" multiselect="false" size="1" styleClass="form-control c-select exped-Process requiredField" id="expediteprocess">
+                                                        <apex:selectOption itemlabel="Please Select" itemvalue="" html-selected="selected"/>
+                                                        <apex:selectOption itemlabel="Yes" itemvalue="Yes" />
+                                                        <apex:selectOption itemLabel="No" itemValue="No"/>
+                                                        <apex:selectOption itemLabel="Not Sure" itemValue="Not Sure"/>
+                                                    </apex:selectList>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row expedite-explain fadein-alert">
+                                                <div class="col-md-12"><label>Please provide medical reason for request</label></div><!--SIW-355 changed verbiage-->
+                                                <div class="col-md-6"><apex:inputTextarea styleClass="form-control plz-Exp " html-maxlength="10000" value="{!wishChildWrapperIns.plzExplain}" /></div>
+                                            
+                                            <!--SIW-355 start : Added new question-->                                            
+                                                <div class="col-md-12"><label>Please provide ideal timeframe for wish, if eligible</label></div>
+                                                <div class="col-md-6">
+                                                    <apex:selectList value="{!wishChildWrapperIns.timeFrameValue}" multiselect="false" size="1" styleClass="form-control c-select timeFrame " id="timeprocess">
+                                                    <apex:selectOption itemlabel="Please Select" itemvalue="" html-selected="selected"/>
+                                                    <apex:selectOption itemlabel="< 1 month" itemvalue="< 1 month" />
+                                                    <apex:selectOption itemLabel="1-3 months" itemValue="1-3 months"/>
+                                                    <apex:selectOption itemLabel="3-6 months" itemValue="3-6 months"/>
+                                                    <apex:selectOption itemLabel="Other" itemValue="Other"/>
+                                                </apex:selectList>
+                                            </div>
+                                            </div>
+                                            <div class="form-group row ideal-timeframe fadein-alert">                                                
+                                                <div class="col-md-6"><apex:inputTextarea styleClass="form-control ideal-time" html-maxlength="10000" html-placeholder="Please describe the ideal timeframe" value="{!wishChildWrapperIns.idealtimeFrameValue}" id="idealTime"/></div>
+                                            </div> 
+                                            <!--SIW-355 End : Added new question-->                                           
+                                            
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>In order to facilitate communication, please select all that apply to {!currLead.FirstName} {!currLead.LastName}</label></div>
                                                  <div class="col-md-12">
@@ -1527,9 +1545,12 @@ Modification Log:
                                             if(this.value == 'Yes') {
                                                 $('.expedite-explain').prop('hidden', false);
                                                 $(".plz-Exp").addClass("requiredField");
+                                                $(".timeFrame").addClass("requiredField");
                                             } else if(this.value == 'No' || this.value == 'Not Sure') {
                                                 $('.plz-Exp').val("");
+                                                $('.timeFrame').val("");
                                                 $(".plz-Exp").removeClass("requiredField");
+                                                $(".timeFrame").removeClass("requiredField");
                                                 $('.expedite-explain').prop('hidden', true);
                                                 
                                             }
@@ -1564,6 +1585,32 @@ Modification Log:
                                             }
                                         }
                                         //SIW-287 End
+                                        
+                                        //SIW-355 Start : Added CSS to hide and display questions on DV form
+                                        // hide 'ideal timeframe' textbox onload
+                                        $('.ideal-timeframe').prop('hidden', true);
+                                        // show/hide 'ideal timeframe' textbox
+                                        $('[id$=timeprocess]').on('change', function() {
+                                            if(this.value == 'Other') {
+                                                $('.ideal-timeframe').prop('hidden', false);
+                                                $(".ideal-time").addClass("requiredField");
+                                            } else{
+                                                $('.ideal-time').val("");
+                                                $(".ideal-time").removeClass("requiredField");
+                                                $('.ideal-timeframe').prop('hidden', true);                                                
+                                            }
+                                        });
+                                        //display 'ideal timeframe' textbox if there is a value in 'ideal timeframe for wish' on page load
+                                        if ($('[id$=timeprocess]').val() != null){
+                                            if ($('[id$=timeprocess]').val().indexOf('Other') != -1){
+                                                $('.ideal-timeframe').prop('hidden', false);
+                                                $(".ideal-time").addClass("requiredField");
+                                               // if($('[id$=idealTime]').val() == null || $('[id$=idealTime]').val() == '')  $(".ideal-time").addClass("requiredField");                                                
+                                               // else $(".ideal-time").removeClass("requiredField");
+                                            }
+                                        }
+                                        //SIW-355 End
+
                                         // hide condition deteriorate explain textbox onload
                                         $('.condition-deteriorate-explain').prop('hidden', true);
                                         // show/hide condition deteriorate textbox

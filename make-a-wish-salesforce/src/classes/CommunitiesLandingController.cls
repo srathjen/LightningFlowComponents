@@ -1,28 +1,30 @@
 /**
-* An apex page controller that takes the user to the right start page based on credentials or lack thereof
+* @description      Controller to route users to the correct staring page.
 */
 public with sharing class CommunitiesLandingController {
-    
-    List<Profile> userProfileName = [SELECT Id, Name FROM Profile WHERE Id=:userinfo.getProfileId() LIMIT 1];
-    
-    // Code we will invoke on page load.
+    /*
+     * @description     Code to route users to appropriate page based on user profile after login.
+     *
+     * @author          MST Solutions
+     * @createdDate     unknknown
+     */
     public PageReference forwardToStartPage() {
         String startUrl = System.currentPageReference().getParameters().get('startURL');
-        
-        if(userProfileName.size()>0 && (userProfileName[0].Id == label.Active_Volunteer_Profile)) {
-            if(!String.isEmpty(startUrl)) {
+
+        if (Utils.currentUser.ProfileId == Label.Active_Volunteer_Profile) {
+            if (!String.isEmpty(startUrl)) {
                 PageReference landingPage = new PageReference(startUrl);
+
                 return landingPage;
             } else {
-                return page.VolunteerLanding_VF;
+                return Page.VolunteerLanding_VF;
             }
-            //return page.VolunteerLanding_VF;
-        } else if(userProfileName.size()>0 && (userProfileName[0].Id == label.Prospective_Volunteer_Profile)) {
-            return page.VolunteerWelcomePage_VF;
+        } else if (Utils.currentUser.ProfileId == Label.Prospective_Volunteer_Profile) {
+            return Page.VolunteerWelcomePage_VF;
         } else {
-            return page.CommunitiesLogin;
+            return Page.CommunitiesLogin;
         }
     }
-    
+
     public CommunitiesLandingController() {}
 }

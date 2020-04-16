@@ -14,6 +14,14 @@ public class Utils_Test {
 	}
 
 	@IsTest
+	private static void getPicklistSelectOptions() {
+		List<SelectOption> opportunityStages = Utils.getPicklistSelectOptions(
+				'Opportunity', 'StageName', 'Please select a Stage Name');
+
+		System.assert(!opportunityStages.isEmpty(), 'Picklist Select Options should be available');
+	}
+
+	@IsTest
 	private static void getFieldLabels() {
 		Map<String, String> opportunityStages = Utils.getFieldLabels('Opportunity');
 

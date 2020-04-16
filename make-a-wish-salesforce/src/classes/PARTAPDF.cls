@@ -2,6 +2,7 @@
 Author      : MST Solutions
 Date        : 9/30/2016
 Description : This class is used to display the Medical Information in Docusign page
+1. 09/04/2020 - Manoj      - SIW-355 : Added 2 new field to get queried on page load
 *******************************************************************************************************************/
 public class PARTAPDF {
     public Id leadId { get; set; }
@@ -42,7 +43,9 @@ public class PARTAPDF {
             'RFI_Form_Info_Hidden__c',
             'Override_Dupe_Check__c',
             'Please_Explain_Deteriorate__c',
-            'ICD_Given_By_Referrer__r.Name'
+            'ICD_Given_By_Referrer__r.Name',
+            'Expedite_timeframe__c',
+            'Other_expedite_timeframe_comments__c'
         };
 
         try {
