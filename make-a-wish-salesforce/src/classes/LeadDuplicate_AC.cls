@@ -658,10 +658,13 @@ public class LeadDuplicate_AC {
 							}
 						}
 						// Collect the standard and custom fields separately for sorting
-						if (fResult.isCustom() && fieldsSet.contains(fieldName)) {
-							customFieldMap.put(fieldName, fResult);
-						} else {
-							standardFieldMap.put(fieldName, fResult);
+						// Only include fields that are in fieldset.
+						if (fieldsSet.contains(fieldName))	{
+							if (fResult.isCustom()) {
+								customFieldMap.put(fieldName, fResult);
+							} else {
+								standardFieldMap.put(fieldName, fResult);
+							}
 						}
 					}
 				}
