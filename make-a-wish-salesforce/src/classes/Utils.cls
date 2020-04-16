@@ -265,14 +265,14 @@ public class Utils {
 	}
 
 	/**
-	 * @description		Get a Map of UserRole.Name by User Id.
+	 * @description     Get a Map of UserRole.Name by User Id.
 	 *
-	 * @param 			Set<id> userIds
+	 * @param           Set<id> userIds
 	 *
-	 * @return			Map<Id,String>
+	 * @return          Map<Id,String>
 	 *
-	 * @author			MST Solutions
-	 * @createdDate		unknown
+	 * @author          MST Solutions
+	 * @createdDate     unknown
 	 */
 	public static Map<Id,String> getUserRoleMap(Set<Id> userIds) {
 		Map<Id, String> userRoleMap = new Map<Id, String>();
