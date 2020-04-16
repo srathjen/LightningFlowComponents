@@ -21,10 +21,10 @@ public with sharing class VolunteerRoleDomain extends trac_TriggerHandlerBase {
 	 * Before update of Volunteer Role
 	 */
 	public override void handleBeforeUpdate() {
-		VolunteerRoleService.setSubStatusAndStartDate(newVolunteerRoleList);
 		Set<String> chapterNamesSet = VolunteerRoleService.buildChapterNames(newVolunteerRoleList);
 		Map<String, String> chapterRoleMap = ChapterStaffRecordSharing_AC.findChapterRole(chapterNamesSet);
-		VolunteerRoleService.validatePermission(newVolunteerRoleList, chapterRoleMap);
+		VolunteerRoleValidation.validatePermission(newVolunteerRoleList, chapterRoleMap);
+		VolunteerRoleService.setSubStatusAndStartDate(newVolunteerRoleList);
 	}
 
 	/**

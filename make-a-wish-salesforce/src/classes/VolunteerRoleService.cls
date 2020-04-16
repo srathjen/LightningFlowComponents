@@ -93,24 +93,6 @@ public class VolunteerRoleService {
 	}
 
 	/**
-	 * Validate if User / Profile has permission, add Permission Error message on record
-	 * @param volunteerRoles
-	 * @param chapterRoleMap
-	 */
-	public static void validatePermission(List<Volunteer_Roles__c> volunteerRoles,
-			Map<String, String> chapterRoleMap) {
-		User currUser = Utils.currentUser;
-		for (Volunteer_Roles__c volRole : volunteerRoles) {
-			if (chapterRoleMap.get(volRole.Chapter_Name__c) != currUser.UserRole.Name
-					&& currUser.UserRole.Name != ROLE_NATIONAL_STAFF
-					&& currUser.Profile.Name != PROFILE_SYSTEM_ADMINISTRATOR
-					&& Bypass_Triggers__c.getValues(UserInfo.getUserId()) == null) {
-				volRole.addError(Label.Volunteer_Role_Error_Update);
-			}
-		}
-	}
-
-	/**
 	 * Find Volunteer by Volunteer Roles count
 	 * @param volunteerRolesMap
 	 * @param statusSet
