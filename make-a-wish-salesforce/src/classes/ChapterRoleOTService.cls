@@ -29,13 +29,10 @@ public class ChapterRoleOTService {
 				WHERE Id IN :chapterRoleOTMap.keySet()
 		]) {
 			if (ROLE_NATIONAL_STAFF.equals(currRec.Owner.UserRole.Name)) {
-				if (chapterRoleMap.containsKey(currRec.Chapter_Name__c)) {
-					chapterRoleMap.get(currRec.Chapter_Name__c).add(currRec);
-				} else {
-					chapterRoleMap.put(currRec.Chapter_Name__c, new List<Chapter_Role_O_T__c>{
-							currRec
-					});
+				if (!chapterRoleMap.containsKey(currRec.Chapter_Name__c)) {
+					chapterRoleMap.put(currRec.Chapter_Name__c, new List<Chapter_Role_O_T__c>());
 				}
+				chapterRoleMap.get(currRec.Chapter_Name__c).add(currRec);
 			}
 		}
 		return chapterRoleMap;
