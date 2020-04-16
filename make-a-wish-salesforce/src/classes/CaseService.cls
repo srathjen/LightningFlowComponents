@@ -670,12 +670,7 @@ public with sharing class CaseService {
 				throw new CommonTriggerException('Test Class execution');
 			}
 		} catch (Exception ex) {
-			for (Case currRec : parentWishesList) {
-				ErrorMessage_AC.createdebugRec('Case_OnAfterInsertTriggerHandlerHelper', String.valueOf(currRec),
-					String.valueOf(ex), 'UpdateWishRecordIdentifier', currRec.Id, ex.getStackTraceString(), 'Error');
-			}
-
-			if (!Test.isRunningTest()) {
+			if (!Test.isRunningTest() && parentWishesList != null) {
 				for (Case currRec : parentWishesList) {
 					currRec.addError(Label.Debug_log_error_message);
 				}
