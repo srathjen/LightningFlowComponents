@@ -38,7 +38,7 @@ global class CreateNewWish_AC {
 
             Set<Id> accountIds = new Set<Id>();
             accountIds.add(currCase.ChapterName__c);
-            Case_OnAfterUpdateTriggerHandlerHelper.createVolunteerOpportunity(newCaseMap, accountIds);
+            CaseService.createVolunteerOpportunity(newCaseMap, accountIds);
         }
 
         return newCase.Id;

@@ -156,6 +156,7 @@ public class DiagnosisVerification_AC_Helper {
                 Not_Listed__c,
                 PR_Diagnosis__c
             FROM Condition_Description__c
+            WHERE InActive__c = FALSE
         ];
     }
 

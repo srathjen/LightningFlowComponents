@@ -1,12 +1,9 @@
 public class RecursiveTriggerHandler{
     public static Boolean isFirstTime = true;
-    public static boolean blockCaseLockRecursive = true;
-    public static boolean accountRecursive = true;
-    public static boolean PartARecursive = true;
-    public static boolean accountBeforeUpdate = true;
-    public static boolean relationShipRecursive= true;
-    public static boolean blockBeforeUpdate = false;
-    public static boolean blockAfterUpdate = false;
-    public static boolean allowToEditRecord = FALSE;
-    Public Static Boolean nationalEmailRecurrence = FALSE;
+    public static Boolean blockCaseLockRecursive = true;
+    public static Boolean accountRecursive = true;
+    public static Boolean relationShipRecursive = true;
+    public static Boolean blockBeforeUpdate = false;
+    public static Boolean blockAfterUpdate = false;
+    public static Boolean allowToEditRecord = false;
 }

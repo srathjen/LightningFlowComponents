@@ -10,10 +10,11 @@ Modification Log:
                            Descriptions 1-4 not populating when MP fills the form, save, then come back later to
                            sign the DV.
                            Modification Log:
-              09/10/2019 - Manik - WLP-423
+              09/10/2019 - Manik - WLP-4232
               01/02/2020 - CSmith - SIW-342 All changes reverted.
 1. 01/09/2020 - Manoj      - SIW-287 : Mapped newly created fields to insert values in lead records upon submission of DV form.
 2. 04/02/2020 - Manoj      - SIW-379 : Mapped 'Travel_Restriction__c' field in lead records based on user selection.
+3 .09/04/2020 - Manoj      - SIW-355 : Mapped 2 Wrapper fields values with lead fields value - timeFrameValue, idealtimeFrameValue
 *******************************************************************************************************************/
 public class DiagnosisVerification_AC {
 
@@ -121,6 +122,10 @@ public class DiagnosisVerification_AC {
         wishChildWrapperIns.numberOfHospitalAdmission =  Integer.valueOf(currLead.Number_hospital_admissions__c);
         wishChildWrapperIns.admittingDiagnosis = currLead.Admitting_diagnosis__c;
         wishChildWrapperIns.ifICUAdmission = currLead.ICU_Admissions__c;
+        //SIW-355 Start : Mapped 2 new added questions value to lead field on loading of page
+        wishChildWrapperIns.timeFrameValue = currLead.Expedite_timeframe__c;
+        wishChildWrapperIns.idealtimeFrameValue = currLead.Other_expedite_timeframe_comments__c;
+        //SIW-355 End
 
         if (currLead.Child_will_ultimately_die_prematurely__c == true) {
             wishChildWrapperIns.describePatient = '1';
@@ -639,6 +644,10 @@ public class DiagnosisVerification_AC {
      */
     @TestVisible
     private List<DiagnosisWrapper.MedicalWrapper> MedicalQuestions(String icdCode, String conditionDescription, Boolean isGroup1, String icdOrPcd, Integer diagnosisBlockNum, List<Medical_Questions__c> medicalQuestions, Boolean skipMedQues) {
+        if (medicalQuestions == null) {
+            medicalQuestions = new List<Medical_Questions__c>();
+        }
+
         try {
             Condition_Description__c conditionDesc;
             diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescriptionObject = conditionDescription;
@@ -849,6 +858,10 @@ public class DiagnosisVerification_AC {
             currLead.Number_hospital_admissions__c =  wishChildWrapperIns.numberOfHospitalAdmission;
             currLead.Admitting_diagnosis__c = wishChildWrapperIns.admittingDiagnosis;
             currLead.ICU_Admissions__c = wishChildWrapperIns.ifICUAdmission;
+            //SIW-355 Start : Mapped 2 new added questions value to lead field on submission of DV form
+            currLead.Expedite_timeframe__c = wishChildWrapperIns.timeFrameValue;
+            currLead.Other_expedite_timeframe_comments__c = wishChildWrapperIns.idealtimeFrameValue;
+            //SIW-355 End
 
             if (wishChildWrapperIns.describePatient == '1') {
                 currLead.Child_will_ultimately_die_prematurely__c = true;
@@ -1354,14 +1367,16 @@ public class DiagnosisVerification_AC {
             'RFI_Form_Info_Hidden__c',
             'Override_Dupe_Check__c',
             'isConverted',
-            'Please_Explain_Deteriorate__c'
+            'Please_Explain_Deteriorate__c',
+            'Expedite_timeframe__c',
+            'Other_expedite_timeframe_comments__c'
         };
 
         for (String field : FIELDS_TO_SELECT) {
             query += field + ',';
         }
 
-        for (Schema.FieldSetMember currField : Utils.getPartAFields()) { 
+        for (Schema.FieldSetMember currField : Utils.getPartAFields()) {
             query += currField.getFieldPath() + ',';
         }
 

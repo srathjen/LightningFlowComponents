@@ -4,6 +4,7 @@
 // 06/02/2020 - Manoj - SIW-487 Added One New question as mentioned in ticket.
 // 31/03/2020 - Manoj - SIW-487 Allowing users to proceed with form when relationship is Parent\Guardin and option has been selected 'No, I wish to proceed'.
 // 31/03/2020 - Manoj - SIW-370 Make Primary language as required field
+// 14/04/2020 - Manoj - SIW-569 Changed unsupported method 'includes' to 'indexOf' for IE11 issue
 -->
 
 <apex:page controller="WishReferralForm_AC" showHeader="false" applyBodyTag="false" sidebar="false" standardStylesheets="false" docType="html-5.0" cache="false">
@@ -119,7 +120,7 @@
             } 
         } 
         console.log(selectedArray);
-        if(selectedArray.includes("Other")){
+        if(selectedArray.indexOf("Other") > -1){//SIW-569 Changed unsupported method 'includes' to 'indexOf' for IE11 issue
             document.getElementById('otherlanguagediv').style.display='block';
         }
         else{
@@ -928,3 +929,4 @@
             </script>
         </body>
     </apex:page>
+    

@@ -128,14 +128,10 @@ public with sharing class ContactDomain extends trac_TriggerHandlerBase {
             return;
         }
         List<Contact> volunteerContactList = new List<Contact>();
-        Set<Id> contactHouseholdSet = new Set<Id>();
         for(Contact newContact : newContactsList) {
             Contact oldContact = oldContactsMap.get(newContact.Id);
             if(newContact.recordTypeId == VOLUNTEER_RT_ID && oldContact.recordTypeId != VOLUNTEER_RT_ID) {
                 volunteerContactList.add(newContact);
-            }
-            if(newContact.Same_as_Household_Address__c && !oldContact.Same_as_Household_Address__c) {
-                contactHouseholdSet.add(newContact.Id);
             }
         }
         if(RecursiveTriggerHandler.isFirstTime || Test.isRunningTest()) {
@@ -143,7 +139,7 @@ public with sharing class ContactDomain extends trac_TriggerHandlerBase {
             ContactService.updateEmailAddress(newContactsList, oldContactsMap);
         }
         ContactService.createAffiliation(volunteerContactList);
-        ContactService.updateHouseHoldAddress(contactHouseholdSet);
+        ContactService.updateHouseHoldAddress(newContactsList, oldContactsMap);
         ContactService.updateWishFormRecord(newContactsList, oldContactsMap);
         ContactService.updateRelationship(newContactsList, oldContactsMap);
         ContactService.updateMedicalProfessional(newContactsList, oldContactsMap);
@@ -180,7 +176,6 @@ public with sharing class ContactDomain extends trac_TriggerHandlerBase {
                 || newContact.MailingStateCode != oldContact.MailingStateCode 
                 || newContact.MailingPostalCode != oldContact.MailingPostalCode);
     }
-	
     //Check if other address has been updated
     private static Boolean hasOtherAddressChanged(Contact newContact, Contact oldContact) {
         return (newContact.OtherStreet != oldContact.OtherStreet 
@@ -189,7 +184,6 @@ public with sharing class ContactDomain extends trac_TriggerHandlerBase {
                 || newContact.OtherCity != oldContact.OtherCity 
                 || newContact.OtherPostalCode != oldContact.OtherPostalCode);
     }
-	
     //Check if contact is active volunteer
     private static Boolean isNotActiveVolunteer(Contact newContact) {
         return(newContact.Active_Board_Member__c == false 
@@ -197,7 +191,6 @@ public with sharing class ContactDomain extends trac_TriggerHandlerBase {
                && newContact.Active_Single_Day_Event_Volunteer__c == false 
                && newContact.Active_Wish_Granter__c == false);
     }
-	
     //Create map of month name with coordinating digit value
     private static Map<String, String> constructMonthNameValueMap() {
         Map<String, String> monthValueMap = new Map<String, String>();
@@ -215,7 +208,6 @@ public with sharing class ContactDomain extends trac_TriggerHandlerBase {
         monthValueMap.put('December', '12');
         return monthValueMap;
     }
-	
     //Create map of month digit value with coordinating name
     private static Map<String, String> constructMonthValueNameMap() {
         Map<String, String> monthNameMap = new Map<String, String>();
