@@ -856,9 +856,13 @@ public class DiagnosisVerification_AC {
             currLead.None_of_these_statements_describes_Child__c = false;
             currLead.Responds_to_treatment_with_normal_health__c = false;
             currLead.Unplanned_hospital_admissions__c = wishChildWrapperIns.unplannedHospitalAdmission;
-			//SIW-531 Start : Setting value blank for Number_hospital_admissions__c if no value provided from form for this question
-            if(wishChildWrapperIns.unplannedHospitalAdmission != 'No') currLead.Number_hospital_admissions__c =  wishChildWrapperIns.numberOfHospitalAdmission;  
-            else currLead.Number_hospital_admissions__c =  null;
+	    //SIW-531 Start : Setting value blank for Number_hospital_admissions__c if no value provided from form for this question
+             if(wishChildWrapperIns.unplannedHospitalAdmission != 'No') {
+                currLead.Number_hospital_admissions__c =  wishChildWrapperIns.numberOfHospitalAdmission;
+            }  
+            else {
+                currLead.Number_hospital_admissions__c =  null;
+            }
             //SIW-531 End            
             currLead.Admitting_diagnosis__c = wishChildWrapperIns.admittingDiagnosis;
             currLead.ICU_Admissions__c = wishChildWrapperIns.ifICUAdmission;
