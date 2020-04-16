@@ -61,31 +61,30 @@ public with sharing class TimesheetService {
                 newVolunteerOppIds.add(sheet.Volunteer_Opportunity__c);
             }
         }
-        if(!newVolunteerOppIds.isEmpty() && currentUser.ContactId != null) {
-            Map<Id, Volunteer_Opportunity__c> volunteerOppMap = new Map<Id, Volunteer_Opportunity__c>([
-                SELECT Id 
-                FROM Volunteer_Opportunity__c
-                WHERE Volunteer_Name__c = :currentUser.ContactId
-                AND Id IN :newVolunteerOppIds
-            ]);
-            if(!volunteerOppMap.isEmpty()) {
-                Map<Id, Volunteer_Opportunity__Share> volOppShareMap = new Map<Id, Volunteer_Opportunity__Share>([
-                    SELECT Id, ParentId 
-                    FROM Volunteer_Opportunity__Share
-                    WHERE ParentId IN :volunteerOppMap.keySet()
-                ]);
-                for(Id volunteerOppId : volunteerOppMap.keySet()) {
-                    if(!volOppShareMap.keySet().contains(volunteerOppId)) {
-                        Volunteer_Opportunity__Share newVolOppShareRec = new Volunteer_Opportunity__Share();
-                        newVolOppShareRec.ParentId = volunteerOppId;
-                        newVolOppShareRec.AccessLevel = 'Edit';
-                        newVolOppShareRec.UserOrGroupId = currentUser.Id;
-                        newVolOppShareRec.rowCause = Schema.Volunteer_Opportunity__Share.RowCause.Grant_Edit_Access_to_assigned_Volunteer__c;
-                        volOpportunitySharingList.add(newVolOppShareRec);
-                    }
+        if(newVolunteerOppIds.isEmpty() || currentUser.ContactId == null) {
+            return;
+        }
+        Map<Id, Volunteer_Opportunity__c> volunteerOppMap = new Map<Id, Volunteer_Opportunity__c>([
+            SELECT Id 
+            FROM Volunteer_Opportunity__c
+            WHERE Volunteer_Name__c = :currentUser.ContactId
+            AND Id IN :newVolunteerOppIds]);
+        if(!volunteerOppMap.isEmpty()) {
+            Map<Id, Volunteer_Opportunity__Share> volOppShareMap = new Map<Id, Volunteer_Opportunity__Share>([
+                SELECT Id, ParentId 
+                FROM Volunteer_Opportunity__Share
+                WHERE ParentId IN :volunteerOppMap.keySet()]);
+            for(Id volunteerOppId : volunteerOppMap.keySet()) {
+                if(!volOppShareMap.keySet().contains(volunteerOppId)) {
+                    Volunteer_Opportunity__Share newVolOppShareRec = new Volunteer_Opportunity__Share();
+                    newVolOppShareRec.ParentId = volunteerOppId;
+                    newVolOppShareRec.AccessLevel = 'Edit';
+                    newVolOppShareRec.UserOrGroupId = currentUser.Id;
+                    newVolOppShareRec.rowCause = Schema.Volunteer_Opportunity__Share.RowCause.Grant_Edit_Access_to_assigned_Volunteer__c;
+                    volOpportunitySharingList.add(newVolOppShareRec);
                 }
-                insert volOpportunitySharingList;
             }
+            insert volOpportunitySharingList;
         }
     }
 
@@ -102,97 +101,101 @@ public with sharing class TimesheetService {
         Decimal min = 0;
         String totalHours;
         for(Time_sheet__c sheet : timesheetList) {
-            if(sheet.Volunteer_Opportunity__c != null)
+            if(sheet.Volunteer_Opportunity__c != null) {
                 volOpportunityIdSet.add(sheet.Volunteer_Opportunity__c);
-        }
-        if(!volOpportunityIdSet.isEmpty()) {
-            for(Volunteer_Opportunity__c volOpp : [
-                SELECT Id, Wish__c 
-                FROM Volunteer_Opportunity__c 
-                WHERE Id IN :volOpportunityIdSet 
-                AND Wish__c != null]) {
-                    wishIdSet.add(volOpp.Wish__c);
-                }
-            if(!wishIdSet.isEmpty()) {
-                for(AggregateResult agResult : [
-                    SELECT Volunteer_Opportunity__r.Wish__c wish, Sum(Hours_Hidden__c)aver
-                    FROM Time_sheet__c
-                    WHERE Volunteer_Opportunity__r.Wish__c IN :wishIdSet 
-                    AND Volunteer_Opportunity__r.Wish__c != null
-                    GROUP BY Volunteer_Opportunity__r.Wish__c]) {
-                        volOpportunityMap.put((Id)agResult.get('wish'), (decimal)agResult.get('aver'));
-                    }
-                if(!volOpportunityMap.isEmpty()) {
-                    for(Volunteer_Opportunity__c volOpp : [
-                        SELECT Id, Wish__c, Wish__r.Total_Hour_Spent_Hidden__c
-                        FROM Volunteer_Opportunity__c
-                        WHERE Wish__c IN :volOpportunityMap.keySet() AND Wish__c != null]) {
-                            Case updateCase = new Case();
-                            if(caseMap.containsKey(volOpp.Wish__c)) {
-                                updateCase.Id = caseMap.get(volOpp.Wish__c).Id;
-                            } else {
-                                updateCase.Id = volOpp.Wish__c;
-                            }
-                            if((updateCase.Total_Hour_Spent_Hidden__c == null || updateCase.Total_Hour_Spent_Hidden__c == 0.00) 
-                               && volOpp.Wish__r.Total_Hour_Spent_Hidden__c != null && volOpp.Wish__r.Total_Hour_Spent_Hidden__c > 0) {
-                                   hrs = math.floor(volOpp.Wish__r.Total_Hour_Spent_Hidden__c / 60);
-                                   min = math.mod(Integer.valueOf(volOpp.Wish__r.Total_Hour_Spent_Hidden__c), 60);
-                                   totalHours = hrs + '.' + min;
-                                   updateCase.Total_Hour_Spent_Hidden__c = Decimal.valueOf(totalHours);
-                               }
-                            if(updateCase.Total_Hour_Spent_Hidden__c == null || updateCase.Total_Hour_Spent_Hidden__c == 0.00) {
-                                hrs = math.floor(volOpportunityMap.get(volOpp.Wish__c) / 60);
-                                min = math.mod(Integer.valueOf(volOpportunityMap.get(volOpp.Wish__c)), 60);
-                                totalHours = hrs + '.' + min;
-                                updateCase.Total_Hour_Spent_Hidden__c = Decimal.valueOf(totalHours);
-                            } else {
-                                hrs = math.floor(volOpportunityMap.get(volOpp.Wish__c) / 60);
-                                min = math.mod(Integer.ValueOf(volOpportunityMap.get(volOpp.Wish__c)), 60);
-                                totalHours = hrs + '.' + min;
-                                updateCase.Total_Hour_Spent_Hidden__c = Decimal.valueOf(totalHours);
-                            }
-                            if(updateCase.Total_Hour_Spent_Hidden__c > 0) {
-                                Decimal toRound = updateCase.Total_Hour_Spent_Hidden__c;
-                                Decimal rounded = toRound.setScale(2);
-                                List<String> timeList = String.valueOf(rounded).split('\\.');
-                                Integer hours = Integer.valueOf(timeList[0]);
-                                Integer minutes = Integer.valueOf(timeList[1]);
-                                if(hours > 0) {
-                                    if(minutes > 59) {
-                                        Integer divideMinutes = minutes / 60;
-                                        Integer roundMinutes = math.mod(minutes, 60);
-                                        if(divideMinutes != null) {
-                                            hours = hours + divideMinutes;
-                                            if(roundMinutes < 10) {
-                                                updateCase.Total_Hour_Spent__c = hours + ':0' + roundMinutes ;
-                                                caseMap.put(updateCase.Id, updateCase);
-                                            } else {
-                                                updateCase.Total_Hour_Spent__c = hours + ':' + roundMinutes ;
-                                                caseMap.put(updateCase.Id, updateCase);
-                                            }
-                                        }
-                                    } else {
-                                        updateCase.Total_Hour_Spent__c = hours + ':' + minutes;
-                                        caseMap.put(updateCase.Id, updateCase);
-                                    }
-                                } else {
-                                    updateCase.Total_Hour_Spent__c = hours + ':' + minutes;
-                                    caseMap.put(updateCase.Id, updateCase);
-                                }
-                            }
-                        }
-                } else {
-                    for(Case caseUpdate : [
-                        SELECT Id, Total_Hour_Spent_Hidden__c
-                        FROM Case
-                        WHERE Id IN :wishIdSet]) {
-                            caseUpdate.Total_Hour_Spent__c = String.valueof(0);
-                            caseMap.put(caseUpdate.Id, caseUpdate);
-                        }
-                }
-                update caseMap.values();
             }
         }
+        if(volOpportunityIdSet.isEmpty()) {
+            return;
+        }
+        for(Volunteer_Opportunity__c volOpp : [
+            SELECT Id, Wish__c 
+            FROM Volunteer_Opportunity__c 
+            WHERE Id IN :volOpportunityIdSet 
+            AND Wish__c != null]) {
+                wishIdSet.add(volOpp.Wish__c);
+            }
+        if(wishIdSet.isEmpty()) {
+            return;
+        }
+        for(AggregateResult agResult : [
+            SELECT Volunteer_Opportunity__r.Wish__c wish, Sum(Hours_Hidden__c)aver
+            FROM Time_sheet__c
+            WHERE Volunteer_Opportunity__r.Wish__c IN :wishIdSet 
+            AND Volunteer_Opportunity__r.Wish__c != null
+            GROUP BY Volunteer_Opportunity__r.Wish__c]) {
+                volOpportunityMap.put((Id)agResult.get('wish'), (decimal)agResult.get('aver'));
+            }
+        if(!volOpportunityMap.isEmpty()) {
+            for(Volunteer_Opportunity__c volOpp : [
+                SELECT Id, Wish__c, Wish__r.Total_Hour_Spent_Hidden__c
+                FROM Volunteer_Opportunity__c
+                WHERE Wish__c IN :volOpportunityMap.keySet() 
+                AND Wish__c != null]) {
+                    Case updateCase = new Case();
+                    if(caseMap.containsKey(volOpp.Wish__c)) {
+                        updateCase.Id = caseMap.get(volOpp.Wish__c).Id;
+                    } else {
+                        updateCase.Id = volOpp.Wish__c;
+                    }
+                    if((updateCase.Total_Hour_Spent_Hidden__c == null || updateCase.Total_Hour_Spent_Hidden__c == 0.00) 
+                       && volOpp.Wish__r.Total_Hour_Spent_Hidden__c != null && volOpp.Wish__r.Total_Hour_Spent_Hidden__c > 0) {
+                           hrs = math.floor(volOpp.Wish__r.Total_Hour_Spent_Hidden__c / 60);
+                           min = math.mod(Integer.valueOf(volOpp.Wish__r.Total_Hour_Spent_Hidden__c), 60);
+                           totalHours = hrs + '.' + min;
+                           updateCase.Total_Hour_Spent_Hidden__c = Decimal.valueOf(totalHours);
+                       }
+                    if(updateCase.Total_Hour_Spent_Hidden__c == null || updateCase.Total_Hour_Spent_Hidden__c == 0.00) {
+                        hrs = math.floor(volOpportunityMap.get(volOpp.Wish__c) / 60);
+                        min = math.mod(Integer.valueOf(volOpportunityMap.get(volOpp.Wish__c)), 60);
+                        totalHours = hrs + '.' + min;
+                        updateCase.Total_Hour_Spent_Hidden__c = Decimal.valueOf(totalHours);
+                    } else {
+                        hrs = math.floor(volOpportunityMap.get(volOpp.Wish__c) / 60);
+                        min = math.mod(Integer.ValueOf(volOpportunityMap.get(volOpp.Wish__c)), 60);
+                        totalHours = hrs + '.' + min;
+                        updateCase.Total_Hour_Spent_Hidden__c = Decimal.valueOf(totalHours);
+                    }
+                    if(updateCase.Total_Hour_Spent_Hidden__c > 0) {
+                        Decimal toRound = updateCase.Total_Hour_Spent_Hidden__c;
+                        Decimal rounded = toRound.setScale(2);
+                        List<String> timeList = String.valueOf(rounded).split('\\.');
+                        Integer hours = Integer.valueOf(timeList[0]);
+                        Integer minutes = Integer.valueOf(timeList[1]);
+                        if(hours > 0) {
+                            if(minutes > 59) {
+                                Integer divideMinutes = minutes / 60;
+                                Integer roundMinutes = math.mod(minutes, 60);
+                                if(divideMinutes != null) {
+                                    hours = hours + divideMinutes;
+                                    if(roundMinutes < 10) {
+                                        updateCase.Total_Hour_Spent__c = hours + ':0' + roundMinutes ;
+                                        caseMap.put(updateCase.Id, updateCase);
+                                    } else {
+                                        updateCase.Total_Hour_Spent__c = hours + ':' + roundMinutes ;
+                                        caseMap.put(updateCase.Id, updateCase);
+                                    }
+                                }
+                            } else {
+                                updateCase.Total_Hour_Spent__c = hours + ':' + minutes;
+                                caseMap.put(updateCase.Id, updateCase);
+                            }
+                        } else {
+                            updateCase.Total_Hour_Spent__c = hours + ':' + minutes;
+                            caseMap.put(updateCase.Id, updateCase);
+                        }
+                    }
+                }
+        } else {
+            for(Case caseUpdate : [
+                SELECT Id, Total_Hour_Spent_Hidden__c
+                FROM Case
+                WHERE Id IN :wishIdSet]) {
+                    caseUpdate.Total_Hour_Spent__c = String.valueof(0);
+                    caseMap.put(caseUpdate.Id, caseUpdate);
+                }
+        }
+        update caseMap.values();
     }
 
     /**
@@ -208,8 +211,9 @@ public with sharing class TimesheetService {
         Decimal min = 0;
         String totalHours;
         for(Time_sheet__c sheet : timesheetList) {
-            if(sheet.Volunteer_Opportunity__c != null)
+            if(sheet.Volunteer_Opportunity__c != null) {
                 volOpportunityIdSet.add(sheet.Volunteer_Opportunity__c);
+            }
         }
         if(!volOpportunityIdSet.isEmpty()) {
             for(Volunteer_Opportunity__c volOpp : [
@@ -218,78 +222,81 @@ public with sharing class TimesheetService {
                 WHERE Id IN :volOpportunityIdSet AND Non_Wish_Event__c != null]) {
                     nonwishIdSet.add(volOpp.Non_Wish_Event__c);
                 }
-            if(!nonwishIdSet.isEmpty()) {
-                for(AggregateResult aggResult : [
-                    SELECT Volunteer_Opportunity__r.Non_Wish_Event__c nonwish, Sum(Hours_Hidden__c)aver
-                    FROM Time_sheet__c
-                    WHERE Volunteer_Opportunity__r.Non_Wish_Event__c IN :nonwishIdSet 
-                    AND Volunteer_Opportunity__r.Non_Wish_Event__c != null
-                    GROUP BY Volunteer_Opportunity__r.Non_Wish_Event__c]) {
-                        volOpportunityMap.put((Id)aggResult.get('nonwish'), (decimal)aggResult.get('aver'));
-                    }
-                if(!volOpportunityMap.isEmpty()) {
-                    for(Volunteer_Opportunity__c volOpp : [
-                        SELECT Id, Non_Wish_Event__c, Non_Wish_Event__r.Total_Hour_Spent_Hidden__c
-                        FROM Volunteer_Opportunity__c
-                        WHERE Non_Wish_Event__c IN :volOpportunityMap.keySet() AND Non_Wish_Event__c != null]) {
-                            Non_Wish_Events__c nonwishUpdate = new Non_Wish_Events__c();
-                            if(nonwishMap.containsKey(volOpp.Non_Wish_Event__c)) {
-                                nonwishUpdate.Id = nonwishMap.get(volOpp.Non_Wish_Event__c).Id;
-                            } else {
-                                nonwishUpdate.Id = volOpp.Non_Wish_Event__c;
-                            }
-                            if((nonwishUpdate.Total_Hour_Spent_Hidden__c == null || nonwishUpdate.Total_Hour_Spent_Hidden__c == 0.00) 
-                               && volOpp.Non_Wish_Event__r.Total_Hour_Spent_Hidden__c != null 
-                               && volOpp.Non_Wish_Event__r.Total_Hour_Spent_Hidden__c > 0) {
-                                   hrs = math.floor(volOpp.Non_Wish_Event__r.Total_Hour_Spent_Hidden__c / 60);
-                                   min = math.mod(Integer.valueOf(volOpp.Non_Wish_Event__r.Total_Hour_Spent_Hidden__c), 60);
-                                   totalHours = hrs + '.' + min;
-                                   nonwishUpdate.Total_Hour_Spent_Hidden__c = Decimal.valueOf(totalHours);
-                               }
-                            if(nonwishUpdate.Total_Hour_Spent_Hidden__c == null || nonwishUpdate.Total_Hour_Spent_Hidden__c == 0.00) {
-                                hrs = math.floor(volOpportunityMap.get(volOpp.Non_Wish_Event__c) / 60);
-                                min = math.mod(Integer.valueOf(volOpportunityMap.get(volOpp.Non_Wish_Event__c)), 60);
-                                totalHours = hrs + '.' + min;
-                                nonwishUpdate.Total_Hour_Spent_Hidden__c = Decimal.valueOf(totalHours);
-                            } else {
-                                hrs = math.floor(volOpportunityMap.get(volOpp.Non_Wish_Event__c) / 60);
-                                min = math.mod(Integer.valueOf(volOpportunityMap.get(volOpp.Non_Wish_Event__c)), 60);
-                                totalHours = hrs + '.' + min;
-                                nonwishUpdate.Total_Hour_Spent_Hidden__c = Decimal.valueOf(totalHours);
-                            }
-                            if(nonwishUpdate.Total_Hour_Spent_Hidden__c > 0) {
-                                Decimal toRound = nonwishUpdate.Total_Hour_Spent_Hidden__c ;
-                                Decimal rounded = toRound.setScale(2);
-                                List<String> timeList = String.valueOf(rounded).split('\\.');
-                                Integer hours = Integer.valueOf(timeList[0]);
-                                Integer minutes = Integer.valueOf(timeList[1]);
-                                if(hours > 0) {
-                                    if(minutes > 59) {
-                                        Integer divideMinutes = minutes / 60;
-                                        Integer roundMinutes = math.mod(minutes, 60);
-                                        if(divideMinutes != null) {
-                                            hours = hours + divideMinutes;
-                                            if(roundMinutes < 10) {
-                                                nonwishUpdate.Total_Hour_Spent__c = hours + ':0' + roundMinutes ;
-                                                nonwishMap.put(nonwishUpdate.id, nonwishUpdate);
-                                            } else {
-                                                nonwishUpdate.Total_Hour_Spent__c = hours + ':' + roundMinutes ;
-                                                nonwishMap.put(nonwishUpdate.id, nonwishUpdate);
-                                            }
-                                        }
-                                    } else {
-                                        nonwishUpdate.Total_Hour_Spent__c = hours + ':' + minutes;
-                                        nonwishMap.put(nonwishUpdate.Id, nonwishUpdate);
-                                    }
-                                } else {
-                                    nonwishUpdate.Total_Hour_Spent__c = hours + ':' + minutes;
-                                    nonwishMap.put(nonwishUpdate.Id, nonwishUpdate);
-                                }
-                            }
-                            
-                        }
-                }
+            if(nonwishIdSet.isEmpty()) {
+                return;
             }
+            for(AggregateResult aggResult : [
+                SELECT Volunteer_Opportunity__r.Non_Wish_Event__c nonwish, Sum(Hours_Hidden__c)aver
+                FROM Time_sheet__c
+                WHERE Volunteer_Opportunity__r.Non_Wish_Event__c IN :nonwishIdSet 
+                AND Volunteer_Opportunity__r.Non_Wish_Event__c != null
+                GROUP BY Volunteer_Opportunity__r.Non_Wish_Event__c]) {
+                    volOpportunityMap.put((Id)aggResult.get('nonwish'), (decimal)aggResult.get('aver'));
+                }
+            if(volOpportunityMap.isEmpty()) {
+                return;
+            }
+            for(Volunteer_Opportunity__c volOpp : [
+                SELECT Id, Non_Wish_Event__c, Non_Wish_Event__r.Total_Hour_Spent_Hidden__c
+                FROM Volunteer_Opportunity__c
+                WHERE Non_Wish_Event__c IN :volOpportunityMap.keySet() 
+                AND Non_Wish_Event__c != null]) {
+                    Non_Wish_Events__c nonwishUpdate = new Non_Wish_Events__c();
+                    if(nonwishMap.containsKey(volOpp.Non_Wish_Event__c)) {
+                        nonwishUpdate.Id = nonwishMap.get(volOpp.Non_Wish_Event__c).Id;
+                    } else {
+                        nonwishUpdate.Id = volOpp.Non_Wish_Event__c;
+                    }
+                    if((nonwishUpdate.Total_Hour_Spent_Hidden__c == null || nonwishUpdate.Total_Hour_Spent_Hidden__c == 0.00) 
+                       && volOpp.Non_Wish_Event__r.Total_Hour_Spent_Hidden__c != null 
+                       && volOpp.Non_Wish_Event__r.Total_Hour_Spent_Hidden__c > 0) {
+                           hrs = math.floor(volOpp.Non_Wish_Event__r.Total_Hour_Spent_Hidden__c / 60);
+                           min = math.mod(Integer.valueOf(volOpp.Non_Wish_Event__r.Total_Hour_Spent_Hidden__c), 60);
+                           totalHours = hrs + '.' + min;
+                           nonwishUpdate.Total_Hour_Spent_Hidden__c = Decimal.valueOf(totalHours);
+                       }
+                    if(nonwishUpdate.Total_Hour_Spent_Hidden__c == null || nonwishUpdate.Total_Hour_Spent_Hidden__c == 0.00) {
+                        hrs = math.floor(volOpportunityMap.get(volOpp.Non_Wish_Event__c) / 60);
+                        min = math.mod(Integer.valueOf(volOpportunityMap.get(volOpp.Non_Wish_Event__c)), 60);
+                        totalHours = hrs + '.' + min;
+                        nonwishUpdate.Total_Hour_Spent_Hidden__c = Decimal.valueOf(totalHours);
+                    } else {
+                        hrs = math.floor(volOpportunityMap.get(volOpp.Non_Wish_Event__c) / 60);
+                        min = math.mod(Integer.valueOf(volOpportunityMap.get(volOpp.Non_Wish_Event__c)), 60);
+                        totalHours = hrs + '.' + min;
+                        nonwishUpdate.Total_Hour_Spent_Hidden__c = Decimal.valueOf(totalHours);
+                    }
+                    if(nonwishUpdate.Total_Hour_Spent_Hidden__c > 0) {
+                        Decimal toRound = nonwishUpdate.Total_Hour_Spent_Hidden__c ;
+                        Decimal rounded = toRound.setScale(2);
+                        List<String> timeList = String.valueOf(rounded).split('\\.');
+                        Integer hours = Integer.valueOf(timeList[0]);
+                        Integer minutes = Integer.valueOf(timeList[1]);
+                        if(hours > 0) {
+                            if(minutes > 59) {
+                                Integer divideMinutes = minutes / 60;
+                                Integer roundMinutes = math.mod(minutes, 60);
+                                if(divideMinutes != null) {
+                                    hours = hours + divideMinutes;
+                                    if(roundMinutes < 10) {
+                                        nonwishUpdate.Total_Hour_Spent__c = hours + ':0' + roundMinutes ;
+                                        nonwishMap.put(nonwishUpdate.id, nonwishUpdate);
+                                    } else {
+                                        nonwishUpdate.Total_Hour_Spent__c = hours + ':' + roundMinutes ;
+                                        nonwishMap.put(nonwishUpdate.id, nonwishUpdate);
+                                    }
+                                }
+                            } else {
+                                nonwishUpdate.Total_Hour_Spent__c = hours + ':' + minutes;
+                                nonwishMap.put(nonwishUpdate.Id, nonwishUpdate);
+                            }
+                        } else {
+                            nonwishUpdate.Total_Hour_Spent__c = hours + ':' + minutes;
+                            nonwishMap.put(nonwishUpdate.Id, nonwishUpdate);
+                        }
+                    }
+                    
+                }
         } else {
             for(Non_Wish_Events__c nonwishUpdate : [
                 SELECT Id, Total_Hour_Spent__c 
@@ -333,24 +340,25 @@ public with sharing class TimesheetService {
                 timesheetIds.add(sheet.Id);
             }
         }
-        if(!timesheetIds.isEmpty()) {
-            for(Time_sheet__c sheet : [
-                    SELECT Id, Date__c, Volunteer_Opportunity__r.Volunteer_Name__c,
-                    	Volunteer_Opportunity__r.Volunteer_Name__r.Date_of_last_engagement__c
-                    FROM Time_sheet__c
-                    WHERE Id IN :timeSheetIds
-            ]) {
-                if(sheet.Volunteer_Opportunity__r.Volunteer_Name__r.Date_of_last_engagement__c == null 
-                   || sheet.Volunteer_Opportunity__r.Volunteer_Name__r.Date_of_last_engagement__c < sheet.Date__c) {
-                       Contact updateContact = new Contact();
-                       updateContact.Id = sheet.Volunteer_Opportunity__r.Volunteer_Name__c;
-                       updateContact.Date_of_last_engagement__c = sheet.Date__c;
-                       volunteerInfoUpdateMap.put(updateContact.Id, updateContact);
-                   }
-            }
-            if(!volunteerInfoUpdateMap.isEmpty()) {
-                update volunteerInfoUpdateMap.values();
-            }
+        if(timesheetIds.isEmpty()) {
+            return;
+        }
+        for(Time_sheet__c sheet : [
+                SELECT Id, Date__c, Volunteer_Opportunity__r.Volunteer_Name__c,
+                    Volunteer_Opportunity__r.Volunteer_Name__r.Date_of_last_engagement__c
+                FROM Time_sheet__c
+                WHERE Id IN :timeSheetIds
+        ]) {
+            if(sheet.Volunteer_Opportunity__r.Volunteer_Name__r.Date_of_last_engagement__c == null 
+                || sheet.Volunteer_Opportunity__r.Volunteer_Name__r.Date_of_last_engagement__c < sheet.Date__c) {
+                    Contact updateContact = new Contact();
+                    updateContact.Id = sheet.Volunteer_Opportunity__r.Volunteer_Name__c;
+                    updateContact.Date_of_last_engagement__c = sheet.Date__c;
+                    volunteerInfoUpdateMap.put(updateContact.Id, updateContact);
+                }
+        }
+        if(!volunteerInfoUpdateMap.isEmpty()) {
+            update volunteerInfoUpdateMap.values();
         }
     }
     
