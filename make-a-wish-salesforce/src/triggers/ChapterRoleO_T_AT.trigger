@@ -1,20 +1,8 @@
-/***********************************************************************************************************
-Author      : MST Solutions
-Date        : 
-Description : 
-              
-              Modification Log
-              ------------------
-              WVC-1887    Pavithra G  07/03/2018
-************************************************************************************************************/
-trigger ChapterRoleO_T_AT on Chapter_Role_O_T__c (After insert, After update) 
-{
-   if(Trigger.isUpdate && Trigger.isAfter)
-   {
-     ChapterRoleOT_OnAfterUpdateHandler.afterUpdate(Trigger.newMap,Trigger.OldMap);   
-   }
-   If(Trigger.isInsert && Trigger.isAfter){
-       ChapterRoleOT_OnAfterInsertHandler.afterInsert(Trigger.newMap);  
-   }
-
+/**
+ * @description Chapter Role Orientation and Training Trigger
+ * @author		Gustavo Mayer, Traction on Demand
+ * @date 		04-15-2020
+ */
+trigger ChapterRoleO_T_AT on Chapter_Role_O_T__c (before insert, before update, before delete, after insert, after update, after delete, after undelete) {
+    trac_TriggerHandlerBase.triggerHandler(new ChapterRoleOTDomain());
 }
