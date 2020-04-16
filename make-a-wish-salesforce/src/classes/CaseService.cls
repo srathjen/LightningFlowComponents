@@ -246,12 +246,7 @@ public with sharing class CaseService {
 				throw new CommonTriggerException('Test Class execution');
 			}
 		} catch (Exception ex) {
-			for (Lead currRec : LeadList) {
-				ErrorMessage_AC.createdebugRec('Case Service',
-					String.valueOf(currRec), String.valueOf(ex), 'createEligibilityReview',
-					currRec.Id, ex.getStackTraceString(), 'Error');
-			}
-			if (!Test.isRunningTest()) {
+			if (!Test.isRunningTest() && LeadList != null) {
 				for (Lead currRec : LeadList) {
 					currRec.addError(Label.Debug_log_error_message);
 				}
@@ -756,11 +751,7 @@ public with sharing class CaseService {
 				throw new CommonTriggerException('Test Class execution');
 			}
 		} catch (Exception ex) {
-			for (Case currRec : parentCaseIntakeOwnerMap.values()) {
-				ErrorMessage_AC.createdebugRec('Case_OnAfterInsertTriggerHandlerHelper', String.valueOf(currRec), String.valueOf(ex), 'CaseTeamInTakeManager', currRec.Id, ex.getStackTraceString(), 'Error');
-			}
-
-			if (!Test.isRunningTest()) {
+			if (!Test.isRunningTest() && parentCaseIntakeOwnerMap != null) {
 				for (Case currRec : parentCaseIntakeOwnerMap.values()) {
 					currRec.addError(Label.Debug_log_error_message);
 				}
@@ -831,11 +822,7 @@ public with sharing class CaseService {
 			}
 
 		} catch (Exception ex) {
-			for (Case currRec : caseList) {
-				ErrorMessage_AC.createdebugRec('Case_OnAfterInsertTriggerHandlerHelper', String.valueOf(currRec), String.valueOf(ex), 'createCaseFile', currRec.Id, ex.getStackTraceString(), 'Error');
-			}
-
-			if (!Test.isRunningTest()) {
+			if (!Test.isRunningTest() && caseList != null) {
 				for (Case currRec : caseList) {
 					currRec.addError(Label.Debug_log_error_message);
 				}
