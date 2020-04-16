@@ -58,7 +58,7 @@ public with sharing class BackgroundCheckService {
 		for (Background_check__c backgroundCheck : newBackgroundChecksList) {
 			ownerIdSet.add(backgroundCheck.OwnerId);
 		}
-		Map<Id, String> ownerRoleMap = new Map<Id, String>(UserRoleUtility.getUserRole(ownerIdSet));
+		Map<Id, String> ownerRoleMap = new Map<Id, String>(Utils.getUserRoleMap(ownerIdSet));
 		return ownerRoleMap;
 	}
 

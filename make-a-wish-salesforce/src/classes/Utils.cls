@@ -263,4 +263,24 @@ public class Utils {
 
 		return mapOfSObjectLabelsByFields;
 	}
+
+	/**
+	 * @description		Get a Map of UserRole.Name by User Id.
+	 *
+	 * @param 			Set<id> userIds
+	 *
+	 * @return			Map<Id,String>
+	 *
+	 * @author			MST Solutions
+	 * @createdDate		unknown
+	 */
+	public static Map<Id,String> getUserRoleMap(Set<Id> userIds) {
+		Map<Id, String> userRoleMap = new Map<Id, String>();
+
+		for (User currUser : [SELECT Id, UserRole.Name FROM User WHERE id IN :userIds]) {
+			userRoleMap.put(currUser.Id, currUser.UserRole.Name);
+		}
+
+		return userRoleMap;
+	}
 }
