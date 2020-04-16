@@ -10,10 +10,12 @@ Modification Log:
                            Descriptions 1-4 not populating when MP fills the form, save, then come back later to
                            sign the DV.
                            Modification Log:
-              09/10/2019 - Manik - WLP-423
+              09/10/2019 - Manik - WLP-4232
               01/02/2020 - CSmith - SIW-342 All changes reverted.
 1. 01/09/2020 - Manoj      - SIW-287 : Mapped newly created fields to insert values in lead records upon submission of DV form.
 2. 04/02/2020 - Manoj      - SIW-379 : Mapped 'Travel_Restriction__c' field in lead records based on user selection.
+3. 09/04/2020 - Manoj      - SIW-355 : Mapped 2 Wrapper fields values with lead fields value - timeFrameValue, idealtimeFrameValue
+4. 15/04/2020 - Manoj      - SIW-531 : Setting value blank for Number_hospital_admissions__c field if no value provided from form for the associated question
 *******************************************************************************************************************/
 public class DiagnosisVerification_AC {
 
@@ -121,6 +123,10 @@ public class DiagnosisVerification_AC {
         wishChildWrapperIns.numberOfHospitalAdmission =  Integer.valueOf(currLead.Number_hospital_admissions__c);
         wishChildWrapperIns.admittingDiagnosis = currLead.Admitting_diagnosis__c;
         wishChildWrapperIns.ifICUAdmission = currLead.ICU_Admissions__c;
+        //SIW-355 Start : Mapped 2 new added questions value to lead field on loading of page
+        wishChildWrapperIns.timeFrameValue = currLead.Expedite_timeframe__c;
+        wishChildWrapperIns.idealtimeFrameValue = currLead.Other_expedite_timeframe_comments__c;
+        //SIW-355 End
 
         if (currLead.Child_will_ultimately_die_prematurely__c == true) {
             wishChildWrapperIns.describePatient = '1';
@@ -468,6 +474,10 @@ public class DiagnosisVerification_AC {
         List<Condition_Description__c> conditionDescriptions = new List<Condition_Description__c>();
         Pattern pattern = Pattern.compile('(?i).*' + String.escapeSingleQuotes(searchTerm) + '.*');
 
+        /*
+        List<Condition_Description_c> conditionDescriptions = Database.query('Select Id, Name, Code_To_Usec, InActivec from Condition_Descriptionc where InActive_c != true and Name like \'%'  String.escapeSingleQuotes(searchTerm)  '%\' LIMIT 50000');
+         */
+
         for (String cdName : MAP_OF_CONDITION_DESCRIPTIONS_BY_NAME.keySet()) {
             if (pattern.matcher(cdName).matches()) {
                 conditionDescriptions.addAll(MAP_OF_CONDITION_DESCRIPTIONS_BY_NAME.get(cdName));
@@ -564,7 +574,7 @@ public class DiagnosisVerification_AC {
 
                 List<Condition_Description__c> conditionDescriptionInfo = MAP_OF_CONDITION_DESCRIPTIONS_BY_NAME.get(diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription);
 
-                if (conditionDescriptionInfo.size() > 0) {
+                if (conditionDescriptionInfo != null && conditionDescriptionInfo.size() > 0) {
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isGroup1Rec = conditionDescriptionInfo[0].Group1__c;
 
                     List<Medical_Questions__c> medicalQuestionList = MAP_OF_MEDICAL_QUESTIONS_BY_DESCRIPTION.get(conditionDescriptionInfo[0].Id);
@@ -607,7 +617,6 @@ public class DiagnosisVerification_AC {
         } catch (Exception ex) {
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
             ApexPages.addMessage(myMsg);
-
         }
     }
 
@@ -639,6 +648,10 @@ public class DiagnosisVerification_AC {
      */
     @TestVisible
     private List<DiagnosisWrapper.MedicalWrapper> MedicalQuestions(String icdCode, String conditionDescription, Boolean isGroup1, String icdOrPcd, Integer diagnosisBlockNum, List<Medical_Questions__c> medicalQuestions, Boolean skipMedQues) {
+        if (medicalQuestions == null) {
+            medicalQuestions = new List<Medical_Questions__c>();
+        }
+
         try {
             Condition_Description__c conditionDesc;
             diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescriptionObject = conditionDescription;
@@ -846,9 +859,16 @@ public class DiagnosisVerification_AC {
             currLead.None_of_these_statements_describes_Child__c = false;
             currLead.Responds_to_treatment_with_normal_health__c = false;
             currLead.Unplanned_hospital_admissions__c = wishChildWrapperIns.unplannedHospitalAdmission;
-            currLead.Number_hospital_admissions__c =  wishChildWrapperIns.numberOfHospitalAdmission;
+            //SIW-531 Start : Setting value blank for Number_hospital_admissions__c if no value provided from form for this question
+            if(wishChildWrapperIns.unplannedHospitalAdmission != 'No') currLead.Number_hospital_admissions__c =  wishChildWrapperIns.numberOfHospitalAdmission;
+            else currLead.Number_hospital_admissions__c =  null;
+            //SIW-531 End
             currLead.Admitting_diagnosis__c = wishChildWrapperIns.admittingDiagnosis;
             currLead.ICU_Admissions__c = wishChildWrapperIns.ifICUAdmission;
+            //SIW-355 Start : Mapped 2 new added questions value to lead field on submission of DV form
+            currLead.Expedite_timeframe__c = wishChildWrapperIns.timeFrameValue;
+            currLead.Other_expedite_timeframe_comments__c = wishChildWrapperIns.idealtimeFrameValue;
+            //SIW-355 End
 
             if (wishChildWrapperIns.describePatient == '1') {
                 currLead.Child_will_ultimately_die_prematurely__c = true;
@@ -1354,14 +1374,16 @@ public class DiagnosisVerification_AC {
             'RFI_Form_Info_Hidden__c',
             'Override_Dupe_Check__c',
             'isConverted',
-            'Please_Explain_Deteriorate__c'
+            'Please_Explain_Deteriorate__c',
+            'Expedite_timeframe__c',
+            'Other_expedite_timeframe_comments__c'
         };
 
         for (String field : FIELDS_TO_SELECT) {
             query += field + ',';
         }
 
-        for (Schema.FieldSetMember currField : Utils.getPartAFields()) { 
+        for (Schema.FieldSetMember currField : Utils.getPartAFields()) {
             query += currField.getFieldPath() + ',';
         }
 
