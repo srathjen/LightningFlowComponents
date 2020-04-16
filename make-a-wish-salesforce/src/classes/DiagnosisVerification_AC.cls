@@ -15,6 +15,7 @@ Modification Log:
 1. 01/09/2020 - Manoj      - SIW-287 : Mapped newly created fields to insert values in lead records upon submission of DV form.
 2. 04/02/2020 - Manoj      - SIW-379 : Mapped 'Travel_Restriction__c' field in lead records based on user selection.
 3 .09/04/2020 - Manoj      - SIW-355 : Mapped 2 Wrapper fields values with lead fields value - timeFrameValue, idealtimeFrameValue
+4. 15/04/2020 - Manoj      - SIW-531 : Setting value blank for Number_hospital_admissions__c field if no value provided from form for the associated question
 *******************************************************************************************************************/
 public class DiagnosisVerification_AC {
 
@@ -855,7 +856,14 @@ public class DiagnosisVerification_AC {
             currLead.None_of_these_statements_describes_Child__c = false;
             currLead.Responds_to_treatment_with_normal_health__c = false;
             currLead.Unplanned_hospital_admissions__c = wishChildWrapperIns.unplannedHospitalAdmission;
-            currLead.Number_hospital_admissions__c =  wishChildWrapperIns.numberOfHospitalAdmission;
+	    //SIW-531 Start : Setting value blank for Number_hospital_admissions__c if no value provided from form for this question
+             if(wishChildWrapperIns.unplannedHospitalAdmission != 'No') {
+                currLead.Number_hospital_admissions__c =  wishChildWrapperIns.numberOfHospitalAdmission;
+            }  
+            else {
+                currLead.Number_hospital_admissions__c =  null;
+            }
+            //SIW-531 End            
             currLead.Admitting_diagnosis__c = wishChildWrapperIns.admittingDiagnosis;
             currLead.ICU_Admissions__c = wishChildWrapperIns.ifICUAdmission;
             //SIW-355 Start : Mapped 2 new added questions value to lead field on submission of DV form
@@ -1386,3 +1394,4 @@ public class DiagnosisVerification_AC {
         return Database.query(query);
     }
 }
+
