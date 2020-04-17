@@ -4,11 +4,12 @@ CreatedBy   : Kanagaraj
 Date        : 28/06/2016
 Description : BackGroundCheck_AT_Test is used to increase the code coverage for Application_AC controller.
 *****************************************************************************************************/
-@isTest
+@IsTest
 public class BackGroundCheck_AT_Test {
 
 	/*This method is used to update the background check record to approved*/
-	public testmethod static void UpdateBackGroundChecktoApproved() {
+	@IsTest
+	public static void updateBackGroundChecktoApproved() {
 		Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert volunteerAccount;
 
@@ -30,33 +31,33 @@ public class BackGroundCheck_AT_Test {
 		Orientation_Training__c orientationId = OrientationandTrainingUtil.CreateVolunteerTrainingRecord();
 		insert orientationId;
 
-		Chapter_Role_O_T__c chapterRoleT = OrientationandTrainingUtil.createChapterOandT (chapterRole.Id, orientationId.id);
+		Chapter_Role_O_T__c chapterRoleT = OrientationandTrainingUtil.createChapterOandT (chapterRole.Id, orientationId.Id);
 		insert chapterRoleT;
 
 		npe5__Affiliation__c orgAfflitation = OrientationandTrainingUtil.CreateAffiliationwithAccount(volunteerContact.Id, volunteerAccount.Id);
 		insert orgAfflitation;
 
 		insert OrientationandTrainingUtil.createCOI(volunteerContact.Id);
-		Background_check__c backgroundcheck = OrientationandTrainingUtil.createBackgroundCheck(volunteerContact.id);
+		Background_check__c backgroundcheck = OrientationandTrainingUtil.createBackgroundCheck(volunteerContact.Id);
 		insert backgroundcheck;
 
 		backgroundcheck.Status__c = 'Approved';
-		backgroundcheck.current__c = true;
-		backgroundcheck.Date_Completed__c = system.today();
+		backgroundcheck.Current__c = true;
+		backgroundcheck.Date_Completed__c = System.today();
 		update backgroundcheck;
-
 	}
 
 	/*This method is used to update the background check record to Rejected*/
 
-	public testmethod static void UpdateBackGroundChecktoRejected() {
+	@IsTest
+	public static void updateBackGroundChecktoRejected() {
 		Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert volunteerAccount;
 
 		Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(volunteerAccount.Id);
 		insert volunteerContact;
 
-		Background_check__c backgroundcheck = OrientationandTrainingUtil.createBackgroundCheckFasleRec(volunteerContact.id);
+		Background_check__c backgroundcheck = OrientationandTrainingUtil.createBackgroundCheckFasleRec(volunteerContact.Id);
 		insert backgroundcheck;
 
 		backgroundcheck.Status__c = 'Rejected';
@@ -67,12 +68,13 @@ public class BackGroundCheck_AT_Test {
 		backgroundcheck.Hidden_Background_Rejected__c = false;
 		update backgroundcheck;
 
-		backgroundcheck.Status__c = 'Received from First Advantage';
+		backgroundcheck.Status__c = 'Received FROM First Advantage';
 		update backgroundcheck;
 	}
 	/*This method is used to create background check record*/
 
-	public testmethod static void CreateBackGroundCheckRecord() {
+	@IsTest
+	public static void CreateBackGroundCheckRecord() {
 		Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert volunteerAccount;
 
@@ -80,67 +82,25 @@ public class BackGroundCheck_AT_Test {
 		insert volunteerContact;
 
 		insert OrientationandTrainingUtil.createBackgroundCheckRec(volunteerContact.Id);
-		Background_check__c backgroundcheck = OrientationandTrainingUtil.createBackgroundCheckActiveRec(volunteerContact.id);
+		Background_check__c backgroundcheck = OrientationandTrainingUtil.createBackgroundCheckActiveRec(volunteerContact.Id);
 		insert backgroundcheck;
 
 	}
 
-	/*This method is used to create background check record to Active*/
-
-	public testmethod static void updateBackgroundChecktoActive() {
-		Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
-		insert volunteerAccount;
-
-		Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(volunteerAccount.Id);
-		insert volunteerContact;
-
-		Background_check__c backgroundcheck = OrientationandTrainingUtil.createBackgroundCheckActiveRec(volunteerContact.id);
-		Background_check__c backgroundcheckfalse = OrientationandTrainingUtil.createBackgroundCheckFasleRec(volunteerContact.Id);
-		insert new List<Background_check__c>{
-				backgroundcheck, backgroundcheckfalse
-		};
-		backgroundcheckfalse.current__c = true;
-		backgroundcheckfalse.Date_Completed__c = system.today() + 9;
-		Database.SaveResult result = Database.update(backgroundcheckfalse, false);
-		//System.assertEquals('Active Background Check Already Exist',result.getErrors()[0].getMessage());
-
-	}
-
-	/*This method is used to create background check exisiting background record is Active or not*/
-
-	public testmethod static void CheckExisitingRecordtoActive() {
-		Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
-		insert volunteerAccount;
-
-		Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(volunteerAccount.Id);
-		insert volunteerContact;
-
-		Background_check__c backgroundcheck = OrientationandTrainingUtil.createBackgroundCheckActiveRec(volunteerContact.id);
-		Background_check__c backgroundcheckActive = OrientationandTrainingUtil.createBackgroundCheckActiveRec(volunteerContact.id);
-		Background_check__c backgroundcheckfalse = OrientationandTrainingUtil.createBackgroundCheckFasleRec(volunteerContact.Id);
-		insert new List<Background_check__c>{
-				backgroundcheck, backgroundcheckActive, backgroundcheckfalse
-		};
-		backgroundcheckfalse.current__c = true;
-		backgroundcheckfalse.Date_Completed__c = system.today() + 9;
-		Database.SaveResult result = Database.update(backgroundcheckfalse, false);
-		//System.assertEquals('Active Background Check Already Exist',result.getErrors()[0].getMessage());
-
-	}
-
-	private testmethod static void createBackgroundCheckNationalStaff() {
+	@IsTest
+	private static void createBackgroundCheckNationalStaff() {
 		User currUser = [
-				SELECT id
-				from User
-				where id = :Userinfo.getUserId()
-				limit 1
+				SELECT Id
+				FROM User
+				WHERE Id = :UserInfo.getUserId()
+				LIMIT 1
 		];
 		User nationalStaff;
-		System.RunAs(currUser) {
+		System.runAs(currUser) {
 			nationalStaff = OrientationandTrainingUtil.createUserWithRole([
-					select Id
-					from UserRole
-					where Name = 'National Staff'
+					SELECT Id
+					FROM UserRole
+					WHERE Name = 'National Staff'
 			].Id);
 		}
 		System.runAs(nationalStaff) {
@@ -153,23 +113,24 @@ public class BackGroundCheck_AT_Test {
 			update volunteerContact;
 
 			Background_check__c backCheck = new Background_check__c();
-			backCheck.Date__c = system.today() + 3;
+			backCheck.Date__c = System.today() + 3;
 			backCheck.Volunteer__c = volunteerContact.Id;
 			backCheck.Status__c = 'Manual';
-			backCheck.current__c = true;
-			backCheck.Date_Completed__c = system.today() + 9;
+			backCheck.Current__c = true;
+			backCheck.Date_Completed__c = System.today() + 9;
 			backCheck.OwnerId = nationalStaff.Id;
 			insert backCheck;
 		}
 		//System.assertEquals('Active Background Check Already Exist',result.getErrors()[0].getMessage());
 	}
 
-	private testmethod static void createBackgroundCheckNonNationalStaff() {
+	@IsTest
+	private static void createBackgroundCheckNonNationalStaff() {
 		User currUser = [
-				SELECT id
-				from User
-				where id = :Userinfo.getUserId()
-				limit 1
+				SELECT Id
+				FROM User
+				WHERE Id = :UserInfo.getUserId()
+				LIMIT 1
 		];
 		Id staffProfileId = [
 				SELECT Id
@@ -177,11 +138,11 @@ public class BackGroundCheck_AT_Test {
 				WHERE Name = 'Program Staff'
 		].Id;
 		User nonNationalStaff;
-		System.RunAs(currUser) {
+		System.runAs(currUser) {
 			nonNationalStaff = OrientationandTrainingUtil.createUserWithRole([
-					select Id
-					from UserRole
-					where Name = 'National Staff'
+					SELECT Id
+					FROM UserRole
+					WHERE Name = 'National Staff'
 			].Id);
 			nonNationalStaff.UserRoleId = [
 					SELECT Id
@@ -199,22 +160,23 @@ public class BackGroundCheck_AT_Test {
             insert volunteerContact;
 
 			Background_check__c backCheck = new Background_check__c();
-			backCheck.Date__c = system.today() + 3;
+			backCheck.Date__c = System.today() + 3;
 			backCheck.Volunteer__c = volunteerContact.Id;
 			backCheck.Status__c = 'test';
-			backCheck.current__c = true;
-			backCheck.Date_Completed__c = system.today() + 9;
+			backCheck.Current__c = true;
+			backCheck.Date_Completed__c = System.today() + 9;
 			backCheck.OwnerId = nonNationalStaff.Id;
 			insert backCheck;
 		}
 		//System.assertEquals('Active Background Check Already Exist',result.getErrors()[0].getMessage());
 	}
 
-	private testmethod static void checkVolOpp() {
+	@IsTest
+	private static void checkVolOpp() {
 		Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert chapterAccount;
 
-		Contact volunteerCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+		Contact volunteerCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
 		volunteerCon.MailingLatitude = -24.355798;
 		volunteerCon.MailingLongitude = 69.830469;
 		volunteerCon.MailingStreet = '7540 E Gold Dust Ave';
@@ -225,23 +187,23 @@ public class BackGroundCheck_AT_Test {
 
 		Case wishCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
 		wishCase.ChapterName__c = chapterAccount.Id;
-		wishCase.contactId = volunteerCon.Id;
+		wishCase.ContactId = volunteerCon.Id;
 		insert wishCase;
 
 		Role__c roleName = OrientationandTrainingUtil.createRole();
 		insert roleName;
-		Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id, roleName.id);
+		Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id, roleName.Id);
 		insert chapterRole;
-		Volunteer_Opportunity__c wishVolOpp = OrientationandTrainingUtil.CreateNewWishVolunteerOpportunity(chapterAccount.id, chapterRole.id, wishCase.id);
+		Volunteer_Opportunity__c wishVolOpp = OrientationandTrainingUtil.CreateNewWishVolunteerOpportunity(chapterAccount.Id, chapterRole.Id, wishCase.Id);
 		wishVolOpp.Status__c = 'Approved';
 		wishVolOpp.Volunteer_Name__c = volunteerCon.Id;
 		insert wishVolOpp;
 
 		Test.startTest();
-		Volunteer_Roles__c volRole = OrientationandTrainingUtil.createVolRole(volunteerCon.id, chapterRole.Id);
+		Volunteer_Roles__c volRole = OrientationandTrainingUtil.createVolRole(volunteerCon.Id, chapterRole.Id);
 		insert volRole;
 
-		Background_check__c backgroundcheck = OrientationandTrainingUtil.createBackgroundCheckFasleRec(volunteerCon.id);
+		Background_check__c backgroundcheck = OrientationandTrainingUtil.createBackgroundCheckFasleRec(volunteerCon.Id);
 		backgroundcheck.Hidden_Background_Rejected__c = false;
 		insert backgroundcheck;
 

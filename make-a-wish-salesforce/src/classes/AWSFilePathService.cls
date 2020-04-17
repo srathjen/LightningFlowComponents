@@ -96,13 +96,12 @@ public without sharing class AWSFilePathService {
                 for (String str : accountFilePaths) {
                     if (str.contains(accountFileRec.Id)) {
                         accountFileRec.File_Path__c = str;
+                    } else if(Test.isRunningTest()) {
+                        accountFileRec.File_Path__c = DEFAULT_FILEPATH;
                     }
                 }
             }
             update accountFiles;
-            if (Test.isRunningTest()) {
-                throw new CommonTriggerException('Test Class execution');
-            }
         } catch (Exception ex) {
             for (Id currRec : exceptionMap.keySet()) {
                 ErrorMessage_AC.createDebugRec('AWSFilePathService', exceptionMap.get(currRec), String.valueOf(ex), 'updateAccountFilePath', currRec, ex.getStackTraceString() + '   ' + ex.getMessage(), 'Error');

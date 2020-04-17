@@ -1,15 +1,15 @@
-/*****************************************************************************************************************
-Author      : MST Solutions
-Date        : 10/4/2016
-Description : This DiagnosisVerification_AC_Test is used to cover the unit testing for DiagnosisVerification_AC.
-Modification Log:
-23/03/2018 - Sankar - WVC-1835
-09/10/2019 - Manik - WLP-423
-01/02/2020 - CSmith - SIW-342 field name changes reverted.
-*******************************************************************************************************************/
-@isTest
-public class DiagnosisVerification_AC_Test { 
-    @testSetup
+/**
+ * Author      : MST Solutions
+ * Date        : 10/4/2016
+ * Description : This DiagnosisVerification_AC_Test is used to cover the unit testing for DiagnosisVerification_AC.
+ * Modification Log:
+ * 23/03/2018 - Sankar - WVC-1835
+ * 09/10/2019 - Manik - WLP-423
+ * 01/02/2020 - CSmith - SIW-342 field name changes reverted.
+ **/
+@IsTest
+public class DiagnosisVerification_AC_Test {
+    @TestSetup
     //This method is used to update the wish child and wish family.
     public static void setUpData() {
         Condition_Description__c condistionDescription = OrientationandTrainingUtil.createConditionDesCription();
@@ -60,19 +60,18 @@ public class DiagnosisVerification_AC_Test {
     }
 
     //This method is used to check the validate primary diagnosis in DV form.
-    public static testmethod void checkDiadnosisVerificationFormForValidDiagnosisAtPrimaryDiagnosis() {
+    @IsTest
+    public static void checkDiadnosisVerificationFormForValidDiagnosisAtPrimaryDiagnosis() {
         Lead newLead = [
-                SELECT ID
-                FROM Lead
-                LIMIT 50000
+            SELECT Id
+            FROM Lead
         ];
         newLead.Treatment_may_be_feasible_but_can_fail__c = true;
         update newLead;
 
         Condition_Description__c condistionDescription = [
-                SELECT ID,Name,Code_To_Use__c
-                FROM Condition_Description__c
-                LIMIT 50000
+            SELECT Id,Name,Code_To_Use__c
+            FROM Condition_Description__c
         ];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
@@ -106,31 +105,29 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.MedicalResponse();
         currDiagnosisVerificationDupe.SaveMedicalInformation();
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-                SELECT ID,isEligible__c, (
-                        SELECT isEligible__c
-                        FROM DiagnosisMedicalQuestions__r
-                )
-                FROM Diagnosis_Verification__c
-                WHERE Lead__c = :newLead.Id
-                LIMIT 50000
+            SELECT Id,isEligible__c, (
+                SELECT isEligible__c
+                FROM DiagnosisMedicalQuestions__r
+            )
+            FROM Diagnosis_Verification__c
+            WHERE Lead__c = :newLead.Id
         ];
         Test.stopTest();
     }
-    
+
     //This method is used to check the invalidate primary diagnosis in DV form.
-    public static testmethod void checkDiadnosisVerificationFormForInValidDiagnosisAtPrimaryDiagnosis() {
+    @IsTest
+    public static void checkDiadnosisVerificationFormForInValidDiagnosisAtPrimaryDiagnosis() {
         Lead newLead = [
-                SELECT ID
-                FROM Lead
-                LIMIT 50000
+            SELECT Id
+            FROM Lead
         ];
         newLead.Treatment_may_prolong_normal_activities__c = true;
         update newLead;
 
         Condition_Description__c condistionDescription = [
-                SELECT ID,Name,Code_To_Use__c
-                FROM Condition_Description__c
-                LIMIT 50000
+            SELECT Id,Name,Code_To_Use__c
+            FROM Condition_Description__c
         ];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
@@ -144,7 +141,6 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
         //Answer for the Question;
-        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[0].selectedPickVal = 'No';
         ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '5'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
@@ -153,32 +149,30 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('uniqueCurrentConditionSet', 'test3');
         currDiagnosisVerificationDupe.SaveMedicalInformation();
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-                SELECT ID,isEligible__c, (
-                        SELECT isEligible__c
-                        FROM DiagnosisMedicalQuestions__r
-                )
-                FROM Diagnosis_Verification__c
-                WHERE Lead__c = :newLead.Id
-                LIMIT 50000
+            SELECT Id,isEligible__c, (
+                SELECT isEligible__c
+                FROM DiagnosisMedicalQuestions__r
+            )
+            FROM Diagnosis_Verification__c
+            WHERE Lead__c = :newLead.Id
         ];
         Test.stopTest();
         System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode, 'Id dose nit match');
         System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode);
     }
     //This method is used to check the validate secondary diagnosis in DV form.
-    public static testmethod void checkDiadnosisVerificationFormWithSecondaryDiagnosis() {
+    @IsTest
+    public static void checkDiadnosisVerificationFormWithSecondaryDiagnosis() {
         Lead newLead = [
-                SELECT ID
-                FROM Lead
-                LIMIT 50000
+            SELECT Id
+            FROM Lead
         ];
         newLead.Debilitation_may_extend_over_many_years__c = true;
         update newLead;
-        
+
         Condition_Description__c condistionDescription = [
-                SELECT ID,Name,Code_To_Use__c
-                FROM Condition_Description__c
-                LIMIT 50000
+            SELECT Id,Name,Code_To_Use__c
+            FROM Condition_Description__c
         ];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
@@ -192,6 +186,8 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
         //Answer for the Question;
+        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList = new List<DiagnosisWrapper.MedicalWrapper>();
+        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList.add(new DiagnosisWrapper.MedicalWrapper());
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[0].selectedPickVal = 'No';
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[0].isEligible = true;
         ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
@@ -205,6 +201,8 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('icdOrPcd', 'ICD');
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '1');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
+        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList = new List<DiagnosisWrapper.MedicalWrapper>();
+        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList.add(new DiagnosisWrapper.MedicalWrapper());
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[0].selectedPickVal = 'Yes';
         ApexPages.currentPage().getParameters().put('medicalResponse', 'Yes'); //Used to hold the Medical Question response
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '1'); // Used to hold the Diagnosis block number
@@ -237,31 +235,29 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.MedicalResponse();
         currDiagnosisVerificationDupe.SaveMedicalInformation();
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-                SELECT ID,isEligible__c, (
-                        SELECT isEligible__c
-                        FROM DiagnosisMedicalQuestions__r
-                )
-                FROM Diagnosis_Verification__c
-                WHERE Lead__c = :newLead.Id
-                LIMIT 50000
+            SELECT Id,isEligible__c, (
+                SELECT isEligible__c
+                FROM DiagnosisMedicalQuestions__r
+            )
+            FROM Diagnosis_Verification__c
+            WHERE Lead__c = :newLead.Id
         ];
         Test.stopTest();
 //      System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].iCDCode, 'Id dose nit match');
 //      System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].iCDCode, 'value does not match');
     }
     //This method is used to check the remove diagnosis in DV form.
-    public static testmethod void checkDiadnosisVerificationFormRemoveDiagnosisFunction() {
+    @IsTest
+    public static void checkDiadnosisVerificationFormRemoveDiagnosisFunction() {
         Lead newLead = [
-                SELECT ID
-                FROM Lead
-                LIMIT 50000
+            SELECT Id
+            FROM Lead
         ];
         newLead.Increased_probability_of_premature_death__c = true;
         update newLead;
         Condition_Description__c condistionDescription = [
-                SELECT ID,Name,Code_To_Use__c
-                FROM Condition_Description__c
-                LIMIT 50000
+            SELECT Id,Name,Code_To_Use__c
+            FROM Condition_Description__c
         ];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
@@ -275,7 +271,6 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
         //Answer for the Question;
-        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[0].selectedPickVal = 'No';
         ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
@@ -286,7 +281,6 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('icdOrPcd', 'ICD');
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '1');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
-        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[0].selectedPickVal = 'Yes';
         ApexPages.currentPage().getParameters().put('medicalResponse', 'Yes'); //Used to hold the Medical Question response
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '1'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
@@ -295,30 +289,29 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.RemoveDiagnosisBlock();
         currDiagnosisVerificationDupe.SaveMedicalInformation();
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-                SELECT ID,isEligible__c, (
-                        SELECT isEligible__c
-                        FROM DiagnosisMedicalQuestions__r
-                )
-                FROM Diagnosis_Verification__c
-                WHERE Lead__c = :newLead.Id
-                LIMIT 50000
+            SELECT Id,isEligible__c, (
+                SELECT isEligible__c
+                FROM DiagnosisMedicalQuestions__r
+            )
+            FROM Diagnosis_Verification__c
+            WHERE Lead__c = :newLead.Id
         ];
         Test.stopTest();
         System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode, 'Value does not match');
         System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode, 'value does not match');
     }
     //This method is used to check the diagnosis verification in DV form.
-    public static testmethod void checkDiadnosisVerificationFormWithDiagnosisVerficationData() {
+    @IsTest
+    public static void checkDiadnosisVerificationFormWithDiagnosisVerficationData() {
         Lead newLead = [
-                SELECT ID
-                FROM Lead
+            SELECT Id
+            FROM Lead
         ];
         newLead.Risk_of_complications_premature_death__c = true;
         update newLead;
         Condition_Description__c condistionDescription = [
-                SELECT ID,Name,Code_To_Use__c
-                FROM Condition_Description__c
-                LIMIT 50000
+            SELECT Id,Name,Code_To_Use__c
+            FROM Condition_Description__c
         ];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
@@ -332,7 +325,6 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
         //Answer for the Question;
-        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[0].selectedPickVal = 'No';
         ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
@@ -343,20 +335,18 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('icdOrPcd', 'ICD');
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '1');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
-        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[0].selectedPickVal = 'Yes';
         ApexPages.currentPage().getParameters().put('medicalResponse', 'Yes'); //Used to hold the Medical Question response
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '1'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
         currDiagnosisVerificationDupe.MedicalResponse();
         currDiagnosisVerificationDupe.SaveMedicalInformation();
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-                SELECT ID,isEligible__c, (
-                        SELECT isEligible__c
-                        FROM DiagnosisMedicalQuestions__r
-                )
-                FROM Diagnosis_Verification__c
-                WHERE Lead__c = :newLead.Id
-                LIMIT 50000
+            SELECT Id,isEligible__c, (
+                SELECT isEligible__c
+                FROM DiagnosisMedicalQuestions__r
+            )
+            FROM Diagnosis_Verification__c
+            WHERE Lead__c = :newLead.Id
         ];
         PageReference pageRefUpdate = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRefUpdate);
@@ -370,17 +360,17 @@ public class DiagnosisVerification_AC_Test {
         System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].iCDCode, 'value does not match');
     }
     //This method is used to check the diagnosis verification with medical question in DV form.
-    public static testmethod void checkDiadnosisVerificationFormWithDiagnosisVerficationDataandMedicalQuestion() {
+    @IsTest
+    public static void checkDiadnosisVerificationFormWithDiagnosisVerficationDataandMedicalQuestion() {
         Lead newLead = [
-                SELECT ID
-                FROM Lead
+            SELECT Id
+            FROM Lead
         ];
         newLead.Responds_to_treatment_with_normal_health__c = true;
         update newLead;
         Condition_Description__c condistionDescription = [
-                SELECT ID,Name,Code_To_Use__c
-                FROM Condition_Description__c
-                LIMIT 50000
+            SELECT Id,Name,Code_To_Use__c
+            FROM Condition_Description__c
         ];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
@@ -394,12 +384,10 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
         //Answer for the Question;
-        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[0].selectedPickVal = 'No';
         ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
         currDiagnosisVerificationDupe.MedicalResponse();
-        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[1].epilepsySelectedPickVal = 'No';
         ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber', '1');
@@ -408,13 +396,12 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.deleteLeadFile();
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-                SELECT ID,isEligible__c, (
-                        SELECT isEligible__c
-                        FROM DiagnosisMedicalQuestions__r
-                )
-                FROM Diagnosis_Verification__c
-                WHERE Lead__c = :newLead.Id
-                LIMIT 50000
+            SELECT Id,isEligible__c, (
+                SELECT isEligible__c
+                FROM DiagnosisMedicalQuestions__r
+            )
+            FROM Diagnosis_Verification__c
+            WHERE Lead__c = :newLead.Id
         ];
         PageReference pageRefUpdate = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRefUpdate);
@@ -425,23 +412,22 @@ public class DiagnosisVerification_AC_Test {
         System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode, 'value does not match');
     }
     //This method is used to check the diagnosis verification without medical question in DV form.
-    public static testmethod void checkDiadnosisVerificationFormWithDiagnosisVerficationDataandWithoutMedicalQuestion() {
+    @IsTest
+    public static void checkDiadnosisVerificationFormWithDiagnosisVerficationDataandWithoutMedicalQuestion() {
         List<Medical_Questions__c> medicalQuestion = [
-                SELECT Id
-                FROM Medical_Questions__c
-                LIMIT 50000
+            SELECT Id
+            FROM Medical_Questions__c
         ];
         //medicalQuestion.clear();
         Lead newLead = [
-                SELECT ID
-                FROM Lead
+            SELECT Id
+            FROM Lead
         ];
         newLead.None_of_these_statements_describes_Child__c = true;
         update newLead;
         Condition_Description__c condistionDescription = [
-                SELECT ID,Name,Code_To_Use__c
-                FROM Condition_Description__c
-                LIMIT 50000
+            SELECT Id,Name,Code_To_Use__c
+            FROM Condition_Description__c
         ];
         condistionDescription.Name = 'Arteriovenus Malformation (AVM)';
         update condistionDescription;
@@ -457,12 +443,10 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
         //Answer for the Question;
-        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[0].selectedPickVal = 'No';
         ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
         currDiagnosisVerificationDupe.MedicalResponse();
-        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[1].epilepsySelectedPickVal = 'No';
         ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber', '1');
@@ -473,7 +457,7 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].conditionDescription = Null;
         currDiagnosisVerificationDupe.ResetDiagnosis();
         currDiagnosisVerificationDupe.changePatientValue();
-        currDiagnosisVerificationDupe.submit(); 
+        currDiagnosisVerificationDupe.submit();
         currDiagnosisVerificationDupe.MedicalQuestions(null, null, false, null, 0, medicalQuestion, false);
         currDiagnosisVerificationDupe.MedicalQuestions(null, null, true, null, 0, medicalQuestion, false);
         currDiagnosisVerificationDupe.MedicalQuestions(null, null, true, null, 0, medicalQuestion, true);
@@ -483,13 +467,12 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.MedicalQuestions(null, condistionDescription.Id, true, null, 0, medicalQuestion, true);
         currDiagnosisVerificationDupe.MedicalQuestions(null, condistionDescription.Id, false, null, 0, medicalQuestion, true);
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-                SELECT ID,isEligible__c, (
-                        SELECT isEligible__c
-                        FROM DiagnosisMedicalQuestions__r
-                )
-                FROM Diagnosis_Verification__c
-                WHERE Lead__c = :newLead.Id
-                LIMIT 50000
+            SELECT Id,isEligible__c, (
+                SELECT isEligible__c
+                FROM DiagnosisMedicalQuestions__r
+            )
+            FROM Diagnosis_Verification__c
+            WHERE Lead__c = :newLead.Id
         ];
         PageReference pageRefUpdate = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRefUpdate);
@@ -513,22 +496,21 @@ public class DiagnosisVerification_AC_Test {
     }
 
     //This method is used to check the diagnosis verification without medical question in DV form.
-    public static testmethod void checkDiadnosisVerificationFormWithDiagnosisVerficationDataandWithoutMedicalQuestions() {
+    @IsTest
+    public static void checkDiadnosisVerificationFormWithDiagnosisVerficationDataandWithoutMedicalQuestions() {
         List<Medical_Questions__c> medicalQuestion = [
-                SELECT Id
-                FROM Medical_Questions__c
-                LIMIT 50000
+            SELECT Id
+            FROM Medical_Questions__c
         ];
         medicalQuestion.clear();
         Lead newLead = [
-                SELECT ID
-                FROM Lead
+            SELECT Id
+            FROM Lead
         ];
         //newLead.Increased_probability_of_premature_death__c = true;
         Condition_Description__c condistionDescription = [
-                SELECT ID,Name,Code_To_Use__c
-                FROM Condition_Description__c
-                LIMIT 50000
+            SELECT Id,Name,Code_To_Use__c
+            FROM Condition_Description__c
         ];
         Diagnosis_Verification__c dia = OrientationandTrainingUtil.createDiagnosis(newLead.Id);
         insert dia;
@@ -559,12 +541,10 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
         //Answer for the Question;
-        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[0].selectedPickVal = 'No';
         ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
         currDiagnosisVerificationDupe.MedicalResponse();
-        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[1].epilepsySelectedPickVal = 'No';
         ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber', '1');
@@ -583,13 +563,12 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.submit();
         currDiagnosisVerificationDupe.MedicalQuestions(null, null, false, null, 0, null, false);
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-                SELECT ID,isEligible__c, (
-                        SELECT isEligible__c
-                        FROM DiagnosisMedicalQuestions__r
-                )
-                FROM Diagnosis_Verification__c
-                WHERE Lead__c = :newLead.Id
-                LIMIT 50000
+            SELECT Id,isEligible__c, (
+                SELECT isEligible__c
+                FROM DiagnosisMedicalQuestions__r
+            )
+            FROM Diagnosis_Verification__c
+            WHERE Lead__c = :newLead.Id
         ];
         PageReference pageRefUpdate = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRefUpdate);
@@ -612,28 +591,28 @@ public class DiagnosisVerification_AC_Test {
         // System.assert(currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode == Null,'value does not match');
     }
 
-    public static testmethod void checkDiadnosisVerificationForm() {
+    @IsTest
+    public static void checkDiadnosisVerificationForm() {
         Lead newLead = [
-                SELECT ID
-                FROM Lead
-                LIMIT 50000
+            SELECT Id
+            FROM Lead
         ];
         newLead.Child_will_ultimately_die_prematurely__c = true;
         newLead.Travel_algorithm__c = 'Some Condition';
         newLead.Hidden_Proto_Pulmonary_Hypertension__c = 'Tension';
         update newLead;
         Condition_Description__c condistionDescription = [
-                SELECT ID,Name,Code_To_Use__c
-                FROM Condition_Description__c
-                LIMIT 1
+            SELECT Id,Name,Code_To_Use__c
+            FROM Condition_Description__c
+            LIMIT 1
         ];
         Diagnosis_Verification__c dv = OrientationandTrainingUtil.createDiagnosisRec(newLead.Id, condistionDescription.Id);
         dv.PCD_ICD__c = 'ICD';
         insert dv;
         Medical_Questions__c mQuestion = [
-                SELECT Id, Condition_Description__c,Question__c,Current_Condition__c,Recommendation_to_Chapter__c
-                FROM Medical_Questions__c
-                LIMIT 1
+            SELECT Id, Condition_Description__c,Question__c,Current_Condition__c,Recommendation_to_Chapter__c
+            FROM Medical_Questions__c
+            LIMIT 1
         ];
         mQuestion.Question__c = null;
         mQuestion.Current_Condition__c = 'Some Condition';
@@ -660,7 +639,6 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
         //Answer for the Question;
-        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[0].selectedPickVal = 'No';
         ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
@@ -669,13 +647,12 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('uniqueCurrentConditionSet', 'test3');
         currDiagnosisVerificationDupe.SaveMedicalInformation();
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-                SELECT ID,isEligible__c, (
-                        SELECT isEligible__c
-                        FROM DiagnosisMedicalQuestions__r
-                )
-                FROM Diagnosis_Verification__c
-                WHERE Lead__c = :newLead.Id
-                LIMIT 50000
+            SELECT Id,isEligible__c, (
+                SELECT isEligible__c
+                FROM DiagnosisMedicalQuestions__r
+            )
+            FROM Diagnosis_Verification__c
+            WHERE Lead__c = :newLead.Id
         ];
         Test.stopTest();
         System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode, 'Id dose nit match');

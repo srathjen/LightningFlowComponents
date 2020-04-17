@@ -5,19 +5,21 @@ Date        : 28/06/2016
 Description : ContactTrigger_AT_Test is used to increase the code coverage for contact_AT trigger and contactTriggerHandler.
 *****************************************************************************************************/
 
-@isTest
+@IsTest
 public class ContactTrigger_AT_Test {
 
-	/*This setup method is used to create a chapter user and systemAdmin users*/
-	@testSetup static void setup() {
-		User user = OrientationandTrainingUtil.createChapterUser();
-		insert user;
+	/*This setup method is used to create a chapter User and systemAdmin Users*/
+	@TestSetup
+	static void setup() {
+		User User = OrientationandTrainingUtil.createChapterUser();
+		insert User;
 		User adminUser = OrientationandTrainingUtil.createrSystemAdminUser();
 		insert adminUser;
 	}
 
-	/*This setup method is used to create a community user records*/
-	public testmethod static void createCommunityUser() {
+	/*This setup method is used to create a community User records*/
+	@IsTest
+	public static void createCommunityUser() {
 		User chapterUser = [
 				SELECT Id,UserName,ProfileId,Profile.Name,Email
 				FROM User
@@ -28,7 +30,7 @@ public class ContactTrigger_AT_Test {
 			Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 			insert chapterAccount;
 			try {
-				Contact contact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+				Contact contact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
 				insert contact;
 			} catch (exception ex) {
 			}
@@ -36,24 +38,25 @@ public class ContactTrigger_AT_Test {
 	}
 
 	/*This method is used to update the application status to complete*/
-	public testmethod static void UpdateApplicationStatustoComplete() {
+	@IsTest
+	public static void UpdateApplicationStatustoComplete() {
 		Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
-		user systemAdmin = [
-				select id
-				from user
-				where id = :userinfo.getuserid()
+		User systemAdmin = [
+				SELECT id
+				FROM User
+				WHERE id = :UserInfo.getUserId()
 		];
-		system.runAs(systemAdmin) {
+		System.runAs(systemAdmin) {
 			Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 			insert chapterAccount;
-			Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+			Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
 			insert volunteerContact;
 			OrientationandTrainingUtil.CreateAffiliation(volunteerContact.Id);
 			Contact dbcontact = [
 					SELECT Id,FirstName,LastName,AccountId,Birth_Month__c,Birth_Day__c,is_Application__c, Birth_Year__c,RecordTypeId
 					FROM Contact
-					Where RecordTypeId = :volunteerRecordTypeId
-					Limit 1
+					WHERE RecordTypeId = :volunteerRecordTypeId
+					LIMIT 1
 			];
 			dbcontact .Birth_Day__c = '21';
 			dbcontact .Birth_Month__c = 'March';
@@ -67,29 +70,30 @@ public class ContactTrigger_AT_Test {
 	}
 
 	/*This method is used to update the application status to reject*/
-	public testmethod static void UpdateApplicationStatustoReject() {
+	@IsTest
+	public static void UpdateApplicationStatustoReject() {
 		Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
-		user systemAdmin = [
-				select id
-				from user
-				where id = :userinfo.getuserid()
+		User systemAdmin = [
+				SELECT id
+				FROM User
+				WHERE id = :UserInfo.getUserId()
 		];
-		system.runAs(systemAdmin) {
+		System.runAs(systemAdmin) {
 			Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 			insert chapterAccount;
-			Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+			Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
 			insert volunteerContact;
-			npe5__Affiliation__c affiliation = OrientationandTrainingUtil.CreateAffiliationwithAccount(volunteerContact.Id, chapterAccount.id);
+			npe5__Affiliation__c affiliation = OrientationandTrainingUtil.CreateAffiliationwithAccount(volunteerContact.Id, chapterAccount.Id);
 			insert affiliation;
-			Role__c WishRole = OrientationandTrainingUtil.createRole();
+			Role__c wishRole = OrientationandTrainingUtil.createRole();
 			insert wishRole;
-			Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.id, WishRole.Id);
+			Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id, wishRole.Id);
 			insert chapterRole;
 			Contact dbcontact = [
 					SELECT Id,FirstName,LastName,AccountId,Birth_Month__c,Birth_Day__c,is_Application__c, Birth_Year__c,RecordTypeId
 					FROM Contact
-					Where RecordTypeId = :volunteerRecordTypeId
-					Limit 1
+					WHERE RecordTypeId = :volunteerRecordTypeId
+					LIMIT 1
 			];
 			dbcontact .Birth_Day__c = '21';
 			dbcontact .Birth_Month__c = 'March';
@@ -102,28 +106,29 @@ public class ContactTrigger_AT_Test {
 	}
 
 	/*This method is used to create a task record when zipcode is update*/
-	public testmethod static void CreateZipcodeUpdateTask() {
-		user systemAdmin = [
-				select id
-				from user
-				where id = :userinfo.getuserid()
+	@IsTest
+	public static void CreateZipcodeUpdateTask() {
+		User systemAdmin = [
+				SELECT id
+				FROM User
+				WHERE id = :UserInfo.getUserId()
 		];
-		system.runAs(systemAdmin) {
+		System.runAs(systemAdmin) {
 			Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 			insert chapterAccount;
 			Account chapterAccount1 = OrientationandTrainingUtil.createVolunteerAccount();
 			insert chapterAccount1;
-			Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+			Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
 			insert volunteerContact;
 			Office__c officeRec = OrientationandTrainingUtil.createOffice(chapterAccount1.Id);
 			officeRec.External_Id__c = 'R123';
 			insert officeRec;
 			Zip_Code__c zipcodeRec = OrientationandTrainingUtil.createZipcode(officeRec.Id);
 			zipcodeRec.Name = '35004';
-			zipCodeRec.office__c = officeRec.id;
+			zipCodeRec.office__c = officeRec.Id;
 			zipCodeRec.External_Id__c = 'R123';
 			insert zipCodeRec;
-			npe5__Affiliation__c affiliation = OrientationandTrainingUtil.CreateAffiliationwithAccount(volunteerContact.Id, chapterAccount.id);
+			npe5__Affiliation__c affiliation = OrientationandTrainingUtil.CreateAffiliationwithAccount(volunteerContact.Id, chapterAccount.Id);
 			insert affiliation;
 			Contact dbContact = [
 					SELECT Id,MailingPostalCode
@@ -137,32 +142,33 @@ public class ContactTrigger_AT_Test {
 	}
 
 	/* This Method is used to update the Volunteer LastName,FirstName,Email and Mobile Number */
-	public testmethod static void UpdateVolunteerDetails() {
+	@IsTest
+	public static void UpdateVolunteerDetails() {
 		Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
-		user systemAdmin = [
-				select id
-				from user
-				where id = :userinfo.getuserid()
+		User systemAdmin = [
+				SELECT id
+				FROM User
+				WHERE id = :UserInfo.getUserId()
 		];
-		system.runAs(systemAdmin) {
+		System.runAs(systemAdmin) {
 
 			Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 			insert chapterAccount;
-			Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+			Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
 			insert volunteerContact;
 			User volunteerUser = OrientationandTrainingUtil.createVolunteerUser(volunteerContact.Id);
 			insert volunteerUser;
-			npe5__Affiliation__c affiliation = OrientationandTrainingUtil.CreateAffiliationwithAccount(volunteerContact.Id, chapterAccount.id);
+			npe5__Affiliation__c affiliation = OrientationandTrainingUtil.CreateAffiliationwithAccount(volunteerContact.Id, chapterAccount.Id);
 			insert affiliation;
 			Role__c wishRole = OrientationandTrainingUtil.createRole();
 			insert wishRole;
-			Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.id, wishRole.Id);
+			Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id, wishRole.Id);
 			insert chapterRole;
 			Contact dbcontact = [
 					SELECT Id,FirstName,LastName,MobilePhone,Email,RecordTypeId
 					FROM Contact
-					Where RecordTypeId = :volunteerRecordTypeId
-					Limit 1
+					WHERE RecordTypeId = :volunteerRecordTypeId
+					LIMIT 1
 			];
 			dbcontact.LastName = 'moss';
 			dbcontact.FirstName = 'Smith';
@@ -173,7 +179,8 @@ public class ContactTrigger_AT_Test {
 
 	}
 	//This Method is used to create a wish child contact
-	testmethod static void CreateWishChildContact() {
+	@IsTest
+	public static void CreateWishChildContact() {
 		Id wichChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
 
 		Account newAcc = new Account();
@@ -189,7 +196,7 @@ public class ContactTrigger_AT_Test {
 		newCon.ICD_10_Code__c = newICD.Id;
 		newCon.Diagnosis__c = 'Malignant Neoplasm';
 		newCon.Non_Verbal__c = 'No';
-		newCon.accountid = newAcc.id;
+		newCon.accountid = newAcc.Id;
 		newCon.Region_Chapter__c = chapterAcc.Id;
 		newCon.recordTypeId = wichChildRecordTypeId;
 		insert newCon;
@@ -197,7 +204,8 @@ public class ContactTrigger_AT_Test {
 	}
 
 	//This method is used to create a medical professional contact.
-	testmethod static void CreateMedicalContact() {
+	@IsTest
+	public static void CreateMedicalContact() {
 		Id wichChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
 		Id MedicalProfContactRecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
 		Account newAcc = new Account();
@@ -211,7 +219,7 @@ public class ContactTrigger_AT_Test {
 		newCon.ICD_10_Code__c = newICD.Id;
 		newCon.Diagnosis__c = 'Malignant Neoplasm';
 		newCon.Non_Verbal__c = 'No';
-		newCon.accountid = newAcc.id;
+		newCon.accountid = newAcc.Id;
 		newCon.recordTypeId = wichChildRecordTypeId;
 		insert newCon;
 
@@ -221,8 +229,8 @@ public class ContactTrigger_AT_Test {
 		insert newMedCon;
 
 		npe4__Relationship__c newRel = new npe4__Relationship__c();
-		newRel.npe4__RelatedContact__c = newMedCon.id;
-		newRel.npe4__Contact__c = newCon.id;
+		newRel.npe4__RelatedContact__c = newMedCon.Id;
+		newRel.npe4__Contact__c = newCon.Id;
 		newRel.npe4__Status__c = 'Active';
 		newRel.Qualifying_Medical_Professional__c = true;
 		insert newRel;
@@ -234,7 +242,8 @@ public class ContactTrigger_AT_Test {
 	}
 
 	//This method is used to update the wish family contatc information.
-	public testmethod static void RecallWishFamilyContactInfo() {
+	@IsTest
+	public static void RecallWishFamilyContactInfo() {
 
 		Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
 		insert childCon;
@@ -265,7 +274,8 @@ public class ContactTrigger_AT_Test {
 	}
 
 	//This method used to increase the code coverage for when the wish child information is updated.
-	public testmethod static void updatewishChildContactInfo() {
+	@IsTest
+	public static void updatewishChildContactInfo() {
 		Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
 		insert childCon;
 		Contact updateCon = new Contact();
@@ -285,25 +295,26 @@ public class ContactTrigger_AT_Test {
 	}
 
 	/*This method is used to update the application status to submit*/
-	public testmethod static void UpdateApplicationStatustoSubmit() {
+	@IsTest
+	public static void UpdateApplicationStatustoSubmit() {
 		Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
-		user systemAdmin = [
-				select id
-				from user
-				where id = :userinfo.getuserid()
+		User systemAdmin = [
+				SELECT id
+				FROM User
+				WHERE id = :UserInfo.getUserId()
 		];
-		system.runAs(systemAdmin) {
+		System.runAs(systemAdmin) {
 			Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 			insert chapterAccount;
-			Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+			Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
 			insert volunteerContact;
 			npe5__Affiliation__c affiliation = OrientationandTrainingUtil.CreateAffiliation(volunteerContact.Id);
 			insert affiliation;
 			Contact dbcontact = [
 					SELECT Id,FirstName,LastName,AccountId,Birth_Month__c,Birth_Day__c,is_Application__c, Birth_Year__c,RecordTypeId
 					FROM Contact
-					Where RecordTypeId = :volunteerRecordTypeId
-					Limit 1
+					WHERE RecordTypeId = :volunteerRecordTypeId
+					LIMIT 1
 			];
 			dbcontact .Birth_Day__c = '21';
 			dbcontact .Birth_Month__c = 'March';
@@ -314,12 +325,14 @@ public class ContactTrigger_AT_Test {
 		}
 	}
 
-	public testMethod static void createwishfamilyContact() {
+	@IsTest
+	public static void createwishfamilyContact() {
 		Contact wishChildFamily = OrientationandTrainingUtil.CreateWishFamily();
 	}
 
 	//This Method is used to Update and recall the wish family contatc information.
-	public testMethod static void recallWishChildContactInfo() {
+	@IsTest
+	public static void recallWishChildContactInfo() {
 		Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
 		insert childCon;
 		Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
@@ -353,7 +366,8 @@ public class ContactTrigger_AT_Test {
 	}
 
 	//This method is used to recall the approval and update the wish child contac information.
-	public testmethod static void updatewishChildRecall() {
+	@IsTest
+	public static void updatewishChildRecall() {
 		Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
 		insert childCon;
 		Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
@@ -381,7 +395,8 @@ public class ContactTrigger_AT_Test {
 		System.assertEquals(updateCon.Hidden_city__c, 'Chennai');
 	}
 
-	public testmethod static void deleteContact() {
+	@IsTest
+	public static void deleteContact() {
 		Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
 		insert childCon;
 		Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
@@ -390,7 +405,8 @@ public class ContactTrigger_AT_Test {
 	}
 
 	//This method is used to update the condition description in wish child contact.
-	public testmethod static void diagnosisUpdate() {
+	@IsTest
+	public static void diagnosisUpdate() {
 		Id wichChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
 		Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
 		insert childCon;
@@ -411,7 +427,8 @@ public class ContactTrigger_AT_Test {
 	}
 
 	//This method is used to update the ICD in wish child contact.
-	public testmethod static void icdUpdates() {
+	@IsTest
+	public static void icdUpdates() {
 		Id wichChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
 		Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
 		insert childCon;
@@ -433,8 +450,9 @@ public class ContactTrigger_AT_Test {
 		].Id, childCon.Id);
 	}
 
-	//This method is used to create a volunteer user for migrated volunteer contact.
-	public testmethod static void createMigratedVolunteerUser() {
+	//This method is used to create a volunteer User for migrated volunteer contact.
+	@IsTest
+	public static void createMigratedVolunteerUser() {
 		Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
 		Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
 		insert chapterAcc;
@@ -480,7 +498,8 @@ public class ContactTrigger_AT_Test {
 		System.assert(newContact.Migrated_Record__c, True);
 	}
 
-	public testmethod static void updateContactPhone() {
+	@IsTest
+	public static void updateContactPhone() {
 		Id wichChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
 		Contact newCon = New Contact();
 		newCon.RecordTypeId = wichChildRecordTypeId;
@@ -492,21 +511,22 @@ public class ContactTrigger_AT_Test {
 		newCon.Diagnosis__c = 'Malignant Neoplasm';
 		insert newCon;
 		npe4__Relationship__c newRlet = new npe4__Relationship__c();
-		newRlet.npe4__RelatedContact__c = newCon.id;
+		newRlet.npe4__RelatedContact__c = newCon.Id;
 		newRlet.npe4__Status__c = 'Active';
-		newRlet.npe4__Contact__c = newCon.id;
+		newRlet.npe4__Contact__c = newCon.Id;
 		insert newRlet;
 		newCon.Hidden_Phone__c = '222222222222';
 		newCon.HiddenMobilePhone__c = '2222222222';
 		newCon.HiddenOtherPhone__c = '1111111111';
-		newCon.Hidden_Preferred_Contact_Rel_Id__c = newRlet.id;
+		newCon.Hidden_Preferred_Contact_Rel_Id__c = newRlet.Id;
 		newCon.Hidden_Zip_Code__c = '62100';
 		update newCon;
 		newCon.Hidden_Preferred_Contact_Rel_Id__c = 'Remove';
 		update newCon;
 	}
 
-	public testmethod static void updateContactPhoneNegative() {
+	@IsTest
+	public static void updateContactPhoneNegative() {
 		Id wichChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
 		Contact newCon = New Contact();
 		newCon.RecordTypeId = wichChildRecordTypeId;
@@ -523,7 +543,8 @@ public class ContactTrigger_AT_Test {
 		update newCon;
 	}
 
-	public testmethod static void deleteWishForm() {
+	@IsTest
+	public static void deleteWishForm() {
 		Id wichChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
 		Id wishFormRecordTypeId = Constant_AC.WISH_FORM_FAMILY_ID;
 		Wish_Child_Form__c newWF = new Wish_Child_Form__c();
@@ -544,7 +565,8 @@ public class ContactTrigger_AT_Test {
 		Delete newCon;
 	}
 
-	public testmethod static void updatewishChildSameAsHousHold() {
+	@IsTest
+	public static void updatewishChildSameAsHousHold() {
 		Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
 		insert childCon;
 		Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
@@ -573,7 +595,7 @@ public class ContactTrigger_AT_Test {
 		updateCon.Hidden_Work_Phone__c = '9912121313';
 		updateCon.HiddenMobilePhone__c = '9912121313';
 		updateCon.Id = childFamily.Id;
-		wishChildIdSet.add(childCon.id);
+		wishChildIdSet.add(childCon.Id);
 		update updateCon;
 		update childCon;
         contactList.add(updateCon);
@@ -581,7 +603,8 @@ public class ContactTrigger_AT_Test {
 		System.assertEquals(updateCon.IsContactInfoUpdated__c, True);
 	}
 
-	public testmethod static void updatewishChildHiddenPhone() {
+	@IsTest
+	public static void updatewishChildHiddenPhone() {
 		Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
 		insert childCon;
 		Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
@@ -611,17 +634,18 @@ public class ContactTrigger_AT_Test {
 		updateCon.Hidden_Work_Phone__c = '8012121313';
 		updateCon.HiddenMobilePhone__c = '8012121313';
 		updateCon.Id = childFamily.Id;
-		wishChildIdSet.add(childCon.id);
-		removePrefIdSet.add(childCon.id);
-		ConrelationshipIdMap.put(childCon.id, childCon);
+		wishChildIdSet.add(childCon.Id);
+		removePrefIdSet.add(childCon.Id);
+		ConrelationshipIdMap.put(childCon.Id, childCon);
 		update updateCon;
 		update childCon;
-        contactList.add(updateCon);
-        ContactService.updateFamilyContactDetails(wishChildIdSet, contactList);
+    contactList.add(updateCon);
+    ContactService.updateFamilyContactDetails(wishChildIdSet, contactList);
 		System.assertEquals(updateCon.IsContactInfoUpdated__c, True);
 	}
 
-	public testmethod static void docusignNameUpdate() {
+	@IsTest
+	public static void docusignNameUpdate() {
 		Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
 		insert childCon;
 		Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
@@ -648,7 +672,8 @@ public class ContactTrigger_AT_Test {
 		Test.stopTest();
 	}
 
-	public testmethod static void createAffiliation() {
+	@IsTest
+	public static void createAffiliation() {
 		Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
 		Id ChapterRecordTypeId = Constant_AC.CHAPTER_RT_ID;
 		Id medicalProfessionalRecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;

@@ -1,14 +1,11 @@
-/*************************************************************************************************************************************************
-Created by: Pavithra
-Author : MST Solutions
-CreateDate : 10/05/2016
-Description :Batch_UpdateVolunteerStatus_Test is used to increase the code coverage for Batch_UpdateVolunteerStatus_AC class.
-*************************************************************************************************************************************************/
-
-@isTest
+/**
+ * Test
+ */
+@IsTest
 public class Batch_UpdateVolunteerRoleStatus_Test {
 
-	static testMethod void updateVolunteerStatus() {
+	@IsTest
+	static void updateVolunteerStatus() {
 		Account chapterAc = OrientationandTrainingUtil.createchapterAccount();
 		insert chapterAc;
 
@@ -69,7 +66,9 @@ public class Batch_UpdateVolunteerRoleStatus_Test {
 		Database.executeBatch(new Batch_UpdateVolunteerRoleStatus_AC());
 		Test.stopTest();
 	}
-	static testMethod void updateVolunteerSingleActiveStatus() {
+
+	@IsTest
+	static void updateVolunteerSingleActiveStatus() {
 		Account chapterAc = OrientationandTrainingUtil.createchapterAccount();
 		insert chapterAc;
 
@@ -124,9 +123,10 @@ public class Batch_UpdateVolunteerRoleStatus_Test {
 		Database.executeBatch(new Batch_UpdateVolunteerRoleStatus_AC());
 		Test.stopTest();
 		System.assertEquals(boardMemberRole.Name, Constant_AC.BOARD_MEMBER_RT_LABEL, 'Role is not board member');
-//        system.assert(affiliation.npe5__Status__c == 'Active','status updated incorrectly' );
 	}
-	static testMethod void updateVolunteerRolePedingStatus() {
+
+	@IsTest
+	static void updateVolunteerRolePedingStatus() {
 		Account chapterAc = OrientationandTrainingUtil.createchapterAccount();
 		insert chapterAc;
 

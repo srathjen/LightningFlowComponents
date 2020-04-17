@@ -1,3 +1,6 @@
+<!-- Revision History:
+// 16/04/2020 - Manoj - SIW-499 Updated language for volunteers
+-->
 <apex:page standardController="Case" extensions="InkindandReimbursement_AC" applyBodyTag="false" sidebar="false" docType="html-5.0" standardStylesheets="false">
     <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.prospective_assets, 'web/css/lib/bootstrap.min.css')}" />
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet"/>
@@ -55,9 +58,9 @@
                 <h2 class="h2 underline-text col-md-12">In-Kind Donations</h2>
                 <ol class="col-xs-12 col-sf-lg-12 col-lg-7">
                     <li>Download the Gift-In-Kind Donation Form PDF by clicking on the link below.</li>
-                    <li>Complete the editable PDF form and save to your computer.</li>
-                    <li>Scan or take photos of documentation of the donation value, (i.e. itemized receipts,invoices or documentation of donor stated value) to send to us along with your form.</li>
-                    <li>Upload the form in case notes and tag your wish manager (case owner).</li>
+                    <li>Complete the editable PDF form and save it to your computer.</li>
+                    <li>Scan or take photos of documentation of the donation value, (i.e. itemized receipts, invoices or documentation of donor stated value) to send to us along with your form.</li>
+                    <li>Upload the form in the attachments section of the child’s case. Please make sure to select the appropriate receipt type before uploading.</li>
                 </ol>
                 <div class="col-md-12 text-center">
                     <apex:commandButton value="In-Kind Form PDF" onclick="SaveToDisk('{!inKindFormLink}');" reRender="inKindForm" styleClass="btn-md no-print"/>
@@ -67,9 +70,9 @@
                 <h2 class="h2 underline-text col-md-12">Reimbursement Requests</h2>
                 <ol class="col-xs-12 col-sf-lg-12 col-lg-7">
                     <li>Download the Check Request Form PDF by clicking on the link below.</li>
-                    <li>Complete the editable PDF form and save to your computer.</li>
+                    <li>Complete the editable PDF form and save it to your computer.</li>
                     <li>Scan or take photos of purchase receipts to send to us along with your form.</li>
-                    <li>Upload the form, along with the photos or scans of your receipts, in case notes and tag your wish manager (case owner).</li>
+                    <li>Upload the form, along with the photos or scans of your receipts, in the attachment section of the child’s case. Please make sure to select the appropriate receipt type before uploading.</li>
                     <li>Checks will be available for pickup at the chapter office unless you have indicated otherwise in Section 5 of the Check Request Form.</li>
                 </ol>
                 <div class="col-md-12 text-center">

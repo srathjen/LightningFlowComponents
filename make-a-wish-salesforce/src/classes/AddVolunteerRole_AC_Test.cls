@@ -1,37 +1,24 @@
-/***************************************************************************************************
-Author      : MST Solutions
-CreatedBy   : Kanagaraj
-Date        : 28/06/2016
-Description : AddVolunteerRole_AC_Test is used to increase the code coverage for Application_AC controller.
-*****************************************************************************************************/
-//AddVolunteerRole_AC_Test class is used to the unit testing of the AddVolunteerRole_AC class functionality
-//This class has the four test methods to do the both possitive and negative testing
-//This class is created by Kanagaraj
-@isTest
+@IsTest
 public class AddVolunteerRole_AC_Test {
+
 	@TestSetup
 	private static void setup() {
 		trac_TriggerHandlerBase.blockTrigger = true;
 	}
 
-	/* This method is used to create number of NonWishEvent Volunteer Opportunity count */
-	//This method will create chapter account
-	//This method will created volunteer contact
-	//This method will update the volunteer contact
-	public testMethod static void createNonWishEvent() {
+	@IsTest
+	public static void createNonWishEvent() {
 		User volunteerUser = new User();
 		System.runAs (new User(Id = UserInfo.getUserId())) {
 			volunteerUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(null);
 			volunteerUser.Hidden_Role_Name_Id__c = 'Test';
 			insert volunteerUser;
 		}
-		// Need parent fields
 		volunteerUser = [
 				SELECT Id, ContactId, Contact.AccountId
 				FROM User
 				WHERE Id = :volunteerUser.Id
 		];
-
 		Role__c nonWishRole = OrientationandTrainingUtil.createRole();
 		insert nonWishRole;
 
@@ -41,7 +28,7 @@ public class AddVolunteerRole_AC_Test {
 		Non_Wish_Events__c nonWishEvent = OrientationandTrainingUtil.CreateEventRec(chapterRole.Id, volunteerUser.Contact.AccountId);
 		insert nonWishEvent;
 
-		system.runAs(volunteerUser) {
+		System.runAs(volunteerUser) {
 			ApexPages.StandardController sc = new ApexPages.StandardController(nonWishEvent);
 			AddVolunteerRole_AC addRole = new AddVolunteerRole_AC(sc);
 			PageReference pageRef = Page.AddVolunteerRole_VF;
@@ -59,7 +46,6 @@ public class AddVolunteerRole_AC_Test {
 					SELECT Id,Volunteer_Needed__c
 					FROM Volunteer_Count__c
 					WHERE Id = :volnteerCount.Id
-					Limit 50000
 			];
 			VolunteerNeededCount.Volunteer_Needed__c = 2;
 			update VolunteerNeededCount;
@@ -69,11 +55,13 @@ public class AddVolunteerRole_AC_Test {
 			addRole.ChapterRoleId = chapterRole.Id;
 			addRole.register();
 			System.assertEquals(VolunteerNeededCount.Volunteer_Needed__c, 2, 'Count does not Match');
-			System.assert(VolunteerNeededCount.Volunteer_Needed__c == 2, 'The value of VolunteerNeededCount.Volunteer_Needed__c is: ' + VolunteerNeededCount.Volunteer_Needed__c + ' and the value of actual count is: 2');
+			System.assert(VolunteerNeededCount.Volunteer_Needed__c == 2, 'The value of VolunteerNeededCount.Volunteer_Needed__c is: '
+					+ VolunteerNeededCount.Volunteer_Needed__c + ' and the value of actual count is: 2');
 		}
 	}
 
-	public testMethod static void createNonWishEventErrors() {
+	@IsTest
+	public static void createNonWishEventErrors() {
 		User volunteerUser = new User();
 		System.runAs (new User(Id = UserInfo.getUserId())) {
 			volunteerUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(null);
@@ -96,7 +84,7 @@ public class AddVolunteerRole_AC_Test {
 		Non_Wish_Events__c nonWishEvent = OrientationandTrainingUtil.CreateEventRec(chapterRole.Id, volunteerUser.Contact.AccountId);
 		insert nonWishEvent;
 
-		system.runAs(volunteerUser) {
+		System.runAs(volunteerUser) {
 			Test.startTest();
 			ApexPages.StandardController sc = new ApexPages.StandardController(nonWishEvent);
 			AddVolunteerRole_AC addRole = new AddVolunteerRole_AC(sc);
@@ -115,7 +103,7 @@ public class AddVolunteerRole_AC_Test {
 					SELECT Id,Volunteer_Needed__c
 					FROM Volunteer_Count__c
 					WHERE Id = :volnteerCount.Id
-					Limit 50000
+					LIMIT 50000
 			];
 			VolunteerNeededCount.Volunteer_Needed__c = 2;
 			volnteerCount.Registered__c = volnteerCount.Volunteer_Needed__c + 1;
@@ -138,9 +126,8 @@ public class AddVolunteerRole_AC_Test {
 		}
 	}
 
-	/*This method is used to remove the volunteer contact from NonWishEvent Volunteer Opportunity*/
-
-	public testMethod static void removeVolunteerContactonNonwishEvent() {
+	@IsTest
+	public static void removeVolunteerContactonNonwishEvent() {
 		Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert chapterAccount;
 
@@ -150,7 +137,7 @@ public class AddVolunteerRole_AC_Test {
 		Role__c nonWishRole = OrientationandTrainingUtil.createRole();
 		insert nonWishRole;
 
-		Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.id, nonWishRole.Id);
+		Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id, nonWishRole.Id);
 		insert chapterRole;
 
 		Non_Wish_Events__c nonWishEvent = OrientationandTrainingUtil.CreateEventRec(chapterRole.Id, chapterAccount.Id);
@@ -172,7 +159,7 @@ public class AddVolunteerRole_AC_Test {
 				SELECT Id,Volunteer_Needed__c
 				FROM Volunteer_Count__c
 				WHERE Id = :volnteerCount.Id
-				Limit 50000
+				LIMIT 50000
 		];
 		VolunteerNeededCount.Volunteer_Needed__c = 2;
 		update VolunteerNeededCount;
@@ -185,12 +172,12 @@ public class AddVolunteerRole_AC_Test {
 		addRole.ChapterRoleId = chapterRole.Id;
 		addRole.register();
 		System.assertEquals(addRole.VolunteerCount, 3, 'Count does not match');
-		System.assert(addRole.VolunteerCount == 3, 'The value of  addRole.VolunteerCount is: ' + addRole.VolunteerCount + ' and the value of actual count is: 3');
+		System.assert(addRole.VolunteerCount == 3, 'The value of  addRole.VolunteerCount is: '
+				+ addRole.VolunteerCount + ' and the value of actual count is: 3');
 	}
 
-	/* This method is used to update number of NonWishEvent Volunteer Opportunity count */
-
-	public testMethod static void updateNonWishEvent() {
+	@IsTest
+	public static void updateNonWishEvent() {
 		Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert chapterAccount;
 
@@ -200,7 +187,7 @@ public class AddVolunteerRole_AC_Test {
 		Role__c nonWishRole = OrientationandTrainingUtil.createRole();
 		insert nonWishRole;
 
-		Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.id, nonWishRole.Id);
+		Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id, nonWishRole.Id);
 		insert chapterRole;
 
 		Non_Wish_Events__c nonWishEvent = OrientationandTrainingUtil.CreateEventRec(chapterRole.Id, chapterAccount.Id);
@@ -231,12 +218,12 @@ public class AddVolunteerRole_AC_Test {
 		// addRole.dbVolOpporunity.add(newVolCount);
 		addRole.register();
 		System.assertEquals(addRole.ChapterRoleId, chapterRole.Id, 'Id does not match');
-		System.assert(addRole.ChapterRoleId == chapterRole.Id, 'The value of  addRole.ChapterRoleId is: ' + addRole.VolunteerCount + ' and the value chapterRole.Id is: ' + chapterRole.Id);
+		System.assert(addRole.ChapterRoleId == chapterRole.Id, 'The value of  addRole.ChapterRoleId is: '
+				+ addRole.VolunteerCount + ' and the value chapterRole.Id is: ' + chapterRole.Id);
 	}
 
-	/* This method is used to Register the volunteer contact to NonWishEvent Volunteer Opportunity */
-
-	public testMethod static void registerVolunteerContact() {
+	@IsTest
+	public static void registerVolunteerContact() {
 		User volunteerUser = new User();
 		System.runAs (new User(Id = UserInfo.getUserId())) {
 			volunteerUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(null);
@@ -260,8 +247,8 @@ public class AddVolunteerRole_AC_Test {
 					nonWishRole, wishRole
 			};
 
-			Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.id, nonWishRole.Id);
-			Chapter_Role__c chapterRole2 = OrientationandTrainingUtil.createChapter(chapterAccount.id, wishRole.Id);
+			Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id, nonWishRole.Id);
+			Chapter_Role__c chapterRole2 = OrientationandTrainingUtil.createChapter(chapterAccount.Id, wishRole.Id);
 			insert new List<Chapter_Role__c>{
 					chapterRole, chapterRole2
 			};
@@ -332,7 +319,8 @@ public class AddVolunteerRole_AC_Test {
 			addRole.displayErrorMsg();
 			Test.stopTest();
 			System.assertEquals(addRole.ChapterRoleId, chapterRole.Id, 'Id does not match');
-			System.assert(addRole.ChapterRoleId == chapterRole.Id, 'The value of  addRole.ChapterRoleId is: ' + addRole.VolunteerCount + ' and the value chapterRole.Id is: ' + chapterRole.Id);
+			System.assert(addRole.ChapterRoleId == chapterRole.Id, 'The value of  addRole.ChapterRoleId is: '
+					+ addRole.VolunteerCount + ' and the value chapterRole.Id is: ' + chapterRole.Id);
 		}
 	}
 }

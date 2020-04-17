@@ -448,6 +448,15 @@ public class TestDataFactory {
         }
         return nonWishEvents;
     }
+    
+    public static List<Time_sheet__c> createTimesheet(Integer num) {
+        List<Time_sheet__c> timesheets = new List<Time_sheet__c>();
+        for(Integer i = 0; i < num; i++) {
+            Time_sheet__c timesheet = new Time_sheet__c();
+            timesheets.add(timesheet);
+        }
+        return timesheets;
+    }
 
 	public static Lead createQualifiedLead(Id accountId, Id icdCodeId){
 		Lead lead = new Lead();
