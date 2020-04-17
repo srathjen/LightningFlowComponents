@@ -19,8 +19,6 @@ public class ChapterRoleService {
 				roleIds.add(newChapterRole.Role_Name__c);
 			}
 		}
-		if (roleIds.isEmpty()) {
-		}
 		for (Role__c role : [
 				SELECT Id,Name
 				FROM Role__c
@@ -78,16 +76,15 @@ public class ChapterRoleService {
 				FROM Chapter_Role__c
 				WHERE Id IN :newChapterRoleMap.keySet()
 		]) {
-			if (!oldChapterRoleMap.isEmpty() && currRec.OwnerId != oldChapterRoleMap.get(currRec.Id).OwnerId) {
-				if (ROLE_NATIONAL_STAFF.equals(currRec.Owner.UserRole.Name)) {
-					if (chapterRoleMap.containsKey(currRec.Chapter_Name__r.Name)) {
-						chapterRoleMap.get(currRec.Chapter_Name__r.Name).add(currRec);
-					} else {
-						chapterRoleMap.put(currRec.Chapter_Name__r.Name, new List<Chapter_Role__c>{
-								currRec
-						});
-					}
+			if (!oldChapterRoleMap.isEmpty()
+					&& currRec.OwnerId != oldChapterRoleMap.get(currRec.Id).OwnerId
+					&& ROLE_NATIONAL_STAFF.equals(currRec.Owner.UserRole.Name)) {
+				if (!chapterRoleMap.containsKey(currRec.Chapter_Name__r.Name)) {
+					chapterRoleMap.put(currRec.Chapter_Name__r.Name, new List<Chapter_Role__c>{
+							currRec
+					});
 				}
+				chapterRoleMap.get(currRec.Chapter_Name__r.Name).add(currRec);
 			}
 		}
 		return chapterRoleMap;
