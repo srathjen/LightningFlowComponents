@@ -309,7 +309,6 @@ public class Utils {
 	 * @param 			Set<id> userIds
 	 *
 	 * @return			Map<Id,String>
-	 *
 	 * @author			MST Solutions
 	 * @createdDate		unknown
 	 */
