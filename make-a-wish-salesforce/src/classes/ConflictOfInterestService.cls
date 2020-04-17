@@ -116,7 +116,7 @@ public class ConflictOfInterestService {
 	public static List<Conflict_Of_Interest__Share> createRecordSharing(Map<Id, Conflict_Of_Interest__c> ownerIdCoiMap) {
 		List<Conflict_Of_Interest__Share> conflictOfInterestShares = new List<Conflict_Of_Interest__Share>();
 		try {
-			Map<Id, String> userRoleMap = UserRoleUtility.getUserRole(ownerIdCoiMap.keySet());
+			Map<Id, String> userRoleMap = Utils.getUserRoleMap(ownerIdCoiMap.keySet());
 			Map<String, List<Conflict_Of_Interest__c>> coiMap = new Map<String, List<Conflict_Of_Interest__c>>();
 			for (Conflict_Of_Interest__c coi : ownerIdCoiMap.values()) {
 				if (coi.Account_Name__c != null && userRoleMap.get(coi.OwnerId) == Constant_AC.ROLE_NATIONAL_STAFF) {
