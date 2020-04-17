@@ -71,4 +71,40 @@ public class VolunteerOpportunityService {
 		}
 		return updateVolOppMap;
 	}
+
+	/**
+	 * Delete Volunteer Opportunity Non Approved By Non Wish Event and Record Type Id
+	 * @param nonWishEventId
+	 * @param recordTypeId
+	 */
+	public static void deleteNonApprovedByNonWishEventAndRecordType(Id nonWishEventId, Id recordTypeId) {
+		List<Volunteer_Opportunity__c> volunteerOpportunity = [
+				SELECT Id,RecordTypeId,Chapter_Role_Opportunity__c,Chapter_Name__c,
+						Volunteer_Name__c,Non_Wish_Event__c,Reason_Inactive__c
+				FROM Volunteer_Opportunity__c
+				WHERE Volunteer_Name__c = NULL
+				AND Non_Wish_Event__c = :nonWishEventId
+				AND RecordTypeId = :recordTypeId
+				AND Status__c != :VOLUNTEER_OPPORTUNITY_STATUS_APPROVED
+				AND Reason_Inactive__c = :NULL
+		];
+		delete volunteerOpportunity;
+	}
+
+	/**
+	 * Delete Volunteer Opportunity Non Approved By Chapter and Non Wish Event
+	 * @param nonWishEventId
+	 * @param recordTypeId
+	 */
+	public static void deleteNonApprovedByChapterAndNonWishEvent(Set<Id> chapterRoleIds, Id nonWishEventId) {
+		List<Volunteer_Opportunity__c> deleteVolunteerList = [
+				SELECT Id,Chapter_Name__c,Chapter_Role_Opportunity__c,Volunteer_Name__c,Non_Wish_Event__c
+				FROM Volunteer_Opportunity__c
+				WHERE Chapter_Role_Opportunity__c IN:chapterRoleIds
+				AND Volunteer_Name__c = NULL
+				AND Non_Wish_Event__c = :nonWishEventId
+				AND Reason_Inactive__c = :NULL
+		];
+		delete deleteVolunteerList;
+	}
 }
