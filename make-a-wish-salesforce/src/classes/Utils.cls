@@ -9,10 +9,10 @@ public class Utils {
 	}
 
 	public static final String DATE_FORMAT_MDDYYYY = 'M/dd/yyyy';
+	public static final String PM = 'PM';
 
-	/*
+	/**
 	 * @description 		Retrieve information about the current user.
-	 *
 	 * @author				Chris Shinnimin, Traction on Demand
 	 * @date				2020-03-18
 	 */
@@ -20,19 +20,37 @@ public class Utils {
 		get {
 			if (currentUser == null) {
 				currentUser = [
-					SELECT
-						Id, Name, Chapter_Name__c,
-						UserRole.Name,
-						ProfileId, Profile.Id, Profile.Name,
-						ContactId, Contact.Account.Volunteer_Manager__c, Contact.OwnerId
-					FROM User
-					WHERE Id = :UserInfo.getUserId()
-					LIMIT 1
+						SELECT Id, Name, Chapter_Name__c, UserRole.Name, ProfileId, Profile.Id, Profile.Name, ContactId,
+								Contact.Account.Volunteer_Manager__c, Contact.OwnerId, Hidden_Role_Name_Id__c
+						FROM User
+						WHERE Id = :UserInfo.getUserId()
+						LIMIT 1
 				];
 			}
 			return currentUser;
 		}
 		set;
+	}
+
+	/**
+	 * Find Picklist Field Label / Values Map
+	 * @param sObjectApiName
+	 * @param fieldApiName
+	 * @return List of Picklist Options
+	 */
+	public static Map<String, String> getFieldMap(String sObjectApiName, String fieldApiName) {
+		Map<String, String> fieldMap = new Map<String, String>();
+		try {
+			Map<String, Schema.SObjectField> fieldsByName = Schema.getGlobalDescribe().get(sObjectApiName).getDescribe().fields.getMap();
+			Schema.DescribeFieldResult fieldResult = fieldsByName.get(fieldApiName).getDescribe();
+			List<Schema.PicklistEntry> picklistEntries = fieldResult.getPicklistValues();
+			for (Schema.PicklistEntry pickListValue : picklistEntries) {
+				fieldMap.put(pickListValue.getLabel(), pickListValue.getValue());
+			}
+		} catch (Exception e) {
+			System.debug('Error in get picklist labels and values map: line' + e.getLineNumber() + ', ' + e.getMessage());
+		}
+		return fieldMap;
 	}
 
 	/**
@@ -262,5 +280,50 @@ public class Utils {
 		}
 
 		return mapOfSObjectLabelsByFields;
+	}
+
+	public static Time parseAmPm(String value, TimeRegexPattern regex) {
+		Pattern p = Pattern.compile(regex.getPattern());
+		Matcher m = p.matcher(value);
+		if (!m.matches()) {
+			throw new UtilsException('Pattern ' + regex.getPatternKey() + ' does not match the value ' + value + ' provided');
+		} else if (TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM.equals(regex.getPatternKey())) {
+			Integer hour = Integer.valueOf(m.group(1)),
+					minute = Integer.valueOf(m.group(2)),
+					shift = m.group(3).toUpperCase().equals(PM) ? 12 : 0;
+			return Time.newInstance(hour + shift, minute, 0, 0);
+		} else if (TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_SECOND_AM_PM.equals(regex.getPatternKey())) {
+			Integer Hours = Integer.valueOf(m.group(1)),
+					minute = Integer.valueOf(m.group(2)),
+					second = Integer.valueOf(m.group(3)),
+					shift = m.group(4).toUpperCase().equals(PM) ? 12 : 0;
+			return Time.newInstance(Hours + shift, minute, second, 0);
+		} else {
+			throw new UtilsException('Error while trying to parse value');
+		}
+	}
+
+	/**
+	 * @description		Get a Map of UserRole.Name by User Id.
+	 *
+	 * @param 			Set<id> userIds
+	 *
+	 * @return			Map<Id,String>
+	 *
+	 * @author			MST Solutions
+	 * @createdDate		unknown
+	 */
+	public static Map<Id, String> getUserRoleMap(Set<Id> userIds) {
+		Map<Id, String> userRoleMap = new Map<Id, String>();
+
+		for (User currUser : [
+				SELECT Id, UserRole.Name
+				FROM User
+				WHERE id IN :userIds
+		]) {
+			userRoleMap.put(currUser.Id, currUser.UserRole.Name);
+		}
+
+		return userRoleMap;
 	}
 }

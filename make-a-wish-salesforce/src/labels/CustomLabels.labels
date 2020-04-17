@@ -33,6 +33,22 @@
         <value>00e36000001CMlqAAG</value>
     </labels>
     <labels>
+        <fullName>Add_Volunteer_Role_Existing_Entry</fullName>
+        <categories>Volunteer Role</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add Volunteer Role Existing Entry</shortDescription>
+        <value>All values match with an existing entry. Please update the existing entry or create a new one.</value>
+    </labels>
+    <labels>
+        <fullName>Add_Volunteer_Role_Missing_Date</fullName>
+        <categories>Volunteer Role</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add Volunteer Role Missing Date</shortDescription>
+        <value>Please enter the current or future date.</value>
+    </labels>
+    <labels>
         <fullName>B_C_No_of_days_for_expiration</fullName>
         <categories>It holds the expiration duration for Background check.</categories>
         <language>en_US</language>
@@ -235,7 +251,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>DV to fax</shortDescription>
-        <value>a1a36000004SPWWAA4</value>
+        <value>a1a8A0000011yep</value>
     </labels>
     <labels>
         <fullName>DV_to_fax_w_fax_cover</fullName>
@@ -243,7 +259,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>DV to fax w/ fax cover</shortDescription>
-        <value>a1a36000004SPWUAA4</value>
+        <value>a1a8A0000011yeo</value>
     </labels>
     <labels>
         <fullName>Debug_log_error_message</fullName>
@@ -280,14 +296,6 @@
         <protected>false</protected>
         <shortDescription>Diagnosis Verification Contact Duplicates</shortDescription>
         <value>There might be an existing {0}. Please click Send Diagnosis Verification button to review the existing record.</value>
-    </labels>
-    <labels>
-        <fullName>Diagnosis_Verification_Duplicates</fullName>
-        <categories>Lead</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Diagnosis Verification Duplicates</shortDescription>
-        <value>There might be a duplicate {0}. Please click Send Diagnosis Verification button to review the duplicates.</value>
     </labels>
     <labels>
         <fullName>Diagnosis_Verification_Lead_Duplicates</fullName>
@@ -342,7 +350,15 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Duplicate Record</shortDescription>
-        <value>There might be a duplicate {0}. Please click [OK] to review the duplicates.</value>
+        <value>There might be a duplicate {0}. Please click [OK] to review the duplicates</value>
+    </labels>
+    <labels>
+        <fullName>Enter_Valid</fullName>
+        <categories>Class Offering</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Enter Valid</shortDescription>
+        <value>Please enter a valid {0}</value>
     </labels>
     <labels>
         <fullName>Existing_Files_Attached</fullName>
@@ -409,6 +425,14 @@
         <protected>false</protected>
         <shortDescription>Integration User Profile</shortDescription>
         <value>00e36000001CMIeAAO</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Start_and_End_Time</fullName>
+        <categories>Class Offering</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Start and End Time</shortDescription>
+        <value>End Time should be greater than Start time</value>
     </labels>
     <labels>
         <fullName>Karen</fullName>
@@ -502,15 +526,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Potential Existing Lead Records</shortDescription>
-        <value>There might be a duplicate {0}. Please click &lt;a href={1}/apex/LeadDuplicate_VF?id={2}&gt;here&lt;/a&gt; to review the duplicates.</value>
-    </labels>
-    <labels>
-        <fullName>Potential_Existing_Records</fullName>
-        <categories>Lead</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Potential Existing Records</shortDescription>
-        <value>There might be a duplicate {0}. Please click &lt;a href={1}/apex/LeadDuplicate_VF?id={2}&gt;here&lt;/a&gt; to review the duplicates.</value>
+        <value>There might be a duplicate {0}. Please click &lt;a href={1}/apex/LeadDuplicate_VF?id={2}&gt;here&lt;/a&gt; To review the duplicates.</value>
     </labels>
     <labels>
         <fullName>Prospective_Volunteer_Profile</fullName>
@@ -654,12 +670,68 @@ Click Generate Document and once the document is generated you can click the lin
         <value>CF00N3600000OtMjl</value>
     </labels>
     <labels>
+        <fullName>Volunteer_Role_Already_Filled</fullName>
+        <categories>Volunteer Role</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Role Already Filled</shortDescription>
+        <value>This volunteer opportunity has already been filled. Please register for another available volunteer opportunity.</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Role_Already_Registered</fullName>
+        <categories>Volunteer Role</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Role Already Registered</shortDescription>
+        <value>You already registered for this event</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Role_Already_Registered_Time</fullName>
+        <categories>Volunteer Role</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Role Already Registered Time</shortDescription>
+        <value>You already registered for another event at this same time.</value>
+    </labels>
+    <labels>
         <fullName>Volunteer_Role_Error_Update</fullName>
         <categories>Volunteer Role</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Volunteer Role Error Update</shortDescription>
         <value>Insufficient privilege to update this record. Please contact system administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Role_Opportunity_Declined</fullName>
+        <categories>Volunteer Role</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Role Opportunity Declined</shortDescription>
+        <value>You have been previously declined for this opportunity. Please contact the chapter office with any questions.</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Role_Opportunity_Requested</fullName>
+        <categories>Volunteer Role</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Role Opportunity Requested</shortDescription>
+        <value>Thank you for requesting to volunteer for this opportunity. A notification has been sent to chapter staff to review your request and staff will respond with further details, as applicable.</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Role_Opportunity_Training_Not_Completed</fullName>
+        <categories>Volunteer Role</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Role Opportunity Training Not Completed</shortDescription>
+        <value>Thank you for your interest in this opportunity. This opportunity requires specialized training that you have not completed, contact chapter staff for more information about expanding your volunteer opportunities.</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Role_Volunteer_Count_Less</fullName>
+        <categories>Volunteer Role</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Role Volunteer Count Less</shortDescription>
+        <value>Volunteer need count should not be less than the volunteer registered count.</value>
     </labels>
     <labels>
         <fullName>WG_FinalStep_FileClosed</fullName>
