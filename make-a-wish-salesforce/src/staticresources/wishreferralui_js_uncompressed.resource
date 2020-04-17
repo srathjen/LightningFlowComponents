@@ -20,6 +20,9 @@
 //                04/08/2020 - Manoj - SIW-555
 //                Added custom email validation rule               
 //
+//                04/17/2020 - Manoj - SIW-575
+//                Removed Primary language validation from here as applied in VF Page itself
+//
 // format phone/date fields
 // target desktop
 // if (window.matchMedia("(min-width: 47.5rem)").matches) {
@@ -1608,13 +1611,7 @@ function formValidationRules() {
         messages: {
             required: "Oops! This question is required"
         }
-    });
-    $("select.language").rules("add", {
-        required: true,
-        messages: {
-            required: "Oops! Please select a language"
-        }
-    });
+    });    
     $("select.siblings-chk").rules("add", {
         required: true,
         messages: {
