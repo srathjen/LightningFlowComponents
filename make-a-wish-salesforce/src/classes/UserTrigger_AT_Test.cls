@@ -19,7 +19,7 @@ public class UserTrigger_AT_Test {
 				SELECT Id,UserRoleId,UserName,ProfileId,Email,FirstName,LastName,isActive
 				From User
 				WHERE FirstName =:'Test FirstName'
-				Limit 1
+				LIMIT 1
 		];
 		system.RunAs(dbUser) {
 			Test.StartTest();
