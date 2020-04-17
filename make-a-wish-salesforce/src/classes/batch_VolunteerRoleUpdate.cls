@@ -6,11 +6,13 @@
 global class batch_VolunteerRoleUpdate implements Database.Batchable<SObject> {
 
 	private final static String VOLUNTEER_ROLE_STATUS_ACTIVE = Constant_AC.VOLUNTEER_ROLE_STATUS_ACTIVE;
+	private final static String VOLUNTEER_ROLE_ATTENDANCE_COMPLETED = Constant_AC.VOLUNTEER_ROLE_ATTENDANCE_COMPLETED;
+	private final static String VOLUNTEER_ROLE_STATUS_PENDING_TRAINING = Constant_AC.VOLUNTEER_ROLE_STATUS_PENDING_TRAINING;
 
 	global Database.QueryLocator start(Database.BatchableContext BC) {
 
 		return Database.getQueryLocator([
-				SELECT Id,Status__c,Volunteer_Name__c,Role_Name__c,Chapter_Role__c
+				SELECT Id, Status__c, Volunteer_Name__c, Role_Name__c, Chapter_Role__c
 				FROM Volunteer_Roles__c
 				WHERE Migrated_Record__c = TRUE
 		]);
@@ -22,54 +24,48 @@ global class batch_VolunteerRoleUpdate implements Database.Batchable<SObject> {
 		Map<Id, Volunteer_Roles__c> updateVolunteerRole = new Map<Id, Volunteer_Roles__c>();
 		Map<Id, Boolean> volunteerTrainingMap = new Map<Id, Boolean>();
 		Set<Id> chapterRoleIds = new Set<Id>();
-
-		for (Volunteer_Roles__c currRole : scope) {
-			volunteerContactIds.add(currRole.Volunteer_Name__c);
-			chapterRoleIds.add(currRole.Chapter_Role__c);
-
-			if (volunteerRolesMap.containsKey(currRole.Volunteer_Name__c)) {
-				volunteerRolesMap.get(currRole.Volunteer_Name__c).add(currRole);
-			} else {
-				volunteerRolesMap.put(currRole.Volunteer_Name__c, new List<Volunteer_Roles__c>{
-						currRole
+		for (Volunteer_Roles__c volunteerRole : scope) {
+			volunteerContactIds.add(volunteerRole.Volunteer_Name__c);
+			chapterRoleIds.add(volunteerRole.Chapter_Role__c);
+			if (!volunteerRolesMap.containsKey(volunteerRole.Volunteer_Name__c)) {
+				volunteerRolesMap.put(volunteerRole.Volunteer_Name__c, new List<Volunteer_Roles__c>{
+						volunteerRole
 				});
 			}
+			volunteerRolesMap.get(volunteerRole.Volunteer_Name__c).add(volunteerRole);
 		}
-
-		for (Volunteer_Orientation_Training__c currTraining : [
+		for (Volunteer_Orientation_Training__c volunteerOT : [
 				SELECT Id,Class_Offering__c,Class_Offering__r.Chapter_Role_O_T__r.Role_Name__c,
 						Volunteer_Attendance__c,Volunteer__c
 				FROM Volunteer_Orientation_Training__c
 				WHERE Volunteer__c IN :volunteerContactIds
 		]) {
-			volunteerTrainingMap.put(currTraining.Volunteer__c, true);
-			if (volunteerRolesMap.containsKey(currTraining.Volunteer__c)) {
-				for (Volunteer_Roles__c currRec : volunteerRolesMap.get(currTraining.Volunteer__c)) {
+			volunteerTrainingMap.put(volunteerOT.Volunteer__c, true);
+			if (volunteerRolesMap.containsKey(volunteerOT.Volunteer__c)) {
+				for (Volunteer_Roles__c volunteerRole : volunteerRolesMap.get(volunteerOT.Volunteer__c)) {
 					Volunteer_Roles__c updateRec = new Volunteer_Roles__c();
-					updateRec.Id = currRec.Id;
-					if (currTraining.Class_Offering__r.Chapter_Role_O_T__r.Role_Name__c == currRec.Role_Name__c) {
-						if (currTraining.Volunteer_Attendance__c == 'Completed') {
+					updateRec.Id = volunteerRole.Id;
+					if (volunteerOT.Class_Offering__r.Chapter_Role_O_T__r.Role_Name__c == volunteerRole.Role_Name__c) {
+						if (VOLUNTEER_ROLE_ATTENDANCE_COMPLETED.equals(volunteerOT.Volunteer_Attendance__c)) {
 							updateRec.Status__c = VOLUNTEER_ROLE_STATUS_ACTIVE;
 							updateVolunteerRole.put(updateRec.Id, updateRec);
 						} else {
-							if (updateVolunteerRole.containsKey(updateRec.Id)) {
-								if (updateVolunteerRole.get(updateRec.Id).Status__c != VOLUNTEER_ROLE_STATUS_ACTIVE) {
-									updateRec.Status__c = 'Pending Training';
-									updateVolunteerRole.put(updateRec.Id, updateRec);
-								}
+							if (updateVolunteerRole.containsKey(updateRec.Id)
+									&& updateVolunteerRole.get(updateRec.Id).Status__c != VOLUNTEER_ROLE_STATUS_ACTIVE) {
+								updateRec.Status__c = VOLUNTEER_ROLE_STATUS_PENDING_TRAINING;
+								updateVolunteerRole.put(updateRec.Id, updateRec);
 							} else {
-								updateRec.Status__c = 'Pending Training';
+								updateRec.Status__c = VOLUNTEER_ROLE_STATUS_PENDING_TRAINING;
 								updateVolunteerRole.put(updateRec.Id, updateRec);
 							}
 						}
 					} else {
-						if (updateVolunteerRole.containsKey(updateRec.Id)) {
-							if (updateVolunteerRole.get(updateRec.Id).Status__c != VOLUNTEER_ROLE_STATUS_ACTIVE) {
-								updateRec.Status__c = 'Pending Training';
-								updateVolunteerRole.put(updateRec.Id, updateRec);
-							}
+						if (updateVolunteerRole.containsKey(updateRec.Id)
+								&& updateVolunteerRole.get(updateRec.Id).Status__c != VOLUNTEER_ROLE_STATUS_ACTIVE) {
+							updateRec.Status__c = VOLUNTEER_ROLE_STATUS_PENDING_TRAINING;
+							updateVolunteerRole.put(updateRec.Id, updateRec);
 						} else {
-							updateRec.Status__c = 'Pending Training';
+							updateRec.Status__c = VOLUNTEER_ROLE_STATUS_PENDING_TRAINING;
 							updateVolunteerRole.put(updateRec.Id, updateRec);
 						}
 					}
@@ -91,7 +87,7 @@ global class batch_VolunteerRoleUpdate implements Database.Batchable<SObject> {
 				updateRec.Id = currRole.Id;
 				if (!(volunteerTrainingMap.containsKey(currRole.Volunteer_Name__c))
 						&& requiredTrainingCO.contains(currRole.Chapter_Role__c)) {
-					updateRec.Status__c = 'Pending Training';
+					updateRec.Status__c = VOLUNTEER_ROLE_STATUS_PENDING_TRAINING;
 				} else if (!((volunteerTrainingMap.containsKey(currRole.Volunteer_Name__c))
 						&& requiredTrainingCO.contains(currRole.Chapter_Role__c))) {
 					updateRec.Status__c = VOLUNTEER_ROLE_STATUS_ACTIVE;
@@ -99,10 +95,7 @@ global class batch_VolunteerRoleUpdate implements Database.Batchable<SObject> {
 				updateVolunteerRole.put(updateRec.Id, updateRec);
 			}
 		}
-
-		if (updateVolunteerRole.size() > 0) {
-			update updateVolunteerRole.values();
-		}
+		update updateVolunteerRole.values();
 	}
 
 	global void finish(Database.BatchableContext BC) {
