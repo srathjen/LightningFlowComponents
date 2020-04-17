@@ -1,7 +1,11 @@
-@isTest
+/**
+ * Test
+ */
+@IsTest
 public class batch_VolunteerRoleUpdate_Test {
 
-	static testmethod void testVolunteerRoleUpdate() {
+	@IsTest
+	static void testVolunteerRoleUpdate() {
 		Account chapterAccount = OrientationandTrainingUtil.CreateAlabamaAccount();
 		insert chapterAccount;
 		Role__c role = OrientationandTrainingUtil.createRole();
@@ -30,7 +34,8 @@ public class batch_VolunteerRoleUpdate_Test {
 		Test.StopTest();
 	}
 
-	static testmethod void testVolunteerRoleUpdate1() {
+	@IsTest
+	static void testVolunteerRoleUpdate1() {
 		Account chapterAccount = OrientationandTrainingUtil.CreateAlabamaAccount();
 		insert chapterAccount;
 		Role__c role = OrientationandTrainingUtil.createRole();
