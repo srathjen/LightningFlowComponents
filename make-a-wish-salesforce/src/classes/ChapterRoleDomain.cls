@@ -4,7 +4,7 @@
  * @createdDate	4/15/2020
  */
 public with sharing class ChapterRoleDomain extends trac_TriggerHandlerBase {
-
+	
 	List<Chapter_Role__c> newChapterRoleList = (List<Chapter_Role__c>) newRecordsList;
 	List<Chapter_Role__c> oldChapterRoleList = (List<Chapter_Role__c>) oldRecordsList;
 	Map<Id, Chapter_Role__c> newChapterRolesMap = (Map<Id, Chapter_Role__c>) newRecordsMap;
