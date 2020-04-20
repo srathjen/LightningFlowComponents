@@ -1,12 +1,10 @@
-@isTest
-Public class CreateNewWish_ACTest {
+@IsTest
+public class CreateNewWish_ACTest {
 
-    static testmethod void createParentWish() {
+    @IsTest
+    static void createParentWish() {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         insert chapterAccount;
-
-        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
 
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         insert wishChild;
@@ -17,21 +15,29 @@ Public class CreateNewWish_ACTest {
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         insert parentCase;
 
-        Contact volunterCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+        Contact volunterCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
         insert volunterCon;
 
         User volunterUser;
-        User currUser = [SELECT Id from User Where Id = :Userinfo.getUserId() LIMIT 1];
+        User currUser = [
+                SELECT Id
+                FROM User
+                WHERE Id = :UserInfo.getUserId()
+                LIMIT 1
+        ];
         System.runAs(currUser) {
-            volunterUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunterCon.id);
+            volunterUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunterCon.Id);
             insert volunterUser;
         }
 
-        CaseTeamRole roleRec = [SELECT Id FROM CaseTeamRole WHERE Name = 'Wish Granter'];       
-        CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id,volunterUser.id,roleRec.id);
+        CaseTeamRole roleRec = [
+                SELECT Id
+                FROM CaseTeamRole
+                WHERE Name = 'Wish Granter'
+        ];
+        CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(parentCase.Id, volunterUser.Id, roleRec.Id);
         insert caseTeamMeber;
 
-        //CreateNewWish_AC  newWish = new CreateNewWish_AC();
-        CreateNewWish_AC.CreateCase(parentCase.id);
+        CreateNewWish_AC.createCase(parentCase.Id);
     }
 }

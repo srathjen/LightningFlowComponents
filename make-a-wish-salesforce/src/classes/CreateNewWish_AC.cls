@@ -15,7 +15,7 @@ global class CreateNewWish_AC {
         Case currCase = [
             SELECT Id, Subject, Description, Priority, AccountId, RecordTypeId,
                 ChapterName__r.Volunteer_Manager__c, ContactId, ContactMobile,
-                ContactPhone, Type, ChapterName__c
+                ContactPhone, Type, ChapterName__c, Case.OwnerId
             FROM Case
             WHERE Id = :caseId
         ];
