@@ -2,7 +2,7 @@
  * @author Steve Doucette, Traction on Demand 
  * @date 3/16/2020
  */
-public with sharing class CaseFileService {
+public class CaseFileService {
 
     private static final String HTML_DOUBLE_BREAK_LINE = '<br><br>';
 

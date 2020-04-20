@@ -3,7 +3,7 @@
  * @author	Gustavo Mayer, Traction on Demand
  * @createdDate	3-18-2020
  */
-public with sharing class ConflictOfInterestDomain extends trac_TriggerHandlerBase {
+public class ConflictOfInterestDomain extends trac_TriggerHandlerBase {
 
 	List<Conflict_Of_Interest__c> newCOIList = (List<Conflict_Of_Interest__c>) newRecordsList;
 	List<Conflict_Of_Interest__c> oldCOIList = (List<Conflict_Of_Interest__c>) oldRecordsList;

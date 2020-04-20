@@ -3,8 +3,8 @@
  * @author Michelle Cominotto, Make-A-Wish
  * @createdDate 3/24/2020
  */
-public with sharing class ContactDomain extends trac_TriggerHandlerBase {
-    
+public class ContactDomain extends trac_TriggerHandlerBase {
+
     private List<Contact> newContactsList = (List<Contact>)newRecordsList;
     private List<Contact> oldContactsList = (List<Contact>)oldRecordsList;
     private Map<Id, Contact> newContactsMap = (Map<Id, Contact>)newRecordsMap;

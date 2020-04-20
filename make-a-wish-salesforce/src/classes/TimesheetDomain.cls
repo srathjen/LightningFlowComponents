@@ -3,7 +3,7 @@
 * @author Michelle Cominotto, Make-A-Wish
 * @createdDate 4/10/2020
 */
-public with sharing class TimesheetDomain extends trac_TriggerHandlerBase {
+public class TimesheetDomain extends trac_TriggerHandlerBase {
     private List<Time_sheet__c> newTimesheetsList = (List<Time_sheet__c>)newRecordsList;
     private List<Time_sheet__c> oldTimesheetsList = (List<Time_sheet__c>)oldRecordsList;
     private Map<Id, Time_sheet__c> newTimesheetsMap = (Map<Id, Time_sheet__c>)newRecordsMap;

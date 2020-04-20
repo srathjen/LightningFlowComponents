@@ -4,7 +4,7 @@
  * @author Chris Shinnimin, Traction on Demand
  * @date 2020-03-17
  */
-public with sharing class InKindDonationReimburseService {
+public class InKindDonationReimburseService {
 
     /*
      * @description     Function to validate chapter role before update.

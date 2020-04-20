@@ -2,7 +2,7 @@
  * @author Steve Doucette, Traction on Demand 
  * @date 3/16/2020
  */
-public with sharing class CaseFileDomain extends trac_TriggerHandlerBase {
+public class CaseFileDomain extends trac_TriggerHandlerBase {
     List<cg__CaseFile__c> newCaseFiles = (List<cg__CaseFile__c>) newRecordsList;
     List<cg__CaseFile__c> oldCaseFiles = (List<cg__CaseFile__c>) oldRecordsList;
     Map<Id, cg__CaseFile__c> newCaseFilesMap = (Map<Id, cg__CaseFile__c>) newRecordsMap;

@@ -4,7 +4,7 @@
  * @author Chris Shinnimin, Traction on Demand
  * @date 2020-04-03
  */
-public with sharing class UserService {
+public class UserService {
     /*
      * @description     Update Volunteer Contact Details based on the User record details.
      *
@@ -292,7 +292,7 @@ public with sharing class UserService {
      * @createdDate     unknown
      */
     @future
-    public static void updateContactEmail(Map<Id,Id> contactIdMap) {
+    public static void updateContactEmail(Map<Id, Id> contactIdMap) {
         if (contactIdMap == null || contactIdMap.isEmpty()) {
             return;
         }

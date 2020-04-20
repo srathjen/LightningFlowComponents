@@ -3,7 +3,7 @@
 * @author Michelle Cominotto, Make-A-Wish
 * @createdDate 4/08/2020
 */
-public with sharing class NonwishEventService {    
+public class NonwishEventService {
     /**
     * Checks if chapter already has event with same priority and displays error
     * @param nonwishEventsList
