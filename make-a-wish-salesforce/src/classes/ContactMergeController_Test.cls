@@ -13,9 +13,9 @@ public class ContactMergeController_Test {
 		insert new List<Account>{
 				hospitaltreatmentaccount, chapteraccount, householdaccount
 		};
-
+            
 		User prospect;
-		system.runAs(new User(id = userinfo.getuserId())) {
+		system.runAs(new User(Id = userinfo.getuserId())) {
 			prospect = OrientationandTrainingUtil.createProspectiveVolunteerUser(null);
 			insert prospect;
 		}
@@ -58,7 +58,6 @@ public class ContactMergeController_Test {
 		insert chapterroleot;
 
 		test.startTest();
-		//Case wish=OrientationandTrainingUtil.ParentCasetoAddCaseMember(conchild.Id);
 		Class_Offering__c classoff = OrientationandTrainingUtil.createClassOffering(chapterroleot.Id);
 		insert classoff;
 
@@ -73,9 +72,11 @@ public class ContactMergeController_Test {
 
 		Volunteer_Orientation_Training__c volorientationtraining = OrientationandTrainingUtil.createVolOrientation(ot.Id, classoff.Id, medicalprof.Id, 'Registered');
 		insert volorientationtraining;
-		Volunteer_Opportunity__c volopp = OrientationandTrainingUtil.NewnonWishVolunteerOpportunity(chapterAccount.Id, convolunteer.id);
+		
+        Volunteer_Opportunity__c volopp = OrientationandTrainingUtil.NewnonWishVolunteerOpportunity(chapterAccount.Id, convolunteer.id);
 		insert volopp;
-		Background_check__c backgdcheck = OrientationandTrainingUtil.createBackgroundCheck(convolunteer.Id);
+		
+        Background_check__c backgdcheck = OrientationandTrainingUtil.createBackgroundCheck(convolunteer.Id);
 		insert backgdcheck;
 
 		Awards_Recognition__c awdreg = OrientationandTrainingUtil.CreateAwardRecognition(chapteraccount.Id, convolunteer.Id);
@@ -111,7 +112,6 @@ public class ContactMergeController_Test {
 		cf.cg__Contact__c = convolunteer.id;
 		cf.cg__File_Name__c = 'Test File';
 		insert cf;
-		// testobj.search();
 		List<Contact> conlists = new List<Contact>();
 		conlists.add(confamily);
 		testobj.addFieldComparisonRows('Wish_Child_Id_Hidden__c', Contact.Wish_Child_Id_Hidden__c.getDescribe(), conlists);
@@ -121,7 +121,7 @@ public class ContactMergeController_Test {
 		testobj.searchResults.add(contactwrapper2);
 		testobj.mapHoldingSelectedRecords.put(contactwrapper1.con.Id, contactwrapper1);
 		testobj.mapHoldingSelectedRecords.put(contactwrapper2.con.Id, contactwrapper2);
-		testobj.selectedRecords.put(confamily.id, confamily);
+		testobj.selectedRecords.put(confamily.Id, confamily);
 		testobj.setPageSize();
 		testobj.nextStep();
 		testobj.first();
@@ -133,11 +133,6 @@ public class ContactMergeController_Test {
 		integer pageNo = testobj.pageNumber;
 		Integer totalPage = testobj.getTotalPages();
 		testobj.searchRecords();
-
-		Integer size = testobj.size;
-		Integer noOfRecords = testobj.noOfRecords;
-		List<SelectOption> paginationSizeOptions = testobj.paginationSizeOptions;
-
 		volopwrap.checkbox = true;
 		volrolwrap.checkbox = true;
 		volotwrap.checkbox = true;
@@ -152,15 +147,14 @@ public class ContactMergeController_Test {
 		inkindwrap2.checkbox = false;
 		awdwrap.checkbox = true;
 		coiwrap.checkbox = true;
-
 		testobj.volunteerOppList.add(volopwrap);
 		testobj.volunteerRoleList.add(volrolwrap);
 		testobj.volunteerOTList.add(volotwrap);
 		testobj.volunteerOTList.add(volotwrap2);
 		testobj.relationshipList.add(relwrap);
 		testobj.relationshipList.add(relwrap2);
-		testobj.Affiliations.add(affwrap);
-		testobj.Affiliations.add(affwrap2);
+		testobj.affiliationsList.add(affwrap);
+		testobj.affiliationsList.add(affwrap2);
 		testobj.backgroundcheckList.add(backgdwrap);
 		testobj.awardsRecognitionList.add(awdwrap);
 		testobj.inkindDonationList.add(inkindwrap);
@@ -168,15 +162,9 @@ public class ContactMergeController_Test {
 		testobj.conflictofInterestList.add(coiwrap);
 		testobj.fieldRows.add(fieldrow);
 		testobj.fieldRows.add(fieldrow2);
-		// testobj.Affiliations.add(affiliation);
-//		testobj.mergeContacts();
 		List<Contact> conlist = new List<Contact>();
 		conlist.add(convolunteer);
 		testobj.wrapSOSLResults(conlist);
-		// User contid=[Select id,ContactId,IsPortalEnabled from User where IsPortalEnabled=true and isactive=false limit 1];
-		// Set<Id> contsetid=new Set<Id>();
-		//   contsetid.add(contid.ContactId);
-		//  ContactMergeController_AC.updateUser(contsetid);
 		Test.setCurrentPage(Page.MergeContact_VF);
 		ApexPages.currentPage().getParameters().put('recordId', conchild.Id);
 		testobj.selectedRecords.put(confamily.Id, confamily);
@@ -187,21 +175,16 @@ public class ContactMergeController_Test {
 		testobj.mergeContacts();
 		Test.stopTest();
 
-		// testobj.selectDefaultRecord();
 		testobj.volunteerOppList.clear();
 		testobj.volunteerOTList.clear();
 		testobj.volunteerRoleList.clear();
 		testobj.relationshipList.clear();
-		testobj.Affiliations.clear();
+		testobj.affiliationsList.clear();
 		testobj.backgroundcheckList.clear();
 		testobj.awardsRecognitionList.clear();
 		testobj.inkindDonationList.clear();
 		testobj.conflictofInterestList.clear();
 		testobj.mergeContacts();
-		//
-
-		// Adding to cover a default constructor
-		ContactMergeController_AC testobj2 = new ContactMergeController_AC();
 	}
 
 	public static testmethod void contactSearchRecord() {
