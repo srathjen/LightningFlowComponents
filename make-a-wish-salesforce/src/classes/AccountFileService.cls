@@ -2,7 +2,7 @@
  * @author Steve Doucette, Traction on Demand 
  * @date 3/16/2020
  */
-public with sharing class AccountFileService {
+public class AccountFileService {
     /**
      * @param newAccountFiles
      */

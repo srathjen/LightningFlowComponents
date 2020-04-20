@@ -3,7 +3,7 @@
  * @author Michelle Cominotto, Make-A-Wish
  * @createdDate 3/18/2020
  */
-public with sharing class BackgroundCheckService {
+public class BackgroundCheckService {
 
 	private final static String AFFILIATION_STATUS_ACTIVE = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
 	private final static String AFFILIATION_STATUS_NOT_APPROVED = Constant_AC.ORG_AFFILIATION_STATUS_NOT_APPROVED;

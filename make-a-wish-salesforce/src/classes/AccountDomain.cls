@@ -3,7 +3,7 @@
 * @author Michelle Cominotto, Make-A-Wish
 * @createdDate 3-13-2020
 */
-public with sharing class AccountDomain extends trac_TriggerHandlerBase {
+public class AccountDomain extends trac_TriggerHandlerBase {
 
     private final static Id HOUSEHOLD_RECORD_TYPE_ID = Constant_AC.HOUSEHOLD_RT_ID;
     private final static Id CHAPTER_RECORD_TYPE_ID = Constant_AC.CHAPTER_RT_ID;

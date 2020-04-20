@@ -4,7 +4,7 @@
  * @author Chris Shinnimin, Traction on Demand
  * @date 2020-04-14
  */
-public with sharing class CaseValidations {
+public class CaseValidations {
     private static final Boolean USER_HAS_RESTRICTED_PERMISSIONS_ON_CASE = CaseService.userHasRestrictedPermissionOnCase();
     private static final UserSetting__c usc = UserSetting__c.getValues(UserInfo.getUserId());
 

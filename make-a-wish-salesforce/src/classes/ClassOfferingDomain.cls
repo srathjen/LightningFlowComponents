@@ -3,7 +3,7 @@
  * @author	Gustavo Mayer, Traction on Demand
  * @createdDate	4/15/2020
  */
-public with sharing class ClassOfferingDomain extends trac_TriggerHandlerBase {
+public class ClassOfferingDomain extends trac_TriggerHandlerBase {
 
 	List<Class_Offering__c> newClassOfferingList = (List<Class_Offering__c>) newRecordsList;
 	List<Class_Offering__c> oldClassOfferingList = (List<Class_Offering__c>) oldRecordsList;

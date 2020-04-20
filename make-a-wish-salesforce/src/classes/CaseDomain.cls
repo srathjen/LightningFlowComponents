@@ -4,7 +4,7 @@
  * @author          Chris Shinnimin, Traction on Demand
  * @date            2020-03-12
  */
-public with sharing class CaseDomain extends trac_TriggerHandlerBase {
+public class CaseDomain extends trac_TriggerHandlerBase {
     List<Case> newCasesList = (List<Case>) newRecordsList;
     List<Case> oldCasesList = (List<Case>) oldRecordsList;
     Map<Id, Case> newCasesMap = (Map<Id, Case>) newRecordsMap;

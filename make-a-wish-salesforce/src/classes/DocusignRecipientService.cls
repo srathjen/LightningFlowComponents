@@ -2,7 +2,7 @@
  * @author Steve Doucette, Traction on Demand 
  * @date 3/26/2020
  */
-public with sharing class DocusignRecipientService {
+public class DocusignRecipientService {
     private static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_LIABILITY = Constant_AC.DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_LIABILITY;
     private static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_WISH_FORM_AND_LIABILITY = Constant_AC.DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_WISH_FORM_AND_LIABILITY;
 

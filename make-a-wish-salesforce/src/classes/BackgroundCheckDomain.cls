@@ -3,7 +3,7 @@
  * @author Michelle Cominotto, Make-A-Wish
  * @createdDate 3/18/2020
  */
-public with sharing class BackgroundCheckDomain extends trac_TriggerHandlerBase {
+public class BackgroundCheckDomain extends trac_TriggerHandlerBase {
 
     private final static String BACKGROUND_CHECK_STATUS_APPROVED = Constant_AC.BACKGROUND_CHECK_STATUS_APPROVED;
     private final static String BACKGROUND_CHECK_STATUS_APPROVED_WITH_CONDITIONS = Constant_AC.BACKGROUND_CHECK_STATUS_APPROVED_WITH_CONDITIONS;

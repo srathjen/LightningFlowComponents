@@ -2,7 +2,7 @@
  * @author Steve Doucette, Traction on Demand 
  * @date 3/25/2020
  */
-public with sharing class DocusignStatusService {
+public class DocusignStatusService {
     private static final String ATTACHMENT_NAME = 'DV_Form.pdf';
     private static final String DOCUSIGN_ENVELOPE_STATUS_COMPLETED = Constant_AC.DOCUSIGN_ENVELOPE_STATUS_COMPLETED;
 

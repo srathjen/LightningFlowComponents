@@ -2,7 +2,7 @@
  * @author Steve Doucette, Traction on Demand 
  * @date 3/25/2020
  */
-public with sharing class DocusignRecipientDomain extends trac_TriggerHandlerBase {
+public class DocusignRecipientDomain extends trac_TriggerHandlerBase {
 
     List<dsfs__DocuSign_Recipient_Status__c> newList = (List<dsfs__DocuSign_Recipient_Status__c>) newRecordsList;
     List<dsfs__DocuSign_Recipient_Status__c> oldList = (List<dsfs__DocuSign_Recipient_Status__c>) oldRecordsList;
