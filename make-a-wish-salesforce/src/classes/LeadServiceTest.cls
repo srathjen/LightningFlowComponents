@@ -284,7 +284,7 @@ public class LeadServiceTest {
         ].ChapterName__c);
         System.assertEquals(Constant_AC.LEAD_STATUS_INQUIRY, [
                 SELECT Status
-                FROM lead
+                FROM Lead
                 WHERE Id = :newLead.Id
         ].Status);
 
