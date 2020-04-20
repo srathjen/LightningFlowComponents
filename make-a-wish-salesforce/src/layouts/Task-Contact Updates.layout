@@ -53,15 +53,7 @@
         <detailHeading>true</detailHeading>
         <editHeading>false</editHeading>
         <label>Contact Information</label>
-        <layoutColumns>
-            <layoutItems>
-                <height>200</height>
-                <page>ContactInfo_VF</page>
-                <showLabel>false</showLabel>
-                <showScrollbars>true</showScrollbars>
-                <width>100%</width>
-            </layoutItems>
-        </layoutColumns>
+        <layoutColumns/>
         <style>OneColumn</style>
     </layoutSections>
     <layoutSections>
@@ -190,7 +182,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00hQ0000000TFiJ</masterLabel>
+        <masterLabel>00h36000004niZP</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

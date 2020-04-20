@@ -3,7 +3,7 @@
  * @author	Gustavo Mayer, Traction on Demand
  * @createdDate	4/08/2019
  */
-public with sharing class RelationshipsDomain extends trac_TriggerHandlerBase {
+public class RelationshipsDomain extends trac_TriggerHandlerBase {
 
 	List<npe4__Relationship__c> newRelationshipsList = (List<npe4__Relationship__c>) newRecordsList;
 	List<npe4__Relationship__c> oldRelationshipsList = (List<npe4__Relationship__c>) oldRecordsList;

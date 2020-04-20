@@ -2,7 +2,7 @@
  * @author Steve Doucette, Traction on Demand 
  * @date 3/16/2020
  */
-public with sharing class AccountFileDomain extends trac_TriggerHandlerBase {
+public class AccountFileDomain extends trac_TriggerHandlerBase {
     List<cg__AccountFile__c> newAccountFiles = (List<cg__AccountFile__c>) newRecordsList;
     List<cg__AccountFile__c> oldAccountFiles = (List<cg__AccountFile__c>) oldRecordsList;
     Map<Id, cg__AccountFile__c> newAccountFilesMap = (Map<Id, cg__AccountFile__c>) newRecordsMap;

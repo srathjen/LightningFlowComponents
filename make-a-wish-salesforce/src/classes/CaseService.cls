@@ -27,8 +27,9 @@ public class CaseService {
         Utils.mapOfSObjectLabelsByFields(Schema.SObjectType.Case);
     private static final Map<Schema.SObjectField, String> MAP_OF_LEAD_LABELS_BY_FIELDS =
         Utils.mapOfSObjectLabelsByFields(Schema.SObjectType.Lead);
-    private static final Set<Id> CASE_MEMBER_CHECK_IDS = new Set<Id>
-    {Constant_AC.WISH_RT_ID, Constant_AC.WISH_ASSIST_RT_ID, Constant_AC.DIAGNOSIS_RT_ID};
+    private static final Set<Id> CASE_MEMBER_CHECK_IDS = new Set<Id>{
+        Constant_AC.WISH_RT_ID, Constant_AC.WISH_ASSIST_RT_ID, Constant_AC.DIAGNOSIS_RT_ID
+    };
 
     /**
     * Check if the User or the User's profile has permissions on Case
@@ -74,7 +75,6 @@ public class CaseService {
             }
             caseMap.put(caseRecord.Id, caseRecord);
         }
-        System.debug('caseMapz ' + caseMap);
         update caseMap.values();
         return caseMap;
     }
@@ -181,7 +181,6 @@ public class CaseService {
      * @param LeadList
      */
     public static void createEligibilityReview(List<Lead> LeadList) {
-        System.debug('Debugz createEligibilityReview' + LeadList);
         List<Case> newCaseList = new List<Case>();
         Set<Id> accountIdSet = new Set<Id>();
         Map<Id, String> emailMap = new Map<Id, String>();
@@ -238,7 +237,6 @@ public class CaseService {
                 newCaseList.add(newCase);
             }
 
-            System.debug('Debugz createEligibilityReview' + newCaseList);
             if (!newCaseList.isEmpty()) {
                 insert newCaseList;
             }
@@ -680,9 +678,7 @@ public class CaseService {
     * @createdDate		unknown
     */
     public static void caseTeamInTakeManager(List<Case> cases) {
-        Map<Id, String> teamRoleNameMap = new Map<Id, String>();
         Map<String, Id> teamRoleIdMap = new Map<String, Id>();
-        Set<Id> chapterSet = new Set<Id>();
         Map<Id, Set<Id>> checkMemMap = new Map<Id, Set<Id>>();
         Map<Id, Case> parentCaseIntakeOwnerMap = new Map<Id, Case>();
 
@@ -696,16 +692,24 @@ public class CaseService {
             }
         }
 
-        try {
-            for (Case CaseInfo : parentCaseIntakeOwnerMap.values()) {
-                chapterSet.add(CaseInfo.ChapterName__c);
-            }
+        Set<Id> chapterIds = new Set<Id>();
+        for (Case caseIntakeOwner : parentCaseIntakeOwnerMap.values()) {
+            chapterIds.add(caseIntakeOwner.ChapterName__c);
+        }
+        Map<Id, Id> chapterIntakeManagerMap = new Map<Id, Id>();
+        for (Account chapterAccount : [
+            SELECT Id, Intake_Manager__c
+            FROM Account
+            WHERE Id IN :chapterIds
+        ]) {
+            chapterIntakeManagerMap.put(chapterAccount.Id, chapterAccount.Intake_Manager__c);
+        }
 
+        try {
             for (CaseTeamRole CaseTeamRoleInfo : [
                 SELECT Id, Name
                 FROM CaseTeamRole
             ]) {
-                teamRoleNameMap.put(CaseTeamRoleInfo.Id, CaseTeamRoleInfo.Name);
                 teamRoleIdMap.put(CaseTeamRoleInfo.Name, CaseTeamRoleInfo.Id);
             }
 
@@ -725,23 +729,21 @@ public class CaseService {
 
             if (parentCaseIntakeOwnerMap.size() > 0) {
                 List<CaseTeamMember> memberList = new List<CaseTeamMember>();
-
                 for (Case Caseteam : parentCaseIntakeOwnerMap.values()) {
                     if (checkMemMap.containsKey(Caseteam.Id) && !checkMemMap.get(Caseteam.Id).contains(Caseteam.OwnerId)) {
                         CaseTeamMember newCaseTeamMember = new CaseTeamMember();
                         newCaseTeamMember.ParentId = Caseteam.Id;
-                        newCaseTeamMember.MemberId = Caseteam.OwnerId;
+                        newCaseTeamMember.MemberId = chapterIntakeManagerMap.get(Caseteam.ChapterName__c);
                         newCaseTeamMember.TeamRoleId = teamRoleIdMap.get(Constant_AC.CASE_TEAM_ROLE_INTAKE_MANAGER);
                         memberList.add(newCaseTeamMember);
                     } else if (!checkMemMap.containsKey(Caseteam.Id)) {
                         CaseTeamMember newCaseTeamMember = new CaseTeamMember();
                         newCaseTeamMember.ParentId = Caseteam.Id;
-                        newCaseTeamMember.MemberId = Caseteam.OwnerId;
+                        newCaseTeamMember.MemberId = chapterIntakeManagerMap.get(Caseteam.ChapterName__c);
                         newCaseTeamMember.TeamRoleId = teamRoleIdMap.get(Constant_AC.CASE_TEAM_ROLE_INTAKE_MANAGER);
                         memberList.add(newCaseTeamMember);
                     }
                 }
-
                 if (memberList.size() > 0) {
                     insert memberList;
                 }
@@ -985,7 +987,7 @@ public class CaseService {
     */
     public static void updateLeadStatus(Set<String> updatedApprovedLeadInfoSet, Set<String> updatedDnqLeadInfoSet, List<Case> newCaseList) {
         if ((updatedApprovedLeadInfoSet == null || updatedApprovedLeadInfoSet.isEmpty())
-            &&(updatedDnqLeadInfoSet == null || updatedDnqLeadInfoSet.isEmpty())){
+            && (updatedDnqLeadInfoSet == null || updatedDnqLeadInfoSet.isEmpty())) {
 
             return;
         }
@@ -1082,7 +1084,7 @@ public class CaseService {
      * @createdDate     unknown
     */
     //public static void updateVolunteerOpp(Set<Id> volunteerOppCaseIdSet, Boolean bool) {
-    public static void updateVolunteerOpp(Map<Id,Boolean> volunteerOppCaseIdMap) {
+    public static void updateVolunteerOpp(Map<Id, Boolean> volunteerOppCaseIdMap) {
         if (volunteerOppCaseIdMap == null || volunteerOppCaseIdMap.isEmpty()) {
             return;
         }
@@ -1097,16 +1099,9 @@ public class CaseService {
         ]) {
             Volunteer_Opportunity__c newVolOpp = new Volunteer_Opportunity__c();
             newVolOpp.Id = currRec.Id;
-
-            if (volunteerOppCaseIdMap.containsKey(currRec.Id)) {
-                newVolOpp.In_Progress__c = true;
-            } else {
-                newVolOpp.In_Progress__c = false;
-            }
-
+            newVolOpp.In_Progress__c = volunteerOppCaseIdMap.containsKey(currRec.Id) ? true : false;
             updateVolOppList.add(newVolOpp);
         }
-
         if (updateVolOppList.size() > 0) {
             update updateVolOppList;
         }
@@ -1223,10 +1218,7 @@ public class CaseService {
         if (updateVolunteerManagerCaseTeamMap == null || updateVolunteerManagerCaseTeamMap.isEmpty()) {
             return;
         }
-
         RecursiveTriggerHandler.blockCaseLockRecursive = false;
-
-        Map<Id, String> teamRoleNameMap = new Map<Id, String>();
         Map<String, Id> teamRoleIdMap = new Map<String, Id>();
         Map<Id, Id> ownerManagerMap = new Map<Id, Id>();
         Set<Id> caseOwnerIdSet = new Set<Id>();
@@ -1247,7 +1239,6 @@ public class CaseService {
             SELECT Id, Name
             FROM CaseTeamRole
         ]) {
-            teamRoleNameMap.put(caseTeamRoleInfo.Id, caseTeamRoleInfo.Name);
             teamRoleIdMap.put(caseTeamRoleInfo.Name, caseTeamRoleInfo.Id);
         }
 
@@ -1345,11 +1336,9 @@ public class CaseService {
                                 inActiveAndActiveVMUpsertList.add(CaseTeamMem);
                             }
                         }
-
                         CaseTeamMember newCaseTeamMember = new CaseTeamMember();
                         newCaseTeamMember.ParentId = updateTeamMember.Id;
                         newCaseTeamMember.MemberId = updateTeamMember.OwnerId;
-
                         if (volunteerManagerIdSet.contains(updateTeamMember.Id)) {
                             if (teamRoleIdMap.containsKey(Constant_AC.CASE_TEAM_ROLE_VOLUNTEER_MANAGER)) {
                                 newCaseTeamMember.TeamRoleId = teamRoleIdMap.get(Constant_AC.CASE_TEAM_ROLE_VOLUNTEER_MANAGER);
@@ -1413,7 +1402,7 @@ public class CaseService {
      * @author          MST Solutions
      * @createdDate     unknown
     */
-    public static void changeAccessPermission(Map<Id,Id> caseContactMap) {
+    public static void changeAccessPermission(Map<Id, Id> caseContactMap) {
         if (caseContactMap == null || caseContactMap.isEmpty()) {
             return;
         }

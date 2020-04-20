@@ -4,7 +4,7 @@
 * @createdDate 4/10/2020
 */
 
-public with sharing class TimesheetService {
+public class TimesheetService {
 
     /**
     * Splits time into hours and minutes

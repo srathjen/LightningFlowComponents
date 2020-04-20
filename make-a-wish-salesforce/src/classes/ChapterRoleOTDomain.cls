@@ -3,7 +3,7 @@
  * @author	Gustavo Mayer, Traction on Demand
  * @createdDate	4/15/2020
  */
-public with sharing class ChapterRoleOTDomain extends trac_TriggerHandlerBase {
+public class ChapterRoleOTDomain extends trac_TriggerHandlerBase {
 
 	List<Chapter_Role_O_T__c> newChapterRoleOTList = (List<Chapter_Role_O_T__c>) newRecordsList;
 	List<Chapter_Role_O_T__c> oldChapterRoleOTList = (List<Chapter_Role_O_T__c>) oldRecordsList;

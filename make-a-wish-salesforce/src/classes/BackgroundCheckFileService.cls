@@ -2,7 +2,7 @@
  * @author Steve Doucette, Traction on Demand 
  * @date 3/16/2020
  */
-public with sharing class BackgroundCheckFileService {
+public class BackgroundCheckFileService {
 
     /**
      * @param newBackgroundCheckFiles

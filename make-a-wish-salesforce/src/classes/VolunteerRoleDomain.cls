@@ -3,7 +3,7 @@
  * @author	Gustavo Mayer, Traction on Demand
  * @createdDate	4/14/2020
  */
-public with sharing class VolunteerRoleDomain extends trac_TriggerHandlerBase {
+public class VolunteerRoleDomain extends trac_TriggerHandlerBase {
 
 	List<Volunteer_Roles__c> newVolunteerRoleList = (List<Volunteer_Roles__c>) newRecordsList;
 	List<Volunteer_Roles__c> oldVolunteerRoleList = (List<Volunteer_Roles__c>) oldRecordsList;

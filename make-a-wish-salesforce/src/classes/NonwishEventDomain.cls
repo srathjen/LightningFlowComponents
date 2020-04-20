@@ -4,7 +4,7 @@
 * @createdDate 4/08/2020
 */
 
-public with sharing class NonwishEventDomain extends trac_TriggerHandlerBase {
+public class NonwishEventDomain extends trac_TriggerHandlerBase {
     private List<Non_Wish_Events__c> newNonwishEventsList = (List<Non_Wish_Events__c>)newRecordsList;
     private List<Non_Wish_Events__c> oldNonwishEventsList = (List<Non_Wish_Events__c>)oldRecordsList;
     private Map<Id, Non_Wish_Events__c> newNonwishEventsMap = (Map<Id, Non_Wish_Events__c>)newRecordsMap;

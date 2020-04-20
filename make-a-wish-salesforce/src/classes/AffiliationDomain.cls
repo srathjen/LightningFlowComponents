@@ -3,7 +3,7 @@
  * @author	Gustavo Mayer, Traction on Demand
  * @createdDate	3-19-2020
  */
-public with sharing class AffiliationDomain extends trac_TriggerHandlerBase {
+public class AffiliationDomain extends trac_TriggerHandlerBase {
 
     List<npe5__Affiliation__c> newList = (List<npe5__Affiliation__c>) newRecordsList;
     List<npe5__Affiliation__c> oldList = (List<npe5__Affiliation__c>) oldRecordsList;
