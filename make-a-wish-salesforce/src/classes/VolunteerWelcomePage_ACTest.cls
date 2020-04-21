@@ -712,23 +712,21 @@ public class VolunteerWelcomePage_ACTest {
 
 	@IsTest
     static void verifyCompleteTraining1() {
+        trac_TriggerHandlerBase.blockTrigger = true;
         User currUser;
         System.runAs(new User(Id = UserInfo.getUserId())) {
             currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(null);
             insert currUser;
         }
         // Need parent record fields
-        currUser = [
-                SELECT Id, ContactId, Contact.AccountId
-                FROM User
-                WHERE Id = :currUser.Id
-        ];
+        currUser = Utils.currentUser;
         insert new Bypass_Triggers__c(SetupOwnerId = currUser.Id);
         Conflict_Of_Interest__c coiRecord = OrientationandTrainingUtil.createCOIwithCurrent(currUser.ContactId, true);
         coiRecord.Volunteer_Contact__c = currUser.ContactId;
         coiRecord.Expiration_Date__c = System.today() - 7;
         coiRecord.Current__c = true;
         insert coiRecord;
+
         System.runAs(currUser) {
             Account acc = OrientationandTrainingUtil.createVolunteerAccount();
             insert acc;
@@ -760,6 +758,7 @@ public class VolunteerWelcomePage_ACTest {
 
             Volunteer_Orientation_Training__c createVolOrientation = OrientationandTrainingUtil.createVolOrientation(currOrientationTraining.Id, currOrientationOffering.Id, currUser.ContactId, 'Completed');
             insert createVolOrientation;
+            trac_TriggerHandlerBase.blockTrigger = false;
 
             Test.startTest();
             List<npe5__Affiliation__c> records = [
