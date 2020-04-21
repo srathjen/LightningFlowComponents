@@ -23,7 +23,6 @@ public class CreateNewWish_ACTest {
                 SELECT Id
                 FROM User
                 WHERE Id = :UserInfo.getUserId()
-                LIMIT 1
         ];
         System.runAs(currUser) {
             volunterUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunterCon.Id);
