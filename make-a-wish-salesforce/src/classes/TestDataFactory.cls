@@ -457,6 +457,15 @@ public class TestDataFactory {
         }
         return timesheets;
     }
+    
+    public static List<Awards_Recognition__c> createAwardsRecognitions(Integer num) {
+        List<Awards_Recognition__c> awards = new List<Awards_Recognition__c>();
+        for(Integer i = 0; i < num; i++) {
+            Awards_Recognition__c award = new Awards_Recognition__c();
+            awards.add(award);
+        }
+        return awards;
+    }
 
 	public static Lead createQualifiedLead(Id accountId, Id icdCodeId){
 		Lead lead = new Lead();
