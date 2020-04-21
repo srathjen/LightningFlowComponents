@@ -26,7 +26,7 @@ public class CaseTriggerHandler_Test {
         insert parentCase;
         Case anticipationCase = parentCase.clone();
         anticipationCase.RecordTypeId = wishRecordTypeId;
-        anticipationCase.parentId = parentCase.Id;
+        anticipationCase.ParentId = parentCase.Id;
         //anticipationCase.Absent_Parent_Form__c = true;
         insert anticipationCase;
 
@@ -70,7 +70,7 @@ public class CaseTriggerHandler_Test {
         insert parentCase;
         Case anticipationCase = parentCase.clone();
         anticipationCase.RecordTypeId = wishRecordTypeId;
-        anticipationCase.parentId = parentCase.Id;
+        anticipationCase.ParentId = parentCase.Id;
         //anticipationCase.Child_s_Medical_Summary_Form__c = true;
         //anticipationCase.Date_Wish_Child_Form__c = system.today();
         //anticipationCase.Date_Wish_Family_Form__c = system.today();
@@ -119,7 +119,7 @@ public class CaseTriggerHandler_Test {
         insert parentCase;
         Case anticipationCase = parentCase.clone();
         anticipationCase.RecordTypeId = wishRecordTypeId;
-        anticipationCase.parentId = parentCase.Id;
+        anticipationCase.ParentId = parentCase.Id;
         anticipationCase.Communication_Profile__c = true;
         insert anticipationCase;
 
@@ -163,7 +163,7 @@ public class CaseTriggerHandler_Test {
         insert parentCase;
         Case anticipationCase = parentCase.clone();
         anticipationCase.RecordTypeId = wishRecordTypeId;
-        anticipationCase.parentId = parentCase.Id;
+        anticipationCase.ParentId = parentCase.Id;
         //anticipationCase.Entertainment_Sports_Wish_LOU__c = true;
         insert anticipationCase;
 
@@ -207,7 +207,7 @@ public class CaseTriggerHandler_Test {
         insert parentCase;
         Case anticipationCase = parentCase.clone();
         anticipationCase.RecordTypeId = wishRecordTypeId;
-        anticipationCase.parentId = parentCase.Id;
+        anticipationCase.ParentId = parentCase.Id;
         //anticipationCase.Guardianship_Document__c = true;
         insert anticipationCase;
 
@@ -251,7 +251,7 @@ public class CaseTriggerHandler_Test {
         insert parentCase;
         Case anticipationCase = parentCase.clone();
         anticipationCase.RecordTypeId = wishRecordTypeId;
-        anticipationCase.parentId = parentCase.Id;
+        anticipationCase.ParentId = parentCase.Id;
         //anticipationCase.Liability_Release_and_Authorization__c = true;
         insert anticipationCase;
 
@@ -295,7 +295,7 @@ public class CaseTriggerHandler_Test {
         insert parentCase;
         Case anticipationCase = parentCase.clone();
         anticipationCase.RecordTypeId = wishRecordTypeId;
-        anticipationCase.parentId = parentCase.Id;
+        anticipationCase.ParentId = parentCase.Id;
         anticipationCase.Passports__c = true;
         insert anticipationCase;
 
@@ -339,7 +339,7 @@ public class CaseTriggerHandler_Test {
         insert parentCase;
         Case anticipationCase = parentCase.clone();
         anticipationCase.RecordTypeId = wishRecordTypeId;
-        anticipationCase.parentId = parentCase.Id;
+        anticipationCase.ParentId = parentCase.Id;
         //anticipationCase.Single_Parent_Form__c = true;
         insert anticipationCase;
 
@@ -383,7 +383,7 @@ public class CaseTriggerHandler_Test {
         insert parentCase;
         Case anticipationCase = parentCase.clone();
         anticipationCase.RecordTypeId = wishRecordTypeId;
-        anticipationCase.parentId = parentCase.Id;
+        anticipationCase.ParentId = parentCase.Id;
         anticipationCase.Visas__c = true;
         insert anticipationCase;
 
@@ -427,7 +427,7 @@ public class CaseTriggerHandler_Test {
         insert parentCase;
         Case anticipationCase = parentCase.clone();
         anticipationCase.RecordTypeId = wishRecordTypeId;
-        anticipationCase.parentId = parentCase.Id;
+        anticipationCase.ParentId = parentCase.Id;
         //anticipationCase.Wish_Child_Form__c = true;
         insert anticipationCase;
 
@@ -471,7 +471,7 @@ public class CaseTriggerHandler_Test {
         insert parentCase;
         Case anticipationCase = parentCase.clone();
         anticipationCase.RecordTypeId = wishRecordTypeId;
-        anticipationCase.parentId = parentCase.Id;
+        anticipationCase.ParentId = parentCase.Id;
         //anticipationCase.Wish_Family_Form__c = true;
         insert anticipationCase;
 
@@ -515,7 +515,7 @@ public class CaseTriggerHandler_Test {
         insert parentCase;
         Case anticipationCase = parentCase.clone();
         anticipationCase.RecordTypeId = wishRecordTypeId;
-        anticipationCase.parentId = parentCase.Id;
+        anticipationCase.ParentId = parentCase.Id;
         //anticipationCase.Wish_Information_Form__c = true;
         insert anticipationCase;
 
@@ -1011,53 +1011,6 @@ public class CaseTriggerHandler_Test {
         update updateParentCase;
         System.assertEquals(System.today(), updateParentCase.Closed_Date__c, 'case close date should be today');
         System.assert(updateParentCase.Status == 'Closed', 'case should be Closed');
-        Test.stopTest();
-    }
-
-    //This method is used to check the chapter action track as null.
-    @IsTest
-    static void chapterActionTrackAsNull() {
-        Id planningRT = Constant_AC.PLANNING_ANTICIPATION_CHAPTER_ACTION_RT_ID;
-        Id wishGrantTaskRT = Constant_AC.GRANT_CHAPTER_ACTION_RT_ID;
-        Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-        insert chapterAccount;
-
-        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
-        insert wishChild;
-        Chapter_Action_Track__c newActionTrack = new Chapter_Action_Track__c();
-        newActionTrack.Task_Name__c = 'Sample Task';
-        newActionTrack.Due_Days__c = 10.0;
-        newActionTrack.Months__c = 1;
-        newActionTrack.Chapter_Name__c = chapterAccount.Id;
-        newActionTrack.Wish_type__c = 'Other';
-        newActionTrack.Description__c = 'sample';
-        newActionTrack.RecordTypeId = planningRT;
-        insert newActionTrack;
-        Chapter_Action_Track__c newActionTrack1 = new Chapter_Action_Track__c();
-        newActionTrack1.Task_Name__c = 'Sample Task';
-        newActionTrack1.Due_Days__c = 10.0;
-        newActionTrack1.Months__c = 1;
-        newActionTrack1.Chapter_Name__c = chapterAccount.Id;
-        newActionTrack1.Wish_type__c = 'Other';
-        newActionTrack1.Description__c = 'sample';
-        newActionTrack1.RecordTypeId = wishGrantTaskRT;
-        insert newActionTrack1;
-
-        Case parentCase = new Case(RecordTypeId = wishRecordTypeId, Subject = 'Parent Wish',
-                Status = 'New', Interview_date__c = System.today(), ContactId = wishChild.Id);
-        insert parentCase;
-        Case anticipationCase = parentCase.clone();
-        anticipationCase.RecordTypeId = wishRecordTypeId;
-        anticipationCase.parentId = parentCase.Id;
-        insert anticipationCase;
-        parentCase.ChapterName__c = chapterAccount.Id;
-        parentCase.Status = 'Wish Determined';
-        parentCase.Wish_Type__c = 'Oth';
-        parentCase.Sub_Status__c = 'Within Policy';
-        Test.startTest();
-        update parentCase;
-        System.assertEquals('Within Policy', parentCase.Sub_Status__c, 'case sub status should be within policy');
-        System.assert(parentCase.Status == 'Wish Determined', 'case status should be Wish determined');
         Test.stopTest();
     }
 

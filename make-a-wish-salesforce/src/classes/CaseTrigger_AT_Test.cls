@@ -367,7 +367,7 @@ The case status is updated to Ready to Assign.
     static void updateStatusasRTA() {
 
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-        chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
+        chapterAccount.Volunteer_Manager__c = UserInfo.getUserId();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
                 chapterAccount, chapterAmericaAccount
@@ -415,7 +415,7 @@ The case status is updated to Ready to Assign.
     @IsTest
     static void createAnticipationCase() {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-        chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
+        chapterAccount.Volunteer_Manager__c = UserInfo.getUserId();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
                 chapterAccount, chapterAmericaAccount
@@ -452,7 +452,7 @@ The case status is updated to Ready to Assign.
     @IsTest
     static void createAnticipationCaseOther() {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-        chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
+        chapterAccount.Volunteer_Manager__c = UserInfo.getUserId();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
                 chapterAccount, chapterAmericaAccount
@@ -485,7 +485,7 @@ The case status is updated to Ready to Assign.
     @IsTest
     static void createDeterminationCase() {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-        chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
+        chapterAccount.Volunteer_Manager__c = UserInfo.getUserId();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
                 chapterAccount, chapterAmericaAccount
@@ -542,7 +542,7 @@ This method is increase the code coverage  when the wish type is changed in pare
     @IsTest
     static void updateWishType() {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-        chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
+        chapterAccount.Volunteer_Manager__c = UserInfo.getUserId();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
                 chapterAccount, chapterAmericaAccount
@@ -570,48 +570,10 @@ This method is increase the code coverage  when the wish type is changed in pare
         System.assertEquals('Test', parentCase.Wish_Type__c, 'wish type should be Test');
         System.assert(newTask.Priority == '4', 'Task priority should 4');
     }
-
+    
     /* ************************************************************************
-    This method is increase the code coverage  when the case status is changed to Wish Determination.
+    This method is increase the code coverage  when the case status is changed to DNQ.
     ************************************************************************** */
-    @IsTest
-    static void updateStatusasWD() {
-        Id planningRT = Constant_AC.PLANNING_ANTICIPATION_CHAPTER_ACTION_RT_ID;
-        Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-        insert chapterAccount;
-
-        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
-        insert wishChild;
-
-        Chapter_Action_Track__c newActionTrack = new Chapter_Action_Track__c();
-        newActionTrack.Task_Name__c = 'Sample Task';
-        newActionTrack.Due_Days__c = 10.0;
-        newActionTrack.Chapter_Name__c = chapterAccount.Id;
-        newActionTrack.Wish_type__c = 'Disney World';
-        newActionTrack.Description__c = 'sample';
-        newActionTrack.Months__c = 1;
-        newActionTrack.RecordTypeId = planningRT;
-        insert newActionTrack;
-
-        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-        insert parentCase;
-        Case anticipationCase = parentCase.clone();
-        anticipationCase.RecordTypeId = wishRecordTypeId;
-        anticipationCase.ParentId = parentCase.Id;
-        insert anticipationCase;
-        parentCase.ChapterName__c = chapterAccount.Id;
-        parentCase.Status = 'Wish Determined';
-        parentCase.Wish_Type__c = 'Disney World';
-        parentCase.Sub_Status__c = 'Within Policy';
-        Test.startTest();
-        update parentCase;
-        Test.stopTest();
-        System.assertEquals('Wish Determined', parentCase.Status, 'Wish status should be wish determination');
-        System.assert(parentCase.Sub_Status__c == 'Within Policy', 'Wish sub status should be within Policy');
-    }
-    /* ************************************************************************
-This method is increase the code coverage  when the case status is changed to DNQ.
-************************************************************************** */
     @IsTest
     static void updateStatusasDNQ() {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
@@ -948,8 +910,9 @@ This method is increase the code coverage  when the wish Granted case is created
     ************************************************************************** */
     @IsTest
     static void createWishExpense() {
+        trac_TriggerHandlerBase.blockTrigger = true;
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-        chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
+        chapterAccount.Volunteer_Manager__c = UserInfo.getUserId();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
                 chapterAccount, chapterAmericaAccount
@@ -961,28 +924,28 @@ This method is increase the code coverage  when the wish Granted case is created
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         insert parentCase;
 
-        Chapter_Action_Track__c newTrack = OrientationandTrainingUtil.createChapterActionTrack();
-        newTrack.Chapter_Name__c = parentCase.ChapterName__c;
-        insert newTrack;
-
         Case anticipationCase = parentCase.clone();
         anticipationCase.RecordTypeId = wishRecordTypeId;
         anticipationCase.ParentId = parentCase.Id;
-        insert anticipationCase;
 
         Case wishImpactCase = parentCase.clone();
         wishImpactCase.ParentId = parentCase.Id;
         wishImpactCase.RecordTypeId = wishRecordTypeId;
-        //wishImpactCase.Survey_Email__c = 'chadrutest@gmc.com';
-        insert wishImpactCase;
+        insert new List<Case>{
+                anticipationCase, wishImpactCase
+        };
 
         Wish_Expense__c currExpense = new Wish_Expense__c();
         currExpense.Case__c = parentCase.Id;
-        //currExpense.Budget_Approval_Status__c = 'Submitted';
         currExpense.Projected_Approval_Status__c = 'Submitted';
         currExpense.Projected_Cash__c = 0;
         currExpense.Projected_In_Kind__c = 0;
         insert currExpense;
+
+        Chapter_Action_Track__c newTrack = OrientationandTrainingUtil.createChapterActionTrack();
+        newTrack.Chapter_Name__c = parentCase.ChapterName__c;
+        insert newTrack;
+        trac_TriggerHandlerBase.blockTrigger = false;
 
         Test.startTest();
         anticipationCase.Budget_Approval_Status__c = 'Approved';
@@ -1133,7 +1096,7 @@ This method is increase the code coverage  when the Aniticipation is created und
     @IsTest
     static void anticipationAsNull() {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-        chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
+        chapterAccount.Volunteer_Manager__c = UserInfo.getUserId();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
                 chapterAccount, chapterAmericaAccount
@@ -1270,7 +1233,7 @@ This method is increase the code coverage  when the status is updated to closed.
     @IsTest
     static void updateFormTracking() {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-        chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
+        chapterAccount.Volunteer_Manager__c = UserInfo.getUserId();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         insert new List<Account>{
                 chapterAccount, chapterAmericaAccount
