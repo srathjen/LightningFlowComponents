@@ -245,68 +245,6 @@ public class LeadServiceTest {
         System.assertEquals(true, result);
     }
 
-    @IsTest
-    public static void UpdateStatusDNQ() {
-        User currUser = Utils.currentUser;
-        User nationalStaff;
-        RecursiveTriggerHandler.isFirstTime = true;
-        System.runAs(currUser) {
-            nationalStaff = OrientationandTrainingUtil.createUserWithRole([
-                    SELECT Id
-                    FROM UserRole
-                    WHERE Name = :Constant_AC.ROLE_NATIONAL_STAFF
-            ].Id);
-            insert nationalStaff;
-        }
-
-        Account chapterAccount = OrientationandTrainingUtil.CreateAmericaAccount();
-        insert chapterAccount;
-
-        Contact medicalProfessionalCon = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
-        insert medicalProfessionalCon;
-
-        Contact wishFamily = OrientationandTrainingUtil.CreateWishFamily();
-        insert wishFamily;
-
-        chapterAccount.Intake_Manager__c = nationalStaff.Id;
-        update chapterAccount;
-
-        Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
-        newLead.ChapterName__c = chapterAccount.Id;
-        newLead.Status = Constant_AC.LEAD_STATUS_INQUIRY;
-        newLead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
-        insert newLead;
-
-        System.assertEquals(chapterAccount.Id, [
-                SELECT ChapterName__r.Name
-                FROM Lead
-                WHERE Id = :newLead.Id
-        ].ChapterName__c);
-        System.assertEquals(Constant_AC.LEAD_STATUS_INQUIRY, [
-                SELECT Status
-                FROM Lead
-                WHERE Id = :newLead.Id
-        ].Status);
-
-        RecursiveTriggerHandler.isFirstTime = true;
-        newLead.Qualifying_Diagnosis__c = 'Test';
-        newLead.Will_Child_s_Condition_Deteriorate__c = 'No';
-        newLead.I_m_Part_of_The_Treating_HealthCare_Team__c = 'No';
-        newLead.Is_in_a_Comatose_Vegetative_State__c = 'No';
-        newLead.I_am_Recognized_To_Practice_As_a__c = 'Nurse';
-        newLead.Any_medical_reason_for_moving_quickly__c = 'No';
-        newLead.Part_A_Received__c = System.today();
-        newLead.Sub_Status__c = 'Age';
-        newLead.Status = Constant_AC.LEAD_STATUS_DNQ;
-        update newLead;
-
-        System.assertEquals(Constant_AC.LEAD_STATUS_DNQ, [
-                SELECT Status
-                FROM Lead
-                WHERE Id = :newLead.Id
-        ].Status);
-    }
-
     private static Lead getTestLead() {
         return [
                 SELECT Id, ChapterName__c
