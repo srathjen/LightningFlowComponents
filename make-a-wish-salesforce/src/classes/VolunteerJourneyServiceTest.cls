@@ -146,11 +146,15 @@ public class VolunteerJourneyServiceTest {
 		Class_Offering__c classOfferingOrientation = classOfferingDataFactory.get(0);
 		classOfferingOrientation.Chapter_Role_O_T__c = chapterRoleOTOrientation.Id;
 		classOfferingOrientation.Date__c = System.today() + 10;
+		classOfferingOrientation.Start_Time__c = '10:00 AM';
+		classOfferingOrientation.End_Time__c = '1:00 PM';
 		classOfferingOrientation.RecordTypeId = CLASS_OFFERING_RECORD_TYPE_ID;
 		classOfferings.add(classOfferingOrientation);
 		Class_Offering__c classOfferingTraining = classOfferingDataFactory.get(1);
 		classOfferingTraining.Chapter_Role_O_T__c = chapterRoleOTTraining.Id;
 		classOfferingTraining.Date__c = System.today() + 10;
+		classOfferingTraining.Start_Time__c = '10:00 AM';
+		classOfferingTraining.End_Time__c = '1:00 PM';
 		classOfferingTraining.RecordTypeId = CLASS_OFFERING_RECORD_TYPE_ID;
 		classOfferings.add(classOfferingTraining);
 		insert classOfferings;
@@ -168,20 +172,13 @@ public class VolunteerJourneyServiceTest {
 		volunteerOrientationTrainings.add(volunteerTraining);
 		insert volunteerOrientationTrainings;
 		System.runAs(new User(Id = UserInfo.getUserId())) {
-			UserRole userRoleNat = [
-					SELECT Id
-					FROM UserRole
-					WHERE Name = 'Make-A-Wish Test Chapter Customer User'
-					LIMIT 1
-			];
-			User volunteerUser = new User(FirstName = 'Mark', LastName = 'Smith', Email = 'ms@testemail.com', Username = 'ms@testemail.com',
-					EmailEncodingKey = 'ISO-8859-1', Alias = 'mark', TimeZoneSidKey = 'America/Los_Angeles', LocaleSidKey = 'en_US', Created_from_Portal__c = true,
-					LanguageLocaleKey = 'en_US', /*UserRoleId = userRoleNat.Id,*/ ProfileId = Label.Active_Volunteer_Profile, IsActive = true, StateCode = 'AZ', ContactId = volunteerArizona.Id);
+			User volunteerUser = TestDataFactory.createCommunityUser(1)[0];
 			insert volunteerUser;
 		}
 	}
 
-	static testMethod void processVolunteersActive() {
+	@IsTest
+	static void processVolunteersActive() {
 		// ARRANGE
 		Contact markVolunteerArizona = [
 				SELECT Id, MailingState
@@ -211,7 +208,8 @@ public class VolunteerJourneyServiceTest {
 		System.assertEquals(null, markVolunteerNewYorkActive);
 	}
 
-	static testMethod void processVolunteersWhenVolunteerRoleSetToActiveManually() {
+	@IsTest
+	static void processVolunteersWhenVolunteerRoleSetToActiveManually() {
 		// ARRANGE
 		Volunteer_Roles__c manualActivatedVolunteerRole = [
 				SELECT Id, Chapter_Name__c, Volunteer_Name__c

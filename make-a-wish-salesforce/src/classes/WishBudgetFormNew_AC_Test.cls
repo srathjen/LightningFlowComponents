@@ -55,7 +55,7 @@ public with sharing class WishBudgetFormNew_AC_Test {
         ApexPages.StandardController sc = new ApexPages.StandardController(expenseList[0]);
         WishBudgetFormNew_AC wishBudget = new WishBudgetFormNew_AC(sc);
         wishBudget.DeptDiv = '10,20,30';
-        wishBudget.getWishExpenseTypes();
+        wishBudget.getWishExpenseTypeOptions();
         wishBudget.getDeptDivisions();
         wishBudget.getAccountDescs();
         wishBudget.showDeptDiv();
@@ -120,7 +120,7 @@ public with sharing class WishBudgetFormNew_AC_Test {
         });
         wishBudget.newExpenseType = wishExpenseType.Id;
         wishBudget.addExpenseType();
-        wishBudget.getWishExpenseTypes();
+        wishBudget.getWishExpenseTypeOptions();
         wishBudget.getDeptDivisions();
         wishBudget.getAccountDescs();
         wishBudget.getUserListForApproval();

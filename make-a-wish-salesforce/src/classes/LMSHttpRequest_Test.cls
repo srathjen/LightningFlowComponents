@@ -3,15 +3,17 @@ Description : This Class is test class for LMSHttpRequest.
 */
 @IsTest
 public class LMSHttpRequest_Test {
-	// To validate createHttpRequest method
-	static testMethod void createHttpRequest() {
+
+	@IsTest
+	static void createHttpRequest() {
 		LMS_Credentials__c currLMSCredential = TestClassUtil.createLMSCredentials();
 		Test.startTest();
 		HttpRequest request = LMSHttpRequest.createLMSHttpRequest(currLMSCredential, '/Test', 'GET');
 		Test.stopTest();
 	}
-	// To validate getLMSSSODetails method
-	static testMethod void getLMSSSODetails() {
+
+	@IsTest
+	static void getLMSSSODetails() {
 		LMS_Credentials__c currLMSCredential;
 		LMSCourseSyncMockImpl currLMSCourseSyncMockImpl = new LMSCourseSyncMockImpl();
 		String payload;
@@ -58,8 +60,9 @@ public class LMSHttpRequest_Test {
 		}
 		Test.stopTest();
 	}
-	// To validate createOrActivateLMSUser method
-	static testMethod void createOrActivateLMSUser() {
+
+	@IsTest
+	static void createOrActivateLMSUser() {
 		LMS_Credentials__c currLMSCredential;
 		LMSCourseSyncMockImpl currLMSCourseSyncMockImpl = new LMSCourseSyncMockImpl();
 		String payload;
@@ -108,8 +111,9 @@ public class LMSHttpRequest_Test {
 		}
 		Test.stopTest();
 	}
-	// To validate createOrUpdateEnrollment method
-	static testMethod void createOrUpdateEnrollment() {
+
+	@IsTest
+	static void createOrUpdateEnrollment() {
 		LMS_Credentials__c currLMSCredential;
 		LMSCourseSyncMockImpl currLMSCourseSyncMockImpl = new LMSCourseSyncMockImpl();
 		String payload;
@@ -196,10 +200,8 @@ public class LMSHttpRequest_Test {
 		Test.stopTest();
 	}
 
-	// To validate getLMSSSODetails method
-	static testMethod void getLMSSSODetails1() {
-		LMS_Credentials__c currLMSCredential;
-		LMSCourseSyncMockImpl currLMSCourseSyncMockImpl = new LMSCourseSyncMockImpl();
+	@IsTest
+	static void getLMSSSODetails1() {
 		LMS_Credentials__c lmsCred = new LMS_Credentials__c();
 		lmsCred.Name = 'LMS Integration';
 		lmsCred.CourseEndpoint__c = '/exceed_lms/api/courses/';
@@ -211,6 +213,8 @@ public class LMSHttpRequest_Test {
 		lmsDet.Course_Name__c = 'LMS Name';
 		lmsDet.Description__c = 'Description';
 		lmsDet.Course_ID__c = '12121';
+		lmsDet.Start_Time__c = '10:00 AM';
+		lmsDet.End_Time__c = '1:00 PM';
 		insert lmsDet;
 		List<User> currUserLst = [
 				SELECT ID
