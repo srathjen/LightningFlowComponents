@@ -4,7 +4,7 @@
         <description>Sends and Email to salesforce@wish.org with content of error.</description>
         <name>Send_Error_Email</name>
         <label>Send Error Email</label>
-        <locationX>258</locationX>
+        <locationX>257</locationX>
         <locationY>275</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
