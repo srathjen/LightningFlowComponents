@@ -4,8 +4,8 @@
         <description>Sends and Email to salesforce@wish.org with content of error.</description>
         <name>Send_Error_Email</name>
         <label>Send Error Email</label>
-        <locationX>364</locationX>
-        <locationY>347</locationY>
+        <locationX>258</locationX>
+        <locationY>275</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <inputParameters>
@@ -37,8 +37,8 @@
         <description>Only used to generate a fault path from Update Wish Case</description>
         <name>Clear_ID_field</name>
         <label>Clear ID field</label>
-        <locationX>627</locationX>
-        <locationY>61</locationY>
+        <locationX>526</locationX>
+        <locationY>54</locationY>
         <assignmentItems>
             <assignToReference>contactID</assignToReference>
             <operator>Assign</operator>
@@ -48,10 +48,10 @@
         </assignmentItems>
     </assignments>
     <assignments>
-        <name>Update_Case_Subject</name>
-        <label>Update Case Subject</label>
-        <locationX>367</locationX>
-        <locationY>126</locationY>
+        <name>Update_Case_Status</name>
+        <label>Update Case Status</label>
+        <locationX>260</locationX>
+        <locationY>54</locationY>
         <assignmentItems>
             <assignToReference>Get_Wish_Case.Subject</assignToReference>
             <operator>Assign</operator>
@@ -63,31 +63,6 @@
             <targetReference>Update_Wish_Casae</targetReference>
         </connector>
     </assignments>
-    <decisions>
-        <name>Is_Contact_Wish_Child</name>
-        <label>Is Wish Case?</label>
-        <locationX>237</locationX>
-        <locationY>63</locationY>
-        <defaultConnector>
-            <targetReference>Clear_ID_field</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
-        <rules>
-            <name>isWishCase</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Get_Wish_Case.RecordType.Name</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <stringValue>Wish</stringValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Update_Case_Subject</targetReference>
-            </connector>
-            <label>Yes</label>
-        </rules>
-    </decisions>
     <description>Updates the Wish Case record&apos;s subject. Is called from Process Builder on Contact and needs to be sent the Contact record&apos;s id.</description>
     <formulas>
         <name>caseSubjectAsFormula</name>
@@ -113,11 +88,11 @@
         <description>Retrieves the Wish Child&apos;s Wish Case Record based on the Contact ID.</description>
         <name>Get_Wish_Case</name>
         <label>Get Wish Case</label>
-        <locationX>142</locationX>
-        <locationY>61</locationY>
+        <locationX>141</locationX>
+        <locationY>54</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Is_Contact_Wish_Child</targetReference>
+            <targetReference>Update_Case_Status</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Send_Error_Email</targetReference>
@@ -143,8 +118,8 @@
     <recordUpdates>
         <name>Update_Wish_Casae</name>
         <label>Update Wish Casae</label>
-        <locationX>499</locationX>
-        <locationY>126</locationY>
+        <locationX>393</locationX>
+        <locationY>54</locationY>
         <connector>
             <targetReference>Clear_ID_field</targetReference>
         </connector>
@@ -154,13 +129,13 @@
         <inputReference>Get_Wish_Case</inputReference>
     </recordUpdates>
     <start>
-        <locationX>22</locationX>
-        <locationY>61</locationY>
+        <locationX>21</locationX>
+        <locationY>54</locationY>
         <connector>
             <targetReference>Get_Wish_Case</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <textTemplates>
         <name>faultEmailBody</name>
         <text>&lt;p&gt;Error: {!$Flow.FaultMessage}&lt;/p&gt;&lt;p&gt;At {!$Flow.CurrentDateTime}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;ID of Contact: {!contactID}&lt;/p&gt;</text>
