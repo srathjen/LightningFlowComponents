@@ -5,163 +5,34 @@
  */
 public class VolunteerOTDomain extends trac_TriggerHandlerBase {
 
+    private final static String ACTION_TRAINING = 'Training';
+    private final static String ACTION_REGISTERED = 'Registered';
+    private final static String ACTION_VOLUNTEER_CANCELLED = 'Volunteer Cancelled';
+    private final static String VOLUNTEER_ORIENTATION_TRAINING_TYPE_TRAINING = Constant_AC.VOLUNTEER_ORIENTATION_TRAINING_TYPE_TRAINING;
+    private final static String VOLUNTEER_ORIENTATION_TRAINING_TYPE_ORIENTATION = Constant_AC.VOLUNTEER_ORIENTATION_TRAINING_TYPE_ORIENTATION;
+    private final static String VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED = Constant_AC.VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED;
+    private final static String VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_REGISTERED = Constant_AC.VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_REGISTERED;
+    private final static String VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_VOLUNTEER_CANCELLED = Constant_AC.VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_VOLUNTEER_CANCELLED;
+
     private List<Volunteer_Orientation_Training__c> newList = (List<Volunteer_Orientation_Training__c>) newRecordsList;
     private List<Volunteer_Orientation_Training__c> oldList = (List<Volunteer_Orientation_Training__c>) oldRecordsList;
     private Map<Id, Volunteer_Orientation_Training__c> newMap = (Map<Id, Volunteer_Orientation_Training__c>) newRecordsMap;
     private Map<Id, Volunteer_Orientation_Training__c> oldMap = (Map<Id, Volunteer_Orientation_Training__c>) oldRecordsMap;
 
     public override void handleBeforeInsert() {
-        Set<String> volOTSet = new Set<String>();
-        Set<Id> orientationAndTrainingSet = new Set<Id>();
-        Map<Id, Contact> contactInfoMap = new Map<Id, Contact>();
-        Set<String> classOfferingIdSet = new Set<String>();
-        Map<String, String> orientationIdMap = new Map<String, String>();
-        List<Volunteer_Orientation_Training__c> volunteerOrientationTrainingList = new List<Volunteer_Orientation_Training__c>();
-        for (Volunteer_Orientation_Training__c currRec : newList) {
-            if (!trac_TriggerHandlerBase.blockTrigger) {
-                if (currRec.Volunteer__c != null) {
-                    volOTSet.add(currRec.Volunteer__c);
-                }
-                if (currRec.Hidden_O_T_Id__c != null) {
-                    orientationAndTrainingSet.add(currRec.Id);
-                }
-
-                if (currRec.Volunteer__c != null && currRec.Class_Offering__c != null && (Trigger.isInsert || oldMap.get(currRec.Id).Class_Offering__c != currRec.Class_Offering__c)) {
-                    classOfferingIdSet.add(currRec.Class_Offering__c);
-                }
-
-                if (currRec.Type__c == 'Training'
-                        && (currRec.Volunteer_Attendance__c == 'Registered' || currRec.Volunteer_Attendance__c == 'Completed' || currRec.Volunteer_Attendance__c == 'Volunteer Cancelled')) {
-                    volunteerOrientationTrainingList.add(currRec);
-                }
-            }
-        }
-
-        for (Contact getContactInfo : [
-                SELECT Id, Name, Account.Name, Account.Phone,Email,Account.Email__c
-                FROM Contact
-                WHERE Id IN :volOTSet
-        ]) {
-            if (!contactInfoMap.containsKey(getContactInfo.Id)) {
-                contactInfoMap.put(getContactInfo.Id, getContactInfo);
-            }
-        }
-
-        if (classOfferingIdSet.size() > 0) {
-            for (Class_Offering__c currRec : [
-                    SELECT Id,Chapter_Role_O_T__r.Orientation_Training__c
-                    FROM Class_Offering__c
-                    WHERE Id IN :classOfferingIdSet
-            ]) {
-                orientationIdMap.put(currRec.Id, currRec.Chapter_Role_O_T__r.Orientation_Training__c);
-            }
-        }
-
-        for (Volunteer_Orientation_Training__c currRec : newList) {
-            if (!trac_TriggerHandlerBase.blockTrigger) {
-                if (currRec.Volunteer__c != null && contactInfoMap.containsKey(currRec.Volunteer__c)) {
-                    currRec.Account_Name__c = contactInfoMap.get(currRec.Volunteer__c).Account.Name;
-                    currRec.Account_Phone__c = contactInfoMap.get(currRec.Volunteer__c).Account.Phone;
-                    currRec.VolunteerHidden_Email__c = contactInfoMap.get(currRec.Volunteer__c).Email;
-                    currRec.Account_Email__c = contactInfoMap.get(currRec.Volunteer__c).Account.Email__c;
-                }
-
-                //Update the hidden O&T Id field with the orientation and training Id.
-                if (currRec.Class_Offering__c != null && currRec.Class_Offering__c != null && orientationIdMap.containsKey(currRec.Class_Offering__c)) {
-                    currRec.Hidden_O_T_Id__c = orientationIdMap.get(currRec.Class_Offering__c);
-                }
-            }
-        }
-        VolunteerOTService.updateContactRec(volunteerOrientationTrainingList);
+        VolunteerOTService.setVolOTFields(newList);
+        VolunteerOTService.updateContactRec(VolunteerOTService.getTrainingVOTRecords(newList));
     }
 
     public override void handleBeforeUpdate() {
-        Set<String> volOTSet = new Set<String>();
-        Set<Id> orientationAndTrainingSet = new Set<Id>();
-        Map<Id, Contact> contactInfoMap = new Map<Id, Contact>();
-        Set<String> classOfferingIdSet = new Set<String>();
-        Map<String, String> orientationIdMap = new Map<String, String>();
-        List<Volunteer_Orientation_Training__c> volunteerOrientationTrainingList = new List<Volunteer_Orientation_Training__c>();
-        for (Volunteer_Orientation_Training__c currRec : newList) {
-            if (!trac_TriggerHandlerBase.blockTrigger) {
-                if (currRec.Volunteer__c != null) {
-                    volOTSet.add(currRec.Volunteer__c);
-                }
-                if (currRec.Hidden_O_T_Id__c != null) {
-                    orientationAndTrainingSet.add(currRec.Id);
-                }
-
-                if (currRec.Volunteer__c != null && currRec.Class_Offering__c != null && (Trigger.isInsert || oldMap.get(currRec.Id).Class_Offering__c != currRec.Class_Offering__c)) {
-                    classOfferingIdSet.add(currRec.Class_Offering__c);
-                }
-
-                if (currRec.Type__c == 'Training' && currRec.Volunteer_Attendance__c == 'Registered') {
-                    volunteerOrientationTrainingList.add(currRec);
-                }
-
-                if (currRec.Type__c == 'Training' && (currRec.Volunteer_Attendance__c == 'Completed' || currRec.Volunteer_Attendance__c == 'Volunteer Cancelled')) {
-                    volunteerOrientationTrainingList.add(currRec);
-                }
-            }
-        }
-
-        for (Contact getContactInfo : [
-                SELECT Id, Name, Account.Name, Account.Phone,Email,Account.Email__c
-                FROM Contact
-                WHERE Id IN :volOTSet
-        ]) {
-            if (!contactInfoMap.containsKey(getContactInfo.Id)) {
-                contactInfoMap.put(getContactInfo.Id, getContactInfo);
-            }
-        }
-
-        if (classOfferingIdSet.size() > 0) {
-            for (Class_Offering__c currRec : [
-                    SELECT Id,Chapter_Role_O_T__r.Orientation_Training__c
-                    FROM Class_Offering__c
-                    WHERE Id IN :classOfferingIdSet
-            ]) {
-                orientationIdMap.put(currRec.Id, currRec.Chapter_Role_O_T__r.Orientation_Training__c);
-            }
-        }
-
-        for (Volunteer_Orientation_Training__c currRec : newList) {
-            if (!trac_TriggerHandlerBase.blockTrigger) {
-                if (currRec.Volunteer__c != null && contactInfoMap.containsKey(currRec.Volunteer__c)) {
-                    currRec.Account_Name__c = contactInfoMap.get(currRec.Volunteer__c).Account.Name;
-                    currRec.Account_Phone__c = contactInfoMap.get(currRec.Volunteer__c).Account.Phone;
-                    currRec.VolunteerHidden_Email__c = contactInfoMap.get(currRec.Volunteer__c).Email;
-                    currRec.Account_Email__c = contactInfoMap.get(currRec.Volunteer__c).Account.Email__c;
-                }
-
-                //Update the hidden O&T Id field with the orientation and training Id.
-                if (currRec.Class_Offering__c != null && currRec.Class_Offering__c != null && orientationIdMap.containsKey(currRec.Class_Offering__c)) {
-                    currRec.Hidden_O_T_Id__c = orientationIdMap.get(currRec.Class_Offering__c);
-                }
-            }
-        }
-        VolunteerOTService.updateContactRec(volunteerOrientationTrainingList);
+        VolunteerOTService.setVolOTFields(newList, oldMap);
+        VolunteerOTService.updateContactRec(VolunteerOTService.getTrainingVOTRecords(newList));
     }
 
     public override void handleAfterInsert() {
-        Set<Id> contactId = new Set<Id>();
-        Set<Id> trainingRegisteredVolIdsSet = new Set<Id>();
-        Set<Id> trainingCompletedVolunteerIdsSet = new Set<Id>();
-        for (Volunteer_Orientation_Training__c newVolInsert : newList) {
-            if (newVolInsert.Type__c == 'Orientation' && newVolInsert.Volunteer_Attendance__c == 'Registered') {
-                contactId.add(newVolInsert.Volunteer__c);
-            }
-
-            if (newVolInsert.Type__c == 'Training') {
-                if(newVolInsert.Volunteer_Attendance__c == 'Registered'){
-                    trainingRegisteredVolIdsSet.add(newVolInsert.Volunteer__c);
-                } else if (newVolInsert.Volunteer_Attendance__c == 'Completed'){
-                    trainingCompletedVolunteerIdsSet.add(newVolInsert.Volunteer__c);
-                }
-            }
-        }
-        VolunteerOTService.updateVolunteerHiddenVolOTStatus(trainingRegisteredVolIdsSet, 'training');
-        VolunteerOTService.updateUserVolunteerStatus(contactId, 'Registered');
+        Set<Id> trainingCompletedVolunteerIdsSet = VolunteerOTService.getTrainingCompletedVolunteerIds(newList);
+        VolunteerOTService.updateVolunteerHiddenVolOTStatus(VolunteerOTService.getTrainingRegisteredVolunteerIds(newList), ACTION_TRAINING);
+        VolunteerOTService.updateUserVolunteerStatus(VolunteerOTService.getRegisteredOrientationVolunteerIds(newList), ACTION_REGISTERED);
         VolunteerOTService.updateAffiliationStatusAsActive(trainingCompletedVolunteerIdsSet);
         VolunteerJourneyService.processVolunteersChapterRequirements(trainingCompletedVolunteerIdsSet);
     }
@@ -180,24 +51,26 @@ public class VolunteerOTDomain extends trac_TriggerHandlerBase {
 
         for (Volunteer_Orientation_Training__c newVol : newList) {
             if (!trac_TriggerHandlerBase.blockTrigger) {
-                if (newVol.Volunteer_Attendance__c != null && newVol.Volunteer_Attendance__c == 'Completed' && newVol.Type__c == 'Training') {
+                if (newVol.Volunteer_Attendance__c != null && newVol.Volunteer_Attendance__c == VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED && newVol.Type__c == VOLUNTEER_ORIENTATION_TRAINING_TYPE_TRAINING) {
                     volnteerContactIdSet.add(newVol.Volunteer__c);
                 }
             }
             Volunteer_Orientation_Training__c oldVol = oldMap.get(newVol.Id);
-            if (newVol.Volunteer_Attendance__c == 'Completed' && newVol.Type__c == 'Orientation' && oldVol.Volunteer_Attendance__c != 'Completed') {
+            if (newVol.Volunteer_Attendance__c == VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED
+                    && newVol.Type__c == VOLUNTEER_ORIENTATION_TRAINING_TYPE_ORIENTATION && oldVol.Volunteer_Attendance__c != VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED) {
                 completedContactSet.add(newVol.Volunteer__c);
             }
-            if (newVol.Volunteer_Attendance__c == 'Registered' && newVol.Type__c == 'Orientation' && oldVol.Volunteer_Attendance__c != 'Registered') {
+            if (newVol.Volunteer_Attendance__c == VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_REGISTERED
+                    && newVol.Type__c == VOLUNTEER_ORIENTATION_TRAINING_TYPE_ORIENTATION && oldVol.Volunteer_Attendance__c != VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_REGISTERED) {
                 registeredVolunteerIds.add(newVol.Volunteer__c);
             }
 
-            if (newVol.Volunteer_Attendance__c == 'Volunteer Cancelled' && newVol.Type__c == 'Orientation' && oldVol.Volunteer_Attendance__c != 'Volunteer Cancelled') {
+            if (newVol.Volunteer_Attendance__c == VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_VOLUNTEER_CANCELLED && newVol.Type__c == VOLUNTEER_ORIENTATION_TRAINING_TYPE_ORIENTATION && oldVol.Volunteer_Attendance__c != VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_VOLUNTEER_CANCELLED) {
                 cancelContactId.add(newVol.Volunteer__c);
             }
         }
 
-        if (completedContactSet.size() > 0) {
+        if (!completedContactSet.isEmpty()) {
             for (Contact contactCompleted : [
                     SELECT Id,Hidden_Volunteer_OT_Status__c
                     FROM Contact
@@ -210,13 +83,13 @@ public class VolunteerOTDomain extends trac_TriggerHandlerBase {
             }
         }
 
-        VolunteerOTService.updateUserVolunteerStatus(registeredVolunteerIds, 'Registered');
+        VolunteerOTService.updateUserVolunteerStatus(registeredVolunteerIds, ACTION_REGISTERED);
         VolunteerOTService.updateAffiliationStatusAsActive(volnteerContactIdSet);
 
         for (AggregateResult ar : [
                 SELECT Volunteer__c cntid, COUNT(Id) cnt
                 FROM Volunteer_Orientation_Training__c
-                WHERE Volunteer__c IN :cancelContactId AND Volunteer_Attendance__c = 'Registered'
+                WHERE Volunteer__c IN :cancelContactId AND Volunteer_Attendance__c = :VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_REGISTERED
                 GROUP BY Volunteer__c
         ]) {
             registerdCountId.add((Id) ar.get('cntid'));
@@ -225,7 +98,7 @@ public class VolunteerOTDomain extends trac_TriggerHandlerBase {
         for (AggregateResult ar : [
                 SELECT Volunteer__c cntid, COUNT(Id) cnt
                 FROM Volunteer_Orientation_Training__c
-                WHERE Volunteer__c IN :cancelContactId AND Volunteer_Attendance__c = 'Completed'
+                WHERE Volunteer__c IN :cancelContactId AND Volunteer_Attendance__c = :VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED
                 GROUP BY Volunteer__c
         ]) {
             completedCountId.add((Id) ar.get('cntid'));
@@ -238,7 +111,7 @@ public class VolunteerOTDomain extends trac_TriggerHandlerBase {
             }
         }
 
-        if (contactUpdateContactId.size() > 0) {
+        if (!contactUpdateContactId.isEmpty()) {
             for (Contact contactUpdate : [
                     SELECT Id,Hidden_Volunteer_OT_Status__c
                     FROM Contact
@@ -250,7 +123,7 @@ public class VolunteerOTDomain extends trac_TriggerHandlerBase {
                 updateContactList.add(contactUpdation);
             }
         }
-        VolunteerOTService.updateUserVolunteerStatus(userUpdateContactId, 'Volunteer Cancelled');
+        VolunteerOTService.updateUserVolunteerStatus(userUpdateContactId, ACTION_VOLUNTEER_CANCELLED);
 
         update updateContactList;
         update contactCompletedUpdate;

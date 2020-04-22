@@ -290,6 +290,7 @@ public class Constant_AC {
 	 * Volunteer Orientation Training Constants
 	 */
 	public static final String VOLUNTEER_ORIENTATION_TRAINING_TYPE_TRAINING = 'Training';
+	public static final String VOLUNTEER_ORIENTATION_TRAINING_TYPE_ORIENTATION = 'Orientation';
 	public static final String VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED = 'Completed';
 	public static final String VOLUNTEER_ORIENTATION_TRAINING_COMPLETION_NOT_APPROVED = 'Not Approved';
 	public static final String VOLUNTEER_ORIENTATION_TRAINING_COMPLETION_FOLLOW_UP_REQUESTED = 'Follow-up Requested';
