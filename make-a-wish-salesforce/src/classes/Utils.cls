@@ -293,13 +293,10 @@ public class Utils {
 			Integer minute = Integer.valueOf(m.group(2));
 			Integer shift = m.group(3).toUpperCase().equals(PM) ? 12 : 0;
 			if (hour == 12 && m.group(3).toUpperCase().equals(AM)) {
-				System.debug('HEREZ1 - ' + hour + ' - ' + shift);
 				return Datetime.newInstanceGmt(Date.today().addDays(1), Time.newInstance(hour + 12, minute, 0, 0));
 			} else if ((hour + shift) == 24) {
-				System.debug('HEREZ2 - ' + hour + ' - ' + shift);
 				return Datetime.newInstanceGmt(Date.today(), Time.newInstance(hour, minute, 0, 0));
 			}
-			System.debug('HEREZ3 - ' + hour + ' - ' + shift);
 			return Datetime.newInstanceGmt(Date.today(), Time.newInstance(hour + shift, minute, 0, 0));
 		} else if (TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_SECOND_AM_PM.equals(regex.getPatternKey())) {
 			Integer hour = Integer.valueOf(m.group(1));
