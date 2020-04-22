@@ -16275,11 +16275,11 @@ RecordType.Name ="Wish Child"</errorConditionFormula>
         <fullName>Lead_DOB_Referral_Validation</fullName>
         <active>true</active>
         <description>When lead is changed to Referred, DOB is mandatory.</description>
-        <errorConditionFormula>Text(Status) == 'Referred' &amp;&amp;  DOB__c == Null &amp;&amp;   (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != 'Integration'
+        <errorConditionFormula>AND( ISCHANGED(Status), ISPICKVAL(Status,'Referred'), ISBLANK(DOB__c), $Profile.Name != 'Integration')
 &amp;&amp;
 RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>DOB__c</errorDisplayField>
-        <errorMessage>Please Enter DOB</errorMessage>
+        <errorMessage>Please enter the child's date of birth in the DOB field</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_DOB_When_Elig_Rev</fullName>
