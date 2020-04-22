@@ -9,6 +9,7 @@ public class Utils {
 	}
 
 	public static final String DATE_FORMAT_MDDYYYY = 'M/dd/yyyy';
+	public static final String AM = 'AM';
 	public static final String PM = 'PM';
 
 	/**
@@ -282,22 +283,35 @@ public class Utils {
 		return mapOfSObjectLabelsByFields;
 	}
 
-	public static Time parseAmPm(String value, TimeRegexPattern regex) {
+	public static Datetime parseAmPm(String value, TimeRegexPattern regex) {
 		Pattern p = Pattern.compile(regex.getPattern());
 		Matcher m = p.matcher(value);
 		if (!m.matches()) {
 			throw new UtilsException('Pattern ' + regex.getPatternKey() + ' does not match the value ' + value + ' provided');
 		} else if (TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM.equals(regex.getPatternKey())) {
-			Integer hour = Integer.valueOf(m.group(1)),
-					minute = Integer.valueOf(m.group(2)),
-					shift = m.group(3).toUpperCase().equals(PM) ? 12 : 0;
-			return Time.newInstance(hour + shift, minute, 0, 0);
+			Integer hour = Integer.valueOf(m.group(1));
+			Integer minute = Integer.valueOf(m.group(2));
+			Integer shift = m.group(3).toUpperCase().equals(PM) ? 12 : 0;
+			if (hour == 12 && m.group(3).toUpperCase().equals(AM)) {
+				System.debug('HEREZ1 - ' + hour + ' - ' + shift);
+				return Datetime.newInstanceGmt(Date.today().addDays(1), Time.newInstance(hour + 12, minute, 0, 0));
+			} else if ((hour + shift) == 24) {
+				System.debug('HEREZ2 - ' + hour + ' - ' + shift);
+				return Datetime.newInstanceGmt(Date.today(), Time.newInstance(hour, minute, 0, 0));
+			}
+			System.debug('HEREZ3 - ' + hour + ' - ' + shift);
+			return Datetime.newInstanceGmt(Date.today(), Time.newInstance(hour + shift, minute, 0, 0));
 		} else if (TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_SECOND_AM_PM.equals(regex.getPatternKey())) {
-			Integer Hours = Integer.valueOf(m.group(1)),
-					minute = Integer.valueOf(m.group(2)),
-					second = Integer.valueOf(m.group(3)),
-					shift = m.group(4).toUpperCase().equals(PM) ? 12 : 0;
-			return Time.newInstance(Hours + shift, minute, second, 0);
+			Integer hour = Integer.valueOf(m.group(1));
+			Integer minute = Integer.valueOf(m.group(2));
+			Integer second = Integer.valueOf(m.group(3));
+			Integer shift = m.group(4).toUpperCase().equals(PM) ? 12 : 0;
+			if (hour == 12 && m.group(3).toUpperCase().equals(AM)) {
+				return Datetime.newInstanceGmt(Date.today().addDays(1), Time.newInstance(hour + 12, minute, second, 0));
+			} else if ((hour + shift) == 24) {
+				return Datetime.newInstanceGmt(Date.today(), Time.newInstance(hour, minute, second, 0));
+			}
+			return Datetime.newInstanceGmt(Date.today(), Time.newInstance(hour + shift, minute, second, 0));
 		} else {
 			throw new UtilsException('Error while trying to parse value');
 		}
@@ -319,7 +333,7 @@ public class Utils {
 		for (User currUser : [
 				SELECT Id, UserRole.Name
 				FROM User
-				WHERE id IN :userIds
+				WHERE Id IN :userIds
 		]) {
 			userRoleMap.put(currUser.Id, currUser.UserRole.Name);
 		}
