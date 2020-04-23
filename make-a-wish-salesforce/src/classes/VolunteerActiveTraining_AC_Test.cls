@@ -4,7 +4,8 @@
 Public class VolunteerActiveTraining_AC_Test {
 
 	// Complete the Volunteer Training.
-	static testMethod void CreatingCompletedTraining() {
+	@IsTest
+	static void CreatingCompletedTraining() {
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
 		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
@@ -50,7 +51,8 @@ Public class VolunteerActiveTraining_AC_Test {
 
 	}
 	// Display Class OFfering on Portal.
-	static testMethod void VolunteerTrainingDisplay() {
+	@IsTest
+	static void VolunteerTrainingDisplay() {
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
 		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
@@ -95,7 +97,8 @@ Public class VolunteerActiveTraining_AC_Test {
 		}
 	}
 	// Register for new Training.
-	static testMethod void CreateNewTraining() {
+	@IsTest
+	static void CreateNewTraining() {
 		LMS_Credentials__c currLMSCredential = testClassUtil.createLMSCredentials();
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
@@ -134,7 +137,8 @@ Public class VolunteerActiveTraining_AC_Test {
 		}
 	}
 	// Creating Training with Cancelled status.
-	static testMethod void CreatingCancelledTraining() {
+	@IsTest
+	static void CreatingCancelledTraining() {
 		LMS_Credentials__c currLMSCredential = testClassUtil.createLMSCredentials();
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
@@ -170,7 +174,8 @@ Public class VolunteerActiveTraining_AC_Test {
 		//  controller.Register();
 	}
 	// Cancel Registered Training.
-	static testMethod void CancelTraining() {
+	@IsTest
+	static void CancelTraining() {
 		LMS_Credentials__c currLMSCredential = testClassUtil.createLMSCredentials();
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
@@ -219,7 +224,8 @@ Public class VolunteerActiveTraining_AC_Test {
 	}
 
 	// Duplicate Training time prevention.
-	static testMethod void BookingTrainingwithSameTime() {
+	@IsTest
+	static void BookingTrainingwithSameTime() {
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
 		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
@@ -283,7 +289,8 @@ Public class VolunteerActiveTraining_AC_Test {
 		return createNewVol;
 	}
 
-	static testMethod void CheckViewLMS() {
+	@IsTest
+	static void CheckViewLMS() {
 		Account acc;
 		Contact con;
 		LMS_Credentials__c currLMSCredential;
@@ -337,7 +344,8 @@ Public class VolunteerActiveTraining_AC_Test {
 		Test.stopTest();
 	}
 
-	static testMethod void register_test() {
+	@IsTest
+	static void register_test() {
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
 		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
@@ -346,7 +354,6 @@ Public class VolunteerActiveTraining_AC_Test {
 		User currUser;
 		System.RunAs(new User(Id = UserInfo.getUserId(), ContactId = con.id)) {
 			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
-//			currUser = OrientationandTrainingUtil.createAdminUser();
 			insert currUser;
 		}
 
@@ -419,7 +426,8 @@ Public class VolunteerActiveTraining_AC_Test {
 		Test.stopTest();
 	}
 
-	static testMethod void register_test2() {
+	@IsTest
+	static void register_test2() {
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
 		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
