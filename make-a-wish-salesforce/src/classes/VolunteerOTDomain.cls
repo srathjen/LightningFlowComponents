@@ -1,4 +1,6 @@
 /**
+ * @description
+ *
  * @author Steve Doucette, Traction on Demand
  *
  * @date 4/22/2020
@@ -40,33 +42,19 @@ public class VolunteerOTDomain extends trac_TriggerHandlerBase {
         VolunteerOTService.updateAffiliationStatusAsActive(VolunteerOTService.getTrainingCompletedVolunteerIds(newList));
 
         Set<Id> cancelContactId = VolunteerOTService.getCancelledTrainingVolunteers(newList, oldMap);
-        Set<Id> registerdCountId = new Set<Id>();
-        for (AggregateResult ar : [
-                SELECT Volunteer__c cntid, COUNT(Id) cnt
-                FROM Volunteer_Orientation_Training__c
-                WHERE Volunteer__c IN :cancelContactId AND Volunteer_Attendance__c = :VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_REGISTERED
-                GROUP BY Volunteer__c
-        ]) {
-            registerdCountId.add((Id) ar.get('cntid'));
-        }
+        Set<Id> registerdCountId = getAggregateVolunteers(cancelContactId, VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_REGISTERED);
+        Set<Id> completedCountId = getAggregateVolunteers(cancelContactId, VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED);
 
-        Set<Id> completedCountId = new Set<Id>();
-        for (AggregateResult ar : [
-                SELECT Volunteer__c cntid, COUNT(Id) cnt
-                FROM Volunteer_Orientation_Training__c
-                WHERE Volunteer__c IN :cancelContactId AND Volunteer_Attendance__c = :VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED
-                GROUP BY Volunteer__c
-        ]) {
-            completedCountId.add((Id) ar.get('cntid'));
-        }
 
         Set<Id> userUpdateContactId = new Set<Id>();
         Set<Id> contactUpdateContactId = new Set<Id>();
         for (Volunteer_Orientation_Training__c votcancelupdate : newList) {
-            if (cancelContactId.contains(votcancelupdate.Volunteer__c) && !registerdCountId.contains(votcancelupdate.Volunteer__c) && !completedCountId.contains(votcancelupdate.Volunteer__c)) {
-                userUpdateContactId.add(votcancelupdate.Volunteer__c);
-            } else if (cancelContactId.contains(votcancelupdate.Volunteer__c) && registerdCountId.contains(votcancelupdate.Volunteer__c) && !completedCountId.contains(votcancelupdate.Volunteer__c)) {
-                contactUpdateContactId.add(votcancelupdate.Volunteer__c);
+            if (cancelContactId.contains(votcancelupdate.Volunteer__c) && !completedCountId.contains(votcancelupdate.Volunteer__c)) {
+                if (!registerdCountId.contains(votcancelupdate.Volunteer__c)) {
+                    userUpdateContactId.add(votcancelupdate.Volunteer__c);
+                } else if (registerdCountId.contains(votcancelupdate.Volunteer__c)) {
+                    contactUpdateContactId.add(votcancelupdate.Volunteer__c);
+                }
             }
         }
 
@@ -85,5 +73,18 @@ public class VolunteerOTDomain extends trac_TriggerHandlerBase {
 
         VolunteerOTService.updateUserVolunteerStatus(userUpdateContactId, ACTION_VOLUNTEER_CANCELLED);
         VolunteerJourneyService.processVolunteersChapterRequirements(userUpdateContactId);
+    }
+
+    private static Set<Id> getAggregateVolunteers(Set<Id> volunteerIds, String volunteerAttendance) {
+        Set<Id> ret = new Set<Id>();
+        for (AggregateResult ar : [
+                SELECT Volunteer__c cntid, COUNT(Id) cnt
+                FROM Volunteer_Orientation_Training__c
+                WHERE Volunteer__c IN :volunteerIds AND Volunteer_Attendance__c = :volunteerAttendance
+                GROUP BY Volunteer__c
+        ]) {
+            ret.add((Id) ar.get('cntid'));
+        }
+        return ret;
     }
 }
