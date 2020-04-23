@@ -458,6 +458,15 @@ public class TestDataFactory {
         return timesheets;
     }
     
+    public static List<Chapter_Vs_Role__c> createChapterVsRole(Integer num) {
+        List<Chapter_Vs_Role__c> chapterRoleList = new List<Chapter_Vs_Role__c>();
+        for(Integer i = 0; i < num; i++) {
+            Chapter_Vs_Role__c chapterRole = new Chapter_Vs_Role__c();
+            chapterRoleList.add(chapterRole);
+        }
+        return chapterRoleList;
+    }
+    
     public static List<Awards_Recognition__c> createAwardsRecognitions(Integer num) {
         List<Awards_Recognition__c> awards = new List<Awards_Recognition__c>();
         for(Integer i = 0; i < num; i++) {
@@ -465,6 +474,15 @@ public class TestDataFactory {
             awards.add(award);
         }
         return awards;
+    }
+    
+    public static List<Dynamic_Content__c> createDynamicContent(Integer num) {
+        List<Dynamic_Content__c> contentList = new List<Dynamic_Content__c>();
+        for(Integer i = 0; i < num; i++) {
+            Dynamic_Content__c content = new Dynamic_Content__c();
+            contentList.add(content);
+        }
+        return contentList;
     }
 
 	public static Lead createQualifiedLead(Id accountId, Id icdCodeId){
