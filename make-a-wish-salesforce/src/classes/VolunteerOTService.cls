@@ -346,8 +346,7 @@ public class VolunteerOTService {
         ]) {
             if (action == ACTION_TRAINING) {
                 currentCon.Hidden_Volunteer_OT_Status__c = Constant_AC.CONTACT_HIDDEN_VOLUNTEER_STATUS_TRAINING_REGISTERED;
-            }
-            if (action == ACTION_ORIENTATION) {
+            } else if (action == ACTION_ORIENTATION) {
                 currentCon.Hidden_Volunteer_OT_Status__c = Constant_AC.CONTACT_HIDDEN_VOLUNTEER_STATUS_ORIENTATION_COMPLETED;
             }
             updateContactList.add(currentCon);
@@ -381,118 +380,105 @@ public class VolunteerOTService {
         update userUpdateList;
     }
 
-    /**
-     * @description Return set of volunteer Ids from VOT records
-     *
-     * @param newList
-     *
-     * @return
-     */
+    // Return set of volunteer Ids from VOT records
     public static Set<Id> getVolunteerIds(List<Volunteer_Orientation_Training__c> newList) {
-        Set<Id> retSet = new Set<Id>();
-        if (!trac_TriggerHandlerBase.blockTrigger) {
-            for (Volunteer_Orientation_Training__c currRec : newList) {
-                if (currRec.Volunteer__c != null) {
-                    retSet.add(currRec.Volunteer__c);
-                }
+        Set<Id> ret = new Set<Id>();
+        for (Volunteer_Orientation_Training__c currRec : newList) {
+            if (currRec.Volunteer__c != null) {
+                ret.add(currRec.Volunteer__c);
             }
         }
-        return retSet;
+        return ret;
     }
 
-    /**
-     * @description
-     *
-     * @param newList
-     *
-     * @return
-     */
+    // Return set of Ids for registered orientation volunteers
     public static Set<Id> getRegisteredOrientationVolunteerIds(List<Volunteer_Orientation_Training__c> newList) {
-        Set<Id> retSet = new Set<Id>();
+        return getRegisteredOrientationVolunteerIds(newList, null);
+    }
+    public static Set<Id> getRegisteredOrientationVolunteerIds(List<Volunteer_Orientation_Training__c> newList, Map<Id, Volunteer_Orientation_Training__c> oldMap) {
+        Set<Id> ret = new Set<Id>();
         for (Volunteer_Orientation_Training__c currRec : newList) {
             if (currRec.Type__c == VOLUNTEER_ORIENTATION_TRAINING_TYPE_ORIENTATION
-                    && currRec.Volunteer_Attendance__c == VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_REGISTERED) {
-                retSet.add(currRec.Volunteer__c);
+                    && (oldMap == null || currRec.Volunteer_Attendance__c == VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_REGISTERED && oldMap.get(currRec.Id).Volunteer_Attendance__c != VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_REGISTERED)) {
+                ret.add(currRec.Volunteer__c);
             }
         }
-        return retSet;
+        return ret;
     }
 
-    /**
-     * @description
-     *
-     * @param newList
-     *
-     * @return
-     */
+    // Return set of Ids for registered orientation volunteers
+    public static Set<Id> getCompletedOrientationVolunteerIds(List<Volunteer_Orientation_Training__c> newList) {
+        return getRegisteredOrientationVolunteerIds(newList, null);
+    }
+    public static Set<Id> getCompletedOrientationVolunteerIds(List<Volunteer_Orientation_Training__c> newList, Map<Id, Volunteer_Orientation_Training__c> oldMap) {
+        Set<Id> ret = new Set<Id>();
+        for (Volunteer_Orientation_Training__c currRec : newList) {
+            if (currRec.Type__c == VOLUNTEER_ORIENTATION_TRAINING_TYPE_ORIENTATION
+                    && (oldMap == null || currRec.Volunteer_Attendance__c == VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED && oldMap.get(currRec.Id).Volunteer_Attendance__c != VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED)) {
+                ret.add(currRec.Volunteer__c);
+            }
+        }
+        return ret;
+    }
+
+    // Return set of Ids for completed training volunteers
     public static Set<Id> getTrainingCompletedVolunteerIds(List<Volunteer_Orientation_Training__c> newList) {
-        Set<Id> retSet = new Set<Id>();
+        Set<Id> ret = new Set<Id>();
         for (Volunteer_Orientation_Training__c currRec : newList) {
             if (currRec.Type__c == VOLUNTEER_ORIENTATION_TRAINING_TYPE_TRAINING
                     && currRec.Volunteer_Attendance__c == VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED) {
-                retSet.add(currRec.Volunteer__c);
+                ret.add(currRec.Volunteer__c);
             }
         }
-        return retSet;
+        return ret;
     }
 
-    /**
-     * @description
-     *
-     * @param newList
-     *
-     * @return
-     */
+    // Return set of Ids for registered training volunteers
     public static Set<Id> getTrainingRegisteredVolunteerIds(List<Volunteer_Orientation_Training__c> newList) {
-        Set<Id> retSet = new Set<Id>();
+        Set<Id> ret = new Set<Id>();
         for (Volunteer_Orientation_Training__c currRec : newList) {
             if (currRec.Type__c == VOLUNTEER_ORIENTATION_TRAINING_TYPE_TRAINING
                     && currRec.Volunteer_Attendance__c == VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_REGISTERED) {
-                retSet.add(currRec.Volunteer__c);
+                ret.add(currRec.Volunteer__c);
             }
         }
-        return retSet;
+        return ret;
     }
 
-    /**
-     * @description Return set of class offering Ids from VOT records
-     *
-     * @param newList
-     * @param oldMap
-     *
-     * @return
-     */
-    public static Set<Id> getClassOfferingIds(List<Volunteer_Orientation_Training__c> newList, Map<Id, Volunteer_Orientation_Training__c> oldMap) {
-        Set<Id> retSet = new Set<Id>();
-        if (!trac_TriggerHandlerBase.blockTrigger) {
-            for (Volunteer_Orientation_Training__c currRec : newList) {
-                if (currRec.Volunteer__c != null && currRec.Class_Offering__c != null
-                        && (oldMap == null || oldMap.get(currRec.Id).Class_Offering__c != currRec.Class_Offering__c)) {
-                    retSet.add(currRec.Class_Offering__c);
-                }
-            }
-        }
-        return retSet;
-    }
-
-    /**
-     * @description Return list of VOT records of type training and valid status
-     *
-     * @param newList
-     *
-     * @return
-     */
+    // Return list of VOT records of type training and valid status
     public static List<Volunteer_Orientation_Training__c> getTrainingVOTRecords(List<Volunteer_Orientation_Training__c> newList) {
-        List<Volunteer_Orientation_Training__c> retList = new List<Volunteer_Orientation_Training__c>();
-        if (!trac_TriggerHandlerBase.blockTrigger) {
-            for (Volunteer_Orientation_Training__c currRec : newList) {
-                if (currRec.Type__c == VOLUNTEER_ORIENTATION_TRAINING_TYPE_TRAINING
-                        && (currRec.Volunteer_Attendance__c == VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_REGISTERED || currRec.Volunteer_Attendance__c == VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED || currRec.Volunteer_Attendance__c == VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_VOLUNTEER_CANCELLED)) {
-                    retList.add(currRec);
-                }
+        List<Volunteer_Orientation_Training__c> ret = new List<Volunteer_Orientation_Training__c>();
+        for (Volunteer_Orientation_Training__c currRec : newList) {
+            if (currRec.Type__c == VOLUNTEER_ORIENTATION_TRAINING_TYPE_TRAINING
+                    && (currRec.Volunteer_Attendance__c == VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_REGISTERED || currRec.Volunteer_Attendance__c == VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED || currRec.Volunteer_Attendance__c == VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_VOLUNTEER_CANCELLED)) {
+                ret.add(currRec);
             }
         }
-        return retList;
+        return ret;
+    }
+
+    // Return set of volunteer Ids from cancelled VOT records
+    public static Set<Id> getCancelledTrainingVolunteers(List<Volunteer_Orientation_Training__c> newList, Map<Id, Volunteer_Orientation_Training__c> oldMap) {
+        Set<Id> ret = new Set<Id>();
+        for (Volunteer_Orientation_Training__c currRec : newList) {
+            if (currRec.Type__c == VOLUNTEER_ORIENTATION_TRAINING_TYPE_ORIENTATION
+                    && (oldMap == null || currRec.Volunteer_Attendance__c == VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_VOLUNTEER_CANCELLED && oldMap.get(currRec.Id).Volunteer_Attendance__c != VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_VOLUNTEER_CANCELLED)) {
+                ret.add(currRec.Volunteer__c);
+            }
+        }
+        return ret;
+    }
+
+    // Return set of class offering Ids from VOT records
+    public static Set<Id> getClassOfferingIds(List<Volunteer_Orientation_Training__c> newList, Map<Id, Volunteer_Orientation_Training__c> oldMap) {
+        Set<Id> ret = new Set<Id>();
+        for (Volunteer_Orientation_Training__c currRec : newList) {
+            if (currRec.Volunteer__c != null && currRec.Class_Offering__c != null
+                    && (oldMap == null || oldMap.get(currRec.Id).Class_Offering__c != currRec.Class_Offering__c)) {
+                ret.add(currRec.Class_Offering__c);
+            }
+        }
+        return ret;
     }
 
     /**

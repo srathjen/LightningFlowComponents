@@ -245,6 +245,7 @@ public class Constant_AC {
 	public static final String CONTACT_PUBLICITY_YES = 'Yes';
 	public static final String CONTACT_HIDDEN_VOLUNTEER_STATUS_TRAINING_REGISTERED = 'Training Registered';
 	public static final String CONTACT_HIDDEN_VOLUNTEER_STATUS_ORIENTATION_COMPLETED = 'Orientation With Completed';
+	public static final String CONTACT_HIDDEN_VOLUNTEER_STATUS_ORIENTATION_WITHOUT_COMPLETED = 'Orientation Without Completed';
 
 	/**
 	 * Chapter Role File Constants
