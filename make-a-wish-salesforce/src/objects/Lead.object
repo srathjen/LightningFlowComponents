@@ -16275,7 +16275,7 @@ RecordType.Name ="Wish Child"</errorConditionFormula>
         <fullName>Lead_DOB_Referral_Validation</fullName>
         <active>true</active>
         <description>When lead is changed to Referred, DOB is mandatory.</description>
-        <errorConditionFormula>AND( ISCHANGED(Status), ISPICKVAL(Status,'Referred'), ISBLANK(DOB__c), $Profile.Name != 'Integration')
+        <errorConditionFormula>AND(ISPICKVAL(Status,'Referred'), ISBLANK(DOB__c), $Profile.Name != 'Integration')
 &amp;&amp;
 RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>DOB__c</errorDisplayField>
