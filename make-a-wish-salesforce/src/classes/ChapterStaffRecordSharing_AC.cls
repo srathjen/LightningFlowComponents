@@ -347,6 +347,33 @@ public class ChapterStaffRecordSharing_AC {
         insert volunteerOppShareList;
     }
 
+    public static List<ContactShare> createContactSharing(Map<Id, Set<Id>> wishUserMap, Map<Id, Case> wishRelatedContactMap,
+            Map<Id, Id> volunteerUserMap) {
+        List<ContactShare> contactToShareList = new List<ContactShare>();
+        if(wishUserMap.isEmpty()){
+            return contactToShareList;
+        }
+        for (Id caseId : wishUserMap.keySet()) {
+            if (wishUserMap.containsKey(caseId)) {
+                for (Id userId : wishUserMap.get(caseId)) {
+                    ContactShare shareContact = new ContactShare();
+                    shareContact.ContactAccessLevel = 'Edit';
+                    if (wishRelatedContactMap.containsKey(caseId)
+                            && wishRelatedContactMap.get(caseId) != null) {
+                        shareContact.ContactId = wishRelatedContactMap.get(caseId).ContactId;
+                    }
+                    if (volunteerUserMap.containsKey(userId)
+                            && volunteerUserMap.get(userId) != null) {
+                        shareContact.UserOrGroupId = volunteerUserMap.get(userId);
+                        contactToShareList.add(shareContact);
+                    }
+                }
+            }
+        }
+        insert contactToShareList;
+        return contactToShareList;
+    }
+
     /**
      * @param usersRole
      *

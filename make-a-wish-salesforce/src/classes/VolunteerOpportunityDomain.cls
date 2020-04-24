@@ -27,7 +27,7 @@ public class VolunteerOpportunityDomain extends trac_TriggerHandlerBase {
 	/**
 	 * After insert of Volunteer Opportunity
 	 */
-	public override void handleAfterInsert() {
+	public override void handleAfterInsert() { 
 		Set<Id> volunteerIds = VolunteerOpportunityService.buildVolunteerApprovedOpportunitiesIds(newVolunteerOpportunityList);
 		ContactService.updateAssignedNumberOfOpportunities(volunteerIds);
 		Map<String, List<Volunteer_Opportunity__c>> volunteerOpportunityShareMap =
