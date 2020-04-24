@@ -21,7 +21,6 @@ private class DynamicContentServiceTest {
         Dynamic_Content__c volunteerAzContent = dynamicContent.get(0);
         volunteerAzContent.RecordTypeId = PROSPECTIVE_VOLUNTEER_RT_ID;
         volunteerAzContent.Chapter_Name__c = accountAzChapter.Id;
-        volunteerAzContent.Active__c = true;
         Dynamic_Content__c volunteerAzContent2 = dynamicContent.get(1);
         volunteerAzContent2.RecordTypeId = PROSPECTIVE_VOLUNTEER_RT_ID;
         volunteerAzContent2.Chapter_Name__c = accountAzChapter.Id;
@@ -82,10 +81,10 @@ private class DynamicContentServiceTest {
     @isTest
     private static void validateRestrictActiveUpdateForDupes() {
         String errorMessage = '';
+        Integer count = 0;
         Map<Id, Dynamic_Content__c> inactiveContentMap = new Map<Id, Dynamic_Content__c>([
             SELECT Id, Active__c, RecordTypeId, Chapter_Name__c 
-            FROM Dynamic_Content__c 
-            WHERE Active__c = false]);
+            FROM Dynamic_Content__c]);
         List<Dynamic_Content__c> updatedContentList = new List<Dynamic_Content__c>();
         for(Dynamic_Content__c content : inactiveContentMap.values()) {
             Dynamic_Content__c updatedContent = new Dynamic_Content__c(Id = content.Id);
@@ -93,7 +92,12 @@ private class DynamicContentServiceTest {
             updatedContent.RecordTypeId = content.RecordTypeId;
             updatedContent.Chapter_Name__c = content.Chapter_Name__c;
             updatedContentList.add(updatedContent);
+            if(count < 1) {
+                content.Active__c = false;
+                count++;
+            }
         }
+        update inactiveContentMap.values();
         
         Test.startTest();
         try {

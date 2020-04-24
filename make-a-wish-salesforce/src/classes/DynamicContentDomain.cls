@@ -13,23 +13,35 @@ public class DynamicContentDomain extends trac_TriggerHandlerBase {
     /**
     * Before insert of dynamic content
     */
+    public override void handleBeforeInsertIgnoreBypass() {
+        DynamicContentService.setActiveFlagTrue(newDynamicContentList);
+    }
+    
+    /**
+    * Before insert of dynamic content if user has no bypass_trigger record
+    */
     public override void handleBeforeInsert() {
         DynamicContentService.checkChapterPermission(newDynamicContentList);
-        DynamicContentService.setActiveFlagTrue(newDynamicContentList);
     }
     
     /**
     * Before update of dynamic content
     */
+    public override void handleBeforeUpdateIgnoreBypass() {
+        DynamicContentService.restrictActiveUpdateForDupes(newDynamicContentList, oldDynamicContentMap);
+    }
+    
+    /**
+    * Before update of dynamic content if user has no bypass_trigger record
+    */
     public override void handleBeforeUpdate() {
         DynamicContentService.checkChapterPermission(newDynamicContentList, oldDynamicContentMap);
-        DynamicContentService.restrictActiveUpdateForDupes(newDynamicContentList, oldDynamicContentMap);
     }
     
     /**
     * After insert of dynamic content
     */
-    public override void handleAfterInsert() {
+    public override void handleAfterInsertIgnoreBypass() {
         DynamicContentService.updateActiveFlagFalse(newDynamicContentList);
     }
 }
