@@ -24,6 +24,7 @@ public class VolunteerOrientation_AC_Test {
 		System.runAs(currUser) {
 			Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 			insert acc;
+			
 			Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
 			insert con;
 			OrientationandTrainingUtil.createAffiliation(con.Id);
