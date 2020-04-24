@@ -391,6 +391,7 @@ public class Constant_AC {
 	public static final String TASK_STATUS_IN_PROGRESS = 'In Progress';
 	public static final String TASK_STATUS_SCHEDULED = 'Scheduled';
 	public static final String TASK_STATUS_DECLINED = 'Declined';
+	public static final String TASK_STATUS_APPROVED = 'Approved';
 	public static final String TASK_DESCRIPTION_RUSH_QUALIFIED = 'New RUSH referral qualified';
 	public static final String TASK_SUBJECT_SEND_DIAGNOSIS_VERIFICATION = 'Send Diagnosis Verification';
 	public static final String TASK_SUBJECT_REMINDER_FOR_DIAGNOSIS_VERIFICATION = 'days reminder for Diagnosis Verification';
@@ -422,6 +423,12 @@ public class Constant_AC {
 	public static final String TASK_SUBJECT_WISH_CONCEPT_APPROVAL = 'Wish concept approval';
 	public static final String TASK_SUBJECT_WISH_NOT_CLOSED = 'Wish not closed';
 	public static final String TASK_SUBJECT_FOLLOWUP_ACTIVITIES_INCOMPLETE = 'Volunteer wish follow-up activities not complete';
+	public static final String TASK_SUBJECT_FLIGHTS_BOOKED = 'Flights booked';
+	public static final String TASK_SUBJECT_BUDGET = 'Budget';
+	public static final String TASK_SUBJECT_REQUEST_PASSPORTS = 'Request Passports from family';
+	public static final String TASK_SUBJECT_PASSPORTS_REQUESTED = 'Passports Requested from family';
+	public static final String TASK_SUBJECT_SNEAK_PEEK_LETTER = 'Sneak Peek Letter';
+	public static final String TASK_SUBJECT_CRUISE_REQUEST_FORM = 'Cruise request form';
 	public static final String TASK_TYPE_EMAIL = 'Email';
 	public static final String TASK_AVAILABLE_TIME_OTHER = 'Other';
 	public final static String TASK_RT_STAFF_LABEL = Schema.SObjectType.Task.getRecordTypeInfosByDeveloperName().get('Staff').getName();
