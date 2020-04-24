@@ -11,7 +11,9 @@ Modification Log:
 2. 04/12/2018 - Yuvraj - IME-77 - LINE NO: 531
 3 .07/10/2018 - Vignesh SM  - IME 213
 4. 09/10/2019 - Manik - WLP-423
-4. 01/10/2020 - Brittany - SIW-147
+5. 01/10/2020 - Brittany - SIW-147
+6. 04/24/2020 - Chris Smith - SIW-507 - correct logic to show only fields on merge page that
+							are members of the merge_fields fieldset
 ****************************************************************************************/
 public class LeadDuplicate_AC {
 	public String currId { get; set; }
@@ -670,8 +672,10 @@ public class LeadDuplicate_AC {
 				}
 				// Adding some non-updateable system fields which we need to add to the record diff table.
 				query += 'createdby.name, createddate, LastModifiedBy.name, LastModifiedDate';
+				//Store Record Type ID locally to provide proper scope for Database.query()
+				String localWishRTid = Constant_AC.LEAD_RT_WISH_CHILD;
 				// Finally completing the query by appending the table name and the filter clause
-				query += ' from Lead where id IN :mergeCandidates and RecordTypeId = :Constant_AC.LEAD_RT_WISH_CHILD';
+				query += ' from Lead where id IN :mergeCandidates and RecordTypeId = :localWishRTid';
 				List<Lead> leads;
 				try {
 					leads = Database.query(query); // Query the records
