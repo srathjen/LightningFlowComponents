@@ -34,8 +34,6 @@ public class VolunteerOpportunityTrigger_AT_Test {
 		}
 		test.startTest();
 		insert volunteerOpportunityList;
-		VolOpportunity_OnAfter_Update_Helper.updateCase(caseIdsSet, volOppIdsSet, volunteerOpportunityList);
-		VolOpportunity_OnAfter_Update_Helper.createCaseTeamMembers(volunteerOpportunityList);
 		test.stopTest();
 		return volunteerOpportunityList;
 	}
@@ -50,8 +48,8 @@ public class VolunteerOpportunityTrigger_AT_Test {
 		insert VolunteerContact;
 		Case parentCase = OrientationandTrainingUtil.ParentCasetoAddCaseMember(wishChild.Id);
 		insert parentCase;
-		Task taskIns = OrientationandTrainingUtil.createFamilyCheckinTask(parentCase.Id);
-		insert taskIns;
+//		Task taskIns = OrientationandTrainingUtil.createFamilyCheckinTask(parentCase.Id);
+//		insert taskIns;
 		Role__c roleName = OrientationandTrainingUtil.createRole();
 		insert roleName;
 		Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id, roleName.id);
@@ -101,12 +99,11 @@ public class VolunteerOpportunityTrigger_AT_Test {
 		volOppList.add(volOpportunity);
 		nonWishEventIdsSet.add(nonWishEvent.id);
 		volId.add(volOpportunity.id);
-		VolOpportunity_OnAfter_Update_Helper.updateVolunteerRegisterdCount(volOppList, nonWishEventIdsSet, true);
+		VolunteerOpportunityService.updateVolunteerRegisteredCount(volOppList, nonWishEventIdsSet, true);
 		System.runAs(new User(Id = UserInfo.getUserId())) {
 			volunteerUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunteerContact.Id);
 			userIdset.add(volunteerUser.id);
-			VolOpportunity_OnAfter_Update_Helper.updateUserRoleId(volId, userIdset);
-
+			VolunteerOpportunityService.updateUserRoleId(volOppList);
 		}
 		OrientationandTrainingUtil.createVolunteerCount(nonWishEvent.Id, chapterRole.Id, 3);
 		Volunteer_Opportunity__c deleteOpportunity = new Volunteer_Opportunity__c ();

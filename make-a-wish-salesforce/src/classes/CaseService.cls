@@ -1664,7 +1664,7 @@ public class CaseService {
 		}
 
 		if (volunteerIdsSet.size() > 0) {
-			VolOpportunity_OnAfter_Update_Helper.ActiveWishCount(volunteerIdsSet);
+			VolunteerOpportunityService.activeWishCount(volunteerIdsSet);
 		}
 	}
 
