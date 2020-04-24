@@ -135,13 +135,13 @@
         <div class="row">
             <section class="col-md-12">
                 <div class="row">
-                    <h1 class="col-md-12">Training</h1>
+                    <h1 class="col-md-12">{!$Label.Volunteer_Portal_Page_Title_Training}</h1>
                 </div>
 
                 <nav>
                     <ul class="step">
                         <li>
-                            <a href="/VolunteerProfile_VF">Back to Profile</a>
+                            <a href="/VolunteerProfile_VF">{!$Label.Volunteer_Portal_Back_To_Profile}</a>
                         </li>
                     </ul>
                 </nav>
@@ -152,32 +152,30 @@
                     </div>
                     <apex:pageBlock>
                         <apex:outputPanel rendered="{!(isTrainingExist == True)}">
-                            <h3>Success</h3>
-                            <p>You have successfully registered for a volunteer training. If you need to change your
-                                training day/time please cancel your existing training and register for a new
-                                training.</p>
+                            <h3>{!$Label.Volunteer_Portal_Title_Confirmation_Success}</h3>
+                            <p>{!$Label.Volunteer_Portal_Confirmation_Success}</p>
                         </apex:outputPanel>
                         <apex:outputPanel rendered="{!(isCancelled == True)}">
-                            <h3>Cancelled</h3>
-                            <p>You have successfully cancelled for a registered Volunteer Training program</p>
+                            <h3>{!$Label.Volunteer_Portal_Title_Confirmation_Cancelled}</h3>
+                            <p>{!$Label.Volunteer_Portal_Confirmation_Cancelled_Training}</p>
                         </apex:outputPanel>
                         <apex:outputPanel rendered="{!If(checkExistProgram == true, false,true)}">
-                            <p><strong>Registered Training Details</strong></p>
+                            <p><strong>{!$Label.Volunteer_Portal_Table_Section_Training}</strong></p>
                             <table id="dataTab1" class="table table-maw table-hover" width="100%">
                                 <thead class="thead-default">
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Chapter Name</th>
-                                    <th>Type</th>
-                                    <th>Date</th>
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
-                                    <th>Location</th>
-                                    <th>Max Capacity</th>
-                                    <th>Available Seats</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                    <th>Link</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Name}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Chapter}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Type}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Date}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Start_Time}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_End_Time}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Location}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Capacity}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Available_Seats}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Status}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Action}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Link}</th>
                                 </tr>
                                 </thead>
 
@@ -201,7 +199,6 @@
                                                 <td>{!training.maxCapacity}</td>
                                                 <td>{!training.avilableSheets}</td>
                                                 <td>{!training.Status}</td>
-
                                                 <td>
                                                     <apex:commandLink action="{!Cancel}"
                                                                       rendered="{!(If(training.status == 'Registered',True,False))}">
@@ -228,21 +225,20 @@
                         </apex:outputPanel>
 
                         <apex:outputPanel id="myPanel">
-                            <h2>Upcoming Trainings</h2>
+                            <h2>{!$Label.Volunteer_Portal_Table_Section_Upcoming_Training}</h2>
                             <table id="dataTab2" class="table table-maw table-hover" width="100%">
                                 <thead class="thead-default">
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Chapter Name</th>
-                                    <th>Type</th>
-                                    <th>Date</th>
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
-                                    <th>Location</th>
-                                    <th>Max Capacity</th>
-                                    <th>Available Seats</th>
-
-                                    <th>Action</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Name}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Chapter}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Type}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Date}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Start_Time}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_End_Time}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Location}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Capacity}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Available_Seats}</th>
+                                    <th>{!$Label.Volunteer_Portal_Table_Header_Action}</th>
                                 </tr>
                                 </thead>
 
@@ -253,7 +249,6 @@
                                             <td>{!training.orientationName}</td>
                                             <td>{!training.chapterName}</td>
                                             <td>{!training.recordType}</td>
-
                                             <td>
                                                 <apex:outputText value="{0,date,MM'/'dd'/'yyyy}" id="date2">
                                                     <apex:param value="{!training.orientationDate}"/>
@@ -264,7 +259,6 @@
                                             <td>{!training.location}</td>
                                             <td>{!training.maxCapacity}</td>
                                             <td>{!training.avilableSheets}</td>
-
                                             <td>
                                                 <apex:commandLink action="{!Register}">Register
                                                     <apex:param name="trainingId" value="{!training.recordId}"
@@ -280,7 +274,7 @@
                     </apex:pageBlock>
                     <div class="row">
                         <div class="col-md-12">
-                            <h3>Additional Information</h3>
+                            <h3>{!$Label.Volunteer_Portal_Additional_Information}</h3>
                             <apex:outputText value="{!orientationContent}" escape="false"/>
                         </div>
                     </div>
@@ -290,12 +284,10 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title">For a Better Experience</h1>
+                                    <h1 class="modal-title">{!$Label.Volunteer_Portal_Better_Experience_Information_Header}</h1>
                                 </div>
                                 <div class="modal-body">
-                                    <p class="text-muted">Please select the radio option "Always allow pop-ups for
-                                        this domain", in the URL bar (Pop up Blocker options) then refresh the
-                                        page.</p>
+                                    <p class="text-muted">{!$Label.Volunteer_Portal_Better_Experience_Information}</p>
                                 </div>
                                 <div class="modal-footer">
                                     <apex:commandButton html-data-dismiss="modal" html-aria-label="Close"
@@ -312,8 +304,7 @@
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-12 col-md-12">
                                             <div class="row">
-                                                Our records show you have already completed this training. Do you
-                                                want to continue registering?<br/>
+                                                {!$Label.Volunteer_Portal_Training_Completed_Warning}<br/>
                                             </div>
                                             <div class="col-sm-4">
                                                 <apex:commandButton value="Yes" action="{!Register}"
