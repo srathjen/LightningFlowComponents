@@ -13,33 +13,35 @@ public class VolunteerOrientation_AC_Test {
 		trac_TriggerHandlerBase.blockTrigger = true;
 	}
 
-	static testMethod void coverMisc() {
+	@IsTest
+	static void coverMisc() {
 		User currUser;
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
+		System.runAs(new User(Id = UserInfo.getUserId())) {
 			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(null);
 			insert currUser;
 		}
 
-		System.RunAs(currUser) {
+		System.runAs(currUser) {
 			Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 			insert acc;
-			Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+			
+			Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
 			insert con;
-			OrientationandTrainingUtil.createAffiliation(con.id);
+			OrientationandTrainingUtil.createAffiliation(con.Id);
 			Role__c currRole = OrientationandTrainingUtil.createRole();
 			insert currRole;
-			Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.id, currRole.id);
+			Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
 			insert currChapRole;
-			Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.id, currChapRole.id);
+			Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
 			insert currVolRole;
 			Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
 			insert currOandT;
-			Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.id, currOandT.id);
+			Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
 			insert currChapOandT;
-			Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.id);
+			Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
 			insert currOffering;
 
-			Volunteer_Orientation_Training__c createVolOrientation = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.id, currOffering.Id, currUser.ContactId, 'Completed');
+			Volunteer_Orientation_Training__c createVolOrientation = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.Id, currOffering.Id, currUser.ContactId, 'Completed');
 			createVolOrientation.Volunteer_Attendance__c = 'Registered';
 
 			update createVolOrientation;
@@ -52,7 +54,7 @@ public class VolunteerOrientation_AC_Test {
 			neworgAffiliation.Constituent_code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
 			insert neworgAffiliation;
 
-			System.assertEquals(currOffering.id, createVolOrientation.class_offering__c);
+			System.assertEquals(currOffering.Id, createVolOrientation.class_offering__c);
 			TestClassUtil.createDynamicContent();
 			PageReference pageRef = Page.VolunteerTraining_VF;
 			Test.setCurrentPage(pageRef);
@@ -63,7 +65,7 @@ public class VolunteerOrientation_AC_Test {
 			controller.getOrientationRecordList();
 			controller.classOfferingMap.put(controller.trainingId, currOffering);
 			controller.Register();
-			controller.trainingId = currOffering.id;
+			controller.trainingId = currOffering.Id;
 			List<Orientation_Training__c> volunteerRelatedTrainingsList = controller.volunteerTrainingsList;
 			Boolean bgTabPermission = controller.bgTabPermission;
 			Boolean trainingTabVisible = controller.trainingTabVisible;
@@ -96,35 +98,36 @@ public class VolunteerOrientation_AC_Test {
 	}
 
 	// Complete the Volunteer Orientation.
-	static testMethod void CreatingCompletedOrientation() {
+	@IsTest
+	static void CreatingCompletedOrientation() {
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
 		insert con;
-		OrientationandTrainingUtil.createAffiliation(con.id);
+		OrientationandTrainingUtil.createAffiliation(con.Id);
 		Role__c currRole = OrientationandTrainingUtil.createRole();
 		insert currRole;
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.id, currRole.id);
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.id, currChapRole.id);
+		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
+		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
 		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
 		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.id, currOandT.id);
+		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
 		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.id);
+		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
 		insert currOffering;
 
 		User currUser;
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
 		}
-		Volunteer_Orientation_Training__c createVolOrientation = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.id, currOffering.Id, currUser.ContactId, 'Completed');
+		Volunteer_Orientation_Training__c createVolOrientation = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.Id, currOffering.Id, currUser.ContactId, 'Completed');
 
-		Volunteer_Orientation_Training__c createVolOrientation2 = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.id, currOffering.Id, currUser.ContactId, 'Completed');
+		Volunteer_Orientation_Training__c createVolOrientation2 = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.Id, currOffering.Id, currUser.ContactId, 'Completed');
 		createVolOrientation2.Type__c = 'Orientation';
 		createVolOrientation2.Volunteer_Attendance__c = 'No Show';
 		update createVolOrientation2;
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
-			System.assertEquals(currOffering.id, createVolOrientation.class_offering__c);
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			System.assertEquals(currOffering.Id, createVolOrientation.class_offering__c);
 			TestClassUtil.createDynamicContent();
 			PageReference pageRef = Page.VolunteerTraining_VF;
 			Test.setCurrentPage(pageRef);
@@ -133,19 +136,20 @@ public class VolunteerOrientation_AC_Test {
 			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
 			controller.TimingInfo();
 			controller.getOrientationRecordList();
-			controller.trainingId = currOffering.id;
+			controller.trainingId = currOffering.Id;
 			List<Orientation_Training__c> volunteerRelatedTrainingsList = controller.volunteerTrainingsList;
 			Boolean bgTabPermission = controller.bgTabPermission;
 			Boolean trainingTabVisible = controller.trainingTabVisible;
 		}
 	}
 	// Display Class OFfering on Portal.
-	static testMethod void VolunteerTrainingDisplay() {
+	@IsTest
+	static void VolunteerTrainingDisplay() {
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
 		insert con;
-		//OrientationandTrainingUtil.createAffiliation(con.id);
+		//OrientationandTrainingUtil.createAffiliation(con.Id);
 
 		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
 		neworgAffiliation.npe5__Contact__c = con.Id;
@@ -158,26 +162,26 @@ public class VolunteerOrientation_AC_Test {
 		User currUser;
 		Role__c currRole = OrientationandTrainingUtil.createRole();
 		insert currRole;
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.id, currRole.id);
+		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
 		insert currChapRole;
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.id, currChapRole.id);
+		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
 		insert currVolRole;
 		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
 		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.id, currOandT.id);
+		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
 		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.id);
+		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
 		insert currOffering;
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
 			insert currUser;
 		}
-		Volunteer_Orientation_Training__c createVolOrientation = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.id, currOffering.id, currUser.ContactId, 'Registered');
+		Volunteer_Orientation_Training__c createVolOrientation = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.Id, currOffering.Id, currUser.ContactId, 'Registered');
 //		insert createVolOrientation;
-		//System.RunAs(new User(Id = UserInfo.getUserId())) {
-		System.RunAs(currUser) {
+		//System.runAs(new User(Id = UserInfo.getUserId())) {
+		System.runAs(currUser) {
 
-			System.assertEquals(currOffering.id, createVolOrientation.class_offering__c);
+			System.assertEquals(currOffering.Id, createVolOrientation.class_offering__c);
 
 			TestClassUtil.createDynamicContent();
 			PageReference pageRef = Page.VolunteerOrientation_VF;
@@ -186,19 +190,20 @@ public class VolunteerOrientation_AC_Test {
 			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
 			controller.TimingInfo();
 			controller.getOrientationRecordList();
-			controller.trainingId = currOffering.id;
+			controller.trainingId = currOffering.Id;
 			controller.Register();
 		}
 	}
 
 	// Register for new Orientation.
-	static testMethod void CreateNewTraining() {
+	@IsTest
+	static void CreateNewTraining() {
 		LMS_Credentials__c currLMSCredential = testClassUtil.createLMSCredentials();
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
 		insert con;
-		//OrientationandTrainingUtil.createAffiliation(con.id);
+		//OrientationandTrainingUtil.createAffiliation(con.Id);
 		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
 		neworgAffiliation.npe5__Contact__c = con.Id;
 		neworgAffiliation.npe5__Organization__c = acc.Id;
@@ -209,21 +214,21 @@ public class VolunteerOrientation_AC_Test {
 
 		Role__c currRole = OrientationandTrainingUtil.createRole();
 		insert currRole;
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.id, currRole.id);
+		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
 		insert currChapRole;
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.id, currChapRole.id);
+		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
 		insert currVolRole;
 		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
 		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.id, currOandT.id);
+		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
 		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.id);
+		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
 		insert currOffering;
 		User currUser;
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
 		}
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
+		System.runAs(new User(Id = UserInfo.getUserId())) {
 
 			TestClassUtil.createDynamicContent();
 			PageReference pageRef = Page.VolunteerOrientation_VF;
@@ -231,20 +236,21 @@ public class VolunteerOrientation_AC_Test {
 			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
 			controller.TimingInfo();
 			controller.getOrientationRecordList();
-			controller.trainingId = currOffering.id;
+			controller.trainingId = currOffering.Id;
 			controller.Register();
-			VolunteerOrientation_AC.updateUser('volunteer@gmail.com', '3409379', 'volunteer@gmail.com', currUser.id);
+			VolunteerOrientation_AC.updateUser('volunteer@gmail.com', '3409379', 'volunteer@gmail.com', currUser.Id);
 		}
 	}
 
 	// Creating Orientation with Cancelled status.
-	static testMethod void CreatingCancelledTraining() {
+	@IsTest
+	static void CreatingCancelledTraining() {
 		LMS_Credentials__c currLMSCredential = testClassUtil.createLMSCredentials();
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
 		insert con;
-		//OrientationandTrainingUtil.createAffiliation(con.id);
+		//OrientationandTrainingUtil.createAffiliation(con.Id);
 		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
 		neworgAffiliation.npe5__Contact__c = con.Id;
 		neworgAffiliation.npe5__Organization__c = acc.Id;
@@ -256,24 +262,24 @@ public class VolunteerOrientation_AC_Test {
 		User currUser;
 		Role__c currRole = OrientationandTrainingUtil.createRole();
 		insert currRole;
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.id, currRole.id);
+		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
 		insert currChapRole;
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.id, currChapRole.id);
+		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
 		insert currVolRole;
 		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
 		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.id, currOandT.id);
+		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
 		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.id);
+		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
 		insert currOffering;
-		Volunteer_Orientation_Training__c createVolOrientation = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.id, currOffering.id, con.id, 'Volunteer Cancelled');
+		Volunteer_Orientation_Training__c createVolOrientation = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.Id, currOffering.Id, con.Id, 'Volunteer Cancelled');
 //        insert createVolOrientation;
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
 		}
 
 		VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
+		System.runAs(new User(Id = UserInfo.getUserId())) {
 
 			TestClassUtil.createDynamicContent();
 			PageReference pageRef = Page.VolunteerOrientation_VF;
@@ -281,7 +287,7 @@ public class VolunteerOrientation_AC_Test {
 
 			controller.TimingInfo();
 			controller.getOrientationRecordList();
-			controller.trainingId = currOffering.id;
+			controller.trainingId = currOffering.Id;
 			VolunteerOrientation_AC.updateUser('volunteer@gmail.com', '3409379', 'volunteer@gmail.com', UserInfo.getUserId());
 		}
 
@@ -289,13 +295,14 @@ public class VolunteerOrientation_AC_Test {
 		// controller.Register();
 	}
 	// Cancel Registered Orientation.
-	static testMethod void CancelTraining() {
+	@IsTest
+	static void CancelTraining() {
 		LMS_Credentials__c currLMSCredential = testClassUtil.createLMSCredentials();
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
 		insert con;
-		//OrientationandTrainingUtil.createAffiliation(con.id);
+		//OrientationandTrainingUtil.createAffiliation(con.Id);
 		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
 		neworgAffiliation.npe5__Contact__c = con.Id;
 		neworgAffiliation.npe5__Organization__c = acc.Id;
@@ -307,25 +314,25 @@ public class VolunteerOrientation_AC_Test {
 		User currUser;
 		Role__c currRole = OrientationandTrainingUtil.createRole();
 		insert currRole;
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.id, currRole.id);
+		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
 		insert currChapRole;
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.id, currChapRole.id);
+		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
 		insert currVolRole;
 		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
 		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.id, currOandT.id);
+		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
 		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.id);
+		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
 		insert currOffering;
-		Volunteer_Orientation_Training__c createVolOrientation = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.id, currOffering.id, con.id, 'Registered');
+		Volunteer_Orientation_Training__c createVolOrientation = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.Id, currOffering.Id, con.Id, 'Registered');
 
 		createVolOrientation.Volunteer_Attendance__c = 'Volunteer Cancelled';
 		update createVolOrientation;
-		Volunteer_Orientation_Training__c createVolOrientation2 = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.id, currOffering.id, con.id, 'Registered');
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
+		Volunteer_Orientation_Training__c createVolOrientation2 = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.Id, currOffering.Id, con.Id, 'Registered');
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
 		}
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
+		System.runAs(new User(Id = UserInfo.getUserId())) {
 
 			TestClassUtil.createDynamicContent();
 			PageReference pageRef = Page.VolunteerOrientation_VF;
@@ -335,7 +342,7 @@ public class VolunteerOrientation_AC_Test {
 			controller.TimingInfo();
 
 			controller.getOrientationRecordList();
-			controller.trainingId = currOffering.id;
+			controller.trainingId = currOffering.Id;
 			controller.Cancel();
 			system.assertEquals('Volunteer Cancelled', createVolOrientation.Volunteer_Attendance__c);
 			controller.Register();
@@ -344,12 +351,14 @@ public class VolunteerOrientation_AC_Test {
 	}
 
 	// Duplicate Orientation time prevention.
-	static testMethod void BookingTrainingwithSameTime() {
+	@IsTest
+	static void BookingTrainingwithSameTime() {
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+
+		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
 		insert con;
-		//OrientationandTrainingUtil.createAffiliation(con.id);
+
 		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
 		neworgAffiliation.npe5__Contact__c = con.Id;
 		neworgAffiliation.npe5__Organization__c = acc.Id;
@@ -360,30 +369,38 @@ public class VolunteerOrientation_AC_Test {
 
 		Role__c currRole = OrientationandTrainingUtil.createRole();
 		insert currRole;
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.id, currRole.id);
+
+		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
 		insert currChapRole;
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.id, currChapRole.id);
+
+		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
 		insert currVolRole;
 
 		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
 		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.id, currOandT.id);
+
+		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
 		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.id);
+
+		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
 		insert currOffering;
-		Volunteer_Orientation_Training__c createVolOrientation = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.id, currOffering.id, con.id, 'Registered');
+
+		VolunteerOrientation_AC_Test.createVolOrientation(currOandT.Id, currOffering.Id, con.Id, 'Registered');
 
 		Orientation_Training__c currOandT1 = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
 		insert currOandT1;
-		Chapter_Role_O_T__c currChapOandT1 = OrientationandTrainingUtil.createChapterOandT(currChapRole.id, currOandT1.id);
+
+		Chapter_Role_O_T__c currChapOandT1 = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT1.Id);
 		insert currChapOandT1;
-		Class_Offering__c currOffering1 = OrientationandTrainingUtil.createClassOffering(currChapOandT1.id);
+
+		Class_Offering__c currOffering1 = OrientationandTrainingUtil.createClassOffering(currChapOandT1.Id);
 		insert currOffering1;
+
 		User currUser;
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
 		}
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
+		System.runAs(new User(Id = UserInfo.getUserId())) {
 
 			TestClassUtil.createDynamicContent();
 			PageReference pageRef = Page.VolunteerOrientation_VF;
@@ -393,13 +410,11 @@ public class VolunteerOrientation_AC_Test {
 			controller.TimingInfo();
 			controller.userRelatedContactId = con.Id;
 			controller.getOrientationRecordList();
-			controller.trainingId = currOffering1.id;
+			controller.trainingId = currOffering1.Id;
 			controller.Register();
 			controller.Next();
 			controller.Beginning();
 			controller.getPageNumber();
-//                controller.getTotalPages();
-//                controller.End();
 			controller.getDisableNext();
 
 		}
@@ -418,16 +433,16 @@ public class VolunteerOrientation_AC_Test {
 		return createNewVol;
 	}
 
-	static testMethod void CheckViewLMS() {
+	@IsTest
+	static void CheckViewLMS() {
 		Account acc;
 		Contact con;
 		LMS_Credentials__c currLMSCredential;
-		User currUser;
 		acc = OrientationandTrainingUtil.createVolunteerAccount();
-		con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+		con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
 		currLMSCredential = testClassUtil.createLMSCredentials();
-		OrientationandTrainingUtil.createAffiliation(con.id);
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
+		OrientationandTrainingUtil.createAffiliation(con.Id);
+		System.runAs(new User(Id = UserInfo.getUserId())) {
 			testClassUtil.createUser();
 			//testClassUtil.createUser();
 		}
@@ -436,14 +451,14 @@ public class VolunteerOrientation_AC_Test {
 				FROM USER
 				WHERE ID != :Userinfo.getUserId() AND isActive = True
 		];
-		System.RunAs(currUserLst[0]) {
+		System.runAs(currUserLst[0]) {
 
 			LMSCourseSyncMockImpl currLMSCourseSyncMockImpl = new LMSCourseSyncMockImpl();
 			HttpResponse response = new HttpResponse();
 			response.setStatus('OK');
 			response.setStatusCode(200);
 			LMSUserResponse currLMSUserResponse = new LMSUserResponse();
-			currLMSUserResponse.id = 1234;
+			currLMSUserResponse.Id = 1234;
 			currLMSUserResponse.login = 'test@test.com';
 			currLMSUserResponse.code = 'test@test.com';
 			currLMSUserResponse.first_name = 'test';
@@ -457,7 +472,7 @@ public class VolunteerOrientation_AC_Test {
 			Test.setMock(HttpCalloutMock.class, currLMSCourseSyncMockImpl);
 		}
 		Test.startTest();
-		System.RunAs(currUserLst[1]) {
+		System.runAs(currUserLst[1]) {
 			PageReference pageRef = Page.VolunteerOrientation_VF;
 			Test.setCurrentPage(pageRef);
 			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
@@ -470,13 +485,14 @@ public class VolunteerOrientation_AC_Test {
 		Test.stopTest();
 	}
 
-	static testMethod void CreateNewTrainingWithExistingCancelledRecords() {
+	@IsTest
+	static void CreateNewTrainingWithExistingCancelledRecords() {
 		LMS_Credentials__c currLMSCredential = testClassUtil.createLMSCredentials();
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
 		insert con;
-		//OrientationandTrainingUtil.createAffiliation(con.id);
+		//OrientationandTrainingUtil.createAffiliation(con.Id);
 		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
 		neworgAffiliation.npe5__Contact__c = con.Id;
 		neworgAffiliation.npe5__Organization__c = acc.Id;
@@ -487,25 +503,25 @@ public class VolunteerOrientation_AC_Test {
 
 		Role__c currRole = OrientationandTrainingUtil.createRole();
 		insert currRole;
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.id, currRole.id);
+		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
 		insert currChapRole;
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.id, currChapRole.id);
+		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
 		insert currVolRole;
 		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
 		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.id, currOandT.id);
+		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
 		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.id);
+		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
 		insert currOffering;
 
 		Volunteer_Orientation_Training__c volunteerOrientationTraining = OrientationandTrainingUtil.createVolTraining(currOandT.Id, currOffering.Id, con.Id, 'Completed');
 		insert volunteerOrientationTraining;
 
 		User currUser;
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
 		}
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
+		System.runAs(new User(Id = UserInfo.getUserId())) {
 
 			TestClassUtil.createDynamicContent();
 			PageReference pageRef = Page.VolunteerOrientation_VF;
@@ -513,19 +529,20 @@ public class VolunteerOrientation_AC_Test {
 			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
 			controller.TimingInfo();
 			controller.getOrientationRecordList();
-			controller.trainingId = currOffering.id;
+			controller.trainingId = currOffering.Id;
 			controller.userRelatedContactId = con.Id;
 			controller.classOfferingMap = new Map<Id, Class_Offering__c>();
-			controller.classOfferingMap.put(currOffering.id, currOffering);
+			controller.classOfferingMap.put(currOffering.Id, currOffering);
 			controller.Register();
 		}
 	}
 
-	static testMethod void CreateNewTrainingWithVolunteerCancelledRecords() {
+	@IsTest
+	static void CreateNewTrainingWithVolunteerCancelledRecords() {
 		LMS_Credentials__c currLMSCredential = testClassUtil.createLMSCredentials();
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
 		insert con;
 		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
 		neworgAffiliation.npe5__Contact__c = con.Id;
@@ -537,26 +554,26 @@ public class VolunteerOrientation_AC_Test {
 
 		Role__c currRole = OrientationandTrainingUtil.createRole();
 		insert currRole;
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.id, currRole.id);
+		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
 		insert currChapRole;
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.id, currChapRole.id);
+		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
 		insert currVolRole;
 		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
 		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.id, currOandT.id);
+		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
 		currChapOandT.Orientation_Training__r = currOandT;
 		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.id);
+		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
 		insert currOffering;
 
 		Volunteer_Orientation_Training__c volunteerOrientationTraining = OrientationandTrainingUtil.createVolTraining(currOandT.Id, currOffering.Id, con.Id, 'Volunteer Cancelled');
 		insert volunteerOrientationTraining;
 
 		User currUser;
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
 		}
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
+		System.runAs(new User(Id = UserInfo.getUserId())) {
 
 			TestClassUtil.createDynamicContent();
 			PageReference pageRef = Page.VolunteerOrientation_VF;
@@ -564,10 +581,10 @@ public class VolunteerOrientation_AC_Test {
 			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
 			controller.TimingInfo();
 			controller.getOrientationRecordList();
-			controller.trainingId = currOffering.id;
+			controller.trainingId = currOffering.Id;
 			controller.userRelatedContactId = con.Id;
 			controller.classOfferingMap = new Map<Id, Class_Offering__c>();
-			controller.classOfferingMap.put(currOffering.id, [
+			controller.classOfferingMap.put(currOffering.Id, [
 					SELECT Id, Chapter_Role_O_T__r.Orientation_Training__c
 					FROM Class_Offering__c
 					WHERE Id = :currOffering.Id
@@ -576,82 +593,26 @@ public class VolunteerOrientation_AC_Test {
 		}
 	}
 
-	/*
-	static testMethod void CreateNewTrainingWithCheckForExistingBeforeRecords()
-	{
-		LMS_Credentials__c currLMSCredential = testClassUtil.createLMSCredentials();
-		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
-		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
-		insert con;
-		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
-		neworgAffiliation.npe5__Contact__c  = con.Id;
-		neworgAffiliation.npe5__Organization__c = acc.Id;
-		neworgAffiliation.npe5__Primary__c = true;
-		neworgAffiliation.npe5__Status__c = 'Pending';
-		neworgAffiliation.Constituent_code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
-		insert neworgAffiliation;
-
-		Role__c currRole = OrientationandTrainingUtil.createRole();
-		insert currRole;
-		Chapter_Role__c  currChapRole = OrientationandTrainingUtil.createChapter(acc.id,currRole.id);
-		insert currChapRole;
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.id,currChapRole.id);
-		insert currVolRole;
-		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
-		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.id,currOandT.id);
-		currChapOandT.Orientation_Training__r = currOandT;
-		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.id);
-		insert currOffering;
-
-		Volunteer_Orientation_Training__c volunteerOrientationTraining = OrientationandTrainingUtil.createVolTraining(currOandT.Id, currOffering.Id, con.Id, 'Volunteer Cancelled');
-		insert volunteerOrientationTraining;
-
-		User currUser;
-		System.RunAs(new User(Id = UserInfo.getUserId()))
-		{
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
-		}
-		System.RunAs(new User(Id = UserInfo.getUserId()))
-		{
-
-			TestClassUtil.createDynamicContent();
-			PageReference pageRef = Page.VolunteerOrientation_VF;
-			Test.setCurrentPage(pageRef);
-			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
-			controller.TimingInfo();
-			controller.getOrientationRecordList();
-			controller.trainingId = currOffering.id;
-			controller.userRelatedContactId = con.Id;
-			controller.classOfferingMap = new Map<Id,Class_Offering__c>();
-			controller.classOfferingMap.put(currOffering.id, [SELECT Id, Chapter_Role_O_T__r.Orientation_Training__c FROM Class_Offering__c WHERE Id = :currOffering.Id]);
-			controller.Register();
-		}
-	}
-	*/
-
 	@IsTest
 	static void testCancelWithOrientationDetails() {
 		Account chapterAcc = OrientationandTrainingUtil.createChapterAccount();
 		insert chapterAcc;
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
 		insert con;
 		Role__c currRole = OrientationandTrainingUtil.createRole();
 		insert currRole;
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.id, currRole.id);
+		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
 		insert currChapRole;
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.id, currChapRole.id);
+		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
 		insert currVolRole;
 		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
 		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.id, currOandT.id);
+		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
 		currChapOandT.Orientation_Training__r = currOandT;
 		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.id);
+		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
 		insert currOffering;
 
 		Volunteer_Orientation_Training__c volunteerOrientationTraining = OrientationandTrainingUtil.createVolTraining(currOandT.Id, currOffering.Id, con.Id, 'Volunteer Cancelled');
@@ -659,12 +620,12 @@ public class VolunteerOrientation_AC_Test {
 		insert volunteerOrientationTraining;
 
 		User currUser;
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
 		}
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
+		System.runAs(new User(Id = UserInfo.getUserId())) {
 			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
-			controller.trainingId = currOffering.id;
+			controller.trainingId = currOffering.Id;
 			controller.userRelatedContactId = con.Id;
 			controller.lMSCredential = testClassUtil.createLMSCredentials();
 			controller.Cancel();
@@ -677,20 +638,20 @@ public class VolunteerOrientation_AC_Test {
 		insert chapterAcc;
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
 		insert con;
 		Role__c currRole = OrientationandTrainingUtil.createRole();
 		insert currRole;
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.id, currRole.id);
+		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
 		insert currChapRole;
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.id, currChapRole.id);
+		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
 		insert currVolRole;
 		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
 		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.id, currOandT.id);
+		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
 		currChapOandT.Orientation_Training__r = currOandT;
 		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.id);
+		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
 		insert currOffering;
 
 		Volunteer_Orientation_Training__c volunteerOrientationTraining = OrientationandTrainingUtil.createVolTraining(currOandT.Id, currOffering.Id, con.Id, 'Volunteer Cancelled');
@@ -698,12 +659,12 @@ public class VolunteerOrientation_AC_Test {
 		insert volunteerOrientationTraining;
 
 		User currUser;
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
 		}
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
+		System.runAs(new User(Id = UserInfo.getUserId())) {
 			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
-			controller.trainingId = currOffering.id;
+			controller.trainingId = currOffering.Id;
 			controller.userRelatedContactId = con.Id;
 			controller.Cancel();
 		}
