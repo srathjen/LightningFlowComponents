@@ -702,7 +702,7 @@ public class CaseService {
 				FROM Account
 				WHERE Id IN :chapterIds
 		]) {
-            chapterIntakeManagerMap.put(chapterAccount.Id, chapterAccount.Intake_Manager__c);
+			chapterIntakeManagerMap.put(chapterAccount.Id, chapterAccount.Intake_Manager__c);
 		}
 
 		try {
@@ -1668,20 +1668,17 @@ public class CaseService {
 		}
 	}
 
-	/*
+	/**
 	 * @description     This method is used to recall the Volunteer Opportunity approval process.
-	 *
 	 * @author          MST Solutions
 	 * @createdDate     unknown
 	*/
 	public static void recallVolOppApproval(Set<Id> pendingVollOppIdSet) {
-		String volOppIsString = '';
-
-		for (String volId : pendingVollOppIdSet) {
-			volOppIsString += volId + ',';
+		if (pendingVollOppIdSet.isEmpty()) {
+			return;
 		}
-
-		VolunteerInterviewTask_AC.getApprovalRecal(volOppIsString.removeEnd(','));
+		String volunteerOpportunityIds = String.join(new List<Id>(pendingVollOppIdSet), ',');
+		VolunteerInterviewTask_AC.getApprovalRecal(volunteerOpportunityIds);
 	}
 
 	/*
@@ -1722,9 +1719,8 @@ public class CaseService {
 		update volunteerOpportunityList;
 	}
 
-	/*
+	/**
 	 * @description     Update Case to Lead substatus.
-	 *
 	 * @author          MST Solutions
 	 * @createdDate     unknown
 	*/
@@ -1748,5 +1744,82 @@ public class CaseService {
 		if (updateLeadList.size() > 0) {
 			update updateLeadList;
 		}
+	}
+
+	public static void updateInActiveWishGranter(Set<Id> volunteerIds, List<Volunteer_Opportunity__c> volunteerOpportunities) {
+		if (volunteerIds.isEmpty() || volunteerOpportunities.isEmpty()) {
+			return;
+		}
+		RecursiveTriggerHandler.isFirstTime = false;
+		RecursiveTriggerHandler.allowToEditRecord = true;
+		Set<Id> caseIds = new Set<Id>();
+		for (Volunteer_Opportunity__c volunteerOpportunity : volunteerOpportunities) {
+			caseIds.add(volunteerOpportunity.Wish__c);
+		}
+		List<Case> updateCaseList = new List<Case>();
+		Case myParentCase = new Case();
+		try {
+			for (Case wishCase : [
+					SELECT Id
+					FROM Case
+					WHERE Id IN :caseIds
+			]) {
+				myParentCase.Id = wishCase.Id;
+			}
+			for (User dbUser : [
+					SELECT Id,Name,ContactId
+					FROM User
+					WHERE ContactId IN:volunteerIds
+			]) {
+				if (volunteerIds.contains(dbUser.ContactId)) {
+					myParentCase.InActiveWishGranter__c = dbUser.Name;
+				}
+			}
+			updateCaseList.add(myParentCase);
+			update updateCaseList ;
+			if (Test.isRunningTest()) {
+				throw new CommonTriggerException('Test Class execution');
+			}
+		} catch (Exception ex) {
+			for (Volunteer_Opportunity__c currRec : volunteerOpportunities) {
+				ErrorMessage_AC.createDebugRec('CaseService',
+						String.valueOf(currRec), String.valueOf(ex),
+						'updateInActiveWishGranter', currRec.Id, ex.getStackTraceString(), 'Error');
+				if (!Test.isRunningTest()) {
+					currRec.addError(Label.Debug_log_error_message);
+				}
+			}
+		}
+	}
+
+	public static List<Case> updateHiddenVolunteerInactive(Set<Id> caseIds) {
+		List<Case> wishCasesVolunteerInactive = new List<Case>();
+		if (caseIds.isEmpty()) {
+			return wishCasesVolunteerInactive;
+		}
+		Case parentCase = new Case();
+		for (Case newCase : [
+				SELECT Id,Hidden_VOinactive__c
+				FROM Case
+				WHERE Id IN :caseIds
+		]) {
+			parentCase.Id = newCase.Id;
+			parentCase.Hidden_VOinactive__c = true;
+			wishCasesVolunteerInactive.add(parentCase);
+		}
+		update wishCasesVolunteerInactive;
+		return wishCasesVolunteerInactive;
+	}
+
+	public static Map<Id, Case> findById(Set<Id> caseIds) {
+		Map<Id, Case> caseMap = new Map<Id, Case>();
+		for (Case newCase : [
+				SELECT Id, ContactId, OwnerId, Hidden_VOinactive__c
+				FROM Case
+				WHERE Id IN :caseIds
+		]) {
+			caseMap.put(newCase.Id, newCase);
+		}
+		return caseMap;
 	}
 }

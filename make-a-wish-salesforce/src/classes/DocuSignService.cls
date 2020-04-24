@@ -216,7 +216,7 @@ public class DocuSignService {
 				'    "recipientId": "1",' +
 				'    "clientUserId": "1",' +
 				'    "authenticationMethod": "None",' +
-				'    "returnUrl": "' + returnUrl +
+				'    "returnUrl": "' + returnUrl + '"' +
 				'}';
 		request.setBody(jsonPayload);
 		response = httprequest.send(request);

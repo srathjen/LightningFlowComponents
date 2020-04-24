@@ -719,6 +719,204 @@ Click Generate Document and once the document is generated you can click the lin
         <value>CF00N3600000OtMjl</value>
     </labels>
     <labels>
+        <fullName>Volunteer_Orientation_Page_Title</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Page Title</shortDescription>
+        <value>Orientation</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Table_Header_Name</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Table Header - Name</shortDescription>
+        <value>Name</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Table_Header_Chapter</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Table Header - Chapter</shortDescription>
+        <value>Chapter</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Table_Header_Type</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Table Header - Type</shortDescription>
+        <value>Type</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Table_Header_Date</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Table Header - Date</shortDescription>
+        <value>Date</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Table_Header_Start</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Table Header - Start</shortDescription>
+        <value>Start</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Table_Header_End</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Table Header - End</shortDescription>
+        <value>End</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Table_Header_Location</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Table Header - Location</shortDescription>
+        <value>Location</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Table_Header_Capacity</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Table Header - Capacity</shortDescription>
+        <value>Capacity</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Table_Header_Seats</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Table Header - Seats</shortDescription>
+        <value>Seats</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Table_Header_Action</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Table Header - Action</shortDescription>
+        <value>Action</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Table_Header_Link</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Table Header - Link</shortDescription>
+        <value>Link</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Registered_Orientation_Details</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Table Title Registered Orientation Details</shortDescription>
+        <value>Registered Orientation Details</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Available_Orientation_Details</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Table Title Available Orientation Details</shortDescription>
+        <value>Available Orientation Details</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Additional_Information</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Subsection Additional Information</shortDescription>
+        <value>Additional Information</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Better_Experience_Information</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Subsection Better Experience Content</shortDescription>
+        <value>Please select the radio option "Always allow pop-ups for this
+            domain", in the URL bar (Pop up Blocker options) then click start course
+            again.</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Better_Experience_Information_Header</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Subsection Better Experience Header</shortDescription>
+        <value>For a Better Experience</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Already_Registered_Message</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Already Registered Message</shortDescription>
+        <value>You have already registered for this Orientation.</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Already_Registered_Same_Day_Time_Message</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Already Registered Same Day/Time Message</shortDescription>
+        <value>You have already registered for an orientation on the same day at this time.</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Title_Registered</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Title Registered</shortDescription>
+        <value>Registered</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Title_Cancelled</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Title Cancelled</shortDescription>
+        <value>Cancelled</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Confirmation_Registered</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Confirmation Registered</shortDescription>
+        <value>You have registered for a volunteer orientation. Once you complete the orientation, you
+            will receive an email to continue the application process. If you need to change your
+            orientation day/time please cancel your existing registration and register for a new
+            orientation.</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Confirmation_Cancelled</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Confirmation Cancelled</shortDescription>
+        <value>You have successfully cancelled your registration for orientation. Please select a new
+            orientation.</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Orientation_Alert_Registration_Not_Found</fullName>
+        <categories>Volunteer Orientation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Orientation Alert Registration Not Found</shortDescription>
+        <value>No course registration found in LMS. Please contact the Chapter staff.</value>
+    </labels>
+    <labels>
         <fullName>Volunteer_Role_Already_Filled</fullName>
         <categories>Volunteer Role</categories>
         <language>en_US</language>
