@@ -243,6 +243,10 @@ public class Constant_AC {
 	public static final String CONTACT_STATUS_ROLE_SPECIFIC_TRAINING_AVAILABLE = 'Role Specific Training Available';
 	public static final String CONTACT_ONBOARDING_STATUS_BACKGROUND_CHECK = 'Background Check';
 	public static final String CONTACT_PUBLICITY_YES = 'Yes';
+	public static final String CONTACT_HIDDEN_VOLUNTEER_STATUS_TRAINING_REGISTERED = 'Training Registered';
+	public static final String CONTACT_HIDDEN_VOLUNTEER_STATUS_ORIENTATION_COMPLETED = 'Orientation With Completed';
+	public static final String CONTACT_HIDDEN_VOLUNTEER_STATUS_ORIENTATION_WITHOUT_COMPLETED = 'Orientation Without Completed';
+	public static final String CONTACT_ONBOARDING_STATUS_ORIENTATION = 'Orientation';
 
 	/**
 	 * Chapter Role File Constants
@@ -288,9 +292,12 @@ public class Constant_AC {
 	 * Volunteer Orientation Training Constants
 	 */
 	public static final String VOLUNTEER_ORIENTATION_TRAINING_TYPE_TRAINING = 'Training';
-	public static final String VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED = 'Completed';
+	public static final String VOLUNTEER_ORIENTATION_TRAINING_TYPE_ORIENTATION = 'Orientation';
 	public static final String VOLUNTEER_ORIENTATION_TRAINING_COMPLETION_NOT_APPROVED = 'Not Approved';
 	public static final String VOLUNTEER_ORIENTATION_TRAINING_COMPLETION_FOLLOW_UP_REQUESTED = 'Follow-up Requested';
+	public static final String VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED = 'Completed';
+	public static final String VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_REGISTERED = 'Registered';
+	public static final String VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_VOLUNTEER_CANCELLED = 'Volunteer Cancelled';
 
 	/**
 	 * Volunteer Opportunities Constants
@@ -306,6 +313,7 @@ public class Constant_AC {
 	public static final String VOLUNTEER_OPPORTUNITY_STATUS_HOLD = 'Hold';
 	public static final String VOLUNTEER_OPPORTUNITY_STATUS_PENDING = 'Pending';
 	public static final String VOLUNTEER_OPPORTUNITY_REASON_INACTIVE_NOT_APPROVED = 'Not Approved';
+	public final static String VOLUNTEER_RT_LABEL_NON_WISH_EVENT = Schema.SObjectType.Volunteer_Opportunity__c.getRecordTypeInfosByDeveloperName().get('Non_Wish_Event').getName();
 
 	/**
 	 * Contact Application Status
@@ -391,11 +399,14 @@ public class Constant_AC {
 	public static final String TASK_SUBJECT_REVIEW_BACKGROUND_CHECK = 'Review Background Check';
 	public static final String TASK_SUBJECT_BACKGROUND_CHECK = 'Background Check';
 	public static final String TASK_TYPE_EMAIL = 'Email';
+	public final static String TASK_RT_STAFF_LABEL = Schema.SObjectType.Task.getRecordTypeInfosByDeveloperName().get('Staff').getName();
 
 	/*
 	 * User Constants
 	 */
 	public static final String INTEGRATION_USER = 'Integration User';
+	public static final String USER_VOLUNTEER_ORIENTATION_STATUS_REGISTERED = 'Registered';
+	public static final String USER_VOLUNTEER_ORIENTATION_STATUS_CANCELLED = 'Cancelled';
 
 	/**
 	 * Profile Constants
