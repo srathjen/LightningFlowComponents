@@ -74,6 +74,7 @@ public class LeadDuplicate_AC {
 		} else {
 			currLead = new Lead();
 		}
+		
 		// Checking medical info and treating medical info is same or not. if it is same, then we are displaying duplicates on same table.
 		if (currLead.Id != null) {
 			if (currLead.Medical_Professional_First_Name__c != null
