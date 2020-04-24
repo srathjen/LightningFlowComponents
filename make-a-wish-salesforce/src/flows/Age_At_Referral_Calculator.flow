@@ -257,6 +257,19 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Set_Age_at_Referral_to_Blank</name>
+        <label>Set Age at Referral to Blank</label>
+        <locationX>541</locationX>
+        <locationY>40</locationY>
+        <assignmentItems>
+            <assignToReference>Wish_Kid_Lead.Child_Age__c</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Wish_Kid_Record</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <description>Sets the Age At Referral value to Under 2.5</description>
         <name>Set_Age_At_Referral_Under_2_5</name>
         <label>Set Age At Referral Under 2.5</label>
@@ -565,7 +578,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Is_Child_Under_2_5</targetReference>
+            <targetReference>Is_DOB_filled</targetReference>
         </connector>
     </assignments>
     <decisions>
@@ -994,8 +1007,38 @@
             <label>Yes</label>
         </rules>
     </decisions>
+    <decisions>
+        <description>Checks to see if there is a null date for DOB</description>
+        <name>Is_DOB_filled</name>
+        <label>Is DOB filled?</label>
+        <locationX>362</locationX>
+        <locationY>46</locationY>
+        <defaultConnector>
+            <targetReference>Is_Child_Under_2_5</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Yes</defaultConnectorLabel>
+        <rules>
+            <name>DOBIsFilled</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>dateOfBirth</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>dateOfBirth</leftValueReference>
+                <operator>EqualTo</operator>
+            </conditions>
+            <connector>
+                <targetReference>Set_Age_at_Referral_to_Blank</targetReference>
+            </connector>
+            <label>No</label>
+        </rules>
+    </decisions>
     <formulas>
-        <description>The number of days that passed between the child&apos;s date of birth and the referral/created date.</description>
+        <description>The number of days that passed between the child&#39;s date of birth and the referral/created date.</description>
         <name>daysSinceBorn</name>
         <dataType>Number</dataType>
         <expression>if(IsBlank({!referralDate}), {!inquiryDate} - {!dateOfBirth}, {!referralDate} - {!dateOfBirth})</expression>
