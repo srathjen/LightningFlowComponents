@@ -663,6 +663,55 @@ Click Generate Document and once the document is generated you can click the lin
         <value>Submit</value>
     </labels>
     <labels>
+        <fullName>TaskTrigger_Close_Other_Task_First</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TaskTrigger_Close_Other_Task_First</shortDescription>
+        <value>Please close other follow up task before closing this task.</value>
+    </labels>
+    <labels>
+        <fullName>TaskTrigger_Close_Wish_Before_Task</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TaskTrigger_Close_Wish_Before_Task</shortDescription>
+        <value>Please close the wish before closing this task.</value>
+    </labels>
+    <labels>
+        <fullName>TaskTrigger_Confirm_Date_Greater_Than_Today</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TaskTrigger_Confirm_Date_Greater_Than_Today</shortDescription>
+        <value>Confirm Date should be greater than today</value>
+    </labels>
+    <labels>
+        <fullName>TaskTrigger_Determination_Not_Policy</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TaskTrigger_Determination_Not_Policy</shortDescription>
+        <value>Wish determination is not within the policy.</value>
+    </labels>
+    <labels>
+        <fullName>TaskTrigger_Enter_Confirmed_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TaskTrigger_Enter_Confirmed_Date</shortDescription>
+        <value>Please Enter Confirmed Date</value>
+    </labels>
+    <labels>
+        <fullName>TaskTrigger_Enter_Confirmed_Time</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TaskTrigger_Enter_Confirmed_Time</shortDescription>
+        <value>Please Enter Confirmed Time</value>
+    </labels>
+    <labels>
+        <fullName>TaskTrigger_Please_Enter_Venue</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TaskTrigger_Please_Enter_Venue</shortDescription>
+        <value>Please Enter Venue</value>
+    </labels>
+    <labels>
         <fullName>Volunteer_Opportunity_Id</fullName>
         <language>en_US</language>
         <protected>false</protected>

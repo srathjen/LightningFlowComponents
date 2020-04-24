@@ -18,6 +18,21 @@ public with sharing class TaskDomain extends trac_TriggerHandlerBase {
         Constant_AC.INTERVIEW_RT_ID
     };
 
+    private static final Set<Id> BEFORE_UPDATE_RECORD_TYPE_IDS = new Set<Id>{
+        Constant_AC.GRANT_TASK_RT_ID, Constant_AC.BACKGROUND_RT_ID,
+        Constant_AC.UPDATE_CONTACT_RT_ID, Constant_AC.PLANNING_ANTICIPATION_TASK_RT_ID,
+        Constant_AC.DETERMINATION_TASK_RT_ID, Constant_AC.VOLUNTEER_TASK_RT_ID,
+        Constant_AC.STAFF_TASK_RT_ID, Constant_AC.TASK_RT_ID,
+        Constant_AC.INTERVIEW_RT_ID
+    };
+
+    private static final Set<Id> AFTER_UPDATE_RECORD_TYPE_IDS = new Set<Id>{
+        Constant_AC.GRANT_TASK_RT_ID, Constant_AC.BACKGROUND_RT_ID,
+        Constant_AC.UPDATE_CONTACT_RT_ID, Constant_AC.PLANNING_ANTICIPATION_TASK_RT_ID,
+        Constant_AC.DETERMINATION_TASK_RT_ID, Constant_AC.VOLUNTEER_TASK_RT_ID,
+        Constant_AC.STAFF_TASK_RT_ID, Constant_AC.TASK_RT_ID,
+        Constant_AC.INTERVIEW_RT_ID
+    };
 
     /*
      * @description		OnBeforeInsert trigger handler for the Task object
@@ -26,120 +41,81 @@ public with sharing class TaskDomain extends trac_TriggerHandlerBase {
      * @createdDate		2016-06-01
      */
     public override void handleBeforeInsert() {
-        List<Task> birthdayTasksList = new List<Task>();
-        Set<Id> taskRelatedContactIdsSet = new Set<Id>();
-        set<ID> contactIdset = new set<ID>();
-        List<Task> updateTaskList = new List<Task>();
-        List<Task> matchContactTaskList = new List<Task>();
-        Set<Id> taskParentIdSet = new Set<Id>();
-        Map<Id,List<Task>> reparentChildCaseTaskMap = new Map<Id,List<Task>>();
-        Map<Id,Task> bgExpiringTaskMap = new Map<Id,Task>();
-        Map<Id,Task> coiExpiringTaskMap = new Map<Id,Task>();
+        List<Task> beforeInsertTasks = new List<Task>();
+        for (Task newTask : newTasksList) {
+            if (!BEFORE_INSERT_RECORD_TYPE_IDS.contains(newTask.RecordTypeId)) {
+                continue;
+            }
+
+            beforeInsertTasks.add(newTask);
+        }
 
         try {
-            for (Task newTask : newTasksList) {
-                if (!BEFORE_INSERT_RECORD_TYPE_IDS.contains(newTask.RecordTypeId)) {
-                    continue;
-                }
-
-                if (newTask.Subject == 'Check in with the family every 30 days' || newTask.Subject == 'Wish Presentation Not Set' || newTask.Subject == 'Budget is approved: Acknowledge Receipt of Approval'
-                    || newTask.Subject == 'Send DNQ Notification to Qualifying Medical Professional' || newTask.Subject == 'Interview Task' || newTask.Subject == 'Interview Completed' || newTask.Subject == 'Parent/Guardian Orientation') {
-                    newTask.SystemGeneratedTask__c = True;
-                }
-                if (newTask.Subject.contains(' ET : ') && newTask.status == 'Completed' && (newTask.SystemGeneratedTask__c == FALSE || newTask.ActivityDate != NULL)) {
-                    newTask.SystemGeneratedTask__c = True;
-                    newTask.ActivityDate = null;
-                }
-                if (newTask.Subject == 'BC ET : Background Check Expiring') {
-                    if (newTask.WhatId != NULL) {
-                        bgExpiringTaskMap.put(newTask.WhatId, newTask);
-                    }
-                }
-                if (newTask.Subject == 'COI ET : COI Expiring') {
-                    if (newTask.WhatId != NULL) {
-                        coiExpiringTaskMap.put(newTask.WhatId, newTask);
-                    }
-                }
-                if (newTask.subject == 'Budget is approved' || newTask.subject == 'Case ET : Budget Approval Request' || newTask.subject == 'Budget needs to be revised' || newTask.subject == 'Follow-up on wish clearance' || newTask.subject == 'Interview date not set'
-                    || newTask.subject == 'Wish Child Birthday Reminder' || newTask.subject == 'Wish Family Packet not submitted') {
-                    newTask.SystemGeneratedTask__c = True;
-                    newTask.RecordTypeId = Constant_AC.STAFF_TASK_RT_ID;
-                    matchContactTaskList.add(newTask);
-                    taskParentIdSet.add(newTask.WhatId);
-                }
-                if (newTask.Subject == 'Wish Child Birthday Reminder') {
-                    birthdayTasksList.add(newTask);
-                    taskRelatedContactIdsSet.add(newTask.whatId);
-                }
-                //IME 58
-                if (newTask.Subject == 'Lead ET : New Rush Qualified' || newTask.Subject == 'Lead ET : New Rush Referral' ||
-                    newTask.Subject == 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary') {
-                    newTask.RecordTypeId = Constant_AC.TASK_RT_ID;
-                }
-
-                if (newTask.WhoId != null) {
-                    contactIdset.add(newTask.WhoId);
-                    updateTaskList.add(newTask);
-                }
-                if (newTask.subject == 'Case ET : Wish Presentation Date Reminder' || newTask.subject == 'Case ET : Wish Presentation Details') {
-                    if (reparentChildCaseTaskMap.containsKey(newTask.WhatId)) {
-                        reparentChildCaseTaskMap.get(newTask.WhatId).add(newTask);
-                    } else {
-                        reparentChildCaseTaskMap.put(newTask.WhatId, new List<Task>{
-                            newTask
-                        });
-                    }
-
-                }
-            }
-            /**
-             * JIRA: WLP-286
-             * Author: Gustavo Mayer
-             * Update: Sub case conversion to the single Wish Case, no need to update
-             * as there is no longer the concept of parent case.
-             */
-//			if (reparentChildCaseTaskMap.size() > 0) {
-//				Task_OnBeforeInsertHelper.reparentChildCaseToParentCase(reparentChildCaseTaskMap);
-//			}
-            if (bgExpiringTaskMap.size() > 0) {
-                TaskService.updateBGCTaskSubjectDays(bgExpiringTaskMap);
-            }
-            if (coiExpiringTaskMap.size() > 0) {
-                TaskService.updateCOITaskSubjectDays(coiExpiringTaskMap);
-            }
-            if (matchContactTaskList.size() > 0 && taskParentIdSet.size() > 0) {
-                //Task_OnBeforeInsertHelper.UpdateContactToTask(matchContactTaskList, taskParentIdSet);
-                // FUNCTION CANNOT ACCOMPLISH ANYTHING
-            }
-            if ((contactIdset.size() > 0) && (updateTaskList.size() > 0)) {
-                TaskService.updateTaskEmailMergeFields(contactIdset, updateTaskList);
-            }
-            if (birthdayTasksList.size() > 0 && taskRelatedContactIdsSet.size() > 0) {
-                TaskService.birthdayTaskPrimaryVolunteerAssign(birthdayTasksList, taskRelatedContactIdsSet);
-            }
-
-            if (Test.isRunningTest()) {
-                throw new CommonTriggerException('Test Class execution');
-            }
-
+            TaskService.updateBGCTaskSubjectDays(beforeInsertTasks);
+            TaskService.updateCOITaskSubjectDays(beforeInsertTasks);
+            TaskService.updateTaskEmailMergeFields(beforeInsertTasks);
+            TaskService.birthdayTaskPrimaryVolunteerAssign(beforeInsertTasks);
         } catch (Exception ex) {
             for (Task currRec : newTasksList) {
                 ErrorMessage__e newsEvent = new ErrorMessage__e();
+
                 newsEvent.Apex_Class__c = 'Task_OnBeforeInsertHandler';
-                newsEvent.Developer_Message__c = String.valueof(currRec);
+                newsEvent.Developer_Message__c = String.valueOf(currRec);
                 newsEvent.Message__c = ex.getMessage();
                 newsEvent.Method__c = 'onBeforeInsert';
                 newsEvent.Record_Id__c = currRec.Id;
-                //newsEvent.Stack_Trace__c = String.valueOf(ex);
                 newsEvent.Type__c = 'Error';
                 Database.SaveResult sr = EventBus.publish(newsEvent);
 
                 if (!Test.isRunningTest()) {
-
                     currRec.addError(Label.Debug_log_error_message);
-
                 }
             }
+        }
+
+        for (Task newTask : beforeInsertTasks) {
+            if (newTask.Subject == Constant_AC.TASK_SUBJECT_CHECK_IN_WITH_FAMILY ||
+                newTask.Subject == Constant_AC.TASK_SUBJECT_WISH_PRESENTATION_NOT_SET ||
+                newTask.Subject == Constant_AC.TASK_SUBJECT_BUDGET_IS_APPROVED_ACKNOWLEDGE ||
+                newTask.Subject == Constant_AC.TASK_SUBJECT_SEND_DNQ ||
+                newTask.Subject == Constant_AC.TASK_SUBJECT_INTERVIEW_TASK ||
+                newTask.Subject == Constant_AC.TASK_SUBJECT_INTERVIEW_COMPLETED ||
+                newTask.Subject == Constant_AC.TASK_SUBJECT_PARENT_ORIENTATION) {
+
+                newTask.SystemGeneratedTask__c = true;
+            }
+
+            if (newTask.Subject.contains(' ET : ') &&
+                newTask.Status == Constant_AC.TASK_STATUS_COMPLETED &&
+                (newTask.SystemGeneratedTask__c == false || newTask.ActivityDate != null)) {
+
+                newTask.SystemGeneratedTask__c = true;
+                newTask.ActivityDate = null;
+            }
+
+
+            if (newTask.Subject == Constant_AC.TASK_SUBJECT_BUDGET_IS_APPROVED ||
+                newTask.Subject == Constant_AC.TASK_SUBJECT_BUDGET_APPROVAL_REQUEST ||
+                newTask.Subject == Constant_AC.TASK_SUBJECT_BUDGET_NEEDS_REVISED ||
+                newTask.Subject == Constant_AC.TASK_SUBJECT_FOLLOWUP_ON_CLEARANCE ||
+                newTask.Subject == Constant_AC.TASK_SUBJECT_INTERVIEW_DATE_NOT_SET ||
+                newTask.Subject == Constant_AC.TASK_SUBJECT_BIRTHDAY_REMINDER ||
+                newTask.Subject == Constant_AC.TASK_SUBJECT_FAMILY_PACKET_NOT_SUBMITTED) {
+
+                newTask.SystemGeneratedTask__c = true;
+                newTask.RecordTypeId = Constant_AC.STAFF_TASK_RT_ID;
+            }
+
+            if (newTask.Subject == Constant_AC.TASK_SUBJECT_RUSH_QUALIFIED ||
+                newTask.Subject == Constant_AC.TASK_SUBJECT_RUSH_REFERRAL ||
+                newTask.Subject == Constant_AC.TASK_SUBJECT_RUSH_CHANGED) {
+
+                newTask.RecordTypeId = Constant_AC.TASK_RT_ID;
+            }
+        }
+
+        if (Test.isRunningTest()) {
+            throw new CommonTriggerException('Test Class execution');
         }
     }
 
@@ -157,7 +133,43 @@ public with sharing class TaskDomain extends trac_TriggerHandlerBase {
             return;
         }
 
-        Task_OnBeforeUpdateHandler.OnBeforeUpdate(newTasksMap, oldTasksMap);
+        List<Task> beforeUpdateTasks = new List<Task>();
+        for (Task newTask : newTasksList) {
+            if (!BEFORE_UPDATE_RECORD_TYPE_IDS.contains(newTask.RecordTypeId)) {
+                continue;
+            }
+
+            beforeUpdateTasks.add(newTask);
+        }
+
+        TaskService.closeTaskValidation(beforeUpdateTasks, oldTasksMap);
+        TaskService.updateTaskEmailMergeFields(beforeUpdateTasks, oldTasksMap);
+        TaskService.dateTimeValidations(beforeUpdateTasks, oldTasksMap);
+
+        for (Task newTask : beforeUpdateTasks) {
+            if (newTask.Confirmed_Date__c != null && oldTasksMap.get(newTask.Id).Confirmed_Date__c == null) {
+                newTask.Status = Constant_AC.TASK_STATUS_SCHEDULED;
+            }
+
+            if (newTask.Availability_Time_Other1__c != null && newTask.Available_Time1__c != Constant_AC.TASK_AVAILABLE_TIME_OTHER) {
+                newTask.Availability_Time_Other1__c = '';
+            }
+
+            if (newTask.Subject.contains(' ET : ') && newTask.Status == Constant_AC.TASK_STATUS_COMPLETED
+                && (newTask.SystemGeneratedTask__c == false || newTask.ActivityDate != null)) {
+
+                newTask.SystemGeneratedTask__c = true;
+                newTask.ActivityDate = null;
+            }
+
+            if (newTask.Availability_Time_Other2__c != null && newTask.Available_Time2__c != Constant_AC.TASK_AVAILABLE_TIME_OTHER) {
+                newTask.Availability_Time_Other2__c = '';
+            }
+
+            if (newTask.Availability_Time_Other3__c != null && newTask.Available_Time3__c != Constant_AC.TASK_AVAILABLE_TIME_OTHER) {
+                newTask.Availability_Time_Other3__c = '';
+            }
+        }
     }
 
     /*
@@ -174,6 +186,21 @@ public with sharing class TaskDomain extends trac_TriggerHandlerBase {
             return;
         }
 
-        Task_OnAfterUpdateHandler.OnAfterUpdate(newTasksMap, oldTasksMap);
+        List<Task> afterUpdateTasks = new List<Task>();
+        for (Task newTask : newTasksList) {
+            if (!AFTER_UPDATE_RECORD_TYPE_IDS.contains(newTask.RecordTypeId)) {
+                continue;
+            }
+
+            afterUpdateTasks.add(newTask);
+        }
+
+        TaskService.checkFollowUpTask(afterUpdateTasks, oldTasksMap);
+        TaskService.updateVolunteerRecord(afterUpdateTasks, oldTasksMap);
+        TaskService.updateAffiliationStatusAsDeclined(afterUpdateTasks, oldTasksMap);
+        TaskService.updateAffiliationStatus(afterUpdateTasks, oldTasksMap);
+        TaskService.sneakPeekTask(afterUpdateTasks, oldTasksMap);
+        TaskService.autoCloseTask(afterUpdateTasks, oldTasksMap);
+        TaskService.updateLeadCloseDate(afterUpdateTasks, oldTasksMap);
     }
 }

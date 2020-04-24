@@ -243,6 +243,10 @@ public class Constant_AC {
 	public static final String CONTACT_STATUS_ROLE_SPECIFIC_TRAINING_AVAILABLE = 'Role Specific Training Available';
 	public static final String CONTACT_ONBOARDING_STATUS_BACKGROUND_CHECK = 'Background Check';
 	public static final String CONTACT_PUBLICITY_YES = 'Yes';
+	public static final String CONTACT_HIDDEN_VOLUNTEER_STATUS_TRAINING_REGISTERED = 'Training Registered';
+	public static final String CONTACT_HIDDEN_VOLUNTEER_STATUS_ORIENTATION_COMPLETED = 'Orientation With Completed';
+	public static final String CONTACT_HIDDEN_VOLUNTEER_STATUS_ORIENTATION_WITHOUT_COMPLETED = 'Orientation Without Completed';
+	public static final String CONTACT_ONBOARDING_STATUS_ORIENTATION = 'Orientation';
 
 	/**
 	 * Chapter Role File Constants
@@ -282,15 +286,19 @@ public class Constant_AC {
 	public static final String VOLUNTEER_ROLE_STATUS_PENDING = 'Pending';
 	public final static String VOLUNTEER_ROLE_STATUS_PENDING_TRAINING = 'Pending Training';
 	public final static String VOLUNTEER_ROLE_STATUS_MISSING_REQUIREMENT = 'Missing Requirement';
+	public final static String VOLUNTEER_ROLE_SUB_STATUS_UNDER_CHAPTER_REVIEW = 'Under Chapter Review';
 	public final static String VOLUNTEER_ROLE_ATTENDANCE_COMPLETED = 'Completed';
 
 	/**
 	 * Volunteer Orientation Training Constants
 	 */
 	public static final String VOLUNTEER_ORIENTATION_TRAINING_TYPE_TRAINING = 'Training';
-	public static final String VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED = 'Completed';
+	public static final String VOLUNTEER_ORIENTATION_TRAINING_TYPE_ORIENTATION = 'Orientation';
 	public static final String VOLUNTEER_ORIENTATION_TRAINING_COMPLETION_NOT_APPROVED = 'Not Approved';
 	public static final String VOLUNTEER_ORIENTATION_TRAINING_COMPLETION_FOLLOW_UP_REQUESTED = 'Follow-up Requested';
+	public static final String VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED = 'Completed';
+	public static final String VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_REGISTERED = 'Registered';
+	public static final String VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_VOLUNTEER_CANCELLED = 'Volunteer Cancelled';
 
 	/**
 	 * Volunteer Opportunities Constants
@@ -306,6 +314,7 @@ public class Constant_AC {
 	public static final String VOLUNTEER_OPPORTUNITY_STATUS_HOLD = 'Hold';
 	public static final String VOLUNTEER_OPPORTUNITY_STATUS_PENDING = 'Pending';
 	public static final String VOLUNTEER_OPPORTUNITY_REASON_INACTIVE_NOT_APPROVED = 'Not Approved';
+	public final static String VOLUNTEER_RT_LABEL_NON_WISH_EVENT = Schema.SObjectType.Volunteer_Opportunity__c.getRecordTypeInfosByDeveloperName().get('Non_Wish_Event').getName();
 
 	/**
 	 * Contact Application Status
@@ -380,6 +389,9 @@ public class Constant_AC {
 	public static final String TASK_STATUS_NOT_STARTED = 'Not Started';
 	public static final String TASK_STATUS_COMPLETED = 'Completed';
 	public static final String TASK_STATUS_IN_PROGRESS = 'In Progress';
+	public static final String TASK_STATUS_SCHEDULED = 'Scheduled';
+	public static final String TASK_STATUS_DECLINED = 'Declined';
+	public static final String TASK_STATUS_APPROVED = 'Approved';
 	public static final String TASK_DESCRIPTION_RUSH_QUALIFIED = 'New RUSH referral qualified';
 	public static final String TASK_SUBJECT_SEND_DIAGNOSIS_VERIFICATION = 'Send Diagnosis Verification';
 	public static final String TASK_SUBJECT_REMINDER_FOR_DIAGNOSIS_VERIFICATION = 'days reminder for Diagnosis Verification';
@@ -390,12 +402,44 @@ public class Constant_AC {
 	public static final String TASK_SUBJECT_RUSH_MODIFIED_NO = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary';
 	public static final String TASK_SUBJECT_REVIEW_BACKGROUND_CHECK = 'Review Background Check';
 	public static final String TASK_SUBJECT_BACKGROUND_CHECK = 'Background Check';
+	public static final String TASK_SUBJECT_CHECK_IN_WITH_FAMILY = 'Check in with the family every 30 days';
+	public static final String TASK_SUBJECT_WISH_PRESENTATION_NOT_SET = 'Wish Presentation Not Set';
+	public static final String TASK_SUBJECT_BUDGET_IS_APPROVED_ACKNOWLEDGE = 'Budget is approved: Acknowledge Receipt of Approval';
+	public static final String TASK_SUBJECT_SEND_DNQ = 'Send DNQ Notification to Qualifying Medical Professional';
+	public static final String TASK_SUBJECT_INTERVIEW_TASK  = 'Interview Task';
+	public static final String TASK_SUBJECT_INTERVIEW_COMPLETED = 'Interview Completed';
+	public static final String TASK_SUBJECT_PARENT_ORIENTATION = 'Parent/Guardian Orientation';
+	public static final String TASK_SUBJECT_BACKGROUND_CHECK_EXPIRING = 'BC ET : Background Check Expiring';
+	public static final String TASK_SUBJECT_COI_EXPIRING = 'COI ET : COI Expiring';
+	public static final String TASK_SUBJECT_BUDGET_IS_APPROVED = 'Budget is approved';
+	public static final String TASK_SUBJECT_BUDGET_APPROVAL_REQUEST = 'Case ET : Budget Approval Request';
+	public static final String TASK_SUBJECT_BUDGET_NEEDS_REVISED = 'Budget needs to be revised';
+	public static final String TASK_SUBJECT_FOLLOWUP_ON_CLEARANCE = 'Follow-up on wish clearance';
+	public static final String TASK_SUBJECT_INTERVIEW_DATE_NOT_SET = 'Interview date not set';
+	public static final String TASK_SUBJECT_BIRTHDAY_REMINDER = 'Wish Child Birthday Reminder';
+	public static final String TASK_SUBJECT_FAMILY_PACKET_NOT_SUBMITTED = 'Wish Family Packet not submitted';
+	public static final String TASK_SUBJECT_RUSH_REFERRAL = 'Lead ET : New Rush Referral';
+	public static final String TASK_SUBJECT_RUSH_CHANGED = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary';
+	public static final String TASK_SUBJECT_WISH_CONCEPT_APPROVAL = 'Wish concept approval';
+	public static final String TASK_SUBJECT_WISH_NOT_CLOSED = 'Wish not closed';
+	public static final String TASK_SUBJECT_FOLLOWUP_ACTIVITIES_INCOMPLETE = 'Volunteer wish follow-up activities not complete';
+	public static final String TASK_SUBJECT_FLIGHTS_BOOKED = 'Flights booked';
+	public static final String TASK_SUBJECT_BUDGET = 'Budget';
+	public static final String TASK_SUBJECT_REQUEST_PASSPORTS = 'Request Passports from family';
+	public static final String TASK_SUBJECT_PASSPORTS_REQUESTED = 'Passports Requested from family';
+	public static final String TASK_SUBJECT_SNEAK_PEEK_LETTER = 'Sneak Peek Letter';
+	public static final String TASK_SUBJECT_CRUISE_REQUEST_FORM = 'Cruise request form';
+	public static final String TASK_SUBJECT_REFERRAL_DNQ = 'Referral DNQ';
 	public static final String TASK_TYPE_EMAIL = 'Email';
+	public static final String TASK_AVAILABLE_TIME_OTHER = 'Other';
+	public final static String TASK_RT_STAFF_LABEL = Schema.SObjectType.Task.getRecordTypeInfosByDeveloperName().get('Staff').getName();
 
 	/*
 	 * User Constants
 	 */
 	public static final String INTEGRATION_USER = 'Integration User';
+	public static final String USER_VOLUNTEER_ORIENTATION_STATUS_REGISTERED = 'Registered';
+	public static final String USER_VOLUNTEER_ORIENTATION_STATUS_CANCELLED = 'Cancelled';
 
 	/**
 	 * Profile Constants
@@ -407,6 +451,11 @@ public class Constant_AC {
 	 * Role Constants
 	 */
 	public static final String ROLE_NATIONAL_STAFF = 'National Staff';
+
+	/*
+	 * Wish Role Constants
+	 */
+	public static final String WISH_ROLE_ALL_ROLES = 'All Roles';
 
 	/**
 	 * File Constants
