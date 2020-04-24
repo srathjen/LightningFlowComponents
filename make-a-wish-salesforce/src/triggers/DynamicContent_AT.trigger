@@ -15,6 +15,6 @@ So we can add an Active flag on the record. if we are creating a new national re
 **********************************************************************************************/
 
 trigger DynamicContent_AT on Dynamic_Content__c (before insert, before update, before delete, 
-                                                 after insert, after update, after delete, after undelete) {
+                                                after insert, after update, after delete, after undelete) {
     trac_TriggerHandlerBase.triggerHandler(new DynamicContentDomain());
 }
