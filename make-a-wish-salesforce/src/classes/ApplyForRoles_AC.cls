@@ -35,7 +35,7 @@ public class ApplyForRoles_AC {
 	public String contactName { get; set; }
 	private Boolean updateContact { get; set; }
 	private final static String EMPTY_STATE_OPTION = 'Please select state';
-	private final static String APPLY_FOR_ROLES_PAGE_PATH = '/ApplyForRoles_VF';
+	private final static String APPLY_FOR_ROLES_PAGE_PATH = 'ApplyForRoles_VF';
 	private final static String SIGNING_STATUS_COMPLETE = 'signing_complete';
 	private static final String APPLICATION_STATUS_APPROVED = Constant_AC.CONTACT_APPLICATION_STATUS_APPROVED;
 	private static final String APPLICATION_STATUS_COMPLETE = Constant_AC.CONTACT_APPLICATION_STATUS_COMPLETE;

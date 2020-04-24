@@ -6,6 +6,7 @@
 public class CaseTeamMemberService {
 
 	private final static String INACTIVE = '(Inactive)';
+	private final static String TEAM_MEMBER_NAME_INACTIVE = 'Inactive';
 
 	/**
 	 * Update Inactive Case Team Member
@@ -53,5 +54,51 @@ public class CaseTeamMemberService {
 		}
 		update updateTeamList;
 		return updateTeamList;
+	}
+
+	public static Set<Id> updateTeamRoleId(Set<Id> parentIds, Set<Id> memberIds, Map<Id, String> caseTeamMap,
+			Map<Id, Id> contactUserMap, Map<Id, String> volunteerOppMap, Map<String, Id> caseTeamNameMap) {
+		Set<Id> parentUpdatedIds = new Set<Id>();
+		List<CaseTeamMember> caseTeamMembers = new List<CaseTeamMember>();
+		for (CaseTeamMember caseTeamMember : [
+				SELECT Id,MemberId, ParentId, TeamRoleId, TeamRole.Name
+				FROM CaseTeamMember
+				WHERE ParentId IN :parentIds
+				AND MemberId IN :memberIds
+		]) {
+			if (!caseTeamMap.isEmpty() && caseTeamMap.containsKey(caseTeamMember.TeamRoleId)) {
+				if (contactUserMap.containsKey(caseTeamMember.MemberId)) {
+					if (volunteerOppMap.containsKey(contactUserMap.get(caseTeamMember.MemberId))) {
+						caseTeamMember.TeamRoleId = caseTeamNameMap.get(volunteerOppMap.get(contactUserMap.get(caseTeamMember.MemberId)));
+						caseTeamMembers.add(caseTeamMember);
+						parentUpdatedIds.add(caseTeamMember.ParentId);
+					} else if (caseTeamNameMap.containsKey(caseTeamMember.TeamRole.Name + ' (' + TEAM_MEMBER_NAME_INACTIVE + ')')) {
+						caseTeamMember.TeamRoleId = caseTeamNameMap.get(caseTeamMember.TeamRole.Name + ' (' + TEAM_MEMBER_NAME_INACTIVE + ')');
+						caseTeamMembers.add(caseTeamMember);
+						parentUpdatedIds.add(caseTeamMember.ParentId);
+					}
+				}
+			}
+		}
+		update caseTeamMembers;
+		return parentUpdatedIds;
+	}
+
+	public static Map<Id, Id> findByTeamRoleNamesAndParentIdsAndMemberIds(Set<String> teamRoleNames,
+			Set<Id> inactiveOwners, Set<Id> userIds) {
+		Map<Id, Id> activeVolunteerMap = new Map<Id, Id>();
+		for (CaseTeamMember caseTeamInfo : [
+				SELECT Id, TeamRole.Name, ParentId, MemberId
+				FROM CaseTeamMember
+				WHERE TeamRole.Name IN :teamRoleNames
+				AND ParentId IN :inactiveOwners
+				AND MemberId NOT IN :userIds
+				ORDER BY CreatedDate ASC
+		]) {
+			if (!activeVolunteerMap.containsKey(caseTeamInfo.ParentId)) {
+				activeVolunteerMap.put(caseTeamInfo.ParentId, caseTeamInfo.MemberId);
+			}
+		}
+		return activeVolunteerMap;
 	}
 }

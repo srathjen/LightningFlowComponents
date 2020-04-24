@@ -7,9 +7,8 @@ Description : VolunteerOpportunityTrigger_AT_Test is used to increase the code c
 @IsTest
 public class VolunteerOpportunityTrigger_AT_Test {
 
-	/*Submit volunteer Opportunity to approval process*/
-
-	public testMethod static List<Volunteer_Opportunity__c> SubmittoApproval() {
+	@IsTest
+	public static List<Volunteer_Opportunity__c> SubmittoApproval() {
 		Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert chapterAccount;
 		Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -20,20 +19,13 @@ public class VolunteerOpportunityTrigger_AT_Test {
 		insert parentCase;
 		Set<Id> caseIdsSet = new Set<Id>();
 		Set<Id> volOppIdsSet = new Set<Id>();
-		/**
-		 * JIRA: WLP-286
-		 * Author: Gustavo Mayer
-		 * Update: This test classes references Child Cases which will no longer be used as the Cases 'Wish Determination, 'Wish Planning,
-		 * 'Wish Granting and 'Wish Impact are now converted to a single case Wish
-		 */
-//        list<Case> subcase = new list<Case>();
-//        subcase.add(parentCase);
 		caseIdsSet.add(parentCase.id);
 		Role__c roleName = OrientationandTrainingUtil.createRole();
 		insert roleName;
 		Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id, roleName.id);
 		insert chapterRole;
-		List<Volunteer_Opportunity__c> wishVolunteerOpportunityList = OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id, chapterRole.id, parentCase.id, 3);
+		List<Volunteer_Opportunity__c> wishVolunteerOpportunityList =
+				OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id, chapterRole.id, parentCase.id, 3);
 		List<Volunteer_Opportunity__c> volunteerOpportunityList = new List<Volunteer_Opportunity__c>();
 		for (Volunteer_Opportunity__c processVolOpportunities : wishVolunteerOpportunityList) {
 			processVolOpportunities.Volunteer_Name__c = VolunteerContact.Id;
@@ -43,33 +35,13 @@ public class VolunteerOpportunityTrigger_AT_Test {
 		test.startTest();
 		insert volunteerOpportunityList;
 		VolOpportunity_OnAfter_Update_Helper.updateCase(caseIdsSet, volOppIdsSet, volunteerOpportunityList);
-		/**
-		 * JIRA: WLP-286
-		 * Author: Gustavo Mayer
-		 * Update: This test classes references Child Cases which will no longer be used as the Cases 'Wish Determination, 'Wish Planning,
-		 * 'Wish Granting and 'Wish Impact are now converted to a single case Wish
-		 */
-//        VolOpportunity_OnAfter_Update_Helper.updateCaseTeamMemberForSubCase(caseIdsSet,subcase,volunteerOpportunityList);
 		VolOpportunity_OnAfter_Update_Helper.createCaseTeamMembers(volunteerOpportunityList);
 		test.stopTest();
 		return volunteerOpportunityList;
 	}
 
-//    public testmethod static void updateVolunteerOpportunity(){
-//        List<Volunteer_Opportunity__c> volOppList  = VolunteerOpportunityTrigger_AT_Test.SubmittoApproval();
-//        insert volOppList;
-//        List<Volunteer_Opportunity__c> updateVOlOpportunity = new  List<Volunteer_Opportunity__c>();
-//        for(Volunteer_Opportunity__c currOpp : volOppList){
-//            updateVOlOpportunity.add(currOpp);
-//        }
-//        //test.startTest();
-//        insert updateVOlOpportunity;
-//        //test.stopTest();
-//    }
-
-	//Create case team member when the approver approve the request
-
-	public testmethod static void CreateCaseTeamMember() {
+	@IsTest
+	public static void CreateCaseTeamMember() {
 		Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert chapterAccount;
 		Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -93,7 +65,8 @@ public class VolunteerOpportunityTrigger_AT_Test {
 		];
 		CaseTeamMember caseMem = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id, currUser.id, dbRole.Id);
 		System.RunAs(new User(Id = UserInfo.getUserId())) {
-			List<Volunteer_Opportunity__c> wishVolunteerOpportunityList = OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id, chapterRole.id, parentCase.id, 1);
+			List<Volunteer_Opportunity__c> wishVolunteerOpportunityList =
+					OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id, chapterRole.id, parentCase.id, 1);
 			Volunteer_Opportunity__c updateVolOpportunity = new Volunteer_Opportunity__c();
 			updateVolOpportunity.Id = wishVolunteerOpportunityList.get(0).Id;
 			updateVolOpportunity.Status__c = 'Approved';
@@ -105,10 +78,8 @@ public class VolunteerOpportunityTrigger_AT_Test {
 		}
 	}
 
-	// Delete the approved volunteer opportunity
-
-	public testmethod static void DeleteOpportunityCount() {
-
+	@IsTest
+	public static void DeleteOpportunityCount() {
 		Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert chapterAccount;
 		Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
@@ -138,26 +109,19 @@ public class VolunteerOpportunityTrigger_AT_Test {
 
 		}
 		OrientationandTrainingUtil.createVolunteerCount(nonWishEvent.Id, chapterRole.Id, 3);
-		// Volunteer_Opportunity__c volOpportunity = OrientationandTrainingUtil.CreateNonWishVolunteerOpportunity(chapterAccount.Id,chapterRole.Id,nonWishEvent.Id);
-//        volOpportunity.Volunteer_Name__c  = volunteerContact.Id;
-//        update volOpportunity;
 		Volunteer_Opportunity__c deleteOpportunity = new Volunteer_Opportunity__c ();
 		System.runAs(new User(Id = UserInfo.getUserId())) {
 			volunteerUser.Hidden_Role_Name_Id__c = volOpportunity.Chapter_Role_Opportunity__r.Role_Name__c + String.Valueof(volOpportunity.Non_Wish_Event__c);
 			insert volunteerUser;
 		}
 		deleteOpportunity.Id = volOpportunity.Id;
-		//deleteOpportunity.Volunteer_Name__c  = Null;
 		test.startTest();
-		// update deleteOpportunity;
 		delete deleteOpportunity;
 		test.stopTest();
 	}
 
-	// Create new wishVolunteerOpportunity when the reason inactive is not equal to null
-
-	public testmethod static void CreateWishVolunteerOpportunityCount() {
-
+	@IsTest
+	public static void CreateWishVolunteerOpportunityCount() {
 		Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert chapterAccount;
 		Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -179,14 +143,11 @@ public class VolunteerOpportunityTrigger_AT_Test {
 			test.startTest();
 			insert updateVolOpportunity;
 			test.stopTest();
-
 		}
 	}
 
-	// Create new nonWishVolunteerOpportunity when the reason inactive is not equal to null
-
-	public testmethod static void CreateNonWishVolunteerOpportunityCount() {
-
+	@IsTest
+	public static void CreateNonWishVolunteerOpportunityCount() {
 		Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert chapterAccount;
 		Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
@@ -205,13 +166,10 @@ public class VolunteerOpportunityTrigger_AT_Test {
 		test.startTest();
 		insert volOpportunity;
 		test.stopTest();
-
 	}
 
-	//Update the NonWish Volunteer Opportunity count
-
-	public testmethod static void UpdateNeededOpportunityCount() {
-
+	@IsTest
+	public static void UpdateNeededOpportunityCount() {
 		Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert chapterAccount;
 		Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
@@ -234,21 +192,19 @@ public class VolunteerOpportunityTrigger_AT_Test {
 		test.startTest();
 		insert volOpportunity;
 		Volunteer_Opportunity__c deleteOpportunity = new Volunteer_Opportunity__c ();
-//        deleteOpportunity.Id = volOpportunity.Id;
-		// deleteOpportunity.Volunteer_Name__c  = Null;
 		deleteOpportunity.Status__c = 'Approved';
 		insert deleteOpportunity;
 		System.runAs(new User(Id = UserInfo.getUserId())) {
-			volunteerUser.Hidden_Role_Name_Id__c = volOpportunity.Chapter_Role_Opportunity__r.Role_Name__c + String.Valueof(volOpportunity.Non_Wish_Event__c);
+			volunteerUser.Hidden_Role_Name_Id__c = volOpportunity.Chapter_Role_Opportunity__r.Role_Name__c +
+					String.Valueof(volOpportunity.Non_Wish_Event__c);
 			insert volunteerUser;
 		}
 		delete deleteOpportunity;
 		test.stopTest();
 	}
 
-	//Update the NonWish Volunteer Opportunity registered count
-	public testmethod static void UpdatetoRegisteredCount() {
-
+	@IsTest
+	public static void UpdatetoRegisteredCount() {
 		Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
 		Role__c nonWishRole = OrientationandTrainingUtil.createRole();
@@ -274,10 +230,10 @@ public class VolunteerOpportunityTrigger_AT_Test {
 		update deleteOpportunity;
 		delete deleteOpportunity;
 		test.stopTest();
-
 	}
 
-	public testmethod static void createRecforNationalStaffasOwner() {
+	@IsTest
+	public static void createRecforNationalStaffasOwner() {
 		Chapter_Vs_Role__c arizonaChap = OrientationandTrainingUtil.createArizonaChapter();
 		Chapter_Vs_Role__c alabamaChap = OrientationandTrainingUtil.createAlabamaChapter();
 		test.startTest();
@@ -299,7 +255,6 @@ public class VolunteerOpportunityTrigger_AT_Test {
 					where Name = 'National Staff'
 			].Id);
 		}
-
 		System.runAs(currUser) {
 			Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 			Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
@@ -311,7 +266,8 @@ public class VolunteerOpportunityTrigger_AT_Test {
 		}
 	}
 
-	public testmethod static List<Volunteer_Opportunity__c> RejectedWish() {
+	@IsTest
+	public static List<Volunteer_Opportunity__c> RejectedWish() {
 		Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
 		Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
@@ -324,17 +280,15 @@ public class VolunteerOpportunityTrigger_AT_Test {
 			processVolOpportunities.Volunteer_Name__c = VolunteerContact.Id;
 			processVolOpportunities.Reason_Inactive__c = 'Not Approved';
 			volunteerOpportunityList.add(processVolOpportunities);
-
 		}
 		test.startTest();
 		insert volunteerOpportunityList;
 		test.stopTest();
 		return volunteerOpportunityList;
-
 	}
 
-	public testmethod static void RejectedNonWish() {
-
+	@IsTest
+	public static void RejectedNonWish() {
 		Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert chapterAccount;
 		Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
@@ -354,7 +308,8 @@ public class VolunteerOpportunityTrigger_AT_Test {
 		test.stopTest();
 	}
 
-	public testmethod static void RemoveCaseTeamMember() {
+	@IsTest
+	public static void RemoveCaseTeamMember() {
 		Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert chapterAccount;
 		Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -368,7 +323,6 @@ public class VolunteerOpportunityTrigger_AT_Test {
 		Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id, roleName.id);
 		insert chapterRole;
 		System.RunAs(new User(Id = UserInfo.getUserId())) {
-
 			User currUser = OrientationandTrainingUtil.createActiveVolunteerUser(VolunteerContact.id);
 			CaseTeamRole dbRole = [
 					SELECT Id,Name
@@ -378,20 +332,18 @@ public class VolunteerOpportunityTrigger_AT_Test {
 			];
 			CaseTeamMember caseMem = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id, currUser.id, dbRole.Id);
 			List<Volunteer_Opportunity__c> wishVolunteerOpportunityList = OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id, chapterRole.id, parentCase.id, 1);
-			//VolOpportunity_OnAfter_Update_Helper.createCaseTeamMembers(wishVolunteerOpportunityList);
 			Volunteer_Opportunity__c updateVolOpportunity = new Volunteer_Opportunity__c();
 			updateVolOpportunity.Id = wishVolunteerOpportunityList.get(0).Id;
 			updateVolOpportunity.Reason_Inactive__c = 'Non-responsive';
 			updateVolOpportunity.Volunteer_Name__c = VolunteerContact.Id;
 			test.startTest();
 			insert updateVolOpportunity;
-
 			test.stopTest();
 		}
 	}
 
-	public testmethod static void UpdateUserRole() {
-
+	@IsTest
+	public static void UpdateUserRole() {
 		Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
 		insert chapterAccount;
 		Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
@@ -406,10 +358,9 @@ public class VolunteerOpportunityTrigger_AT_Test {
 		insert chapterRole;
 		System.RunAs(new User(Id = UserInfo.getUserId())) {
 			User volunteerUser;
-
 			volunteerUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunteerContact.Id);
-
-			List<Volunteer_Opportunity__c> wishVolunteerOpportunityList = OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id, chapterRole.id, parentCase.id, 1);
+			List<Volunteer_Opportunity__c> wishVolunteerOpportunityList =
+					OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id, chapterRole.id, parentCase.id, 1);
 			Volunteer_Opportunity__c updateVolOpportunity = new Volunteer_Opportunity__c();
 			updateVolOpportunity.Id = wishVolunteerOpportunityList.get(0).Id;
 			updateVolOpportunity.Volunteer_Name__c = VolunteerContact.Id;
@@ -417,19 +368,15 @@ public class VolunteerOpportunityTrigger_AT_Test {
 			test.startTest();
 			insert updateVolOpportunity;
 			test.stopTest();
-
 			Volunteer_Opportunity__c dbVol = [
 					SELECT Id,Volunteer_Name__c
 					FROM Volunteer_Opportunity__c
 					WHERE Id = :updateVolOpportunity.Id
 			];
-
 			Volunteer_Opportunity__c updateUserRole = new Volunteer_Opportunity__c();
 			updateUserRole.Id = wishVolunteerOpportunityList.get(0).Id;
 			updateUserRole.Volunteer_Name__c = null;
-			//updateVolOpportunity.Reason_Inactive__c = 'Moved';
 			insert updateUserRole;
-
 		}
 	}
 }

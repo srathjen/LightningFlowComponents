@@ -104,18 +104,18 @@ public class Utils_Test {
 	private static void parseAmPm_WhenHourMinuteAmPm() {
 		String value = '10:30 PM';
 
-		Time result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM));
+		Datetime result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM));
 
-		System.assertEquals(Time.newInstance(22, 30, 0, 0), result);
+		System.assertEquals(Datetime.newInstanceGmt(Date.today(), Time.newInstance(22, 30, 0, 0)), result);
 	}
 
 	@IsTest
 	private static void parseAmPm_WhenHourMinuteSecondAmPm() {
 		String value = '9:30:46 AM';
 
-		Time result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_SECOND_AM_PM));
+		Datetime result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_SECOND_AM_PM));
 
-		System.assertEquals(Time.newInstance(9, 30, 46, 0), result);
+		System.assertEquals(Datetime.newInstanceGmt(Date.today(),Time.newInstance(9, 30, 46, 0)), result);
 	}
 
 	@IsTest
@@ -126,5 +126,21 @@ public class Utils_Test {
 		} catch (Utils.UtilsException e) {
 			System.assertEquals('Pattern HOUR_MINUTE_AM_PM does not match the value 9:30:46 AM provided', e.getMessage());
 		}
+	}
+
+	@IsTest
+	private static void parseAmPmShouldMatch() {
+		String value = '12:00 AM';
+		Datetime result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM));
+		System.assertEquals(Datetime.newInstanceGmt(Date.today().addDays(1),Time.newInstance(00, 00, 0, 0)), result);
+		value = '1:00 AM';
+		result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM));
+		System.assertEquals(Datetime.newInstanceGmt(Date.today(),Time.newInstance(01, 00, 0, 0)), result);
+		value = '12:00 PM';
+		result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM));
+		System.assertEquals(Datetime.newInstanceGmt(Date.today(),Time.newInstance(12, 00, 0, 0)), result);
+		value = '1:00 PM';
+		result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM));
+		System.assertEquals(Datetime.newInstanceGmt(Date.today(),Time.newInstance(13, 00, 0, 0)), result);
 	}
 }
