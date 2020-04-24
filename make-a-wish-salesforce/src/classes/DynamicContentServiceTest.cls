@@ -106,7 +106,6 @@ private class DynamicContentServiceTest {
             errorMessage = ex.getMessage();
         }
         Test.stopTest();
-        
         System.assert(errorMessage.contains('Active record already exist for this chapter and record type'));
     }
 
