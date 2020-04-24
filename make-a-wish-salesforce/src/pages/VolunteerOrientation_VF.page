@@ -99,7 +99,7 @@
                     <apex:pageBlock>
                         <apex:outputPanel rendered="{!(isOrientationExist == True)}">
                             <h3>{!$Label.Volunteer_Portal_Title_Confirmation_Registered}</h3>
-                            <p>{!$Label.Volunteer_Portal_Confirmation_Registered}</p>
+                            <p>{!$Label.Volunteer_Portal_Confirmation_Registered_Orientation}</p>
                         </apex:outputPanel>
                         <apex:outputPanel rendered="{!(isCancelled == True)}">
                             <h3>{!$Label.Volunteer_Portal_Title_Confirmation_Cancelled}</h3>
