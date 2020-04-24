@@ -6,6 +6,7 @@ public class VolunteerTraining_AC_Test {
 	private static void setup() {
 		trac_TriggerHandlerBase.blockTrigger = true;
 		insert new Bypass_Triggers__c(SetupOwnerId = UserInfo.getUserId());
+		
 		LMS_Credentials__c currLMSCredential = TestClassUtil.createLMSCredentials();
 
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
