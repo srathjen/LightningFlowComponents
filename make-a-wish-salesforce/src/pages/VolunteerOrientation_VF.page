@@ -63,7 +63,7 @@
     <script type="text/javascript">
         function openLMS(ssoLink, courseLink) {
             if (courseLink.length <= 0) {
-                alert('{!$Label.Volunteer_Orientation_Alert_Registration_Not_Found}');
+                alert('{!$Label.Volunteer_Portal_Alert_Registration_Not_Found}');
             } else {
                 newwindow = window.open(ssoLink, 'openLMS');
                 if ((newwindow == null || typeof (newwindow) == 'undefined')) {
@@ -88,7 +88,7 @@
         <div class="row">
             <section class="col-md-12">
                 <div class="row">
-                    <h1 class="col-md-12">{!$Label.Volunteer_Orientation_Page_Title}</h1>
+                    <h1 class="col-md-12">{!$Label.Volunteer_Portal_Page_Title_Orientation}</h1>
                 </div>
 
                 <apex:form id="frm1" styleClass="col-md-12">
@@ -98,31 +98,31 @@
 
                     <apex:pageBlock>
                         <apex:outputPanel rendered="{!(isOrientationExist == True)}">
-                            <h3>{!$Label.Volunteer_Orientation_Title_Registered}</h3>
-                            <p>{!$Label.Volunteer_Orientation_Confirmation_Registered}</p>
+                            <h3>{!$Label.Volunteer_Portal_Title_Confirmation_Registered}</h3>
+                            <p>{!$Label.Volunteer_Portal_Confirmation_Registered}</p>
                         </apex:outputPanel>
                         <apex:outputPanel rendered="{!(isCancelled == True)}">
-                            <h3>{!$Label.Volunteer_Orientation_Title_Cancelled}</h3>
-                            <p>{!$Label.Volunteer_Orientation_Confirmation_Cancelled}</p>
+                            <h3>{!$Label.Volunteer_Portal_Title_Confirmation_Cancelled}</h3>
+                            <p>{!$Label.Volunteer_Portal_Confirmation_Cancelled_Orientation}</p>
                         </apex:outputPanel>
 
                         <apex:outputPanel rendered="{! !checkExistProgram}">
-                            <h2>{!$Label.Volunteer_Orientation_Registered_Orientation_Details}</h2>
+                            <h2>{!$Label.Volunteer_Portal_Registered_Orientation_Details}</h2>
                             <div class="table-wrap">
                                 <table id="dataTab1" class="table table-maw table-hover">
                                     <thead class="thead-default">
                                     <tr>
-                                        <th title="Volunteer Name">{!$Label.Volunteer_Orientation_Table_Header_Name}</th>
-                                        <th title="Chapter Name">{!$Label.Volunteer_Orientation_Table_Header_Chapter}</th>
-                                        <th title="Orientation Type">{!$Label.Volunteer_Orientation_Table_Header_Type}</th>
-                                        <th title="Orientation Date">{!$Label.Volunteer_Orientation_Table_Header_Date}</th>
-                                        <th title="Start Time">{!$Label.Volunteer_Orientation_Table_Header_Start}</th>
-                                        <th title="End Time">{!$Label.Volunteer_Orientation_Table_Header_End}</th>
-                                        <th title="Orientation Location">{!$Label.Volunteer_Orientation_Table_Header_Location}</th>
-                                        <th title="Max Capacity">{!$Label.Volunteer_Orientation_Table_Header_Capacity}</th>
-                                        <th title="Available Seats">{!$Label.Volunteer_Orientation_Table_Header_Seats}</th>
-                                        <th title="Select Below">{!$Label.Volunteer_Orientation_Table_Header_Action}</th>
-                                        <th>{!$Label.Volunteer_Orientation_Table_Header_Link}</th>
+                                        <th title="Volunteer Name">{!$Label.Volunteer_Portal_Table_Header_Name}</th>
+                                        <th title="Chapter Name">{!$Label.Volunteer_Portal_Table_Header_Chapter}</th>
+                                        <th title="Orientation Type">{!$Label.Volunteer_Portal_Table_Header_Type}</th>
+                                        <th title="Orientation Date">{!$Label.Volunteer_Portal_Table_Header_Date}</th>
+                                        <th title="Start Time">{!$Label.Volunteer_Portal_Table_Header_Start_Time}</th>
+                                        <th title="End Time">{!$Label.Volunteer_Portal_Table_Header_End_Time}</th>
+                                        <th title="Orientation Location">{!$Label.Volunteer_Portal_Table_Header_Location}</th>
+                                        <th title="Max Capacity">{!$Label.Volunteer_Portal_Table_Header_Capacity}</th>
+                                        <th title="Available Seats">{!$Label.Volunteer_Portal_Table_Header_Available_Seats}</th>
+                                        <th title="Select Below">{!$Label.Volunteer_Portal_Table_Header_Action}</th>
+                                        <th>{!$Label.Volunteer_Portal_Table_Header_Link}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -167,21 +167,21 @@
                         </apex:outputPanel>
 
                         <apex:outputPanel id="myPanel">
-                            <h2>{!$Label.Volunteer_Orientation_Available_Orientation_Details}</h2>
+                            <h2>{!$Label.Volunteer_Portal_Available_Orientation_Details}</h2>
                             <div class="table-wrap">
                                 <table id="dataTab2" class="table table-maw table-hover">
                                     <thead class="thead-default">
                                     <tr>
-                                        <th title="Volunteer Name">{!$Label.Volunteer_Orientation_Table_Header_Name}</th>
-                                        <th title="Chapter Name">{!$Label.Volunteer_Orientation_Table_Header_Chapter}</th>
-                                        <th title="Orientation Type">{!$Label.Volunteer_Orientation_Table_Header_Type}</th>
-                                        <th title="Orientation Date">{!$Label.Volunteer_Orientation_Table_Header_Date}</th>
-                                        <th title="Start Time">{!$Label.Volunteer_Orientation_Table_Header_Start}</th>
-                                        <th title="End Time">{!$Label.Volunteer_Orientation_Table_Header_End}</th>
-                                        <th title="Orientation Location">{!$Label.Volunteer_Orientation_Table_Header_Location}</th>
-                                        <th title="Max Capacity">{!$Label.Volunteer_Orientation_Table_Header_Capacity}</th>
-                                        <th title="Available Seats">{!$Label.Volunteer_Orientation_Table_Header_Seats}</th>
-                                        <th title="Select Below">{!$Label.Volunteer_Orientation_Table_Header_Action}</th>
+                                        <th title="Volunteer Name">{!$Label.Volunteer_Portal_Table_Header_Name}</th>
+                                        <th title="Chapter Name">{!$Label.Volunteer_Portal_Table_Header_Chapter}</th>
+                                        <th title="Orientation Type">{!$Label.Volunteer_Portal_Table_Header_Type}</th>
+                                        <th title="Orientation Date">{!$Label.Volunteer_Portal_Table_Header_Date}</th>
+                                        <th title="Start Time">{!$Label.Volunteer_Portal_Table_Header_Start_Time}</th>
+                                        <th title="End Time">{!$Label.Volunteer_Portal_Table_Header_End_Time}</th>
+                                        <th title="Orientation Location">{!$Label.Volunteer_Portal_Table_Header_Location}</th>
+                                        <th title="Max Capacity">{!$Label.Volunteer_Portal_Table_Header_Capacity}</th>
+                                        <th title="Available Seats">{!$Label.Volunteer_Portal_Table_Header_Available_Seats}</th>
+                                        <th title="Select Below">{!$Label.Volunteer_Portal_Table_Header_Action}</th>
                                     </tr>
                                     </thead>
 
@@ -220,7 +220,7 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <h3>{!$Label.Volunteer_Orientation_Additional_Information}</h3>
+                            <h3>{!$Label.Volunteer_Portal_Additional_Information}</h3>
                             <apex:outputText value="{!orientationContent}" escape="false" id="orientContent"/>
                         </div>
                     </div>
@@ -230,10 +230,10 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title">{!$Label.Volunteer_Orientation_Better_Experience_Information_Header}</h1>
+                                    <h1 class="modal-title">{!$Label.Volunteer_Portal_Better_Experience_Information_Header}</h1>
                                 </div>
                                 <div class="modal-body">
-                                    <p class="text-muted">{!$Label.Volunteer_Orientation_Better_Experience_Information}</p>
+                                    <p class="text-muted">{!$Label.Volunteer_Portal_Better_Experience_Information}</p>
                                 </div>
                                 <div class="modal-footer">
                                     <apex:commandButton html-data-dismiss="modal" html-aria-label="Close"

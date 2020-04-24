@@ -28,17 +28,6 @@ Last Modified   : 07/11/2016
             <div class="row">
                 <h1 class="col-md-12">Background Check</h1>
             </div>
-          <!--  <nav class="row">
-                <ul class="step">
-                    <li><a href="/apex/VolunteerOrientation_VF?bgRequired={!bgTabPermission}&trainingRequired={!trainingTabVisible}">Orientation</a></li>
-                    <li><a href="/apex/Application_VF?bgRequired={!bgTabPermission}&trainingRequired={!trainingTabVisible}">Application</a></li>
-                    <li><a href="/apex/VolunteerInterview_VF?bgRequired={!bgTabPermission}&trainingRequired={!trainingTabVisible}">Interview</a></li>
-                    <li class="current"><a href="">Background Check</a></li>
-                   <apex:outputpanel rendered="{!trainingTabVisible==True}">
-                    <li><a href="/apex/VolunteerTraining_VF?bgRequired={!bgTabPermission}&trainingRequired={!trainingTabVisible}">Training</a></li>
-                   </apex:outputpanel>
-                </ul>
-            </nav> -->
 
             <div class="row">
                 <section class="col-md-8">
@@ -51,7 +40,7 @@ Last Modified   : 07/11/2016
                          <apex:outputpanel rendered="{!isBGFinished==true}">
                             <fieldset style="min-height:350px;">
                                 <p><apex:outputText value="Thank you for requesting your background check." id="thankYouForReqBcheck" /></p>
-                                <p><apex:outputText value="You will receive an email from First Advantage, our background check provider, with specific details on how to complete the criminal background check process." id="crimalBcheck"/></p>
+                                <p><apex:outputText value="{!$Label.Volunteer_Portal_Alert_Background_Check_Instructions}" id="crimalBcheck"/></p>
                                 <p><apex:outputText value="Background checks can take several weeks to process. Once completed and reviewed by chapter staff, you will receive an email to confirm you are approved to complete your required volunteer training. If you have any questions, please contact the chapter office. Chapter contact information can be found on the home page." id="severalWeekProcess" /></p>
                             </fieldset>
                         </apex:outputpanel>
