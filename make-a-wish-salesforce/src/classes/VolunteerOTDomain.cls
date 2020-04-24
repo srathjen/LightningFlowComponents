@@ -42,49 +42,18 @@ public class VolunteerOTDomain extends trac_TriggerHandlerBase {
         VolunteerOTService.updateAffiliationStatusAsActive(VolunteerOTService.getTrainingCompletedVolunteerIds(newList));
 
         Set<Id> cancelContactId = VolunteerOTService.getCancelledTrainingVolunteers(newList, oldMap);
-        Set<Id> registerdCountId = getAggregateVolunteers(cancelContactId, VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_REGISTERED);
-        Set<Id> completedCountId = getAggregateVolunteers(cancelContactId, VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED);
+        Set<Id> registerdCountId = VolunteerOTService.getAggregateVolunteers(cancelContactId, VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_REGISTERED);
+        Set<Id> completedCountId = VolunteerOTService.getAggregateVolunteers(cancelContactId, VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED);
 
-
-        Set<Id> userUpdateContactId = new Set<Id>();
-        Set<Id> contactUpdateContactId = new Set<Id>();
-        for (Volunteer_Orientation_Training__c votcancelupdate : newList) {
-            if (cancelContactId.contains(votcancelupdate.Volunteer__c) && !completedCountId.contains(votcancelupdate.Volunteer__c)) {
-                if (!registerdCountId.contains(votcancelupdate.Volunteer__c)) {
-                    userUpdateContactId.add(votcancelupdate.Volunteer__c);
-                } else if (registerdCountId.contains(votcancelupdate.Volunteer__c)) {
-                    contactUpdateContactId.add(votcancelupdate.Volunteer__c);
-                }
-            }
-        }
-
-        List<Contact> updateContactList = new List<Contact>();
-        if (!contactUpdateContactId.isEmpty()) {
-            for (Contact contactUpdate : [
-                    SELECT Id,Hidden_Volunteer_OT_Status__c
-                    FROM Contact
-                    WHERE Id IN :contactUpdateContactId OR Id IN :VolunteerOTService.getCompletedOrientationVolunteerIds(newList, oldMap)
-            ]) {
-                contactUpdate.Hidden_Volunteer_OT_Status__c = Constant_AC.CONTACT_HIDDEN_VOLUNTEER_STATUS_ORIENTATION_WITHOUT_COMPLETED;
-                updateContactList.add(contactUpdate);
-            }
-        }
+        VolunteerOTService.CancelledIdsWrapper cancelledIds
+                = VolunteerOTService.cancelledIdsParser(newList, cancelContactId, registerdCountId, completedCountId);
+        Set<Id> contactUpdateContactId = cancelledIds.contactUpdateContactIds;
+        contactUpdateContactId.addAll(VolunteerOTService.getCompletedOrientationVolunteerIds(newList, oldMap));
+        List<Contact> updateContactList = VolunteerOTService.updateContactsHiddenVolOTStatus(contactUpdateContactId);
         update updateContactList;
 
+        Set<Id> userUpdateContactId = cancelledIds.userUpdateContactIds;
         VolunteerOTService.updateUserVolunteerStatus(userUpdateContactId, ACTION_VOLUNTEER_CANCELLED);
         VolunteerJourneyService.processVolunteersChapterRequirements(userUpdateContactId);
-    }
-
-    private static Set<Id> getAggregateVolunteers(Set<Id> volunteerIds, String volunteerAttendance) {
-        Set<Id> ret = new Set<Id>();
-        for (AggregateResult ar : [
-                SELECT Volunteer__c cntid, COUNT(Id) cnt
-                FROM Volunteer_Orientation_Training__c
-                WHERE Volunteer__c IN :volunteerIds AND Volunteer_Attendance__c = :volunteerAttendance
-                GROUP BY Volunteer__c
-        ]) {
-            ret.add((Id) ar.get('cntid'));
-        }
-        return ret;
     }
 }

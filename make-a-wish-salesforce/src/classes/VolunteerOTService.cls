@@ -481,6 +481,52 @@ public class VolunteerOTService {
         return ret;
     }
 
+    // Set related contact records Hidden VOT Status field
+    public static List<Contact> updateContactsHiddenVolOTStatus(Set<Id> contactIds) {
+        List<Contact> ret = new List<Contact>();
+        if (!contactIds.isEmpty()) {
+            for (Contact contactUpdate : [
+                    SELECT Id,Hidden_Volunteer_OT_Status__c
+                    FROM Contact
+                    WHERE Id IN :contactIds
+            ]) {
+                contactUpdate.Hidden_Volunteer_OT_Status__c = Constant_AC.CONTACT_HIDDEN_VOLUNTEER_STATUS_ORIENTATION_WITHOUT_COMPLETED;
+                ret.add(contactUpdate);
+            }
+        }
+        return ret;
+    }
+
+    // Return an aggregate query of VOT records based on volunteers and attendance
+    public static Set<Id> getAggregateVolunteers(Set<Id> volunteerIds, String volunteerAttendance) {
+        Set<Id> ret = new Set<Id>();
+        for (AggregateResult ar : [
+                SELECT Volunteer__c cntid, COUNT(Id) cnt
+                FROM Volunteer_Orientation_Training__c
+                WHERE Volunteer__c IN :volunteerIds AND Volunteer_Attendance__c = :volunteerAttendance
+                GROUP BY Volunteer__c
+        ]) {
+            ret.add((Id) ar.get('cntid'));
+        }
+        return ret;
+    }
+
+    // Parse out cancelled volunteer ids
+    public static CancelledIdsWrapper cancelledIdsParser(List<Volunteer_Orientation_Training__c> volList, Set<Id> cancelContactId,
+            Set<Id> registerdCountId, Set<Id> completedCountId) {
+        CancelledIdsWrapper wrapper = new CancelledIdsWrapper();
+        for (Volunteer_Orientation_Training__c votcancelupdate : volList) {
+            if (cancelContactId.contains(votcancelupdate.Volunteer__c) && !completedCountId.contains(votcancelupdate.Volunteer__c)) {
+                if (registerdCountId.contains(votcancelupdate.Volunteer__c)) {
+                    wrapper.contactUpdateContactIds.add(votcancelupdate.Volunteer__c);
+                } else {
+                    wrapper.userUpdateContactIds.add(votcancelupdate.Volunteer__c);
+                }
+            }
+        }
+        return wrapper;
+    }
+
     /**
      * @description
      *
@@ -504,5 +550,15 @@ public class VolunteerOTService {
             updateUserList.add(newUser);
         }
         update updateUserList;
+    }
+
+    public class CancelledIdsWrapper {
+        public Set<Id> userUpdateContactIds { get; set; }
+        public Set<Id> contactUpdateContactIds { get; set; }
+
+        public CancelledIdsWrapper() {
+            userUpdateContactIds = new Set<Id>();
+            contactUpdateContactIds = new Set<Id>();
+        }
     }
 }
