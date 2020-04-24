@@ -14,9 +14,7 @@ public class DynamicContentDomain extends trac_TriggerHandlerBase {
     * Before insert of dynamic content
     */
     public override void handleBeforeInsert() {
-        if(!blockTrigger) {
-            DynamicContentService.checkChapterPermission(newDynamicContentList);
-        }
+        DynamicContentService.checkChapterPermission(newDynamicContentList);
         DynamicContentService.setActiveFlagTrue(newDynamicContentList);
     }
     
@@ -24,9 +22,7 @@ public class DynamicContentDomain extends trac_TriggerHandlerBase {
     * Before update of dynamic content
     */
     public override void handleBeforeUpdate() {
-        if(!blockTrigger) {
-            DynamicContentService.checkChapterPermission(newDynamicContentList, oldDynamicContentMap);
-        }
+        DynamicContentService.checkChapterPermission(newDynamicContentList, oldDynamicContentMap);
         DynamicContentService.restrictActiveUpdateForDupes(newDynamicContentList, oldDynamicContentMap);
     }
     
