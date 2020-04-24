@@ -630,13 +630,6 @@ public class OrientationandTrainingUtil {
 		return newParentWish;
 	}
 
-	public static case createEligibilityReviewCase() {
-		Case newParentWish = new Case();
-		newParentWish.RecordTypeId = diagnosisVerificationRecordTypeId;
-		newParentWish.Subject = 'Eligibility Review';
-		return newParentWish;
-	}
-
 	public static case CreateParentCaseWithTravel(Id wishChildId) {
 		Account alabamaAccount = CreateAlabamaAccount();
 		insert alabamaAccount;
@@ -818,7 +811,9 @@ public class OrientationandTrainingUtil {
 	public static Orientation_Training__c CreateVolunteerTrainingRecord() {
 		Orientation_Training__c newTraining = new Orientation_Training__c();
 		newTraining.Name = 'Trainging1';
-		newTraining.RecordTypeId = volunteerTrainingRecordTypeId ;
+		newTraining.RecordTypeId = volunteerTrainingRecordTypeId;
+		newTraining.Start_Time__c = '7:00 AM';
+		newTraining.End_Time__c = '7:00 PM';
 		return newTraining;
 	}
 
@@ -826,6 +821,8 @@ public class OrientationandTrainingUtil {
 		Orientation_Training__c newOrientation = new Orientation_Training__c();
 		newOrientation.Name = 'Orienatation1';
 		newOrientation.RecordTypeId = volunteerOrientationRecordTypeId;
+		newOrientation.Start_Time__c = '7:00 AM';
+		newOrientation.End_Time__c = '7:00 PM';
 		return newOrientation;
 	}
 

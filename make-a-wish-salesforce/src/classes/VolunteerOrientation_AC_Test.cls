@@ -8,9 +8,10 @@ Modification Log
 
 @IsTest
 public class VolunteerOrientation_AC_Test {
+
 	@TestSetup
-	private static void setup() {
-		trac_TriggerHandlerBase.blockTrigger = true;
+	private static void setup(){
+		insert new Bypass_Triggers__c(SetupOwnerId = UserInfo.getUserId());
 	}
 
 	@IsTest
@@ -24,7 +25,7 @@ public class VolunteerOrientation_AC_Test {
 		System.runAs(currUser) {
 			Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 			insert acc;
-			
+      
 			Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
 			insert con;
 			OrientationandTrainingUtil.createAffiliation(con.Id);
@@ -34,6 +35,7 @@ public class VolunteerOrientation_AC_Test {
 			insert currChapRole;
 			Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
 			insert currVolRole;
+			trac_TriggerHandlerBase.blockTrigger = true;
 			Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
 			insert currOandT;
 			Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
@@ -51,7 +53,7 @@ public class VolunteerOrientation_AC_Test {
 			neworgAffiliation.npe5__Organization__c = acc.Id;
 			neworgAffiliation.npe5__Primary__c = true;
 			neworgAffiliation.npe5__Status__c = 'Pending';
-			neworgAffiliation.Constituent_code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
+			neworgAffiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
 			insert neworgAffiliation;
 
 			System.assertEquals(currOffering.Id, createVolOrientation.class_offering__c);
@@ -156,7 +158,7 @@ public class VolunteerOrientation_AC_Test {
 		neworgAffiliation.npe5__Organization__c = acc.Id;
 		neworgAffiliation.npe5__Primary__c = true;
 		neworgAffiliation.npe5__Status__c = 'Pending';
-		neworgAffiliation.Constituent_code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
+		neworgAffiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
 		insert neworgAffiliation;
 
 		User currUser;
@@ -198,7 +200,7 @@ public class VolunteerOrientation_AC_Test {
 	// Register for new Orientation.
 	@IsTest
 	static void CreateNewTraining() {
-		LMS_Credentials__c currLMSCredential = testClassUtil.createLMSCredentials();
+		LMS_Credentials__c currLMSCredential = TestClassUtil.createLMSCredentials();
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
 		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
@@ -209,7 +211,7 @@ public class VolunteerOrientation_AC_Test {
 		neworgAffiliation.npe5__Organization__c = acc.Id;
 		neworgAffiliation.npe5__Primary__c = true;
 		neworgAffiliation.npe5__Status__c = 'Pending';
-		neworgAffiliation.Constituent_code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
+		neworgAffiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
 		insert neworgAffiliation;
 
 		Role__c currRole = OrientationandTrainingUtil.createRole();
@@ -245,7 +247,7 @@ public class VolunteerOrientation_AC_Test {
 	// Creating Orientation with Cancelled status.
 	@IsTest
 	static void CreatingCancelledTraining() {
-		LMS_Credentials__c currLMSCredential = testClassUtil.createLMSCredentials();
+		LMS_Credentials__c currLMSCredential = TestClassUtil.createLMSCredentials();
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
 		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
@@ -256,7 +258,7 @@ public class VolunteerOrientation_AC_Test {
 		neworgAffiliation.npe5__Organization__c = acc.Id;
 		neworgAffiliation.npe5__Primary__c = true;
 		neworgAffiliation.npe5__Status__c = 'Pending';
-		neworgAffiliation.Constituent_code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
+		neworgAffiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
 		insert neworgAffiliation;
 
 		User currUser;
@@ -290,25 +292,21 @@ public class VolunteerOrientation_AC_Test {
 			controller.trainingId = currOffering.Id;
 			VolunteerOrientation_AC.updateUser('volunteer@gmail.com', '3409379', 'volunteer@gmail.com', UserInfo.getUserId());
 		}
-
-		//
-		// controller.Register();
 	}
 	// Cancel Registered Orientation.
 	@IsTest
 	static void CancelTraining() {
-		LMS_Credentials__c currLMSCredential = testClassUtil.createLMSCredentials();
+		LMS_Credentials__c currLMSCredential = TestClassUtil.createLMSCredentials();
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
 		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
 		insert con;
-		//OrientationandTrainingUtil.createAffiliation(con.Id);
 		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
 		neworgAffiliation.npe5__Contact__c = con.Id;
 		neworgAffiliation.npe5__Organization__c = acc.Id;
 		neworgAffiliation.npe5__Primary__c = true;
 		neworgAffiliation.npe5__Status__c = 'Pending';
-		neworgAffiliation.Constituent_code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
+		neworgAffiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
 		insert neworgAffiliation;
 
 		User currUser;
@@ -364,7 +362,7 @@ public class VolunteerOrientation_AC_Test {
 		neworgAffiliation.npe5__Organization__c = acc.Id;
 		neworgAffiliation.npe5__Primary__c = true;
 		neworgAffiliation.npe5__Status__c = 'Pending';
-		neworgAffiliation.Constituent_code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
+		neworgAffiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
 		insert neworgAffiliation;
 
 		Role__c currRole = OrientationandTrainingUtil.createRole();
@@ -440,19 +438,17 @@ public class VolunteerOrientation_AC_Test {
 		LMS_Credentials__c currLMSCredential;
 		acc = OrientationandTrainingUtil.createVolunteerAccount();
 		con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
-		currLMSCredential = testClassUtil.createLMSCredentials();
+		currLMSCredential = TestClassUtil.createLMSCredentials();
 		OrientationandTrainingUtil.createAffiliation(con.Id);
 		System.runAs(new User(Id = UserInfo.getUserId())) {
-			testClassUtil.createUser();
-			//testClassUtil.createUser();
+			TestClassUtil.createUser();
 		}
 		List<User> currUserLst = [
-				SELECT ID
-				FROM USER
-				WHERE ID != :Userinfo.getUserId() AND isActive = True
+				SELECT Id
+				FROM User
+				WHERE Id != :UserInfo.getUserId() AND IsActive = TRUE
 		];
 		System.runAs(currUserLst[0]) {
-
 			LMSCourseSyncMockImpl currLMSCourseSyncMockImpl = new LMSCourseSyncMockImpl();
 			HttpResponse response = new HttpResponse();
 			response.setStatus('OK');
@@ -487,7 +483,7 @@ public class VolunteerOrientation_AC_Test {
 
 	@IsTest
 	static void CreateNewTrainingWithExistingCancelledRecords() {
-		LMS_Credentials__c currLMSCredential = testClassUtil.createLMSCredentials();
+		LMS_Credentials__c currLMSCredential = TestClassUtil.createLMSCredentials();
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
 		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
@@ -498,7 +494,7 @@ public class VolunteerOrientation_AC_Test {
 		neworgAffiliation.npe5__Organization__c = acc.Id;
 		neworgAffiliation.npe5__Primary__c = true;
 		neworgAffiliation.npe5__Status__c = 'Pending';
-		neworgAffiliation.Constituent_code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
+		neworgAffiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
 		insert neworgAffiliation;
 
 		Role__c currRole = OrientationandTrainingUtil.createRole();
@@ -539,7 +535,7 @@ public class VolunteerOrientation_AC_Test {
 
 	@IsTest
 	static void CreateNewTrainingWithVolunteerCancelledRecords() {
-		LMS_Credentials__c currLMSCredential = testClassUtil.createLMSCredentials();
+		LMS_Credentials__c currLMSCredential = TestClassUtil.createLMSCredentials();
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		insert acc;
 		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
@@ -549,7 +545,7 @@ public class VolunteerOrientation_AC_Test {
 		neworgAffiliation.npe5__Organization__c = acc.Id;
 		neworgAffiliation.npe5__Primary__c = true;
 		neworgAffiliation.npe5__Status__c = 'Pending';
-		neworgAffiliation.Constituent_code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
+		neworgAffiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
 		insert neworgAffiliation;
 
 		Role__c currRole = OrientationandTrainingUtil.createRole();
@@ -627,7 +623,7 @@ public class VolunteerOrientation_AC_Test {
 			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
 			controller.trainingId = currOffering.Id;
 			controller.userRelatedContactId = con.Id;
-			controller.lMSCredential = testClassUtil.createLMSCredentials();
+			controller.lMSCredential = TestClassUtil.createLMSCredentials();
 			controller.Cancel();
 		}
 	}

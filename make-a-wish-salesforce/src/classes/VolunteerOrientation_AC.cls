@@ -248,7 +248,7 @@ public class VolunteerOrientation_AC {
             ];
             LstLog.add('existingRecList' + String.valueOf(existingRecList));
             if (!existingRecList.isEmpty()) {
-                ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Volunteer_Orientation_Already_Registered_Message);
+                ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Volunteer_Portal_Already_Registered_Message_Orientation);
                 ApexPages.addMessage(myMsg);
 
             } else {
@@ -298,7 +298,7 @@ public class VolunteerOrientation_AC {
                                     checkExistingCanceledRecords.get(0).Class_Offering__c = trainingId;
                                     updateList.add(checkExistingCanceledRecords[0]);
                                 } else {
-                                    ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Volunteer_Orientation_Already_Registered_Same_Day_Time_Message);
+                                    ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Volunteer_Portal_Already_Registered_Same_Day_Time_Message_Orientation);
                                     ApexPages.addMessage(myMsg);
 
                                     flag = false;
@@ -355,7 +355,7 @@ public class VolunteerOrientation_AC {
                             }
                         }
                         if (!checkDupSets.isEmpty()) {
-                            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Volunteer_Orientation_Already_Registered_Same_Day_Time_Message);
+                            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Volunteer_Portal_Already_Registered_Same_Day_Time_Message_Orientation);
                             ApexPages.addMessage(myMsg);
                             isCancelled = false;
                             isOrientationExist = false;
