@@ -3268,7 +3268,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Checkbox</type>
-	 <fields>
+	    </fields>
 	 <fields>
         <fullName>Inquiry_Date__c</fullName>
         <description>It holds the Date of Inquriy form submitted.</description>
