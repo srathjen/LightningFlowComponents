@@ -1,11 +1,12 @@
 //Unit Test for Volunteer Training.
-
-@isTest
-Public class VolunteerTraining_AC_Test {
+@IsTest
+public class VolunteerTraining_AC_Test {
 
 	@TestSetup
 	private static void setup() {
 		trac_TriggerHandlerBase.blockTrigger = true;
+		insert new Bypass_Triggers__c(SetupOwnerId = UserInfo.getUserId());
+		
 		LMS_Credentials__c currLMSCredential = TestClassUtil.createLMSCredentials();
 
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
