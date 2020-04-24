@@ -99,7 +99,7 @@ public class LeadDomain extends trac_TriggerHandlerBase {
     /**
      * Before update of Lead
      */
-    public override void handleBeforeUpdate() {
+    public override void handleBeforeUpdateIgnoreBypass() {
         Map<Id, Lead> accountIdLeadMap = new Map<Id, Lead>();
         Map<Id, Lead> icdCodeLeadMap = new Map<Id, Lead>();
         Map<Id, Set<Integer>> icdCodeDescriptionMatchMap = new Map<Id, Set<Integer>>();
@@ -115,6 +115,7 @@ public class LeadDomain extends trac_TriggerHandlerBase {
         Set<String> updatedQualifyingDiagnoses = new Set<String>();
         List<Diagnosis_Verification__c> diagnosisVerifications = new List<Diagnosis_Verification__c>();
         Set<Id> completedTaskLeadSet = new Set<Id>();
+
         for (Lead newLead : newLeadsMap.values()) {
             if (LEAD_RT_WISH_CHILD.equals(newLead.RecordTypeId)) {
                 Lead oldLead = oldLeadsMap.get(newLead.Id);
@@ -123,6 +124,15 @@ public class LeadDomain extends trac_TriggerHandlerBase {
                     newLead.AddressVerificationAttempted__c = null;
                     newLead.County__c = null;
                 }
+                if (hasLeadZipCodeChangedByIntegrationUser(newLead, oldLead)) {
+                    newLead.Initial_Address_Verification__c = true;
+                    updateChapterLeadList.add(newLead);
+                    newLead.Hidden_Chapter_Change_Confirmation__c = null;
+                }
+                if (!updateChapterLeadList.isEmpty()) {
+                    LeadService.setChapterViaZipCode(updateChapterLeadList);
+                }
+ 
                 if (isLeadNew(newLead, oldLead)) {
                     newLead.Sub_Status__c = LEAD_NEW;
                     newLead.Eligibility_Review_Date__c = Date.today();
@@ -141,6 +151,9 @@ public class LeadDomain extends trac_TriggerHandlerBase {
                         newLead.Hidden_Chapter_Change_Confirmation__c = oldLead.ChapterName__c;
                     }
                     accountIdLeadMap.put(newLead.ChapterName__c, newLead);
+                }
+                 if (hasLeadZipCodeChangedByIntegrationUser(newLead, oldLead)) {
+                    newLead.Hidden_Chapter_Change_Confirmation__c = null;
                 }
                 if (hasLeadTreatingMedicalEmailChanged(newLead, oldLead)) {
                     newLead.HiddenMedicalProfessionalEmail__c = newLead.Treating_Medical_Professional_Email__c;
@@ -203,10 +216,6 @@ public class LeadDomain extends trac_TriggerHandlerBase {
                 }
                 if (isLeadPending(newLead)) {
                     newLead.Pending_Diagnosis_Date__c = Date.today();
-                }
-                if (hasLeadZipCodeChangedByIntegrationUser(newLead, oldLead)) {
-                    updateChapterLeadList.add(newLead);
-                    newLead.Hidden_Chapter_Change_Confirmation__c = null;
                 }
                 if (newLead.SD1_ICD_Code__c != oldLead.SD1_ICD_Code__c && newLead.SD1_ICD_Code__c != null) {
                     icdCodeLeadMap.put(newLead.SD1_ICD_Code__c, newLead);
@@ -289,9 +298,6 @@ public class LeadDomain extends trac_TriggerHandlerBase {
             }
             if (!completedTaskLeadSet.isEmpty()) {
                 TaskService.updateCompleted(completedTaskLeadSet);
-            }
-            if (!updateChapterLeadList.isEmpty()) {
-                LeadService.setChapterViaZipCode(updateChapterLeadList);
             }
         }
     }
@@ -713,6 +719,7 @@ public class LeadDomain extends trac_TriggerHandlerBase {
         ];
         return currentProfile.Name == Constant_AC.PROFILE_INTEGRATION
                 && newLead.PostalCode != null
-                && (newLead.PostalCode != oldLead.PostalCode);
+                && (newLead.PostalCode != oldLead.PostalCode)
+                && oldLead.Initial_Address_Verification__c==false;
     }
 }

@@ -1118,7 +1118,7 @@ public class LeadService {
 			}
 		} catch (Exception ex) {
 			for (Lead lead : leadRecords) {
-				ErrorMessage_AC.createdebugRec('LeadService',
+				ErrorMessage_AC.createDebugRec('LeadService',
 						String.valueOf(lead), String.valueOf(ex), 'findDuplicateContacts',
 						lead.Id, ex.getStackTraceString(), 'Error');
 			}
