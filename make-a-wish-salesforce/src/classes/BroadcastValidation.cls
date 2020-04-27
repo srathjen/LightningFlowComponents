@@ -11,29 +11,25 @@ public class BroadcastValidation extends trac_TriggerHandlerBase {
 		}
 		Map<String, String> chapterRoleMap = new Map<String, String>();
 		Map<Id, String> chapterNameMap = new Map<Id, String>();
-		String userRole = [
-				SELECT UserRole.Name
-				FROM User
-				WHERE Id = :UserInfo.getUserId()
-		].UserRole.Name;
-		for (Account currAcc : [
+		User user = Utils.currentUser;
+		for (Account account : [
 				SELECT Id,Name
 				FROM Account
 				WHERE Id IN :chapterIds
 		]) {
-			chapterNameMap.put(currAcc.Id, currAcc.Name);
+			chapterNameMap.put(account.Id, account.Name);
 		}
-		for (Chapter_Vs_Role__c currChapterRole : [
+		for (Chapter_Vs_Role__c chapterVsRole : [
 				SELECT Chapter_Name__c, Role_Name__c
 				FROM Chapter_Vs_Role__c
 				WHERE Chapter_Name__c IN :chapterNameMap.values()
 		]) {
-			chapterRoleMap.put(currChapterRole.Chapter_Name__c, currChapterRole.Role_Name__c);
+			chapterRoleMap.put(chapterVsRole.Chapter_Name__c, chapterVsRole.Role_Name__c);
 		}
-		for (Broadcast__c currBroadcast : newBroadcastList) {
-			if (userRole != chapterRoleMap.get(chapterNameMap.get(currBroadcast.Chapter_Name__c))
-					&& Bypass_Triggers__c.getValues(UserInfo.getUserId()) == null && !Test.isRunningTest()) {
-				currBroadcast.addError(Label.Broadcast_Create_Chapter_Denied);
+		for (Broadcast__c broadcast : newBroadcastList) {
+			if (user.UserRole.Name != chapterRoleMap.get(chapterNameMap.get(broadcast.Chapter_Name__c))
+					&& Bypass_Triggers__c.getValues(user.Id) == null && !Test.isRunningTest()) {
+				broadcast.addError(Label.Broadcast_Create_Chapter_Denied);
 			}
 		}
 	}
