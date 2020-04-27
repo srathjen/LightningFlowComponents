@@ -44,19 +44,6 @@
             <div class="row">
                 <h1 class="col-md-12">Volunteer Application</h1>
             </div>
-            <!-- <nav class="row">
-                <ul class="step">
-                    <li><a href="/apex/VolunteerOrientation_VF?bgRequired={!bgTabPermission}&trainingRequired={!trainingTabVisible}">Orientation</a></li>
-                    <li class="current"><a href="">Application</a></li>
-                    <li><a href="/apex/VolunteerInterview_VF?bgRequired={!bgTabPermission}&trainingRequired={!trainingTabVisible}">Interview</a></li>
-                     <apex:outputPanel rendered="{!bgTabPermission == True}">
-                            <li><a href="/apex/BackgroundCheck_VF?bgRequired={!bgTabPermission}&trainingRequired={!trainingTabVisible}">Background Check</a></li>
-                      </apex:outputpanel>
-                    <apex:outputpanel rendered="{!trainingTabVisible==True}">
-                             <li><a href="/VolunteerTraining_VF?bgRequired={!bgTabPermission}&trainingRequired={!trainingTabVisible}">Training</a></li>
-                    </apex:outputpanel>
-                </ul>
-                </nav> -->
             <!-- Input Mode of application form -->
             <div class="row">
                 <section class="col-md-12">
@@ -67,9 +54,8 @@
                             </p>
                         </apex:outputPanel>
                         <apex:pageBlock id="formedit" mode="Edit" rendered="{!savemode}">
-                            <!-- rendered="{!savemode}" -->
                             <fieldset>
-                            <apex:pageMessages id="showmsg"/>
+                                <apex:pageMessages id="showmsg"/>
                                 <legend>Your Information<span>Please fill the fields below.</span></legend>
                                 <div class="col-md-6">
                                     <div class="form-group row">
@@ -167,36 +153,18 @@
                                         <div class="col-xs-8 col-sm-6">
                                             <apex:inputText styleClass="form-control f-phone phonechk" maxlength="28" id="preferredphonenumber1" html-placeholder="(000) 000-0000" value="{!currentVolunteer.MobilePhone}"  />
                                         </div>
-                                        <!-- <div class="col-xs-4 col-sm-3">
-                                            <label for="preferredphone" class="sr-only">Preferred Phone Number Type</label>
-                                            <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list required"  value="{!currentVolunteer.npe01__PreferredPhone__c}"  size="1" id="preferdPhone1" multiselect="false" >
-                                                <apex:selectOptions value="{!PreferedPhoneType}" />
-                                            </apex:selectList>
-                                            </div> -->
                                     </div>
                                     <div class="form-group row">
                                         <label for="altphonenumber" class="col-sm-4" aria-labelledby="Alternate Phone Number">Home Phone</label>
                                         <div class="col-xs-8 col-sm-6">
                                             <apex:inputText styleClass="form-control f-phone dynamicCheck HomeCheck" maxlength="28" id="altphonenumber1" html-placeholder="(000) 000-0000" value="{!currentVolunteer.homePhone}" />
                                         </div>
-                                        <!--  <div class="col-xs-4 col-sm-3">
-                                            <label for="altphone" class="sr-only">Alternate Phone Number Type</label>
-                                            <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list"  value="{!currentVolunteer.Alternate_Phone_Type__c}"  size="1" id="altPhone1" multiselect="false">
-                                                <apex:selectOptions value="{!AlternatePhoneType}" />
-                                            </apex:selectList>
-                                            </div> -->
                                     </div>
                                     <div class="form-group row">
                                         <label for="altphonenumber" class="col-sm-4" aria-labelledby="Other Phone Number">Other Phone</label>
                                         <div class="col-xs-8 col-sm-6">
                                             <apex:inputText styleClass="form-control f-phone dynamicCheck OtherCheck" maxlength="28" id="altphonenumber2" html-placeholder="(000) 000-0000" value="{!currentVolunteer.OtherPhone}" />
                                         </div>
-                                        <!--  <div class="col-xs-4 col-sm-3">
-                                            <label for="altphone" class="sr-only">Alternate Phone Number Type</label>
-                                            <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list"  value="{!currentVolunteer.Alternate_Phone_Type__c}"  size="1" id="altPhone1" multiselect="false">
-                                                <apex:selectOptions value="{!AlternatePhoneType}" />
-                                            </apex:selectList>
-                                            </div> -->
                                     </div>
                                     <div class="form-group row">
                                         <label for="preferredphonetype" class="col-sm-4" aria-labelledby="Preferred Phone Type">Preferred Phone Type<span style="color:red;font-size: 150%"> *</span></label>
@@ -205,12 +173,6 @@
                                                 <apex:selectOptions value="{!PreferedPhoneType}" />
                                             </apex:selectList>
                                         </div>
-                                        <!-- <div class="col-xs-4 col-sm-3">
-                                            <label for="preferredphone" class="sr-only">Preferred Phone Number Type</label>
-                                            <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list required"  value="{!currentVolunteer.npe01__PreferredPhone__c}"  size="1" id="preferdPhone1" multiselect="false" >
-                                                <apex:selectOptions value="{!PreferedPhoneType}" />
-                                            </apex:selectList>
-                                            </div> -->
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-4"><label for="emailaddress" aria-labelledby="email_address">Email Address<span style="color:red;font-size: 150%"> *</span></label></div>
@@ -287,7 +249,7 @@
                                     <div class="form-group row">
                                         <div class="col-sm-3"><label for="employer-phone" aria-labelledby="Employer Phone">Phone</label></div>
                                         <div class="col-sm-6">
-                                          <apex:inputText styleClass="form-control f-phone" maxlength="28" id="employer-phone" html-placeholder="(000) 000-0000" value="{!currentVolunteer.npe01__WorkPhone__c}" />
+                                            <apex:inputText styleClass="form-control f-phone" maxlength="28" id="employer-phone" html-placeholder="(000) 000-0000" value="{!currentVolunteer.npe01__WorkPhone__c}" />
                                         </div>
                                     </div>
                                 </div>
@@ -297,7 +259,6 @@
                                             <label for="employer-contact-work" aria-labelledby="Contact At Work?">May We Contact You at Work?</label>
                                         </div>
                                         <div class="col-sm-3">
-                                            <!-- <apex:inputfield styleClass="form-control c-select sm-list emp" id="employer-contact-work" value="{!currentVolunteer.May_We_Contact_You_at_Work__c}"></apex:inputfield> -->
                                             <apex:selectList styleClass="form-control c-select sm-list" id="employer-contact-work" value="{!currentVolunteer.May_We_Contact_You_at_Work__c}" size="1" multiselect="false" >
                                                 <apex:selectOptions value="{!ContactAtWorks}" />
                                             </apex:selectList>
@@ -308,7 +269,6 @@
                                             <label for="employer-company-interest" aria-labelledby="Company Interest in Make-A-Wish">WOULD YOU LIKE TO <i>SHARE THE POWER OF A WISH</i><sup>®</sup> AT WORK BY LEARNING MORE ABOUT OUR WISHMAKERS AT WORK<sup>®</sup> PROGRAM?</label>
                                         </div>
                                         <div class="col-sm-3">
-                                            <!-- <apex:inputfield styleClass="form-control c-select sm-list emp" id="employer-company-interest" value="{!currentVolunteer.Interested_involved_with_Make_A_Wish__c}"></apex:inputfield>-->
                                             <apex:selectList styleClass="form-control c-select sm-list" id="employer-company-interest" value="{!currentVolunteer.Interested_involved_with_Make_A_Wish__c}" size="1" multiselect="false" >
                                                 <apex:selectOptions value="{!InterstedList}" />
                                             </apex:selectList>
@@ -425,7 +385,7 @@
                                             <apex:selectList styleClass="form-control c-select multi required" value="{!volRoles}" size="1" id="role" multiselect="true" >
                                                 <apex:selectOptions value="{!Roles}" />
                                             </apex:selectList>
-                                            <apex:commandLink value="See Volunteer Role Descriptions" action="{!DisplayDescription}" rerender="tstpopup" styleClass="text-muted" />
+                                            <apex:commandLink value="See Volunteer Role Descriptions" action="{!displayDescription}" rerender="tstpopup" styleClass="text-muted" />
                                         </div>
                                     </div>
                                 </div>
@@ -435,17 +395,12 @@
                                     <apex:commandbutton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md btn-save" id="submit_signup" value="Save"  action="{!saveRec}" rerender="formid,showmsg" />
                                 </div>
                                 <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-2 col-md-push-8">
-                                    <!-- <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md submitSign" value="Submit & Sign" action="{!SubmitAndSign}" rendered="{!(showSubmitandSign == True)}" rerender="formid" /> -->
                                     <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md submitSign btn-submit-sign" value="Submit & Sign" action="{!confirmSign}" rerender="formid,showmsg"  rendered="{!(isSigned == false)}"/>
-                                    <!-- rerender="formid" rendered="{!(showSubmitandSign == True)}"   -->
-                                    <!-- <apex:commandButton value="Submit and Sign" action="{!SubmitAndSign}"  rerender="formid" />-->
-                                    <!-- rendered="{!showsubmitbutton}" -->
                                 </div>
                             </fieldset>
                         </apex:pageBlock>
                         <!--  Output mode of application form -->
                         <!-- Only show this when form is successfully signed and submitted -->
-                        <!--   <apex:outputpanel id="formsummary" style="display:none"> --> <!-- rendered="{!editmode}" -->
                         <apex:outputpanel id="formsummary" rendered="{!editmode}">
                             <fieldset class="saved">
                                 <legend>Personal Information</legend>
@@ -548,51 +503,6 @@
                                             <apex:outputfield value="{!currentVolunteer.npe01__PreferredPhone__c}" id="preferredPhone"/>
                                         </span>
                                     </div>
-                                    <!-- <apex:outputpanel rendered="{!(currentVolunteer.npe01__PreferredPhone__c =='Home') &&  (currentVolunteer.Alternate_Phone_Type__c == 'Mobile' || currentVolunteer.Alternate_Phone_Type__c == 'Home')}">
-                                        <div class="row">
-                                            <label class="col-xs-6 col-sm-6">Preferred Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.HomePhone}"  /></span>
-                                        </div>
-                                        </apex:outputpanel>
-
-                                        <apex:outputpanel rendered="{!(currentVolunteer.npe01__PreferredPhone__c =='Mobile') &&  (currentVolunteer.Alternate_Phone_Type__c == 'Mobile' || currentVolunteer.Alternate_Phone_Type__c == 'Home')}">
-                                        <div class="row">
-                                            <label class="col-xs-6 col-sm-6">Preferred Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.MobilePhone}" /></span>
-                                        </div>
-
-                                        </apex:outputpanel>
-
-                                        <div class="row">
-                                            <label class="col-xs-6 col-sm-6">Preferred Phone Types: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.npe01__PreferredPhone__c}" /></span>
-                                        </div>
-
-                                        <apex:outputpanel rendered="{!(currentVolunteer.Alternate_Phone_Type__c =='Mobile') &&  (currentVolunteer.npe01__PreferredPhone__c == 'Home')}">
-                                        <div class="row">
-                                            <label class="col-xs-6 col-sm-6">Alternate Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.MobilePhone}" /></span>
-                                        </div>
-                                        </apex:outputpanel>
-
-                                        <apex:outputpanel rendered="{!(currentVolunteer.Alternate_Phone_Type__c =='Home') &&  (currentVolunteer.npe01__PreferredPhone__c == 'Mobile')}">
-                                        <div class="row">
-                                            <label class="col-xs-6 col-sm-6">Alternate Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.HomePhone}" /></span>
-                                        </div>
-                                        </apex:outputpanel>
-
-                                        <apex:outputpanel rendered="{!(currentVolunteer.Alternate_Phone_Type__c =='Home') &&  (currentVolunteer.npe01__PreferredPhone__c == 'Home')}">
-                                        <div class="row">
-                                            <label class="col-xs-6 col-sm-6">Alternate Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.OtherPhone}" /></span>
-                                        </div>
-                                        </apex:outputpanel>
-
-                                        <apex:outputpanel rendered="{!(currentVolunteer.Alternate_Phone_Type__c =='Mobile') &&  (currentVolunteer.npe01__PreferredPhone__c == 'Mobile')}">
-                                        <div class="row">
-                                            <label class="col-xs-6 col-sm-6">Alternate Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.OtherPhone}" /></span>
-                                        </div>
-                                        </apex:outputpanel>
-
-
-                                        <div class="row">
-                                            <label class="col-xs-6 col-sm-6">Alternate Phone Types: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Alternate_Phone_Type__c}" /></span>
-                                        </div> -->
                                     <div class="row">
                                         <label class="col-xs-6 col-sm-6">Email: </label>
                                         <span class="col-xs-6 col-sm-6 text-muted">
@@ -661,7 +571,7 @@
                                     <div class="row">
                                         <label class="col-xs-6 col-sm-6">Work Phone: </label>
                                         <span class="col-xs-6 col-sm-6 text-muted">
-                                        <apex:outputfield value="{!currentVolunteer.npe01__WorkPhone__c}" id="workPhone" />
+                                            <apex:outputfield value="{!currentVolunteer.npe01__WorkPhone__c}" id="workPhone" />
                                         </span>
                                     </div>
                                     <div class="row">
@@ -771,12 +681,9 @@
                             <fieldset>
                                 <div class="form-group row">
                                     <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-2 col-md-push-8">
-                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md" value="Edit" action="{!EditRec}"  rendered="{!(isSigned == false)}" rerender="showmsg"/>
+                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md" value="Edit" action="{!editRec}"  rendered="{!(isSigned == false)}" rerender="showmsg"/>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-2 col-md-push-8">
-                                        <!-- <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md submitSign" value="Submit & Sign" action="{!SubmitAndSign}" rerender="formid" /> --> <!-- rendered="{!(showSubmitandSign == True)}"   -->
-                                        <!-- <apex:commandButton value="Submit and Sign" action="{!SubmitAndSign}"  rerender="formid" />-->
-                                        <!-- rendered="{!showsubmitbutton}" -->
                                     </div>
                                 </div>
                             </fieldset>
@@ -791,17 +698,14 @@
                         <apex:outputPanel id="tstpopup">
                             <apex:outputPanel rendered="{!displayPopUp}">
                                 <script>
-                                    var modal = document.getElementById('myModal');
-                                    modal.style.display = "block";
-
-                                    // Get the <span> element that closes the modal
-                                    var span = document.getElementsByClassName("Modalclose")[0];
-
-                                    // When the user clicks on <span> (x), close the modal
-                                    span.onclick = function() {
+                                var modal = document.getElementById('myModal');
+                                modal.style.display = "block";
+                                // Get the <span> element that closes the modal
+                                var span = document.getElementsByClassName("Modalclose")[0];
+                                // When the user clicks on <span> (x), close the modal
+                                span.onclick = function() {
                                     modal.style.display = "none";
-                                    }
-
+                                }
                                 </script>
                                 <div id="myModal" class="modal">
                                     <!-- Modal content -->
@@ -838,17 +742,11 @@
                                                             Are you sure you want to submit and sign?
                                                             <div class="modal-footer">
                                                                 <center>
-                                                                    <apex:commandButton value="Yes" styleClass="btn-md"  action="{!SubmitAndSign}" rerender="showmsg,SignNowpopup"  style="height: 2.75rem;margin-top: 3% !important;width: 90px !important;"/>
+                                                                    <apex:commandButton value="Yes" styleClass="btn-md"  action="{!submitAndSign}" rerender="showmsg,SignNowpopup"  style="height: 2.75rem;margin-top: 3% !important;width: 90px !important;"/>
                                                                     &nbsp;&nbsp;&nbsp;
                                                                     <apex:commandButton value="No"  styleClass="btn-md"  action="{!hidePopup}" style="height: 2.75rem;margin-top: 3% !important;width: 90px !important;"/>
                                                                 </center>
                                                             </div>
-                                                            <!-- <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px;margin-left: 23%;">
-                                                                <apex:commandButton value="Yes" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!SubmitAndSign}" style="height: 2.75rem;margin-top: 3% !important;width: 90px !important;"/>
-                                                                </div>
-                                                                <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:-14%;margin-left: 48%;">
-                                                                <apex:commandButton value="No" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!hidePopup}" style="height: 2.75rem;margin-top: 3% !important;width: 90px !important;"/>
-                                                                </div> -->
                                                         </center>
                                                     </div>
                                                 </div>
@@ -866,394 +764,362 @@
         <!-- chosen select -->
         <script src="{!URLFOR($Resource.prospective_assets,'web/js/chosen.jquery.min.js')}"></script>
         <!-- masked input -->
-        <script src="{!URLFOR($Resource.prospective_assets,'web/js/jq.maskedinput.min.js')}" type="text/javascript"></script>
+            <script src="{!URLFOR($Resource.prospective_assets,'web/js/jq.maskedinput.min.js')}" type="text/javascript"></script>
         <!-- validate forms -->
         <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.validate.min.js')}"></script>
         <!-- validate form (additional methods) -->
-        <script src="{!URLFOR($Resource.prospective_assets, 'web/js/additional-methods.min.js')}"></script>
+            <script src="{!URLFOR($Resource.prospective_assets, 'web/js/additional-methods.min.js')}"></script>
         <script>
         $( document ).ready(function() {
-                    var btn
-                    tSignOnclick = $('.btn-submit-sign').attr('onclick'); // grab original value
-                    $('.btn-submit-sign').removeAttr('onclick');
-                    $('.btn-save').attr('formnovalidate','formnovalidate'); // no validate on save
-
-                    $(".f-phone").attr('type','tel'); // enhanced for html5 and mobile
-                    $(".f-phone").mask("(999) 999-9999");
-
-                    // select fields - default options
+            var btn
+            tSignOnclick = $('.btn-submit-sign').attr('onclick'); // grab original value
+            $('.btn-submit-sign').removeAttr('onclick');
+            $('.btn-save').attr('formnovalidate','formnovalidate'); // no validate on save            
+            $(".f-phone").attr('type','tel'); // enhanced for html5 and mobile
+            $(".f-phone").mask("(999) 999-9999");
+            // select fields - default options
             $("select.title").prepend('<option disabled="disabled">Please select a Title</option>');
             $(".bmonth option:first").text('Month').prop('disabled',true);
             $(".bmonth").chosen({disable_search:"true", placeholder_text_single: "Month", width:"100%"});
             $('.bmonth').on('change', function() {
-              // format birthday
-              setIntervalX(function(){
-                formatBday();
-                $('.bday-wrap3').find('select').addClass('sr-only').prop('disabled',false).removeAttr('style');
-                $(".bday").chosen({disable_search:"true", placeholder_text_single: "Day", width:"100%"});
-              }, 50, 2);
+                // format birthday
+                setIntervalX(function(){
+                    formatBday();
+                    $('.bday-wrap3').find('select').addClass('sr-only').prop('disabled',false).removeAttr('style');
+                    $(".bday").chosen({disable_search:"true", placeholder_text_single: "Day", width:"100%"});
+                }, 50, 2);
             });
             // shows default birthday select
             setIntervalX(function(){
-              formatBday();
-              $('.bday-wrap3').find('select').css('opacity','0.5')
+                formatBday();
+                $('.bday-wrap3').find('select').css('opacity','0.5')
             }, 500, 4);
             function formatBday(){
-              // enables chosen select, hiding real select
-              $('.bday-wrap3').find('select').addClass('form-control c-select required bday');
-              if ($(".bday option:first").text() == "--None--" ){
-                $(".bday option:first").text('Day').prop('disabled',true)
-              }
+                // enables chosen select, hiding real select
+                $('.bday-wrap3').find('select').addClass('form-control c-select required bday');
+                if ($(".bday option:first").text() == "--None--" ){
+                    $(".bday option:first").text('Day').prop('disabled',true)
+                }
             }
-                    $(".sm-list").chosen({disable_search:"true", width:"100%"});
-                    $(".multi").chosen({placeholder_text_multiple: "Please select all that apply", width:"100%"});
-                    $(".f-state").chosen({placeholder_text_single: "Please select a State", no_results_text: "State not found", width:"100%"});
-
-                    //show textarea fields on pageload if "other" was selected
-                    if ($('.f-mawdiscovery').val() != null){
-                            if ($('.f-mawdiscovery').val().indexOf('Other, please specify') != -1){
-                                    $('.mawdiscoveryother').removeClass('sr-only');
-                                    $('.mawdisc-textarea').addClass('required');
-                            }
+            $(".sm-list").chosen({disable_search:"true", width:"100%"});
+            $(".multi").chosen({placeholder_text_multiple: "Please select all that apply", width:"100%"});
+            $(".f-state").chosen({placeholder_text_single: "Please select a State", no_results_text: "State not found", width:"100%"});
+            //show textarea fields on pageload if "other" was selected
+            if ($('.f-mawdiscovery').val() != null){
+                if ($('.f-mawdiscovery').val().indexOf('Other, please specify') != -1){
+                    $('.mawdiscoveryother').removeClass('sr-only');
+                    $('.mawdisc-textarea').addClass('required');
+                }
+            }
+            // maw discovery show/hide "other" textbox
+            $('.f-mawdiscovery').on('change', function() {
+                if($(this).val() != null){
+                    if ($(this).val().indexOf('Other, please specify') != -1){
+                        $('.mawdiscoveryother').removeClass('sr-only');
+                        $('.mawdisc-textarea').addClass('required');
+                    } else {
+                        $('.mawdiscoveryother').addClass('sr-only');
+                        $('.mawdisc-textarea').val('').removeClass('required');
+                        $('.mawdisc-textarea').valid();
                     }
-                    // maw discovery show/hide "other" textbox
-                    $('.f-mawdiscovery').on('change', function() {
-                            if($(this).val() != null){
-                                    if ($(this).val().indexOf('Other, please specify') != -1){
-                                            $('.mawdiscoveryother').removeClass('sr-only');
-                                            $('.mawdisc-textarea').addClass('required');
-                                    } else {
-                                            $('.mawdiscoveryother').addClass('sr-only');
-                                            $('.mawdisc-textarea').val('').removeClass('required');
-                                            $('.mawdisc-textarea').valid();
-                                    }
-                            }
-                    });
-
-
-                    // prof skills show/hide "other" textbox
-                    $('.prof-skills').on('change', function() {
-                            checkProfSkill($(this));
-                    });
-
-                    checkProfSkill($('.prof-skills'));
-                    // language fields
-                    $('.lang').on('change', function() {
-                            if($(this).val() != null){
-                                    if ($(this).val().indexOf('Other') != -1){
-                                            $('.lang-note').attr('placeholder', "Please specify other language(s)").addClass('required');
-                                    } else {
-                                            $('.lang-note').attr('placeholder', "Additional details (Optional)").val('').removeClass('required');
-                                            $('.lang-note').valid();
-                                    }
-                            }
-                    });
-
-                    function checkProfSkill(cmp){
-                            if($(cmp).val() != null){
-                                if ($(cmp).val().indexOf('Other') != -1){
-
-                                        $('.prof-skills-other').removeClass('sr-only');
-                                } else {
-                                    $('.prof-skills-other').addClass('sr-only');
-                                    $('.prof-skills-other').children('.col-sm-6').children('textarea').val('');
-                                }
-                         }
+                }
+            });
+            // prof skills show/hide "other" textbox
+            $('.prof-skills').on('change', function() {
+                checkProfSkill($(this));
+            });
+            checkProfSkill($('.prof-skills'));
+            // language fields
+            $('.lang').on('change', function() {
+                if($(this).val() != null){
+                    if ($(this).val().indexOf('Other') != -1){
+                        $('.lang-note').attr('placeholder', "Please specify other language(s)").addClass('required');
+                    } else {
+                        $('.lang-note').attr('placeholder', "Additional details (Optional)").val('').removeClass('required');
+                        $('.lang-note').valid();
                     }
-
-                    // fire x amount of times
-                    function setIntervalX(callback, delay, repetitions) {
-                            var x = 0;
-                            var intervalID = window.setInterval(function () {
-                                    callback();
-                                    if (++x === repetitions) {
-                                            window.clearInterval(intervalID);
-                                    }
-                            }, delay);
+                }
+            });
+            function checkProfSkill(cmp){
+                if($(cmp).val() != null){
+                    if ($(cmp).val().indexOf('Other') != -1){
+                        
+                        $('.prof-skills-other').removeClass('sr-only');
+                    } else {
+                        $('.prof-skills-other').addClass('sr-only');
+                        $('.prof-skills-other').children('.col-sm-6').children('textarea').val('');
                     }
-
-                    // inputs: numbers only
-                    $(".numbers-only").keydown(function (e) {
-                            // Allow: backspace, delete, tab, escape, enter and .
-                            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-                                    // Allow: Ctrl+A
-                                    (e.keyCode == 65 && e.ctrlKey === true) ||
-                                    // Allow: Ctrl+C
-                                    (e.keyCode == 67 && e.ctrlKey === true) ||
-                                    // Allow: Ctrl+X
-                                    (e.keyCode == 88 && e.ctrlKey === true) ||
-                                    // Allow: home, end, left, right
-                                    (e.keyCode >= 35 && e.keyCode <= 39)) {
-                                    // let it happen, don't do anything
-                                    return;
-                            }
-                            // Ensure that it is a number and stop the keypress
-                            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-                                    e.preventDefault();
-                            }
-                    });
-
-                    // form validation defaults
-                    $.validator.setDefaults({
-                        //debug: true,
-                        submitHandler:
-                            function () {
-                             if ($('form').valid()){
-                                    console.log('form submitted');
-                                    // taken from rendered button in order to control submit (rerender="formId")
-                                    return A4J.AJAX.Submit('j_id0:formid',event,{'similarityGroupingId':'j_id0:formid:formedit:j_id150','html5Validate':true,'parameters':{'j_id0:formid:formedit:j_id150':'j_id0:formid:formedit:j_id150'} } );
-                                    //return btnSubmitSignOnclick
-                                    //form.submit();
-                                    //$('#formedit').hide();
-                                    //$('#formsummary').show();
-                                }
-                            },
-                        // ignore chosen.js fields
-                        ignore: ":hidden:not(.c-select)",
-                    });
-                    $.validator.addMethod("fullname", function (value) {
-                        return /[a-zA-Z]{1,}\s+[a-zA-Z]{1,}/.test(value); // regex - word space word with at least 2 char, mixed (only letter) capitalization
-                    });
-                    // validation rules and methods
-                    $('form').validate({
-                            errorElement: "em",
-                            errorPlacement: function ( error, element ) {
-
-                                    // Add the `help-block` class to the error element
-                                    error.addClass( "help-block" );
-                                    // Add `has-feedback` class to the parent div.form-group in order to add icons to inputs
-                                    element.parents( ".col-sm-6" ).addClass( "has-feedback" );
-
-                                    if (element.hasClass("c-select") ){
-                                            var selectParent = $( element ).parents(".col-sm-6").children(".chosen-container");
-                                            error.insertAfter( selectParent );
-                                    } else {
-                                            error.insertAfter( element );
-                                    }
-                            },
-                            highlight: function ( element, errorClass, validClass ) {
-                                    var elementParents = $( element ).parents( ".col-sm-6, .col-sm-3, .col-xs-6 span, .col-xs-6, .col-xs-12" );
-                                    // non-div-wrapped label
-                                    $(elementParents).removeClass( "has-success" ).addClass( "has-error" ).prev('label').css('color','red');
-                                    // div wrapped label
-                                    $(elementParents).removeClass( "has-success" ).addClass( "has-error" ).prev('div').children('label').css('color','red');
-                                    $(elementParents).children(".chosen-container").children('.chosen-choices, a.chosen-single').css('border','1px solid red');
-                                    $(elementParents).children( "input, select, textarea" ).css('border','1px solid red');
-                                    $(elementParents).children('label').css('border','1px solid red');
-                            },
-                            unhighlight: function ( element, errorClass, validClass ) {
-                                    var elementParents = $( element ).parents( ".col-sm-6, .col-sm-3, .col-xs-6 span, .col-xs-6, .col-xs-12" );
-                                    $(elementParents).removeClass( "has-error" ).prev( "label" ).css('color','');
-                                    $(elementParents).removeClass( "has-error" ).prev('div').children( "label" ).css('color','');
-                                    $(elementParents).children(".chosen-container").children('.chosen-choices, a.chosen-single').css('border','');
-                                    $(elementParents).children( "input, select, label, textarea" ).css('border','');
-                                    $(elementParents).children( ".help-block" ).remove();
-                            }
-                    });
-                    $('.btn-submit-sign').click(function(){
-                            var x = $('.preferedType').val();
-                            $('.dynamicCheck').each(function(){
-                                    $(this).rules('remove');
-                            });
-                            var y = $('.'+x+'Check').val();
-                            if(typeof y != 'undefined' && y.length<1)
-                            {
-                                    $('.'+x+'Check').rules("add", {
-                                            required: true,
-                                            phoneUS: true,
-                                            minlength: 10,
-                                            maxlength: 15,
-                                            messages: {
-                                                    required: "Please enter the "+x+" Phone as you have selected the Preferred Phone Type as "+x,
-                                                    phoneUS: "Oops! Must be a valid US number",
-                                                    //number: "Only numbers are accepted",
-                                                    minlength: "Opps! Please enter at least 10 digits",
-                                                    maxlength: "We're sorry, you've reached the maximum allowed characters"
-                                            }
-                                    });
-                            }
-
-                    });
-
-                    // validation rules
-                    function formValidationRules() {
-
-                            // add validation rules for common fields
-                            $("input.firstname").each(function(){
-                                    $(this).rules("add", {
-                                            required: true,
-                                            minlength: 2,
-                                            maxlength: 40,
-                                            messages: {
-                                                    required: "Oops! Please enter a first name",
-                                                    minlength: "Oops! Your first name must have more than 2 letters",
-                                                    maxlength: "We're sorry, you've reached the maximum allowed characters"
-                                            }
-                                    });
-                            });
-                            $("input.lastname").each(function(){
-                                    $(this).rules("add", {
-                                            required: true,
-                                            minlength: 2,
-                                            maxlength: 40,
-                                            messages: {
-                                                    required: "Oops! Please enter a last name",
-                                                    minlength: "Oops! Your first name must have more than 2 letters",
-                                                    maxlength: "We're sorry, you've reached the maximum allowed characters"
-                                            }
-                                    });
-                            });
-                            $("input.phonechk").each(function(){
-                                    $(this).rules("add", {
-                                            required: true,
-                                            phoneUS: true,
-                                            minlength: 10,
-                                            maxlength: 15,
-                                            messages: {
-                                                    required: "Oops! Please enter a phone number",
-                                                    phoneUS: "Oops! Must be a valid US number",
-                                                    //number: "Only numbers are accepted",
-                                                    minlength: "Opps! Please enter at least 10 digits",
-                                                    maxlength: "We're sorry, you've reached the maximum allowed characters"
-                                            }
-                                    });
-                            });
-                            $("input.email").each(function(){
-                                    $(this).rules("add", {
-                                            required: true,
-                                            email: true,
-                                            messages: {
-                                                    required: "Oops! Please enter a valid email address",
-                                                    email: "Oops! You've entered an invalid email address"
-                                            }
-                                    });
-                            });
-                            $("input.city").each(function(){
-                                    $(this).rules("add", {
-                                            required: true,
-                                            minlength: 3,
-                                            maxlength: 22,
-                                            messages: {
-                                                    required: "Oops! Please enter a US city",
-                                                    minlength: "Oops! Please enter at least 3 characters",
-                                                    maxlength: "We're sorry, you've reached the maximum allowed characters"
-                                            }
-                                    });
-                            });
-
-                    $("input.postalcode").each(function(){
-                        $(this).rules("add", {
-                                required: true,
-                                zipcode: true,
-                                messages: {
-                                        //required: "Oops! Please enter a valid US postal code",
-                                        minlength: "Oops! Please enter a minimum of 5 digits",
-                                        maxlength: "We're sorry, you've reached the maximum allowed characters"
-                                }
-                        });
+                }
+            }
+            // fire x amount of times
+            function setIntervalX(callback, delay, repetitions) {
+                var x = 0;
+                var intervalID = window.setInterval(function () {
+                    callback();
+                    if (++x === repetitions) {
+                        window.clearInterval(intervalID);
+                    }
+                }, delay);
+            }
+            // inputs: numbers only
+            $(".numbers-only").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                    (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: Ctrl+C
+                    (e.keyCode == 67 && e.ctrlKey === true) ||
+                    // Allow: Ctrl+X
+                    (e.keyCode == 88 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                    (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+            
+            // form validation defaults
+            $.validator.setDefaults({
+                submitHandler:
+                function () {
+                    if ($('form').valid()){
+                        console.log('form submitted');
+                        // taken from rendered button in order to control submit (rerender="formId")
+                        return A4J.AJAX.Submit('j_id0:formid',event,{'similarityGroupingId':'j_id0:formid:formedit:j_id150','html5Validate':true,'parameters':{'j_id0:formid:formedit:j_id150':'j_id0:formid:formedit:j_id150'} } );
+                    }
+                },
+                // ignore chosen.js fields
+                ignore: ":hidden:not(.c-select)",
+            });
+            $.validator.addMethod("fullname", function (value) {
+                return /[a-zA-Z]{1,}\s+[a-zA-Z]{1,}/.test(value); // regex - word space word with at least 2 char, mixed (only letter) capitalization
+            });
+            // validation rules and methods
+            $('form').validate({
+                errorElement: "em",
+                errorPlacement: function ( error, element ) {
+                    // Add the `help-block` class to the error element
+                    error.addClass( "help-block" );
+                    // Add `has-feedback` class to the parent div.form-group in order to add icons to inputs
+                    element.parents( ".col-sm-6" ).addClass( "has-feedback" );
+                    if (element.hasClass("c-select") ){
+                        var selectParent = $( element ).parents(".col-sm-6").children(".chosen-container");
+                        error.insertAfter( selectParent );
+                    } else {
+                        error.insertAfter( element );
+                    }
+                },
+                highlight: function ( element, errorClass, validClass ) {
+                    var elementParents = $( element ).parents( ".col-sm-6, .col-sm-3, .col-xs-6 span, .col-xs-6, .col-xs-12" );
+                    // non-div-wrapped label
+                    $(elementParents).removeClass( "has-success" ).addClass( "has-error" ).prev('label').css('color','red');
+                    // div wrapped label
+                    $(elementParents).removeClass( "has-success" ).addClass( "has-error" ).prev('div').children('label').css('color','red');
+                    $(elementParents).children(".chosen-container").children('.chosen-choices, a.chosen-single').css('border','1px solid red');
+                    $(elementParents).children( "input, select, textarea" ).css('border','1px solid red');
+                    $(elementParents).children('label').css('border','1px solid red');
+                },
+                unhighlight: function ( element, errorClass, validClass ) {
+                    var elementParents = $( element ).parents( ".col-sm-6, .col-sm-3, .col-xs-6 span, .col-xs-6, .col-xs-12" );
+                    $(elementParents).removeClass( "has-error" ).prev( "label" ).css('color','');
+                    $(elementParents).removeClass( "has-error" ).prev('div').children( "label" ).css('color','');
+                    $(elementParents).children(".chosen-container").children('.chosen-choices, a.chosen-single').css('border','');
+                    $(elementParents).children( "input, select, label, textarea" ).css('border','');
+                    $(elementParents).children( ".help-block" ).remove();
+                }
+            });
+            $('.btn-submit-sign').click(function(){
+                var x = $('.preferedType').val();
+                $('.dynamicCheck').each(function(){
+                    $(this).rules('remove');
                 });
-                            $("select.mawdisc").each(function(){
-                                $(this).chosen().change(function(){
-                                        $(this).valid();
-                                });
-                                $(this).rules("add", {
-                                    required: true,
-                                    messages: {
-                                        required: "Oops! Please select all that apply"
-                                    }
-                                });
-                            });
-                            $("select.language").each(function(){
-                                $(this).chosen().change(function(){
-                                        $(this).valid();
-                                });
-                                $(this).rules("add", {
-                                    required: true,
-                                    messages: {
-                                        required: "Oops! Please select a language"
-                                    }
-                                });
-                            });
-
-                            // add rules for all other fields
-                            $("input.address").rules("add", {
-                                    required: true,
-                                    minlength: 5,
-                                    maxlength: 40,
-                                    messages: {
-                                            required: "Oops! Please enter an address",
-                                            minlength: "Oops! Please enter a minimum of 5 characters",
-                                            maxlength: "We're sorry, you've reached the maximum allowed characters"
-                                    }
-                            });
-                             // auto format postal code
-                    $(".postalcode,.notrquired").keydown(function(e){
-                        if (($(this).val().length == 5) && (e.keyCode != 8) && (e.keyCode != 9)){
-                            // auto insert dash on 5th character keypress
-                            $(this).val($(this).val() + "-");
-                        }
-                        if (($(this).val().length == 7) && (e.keyCode == 8)){
-                            // remove dash if on 7th character backspace is used
-                            $(this).val($(this).val().substring(0, $(this).val().length - 1));
+                var y = $('.'+x+'Check').val();
+                if(typeof y != 'undefined' && y.length<1)
+                {
+                    $('.'+x+'Check').rules("add", {
+                        required: true,
+                        phoneUS: true,
+                        minlength: 10,
+                        maxlength: 15,
+                        messages: {
+                            required: "Please enter the "+x+" Phone as you have selected the Preferred Phone Type as "+x,
+                            phoneUS: "Oops! Must be a valid US number",
+                            minlength: "Opps! Please enter at least 10 digits",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
                         }
                     });
-
-
-
-
-                            $("select.f-state").each(function(){
-                                $(this).chosen().change(function(){
-                                        $(this).valid();
-                                });
-                                $(this).rules("add", {
-                                        required: true,
-                                        messages: {
-                                                required: "Oops! Please select a state"
-                                        }
-                                });
-                            });
-                            $("select.relationship").each(function(){
-                                $(this).chosen().change(function(){
-                                        $(this).valid();
-                                });
-                                $(this).rules("add", {
-                                        required: true,
-                                        messages: {
-                                                required: "Oops! Please select the relationship"
-                                        }
-                                });
-                            });
-                            $("input.fullname").rules("add", {
-                                required: true,
-                                fullname: true,
-                                minlength: 5,
-                                maxlength: 40,
-                                messages: {
-                                    required: "Oops! Please enter a first and last name",
-                                    fullname: "Oops! Please also enter a last name",
-                                    minlength: "Oops! The full name must have more than 4 letters",
-                                    maxlength: "We're sorry, you've reached the maximum allowed characters"
-                                }
-                        });
-                    } formValidationRules();
-
-                $('.postalcode1').rules("add", {
-                                required: false,
-                                zipcode: true,
-                                messages: {
-                                        //required: "Oops! Please enter a valid US postal code",
-                                        minlength: "Oops! Please enter a minimum of 5 digits",
-                                        maxlength: "We're sorry, you've reached the maximum allowed characters"
-                                }
-             });
-
-
-             jQuery.validator.addMethod("zipcode", function(value, element) {
+                }
+                
+            });
+            // validation rules
+            function formValidationRules() {
+                // add validation rules for common fields
+                $("input.firstname").each(function(){
+                    $(this).rules("add", {
+                        required: true,
+                        minlength: 2,
+                        maxlength: 40,
+                        messages: {
+                            required: "Oops! Please enter a first name",
+                            minlength: "Oops! Your first name must have more than 2 letters",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        }
+                    });
+                });
+                $("input.lastname").each(function(){
+                    $(this).rules("add", {
+                        required: true,
+                        minlength: 2,
+                        maxlength: 40,
+                        messages: {
+                            required: "Oops! Please enter a last name",
+                            minlength: "Oops! Your first name must have more than 2 letters",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        }
+                    });
+                });
+                $("input.phonechk").each(function(){
+                    $(this).rules("add", {
+                        required: true,
+                        phoneUS: true,
+                        minlength: 10,
+                        maxlength: 15,
+                        messages: {
+                            required: "Oops! Please enter a phone number",
+                            phoneUS: "Oops! Must be a valid US number",
+                            minlength: "Opps! Please enter at least 10 digits",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        }
+                    });
+                });
+                $("input.email").each(function(){
+                    $(this).rules("add", {
+                        required: true,
+                        email: true,
+                        messages: {
+                            required: "Oops! Please enter a valid email address",
+                            email: "Oops! You've entered an invalid email address"
+                        }
+                    });
+                });
+                $("input.city").each(function(){
+                    $(this).rules("add", {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 22,
+                        messages: {
+                            required: "Oops! Please enter a US city",
+                            minlength: "Oops! Please enter at least 3 characters",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        }
+                    });
+                });
+                $("input.postalcode").each(function(){
+                    $(this).rules("add", {
+                        required: true,
+                        zipcode: true,
+                        messages: {
+                            //required: "Oops! Please enter a valid US postal code",
+                            minlength: "Oops! Please enter a minimum of 5 digits",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        }
+                    });
+                });
+                $("select.mawdisc").each(function(){
+                    $(this).chosen().change(function(){
+                        $(this).valid();
+                    });
+                    $(this).rules("add", {
+                        required: true,
+                        messages: {
+                            required: "Oops! Please select all that apply"
+                        }
+                    });
+                });
+                $("select.language").each(function(){
+                    $(this).chosen().change(function(){
+                        $(this).valid();
+                    });
+                    $(this).rules("add", {
+                        required: true,
+                        messages: {
+                            required: "Oops! Please select a language"
+                        }
+                    });
+                });
+                // add rules for all other fields
+                $("input.address").rules("add", {
+                    required: true,
+                    minlength: 5,
+                    maxlength: 40,
+                    messages: {
+                        required: "Oops! Please enter an address",
+                        minlength: "Oops! Please enter a minimum of 5 characters",
+                        maxlength: "We're sorry, you've reached the maximum allowed characters"
+                    }
+                });
+                // auto format postal code
+                $(".postalcode,.notrquired").keydown(function(e){
+                    if (($(this).val().length == 5) && (e.keyCode != 8) && (e.keyCode != 9)){
+                        // auto insert dash on 5th character keypress
+                        $(this).val($(this).val() + "-");
+                    }
+                    if (($(this).val().length == 7) && (e.keyCode == 8)){
+                        // remove dash if on 7th character backspace is used
+                        $(this).val($(this).val().substring(0, $(this).val().length - 1));
+                    }
+                });
+                $("select.f-state").each(function(){
+                    $(this).chosen().change(function(){
+                        $(this).valid();
+                    });
+                    $(this).rules("add", {
+                        required: true,
+                        messages: {
+                            required: "Oops! Please select a state"
+                        }
+                    });
+                });
+                $("select.relationship").each(function(){
+                    $(this).chosen().change(function(){
+                        $(this).valid();
+                    });
+                    $(this).rules("add", {
+                        required: true,
+                        messages: {
+                            required: "Oops! Please select the relationship"
+                        }
+                    });
+                });
+                $("input.fullname").rules("add", {
+                    required: true,
+                    fullname: true,
+                    minlength: 5,
+                    maxlength: 40,
+                    messages: {
+                        required: "Oops! Please enter a first and last name",
+                        fullname: "Oops! Please also enter a last name",
+                        minlength: "Oops! The full name must have more than 4 letters",
+                        maxlength: "We're sorry, you've reached the maximum allowed characters"
+                    }
+                });
+            } formValidationRules();
+            $('.postalcode1').rules("add", {
+                required: false,
+                zipcode: true,
+                messages: {
+                    minlength: "Oops! Please enter a minimum of 5 digits",
+                    maxlength: "We're sorry, you've reached the maximum allowed characters"
+                }
+            });
+            jQuery.validator.addMethod("zipcode", function(value, element) {
                 return this.optional(element) || /^\d{5}(?:-\d{4})?$/.test(value);
             }, "Oops! Please enter a valid US postal code");
-
-
-            });
+        });
         </script>
     </body>
 </apex:page>
