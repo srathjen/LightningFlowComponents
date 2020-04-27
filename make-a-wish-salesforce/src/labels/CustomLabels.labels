@@ -1221,6 +1221,13 @@ Click Generate Document and once the document is generated you can click the lin
         <value>Volunteer need count should not be less than the volunteer registered count.</value>
     </labels>
     <labels>
+        <fullName>VolunteerInterviewTask_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerInterviewTask_Error</shortDescription>
+        <value>Error while retrieving records:</value>
+    </labels>
+    <labels>
         <fullName>WG_FinalStep_FileClosed</fullName>
         <categories>Drawloop</categories>
         <language>en_US</language>
