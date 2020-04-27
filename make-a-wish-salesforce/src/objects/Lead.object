@@ -449,6 +449,30 @@
                 </value>
             </valueSetDefinition>
         </valueSet>
+    </fields>	
+    <fields>
+    <fullName>Is_wish_referral_discussed_health_del__c</fullName>
+    <externalId>false</externalId>
+    <label>Referral Discussed With Healthcare?</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Yes</fullName>
+                <default>false</default>
+                <label>Yes</label>
+            </value>
+            <value>
+                <fullName>No</fullName>
+                <default>false</default>
+                <label>No</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
     </fields>
     <fields>
         <fullName>Additional_Parent_Relationship_to_Child__c</fullName>

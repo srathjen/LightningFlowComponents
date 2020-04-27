@@ -35,9 +35,9 @@ public class LMSHttpRequest_Test {
 		TestClassUtil.createUser();
 		TestClassUtil.createUser();
 		List<User> currUserLst = [
-				SELECT ID
-				FROM USER
-				WHERE ID != :Userinfo.getUserId() AND IsActive = True
+				SELECT Id
+				FROM User
+				WHERE Id != :UserInfo.getUserId() AND IsActive = TRUE
 		];
 		System.runAs(currUserLst[0]) {
 			currLMSCredential = TestClassUtil.createLMSCredentials();
@@ -85,9 +85,9 @@ public class LMSHttpRequest_Test {
 		TestClassUtil.createUser();
 		TestClassUtil.createUser();
 		List<User> currUserLst = [
-				SELECT ID,firstname,lastname,Email,Username, LMS_Login__c
-				FROM USER
-				WHERE ID != :Userinfo.getUserId() and isactive = true
+				SELECT Id, FirstName, LastName, Email, Username, LMS_Login__c
+				FROM User
+				WHERE Id != :UserInfo.getUserId() AND IsActive = TRUE
 		];
 		currUserLst[0].LMS_Login__c = 'Test';
 		System.runAs(currUserLst[0]) {
@@ -155,9 +155,9 @@ public class LMSHttpRequest_Test {
 		TestClassUtil.createUser();
 		TestClassUtil.createUser();
 		List<User> currUserLst = [
-				SELECT ID
-				FROM USER
-				WHERE ID != :Userinfo.getUserId() AND IsActive = True
+				SELECT Id
+				FROM User
+				WHERE Id != :UserInfo.getUserId() AND IsActive = TRUE
 		];
 		System.runAs(currUserLst[0]) {
 			currLMSCredential = TestClassUtil.createLMSCredentials();
@@ -217,15 +217,15 @@ public class LMSHttpRequest_Test {
 		lmsDet.End_Time__c = '1:00 PM';
 		insert lmsDet;
 		List<User> currUserLst = [
-				SELECT ID
-				FROM USER
-				WHERE ID != :Userinfo.getUserId() AND IsActive = True
+				SELECT Id
+				FROM User
+				WHERE Id != :UserInfo.getUserId() AND IsActive = TRUE
 		];
 		System.runAs(currUserLst[0]) {
 			Test.setMock(HttpCalloutMock.class, new Mock_ResponseGenerator());
-			Test.StartTest();
+			Test.startTest();
 			LMSCourseSync.getLMSCourseInfo(lmsDet.Id, lmsDet.Id);
-			Test.StopTest();
+			Test.stopTest();
 		}
 	}
 }

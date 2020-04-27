@@ -1,17 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
-    
-    
+<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <classAccesses>
         <apexClass>AccountTrigger_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>AddVolunteerRole_AC</apexClass>
         <enabled>false</enabled>
@@ -68,13 +59,6 @@
         <apexClass>BackGroundCheck_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>BackgroundCheck_AC</apexClass>
         <enabled>false</enabled>
@@ -91,9 +75,6 @@
         <apexClass>Background_CheckBeforeDelete_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
     
     
     
@@ -150,21 +131,10 @@
         <apexClass>Broadcast_OnBeforeUpdateTriggerHandler</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>CaseCommentTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>CaseFile_AT_Test</apexClass>
         <enabled>false</enabled>
@@ -205,13 +175,6 @@
         <apexClass>ChangePasswordControllerTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>ChapterChangeConfirmationPopup_AC</apexClass>
         <enabled>false</enabled>
@@ -348,8 +311,6 @@
         <apexClass>CreateVolunteerUser_ATTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>CustomLookUpController_Test</apexClass>
         <enabled>false</enabled>
@@ -386,9 +347,6 @@
         <apexClass>DeleteApexDebugLogRecords_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    
-    
-    
     <classAccesses>
         <apexClass>DiagnosisVerification_AC</apexClass>
         <enabled>false</enabled>
@@ -460,8 +418,6 @@
         <apexClass>ForgotPasswordControllerTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>FutureHandler</apexClass>
         <enabled>false</enabled>
@@ -608,17 +564,6 @@
         <apexClass>LeadTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>Lead_Trigger_Test</apexClass>
         <enabled>false</enabled>
@@ -647,9 +592,6 @@
         <apexClass>MedicalRelationships_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
     <classAccesses>
         <apexClass>MockHttpResponseGenerator</apexClass>
         <enabled>false</enabled>
@@ -818,8 +760,6 @@
         <apexClass>SendReferralEmailLC_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>SiteLoginController</apexClass>
         <enabled>false</enabled>
@@ -1111,11 +1051,6 @@
         <apexClass>WishExpenseHandler_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>WishReferralForm_AC</apexClass>
         <enabled>false</enabled>
@@ -1124,8 +1059,6 @@
         <apexClass>WishReferralForm_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>WishRequiredSignatureFileDomain</apexClass>
         <enabled>false</enabled>
@@ -1186,9 +1119,6 @@
         <apexClass>Wish_ExpenseDomain</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
     <classAccesses>
         <apexClass>batch_BGCExpReminder_AC</apexClass>
         <enabled>false</enabled>
@@ -1197,7 +1127,6 @@
         <apexClass>batch_BGCExpReminder_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
     
     
     <classAccesses>
@@ -1210,7 +1139,6 @@
     </classAccesses>
     
     
-    
     <classAccesses>
         <apexClass>batch_CheckBGCheckExpiration_AC_Test</apexClass>
         <enabled>false</enabled>
@@ -1219,7 +1147,6 @@
         <apexClass>batch_CheckBackGroundCheckExpiration_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>batch_CheckCOIExpiration_AC</apexClass>
         <enabled>false</enabled>
@@ -1228,9 +1155,6 @@
         <apexClass>batch_CheckCOIExpiration_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
     <classAccesses>
         <apexClass>batch_LeadChildAgeSchedule</apexClass>
         <enabled>false</enabled>
@@ -1302,13 +1226,10 @@
         <apexClass>customLookUpController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>trac_TriggerHandlerBase</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>wishBudgetsController</apexClass>
         <enabled>false</enabled>
@@ -1326,7 +1247,19 @@
         <enabled>false</enabled>
     </classAccesses>
     <custom>true</custom>
+    <customMetadataTypeAccesses>
+        <enabled>true</enabled>
+        <name>Wish_Affiliation_Category__mdt</name>
+    </customMetadataTypeAccesses>
+    <customMetadataTypeAccesses>
+        <enabled>true</enabled>
+        <name>Wish_Clearance_Needed_and_National_type__mdt</name>
+    </customMetadataTypeAccesses>
     <description>This profile is having limited permissions for Intern users.</description>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Age_At_Referral_Calculator</flow>
+    </flowAccesses>
     <flowAccesses>
         <enabled>false</enabled>
         <flow>Background_Check_Email_Update</flow>
@@ -1353,7 +1286,7 @@
     </flowAccesses>
     <flowAccesses>
         <enabled>false</enabled>
-        <flow>Close_DV_Case_when_Lead_is_Duplicate_or_DNQ</flow>
+        <flow>Case_Update_Key_Fields</flow>
     </flowAccesses>
     <flowAccesses>
         <enabled>false</enabled>
@@ -1373,15 +1306,15 @@
     </flowAccesses>
     <flowAccesses>
         <enabled>false</enabled>
-        <flow>Instance_Email_Alert_for_Missed_Referrer</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
         <flow>Lead_Case_Status_Process_Flow</flow>
     </flowAccesses>
     <flowAccesses>
         <enabled>false</enabled>
         <flow>Lead_Notify_Intake_Manager</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Lead_Update_Age_at_Referral</flow>
     </flowAccesses>
     <flowAccesses>
         <enabled>false</enabled>
@@ -1402,6 +1335,10 @@
     <flowAccesses>
         <enabled>false</enabled>
         <flow>Send_Email_With_Wish_Referral_Form_To_Office_referral_Email</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Update_Case_Subject</flow>
     </flowAccesses>
     <flowAccesses>
         <enabled>false</enabled>
@@ -1580,9 +1517,9 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>Itinerary_VF</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
+<apexPage>Itinerary_VF</apexPage>
+<enabled>false</enabled>
+</pageAccesses>
     <pageAccesses>
         <apexPage>LeadDuplicate_VF</apexPage>
         <enabled>true</enabled>
@@ -1740,9 +1677,9 @@
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>WishChildPhoto_VF</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
+<apexPage>WishChildPhoto_VF</apexPage>
+<enabled>false</enabled>
+</pageAccesses>
     <pageAccesses>
         <apexPage>WishClearanceNoTravel_VF</apexPage>
         <enabled>false</enabled>
@@ -1756,9 +1693,9 @@
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>WishParticipants_VF</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
+<apexPage>WishParticipants_VF</apexPage>
+<enabled>false</enabled>
+</pageAccesses>
     <pageAccesses>
         <apexPage>WishReceipt</apexPage>
         <enabled>false</enabled>
@@ -1776,13 +1713,13 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>WishRelatedLinks</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
+<apexPage>WishRelatedLinks</apexPage>
+<enabled>false</enabled>
+</pageAccesses>
     <pageAccesses>
-        <apexPage>WishRelatedLinks_VF</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
+<apexPage>WishRelatedLinks_VF</apexPage>
+<enabled>false</enabled>
+</pageAccesses>
     <pageAccesses>
         <apexPage>WishVisionFormChild</apexPage>
         <enabled>true</enabled>
@@ -7108,7 +7045,7 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.Birthdate</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -7328,6 +7265,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Employer__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Expedite_timeframe__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -7873,6 +7815,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Other_diagnosis__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Other_expedite_timeframe_comments__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -9006,22 +8953,22 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npe01__Last_Donation_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npe01__Lifetime_Giving_History_Amount__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npe01__Organization_Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npe01__Other_Address__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -9061,7 +9008,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npe01__Type_of_Account__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -9076,7 +9023,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npe01__Work_Address__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -9196,7 +9143,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npo02__OppAmountLastYearHH__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -9206,7 +9153,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npo02__OppAmountThisYearHH__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -9276,7 +9223,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npo02__Total_Household_Gifts__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -9406,160 +9353,160 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointConsent.ContactPointTypeConsentId</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointConsent.ContactPointTypeConsentId</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointConsent.DataUsePurposeId</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointConsent.DataUsePurposeId</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointConsent.DoubleConsentCaptureDate</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointConsent.DoubleConsentCaptureDate</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointConsent.EffectiveFrom</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointConsent.EffectiveFrom</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointConsent.EffectiveTo</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointConsent.EffectiveTo</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointEmail.ActiveFromDate</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointEmail.ActiveFromDate</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointEmail.ActiveToDate</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointEmail.ActiveToDate</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointEmail.BestTimeToContactEndTime</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointEmail.BestTimeToContactEndTime</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointEmail.BestTimeToContactStartTime</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointEmail.BestTimeToContactStartTime</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointEmail.BestTimeToContactTimezone</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointEmail.BestTimeToContactTimezone</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointEmail.EmailDomain</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointEmail.EmailDomain</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointEmail.EmailLatestBounceDateTime</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointEmail.EmailLatestBounceDateTime</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointEmail.EmailLatestBounceReasonText</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointEmail.EmailLatestBounceReasonText</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointEmail.EmailMailBox</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointEmail.EmailMailBox</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointEmail.IsPrimary</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointEmail.IsPrimary</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointEmail.ParentId</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointEmail.ParentId</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointPhone.ActiveFromDate</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointPhone.ActiveFromDate</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointPhone.AreaCode</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointPhone.AreaCode</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointPhone.BestTimeToContactEndTime</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointPhone.BestTimeToContactEndTime</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointPhone.BestTimeToContactStartTime</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointPhone.BestTimeToContactStartTime</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointPhone.BestTimeToContactTimezone</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointPhone.BestTimeToContactTimezone</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointPhone.ExtensionNumber</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointPhone.ExtensionNumber</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointPhone.FormattedInternationalPhoneNumber</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointPhone.FormattedInternationalPhoneNumber</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointPhone.FormattedNationalPhoneNumber</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointPhone.FormattedNationalPhoneNumber</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointPhone.IsBusinessPhone</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointPhone.IsBusinessPhone</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointPhone.IsFaxCapable</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointPhone.IsFaxCapable</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointPhone.IsPersonalPhone</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointPhone.IsPersonalPhone</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointPhone.IsPrimary</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointPhone.IsPrimary</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointPhone.IsSmsCapable</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointPhone.IsSmsCapable</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointPhone.ParentId</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointPhone.ParentId</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ContactPointPhone.PhoneType</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ContactPointPhone.PhoneType</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>ContactPointTypeConsent.DataUsePurposeId</field>
@@ -10281,65 +10228,65 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>GETGSI__Approval_Status__c.GETGSI__Actor_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>GETGSI__Approval_Status__c.GETGSI__Actor_Id__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>GETGSI__Approval_Status__c.GETGSI__Comment__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>GETGSI__Approval_Status__c.GETGSI__Comment__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>GETGSI__Approval_Status__c.GETGSI__Commit_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>GETGSI__Approval_Status__c.GETGSI__Commit_Id__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>GETGSI__Approval_Status__c.GETGSI__Commit_Records__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>GETGSI__Approval_Status__c.GETGSI__Commit_Records__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>GETGSI__Approval_Status__c.GETGSI__Failed__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>GETGSI__Approval_Status__c.GETGSI__Failed__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>GETGSI__Approval_Status__c.GETGSI__Reassign_To_User__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>GETGSI__Approval_Status__c.GETGSI__Reassign_To_User__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>GETGSI__Approval_Status__c.GETGSI__Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>GETGSI__Approval_Status__c.GETGSI__Type__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>GETGSI__Approval_Status__c.GETGSI__Work_Item_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>GETGSI__Approval_Status__c.GETGSI__Work_Item_Id__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>GETGSI__Error_Log__c.GETGSI__Commit_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>GETGSI__Error_Log__c.GETGSI__Commit_Id__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>GETGSI__Error_Log__c.GETGSI__Error_Log__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>GETGSI__Error_Log__c.GETGSI__Error_Log__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>GETGSI__Error_Log__c.GETGSI__Record_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>GETGSI__Error_Log__c.GETGSI__Record_Id__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>GETGSI__Error_Log__c.GETGSI__Record_Link__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>GETGSI__Error_Log__c.GETGSI__Record_Link__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Guardian_Signature__c.Signee_Name__c</field>
@@ -11357,6 +11304,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Lead.Debug__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Lead.Department__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -11403,6 +11355,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Email</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Expedite_timeframe__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -11596,6 +11553,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Initial_Address_Verification__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Inquiry_Date__c</field>
         <readable>true</readable>
@@ -11623,6 +11585,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Is_in_a_Comatose_Vegetative_State__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Is_wish_referral_discussed_health_del__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -11768,6 +11735,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Other_diagnosis__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Other_expedite_timeframe_comments__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -12876,10 +12848,10 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Loop__DDP_File__c.Loop__Email_As__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>Loop__DDP_File__c.Loop__Email_As__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Loop__DDP_File__c.Loop__Excel_Print_Titles__c</field>
@@ -12971,10 +12943,10 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Loop__DDP_File__c.Loop__Visualforce_Content_Output_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>Loop__DDP_File__c.Loop__Visualforce_Content_Output_Type__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Loop__DDP_Integration_Option__c.Loop__Agreement_Name__c</field>
@@ -13026,10 +12998,10 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Loop__DDP_Integration_Option__c.Loop__DDP_File_Template__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>Loop__DDP_Integration_Option__c.Loop__DDP_File_Template__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Loop__DDP_Integration_Option__c.Loop__Data_Mapping_Id__c</field>
@@ -13061,10 +13033,10 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Loop__DDP_Integration_Option__c.Loop__Disable_Wet_Sign__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>Loop__DDP_Integration_Option__c.Loop__Disable_Wet_Sign__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Loop__DDP_Integration_Option__c.Loop__Email_Doc_Links__c</field>
@@ -13081,10 +13053,10 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Loop__DDP_Integration_Option__c.Loop__Encrypted_Token__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>Loop__DDP_Integration_Option__c.Loop__Encrypted_Token__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Loop__DDP_Integration_Option__c.Loop__EnforceSignerVisibility__c</field>
@@ -13366,10 +13338,10 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Loop__DDP_Text_Group__c.Loop__Delete_Empty_Containers__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>Loop__DDP_Text_Group__c.Loop__Delete_Empty_Containers__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Loop__DDP_Text_Group__c.Loop__Field_Tag__c</field>
@@ -13681,10 +13653,10 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Loop__DDP__c.Loop__Scheduled_Delivery_Option__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>Loop__DDP__c.Loop__Scheduled_Delivery_Option__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Loop__DDP__c.Loop__SecurityType__c</field>
@@ -13920,7 +13892,6 @@
         <field>Loop__Insert_Update__c.Loop__Use_Admin_Credentials__c</field>
         <readable>false</readable>
     </fieldPermissions>
-    
     <fieldPermissions>
         <editable>false</editable>
         <field>Loop__PDF_Stamp__c.Loop__Background_Color__c</field>
@@ -14372,15 +14343,15 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Loop__dsRecipient__c.Loop__SigningGroupId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>Loop__dsRecipient__c.Loop__SigningGroupId__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Loop__dsRecipient__c.Loop__SigningGroupName__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>Loop__dsRecipient__c.Loop__SigningGroupName__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Loop__dsRecipient__c.Loop__SigningOrder__c</field>
@@ -16891,9 +16862,6 @@
         <field>VisualAntidote__Field_Integration__c.VisualAntidote__PlatformAccount__c</field>
         <readable>false</readable>
     </fieldPermissions>
-    
-    
-    
     <fieldPermissions>
         <editable>false</editable>
         <field>VisualAntidote__Form_Migration__c.VisualAntidote__ApprovedBy__c</field>
@@ -17099,7 +17067,6 @@
         <field>VisualAntidote__Form_Submission__c.VisualAntidote__Verification_Emails__c</field>
         <readable>false</readable>
     </fieldPermissions>
-    
     <fieldPermissions>
         <editable>false</editable>
         <field>VisualAntidote__Formstack_User_License__c.VisualAntidote__One_Primary_User__c</field>
@@ -20816,1240 +20783,1240 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__Content_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__File_Size__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__File_Size_in_Bytes__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__Is_Deleted__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__Is_Latest_Version__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__Is_Parent_Deleted__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__Page_Count__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__Parent_Folder_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__Preview_Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__Preview_Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__Private__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__Shortcut__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__Sync_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__Tags__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__Thumbnail_Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__Thumbnail_Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__Version_Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AccountFile__c.cg__WIP__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AttachmentSync__c.cg__AttachmentId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AttachmentSync__c.cg__AttachmentObjectFileName__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AttachmentSync__c.cg__AttachmentParentId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AttachmentSync__c.cg__AttachmentParentObjectName__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AttachmentSync__c.cg__AttachmentRelationshipName__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AttachmentSync__c.cg__FailedMessage__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AttachmentSync__c.cg__FailedStatus__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__AttachmentSync__c.cg__Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.Add_l_Publicity_Approval__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>cg__CaseFile__c.Age__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>cg__CaseFile__c.Chapter_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.Check_Requested__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.Child_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.Comments__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>cg__CaseFile__c.County__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.File_Path__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>cg__CaseFile__c.Gender__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.In_Kind_Recorded__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>cg__CaseFile__c.My_Case_File__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.Parent_Folder_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>cg__CaseFile__c.Primary_Diagnosis__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.Receipt_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>cg__CaseFile__c.Wish_Date__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>cg__CaseFile__c.Wish_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__Content_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__File_Size__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__File_Size_in_Bytes__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__Is_Deleted__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__Is_Latest_Version__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__Is_Parent_Deleted__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__Number_Of_Files__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__Page_Count__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__Parent_Folder_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__Preview_Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__Preview_Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__Private__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__Shortcut__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__Sync_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__Tags__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__Thumbnail_Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__Thumbnail_Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__Version_Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__CaseFile__c.cg__WIP__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__Content_Type__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__Description__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__File_Size__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__File_Size_in_Bytes__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__Is_Deleted__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__Is_Latest_Version__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__Is_Parent_Deleted__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__Page_Count__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__Parent_Folder_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__Preview_Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__Preview_Version_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__Private__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__Shortcut__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__Sync_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__Tags__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__Thumbnail_Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__Thumbnail_Version_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__Version_Description__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__Version_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AccountFile__c.cg__WIP__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AttachmentSync__c.cg__AttachmentId__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AttachmentSync__c.cg__AttachmentObjectFileName__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AttachmentSync__c.cg__AttachmentParentId__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AttachmentSync__c.cg__AttachmentParentObjectName__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AttachmentSync__c.cg__AttachmentRelationshipName__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AttachmentSync__c.cg__FailedMessage__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AttachmentSync__c.cg__FailedStatus__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__AttachmentSync__c.cg__Type__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.Add_l_Publicity_Approval__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.Age__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.Chapter_Name__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.Check_Requested__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.Child_Name__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.Comments__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.County__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.File_Path__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.Gender__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.In_Kind_Recorded__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.My_Case_File__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.Parent_Folder_Name__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.Primary_Diagnosis__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.Receipt_Type__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.Wish_Date__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.Wish_Type__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__Content_Type__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__Description__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__File_Size__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__File_Size_in_Bytes__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__Is_Deleted__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__Is_Latest_Version__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__Is_Parent_Deleted__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__Number_Of_Files__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__Page_Count__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__Parent_Folder_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__Preview_Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__Preview_Version_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__Private__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__Shortcut__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__Sync_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__Tags__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__Thumbnail_Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__Thumbnail_Version_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__Version_Description__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__Version_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__CaseFile__c.cg__WIP__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>cg__ContactFile__c.File_Path__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.Parent_Folder_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.Parent_Folder_Name__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__Content_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__Content_Type__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__Description__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__File_Size__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__File_Size__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__File_Size_in_Bytes__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__File_Size_in_Bytes__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__Is_Deleted__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__Is_Deleted__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__Is_Latest_Version__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__Is_Latest_Version__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__Is_Parent_Deleted__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__Is_Parent_Deleted__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__Key__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__Page_Count__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__Page_Count__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__Parent_Folder_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__Parent_Folder_Id__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__Preview_Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__Preview_Key__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__Preview_Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__Preview_Version_Id__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__Private__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__Private__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__Shortcut__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__Shortcut__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__Sync_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__Sync_Id__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__Tags__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__Tags__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__Thumbnail_Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__Thumbnail_Key__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__Thumbnail_Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__Thumbnail_Version_Id__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__Version_Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__Version_Description__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__Version_Id__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ContactFile__c.cg__WIP__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ContactFile__c.cg__WIP__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ExternalFileMessage__c.cg__fileIds__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ExternalFileMessage__c.cg__fileIds__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ExternalFileMessage__c.cg__fileObjectName__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ExternalFileMessage__c.cg__fileObjectName__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ExternalFileMessage__c.cg__namespace__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ExternalFileMessage__c.cg__namespace__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ExternalFileMessage__c.cg__organizationId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ExternalFileMessage__c.cg__organizationId__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ExternalFileMessage__c.cg__parentId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ExternalFileMessage__c.cg__parentId__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ExternalFileMessage__c.cg__relationshipName__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ExternalFileMessage__c.cg__relationshipName__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__ExternalFileMessage__c.cg__sDriveFolderId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__ExternalFileMessage__c.cg__sDriveFolderId__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__File_Activity__c.cg__Account_File__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__File_Activity__c.cg__Account_File__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__File_Activity__c.cg__Activity_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__File_Activity__c.cg__Activity_Type__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__File_Activity__c.cg__Additional_Details__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__File_Activity__c.cg__Additional_Details__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__File_Activity__c.cg__Case_File__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__File_Activity__c.cg__Case_File__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__File_Activity__c.cg__Contact_File__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__File_Activity__c.cg__Contact_File__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__File_Activity__c.cg__Opportunity_File__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__File_Activity__c.cg__Opportunity_File__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__File_Activity__c.cg__S3Object__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__File_Activity__c.cg__S3Object__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.File_Path__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.File_Path__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.Historical_Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.Historical_Description__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>cg__Lead_File__c.Private__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__Content_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__File_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__File_Size__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__File_Size_in_Bytes__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__Is_Deleted__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__Is_Latest_Version__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__Is_Parent_Deleted__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__Lead__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__Page_Count__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__Parent_Folder_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__Preview_Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__Preview_Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__Shortcut__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__Sync_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__Tags__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__Thumbnail_Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__Thumbnail_Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__Version_Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Lead_File__c.cg__WIP__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__Content_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__File_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__File_Size__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__File_Size_in_Bytes__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__Is_Deleted__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__Is_Latest_Version__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__Is_Parent_Deleted__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__Page_Count__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__Parent_Folder_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__Preview_Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__Preview_Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__Shortcut__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__Sync_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__Tags__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__Thumbnail_Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__Thumbnail_Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__Version_Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__MyS3Object__c.cg__WIP__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__Content_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__File_Size__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__File_Size_in_Bytes__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__Is_Deleted__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__Is_Latest_Version__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__Is_Parent_Deleted__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__Page_Count__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__Parent_Folder_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__Preview_Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__Preview_Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__Private__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__Shortcut__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__Sync_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__Tags__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__Thumbnail_Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__Thumbnail_Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__Version_Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__OpportunityFile__c.cg__WIP__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Preview__c.cg__Error_Count__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Preview__c.cg__Error_Message__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Preview__c.cg__File_Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Preview__c.cg__File_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Preview__c.cg__File_Object_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Preview__c.cg__File_Object_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Preview__c.cg__File_Size__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Preview__c.cg__File_Url__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Preview__c.cg__Preview_Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Preview__c.cg__Preview_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Preview__c.cg__Preview_State__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Preview__c.cg__S3_Signature__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Preview__c.cg__Thumbnail_Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Preview__c.cg__Thumbnail_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__Preview__c.cg__Thumbnail_State__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Config__c.cg__Value__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__Content_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__File_Size__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__File_Size_in_Bytes__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__Has_Children__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__Is_Deleted__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__Is_Latest_Version__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__Is_Parent_Deleted__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__Page_Count__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__Parent__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__Preview_Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__Preview_Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__Recycled__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__Shortcut__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__Sync_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__Tags__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__Thumbnail_Key__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__Thumbnail_Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__Version_Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__Version_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__S3Object__c.cg__WIP__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SDriveCustomAction__c.cg__Active__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SDriveCustomAction__c.cg__File_Types__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SDriveCustomAction__c.cg__Interface_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SDriveCustomAction__c.cg__Multiple__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SDriveCustomAction__c.cg__Objects__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SDriveCustomAction__c.cg__Users__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SQueue__c.cg__Error_Count__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SQueue__c.cg__Error_Message__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SQueue__c.cg__Execution_Date__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SQueue__c.cg__Is_Completed__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SQueue__c.cg__Payload__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SQueue__c.cg__Process__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl_Hit__c.cg__Browser__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl_Hit__c.cg__IP_Address__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl_Hit__c.cg__OS__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl_Hit__c.cg__Referrer__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl_Hit__c.cg__User_Agent__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__Expiration_Date__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__File_Ids__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__Hits__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__IP_Range__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__Is_Accessible__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__Is_Creatable__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__Is_Deletable__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__Is_Open__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__Is_Public_Share__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__Is_Updatable__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__Object_File_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__Object_File_Prefix__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__Object_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__Object_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__Object_Relationship_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__Object_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__Password_Encrypted__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__Password__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__SUrl_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__Short_URL__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>cg__SUrl__c.cg__URL__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__Content_Type__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__Description__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__File_Name__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__File_Size__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__File_Size_in_Bytes__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__Is_Deleted__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__Is_Latest_Version__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__Is_Parent_Deleted__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__Lead__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__Page_Count__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__Parent_Folder_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__Preview_Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__Preview_Version_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__Shortcut__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__Sync_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__Tags__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__Thumbnail_Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__Thumbnail_Version_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__Version_Description__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__Version_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Lead_File__c.cg__WIP__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__Content_Type__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__Description__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__File_Name__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__File_Size__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__File_Size_in_Bytes__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__Is_Deleted__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__Is_Latest_Version__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__Is_Parent_Deleted__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__Page_Count__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__Parent_Folder_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__Preview_Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__Preview_Version_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__Shortcut__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__Sync_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__Tags__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__Thumbnail_Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__Thumbnail_Version_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__Version_Description__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__Version_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__MyS3Object__c.cg__WIP__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__Content_Type__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__Description__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__File_Size__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__File_Size_in_Bytes__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__Is_Deleted__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__Is_Latest_Version__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__Is_Parent_Deleted__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__Page_Count__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__Parent_Folder_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__Preview_Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__Preview_Version_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__Private__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__Shortcut__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__Sync_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__Tags__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__Thumbnail_Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__Thumbnail_Version_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__Version_Description__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__Version_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__OpportunityFile__c.cg__WIP__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Preview__c.cg__Error_Count__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Preview__c.cg__Error_Message__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Preview__c.cg__File_Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Preview__c.cg__File_Name__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Preview__c.cg__File_Object_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Preview__c.cg__File_Object_Type__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Preview__c.cg__File_Size__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Preview__c.cg__File_Url__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Preview__c.cg__Preview_Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Preview__c.cg__Preview_Name__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Preview__c.cg__Preview_State__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Preview__c.cg__S3_Signature__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Preview__c.cg__Thumbnail_Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Preview__c.cg__Thumbnail_Name__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__Preview__c.cg__Thumbnail_State__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Config__c.cg__Value__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__Content_Type__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__Description__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__File_Size__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__File_Size_in_Bytes__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__Has_Children__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__Is_Deleted__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__Is_Latest_Version__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__Is_Parent_Deleted__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__Page_Count__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__Parent__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__Preview_Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__Preview_Version_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__Recycled__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__Shortcut__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__Sync_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__Tags__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__Thumbnail_Key__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__Thumbnail_Version_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__Version_Description__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__Version_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__S3Object__c.cg__WIP__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SDriveCustomAction__c.cg__Active__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SDriveCustomAction__c.cg__File_Types__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SDriveCustomAction__c.cg__Interface_Type__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SDriveCustomAction__c.cg__Multiple__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SDriveCustomAction__c.cg__Objects__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SDriveCustomAction__c.cg__Users__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SQueue__c.cg__Error_Count__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SQueue__c.cg__Error_Message__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SQueue__c.cg__Execution_Date__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SQueue__c.cg__Is_Completed__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SQueue__c.cg__Payload__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SQueue__c.cg__Process__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl_Hit__c.cg__Browser__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl_Hit__c.cg__IP_Address__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl_Hit__c.cg__OS__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl_Hit__c.cg__Referrer__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl_Hit__c.cg__User_Agent__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__Expiration_Date__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__File_Ids__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__Hits__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__IP_Range__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__Is_Accessible__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__Is_Creatable__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__Is_Deletable__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__Is_Open__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__Is_Public_Share__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__Is_Updatable__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__Object_File_Name__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__Object_File_Prefix__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__Object_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__Object_Name__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__Object_Relationship_Name__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__Object_Type__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__Password_Encrypted__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__Password__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__SUrl_Id__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__Short_URL__c</field>
+</fieldPermissions>
+    <fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>cg__SUrl__c.cg__URL__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>cwbtool__AnalysisSummary__c.cwbtool__AnalysisLink__c</field>
@@ -22135,8 +22102,6 @@
         <field>cwbtool__AnalysisSummary__c.cwbtool__Total_Process_Batch__c</field>
         <readable>false</readable>
     </fieldPermissions>
-    
-    
     <fieldPermissions>
         <editable>false</editable>
         <field>cwbtool__Connection__c.cwbtool__Current_Org__c</field>
@@ -22458,345 +22423,345 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__AccountId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__AccountId__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterActionsUndoAndSend__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterActionsUndoAndSend__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvCompletedText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvCompletedText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvCompleted__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvCompleted__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvDeclinedText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvDeclinedText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvDeclined__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvDeclined__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvDeliveredText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvDeliveredText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvDelivered__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvDelivered__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvSentText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvSentText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvSent__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvSent__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvVoidedText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvVoidedText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvVoided__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvVoided__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvelopeSigning__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterEnvelopeSigning__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipCompletedText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipCompletedText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipCompleted__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipCompleted__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipDeclinedText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipDeclinedText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipDeclined__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipDeclined__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipDeliveredText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipDeliveredText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipDelivered__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipDelivered__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipSentText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipSentText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipSent__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipSent__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipSignedText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipSignedText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipSigned__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterRecipSigned__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterSetting__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ChatterSetting__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DSProSFPassword__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DSProSFPassword__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DSProSFUsername__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DSProSFUsername__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DefaultExpireNDays__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DefaultExpireNDays__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DefaultReminderNDays__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DefaultReminderNDays__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DefaultRepeatReminderNDays__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DefaultRepeatReminderNDays__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DefaultRoleNames__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DefaultRoleNames__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DefaultRoleValues__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DefaultRoleValues__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DefaultWarnOfExpireNDays__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DefaultWarnOfExpireNDays__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSignAccountConfiguration__c.dsfs__Default_Apex_Timeout__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DisplayInPersonSigningInOwnWindow__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DisplayInPersonSigningInOwnWindow__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DisplayTaggerInOwnWindow__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DisplayTaggerInOwnWindow__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DocuSignBaseURL__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DocuSignBaseURL__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DocuSignEnvironment__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__DocuSignEnvironment__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_de__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_de__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_es__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_es__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_fr__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_fr__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_it__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_it__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_ja__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_ja__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_ko__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_ko__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_nl__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_nl__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_pt_BR__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_pt_BR__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_ru__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_ru__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_zh_CN__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailBody_zh_CN__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_de__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_de__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_es__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_es__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_fr__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_fr__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_it__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_it__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_ja__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_ja__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_ko__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_ko__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_nl__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_nl__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_pt_BR__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_pt_BR__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_ru__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_ru__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_zh_CN__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EmailSubject_zh_CN__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EnableNewMobileTaggingUI__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__EnableNewMobileTaggingUI__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__FetchDocuments__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__FetchDocuments__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__HideChatter__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__HideChatter__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__HideEmailMessage__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__HideEmailMessage__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__HideEmailSubject__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__HideEmailSubject__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__HideRemindExpire__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__HideRemindExpire__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__HideSendNowButton__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__HideSendNowButton__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__HideTagButton__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__HideTagButton__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__IncludeDefaultAnchorTabs__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__IncludeDefaultAnchorTabs__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSignAccountConfiguration__c.dsfs__Lightning_Component_Logging__c</field>
@@ -22808,250 +22773,250 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__LookupUser__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__LookupUser__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ManageUsersFields__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__ManageUsersFields__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__OrganizationId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__OrganizationId__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__SetupDone__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__SetupDone__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__UpgradeHelper__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__UpgradeHelper__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__UseAccountNotificationDefaults__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__UseAccountNotificationDefaults__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSignAccountConfiguration__c.dsfs__UseSendOnBehalfOf__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSignAccountConfiguration__c.dsfs__UseSendOnBehalfOf__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Document__c.dsfs__Attachment_ID__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Document__c.dsfs__Attachment_ID__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Document__c.dsfs__Attachment_NameEx__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Document__c.dsfs__Attachment_NameEx__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Document__c.dsfs__Attachment_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Document__c.dsfs__Attachment_Name__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Document__c.dsfs__Document_ID__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Document__c.dsfs__Document_ID__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Document__c.dsfs__Document_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Document__c.dsfs__Document_Name__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Document__c.dsfs__Document_Order__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Document__c.dsfs__Document_Order__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSign_Envelope_Document__c.dsfs__Extension__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Document__c.dsfs__External_Document_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Document__c.dsfs__External_Document_Id__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Document__c.dsfs__SFDocument_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Document__c.dsfs__SFDocument_Type__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSign_Envelope_Document__c.dsfs__Size__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Document__c.dsfs__Validation_Message__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Document__c.dsfs__Validation_Message__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Access_Code__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Access_Code__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DSER_ContactID__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DSER_ContactID__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DSER_CustomFeaturesEx__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DSER_CustomFeaturesEx__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DSER_CustomFeatures__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DSER_CustomFeatures__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DSER_CustomId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DSER_CustomId__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DSER_CustomName__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DSER_CustomName__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DSER_LeadID__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DSER_LeadID__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DSER_UserID__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DSER_UserID__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DocuSign_Recipient_Role__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DocuSign_Recipient_Role__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DocuSign_Signature_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DocuSign_Signature_Name__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DocuSign_Signer_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__DocuSign_Signer_Type__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Email_Body__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Email_Body__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Email_Subject__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Email_Subject__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__ID_Check__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__ID_Check__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__LanguageCode__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__LanguageCode__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Language__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Language__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Recipient_Email__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Recipient_Email__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Recipient_ID__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Recipient_Note_Long__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Recipient_Note_Long__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Recipient_Note__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Recipient_Note__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__RoleName__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__RoleName__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__RoleValue__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__RoleValue__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Routing_Order__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Routing_Order__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__SMSAuthentication_PhoneNumber__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Salesforce_Recipient_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Salesforce_Recipient_Type__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__SignInPersonEmail__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__SignInPersonEmail__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__SignInPersonName__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__SignInPersonName__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__SignNow__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__SignNow__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__SigningGroupId__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Validation_Message__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope_Recipient__c.dsfs__Validation_Message__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__DocuSign_Envelope__c.Unique_Record_Count__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.Unique_Record_Count__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSign_Envelope__c.dsfs__BulkSendErrorMessage__c</field>
@@ -23063,355 +23028,355 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvCompletedText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvCompletedText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvCompleted__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvCompleted__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvDeclinedText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvDeclinedText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvDeclined__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvDeclined__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvDeliveredText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvDeliveredText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvDelivered__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvDelivered__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvSentText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvSentText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvSent__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvSent__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvVoidedText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvVoidedText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvVoided__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterEnvVoided__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipCompletedText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipCompletedText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipCompleted__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipCompleted__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipDeclinedText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipDeclinedText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipDeclined__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipDeclined__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipDeliveredText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipDeliveredText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipDelivered__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipDelivered__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipSentText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipSentText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipSent__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipSent__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipSignedText__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipSignedText__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipSigned__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterRecipSigned__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterUpdatesEnabled__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__ChatterUpdatesEnabled__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Contact2eSignDoc01__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Contact2eSignDoc01__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Custom_Field_1_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Custom_Field_1_Name__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Custom_Field_1_Value__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Custom_Field_1_Value__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Custom_Field_1__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Custom_Field_1__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Custom_Field_2_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Custom_Field_2_Name__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Custom_Field_2_Value__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Custom_Field_2_Value__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Custom_Field_2__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Custom_Field_2__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Custom_Field_3_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Custom_Field_3_Name__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Custom_Field_3_Value__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Custom_Field_3_Value__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Custom_Field_3__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Custom_Field_3__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Day_Prior_to_Warn_of_expiration__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Day_Prior_to_Warn_of_expiration__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Days_before_Envelope_is_Expired_Voided__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Days_before_Envelope_is_Expired_Voided__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__DocuSign_Email_Message__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__DocuSign_Email_Message__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__DocuSign_Envelope_ID__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__DocuSign_Envelope_ID__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__DocuSign_Envelope_Sent__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__DocuSign_Envelope_Sent__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__DocumentID__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__DocumentID__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Document_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Document_Name__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSign_Envelope__c.dsfs__EnvelopeConfiguration__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Expire_Void_Envelope__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Expire_Void_Envelope__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__I_agree_to_Terms__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__I_agree_to_Terms__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__I_will_Sign__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__I_will_Sign__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSign_Envelope__c.dsfs__Job__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Lead2eSignDoc01__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Lead2eSignDoc01__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Reminder_Interval__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Reminder_Interval__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Reminder_Repeat_Interval_in_Days__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Reminder_Repeat_Interval_in_Days__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Send_Reminder__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Send_Reminder__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Sender__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Sender__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Source_Object_Parent__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Source_Object_Parent__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Envelope__c.dsfs__Source_Object__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Envelope__c.dsfs__Source_Object__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Account__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Account__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Contact__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Contact__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Date_Declined__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Date_Declined__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Date_Delivered__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Date_Delivered__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Date_Sent__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Date_Sent__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Date_Signed__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Date_Signed__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Decline_Reason_Extended__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Decline_Reason__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Decline_Reason__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Recipient_Status__c.dsfs__DocuSign_Recipient_Company__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Recipient_Status__c.dsfs__DocuSign_Recipient_Company__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Recipient_Status__c.dsfs__DocuSign_Recipient_Email__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Recipient_Status__c.dsfs__DocuSign_Recipient_Email__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Recipient_Status__c.dsfs__DocuSign_Recipient_Title__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Recipient_Status__c.dsfs__DocuSign_Recipient_Title__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Recipient_Status__c.dsfs__DocuSign_Routing_Order__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Recipient_Status__c.dsfs__DocuSign_Routing_Order__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Envelope_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Envelope_Id__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Lead__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Lead__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Recipient_Status__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Recipient_Status__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.Associated_Childeren__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.Associated_Childeren__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.AttachmentId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.AttachmentId__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSign_Status__c.Case_Link__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.Case_Owner_Email_Hidden__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.Case_Owner_Email_Hidden__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.Case_Owner_Name_Hidden__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.Case_Owner_Name_Hidden__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSign_Status__c.Conflict_Of_Interest__c</field>
@@ -23428,25 +23393,25 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.Form_Name__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.Form_Name__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.Minor_Participant__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.Minor_Participant__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.Recipient_names__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.Recipient_names__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.Signatures__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.Signatures__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSign_Status__c.Subject_For_Email_Template__c</field>
@@ -23458,165 +23423,165 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>dsfs__DocuSign_Status__c.Unique_Record_Count__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.Unique_Record_Count__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.Wish_Required_Signature__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.Wish_Required_Signature__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Case__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Case__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Company__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Company__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Completed_Age__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Completed_Age__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Completed_Date_Time__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Completed_Date_Time__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Contact__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Contact__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Contract__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Contract__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Days_to_Complete__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Days_to_Complete__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Declined_Date_Time__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Declined_Date_Time__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSign_Status__c.dsfs__Declined_Reason_Extended__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Declined_Reason__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Declined_Reason__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__DocuSign_Envelope_ID__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__DocuSign_Envelope_ID__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSign_Status__c.dsfs__EnvelopeConfiguration__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Envelope_Link__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Envelope_Link__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Envelope_Status__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Envelope_Status__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Hours_to_Complete__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Hours_to_Complete__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Hrs_Sent_to_Sign__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Hrs_Sent_to_Sign__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Lead__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Lead__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Minutes_to_Complete__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Minutes_to_Complete__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Number_Completed__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Number_Completed__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Opportunity__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Opportunity__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Sender_Email__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Sender_Email__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Sender__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Sender__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Sent_Age__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Sent_Age__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Sent_Date_Time__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Sent_Date_Time__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Subject__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Subject__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Time_to_Complete__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Time_to_Complete__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Viewed_Date_Time__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Viewed_Date_Time__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Voided_Date_Time__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Voided_Date_Time__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSign_Status__c.dsfs__Voided_Reason_Extended__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>dsfs__DocuSign_Status__c.dsfs__Voided_Reason__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>dsfs__DocuSign_Status__c.dsfs__Voided_Reason__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSign_Status__c.isConflict__c</field>
@@ -23747,24 +23712,6 @@
         <field>dsfs__EnvelopeLocalization__c.dsfs__Locale__c</field>
         <readable>false</readable>
     </fieldPermissions>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__Recipient__c.dsfs__AccessCode__c</field>
@@ -24186,45 +24133,45 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe01__OppPayment__c.npe01__Check_Reference_Number__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe01__OppPayment__c.npe01__Check_Reference_Number__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe01__OppPayment__c.npe01__Custom_Payment_Field__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe01__OppPayment__c.npe01__Custom_Payment_Field__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe01__OppPayment__c.npe01__Paid__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe01__OppPayment__c.npe01__Paid__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe01__OppPayment__c.npe01__Payment_Amount__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe01__OppPayment__c.npe01__Payment_Amount__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe01__OppPayment__c.npe01__Payment_Date__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe01__OppPayment__c.npe01__Payment_Date__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe01__OppPayment__c.npe01__Payment_Method__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe01__OppPayment__c.npe01__Payment_Method__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe01__OppPayment__c.npe01__Scheduled_Date__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe01__OppPayment__c.npe01__Scheduled_Date__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe01__OppPayment__c.npe01__Written_Off__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe01__OppPayment__c.npe01__Written_Off__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>npe01__OppPayment__c.npsp__Payment_Acknowledged_Date__c</field>
@@ -24546,315 +24493,315 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe5__Affiliation__c.Constituent_Code__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe5__Affiliation__c.Constituent_Code__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>npe5__Affiliation__c.External_Id__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe5__Affiliation__c.Hidden_Status_Updated__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe5__Affiliation__c.Hidden_Status_Updated__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>npe5__Affiliation__c.Import_Id__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>npe5__Affiliation__c.Migrated_Record__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe5__Affiliation__c.Migrated_Record__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe5__Affiliation__c.Region_Code__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe5__Affiliation__c.Region_Code__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe5__Affiliation__c.Sub_Status__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe5__Affiliation__c.Sub_Status__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe5__Affiliation__c.Treating_Facility__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe5__Affiliation__c.Treating_Facility__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>npe5__Affiliation__c.UAT_Data_Warning__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>npe5__Affiliation__c.Unique_Record_Count__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe5__Affiliation__c.Unique_Record_Count__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe5__Affiliation__c.User_Email_Hidden__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe5__Affiliation__c.User_Email_Hidden__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe5__Affiliation__c.User_Name_Hidden__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe5__Affiliation__c.User_Name_Hidden__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe5__Affiliation__c.npe5__Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe5__Affiliation__c.npe5__Description__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe5__Affiliation__c.npe5__EndDate__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe5__Affiliation__c.npe5__EndDate__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe5__Affiliation__c.npe5__Primary__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe5__Affiliation__c.npe5__Primary__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe5__Affiliation__c.npe5__Role__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe5__Affiliation__c.npe5__Role__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe5__Affiliation__c.npe5__StartDate__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe5__Affiliation__c.npe5__StartDate__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npe5__Affiliation__c.npe5__Status__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npe5__Affiliation__c.npe5__Status__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>npe5__Affiliation__c.npsp__Related_Opportunity_Contact_Role__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__Addressee__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__Addressee__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__Always_Anonymous__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__Always_Anonymous__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__AverageAmount__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__AverageAmount__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__Best_Gift_Year_Total__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__Best_Gift_Year_Total__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__Best_Gift_Year__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__Best_Gift_Year__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__FirstCloseDate__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__FirstCloseDate__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__Formal_Greeting__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__Formal_Greeting__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__Formula_MailingAddress__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__Formula_MailingAddress__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__HouseholdEmail__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__HouseholdEmail__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__HouseholdPhone__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__HouseholdPhone__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__Household_ID__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__Household_ID__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__Informal_Greeting__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__Informal_Greeting__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__LargestAmount__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__LargestAmount__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__LastCloseDate__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__LastCloseDate__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__LastMembershipAmount__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__LastMembershipAmount__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__LastMembershipDate__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__LastMembershipDate__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__LastMembershipLevel__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__LastMembershipLevel__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__LastMembershipOrigin__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__LastMembershipOrigin__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__LastOppAmount__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__LastOppAmount__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__MailingCity__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__MailingCity__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__MailingCountry__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__MailingCountry__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__MailingPostalCode__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__MailingPostalCode__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__MailingState__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__MailingState__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__MailingStreet__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__MailingStreet__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__MembershipEndDate__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__MembershipEndDate__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__MembershipJoinDate__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__MembershipJoinDate__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__Membership_Span__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__Membership_Span__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__Membership_Status__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__Membership_Status__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__NumberOfClosedOpps__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__NumberOfClosedOpps__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__NumberOfMembershipOpps__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__NumberOfMembershipOpps__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__OppAmount2YearsAgo__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__OppAmount2YearsAgo__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__OppAmountLastNDays__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__OppAmountLastNDays__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__OppAmountLastYear__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__OppAmountLastYear__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__OppAmountThisYear__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__OppAmountThisYear__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__OppsClosed2YearsAgo__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__OppsClosed2YearsAgo__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__OppsClosedLastNDays__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__OppsClosedLastNDays__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__OppsClosedLastYear__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__OppsClosedLastYear__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__OppsClosedThisYear__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__OppsClosedThisYear__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__SYSTEM_CUSTOM_NAMING__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__SYSTEM_CUSTOM_NAMING__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__SmallestAmount__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__SmallestAmount__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__TotalMembershipOppAmount__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__TotalMembershipOppAmount__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npo02__TotalOppAmount__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npo02__TotalOppAmount__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>npo02__Household__c.npsp__Number_of_Household_Members__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>npo02__Household__c.npsp__Number_of_Household_Members__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>npsp__Account_Soft_Credit__c.npsp__Amount__c</field>
@@ -27484,21 +27431,30 @@
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>GETGSI__Approval_Status__c</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
+    <object>GETGSI__Approval_Status__c</object>
+    <allowCreate>false</allowCreate>
+    <allowDelete>false</allowDelete>
+    <allowEdit>false</allowEdit>
+    <allowRead>false</allowRead>
+    <modifyAllRecords>false</modifyAllRecords>
+    <viewAllRecords>false</viewAllRecords>
+</objectPermissions>
+    <objectPermissions>
+    <object>GETGSI__Error_Log__c</object>
+    <allowCreate>false</allowCreate>
+    <allowDelete>false</allowDelete>
+    <allowEdit>false</allowEdit>
+    <allowRead>false</allowRead>
+    <modifyAllRecords>false</modifyAllRecords>
+    <viewAllRecords>false</viewAllRecords>
+</objectPermissions>
     <objectPermissions>
         <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
+        <allowDelete>false</allowDelete>
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>false</modifyAllRecords>
-        <object>GETGSI__Error_Log__c</object>
+        <object>Guardian_Signature__c</object>
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -27538,23 +27494,23 @@
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
-        <allowCreate>false</allowCreate>
-        <allowDelete>false</allowDelete>
-        <allowEdit>false</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>Loop__DDP__c</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
+    <object>Loop__DDP__c</object>
+    <allowCreate>false</allowCreate>
+    <allowDelete>false</allowDelete>
+    <allowEdit>false</allowEdit>
+    <allowRead>false</allowRead>
+    <modifyAllRecords>false</modifyAllRecords>
+    <viewAllRecords>false</viewAllRecords>
+</objectPermissions>
     <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>false</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>Loop__Related_Object__c</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
+    <object>Loop__Related_Object__c</object>
+    <allowCreate>false</allowCreate>
+    <allowDelete>false</allowDelete>
+    <allowEdit>false</allowEdit>
+    <allowRead>false</allowRead>
+    <modifyAllRecords>false</modifyAllRecords>
+    <viewAllRecords>false</viewAllRecords>
+</objectPermissions>
     <objectPermissions>
         <allowCreate>false</allowCreate>
         <allowDelete>false</allowDelete>
@@ -27683,6 +27639,15 @@
     </objectPermissions>
     <objectPermissions>
         <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Wish_Affiliation__c</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
@@ -27736,6 +27701,42 @@
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Wish_Required_Signature_File__c</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Wish_Required_Signature__c</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Wish_Signature_Chapter_Form__c</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Wish_Signature_Forms__c</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
         <allowCreate>false</allowCreate>
         <allowDelete>false</allowDelete>
         <allowEdit>false</allowEdit>
@@ -27745,104 +27746,104 @@
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>false</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>cg__AccountFile__c</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
+    <object>cg__AccountFile__c</object>
+    <allowCreate>false</allowCreate>
+    <allowDelete>false</allowDelete>
+    <allowEdit>false</allowEdit>
+    <allowRead>false</allowRead>
+    <modifyAllRecords>false</modifyAllRecords>
+    <viewAllRecords>false</viewAllRecords>
+</objectPermissions>
     <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>false</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>cg__CaseFile__c</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
+    <object>cg__CaseFile__c</object>
+    <allowCreate>false</allowCreate>
+    <allowDelete>false</allowDelete>
+    <allowEdit>false</allowEdit>
+    <allowRead>false</allowRead>
+    <modifyAllRecords>false</modifyAllRecords>
+    <viewAllRecords>false</viewAllRecords>
+</objectPermissions>
     <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>false</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>cg__ContactFile__c</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
+    <object>cg__ContactFile__c</object>
+    <allowCreate>false</allowCreate>
+    <allowDelete>false</allowDelete>
+    <allowEdit>false</allowEdit>
+    <allowRead>false</allowRead>
+    <modifyAllRecords>false</modifyAllRecords>
+    <viewAllRecords>false</viewAllRecords>
+</objectPermissions>
     <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>cg__ExternalFileMessage__c</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
+    <object>cg__ExternalFileMessage__c</object>
+    <allowCreate>false</allowCreate>
+    <allowDelete>false</allowDelete>
+    <allowEdit>false</allowEdit>
+    <allowRead>false</allowRead>
+    <modifyAllRecords>false</modifyAllRecords>
+    <viewAllRecords>false</viewAllRecords>
+</objectPermissions>
     <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>cg__Lead_File__c</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
+    <object>cg__Lead_File__c</object>
+    <allowCreate>false</allowCreate>
+    <allowDelete>false</allowDelete>
+    <allowEdit>false</allowEdit>
+    <allowRead>false</allowRead>
+    <modifyAllRecords>false</modifyAllRecords>
+    <viewAllRecords>false</viewAllRecords>
+</objectPermissions>
     <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>cg__MyS3Object__c</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
+    <object>cg__MyS3Object__c</object>
+    <allowCreate>false</allowCreate>
+    <allowDelete>false</allowDelete>
+    <allowEdit>false</allowEdit>
+    <allowRead>false</allowRead>
+    <modifyAllRecords>false</modifyAllRecords>
+    <viewAllRecords>false</viewAllRecords>
+</objectPermissions>
     <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>cg__Preview__c</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
+    <object>cg__Preview__c</object>
+    <allowCreate>false</allowCreate>
+    <allowDelete>false</allowDelete>
+    <allowEdit>false</allowEdit>
+    <allowRead>false</allowRead>
+    <modifyAllRecords>false</modifyAllRecords>
+    <viewAllRecords>false</viewAllRecords>
+</objectPermissions>
     <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>cg__SDriveCustomAction__c</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
+    <object>cg__SDriveCustomAction__c</object>
+    <allowCreate>false</allowCreate>
+    <allowDelete>false</allowDelete>
+    <allowEdit>false</allowEdit>
+    <allowRead>false</allowRead>
+    <modifyAllRecords>false</modifyAllRecords>
+    <viewAllRecords>false</viewAllRecords>
+</objectPermissions>
     <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>cg__SQueue__c</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
+    <object>cg__SQueue__c</object>
+    <allowCreate>false</allowCreate>
+    <allowDelete>false</allowDelete>
+    <allowEdit>false</allowEdit>
+    <allowRead>false</allowRead>
+    <modifyAllRecords>false</modifyAllRecords>
+    <viewAllRecords>false</viewAllRecords>
+</objectPermissions>
     <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>cg__SUrl_Hit__c</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
+    <object>cg__SUrl_Hit__c</object>
+    <allowCreate>false</allowCreate>
+    <allowDelete>false</allowDelete>
+    <allowEdit>false</allowEdit>
+    <allowRead>false</allowRead>
+    <modifyAllRecords>false</modifyAllRecords>
+    <viewAllRecords>false</viewAllRecords>
+</objectPermissions>
     <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>cg__SUrl__c</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
+    <object>cg__SUrl__c</object>
+    <allowCreate>false</allowCreate>
+    <allowDelete>false</allowDelete>
+    <allowEdit>false</allowEdit>
+    <allowRead>false</allowRead>
+    <modifyAllRecords>false</modifyAllRecords>
+    <viewAllRecords>false</viewAllRecords>
+</objectPermissions>
     <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>false</allowDelete>
@@ -27853,14 +27854,14 @@
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>false</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>npe5__Affiliation__c</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
+    <object>npe5__Affiliation__c</object>
+    <allowCreate>false</allowCreate>
+    <allowDelete>false</allowDelete>
+    <allowEdit>false</allowEdit>
+    <allowRead>false</allowRead>
+    <modifyAllRecords>false</modifyAllRecords>
+    <viewAllRecords>false</viewAllRecords>
+</objectPermissions>
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Account.Chapter</recordType>
@@ -27905,12 +27906,12 @@
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Case.Wish</recordType>
-        <visible>true</visible>
+        <visible>false</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Case.Wish_Assist</recordType>
-        <visible>true</visible>
+        <visible>false</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>false</default>
@@ -28921,6 +28922,10 @@
         <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>
+        <tab>standard-ContentNote</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
         <tab>standard-Contract</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
@@ -28942,6 +28947,10 @@
     </tabVisibilities>
     <tabVisibilities>
         <tab>standard-DuplicateRecordSet</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>standard-EmailTemplate</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
@@ -29007,6 +29016,10 @@
     <tabVisibilities>
         <tab>standard-Pricebook2</tab>
         <visibility>DefaultOff</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>standard-ProcessInstanceWorkitem</tab>
+        <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
         <tab>standard-Product2</tab>

@@ -4,23 +4,8 @@
  * @createdDate	4/15/2020
  */
 public class OrientationTrainingDomain extends trac_TriggerHandlerBase {
-
 	List<Orientation_Training__c> newOrientationTrainingList = (List<Orientation_Training__c>) newRecordsList;
 	List<Orientation_Training__c> oldOrientationTrainingList = (List<Orientation_Training__c>) oldRecordsList;
 	Map<Id, Orientation_Training__c> newOrientationTrainingMap = (Map<Id, Orientation_Training__c>) newRecordsMap;
 	Map<Id, Orientation_Training__c> oldOrientationTrainingMap = (Map<Id, Orientation_Training__c>) oldRecordsMap;
-
-	/**
-	 * Before insert of Orientation Training
-	 */
-	public override void handleBeforeInsert() {
-		OrientationTrainingValidation.validateStartEnd(newOrientationTrainingList);
-	}
-
-	/**
-	 * Before update of Orientation Training
-	 */
-	public override void handleBeforeUpdate() {
-		OrientationTrainingValidation.validateStartEnd(newOrientationTrainingList);
-	}
 }

@@ -451,6 +451,38 @@
         <value>005360000056rbe</value>
     </labels>
     <labels>
+        <fullName>LMS_Error_Exception</fullName>
+        <categories>LMS</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LMS Exception error - Generic</shortDescription>
+        <value>Exception caused, Please retry again or contact System Administrator</value>
+    </labels>
+    <labels>
+        <fullName>LMS_Error_Invalid_Course_Id</fullName>
+        <categories>LMS</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LMS Exception error - Invalid Course Id</shortDescription>
+        <value>Invalid Course ID. Please check the Course ID.</value>
+    </labels>
+    <labels>
+        <fullName>LMS_Error_Missing_Course_Id</fullName>
+        <categories>LMS</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LMS Exception error - Missing Course Id</shortDescription>
+        <value>Please enter the Course ID and Try again!</value>
+    </labels>
+    <labels>
+        <fullName>LMS_Success_Valid_Course_Id</fullName>
+        <categories>LMS</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LMS Success - Valid Course Id</shortDescription>
+        <value>Please enter the Course ID and Try again!</value>
+    </labels>
+    <labels>
         <fullName>Lead_DNQ_Letter</fullName>
         <categories>Drawloop</categories>
         <language>en_US</language>
@@ -1187,6 +1219,13 @@ Click Generate Document and once the document is generated you can click the lin
         <protected>false</protected>
         <shortDescription>Volunteer Role Volunteer Count Less</shortDescription>
         <value>Volunteer need count should not be less than the volunteer registered count.</value>
+    </labels>
+    <labels>
+        <fullName>VolunteerInterviewTask_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerInterviewTask_Error</shortDescription>
+        <value>Error while retrieving records:</value>
     </labels>
     <labels>
         <fullName>WG_FinalStep_FileClosed</fullName>
