@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -638,7 +637,7 @@
     </fieldSets>
     <fields>
         <fullName>About_Me__c</fullName>
-        <description>It will display the details about volunteer contact&apos;s about me filed value</description>
+        <description>It will display the details about volunteer contact's about me filed value</description>
         <externalId>false</externalId>
         <formula>Wish__r.Contact.About_Me__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -706,7 +705,7 @@
     </fields>
     <fields>
         <fullName>Approved_Date__c</fullName>
-        <description>Populated with today&apos;s date the first time the Volunteer Opportunity has a volunteer assigned and they are set to an &apos;Approved&apos; status.</description>
+        <description>Populated with today's date the first time the Volunteer Opportunity has a volunteer assigned and they are set to an 'Approved' status.</description>
         <externalId>false</externalId>
         <label>Approved Date</label>
         <required>false</required>
@@ -717,7 +716,7 @@
     <fields>
         <fullName>Case_Owner__c</fullName>
         <externalId>false</externalId>
-        <formula>Wish__r.Owner:User.FirstName +&apos; &apos; + Wish__r.Owner:User.LastName</formula>
+        <formula>Wish__r.Owner:User.FirstName +' ' + Wish__r.Owner:User.LastName</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Case Owner</label>
         <required>false</required>
@@ -819,9 +818,9 @@
         <fullName>Distance_From_Me__c</fullName>
         <externalId>false</externalId>
         <formula>IF( 
-Distance_Miles__c &lt; 5, &apos;0-5 Miles&apos;, 
-IF(Distance_Miles__c &gt; 5 &amp;&amp; Distance_Miles__c &lt;10, &apos;5-10 Miles&apos;, 
-IF(Distance_Miles__c &gt; 10 &amp;&amp; Distance_Miles__c &lt;20, &apos;10-20 Miles&apos;, &apos;&gt;20 Miles&apos; 
+Distance_Miles__c &lt; 5, '0-5 Miles', 
+IF(Distance_Miles__c &gt; 5 &amp;&amp; Distance_Miles__c &lt;10, '5-10 Miles', 
+IF(Distance_Miles__c &gt; 10 &amp;&amp; Distance_Miles__c &lt;20, '10-20 Miles', '&gt;20 Miles' 
 ) 
 ) 
 )</formula>
@@ -852,7 +851,7 @@ IF(Distance_Miles__c &gt; 10 &amp;&amp; Distance_Miles__c &lt;20, &apos;10-20 Mi
 NOT(ISBLANK(Volunteer_Name__c)), 
 Distance_From_Volunteer__c  , 
 DISTANCE(GEOLOCATION( $User.Address_Latitude__c ,  $User.Address_Longitude__c ), 
-GEOLOCATION(  Wish__r.Contact.Address_Latitude__c ,  Wish__r.Contact.Address_Longitude__c ),&apos;mi&apos;) 
+GEOLOCATION(  Wish__r.Contact.Address_Latitude__c ,  Wish__r.Contact.Address_Longitude__c ),'mi') 
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Distance(Miles)</label>
@@ -1343,7 +1342,7 @@ GEOLOCATION(  Wish__r.Contact.Address_Latitude__c ,  Wish__r.Contact.Address_Lon
         <fullName>Hidden_Volunteer_Contact_Name__c</fullName>
         <description>This field is used to store the volunteer contact name for sending email purpose.</description>
         <externalId>false</externalId>
-        <formula>Volunteer_Name__r.FirstName+&apos; &apos;+ Volunteer_Name__r.LastName</formula>
+        <formula>Volunteer_Name__r.FirstName+' '+ Volunteer_Name__r.LastName</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Volunteer Contact Name</label>
         <required>false</required>
@@ -1431,39 +1430,39 @@ GEOLOCATION(  Wish__r.Contact.Address_Latitude__c ,  Wish__r.Contact.Address_Lon
         <fullName>Language__c</fullName>
         <description>It will hold the language from wish child</description>
         <externalId>false</externalId>
-        <formula>IF(INCLUDES( Wish__r.Contact.Language__c , &quot;American Sign Language&quot;), &quot;American Sign Language&quot;, NULL)  +
+        <formula>IF(INCLUDES( Wish__r.Contact.Language__c , "American Sign Language"), "American Sign Language", NULL)  +
 
-IF(INCLUDES( Wish__r.Contact.Language__c , &quot;Arabic&quot;), &quot;Arabic&quot;, NULL)  + &apos; &apos; + 
+IF(INCLUDES( Wish__r.Contact.Language__c , "Arabic"), "Arabic", NULL)  + ' ' + 
 
-IF(INCLUDES( Wish__r.Contact.Language__c , &quot;Chinese&quot;), &quot;Chinese&quot;, NULL)  + &apos; &apos; + 
+IF(INCLUDES( Wish__r.Contact.Language__c , "Chinese"), "Chinese", NULL)  + ' ' + 
 
-IF(INCLUDES( Wish__r.Contact.Language__c , &quot;English&quot;), &quot;English&quot;, NULL)  + &apos; &apos; + 
+IF(INCLUDES( Wish__r.Contact.Language__c , "English"), "English", NULL)  + ' ' + 
 
-IF(INCLUDES( Wish__r.Contact.Language__c , &quot;French and French Creole&quot;), &quot;French and French Creole&quot;, NULL)  + &apos; &apos; + 
+IF(INCLUDES( Wish__r.Contact.Language__c , "French and French Creole"), "French and French Creole", NULL)  + ' ' + 
 
-IF(INCLUDES( Wish__r.Contact.Language__c , &quot;German&quot;), &quot;German&quot;, NULL)  + &apos; &apos; + 
+IF(INCLUDES( Wish__r.Contact.Language__c , "German"), "German", NULL)  + ' ' + 
 
-IF(INCLUDES( Wish__r.Contact.Language__c , &quot;Hindi&quot;), &quot;Hindi&quot;, NULL)  + &apos; &apos; + 
+IF(INCLUDES( Wish__r.Contact.Language__c , "Hindi"), "Hindi", NULL)  + ' ' + 
 
-IF(INCLUDES( Wish__r.Contact.Language__c , &quot;Italian&quot;), &quot;Italian&quot;, NULL)  + &apos; &apos; + 
+IF(INCLUDES( Wish__r.Contact.Language__c , "Italian"), "Italian", NULL)  + ' ' + 
 
-IF(INCLUDES( Wish__r.Contact.Language__c , &quot;Japanese&quot;), &quot;Japanese&quot;, NULL)  + &apos; &apos; + 
+IF(INCLUDES( Wish__r.Contact.Language__c , "Japanese"), "Japanese", NULL)  + ' ' + 
 
-IF(INCLUDES( Wish__r.Contact.Language__c , &quot;Korean&quot;), &quot;Korean&quot;, NULL)  + &apos; &apos; + 
+IF(INCLUDES( Wish__r.Contact.Language__c , "Korean"), "Korean", NULL)  + ' ' + 
 
-IF(INCLUDES( Wish__r.Contact.Language__c , &quot;Polish&quot;), &quot;Polish&quot;, NULL)  + &apos; &apos; + 
+IF(INCLUDES( Wish__r.Contact.Language__c , "Polish"), "Polish", NULL)  + ' ' + 
 
-IF(INCLUDES( Wish__r.Contact.Language__c , &quot;Portuguese&quot;), &quot;Portuguese&quot;, NULL)  + &apos; &apos; +
+IF(INCLUDES( Wish__r.Contact.Language__c , "Portuguese"), "Portuguese", NULL)  + ' ' +
 
-IF(INCLUDES( Wish__r.Contact.Language__c , &quot;Russian&quot;), &quot;Russian&quot;, NULL)  + &apos; &apos; +
+IF(INCLUDES( Wish__r.Contact.Language__c , "Russian"), "Russian", NULL)  + ' ' +
 
-IF(INCLUDES( Wish__r.Contact.Language__c , &quot;Spanish&quot;), &quot;Spanish&quot;, NULL)  + &apos; &apos; + 
+IF(INCLUDES( Wish__r.Contact.Language__c , "Spanish"), "Spanish", NULL)  + ' ' + 
 
-IF(INCLUDES( Wish__r.Contact.Language__c , &quot;Tagalog&quot;), &quot;Tagalog&quot;, NULL)  + &apos; &apos; + 
+IF(INCLUDES( Wish__r.Contact.Language__c , "Tagalog"), "Tagalog", NULL)  + ' ' + 
 
-IF(INCLUDES( Wish__r.Contact.Language__c , &quot;Vietnamese&quot;), &quot;Vietnamese&quot;, NULL)  + &apos; &apos; + 
+IF(INCLUDES( Wish__r.Contact.Language__c , "Vietnamese"), "Vietnamese", NULL)  + ' ' + 
 
-IF(INCLUDES( Wish__r.Contact.Language__c , &quot;Other&quot;), &quot;Other&quot;, NULL)</formula>
+IF(INCLUDES( Wish__r.Contact.Language__c , "Other"), "Other", NULL)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Language</label>
         <required>false</required>
@@ -1536,13 +1535,13 @@ IF(INCLUDES( Wish__r.Contact.Language__c , &quot;Other&quot;), &quot;Other&quot;
         <fullName>NWE_Day_of_The_Week__c</fullName>
         <description>Formula to display no of Days in a week or total weeks</description>
         <externalId>false</externalId>
-        <formula>IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Sunday&quot;), &quot;Sunday&quot;, NULL)  +BR()+ 
-IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Monday&quot;), &quot;Monday&quot;, NULL)  + BR()+
-IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Tuesday&quot;), &quot;Tuesday&quot;, NULL)  + BR()+
-IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Wednesday&quot;), &quot;Wednesday&quot;, NULL)  + BR()+
-IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Thursday&quot;), &quot;Thursday&quot;, NULL)  + BR()+
-IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Friday&quot;), &quot;Friday&quot;, NULL)  + BR()+
-IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Saturday&quot;), &quot;Saturday&quot;, NULL)</formula>
+        <formula>IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , "Sunday"), "Sunday", NULL)  +BR()+ 
+IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , "Monday"), "Monday", NULL)  + BR()+
+IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , "Tuesday"), "Tuesday", NULL)  + BR()+
+IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , "Wednesday"), "Wednesday", NULL)  + BR()+
+IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , "Thursday"), "Thursday", NULL)  + BR()+
+IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , "Friday"), "Friday", NULL)  + BR()+
+IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , "Saturday"), "Saturday", NULL)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Day of The Week</label>
         <required>false</required>
@@ -1619,7 +1618,7 @@ IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Saturday&quot;), &qu
     <fields>
         <fullName>NameLink__c</fullName>
         <externalId>false</externalId>
-        <formula>HYPERLINK(&quot;/&quot;+  Wish__c , Name__c, &quot;_self&quot; )</formula>
+        <formula>HYPERLINK("/"+  Wish__c , Name__c, "_self" )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Name</label>
         <required>false</required>
@@ -1632,7 +1631,7 @@ IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Saturday&quot;), &qu
         <fullName>Name__c</fullName>
         <description>Used to display name of the non wish event</description>
         <externalId>false</externalId>
-        <formula>Wish__r.Contact.FirstName &amp; &apos; &apos; &amp; Wish__r.Contact.LastName</formula>
+        <formula>Wish__r.Contact.FirstName &amp; ' ' &amp; Wish__r.Contact.LastName</formula>
         <label>Name</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -1642,7 +1641,7 @@ IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Saturday&quot;), &qu
     </fields>
     <fields>
         <fullName>Non_Verbal__c</fullName>
-        <description>Its indicating wish&apos;s facilitating communication.</description>
+        <description>Its indicating wish's facilitating communication.</description>
         <externalId>false</externalId>
         <formula>Text(Wish__r.Contact.Non_Verbal__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -1670,7 +1669,7 @@ IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Saturday&quot;), &qu
     </fields>
     <fields>
         <fullName>Number_Of_Active_Wishes_For_This_Vol__c</fullName>
-        <description>The number of active wishes logged in this Contact&apos;s record. Note that this field is updated on the Contact record via code.</description>
+        <description>The number of active wishes logged in this Contact's record. Note that this field is updated on the Contact record via code.</description>
         <externalId>false</externalId>
         <formula>Volunteer_Name__r.Number_of_wishes_active__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -1736,8 +1735,8 @@ IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Saturday&quot;), &qu
     </fields>
     <fields>
         <fullName>RE_Role__c</fullName>
-        <description>&quot;VOLUNTEER_TYPE
-RECIP_RELATION_CODE&quot;</description>
+        <description>"VOLUNTEER_TYPE
+RECIP_RELATION_CODE"</description>
         <externalId>false</externalId>
         <label>RE Role</label>
         <length>255</length>
@@ -2337,9 +2336,9 @@ RECIP_RELATION_CODE&quot;</description>
                     <label>Single Day Event Volunteer</label>
                 </value>
                 <value>
-                    <fullName>Speaker&apos;s Bureau</fullName>
+                    <fullName>Speaker's Bureau</fullName>
                     <default>false</default>
-                    <label>Speaker&apos;s Bureau</label>
+                    <label>Speaker's Bureau</label>
                 </value>
                 <value>
                     <fullName>Special Events - Committee Member</fullName>
@@ -2405,7 +2404,7 @@ RECIP_RELATION_CODE&quot;</description>
         <fullName>Wish_Child_Name__c</fullName>
         <description>The name of the Contact associated with the Wish Case; i.e., the name of the Wish Child.</description>
         <externalId>false</externalId>
-        <formula>Wish__r.Contact.FirstName + &quot; &quot; +  Wish__r.Contact.LastName</formula>
+        <formula>Wish__r.Contact.FirstName + " " +  Wish__r.Contact.LastName</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Wish Child Name</label>
         <required>false</required>
@@ -2417,7 +2416,7 @@ RECIP_RELATION_CODE&quot;</description>
     <fields>
         <fullName>Wish_Child__c</fullName>
         <externalId>false</externalId>
-        <formula>Wish__r.Contact.Hidden_First_Name__c &amp; &quot; &quot; &amp; Wish__r.Contact.Hidden_Last_Name__c</formula>
+        <formula>Wish__r.Contact.Hidden_First_Name__c &amp; " " &amp; Wish__r.Contact.Hidden_Last_Name__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Wish Child</label>
         <required>false</required>
@@ -2500,7 +2499,7 @@ RECIP_RELATION_CODE&quot;</description>
     </fields>
     <fields>
         <fullName>of_Days_until_Approved__c</fullName>
-        <description>Displays the Number of days between the &apos;Created&apos; Date and &apos;Approved&apos; Date</description>
+        <description>Displays the Number of days between the 'Created' Date and 'Approved' Date</description>
         <externalId>false</externalId>
         <formula>IF(Isblank(Approved_Date__c)=FALSE,Approved_Date__c - Datevalue(CreatedDate),NULL)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -4394,20 +4393,20 @@ RECIP_RELATION_CODE&quot;</description>
         <fullName>Vol_Opp_Do_Not_Create_for_Closed_Wish</fullName>
         <active>true</active>
         <description>Should not create volunteer opportunity for Closed Wish.</description>
-        <errorConditionFormula>Wish__r.IsClosed=True &amp;&amp; ISNEW() &amp;&amp; $Profile.Name  != &apos;Integration&apos;</errorConditionFormula>
+        <errorConditionFormula>Wish__r.IsClosed=True &amp;&amp; ISNEW() &amp;&amp; $Profile.Name  != 'Integration'</errorConditionFormula>
         <errorMessage>You cannot create volunteer opportunity for closed wish.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Volunteer_Opp_Hold_Status</fullName>
         <active>true</active>
-        <errorConditionFormula>AND(ISCHANGED( Status__c ), NOT(Hidden_allow_Hold_status__c), ISPICKVAL(Status__c , &apos;Hold&apos;) )</errorConditionFormula>
+        <errorConditionFormula>AND(ISCHANGED( Status__c ), NOT(Hidden_allow_Hold_status__c), ISPICKVAL(Status__c , 'Hold') )</errorConditionFormula>
         <errorMessage>Hold is a system-generated status and cannot be manually assigned.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Volunteer_Opp_Inactive_Status</fullName>
         <active>true</active>
-        <description>This validation will fire when the Volunteer Opportunity status is &apos;Inactive&apos; and Inactive field is unchecked.</description>
-        <errorConditionFormula>AND(ISPICKVAL(Status__c,&apos;Inactive&apos;),Inactive__c = false )</errorConditionFormula>
+        <description>This validation will fire when the Volunteer Opportunity status is 'Inactive' and Inactive field is unchecked.</description>
+        <errorConditionFormula>AND(ISPICKVAL(Status__c,'Inactive'),Inactive__c = false )</errorConditionFormula>
         <errorMessage>Please check the Inactive check box.</errorMessage>
     </validationRules>
     <validationRules>
@@ -4418,38 +4417,6 @@ RECIP_RELATION_CODE&quot;</description>
         <errorMessage>Please enter the value for Reason Inactive</errorMessage>
     </validationRules>
     <visibility>Public</visibility>
-    <webLinks>
-        <fullName>Move_to_Historical</fullName>
-        <availability>online</availability>
-        <description>When the button is clicked, the volunteer opportunity is moved to historical tab.</description>
-        <displayType>button</displayType>
-        <linkType>javascript</linkType>
-        <masterLabel>Move to Historical</masterLabel>
-        <openType>onClickJavaScript</openType>
-        <protected>false</protected>
-        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)} 
-{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)} 
-
-var isCheck = sforce.apex.execute(&quot;MovetoHistorical&quot;,&quot;CheckHistoricalRole&quot;, {VolunteerOpportunityId:&apos;{!Volunteer_Opportunity__c.Id}&apos;}); 
-if(isCheck == &apos;true&apos;){	
-if(confirm(&quot;I have completed all related tasks and want to move this assignment to my historical assignments. Once “OK” is selected, you will no longer have access to the wish.&quot;) == true){
-var message = &apos;&apos;;
-message = sforce.apex.execute(&quot;MovetoHistorical&quot;,&quot;UpdateVolunteerOpportunity&quot;, {VolunteerOpportunityId:&apos;{!Volunteer_Opportunity__c.Id}&apos;}); 
-   if(message == &apos;Success&apos;){
-     window.location.href = &apos;{!$Site.BaseUrl}/MyAssignment_VF&apos;; 
-   }
-   else{
-      alert(message);
-   }
-}
-else{
-    window.location.href = &apos;{!$Site.BaseUrl}/MyAssignment_VF&apos;; 
-}
-}
-else{
-    alert(&apos;You don\&apos;t have the permission to move this volunteer opportunity to historical.&apos;);
-}</url>
-    </webLinks>
     <webLinks>
         <fullName>Register</fullName>
         <availability>online</availability>
