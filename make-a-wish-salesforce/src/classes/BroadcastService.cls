@@ -46,9 +46,7 @@ public class BroadcastService {
 		]) {
 			if (ROLE_NATIONAL_STAFF.equals(broadcast.Owner.UserRole.Name)) {
 				if (!broadcastShareMap.containsKey(broadcast.Chapter_Name__r.Name)) {
-					broadcastShareMap.put(broadcast.Chapter_Name__r.Name, new List<Broadcast__c>{
-							broadcast
-					});
+					broadcastShareMap.put(broadcast.Chapter_Name__r.Name, new List<Broadcast__c>{});
 				}
 				broadcastShareMap.get(broadcast.Chapter_Name__r.Name).add(broadcast);
 			}
@@ -70,9 +68,7 @@ public class BroadcastService {
 			if (currRec.OwnerId != oldBroadcastMap.get(currRec.Id).OwnerId) {
 				if (ROLE_NATIONAL_STAFF.equals(currRec.Owner.UserRole.Name)) {
 					if (!broadcastShareMap.containsKey(currRec.Chapter_Name__r.Name)) {
-						broadcastShareMap.put(currRec.Chapter_Name__r.Name, new List<Broadcast__c>{
-								currRec
-						});
+						broadcastShareMap.put(currRec.Chapter_Name__r.Name, new List<Broadcast__c>{});
 					}
 					broadcastShareMap.get(currRec.Chapter_Name__r.Name).add(currRec);
 				}
