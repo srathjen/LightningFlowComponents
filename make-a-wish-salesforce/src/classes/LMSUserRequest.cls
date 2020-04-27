@@ -1,14 +1,22 @@
 /* Created by : MST
 Description : This class will be used to create JSON for LMS User Request Call.
 */
-public class LMSUserRequest{
-    public String login;    //sailappa@test.com
-    public String first_name;   //sailappa
-    public String last_name;    //pg
-    public String email;    //sailappar@test.com
-    public String password; //sailappa
-    public String chapter_id; //sailappa
-    public static LMSUserRequest parse(String json){
+public class LMSUserRequest {
+    public String login;
+    public String first_name;
+    public String last_name;
+    public String email;
+    public String password;
+    public String chapter_id;
+
+    /**
+     * @description
+     *
+     * @param json
+     *
+     * @return
+     */
+    public static LMSUserRequest parse(String json) {
         return (LMSUserRequest) System.JSON.deserialize(json, LMSUserRequest.class);
     }
 }
