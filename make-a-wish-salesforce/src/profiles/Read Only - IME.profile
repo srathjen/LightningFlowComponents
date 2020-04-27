@@ -20,38 +20,17 @@
         <apexClass>AddVolunteerRole_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>AffiliationTrigger_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>Affiliation_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>Affiliation_BeforeUpdateTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Affiliation_OnAfterDeleteTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Affiliation_OnAfterDeleteTriggerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Affiliation_OnAfterUpdateTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Affiliation_OnAfterUpdateTriggerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Affiliation_OnBeforeInsertTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>ApexDebugLog</apexClass>
         <enabled>true</enabled>
@@ -76,30 +55,15 @@
         <apexClass>ApplyForRoles_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>AttachmentUploadController</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>AttachmentUploadController_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
     <classAccesses>
         <apexClass>AwardsRecognitionTrigger_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>AwardsRecognition_OnAfterInsertHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>AwardsRecognition_OnAfterInsertHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>AwardsRecognition_OnAfterUpdateHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
     <classAccesses>
         <apexClass>BackGroundCheck_AT_Test</apexClass>
         <enabled>false</enabled>
@@ -127,33 +91,15 @@
         <apexClass>Background_CheckBeforeDelete_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>BatchRelationshipRecUpdate</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>BatchRelationshipRecUpdate_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
     
     
     
-    <classAccesses>
-        <apexClass>Batch_UpdateChildCaseOwner_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Batch_UpdateChildCaseOwner_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Batch_UpdateChildCaseTeamMember_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Batch_UpdateChildWishCaseTeamMember_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>Batch_UpdateVolunteerRoleStatus_AC</apexClass>
         <enabled>false</enabled>
@@ -162,14 +108,8 @@
         <apexClass>Batch_UpdateVolunteerRoleStatus_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>Batch_UpdateVolunteerStatusSchedule_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Batch_UpdateVolunteerStatusSchedule_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
     <classAccesses>
         <apexClass>Batch_UpdateVolunteerStatus_AC</apexClass>
         <enabled>false</enabled>
@@ -245,38 +185,14 @@
         <apexClass>CaseTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>Case_OnAfterInsertTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Case_OnAfterInsertTriggerHandlerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Case_OnAfterUpdateTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Case_OnAfterUpdateTriggerHandlerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Case_OnBeforeInsertTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Case_OnBeforeInsertTriggerHandlerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Case_OnBeforeUpdateTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Case_OnBeforeUpdateTriggerHandlerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>Case_Trigger_Test</apexClass>
         <enabled>false</enabled>
@@ -300,18 +216,9 @@
         <apexClass>ChapterChangeConfirmationPopup_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>ChapterRoleOT_OnAfterInsertHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ChapterRoleOT_OnAfterInsertHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ChapterRoleOT_OnAfterUpdateHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
     <classAccesses>
         <apexClass>ChapterRoleOT_Test</apexClass>
         <enabled>false</enabled>
@@ -320,18 +227,9 @@
         <apexClass>ChapterRoleTrigger_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>ChapterRole_OnBeforeInsertHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ChapterRole_OnBeforeInsertHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ChapterRole_OnBeforeUpdateHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
     <classAccesses>
         <apexClass>ChapterStaffRecordSharing_AC</apexClass>
         <enabled>false</enabled>
@@ -400,22 +298,13 @@
         <apexClass>Constant_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>ContactConstituentCodeTrigger_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>ContactFile_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>ContactInfo_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ContactInfo_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
     <classAccesses>
         <apexClass>ContactMergeController_AC</apexClass>
         <enabled>false</enabled>
@@ -436,50 +325,17 @@
         <apexClass>ContactTrigger_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>Contact_OnAfterInsertTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Contact_OnAfterInsertTriggerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Contact_OnAfterUpdateTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Contact_OnAfterUpdateTriggerHepler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Contact_OnBeforeDeleteTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Contact_OnBeforeDeleteTriggerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Contact_OnBeforeInsertTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Contact_OnBeforeUpdateTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Contact_OnBeforeUpdateTriggerHandlerTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Contact_OnBeforeUpdateTriggerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Contact_OnBeforeUpdateTriggerHelper_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>CreateNewWish_AC</apexClass>
         <enabled>false</enabled>
@@ -565,38 +421,17 @@
         <apexClass>DocusignRecipientTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>DocusignRecipient_OnAfterInsertHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DocusignRecipient_OnAfterInsertHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DocusignRecipient_OnAfterUpdateHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DocusignRecipient_OnAfterUpdateHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DocusignStatusTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>DocusignStatusTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>DriverJason2Apex</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DynamicContentHanlder</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
     <classAccesses>
         <apexClass>DynamicContent_ATTest</apexClass>
         <enabled>false</enabled>
@@ -659,10 +494,7 @@
         <apexClass>InKindReimbursementApproval_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>InactiveVolunteerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>InactiveVolunteerHandlerTest</apexClass>
         <enabled>false</enabled>
@@ -771,10 +603,7 @@
         <apexClass>LeadSelectMedEmailController_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>LeadTriggerHandler_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>LeadTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
@@ -865,18 +694,9 @@
         <apexClass>NonWishEvents_ATTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>NonwishEvent_OnBeforeInsertHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>NonwishEvent_OnBeforeInsertHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>NonwishEvent_OnBeforeUpdateHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
     <classAccesses>
         <apexClass>OTUB_UpdateVolUserStatusOnBGCOI_AC</apexClass>
         <enabled>false</enabled>
@@ -889,10 +709,7 @@
         <apexClass>OrientationTraining_ATTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>OrientationTraining_AT_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>OrientationandTrainingUtil</apexClass>
         <enabled>false</enabled>
@@ -1031,38 +848,14 @@
         <apexClass>TaskTrigger_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>Task_OnAfterInsertHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Task_OnAfterInsertHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Task_OnAfterUpdateHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Task_OnAfterUpdateHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Task_OnBeforeInsertHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Task_OnBeforeInsertHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Task_OnBeforeUpdateHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Task_OnBeforeUpdateHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>TestClassUtil</apexClass>
         <enabled>false</enabled>
@@ -1075,10 +868,7 @@
         <apexClass>TestDataUtility_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>TimeSheetTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>TimeSheetTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
@@ -1103,18 +893,9 @@
         <apexClass>UIThemeControllerTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>UpdatAffiliationAsInactiveBatch_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>UpdatAffiliationAsInactiveBatch_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>UpdatAffiliationAsInactiveSchedule_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
     <classAccesses>
         <apexClass>UpdateWishAssignmentBatchTest_AC</apexClass>
         <enabled>false</enabled>
@@ -1123,38 +904,17 @@
         <apexClass>UpdateWishFamily_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>UserRoleUtility</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>UserTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>User_OnAfterInsertHandler_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>User_OnAfterInsertHelper_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>User_OnAfterUpdateHandler_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>User_OnAfterUpdateHelper_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>User_OnBeforeInsertHandler_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>User_OnBeforeUpdateHandler_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>Utils</apexClass>
         <enabled>false</enabled>
@@ -1163,46 +923,16 @@
         <apexClass>Utils_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>VolOpportunity_OnAfter_Delete_Handler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>VolOpportunity_OnAfter_Delete_Hepler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>VolOpportunity_OnAfter_Insert_Handler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>VolOpportunity_OnAfter_Insert_Helper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>VolOpportunity_OnAfter_Update_Handler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>VolOpportunity_OnAfter_Update_Helper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>VolOpportunity_OnAfter_Update_HelperTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>VolOpportunity_OnBefore_Delete_Handler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>VolOpportunity_OnBefore_Delete_Helper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>VolOpportunity_OnBefore_Update_Handler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>VolunteerActiveTraining_AC</apexClass>
         <enabled>false</enabled>
@@ -1219,10 +949,7 @@
         <apexClass>VolunteerActivities_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>VolunteerContactHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>VolunteerInterviewTask_AC</apexClass>
         <enabled>false</enabled>
@@ -1251,14 +978,8 @@
         <apexClass>VolunteerLanding_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>VolunteerOandTHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>VolunteerOandTTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
     <classAccesses>
         <apexClass>VolunteerOandTTriggerHandler_Test</apexClass>
         <enabled>false</enabled>
@@ -1271,10 +992,7 @@
         <apexClass>VolunteerOpportunitySelection_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>VolunteerOpportunityTriggerHandler_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>VolunteerOpportunityTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
@@ -1299,30 +1017,12 @@
         <apexClass>VolunteerRole_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>VolunteerRole_OnAfterInsertHandler_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>VolunteerRole_OnAfterInsertHelper_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>VolunteerRole_OnAfterUpdateHandler_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>VolunteerRole_OnAfterUpdateHelper_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>VolunteerRole_OnBeforeInsertHandler_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>VolunteerRole_OnBeforeUpdateHandler_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>VolunteerSignUp_AC</apexClass>
         <enabled>false</enabled>
@@ -1497,14 +1197,8 @@
         <apexClass>batch_BGCExpReminder_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>batch_BUpdateAffiliation_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_BUpdateAffiliation_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
     
     <classAccesses>
         <apexClass>batch_COIExpReminder_AC</apexClass>
@@ -1514,14 +1208,8 @@
         <apexClass>batch_COIExpReminder_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>batch_CaseTeamMemberUpdate</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_CaseTeamMemberUpdateTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
     
     <classAccesses>
         <apexClass>batch_CheckBGCheckExpiration_AC_Test</apexClass>
@@ -1551,14 +1239,8 @@
         <apexClass>batch_LeadChildAgeTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>batch_UpdatAffiliationStatus</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_UpdatAffiliationStatus_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
     <classAccesses>
         <apexClass>batch_UpdatLastEduDate</apexClass>
         <enabled>false</enabled>
@@ -1571,10 +1253,7 @@
         <apexClass>batch_UpdatLastEduDateforVO</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>batch_UpdateLastEngageSchedule_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>batch_UpdateVolunteerLastEngage</apexClass>
         <enabled>false</enabled>
@@ -1591,14 +1270,8 @@
         <apexClass>batch_VolunteerRoleUpdate_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>batch_addCaseTeamMemonSC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_addCaseTeamMemonSCTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
     <classAccesses>
         <apexClass>batch_changeVolunOppSatus</apexClass>
         <enabled>false</enabled>
@@ -1615,14 +1288,8 @@
         <apexClass>batch_leadChildAge</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>batch_sendAgeNotificationSchedule_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_sendAgeNotificationSchedule_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
     <classAccesses>
         <apexClass>batch_sendAgeNotificationToCaseOwner_AC</apexClass>
         <enabled>false</enabled>
