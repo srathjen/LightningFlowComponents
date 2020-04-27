@@ -23,6 +23,9 @@
 //                04/17/2020 - Manoj - SIW-575
 //                Removed Primary language validation from here as applied in VF Page itself
 //
+//                27/04/2020 - Manoj - SIW-556
+//                Updated text even when users select No in question "HAS THE REFERRAL BEEN DISCUSSED WITH THE CHILD'S HEALTHCARE PROVIDER?"
+//
 // format phone/date fields
 // target desktop
 // if (window.matchMedia("(min-width: 47.5rem)").matches) {
@@ -326,7 +329,7 @@ function formLogic() {
             $('.medprovcat-other').val('');
             if (labelsAvailable > -1) {
                 $(this).next('.familyAwareError').text(familyAwareError).append($(link));
-                $('.shownOnYes').addClass('fam-aware-overlay');
+                //$('.shownOnYes').addClass('fam-aware-overlay');
                 if (labelName == " Medical Professional") {
                     $('.medicalProvider').css('display', 'none');
                 }
@@ -349,7 +352,7 @@ function formLogic() {
                 $('.r2c-manual-input').parent().parent().removeClass('displayNone').css('display', 'block');
             }
         } else {
-            $('.shownOnYes').addClass('fam-aware-overlay');
+            //$('.shownOnYes').addClass('fam-aware-overlay');
             $('.familyAwareError').css('display', 'none');
         }
     });
@@ -363,8 +366,15 @@ function formLogic() {
             $('.medprovcat-other-wrap').css('display', 'none');
             $('.medprovcat-other').val('');
             if (labelsAvailable > -1) {
+                //SIW-556 Start : Added if-else condition to update text
+				if (labelName == " Other" || labelName == " Medical Professional") {
                 $(this).next('.discussedProviderError').text(referralDiscussedError).append($(link));
-                $('.shownOnYes').addClass('fam-aware-overlay');
+                }
+                else{
+                    $(this).next('.discussedProviderError').text(referralDiscussedError).append($(link)).append('. '+refDisAddError);  
+                }
+                //SIW-556 End
+                //$('.shownOnYes').addClass('fam-aware-overlay');
                 if (labelName == " Medical Professional") {
                     $('.medicalProvider').css('display', 'none');
                 }
@@ -386,7 +396,7 @@ function formLogic() {
                 $('.r2c-manual-input').parent().parent().removeClass('displayNone').css('display', 'block');
             }
         } else {
-            $('.shownOnYes').addClass('fam-aware-overlay');
+            //$('.shownOnYes').addClass('fam-aware-overlay');
             $('.discussedProviderError').css('display', 'none');
         }
     });
@@ -642,7 +652,7 @@ function formLogic() {
         }
         // hidden but still validates based off birthdate selection
         $('[id$=wcage]').parents('.form-group').addClass('sr-only');
-        $('.shownOnYes').addClass('fam-aware-overlay');
+        //$('.shownOnYes').addClass('fam-aware-overlay');
         $('.familyAwareError').css('display', 'none');
         dateLogic();
         $('.medprovcat-other-wrap, .other, .main-office-contact, .medical-additional-info').css('display', 'none');
