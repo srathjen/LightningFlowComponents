@@ -287,6 +287,8 @@ public class Constant_AC {
 	public final static String VOLUNTEER_ROLE_STATUS_PENDING_TRAINING = 'Pending Training';
 	public final static String VOLUNTEER_ROLE_STATUS_MISSING_REQUIREMENT = 'Missing Requirement';
 	public final static String VOLUNTEER_ROLE_SUB_STATUS_UNDER_CHAPTER_REVIEW = 'Under Chapter Review';
+	public final static String VOLUNTEER_ROLE_SUB_STATUS_CHAPTER = 'Chapter';
+	public final static String VOLUNTEER_ROLE_SUB_STATUS_VOLUNTEER = 'Volunteer';
 	public final static String VOLUNTEER_ROLE_ATTENDANCE_COMPLETED = 'Completed';
 
 	/**
@@ -482,6 +484,8 @@ public class Constant_AC {
 	public static final String BACKGROUND_CHECK_STATUS_REJECTED = 'Rejected';
 	public static final String BACKGROUND_CHECK_STATUS_FIRST_ADVANTAGE = 'Received from First Advantage';
 	public static final String BACKGROUND_CHECK_STATUS_MANUAL = 'Manual';
+	public static final String BACKGROUND_CHECK_RESIDED_IN_US_FOR_PAST_7_YEARS_YES = 'Yes';
+	public static final String BACKGROUND_CHECK_RESIDED_IN_US_FOR_PAST_7_YEARS_NO = 'No';
 
 	/**
 	 * Wish Expense Constants
