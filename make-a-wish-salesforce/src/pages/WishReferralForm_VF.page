@@ -6,6 +6,8 @@
 // 31/03/2020 - Manoj - SIW-370 Make Primary language as required field
 // 14/04/2020 - Manoj - SIW-569 Changed unsupported method 'includes' to 'indexOf' for IE11 issue
 // 17/04/2020 - Manoj - SIW-575 Modified methods 'languageselection' and 'checkPrimLangRequired' for Mobile issue
+// 27/04/2020 - Manoj - SIW-556 : Modified method 'getInputValue' to allow users to proceed even when select No in question "HAS THE REFERRAL BEEN DISCUSSED WITH THE CHILD'S HEALTHCARE PROVIDER?"
+
 -->
 
 <apex:page controller="WishReferralForm_AC" showHeader="false" applyBodyTag="false" sidebar="false" standardStylesheets="false" docType="html-5.0" cache="false">
@@ -188,7 +190,7 @@
                     <div class="form-group row" style="display: none;" id="healthProvider">
                         <label class="col-sm-3">{!$Label.Wish_Referral_Discussed_Healthcare_Provider}</label>
                         <div class="col-sm-6">
-                            <apex:inputField value="{!currLead.is_Family_Aware_of_Referral__c}"  styleClass="form-control col-xs-12 c-select required discussedProvider searchField" id="discussed-with-provider" onchange="getInputValue();"><!--SIW-487: Added new field to capture the response-->
+                            <apex:inputField value="{!currLead.Is_wish_referral_discussed_health_del__c}"  styleClass="form-control col-xs-12 c-select required discussedProvider searchFieldDis" id="discussed-with-provider" onchange="getInputValue();"><!--SIW-487: Added new field to capture the response-->
                             </apex:inputField>
                             <span class="discussedProviderError text-muted" id="hhh"></span>
                         </div>
@@ -196,7 +198,7 @@
                     <div class="form-group row" style="display: none;">
                         <label class="col-sm-3">{!$Label.Wish_Referral_Is_Family_Aware_of_Referral}</label>
                         <div class="col-sm-6">
-                            <apex:inputField value="{!currLead.is_Family_Aware_of_Referral__c}"  styleClass="form-control col-xs-12 c-select familyAware searchField" id="aware-of-referral" onchange="getInputValue();">
+                            <apex:inputField value="{!currLead.is_Family_Aware_of_Referral__c}"  styleClass="form-control col-xs-12 c-select familyAware searchFieldAwa" id="aware-of-referral" onchange="getInputValue();">
                             </apex:inputField>
                             <span class="familyAwareError text-muted"></span>
                         </div>
@@ -882,24 +884,36 @@
                         document.getElementById('remail1div').style.display = '';
                         document.getElementById('healthProvider').style.display = 'none';                        
                     }
-                if(val == 'Parent/Guardian') {
+                if(val == 'Parent/Guardian') {                    
                     $(".shownOnYes").addClass("fam-aware-overlay");
                 }
             }
+            //SIW-556 : Modified this method to allow users to proceed even when select No in question "HAS THE REFERRAL BEEN DISCUSSED WITH THE CHILD'S HEALTHCARE PROVIDER?"
             function getInputValue(){   
                 // Selecting the input element and get its value document.querySelector('.searchField').value;   
-                var inputVal1 = document.querySelectorAll(".searchField");         
-                if(rel=='Self' || rel=='Parent/Guardian' || rel=='Family Member/Relative')
-                {
-                    if(inputVal1[0].value == 'Yes' && inputVal1[1].value == 'Yes'){
-                        $(".shownOnYes").removeClass("fam-aware-overlay")
+                var inputVal1 = document.querySelectorAll(".searchFieldDis"); 
+                var inputVal2 = document.querySelectorAll(".searchFieldAwa");               
+                
+                if(rel=='Self' || rel=='Family Member/Relative')
+                {                    
+                        if(inputVal2[0].value == 'Yes'){ 
+                            if(inputVal1[0].value == 'Yes' || inputVal1[0].value == 'No')  {
+                                $(".shownOnYes").removeClass("fam-aware-overlay") 
+                            }    else{
+                            $(".shownOnYes").addClass("fam-aware-overlay")
+                        }             
+                                              
                     }
-                    else{
-                        $(".shownOnYes").addClass("fam-aware-overlay")
-                    }
+                        else{
+                            $(".shownOnYes").addClass("fam-aware-overlay")
+                        }
                 }
-                else{
-                    if(inputVal1[0].value == 'Yes' || inputVal1[1].value == 'Yes'){
+                else if(rel == 'Parent/Guardian') {
+                    $(".shownOnYes").removeClass("fam-aware-overlay")
+                           
+                }
+                else{                    
+                    if(inputVal1[0].value == 'Yes' || inputVal2[0].value == 'Yes'){
                         $(".shownOnYes").removeClass("fam-aware-overlay")
                     }
                     else{
