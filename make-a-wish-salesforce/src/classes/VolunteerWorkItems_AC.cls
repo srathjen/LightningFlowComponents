@@ -88,6 +88,7 @@ public class VolunteerWorkItems_AC {
 		volunteerChaptersSet = new Set<Id>();
 		Volunteer_Opportunity__c volRec = (Volunteer_Opportunity__c) controller.getRecord();
 		volunteerOpportunityRecordId = volRec.Id;
+		
 		User currentUser = Utils.currentUser;
 		userRelatedContactId = currentUser.ContactId;
 		chaptersList = [
