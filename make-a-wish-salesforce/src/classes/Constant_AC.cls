@@ -217,6 +217,8 @@ public class Constant_AC {
 	public static final String CONTACT_PHONE_OTHER = 'Other';
 	public static final String CONTACT_PHONE_WORK = 'Work';
 	public static final String CONTACT_PREFERRED_EMAIL_WORK = 'Work';
+	public static final String CONTACT_PREFERRED_EMAIL_PERSONAL = 'Personal';
+	public static final String CONTACT_PREFERRED_EMAIL_ALTERNATE = 'Alternate';
 	public static final String CONTACT_FIRSTNAME_API_NAME = 'FirstName';
 	public static final String CONTACT_LASTNAME_API_NAME = 'LastName';
 	public static final String CONTACT_BIRTHDATE_API_NAME = 'Birthdate';

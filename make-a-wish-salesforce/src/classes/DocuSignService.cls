@@ -117,7 +117,7 @@ public class DocuSignService {
 		}
 		String authorizationHeader =
 				'<DocuSignCredentials><Username>{!$Credential.Username}</Username><Password>{!$Credential.Password}</Password><IntegratorKey>'
-				+ IntegratorKey + '</IntegratorKey></DocuSignCredentials>';
+						+ IntegratorKey + '</IntegratorKey></DocuSignCredentials>';
 		String boundary = 'AAA';
 		String body = '{' +
 				'  "status":"sent",' +
@@ -197,8 +197,10 @@ public class DocuSignService {
 			account = credentialIns.account__c;
 			IntegratorKey = credentialIns.IntegratorKey__c;
 		}
+
 		String authorizationHeader = '<DocuSignCredentials><Username>{!$Credential.Username}</Username><Password>{!$Credential.Password}</Password><IntegratorKey>'
 				+ IntegratorKey + '</IntegratorKey></DocuSignCredentials>';
+
 		HttpRequest request = new HttpRequest();
 		request.setHeader('X-DocuSign-Authentication', authorizationHeader);
 		request.setHeader('Accept', 'application/json');
@@ -220,6 +222,130 @@ public class DocuSignService {
 				'}';
 		request.setBody(jsonPayload);
 		response = httprequest.send(request);
+		return response;
+	}
+
+	public static HttpResponse createEnvelope(Contact volunteercon) {
+		String account;
+		String IntegratorKey;
+		String log;
+		Map<String, DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
+		for (DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()) {
+			account = credentialIns.account__c;
+			IntegratorKey = credentialIns.IntegratorKey__c;
+		}
+		String authorizationHeader = '<DocuSignCredentials><Username>{!$Credential.Username}</Username><Password>{!$Credential.Password}</Password><IntegratorKey>' + IntegratorKey + '</IntegratorKey></DocuSignCredentials>';
+		String boundary = 'AAA';
+		PageReference PDF = Page.ConflictOfInterestPage_PDF_VF;
+		PDF.getParameters().put('id', volunteercon.Id);
+		String documentPDF;
+		try {
+			documentPDF = EncodingUtil.base64Encode(PDF.getContentAsPDF());
+		} catch (Exception e) {
+			new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerLanding_AC', 'confirmConflict', null, e, log));
+		}
+		String body = '{' +
+				'  "status":"sent",' +
+				'  "enableWetSign": "false",' +
+				'  "emailBlurb":"",' +
+				'  "emailSubject": "Please review & act on these document",' +
+				'  "enforceSignerVisibility":"True",' +
+				'  "documents": [{' +
+				'      "name": "document.pdf",' +
+				'      "documentId":"1",' +
+				'      "order":"1",' +
+				'      "documentBase64":"' + documentPDF + '"' +
+				'  }],' +
+				'"recipients": {' +
+				'    "signers" : [{' +
+				'      "email": "' + volunteercon.Email + '",' +
+				'      "name": "' + volunteercon.Name + '",' +
+				'      "recipientId":"1",' +
+				'      "clientUserId":"1",' +
+				'      "tabs": {' +
+				'                "signHereTabs": [{' +
+				'                    "anchorString": "~s1",' +
+				'                    "anchorXOffset": "0.1",' +
+				'                    "anchorYOffset": "0.1",' +
+				'                    "anchorIgnoreIfNotPresent": "false",' +
+				'                    "anchorUnits": "inches"' +
+				'                }],' +
+				'                "dateSignedTabs": [{' +
+				'                      "anchorString": "~date",' +
+				'                       "anchorXOffset": "0",' +
+				'                       "fontSize":      "Size14",' +
+				'                       "fontColor":     "Black",' +
+				'                        "anchorYOffset": "0",' +
+				'                        "anchorIgnoreIfNotPresent": "false",' +
+				'                        "xPosition": "100",' +
+				'                        "yPosition": "72",' +
+				'                        "anchorUnits": "inches"' +
+				'                    }]' +
+				'            }' +
+				'    }]' +
+				'  }' +
+				'}';
+
+		String header = '--' + boundary + '\nContent-Type: application/json\nContent-Disposition: form-data';
+		String jsonBody = header + '\n\n' + body + '\n\n--' + boundary + '--';
+		HttpRequest req = new HttpRequest();
+		req.setHeader('X-DocuSign-Authentication', authorizationHeader);
+		req.setHeader('Accept', 'application/json');
+		req.setHeader('Host', 'demo.docusign.net');
+		req.setHeader('Content-Length', '162100');
+		req.setHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
+		req.setEndpoint('Callout:Docusign_Credential/accounts/' + account + '/envelopes');
+		req.setMethod('POST');
+		req.setBody(jsonBody);
+		Http http = new Http();
+		HttpResponse res = new HttpResponse();
+		log = String.valueOf(req);
+		if (!Test.isRunningTest()) {
+			res = http.send(req);
+		} else {
+			res.setStatusCode(200);
+			res.setBody('{"envelopeId":"Test"}');
+		}
+		return res;
+	}
+
+	public static HttpResponse createRecipient(Contact volunteercon, String envelopeId, String returnUrl) {
+		String account;
+		String IntegratorKey;
+		String log;
+		Map<String, DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
+		for (DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()) {
+			account = credentialIns.account__c;
+			IntegratorKey = credentialIns.IntegratorKey__c;
+		}
+		String authorizationHeader = '<DocuSignCredentials><Username>{!$Credential.Username}</Username><Password>{!$Credential.Password}</Password><IntegratorKey>' + IntegratorKey + '</IntegratorKey></DocuSignCredentials>';
+		HttpRequest request = new HttpRequest();
+		request.setHeader('X-DocuSign-Authentication', authorizationHeader);
+		request.setHeader('Accept', 'application/json');
+		request.setHeader('Host', 'demo.docusign.net');
+		request.setHeader('Content-Length', '162100');
+		request.setHeader('Content-Type', 'application/json');
+		request.setMethod('POST');
+		Http httprequest = new Http();
+		HttpResponse response = new HttpResponse();
+		request.setEndpoint('Callout:Docusign_Credential/accounts/' + account + '/envelopes/' + envelopeId + '/views/recipient');
+		String jsonPayload;
+		jsonPayload = '{' +
+				'    "userName": "' + volunteercon.Name + '",' +
+				'    "email": "' + volunteercon.Email + '",' +
+				'    "recipientId": "1",' +
+				'    "clientUserId": "1",' +
+				'    "authenticationMethod": "None",' +
+				'    "returnUrl": "' + Endpoints__c.getInstance().Site_URL__c + '/' + returnUrl + '"' +
+				'}';
+		request.setBody(jsonPayload);
+		log = String.valueOf(request);
+		if (!Test.isRunningTest()) {
+			response = httprequest.send(request);
+		} else {
+			response.setStatusCode(200);
+			response.setBody('{"url":"Test"}');
+		}
 		return response;
 	}
 }
