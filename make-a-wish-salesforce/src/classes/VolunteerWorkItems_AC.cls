@@ -11,6 +11,13 @@ Volunteer opportunities that are assigned to the current loged in volunteer user
 public class VolunteerWorkItems_AC {
 
 	private final static String VOLUNTEER_ROLE_STATUS_ACTIVE = Constant_AC.VOLUNTEER_ROLE_STATUS_ACTIVE;
+	private final static String VOLUNTEER_OPPORTUNITY_STATUS_PENDING = Constant_AC.VOLUNTEER_OPPORTUNITY_STATUS_PENDING;
+	private final static String VOLUNTEER_OPPORTUNITY_STATUS_APPROVED = Constant_AC.VOLUNTEER_OPPORTUNITY_STATUS_APPROVED;
+	private final static String VOLUNTEER_OPPORTUNITY_STATUS_COMPLETED = Constant_AC.VOLUNTEER_OPPORTUNITY_STATUS_COMPLETED;
+	private final static String VOLUNTEER_OPPORTUNITY_ROLE_WISH_GRANTER = Constant_AC.VOLUNTEER_OPPORTUNITY_ROLE_WISH_GRANTER;
+	private final static String VOLUNTEER_ROLE_STATUS_MISSING_REQUIREMENT = Constant_AC.VOLUNTEER_ROLE_STATUS_MISSING_REQUIREMENT;
+	private final static String VOLUNTEER_OPPORTUNITY_ROLE_WISH_GRANTER_MENTOR = Constant_AC.VOLUNTEER_OPPORTUNITY_ROLE_WISH_GRANTER_MENTOR;
+
 	public String nonWishQueryString { get; set; }
 	public String assignedQueryString { get; set; }
 	public String wishQueryString { get; set; }
@@ -112,18 +119,18 @@ public class VolunteerWorkItems_AC {
 			assignedWishQueryString += nonWishEventField.getFieldPath() + ',';
 		}
 		assignedWishQueryString = assignedWishQueryString.removeEnd(',');
-		assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN :volunteerChaptersSet AND Status__c != \'Out of Compliance\' AND (RecordTypeId =: registeredWishRecordTypeId OR RecordTypeId =:wishEvents) AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Wish__r.isClosed = False AND Reason_Inactive__c != \'Error\' LIMIT 50000';
+		assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN :volunteerChaptersSet AND Status__c != \'Out of Compliance\' AND (RecordTypeId =: registeredWishRecordTypeId OR RecordTypeId =:wishEvents) AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Wish__r.isClosed = False AND Reason_Inactive__c != \'Error\'';
 		volunteerWishEventsList = Database.query(assignedWishQueryString);
 		if (!volunteerWishEventsList.isEmpty()) {
 			for (Volunteer_Opportunity__c checkApprovalStatus : volunteerWishEventsList) {
 				visibilityMap.put(checkApprovalStatus.Id, false);
-				if (checkApprovalStatus.Status__c == 'Approved') {
+				if (checkApprovalStatus.Status__c == VOLUNTEER_OPPORTUNITY_STATUS_APPROVED) {
 					visibilityMap.put(checkApprovalStatus.Id, true);
 				} else if (checkApprovalStatus.Inactive__c == true
 						&& checkApprovalStatus.Inactivated_or_Rejected_Date__c != null
 						&& checkApprovalStatus.Inactivated_or_Rejected_Date__c.addDays(30) > Date.today()) {
 					visibilityMap.put(checkApprovalStatus.Id, true);
-				} else if (checkApprovalStatus.Status__c == 'Pending'
+				} else if (checkApprovalStatus.Status__c == VOLUNTEER_OPPORTUNITY_STATUS_PENDING
 						&& checkApprovalStatus.Inactivated_or_Rejected_Date__c != null
 						&& checkApprovalStatus.Inactivated_or_Rejected_Date__c.addDays(30) > Date.today()) {
 					visibilityMap.put(checkApprovalStatus.Id, true);
@@ -140,19 +147,19 @@ public class VolunteerWorkItems_AC {
 			assignedWishQueryString += nonWishEventField.getFieldPath() + ',';
 		}
 		assignedWishQueryString = assignedWishQueryString.removeEnd(',');
-		String VOStatus = 'Completed';
-		assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND Status__c != \'Out of Compliance\' AND (RecordTypeId =: registeredNonWishRecordTypeId OR RecordTypeId =:nonWishEvents ) AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Status__c !=: VOStatus AND Reason_Inactive__c != \'Error\' LIMIT 50000';
+		String VOStatus = VOLUNTEER_OPPORTUNITY_STATUS_COMPLETED;
+		assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND Status__c != \'Out of Compliance\' AND (RecordTypeId =: registeredNonWishRecordTypeId OR RecordTypeId =:nonWishEvents ) AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Status__c !=: VOStatus AND Reason_Inactive__c != \'Error\'';
 		volunteerNonWishEventsList = Database.query(assignedWishQueryString);
 		if (!volunteerNonWishEventsList.isEmpty()) {
 			for (Volunteer_Opportunity__c checkApprovalStatus : volunteerNonWishEventsList) {
 				visibilityMap.put(checkApprovalStatus.Id, false);
-				if (checkApprovalStatus.Status__c == 'Approved') {
+				if (checkApprovalStatus.Status__c == VOLUNTEER_OPPORTUNITY_STATUS_APPROVED) {
 					visibilityMap.put(checkApprovalStatus.Id, true);
 				} else if (checkApprovalStatus.Inactive__c == true
 						&& checkApprovalStatus.Inactivated_or_Rejected_Date__c != null
 						&& checkApprovalStatus.Inactivated_or_Rejected_Date__c.addDays(30) > Date.today()) {
 					visibilityMap.put(checkApprovalStatus.Id, true);
-				} else if (checkApprovalStatus.Status__c == 'Pending'
+				} else if (checkApprovalStatus.Status__c == VOLUNTEER_OPPORTUNITY_STATUS_PENDING
 						&& checkApprovalStatus.Inactivated_or_Rejected_Date__c != null
 						&& checkApprovalStatus.Inactivated_or_Rejected_Date__c.addDays(30) > Date.today()) {
 					visibilityMap.put(checkApprovalStatus.Id, true);
@@ -168,8 +175,8 @@ public class VolunteerWorkItems_AC {
 	 *
 	 * @return
 	 */
-	public List<WrapperClass> getNonWishEvents() {
-		Map<String, WrapperClass> nonWishOpportunitiesMap = new Map<String, WrapperClass>();
+	public List<WishWrapperClass> getNonWishEvents() {
+		Map<String, WishWrapperClass> nonWishOpportunitiesMap = new Map<String, WishWrapperClass>();
 		Set<Id> nonWishIdSet = new Set<Id>();
 		Date today = Date.today();
 		nonWishQueryString = 'SELECT Chapter_Name__c,Non_Wish_Event__c,';
@@ -180,7 +187,7 @@ public class VolunteerWorkItems_AC {
 		}
 		nonWishQueryString = nonWishQueryString.removeEnd(',');
 		assignedQueryString = assignedQueryString.removeEnd(',');
-		nonWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c = null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Inactive__c = False  AND Non_Wish_Event__r.Event_Date__c >= : today LIMIT 50000';
+		nonWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c = null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Inactive__c = False  AND Non_Wish_Event__r.Event_Date__c >= : today';
 
 		volunteerNonWishEventsList = Database.query(nonWishQueryString);
 		for (Volunteer_Opportunity__c nonWishOpportunities : volunteerNonWishEventsList) {
@@ -189,21 +196,21 @@ public class VolunteerWorkItems_AC {
 					+ nonWishOpportunities.Chapter_Name__c + '-'
 					+ nonWishOpportunities.Role__c + '-'
 					+ nonWishOpportunities.HiddenVolunteer_Count_Description__c)) {
-				WrapperClass nonwishWrapperInstance = new WrapperClass();
-				nonwishWrapperInstance.nonWishOpportunities = nonWishOpportunities;
-				nonwishWrapperInstance.nonWishOpportunityCount = (nonwishWrapperInstance.nonWishOpportunityCount == null)
-						? 1 : nonwishWrapperInstance.nonWishOpportunityCount + 1;
+				WishWrapperClass nonwishWrapperInstance = new WishWrapperClass();
+				nonwishWrapperInstance.wishOpportunities = nonWishOpportunities;
+				nonwishWrapperInstance.wishOpportunitiesCount = (nonwishWrapperInstance.wishOpportunitiesCount == null)
+						? 1 : nonwishWrapperInstance.wishOpportunitiesCount + 1;
 				nonWishOpportunitiesMap.put(nonWishOpportunities.Non_Wish_Event__c + '-'
 						+ nonWishOpportunities.Chapter_Name__c + '-'
 						+ nonWishOpportunities.Role__c + '-'
 						+ nonWishOpportunities.HiddenVolunteer_Count_Description__c, nonwishWrapperInstance);
 			} else {
-				WrapperClass nonwishWrapperInstance = nonWishOpportunitiesMap.get(nonWishOpportunities.Non_Wish_Event__c + '-'
+				WishWrapperClass nonwishWrapperInstance = nonWishOpportunitiesMap.get(nonWishOpportunities.Non_Wish_Event__c + '-'
 						+ nonWishOpportunities.Chapter_Name__c + '-'
 						+ nonWishOpportunities.Role__c + '-'
 						+ nonWishOpportunities.HiddenVolunteer_Count_Description__c);
-				nonwishWrapperInstance.nonWishOpportunityCount = (nonwishWrapperInstance.nonWishOpportunityCount == null)
-						? 1 : nonwishWrapperInstance.nonWishOpportunityCount + 1;
+				nonwishWrapperInstance.wishOpportunitiesCount = (nonwishWrapperInstance.wishOpportunitiesCount == null)
+						? 1 : nonwishWrapperInstance.wishOpportunitiesCount + 1;
 				nonWishOpportunitiesMap.put(nonWishOpportunities.Non_Wish_Event__c + '-'
 						+ nonWishOpportunities.Chapter_Name__c + '-'
 						+ nonWishOpportunities.Role__c + '-'
@@ -211,19 +218,19 @@ public class VolunteerWorkItems_AC {
 			}
 		}
 
-		assignedQueryString += ' FROM Volunteer_Opportunity__c WHERE Non_Wish_Event__c IN : nonWishIdSet AND Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: registeredNonWishRecordTypeId OR RecordTypeId =:nonWishEvents )  AND Reason_Inactive__c = null AND Inactive__c = False LIMIT 50000';
+		assignedQueryString += ' FROM Volunteer_Opportunity__c WHERE Non_Wish_Event__c IN : nonWishIdSet AND Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: registeredNonWishRecordTypeId OR RecordTypeId =:nonWishEvents )  AND Reason_Inactive__c = null AND Inactive__c = False';
 		for (Volunteer_Opportunity__c assignedNonWishOpportunities : Database.query(assignedQueryString)) {
 			if (nonWishOpportunitiesMap.containsKey(assignedNonWishOpportunities.Non_Wish_Event__c + '-'
 					+ assignedNonWishOpportunities.Chapter_Name__c + '-'
 					+ assignedNonWishOpportunities.Role__c + '-'
 					+ assignedNonWishOpportunities.HiddenVolunteer_Count_Description__c)) {
-				WrapperClass nonwishWrapperInstance = nonWishOpportunitiesMap.get(assignedNonWishOpportunities.Non_Wish_Event__c + '-'
+				WishWrapperClass nonwishWrapperInstance = nonWishOpportunitiesMap.get(assignedNonWishOpportunities.Non_Wish_Event__c + '-'
 						+ assignedNonWishOpportunities.Chapter_Name__c + '-'
 						+ assignedNonWishOpportunities.Role__c + '-' + assignedNonWishOpportunities.HiddenVolunteer_Count_Description__c);
-				nonwishWrapperInstance.nonWishOpportunityCount = (nonwishWrapperInstance.nonWishOpportunityCount == null)
-						? 1 : nonwishWrapperInstance.nonWishOpportunityCount + 1;
-				nonwishWrapperInstance.registeredNonWishOpportunityCount = (nonwishWrapperInstance.registeredNonWishOpportunityCount == null)
-						? 1 : nonwishWrapperInstance.registeredNonWishOpportunityCount + 1;
+				nonwishWrapperInstance.wishOpportunitiesCount = (nonwishWrapperInstance.wishOpportunitiesCount == null)
+						? 1 : nonwishWrapperInstance.wishOpportunitiesCount + 1;
+				nonwishWrapperInstance.registeredWishOpportunitiesCount = (nonwishWrapperInstance.registeredWishOpportunitiesCount == null)
+						? 1 : nonwishWrapperInstance.registeredWishOpportunitiesCount + 1;
 				nonWishOpportunitiesMap.put(assignedNonWishOpportunities.Non_Wish_Event__c + '-'
 						+ assignedNonWishOpportunities.Chapter_Name__c + '-'
 						+ assignedNonWishOpportunities.Role__c + '-'
@@ -241,7 +248,7 @@ public class VolunteerWorkItems_AC {
 			closedWishQueryString += closedWishField.getFieldPath() + ',';
 		}
 		closedWishQueryString = closedWishQueryString .removeEnd(',');
-		closedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: wishEventsRegistered OR RecordTypeId =: wishEvents) AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND (Wish__r.isClosed = true OR Wish__r.Status = \'completed\') AND Reason_Inactive__c != \'Error\' LIMIT 50000';
+		closedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: wishEventsRegistered OR RecordTypeId =: wishEvents) AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND (Wish__r.isClosed = true OR Wish__r.Status = \'completed\') AND Reason_Inactive__c != \'Error\'';
 		closedVolunteerWishList = Database.query(closedWishQueryString);
 		return closedVolunteerWishList;
 	}
@@ -255,8 +262,8 @@ public class VolunteerWorkItems_AC {
 			closedNonWishQueryString += closedNonWishField.getFieldPath() + ',';
 		}
 		closedNonWishQueryString = closedNonWishQueryString .removeEnd(',');
-		String VOStatus = 'Completed';
-		closedNonWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: registeredNonWishRecordTypeId OR RecordTypeId =:nonWishEvents ) AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Status__c =: VOStatus AND Reason_Inactive__c != \'Error\' LIMIT 50000';
+		String VOStatus = VOLUNTEER_OPPORTUNITY_STATUS_COMPLETED;
+		closedNonWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: registeredNonWishRecordTypeId OR RecordTypeId =:nonWishEvents ) AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Status__c =: VOStatus AND Reason_Inactive__c != \'Error\'';
 		closedVolunteerNonWishList = Database.query(closedNonWishQueryString);
 		return closedVolunteerNonWishList ;
 	}
@@ -276,7 +283,7 @@ public class VolunteerWorkItems_AC {
 
 		wishQueryString = wishQueryString.removeEnd(',');
 		assignedWishQueryString = assignedWishQueryString.removeEnd(',');
-		wishQueryString += ' FROM Volunteer_Opportunity__c WHERE ((Wish__r.Sub_Status__c!= \'Non-Viewable\') OR (Wish__r.Sub_Status__c= \'Non-Viewable\' AND Is_Non_Viewable__c!= true)) AND Volunteer_Name__c = null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Reason_Inactive__c = null AND Inactive__c = False LIMIT 50000';
+		wishQueryString += ' FROM Volunteer_Opportunity__c WHERE ((Wish__r.Sub_Status__c!= \'Non-Viewable\') OR (Wish__r.Sub_Status__c= \'Non-Viewable\' AND Is_Non_Viewable__c!= true)) AND Volunteer_Name__c = null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Reason_Inactive__c = null AND Inactive__c = False';
 
 		volunteerWishEventsList = Database.query(wishQueryString);
 		for (Volunteer_Opportunity__c wishOpportunities : volunteerWishEventsList) {
@@ -300,7 +307,7 @@ public class VolunteerWorkItems_AC {
 			}
 		}
 
-		assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Wish__c IN : wishIdSet AND Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: wishEvents OR RecordTypeId = :registeredWishRecordTypeId) AND Reason_Inactive__c = null AND Inactive__c = False LIMIT 50000';
+		assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Wish__c IN : wishIdSet AND Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: wishEvents OR RecordTypeId = :registeredWishRecordTypeId) AND Reason_Inactive__c = null AND Inactive__c = False';
 		for (Volunteer_Opportunity__c assignedWishOpportunities : Database.query(assignedWishQueryString)) {
 			if (wishOpportunitiesMap.containsKey(assignedWishOpportunities.Wish__c + '-'
 					+ assignedWishOpportunities.Chapter_Name__c + '-'
@@ -317,7 +324,6 @@ public class VolunteerWorkItems_AC {
 			}
 		}
 		return wishOpportunitiesMap.values();
-
 	}
 
 	public Boolean getChapterRoleOanTStatus(Id chapterRole) {
@@ -360,12 +366,12 @@ public class VolunteerWorkItems_AC {
 					FROM Volunteer_Roles__c
 					WHERE Volunteer_Name__c = :userRelatedContactId
 					AND Chapter_Name__c = :volunteerOpportunity.get(0).Chapter_Name__r.Name
-					AND (Status__c = :VOLUNTEER_ROLE_STATUS_ACTIVE OR (Status__c = 'Pending' AND Sub_status__c = 'Missing Requirement'))
+					AND (Status__c = :VOLUNTEER_ROLE_STATUS_ACTIVE OR (Status__c = :VOLUNTEER_OPPORTUNITY_STATUS_PENDING AND Sub_status__c = :VOLUNTEER_ROLE_STATUS_MISSING_REQUIREMENT))
 			]) {
 				Logvalue += String.valueOf(checkForMatchingRole);
 				if (checkForMatchingRole.isWishRole__c == true && checkForMatchingRole.Status__c == VOLUNTEER_ROLE_STATUS_ACTIVE) {
 					WishTrainedMap.put(checkForMatchingRole.Chapter_Role__c, checkForMatchingRole);
-					if (checkForMatchingRole.Role_Name__c == 'Wish Granter Mentor') {
+					if (checkForMatchingRole.Role_Name__c == VOLUNTEER_OPPORTUNITY_ROLE_WISH_GRANTER_MENTOR) {
 						isWishGranterMentor = true;
 					}
 				} else if (checkForMatchingRole.isWishRole__c == true && checkForMatchingRole.Status__c != VOLUNTEER_ROLE_STATUS_ACTIVE) {
@@ -401,13 +407,13 @@ public class VolunteerWorkItems_AC {
 			} else if (isWishRole == true) {
 				if (getChapterRoleOanTStatus(volunteerOpportunity[0].Chapter_Role_Opportunity__c) == true) {
 					if (WishTrainedMap.containsKey(volunteerOpportunity[0].Chapter_Role_Opportunity__c)
-							|| (isWishGranterMentor == true && volunteerOpportunity[0].Role__c == 'Wish Granter')) {
+							|| (isWishGranterMentor == true && volunteerOpportunity[0].Role__c == VOLUNTEER_OPPORTUNITY_ROLE_WISH_GRANTER)) {
 						updateRecord = true;
 						allowRegister = true;
 					}
 				} else if (getChapterRoleOanTStatus(volunteerOpportunity[0].Chapter_Role_Opportunity__c) == false) {
 					if (WishTrainedMap.containsKey(volunteerOpportunity[0].Chapter_Role_Opportunity__c) ||
-							(isWishGranterMentor == true && volunteerOpportunity[0].Role__c == 'Wish Granter')) {
+							(isWishGranterMentor == true && volunteerOpportunity[0].Role__c == VOLUNTEER_OPPORTUNITY_ROLE_WISH_GRANTER)) {
 						updateRecord = true;
 						allowRegister = true;
 					}
@@ -465,11 +471,11 @@ public class VolunteerWorkItems_AC {
 			if (!volunteerOpportunityDuplicateLists.isEmpty() || !volunteerOpportunitySameRoleList.isEmpty()) {
 				if (!volunteerOpportunitySameRoleList.isEmpty()) {
 					ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.ERROR,
-							'You have been previously declined for this opportunity. Please contact the chapter office with any questions.');
+							Label.Volunteer_Portal_Alert_Previously_Declined);
 					ApexPages.addMessage(mymsg);
 				} else if (!volunteerOpportunityDuplicateLists.isEmpty()) {
 					ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.ERROR,
-							'You are already registered for this opportunity.');
+							Label.Volunteer_Portal_Already_Registered_Message_Opportunity);
 					ApexPages.addMessage(mymsg);
 				}
 			} else {
@@ -486,7 +492,7 @@ public class VolunteerWorkItems_AC {
 						} else {
 							isUpdate = false;
 							ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.ERROR,
-									'Please refresh the page and try again.');
+									Label.Volunteer_Portal_Alert_Please_Refresh);
 							ApexPages.addMessage(mymsg);
 						}
 
@@ -495,12 +501,12 @@ public class VolunteerWorkItems_AC {
 							LstLog.add(String.valueOf(volunteerOpportunity));
 							update volunteerOpportunity;
 							ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.CONFIRM,
-									'Thank you for requesting to volunteer for this opportunity. A notification has been sent to chapter staff to review your request and staff will respond with further details, as applicable.');
+									Label.Volunteer_Portal_Confirmation_Success_Opportunity);
 							ApexPages.addMessage(mymsg);
 						}
 					} else {
 						ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.ERROR,
-								'Thank you for your interest in this opportunity. This opportunity requires specialized training that you have not completed, contact chapter staff for more information about expanding your volunteer opportunities.');
+								Label.Volunteer_Portal_Alert_Specialized_Training_Required);
 						ApexPages.addMessage(mymsg);
 					}
 				}
@@ -532,16 +538,6 @@ public class VolunteerWorkItems_AC {
 	public PageReference RedirecttoVolOpportunity() {
 		PageReference pr = new PageReference('/' + volunteerOpportunityRecordId);
 		return pr;
-	}
-
-	/**
-	 * @description Wrapper class for non wish volunteer opportunities
-	 */
-	public class WrapperClass {
-		public Volunteer_Opportunity__c nonWishOpportunities { get; set; }
-		public Integer nonWishOpportunityCount { get; set; }
-		public Integer registeredNonWishOpportunityCount { get; set; }
-
 	}
 
 	//Wrapper class for wish volunteer opportunities

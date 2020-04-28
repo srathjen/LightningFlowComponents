@@ -13,12 +13,13 @@ Description : This page is used to display the volunteer opportunity recordes wh
     <main role="main" class="container" style="margin-bottom:4rem">
         <div class="row">
             <section class="col-md-12">
-                <h1>Volunteer Opportunities</h1>
-                <div><p style="padding-left: 30px;margin-top: -25px;">
-                        To sort using one criteria: Click on the desired column header.
-                        <br/> To sort using multiple criteria: Click on one of the desired column headers. Press and
-                        hold the “Shift” key while clicking on any additional headers.
-                    </p></div>
+                <h1>{!$Label.Volunteer_Portal_Page_Title_Volunteer_Opportunities}</h1>
+                <div>
+                    <p style="padding-left: 30px;margin-top: -25px;">
+                        <apex:outputText value="{!$Label.Volunteer_Portal_Sorting_Instructions}"
+                                         escape="false"/>
+                    </p>
+                </div>
                 <apex:form id="formId">
                     <apex:pageMessages id="mymsg"/>
 
@@ -30,36 +31,42 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                 <table id="dataTab1" class="display table table-maw table-hover">
                                     <thead class="thead-default">
                                     <tr>
-                                        <th>SIGN UP</th>
-                                        <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.WishEvents}"
+                                        <th>{!$Label.Volunteer_Portal_Table_Header_Sign_Up}</th>
+                                        <apex:repeat
+                                                value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.WishEvents}"
                                                 var="fieldValue">
                                             <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
                                                 <th>{!fieldValue.label}</th>
                                             </apex:outputpanel>
                                         </apex:repeat>
-                                        <th># Needed</th>
-                                        <th># Registered</th>
+                                        <th>{!$Label.Volunteer_Portal_Table_Header_Number_Needed}</th>
+                                        <th>{!$Label.Volunteer_Portal_Table_Header_Number_Registered}</th>
                                     </tr>
                                     </thead>
 
                                     <tbody>
                                     <apex:repeat value="{!WishEvents}" var="con1">
-                                        <apex:outputpanel rendered="{!(OR(con1.wishOpportunities.Role__c == 'Wish Granter',con1.wishOpportunities.Role__c == 'Wish Granter Mentor',con1.wishOpportunities.Role__c == 'Temporary Wish Granter'))}">
+                                        <apex:outputpanel
+                                                rendered="{!(OR(con1.wishOpportunities.Role__c == 'Wish Granter',con1.wishOpportunities.Role__c == 'Wish Granter Mentor',con1.wishOpportunities.Role__c == 'Temporary Wish Granter'))}">
                                             <tr>
-                                                <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.WishEvents}"
+                                                <apex:repeat
+                                                        value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.WishEvents}"
                                                         var="fieldValue">
                                                     <apex:outputpanel rendered="{!fieldValue.label = 'Record ID' }">
                                                         <td style="width:10%">
-                                                            <apex:outputLink style="text-decoration: underline;color: blue;"
+                                                            <apex:outputLink
+                                                                    style="text-decoration: underline;color: blue;"
                                                                     value="/{!con1.wishOpportunities[fieldValue]}"
-                                                                    id="theLink">View
+                                                                    id="theLink">{!$Label.Volunteer_Portal_Table_Cell_View}
                                                             </apex:outputLink>
                                                         </td>
                                                     </apex:outputpanel>
-                                                    <apex:outputpanel rendered="{!fieldValue.label != 'Distance From Me' && fieldValue.label != 'Record ID' && fieldValue.label  != 'Waiting Since' && fieldValue.label  !='In Progress' }">
+                                                    <apex:outputpanel
+                                                            rendered="{!fieldValue.label != 'Distance From Me' && fieldValue.label != 'Record ID' && fieldValue.label  != 'Waiting Since' && fieldValue.label  !='In Progress' }">
                                                         <td>{!con1.wishOpportunities[fieldValue]}</td>
                                                     </apex:outputpanel>
-                                                    <apex:outputpanel rendered="{!fieldValue.label  == 'Distance From Me' }">
+                                                    <apex:outputpanel
+                                                            rendered="{!fieldValue.label  == 'Distance From Me' }">
                                                         <td data-order="{!IF(contains(con1.wishOpportunities[fieldValue],'-'),LEFT(con1.wishOpportunities[fieldValue], FIND('-', con1.wishOpportunities[fieldValue])-1),IF(contains(con1.wishOpportunities[fieldValue],'+'),LEFT(con1.wishOpportunities[fieldValue], FIND('+', con1.wishOpportunities[fieldValue])-1),IF(contains(con1.wishOpportunities[fieldValue],' '),LEFT(con1.wishOpportunities[fieldValue], FIND(' ', con1.wishOpportunities[fieldValue])-1),'')))}">{!con1.wishOpportunities[fieldValue]}</td>
                                                     </apex:outputpanel>
                                                     <apex:outputpanel rendered="{!fieldValue.label  == 'In Progress' }">
@@ -73,10 +80,12 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                         </td>
 
                                                     </apex:outputpanel>
-                                                    <apex:outputpanel rendered="{!fieldValue.label  == 'Waiting Since'}">
+                                                    <apex:outputpanel
+                                                            rendered="{!fieldValue.label  == 'Waiting Since'}">
                                                         <td>
                                                             <apex:outputText value="{0,date,MM'/'dd'/'yyyy}" id="date1">
-                                                                <apex:param value="{!con1.wishOpportunities[fieldValue]}"/>
+                                                                <apex:param
+                                                                        value="{!con1.wishOpportunities[fieldValue]}"/>
                                                             </apex:outputText>
                                                         </td>
                                                     </apex:outputpanel>
@@ -99,36 +108,42 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                 <table id="dataTab1" class="display table table-maw table-hover">
                                     <thead class="thead-default">
                                     <tr>
-                                        <th>SIGN UP</th>
-                                        <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.WishEvents}"
+                                        <th>{!$Label.Volunteer_Portal_Table_Header_Sign_Up}</th>
+                                        <apex:repeat
+                                                value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.WishEvents}"
                                                 var="fieldValue">
                                             <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
                                                 <th>{!fieldValue.label}</th>
                                             </apex:outputpanel>
                                         </apex:repeat>
-                                        <th># Needed</th>
-                                        <th># Registered</th>
+                                        <th>{!$Label.Volunteer_Portal_Table_Header_Number_Needed}</th>
+                                        <th>{!$Label.Volunteer_Portal_Table_Header_Number_Registered}</th>
                                     </tr>
                                     </thead>
 
                                     <tbody>
                                     <apex:repeat value="{!WishEvents}" var="con1">
-                                        <apex:outputpanel rendered="{!Not(OR(con1.wishOpportunities.Role__c == 'Wish Granter',con1.wishOpportunities.Role__c == 'Wish Granter Mentor',con1.wishOpportunities.Role__c == 'Temporary Wish Granter'))}">
+                                        <apex:outputpanel
+                                                rendered="{!Not(OR(con1.wishOpportunities.Role__c == 'Wish Granter',con1.wishOpportunities.Role__c == 'Wish Granter Mentor',con1.wishOpportunities.Role__c == 'Temporary Wish Granter'))}">
                                             <tr>
-                                                <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.WishEvents}"
+                                                <apex:repeat
+                                                        value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.WishEvents}"
                                                         var="fieldValue">
                                                     <apex:outputpanel rendered="{!fieldValue.label = 'Record ID' }">
                                                         <td style="width:10%">
-                                                            <apex:outputLink style="text-decoration: underline;color: blue;"
+                                                            <apex:outputLink
+                                                                    style="text-decoration: underline;color: blue;"
                                                                     value="/{!con1.wishOpportunities[fieldValue]}"
-                                                                    id="theLink">View
+                                                                    id="theLink">{!$Label.Volunteer_Portal_Table_Cell_View}
                                                             </apex:outputLink>
                                                         </td>
                                                     </apex:outputpanel>
-                                                    <apex:outputpanel rendered="{!fieldValue.label != 'Distance From Me' && fieldValue.label != 'Record ID' && fieldValue.label  != 'Waiting Since' && fieldValue.label  !='In Progress' }">
+                                                    <apex:outputpanel
+                                                            rendered="{!fieldValue.label != 'Distance From Me' && fieldValue.label != 'Record ID' && fieldValue.label  != 'Waiting Since' && fieldValue.label  !='In Progress' }">
                                                         <td>{!con1.wishOpportunities[fieldValue]}</td>
                                                     </apex:outputpanel>
-                                                    <apex:outputpanel rendered="{!fieldValue.label  == 'Distance From Me' }">
+                                                    <apex:outputpanel
+                                                            rendered="{!fieldValue.label  == 'Distance From Me' }">
                                                         <td data-order="{!IF(contains(con1.wishOpportunities[fieldValue],'-'),LEFT(con1.wishOpportunities[fieldValue], FIND('-', con1.wishOpportunities[fieldValue])-1),IF(contains(con1.wishOpportunities[fieldValue],'+'),LEFT(con1.wishOpportunities[fieldValue], FIND('+', con1.wishOpportunities[fieldValue])-1),IF(contains(con1.wishOpportunities[fieldValue],' '),LEFT(con1.wishOpportunities[fieldValue], FIND(' ', con1.wishOpportunities[fieldValue])-1),'')))}">{!con1.wishOpportunities[fieldValue]}</td>
                                                     </apex:outputpanel>
                                                     <apex:outputpanel rendered="{!fieldValue.label  == 'In Progress' }">
@@ -141,10 +156,12 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                                    class="inp-wish" readonly="true"/>
                                                         </td>
                                                     </apex:outputpanel>
-                                                    <apex:outputpanel rendered="{!fieldValue.label  == 'Waiting Since'}">
+                                                    <apex:outputpanel
+                                                            rendered="{!fieldValue.label  == 'Waiting Since'}">
                                                         <td>
                                                             <apex:outputText value="{0,date,MM'/'dd'/'yyyy}" id="date1">
-                                                                <apex:param value="{!con1.wishOpportunities[fieldValue]}"/>
+                                                                <apex:param
+                                                                        value="{!con1.wishOpportunities[fieldValue]}"/>
                                                             </apex:outputText>
                                                         </td>
                                                     </apex:outputpanel>
@@ -169,52 +186,60 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                 <table id="dataTab2" class="display table table-maw table-hover">
                                     <thead class="thead-default">
                                     <tr>
-                                        <th>SIGN UP</th>
-                                        <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.NonWishEvents}"
+                                        <th>{!$Label.Volunteer_Portal_Table_Header_Sign_Up}</th>
+                                        <apex:repeat
+                                                value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.NonWishEvents}"
                                                 var="fieldValue">
-                                            <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' && fieldValue.label != 'HiddenVolunteer Count Description' && fieldValue.label  != 'Event Date'}">
-                                                <apex:outputPanel rendered="{!fieldValue.label == 'Volunteer Opportunity Notes'}">
+                                            <apex:outputpanel
+                                                    rendered="{!fieldValue.label != 'Record ID' && fieldValue.label != 'HiddenVolunteer Count Description' && fieldValue.label  != 'Event Date'}">
+                                                <apex:outputPanel
+                                                        rendered="{!fieldValue.label == 'Volunteer Opportunity Notes'}">
                                                     <th>Notes</th>
                                                 </apex:outputPanel>
-                                                <apex:outputPanel rendered="{!fieldValue.label == 'Non-WIsh/Event Name'}">
+                                                <apex:outputPanel
+                                                        rendered="{!fieldValue.label == 'Non-WIsh/Event Name'}">
                                                     <th>EVENT NAME</th>
                                                 </apex:outputPanel>
-                                                <apex:outputPanel rendered="{!fieldValue.label != 'Non-WIsh/Event Name' && fieldValue.label != 'Volunteer Opportunity Notes'}">
+                                                <apex:outputPanel
+                                                        rendered="{!fieldValue.label != 'Non-WIsh/Event Name' && fieldValue.label != 'Volunteer Opportunity Notes'}">
                                                     <th>{!fieldValue.label}</th>
                                                 </apex:outputpanel>
                                             </apex:outputpanel>
                                         </apex:repeat>
-                                        <th># Needed</th>
-                                        <th># Registered</th>
+                                        <th>{!$Label.Volunteer_Portal_Table_Header_Number_Needed}</th>
+                                        <th>{!$Label.Volunteer_Portal_Table_Header_Number_Registered}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <apex:repeat value="{!NonWishEvents}" var="con">
                                         <tr>
-                                            <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.NonWishEvents}"
+                                            <apex:repeat
+                                                    value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.NonWishEvents}"
                                                     var="fieldValue">
                                                 <apex:outputpanel rendered="{!fieldValue.label = 'Record ID' }">
                                                     <td>
 
                                                         <apex:outputLink style="text-decoration: underline;color: blue;"
-                                                                         value="/{!con.nonWishOpportunities.Non_Wish_Event__c}"
-                                                                         id="theLink">View
+                                                                         value="/{!con.wishOpportunities.Non_Wish_Event__c}"
+                                                                         id="theLink">{!$Label.Volunteer_Portal_Table_Cell_View}
                                                         </apex:outputLink>
                                                     </td>
                                                 </apex:outputpanel>
-                                                <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' && fieldValue.label != 'Event Date' && fieldValue.label != 'HiddenVolunteer Count Description' && fieldValue.label != 'Date' }">
-                                                    <td>{!con.nonWishOpportunities[fieldValue]}</td>
+                                                <apex:outputpanel
+                                                        rendered="{!fieldValue.label != 'Record ID' && fieldValue.label != 'Event Date' && fieldValue.label != 'HiddenVolunteer Count Description' && fieldValue.label != 'Date' }">
+                                                    <td>{!con.wishOpportunities[fieldValue]}</td>
                                                 </apex:outputpanel>
                                                 <apex:outputpanel rendered="{!fieldValue.label  == 'Date'}">
                                                     <td>
                                                         <apex:outputText value="{0,date,MM'/'dd'/'yyyy}" id="date3">
-                                                            <apex:param value="{!con.nonWishOpportunities[fieldValue]}"/>
+                                                            <apex:param
+                                                                    value="{!con.wishOpportunities[fieldValue]}"/>
                                                         </apex:outputText>
                                                     </td>
                                                 </apex:outputpanel>
                                             </apex:repeat>
-                                            <td style='text-align: center;'>{!con.nonWishOpportunityCount}</td>
-                                            <td style='text-align: center;'>{!con.registeredNonWishOpportunityCount}</td>
+                                            <td style='text-align: center;'>{!con.wishOpportunitiesCount}</td>
+                                            <td style='text-align: center;'>{!con.registeredWishOpportunitiesCount}</td>
                                         </tr>
                                     </apex:repeat>
                                     </tbody>

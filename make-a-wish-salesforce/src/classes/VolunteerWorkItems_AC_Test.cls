@@ -24,7 +24,7 @@ public class VolunteerWorkItems_AC_Test {
 
 		Role__c currRole = OrientationandTrainingUtil.createRole();
 		Role__c currNonWishRole = OrientationandTrainingUtil.createNonWishRole();
-		insert new List<Role__C>{
+		insert new List<Role__c>{
 				currRole, currNonWishRole
 		};
 
@@ -89,10 +89,6 @@ public class VolunteerWorkItems_AC_Test {
 				nonWishEventVolunteerOpportunity, nonWishEventVolunteerOpportunity1,
 				wishEventVolunteerOpportunity, wishEventVolunteerOpportunity1
 		};
-		/*Case ParentWish = OrientationandTrainingUtil.CreateParentCaseWithTravel(wishChild.Id);
-		Volunteer_Opportunity__c closewishVolunteerOpportunity = OrientationandTrainingUtil.CreateNewWishVolunteerOpportunity(acc.Id,currChapRole.Id,ParentWish.Id);
-		closewishVolunteerOpportunity.Volunteer_Name__c = con.Id;
-		update closewishVolunteerOpportunity;*/
 		trac_TriggerHandlerBase.blockTrigger = false;
 	}
 
@@ -129,13 +125,13 @@ public class VolunteerWorkItems_AC_Test {
 		];
 
 		Volunteer_Opportunity__c dbOpp = [
-				SELECT Id,Wish__c,Non_Wish_Event__C,Hidden_VolunteerCount_Desc__c,Chapter_Role_Opportunity__c
+				SELECT Id,Wish__c,Non_Wish_Event__c,Hidden_VolunteerCount_Desc__c,Chapter_Role_Opportunity__c
 				FROM Volunteer_Opportunity__c
 				WHERE Wish__c = :dbCase.Id
-				Limit 1
+				LIMIT 1
 		];
 		List<Volunteer_Opportunity__c> voloppList = new List<Volunteer_Opportunity__c>([
-				SELECT Id,Wish__c,Non_Wish_Event__C,Hidden_VolunteerCount_Desc__c,Role__c,
+				SELECT Id,Wish__c,Non_Wish_Event__c,Hidden_VolunteerCount_Desc__c,Role__c,
 						Chapter_Role_Opportunity__r.Role_Name__c,Chapter_Name__r.Name, Reason_Inactive__c,
 						Status__c
 				FROM Volunteer_Opportunity__c
@@ -178,6 +174,7 @@ public class VolunteerWorkItems_AC_Test {
 			Test.stopTest();
 		}
 	}
+
 	@IsTest
 	public static void volunteerClosedWish() {
 		Test.startTest();
@@ -205,6 +202,7 @@ public class VolunteerWorkItems_AC_Test {
 		}
 		Test.stopTest();
 	}
+
 	@IsTest
 	public static void volunteerClosedNonWish() {
 		Test.startTest();
@@ -246,10 +244,10 @@ public class VolunteerWorkItems_AC_Test {
 				WHERE Event_Text__c = 'Sending Wish Child'
 		];
 		Volunteer_Opportunity__c dbOpp = [
-				SELECT Id,Chapter_Name__r.Name,Non_Wish_Event__C,Chapter_Role_Opportunity__r.Role_Name__c
+				SELECT Id,Chapter_Name__r.Name,Non_Wish_Event__c,Chapter_Role_Opportunity__r.Role_Name__c
 				FROM Volunteer_Opportunity__c
-				WHERE Non_Wish_Event__C = :dbNonWish.Id
-				Limit 1
+				WHERE Non_Wish_Event__c = :dbNonWish.Id
+				LIMIT 1
 		];
 		System.runAs(currUser) {
 			PageReference pageref = Page.MyAssignment_VF;
@@ -257,9 +255,6 @@ public class VolunteerWorkItems_AC_Test {
 			VolunteerWorkItems_AC volunteerWorkitems = new VolunteerWorkItems_AC();
 			volunteerWorkitems.volunteerOpportunityRecordId = dbOpp.Id;
 			volunteerWorkitems.RegisterWishEvents();
-			//volunteerWorkitems.allowRegisteration();
-			// volunteerWorkitems.RegisterNonWishEvents();
-
 		}
 		Test.stopTest();
 	}

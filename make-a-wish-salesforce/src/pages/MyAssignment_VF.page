@@ -100,7 +100,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
     <main role="main" class="container">
         <div class="row">
             <section class="col-md-12">
-                <h1>My Assignments</h1>
+                <h1>{!$Label.Volunteer_Portal_Page_Title_My_Assignment}</h1>
                 <apex:form id="refForm">
                     <div class="pad">
                         <div class="nav-content">
@@ -115,15 +115,18 @@ Description : This page is used to display the volunteer opportunity recordes wh
 
 
                         <div class="tab-panel-wrap">
-                            <button type="button" class="btn btn-current w-event">Wish Granter</button>
-                            <button type="button" class="btn wr-event">Wish Related</button>
-                            <button type="button" class="btn n-event">Non-Wish and Events</button>
+                            <button type="button"
+                                    class="btn btn-current w-event">{!$Label.Volunteer_Portal_Button_Wish_Granter}</button>
+                            <button type="button"
+                                    class="btn wr-event">{!$Label.Volunteer_Portal_Button_Wish_Related}</button>
+                            <button type="button"
+                                    class="btn n-event">{!$Label.Volunteer_Portal_Button_Non_Wish_And_Events}</button>
                             <div class="openActivities">
                                 <div class="Curr-WishEvent">
                                     <table id="dataTab1" class="display table table-maw table-hover" width="100%">
                                         <thead class="thead-default">
                                         <tr>
-                                            <th>Assignment</th>
+                                            <th>{!$Label.Volunteer_Portal_Table_Header_Assignment}</th>
                                             <apex:repeat
                                                     value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.MyAssignmentsWish}"
                                                     var="fieldValue">
@@ -135,10 +138,10 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                     </apex:outputPanel>
                                                     <apex:outputPanel
                                                             rendered="{!fieldValue.label == 'Wish National Type'}">
-                                                        <th>Wish Type</th>
+                                                        <th>{!$Label.Volunteer_Portal_Table_Header_Wish_Type}</th>
                                                     </apex:outputPanel>
                                                     <apex:outputPanel rendered="{!fieldValue.label == 'Wish Status'}">
-                                                        <th>Status</th>
+                                                        <th>{!$Label.Volunteer_Portal_Table_Header_Status}</th>
                                                     </apex:outputPanel>
                                                 </apex:outputPanel>
                                             </apex:repeat>
@@ -159,11 +162,11 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                             <td>
                                                                 <apex:outputText id="rejected"
                                                                                  rendered="{!con1.Status__c == 'Inactive' && con1.Reason_Inactive__c == 'Not Approved'}">
-                                                                    Not Approved
+                                                                    {!$Label.Volunteer_Portal_Table_Cell_Not_Approved}
                                                                 </apex:outputText>
                                                                 <apex:outputText id="inactive"
                                                                                  rendered="{!con1.Status__c == 'Inactive' && con1.Reason_Inactive__c != 'Not Approved'}">
-                                                                    Inactive
+                                                                    {!$Label.Volunteer_Portal_Table_Cell_Inactive}
                                                                 </apex:outputText>
                                                                 <apex:outputText id="pending"
                                                                                  rendered="{!con1.Status__c == 'Pending'}">
@@ -171,11 +174,11 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                                 </apex:outputText>
                                                                 <apex:outputLink value="/{!con1.Id}" id="approved"
                                                                                  rendered="{!con1.Status__c == 'Approved' && con1.Role__c != 'Wish Granter' && con1.Role__c != 'Wish Granter Mentor' && con1.Role__c !=  'Temporary Wish Granter'}">
-                                                                    View
+                                                                    {!$Label.Volunteer_Portal_Table_Cell_View}
                                                                 </apex:outputLink>
                                                                 <apex:outputLink value="/{!con1.Wish__c}" id="approved1"
                                                                                  rendered="{!con1.Status__c == 'Approved' && (con1.Role__c == 'Wish Granter' || con1.Role__c == 'Wish Granter Mentor' || con1.Role__c ==   'Temporary Wish Granter')}">
-                                                                    View
+                                                                    {!$Label.Volunteer_Portal_Table_Cell_View}
                                                                 </apex:outputLink>
                                                             </td>
                                                         </apex:outputPanel>
@@ -201,7 +204,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                     <table id="dataTab1" class="display table table-maw table-hover" width="100%">
                                         <thead class="thead-default">
                                         <tr>
-                                            <th>Assignment</th>
+                                            <th>{!$Label.Volunteer_Portal_Table_Header_Assignment}</th>
                                             <apex:repeat
                                                     value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.MyAssignmentsWish}"
                                                     var="fieldValue">
@@ -213,10 +216,10 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                     </apex:outputPanel>
                                                     <apex:outputPanel
                                                             rendered="{!fieldValue.label == 'Wish National Type'}">
-                                                        <th>Wish Type</th>
+                                                        <th>{!$Label.Volunteer_Portal_Table_Header_Wish_Type}</th>
                                                     </apex:outputPanel>
                                                     <apex:outputPanel rendered="{!fieldValue.label == 'Wish Status'}">
-                                                        <th>Status</th>
+                                                        <th>{!$Label.Volunteer_Portal_Table_Header_Status}</th>
                                                     </apex:outputPanel>
                                                 </apex:outputPanel>
                                             </apex:repeat>
@@ -236,23 +239,23 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                             <td>
                                                                 <apex:outputText id="rejected"
                                                                                  rendered="{!con1.Status__c == 'Inactive' && con1.Reason_Inactive__c == 'Not Approved'}">
-                                                                    Not Approved
+                                                                    {!$Label.Volunteer_Portal_Table_Cell_Not_Approved}
                                                                 </apex:outputText>
                                                                 <apex:outputText id="inactive"
                                                                                  rendered="{!con1.Status__c == 'Inactive' && con1.Reason_Inactive__c != 'Not Approved'}">
-                                                                    Inactive
+                                                                    {!$Label.Volunteer_Portal_Table_Cell_Inactive}
                                                                 </apex:outputText>
                                                                 <apex:outputText id="pending"
                                                                                  rendered="{!con1.Status__c == 'Pending'}">
-                                                                    Pending Approval
+                                                                    {!$Label.Volunteer_Portal_Table_Cell_Pending_Approval}
                                                                 </apex:outputText>
                                                                 <apex:outputLink value="/{!con1.Id}" id="approved"
                                                                                  rendered="{!con1.Status__c == 'Approved' && con1.Role__c != 'Wish Granter' && con1.Role__c != 'Wish Granter Mentor' && con1.Role__c != 'Temporary Wish Granter'}">
-                                                                    View
+                                                                    {!$Label.Volunteer_Portal_Table_Cell_View}
                                                                 </apex:outputLink>
                                                                 <apex:outputLink value="/{!con1.Wish__c}" id="approved1"
                                                                                  rendered="{!con1.Status__c == 'Approved' && con1.Role__c == 'Wish Granter' || con1.Role__c == 'Wish Granter Mentor' && con1.Role__c == 'Temporary Wish Granter'}">
-                                                                    View
+                                                                    {!$Label.Volunteer_Portal_Table_Cell_View}
                                                                 </apex:outputLink>
                                                             </td>
                                                         </apex:outputPanel>
@@ -279,7 +282,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                     <table id="dataTab2" class="display table table-maw table-hover" width="100%">
                                         <thead class="thead-default">
                                         <tr>
-                                            <th>Assignment</th>
+                                            <th>{!$Label.Volunteer_Portal_Table_Header_Assignment}</th>
                                             <apex:repeat
                                                     value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.MyAssignmentsNonWish}"
                                                     var="fieldValue">
@@ -287,7 +290,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                         rendered="{!fieldValue.label != 'Record ID' && fieldValue.label  != 'Event Date'}">
                                                     <apex:outputPanel
                                                             rendered="{!fieldValue.label == 'Non-WIsh/Event Name'}">
-                                                        <th>OPPORTUNITY</th>
+                                                        <th style="text-transform: uppercase">{!$Label.Volunteer_Portal_Table_Header_Opportunity}</th>
                                                     </apex:outputPanel>
                                                     <apex:outputPanel
                                                             rendered="{!fieldValue.label != 'Non-WIsh/Event Name'}">
@@ -305,26 +308,24 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                     <apex:repeat
                                                             value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.MyAssignmentsNonWish}"
                                                             var="fieldValue">
-
                                                         <apex:outputPanel rendered="{!fieldValue.label = 'Record ID' }">
                                                             <td>
                                                                 <apex:outputText id="rejected"
                                                                                  rendered="{!con1.Status__c == 'Inactive' && con1.Reason_Inactive__c == 'Not Approved'}">
-                                                                    Not Approved
+                                                                    {!$Label.Volunteer_Portal_Table_Cell_Not_Approved}
                                                                 </apex:outputText>
                                                                 <apex:outputText id="inactive"
                                                                                  rendered="{!con1.Status__c == 'Inactive' && con1.Reason_Inactive__c != 'Not Approved'}">
-                                                                    Inactive
+                                                                    {!$Label.Volunteer_Portal_Table_Cell_Inactive}
                                                                 </apex:outputText>
                                                                 <apex:outputText id="pending"
                                                                                  rendered="{!con1.Status__c == 'Pending'}">
-                                                                    Pending Approval
+                                                                    {!$Label.Volunteer_Portal_Table_Cell_Pending_Approval}
                                                                 </apex:outputText>
                                                                 <apex:outputLink value="/{!con1.Id}" id="approved"
                                                                                  rendered="{!con1.Status__c == 'Approved'}">
-                                                                    View
+                                                                    {!$Label.Volunteer_Portal_Table_Cell_View}
                                                                 </apex:outputLink>
-
                                                             </td>
                                                         </apex:outputPanel>
                                                         <apex:outputPanel
@@ -365,7 +366,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                     </apex:outputPanel>
                                                     <apex:outputPanel
                                                             rendered="{!fieldValue.label == 'Wish National Type'}">
-                                                        <th>Wish Type</th>
+                                                        <th>{!$Label.Volunteer_Portal_Table_Header_Wish_Type}</th>
                                                     </apex:outputPanel>
                                                 </apex:outputPanel>
                                             </apex:repeat>
@@ -482,7 +483,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                         rendered="{!fieldValue.label != 'Record ID' && fieldValue.label != 'Event Date' && fieldValue.label != 'End Time' && fieldValue.label != 'Start Time'}">
                                                     <apex:outputPanel
                                                             rendered="{!fieldValue.label == 'Non-WIsh/Event Name' }">
-                                                        <th>OPPORTUNITY</th>
+                                                        <th style="text-transform: uppercase">{!$Label.Volunteer_Portal_Table_Header_Opportunity}</th>
                                                     </apex:outputPanel>
                                                     <apex:outputPanel
                                                             rendered="{!fieldValue.label != 'Non-WIsh/Event Name' }">
