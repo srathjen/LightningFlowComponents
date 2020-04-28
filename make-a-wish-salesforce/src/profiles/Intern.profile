@@ -20,7 +20,7 @@
     
     
     
-    f
+    
     
     <classAccesses>
         <apexClass>ApexDebugLog</apexClass>
@@ -75,42 +75,12 @@
         <apexClass>Background_CheckBeforeDelete_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-<<<<<<< HEAD
     
     
     
     
     
     
-    
-    
-    
-=======
-    <classAccesses>
-        <apexClass>BatchRelationshipRecUpdate</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>BatchRelationshipRecUpdate_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Batch_UpdateChildCaseOwner_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Batch_UpdateChildCaseOwner_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Batch_UpdateChildCaseTeamMember_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Batch_UpdateChildWishCaseTeamMember_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
->>>>>>> master
     <classAccesses>
         <apexClass>Batch_UpdateVolunteerRoleStatus_AC</apexClass>
         <enabled>false</enabled>
@@ -1157,20 +1127,8 @@
         <apexClass>batch_BGCExpReminder_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-<<<<<<< HEAD
     
     
-    
-=======
-    <classAccesses>
-        <apexClass>batch_BUpdateAffiliation_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_BUpdateAffiliation_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
->>>>>>> master
     <classAccesses>
         <apexClass>batch_COIExpReminder_AC</apexClass>
         <enabled>false</enabled>
@@ -1179,20 +1137,8 @@
         <apexClass>batch_COIExpReminder_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-<<<<<<< HEAD
     
     
-    
-=======
-    <classAccesses>
-        <apexClass>batch_CaseTeamMemberUpdate</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_CaseTeamMemberUpdateTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
->>>>>>> master
     <classAccesses>
         <apexClass>batch_CheckBGCheckExpiration_AC_Test</apexClass>
         <enabled>false</enabled>
