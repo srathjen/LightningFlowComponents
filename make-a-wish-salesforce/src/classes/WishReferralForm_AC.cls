@@ -7,7 +7,9 @@ Description : It will capture the lead from Referral form.
 // 07/29/2019 -Brittany - SIW-147 Comment out entire duplicate block logic (including Notifications) to support Potential Duplicates Functionality
 // 06/02/2020 - Manoj - SIW-275 Mapped 'Medical reason' text value to field 'Referrer Rush Reason' on Lead
 // 03/25/2020 - Gus Mayer - SCC-151 Assigning Lead Record Type to Wish Child
+// 04/28/2020 - Manoj -  SIW-563: Modified condition to fix email issue for all relationship type
 global class WishReferralForm_AC {
+	
     public String remailOne {get;set;}
     public String remailTwo {get;set;}
     public Lead currLead {get;set;}
@@ -51,12 +53,15 @@ global class WishReferralForm_AC {
      * Create new lead
      */
     public PageReference CreateLead() {
-        if(currLead.Relationship_to_child__c != null 
-                && currLead.Relationship_to_child__c.contains(Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL)) {
-                        currLead.Referrer_Email__c = remailOne;
-        } else {
-            currLead.Referrer_Email__c = remailTwo;
-        }
+        //SIW-563: Modified condition to fix email issue for all relationship type
+        if(currLead.Relationship_to_child__c != null) {
+            if(currLead.Relationship_to_child__c.trim().equalsIgnoreCase(Constant_AC.Other_RT_LABEL)){
+                currLead.Referrer_Email__c = remailTwo;
+            }
+            else{
+                currLead.Referrer_Email__c = remailOne;
+            }
+        }   
         String logValue;
         String recId;
         List<String> lstLog = new List<String>();
@@ -536,3 +541,4 @@ global class WishReferralForm_AC {
         public String age {get;set;}
     }
 }
+
