@@ -90,13 +90,6 @@ public class VolunteerLanding_AC {
 		diplayClassOffRec = new List<Class_Offering__c>();
 		Id activeVolunteerRecordTypeId = Constant_AC.ACTIVE_VOL_RT_ID;
 		currUser = Utils.currentUser;
-		if (Test.isRunningTest()) {
-			currUser = [
-					SELECT Id, ContactId
-					FROM User
-					WHERE Id = :UserInfo.getUserId()
-			];
-		}
 		currentUserId = currUser.Id;
 		List<Background_check__c> dbBackGround = [
 				SELECT Id,CreatedDate,Hidden_Display_Popup__c,Volunteer__c,Status__c
@@ -341,13 +334,6 @@ public class VolunteerLanding_AC {
 		String log, recId;
 		try {
 			User currUser = Utils.currentUser;
-			if (Test.isRunningTest()) {
-				currUser = [
-						SELECT Id, ContactId
-						FROM User
-						WHERE Id = :UserInfo.getUserId()
-				];
-			}
 			List<Background_check__c> currVolBGCheck = [
 					SELECT Id,Volunteer__c, Current__c, Date_Completed__c,Date__c,Status__c
 					FROM Background_check__c
@@ -659,13 +645,6 @@ public class VolunteerLanding_AC {
 			Background_check__c newCheck = new Background_check__c();
 			newCheck.Date_Requested__c = Date.today();
 			newCheck.Requested_By__c = Utils.currentUser.Id;
-			if (Test.isRunningTest()) {
-				newCheck.Requested_By__c = [
-						SELECT Id, ContactId
-						FROM User
-						WHERE Id = :UserInfo.getUserId()
-				].Id;
-			}
 			newCheck.Volunteer__c = currUser.ContactId;
 			if (confirmPopup) {
 				newCheck.Hidden_Display_Popup__c = true;
@@ -791,13 +770,6 @@ public class VolunteerLanding_AC {
 		String recId;
 		try {
 			User currUser = Utils.currentUser;
-			if (Test.isRunningTest()) {
-				currUser = [
-						SELECT Id, ContactId
-						FROM User
-						WHERE Id = :UserInfo.getUserId()
-				];
-			}
 			volunteercon = [
 					SELECT Id,FirstName,LastName,Name,Email,Phone
 					FROM Contact

@@ -135,6 +135,7 @@ public class VolunteerLanding_AC_Test {
 			Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
 			insert currOffering;
 
+			Utils.currentUser = null;
 			controller = new VolunteerLanding_AC();
 			controller.getChapterList();
 			controller.EnterchapterPage();
@@ -246,6 +247,7 @@ public class VolunteerLanding_AC_Test {
 		insert currOffering;
 
 		System.runAs(currUser) {
+			Utils.currentUser = null;
 			controller = new VolunteerLanding_AC();
 			controller.confirmPopup = true;
 			controller.hidePopup();
@@ -310,6 +312,7 @@ public class VolunteerLanding_AC_Test {
 			currVal.CurrentChapter__c = currUser.Contact.Account.Name;
 			insert currVal;
 
+			Utils.currentUser = null;
 			controller = new VolunteerLanding_AC();
 			controller.getChapterList();
 			controller.EnterchapterPage();
