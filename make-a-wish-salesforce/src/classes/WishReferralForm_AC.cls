@@ -9,6 +9,7 @@ Description : It will capture the lead from Referral form.
 // 03/25/2020 - Gus Mayer - SCC-151 Assigning Lead Record Type to Wish Child
 // 04/28/2020 - Manoj -  SIW-563: Modified condition to fix email issue for all relationship type
 global class WishReferralForm_AC {
+	
     public String remailOne {get;set;}
     public String remailTwo {get;set;}
     public Lead currLead {get;set;}
