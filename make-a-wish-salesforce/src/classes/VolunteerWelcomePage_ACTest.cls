@@ -31,7 +31,7 @@ public class VolunteerWelcomePage_ACTest {
             insert currUser;
         }
         currUser = [
-                SELECT Id, ContactId, Contact.AccountId
+                SELECT Id,ContactId,CreatedDate,ProfileId
                 FROM User
                 WHERE Id = :currUser.Id
         ];
@@ -41,6 +41,7 @@ public class VolunteerWelcomePage_ACTest {
                 createDynamicContent, createProspectiveDynamicContent
         };
         System.runAs(currUser) {
+            Utils.currentUser = null;
             VolunteerWelcomePage_AC controller = new VolunteerWelcomePage_AC();
             controller.becomeAVolunteer();
             controller.findVolunteerStatus();
@@ -559,6 +560,8 @@ public class VolunteerWelcomePage_ACTest {
             currBC.Status__c = 'Approved';
             currBC.Current__c = true;
             update currBC;
+
+            Utils.currentUser = null;
             VolunteerWelcomePage_AC controller = new VolunteerWelcomePage_AC();
             controller.getEvents();
             controller.becomeAVolunteer();
@@ -653,6 +656,7 @@ public class VolunteerWelcomePage_ACTest {
             currBC1.Status__c = 'Approved';
             insert currBC1;
 
+            Utils.currentUser = null;
             VolunteerWelcomePage_AC controller = new VolunteerWelcomePage_AC();
             controller.getEvents();
             controller.becomeAVolunteer();
