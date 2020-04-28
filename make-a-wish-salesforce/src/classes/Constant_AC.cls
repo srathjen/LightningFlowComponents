@@ -2,6 +2,7 @@
  * @description Constants class
  * @author      Gustavo Mayer, Traction on Demand
  * @createdDate 6-19-2019
+ // 04/28/2020 - Manoj - SIW-563 : Added label for 'Other'
  */
 public class Constant_AC {
 	public final static String CONTACT_WISH_CHILD_RT_LABEL = 'Wish Child';
@@ -20,6 +21,7 @@ public class Constant_AC {
 	public final static Id WISH_RT_ID = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Wish').getRecordTypeId();
 	public final static Id MEDICAL_PROFESSIONAL_RT_ID = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName().get('Medical_Professional').getRecordTypeId();
 	public final static String MEDICAL_PROFESSIONAL_RT_LABEL = 'Medical Professional';
+	public final static String Other_RT_LABEL = 'Other';//SIW-563 : Added label for 'Other'
 	public final static Id ORGANIZATION_RT_ID = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Organization').getRecordTypeId();
 	public final static Id HOUSEHOLD_RT_ID = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('HH_Account').getRecordTypeId();
 	public final static Id CHAPTER_RT_ID = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Chapter').getRecordTypeId();
