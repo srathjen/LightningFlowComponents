@@ -1,34 +1,35 @@
-@isTest
+@IsTest
 public class VolunteerWorkItems_AC_Test {
 
-	@testSetup static void setup() {
+	@TestSetup
+	static void setup() {
 		trac_TriggerHandlerBase.blockTrigger = true;
 		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
 		acc.Name = 'Primary Account';
 		insert acc;
 
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
 		Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
 		insert new List<Contact>{
 				con, wishChild
 		};
 
-		insert OrientationandTrainingUtil.createAffiliation(con.id);
+		insert OrientationandTrainingUtil.createAffiliation(con.Id);
 
 		User currUser;
-		System.RunAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createActiveVolunteerUser(con.id);
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			currUser = OrientationandTrainingUtil.createActiveVolunteerUser(con.Id);
 			insert currUser;
 		}
 
 		Role__c currRole = OrientationandTrainingUtil.createRole();
 		Role__c currNonWishRole = OrientationandTrainingUtil.createNonWishRole();
-		insert new List<Role__C>{
+		insert new List<Role__c>{
 				currRole, currNonWishRole
 		};
 
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.id, currRole.Id);
-		Chapter_Role__c currNonWishChapRole = OrientationandTrainingUtil.createChapter(acc.id, currNonWishRole.Id);
+		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
+		Chapter_Role__c currNonWishChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currNonWishRole.Id);
 		insert new List<Chapter_Role__c>{
 				currChapRole, currNonWishChapRole
 		};
@@ -88,15 +89,12 @@ public class VolunteerWorkItems_AC_Test {
 				nonWishEventVolunteerOpportunity, nonWishEventVolunteerOpportunity1,
 				wishEventVolunteerOpportunity, wishEventVolunteerOpportunity1
 		};
-		/*Case ParentWish = OrientationandTrainingUtil.CreateParentCaseWithTravel(wishChild.Id);
-		Volunteer_Opportunity__c closewishVolunteerOpportunity = OrientationandTrainingUtil.CreateNewWishVolunteerOpportunity(acc.Id,currChapRole.Id,ParentWish.Id);
-		closewishVolunteerOpportunity.Volunteer_Name__c = con.Id;
-		update closewishVolunteerOpportunity;*/
 		trac_TriggerHandlerBase.blockTrigger = false;
 	}
 
-	public static testMethod void volunteerWishEvents() {
-		test.startTest();
+	@IsTest
+	public static void volunteerWishEvents() {
+		Test.startTest();
 		Account chapterAcc = [
 				SELECT Id
 				FROM Account
@@ -112,13 +110,13 @@ public class VolunteerWorkItems_AC_Test {
 				currRole, currNonWishRole
 		};
 
-		Chapter_Role__c currNonWishChapRole = OrientationandTrainingUtil.createChapter(acc.id, currNonWishRole.Id);
+		Chapter_Role__c currNonWishChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currNonWishRole.Id);
 		insert currNonWishChapRole;
 
 		User currUser = [
-				SELECT Id,UserName, ContactId
+				SELECT Id,Username, ContactId
 				FROM User
-				WHERE UserName = :'joathanedwards@gmail.com'
+				WHERE Username = :'joathanedwards@gmail.com'
 		];
 		Case dbCase = [
 				SELECT Id,Status,Wish_Type__c
@@ -127,13 +125,13 @@ public class VolunteerWorkItems_AC_Test {
 		];
 
 		Volunteer_Opportunity__c dbOpp = [
-				SELECT Id,Wish__c,Non_Wish_Event__C,Hidden_VolunteerCount_Desc__c,Chapter_Role_Opportunity__c
+				SELECT Id,Wish__c,Non_Wish_Event__c,Hidden_VolunteerCount_Desc__c,Chapter_Role_Opportunity__c
 				FROM Volunteer_Opportunity__c
-				WHERE Wish__c = :dbCase.id
-				Limit 1
+				WHERE Wish__c = :dbCase.Id
+				LIMIT 1
 		];
 		List<Volunteer_Opportunity__c> voloppList = new List<Volunteer_Opportunity__c>([
-				SELECT Id,Wish__c,Non_Wish_Event__C,Hidden_VolunteerCount_Desc__c,Role__c,
+				SELECT Id,Wish__c,Non_Wish_Event__c,Hidden_VolunteerCount_Desc__c,Role__c,
 						Chapter_Role_Opportunity__r.Role_Name__c,Chapter_Name__r.Name, Reason_Inactive__c,
 						Status__c
 				FROM Volunteer_Opportunity__c
@@ -152,7 +150,7 @@ public class VolunteerWorkItems_AC_Test {
 		volRole.Sub_status__c = 'Missing Requirement';
 		volRole.Volunteer_Name__c = currUser.ContactId;
 		update volRole;
-		System.RunAs(currUser) {
+		System.runAs(currUser) {
 
 			PageReference pageref = Page.MyAssignment_VF;
 			Test.setCurrentPageReference(pageref);
@@ -170,18 +168,20 @@ public class VolunteerWorkItems_AC_Test {
 			volunteerWorkitems.volunteerOpportunityRecordId = voloppList[0].Id;
 			volunteerWorkitems.RegisterWishEvents();
 			volunteerWorkitems.registrationConfirmation();
-			volunteerWorkitems.getChapterRoleOanTStatus(currNonWishChapRole.id);
+			volunteerWorkitems.getChapterRoleOanTStatus(currNonWishChapRole.Id);
 			volunteerWorkitems.allowRegisteration(voloppList);
 			volunteerWorkitems.RedirecttoVolOpportunity();
-			test.stopTest();
+			Test.stopTest();
 		}
 	}
-	public static testMethod void volunteerClosedWish() {
+
+	@IsTest
+	public static void volunteerClosedWish() {
 		Test.startTest();
-		user currUser = [
-				SELECT Id,UserName
+		User currUser = [
+				SELECT Id,Username
 				FROM User
-				WHERE UserName = :'joathanedwards@gmail.com'
+				WHERE Username = :'joathanedwards@gmail.com'
 		];
 
 		Case dbCase = [
@@ -190,10 +190,8 @@ public class VolunteerWorkItems_AC_Test {
 				WHERE Wish_Type__c = :'Disney World'
 		];
 		dbCase.Status = 'Closed';
-		//update closedCase;
 
-		System.RunAs(currUser) {
-
+		System.runAs(currUser) {
 			PageReference pageref = Page.MyAssignment_VF;
 			Test.setCurrentPageReference(pageref);
 			VolunteerWorkItems_AC volunteerWorkitems = new VolunteerWorkItems_AC();
@@ -201,26 +199,26 @@ public class VolunteerWorkItems_AC_Test {
 			volunteerWorkitems.HistoricalWish();
 			volunteerWorkitems.getClosedWish();
 			volunteerWorkitems.RegisterWishEvents();
-			// volunteerWorkitems.allowRegisteration();
-
 		}
-		test.stopTest();
+		Test.stopTest();
 	}
-	public static testMethod void volunteerClosedNonWish() {
+
+	@IsTest
+	public static void volunteerClosedNonWish() {
 		Test.startTest();
-		user currUser = [
-				SELECT Id,UserName
+		User currUser = [
+				SELECT Id,Username
 				FROM User
-				WHERE UserName = :'joathanedwards@gmail.com'
+				WHERE Username = :'joathanedwards@gmail.com'
 		];
 		Non_Wish_Events__c closedNonWish = [
 				SELECT Id,Event_Text__c
 				FROM Non_Wish_Events__c
 				WHERE Event_Text__c = 'Sending Wish Child'
 		];
-		closedNonWish.Event_Date__c = system.today() - 3;
+		closedNonWish.Event_Date__c = System.today() - 3;
 		update closedNonWish;
-		System.RunAs(currUser) {
+		System.runAs(currUser) {
 			PageReference pageref = Page.MyAssignment_VF;
 			Test.setCurrentPageReference(pageref);
 			VolunteerWorkItems_AC volunteerWorkitems = new VolunteerWorkItems_AC();
@@ -228,18 +226,17 @@ public class VolunteerWorkItems_AC_Test {
 			volunteerWorkitems.HistoricalWish();
 			volunteerWorkitems.getClosedNonWishEvents();
 			volunteerWorkitems.RegisterWishEvents();
-			//volunteerWorkitems.allowRegisteration();
-
 		}
-		test.stopTest();
+		Test.stopTest();
 	}
 
-	public static testMethod void volunteerRegisteredNonWish() {
+	@IsTest
+	public static void volunteerRegisteredNonWish() {
 		Test.startTest();
-		user currUser = [
-				SELECT Id,UserName
+		User currUser = [
+				SELECT Id,Username
 				FROM User
-				WHERE UserName = :'joathanedwards@gmail.com'
+				WHERE Username = :'joathanedwards@gmail.com'
 		];
 		Non_Wish_Events__c dbNonWish = [
 				SELECT Id,Event_Text__c
@@ -247,20 +244,17 @@ public class VolunteerWorkItems_AC_Test {
 				WHERE Event_Text__c = 'Sending Wish Child'
 		];
 		Volunteer_Opportunity__c dbOpp = [
-				SELECT Id,Chapter_Name__r.Name,Non_Wish_Event__C,Chapter_Role_Opportunity__r.Role_Name__c
+				SELECT Id,Chapter_Name__r.Name,Non_Wish_Event__c,Chapter_Role_Opportunity__r.Role_Name__c
 				FROM Volunteer_Opportunity__c
-				WHERE Non_Wish_Event__C = :dbNonWish.Id
-				Limit 1
+				WHERE Non_Wish_Event__c = :dbNonWish.Id
+				LIMIT 1
 		];
-		System.RunAs(currUser) {
+		System.runAs(currUser) {
 			PageReference pageref = Page.MyAssignment_VF;
 			Test.setCurrentPageReference(pageref);
 			VolunteerWorkItems_AC volunteerWorkitems = new VolunteerWorkItems_AC();
 			volunteerWorkitems.volunteerOpportunityRecordId = dbOpp.Id;
 			volunteerWorkitems.RegisterWishEvents();
-			//volunteerWorkitems.allowRegisteration();
-			// volunteerWorkitems.RegisterNonWishEvents();
-
 		}
 		Test.stopTest();
 	}
