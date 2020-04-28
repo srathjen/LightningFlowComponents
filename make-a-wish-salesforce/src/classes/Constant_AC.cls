@@ -520,6 +520,7 @@ public class Constant_AC {
 	public static final String CASE_TEAM_ROLE_WISH_COORDINATOR_INACTIVE = 'Wish Coordinator (Inactive)';
 	public static final String CASE_TEAM_ROLE_WISH_COORDINATOR = 'Wish Coordinator';
 	public static final String CASE_TEAM_ROLE_WISH_GRANTER = 'Wish Granter';
+	public static final String CASE_TEAM_ROLE_WISH_GRANTER_MENTOR = 'Wish Granter Mentor';
 
 	/**
 	 * Process Instance Constants
