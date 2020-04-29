@@ -1412,6 +1412,48 @@
         <value>Volunteer need count should not be less than the volunteer registered count.</value>
     </labels>
     <labels>
+        <fullName>VolunteerSignUp_Over18</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerSignUp_Over18</shortDescription>
+        <value>Thank you for your interest in volunteering with Make-A-Wish. Most volunteer opportunities are designed for individuals over the age of 18. If you are under the age of 18, please contact your local chapter to discuss what, if any, opportunities we currently have available.</value>
+    </labels>
+    <labels>
+        <fullName>VolunteerSignUp_Required_Fields</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerSignUp_Required_Fields</shortDescription>
+        <value>Please fill out all required fields.</value>
+    </labels>
+    <labels>
+        <fullName>VolunteerSignUp_Username_In_Use</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerSignUp_Username_In_Use</shortDescription>
+        <value>The username you provided is already in use. Please enter a different username to continue the sign up process. If you have already signed up, please click &quot;Log In&quot; to access the login page.</value>
+    </labels>
+    <labels>
+        <fullName>VolunteerSignUp_Valid_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerSignUp_Valid_Email</shortDescription>
+        <value>Please enter a valid email address.</value>
+    </labels>
+    <labels>
+        <fullName>VolunteerSignUp_Valid_Username</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerSignUp_Valid_Username</shortDescription>
+        <value>Please enter a valid username. Username must be in email format (name@domain.com).</value>
+    </labels>
+    <labels>
+        <fullName>VolunteerSignUp_Zip_Code</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerSignUp_Zip_Code</shortDescription>
+        <value>Please enter a 5 digit zip code.</value>
+    </labels>
+    <labels>
         <fullName>WG_FinalStep_FileClosed</fullName>
         <categories>Drawloop</categories>
         <language>en_US</language>
