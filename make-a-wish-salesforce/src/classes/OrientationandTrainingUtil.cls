@@ -35,7 +35,7 @@ public class OrientationandTrainingUtil {
 
 	public static Account createchapterAccount() {
 		Account newchapterAccount = new Account();
-		newchapterAccount .Name = 'Make-A-Wish Alabama';
+		newchapterAccount.Name = 'Make-A-Wish Alabama';
 		newchapterAccount.RecordTypeId = chapterRecordTypeId;
 		newchapterAccount.MAC_Email_del__c = 'Test@gmail.com';
 		newchapterAccount.Wish_Co_ordinator__c = createUser().Id;
@@ -58,11 +58,11 @@ public class OrientationandTrainingUtil {
 		return newchapterAccount;
 	}
 
-	public static account CreateAmericaAccount() {
+	public static Account CreateAmericaAccount() {
 		Account newchapterAccount = new Account();
 		newchapterAccount.Name = 'Make-A-Wish America';
 		newchapterAccount.RecordTypeId = chapterRecordTypeId;
-		newchapterAccount.Wish_Co_ordinator__c = Userinfo.getUserId();
+		newchapterAccount.Wish_Co_ordinator__c = UserInfo.getUserId();
 		return newchapterAccount;
 	}
 
@@ -77,7 +77,7 @@ public class OrientationandTrainingUtil {
 		Account newchapterAccount = new Account();
 		newchapterAccount.Name = 'InKind Account';
 		newchapterAccount.RecordTypeId = inKindDonorsAccountRecordTypeId;
-		newchapterAccount.Chapter_Name__c = createchapterAccount().id;
+		newchapterAccount.Chapter_Name__c = createchapterAccount().Id;
 		return newchapterAccount;
 	}
 
@@ -365,7 +365,7 @@ public class OrientationandTrainingUtil {
 		wishFamilyCon.RecordTypeId = wishFamilyRecordTypeId ;
 		wishFamilyCon.IsParentGuardian__c = 'ParentGuardian';
 		wishFamilyCon.BirthDate = system.Today() + 11234;
-		wishFamilyCon.Region_Chapter__c = createchapterAccount().id;
+		wishFamilyCon.Region_Chapter__c = createchapterAccount().Id;
 		return wishFamilyCon ;
 	}
 
@@ -381,13 +381,13 @@ public class OrientationandTrainingUtil {
 		wishFamilyCon.MailingPostalCode = '6201717';
 		wishFamilyCon.MailingCountryCode = 'US';
 		wishFamilyCon.RecordTypeId = wishFamilyRecordTypeId ;
-		wishFamilyCon.Region_Chapter__c = createchapterAccount().id;
+		wishFamilyCon.Region_Chapter__c = createchapterAccount().Id;
 		return wishFamilyCon ;
 	}
 
 	public static contact CreateWishChildCon() {
 		Contact wishChildCon = new Contact();
-		wishChildCon.Region_Chapter__c = createchapterAccount().id;
+		wishChildCon.Region_Chapter__c = createchapterAccount().Id;
 		wishChildCon.FirstName = 'moss';
 		wishChildCon.LastName = 'Smith Household';
 		wishChildCon.Email = 'testmawa@gmail.com';
@@ -417,7 +417,7 @@ public class OrientationandTrainingUtil {
 		newWishChild.Parent_Guardian_Name__c = 'Jonathan Edwards';
 		newWishChild.RecordTypeId = wishChildRecordTypeId ;
 		newWishChild.Diagnosis__c = 'Test';
-		newWishChild.ICD_10_Code__c = obj.id;
+		newWishChild.ICD_10_Code__c = obj.Id;
 		newWishChild.AccountId = accId;
 		return newWishChild;
 	}
@@ -435,7 +435,7 @@ public class OrientationandTrainingUtil {
 		wishFamilyCon.MailingCountryCode = 'US';
 		wishFamilyCon.BirthDate = system.Today() + 11234;
 		wishFamilyCon.RecordTypeId = wishFamilyRecordTypeId ;
-		wishFamilyCon.Region_Chapter__c = createchapterAccount().id;
+		wishFamilyCon.Region_Chapter__c = createchapterAccount().Id;
 		return wishFamilyCon ;
 	}
 
@@ -481,7 +481,7 @@ public class OrientationandTrainingUtil {
 		ICD_Codes__c obj = new ICD_Codes__c();
 		obj.Name = 'C120';
 		insert obj;
-		newLead.PD_ICD_Code__c = obj.id;
+		newLead.PD_ICD_Code__c = obj.Id;
 		newLead.Lung_Disease__c = 'Test1;Test2';
 		newLead.Angina__c = 'Test1;Test2';
 		newLead.Ventilator__c = 'Test1;Test2';
@@ -569,8 +569,8 @@ public class OrientationandTrainingUtil {
 		Lead newLead = createTestLeadRec(chapterAccount.Id);
 		Contact newContact = CreateMedicalProfContact();
 		Case newDiagnosis = new Case();
-		newDiagnosis.Lead__c = newLead.id;
-		newDiagnosis.Local_MCA_Team__c = newContact.id;
+		newDiagnosis.Lead__c = newLead.Id;
+		newDiagnosis.Local_MCA_Team__c = newContact.Id;
 		newDiagnosis.MAC_Email__c = 'chandrasekar@mstsolutions.com';
 		newDiagnosis.RecordTypeId = diagnosisVerificationRecordTypeId;
 		return newDiagnosis;
@@ -681,7 +681,7 @@ public class OrientationandTrainingUtil {
 		newDeterminationtWish.ParentId = CreateParentCaseWithoutInterviewDate(newCon.Id).Id;
 		insert newDeterminationtWish;
 		Datetime oldDate = Datetime.now().addDays(-21);
-		Test.setCreatedDate(newDeterminationtWish.id, oldDate);
+		Test.setCreatedDate(newDeterminationtWish.Id, oldDate);
 		return newDeterminationtWish;
 	}
 
@@ -770,7 +770,7 @@ public class OrientationandTrainingUtil {
 		return newRole;
 	}
 
-	public Static Chapter_Role__c createChapter(String chapterId, String RoleId) {
+	public static Chapter_Role__c createChapter(String chapterId, String RoleId) {
 		Chapter_Role__c newChapRole = new Chapter_Role__c();
 		newChapRole.Chapter_Name__c = chapterId;
 		newChapRole.Role_Name__c = roleId;
@@ -854,7 +854,7 @@ public class OrientationandTrainingUtil {
 				TimeZoneSidKey = 'America/Los_Angeles',
 				LocaleSidKey = 'en_US',
 				LanguageLocaleKey = 'en_US',
-				ProfileId = sysAdminProfile.id);
+				ProfileId = sysAdminProfile.Id);
 		return tuser;
 	}
 
@@ -975,7 +975,7 @@ public class OrientationandTrainingUtil {
 				isActive = true,
 				State = 'Arizona',
 				UserRoleId = newUserRole.Id,
-				ManagerId = user1.id
+				ManagerId = user1.Id
 		);
 		return tuser;
 	}
@@ -1177,7 +1177,7 @@ public class OrientationandTrainingUtil {
 		return newContent;
 	}
 
-	public Static DocuSignCredentialsSetting__c insertDocusignSetting() {
+	public static DocuSignCredentialsSetting__c insertDocusignSetting() {
 		DocuSignCredentialsSetting__c newSetting = new DocuSignCredentialsSetting__c();
 		newSetting.account__c = '0afd45e1-ae2d-468c-a168-b8603dae66a3';
 		newSetting.IntegratorKey__c = 'ea6d625f-6c08-4b12-aa2d-554909addb30';
@@ -1223,7 +1223,7 @@ public class OrientationandTrainingUtil {
 		newNonWishOpportunity.Chapter_Name__c = chapterId;
 		newNonWishOpportunity.RecordTypeId = nonWishRecordTypeId;
 		newNonWishOpportunity.Status__c = 'Pending';
-		newNonWishOpportunity.HiddenVolunteer_Count_Description__c = newVolCount.id;
+		newNonWishOpportunity.HiddenVolunteer_Count_Description__c = newVolCount.Id;
 		return newNonWishOpportunity;
 	}
 
@@ -1350,7 +1350,7 @@ public class OrientationandTrainingUtil {
 		return newVolCount;
 	}
 
-	public Static List<Time_sheet__c> crateWishTimeSheet(List<Volunteer_Opportunity__c> WishOpportunityList) {
+	public static List<Time_sheet__c> crateWishTimeSheet(List<Volunteer_Opportunity__c> WishOpportunityList) {
 		List<Time_sheet__c> nonwishDeterminationList = new List<Time_sheet__c>();
 		for (Integer i = 0; i < WishOpportunityList.Size(); i++) {
 			Time_sheet__c newTimeSheet = new Time_sheet__c();
@@ -1362,7 +1362,7 @@ public class OrientationandTrainingUtil {
 		return nonwishDeterminationList;
 	}
 
-	public Static List<Time_sheet__c> crateNonWishTimeSheet(List<Volunteer_Opportunity__c> nonWishopportunityList, integer a) {
+	public static List<Time_sheet__c> crateNonWishTimeSheet(List<Volunteer_Opportunity__c> nonWishopportunityList, integer a) {
 		List<Time_sheet__c> nonwishDeterminationList = new List<Time_sheet__c>();
 		for (Integer i = 1; i <= a; i++) {
 			Time_sheet__c newTimeSheet = new Time_sheet__c();
@@ -1374,7 +1374,7 @@ public class OrientationandTrainingUtil {
 		return nonwishDeterminationList;
 	}
 
-	public Static void cretateGroup() {
+	public static void cretateGroup() {
 		Group leadalabamaGroup = new Group(Type = 'Regular', Name = 'Arizona');
 	}
 
@@ -1448,7 +1448,7 @@ public class OrientationandTrainingUtil {
 		return newZip;
 	}
 
-	public Static List<Medical_Questions__c> CreateMedicalQuestion(Id ConditionDesc) {
+	public static List<Medical_Questions__c> CreateMedicalQuestion(Id ConditionDesc) {
 		list<Medical_Questions__c> medicalQuestionList = new List<Medical_Questions__c>();
 		Medical_Questions__c newQuestionsOne = new Medical_Questions__c();
 		newQuestionsOne.Question__c = 'Is child currently or within one year of completing treatment for this condition?';
@@ -1707,22 +1707,10 @@ public class OrientationandTrainingUtil {
 		return newRelationShip;
 	}
 
-	public Static npe4__Relationship__c relationshipChild(Id FamilyContactId, id ChildContactid) {
+	public static npe4__Relationship__c relationshipChild(Id FamilyContactId, id ChildContactid) {
 		npe4__Relationship__c newRelationForm = new npe4__Relationship__c();
 		newRelationForm.npe4__Contact__c = ChildContactid;
 		newRelationForm.npe4__RelatedContact__c = FamilyContactId;
-		newRelationForm.Parent_Legal_Guardian__c = true;
-		return newRelationForm;
-	}
-
-	public Static npe4__Relationship__c relationshipChildWithFalse(Id FamilyContactId, id ChildContactid) {
-		npe4__Relationship__c newRelationForm = new npe4__Relationship__c();
-		newRelationForm.npe4__Contact__c = ChildContactid;
-		newRelationForm.npe4__RelatedContact__c = FamilyContactId;
-		newRelationForm.Parent_Legal_Guardian__c = false;
-		newRelationForm.npe4__Type__c = medicalProfessionalRecordTypeLabel;
-		newRelationForm.Qualifying_Medical_Professional__c = true;
-		newRelationForm.npe4__Status__c = 'Active';
 		newRelationForm.Parent_Legal_Guardian__c = true;
 		return newRelationForm;
 	}
@@ -1772,7 +1760,7 @@ public class OrientationandTrainingUtil {
 		return newCaseFile;
 	}
 
-	public static cg__contactFile__c createContactFileRecord(Id contactId) {
+	public static cg__ContactFile__c createContactFileRecord(Id contactId) {
 		cg__ContactFile__c newContactFile = new cg__ContactFile__c();
 		newContactFile.cg__File_Name__c = 'MedicalSummary.txt';
 		newContactFile.cg__Contact__c = contactId;
@@ -1780,12 +1768,12 @@ public class OrientationandTrainingUtil {
 		return newContactFile;
 	}
 
-	public Static Case createParentCase() {
+	public static Case createParentCase() {
 		Case newCase = new Case();
 		return newCase;
 	}
 
-	public Static dsfs__DocuSign_Recipient_Status__c CreatedsfsRec(Id dsfsStatusId) {
+	public static dsfs__DocuSign_Recipient_Status__c CreatedsfsRec(Id dsfsStatusId) {
 		dsfs__DocuSign_Recipient_Status__c newdsfs = new dsfs__DocuSign_Recipient_Status__c();
 		newdsfs.dsfs__Parent_Status_Record__c = dsfsStatusId;
 		newdsfs.dsfs__DocuSign_Recipient_Email__c = 'testmawa@gmail.com';
@@ -1796,7 +1784,7 @@ public class OrientationandTrainingUtil {
 		return newdsfs;
 	}
 
-	public Static dsfs__DocuSign_Recipient_Status__c CreatedsfsRecAsDeliver(Id dsfsStatusId) {
+	public static dsfs__DocuSign_Recipient_Status__c CreatedsfsRecAsDeliver(Id dsfsStatusId) {
 		dsfs__DocuSign_Recipient_Status__c newdsfs = new dsfs__DocuSign_Recipient_Status__c();
 		newdsfs.dsfs__Parent_Status_Record__c = dsfsStatusId;
 		newdsfs.dsfs__DocuSign_Recipient_Email__c = 'testmawa@gmail.com';
@@ -1807,7 +1795,7 @@ public class OrientationandTrainingUtil {
 		return newdsfs;
 	}
 
-	public Static dsfs__DocuSign_Recipient_Status__c CreatedsfsRecAsDeliverRecord(Id dsfsStatusId) {
+	public static dsfs__DocuSign_Recipient_Status__c CreatedsfsRecAsDeliverRecord(Id dsfsStatusId) {
 		dsfs__DocuSign_Recipient_Status__c newdsfs = new dsfs__DocuSign_Recipient_Status__c();
 		newdsfs.dsfs__Parent_Status_Record__c = dsfsStatusId;
 		newdsfs.dsfs__DocuSign_Recipient_Email__c = 'testmawa@gmail.com';
@@ -1820,7 +1808,6 @@ public class OrientationandTrainingUtil {
 
 	// public static In_Kind_Donation_Reimbursement_File__c  createInkindDonaReimbFileRecord(Id ikdrId) {
 	public static InkindDon_reimburseFile__c createInkindDonaReimbFileRecord(Id ikdrId) {
-		//In_Kind_Donation_Reimbursement_File__c  newikdrFile = new In_Kind_Donation_Reimbursement_File__c  ();
 		InkindDon_reimburseFile__c newikdrFile = new InkindDon_reimburseFile__c();
 		newikdrFile.Parent__c = ikdrId;
 		newikdrFile.File_Name__c = 'MedicalSummary.txt';
@@ -1846,7 +1833,7 @@ public class OrientationandTrainingUtil {
 		Attachment newAttachment = new Attachment();
 		newAttachment.ParentId = ParentId;
 		newAttachment.Name = 'Attachment1';
-		newAttachment.Body = blob.valueOf('Hi Welcome to body text');
+		newAttachment.Body = Blob.valueOf('Hi Welcome to body text');
 		return newAttachment;
 	}
 
