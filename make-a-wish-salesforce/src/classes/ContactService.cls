@@ -11,7 +11,6 @@ public class ContactService {
 	private final static Id VOLUNTEER_RT_ID = Constant_AC.VOLUNTEER_RT_ID;
 	private final static Id BOARD_MEMBER_RT_ID = Constant_AC.BOARD_MEMBER_RT_ID;
 	private final static Id STAFF_TASK_RT_ID = Constant_AC.STAFF_TASK_RT_ID;
-	private final static Id WISH_FORM_FAMILY_ID = Constant_AC.WISH_FORM_FAMILY_ID;
 	private final static String VOLUNTEER_ROLE_STATUS_ACTIVE = Constant_AC.VOLUNTEER_ROLE_STATUS_ACTIVE;
 	private final static String ORG_AFFILIATION_STATUS_STATUS_ACTIVE = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
 	private final static String CHAPTER_ROLE_SINGLE_DAY_EVENT_VOLUNTEER = Constant_AC.CHAPTER_ROLE_SINGLE_DAY_EVENT_VOLUNTEER;
@@ -740,40 +739,6 @@ public class ContactService {
 				update affiliationList;
 			} catch (Exception e) {
 				createContactDebugLog(affiliationList, 'updateContactAffiliation', e);
-			}
-		}
-	}
-
-	/**
-	* Update contact lookup on wish form
-	* @param contactList
-	*/
-	public static void updateWishFormContact(List<Contact> contactList) {
-		Map<Id, Id> contactIdMap = new Map<Id, Id>();
-		List<Wish_Child_Form__c> wishChildFormList = new List<Wish_Child_Form__c>();
-		for (Contact contact : contactList) {
-			if (contact.Hidden_Wish_Form_Id__c != null &&
-					(contact.RecordTypeId == WISH_CHILD_RECORD_TYPE_ID
-							|| contact.RecordTypeId == WISH_FAMILY_RECORD_TYPE_ID)) {
-				contactIdMap.put(contact.Hidden_Wish_Form_Id__c, contact.Id);
-			}
-		}
-		if (!contactIdMap.isEmpty()) {
-			for (Wish_Child_Form__c wishForm : [
-					SELECT Id, Contact__c
-					FROM Wish_Child_Form__c
-					WHERE Id IN:contactIdMap.keySet()
-					AND Migrated__c = false
-			]) {
-				if (contactIdMap.containsKey(wishForm.Id)) {
-					wishForm.Contact__c = contactIdMap.get(wishForm.Id);
-					wishChildFormList.add(wishForm);
-				}
-			}
-			try {
-				update wishChildFormList;
-			} catch (Exception e) {
-				createContactDebugLog(contactList, 'updateWishFormContact', e);
 			}
 		}
 	}
@@ -1714,142 +1679,6 @@ public class ContactService {
 	}
 
 	/**
-	* Update wish form details with contact details
-	* @param newContactsList
-	* @param oldContactsMap
-	*/
-	public static void updateWishFormRecord(List<Contact> newContactsList, Map<Id, Contact> oldContactsMap) {
-		Map<Id, Contact> wishChildContactMap = new Map<Id, Contact>();
-		Map<Id, Contact> wishFamilyContactMap = new Map<Id, Contact>();
-		List<Wish_Child_Form__c> updateWishFormList = new List<Wish_Child_Form__c>();
-		for (Contact newContact : newContactsList) {
-			Contact oldContact = oldContactsMap.get(newContact.Id);
-			if (newContact.RecordTypeId == WISH_CHILD_RECORD_TYPE_ID && newContact.Hidden_Wish_Form_Id__c != null) {
-				wishChildContactMap.put(newContact.Hidden_Wish_Form_Id__c, newContact);
-			} else if (newContact.RecordTypeId == WISH_FAMILY_RECORD_TYPE_ID && newContact.Hidden_Wish_Form_Id__c != null
-					&& ((newContact.FirstName != oldContact.FirstName
-					|| newContact.Middle_Name__c != oldContact.Middle_Name__c
-					|| newContact.LastName != oldContact.LastName
-					|| newContact.Preferred_Name__c != oldContact.Preferred_Name__c)
-					|| (newContact.MailingStreet != oldContact.MailingStreet
-					|| newContact.MailingCity != oldContact.MailingCity
-					|| newContact.MailingState != oldContact.MailingState
-					|| newContact.MailingStateCode != oldContact.MailingStateCode
-					|| newContact.MailingPostalCode != oldContact.MailingPostalCode)
-					|| (newContact.Email != oldContact.Email
-					|| newContact.T_Shirt_Size__c != oldContact.T_Shirt_Size__c
-					|| newContact.Residing_with_Wish_child__c != oldContact.Residing_with_Wish_child__c
-					|| newContact.HomePhone != oldContact.HomePhone
-					|| newContact.Relationship__c != oldContact.Relationship__c
-					|| newContact.npe01__WorkPhone__c != oldContact.npe01__WorkPhone__c
-					|| newContact.Birthdate != oldContact.Birthdate
-					|| newContact.MobilePhone != oldContact.MobilePhone
-					|| newContact.Gender__c != oldContact.Gender__c
-					|| newContact.MailingCountry != oldContact.MailingCountry))) {
-				wishFamilyContactMap.put(newContact.Hidden_Wish_Form_Id__c, newContact);
-			}
-		}
-		if (!wishChildContactMap.isEmpty()) {
-			for (Wish_Child_Form__c dbWishForm : [
-					SELECT Id, FirstName__c, LastName__c, Middle_Name__c, Gender__c, Self_describe_comment_box__c, BirthDate__c, T_Shirt_Size__c, Diagnosis__c,
-							PrimaryAddreess__c, mobilePhone__c, Email__c, Color__c, Music_Singer__c, Book_Story__c, Hobby__c, Game__c, Food__c, Movie__c, TVShow__c,
-							Restaurant__c, Actor_Actress__c,Cake_Candy__c, Sport_Athlete__c, Snack_Food__c, Pet_Animal__c, ClassinSchool__c, Other__c, When_I_m_outside_I_like_to__c,
-							When_I_m_inside_I_like_to__c, Electronics_Games_that_I_like_to_play__c, When_I_m_with_my_family_I_like_to__c, When_I_m_with_my_friends_I_like_to__c,
-							MY_WISH_IS_TO__c, When_I_think_about_my_wish_I_imagine__c, This_is_my_wish_because__c, To_me_the_most_important_part_of_my_wish__c,
-							Wish_Notes__c, When_thinking_some_of_my_wish_ideas_were__c, Street__c, City__c, State__c, Zip_code__c, RecordTypeId, Migrated__c
-					FROM Wish_Child_Form__c
-					WHERE Id IN :wishChildContactMap.keySet()
-					AND RecordTypeId = :WISH_CHILD_RECORD_TYPE_ID AND Migrated__c = false
-			]) {
-				if (wishChildContactMap.containsKey(dbWishForm.Id)) {
-					Contact wishChildContact = wishChildContactMap.get(dbWishForm.Id);
-					dbWishForm.FirstName__c = wishChildContact.FirstName;
-					dbWishForm.LastName__c = wishChildContact.LastName;
-					dbWishForm.Middle_Name__c = wishChildContact.Middle_Name__c;
-					dbWishForm.BirthDate__c = wishChildContact.BirthDate;
-					dbWishForm.Diagnosis__c = wishChildContact.Diagnosis__c;
-					dbWishForm.Gender__c = wishChildContact.Gender__c;
-					dbWishForm.Self_describe_comment_box__c = wishChildContact.Self_describe_comment_box__c;
-					dbWishForm.mobilePhone__c = wishChildContact.MobilePhone;
-					dbWishForm.Email__c = wishChildContact.Email;
-					dbWishForm.T_Shirt_Size__c = wishChildContact.T_Shirt_Size__c;
-					dbWishForm.Street__c = wishChildContact.MailingStreet;
-					dbWishForm.State__c = wishChildContact.MailingState;
-					dbWishForm.city__c = wishChildContact.MailingCity;
-					dbWishForm.Zip_code__c = wishChildContact.MailingPostalCode;
-					dbWishForm.Contact__c = wishChildContact.Id;
-					dbWishForm.Color__c = wishChildContact.Color__c ;
-					dbWishForm.Music_Singer__c = wishChildContact.Music_Singer__c;
-					dbWishForm.Book_Story__c = wishChildContact.Book_Story__c;
-					dbWishForm.Hobby__c = wishChildContact.Hobby__c ;
-					dbWishForm.Game__c = wishChildContact.Game__c;
-					dbWishForm.Movie__c = wishChildContact.Movie__c;
-					dbWishForm.Food__c = wishChildContact.Food__c;
-					dbWishForm.TVShow__c = wishChildContact.TV_Show__c;
-					dbWishForm.Restaurant__c = wishChildContact.Restaurant__c;
-					dbWishForm.Actor_Actress__c = wishChildContact.Actor_Actress__c ;
-					dbWishForm.Cake_Candy__c = wishChildContact.Cake_Candy__c;
-					dbWishForm.Sport_Athlete__c = wishChildContact.Sport_Athlete__c;
-					dbWishForm.Snack_Food__c = wishChildContact.Snack_Food__c ;
-					dbWishForm.Pet_Animal__c = wishChildContact.Pet_Animal__c ;
-					dbWishForm.ClassinSchool__c = wishChildContact.Class_in_School__c;
-					dbWishForm.When_I_m_outside_I_like_to__c = wishChildContact.When_I_m_outside_I_like_to__c ;
-					dbWishForm.When_I_m_inside_I_like_to__c = wishChildContact.When_I_m_inside_I_like_to__c;
-					dbWishForm.Electronics_Games_that_I_like_to_play__c = wishChildContact.Electronics_Games_that_I_like_to_play__c ;
-					dbWishForm.When_I_m_with_my_family_I_like_to__c = wishChildContact.When_I_m_with_my_family_I_like_to__c ;
-					dbWishForm.When_I_m_with_my_friends_I_like_to__c = wishChildContact.When_I_m_with_my_friends_I_like_to__c;
-					dbWishForm.When_thinking_some_of_my_wish_ideas_were__c = wishChildContact.When_thinking_some_of_my_wish_ideas_were__c;
-					dbWishForm.MY_WISH_IS_TO__c = wishChildContact.MyWishIsTo__c ;
-					dbWishForm.This_is_my_wish_because__c = wishChildContact.This_is_my_wish_because__c;
-					dbWishForm.To_me_the_most_important_part_of_my_wish__c = wishChildContact.To_me_the_most_important_part_of_my_wish__c;
-					dbWishForm.When_I_think_about_my_wish_I_imagine__c = wishChildContact.When_I_think_about_my_wish_I_imagine__c;
-					dbWishForm.Wish_Notes__c = wishChildContact.Wish_Notes__c;
-					dbWishForm.Preferred_Name__c = wishChildContact.Preferred_Name__c;
-					updateWishFormList.add(dbWishForm);
-				}
-			}
-		}
-		if (!wishFamilyContactMap.isEmpty()) {
-			for (Wish_Child_Form__c dbWishForm : [
-					SELECT Id,FirstName__c, Middle_Name__c, LastName__c, Emergency_Relationship__c, Home_Phone__c, TelePhone__c, mobilePhone__c, Email__c,
-							BirthDate__c, Street__c, City__c, State__c, Zip_code__c, Residing_With_Wish_Child__c, T_Shirt_Size__c, RecordTypeId,
-							Migrated__c
-					FROM Wish_Child_Form__c
-					WHERE Id IN :wishFamilyContactMap.keySet()
-					AND RecordTypeId = :WISH_FORM_FAMILY_ID AND Migrated__c = false
-			]) {
-				if (wishFamilyContactMap.containsKey(dbWishForm.Id)) {
-					Contact wishFamilyContact = wishFamilyContactMap.get(dbWishForm.Id);
-					dbWishForm.FirstName__c = wishFamilyContact.FirstName;
-					dbWishForm.LastName__c = wishFamilyContact.LastName;
-					dbWishForm.Middle_Name__c = wishFamilyContact.Middle_Name__c;
-					dbWishForm.BirthDate__c = wishFamilyContact.BirthDate;
-					dbWishForm.mobilePhone__c = wishFamilyContact.MobilePhone;
-					dbWishForm.Email__c = wishFamilyContact.Email;
-					dbWishForm.T_Shirt_Size__c = wishFamilyContact.T_Shirt_Size__c;
-					dbWishForm.Street__c = wishFamilyContact.MailingStreet;
-					dbWishForm.State__c = wishFamilyContact.MailingState;
-					dbWishForm.city__c = wishFamilyContact.MailingCity;
-					dbWishForm.Zip_code__c = wishFamilyContact.MailingPostalCode;
-					dbWishForm.Contact__c = wishFamilyContact.Id;
-					dbWishForm.Gender__c = wishFamilyContact.Gender__c;
-					dbWishForm.Residing_With_Wish_Child__c = wishFamilyContact.Residing_with_Wish_child__c;
-					dbWishForm.Home_Phone__c = wishFamilyContact.HomePhone;
-					dbWishForm.TelePhone__c = wishFamilyContact.npe01__WorkPhone__c ;
-					dbWishForm.Emergency_Relationship__c = wishFamilyContact.Relationship__c;
-					dbWishForm.RecordTypeId = WISH_FORM_FAMILY_ID;
-					updateWishFormList.add(dbWishForm);
-				}
-			}
-		}
-		try {
-			update updateWishFormList;
-		} catch (Exception e) {
-			createContactDebugLog(updateWishFormList, 'updateWishFormRecord', e);
-		}
-	}
-
-	/**
 	* Update hidden case fields
 	* @param contactList
 	* @param oldContactsMap
@@ -1946,22 +1775,6 @@ public class ContactService {
 					dbContact.addError('You cannot delete this Contact as it is associated with a Lead');
 				}
 			}
-		}
-	}
-
-	/**
-	* Delete wish form associated with contact
-	* @param wishFormIdSet
-	*/
-	public static void deleteWishForm(Set<Id> wishFormIdSet) {
-		if (!wishFormIdSet.isEmpty()) {
-			delete [
-					SELECT Id
-					FROM Wish_Child_Form__c
-					WHERE Id IN :wishFormIdSet
-					AND RecordTypeId = :WISH_FORM_FAMILY_ID
-					AND Migrated__c = false
-			];
 		}
 	}
 

@@ -431,15 +431,6 @@ public class TestDataFactory {
 		return affiliations;
 	}
     
-    public static List<Wish_Child_Form__c> createWishForm(Integer num) {
-        List<Wish_Child_Form__c> wishForms = new List<Wish_Child_Form__c>();
-        for(Integer i = 0; i < num; i++) {
-            Wish_Child_Form__c wishForm = new Wish_Child_Form__c();
-            wishForms.add(wishForm);
-        }
-        return wishForms;
-    }
-    
     public static List<Non_Wish_Events__c> createNonwishEvent(Integer num) {
         List<Non_Wish_Events__c> nonWishEvents = new List<Non_Wish_Events__c>();
         for(Integer i = 0; i < num; i++) {

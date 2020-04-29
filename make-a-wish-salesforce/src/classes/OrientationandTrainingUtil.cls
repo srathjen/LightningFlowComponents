@@ -19,7 +19,6 @@ public class OrientationandTrainingUtil {
 	private final static Id diagnosisVerificationRecordTypeId = Constant_AC.DIAGNOSIS_RT_ID;
 	private final static Id wishRecordTypeId = Constant_AC.WISH_RT_ID;
 	private final static Id wishChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
-	private final static Id assistWishRecordTypeId = Constant_AC.WISH_ASSIST_RT_ID;
 	private final static Id volunteerTrainingRecordTypeId = Constant_AC.TRAINING_RT_ID;
 	private final static Id volunteerOrientationRecordTypeId = Constant_AC.ORIENTATION_RT_ID;
 	private final static Id classOfferingRecordTypeId = Constant_AC.CLASS_OFFERING_RECORD_TYPE_ID;
@@ -32,18 +31,7 @@ public class OrientationandTrainingUtil {
 	private final static Id algorithmRecordTypeId = Constant_AC.TRAVEL_ALGM_RT_ID;
 	private final static Id inKindRecordTypeId = Constant_AC.IN_KIND_ID;
 	private final static Id reimbursementRecordTypeId = Constant_AC.REIMBURSEMENT_ID;
-	private final static Id wishGrantTaskRecordTypeId = Constant_AC.GRANT_TASK_RT_ID;
 	private final static String boardMemberRecordTypeLabel = Constant_AC.BOARD_MEMBER_RT_LABEL;
-	private final static Id familyContactRecordTypeId = Constant_AC.WISH_FORM_FAMILY_ID;
-	private final static Id wishDeterminationCaseRecordTypeId = Constant_AC.WISH_FORM_DETERMINATION_ID;
-	private final static Id driverContactRecordTypeId = Constant_AC.WISH_FORM_CHILD_DRIVER_ID;
-	private final static Id emergencyContactRecordTypeId = Constant_AC.WISH_FORM_CHILD_EMERGENCY_ID;
-	private final static Id formTrackerAttachmentRecordTypeId = Constant_AC.FORM_TRACKER_ATTACHMENT_ID;
-	private final static Id PARENT_FOLDER_ID = [
-			SELECT Id
-			FROM Folder
-			LIMIT 1
-	].Id;
 
 	public static Account createchapterAccount() {
 		Account newchapterAccount = new Account();
@@ -1883,164 +1871,5 @@ public class OrientationandTrainingUtil {
 		createRec.Role_Name__c = 'Arizona - Chapter';
 		createRec.Name = 'Make-A-Wish Arizona';
 		return createRec;
-	}
-
-	public static List<Wish_Child_Form__c> createWishChildForm(Id ParentWishId, Contact wishChildContact, Contact parentGurdian, Contact participant) {
-		List<Wish_Child_Form__c> WishFormList = new List<Wish_Child_Form__c>();
-		Wish_Child_Form__c currWishChild = new Wish_Child_Form__c();
-		currWishChild.FirstName__c = wishChildContact.FirstName;
-		currWishChild.LastName__c = wishChildContact.LastName;
-		currWishChild.Middle_Name__c = wishChildContact.Middle_Name__c;
-		currWishChild.BirthDate__c = wishChildContact.BirthDate;
-		currWishChild.Diagnosis__c = wishChildContact.Diagnosis__c;
-		currWishChild.Gender__c = wishChildContact.Gender__c;
-		currWishChild.Self_describe_comment_box__c = wishChildContact.Self_describe_comment_box__c;
-		currWishChild.mobilePhone__c = wishChildContact.MobilePhone;
-		currWishChild.Case__c = ParentWishId;
-		currWishChild.Email__c = wishChildContact.Email;
-		currWishChild.T_Shirt_Size__c = wishChildContact.T_Shirt_Size__c;
-		currWishChild.Street__c = wishChildContact.MailingStreet;
-		currWishChild.State__c = wishChildContact.MailingState;
-		currWishChild.city__c = wishChildContact.MailingCity;
-		currWishChild.Zip_code__c = wishChildContact.MailingPostalCode;
-		currWishChild.RecordTypeId = Constant_AC.WISH_FORM_CHILD_ID;
-		currWishChild.Contact__c = wishChildContact.Id;
-		currWishChild.Preferred_Name__c = wishChildContact.Preferred_Name__c;
-		WishFormList.add(currWishChild);
-
-		Wish_Child_Form__c familyCon = new Wish_Child_Form__c();
-		familyCon.FirstName__c = parentGurdian.FirstName;
-		familyCon.LastName__c = parentGurdian.LastName;
-		familyCon.Middle_Name__c = parentGurdian.Middle_Name__c;
-		familyCon.BirthDate__c = parentGurdian.BirthDate;
-		familyCon.Diagnosis__c = parentGurdian.Diagnosis__c;
-		familyCon.Gender__c = parentGurdian.Gender__c;
-		familyCon.Self_describe_comment_box__c = parentGurdian.Self_describe_comment_box__c;
-		familyCon.mobilePhone__c = parentGurdian.MobilePhone;
-		familyCon.Case__c = ParentWishId;
-		familyCon.Email__c = parentGurdian.Email;
-		familyCon.T_Shirt_Size__c = parentGurdian.T_Shirt_Size__c;
-		familyCon.Street__c = parentGurdian.MailingStreet;
-		familyCon.State__c = parentGurdian.MailingState;
-		familyCon.city__c = parentGurdian.MailingCity;
-		familyCon.Zip_code__c = parentGurdian.MailingPostalCode;
-		familyCon.RecordTypeId = Constant_AC.WISH_FORM_FAMILY_ID;
-		familyCon.Contact__c = parentGurdian.Id;
-		familyCon.Preferred_Name__c = parentGurdian.Preferred_Name__c;
-		familyCon.IsParticipant__c = false;
-		WishFormList.add(familyCon);
-
-		Wish_Child_Form__c participantCon = new Wish_Child_Form__c();
-		participantCon.FirstName__c = participant.FirstName;
-		participantCon.LastName__c = participant.LastName;
-		participantCon.Middle_Name__c = participant.Middle_Name__c;
-		participantCon.BirthDate__c = participant.BirthDate;
-		participantCon.Diagnosis__c = participant.Diagnosis__c;
-		participantCon.Gender__c = participant.Gender__c;
-		participantCon.Self_describe_comment_box__c = participant.Self_describe_comment_box__c;
-		participantCon.mobilePhone__c = participant.MobilePhone;
-		participantCon.Case__c = ParentWishId;
-		participantCon.Email__c = participant.Email;
-		participantCon.T_Shirt_Size__c = participant.T_Shirt_Size__c;
-		participantCon.Street__c = participant.MailingStreet;
-		participantCon.State__c = participant.MailingState;
-		participantCon.city__c = participant.MailingCity;
-		participantCon.Zip_code__c = participant.MailingPostalCode;
-		participantCon.RecordTypeId = Constant_AC.WISH_FORM_FAMILY_ID;
-		participantCon.Contact__c = participant.Id;
-		participantCon.Preferred_Name__c = participant.Preferred_Name__c;
-		participantCon.IsParticipant__c = true;
-		WishFormList.add(participantCon);
-
-		Wish_Child_Form__c emergencyContact = new Wish_Child_Form__c();
-		emergencyContact.Emergency_Relationship__c = 'Employee';
-		emergencyContact.Emergency_First_Name__c = 'TestEmployee';
-		emergencyContact.Emergency_Last_Name__c = 'TestLastEmployee';
-		emergencyContact.Emergency_Mobilephone__c = '9600467559';
-		emergencyContact.Race_Ethnicity__c = 'American Indian or Alaska Native';
-		emergencyContact.Case_Team_Member1__c = 'Test Chandru';
-		emergencyContact.Case_Team_Member2__c = 'Test Kesav';
-		emergencyContact.RecordTypeId = Constant_AC.WISH_FORM_FAMILY_ID;
-		emergencyContact.Driver_Information__c = '{"type":"","state":"Alabama","licenseNum":"Test","expirationDate":"2019-10-02","driverName":"Father - Chandr Sek"}]';
-		emergencyContact.Case__c = ParentWishId;
-		emergencyContact.RecordTypeId = emergencyContactRecordTypeId;
-		WishFormList.add(emergencyContact);
-
-		Wish_Child_Form__c driverInfo = new Wish_Child_Form__c();
-		driverInfo.Driver_Name__c = 'Test Driver';
-		driverInfo.State__c = 'Alabama';
-		driverInfo.Expiration_Date__c = system.today() + 120;
-		driverInfo.Driver_License_Number__c = 'ERTE234';
-		driverInfo.RecordTypeId = driverContactRecordTypeId;
-		driverInfo.Case__c = ParentWishId;
-		WishFormList.add(driverInfo);
-
-		Wish_Child_Form__c determinationcase = new Wish_Child_Form__c();
-		determinationcase.Details_about_Impact__c = 'Test Data';
-		determinationcase.Participant_require_oxygen_how_often__c = 'Yes';
-		determinationcase.Participant_require_oxygen_Note__c = 'Test - Data';
-		determinationcase.Participant_dietary_restrictions__c = 'Yes';
-		determinationcase.Participant_dietary_restrictions_Note__c = 'Test-Data';
-		determinationcase.Participant_have_allergies_to_food__c = 'Yes';
-		determinationcase.Participant_have_allergies_to_food_Note__c = 'Test - Data';
-		determinationcase.Medication_require_refrigeration__c = 'Yes';
-		determinationcase.Medication_require_refrigeration_Note__c = 'Test - Data';
-		determinationcase.Wish_child_receive_nursing_care__c = 'Yes';
-		determinationcase.Participant_require_medical_supplies__c = 'Yes';
-		determinationcase.Participant_require_medical_suppliesNote__c = 'Test - Data';
-		determinationcase.Participant_require_a_wheelchair__c = 'Yes';
-		determinationcase.Participant_require_a_wheelchair_Note__c = 'Test - Data';
-		determinationcase.Will_your_family_bring_wheelchair__c = 'Yes';
-		determinationcase.Will_your_family_bring_wheelchair_Note__c = 'Test - Data';
-		determinationcase.Is_the_wheelchair_collapsible__c = 'Yes';
-		determinationcase.Is_the_wheelchair_collapsible_Note__c = 'Test - Data';
-		determinationcase.Is_the_wheelchair_power__c = 'Yes';
-		determinationcase.Is_the_wheelchair_power_Note__c = 'Test - Data';
-		determinationcase.Has_your_family_flown_before__c = 'Yes';
-		determinationcase.Has_your_family_flown__c = 'Test - Data';
-		determinationcase.Will_an_interpreter_be_needed__c = 'Yes';
-		determinationcase.Will_an_interpreter_be_needed_Details__c = 'Test - Data';
-		determinationcase.Will_a_rental_car_seat_s_be_needed__c = 'Yes';
-		determinationcase.Will_a_rental_car_seat_s_Details__c = 'Test - Data';
-		determinationcase.Sit_up_takeoff_landing_on_airplane__c = 'Yes';
-		determinationcase.Are_all_requested_participants_Details__c = 'Test - Data';
-		determinationcase.Will_a_rental_stroller_be_needed__c = 'Yes';
-		determinationcase.Will_a_rental_stroller_Details__c = 'Test - Data';
-		determinationcase.Handicap_accommodations_be_required__c = 'Yes';
-		determinationcase.Will_handicap_accessible_Details__c = 'Test - Data';
-		determinationcase.Participant_have_valid_passports__c = 'Yes';
-		determinationcase.Does_each_requested_participant_Details__c = 'Test - Data';
-		determinationcase.Does_participant_have_valid_photo_ID__c = 'Yes';
-		determinationcase.Does_each_requested_participan__c = 'Test - Data';
-		determinationcase.Does_Your_Medical_Insurance_Include__c = 'Yes';
-		determinationcase.Does_Your_Medical_Insurance_Details__c = 'Test - Data';
-		determinationcase.Does_your_family_have_a_credit_card__c = 'Yes';
-		determinationcase.Does_your_family_Details__c = 'Test - Data';
-		//determinationcase.Driver_Information__c = driverdetails;
-		determinationcase.Information_Provided__c = True;
-		determinationcase.RecordTypeId = wishDeterminationCaseRecordTypeId;
-		determinationcase.Case__c = ParentWishId;
-		//determinationcase.Contact__c  = determinationcaseInfo.Contact__c;
-		determinationcase.Have_current_automobile_insurance__c = 'Yes';
-		determinationcase.Automobile_insurance_provide_coverage__c = 'Test - Data';
-		determinationcase.Is_your_family_comfortable_in_rendal_car__c = 'Yes';
-		determinationcase.Is_a_wheelchair_accessible_vehicle_neede__c = 'Yes';
-		determinationcase.Wish_child_receive_nursing_care_Note__c = 'Test - Data';
-		determinationcase.Availability_Time_Period_1__c = 'Jan/2022';
-		determinationcase.Availability_Time_Period_2__c = 'Feb/2019';
-		determinationcase.Availability_Time_Period_3__c = 'Mar/2019';
-
-		WishFormList.add(determinationcase);
-
-		Wish_Child_Form__c driverInfoone = new Wish_Child_Form__c();
-		driverInfoone.Driver_Name__c = 'Test Driver One';
-		driverInfoone.State__c = 'Alabama';
-		driverInfoone.Expiration_Date__c = system.today() + 130;
-		driverInfoone.Driver_License_Number__c = 'ERTETE234';
-		driverInfoone.RecordTypeId = driverContactRecordTypeId;
-		driverInfoone.Case__c = ParentWishId;
-		WishFormList.add(driverInfoone);
-
-		return WishFormList;
 	}
 }

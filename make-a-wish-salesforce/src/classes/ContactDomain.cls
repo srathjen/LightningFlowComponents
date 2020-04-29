@@ -13,11 +13,9 @@ public class ContactDomain extends trac_TriggerHandlerBase {
     private final static Id WISH_CHILD_RT_ID = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
     private final static Id WISH_FAMILY_RT_ID = Constant_AC.WISH_FAMILY_RT_ID;
     private final static Id BOARD_MEMBER_RT_ID = Constant_AC.BOARD_MEMBER_RT_ID;
-    private final static Id MEDICAL_PROFESSIONAL_RT_ID = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
     private final static String CONTACT_WISH_CHILD_RT_LABEL = Constant_AC.CONTACT_WISH_CHILD_RT_LABEL;
     private final static String ACCOUNT_NAME_MAW_AMERICA = Constant_AC.ACCOUNT_NAME_MAW_AMERICA;
     private final static String RELATIONSHIP_TYPE_PARENT_GUARDIAN = Constant_AC.CONTACT_TYPE_PARENT_LEGAL_GUARDIAN;
-    private final static String REMOVE = 'Remove';
     private final static Map<String, String> MONTH_VALUE_MAP = constructMonthNameValueMap();
     private final static Map<String, String> MONTH_NAME_MAP = constructMonthValueNameMap();
 
@@ -62,7 +60,6 @@ public class ContactDomain extends trac_TriggerHandlerBase {
             ContactService.createAffiliation(newContactsList);
         }
         ChapterStaffRecordSharing_AC.ContactSharing(contactChapterMap);
-        ContactService.updateWishFormContact(newContactsList);
         ContactService.createVolunteerUser(newContactsMap.keySet());
     }
 
@@ -140,7 +137,6 @@ public class ContactDomain extends trac_TriggerHandlerBase {
         }
         ContactService.createAffiliation(volunteerContactList);
         ContactService.updateHouseHoldAddress(newContactsList, oldContactsMap);
-        ContactService.updateWishFormRecord(newContactsList, oldContactsMap);
         ContactService.updateRelationship(newContactsList, oldContactsMap);
         ContactService.updateMedicalProfessional(newContactsList, oldContactsMap);
         ContactService.updateOrgAffiliationStatus(newContactsList, oldContactsMap);
@@ -163,7 +159,6 @@ public class ContactDomain extends trac_TriggerHandlerBase {
                 wishFormIdSet.add(contact.Hidden_Wish_Form_Id__c);
             }
         }
-        ContactService.deleteWishForm(wishFormIdSet);
         ContactService.updateAffiliationPrimaryStatus(contactMap);
         ContactService.validateContact(contactMap);
     }

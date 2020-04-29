@@ -8,7 +8,6 @@ Description : ContactTrigger_AT_Test is used to increase the code coverage for c
 @IsTest
 public class ContactTrigger_AT_Test {
 
-	/*This setup method is used to create a chapter User and systemAdmin Users*/
 	@TestSetup
 	static void setup() {
 		User User = OrientationandTrainingUtil.createChapterUser();
@@ -17,11 +16,10 @@ public class ContactTrigger_AT_Test {
 		insert adminUser;
 	}
 
-	/*This setup method is used to create a community User records*/
 	@IsTest
 	public static void createCommunityUser() {
 		User chapterUser = [
-				SELECT Id,UserName,ProfileId,Profile.Name,Email
+				SELECT Id, Username, ProfileId, Profile.Name, Email
 				FROM User
 				WHERE Email = :'test123@gmail.com'
 				LIMIT 1
@@ -32,19 +30,18 @@ public class ContactTrigger_AT_Test {
 			try {
 				Contact contact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
 				insert contact;
-			} catch (exception ex) {
+			} catch (Exception ex) {
 			}
 		}
 	}
 
-	/*This method is used to update the application status to complete*/
 	@IsTest
 	public static void UpdateApplicationStatustoComplete() {
 		Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
 		User systemAdmin = [
-				SELECT id
+				SELECT Id
 				FROM User
-				WHERE id = :UserInfo.getUserId()
+				WHERE Id = :UserInfo.getUserId()
 		];
 		System.runAs(systemAdmin) {
 			Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
@@ -69,14 +66,13 @@ public class ContactTrigger_AT_Test {
 		}
 	}
 
-	/*This method is used to update the application status to reject*/
 	@IsTest
 	public static void UpdateApplicationStatustoReject() {
 		Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
 		User systemAdmin = [
-				SELECT id
+				SELECT Id
 				FROM User
-				WHERE id = :UserInfo.getUserId()
+				WHERE Id = :UserInfo.getUserId()
 		];
 		System.runAs(systemAdmin) {
 			Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
@@ -105,13 +101,12 @@ public class ContactTrigger_AT_Test {
 		}
 	}
 
-	/*This method is used to create a task record when zipcode is update*/
 	@IsTest
 	public static void CreateZipcodeUpdateTask() {
 		User systemAdmin = [
-				SELECT id
+				SELECT Id
 				FROM User
-				WHERE id = :UserInfo.getUserId()
+				WHERE Id = :UserInfo.getUserId()
 		];
 		System.runAs(systemAdmin) {
 			Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
@@ -123,9 +118,9 @@ public class ContactTrigger_AT_Test {
 			Office__c officeRec = OrientationandTrainingUtil.createOffice(chapterAccount1.Id);
 			officeRec.External_Id__c = 'R123';
 			insert officeRec;
-			Zip_Code__c zipcodeRec = OrientationandTrainingUtil.createZipcode(officeRec.Id);
-			zipcodeRec.Name = '35004';
-			zipCodeRec.office__c = officeRec.Id;
+			Zip_Code__c zipCodeRec = OrientationandTrainingUtil.createZipcode(officeRec.Id);
+			zipCodeRec.Name = '35004';
+			zipCodeRec.Office__c = officeRec.Id;
 			zipCodeRec.External_Id__c = 'R123';
 			insert zipCodeRec;
 			npe5__Affiliation__c affiliation = OrientationandTrainingUtil.CreateAffiliationwithAccount(volunteerContact.Id, chapterAccount.Id);
@@ -136,19 +131,18 @@ public class ContactTrigger_AT_Test {
 					WHERE Id = :volunteerContact.Id
 			];
 			dbContact.MailingPostalCode = '35004';
-			System.assertEquals(dbcontact .MailingPostalCode, '35004');
+			System.assertEquals(dbContact .MailingPostalCode, '35004');
 
 		}
 	}
 
-	/* This Method is used to update the Volunteer LastName,FirstName,Email and Mobile Number */
 	@IsTest
 	public static void UpdateVolunteerDetails() {
 		Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
 		User systemAdmin = [
-				SELECT id
+				SELECT Id
 				FROM User
-				WHERE id = :UserInfo.getUserId()
+				WHERE Id = :UserInfo.getUserId()
 		];
 		System.runAs(systemAdmin) {
 
@@ -176,9 +170,8 @@ public class ContactTrigger_AT_Test {
 			dbcontact.Email = 'Smith@gmail.com';
 			System.assertEquals(dbcontact .Email, 'Smith@gmail.com');
 		}
-
 	}
-	//This Method is used to create a wish child contact
+
 	@IsTest
 	public static void CreateWishChildContact() {
 		Id wichChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
@@ -196,14 +189,13 @@ public class ContactTrigger_AT_Test {
 		newCon.ICD_10_Code__c = newICD.Id;
 		newCon.Diagnosis__c = 'Malignant Neoplasm';
 		newCon.Non_Verbal__c = 'No';
-		newCon.accountid = newAcc.Id;
+		newCon.AccountId = newAcc.Id;
 		newCon.Region_Chapter__c = chapterAcc.Id;
-		newCon.recordTypeId = wichChildRecordTypeId;
+		newCon.RecordTypeId = wichChildRecordTypeId;
 		insert newCon;
 		System.assertEquals(newCon.ICD_10_Code__c, newICD.Id);
 	}
 
-	//This method is used to create a medical professional contact.
 	@IsTest
 	public static void CreateMedicalContact() {
 		Id wichChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
@@ -219,13 +211,13 @@ public class ContactTrigger_AT_Test {
 		newCon.ICD_10_Code__c = newICD.Id;
 		newCon.Diagnosis__c = 'Malignant Neoplasm';
 		newCon.Non_Verbal__c = 'No';
-		newCon.accountid = newAcc.Id;
-		newCon.recordTypeId = wichChildRecordTypeId;
+		newCon.AccountId = newAcc.Id;
+		newCon.RecordTypeId = wichChildRecordTypeId;
 		insert newCon;
 
 		Contact newMedCon = new Contact();
 		newMedCon.LastName = 'Test';
-		newMedCon.recordTypeId = MedicalProfContactRecordTypeId;
+		newMedCon.RecordTypeId = MedicalProfContactRecordTypeId;
 		insert newMedCon;
 
 		npe4__Relationship__c newRel = new npe4__Relationship__c();
@@ -241,7 +233,6 @@ public class ContactTrigger_AT_Test {
 		System.assertEquals(newMedCon.Email, 'test@gmail.com');
 	}
 
-	//This method is used to update the wish family contatc information.
 	@IsTest
 	public static void RecallWishFamilyContactInfo() {
 
@@ -249,7 +240,7 @@ public class ContactTrigger_AT_Test {
 		insert childCon;
 		Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
 		insert childFamily;
-		npe4__Relationship__c npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id, childFamily.Id);
+		OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id, childFamily.Id);
 
 		Contact updateConFamily = new Contact();
 		updateConFamily.Hidden_First_Name__c = 'Chandra';
@@ -270,10 +261,9 @@ public class ContactTrigger_AT_Test {
 		updateCon.IsRejected_Contact_Info__c = true;
 		updateCon.Id = childCon.Id;
 		update updateCon;
-		System.assertEquals(updateCon.IsRejected_Contact_Info__c, True);
+		System.assertEquals(updateCon.IsRejected_Contact_Info__c, true);
 	}
 
-	//This method used to increase the code coverage for when the wish child information is updated.
 	@IsTest
 	public static void updatewishChildContactInfo() {
 		Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
@@ -291,7 +281,7 @@ public class ContactTrigger_AT_Test {
 		updateCon.IsContactInfoUpdated__c = true;
 		updateCon.Id = childCon.Id;
 		update updateCon;
-		System.assertEquals(updateCon.IsContactInfoUpdated__c, True);
+		System.assertEquals(updateCon.IsContactInfoUpdated__c, true);
 	}
 
 	/*This method is used to update the application status to submit*/
@@ -299,9 +289,9 @@ public class ContactTrigger_AT_Test {
 	public static void UpdateApplicationStatustoSubmit() {
 		Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
 		User systemAdmin = [
-				SELECT id
+				SELECT Id
 				FROM User
-				WHERE id = :UserInfo.getUserId()
+				WHERE Id = :UserInfo.getUserId()
 		];
 		System.runAs(systemAdmin) {
 			Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
@@ -327,17 +317,16 @@ public class ContactTrigger_AT_Test {
 
 	@IsTest
 	public static void createwishfamilyContact() {
-		Contact wishChildFamily = OrientationandTrainingUtil.CreateWishFamily();
+		OrientationandTrainingUtil.CreateWishFamily();
 	}
 
-	//This Method is used to Update and recall the wish family contatc information.
 	@IsTest
 	public static void recallWishChildContactInfo() {
 		Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
 		insert childCon;
 		Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
 		insert childFamily;
-		npe4__Relationship__c npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id, childFamily.Id);
+		OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id, childFamily.Id);
 		Contact updateConFamily = new Contact();
 		updateConFamily.Hidden_First_Name__c = 'Chandra';
 		updateConFamily.Hidden_Last_Name__c = 'Sekar';
@@ -357,7 +346,7 @@ public class ContactTrigger_AT_Test {
 				FROM Contact
 				WHERE Hidden_Zip_Code__c = '621010'
 				LIMIT 1
-		].Name != Null);
+		].Name != null);
 		Contact updateCon = new Contact();
 		updateCon.Email = 'kanagu431@gmail.com';
 		updateCon.IsContactInfoUpdated__c = true;
@@ -365,14 +354,13 @@ public class ContactTrigger_AT_Test {
 		update updateCon;
 	}
 
-	//This method is used to recall the approval and update the wish child contac information.
 	@IsTest
 	public static void updatewishChildRecall() {
 		Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
 		insert childCon;
 		Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
 		insert childFamily;
-		npe4__Relationship__c npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id, childFamily.Id);
+		OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id, childFamily.Id);
 		childFamily.Hidden_First_Name__c = '';
 		update childFamily;
 		Contact updateCon = new Contact();
@@ -386,12 +374,12 @@ public class ContactTrigger_AT_Test {
 		updateCon.Hidden_Zip_Code__c = '621010';
 		updateCon.HiddenOtherPhone__c = '9876543210';
 		updateCon.HiddenMobilePhone__c = '8907654321';
-		updateCon.Hidden_Use_as_Household_Address__c = True;
+		updateCon.Hidden_Use_as_Household_Address__c = true;
 		updateCon.IsRejected_Contact_Info__c = true;
 		updateCon.Id = childCon.Id;
 		update updateCon;
 		updateCon.Hidden_city__c = 'Chennai';
-		Update updateCon;
+		update updateCon;
 		System.assertEquals(updateCon.Hidden_city__c, 'Chennai');
 	}
 
@@ -404,13 +392,12 @@ public class ContactTrigger_AT_Test {
 		delete childFamily;
 	}
 
-	//This method is used to update the condition description in wish child contact.
 	@IsTest
 	public static void diagnosisUpdate() {
 		Id wichChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
 		Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
 		insert childCon;
-		Case parentCase = OrientationandTrainingUtil.CreateParentCase(childCon.Id);
+		OrientationandTrainingUtil.CreateParentCase(childCon.Id);
 		childCon.Diagnosis__c = 'Malignant';
 		childCon.SD1_Condition_Description__c = 'Malignant';
 		childCon.SD2_Condition_Description__c = 'Malignant';
@@ -426,7 +413,6 @@ public class ContactTrigger_AT_Test {
 		].Id, childCon.Id);
 	}
 
-	//This method is used to update the ICD in wish child contact.
 	@IsTest
 	public static void icdUpdates() {
 		Id wichChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
@@ -434,7 +420,7 @@ public class ContactTrigger_AT_Test {
 		insert childCon;
 		ICD_Codes__c newICD = new ICD_Codes__c(Name = 'C00');
 		insert newICD;
-		Case parentCase = OrientationandTrainingUtil.CreateParentCase(childCon.Id);
+		OrientationandTrainingUtil.CreateParentCase(childCon.Id);
 		childCon.ICD_10_Code__c = newICD.Id;
 		childCon.SD1_ICD_Code__c = newICD.Id;
 		childCon.SD2_ICD_Code__c = newICD.Id;
@@ -450,7 +436,6 @@ public class ContactTrigger_AT_Test {
 		].Id, childCon.Id);
 	}
 
-	//This method is used to create a volunteer User for migrated volunteer contact.
 	@IsTest
 	public static void createMigratedVolunteerUser() {
 		Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
@@ -475,33 +460,33 @@ public class ContactTrigger_AT_Test {
 		newContact.How_did_you_hear_about_Make_A_Wish__c = 'Family';
 		newContact.MailingStreet = 'ThillaiNagar';
 		newContact.MailingCity = 'Trichy';
-		newContact.MailingCountrycode = 'US';
+		newContact.MailingCountryCode = 'US';
 		newContact.MailingPostalCode = '621010';
-		newContact.mailingstatecode = 'AZ';
+		newContact.MailingStateCode = 'AZ';
 		newContact.Emergency_Contact__c = 'Test';
 		newContact.Emergency_Contact_Relationship__c = 'Father';
 		newContact.Emergency_Contact_Phone__c = '9003910426';
 		newContact.Read__c = 'English';
-		newContact.language__c = 'English';
-		newContact.speak__c = 'English';
-		newContact.understand__c = 'English';
+		newContact.Language__c = 'English';
+		newContact.Speak__c = 'English';
+		newContact.Understand__c = 'English';
 		newContact.Professional_Skills__c = 'Photography';
 		newContact.Language_Notes__c = 'Test';
 		newContact.Volunteer_Role__c = 'Special Events';
 		newContact.is_Application__c = 'Partial Submit';
 		newContact.AccountId = chapterAcc.Id;
-		newContact.email = 'Test@mail.com';
+		newContact.Email = 'Test@mail.com';
 		newContact.Volunteer_Role__c = 'Water Handler';
-		newContact.Do_Not_Create_User__c = False;
-		newContact.Migrated_Record__c = True;
+		newContact.Do_Not_Create_User__c = false;
+		newContact.Migrated_Record__c = true;
 		insert newContact;
-		System.assert(newContact.Migrated_Record__c, True);
+		System.assert(newContact.Migrated_Record__c, true);
 	}
 
 	@IsTest
 	public static void updateContactPhone() {
 		Id wichChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
-		Contact newCon = New Contact();
+		Contact newCon = new Contact();
 		newCon.RecordTypeId = wichChildRecordTypeId;
 		newCon.IsContactInfoUpdated__c = true;
 		newCon.Hidden_First_Name__c = 'TestFirst Name';
@@ -528,7 +513,7 @@ public class ContactTrigger_AT_Test {
 	@IsTest
 	public static void updateContactPhoneNegative() {
 		Id wichChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
-		Contact newCon = New Contact();
+		Contact newCon = new Contact();
 		newCon.RecordTypeId = wichChildRecordTypeId;
 		newCon.IsContactInfoUpdated__c = true;
 		newCon.FirstName = 'TestFirst Name';
@@ -546,23 +531,17 @@ public class ContactTrigger_AT_Test {
 	@IsTest
 	public static void deleteWishForm() {
 		Id wichChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
-		Id wishFormRecordTypeId = Constant_AC.WISH_FORM_FAMILY_ID;
-		Wish_Child_Form__c newWF = new Wish_Child_Form__c();
-		newWF.RecordTypeId = wishFormRecordTypeId;
-		insert newWF;
-		Contact newCon = New Contact();
+		Contact newCon = new Contact();
 		newCon.RecordTypeId = wichChildRecordTypeId;
 		newCon.IsContactInfoUpdated__c = true;
 		newCon.FirstName = 'TestFirst Name';
-		newCon.Hidden_Wish_Form_Id__c = newWF.Id;
 		newCon.LastName = 'TestLastName';
 		newCon.Diagnosis__c = 'Malignant Neoplasm';
 		insert newCon;
 		Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
 		insert childFamily;
-		childFamily.Hidden_Wish_Form_Id__c = newWF.Id;
 		update childFamily;
-		Delete newCon;
+		delete newCon;
 	}
 
 	@IsTest
@@ -573,7 +552,7 @@ public class ContactTrigger_AT_Test {
 		insert childFamily;
 		npe4__Relationship__c npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id, childFamily.Id);
 		insert npcr;
-		set<Id> wishChildIdSet = new set<Id>();
+		Set<Id> wishChildIdSet = new Set<Id>();
 		String dummyValue = Label.Dummy_Email;
         List<Contact> contactList = new List<Contact>();
 		Contact updateCon = new Contact();
@@ -600,7 +579,7 @@ public class ContactTrigger_AT_Test {
 		update childCon;
         contactList.add(updateCon);
         ContactService.updateFamilyContactDetails(wishChildIdSet, contactList);
-		System.assertEquals(updateCon.IsContactInfoUpdated__c, True);
+		System.assertEquals(updateCon.IsContactInfoUpdated__c, true);
 	}
 
 	@IsTest
@@ -609,10 +588,10 @@ public class ContactTrigger_AT_Test {
 		insert childCon;
 		Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
 		insert childFamily;
-		npe4__Relationship__c npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id, childFamily.Id);
-		set<Id> wishChildIdSet = new set<Id>();
+		OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id, childFamily.Id);
+		Set<Id> wishChildIdSet = new Set<Id>();
 		Map<Id, Contact> ConrelationshipIdMap = new Map<Id, Contact>();
-		set<Id> removePrefIdSet = new set<Id>();
+		Set<Id> removePrefIdSet = new Set<Id>();
 		String dummyValue = Label.Dummy_Email;
         List<Contact> contactList = new List<Contact>();
 		Contact updateCon = new Contact();
@@ -639,9 +618,9 @@ public class ContactTrigger_AT_Test {
 		ConrelationshipIdMap.put(childCon.Id, childCon);
 		update updateCon;
 		update childCon;
-    contactList.add(updateCon);
-    ContactService.updateFamilyContactDetails(wishChildIdSet, contactList);
-		System.assertEquals(updateCon.IsContactInfoUpdated__c, True);
+        contactList.add(updateCon);
+        ContactService.updateFamilyContactDetails(wishChildIdSet, contactList);
+		System.assertEquals(updateCon.IsContactInfoUpdated__c, true);
 	}
 
 	@IsTest
@@ -651,13 +630,12 @@ public class ContactTrigger_AT_Test {
 		Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
 		insert childFamily;
 		Contact childFamily2 = OrientationandTrainingUtil.CreateWishFamily();
-		npe4__Relationship__c npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id, childFamily.Id);
+		OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id, childFamily.Id);
 		Test.startTest();
-		npe4__Relationship__c npcr2 = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id, childFamily2.Id);
+		OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id, childFamily2.Id);
 		Case newCase = OrientationandTrainingUtil.CreateParentCase(childCon.Id);
 		newCase.ContactId = childCon.Id;
 
-		// insert newCase;
 		dsfs__DocuSign_Status__c newStat = new dsfs__DocuSign_Status__c();
 		newStat.dsfs__Case__c = newCase.Id;
 		insert newStat;
@@ -665,8 +643,6 @@ public class ContactTrigger_AT_Test {
 		newRecpStatus.dsfs__Parent_Status_Record__c = newStat.Id;
 		newRecpStatus.dsfs__DocuSign_Recipient_Id__c = '3643786876';
 		insert newRecpStatus;
-		List<Wish_Child_Form__c> wishChildForm = OrientationandTrainingUtil.createWishChildForm(newCase.Id, childCon, childFamily, childFamily2);
-		Insert wishChildForm;
 		childFamily.Relationship__c = 'Self';
 		update childFamily;
 		Test.stopTest();
@@ -681,7 +657,7 @@ public class ContactTrigger_AT_Test {
 		newchapterAccount .Name = 'Make-A-Wish Alabama';
 		newchapterAccount.RecordTypeId = ChapterRecordTypeId;
 		insert newchapterAccount;
-		List<contact> conList = new List<Contact>();
+		List<Contact> conList = new List<Contact>();
 		Contact medCon = OrientationandTrainingUtil.CreateWishFamily();
 		insert medCon;
 		medCon.RecordTypeId = medicalProfessionalRecordTypeId ;
