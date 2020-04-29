@@ -19,6 +19,7 @@ public class Constant_AC {
 	public final static Id WISH_RT_ID = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Wish').getRecordTypeId();
 	public final static Id MEDICAL_PROFESSIONAL_RT_ID = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName().get('Medical_Professional').getRecordTypeId();
 	public final static String MEDICAL_PROFESSIONAL_RT_LABEL = 'Medical Professional';
+	public final static String Other_RT_LABEL = 'Other';//SIW-563 : Added label for 'Other'
 	public final static Id ORGANIZATION_RT_ID = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Organization').getRecordTypeId();
 	public final static Id HOUSEHOLD_RT_ID = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('HH_Account').getRecordTypeId();
 	public final static Id CHAPTER_RT_ID = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Chapter').getRecordTypeId();
@@ -481,11 +482,6 @@ public class Constant_AC {
 	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
 
 	/**
-	 * Wish Form (Wish_Child_Form__c) Constants
-	 */
-	public static final String WISH_CHILD_FORM_EMERGENCY_RELATIONSHIP_STATUS_SELF = 'Self';
-
-	/**
 	 * Group Constants
 	 */
 	public static final String GROUP_TYPE_REGULAR = 'Regular';
@@ -510,4 +506,9 @@ public class Constant_AC {
 	 * Access Token Lists (Custom Metadata) Constants
 	 */
 	public static final String ACCESS_TOKEN_LISTS_FIRST_ADVANTAGE = 'First Advantage';
+
+	/*
+	 * User Role Constants
+	 */
+	public static final String USER_ROLE_CUSTOMER_PORTAL = 'CustomerPortal';
 }

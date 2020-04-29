@@ -12,7 +12,7 @@ public class TestDataFactory {
                 adminUser = [
                         SELECT Id
                         FROM User
-                        WHERE Profile.Name = 'System Administrator' AND UserRole.Name != NULL AND UserRole.Name != 'CustomerPortal'
+                        WHERE Profile.Name = :Constant_AC.PROFILE_SYSTEM_ADMINISTRATOR AND UserRole.Name != NULL AND UserRole.Name != :Constant_AC.USER_ROLE_CUSTOMER_PORTAL
                         AND IsActive = TRUE AND Id != :UserInfo.getUserId()
                         LIMIT 1
                 ];
@@ -123,7 +123,7 @@ public class TestDataFactory {
         for (Integer i = 0; i < num; i++) {
             Wish_Signature_Forms__c wishSignForm = new Wish_Signature_Forms__c();
             wishSignForm.Name = 'Medical Test';
-            wishSignForm.Active__c = True;
+            wishSignForm.Active__c = true;
             wishForms.add(wishSignForm);
         }
         return wishForms;
@@ -205,12 +205,6 @@ public class TestDataFactory {
             insert contacts;
 
             // Create customer portal user
-            UserRole userRole = [
-                    SELECT PortalType, PortalAccountId
-                    FROM UserRole
-                    WHERE PortalType = 'CustomerPortal'
-                    LIMIT 1
-            ];
             Profile profile = [
                     SELECT Id,Name
                     FROM Profile
@@ -431,7 +425,7 @@ public class TestDataFactory {
 		return affiliations;
 	}
     
-    public static List<Non_Wish_Events__c> createNonwishEvent(Integer num) {
+    public static List<Non_Wish_Events__c> createNonWishEvent(Integer num) {
         List<Non_Wish_Events__c> nonWishEvents = new List<Non_Wish_Events__c>();
         for(Integer i = 0; i < num; i++) {
             Non_Wish_Events__c nonWishEvent = new Non_Wish_Events__c();
@@ -448,11 +442,17 @@ public class TestDataFactory {
         }
         return timesheets;
     }
+
+    public static List<Chapter_Vs_Role__c> createChapterVsRole(Integer num){
+        return createChapterVsRole(num, 'Arizona');
+    }
     
-    public static List<Chapter_Vs_Role__c> createChapterVsRole(Integer num) {
+    public static List<Chapter_Vs_Role__c> createChapterVsRole(Integer num, String chapterName) {
         List<Chapter_Vs_Role__c> chapterRoleList = new List<Chapter_Vs_Role__c>();
         for(Integer i = 0; i < num; i++) {
             Chapter_Vs_Role__c chapterRole = new Chapter_Vs_Role__c();
+            chapterRole.Chapter_Name__c = chapterRole.Name = 'Make-A-Wish ' + chapterName;
+            chapterRole.Role_Name__c = chapterName + ' - Chapter';
             chapterRoleList.add(chapterRole);
         }
         return chapterRoleList;
