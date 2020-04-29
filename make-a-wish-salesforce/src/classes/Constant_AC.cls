@@ -432,6 +432,7 @@ public class Constant_AC {
 	public static final String TASK_SUBJECT_SNEAK_PEEK_LETTER = 'Sneak Peek Letter';
 	public static final String TASK_SUBJECT_CRUISE_REQUEST_FORM = 'Cruise request form';
 	public static final String TASK_SUBJECT_REFERRAL_DNQ = 'Referral DNQ';
+	public static final String TASK_SUBJECT_REVIEW_VOLUNTEER_UPLOAD = 'Review Volunteer Upload';
 	public static final String TASK_TYPE_EMAIL = 'Email';
 	public static final String TASK_AVAILABLE_TIME_OTHER = 'Other';
 	public final static String TASK_RT_STAFF_LABEL = Schema.SObjectType.Task.getRecordTypeInfosByDeveloperName().get('Staff').getName();
