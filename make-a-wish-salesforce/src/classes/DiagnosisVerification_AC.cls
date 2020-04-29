@@ -16,6 +16,8 @@ Modification Log:
 2. 04/02/2020 - Manoj      - SIW-379 : Mapped 'Travel_Restriction__c' field in lead records based on user selection.
 3. 09/04/2020 - Manoj      - SIW-355 : Mapped 2 Wrapper fields values with lead fields value - timeFrameValue, idealtimeFrameValue
 4. 15/04/2020 - Manoj      - SIW-531 : Setting value blank for Number_hospital_admissions__c field if no value provided from form for the associated question
+5. 15 Apr 2020 - Chris Smith - SIW-497 : Provided check on Save & Next to make sure ICD Codes and Condition
+                                         Descriptions were looked up.
 *******************************************************************************************************************/
 public class DiagnosisVerification_AC {
 
@@ -33,6 +35,7 @@ public class DiagnosisVerification_AC {
     public String wishStatus { get; set; }
     public String otherDiagnosisBlock { get; set; }
     public Boolean showAddAnotherDiagnosisBtn { get; set; }
+    public Boolean  icdLookupAttempted { get; set; }
     public Lead currLead { get; set; }
     public DiagnosisWrapper wrapCls { get; set; }
     public WishChildWrapper wishChildWrapperIns { get; set; }
@@ -60,6 +63,7 @@ public class DiagnosisVerification_AC {
         wishStatus = null;
         wrapCls = new DiagnosisWrapper();
         currLead = new Lead();
+        icdLookupAttempted = false;
         leadId = ApexPages.currentPage().getParameters().get('leadId');
 
         if (leadId != null && leadId.length() > 0) {
@@ -474,10 +478,6 @@ public class DiagnosisVerification_AC {
         List<Condition_Description__c> conditionDescriptions = new List<Condition_Description__c>();
         Pattern pattern = Pattern.compile('(?i).*' + String.escapeSingleQuotes(searchTerm) + '.*');
 
-        /*
-        List<Condition_Description_c> conditionDescriptions = Database.query('Select Id, Name, Code_To_Usec, InActivec from Condition_Descriptionc where InActive_c != true and Name like \'%'  String.escapeSingleQuotes(searchTerm)  '%\' LIMIT 50000');
-         */
-
         for (String cdName : MAP_OF_CONDITION_DESCRIPTIONS_BY_NAME.keySet()) {
             if (pattern.matcher(cdName).matches()) {
                 conditionDescriptions.addAll(MAP_OF_CONDITION_DESCRIPTIONS_BY_NAME.get(cdName));
@@ -551,12 +551,14 @@ public class DiagnosisVerification_AC {
             //ICD code
             if (icdOrPcd == 'ICD') {
                 List<ICD_Codes__c> icdCodeInfo = DiagnosisVerification_AC_Helper.getIcdCodeInfo(diagnosisVerificationWrapperLst[diagnosisBlockNum].icdCode);
+                icdLookupAttempted = true;
                 if (icdCodeInfo.size() > 0) {
                     List<Medical_Questions__c> medicalQuestionList = MAP_OF_MEDICAL_QUESTIONS_BY_DESCRIPTION.get(icdCodeInfo[0].Condition_Description__c);
 
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = icdCodeInfo[0].Short_Description__c;
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isGroup1Rec = icdCodeInfo[0].Group1__c;
 
+                    //Chris - Can you fix this hardcode?
                     if (!String.isEmpty(icdCodeInfo[0].Condition_Description__r.Name) && icdCodeInfo[0].Condition_Description__r.Name == 'Total Parenteral Nutrition (TPN)') {
                         showAddAnotherDiagnosisBtn = true;
                     }
@@ -568,11 +570,13 @@ public class DiagnosisVerification_AC {
 
                 // Condition Description
             } else if (icdOrPcd == 'PCD') {
+                //Chris - Can you fix this hardcode?
                 if (diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription == 'Total Parenteral Nutrition (TPN)') {
                     showAddAnotherDiagnosisBtn = true;
                 }
 
                 List<Condition_Description__c> conditionDescriptionInfo = MAP_OF_CONDITION_DESCRIPTIONS_BY_NAME.get(diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription);
+                icdLookupAttempted = true;
 
                 if (conditionDescriptionInfo != null && conditionDescriptionInfo.size() > 0) {
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isGroup1Rec = conditionDescriptionInfo[0].Group1__c;
@@ -617,6 +621,7 @@ public class DiagnosisVerification_AC {
         } catch (Exception ex) {
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
             ApexPages.addMessage(myMsg);
+
         }
     }
 
@@ -631,11 +636,11 @@ public class DiagnosisVerification_AC {
 
         for (DiagnosisWrapper currDiagnosisWrapper : diagnosisVerificationWrapperLst) {
             if (currDiagnosisWrapper.isEligible) {
-                wishStatus = 'Qualified';
+                wishStatus = Constant_AC.LEAD_STATUS_QUALIFIED;
             }
         }
 
-        if (wishStatus != 'Qualified') {
+        if (wishStatus != Constant_AC.LEAD_STATUS_QUALIFIED) {
             wishStatus = 'Not Qualified';
         }
     }
@@ -659,10 +664,6 @@ public class DiagnosisVerification_AC {
             if (MAP_OF_CONDITION_DESCRIPTIONS_BY_ID.containsKey(conditionDescription) &&  medicalQuestions.size() > 0) {
                 conditionDesc = MAP_OF_CONDITION_DESCRIPTIONS_BY_ID.get(conditionDescription);
 
-                if (conditionDesc.Name == 'Arteriovenus Malformation (AVM)') {
-                    diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = true;
-                }
-
                 List<Medical_Questions__c> medicalQuestionList = new List<Medical_Questions__c>();
                 medicalQuestionList.addAll(medicalQuestions);
 
@@ -671,8 +672,8 @@ public class DiagnosisVerification_AC {
                         DiagnosisWrapper.MedicalWrapper medicalWrapperItem = new DiagnosisWrapper.MedicalWrapper();
                         medicalWrapperItem.medicalQuestion = medicalQuestion;
 
-                        medicalWrapperItem.pickVals = Utils.picklistStringToOptions(medicalQuestion.Picklist_values__c);
-                        medicalWrapperItem.epilepsyPickVals = Utils.picklistStringToOptions(medicalQuestion.Epilepsy_picklist__c);
+                        medicalWrapperItem.pickVals = Utils.picklistStringToOptions(medicalQuestion.Picklist_values__c, 'Please Select');
+                        medicalWrapperItem.epilepsyPickVals = Utils.picklistStringToOptions(medicalQuestion.Epilepsy_picklist__c, 'Please Select');
 
                         diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList.add(medicalWrapperItem);
                     }
@@ -824,6 +825,35 @@ public class DiagnosisVerification_AC {
     }
 
     /*
+     * @description     In case of client-side issues with Diagnosis selection, make sure that the wishChildEligibilityCheck() has run
+     *
+     * @author          Christopher Smith
+     * @date             04/20/2020
+     */
+    public void forceEligibilityCheck() {
+        diagnosisBlockNum = Integer.valueOf(ApexPages.currentPage().getParameters().get('diagnosisBlockNum'));
+        wishChildEligibilityCheck();
+
+        if(diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible)  {
+            ApexPages.CurrentPage().getParameters().put('docusignReady','true'); //lookup was successful and child is eligible
+            //page should call docusign method
+        }   else if(showAddAnotherDiagnosisBtn == true) {
+            //lookup was successful but another diagnosis is necessary
+            if(diagnosisBlockNum >= 5)  {
+                //return to page verify field for not autoqualify text is filled if not done ahead of time
+            }   else    {
+                ApexPages.CurrentPage().getParameters().put('confirmDX', 'true'); //page should redirict to medicalQuestionBlockID
+            }
+        }  /* Not necessary because setWishStatus operates on same logic    else if(wishStatus == LEAD_STATUS_QUALIFIED)   {
+            return; //page should call docusign method
+        } */ else if(ApexPages.CurrentPage().GetParameters().get('icdOrPcd') == 'PCD') {
+            // Condition Description entered does not match one in the system.
+            ResetDiagnosis();
+            ApexPages.currentPage().getParameters().put('tryICD', 'true'); //page should redirect to medicalQuestionBlockID
+        }
+    }
+
+    /*
      * @description     Used to save information given by MedicalProfessional
      *
      * @author          unknown
@@ -859,14 +889,10 @@ public class DiagnosisVerification_AC {
             currLead.None_of_these_statements_describes_Child__c = false;
             currLead.Responds_to_treatment_with_normal_health__c = false;
             currLead.Unplanned_hospital_admissions__c = wishChildWrapperIns.unplannedHospitalAdmission;
-	          //SIW-531 Start : Setting value blank for Number_hospital_admissions__c if no value provided from form for this question
-             if(wishChildWrapperIns.unplannedHospitalAdmission != 'No') {
-                currLead.Number_hospital_admissions__c =  wishChildWrapperIns.numberOfHospitalAdmission;
-            }  
-            else {
-                currLead.Number_hospital_admissions__c =  null;
-            }
-            //SIW-531 End      
+            //SIW-531 Start : Setting value blank for Number_hospital_admissions__c if no value provided from form for this question
+            if(wishChildWrapperIns.unplannedHospitalAdmission != 'No') currLead.Number_hospital_admissions__c =  wishChildWrapperIns.numberOfHospitalAdmission;
+            else currLead.Number_hospital_admissions__c =  null;
+            //SIW-531 End
             currLead.Admitting_diagnosis__c = wishChildWrapperIns.admittingDiagnosis;
             currLead.ICU_Admissions__c = wishChildWrapperIns.ifICUAdmission;
             //SIW-355 Start : Mapped 2 new added questions value to lead field on submission of DV form
@@ -1397,4 +1423,3 @@ public class DiagnosisVerification_AC {
         return Database.query(query);
     }
 }
-
