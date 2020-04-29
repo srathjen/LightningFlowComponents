@@ -5,11 +5,11 @@ public class ChapterRoleTrigger_Test{
     
     //Used to create a Chapter Role record for National Staff as Owner.
     private testmethod static void  createChapterRole(){
-        Chapter_Vs_Role__c arizonaChap = OrientationandTrainingUtil.createArizonaChapter();
-        insert arizonaChap;
-
-        Chapter_Vs_Role__c alabamaChap = OrientationandTrainingUtil.createAlabamaChapter();
-        insert alabamaChap;
+        Chapter_Vs_Role__c arizonaChap = TestDataFactory.createChapterVsRole(1, 'Arizona')[0];
+        Chapter_Vs_Role__c alabamaChap = TestDataFactory.createChapterVsRole(1, 'Alabama')[0];
+        insert new List<Chapter_Vs_Role__c>{
+                arizonaChap, alabamaChap
+        };
         
         User currUser = [SELECT id from User where id = :Userinfo.getUserId() limit 1]; 
         User nationalStaff;
