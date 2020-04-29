@@ -5,7 +5,6 @@
 */
 @IsTest
 public class ContactServiceTest {
-    
     private final static Id CHAPTER_RECORD_TYPE_ID = Constant_AC.CHAPTER_RT_ID;
     private final static Id HOUSEHOLD_RT_ID = Constant_AC.HOUSEHOLD_RT_ID;
     private final static Id VOLUNTEER_RECORD_TYPE_ID = Constant_AC.VOLUNTEER_RT_ID;
@@ -37,12 +36,7 @@ public class ContactServiceTest {
         
         List<ICD_Codes__c> icdCodes = TestDataFactory.createIcdCode(1);
         insert icdCodes;
-        
-        List<Wish_Child_Form__c> wishForms = TestDataFactory.createWishForm(1);
-        Wish_Child_Form__c wishForm1 = wishForms.get(0);
-        wishForm1.Migrated__c = false;
-        insert wishForms;
-        
+
         List<Contact> contacts = TestDataFactory.createContact(8);
         Contact volunteerArizona = contacts.get(0);
         volunteerArizona.RecordTypeId = VOLUNTEER_RECORD_TYPE_ID;
@@ -97,7 +91,6 @@ public class ContactServiceTest {
         wishChildContact2.First_Recipient_Name__c = 'Emily Watkins';
         wishChildContact2.Second_Recipient_Email__c = 'j.watkins@mail.com';
         wishChildContact2.Second_Recipient_Name__c = 'Joel Watkins';
-        wishChildContact2.Hidden_Wish_Form_Id__c = wishForm1.Id;
         wishChildContact2.Same_as_Household_Address__c = true;
         wishChildContact2.Hidden_First_Name__c = 'Rebecca';
         wishChildContact2.Hidden_Last_Name__c = 'Watkins';
@@ -636,27 +629,6 @@ public class ContactServiceTest {
     }
     
     @isTest
-    private static void validateUpdateWishFormContact() {
-        Test.startTest();
-        Map<Id, Contact> contactMap = new Map<Id, Contact>([
-            SELECT Id, RecordTypeId, Hidden_Wish_Form_Id__c
-            FROM Contact
-            WHERE Hidden_Wish_Form_Id__c != null
-        ]);
-        Set<Id> wishFormIds = new Set<Id>();
-        for(Contact contact : contactMap.values()) {
-            wishFormIds.add(contact.Hidden_Wish_Form_Id__c);
-        }
-        ContactService.updateWishFormContact(contactMap.values());
-        List<Wish_Child_Form__c> wishFormListUpdated = [
-            SELECT Id, Contact__c 
-            FROM Wish_Child_Form__c 
-            WHERE Id IN :wishFormIds];
-        Test.stopTest();
-        System.assert(wishFormListUpdated[0].Contact__c != null);
-    }
-    
-    @isTest
     private static void validateUpdateFamilyContactDetails() {
         Set<Id> wishChildIdSet = new Set<Id>();
         Map<Id, Id> childPreferredRelationMap = new Map<Id, Id>();
@@ -828,11 +800,11 @@ public class ContactServiceTest {
         Map<Id, Contact> contactMap = new Map<Id, Contact>([
             SELECT Id, FirstName, LastName, Middle_Name__c, Email 
             FROM Contact 
-            WHERE Migrated_Record__c = true
+            WHERE Migrated_Record__c = TRUE
         ]);
         ContactService.createVolunteerUser(contactMap.keySet());
         Test.stopTest();
-        List<User> newUserList = [SELECT Id, ContactId FROM User WHERE ContactId IN :contactMap.keySet()];
+        List<User> newUserList = [SELECT Id, ContactId FROM User];
         System.assert(!newUserList.isEmpty());
     }
     

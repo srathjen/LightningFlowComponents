@@ -7,8 +7,6 @@ public class RelationshipService {
 
 	private final static Id WISH_FAMILY_ID = Constant_AC.WISH_FAMILY_RT_ID;
 	private final static Id MEDICAL_PROFESSIONAL_ID = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
-	private final static Id WISH_RT_ID = Constant_AC.WISH_RT_ID;
-	private final static Id WISH_FORM_FAMILY_ID = Constant_AC.WISH_FORM_FAMILY_ID;
 	private final static Id CONTACT_WISH_CHILD_RT_ID = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
 	private final static String MEDICAL_PROFESSIONAL_LABEL = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
 	private static final String LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL;

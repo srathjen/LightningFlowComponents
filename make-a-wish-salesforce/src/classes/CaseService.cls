@@ -16,10 +16,8 @@ public class CaseService {
 	private static final String LEAD_MEDICAL_REASON_FOR_MOVING_QUICKLY_YES = Constant_AC.LEAD_MEDICAL_REASON_FOR_MOVING_QUICKLY_YES;
 	private static final String SPACE = ' ';
 	private static final String APPEND_ELIGIBILITY_REVIEW = ' - Eligibility Review';
-
 	private static final Id WISH_RECORDTYPE_ID = Constant_AC.WISH_RT_ID;
 	private static final Id WISH_CHILD_RECORDTYPE_ID = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
-	private static final Id WISH_FORM_CHILD_ID = Constant_AC.WISH_FORM_CHILD_ID;
 	private static final Id WISH_VOLUNTEER_OPPORTUNITY_RECORDTYPE_ID = Constant_AC.WISH_VOLUNTEER_OPPORTUNITY_ID;
 	private static final Id CHAPTER_RECORDTYPE_ID = Constant_AC.CHAPTER_RT_ID;
 

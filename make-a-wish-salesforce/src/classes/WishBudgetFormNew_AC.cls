@@ -67,7 +67,6 @@ public class WishBudgetFormNew_AC {
         budgetId = Id.valueOf(ApexPages.currentPage().getParameters().get('BudgetId'));
         retURLRecordId = caseId;
         participentSet = new Set<Id>();
-        Id wishChildRecordTypeId = Constant_AC.WISH_FORM_CHILD_ID;
 
         /**
          * JIRA: WLP-286
@@ -96,7 +95,6 @@ public class WishBudgetFormNew_AC {
         * 	This will be used in the VF to determine which fields are editable for the expenses
         */
         isApprover = false;
-        // Check if user has a modify all permission
         if (!isApprover) {
             isApprover = [
                 SELECT AssigneeId, Assignee.Name
@@ -105,7 +103,6 @@ public class WishBudgetFormNew_AC {
             ].size() > 0;
         }
 
-        // To check whether budget approval form is approved
         List<Case> caseList = [
             SELECT Id, Contact.FirstName, Contact.LastName, Description, Contact.Middle_Name__c,
                 Start_Date__c, isApprove__c, ChapterName__r.Name, Wish_Type__c, Budget_Notes__c
@@ -147,17 +144,6 @@ public class WishBudgetFormNew_AC {
             }
             if (participentSet.size() > 0) {
                 NoOfWishParts = participentSet.size();
-            }
-            List<Wish_Child_Form__c> wishChild = [
-                SELECT Id,Hidden_Same_as_Family__c,Migrated__c,RecordTypeId
-                FROM Wish_Child_Form__c
-                WHERE Case__c = :caseList[0].Id
-                AND RecordTypeId = :wishChildRecordTypeId
-                AND Migrated__c = :FALSE
-                LIMIT 1
-            ];
-            if ((wishChild.size() > 0 && wishChild[0].Hidden_Same_as_Family__c == true) || (wishChild.size() == 0)) {
-                NoOfWishParts += 1;
             }
         }
 
@@ -1097,7 +1083,6 @@ public class WishBudgetFormNew_AC {
                 * Update: Determine if current user is initial approver, original approver, or has modify all permissions.
                 * 	This will be used in the VF to determine which fields are editable for the expenses
                 */
-                // Check if user is assigned to or approver
                 if ((sWI.StepStatus == 'Pending' || sWI.StepStatus == 'Reassigned') && sWI.OriginalActorId == UserInfo.getUserId()) {
                     isApprover = true;
                 }
