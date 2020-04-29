@@ -231,19 +231,15 @@ public class VolunteerOpportunityTrigger_AT_Test {
 
 	@IsTest
 	public static void createRecforNationalStaffasOwner() {
-		Chapter_Vs_Role__c arizonaChap = OrientationandTrainingUtil.createArizonaChapter();
-		Chapter_Vs_Role__c alabamaChap = OrientationandTrainingUtil.createAlabamaChapter();
-		test.startTest();
-		Insert alabamaChap;
-		Insert arizonaChap;
-		test.stopTest();
+		Chapter_Vs_Role__c arizonaChap = TestDataFactory.createChapterVsRole(1, 'Arizona')[0];
+		Chapter_Vs_Role__c alabamaChap = TestDataFactory.createChapterVsRole(1, 'Alabama')[0];
+		Test.startTest();
+		insert new List<Chapter_Vs_Role__c>{
+				arizonaChap, alabamaChap
+		};
+		Test.stopTest();
 
-		User currUser = [
-				SELECT id
-				from User
-				where id = :Userinfo.getUserId()
-				limit 1
-		];
+		User currUser = Utils.currentUser;
 		User nationalStaff;
 		System.RunAs(currUser) {
 			nationalStaff = OrientationandTrainingUtil.createUserWithRole([

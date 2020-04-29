@@ -6,6 +6,32 @@
 @IsTest
 public class TestDataFactory {
 
+    private final static Id CHAPTER_RT_ID = Constant_AC.CHAPTER_RT_ID;
+    private final static Id HOUSEHOLD_RT_ID = Constant_AC.HOUSEHOLD_RT_ID;
+    private final static Id inKindDonorsAccountRecordTypeId = Constant_AC.IN_KIND_ACCOUNT_ID;
+    private final static Id hospitalTreatmentRecordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID;
+    private final static Id volunteerRecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
+    private final static Id medicalProfessionalRecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+    private final static Id wishFamilyRecordTypeId = Constant_AC.WISH_FAMILY_RT_ID;
+    private final static Id diagnosisVerificationRecordTypeId = Constant_AC.DIAGNOSIS_RT_ID;
+    private final static Id wishRecordTypeId = Constant_AC.WISH_RT_ID;
+    private final static Id wishChildRecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
+    private final static Id volunteerTrainingRecordTypeId = Constant_AC.TRAINING_RT_ID;
+    private final static Id volunteerOrientationRecordTypeId = Constant_AC.ORIENTATION_RT_ID;
+    private final static Id classOfferingRecordTypeId = Constant_AC.CLASS_OFFERING_RECORD_TYPE_ID;
+    private final static Id activeRecordTypeId = Constant_AC.ACTIVE_VOL_RT_ID;
+    private final static Id nationalRecordTypeId = Constant_AC.NATIONAL_RT_ID;
+    private final static Id prospectiveVolunteerRecordTypeId = Constant_AC.PROSPECTIVE_VOLUNTEER_RT_ID;
+    private final static Id wishVolunteerOpportunityRecordTypeId = Constant_AC.WISH_VOLUNTEER_OPPORTUNITY_ID;
+    private final static Id nonWishRecordTypeId = Constant_AC.NON_WISH_EVENT_RT_ID;
+    private final static Id eventsRecordTypeId = Constant_AC.EVENTS_ID;
+    private final static Id algorithmRecordTypeId = Constant_AC.TRAVEL_ALGM_RT_ID;
+    private final static Id inKindRecordTypeId = Constant_AC.IN_KIND_ID;
+    private final static Id reimbursementRecordTypeId = Constant_AC.REIMBURSEMENT_ID;
+    private final static String boardMemberRecordTypeLabel = Constant_AC.BOARD_MEMBER_RT_LABEL;
+
+    private static final String TEST_EMAIL = 'Test123@test456.com';
+
     public static User adminUser {
         get {
             if (adminUser == null) {
@@ -40,6 +66,14 @@ public class TestDataFactory {
             accounts.add(a);
         }
         return accounts;
+    }
+
+    public static List<Account> createChapterAccount(Integer num) {
+        List<Account> chapterAccounts = createAccount(num);
+        for(Account chapterAccount : chapterAccounts){
+            chapterAccount.RecordTypeId = CHAPTER_RT_ID;
+        }
+        return chapterAccounts;
     }
 
     public static List<Role__c> createRole(Integer num, Boolean isWishRole) {

@@ -30,10 +30,11 @@ public class ClassOffering_AT_Test {
 
     @IsTest
 	public static void createClassOfferingNationalStaffasOwner() {
-		Chapter_Vs_Role__c arizonaChap = OrientationandTrainingUtil.createArizonaChapter();
-		Chapter_Vs_Role__c alabamaChap = OrientationandTrainingUtil.createAlabamaChapter();
-		insert alabamaChap;
-		insert arizonaChap;
+		Chapter_Vs_Role__c arizonaChap = TestDataFactory.createChapterVsRole(1, 'Arizona')[0];
+		Chapter_Vs_Role__c alabamaChap = TestDataFactory.createChapterVsRole(1, 'Alabama')[0];
+		insert new List<Chapter_Vs_Role__c>{
+				arizonaChap, alabamaChap
+		};
 		User currUser = Utils.currentUser;
 		User nationalStaff;
 		System.runAs(currUser) {

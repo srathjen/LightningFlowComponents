@@ -56,16 +56,12 @@ public class NonWishEvents_ATTest {
 	}
 
 	public static testmethod void createEvenetRecordasNationalStaff() {
-		Chapter_Vs_Role__c arizonaChap = OrientationandTrainingUtil.createArizonaChapter();
-		Chapter_Vs_Role__c alabamaChap = OrientationandTrainingUtil.createAlabamaChapter();
-		Insert alabamaChap;
-		Insert arizonaChap;
-		User currUser = [
-				SELECT id
-				from User
-				where id = :Userinfo.getUserId()
-				limit 1
-		];
+		Chapter_Vs_Role__c arizonaChap = TestDataFactory.createChapterVsRole(1, 'Arizona')[0];
+		Chapter_Vs_Role__c alabamaChap = TestDataFactory.createChapterVsRole(1, 'Alabama')[0];
+		insert new List<Chapter_Vs_Role__c>{
+				arizonaChap, alabamaChap
+		};
+		User currUser = Utils.currentUser;
 		User nationalStaff;
 		System.RunAs(currUser) {
 			nationalStaff = OrientationandTrainingUtil.createUserWithRole([

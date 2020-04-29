@@ -111,10 +111,11 @@ public class BroadcastTrigger_Test {
 
 	@IsTest
 	public static void createBroadCastNationalstaff() {
-		Chapter_Vs_Role__c arizonaChap = OrientationandTrainingUtil.createArizonaChapter();
-		Chapter_Vs_Role__c alabamaChap = OrientationandTrainingUtil.createAlabamaChapter();
-		insert alabamaChap;
-		insert arizonaChap;
+		Chapter_Vs_Role__c arizonaChap = TestDataFactory.createChapterVsRole(1, 'Arizona')[0];
+		Chapter_Vs_Role__c alabamaChap = TestDataFactory.createChapterVsRole(1, 'Alabama')[0];
+		insert new List<Chapter_Vs_Role__c>{
+				arizonaChap, alabamaChap
+		};
 		Broadcast__c newBroad = new Broadcast__c();
 		newBroad.Broadcast_Message__c = 'Test';
 		Account account = OrientationandTrainingUtil.createchapterAccount();
@@ -152,10 +153,11 @@ public class BroadcastTrigger_Test {
 
 	@IsTest
 	public static void updateAsArizonaUser() {
-		Chapter_Vs_Role__c arizonaChap = OrientationandTrainingUtil.createArizonaChapter();
-		Chapter_Vs_Role__c alabamaChap = OrientationandTrainingUtil.createAlabamaChapter();
-		insert alabamaChap;
-		insert arizonaChap;
+		Chapter_Vs_Role__c arizonaChap = TestDataFactory.createChapterVsRole(1, 'Arizona')[0];
+		Chapter_Vs_Role__c alabamaChap = TestDataFactory.createChapterVsRole(1, 'Alabama')[0];
+		insert new List<Chapter_Vs_Role__c>{
+				arizonaChap, alabamaChap
+		};
 		Broadcast__c newBroad = new Broadcast__c();
 		newBroad.Broadcast_Message__c = 'Test';
 		User currUser = [

@@ -936,28 +936,6 @@ public class TestClassUtil {
 		return newWishChild;
 	}
 
-	/**
-	 * JIRA: WLP-286
-	 * Author: Gustavo Mayer
-	 * Update: This test classes references Child Cases which will no longer be used as the Cases 'Wish Determination, 'Wish Planning,
-	 * 'Wish Granting and 'Wish Impact are now converted to a single case Wish
-	 */
-//	public static Case determinationCaseProcess() {
-//		Case newWishDeterminatonWish = new Case();
-//		newWishDeterminatonWish.RecordTypeId = wishDeterminationRecordTypeId;
-//		newWishDeterminatonWish.ChapterName__c = createArizonaChapter();
-//		newWishDeterminatonWish.Subject = 'Wish Determination';
-//		newWishDeterminatonWish.Wish_Type__c = 'Standard';
-//		return newWishDeterminatonWish;
-//	}
-
-	public static Task createNewTask() {
-		Task newTask = new Task();
-		newTask.Subject = 'Planning';
-		newTask.IsRecurrence = false;
-		return newTask;
-	}
-
 	public static List<Dynamic_Content__c> chapterDynamicContent() {
 		List<Dynamic_Content__c> newChapterContentList = new List<Dynamic_Content__c>();
 		Dynamic_Content__c newChapterContent = new Dynamic_Content__c();
