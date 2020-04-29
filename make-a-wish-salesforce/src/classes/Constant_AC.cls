@@ -2,6 +2,7 @@
  * @description Constants class
  * @author      Gustavo Mayer, Traction on Demand
  * @createdDate 6-19-2019
+ // 04/28/2020 - Manoj - SIW-563 : Added label for 'Other'
  */
 public class Constant_AC {
 	public final static String CONTACT_WISH_CHILD_RT_LABEL = 'Wish Child';
@@ -9,9 +10,7 @@ public class Constant_AC {
 	public final static Id IN_KIND_ACCOUNT_ID = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('In_Kind_Donors').getRecordTypeId();
 	public final static Id DETERMINATION_TASK_RT_ID = Schema.SObjectType.Task.getRecordTypeInfosByDeveloperName().get('Wish_Determination').getRecordTypeId();
 	public final static Id DETERMINATION_CHAPTER_ACTION_RT_ID = Schema.SObjectType.Chapter_Action_Track__c.getRecordTypeInfosByDeveloperName().get('Wish_Determination').getRecordTypeId();
-	public final static Id PLANNING_ANTICIPATION_CHAPTER_ACTION_RT_ID = Schema.SObjectType.Chapter_Action_Track__c.getRecordTypeInfosByDeveloperName().get('Wish_Planning').getRecordTypeId();
 	public final static Id PLANNING_ANTICIPATION_TASK_RT_ID = Schema.SObjectType.Task.getRecordTypeInfosByDeveloperName().get('Wish_Planning').getRecordTypeId();
-	public final static String WISH_ASSIST_RT_LABEL = 'Wish Assist';
 	public final static Id WISH_ASSIST_RT_ID = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Wish_Assist').getRecordTypeId();
 	public final static Id GRANT_CHAPTER_ACTION_RT_ID = Schema.SObjectType.Chapter_Action_Track__c.getRecordTypeInfosByDeveloperName().get('Wish_Granting').getRecordTypeId();
 	public final static Id GRANT_TASK_RT_ID = Schema.SObjectType.Task.getRecordTypeInfosByDeveloperName().get('Wish_Granting').getRecordTypeId();
@@ -20,6 +19,7 @@ public class Constant_AC {
 	public final static Id WISH_RT_ID = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Wish').getRecordTypeId();
 	public final static Id MEDICAL_PROFESSIONAL_RT_ID = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName().get('Medical_Professional').getRecordTypeId();
 	public final static String MEDICAL_PROFESSIONAL_RT_LABEL = 'Medical Professional';
+	public final static String Other_RT_LABEL = 'Other';//SIW-563 : Added label for 'Other'
 	public final static Id ORGANIZATION_RT_ID = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Organization').getRecordTypeId();
 	public final static Id HOUSEHOLD_RT_ID = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('HH_Account').getRecordTypeId();
 	public final static Id CHAPTER_RT_ID = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Chapter').getRecordTypeId();
@@ -54,14 +54,7 @@ public class Constant_AC {
 	public final static Id VOLUNTEER_TASK_RT_ID = Schema.SObjectType.Task.getRecordTypeInfosByDeveloperName().get('Volunteer').getRecordTypeId();
 	public final static String VOLUNTEER_TASK_RT_LABEL = 'Volunteer';
 	public final static Id STAFF_TASK_RT_ID = Schema.SObjectType.Task.getRecordTypeInfosByDeveloperName().get('Staff').getRecordTypeId();
-	public final static Id WISH_FORM_CHILD_ID = Schema.SObjectType.Wish_Child_Form__c.getRecordTypeInfosByDeveloperName().get('Wish_Child').getRecordTypeId();
-	public final static Id WISH_FORM_FAMILY_ID = Schema.SObjectType.Wish_Child_Form__c.getRecordTypeInfosByDeveloperName().get('Wish_Form_Family').getRecordTypeId();
-	public final static Id WISH_FORM_DETERMINATION_ID = Schema.SObjectType.Wish_Child_Form__c.getRecordTypeInfosByDeveloperName().get('Wish_Form_Determination_Case').getRecordTypeId();
-	public final static Id WISH_FORM_CHILD_EMERGENCY_ID = Schema.SObjectType.Wish_Child_Form__c.getRecordTypeInfosByDeveloperName().get('Wish_Form_Emergency_Contact').getRecordTypeId();
-	public final static Id WISH_FORM_CHILD_DRIVER_ID = Schema.SObjectType.Wish_Child_Form__c.getRecordTypeInfosByDeveloperName().get('Wish_Form_Driver_Information').getRecordTypeId();
-	public final static String WISH_FORM_FAMILY_LABEL = Schema.SObjectType.Wish_Child_Form__c.getRecordTypeInfosByDeveloperName().get('Wish_Form_Family').getName();
 	public final static Id WISH_CLEARANCE_ATTACHMENT_ID = Schema.SObjectType.Minor_Participant__c.getRecordTypeInfosByDeveloperName().get('Wish_Clarence_Attachment').getRecordTypeId();
-	public final static Id FORM_TRACKER_ATTACHMENT_ID = Schema.SObjectType.Minor_Participant__c.getRecordTypeInfosByDeveloperName().get('Form_Tracker_Attachment').getRecordTypeId();
 	public final static Id COMBO_RECORD_ID = Schema.SObjectType.Minor_Participant__c.getRecordTypeInfosByDeveloperName().get('Combo_Form_Attachment').getRecordTypeId();
 	public final static Id WISH_EXPENSE_RT_FINANCE = Schema.SObjectType.Wish_Expense__c.getRecordTypeInfosByDeveloperName().get('Finance').getRecordTypeId();
 	public static final String TYPE_LIGHTNING = 'Lightning';
@@ -102,8 +95,6 @@ public class Constant_AC {
 	/**
 	 * Lead Constants
 	 */
-	public static final Id LEAD_RT_DEFAULT = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Default').getRecordTypeId();
-	//public static final Id LEAD_RT_MASTER = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Master').getRecordTypeId();
 	public static final Id LEAD_RT_WISH_CHILD = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Wish_Child').getRecordTypeId();
 	public static final String LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL = 'Treating Medical Professional';
 	public static final String LEAD_DV_FORM_TYPE_BEST_CONTACT = 'Best contact for Physician';
@@ -182,9 +173,6 @@ public class Constant_AC {
 	public static final String CASE_WISH_CLEARANCE_APPROPRIATE = 'Appropriate';
 	public static final String CASE_WISH_CLEARANCE_NOT_APPROPRIATE = 'Not Appropriate';
 	public static final String MEET_PWL_CRITERIA_YES = 'Yes';
-	public static final String CASE_WISH_TYPE_CELEBRITY_DOMESTIC_TRAVEL = 'Celebrity-Domestic Travel';
-	public static final String CASE_WISH_TYPE_CELEBRITY_LOCAL = 'Celebrity-Local';
-	public static final String CASE_WISH_TYPE_CELEBRITY_INTERNATIONAL_TRAVEL = 'Celebrity-International Travel';
 	public static final String CASE_WISH_TYPE_CRUISE_CELEBRITY_ROYAL = 'Cruise-Celebrity/Royal';
 	public static final String CASE_WISH_TYPE_CRUISE_DISNEY = 'Cruise-Disney';
 	public static final String CASE_WISH_TYPE_CRUISE_OTHER = 'Cruise-Other';
@@ -194,7 +182,6 @@ public class Constant_AC {
 	public static final String CASE_WISH_TYPE_TRAVEL_HAWAII = 'Travel-Hawaii';
 	public static final String CASE_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
 	public static final String CASE_RECORD_TYPE_DIAGNOSIS_VERIFICATION_REVIEW = 'Diagnosis Verification Review';
-	public static final String CASE_RECORD_TYPE_WISH = 'Wish';
 	public static final String CASE_ORIGIN_WEB = 'Web';
 	public static final String CASE_ORIGIN_EMAIL = 'Email';
 	public static final String CASE_RUSH_TIME_FRAME = 'Select timeframe';
@@ -215,6 +202,8 @@ public class Constant_AC {
 	public static final String CONTACT_PHONE_OTHER = 'Other';
 	public static final String CONTACT_PHONE_WORK = 'Work';
 	public static final String CONTACT_PREFERRED_EMAIL_WORK = 'Work';
+	public static final String CONTACT_PREFERRED_EMAIL_PERSONAL = 'Personal';
+	public static final String CONTACT_PREFERRED_EMAIL_ALTERNATE = 'Alternate';
 	public static final String CONTACT_FIRSTNAME_API_NAME = 'FirstName';
 	public static final String CONTACT_LASTNAME_API_NAME = 'LastName';
 	public static final String CONTACT_BIRTHDATE_API_NAME = 'Birthdate';
@@ -337,11 +326,6 @@ public class Constant_AC {
 	public static final String DOCUSIGN_SUBJECT_DIAGNOSIS_VERIFICATION_FORM = 'Diagnosis Verification Form';
 	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_LIABILITY = 'Signature Required - Liability And Publicity Release Form';
 	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_WISH_FORM_AND_LIABILITY = 'Signature Required - Wish Form & Liability And Publicity Release Form';
-	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_ABSENT_PARENT_LIABILITY = 'Signature Required - Absent Parent Form';
-	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_SINGLE_PARENT_LIABILITY = 'Signature Required - Single Parent Form';
-	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_COMBO_FAMILY_LIABILITY = 'Signature Required - Combo Family Form & Liability/Publicity Release Form';
-	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_CHILD_MEDICAL_FORM = 'Signature Required – Make-A-Wish Child\'s Medical Summary Form:';
-	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_RUSH_CHILD_MEDICAL_FORM = 'Signature Required – Make-A-Wish Rush Child\'s Medical Summary Form:';
 	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_WISH_CLEARANCE_FORM = 'Signature Required – Make-A-Wish Wish Clearance Form';
 	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_RUSH_WISH_CLEARANCE_FORM = 'Signature Required – Make-A-Wish Rush Wish Clearance Form';
 	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_WISH_CLEARANCE_NO_TRAVEL_FORM = 'Signature Required – Make-A-Wish Wish Clearance No Travel Form';
@@ -363,9 +347,7 @@ public class Constant_AC {
 	public static final String WISH_AFFILIATION_TYPE_WISH_CHILD = 'Wish Child';
 	public static final String WISH_AFFILIATION_TYPE_APPROVED_PARTICIPANT = 'Approved Participant';
 	public static final String WISH_AFFILIATION_TYPE_REQUESTED_PARTICIPANT = 'Requested Participant';
-	public static final String WISH_AFFILIATION_TYPE_DECLINED_PARTICIPANT = 'Declined Participant';
 	public static final String WISH_AFFILIATION_TYPE_MEDICAL_PROFESSIONAL = 'Medical Professional';
-	public static final String WISH_AFFILIATION_TYPE_GUARDIAN_OF_MINOR_PARTICIPANT = 'Guardian of Minor Participant';
 	public static final String WISH_AFFILIATION_TYPE_OTHER = 'Other';
 
 	/**
@@ -373,7 +355,6 @@ public class Constant_AC {
 	*/
 	public static final String WISH_CHANGE_REQUEST_STATUS_PROPOSED = 'Proposed';
 	public static final String WISH_CHANGE_REQUEST_STATUS_APPROVED = 'Approved';
-	public static final String WISH_CHANGE_REQUEST_STATUS_REJECTED = 'Rejected';
 
 	/**
 	 * Wish Required Signature
@@ -404,24 +385,24 @@ public class Constant_AC {
 	public static final String TASK_SUBJECT_RUSH_MODIFIED_NO = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary';
 	public static final String TASK_SUBJECT_REVIEW_BACKGROUND_CHECK = 'Review Background Check';
 	public static final String TASK_SUBJECT_BACKGROUND_CHECK = 'Background Check';
-    public static final String TASK_SUBJECT_CHECK_IN_WITH_FAMILY = 'Check in with the family every 30 days';
-    public static final String TASK_SUBJECT_WISH_PRESENTATION_NOT_SET = 'Wish Presentation Not Set';
-    public static final String TASK_SUBJECT_BUDGET_IS_APPROVED_ACKNOWLEDGE = 'Budget is approved: Acknowledge Receipt of Approval';
-    public static final String TASK_SUBJECT_SEND_DNQ = 'Send DNQ Notification to Qualifying Medical Professional';
-    public static final String TASK_SUBJECT_INTERVIEW_TASK  = 'Interview Task';
-    public static final String TASK_SUBJECT_INTERVIEW_COMPLETED = 'Interview Completed';
-    public static final String TASK_SUBJECT_PARENT_ORIENTATION = 'Parent/Guardian Orientation';
-    public static final String TASK_SUBJECT_BACKGROUND_CHECK_EXPIRING = 'BC ET : Background Check Expiring';
-    public static final String TASK_SUBJECT_COI_EXPIRING = 'COI ET : COI Expiring';
-    public static final String TASK_SUBJECT_BUDGET_IS_APPROVED = 'Budget is approved';
-    public static final String TASK_SUBJECT_BUDGET_APPROVAL_REQUEST = 'Case ET : Budget Approval Request';
-    public static final String TASK_SUBJECT_BUDGET_NEEDS_REVISED = 'Budget needs to be revised';
-    public static final String TASK_SUBJECT_FOLLOWUP_ON_CLEARANCE = 'Follow-up on wish clearance';
-    public static final String TASK_SUBJECT_INTERVIEW_DATE_NOT_SET = 'Interview date not set';
-    public static final String TASK_SUBJECT_BIRTHDAY_REMINDER = 'Wish Child Birthday Reminder';
-    public static final String TASK_SUBJECT_FAMILY_PACKET_NOT_SUBMITTED = 'Wish Family Packet not submitted';
-    public static final String TASK_SUBJECT_RUSH_REFERRAL = 'Lead ET : New Rush Referral';
-    public static final String TASK_SUBJECT_RUSH_CHANGED = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary';
+	public static final String TASK_SUBJECT_CHECK_IN_WITH_FAMILY = 'Check in with the family every 30 days';
+	public static final String TASK_SUBJECT_WISH_PRESENTATION_NOT_SET = 'Wish Presentation Not Set';
+	public static final String TASK_SUBJECT_BUDGET_IS_APPROVED_ACKNOWLEDGE = 'Budget is approved: Acknowledge Receipt of Approval';
+	public static final String TASK_SUBJECT_SEND_DNQ = 'Send DNQ Notification to Qualifying Medical Professional';
+	public static final String TASK_SUBJECT_INTERVIEW_TASK  = 'Interview Task';
+	public static final String TASK_SUBJECT_INTERVIEW_COMPLETED = 'Interview Completed';
+	public static final String TASK_SUBJECT_PARENT_ORIENTATION = 'Parent/Guardian Orientation';
+	public static final String TASK_SUBJECT_BACKGROUND_CHECK_EXPIRING = 'BC ET : Background Check Expiring';
+	public static final String TASK_SUBJECT_COI_EXPIRING = 'COI ET : COI Expiring';
+	public static final String TASK_SUBJECT_BUDGET_IS_APPROVED = 'Budget is approved';
+	public static final String TASK_SUBJECT_BUDGET_APPROVAL_REQUEST = 'Case ET : Budget Approval Request';
+	public static final String TASK_SUBJECT_BUDGET_NEEDS_REVISED = 'Budget needs to be revised';
+	public static final String TASK_SUBJECT_FOLLOWUP_ON_CLEARANCE = 'Follow-up on wish clearance';
+	public static final String TASK_SUBJECT_INTERVIEW_DATE_NOT_SET = 'Interview date not set';
+	public static final String TASK_SUBJECT_BIRTHDAY_REMINDER = 'Wish Child Birthday Reminder';
+	public static final String TASK_SUBJECT_FAMILY_PACKET_NOT_SUBMITTED = 'Wish Family Packet not submitted';
+	public static final String TASK_SUBJECT_RUSH_REFERRAL = 'Lead ET : New Rush Referral';
+	public static final String TASK_SUBJECT_RUSH_CHANGED = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary';
 	public static final String TASK_SUBJECT_WISH_CONCEPT_APPROVAL = 'Wish concept approval';
 	public static final String TASK_SUBJECT_WISH_NOT_CLOSED = 'Wish not closed';
 	public static final String TASK_SUBJECT_FOLLOWUP_ACTIVITIES_INCOMPLETE = 'Volunteer wish follow-up activities not complete';
@@ -493,14 +474,12 @@ public class Constant_AC {
 	 */
 	public static final String WISH_EXPENSE_BUDGET_APPROVAL_STATUS_SUBMITTED = 'Submitted';
 	public static final String WISH_EXPENSE_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
-	public static final String WISH_EXPENSE_BUDGET_APPROVAL_STATUS_REJECTED = 'Rejected';
 
 	/**
 	 * Wish Budget Constants
 	 */
 	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_SUBMITTED = 'Submitted';
 	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
-	public static final String WISH_BUDGET_BUDGET_APPROVAL_STATUS_REJECTED = 'Rejected';
 
 	/**
 	 * Wish Form (Wish_Child_Form__c) Constants
@@ -528,7 +507,7 @@ public class Constant_AC {
 	 */
 	public static final String PROCESS_INSTANCE_STATUS_PENDING = 'Pending';
 
-	/*
+	/**
 	 * Access Token Lists (Custom Metadata) Constants
 	 */
 	public static final String ACCESS_TOKEN_LISTS_FIRST_ADVANTAGE = 'First Advantage';
