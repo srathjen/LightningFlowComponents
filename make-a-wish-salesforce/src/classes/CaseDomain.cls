@@ -725,7 +725,7 @@ public class CaseDomain extends trac_TriggerHandlerBase {
     private Map<Id,Case> getCreateVolunteerOpportunityCaseMap() {
         Map<Id,Case> createVolunteerOpportunityCaseMap = new Map<Id,Case>();
 
-        if (RecursiveTriggerHandler.isFirstTime == true) {
+        if (RecursiveTriggerHandler.isFirstTime == false) {
             return createVolunteerOpportunityCaseMap;
         }
 
