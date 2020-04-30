@@ -20,15 +20,24 @@ public class ClassOfferingValidation {
 			timeConversion.put(fieldLabel, Utils.parseAmPm(fieldLabel, regex));
 		}
 		for (Class_Offering__c classOffering : classOfferings) {
-			if (String.isEmpty(classOffering.Start_Time__c) || !timeConversion.containsKey(classOffering.Start_Time__c)) {
+			if (String.isEmpty(classOffering.Start_Time__c) && String.isEmpty(classOffering.End_Time__c)) {
+				continue;
+			} else if (String.isEmpty(classOffering.Start_Time__c) && String.isNotEmpty(classOffering.End_Time__c)) {
 				classOffering.addError(String.format(Label.Enter_Valid, new List<String>{
 						START_TIME
 				}));
-			} else if (String.isEmpty(classOffering.End_Time__c) || !timeConversion.containsKey(classOffering.End_Time__c)) {
+			} else if (String.isNotEmpty(classOffering.Start_Time__c) && String.isNotEmpty(classOffering.End_Time__c)
+					&& !timeConversion.containsKey(classOffering.Start_Time__c)) {
+				classOffering.addError(String.format(Label.Enter_Valid, new List<String>{
+						START_TIME
+				}));
+			} else if (String.isNotEmpty(classOffering.Start_Time__c) && String.isNotEmpty(classOffering.End_Time__c)
+					&& !timeConversion.containsKey(classOffering.End_Time__c)) {
 				classOffering.addError(String.format(Label.Enter_Valid, new List<String>{
 						END_TIME
 				}));
-			} else if ((timeConversion.get(classOffering.Start_Time__c) >= timeConversion.get(classOffering.End_Time__c))) {
+			} else if (String.isNotEmpty(classOffering.Start_Time__c) && String.isNotEmpty(classOffering.End_Time__c)
+					&& timeConversion.get(classOffering.Start_Time__c) >= timeConversion.get(classOffering.End_Time__c)) {
 				classOffering.addError(Label.Invalid_Start_and_End_Time);
 			}
 		}
