@@ -363,10 +363,8 @@ public class BackgroundCheckService {
      * @param ex
      */
     public static void createBackgroundCheckDebugLog(List<SObject> exceptionList, String methodName, Exception ex) {
-        for (SObject record : exceptionList) {
-            ErrorMessage_AC.createDebugRec('BackgroundCheckService', String.valueOf(record), String.valueOf(ex),
-                    methodName, record.Id, ex.getStackTraceString() + ' ' + ex.getMessage(), 'Error');
-        }
+        ErrorMessage_AC.createDebugRec(exceptionList, 'BackgroundCheckService', String.valueOf(ex),
+                methodName, ex.getStackTraceString() + ' ' + ex.getMessage(), 'Error');
     }
 
     /*
