@@ -191,7 +191,6 @@ public with sharing class TaskDomain extends trac_TriggerHandlerBase {
             afterUpdateTasks.add(newTask);
         }
 
-        TaskService.checkFollowUpTask(afterUpdateTasks, oldTasksMap);
         TaskService.updateVolunteerRecord(afterUpdateTasks, oldTasksMap);
         TaskService.updateAffiliationStatusAsDeclined(afterUpdateTasks, oldTasksMap);
         TaskService.updateAffiliationStatus(afterUpdateTasks, oldTasksMap);

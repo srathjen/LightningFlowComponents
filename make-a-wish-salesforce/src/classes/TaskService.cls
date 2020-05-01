@@ -529,67 +529,6 @@ public class TaskService {
 	}
 
 	/**
-     * @description     Check volunteer followup task.
-     *
-     * @param           List<Task> newTasks
-     * @param           Map<Id,Task> oldTasksMap
-     *
-     * @author          MST Solutions
-     * @createdDate     unknown
-     **/
-	public static void checkFollowUpTask(List<Task> newTasks, Map<Id,Task> oldTasksMap) {
-		if (newTasks == null || newTasks.isEmpty()) {
-			return;
-		}
-
-		Map<Id,Task> followUpTaskMap = new Map<Id,Task>();
-		for (Task newTask : newTasks) {
-			if (newTask.Status == Constant_AC.TASK_STATUS_COMPLETED &&
-				oldTasksMap.get(newTask.Id).Status != newTask.Status &&
-				newTask.Subject == Constant_AC.TASK_SUBJECT_FOLLOWUP_ACTIVITIES_INCOMPLETE) {
-
-				followUpTaskMap.put(newTask.WhatId, newTask);
-			}
-		}
-
-		if (followUpTaskMap.isEmpty()) {
-			return;
-		}
-
-		Set<Id> openTaskIdSet = new Set<Id>();
-		Set<Id> ownerIdSet = new Set<Id>();
-		for (CaseTeamMember caseTeamMem : [
-			SELECT ParentId, MemberId, TeamRoleId, TeamRole.Name, Parent.RecordTypeId
-			FROM CaseTeamMember
-			WHERE TeamRole.Name = :Constant_AC.CASE_TEAM_ROLE_WISH_GRANTER
-			AND ParentId IN :followUpTaskMap.keySet()
-			AND Parent.RecordTypeId = :Constant_AC.WISH_RT_ID
-		]) {
-			ownerIdSet.add(caseTeamMem.MemberId);
-		}
-
-		if (ownerIdSet.isEmpty()) {
-			return;
-		}
-
-		for (Task existingTask : [
-			SELECT Id, WhatId, OwnerId
-			FROM Task
-			WHERE WhatId IN :followUpTaskMap.keySet()
-			AND IsClosed = FALSE
-			AND OwnerId IN :ownerIdSet
-		]) {
-			openTaskIdSet.add(existingTask.WhatId);
-		}
-
-		for (Task checkOpenTask : followUpTaskMap.values()) {
-			if (openTaskIdSet.contains(checkOpenTask.WhatId)) {
-				checkOpenTask.addError(Label.TaskTrigger_Close_Other_Task_First);
-			}
-		}
-	}
-
-	/**
      * @description     This method is used to update the volunteer record for tracing the last engagement date.
      *
      * @param           List<Task> newTasks
