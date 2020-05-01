@@ -195,7 +195,6 @@ public with sharing class TaskDomain extends trac_TriggerHandlerBase {
         TaskService.updateAffiliationStatusAsDeclined(afterUpdateTasks, oldTasksMap);
         TaskService.updateAffiliationStatus(afterUpdateTasks, oldTasksMap);
         TaskService.sneakPeekTask(afterUpdateTasks, oldTasksMap);
-        TaskService.autoCloseTask(afterUpdateTasks, oldTasksMap);
         TaskService.updateLeadCloseDate(afterUpdateTasks, oldTasksMap);
     }
 }
