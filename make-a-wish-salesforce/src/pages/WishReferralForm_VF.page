@@ -865,6 +865,7 @@
             <script>
                 var rel = null;
             function changeRelationship(ref, val){
+            $(".shownOnYes").addClass("fam-aware-overlay");//SIW-556 Issue fix
                 rel = val;
                 document.getElementById('hhh').style.display = 'none';
                 var prefix = ref.split('relationToChild')[0];
