@@ -2,13 +2,17 @@ global class batch_changeVolunOppSatus implements Database.Batchable<SObject>, S
 
 	private final static String VOLUNTEER_OPPORTUNITY_STATUS_COMPLETED = Constant_AC.VOLUNTEER_OPPORTUNITY_STATUS_COMPLETED;
 	private final static String VOLUNTEER_RT_LABEL_NON_WISH_EVENT = Constant_AC.VOLUNTEER_RT_LABEL_NON_WISH_EVENT;
+	private final static String VOLUNTEER_RT_LABEL_NON_WISH_EVENT_VOLUNTEER_REGISTERED = Constant_AC.VOLUNTEER_RT_LABEL_NON_WISH_EVENT_VOLUNTEER_REGISTERED;
 
 	global Database.QueryLocator start(Database.BatchableContext BC) {
 		return Database.getQueryLocator([
 				SELECT Event_Date__c, Id, Status__c
 				FROM Volunteer_Opportunity__c
 				WHERE Event_Date__c < :Date.today()
-				AND RecordType.Name = :VOLUNTEER_RT_LABEL_NON_WISH_EVENT
+				AND RecordType.Name IN (
+						:VOLUNTEER_RT_LABEL_NON_WISH_EVENT,
+						:VOLUNTEER_RT_LABEL_NON_WISH_EVENT_VOLUNTEER_REGISTERED
+				)
 		]);
 	}
 
