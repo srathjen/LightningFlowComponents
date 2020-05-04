@@ -113,10 +113,6 @@ public with sharing class TaskDomain extends trac_TriggerHandlerBase {
                 newTask.RecordTypeId = Constant_AC.TASK_RT_ID;
             }
         }
-
-        if (Test.isRunningTest()) {
-            throw new CommonTriggerException('Test Class execution');
-        }
     }
 
     /*
@@ -195,12 +191,10 @@ public with sharing class TaskDomain extends trac_TriggerHandlerBase {
             afterUpdateTasks.add(newTask);
         }
 
-        TaskService.checkFollowUpTask(afterUpdateTasks, oldTasksMap);
         TaskService.updateVolunteerRecord(afterUpdateTasks, oldTasksMap);
         TaskService.updateAffiliationStatusAsDeclined(afterUpdateTasks, oldTasksMap);
         TaskService.updateAffiliationStatus(afterUpdateTasks, oldTasksMap);
         TaskService.sneakPeekTask(afterUpdateTasks, oldTasksMap);
-        TaskService.autoCloseTask(afterUpdateTasks, oldTasksMap);
         TaskService.updateLeadCloseDate(afterUpdateTasks, oldTasksMap);
     }
 }

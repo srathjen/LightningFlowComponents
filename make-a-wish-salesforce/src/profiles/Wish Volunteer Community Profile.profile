@@ -28600,7 +28600,7 @@
         <name>UseWebLink</name>
     </userPermissions>
     <userPermissions>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
         <name>ViewAllUsers</name>
     </userPermissions>
 </Profile>

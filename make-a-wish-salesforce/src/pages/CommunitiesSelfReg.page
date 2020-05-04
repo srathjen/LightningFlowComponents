@@ -5,7 +5,6 @@
     <apex:define name="body">
         <body class="vcp vcpsignup">
             <apex:include pageName="prospective_header" id="pheader" />
-
             <main role="main" class="container">
                 <div class="row">
                     <h1 class="col-md-12">Volunteer Sign Up</h1>
@@ -13,7 +12,6 @@
                 <div class="row">
                     <section class="col-md-8">
                         <apex:form id="theForm" styleClass="portal form-vcp-signup" forceSSL="true" >
-                            <!--<apex:pagemessages ></apex:pagemessages>-->
                             <apex:messages />
                             <apex:outputPanel rendered="{!showErrorMsg}" styleclass="alert alert-danger fade in col-sm-12">
                                 <apex:outputText escape="false" value="{!errorMessage}" id="errorMsg"/>
@@ -78,7 +76,7 @@
                                     </div>
                                 </div>
                             </fieldset>
-
+                            
                             <fieldset>
                                 <legend>Create a Username and Password</legend>
                                 <div class="form-group row">
@@ -87,7 +85,7 @@
                                         <apex:inputText styleClass="form-control f-username" maxlength="40" id="username" html-placeholder="your_email@domain.com" required="true" value="{!userName}" />
                                     </div>
                                 </div>
-
+                                
                                 <div class="form-group row">
                                     <div class="col-sm-3"><label for="communitiesSelfRegPage:theForm:password" aria-label="Create a Password">Password</label></div>
                                     <div class="col-sm-6">
@@ -96,7 +94,7 @@
                                         <p id="password-strength-text" class="text-muted"></p>
                                     </div>
                                 </div>
-
+                                
                                 <div class="form-group row">
                                     <div class="col-sm-3"><label for="communitiesSelfRegPage:theForm:confirmpassword" aria-label="Confirm Password">Confirm Password</label></div>
                                     <div class="col-sm-6">
@@ -104,7 +102,7 @@
                                     </div>
                                 </div>
                             </fieldset>
-
+                            
                             <fieldset>
                                 <legend>Age Confirmation</legend>
                                 <label class="c-input c-checkbox" for="communitiesSelfRegPage:theForm:over18" aria-label="Over 18">
@@ -116,7 +114,6 @@
                             <fieldset class="fs">
                                 <legend>Form Security</legend>
                                 <div class="form-group row">
-                                    <!-- <label for="form-security" class="sr-only" aria-label="form-security">Form Security</label> -->
                                     <div class="col-sm-6">
                                         <label class="c-input c-checkbox" for="6Lci5yITAAAAAJPB5cxQOi7CFAS6d4W5W8okrnAt">
                                             <input type="checkbox" id="6Lci5yITAAAAAJPB5cxQOi7CFAS6d4W5W8okrnAt" name="6Lci5yITAAAAAJPB5cxQOi7CFAS6d4W5W8okrnAt" />
@@ -129,7 +126,7 @@
                                     <div class="col-sm-3"><label for="2-6Lci5yITAAAAAJPB5cxQOi7CFAS6d4W5W8okrnAt">Security Input</label></div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control 2-6Lci5yITAAAAAJPB5cxQOi7CFAS6d4W5W8okrnAt" maxlength="50" name="88hE!joP" id="2-6Lci5yITAAAAAJPB5cxQOi7CFAS6d4W5W8okrnAt" placeholder="If you see this, you might be a bot" value="88hE!joP" />
-                                    <small class="text-muted">Do not change this field</small>
+                                        <small class="text-muted">Do not change this field</small>
                                     </div>
                                 </div>
                             </fieldset>
@@ -139,14 +136,14 @@
                             </fieldset>
                         </apex:form>
                     </section>
-
+                    
                     <aside class="col-md-4 page-info" role="page-info">
                         <h2 aria-labelledby="Volunteering">Volunteering</h2>
                         <p><apex:outputText value="{!signUpNotes}" id="signupNote" escape="false"/></p>
                     </aside>
                 </div>
             </main>
-
+            
             <apex:include pageName="prospective_footer" id="pfooter" />
             <script>
             //set page title
@@ -157,13 +154,13 @@
             <!-- chosen select -->
             <script src="{!URLFOR($Resource.prospective_assets,'web/js/chosen.jquery.min.js')}"></script>
             <!-- validate forms -->
-            <script src="{!URLFOR($Resource.prospective_assets,'web/js/jquery.validate.min.js')}"></script>
+                <script src="{!URLFOR($Resource.prospective_assets,'web/js/jquery.validate.min.js')}"></script>
             <!-- validate form (additional methods) -->
             <script src="{!URLFOR($Resource.prospective_assets,'web/js/additional-methods.min.js')}"></script>
-
+            
             <script>
-            // hide form security from bots (suck it bots)
-            $('.fs').hide();
+                // hide form security from bots (suck it bots)
+                $('.fs').hide();
             // form validation
             $.validator.setDefaults({
                 submitHandler: function () {
@@ -171,22 +168,20 @@
                     if($('#6Lci5yITAAAAAJPB5cxQOi7CFAS6d4W5W8okrnAt').is(':checked') == true || $('#2-6Lci5yITAAAAAJPB5cxQOi7CFAS6d4W5W8okrnAt').val() !== '88hE!joP') {
                         onsubmit: false
                     } else {
-                      $('#communitiesSelfRegPage\\:theForm\\:submit_signup').css({'opacity':'.5','cursor':'wait'}).prop('disabled',true).attr('title','Your form is submitting.');
-                      form.submit();
+                        $('#communitiesSelfRegPage\\:theForm\\:submit_signup').css({'opacity':'.5','cursor':'wait'}).prop('disabled',true).attr('title','Your form is submitting.');
+                        form.submit();
                     }
                 },
                 // required for chosen.js
                 ignore: ":hidden:not(.c-select)"
             });
-
+            
             $.validator.addMethod("oneletterdigit", function (value) {
-                    return /[a-z].*[0-9]|[0-9].*[a-z]/i.test(value);
+                return /[a-z].*[0-9]|[0-9].*[a-z]/i.test(value);
             }, 'Your input must contain at least 1 letter and 1 number');
-
+            
             $( document ).ready(function() {
                 $(".f-password").attr('autocomplete','new-password');
-
-
                 $( ".form-vcp-signup" ).validate({
                     rules: {
                         "communitiesSelfRegPage:theForm:firstname": {
@@ -321,7 +316,7 @@
                         error.addClass( "help-block" );
                         // Add `has-feedback` class to the parent div.form-group in order to add icons to inputs
                         element.parents( ".col-sm-6" ).addClass( "has-feedback" );
-
+                        
                         if ( element.prop( "type" ) === "checkbox" ) {
                             error.insertAfter( element.parent( "label" ) );
                         } else if ( element.hasClass("c-select") ){
@@ -345,11 +340,11 @@
                         $(elementParents).children( ".help-block" ).remove();
                     }
                 });
-
+                
                 // chosen.js - state select
                 $("select.c-select").prepend('<option disabled="disabled" selected="selected">Please select a State</option>');
                 $(".c-select").chosen({no_results_text: "State not found", placeholder_text_single: "Please Select a State", width:"100%"});
-
+                
                 $('.f-state').on('change', function() {
                     var stateParents = $( this ).parents(".col-sm-6");
                     $(stateParents).removeClass( "has-error" ).prev( "label" ).css('color','');
@@ -358,47 +353,47 @@
                 });
                 // inputs: numbers only
                 $(".numbers-only").keydown(function (e) {
-                  // Allow: backspace, delete, tab, escape and enter
-                  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
-                      // Allow: Ctrl+A
-                      (e.keyCode == 65 && e.ctrlKey === true) ||
-                      // Allow: Ctrl+C
-                      (e.keyCode == 67 && e.ctrlKey === true) ||
-                      // Allow: Ctrl+X
-                      (e.keyCode == 88 && e.ctrlKey === true) ||
-                      // Allow: home, end, left, right
-                      (e.keyCode >= 35 && e.keyCode <= 39)) {
-                      // let it happen, don't do anything
-                      return;
-                  }
-                  // Ensure that it is a number and stop the keypress
-                  else if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105 || (e.keyCode == 191) )) {
-                    e.preventDefault();
-                  }
+                    // Allow: backspace, delete, tab, escape and enter
+                    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+                        // Allow: Ctrl+A
+                        (e.keyCode == 65 && e.ctrlKey === true) ||
+                        // Allow: Ctrl+C
+                        (e.keyCode == 67 && e.ctrlKey === true) ||
+                        // Allow: Ctrl+X
+                        (e.keyCode == 88 && e.ctrlKey === true) ||
+                        // Allow: home, end, left, right
+                        (e.keyCode >= 35 && e.keyCode <= 39)) {
+                        // let it happen, don't do anything
+                        return;
+                    }
+                    // Ensure that it is a number and stop the keypress
+                    else if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105 || (e.keyCode == 191) )) {
+                        e.preventDefault();
+                    }
                 });
                 // auto format phone
                 $(".f-phone").keydown(function(e){
-                  if (($(this).val().length == 0) && (e.keyCode != 8)){
-                    $(this).val($(this).val() + "(");
-                  } else if(($(this).val().length == 4) && (e.keyCode != 8)){
-                    $(this).val($(this).val() + ") ");
-                  } else if (($(this).val().length == 9) && (e.keyCode != 8)){
-                    $(this).val($(this).val() + "-");
-                  }
-                  // if backspace or tab is pressed on certain lengths
-                  if ( (($(this).val().length == 2 || $(this).val().length == 11) && e.keyCode == 8) || (($(this).val().length == 2) && e.keyCode == 9) ){
-                    // remove dash or parenthesis
-                    $(this).val($(this).val().substring(0, $(this).val().length - 1));
-                  }
-                  // if backspace is pressed on deletion of digit before space
-                  if (($(this).val().length == 7) && (e.keyCode == 8)){
-                    // remove space and parenthesis
-                    $(this).val($(this).val().substring(0, $(this).val().length - 2));
-                  }
-                  // if full phone number isn't entered and tab is pressed
-                  if ( ($(this).val().length) != 14 && (e.keyCode == 9 ) ){
-                    $(this).val('')
-                  }
+                    if (($(this).val().length == 0) && (e.keyCode != 8)){
+                        $(this).val($(this).val() + "(");
+                    } else if(($(this).val().length == 4) && (e.keyCode != 8)){
+                        $(this).val($(this).val() + ") ");
+                    } else if (($(this).val().length == 9) && (e.keyCode != 8)){
+                        $(this).val($(this).val() + "-");
+                    }
+                    // if backspace or tab is pressed on certain lengths
+                    if ( (($(this).val().length == 2 || $(this).val().length == 11) && e.keyCode == 8) || (($(this).val().length == 2) && e.keyCode == 9) ){
+                        // remove dash or parenthesis
+                        $(this).val($(this).val().substring(0, $(this).val().length - 1));
+                    }
+                    // if backspace is pressed on deletion of digit before space
+                    if (($(this).val().length == 7) && (e.keyCode == 8)){
+                        // remove space and parenthesis
+                        $(this).val($(this).val().substring(0, $(this).val().length - 2));
+                    }
+                    // if full phone number isn't entered and tab is pressed
+                    if ( ($(this).val().length) != 14 && (e.keyCode == 9 ) ){
+                        $(this).val('')
+                    }
                 });
             });
             </script>
@@ -410,14 +405,14 @@
             var password = document.getElementById('communitiesSelfRegPage\:theForm\:password');
             var meter = document.getElementById('password-strength-meter');
             var text = document.getElementById('password-strength-text');
-
+            
             password.addEventListener('input', function() {
                 var val = password.value;
                 var result = zxcvbn(val);
-
+                
                 // Update the password strength meter
                 meter.value = result.score;
-
+                
                 // Update the text indicator
                 if (val !== "") {
                     text.innerHTML = "<strong>Strength:</strong> " + strength[result.score];
