@@ -1296,6 +1296,11 @@
         <enabled>false</enabled>
     </classAccesses>
     <custom>true</custom>
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Is_wish_referral_discussed_health_del__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>AccessTokenList__mdt.API_URL__c</field>
