@@ -192,9 +192,5 @@ public class AccountDomain extends trac_TriggerHandlerBase {
         if(!houseHoldAccountIdsSet.isEmpty()) {
             AccountService.updateRelatedContactAddressWithHousehold(houseHoldAccountIdsSet);
         }
-        //Update emergency contact information
-        if(!wishFormAccountList.isEmpty()) {
-            AccountService.updateWishFormRecordEmergencyContact(wishFormAccountList);
-        }
     }
 }

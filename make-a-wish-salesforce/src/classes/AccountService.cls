@@ -10,7 +10,6 @@ public class AccountService {
     private final static Id HOSPITAL_TREATMENT_RECORD_TYPE_ID = Constant_AC.HOSPITAL_TREATMENT_ID;
     private final static Id CHAPTER_RECORD_TYPE_ID = Constant_AC.CHAPTER_RT_ID;
     private final static Id CONTACT_WISH_CHILD_RECORD_TYPE_ID = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
-    private final static Id WISH_FORM_CHILD_EMERGENCY_ID = Constant_AC.WISH_FORM_CHILD_EMERGENCY_ID;
     private final static String WISH_FAMILY_RECORD_TYPE_LABEL = Constant_AC.WISH_FAMILY_RT_LABEL;
     private final static String READ = Constant_AC.RECORD_SHARE_READ;
     private final static String EDIT = Constant_AC.RECORD_SHARE_EDIT;
@@ -18,7 +17,7 @@ public class AccountService {
     private final static String RECORD_NAME_REMOVE_SUBSTRING_MAW = 'Make-A-Wish ';
     private final static String CHAPTER_SUBSTRING = ' - Chapter';
     private final static String USER_ROLE_NAME_NATIONAL_STAFF = 'National Staff';
-    private final static STRING GROUP_TYPE_REGULAR = 'Regular';
+    private final static String GROUP_TYPE_REGULAR = 'Regular';
 
     /**
      * Sets FirstName, LastName and Household fields on Account
@@ -337,40 +336,6 @@ public class AccountService {
 
         if (!wishFamilyContactIdSet.isEmpty()) {
             ContactService.updateHouseHoldAddress(wishFamilyContactIdSet);
-        }
-    }
-
-    /**
-    * Update wish form emergency contact information
-    * @param accountList
-    */
-    public static void updateWishFormRecordEmergencyContact(List<Account> accountList) {
-        Map<Id, Account> accountMap = new Map<Id, Account>();
-        List<Wish_Child_Form__c> updateWishFormList = new List<Wish_Child_Form__c>();
-        for (Account accountRecord : accountList) {
-            if (accountRecord.RecordTypeId == HOUSEHOLD_RECORD_TYPE_ID
-                    && accountRecord.Hidden_Wish_Form_Id__c != null) {
-                accountMap.put(accountRecord.Hidden_Wish_Form_Id__c, accountRecord);
-            }
-        }
-        for (Wish_Child_Form__c wishForm : [
-                SELECT Id, mobilePhone__c, Emergency_Relationship__c,
-                        LastName__c, Middle_Name__c, Email__c, RecordTypeId, Migrated__c
-                FROM Wish_Child_Form__c
-                WHERE Id IN :accountMap.keySet()
-                AND RecordTypeId = :WISH_FORM_CHILD_EMERGENCY_ID
-                AND Migrated__c = false
-        ]) {
-            if (accountMap.containsKey(wishForm.Id)) {
-                wishForm.mobilePhone__c = accountMap.get(wishForm.Id).Emergency_Contact_Phone__c;
-                wishForm.Emergency_Relationship__c = accountMap.get(wishForm.Id).Relationship_type__c;
-                wishForm.Middle_Name__c = accountMap.get(wishForm.Id).Emergency_Contact_Middle_Name__c;
-                wishForm.Email__c = accountMap.get(wishForm.Id).Emergency_Contact_Email__c;
-                updateWishFormList.add(wishForm);
-            }
-        }
-        if (!updateWishFormList.isEmpty()) {
-            update updateWishFormList;
         }
     }
 }

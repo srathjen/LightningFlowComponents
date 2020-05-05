@@ -3,14 +3,10 @@
    Guest users are never able to access this page.
  */
 public with sharing class MyProfilePageController {
-
+    
     private User user;
     private boolean isEdit = false;
-
-    public User getUser() {
-        return user;
-    }
-
+    
     public MyProfilePageController() {
         user = [SELECT id, email, username, usertype, communitynickname, timezonesidkey, languagelocalekey, firstname, lastname, phone, title,
                 street, city, country, postalcode, state, localesidkey, mobilephone, extension, fax, contact.email
@@ -21,15 +17,25 @@ public with sharing class MyProfilePageController {
             throw new NoAccessException();
         }
     }
-
+    
+    public User getUser() {
+        return user;
+    }
+    
     public Boolean getIsEdit() {
         return isEdit;
     }
-
+    
+    /**
+    * Enables edit mode
+    */
     public void edit() {
         isEdit=true;
     }
-
+    
+    /**
+    * Updates user information
+    */
     public void save() {
         try {
             update user;
@@ -38,11 +44,17 @@ public with sharing class MyProfilePageController {
             ApexPages.addMessages(e);
         }
     }
-
+    
+    /**
+    * Redirects to change password page
+    */
     public PageReference changePassword() {
         return Page.ChangePassword;
     }
-
+    
+    /**
+    * Cancels edit mode
+    */
     public void cancel() {
         isEdit=false;
         user = [SELECT id, email, username, communitynickname, timezonesidkey, languagelocalekey, firstname, lastname, phone, title,

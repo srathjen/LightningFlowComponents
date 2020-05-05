@@ -59,7 +59,6 @@ public class Relationship_AT_Test {
 		wishChild.Street__c = wishChild.MailingStreet;
 		wishChild.State__c = wishChild.MailingState;
 		wishChild.T_Shirt_Size__c = wishChild.T_Shirt_Size__c;
-		wishChild.RecordTypeId = Constant_AC.WISH_FORM_CHILD_ID;
 		wishChild.Preferred_Name__c = wishChild.Preferred_Name__c;
 		wishChild.RecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
 		Contact family = contacts.get(1);

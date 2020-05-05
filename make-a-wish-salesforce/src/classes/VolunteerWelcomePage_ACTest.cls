@@ -14,7 +14,6 @@ public class VolunteerWelcomePage_ACTest {
         insert new Bypass_Triggers__c(SetupOwnerId = UserInfo.getUserId());
     }
 
-    // Initializing  constructor.
     @IsTest
     static void testVolunteerWelcomePage() {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
@@ -31,10 +30,8 @@ public class VolunteerWelcomePage_ACTest {
             currUser.ProfileId = Label.Active_Volunteer_Profile;
             insert currUser;
         }
-
-        // Need parent record fields
         currUser = [
-                SELECT Id, ContactId, Contact.AccountId
+                SELECT Id,ContactId,CreatedDate,ProfileId
                 FROM User
                 WHERE Id = :currUser.Id
         ];
@@ -44,12 +41,10 @@ public class VolunteerWelcomePage_ACTest {
                 createDynamicContent, createProspectiveDynamicContent
         };
         System.runAs(currUser) {
-
+            Utils.currentUser = null;
             VolunteerWelcomePage_AC controller = new VolunteerWelcomePage_AC();
             controller.becomeAVolunteer();
             controller.findVolunteerStatus();
-
-            // Cover fields
             Boolean displayBecomAVolunteer = controller.displayBecomAVolunteer;
             Boolean displayContinueProcess = controller.displayContinueProcess;
             String welcomText = controller.welcomText;
@@ -63,12 +58,10 @@ public class VolunteerWelcomePage_ACTest {
         }
     }
 
-    // Testing negative case for orientation.
 	@IsTest
     static void negativeDataforOrientation() {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
         insert acc;
-
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
         insert con;
         Contact updateContact = new Contact();
@@ -81,7 +74,6 @@ public class VolunteerWelcomePage_ACTest {
             currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
             insert currUser;
         }
-        // Need parent record fields
         currUser = [
                 SELECT Id, ContactId, Contact.AccountId
                 FROM User
@@ -157,7 +149,6 @@ public class VolunteerWelcomePage_ACTest {
 
     }
 
-    // Completing Orientation for updating Orientation status.
 	@IsTest
     static void completeOrientation() {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
@@ -180,7 +171,6 @@ public class VolunteerWelcomePage_ACTest {
             currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
             insert currUser;
         }
-        // Need parent record fields
         currUser = [
                 SELECT Id, ContactId, Contact.AccountId
                 FROM User
@@ -219,9 +209,8 @@ public class VolunteerWelcomePage_ACTest {
             controller.findVolunteerStatus();
             Test.stopTest();
         }
-
     }
-    // Completing Applicaiton for updating Applicaiton status.
+
 	@IsTest
 	static void completeApplication() {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
@@ -240,7 +229,6 @@ public class VolunteerWelcomePage_ACTest {
             currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
             insert currUser;
         }
-        // Need parent record fields
         currUser = [
                 SELECT Id, ContactId, Contact.AccountId
                 FROM User
@@ -279,7 +267,7 @@ public class VolunteerWelcomePage_ACTest {
         System.assertEquals(updateContact.is_Application__c, 'Approved', 'Contact application status does not match');
         System.assert(updateContact.is_Application__c == 'Approved', 'Contact application status does not match');
     }
-    // Completing Interview for updating Interview status.
+
 	@IsTest
 	static void completeInterviewTask() {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
@@ -298,7 +286,6 @@ public class VolunteerWelcomePage_ACTest {
             currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
             insert currUser;
         }
-        // Need parent record fields
         currUser = [
                 SELECT Id, ContactId, Contact.AccountId
                 FROM User
@@ -324,9 +311,7 @@ public class VolunteerWelcomePage_ACTest {
             Class_Offering__c currOrientationOffering = OrientationandTrainingUtil.createClassOffering(currChapOrientation.Id);
             insert currOrientationOffering;
 
-            // Task Creation.
             Id interviewRT = Constant_AC.TASK_RT_ID;
-            // Confirmation Task
             Task confirmationTask = new Task();
             confirmationTask.Subject = 'Interview Task';
             confirmationTask.RecordTypeId = interviewRT;
@@ -337,7 +322,6 @@ public class VolunteerWelcomePage_ACTest {
             confirmationTask.Status = 'Approved';
             confirmationTask.whoId = currUser.ContactId;
             insert confirmationTask;
-
             VolunteerWelcomePage_AC controller = new VolunteerWelcomePage_AC();
             controller.getEvents();
             controller.becomeAVolunteer();
@@ -347,7 +331,6 @@ public class VolunteerWelcomePage_ACTest {
         }
     }
 
-    // Creating Background check.
 	@IsTest
 	static void createBackGroundCheck() {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
@@ -366,7 +349,6 @@ public class VolunteerWelcomePage_ACTest {
             currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
             insert currUser;
         }
-        // Need parent record fields
         currUser = [
                 SELECT Id, ContactId, Contact.AccountId
                 FROM User
@@ -392,9 +374,7 @@ public class VolunteerWelcomePage_ACTest {
             Class_Offering__c currOrientationOffering = OrientationandTrainingUtil.createClassOffering(currChapOrientation.Id);
             insert currOrientationOffering;
 
-            // Task Creation.
             Id interviewRT = Constant_AC.TASK_RT_ID;
-            // Confirmation Task
             Task confirmationTask = new Task();
             confirmationTask.Subject = 'Interview Task';
             confirmationTask.RecordTypeId = interviewRT;
@@ -406,7 +386,6 @@ public class VolunteerWelcomePage_ACTest {
             confirmationTask.whoId = currUser.ContactId;
             insert confirmationTask;
 
-            // Backgroud check creationn.
             Background_check__c currBC = OrientationandTrainingUtil.createBackgroundCheck(currUser.ContactId);
             currBC.Status__c = 'Approved';
             currBC.Date__c = Date.today().addDays(7);
@@ -414,7 +393,7 @@ public class VolunteerWelcomePage_ACTest {
             insert currBC;
             Test.startTest();
             VolunteerWelcomePage_AC controller = new VolunteerWelcomePage_AC();
-            controller.BackgroundCheck(true);
+            controller.backgroundCheck();
             controller.getEvents();
             controller.becomeAVolunteer();
             controller.applyForRolesStatus = 'Completed';
@@ -431,7 +410,6 @@ public class VolunteerWelcomePage_ACTest {
         }
     }
 
-    // Completing Background check for updating background check status.
 	@IsTest
 	static void completeBackGroundCheck() {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
@@ -447,7 +425,6 @@ public class VolunteerWelcomePage_ACTest {
             currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
             insert currUser;
         }
-        // Need parent record fields
         currUser = [
                 SELECT Id, ContactId, Contact.AccountId
                 FROM User
@@ -482,9 +459,7 @@ public class VolunteerWelcomePage_ACTest {
             Class_Offering__c currOrientationOffering = OrientationandTrainingUtil.createClassOffering(currChapOrientation.Id);
             insert currOrientationOffering;
 
-            // Task Creation.
             Id interviewRT = Constant_AC.TASK_RT_ID;
-            // Confirmation Task
             Task confirmationTask = new Task();
             confirmationTask.Subject = 'Interview Task';
             confirmationTask.RecordTypeId = interviewRT;
@@ -496,19 +471,16 @@ public class VolunteerWelcomePage_ACTest {
             confirmationTask.whoId = currUser.ContactId;
             insert confirmationTask;
 
-            // Backgroud check creationn.
             Test.startTest();
             Background_check__c currBC = OrientationandTrainingUtil.createBackgroundCheck(currUser.ContactId);
             currBC.Current__c = true;
             insert currBC;
-            //VolunteerLanding_AC_Test.BGCRecordSharing(currUser.Id,currBc.Id);
             currBC.Date_Completed__c = Date.Today();
             currBC.Date__c = Date.today().addDays(1);
             currBC.Status__c = 'Approved';
-//            BGCRecordSharing(currUser.Id, currBC.Id);
             update currBC;
             VolunteerWelcomePage_AC controller = new VolunteerWelcomePage_AC();
-            controller.BackgroundCheck(true);
+            controller.backgroundCheck();
             controller.getEvents();
             controller.becomeAVolunteer();
             controller.findVolunteerStatus();
@@ -517,7 +489,7 @@ public class VolunteerWelcomePage_ACTest {
             System.assert(currBC.Status__c == 'Approved', 'Background check status does not match');
         }
     }
-    // Completing training.
+
 	@IsTest
 	static void completeTraining() {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
@@ -535,7 +507,6 @@ public class VolunteerWelcomePage_ACTest {
             currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
             insert currUser;
         }
-        // Need parent record fields
         currUser = [
                 SELECT Id, ContactId, Contact.AccountId
                 FROM User
@@ -571,9 +542,7 @@ public class VolunteerWelcomePage_ACTest {
 
             Test.startTest();
 
-            // Task Creation.
             Id interviewRT = Constant_AC.TASK_RT_ID;
-            // Confirmation Task
             Task confirmationTask = new Task();
             confirmationTask.Subject = 'Interview Task';
             confirmationTask.RecordTypeId = interviewRT;
@@ -585,14 +554,14 @@ public class VolunteerWelcomePage_ACTest {
             confirmationTask.whoId = currUser.ContactId;
             insert confirmationTask;
 
-            // Backgroud check creationn.
             Background_check__c currBC = OrientationandTrainingUtil.createBackgroundCheck(currUser.ContactId);
             insert currBC;
             currBC.Date_Completed__c = Date.Today();
             currBC.Status__c = 'Approved';
             currBC.Current__c = true;
-//            BGCRecordSharing(currUser.Id, currBC.Id);
             update currBC;
+
+            Utils.currentUser = null;
             VolunteerWelcomePage_AC controller = new VolunteerWelcomePage_AC();
             controller.getEvents();
             controller.becomeAVolunteer();
@@ -629,7 +598,6 @@ public class VolunteerWelcomePage_ACTest {
             currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
             insert currUser;
         }
-        // Need parent record fields
         currUser = [
                 SELECT Id, ContactId, Contact.AccountId
                 FROM User
@@ -664,9 +632,7 @@ public class VolunteerWelcomePage_ACTest {
             Class_Offering__c currOrientationOffering = OrientationandTrainingUtil.createClassOffering(currChapOrientation.Id);
             insert currOrientationOffering;
 
-            // Task Creation.
             Id interviewRT = Constant_AC.TASK_RT_ID;
-            // Confirmation Task
             Task confirmationTask = new Task();
             confirmationTask.Subject = 'Interview Task';
             confirmationTask.RecordTypeId = interviewRT;
@@ -678,21 +644,19 @@ public class VolunteerWelcomePage_ACTest {
             confirmationTask.whoId = currUser.ContactId;
             insert confirmationTask;
 
-            // Backgroud check creationn.
             Background_check__c currBC = OrientationandTrainingUtil.createBackgroundCheckFasleRec(currUser.ContactId);
             currBC.Date_Completed__c = Date.Today() + 2;
             currBC.Date__c = Date.today().addDays(1);
             currBC.Status__c = 'Approved';
             insert currBC;
-//            BGCRecordSharing(currUser.Id, currBC.Id);
 
             Background_check__c currBC1 = OrientationandTrainingUtil.createBackgroundCheckFasleRec(currUser.ContactId);
             currBC1.Date_Completed__c = Date.Today() + 2;
             currBC1.Date__c = Date.today().addDays(1);
             currBC1.Status__c = 'Approved';
             insert currBC1;
-//            BGCRecordSharing(currUser.Id, currBC1.Id);
 
+            Utils.currentUser = null;
             VolunteerWelcomePage_AC controller = new VolunteerWelcomePage_AC();
             controller.getEvents();
             controller.becomeAVolunteer();

@@ -114,7 +114,8 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>CaseTrigger_Air_Travel_Aware</shortDescription>
-        <value>I am fully aware of the medical research regarding air travel and feel it is appropriate for this child. I will make any necessary adjustments to the medical treatment plan prior to their travel dates.</value>
+        <value>I am fully aware of the medical research regarding air travel and feel it is appropriate for this child.
+            I will make any necessary adjustments to the medical treatment plan prior to their travel dates.</value>
     </labels>
     <labels>
         <fullName>CaseTrigger_Budget_Posted_Match</fullName>
@@ -303,7 +304,8 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Diagnosis Verification Contact Duplicates</shortDescription>
-        <value>There might be an existing {0}. Please click Send Diagnosis Verification button to review the existing record.</value>
+        <value>There might be an existing {0}. Please click Send Diagnosis Verification button to review the existing
+            record.</value>
     </labels>
     <labels>
         <fullName>Diagnosis_Verification_Lead_Duplicates</fullName>
@@ -311,7 +313,8 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Diagnosis Verification Lead Duplicates</shortDescription>
-        <value>There might be a duplicate {0}. Please click Send Diagnosis Verification button to review the duplicates.</value>
+        <value>There might be a duplicate {0}. Please click Send Diagnosis Verification button to review the
+            duplicates.</value>
     </labels>
     <labels>
         <fullName>DocumentController_OrderAndPackageIdNoValue</fullName>
@@ -342,7 +345,8 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Duplicate Lead Message 2</shortDescription>
-        <value>Please select an existing lead to merge or check &quot;No Duplicate Found&quot; if the leads displayed are not duplicates.</value>
+        <value>Please select an existing lead to merge or check &quot;No Duplicate Found&quot; if the leads displayed
+            are not duplicates.</value>
     </labels>
     <labels>
         <fullName>Duplicate_Lead_Message_3</fullName>
@@ -558,7 +562,8 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Potential Existing Contact Records</shortDescription>
-        <value>There might be an existing {0}. Please click &lt;a href={1}/apex/LeadDuplicate_VF?id={2}&amp;wishFamily=true&amp;manual=true&gt;here&lt;/a&gt; to review the existing record.</value>
+        <value>There might be an existing {0}. Please click &lt;a href={1}/apex/LeadDuplicate_VF?id={2}&amp;wishFamily=true&amp;manual=true&gt;here&lt;/a&gt;
+            to review the existing record.</value>
     </labels>
     <labels>
         <fullName>Potential_Existing_Lead_Records</fullName>
@@ -566,7 +571,8 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Potential Existing Lead Records</shortDescription>
-        <value>There might be a duplicate {0}. Please click &lt;a href={1}/apex/LeadDuplicate_VF?id={2}&gt;here&lt;/a&gt; To review the duplicates.</value>
+        <value>There might be a duplicate {0}. Please click &lt;a href={1}/apex/LeadDuplicate_VF?id={2}&gt;here&lt;/a&gt;
+            To review the duplicates.</value>
     </labels>
     <labels>
         <fullName>Prospective_Volunteer_Profile</fullName>
@@ -660,8 +666,9 @@
         <protected>false</protected>
         <shortDescription>SendForESignatureInstructions</shortDescription>
         <value>Double-check the email address.
-Add an optional additional attachment and click Upload.
-Click Generate Document and once the document is generated you can click the link to view it then click Send to Docusign.</value>
+            Add an optional additional attachment and click Upload.
+            Click Generate Document and once the document is generated you can click the link to view it then click Send
+            to Docusign.</value>
     </labels>
     <labels>
         <fullName>Shopping_Spree_DDP</fullName>
@@ -752,6 +759,13 @@ Click Generate Document and once the document is generated you can click the lin
         <value>Please Enter Venue</value>
     </labels>
     <labels>
+        <fullName>VolunteerInterviewTask_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerInterviewTask_Error</shortDescription>
+        <value>Error while retrieving records:</value>
+    </labels>
+    <labels>
         <fullName>Volunteer_Opportunity_Id</fullName>
         <language>en_US</language>
         <protected>false</protected>
@@ -772,7 +786,8 @@ Click Generate Document and once the document is generated you can click the lin
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Volunteer Portal Alert - Background Check Instructions</shortDescription>
-        <value>You will receive an email from First Advantage, our background check provider, with specific details on how to complete the criminal background check process.</value>
+        <value>You will receive an email from First Advantage, our background check provider, with specific details on
+            how to complete the criminal background check process.</value>
     </labels>
     <labels>
         <fullName>Volunteer_Portal_Alert_Background_Check_Required</fullName>
@@ -783,6 +798,22 @@ Click Generate Document and once the document is generated you can click the lin
         <value>The training you have selected requires a completed background check.</value>
     </labels>
     <labels>
+        <fullName>Volunteer_Portal_Alert_Please_Refresh</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Alert - Please Refresh</shortDescription>
+        <value>Please refresh the page and try again.</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Portal_Alert_Previously_Declined</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Alert - Previously Declined</shortDescription>
+        <value>You have been previously declined for this opportunity. Please contact the chapter office with any questions.</value>
+    </labels>
+    <labels>
         <fullName>Volunteer_Portal_Alert_Registration_Not_Found</fullName>
         <categories>Volunteer Portal</categories>
         <language>en_US</language>
@@ -791,12 +822,29 @@ Click Generate Document and once the document is generated you can click the lin
         <value>No course registration found in LMS. Please contact the Chapter staff.</value>
     </labels>
     <labels>
+        <fullName>Volunteer_Portal_Alert_Specialized_Training_Required</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Alert - Specialized Training Required</shortDescription>
+        <value>Thank you for your interest in this opportunity. &apos;This opportunity requires specialized training that you have not completed,
+            contact chapter staff for more information about expanding your volunteer opportunities.</value>
+    </labels>
+    <labels>
         <fullName>Volunteer_Portal_Already_Registered_Message</fullName>
         <categories>Volunteer Portal</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Volunteer Portal Already Registered Message</shortDescription>
         <value>You have already registered for this Orientation.</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Portal_Already_Registered_Message_Opportunity</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Already Registered Message - Opportunity</shortDescription>
+        <value>You are already registered for this opportunity.</value>
     </labels>
     <labels>
         <fullName>Volunteer_Portal_Already_Registered_Message_Orientation</fullName>
@@ -873,6 +921,30 @@ Click Generate Document and once the document is generated you can click the lin
         <value>For a Better Experience</value>
     </labels>
     <labels>
+        <fullName>Volunteer_Portal_Button_Non_Wish_And_Events</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Button - Non wish and Events</shortDescription>
+        <value>Non-Wish and Events</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Portal_Button_Wish_Granter</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Button - Wish Granter</shortDescription>
+        <value>Wish Granter</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Portal_Button_Wish_Related</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Button - Wish Related</shortDescription>
+        <value>Wish Related</value>
+    </labels>
+    <labels>
         <fullName>Volunteer_Portal_Confirmation_Cancelled_Orientation</fullName>
         <categories>Volunteer Portal</categories>
         <language>en_US</language>
@@ -933,12 +1005,29 @@ Click Generate Document and once the document is generated you can click the lin
             training.</value>
     </labels>
     <labels>
+        <fullName>Volunteer_Portal_Confirmation_Success_Opportunity</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Confirmation Success - Opportunity</shortDescription>
+        <value>Thank you for requesting to volunteer for this opportunity. A notification has been sent to
+            chapter staff to review your request and staff will respond with further details, as applicable.</value>
+    </labels>
+    <labels>
         <fullName>Volunteer_Portal_Page_Title</fullName>
         <categories>Volunteer Portal</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Volunteer Portal Page Title</shortDescription>
         <value>Orientation</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Portal_Page_Title_My_Assignment</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Page Title - My Assignment</shortDescription>
+        <value>My Assignment</value>
     </labels>
     <labels>
         <fullName>Volunteer_Portal_Page_Title_Orientation</fullName>
@@ -957,6 +1046,14 @@ Click Generate Document and once the document is generated you can click the lin
         <value>Training</value>
     </labels>
     <labels>
+        <fullName>Volunteer_Portal_Page_Title_Volunteer_Opportunities</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Page Title - Volunteer_Opportunities</shortDescription>
+        <value>Volunteer_Opportunities</value>
+    </labels>
+    <labels>
         <fullName>Volunteer_Portal_Registered_Orientation_Details</fullName>
         <categories>Volunteer Portal</categories>
         <language>en_US</language>
@@ -965,12 +1062,62 @@ Click Generate Document and once the document is generated you can click the lin
         <value>Registered Orientation Details</value>
     </labels>
     <labels>
+        <fullName>Volunteer_Portal_Sorting_Instructions</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Alert - Sorting Instructions</shortDescription>
+        <value>To sort using one criteria: Click on the desired column header.
+            &lt;br&gt; To sort using multiple criteria: Click on one of the desired column headers. Press and
+            hold the “Shift” key while clicking on any additional headers.</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Portal_Table_Cell_Inactive</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Table Cell - Inactive</shortDescription>
+        <value>Inactive</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Portal_Table_Cell_Not_Approved</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Table Cell - Not Approved</shortDescription>
+        <value>Not Approved</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Portal_Table_Cell_Pending_Approval</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Table Cell - Pending Approval</shortDescription>
+        <value>Pending Approval</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Portal_Table_Cell_View</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Table Cell - View</shortDescription>
+        <value>View</value>
+    </labels>
+    <labels>
         <fullName>Volunteer_Portal_Table_Header_Action</fullName>
         <categories>Volunteer Portal</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Volunteer Portal Table Header - Action</shortDescription>
         <value>Action</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Portal_Table_Header_Assignment</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Table Header - Assignment</shortDescription>
+        <value>Assignment</value>
     </labels>
     <labels>
         <fullName>Volunteer_Portal_Table_Header_Available_Seats</fullName>
@@ -998,7 +1145,7 @@ Click Generate Document and once the document is generated you can click the lin
     </labels>
     <labels>
         <fullName>Volunteer_Portal_Table_Header_Chapter_Name</fullName>
-        <categories>Volunteer Orientation</categories>
+        <categories>Volunteer Portal</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Volunteer Portal Table Header - Chapter Name</shortDescription>
@@ -1014,7 +1161,7 @@ Click Generate Document and once the document is generated you can click the lin
     </labels>
     <labels>
         <fullName>Volunteer_Portal_Table_Header_End</fullName>
-        <categories>Volunteer Orientation</categories>
+        <categories>Volunteer Portal</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Volunteer Portal Table Header - End</shortDescription>
@@ -1053,16 +1200,48 @@ Click Generate Document and once the document is generated you can click the lin
         <value>Name</value>
     </labels>
     <labels>
+        <fullName>Volunteer_Portal_Table_Header_Number_Needed</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Table Header - # Needed</shortDescription>
+        <value># Needed</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Portal_Table_Header_Number_Registered</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Table Header - # Registered</shortDescription>
+        <value># Registered</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Portal_Table_Header_Opportunity</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Table Header - Opportunity</shortDescription>
+        <value>Opportunity</value>
+    </labels>
+    <labels>
         <fullName>Volunteer_Portal_Table_Header_Seats</fullName>
-        <categories>Volunteer Orientation</categories>
+        <categories>Volunteer Portal</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Volunteer Portal Table Header - Seats</shortDescription>
         <value>Seats</value>
     </labels>
     <labels>
+        <fullName>Volunteer_Portal_Table_Header_Sign_Up</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Table Header - Sign Up</shortDescription>
+        <value>Sign Up</value>
+    </labels>
+    <labels>
         <fullName>Volunteer_Portal_Table_Header_Start</fullName>
-        <categories>Volunteer Orientation</categories>
+        <categories>Volunteer Portal</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Volunteer Portal Table Header - Start</shortDescription>
@@ -1091,6 +1270,14 @@ Click Generate Document and once the document is generated you can click the lin
         <protected>false</protected>
         <shortDescription>Volunteer Portal Table Header - Type</shortDescription>
         <value>Type</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Portal_Table_Header_Wish_Type</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Table Header - Wish Type</shortDescription>
+        <value>Wish Type</value>
     </labels>
     <labels>
         <fullName>Volunteer_Portal_Table_Section_Available_Training</fullName>
@@ -1162,7 +1349,8 @@ Click Generate Document and once the document is generated you can click the lin
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Volunteer Role Already Filled</shortDescription>
-        <value>This volunteer opportunity has already been filled. Please register for another available volunteer opportunity.</value>
+        <value>This volunteer opportunity has already been filled. Please register for another available volunteer
+            opportunity.</value>
     </labels>
     <labels>
         <fullName>Volunteer_Role_Already_Registered</fullName>
@@ -1194,7 +1382,8 @@ Click Generate Document and once the document is generated you can click the lin
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Volunteer Role Opportunity Declined</shortDescription>
-        <value>You have been previously declined for this opportunity. Please contact the chapter office with any questions.</value>
+        <value>You have been previously declined for this opportunity. Please contact the chapter office with any
+            questions.</value>
     </labels>
     <labels>
         <fullName>Volunteer_Role_Opportunity_Requested</fullName>
@@ -1202,7 +1391,8 @@ Click Generate Document and once the document is generated you can click the lin
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Volunteer Role Opportunity Requested</shortDescription>
-        <value>Thank you for requesting to volunteer for this opportunity. A notification has been sent to chapter staff to review your request and staff will respond with further details, as applicable.</value>
+        <value>Thank you for requesting to volunteer for this opportunity. A notification has been sent to chapter staff
+            to review your request and staff will respond with further details, as applicable.</value>
     </labels>
     <labels>
         <fullName>Volunteer_Role_Opportunity_Training_Not_Completed</fullName>
@@ -1210,7 +1400,8 @@ Click Generate Document and once the document is generated you can click the lin
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Volunteer Role Opportunity Training Not Completed</shortDescription>
-        <value>Thank you for your interest in this opportunity. This opportunity requires specialized training that you have not completed, contact chapter staff for more information about expanding your volunteer opportunities.</value>
+        <value>Thank you for your interest in this opportunity. This opportunity requires specialized training that you
+            have not completed, contact chapter staff for more information about expanding your volunteer opportunities.</value>
     </labels>
     <labels>
         <fullName>Volunteer_Role_Volunteer_Count_Less</fullName>
@@ -1221,11 +1412,46 @@ Click Generate Document and once the document is generated you can click the lin
         <value>Volunteer need count should not be less than the volunteer registered count.</value>
     </labels>
     <labels>
-        <fullName>VolunteerInterviewTask_Error</fullName>
+        <fullName>VolunteerSignUp_Over18</fullName>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>VolunteerInterviewTask_Error</shortDescription>
-        <value>Error while retrieving records:</value>
+        <shortDescription>VolunteerSignUp_Over18</shortDescription>
+        <value>Thank you for your interest in volunteering with Make-A-Wish. Most volunteer opportunities are designed for individuals over the age of 18. If you are under the age of 18, please contact your local chapter to discuss what, if any, opportunities we currently have available.</value>
+    </labels>
+    <labels>
+        <fullName>VolunteerSignUp_Required_Fields</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerSignUp_Required_Fields</shortDescription>
+        <value>Please fill out all required fields.</value>
+    </labels>
+    <labels>
+        <fullName>VolunteerSignUp_Username_In_Use</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerSignUp_Username_In_Use</shortDescription>
+        <value>The username you provided is already in use. Please enter a different username to continue the sign up process. If you have already signed up, please click &quot;Log In&quot; to access the login page.</value>
+    </labels>
+    <labels>
+        <fullName>VolunteerSignUp_Valid_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerSignUp_Valid_Email</shortDescription>
+        <value>Please enter a valid email address.</value>
+    </labels>
+    <labels>
+        <fullName>VolunteerSignUp_Valid_Username</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerSignUp_Valid_Username</shortDescription>
+        <value>Please enter a valid username. Username must be in email format (name@domain.com).</value>
+    </labels>
+    <labels>
+        <fullName>VolunteerSignUp_Zip_Code</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerSignUp_Zip_Code</shortDescription>
+        <value>Please enter a 5 digit zip code.</value>
     </labels>
     <labels>
         <fullName>WG_FinalStep_FileClosed</fullName>
@@ -1604,7 +1830,8 @@ Click Generate Document and once the document is generated you can click the lin
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Budget Error</shortDescription>
-        <value>The current active budget is locked for approval.  Please recall, reject or approve the previous budget before proceeding.</value>
+        <value>The current active budget is locked for approval. Please recall, reject or approve the previous budget
+            before proceeding.</value>
     </labels>
     <labels>
         <fullName>Wish_Budget_Warning</fullName>
@@ -1612,7 +1839,7 @@ Click Generate Document and once the document is generated you can click the lin
         <protected>false</protected>
         <shortDescription>Wish Budget Warning</shortDescription>
         <value>You are requesting to create a new Wish Budget.
-This will archive the existing active budget and cannot be undone. Are you sure you want to proceed?</value>
+            This will archive the existing active budget and cannot be undone. Are you sure you want to proceed?</value>
     </labels>
     <labels>
         <fullName>Wish_Change_Request_Error_Date_Format</fullName>
@@ -1740,7 +1967,8 @@ This will archive the existing active budget and cannot be undone. Are you sure 
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Form File Upload Help</shortDescription>
-        <value>Enter a descriptive name for the file you want to upload, then click the Upload Files button to select the file you want to attach. Be sure to click the red Upload button to complete the upload.</value>
+        <value>Enter a descriptive name for the file you want to upload, then click the Upload Files button to select
+            the file you want to attach. Be sure to click the red Upload button to complete the upload.</value>
     </labels>
     <labels>
         <fullName>Wish_Form_File_Uploading</fullName>
@@ -1844,7 +2072,8 @@ This will archive the existing active budget and cannot be undone. Are you sure 
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Form The</shortDescription>
-        <value>The {0} form has already been submitted for {1}. Are you sure you want to proceed with updating the form?</value>
+        <value>The {0} form has already been submitted for {1}. Are you sure you want to proceed with updating the
+            form?</value>
     </labels>
     <labels>
         <fullName>Wish_Form_Uploaded_Files</fullName>
@@ -1868,8 +2097,8 @@ This will archive the existing active budget and cannot be undone. Are you sure 
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Form Welcome Message</shortDescription>
-        <value>Please use the Wish Design Forms to get to the heart - 
-            the who, what, where, why, when - of the child’s one true wish. 
+        <value>Please use the Wish Design Forms to get to the heart -
+            the who, what, where, why, when - of the child’s one true wish.
             Complete the forms in their entirety and with as much detail as possible.</value>
     </labels>
     <labels>
@@ -2470,7 +2699,8 @@ This will archive the existing active budget and cannot be undone. Are you sure 
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Referral Other Treating Medical Professional</shortDescription>
-        <value>Please provide the best person in the Treating Medical Professional&apos;s Office to contact if different than the Treating Medical Professional</value>
+        <value>Please provide the best person in the Treating Medical Professional&apos;s Office to contact if different
+            than the Treating Medical Professional</value>
     </labels>
     <labels>
         <fullName>Wish_Referral_Parent_or_Guardian</fullName>
@@ -2686,7 +2916,8 @@ This will archive the existing active budget and cannot be undone. Are you sure 
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Referral Thank You For Submitting</shortDescription>
-        <value>Thank you for submitting a referral. Chapter staff will be in contact soon if additional information is required.</value>
+        <value>Thank you for submitting a referral. Chapter staff will be in contact soon if additional information is
+            required.</value>
     </labels>
     <labels>
         <fullName>Wish_Referral_Treating_Medical_Professional_Information</fullName>

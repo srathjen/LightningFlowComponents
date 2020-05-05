@@ -12,6 +12,32 @@ public class Utils {
 	public static final String AM = 'AM';
 	public static final String PM = 'PM';
 
+	private static final String EMAIL_REGEX = '([a-zA-Z0-9_\\-\\.]+)@((\\[a-z]{1,3}\\.[a-z]{1,3}\\.[a-z]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})';
+
+	public static final Map<String,String> TIME_ZONE_MAP = new Map<String,String>{
+		'(GMT-07:00) Mountain Standard Time (America/Phoenix)' => 'America/Phoenix',
+		'(GMT-02:00) Brasilia Summer Time (America/Sao_Paulo)' => 'America/Sao_Paulo',
+		'(GMT-03:00) Argentina Time (America/Argentina/Buenos_Aires)' => 'America/Argentina/Buenos_Aires',
+		'(GMT-03:00) Chile Summer Time (America/Santiago)' => 'America/Santiago',
+		'(GMT-03:30) Newfoundland Standard Time (America/St_Johns)' => 'America/St_Johns',
+		'(GMT-04:00) Atlantic Standard Time (America/Halifax)' => 'America/Halifax',
+		'(GMT-04:00) Atlantic Standard Time (America/Puerto_Rico)' => 'America/Puerto_Rico',
+		'(GMT-04:30) Venezuela Time (America/Caracas)' => 'America/Caracas',
+		'(GMT-05:00) Colombia Time (America/Bogota)' => 'America/Bogota',
+		'(GMT-05:00) Eastern Standard Time (America/Indiana/Indianapolis)' => 'America/Indiana/Indianapolis',
+		'(GMT-05:00) Peru Time (America/Lima)' => 'America/Lima',
+		'(GMT-05:00) Eastern Standard Time (America/New_York)' => 'America/New_York',
+		'(GMT-05:00) Eastern Standard Time (America/Panama)' => 'America/Panama',
+		'(GMT-06:00) Central Standard Time (America/Chicago)' => 'America/Chicago',
+		'(GMT-06:00) Central Standard Time (America/El_Salvador)' => 'America/El_Salvador',
+		'(GMT-06:00) Central Standard Time (America/Mexico_City)' => 'America/Mexico_City',
+		'(GMT-07:00) Mountain Standard Time (America/Denver)' => 'America/Denver',
+		'(GMT-07:00) Mountain Standard Time (America/Phoenix)' => 'America/Phoenix',
+		'(GMT-08:00) Pacific Standard Time (America/Los_Angeles)' => 'America/Los_Angeles',
+		'(GMT-08:00) Pacific Standard Time (America/Tijuana)' => 'America/Tijuana',
+		'(GMT-09:00) Alaska Standard Time (America/Anchorage)' => 'America/Anchorage'
+	};
+
 	/**
 	 * @description 		Retrieve information about the current user.
 	 * @author				Chris Shinnimin, Traction on Demand
@@ -21,11 +47,11 @@ public class Utils {
 		get {
 			if (currentUser == null) {
 				currentUser = [
-						SELECT Id, Name, Chapter_Name__c, UserRole.Name, ProfileId, Profile.Id, Profile.Name, ContactId,
-								Contact.Account.Volunteer_Manager__c, Contact.OwnerId, Hidden_Role_Name_Id__c
-						FROM User
-						WHERE Id = :UserInfo.getUserId()
-						LIMIT 1
+					SELECT Id, Name, Chapter_Name__c, UserRole.Name, ProfileId, Profile.Id, Profile.Name, ContactId,
+						Contact.Account.Volunteer_Manager__c, Contact.OwnerId, Hidden_Role_Name_Id__c, CreatedDate
+					FROM User
+					WHERE Id = :UserInfo.getUserId()
+					LIMIT 1
 				];
 			}
 			return currentUser;
@@ -87,7 +113,7 @@ public class Utils {
 		try {
 			Map<String, Schema.SObjectField> fieldsByName = Schema.getGlobalDescribe().get(sObjectApiName).getDescribe().fields.getMap();
 			List<Schema.PicklistEntry> picklistEntries = fieldsByName.get(fieldApiName).getDescribe().getPicklistValues();
-			if (String.isNotEmpty(optionalPlaceholderOption)) {
+			if (optionalPlaceholderOption != null) {
 				selectOptions.add(new SelectOption('', optionalPlaceholderOption));
 			}
 			for (Schema.PicklistEntry pickListValue : picklistEntries) {
@@ -213,14 +239,17 @@ public class Utils {
 	 * @author Chris Shinnimin, Traction on Demand
 	 * @date 2020-03-03
 	*/
-	public static List<SelectOption> picklistStringToOptions(String picklistString) {
+	public static List<SelectOption> picklistStringToOptions(String picklistString, String optionalPlaceholderOption) {
 		List<SelectOption> selectOptions = new List<SelectOption>();
 
 		if (String.isBlank(picklistString)) {
 			return selectOptions;
 		}
 
-		selectOptions.add(new SelectOption('', 'Please Select'));
+		if (optionalPlaceholderOption != null) {
+			selectOptions.add(new SelectOption('', optionalPlaceholderOption));
+		}
+
 		for (String currString : picklistString.split(',')) {
 			selectOptions.add(new SelectOption(currString, currString));
 		}
@@ -328,13 +357,30 @@ public class Utils {
 		Map<Id, String> userRoleMap = new Map<Id, String>();
 
 		for (User currUser : [
-				SELECT Id, UserRole.Name
-				FROM User
-				WHERE Id IN :userIds
+			SELECT Id, UserRole.Name
+			FROM User
+			WHERE Id IN :userIds
 		]) {
 			userRoleMap.put(currUser.Id, currUser.UserRole.Name);
 		}
 
 		return userRoleMap;
+	}
+
+	/**
+     * @description     Validate whether a String contains an email address.
+     *
+     * @param           String email
+     *
+     * @return          Boolean
+     *
+     * @author          unknown
+     * @createdDate     unknown
+     */
+	public static Boolean isEmail(String email) {
+		Pattern MyPattern = Pattern.compile(EMAIL_REGEX);
+		Matcher MyMatcher = MyPattern.matcher(email);
+
+		return MyMatcher.matches();
 	}
 }
