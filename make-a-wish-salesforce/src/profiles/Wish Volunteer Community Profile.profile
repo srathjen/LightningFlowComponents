@@ -28385,7 +28385,7 @@
         <name>UseWebLink</name>
     </userPermissions>
     <userPermissions>
-        <enabled>true</enabled>
-        <name>ViewAllUsers</name>
-    </userPermissions>
+    <enabled>false</enabled>
+    <name>ViewAllUsers</name>
+</userPermissions>
 </Profile>
