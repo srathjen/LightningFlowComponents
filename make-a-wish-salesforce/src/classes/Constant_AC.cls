@@ -306,6 +306,7 @@ public class Constant_AC {
 	public static final String VOLUNTEER_OPPORTUNITY_STATUS_PENDING = 'Pending';
 	public static final String VOLUNTEER_OPPORTUNITY_REASON_INACTIVE_NOT_APPROVED = 'Not Approved';
 	public final static String VOLUNTEER_RT_LABEL_NON_WISH_EVENT = Schema.SObjectType.Volunteer_Opportunity__c.getRecordTypeInfosByDeveloperName().get('Non_Wish_Event').getName();
+	public final static String VOLUNTEER_RT_LABEL_NON_WISH_EVENT_VOLUNTEER_REGISTERED = Schema.SObjectType.Volunteer_Opportunity__c.getRecordTypeInfosByDeveloperName().get('Volunteer_Registered_Non_Wish').getName();
 
 	/**
 	 * Contact Application Status
@@ -385,24 +386,24 @@ public class Constant_AC {
 	public static final String TASK_SUBJECT_RUSH_MODIFIED_NO = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary';
 	public static final String TASK_SUBJECT_REVIEW_BACKGROUND_CHECK = 'Review Background Check';
 	public static final String TASK_SUBJECT_BACKGROUND_CHECK = 'Background Check';
-	public static final String TASK_SUBJECT_CHECK_IN_WITH_FAMILY = 'Check in with the family every 30 days';
-	public static final String TASK_SUBJECT_WISH_PRESENTATION_NOT_SET = 'Wish Presentation Not Set';
-	public static final String TASK_SUBJECT_BUDGET_IS_APPROVED_ACKNOWLEDGE = 'Budget is approved: Acknowledge Receipt of Approval';
-	public static final String TASK_SUBJECT_SEND_DNQ = 'Send DNQ Notification to Qualifying Medical Professional';
-	public static final String TASK_SUBJECT_INTERVIEW_TASK  = 'Interview Task';
-	public static final String TASK_SUBJECT_INTERVIEW_COMPLETED = 'Interview Completed';
-	public static final String TASK_SUBJECT_PARENT_ORIENTATION = 'Parent/Guardian Orientation';
-	public static final String TASK_SUBJECT_BACKGROUND_CHECK_EXPIRING = 'BC ET : Background Check Expiring';
-	public static final String TASK_SUBJECT_COI_EXPIRING = 'COI ET : COI Expiring';
-	public static final String TASK_SUBJECT_BUDGET_IS_APPROVED = 'Budget is approved';
-	public static final String TASK_SUBJECT_BUDGET_APPROVAL_REQUEST = 'Case ET : Budget Approval Request';
-	public static final String TASK_SUBJECT_BUDGET_NEEDS_REVISED = 'Budget needs to be revised';
-	public static final String TASK_SUBJECT_FOLLOWUP_ON_CLEARANCE = 'Follow-up on wish clearance';
-	public static final String TASK_SUBJECT_INTERVIEW_DATE_NOT_SET = 'Interview date not set';
-	public static final String TASK_SUBJECT_BIRTHDAY_REMINDER = 'Wish Child Birthday Reminder';
-	public static final String TASK_SUBJECT_FAMILY_PACKET_NOT_SUBMITTED = 'Wish Family Packet not submitted';
-	public static final String TASK_SUBJECT_RUSH_REFERRAL = 'Lead ET : New Rush Referral';
-	public static final String TASK_SUBJECT_RUSH_CHANGED = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary';
+    public static final String TASK_SUBJECT_CHECK_IN_WITH_FAMILY = 'Check in with the family every 30 days';
+    public static final String TASK_SUBJECT_WISH_PRESENTATION_NOT_SET = 'Wish Presentation Not Set';
+    public static final String TASK_SUBJECT_BUDGET_IS_APPROVED_ACKNOWLEDGE = 'Budget is approved: Acknowledge Receipt of Approval';
+    public static final String TASK_SUBJECT_SEND_DNQ = 'Send DNQ Notification to Qualifying Medical Professional';
+    public static final String TASK_SUBJECT_INTERVIEW_TASK  = 'Interview Task';
+    public static final String TASK_SUBJECT_INTERVIEW_COMPLETED = 'Interview Completed';
+    public static final String TASK_SUBJECT_PARENT_ORIENTATION = 'Parent/Guardian Orientation';
+    public static final String TASK_SUBJECT_BACKGROUND_CHECK_EXPIRING = 'BC ET : Background Check Expiring';
+    public static final String TASK_SUBJECT_COI_EXPIRING = 'COI ET : COI Expiring';
+    public static final String TASK_SUBJECT_BUDGET_IS_APPROVED = 'Budget is approved';
+    public static final String TASK_SUBJECT_BUDGET_APPROVAL_REQUEST = 'Case ET : Budget Approval Request';
+    public static final String TASK_SUBJECT_BUDGET_NEEDS_REVISED = 'Budget needs to be revised';
+    public static final String TASK_SUBJECT_FOLLOWUP_ON_CLEARANCE = 'Follow-up on wish clearance';
+    public static final String TASK_SUBJECT_INTERVIEW_DATE_NOT_SET = 'Interview date not set';
+    public static final String TASK_SUBJECT_BIRTHDAY_REMINDER = 'Wish Child Birthday Reminder';
+    public static final String TASK_SUBJECT_FAMILY_PACKET_NOT_SUBMITTED = 'Wish Family Packet not submitted';
+    public static final String TASK_SUBJECT_RUSH_REFERRAL = 'Lead ET : New Rush Referral';
+    public static final String TASK_SUBJECT_RUSH_CHANGED = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary';
 	public static final String TASK_SUBJECT_WISH_CONCEPT_APPROVAL = 'Wish concept approval';
 	public static final String TASK_SUBJECT_WISH_NOT_CLOSED = 'Wish not closed';
 	public static final String TASK_SUBJECT_FOLLOWUP_ACTIVITIES_INCOMPLETE = 'Volunteer wish follow-up activities not complete';
