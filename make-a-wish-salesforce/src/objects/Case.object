@@ -9840,6 +9840,10 @@ NULL)</formula>
                 <default>false</default>
             </values>
             <values>
+                <fullName>Loss of Contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Moved</fullName>
                 <default>false</default>
             </values>
