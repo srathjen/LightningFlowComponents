@@ -39,8 +39,13 @@
     <members>Inkind_Donation_PDFs__c</members>
     <members>Lead</members>
     <members>Wish_Budget_Approver_Filter__c</members>
+	<members>WishReferralForm_Translation__mdt</members>
     <name>CustomObject</name>
   </types>
+   <types>
+  <members>WishReferralForm_Translation.es</members>
+   <name>CustomMetadata</name>
+</types>
   <types>
     <members>Automated_Volunteer_Templates/BC_Completed_Email_Active_Volunteer_Template</members>
     <members>Automated_Volunteer_Templates/Bc_Completed_Email_Pending_Volunteer_Training_Required_Template</members>
@@ -187,6 +192,7 @@
     <members>Volunteer Staff</members>
     <members>Wish Referral Form Profile</members>
     <members>Wish Volunteer Community Profile</members>
+	<members>Wish Referral Form- Spanish Profile</members>	
     <name>Profile</name>
   </types>
   <types>
@@ -202,6 +208,18 @@
     <members>*</members>
     <name>StaticResource</name>
   </types>
+  <types>
+        <members>*</members>
+        <name>CustomSite</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>Network</name>
+    </types>
+	 <types>
+        <members>*</members>
+        <name>SiteDotCom</name>
+    </types>
   <types>
     <members>Account.Family_Dynamics_Validation</members>
     <members>Account.InkindAccount_Chapter_Validation</members>
