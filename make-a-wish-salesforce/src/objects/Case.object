@@ -6063,7 +6063,6 @@ on airplane</description>
             </valueSettings>
             <valueSettings>
                 <controllingFieldValue>Closed</controllingFieldValue>
-                <controllingFieldValue>Inactive</controllingFieldValue>
                 <valueName>Loss of Contact</valueName>
             </valueSettings>
             <valueSettings>
