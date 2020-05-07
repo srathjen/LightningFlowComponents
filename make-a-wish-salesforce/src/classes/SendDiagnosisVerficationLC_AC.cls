@@ -11,7 +11,7 @@ public without sharing class SendDiagnosisVerficationLC_AC {
 
     /*
      * @description     Get the neccessary lead information for further process of sending diagnosis verification
-     * @param           Id leadId`
+     * @param           Id leadId
      * @return          String
      * @date            unknown
      * @author          MST Solutions
