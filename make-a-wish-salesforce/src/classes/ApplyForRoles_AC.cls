@@ -248,6 +248,7 @@ public class ApplyForRoles_AC {
 
 			String envelopeId = (String) results.get('envelopeId');
 			String returnUrl = Endpoints__c.getInstance().Site_URL__c + APPLY_FOR_ROLES_PAGE_PATH;
+
 			HttpResponse createRecipientResponse = DocuSignService.createRecipient(envelopeId, currentVolunteer.Email,
 					currentVolunteer.FirstName, currentVolunteer.LastName, returnUrl);
 

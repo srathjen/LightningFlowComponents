@@ -54,7 +54,6 @@ public class LeadDuplicateService_Test {
 
 		List<Lead> leads = TestDataFactory.createLead(2);
 		Lead lead = leads.get(0);
-		lead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
 		lead.FirstName = 'Jack';
 		lead.LastName = 'Smith';
 		lead.Phone = '123456789';
@@ -108,6 +107,7 @@ public class LeadDuplicateService_Test {
 		lead.isSign__c = true;
 		lead.Travel_algorithm__c = 'Test1;Test2;';
 		lead.Child_Age__c = '4';
+		lead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
 		Lead leadDuplicated = leads.get(1);
 		leadDuplicated.FirstName = 'Jack';
 		leadDuplicated.LastName = 'S';
@@ -162,6 +162,7 @@ public class LeadDuplicateService_Test {
 		leadDuplicated.isSign__c = true;
 		leadDuplicated.Travel_algorithm__c = 'Test1;Test2;';
 		leadDuplicated.Child_Age__c = '5';
+		leadDuplicated.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
 		insert leads;
 		trac_TriggerHandlerBase.blockTrigger = false;
 	}
