@@ -24,7 +24,6 @@ global Class WishReferralFormSpanish_AC
     public string diagnosisYear{get;set;}
     public List<string> communictionList{get;set;}
     public List<String> languageList{get;set;}
-    //public string communictionAids{get;set;}
     public string additionalParentState{get;set;}
     public static string icdOrPcd;
     public string refChildFormParent{get;set;}
@@ -95,13 +94,10 @@ global Class WishReferralFormSpanish_AC
          if(icdCodeInfoList.size() > 0) {
              currLead.PD_ICD_Code__c = icdCodeInfoList[0].Id;
              currLead.ICD_Given_By_Referrer__c = icdCodeInfoList[0].Id;
-         }
-        // currLead.PD_Condition_Description__c = selectedDiagnosis;
-        // currLead.ICD_10_Code__c = 'NotListed';
+         }        
          currLead.Diagnosis_Given_By_Referrer__c = 'Not Listed';
          currLead.PD_Condition_Description__c = 'Not Listed';
          currLead.Company = 'Make-A-Wish';
-         //currLead.RecordTypeId = '0128A000000XXAGQA4';
          currLead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
          currLead.LastName = lastName;
          String zipCode='';
@@ -159,9 +155,7 @@ global Class WishReferralFormSpanish_AC
              if(currLead.PD_ICD_Code__c != Null)
              {
                  if(icdCodeInfoList.size() > 0)
-                 {
-                     //Removed as per IME-120
-                     //currLead.Childs_Qualifying_Diagnosis__c = icdCodeInfoList[0].Condition_Description__r.Code_to_Use__c;
+                 {                   
                      
                  }                           
              }
@@ -173,8 +167,7 @@ global Class WishReferralFormSpanish_AC
                  
                  if(descriptionList.size() > 0)
                  {
-                      //commented as per IME-120
-                     //currLead.PR_Diagnosis__c = descriptionList[0].PR_Diagnosis__c;
+                     
                  }                           
              }
              
@@ -263,63 +256,7 @@ global Class WishReferralFormSpanish_AC
                                            AND PostalCode = :currLead.PostalCode)))
                                         AND isConverted=false limit 1];
              boolean redirection;                                
-         /* SIW-147 Comment out all code related to duplicate block functionality Lines 248-303
-            if(contactDupCheck.size() > 0 && leadDupCheck.size() > 0)
-             {
-                 Lead updateLead = new Lead();
-                 updateLead.id = leadDupCheck[0].id;
-                 updateLead.status = 'Duplicate';
-                 updateLead.Lead_Owner_Dupe_Alert__c = true;
-                 if (!String.isBlank(intakeManagerId)) {
-                     updateLead.Intake_Manager_For_Dupe_Alert__c = intakeManagerId;
-                 }
-                 update updateLead;
-                 
-                 Task newTask = WishReferralForm_AC.createTask(contactDupCheck[0].id,contactDupCheck[0].ownerId,contactDupCheck[0].accountId, 'Duplicate Inquiry/Referral Submitted',staffTaskRT);
-                 if(newTask.id != Null)
-                     redirection = true;
-             }
-             else if(contactDupCheck.size() > 0)
-             {
-                 Task newTask = WishReferralForm_AC.createTask(contactDupCheck[0].id,contactDupCheck[0].ownerId,contactDupCheck[0].accountId, 'Duplicate Inquiry/Referral Submitted',staffTaskRT);
-                 if(newTask.id != Null)
-                     redirection = true;
-
-                 Contact updateContact = new Contact();
-                 updateContact.id = contactDupCheck[0].id;
-                 updateContact.Contact_Owner_Dupe_Alert__c = true;
-                 if (!String.isBlank(intakeManagerId)) {
-                     updateContact.Intake_Manager_For_Dupe_Alert__c = intakeManagerId;
-                 }
-                 update updateContact;
-                 
-             }
-             else if(leadDupCheck.size() > 0)
-             {
-                 if(leadDupCheck[0].Status == 'Referred') {
-                     Task newTask = WishReferralForm_AC.createTask(leadDupCheck[0].id,leadDupCheck[0].ownerId,leadDupCheck[0].ChapterName__c, 'Duplicate Referral Submitted',staffTaskRT);
-                     if(newTask.id != Null)
-                         redirection = true;
-                 } else if(leadDupCheck[0].Status == 'Inquiry') {
-                     Task newTask = WishReferralForm_AC.createTask(leadDupCheck[0].id,leadDupCheck[0].ownerId,leadDupCheck[0].ChapterName__c, 'Duplicate Inquiry Submitted',staffTaskRT);
-                     if(newTask.id != Null)
-                         redirection = true;
-                 }
-                 else if(leadDupCheck[0].Status != 'Inquiry' || leadDupCheck[0].Status != 'Referred') {
-                     Task newTask = WishReferralForm_AC.createTask(leadDupCheck[0].id,leadDupCheck[0].ownerId,leadDupCheck[0].ChapterName__c, 'Duplicate Referral Submitted',staffTaskRT);
-                     if(newTask.id != Null)
-                         redirection = true;
-                 }
-                 Lead updateLead = new Lead();
-                 updateLead.id = leadDupCheck[0].id;
-                 updateLead.Lead_Owner_Dupe_Alert__c = true;
-                 if (!String.isBlank(intakeManagerId)) {
-                     updateLead.Intake_Manager_For_Dupe_Alert__c = intakeManagerId;
-                 }
-                 update updateLead;
-                 
-             }
-             else */
+         
              {
                  
                  if(currLead.Relationship_To_child__c == 'Other' || currLead.Child_Age__c == 'Menos de 2.5')
@@ -414,10 +351,7 @@ global Class WishReferralFormSpanish_AC
              }
              
              if(redirection == true) {
-                 /*SIW-193 Commented 397-399 
-                    PageReference reference=new PageReference('/apex/WishReferralForm_VF?isSuccess=True&chid='+refChildFormParent + '&rel=' + currLead.Relationship_to_child__c);
-                    reference.setRedirect(true);
-                    return reference;*/
+                 
                     
                  //SIW-193 
                     string arg;
@@ -499,14 +433,7 @@ global Class WishReferralFormSpanish_AC
             options.add(new SelectOption('Parent/Guardian', 'Padre/Madre/Custodio'));
             options.add(new SelectOption('Family Member/Relative', 'Miembro de la Familia/Pariente'));
             options.add(new SelectOption('Other', 'Otro'));
-            currLead.Relationship_to_child__c = 'Other';
-            /*Schema.DescribeFieldResult fieldResult =  Lead.Relationship_To_Child__c.getDescribe();
-            List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
-            for( Schema.PicklistEntry currVal : picklistValues)
-            {      options.add(new SelectOption(currVal.getLabel(), currVal.getValue())); 
-             
-            }  
-            Logvalue = string.valueOf(options);*/
+            currLead.Relationship_to_child__c = 'Other';            
             return options;
         }
         catch(Exception ex){
@@ -699,14 +626,7 @@ global Class WishReferralFormSpanish_AC
                 }
             }
             Logvalue = string.valueOf(currList);
-            return currList;
-      /*  }
-        catch(Exception ex){
-            new ApexDebugLog().createLog(new ApexDebugLog.Error('WishReferralForm_AC','getSiblingList',recId,ex,Logvalue));
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-            ApexPages.addMessage(myMsg);
-            return null; 
-        }   */     
+            return currList;         
     }
     
     //Capturing State Picklist values.   
@@ -724,13 +644,7 @@ global Class WishReferralFormSpanish_AC
             }
             Logvalue = string.valueOf(options);        
             return options;
-      /*  }
-        catch(Exception ex){
-            new ApexDebugLog().createLog(new ApexDebugLog.Error('WishReferralForm_AC','getStates',recId,ex,Logvalue));
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-            ApexPages.addMessage(myMsg);
-            return null; 
-        }*/
+      
     }  
     public List<SelectOption> getChildagesp() {      
        // try{
@@ -750,13 +664,7 @@ global Class WishReferralFormSpanish_AC
                 }  
             }
             return options;
-      /*  }
-        catch(Exception ex){
-            new ApexDebugLog().createLog(new ApexDebugLog.Error('WishReferralForm_AC','getStates',recId,ex,Logvalue));
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-            ApexPages.addMessage(myMsg);
-            return null; 
-        }*/
+     
     }  
     
    
@@ -776,13 +684,7 @@ global Class WishReferralFormSpanish_AC
             }
             Logvalue = string.valueOf(options);    
             return options;
-      /*  }
-        catch(Exception ex){
-            new ApexDebugLog().createLog(new ApexDebugLog.Error('WishReferralForm_AC','getHereAboutMAW',recId,ex,Logvalue));
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-            ApexPages.addMessage(myMsg);
-            return null; 
-        }*/
+     
     }  
     
     /* ************************************
@@ -797,28 +699,9 @@ Capturing Communication Picklist values.
             List<String> val = s.split(':');
             options.add(new SelectOption(val[0], val[1]));
         }
-        /*string recId;
-        string Logvalue;
-        List<SelectOption> options = new List<SelectOption>();
-        try{
-            //List<SelectOption> options = new List<SelectOption>();
-            Schema.DescribeFieldResult fieldResult =  Lead.Communication__c.getDescribe();
-            options.add(new SelectOption('', 'Select an option')); 
-            List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
-            for( Schema.PicklistEntry currVal : picklistValues){
-                if(currVal.isActive())
-                    options.add(new SelectOption(currVal.getLabel(), currVal.getValue())); 
-                
-            }
-            Logvalue = string.valueOf(options);  */
+       
             return options;
-       /*     }
-        catch(Exception ex){
-            new ApexDebugLog().createLog(new ApexDebugLog.Error('WishReferralForm_AC','getCommunication',recId,ex,Logvalue));
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-            ApexPages.addMessage(myMsg);
-            return null; 
-        }*/
+      
     }  
     
     //IME-157 Start
@@ -833,34 +716,12 @@ Capturing Communication Picklist values.
             List<String> val = s.split(':');
             options.add(new SelectOption(val[0], val[1]));
         }
-            
-        /*Schema.DescribeFieldResult fieldResult =  Lead.What_is_the_family_s_primary_spoken_lang__c.getDescribe();
-        options.add(new SelectOption('', 'Select an option')); 
-        List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
-        for( Schema.PicklistEntry currVal : picklistValues){
-            if(currVal.isActive())
-                options.add(new SelectOption(currVal.getLabel(), currVal.getValue())); 
-            
-        }
-        Logvalue = string.valueOf(options);  */
+        
         return options;
     }      
     //IME-157 Ends
     
-    /* ************************************
-Capturing Communication Aids Picklist values.
-************************************* */   
-    /* public List<SelectOption> getCommunicationAids() {
-List<SelectOption> options = new List<SelectOption>();
-Schema.DescribeFieldResult fieldResult =  Lead.Communication_Aids__c.getDescribe();
-options.add(new SelectOption('', 'Select an option')); 
-List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
-for( Schema.PicklistEntry currVal : picklistValues){
-options.add(new SelectOption(currVal.getLabel(), currVal.getValue())); 
 
-}  
-return options;
-}  */
     
     //diaYear
     public List<SelectOption> getdiaYear() {
@@ -868,21 +729,13 @@ return options;
         string Logvalue;
       //  try{
             List<SelectOption> options = new List<SelectOption>();
-            //Schema.DescribeFieldResult fieldResult =  Lead.How_Did_you_hear_about_Make_A_Wish__c.getDescribe();
             options.add(new SelectOption('', 'Año')); 
-            //List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
             for( Integer i=Date.Today().Year(); i>=Date.Today().Year()-18; i--){
                 options.add(new SelectOption(String.valueOf(i),String.valueOf(i)));                
             }
             Logvalue = string.valueOf(options);  
             return options;
-      /*  }
-        catch(Exception ex){
-            new ApexDebugLog().createLog(new ApexDebugLog.Error('WishReferralForm_AC','getdiaYear',recId,ex,Logvalue));
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-            ApexPages.addMessage(myMsg);
-            return null; 
-        }*/
+     
     }  
     
     
@@ -908,13 +761,7 @@ return options;
             
             Logvalue = string.valueOf(options); 
             return options;
-       /* }
-        catch(Exception ex){
-            new ApexDebugLog().createLog(new ApexDebugLog.Error('WishReferralForm_AC','getNoOfSiblings',recId,ex,Logvalue));
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-            ApexPages.addMessage(myMsg);
-            return null; 
-        }*/
+     
     } 
     
     // Self Fieldset, it holds the mandatory fields of Self relationship.
@@ -982,8 +829,7 @@ return options;
         public string lName{get;set;}
         public string age{get;set;}
         
-    } 
-    
+    }   
     
     
 }
