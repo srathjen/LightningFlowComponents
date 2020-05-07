@@ -27,6 +27,70 @@
     <members>Lead.Expedite_timeframe__c</members>
     <members>Lead.Other_expedite_timeframe_comments__c</members>
     <members>Lead.Primary_Medical_Professional_Type_Other__c</members>
+	     <members>WishReferralForm_Translation__mdt.Add_Parent_Legal_Guardian__c</members>
+        <members>WishReferralForm_Translation__mdt.Additional_information__c</members>
+        <members>WishReferralForm_Translation__mdt.Address__c</members>
+        <members>WishReferralForm_Translation__mdt.Age_Requirement__c</members>
+        <members>WishReferralForm_Translation__mdt.Age__c</members>
+        <members>WishReferralForm_Translation__mdt.Approximate_diagnosis_date__c</members>
+        <members>WishReferralForm_Translation__mdt.Check_this__c</members>
+        <members>WishReferralForm_Translation__mdt.City__c</members>
+        <members>WishReferralForm_Translation__mdt.Continue__c</members>
+        <members>WishReferralForm_Translation__mdt.Date_of_Birth__c</members>
+        <members>WishReferralForm_Translation__mdt.Do_not__c</members>
+        <members>WishReferralForm_Translation__mdt.Do_not_change_this_field__c</members>
+        <members>WishReferralForm_Translation__mdt.Email_Address__c</members>
+        <members>WishReferralForm_Translation__mdt.Fact_Communication__c</members>
+        <members>WishReferralForm_Translation__mdt.Family_information__c</members>
+        <members>WishReferralForm_Translation__mdt.First_Name__c</members>
+        <members>WishReferralForm_Translation__mdt.Form_Security__c</members>
+        <members>WishReferralForm_Translation__mdt.Gender__c</members>
+        <members>WishReferralForm_Translation__mdt.Gender_description__c</members>
+        <members>WishReferralForm_Translation__mdt.Has_this_child_ever_received__c</members>
+        <members>WishReferralForm_Translation__mdt.Hospital_or_treatment_facility__c</members>
+        <members>WishReferralForm_Translation__mdt.How_did_you_hear_about_Make_A_Wish__c</members>
+        <members>WishReferralForm_Translation__mdt.ICD_Code__c</members>
+        <members>WishReferralForm_Translation__mdt.If_you_are_human__c</members>
+        <members>WishReferralForm_Translation__mdt.Is_the_family_aware_of_the_referral__c</members>
+        <members>WishReferralForm_Translation__mdt.Is_there_a_medical_reason__c</members>
+        <members>WishReferralForm_Translation__mdt.Last_Name__c</members>
+        <members>WishReferralForm_Translation__mdt.Medical_information__c</members>
+        <members>WishReferralForm_Translation__mdt.Medical_professional_category__c</members>
+        <members>WishReferralForm_Translation__mdt.Middle_initial__c</members>
+        <members>WishReferralForm_Translation__mdt.Name__c</members>
+        <members>WishReferralForm_Translation__mdt.Number_of_siblings__c</members>
+        <members>WishReferralForm_Translation__mdt.Other_Language__c</members>
+        <members>WishReferralForm_Translation__mdt.Other_Not_Listed_Diagnosis_Selected__c</members>
+        <members>WishReferralForm_Translation__mdt.Over_18_years_old__c</members>
+        <members>WishReferralForm_Translation__mdt.Parent_or_Guardian_1__c</members>
+        <members>WishReferralForm_Translation__mdt.Parent_or_Guardian_2__c</members>
+        <members>WishReferralForm_Translation__mdt.Phone__c</members>
+        <members>WishReferralForm_Translation__mdt.Please_provide_the_best_person__c</members>
+        <members>WishReferralForm_Translation__mdt.Postal_Code__c</members>
+        <members>WishReferralForm_Translation__mdt.Primary_Diagnosis_Description__c</members>
+        <members>WishReferralForm_Translation__mdt.Primary_diagnosis__c</members>
+        <members>WishReferralForm_Translation__mdt.Primary_phone_number__c</members>
+        <members>WishReferralForm_Translation__mdt.Provide_your_relationship_to_the_child__c</members>
+        <members>WishReferralForm_Translation__mdt.Question_Has_the_child_ever_received__c</members>
+        <members>WishReferralForm_Translation__mdt.Question_Is_there_a_medical_reason__c</members>
+        <members>WishReferralForm_Translation__mdt.Referrer_information__c</members>
+        <members>WishReferralForm_Translation__mdt.Relationship_to_child__c</members>
+        <members>WishReferralForm_Translation__mdt.Remove_if_no_Parent_Guardian_2__c</members>
+        <members>WishReferralForm_Translation__mdt.Same_address_as_Parent_or_Guardian_1__c</members>
+        <members>WishReferralForm_Translation__mdt.Same_as_Referrer_Information__c</members>
+        <members>WishReferralForm_Translation__mdt.Security_Checkbox__c</members>
+        <members>WishReferralForm_Translation__mdt.Security_Input__c</members>
+        <members>WishReferralForm_Translation__mdt.Self_Describe_selected__c</members>
+        <members>WishReferralForm_Translation__mdt.Sibling_information__c</members>
+        <members>WishReferralForm_Translation__mdt.State__c</members>
+        <members>WishReferralForm_Translation__mdt.Street_Address__c</members>
+        <members>WishReferralForm_Translation__mdt.Submit__c</members>
+        <members>WishReferralForm_Translation__mdt.Thank_you_for_submitting_a_referral__c</members>
+        <members>WishReferralForm_Translation__mdt.Treating_medical_professional_informatio__c</members>
+        <members>WishReferralForm_Translation__mdt.What_is_the_family_s_primary__c</members>
+        <members>WishReferralForm_Translation__mdt.Wish_child_information__c</members>
+        <members>WishReferralForm_Translation__mdt.spanishCommunication__c</members>
+        <members>WishReferralForm_Translation__mdt.spanishLanguage__c</members>
     <name>CustomField</name>
   </types>
   <types>
@@ -39,8 +103,13 @@
     <members>Inkind_Donation_PDFs__c</members>
     <members>Lead</members>
     <members>Wish_Budget_Approver_Filter__c</members>
+	<members>WishReferralForm_Translation__mdt</members>
     <name>CustomObject</name>
   </types>
+  <types>
+        <members>WishReferralForm_Translation.es</members>
+        <name>CustomMetadata</name>
+    </types>
   <types>
     <members>Automated_Volunteer_Templates/BC_Completed_Email_Active_Volunteer_Template</members>
     <members>Automated_Volunteer_Templates/Bc_Completed_Email_Pending_Volunteer_Training_Required_Template</members>
@@ -187,6 +256,7 @@
     <members>Volunteer Staff</members>
     <members>Wish Referral Form Profile</members>
     <members>Wish Volunteer Community Profile</members>
+	<members>Wish Referral Form- Spanish Profile</members>	
     <name>Profile</name>
   </types>
   <types>
@@ -201,7 +271,7 @@
   <types>
     <members>*</members>
     <name>StaticResource</name>
-  </types>
+  </types>    
   <types>
     <members>Account.Family_Dynamics_Validation</members>
     <members>Account.InkindAccount_Chapter_Validation</members>
@@ -391,5 +461,10 @@
     <members>Lead</members>
     <name>Workflow</name>
   </types>
+  <types>
+        <members>Wish_Referral_Form_Spanish</members>
+        <name>CustomSite</name>
+    </types>
+    
   <version>47.0</version>
 </Package>
