@@ -231,6 +231,41 @@ public class TestDataFactory {
 		return users;
 	}
 
+	public static List<User> createVolunteerUser(Integer num) {
+		// Must run as admin to create community user
+		List<User> users = createUser(num);
+		System.runAs (adminUser) {
+			// Volunteer users require associated contact/account
+			List<Account> accounts = createAccount(num);
+			for (Integer i = 0; i < num; i++) {
+				accounts[i].RecordTypeId = Constant_AC.CHAPTER_RT_ID;
+			}
+			insert accounts;
+
+			List<Contact> contacts = createContact(num);
+			for (Integer i = 0; i < num; i++) {
+				contacts[i].AccountId = accounts[i].Id;
+				contacts[i].RecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
+			}
+			insert contacts;
+
+			// Create customer portal user
+			Profile profile = [
+					SELECT Id,Name
+					FROM Profile
+					WHERE Name = 'Active Volunteer (Member)'
+					LIMIT 1
+			];
+			for (Integer i = 0; i < num; i++) {
+				User u = users[i];
+				u.ProfileId = profile.Id;
+				u.ContactId = contacts[i].Id;
+				u.PortalRole = 'Manager';
+			}
+		}
+		return users;
+	}
+
 	public static List<Wish_Budget__c> createWishBudget(Integer num, Id caseId) {
 		List<Wish_Budget__c> wishBudgets = new List<Wish_Budget__c>();
 		for (Integer i = 0; i < num; i++) {
