@@ -39,7 +39,7 @@ public class BackgroundCheck_AC_Test {
 		lead.Company = 'MAW';
 		insert lead;
 
-		User volunteerUser = TestDataFactory.createVolunteerUser(1).get(0);
+		User volunteerUser = TestDataFactory.createVolunteerUser(1, 'Active Volunteer (Login)', 'Manager').get(0);
 		volunteerUser.LastName = 'Smith0';
 		System.runAs(TestDataFactory.adminUser) {
 			insert volunteerUser;
