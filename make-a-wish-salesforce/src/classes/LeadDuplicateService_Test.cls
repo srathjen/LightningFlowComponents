@@ -208,6 +208,7 @@ public class LeadDuplicateService_Test {
 		newLead.PostalCode = '35004';
 		newLead.Street = 'test';
 		newLead.Phone = '8220708920';
+		newLead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
 		insert newLead;
 		Lead dupeLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
 		dupeLead.LastName = 'John';
@@ -217,6 +218,7 @@ public class LeadDuplicateService_Test {
 		dupeLead.Street = 'test';
 		dupeLead.Phone = '8220708920';
 		dupeLead.Override_Dupe_Check__c = true;
+		dupeLead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
 		insert dupeLead;
 
 		String result = LeadDuplicateService.FindLeadDupe(dupeLead.id);
