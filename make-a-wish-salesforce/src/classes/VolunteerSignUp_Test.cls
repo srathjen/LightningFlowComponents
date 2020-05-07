@@ -396,18 +396,18 @@ private class VolunteerSignUp_Test {
 		VolunteerSignUp_AC controller = new VolunteerSignUp_AC();
 
 		Test.startTest();
-		states = controller.getStates();
-		titles = controller.getTitles();
-		preferredPhoneTypes = controller.getPreferredPhoneTypes();
-		onLinkedInOptions = controller.getOnLinkedInOptions();
-		hearAboutMAWOptions = controller.getHearAboutMAWOptions();
-		contactAtWorkOptions = controller.getContactAtWorkOptions();
-		employerSharePowerOptions = controller.getEmployerSharePowerOptions();
-		languages = controller.getLanguages();
-		professionalSkills = controller.getProfessionalSkills();
-		emergencyRelationships = controller.getEmergencyRelationships();
-		birthMonths = controller.getBirthMonths();
-		birthDays = controller.getBirthDays();
+		states = VolunteerSignUp_AC.States;
+		titles = VolunteerSignUp_AC.Titles;
+		preferredPhoneTypes = VolunteerSignUp_AC.PreferredPhoneTypes;
+		onLinkedInOptions = VolunteerSignUp_AC.OnLinkedInOptions;
+		hearAboutMAWOptions = VolunteerSignUp_AC.HearAboutMAWOptions;
+		contactAtWorkOptions = VolunteerSignUp_AC.ContactAtWorkOptions;
+		employerSharePowerOptions = VolunteerSignUp_AC.EmployerSharePowerOptions;
+		languages = VolunteerSignUp_AC.Languages;
+		professionalSkills = VolunteerSignUp_AC.ProfessionalSkills;
+		emergencyRelationships = VolunteerSignUp_AC.EmergencyRelationships;
+		birthMonths = VolunteerSignUp_AC.BirthMonths;
+		birthDays = VolunteerSignUp_AC.BirthDays;
 		Test.stopTest();
 
 		System.assert(states.size() > 0, 'getStates returns nothing.');

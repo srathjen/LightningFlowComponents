@@ -508,7 +508,7 @@ public class Constant_AC {
 	 */
 	public static final String ACCESS_TOKEN_LISTS_FIRST_ADVANTAGE = 'First Advantage';
 
-	/**
+	/*
 	 * User Role Constants
 	 */
 	public static final String USER_ROLE_CUSTOMER_PORTAL = 'CustomerPortal';

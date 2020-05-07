@@ -15,7 +15,7 @@ public class ChapterStaffRecordSharing_ACTest {
         ].Id);
 
         System.runAs(nationalStaff) {
-            Chapter_Vs_Role__c createRec = OrientationandTrainingUtil.createAlabamaChapter();
+            Chapter_Vs_Role__c createRec = TestDataFactory.createChapterVsRole(1, 'Alabama')[0];
             insert createRec;
 
             Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
