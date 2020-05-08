@@ -2,6 +2,7 @@
     <classAccesses>
         <apexClass>AccountTrigger_Test</apexClass>
         <enabled>true</enabled>
+    </classAccesses>
   <classAccesses>
         <apexClass>AWSFilePathService</apexClass>
         <enabled>false</enabled>
