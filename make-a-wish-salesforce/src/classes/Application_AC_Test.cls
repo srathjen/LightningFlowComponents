@@ -46,7 +46,7 @@ public class Application_AC_Test {
 		contact1.ICD_10_Code__c = icdCode.Id;
 		insert contacts;
 
-		User volunteerUser = TestDataFactory.createVolunteerUser(1).get(0);
+		User volunteerUser = TestDataFactory.createVolunteerUser(1, 'Active Volunteer (Login)', 'Manager').get(0);
 		volunteerUser.LastName = 'Smith0';
 		volunteerUser.Email = 'js@email.com';
 		System.runAs(TestDataFactory.adminUser) {
