@@ -231,7 +231,7 @@ public class TestDataFactory {
 		return users;
 	}
 
-	public static List<User> createVolunteerUser(Integer num) {
+	public static List<User> createVolunteerUser(Integer num, String profileName, String portalRole) {
 		// Must run as admin to create community user
 		List<User> users = createUser(num);
 		System.runAs (adminUser) {
@@ -253,14 +253,14 @@ public class TestDataFactory {
 			Profile profile = [
 					SELECT Id,Name
 					FROM Profile
-					WHERE Name = 'Active Volunteer (Member)'
+					WHERE Name = :profileName
 					LIMIT 1
 			];
 			for (Integer i = 0; i < num; i++) {
 				User u = users[i];
 				u.ProfileId = profile.Id;
 				u.ContactId = contacts[i].Id;
-				u.PortalRole = 'Manager';
+				u.PortalRole = portalRole;
 			}
 		}
 		return users;
@@ -531,6 +531,24 @@ public class TestDataFactory {
 		}
 		return documents;
 	}
+    
+    public static List<Broadcast__c> createBroadcast(Integer num) {
+        List<Broadcast__c> broadcastList = new List<Broadcast__c>();
+        for (Integer i = 0; i < num; i++) {
+            Broadcast__c bc  = new Broadcast__c();
+            broadcastList.add(bc);
+        }
+        return broadcastList;
+    }
+    
+    public static List<Chapter_Action_Track__c> createChapterActionTrack(Integer num) {
+        List<Chapter_Action_Track__c> chapterActionTrackList = new List<Chapter_Action_Track__c>();
+        for (Integer i = 0; i < num; i++) {
+            Chapter_Action_Track__c chapterAction  = new Chapter_Action_Track__c();
+            chapterActionTrackList.add(chapterAction);
+        }
+        return chapterActionTrackList;
+    }
 
 	public static Lead createQualifiedLead(Id accountId, Id icdCodeId) {
 		Lead lead = new Lead();
