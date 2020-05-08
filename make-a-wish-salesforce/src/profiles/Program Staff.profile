@@ -39,8 +39,6 @@
     <classAccesses>
         <apexClass>AccountTrigger_Test</apexClass>
         <enabled>true</enabled>
-=======
->>>>>>> parent of 9c916341... SIW-539 Restrict Access to @AuraEnabled Methods for Authenticated Users
     </classAccesses>
     <classAccesses>
         <apexClass>AddVolunteerRole_AC</apexClass>
