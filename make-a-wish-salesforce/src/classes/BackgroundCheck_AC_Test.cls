@@ -7,7 +7,6 @@ Description : This test class used for unit test and code coverage
 
 @IsTest
 public class BackgroundCheck_AC_Test {
-
 	private final static Id CHAPTER_RECORD_TYPE_ID = Constant_AC.CHAPTER_RT_ID;
 	private final static Id NATIONAL_RT_ID = Constant_AC.NATIONAL_RT_ID;
 
