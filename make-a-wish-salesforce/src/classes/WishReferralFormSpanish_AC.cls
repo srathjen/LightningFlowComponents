@@ -73,12 +73,7 @@ global Class WishReferralFormSpanish_AC
     // SIW-14 START update for adding Email to referral email on lead object. Jan2019
     system.debug('Date '+currLead.DOB__c);
         currLead.Relationship_to_child__c = 'Other';
-        if(currLead.Relationship_to_child__c != null && currLead.Relationship_to_child__c.contains('Medical Professional')){
-            currLead.Referrer_Email__c = remailOne;
-        }
-        else{
-            currLead.Referrer_Email__c = remailTwo;
-        }
+        currLead.Referrer_Email__c = remailOne;
         // SIW-14 END
      String LogValue;
      String recId;
@@ -568,7 +563,7 @@ global Class WishReferralFormSpanish_AC
             copyReferrerInfo=false;
         }
         
-        if(currLead.of_Siblings__c != Null && currLead.of_Siblings__c != '0' && currLead.Of_Siblings__c != 'Desconocido')
+        if(currLead.of_Siblings__c != Null && currLead.of_Siblings__c != '0' && currLead.Of_Siblings__c != 'Unknown')
         {
             
             getSiblingList();
@@ -618,7 +613,7 @@ global Class WishReferralFormSpanish_AC
 //        try{
             currList = new List<siblingWrapper>();
             System.debug('currLead.of_Siblings__c++++++++++++++++++++++++++++ ' +currLead.of_Siblings__c);
-            if(currLead.of_Siblings__c != Null && currLead.Of_Siblings__c != 'Desconocido')
+            if(currLead.of_Siblings__c != Null && currLead.Of_Siblings__c != 'Unknown')
             {
                 for(integer i=0;i<integer.valueOf(currLead.of_Siblings__c);i++)
                 {
@@ -752,7 +747,7 @@ Capturing Communication Picklist values.
             List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
             for( Schema.PicklistEntry currVal : picklistValues){
                 if(currVal.getValue() == 'Unknown'){
-                    options.add(new SelectOption('Desconocido', 'Desconocido')); 
+                    options.add(new SelectOption('Unknown', 'Desconocido')); 
                 }
                 else{
                     options.add(new SelectOption(currVal.getLabel(), currVal.getValue())); 
