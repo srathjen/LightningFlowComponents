@@ -264,6 +264,11 @@
     <name>Profile</name>
   </types>
   <types>
+    <members>Case.DatesP1</members>
+    <members>Case.Wish_Timing</members>
+    <name>QuickAction</name>
+  </types>
+  <types>
     <members>Chatter</members>
     <members>EmailAdministration</members>
     <name>Settings</name>
