@@ -532,7 +532,7 @@ label.error{
                     </div>
                     <div class="form-group row sibInfo">
                         <apex:outputPanel id="table">
-                            <apex:outputPanel rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Desconocido'}">
+                            <apex:outputPanel rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
                                 <label class="col-md-12">{!formLabels.Sibling_information__c}</label>
                             </apex:outputPanel>
                             
@@ -709,7 +709,7 @@ label.error{
                     <apex:selectOption itemLabel="Please Select" itemValue="" html-selected="true" html-disabled="true" />
                     <apex:selectOption itemLabel="Si" itemValue="Yes" />
                     <apex:selectOption itemLabel="No" itemValue="No" />
-                    <apex:selectOption itemLabel="No estoy seguro/a" itemValue="No estoy seguro/a" />
+                    <apex:selectOption itemLabel="No estoy seguro/a" itemValue="Not Sure" />
                 </apex:selectList>
             </div>
         </div>
