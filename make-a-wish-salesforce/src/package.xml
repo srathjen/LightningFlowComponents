@@ -264,6 +264,14 @@
     <name>Profile</name>
   </types>
   <types>
+    <members>Wish_Referral_Form_Spanish_Profile_profilePasswordPolicy1588954219544</members>
+    <name>ProfilePasswordPolicy</name>
+  </types>
+  <types>
+    <members>Wish_Referral_Form_Spanish_Profile_profileSessionSetting1588954219684</members>
+    <name>ProfileSessionSetting</name>
+  </types>
+  <types>
     <members>Chatter</members>
     <members>EmailAdministration</members>
     <name>Settings</name>
