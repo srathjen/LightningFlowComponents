@@ -692,4 +692,22 @@ public class TestDataFactory {
 		lead.Will_Child_s_Condition_Deteriorate__c = 'Not Sure';
 		return lead;
 	}
+
+	public static List<HoldCurrentChapter__c> createHoldCurrentChapter(Integer num) {
+		List<HoldCurrentChapter__c> holdCurrentChapters = new List<HoldCurrentChapter__c>();
+		for (Integer i = 0; i < num; i++) {
+			HoldCurrentChapter__c holdCurrentChapter = new HoldCurrentChapter__c();
+			holdCurrentChapters.add(holdCurrentChapter);
+		}
+		return holdCurrentChapters;
+	}
+
+	public static List<DocuSignCredentialsSetting__c> createDocuSignCredentialsSetting(Integer num) {
+		List<DocuSignCredentialsSetting__c> docuSignCredentialsSettings = new List<DocuSignCredentialsSetting__c>();
+		for (Integer i = 0; i < num; i++) {
+			DocuSignCredentialsSetting__c docuSignCredentialsSetting = new DocuSignCredentialsSetting__c();
+			docuSignCredentialsSettings.add(docuSignCredentialsSetting);
+		}
+		return docuSignCredentialsSettings;
+	}
 }
