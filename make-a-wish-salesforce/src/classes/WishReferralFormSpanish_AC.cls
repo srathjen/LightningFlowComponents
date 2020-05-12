@@ -73,12 +73,7 @@ global Class WishReferralFormSpanish_AC
     // SIW-14 START update for adding Email to referral email on lead object. Jan2019
     system.debug('Date '+currLead.DOB__c);
         currLead.Relationship_to_child__c = 'Other';
-        if(currLead.Relationship_to_child__c != null && currLead.Relationship_to_child__c.contains('Medical Professional')){
-            currLead.Referrer_Email__c = remailOne;
-        }
-        else{
-            currLead.Referrer_Email__c = remailTwo;
-        }
+        currLead.Referrer_Email__c = remailOne;
         // SIW-14 END
      String LogValue;
      String recId;
@@ -259,7 +254,7 @@ global Class WishReferralFormSpanish_AC
          
              {
                  
-                 if(currLead.Relationship_To_child__c == 'Other' || currLead.Child_Age__c == 'Menos de 2.5')
+                 if(currLead.Relationship_To_child__c == 'Other' || currLead.Child_Age__c == 'Under 2.5')
                  {
                      currLead.Status = 'Inquiry';
                      currLead.RFI_Form_Info_Hidden__c = 'Inquiry';
@@ -489,7 +484,7 @@ global Class WishReferralFormSpanish_AC
             options.add(new SelectOption('Mother', 'Madre'));
             options.add(new SelectOption('Sister', 'Hermana'));
             options.add(new SelectOption('Brother', 'Hermano'));
-            options.add(new SelectOption('Guardian', 'Guardián'));
+            options.add(new SelectOption('Guardian', 'Tutor'));
             options.add(new SelectOption('Grandmother', 'Abuela'));
             options.add(new SelectOption('Grandfather', 'Abuelo'));
             options.add(new SelectOption('Stepmother', 'Madrastra'));
@@ -568,7 +563,7 @@ global Class WishReferralFormSpanish_AC
             copyReferrerInfo=false;
         }
         
-        if(currLead.of_Siblings__c != Null && currLead.of_Siblings__c != '0' && currLead.Of_Siblings__c != 'Desconocido')
+        if(currLead.of_Siblings__c != Null && currLead.of_Siblings__c != '0' && currLead.Of_Siblings__c != 'Unknown')
         {
             
             getSiblingList();
@@ -618,7 +613,7 @@ global Class WishReferralFormSpanish_AC
 //        try{
             currList = new List<siblingWrapper>();
             System.debug('currLead.of_Siblings__c++++++++++++++++++++++++++++ ' +currLead.of_Siblings__c);
-            if(currLead.of_Siblings__c != Null && currLead.Of_Siblings__c != 'Desconocido')
+            if(currLead.of_Siblings__c != Null && currLead.Of_Siblings__c != 'Unknown')
             {
                 for(integer i=0;i<integer.valueOf(currLead.of_Siblings__c);i++)
                 {
@@ -654,10 +649,10 @@ global Class WishReferralFormSpanish_AC
             List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
             for( Schema.PicklistEntry currVal : picklistValues){
                 if(currVal.getValue() == 'Under 2.5'){
-                    options.add(new SelectOption('Menos de 2.5', 'Menos de 2.5'));
+                    options.add(new SelectOption('Under 2.5', 'Menos de 2.5'));
                 }
                 else if(currVal.getValue() == '18 & Above'){
-                    options.add(new SelectOption('18 & Más', '18 & Más'));
+                    options.add(new SelectOption('18 & Above', '18 & Más'));
                 }
                 else{
                     options.add(new SelectOption(currVal.getLabel(), currVal.getValue()));
@@ -752,7 +747,7 @@ Capturing Communication Picklist values.
             List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
             for( Schema.PicklistEntry currVal : picklistValues){
                 if(currVal.getValue() == 'Unknown'){
-                    options.add(new SelectOption('Desconocido', 'Desconocido')); 
+                    options.add(new SelectOption('Unknown', 'Desconocido')); 
                 }
                 else{
                     options.add(new SelectOption(currVal.getLabel(), currVal.getValue())); 
