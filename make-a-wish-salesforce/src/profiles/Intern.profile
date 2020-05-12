@@ -513,7 +513,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>LightningDataTableController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>LightningDataTableControllerTest</apexClass>
@@ -20484,6 +20484,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Wish_Required_Signature_File__c.Shortcut__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Wish_Required_Signature_File__c.Sync_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

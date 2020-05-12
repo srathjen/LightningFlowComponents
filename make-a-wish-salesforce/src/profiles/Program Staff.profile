@@ -332,6 +332,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>DiagnosisVerificationReminder_AC</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DiagnosisVerificationReminder_ACTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>DiagnosisVerification_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -345,7 +353,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>DisplayMobileFieldSetsCtlr</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>DisplayMobileFieldSetsCtlrTest</apexClass>
@@ -381,7 +389,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>FileUploadController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>FileUploadControllerTest</apexClass>
@@ -396,9 +404,9 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>FutureHandler</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
+    <enabled>false</enabled>
+    <apexClass>FutureHandler</apexClass>
+</classAccesses>
     <classAccesses>
         <apexClass>FutureHandler_Test</apexClass>
         <enabled>false</enabled>
@@ -520,9 +528,9 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>LeadDuplicate_ACTest</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
+    <enabled>false</enabled>
+    <apexClass>LeadDuplicate_ACTest</apexClass>
+</classAccesses>
     <classAccesses>
         <apexClass>LeadFile_AT_Test</apexClass>
         <enabled>true</enabled>
@@ -545,7 +553,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>LightningDataTableController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>LightningDataTableControllerTest</apexClass>
@@ -553,11 +561,11 @@
     </classAccesses>
     <classAccesses>
         <apexClass>LookupSObjectCtlr</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>LookupSObjectCtrlTest</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>MedicalRelationships_AC</apexClass>
@@ -601,7 +609,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>NewWishBudgetController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>NewWishBudgetControllerTest</apexClass>
@@ -640,9 +648,9 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>PartAFormWrapper</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
+    <enabled>false</enabled>
+    <apexClass>PartAFormWrapper</apexClass>
+</classAccesses>
     <classAccesses>
         <apexClass>ParticipantJSON2Apex</apexClass>
         <enabled>false</enabled>
@@ -653,7 +661,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>QualifyingDiagnosisLC_AC</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>QualifyingDiagnosisLC_AC_TEST</apexClass>
@@ -717,7 +725,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>SendDiagnosisVerficationLC_AC</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>SendDiagnosisVerficationLC_ACTest</apexClass>
@@ -772,12 +780,16 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>TimeSheetTriggerHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>TimeSheetTrigger_AT_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>TractionLinksController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>TractionLinksControllerTest</apexClass>
@@ -789,7 +801,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>UIThemeController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>UIThemeControllerTest</apexClass>
@@ -840,9 +852,9 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>VolunteerInterview_ACTest</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
+    <enabled>false</enabled>
+    <apexClass>VolunteerInterview_ACTest</apexClass>
+</classAccesses>
     <classAccesses>
         <apexClass>VolunteerJourneyService</apexClass>
         <enabled>false</enabled>
@@ -937,7 +949,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>WishAffiliationDesign_AC</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>WishAffiliationDesign_AC_Test</apexClass>
@@ -984,6 +996,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>WishReferralFormSpanish_AC</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>WishReferralForm_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -1013,7 +1029,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>WishSignatureController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>WishSignatureControllerTest</apexClass>
@@ -1104,6 +1120,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>batch_UpdateLastEngageSchedule_AC</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>batch_UpdateVolunteerLastEngage</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -1153,7 +1173,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>wishBudgetsController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>wishBudgetsControllerTest</apexClass>
@@ -1161,7 +1181,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>wishFormFileUpload_AC</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>wishFormFileUpload_AC_Test</apexClass>
@@ -1509,102 +1529,6 @@
         <name>p0pFD__ObjectsToDump__c</name>
     </customSettingAccesses>
     <description>This profile assigned to program users</description>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Background_Check_Email_Update</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Capture_Inactivation_Date</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Case_Create_NMA_Task</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Case_Fields_Tagging_on_Case_File</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Case_Fields_update_on_Case_File</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Case_Set_Interview_Date</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Close_DV_Case_when_Lead_is_Duplicate_or_DNQ</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Completed_Signed_DV</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Contact_Out_OF_Compliance_Task_Creation</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Distance_between_Volunteer_and_Wishchild</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Docusign_Electronic_Validation</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Instance_Email_Alert_for_Missed_Referrer</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Lead_Case_Status_Process_Flow</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Lead_Notify_Intake_Manager</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Login_Flow_Scheduled_Maintenance</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Part_A_Form_Process_Rule</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Post_To_Chatter_on_Lead</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Send_Email_Notification_to_Case_Owner</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Send_Email_With_Wish_Referral_Form_To_Office_referral_Email</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Update_Task_Interview_Completed_Date</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Update_Wish_Change_Requests</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Wish_Affiliations_for_Mobile</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Wish_Design_Forms</flow>
-    </flowAccesses>
-    <flowAccesses>
-        <enabled>false</enabled>
-        <flow>Wish_Form_Email_Alert_on_Wish_Form_Create_Edit</flow>
-    </flowAccesses>
     <pageAccesses>
         <apexPage>AddVolunteerRole_VF</apexPage>
         <enabled>true</enabled>
@@ -11834,6 +11758,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Lead.Is_wish_referral_discussed_health_del__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Lead.Jigsaw</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -20820,6 +20749,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Wish_Required_Signature_File__c.Shortcut__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Wish_Required_Signature_File__c.Sync_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
