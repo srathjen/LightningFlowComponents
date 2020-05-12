@@ -146,9 +146,10 @@ public class CaseDomain extends trac_TriggerHandlerBase {
         ];
 
         for (Case currentCase : newCasesMap.values()) {
+            /* Disabled temporarily for Bunsen release. See SIW-490 in Jira.
             if (CaseValidations.beforeUpdateValidations(currentCase, oldCasesMap.get(currentCase.Id))) {
                 continue;
-            }
+            } */
 
             if (WISH_OWNER_CHECK_RECORD_TYPE_IDS.contains(currentCase.RecordTypeId)) {
                 if (currentCase.Comment_1__c != null && oldCasesMap.get(currentCase.Id).Comment_1__c != currentCase.Comment_1__c) {
@@ -168,6 +169,9 @@ public class CaseDomain extends trac_TriggerHandlerBase {
                 && currentCase.RecordTypeId == WISH_RECORDTYPE_ID) {
 
                 currentCase.Sub_Status__c = Constant_AC.CASE_SUB_STATUS_PENDING;
+                if(currentCase.Ready_to_Interview_Date__c == null)  {
+                    currentCase.Ready_to_Interview_Date__c = Date.today();
+                }
             }
 
             if (currentCase.RecordTypeId == diagnosisVerificationRT

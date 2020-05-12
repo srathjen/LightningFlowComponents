@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -5529,6 +5528,17 @@ NULL)</formula>
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>Ready_to_Interview_Date__c</fullName>
+        <description>Set automatically when Case Status is updated to Ready to Interview with Sub Status of Pending.</description>
+        <externalId>false</externalId>
+        <label>Ready to Interview Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Reason</fullName>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
@@ -6063,7 +6073,6 @@ on airplane</description>
             </valueSettings>
             <valueSettings>
                 <controllingFieldValue>Closed</controllingFieldValue>
-                <controllingFieldValue>Inactive</controllingFieldValue>
                 <valueName>Loss of Contact</valueName>
             </valueSettings>
             <valueSettings>
@@ -7836,11 +7845,12 @@ arrangements/unique circumstances for any requested wish participant not residin
     </fields>
     <fields>
         <fullName>of_Days_Assigned_Interviewed__c</fullName>
-        <description>Displays the number of days between the first volunteer assignment and the Interview Date when both fields are populated.</description>
+        <description>Not in Use, per SIW-490.
+Displays the number of days between the first volunteer assignment and the Interview Date when both fields are populated.</description>
         <externalId>false</externalId>
-        <formula>IF( 
-!ISBLANK(Interview_date__c) &amp;&amp; !ISBLANK(Assigned_Date__c)&amp;&amp; (Interview_date__c - Assigned_Date__c) &gt; 0, 
-Interview_date__c  - Assigned_Date__c, 
+        <formula>IF(
+!ISBLANK(Interview_date__c) &amp;&amp; !ISBLANK(Assigned_Date__c)&amp;&amp; (Interview_date__c - Assigned_Date__c) &gt; 0,
+Interview_date__c - Assigned_Date__c,
 NULL)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <inlineHelpText>Displays the number of days between the first volunteer assignment and the Interview Date</inlineHelpText>
@@ -7945,8 +7955,46 @@ NULL)</formula>
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>of_Days_RTA_Ready_to_Interview__c</fullName>
+        <description>Displays the number of days between the Parental Signatures Received (Status = Ready to Assign) and the date all volunteers are assigned (Status = Ready to Interview), when both are present.</description>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(Ready_to_Assign_Date__c)=FALSE &amp;&amp; ISBLANK(Ready_to_Interview_Date__c)=FALSE &amp;&amp; (Ready_to_Interview_Date__c - Ready_to_Assign_Date__c) &gt; 0,
+Ready_to_Interview_Date__c - Ready_to_Assign_Date__c ,
+NULL)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Displays the number of days between the Parental Signatures Received (Status = Ready to Assign) and the date all volunteers are assigned (Status = Ready to Interview).</inlineHelpText>
+        <label># of Days RTA --&gt; Ready to Interview</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>of_Days_RTI_Interviewed__c</fullName>
+        <description>Displays the number of days between the date all volunteers are assigned (Status = Ready to Interview) and the Interview Date, when both are present.</description>
+        <externalId>false</externalId>
+        <formula>IF(
+!ISBLANK(Interview_date__c) &amp;&amp; !ISBLANK(Assigned_Date__c)&amp;&amp; (Interview_date__c - Ready_to_Interview_Date__c) &gt; 0,
+Interview_date__c - Ready_to_Interview_Date__c,
+NULL)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Displays the number of days between the date all volunteers are assigned (Status = Ready to Interview) and the Interview Date.</inlineHelpText>
+        <label># of Days RTI --&gt; Interviewed</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>of_Days_Ready_to_Assign_Assigned__c</fullName>
-        <description>Displays the number of days between the Parental Signatures Received (Status = Ready to Assign) and the first volunteer assigned dates when both fields are populated.</description>
+        <description>Not in use, per SIW-490.
+Displays the number of days between the Parental Signatures Received (Status = Ready to Assign) and the first volunteer assigned dates when both fields are populated.</description>
         <externalId>false</externalId>
         <formula>IF(ISBLANK(Ready_to_Assign_Date__c)=FALSE &amp;&amp; ISBLANK(Assigned_Date__c)=FALSE &amp;&amp; (Assigned_Date__c - Ready_to_Assign_Date__c) &gt; 0,
 Assigned_Date__c - Ready_to_Assign_Date__c ,
@@ -9837,6 +9885,10 @@ NULL)</formula>
             </values>
             <values>
                 <fullName>International</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Loss of Contact</fullName>
                 <default>false</default>
             </values>
             <values>

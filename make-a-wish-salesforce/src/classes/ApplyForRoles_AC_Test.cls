@@ -475,6 +475,7 @@ private class ApplyForRoles_AC_Test {
 		System.currentPageReference().getParameters().put('trainingRequired', 'true');
 
 		System.runAs(testUser) {
+            Utils.currentUser = null;
 			ApplyForRoles_AC controller = new ApplyForRoles_AC();
 			controller.currentVolunteer = testContact;
 

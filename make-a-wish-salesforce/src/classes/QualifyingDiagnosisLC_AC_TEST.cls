@@ -31,6 +31,7 @@ public class QualifyingDiagnosisLC_AC_TEST {
 		lead.Diagnosis_Given_By_Referrer__c = 'Test Diagnosis';
 		lead.PD_ICD_Code__c = icdCode.Id;
 		lead.Company = 'MAW';
+        lead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
 		insert lead;
 
         List<Contact> contacts = TestDataFactory.createContact(1);

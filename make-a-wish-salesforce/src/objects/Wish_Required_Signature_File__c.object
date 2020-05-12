@@ -381,6 +381,17 @@ TEXT(File_Size_in_Bytes__c) &amp; &quot; bytes&quot;))</formula>
         <type>Checkbox</type>
     </fields>
     <fields>
+	<fullName>Sync_Id__c</fullName>
+    <description>SIW-355 Required for SDrive File Sync</description>
+    <externalId>false</externalId>
+    <label>Sync Id</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+	</fields>
+    <fields>
         <fullName>Wish_Required_Signature__c</fullName>
         <externalId>false</externalId>
         <label>Wish Required Signature</label>
