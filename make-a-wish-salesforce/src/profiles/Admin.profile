@@ -11801,6 +11801,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Lead.Is_wish_referral_discussed_health_del__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Lead.Jigsaw</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -20787,6 +20792,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Wish_Required_Signature_File__c.Shortcut__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Wish_Required_Signature_File__c.Sync_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
