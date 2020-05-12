@@ -16,8 +16,7 @@ Modification Log:
 2. 04/02/2020 - Manoj      - SIW-379 : Mapped 'Travel_Restriction__c' field in lead records based on user selection.
 3. 09/04/2020 - Manoj      - SIW-355 : Mapped 2 Wrapper fields values with lead fields value - timeFrameValue, idealtimeFrameValue
 4. 15/04/2020 - Manoj      - SIW-531 : Setting value blank for Number_hospital_admissions__c field if no value provided from form for the associated question
-5. 15 Apr 2020 - Chris Smith - SIW-497 : Provided check on Save & Next to make sure ICD Codes and Condition
-                                         Descriptions were looked up.
+5. 15 Apr 2020 - Chris Smith - SIW-497 : Changes reverted 5/12/2020 before going to production.
 *******************************************************************************************************************/
 public class DiagnosisVerification_AC {
 
@@ -35,7 +34,6 @@ public class DiagnosisVerification_AC {
     public String wishStatus { get; set; }
     public String otherDiagnosisBlock { get; set; }
     public Boolean showAddAnotherDiagnosisBtn { get; set; }
-    public Boolean  icdLookupAttempted { get; set; }
     public Lead currLead { get; set; }
     public DiagnosisWrapper wrapCls { get; set; }
     public WishChildWrapper wishChildWrapperIns { get; set; }
@@ -63,7 +61,6 @@ public class DiagnosisVerification_AC {
         wishStatus = null;
         wrapCls = new DiagnosisWrapper();
         currLead = new Lead();
-        icdLookupAttempted = false;
         leadId = ApexPages.currentPage().getParameters().get('leadId');
 
         if (leadId != null && leadId.length() > 0) {
@@ -551,14 +548,13 @@ public class DiagnosisVerification_AC {
             //ICD code
             if (icdOrPcd == 'ICD') {
                 List<ICD_Codes__c> icdCodeInfo = DiagnosisVerification_AC_Helper.getIcdCodeInfo(diagnosisVerificationWrapperLst[diagnosisBlockNum].icdCode);
-                icdLookupAttempted = true;
+                
                 if (icdCodeInfo.size() > 0) {
                     List<Medical_Questions__c> medicalQuestionList = MAP_OF_MEDICAL_QUESTIONS_BY_DESCRIPTION.get(icdCodeInfo[0].Condition_Description__c);
 
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = icdCodeInfo[0].Short_Description__c;
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isGroup1Rec = icdCodeInfo[0].Group1__c;
 
-                    //Chris - Can you fix this hardcode?
                     if (!String.isEmpty(icdCodeInfo[0].Condition_Description__r.Name) && icdCodeInfo[0].Condition_Description__r.Name == 'Total Parenteral Nutrition (TPN)') {
                         showAddAnotherDiagnosisBtn = true;
                     }
@@ -570,13 +566,11 @@ public class DiagnosisVerification_AC {
 
                 // Condition Description
             } else if (icdOrPcd == 'PCD') {
-                //Chris - Can you fix this hardcode?
                 if (diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription == 'Total Parenteral Nutrition (TPN)') {
                     showAddAnotherDiagnosisBtn = true;
                 }
 
                 List<Condition_Description__c> conditionDescriptionInfo = MAP_OF_CONDITION_DESCRIPTIONS_BY_NAME.get(diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription);
-                icdLookupAttempted = true;
 
                 if (conditionDescriptionInfo != null && conditionDescriptionInfo.size() > 0) {
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isGroup1Rec = conditionDescriptionInfo[0].Group1__c;
@@ -824,34 +818,6 @@ public class DiagnosisVerification_AC {
         }
     }
 
-    /*
-     * @description     In case of client-side issues with Diagnosis selection, make sure that the wishChildEligibilityCheck() has run
-     *
-     * @author          Christopher Smith
-     * @date             04/20/2020
-     */
-    public void forceEligibilityCheck() {
-        diagnosisBlockNum = Integer.valueOf(ApexPages.currentPage().getParameters().get('diagnosisBlockNum'));
-        wishChildEligibilityCheck();
-
-        if(diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible)  {
-            ApexPages.CurrentPage().getParameters().put('docusignReady','true'); //lookup was successful and child is eligible
-            //page should call docusign method
-        }   else if(showAddAnotherDiagnosisBtn == true) {
-            //lookup was successful but another diagnosis is necessary
-            if(diagnosisBlockNum >= 5)  {
-                //return to page verify field for not autoqualify text is filled if not done ahead of time
-            }   else    {
-                ApexPages.CurrentPage().getParameters().put('confirmDX', 'true'); //page should redirict to medicalQuestionBlockID
-            }
-        }  /* Not necessary because setWishStatus operates on same logic    else if(wishStatus == LEAD_STATUS_QUALIFIED)   {
-            return; //page should call docusign method
-        } */ else if(ApexPages.CurrentPage().GetParameters().get('icdOrPcd') == 'PCD') {
-            // Condition Description entered does not match one in the system.
-            ResetDiagnosis();
-            ApexPages.currentPage().getParameters().put('tryICD', 'true'); //page should redirect to medicalQuestionBlockID
-        }
-    }
 
     /*
      * @description     Used to save information given by MedicalProfessional
