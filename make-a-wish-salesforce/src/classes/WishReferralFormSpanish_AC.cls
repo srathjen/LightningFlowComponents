@@ -4,8 +4,7 @@ Created Date : 04/05/2020
 Description : Spanish version of WishReferral form to capture lead details
 ***********************************************************/
 
-global Class WishReferralFormSpanish_AC 
-{
+global Class WishReferralFormSpanish_AC {
     Public string remailOne{get;set;}
     Public string remailTwo{get;set;}
     Public Lead currLead{get;set;}
