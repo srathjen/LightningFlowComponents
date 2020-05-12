@@ -6,17 +6,20 @@ public class LeadDuplicateService_Test {
 	@TestSetup
 	private static void setup() {
 		trac_TriggerHandlerBase.blockTrigger = true;
+
 		insert new Bypass_Triggers__c(SetupOwnerId = UserInfo.getUserId());
+
 		List<Account> accounts = TestDataFactory.createAccount(2);
 		Account account1 = accounts.get(0);
 		account1.Name = 'Make-A-Wish Arizona';
 		account1.RecordTypeId = CHAPTER_RECORD_TYPE_ID;
+
 		Account account2 = accounts.get(1);
 		account2.Name = 'Make-A-Wish New York';
 		account2.RecordTypeId = CHAPTER_RECORD_TYPE_ID;
 
-		List<Contact> contacts = TestDataFactory.createContact(2);
-		Contact childContact = contacts[0];
+		List<Contact> contacts = TestDataFactory.createContact(5);
+		Contact childContact = contacts.get(0);
 		childContact.Region_Chapter__c = account1.Id;
 		childContact.FirstName = 'moss';
 		childContact.LastName = 'Smith Household';
@@ -33,7 +36,24 @@ public class LeadDuplicateService_Test {
 		childContact.MobilePhone = '9900220022';
 		childContact.Primary_Diagnosis_Condition_Description__c = 'Test';
 		childContact.Diagnosis__c = 'test';
-		Contact familyContact = contacts[1];
+
+		Contact childContactDuplicate = contacts.get(1);
+		childContactDuplicate.Region_Chapter__c = account1.Id;
+		childContactDuplicate.FirstName = 'James';
+		childContactDuplicate.LastName = 'B';
+		childContactDuplicate.Email = 'bobj@email.com';
+		childContactDuplicate.Phone = '1234567890';
+		childContactDuplicate.MailingStreet = '456 Street';
+		childContactDuplicate.MailingCity = 'Phoenix';
+		childContactDuplicate.MailingState = 'Arizona';
+		childContactDuplicate.MailingStateCode = 'AZ';
+		childContactDuplicate.MailingPostalCode = '8042123';
+		childContactDuplicate.MailingCountryCode = 'US';
+		childContactDuplicate.MobilePhone = '9900220022';
+		childContactDuplicate.Primary_Diagnosis_Condition_Description__c = 'Test';
+		childContactDuplicate.Diagnosis__c = 'test';
+
+		Contact familyContact = contacts.get(2);
 		familyContact.Region_Chapter__c = account1.Id;
 		familyContact.FirstName = 'Bob';
 		familyContact.LastName = 'Smith';
@@ -52,9 +72,8 @@ public class LeadDuplicateService_Test {
 		ICD_Codes__c icdCode = icdCodes.get(0);
 		insert icdCodes;
 
-		List<Lead> leads = TestDataFactory.createLead(2);
+		List<Lead> leads = TestDataFactory.createLead(3);
 		Lead lead = leads.get(0);
-		lead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
 		lead.FirstName = 'Jack';
 		lead.LastName = 'Smith';
 		lead.Phone = '123456789';
@@ -94,20 +113,9 @@ public class LeadDuplicateService_Test {
 		lead.is_Family_Aware_of_Referral__c = 'Yes';
 		lead.Medical_Questions__c = 'Test Diagnosis';
 		lead.PD_ICD_Code__c = icdCode.Id;
-		lead.Lung_Disease__c = 'Test1;Test2';
-		lead.Angina__c = 'Test1;Test2';
-		lead.Ventilator__c = 'Test1;Test2';
-		lead.Arrhythmia__c = 'Test1;Test2';
-		lead.Heart_Failure__c = 'Test1;Test2';
-		lead.Congenital_Heart_Disease__c = 'Test1;Test2';
-		lead.Chronic_Hepatitis__c = 'Test1;Test2';
-		lead.Convulsive_Disorders__c = 'Test1;Test2';
-		lead.Pulmonary_Hypertension__c = 'Test1;Test2';
-		lead.Strokes__c = 'Test1;Test2';
-		lead.Chronic_Heart_Failure__c = 'Test1;Test2';
-		lead.isSign__c = true;
-		lead.Travel_algorithm__c = 'Test1;Test2;';
 		lead.Child_Age__c = '4';
+		lead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
+
 		Lead leadDuplicated = leads.get(1);
 		leadDuplicated.FirstName = 'Jack';
 		leadDuplicated.LastName = 'S';
@@ -148,21 +156,53 @@ public class LeadDuplicateService_Test {
 		leadDuplicated.is_Family_Aware_of_Referral__c = 'Yes';
 		leadDuplicated.Medical_Questions__c = 'Test Diagnosis2';
 		leadDuplicated.PD_ICD_Code__c = icdCode.Id;
-		leadDuplicated.Lung_Disease__c = 'Test3;Test4';
-		leadDuplicated.Angina__c = 'Test3;Test4';
-		leadDuplicated.Ventilator__c = 'Test3;Test4';
-		leadDuplicated.Arrhythmia__c = 'Test3;Test4';
-		leadDuplicated.Heart_Failure__c = 'Test3;Test4';
-		leadDuplicated.Congenital_Heart_Disease__c = 'Test3;Test4';
-		leadDuplicated.Chronic_Hepatitis__c = 'Test3;Test4';
-		leadDuplicated.Convulsive_Disorders__c = 'Test3;Test4';
-		leadDuplicated.Pulmonary_Hypertension__c = 'Test3;Test4';
-		leadDuplicated.Strokes__c = 'Test3;Test4';
-		leadDuplicated.Chronic_Heart_Failure__c = 'Test3;Test4';
-		leadDuplicated.isSign__c = true;
-		leadDuplicated.Travel_algorithm__c = 'Test1;Test2;';
 		leadDuplicated.Child_Age__c = '5';
+		leadDuplicated.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
+
+		Lead leadNotDuplicated = leads.get(2);
+		leadNotDuplicated.FirstName = 'Bob';
+		leadNotDuplicated.LastName = 'Johnson';
+		leadNotDuplicated.Phone = '1234567890';
+		leadNotDuplicated.Email = 'bobj@email.com';
+		leadNotDuplicated.Street = '456 Street';
+		leadNotDuplicated.City = 'Phoenix';
+		leadNotDuplicated.State = 'Arizona';
+		leadNotDuplicated.StateCode = 'AZ';
+		leadNotDuplicated.PostalCode = '8042123';
+		leadNotDuplicated.CountryCode = 'US';
+		leadNotDuplicated.DOB__c = System.today() - 1000;
+		leadNotDuplicated.Company = 'MAW';
+		leadNotDuplicated.Status = 'Inquiry';
+		leadNotDuplicated.Gender__c = 'Male';
+		leadNotDuplicated.ChapterName__c = account1.Id;
+		leadNotDuplicated.Parent_First_Name__c = 'Paul';
+		leadNotDuplicated.Parent_Last_Name__c = 'Smith';
+		leadNotDuplicated.Referrer_FirstName__c = 'Matt';
+		leadNotDuplicated.Referrer_Last_Name__c = 'Test';
+		leadNotDuplicated.Referrer_Email__c = 'matt@email.com';
+		leadNotDuplicated.Referrer_Phone__c = '3212323434';
+		leadNotDuplicated.Referrer_City__c = 'Phoenix';
+		leadNotDuplicated.Referrer_Zip__c = '4545';
+		leadNotDuplicated.Sibling_Detail__c = '';
+		leadNotDuplicated.PD_Condition_Description__c = 'Test Diagnosis';
+		leadNotDuplicated.Medical_Professional_First_Name__c = 'Rick';
+		leadNotDuplicated.Medical_Professional_Last_Name__c = 'A';
+		leadNotDuplicated.Medical_Professional_Phone__c = '9600467559';
+		leadNotDuplicated.Medical_Professional_Email__c = 'testmawa1s@gmail.com';
+		leadNotDuplicated.Hospital_Treatment_Facility__c = 'Moss Hart AC';
+		leadNotDuplicated.Treating_Medical_Professional_First_Name__c = 'Steve';
+		leadNotDuplicated.Treating_Medical_Professional_Last_Name__c = 'Smith';
+		leadNotDuplicated.Treating_Medical_Professional_Phone__c = '9600467578';
+		leadNotDuplicated.Treating_Medical_Professional_Email__c = 'testmawa2d@gmail.com';
+		leadNotDuplicated.Hospital_Treatment_Facility_Treating__c = 'Steve Smith 2';
+		leadNotDuplicated.Diagnosis_Given_By_Referrer__c = 'Test Diagnosis2';
+		leadNotDuplicated.is_Family_Aware_of_Referral__c = 'Yes';
+		leadNotDuplicated.Medical_Questions__c = 'Test Diagnosis2';
+		leadNotDuplicated.PD_ICD_Code__c = icdCode.Id;
+		leadNotDuplicated.Child_Age__c = '10';
+		leadNotDuplicated.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
 		insert leads;
+
 		trac_TriggerHandlerBase.blockTrigger = false;
 	}
 
@@ -197,62 +237,34 @@ public class LeadDuplicateService_Test {
 	}
 
 	@IsTest
-	public static void findLeadDupe() {
-		Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
-		insert chapterAccount;
+	public static void shouldFndLeadDupe() {
+		Lead lead = [
+				SELECT Id, ChapterName__c
+				FROM Lead
+				WHERE LastName = 'Smith'
+				LIMIT 1
+		];
 
-		Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
-		newLead.Child_Age__c = '4';
-		newLead.State = 'Arizona';
-		newLead.PostalCode = '35004';
-		newLead.Street = 'test';
-		newLead.Phone = '8220708920';
-		insert newLead;
-		Lead dupeLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
-		dupeLead.LastName = 'John';
-		dupeLead.City = 'Karur';
-		dupeLead.State = 'Arizona';
-		dupeLead.PostalCode = '35004';
-		dupeLead.Street = 'test';
-		dupeLead.Phone = '8220708920';
-		dupeLead.Override_Dupe_Check__c = true;
-		insert dupeLead;
-
-		String result = LeadDuplicateService.FindLeadDupe(dupeLead.id);
-		LeadDuplicateService.resetDVMedicalSummary(dupeLead.id);
-
-		System.assertEquals(LeadDuplicateService.DUPE_MESSAGE, result);
-
-		// Covering other blocks of the FindLeadDupe method
 		Test.startTest();
-		dupeLead.FirstName = dupeLead.LastName = 'Test FN';
-		dupeLead.DOB__c = newLead.DOB__c;
-		dupeLead.Street = 'Test St.';
-		update dupeLead;
-		result = LeadDuplicateService.FindLeadDupe(dupeLead.id);
+		String result = LeadDuplicateService.FindLeadDupe(lead.Id);
+		LeadDuplicateService.resetDVMedicalSummary(lead.Id);
+		System.assertEquals(LeadDuplicateService.DUPE_MESSAGE, result);
+		Test.stopTest();
+	}
 
-		dupeLead.FirstName = newLead.FirstName;
-		dupeLead.State = 'Colorado';
-		dupeLead.City = 'Denver';
-		dupeLead.PostalCode = '12345';
-		dupeLead.Phone = '1234567890';
-		dupeLead.Email = 'Test@test.com';
-		update dupeLead;
-		result = LeadDuplicateService.FindLeadDupe(dupeLead.id);
-		delete newLead;
+	@IsTest
+	public static void shouldNotFndLeadDupe() {
+		Lead lead = [
+				SELECT Id, ChapterName__c
+				FROM Lead
+				WHERE LastName = 'Johnson'
+				LIMIT 1
+		];
 
-		Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
-		wishChildContact.FirstName = newLead.FirstName;
-		wishChildContact.LastName = newLead.LastName;
-		wishChildContact.Region_Chapter__c = newLead.ChapterName__c;
-		insert wishChildContact;
-		result = LeadDuplicateService.FindLeadDupe(dupeLead.id);
-
-		wishChildContact.Birthdate = newLead.DOB__c;
-		wishChildContact.Phone = newLead.Phone;
-		wishChildContact.Email = newLead.Email;
-		update wishChildContact;
-		result = LeadDuplicateService.FindLeadDupe(dupeLead.id);
+		Test.startTest();
+		String result = LeadDuplicateService.FindLeadDupe(lead.Id);
+		LeadDuplicateService.resetDVMedicalSummary(lead.Id);
+		System.assertEquals(null, result);
 		Test.stopTest();
 	}
 }
