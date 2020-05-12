@@ -11,17 +11,10 @@
         <apexClass>AddVolunteerRole_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>Affiliation_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>ApexDebugLog</apexClass>
         <enabled>true</enabled>
@@ -46,15 +39,10 @@
         <apexClass>ApplyForRoles_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>AwardsRecognitionTrigger_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
     <classAccesses>
         <apexClass>BackGroundCheck_AT_Test</apexClass>
         <enabled>false</enabled>
@@ -75,12 +63,6 @@
         <apexClass>Background_CheckBeforeDelete_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>Batch_UpdateVolunteerRoleStatus_AC</apexClass>
         <enabled>false</enabled>
@@ -89,8 +71,6 @@
         <apexClass>Batch_UpdateVolunteerRoleStatus_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>Batch_UpdateVolunteerStatus_AC</apexClass>
         <enabled>false</enabled>
@@ -155,14 +135,6 @@
         <apexClass>CaseTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>Case_Trigger_Test</apexClass>
         <enabled>false</enabled>
@@ -179,9 +151,6 @@
         <apexClass>ChapterChangeConfirmationPopup_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
     <classAccesses>
         <apexClass>ChapterRoleOT_Test</apexClass>
         <enabled>false</enabled>
@@ -190,9 +159,6 @@
         <apexClass>ChapterRoleTrigger_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
     <classAccesses>
         <apexClass>ChapterStaffRecordSharing_AC</apexClass>
         <enabled>false</enabled>
@@ -261,13 +227,10 @@
         <apexClass>Constant_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>ContactFile_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>ContactMergeController_AC</apexClass>
         <enabled>false</enabled>
@@ -288,17 +251,6 @@
         <apexClass>ContactTrigger_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>CreateNewWish_AC</apexClass>
         <enabled>false</enabled>
@@ -379,17 +331,10 @@
         <apexClass>DocusignRecipientTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>DocusignStatusTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>DynamicContent_ATTest</apexClass>
         <enabled>false</enabled>
@@ -450,7 +395,6 @@
         <apexClass>InKindReimbursementApproval_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>InactiveVolunteerHandlerTest</apexClass>
         <enabled>false</enabled>
@@ -559,7 +503,6 @@
         <apexClass>LeadSelectMedEmailController_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>LeadTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
@@ -636,9 +579,6 @@
         <apexClass>NonWishEvents_ATTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
     <classAccesses>
         <apexClass>OTUB_UpdateVolUserStatusOnBGCOI_AC</apexClass>
         <enabled>false</enabled>
@@ -651,7 +591,6 @@
         <apexClass>OrientationTraining_ATTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>OrientationandTrainingUtil</apexClass>
         <enabled>false</enabled>
@@ -788,14 +727,6 @@
         <apexClass>TaskTrigger_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>TestClassUtil</apexClass>
         <enabled>false</enabled>
@@ -808,7 +739,6 @@
         <apexClass>TestDataUtility_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>TimeSheetTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
@@ -833,9 +763,6 @@
         <apexClass>UIThemeControllerTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
     <classAccesses>
         <apexClass>UpdateWishAssignmentBatchTest_AC</apexClass>
         <enabled>false</enabled>
@@ -844,17 +771,10 @@
         <apexClass>UpdateWishFamily_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>UserTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>Utils</apexClass>
         <enabled>false</enabled>
@@ -863,16 +783,6 @@
         <apexClass>Utils_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>VolunteerActiveTraining_AC</apexClass>
         <enabled>false</enabled>
@@ -889,7 +799,6 @@
         <apexClass>VolunteerActivities_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>VolunteerInterviewTask_AC</apexClass>
         <enabled>false</enabled>
@@ -918,8 +827,6 @@
         <apexClass>VolunteerLanding_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>VolunteerOandTTriggerHandler_Test</apexClass>
         <enabled>false</enabled>
@@ -932,7 +839,6 @@
         <apexClass>VolunteerOpportunitySelection_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>VolunteerOpportunityTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
@@ -957,12 +863,6 @@
         <apexClass>VolunteerRole_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>VolunteerSignUp_AC</apexClass>
         <enabled>false</enabled>
@@ -1127,8 +1027,6 @@
         <apexClass>batch_BGCExpReminder_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>batch_COIExpReminder_AC</apexClass>
         <enabled>false</enabled>
@@ -1137,8 +1035,6 @@
         <apexClass>batch_COIExpReminder_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>batch_CheckBGCheckExpiration_AC_Test</apexClass>
         <enabled>false</enabled>
@@ -1163,8 +1059,6 @@
         <apexClass>batch_LeadChildAgeTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>batch_UpdatLastEduDate</apexClass>
         <enabled>false</enabled>
@@ -1177,7 +1071,6 @@
         <apexClass>batch_UpdatLastEduDateforVO</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>batch_UpdateVolunteerLastEngage</apexClass>
         <enabled>false</enabled>
@@ -1194,8 +1087,6 @@
         <apexClass>batch_VolunteerRoleUpdate_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>batch_changeVolunOppSatus</apexClass>
         <enabled>false</enabled>
@@ -1212,8 +1103,6 @@
         <apexClass>batch_leadChildAge</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>batch_sendAgeNotificationToCaseOwner_AC</apexClass>
         <enabled>false</enabled>
@@ -5794,6 +5683,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Case.Ready_to_Interview_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Case.Reason</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -6485,6 +6379,16 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Case.of_Days_Qualified_Granted__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.of_Days_RTA_Ready_to_Interview__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.of_Days_RTI_Interviewed__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
