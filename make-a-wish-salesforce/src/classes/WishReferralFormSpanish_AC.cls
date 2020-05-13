@@ -4,7 +4,8 @@ Created Date : 04/05/2020
 Description : Spanish version of WishReferral form to capture lead details
 ***********************************************************/
 
-global Class WishReferralFormSpanish_AC {
+global Class WishReferralFormSpanish_AC 
+{
     Public string remailOne{get;set;}
     Public string remailTwo{get;set;}
     Public Lead currLead{get;set;}
@@ -40,11 +41,9 @@ global Class WishReferralFormSpanish_AC {
         copyReferrerInfoToWish =false;
         copyReferrerInfo =false;
         icdOrPcd = '';
-        formTitle = 'Relationship with child';
-        
+        formTitle = 'Relationship with child';        
         if(ApexPages.currentPage().getParameters().get('isSuccess') != Null)
-            displayAckMsg = Boolean.valueOf(ApexPages.currentPage().getParameters().get('isSuccess'));
-        
+            displayAckMsg = Boolean.valueOf(ApexPages.currentPage().getParameters().get('isSuccess'));        
         formLabels = [SELECT MasterLabel,City__c,First_Name__c,Is_the_family_aware_of_the_referral__c,
                       Last_Name__c,Medical_professional_category__c,Phone__c,Postal_Code__c,Provide_your_relationship_to_the_child__c,
                       Referrer_information__c,Relationship_to_child__c,Additional_information__c,Age__c,
@@ -61,12 +60,9 @@ global Class WishReferralFormSpanish_AC {
                       Parent_or_Guardian_2__c,Primary_Diagnosis_Description__c,Other_Not_Listed_Diagnosis_Selected__c,
                       ICD_Code__c,Is_there_a_medical_reason__c,Same_as_Referrer_Information__c,Form_Security__c,
                       Security_Checkbox__c,If_you_are_human__c,Do_not__c,Check_this__c,Do_not_change_this_field__c,
-                      Security_Input__c,Thank_you_for_submitting_a_referral__c,spanishCommunication__c,spanishLanguage__c,Fact_Communication__c
-                      
-                      FROM WishReferralForm_Translation__mdt WHERE MasterLabel = 'es' LIMIT 1];
-        
-    }
-    
+                      Security_Input__c,Thank_you_for_submitting_a_referral__c,spanishCommunication__c,spanishLanguage__c,Fact_Communication__c                      
+                      FROM WishReferralForm_Translation__mdt WHERE MasterLabel = 'es' LIMIT 1];        
+    }    
     // Creating new Lead.
     Public PageReference CreateLead(){
     // SIW-14 START update for adding Email to referral email on lead object. Jan2019
@@ -99,12 +95,9 @@ global Class WishReferralFormSpanish_AC {
          Boolean flag = True;
          CurrLead.State = currState;
          currLead.LeadSource = 'Online';
-         CurrLead.Additional_Parent_State__c = additionalParentState;       
-         
-         
+         CurrLead.Additional_Parent_State__c = additionalParentState;  
          if(currLead.Has_this_child_ever_received_prior_wish__c != Null)
-             currLead.Has_this_child_ever_received_prior_wish__c = currLead.Has_this_child_ever_received_prior_wish__c.trim();
-         
+             currLead.Has_this_child_ever_received_prior_wish__c = currLead.Has_this_child_ever_received_prior_wish__c.trim();         
          if(currLead.Any_medical_reason_for_moving_quickly__c == 'Yes')
          {
              currLead.Any_medical_reason_for_moving_quickly__c = '<font color="Red">'+currLead.Any_medical_reason_for_moving_quickly__c +'</font>';
@@ -118,53 +111,13 @@ global Class WishReferralFormSpanish_AC {
          {
              currLead.Has_this_child_ever_received_prior_wish__c = '<font color="Red">'+currLead.Has_this_child_ever_received_prior_wish__c+'</font>';
          }
-         if(currLead.Relationship_to_child__c == Null || currLead.Relationship_to_child__c == '')
-         {
-             system.debug('1');
-             flag = false;
-             ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR, 'Please select Relationship To Child');
-             ApexPages.addMessage(msg);
-             return null;
-         }
-         
-         
-         if(flag == false)
-         {
-             if(label != '')
-             {
-                system.debug('2');
-                 label = label.removeEnd(',');
-                 ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR, 'Please complete following mandatory fields : ' +label );
-                 ApexPages.addMessage(msg);
-                 return null;
-             }
-         } 
+        
          if(flag == True)
          {
              if(currLead.Postalcode!= Null && currLead.Postalcode !='')
                  zipCode = currLead.Postalcode;
              else
                  zipCode = currLead.Referrer_Zip__c;
-             
-             if(currLead.PD_ICD_Code__c != Null)
-             {
-                 if(icdCodeInfoList.size() > 0)
-                 {                   
-                     
-                 }                           
-             }
-             
-             if(currLead.PD_Condition_Description__c != Null)
-             {
-                 List<Condition_Description__c> descriptionList = [SELECT Id, PR_Diagnosis__c
-                                                                   FROM Condition_Description__c WHERE Name = :currLead.PD_Condition_Description__c limit 1];
-                 
-                 if(descriptionList.size() > 0)
-                 {
-                     
-                 }                           
-             }
-             
              if(currList!=Null)
              {
                  for(siblingWrapper currVal : currList)
@@ -199,16 +152,12 @@ global Class WishReferralFormSpanish_AC {
                          currLead.Sibling_Detail__c+= '-'+'<br>';  
                      }  
                  }
-             }  
-             
-             
-             
+             }
              // Route to Chapter.
              List<Zip_Code__c> findChapterviaZipCode = new List<Zip_Code__c>();
              if(zipCode != '')
                  findChapterViaZipCode = [SELECT id, Office__c, Office__r.Chapter__c,Office__r.Chapter__r.Intake_Manager__c 
-                                          FROM Zip_Code__c WHERE Name = :zipCode limit 1]; 
-             
+                                          FROM Zip_Code__c WHERE Name = :zipCode limit 1];              
              String intakeManagerId = '';
              if(findChapterviaZipCode.size()>0)
              {
@@ -220,7 +169,6 @@ global Class WishReferralFormSpanish_AC {
                          currLead.OwnerId = findChapterviaZipCode[0].Office__r.chapter__r.Intake_Manager__c;
                          intakeManagerId = findChapterviaZipCode[0].Office__r.chapter__r.Intake_Manager__c;
                      }
-
                  }
              }
              else
@@ -235,8 +183,7 @@ global Class WishReferralFormSpanish_AC {
                      }
                  }
                  
-             }
-             
+             }             
              List<Contact> contactDupCheck = [SELECT id,OwnerId, AccountId FROM CONTACT WHERE LastName = :currLead.LastName AND 
                                               FirstName = :currLead.FirstName AND Birthdate = :currLead.DOB__c AND
                                               ((Phone = :currLead.Phone OR Email = :currLead.Email OR 
@@ -249,10 +196,8 @@ global Class WishReferralFormSpanish_AC {
                                           (City = :currLead.City AND State = :currLead.State 
                                            AND PostalCode = :currLead.PostalCode)))
                                         AND isConverted=false limit 1];
-             boolean redirection;                                
-         
-             {
-                 
+             boolean redirection;                             
+                      {                 
                  if(currLead.Relationship_To_child__c == 'Other' || currLead.Child_Age__c == 'Under 2.5')
                  {
                      currLead.Status = 'Inquiry';
@@ -261,48 +206,22 @@ global Class WishReferralFormSpanish_AC {
                  else
                  {
                      currLead.Status = 'Referred';
-                     currLead.RFI_Form_Info_Hidden__c = 'Referred';
-                     
-                     System.debug('currLead.RFI_Form_Info_Hidden__c ++++++++++++++++++++++ ' + currLead.RFI_Form_Info_Hidden__c);
-                 }
-                 
-                 if(currLead.Relationship_To_Child__c == 'Medical Professional'){
-                     System.debug('RefComment>>>>>>!!!!'+referralComment);
-                     currLead.ReferralComment__c = referralComment;
-                 } else {
-                     System.debug('RefComment>>>>>>!!!!>>>>>');
-                     currLead.ReferralComment__c = '';
-                 }
-                 
-                 if(currLead.Relationship_To_Child__c == 'Medical Professional' && 
-                    (currLead.Medical_Provider_Category__c  == 'Nurse Practitioner' || currLead.Medical_Provider_Category__c == 'Physician Assistant' || currLead.Medical_Provider_Category__c == 'Physician'))
-                 {
-                     currLead.Medical_Professional_First_Name__c = currLead.Referrer_FirstName__c;
-                     currLead.Medical_Professional_Last_Name__c = currLead.Referrer_Last_Name__c;
-                     currLead.Medical_Professional_Phone__c = currLead.Referrer_Phone__c;
-                     currLead.Medical_Professional_Email__c = currLead.Referrer_Email__c;
-                     currLead.Hospital_Treatment_Facility__c = currLead.Hospital_Treatment_Facility_Treating__c;
-                     
-                     
-                 }
-                 
+                     currLead.RFI_Form_Info_Hidden__c = 'Referred';                     
+                 }                 
+                 currLead.ReferralComment__c = ''; 
                  if(!(string.isBlank(diagnosisYear)) ){
-                     system.debug('Dia Year'+diagnosisYear);
                      if(String.isBlank(diagnosisMonth))
                          currLead.Approximate_Diagnosis_Date__c = diagnosisYear;                            
                      else
-                         currLead.Approximate_Diagnosis_Date__c = diagnosisMonth +'   '+diagnosisYear;
-                     
+                         currLead.Approximate_Diagnosis_Date__c = diagnosisMonth +'   '+diagnosisYear;                     
                  }
                  String communications = '';
                  if(communictionList != Null){
                      for(String s:communictionList){
                          communications +=s+';';
                      }
-                 }
-                 
-                 currLead.communication__C = communications;
-                 
+                 }                 
+                 currLead.communication__C = communications;                 
                  // IME-157 - starts
                  String languages = '';
                  if(languageList != null){
@@ -342,103 +261,26 @@ global Class WishReferralFormSpanish_AC {
                  insert currLead;
                  if(currLead.id != Null)
                      redirection = true;
-             }
-             
-             if(redirection == true) {
-                 
-                    
+             }             
+             if(redirection == true) { 
                  //SIW-193 
                     string arg;
                     if(ApexPages.currentPage().getParameters().get('alt') == 't') {
-                        arg = '&alt=t';}
-                    
+                        arg = '&alt=t';}                    
                     PageReference reference=new PageReference('/apex/WishReferralForm_Spanish_VF?isSuccess=True&chid='+refChildFormParent + '&rel=' + currLead.Relationship_to_child__c + arg);
                     reference.setRedirect(true);
                     return reference;
              }
-         }
-         
-     }
-     
+         }         
+     }     
      Catch(Exception ex){
-        system.debug('3');
          Logvalue = string.join(LstLog,', ');
          new ApexDebugLog().createLog(new ApexDebugLog.Error('WishReferralFormSpanish_AC','CreateLead',recId,ex,Logvalue));
          ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
          ApexPages.addMessage(myMsg);  
      }
-     return null;
-     
-    }
-    
-    // Auto Complete the ICD Code values.
-    @RemoteAction
-    global static List<ICD_Codes__c> searchDiagnosis(String searchTerm) {
-        string recId;
-        string Logvalue;
-        try{
-        icdOrPcd = 'ICD';
-        List<ICD_Codes__c> icdCodes = Database.query('Select Id, Name,Condition_Description__c, Short_Description__c, Condition_Description__r.Name, Condition_Description__r.InActive__c from ICD_Codes__c where Condition_Description__r.InActive__c != true and Name like \'%' + String.escapeSingleQuotes(searchTerm) + '%\' AND Hidden_ICD_Code__c = false');
-        Logvalue = string.valueOf(icdCodes);
-        return icdCodes;
-         }
-        catch(Exception ex){
-            system.debug('4');
-            new ApexDebugLog().createLog(new ApexDebugLog.Error('WishReferralFormSpanish_AC','searchCondition',recId,ex,Logvalue));
-            
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-            ApexPages.addMessage(myMsg);
-            return null; 
-        }
-    } 
-    
-    // Auto Complete the Dianosis field value.
-    @RemoteAction
-    global static List<Condition_Description__c> searchCondition(String searchTerm) {
-        string recId;
-        string Logvalue;
-        try{
-        icdOrPcd = 'PCD';
-                List<Condition_Description__c> conditionDescriptions = Database.query('Select Id, Name, Code_To_Use__c, InActive__c from Condition_Description__c where InActive__c != true and Not_Listed = True');
-        if(!(conditionDescriptions.size() > 0))
-        {
-            conditionDescriptions =[Select Id, Name, Code_To_Use__c from Condition_Description__c WHERE Not_Listed__c = True];
-        }
-        Logvalue = string.valueOf(conditionDescriptions);
-        return conditionDescriptions;
-        }
-        catch(Exception ex){
-            system.debug('5');
-            new ApexDebugLog().createLog(new ApexDebugLog.Error('WishReferralFormSpanish_AC','searchCondition',recId,ex,Logvalue));
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-            ApexPages.addMessage(myMsg);
-            return null; 
-        }
-    } 
-    
-    // Fetch the relationship picklist values from Relationship_To_child field and displaying as a Radio Button.
-    public List<SelectOption> getRelationships(){
-        string recId;
-        string Logvalue;
-        try{
-            List<SelectOption> options = new List<SelectOption>();
-            options.add(new SelectOption('Self', 'Yo mismo/a'));
-            options.add(new SelectOption('Medical Professional', 'Profesional Médico'));
-            options.add(new SelectOption('Parent/Guardian', 'Padre/Madre/Custodio'));
-            options.add(new SelectOption('Family Member/Relative', 'Miembro de la Familia/Pariente'));
-            options.add(new SelectOption('Other', 'Otro'));
-            currLead.Relationship_to_child__c = 'Other';            
-            return options;
-        }
-        catch(Exception ex){
-            system.debug('6');
-            new ApexDebugLog().createLog(new ApexDebugLog.Error('WishReferralFormSpanish_AC','getRelationships',recId,ex,Logvalue));
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-            ApexPages.addMessage(myMsg);
-            return null; 
-        }
-    }   
-    
+     return null;     
+    }  
     public List<SelectOption> getHearWish(){
         string recId;
         string Logvalue;
@@ -525,53 +367,24 @@ global Class WishReferralFormSpanish_AC {
             ApexPages.addMessage(myMsg);
             return null; 
         }
-    }   
-    
-    
+    } 
     // Based on the Family Aware of Referral field, Child form would render.
     public void disPlayChildForm()
-    {
-        
+    {        
         if(currLead.Relationship_To_Child__c != 'Medical Professional')
         {
             currLead.Medical_Provider_Category__c = '';
             copyReferrerInfo = false;
-        }
-        
-        if(currLead.Relationship_To_Child__c == 'Self' && currLead.is_Family_Aware_of_Referral__c=='Yes')
-        {
-            
-            currLead.FirstName = currLead.Referrer_FirstName__c;
-            lastName = currLead.Referrer_Last_Name__c;
-        }
-        
-        if(currLead.Relationship_To_Child__c == 'Parent/Guardian' && currLead.is_Family_Aware_of_Referral__c=='Yes')
-        { 
-            
-            
-            currLead.Parent_First_Name__c = currLead.Referrer_FirstName__c;
-            currLead.Parent_Last_Name__c = currLead.Referrer_Last_Name__c;
-            currLead.City = currLead.Referrer_City__c;
-            currLead.PostalCode =  currLead.Referrer_Zip__c;
-            currLead.Email = currLead.Referrer_Email__c;
-            currLead.Phone = currLead.Referrer_Phone__c;
-        }
-        
+        }  
         if(currLead.Medical_Provider_Category__c != 'Nurse Practitioner' &&  currLead.Medical_Provider_Category__c != 'Physician' && currLead.Medical_Provider_Category__c != 'Physician Assistant')
         {
             copyReferrerInfo=false;
-        }
-        
+        }        
         if(currLead.of_Siblings__c != Null && currLead.of_Siblings__c != '0' && currLead.Of_Siblings__c != 'Unknown')
-        {
-            
+        {            
             getSiblingList();
         }
-        
-        
-        
-    }
-    
+    }   
     
     // Referrer and Medical Provider is same, then Referrer details would display on Medical Provider section also.
     public void CopyReferralInfo()
@@ -597,16 +410,12 @@ global Class WishReferralFormSpanish_AC {
             currLead.Medical_Professional_Last_Name__c = '';
             currLead.Medical_Professional_Phone__c = '';
             currLead.Medical_Professional_Email__c = '';
-        }
-        
-        
-        
+        }  
     } 
     
     // Based on the number of siblings field, data entry data table would display.
     Public List<siblingWrapper> getSiblingList()
-    {
-        
+    {        
         string recId;
         string Logvalue;
 //        try{
@@ -633,12 +442,10 @@ global Class WishReferralFormSpanish_AC {
             options.add(new SelectOption('', 'Select an option')); 
             List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
             for( Schema.PicklistEntry currVal : picklistValues){
-                options.add(new SelectOption(currVal.getLabel(), currVal.getValue())); 
-                
+                options.add(new SelectOption(currVal.getLabel(), currVal.getValue()));
             }
             Logvalue = string.valueOf(options);        
-            return options;
-      
+            return options;      
     }  
     public List<SelectOption> getChildagesp() {      
        // try{
@@ -657,12 +464,8 @@ global Class WishReferralFormSpanish_AC {
                     options.add(new SelectOption(currVal.getLabel(), currVal.getValue()));
                 }  
             }
-            return options;
-     
+            return options;     
     }  
-    
-   
-    
     //Capturing Parent Relationship to child Picklist values.   
     public List<SelectOption> getHereAboutMAW() {
         string recId;
@@ -677,8 +480,7 @@ global Class WishReferralFormSpanish_AC {
                 
             }
             Logvalue = string.valueOf(options);    
-            return options;
-     
+            return options;     
     }  
     
     /* ************************************
@@ -692,10 +494,8 @@ Capturing Communication Picklist values.
         for(String s : str){
             List<String> val = s.split(':');
             options.add(new SelectOption(val[0], val[1]));
-        }
-       
-            return options;
-      
+        }       
+            return options;      
     }  
     
     //IME-157 Start
@@ -709,14 +509,10 @@ Capturing Communication Picklist values.
         for(String s : str){
             List<String> val = s.split(':');
             options.add(new SelectOption(val[0], val[1]));
-        }
-        
+        }        
         return options;
     }      
-    //IME-157 Ends
-    
-
-    
+    //IME-157 Ends 
     //diaYear
     public List<SelectOption> getdiaYear() {
         string recId;
@@ -728,13 +524,8 @@ Capturing Communication Picklist values.
                 options.add(new SelectOption(String.valueOf(i),String.valueOf(i)));                
             }
             Logvalue = string.valueOf(options);  
-            return options;
-     
-    }  
-    
-    
-    
-    
+            return options;     
+    }   
     //Capturing State Picklist values.   
     public List<SelectOption> getNoOfSiblings() {
         string recId;
@@ -751,11 +542,9 @@ Capturing Communication Picklist values.
                 else{
                     options.add(new SelectOption(currVal.getLabel(), currVal.getValue())); 
                 }  
-            } 
-            
+            }             
             Logvalue = string.valueOf(options); 
-            return options;
-     
+            return options;     
     } 
     
     // Self Fieldset, it holds the mandatory fields of Self relationship.
@@ -770,10 +559,7 @@ Capturing Communication Picklist values.
     public List<Schema.FieldSetMember> getMedicalRequiredFields() {
         return SObjectType.Lead.FieldSets.Medical_Referral_Required_Form.getFields();
     }
-    
-    
     // Creating Task 
-    
     private static Task createTask(Id whoId,Id ownerId,Id whatId, String subject, Id recordTypeId)
     {  
         List<string> LstLog = new List<string>();
@@ -790,8 +576,7 @@ Capturing Communication Picklist values.
             newTask.Status = 'Not Started';
             newTask.activityDate = Date.Today() + 10;
             if(ownerId != Null)
-                newTask.OwnerId = ownerId;
-            
+                newTask.OwnerId = ownerId;            
             //newTask.whatId = whatId;
             newTask.RecordTypeId = taskRT;
             LstLog.add('Subject: '+newTask.Subject);
@@ -821,9 +606,7 @@ Capturing Communication Picklist values.
     {
         public string fName{get;set;}
         public string lName{get;set;}
-        public string age{get;set;}
-        
-    }   
-    
+        public string age{get;set;}        
+    }      
     
 }
