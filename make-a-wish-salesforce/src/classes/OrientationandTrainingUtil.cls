@@ -1335,7 +1335,7 @@ public class OrientationandTrainingUtil {
 		Volunteer_Count__c newVolCount = new Volunteer_Count__c ();
 		newVolCount.Volunteer_Needed__c = count;
 		newVolCount.Chapter_Role__c = chapterRoleId;
-		newVolCount .Non_Wish_Events__c = nonWishId;
+		newVolCount.Non_Wish_Events__c = nonWishId;
 		newVolCount.Description__c = 'Test Description';
 		newVolCount.Date__c = system.today();
 		newVolCount.Start_Time__c = '7.00 AM';
