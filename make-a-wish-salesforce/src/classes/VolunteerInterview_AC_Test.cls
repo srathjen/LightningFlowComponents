@@ -1,6 +1,6 @@
-@isTest
+@IsTest
 private class VolunteerInterview_AC_Test {
-    
+
     private final static Id CHAPTER_RT_ID = Constant_AC.CHAPTER_RT_ID;
     private final static Id NATIONAL_RT_ID = Constant_AC.NATIONAL_RT_ID;
 
@@ -9,11 +9,12 @@ private class VolunteerInterview_AC_Test {
         trac_TriggerHandlerBase.blockTrigger = true;
 
         User volunteer = [
-            SELECT Id, ContactId 
-            FROM User 
-            WHERE ContactId != null 
-            AND IsActive = true 
-            LIMIT 1];
+                SELECT Id, ContactId
+                FROM User
+                WHERE ContactId != NULL
+                AND IsActive = TRUE
+                LIMIT 1
+        ];
 
         List<Account> accountList = TestDataFactory.createAccount(1);
         Account accountAzChapter = accountList.get(0);
@@ -36,24 +37,25 @@ private class VolunteerInterview_AC_Test {
         insert affiliationList;
 
         trac_TriggerHandlerBase.blockTrigger = false;
-        
     }
 
-    @isTest
+    @IsTest
     private static void validateVolunteerInterviewController() {
         List<npe5__Affiliation__c> affiliationList = [
-            SELECT Id, npe5__Contact__c 
-            FROM npe5__Affiliation__c 
-            WHERE npe5__Contact__c != null];
+                SELECT Id, npe5__Contact__c
+                FROM npe5__Affiliation__c
+                WHERE npe5__Contact__c != NULL
+        ];
         User volunteerUser = [
-            SELECT Id, ContactId 
-            FROM User 
-            WHERE ContactId = :affiliationList[0].npe5__Contact__c];
-        
+                SELECT Id, ContactId
+                FROM User
+                WHERE ContactId = :affiliationList[0].npe5__Contact__c
+        ];
+
         ApexPages.currentPage().getParameters().put('bgRequired', 'true');
         ApexPages.currentPage().getParameters().put('trainingRequired', 'true');
 
-        System.runAS(volunteerUser) {
+        System.runAs(volunteerUser) {
             VolunteerInterview_AC controller = new VolunteerInterview_AC();
             controller.getTimes();
             controller.confirmReschedule();
