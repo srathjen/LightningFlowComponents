@@ -1,5 +1,5 @@
 /**
- * @description CreatedBy: Kanagaraj
+ * CreatedBy: Kanagaraj
  * Author   : MST Solutions
  * CreatedDate : 07/27/2016
  * Location : This controller referred in AddVolunteerRole_VF.
@@ -125,7 +125,7 @@ public class AddVolunteerRole_AC {
      * @description This SaveRec() is used to create the no. of volunteer opportuity based on the volunteerNeeded.
      * As well as it will update the volunteer opportunity.
      *
-     * @return
+     * @return null PageReference in order to refresh page
      */
     public PageReference saveRec() {
         PageReference pr ;
@@ -302,7 +302,7 @@ public class AddVolunteerRole_AC {
     /**
      * @description Display Error Message
      *
-     * @return
+     * @return null PageReference in order to refresh page
      */
     public PageReference displayErrorMsg() {
         isReferesh = true;
@@ -477,7 +477,7 @@ public class AddVolunteerRole_AC {
     /**
      * @description Register Volunteer Opportunity
      *
-     * @return Page
+     * @return null PageReference in order to refresh page
      */
     public PageReference register() {
         try {
@@ -662,7 +662,7 @@ public class AddVolunteerRole_AC {
      *
      * @param nonWishEventId
      *
-     * @return
+     * @return List of Volunteer Counts related to a Non Wish Event
      */
     private List<Volunteer_Count__c> initializeVolunteerCounts(Id nonWishEventId) {
         return [
