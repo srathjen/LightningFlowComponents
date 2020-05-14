@@ -710,4 +710,22 @@ public class TestDataFactory {
 		}
 		return docuSignCredentialsSettings;
 	}
+
+	public static List<Office__c> createOffice(Integer num) {
+		List<Office__c> offices = new List<Office__c>();
+		for (Integer i = 0; i < num; i++) {
+			Office__c office = new Office__c();
+			offices.add(office);
+		}
+		return offices;
+	}
+
+	public static List<Zip_Code__c> createZipCode(Integer num) {
+		List<Zip_Code__c> zipCodes = new List<Zip_Code__c>();
+		for (Integer i = 0; i < num; i++) {
+			Zip_Code__c zipCode = new Zip_Code__c();
+			zipCodes.add(zipCode);
+		}
+		return zipCodes;
+	}
 }
