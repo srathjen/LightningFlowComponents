@@ -728,4 +728,13 @@ public class TestDataFactory {
 		}
 		return zipCodes;
 	}
+
+	public static List<CaseTeamMember> createCaseTeamMember(Integer num) {
+		List<CaseTeamMember> caseTeamMembers = new List<CaseTeamMember>();
+		for (Integer i = 0; i < num; i++) {
+			CaseTeamMember caseTeamMember = new CaseTeamMember();
+			caseTeamMembers.add(caseTeamMember);
+		}
+		return caseTeamMembers;
+	}
 }
