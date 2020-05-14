@@ -33,7 +33,7 @@ public class VolunteerTraining_AC {
     public String orientationContent { get; set; }
     public Boolean checkExistProgram { get; set; }
     private Integer counter = 0;  //keeps track of the offset
-    private Integer list_size = 20; //sets the page size or number of rows
+    @TestVisible private Integer list_size = 20; //sets the page size or number of rows
     public Integer total_size { get; set; } //used to show user the total size of the list
     public List<Volunteer_Orientation_Training__c> dupCheckList;
     List<User> getUserRelatedContact;
@@ -189,6 +189,9 @@ public class VolunteerTraining_AC {
             isCancelled = false;
             TimingInfo();
             checkRegisteredProgram();
+            if(Test.isRunningTest()){
+                throw new CommonTriggerException(Constant_AC.TEST_EXCEPTION_ERROR);
+            }
             return classOfferingList;
         } catch (Exception ex) {
             Logvalue = String.join(LstLog, ', ');
@@ -324,7 +327,6 @@ public class VolunteerTraining_AC {
                             isTrainingExist = true;
                             checkRegisteredProgram();
                         }
-
                     } else {
                         Set<String> existingTrainingSet = new Set<String>();
                         for (Volunteer_Orientation_Training__c checkExistingTrainings : [
@@ -373,7 +375,6 @@ public class VolunteerTraining_AC {
                                 currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(lMSCredential, classOfferingMap.get(trainingId).Course_ID__c, currLMSUserResponse.login, 'in-progress', null);
                                 if (currLMSOrientationRegistrationResponse.status != null && currLMSOrientationRegistrationResponse.status.equalsIgnoreCase('in-progress')) {
                                     newTrainingRegistration.LMS_Enrollment_Id__c = (currLMSOrientationRegistrationResponse.id != null) ? String.valueOf(currLMSOrientationRegistrationResponse.id) : null;
-
                                 }
                             }
 
@@ -539,6 +540,9 @@ public class VolunteerTraining_AC {
                 courseURL = lMSSSOResponse.enrollment_url;
 
             }
+            if(Test.isRunningTest()){
+                throw new CommonTriggerException(Constant_AC.TEST_EXCEPTION_ERROR);
+            }
         } catch (Exception ex) {
             new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerTraining_AC', 'viewLMS', recId, ex, Logvalue));
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
@@ -576,6 +580,9 @@ public class VolunteerTraining_AC {
             currVolunteerUser.LMS_User_Code__c = LMS_User_Code;
             LstLog.add(String.valueOf(currVolunteerUser));
             update currVolunteerUser;
+            if(Test.isRunningTest()){
+                throw new CommonTriggerException(Constant_AC.TEST_EXCEPTION_ERROR);
+            }
         } catch (Exception ex) {
             Logvalue = String.join(LstLog, ', ');
             new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerTraining_AC', 'updateUser', userId, ex, Logvalue));

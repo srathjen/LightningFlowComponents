@@ -78,6 +78,7 @@ public class Constant_AC {
 	 * Account Constants
 	 */
 	public static final String ACCOUNT_NAME_MAW_AMERICA = 'Make-A-Wish America';
+	public static final String ACCOUNT_NAME_MAW_ALABAMA = 'Make-A-Wish Alabama';
 	public static final String FAMILY_HOUSEHOLD_NAME_APPEND = ' ' + ' & ' + ' ' + 'Family Household';
 
 	/**
@@ -236,6 +237,8 @@ public class Constant_AC {
 	public static final String CONTACT_HIDDEN_VOLUNTEER_STATUS_ORIENTATION_COMPLETED = 'Orientation With Completed';
 	public static final String CONTACT_HIDDEN_VOLUNTEER_STATUS_ORIENTATION_WITHOUT_COMPLETED = 'Orientation Without Completed';
 	public static final String CONTACT_ONBOARDING_STATUS_ORIENTATION = 'Orientation';
+	public static final String CONTACT_IS_APPLICATION_SUBMIT = 'Submit';
+	public static final String CONTACT_IS_APPLICATION_APPROVED = 'Approved';
 
 	/**
 	 * Chapter Role File Constants
@@ -275,6 +278,7 @@ public class Constant_AC {
 	public static final String VOLUNTEER_ROLE_STATUS_PENDING = 'Pending';
 	public final static String VOLUNTEER_ROLE_STATUS_PENDING_TRAINING = 'Pending Training';
 	public final static String VOLUNTEER_ROLE_STATUS_MISSING_REQUIREMENT = 'Missing Requirement';
+	public final static String VOLUNTEER_ROLE_STATUS_CHAPTER_REVIEW = 'Chapter Review';
 	public final static String VOLUNTEER_ROLE_SUB_STATUS_UNDER_CHAPTER_REVIEW = 'Under Chapter Review';
 	public final static String VOLUNTEER_ROLE_SUB_STATUS_CHAPTER = 'Chapter';
 	public final static String VOLUNTEER_ROLE_SUB_STATUS_VOLUNTEER = 'Volunteer';
@@ -285,6 +289,7 @@ public class Constant_AC {
 	 */
 	public static final String VOLUNTEER_ORIENTATION_TRAINING_TYPE_TRAINING = 'Training';
 	public static final String VOLUNTEER_ORIENTATION_TRAINING_TYPE_ORIENTATION = 'Orientation';
+	public static final String VOLUNTEER_ORIENTATION_TRAINING_COMPLETION_APPROVED = 'Approved';
 	public static final String VOLUNTEER_ORIENTATION_TRAINING_COMPLETION_NOT_APPROVED = 'Not Approved';
 	public static final String VOLUNTEER_ORIENTATION_TRAINING_COMPLETION_FOLLOW_UP_REQUESTED = 'Follow-up Requested';
 	public static final String VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED = 'Completed';
@@ -467,6 +472,7 @@ public class Constant_AC {
 	public static final String BACKGROUND_CHECK_STATUS_REJECTED = 'Rejected';
 	public static final String BACKGROUND_CHECK_STATUS_FIRST_ADVANTAGE = 'Received from First Advantage';
 	public static final String BACKGROUND_CHECK_STATUS_MANUAL = 'Manual';
+	public static final String BACKGROUND_CHECK_SUBSTATUS_PASS = 'Pass';
 	public static final String BACKGROUND_CHECK_RESIDED_IN_US_FOR_PAST_7_YEARS_YES = 'Yes';
 	public static final String BACKGROUND_CHECK_RESIDED_IN_US_FOR_PAST_7_YEARS_NO = 'No';
 
@@ -508,8 +514,13 @@ public class Constant_AC {
 	 */
 	public static final String ACCESS_TOKEN_LISTS_FIRST_ADVANTAGE = 'First Advantage';
 
-	/*
+	/**
 	 * User Role Constants
 	 */
 	public static final String USER_ROLE_CUSTOMER_PORTAL = 'CustomerPortal';
+
+	/*
+	 * Role (Role__c) Constants
+	 */
+	public final static String ROLE_WISH_GRANTER = 'Wish Granter';
 }
