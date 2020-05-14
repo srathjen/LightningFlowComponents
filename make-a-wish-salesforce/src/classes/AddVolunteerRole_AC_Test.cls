@@ -8,7 +8,7 @@ public class AddVolunteerRole_AC_Test {
         trac_TriggerHandlerBase.blockTrigger = true;
         User volunteerUser = new User();
         System.runAs (new User(Id = UserInfo.getUserId())) {
-            volunteerUser = TestDataFactory.createVolunteerUser(1, 'Active Volunteer (Member)', 'Manager')[0];
+            volunteerUser = TestDataFactory.createVolunteerUser(1)[0];
             volunteerUser.Hidden_Role_Name_Id__c = NAME_TEST;
             volunteerUser.LastName = NAME_TEST;
             insert volunteerUser;
@@ -59,7 +59,7 @@ public class AddVolunteerRole_AC_Test {
             volunteerOpportunity.Non_Wish_Event__c = nonWishEvent.Id;
             volunteerOpportunity.Chapter_Name__c = volunteerUser.Contact.AccountId;
             volunteerOpportunity.RecordTypeId = Constant_AC.NON_WISH_EVENT_RT_ID;
-            volunteerOpportunity.Status__c = 'Pending';
+            volunteerOpportunity.Status__c = Constant_AC.VOLUNTEER_OPPORTUNITY_STATUS_PENDING;
             insert volunteerOpportunity;
         }
         trac_TriggerHandlerBase.blockTrigger = false;

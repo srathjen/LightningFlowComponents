@@ -231,6 +231,9 @@ public class TestDataFactory {
         return users;
     }
 
+    public static List<User> createVolunteerUser(Integer num){
+        return createVolunteerUser(num, 'Active Volunteer (Member)', 'Manager');
+    }
     public static List<User> createVolunteerUser(Integer num, String profileName, String portalRole) {
         // Must run as admin to create community user
         List<User> users = createUser(num);

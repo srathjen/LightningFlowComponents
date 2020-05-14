@@ -2,6 +2,10 @@
 @IsTest
 public class VolunteerTraining_AC_Test {
 
+    private static final String VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_VOLUNTEER_CANCELLED = Constant_AC.VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_VOLUNTEER_CANCELLED;
+    private static final String VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED = Constant_AC.VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED;
+    private static final String VOLUNTEER_ORIENTATION_TRAINING_TYPE_TRAINING = Constant_AC.VOLUNTEER_ORIENTATION_TRAINING_TYPE_TRAINING;
+
     @TestSetup
     private static void setup() {
         trac_TriggerHandlerBase.blockTrigger = true;
@@ -17,7 +21,7 @@ public class VolunteerTraining_AC_Test {
         con.AccountId = acc.Id;
         insert con;
 
-        User volunteerUser = TestDataFactory.createVolunteerUser(1, 'Active Volunteer (Member)', 'Manager')[0];
+        User volunteerUser = TestDataFactory.createVolunteerUser(1)[0];
         insert volunteerUser;
 
         npe5__Affiliation__c affiliation = TestDataFactory.createAffiliation(1)[0];
@@ -28,31 +32,56 @@ public class VolunteerTraining_AC_Test {
         Role__c currRole = TestDataFactory.createRole(1, true)[0];
         insert currRole;
 
-        Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
+        Chapter_Role__c currChapRole = TestDataFactory.createChapterRole(1)[0];
+        currChapRole.Chapter_Name__c = acc.Id;
+        currChapRole.Role_Name__c = currRole.Id;
+        currChapRole.Background_Check_Required__c = true;
         insert currChapRole;
 
-        Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
+        Volunteer_Roles__c currVolRole = TestDataFactory.createVolunteerRole(1)[0];
+        currVolRole.Chapter_Role__c = currChapRole.Id;
+        currVolRole.Volunteer_Name__c = con.Id;
+        currVolRole.Status__c = Constant_AC.VOLUNTEER_ROLE_STATUS_CHAPTER_REVIEW;
         currVolRole.Volunteer_Name__c = volunteerUser.ContactId;
         insert currVolRole;
 
-        Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerTrainingRecord();
+        Orientation_Training__c currOandT = TestDataFactory.createOrientationTraining(1)[0];
+        currOandT.Name = 'Trainging1';
+        currOandT.RecordTypeId = Constant_AC.TRAINING_RT_ID;
+        currOandT.Start_Time__c = '7:00 AM';
+        currOandT.End_Time__c = '7:00 PM';
         insert currOandT;
 
-        Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
+        Chapter_Role_O_T__c currChapOandT = TestDataFactory.createChapterRoleOrientationAndTraining(1)[0];
+        currChapOandT.Orientation_Training__c = currOandT.Id;
+        currChapOandT.Chapter_Role__c = currChapRole.Id;
+        currChapOandT.Required__c = true;
         insert currChapOandT;
 
-        Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
+        Class_Offering__c currOffering = TestDataFactory.createClassOffering(1)[0];
+        currOffering.Chapter_Role_O_T__c = currChapOandT.Id;
+        currOffering.Date__c = System.today() + 10;
+        currOffering.Start_Time__c = '10:00 AM';
+        currOffering.End_Time__c = '11:00 AM';
+        currOffering.max_capacity__c = 100;
+        currOffering.Location__c = 'Test';
+        currOffering.RecordTypeId = Constant_AC.CLASS_OFFERING_RECORD_TYPE_ID;
         insert currOffering;
 
-        Volunteer_Orientation_Training__c createVolOrientation = new Volunteer_Orientation_Training__c();
+        Volunteer_Orientation_Training__c createVolOrientation = TestDataFactory.createVolunteerOrientationAndTraining(1)[0];
         createVolOrientation.Class_Offering__c = currOffering.Id;
         createVolOrientation.Hidden_O_T_Id__c = currOandT.Id;
         createVolOrientation.Registered_Date__c = Date.today();
         createVolOrientation.Volunteer__c = con.Id;
-        createVolOrientation.Volunteer_Attendance__c = 'Completed';
-        createVolOrientation.Type__c = 'Training';
+        createVolOrientation.Volunteer_Attendance__c = VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED;
+        createVolOrientation.Type__c = VOLUNTEER_ORIENTATION_TRAINING_TYPE_TRAINING;
         createVolOrientation.Volunteer__c = volunteerUser.ContactId;
         insert createVolOrientation;
+
+        Dynamic_Content__c dc = TestDataFactory.createDynamicContent(1)[0];
+        dc.RecordTypeId = Constant_AC.NATIONAL_RT_ID;
+        dc.Active__c = true;
+        insert dc;
 
         trac_TriggerHandlerBase.blockTrigger = false;
     }
@@ -87,7 +116,7 @@ public class VolunteerTraining_AC_Test {
         System.assertEquals(currOffering.Id, createVolOrientation.Class_Offering__c);
 
         Test.startTest();
-        createVolOrientation.Volunteer_Attendance__c = 'Volunteer Cancelled';
+        createVolOrientation.Volunteer_Attendance__c = VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_VOLUNTEER_CANCELLED;
         update createVolOrientation;
 
         User volunteerUser = getVolunteerUser();
@@ -134,13 +163,27 @@ public class VolunteerTraining_AC_Test {
                 FROM Chapter_Role__c
         ];
 
-        Orientation_Training__c currOandT1 = OrientationandTrainingUtil.CreateVolunteerTrainingRecord();
+        Orientation_Training__c currOandT1 = TestDataFactory.createOrientationTraining(1)[0];
+        currOandT1.Name = 'Trainging1';
+        currOandT1.RecordTypeId = Constant_AC.TRAINING_RT_ID;
+        currOandT1.Start_Time__c = '7:00 AM';
+        currOandT1.End_Time__c = '7:00 PM';
         insert currOandT1;
 
-        Chapter_Role_O_T__c currChapOandT1 = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT1.Id);
+        Chapter_Role_O_T__c currChapOandT1 = TestDataFactory.createChapterRoleOrientationAndTraining(1)[0];
+        currChapOandT1.Orientation_Training__c = currOandT1.Id;
+        currChapOandT1.Chapter_Role__c = currChapRole.Id;
+        currChapOandT1.Required__c = true;
         insert currChapOandT1;
 
-        Class_Offering__c currOffering1 = OrientationandTrainingUtil.createClassOffering(currChapOandT1.Id);
+        Class_Offering__c currOffering1 = TestDataFactory.createClassOffering(1)[0];
+        currOffering1.Chapter_Role_O_T__c = currChapOandT1.Id;
+        currOffering1.Date__c = System.today() + 10;
+        currOffering1.Start_Time__c = '10:00 AM';
+        currOffering1.End_Time__c = '11:00 AM';
+        currOffering1.max_capacity__c = 100;
+        currOffering1.Location__c = 'Test';
+        currOffering1.RecordTypeId = Constant_AC.CLASS_OFFERING_RECORD_TYPE_ID;
         insert currOffering1;
 
         User volunteerUser = getVolunteerUser();
@@ -159,6 +202,8 @@ public class VolunteerTraining_AC_Test {
             controller.Beginning();
             controller.getPageNumber();
             controller.total_size = 1;
+            controller.getTotalPages();
+            controller.total_size = controller.list_size = 1;
             controller.getTotalPages();
             controller.End();
             controller.getDisableNext();
