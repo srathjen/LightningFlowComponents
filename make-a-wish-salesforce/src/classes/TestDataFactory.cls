@@ -321,6 +321,15 @@ public class TestDataFactory {
         return wishTransCodes;
     }
 
+    public static List<Wish_Expense_Type_Tempate__c> createWishExpenseTypeTempates(Integer num) {
+        List<Wish_Expense_Type_Tempate__c> wishExpenseTypeTempates = new List<Wish_Expense_Type_Tempate__c>();
+        for (Integer i = 0; i < num; i++) {
+            Wish_Expense_Type_Tempate__c wishExpenseTypeTempate = new Wish_Expense_Type_Tempate__c();
+            wishExpenseTypeTempates.add(wishExpenseTypeTempate);
+        }
+        return wishExpenseTypeTempates;
+    }
+
     public static List<Wish_Change_Request__c> createWishChangeRequests(Integer num, Id wishCaseRecordId,
             Id wishAffiliationId) {
         List<Wish_Change_Request__c> wishChangeRequests = new List<Wish_Change_Request__c>();
@@ -749,5 +758,32 @@ public class TestDataFactory {
         currLMSCredential.UserCreaationEndpoint__c = '/Usercreation';
         currLMSCredential.Name = 'LMS Integration';
         return currLMSCredential;
+    }
+
+    public static List<Office__c> createOffice(Integer num) {
+        List<Office__c> offices = new List<Office__c>();
+        for (Integer i = 0; i < num; i++) {
+            Office__c office = new Office__c();
+            offices.add(office);
+        }
+        return offices;
+    }
+
+    public static List<Zip_Code__c> createZipCode(Integer num) {
+        List<Zip_Code__c> zipCodes = new List<Zip_Code__c>();
+        for (Integer i = 0; i < num; i++) {
+            Zip_Code__c zipCode = new Zip_Code__c();
+            zipCodes.add(zipCode);
+        }
+        return zipCodes;
+    }
+
+    public static List<CaseTeamMember> createCaseTeamMember(Integer num) {
+        List<CaseTeamMember> caseTeamMembers = new List<CaseTeamMember>();
+        for (Integer i = 0; i < num; i++) {
+            CaseTeamMember caseTeamMember = new CaseTeamMember();
+            caseTeamMembers.add(caseTeamMember);
+        }
+        return caseTeamMembers;
     }
 }
