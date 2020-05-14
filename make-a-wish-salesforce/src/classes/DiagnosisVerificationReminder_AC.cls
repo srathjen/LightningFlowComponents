@@ -1,4 +1,4 @@
-global class DiagnosisVerificationReminder_AC implements Database.Batchable<sObject>, Schedulable {
+global class DiagnosisVerificationReminder_AC implements Database.Batchable<SObject>, Schedulable {
      @TestVisible
      private Date todayDate = Date.today();
 
@@ -17,7 +17,7 @@ global class DiagnosisVerificationReminder_AC implements Database.Batchable<sObj
           List<Lead> updateLead = new List<Lead>();
           String days;
           for(Lead lead : leadList) {
-               days = NULL;
+               days = null;
                if(lead.Status == Constant_AC.LEAD_STATUS_REFERRED && lead.Referred_Date__c.addDays(3) == todayDate) {
                     days = '3';
                } else if(lead.Sub_Status__c == Constant_AC.LEAD_SUB_STATUS_PENDING_DIAGNOSIS_VERIFICATION) {
@@ -28,11 +28,11 @@ global class DiagnosisVerificationReminder_AC implements Database.Batchable<sObj
                     } else if(lead.Part_A_Sent__c.addDays(21) == todayDate) {
                          days = '21';
                     }
-                    if(days != NULL) {
+                    if(days != null) {
                          updateLead.add(updateLeadDiagnosisPendingDays(lead.Id, days));
                     }
                }
-               if(days != NULL) {
+               if(days != null) {
                     createTask.add(createReminderTask(lead, days));
                }
           } 
@@ -56,7 +56,7 @@ global class DiagnosisVerificationReminder_AC implements Database.Batchable<sObj
           } else if(lead.Sub_Status__c == Constant_AC.LEAD_SUB_STATUS_PENDING_DIAGNOSIS_VERIFICATION) {
                task.Subject = days + ' ' + Constant_AC.TASK_SUBJECT_REMINDER_FOR_DIAGNOSIS_VERIFICATION;
           }
-          task.whoId = lead.Id;
+          task.WhoId = lead.Id;
           task.Account_Email__c = lead.Treating_Medical_Professional_Email__c;
           return task;
      }
