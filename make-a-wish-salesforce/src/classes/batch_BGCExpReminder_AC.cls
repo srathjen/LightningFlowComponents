@@ -6,7 +6,7 @@
  **/
 global class batch_BGCExpReminder_AC implements Database.Batchable<SObject>, Schedulable {
 
-    @TestVisible private Date TODAY = Date.today();
+    @TestVisible private static final Date TODAY = Date.today();
     private final static String BACKGROUND_CHECK_STATUS_REJECTED = Constant_AC.BACKGROUND_CHECK_STATUS_REJECTED;
 
     global Database.QueryLocator start(Database.BatchableContext BC) {

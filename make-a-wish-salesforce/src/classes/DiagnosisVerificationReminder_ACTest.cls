@@ -73,7 +73,6 @@ private class DiagnosisVerificationReminder_ACTest {
 
     @IsTest
     static void testBatchReferredDateThreeDays() {
-        Test.startTest();
         List<Lead> leadsBeforeUpdate = getTestLeads();
         for (Lead lead : leadsBeforeUpdate) {
             setupLeadRecord(lead, TODAY, Constant_AC.LEAD_STATUS_REFERRED);
@@ -81,45 +80,50 @@ private class DiagnosisVerificationReminder_ACTest {
             lead.Referred_Date__c = TODAY.addDays(-3);
         }
         update leadsBeforeUpdate;
+
+        Test.startTest();
         scheduleJob();
         Test.stopTest();
     }
 
     @IsTest
     static void testBatchPartAReminderSevenDays() {
-        Test.startTest();
         List<Lead> leadsBeforeUpdate = getTestLeads();
         System.assertEquals(null, leadsBeforeUpdate[0].Diagnosis_Pending_Days__c);
         for (Lead lead : leadsBeforeUpdate) {
             setupLeadRecord(lead, TODAY.addDays(-7), Constant_AC.LEAD_STATUS_REFERRED);
         }
         update leadsBeforeUpdate;
+
+        Test.startTest();
         scheduleJob();
         Test.stopTest();
     }
 
     @IsTest
     static void testBatchPartAReminderFourteenDays() {
-        Test.startTest();
         List<Lead> leadsBeforeUpdate = getTestLeads();
         System.assertEquals(null, leadsBeforeUpdate[0].Diagnosis_Pending_Days__c);
         for (Lead lead : leadsBeforeUpdate) {
             setupLeadRecord(lead, TODAY.addDays(-14), Constant_AC.LEAD_STATUS_REFERRED);
         }
         update leadsBeforeUpdate;
+
+        Test.startTest();
         scheduleJob();
         Test.stopTest();
     }
 
     @IsTest
     static void testBatchPartAReminderTwentyOneDays() {
-        Test.startTest();
         List<Lead> leadsBeforeUpdate = getTestLeads();
         System.assertEquals(null, leadsBeforeUpdate[0].Diagnosis_Pending_Days__c);
         for (Lead lead : leadsBeforeUpdate) {
             setupLeadRecord(lead, TODAY.addDays(-21), Constant_AC.LEAD_SUB_STATUS_PENDING_DIAGNOSIS_VERIFICATION);
         }
         update leadsBeforeUpdate;
+
+        Test.startTest();
         scheduleJob();
         Test.stopTest();
     }
