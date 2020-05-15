@@ -24,12 +24,6 @@ private class CloudNewsTrigger_Test {
         conditionDescriptions[0].Group1__c = true;
         insert conditionDescriptions;
 
-        Contact medicalProfessionalCon = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
-        insert medicalProfessionalCon;
-
-        Contact FamilyContact = OrientationandTrainingUtil.CreateWishFamily();
-        insert FamilyContact;
-
         List<Contact> contacts = TestDataFactory.createContact(2);
 
         contacts[0].FirstName = 'Steveone';
