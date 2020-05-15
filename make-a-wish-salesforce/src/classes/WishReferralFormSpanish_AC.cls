@@ -293,14 +293,14 @@ global Class WishReferralFormSpanish_AC
             options.add(new SelectOption('Physician', 'Médico'));
             options.add(new SelectOption('Friend', 'Amigo(a)'));
             options.add(new SelectOption('Brochure at the Doctor\'s Office', 'Folleto en el consultorio'));
-            options.add(new SelectOption('Email', 'Correo Electronico'));
+            options.add(new SelectOption('Email', 'Correo electrónico'));
             options.add(new SelectOption('Event', 'Evento'));
             options.add(new SelectOption('Make-A-Wish Hospital Presence', 'Presencia de Make-A-Wish en el Hospital'));
-            options.add(new SelectOption('Make-A-Wish Staff/Volunteer', 'Personal / Voluntaria Make-A-Wish'));    
+            options.add(new SelectOption('Make-A-Wish Staff/Volunteer', 'Personal/Voluntario(a) de Make-A-Wish'));    
             options.add(new SelectOption('Newspaper', 'Periódico'));
-            options.add(new SelectOption('Other Make-A-Wish Family', 'Otra familia Make-A-Wish'));
+            options.add(new SelectOption('Other Make-A-Wish Family', 'Otra familia de Make-A-Wish'));
             options.add(new SelectOption('Radio', 'Radio'));
-            options.add(new SelectOption('School – Kids For Wish Kids', 'Escuela - Programa Wish for Wish Kids'));
+            options.add(new SelectOption('School – Kids For Wish Kids', 'Escuela – Programa Kids For Wish Kids'));
             options.add(new SelectOption('Social Media', 'Medios de comunicación social'));
             options.add(new SelectOption('Support Group', 'Grupo de apoyo'));
             options.add(new SelectOption('Television', 'Televisión'));
