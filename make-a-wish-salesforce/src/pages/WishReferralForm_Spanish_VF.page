@@ -478,7 +478,7 @@ label.error{
             <div class="form-group row">
                 <div class="col-sm-3"><label aria-labelledby="email address">{!formLabels.Email_Address__c}</label></div>
                 <div class="col-sm-6">
-                    <apex:inputText value="{!currLead.Email}" styleClass="form-control pemailaddress pemailaddress1 email-std" id="pemailaddress" maxlength="50" html-placeholder="sucorreo_electronico@dominio.com"  />
+                    <apex:inputText value="{!currLead.Email}" styleClass="form-control pemailaddress pemailaddress1 email-std" id="pemailaddress" maxlength="50" html-placeholder="sucorreo_electrónico@dominio.com"  />
                 </div>
             </div>
             <div class="form-group row">
@@ -622,7 +622,7 @@ label.error{
             <div class="form-group row">
                 <div class="col-sm-3"><label aria-labelledby="email address">{!formLabels.Email_Address__c}</label></div>
                 <div class="col-sm-6">
-                    <apex:inputText value="{!currLead.Additional_Parent_Email__c}" styleClass="form-control pemailaddress email-std" id="pemailaddress2" maxlength="50" html-placeholder="sucorreo_electronico@dominio.com"  />
+                    <apex:inputText value="{!currLead.Additional_Parent_Email__c}" styleClass="form-control pemailaddress email-std" id="pemailaddress2" maxlength="50" html-placeholder="sucorreo_electrónico@dominio.com"  />
                 </div>
             </div>
             <div class="form-group row">

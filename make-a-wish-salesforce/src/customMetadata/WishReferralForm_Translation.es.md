@@ -52,7 +52,7 @@
     </values>
     <values>
         <field>Email_Address__c</field>
-        <value xsi:type="xsd:string">Correo Electronico</value>
+        <value xsi:type="xsd:string">Correo Electrónico</value>
     </values>
     <values>
         <field>Fact_Communication__c</field>
@@ -252,7 +252,7 @@
     </values>
     <values>
         <field>spanishCommunication__c</field>
-        <value xsi:type="xsd:string">This child is non-verbal:Este niño/a no es verbal;This child is developmentally on target for chronological age:Este niño/a está en el objetivo para su edad cronológica;This child functions at a 0-2 year old, Sensorimotor stage:Este niño/a funciona en una etapa sensoriomotora de 0-2 años de edad;This child functions at a 2-7 year old, Preoperational stage:Este niño/a funciona en una etapa preoperativa de 2-7 años ;This child functions at a 7-11 year old, Concrete Operational stage:Este niño/a funciona en una etapa operacional concreta de 7-11 años;This child functions at an 11+ year old, Formal Operational stage:Este niño/a funciona en una etapa operativa formal de 11+ años;I am not sure:No estoy seguro</value>
+        <value xsi:type="xsd:string">This child is non-verbal:Este niño/a no es verbal;This child is developmentally on target for chronological age:Este niño/a está en el objetivo para su edad cronológica;This child functions at a 0-2 year old, Sensorimotor stage:Este niño/a funciona en una etapa sensoriomotora de 0-2 años de edad;This child functions at a 2-7 year old, Preoperational stage:Este niño/a funciona en una etapa preoperativa de 2-7 años ;This child functions at a 7-11 year old, Concrete Operational stage:Este niño/a funciona en una etapa operacional concreta de 7-11 años;This child functions at an 11+ year old, Formal Operational stage:Este niño/a funciona en una etapa operativa formal de 11+ años;I am not sure:No estoy seguro/a</value>
     </values>
     <values>
         <field>spanishLanguage__c</field>
