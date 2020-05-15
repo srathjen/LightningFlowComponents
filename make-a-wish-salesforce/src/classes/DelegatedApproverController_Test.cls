@@ -1,96 +1,107 @@
 @isTest
 //This class is used to improve the code coverage of delegated approval process.
 public class DelegatedApproverController_Test {
-
-    //This method is query the all record in the approval process.
-    public testmethod static void queryapprovalRecord() {
+    
+    @TestSetup
+    public static void setup() {
         trac_TriggerHandlerBase.blockTrigger = true;
-        insert new Bypass_Triggers__c(SetupOwnerId = UserInfo.getUserId());
-
-        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
-        insert chapterAccount;
-
-        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
-        Contact volunteerCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
-        Contact volunteerConOne = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
-        insert new List<Contact>{
-                wishChild, volunteerCon, volunteerConOne
-        };
-
-        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-        insert parentCase;
-
-        Role__c roleName = OrientationandTrainingUtil.createRole();
-        Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id, roleName.id);
-        List<Volunteer_Opportunity__c> wishVolunteerOpportunityList = OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id, chapterRole.id, parentCase.id, 2);
-        wishVolunteerOpportunityList[0].Volunteer_Name__c = volunteerCon.Id;
-        wishVolunteerOpportunityList[1].Volunteer_Name__c = volunteerConOne.Id;
-        insert wishVolunteerOpportunityList;
-
-        Chapter_Vs_Role__c alabama = TestDataFactory.createChapterVsRole(1, 'Alabama')[0];
-        insert alabama;
-
-        In_Kind_Donation_Reimbursement__c inKindDonationReimbursement = new In_Kind_Donation_Reimbursement__c();
-        inKindDonationReimbursement.Wish__c = parentCase.Id;
-        insert inKindDonationReimbursement;
-
-        //Creating Queue based on the chapterName.
-        Group newGroup = new Group();
-        newGroup.Name = 'Make-A-Wish Alabama';
-        newGroup.Type = 'Queue';
-        insert newGroup;
-
-        //Submitting for Case Approval
-        Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
-        req.setComments('Submitting request for approval.');
-        req.setObjectId(parentCase.id);
-        req.setProcessDefinitionNameOrId('Wish_Child_Form_Approval_Process');
-        req.setSkipEntryCriteria(true);
-        req.setNextApproverIds(new Id[]{
-                newGroup.Id
-        });
-
-        //Submitting for Contact Approval
-        Approval.ProcessSubmitRequest contactRequest = new Approval.ProcessSubmitRequest();
-        contactRequest.setComments('Submitting request for approval.');
-        contactRequest.setObjectId(wishChild.id);
-        contactRequest.setSkipEntryCriteria(true);
-        contactRequest.setNextApproverIds(new Id[]{
-                newGroup.Id
-        });
-
-        //Submitting for Account Approval
-        Approval.ProcessSubmitRequest accountRequest = new Approval.ProcessSubmitRequest();
-        accountRequest.setComments('Submitting request for approval.');
-        accountRequest.setObjectId(chapterAccount.id);
-        accountRequest.setSkipEntryCriteria(true);
-        accountRequest.setNextApproverIds(new Id[]{
-                newGroup.Id
-        });
-
-        //Submitting for Vol Opp Approval
-        Approval.ProcessSubmitRequest volOppRequest = new Approval.ProcessSubmitRequest();
+        
+        Account accountAzChapter = TestDataFactory.createAccount(1)[0];
+        accountAzChapter.Name = 'Make-A-Wish Arizona';
+        accountAzChapter.RecordTypeId = Constant_AC.CHAPTER_RT_ID;
+        insert accountAzChapter;
+        
+        List<Contact> contactList = TestDataFactory.createContact(2);
+        Contact volunteerJessica = contactList.get(0);
+        volunteerJessica.FirstName = 'Jessica';
+        volunteerJessica.LastName = 'Sailor';
+        volunteerJessica.Email = 'Test.Mawa@gmail.com';
+        volunteerJessica.RecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
+        volunteerJessica.AccountId = accountAzChapter.Id;
+        volunteerJessica.Region_Chapter__c = accountAzChapter.Id;
+        Contact wishChildVictoria = contactList.get(1);
+        wishChildVictoria.FirstName = 'Victoria';
+        wishChildVictoria.LastName = 'McQueen';
+        wishChildVictoria.RecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
+        wishChildVictoria.AccountId = accountAzChapter.Id;
+        wishChildVictoria.Region_Chapter__c = accountAzChapter.Id;
+        wishChildVictoria.Birthdate = Date.today().addYears(-13);        
+        insert contactList;
+        
+        List<Case> caseList = TestDataFactory.createCase(1);
+        Case wishCaseMcQueen = caseList.get(0);
+        wishCaseMcQueen.RecordTypeId = Constant_AC.WISH_RT_ID;
+        wishCaseMcQueen.ChapterName__c = accountAzChapter.Id;
+        wishCaseMcQueen.Subject = 'Victori McQueen Wish';
+        wishCaseMcQueen.Interview_date__c = System.today();
+        wishCaseMcQueen.Wish_Type__c = 'Disney World';
+        wishCaseMcQueen.Start_Date__c = System.today();
+        wishCaseMcQueen.ContactId = wishChildVictoria.Id;
+        wishCaseMcQueen.Status = 'New';
+        insert caseList;
+        
+        List<Role__c> roleList = TestDataFactory.createRole(1, true);
+        Role__c wishRole = roleList.get(0);
+        wishRole.Name = 'Wish Granter';
+        insert roleList;
+        
+        List<Chapter_Role__c> chapterRoleList = TestDataFactory.createChapterRole(1);
+        Chapter_Role__c wishGranterChapterRole = chapterRoleList.get(0);
+        wishGranterChapterRole.Chapter_Name__c = accountAzChapter.Id;
+        wishGranterChapterRole.Role_Name__c = wishRole.Id;
+        wishGranterChapterRole.Background_Check_Required__c = true;
+        insert chapterRoleList;
+        
+        List<Volunteer_Opportunity__c> volOppsList = TestDataFactory.createVolunteerOpportunity(1);
+        Volunteer_Opportunity__c volOppWishJessica = volOppsList.get(0);
+        volOppWishJessica.RecordTypeId =  Constant_AC.WISH_VOLUNTEER_OPPORTUNITY_ID;
+        volOppWishJessica.Volunteer_Name__c = volunteerJessica.Id;
+        volOppWishJessica.Chapter_Role_Opportunity__c = wishGranterChapterRole.Id;
+        volOppWishJessica.Wish__c = wishCaseMcQueen.Id;
+        volOppWishJessica.Chapter_Name__c = accountAzChapter.Id;
+        insert volOppsList;
+        
+        List<In_Kind_Donation_Reimbursement__c> inKindDonationList = TestDataFactory.createInKindDonationReimbursement(1);
+        In_Kind_Donation_Reimbursement__c reimbursement = inKindDonationList.get(0);
+        reimbursement.Wish__c = wishCaseMcQueen.Id;
+        insert inKindDonationList;
+        
+        List<Group> groupList = TestDataFactory.createGroup(1);
+        Group azGroup = groupList.get(0);
+        azGroup.Name = 'Make-A-Wish Arizona';
+        azGroup.Type = 'Queue';
+        insert groupList;
+        
+        List<Id> approverIdList = new List<Id>{azGroup.Id};
+            
+        List<Approval.ProcessSubmitRequest> requestList = TestDataFactory.createApporvalProcessRequest(3);
+        Approval.ProcessSubmitRequest caseRequest = requestList.get(0);
+        caseRequest.setComments('Submitting request for approval.');
+        caseRequest.setObjectId(wishCaseMcQueen.id);
+        caseRequest.setProcessDefinitionNameOrId('Wish_Child_Form_Approval_Process');
+        caseRequest.setSkipEntryCriteria(true);
+        caseRequest.setNextApproverIds(approverIdList);
+        Approval.ProcessSubmitRequest volOppRequest = requestList.get(1);
         volOppRequest.setComments('Submitting request for approval.');
-        volOppRequest.setObjectId(wishVolunteerOpportunityList[0].id);
+        volOppRequest.setObjectId(volOppWishJessica.Id);
         volOppRequest.setSkipEntryCriteria(true);
-        volOppRequest.setNextApproverIds(new Id[]{
-                newGroup.Id
-        });
-
-        //Submitting for In Kind Approval
-        Approval.ProcessSubmitRequest inKindRequest = new Approval.ProcessSubmitRequest();
+        volOppRequest.setNextApproverIds(approverIdList);
+        Approval.ProcessSubmitRequest inKindRequest = requestList.get(2);
         inKindRequest.setComments('Submitting request for approval.');
-        inKindRequest.setObjectId(inKindDonationReimbursement.id);
+        inKindRequest.setObjectId(reimbursement.Id);
         inKindRequest.setSkipEntryCriteria(true);
-        inKindRequest.setNextApproverIds(new Id[]{
-                newGroup.Id
-        });
-
-        Approval.ProcessResult result = Approval.process(req);
-        //Approval.ProcessResult result2 = Approval.process(contactRequest);
-//		Approval.ProcessResult result3 = Approval.process(accountRequest);
-        Approval.ProcessResult result4 = Approval.process(volOppRequest);
-        Approval.ProcessResult result5 = Approval.process(inKindRequest);
-        DelegatedApproverController_AC.getAppList(String.valueOf(Date.today()), String.valueOf(Date.today()));
+        inKindRequest.setNextApproverIds(approverIdList);
+        Approval.process(requestList);
+        
+        trac_TriggerHandlerBase.blockTrigger = false;
+    }
+    
+    @isTest
+    public static void queryapprovalRecord() {
+        String approvalProcessSerialized = '';
+        Test.startTest();
+        approvalProcessSerialized = DelegatedApproverController_AC.getAppList(String.valueOf(Date.today()), String.valueOf(Date.today()));
+        Test.stopTest();
+        System.assert(approvalProcessSerialized.contains('"wishChild":"Victoria McQueen"'));
     }
 }
