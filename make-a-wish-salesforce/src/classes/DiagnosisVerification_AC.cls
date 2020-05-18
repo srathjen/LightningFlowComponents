@@ -856,11 +856,17 @@ public class DiagnosisVerification_AC {
             currLead.Responds_to_treatment_with_normal_health__c = false;
             currLead.Unplanned_hospital_admissions__c = wishChildWrapperIns.unplannedHospitalAdmission;
             //SIW-531 Start : Setting value blank for Number_hospital_admissions__c if no value provided from form for this question
-            if(wishChildWrapperIns.unplannedHospitalAdmission == 'Yes') currLead.Number_hospital_admissions__c =  wishChildWrapperIns.numberOfHospitalAdmission;
-            else currLead.Number_hospital_admissions__c =  null;
+            if (wishChildWrapperIns.unplannedHospitalAdmission == 'Yes') {
+                currLead.Number_hospital_admissions__c = wishChildWrapperIns.numberOfHospitalAdmission;
+                currLead.Admitting_diagnosis__c = wishChildWrapperIns.admittingDiagnosis;
+                currLead.ICU_Admissions__c = wishChildWrapperIns.ifICUAdmission; 
+            }
+            else{
+                currLead.Number_hospital_admissions__c = null;
+                currLead.Admitting_diagnosis__c = null;
+                currLead.ICU_Admissions__c = null;
+            }
             //SIW-531 End
-            currLead.Admitting_diagnosis__c = wishChildWrapperIns.admittingDiagnosis;
-            currLead.ICU_Admissions__c = wishChildWrapperIns.ifICUAdmission;
             //SIW-355 Start : Mapped 2 new added questions value to lead field on submission of DV form
             currLead.Expedite_timeframe__c = wishChildWrapperIns.timeFrameValue;
             currLead.Other_expedite_timeframe_comments__c = wishChildWrapperIns.idealtimeFrameValue;
@@ -1389,3 +1395,4 @@ public class DiagnosisVerification_AC {
         return Database.query(query);
     }
 }
+
