@@ -3,7 +3,6 @@ Created by: Manoj Tammineny
 Created Date : 04/05/2020
 Description : Static Resource for Spanish version of WishReferral form 
 ***********************************************************/
-
 function getRadioVal(e, a) {
     for (var i, s = e.elements[a], r = 0, t = s.length; r < t; r++)
         if (s[r].checked) {
@@ -34,40 +33,25 @@ function formLogic() {
         n = ["2.5", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"],
         d = "Para ser elegibles, los niños/as deben ser mayores de 2½ años de edad y menores de 18 años de edad.";
 
-    function l() {}
-
-    function o() {}
-
-    function c() {
+    function l() {
         $(".wcfirstname").val($(".rfirstname").val()), $(".wclastname").val($(".rlastname").val()), $(".wcfirstname").val() == $(".rfirstname").val() && $(".wcfirstname").val(""), $(".wclastname").val() == $(".rlastname").val() && $(".wclastname").val("")
     }
 
-    function p() {
+    function o() {
         $(".pfirstname").val($(".rfirstname").val()), $(".plastname").val($(".rlastname").val()), $(".pphone").val($(".rphone").val()), $(".pemailaddress").val($(".remail").val()), $(".pcity").val($(".rcity").val()), $(".ppostalcode").val($(".rpostalcode").val()), $(".pfirstname").val() == $(".rfirstname").val() && $(".pfirstname").val(""), $(".plastname").val() == $(".rlastname").val() && $(".plastname").val(""), $(".pphone").val() == $(".rphone").val() && $(".pphone").val(""), $(".pemailaddress").val() == $(".remail").val() && $(".pemailaddress").val(""), $(".pcity").val() == $(".rcity").val() && $(".pcity").val(""), $(".ppostalcode").val() == $(".rpostalcode").val() && $(".ppostalcode").val("")
-    }
-
-    function m() {
-        var e = $(".childAge").val();
-        $.inArray(e, n)
     }
     $(".familyAware").on("change", function() {
         if ("No" == $(this).val()) {
             var i = " Other",
                 r = $.inArray(i, s);
             $(".familyAwareError").css("display", "block"), $(".medprovcat-other-wrap").css("display", "none"), $(".medprovcat-other").val(""), $(this).next(".familyAwareError").text(a).append($(e)), r > -1 ? ($(this).next(".familyAwareError").text(a).append($(e)), $(".shownOnYes").addClass("fam-aware-overlay"), " Medical Professional" == i && $(".medicalProvider").css("display", "none"), " Other" == i && ($(".r2c-manual-input").parent().parent().css("display", "none"), $(this).next(".familyAwareError").text(a).append($(e)))) : ($(".familyAwareError, .medprovcat-other-wrap").css("display", "none"), $(".medprovcat-other").val(""))
-        } else if ("Yes" == $(this).val()) {
-            i = " Other";
-            $(this).next("span").text(""), $(".r2c-manual-input").parent().parent().removeClass("displayNone").css("display", "block"), " Medical Professional" == i && $(".medicalProvider").css("display", "block"), " Other" == i && $(".r2c-manual-input").parent().parent().removeClass("displayNone").css("display", "block")
-        } else $(".shownOnYes").addClass("fam-aware-overlay"), $(".familyAwareError").css("display", "none")
+        } else "Yes" == $(this).val() ? (i = " Other", $(this).next("span").text(""), $(".r2c-manual-input").parent().parent().removeClass("displayNone").css("display", "block"), " Medical Professional" == i && $(".medicalProvider").css("display", "block"), " Other" == i && $(".r2c-manual-input").parent().parent().removeClass("displayNone").css("display", "block")) : ($(".shownOnYes").addClass("fam-aware-overlay"), $(".familyAwareError").css("display", "none"))
     }), $(".discussedProvider").on("change", function() {
         if ("No" == $(this).val()) {
             var a = " Other",
                 r = $.inArray(a, s);
             $(".discussedProviderError").css("display", "block"), $(".medprovcat-other-wrap").css("display", "none"), $(".medprovcat-other").val(""), r > -1 ? ($(this).next(".discussedProviderError").text(i).append($(e)), $(".shownOnYes").addClass("fam-aware-overlay"), " Medical Professional" == a && $(".medicalProvider").css("display", "none"), " Other" == a && ($(".r2c-manual-input").parent().parent().css("display", "none"), $(this).next(".discussedProviderError").text(i).append($(e)))) : ($(".discussedProviderError, .medprovcat-other-wrap").css("display", "none"), $(".medprovcat-other").val(""))
-        } else if ("Yes" == $(this).val()) {
-            a = " Other";
-            $(this).next("span").text(""), " Medical Professional" == a && $(".medicalProvider").css("display", "block"), " Other" == a && $(".r2c-manual-input").parent().parent().removeClass("displayNone").css("display", "block")
-        } else $(".shownOnYes").addClass("fam-aware-overlay"), $(".discussedProviderError").css("display", "none")
+        } else "Yes" == $(this).val() ? (a = " Other", $(this).next("span").text(""), " Medical Professional" == a && $(".medicalProvider").css("display", "block"), " Other" == a && $(".r2c-manual-input").parent().parent().removeClass("displayNone").css("display", "block")) : ($(".shownOnYes").addClass("fam-aware-overlay"), $(".discussedProviderError").css("display", "none"))
     }), $("#j_id0\\:frm\\:wcgender").on("change", function() {
         null != $(this).val() && (-1 != $(this).val().indexOf("Self-describe") ? ($(".self-desc").prop("hidden", !1), $(".self-desc-field").addClass("selfdescreq")) : ($(".self-desc").prop("hidden", !0), $(".self-desc-field").removeClass("selfdescreq").val("")), formValidationRules())
     }), $(".medprovcat-other-wrap").css("display", "none"), $("[id$=medprov]").on("change", function() {
@@ -79,16 +63,15 @@ function formLogic() {
         checkVisible = $(".repeatMedProf input").is(":checked"), 1 == checkVisible ? ($(".mfirstname").val($(".rfirstname").val()), $(".mlastname").val($(".rlastname").val()), $(".mphone").val($(".rphone").val()), $(".memail").val($(".remail").val())) : 0 == checkVisible && $(".medToRepeat :input").each(function() {
             $(this).val("")
         })
-    }), $(".refToRepeat :input").on("keyup", l), $(".clone-guardian-1 input").click(function() {
+    }), $(".refToRepeat :input").on("keyup", function() {}), $(".clone-guardian-1 input").click(function() {
         $(this).is(":checked") ? ($("[id$=paddress2]").val($("[id$=paddress]").val()), $("[id$=pcity2]").val($("[id$=pcity]").val()), $("[id$=p-state2]").val($("[id$=p-state]").val()), $("[id$=ppostalcode2]").val($("[id$=ppostalcode]").val())) : ($("[id$=paddress2], [id$=pcity2], [id$=ppostalcode2]").val(""), $("[id$=p-state2]").prop("selectedIndex", 0))
-    }), $(".refToParent :input").on("keyup", o), $("[id$=nSib],[id$=nSib2]").on("change", function() {
-        function e(e, a, i) {
+    }), $(".refToParent :input").on("keyup", function() {}), $("[id$=nSib],[id$=nSib2]").on("change", function() {
+        "" != $(this).val() || "0" != $(this).val() || "Desconocido" != $(this).val() ? $(".sibInfo").css("display", "block") : ($(".sibInfo").css("display", "none"), function(e, a, i) {
             var s = 0,
                 r = window.setInterval(function() {
                     e(), ++s === i && window.clearInterval(r)
                 }, a)
-        }
-        "" != $(this).val() || "0" != $(this).val() || "Desconocido" != $(this).val() ? $(".sibInfo").css("display", "block") : ($(".sibInfo").css("display", "none"), e(function() {
+        }(function() {
             $("[id$=psibfirstname],[id$=psibfirstname2]").removeClass("firstname"), $("[id$=psiblastname],[id$=psiblastname]").removeClass("lastname"), $("[id$=psibage],[id$=psibage]").removeClass("sibage"), $("input[id$=psibfirstname],input[id$=psibfirstname2],input[id$=psiblastname],input[id$=psiblastname2],input[id$=psibage],input[id$=psibage2]").each(function() {
                 $(this).rules("remove")
             })
@@ -123,9 +106,7 @@ function formLogic() {
                     d = n[0],
                     l = n[1],
                     o = n[2];
-                if (d < 1 || d > 12 || l < 1 || l > 31) return r = 0, NaN;
-                var c = new Date(o, d, 0).getDate();
-                return l > c ? (r = 0, NaN) : (a = new Date(e)).getTime() > i.getTime() ? (r = 0, NaN) : (s = i.getFullYear() - a.getFullYear(), (t = i.getMonth() - a.getMonth()) < 0 && (s -= 1, t += 12), i.getDate() - a.getDate() < 0 && ((t -= 1) < 0 && (s -= 1, t += 12), new Date(a.getFullYear(), a.getMonth() + 1, 0).getDate(), a.getDate(), i.getDate()), s >= 18 ? r = 5 : s >= 13 && s < 18 ? r = 4 : s >= 2 && s < 13 ? r = s >= 3 ? 3 : t >= 6 ? 2 : 1 : 0 != s && 1 != s || (r = 1, s = 1), s)
+                return d < 1 || d > 12 || l < 1 || l > 31 ? (r = 0, NaN) : l > new Date(o, d, 0).getDate() ? (r = 0, NaN) : (a = new Date(e)).getTime() > i.getTime() ? (r = 0, NaN) : (s = i.getFullYear() - a.getFullYear(), (t = i.getMonth() - a.getMonth()) < 0 && (s -= 1, t += 12), i.getDate() - a.getDate() < 0 && ((t -= 1) < 0 && (s -= 1, t += 12), new Date(a.getFullYear(), a.getMonth() + 1, 0).getDate(), a.getDate(), i.getDate()), s >= 18 ? r = 5 : s >= 13 && s < 18 ? r = 4 : s >= 2 && s < 13 ? r = s >= 3 ? 3 : t >= 6 ? 2 : 1 : 0 != s && 1 != s || (r = 1, s = 1), s)
             }
             for (; - 1 !== o;) n++, o = t.indexOf(l, o + 1);
             0 === n && function() {
@@ -140,14 +121,18 @@ function formLogic() {
                     }), $(a).prop("selectedIndex", 0)
                 }, 1e3))
             }()
-        }), $(".medprovcat-other-wrap, .other, .main-office-contact, .medical-additional-info").css("display", "none"), $(".Relchild").val(" Other"), e > -1 && ($(".referrerInfo").css("display", "block"), $(".medicalProvider,.other").css("display", "none"), -1 != e && 2 != e || (c(), p())), $("[id$=rphone],[id$=pphonenumber],[id$=pphonenumber2],[id$=mpphone]").addClass("phonechk-std"), $("[id$=remail],[id$=mpemail],[id$=pemailaddress],[id$=pemailaddress2]").addClass("email-std"), $(".other input").val(""), $(".referrerInfo,.other").css("display", "block"), $(".medicalProvider").css("display", "none"), $("[id$=aware-of-referral]").addClass("family-aware-chk"), $("[id$=r2cManualInput]").addClass("r2c-manual-input"), $("[id$=rfirstname],[id$=wcfirstname],[id$=frm\\:pfirstname],[id$=frm\\:pfirstname2]").addClass("firstname"), $("[id$=rlastname],[id$=frm\\:plastname],[id$=frm\\:plastname2],[id$=wclastname]").addClass("lastname"), $("[id$=rphone]").hasClass("phonechk-std") && ($("[id$=rphone]").removeClass("phonechk-std"), $("[id$=rphone]").addClass("phonechk")), $("[id$=remail]").hasClass("email-std") && ($("[id$=remail]").removeClass("email-std"), $("[id$=remail]").addClass("email")), $("[id$=rcity]").addClass("city"), $("[id$=rpostalcode]").addClass("postalcode"), $("[id$=urgency]").addClass("urgency"), formValidationRules(), $("[id$=searchDiagnosisId]").addClass("pdiagnosis"), $("[id$=wcage]").parents(".form-group").removeClass("sr-only"), $(".repeatMedProf").css("display", "none"), c(), p()
+        }), $(".medprovcat-other-wrap, .other, .main-office-contact, .medical-additional-info").css("display", "none"), $(".Relchild").val(" Other"), e > -1 && ($(".referrerInfo").css("display", "block"), $(".medicalProvider,.other").css("display", "none"), -1 != e && 2 != e || (l(), o())), $("[id$=rphone],[id$=pphonenumber],[id$=pphonenumber2],[id$=mpphone]").addClass("phonechk-std"), $("[id$=remail],[id$=mpemail],[id$=pemailaddress],[id$=pemailaddress2]").addClass("email-std"), $(".other input").val(""), $(".referrerInfo,.other").css("display", "block"), $(".medicalProvider").css("display", "none"), $("[id$=aware-of-referral]").addClass("family-aware-chk"), $("[id$=r2cManualInput]").addClass("r2c-manual-input"), $("[id$=rfirstname],[id$=wcfirstname],[id$=frm\\:pfirstname],[id$=frm\\:pfirstname2]").addClass("firstname"), $("[id$=rlastname],[id$=frm\\:plastname],[id$=frm\\:plastname2],[id$=wclastname]").addClass("lastname"), $("[id$=rphone]").hasClass("phonechk-std") && ($("[id$=rphone]").removeClass("phonechk-std"), $("[id$=rphone]").addClass("phonechk")), $("[id$=remail]").hasClass("email-std") && ($("[id$=remail]").removeClass("email-std"), $("[id$=remail]").addClass("email")), $("[id$=rcity]").addClass("city"), $("[id$=rpostalcode]").addClass("postalcode"), $("[id$=urgency]").addClass("urgency"), formValidationRules(), $("[id$=searchDiagnosisId]").addClass("pdiagnosis"), $("[id$=wcage]").parents(".form-group").removeClass("sr-only"), $(".repeatMedProf").css("display", "none"), l(), o()
     }), $(".childAge").on("change", function() {
         var e = $("age-text").text();
         "Under 2.5" != $(this).val() && "18 & Above" != $(this).val() || ($(".alertMsg").text(d), $("#warningModal").modal("show")), $("select.childAge").val() != e && ($("[id$=wcdob]").val(""), $(".age-text").fadeOut(300, function() {
-            $(this).remove()
-        }), $("[id$=wcdob]").unmask(), $("[id$=wcdob]").mask("99/99/9999", {
-            placeholder: "mm/dd/yyyy"
-        })), m()
+                $(this).remove()
+            }), $("[id$=wcdob]").unmask(), $("[id$=wcdob]").mask("99/99/9999", {
+                placeholder: "mm/dd/yyyy"
+            })),
+            function() {
+                var e = $(".childAge").val();
+                $.inArray(e, n)
+            }()
     })
 }
 
@@ -298,7 +283,7 @@ function formValidationRules() {
             minlength: 3,
             maxlength: 22,
             messages: {
-                required: "Por favor, introduzca una ciudad de EE. UU.",
+                required: "Por favor, introduzca una ciudad de EE. UU",
                 minlength: "Por Favor introduzca al menos 3 caracteres",
                 maxlength: "Lo sentimos, ha alcanzado el máximo de caracteres permitidos"
             }
@@ -310,7 +295,7 @@ function formValidationRules() {
             minlength: 5,
             maxlength: 9,
             messages: {
-                required: "Intorduzca un código postal válido de EE. UU.",
+                required: "Introduzca un código postal válido de EE. UU",
                 digits: "Por favor solo introduzca dígitos",
                 minlength: "Por favor introduzca un mínimo de 5 dígitos",
                 maxlength: "Lo sentimos, ha alcanzado el máximo de caracteres permitidos"
@@ -323,7 +308,7 @@ function formValidationRules() {
             minlength: 5,
             maxlength: 10,
             messages: {
-                required: "Intorduzca un código postal válido de EE. UU.",
+                required: "Introduzca un código postal válido de EE. UU",
                 minlength: "Por favor introduzca un mínimo de 5 dígitos",
                 maxlength: "Lo sentimos, ha alcanzado el máximo de caracteres permitidos"
             }
