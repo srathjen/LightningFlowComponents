@@ -1,5 +1,5 @@
 /**
- * @description Author :            MST Solutions
+ * Author :            MST Solutions
  * Description :       This class referred in the LeadSelectMedEmail_VF.Intake form contains
  * both treating medical professional and best contact for physicians
  * Then the user must select who have received DV form.
