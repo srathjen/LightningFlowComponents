@@ -3,7 +3,7 @@
     <apiVersion>46.0</apiVersion>
     <packageVersions>
         <majorNumber>4</majorNumber>
-        <minorNumber>9</minorNumber>
+        <minorNumber>14</minorNumber>
         <namespace>VisualAntidote</namespace>
     </packageVersions>
     <packageVersions>

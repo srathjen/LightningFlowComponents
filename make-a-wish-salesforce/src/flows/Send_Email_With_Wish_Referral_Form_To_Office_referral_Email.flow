@@ -59,7 +59,7 @@
                 <stringValue>$Label.Salesforce_Support_User_Id </stringValue>
             </value>
         </processMetadataValues>
-        <name>formula_2_myRule_1_A2_0475198027</name>
+        <name>formula_2_myRule_1_A2_4600229065</name>
         <dataType>String</dataType>
         <expression>{!$Label.Salesforce_Support_User_Id}</expression>
     </formulas>
@@ -67,21 +67,21 @@
         <processMetadataValues>
             <name>originalFormula</name>
             <value>
-                <stringValue>(ISNEW() &amp;&amp; NOT( [Lead].Is_Chapter_Active__c)) || 
-(ISCHANGED([Lead].Hidden_Trigger_Referral_Email__c ) &amp;&amp;  NOT( [Lead].Is_Chapter_Active__c))
-&amp;&amp;
-[Lead].RecordType.Name = &quot;Wish Child&quot;
+                <stringValue>$Profile.Name &lt;&gt; &apos;Integration&apos;
+&amp;&amp; (ISNEW() &amp;&amp; NOT( [Lead].Is_Chapter_Active__c)) || (ISCHANGED([Lead].Hidden_Trigger_Referral_Email__c ) 
+&amp;&amp; NOT([Lead].Is_Chapter_Active__c))
+&amp;&amp; [Lead].RecordType.Name = &quot;Wish Child&quot;
 </stringValue>
             </value>
         </processMetadataValues>
         <name>formula_myRule_1</name>
         <dataType>Boolean</dataType>
-        <expression>(ISNEW() &amp;&amp; NOT( {!myVariable_current.Is_Chapter_Active__c})) || 
-(ISCHANGED({!myVariable_current.Hidden_Trigger_Referral_Email__c} ) &amp;&amp;  NOT( {!myVariable_current.Is_Chapter_Active__c}))
-&amp;&amp;
-{!myVariable_current.RecordType.Name} = &quot;Wish Child&quot;</expression>
+        <expression>{!$Profile.Name} &lt;&gt; &apos;Integration&apos;
+&amp;&amp; (ISNEW() &amp;&amp; NOT( {!myVariable_current.Is_Chapter_Active__c})) || (ISCHANGED({!myVariable_current.Hidden_Trigger_Referral_Email__c} ) 
+&amp;&amp; NOT({!myVariable_current.Is_Chapter_Active__c}))
+&amp;&amp; {!myVariable_current.RecordType.Name} = &quot;Wish Child&quot;</expression>
     </formulas>
-    <interviewLabel>Send_Email_With_Wish_Referral_Form_To_Office_referral_Email-15_InterviewLabel</interviewLabel>
+    <interviewLabel>Send_Email_With_Wish_Referral_Form_To_Office_referral_Email-16_InterviewLabel</interviewLabel>
     <label>Send Email With Wish Referral Form To Office referral Email</label>
     <processMetadataValues>
         <name>ObjectType</name>
@@ -140,7 +140,7 @@
             </processMetadataValues>
             <field>OwnerId</field>
             <value>
-                <elementReference>formula_2_myRule_1_A2_0475198027</elementReference>
+                <elementReference>formula_2_myRule_1_A2_4600229065</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
