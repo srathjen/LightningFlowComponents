@@ -45,6 +45,7 @@ public class BackgroundCheckDomain extends trac_TriggerHandlerBase {
                 } else if(newBackgroundCheck.Status__c == BACKGROUND_CHECK_STATUS_APPROVED 
                           || newBackgroundCheck.Status__c == BACKGROUND_CHECK_STATUS_APPROVED_WITH_CONDITIONS) {
                               newBackgroundCheck.Current__c = true;
+                              newBackgroundCheck.Date__c = newBackgroundCheck.Date_Completed__c.addYears(3);
                           }
             }
         }
