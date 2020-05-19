@@ -4,7 +4,7 @@
  * @createdDate 3/18/2020
  */
 public class BackgroundCheckDomain extends trac_TriggerHandlerBase {
-
+    
     private final static String BACKGROUND_CHECK_STATUS_APPROVED = Constant_AC.BACKGROUND_CHECK_STATUS_APPROVED;
     private final static String BACKGROUND_CHECK_STATUS_APPROVED_WITH_CONDITIONS = Constant_AC.BACKGROUND_CHECK_STATUS_APPROVED_WITH_CONDITIONS;
     private final static String BACKGROUND_CHECK_STATUS_RECEIVED_FROM_FIRST_ADVANTAGE = Constant_AC.BACKGROUND_CHECK_STATUS_FIRST_ADVANTAGE;
@@ -13,29 +13,24 @@ public class BackgroundCheckDomain extends trac_TriggerHandlerBase {
     private List<Background_check__c> oldBackgroundChecksList = (List<Background_check__c>)oldRecordsList;
     private Map<Id, Background_check__c> newBackgroundChecksMap = (Map<Id, Background_check__c>)newRecordsMap;
     private Map<Id, Background_check__c> oldBackgroundChecksMap = (Map<Id, Background_check__c>)oldRecordsMap;
-
+    
     /**
     * Before insert of background check
     */
     public override void handleBeforeInsert() {
         Set<Id> volunteerIds = new Set<Id>();
         for(Background_check__c  backgroundCheck : newBackgroundChecksList) {
-            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == null) {
-                if(backgroundCheck.Date_Completed__c != null 
-                   && backgroundCheck.Status__c != null) {
-                       backgroundCheck.Current__c = true;
-                   }
-                volunteerIds.add(backgroundCheck.Volunteer__c);
+            if(backgroundCheck.Date_Completed__c != null && backgroundCheck.Status__c != null) {
+                backgroundCheck.Current__c = true;
             }
             if(backgroundCheck.Date_Completed__c != null) {
-                backgroundCheck.Date_Completed__c.addYears(3);
+                backgroundCheck.Date__c = backgroundCheck.Date_Completed__c.addYears(3);
             }
+            volunteerIds.add(backgroundCheck.Volunteer__c);
         }
-        if(!volunteerIds.isEmpty()) {
-            BackgroundCheckService.updateHiddenEmailAndOwner(volunteerIds, newBackgroundChecksList);
-        }
+        BackgroundCheckService.updateHiddenEmailAndOwner(volunteerIds, newBackgroundChecksList);
     }
-
+    
     /**
     * Before update of background check
     */
@@ -48,16 +43,14 @@ public class BackgroundCheckDomain extends trac_TriggerHandlerBase {
                 if(newBackgroundCheck.Status__c == BACKGROUND_CHECK_STATUS_RECEIVED_FROM_FIRST_ADVANTAGE) {
                     newBackgroundCheck.Date_Completed__c = Date.today();
                 } else if(newBackgroundCheck.Status__c == BACKGROUND_CHECK_STATUS_APPROVED 
-                            || newBackgroundCheck.Status__c == BACKGROUND_CHECK_STATUS_APPROVED_WITH_CONDITIONS) {
-                    newBackgroundCheck.Current__c = true;
-                }
+                          || newBackgroundCheck.Status__c == BACKGROUND_CHECK_STATUS_APPROVED_WITH_CONDITIONS) {
+                              newBackgroundCheck.Current__c = true;
+                          }
             }
         }
-        if(!volunteerIds.isEmpty()) {
-            BackgroundCheckService.updateHiddenEmailAndOwner(volunteerIds, newBackgroundChecksList);
-        }
+        BackgroundCheckService.updateHiddenEmailAndOwner(volunteerIds, newBackgroundChecksList);
     }
-
+    
     /**
     * After insert of background check
     */
@@ -69,31 +62,26 @@ public class BackgroundCheckDomain extends trac_TriggerHandlerBase {
             new Map<String, List<Background_check__c>>();
         
         for(Background_check__c backgroundCheck : newBackgroundChecksList) {
-            if(Bypass_Triggers__c.getValues(UserInfo.getUserId()) == null) {
-                if(backgroundCheck.Current__c == true) {
-                    backgroundCheckVolunteerMap.put(backgroundCheck.Id, backgroundCheck.Volunteer__c);
-                }
-                if(backgroundCheck.Account_Name__c != null 
-                   && ownerRoleMap.get(backgroundCheck.OwnerId) == ROLE_NATIONAL_STAFF) {
-                       if(backgroundCheckAccountMap.containsKey(backgroundCheck.Account_Name__c)) {
-                           backgroundCheckAccountMap.get(backgroundCheck.Account_Name__c).add(backgroundCheck);
-                       } else {
-                           backgroundCheckAccountMap.put(backgroundCheck.Account_Name__c, 
-                                                         new List<Background_check__c>{backgroundCheck});
-                       }
-                   }
+            if(backgroundCheck.Current__c == true) {
+                backgroundCheckVolunteerMap.put(backgroundCheck.Id, backgroundCheck.Volunteer__c);
             }
+            if(backgroundCheck.Account_Name__c != null 
+               && ownerRoleMap.get(backgroundCheck.OwnerId) == ROLE_NATIONAL_STAFF) {
+                   if(backgroundCheckAccountMap.containsKey(backgroundCheck.Account_Name__c)) {
+                       backgroundCheckAccountMap.get(backgroundCheck.Account_Name__c).add(backgroundCheck);
+                   } else {
+                       backgroundCheckAccountMap.put(backgroundCheck.Account_Name__c, 
+                                                     new List<Background_check__c>{backgroundCheck});
+                   }
+               }
+            
         }
-        if(!backgroundCheckVolunteerMap.isEmpty()) {
-            BackgroundCheckService.deactivateBackgroundCheck(backgroundCheckVolunteerMap);
-            BackgroundCheckService.updateVolunteerExpirationDate(newBackgroundChecksList);
-            VolunteerJourneyService.processVolunteersChapterRequirements(new Set<Id>(backgroundCheckVolunteerMap.values()));
-        }
-        if(!backgroundCheckAccountMap.isEmpty()) {
-            ChapterStaffRecordSharing_AC.BGCRecordSharing(backgroundCheckAccountMap);
-        }
+        BackgroundCheckService.deactivateBackgroundCheck(backgroundCheckVolunteerMap);
+        BackgroundCheckService.updateVolunteerExpirationDate(newBackgroundChecksList);
+        VolunteerJourneyService.processVolunteersChapterRequirements(new Set<Id>(backgroundCheckVolunteerMap.values()));
+        ChapterStaffRecordSharing_AC.BGCRecordSharing(backgroundCheckAccountMap);
     }
-
+    
     /**
     * After update of background check
     */
@@ -114,13 +102,13 @@ public class BackgroundCheckDomain extends trac_TriggerHandlerBase {
                 backgroundCheckExpireList.add(newBackgroundCheck);
             }
             if(newBackgroundCheck.HiddenBackgroundExpire__c == true 
-                && oldBackgroundCheck.HiddenBackgroundExpire__c == false) {
-                    volunteerIdsExpiredRejected.add(newBackgroundCheck.Volunteer__c);
-            }
+               && oldBackgroundCheck.HiddenBackgroundExpire__c == false) {
+                   volunteerIdsExpiredRejected.add(newBackgroundCheck.Volunteer__c);
+               }
             if(newBackgroundCheck.Hidden_Background_Rejected__c == true 
-                && oldBackgroundCheck.Hidden_Background_Rejected__c == false) {
-                    volunteerIdsExpiredRejected.add(newBackgroundCheck.Volunteer__c);
-            }
+               && oldBackgroundCheck.Hidden_Background_Rejected__c == false) {
+                   volunteerIdsExpiredRejected.add(newBackgroundCheck.Volunteer__c);
+               }
             if(newBackgroundCheck.Status__c != oldBackgroundCheck.Status__c) {
                 backgroundCheckStatusChangeList.add(newBackgroundCheck);
             }
@@ -128,26 +116,14 @@ public class BackgroundCheckDomain extends trac_TriggerHandlerBase {
                 chapterNameMap.put(newBackgroundCheck.Id, newBackgroundCheck.Account_Name__c);
             }
         }
-        if(!chapterNameMap.isEmpty()) {
-            BackgroundCheckService.checkUpdatePrivilege(chapterNameMap, newBackgroundChecksList, oldBackgroundChecksMap);
-        }
-        if(!backgroundCheckVolunteerMap.isEmpty()) {
-            BackgroundCheckService.deactivateBackgroundCheck(backgroundCheckVolunteerMap);
-        }
-        if(!backgroundCheckExpireList.isEmpty()) {
-            BackgroundCheckService.updateVolunteerExpirationDate(backgroundCheckExpireList);
-        }
-        if(!volunteerIdsExpiredRejected.isEmpty()) {
-            BackgroundCheckService.updateVolunteerRoleHiddenStatus(volunteerIdsExpiredRejected, 'backgroundcheck', newBackgroundChecksList);
-        }
-        if(!backgroundCheckStatusChangeList.isEmpty()) {
-            BackgroundCheckService.updateAffiliationStatusNotApproved(backgroundCheckStatusChangeList, oldBackgroundChecksMap);
-            BackgroundCheckService.createBackgroundCheckReviewTask(backgroundCheckStatusChangeList);
-            volunteerIdsBgcApprovedCurrent = BackgroundCheckService.updateVolunteerOrientationStatus(backgroundCheckStatusChangeList, oldBackgroundChecksMap);
-        }
-        if(!volunteerIdsBgcApprovedCurrent.isEmpty()) {
-            BackgroundCheckService.updateVolunteerRoleStatus(volunteerIdsBgcApprovedCurrent, newBackgroundChecksList);
-            VolunteerJourneyService.processVolunteersChapterRequirements(volunteerIdsBgcApprovedCurrent);
-        }
+        BackgroundCheckService.checkUpdatePrivilege(chapterNameMap, newBackgroundChecksList, oldBackgroundChecksMap);
+        BackgroundCheckService.deactivateBackgroundCheck(backgroundCheckVolunteerMap);
+        BackgroundCheckService.updateVolunteerExpirationDate(backgroundCheckExpireList);
+        BackgroundCheckService.updateVolunteerRoleHiddenStatus(volunteerIdsExpiredRejected, 'backgroundcheck', newBackgroundChecksList);
+        BackgroundCheckService.updateAffiliationStatusNotApproved(backgroundCheckStatusChangeList, oldBackgroundChecksMap);
+        BackgroundCheckService.createBackgroundCheckReviewTask(backgroundCheckStatusChangeList);
+        volunteerIdsBgcApprovedCurrent = BackgroundCheckService.updateVolunteerOrientationStatus(backgroundCheckStatusChangeList, oldBackgroundChecksMap);
+        BackgroundCheckService.updateVolunteerRoleStatus(volunteerIdsBgcApprovedCurrent, newBackgroundChecksList);
+        VolunteerJourneyService.processVolunteersChapterRequirements(volunteerIdsBgcApprovedCurrent);
     }
 }
