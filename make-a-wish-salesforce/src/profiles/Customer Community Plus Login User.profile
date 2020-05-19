@@ -246,11 +246,6 @@
         <apexClass>BroadcastTrigger_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>CaseCommentTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
@@ -503,8 +498,6 @@
         <apexClass>ForgotPasswordControllerTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>Hidden_ContactShareController_AC</apexClass>
         <enabled>false</enabled>
@@ -677,8 +670,6 @@
         <apexClass>Mock_ResponseGenerator</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>MultiselectPicklistComponent_AC</apexClass>
         <enabled>false</enabled>
@@ -767,12 +758,6 @@
         <apexClass>RecursiveTriggerHandler</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>Relationship_AT_Test</apexClass>
         <enabled>false</enabled>
@@ -877,7 +862,6 @@
         <apexClass>UpdateWishAssignmentBatchTest_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>UserTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
@@ -910,8 +894,6 @@
         <apexClass>VolunteerInterviewTask_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>VolunteerJourneyService</apexClass>
         <enabled>false</enabled>
@@ -1006,7 +988,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>WishAffiliationDesign_AC</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>WishAffiliationDesign_AC_Test</apexClass>
@@ -1160,9 +1142,6 @@
         <apexClass>batch_LeadChildAgeTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
     <classAccesses>
         <apexClass>batch_UpdateVolunteerLastEngage</apexClass>
         <enabled>false</enabled>
@@ -1183,7 +1162,6 @@
         <apexClass>batch_changeVolunOppSatus</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>batch_changeVolunOppSatus_Test</apexClass>
         <enabled>false</enabled>
