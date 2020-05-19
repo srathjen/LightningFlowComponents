@@ -76,9 +76,13 @@ public class batch_LeadChildAgeTest {
             WHERE Age_Requirement_Met__c = true
         ];
         System.assertEquals(0, leadsBeforeUpdateList.size());
-        batch_leadChildAge reminder = new batch_leadChildAge();
-        Database.executeBatch(reminder);
+        //Cron Expression setting at 13:00:00 every day
+        String cronExpression = '0 0 13 * * ?';
+        batch_LeadChildAgeSchedule reminder = new batch_LeadChildAgeSchedule();
+        String jobId = System.schedule('Lead Child Age Req', cronExpression, reminder);
+        reminder.execute(null);
         Test.stopTest();
+        
         Lead[] leadsUpdatedList = [
             SELECT Id, Age_Requirement_Met__c
             FROM Lead
@@ -87,6 +91,12 @@ public class batch_LeadChildAgeTest {
         //Assert that number of the leads that should have been updated have been updated
         System.assertEquals(true, leadsUpdatedList[0].Age_Requirement_Met__c);
         System.assertEquals(10, leadsUpdatedList.size());
+        CronTrigger ct = [
+            SELECT Id, CronExpression, TimesTriggered, NextFireTime
+            FROM CronTrigger
+            WHERE Id = :jobId
+        ];
+        System.assertEquals(cronExpression, ct.CronExpression);
     }
     
     @IsTest
@@ -111,22 +121,5 @@ public class batch_LeadChildAgeTest {
         ];
         //Assert that no leads should have been updated
         System.assertEquals(0, leadsUpdatedList.size());
-    }
-    
-    @IsTest
-    static void testBatchScheduler() {
-        Test.startTest();
-        //Cron Expression setting at 13:00:00 every day
-        String cronExpression = '0 0 13 * * ?';
-        batch_LeadChildAgeSchedule reminder = new batch_LeadChildAgeSchedule();
-        String jobId = System.schedule('Lead Child Age Req', cronExpression, reminder);
-        Test.stopTest();
-        CronTrigger ct = [
-            SELECT Id, CronExpression, TimesTriggered, NextFireTime
-            FROM CronTrigger
-            WHERE Id = :jobId
-        ];
-        System.assertEquals(cronExpression, ct.CronExpression);
-        System.assertEquals(0, ct.TimesTriggered);
     }
 }
