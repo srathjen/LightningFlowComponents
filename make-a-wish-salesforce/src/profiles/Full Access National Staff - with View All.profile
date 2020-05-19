@@ -95,26 +95,11 @@
         <apexClass>BroadcastTrigger_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>Broadcast_OnAfterInsertTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Broadcast_OnAfterUpdateTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Broadcast_OnBeforeInsertTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Broadcast_OnBeforeInsertTriggerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Broadcast_OnBeforeUpdateTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>CaseCommentTrigger_AT_Test</apexClass>
         <enabled>true</enabled>
@@ -304,6 +289,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>DiagnosisVerificationReminder_AC</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DiagnosisVerificationReminder_ACTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>DiagnosisVerification_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -367,14 +360,7 @@
         <apexClass>ForgotPasswordControllerTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>FutureHandler</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>FutureHandler_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>Hidden_ContactShareController_AC</apexClass>
         <enabled>false</enabled>
@@ -492,9 +478,9 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>LeadDuplicate_ACTest</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
+    <enabled>false</enabled>
+    <apexClass>LeadDuplicate_ACTest</apexClass>
+</classAccesses>
     <classAccesses>
         <apexClass>LeadFile_AT_Test</apexClass>
         <enabled>true</enabled>
@@ -547,14 +533,8 @@
         <apexClass>Mock_ResponseGenerator</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>MovetoHistorical</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>MovetoHistorical_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
     <classAccesses>
         <apexClass>MultiselectPicklistComponent_AC</apexClass>
         <enabled>true</enabled>
@@ -643,30 +623,12 @@
         <apexClass>RecursiveTriggerHandler</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>RelationshipOnAfterInsertTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>RelationshipOnAfterInsertTriggerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>RelationshipOnAfterUpdateTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>RelationshipOnAfterUpdateTriggerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>RelationshipOnBeforeDeleteTriggerHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>RelationshipOnBeforeDeleteTriggerHelper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
+    
+    
+    
     <classAccesses>
         <apexClass>Relationship_AT_Test</apexClass>
         <enabled>true</enabled>
@@ -771,10 +733,7 @@
         <apexClass>UpdateWishAssignmentBatchTest_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>UpdateWishFamily_AT_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>UserTrigger_AT_Test</apexClass>
         <enabled>true</enabled>
@@ -807,14 +766,7 @@
         <apexClass>VolunteerInterviewTask_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>VolunteerInterview_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>VolunteerInterview_ACTest</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>VolunteerJourneyService</apexClass>
         <enabled>false</enabled>
@@ -1063,18 +1015,9 @@
         <apexClass>batch_LeadChildAgeTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>batch_UpdatLastEduDate</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_UpdatLastEduDate_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_UpdatLastEduDateforVO</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
+    
+    
+    
     <classAccesses>
         <apexClass>batch_UpdateVolunteerLastEngage</apexClass>
         <enabled>true</enabled>
@@ -1093,10 +1036,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>batch_changeVolunOppSatus</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_changeVolunOppSatusSchedule_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
