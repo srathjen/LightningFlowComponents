@@ -1570,7 +1570,7 @@ Modification Log:
                                             if(this.value == 'Yes') {
                                                 $('.unplanned-admission').prop('hidden', false);
                                                 $(".unplanned-text").addClass("requiredField");
-                                            } else if(this.value == 'No') {
+                                            } else {
                                                 $('.unplanned-text').val("");
                                                 $(".unplanned-text").removeClass("requiredField");
                                                 $('.unplanned-admission').prop('hidden', true);
