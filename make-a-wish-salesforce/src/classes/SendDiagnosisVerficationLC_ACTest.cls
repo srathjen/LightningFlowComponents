@@ -1,9 +1,9 @@
-/***************************************************************************************************
-Author      : MST Solutions
-CreatedBy   : Vignesh SM
-Date        : 13/03/2018
-Description : Class contains test method for SendDiagnosisVerficationLC_AC.apxc component
-*****************************************************************************************************/
+/**
+ * Author      : MST Solutions
+ * CreatedBy   : Vignesh SM
+ * Date        : 13/03/2018
+ * Description : Class contains test method for SendDiagnosisVerficationLC_AC.apxc component
+ **/
 @IsTest
 public class SendDiagnosisVerficationLC_ACTest {
 
@@ -11,6 +11,8 @@ public class SendDiagnosisVerficationLC_ACTest {
 
     @TestSetup
     public static void setup() {
+        trac_TriggerHandlerBase.blockTrigger = true;
+
         List<Account> accounts = TestDataFactory.createAccount(1);
         Account account1 = accounts.get(0);
         account1.Name = 'Make-A-Wish Arizona';
@@ -32,22 +34,25 @@ public class SendDiagnosisVerficationLC_ACTest {
         lead.PD_ICD_Code__c = icdCode.Id;
         lead.Company = 'MAW';
         lead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
+        lead.Treating_Medical_Professional_Email__c = 'TestMed@test.org';
         insert lead;
+
+        trac_TriggerHandlerBase.blockTrigger = false;
     }
 
     @IsTest
-    static void getLeadInformation_test(){
+    static void getLeadInformation_test() {
         Lead lead = [
                 SELECT Id
                 FROM Lead
                 WHERE Name = 'Jack Smith'
         ];
-        Lead retreiveLead = SendDiagnosisVerficationLC_AC.getLeadInformation(lead.Id);
-        System.assertEquals(lead.Id, retreiveLead.Id);
+        Lead retrieveLead = SendDiagnosisVerficationLC_AC.getLeadInformation(lead.Id);
+        System.assertEquals(lead.Id, retrieveLead.Id);
     }
-    
+
     @IsTest
-    static void utilityMethods_test(){
+    static void utilityMethods_test() {
         Lead lead = [
                 SELECT Id
                 FROM Lead
@@ -56,11 +61,10 @@ public class SendDiagnosisVerficationLC_ACTest {
         SendDiagnosisVerficationLC_AC.resetDVMedicalSummary(lead.Id);
         SendDiagnosisVerficationLC_AC.findLeadDupe(lead.Id);
         SendDiagnosisVerficationLC_AC.findFamilyContactDupe(lead.Id);
-        System.assert(true);
     }
-    
+
     @IsTest
-    static void updateLead_test(){
+    static void updateLead_test() {
         Lead lead = [
                 SELECT Id
                 FROM Lead
