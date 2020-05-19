@@ -33,7 +33,7 @@ public with sharing class CommunitiesLandingControllerTest {
             returnPage = controller.forwardToStartPage();
         }
         Test.stopTest();
-        System.assert(String.valueOf(returnPage) == 'System.PageReference[/apex/volunteerlanding_vf]');
+        System.assert(String.valueOf(returnPage).contains('/apex/volunteerlanding_vf'));
     }
     
     @isTest
@@ -53,7 +53,7 @@ public with sharing class CommunitiesLandingControllerTest {
             returnPage = controller.forwardToStartPage();
         }
         Test.stopTest();
-        System.assert(String.valueOf(returnPage) == 'System.PageReference[https://mawa.com]');
+        System.assert(String.valueOf(returnPage).contains('https://mawa.com'));
     }
     
     @IsTest
@@ -71,7 +71,7 @@ public with sharing class CommunitiesLandingControllerTest {
             returnPage = controller.forwardToStartPage();
         }
         Test.stopTest();
-        System.assert(String.valueOf(returnPage) == 'System.PageReference[/apex/volunteerwelcomepage_vf]');
+        System.assert(String.valueOf(returnPage).contains('/apex/volunteerwelcomepage_vf'));
     }
     
     @IsTest
@@ -85,6 +85,6 @@ public with sharing class CommunitiesLandingControllerTest {
             returnPage = controller.forwardToStartPage();
         }
         Test.stopTest();
-        System.assert(String.valueOf(returnPage) == 'System.PageReference[/apex/communitieslogin]');
+        System.assert(String.valueOf(returnPage).contains('/apex/communitieslogin'));
     }
 }
