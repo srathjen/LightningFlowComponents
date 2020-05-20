@@ -22,11 +22,11 @@ public class UserService {
 			List<ContactShare> contactSharingList = new List<ContactShare>();
 
 			for (Contact currRec : [
-					SELECT
-							Id, MailingState, MailingPostalCode, MailingCity,
-							Account.Volunteer_Manager__c, HomePhone
-					FROM Contact
-					WHERE Id IN :prospectiveUserMap.keySet()
+				SELECT
+					Id, MailingState, MailingPostalCode, MailingCity,
+					Account.Volunteer_Manager__c, HomePhone
+				FROM Contact
+				WHERE Id IN :prospectiveUserMap.keySet()
 			]) {
 				if (prospectiveUserMap.containsKey(currRec.Id)) {
 					Contact updateContact = new Contact();
@@ -66,10 +66,10 @@ public class UserService {
 
 			// Updating the Affiliation Record status As Pending.
 			for (npe5__Affiliation__c currRec : [
-					SELECT Id, npe5__Status__c
-					FROM npe5__Affiliation__c
-					WHERE npe5__Contact__c IN :prospectiveUserMap.keySet()
-					AND npe5__Status__c = :Constant_AC.ORG_AFFILIATION_STATUS_CURRENT
+				SELECT Id, npe5__Status__c
+				FROM npe5__Affiliation__c
+				WHERE npe5__Contact__c IN :prospectiveUserMap.keySet()
+				AND npe5__Status__c = :Constant_AC.ORG_AFFILIATION_STATUS_CURRENT
 			]) {
 				npe5__Affiliation__c updateRec = new npe5__Affiliation__c();
 				updateRec.Id = currRec.Id;
@@ -112,9 +112,9 @@ public class UserService {
 			List<CollaborationGroupMember> chatterGroupMembersList = new List<CollaborationGroupMember>();
 
 			for (UserRole getUserRoleName : [
-					SELECT Id, Name
-					FROM UserRole
-					WHERE Id IN :newUserRoleIdMap.values()
+				SELECT Id, Name
+				FROM UserRole
+				WHERE Id IN :newUserRoleIdMap.values()
 			]) {
 				if (getUserRoleName.Name.contains(' - Chapter')) {
 					userRoleName.add(getUserRoleName.Name.remove(' - Chapter'));
@@ -124,9 +124,9 @@ public class UserService {
 
 			if (userRoleName.size() > 0) {
 				for (CollaborationGroup getgroupInfo : [
-						SELECT Id, Name
-						FROM CollaborationGroup
-						WHERE Name IN :userRoleName
+					SELECT Id, Name
+					FROM CollaborationGroup
+					WHERE Name IN :userRoleName
 				]) {
 					chatterGroupNameIdsMap.put(getgroupInfo.Name, getgroupInfo.Id);
 				}
@@ -150,9 +150,9 @@ public class UserService {
 			}
 		} catch (Exception ex) {
 			for (User currRec : [
-					SELECT Id, Name
-					FROM User
-					WHERE Id IN :newUserRoleIdMap.values()
+				SELECT Id, Name
+				FROM User
+				WHERE Id IN :newUserRoleIdMap.values()
 			]) {
 				ErrorMessage_AC.createdebugRec('User_OnAfterInsertHelper_AC', String.valueOf(currRec), String.valueOf(ex), 'AddInternalUserToChatterGroup', currRec.Id, ex.getStackTraceString() + '   ' + ex.getMessage(), 'Error');
 			}
@@ -177,9 +177,9 @@ public class UserService {
 			Map<String, Id> userRoleNameIdMap = new Map<String, Id>();
 
 			for (UserRole getUserRoleName : [
-					SELECT Id, Name
-					FROM UserRole
-					WHERE Id IN :oldUserRoleIdMap.values()
+				SELECT Id, Name
+				FROM UserRole
+				WHERE Id IN :oldUserRoleIdMap.values()
 			]) {
 				if (getUserRoleName.Name.contains(' - Chapter')) {
 					userRoleName.add(getUserRoleName.Name.remove(' - Chapter'));
@@ -190,17 +190,17 @@ public class UserService {
 			Map<Id, String> roleChapterMap = new Map<Id, String>();
 			if (userRoleName.size() > 0) {
 				for (CollaborationGroup getgroupInfo : [
-						SELECT Id, Name
-						FROM CollaborationGroup
-						WHERE Name IN :userRoleName
+					SELECT Id, Name
+					FROM CollaborationGroup
+					WHERE Name IN :userRoleName
 				]) {
 					roleChapterMap.put(getgroupInfo.Id, getgroupInfo.Name);
 				}
 
 				for (CollaborationGroupMember chatterInfo : [
-						SELECT Id, MemberId, CollaborationGroupId
-						FROM CollaborationGroupMember
-						WHERE MemberId IN :oldUserRoleIdMap.keySet()
+					SELECT Id, MemberId, CollaborationGroupId
+					FROM CollaborationGroupMember
+					WHERE MemberId IN :oldUserRoleIdMap.keySet()
 				]) {
 					if (userRoleNameIdMap.get(roleChapterMap.get(chatterInfo.CollaborationGroupId)) == oldUserRoleIdMap.get(chatterInfo.MemberId)) {
 						chatterGroupMembersList.add(chatterInfo);
@@ -217,9 +217,9 @@ public class UserService {
 			}
 		} catch (Exception ex) {
 			for (User currRec : [
-					SELECT Id, Name
-					FROM User
-					WHERE Id IN :oldUserRoleIdMap.values()
+				SELECT Id, Name
+				FROM User
+				WHERE Id IN :oldUserRoleIdMap.values()
 			]) {
 				ErrorMessage_AC.createdebugRec('User_OnAfterUpdateHelper_AC', String.valueOf(currRec), String.valueOf(ex), 'RemoveInternalUserToChatterGroup', currRec.Id, ex.getStackTraceString() + '   ' + ex.getMessage(), 'Error');
 			}
@@ -242,21 +242,21 @@ public class UserService {
 			Map<Id, String> caseTeamMemberMap = new Map<Id, String>();
 
 			for (CaseTeamMember dbCaseTeamMember : [
-					SELECT
-							Id, MemberId, Member.FirstName, Member.LastName,
-							ParentId, Parent.RecordTypeId, TeamRoleId, TeamRole.Name
-					FROM CaseTeamMember
-					WHERE TeamRole.Name = :Constant_AC.CASE_TEAM_ROLE_WISH_GRANTER
-					AND MemberId IN :inactiveUserIdSet
+				SELECT
+					Id, MemberId, Member.FirstName, Member.LastName,
+					ParentId, Parent.RecordTypeId, TeamRoleId, TeamRole.Name
+				FROM CaseTeamMember
+				WHERE TeamRole.Name = :Constant_AC.CASE_TEAM_ROLE_WISH_GRANTER
+				AND MemberId IN :inactiveUserIdSet
 			]) {
 				caseTeamMemberMap.put(dbCaseTeamMember.ParentId, dbCaseTeamMember.Member.FirstName + ' ' + dbCaseTeamMember.Member.LastName);
 			}
 
 			for (Case dbCase : [
-					SELECT Id, isEmailWishGranter__c, InActiveWishGranter__c
-					FROM Case
-					WHERE Id IN :caseTeamMemberMap.keySet()
-					AND IsClosed = FALSE
+				SELECT Id, isEmailWishGranter__c, InActiveWishGranter__c
+				FROM Case
+				WHERE Id IN :caseTeamMemberMap.keySet()
+				AND IsClosed = FALSE
 			]) {
 				dbCase.isEmailWishGranter__c = true;
 
@@ -276,9 +276,9 @@ public class UserService {
 			}
 		} catch (Exception ex) {
 			for (User currRec : [
-					SELECT Id, Name
-					FROM User
-					WHERE Id IN :inactiveUserIdSet
+				SELECT Id, Name
+				FROM User
+				WHERE Id IN :inactiveUserIdSet
 			]) {
 				ErrorMessage_AC.createdebugRec('User_OnAfterUpdateHelper_AC', String.valueOf(currRec), String.valueOf(ex), 'updateUser', currRec.Id, ex.getStackTraceString() + '   ' + ex.getMessage(), 'Error');
 			}
@@ -301,22 +301,22 @@ public class UserService {
 			Map<Id, User> contactUserMap = new Map<Id, User>();
 
 			for (User currUser : [
-					SELECT
-							Id, FirstName, LastName, Email, MobilePhone,
-							ContactId, Street, City, State, PostalCode, Country, Fax
-					FROM User
-					WHERE Id IN :contactIdMap.values()
+				SELECT
+					Id, FirstName, LastName, Email, MobilePhone,
+					ContactId, Street, City, State, PostalCode, Country, Fax
+				FROM User
+				WHERE Id IN :contactIdMap.values()
 			]) {
 				contactUserMap.put(currUser.ContactId, currUser);
 			}
 
 			List<Contact> updateContactList = new List<Contact>();
 			for (contact currRec : [
-					SELECT Id, FirstName, LastName, Email, MobilePhone,
-							MailingStreet, MailingCity, MailingState, MailingCountry,
-							MailingPostalCode, Fax
-					FROM Contact
-					WHERE Id IN :contactIdMap.keySet() AND Email != NULL
+				SELECT Id, FirstName, LastName, Email, MobilePhone,
+					MailingStreet, MailingCity, MailingState, MailingCountry,
+					MailingPostalCode, Fax
+				FROM Contact
+				WHERE Id IN :contactIdMap.keySet() AND Email != NULL
 			]) {
 				if (contactUserMap.containsKey(currRec.Id) && currRec.Email != contactUserMap.get(currRec.Id).Email) {
 					currRec.Email = contactUserMap.get(currRec.Id).Email;
@@ -355,15 +355,11 @@ public class UserService {
 			if (updateContactList.size() > 0) {
 				update updateContactList;
 			}
-
-			if (Test.isRunningTest()) {
-				throw new CommonTriggerException('Test Class execution');
-			}
 		} catch (Exception ex) {
 			for (User currRec : [
-					SELECT Id, FirstName, LastName, Email, MobilePhone, ContactId, Street, City, State, PostalCode, Country, Fax
-					FROM User
-					WHERE Id IN :contactIdMap.values()
+				SELECT Id, FirstName, LastName, Email, MobilePhone, ContactId, Street, City, State, PostalCode, Country, Fax
+				FROM User
+				WHERE Id IN :contactIdMap.values()
 			]) {
 				ErrorMessage_AC.createdebugRec('User_OnAfterUpdateHelper_AC', String.valueof(currRec), String.valueOf(ex), 'updateConatcEmail', currRec.Id, ex.getStackTraceString() + '   ' + ex.getMessage(), 'Error');
 			}
@@ -378,12 +374,12 @@ public class UserService {
 	public static Map<Id, Id> findByContactId(Set<Id> contactIds) {
 		Map<Id, Id> contactUserMap = new Map<Id, Id>();
 		for (User userInfo : [
-				SELECT Id, ContactId
-				FROM User
-				WHERE ContactId IN :contactIds
+			SELECT Id, ContactId
+			FROM User
+			WHERE ContactId IN :contactIds
 		]) {
 			contactUserMap.put(userInfo.Id, userInfo.ContactId);
 		}
-        return contactUserMap;
+		return contactUserMap;
 	}
 }

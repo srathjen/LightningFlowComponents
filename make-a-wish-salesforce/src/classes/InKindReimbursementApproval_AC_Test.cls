@@ -1,80 +1,78 @@
-/***************************************************************************************************
-Author      : MST Solutions
-CreatedBy   : Chandrasekar
-Date        : 4/10/2016
-Description : This class is used to make sure the unit test and functionality for the InKindDonationReimbursement_AT
-****************************************************************************************************/
-@isTest
+/**
+ * @description Author      : MST Solutions
+ * CreatedBy   : Chandrasekar
+ * Date        : 4/10/2016
+ * Description : This class is used to make sure the unit test and functionality for the InKindDonationReimbursement_AT
+ **/
+@IsTest
 public class InKindReimbursementApproval_AC_Test {
 
-	private final static Id wishRecordTypeId = Constant_AC.WISH_RT_ID;
+    private static final Id WISH_RECORD_TYPE_ID = Constant_AC.WISH_RT_ID;
+    private static final Id IN_KIND_RECORD_TYPE_ID = Constant_AC.IN_KIND_ID;
+    private static final Id REIMBURSEMENT_RECORD_TYPE_ID = Constant_AC.REIMBURSEMENT_ID;
 
-	//This method used to create a inkind type record for inkinddonorobject
-	static testMethod void callInkindApprovalMethods() {
-		Id inkindgRecordTypeId = Constant_AC.IN_KIND_ID;
-		Case parent = OrientationandTrainingUtil.createParentCase();
-		insert parent;
-		Contact cntid = OrientationandTrainingUtil.CreateWishChild();
-		insert cntid;
-		Case caseid = OrientationandTrainingUtil.createWishGrantCase(cntid.Id, parent.Id);
-		insert caseid;
-		Case cs = new Case();
-		cs.Id = caseid.Id;
-		cs.RecordTypeId = wishRecordTypeId;
-		update cs;
-		In_Kind_Donation_Reimbursement__c inKind2 = OrientationandTrainingUtil.CreateInkindRecord(caseid.Id);
-		insert inKind2;
-		System.assertEquals(inkindgRecordTypeId, inKind2.RecordTypeId, 'Check Inkind RecordType');
-		InKindReimbursementApproval_AC.submitApproval(inKind2.Id, 'In-Kind Donation');
-		inKind2.Documentation__c = 'Will Attach';
-		InKindReimbursementApproval_AC.submitApproval(inKind2.Id, 'In-Kind Donation');
-	}
+    private static final String IN_KIND_DONATION_RT_LABEL = Constant_AC.IN_KIND_DONATION_RT_LABEL;
+    private static final String IN_KIND_REIMBURSEMENT_RT_LABEL = Constant_AC.IN_KIND_REIMBURSEMENT_RT_LABEL;
 
-	//This method used to create a Inkind donor type record for inkinddonorobject without attachment.
-	static testMethod void callInkindApprovalWithoutAttachment() {
-		Id inkindgRecordTypeId = Constant_AC.IN_KIND_ID;
-		//   In_Kind_Donation_Reimbursement__c inKind = OrientationandTrainingUtil.CreateInkindRecordWithOutAttachment();
-		Case parent = OrientationandTrainingUtil.createParentCase();
-		insert parent;
-		Contact cntid = OrientationandTrainingUtil.CreateWishChild();
-		insert cntid;
-		Case caseid = OrientationandTrainingUtil.createWishGrantCase(cntid.Id, parent.Id);
-		insert caseid;
-		Case cs = new Case();
-		cs.Id = caseid.Id;
-		cs.RecordTypeId = wishRecordTypeId;
-		update cs;
-		In_Kind_Donation_Reimbursement__c inKind2 = OrientationandTrainingUtil.CreateInkindRecord(caseid.Id);
-		insert inKind2;
-		System.assertEquals(inkindgRecordTypeId, inKind2.RecordTypeId, 'Check Inkind RecordType');
-		InKindReimbursementApproval_AC.submitApproval(inKind2.Id, 'In-Kind Donation');
-	}
+    @TestSetup
+    private static void setup() {
+        Account parentAccount = TestDataFactory.createChapterAccount(1)[0];
+        insert parentAccount;
 
-	//This method used to create a reimbursement type record for inkinddonorobject
-	static testMethod void callReimbursementApprovalMethods() {
-		Case parent = OrientationandTrainingUtil.createParentCase();
-		insert parent;
-		Contact cntid = OrientationandTrainingUtil.CreateWishChild();
-		insert cntid;
-		Case caseid = OrientationandTrainingUtil.createWishGrantCase(cntid.Id, parent.Id);
-		insert caseid;
-		Case cs = new Case();
-		cs.Id = caseid.Id;
-		cs.RecordTypeId = wishRecordTypeId;
-		update cs;
-		Id reEmbRT = Constant_AC.REIMBURSEMENT_ID;
-		In_Kind_Donation_Reimbursement__c reimbursement = OrientationandTrainingUtil.CreateReimbursRecordWithCase(caseid.Id);
-		insert reimbursement;
-		System.assertEquals(reEmbRT, reimbursement.RecordTypeId, 'Check Reimbursement RecordType');
-		InKindReimbursementApproval_AC.submitApproval(reimbursement.Id, 'Reimbursement');
-	}
+        Contact wishChild = TestDataFactory.createContact(1)[0];
+        wishChild.RecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
+        insert wishChild;
 
-	//This method used to create a reimbursement type record for inkinddonorobject without Attaachement.
-	static testMethod void callReimbursementApprovalWithoutAttachment() {
-		Id reEmbRT = Constant_AC.REIMBURSEMENT_ID;
-		In_Kind_Donation_Reimbursement__c reimbursement = OrientationandTrainingUtil.CreateReimbursRecordWithOutAttachment();
-		insert reimbursement;
-		System.assertEquals(reEmbRT, reimbursement.RecordTypeId, 'Check Reimbursement RecordType');
-		InKindReimbursementApproval_AC.submitApproval(reimbursement.Id, 'Reimbursement');
-	}
+        Case wishCase = TestDataFactory.createCase(1)[0];
+        wishCase.RecordTypeId = WISH_RECORD_TYPE_ID;
+        wishCase.ChapterName__c = parentAccount.Id;
+        wishCase.ContactId = wishChild.Id;
+        insert wishCase;
+    }
+
+    @IsTest
+    static void callInkindApprovalMethods() {
+        In_Kind_Donation_Reimbursement__c inKind2 = createInKindDonationReimbursement(getTestCase().Id);
+        inKind2.Documentation__c = InKindReimbursementApproval_AC.DOCUMENTATION_NOT_AVAILABLE;
+        inKind2.RecordTypeId = IN_KIND_RECORD_TYPE_ID;
+        insert inKind2;
+        System.assertEquals(IN_KIND_RECORD_TYPE_ID, inKind2.RecordTypeId);
+        InKindReimbursementApproval_AC.submitApproval(inKind2.Id, IN_KIND_DONATION_RT_LABEL);
+        inKind2.Documentation__c = InKindReimbursementApproval_AC.DOCUMENTATION_WILL_ATTACH;
+        InKindReimbursementApproval_AC.submitApproval(inKind2.Id, IN_KIND_DONATION_RT_LABEL);
+    }
+
+    @IsTest
+    static void callReimbursementApprovalMethods() {
+        In_Kind_Donation_Reimbursement__c reimbursement = createInKindDonationReimbursement(getTestCase().Id);
+        reimbursement.Documentation__c = InKindReimbursementApproval_AC.DOCUMENTATION_NOT_AVAILABLE;
+        reimbursement.RecordTypeId = REIMBURSEMENT_RECORD_TYPE_ID;
+        insert reimbursement;
+        System.assertEquals(REIMBURSEMENT_RECORD_TYPE_ID, reimbursement.RecordTypeId);
+        InKindReimbursementApproval_AC.submitApproval(reimbursement.Id, IN_KIND_REIMBURSEMENT_RT_LABEL);
+    }
+
+    @IsTest
+    static void callReimbursementApprovalWithoutAttachment() {
+        In_Kind_Donation_Reimbursement__c reimbursement = createInKindDonationReimbursement(getTestCase().Id);
+        reimbursement.RecordTypeId = REIMBURSEMENT_RECORD_TYPE_ID;
+        reimbursement.Documentation__c = InKindReimbursementApproval_AC.DOCUMENTATION_WILL_ATTACH;
+        insert reimbursement;
+        System.assertEquals(REIMBURSEMENT_RECORD_TYPE_ID, reimbursement.RecordTypeId);
+        InKindReimbursementApproval_AC.submitApproval(reimbursement.Id, IN_KIND_REIMBURSEMENT_RT_LABEL);
+    }
+
+    private static Case getTestCase() {
+        return [
+                SELECT Id
+                FROM Case
+                WHERE RecordTypeId = :WISH_RECORD_TYPE_ID
+        ];
+    }
+
+    private static In_Kind_Donation_Reimbursement__c createInKindDonationReimbursement(Id wishId) {
+        In_Kind_Donation_Reimbursement__c inKind2 = TestDataFactory.createInKindDonationReimbursement(1)[0];
+        inKind2.Wish__c = wishId;
+        return inKind2;
+    }
 }
