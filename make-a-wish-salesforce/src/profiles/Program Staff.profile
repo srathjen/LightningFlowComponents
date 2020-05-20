@@ -19,7 +19,6 @@
         <apexClass>AccountFileServiceTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>AccountService</apexClass>
         <enabled>false</enabled>
@@ -120,11 +119,6 @@
         <apexClass>BroadcastTrigger_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>CaseCommentTrigger_AT_Test</apexClass>
         <enabled>true</enabled>
@@ -385,8 +379,6 @@
         <apexClass>ForgotPasswordControllerTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>Hidden_ContactShareController_AC</apexClass>
         <enabled>false</enabled>
@@ -559,8 +551,6 @@
         <apexClass>Mock_ResponseGenerator</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>MultiselectPicklistComponent_AC</apexClass>
         <enabled>true</enabled>
@@ -649,12 +639,6 @@
         <apexClass>RecursiveTriggerHandler</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>Relationship_AT_Test</apexClass>
         <enabled>true</enabled>
@@ -731,7 +715,6 @@
         <apexClass>TestDataUtility_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>TimeSheetTrigger_AT_Test</apexClass>
         <enabled>true</enabled>
@@ -760,7 +743,6 @@
         <apexClass>UpdateWishAssignmentBatchTest_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>UserTrigger_AT_Test</apexClass>
         <enabled>true</enabled>
@@ -793,8 +775,6 @@
         <apexClass>VolunteerInterviewTask_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>VolunteerJourneyService</apexClass>
         <enabled>false</enabled>
@@ -888,9 +868,9 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>WishAffiliationDesign_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
+    <enabled>false</enabled>
+    <apexClass>WishAffiliationDesign_AC</apexClass>
+</classAccesses>
     <classAccesses>
         <apexClass>WishAffiliationDesign_AC_Test</apexClass>
         <enabled>false</enabled>
@@ -1047,10 +1027,6 @@
         <apexClass>batch_LeadChildAgeTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
     <classAccesses>
         <apexClass>batch_UpdateVolunteerLastEngage</apexClass>
         <enabled>true</enabled>
