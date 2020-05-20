@@ -36,12 +36,15 @@ public class BackgroundCheckService {
      * @return
      */
     public static List<Background_check__c> updateHiddenEmailAndOwner(Set<Id> volunteerIds, List<Background_check__c> newBackgroundChecksList) {
+        if(volunteerIds.isEmpty()) {
+            return newBackgroundChecksList;
+        }
         Map<Id, Contact> volunteerMap = new Map<Id, Contact>([
-                SELECT Id, OwnerId, Email
-                FROM Contact
-                WHERE Id IN :volunteerIds
+            SELECT Id, OwnerId, Email
+            FROM Contact
+            WHERE Id IN :volunteerIds
         ]);
-
+        
         for (Background_check__c backgroundCheck : newBackgroundChecksList) {
             if (volunteerMap.containsKey(backgroundCheck.Volunteer__c)) {
                 backgroundCheck.Hidden_Volunteer_Contact_Email__c = volunteerMap.get(backgroundCheck.Volunteer__c).Email;
@@ -73,23 +76,23 @@ public class BackgroundCheckService {
      * @param backgroundCheckVolunteersMap
      */
     public static void deactivateBackgroundCheck(Map<Id, Id> backgroundCheckVolunteersMap) {
-        List<Background_check__c> deactivateBackgroundChecks = new List<Background_check__c>();
-        for (Background_check__c existingBackgroundChecks : [
-                SELECT Id, Current__c
-                FROM Background_check__c
-                WHERE Current__c = TRUE
-                AND Id NOT IN :backgroundCheckVolunteersMap.keySet()
-                AND Volunteer__c IN :backgroundCheckVolunteersMap.values()
-        ]) {
-            existingBackgroundChecks.Current__c = false;
-            deactivateBackgroundChecks.add(existingBackgroundChecks);
+        if(backgroundCheckVolunteersMap.isEmpty()) {
+            return;
         }
-        if (!deactivateBackgroundChecks.isEmpty()) {
-            try {
-                update deactivateBackgroundChecks;
-            } catch (Exception e) {
-                createBackgroundCheckDebugLog(deactivateBackgroundChecks, 'deactivateBackgroundCheck', e);
-            }
+        List<Background_check__c> deactivateBackgroundChecks = [
+            SELECT Id, Current__c
+            FROM Background_check__c
+            WHERE Current__c = true
+            AND Id NOT IN :backgroundCheckVolunteersMap.keySet()
+            AND Volunteer__c IN :backgroundCheckVolunteersMap.values()
+        ];
+        for (Background_check__c existingBackgroundChecks : deactivateBackgroundChecks) {
+            existingBackgroundChecks.Current__c = false;
+        }
+        try {
+            update deactivateBackgroundChecks;
+        } catch (Exception e) {
+            createBackgroundCheckDebugLog(deactivateBackgroundChecks, 'deactivateBackgroundCheck', e);
         }
     }
 
@@ -189,6 +192,9 @@ public class BackgroundCheckService {
      * @param newBackgroundChecksList
      */
     public static void updateVolunteerRoleStatus(Set<Id> approvedVolunteerIds, List<Background_check__c> newBackgroundChecksList) {
+        if(approvedVolunteerIds.isEmpty()) {
+            return;
+        }
         Map<Id, Conflict_Of_Interest__c> conflictOfInterestMap = new Map<Id, Conflict_Of_Interest__c>();
         List<Volunteer_Roles__c> updateVolunteerRoleList = new List<Volunteer_Roles__c>();
 
@@ -296,6 +302,9 @@ public class BackgroundCheckService {
      * @param exceptionList
      */
     public static void updateVolunteerRoleHiddenStatus(Set<Id> volunteerIds, String objectName, List<SObject> exceptionList) {
+        if(volunteerIds.isEmpty()) {
+            return;
+        }
         List<Volunteer_Roles__c> updateVolunteerRoleList = new List<Volunteer_Roles__c>();
         for (Volunteer_Roles__c volRole : [
                 SELECT Id, Volunteer_Name__c, Hidden_Previous_Sub_Status__c, Hidden_Previous_Status__c,
@@ -307,13 +316,8 @@ public class BackgroundCheckService {
                 AND Status__c != :VOLUNTEER_ROLE_STATUS_FORMER
                 AND Status__c != :VOLUNTEER_ROLE_STATUS_NOT_APPROVED
         ]) {
-            if (objectName == 'backgroundcheck'
-                    && volRole.Chapter_Role__r.Background_Check_Required__c) {
-                volRole.Hidden_Previous_Status__c = volRole.Status__c;
-                volRole.Hidden_Previous_Sub_Status__c = volRole.Sub_status__c;
-                volRole.Status__c = VOLUNTEER_ROLE_STATUS_OUT_OF_COMPLIANCE;
-            } else if (objectName == 'COI'
-                    && volRole.Chapter_Role__r.COI_Required__c) {
+            if ((objectName == 'backgroundcheck' && volRole.Chapter_Role__r.Background_Check_Required__c)
+                    || (objectName == 'COI' && volRole.Chapter_Role__r.COI_Required__c)) {
                 volRole.Hidden_Previous_Status__c = volRole.Status__c;
                 volRole.Hidden_Previous_Sub_Status__c = volRole.Sub_status__c;
                 volRole.Status__c = VOLUNTEER_ROLE_STATUS_OUT_OF_COMPLIANCE;

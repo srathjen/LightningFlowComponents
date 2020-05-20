@@ -107,6 +107,7 @@
     <members>Inkind_Donation_PDFs__c</members>
     <members>Lead</members>
     <members>Wish_Budget_Approver_Filter__c</members>
+    <members>Wish_Required_Signature_File__c</members>
     <members>WishReferralForm_Translation__mdt</members>
     <name>CustomObject</name>
   </types>
@@ -264,17 +265,17 @@
     <name>Profile</name>
   </types>
   <types>
-    <members>Case.DatesP1</members>
-    <members>Case.Wish_Timing</members>
-    <name>QuickAction</name>
-  </types>  
-  <types>
     <members>Wish_Referral_Form_Spanish_Profile_profilePasswordPolicy1588954219544</members>
     <name>ProfilePasswordPolicy</name>
   </types>
   <types>
     <members>Wish_Referral_Form_Spanish_Profile_profileSessionSetting1588954219684</members>
     <name>ProfileSessionSetting</name>
+  </types>
+  <types>
+    <members>Case.DatesP1</members>
+    <members>Case.Wish_Timing</members>
+    <name>QuickAction</name>
   </types>
   <types>
     <members>Chatter</members>

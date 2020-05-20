@@ -234,6 +234,7 @@ public class TestDataFactory {
     public static List<User> createVolunteerUser(Integer num){
         return createVolunteerUser(num, 'Active Volunteer (Member)', 'Manager');
     }
+  
     public static List<User> createVolunteerUser(Integer num, String profileName, String portalRole) {
         // Must run as admin to create community user
         List<User> users = createUser(num);
@@ -269,7 +270,25 @@ public class TestDataFactory {
         }
         return users;
     }
-
+  
+    public static List<User> createIntegrationUser(Integer num, String profileName, String portalRole) {
+        // Must run as admin to create integration user
+        List<User> users = createUser(num);
+        System.runAs(adminUser) {
+            Profile profile = [
+                    SELECT Id,Name
+                    FROM Profile
+                    WHERE Name = :profileName
+                    LIMIT 1
+            ];
+            for (Integer i = 0; i < num; i++) {
+                User u = users[i];
+                u.ProfileId = profile.Id;
+            }
+        }
+        return users;
+    }
+  
     public static List<Wish_Budget__c> createWishBudget(Integer num, Id caseId) {
         List<Wish_Budget__c> wishBudgets = new List<Wish_Budget__c>();
         for (Integer i = 0; i < num; i++) {

@@ -72,10 +72,10 @@ public class CaseDomain extends trac_TriggerHandlerBase {
     };
 
     /*
-     * @description		OnBeforeInsert trigger handler for the Case object
+     * @description     OnBeforeInsert trigger handler for the Case object
      *
-     * @author 			MST Solutions
-     * @createdDate		2018-03-23
+     * @author          MST Solutions
+     * @createdDate     2018-03-23
      */
     public override void handleBeforeInsert() {
         Set<Id> wishOwnerIdSet = new Set<Id>();
@@ -121,10 +121,10 @@ public class CaseDomain extends trac_TriggerHandlerBase {
     }
 
     /*
-     * @description		OnBeforeUpdate trigger handler for the Case object
+     * @description     OnBeforeUpdate trigger handler for the Case object
      *
-     * @author 			MST Solutions
-     * @createdDate		2018-03-23
+     * @author          MST Solutions
+     * @createdDate     2018-03-23
      */
     public override void handleBeforeUpdate() {
         // During code cleanup, RecursiveTrigger.blockBeforeUpdate was found to manage BEFORE UPDATE
@@ -146,10 +146,9 @@ public class CaseDomain extends trac_TriggerHandlerBase {
         ];
 
         for (Case currentCase : newCasesMap.values()) {
-            /* Disabled temporarily for Bunsen release. See SIW-490 in Jira.
-            if (CaseValidations.beforeUpdateValidations(currentCase, oldCasesMap.get(currentCase.Id))) {
+            if (!CaseValidations.beforeUpdateValidations(currentCase, oldCasesMap.get(currentCase.Id))) {
                 continue;
-            } */
+            } 
 
             if (WISH_OWNER_CHECK_RECORD_TYPE_IDS.contains(currentCase.RecordTypeId)) {
                 if (currentCase.Comment_1__c != null && oldCasesMap.get(currentCase.Id).Comment_1__c != currentCase.Comment_1__c) {
@@ -302,10 +301,10 @@ public class CaseDomain extends trac_TriggerHandlerBase {
     }
 
     /*
-     * @description		OnAfterInsert trigger handler for the Case object
+     * @description     OnAfterInsert trigger handler for the Case object
      *
-     * @author 			MST Solutions
-     * @createdDate		2016-05-26
+     * @author          MST Solutions
+     * @createdDate     2016-05-26
      */
     public override void handleAfterInsert() {
         CaseService.updateWishRecordIdentifier(newCasesList);
@@ -315,10 +314,10 @@ public class CaseDomain extends trac_TriggerHandlerBase {
     }
 
     /*
-     * @description		OnAfterUpdate trigger handler for the Case object
+     * @description     OnAfterUpdate trigger handler for the Case object
      *
-     * @author 			MST Solutions
-     * @createdDate		2018-03-26
+     * @author          MST Solutions
+     * @createdDate     2018-03-26
      */
     public override void handleAfterUpdate() {
         // During code cleanup, RecursiveTrigger.blockBeforeUpdate was found to manage BEFORE UPDATE

@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?><PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <hasActivationRequired>false</hasActivationRequired>
     <label>Form Tracker Access permission</label>
-    <classAccesses>
-        <apexClass>FormTrackerAttachment_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
     <pageAccesses>
         <apexPage>FormTrackerAttachment_VF</apexPage>
         <enabled>true</enabled>

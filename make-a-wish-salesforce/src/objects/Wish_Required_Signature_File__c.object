@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -194,14 +193,14 @@
     <fields>
         <fullName>File_Size__c</fullName>
         <externalId>false</externalId>
-        <formula>IF(!(ISBLANK(Shortcut__c )), RIGHT(Shortcut__c, (LEN(Shortcut__c) - FIND(&apos;:&apos;, Shortcut__c))), 
+        <formula>IF(!(ISBLANK(Shortcut__c )), RIGHT(Shortcut__c, (LEN(Shortcut__c) - FIND(':', Shortcut__c))), 
 IF(File_Size_in_Bytes__c &gt; 1024, 
 IF(File_Size_in_Bytes__c &gt; 1048576, 
 IF(File_Size_in_Bytes__c &gt; 1073741824, 
-TEXT(ROUND((File_Size_in_Bytes__c /1073741824),2)) &amp; &quot; GB&quot;, 
-TEXT(ROUND((File_Size_in_Bytes__c /1048576),2)) &amp; &quot; MB&quot;), 
-TEXT(ROUND((File_Size_in_Bytes__c /1024),2)) &amp; &quot; KB&quot;), 
-TEXT(File_Size_in_Bytes__c) &amp; &quot; bytes&quot;))</formula>
+TEXT(ROUND((File_Size_in_Bytes__c /1073741824),2)) &amp; " GB", 
+TEXT(ROUND((File_Size_in_Bytes__c /1048576),2)) &amp; " MB"), 
+TEXT(ROUND((File_Size_in_Bytes__c /1024),2)) &amp; " KB"), 
+TEXT(File_Size_in_Bytes__c) &amp; " bytes"))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>File Size</label>
         <required>false</required>
@@ -381,16 +380,16 @@ TEXT(File_Size_in_Bytes__c) &amp; &quot; bytes&quot;))</formula>
         <type>Checkbox</type>
     </fields>
     <fields>
-	<fullName>Sync_Id__c</fullName>
-    <description>SIW-355 Required for SDrive File Sync</description>
-    <externalId>false</externalId>
-    <label>Sync Id</label>
-    <length>255</length>
-    <required>false</required>
-    <trackTrending>false</trackTrending>
-    <type>Text</type>
-    <unique>false</unique>
-	</fields>
+        <fullName>Sync_Id__c</fullName>
+        <description>Required for SDrive File Sync</description>
+        <externalId>false</externalId>
+        <label>Sync Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
     <fields>
         <fullName>Wish_Required_Signature__c</fullName>
         <externalId>false</externalId>
@@ -411,7 +410,7 @@ TEXT(File_Size_in_Bytes__c) &amp; &quot; bytes&quot;))</formula>
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Wish Required Signature Files</pluralLabel>
-    <searchLayouts/>
+    <searchLayouts />
     <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

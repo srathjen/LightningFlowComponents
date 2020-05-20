@@ -242,16 +242,7 @@ label.error{
 <apex:pagemessages id="msg"/>
 <apex:inputText value="{!refChildFormParent}" id="childToParent" styleClass="chid-value" style="display:none" />
 <legend>{!formLabels.Relationship_to_child__c}</legend>
-<div class="row" style="margin-bottom:2rem" >
 
-<div class="form-group r2c mySelect23 radioClickable radioSection" hidden="hidden">
-<!--<apex:actionRegion >-->
-    <apex:selectRadio value="{!currLead.Relationship_to_child__c}" id="relationToChild" layout="pageDirection" onchange="changeRelationship(this.id, this.value)" >
-        <apex:selectOptions value="{!Relationships}"/>
-    </apex:selectRadio>
-    <!--  </apex:actionRegion>-->
-</div>
-</div>
 <div class="form-group row">
     <label class="col-sm-3">{!formLabels.Is_the_family_aware_of_the_referral__c}</label>
     <div class="col-sm-6">
@@ -487,7 +478,7 @@ label.error{
             <div class="form-group row">
                 <div class="col-sm-3"><label aria-labelledby="email address">{!formLabels.Email_Address__c}</label></div>
                 <div class="col-sm-6">
-                    <apex:inputText value="{!currLead.Email}" styleClass="form-control pemailaddress pemailaddress1 email-std" id="pemailaddress" maxlength="50" html-placeholder="sucorreo_electronico@dominio.com"  />
+                    <apex:inputText value="{!currLead.Email}" styleClass="form-control pemailaddress pemailaddress1 email-std" id="pemailaddress" maxlength="50" html-placeholder="sucorreo_electrónico@dominio.com"  />
                 </div>
             </div>
             <div class="form-group row">
@@ -515,7 +506,7 @@ label.error{
             <div class="form-group row" id="otherlanguagediv" style="display:none;">
                     <div class="col-sm-3"><label aria-labelledby="other language">{!formLabels.Other_Language__c}</label></div>
                     <div class="col-sm-6">
-                        <apex:inputText value="{!currLead.OtherLanguage__c}" styleClass="form-control alpha-only otherlanguageclass" html-placeholder="Please enter other language" id="otherlanguage" />
+                        <apex:inputText value="{!currLead.OtherLanguage__c}" styleClass="form-control alpha-only otherlanguageclass" html-placeholder="Por favor, introduzca otro idioma" id="otherlanguage" />
                     </div>
                 </div>
             
@@ -631,7 +622,7 @@ label.error{
             <div class="form-group row">
                 <div class="col-sm-3"><label aria-labelledby="email address">{!formLabels.Email_Address__c}</label></div>
                 <div class="col-sm-6">
-                    <apex:inputText value="{!currLead.Additional_Parent_Email__c}" styleClass="form-control pemailaddress email-std" id="pemailaddress2" maxlength="50" html-placeholder="sucorreo_electronico@dominio.com"  />
+                    <apex:inputText value="{!currLead.Additional_Parent_Email__c}" styleClass="form-control pemailaddress email-std" id="pemailaddress2" maxlength="50" html-placeholder="sucorreo_electrónico@dominio.com"  />
                 </div>
             </div>
             <div class="form-group row">
@@ -825,7 +816,7 @@ label.error{
             <p class="text-center">{!formLabels.Thank_you_for_submitting_a_referral__c}</p>
             <div class="text-center">
                 <button type="button" onClick="window.location.href=document.referrer" class="btn-md m-r-1" aria-label="Enviar otra referencia"><span aria-hidden="true">Enviar otra referencia</span></button>
-                <button type="button" onclick="window.parent.postMessage('home', '*');" class="btn-md" aria-label="Volver al sitio de inicio"><span aria-hidden="true">Volver al sitio de inicio</span></button>
+                <button type="button" onclick="window.open('https://wish.org/en-espa%C3%B1ol','_self')" class="btn-md" aria-label="Volver al sitio de inicio"><span aria-hidden="true">Volver al sitio de inicio</span></button>
             </div>
         </div>
     </apex:outputpanel>
@@ -963,19 +954,7 @@ $(document).ready(function() {
 <script>_satellite.pageBottom();</script>
 </apex:outputPanel>
 
-<script>
-    function changeRelationship(ref, val){
-        var prefix = ref.split('relationToChild')[0];
-        //alert(document.getElementsByClassName('remail')[0].id);
-        if(val == 'Medical Professional'){
-            document.getElementById('remaildiv').style.display = '';
-            document.getElementById('remail1div').style.display = 'none';
-        }
-        else{
-            document.getElementById('remaildiv').style.display = 'none';
-            document.getElementById('remail1div').style.display = '';
-        }
-    }
+<script>  
     function getInputValue(){   
                 //setTimeout(timeFunction, 3000);
                 // Selecting the input element and get its value document.querySelector('.searchField').value;  

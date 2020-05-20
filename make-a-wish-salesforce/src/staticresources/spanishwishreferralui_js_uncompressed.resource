@@ -283,7 +283,7 @@ function formValidationRules() {
             minlength: 3,
             maxlength: 22,
             messages: {
-                required: "Por favor, introduzca una ciudad de EE. UU",
+                required: "Por favor, introduzca una ciudad de EE. UU.",
                 minlength: "Por Favor introduzca al menos 3 caracteres",
                 maxlength: "Lo sentimos, ha alcanzado el máximo de caracteres permitidos"
             }
@@ -295,7 +295,7 @@ function formValidationRules() {
             minlength: 5,
             maxlength: 9,
             messages: {
-                required: "Introduzca un código postal válido de EE. UU",
+                required: "Intorduzca un código postal válido de EE. UU.",
                 digits: "Por favor solo introduzca dígitos",
                 minlength: "Por favor introduzca un mínimo de 5 dígitos",
                 maxlength: "Lo sentimos, ha alcanzado el máximo de caracteres permitidos"
@@ -308,7 +308,7 @@ function formValidationRules() {
             minlength: 5,
             maxlength: 10,
             messages: {
-                required: "Introduzca un código postal válido de EE. UU",
+                required: "Intorduzca un código postal válido de EE. UU.",
                 minlength: "Por favor introduzca un mínimo de 5 dígitos",
                 maxlength: "Lo sentimos, ha alcanzado el máximo de caracteres permitidos"
             }
@@ -516,3 +516,4 @@ $("[id$=wcdob]").removeAttr("onfocus").mask("99/99/9999", {
             }).addClass("disabled").prop("disabled", !0), void form.submit()
         }
     }), $(".r2c").children("label").children("input").addClass("r2c-radio"), $("[id$=p-r2c-1]").addClass("r2c-select"), $("[id$=wcage]").addClass("r2c-select"), $("[id$=plang").addClass("language"), formValidationRules();
+    
