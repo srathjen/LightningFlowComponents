@@ -109,16 +109,16 @@ public class UserDomain extends trac_TriggerHandlerBase {
 
                 if ((newUser.ContactId != null) &&
                     ((newUser.FirstName != null && oldUsersMap.get(newUser.Id).FirstName != newUser.FirstName) ||
-                    (newUser.LastName != null && oldUsersMap.get(newUser.Id).LastName != newUser.LastName) ||
-                    (newUser.MobilePhone != null && oldUsersMap.get(newUser.Id).MobilePhone != newUser.MobilePhone) ||
-                    (newUser.Email != null && oldUsersMap.get(newUser.Id).Email != newUser.Email) ||
-                    (newUser.Street != null && oldUsersMap.get(newUser.Id).Street != newUser.Street) ||
-                    (newUser.City != null && oldUsersMap.get(newUser.Id).City != newUser.City) ||
-                    (newUser.State != null && oldUsersMap.get(newUser.Id).State != newUser.State) ||
-                    (newUser.PostalCode != null && oldUsersMap.get(newUser.Id).PostalCode != newUser.PostalCode) ||
-                    (newUser.Country != null && oldUsersMap.get(newUser.Id).Country != newUser.Country) ||
-                    (newUser.Fax != null && oldUsersMap.get(newUser.Id).Fax != newUser.Fax))
-                ) {
+                        (newUser.LastName != null && oldUsersMap.get(newUser.Id).LastName != newUser.LastName) ||
+                        (newUser.MobilePhone != null && oldUsersMap.get(newUser.Id).MobilePhone != newUser.MobilePhone) ||
+                        (newUser.Email != null && oldUsersMap.get(newUser.Id).Email != newUser.Email) ||
+                        (newUser.Street != null && oldUsersMap.get(newUser.Id).Street != newUser.Street) ||
+                        (newUser.City != null && oldUsersMap.get(newUser.Id).City != newUser.City) ||
+                        (newUser.State != null && oldUsersMap.get(newUser.Id).State != newUser.State) ||
+                        (newUser.PostalCode != null && oldUsersMap.get(newUser.Id).PostalCode != newUser.PostalCode) ||
+                        (newUser.Country != null && oldUsersMap.get(newUser.Id).Country != newUser.Country) ||
+                        (newUser.Fax != null && oldUsersMap.get(newUser.Id).Fax != newUser.Fax))
+                    ) {
                     contactUserIdMap.put(newUser.ContactId, newUser.Id);
                 }
 
