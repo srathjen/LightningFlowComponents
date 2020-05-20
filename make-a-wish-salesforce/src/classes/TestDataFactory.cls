@@ -12,7 +12,7 @@ public class TestDataFactory {
         get {
             if (adminUser == null) {
                 adminUser = [
-                        SELECT Id
+                        SELECT Id, ProfileId
                         FROM User
                         WHERE Profile.Name = :Constant_AC.PROFILE_SYSTEM_ADMINISTRATOR AND UserRole.Name != NULL AND UserRole.Name != :Constant_AC.USER_ROLE_CUSTOMER_PORTAL
                         AND IsActive = TRUE AND Id != :UserInfo.getUserId()
@@ -249,6 +249,7 @@ public class TestDataFactory {
             for (Integer i = 0; i < num; i++) {
                 contacts[i].AccountId = accounts[i].Id;
                 contacts[i].RecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
+                contacts[i].Email = 'test_volunteer_user' + String.valueOf(i) + '@maw.org.test';
             }
             insert contacts;
 
@@ -785,5 +786,23 @@ public class TestDataFactory {
             caseTeamMembers.add(caseTeamMember);
         }
         return caseTeamMembers;
+    }
+
+    public static List<CollaborationGroup> createCollaborationGroup(Integer num) {
+        List<CollaborationGroup> collaborationGroups = new List<CollaborationGroup>();
+        for (Integer i = 0; i < num; i++) {
+            CollaborationGroup collaborationGroup = new CollaborationGroup();
+            collaborationGroups.add(collaborationGroup);
+        }
+        return collaborationGroups;
+    }
+
+    public static List<UserRole> createUserRole(Integer num) {
+        List<UserRole> userRoles = new List<UserRole>();
+        for (Integer i = 0; i < num; i++) {
+            UserRole userRole = new UserRole();
+            userRoles.add(userRole);
+        }
+        return userRoles;
     }
 }
