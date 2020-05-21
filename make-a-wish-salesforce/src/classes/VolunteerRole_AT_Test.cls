@@ -1,126 +1,95 @@
-/*--*****************************************************************************************************************
-Author      : MST Solutions
-Date        : 7/18/2016
-Description : This test class used for unit test and code coverage
-Modification Log: 
-28/03/2018 - Kanagaraj
-*******************************************************************************************************************/
-@isTest
-public class VolunteerRole_AT_Test {
-
-	private final static String VOLUNTEER_ROLE_STATUS_ACTIVE = Constant_AC.VOLUNTEER_ROLE_STATUS_ACTIVE;
-
+/**
+ * @description 	Test class for Volunteer Role (Volunteer_Roles__c) trigger, domain and service classes.
+ * @author 			MST Solutions
+ * @createdDate		2016-07-18
+ */
+@IsTest
+private class VolunteerRole_AT_Test {
 	@TestSetup
-	private static void setup() {
-		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
-		insert acc;
+	static void setup() {
+		trac_TriggerHandlerBase.blockTrigger = true;
 
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
-		insert con;
+		List<Account> accounts = TestDataFactory.createAccount(1);
+		accounts[0].Name = Constant_AC.ACCOUNT_NAME_MAW_ALABAMA;
+		accounts[0].RecordTypeId = Constant_AC.CHAPTER_RT_ID;
+		accounts[0].Volunteer_Manager__c = Utils.currentUser.Id;
+		accounts[0].Alert_for_Unassigned_Wishes__c = 1;
+		insert accounts;
 
-		insert OrientationandTrainingUtil.createAffiliation(con.id);
-		Role__c currRole = OrientationandTrainingUtil.createRole();
-		insert currRole;
+		List<Contact> contacts = TestDataFactory.createContact(1);
+		contacts[0].FirstName = 'Volunteer';
+		contacts[0].LastName = 'TestContact';
+		contacts[0].RecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
+		contacts[0].AccountId = accounts[0].Id;
+		contacts[0].Volunteer_Role__c = 'Water Handler';
+		contacts[0].Email = 'test@gmail.com';
+		insert contacts;
 
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.id, currRole.id);
-		insert currChapRole;
+		List<npe5__Affiliation__c> affiliations = TestDataFactory.createAffiliation(1);
+		affiliations[0].npe5__Contact__c = contacts[0].Id;
+		affiliations[0].npe5__Organization__c = TestClassUtil.createVolunteerAccount().Id;
+		affiliations[0].npe5__Primary__c = true;
+		affiliations[0].npe5__Status__c = 'Pending';
+		affiliations[0].Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
+		insert affiliations;
 
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.id, currChapRole.id);
-		insert currVolRole;
+		List<Role__c> roles = TestDataFactory.createRole(1);
+		roles[0].Name = 'Wish Granter';
+		roles[0].isWishRole__c = true;
+		insert roles;
+
+		List<Chapter_Role__c> chapterRoles = TestDataFactory.createChapterRole(1);
+		chapterRoles[0].Chapter_Name__c = accounts[0].Id;
+		chapterRoles[0].Role_Name__c = roles[0].Id;
+		chapterRoles[0].Background_Check_Required__c = true;
+		insert chapterRoles;
+
+		List<Volunteer_Roles__c> volunteerRoles = TestDataFactory.createVolunteerRole(1);
+		volunteerRoles[0].Chapter_Role__c = chapterRoles[0].Id;
+		volunteerRoles[0].Volunteer_Name__c = contacts[0].Id;
+		volunteerRoles[0].Status__c = 'Chapter Review';
+		insert volunteerRoles;
 	}
 
-	// Update Volunteer Role.
-	static testMethod void createRecords() {
-		Volunteer_Roles__c currVolRole = [
-				SELECT Status__C
-				FROM Volunteer_Roles__c
-		];
+	@IsTest
+	static void createRecords() {
+		Volunteer_Roles__c currVolRole = [SELECT Status__c FROM Volunteer_Roles__c];
 		currVolRole.Status__c = 'Pending Training';
 		update currVolRole;
+
 		System.assertEquals(currVolRole.Status__c, 'Pending Training', 'Volunteer role status does not match');
-		System.assert(currVolRole.Status__c == 'Pending Training', 'Volunteer role status does not match');
 	}
-	// Update volunteer role status as Out of Compliance and Trained
-	static testMethod void updateVolunteerROle() {
-		Account acc = [
-				SELECT Id
-				FROM Account
-				WHERE RecordTypeId = :Constant_AC.CHAPTER_RT_ID AND Volunteer_Manager__c = :UserInfo.getUserId()
-		];
-		Contact con = [
-				SELECT Id
-				FROM Contact
-		];
-		Chapter_Role__c currChapRole = [
-				SELECT Id
-				FROM Chapter_Role__c
-		];
-		Volunteer_Roles__c currVolRole = [
-				SELECT Id
-				FROM Volunteer_Roles__c
-		];
+
+	@IsTest
+	static void updateVolunteerRole() {
+		Account acc = [SELECT Id FROM Account WHERE RecordTypeId = :Constant_AC.CHAPTER_RT_ID AND Volunteer_Manager__c = :UserInfo.getUserId()];
+		Contact con = [SELECT Id FROM Contact];
+		Chapter_Role__c currChapRole = [SELECT Id FROM Chapter_Role__c];
+		Volunteer_Roles__c currVolRole = [SELECT Id FROM Volunteer_Roles__c];
 
 		Test.startTest();
-		Volunteer_Opportunity__c newVlOpp = new Volunteer_Opportunity__c();
-		newVlOpp.Chapter_Name__c = acc.id;
-		newVlOpp.Chapter_Role_Opportunity__c = currChapRole.id;
-		newVlOpp.Volunteer_Name__c = con.id;
-		insert newVlOpp;
+		List<Volunteer_Opportunity__c> volunteerOpportunities = TestDataFactory.createVolunteerOpportunity(1);
+		volunteerOpportunities[0].Chapter_Name__c = acc.Id;
+		volunteerOpportunities[0].Chapter_Role_Opportunity__c = currChapRole.Id;
+		volunteerOpportunities[0].Volunteer_Name__c = con.Id;
+		insert volunteerOpportunities;
 
-		Volunteer_Roles__c newVolunteerRole = OrientationandTrainingUtil.createVolRole(con.id, currChapRole.id);
-		insert newVolunteerRole;
+		List<Volunteer_Roles__c> volunteerRoles = TestDataFactory.createVolunteerRole(1);
+		volunteerRoles[0].Chapter_Role__c = currChapRole.Id;
+		volunteerRoles[0].Volunteer_Name__c = con.Id;
+		volunteerRoles[0].Status__c = 'Chapter Review';
+		insert volunteerRoles;
 
 		currVolRole.Status__c = 'Out of Compliance';
 		update currVolRole;
-		newVolunteerRole.Status__c = 'Out of Compliance';
-		currVolRole.Status__c = VOLUNTEER_ROLE_STATUS_ACTIVE;
+
+		volunteerRoles[0].Status__c = 'Out of Compliance';
+		currVolRole.Status__c = Constant_AC.VOLUNTEER_ROLE_STATUS_ACTIVE;
+
 		update currVolRole;
-		update newVolunteerRole;
+		update volunteerRoles[0];
 		Test.stopTest();
 
-		System.assertEquals(currVolRole.Status__c, VOLUNTEER_ROLE_STATUS_ACTIVE, 'Volunteer role status does not match');
-		System.assert(currVolRole.Status__c == VOLUNTEER_ROLE_STATUS_ACTIVE, 'Volunteer role status does not match');
-	}
-
-	static testMethod void updatbackgrounCheck() {
-		Contact con = [
-				SELECT Id
-				FROM Contact
-		];
-		Background_check__c newBack = new Background_check__c();
-		newBack.Volunteer__c = con.id;
-		newBack.Current__c = true;
-		insert newBack;
-		Set<ID> volIdSet = new Set<ID>();
-		volIdSet.add(con.id);
-
-		System.assertEquals(newBack.Volunteer__c, con.id, 'Background check volunteer does not match');
-		System.assert(newBack.Volunteer__c == con.id, 'Background check volunteer does not match');
-	}
-
-	static testMethod void updateConfilciOfInt() {
-		Contact con = [
-				SELECT Id
-				FROM Contact
-		];
-		Chapter_Role__c currChapRole = [
-				SELECT Id
-				FROM Chapter_Role__c
-		];
-		currChapRole.Background_Check_Required__c = false;
-		update currChapRole;
-		Conflict_Of_Interest__c newCOI = new Conflict_Of_Interest__c();
-		Volunteer_Roles__c newVolRole = new Volunteer_Roles__c();
-		newVolRole.Volunteer_Name__c = con.id;
-		newVolRole.Chapter_Role__c = currChapRole.id;
-		newVolRole.Status__c = 'Pending Training';
-		insert newVolRole;
-		newCOI.Volunteer_Contact__c = con.id;
-		newCOI.Current__c = true;
-		insert newCOI;
-		Set<ID> volIdSet = new Set<ID>();
-		volIdSet.add(con.id);
-		System.assertEquals(newVolRole.Status__c, 'Pending Training', 'Volunteer role status does not match');
-		System.assert(newVolRole.Status__c == 'Pending Training', 'Volunteer role status does not match');
+		System.assertEquals(currVolRole.Status__c, Constant_AC.VOLUNTEER_ROLE_STATUS_ACTIVE, 'Volunteer role status does not match');
 	}
 }
