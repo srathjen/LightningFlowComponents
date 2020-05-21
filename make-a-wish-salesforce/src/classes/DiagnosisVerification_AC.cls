@@ -1,23 +1,24 @@
-/*****************************************************************************************************************
-Author      : MST Solutions
-Date        : 10/4/2016
-Description : This form is for Medical Professionals to fill up the Medical Summary Reports about the Wish child
-              whom they are treating.
-Modification Log:
-              WVC-1835 : Sankar
-              10/05/2018 - Yuvraj - IME-126 - Line No: 981,994,998,1066
-              07/30/2019 - Samer  - SIW-235 - Fixed bug related to Primary Diagnosis and Secondary Condition
-                           Descriptions 1-4 not populating when MP fills the form, save, then come back later to
-                           sign the DV.
-                           Modification Log:
-              09/10/2019 - Manik - WLP-4232
-              01/02/2020 - CSmith - SIW-342 All changes reverted.
-1. 01/09/2020 - Manoj      - SIW-287 : Mapped newly created fields to insert values in lead records upon submission of DV form.
-2. 04/02/2020 - Manoj      - SIW-379 : Mapped 'Travel_Restriction__c' field in lead records based on user selection.
-3. 09/04/2020 - Manoj      - SIW-355 : Mapped 2 Wrapper fields values with lead fields value - timeFrameValue, idealtimeFrameValue
-4. 15/04/2020 - Manoj      - SIW-531 : Setting value blank for Number_hospital_admissions__c field if no value provided from form for the associated question
-5. 15 Apr 2020 - Chris Smith - SIW-497 : Changes reverted 5/12/2020 before going to production.
-*******************************************************************************************************************/
+/**
+ * @description Author      : MST Solutions
+ * Date        : 10/4/2016
+ * Description : This form is for Medical Professionals to fill up the Medical Summary Reports about the Wish child
+ * whom they are treating.
+ * Modification Log:
+ * WVC-1835 : Sankar
+ * 10/05/2018 - Yuvraj - IME-126 - Line No: 981,994,998,1066
+ * 07/30/2019 - Samer  - SIW-235 - Fixed bug related to Primary Diagnosis and Secondary Condition
+ * Descriptions 1-4 not populating when MP fills the form, save, then come back later to
+ * sign the DV.
+ * Modification Log:
+ * 09/10/2019 - Manik - WLP-4232
+ * 01/02/2020 - CSmith - SIW-342 All changes reverted.
+ * 1. 01/09/2020 - Manoj      - SIW-287 : Mapped newly created fields to insert values in lead records upon submission of DV form.
+ * 2. 04/02/2020 - Manoj      - SIW-379 : Mapped 'Travel_Restriction__c' field in lead records based on user selection.
+ * 3. 09/04/2020 - Manoj      - SIW-355 : Mapped 2 Wrapper fields values with lead fields value - timeFrameValue, idealtimeFrameValue
+ * 4. 15/04/2020 - Manoj      - SIW-531 : Setting value blank for Number_hospital_admissions__c field if no value provided from form for the associated question
+ * 5. 15 Apr 2020 - Chris Smith - SIW-497 : Provided check on Save & Next to make sure ICD Codes and Condition
+ * Descriptions were looked up.
+ **/
 public class DiagnosisVerification_AC {
 
     private Integer diagnosisBlockNum;
@@ -34,6 +35,7 @@ public class DiagnosisVerification_AC {
     public String wishStatus { get; set; }
     public String otherDiagnosisBlock { get; set; }
     public Boolean showAddAnotherDiagnosisBtn { get; set; }
+    public Boolean icdLookupAttempted { get; set; }
     public Lead currLead { get; set; }
     public DiagnosisWrapper wrapCls { get; set; }
     public WishChildWrapper wishChildWrapperIns { get; set; }
@@ -41,17 +43,17 @@ public class DiagnosisVerification_AC {
     public List<DiagnosisWrapper> diagnosisVerificationWrapperLst { get; set; }
 
     private static final List<Medical_Questions__c> ALL_MEDICAL_QUESTIONS =
-        DiagnosisVerification_AC_Helper.getMedicalQuestions();
-    private static final Map<String,List<Medical_Questions__c>> MAP_OF_MEDICAL_QUESTIONS_BY_DESCRIPTION =
-        DiagnosisVerification_AC_Helper.createMapOfMedicalQuestionsByDescription(ALL_MEDICAL_QUESTIONS);
+            DiagnosisVerification_AC_Helper.getMedicalQuestions();
+    private static final Map<String, List<Medical_Questions__c>> MAP_OF_MEDICAL_QUESTIONS_BY_DESCRIPTION =
+            DiagnosisVerification_AC_Helper.createMapOfMedicalQuestionsByDescription(ALL_MEDICAL_QUESTIONS);
     private static final List<Condition_Description__c> ALL_CONDITION_DESCRIPTIONS =
-        DiagnosisVerification_AC_Helper.getConditionDescriptionInfo();
+            DiagnosisVerification_AC_Helper.getConditionDescriptionInfo();
     private static final List<Condition_Description__c> DEFAULT_CONDITION_DESCRIPTIONS =
-        DiagnosisVerification_AC_Helper.createListOfDefaultDescriptions(ALL_CONDITION_DESCRIPTIONS);
-    private static final Map<String,List<Condition_Description__c>> MAP_OF_CONDITION_DESCRIPTIONS_BY_NAME =
-        DiagnosisVerification_AC_Helper.createMapOfConditionDescriptionsByName(ALL_CONDITION_DESCRIPTIONS);
-    private static final Map<Id,Condition_Description__c> MAP_OF_CONDITION_DESCRIPTIONS_BY_ID =
-        new Map<Id,Condition_Description__c>(ALL_CONDITION_DESCRIPTIONS);
+            DiagnosisVerification_AC_Helper.createListOfDefaultDescriptions(ALL_CONDITION_DESCRIPTIONS);
+    private static final Map<String, List<Condition_Description__c>> MAP_OF_CONDITION_DESCRIPTIONS_BY_NAME =
+            DiagnosisVerification_AC_Helper.createMapOfConditionDescriptionsByName(ALL_CONDITION_DESCRIPTIONS);
+    private static final Map<Id, Condition_Description__c> MAP_OF_CONDITION_DESCRIPTIONS_BY_ID =
+            new Map<Id, Condition_Description__c>(ALL_CONDITION_DESCRIPTIONS);
 
     public DiagnosisVerification_AC() {
         pluHypTxt = '';
@@ -61,6 +63,7 @@ public class DiagnosisVerification_AC {
         wishStatus = null;
         wrapCls = new DiagnosisWrapper();
         currLead = new Lead();
+        icdLookupAttempted = false;
         leadId = ApexPages.currentPage().getParameters().get('leadId');
 
         if (leadId != null && leadId.length() > 0) {
@@ -121,7 +124,7 @@ public class DiagnosisVerification_AC {
         wishChildWrapperIns.alt2MedPhone = currLead.Alternate2MedProfessionalPhone__c;
         wishChildWrapperIns.alt2MedHosp = currLead.Alternate2HospitalTreatmentFacility__c;
         wishChildWrapperIns.unplannedHospitalAdmission = currLead.Unplanned_hospital_admissions__c;
-        wishChildWrapperIns.numberOfHospitalAdmission =  Integer.valueOf(currLead.Number_hospital_admissions__c);
+        wishChildWrapperIns.numberOfHospitalAdmission = Integer.valueOf(currLead.Number_hospital_admissions__c);
         wishChildWrapperIns.admittingDiagnosis = currLead.Admitting_diagnosis__c;
         wishChildWrapperIns.ifICUAdmission = currLead.ICU_Admissions__c;
         //SIW-355 Start : Mapped 2 new added questions value to lead field on loading of page
@@ -165,7 +168,7 @@ public class DiagnosisVerification_AC {
                     condDesMedicalQuestionMap.get(medicalQuestion.Condition_Description__c).add(medicalQuestion);
                 } else {
                     condDesMedicalQuestionMap.put(medicalQuestion.Condition_Description__c, new List<Medical_Questions__c>{
-                        medicalQuestion
+                            medicalQuestion
                     });
                 }
             }
@@ -385,9 +388,9 @@ public class DiagnosisVerification_AC {
     public void RemoveDiagnosisBlock() {
         diagnosisBlockNum = Integer.valueOf(ApexPages.currentPage().getParameters().get('diagnosisBlockNum')); // Used to hold the Diagnosis block number
         List<Diagnosis_Verification__c> removeDiagnosisVerificationList = [
-            SELECT Id, Order__c
-            FROM Diagnosis_Verification__c
-            WHERE Order__c = :diagnosisBlockNum
+                SELECT Id, Order__c
+                FROM Diagnosis_Verification__c
+                WHERE Order__c = :diagnosisBlockNum
         ];
 
         diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = null;
@@ -434,13 +437,13 @@ public class DiagnosisVerification_AC {
     public static List<ICD_Codes__c> searchDiagnosis(String searchTerm) {
         String query = 'SELECT ';
 
-        final List<String> FIELDS_TO_SELECT = new List<String> {
-            'Id',
-            'Name',
-            'Condition_Description__c',
-            'Condition_Description__r.InActive__c',
-            'Condition_Description__r.Name',
-            'Short_Description__c'
+        final List<String> FIELDS_TO_SELECT = new List<String>{
+                'Id',
+                'Name',
+                'Condition_Description__c',
+                'Condition_Description__r.InActive__c',
+                'Condition_Description__r.Name',
+                'Short_Description__c'
         };
 
         for (String field : FIELDS_TO_SELECT) {
@@ -548,13 +551,14 @@ public class DiagnosisVerification_AC {
             //ICD code
             if (icdOrPcd == 'ICD') {
                 List<ICD_Codes__c> icdCodeInfo = DiagnosisVerification_AC_Helper.getIcdCodeInfo(diagnosisVerificationWrapperLst[diagnosisBlockNum].icdCode);
-                
+                icdLookupAttempted = true;
                 if (icdCodeInfo.size() > 0) {
                     List<Medical_Questions__c> medicalQuestionList = MAP_OF_MEDICAL_QUESTIONS_BY_DESCRIPTION.get(icdCodeInfo[0].Condition_Description__c);
 
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = icdCodeInfo[0].Short_Description__c;
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isGroup1Rec = icdCodeInfo[0].Group1__c;
 
+                    //Chris - Can you fix this hardcode?
                     if (!String.isEmpty(icdCodeInfo[0].Condition_Description__r.Name) && icdCodeInfo[0].Condition_Description__r.Name == 'Total Parenteral Nutrition (TPN)') {
                         showAddAnotherDiagnosisBtn = true;
                     }
@@ -566,11 +570,13 @@ public class DiagnosisVerification_AC {
 
                 // Condition Description
             } else if (icdOrPcd == 'PCD') {
+                //Chris - Can you fix this hardcode?
                 if (diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription == 'Total Parenteral Nutrition (TPN)') {
                     showAddAnotherDiagnosisBtn = true;
                 }
 
                 List<Condition_Description__c> conditionDescriptionInfo = MAP_OF_CONDITION_DESCRIPTIONS_BY_NAME.get(diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription);
+                icdLookupAttempted = true;
 
                 if (conditionDescriptionInfo != null && conditionDescriptionInfo.size() > 0) {
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isGroup1Rec = conditionDescriptionInfo[0].Group1__c;
@@ -655,7 +661,7 @@ public class DiagnosisVerification_AC {
             Condition_Description__c conditionDesc;
             diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescriptionObject = conditionDescription;
 
-            if (MAP_OF_CONDITION_DESCRIPTIONS_BY_ID.containsKey(conditionDescription) &&  medicalQuestions.size() > 0) {
+            if (MAP_OF_CONDITION_DESCRIPTIONS_BY_ID.containsKey(conditionDescription) && medicalQuestions.size() > 0) {
                 conditionDesc = MAP_OF_CONDITION_DESCRIPTIONS_BY_ID.get(conditionDescription);
 
                 List<Medical_Questions__c> medicalQuestionList = new List<Medical_Questions__c>();
@@ -804,9 +810,9 @@ public class DiagnosisVerification_AC {
 
         try {
             delete [
-                SELECT Id
-                FROM cg__Lead_File__c
-                WHERE Id = :attachmentId
+                    SELECT Id
+                    FROM cg__Lead_File__c
+                    WHERE Id = :attachmentId
             ];
 
             if (Test.isRunningTest()) {
@@ -818,6 +824,34 @@ public class DiagnosisVerification_AC {
         }
     }
 
+    /*
+     * @description     In case of client-side issues with Diagnosis selection, make sure that the wishChildEligibilityCheck() has run
+     * 
+     * @author          Christopher Smith
+     * @date             04/20/2020
+     */
+    public void forceEligibilityCheck() {
+        diagnosisBlockNum = Integer.valueOf(ApexPages.currentPage().getParameters().get('diagnosisBlockNum'));
+        wishChildEligibilityCheck();
+
+        if (diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible) {
+            ApexPages.CurrentPage().getParameters().put('docusignReady', 'true'); //lookup was successful and child is eligible
+            //page should call docusign method
+        } else if (showAddAnotherDiagnosisBtn == true) {
+            //lookup was successful but another diagnosis is necessary
+            if (diagnosisBlockNum >= 5) {
+                //return to page verify field for not autoqualify text is filled if not done ahead of time
+            } else {
+                ApexPages.CurrentPage().getParameters().put('confirmDX', 'true'); //page should redirict to medicalQuestionBlockID
+            }
+        }  /* Not necessary because setWishStatus operates on same logic    else if(wishStatus == LEAD_STATUS_QUALIFIED)   {
+            return; //page should call docusign method
+        } */ else if (ApexPages.CurrentPage().GetParameters().get('icdOrPcd') == 'PCD') {
+            // Condition Description entered does not match one in the system. 
+            ResetDiagnosis();
+            ApexPages.currentPage().getParameters().put('tryICD', 'true'); //page should redirect to medicalQuestionBlockID
+        }
+    }
 
     /*
      * @description     Used to save information given by MedicalProfessional
@@ -859,14 +893,14 @@ public class DiagnosisVerification_AC {
             if (wishChildWrapperIns.unplannedHospitalAdmission == 'Yes') {
                 currLead.Number_hospital_admissions__c = wishChildWrapperIns.numberOfHospitalAdmission;
                 currLead.Admitting_diagnosis__c = wishChildWrapperIns.admittingDiagnosis;
-                currLead.ICU_Admissions__c = wishChildWrapperIns.ifICUAdmission; 
-            }
-            else{
+                currLead.ICU_Admissions__c = wishChildWrapperIns.ifICUAdmission;
+            } else {
                 currLead.Number_hospital_admissions__c = null;
                 currLead.Admitting_diagnosis__c = null;
                 currLead.ICU_Admissions__c = null;
             }
             //SIW-531 End
+
             //SIW-355 Start : Mapped 2 new added questions value to lead field on submission of DV form
             currLead.Expedite_timeframe__c = wishChildWrapperIns.timeFrameValue;
             currLead.Other_expedite_timeframe_comments__c = wishChildWrapperIns.idealtimeFrameValue;
@@ -922,9 +956,9 @@ public class DiagnosisVerification_AC {
             }
 
             for (ICD_Codes__c icdInfo : [
-                SELECT Id, Name
-                FROM ICD_Codes__c
-                WHERE Name IN :icdCodeSet
+                    SELECT Id, Name
+                    FROM ICD_Codes__c
+                    WHERE Name IN :icdCodeSet
             ]) {
                 icdInfoMap.put(icdInfo.Name, icdInfo.Id);
             }
@@ -1213,47 +1247,47 @@ public class DiagnosisVerification_AC {
             }
 
             String body = '{' +
-                '  "status":"sent",' +
-                '  "enableWetSign": "false",' +
-                '  "emailBlurb":"",' +
-                '  "emailSubject": "Diagnosis Verification Form",' +
-                '  "enforceSignerVisibility":"True",' +
-                '  "documents": [{' +
-                '      "name": "document.pdf",' +
-                '      "documentId":"1",' +
-                '      "order":"1",' +
-                '      "documentBase64":"' + documentPDF + '"' +
-                '  }],' +
-                '"recipients": {' +
-                '    "signers" : [{' +
-                '      "email": "' + myEmail + '",' +
-                '      "name": "' + mySenderName + '",' +
-                '      "recipientId":"1",' +
-                '      "clientUserId":"1",' +
-                '      "tabs": {' +
-                '                "signHereTabs": [{' +
-                '                    "anchorString": "~s1",' +
-                '                    "anchorXOffset": "0.1",' +
-                '                    "anchorYOffset": "0.1",' +
-                '                    "anchorIgnoreIfNotPresent": "false",' +
-                '                    "anchorUnits": "inches"' +
-                '                }],' +
-                '                "dateSignedTabs": [{' +
-                '                      "anchorString": "~date1",' +
-                '                       "anchorXOffset": "0",' +
-                '                       "fontSize":      "Size12",' +
-                '                       "fontColor":     "Black",' +
-                '                       "fonttype":     "Helvetica",' +
-                '                        "anchorYOffset": "0",' +
-                '                        "anchorIgnoreIfNotPresent": "false",' +
-                '                        "xPosition": "100",' +
-                '                        "yPosition": "72",' +
-                '                        "anchorUnits": "inches"' +
-                '                    }]' +
-                '            }' +
-                '    }]' +
-                '  }' +
-                '}';
+                    '  "status":"sent",' +
+                    '  "enableWetSign": "false",' +
+                    '  "emailBlurb":"",' +
+                    '  "emailSubject": "Diagnosis Verification Form",' +
+                    '  "enforceSignerVisibility":"True",' +
+                    '  "documents": [{' +
+                    '      "name": "document.pdf",' +
+                    '      "documentId":"1",' +
+                    '      "order":"1",' +
+                    '      "documentBase64":"' + documentPDF + '"' +
+                    '  }],' +
+                    '"recipients": {' +
+                    '    "signers" : [{' +
+                    '      "email": "' + myEmail + '",' +
+                    '      "name": "' + mySenderName + '",' +
+                    '      "recipientId":"1",' +
+                    '      "clientUserId":"1",' +
+                    '      "tabs": {' +
+                    '                "signHereTabs": [{' +
+                    '                    "anchorString": "~s1",' +
+                    '                    "anchorXOffset": "0.1",' +
+                    '                    "anchorYOffset": "0.1",' +
+                    '                    "anchorIgnoreIfNotPresent": "false",' +
+                    '                    "anchorUnits": "inches"' +
+                    '                }],' +
+                    '                "dateSignedTabs": [{' +
+                    '                      "anchorString": "~date1",' +
+                    '                       "anchorXOffset": "0",' +
+                    '                       "fontSize":      "Size12",' +
+                    '                       "fontColor":     "Black",' +
+                    '                       "fonttype":     "Helvetica",' +
+                    '                        "anchorYOffset": "0",' +
+                    '                        "anchorIgnoreIfNotPresent": "false",' +
+                    '                        "xPosition": "100",' +
+                    '                        "yPosition": "72",' +
+                    '                        "anchorUnits": "inches"' +
+                    '                    }]' +
+                    '            }' +
+                    '    }]' +
+                    '  }' +
+                    '}';
 
             String header = '--' + boundary + '\nContent-Type: application/json\nContent-Disposition: form-data';
             String jsonBody = header + '\n\n' + body + '\n\n--' + boundary + '--';
@@ -1298,13 +1332,13 @@ public class DiagnosisVerification_AC {
 
                     String jsonPayload;
                     jsonPayload = '{' +
-                        '    "userName": "' + mySenderName + '",' +
-                        '    "email": "' + myEmail + '",' +
-                        '    "recipientId": "1",' +
-                        '    "clientUserId": "1",' +
-                        '    "authenticationMethod": "None",' +
-                        '    "returnUrl": "' + Endpoints__c.getInstance().DVReturn_URL__c + '/verification_success' + '"' +
-                        '}';
+                            '    "userName": "' + mySenderName + '",' +
+                            '    "email": "' + myEmail + '",' +
+                            '    "recipientId": "1",' +
+                            '    "clientUserId": "1",' +
+                            '    "authenticationMethod": "None",' +
+                            '    "returnUrl": "' + Endpoints__c.getInstance().DVReturn_URL__c + '/verification_success' + '"' +
+                            '}';
 
                     request.setBody(jsonPayload);
 
@@ -1361,24 +1395,24 @@ public class DiagnosisVerification_AC {
     private Lead getCurrLead(Id leadId) {
         String query = 'SELECT ';
 
-        final List<String> FIELDS_TO_SELECT = new List<String> {
-            'Id',
-            'Name',
-            'FirstName',
-            'LastName',
-            'Email',
-            'Phone',
-            'Provided_additional_information__c',
-            'Hidden_Proto_Pulmonary_Hypertension__c',
-            'Diagnosis_Given_By_Referrer__c',
-            'ICD_Given_By_Referrer__c',
-            'ICD_Given_By_Referrer__r.Name',
-            'RFI_Form_Info_Hidden__c',
-            'Override_Dupe_Check__c',
-            'isConverted',
-            'Please_Explain_Deteriorate__c',
-            'Expedite_timeframe__c',
-            'Other_expedite_timeframe_comments__c'
+        final List<String> FIELDS_TO_SELECT = new List<String>{
+                'Id',
+                'Name',
+                'FirstName',
+                'LastName',
+                'Email',
+                'Phone',
+                'Provided_additional_information__c',
+                'Hidden_Proto_Pulmonary_Hypertension__c',
+                'Diagnosis_Given_By_Referrer__c',
+                'ICD_Given_By_Referrer__c',
+                'ICD_Given_By_Referrer__r.Name',
+                'RFI_Form_Info_Hidden__c',
+                'Override_Dupe_Check__c',
+                'isConverted',
+                'Please_Explain_Deteriorate__c',
+                'Expedite_timeframe__c',
+                'Other_expedite_timeframe_comments__c'
         };
 
         for (String field : FIELDS_TO_SELECT) {
@@ -1395,4 +1429,3 @@ public class DiagnosisVerification_AC {
         return Database.query(query);
     }
 }
-
