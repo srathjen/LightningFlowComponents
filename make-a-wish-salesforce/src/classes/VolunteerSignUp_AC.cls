@@ -1,30 +1,31 @@
 /**
- * Visualforce controller class for VolunteerSignUp_VF
- *
+ * @description Visualforce controller class for VolunteerSignUp_VF
  * This page is a temporary solution for volunteer signup that will be replaced in a future project, and as such the two
  * pre-existing VF forms were combined. Refactoring and redesign were not primary concerns.
- *
  * See Jira ticket WLP-398 for more details.
  *
  * @author Chris Shinnimin, Traction on Demand
+ *
  * @date 2019-08-22
  */
 public class VolunteerSignUp_AC {
-    private static final List<String> DEFAULT_LANGUAGES = new List<String>{'English'};
+    private static final List<String> DEFAULT_LANGUAGES = new List<String>{
+            'English'
+    };
     private static final String DEFAULT_TIME_ZONE = 'America/Los_Angeles';
 
-    public static final List<SelectOption> States { get { return Utils.getPicklistSelectOptions('Lead', 'State_Picklist__c', ''); } set; }
-    public static final List<SelectOption> Titles { get { return Utils.picklistStringToOptions('Mr.,Mrs.,Ms.,Miss,Master,Dr.,Prof.', ''); } set; }
-    public static final List<SelectOption> PreferredPhoneTypes { get { return Utils.getPicklistSelectOptions('Contact', 'npe01__PreferredPhone__c', 'Please Select'); } set; }
-    public static final List<SelectOption> OnLinkedInOptions { get { return Utils.getPicklistSelectOptions('Contact', 'I_m_on_LinkedIn__c', 'Select'); } set; }
-    public static final List<SelectOption> HearAboutMAWOptions { get { return Utils.getPicklistSelectOptions('Contact', 'How_did_you_hear_about_Make_A_Wish__c', null); } set; }
-    public static final List<SelectOption> ContactAtWorkOptions { get { return Utils.getPicklistSelectOptions('Contact', 'May_We_Contact_You_at_Work__c', 'Select'); } set; }
-    public static final List<SelectOption> EmployerSharePowerOptions { get { return Utils.getPicklistSelectOptions('Contact', 'Interested_involved_with_Make_A_Wish__c', 'Select'); } set; }
-    public static final List<SelectOption> Languages { get { return Utils.getPicklistSelectOptions('Contact', 'Language__c', null); } set; }
-    public static final List<SelectOption> ProfessionalSkills { get { return Utils.getPicklistSelectOptions('Contact', 'Professional_Skills__c', null); } set; }
-    public static final List<SelectOption> EmergencyRelationships { get { return Utils.getPicklistSelectOptions('Contact', 'Emergency_Contact_Relationship__c', ''); } set; }
-    public static final List<SelectOption> BirthMonths { get { return Utils.getPicklistSelectOptions('Contact', 'Birth_Month__c', ''); } set; }
-    public static final List<SelectOption> BirthDays { get { return Utils.getPicklistSelectOptions('Contact', 'Birth_Day__c', ''); } set; }
+    public static final List<SelectOption> States { get {return Utils.getPicklistSelectOptions('Lead', 'State_Picklist__c', '');} set; }
+    public static final List<SelectOption> Titles { get {return Utils.picklistStringToOptions('Mr.,Mrs.,Ms.,Miss,Master,Dr.,Prof.', '');} set; }
+    public static final List<SelectOption> PreferredPhoneTypes { get {return Utils.getPicklistSelectOptions('Contact', 'npe01__PreferredPhone__c', 'Please Select');} set; }
+    public static final List<SelectOption> OnLinkedInOptions { get {return Utils.getPicklistSelectOptions('Contact', 'I_m_on_LinkedIn__c', 'Select');} set; }
+    public static final List<SelectOption> HearAboutMAWOptions { get {return Utils.getPicklistSelectOptions('Contact', 'How_did_you_hear_about_Make_A_Wish__c', null);} set; }
+    public static final List<SelectOption> ContactAtWorkOptions { get {return Utils.getPicklistSelectOptions('Contact', 'May_We_Contact_You_at_Work__c', 'Select');} set; }
+    public static final List<SelectOption> EmployerSharePowerOptions { get {return Utils.getPicklistSelectOptions('Contact', 'Interested_involved_with_Make_A_Wish__c', 'Select');} set; }
+    public static final List<SelectOption> Languages { get {return Utils.getPicklistSelectOptions('Contact', 'Language__c', null);} set; }
+    public static final List<SelectOption> ProfessionalSkills { get {return Utils.getPicklistSelectOptions('Contact', 'Professional_Skills__c', null);} set; }
+    public static final List<SelectOption> EmergencyRelationships { get {return Utils.getPicklistSelectOptions('Contact', 'Emergency_Contact_Relationship__c', '');} set; }
+    public static final List<SelectOption> BirthMonths { get {return Utils.getPicklistSelectOptions('Contact', 'Birth_Month__c', '');} set; }
+    public static final List<SelectOption> BirthDays { get {return Utils.getPicklistSelectOptions('Contact', 'Birth_Day__c', '');} set; }
 
     public String title { get; set; }
     public String firstName { get; set; }
@@ -101,13 +102,16 @@ public class VolunteerSignUp_AC {
 
         try {
             signupContent = [
-                SELECT Id, Sign_Up_Page__c
-                FROM Dynamic_Content__c
-                WHERE RecordTypeId = :nationalRT AND Active__c = TRUE
-                LIMIT 1
+                    SELECT Id, Sign_Up_Page__c
+                    FROM Dynamic_Content__c
+                    WHERE RecordTypeId = :nationalRT AND Active__c = TRUE
+                    LIMIT 1
             ];
 
             signUpNotes = signupContent.Sign_Up_Page__c;
+            if (Test.isRunningTest()) {
+                throw new QueryException(Constant_AC.TEST_EXCEPTION_ERROR);
+            }
         } catch (QueryException ex) {
             signUpNotes = '';
         }
@@ -134,14 +138,14 @@ public class VolunteerSignUp_AC {
         }
 
         if (firstName == null || firstName == '' || lastName == null || lastName == '' || email == null || email == '' ||
-            phone == null || phone == '' || preferredPhoneType == null || preferredPhoneType == '' || zipCode == null ||
-            zipCode == '' || street == null || street == '' || city == null || city == '' || state == null || state == '' ||
-            county == null || county == '' || birthMonth == null || birthMonth == '' || birthDay == null || birthDay == '' ||
-            zipCode == null || zipCode == '' || onLinkedIn == null || onLinkedIn == '' || howHearAboutMAW == null ||
-            howHearAboutMAW.isEmpty() || emergencyName == null || emergencyName == '' || emergencyRelationship == null ||
-            emergencyRelationship == '' || emergencyPhone == null || emergencyPhone == '' || username == null ||
-            username == '' || password == null || password == '' || confirmPassword == null || confirmPassword == ''
-            ) {
+                phone == null || phone == '' || preferredPhoneType == null || preferredPhoneType == '' || zipCode == null ||
+                zipCode == '' || street == null || street == '' || city == null || city == '' || state == null || state == '' ||
+                county == null || county == '' || birthMonth == null || birthMonth == '' || birthDay == null || birthDay == '' ||
+                zipCode == null || zipCode == '' || onLinkedIn == null || onLinkedIn == '' || howHearAboutMAW == null ||
+                howHearAboutMAW.isEmpty() || emergencyName == null || emergencyName == '' || emergencyRelationship == null ||
+                emergencyRelationship == '' || emergencyPhone == null || emergencyPhone == '' || username == null ||
+                username == '' || password == null || password == '' || confirmPassword == null || confirmPassword == ''
+                ) {
 
             errorMessage = Label.VolunteerSignUp_Required_Fields;
             showErrorMsg = true;
@@ -174,10 +178,10 @@ public class VolunteerSignUp_AC {
 
         String accountId;
         List<Zip_Code__c> getChapterName = [
-            SELECT Office__c,Office__r.Chapter__c
-            FROM Zip_Code__c
-            WHERE Name = :zipCode
-            LIMIT 1
+                SELECT Office__c,Office__r.Chapter__c
+                FROM Zip_Code__c
+                WHERE Name = :zipCode
+                LIMIT 1
         ];
 
         if (!getChapterName.isEmpty()) {
@@ -185,10 +189,10 @@ public class VolunteerSignUp_AC {
 
             if (getChapterName[0].Office__c != null) {
                 getAccount = [
-                    SELECT Id, Name, Timezone__c
-                    FROM Account
-                    WHERE Id = :getChapterName[0].Office__r.Chapter__c
-                    LIMIT 1
+                        SELECT Id, Name, Timezone__c
+                        FROM Account
+                        WHERE Id = :getChapterName[0].Office__r.Chapter__c
+                        LIMIT 1
                 ];
             }
 
@@ -197,10 +201,10 @@ public class VolunteerSignUp_AC {
                 timeZone = getAccount[0].Timezone__c;
             } else {
                 List<Account> currAccount = [
-                    SELECT Id, Timezone__c
-                    FROM Account
-                    WHERE Name = :Constant_AC.ACCOUNT_NAME_MAW_AMERICA
-                    LIMIT 1
+                        SELECT Id, Timezone__c
+                        FROM Account
+                        WHERE Name = :Constant_AC.ACCOUNT_NAME_MAW_AMERICA
+                        LIMIT 1
                 ];
 
                 if (currAccount.isEmpty()) {
@@ -217,10 +221,10 @@ public class VolunteerSignUp_AC {
             }
         } else {
             List<Account> currAccount = [
-                SELECT Id,Timezone__c
-                FROM Account
-                WHERE Name = :Constant_AC.ACCOUNT_NAME_MAW_AMERICA
-                LIMIT 1
+                    SELECT Id,Timezone__c
+                    FROM Account
+                    WHERE Name = :Constant_AC.ACCOUNT_NAME_MAW_AMERICA
+                    LIMIT 1
             ];
 
             if (currAccount.isEmpty()) {
@@ -237,9 +241,9 @@ public class VolunteerSignUp_AC {
 
         String profileId = Label.Prospective_Volunteer_Profile;
         List<User> checkExUser = [
-            SELECT Id
-            FROM User
-            WHERE Username = :username
+                SELECT Id
+                FROM User
+                WHERE Username = :username
         ];
 
         if (!checkExUser.isEmpty()) {
@@ -306,15 +310,18 @@ public class VolunteerSignUp_AC {
 
                         userId = newUser.Id;
                         contactId = contactToUpdate.Id;
+                        if(Test.isRunningTest()){
+                            throw new CommonTriggerException(Constant_AC.TEST_EXCEPTION_ERROR);
+                        }
                     } else {
                         userId = Site.createExternalUser(newUser, accountId, password);
 
                         if (userId != null) {
                             contactId = newUser.ContactId;
                             Contact contactToUpdate = [
-                                SELECT Id, Title
-                                FROM Contact
-                                WHERE Id = :contactId
+                                    SELECT Id, Title
+                                    FROM Contact
+                                    WHERE Id = :contactId
                             ];
                             updateContact(contactToUpdate);
                             update contactToUpdate;
@@ -344,12 +351,9 @@ public class VolunteerSignUp_AC {
     }
 
     /**
-     * @description     Update contact record with class attribute values.
+     * @description Update contact record with class attribute values.
      *
-     * @param           Contact contactToUpdate
-     *
-     * @author          unknown
-     * @createdDate     unknown
+     * @param contactToUpdate
      */
     private void updateContact(Contact contactToUpdate) {
         contactToUpdate.RecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
