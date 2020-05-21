@@ -180,11 +180,14 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.SubmitSign();
         currDiagnosisVerificationDupe.wishChildWrapperIns.medProfTypeHid = 'Alternate Medical Professional Other';
         currDiagnosisVerificationDupe.SubmitSign();
+        currDiagnosisVerificationDupe.wishChildWrapperIns.getStateRecognizationPicklistValues();
+        currDiagnosisVerificationDupe.wishChildWrapperIns.getHealthCareWorks();
+        currDiagnosisVerificationDupe.wishChildWrapperIns.getCommunications();
         DiagnosisWrapper dw = new DiagnosisWrapper();
         dw.conditionDescription = 'ss';
         //Setting the Primary Diagnosis
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].conditionDescription = conditionDescription.Name;
-        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode = conditionDescription.Code_To_Use__c;
+        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].icdCode = conditionDescription.Code_To_Use__c;
         ApexPages.currentPage().getParameters().put('icdOrPcd', 'PCD');
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         conditionDescription.isEligible__c = true;
@@ -524,6 +527,7 @@ public class DiagnosisVerification_AC_Test {
         pw.getArrhythmiaList();
         pw.getanginaList();
         pw.getventilatorList();
+        pw.getphtList();
         pw.getLungDiseaseList();
         Test.stopTest();
         
