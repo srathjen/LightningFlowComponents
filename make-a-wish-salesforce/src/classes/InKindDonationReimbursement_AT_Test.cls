@@ -7,6 +7,8 @@
 public class InKindDonationReimbursement_AT_Test {
 	@testSetup
 	static void setup() {
+		trac_TriggerHandlerBase.blockTrigger = true;
+
 		List<Account> accounts = TestDataFactory.createAccount(1);
 		accounts[0].Name = Constant_AC.ACCOUNT_NAME_MAW_ALABAMA;
 		accounts[0].RecordTypeId = Constant_AC.CHAPTER_RT_ID;
