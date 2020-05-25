@@ -3,6 +3,8 @@ public class WishReferralFormSpanish_AC_Test {
 
     @TestSetup
     static void setup() {
+        trac_TriggerHandlerBase.blockTrigger = true;
+
         Condition_Description__c conditionDescription = new Condition_Description__c(Name = 'Cancer', Code_To_Use__c = 'C00');
         insert conditionDescription;
 
@@ -21,6 +23,8 @@ public class WishReferralFormSpanish_AC_Test {
         Zip_Code__c zipCode = new Zip_Code__c(Name = '85016', External_Id__c = Utils.generateRandomNumber(7));
         zipCode.Office__c = office.Id;
         insert zipCode;
+
+        trac_TriggerHandlerBase.blockTrigger = false;
     }
 
     @IsTest static void relationshipNone() {

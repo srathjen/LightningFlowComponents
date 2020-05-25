@@ -14,12 +14,9 @@ public class DVMedicalSummaryAttachment_AC_Test {
 
     @TestSetup
     public static void setup() {
-        User currUser = [
-                SELECT Id
-                FROM User
-                WHERE Id = :UserInfo.getUserId()
-                LIMIT 1
-        ];
+        trac_TriggerHandlerBase.blockTrigger = true;
+
+        User currUser = Utils.currentUser;
         List<Account> accounts = TestDataFactory.createAccount(1);
         Account account = accounts.get(0);
         account.Name = 'Make-A-Wish Arizona';
@@ -47,6 +44,8 @@ public class DVMedicalSummaryAttachment_AC_Test {
         cg__Lead_File__c leadFile = leadFilesDataFactory.get(0);
         leadFile.cg__Lead__c = lead.Id;
         insert leadFilesDataFactory;
+
+        trac_TriggerHandlerBase.blockTrigger = false;
     }
 
     //Attachment for Diagnosis Verification
