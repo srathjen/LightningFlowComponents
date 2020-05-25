@@ -64,6 +64,8 @@ public class InKindDonationReimbursement_AT_Test {
 		inKindDonationReimbursements[0].Make_check_payable_to_me__c = true;
 		inKindDonationReimbursements[0].Wish__c = cases[0].Id;
 		insert inKindDonationReimbursements;
+		
+		trac_TriggerHandlerBase.blockTrigger = false;
 	}
 
 	@isTest
