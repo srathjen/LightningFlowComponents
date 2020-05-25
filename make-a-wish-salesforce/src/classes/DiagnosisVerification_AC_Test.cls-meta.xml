@@ -6,10 +6,5 @@
         <minorNumber>5</minorNumber>
         <namespace>cg</namespace>
     </packageVersions>
-    <packageVersions>
-        <majorNumber>7</majorNumber>
-        <minorNumber>4</minorNumber>
-        <namespace>dsfs</namespace>
-    </packageVersions>
     <status>Active</status>
 </ApexClass>

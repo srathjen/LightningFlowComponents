@@ -1,64 +1,44 @@
-/***************************************************************************
-Author : MST Solutions
-Created Date : 11/13/2017
-Description : This class is used to cover unit test for batch_BGCExpReminder_AC.
-1. wvc-2205 Kanagaraj A - 08/08/2018  //line 16 previously the affiliation status was "Prospective".
-                                        Now we have updated as "Pending"
-****************************************************************************/
-@isTest(seeAllData=False)
+/**
+ * @description : This class is used to cover unit test for batch_BGCExpReminder_AC.
+ * 1. wvc-2205 Kanagaraj A - 08/08/2018  //line 16 previously the affiliation status was "Prospective".
+ * Now we have updated as "Pending"
+ *
+ * @author : MST Solutions
+@createdDate : 11/13/2017
+ **/
+@IsTest
 public class batch_BGCExpReminder_AC_Test {
 
-	private final static String VOLUNTEER_ROLE_STATUS_ACTIVE = Constant_AC.VOLUNTEER_ROLE_STATUS_ACTIVE;
-
-	//Background check initiated by volunteer
-    static testmethod void bgInitiated() {
-        Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
-        Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(volunteerAccount.id);
-        npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c(npe5__Contact__c = volunteerContact.id, npe5__Organization__c = TestClassUtil.createVolunteerAccount().Id, npe5__Primary__c = true,
-                                                                          npe5__Status__c = 'Pending', Constituent_code__c = Constant_AC.VOLUNTEER_TASK_RT_LABEL, Hidden_Status_Updated__c = false);
-        
-        Volunteer_Roles__c volunteerRole = new Volunteer_Roles__c(Status__c = VOLUNTEER_ROLE_STATUS_ACTIVE, Volunteer_Name__c = volunteerContact .id);
-        System.assertEquals(volunteerRole.status__c, VOLUNTEER_ROLE_STATUS_ACTIVE);
-        insert volunteerRole ;
-        Background_check__c createBackCheck = OrientationandTrainingUtil.createBackgroundCheckFasleRec(volunteerContact.id);
-        insert createBackCheck;
-        Conflict_Of_Interest__c createCOI = OrientationandTrainingUtil.createCOI(volunteerContact.id);
-        insert createCOI;
-        createBackCheck.Current__c = true;
-        createBackCheck.Date__c = Date.today().addDays(2);
-        update createBackCheck;
-        Background_check__c initiatedBG = new Background_check__c(Volunteer__c = volunteerContact.id);
-        insert initiatedBG;
-        Test.startTest();
-        DataBase.executeBatch(new batch_BGCExpReminder_AC());
-        Test.stopTest();
-    }
-    
     //Background check not initated by volunteer
-    static testmethod void bgNotInitiated() {
-        Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
+    @IsTest
+    static void testBatchAndSchedule() {
+        trac_TriggerHandlerBase.blockTrigger = true;
+        Account volunteerAccount = TestDataFactory.createChapterAccount(1)[0];
         insert volunteerAccount;
-        Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(volunteerAccount.id);
-        insert volunteerContact;
-        Background_check__c createBackCheck = OrientationandTrainingUtil.createBackgroundCheckFasleRec(volunteerContact.id);
-        insert createBackCheck;
-        Conflict_Of_Interest__c createCOI = OrientationandTrainingUtil.createCOI(volunteerContact.id);
+
+        List<Contact> volunteerContacts = TestDataFactory.createContact(2);
+        volunteerContacts[0].AccountId = volunteerContacts[1].AccountId = volunteerAccount.Id;
+        volunteerContacts[0].RecordTypeId = volunteerContacts[1].RecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
+        insert volunteerContacts;
+
+        List<Background_check__c> backgroundChecks = TestDataFactory.createBackgroundCheck(3);
+        backgroundChecks[0].Volunteer__c = backgroundChecks[1].Volunteer__c = volunteerContacts[0].Id;
+        backgroundChecks[2].Volunteer__c = volunteerContacts[1].Id;
+        backgroundChecks[0].Current__c = backgroundChecks[1].Current__c = backgroundChecks[2].Current__c = true;
+        backgroundChecks[0].Status__c = backgroundChecks[2].Status__c = Constant_AC.BACKGROUND_CHECK_STATUS_APPROVED;
+        backgroundChecks[0].Date__c = backgroundChecks[0].Date_Completed__c =
+                backgroundChecks[2].Date__c = backgroundChecks[2].Date_Completed__c = Date.today().addDays(2);
+        insert backgroundChecks;
+
+        Conflict_Of_Interest__c createCOI = TestDataFactory.createConflictOfInterest(1)[0];
+        createCOI.Volunteer_Contact__c = volunteerContacts[0].Id;
+        createCOI.Expiration_Date__c = System.today() + 3;
         insert createCOI;
-        createBackCheck.Current__c = true;
-        createBackCheck.Date__c = Date.today().addDays(2);
-        update createBackCheck;
+        trac_TriggerHandlerBase.blockTrigger = false;
+
         Test.startTest();
-        DataBase.executeBatch(new batch_BGCExpReminder_AC());
-        Test.stopTest();
-    }
-    
-    //Used to test schedule method
-    static testmethod void testschedule() {
-        Test.startTest();
-        batch_BGCExpReminder_AC reminder = new batch_BGCExpReminder_AC();
         String sch = '0 0 13 * * ?';
-        String jobID = System.schedule('Backgroundcheck Expiration Notification', sch, reminder);
-        List<Background_check__c> objectList = new List<Background_check__c>();
+        System.schedule('Backgroundcheck Expiration Notification', sch, new batch_BGCExpReminder_AC());
         Test.stopTest();
     }
 }

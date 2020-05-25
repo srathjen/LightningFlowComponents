@@ -2,19 +2,9 @@
 <ApexClass xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>37.0</apiVersion>
     <packageVersions>
-        <majorNumber>6</majorNumber>
-        <minorNumber>4</minorNumber>
-        <namespace>dsfs</namespace>
-    </packageVersions>
-    <packageVersions>
         <majorNumber>3</majorNumber>
         <minorNumber>11</minorNumber>
         <namespace>npe01</namespace>
-    </packageVersions>
-    <packageVersions>
-        <majorNumber>3</majorNumber>
-        <minorNumber>7</minorNumber>
-        <namespace>npe5</namespace>
     </packageVersions>
     <status>Active</status>
 </ApexClass>

@@ -907,13 +907,6 @@ public class OrientationandTrainingUtil {
 		return newUser;
 	}
 
-	public static User CreateActiveVolunteerUserWithPS(Id contactId) {
-		String activeProfileId = label.Active_Volunteer_Profile;
-		User newUser = createProspectiveVolunteerUser(null);
-		newUser.ProfileId = activeProfileId;
-		return newUser;
-	}
-
 	public static user createrSystemAdminUser() {
 		UserRole newUserRole = new UserRole();
 		newUserRole.Name = 'Make A Wish Alabama';
@@ -1342,7 +1335,7 @@ public class OrientationandTrainingUtil {
 		Volunteer_Count__c newVolCount = new Volunteer_Count__c ();
 		newVolCount.Volunteer_Needed__c = count;
 		newVolCount.Chapter_Role__c = chapterRoleId;
-		newVolCount .Non_Wish_Events__c = nonWishId;
+		newVolCount.Non_Wish_Events__c = nonWishId;
 		newVolCount.Description__c = 'Test Description';
 		newVolCount.Date__c = system.today();
 		newVolCount.Start_Time__c = '7.00 AM';
@@ -1846,7 +1839,7 @@ public class OrientationandTrainingUtil {
 		Attachment newAttachment = new Attachment();
 		newAttachment.ParentId = ParentId;
 		newAttachment.Name = 'Attachment1';
-		newAttachment.Body = blob.valueOf('Hi Welcome to body text');
+		newAttachment.Body = Blob.valueOf('Hi Welcome to body text');
 		return newAttachment;
 	}
 
@@ -1855,21 +1848,5 @@ public class OrientationandTrainingUtil {
 		newRegion.Name = 'Alabama';
 		newRegion.Chapter_Name__c = AccountId;
 		return newRegion;
-	}
-
-	public static Chapter_Vs_Role__c createAlabamaChapter() {
-		Chapter_Vs_Role__c createRec = new Chapter_Vs_Role__c();
-		createRec.Chapter_Name__c = 'Make-A-Wish Alabama';
-		createRec.Role_Name__c = 'Alabama - Chapter';
-		createRec.Name = 'Make-A-Wish Alabama';
-		return createRec;
-	}
-
-	public static Chapter_Vs_Role__c createArizonaChapter() {
-		Chapter_Vs_Role__c createRec = new Chapter_Vs_Role__c();
-		createRec.Chapter_Name__c = 'Make-A-Wish Arizona';
-		createRec.Role_Name__c = 'Arizona - Chapter';
-		createRec.Name = 'Make-A-Wish Arizona';
-		return createRec;
 	}
 }

@@ -1528,6 +1528,10 @@ public class ContactService {
 	* @param oldContactsMap
 	*/
 	public static void updateUserDetails(List<Contact> contactList, Map<Id, Contact> oldContactsMap) {
+		if (System.isFuture()) {
+			return;
+		}
+
 		List<User> updateUserList = new List<User>();
 		Map<Id, Contact> updatedContactMap = new Map<Id, Contact>();
 		for (Contact newContact : contactList) {

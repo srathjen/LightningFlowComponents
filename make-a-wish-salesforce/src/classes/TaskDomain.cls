@@ -14,24 +14,21 @@ public with sharing class TaskDomain extends trac_TriggerHandlerBase {
         Constant_AC.GRANT_TASK_RT_ID, Constant_AC.PLANNING_ANTICIPATION_TASK_RT_ID,
         Constant_AC.DETERMINATION_TASK_RT_ID, Constant_AC.VOLUNTEER_TASK_RT_ID,
         Constant_AC.STAFF_TASK_RT_ID, Constant_AC.BACKGROUND_RT_ID,
-        Constant_AC.UPDATE_CONTACT_RT_ID, Constant_AC.TASK_RT_ID,
-        Constant_AC.INTERVIEW_RT_ID
+        Constant_AC.UPDATE_CONTACT_RT_ID, Constant_AC.TASK_RT_ID
     };
 
     private static final Set<Id> BEFORE_UPDATE_RECORD_TYPE_IDS = new Set<Id>{
         Constant_AC.GRANT_TASK_RT_ID, Constant_AC.BACKGROUND_RT_ID,
         Constant_AC.UPDATE_CONTACT_RT_ID, Constant_AC.PLANNING_ANTICIPATION_TASK_RT_ID,
         Constant_AC.DETERMINATION_TASK_RT_ID, Constant_AC.VOLUNTEER_TASK_RT_ID,
-        Constant_AC.STAFF_TASK_RT_ID, Constant_AC.TASK_RT_ID,
-        Constant_AC.INTERVIEW_RT_ID
+        Constant_AC.STAFF_TASK_RT_ID, Constant_AC.TASK_RT_ID
     };
 
     private static final Set<Id> AFTER_UPDATE_RECORD_TYPE_IDS = new Set<Id>{
         Constant_AC.GRANT_TASK_RT_ID, Constant_AC.BACKGROUND_RT_ID,
         Constant_AC.UPDATE_CONTACT_RT_ID, Constant_AC.PLANNING_ANTICIPATION_TASK_RT_ID,
         Constant_AC.DETERMINATION_TASK_RT_ID, Constant_AC.VOLUNTEER_TASK_RT_ID,
-        Constant_AC.STAFF_TASK_RT_ID, Constant_AC.TASK_RT_ID,
-        Constant_AC.INTERVIEW_RT_ID
+        Constant_AC.STAFF_TASK_RT_ID, Constant_AC.TASK_RT_ID
     };
 
     /*
@@ -58,15 +55,13 @@ public with sharing class TaskDomain extends trac_TriggerHandlerBase {
         } catch (Exception ex) {
             for (Task currRec : newTasksList) {
                 ErrorMessage__e newsEvent = new ErrorMessage__e();
-
-                newsEvent.Apex_Class__c = 'Task_OnBeforeInsertHandler';
+                newsEvent.Apex_Class__c = 'TaskDomain';
                 newsEvent.Developer_Message__c = String.valueOf(currRec);
                 newsEvent.Message__c = ex.getMessage();
                 newsEvent.Method__c = 'onBeforeInsert';
                 newsEvent.Record_Id__c = currRec.Id;
                 newsEvent.Type__c = 'Error';
                 Database.SaveResult sr = EventBus.publish(newsEvent);
-
                 if (!Test.isRunningTest()) {
                     currRec.addError(Label.Debug_log_error_message);
                 }
@@ -192,8 +187,6 @@ public with sharing class TaskDomain extends trac_TriggerHandlerBase {
         }
 
         TaskService.updateVolunteerRecord(afterUpdateTasks, oldTasksMap);
-        TaskService.updateAffiliationStatusAsDeclined(afterUpdateTasks, oldTasksMap);
-        TaskService.updateAffiliationStatus(afterUpdateTasks, oldTasksMap);
         TaskService.sneakPeekTask(afterUpdateTasks, oldTasksMap);
         TaskService.updateLeadCloseDate(afterUpdateTasks, oldTasksMap);
     }

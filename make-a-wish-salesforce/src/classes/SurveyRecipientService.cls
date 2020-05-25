@@ -1,7 +1,9 @@
 /**
  * @description Service class for updating survey recipients
- * @author		Mason Buhler, Traction on Demand
- * @date 		7-26-2019
+ *
+ * @author Mason Buhler, Traction on Demand
+ *
+ * @date 7-26-2019
  */
 public with sharing class SurveyRecipientService {
 
@@ -18,11 +20,10 @@ public with sharing class SurveyRecipientService {
             if ((oldWA == null || wa.Survey_Recipient__c != oldWA.Survey_Recipient__c) && wa.Wish__c != null) {
                 if (wa.Survey_Recipient__c) {
                     wishAffiliationsToProcess.add(wa);
-                    allCaseIds.add(wa.Wish__c);
                 } else {
-                    allCaseIds.add(wa.Wish__c);
                     caseIdsToClearSurveyRecipient.add(wa.Wish__c);
                 }
+                allCaseIds.add(wa.Wish__c);
             }
         }
 
@@ -32,7 +33,11 @@ public with sharing class SurveyRecipientService {
         }
 
         // Retrieve all related cases (wishes) and map them by case Id
-        Map<Id, Case> allCasesById = new Map<Id, Case>([SELECT Id, Survey_Recipient__c FROM Case WHERE Id IN :allCaseIds]);
+        Map<Id, Case> allCasesById = new Map<Id, Case>([
+                SELECT Id, Survey_Recipient__c
+                FROM Case
+                WHERE Id IN :allCaseIds
+        ]);
 
         for (Id caseId : caseIdsToClearSurveyRecipient) {
             Case c = allCasesById.get(caseId);
@@ -42,7 +47,11 @@ public with sharing class SurveyRecipientService {
 
         if (!wishAffiliationsToProcess.isEmpty()) {
             // Retrieve all related wish affiliations and map them by case Id
-            List<Wish_Affiliation__c> allRelatedWishAffiliations = [SELECT Id, Survey_Recipient__c, Contact__c, Wish__c FROM Wish_Affiliation__c WHERE Survey_Recipient__c = TRUE AND Wish__c IN :allCaseIds];
+            List<Wish_Affiliation__c> allRelatedWishAffiliations = [
+                    SELECT Id, Survey_Recipient__c, Contact__c, Wish__c
+                    FROM Wish_Affiliation__c
+                    WHERE Survey_Recipient__c = TRUE AND Wish__c IN :allCaseIds
+            ];
 
             Map<Id, List<Wish_Affiliation__c>> relatedWishAffiliationsByCaseId = new Map<Id, List<Wish_Affiliation__c>>();
             for (Wish_Affiliation__c wa : allRelatedWishAffiliations) {
@@ -66,13 +75,7 @@ public with sharing class SurveyRecipientService {
                 casesToUpdate.put(c.Id, c);
             }
         }
-
-        if (!wishAffiliationsToUpdate.isEmpty()) {
-            update wishAffiliationsToUpdate;
-        }
-
-        if (!casesToUpdate.isEmpty()) {
-            update casesToUpdate.values();
-        }
+        update wishAffiliationsToUpdate;
+        update casesToUpdate.values();
     }
 }

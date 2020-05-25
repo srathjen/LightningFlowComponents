@@ -1,5 +1,5 @@
 /**
- * Author      : MST Solutions
+ * @description Author      : MST Solutions
  * Date        : 10/4/2016
  * Description : This DiagnosisVerification_AC_Test is used to cover the unit testing for DiagnosisVerification_AC.
  * Modification Log:
@@ -9,70 +9,169 @@
  **/
 @IsTest
 public class DiagnosisVerification_AC_Test {
+
+    private final static Id CHAPTER_RT_ID = Constant_AC.CHAPTER_RT_ID;
+
     @TestSetup
-    //This method is used to update the wish child and wish family.
     public static void setUpData() {
-        Condition_Description__c condistionDescription = OrientationandTrainingUtil.createConditionDesCription();
-        condistionDescription.Not_Listed__c = condistionDescription.InActive__c = true;
-        insert condistionDescription;
+        trac_TriggerHandlerBase.blockTrigger = true;
 
-        ICD_Codes__c iCDCode = OrientationandTrainingUtil.createICDCode(condistionDescription.Id);
-        insert iCDCode;
+        List<Condition_Description__c> conditionList = TestDataFactory.createConditionDescription(2);
+        Condition_Description__c conditionMelanoma = conditionList.get(0);
+        conditionMelanoma.Name = 'Malignant Melanoma';
+        conditionMelanoma.Treatment_Subspecialty__c = 'Oncology';
+        conditionMelanoma.Code_To_Use__c = 'C43.30';
+        conditionMelanoma.PR_Diagnosis__c = 'Malignant Melanoma';
+        conditionMelanoma.Group1__c = true;
+        conditionMelanoma.Not_Listed__c = true;
+        conditionMelanoma.InActive__c = true;
+        Condition_Description__c conditionMelanoma2 = conditionList.get(0);
+        conditionMelanoma.Name = 'Malignant Melanoma';
+        conditionMelanoma.Treatment_Subspecialty__c = 'Oncology';
+        conditionMelanoma.Code_To_Use__c = 'C43.30';
+        conditionMelanoma.PR_Diagnosis__c = 'Malignant Melanoma';
+        conditionMelanoma.Group1__c = true;
+        conditionMelanoma.Not_Listed__c = true;
+        conditionMelanoma.InActive__c = false;
+        insert conditionList;
 
-        List<Medical_Questions__c> medicalQuestion = OrientationandTrainingUtil.CreateMedicalQuestion(condistionDescription.Id);
-        insert medicalQuestion;
+        List<ICD_Codes__c> icdCodeList = TestDataFactory.createIcdCode(1);
+        ICD_Codes__c icdMelanoma = icdCodeList.get(0);
+        icdMelanoma.Name = 'C43.30';
+        icdMelanoma.Condition_Description__c = conditionMelanoma.Id;
+        icdMelanoma.Group1__c = true;
+        icdMelanoma.Short_Description__c = 'Malignant melanoma of unspecified part of face';
+        icdMelanoma.Long_Description__c = 'Malignant melanoma of unspecified part of face';
+        insert icdCodeList;
 
-        Account chapterAccount = OrientationandTrainingUtil.CreateAmericaAccount();
-        insert chapterAccount;
+        List<Medical_Questions__c> medicalQuestionList = TestDataFactory.createMedicalQuestions(4);
+        Medical_Questions__c questionOne = medicalQuestionList.get(0);
+        questionOne.Question__c = 'Is child currently or within one year of completing treatment for this condition?';
+        questionOne.Picklist_values__c = 'Yes,No';
+        questionOne.Data_Type__c = 'Picklist';
+        questionOne.Wrapper_Variable__c = 'TestWrapperOne';
+        questionOne.Current_Condition__c = 'TestConditionOne';
+        questionOne.Recommendation_to_Chapter__c = 'None Apply';
+        questionOne.Condition_Description__c = conditionMelanoma.Id;
+        questionOne.Sort_Order__c = 1;
+        Medical_Questions__c questionTwo = medicalQuestionList.get(1);
+        questionTwo.Question__c = 'Is child currently receiving or within one year of completing chemotherapy infusions or radiation treatment for this condition?';
+        questionTwo.Picklist_values__c = 'Yes,No';
+        questionTwo.Data_Type__c = 'Picklist';
+        questionTwo.Wrapper_Variable__c = 'TestWrapperTwo';
+        questionTwo.Current_Condition__c = 'TestConditionTwo';
+        questionTwo.Recommendation_to_Chapter__c = 'None Apply';
+        questionTwo.Condition_Description__c = conditionMelanoma.Id;
+        questionTwo.Sort_Order__c = 2;
+        Medical_Questions__c questionThree = medicalQuestionList.get(2);
+        questionThree.Question__c = 'Does child also have end organ damage?';
+        questionThree.Picklist_values__c = 'Yes,No';
+        questionThree.Data_Type__c = 'Picklist';
+        questionThree.Wrapper_Variable__c = 'TestWrapperThree';
+        questionThree.Current_Condition__c = 'TestConditionThree';
+        questionThree.Recommendation_to_Chapter__c = 'None Apply';
+        questionThree.Condition_Description__c = conditionMelanoma.Id;
+        questionThree.Sort_Order__c = 3;
+        Medical_Questions__c questionFour = medicalQuestionList.get(3);
+        questionFour.Question__c = 'Does child suffer from epilepsy?';
+        questionFour.Picklist_values__c = 'Yes,No';
+        questionFour.Data_Type__c = 'Picklist';
+        questionFour.Wrapper_Variable__c = 'TestWrapperFour';
+        questionFour.Current_Condition__c = 'TestConditionFour';
+        questionFour.Recommendation_to_Chapter__c = 'None Apply';
+        questionFour.Epilepsy_picklist__c = 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with simple partial seizures,' +
+                ' Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures,Generalized idiopathic epilepsy' +
+                ' and epileptic syndromes,Lennox-Gastaut Syndrome,Epileptic Spasms,None of these describe child';
+        questionFour.Condition_Description__c = conditionMelanoma.Id;
+        questionFour.Sort_Order__c = 4;
+        insert medicalQuestionList;
 
-        Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
-        newLead.PD_ICD_Code__c = iCDCode.Id;
-        newLead.Communication__c = 'rec1;rec2';
-        //newLead.Travel_Restriction__c = 'Test1;Test2;Test3;';
-        newLead.Current_Condition_Label__c = 'Test1;Test2;Test3;';
-        newLead.PD_Condition_Description__c = 'Malignant Melanoma';
-        newLead.unique_wish_identifier__c = '059-17-12367';
-        insert newLead;
+        List<Account> accountList = TestDataFactory.createAccount(1);
+        Account accountMawa = accountList.get(0);
+        accountMawa.Name = 'Make-A-Wish America';
+        accountMawa.RecordTypeId = CHAPTER_RT_ID;
+        insert accountList;
 
-        WishChildWrapper wc = new WishChildWrapper();
-        wc.describePatient = 'Yes';
-        wc.password = '123456';
-        wc.getStateRecognizationPicklistValues();
-        wc.getCommunications();
-        wc.getHealthCareWorks();
+        List<Lead> leadList = TestDataFactory.createLead(1);
+        Lead leadFrieda = leadList.get(0);
+        leadFrieda.ChapterName__c = accountMawa.Id;
+        leadFrieda.FirstName = 'Frieda';
+        leadFrieda.LastName = 'Crowley';
+        leadFrieda.Diagnosis_Given_By_Referrer__c = 'Test Diagnosis';
+        leadFrieda.PD_ICD_Code__c = icdMelanoma.Id;
+        leadFrieda.Phone = '9600467559';
+        leadFrieda.Email = 'testmawa@gmail.com';
+        leadFrieda.Street = '100 Mesa Avenue';
+        leadFrieda.StateCode = 'AZ';
+        leadFrieda.City = 'Scottsdale';
+        leadFrieda.PostalCode = '85261';
+        leadFrieda.CountryCode = 'US';
+        leadFrieda.DOB__c = System.today() - 1435;
+        leadFrieda.Company = 'MAW';
+        leadFrieda.Status = 'Inquiry';
+        leadFrieda.Gender__c = 'Female';
+        leadFrieda.is_Family_Aware_of_Referral__c = 'Yes';
+        leadFrieda.Referrer_FirstName__c = 'Alan';
+        leadFrieda.Referrer_Last_Name__c = 'Lady';
+        leadFrieda.Referrer_Email__c = 'testmawa2d@gmail.com';
+        leadFrieda.Referrer_Phone__c = '9600467578';
+        leadFrieda.Referrer_City__c = 'Scottsdale';
+        leadFrieda.Referrer_Zip__c = '85261';
+        leadFrieda.Current_Condition_Label__c = 'Surgery in the past 3 months;I am not sure';
+        leadFrieda.PD_Condition_Description__c = 'Malignant Melanoma';
+        leadFrieda.Communication__c = 'rec1;rec2';
+        leadFrieda.unique_wish_identifier__c = '059-17-12367';
+        leadFrieda.Chronic_Hepatitis__c = 'N/A';
+        leadFrieda.Strokes__c = 'N/A';
+        leadFrieda.Convulsive_Disorders__c = 'Epilepsy;Unknown';
+        leadFrieda.Congenital_Heart_Disease__c = 'Unknown;N/A';
+        leadFrieda.Chronic_Heart_Failure__c = 'Unknown;N/A';
+        leadFrieda.Heart_Failure__c = 'Unknown;N/A';
+        leadFrieda.Arrhythmia__c = 'Unknown;N/A';
+        leadFrieda.Ventilator__c = 'N/A';
+        leadFrieda.Angina__c = 'Unknown;N/A';
+        leadFrieda.Lung_Disease__c = 'Unknown;N/A';
+        insert leadList;
 
-        cg__Lead_File__c newFile = new cg__Lead_File__c();
-        newFile.cg__Lead__c = newLead.Id;
-        newFile.cg__Description__c = 'SampleDesc';
-        newFile.File_Path__c = 'TestPath';
-        newFile.cg__File_Name__c = 'File';
-        insert newFile;
+        List<cg__Lead_File__c> leadFileList = TestDataFactory.createLeadFile(1);
+        cg__Lead_File__c leadFileFrieda = leadFileList.get(0);
+        leadFileFrieda.cg__Lead__c = leadFrieda.Id;
+        leadFileFrieda.cg__Description__c = 'Medical Information for Frieda Crowley';
+        leadFileFrieda.File_Path__c = 'TestPath';
+        insert leadFileList;
+
+        List<Diagnosis_Verification__c> diagnosisVerificationList = TestDataFactory.createDiagnosisVerification(1);
+        Diagnosis_Verification__c verificationFrieda = diagnosisVerificationList.get(0);
+        verificationFrieda.ICD_Code__c = icdMelanoma.Id;
+        verificationFrieda.Lead__c = leadFrieda.Id;
+        verificationFrieda.Order__c = 2;
+        verificationFrieda.Condition_Description__c = conditionMelanoma.Id;
+        insert diagnosisVerificationList;
 
         DocuSignCredentialsSetting__c setting = new DocuSignCredentialsSetting__c();
         setting.Name = 'Test Setting';
         setting.account__c = 'TestAccount';
         insert setting;
 
-        dsfs__DocuSign_Status__c newStatus = new dsfs__DocuSign_Status__c(dsfs__Lead__c = newLead.Id, dsfs__Subject__c = 'Diagnosis Verification Form');
-        insert newStatus;
-//        System.assertEquals(newLead.Id, newFile.Parent__c, 'Id dose nit match');
-//        System.assert(newLead.Id == newFile.Parent__c, 'value does not match');
+        trac_TriggerHandlerBase.blockTrigger = false;
     }
 
-    //This method is used to check the validate primary diagnosis in DV form.
     @IsTest
-    public static void checkDiadnosisVerificationFormForValidDiagnosisAtPrimaryDiagnosis() {
+    public static void checkDiagnosisVerificationFormForValidDiagnosisAtPrimaryDiagnosis() {
         Lead newLead = [
-            SELECT Id
-            FROM Lead
+                SELECT Id
+                FROM Lead
+                WHERE Name = 'Frieda Crowley'
         ];
         newLead.Treatment_may_be_feasible_but_can_fail__c = true;
         update newLead;
 
-        Condition_Description__c condistionDescription = [
-            SELECT Id,Name,Code_To_Use__c
-            FROM Condition_Description__c
+        Condition_Description__c conditionDescription = [
+                SELECT Id, Name, Code_To_Use__c
+                FROM Condition_Description__c
+                WHERE Name = 'Malignant Melanoma'
         ];
+
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRef);
@@ -87,93 +186,48 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.SubmitSign();
         currDiagnosisVerificationDupe.wishChildWrapperIns.medProfTypeHid = 'Alternate 2 Medical Professional';
         currDiagnosisVerificationDupe.SubmitSign();
+        currDiagnosisVerificationDupe.wishChildWrapperIns.medProfTypeHid = 'Alternate Medical Professional Other';
+        currDiagnosisVerificationDupe.SubmitSign();
+        currDiagnosisVerificationDupe.wishChildWrapperIns.getStateRecognizationPicklistValues();
+        currDiagnosisVerificationDupe.wishChildWrapperIns.getHealthCareWorks();
+        currDiagnosisVerificationDupe.wishChildWrapperIns.getCommunications();
         DiagnosisWrapper dw = new DiagnosisWrapper();
         dw.conditionDescription = 'ss';
         //Setting the Primary Diagnosis
-        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].conditionDescription = condistionDescription.Name;
-        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode = condistionDescription.Code_To_Use__c;
+        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].conditionDescription = conditionDescription.Name;
+        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].icdCode = conditionDescription.Code_To_Use__c;
         ApexPages.currentPage().getParameters().put('icdOrPcd', 'PCD');
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
-        condistionDescription.isEligible__c = true;
-        update condistionDescription;
+        conditionDescription.isEligible__c = true;
+        update conditionDescription;
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
-        //Answer for the Question;
-//      currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[0].selectedPickVal = 'Yes';
+        //Answer for the Question
         ApexPages.currentPage().getParameters().put('medicalResponse', 'Yes'); //Used to hold the Medical Question response
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
         currDiagnosisVerificationDupe.MedicalResponse();
         currDiagnosisVerificationDupe.SaveMedicalInformation();
-        List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-            SELECT Id,isEligible__c, (
-                SELECT isEligible__c
-                FROM DiagnosisMedicalQuestions__r
-            )
-            FROM Diagnosis_Verification__c
-            WHERE Lead__c = :newLead.Id
-        ];
         Test.stopTest();
+
+        System.assert(conditionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode);
     }
 
-    //This method is used to check the invalidate primary diagnosis in DV form.
     @IsTest
-    public static void checkDiadnosisVerificationFormForInValidDiagnosisAtPrimaryDiagnosis() {
+    public static void checkDiagnosisVerificationFormWithSecondaryDiagnosis() {
         Lead newLead = [
-            SELECT Id
-            FROM Lead
-        ];
-        newLead.Treatment_may_prolong_normal_activities__c = true;
-        update newLead;
-
-        Condition_Description__c condistionDescription = [
-            SELECT Id,Name,Code_To_Use__c
-            FROM Condition_Description__c
-        ];
-        Test.startTest();
-        PageReference pageRef = Page.DiagnosisVerification_VF;
-        Test.setCurrentPage(pageRef);
-        ApexPages.currentPage().getParameters().put('leadId', newLead.Id);
-        DiagnosisVerification_AC currDiagnosisVerificationDupe = new DiagnosisVerification_AC();
-        //Setting the Primary Diagnosis
-        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].conditionDescription = condistionDescription.Name;
-        currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode = condistionDescription.Code_To_Use__c;
-        ApexPages.currentPage().getParameters().put('icdOrPcd', 'PCD');
-        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
-        currDiagnosisVerificationDupe.WishChildEligibilityCheck();
-        //Answer for the Question;
-        ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
-        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '5'); // Used to hold the Diagnosis block number
-        ApexPages.currentPage().getParameters().put('questionNumber', '0');
-        currDiagnosisVerificationDupe.MedicalResponse();
-        ApexPages.currentPage().getParameters().put('collectedConditionValue', 'test1;test2');
-        ApexPages.currentPage().getParameters().put('uniqueCurrentConditionSet', 'test3');
-        currDiagnosisVerificationDupe.SaveMedicalInformation();
-        List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-            SELECT Id,isEligible__c, (
-                SELECT isEligible__c
-                FROM DiagnosisMedicalQuestions__r
-            )
-            FROM Diagnosis_Verification__c
-            WHERE Lead__c = :newLead.Id
-        ];
-        Test.stopTest();
-        System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode, 'Id dose nit match');
-        System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode);
-    }
-    //This method is used to check the validate secondary diagnosis in DV form.
-    @IsTest
-    public static void checkDiadnosisVerificationFormWithSecondaryDiagnosis() {
-        Lead newLead = [
-            SELECT Id
-            FROM Lead
+                SELECT Id
+                FROM Lead
+                WHERE Name = 'Frieda Crowley'
         ];
         newLead.Debilitation_may_extend_over_many_years__c = true;
         update newLead;
 
         Condition_Description__c condistionDescription = [
-            SELECT Id,Name,Code_To_Use__c
-            FROM Condition_Description__c
+                SELECT Id, Name, Code_To_Use__c
+                FROM Condition_Description__c
+                WHERE Name = 'Malignant Melanoma'
         ];
+
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRef);
@@ -185,13 +239,13 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('icdOrPcd', 'PCD');
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
-        //Answer for the Question;
+        //Answer for the Question
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList = new List<DiagnosisWrapper.MedicalWrapper>();
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList.add(new DiagnosisWrapper.MedicalWrapper());
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[0].selectedPickVal = 'No';
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[0].isEligible = true;
-        ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
-        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
+        ApexPages.currentPage().getParameters().put('medicalResponse', 'No');
+        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
         currDiagnosisVerificationDupe.changeWishStatus();
         currDiagnosisVerificationDupe.MedicalResponse();
@@ -204,12 +258,12 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList = new List<DiagnosisWrapper.MedicalWrapper>();
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList.add(new DiagnosisWrapper.MedicalWrapper());
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[0].selectedPickVal = 'Yes';
-        ApexPages.currentPage().getParameters().put('medicalResponse', 'Yes'); //Used to hold the Medical Question response
-        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '1'); // Used to hold the Diagnosis block number
+        ApexPages.currentPage().getParameters().put('medicalResponse', 'Yes');
+        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '1');
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
         currDiagnosisVerificationDupe.MedicalResponse();
-        ApexPages.currentPage().getParameters().put('medicalResponse', null); //Used to hold the Medical Question response
-        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '6'); // Used to hold the Diagnosis block number
+        ApexPages.currentPage().getParameters().put('medicalResponse', null);
+        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '6');
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst.add(new DiagnosisWrapper());
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst.add(new DiagnosisWrapper());
@@ -234,31 +288,27 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[6].medicalWrapperList[0].isEligible = true;
         currDiagnosisVerificationDupe.MedicalResponse();
         currDiagnosisVerificationDupe.SaveMedicalInformation();
-        List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-            SELECT Id,isEligible__c, (
-                SELECT isEligible__c
-                FROM DiagnosisMedicalQuestions__r
-            )
-            FROM Diagnosis_Verification__c
-            WHERE Lead__c = :newLead.Id
-        ];
         Test.stopTest();
-//      System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].iCDCode, 'Id dose nit match');
-//      System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].iCDCode, 'value does not match');
+
+        System.assert(currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].iCDCode == 'A00');
     }
-    //This method is used to check the remove diagnosis in DV form.
+
     @IsTest
-    public static void checkDiadnosisVerificationFormRemoveDiagnosisFunction() {
+    public static void checkDiagnosisVerificationFormRemoveDiagnosisFunction() {
+        Integer countBeforeRemove;
         Lead newLead = [
-            SELECT Id
-            FROM Lead
+                SELECT Id
+                FROM Lead
+                WHERE Name = 'Frieda Crowley'
         ];
         newLead.Increased_probability_of_premature_death__c = true;
         update newLead;
         Condition_Description__c condistionDescription = [
-            SELECT Id,Name,Code_To_Use__c
-            FROM Condition_Description__c
+                SELECT Id, Name, Code_To_Use__c
+                FROM Condition_Description__c
+                WHERE Name = 'Malignant Melanoma'
         ];
+
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRef);
@@ -270,9 +320,9 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('icdOrPcd', 'PCD');
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
-        //Answer for the Question;
-        ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
-        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
+        //Answer for the Question
+        ApexPages.currentPage().getParameters().put('medicalResponse', 'No');
+        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
         currDiagnosisVerificationDupe.MedicalResponse();
         currDiagnosisVerificationDupe.addDiagnosisVerification();
@@ -281,38 +331,34 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('icdOrPcd', 'ICD');
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '1');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
-        ApexPages.currentPage().getParameters().put('medicalResponse', 'Yes'); //Used to hold the Medical Question response
-        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '1'); // Used to hold the Diagnosis block number
+        ApexPages.currentPage().getParameters().put('medicalResponse', 'Yes');
+        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '1');
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
         currDiagnosisVerificationDupe.MedicalResponse();
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '1');
+        countBeforeRemove = currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst.size();
         currDiagnosisVerificationDupe.RemoveDiagnosisBlock();
         currDiagnosisVerificationDupe.SaveMedicalInformation();
-        List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-            SELECT Id,isEligible__c, (
-                SELECT isEligible__c
-                FROM DiagnosisMedicalQuestions__r
-            )
-            FROM Diagnosis_Verification__c
-            WHERE Lead__c = :newLead.Id
-        ];
         Test.stopTest();
-        System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode, 'Value does not match');
-        System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode, 'value does not match');
+
+        System.assert(currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst.size() != countBeforeRemove);
     }
-    //This method is used to check the diagnosis verification in DV form.
+
     @IsTest
-    public static void checkDiadnosisVerificationFormWithDiagnosisVerficationData() {
+    public static void checkDiagnosisVerificationFormWithDiagnosisVerficationData() {
         Lead newLead = [
-            SELECT Id
-            FROM Lead
+                SELECT Id
+                FROM Lead
+                WHERE Name = 'Frieda Crowley'
         ];
         newLead.Risk_of_complications_premature_death__c = true;
         update newLead;
         Condition_Description__c condistionDescription = [
-            SELECT Id,Name,Code_To_Use__c
-            FROM Condition_Description__c
+                SELECT Id, Name, Code_To_Use__c
+                FROM Condition_Description__c
+                WHERE Name = 'Malignant Melanoma'
         ];
+
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRef);
@@ -324,7 +370,7 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('icdOrPcd', 'PCD');
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
-        //Answer for the Question;
+        //Answer for the Question
         ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
@@ -335,19 +381,12 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('icdOrPcd', 'ICD');
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '1');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
-        ApexPages.currentPage().getParameters().put('medicalResponse', 'Yes'); //Used to hold the Medical Question response
-        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '1'); // Used to hold the Diagnosis block number
+        ApexPages.currentPage().getParameters().put('medicalResponse', 'Yes');
+        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '1');
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
         currDiagnosisVerificationDupe.MedicalResponse();
         currDiagnosisVerificationDupe.SaveMedicalInformation();
-        List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-            SELECT Id,isEligible__c, (
-                SELECT isEligible__c
-                FROM DiagnosisMedicalQuestions__r
-            )
-            FROM Diagnosis_Verification__c
-            WHERE Lead__c = :newLead.Id
-        ];
+
         PageReference pageRefUpdate = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRefUpdate);
         ApexPages.currentPage().getParameters().put('leadId', newLead.Id);
@@ -356,21 +395,29 @@ public class DiagnosisVerification_AC_Test {
         List<ICD_Codes__c> iCDCodeLst = DiagnosisVerification_AC.searchDiagnosis('C43.30');
         List<ICD_Codes__c> iCDCodeLst1 = DiagnosisVerification_AC.searchDiagnosis(NULL);
         Test.stopTest();
-        System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].iCDCode, 'Value does not match');
-        System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].iCDCode, 'value does not match');
+
+        System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].iCDCode);
     }
-    //This method is used to check the diagnosis verification with medical question in DV form.
+
     @IsTest
-    public static void checkDiadnosisVerificationFormWithDiagnosisVerficationDataandMedicalQuestion() {
+    public static void checkDiagnosisVerificationLeadFileDelete() {
         Lead newLead = [
-            SELECT Id
-            FROM Lead
+                SELECT Id
+                FROM Lead
+                WHERE Name = 'Frieda Crowley'
         ];
         newLead.Responds_to_treatment_with_normal_health__c = true;
         update newLead;
         Condition_Description__c condistionDescription = [
-            SELECT Id,Name,Code_To_Use__c
-            FROM Condition_Description__c
+                SELECT Id, Name, Code_To_Use__c
+                FROM Condition_Description__c
+                WHERE Name = 'Malignant Melanoma'
+        ];
+
+        cg__Lead_File__c leadFile = [
+                SELECT Id
+                FROM cg__Lead_File__c
+                WHERE cg__Lead__c = :newLead.Id
         ];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
@@ -384,50 +431,54 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
         //Answer for the Question;
-        ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
-        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
+        ApexPages.currentPage().getParameters().put('medicalResponse', 'No');
+        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
         currDiagnosisVerificationDupe.MedicalResponse();
-        ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
-        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
+        ApexPages.currentPage().getParameters().put('medicalResponse', 'No');
+        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         ApexPages.currentPage().getParameters().put('questionNumber', '1');
         currDiagnosisVerificationDupe.MedicalResponse();
         currDiagnosisVerificationDupe.SaveMedicalInformation();
-        currDiagnosisVerificationDupe.deleteLeadFile();
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
-        List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-            SELECT Id,isEligible__c, (
-                SELECT isEligible__c
-                FROM DiagnosisMedicalQuestions__r
-            )
-            FROM Diagnosis_Verification__c
-            WHERE Lead__c = :newLead.Id
-        ];
+        ApexPages.currentPage().getParameters().put('attachmentId', leadFile.Id);
+        currDiagnosisVerificationDupe.deleteLeadFile();
         PageReference pageRefUpdate = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRefUpdate);
         ApexPages.currentPage().getParameters().put('leadId', newLead.Id);
         DiagnosisVerification_AC currDiagnosisVerificationDupeUpdated = new DiagnosisVerification_AC();
         Test.stopTest();
-        System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode, 'Value does not match');
-        System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode, 'value does not match');
+
+        String errorMsg;
+        try {
+            cg__Lead_File__c leadFileUpdate = [
+                    SELECT Id
+                    FROM cg__Lead_File__c
+                    WHERE cg__Lead__c = :newLead.Id
+            ];
+        } catch (Exception e) {
+            errorMsg = e.getMessage();
+        }
+        System.assert(errorMsg == 'List has no rows for assignment to SObject');
     }
-    //This method is used to check the diagnosis verification without medical question in DV form.
+
     @IsTest
-    public static void checkDiadnosisVerificationFormWithDiagnosisVerficationDataandWithoutMedicalQuestion() {
+    public static void checkDiagnosisVerificationFormWithDiagnosisVerficationDataWithoutMedicalQuestion() {
         List<Medical_Questions__c> medicalQuestion = [
-            SELECT Id
-            FROM Medical_Questions__c
+                SELECT Id
+                FROM Medical_Questions__c
         ];
-        //medicalQuestion.clear();
         Lead newLead = [
-            SELECT Id
-            FROM Lead
+                SELECT Id
+                FROM Lead
+                WHERE Name = 'Frieda Crowley'
         ];
         newLead.None_of_these_statements_describes_Child__c = true;
         update newLead;
         Condition_Description__c condistionDescription = [
-            SELECT Id,Name,Code_To_Use__c
-            FROM Condition_Description__c
+                SELECT Id,Name,Code_To_Use__c
+                FROM Condition_Description__c
+                WHERE Name = 'Malignant Melanoma'
         ];
         condistionDescription.Name = 'Arteriovenus Malformation (AVM)';
         update condistionDescription;
@@ -442,15 +493,17 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('icdOrPcd', 'PCD');
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
-        //Answer for the Question;
-        ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
-        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
+        //Answer for the Question
+        ApexPages.currentPage().getParameters().put('medicalResponse', 'No');
+        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
         currDiagnosisVerificationDupe.MedicalResponse();
-        ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
-        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
+        ApexPages.currentPage().getParameters().put('medicalResponse', 'No');
+        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         ApexPages.currentPage().getParameters().put('questionNumber', '1');
         currDiagnosisVerificationDupe.MedicalResponse();
+        ApexPages.currentPage().getParameters().put('collectedConditionValue', 'test1;test2');
+        ApexPages.currentPage().getParameters().put('uniqueCurrentConditionSet', 'test3');
         currDiagnosisVerificationDupe.SaveMedicalInformation();
         currDiagnosisVerificationDupe.deleteLeadFile();
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode = Null;
@@ -466,14 +519,7 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.MedicalQuestions(null, condistionDescription.Id, true, null, 0, medicalQuestion, false);
         currDiagnosisVerificationDupe.MedicalQuestions(null, condistionDescription.Id, true, null, 0, medicalQuestion, true);
         currDiagnosisVerificationDupe.MedicalQuestions(null, condistionDescription.Id, false, null, 0, medicalQuestion, true);
-        List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-            SELECT Id,isEligible__c, (
-                SELECT isEligible__c
-                FROM DiagnosisMedicalQuestions__r
-            )
-            FROM Diagnosis_Verification__c
-            WHERE Lead__c = :newLead.Id
-        ];
+
         PageReference pageRefUpdate = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRefUpdate);
         ApexPages.currentPage().getParameters().put('leadId', newLead.Id);
@@ -489,42 +535,30 @@ public class DiagnosisVerification_AC_Test {
         pw.getArrhythmiaList();
         pw.getanginaList();
         pw.getventilatorList();
+        pw.getphtList();
         pw.getLungDiseaseList();
         Test.stopTest();
-        System.assertEquals(Null, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode, 'Value does not match');
-        System.assert(currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode == Null, 'value does not match');
+
+        System.assert(currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode == null, 'value does not match');
     }
 
-    //This method is used to check the diagnosis verification without medical question in DV form.
     @IsTest
-    public static void checkDiadnosisVerificationFormWithDiagnosisVerficationDataandWithoutMedicalQuestions() {
+    public static void checkDiagnosisVerificationFormWithDiagnosisVerficationDataandWithoutMedicalQuestions() {
         List<Medical_Questions__c> medicalQuestion = [
-            SELECT Id
-            FROM Medical_Questions__c
+                SELECT Id
+                FROM Medical_Questions__c
         ];
         medicalQuestion.clear();
         Lead newLead = [
-            SELECT Id
-            FROM Lead
+                SELECT Id
+                FROM Lead
+                WHERE Name = 'Frieda Crowley'
         ];
-        //newLead.Increased_probability_of_premature_death__c = true;
         Condition_Description__c condistionDescription = [
-            SELECT Id,Name,Code_To_Use__c
-            FROM Condition_Description__c
+                SELECT Id, Name, Code_To_Use__c
+                FROM Condition_Description__c
+                WHERE Name = 'Malignant Melanoma'
         ];
-        Diagnosis_Verification__c dia = OrientationandTrainingUtil.createDiagnosis(newLead.Id);
-        insert dia;
-
-        Medical_Questions__c medQues = new Medical_Questions__c();
-        medQues.Question__c = 'Is [child\'s name] currently receiving or within one year of completing chemotherapy infusions or radiation treatment for this condition?';
-        medQues.Data_Type__c = 'Picklist';
-        medQues.Picklist_values__c = 'Yes,No';
-        insert medQues;
-
-        DiagnosisMedicalQuestions__c newMedicalQues = new DiagnosisMedicalQuestions__c();
-        newMedicalQues.Diagnosis_Verification__c = dia.Id;
-        newMedicalQues.Medical_Question__c = medQues.Id;
-        insert newMedicalQues;
 
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
@@ -541,17 +575,17 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
         //Answer for the Question;
-        ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
-        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
+        ApexPages.currentPage().getParameters().put('medicalResponse', 'No');
+        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
         currDiagnosisVerificationDupe.MedicalResponse();
-        ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
-        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
+        ApexPages.currentPage().getParameters().put('medicalResponse', 'No');
+        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         ApexPages.currentPage().getParameters().put('questionNumber', '1');
         currDiagnosisVerificationDupe.MedicalResponse();
         currDiagnosisVerificationDupe.SaveMedicalInformation();
         currDiagnosisVerificationDupe.deleteLeadFile();
-        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '1'); // Used to hold the Diagnosis block number
+        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '1');
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode = Null;
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].conditionDescription = Null;
         currDiagnosisVerificationDupe.ResetDiagnosis();
@@ -562,14 +596,7 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.currLead = new Lead(Part_A_Form_Password__c = 'Test2');
         currDiagnosisVerificationDupe.submit();
         currDiagnosisVerificationDupe.MedicalQuestions(null, null, false, null, 0, null, false);
-        List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-            SELECT Id,isEligible__c, (
-                SELECT isEligible__c
-                FROM DiagnosisMedicalQuestions__r
-            )
-            FROM Diagnosis_Verification__c
-            WHERE Lead__c = :newLead.Id
-        ];
+
         PageReference pageRefUpdate = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRefUpdate);
         ApexPages.currentPage().getParameters().put('leadId', newLead.Id);
@@ -587,46 +614,27 @@ public class DiagnosisVerification_AC_Test {
         pw.getventilatorList();
         pw.getLungDiseaseList();
         Test.stopTest();
-        // System.assertEquals(Null, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode,'Value does not match');
-        // System.assert(currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode == Null,'value does not match');
+
+        System.assert(currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].isEligible == false);
     }
 
     @IsTest
-    public static void checkDiadnosisVerificationForm() {
+    public static void checkDiagnosisVerificationForm() {
         Lead newLead = [
-            SELECT Id
-            FROM Lead
+                SELECT Id
+                FROM Lead
+                WHERE Name = 'Frieda Crowley'
         ];
         newLead.Child_will_ultimately_die_prematurely__c = true;
         newLead.Travel_algorithm__c = 'Some Condition';
         newLead.Hidden_Proto_Pulmonary_Hypertension__c = 'Tension';
         update newLead;
         Condition_Description__c condistionDescription = [
-            SELECT Id,Name,Code_To_Use__c
-            FROM Condition_Description__c
-            LIMIT 1
+                SELECT Id, Name, Code_To_Use__c
+                FROM Condition_Description__c
+                LIMIT 1
         ];
-        Diagnosis_Verification__c dv = OrientationandTrainingUtil.createDiagnosisRec(newLead.Id, condistionDescription.Id);
-        dv.PCD_ICD__c = 'ICD';
-        insert dv;
-        Medical_Questions__c mQuestion = [
-            SELECT Id, Condition_Description__c,Question__c,Current_Condition__c,Recommendation_to_Chapter__c
-            FROM Medical_Questions__c
-            LIMIT 1
-        ];
-        mQuestion.Question__c = null;
-        mQuestion.Current_Condition__c = 'Some Condition';
-        mQuestion.Recommendation_to_Chapter__c = 'Some Recommendation';
-        mQuestion.Data_Type__c = 'Comment box';
-        update mQuestion;
-        DiagnosisMedicalQuestions__c dvQuestion = new DiagnosisMedicalQuestions__c();
-        dvQuestion.Medical_Question__c = mQuestion.Id;
-        dvQuestion.Epilepsy_Value__c = 'Some epilepsy Value';
-        dvQuestion.Medical_Question_Answer__c = '';
-        dvQuestion.isEligible__c = true;
-        dvQuestion.Comment__c = '';
-        dvQuestion.Diagnosis_Verification__c = dv.Id;
-        insert dvQuestion;
+
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRef);
@@ -639,23 +647,15 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         currDiagnosisVerificationDupe.WishChildEligibilityCheck();
         //Answer for the Question;
-        ApexPages.currentPage().getParameters().put('medicalResponse', 'No'); //Used to hold the Medical Question response
-        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0'); // Used to hold the Diagnosis block number
+        ApexPages.currentPage().getParameters().put('medicalResponse', 'No');
+        ApexPages.currentPage().getParameters().put('diagnosisBlockNum', '0');
         ApexPages.currentPage().getParameters().put('questionNumber', '0');
         currDiagnosisVerificationDupe.MedicalResponse();
         ApexPages.currentPage().getParameters().put('collectedConditionValue', 'test1;test2');
         ApexPages.currentPage().getParameters().put('uniqueCurrentConditionSet', 'test3');
         currDiagnosisVerificationDupe.SaveMedicalInformation();
-        List<Diagnosis_Verification__c> diagnosisVerificationLst = [
-            SELECT Id,isEligible__c, (
-                SELECT isEligible__c
-                FROM DiagnosisMedicalQuestions__r
-            )
-            FROM Diagnosis_Verification__c
-            WHERE Lead__c = :newLead.Id
-        ];
         Test.stopTest();
-        System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode, 'Id dose nit match');
+        System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode, 'Id does not match');
         System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode);
     }
 }
