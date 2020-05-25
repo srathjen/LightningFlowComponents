@@ -1,146 +1,222 @@
 /**
  * @description Utils Test Class
+ *
  * @author Gustavo Mayer, Traction on Demand
- * @createdDate 7/15/2019
+ *
+ * @date 7/15/2019
  */
 @IsTest
 public class Utils_Test {
 
-	@IsTest
-	private static void getPicklistLabels() {
-		List<String> opportunityStages = Utils.getPicklistLabels('Opportunity', 'StageName');
+    @IsTest
+    private static void getCurrentUser() {
+        System.assertEquals(UserInfo.getUserId(), Utils.currentUser.Id);
+    }
 
-		System.assert(!opportunityStages.isEmpty(), 'Picklist Labels should be available');
-	}
+    @IsTest
+    private static void getPicklistLabels() {
+        List<String> pickListLabels = Utils.getPicklistLabels('Opportunity', 'StageName');
+        System.assert(!pickListLabels.isEmpty(), 'Picklist Labels should be available');
 
-	@IsTest
-	private static void getFieldMap() {
-		Map<String, String> opportunityStages = Utils.getFieldMap('Opportunity', 'StageName');
+        pickListLabels = Utils.getPicklistLabels('NotActualObject', 'NotActualField');
+        System.assert(pickListLabels.isEmpty(), 'Picklist Labels should be empty for non existing objects/fields');
+    }
 
-		System.assert(!opportunityStages.isEmpty(), 'Picklist Map should be available');
-	}
+    @IsTest
+    private static void getFieldMap() {
+        Map<String, String> fieldMap = Utils.getFieldMap('Opportunity', 'StageName');
+        System.assert(!fieldMap.isEmpty(), 'Picklist Map should be available');
 
-	@IsTest
-	private static void getPicklistSelectOptions() {
-		List<SelectOption> opportunityStages = Utils.getPicklistSelectOptions(
-				'Opportunity', 'StageName', 'Please select a Stage Name');
+        fieldMap = Utils.getFieldMap('NotActualObject', 'NotActualField');
+        System.assert(fieldMap.isEmpty(), 'Field Map should be empty for non existing objects/fields');
+    }
 
-		System.assert(!opportunityStages.isEmpty(), 'Picklist Select Options should be available');
-	}
+    @IsTest
+    private static void getPicklistSelectOptions() {
+        List<SelectOption> selectOptions = Utils.getPicklistSelectOptions(
+                'Opportunity', 'StageName', 'Please select a Stage Name');
+        System.assert(!selectOptions.isEmpty(), 'Select Options should be available');
 
-	@IsTest
-	private static void getFieldLabels() {
-		Map<String, String> opportunityStages = Utils.getFieldLabels('Opportunity');
+        selectOptions = Utils.getPicklistSelectOptions(
+                'NotActualObject', 'NotActualField', 'Optional');
+        System.assert(selectOptions.isEmpty(), 'Select Options should be empty for non existing objects/fields');
+    }
 
-		System.assert(!opportunityStages.isEmpty(), 'Picklist Labels should be available');
-	}
+    @IsTest
+    private static void getFieldLabels() {
+        Map<String, String> fieldLabels = Utils.getFieldLabels('Opportunity');
+        System.assert(!fieldLabels.isEmpty(), 'Field Labels should be available');
 
-	@IsTest
-	private static void getFieldPaths() {
-		List<String> relationshipMedicalRelationships = Utils.getFieldPaths('npe4__Relationship__c', 'MedicalRelationships');
+        fieldLabels = Utils.getFieldLabels('NotActualObject');
+        System.assert(fieldLabels.isEmpty(), 'Field Labels should be empty for non existing objects');
+    }
 
-		System.assert(!relationshipMedicalRelationships.isEmpty(), 'Picklist Labels should be available');
-	}
+    @IsTest
+    private static void getFieldPaths() {
+        List<String> relationshipMedicalRelationships = Utils.getFieldPaths('npe4__Relationship__c', 'MedicalRelationships');
+        System.assert(!relationshipMedicalRelationships.isEmpty(), 'Field paths should be available');
 
-	@IsTest
-	private static void formatDateToString() {
-		Integer year = 2019;
-		Integer month = 2;
-		Integer day = 5;
-		Date d = Date.newInstance(year, month, day);
+        relationshipMedicalRelationships = Utils.getFieldPaths('NotActualObject', 'NotActualField');
+        System.assert(relationshipMedicalRelationships.isEmpty(), 'Field paths should be empty for non existing objects/fields');
+    }
 
-		String result = Utils.formatDate(d, Utils.DATE_FORMAT_MDDYYYY);
+    @IsTest
+    private static void formatDateToString() {
+        Integer year = 2019;
+        Integer month = 2;
+        Integer day = 5;
+        Date d = Date.newInstance(year, month, day);
 
-		System.assertEquals('2/05/2019', result);
-	}
+        String result = Utils.formatDate(d, Utils.DATE_FORMAT_MDDYYYY);
 
-	@IsTest
-	private static void parseStringToDate() {
-		Integer year = 2019;
-		Integer month = 2;
-		Integer day = 5;
-		String dateWithSlash = month + '/' + day + '/' + year;
-		String dateWithHyphen = month + '-' + day + '-' + year;
+        System.assertEquals('2/05/2019', result);
 
-		Date result1 = Utils.parseDate(dateWithSlash, Utils.DATE_FORMAT_MDDYYYY);
-		Date result2 = Utils.parseDate(dateWithHyphen, Utils.DATE_FORMAT_MDDYYYY);
+        try {
+            result = Utils.formatDate(d, 'Invalid');
+            System.assert(false, 'Should have thrown an exception');
+        } catch (Utils.UtilsException e) {
+            // Passes test
+        }
+    }
 
-		System.assertEquals(year, result1.year());
-		System.assertEquals(month, result1.month());
-		System.assertEquals(day, result1.day());
-		System.assertEquals(year, result2.year());
-		System.assertEquals(month, result2.month());
-		System.assertEquals(day, result2.day());
-	}
+    @IsTest
+    private static void parseStringToDate() {
+        Integer year = 2019;
+        Integer month = 2;
+        Integer day = 5;
+        String dateWithSlash = month + '/' + day + '/' + year;
+        String dateWithHyphen = month + '-' + day + '-' + year;
 
-	@IsTest
-	private static void generateRandomNumber() {
-		Integer numberLength = 3;
+        Date nullResult = Utils.parseDate(dateWithSlash, '');
+        Date result1 = Utils.parseDate(dateWithSlash, Utils.DATE_FORMAT_MDDYYYY);
+        Date result2 = Utils.parseDate(dateWithHyphen, Utils.DATE_FORMAT_MDDYYYY);
 
-		String result = Utils.generateRandomNumber(numberLength);
+        System.assertEquals(null, nullResult);
+        System.assertEquals(year, result1.year());
+        System.assertEquals(month, result1.month());
+        System.assertEquals(day, result1.day());
+        System.assertEquals(year, result2.year());
+        System.assertEquals(month, result2.month());
+        System.assertEquals(day, result2.day());
 
-		System.assertEquals(3, result.length());
-	}
+        try {
+            Date error = Utils.parseDate(dateWithSlash, ':');
+            System.assert(false, 'Exception should have been thrown');
+        } catch (Utils.UtilsException e) {
+            // Passes test
+        }
 
-	@IsTest
-	private static void generateRandomNumberWhenInvalidLength() {
-		Integer numberLength = null;
+        try {
+            Date error = Utils.parseDate('x/y/z', Utils.DATE_FORMAT_MDDYYYY);
+            System.assert(false, 'Exception should have been thrown');
+        } catch (Utils.UtilsException e) {
+            // Passes test
+        }
+    }
 
-		String result = Utils.generateRandomNumber(numberLength);
+    @IsTest
+    private static void generateRandomNumber() {
+        Integer numberLength = 3;
 
-		System.assertEquals(6, result.length());
-	}
+        String result = Utils.generateRandomNumber(numberLength);
 
-	@IsTest
-	private static void removeNonNumericCharacters() {
-		String alpanumericString = '(555)555-5555';
+        System.assertEquals(3, result.length());
+    }
 
-		String result = Utils.removeFormatNumberField(alpanumericString);
+    @IsTest
+    private static void generateRandomNumberWhenInvalidLength() {
+        Integer numberLength = null;
 
-		System.assertEquals('5555555555', result);
-	}
+        String result = Utils.generateRandomNumber(numberLength);
 
-	@IsTest
-	private static void parseAmPm_WhenHourMinuteAmPm() {
-		String value = '10:30 PM';
+        System.assertEquals(6, result.length());
+    }
 
-		Datetime result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM));
+    @IsTest
+    private static void removeNonNumericCharacters() {
+        String alpanumericString = '(555)555-5555';
+        String result = Utils.removeFormatNumberField(alpanumericString);
+        System.assertEquals('5555555555', result);
 
-		System.assertEquals(Datetime.newInstanceGmt(Date.today(), Time.newInstance(22, 30, 0, 0)), result);
-	}
+        System.assertEquals('', Utils.removeFormatNumberField(''));
+    }
 
-	@IsTest
-	private static void parseAmPm_WhenHourMinuteSecondAmPm() {
-		String value = '9:30:46 AM';
+    @IsTest
+    private static void parseAmPm_WhenHourMinuteAmPm() {
+        String value = '10:30 PM';
 
-		Datetime result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_SECOND_AM_PM));
+        Datetime result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM));
 
-		System.assertEquals(Datetime.newInstanceGmt(Date.today(),Time.newInstance(9, 30, 46, 0)), result);
-	}
+        System.assertEquals(Datetime.newInstanceGmt(Date.today(), Time.newInstance(22, 30, 0, 0)), result);
+    }
 
-	@IsTest
-	private static void parseAmPm_WhenInvalidPattern() {
-		String value = '9:30:46 AM';
-		try {
-			Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM));
-		} catch (Utils.UtilsException e) {
-			System.assertEquals('Pattern HOUR_MINUTE_AM_PM does not match the value 9:30:46 AM provided', e.getMessage());
-		}
-	}
+    @IsTest
+    private static void parseAmPm_WhenHourMinuteSecondAmPm() {
+        String value = '9:30:46 AM';
+        Datetime result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_SECOND_AM_PM));
+        System.assertEquals(Datetime.newInstanceGmt(Date.today(), Time.newInstance(9, 30, 46, 0)), result);
 
-	@IsTest
-	private static void parseAmPmShouldMatch() {
-		String value = '12:00 AM';
-		Datetime result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM));
-		System.assertEquals(Datetime.newInstanceGmt(Date.today().addDays(1),Time.newInstance(00, 00, 0, 0)), result);
-		value = '1:00 AM';
-		result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM));
-		System.assertEquals(Datetime.newInstanceGmt(Date.today(),Time.newInstance(01, 00, 0, 0)), result);
-		value = '12:00 PM';
-		result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM));
-		System.assertEquals(Datetime.newInstanceGmt(Date.today(),Time.newInstance(12, 00, 0, 0)), result);
-		value = '1:00 PM';
-		result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM));
-		System.assertEquals(Datetime.newInstanceGmt(Date.today(),Time.newInstance(13, 00, 0, 0)), result);
-	}
+        String value2 = '12:00:00 AM';
+        Datetime result2 = Utils.parseAmPm(value2, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_SECOND_AM_PM));
+        System.assertEquals(Datetime.newInstanceGmt(Date.today().addDays(1), Time.newInstance(0, 0, 0, 0)), result2);
+
+        String value3 = '12:00:00 PM';
+        Datetime result3 = Utils.parseAmPm(value3, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_SECOND_AM_PM));
+        System.assertEquals(Datetime.newInstanceGmt(Date.today(), Time.newInstance(12, 0, 0, 0)), result3);
+    }
+
+    @IsTest
+    private static void parseAmPm_WhenInvalidPattern() {
+        try {
+            String value = '9:30:46 AM';
+            Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM));
+        } catch (Utils.UtilsException e) {
+            System.assertEquals('Pattern HOUR_MINUTE_AM_PM does not match the value 9:30:46 AM provided', e.getMessage());
+        }
+    }
+
+    @IsTest
+    private static void parseAmPmShouldMatch() {
+        String value = '12:00 AM';
+        Datetime result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM));
+        System.assertEquals(Datetime.newInstanceGmt(Date.today().addDays(1), Time.newInstance(00, 00, 0, 0)), result);
+        value = '1:00 AM';
+        result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM));
+        System.assertEquals(Datetime.newInstanceGmt(Date.today(), Time.newInstance(01, 00, 0, 0)), result);
+        value = '12:00 PM';
+        result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM));
+        System.assertEquals(Datetime.newInstanceGmt(Date.today(), Time.newInstance(12, 00, 0, 0)), result);
+        value = '1:00 PM';
+        result = Utils.parseAmPm(value, new TimeRegexPattern(TimeRegexPattern.TimeRegexPatternEnum.HOUR_MINUTE_AM_PM));
+        System.assertEquals(Datetime.newInstanceGmt(Date.today(), Time.newInstance(13, 00, 0, 0)), result);
+    }
+
+    @IsTest
+    private static void picklistStringToOptions() {
+        System.assertEquals(true, Utils.picklistStringToOptions('', 'Test').isEmpty());
+        System.assertEquals(false, Utils.picklistStringToOptions('Test1, Test2, Test3', 'Test').isEmpty());
+    }
+
+    @IsTest
+    private static void getPartAFields() {
+        System.assertEquals(false, Utils.getPartAFields().isEmpty());
+    }
+
+    @IsTest
+    private static void mapOfSObjectLabelsByFields() {
+        System.assertEquals(false, Utils.mapOfSObjectLabelsByFields(Schema.getGlobalDescribe().get('Account').getDescribe()).isEmpty());
+    }
+
+    @IsTest
+    private static void getUserRoleMap() {
+        System.assertEquals(false, Utils.getUserRoleMap(new Set<Id>{
+                UserInfo.getUserId()
+        }).isEmpty());
+    }
+
+    @IsTest
+    private static void isEmail() {
+        System.assertEquals(false, Utils.isEmail('NotAnEmail'));
+        System.assertEquals(true, Utils.isEmail('Email@test.com'));
+    }
 }
