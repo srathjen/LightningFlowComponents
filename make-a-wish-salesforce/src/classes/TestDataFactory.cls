@@ -824,4 +824,13 @@ public class TestDataFactory {
         }
         return userRoles;
     }
+
+    public static List<Role__c> createRole(Integer num) {
+        List<Role__c> roles = new List<Role__c>();
+        for (Integer i = 0; i < num; i++) {
+            Role__c role = new Role__c();
+            roles.add(role);
+        }
+        return roles;
+    }
 }
