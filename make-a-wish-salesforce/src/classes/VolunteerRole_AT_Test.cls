@@ -49,6 +49,8 @@ private class VolunteerRole_AT_Test {
 		volunteerRoles[0].Volunteer_Name__c = contacts[0].Id;
 		volunteerRoles[0].Status__c = 'Chapter Review';
 		insert volunteerRoles;
+		
+		trac_TriggerHandlerBase.blockTrigger = false;
 	}
 
 	@IsTest
