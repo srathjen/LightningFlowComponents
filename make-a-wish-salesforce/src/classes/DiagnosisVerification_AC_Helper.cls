@@ -1,8 +1,9 @@
 /**
- * @description     Helper class to separate out selector and other common functions related to DiagnosisVerification_AC
+ * @description Helper class to separate out selector and other common functions related to DiagnosisVerification_AC
  *
- * @author          Chris Shinnimin, Traction on Demand
- * @date            2020-03-03
+ * @author Chris Shinnimin, Traction on Demand
+ *
+ * @date 2020-03-03
  */
 public class DiagnosisVerification_AC_Helper {
     /*
@@ -16,21 +17,21 @@ public class DiagnosisVerification_AC_Helper {
       */
     public static List<Medical_Questions__c> getMedicalQuestions() {
         return [
-            SELECT
-                Id,
-                RecordTypeId,
-                Condition_Description__c,
-                Condition_Description__r.Name,
-                Current_Condition__c,
-                Data_Type__c,
-                Epilepsy_picklist__c,
-                Picklist_values__c,
-                Question__c,
-                Recommendation_to_Chapter__c,
-                Sort_Order__c,
-                Wrapper_Variable__c
-            FROM Medical_Questions__c
-            ORDER BY Sort_Order__c
+                SELECT
+                        Id,
+                        RecordTypeId,
+                        Condition_Description__c,
+                        Condition_Description__r.Name,
+                        Current_Condition__c,
+                        Data_Type__c,
+                        Epilepsy_picklist__c,
+                        Picklist_values__c,
+                        Question__c,
+                        Recommendation_to_Chapter__c,
+                        Sort_Order__c,
+                        Wrapper_Variable__c
+                FROM Medical_Questions__c
+                ORDER BY Sort_Order__c
         ];
     }
 
@@ -45,8 +46,8 @@ public class DiagnosisVerification_AC_Helper {
      * @author          Chris Shinnimin, Traction on Demand
      * @createdDate     2020-03-04
      */
-    public static Map<String,List<Medical_Questions__c>> createMapOfMedicalQuestionsByDescription(List<Medical_Questions__c> medicalQuestions) {
-        Map<String,List<Medical_Questions__c>> mapOfMedicalQuestionsByDescription = new Map<String,List<Medical_Questions__c>>();
+    public static Map<String, List<Medical_Questions__c>> createMapOfMedicalQuestionsByDescription(List<Medical_Questions__c> medicalQuestions) {
+        Map<String, List<Medical_Questions__c>> mapOfMedicalQuestionsByDescription = new Map<String, List<Medical_Questions__c>>();
 
         for (Medical_Questions__c medicalQuestion : medicalQuestions) {
             if (!mapOfMedicalQuestionsByDescription.containsKey(medicalQuestion.Condition_Description__c)) {
@@ -72,31 +73,30 @@ public class DiagnosisVerification_AC_Helper {
      */
     public static List<Diagnosis_Verification__c> getDiagnosisVerifications(Id leadId) {
         return [
-            SELECT
-                Id,
-                Group1__c,
-                ICD_Code__c,
-                Lead__c,
-                Primary_Diagnosis__c,
-                PCD_ICD__c,
-                Order__c,
-                Short_Description__c,
-                Condition_Description__c,
-                Condition_Description__r.Name,
-                IsEligible__c,
-            (
                 SELECT
-                    Medical_Question__c,
-                    Epilepsy_Value__c,
-                    Medical_Question_Answer__c,
-                    IsEligible__c,
-                    Comment__c
-                FROM DiagnosisMedicalQuestions__r
-            )
-            FROM Diagnosis_Verification__c
-            WHERE Lead__c = :leadId
-            ORDER BY Order__c
-            LIMIT 50000
+                        Id,
+                        Group1__c,
+                        ICD_Code__c,
+                        Lead__c,
+                        Primary_Diagnosis__c,
+                        PCD_ICD__c,
+                        Order__c,
+                        Short_Description__c,
+                        Condition_Description__c,
+                        Condition_Description__r.Name,
+                        IsEligible__c, (
+                        SELECT
+                                Medical_Question__c,
+                                Epilepsy_Value__c,
+                                Medical_Question_Answer__c,
+                                IsEligible__c,
+                                Comment__c
+                        FROM DiagnosisMedicalQuestions__r
+                )
+                FROM Diagnosis_Verification__c
+                WHERE Lead__c = :leadId
+                ORDER BY Order__c
+                LIMIT 50000
         ];
     }
 
@@ -116,18 +116,18 @@ public class DiagnosisVerification_AC_Helper {
      */
     public static List<ICD_Codes__c> getIcdCodeInfo(String nameString) {
         return [
-            SELECT
-                Id,
-                Name,
-                Skip_Medical_Question__c,
-                Condition_Description__c,
-                Short_Description__c,
-                Condition_Description__r.Name,
-                Condition_Description__r.isEligible__c,
-                Group1__c
-            FROM ICD_Codes__c
-            WHERE Name = :nameString
-            LIMIT 50000
+                SELECT
+                        Id,
+                        Name,
+                        Skip_Medical_Question__c,
+                        Condition_Description__c,
+                        Short_Description__c,
+                        Condition_Description__r.Name,
+                        Condition_Description__r.isEligible__c,
+                        Group1__c
+                FROM ICD_Codes__c
+                WHERE Name = :nameString
+                LIMIT 50000
         ];
     }
 
@@ -146,17 +146,17 @@ public class DiagnosisVerification_AC_Helper {
      */
     public static List<Condition_Description__c> getConditionDescriptionInfo() {
         return [
-            SELECT
-                Id,
-                Name,
-                isEligible__c,
-                Group1__c,
-                Code_To_Use__c,
-                InActive__c,
-                Not_Listed__c,
-                PR_Diagnosis__c
-            FROM Condition_Description__c
-            WHERE InActive__c = FALSE
+                SELECT
+                        Id,
+                        Name,
+                        isEligible__c,
+                        Group1__c,
+                        Code_To_Use__c,
+                        InActive__c,
+                        Not_Listed__c,
+                        PR_Diagnosis__c
+                FROM Condition_Description__c
+                WHERE InActive__c = FALSE
         ];
     }
 
@@ -171,8 +171,8 @@ public class DiagnosisVerification_AC_Helper {
      * @author          Chris Shinnimin, Traction on Demand
      * @createdDate     2020-03-04
      */
-    public static Map<String,List<Condition_Description__c>> createMapOfConditionDescriptionsByName(List<Condition_Description__c> conditionDescriptions) {
-        Map<String,List<Condition_Description__c>> mapOfConditionDescriptionsByName = new Map<String,List<Condition_Description__c>>();
+    public static Map<String, List<Condition_Description__c>> createMapOfConditionDescriptionsByName(List<Condition_Description__c> conditionDescriptions) {
+        Map<String, List<Condition_Description__c>> mapOfConditionDescriptionsByName = new Map<String, List<Condition_Description__c>>();
 
         for (Condition_Description__c conditionDescription : conditionDescriptions) {
             if (!mapOfConditionDescriptionsByName.containsKey(conditionDescription.Name)) {
