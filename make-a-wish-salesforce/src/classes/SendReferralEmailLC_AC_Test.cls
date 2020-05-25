@@ -5,6 +5,7 @@ public class SendReferralEmailLC_AC_Test {
 
     @TestSetup
     public static void setup() {
+        trac_TriggerHandlerBase.blockTrigger = true;
         List<Account> accounts = TestDataFactory.createAccount(1);
         Account account1 = accounts.get(0);
         account1.Name = 'Make-A-Wish Arizona';
@@ -27,6 +28,8 @@ public class SendReferralEmailLC_AC_Test {
         lead.Company = 'MAW';
         lead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
         insert lead;
+
+        trac_TriggerHandlerBase.blockTrigger = false;
     }
 
     @IsTest
@@ -37,6 +40,7 @@ public class SendReferralEmailLC_AC_Test {
                 WHERE Name = 'Jack Smith'
         ];
 
+        SendReferralEmailLC_AC.getLeadInformation(lead.Id);
         SendReferralEmailLC_AC.getOfficeViaLead(lead.Id);
         SendReferralEmailLC_AC.triggerEmail(lead.Id, 'Test@test.com');
         ChapterChangeConfirmationPopup_AC.updateLeadChapter('revert', lead.Id);

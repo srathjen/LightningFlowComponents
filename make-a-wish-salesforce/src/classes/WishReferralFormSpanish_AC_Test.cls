@@ -1,28 +1,33 @@
-@isTest
+@IsTest
 public class WishReferralFormSpanish_AC_Test {
-    
-    @testsetup static void prepdata()    {
-        Condition_Description__c conditionDescription = new Condition_Description__c(name='Cancer', Code_to_Use__c = 'C00');
+
+    @TestSetup
+    static void setup() {
+        trac_TriggerHandlerBase.blockTrigger = true;
+
+        Condition_Description__c conditionDescription = new Condition_Description__c(Name = 'Cancer', Code_To_Use__c = 'C00');
         insert conditionDescription;
 
         ICD_Codes__c icdCode = new ICD_Codes__c();
         icdCode.Name = 'C00';
-        icdCode.Condition_Description__c = conditionDescription.id;
+        icdCode.Condition_Description__c = conditionDescription.Id;
         insert icdCode;
 
         List<Account> chapterAccounts = TestDataFactory.createAccount(1);
         chapterAccounts[0].Intake_Manager__c = UserInfo.getUserId();
         insert chapterAccounts;
-        
-        Office__c office = new Office__c(name = Utils.generateRandomCharacterString(7));
+
+        Office__c office = new Office__c(Name = Utils.generateRandomCharacterString(7));
         insert office;
 
-        Zip_Code__c zipCode = new Zip_Code__c(name='85016',External_Id__c=Utils.generateRandomNumber(7));
+        Zip_Code__c zipCode = new Zip_Code__c(Name = '85016', External_Id__c = Utils.generateRandomNumber(7));
         zipCode.Office__c = office.Id;
         insert zipCode;
+
+        trac_TriggerHandlerBase.blockTrigger = false;
     }
 
-    @isTest static void relationshipNone() {
+    @IsTest static void relationshipNone() {
         PageReference pageRef = Page.WishReferralForm_Spanish_VF;
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
@@ -42,31 +47,35 @@ public class WishReferralFormSpanish_AC_Test {
         controller.getMedicalRequiredFields();
 
         WishReferralFormSpanish_AC.siblingWrapper sibling = new WishReferralFormSpanish_AC.siblingWrapper();
-        String fname = sibling.fname;
-        String lname = sibling.lname;
+        String fName = sibling.fName;
+        String lName = sibling.lName;
         String age = sibling.age;
+        String refChildFormParent = controller.refChildFormParent;
+        String referralComment = controller.referralComment;
     }
 
-    @istest static void relationshipSelf() {
+    @IsTest
+    static void relationshipSelf() {
         PageReference pageRef = Page.WishReferralForm_Spanish_VF;
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
         WishReferralFormSpanish_AC controller = new WishReferralFormSpanish_AC();
         controller.currLead.Has_this_child_ever_received_prior_wish__c = Label.Wish_Form_Yes;
         controller.currLead.Any_medical_reason_for_moving_quickly__c = Label.Wish_Form_Yes;
-        controller.currLead.Relationship_To_Child__c = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_SELF;
+        controller.currLead.Relationship_to_child__c = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_SELF;
         controller.currLead.Child_Age__c = String.valueOf(5);
         controller.CreateLead();
-        controller.copyReferralInfo();
+        controller.CopyReferralInfo();
     }
 
-    @istest static void relationshipSelf1() {
+    @IsTest
+    static void relationshipSelf1() {
         PageReference pageRef = Page.WishReferralForm_Spanish_VF;
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
 
         WishReferralFormSpanish_AC controller = new WishReferralFormSpanish_AC();
-        
+
         fillReferralContacts(controller.currLead);
 
         controller.currLead.Has_this_child_ever_received_prior_wish__c = Label.Wish_Form_Yes;
@@ -74,44 +83,53 @@ public class WishReferralFormSpanish_AC_Test {
         controller.currLead.Child_Age__c = String.valueOf(15);
         controller.currLead.DOB__c = Date.today().addYears(-15);
         controller.currLead.is_Family_Aware_of_Referral__c = Label.Wish_Form_Yes;
-        
+
         controller.currLead.What_is_the_family_s_primary_spoken_lang__c = 'English';
 
-        ICD_Codes__c icdCode = [SELECT id, name FROM ICD_Codes__c WHERE name = 'C00' LIMIT 1];
+        ICD_Codes__c icdCode = [
+                SELECT Id, Name
+                FROM ICD_Codes__c
+                WHERE Name = 'C00'
+                LIMIT 1
+        ];
         controller.diagnosisFilter = icdCode.Name;
         controller.selectedDiagnosis = icdCode.Name;
         controller.currLead.Hospital_Treatment_Facility_Treating__c = Utils.generateRandomCharacterString(7);
-        controller.currList = new List<WishReferralFormSpanish_AC.SiblingWrapper>{
-                new WishReferralFormSpanish_AC.SiblingWrapper()
+        controller.currList = new List<WishReferralFormSpanish_AC.siblingWrapper>{
+                new WishReferralFormSpanish_AC.siblingWrapper()
         };
         controller.currList[0].fName = Utils.generateRandomCharacterString(3);
         controller.currList[0].lName = Utils.generateRandomCharacterString(7);
         controller.currList[0].age = Utils.generateRandomCharacterString(1);
-        
+
         controller.CreateLead();
-        controller.currLead.Relationship_To_Child__c = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_SELF;
+        controller.currLead.Relationship_to_child__c = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_SELF;
         controller.CreateLead();
-        controller.copyReferralInfo();
+        controller.CopyReferralInfo();
     }
 
-    @isTest static void relationshipSelf2() {
+    @IsTest static void relationshipSelf2() {
         PageReference pageRef = Page.WishReferralForm_Spanish_VF;
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
-        Contact con = WishReferralFormSpanish_AC_Test.createContact();
+        WishReferralFormSpanish_AC_Test.createContact();
         WishReferralFormSpanish_AC controller = new WishReferralFormSpanish_AC();
         controller.currLead.Has_this_child_ever_received_prior_wish__c = Label.Wish_Form_Yes;
         controller.currLead.Any_medical_reason_for_moving_quickly__c = Label.Wish_Form_Yes;
         controller.currLead.Medical_Provider_Category__c = Constant_AC.LEAD_MEDICAL_PROVIDER_PHYSICIAN;
-        controller.currLead.Relationship_To_Child__c = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_SELF;
+        controller.currLead.Relationship_to_child__c = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_SELF;
         fillReferralContacts(controller.currLead);
         controller.currLead.is_Family_Aware_of_Referral__c = Label.Wish_Form_Yes;
         controller.currLead.Child_Age__c = String.valueOf(16);
-        controller.currLead.DOB__c = Date.valueOf(Date.Today().addYears(-16));
+        controller.currLead.DOB__c = Date.valueOf(Date.today().addYears(-16));
         controller.currLead.What_is_the_family_s_primary_spoken_lang__c = 'English';
 
-        Condition_Description__c conditionDescription = [SELECT id,name,Code_to_Use__c FROM Condition_Description__c WHERE Code_to_Use__c = 'C00'];
-        controller.diagnosisFilter = conditionDescription.Code_to_Use__c;
+        Condition_Description__c conditionDescription = [
+                SELECT Id, Name, Code_To_Use__c
+                FROM Condition_Description__c
+                WHERE Code_To_Use__c = 'C00'
+        ];
+        controller.diagnosisFilter = conditionDescription.Code_To_Use__c;
         controller.selectedDiagnosis = conditionDescription.Name;
         controller.currLead.Hospital_Treatment_Facility_Treating__c = Utils.generateRandomCharacterString(13);
         controller.currLead.Treating_Medical_Professional_First_Name__c = controller.currLead.Referrer_FirstName__c;
@@ -119,46 +137,56 @@ public class WishReferralFormSpanish_AC_Test {
         controller.currLead.Treating_Medical_Professional_Phone__c = controller.currLead.Referrer_Phone__c;
         controller.currLead.Treating_Medical_Professional_Email__c = controller.currLead.Referrer_Email__c;
         controller.currLead.Any_medical_reason_for_moving_quickly__c = Label.Wish_Form_Yes;
-        controller.diagnosisYear = String.valueOf(Date.Today().Year()-4);
-        controller.diagnosisMonth = String.valueOf(Date.Today().Month());
+        controller.diagnosisYear = String.valueOf(Date.today().year() - 4);
+        controller.diagnosisMonth = String.valueOf(Date.today().month());
         controller.CreateLead();
-        controller.copyReferralInfo();
+        controller.CopyReferralInfo();
     }
 
-    public static testMethod void relationshipSelf3() {
+    @IsTest
+    public static void relationshipSelf3() {
         PageReference pageRef = Page.WishReferralForm_Spanish_VF;
         WishReferralFormSpanish_AC controller = new WishReferralFormSpanish_AC();
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
-        Contact con = WishReferralFormSpanish_AC_Test.createContact();
+        WishReferralFormSpanish_AC_Test.createContact();
         List<SelectOption> statesList = controller.getStates();
 
-        Condition_Description__c conditionDescription = [SELECT id,name,Code_to_Use__c FROM Condition_Description__c WHERE Code_to_Use__c = 'C00'];
-        ICD_Codes__c icdCode = [SELECT id, name FROM ICD_Codes__c WHERE name = 'C00' LIMIT 1];
+        Condition_Description__c conditionDescription = [
+                SELECT Id, Name, Code_To_Use__c
+                FROM Condition_Description__c
+                WHERE Code_To_Use__c = 'C00'
+        ];
+        ICD_Codes__c icdCode = [
+                SELECT Id, Name
+                FROM ICD_Codes__c
+                WHERE Name = 'C00'
+                LIMIT 1
+        ];
 
         Lead dupeLead = new Lead();
         dupeLead.is_Family_Aware_of_Referral__c = Label.Wish_Form_Yes;
         dupeLead.PD_ICD_Code__c = icdCode.Id;
-        dupeLead.PD_Condition_Description__c = conditionDescription.name;
+        dupeLead.PD_Condition_Description__c = conditionDescription.Name;
         dupeLead.Status = Constant_AC.LEAD_STATUS_REFERRED;
-        dupeLead.Diagnosis_Given_By_Referrer__c = conditionDescription.name;
-        dupeLead.Hospital_Treatment_Facility__c = Utils.generateRandomCharacterString(10)+ ' ' + Utils.generateRandomCharacterString(8);
+        dupeLead.Diagnosis_Given_By_Referrer__c = conditionDescription.Name;
+        dupeLead.Hospital_Treatment_Facility__c = Utils.generateRandomCharacterString(10) + ' ' + Utils.generateRandomCharacterString(8);
         dupeLead.Hospital_Treatment_Facility_Treating__c = dupeLead.Hospital_Treatment_Facility__c;
         dupeLead.Treating_Medical_Professional_Last_Name__c = Utils.generateRandomCharacterString(9);
         dupeLead.Gender__c = Constant_AC.CONTACT_GENDER_MALE;
         dupeLead.Company = Utils.generateRandomCharacterString(7) + ', Inc.';
-        
+
         controller.currLead.Has_this_child_ever_received_prior_wish__c = Label.Wish_Form_Yes;
         controller.currLead.Any_medical_reason_for_moving_quickly__c = Label.Wish_Form_Yes;
         fillReferralContacts(controller.currLead);
-        controller.currLead.Relationship_To_Child__c = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN;
+        controller.currLead.Relationship_to_child__c = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN;
         controller.currLead.is_Family_Aware_of_Referral__c = Label.Wish_Form_Yes;
-        
+
         controller.currLead.Child_Age__c = '16';
-        controller.currLead.DOB__c = dupeLead.DOB__c = Date.valueOf(Date.Today().addYears(-16));
-        controller.currLead.State = statesList[Math.mod(Math.abs(Crypto.getRandomInteger()),statesList.size()-1)].getValue();
-        dupeLead.firstName = controller.currLead.firstName;
-        dupeLead.lastName = controller.currLead.lastName;
+        controller.currLead.DOB__c = dupeLead.DOB__c = Date.valueOf(Date.today().addYears(-16));
+        controller.currLead.State = statesList[Math.mod(Math.abs(Crypto.getRandomInteger()), statesList.size() - 1)].getValue();
+        dupeLead.FirstName = controller.currLead.FirstName;
+        dupeLead.LastName = controller.currLead.LastName;
         dupeLead.Street = controller.currLead.Street;
         dupeLead.City = controller.currLead.City;
         dupeLead.State = controller.currLead.State;
@@ -170,7 +198,7 @@ public class WishReferralFormSpanish_AC_Test {
         controller.selectedDiagnosis = conditionDescription.Name;
         controller.currLead.Hospital_Treatment_Facility_Treating__c = Utils.generateRandomCharacterString(12);
         controller.currLead.Any_medical_reason_for_moving_quickly__c = Label.Wish_Form_Yes;
-        controller.currLead.PD_Condition_Description__c = conditionDescription.name;
+        controller.currLead.PD_Condition_Description__c = conditionDescription.Name;
         Lead dupeLead2 = dupeLead.clone();
         dupeLead2.Status = Constant_AC.LEAD_STATUS_INQUIRY;
         Lead dupeLead3 = dupeLead.clone();
@@ -178,136 +206,153 @@ public class WishReferralFormSpanish_AC_Test {
 
         insert new List<Lead>{
                 dupeLead, dupeLead2, dupeLead3
-        }; 
+        };
         controller.CreateLead();
-        controller.copyReferralInfo();
+        controller.CopyReferralInfo();
     }
 
-    public static testMethod void relationshipOther() {
+    @IsTest
+    public static void relationshipOther() {
         PageReference pageRef = Page.WishReferralForm_Spanish_VF;
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
         WishReferralFormSpanish_AC controller = new WishReferralFormSpanish_AC();
         controller.currLead.Has_this_child_ever_received_prior_wish__c = Label.Wish_Form_Yes;
         controller.currLead.Any_medical_reason_for_moving_quickly__c = Label.Wish_Form_Yes;
-        controller.currLead.Relationship_To_Child__c = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_OTHER;
+        controller.currLead.Relationship_to_child__c = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_OTHER;
         controller.CreateLead();
     }
 
-    public static testMethod void relationshipMedicalProfessional() {
+    @IsTest
+    public static void relationshipMedicalProfessional() {
         PageReference pageRef = Page.WishReferralForm_Spanish_VF;
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
         WishReferralFormSpanish_AC controller = new WishReferralFormSpanish_AC();
         controller.currLead.Has_this_child_ever_received_prior_wish__c = Label.Wish_Form_Yes;
         controller.currLead.Any_medical_reason_for_moving_quickly__c = Label.Wish_Form_Yes;
-        controller.currLead.Relationship_To_Child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+        controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
         controller.currLead.Medical_Provider_Category__c = Constant_AC.LEAD_MEDICAL_PROVIDER_NURSE_PRACTITIONER;
 
         controller.CreateLead();
     }
 
-    public static testMethod void medicalFirstNameblank() {
+    @IsTest
+    public static void medicalFirstNameblank() {
         PageReference pageRef = Page.WishReferralForm_Spanish_VF;
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
         WishReferralFormSpanish_AC controller = new WishReferralFormSpanish_AC();
         controller.currLead.Has_this_child_ever_received_prior_wish__c = Label.Wish_Form_Yes;
         controller.currLead.Any_medical_reason_for_moving_quickly__c = Label.Wish_Form_Yes;
-        controller.currLead.Relationship_To_Child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+        controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
         controller.currLead.LastName = Utils.generateRandomCharacterString(8);
-        controller.diagnosisYear = String.ValueOf(Date.Today().addYears(-2));
-        controller.diagnosisMonth = String.ValueOf(Date.Today().Month());
+        controller.diagnosisYear = String.valueOf(Date.today().addYears(-2));
+        controller.diagnosisMonth = String.valueOf(Date.today().month());
         controller.CreateLead();
     }
 
-    public static testMethod void relationshipFamily() {
+    @IsTest
+    public static void relationshipFamily() {
         PageReference pageRef = Page.WishReferralForm_Spanish_VF;
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
         WishReferralFormSpanish_AC controller = new WishReferralFormSpanish_AC();
         controller.currLead.Has_this_child_ever_received_prior_wish__c = Label.Wish_Form_Yes;
         controller.currLead.Any_medical_reason_for_moving_quickly__c = Label.Wish_Form_Yes;
-        controller.currLead.Relationship_To_Child__c = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN;
+        controller.currLead.Relationship_to_child__c = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN;
         controller.currLead.LastName = Utils.generateRandomCharacterString(4);
-        controller.currLead.DOB__c = Date.Today().addYears(-16);
-        controller.currlead.Child_Age__c = '16';
+        controller.currLead.DOB__c = Date.today().addYears(-16);
+        controller.currLead.Child_Age__c = '16';
         controller.CreateLead();
     }
 
-    public static testMethod void relationshipSibling() {
+    @IsTest
+    public static void relationshipSibling() {
         PageReference pageRef = Page.WishReferralForm_Spanish_VF;
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
         WishReferralFormSpanish_AC controller = new WishReferralFormSpanish_AC();
         controller.currLead.Has_this_child_ever_received_prior_wish__c = Label.Wish_Form_Yes;
         controller.currLead.Any_medical_reason_for_moving_quickly__c = Label.Wish_Form_Yes;
-        controller.currLead.Relationship_To_Child__c = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN;
+        controller.currLead.Relationship_to_child__c = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN;
         controller.currLead.LastName = Utils.generateRandomCharacterString(10);
-        controller.currLead.DOB__c = Date.Today().addDays(-1050);
-        controller.currlead.Of_Siblings__c = '2';
+        controller.currLead.DOB__c = Date.today().addDays(-1050);
+        controller.currLead.of_Siblings__c = '2';
         controller.getSiblingList();
         controller.CreateLead();
         controller.getStates();
-        controller.copyReferrerInfo = True;
-        controller.copyReferralInfo();     
+        controller.copyReferrerInfo = true;
+        controller.CopyReferralInfo();
         controller.getNoOfSiblings();
         controller.currLead.is_Family_Aware_of_Referral__c = Label.Wish_Form_Yes;
         controller.disPlayChildForm();
     }
 
-    public static testMethod void relationshipSibling2() {
+    @IsTest
+    public static void relationshipSibling2() {
         PageReference pageRef = Page.WishReferralForm_Spanish_VF;
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
         WishReferralFormSpanish_AC controller = new WishReferralFormSpanish_AC();
         controller.currLead.Has_this_child_ever_received_prior_wish__c = Label.Wish_Form_Yes;
         controller.currLead.Any_medical_reason_for_moving_quickly__c = Label.Wish_Form_Yes;
-        controller.currLead.Relationship_To_Child__c = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_SELF;
+        controller.currLead.Relationship_to_child__c = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_SELF;
         controller.currLead.LastName = Utils.generateRandomCharacterString(10);
-        controller.currLead.DOB__c = Date.Today().addDays(-1050);
-        controller.currlead.Of_Siblings__c = '2';
+        controller.currLead.DOB__c = Date.today().addDays(-1050);
+        controller.currLead.of_Siblings__c = '2';
         controller.getSiblingList();
         controller.CreateLead();
         controller.getStates();
-        controller.copyReferrerInfo = True;
-        controller.copyReferralInfo();       
-        controller.getNoOfSiblings();        
+        controller.copyReferrerInfo = true;
+        controller.CopyReferralInfo();
+        controller.getNoOfSiblings();
         controller.currLead.is_Family_Aware_of_Referral__c = Label.Wish_Form_Yes;
         controller.disPlayChildForm();
     }
 
-    public static testmethod void callmethods() {
+    @IsTest
+    public static void callmethods() {
         WishReferralFormSpanish_AC obj = new WishReferralFormSpanish_AC();
         obj.getNonMedicalReqFields();
         obj.getMedicalRequiredFields();
         obj.getSelfRequiredFields();
         obj.getRelationshipsToChild();
         obj.getHearWish();
-        obj.getChildagesp();        
+        obj.getChildagesp();
         obj.getHereAboutMAW();
         obj.getdiaYear();
         obj.getCommunication();
     }
 
-    static contact createContact() {
+    static Contact createContact() {
         Contact currCon = new Contact();
-        currcon.FirstName = Utils.generateRandomCharacterString(7);
-        currcon.lastName = Utils.generateRandomCharacterString(11);
-        currCon.Birthdate = Date.Today().addYears(-17);
+        currCon.FirstName = Utils.generateRandomCharacterString(7);
+        currCon.LastName = Utils.generateRandomCharacterString(11);
+        currCon.Birthdate = Date.today().addYears(-17);
         currCon.Phone = Utils.generateRandomNumber(10);
         currCon.Email = Utils.generateRandomEmailAddress();
-        
-        Condition_Description__c conditionDescription = [SELECT id, Name FROM Condition_Description__c WHERE Code_to_Use__c = 'C00' LIMIT 1];
+
+        Condition_Description__c conditionDescription = [
+                SELECT Id, Name
+                FROM Condition_Description__c
+                WHERE Code_To_Use__c = 'C00'
+                LIMIT 1
+        ];
 
         currCon.Diagnosis__c = conditionDescription.Name;
         insert currCon;
         return currCon;
     }
 
-    private static void fillReferralContacts(Lead leadToFill)  {
-        Zip_Code__c zipCode = [SELECT id, name FROM Zip_Code__c WHERE name = '85016' LIMIT 1];
-        
+    private static void fillReferralContacts(Lead leadToFill) {
+        Zip_Code__c zipCode = [
+                SELECT Id, Name
+                FROM Zip_Code__c
+                WHERE Name = '85016'
+                LIMIT 1
+        ];
+
         leadToFill.Referrer_FirstName__c = Utils.generateRandomCharacterString(5);
         leadToFill.Referrer_Last_Name__c = Utils.generateRandomCharacterString(5);
         leadToFill.Referrer_Phone__c = Utils.generateRandomNumber(10);
@@ -315,12 +360,12 @@ public class WishReferralFormSpanish_AC_Test {
         leadToFill.Referrer_City__c = Utils.generateRandomCharacterString(8);
         leadToFill.Referrer_Zip__c = zipCode.Name;
         leadToFill.Medical_Provider_Category__c = Constant_AC.LEAD_MEDICAL_PROVIDER_PHYSICIAN;
-        
+
         leadToFill.FirstName = Utils.generateRandomCharacterString(5);
         leadToFill.Child_Middle_Initial__c = Utils.generateRandomCharacterString(1);
-        leadToFill.lastName = Utils.generateRandomCharacterString(7);
+        leadToFill.LastName = Utils.generateRandomCharacterString(7);
         leadToFill.Gender__c = Constant_AC.CONTACT_GENDER_MALE;
-        
+
         leadToFill.Parent_First_Name__c = Utils.generateRandomCharacterString(8);
         leadToFill.Parent_Last_Name__c = Utils.generateRandomCharacterString(8);
         leadToFill.Street = Utils.generateRandomNumber(3) + ' ' + Utils.generateRandomCharacterString(7);
@@ -335,7 +380,4 @@ public class WishReferralFormSpanish_AC_Test {
         leadToFill.Treating_Medical_Professional_Email__c = Utils.generateRandomEmailAddress();
     }
 
-    
-
-    
 }

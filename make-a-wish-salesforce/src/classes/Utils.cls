@@ -251,6 +251,34 @@ public class Utils {
         return randStr;
     }
 
+    /**
+     * @description Generates a string of lowercase letters of specified length;
+     *
+     * @param numCharacters
+     *
+     * @return String
+     */
+    public static String generateRandomCharacterString(Integer numCharacters) {
+        if (numCharacters == null || numCharacters <= 0) {
+            numCharacters = 6;
+        }
+        final String characters = 'abcdefghijklmnopqrstuvwxyz';
+        String returnString = '';
+        for (Integer i = 0; i < numCharacters; i++) {
+            returnString += Math.mod(Math.abs(Crypto.getRandomInteger()), characters.length() - 1);
+        }
+        return returnString;
+    }
+
+    /**
+     * @description Generates a random email address.
+     *
+     * @return
+     */
+    public static String generateRandomEmailAddress() {
+        return generateRandomCharacterString(5) + '@' + generateRandomCharacterString(5) + '.' + generateRandomCharacterString(3);
+    }
+
     /*
      * Static function to convert a comma separated String to a List<SelectOption>
      *
@@ -307,7 +335,7 @@ public class Utils {
      * @author			MST Solutions
      */
     public static List<Schema.FieldSetMember> getPartAFields() {
-        return SObjectType.Lead.FieldSets.Diagnosis_Verfication_Fieldset.getFields();
+        return SObjectType.Lead.fieldSets.Diagnosis_Verfication_Fieldset.getFields();
     }
 
     /*

@@ -1,11 +1,12 @@
-/*****************************************************************************************************************
-Created By : MST Solutions
-Created Date : 1/23/2017
-Description : This test class used to perform unit testing for the DV Medical Summary Attachment
-
-Modification Log:
-09/10/2019 - Manik - WLP-423
-*******************************************************************************************************************/
+/**
+ * @description This test class used to perform unit testing for the DV Medical Summary Attachment
+ * Modification Log:
+ * 09/10/2019 - Manik - WLP-423
+ *
+ * @author MST Solutions
+ *
+ * @date : 1/23/2017
+ **/
 @IsTest
 public class DVMedicalSummaryAttachment_AC_Test {
 
@@ -13,12 +14,9 @@ public class DVMedicalSummaryAttachment_AC_Test {
 
     @TestSetup
     public static void setup() {
-        User currUser = [
-                SELECT Id
-                FROM User
-                WHERE Id = :UserInfo.getUserId()
-                LIMIT 1
-        ];
+        trac_TriggerHandlerBase.blockTrigger = true;
+
+        User currUser = Utils.currentUser;
         List<Account> accounts = TestDataFactory.createAccount(1);
         Account account = accounts.get(0);
         account.Name = 'Make-A-Wish Arizona';
@@ -46,38 +44,40 @@ public class DVMedicalSummaryAttachment_AC_Test {
         cg__Lead_File__c leadFile = leadFilesDataFactory.get(0);
         leadFile.cg__Lead__c = lead.Id;
         insert leadFilesDataFactory;
+
+        trac_TriggerHandlerBase.blockTrigger = false;
     }
 
-	//Attachment for Diagnosis Verification
+    //Attachment for Diagnosis Verification
     @IsTest
-	public static void getAttachmentWhenSaved() {
-		Lead lead = [
-				SELECT Id
-				FROM Lead
+    public static void getAttachmentWhenSaved() {
+        Lead lead = [
+                SELECT Id
+                FROM Lead
                 WHERE Name = 'Jack Smith'
-		];
-		List<cg__Lead_File__c> leadFile = [
-				SELECT Id
-				FROM cg__Lead_File__c
+        ];
+        List<cg__Lead_File__c> leadFile = [
+                SELECT Id
+                FROM cg__Lead_File__c
                 WHERE cg__Lead__c = :lead.Id
-		];
-		Test.startTest();
-		PageReference pageRef = Page.DVMedicalSummaryAttachment_VF;
-		Test.setCurrentPage(pageRef);
-		ApexPages.currentPage().getParameters().put('id', lead.Id);
-		ApexPages.currentPage().getParameters().put('saved', 'true');
-		DVMedicalSummaryAttachment_AC currDiagnosisVerificationDupe = new DVMedicalSummaryAttachment_AC();
-		currDiagnosisVerificationDupe.getAttachments();
-		Attachment attach = new Attachment();
-		attach.Name = 'Wish Child Medical Summary';
-		Blob bodyBlob = Blob.valueOf('Medical Summary Wish Child');
-		attach.Body = bodyBlob;
-		currDiagnosisVerificationDupe.newAttachment = attach;
-		currDiagnosisVerificationDupe.save();
-		currDiagnosisVerificationDupe.attachmentId = leadFile[0].Id;
-		currDiagnosisVerificationDupe.removeAttachment();
-		Test.stopTest();
-	}
+        ];
+        Test.startTest();
+        PageReference pageRef = Page.DVMedicalSummaryAttachment_VF;
+        Test.setCurrentPage(pageRef);
+        ApexPages.currentPage().getParameters().put('id', lead.Id);
+        ApexPages.currentPage().getParameters().put('saved', 'true');
+        DVMedicalSummaryAttachment_AC currDiagnosisVerificationDupe = new DVMedicalSummaryAttachment_AC();
+        currDiagnosisVerificationDupe.getAttachments();
+        Attachment attach = new Attachment();
+        attach.Name = 'Wish Child Medical Summary';
+        Blob bodyBlob = Blob.valueOf('Medical Summary Wish Child');
+        attach.Body = bodyBlob;
+        currDiagnosisVerificationDupe.newAttachment = attach;
+        currDiagnosisVerificationDupe.save();
+        currDiagnosisVerificationDupe.attachmentId = leadFile[0].Id;
+        currDiagnosisVerificationDupe.removeAttachment();
+        Test.stopTest();
+    }
 
     //Attachment for Diagnosis Verification
     @IsTest
