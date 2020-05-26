@@ -1,6 +1,8 @@
-/* Created by : MST
-Description : This class will be used to create JSON for LMS User Request Call.
-*/
+/**
+ * @description This class will be used to create JSON for LMS User Request Call
+ *
+ * @author MST
+ */
 public class LMSUserRequest {
     public String login;
     public String first_name;

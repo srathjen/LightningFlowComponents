@@ -1,6 +1,8 @@
-/*Created by : MST 
-Description : This class is used to convert the Course response JSON from LMS to LMSCourse */
-
+/**
+ * @description This class is used to convert the Course response JSON from LMS to LMSCourse
+ *
+ * @author MST
+ */
 public class LMSCourse {
     public Integer id;  //1234
     public String name; //WishGranting101-Arizona

@@ -1,3 +1,8 @@
+/**
+ * @description
+ *
+ * @author MST
+ */
 public class LMSOrientationUpdateRequest {
     public String user_login;
     public String course_code;

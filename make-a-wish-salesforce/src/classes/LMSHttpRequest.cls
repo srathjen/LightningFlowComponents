@@ -1,6 +1,8 @@
-/* Created by : MST
-Description : This Class used to make callouts to LMS.
-*/
+/**
+ * @description This Class used to make callouts to LMS
+ *
+ * @author MST
+ */
 public class LMSHttpRequest {
 
     /**

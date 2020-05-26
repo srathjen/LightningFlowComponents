@@ -1,5 +1,8 @@
-/*Created by : MST 
-Description : This is a test class for LMSCourse class, will parse the JSON String to LMSCourse Object */
+/**
+ * @description This is a test class for LMSCourse class, will parse the JSON String to LMSCourse Object
+ *
+ * @author MST
+ */
 @IsTest
 public class LMSCourse_Test {
     //parse the JSON String 
@@ -18,9 +21,9 @@ public class LMSCourse_Test {
                 '"type": "elearning",' +
                 '"subtype": "granting"' +
                 '}';
-        LMSCourse LMSCourseobj = new LMSCourse();
         Test.startTest();
-        LMSCourseobj = LMSCourse.parse(json);
+        LMSCourse LMSCourseobj = LMSCourse.parse(json);
+        Test.stopTest();
         System.assert(LMSCourseobj != null);
         System.assertEquals(LMSCourseobj.id, 1234);
         System.assertEquals(LMSCourseobj.name, 'WishGranting101-Arizona');
@@ -32,6 +35,5 @@ public class LMSCourse_Test {
         System.assertEquals(LMSCourseobj.completion_type, 'pass/fail');
         System.assertEquals(LMSCourseobj.type, 'elearning');
         System.assertEquals(LMSCourseobj.subtype, 'granting');
-        Test.stopTest();
     }
 }
