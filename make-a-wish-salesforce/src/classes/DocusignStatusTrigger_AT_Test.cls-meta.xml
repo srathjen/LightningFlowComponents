@@ -2,7 +2,7 @@
 <ApexClass xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>37.0</apiVersion>
     <packageVersions>
-        <majorNumber>6</majorNumber>
+        <majorNumber>7</majorNumber>
         <minorNumber>4</minorNumber>
         <namespace>dsfs</namespace>
     </packageVersions>
