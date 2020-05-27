@@ -1,76 +1,100 @@
 @IsTest
 public class ChapterRoleOT_Test {
 
-    private static final Id USER_ROLE_NATIONAL_STAFF_ID = [
-            SELECT Id
-            FROM UserRole
-            WHERE Name = :Constant_AC.ROLE_NATIONAL_STAFF
-    ].Id;
-    private static final Id PROFILE_SYSTEM_ADMIN_ID = [
-            SELECT Id
-            FROM Profile
-            WHERE Name = :Constant_AC.PROFILE_SYSTEM_ADMINISTRATOR
-    ].Id;
+	@TestSetup
+	public static void setUp() {
+		trac_TriggerHandlerBase.blockTrigger = true;
 
-    @TestSetup
-    private static void setup() {
-        trac_TriggerHandlerBase.blockTrigger = true;
-        Chapter_Vs_Role__c arizonaChap = TestDataFactory.createChapterVsRole(1, 'Arizona')[0];
-        Chapter_Vs_Role__c alabamaChap = TestDataFactory.createChapterVsRole(1, 'Alabama')[0];
-        insert new List<Chapter_Vs_Role__c>{
-                arizonaChap, alabamaChap
-        };
+		List<Account> accounts = TestDataFactory.createAccount(1);
+		Account account1 = accounts.get(0);
+		account1.Name = 'Make-A-Wish Arizona';
+		account1.RecordTypeId = Constant_AC.CHAPTER_RT_ID;
+		insert accounts;
 
-        User currUser = Utils.currentUser;
-        User nationalStaff;
-        System.runAs(currUser) {
-            nationalStaff = TestDataFactory.createUser(1)[0];
-            nationalStaff.UserRoleId = USER_ROLE_NATIONAL_STAFF_ID;
-            nationalStaff.ProfileId = PROFILE_SYSTEM_ADMIN_ID;
-            insert nationalStaff;
-        }
-        trac_TriggerHandlerBase.blockTrigger = false;
-    }
+		String profileName = 'Full Access National Staff';
+		String portalRole = 'Manager';
+		Id userRoleId = [
+				SELECT Id
+				FROM UserRole
+				WHERE Name = 'National Staff'
+		].Id;
 
-    //Create a chapterroleO&T record owner as National staff
-    @IsTest
-    private static void createChapterRoleOT() {
-        System.runAs(getNationalStaffUser()) {
-            Chapter_Role__c newChapterRole = OrientationandTrainingUtil.createChapter(TestDataFactory.createChapterAccount(1)[0].Id, TestDataFactory.createRole(1, false)[0].Id);
-            insert newChapterRole;
+		List<User> users = TestDataFactory.createUser(1);
+		System.runAs(Utils.currentUser) {
+			Profile profile = [
+					SELECT Id,Name
+					FROM Profile
+					WHERE Name = :profileName
+					LIMIT 1
+			];
+			User u = users.get(0);
+			u.ProfileId = profile.Id;
+			u.PortalRole = portalRole;
+			u.UserRoleId = userRoleId;
+			insert users;
+		}
 
-            OrientationandTrainingUtil.createChapterOandT(newChapterRole.Id, OrientationandTrainingUtil.CreateVolunteerOrientationRecord().Id);
-        }
-    }
+		trac_TriggerHandlerBase.blockTrigger = false;
+	}
 
-    //Update Owner
-    @IsTest
-    private static void ownerUpdate() {
-        System.runAs(getNationalStaffUser()) {
-            Chapter_Role__c newChapterRole = OrientationandTrainingUtil.createChapter(OrientationandTrainingUtil.createchapterAccount().Id, OrientationandTrainingUtil.createRole().Id);
-            insert newChapterRole;
+	@IsTest
+	public static void createChapterRole() {
+		User nationalStaff = [
+				SELECT Id, UserRole.Name, AccountId
+				FROM User
+				WHERE Email = 'testuser0@testorg.com'
+				LIMIT 1
+		];
+		Account account = [
+				SELECT Id
+				FROM Account
+				LIMIT 1
+		];
 
-            OrientationandTrainingUtil.createChapterOandT(newChapterRole.Id, OrientationandTrainingUtil.CreateVolunteerOrientationRecord().Id);
-            List<Chapter_Role_O_T__c> chapterRoleOt = [
-                    SELECT Id, OwnerId
-                    FROM Chapter_Role_O_T__c
-                    LIMIT 1
-            ];
-            if (!chapterRoleOt.isEmpty()) {
-                Chapter_Role_O_T__c cOT = new Chapter_Role_O_T__c();
-                cOT.Id = chapterRoleOt[0].Id;
-                cOT.OwnerId = Utils.currentUser.Id;
-                update cOT;
-            }
-        }
-    }
+		Orientation_Training__c volunteerOrientationTraining = TestDataFactory.createOrientationTraining(1)[0];
+		volunteerOrientationTraining.Name = 'Volunteer Orientation';
+		volunteerOrientationTraining.Chapter_Name__c = account.Id;
+		volunteerOrientationTraining.RecordTypeId = Constant_AC.ORIENTATION_RT_ID;
+		volunteerOrientationTraining.Start_Time__c = '7:00 AM';
+		volunteerOrientationTraining.End_Time__c = '7:00 PM';
+		insert volunteerOrientationTraining;
 
-    private static User getNationalStaffUser() {
-        return [
-                SELECT Id
-                FROM User
-                WHERE UserRole.Name = :Constant_AC.ROLE_NATIONAL_STAFF
-                LIMIT 1
-        ];
-    }
+		List<Chapter_Role_O_T__c> chapterRoleOts = TestDataFactory.createChapterRoleOrientationAndTraining(1);
+		Chapter_Role_O_T__c chapterRoleOt = chapterRoleOts.get(0);
+		chapterRoleOt.OwnerId = nationalStaff.Id;
+		chapterRoleOt.Orientation_Training__c = volunteerOrientationTraining.Id;
+		insert chapterRoleOts;
+	}
+
+	@IsTest
+	public static void updateChapterRole() {
+		User nationalStaff = [
+				SELECT Id, UserRole.Name, AccountId
+				FROM User
+				WHERE Email = 'testuser0@testorg.com'
+				LIMIT 1
+		];
+		Account account = [
+				SELECT Id
+				FROM Account
+				LIMIT 1
+		];
+
+		Orientation_Training__c volunteerOrientationTraining = TestDataFactory.createOrientationTraining(1)[0];
+		volunteerOrientationTraining.Name = 'Volunteer Orientation';
+		volunteerOrientationTraining.Chapter_Name__c = account.Id;
+		volunteerOrientationTraining.RecordTypeId = Constant_AC.ORIENTATION_RT_ID;
+		volunteerOrientationTraining.Start_Time__c = '7:00 AM';
+		volunteerOrientationTraining.End_Time__c = '7:00 PM';
+		insert volunteerOrientationTraining;
+
+		List<Chapter_Role_O_T__c> chapterRoleOts = TestDataFactory.createChapterRoleOrientationAndTraining(1);
+		Chapter_Role_O_T__c chapterRoleOt = chapterRoleOts.get(0);
+		chapterRoleOt.OwnerId = Utils.currentUser.Id;
+		chapterRoleOt.Orientation_Training__c = volunteerOrientationTraining.Id;
+		insert chapterRoleOts;
+
+		chapterRoleOt.OwnerId = nationalStaff.Id;
+		update chapterRoleOts;
+	}
 }
