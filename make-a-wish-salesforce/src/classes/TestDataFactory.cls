@@ -234,7 +234,7 @@ public class TestDataFactory {
     public static List<User> createVolunteerUser(Integer num){
         return createVolunteerUser(num, 'Active Volunteer (Member)', 'Manager');
     }
-  
+
     public static List<User> createVolunteerUser(Integer num, String profileName, String portalRole) {
         // Must run as admin to create community user
         List<User> users = createUser(num);
@@ -270,7 +270,7 @@ public class TestDataFactory {
         }
         return users;
     }
-  
+
     public static List<User> createIntegrationUser(Integer num, String profileName, String portalRole) {
         // Must run as admin to create integration user
         List<User> users = createUser(num);
@@ -284,11 +284,12 @@ public class TestDataFactory {
             for (Integer i = 0; i < num; i++) {
                 User u = users[i];
                 u.ProfileId = profile.Id;
+//                u.PortalRole = portalRole;
             }
         }
         return users;
     }
-  
+
     public static List<Wish_Budget__c> createWishBudget(Integer num, Id caseId) {
         List<Wish_Budget__c> wishBudgets = new List<Wish_Budget__c>();
         for (Integer i = 0; i < num; i++) {
@@ -824,6 +825,14 @@ public class TestDataFactory {
         }
         return userRoles;
     }
+    
+    public static InkindDon_reimburseFile__c createInKindDonationReimbursementFile(Id reimbursement) {
+        InkindDon_reimburseFile__c inKindDonReimburseFile = new InkindDon_reimburseFile__c();
+        inKindDonReimburseFile.Parent__c = reimbursement;
+        inKindDonReimburseFile.File_Name__c = 'MedicalSummary.txt';
+        inKindDonReimburseFile.Content_Type__c = 'text/plain';
+        return inKindDonReimburseFile;
+    }
 
     public static List<Role__c> createRole(Integer num) {
         List<Role__c> roles = new List<Role__c>();
@@ -832,5 +841,25 @@ public class TestDataFactory {
             roles.add(role);
         }
         return roles;
+    }
+    
+    public static dsfs__DocuSign_Recipient_Status__c createDocusignRecipientStatus(Id docusignStatusId) {
+        dsfs__DocuSign_Recipient_Status__c recipientStatus = new dsfs__DocuSign_Recipient_Status__c();
+        recipientStatus.dsfs__Parent_Status_Record__c = docusignStatusId;
+        recipientStatus.dsfs__DocuSign_Recipient_Id__c = '98D97010-2A0B-4714-B9AE-494B74BD287F';
+        recipientStatus.dsfs__Envelope_Id__c = '0204C9DD-B8B3-4D7D-B9C5-F88B921E1511';
+        recipientStatus.dsfs__Recipient_Status__c = 'Completed';
+        return recipientStatus;
+    }
+    
+    public static dsfs__DocuSign_Status__c createDocusignStatuswithCase(Id caseId) {
+        dsfs__DocuSign_Status__c dsfs = new dsfs__DocuSign_Status__c();
+        dsfs.dsfs__DocuSign_Envelope_ID__c = '0204C9DD-B8B3-4D7D-B9C5-F88B921E1511';
+        dsfs.dsfs__Case__c = caseId;
+        dsfs.isConflict__c = false;
+        dsfs.dsfs__Envelope_Status__c = 'Sent';
+        dsfs.dsfs__Completed_Date_Time__c = System.now();
+        dsfs.dsfs__Subject__c = 'Signature Required - Liability And Publicity Release Form';
+        return dsfs;
     }
 }

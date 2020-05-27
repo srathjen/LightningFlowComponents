@@ -27,7 +27,6 @@ public class DocusignRecipientDomain extends trac_TriggerHandlerBase {
                 }
             }
         }
-        DocusignRecipientService.updateCompletedRecipient(dsfsIdSet, nameMap, newList);
         DocusignRecipientService.updateStatusRecord(envelopMap, dsRecipientList);
     }
 
@@ -46,7 +45,6 @@ public class DocusignRecipientDomain extends trac_TriggerHandlerBase {
                 dsRecipientList.add(dsfs);
             }
         }
-        DocusignRecipientService.updateRecipientName(completedIdSet, completedNameString, dsRecipientList);
         DocusignRecipientService.updateAttachmentId(completedIdSet, dsRecipientList);
     }
 }
