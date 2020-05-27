@@ -8,661 +8,299 @@ Modification Log
 
 @IsTest
 public class VolunteerOrientation_AC_Test {
-
-	@TestSetup
-	private static void setup(){
-		insert new Bypass_Triggers__c(SetupOwnerId = UserInfo.getUserId());
-	}
-
-	@IsTest
-	static void coverMisc() {
-		User currUser;
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(null);
-			insert currUser;
-		}
-
-		System.runAs(currUser) {
-			Account acc = OrientationandTrainingUtil.createVolunteerAccount();
-			insert acc;
-      
-			Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
-			insert con;
-			OrientationandTrainingUtil.createAffiliation(con.Id);
-			Role__c currRole = OrientationandTrainingUtil.createRole();
-			insert currRole;
-			Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
-			insert currChapRole;
-			Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
-			insert currVolRole;
-			trac_TriggerHandlerBase.blockTrigger = true;
-			Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
-			insert currOandT;
-			Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
-			insert currChapOandT;
-			Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
-			insert currOffering;
-
-			Volunteer_Orientation_Training__c createVolOrientation = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.Id, currOffering.Id, currUser.ContactId, 'Completed');
-			createVolOrientation.Volunteer_Attendance__c = 'Registered';
-
-			update createVolOrientation;
-
-			npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
-			neworgAffiliation.npe5__Contact__c = currUser.ContactId;
-			neworgAffiliation.npe5__Organization__c = acc.Id;
-			neworgAffiliation.npe5__Primary__c = true;
-			neworgAffiliation.npe5__Status__c = 'Pending';
-			neworgAffiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
-			insert neworgAffiliation;
-
-			System.assertEquals(currOffering.Id, createVolOrientation.class_offering__c);
-			TestClassUtil.createDynamicContent();
-			PageReference pageRef = Page.VolunteerTraining_VF;
-			Test.setCurrentPage(pageRef);
-			System.currentPageReference().getParameters().put('bgRequired', 'true');
-			System.currentPageReference().getParameters().put('trainingRequired', 'true');
-			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
-			controller.TimingInfo();
-			controller.getOrientationRecordList();
-			controller.classOfferingMap.put(controller.trainingId, currOffering);
-			controller.Register();
-			controller.trainingId = currOffering.Id;
-			List<Orientation_Training__c> volunteerRelatedTrainingsList = controller.volunteerTrainingsList;
-			Boolean bgTabPermission = controller.bgTabPermission;
-			Boolean trainingTabVisible = controller.trainingTabVisible;
-		}
-
-		VolunteerOrientation_AC.classOfferingWrapper wrapper = new VolunteerOrientation_AC.classOfferingWrapper();
-		wrapper.orientationName = 'x';
-		wrapper.chapterName = 'x';
-		wrapper.orientationDate = Date.today();
-		wrapper.startTime = 'x';
-		wrapper.endTime = 'x';
-		wrapper.location = 'x';
-		wrapper.maxCapacity = 1;
-		wrapper.avilableSheets = 1;
-		wrapper.recordType = 'x';
-		wrapper.status = 'x';
-		wrapper.volOppSize = 1;
-		wrapper.recordId = 'x';
-		wrapper.courseId = 'x';
-		wrapper.recordTypeId = 'x';
-		wrapper.displayRec = true;
-
-		VolunteerOrientation_AC miscController = new VolunteerOrientation_AC();
-		miscController.total_size = 4;
-		miscController.list_size = 3;
-		miscController.getTotalPages();
-		miscController.total_size = 3;
-		miscController.getTotalPages();
-		miscController.End();
-	}
-
-	// Complete the Volunteer Orientation.
-	@IsTest
-	static void CreatingCompletedOrientation() {
-		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
-		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
-		insert con;
-		OrientationandTrainingUtil.createAffiliation(con.Id);
-		Role__c currRole = OrientationandTrainingUtil.createRole();
-		insert currRole;
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
-		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
-		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
-		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
-		insert currOffering;
-
-		User currUser;
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
-		}
-		Volunteer_Orientation_Training__c createVolOrientation = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.Id, currOffering.Id, currUser.ContactId, 'Completed');
-
-		Volunteer_Orientation_Training__c createVolOrientation2 = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.Id, currOffering.Id, currUser.ContactId, 'Completed');
-		createVolOrientation2.Type__c = 'Orientation';
-		createVolOrientation2.Volunteer_Attendance__c = 'No Show';
-		update createVolOrientation2;
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-			System.assertEquals(currOffering.Id, createVolOrientation.class_offering__c);
-			TestClassUtil.createDynamicContent();
-			PageReference pageRef = Page.VolunteerTraining_VF;
-			Test.setCurrentPage(pageRef);
-			System.currentPageReference().getParameters().put('bgRequired', 'true');
-			System.currentPageReference().getParameters().put('trainingRequired', 'true');
-			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
-			controller.TimingInfo();
-			controller.getOrientationRecordList();
-			controller.trainingId = currOffering.Id;
-			List<Orientation_Training__c> volunteerRelatedTrainingsList = controller.volunteerTrainingsList;
-			Boolean bgTabPermission = controller.bgTabPermission;
-			Boolean trainingTabVisible = controller.trainingTabVisible;
-		}
-	}
-	// Display Class OFfering on Portal.
-	@IsTest
-	static void VolunteerTrainingDisplay() {
-		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
-		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
-		insert con;
-		//OrientationandTrainingUtil.createAffiliation(con.Id);
-
-		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
-		neworgAffiliation.npe5__Contact__c = con.Id;
-		neworgAffiliation.npe5__Organization__c = acc.Id;
-		neworgAffiliation.npe5__Primary__c = true;
-		neworgAffiliation.npe5__Status__c = 'Pending';
-		neworgAffiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
-		insert neworgAffiliation;
-
-		User currUser;
-		Role__c currRole = OrientationandTrainingUtil.createRole();
-		insert currRole;
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
-		insert currChapRole;
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
-		insert currVolRole;
-		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
-		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
-		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
-		insert currOffering;
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
-			insert currUser;
-		}
-		Volunteer_Orientation_Training__c createVolOrientation = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.Id, currOffering.Id, currUser.ContactId, 'Registered');
-//		insert createVolOrientation;
-		//System.runAs(new User(Id = UserInfo.getUserId())) {
-		System.runAs(currUser) {
-
-			System.assertEquals(currOffering.Id, createVolOrientation.class_offering__c);
-
-			TestClassUtil.createDynamicContent();
-			PageReference pageRef = Page.VolunteerOrientation_VF;
-			Test.setCurrentPage(pageRef);
-
-			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
-			controller.TimingInfo();
-			controller.getOrientationRecordList();
-			controller.trainingId = currOffering.Id;
-			controller.Register();
-		}
-	}
-
-	// Register for new Orientation.
-	@IsTest
-	static void CreateNewTraining() {
-		LMS_Credentials__c currLMSCredential = TestClassUtil.createLMSCredentials();
-		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
-		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
-		insert con;
-		//OrientationandTrainingUtil.createAffiliation(con.Id);
-		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
-		neworgAffiliation.npe5__Contact__c = con.Id;
-		neworgAffiliation.npe5__Organization__c = acc.Id;
-		neworgAffiliation.npe5__Primary__c = true;
-		neworgAffiliation.npe5__Status__c = 'Pending';
-		neworgAffiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
-		insert neworgAffiliation;
-
-		Role__c currRole = OrientationandTrainingUtil.createRole();
-		insert currRole;
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
-		insert currChapRole;
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
-		insert currVolRole;
-		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
-		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
-		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
-		insert currOffering;
-		User currUser;
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
-		}
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-
-			TestClassUtil.createDynamicContent();
-			PageReference pageRef = Page.VolunteerOrientation_VF;
-			Test.setCurrentPage(pageRef);
-			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
-			controller.TimingInfo();
-			controller.getOrientationRecordList();
-			controller.trainingId = currOffering.Id;
-			controller.Register();
-			VolunteerOrientation_AC.updateUser('volunteer@gmail.com', '3409379', 'volunteer@gmail.com', currUser.Id);
-		}
-	}
-
-	// Creating Orientation with Cancelled status.
-	@IsTest
-	static void CreatingCancelledTraining() {
-		LMS_Credentials__c currLMSCredential = TestClassUtil.createLMSCredentials();
-		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
-		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
-		insert con;
-		//OrientationandTrainingUtil.createAffiliation(con.Id);
-		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
-		neworgAffiliation.npe5__Contact__c = con.Id;
-		neworgAffiliation.npe5__Organization__c = acc.Id;
-		neworgAffiliation.npe5__Primary__c = true;
-		neworgAffiliation.npe5__Status__c = 'Pending';
-		neworgAffiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
-		insert neworgAffiliation;
-
-		User currUser;
-		Role__c currRole = OrientationandTrainingUtil.createRole();
-		insert currRole;
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
-		insert currChapRole;
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
-		insert currVolRole;
-		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
-		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
-		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
-		insert currOffering;
-		Volunteer_Orientation_Training__c createVolOrientation = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.Id, currOffering.Id, con.Id, 'Volunteer Cancelled');
-//        insert createVolOrientation;
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
-		}
-
-		VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-
-			TestClassUtil.createDynamicContent();
-			PageReference pageRef = Page.VolunteerOrientation_VF;
-			Test.setCurrentPage(pageRef);
-
-			controller.TimingInfo();
-			controller.getOrientationRecordList();
-			controller.trainingId = currOffering.Id;
-			VolunteerOrientation_AC.updateUser('volunteer@gmail.com', '3409379', 'volunteer@gmail.com', UserInfo.getUserId());
-		}
-	}
-	// Cancel Registered Orientation.
-	@IsTest
-	static void CancelTraining() {
-		LMS_Credentials__c currLMSCredential = TestClassUtil.createLMSCredentials();
-		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
-		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
-		insert con;
-		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
-		neworgAffiliation.npe5__Contact__c = con.Id;
-		neworgAffiliation.npe5__Organization__c = acc.Id;
-		neworgAffiliation.npe5__Primary__c = true;
-		neworgAffiliation.npe5__Status__c = 'Pending';
-		neworgAffiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
-		insert neworgAffiliation;
-
-		User currUser;
-		Role__c currRole = OrientationandTrainingUtil.createRole();
-		insert currRole;
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
-		insert currChapRole;
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
-		insert currVolRole;
-		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
-		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
-		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
-		insert currOffering;
-		Volunteer_Orientation_Training__c createVolOrientation = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.Id, currOffering.Id, con.Id, 'Registered');
-
-		createVolOrientation.Volunteer_Attendance__c = 'Volunteer Cancelled';
-		update createVolOrientation;
-		Volunteer_Orientation_Training__c createVolOrientation2 = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.Id, currOffering.Id, con.Id, 'Registered');
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
-		}
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-
-			TestClassUtil.createDynamicContent();
-			PageReference pageRef = Page.VolunteerOrientation_VF;
-			Test.setCurrentPage(pageRef);
-
-			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
-			controller.TimingInfo();
-
-			controller.getOrientationRecordList();
-			controller.trainingId = currOffering.Id;
-			controller.Cancel();
-			system.assertEquals('Volunteer Cancelled', createVolOrientation.Volunteer_Attendance__c);
-			controller.Register();
-		}
-
-	}
-
-	// Duplicate Orientation time prevention.
-	@IsTest
-	static void BookingTrainingwithSameTime() {
-		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
-		insert acc;
-
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
-		insert con;
-
-		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
-		neworgAffiliation.npe5__Contact__c = con.Id;
-		neworgAffiliation.npe5__Organization__c = acc.Id;
-		neworgAffiliation.npe5__Primary__c = true;
-		neworgAffiliation.npe5__Status__c = 'Pending';
-		neworgAffiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
-		insert neworgAffiliation;
-
-		Role__c currRole = OrientationandTrainingUtil.createRole();
-		insert currRole;
-
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
-		insert currChapRole;
-
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
-		insert currVolRole;
-
-		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
-		insert currOandT;
-
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
-		insert currChapOandT;
-
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
-		insert currOffering;
-
-		VolunteerOrientation_AC_Test.createVolOrientation(currOandT.Id, currOffering.Id, con.Id, 'Registered');
-
-		Orientation_Training__c currOandT1 = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
-		insert currOandT1;
-
-		Chapter_Role_O_T__c currChapOandT1 = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT1.Id);
-		insert currChapOandT1;
-
-		Class_Offering__c currOffering1 = OrientationandTrainingUtil.createClassOffering(currChapOandT1.Id);
-		insert currOffering1;
-
-		User currUser;
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
-		}
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-
-			TestClassUtil.createDynamicContent();
-			PageReference pageRef = Page.VolunteerOrientation_VF;
-			Test.setCurrentPage(pageRef);
-
-			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
-			controller.TimingInfo();
-			controller.userRelatedContactId = con.Id;
-			controller.getOrientationRecordList();
-			controller.trainingId = currOffering1.Id;
-			controller.Register();
-			controller.Next();
-			controller.Beginning();
-			controller.getPageNumber();
-			controller.getDisableNext();
-
-		}
-	}
-
-	// Creating Volunteer Orientation for volunteer based on the input parameter.
-	static Volunteer_Orientation_Training__c createVolOrientation(Id OrienationId, Id ClassOfferingId, Id volunteer, string status) {
-		Volunteer_Orientation_Training__c createNewVol = new Volunteer_Orientation_Training__c();
-		createNewVol.class_offering__c = ClassOfferingId;
-		createNewVol.Hidden_O_T_Id__c = OrienationId;
-		createNewVol.Registered_Date__c = Date.Today();
-		createNewVol.Volunteer__c = volunteer;
-		createNewVol.Volunteer_Attendance__c = status;
-		createNewVol.Type__c = 'Orientation';
-		insert createNewVol;
-		return createNewVol;
-	}
-
-	@IsTest
-	static void CheckViewLMS() {
-		Account acc;
-		Contact con;
-		LMS_Credentials__c currLMSCredential;
-		acc = OrientationandTrainingUtil.createVolunteerAccount();
-		con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
-		currLMSCredential = TestClassUtil.createLMSCredentials();
-		OrientationandTrainingUtil.createAffiliation(con.Id);
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-			TestClassUtil.createUser();
-		}
-		List<User> currUserLst = [
-				SELECT Id
-				FROM User
-				WHERE Id != :UserInfo.getUserId() AND IsActive = TRUE
-		];
-		System.runAs(currUserLst[0]) {
-			LMSCourseSyncMockImpl currLMSCourseSyncMockImpl = new LMSCourseSyncMockImpl();
-			HttpResponse response = new HttpResponse();
-			response.setStatus('OK');
-			response.setStatusCode(200);
-			LMSUserResponse currLMSUserResponse = new LMSUserResponse();
-			currLMSUserResponse.Id = 1234;
-			currLMSUserResponse.login = 'test@test.com';
-			currLMSUserResponse.code = 'test@test.com';
-			currLMSUserResponse.first_name = 'test';
-			currLMSUserResponse.last_name = 'test';
-			currLMSUserResponse.last_name = 'test@test.com';
-			currLMSUserResponse.is_active = true;
-			currLMSUserResponse.last_login_at = '2016-08-04T19:20:05.407-04:00';
-			String payload = JSON.serialize(currLMSUserResponse);
-			response.setBody(payload);
-			currLMSCourseSyncMockImpl.addResponse(response);
-			Test.setMock(HttpCalloutMock.class, currLMSCourseSyncMockImpl);
-		}
-		Test.startTest();
-		System.runAs(currUserLst[1]) {
-			PageReference pageRef = Page.VolunteerOrientation_VF;
-			Test.setCurrentPage(pageRef);
-			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
-			controller.lMSCourseId = 'Test';
-			controller.viewLMS();
-			// updateUser();
-			controller.Previous();
-			controller.getDisablePrevious();
-		}
-		Test.stopTest();
-	}
-
-	@IsTest
-	static void CreateNewTrainingWithExistingCancelledRecords() {
-		LMS_Credentials__c currLMSCredential = TestClassUtil.createLMSCredentials();
-		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
-		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
-		insert con;
-		//OrientationandTrainingUtil.createAffiliation(con.Id);
-		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
-		neworgAffiliation.npe5__Contact__c = con.Id;
-		neworgAffiliation.npe5__Organization__c = acc.Id;
-		neworgAffiliation.npe5__Primary__c = true;
-		neworgAffiliation.npe5__Status__c = 'Pending';
-		neworgAffiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
-		insert neworgAffiliation;
-
-		Role__c currRole = OrientationandTrainingUtil.createRole();
-		insert currRole;
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
-		insert currChapRole;
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
-		insert currVolRole;
-		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
-		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
-		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
-		insert currOffering;
-
-		Volunteer_Orientation_Training__c volunteerOrientationTraining = OrientationandTrainingUtil.createVolTraining(currOandT.Id, currOffering.Id, con.Id, 'Completed');
-		insert volunteerOrientationTraining;
-
-		User currUser;
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
-		}
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-
-			TestClassUtil.createDynamicContent();
-			PageReference pageRef = Page.VolunteerOrientation_VF;
-			Test.setCurrentPage(pageRef);
-			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
-			controller.TimingInfo();
-			controller.getOrientationRecordList();
-			controller.trainingId = currOffering.Id;
-			controller.userRelatedContactId = con.Id;
-			controller.classOfferingMap = new Map<Id, Class_Offering__c>();
-			controller.classOfferingMap.put(currOffering.Id, currOffering);
-			controller.Register();
-		}
-	}
-
-	@IsTest
-	static void CreateNewTrainingWithVolunteerCancelledRecords() {
-		LMS_Credentials__c currLMSCredential = TestClassUtil.createLMSCredentials();
-		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
-		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
-		insert con;
-		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
-		neworgAffiliation.npe5__Contact__c = con.Id;
-		neworgAffiliation.npe5__Organization__c = acc.Id;
-		neworgAffiliation.npe5__Primary__c = true;
-		neworgAffiliation.npe5__Status__c = 'Pending';
-		neworgAffiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
-		insert neworgAffiliation;
-
-		Role__c currRole = OrientationandTrainingUtil.createRole();
-		insert currRole;
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
-		insert currChapRole;
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
-		insert currVolRole;
-		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
-		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
-		currChapOandT.Orientation_Training__r = currOandT;
-		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
-		insert currOffering;
-
-		Volunteer_Orientation_Training__c volunteerOrientationTraining = OrientationandTrainingUtil.createVolTraining(currOandT.Id, currOffering.Id, con.Id, 'Volunteer Cancelled');
-		insert volunteerOrientationTraining;
-
-		User currUser;
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
-		}
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-
-			TestClassUtil.createDynamicContent();
-			PageReference pageRef = Page.VolunteerOrientation_VF;
-			Test.setCurrentPage(pageRef);
-			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
-			controller.TimingInfo();
-			controller.getOrientationRecordList();
-			controller.trainingId = currOffering.Id;
-			controller.userRelatedContactId = con.Id;
-			controller.classOfferingMap = new Map<Id, Class_Offering__c>();
-			controller.classOfferingMap.put(currOffering.Id, [
-					SELECT Id, Chapter_Role_O_T__r.Orientation_Training__c
-					FROM Class_Offering__c
-					WHERE Id = :currOffering.Id
-			]);
-			controller.Register();
-		}
-	}
-
-	@IsTest
-	static void testCancelWithOrientationDetails() {
-		Account chapterAcc = OrientationandTrainingUtil.createChapterAccount();
-		insert chapterAcc;
-		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
-		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
-		insert con;
-		Role__c currRole = OrientationandTrainingUtil.createRole();
-		insert currRole;
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
-		insert currChapRole;
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
-		insert currVolRole;
-		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
-		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
-		currChapOandT.Orientation_Training__r = currOandT;
-		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
-		insert currOffering;
-
-		Volunteer_Orientation_Training__c volunteerOrientationTraining = OrientationandTrainingUtil.createVolTraining(currOandT.Id, currOffering.Id, con.Id, 'Volunteer Cancelled');
-		volunteerOrientationTraining.Type__c = 'Orientation';
-		insert volunteerOrientationTraining;
-
-		User currUser;
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
-		}
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
-			controller.trainingId = currOffering.Id;
-			controller.userRelatedContactId = con.Id;
-			controller.lMSCredential = TestClassUtil.createLMSCredentials();
-			controller.Cancel();
-		}
-	}
-
-	@IsTest
-	static void testCancelWithOrientationDetailsWithoutCredential() {
-		Account chapterAcc = OrientationandTrainingUtil.createChapterAccount();
-		insert chapterAcc;
-		Account acc = OrientationandTrainingUtil.createVolunteerAccount();
-		insert acc;
-		Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
-		insert con;
-		Role__c currRole = OrientationandTrainingUtil.createRole();
-		insert currRole;
-		Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
-		insert currChapRole;
-		Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
-		insert currVolRole;
-		Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerOrientationRecord();
-		insert currOandT;
-		Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
-		currChapOandT.Orientation_Training__r = currOandT;
-		insert currChapOandT;
-		Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
-		insert currOffering;
-
-		Volunteer_Orientation_Training__c volunteerOrientationTraining = OrientationandTrainingUtil.createVolTraining(currOandT.Id, currOffering.Id, con.Id, 'Volunteer Cancelled');
-		volunteerOrientationTraining.Type__c = 'Orientation';
-		insert volunteerOrientationTraining;
-
-		User currUser;
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-			currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
-		}
-		System.runAs(new User(Id = UserInfo.getUserId())) {
-			VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
-			controller.trainingId = currOffering.Id;
-			controller.userRelatedContactId = con.Id;
-			controller.Cancel();
-		}
-	}
+    
+    @TestSetup
+    private static void setup() {
+        trac_TriggerHandlerBase.blockTrigger = true;
+        
+        Account accountAzChapter = TestDataFactory.createAccount(1)[0];
+        accountAzChapter.Name = 'Make-A-Wish Arizona';
+        accountAzChapter.RecordTypeId = Constant_AC.CHAPTER_RT_ID;
+        insert accountAzChapter;
+        
+        Contact volunteerSelina = TestDataFactory.createContact(1)[0];
+        volunteerSelina.RecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
+        volunteerSelina.AccountId = accountAzChapter.Id;
+        volunteerSelina.FirstName = 'Selina';
+        volunteerSelina.LastName = 'Kyle';
+        volunteerSelina.Email = 's.kyle@email.com';
+        volunteerSelina.Phone = '5557779999';
+        volunteerSelina.Birthdate = Date.today().addYears(-22);
+        volunteerSelina.MailingPostalCode = '85641';
+        volunteerSelina.MailingStreet = '1500 1st Avenue';
+        volunteerSelina.MailingCountry = 'United States';
+        volunteerSelina.MailingState = 'Arizona';
+        volunteerSelina.MailingStateCode = 'AZ';
+        volunteerSelina.MailingCity = 'Phoenix';
+        volunteerSelina.Read__c = 'English';
+        volunteerSelina.language__c = 'English';
+        volunteerSelina.speak__c = 'English';
+        volunteerSelina.understand__c = 'English';
+        volunteerSelina.Professional_Skills__c = 'Photography';
+        volunteerSelina.Language_Notes__c = 'Test';
+        volunteerSelina.Volunteer_Role__c = 'Special Events';
+        volunteerSelina.is_Application__c = 'Partial Submit';
+        volunteerSelina.Volunteer_Role__c = 'Fundraising – Assist';
+        insert volunteerSelina;
+        
+        User volunteerSelinaUser = TestDataFactory.createVolunteerUser(1)[0];
+        volunteerSelinaUser.Username = 'Selina@Kyle.com';
+        volunteerSelinaUser.ContactId = volunteerSelina.Id;
+        insert volunteerSelinaUser;
+        
+        npe5__Affiliation__c neworgAffiliation = TestDataFactory.createAffiliation(1)[0];
+        neworgAffiliation.npe5__Contact__c = volunteerSelina.Id;
+        neworgAffiliation.npe5__Organization__c = accountAzChapter.Id;
+        neworgAffiliation.npe5__Primary__c = true;
+        neworgAffiliation.npe5__Status__c = 'Pending';
+        neworgAffiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
+        insert neworgAffiliation;
+        
+        Role__c wishRole = TestDataFactory.createRole(1, true)[0];
+        wishRole.Name = 'Fundraising – Assist';
+        insert wishRole;
+        
+        Chapter_Role__c chapterRoleFundraising = TestDataFactory.createChapterRole(1)[0];
+        chapterRoleFundraising.Chapter_Name__c = accountAzChapter.Id;
+        chapterRoleFundraising.Role_Name__c = wishRole.Id;
+        insert chapterRoleFundraising;
+        
+        Volunteer_Roles__c volunteerRole = TestDataFactory.createVolunteerRole(1)[0];
+        volunteerRole.Chapter_Role__c = chapterRoleFundraising.Id;
+        volunteerRole.Volunteer_Name__c = volunteerSelina.Id;
+        volunteerRole.Status__c = 'Pending';
+        volunteerRole.Sub_status__c = 'Missing Requirement';
+        insert volunteerRole;
+        
+        List<Orientation_Training__c> orientationTrainingList = TestDataFactory.createOrientationTraining(2);
+        Orientation_Training__c volunteerOrientationTraining = orientationTrainingList.get(0);
+        volunteerOrientationTraining.Name = 'Volunteer Orientation';
+        volunteerOrientationTraining.Chapter_Name__c = accountAzChapter.Id;
+        volunteerOrientationTraining.RecordTypeId = Constant_AC.ORIENTATION_RT_ID;
+        volunteerOrientationTraining.Start_Time__c = '8:00 AM';
+        volunteerOrientationTraining.End_Time__c = '12:00 PM';
+        Orientation_Training__c volunteerFundraiseTraining = orientationTrainingList.get(1);
+        volunteerFundraiseTraining.Name = 'Volunteer Fundraising Training';
+        volunteerFundraiseTraining.Chapter_Name__c = accountAzChapter.Id;
+        volunteerFundraiseTraining.RecordTypeId = Constant_AC.ORIENTATION_RT_ID;
+        volunteerFundraiseTraining.Start_Time__c = '1:00 PM';
+        volunteerFundraiseTraining.End_Time__c = '5:00 PM';
+        insert orientationTrainingList;
+        
+        List<Chapter_Role_O_T__c> chapterRoleOTList = TestDataFactory.createChapterRoleOrientationAndTraining(2);
+        Chapter_Role_O_T__c azChapterOrientationTraining = chapterRoleOTList.get(0);
+        azChapterOrientationTraining.Chapter_Role__c = chapterRoleFundraising.Id;
+        azChapterOrientationTraining.Orientation_Training__c = volunteerOrientationTraining.Id;
+        azChapterOrientationTraining.Required__c = true;
+        Chapter_Role_O_T__c azChapterFundraiseTraining = chapterRoleOTList.get(1);
+        azChapterFundraiseTraining.Chapter_Role__c = chapterRoleFundraising.Id;
+        azChapterFundraiseTraining.Orientation_Training__c = volunteerFundraiseTraining.Id;
+        azChapterFundraiseTraining.Required__c = true;
+        insert azChapterOrientationTraining;
+        
+        List<Class_Offering__c> classOfferingList = TestDataFactory.createClassOffering(2);
+        Class_Offering__c classOfferingOnline = classOfferingList.get(0);
+        classOfferingOnline.Chapter_Role_O_T__c = azChapterOrientationTraining.Id;
+        classOfferingOnline.Date__c = System.today() + 10;
+        classOfferingOnline.Start_Time__c = '10:00 AM';
+        classOfferingOnline.End_Time__c = '12:00 PM';
+        classOfferingOnline.max_capacity__c = 100;
+        classOfferingOnline.Location__c = 'Online';
+        classOfferingOnline.RecordTypeId = Constant_AC.CLASS_OFFERING_RECORD_TYPE_ID;
+        Class_Offering__c classOfferingLibrary = classOfferingList.get(1);
+        classOfferingLibrary.Chapter_Role_O_T__c = azChapterFundraiseTraining.Id;
+        classOfferingLibrary.Date__c = System.today() + 13;
+        classOfferingLibrary.Start_Time__c = '1:00 PM';
+        classOfferingLibrary.End_Time__c = '3:00 PM';
+        classOfferingLibrary.max_capacity__c = 25;
+        classOfferingLibrary.Location__c = 'Library';
+        classOfferingLibrary.RecordTypeId = Constant_AC.CLASS_OFFERING_RECORD_TYPE_ID;
+        insert classOfferingList;
+        
+        List<Volunteer_Orientation_Training__c> volunteerOTList = TestDataFactory.createVolunteerOrientationAndTraining(2);
+        Volunteer_Orientation_Training__c completedVolunteerOT = volunteerOTList.get(0);
+        completedVolunteerOT.class_offering__c = classOfferingOnline.Id;
+        completedVolunteerOT.Hidden_O_T_Id__c = volunteerOrientationTraining.Id;
+        completedVolunteerOT.Registered_Date__c = Date.today();
+        completedVolunteerOT.Volunteer__c = volunteerSelina.Id;
+        completedVolunteerOT.Volunteer_Attendance__c = 'Completed';
+        completedVolunteerOT.Type__c = 'Orientation';
+        Volunteer_Orientation_Training__c noShowVolunteerOT = volunteerOTList.get(1);
+        noShowVolunteerOT.class_offering__c = classOfferingOnline.Id;
+        noShowVolunteerOT.Hidden_O_T_Id__c = volunteerOrientationTraining.Id;
+        noShowVolunteerOT.Registered_Date__c = Date.today();
+        noShowVolunteerOT.Volunteer__c = volunteerSelina.Id;
+        noShowVolunteerOT.Volunteer_Attendance__c = 'No Show';
+        noShowVolunteerOT.Type__c = 'Orientation';
+        insert volunteerOTList;
+        
+        Dynamic_Content__c nationalContent = TestDataFactory.createDynamicContent(1)[0];
+        nationalContent.RecordTypeId = Constant_AC.NATIONAL_RT_ID;
+        nationalContent.Active__c = true;
+        insert nationalContent;
+        
+        LMS_Credentials__c lmsIntegration = TestDataFactory.createLMSCredentials();
+        insert lmsIntegration;
+        
+        trac_TriggerHandlerBase.blockTrigger = false;
+    }
+    
+    @isTest
+    static void testRegistration() {
+        User volunteer = [
+            SELECT Id, ContactId 
+            FROM User 
+            WHERE Username = 'Selina@Kyle.com'
+        ];
+        Class_Offering__c libraryClass = [
+            SELECT Id, Chapter_Role_O_T__r.Orientation_Training__c, Date__c, RecordTypeId
+            FROM Class_Offering__c 
+            WHERE Location__c = 'Library'
+        ];
+        Test.startTest();
+        VolunteerOrientation_AC controller;
+        System.runAs(volunteer) {
+            PageReference pageRef = Page.VolunteerTraining_VF;
+            Test.setCurrentPage(pageRef);
+            System.currentPageReference().getParameters().put('bgRequired', 'true');
+            System.currentPageReference().getParameters().put('trainingRequired', 'true');
+            controller = new VolunteerOrientation_AC();
+            Boolean bgTabPermission = controller.bgTabPermission;
+            Boolean trainingTabVisible = controller.trainingTabVisible;
+            controller.Beginning();
+            controller.Next();
+            controller.Previous();
+            controller.TimingInfo();
+            controller.getOrientationRecordList();
+            controller.trainingId = libraryClass.Id;
+            controller.classOfferingMap.put(libraryClass.Id, libraryClass);
+            controller.Register();
+        }
+        Test.stopTest();
+        System.assert(controller.isOrientationExist == true);
+    }
+    
+    @isTest
+    static void testRegistrationCancelled() {
+        User volunteer = [
+            SELECT Id, ContactId 
+            FROM User 
+            WHERE Username = 'Selina@Kyle.com'
+        ];
+        Class_Offering__c onlineClass = [
+            SELECT Id, Chapter_Role_O_T__r.Orientation_Training__c, Date__c, RecordTypeId
+            FROM Class_Offering__c 
+            WHERE Location__c = 'Online'
+        ];
+        Volunteer_Orientation_Training__c volOTCancel = [
+            SELECT Id, Volunteer_Attendance__c 
+            FROM Volunteer_Orientation_Training__c 
+            WHERE Class_Offering__c = :onlineClass.Id 
+            AND Volunteer_Attendance__c = 'Completed'
+        ];
+        volOTCancel.Volunteer_Attendance__c = 'Volunteer Cancelled';
+        update volOTCancel;
+        Test.startTest();
+        VolunteerOrientation_AC controller;
+        System.runAs(volunteer) {
+            PageReference pageRef = Page.VolunteerTraining_VF;
+            Test.setCurrentPage(pageRef);
+            controller = new VolunteerOrientation_AC();
+            controller.getOrientationRecordList();
+            controller.trainingId = onlineClass.Id;
+            controller.classOfferingMap.put(onlineClass.Id, onlineClass);
+            controller.Register();
+        }
+        Test.stopTest();
+    }
+    
+    @isTest
+    static void testCancellation() {
+        User volunteer = [
+            SELECT Id, ContactId 
+            FROM User 
+            WHERE Username = 'Selina@Kyle.com'
+        ];
+        Class_Offering__c onlineClass = [
+            SELECT Id, Chapter_Role_O_T__r.Orientation_Training__c, Date__c, RecordTypeId
+            FROM Class_Offering__c 
+            WHERE Location__c = 'Online'
+        ];
+        Test.startTest();
+        VolunteerOrientation_AC controller;
+        System.runAs(volunteer) {
+            PageReference pageRef = Page.VolunteerTraining_VF;
+            Test.setCurrentPage(pageRef);
+            controller = new VolunteerOrientation_AC();
+            controller.getOrientationRecordList();
+            controller.getTotalPages();
+            controller.getPageNumber();
+            controller.getDisableNext();
+            controller.getDisablePrevious();
+            controller.trainingId = onlineClass.Id;
+            controller.classOfferingMap.put(onlineClass.Id, onlineClass);
+            controller.Cancel();
+        }
+        Test.stopTest();
+    }
+    
+    @isTest
+    static void testUserUpdate() {
+        User volunteer = [
+            SELECT Id, ContactId 
+            FROM User 
+            WHERE Username = 'Selina@Kyle.com'
+        ];
+        Test.startTest();
+        System.runAs(volunteer) {
+            PageReference pageRef = Page.VolunteerTraining_VF;
+            Test.setCurrentPage(pageRef);
+            VolunteerOrientation_AC.updateUser('3409379', 'selina.kyle@mawvolunteer.com', 'selina.kyle@mawvolunteer.com', volunteer.Id);
+        }
+        Test.stopTest();
+        User volunteerUpdated = [
+            SELECT Id, LMS_Id__c 
+            FROM User 
+            WHERE Id = :volunteer.Id
+        ];
+        System.assert(volunteerUpdated.LMS_Id__c == '3409379');
+    }
+    
+    @IsTest
+    static void testViewLMS() {
+        User volunteer = [
+            SELECT Id, ContactId 
+            FROM User 
+            WHERE Username = 'Selina@Kyle.com'
+        ];
+        System.runAs(volunteer) {
+            LMSCourseSyncMockImpl currLMSCourseSyncMockImpl = new LMSCourseSyncMockImpl();
+            HttpResponse response = new HttpResponse();
+            response.setStatus('OK');
+            response.setStatusCode(200);
+            LMSUserResponse currLMSUserResponse = new LMSUserResponse();
+            currLMSUserResponse.Id = 1234;
+            currLMSUserResponse.login = 'test@test.com';
+            currLMSUserResponse.code = 'test@test.com';
+            currLMSUserResponse.first_name = 'test';
+            currLMSUserResponse.last_name = 'test';
+            currLMSUserResponse.last_name = 'test@test.com';
+            currLMSUserResponse.is_active = true;
+            currLMSUserResponse.last_login_at = '2016-08-04T19:20:05.407-04:00';
+            String payload = JSON.serialize(currLMSUserResponse);
+            response.setBody(payload);
+            currLMSCourseSyncMockImpl.addResponse(response);
+            Test.setMock(HttpCalloutMock.class, currLMSCourseSyncMockImpl);
+        }
+        Test.startTest();
+        VolunteerOrientation_AC controller;
+        System.runAs(volunteer) {
+            PageReference pageRef = Page.VolunteerOrientation_VF;
+            Test.setCurrentPage(pageRef);
+            controller = new VolunteerOrientation_AC();
+            controller.lMSCourseId = 'TestCourse123';
+            controller.viewLMS();
+        }
+        Test.stopTest();
+    }
 }

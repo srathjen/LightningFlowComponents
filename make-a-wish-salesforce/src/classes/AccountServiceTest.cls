@@ -11,12 +11,13 @@ public class AccountServiceTest {
     private final static Id HOUSEHOLD_RECORD_TYPE_ID = Constant_AC.HOUSEHOLD_RT_ID;
     private final static Id CONTACT_WISH_CHILD = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
     private final static Id CONTACT_WISH_FAMILY = Constant_AC.WISH_FAMILY_RT_ID;
-
-	@TestSetup
-	public static void setup() {
+    private final static Id HOSPITAL_TREATMENT_ID = Constant_AC.HOSPITAL_TREATMENT_ID;
+    
+    @TestSetup
+    public static void setup() {
         trac_TriggerHandlerBase.blockTrigger = true;
         User user1 = [SELECT Id FROM User WHERE IsActive = TRUE AND UserRole.Name = 'Central & Northern Florida - Chapter' LIMIT 1];
-		
+        
         List<Account> accounts = TestDataFactory.createAccount(3);
         Account account1 = accounts.get(0);
         account1.Name = 'Make-A-Wish Arizona';
@@ -119,42 +120,47 @@ public class AccountServiceTest {
         lead2.Diagnosis_Given_By_Referrer__c = 'Test Diagnosis';
         lead2.PD_ICD_Code__c = icdCode.Id;
         lead2.Company = 'MAW';
-        insert leads; 
+        lead2.Alternate1HospitalTreatmentFacility__c = 'Phoenix Medical Center';
+        lead2.Alternate2HospitalTreatmentFacility__c = 'Scottsdale Medical Center';
+        lead2.Hospital_Treatment_Facility_Treating__c = 'Arizona State Hospital';
+        insert leads;
+        
+        
         trac_TriggerHandlerBase.blockTrigger = false;
-	}
-
-	@IsTest
-	public static void shouldSetHouseholdFields() {
-		Account account = [
-				SELECT Id
-				FROM Account
-				WHERE Name IN ('Make-A-Wish Arizona')
-		];
-		Lead lead = [
-				SELECT Id, FirstName, LastName, ChapterName__c, What_is_the_family_s_primary_spoken_lang__c
-				FROM Lead
-				WHERE Name = 'Jack Smith'
-		];
-		Set<Id> leadConvertAccountIds = new Set<Id>{account.Id};
-		Set<Id> chapterIds = new Set<Id>{lead.ChapterName__c};
-		Id chapterId;
-		Map<Id, Account> chapterUserMap = new Map<Id, Account>();
-		Map<Id, Lead> convertedAccountMap = new Map<Id, Lead>();
-		convertedAccountMap.put(account.Id, lead);
-		List<Account> updateAccountList = new List<Account>();
-
-		Test.startTest();
+    }
+    
+    @IsTest
+    public static void shouldSetHouseholdFields() {
+        Account account = [
+            SELECT Id
+            FROM Account
+            WHERE Name IN ('Make-A-Wish Arizona')
+        ];
+        Lead lead = [
+            SELECT Id, FirstName, LastName, ChapterName__c, What_is_the_family_s_primary_spoken_lang__c
+            FROM Lead
+            WHERE Name = 'Jack Smith'
+        ];
+        Set<Id> leadConvertAccountIds = new Set<Id>{account.Id};
+            Set<Id> chapterIds = new Set<Id>{lead.ChapterName__c};
+                Id chapterId;
+        Map<Id, Account> chapterUserMap = new Map<Id, Account>();
+        Map<Id, Lead> convertedAccountMap = new Map<Id, Lead>();
+        convertedAccountMap.put(account.Id, lead);
+        List<Account> updateAccountList = new List<Account>();
+        
+        Test.startTest();
         Map<Id, Account> results = AccountService.setHouseholdFields(convertedAccountMap);
-		Test.stopTest();
-
-		String expectedName =
-				lead.FirstName
-				+ ' '
-				+ lead.LastName
-				+ Constant_AC.FAMILY_HOUSEHOLD_NAME_APPEND;
-		System.assertNotEquals(null, account.Id);
-		System.assertEquals(expectedName, results.get(account.Id).Name);
-	} 
+        Test.stopTest();
+        
+        String expectedName =
+            lead.FirstName
+            + ' '
+            + lead.LastName
+            + Constant_AC.FAMILY_HOUSEHOLD_NAME_APPEND;
+        System.assertNotEquals(null, account.Id);
+        System.assertEquals(expectedName, results.get(account.Id).Name);
+    } 
     
     @isTest 
     private static void validateMatchChapterForAccount() {
@@ -171,7 +177,7 @@ public class AccountServiceTest {
         Test.startTest();
         List<Account> accountsUpdatedList = AccountService.matchChapterForAccount(accountOwnerIdSet, accountsInKindDonors);
         Test.stopTest();
-       	System.assert(accountsUpdatedList[0].Wish_Co_ordinator_Hidden_Email__c != null);
+        System.assert(accountsUpdatedList[0].Wish_Co_ordinator_Hidden_Email__c != null);
     }
     
     @isTest 
@@ -190,15 +196,15 @@ public class AccountServiceTest {
         Test.stopTest();
         System.assert(accountList[0].npe01__One2OneContact__c == contact.Id);
     }    
-
+    
     @isTest
     private static void validateSubmitAccountApprovalProcess() {
         List<Account> accountsInKindList = new List<Account>();
         Map<Id, Id> wishCoordinatorMap = new Map<Id, Id>();
         List<Account> accountsChapterList = new List<Account>();
         List<Account> accountsList = new List<Account>([SELECT Id, Name, Wish_Co_ordinator__c, OwnerId, Owner.UserRole.Name, Owner.ContactId, 
-                                                       Volunteer_Manager__c, RecordTypeId, Chapter_Name__c, Chapter_Name__r.Name 
-                                                       FROM Account]);
+                                                        Volunteer_Manager__c, RecordTypeId, Chapter_Name__c, Chapter_Name__r.Name 
+                                                        FROM Account]);
         for(Account account : accountsList) {
             if(account.RecordTypeId == CHAPTER_RECORD_TYPE_ID && account.Wish_Co_ordinator__c != null) {
                 accountsChapterList.add(account);
@@ -251,13 +257,13 @@ public class AccountServiceTest {
     @isTest
     private static void validateCreateAccountShareEditAccess() {
         Chapter_Vs_Role__c chapterRole = new Chapter_Vs_Role__c(Name = 'Central & Northern Florida', 
-                                                               	Chapter_Name__c = 'Make-A-Wish Central & Northern Florida', 
-                                                               	Role_Name__c = 'Central & Northern Florida - Chapter');
+                                                                Chapter_Name__c = 'Make-A-Wish Central & Northern Florida', 
+                                                                Role_Name__c = 'Central & Northern Florida - Chapter');
         insert chapterRole;
         List<String> chapterNamesList = new List<String>();
         List<Account> accountsList = new List<Account>([SELECT Id, Name, Wish_Co_ordinator__c, OwnerId, Owner.UserRole.Name, Owner.ContactId, 
-                                                       Volunteer_Manager__c, RecordTypeId, Chapter_Name__c, Chapter_Name__r.Name 
-                                                       FROM Account]);
+                                                        Volunteer_Manager__c, RecordTypeId, Chapter_Name__c, Chapter_Name__r.Name 
+                                                        FROM Account]);
         for(Account account : accountsList) {
             if(account.Chapter_Name__r.Name != null) {
                 chapterNamesList.add(account.Chapter_Name__r.Name);
@@ -288,5 +294,24 @@ public class AccountServiceTest {
         AccountService.updateRelatedContactAddressWithHousehold(accountIdSet);
         Test.stopTest();
         System.assert(accountList[0].BillingCity == 'Scottsdale');
+    }
+    
+    @isTest
+    private static void validateCreateHospitalTreatmentFacilities() {
+        Lead lead = [
+            SELECT Id, Alternate1HospitalTreatmentFacility__c, Alternate2HospitalTreatmentFacility__c, 
+            Hospital_Treatment_Facility_Treating__c 
+            FROM Lead 
+            WHERE Name = 'Gary Johnson'
+        ];
+        Map<String, Account> accountMap = new Map<String, Account>([
+            SELECT Id, Name 
+            FROM Account 
+        ]);
+        Map<String, Account> hospitalAccountMap = new Map<String, Account>();
+        Test.startTest();
+        hospitalAccountMap = AccountService.createHospitalTreatmentFacilities(new Set<Id>{lead.Id}, accountMap);
+        Test.stopTest();
+        System.assert(hospitalAccountMap.containsKey(lead.Alternate1HospitalTreatmentFacility__c));
     }
 }
