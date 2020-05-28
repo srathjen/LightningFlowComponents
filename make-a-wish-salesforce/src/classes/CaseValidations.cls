@@ -1,8 +1,6 @@
 /**
  * @description A class to centralize logic related to trigger validations of the Case object
- *
  * @author Chris Shinnimin, Traction on Demand
- *
  * @date 2020-04-14
  */
 public class CaseValidations {

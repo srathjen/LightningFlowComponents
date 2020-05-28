@@ -1,11 +1,10 @@
-/*****************************************************************************************************************
-Author      : MST Solutions
-Date        : 10/4/2016
-Description : This class is used to generate file path for the attachment that stored in SDrive for object
-
-Modification Log:
-09/10/2019 - Manik - WLP-423
-*******************************************************************************************************************/
+/**
+ * @description : This class is used to generate file path for the attachment that stored in SDrive for object
+ * Modification Log:
+ * 09/10/2019 - Manik - WLP-423
+ * @author : MST Solutions
+ * @date : 10/4/2016
+ **/
 public without sharing class AWSFilePathService {
 
     private static final String DEFAULT_FILEPATH = Label.AWSDefaultFilePathPrefix;
@@ -13,6 +12,7 @@ public without sharing class AWSFilePathService {
     private static final Integer DEFAULT_TIME_VALUE = 365 * 24 * 60 * 60; // Years worth in seconds
 
     /**
+     * @description
      * @param fileRecordIds
      * @param exceptionMap
      */
@@ -65,6 +65,7 @@ public without sharing class AWSFilePathService {
     }
 
     /**
+     * @description
      * @param fileRecordIds
      * @param exceptionMap
      */
@@ -96,7 +97,7 @@ public without sharing class AWSFilePathService {
                 for (String str : accountFilePaths) {
                     if (str.contains(accountFileRec.Id)) {
                         accountFileRec.File_Path__c = str;
-                    } else if(Test.isRunningTest()) {
+                    } else if (Test.isRunningTest()) {
                         accountFileRec.File_Path__c = DEFAULT_FILEPATH;
                     }
                 }
@@ -110,6 +111,7 @@ public without sharing class AWSFilePathService {
     }
 
     /**
+     * @description
      * @param fileRecordIds
      * @param exceptionMap
      */
@@ -156,6 +158,7 @@ public without sharing class AWSFilePathService {
     }
 
     /**
+     * @description
      * @param fileRecordIds
      * @param exceptionMap
      */
@@ -202,6 +205,7 @@ public without sharing class AWSFilePathService {
     }
 
     /**
+     * @description
      * @param fileRecordIds
      * @param exceptionMap
      */
@@ -248,6 +252,7 @@ public without sharing class AWSFilePathService {
     }
 
     /**
+     * @description
      * @param fileRecordIds
      * @param exceptionMap
      */
