@@ -16,6 +16,7 @@ Modification Log:
 10.04/02/2020 - Manoj      - SIW-413 : Modified text as per the ticket.
 11.04/02/2020 - Manoj      - SIW-379 : Added 'I am not sure' and 'Medically fragile/medically complex' checkbox in DV form.
 12.09/04/2020 - Manoj      - SIW-355 : Added 2 new questions. Also changed the placement of one question as mentiond in the ticket.
+13.28/05/2020 - Manoj      - SIW-262 : Made page scrollable to the fields in case of any error
 *********************************************************************************************************************************** -->
 <apex:page controller="DiagnosisVerification_AC" applyBodyTag="false" sidebar="false" showHeader="false" docType="html-5.0" standardStylesheets="false" title="Make-A-Wish | Diagnosis Verification Form" cache="false">
     <script>
@@ -1340,7 +1341,7 @@ Modification Log:
                                         <div class="col-md-12">
                                             <!--<apex:commandButton value="Save" style="border-right:1px solid #fff" styleClass="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md saveMedicalInfoBtn" action="{!SaveMedicalInformation}" rerender="diagonsisLoop,findAndReplace,notEligible" onClick="checkfunction();" onComplete="ShowSuccessMsg();"/>-->
                                             <input type="button" style="border-right:1px solid #fff" class="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md saveMedicalInfoBtn" value="Save" onClick="checkfunction();"/>
-                                            <input type="button" class="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md SS-btn" value="Save & Next"/>
+                                            <input type="button" class="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md SS-btn" value="Save & Next" onclick="setTimeout(changeControl, 2100)"/>
                                         </div>
                                     </fieldset>
                                     <script>
@@ -1768,7 +1769,7 @@ Modification Log:
                         text: 'Please fill required fields',
                         type: "error",
                         confirmButtonColor: '#0057B8',
-                        timer: 3000
+                        timer: 2000
                     })
                     
                 }
@@ -1780,7 +1781,7 @@ Modification Log:
                         text: 'Please fill required fields',
                         type: "error",
                         confirmButtonColor: '#0057B8',
-                        timer: 3000
+                        timer: 2000
                     })
                     
                 }
@@ -1793,7 +1794,7 @@ Modification Log:
                         text: 'Please fill required fields',
                         type: "error",
                         confirmButtonColor: '#0057B8',
-                        timer: 3000
+                        timer: 2000
                     })
                     isError_Free = false;
                 }
@@ -2389,7 +2390,17 @@ Modification Log:
                 }
             }
         }
-        
+        //SIW-262 : Made page scrollable to the fields in case of any error
+        function changeControl(){
+            var p = document.querySelectorAll('.requiredField');            
+            for(var i=0; i<p.length; i++){ 
+                if(p[i].style.borderColor == "rgb(255, 0, 0)"){
+                    p[i].scrollIntoView();
+                    window.scrollTo
+                    break;
+                }
+            }
+        }
         </script>
     </body>
 </apex:page>
