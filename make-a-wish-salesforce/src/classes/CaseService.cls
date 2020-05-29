@@ -221,18 +221,19 @@ public class CaseService {
                 newCase.Lead__c = processLead.Id;
                 newCase.AccountId = processLead.ChapterName__c;
                 newCase.ChapterName__c = processLead.ChapterName__c;
-                if (processLead.Any_medical_reason_for_moving_quickly__c == LEAD_MEDICAL_REASON_FOR_MOVING_QUICKLY_YES) {
+                if (processLead.Any_medical_reason_for_moving_quickly__c.containsIgnoreCase(LEAD_MEDICAL_REASON_FOR_MOVING_QUICKLY_YES)) {
                     newCase.Rush__c = true;
                     newCase.Rush_Explanation__c = processLead.Please_Explain__c;
                     newCase.Rush_Timeframe__c = RUSH_TIME_FRAME;
                     newCase.Diagnosis_Verification_Receive_Date__c = processLead.Part_A_Received__c;
                 }
+                /* looks redundant. Removed for testing SIW-582 
                 if (processLead.Any_medical_reason_for_moving_quickly__c != null) {
                     String medicalReason = processLead.Any_medical_reason_for_moving_quickly__c;
                     if (medicalReason.contains(LEAD_MEDICAL_REASON_FOR_MOVING_QUICKLY_YES)) {
                         newCase.Rush__c = true;
                     }
-                }
+                }*/
                 newCaseList.add(newCase);
             }
 
@@ -435,7 +436,7 @@ public class CaseService {
     /*
      * @description     Check if any date fields in planning case are null.
      *
-     * @param 			List<Case> cases
+     * @param           List<Case> cases
      *
      * @author          MST Solutions
     */
@@ -495,10 +496,10 @@ public class CaseService {
     }
 
     /*
-     * @description		This method is used to update the parent wish subject, fund Id and unique wish
-     * 					identifier values when a parent Case is created.
+     * @description     This method is used to update the parent wish subject, fund Id and unique wish
+     *                  identifier values when a parent Case is created.
      *
-     * @author 			MST Solutions
+     * @author          MST Solutions
      */
     //public static void UpdateWishRecordIdentifier(Set<Id> parentIds, Set<Id> chapterIds, Id recTypeId) {
     public static void updateWishRecordIdentifier(List<Case> cases) {
@@ -624,9 +625,9 @@ public class CaseService {
     }
 
     /*
-    * @description		Used to include Intake Manager into Case team.
+    * @description      Used to include Intake Manager into Case team.
     *
-    * @author 			MST Solutions
+    * @author           MST Solutions
     */
     public static void caseTeamInTakeManager(List<Case> cases) {
         Map<String, Id> teamRoleIdMap = new Map<String, Id>();
@@ -711,9 +712,9 @@ public class CaseService {
     }
 
     /*
-    * @description		Used to create Case file records when a parent Case and subcase is created.
+    * @description      Used to create Case file records when a parent Case and subcase is created.
     *
-    * @author 			MST Solutions
+    * @author           MST Solutions
     */
     public static void createCaseFile(List<Case> caseList) {
         List<cg__CaseFile__c> caseFiles = new List<cg__CaseFile__c>();
@@ -777,7 +778,7 @@ public class CaseService {
     }
 
     /*
-    * @author 			MST Solutions
+    * @author           MST Solutions
     */
     //public static void reParentDvTask(Set<Id> caseIds) {
     public static void reParentDvTask(List<Case> cases) {

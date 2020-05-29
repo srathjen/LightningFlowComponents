@@ -13,9 +13,10 @@ public with sharing class CaseServiceTest {
         Regions__c region = TestDataFactory.createRegions(1)[0];
         insert region;
 
-        List<Account> accounts = TestDataFactory.createAccount(2);
+        List<Account> accounts = TestDataFactory.createChapterAccount(2);
         Account account1 = accounts.get(0);
         Account account2 = accounts.get(1);
+        account1.Name = account2.Name = Constant_AC.ACCOUNT_NAME_MAW_AMERICA;
         insert accounts;
 
         List<Contact> contacts = TestDataFactory.createContact(2);
@@ -25,10 +26,13 @@ public with sharing class CaseServiceTest {
         contact1.AccountId = account1.Id;
         contact1.Region_Code__c = region.Id;
         contact1.County__c = 'Test';
+        contact1.RecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
         Contact contact2 = contacts.get(1);
         contact2.FirstName = 'Test2';
         contact2.LastName = 'User3';
         contact2.AccountId = account2.Id;
+        contact2.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+
         contact1.Diagnosis__c = contact2.Diagnosis__c = 'Test';
         insert contacts;
 
@@ -261,12 +265,96 @@ public with sharing class CaseServiceTest {
     }
 
     @IsTest
+    static void testWishDetermined() {
+        Lead lead = getLead();
+        List<Case> cases = createCases(lead);
+        insert cases;
+
+        cases[0].Status = Constant_AC.CASE_STATUS_WISH_DETERMINED;
+        cases[0].Sub_Status__c = Constant_AC.CASE_SUB_STATUS_ABANDONED;
+        cases[0].Wish_Type__c = Constant_AC.CASE_WISH_TYPE_CRUISE_DISNEY;
+        update cases;
+    }
+
+    @IsTest
+    static void testWishPendingApproval() {
+        Lead lead = getLead();
+        List<Case> cases = createCases(lead);
+        insert cases;
+
+        cases[0].Status = Constant_AC.CASE_STATUS_PENDING_APPROVAL;
+        cases[0].Sub_Status__c = Constant_AC.CASE_SUB_STATUS_NON_VIEWABLE;
+        update cases;
+    }
+
+    @IsTest
+    static void testDNQStatus() {
+        Lead lead = getLead();
+        List<Case> cases = createCases(lead);
+        insert cases;
+
+        cases[0].Status = Constant_AC.CASE_STATUS_DNQ_NATIONAL_STAFF;
+        cases[0].Sub_Status__c = Constant_AC.CASE_SUB_STATUS_NON_VIEWABLE;
+        update cases;
+    }
+
+    @IsTest
+    static void testCaseReadyToInterview() {
+        Lead lead = getLead();
+        List<Case> cases = createCases(lead);
+        for (Case c : cases) {
+            c.Status = Constant_AC.CASE_STATUS_READY_TO_ASSIGN;
+            c.Sub_Status__c = Constant_AC.CASE_SUB_STATUS_PENDING;
+        }
+        insert cases;
+
+        for (Case c : cases) {
+            c.Status = Constant_AC.CASE_STATUS_READY_TO_INTERVIEW;
+        }
+        update cases;
+    }
+
+    @IsTest
+    static void testCaseEscalated() {
+        Lead lead = getLead();
+        List<Case> cases = createCases(lead);
+        for (Case c : cases) {
+            c.Status = Constant_AC.CASE_STATUS_ESCALATED;
+        }
+        insert cases;
+
+        for (Case c : cases) {
+            c.Case_Comment__c = 'TEST';
+        }
+        update cases;
+
+        for (Case c : cases) {
+            c.Status = Constant_AC.CASE_STATUS_NEW;
+        }
+        update cases;
+
+        Contact medicalContact = [
+                SELECT Id
+                FROM Contact
+                WHERE RecordTypeId = :Constant_AC.MEDICAL_PROFESSIONAL_RT_ID
+        ];
+        for (Case c : cases) {
+            c.Status = Constant_AC.CASE_STATUS_ESCALATED;
+            c.Local_MCA_Team__c = medicalContact.Id;
+        }
+        update cases;
+    }
+
+    @IsTest
     static void testChangeWishType() {
         Lead lead = getLead();
         List<Case> cases = createCases(lead);
         insert cases;
 
         cases[0].Wish_Type__c = Constant_AC.CASE_WISH_TYPE_CRUISE_DISNEY;
+        cases[0].Comment_1__c = 'Test';
+        cases[0].Appropriate_Comments__c = 'Test';
+        cases[0].Please_Explain__c = 'Test';
         update cases;
     }
 
@@ -287,10 +375,12 @@ public with sharing class CaseServiceTest {
         List<Account> accounts = [
                 SELECT Id
                 FROM Account
+                ORDER BY CreatedDate
         ];
         List<Contact> contacts = [
                 SELECT Id
                 FROM Contact
+                ORDER BY CreatedDate
         ];
         Case wish = TestDataFactory.createCase(1).get(0);
         wish.Lead__c = lead.Id;
