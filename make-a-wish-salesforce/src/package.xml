@@ -21,6 +21,13 @@
     <name>AuraDefinitionBundle</name>
   </types>
   <types>
+    <members>Intake_Medical_Eligibility1</members>
+    <members>Make_A_Wish_Admin</members>
+    <members>Volunteer_Management</members>
+    <members>WVC_Console</members>
+    <name>CustomApplication</name>
+  </types>
+  <types>
     <members>Contact.Expedite_timeframe__c</members>
     <members>Contact.Other_expedite_timeframe_comments__c</members>
     <members>Lead.Child_Age__c</members>
@@ -164,6 +171,7 @@
   <types>
     <members>Account_Record_Page</members>
     <members>Case_Wish_Lightning</members>
+    <members>Default_Lead_Record_Page</members>
     <members>Lead_Record_Page</members>
     <name>FlexiPage</name>
   </types>
