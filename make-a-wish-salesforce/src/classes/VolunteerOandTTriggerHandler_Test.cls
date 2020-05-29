@@ -1,10 +1,7 @@
 /**
- * Author      : MST Solutions
- * CreatedBy   : Kanagaraj
- * Date        : 28/06/2016
- * Description : Unit TEst for Converting Prospective Volunteer as Active one.
- * Modification Log:
- * 28/03/2018 - Kanagaraj
+ * @description Unit TEst for Converting Prospective Volunteer as Active one.
+ * @author Kanagaraj, MST Solutions
+ * @date 28/06/2016
  **/
 @IsTest
 public class VolunteerOandTTriggerHandler_Test {
@@ -13,46 +10,75 @@ public class VolunteerOandTTriggerHandler_Test {
     @IsTest
     static void completeTraining() {
         trac_TriggerHandlerBase.blockTrigger = true;
-        Account acc = OrientationandTrainingUtil.createVolunteerAccount();
+        Account acc = TestDataFactory.createChapterAccount(1)[0];
         insert acc;
 
-        Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.Id);
+        Contact con = TestDataFactory.createContact(1)[0];
+        con.AccountId = acc.Id;
+        con.RecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
         insert con;
 
-        npe5__Affiliation__c affiliation = OrientationandTrainingUtil.createAffiliation(con.Id);
+        npe5__Affiliation__c affiliation = TestDataFactory.createAffiliation(1)[0];
+        affiliation.npe5__Contact__c = con.Id;
+        affiliation.npe5__Organization__c = acc.Id;
         insert affiliation;
 
         User currUser;
         System.runAs(new User(Id = UserInfo.getUserId())) {
-            currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.Id);
+            currUser = TestDataFactory.createVolunteerUser(1)[0];
             insert currUser;
         }
 
-        Background_check__c currBC = OrientationandTrainingUtil.createBackgroundCheck(con.Id);
+        Background_check__c currBC = TestDataFactory.createBackgroundCheck(1)[0];
         currBC.Date_Completed__c = Date.today();
         currBC.Status__c = 'Approved';
         insert currBC;
+
+        Conflict_Of_Interest__c createCOI = TestDataFactory.createConflictOfInterest(1)[0];
+        createCOI.Volunteer_Contact__c = con.Id;
+        insert createCOI;
+
+        Role__c currRole = TestDataFactory.createRole(1, true)[0];
+        insert currRole;
+
+        Chapter_Role__c currChapRole = TestDataFactory.createChapterRole(1)[0];
+        currChapRole.Chapter_Name__c = acc.Id;
+        currChapRole.Role_Name__c = currRole.Id;
+        insert currChapRole;
+
+        Volunteer_Roles__c currVolRole = TestDataFactory.createVolunteerRole(1)[0];
+        currVolRole.Chapter_Role__c = currChapRole.Id;
+        currVolRole.Volunteer_Name__c = con.Id;
+        insert currVolRole;
+
+        Orientation_Training__c currOandT = TestDataFactory.createOrientationTraining(1)[0];
+        currOandT.RecordTypeId = Constant_AC.TRAINING_RT_ID;
+        insert currOandT;
+
+        Chapter_Role_O_T__c currChapOandT = TestDataFactory.createChapterRoleOrientationAndTraining(1)[0];
+        currChapOandT.Chapter_Role__c = currChapRole.Id;
+        currChapOandT.Orientation_Training__c = currOandT.Id;
+        insert currChapOandT;
+
+        Class_Offering__c currOffering = TestDataFactory.createClassOffering(1)[0];
+        currOffering.Chapter_Role_O_T__c = currChapOandT.Id;
+        insert currOffering;
         trac_TriggerHandlerBase.blockTrigger = false;
 
         Test.startTest();
-        Conflict_Of_Interest__c createCOI = OrientationandTrainingUtil.createCOI(con.Id);
-        insert createCOI;
-        Role__c currRole = OrientationandTrainingUtil.createRole();
-        insert currRole;
-        Chapter_Role__c currChapRole = OrientationandTrainingUtil.createChapter(acc.Id, currRole.Id);
-        insert currChapRole;
-        Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.Id, currChapRole.Id);
-        insert currVolRole;
-        Orientation_Training__c currOandT = OrientationandTrainingUtil.CreateVolunteerTrainingRecord();
-        insert currOandT;
-        Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.Id, currOandT.Id);
-        insert currChapOandT;
-        Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.Id);
-        insert currOffering;
-        Volunteer_Orientation_Training__c createVolTraining = OrientationandTrainingUtil.createVolTraining(currOandT.Id, currOffering.Id, con.Id, 'Registered');
+        Volunteer_Orientation_Training__c createVolTraining = TestDataFactory.createVolunteerOrientationAndTraining(1)[0];
+        createVolTraining.Class_Offering__c = currOffering.Id;
+        createVolTraining.Hidden_O_T_Id__c = currOandT.Id;
+        createVolTraining.Registered_Date__c = Date.today();
+        createVolTraining.Volunteer__c = con.Id;
+        createVolTraining.Volunteer_Attendance__c = 'Registered';
+        createVolTraining.Type__c = 'Training';
+        createVolTraining.RE_Completed_Date__c = String.valueOf(System.today());
         createVolTraining.Volunteer_Attendance__c = 'Completed';
         insert createVolTraining;
+        update createVolTraining;
         Test.stopTest();
+
         System.assertEquals(createVolTraining.Volunteer_Attendance__c, 'Completed', 'Volunteer attendance does not match');
         System.assert(createVolTraining.Volunteer_Attendance__c == 'Completed', 'Volunteer attendance does not match');
     }

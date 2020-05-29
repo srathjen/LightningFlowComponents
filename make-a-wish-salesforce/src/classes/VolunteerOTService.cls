@@ -1,8 +1,6 @@
 /**
  * @description
- *
  * @author Steve Doucette, Traction on Demand
- *
  * @date 4/22/2020
  */
 public class VolunteerOTService {
@@ -26,7 +24,6 @@ public class VolunteerOTService {
 
     /**
      * @description Updating Affiliation status as Active.
-     *
      * @param volunteerContactIds
      */
     public static void updateAffiliationStatusAsActive(Set<Id> volunteerContactIds) {
@@ -188,7 +185,6 @@ public class VolunteerOTService {
 
     /**
      * @description This method is used to update the volunteer contact field to send an email to volunteer.
-     *
      * @param volunteerOrientationTrainingList
      */
     public static void updateContactRec(List<Volunteer_Orientation_Training__c> volunteerOrientationTrainingList) {
@@ -271,7 +267,6 @@ public class VolunteerOTService {
 
     /**
      * @description
-     *
      * @param newList
      */
     public static void setVolOTFields(List<Volunteer_Orientation_Training__c> newList) {
@@ -280,7 +275,6 @@ public class VolunteerOTService {
 
     /**
      * @description
-     *
      * @param newList
      * @param oldMap
      */
@@ -330,7 +324,6 @@ public class VolunteerOTService {
 
     /**
      * @description
-     *
      * @param volIdsSet
      * @param action
      */
@@ -356,7 +349,6 @@ public class VolunteerOTService {
 
     /**
      * @description
-     *
      * @param volunteerContactIds
      * @param Action
      */
@@ -529,7 +521,6 @@ public class VolunteerOTService {
 
     /**
      * @description
-     *
      * @param userIds
      */
     @Future
