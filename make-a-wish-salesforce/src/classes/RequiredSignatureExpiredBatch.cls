@@ -21,8 +21,6 @@ global without sharing class RequiredSignatureExpiredBatch implements Database.B
      * @return Query locator containing query results
      */
     global Database.QueryLocator start(Database.BatchableContext bc) {
-        System.debug('STEVE:');
-        System.debug([SELECT Id, Status__c, Signature_Expiry_Date__c FROM Wish_Required_Signature__c]);
         return Database.getQueryLocator(
                 'SELECT Id, Status__c '
                         + 'FROM Wish_Required_Signature__c '
