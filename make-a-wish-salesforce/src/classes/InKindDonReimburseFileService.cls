@@ -1,13 +1,15 @@
 /**
- * @author Steve Doucette, Traction on Demand 
+ * @description
+ * @author Steve Doucette, Traction on Demand
  * @date 3/16/2020
  */
 public class InKindDonReimburseFileService {
 
     /**
+     * @description
      * @param inKindDonReimburseFiles
      */
-    public static void updateInKindReimburseFilePath(List<InkindDon_reimburseFile__c> inKindDonReimburseFiles){
+    public static void updateInKindReimburseFilePath(List<InkindDon_reimburseFile__c> inKindDonReimburseFiles) {
         List<Id> drIds = new List<Id>();
         Set<String> inKindIdsSet = new Set<String>();
         Map<Id, String> inKindFileMap = new Map<Id, String>();
@@ -38,7 +40,7 @@ public class InKindDonReimburseFileService {
      * @description Set related parents to "Not Available"
      * @param deletedFiles
      */
-    public static void setReimbursementFilesToNotAvailable(List<InkindDon_reimburseFile__c> deletedFiles){
+    public static void setReimbursementFilesToNotAvailable(List<InkindDon_reimburseFile__c> deletedFiles) {
         Set<String> inKindIdsSet = new Set<String>();
         List<In_Kind_Donation_Reimbursement__c> updateList = new List<In_Kind_Donation_Reimbursement__c>();
         for (InkindDon_reimburseFile__c deleteRecord : deletedFiles) {
