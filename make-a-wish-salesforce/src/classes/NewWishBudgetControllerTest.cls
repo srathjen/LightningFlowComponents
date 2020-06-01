@@ -1,17 +1,19 @@
 /**
  * @description New Wish Budget Controller Test Class
+ *
  * @author Mitali Nahar, Traction on Demand
- * @createdDate 8/21/2019
+ *
+ * @date 8/21/2019
  */
 @IsTest
 public with sharing class NewWishBudgetControllerTest {
+
     private final static Id CHAPTER_RECORD_TYPE_ID = Constant_AC.CHAPTER_RT_ID;
     private final static Id WISH_RECORD_TYPE_ID = Constant_AC.WISH_RT_ID;
     private final static Id WISH_FAMILY_RECORD_TYPE_ID = Constant_AC.WISH_FAMILY_RT_ID;
     private final static Id HOUSEHOLD_RECORD_TYPE_ID = Constant_AC.HOUSEHOLD_RT_ID;
     private final static Id WISH_CHILD_RECORD_TYPE_ID = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
     private final static Id MEDICAL_PROF_RECORD_TYPE_ID = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
-
 
     @TestSetup
     private static void insertTestData() {
@@ -23,6 +25,7 @@ public with sharing class NewWishBudgetControllerTest {
         ICD_Codes__c obj = new ICD_Codes__c();
         obj.Name = 'Q917';
         insert obj;
+
         List<Contact> contactsDataFactory = TestDataFactory.createContact(4);
         contactsDataFactory[0].RecordTypeId = WISH_CHILD_RECORD_TYPE_ID;
         contactsDataFactory[0].ICD_10_Code__c = obj.Id;
@@ -43,15 +46,19 @@ public with sharing class NewWishBudgetControllerTest {
         insert casesDataFactory;
     }
 
-    @isTest
-    public static void testGetWishBudgets(){
+    @IsTest
+    public static void testGetWishBudgets() {
         Test.startTest();
-        Case wishCase = [SELECT Id FROM Case LIMIT 1];
-        system.assertEquals(true, wishCase != null);
+        Case wishCase = [
+                SELECT Id
+                FROM Case
+                LIMIT 1
+        ];
+        System.assertEquals(true, wishCase != null);
 
         Case result = NewWishBudgetController.getWishBudgets(wishCase.Id);
-        system.assertNotEquals(null, result);
-        List<Wish_Budget__c> wishBudgetList = TestDataFactory.createWishBudget(1,wishCase.Id);
+        System.assertNotEquals(null, result);
+        List<Wish_Budget__c> wishBudgetList = TestDataFactory.createWishBudget(1, wishCase.Id);
         insert wishBudgetList;
     }
 }
