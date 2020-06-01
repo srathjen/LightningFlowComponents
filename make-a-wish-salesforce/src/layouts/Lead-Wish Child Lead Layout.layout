@@ -908,11 +908,6 @@
             <actionType>ProductivityAction</actionType>
             <sortOrder>14</sortOrder>
         </platformActionListItems>
-        <platformActionListItems>
-            <actionName>Convert</actionName>
-            <actionType>StandardButton</actionType>
-            <sortOrder>15</sortOrder>
-        </platformActionListItems>
     </platformActionList>
     <quickActionList>
         <quickActionListItems>
