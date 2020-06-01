@@ -457,15 +457,12 @@ public class CaseDomain extends trac_TriggerHandlerBase {
         updateLeadStatusApprovedAndDnqLeadIds.add(new Set<String>()); // dnq leads
 
         for (Case aCase : newCasesList) {
-            if ((Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MEDICAL_REVIEW.equals(aCase.Status)
-                    && !Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MEDICAL_REVIEW.equals(oldCasesMap.get(aCase.Id).Status))
-                    || (Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MAC_REVIEW.equals(aCase.Status)
+            if ((Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MEDICAL_REVIEW.equals(aCase.Status) && !Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MEDICAL_REVIEW.equals(oldCasesMap.get(aCase.Id).Status)) || (Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MAC_REVIEW.equals(aCase.Status)
                     && !Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MAC_REVIEW.equals(oldCasesMap.get(aCase.Id).Status))
                     && aCase.RecordTypeId == DIAGNOSIS_VERIFICATION_RECORDTYPE_ID) {
 
                 updateLeadStatusApprovedAndDnqLeadIds[0].add(aCase.Lead__c);
-            } else if ((Constant_AC.CASE_STATUS_DNQ_NATIONAL_MEDICAL_REVIEW.equals(aCase.Status)
-                    || Constant_AC.CASE_STATUS_DNQ_NATIONAL_MAC_REVIEW.equals(aCase.Status))
+            } else if ((Constant_AC.CASE_STATUS_DNQ_NATIONAL_MEDICAL_REVIEW.equals(aCase.Status) || Constant_AC.CASE_STATUS_DNQ_NATIONAL_MAC_REVIEW.equals(aCase.Status))
                     && aCase.RecordTypeId == DIAGNOSIS_VERIFICATION_RECORDTYPE_ID
                     && oldCasesMap.get(aCase.Id).Status != aCase.Status) {
 

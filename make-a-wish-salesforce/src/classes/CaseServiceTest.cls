@@ -243,6 +243,28 @@ public with sharing class CaseServiceTest {
     }
 
     @IsTest
+    static void testChangeToMACReviewed() {
+        Lead lead = getLead();
+        List<Case> cases = createCases(lead);
+        cases[1].Sub_Status__c = Constant_AC.LEAD_SUB_STATUS_PENDING_PART_A;
+        insert cases;
+
+        lead.Qualifying_ICD__c = [
+                SELECT Id
+                FROM ICD_Codes__c
+                LIMIT 1
+        ].Id;
+        lead.Any_medical_reason_for_moving_quickly__c = 'Test';
+        lead.Part_A_Received__c = Date.today();
+        lead.Migrated_Record__c = true;
+        update lead;
+
+        cases[1].Status = Constant_AC.CASE_STATUS_APPROVED_NATIONAL_MAC_REVIEW;
+        cases[1].Diagnosis_Verification_Receive_Date__c = Date.today();
+        update cases;
+    }
+
+    @IsTest
     static void testChangeToCompleted() {
         Lead lead = getLead();
         List<Case> cases = createCases(lead);
