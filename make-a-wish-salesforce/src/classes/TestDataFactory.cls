@@ -231,7 +231,7 @@ public class TestDataFactory {
         return users;
     }
 
-    public static List<User> createVolunteerUser(Integer num){
+    public static List<User> createVolunteerUser(Integer num) {
         return createVolunteerUser(num, 'Active Volunteer (Member)', 'Manager');
     }
 
@@ -582,7 +582,7 @@ public class TestDataFactory {
         }
         return chapterActionTrackList;
     }
-    
+
     public static List<In_Kind_Donation_Reimbursement__c> createInKindDonationReimbursement(Integer num) {
         List<In_Kind_Donation_Reimbursement__c> inKindDonationList = new List<In_Kind_Donation_Reimbursement__c>();
         for (Integer i = 0; i < num; i++) {
@@ -591,7 +591,7 @@ public class TestDataFactory {
         }
         return inKindDonationList;
     }
-    
+
     public static List<Approval.ProcessSubmitRequest> createApporvalProcessRequest(Integer num) {
         List<Approval.ProcessSubmitRequest> approvalProcessRequestList = new List<Approval.ProcessSubmitRequest>();
         for (Integer i = 0; i < num; i++) {
@@ -825,7 +825,7 @@ public class TestDataFactory {
         }
         return userRoles;
     }
-    
+
     public static InkindDon_reimburseFile__c createInKindDonationReimbursementFile(Id reimbursement) {
         InkindDon_reimburseFile__c inKindDonReimburseFile = new InkindDon_reimburseFile__c();
         inKindDonReimburseFile.Parent__c = reimbursement;
@@ -842,7 +842,7 @@ public class TestDataFactory {
         }
         return roles;
     }
-    
+
     public static dsfs__DocuSign_Recipient_Status__c createDocusignRecipientStatus(Id docusignStatusId) {
         dsfs__DocuSign_Recipient_Status__c recipientStatus = new dsfs__DocuSign_Recipient_Status__c();
         recipientStatus.dsfs__Parent_Status_Record__c = docusignStatusId;
@@ -851,7 +851,7 @@ public class TestDataFactory {
         recipientStatus.dsfs__Recipient_Status__c = 'Completed';
         return recipientStatus;
     }
-    
+
     public static dsfs__DocuSign_Status__c createDocusignStatuswithCase(Id caseId) {
         dsfs__DocuSign_Status__c dsfs = new dsfs__DocuSign_Status__c();
         dsfs.dsfs__DocuSign_Envelope_ID__c = '0204C9DD-B8B3-4D7D-B9C5-F88B921E1511';
@@ -861,5 +861,14 @@ public class TestDataFactory {
         dsfs.dsfs__Completed_Date_Time__c = System.now();
         dsfs.dsfs__Subject__c = 'Signature Required - Liability And Publicity Release Form';
         return dsfs;
+    }
+
+    public static List<Regions__c> createRegions(Integer num) {
+        List<Regions__c> retList = new List<Regions__c>();
+        for (Integer i = 0; i < num; i++) {
+            Regions__c obj = new Regions__c();
+            retList.add(obj);
+        }
+        return retList;
     }
 }

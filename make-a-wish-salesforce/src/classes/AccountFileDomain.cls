@@ -1,5 +1,6 @@
 /**
- * @author Steve Doucette, Traction on Demand 
+ * @description
+ * @author Steve Doucette, Traction on Demand
  * @date 3/16/2020
  */
 public class AccountFileDomain extends trac_TriggerHandlerBase {

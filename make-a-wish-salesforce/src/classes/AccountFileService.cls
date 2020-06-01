@@ -1,9 +1,11 @@
 /**
- * @author Steve Doucette, Traction on Demand 
+ * @description
+ * @author Steve Doucette, Traction on Demand
  * @date 3/16/2020
  */
 public class AccountFileService {
     /**
+     * @description
      * @param newAccountFiles
      */
     public static void updateAccountFilePath(List<cg__AccountFile__c> newAccountFiles) {
