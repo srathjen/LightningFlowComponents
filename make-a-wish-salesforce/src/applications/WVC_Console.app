@@ -3551,15 +3551,6 @@
         <pageOrSobjectType>Lead</pageOrSobjectType>
         <recordType>Lead.Default</recordType>
         <type>Flexipage</type>
-        <profile>Intake Manager - Demo</profile>
-    </profileActionOverrides>
-    <profileActionOverrides>
-        <actionName>View</actionName>
-        <content>Default_Lead_Record_Page</content>
-        <formFactor>Large</formFactor>
-        <pageOrSobjectType>Lead</pageOrSobjectType>
-        <recordType>Lead.Default</recordType>
-        <type>Flexipage</type>
         <profile>Integration</profile>
     </profileActionOverrides>
     <profileActionOverrides>
@@ -4037,14 +4028,6 @@
         <content>Lead_Record_Page</content>
         <formFactor>Large</formFactor>
         <pageOrSobjectType>Lead</pageOrSobjectType>
-        <type>Flexipage</type>
-        <profile>Intake Manager - Demo</profile>
-    </profileActionOverrides>
-    <profileActionOverrides>
-        <actionName>View</actionName>
-        <content>Lead_Record_Page</content>
-        <formFactor>Large</formFactor>
-        <pageOrSobjectType>Lead</pageOrSobjectType>
         <recordType>Lead.Wish_Child</recordType>
         <type>Flexipage</type>
         <profile>Chapter Dev/Fin Staff</profile>
@@ -4165,15 +4148,6 @@
         <recordType>Lead.Wish_Child</recordType>
         <type>Flexipage</type>
         <profile>Intake Manager</profile>
-    </profileActionOverrides>
-    <profileActionOverrides>
-        <actionName>View</actionName>
-        <content>Lead_Record_Page</content>
-        <formFactor>Large</formFactor>
-        <pageOrSobjectType>Lead</pageOrSobjectType>
-        <recordType>Lead.Wish_Child</recordType>
-        <type>Flexipage</type>
-        <profile>Intake Manager - Demo</profile>
     </profileActionOverrides>
     <profileActionOverrides>
         <actionName>View</actionName>
