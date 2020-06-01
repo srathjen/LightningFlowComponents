@@ -180,6 +180,11 @@
     <name>LightningComponentBundle</name>
   </types>
   <types>
+    <members>cms_document</members>
+    <members>cms_image</members>
+    <name>ManagedContentType</name>
+  </types>
+  <types>
     <members>Lead_Default</members>
     <members>Lead_Wish_Child</members>
     <members>Wish_Stages</members>
@@ -276,6 +281,14 @@
     <members>Case.DatesP1</members>
     <members>Case.Wish_Timing</members>
     <name>QuickAction</name>
+  </types>
+  <types>
+    <members>unfiled$public/flow_screen_prebuilt_report</members>
+    <name>Report</name>
+  </types>
+  <types>
+    <members>screen_flows_prebuilt_crt</members>
+    <name>ReportType</name>
   </types>
   <types>
     <members>Chatter</members>
