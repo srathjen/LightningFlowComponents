@@ -34,10 +34,6 @@ global class batch_leadChildAge implements Database.Batchable<SObject>, Schedula
             if (runDate.day() == daysInCurrentMonth && daysInCurrentMonth < daysInSixthMonth) {
                 Date fromDate = twoAndHalfToday;
                 Date toDate = fromDate.addDays(daysInSixthMonth - daysInCurrentMonth);
-                System.debug(leads.DOB__c);
-                System.debug(fromDate);
-                System.debug(toDate);
-                System.debug('-----');
                 if ((leads.DOB__c >= fromDate) && (leads.DOB__c <= toDate)) {
                     leads.Age_Requirement_Met__c = true;
                     updateLeads.add(leads);
