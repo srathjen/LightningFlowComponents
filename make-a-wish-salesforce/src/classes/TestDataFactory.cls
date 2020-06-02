@@ -872,21 +872,4 @@ public class TestDataFactory {
 		return retList;
 	}
 
-	public static List<ApexDebugLogSetting__c> createApexDebugLogSetting(Integer num) {
-		List<ApexDebugLogSetting__c> apexDebugLogSettings = new List<ApexDebugLogSetting__c>();
-		for (Integer i = 0; i < num; i++) {
-			ApexDebugLogSetting__c apexDebugLogSetting = new ApexDebugLogSetting__c();
-			apexDebugLogSettings.add(apexDebugLogSetting);
-		}
-		return apexDebugLogSettings;
-	}
-
-	public static List<Apex_Debug_Log__c> createApexDebugLogs(Integer num) {
-		List<Apex_Debug_Log__c> apexDebugLogs = new List<Apex_Debug_Log__c>();
-		for (Integer i = 0; i < num; i++) {
-			Apex_Debug_Log__c apexDebugLog = new Apex_Debug_Log__c();
-			apexDebugLogs.add(apexDebugLog);
-		}
-		return apexDebugLogs;
-	}
 }
