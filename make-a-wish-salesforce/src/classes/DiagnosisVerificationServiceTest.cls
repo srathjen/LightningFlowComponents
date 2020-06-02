@@ -10,6 +10,8 @@ public class DiagnosisVerificationServiceTest {
     
     @TestSetup
     public static void setup() {
+        trac_TriggerHandlerBase.blockTrigger = true;
+        
         List<Account> accounts = TestDataFactory.createAccount(1);
         Account account1 = accounts.get(0);
         account1.Name = 'Make-A-Wish Arizona';
@@ -39,6 +41,8 @@ public class DiagnosisVerificationServiceTest {
         diagnosisVerification.isEligible__c = true;
         diagnosisVerification.ICD_Code__c = icdCode.Name;
         insert diagnosisVerifications;
+        
+        trac_TriggerHandlerBase.blockTrigger = false;
     }
     
     @IsTest
