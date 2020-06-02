@@ -78,8 +78,10 @@ public class WishExpenseHandler_AC {
                 FROM Case
                 WHERE Id IN :wishes
         ]) {
-            if (objCase.Wish_Budget__r.size() > 0 && !caseToBudgetId.containsKey(objCase.Id)) {
-                caseToBudgetId.put(objCase.Id, objCase.Wish_Budget__r[0].Id);
+            if (objCase.Wish_Budget__r.size() > 0) {
+                if (!caseToBudgetId.containsKey(objCase.Id)) {
+                    caseToBudgetId.put(objCase.Id, objCase.Wish_Budget__r[0].Id);
+                }
             } else {
                 caseIds.add(objCase.Id);
             }
@@ -97,8 +99,10 @@ public class WishExpenseHandler_AC {
                 FROM Case
                 WHERE Id IN :wishes
         ]) {
-            if (objCase.Wish_Budget__r.size() > 0 && !caseToBudgetId.containsKey(objCase.Id)) {
-                caseToBudgetId.put(objCase.Id, objCase.Wish_Budget__r[0].Id);
+            if (objCase.Wish_Budget__r.size() > 0) {
+                if (!caseToBudgetId.containsKey(objCase.Id)) {
+                    caseToBudgetId.put(objCase.Id, objCase.Wish_Budget__r[0].Id);
+                }
             } else {
                 Wish_Budget__c newBudget = new Wish_Budget__c();
                 newBudget.Wish_Case__c = objCase.Id;
