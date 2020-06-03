@@ -1,20 +1,20 @@
-/*****************************************************************************************************************
-Author      : MST Solutions
-Date        : 10/26/2016
-Description : This class contains test method for InKindDonationReimbursementFile object
-*******************************************************************************************************************/
-@isTest
+/**
+ * @description This class contains test method for InKindDonationReimbursementFile object
+ * @author MST Solutions
+ * @date 10/26/2016
+ **/
+@IsTest
 public class InKindDonationReimbursementFile_AT_Test {
-    
+
     @TestSetup
     static void setUp() {
         trac_TriggerHandlerBase.blockTrigger = true;
-        
+
         Account accountAzChapter = TestDataFactory.createAccount(1)[0];
         accountAzChapter.Name = 'Make-A-Wish Arizona';
         accountAzChapter.RecordTypeId = Constant_AC.CHAPTER_RT_ID;
         insert accountAzChapter;
-        
+
         List<Contact> contactList = TestDataFactory.createContact(2);
         Contact volunteerHector = contactList.get(0);
         volunteerHector.RecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
@@ -37,7 +37,7 @@ public class InKindDonationReimbursementFile_AT_Test {
         wishChildAnthony.MailingLatitude = -24.355798;
         wishChildAnthony.MailingLongitude = 69.830469;
         insert contactList;
-        
+
         Case wishChildCase = TestDataFactory.createCase(1)[0];
         wishChildCase.RecordTypeId = Constant_AC.WISH_RT_ID;
         wishChildCase.ChapterName__c = accountAzChapter.Id;
@@ -53,7 +53,7 @@ public class InKindDonationReimbursementFile_AT_Test {
         wishChildCase.Budget_Submitted_Date__c = System.today();
         wishChildCase.Budget_Approved_Date__c = System.today();
         insert wishChildCase;
-        
+
         List<In_Kind_Donation_Reimbursement__c> reimbursementList = TestDataFactory.createInKindDonationReimbursement(2);
         In_Kind_Donation_Reimbursement__c reimbursementGoods = reimbursementList.get(0);
         reimbursementGoods.Date_of_Gift__c = System.today() + 2;
@@ -72,47 +72,51 @@ public class InKindDonationReimbursementFile_AT_Test {
         reimbursementServices.Make_check_payable_to_me__c = true;
         reimbursementServices.Wish__c = wishChildCase.Id;
         insert reimbursementList;
-        
+
         InkindDon_reimburseFile__c reimbursementServicesFile = TestDataFactory.createInKindDonationReimbursementFile(reimbursementServices.Id);
-        reimbursementServicesFile.File_Name__c = 'ReimbursementSummary.txt';
-        insert reimbursementServicesFile;
-        
+        InkindDon_reimburseFile__c reimbursementServicesFile2 = TestDataFactory.createInKindDonationReimbursementFile(reimbursementGoods.Id);
+        InkindDon_reimburseFile__c parentFile = TestDataFactory.createInKindDonationReimbursementFile(reimbursementServices.Id);
+        reimbursementServicesFile.File_Name__c = reimbursementServicesFile2.File_Name__c = 'ReimbursementSummary.txt';
+        insert new List<InkindDon_reimburseFile__c>{
+                reimbursementServicesFile, reimbursementServicesFile2, parentFile
+        };
+
         trac_TriggerHandlerBase.blockTrigger = false;
     }
-    
-    @isTest
+
+    @IsTest
     static void createFile() {
         In_Kind_Donation_Reimbursement__c reimbursement = [
-            SELECT Id 
-            FROM In_Kind_Donation_Reimbursement__c 
-            WHERE Gift_Type__c = 'Goods'
+                SELECT Id
+                FROM In_Kind_Donation_Reimbursement__c
+                WHERE Gift_Type__c = 'Goods'
         ];
         InkindDon_reimburseFile__c reimbursementFile = TestDataFactory.createInKindDonationReimbursementFile(reimbursement.Id);
         Test.startTest();
         insert reimbursementFile;
         Test.stopTest();
         In_Kind_Donation_Reimbursement__c reimbursementUpdated = [
-            SELECT Id, Documentation__c
-            FROM In_Kind_Donation_Reimbursement__c
-            WHERE Id = :reimbursement.Id
+                SELECT Id, Documentation__c
+                FROM In_Kind_Donation_Reimbursement__c
+                WHERE Id = :reimbursement.Id
         ];
         System.assert(reimbursementUpdated.Documentation__c == 'Attached');
     }
-    
-    @isTest
+
+    @IsTest
     static void deleteFile() {
-        InkindDon_reimburseFile__c reimbursementFile = [
-            SELECT Id, Parent__c
-            FROM InkindDon_reimburseFile__c 
-            WHERE File_Name__c = 'ReimbursementSummary.txt'
+        List<InkindDon_reimburseFile__c> reimbursementFiles = [
+                SELECT Id, Parent__c
+                FROM InkindDon_reimburseFile__c
+                WHERE File_Name__c = 'ReimbursementSummary.txt'
         ];
         Test.startTest();
-        delete reimbursementFile;
+        delete reimbursementFiles;
         Test.stopTest();
         In_Kind_Donation_Reimbursement__c reimbursementUpdated = [
-            SELECT Id, Documentation__c
-            FROM In_Kind_Donation_Reimbursement__c
-            WHERE Id = :reimbursementFile.Parent__c
+                SELECT Id, Documentation__c
+                FROM In_Kind_Donation_Reimbursement__c
+                WHERE Id = :reimbursementFiles[0].Parent__c
         ];
         System.assert(reimbursementUpdated.Documentation__c == Constant_AC.INKIND_REIMBURSEMENT_FILE_DOCUMENTATION);
     }
