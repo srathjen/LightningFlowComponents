@@ -3,7 +3,7 @@
  * @author Michelle Cominotto, Make-A-Wish
  * @createdDate 3/19/2020
  */
-@isTest
+@IsTest
 private class BackgroundCheckServiceTest {
     
     private final static Id VOLUNTEER_RT_ID = Constant_AC.VOLUNTEER_RT_ID;
@@ -270,5 +270,19 @@ private class BackgroundCheckServiceTest {
                                WHERE WhatId IN :backgroundCheckMap.keySet() 
                                AND Subject = :TASK_SUBJECT_REVIEW_BACKGROUND_CHECK];
         System.assert(!taskList.isEmpty());
+    }
+
+    @IsTest
+    private static void toggleBackgroundCheckInactiveFlag() {
+        Contact volunteerContact = [
+                SELECT Id
+                FROM Contact
+                WHERE Name = 'Joe Marco'
+                LIMIT 1
+        ];
+
+        Test.startTest();
+        BackgroundCheckService.toggleBackgroundCheckInactiveFlag(new Set<Id>{volunteerContact.Id}, true);
+        Test.stopTest();
     }
 }

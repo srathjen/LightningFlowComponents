@@ -18,4 +18,16 @@ private class ErrorMessage_AC_Test {
                 FROM Apex_Debug_Log__c
         ].size());
     }
+
+    @IsTest
+    static void testBehavior2() {
+        Test.startTest();
+        Contact contact = new Contact();
+        ErrorMessage_AC.createDebugRec(new List<SObject>{contact}, TEST_STRING, TEST_STRING, TEST_STRING, TEST_STRING, TEST_STRING);
+        Test.stopTest();
+        System.assertEquals(1, [
+                SELECT Id
+                FROM Apex_Debug_Log__c
+        ].size());
+    }
 }
