@@ -86,13 +86,7 @@ public class DocusignRecipientTrigger_AT_Test {
         dsfs__DocuSign_Recipient_Status__c recipientStatusCompleted = TestDataFactory.createDocusignRecipientStatus(docusignStatus.Id);
         recipientStatusCompleted.Name = 'Test Insert';
         recipientStatusCompleted.dsfs__Recipient_Status__c = Constant_AC.DOCUSIGN_RECIPIENT_STATUS_COMPLETED;
-        try {
-            insert recipientStatusCompleted;
-        } catch (CommonTriggerException e){
-            // Nothing this is a pass
-        } catch (Exception ex){
-            System.assert(false, 'Expected Test Exception, got: ' + ex);
-        }
+        insert recipientStatusCompleted;
         Test.stopTest();
     }
 
@@ -107,13 +101,7 @@ public class DocusignRecipientTrigger_AT_Test {
         dsfs__DocuSign_Recipient_Status__c recipientStatusCompleted = TestDataFactory.createDocusignRecipientStatus(docusignStatus.Id);
         recipientStatusCompleted.Name = 'Test Insert';
         recipientStatusCompleted.dsfs__Recipient_Status__c = Constant_AC.DOCUSIGN_RECIPIENT_STATUS_DELIVERED;
-        try {
-            insert recipientStatusCompleted;
-        } catch (CommonTriggerException e){
-            // Nothing this is a pass
-        } catch (Exception ex){
-            System.assert(false, 'Expected Test Exception, got: ' + ex);
-        }
+        insert recipientStatusCompleted;
         Test.stopTest();
     }
 

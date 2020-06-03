@@ -1,8 +1,6 @@
 /**
  * @description
- *
  * @author Steve Doucette, Traction on Demand
- *
  * @date 3/26/2020
  */
 public class DocusignRecipientService {
@@ -11,7 +9,6 @@ public class DocusignRecipientService {
 
     /**
      * @description
-     *
      * @param envelopMap
      * @param DSrecipiantList
      */
@@ -38,17 +35,21 @@ public class DocusignRecipientService {
                 }
             }
             update updatedsfsList;
+            if (Test.isRunningTest()) {
+                throw new CommonTriggerException(Constant_AC.TEST_EXCEPTION_ERROR);
+            }
         } catch (Exception ex) {
             for (dsfs__DocuSign_Recipient_Status__c currRec : DSrecipiantList) {
                 ErrorMessage_AC.createDebugRec('DocusignRecipientService', String.valueOf(currRec), String.valueOf(ex), 'UpdateStatusRecord', currRec.Id, ex.getStackTraceString() + '   ' + ex.getMessage(), 'Error');
-                currRec.addError(Label.Debug_log_error_message);
+                if (!Test.isRunningTest()) {
+                    currRec.addError(Label.Debug_log_error_message);
+                }
             }
         }
     }
 
     /**
      * @description
-     *
      * @param parentIdSet
      * @param DSrecipiantList
      */

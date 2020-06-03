@@ -1,7 +1,7 @@
 /**
  * @description Domain class for the Affiliation trigger
- * @author	Gustavo Mayer, Traction on Demand
- * @createdDate	3-19-2020
+ * @author Gustavo Mayer, Traction on Demand
+ * @date 3-19-2020
  */
 public class AffiliationDomain extends trac_TriggerHandlerBase {
 
@@ -11,28 +11,28 @@ public class AffiliationDomain extends trac_TriggerHandlerBase {
     Map<Id, npe5__Affiliation__c> oldMap = (Map<Id, npe5__Affiliation__c>) oldRecordsMap;
 
     /**
-     * Before insert of Affiliation
+     * @description Before insert of Affiliation
      */
     public override void handleBeforeInsert() {
         AffiliationService.setStatusAndPrimary(newList);
     }
 
     /**
-     * Before update of Affiliation
+     * @description Before update of Affiliation
      */
     public override void handleBeforeUpdate() {
         AffiliationService.setHiddenUserFields(newList, oldMap);
     }
 
     /**
-     * After insert of Affiliation
+     * @description After insert of Affiliation
      */
     public override void handleAfterInsert() {
         AffiliationService.addToPublicGroup(newList);
     }
 
     /**
-     * After update of Affiliation
+     * @description After update of Affiliation
      */
     public override void handleAfterUpdate() {
         AffiliationService.addToChatterGroup(newList, oldMap);
@@ -40,7 +40,7 @@ public class AffiliationDomain extends trac_TriggerHandlerBase {
     }
 
     /**
-     * After update of Affiliation
+     * @description After update of Affiliation
      */
     public override void handleAfterDelete() {
         Set<String> volunteerNameSet = new Set<String>();
