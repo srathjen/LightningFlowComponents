@@ -1,8 +1,6 @@
 /**
  * @description
- *
  * @author Steve Doucette, Traction on Demand
- *
  * @date 4/22/2020
  */
 public class VolunteerOTDomain extends trac_TriggerHandlerBase {

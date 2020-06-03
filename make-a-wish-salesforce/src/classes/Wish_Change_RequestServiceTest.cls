@@ -163,6 +163,7 @@ public class Wish_Change_RequestServiceTest {
 		// ACT
 		Test.startTest();
 		Map<Id, List<Wish_Change_Request__c>> approvedChangeRequests = Wish_Change_RequestService.processApprovedChangeRequests(updatedWishChangeRequestsList, oldWishChangeRequestsMap);
+        update updatedWishChangeRequestsList;
 		Test.stopTest();
 
 		// ASSERT

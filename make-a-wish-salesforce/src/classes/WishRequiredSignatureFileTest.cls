@@ -3,7 +3,7 @@
 * @author Mitali Nahar, Traction on Demand
 * @Date 2019-07-20
 */
-@isTest
+@IsTest
 public class WishRequiredSignatureFileTest {
 
     private final static Id CHAPTER_RECORD_TYPE_ID = Constant_AC.CHAPTER_RT_ID;
@@ -27,10 +27,10 @@ public class WishRequiredSignatureFileTest {
         contactsDataFactory[0].RecordTypeId = WISH_CHILD_RECORD_TYPE_ID;
         contactsDataFactory[0].ICD_10_Code__c = obj.Id;
         contactsDataFactory[1].RecordTypeId = WISH_FAMILY_RECORD_TYPE_ID;
-        contactsDataFactory[1].BirthDate = System.today().addYears(-20);
+        contactsDataFactory[1].Birthdate = System.today().addYears(-20);
         contactsDataFactory[2].RecordTypeId = MEDICAL_PROF_RECORD_TYPE_ID;
         contactsDataFactory[3].RecordTypeId = WISH_FAMILY_RECORD_TYPE_ID;
-        contactsDataFactory[3].BirthDate = System.today().addYears(-10);
+        contactsDataFactory[3].Birthdate = System.today().addYears(-10);
         insert contactsDataFactory;
 
         List<Case> casesDataFactory = TestDataFactory.createCase(1);
@@ -72,19 +72,19 @@ public class WishRequiredSignatureFileTest {
         insert wishReqSignsDataFactory;
     }
 
-    @isTest
+    @IsTest
     public static void createWishRequiredSignatureFile() {
-        test.startTest();
+        Test.startTest();
         Wish_Required_Signature__c wishSign = [
                 SELECT Id
                 FROM Wish_Required_Signature__c
                 LIMIT 1
         ];
-        system.assertEquals(false, wishSign == null);
+        System.assertEquals(false, wishSign == null);
         Wish_Required_Signature_File__c wrsFile = TestDataFactory.createWRSFileRecord(wishSign.Id);
         insert wrsFile;
-        System.assertEquals(wishSign.id, wrsFile.Wish_Required_Signature__c, 'Id dose not match');
-        System.assert(wishSign.id == wrsFile.Wish_Required_Signature__c, 'The value of wishSign.id is: ' + wishSign.id + ' and the value of wrsFile.Wish_Required_Signature__c is: ' + wrsFile.Wish_Required_Signature__c);
-        test.stopTest();
+        System.assertEquals(wishSign.Id, wrsFile.Wish_Required_Signature__c, 'Id dose not match');
+        System.assert(wishSign.Id == wrsFile.Wish_Required_Signature__c, 'The value of wishSign.id is: ' + wishSign.id + ' and the value of wrsFile.Wish_Required_Signature__c is: ' + wrsFile.Wish_Required_Signature__c);
+        Test.stopTest();
     }
 }

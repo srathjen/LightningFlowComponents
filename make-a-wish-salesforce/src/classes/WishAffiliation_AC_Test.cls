@@ -112,7 +112,8 @@ public class WishAffiliation_AC_Test {
 		insert wishAffiliations;
 	}
 
-	static testMethod void shouldGetParticipants() {
+	@IsTest
+	public static void shouldGetParticipants() {
 		// ARRANGE
 		Wish_Affiliation__c wishAffiliation = [
 				SELECT Wish_Affiliation_Type__c
@@ -140,7 +141,8 @@ public class WishAffiliation_AC_Test {
 		System.assertEquals('Jack Smith', wishAffiliations[0].Contact__r.Name);
 	}
 
-	static testMethod void shouldSaveWishAffiliation() {
+	@IsTest
+	public static void shouldSaveWishAffiliation() {
 		// ARRANGE
 		Case wishCase = [
 				SELECT Id
@@ -211,7 +213,8 @@ public class WishAffiliation_AC_Test {
 		System.assertEquals(wishAffiliation.Relationship__r.npe4__Contact__c, newWishAffiliation.Relationship__r.npe4__Contact__c);
 	}
 
-	static testMethod void shouldSaveChangeRequestsForWishAffiliation_WhenUserIsNotAllowedToEditWishAffiliation() {
+	@IsTest
+	public static void shouldSaveChangeRequestsForWishAffiliation_WhenUserIsNotAllowedToEditWishAffiliation() {
 		// ARRANGE
 		Case wishCase = [
 				SELECT Id
@@ -256,7 +259,8 @@ public class WishAffiliation_AC_Test {
 		System.assert(!changeRequests.isEmpty());
 	}
 
-	static testMethod void shouldCreateNewWishAffiliationWithNewContactOverridingAddressOfRelatedContact() {
+	@IsTest
+	public static void shouldCreateNewWishAffiliationWithNewContactOverridingAddressOfRelatedContact() {
 		// ARRANGE
 		Case wishCase = [
 				SELECT Id
@@ -315,7 +319,8 @@ public class WishAffiliation_AC_Test {
 		System.assertEquals(wishChildContact.Id, newWishAffiliation.Relationship__r.npe4__Contact__c);
 	}
 
-	static testMethod void shouldCreateNewWishAffiliationWithNewContactUsingAddressOfRelatedContact() {
+	@IsTest
+	public static void shouldCreateNewWishAffiliationWithNewContactUsingAddressOfRelatedContact() {
 		// ARRANGE
 		Case wishCase = [
 				SELECT Id
@@ -374,7 +379,8 @@ public class WishAffiliation_AC_Test {
 		System.assertEquals(wishChildContact.Id, newWishAffiliation.Relationship__r.npe4__Contact__c);
 	}
 
-	static testMethod void shouldCreateNewWishAffiliationWithExistingContact() {
+	@IsTest
+	public static void shouldCreateNewWishAffiliationWithExistingContact() {
 		// ARRANGE
 		Case wishCase = [
 				SELECT Id
@@ -411,7 +417,8 @@ public class WishAffiliation_AC_Test {
 		System.assertEquals(false, newWishAffiliation.Relationship__r.Parent_Legal_Guardian__c);
 	}
 
-	static testMethod void shouldNotCreateNewWishAffiliationWithExistingContact_WhenExistingContactIsAlreadyWishAffiliation() {
+	@IsTest
+	public static void shouldNotCreateNewWishAffiliationWithExistingContact_WhenExistingContactIsAlreadyWishAffiliation() {
 		// ARRANGE
 		Case wishCase = [
 				SELECT Id
@@ -451,5 +458,53 @@ public class WishAffiliation_AC_Test {
 		List<String> validationErrors = (List<String>) resultMap.get('validationErrors');
 		System.assertEquals(null, newWishAffiliation);
 		System.assertEquals('This contact is already on Wish Affiliation ( ' + existingWishAffiliation.Name + ' )', validationErrors.get(0));
+	}
+
+	@IsTest
+	public static void shouldCreateNewWishAffiliationWithExistingContact_WhenHouseholdAddressSet() {
+		// ARRANGE
+		Case wishCase = [
+				SELECT Id
+				FROM Case
+				WHERE Wish_Type__c = 'Disney World'
+		];
+		Contact wishChildContact = [
+				SELECT Id
+				FROM Contact
+				WHERE Name = 'Mark Smith'
+		];
+		Contact wishFamilyContactBrother = [
+				SELECT Id
+				FROM Contact
+				WHERE Name = 'Danny Smith'
+		];
+		String payload = '{ ' +
+				'"Wish__c":"' + wishCase.Id + '", "Wish_Affiliation_Type__c":"Approved Participant","Residing_with_Wish_child__c":"",' +
+				'"Medical_Needs__c":false,"Survey_Recipient__c":false,"Non_Comped__c":false,"Details__c":"Residing with Child",' +
+				'"Relationship__r":{"npe4__Type__c":"Brother","Parent_Legal_Guardian__c":false,' +
+				'"npe4__Contact__c":"' + wishChildContact.Id + '"}}';
+		String householdAddress = '{' +
+				'"city":"Phoenix",' +
+				'"country":"United States",' +
+				'"countryCode":"US",' +
+				'"geocodeAccuracy":"",' +
+				'"postalCode":"840001",' +
+				'"state":"Arizona",' +
+				'"stateCode":"AZ",' +
+				'"street":"123 Street"' +
+				'}';
+
+		// ACT
+		Test.startTest();
+		Map<Object, Object> resultMap = WishAffiliation_AC.createWishAffiliation(payload, wishFamilyContactBrother.Id,
+				true, wishChildContact.Id, householdAddress);
+		Test.stopTest();
+
+		// ASSERT
+		Wish_Affiliation__c newWishAffiliation = (Wish_Affiliation__c) resultMap.get('newWishAffiliation');
+		System.assertEquals(false, newWishAffiliation.Medical_Needs__c);
+		System.assertEquals('Danny', newWishAffiliation.Contact__r.FirstName);
+		System.assertEquals('Smith', newWishAffiliation.Contact__r.LastName);
+		System.assertEquals(false, newWishAffiliation.Relationship__r.Parent_Legal_Guardian__c);
 	}
 }
