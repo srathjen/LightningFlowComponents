@@ -1090,7 +1090,7 @@ public class OrientationandTrainingUtil {
 	public static npe5__Affiliation__c CreateAffiliation(Id contactId) {
 		npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
 		neworgAffiliation.npe5__Contact__c = contactId;
-		neworgAffiliation.npe5__Organization__c = TestClassUtil.createVolunteerAccount().Id;
+		//neworgAffiliation.npe5__Organization__c = TestClassUtil.createVolunteerAccount().Id;
 		neworgAffiliation.npe5__Primary__c = true;
 		neworgAffiliation.npe5__Status__c = 'Pending';
 		neworgAffiliation.Constituent_Code__c = boardMemberRecordTypeLabel;
@@ -1335,7 +1335,7 @@ public class OrientationandTrainingUtil {
 		Volunteer_Count__c newVolCount = new Volunteer_Count__c ();
 		newVolCount.Volunteer_Needed__c = count;
 		newVolCount.Chapter_Role__c = chapterRoleId;
-		newVolCount.Non_Wish_Events__c = nonWishId;
+		newVolCount .Non_Wish_Events__c = nonWishId;
 		newVolCount.Description__c = 'Test Description';
 		newVolCount.Date__c = system.today();
 		newVolCount.Start_Time__c = '7.00 AM';
@@ -1394,14 +1394,6 @@ public class OrientationandTrainingUtil {
 	}
 
 	public static CaseTeamMember createCaseTeamMember(Id parentId, Id wishId, Id roleId) {
-		CaseTeamMember caseMember = new CaseTeamMember();
-		caseMember.ParentId = parentId;
-		caseMember.memberId = wishId;
-		caseMember.TeamRoleId = roleId;
-		return caseMember;
-	}
-
-	public static CaseTeamMember createWishTeamMemberwithTeamRole(Id parentId, Id wishId, Id roleId) {
 		CaseTeamMember caseMember = new CaseTeamMember();
 		caseMember.ParentId = parentId;
 		caseMember.memberId = wishId;
