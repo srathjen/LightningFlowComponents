@@ -2748,7 +2748,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Referral Placeholder Diagnosis Example</shortDescription>
-        <value>example: Malignant Neoplasm</value>
+        <value>example: Acute Lymphoblastic Leukemia (ALL)</value>
     </labels>
     <labels>
         <fullName>Wish_Referral_Placeholder_Example_Friend_Friend_of_family</fullName>
