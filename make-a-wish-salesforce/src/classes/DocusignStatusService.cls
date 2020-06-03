@@ -95,18 +95,17 @@ public class DocusignStatusService {
             }
         }
 
-        List<Contact> confilictContactList = new List<Contact>();
+        Map<Id, Contact> conflictContactMap = new Map<Id, Contact>();
         if (!conflictList.isEmpty()) {
             insert conflictList;
             for (dsfs__DocuSign_Status__c dsts : newList) {
                 Contact con = new Contact();
                 con.Id = dsts.Docusign_Hidden_Contact__c;
                 con.isApplication__c = false;
-                confilictContactList.add(con);
-
+                conflictContactMap.put(con.Id, con);
                 dsts.Conflict_Of_Interest__c = conflictList[0].Id;
             }
-            update confilictContactList ;
+            update conflictContactMap.values();
         }
 
         if (!wishClearanceSetId.isEmpty()) {
