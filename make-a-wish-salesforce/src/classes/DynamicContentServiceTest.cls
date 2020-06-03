@@ -106,37 +106,7 @@ private class DynamicContentServiceTest {
             errorMessage = ex.getMessage();
         }
         Test.stopTest();
-        System.assert(errorMessage.contains('Active record already exist for this chapter and record type'));
-    }
-
-    @isTest
-    private static void validateUpdateActiveFlagFalse() {
-        Account arizonaChapter = [
-            SELECT Id 
-            FROM Account 
-            WHERE Name = 'Make-A-Wish Arizona' 
-            LIMIT 1];
         
-        Map<Id, Dynamic_Content__c> mapDynamicContent = new Map<Id, Dynamic_Content__c>([
-            SELECT Id, Active__c 
-            FROM Dynamic_Content__c 
-            WHERE Chapter_Name__c = :arizonaChapter.Id
-            AND Active__c = true
-        ]);
-
-        List<Dynamic_Content__c> newDynamicContent = TestDataFactory.createDynamicContent(1);
-        Dynamic_Content__c volunteerAzContent = newDynamicContent.get(0);
-        volunteerAzContent.RecordTypeId = PROSPECTIVE_VOLUNTEER_RT_ID;
-        volunteerAzContent.Chapter_Name__c = arizonaChapter.Id;
-
-        Test.startTest();
-        insert newDynamicContent;
-        Test.stopTest();
-
-        List<Dynamic_Content__c> updatedDynamicContentList = [
-            SELECT Id, Active__c 
-            FROM Dynamic_Content__c 
-            WHERE Id IN :mapDynamicContent.keySet()];
-        System.assert(updatedDynamicContentList[0].Active__c == false);
+        System.assert(errorMessage.contains('Active record already exist for this chapter and record type'));
     }
 }
