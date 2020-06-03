@@ -3,6 +3,7 @@ Modification Log:
 1. 03/28/2018 - Yuvraj - IME-59 - Line No: 48, 70, 95, 112-116
 2. 25/04/2018 - Vignesh SM - IME 131 - Line No. 73, 100, 103-106
 3. 12/07/2018 - Vignesh SM - IME 231
+4. 06/01/2020- Brittany SIW-543
 */({
     globalParams:{            
     },
@@ -14,9 +15,8 @@ Modification Log:
         var params = {
             "leadId": component.get("v.recordId")
         };
-        
         _this.callAction(component, actionName, params, function(response){
-            component.set("v.leadData", response);            
+            component.set("v.leadData", response);
             _this.handleDiagnosisVerficationProcess(response, component);
         });                     
     },
@@ -27,7 +27,7 @@ Modification Log:
             leadId = component.get("v.recordId"),
             descIcd_criteria = lead.PD_Condition_Description__c || lead.PD_ICD_Code__c,
             statusCriteria = lead.Sub_Status__c == 'Pending Diagnosis Verification' || lead.Status == 'Eligibility Review';
-        
+
         if(descIcd_criteria){            
             
             if(statusCriteria){
@@ -95,17 +95,19 @@ Modification Log:
         //Check for medical professional
         
         var _this = this,
-            paperDVProcess = lead.Using_Paper_Process_For_DV__c;//Added as per IME-59
-        
-        if(!paperDVProcess){//Added as per IME-59
-            _this.handleConfirmation(false, component, "Are you sure you want to submit Diagnosis Verification?", function(){
-               var checkMedProf = lead.Treating_Medical_Professional_Email__c, //IME 131
+            paperDVProcess = lead.Using_Paper_Process_For_DV__c,
+            AgeRequirementNotMet = lead.Child_Age__c == 'Under 2.5' || lead.Child_Age__c == '18 & Above'; 
+          
+        if(!paperDVProcess){
+            var verificationMessage = "Are you sure you want to submit Diagnosis Verification?";
+            if (AgeRequirementNotMet){
+                verificationMessage = "This child did not meet our referral age. A DV should not be sent for this child unless your chapter has received a waiver from the Chapter Performance Committee. " + verificationMessage;
+            }
+            _this.handleConfirmation(false, component, verificationMessage, function(){
+               var checkMedProf = lead.Treating_Medical_Professional_Email__c, 
                    checkAltProf = lead.Best_contact_for_Physician_Email__c || lead.Alternate1MedicalProfessionalEmail__c || lead.Alternate2MedProfessionalEmail__c,
                    mediProf_criteria =  checkMedProf || checkAltProf;
-                /*var params = {
-                    "leadId": lead.Id
-                };
-                */ 
+  
                 
                 if(checkAltProf || checkMedProf) {                                
                     _this.navigateTo("/apex/LeadSelectMedEmail_VF?id=" + lead.Id);      
@@ -114,19 +116,9 @@ Modification Log:
                         _this.closeQuickAction();
                     }, true);
                 } 
-                /* IME 272 
-                _this.callAction(component, "c.checkMedicalInfo", params, function(response){                    
-                    if(response) {                
-                        _this.navigateTo("/apex/LeadSelectMedEmail_VF?id=" + lead.Id);                
-                    } else {
-                        _this.handleConfirmation(false, component, "Please provide the Medical Professional or Using Paper Process for DV.", function(){
-                            _this.closeQuickAction();
-                        }, true);
-                    } 
-                });*/              
-                //Modified as per IME 131               
+                         
             }, false);
-        } else {//Added as per IME-59
+        } else {
             _this.handleConfirmation(false, component, "No potential duplicates found. Please send the Paper Diagnosis Verification Form manually.", function(){
                 _this.closeQuickAction();
             }, true);
