@@ -17,6 +17,7 @@
  * 3. 09/04/2020 - Manoj      - SIW-355 : Mapped 2 Wrapper fields values with lead fields value - timeFrameValue, idealtimeFrameValue
  * 4. 15/04/2020 - Manoj      - SIW-531 : Setting value blank for Number_hospital_admissions__c field if no value provided from form for the associated question
  * 5. 15 Apr 2020 - Chris Smith - SIW-497 : Provided check on Save & Next to make sure ICD Codes and Condition
+ * 6. 01 Jun 2020 - Manoj - SIW-508 : Added conditions to hide hospitalization questions from docusign
  * Descriptions were looked up.
  **/
 public class DiagnosisVerification_AC {
@@ -888,6 +889,14 @@ public class DiagnosisVerification_AC {
             currLead.Risk_of_complications_premature_death__c = false;
             currLead.None_of_these_statements_describes_Child__c = false;
             currLead.Responds_to_treatment_with_normal_health__c = false;
+            //SIW-508: Hide questions from Docusign
+            if (wishStatus == 'Qualified'){
+                currLead.Unplanned_hospital_admissions__c = null;
+                currLead.Number_hospital_admissions__c = null;
+                currLead.Admitting_diagnosis__c = null;
+                currLead.ICU_Admissions__c = null;
+            }
+            else{
             currLead.Unplanned_hospital_admissions__c = wishChildWrapperIns.unplannedHospitalAdmission;
             //SIW-531 Start : Setting value blank for Number_hospital_admissions__c if no value provided from form for this question
             if (wishChildWrapperIns.unplannedHospitalAdmission == 'Yes') {
@@ -900,7 +909,7 @@ public class DiagnosisVerification_AC {
                 currLead.ICU_Admissions__c = null;
             }
             //SIW-531 End
-
+        }
             //SIW-355 Start : Mapped 2 new added questions value to lead field on submission of DV form
             currLead.Expedite_timeframe__c = wishChildWrapperIns.timeFrameValue;
             currLead.Other_expedite_timeframe_comments__c = wishChildWrapperIns.idealtimeFrameValue;
