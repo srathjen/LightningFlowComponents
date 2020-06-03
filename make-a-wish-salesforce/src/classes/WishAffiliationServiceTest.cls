@@ -1,5 +1,7 @@
 /**
- * Created by mbuhler on 7/11/2019.
+ * @description
+ * @author mbuhler
+ * @date 7/11/2019.
  */
 @IsTest
 public class WishAffiliationServiceTest {
@@ -13,18 +15,22 @@ public class WishAffiliationServiceTest {
     @TestSetup
     public static void setup() {
         trac_TriggerHandlerBase.blockTrigger = true;
-        Bypass_Triggers__c bypass = new Bypass_Triggers__c(SetupOwnerId = UserInfo.getUserId());
+
+        insert new Bypass_Triggers__c(SetupOwnerId = UserInfo.getUserId());
+
         List<Account> accounts = TestDataFactory.createAccount(2);
         Account account = accounts.get(0);
         account.Name = 'Make-A-Wish Arizona';
         account.RecordTypeId = CHAPTER_RECORD_TYPE_ID;
         Account hospital = accounts.get(1);
-        account.Name = 'Make-A-Wish Arizona Hospital';
-        account.RecordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID;
+        hospital.Name = 'Make-A-Wish Arizona Hospital';
+        hospital.RecordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID;
         insert accounts;
+
         List<ICD_Codes__c> icdCodesDataFactory = TestDataFactory.createIcdCode(1);
         ICD_Codes__c icdCode = icdCodesDataFactory.get(0);
         insert icdCode;
+
         List<Contact> contactsDataFactory = TestDataFactory.createContact(4);
         List<Contact> contacts = new List<Contact>();
         Contact wishChildContact1 = contactsDataFactory.get(0);
@@ -75,6 +81,7 @@ public class WishAffiliationServiceTest {
         contacts.add(wishFamilyContact);
         contacts.add(wishFamilyContact2);
         insert contacts;
+
         List<Lead> leadsDataFactory = TestDataFactory.createLead(1);
         Lead lead = leadsDataFactory.get(0);
         lead.ChapterName__c = accounts[0].Id;
@@ -132,6 +139,7 @@ public class WishAffiliationServiceTest {
         lead.isSign__c = true;
         lead.Travel_algorithm__c = 'Test1;Test2;';
         insert lead;
+
         List<Case> casesDataFactory = TestDataFactory.createCase(2);
         List<Case> cases = new List<Case>();
         Case wishCase1 = casesDataFactory.get(0);
@@ -165,6 +173,7 @@ public class WishAffiliationServiceTest {
         cases.add(wishCase1);
         cases.add(wishCase2);
         insert cases;
+
         List<npe4__Relationship__c> relationshipsDataFactory = TestDataFactory.createRelationship(3);
         List<npe4__Relationship__c> relationships = new List<npe4__Relationship__c>();
         npe4__Relationship__c relationship1 = relationshipsDataFactory.get(0);
@@ -189,12 +198,15 @@ public class WishAffiliationServiceTest {
         relationships.add(relationship2);
         relationships.add(relationship3);
         insert relationships;
+
         Wish_Affiliation_Category__mdt wishAffiliationCategory = [
                 SELECT Type__c, Is_Default_for_Category__c
                 FROM Wish_Affiliation_Category__mdt
                 WHERE Type__c <> 'Wish Child'
                 LIMIT 1
         ];
+        trac_TriggerHandlerBase.blockTrigger = false;
+
         List<Wish_Affiliation__c> wishAffiliationsDataFactory = TestDataFactory.createWishAffiliation(2);
         List<Wish_Affiliation__c> wishAffiliations = new List<Wish_Affiliation__c>();
         Wish_Affiliation__c wishAffiliationParticipant1 = wishAffiliationsDataFactory.get(0);
@@ -204,7 +216,7 @@ public class WishAffiliationServiceTest {
         wishAffiliationParticipant1.Medical_Needs__c = false;
         wishAffiliationParticipant1.Contact__c = wishFamilyContact.Id;
         wishAffiliationParticipant1.Relationship__c = relationship2.Id;
-        wishAffiliationParticipant1.Health_Treatment_Facility__c = account.Id;
+        wishAffiliationParticipant1.Health_Treatment_Facility__c = hospital.Id;
         wishAffiliationParticipant1.Residing_with_Wish_child__c = 'Yes';
         wishAffiliationParticipant1.Wish_Affiliation_Type__c = wishAffiliationCategory.Type__c;
         wishAffiliationParticipant1.Hide_from_Restricted_Users__c = false;
@@ -221,6 +233,8 @@ public class WishAffiliationServiceTest {
         wishAffiliations.add(wishAffiliationParticipant1);
         wishAffiliations.add(wishAffiliationParticipant2);
         insert wishAffiliations;
+        update wishAffiliations;
+
         List<Wish_Change_Request__c> wishChangeRequestsDataFactory = TestDataFactory.createWishChangeRequests(15, wishCase2.Id, wishAffiliationParticipant1.Id);
         List<Wish_Change_Request__c> wishChangeRequests = new List<Wish_Change_Request__c>();
         DescribeSObjectResult wishAffiliationDescribeSObjectResult = Schema.getGlobalDescribe().get(Constant_AC.WISH_AFFILIATION_API_NAME).getDescribe();
@@ -410,7 +424,7 @@ public class WishAffiliationServiceTest {
         wishChangeRequests.add(cr14);
         wishChangeRequests.add(cr15);
         insert wishChangeRequests;
-        trac_TriggerHandlerBase.blockTrigger = false;
+
     }
 
     @IsTest
