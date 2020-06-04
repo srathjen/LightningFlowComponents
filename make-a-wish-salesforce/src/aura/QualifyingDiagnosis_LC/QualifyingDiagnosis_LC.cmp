@@ -3,6 +3,7 @@ Author      : MST Solutions
 CreatedBy   : PradeepKumar S	
 Date        : 14/03/2018
 Description : Lightning component for storing the value of quailifying diagnosis and ICD Code in lightning experience
+// 02/06/2020 - Manoj      - SIW-557: Updated placeholder to 'Acute Lymphoblastic Leukemia (ALL)' from 'Malignant Neoplasm' and to 'C91.0' from 'C00'
 -->
 
 <aura:component implements="force:appHostable,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction,lightning:actionOverride" 
@@ -137,11 +138,12 @@ Description : Lightning component for storing the value of quailifying diagnosis
         <div class="slds-size_1-of-2">
             <div class="slds-form-element">
                 <!-- Create attribute to store lookup value as a sObject-->
+                <!--SIW-557: Updated placeholder to 'C91.0' from 'C00'-->
                 <c:customLookup aura:id="ICDLookup" objectAPIName="ICD_Codes__c" 
                                 disabledAttr="false"
                                 IconName="custom:custom92"
                                 componentMessage="icdcode"
-                                placeholderText="example: C00"
+                                placeholderText="example: C91.0"
                                 labelClass="slds-form-element__label slds-m-bottom_x-small"
                                 additionalParams="['Condition_Description__r.Name','Group1__c']"
                                 selectedRecord="{!v.selectedRecord}"
@@ -161,12 +163,13 @@ Description : Lightning component for storing the value of quailifying diagnosis
         <div class="slds-size_1-of-2">
             <div class="slds-form-element">
                 <!-- Create attribute to store lookup value as a sObject--> 
+                <!--SIW-557: Updated placeholder to 'Acute Lymphoblastic Leukemia (ALL)' from 'Malignant Neoplasm'-->
                 <c:customLookup aura:id="ConditionDescriptionLookup" objectAPIName="Condition_Description__c" 
                                 disabledAttr="false"
                                 IconName="custom:custom38"
                                 additionalParams="['Code_To_Use__c','Group1__c']"
                                 componentMessage="conditiondescription"
-                                placeholderText="example: Malignant Neoplasm"
+                                placeholderText="example: Acute Lymphoblastic Leukemia (ALL)"
                                 selectedRecord="{!v.conditionDescselectedRecord}"
                                 selectedRecordId="{!v.recId}"
                                 labelClass="slds-form-element__label slds-m-bottom_x-small"
