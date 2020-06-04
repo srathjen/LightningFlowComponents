@@ -6069,10 +6069,10 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Condition_Description__c.Group1__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>Condition_Description__c.Group1__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Condition_Description__c.InActive__c</field>
@@ -6094,10 +6094,10 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Condition_Description__c.isEligible__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>Condition_Description__c.isEligible__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Conflict_Of_Interest__c.Account_Email__c</field>
@@ -8994,10 +8994,10 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Diagnosis_Verification__c.Group1__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>Diagnosis_Verification__c.Group1__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Diagnosis_Verification__c.ICD_Code__c</field>
@@ -9049,10 +9049,10 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Diagnosis_Verification__c.isEligible__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>Diagnosis_Verification__c.isEligible__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Dynamic_Content__c.Active__c</field>
@@ -9624,10 +9624,10 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ICD_Codes__c.Group1__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ICD_Codes__c.Group1__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>ICD_Codes__c.Hidden_ICD_Code__c</field>
@@ -9654,15 +9654,15 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ICD_Codes__c.Skip_Medical_Question__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ICD_Codes__c.Skip_Medical_Question__c</field>
+</fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ICD_Codes__c.Valid_For_Wish__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <editable>false</editable>
+    <readable>false</readable>
+    <field>ICD_Codes__c.Valid_For_Wish__c</field>
+</fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Idea.Attachment</field>
