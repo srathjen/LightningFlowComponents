@@ -179,9 +179,9 @@ private class Case_Trigger_Test {
 		wish4.Update_Wish_Child_Form_Info__c = true;
 		wish4.Status = Constant_AC.CASE_STATUS_ESCALATED;
 		wish1.OwnerId = nationalStaffUser1.Id;
+
 		Test.startTest();
 		insert cases;
-		Test.stopTest();
 
 		wish1.Subject = 'WishUpdate';
 		wish1.Comment_1__c = 'Abc';
@@ -207,7 +207,6 @@ private class Case_Trigger_Test {
 		wish4.Status = Constant_AC.CASE_STATUS_ESCALATED;
 		wish4.OwnerId = nationalStaffUser2.Id;
 
-		Test.startTest();
 		update cases;
 		Test.stopTest();
 	}

@@ -18,44 +18,35 @@ public class VolunteerOrientation_AC_Test {
         accountAzChapter.RecordTypeId = Constant_AC.CHAPTER_RT_ID;
         insert accountAzChapter;
         
-        Contact volunteerSelina = TestDataFactory.createContact(1)[0];
-        volunteerSelina.RecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
-        volunteerSelina.AccountId = accountAzChapter.Id;
-        volunteerSelina.FirstName = 'Selina';
-        volunteerSelina.LastName = 'Kyle';
-        volunteerSelina.Email = 's.kyle@email.com';
-        volunteerSelina.Phone = '5557779999';
-        volunteerSelina.Birthdate = Date.today().addYears(-22);
-        volunteerSelina.MailingPostalCode = '85641';
-        volunteerSelina.MailingStreet = '1500 1st Avenue';
-        volunteerSelina.MailingCountry = 'United States';
-        volunteerSelina.MailingState = 'Arizona';
-        volunteerSelina.MailingStateCode = 'AZ';
-        volunteerSelina.MailingCity = 'Phoenix';
-        volunteerSelina.Read__c = 'English';
-        volunteerSelina.language__c = 'English';
-        volunteerSelina.speak__c = 'English';
-        volunteerSelina.understand__c = 'English';
-        volunteerSelina.Professional_Skills__c = 'Photography';
-        volunteerSelina.Language_Notes__c = 'Test';
-        volunteerSelina.Volunteer_Role__c = 'Special Events';
-        volunteerSelina.is_Application__c = 'Partial Submit';
-        volunteerSelina.Volunteer_Role__c = 'Fundraising – Assist';
-        insert volunteerSelina;
-        
-        User volunteerSelinaUser = TestDataFactory.createVolunteerUser(1)[0];
-        volunteerSelinaUser.Username = 'Selina@Kyle.com';
-        volunteerSelinaUser.ContactId = volunteerSelina.Id;
-        insert volunteerSelinaUser;
-        
-        npe5__Affiliation__c neworgAffiliation = TestDataFactory.createAffiliation(1)[0];
-        neworgAffiliation.npe5__Contact__c = volunteerSelina.Id;
-        neworgAffiliation.npe5__Organization__c = accountAzChapter.Id;
-        neworgAffiliation.npe5__Primary__c = true;
-        neworgAffiliation.npe5__Status__c = 'Pending';
-        neworgAffiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
-        insert neworgAffiliation;
-        
+        User volunteerUser = TestDataFactory.createVolunteerUser(1, 'Active Volunteer (Login)', 'Manager').get(0);
+        volunteerUser.LastName = 'Smith0';
+        volunteerUser.Email = 'js@email.com';
+        System.runAs(TestDataFactory.adminUser) {
+            insert volunteerUser;
+        }
+
+//        Contact volunteerSelina = new Contact();
+//        volunteerSelina.Id = volunteerUser.ContactId;
+//        volunteerSelina.Email = 'js@email.com';
+//        volunteerSelina.Phone = '5557779999';
+//        volunteerSelina.Birthdate = Date.today().addYears(-22);
+//        volunteerSelina.MailingPostalCode = '85641';
+//        volunteerSelina.MailingStreet = '1500 1st Avenue';
+//        volunteerSelina.MailingCountry = 'United States';
+//        volunteerSelina.MailingState = 'Arizona';
+//        volunteerSelina.MailingStateCode = 'AZ';
+//        volunteerSelina.MailingCity = 'Phoenix';
+//        volunteerSelina.Read__c = 'English';
+//        volunteerSelina.Language__c = 'English';
+//        volunteerSelina.Speak__c = 'English';
+//        volunteerSelina.Understand__c = 'English';
+//        volunteerSelina.Professional_Skills__c = 'Photography';
+//        volunteerSelina.Language_Notes__c = 'Test';
+//        volunteerSelina.Volunteer_Role__c = 'Special Events';
+//        volunteerSelina.is_Application__c = 'Partial Submit';
+//        volunteerSelina.Volunteer_Role__c = 'Fundraising – Assist';
+//        update volunteerSelina;
+
         Role__c wishRole = TestDataFactory.createRole(1, true)[0];
         wishRole.Name = 'Fundraising – Assist';
         insert wishRole;
@@ -67,7 +58,7 @@ public class VolunteerOrientation_AC_Test {
         
         Volunteer_Roles__c volunteerRole = TestDataFactory.createVolunteerRole(1)[0];
         volunteerRole.Chapter_Role__c = chapterRoleFundraising.Id;
-        volunteerRole.Volunteer_Name__c = volunteerSelina.Id;
+        volunteerRole.Volunteer_Name__c = volunteerUser.ContactId;
         volunteerRole.Status__c = 'Pending';
         volunteerRole.Sub_status__c = 'Missing Requirement';
         insert volunteerRole;
@@ -119,19 +110,21 @@ public class VolunteerOrientation_AC_Test {
         
         List<Volunteer_Orientation_Training__c> volunteerOTList = TestDataFactory.createVolunteerOrientationAndTraining(2);
         Volunteer_Orientation_Training__c completedVolunteerOT = volunteerOTList.get(0);
-        completedVolunteerOT.class_offering__c = classOfferingOnline.Id;
+        completedVolunteerOT.Class_Offering__c = classOfferingOnline.Id;
         completedVolunteerOT.Hidden_O_T_Id__c = volunteerOrientationTraining.Id;
         completedVolunteerOT.Registered_Date__c = Date.today();
-        completedVolunteerOT.Volunteer__c = volunteerSelina.Id;
+        completedVolunteerOT.Volunteer__c = volunteerUser.ContactId;
         completedVolunteerOT.Volunteer_Attendance__c = 'Completed';
         completedVolunteerOT.Type__c = 'Orientation';
+        completedVolunteerOT.Volunteer__c = volunteerUser.ContactId;
         Volunteer_Orientation_Training__c noShowVolunteerOT = volunteerOTList.get(1);
-        noShowVolunteerOT.class_offering__c = classOfferingOnline.Id;
+        noShowVolunteerOT.Class_Offering__c = classOfferingOnline.Id;
         noShowVolunteerOT.Hidden_O_T_Id__c = volunteerOrientationTraining.Id;
         noShowVolunteerOT.Registered_Date__c = Date.today();
-        noShowVolunteerOT.Volunteer__c = volunteerSelina.Id;
+        noShowVolunteerOT.Volunteer__c = volunteerUser.ContactId;
         noShowVolunteerOT.Volunteer_Attendance__c = 'No Show';
         noShowVolunteerOT.Type__c = 'Orientation';
+        noShowVolunteerOT.Volunteer__c = volunteerUser.ContactId;
         insert volunteerOTList;
         
         Dynamic_Content__c nationalContent = TestDataFactory.createDynamicContent(1)[0];
@@ -141,16 +134,25 @@ public class VolunteerOrientation_AC_Test {
         
         LMS_Credentials__c lmsIntegration = TestDataFactory.createLMSCredentials();
         insert lmsIntegration;
-        
+
+        npe5__Affiliation__c neworgAffiliation = TestDataFactory.createAffiliation(1)[0];
+        neworgAffiliation.npe5__Contact__c = volunteerUser.ContactId;
+        neworgAffiliation.npe5__Organization__c = accountAzChapter.Id;
+        neworgAffiliation.npe5__Primary__c = true;
+        neworgAffiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+        neworgAffiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
+        insert neworgAffiliation;
+
         trac_TriggerHandlerBase.blockTrigger = false;
     }
     
-    @isTest
+    @IsTest
     static void testRegistration() {
         User volunteer = [
-            SELECT Id, ContactId 
-            FROM User 
-            WHERE Username = 'Selina@Kyle.com'
+                SELECT Id, ContactId
+                FROM User
+                WHERE Email = 'js@email.com'
+                LIMIT 1
         ];
         Class_Offering__c libraryClass = [
             SELECT Id, Chapter_Role_O_T__r.Orientation_Training__c, Date__c, RecordTypeId
@@ -180,12 +182,13 @@ public class VolunteerOrientation_AC_Test {
         System.assert(controller.isOrientationExist == true);
     }
     
-    @isTest
+    @IsTest
     static void testRegistrationCancelled() {
         User volunteer = [
-            SELECT Id, ContactId 
-            FROM User 
-            WHERE Username = 'Selina@Kyle.com'
+                SELECT Id, ContactId
+                FROM User
+                WHERE Email = 'js@email.com'
+                LIMIT 1
         ];
         Class_Offering__c onlineClass = [
             SELECT Id, Chapter_Role_O_T__r.Orientation_Training__c, Date__c, RecordTypeId
@@ -214,13 +217,27 @@ public class VolunteerOrientation_AC_Test {
         Test.stopTest();
     }
     
-    @isTest
+    @IsTest
     static void testCancellation() {
-        User volunteer = [
-            SELECT Id, ContactId 
-            FROM User 
-            WHERE Username = 'Selina@Kyle.com'
+        Account account = [
+                SELECT Id
+                FROM Account
+                WHERE Name = 'Make-A-Wish Arizona'
+                LIMIT 1
         ];
+        User volunteer = [
+                SELECT Id, ContactId
+                FROM User
+                WHERE Email = 'js@email.com'
+                LIMIT 1
+        ];
+        npe5__Affiliation__c neworgAffiliation = TestDataFactory.createAffiliation(1)[0];
+        neworgAffiliation.npe5__Contact__c = volunteer.ContactId;
+        neworgAffiliation.npe5__Organization__c = account.Id;
+        neworgAffiliation.npe5__Primary__c = true;
+        neworgAffiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+        insert neworgAffiliation;
+
         Class_Offering__c onlineClass = [
             SELECT Id, Chapter_Role_O_T__r.Orientation_Training__c, Date__c, RecordTypeId
             FROM Class_Offering__c 
@@ -233,6 +250,8 @@ public class VolunteerOrientation_AC_Test {
             Test.setCurrentPage(pageRef);
             controller = new VolunteerOrientation_AC();
             controller.getOrientationRecordList();
+            controller.total_size = 10;
+            controller.list_size = 10;
             controller.getTotalPages();
             controller.getPageNumber();
             controller.getDisableNext();
@@ -244,12 +263,13 @@ public class VolunteerOrientation_AC_Test {
         Test.stopTest();
     }
     
-    @isTest
+    @IsTest
     static void testUserUpdate() {
         User volunteer = [
-            SELECT Id, ContactId 
-            FROM User 
-            WHERE Username = 'Selina@Kyle.com'
+                SELECT Id, ContactId
+                FROM User
+                WHERE Email = 'js@email.com'
+                LIMIT 1
         ];
         Test.startTest();
         System.runAs(volunteer) {
@@ -269,9 +289,10 @@ public class VolunteerOrientation_AC_Test {
     @IsTest
     static void testViewLMS() {
         User volunteer = [
-            SELECT Id, ContactId 
-            FROM User 
-            WHERE Username = 'Selina@Kyle.com'
+                SELECT Id, ContactId
+                FROM User
+                WHERE Email = 'js@email.com'
+                LIMIT 1
         ];
         System.runAs(volunteer) {
             LMSCourseSyncMockImpl currLMSCourseSyncMockImpl = new LMSCourseSyncMockImpl();
@@ -279,7 +300,7 @@ public class VolunteerOrientation_AC_Test {
             response.setStatus('OK');
             response.setStatusCode(200);
             LMSUserResponse currLMSUserResponse = new LMSUserResponse();
-            currLMSUserResponse.Id = 1234;
+            currLMSUserResponse.id = 1234;
             currLMSUserResponse.login = 'test@test.com';
             currLMSUserResponse.code = 'test@test.com';
             currLMSUserResponse.first_name = 'test';

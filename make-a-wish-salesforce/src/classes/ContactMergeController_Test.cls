@@ -1,5 +1,6 @@
-@isTest
+@IsTest
 public class ContactMergeController_Test {
+
     @TestSetup
     private static void setup() {
         trac_TriggerHandlerBase.blockTrigger = true;
@@ -24,6 +25,7 @@ public class ContactMergeController_Test {
         volunteerPamela.MailingState = 'Arizona';
         volunteerPamela.MailingStateCode = 'AZ';
         volunteerPamela.MailingCity = 'Phoenix';
+
         Contact wishChildJacobi = contactList.get(1);
         wishChildJacobi.Region_Chapter__c = accountAzChapter.Id;
         wishChildJacobi.FirstName = 'Jacobi';
@@ -41,6 +43,7 @@ public class ContactMergeController_Test {
         wishChildJacobi.MobilePhone = '9900220022';
         wishChildJacobi.Primary_Diagnosis_Condition_Description__c = 'Test Diagnosis';
         wishChildJacobi.Diagnosis__c = 'Test Diagnosis';
+
         Contact wishFamilySmith = contactList.get(2);
         wishFamilySmith.FirstName = 'Danielle';
         wishFamilySmith.LastName = 'Smith';
@@ -53,6 +56,7 @@ public class ContactMergeController_Test {
         wishFamilySmith.RecordTypeId = Constant_AC.WISH_FAMILY_RT_ID;
         wishFamilySmith.IsParentGuardian__c = 'ParentGuardian';
         wishFamilySmith.Region_Chapter__c = accountAzChapter.Id;
+
         Contact medicalProfContact = contactList.get(3);
         medicalProfContact.FirstName = 'Rhonda';
         medicalProfContact.LastName = 'Oracle';
@@ -63,6 +67,7 @@ public class ContactMergeController_Test {
         medicalProfContact.MailingStateCode = 'AZ';
         medicalProfContact.MailingPostalCode = '85200';
         medicalProfContact.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+
         Contact volunteerPamelaDupe = contactList.get(4);
         volunteerPamelaDupe.RecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
         volunteerPamelaDupe.AccountId = accountAzChapter.Id;
@@ -77,10 +82,13 @@ public class ContactMergeController_Test {
         volunteerPamelaDupe.MailingState = 'Arizona';
         volunteerPamelaDupe.MailingCity = 'Scottsdale';
         insert contactList;
-        
-        User volunteerPamUser = TestDataFactory.createVolunteerUser(1)[0];
-        volunteerPamUser.ContactId = volunteerPamela.Id;
-        insert volunteerPamUser;
+
+        User volunteerUser = TestDataFactory.createVolunteerUser(1, 'Active Volunteer (Login)', 'Manager').get(0);
+        volunteerUser.LastName = 'Smith0';
+        volunteerUser.Email = 'js@email.com';
+        System.runAs(TestDataFactory.adminUser) {
+            insert volunteerUser;
+        }
         
         List<Case> caseList = TestDataFactory.createCase(4);
         caseList[0].ContactId = volunteerPamela.Id;
@@ -98,7 +106,7 @@ public class ContactMergeController_Test {
         volunteerBackgroundCheck.Date__c = System.today() + 60;
         volunteerBackgroundCheck.Volunteer__c = volunteerPamela.Id;
         volunteerBackgroundCheck.Status__c = 'Approved';
-        volunteerBackgroundCheck.current__c = true;
+        volunteerBackgroundCheck.Current__c = true;
         volunteerBackgroundCheck.Date_Completed__c = System.today();
         insert volunteerBackgroundCheck;
         
@@ -157,7 +165,7 @@ public class ContactMergeController_Test {
         insert volunteerRole;
         
         Volunteer_Orientation_Training__c volunteerOrientation = TestDataFactory.createVolunteerOrientationAndTraining(1)[0];
-        volunteerOrientation.class_offering__c = classOffering.Id;
+        volunteerOrientation.Class_Offering__c = classOffering.Id;
         volunteerOrientation.Hidden_O_T_Id__c = volunteerOrientationTraining.Id;
         volunteerOrientation.Registered_Date__c = Date.today();
         volunteerOrientation.Volunteer__c = volunteerPamela.Id;
@@ -185,7 +193,7 @@ public class ContactMergeController_Test {
         trac_TriggerHandlerBase.blockTrigger = false;
     }
     
-    @isTest
+    @IsTest
     public static void contactMergeTest() {
         Contact volunteerPam = [
             SELECT Id, Name, FirstName, LastName, Email, MailingStreet, MailingCity, MailingState, MailingPostalCode, RecordTypeId 
@@ -249,17 +257,17 @@ public class ContactMergeController_Test {
         ContactMergeController_AC testobj = new ContactMergeController_AC(sc);
         testobj.con = volunteerPam;
         testobj.getStates();
-        ContactMergeController_AC.contactWrapper contactwrapper1 = new ContactMergeController_AC.contactWrapper(volunteerPam);
-        ContactMergeController_AC.contactWrapper contactwrapper2 = new ContactMergeController_AC.contactWrapper(volunteerPamDupe);
+        ContactMergeController_AC.ContactWrapper contactwrapper1 = new ContactMergeController_AC.ContactWrapper(volunteerPam);
+        ContactMergeController_AC.ContactWrapper contactwrapper2 = new ContactMergeController_AC.ContactWrapper(volunteerPamDupe);
         ContactMergeController_AC.Cell testcellwrap = new ContactMergeController_AC.Cell(volunteerPam.Id, volunteerPam.Name);
         ContactMergeController_AC.VolunteerOpportunityWrapper volopwrap = new ContactMergeController_AC.VolunteerOpportunityWrapper(volOppPam);
         ContactMergeController_AC.VolunteerRoleWrapper volrolwrap = new ContactMergeController_AC.VolunteerRoleWrapper(volRolePam);
         ContactMergeController_AC.VolunteerOTWrapper volotwrap = new ContactMergeController_AC.VolunteerOTWrapper(volOrientationPam);
         ContactMergeController_AC.VolunteerOTWrapper volotwrap2 = new ContactMergeController_AC.VolunteerOTWrapper(volOrientationPam);
-        ContactMergeController_AC.affiliationWrapper affwrap = new ContactMergeController_AC.affiliationWrapper(affiliation);
-        ContactMergeController_AC.affiliationWrapper affwrap2 = new ContactMergeController_AC.affiliationWrapper(affiliation);
-        ContactMergeController_AC.relationshipWrapper relwrap = new ContactMergeController_AC.relationshipWrapper(relationship);
-        ContactMergeController_AC.relationshipWrapper relwrap2 = new ContactMergeController_AC.relationshipWrapper(relationship);
+        ContactMergeController_AC.AffiliationWrapper affwrap = new ContactMergeController_AC.AffiliationWrapper(affiliation);
+        ContactMergeController_AC.AffiliationWrapper affwrap2 = new ContactMergeController_AC.AffiliationWrapper(affiliation);
+        ContactMergeController_AC.RelationshipWrapper relwrap = new ContactMergeController_AC.RelationshipWrapper(relationship);
+        ContactMergeController_AC.RelationshipWrapper relwrap2 = new ContactMergeController_AC.RelationshipWrapper(relationship);
         ContactMergeController_AC.BackgroundCheckWrapper backgdwrap = new ContactMergeController_AC.BackgroundCheckWrapper(backgroundCheckPam);
         ContactMergeController_AC.AwardsRecognitionWrapper awdwrap = new ContactMergeController_AC.AwardsRecognitionWrapper(awardPam);
         ContactMergeController_AC.ConflictOfInterestWrapper coiwrap = new ContactMergeController_AC.ConflictOfInterestWrapper(coiPam);
@@ -282,7 +290,7 @@ public class ContactMergeController_Test {
         testobj.last();
         Boolean haspre = testobj.hasPrevious;
         Boolean hasnext = testobj.hasNext;
-        integer pageNo = testobj.pageNumber;
+        Integer pageNo = testobj.pageNumber;
         Integer totalPage = testobj.getTotalPages();
         testobj.searchRecords();
         volopwrap.checkbox = true;
@@ -314,6 +322,7 @@ public class ContactMergeController_Test {
         testobj.conflictofInterestList.add(coiwrap);
         testobj.fieldRows.add(fieldrow);
         testobj.fieldRows.add(fieldrow2);
+
         List<Contact> conlist = new List<Contact>();
         conlist.add(volunteerPam);
         testobj.wrapSOSLResults(conlist);
