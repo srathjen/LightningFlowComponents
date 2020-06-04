@@ -673,12 +673,8 @@ Modification Log:
                                             var hosVal = document.querySelectorAll('[id$="unplannedHospital"]');                                                                                   
                                             if(hosVal[0].value == 'Yes') {
                                                 $('.unplanned-admission').prop('hidden', false);
-                                                $(".unplanned-text").addClass("requiredField");  
-                                                $('.unplanned-nbr').val(""); 
-                                                $('.unplanned-text').val("");                                             
-                                            } else {
-                                                $('.unplanned-text').val("");
-                                                $('.unplanned-nbr').val("");
+                                                $(".unplanned-text").addClass("requiredField");
+                                            } else {                                               
                                                 $(".unplanned-text").removeClass("requiredField");
                                                 $('.unplanned-admission').prop('hidden', true);                                                
                                             } 
@@ -1593,12 +1589,8 @@ Modification Log:
                                         $('[id$=unplannedHospital]').on('change', function() {                                            
                                             if(this.value == 'Yes') {
                                                 $('.unplanned-admission').prop('hidden', false);
-                                                $(".unplanned-text").addClass("requiredField");
-                                                $('.unplanned-nbr').val("");
-                                                $('.unplanned-text').val("");
+                                                $(".unplanned-text").addClass("requiredField");                                                
                                             } else {
-                                                $('.unplanned-text').val("");
-                                                $('.unplanned-nbr').val("");
                                                 $(".unplanned-text").removeClass("requiredField");
                                                 $('.unplanned-admission').prop('hidden', true);
                                                 
@@ -2432,12 +2424,8 @@ Modification Log:
             var hosVal = document.querySelectorAll('[id$="unplannedHospital"]');                                                                                   
                                             if(hosVal[0].value == 'Yes') {
                                                 $('.unplanned-admission').prop('hidden', false);
-                                                $(".unplanned-text").addClass("requiredField");
-                                                $('.unplanned-nbr').val("");
-                                                $('.unplanned-text').val("");
-                                            } else {
-                                                $('.unplanned-text').val("");
-                                                $('.unplanned-nbr').val("");
+                                                $(".unplanned-text").addClass("requiredField");                                               
+                                            } else {                                               
                                                 $(".unplanned-text").removeClass("requiredField");
                                                 $('.unplanned-admission').prop('hidden', true);                                                
                                             } 
