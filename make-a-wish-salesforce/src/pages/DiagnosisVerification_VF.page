@@ -650,7 +650,7 @@ Modification Log:
                                             </div>
                                             <div class="form-group row unplanned-admission fadein-alert">
                                                 <div class="col-md-12"><label>How many times has the child been admitted?</label></div>
-                                                <div class="col-md-6" id="admBox"><apex:inputText styleClass="form-control requiredField" maxlength="3"  value="{!wishChildWrapperIns.numberOfHospitalAdmission}" onkeyup="decimalOnly(this);"/>
+                                                <div class="col-md-6" ><apex:inputText styleClass="form-control unplanned-nbr requiredField" id="admBox" maxlength="3"  value="{!wishChildWrapperIns.numberOfHospitalAdmission}" onkeyup="decimalOnly(this);"/>
                                                 <div id="admError" style="display:none;">
                                                     <label style="color:red">Please enter no more than three digits.</label>
                                                     </div>
@@ -673,9 +673,12 @@ Modification Log:
                                             var hosVal = document.querySelectorAll('[id$="unplannedHospital"]');                                                                                   
                                             if(hosVal[0].value == 'Yes') {
                                                 $('.unplanned-admission').prop('hidden', false);
-                                                $(".unplanned-text").addClass("requiredField");
+                                                $(".unplanned-text").addClass("requiredField");  
+                                                $('.unplanned-nbr').val(""); 
+                                                $('.unplanned-text').val("");                                             
                                             } else {
                                                 $('.unplanned-text').val("");
+                                                $('.unplanned-nbr').val("");
                                                 $(".unplanned-text").removeClass("requiredField");
                                                 $('.unplanned-admission').prop('hidden', true);                                                
                                             } 
@@ -1591,8 +1594,11 @@ Modification Log:
                                             if(this.value == 'Yes') {
                                                 $('.unplanned-admission').prop('hidden', false);
                                                 $(".unplanned-text").addClass("requiredField");
+                                                $('.unplanned-nbr').val("");
+                                                $('.unplanned-text').val("");
                                             } else {
                                                 $('.unplanned-text').val("");
+                                                $('.unplanned-nbr').val("");
                                                 $(".unplanned-text").removeClass("requiredField");
                                                 $('.unplanned-admission').prop('hidden', true);
                                                 
@@ -1774,14 +1780,13 @@ Modification Log:
         $(document).delegate('.SS-btn','click',function(){
             var isError_Free = true;
             var myElem = document.getElementById('dvupload');
-            $('.requiredField').each(function() {
-                $(this).css('border','');   
-                if(document.querySelectorAll('[id$="enoughInfo"]').length == 0){
-                var b =document.getElementById('admBox').getElementsByTagName('input');           
-                if(b[0].value.length > 3){
+            $('.requiredField').each(function() {                
+                var b =document.querySelectorAll('[id$="admBox"]');                          
+                $(this).css('border','');              
+                if(b.length > 0 && b[0].value.length > 3){
                     isError_Free = false;
                     document.getElementById('admError').style.display = 'block';
-                    document.getElementById('admBox').getElementsByTagName('input')[0].style.border = '#FF0000 1px solid';
+                    b[0].style.border = '#FF0000 1px solid';
                     if($(this).val() == '' && $(this).is(":visible")){
                      $(this).css({ "border": '#FF0000 1px solid'});
                         }
@@ -1794,7 +1799,6 @@ Modification Log:
                     })
                     
                 }
-            }
                else if($(this).val() == '' && $(this).is(":visible")){
                     isError_Free = false;                    
                     $(this).css({ "border": '#FF0000 1px solid'});
@@ -2429,8 +2433,11 @@ Modification Log:
                                             if(hosVal[0].value == 'Yes') {
                                                 $('.unplanned-admission').prop('hidden', false);
                                                 $(".unplanned-text").addClass("requiredField");
+                                                $('.unplanned-nbr').val("");
+                                                $('.unplanned-text').val("");
                                             } else {
                                                 $('.unplanned-text').val("");
+                                                $('.unplanned-nbr').val("");
                                                 $(".unplanned-text").removeClass("requiredField");
                                                 $('.unplanned-admission').prop('hidden', true);                                                
                                             } 
