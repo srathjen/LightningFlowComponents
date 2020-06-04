@@ -48,7 +48,7 @@ public class VolunteerOrientation_AC {
         String Logvalue;
         dupCheckList = new List<Volunteer_Orientation_Training__c>();
         checkExistingTrainingRecords = new List<Volunteer_Orientation_Training__c>();
-        currentUserId = UserInfo.getUserId();
+        currentUserId = Utils.currentUser.Id;
         classOfferingRecordtypeId = Constant_AC.CLASS_OFFERING_RECORD_TYPE_ID;
         getUserRelatedContact = [
                 SELECT Id, Hidden_Email__c, FirstName, LastName, Email, ContactId, Username,
