@@ -172,7 +172,6 @@ public class ContactDomain extends trac_TriggerHandlerBase {
 				wishFormIdSet.add(contact.Hidden_Wish_Form_Id__c);
 			}
 		}
-		ContactService.updateAffiliationPrimaryStatus(contactMap);
 		ContactService.validateContact(contactMap);
 	}
 
