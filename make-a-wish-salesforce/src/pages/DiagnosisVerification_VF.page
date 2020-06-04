@@ -16,6 +16,9 @@ Modification Log:
 10.04/02/2020 - Manoj      - SIW-413 : Modified text as per the ticket.
 11.04/02/2020 - Manoj      - SIW-379 : Added 'I am not sure' and 'Medically fragile/medically complex' checkbox in DV form.
 12.09/04/2020 - Manoj      - SIW-355 : Added 2 new questions. Also changed the placement of one question as mentiond in the ticket.
+13.28/05/2020 - Manoj      - SIW-262 : Made page scrollable to the fields in case of any error
+14.30/05/2020 - Manoj      - SIW-508 : Hide Hospitalization Questions if DV is autoqualifying
+15.02/06/2020 - Manoj      - SIW-557: Updated placeholder to 'Acute Lymphoblastic Leukemia (ALL)' from 'Malignant Neoplasm' and to 'C91.0' from 'C00'
 *********************************************************************************************************************************** -->
 <apex:page controller="DiagnosisVerification_AC" applyBodyTag="false" sidebar="false" showHeader="false" docType="html-5.0" standardStylesheets="false" title="Make-A-Wish | Diagnosis Verification Form" cache="false">
     <script>
@@ -463,39 +466,39 @@ Modification Log:
                                 <div class="step-two fadein-alert">
                                     <fieldset >
                                         
-                                        <apex:actionfunction action="{!WishChildEligibilityCheck}" name="checkEligible" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
+                                        <apex:actionfunction action="{!WishChildEligibilityCheck}" name="checkEligible" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,hospitalQuestions">
                                             <apex:param name="icdOrPcd" value="" />
                                             <apex:param name="diagnosisBlockNum" value="" />
                                         </apex:actionfunction>
                                         
-                                        <apex:actionfunction action="{!ResetDiagnosis}" name="resetDiagnosisBlock" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
+                                        <apex:actionfunction action="{!ResetDiagnosis}" name="resetDiagnosisBlock" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,hospitalQuestions">
                                             <apex:param name="diagnosisBlockNum" value="" />
                                         </apex:actionfunction>
-                                        <apex:actionfunction action="{!MedicalResponse}" name="medicalResponse" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
+                                        <apex:actionfunction action="{!MedicalResponse}" name="medicalResponse" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,hospitalQuestions">
                                             <apex:param name="medicalResponse" value="" />
                                             <apex:param name="diagnosisBlockNum" value="" />
                                             <apex:param name="questionNumber" value="" />
                                         </apex:actionfunction>
-                                        <apex:actionfunction action="{!RemoveDiagnosisBlock}" name="removeDiagnosisBlock" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
+                                        <apex:actionfunction action="{!RemoveDiagnosisBlock}" name="removeDiagnosisBlock" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,hospitalQuestions">
                                             <apex:param name="diagnosisBlockNum" value="" />
                                         </apex:actionfunction>
                                         <!--<apex:actionfunction action="{!RemoveDiagnosisBlock}" name="removeDiagnosisBlockAndSign"  onComplete="SaveAndSign();" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
 <apex:param name="diagnosisBlockNum" value="" />
 </apex:actionfunction>-->
-                                        <apex:actionfunction action="{!RemoveDiagnosisBlock}" name="removeDiagnosisBlockAndSign"  onComplete="CollectCondition();" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
+                                        <apex:actionfunction action="{!RemoveDiagnosisBlock}" name="removeDiagnosisBlockAndSign"  onComplete="CollectCondition();" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,hospitalQuestions">
                                             <apex:param name="diagnosisBlockNum" value="" />
                                         </apex:actionfunction>
-                                        <apex:actionFunction name="changeWishStatus" action="{!changeWishStatus}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
+                                        <apex:actionFunction name="changeWishStatus" action="{!changeWishStatus}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,hospitalQuestions">
                                             <apex:param name="diagnosisBlockNum" value="" />
                                             <apex:param name="questionNumber" value="" />
                                         </apex:actionFunction>
-                                        <apex:actionFunction name="deleteAttachment" action="{!deleteLeadFile}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
+                                        <apex:actionFunction name="deleteAttachment" action="{!deleteLeadFile}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,hospitalQuestions">
                                             <apex:param name="attachmentId" value="" />
                                         </apex:actionFunction>
-                                        <apex:actionFunction name="docusign" action="{!SubmitSign}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,LoadBlock,myMsg" status="status"/>
+                                        <apex:actionFunction name="docusign" action="{!SubmitSign}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,LoadBlock,myMsg,hospitalQuestions" status="status"/>
                                         <apex:actionFunction name="refreshAttachmentSection"  reRender="attachmentSection">
                                         </apex:actionFunction>
-                                        <apex:actionFunction name="saveMedInfo" action="{!SaveMedicalInformation}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,LoadBlock" onComplete="docusignPageRedirect();" status="status">
+                                        <apex:actionFunction name="saveMedInfo" action="{!SaveMedicalInformation}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,LoadBlock,hospitalQuestions" onComplete="docusignPageRedirect();" status="status">
                                             <apex:param name="travelString" value="" />
                                             <apex:param name="collectedConditionValue" value="" />
                                         </apex:actionFunction>
@@ -515,7 +518,8 @@ Modification Log:
                                                     <div class="form-group row">
                                                         <div class="col-md-3"><label>Diagnosis</label></div>
                                                         <div class="col-md-6">
-                                                            <apex:inputText value="{!diagnosisVerification.conditionDescription}" id="input-pdi" styleClass="requiredField1 placeHolder form-control searchDiagnosisId{!diagnosisBlock} {!diagnosisVerification.pcdOrIcd} {!diagnosisVerification.valueSelectedPCD} inptBx" html-placeholder="example: Malignant Neoplasm" onfocus="ConditionDescription({!diagnosisBlock})"  disabled="{IF(!diagnosisVerification.pcdOrIcd != '', 'true', 'false')}"/>
+                                                            <!--SIW-557: Updated placeholder to 'Acute Lymphoblastic Leukemia (ALL)' from 'Malignant Neoplasm'-->
+                                                            <apex:inputText value="{!diagnosisVerification.conditionDescription}" id="input-pdi" styleClass="requiredField1 placeHolder form-control searchDiagnosisId{!diagnosisBlock} {!diagnosisVerification.pcdOrIcd} {!diagnosisVerification.valueSelectedPCD} inptBx" html-placeholder="example: Acute Lymphoblastic Leukemia (ALL)" onfocus="ConditionDescription({!diagnosisBlock})"  disabled="{IF(!diagnosisVerification.pcdOrIcd != '', 'true', 'false')}"/>
                                                             <apex:inputText value="{!diagnosisVerification.pcdOrIcd}" style="display:none" styleClass="PcdOrIcdVal{!diagnosisBlock}"/>
                                                             <apex:commandLink id="remove-diagnosis" styleClass="diagnosis-link" onclick="ClearFieldProperty({!diagnosisBlock});" value="x" reRender="notEligible"/><!-- onclick="ClearFieldProperty({!diagnosisBlock});" -->
                                                         </div>
@@ -533,7 +537,8 @@ Modification Log:
                                                     <div class="form-group form-group-seperator row">
                                                         <div class="col-md-3"><label>ICD Code</label></div>
                                                         <div class="col-md-6">
-                                                            <apex:inputText value="{!diagnosisVerification.icdCode}" id="input-icd" styleClass="placeHolder form-control diagnosisTextId{!diagnosisBlock} {!diagnosisVerification.pcdOrIcd} {!diagnosisVerification.valueSelectedICD} inptBx" html-placeholder="example: C00" onfocus="PrimaryDiagnosis({!diagnosisBlock})"  disabled="{IF(!diagnosisVerification.pcdOrIcd != '', 'true', 'true')}"/>
+                                                            <!--SIW-557: Updated placeholder to C91.0 from C00 -->
+                                                            <apex:inputText value="{!diagnosisVerification.icdCode}" id="input-icd" styleClass="placeHolder form-control diagnosisTextId{!diagnosisBlock} {!diagnosisVerification.pcdOrIcd} {!diagnosisVerification.valueSelectedICD} inptBx" html-placeholder="example: C91.0" onfocus="PrimaryDiagnosis({!diagnosisBlock})"  disabled="{IF(!diagnosisVerification.pcdOrIcd != '', 'true', 'true')}"/>
                                                             <apex:commandLink id="remove-icd" styleClass="diagnosis-link" value="x" onclick="ClearFieldProperty({!diagnosisBlock});" reRender="notEligible"/>
                                                             <apex:outputPanel rendered="{!IF(diagnosisVerification.shortDescription == '', false, true)}">
                                                                 <span id="shortTextId1" class="shortTextId text-muted">Description: </span>
@@ -613,7 +618,7 @@ Modification Log:
                                                 </div>
                                                 <!--<apex:outputPanel id="eligible" layout="block">-->
                                                 <apex:outputPanel rendered="{!diagnosisVerification.isEligible}">
-                                                    <div class="form-group form-control ques-complete fadein"> <span class="text-muted">You have provided enough diagnosis information for an eligibility decision to be made. <br/>Please complete the remaining questions prior to submitting. </span> </div>
+                                                    <div class="form-group form-control ques-complete fadein" id="enoughInfo"> <span class="text-muted">You have provided enough diagnosis information for an eligibility decision to be made. <br/>Please complete the remaining questions prior to submitting. </span> </div>
                                                 </apex:outputPanel>
                                                 <!--</apex:outputPanel>-->
                                                 
@@ -624,17 +629,19 @@ Modification Log:
                                                         <div class="col-xs-12"><label>Additional diagnoses may be necessary to determine eligibility.</label></div>
                                                     </div>
                                                 </apex:outputtext>
-                                                <apex:commandLink value="+ Add another diagnosis" styleClass="diagnosis-link" action="{!addDiagnosisVerification}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace"   />
+                                                <apex:commandLink value="+ Add another diagnosis" styleClass="diagnosis-link" action="{!addDiagnosisVerification}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,hospitalQuestions"   />
                                             </apex:outputPanel>
                                         </apex:outputPanel>
                                         
                                         <div class="seperator-top" style="padding-top:1rem">
-                                            
+                                           <!-- SIW-508 : Added output panels to render based on status-->
+                                            <apex:outputPanel id="hospitalQuestions">
+                                                <apex:outputPanel rendered="{!wishStatus != 'Qualified'}">
                                             <!--SIW-287 Start : Added new questions-->
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Has {!currLead.FirstName} {!currLead.LastName} had any unplanned hospital admissions in the past 12 months?</label></div>
                                                 <div class="col-md-6">
-                                                    <apex:selectList value="{!wishChildWrapperIns.unplannedHospitalAdmission}" multiselect="false" size="1" styleClass="form-control c-select exped-Process" id="unplannedHospital">
+                                                    <apex:selectList value="{!wishChildWrapperIns.unplannedHospitalAdmission}" multiselect="false" size="1" styleClass="form-control c-select exped-Process" id="unplannedHospital" onchange="changeHospitalQues();">
                                                         <apex:selectOption itemlabel="Please Select" itemvalue="" html-selected="selected"/>
                                                         <apex:selectOption itemlabel="Yes" itemvalue="Yes" />
                                                         <apex:selectOption itemLabel="No" itemValue="No"/>                                                        
@@ -660,6 +667,20 @@ Modification Log:
                                                 </div>
                                             </div>                                          
                                             <!--SIW-287 End-->
+                                            </apex:outputPanel>
+                                            <script>
+                                            //show/hide unplanned hospital admission textbox
+                                            var hosVal = document.querySelectorAll('[id$="unplannedHospital"]');                                                                                   
+                                            if(hosVal[0].value == 'Yes') {
+                                                $('.unplanned-admission').prop('hidden', false);
+                                                $(".unplanned-text").addClass("requiredField");
+                                            } else {
+                                                $('.unplanned-text').val("");
+                                                $(".unplanned-text").removeClass("requiredField");
+                                                $('.unplanned-admission').prop('hidden', true);                                                
+                                            } 
+                                            </script>
+                                            </apex:outputPanel>
                                             
                                             <apex:outputPanel id="notEligibleWishDesc">
                                                 <apex:outputPanel rendered="{!wishStatus != 'Qualified'}">
@@ -1340,7 +1361,7 @@ Modification Log:
                                         <div class="col-md-12">
                                             <!--<apex:commandButton value="Save" style="border-right:1px solid #fff" styleClass="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md saveMedicalInfoBtn" action="{!SaveMedicalInformation}" rerender="diagonsisLoop,findAndReplace,notEligible" onClick="checkfunction();" onComplete="ShowSuccessMsg();"/>-->
                                             <input type="button" style="border-right:1px solid #fff" class="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md saveMedicalInfoBtn" value="Save" onClick="checkfunction();"/>
-                                            <input type="button" class="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md SS-btn" value="Save & Next"/>
+                                            <input type="button" class="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md SS-btn" value="Save & Next" onclick="setTimeout(changeControl, 2100)"/>
                                         </div>
                                     </fieldset>
                                     <script>
@@ -1566,7 +1587,7 @@ Modification Log:
                                         // hide unplanned hospital admission textbox onload
                                         $('.unplanned-admission').prop('hidden', true);
                                         // show/hide unplanned hospital admission textbox
-                                        $('[id$=unplannedHospital]').on('change', function() {
+                                        $('[id$=unplannedHospital]').on('change', function() {                                            
                                             if(this.value == 'Yes') {
                                                 $('.unplanned-admission').prop('hidden', false);
                                                 $(".unplanned-text").addClass("requiredField");
@@ -1753,9 +1774,10 @@ Modification Log:
         $(document).delegate('.SS-btn','click',function(){
             var isError_Free = true;
             var myElem = document.getElementById('dvupload');
-            $('.requiredField').each(function() {                
-                var b =document.getElementById('admBox').getElementsByTagName('input');                          
-                $(this).css('border','');              
+            $('.requiredField').each(function() {
+                $(this).css('border','');   
+                if(document.querySelectorAll('[id$="enoughInfo"]').length == 0){
+                var b =document.getElementById('admBox').getElementsByTagName('input');           
                 if(b[0].value.length > 3){
                     isError_Free = false;
                     document.getElementById('admError').style.display = 'block';
@@ -1768,10 +1790,11 @@ Modification Log:
                         text: 'Please fill required fields',
                         type: "error",
                         confirmButtonColor: '#0057B8',
-                        timer: 3000
+                        timer: 2000
                     })
                     
                 }
+            }
                else if($(this).val() == '' && $(this).is(":visible")){
                     isError_Free = false;                    
                     $(this).css({ "border": '#FF0000 1px solid'});
@@ -1780,7 +1803,7 @@ Modification Log:
                         text: 'Please fill required fields',
                         type: "error",
                         confirmButtonColor: '#0057B8',
-                        timer: 3000
+                        timer: 2000
                     })
                     
                 }
@@ -1793,7 +1816,7 @@ Modification Log:
                         text: 'Please fill required fields',
                         type: "error",
                         confirmButtonColor: '#0057B8',
-                        timer: 3000
+                        timer: 2000
                     })
                     isError_Free = false;
                 }
@@ -2389,7 +2412,29 @@ Modification Log:
                 }
             }
         }
-        
+        //SIW-262 : Made page scrollable to the fields in case of any error
+        function changeControl(){
+            var p = document.querySelectorAll('.requiredField');            
+            for(var i=0; i<p.length; i++){ 
+                if(p[i].style.borderColor == "rgb(255, 0, 0)"){
+                    p[i].scrollIntoView();
+                    window.scrollTo
+                    break;
+                }
+            }
+        }
+        //SIW-287 : show/hide unplanned hospital admission textbox
+        function changeHospitalQues(){            
+            var hosVal = document.querySelectorAll('[id$="unplannedHospital"]');                                                                                   
+                                            if(hosVal[0].value == 'Yes') {
+                                                $('.unplanned-admission').prop('hidden', false);
+                                                $(".unplanned-text").addClass("requiredField");
+                                            } else {
+                                                $('.unplanned-text').val("");
+                                                $(".unplanned-text").removeClass("requiredField");
+                                                $('.unplanned-admission').prop('hidden', true);                                                
+                                            } 
+        }
         </script>
     </body>
 </apex:page>

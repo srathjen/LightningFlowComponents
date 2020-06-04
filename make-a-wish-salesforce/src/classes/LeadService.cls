@@ -2,7 +2,7 @@
  * @description Lead Service, centralizes Lead business rules.
  * @author Gustavo Mayer, Traction on Demand
  * @createdDate 2/27/2020
- */
+ *@updated Bmac 06/26/2020 SIW-616 lines 770, 841, 857*/
 public class LeadService {
 
     private static final String INSTANCE_URL = Endpoints__c.getInstance().Instance_URL__c;
@@ -767,7 +767,7 @@ public class LeadService {
                         }
                     } else if (lead.FirstName == exLead.FirstName
                             && ((lead.Street == exLead.Street && lead.State == exLead.State && lead.City == exLead.City && lead.PostalCode == exLead.PostalCode)
-                            || lead.Phone == exLead.Phone || lead.Email == exLead.Email)) {
+                            || lead.Phone == exLead.Phone || (!String.isblank(Lead.Email) && lead.Email == exLead.Email))) {
                         isDuplicate = true;
                         if (errorType == TYPE_LIGHTNING) {
                             lead.addError(String.format(Label.Diagnosis_Verification_Lead_Duplicates, new List<String>{
@@ -838,7 +838,7 @@ public class LeadService {
                         } else if ((lead.FirstName == exCon.FirstName || lead.LastName == exCon.LastName)
                                 && ((lead.Street == exCon.MailingStreet && lead.State == exCon.MailingState
                                 && lead.City == exCon.MailingCity && lead.PostalCode == exCon.MailingPostalCode)
-                                || lead.Phone == exCon.Phone || lead.Email == exCon.Email)) {
+                                || lead.Phone == exCon.Phone || (!String.isblank(Lead.Email) && lead.Email == exCon.Email))) {
                             isDuplicate = true;
                             if (errorType == TYPE_LIGHTNING) {
                                 lead.addError(String.format(Label.Diagnosis_Verification_Lead_Duplicates, new List<String>{
@@ -854,7 +854,7 @@ public class LeadService {
                                 && lead.State == exCon.MailingState
                                 && lead.City == exCon.MailingCity
                                 && lead.PostalCode == exCon.MailingPostalCode)
-                                || lead.Phone == exCon.Phone || lead.Email == exCon.Email)) {
+                                || lead.Phone == exCon.Phone || (!String.isblank(Lead.Email) && lead.Email == exCon.Email))) {
                             isDuplicate = true;
                             if (errorType == TYPE_LIGHTNING) {
                                 lead.addError(String.format(Label.Diagnosis_Verification_Lead_Duplicates, new List<String>{

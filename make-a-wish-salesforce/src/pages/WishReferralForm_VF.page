@@ -7,7 +7,7 @@
 // 14/04/2020 - Manoj - SIW-569 Changed unsupported method 'includes' to 'indexOf' for IE11 issue
 // 17/04/2020 - Manoj - SIW-575 Modified methods 'languageselection' and 'checkPrimLangRequired' for Mobile issue
 // 27/04/2020 - Manoj - SIW-556 : Modified method 'getInputValue' to allow users to proceed even when select No in question "HAS THE REFERRAL BEEN DISCUSSED WITH THE CHILD'S HEALTHCARE PROVIDER?"
-
+// 02/06/2020 - Manoj - SIW-557: Updated placeholder to 'Acute Lymphoblastic Leukemia (ALL)' from 'Malignant Neoplasm' and to 'C91.0' from 'C00'
 -->
 
 <apex:page controller="WishReferralForm_AC" showHeader="false" applyBodyTag="false" sidebar="false" standardStylesheets="false" docType="html-5.0" cache="false">
@@ -581,7 +581,8 @@
                         <div class="form-group form-group-seperator row">
                             <div class="col-sm-3"><label>{!$Label.Wish_Referral_ICD_Code}</label></div>
                             <div class="col-sm-6">
-                                <apex:inputText id="diagnosisTextId"  styleClass="diagnosisText placeHolder form-control" html-placeholder="example: C00" />
+                                <!--SIW-557: Updated placeholder to 'C91.0' from 'C00'-->
+                                <apex:inputText id="diagnosisTextId"  styleClass="diagnosisText placeHolder form-control" html-placeholder="example: C91.0" />
                                 <apex:outputText id="shortTextId" styleClass="shortTextId text-muted"/>
                                 <apex:inputText styleClass="diagnosisFilter" value="{!diagnosisFilter}" id="dFilter" style="display:none"/>
                             </div>
@@ -865,7 +866,7 @@
             <script>
                 var rel = null;
             function changeRelationship(ref, val){
-            $(".shownOnYes").addClass("fam-aware-overlay");//SIW-556 Issue fix
+                $(".shownOnYes").addClass("fam-aware-overlay");//SIW-556 Issue fix
                 rel = val;
                 document.getElementById('hhh').style.display = 'none';
                 var prefix = ref.split('relationToChild')[0];

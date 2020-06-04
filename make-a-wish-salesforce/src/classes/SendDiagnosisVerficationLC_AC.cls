@@ -6,6 +6,7 @@
  * Modification Log:
  * 1. 03/28/2018 - Yuvraj - IME-59 - Line No: 22
  * 2. 04/12/2018 - Yuvraj - IME-77 - Line:No: 32
+ * 3. 06/03/3030- Brittany - SIW-543
  **/
 public without sharing class SendDiagnosisVerficationLC_AC {
 
@@ -37,7 +38,7 @@ public without sharing class SendDiagnosisVerficationLC_AC {
                         PD_Condition_Description__c,
                         Of_Times_Email_Sent__c,
                         Part_A_Received__c,
-                        isSign__c
+                        isSign__c, Child_Age__c
                 FROM Lead
                 WHERE Id = :leadId
                 AND RecordTypeId = :Constant_AC.LEAD_RT_WISH_CHILD

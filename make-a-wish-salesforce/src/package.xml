@@ -21,6 +21,13 @@
     <name>AuraDefinitionBundle</name>
   </types>
   <types>
+    <members>Intake_Medical_Eligibility1</members>
+    <members>Make_A_Wish_Admin</members>
+    <members>Volunteer_Management</members>
+    <members>WVC_Console</members>
+    <name>CustomApplication</name>
+  </types>
+  <types>
     <members>Contact.Expedite_timeframe__c</members>
     <members>Contact.Other_expedite_timeframe_comments__c</members>
     <members>Lead.Child_Age__c</members>
@@ -106,6 +113,7 @@
     <members>Endpoints__c</members>
     <members>Inkind_Donation_PDFs__c</members>
     <members>Lead</members>
+    <members>QuickText</members>
     <members>Wish_Budget_Approver_Filter__c</members>
     <members>Wish_Required_Signature_File__c</members>
     <members>WishReferralForm_Translation__mdt</members>
@@ -164,6 +172,7 @@
   <types>
     <members>Account_Record_Page</members>
     <members>Case_Wish_Lightning</members>
+    <members>Default_Lead_Record_Page</members>
     <members>Lead_Record_Page</members>
     <name>FlexiPage</name>
   </types>
@@ -178,6 +187,11 @@
   <types>
     <members>*</members>
     <name>LightningComponentBundle</name>
+  </types>
+  <types>
+    <members>cms_document</members>
+    <members>cms_image</members>
+    <name>ManagedContentType</name>
   </types>
   <types>
     <members>Lead_Default</members>
@@ -276,6 +290,15 @@
     <members>Case.DatesP1</members>
     <members>Case.Wish_Timing</members>
     <name>QuickAction</name>
+  </types>
+  <types>
+    <members>unfiled$public/flow_screen_prebuilt_report</members>
+    <members>Wish_Management/Review</members>
+    <name>Report</name>
+  </types>
+  <types>
+    <members>screen_flows_prebuilt_crt</members>
+    <name>ReportType</name>
   </types>
   <types>
     <members>Chatter</members>

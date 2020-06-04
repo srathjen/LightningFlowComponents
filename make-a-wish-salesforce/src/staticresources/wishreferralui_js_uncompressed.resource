@@ -26,6 +26,9 @@
 //                27/04/2020 - Manoj - SIW-556
 //                Updated text even when users select No in question "HAS THE REFERRAL BEEN DISCUSSED WITH THE CHILD'S HEALTHCARE PROVIDER?"
 //
+//                05/26/2020 - Manoj - SIW-372
+//                Made phone as required field under treating medical professional information
+//
 // format phone/date fields
 // target desktop
 // if (window.matchMedia("(min-width: 47.5rem)").matches) {
@@ -754,6 +757,11 @@ function formLogic() {
                 if ($('[id$=rphone],[id$=pphonenumber],[id$=pphonenumber2]').hasClass('phonechk-std')) {
                     $('[id$=rphone],[id$=pphonenumber],[id$=pphonenumber2]').removeClass('phonechk-std');
                     $('[id$=rphone],[id$=pphonenumber]').addClass('phonechk');
+                }
+		//SIW-372: Made phone as required field under treating medical professional information
+                if ($('[id$=mpphone]').hasClass('phonechk-std')) {
+                    $('[id$=mpphone]').removeClass('phonechk-std');
+                    $('[id$=mpphone]').addClass('phonechk');
                 }
                 if ($('[id$=remail]').hasClass('email-std')) {
                     $('[id$=remail]').removeClass('email-std');
