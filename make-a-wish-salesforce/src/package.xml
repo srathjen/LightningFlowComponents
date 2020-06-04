@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
   <types>
     <members>*</members>
@@ -293,6 +293,8 @@
   </types>
   <types>
     <members>unfiled$public/flow_screen_prebuilt_report</members>
+    <members>unfiled$public/SIW581_Diagnosis_Verification_k8w</members>
+    <members>unfiled$public/SIW581_LGO</members>
     <members>Wish_Management/Review</members>
     <name>Report</name>
   </types>

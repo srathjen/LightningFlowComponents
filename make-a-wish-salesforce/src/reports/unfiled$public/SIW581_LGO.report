@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Condition_Description__c$Name</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c.ICD_Codes__r$Name</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Condition_Description__c$Group1__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Condition_Description__c$isEligible__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Condition_Description__c.ICD_Codes__r$Group1__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Condition_Description__c.ICD_Codes__r$Skip_Medical_Question__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Condition_Description__c.ICD_Codes__r$Valid_For_Wish__c</field>
+    </columns>
+    <description>To demonstrate effect of FLS changes on autoqualification fields.</description>
+    <format>Tabular</format>
+    <name>SIW-581 - Condition Desc and ICD</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Condition_Description__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Condition_Description__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>
