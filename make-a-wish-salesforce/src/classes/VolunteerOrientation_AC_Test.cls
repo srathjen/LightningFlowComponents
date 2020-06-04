@@ -25,28 +25,6 @@ public class VolunteerOrientation_AC_Test {
             insert volunteerUser;
         }
 
-//        Contact volunteerSelina = new Contact();
-//        volunteerSelina.Id = volunteerUser.ContactId;
-//        volunteerSelina.Email = 'js@email.com';
-//        volunteerSelina.Phone = '5557779999';
-//        volunteerSelina.Birthdate = Date.today().addYears(-22);
-//        volunteerSelina.MailingPostalCode = '85641';
-//        volunteerSelina.MailingStreet = '1500 1st Avenue';
-//        volunteerSelina.MailingCountry = 'United States';
-//        volunteerSelina.MailingState = 'Arizona';
-//        volunteerSelina.MailingStateCode = 'AZ';
-//        volunteerSelina.MailingCity = 'Phoenix';
-//        volunteerSelina.Read__c = 'English';
-//        volunteerSelina.Language__c = 'English';
-//        volunteerSelina.Speak__c = 'English';
-//        volunteerSelina.Understand__c = 'English';
-//        volunteerSelina.Professional_Skills__c = 'Photography';
-//        volunteerSelina.Language_Notes__c = 'Test';
-//        volunteerSelina.Volunteer_Role__c = 'Special Events';
-//        volunteerSelina.is_Application__c = 'Partial Submit';
-//        volunteerSelina.Volunteer_Role__c = 'Fundraising – Assist';
-//        update volunteerSelina;
-
         Role__c wishRole = TestDataFactory.createRole(1, true)[0];
         wishRole.Name = 'Fundraising – Assist';
         insert wishRole;
