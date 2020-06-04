@@ -59,5 +59,22 @@ public with sharing class wishBudgetsControllerTest {
         System.assertEquals(false, baseURL == null);
         Test.stopTest();
     }
-
+    
+    @IsTest
+    public static void testException() {
+        Account acc = [
+            SELECT Id 
+            FROM Account 
+            LIMIT 1
+        ];
+        String errorMsg = '';
+        test.startTest();
+        try {
+            WishBudgetsController.getWishId(acc.Id);
+        } catch(Exception e) {
+            errorMsg = e.getMessage();
+        }
+        test.stopTest();
+        System.assert(String.isNotEmpty(errorMsg));
+    }
 }
