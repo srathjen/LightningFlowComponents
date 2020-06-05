@@ -171,11 +171,6 @@
         <apexClass>BroadcastValidation</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>CaseCommentTrigger_AT_Test</apexClass>
         <enabled>true</enabled>
@@ -572,7 +567,6 @@
         <apexClass>ForgotPasswordControllerTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>Hidden_ContactShareController_AC</apexClass>
         <enabled>true</enabled>
@@ -1073,7 +1067,6 @@
         <apexClass>VolunteerInterviewTask_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>VolunteerJourneyService</apexClass>
         <enabled>true</enabled>
@@ -9029,6 +9022,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.ReportsToId</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Residing_In_US_7_Yrs__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

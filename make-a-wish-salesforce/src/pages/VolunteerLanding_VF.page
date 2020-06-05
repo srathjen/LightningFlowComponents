@@ -19,7 +19,7 @@ Description : This page is used to display the welcome message, open events , ch
         .popupBackground{ position: fixed; background: rgba(0,0,0,.4); width: 100%; height: 100%; top: 0; left: 0; z-index: 9998}
         .labelCol{width:180px;}
         .errorhideMsg{display:none;color: red;font-size: 15px;}
-        .errorHomePhone, .errormobPhone, .errorPreEmail, .errorEmailField, .errorEmailText, .errorMsg {display:none;color: red;font-size: 15px;}
+        .errorHomePhone, .errormobPhone, .errorPreEmail, .errorEmailField, .errorEmailText, .errorMsg, .errorResideMsg {display:none;color: red;font-size: 15px;}
         .highlight h3 {text-align:center}
         .modal-header,.modal-footer {border-top:none;}
         h1.modal-title {text-align: center; padding-bottom: 0}
@@ -121,15 +121,7 @@ To proceed with your background check, please verify that your name and contact 
                                                 </apex:selectList>
                                             </div>
                                           </div>
-                                          <div class="form-group row">
-                                            <div class="col-xs-12">
-                                              <label class="c-input c-checkbox text-muted">
-                                                <apex:inputField value="{!volunteercon.Residing_in_US__c}" />
-                                                <span class="c-indicator"></span>
-                                                I have resided in the United States for the last seven years.
-                                              </label>
-                                            </div>
-                                          </div>
+             
                                          <div class="row">
                                               <div class="col-md-6">
                                                   <div class="form-group row">
@@ -187,7 +179,16 @@ To proceed with your background check, please verify that your name and contact 
                                                   </div>
                                              </div>
                                           </div>
-                                          
+                                           <div class="form-group row">
+                                            <div class="col-xs-12">
+                                                  <label class="col-sm-3">{!$Label.Volunteer_Onboarding_Resided_in_US}</label>
+                                               <apex:selectList value="{!volunteercon.Residing_In_US_7_Yrs__c}" multiselect="false" size="1" styleClass="form-control reside">
+                                              <apex:selectOption itemLabel="Please Select" itemValue="" html-selected="true" html-disabled="true" />
+                                              <apex:selectOption itemLabel="{!$Label.Select_Option_Yes}" itemValue="{!$Label.Select_Option_Yes}" />
+                                              <apex:selectOption itemLabel="{!$Label.Select_Option_No}" itemValue="{!$Label.Select_Option_No}" />
+                                              </apex:selectList>
+                                          </div>
+                                           </div>
                                           <div class="form-group row">
                                             <div class="col-xs-12">
                                               <label class="c-input c-checkbox">
@@ -206,6 +207,7 @@ To proceed with your background check, please verify that your name and contact 
 
                                         <div class="col-xs-12">
                                           <small class="errorhideMsg">Please confirm that your information is correct by checking the checkbox directly above.</small>
+                                          <small class="errorResideMsg">Oops! Have you resided in the United States for the last seven years? should be selected.</small>
                                           <small class="errormobPhone">Oops! Phone number should be 10 digits US format.</small>
                                           <small class="errorHomePhone">Oops! Phone number should be 10 digits US format.</small>
                                           <small class="errorPreEmail">Oops! Preferred email is required.</small>
@@ -483,13 +485,18 @@ To proceed with your background check, please verify that your name and contact 
             // apply responsive classes to calendar imgs directly
             $(".calendar").find('img').addClass('col-xs-4 col-sm-4 col-md-4');
             $('.InitiateBtn').click(function(){
-                $('.errorhideMsg').hide();$('.errorPreEmail').hide();$('.errorEmailField').hide();$('.errorEmailText').hide();$('.errorHomePhone').hide();$('.errormobPhone').hide();
+                $('.errorhideMsg').hide();$('.errorPreEmail').hide();$('.errorEmailField').hide();$('.errorEmailText').hide();$('.errorHomePhone').hide();$('.errormobPhone').hide();$('.errorResideMsg').hide();
                 var checkEmail;
                 if($.trim($(".preferred-email").val()) != '')
                     checkEmail = $(".preferred-email").val()+'-Email';
 
                 if(($('.confirmChk').is(':checked')) && $.trim($(".preferred-email").val()) == '') {
                     $('.errorPreEmail').show();
+                    return false;
+                }                
+                //SIW-522
+                   if(($('.confirmChk').is(':checked')) && $(".reside").val() == null){ 
+                    $('.errorResideMsg').show("Oops! Have you resided in the United States for the last seven years should be selected");
                     return false;
                 }
 
