@@ -1734,31 +1734,6 @@ public class ContactService {
 	}
 
 	/**
-	* Update affiliation status when the contact is deleted
-	* @param contactMap
-	*/
-	public static void updateAffiliationPrimaryStatus(Map<Id, Contact> contactMap) {
-		List<npe5__Affiliation__c> updateAffiliationList = new List<npe5__Affiliation__c>();
-		if (!contactMap.isEmpty()) {
-			for (npe5__Affiliation__c affiliation : [
-					SELECT Id, Constituent_Code__c, npe5__Contact__c, npe5__Contact__r.RecordTypeId
-					FROM npe5__Affiliation__c
-					WHERE npe5__Contact__c IN :contactMap.keySet()
-			]) {
-				npe5__Affiliation__c aff = new npe5__Affiliation__c();
-				aff.Id = affiliation.Id;
-				aff.npe5__Primary__c = false;
-				updateAffiliationList.add(aff);
-			}
-			try {
-				update updateAffiliationList;
-			} catch (Exception e) {
-				createContactDebugLog(updateAffiliationList, 'updateAffiliationPrimaryStatus', e);
-			}
-		}
-	}
-
-	/**
 	* Display error message when the contact record is associated with a lead
 	* @param contactMap
 	*/

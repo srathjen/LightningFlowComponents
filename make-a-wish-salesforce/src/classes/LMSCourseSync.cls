@@ -1,6 +1,9 @@
-//Created by : MST 
-//Description : This Webservice will be called by the buttom 'Get LMS Details' in the Class offering object for 'Virtual - Self Placed' record type. This class will make a call out the 
-//LMS system with the given course id to validate the  given course is avaible in the LMS.
+/**
+ * @description This Webservice will be called by the buttom 'Get LMS Details' in the Class offering object for 'Virtual - Self Placed' record type.
+ * This class will make a call out the LMS system with the given course id to validate the  given course is avaible in the LMS.
+ *
+ * @author MST
+ */
 global class LMSCourseSync {
 
     private static final String HTML_ENCODED_SPACE = '%20';

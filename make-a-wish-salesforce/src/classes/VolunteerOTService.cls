@@ -1,8 +1,6 @@
 /**
  * @description
- *
  * @author Steve Doucette, Traction on Demand
- *
  * @date 4/22/2020
  */
 public class VolunteerOTService {
@@ -19,14 +17,13 @@ public class VolunteerOTService {
     private final static String USER_VOLUNTEER_ORIENTATION_STATUS_CANCELLED = Constant_AC.USER_VOLUNTEER_ORIENTATION_STATUS_CANCELLED;
     private final static String USER_VOLUNTEER_ORIENTATION_STATUS_REGISTERED = Constant_AC.USER_VOLUNTEER_ORIENTATION_STATUS_REGISTERED;
 
-    private final static String ACTION_TRAINING = 'Training';
-    private final static String ACTION_REGISTERED = 'Registered';
-    private final static String ACTION_ORIENTATION = 'Orientation';
-    private final static String ACTION_VOLUNTEER_CANCELLED = 'Volunteer Cancelled';
+    @TestVisible private final static String ACTION_TRAINING = 'Training';
+    @TestVisible private final static String ACTION_REGISTERED = 'Registered';
+    @TestVisible private final static String ACTION_ORIENTATION = 'Orientation';
+    @TestVisible private final static String ACTION_VOLUNTEER_CANCELLED = 'Volunteer Cancelled';
 
     /**
      * @description Updating Affiliation status as Active.
-     *
      * @param volunteerContactIds
      */
     public static void updateAffiliationStatusAsActive(Set<Id> volunteerContactIds) {
@@ -64,13 +61,10 @@ public class VolunteerOTService {
                 WHERE Volunteer_Name__c IN :volunteerContactIds
         ]) {
             chapterRoleIds.add(currRec.Chapter_Role__c);
-            if (contactChapterRolesMap.containsKey(currRec.Volunteer_Name__c)) {
-                contactChapterRolesMap.get(currRec.Volunteer_Name__c).add(currRec.Chapter_Role__c);
-            } else {
-                contactChapterRolesMap.put(currRec.Volunteer_Name__c, new Set<Id>{
-                        currRec.Chapter_Role__c
-                });
+            if (!contactChapterRolesMap.containsKey(currRec.Volunteer_Name__c)) {
+                contactChapterRolesMap.put(currRec.Volunteer_Name__c, new Set<Id>());
             }
+            contactChapterRolesMap.get(currRec.Volunteer_Name__c).add(currRec.Chapter_Role__c);
             volunteerRoleMap.put(currRec.Volunteer_Name__c + '-' + currRec.Chapter_Role__c, currRec.Id);
         }
 
@@ -85,13 +79,10 @@ public class VolunteerOTService {
                 AND Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId = :trainingRecordTypeId
         ]) {
             orientationIds.add(currRec.Chapter_Role_O_T__r.Orientation_Training__c);
-            if (chapterRoleOandTMap.containsKey(currRec.Chapter_Role_O_T__r.Chapter_Role__c)) {
-                chapterRoleOandTMap.get(currRec.Chapter_Role_O_T__r.Chapter_Role__c).add(currRec.Chapter_Role_O_T__r.Orientation_Training__c);
-            } else {
-                chapterRoleOandTMap.put(currRec.Chapter_Role_O_T__r.Chapter_Role__c, new Set<Id>{
-                        currRec.Chapter_Role_O_T__r.Orientation_Training__c
-                });
+            if (!chapterRoleOandTMap.containsKey(currRec.Chapter_Role_O_T__r.Chapter_Role__c)) {
+                chapterRoleOandTMap.put(currRec.Chapter_Role_O_T__r.Chapter_Role__c, new Set<Id>());
             }
+            chapterRoleOandTMap.get(currRec.Chapter_Role_O_T__r.Chapter_Role__c).add(currRec.Chapter_Role_O_T__r.Orientation_Training__c);
         }
 
         /**
@@ -188,7 +179,6 @@ public class VolunteerOTService {
 
     /**
      * @description This method is used to update the volunteer contact field to send an email to volunteer.
-     *
      * @param volunteerOrientationTrainingList
      */
     public static void updateContactRec(List<Volunteer_Orientation_Training__c> volunteerOrientationTrainingList) {
@@ -271,7 +261,6 @@ public class VolunteerOTService {
 
     /**
      * @description
-     *
      * @param newList
      */
     public static void setVolOTFields(List<Volunteer_Orientation_Training__c> newList) {
@@ -280,7 +269,6 @@ public class VolunteerOTService {
 
     /**
      * @description
-     *
      * @param newList
      * @param oldMap
      */
@@ -330,7 +318,6 @@ public class VolunteerOTService {
 
     /**
      * @description
-     *
      * @param volIdsSet
      * @param action
      */
@@ -356,10 +343,10 @@ public class VolunteerOTService {
 
     /**
      * @description
-     *
      * @param volunteerContactIds
      * @param Action
      */
+    @Future
     public static void updateUserVolunteerStatus(Set<Id> volunteerContactIds, String Action) {
         if (volunteerContactIds.isEmpty()) {
             return;
@@ -368,7 +355,7 @@ public class VolunteerOTService {
         for (User userUpdate : [
                 SELECT Id, Volunteer_Orientation_Status__c, Profile.Name
                 FROM User
-                WHERE ContactId IN :volunteerContactIds AND (Profile.Name = :Label.Prospective_Volunteer_Profile)
+                WHERE ContactId IN :volunteerContactIds AND ProfileId = :Label.Prospective_Volunteer_Profile
         ]) {
             if (Action == ACTION_REGISTERED) {
                 userUpdate.Volunteer_Orientation_Status__c = USER_VOLUNTEER_ORIENTATION_STATUS_REGISTERED;
@@ -406,10 +393,6 @@ public class VolunteerOTService {
         return ret;
     }
 
-    // Return set of Ids for registered orientation volunteers
-    public static Set<Id> getCompletedOrientationVolunteerIds(List<Volunteer_Orientation_Training__c> newList) {
-        return getRegisteredOrientationVolunteerIds(newList, null);
-    }
     public static Set<Id> getCompletedOrientationVolunteerIds(List<Volunteer_Orientation_Training__c> newList, Map<Id, Volunteer_Orientation_Training__c> oldMap) {
         Set<Id> ret = new Set<Id>();
         for (Volunteer_Orientation_Training__c currRec : newList) {
@@ -529,7 +512,6 @@ public class VolunteerOTService {
 
     /**
      * @description
-     *
      * @param userIds
      */
     @Future

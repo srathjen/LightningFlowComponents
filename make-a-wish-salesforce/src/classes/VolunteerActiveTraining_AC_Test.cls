@@ -272,7 +272,8 @@ public class VolunteerActiveTraining_AC_Test {
 				WHERE Location__c = 'Test'
 		][0];
 		System.runAs(volunteerUser) {
-			TestClassUtil.createDynamicContent();
+			Dynamic_Content__c dc = TestDataFactory.createDynamicContent(1)[0];
+			insert dc;
 			PageReference pageRef = Page.VolunteerActiveTraining_VF;
 			Test.setCurrentPage(pageRef);
 			VolunteerActiveTraining_AC controller = new VolunteerActiveTraining_AC();
@@ -303,7 +304,8 @@ public class VolunteerActiveTraining_AC_Test {
 				WHERE Location__c = 'Test'
 		][0];
 		System.runAs(volunteerUser) {
-			TestClassUtil.createDynamicContent();
+			Dynamic_Content__c dc = TestDataFactory.createDynamicContent(1)[0];
+			insert dc;
 			PageReference pageRef = Page.VolunteerActiveTraining_VF;
 			Test.setCurrentPage(pageRef);
 			VolunteerActiveTraining_AC controller = new VolunteerActiveTraining_AC();
@@ -328,7 +330,8 @@ public class VolunteerActiveTraining_AC_Test {
 				WHERE Location__c = 'Test'
 		][0];
 		System.runAs(volunteerUser) {
-			TestClassUtil.createDynamicContent();
+			Dynamic_Content__c dc = TestDataFactory.createDynamicContent(1)[0];
+			insert dc;
 			PageReference pageRef = Page.VolunteerTraining_VF;
 			Test.setCurrentPage(pageRef);
 			VolunteerActiveTraining_AC controller = new VolunteerActiveTraining_AC();
@@ -347,7 +350,8 @@ public class VolunteerActiveTraining_AC_Test {
 				WHERE Location__c = 'Test'
 		][0];
 		VolunteerActiveTraining_AC controller = new VolunteerActiveTraining_AC();
-		TestClassUtil.createDynamicContent();
+		Dynamic_Content__c dc = TestDataFactory.createDynamicContent(1)[0];
+		insert dc;
 		PageReference pageRef = Page.VolunteerActiveTraining_VF;
 		Test.setCurrentPage(pageRef);
 		controller.TimingInfo();
@@ -363,7 +367,8 @@ public class VolunteerActiveTraining_AC_Test {
 				WHERE Location__c = 'Test'
 		][0];
 		System.runAs(Utils.currentUser) {
-			TestClassUtil.createDynamicContent();
+			Dynamic_Content__c dc = TestDataFactory.createDynamicContent(1)[0];
+			insert dc;
 			PageReference pageRef = Page.VolunteerActiveTraining_VF;
 			Test.setCurrentPage(pageRef);
 			VolunteerActiveTraining_AC controller = new VolunteerActiveTraining_AC();
@@ -387,7 +392,8 @@ public class VolunteerActiveTraining_AC_Test {
 				WHERE Email = 'js@email.com'
 		][0];
 		System.runAs(volunteerUser) {
-			TestClassUtil.createDynamicContent();
+			Dynamic_Content__c dc = TestDataFactory.createDynamicContent(1)[0];
+			insert dc;
 			PageReference pageRef = Page.VolunteerActiveTraining_VF;
 			Test.setCurrentPage(pageRef);
 			VolunteerActiveTraining_AC controller = new VolunteerActiveTraining_AC();
@@ -412,7 +418,8 @@ public class VolunteerActiveTraining_AC_Test {
 				WHERE Location__c = 'Test'
 		][0];
 		System.runAs(volunteerUser) {
-			TestClassUtil.createDynamicContent();
+			Dynamic_Content__c dc = TestDataFactory.createDynamicContent(1)[0];
+			insert dc;
 			PageReference pageRef = Page.VolunteerActiveTraining_VF;
 			Test.setCurrentPage(pageRef);
 			VolunteerActiveTraining_AC controller = new VolunteerActiveTraining_AC();
@@ -479,7 +486,8 @@ public class VolunteerActiveTraining_AC_Test {
 		][0];
 		Test.startTest();
 		System.runAs(volunteerUser) {
-			TestClassUtil.createDynamicContent();
+			Dynamic_Content__c dc = TestDataFactory.createDynamicContent(1)[0];
+			insert dc;
 			PageReference pageRef = Page.VolunteerActiveTraining_VF;
 			Test.setCurrentPage(pageRef);
 			VolunteerActiveTraining_AC controller = new VolunteerActiveTraining_AC();
@@ -511,7 +519,8 @@ public class VolunteerActiveTraining_AC_Test {
 				WHERE Location__c = 'Test'
 		][0];
 		System.runAs(volunteerUser) {
-			TestClassUtil.createDynamicContent();
+			Dynamic_Content__c dc = TestDataFactory.createDynamicContent(1)[0];
+			insert dc;
 			PageReference pageRef = Page.VolunteerActiveTraining_VF;
 			Test.setCurrentPage(pageRef);
 			VolunteerActiveTraining_AC controller = new VolunteerActiveTraining_AC();
@@ -540,7 +549,8 @@ public class VolunteerActiveTraining_AC_Test {
 				WHERE Location__c = 'Test'
 		][0];
 		System.runAs(volunteerUser) {
-			TestClassUtil.createDynamicContent();
+			Dynamic_Content__c dc = TestDataFactory.createDynamicContent(1)[0];
+			insert dc;
 			PageReference pageRef = Page.VolunteerActiveTraining_VF;
 			Test.setCurrentPage(pageRef);
 			VolunteerActiveTraining_AC controller = new VolunteerActiveTraining_AC();
@@ -580,7 +590,8 @@ public class VolunteerActiveTraining_AC_Test {
 		}
 		update volunteerOrientationTrainingsUpdate;
 		System.runAs(volunteerUser) {
-			TestClassUtil.createDynamicContent();
+			Dynamic_Content__c dc = TestDataFactory.createDynamicContent(1)[0];
+			insert dc;
 			PageReference pageRef = Page.VolunteerActiveTraining_VF;
 			Test.setCurrentPage(pageRef);
 			VolunteerActiveTraining_AC controller = new VolunteerActiveTraining_AC();

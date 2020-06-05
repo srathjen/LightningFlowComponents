@@ -1,244 +1,131 @@
-/*****************************************************************************************************************
-Author      : MST Solutions
-Date        : 11/14/2016
-Created By  : Mariyappan Sivathanu.
-Description : 
-1.This testClass is used to Relationship_AT for Relationship Contact.
-2.Create Record for child wishes.
-3.Submits parent wish for approval once the required number of volunteers added to the parent wish team.
-4.Add parent wish team members to child wish team.
-*****************************************************************************************************************/
+/**
+ * @description 1.This testClass is used to Relationship_AT for Relationship Contact.
+ * 2.Create Record for child wishes.
+ * 3.Submits parent wish for approval once the required number of volunteers added to the parent wish team.
+ * 4.Add parent wish team members to child wish team.
+ * @author Mariyappan Sivathanu, MST Solutions
+ * @date 11/14/2016
+ **/
 @IsTest
 public class DocusignRecipientTrigger_AT_Test {
 
-	@IsTest
-	public static void dsfsStatusRec() {
-		Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
-		insert chapterAcc;
+    @TestSetup
+    public static void setUp() {
+        trac_TriggerHandlerBase.blockTrigger = true;
 
-		Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
-		insert wishChild;
+        Account accountAzChapter = TestDataFactory.createChapterAccount(1)[0];
+        accountAzChapter.Name = 'Make-A-Wish Arizona';
+        insert accountAzChapter;
 
-		Case caseRec = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-		insert caseRec;
+        List<Contact> contactList = TestDataFactory.createContact(2);
+        Contact volunteerHector = contactList.get(0);
+        volunteerHector.RecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
+        volunteerHector.AccountId = accountAzChapter.Id;
+        volunteerHector.FirstName = 'Hector';
+        volunteerHector.LastName = 'Sol';
+        volunteerHector.Email = 'h.sol@email.com';
+        Contact wishChildAnthony = contactList.get(1);
+        wishChildAnthony.FirstName = 'Anthony';
+        wishChildAnthony.LastName = 'Edwards';
+        wishChildAnthony.Parent_Guardian_Name__c = 'Jonathan Edwards';
+        wishChildAnthony.RecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
+        wishChildAnthony.Birthdate = Date.today().addDays(+21);
+        wishChildAnthony.Birthdate = wishChildAnthony.Birthdate.addYears(-5);
+        wishChildAnthony.MailingPostalCode = '94105-5188';
+        wishChildAnthony.MailingStreet = '7540 E Gold Dust Ave';
+        wishChildAnthony.MailingCountry = 'United States';
+        wishChildAnthony.MailingState = 'Arizona';
+        wishChildAnthony.MailingCity = 'Scottsdale';
+        wishChildAnthony.MailingLatitude = -24.355798;
+        wishChildAnthony.MailingLongitude = 69.830469;
+        insert contactList;
 
-		Contact parentGurdianContact = OrientationandTrainingUtil.CreateWishFamily();
-		Contact participantContact = OrientationandTrainingUtil.CreateWishFamilyparticipant();
-		insert new List<Contact>{
-				parentGurdianContact, participantContact
-		};
+        Case wishChildCase = TestDataFactory.createCase(1)[0];
+        wishChildCase.RecordTypeId = Constant_AC.WISH_RT_ID;
+        wishChildCase.ChapterName__c = accountAzChapter.Id;
+        wishChildCase.Subject = 'Parent Wish';
+        wishChildCase.Interview_date__c = System.today();
+        wishChildCase.Wish_Type__c = 'Disney World';
+        wishChildCase.Start_Date__c = System.today();
+        wishChildCase.End_Date__c = System.today();
+        wishChildCase.ContactId = wishChildAnthony.Id;
+        wishChildCase.Status = 'New';
+        wishChildCase.Start_Date__c = System.today();
+        wishChildCase.LiabilitySignerMapKeyPair__c = 'Anthony Edwards';
+        wishChildCase.Budget_Submitted_Date__c = System.today();
+        wishChildCase.Budget_Approved_Date__c = System.today();
+        insert wishChildCase;
 
-		Test.startTest();
-		npe4__Relationship__c gurdianRelationShipRec = OrientationandTrainingUtil.ParentLegualGuardianRelation(wishChild.Id, parentGurdianContact.Id);
-		npe4__Relationship__c participantRelationShipRec = OrientationandTrainingUtil.ParticipantRelationShip(wishChild.Id, participantContact.Id);
-		insert new List<npe4__Relationship__c>{
-				gurdianRelationShipRec, participantRelationShipRec
-		};
+        dsfs__DocuSign_Status__c dsfsCase = TestDataFactory.createDocusignStatuswithCase(wishChildCase.Id);
+        dsfsCase.Recipient_names__c = 'Anthony Edwards';
+        insert dsfsCase;
 
-		Contact volunterCon = OrientationandTrainingUtil.createVolunteerContact(chapterAcc.Id);
-		Contact volunterConTwo = OrientationandTrainingUtil.createVolunteerContactwithOtherPhone(chapterAcc.Id);
-		insert new List<Contact>{
-				volunterCon, volunterConTwo
-		};
+        dsfs__DocuSign_Status__c dsfsCaseDupe = TestDataFactory.createDocusignStatuswithCase(wishChildCase.Id);
+        dsfsCaseDupe.Recipient_names__c = 'Candace Edwards';
+        insert dsfsCaseDupe;
 
-		RecursiveTriggerHandler.blockBeforeUpdate = true;
-		Case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-		insert wish;
-		Case wishDetermination = OrientationandTrainingUtil.childWishWithConChapter(wish.Id);
-		insert wishDetermination;
+        dsfs__DocuSign_Recipient_Status__c recipientStatusCompleted = TestDataFactory.createDocusignRecipientStatus(dsfsCaseDupe.Id);
+        recipientStatusCompleted.Name = 'Delivered to Candace Edwards';
+        recipientStatusCompleted.dsfs__Recipient_Status__c = 'Delivered';
+        insert recipientStatusCompleted;
 
-		CaseTeamRole roleRec = [
-				SELECT Id
-				FROM CaseTeamRole
-				WHERE Name = 'Wish Granter'
-				LIMIT 1
-		];
-		CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(wish.Id, volunterCon.Id, roleRec.Id);
-		CaseTeamMember caseTeamMebertwo = OrientationandTrainingUtil.createCaseTeamMember(wish.Id, volunterConTwo.Id, roleRec.Id);
-		insert new List<CaseTeamMember>{
-				caseTeamMeber, caseTeamMebertwo
-		};
+        Attachment attachment = TestDataFactory.createAttachments(1, dsfsCaseDupe.Id)[0];
+        insert attachment;
 
-		npe4__Relationship__c npe4Rec = OrientationandTrainingUtil.relationshipChild(parentGurdianContact.Id, wishChild.Id);
-		insert npe4Rec;
+        trac_TriggerHandlerBase.blockTrigger = false;
+    }
 
-		dsfs__DocuSign_Status__c dsfsStatus = OrientationandTrainingUtil.createDocusignStatuswithCase(caseRec.Id);
-		insert dsfsStatus;
-		dsfs__DocuSign_Status__c updatedsfsSubJect = new dsfs__DocuSign_Status__c();
-		updatedsfsSubJect.Id = dsfsStatus.Id;
-		updatedsfsSubJect.dsfs__Subject__c = 'Signature Required - Wish Form & Liability And Publicity Release Form';
-		update updatedsfsSubJect;
-		Test.stopTest();
-		dsfs__DocuSign_Recipient_Status__c dsfsRecipient = OrientationandTrainingUtil.CreatedsfsRec(dsfsStatus.Id);
-		insert dsfsRecipient;
+    @IsTest
+    public static void insertCompletedStatus() {
+        Test.startTest();
+        dsfs__DocuSign_Status__c docusignStatus = [
+                SELECT Id, Recipient_names__c
+                FROM dsfs__DocuSign_Status__c
+                WHERE Recipient_names__c = 'Anthony Edwards'
+        ];
+        dsfs__DocuSign_Recipient_Status__c recipientStatusCompleted = TestDataFactory.createDocusignRecipientStatus(docusignStatus.Id);
+        recipientStatusCompleted.Name = 'Test Insert';
+        recipientStatusCompleted.dsfs__Recipient_Status__c = Constant_AC.DOCUSIGN_RECIPIENT_STATUS_COMPLETED;
+        insert recipientStatusCompleted;
+        Test.stopTest();
+    }
 
-		System.assertEquals(dsfsRecipient.dsfs__Recipient_Status__c, 'Completed');
-	}
+    @IsTest
+    public static void insertDeliveredStatus() {
+        Test.startTest();
+        dsfs__DocuSign_Status__c docusignStatus = [
+                SELECT Id, Recipient_names__c
+                FROM dsfs__DocuSign_Status__c
+                WHERE Recipient_names__c = 'Anthony Edwards'
+        ];
+        dsfs__DocuSign_Recipient_Status__c recipientStatusCompleted = TestDataFactory.createDocusignRecipientStatus(docusignStatus.Id);
+        recipientStatusCompleted.Name = 'Test Insert';
+        recipientStatusCompleted.dsfs__Recipient_Status__c = Constant_AC.DOCUSIGN_RECIPIENT_STATUS_DELIVERED;
+        insert recipientStatusCompleted;
+        Test.stopTest();
+    }
 
-	@IsTest
-	public static void dsfsStatusRecWithName() {
-		Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
-		insert chapterAccount;
-		Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
-		Contact parentGurdianContact = OrientationandTrainingUtil.CreateWishFamily();
-		Contact participantContact = OrientationandTrainingUtil.CreateWishFamilyparticipant();
-		Contact volunterCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
-		Contact volunterConTwo = OrientationandTrainingUtil.createVolunteerContactwithOtherPhone(chapterAccount.Id);
-		insert new List<Contact>{
-				wishChild, parentGurdianContact, participantContact, volunterCon, volunterConTwo
-		};
-		Case caseRec = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-		insert caseRec;
-		Test.startTest();
-		npe4__Relationship__c gurdianRelationShipRec = OrientationandTrainingUtil.ParentLegualGuardianRelation(wishChild.Id, parentGurdianContact.Id);
-		npe4__Relationship__c participantRelationShipRec = OrientationandTrainingUtil.ParticipantRelationShip(wishChild.Id, participantContact.Id);
-		insert new List<npe4__Relationship__c>{
-				gurdianRelationShipRec, participantRelationShipRec
-		};
-		RecursiveTriggerHandler.blockBeforeUpdate = true;
-		Case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-		Case wishDetermination = OrientationandTrainingUtil.childWishWithConChapter(wish.Id);
-		insert new List<Case>{
-				wish, wishDetermination
-		};
-		CaseTeamRole roleRec = [
-				SELECT Id
-				FROM CaseTeamRole
-				WHERE Name = 'Wish Granter'
-				LIMIT 1
-		];
-		CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(wish.Id, volunterCon.Id, roleRec.Id);
-		CaseTeamMember caseTeamMebertwo = OrientationandTrainingUtil.createCaseTeamMember(wish.Id, volunterConTwo.Id, roleRec.Id);
-		insert new List<CaseTeamMember>{
-				caseTeamMeber, caseTeamMebertwo
-		};
-		npe4__Relationship__c npe4Rec = OrientationandTrainingUtil.relationshipChild(parentGurdianContact.Id, wishChild.Id);
-		insert npe4Rec;
-		dsfs__DocuSign_Status__c dsfsStatus = OrientationandTrainingUtil.createDocusignStatuswithCase(caseRec.Id);
-		insert dsfsStatus;
-		Attachment newAttachment = OrientationandTrainingUtil.CreateAttachmentRecordWishChild(dsfsStatus.Id);
-		insert newAttachment;
-
-		dsfs__DocuSign_Recipient_Status__c dsfsRecipient = OrientationandTrainingUtil.CreatedsfsRecAsDeliver(dsfsStatus.Id);
-		insert dsfsRecipient;
-
-		dsfs__DocuSign_Recipient_Status__c updateRecipienttoComplete = new dsfs__DocuSign_Recipient_Status__c();
-		updateRecipienttoComplete.Id = dsfsRecipient.Id;
-		updateRecipienttoComplete .dsfs__Recipient_Status__c = 'Completed';
-		update updateRecipienttoComplete;
-
-		dsfs__DocuSign_Recipient_Status__c dsfsRecipientRec = OrientationandTrainingUtil.CreatedsfsRecAsDeliverRecord(dsfsStatus.Id);
-		insert dsfsRecipientRec;
-
-		dsfs__DocuSign_Recipient_Status__c updateRecipienttodelivered = new dsfs__DocuSign_Recipient_Status__c();
-		updateRecipienttodelivered.Id = dsfsRecipientRec.Id;
-		updateRecipienttodelivered.dsfs__Recipient_Status__c = 'Completed';
-		update updateRecipienttodelivered;
-		Test.stopTest();
-
-		System.assertEquals(updateRecipienttoComplete.dsfs__Recipient_Status__c, 'Completed');
-	}
-
-	@IsTest
-	public static void dsfsWishForm() {
-		Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
-		Case caseRec = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-		Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
-		Contact parentGurdianContact = OrientationandTrainingUtil.CreateWishFamily();
-		Contact participantContact = OrientationandTrainingUtil.CreateWishFamilyparticipant();
-		Test.startTest();
-		OrientationandTrainingUtil.ParentLegualGuardianRelation(wishChild.Id, parentGurdianContact.Id);
-		OrientationandTrainingUtil.ParticipantRelationShip(wishChild.Id, participantContact.Id);
-		Contact volunterCon = OrientationandTrainingUtil.createVolunteerContact(chapterAcc.Id);
-		Contact volunterConTwo = OrientationandTrainingUtil.createVolunteerContactwithOtherPhone(chapterAcc.Id);
-		RecursiveTriggerHandler.blockBeforeUpdate = true;
-		Case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-		Case wishDetermination = OrientationandTrainingUtil.childWishWithConChapter(wish.Id);
-		insert wishDetermination;
-		CaseTeamRole roleRec = [
-				SELECT Id
-				FROM CaseTeamRole
-				WHERE Name = 'Wish Granter'
-				LIMIT 1
-		];
-		OrientationandTrainingUtil.createCaseTeamMember(wish.Id, volunterCon.Id, roleRec.Id);
-		OrientationandTrainingUtil.createCaseTeamMember(wish.Id, volunterConTwo.Id, roleRec.Id);
-		OrientationandTrainingUtil.relationshipChild(parentGurdianContact.Id, wishChild.Id);
-		dsfs__DocuSign_Status__c dsfsStatus = new dsfs__DocuSign_Status__c();
-		dsfsStatus .dsfs__DocuSign_Envelope_ID__c = '0204C9DD-B8B3-4D7D-B9C5-F88B921E1511';
-		dsfsStatus .dsfs__Case__c = caseRec.Id;
-		dsfsStatus .isConflict__c = false;
-		dsfsStatus .dsfs__Envelope_Status__c = 'Sent';
-		dsfsStatus .dsfs__Subject__c = 'Signature Required - Wish Form & Liability And Publicity Release Form';
-		insert dsfsStatus ;
-		Attachment newAttachment = OrientationandTrainingUtil.CreateAttachmentRecordWishChild(dsfsStatus .Id);
-		insert newAttachment;
-		dsfs__DocuSign_Recipient_Status__c dsfsRecipient = OrientationandTrainingUtil.CreatedsfsRecAsDeliver(dsfsStatus.Id);
-		insert dsfsRecipient;
-		dsfs__DocuSign_Recipient_Status__c updateRecipienttoComplete = new dsfs__DocuSign_Recipient_Status__c();
-		updateRecipienttoComplete.Id = dsfsRecipient.Id;
-		updateRecipienttoComplete .dsfs__Recipient_Status__c = 'Completed';
-		update updateRecipienttoComplete;
-
-		dsfs__DocuSign_Recipient_Status__c dsfsRecipientRec = OrientationandTrainingUtil.CreatedsfsRecAsDeliverRecord(dsfsStatus.Id);
-		insert dsfsRecipientRec;
-
-		dsfs__DocuSign_Recipient_Status__c updateRecipienttodelivered = new dsfs__DocuSign_Recipient_Status__c();
-		updateRecipienttodelivered.Id = dsfsRecipientRec.Id;
-		updateRecipienttodelivered.dsfs__Recipient_Status__c = 'Completed';
-		update updateRecipienttodelivered;
-
-		System.assertEquals(updateRecipienttoComplete.dsfs__Recipient_Status__c, 'Completed');
-		Test.stopTest();
-	}
-
-	@IsTest
-	public static void dsfsWishFormWithoutContactName() {
-		Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
-		Case caseRec = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-		Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
-		Contact parentGurdianContact = OrientationandTrainingUtil.CreateWishFamily();
-		Contact participantContact = OrientationandTrainingUtil.CreateWishFamilyparticipant();
-		Test.startTest();
-		OrientationandTrainingUtil.ParentLegualGuardianRelation(wishChild.Id, parentGurdianContact.Id);
-		OrientationandTrainingUtil.ParticipantRelationShip(wishChild.Id, participantContact.Id);
-		Contact volunterCon = OrientationandTrainingUtil.createVolunteerContact(chapterAcc.Id);
-		Contact volunterConTwo = OrientationandTrainingUtil.createVolunteerContactwithOtherPhone(chapterAcc.Id);
-		RecursiveTriggerHandler.blockBeforeUpdate = true;
-		Case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-		Case wishDetermination = OrientationandTrainingUtil.childWishWithConChapter(wish.Id);
-		insert wishDetermination;
-		CaseTeamRole roleRec = [
-				SELECT Id
-				FROM CaseTeamRole
-				WHERE Name = 'Wish Granter'
-				LIMIT 1
-		];
-		OrientationandTrainingUtil.createCaseTeamMember(wish.Id, volunterCon.Id, roleRec.Id);
-		OrientationandTrainingUtil.createCaseTeamMember(wish.Id, volunterConTwo.Id, roleRec.Id);
-		OrientationandTrainingUtil.relationshipChild(parentGurdianContact.Id, wishChild.Id);
-		dsfs__DocuSign_Status__c dsfsStatus = new dsfs__DocuSign_Status__c();
-		dsfsStatus .dsfs__DocuSign_Envelope_ID__c = '0204C9DD-B8B3-4D7D-B9C5-F88B921E1511';
-		dsfsStatus .dsfs__Case__c = caseRec.Id;
-		dsfsStatus .isConflict__c = false;
-		dsfsStatus .dsfs__Envelope_Status__c = 'Sent';
-		dsfsStatus .dsfs__Subject__c = 'Signature Required - Wish Form & Liability And Publicity Release Form';
-		insert dsfsStatus;
-		Attachment newAttachment = OrientationandTrainingUtil.CreateAttachmentRecordWishChild(dsfsStatus .Id);
-		insert newAttachment;
-		dsfs__DocuSign_Recipient_Status__c dsfsRecipient = OrientationandTrainingUtil.CreatedsfsRecAsDeliver(dsfsStatus.Id);
-		insert dsfsRecipient;
-		dsfs__DocuSign_Recipient_Status__c updateRecipienttoComplete = new dsfs__DocuSign_Recipient_Status__c();
-		updateRecipienttoComplete.Id = dsfsRecipient.Id;
-		updateRecipienttoComplete .dsfs__Recipient_Status__c = 'Completed';
-		update updateRecipienttoComplete;
-		dsfs__DocuSign_Recipient_Status__c dsfsRecipientRec = OrientationandTrainingUtil.CreatedsfsRecAsDeliverRecord(dsfsStatus.Id);
-		insert dsfsRecipientRec;
-		dsfs__DocuSign_Recipient_Status__c updateRecipienttodelivered = new dsfs__DocuSign_Recipient_Status__c();
-		updateRecipienttodelivered.Id = dsfsRecipientRec.Id;
-		updateRecipienttodelivered.dsfs__Recipient_Status__c = 'Completed';
-		update updateRecipienttodelivered;
-		System.assertEquals(updateRecipienttoComplete.dsfs__Recipient_Status__c, 'Completed');
-		Test.stopTest();
-	}
+    @IsTest
+    public static void updateStatusCompleted() {
+        Test.startTest();
+        dsfs__DocuSign_Recipient_Status__c recStatus = [
+                SELECT Id, dsfs__Parent_Status_Record__c
+                FROM dsfs__DocuSign_Recipient_Status__c
+                WHERE Name = 'Delivered to Candace Edwards'
+        ];
+        recStatus.dsfs__Recipient_Status__c = 'Completed';
+        update recStatus;
+        Test.stopTest();
+        dsfs__DocuSign_Recipient_Status__c parentRecordUpdate = [
+                SELECT Id, dsfs__Parent_Status_Record__r.AttachmentId__c
+                FROM dsfs__DocuSign_Recipient_Status__c
+                WHERE Id = :recStatus.Id
+        ];
+        Attachment attach = [
+                SELECT Id
+                FROM Attachment
+                WHERE ParentId = :recStatus.dsfs__Parent_Status_Record__c
+        ];
+        System.assert(parentRecordUpdate.dsfs__Parent_Status_Record__r.AttachmentId__c == attach.Id);
+    }
 }

@@ -2,56 +2,72 @@
 public class ClassOffering_AT_Test {
 
     @IsTest
-	public static void createClassOffering() {
-		Class_Offering__c currOffering = new Class_Offering__c();
-		currOffering.Date__c = Date.today() + 3;
-		currOffering.Start_Time__c = '9:30 AM';
-		currOffering.End_Time__c = '9:00 AM';
-		Database.SaveResult result = Database.insert(currOffering, false);
-	}
+    public static void createClassOffering() {
+        Class_Offering__c classOffering = new Class_Offering__c();
+        classOffering.Date__c = Date.today() + 3;
+        classOffering.Start_Time__c = '9:00 AM';
+        classOffering.End_Time__c = '10:00 AM';
+        insert classOffering;
+
+        classOffering.Date__c = Date.today() + 4;
+        classOffering.Start_Time__c = '10:00 AM';
+        classOffering.End_Time__c = '11:00 AM';
+        update classOffering;
+    }
 
     @IsTest
-	public static void createClassOfferingSameTime() {
-		Class_Offering__c currOffering = new Class_Offering__c();
-		currOffering.Date__c = Date.today() + 3;
-		currOffering.Start_Time__c = '7:00 PM';
-		currOffering.End_Time__c = '10:00 AM';
-		Database.insert(currOffering, false);
-	}
+    public static void createClassOfferingSameTime() {
+        Class_Offering__c currOffering = new Class_Offering__c();
+        currOffering.Date__c = Date.today() + 3;
+        currOffering.Start_Time__c = '7:00 PM';
+        currOffering.End_Time__c = '10:00 AM';
+        Database.insert(currOffering, false);
+    }
 
     @IsTest
-	public static void startTimeBlank() {
-		Class_Offering__c currOffering = new Class_Offering__c();
-		currOffering.Date__c = Date.today() + 3;
-		currOffering.End_Time__c = '10:00 AM';
-		Database.SaveResult result = Database.insert(currOffering, false);
-		System.assertEquals('Please enter a valid Start Time', result.getErrors()[0].getMessage());
-	}
+    public static void validateClassOfferingStartTimeBlank() {
+        Class_Offering__c currOffering = new Class_Offering__c();
+        currOffering.Date__c = Date.today() + 3;
+        currOffering.End_Time__c = '10:00 AM';
+        Database.SaveResult result = Database.insert(currOffering, false);
+        System.assertEquals('Please enter a valid Start Time', result.getErrors()[0].getMessage());
+    }
 
     @IsTest
-	public static void createClassOfferingNationalStaffasOwner() {
-		Chapter_Vs_Role__c arizonaChap = TestDataFactory.createChapterVsRole(1, 'Arizona')[0];
-		Chapter_Vs_Role__c alabamaChap = TestDataFactory.createChapterVsRole(1, 'Alabama')[0];
-		insert new List<Chapter_Vs_Role__c>{
-				arizonaChap, alabamaChap
-		};
-		User currUser = Utils.currentUser;
-		User nationalStaff;
-		System.runAs(currUser) {
-			nationalStaff = OrientationandTrainingUtil.createUserWithRole([
-					SELECT Id
-					FROM UserRole
+    public static void createClassOfferingAsNationalStaff() {
+        User nationalStaff;
+        System.runAs(Utils.currentUser) {
+            Id roleId = [
+                    SELECT Id
+                    FROM UserRole
                     WHERE Name = 'National Staff'
-			].Id);
-			insert nationalStaff;
-		}
-		System.runAs(nationalStaff) {
-			Chapter_Role__c newChapterRole = OrientationandTrainingUtil.createChapter(OrientationandTrainingUtil.createchapterAccount().Id, OrientationandTrainingUtil.createRole().Id);
-			insert newChapterRole;
-			Chapter_Role_O_T__c newChapterOT = OrientationandTrainingUtil.createChapterOandT(newChapterRole.Id, OrientationandTrainingUtil.CreateVolunteerOrientationRecord().Id);
-			insert newChapterOT;
-			Class_Offering__c newClassOff = OrientationandTrainingUtil.createClassOffering(newChapterOT.Id);
-			insert newClassOff;
-		}
-	}
+            ].Id;
+
+            Profile systemAdministrator = [
+                    SELECT Id
+                    FROM Profile
+                    WHERE Name = 'System Administrator'
+            ];
+            nationalStaff = new User(FirstName = 'JonJesu', LastName = 'EdwardsJo', Email = 'jonemail@gma111il.com', Username = 'jonsamp0@gma11il.com',
+                    EmailEncodingKey = 'ISO-8859-1', Alias = 'jone', TimeZoneSidKey = 'America/Los_Angeles', LocaleSidKey = 'en_US',
+                    LanguageLocaleKey = 'en_US', UserRoleId = roleId, ProfileId = systemAdministrator.Id, IsActive = true, StateCode = 'AZ');
+            insert nationalStaff;
+        }
+        System.runAs(nationalStaff) {
+            Class_Offering__c classOffering = new Class_Offering__c();
+            classOffering.Date__c = Date.today() + 3;
+            classOffering.Start_Time__c = '9:00 AM';
+            classOffering.End_Time__c = '10:00 AM';
+            classOffering.OwnerId = nationalStaff.Id;
+            insert classOffering;
+
+            classOffering.OwnerId = Utils.currentUser.Id;
+            update classOffering;
+            classOffering.Date__c = Date.today() + 4;
+            classOffering.Start_Time__c = '10:00 AM';
+            classOffering.End_Time__c = '11:00 AM';
+            classOffering.OwnerId = nationalStaff.Id;
+            update classOffering;
+        }
+    }
 }

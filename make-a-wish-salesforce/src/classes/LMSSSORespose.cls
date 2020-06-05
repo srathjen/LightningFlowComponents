@@ -1,6 +1,8 @@
-/* Created by : MST
-Description : This class will be used to parse LMS SSO Response from the Call out.
-*/
+/**
+ * @description This class will be used to parse LMS SSO Response from the Call out
+ *
+ * @author MST
+ */
 public class LMSSSORespose {
     public Integer account_id;
     public Integer id;

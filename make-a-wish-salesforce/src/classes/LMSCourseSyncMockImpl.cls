@@ -1,5 +1,8 @@
-/*Created by : MST 
-Description : This class will create Mock callout and used in test classes */
+/**
+ * @description This class will create Mock callout and used in test classes
+ *
+ * @author MST
+ */
 @IsTest
 global class LMSCourseSyncMockImpl implements HttpCalloutMock {
     HttpResponse[] responses = new HttpResponse[0];
@@ -8,6 +11,5 @@ global class LMSCourseSyncMockImpl implements HttpCalloutMock {
     }
     global HttpResponse respond(HttpRequest req) {
         return responses.remove(0);
-
     }
 }

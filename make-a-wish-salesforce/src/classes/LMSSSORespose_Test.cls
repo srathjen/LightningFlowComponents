@@ -1,6 +1,8 @@
-/* Created by : MST
-Description : This class test class for LMSSSORespose.
-*/
+/**
+ * @description This class test class for LMSSSOResponse
+ *
+ * @author MST
+ */
 @IsTest
 public class LMSSSORespose_Test {
 

@@ -1,6 +1,8 @@
-/* Created by : MST
-Description : This class is the test class for LMSUserRequest.
-*/
+/**
+ * @description This class is the test class for LMSUserRequest
+ *
+ * @author MST
+ */
 @IsTest
 public class LMSUserRequest_test {
     // To parse the JSON to LMSUserRequest

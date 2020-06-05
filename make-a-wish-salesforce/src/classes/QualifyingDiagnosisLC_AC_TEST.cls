@@ -1,45 +1,45 @@
-/***************************************************************************************************
-Author      : MST Solutions
-Date        : 03/28/2018
-Description : Class contains test method for QualifyingDiagnosisLC_AC.apxc component
-*****************************************************************************************************/
+/**
+ * Author      : MST Solutions
+ * Date        : 03/28/2018
+ * Description : Class contains test method for QualifyingDiagnosisLC_AC.apxc component
+ **/
 @IsTest
 public class QualifyingDiagnosisLC_AC_TEST {
 
-	private final static Id CHAPTER_RECORD_TYPE_ID = Constant_AC.CHAPTER_RT_ID;
+    private final static Id CHAPTER_RECORD_TYPE_ID = Constant_AC.CHAPTER_RT_ID;
     private final static Id ALGORITHM_RECORD_TYPE_ID = Constant_AC.TRAVEL_ALGM_RT_ID;
 
-	@TestSetup
-	public static void setup() {
-		List<Account> accounts = TestDataFactory.createAccount(1);
-		Account account1 = accounts.get(0);
-		account1.Name = 'Make-A-Wish Arizona';
-		account1.RecordTypeId = CHAPTER_RECORD_TYPE_ID;
-		insert accounts;
+    @TestSetup
+    public static void setup() {
+        List<Account> accounts = TestDataFactory.createAccount(1);
+        Account account1 = accounts.get(0);
+        account1.Name = 'Make-A-Wish Arizona';
+        account1.RecordTypeId = CHAPTER_RECORD_TYPE_ID;
+        insert accounts;
 
-		List<ICD_Codes__c> icdCodes = TestDataFactory.createIcdCode(1);
-		ICD_Codes__c icdCode = icdCodes.get(0);
-		insert icdCode;
+        List<ICD_Codes__c> icdCodes = TestDataFactory.createIcdCode(1);
+        ICD_Codes__c icdCode = icdCodes.get(0);
+        insert icdCode;
 
-		List<Lead> leadsDataFactory = TestDataFactory.createLead(1);
-		Lead lead = leadsDataFactory.get(0);
-		lead.ChapterName__c = accounts[0].Id;
-		lead.FirstName = 'Jack';
-		lead.LastName = 'Smith';
-		lead.Hidden_Chapter_Change_Confirmation__c = account1.Id;
-		lead.is_Family_Aware_of_Referral__c = 'Yes';
-		lead.Diagnosis_Given_By_Referrer__c = 'Test Diagnosis';
-		lead.PD_ICD_Code__c = icdCode.Id;
-		lead.Company = 'MAW';
+        List<Lead> leadsDataFactory = TestDataFactory.createLead(1);
+        Lead lead = leadsDataFactory.get(0);
+        lead.ChapterName__c = accounts[0].Id;
+        lead.FirstName = 'Jack';
+        lead.LastName = 'Smith';
+        lead.Hidden_Chapter_Change_Confirmation__c = account1.Id;
+        lead.is_Family_Aware_of_Referral__c = 'Yes';
+        lead.Diagnosis_Given_By_Referrer__c = 'Test Diagnosis';
+        lead.PD_ICD_Code__c = icdCode.Id;
+        lead.Company = 'MAW';
         lead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
-		insert lead;
+        insert lead;
 
         List<Contact> contacts = TestDataFactory.createContact(1);
         Contact contact1 = contacts.get(0);
         contact1.FirstName = 'Test1';
         contact1.LastName = 'User2';
         contact1.AccountId = account1.Id;
-		contact1.ICD_10_Code__c = icdCode.Id;
+        contact1.ICD_10_Code__c = icdCode.Id;
         insert contacts;
 
         List<Case> cases = TestDataFactory.createCase(1);
@@ -103,36 +103,37 @@ public class QualifyingDiagnosisLC_AC_TEST {
         newQuestionsThree.Condition_Description__c = conditionDescription.Id;
         newQuestionsThree.Sort_Order__c = 3;
         insert medicalQuestions;
-	}
+    }
 
-	@IsTest
-	static void getMedicalInformation() {
-		Lead lead = [
-				SELECT Id, PD_ICD_Code__c
-				FROM Lead
-				WHERE Name = 'Jack Smith'
-		];
-		List<ICD_Codes__c> icdCodes = [
-				SELECT Id, Name
-				FROM ICD_Codes__c
-				WHERE Name = 'Q917'
-		];
+    @IsTest
+    static void getMedicalInformation() {
+        Lead lead = [
+                SELECT Id, PD_ICD_Code__c
+                FROM Lead
+                WHERE Name = 'Jack Smith'
+        ];
+        List<ICD_Codes__c> icdCodes = [
+                SELECT Id, Name
+                FROM ICD_Codes__c
+                WHERE Name = 'Q917'
+        ];
         List<Case> cases = [
                 SELECT Id
                 FROM Case
                 WHERE Lead__c = :lead.Id
         ];
         List<Condition_Description__c> conditionDescriptions = [
-            SELECT Id, Name, PR_Diagnosis__c
-            FROM Condition_Description__c
-            WHERE Name = 'Malignant Melanoma'
+                SELECT Id, Name, PR_Diagnosis__c
+                FROM Condition_Description__c
+                WHERE Name = 'Malignant Melanoma'
         ];
 
-		System.assertEquals(lead.PD_ICD_Code__c, icdCodes[0].Id, 'ICD Code doesnot match');
-		QualifyingDiagnosisLC_AC.getIcdCodeInfo(icdCodes[0].Name);
-		QualifyingDiagnosisLC_AC.getConditionDescInfo('Malignant Melanoma');
+        System.assertEquals(lead.PD_ICD_Code__c, icdCodes[0].Id, 'ICD Code doesnot match');
+        QualifyingDiagnosisLC_AC.getIcdCodeInfo(icdCodes[0].Name);
+        QualifyingDiagnosisLC_AC.getConditionDescInfo('Malignant Melanoma');
         QualifyingDiagnosisLC_AC.getMedicalInformation(cases[0].Id);
-        QualifyingDiagnosisLC_AC.updateQualifyingDiagnosis(conditionDescriptions[0].Name,
+        String result = QualifyingDiagnosisLC_AC.updateQualifyingDiagnosis(conditionDescriptions[0].Name,
                 icdCodes[0].Id, lead.Id, conditionDescriptions[0].PR_Diagnosis__c);
-	}
+        System.assertEquals('UPDATED', result);
+    }
 }

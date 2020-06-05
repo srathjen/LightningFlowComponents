@@ -63,7 +63,7 @@ public class BroadcastService {
 		for (Broadcast__c currRec : [
 				SELECT Id, Chapter_Name__c,Chapter_Name__r.Name,OwnerId, Owner.UserRoleId, Owner.UserRole.Name
 				FROM Broadcast__c
-				WHERE Id IN :Trigger.newMap.keySet()
+				WHERE Id IN :newBroadcastMap.keySet()
 		]) {
 			if (currRec.OwnerId != oldBroadcastMap.get(currRec.Id).OwnerId) {
 				if (ROLE_NATIONAL_STAFF.equals(currRec.Owner.UserRole.Name)) {

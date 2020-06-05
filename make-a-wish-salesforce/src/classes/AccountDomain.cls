@@ -142,7 +142,6 @@ public class AccountDomain extends trac_TriggerHandlerBase {
         Set<Id> houseHoldAccountIdsSet = new Set<Id>();
         Map<Id, String> chapterEmailMap = new Map<Id, String>();
         List<Account> accountList = new List<Account>();
-        List<Account> wishFormAccountList = new List<Account>();
         for(Account newAccount : newAccountsMap.values()) {
             Account oldAccount = oldAccountsMap.get(newAccount.Id);
             if(newAccount.RecordTypeId == IN_KIND_RECORD_TYPE_ID) {
@@ -170,14 +169,6 @@ public class AccountDomain extends trac_TriggerHandlerBase {
                 || newAccount.BillingCountry != oldAccount.BillingCountry 
                 || newAccount.BillingPostalCode != oldAccount.BillingPostalCode)) {
                     houseHoldAccountIdsSet.add(newAccount.Id);
-            }
-            if(newAccount.RecordTypeId == HOUSEHOLD_RECORD_TYPE_ID 
-                && (newAccount.Emergency_Contact_Phone__c != oldAccount.Emergency_Contact_Phone__c 
-                || newAccount.Relationship_type__c != oldAccount.Relationship_type__c 
-                || newAccount.Emergency_Contact_Middle_Name__c != oldAccount.Emergency_Contact_Middle_Name__c
-                || newAccount.Email__c != oldAccount.Email__c) 
-                && newAccount.Hidden_Wish_Form_Id__c != null) {
-                    wishFormAccountList.add(newAccount);
             }
         }
         //Update dev staff email on case

@@ -462,7 +462,7 @@ public class TaskService {
 
         String taskWhoId;
         for (Task aTask : tasks) {
-            taskWhoId = aTask.Id;
+            taskWhoId = aTask.WhoId;
 
             if (aTask.WhoId != null && taskWhoId.startsWith('003') && oldTasksMap.get(aTask.Id).WhoId != aTask.WhoId) {
                 contactIdSet.add(aTask.WhoId);

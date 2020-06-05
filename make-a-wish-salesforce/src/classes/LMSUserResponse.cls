@@ -1,6 +1,8 @@
-/* Created by : MST
-Description : This class will be used to parse LMS user Response from the Call out.
-*/
+/**
+ * @description This class will be used to parse LMS user Response from the Call out
+ *
+ * @author MST
+ */
 public class LMSUserResponse {
     public Integer id;
     public String login;

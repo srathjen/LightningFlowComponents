@@ -1,5 +1,6 @@
 /**
- * @author Steve Doucette, Traction on Demand 
+ * @description
+ * @author Steve Doucette, Traction on Demand
  * @date 3/25/2020
  */
 public class DocusignRecipientDomain extends trac_TriggerHandlerBase {
@@ -12,7 +13,6 @@ public class DocusignRecipientDomain extends trac_TriggerHandlerBase {
     public override void handleAfterInsert() {
         Set<Id> dsfsIdSet = new Set<Id>();
         Map<String, String> nameMap = new Map<String, String>();
-        Set<Id> deliveredSet = new Set<Id>();
         Map<Id, String> envelopMap = new Map<Id, String>();
         List<dsfs__DocuSign_Recipient_Status__c> dsRecipientList = new List<dsfs__DocuSign_Recipient_Status__c>();
         for (dsfs__DocuSign_Recipient_Status__c dsfs : newList) {
@@ -27,7 +27,6 @@ public class DocusignRecipientDomain extends trac_TriggerHandlerBase {
                 }
             }
         }
-        DocusignRecipientService.updateCompletedRecipient(dsfsIdSet, nameMap, newList);
         DocusignRecipientService.updateStatusRecord(envelopMap, dsRecipientList);
     }
 
@@ -46,7 +45,6 @@ public class DocusignRecipientDomain extends trac_TriggerHandlerBase {
                 dsRecipientList.add(dsfs);
             }
         }
-        DocusignRecipientService.updateRecipientName(completedIdSet, completedNameString, dsRecipientList);
         DocusignRecipientService.updateAttachmentId(completedIdSet, dsRecipientList);
     }
 }
