@@ -221,19 +221,13 @@ public class CaseService {
                 newCase.Lead__c = processLead.Id;
                 newCase.AccountId = processLead.ChapterName__c;
                 newCase.ChapterName__c = processLead.ChapterName__c;
-                if (processLead.Any_medical_reason_for_moving_quickly__c.containsIgnoreCase(LEAD_MEDICAL_REASON_FOR_MOVING_QUICKLY_YES)) {
+                String medicalReason = processLead.Any_medical_reason_for_moving_quickly__c;
+                if (medicalReason.containsIgnoreCase(LEAD_MEDICAL_REASON_FOR_MOVING_QUICKLY_YES)) {
                     newCase.Rush__c = true;
                     newCase.Rush_Explanation__c = processLead.Please_Explain__c;
                     newCase.Rush_Timeframe__c = RUSH_TIME_FRAME;
                     newCase.Diagnosis_Verification_Receive_Date__c = processLead.Part_A_Received__c;
                 }
-                /* looks redundant. Removed for testing SIW-582 
-                if (processLead.Any_medical_reason_for_moving_quickly__c != null) {
-                    String medicalReason = processLead.Any_medical_reason_for_moving_quickly__c;
-                    if (medicalReason.contains(LEAD_MEDICAL_REASON_FOR_MOVING_QUICKLY_YES)) {
-                        newCase.Rush__c = true;
-                    }
-                }*/
                 newCaseList.add(newCase);
             }
 

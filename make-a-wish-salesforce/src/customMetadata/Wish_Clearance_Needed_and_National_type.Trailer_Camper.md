@@ -4,6 +4,6 @@
     <protected>false</protected>
     <values>
         <field>Wish_Clearance_Needed__c</field>
-        <value xsi:type="xsd:string">Yes</value>
+        <value xsi:type="xsd:string">No</value>
     </values>
 </CustomMetadata>

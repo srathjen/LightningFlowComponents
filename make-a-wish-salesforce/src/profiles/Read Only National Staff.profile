@@ -6598,7 +6598,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Condition_Description__c.isEligible__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -9508,7 +9508,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Diagnosis_Verification__c.Group1__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -9563,7 +9563,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Diagnosis_Verification__c.isEligible__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -10138,7 +10138,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>ICD_Codes__c.Group1__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -10168,12 +10168,12 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>ICD_Codes__c.Skip_Medical_Question__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>ICD_Codes__c.Valid_For_Wish__c</field>
         <readable>true</readable>
     </fieldPermissions>
