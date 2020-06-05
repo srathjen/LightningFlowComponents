@@ -45,7 +45,7 @@ public class ContactServiceTest {
         heartTran.Condition_Description__c = heartTransplant.Id;
         insert icdCodes;
 
-        List<Contact> contacts = TestDataFactory.createContact(8);
+        List<Contact> contacts = TestDataFactory.createContact(7);
         Contact volunteerArizona = contacts.get(0);
         volunteerArizona.RecordTypeId = VOLUNTEER_RECORD_TYPE_ID;
         volunteerArizona.AccountId = arizonaChapter.Id;
@@ -59,7 +59,8 @@ public class ContactServiceTest {
         volunteerArizona.MailingCountry = 'United States';
         volunteerArizona.MailingState = 'Arizona';
         volunteerArizona.MailingCity = 'Phoenix';
-        Contact volunteerNewYork = contacts.get(1);
+
+		Contact volunteerNewYork = contacts.get(1);
         volunteerNewYork.RecordTypeId = VOLUNTEER_RECORD_TYPE_ID;
         volunteerNewYork.AccountId = arizonaChapter.Id;
         volunteerNewYork.FirstName = 'Jack';
@@ -72,7 +73,8 @@ public class ContactServiceTest {
         volunteerNewYork.MailingCountry = 'United States';
         volunteerNewYork.MailingState = 'New York';
         volunteerNewYork.MailingCity = 'New York';
-        Contact wishChildContact1 = contacts.get(2);
+
+		Contact wishChildContact1 = contacts.get(2);
         wishChildContact1.AccountId = arizonaChapter.Id;
         wishChildContact1.FirstName = 'Jack';
         wishChildContact1.LastName = 'Smith';
@@ -87,7 +89,8 @@ public class ContactServiceTest {
         wishChildContact1.MailingCountry = 'United States';
         wishChildContact1.MailingState = 'Arizona';
         wishChildContact1.MailingCity = 'Phoenix';
-        Contact wishChildContact2 = contacts.get(3);
+
+		Contact wishChildContact2 = contacts.get(3);
         wishChildContact2.RecordTypeId = WISH_CHILD_RECORD_TYPE_ID;
         wishChildContact2.AccountId = watkinsFamily.Id;
         wishChildContact2.FirstName = 'Rebecca';
@@ -124,7 +127,8 @@ public class ContactServiceTest {
         wishChildContact2.Hidden_Zip_Code__c = '85260';
         wishChildContact2.IsContactInfoUpdated__c = true;
         wishChildContact2.isRecall_Contact_Info__c = true;
-        Contact wishChildContact2Mother = contacts.get(4);
+
+		Contact wishChildContact2Mother = contacts.get(4);
         wishChildContact2Mother.RecordTypeId = WISH_FAMILY_RECORD_TYPE_ID;
         wishChildContact2Mother.FirstName = 'Emily';
         wishChildContact2Mother.LastName = 'Watkins';
@@ -136,7 +140,8 @@ public class ContactServiceTest {
         wishChildContact2Mother.MailingCity = 'Phoenix';
         wishChildContact2Mother.Hidden_Zip_Code__c = '85260';
         wishChildContact2Mother.Relationship__c = 'Mother';
-        Contact wishChildContact2Father = contacts.get(5);
+
+		Contact wishChildContact2Father = contacts.get(5);
         wishChildContact2Father.RecordTypeId = WISH_FAMILY_RECORD_TYPE_ID;
         wishChildContact2Father.FirstName = 'Joel';
         wishChildContact2Father.LastName = 'Watkins';
@@ -165,24 +170,8 @@ public class ContactServiceTest {
         wishChildContact2Father.Hidden_State__c = 'Arizona';
         wishChildContact2Father.Hidden_Country__c = 'United States';
         wishChildContact2Father.Hidden_Zip_Code__c = '85260';
-        Contact volunteerArizona2 = contacts.get(6);
-        volunteerArizona2.RecordTypeId = VOLUNTEER_RECORD_TYPE_ID;
-        volunteerArizona2.AccountId = arizonaChapter.Id;
-        volunteerArizona2.FirstName = 'Abby';
-        volunteerArizona2.Middle_Name__c = 'Rose';
-        volunteerArizona2.LastName = 'Jones';
-        volunteerArizona2.Email = 'a.jones@email.com';
-        volunteerArizona2.Phone = '12345678';
-        volunteerArizona2.MailingPostalCode = '12345-9876';
-        volunteerArizona2.MailingStreet = 'Highland Avenue';
-        volunteerArizona2.MailingCountry = 'United States';
-        volunteerArizona2.MailingState = 'Arizona';
-        volunteerArizona2.MailingCity = 'Phoenix';
-        volunteerArizona2.is_Application__c = 'Submitted';
-        volunteerArizona2.Migrated_Record__c = true;
-        volunteerArizona2.Do_Not_Create_User__c = false;
-        volunteerArizona2.Volunteer_Role__c = 'Wish Granter';
-        Contact medProfessional = contacts.get(7);
+
+        Contact medProfessional = contacts.get(6);
         medProfessional.RecordTypeId = MEDICAL_PROFESSIONAL_RECORD_TYPE_ID;
         medProfessional.Region_Chapter__c = arizonaChapter.Id;
         medProfessional.FirstName = 'Lewis';
@@ -195,13 +184,31 @@ public class ContactServiceTest {
         medProfessional.MailingState = 'Arizona';
         medProfessional.MailingCity = 'Phoenix';
         insert contacts;
-        
+
         User volunteerUser = TestDataFactory.createVolunteerUser(1)[0];
         volunteerUser.FirstName = 'Abby';
         volunteerUser.LastName = 'Jones';
-        volunteerUser.ContactId = volunteerArizona2.Id;
-        insert volunteerUser;
-        
+		System.runAs(TestDataFactory.adminUser) {
+			insert volunteerUser;
+		}
+		Contact volunteerArizonaUpdate = new Contact();
+		volunteerArizonaUpdate.Id = volunteerUser.ContactId;
+		volunteerArizonaUpdate.FirstName = 'Abby';
+		volunteerArizonaUpdate.Middle_Name__c = 'Rose';
+		volunteerArizonaUpdate.LastName = 'Jones';
+		volunteerArizonaUpdate.Email = 'a.jones@email.com';
+		volunteerArizonaUpdate.Phone = '12345678';
+		volunteerArizonaUpdate.MailingPostalCode = '12345-9876';
+		volunteerArizonaUpdate.MailingStreet = 'Highland Avenue';
+		volunteerArizonaUpdate.MailingCountry = 'United States';
+		volunteerArizonaUpdate.MailingState = 'Arizona';
+		volunteerArizonaUpdate.MailingCity = 'Phoenix';
+		volunteerArizonaUpdate.is_Application__c = 'Submitted';
+		volunteerArizonaUpdate.Migrated_Record__c = true;
+		volunteerArizonaUpdate.Do_Not_Create_User__c = false;
+		volunteerArizonaUpdate.Volunteer_Role__c = 'Wish Granter';
+		update volunteerArizonaUpdate;
+
         List<npe4__Relationship__c> relationships = TestDataFactory.createRelationship(3);
         npe4__Relationship__c relationship1 = relationships.get(0);
         relationship1.npe4__Contact__c = wishChildContact2.Id;
@@ -220,7 +227,7 @@ public class ContactServiceTest {
         
         List<npe5__Affiliation__c> affiliations = TestDataFactory.createAffiliation(1);
         npe5__Affiliation__c affiliation1 = affiliations.get(0);
-        affiliation1.npe5__Contact__c = volunteerArizona2.Id;
+        affiliation1.npe5__Contact__c = volunteerArizonaUpdate.Id;
         affiliation1.npe5__Organization__c = arizonaChapter.Id;
         affiliation1.npe5__Status__c = 'Pending';
         affiliation1.npe5__Primary__c = true;

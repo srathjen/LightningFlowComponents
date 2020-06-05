@@ -1716,6 +1716,7 @@ public class ContactService {
 					SELECT Id, ContactId, Hidden_Contact_County__c, Hidden_Contact_Gender__c
 					FROM Case
 					WHERE ContactId IN :updatedContact.keySet()
+					AND RecordType.Name != :Constant_AC.CASE_RECORD_TYPE_DIAGNOSIS_VERIFICATION_REVIEW
 			]) {
 				if (caseRecord.Hidden_Contact_County__c != updatedContact.get(caseRecord.ContactId).County__c
 						|| caseRecord.Hidden_Contact_Gender__c != updatedContact.get(caseRecord.ContactId).Gender__c) {
