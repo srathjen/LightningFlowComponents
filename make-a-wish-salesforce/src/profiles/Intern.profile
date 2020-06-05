@@ -8340,6 +8340,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.Residing_In_US_7_Yrs__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.Residing_in_US__c</field>
         <readable>true</readable>
     </fieldPermissions>

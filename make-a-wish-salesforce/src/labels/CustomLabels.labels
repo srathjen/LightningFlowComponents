@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
         <fullName>AWSDefaultFilePathPrefix</fullName>
         <categories>SDrive</categories>
@@ -93,21 +92,21 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>CaseTrigger_Add_County</shortDescription>
-        <value>Please add county on the wish child&apos;s contact record.</value>
+        <value>Please add county on the wish child's contact record.</value>
     </labels>
     <labels>
         <fullName>CaseTrigger_Add_Region</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>CaseTrigger_Add_Region</shortDescription>
-        <value>Please add region on the wish child&apos;s contact record.</value>
+        <value>Please add region on the wish child's contact record.</value>
     </labels>
     <labels>
         <fullName>CaseTrigger_Add_Region_County</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>CaseTrigger_Add_Region_County</shortDescription>
-        <value>Please add region and county on the wish child&apos;s contact record.</value>
+        <value>Please add region and county on the wish child's contact record.</value>
     </labels>
     <labels>
         <fullName>CaseTrigger_Air_Travel_Aware</fullName>
@@ -337,7 +336,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Duplicate Lead Message 1</shortDescription>
-        <value>&apos;You can either choose &quot;No duplicate Found&quot; or any lead(s) under Select Existing Leads.&apos;</value>
+        <value>'You can either choose "No duplicate Found" or any lead(s) under Select Existing Leads.'</value>
     </labels>
     <labels>
         <fullName>Duplicate_Lead_Message_2</fullName>
@@ -345,7 +344,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Duplicate Lead Message 2</shortDescription>
-        <value>Please select an existing lead to merge or check &quot;No Duplicate Found&quot; if the leads displayed
+        <value>Please select an existing lead to merge or check "No Duplicate Found" if the leads displayed
             are not duplicates.</value>
     </labels>
     <labels>
@@ -766,6 +765,13 @@
         <value>Error while retrieving records:</value>
     </labels>
     <labels>
+        <fullName>Volunteer_Onboarding_Resided_in_US</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer_Onboarding_Resided in US</shortDescription>
+        <value>Have you resided in the United States for the last seven years?</value>
+    </labels>
+    <labels>
         <fullName>Volunteer_Opportunity_Id</fullName>
         <language>en_US</language>
         <protected>false</protected>
@@ -827,7 +833,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Volunteer Portal Alert - Specialized Training Required</shortDescription>
-        <value>Thank you for your interest in this opportunity. &apos;This opportunity requires specialized training that you have not completed,
+        <value>Thank you for your interest in this opportunity. 'This opportunity requires specialized training that you have not completed,
             contact chapter staff for more information about expanding your volunteer opportunities.</value>
     </labels>
     <labels>
@@ -908,8 +914,8 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Volunteer Portal Subsection Better Experience Content</shortDescription>
-        <value>Please select the radio option &quot;Always allow pop-ups for this
-            domain&quot;, in the URL bar (Pop up Blocker options) then click start course
+        <value>Please select the radio option "Always allow pop-ups for this
+            domain", in the URL bar (Pop up Blocker options) then click start course
             again.</value>
     </labels>
     <labels>
@@ -1430,7 +1436,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>VolunteerSignUp_Username_In_Use</shortDescription>
-        <value>The username you provided is already in use. Please enter a different username to continue the sign up process. If you have already signed up, please click &quot;Log In&quot; to access the login page.</value>
+        <value>The username you provided is already in use. Please enter a different username to continue the sign up process. If you have already signed up, please click "Log In" to access the login page.</value>
     </labels>
     <labels>
         <fullName>VolunteerSignUp_Valid_Email</fullName>
@@ -2403,7 +2409,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Referral Discussed Healthcare Provider</shortDescription>
-        <value>Has the referral been discussed with the child&apos;s healthcare provider?</value>
+        <value>Has the referral been discussed with the child's healthcare provider?</value>
     </labels>
     <labels>
         <fullName>Wish_Referral_Email</fullName>
@@ -2699,7 +2705,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Referral Other Treating Medical Professional</shortDescription>
-        <value>Please provide the best person in the Treating Medical Professional&apos;s Office to contact if different
+        <value>Please provide the best person in the Treating Medical Professional's Office to contact if different
             than the Treating Medical Professional</value>
     </labels>
     <labels>
@@ -2740,7 +2746,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Referral Placeholder Description Self Describe</shortDescription>
-        <value>Please enter a description pertaining to &apos;Self-describe&apos;.</value>
+        <value>Please enter a description pertaining to 'Self-describe'.</value>
     </labels>
     <labels>
         <fullName>Wish_Referral_Placeholder_Diagnosis_Example</fullName>

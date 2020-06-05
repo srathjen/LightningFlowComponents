@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>AddCampaign</actionName>
         <type>Default</type>
@@ -1845,7 +1844,7 @@
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </availableFields>
-        <description>Contact Merge&apos;s Found Contacts list</description>
+        <description>Contact Merge's Found Contacts list</description>
         <displayedFields>
             <field>AccountId</field>
             <isFieldManaged>false</isFieldManaged>
@@ -1905,7 +1904,7 @@ Wish Child, Wish Family- Household account</inlineHelpText>
     </fields>
     <fields>
         <fullName>Account_Email__c</fullName>
-        <description>It will be used as a hidden field to store contact&apos;s account email</description>
+        <description>It will be used as a hidden field to store contact's account email</description>
         <externalId>false</externalId>
         <formula>Account.Email__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -1917,7 +1916,7 @@ Wish Child, Wish Family- Household account</inlineHelpText>
     </fields>
     <fields>
         <fullName>Account_Phone__c</fullName>
-        <description>It will be used as a hidden filed to store the contact&apos;s account phone</description>
+        <description>It will be used as a hidden filed to store the contact's account phone</description>
         <externalId>false</externalId>
         <formula>Account.Phone</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -1979,7 +1978,7 @@ Wish Child, Wish Family- Household account</inlineHelpText>
     </fields>
     <fields>
         <fullName>Actor_Actress__c</fullName>
-        <description>It will capture the Wish Child&apos;s favorite Actor/Actress details</description>
+        <description>It will capture the Wish Child's favorite Actor/Actress details</description>
         <externalId>false</externalId>
         <label>Actor/Actress</label>
         <length>255</length>
@@ -2018,7 +2017,7 @@ Wish Child, Wish Family- Household account</inlineHelpText>
     <fields>
         <fullName>Adult_Emergency_Contact__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>It will define that this contact is Adult&apos;s emergency contact or not.</description>
+        <description>It will define that this contact is Adult's emergency contact or not.</description>
         <externalId>false</externalId>
         <label>Is Adult Emergency Contact</label>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2029,8 +2028,8 @@ Wish Child, Wish Family- Household account</inlineHelpText>
         <fullName>Alerts__c</fullName>
         <description>Displays Important Contact Alert Icons</description>
         <externalId>false</externalId>
-        <formula>Wish_Child_Icon__c &amp; &quot; &quot; &amp; Wish_Family_Icon__c  &amp; &quot; &quot; &amp; Board_Member_Icon__c &amp; &quot; &quot; &amp; 
-Medical_Professional_Icon__c  &amp; &quot; &quot; &amp; Volunteer_Icon__c &amp; &quot; &quot; &amp; Deceased_Icon__c</formula>
+        <formula>Wish_Child_Icon__c &amp; " " &amp; Wish_Family_Icon__c  &amp; " " &amp; Board_Member_Icon__c &amp; " " &amp; 
+Medical_Professional_Icon__c  &amp; " " &amp; Volunteer_Icon__c &amp; " " &amp; Deceased_Icon__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Alerts</label>
         <required>false</required>
@@ -2100,13 +2099,13 @@ Medical_Professional_Icon__c  &amp; &quot; &quot; &amp; Volunteer_Icon__c &amp; 
     </fields>
     <fields>
         <fullName>Application_Icon__c</fullName>
-        <description>Displays alerts based on &apos;Application Status&apos;es for Inactive / Onboarding Volunteers.</description>
+        <description>Displays alerts based on 'Application Status'es for Inactive / Onboarding Volunteers.</description>
         <externalId>false</externalId>
-        <formula>IF((RecordType.Name = &quot;Volunteer Contact&quot; ||  RecordType.Name = &quot;Board Member&quot;) &amp;&amp; is_Active_Volunteer__c = FALSE, 
-IF((ISPICKVAL( is_Application__c , &quot;Complete&quot;) || ISPICKVAL( is_Application__c , &quot;Approved&quot;)),  IMAGE(&quot;/resource/icons/App_Approved.png&quot;,&quot;App Complete&quot;,48,48),
-IF((ISPICKVAL( is_Application__c , &quot;Submit&quot;) || ISPICKVAL( is_Application__c , &quot;Partial Submit&quot;)|| ISPICKVAL( is_Application__c , &quot;Fully Submit&quot;)),  IMAGE(&quot;/resource/icons/App_Submitted.png&quot;,&quot;App Submitted&quot;,48,48),
-IF(ISPICKVAL( is_Application__c , &quot;Rejected&quot;),  IMAGE(&quot;/resource/icons/App_Rejected.png&quot;,&quot;App Rejected&quot;,48,48),
-IF(ISPICKVAL( is_Application__c , &quot;&quot;),  IMAGE(&quot;/resource/icons/App_None.png&quot;,&quot;No Application Received&quot;,48,48), &quot;&quot;)))), &quot;&quot;)</formula>
+        <formula>IF((RecordType.Name = "Volunteer Contact" ||  RecordType.Name = "Board Member") &amp;&amp; is_Active_Volunteer__c = FALSE, 
+IF((ISPICKVAL( is_Application__c , "Complete") || ISPICKVAL( is_Application__c , "Approved")),  IMAGE("/resource/icons/App_Approved.png","App Complete",48,48),
+IF((ISPICKVAL( is_Application__c , "Submit") || ISPICKVAL( is_Application__c , "Partial Submit")|| ISPICKVAL( is_Application__c , "Fully Submit")),  IMAGE("/resource/icons/App_Submitted.png","App Submitted",48,48),
+IF(ISPICKVAL( is_Application__c , "Rejected"),  IMAGE("/resource/icons/App_Rejected.png","App Rejected",48,48),
+IF(ISPICKVAL( is_Application__c , ""),  IMAGE("/resource/icons/App_None.png","No Application Received",48,48), "")))), "")</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Application Icon</label>
         <required>false</required>
@@ -2138,11 +2137,11 @@ IF(ISPICKVAL( is_Application__c , &quot;&quot;),  IMAGE(&quot;/resource/icons/Ap
         <fullName>BC_Icon__c</fullName>
         <description>Displays a colored warning icon based on whether a Background Check is Current, Near Expiration (i.e. the expiry date is &lt;= 30 days from today), or Expired.</description>
         <externalId>false</externalId>
-        <formula>IF(RecordType.Name = &quot;Volunteer Contact&quot; || RecordType.Name = &quot;Board Member&quot;,
-IF(ISBLANK(B_C_Expiration_Date__c)=FALSE &amp;&amp; B_C_Expiration_Date__c &lt;= TODAY(), IMAGE(&quot;/resource/icons/BCExpired.png&quot;,&quot;BC Expired&quot;,48,48),
-IF(ISBLANK(B_C_Expiration_Date__c)=FALSE &amp;&amp; B_C_Expiration_Date__c &lt;= TODAY()+30, IMAGE(&quot;/resource/icons/BCWarning.png&quot;,&quot;BC Expiring Soon&quot;,48,48),
-IF(ISBLANK(B_C_Expiration_Date__c)=FALSE &amp;&amp; B_C_Expiration_Date__c &gt; TODAY()+30, IMAGE(&quot;/resource/icons/BC_Current.png&quot;,&quot;BC Current&quot;,48,48),
-IF(ISBLANK(B_C_Expiration_Date__c)=TRUE, IMAGE(&quot;/resource/icons/BCMissing.png&quot;,&quot;BC Missing&quot;,48,48), &quot;&quot;)))),&quot;&quot;)</formula>
+        <formula>IF(RecordType.Name = "Volunteer Contact" || RecordType.Name = "Board Member",
+IF(ISBLANK(B_C_Expiration_Date__c)=FALSE &amp;&amp; B_C_Expiration_Date__c &lt;= TODAY(), IMAGE("/resource/icons/BCExpired.png","BC Expired",48,48),
+IF(ISBLANK(B_C_Expiration_Date__c)=FALSE &amp;&amp; B_C_Expiration_Date__c &lt;= TODAY()+30, IMAGE("/resource/icons/BCWarning.png","BC Expiring Soon",48,48),
+IF(ISBLANK(B_C_Expiration_Date__c)=FALSE &amp;&amp; B_C_Expiration_Date__c &gt; TODAY()+30, IMAGE("/resource/icons/BC_Current.png","BC Current",48,48),
+IF(ISBLANK(B_C_Expiration_Date__c)=TRUE, IMAGE("/resource/icons/BCMissing.png","BC Missing",48,48), "")))),"")</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>BC Icon</label>
         <required>false</required>
@@ -2805,18 +2804,18 @@ IF(ISBLANK(B_C_Expiration_Date__c)=TRUE, IMAGE(&quot;/resource/icons/BCMissing.p
         <description>Displays the Birth Month as a number to Sort in Reports</description>
         <externalId>false</externalId>
         <formula>Case( Birth_Month__c, 
-&quot;January&quot;, 1, 
-&quot;February&quot;, 2, 
-&quot;March&quot;, 3, 
-&quot;April&quot;, 4, 
-&quot;May&quot;, 5, 
-&quot;June&quot;, 6, 
-&quot;July&quot;, 7, 
-&quot;August&quot;, 8, 
-&quot;September&quot;, 9, 
-&quot;October&quot;, 10, 
-&quot;November&quot;, 11, 
-&quot;December&quot;, 12, NULL)</formula>
+"January", 1, 
+"February", 2, 
+"March", 3, 
+"April", 4, 
+"May", 5, 
+"June", 6, 
+"July", 7, 
+"August", 8, 
+"September", 9, 
+"October", 10, 
+"November", 11, 
+"December", 12, NULL)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Birth Month #</label>
         <precision>18</precision>
@@ -2941,7 +2940,7 @@ IF(Month(TODAY())=12 &amp;&amp; Birth_Month_Number__c = 1, TRUE, FALSE)))</formu
     </fields>
     <fields>
         <fullName>Board_Member_Count__c</fullName>
-        <description>Counts the number of Organization Affiliation records of the type &apos;Board Member&apos;</description>
+        <description>Counts the number of Organization Affiliation records of the type 'Board Member'</description>
         <externalId>false</externalId>
         <label>Board Member Count</label>
         <summaryFilterItems>
@@ -2963,8 +2962,8 @@ IF(Month(TODAY())=12 &amp;&amp; Birth_Month_Number__c = 1, TRUE, FALSE)))</formu
         <fullName>Board_Member_Icon__c</fullName>
         <description>Displays the Board Member icon when the affiliation count of the type Board Member is greater than 0 and they are active.  If the count is greater than zero and they are inactive it displays the Inactive Board Member Icon.</description>
         <externalId>false</externalId>
-        <formula>IF(  Board_Member_Count__c  &gt; 0 &amp;&amp;  Active_Board_Member__c =FALSE, IMAGE(&quot;/resource/icons/boardlapsed.png&quot;,&quot;Board Member&quot;,48,48), 
-IF(  Board_Member_Count__c  &gt; 0 &amp;&amp;  Active_Board_Member__c =TRUE, IMAGE(&quot;/resource/icons/board.png&quot;,&quot;Board Member&quot;,48,48), &quot;&quot;))</formula>
+        <formula>IF(  Board_Member_Count__c  &gt; 0 &amp;&amp;  Active_Board_Member__c =FALSE, IMAGE("/resource/icons/boardlapsed.png","Board Member",48,48), 
+IF(  Board_Member_Count__c  &gt; 0 &amp;&amp;  Active_Board_Member__c =TRUE, IMAGE("/resource/icons/board.png","Board Member",48,48), ""))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Board Member Icon</label>
         <required>false</required>
@@ -3039,11 +3038,11 @@ IF(  Board_Member_Count__c  &gt; 0 &amp;&amp;  Active_Board_Member__c =TRUE, IMA
         <fullName>COI_Icon__c</fullName>
         <description>Displays a Colored Warning Icon based on whether a Conflict of Interest is Current, Near Expiration or Expired.</description>
         <externalId>false</externalId>
-        <formula>IF(RecordType.Name = &quot;Volunteer Contact&quot; || RecordType.Name = &quot;Board Member&quot;,
-IF(ISBLANK(COI_Expiration_Date__c)=FALSE &amp;&amp; COI_Expiration_Date__c &lt; TODAY(), IMAGE(&quot;/resource/icons/COI_Expired.png&quot;,&quot;COI Expired&quot;,48,48), 
-IF(ISBLANK(COI_Expiration_Date__c)=FALSE &amp;&amp; COI_Expiration_Date__c &lt;= TODAY()+30, IMAGE(&quot;/resource/icons/COI_Warning.png&quot;,&quot;COI Expiring Soon&quot;,48,48), 
-IF(ISBLANK(COI_Expiration_Date__c)=FALSE &amp;&amp; COI_Expiration_Date__c &gt; TODAY()+30, IMAGE(&quot;/resource/icons/COI_Current.png&quot;,&quot;COI Current&quot;,48,48), 
-IF(ISBLANK(COI_Expiration_Date__c)=TRUE, IMAGE(&quot;/resource/icons/COI_Missing.png&quot;,&quot;COI Missing&quot;,48,48),&quot;&quot;)))),&quot;&quot;)</formula>
+        <formula>IF(RecordType.Name = "Volunteer Contact" || RecordType.Name = "Board Member",
+IF(ISBLANK(COI_Expiration_Date__c)=FALSE &amp;&amp; COI_Expiration_Date__c &lt; TODAY(), IMAGE("/resource/icons/COI_Expired.png","COI Expired",48,48), 
+IF(ISBLANK(COI_Expiration_Date__c)=FALSE &amp;&amp; COI_Expiration_Date__c &lt;= TODAY()+30, IMAGE("/resource/icons/COI_Warning.png","COI Expiring Soon",48,48), 
+IF(ISBLANK(COI_Expiration_Date__c)=FALSE &amp;&amp; COI_Expiration_Date__c &gt; TODAY()+30, IMAGE("/resource/icons/COI_Current.png","COI Current",48,48), 
+IF(ISBLANK(COI_Expiration_Date__c)=TRUE, IMAGE("/resource/icons/COI_Missing.png","COI Missing",48,48),"")))),"")</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>COI Icon</label>
         <required>false</required>
@@ -3152,7 +3151,7 @@ IF(ISBLANK(COI_Expiration_Date__c)=TRUE, IMAGE(&quot;/resource/icons/COI_Missing
     </fields>
     <fields>
         <fullName>Contact_Account_Name__c</fullName>
-        <description>It will be used as a hidden field to store the contact&apos;s account name</description>
+        <description>It will be used as a hidden field to store the contact's account name</description>
         <externalId>false</externalId>
         <formula>Account.Name</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -3207,8 +3206,8 @@ IF(ISBLANK(COI_Expiration_Date__c)=TRUE, IMAGE(&quot;/resource/icons/COI_Missing
     <fields>
         <fullName>CurrentAge__c</fullName>
         <externalId>false</externalId>
-        <formula>IF(Current_Age__c == 18 &amp;&amp; ((RecordType.Name == &apos;Wish Child&apos; &amp;&amp; Signature_Obtained_wish_Child__c == False)||(RecordType.Name == &apos;Wish Family&apos; &amp;&amp; Signature_Obtained_wish_Family__c == False)) ,TEXT(Current_Age__c)+IMAGE(&quot;/resource/1521043629000/Red_Indicator&quot;, &quot;red&quot;, 15, 15), TEXT(Current_Age__c))</formula>
-        <inlineHelpText>A &quot;!&quot; indicator will appear if (this wish participant / the wish child) turns 18--additional signatures may be needed. Check the &quot;Signature obtained&quot; box on the contact record to turn this indicator off.</inlineHelpText>
+        <formula>IF(Current_Age__c == 18 &amp;&amp; ((RecordType.Name == 'Wish Child' &amp;&amp; Signature_Obtained_wish_Child__c == False)||(RecordType.Name == 'Wish Family' &amp;&amp; Signature_Obtained_wish_Family__c == False)) ,TEXT(Current_Age__c)+IMAGE("/resource/1521043629000/Red_Indicator", "red", 15, 15), TEXT(Current_Age__c))</formula>
+        <inlineHelpText>A "!" indicator will appear if (this wish participant / the wish child) turns 18--additional signatures may be needed. Check the "Signature obtained" box on the contact record to turn this indicator off.</inlineHelpText>
         <label>Current Age</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -3289,7 +3288,7 @@ null)</formula>
         <fullName>Deceased_Icon__c</fullName>
         <description>Displays the Deceased Icon if the Deceased field is marked as TRUE</description>
         <externalId>false</externalId>
-        <formula>IF(npsp__Deceased__c =TRUE, IMAGE(&quot;/resource/icons/Deceased.png&quot;,&quot;Deceased&quot;,48,48),&quot;&quot;)</formula>
+        <formula>IF(npsp__Deceased__c =TRUE, IMAGE("/resource/icons/Deceased.png","Deceased",48,48),"")</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Deceased Icon</label>
         <required>false</required>
@@ -3304,7 +3303,7 @@ null)</formula>
     </fields>
     <fields>
         <fullName>Department__c</fullName>
-        <description>Medical Professional&apos;s department in medical facility</description>
+        <description>Medical Professional's department in medical facility</description>
         <externalId>false</externalId>
         <label>Department</label>
         <required>false</required>
@@ -3331,7 +3330,7 @@ null)</formula>
     </fields>
     <fields>
         <fullName>Diagnosis__c</fullName>
-        <description>It will have Wish Child&apos;s Medical Condition details</description>
+        <description>It will have Wish Child's Medical Condition details</description>
         <externalId>false</externalId>
         <label>Primary Diagnosis</label>
         <length>255</length>
@@ -3543,7 +3542,7 @@ null)</formula>
         <fullName>First_Last_Initial__c</fullName>
         <description>It will probably have multiple uses, including emailing sensitive medical information without using full name (medical advisory review for non migrated chapters) as well as display of available wish volunteer opportunities.</description>
         <externalId>false</externalId>
-        <formula>FirstName+&apos; &apos;+LEFT(LastName,1)</formula>
+        <formula>FirstName+' '+LEFT(LastName,1)</formula>
         <label>First + Last Initial</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -3656,7 +3655,7 @@ null)</formula>
         <fullName>HiddenBirthDate__c</fullName>
         <description>This field is used for docusign purpose.</description>
         <externalId>false</externalId>
-        <formula>If(NOT(ISBLANK(Birthdate)), text(MONTH(Birthdate)) +&apos;/&apos;+ text(DAY(Birthdate)) +&apos;/&apos;+ text(YEAR(Birthdate)),Null)</formula>
+        <formula>If(NOT(ISBLANK(Birthdate)), text(MONTH(Birthdate)) +'/'+ text(DAY(Birthdate)) +'/'+ text(YEAR(Birthdate)),Null)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden BirthDate</label>
         <required>false</required>
@@ -3698,7 +3697,7 @@ null)</formula>
     <fields>
         <fullName>Hidden_Contact_Full_Name__c</fullName>
         <externalId>false</externalId>
-        <formula>UPPER(FirstName+&apos; &apos;+LastName)</formula>
+        <formula>UPPER(FirstName+' '+LastName)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Contact Full Name</label>
         <required>false</required>
@@ -4120,8 +4119,8 @@ null)</formula>
         <description>Displays the Account Billing Address</description>
         <externalId>false</externalId>
         <formula>Account.BillingStreet &amp; BR() &amp;
-Account.BillingCity &amp; IF(ISBLANK(Account.BillingCity), &quot;&quot;, &quot;, &quot;) &amp; Account.BillingState &amp; &quot; &quot; &amp; Account.BillingPostalCode 
-&amp; IF(ISBLANK(Account.BillingCountry), &quot;&quot;, BR()&amp; Account.BillingCountry)</formula>
+Account.BillingCity &amp; IF(ISBLANK(Account.BillingCity), "", ", ") &amp; Account.BillingState &amp; " " &amp; Account.BillingPostalCode 
+&amp; IF(ISBLANK(Account.BillingCountry), "", BR()&amp; Account.BillingCountry)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Household Address</label>
         <required>false</required>
@@ -4252,10 +4251,10 @@ Account.BillingCity &amp; IF(ISBLANK(Account.BillingCity), &quot;&quot;, &quot;,
     </fields>
     <fields>
         <fullName>If_yes_Enter_Org_Name_Wish_Date_it_was__c</fullName>
-        <description>If already wish granted, please indicate the organization&apos;s name, the wish,
+        <description>If already wish granted, please indicate the organization's name, the wish,
 and the date it was or will be granted.</description>
         <externalId>false</externalId>
-        <inlineHelpText>If already wish granted, please indicate the organization&apos;s name, the wish,
+        <inlineHelpText>If already wish granted, please indicate the organization's name, the wish,
 and the date it was or will be granted.</inlineHelpText>
         <label>If Yes, Enter Org.Name,Wish&amp; Date It Was</label>
         <length>32768</length>
@@ -4297,7 +4296,7 @@ and the date it was or will be granted.</inlineHelpText>
     </fields>
     <fields>
         <fullName>Inactive_Medical_Professional_Count__c</fullName>
-        <description>Counts the Number of &apos;Former&apos; Wish affiliation records of the type &apos;Medical Professional&apos;</description>
+        <description>Counts the Number of 'Former' Wish affiliation records of the type 'Medical Professional'</description>
         <externalId>false</externalId>
         <label>Inactive Medical Professional Count</label>
         <summaryFilterItems>
@@ -4680,7 +4679,7 @@ and the date it was or will be granted.</inlineHelpText>
     </fields>
     <fields>
         <fullName>Lead_Created_Date__c</fullName>
-        <description>It will hold the value of contact&apos;s lead created date.</description>
+        <description>It will hold the value of contact's lead created date.</description>
         <externalId>false</externalId>
         <label>Lead Created Date</label>
         <required>false</required>
@@ -4777,7 +4776,7 @@ and the date it was or will be granted.</inlineHelpText>
     </fields>
     <fields>
         <fullName>Medical_Professional_Count__c</fullName>
-        <description>Counts the number of Organization Affiliation records of the type &apos;Medical Professional&apos;</description>
+        <description>Counts the number of Organization Affiliation records of the type 'Medical Professional'</description>
         <externalId>false</externalId>
         <label>Medical Professional Count</label>
         <summaryFilterItems>
@@ -4799,8 +4798,8 @@ and the date it was or will be granted.</inlineHelpText>
         <fullName>Medical_Professional_Icon__c</fullName>
         <description>Displays the Medical Professional icon when the affiliation count of the type Medical Professional  is greater than 0</description>
         <externalId>false</externalId>
-        <formula>IF(  Medical_Professional_Count__c  = 0 &amp;&amp; Inactive_Medical_Professional_Count__c &gt; 0 , IMAGE(&quot;/resource/icons/MedProfInactive.png&quot;,&quot;Inactive Medical Professional&quot;,48,48),
-IF(  Medical_Professional_Count__c  &gt; 0 , IMAGE(&quot;/resource/icons/MedProf.png&quot;,&quot;Medical Professional&quot;,48,48), &quot;&quot;))</formula>
+        <formula>IF(  Medical_Professional_Count__c  = 0 &amp;&amp; Inactive_Medical_Professional_Count__c &gt; 0 , IMAGE("/resource/icons/MedProfInactive.png","Inactive Medical Professional",48,48),
+IF(  Medical_Professional_Count__c  &gt; 0 , IMAGE("/resource/icons/MedProf.png","Medical Professional",48,48), ""))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Medical Professional Icon</label>
         <required>false</required>
@@ -4810,12 +4809,12 @@ IF(  Medical_Professional_Count__c  &gt; 0 , IMAGE(&quot;/resource/icons/MedProf
     </fields>
     <fields>
         <fullName>Medical_Professional_Status__c</fullName>
-        <description>Uses the status of a Medical Professional&apos;s Affiliation to the chapter to determine their status.</description>
+        <description>Uses the status of a Medical Professional's Affiliation to the chapter to determine their status.</description>
         <externalId>false</externalId>
-        <formula>If(Medical_Professional_Count__c &gt; 0, &quot;Active&quot;, 
- If(Medical_Professional_Count__c = 0 &amp;&amp; Inactive_Medical_Professional_Count__c &gt; 0, &quot;Inactive&quot;,&quot;&quot;))</formula>
+        <formula>If(Medical_Professional_Count__c &gt; 0, "Active", 
+ If(Medical_Professional_Count__c = 0 &amp;&amp; Inactive_Medical_Professional_Count__c &gt; 0, "Inactive",""))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>To change the status, create or update this contact&apos;s related &apos;Organization Affiliation&apos; records to a status of &apos;Active&apos; or &apos;Inactive&apos;. Note: this is the record or records related to the Chapter not a health treatment facility.</inlineHelpText>
+        <inlineHelpText>To change the status, create or update this contact's related 'Organization Affiliation' records to a status of 'Active' or 'Inactive'. Note: this is the record or records related to the Chapter not a health treatment facility.</inlineHelpText>
         <label>Medical Professional Status</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -4903,7 +4902,7 @@ IF(  Medical_Professional_Count__c  &gt; 0 , IMAGE(&quot;/resource/icons/MedProf
     </fields>
     <fields>
         <fullName>Non_Verbal__c</fullName>
-        <description>Its indicating wish child&apos;s facilitating communication</description>
+        <description>Its indicating wish child's facilitating communication</description>
         <externalId>false</externalId>
         <label>Non - Verbal</label>
         <required>false</required>
@@ -5041,11 +5040,11 @@ IF(  Medical_Professional_Count__c  &gt; 0 , IMAGE(&quot;/resource/icons/MedProf
         <fullName>Orientation_Icon__c</fullName>
         <description>Displays Alerts for Inactive / Volunteers based on the progress towards completing there Volunteer Orientation training.</description>
         <externalId>false</externalId>
-        <formula>IF((RecordType.Name = &quot;Volunteer Contact&quot; || RecordType.Name = &quot;Board Member&quot;) &amp;&amp; is_Active_Volunteer__c = FALSE,  
-IF(ISBLANK(Orientation_Completed_Date__c)=FALSE, IMAGE(&quot;/resource/icons/OR_Current.png&quot;,&quot;Completed Orientation&quot;,48,48),
-IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientation_Date__c)=FALSE &amp;&amp; Registered_Orientation_Date__c  &gt;= TODAY(),  IMAGE(&quot;/resource/icons/OR_Submitted.png&quot;,&quot;Registered for Orientation&quot;,48,48),
-IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientation_Date__c)=FALSE &amp;&amp; Registered_Orientation_Date__c  &lt; TODAY(),  IMAGE(&quot;/resource/icons/OR_Rejected.png&quot;,&quot;Registered for Orientation&quot;,48,48),
-IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientation_Date__c),  IMAGE(&quot;/resource/icons/OR_None.png&quot;,&quot;Not Registered for Orientation&quot;,48,48), &quot;&quot;)))),&quot;&quot;)</formula>
+        <formula>IF((RecordType.Name = "Volunteer Contact" || RecordType.Name = "Board Member") &amp;&amp; is_Active_Volunteer__c = FALSE,  
+IF(ISBLANK(Orientation_Completed_Date__c)=FALSE, IMAGE("/resource/icons/OR_Current.png","Completed Orientation",48,48),
+IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientation_Date__c)=FALSE &amp;&amp; Registered_Orientation_Date__c  &gt;= TODAY(),  IMAGE("/resource/icons/OR_Submitted.png","Registered for Orientation",48,48),
+IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientation_Date__c)=FALSE &amp;&amp; Registered_Orientation_Date__c  &lt; TODAY(),  IMAGE("/resource/icons/OR_Rejected.png","Registered for Orientation",48,48),
+IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientation_Date__c),  IMAGE("/resource/icons/OR_None.png","Not Registered for Orientation",48,48), "")))),"")</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Orientation Icon</label>
         <required>false</required>
@@ -5057,10 +5056,10 @@ IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientat
         <fullName>Orientation_Status__c</fullName>
         <description>Displays the Orientation Status Formula Details based on the Dates in either the Registered Orientation Date OR Orientation Completed Date fields</description>
         <externalId>false</externalId>
-        <formula>IF(ISBLANK(Orientation_Completed_Date__c)=FALSE, &quot;Completed&quot;,
-IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientation_Date__c)=FALSE &amp;&amp; Registered_Orientation_Date__c &gt;= TODAY(), &quot;Registered&quot;,
-IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientation_Date__c)=FALSE &amp;&amp; Registered_Orientation_Date__c &lt; TODAY(), &quot;Missed&quot;,
-IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientation_Date__c), &quot;Not Registered&quot;,&quot;&quot;))))</formula>
+        <formula>IF(ISBLANK(Orientation_Completed_Date__c)=FALSE, "Completed",
+IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientation_Date__c)=FALSE &amp;&amp; Registered_Orientation_Date__c &gt;= TODAY(), "Registered",
+IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientation_Date__c)=FALSE &amp;&amp; Registered_Orientation_Date__c &lt; TODAY(), "Missed",
+IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientation_Date__c), "Not Registered",""))))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Orientation Status</label>
         <required>false</required>
@@ -5260,7 +5259,7 @@ IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientat
     </fields>
     <fields>
         <fullName>Preferred_Name__c</fullName>
-        <description>It will capture the wish child&apos;s preferred name.</description>
+        <description>It will capture the wish child's preferred name.</description>
         <externalId>false</externalId>
         <label>Preferred Name</label>
         <length>100</length>
@@ -5851,8 +5850,8 @@ IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientat
     </fields>
     <fields>
         <fullName>RE_Import_Id__c</fullName>
-        <description>&quot;MAWWISHDATAID, IMPORTID
-|ID, IMPORT_ID&quot;</description>
+        <description>"MAWWISHDATAID, IMPORTID
+|ID, IMPORT_ID"</description>
         <externalId>false</externalId>
         <label>RE Import Id</label>
         <length>255</length>
@@ -5864,8 +5863,8 @@ IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientat
     </fields>
     <fields>
         <fullName>RE_Language_Notes__c</fullName>
-        <description>&quot;PRIMARY_LANGUAGE
-|DESCRIPTION &amp; SKILL_LEVEL&quot;</description>
+        <description>"PRIMARY_LANGUAGE
+|DESCRIPTION &amp; SKILL_LEVEL"</description>
         <externalId>false</externalId>
         <label>RE Language Notes</label>
         <length>255</length>
@@ -5877,8 +5876,8 @@ IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientat
     </fields>
     <fields>
         <fullName>RE_Language__c</fullName>
-        <description>&quot;PRIMARY_LANGUAGE
-|DESCRIPTION &amp; SKILL_LEVEL&quot;</description>
+        <description>"PRIMARY_LANGUAGE
+|DESCRIPTION &amp; SKILL_LEVEL"</description>
         <externalId>false</externalId>
         <label>RE Language</label>
         <length>255</length>
@@ -6261,8 +6260,8 @@ IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientat
     </fields>
     <fields>
         <fullName>RE_Professional_Skills_Other_Notes__c</fullName>
-        <description>&quot;DESCRIPTION
-COMMENTS&quot;</description>
+        <description>"DESCRIPTION
+COMMENTS"</description>
         <externalId>false</externalId>
         <label>RE Professional Skills (Other Notes)</label>
         <length>255</length>
@@ -6335,8 +6334,8 @@ COMMENTS&quot;</description>
     <fields>
         <fullName>RE_Record_Id__c</fullName>
         <caseSensitive>false</caseSensitive>
-        <description>&quot;MAWWISHDATAID, IMPORTID 
-|ID, IMPORT_ID&quot;</description>
+        <description>"MAWWISHDATAID, IMPORTID 
+|ID, IMPORT_ID"</description>
         <externalId>true</externalId>
         <label>RE_Record_Id</label>
         <length>50</length>
@@ -7253,6 +7252,32 @@ null)</formula>
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>Residing_In_US_7_Yrs__c</fullName>
+        <description>SIW-522</description>
+        <externalId>false</externalId>
+        <label>Residing In US 7 Yrs</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
         <fullName>Residing_in_US__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
@@ -7500,7 +7525,7 @@ null)</formula>
     </fields>
     <fields>
         <fullName>Snack_Food__c</fullName>
-        <description>This will capture the wish child&apos;s snack food details.</description>
+        <description>This will capture the wish child's snack food details.</description>
         <externalId>false</externalId>
         <label>Snack Food</label>
         <length>255</length>
@@ -7647,7 +7672,7 @@ provide contact information for each site on which you are active.</inlineHelpTe
     </fields>
     <fields>
         <fullName>Specialty_Notes__c</fullName>
-        <description>Notes related to a medical professional&apos;s specialty or areas of practice</description>
+        <description>Notes related to a medical professional's specialty or areas of practice</description>
         <externalId>false</externalId>
         <label>Specialty Notes</label>
         <required>false</required>
@@ -7814,7 +7839,7 @@ provide contact information for each site on which you are active.</inlineHelpTe
     </fields>
     <fields>
         <fullName>Sport_Athlete__c</fullName>
-        <description>It will capture the Wish Child&apos;s  favorite Sport/Athlete details</description>
+        <description>It will capture the Wish Child's  favorite Sport/Athlete details</description>
         <externalId>false</externalId>
         <label>Sport/Athlete</label>
         <length>255</length>
@@ -8277,7 +8302,7 @@ provide contact information for each site on which you are active.</inlineHelpTe
     </fields>
     <fields>
         <fullName>TV_Show__c</fullName>
-        <description>It will capture the wish child&apos;s favorite TV show details</description>
+        <description>It will capture the wish child's favorite TV show details</description>
         <externalId>false</externalId>
         <label>TV Show</label>
         <length>255</length>
@@ -8562,7 +8587,7 @@ provide contact information for each site on which you are active.</inlineHelpTe
     </fields>
     <fields>
         <fullName>Volunteer_Count__c</fullName>
-        <description>Counts the number of Organization Affiliation records of the type &apos;Volunteer&apos;</description>
+        <description>Counts the number of Organization Affiliation records of the type 'Volunteer'</description>
         <externalId>false</externalId>
         <label>Volunteer Count</label>
         <summaryFilterItems>
@@ -8588,8 +8613,8 @@ provide contact information for each site on which you are active.</inlineHelpTe
         <fullName>Volunteer_Icon__c</fullName>
         <description>Displays the volunteer icon when the affiliation count of the type volunteer is greater than 0</description>
         <externalId>false</externalId>
-        <formula>IF( Volunteer_Count__c &gt; 0 &amp;&amp; is_Active_Volunteer__c = TRUE, IMAGE(&quot;/resource/icons/volunteer.png&quot;,&quot;volunteer&quot;,48,48), 
-IF( Volunteer_Count__c &gt; 0 &amp;&amp; is_Active_Volunteer__c = FALSE, IMAGE(&quot;/resource/icons/volunteerlapsed.png&quot;,&quot;volunteer lapsed&quot;,48,48), &quot;&quot;))</formula>
+        <formula>IF( Volunteer_Count__c &gt; 0 &amp;&amp; is_Active_Volunteer__c = TRUE, IMAGE("/resource/icons/volunteer.png","volunteer",48,48), 
+IF( Volunteer_Count__c &gt; 0 &amp;&amp; is_Active_Volunteer__c = FALSE, IMAGE("/resource/icons/volunteerlapsed.png","volunteer lapsed",48,48), ""))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Volunteer Icon</label>
         <required>false</required>
@@ -8717,8 +8742,8 @@ IF( Volunteer_Count__c &gt; 0 &amp;&amp; is_Active_Volunteer__c = FALSE, IMAGE(&
     <fields>
         <fullName>Volunteer_Status__c</fullName>
         <externalId>false</externalId>
-        <formula>IF(npsp__Deceased__c =TRUE, IMAGE(&quot;/resource/STATUSICONS/DECEASED.png&quot;,&quot;Deceased&quot;), 
-&quot;&quot;) &amp; &quot; &quot; &amp;  Orientation_Icon__c &amp; &quot; &quot; &amp; Application_Icon__c &amp; &quot; &quot; &amp; COI_Icon__c &amp; &quot; &quot; &amp; BC_Icon__c</formula>
+        <formula>IF(npsp__Deceased__c =TRUE, IMAGE("/resource/STATUSICONS/DECEASED.png","Deceased"), 
+"") &amp; " " &amp;  Orientation_Icon__c &amp; " " &amp; Application_Icon__c &amp; " " &amp; COI_Icon__c &amp; " " &amp; BC_Icon__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Volunteer Status</label>
         <required>false</required>
@@ -8890,7 +8915,7 @@ IF( Volunteer_Count__c &gt; 0 &amp;&amp; is_Active_Volunteer__c = FALSE, IMAGE(&
     </fields>
     <fields>
         <fullName>Wish_Child_Count__c</fullName>
-        <description>Counts the number of Organization Affiliation records of the type &apos;Wish Child&apos;</description>
+        <description>Counts the number of Organization Affiliation records of the type 'Wish Child'</description>
         <externalId>false</externalId>
         <label>Wish Child Count</label>
         <summaryFilterItems>
@@ -8907,7 +8932,7 @@ IF( Volunteer_Count__c &gt; 0 &amp;&amp; is_Active_Volunteer__c = FALSE, IMAGE(&
         <fullName>Wish_Child_Icon__c</fullName>
         <description>Displays the wish child icon when the affiliation count of the type wish child is greater than 0</description>
         <externalId>false</externalId>
-        <formula>IF(  Wish_Child_Count__c &gt; 0 , IMAGE(&quot;/resource/icons/WishChild.png&quot;,&quot;Wish Child&quot;,48,48), &quot;&quot;)</formula>
+        <formula>IF(  Wish_Child_Count__c &gt; 0 , IMAGE("/resource/icons/WishChild.png","Wish Child",48,48), "")</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Wish Child Icon</label>
         <required>false</required>
@@ -8960,7 +8985,7 @@ IF( Volunteer_Count__c &gt; 0 &amp;&amp; is_Active_Volunteer__c = FALSE, IMAGE(&
         <fullName>Wish_Family_Icon__c</fullName>
         <description>Displays the wish family icon when the affiliation count of the type wish family is greater than 0</description>
         <externalId>false</externalId>
-        <formula>IF( Wish_Family_Count__c &gt; 0 , IMAGE(&quot;/resource/icons/WishFamily.png&quot;,&quot;Wish Family&quot;,48,48), &quot;&quot;)</formula>
+        <formula>IF( Wish_Family_Count__c &gt; 0 , IMAGE("/resource/icons/WishFamily.png","Wish Family",48,48), "")</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Wish Family Icon</label>
         <required>false</required>
@@ -9078,9 +9103,9 @@ IF( Volunteer_Count__c &gt; 0 &amp;&amp; is_Active_Volunteer__c = FALSE, IMAGE(&
                     <label>Support Group</label>
                 </value>
                 <value>
-                    <fullName>Brochure at the doctor&apos;s office</fullName>
+                    <fullName>Brochure at the doctor's office</fullName>
                     <default>false</default>
-                    <label>Brochure at the doctor&apos;s office</label>
+                    <label>Brochure at the doctor's office</label>
                 </value>
                 <value>
                     <fullName>Make-A-Wish hospital presence</fullName>
@@ -9287,7 +9312,7 @@ IF( Volunteer_Count__c &gt; 0 &amp;&amp; is_Active_Volunteer__c = FALSE, IMAGE(&
         <fullName>is_Application__c</fullName>
         <description>Tracks the status of a volunteers Role Selection and COI progress</description>
         <externalId>false</externalId>
-        <inlineHelpText>Tracks the status of a volunteer&apos;s Role selection. Previously used to track Application Status (prior to 2020).</inlineHelpText>
+        <inlineHelpText>Tracks the status of a volunteer's Role selection. Previously used to track Application Status (prior to 2020).</inlineHelpText>
         <label>Role Selection Status</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -9366,20 +9391,20 @@ IF( Volunteer_Count__c &gt; 0 &amp;&amp; is_Active_Volunteer__c = FALSE, IMAGE(&
         <description>Formula: Uses primary address type field to determine Home Address from Mailing or Other address.</description>
         <externalId>false</externalId>
         <formula>IF(
-  ISPICKVAL(npe01__Primary_Address_Type__c,&quot;Home&quot;),
-  IF(ISBLANK(MailingStreet), &quot;&quot;, MailingStreet &amp; &quot;, &quot;) &amp; 
-  IF(ISBLANK(MailingCity), &quot;&quot;, MailingCity &amp; &quot;, &quot;)&amp; 
-  IF(ISBLANK(MailingState), &quot;&quot;, MailingState &amp; &quot; &quot;)&amp; 
-  IF(ISBLANK(MailingPostalCode), &quot;&quot;, MailingPostalCode) &amp; 
-  IF(ISBLANK(MailingCountry), &quot;&quot;, &quot;, &quot; &amp;MailingCountry)
+  ISPICKVAL(npe01__Primary_Address_Type__c,"Home"),
+  IF(ISBLANK(MailingStreet), "", MailingStreet &amp; ", ") &amp; 
+  IF(ISBLANK(MailingCity), "", MailingCity &amp; ", ")&amp; 
+  IF(ISBLANK(MailingState), "", MailingState &amp; " ")&amp; 
+  IF(ISBLANK(MailingPostalCode), "", MailingPostalCode) &amp; 
+  IF(ISBLANK(MailingCountry), "", ", " &amp;MailingCountry)
 ,
-IF(ISPICKVAL(npe01__Secondary_Address_Type__c,&quot;Home&quot;),
-  IF(ISBLANK(OtherStreet), &quot;&quot;, OtherStreet &amp; &quot;, &quot;) &amp; 
-  IF(ISBLANK(OtherCity), &quot;&quot;, OtherCity &amp; &quot;, &quot;)&amp; 
-  IF(ISBLANK(OtherState), &quot;&quot;, OtherState &amp; &quot; &quot;)&amp; 
-  IF(ISBLANK(OtherPostalCode), &quot;&quot;, OtherPostalCode) &amp; 
-  IF(ISBLANK(OtherCountry), &quot;&quot;, &quot;, &quot; &amp; OtherCountry)
-  ,&quot;&quot;
+IF(ISPICKVAL(npe01__Secondary_Address_Type__c,"Home"),
+  IF(ISBLANK(OtherStreet), "", OtherStreet &amp; ", ") &amp; 
+  IF(ISBLANK(OtherCity), "", OtherCity &amp; ", ")&amp; 
+  IF(ISBLANK(OtherState), "", OtherState &amp; " ")&amp; 
+  IF(ISBLANK(OtherPostalCode), "", OtherPostalCode) &amp; 
+  IF(ISBLANK(OtherCountry), "", ", " &amp; OtherCountry)
+  ,""
 )
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -9393,7 +9418,7 @@ IF(ISPICKVAL(npe01__Secondary_Address_Type__c,&quot;Home&quot;),
     <fields>
         <fullName>npe01__Last_Donation_Date__c</fullName>
         <deprecated>false</deprecated>
-        <description>Formula:  The Last Donation Date of the Account where this Contact is the One to One Contact.   This has been superseded by the &apos;Last Gift Date&apos; field in the Households package.</description>
+        <description>Formula:  The Last Donation Date of the Account where this Contact is the One to One Contact.   This has been superseded by the 'Last Gift Date' field in the Households package.</description>
         <externalId>false</externalId>
         <formula>if( Account.npe01__One2OneContact__c = Id ,
 Account.npe01__LastDonationDate__c,
@@ -9408,7 +9433,7 @@ null
     <fields>
         <fullName>npe01__Lifetime_Giving_History_Amount__c</fullName>
         <deprecated>false</deprecated>
-        <description>Formula:  The Lifetime Donation Amount of the Account where this Contact is the One to One Contact.  This field has been superseded by the &apos;Total Amount&apos; field in the Households package.</description>
+        <description>Formula:  The Lifetime Donation Amount of the Account where this Contact is the One to One Contact.  This field has been superseded by the 'Total Amount' field in the Households package.</description>
         <externalId>false</externalId>
         <formula>IF( Account.npe01__One2OneContact__c = Id ,
 Account.npe01__LifetimeDonationHistory_Amount__c,
@@ -9426,11 +9451,11 @@ null
     <fields>
         <fullName>npe01__Organization_Type__c</fullName>
         <deprecated>false</deprecated>
-        <description>Formula: In order of preference, the SYSTEM_AccountType field, the Account Type field, and &quot;Organization&quot;.</description>
+        <description>Formula: In order of preference, the SYSTEM_AccountType field, the Account Type field, and "Organization".</description>
         <externalId>false</externalId>
-        <formula>NULLVALUE(IF( Account.npe01__SYSTEM_AccountType__c==&quot;&quot;, TEXT(Account.Type),Account.npe01__SYSTEM_AccountType__c),&quot;Organization&quot; )</formula>
+        <formula>NULLVALUE(IF( Account.npe01__SYSTEM_AccountType__c=="", TEXT(Account.Type),Account.npe01__SYSTEM_AccountType__c),"Organization" )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>Formula: In order of preference, the SYSTEM_AccountType field, the Account Type field, and &quot;Organization&quot;.</inlineHelpText>
+        <inlineHelpText>Formula: In order of preference, the SYSTEM_AccountType field, the Account Type field, and "Organization".</inlineHelpText>
         <label>Organization Type</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -9443,20 +9468,20 @@ null
         <description>Formula: If the Primary Address Type is Other, the Mailing Address.  If the Secondary Address Type is Other, the Other Address.</description>
         <externalId>false</externalId>
         <formula>IF(
-  ISPICKVAL(npe01__Primary_Address_Type__c,&quot;Other&quot;),
-  IF(ISBLANK(MailingStreet), &quot;&quot;, MailingStreet &amp; &quot;, &quot;) &amp; 
-  IF(ISBLANK(MailingCity), &quot;&quot;, MailingCity &amp; &quot;, &quot;)&amp; 
-  IF(ISBLANK(MailingState), &quot;&quot;, MailingState &amp; &quot; &quot;)&amp; 
-  IF(ISBLANK(MailingPostalCode), &quot;&quot;, MailingPostalCode) &amp; 
-  IF(ISBLANK(MailingCountry), &quot;&quot;, &quot;, &quot; &amp;MailingCountry)
+  ISPICKVAL(npe01__Primary_Address_Type__c,"Other"),
+  IF(ISBLANK(MailingStreet), "", MailingStreet &amp; ", ") &amp; 
+  IF(ISBLANK(MailingCity), "", MailingCity &amp; ", ")&amp; 
+  IF(ISBLANK(MailingState), "", MailingState &amp; " ")&amp; 
+  IF(ISBLANK(MailingPostalCode), "", MailingPostalCode) &amp; 
+  IF(ISBLANK(MailingCountry), "", ", " &amp;MailingCountry)
 ,
-IF(ISPICKVAL(npe01__Secondary_Address_Type__c,&quot;Other&quot;),
-  IF(ISBLANK(OtherStreet), &quot;&quot;, OtherStreet &amp; &quot;, &quot;) &amp; 
-  IF(ISBLANK(OtherCity), &quot;&quot;, OtherCity &amp; &quot;, &quot;)&amp; 
-  IF(ISBLANK(OtherState), &quot;&quot;, OtherState &amp; &quot; &quot;)&amp; 
-  IF(ISBLANK(OtherPostalCode), &quot;&quot;, OtherPostalCode) &amp; 
-  IF(ISBLANK(OtherCountry), &quot;&quot;, &quot;, &quot; &amp; OtherCountry)
-  ,&quot;&quot;
+IF(ISPICKVAL(npe01__Secondary_Address_Type__c,"Other"),
+  IF(ISBLANK(OtherStreet), "", OtherStreet &amp; ", ") &amp; 
+  IF(ISBLANK(OtherCity), "", OtherCity &amp; ", ")&amp; 
+  IF(ISBLANK(OtherState), "", OtherState &amp; " ")&amp; 
+  IF(ISBLANK(OtherPostalCode), "", OtherPostalCode) &amp; 
+  IF(ISBLANK(OtherCountry), "", ", " &amp; OtherCountry)
+  ,""
 )
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -9654,11 +9679,11 @@ IF(ISPICKVAL(npe01__Secondary_Address_Type__c,&quot;Other&quot;),
     <fields>
         <fullName>npe01__Type_of_Account__c</fullName>
         <deprecated>false</deprecated>
-        <description>Formula: &quot;Individual&quot; or &quot;Organization&quot; depending on Account setting.</description>
+        <description>Formula: "Individual" or "Organization" depending on Account setting.</description>
         <externalId>false</externalId>
-        <formula>IF(Account.npe01__SYSTEMIsIndividual__c,&quot;Individual&quot;,&quot;Organization&quot;)</formula>
+        <formula>IF(Account.npe01__SYSTEMIsIndividual__c,"Individual","Organization")</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>Formula: &quot;Individual&quot; or &quot;Organization&quot; depending on Account setting.</inlineHelpText>
+        <inlineHelpText>Formula: "Individual" or "Organization" depending on Account setting.</inlineHelpText>
         <label>Type of Account</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -9681,9 +9706,9 @@ IF(ISPICKVAL(npe01__Secondary_Address_Type__c,&quot;Other&quot;),
     <fields>
         <fullName>npe01__WorkPhone__c</fullName>
         <deprecated>false</deprecated>
-        <description>See &apos;Preferred Phone&apos; field.</description>
+        <description>See 'Preferred Phone' field.</description>
         <externalId>false</externalId>
-        <inlineHelpText>See &apos;Preferred Phone&apos; field.</inlineHelpText>
+        <inlineHelpText>See 'Preferred Phone' field.</inlineHelpText>
         <label>Work Phone</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -9696,20 +9721,20 @@ IF(ISPICKVAL(npe01__Secondary_Address_Type__c,&quot;Other&quot;),
         <description>Formula: If the Primary Address Type is Work, the Mailing Address.  If the Secondary Address Type is Work, the Other Address.</description>
         <externalId>false</externalId>
         <formula>IF(
-  ISPICKVAL(npe01__Primary_Address_Type__c,&quot;Work&quot;),
-  IF(ISBLANK(MailingStreet), &quot;&quot;, MailingStreet &amp; &quot;, &quot;) &amp; 
-  IF(ISBLANK(MailingCity), &quot;&quot;, MailingCity &amp; &quot;, &quot;)&amp; 
-  IF(ISBLANK(MailingState), &quot;&quot;, MailingState &amp; &quot; &quot;)&amp; 
-  IF(ISBLANK(MailingPostalCode), &quot;&quot;, MailingPostalCode) &amp; 
-  IF(ISBLANK(MailingCountry), &quot;&quot;, &quot;, &quot; &amp;MailingCountry)
+  ISPICKVAL(npe01__Primary_Address_Type__c,"Work"),
+  IF(ISBLANK(MailingStreet), "", MailingStreet &amp; ", ") &amp; 
+  IF(ISBLANK(MailingCity), "", MailingCity &amp; ", ")&amp; 
+  IF(ISBLANK(MailingState), "", MailingState &amp; " ")&amp; 
+  IF(ISBLANK(MailingPostalCode), "", MailingPostalCode) &amp; 
+  IF(ISBLANK(MailingCountry), "", ", " &amp;MailingCountry)
 ,
-IF(ISPICKVAL(npe01__Secondary_Address_Type__c,&quot;Work&quot;),
-  IF(ISBLANK(OtherStreet), &quot;&quot;, OtherStreet &amp; &quot;, &quot;) &amp; 
-  IF(ISBLANK(OtherCity), &quot;&quot;, OtherCity &amp; &quot;, &quot;)&amp; 
-  IF(ISBLANK(OtherState), &quot;&quot;, OtherState &amp; &quot; &quot;)&amp; 
-  IF(ISBLANK(OtherPostalCode), &quot;&quot;, OtherPostalCode) &amp; 
-  IF(ISBLANK(OtherCountry), &quot;&quot;, &quot;, &quot; &amp; OtherCountry)
-  ,&quot;&quot; 
+IF(ISPICKVAL(npe01__Secondary_Address_Type__c,"Work"),
+  IF(ISBLANK(OtherStreet), "", OtherStreet &amp; ", ") &amp; 
+  IF(ISBLANK(OtherCity), "", OtherCity &amp; ", ")&amp; 
+  IF(ISBLANK(OtherState), "", OtherState &amp; " ")&amp; 
+  IF(ISBLANK(OtherPostalCode), "", OtherPostalCode) &amp; 
+  IF(ISBLANK(OtherCountry), "", ", " &amp; OtherCountry)
+  ,"" 
 )
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -9724,7 +9749,7 @@ IF(ISPICKVAL(npe01__Secondary_Address_Type__c,&quot;Work&quot;),
         <fullName>npo02__AverageAmount__c</fullName>
         <defaultValue>0</defaultValue>
         <deprecated>false</deprecated>
-        <description>See excluded Opportunity Record types, excluded Opportunity types in Household setting for &apos;always roll up to primary&apos; (exclude non individual Accounts).  Do not update.  Updated by automatic process.</description>
+        <description>See excluded Opportunity Record types, excluded Opportunity types in Household setting for 'always roll up to primary' (exclude non individual Accounts).  Do not update.  Updated by automatic process.</description>
         <externalId>false</externalId>
         <label>Average Gift</label>
         <precision>16</precision>
@@ -9774,11 +9799,11 @@ IF(ISPICKVAL(npe01__Secondary_Address_Type__c,&quot;Work&quot;),
         <deprecated>false</deprecated>
         <description>Formula: Clone of the Household Mailing address (also a Formula)</description>
         <externalId>false</externalId>
-        <formula>IF(npe01__Organization_Type__c == &apos;Household Account&apos;,
+        <formula>IF(npe01__Organization_Type__c == 'Household Account',
 
 Account.BillingStreet &amp; BR() &amp;
-Account.BillingCity &amp; IF(ISBLANK(Account.BillingCity), &quot;&quot;, &quot;, &quot;) &amp; Account.BillingState &amp; &quot; &quot; &amp; Account.BillingPostalCode 
-&amp; IF(ISBLANK(Account.BillingCountry), &quot;&quot;, BR()&amp; Account.BillingCountry),
+Account.BillingCity &amp; IF(ISBLANK(Account.BillingCity), "", ", ") &amp; Account.BillingState &amp; " " &amp; Account.BillingPostalCode 
+&amp; IF(ISBLANK(Account.BillingCountry), "", BR()&amp; Account.BillingCountry),
 
 npo02__Household__r.npo02__Formula_MailingAddress__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -9793,7 +9818,7 @@ npo02__Household__r.npo02__Formula_MailingAddress__c)</formula>
         <deprecated>false</deprecated>
         <description>Formula: Simple formula of Household Phone field.</description>
         <externalId>false</externalId>
-        <formula>IF(npe01__Organization_Type__c == &apos;Household Account&apos;, 
+        <formula>IF(npe01__Organization_Type__c == 'Household Account', 
 Account.npo02__HouseholdPhone__c,
 npo02__Household__r.npo02__HouseholdPhone__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -9849,7 +9874,7 @@ npo02__Household__r.npo02__HouseholdPhone__c)</formula>
         <deprecated>false</deprecated>
         <description>Formula: Last Close Date field of the related Household.</description>
         <externalId>false</externalId>
-        <formula>IF(npe01__Organization_Type__c == &apos;Household Account&apos;, 
+        <formula>IF(npe01__Organization_Type__c == 'Household Account', 
 Account.npo02__LastCloseDate__c,
 npo02__Household__r.npo02__LastCloseDate__c)</formula>
         <label>Last Household Gift Date</label>
@@ -10051,7 +10076,7 @@ npo02__Household__r.npo02__LastCloseDate__c)</formula>
         <deprecated>false</deprecated>
         <description>Formula:  Total Gifts Last Year on related Household.</description>
         <externalId>false</externalId>
-        <formula>IF(npe01__Organization_Type__c == &apos;Household Account&apos;, 
+        <formula>IF(npe01__Organization_Type__c == 'Household Account', 
 Account.npo02__OppAmountLastYear__c,
 npo02__Household__r.npo02__OppAmountLastYear__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -10081,7 +10106,7 @@ npo02__Household__r.npo02__OppAmountLastYear__c)</formula>
         <deprecated>false</deprecated>
         <description>Formula:  Total Gifts This Year on related Household.</description>
         <externalId>false</externalId>
-        <formula>IF(npe01__Organization_Type__c == &apos;Household Account&apos;, 
+        <formula>IF(npe01__Organization_Type__c == 'Household Account', 
 Account.npo02__OppAmountThisYear__c,
 npo02__Household__r.npo02__OppAmountThisYear__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -10210,7 +10235,7 @@ npo02__Household__r.npo02__OppAmountThisYear__c)</formula>
         <fullName>npo02__Soft_Credit_Total__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
-        <inlineHelpText>Total amount in soft credits for this Contact&apos;s lifetime. Defined in the Household Settings tab.</inlineHelpText>
+        <inlineHelpText>Total amount in soft credits for this Contact's lifetime. Defined in the Household Settings tab.</inlineHelpText>
         <label>Soft Credit Total</label>
         <precision>18</precision>
         <required>false</required>
@@ -10277,7 +10302,7 @@ npo02__Household__r.npo02__OppAmountThisYear__c)</formula>
         <trackHistory>false</trackHistory>
         <type>Currency</type>
     </fields>
-	<fields>
+    <fields>
 	 <fullName>Expedite_timeframe__c</fullName>
     <externalId>false</externalId>
     <label>Expedite timeframe</label>
@@ -10323,7 +10348,7 @@ npo02__Household__r.npo02__OppAmountThisYear__c)</formula>
     <type>LongTextArea</type>
     <visibleLines>3</visibleLines>
 	</fields>
-    <fields>
+	<fields>
         <fullName>npo02__TotalOppAmount__c</fullName>
         <defaultValue>0</defaultValue>
         <deprecated>false</deprecated>
@@ -10342,7 +10367,7 @@ npo02__Household__r.npo02__OppAmountThisYear__c)</formula>
         <deprecated>false</deprecated>
         <description>Formula:  Total Gifts on related Household.</description>
         <externalId>false</externalId>
-        <formula>IF(npe01__Organization_Type__c == &apos;Household Account&apos;, 
+        <formula>IF(npe01__Organization_Type__c == 'Household Account', 
 Account.npo02__TotalOppAmount__c,
 npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -10387,9 +10412,9 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <fullName>npsp__Current_Address__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <deprecated>false</deprecated>
-        <description>Lookup to the current Address record for this Contact. NPSP populates the Contact&apos;s Mailing Address field with the street, city, state, and postal code from the current Address record.</description>
+        <description>Lookup to the current Address record for this Contact. NPSP populates the Contact's Mailing Address field with the street, city, state, and postal code from the current Address record.</description>
         <externalId>false</externalId>
-        <inlineHelpText>The current Address that the Contact&apos;s mailing fields are filled with.</inlineHelpText>
+        <inlineHelpText>The current Address that the Contact's mailing fields are filled with.</inlineHelpText>
         <label>Current Address</label>
         <lookupFilter>
             <active>true</active>
@@ -10398,7 +10423,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <operation>equals</operation>
                 <valueField>$Source.AccountId</valueField>
             </filterItems>
-            <infoMessage>To see all addresses for the Contact&apos;s household, enter A-* in the search window</infoMessage>
+            <infoMessage>To see all addresses for the Contact's household, enter A-* in the search window</infoMessage>
             <isOptional>true</isOptional>
         </lookupFilter>
         <referenceTo>npsp__Address__c</referenceTo>
@@ -10472,7 +10497,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
     <fields>
         <fullName>npsp__First_Soft_Credit_Amount__c</fullName>
         <deprecated>false</deprecated>
-        <description>The amount of this Contact&apos;s earliest soft credit.</description>
+        <description>The amount of this Contact's earliest soft credit.</description>
         <externalId>false</externalId>
         <inlineHelpText>The amount of the earliest soft credit.</inlineHelpText>
         <label>First Soft Credit Amount</label>
@@ -10486,7 +10511,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
     <fields>
         <fullName>npsp__First_Soft_Credit_Date__c</fullName>
         <deprecated>false</deprecated>
-        <description>The date of this Contact&apos;s earliest soft credit.</description>
+        <description>The date of this Contact's earliest soft credit.</description>
         <externalId>false</externalId>
         <inlineHelpText>The date of the earliest soft credit.</inlineHelpText>
         <label>First Soft Credit Date</label>
@@ -10500,7 +10525,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <deprecated>false</deprecated>
         <description>Holds the Id of the Household record (either Household Account, or Household object) this Contact is currently associated with (read only).</description>
         <externalId>false</externalId>
-        <formula>if(Account.npe01__SYSTEM_AccountType__c==&apos;Household Account&apos;,CASESAFEID(AccountId),CASESAFEID(npo02__Household__c))</formula>
+        <formula>if(Account.npe01__SYSTEM_AccountType__c=='Household Account',CASESAFEID(AccountId),CASESAFEID(npo02__Household__c))</formula>
         <inlineHelpText>holds the ID of the current household, whether it is a Household Account, or a Household Object.</inlineHelpText>
         <label>HHId</label>
         <required>false</required>
@@ -10511,7 +10536,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
     <fields>
         <fullName>npsp__Largest_Soft_Credit_Amount__c</fullName>
         <deprecated>false</deprecated>
-        <description>The amount of this Contact&apos;s largest soft credit.</description>
+        <description>The amount of this Contact's largest soft credit.</description>
         <externalId>false</externalId>
         <inlineHelpText>The amount of the largest soft credit.</inlineHelpText>
         <label>Largest Soft Credit Amount</label>
@@ -10525,7 +10550,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
     <fields>
         <fullName>npsp__Largest_Soft_Credit_Date__c</fullName>
         <deprecated>false</deprecated>
-        <description>The date of this Contact&apos;s largest soft credit.</description>
+        <description>The date of this Contact's largest soft credit.</description>
         <externalId>false</externalId>
         <inlineHelpText>The date of the largest soft credit.</inlineHelpText>
         <label>Largest Soft Credit Date</label>
@@ -10537,7 +10562,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
     <fields>
         <fullName>npsp__Last_Soft_Credit_Amount__c</fullName>
         <deprecated>false</deprecated>
-        <description>The amount of this Contact&apos;s most recent soft credit.</description>
+        <description>The amount of this Contact's most recent soft credit.</description>
         <externalId>false</externalId>
         <inlineHelpText>The amount of the most recent soft credit.</inlineHelpText>
         <label>Last Soft Credit Amount</label>
@@ -10551,7 +10576,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
     <fields>
         <fullName>npsp__Last_Soft_Credit_Date__c</fullName>
         <deprecated>false</deprecated>
-        <description>The date of this Contact&apos;s most recent soft credit.</description>
+        <description>The date of this Contact's most recent soft credit.</description>
         <externalId>false</externalId>
         <inlineHelpText>The date of the most recent soft credit.</inlineHelpText>
         <label>Last Soft Credit Date</label>
@@ -10639,9 +10664,9 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <fullName>npsp__Primary_Affiliation__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <deprecated>false</deprecated>
-        <description>The Account marked as Primary in this Contact&apos;s list of Organization Affiliations.</description>
+        <description>The Account marked as Primary in this Contact's list of Organization Affiliations.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Used to track the account of the contact&apos;s Organization Affiliation record that is marked primary.</inlineHelpText>
+        <inlineHelpText>Used to track the account of the contact's Organization Affiliation record that is marked primary.</inlineHelpText>
         <label>Primary Affiliation</label>
         <referenceTo>Account</referenceTo>
         <relationshipLabel>Do Not Use.  Use Organization Affiliations.</relationshipLabel>
@@ -10681,9 +10706,9 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <fullName>npsp__is_Address_Override__c</fullName>
         <defaultValue>false</defaultValue>
         <deprecated>false</deprecated>
-        <description>When selected, NPSP will not sync this Contact&apos;s address with the Household Default or Seasonal Address. Use this to maintain a separate Mailing Address for this particular Contact.</description>
+        <description>When selected, NPSP will not sync this Contact's address with the Household Default or Seasonal Address. Use this to maintain a separate Mailing Address for this particular Contact.</description>
         <externalId>false</externalId>
-        <inlineHelpText>If checked, the Contact&apos;s Current Address lookup overrides the Household&apos;s default Address or seasonal Address.</inlineHelpText>
+        <inlineHelpText>If checked, the Contact's Current Address lookup overrides the Household's default Address or seasonal Address.</inlineHelpText>
         <label>Address Override</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -18824,7 +18849,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <fullName>Contact_Account_Lookup_Validation</fullName>
         <active>true</active>
         <description>This validation will fire when volunteer contact created are updated if account lookup is not chapter account</description>
-        <errorConditionFormula>AND(RecordType.DeveloperName = &apos;Volunteer_Contact&apos;, NOT(Account.RecordType.DeveloperName = &apos;Chapter&apos;), ISNEW(), $Profile.Name  != &apos;Integration&apos;)</errorConditionFormula>
+        <errorConditionFormula>AND(RecordType.DeveloperName = 'Volunteer_Contact', NOT(Account.RecordType.DeveloperName = 'Chapter'), ISNEW(), $Profile.Name  != 'Integration')</errorConditionFormula>
         <errorDisplayField>AccountId</errorDisplayField>
         <errorMessage>You should select only chapter account</errorMessage>
     </validationRules>
@@ -18832,7 +18857,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <fullName>Contact_Birthdate_Validation</fullName>
         <active>true</active>
         <description>This validation rule is used to prevent the date you have entered in the birthday date field if the value is today or greater than today.</description>
-        <errorConditionFormula>AND(Birthdate &gt; Today(),$Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;)</errorConditionFormula>
+        <errorConditionFormula>AND(Birthdate &gt; Today(),$Profile.Name != 'Integration',$RecordType.Name = "Wish")</errorConditionFormula>
         <errorDisplayField>npo02__SystemHouseholdProcessor__c</errorDisplayField>
         <errorMessage>The birthdate entered occurs in the future. Please re-enter the birthdate.</errorMessage>
     </validationRules>
@@ -18840,7 +18865,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <fullName>Contact_Clone_Validation</fullName>
         <active>true</active>
         <description>This validation rule is used to prevent the record while Colne the record.</description>
-        <errorConditionFormula>AND(ISCLONE(),NOT(ISBLANK(Hidden_Wish_Form_Id__c)), OR($RecordType.Name = &quot;Wish Child&quot;,$RecordType.Name = &quot;Wish Family&quot;))</errorConditionFormula>
+        <errorConditionFormula>AND(ISCLONE(),NOT(ISBLANK(Hidden_Wish_Form_Id__c)), OR($RecordType.Name = "Wish Child",$RecordType.Name = "Wish Family"))</errorConditionFormula>
         <errorMessage>Please remove the value from Wish Form field.</errorMessage>
     </validationRules>
     <validationRules>
@@ -18855,13 +18880,13 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <fullName>Contact_Preferred_Email</fullName>
         <active>true</active>
         <errorConditionFormula>AND(
-ISPICKVAL( npe01__Preferred_Email__c ,&quot;&quot;),
+ISPICKVAL( npe01__Preferred_Email__c ,""),
 OR(
 LEN(npe01__AlternateEmail__c  )&gt;0,
 LEN(npe01__WorkEmail__c )&gt;0,
 LEN(npe01__HomeEmail__c  )&gt;0
 ),
-$Profile.Name  != &apos;Integration&apos;
+$Profile.Name  != 'Integration'
 )</errorConditionFormula>
         <errorDisplayField>npe01__Preferred_Email__c</errorDisplayField>
         <errorMessage>Please select a Preferred Email</errorMessage>
@@ -18870,13 +18895,13 @@ $Profile.Name  != &apos;Integration&apos;
         <fullName>Contact_Preferred_Phone</fullName>
         <active>true</active>
         <errorConditionFormula>AND(
- ISPICKVAL(npe01__PreferredPhone__c ,&quot;&quot;),
+ ISPICKVAL(npe01__PreferredPhone__c ,""),
 OR(
  LEN(MobilePhone)&gt;0,
  LEN( npe01__WorkPhone__c)&gt;0,
  LEN( OtherPhone )&gt;0
 ),
-$Profile.Name  != &apos;Integration&apos;
+$Profile.Name  != 'Integration'
 )</errorConditionFormula>
         <errorDisplayField>npe01__PreferredPhone__c</errorDisplayField>
         <errorMessage>Please select a Preferred Phone</errorMessage>
@@ -18885,14 +18910,14 @@ $Profile.Name  != &apos;Integration&apos;
         <fullName>Contact_Primary_Diagnosis_Validation</fullName>
         <active>true</active>
         <description>Used to prevent wish child record when there is no Primary Diagnosis</description>
-        <errorConditionFormula>AND(RecordType.Name == &apos;Wish Child&apos;, ISBLANK(Diagnosis__c), ISBLANK( ICD_10_Code__c ), NOT( ISCHANGED(Hidden_Medical_Physician_Email__c) ), NOT( ISCHANGED(Hidden_Medical_Physician__c) ),$Profile.Name != &apos;Integration&apos;,NOT(ISNEW()))</errorConditionFormula>
+        <errorConditionFormula>AND(RecordType.Name == 'Wish Child', ISBLANK(Diagnosis__c), ISBLANK( ICD_10_Code__c ), NOT( ISCHANGED(Hidden_Medical_Physician_Email__c) ), NOT( ISCHANGED(Hidden_Medical_Physician__c) ),$Profile.Name != 'Integration',NOT(ISNEW()))</errorConditionFormula>
         <errorMessage>Please provide the ICD Code or Primary Diagnosis.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Contact_Publicity_Candidate_Validation</fullName>
         <active>true</active>
         <errorConditionFormula>AND( Publicity_Candidate__c = TRUE, 
-ISBLANK( Reason_for_Publicity_Candidate__c ),$Profile.Name  != &apos;Integration&apos;)</errorConditionFormula>
+ISBLANK( Reason_for_Publicity_Candidate__c ),$Profile.Name  != 'Integration')</errorConditionFormula>
         <errorMessage>Please enter value for Reason for Publicity Candidate in order to enter check Publicity Candidate</errorMessage>
     </validationRules>
     <webLinks>
@@ -18977,7 +19002,7 @@ ISBLANK( Reason_for_Publicity_Candidate__c ),$Profile.Name  != &apos;Integration
         <masterLabel>Relationships Viewer</masterLabel>
         <openType>replace</openType>
         <protected>false</protected>
-        <url>{!URLFOR(&apos;/apex/npsp__REL_RelationshipsViewer?id=&apos; + Contact.Id)}</url>
+        <url>{!URLFOR('/apex/npsp__REL_RelationshipsViewer?id=' + Contact.Id)}</url>
     </webLinks>
     <webLinks>
         <fullName>npo02__Copy_Address_to_Household</fullName>

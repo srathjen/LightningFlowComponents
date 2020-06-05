@@ -2027,7 +2027,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>VolunteerLanding_VF</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>VolunteerOpportunitySelection_VF</apexPage>
@@ -8927,6 +8927,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.ReportsToId</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Residing_In_US_7_Yrs__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
