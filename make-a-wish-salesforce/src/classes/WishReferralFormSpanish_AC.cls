@@ -31,6 +31,7 @@ global class WishReferralFormSpanish_AC {
     public String formTitle { get; set; }
     public String referralRush { get; set; }
     public String selectedLang { get; set; }
+    private static final String RED = 'Red';
     public WishReferralForm_Translation__mdt formLabels { get; set; }
     public WishReferralFormSpanish_AC() {
         selectedLang = 'es';
@@ -106,16 +107,18 @@ global class WishReferralFormSpanish_AC {
             if (currLead.Has_this_child_ever_received_prior_wish__c != null) {
                 currLead.Has_this_child_ever_received_prior_wish__c = currLead.Has_this_child_ever_received_prior_wish__c.trim();
             }
-            if (currLead.Any_medical_reason_for_moving_quickly__c == 'Yes') {
-                currLead.Any_medical_reason_for_moving_quickly__c = '<font color="Red">' + currLead.Any_medical_reason_for_moving_quickly__c + '</font>';
-                currLead.Rush__c = true;
-                currLead.Referrer_Rush_Reason__c = referralRush;
+            if(currLead.Any_medical_reason_for_moving_quickly__c != null)    {
+                if(currLead.Any_medical_reason_for_moving_quickly__c.containsIgnoreCase(Label.Select_Option_Yes)) {
+                    currLead.Any_medical_reason_for_moving_quickly__c = String.format(Label.Dynamic_Font_Tag_With_Color,new List<String> {RED, currLead.Any_medical_reason_for_moving_quickly__c});
+                    currLead.Hidden_Potential_Rush__c = currLead.Any_medical_reason_for_moving_quickly__c;
+                    currLead.Rush__c = true;
+                    currLead.Referrer_Rush_Reason__c = referralRush;
+                }    else {
+                    currLead.Hidden_Potential_Rush__c = currLead.Any_medical_reason_for_moving_quickly__c;
+                }
             }
-            if (currLead.Any_medical_reason_for_moving_quickly__c != null) {
-                currLead.Hidden_Potential_Rush__c = currLead.Any_medical_reason_for_moving_quickly__c;
-            }
-            if (currLead.Has_this_child_ever_received_prior_wish__c == 'Yes') {
-                currLead.Has_this_child_ever_received_prior_wish__c = '<font color="Red">' + currLead.Has_this_child_ever_received_prior_wish__c + '</font>';
+            if (currLead.Has_this_child_ever_received_prior_wish__c.containsIgnoreCase(Label.Select_Option_yes)) {
+                currLead.Has_this_child_ever_received_prior_wish__c = String.format(Label.Dynamic_Font_Tag_With_Color, new List<String> {RED, currLead.Has_this_child_ever_received_prior_wish__c});
             }
 
             if (flag == true) {

@@ -2,7 +2,8 @@
  * @description Lead Service, centralizes Lead business rules.
  * @author Gustavo Mayer, Traction on Demand
  * @createdDate 2/27/2020
- *@updated Bmac 06/26/2020 SIW-616 lines 770, 841, 857*/
+ * @updated Bmac 06/26/2020 SIW-616 lines 770, 841, 857
+ * @updated CSmith 06/05/2020 SIW-539 prevent any_medical_reason_for_moving_quickly__c from being reset. resetLead and resetLeadDVMedicalSummary methods */
 public class LeadService {
 
     private static final String INSTANCE_URL = Endpoints__c.getInstance().Instance_URL__c;
@@ -79,7 +80,6 @@ public class LeadService {
         ];
         lead.Admitting_diagnosis__c = EMPTY;
         lead.Angina__c = EMPTY;
-        lead.Any_medical_reason_for_moving_quickly__c = lead.Hidden_Potential_Rush__c;
         lead.Arrhythmia__c = EMPTY;
         lead.Child_will_ultimately_die_prematurely__c = false;
         lead.Chronic_Heart_Failure__c = EMPTY;
@@ -160,7 +160,6 @@ public class LeadService {
         }
         lead.Admitting_diagnosis__c = EMPTY;
         lead.Angina__c = EMPTY;
-        lead.Any_medical_reason_for_moving_quickly__c = lead.Hidden_Potential_Rush__c;
         lead.Arrhythmia__c = EMPTY;
         lead.Child_will_ultimately_die_prematurely__c = false;
         lead.Chronic_Heart_Failure__c = EMPTY;
