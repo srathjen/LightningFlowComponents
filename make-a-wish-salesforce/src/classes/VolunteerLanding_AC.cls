@@ -651,11 +651,6 @@ public class VolunteerLanding_AC {
             } else {
                 newCheck.Hidden_Display_Popup__c = false;
             }
-             /*if (volunteercon.Residing_in_US__c) {
-                newCheck.Resided_in_US_for_past_7_years__c = BACKGROUND_CHECK_RESIDED_IN_US_FOR_PAST_7_YEARS_YES;
-            } else {
-                newCheck.Resided_in_US_for_past_7_years__c = BACKGROUND_CHECK_RESIDED_IN_US_FOR_PAST_7_YEARS_NO;
-            }*/
             newCheck.Resided_in_US_for_past_7_years__c = volunteercon.Residing_In_US_7_Yrs__c;
             log = String.valueOf(newCheck);
             insert newCheck;
