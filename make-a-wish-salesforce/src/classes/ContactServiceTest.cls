@@ -34,7 +34,15 @@ public class ContactServiceTest {
         watkinsFamily.BillingPostalCode = '85260';
         insert accounts;
         
-        List<ICD_Codes__c> icdCodes = TestDataFactory.createIcdCode(1);
+        List<Condition_Description__c> conditionsList = TestDataFactory.createConditionDescription(1);
+        Condition_Description__c heartTransplant = conditionsList.get(0);
+        heartTransplant.Name = 'Heart Transplant';
+        insert conditionsList;
+        
+        List<ICD_Codes__c> icdCodes = TestDataFactory.createIcdCode(2);
+        ICD_Codes__c heartTran = icdCodes.get(1);
+        heartTran.Name = 'T86.2';
+        heartTran.Condition_Description__c = heartTransplant.Id;
         insert icdCodes;
 
         List<Contact> contacts = TestDataFactory.createContact(8);
@@ -69,6 +77,10 @@ public class ContactServiceTest {
         wishChildContact1.FirstName = 'Jack';
         wishChildContact1.LastName = 'Smith';
         wishChildContact1.ICD_10_Code__c = icdCodes[0].Id;
+        wishChildContact1.SD1_ICD_Code__c = icdCodes[0].Id;
+        wishChildContact1.SD2_ICD_Code__c = icdCodes[0].Id;
+        wishChildContact1.SD3_ICD_Code__c = icdCodes[0].Id;
+        wishChildContact1.SD4_ICD_Code__c = icdCodes[0].Id;
         wishChildContact1.Birthdate = Date.today().addYears(-10);
         wishChildContact1.MailingPostalCode = '12345-9876';
         wishChildContact1.MailingStreet = 'Jack Street';
@@ -111,6 +123,7 @@ public class ContactServiceTest {
         wishChildContact2.Hidden_Country__c = 'United States';
         wishChildContact2.Hidden_Zip_Code__c = '85260';
         wishChildContact2.IsContactInfoUpdated__c = true;
+        wishChildContact2.isRecall_Contact_Info__c = true;
         Contact wishChildContact2Mother = contacts.get(4);
         wishChildContact2Mother.RecordTypeId = WISH_FAMILY_RECORD_TYPE_ID;
         wishChildContact2Mother.FirstName = 'Emily';
@@ -168,8 +181,10 @@ public class ContactServiceTest {
         volunteerArizona2.is_Application__c = 'Submitted';
         volunteerArizona2.Migrated_Record__c = true;
         volunteerArizona2.Do_Not_Create_User__c = false;
+        volunteerArizona2.Volunteer_Role__c = 'Wish Granter';
         Contact medProfessional = contacts.get(7);
         medProfessional.RecordTypeId = MEDICAL_PROFESSIONAL_RECORD_TYPE_ID;
+        medProfessional.Region_Chapter__c = arizonaChapter.Id;
         medProfessional.FirstName = 'Lewis';
         medProfessional.LastName = 'Hall';
         medProfessional.Email = 'l.hall@email.com';
@@ -181,10 +196,17 @@ public class ContactServiceTest {
         medProfessional.MailingCity = 'Phoenix';
         insert contacts;
         
+        User volunteerUser = TestDataFactory.createVolunteerUser(1)[0];
+        volunteerUser.FirstName = 'Abby';
+        volunteerUser.LastName = 'Jones';
+        volunteerUser.ContactId = volunteerArizona2.Id;
+        insert volunteerUser;
+        
         List<npe4__Relationship__c> relationships = TestDataFactory.createRelationship(3);
         npe4__Relationship__c relationship1 = relationships.get(0);
         relationship1.npe4__Contact__c = wishChildContact2.Id;
         relationship1.npe4__RelatedContact__c = wishChildContact2Mother.Id;
+        relationship1.Parent_Legal_Guardian__c = true;
         npe4__Relationship__c relationship2 = relationships.get(1);
         relationship2.npe4__Contact__c = wishChildContact2.Id;
         relationship2.npe4__RelatedContact__c = medProfessional.Id;
@@ -193,6 +215,7 @@ public class ContactServiceTest {
         npe4__Relationship__c relationship3 = relationships.get(2);
         relationship3.npe4__Contact__c = wishChildContact2.Id;
         relationship3.npe4__RelatedContact__c = wishChildContact2Father.Id;
+        relationship3.Parent_Legal_Guardian__c = true;
         insert relationships;
         
         List<npe5__Affiliation__c> affiliations = TestDataFactory.createAffiliation(1);
@@ -200,16 +223,19 @@ public class ContactServiceTest {
         affiliation1.npe5__Contact__c = volunteerArizona2.Id;
         affiliation1.npe5__Organization__c = arizonaChapter.Id;
         affiliation1.npe5__Status__c = 'Pending';
+        affiliation1.npe5__Primary__c = true;
         insert affiliations;
         
-        List<Role__c> roles = TestDataFactory.createRole(2, true);
+        List<Role__c> roles = TestDataFactory.createRole(3, true);
         Role__c wishGranterRole = roles.get(0);
         wishGranterRole.Name = 'Wish Granter';
         Role__c wishGranterMentorRole = roles.get(1);
         wishGranterMentorRole.Name = 'Wish Granter Mentor';
+        Role__c singleDayEvent = roles.get(2);
+        singleDayEvent.Name = 'Single Day Event Volunteer';
         insert roles;
         
-        List<Chapter_Role__c> chapterRoles = TestDataFactory.createChapterRole(3);
+        List<Chapter_Role__c> chapterRoles = TestDataFactory.createChapterRole(4);
         Chapter_Role__c wishGranterArizonaRole = chapterRoles.get(0);
         wishGranterArizonaRole.Chapter_Name__c = arizonaChapter.Id;
         wishGranterArizonaRole.Role_Name__c = wishGranterRole.Id;
@@ -225,6 +251,12 @@ public class ContactServiceTest {
         wishGranterMentorChapterRole.Role_Name__c = wishGranterRole.Id;
         wishGranterMentorChapterRole.Background_Check_Required__c = false;
         wishGranterMentorChapterRole.COI_Required__c = false;
+        wishGranterMentorChapterRole.Add_to_New_Volunteers_Automatically__c = true;
+        Chapter_Role__c singleDayArizonaRole = chapterRoles.get(3);
+        singleDayArizonaRole.Chapter_Name__c = arizonaChapter.Id;
+        singleDayArizonaRole.Role_Name__c = singleDayEvent.Id;
+        singleDayArizonaRole.Background_Check_Required__c = false;
+        singleDayArizonaRole.COI_Required__c = false;
         insert chapterRoles;
         
         List<Volunteer_Roles__c> volunteerRoles = TestDataFactory.createVolunteerRole(2);
@@ -293,15 +325,34 @@ public class ContactServiceTest {
         volunteerTraining.Class_Offering__c = classOfferingTraining.Id;
         insert volunteerOrientationTrainings;
         
-        List<Volunteer_Opportunity__c> volunteerOpportunities = TestDataFactory.createVolunteerOpportunity(1);
+        List<Volunteer_Opportunity__c> volunteerOpportunities = TestDataFactory.createVolunteerOpportunity(2);
         Volunteer_Opportunity__c volunteerOpportunity = volunteerOpportunities.get(0);
         volunteerOpportunity.Volunteer_Name__c = volunteerArizona.Id;
         volunteerOpportunity.RecordTypeId = Constant_AC.WISH_VOLUNTEER_OPPORTUNITY_ID;
         volunteerOpportunity.Chapter_Role_Opportunity__c = wishGranterArizonaRole.Id;
         volunteerOpportunity.Status__c = 'Approved';
+        Volunteer_Opportunity__c volunteerOpportunitySingleDay = volunteerOpportunities.get(1);
+        volunteerOpportunitySingleDay.Volunteer_Name__c = volunteerArizona.Id;
+        volunteerOpportunitySingleDay.RecordTypeId = Constant_AC.WISH_VOLUNTEER_OPPORTUNITY_ID;
+        volunteerOpportunitySingleDay.Chapter_Role_Opportunity__c = singleDayArizonaRole.Id;
+        volunteerOpportunitySingleDay.Status__c = 'Approved';
         insert volunteerOpportunities;
         
-        insert TestDataFactory.createQualifiedLead(arizonaChapter.Id, icdCodes[0].Id);
+        Lead qualifiedLead = TestDataFactory.createQualifiedLead(arizonaChapter.Id, icdCodes[0].Id);
+        qualifiedLead.Treating_Medical_Professional_Contact_Id__c = medProfessional.Id;
+        insert qualifiedLead;
+        
+        Office__c mawAzOffice = TestDataFactory.createOffice(1)[0];
+        mawAzOffice.Name = 'Make-A-Wish-Arizona';
+        mawAzOffice.Chapter__c = arizonaChapter.Id;
+        insert mawAzOffice;
+        
+        Zip_Code__c zipAz = TestDataFactory.createZipCode(1)[0];
+        zipAz.Name = '85069';
+        zipAz.Office__c = mawAzOffice.Id;
+        zipAz.External_Id__c = '85069';
+        insert zipAz;
+        
         trac_TriggerHandlerBase.blockTrigger = false;
     }
 
@@ -733,7 +784,6 @@ public class ContactServiceTest {
     
     @isTest
     private static void validateUpdateEmailAddress() {
-        //SCC-79 need to set relationship.Parent_Legal_Guardian__c = true but causes test failure due to RelationshipOnAfterInsertTriggerHandler
         List<Contact> contactList = new List<Contact>();
         Map<Id, Contact> contactMap = new Map<Id, Contact>();
         for(Contact contact : [SELECT Id, FirstName, LastName, Name, Email FROM Contact WHERE Email != null]) {
@@ -820,6 +870,155 @@ public class ContactServiceTest {
         }
         Test.startTest();
         ContactService.updateWishChildContactInfo(contactList);
+        Test.stopTest();
+    }
+    
+    @isTest
+    private static void validateMatchConditionDescription() {
+        ICD_Codes__c heartTran = [
+            SELECT Id, Condition_Description__c, Condition_Description__r.Name
+            FROM ICD_Codes__c 
+            WHERE Name = 'T86.2'
+        ];
+        Map<Id, Contact> wishChildMap = new Map<Id, Contact>([
+            SELECT Id, Diagnosis__c, SD2_ICD_Code__c, SD3_ICD_Code__c, SD4_ICD_Code__c, ICD_10_Code__c, SD1_ICD_Code__c
+            FROM Contact 
+            WHERE Name = 'Jack Smith'
+        ]);
+        List<Contact> contactUpdatedList = new List<Contact>();
+        for(Contact con : wishChildMap.values()) {
+            Contact contact = new Contact(Id = con.Id);
+            contact.SD1_ICD_Code__c = heartTran.Id;
+            contact.SD2_ICD_Code__c = heartTran.Id;
+            contact.SD3_ICD_Code__c = heartTran.Id;
+            contact.SD4_ICD_Code__c = heartTran.Id;
+            contact.ICD_10_Code__c = heartTran.Id;
+            contactUpdatedList.add(contact);
+        }
+        Test.startTest();
+        List<Contact> contactReturnedList = ContactService.matchConditionDescription(contactUpdatedList, wishChildMap);
+        Test.stopTest();
+        System.assert(contactReturnedList[0].SD1_Condition_Description__c == heartTran.Condition_Description__r.Name);
+    }
+    
+    @isTest
+    private static void validateCreateVolunteerRoles() {
+        Map<Id, Contact> volunteerMap = new Map<Id, Contact>([
+            SELECT Id, RecordTypeId, Volunteer_Role__c 
+            FROM Contact
+            WHERE Volunteer_Role__c != null
+        ]);
+        List<Contact> contactUpdatedList = new List<Contact>();
+        for(Contact con : volunteerMap.values()) {
+            Contact contact = new Contact(Id = con.Id);
+            contact.Volunteer_Role__c = 'Wish Granter Mentor';
+            contact.RecordTypeId = con.RecordTypeId;
+            contactUpdatedList.add(contact);
+        }
+        Test.startTest();
+        ContactService.createVolunteerRoles(contactUpdatedList, volunteerMap);
+        Test.stopTest();
+        List<Volunteer_Roles__c> newVolRole = [
+            SELECT Id, Chapter_Role__c, Chapter_Role__r.Name 
+            FROM Volunteer_Roles__c 
+            WHERE Volunteer_Name__c = :contactUpdatedList[0].Id
+        ];
+        System.assert(!newVolRole.isEmpty());
+    }
+    
+    @isTest
+    private static void validateCreateZipcodeUpdateTask() {
+        Map<Id, Contact> contactMap = new Map<Id, Contact>([
+            SELECT Id, RecordTypeId, MailingAddressVerified__c, MailingPostalCode
+            FROM Contact
+            WHERE FirstName = 'Abby'
+        ]);
+        List<Contact> contactUpdatedList = new List<Contact>();
+        for(Contact con : contactMap.values()) {
+            Contact contact = new Contact(Id = con.Id);
+            contact.RecordTypeId = con.RecordTypeId;
+            contact.MailingAddressVerified__c = false;
+            contact.MailingPostalCode = '85069-9876';
+            contactUpdatedList.add(contact);
+        }
+        Test.startTest();
+        ContactService.createZipcodeUpdateTask(contactUpdatedList, contactMap);
+        Test.stopTest();
+    }
+    
+    @isTest
+    private static void validateClearHiddenFields() {
+        List<Contact> contactList = [
+            SELECT Id, RecordTypeId, IsContactInfoUpdated__c, IsRejected_Contact_Info__c, isRecall_Contact_Info__c, 
+            Hidden_First_Name__c, Hidden_Last_Name__c, Hidden_Phone__c, Hidden_Email__c, Hidden_Street__c, Hidden_State__c,
+            HiddenOtherPhone__c, HiddenMobilePhone__c, Hidden_Country__c, Hidden_Zip_Code__c, Hidden_city__c, 
+            Hidden_Preferred_Contact_Rel_Id__c
+            FROM Contact
+        ];
+        Test.startTest();
+        ContactService.clearHiddenFields(contactList);
+        Test.stopTest();
+    }
+    
+    @isTest
+    private static void validateUpdateAssignedNumberOfOpportunities() {
+        List<Volunteer_Opportunity__c> volOpps = [
+            SELECT Id, Volunteer_Name__c 
+            FROM Volunteer_Opportunity__c
+        ];
+        Set<Id> volunteerIds = new Set<Id>();
+        for(Volunteer_Opportunity__c vOpps: volOpps) {
+            volunteerIds.add(vOpps.Volunteer_Name__c);
+        }
+        Test.startTest();
+        ContactService.updateAssignedNumberOfOpportunities(volunteerIds);
+        Test.stopTest();
+    }
+    
+    @isTest
+    private static void validateUpdateUserDetails() {
+        Map<Id, Contact> contactMap = new Map<Id, Contact>([
+            SELECT Id, FirstName, LastName, MobilePhone, Email, MailingStreet, MailingCity, 
+            MailingState, MailingPostalCode, County__c, Fax, RecordTypeId 
+            FROM Contact
+            WHERE FirstName = 'Abby'
+        ]);
+        List<Contact> contactUpdatedList = new List<Contact>();
+        for(Contact con : contactMap.values()) {
+            Contact contact = new Contact(Id = con.Id);
+            contact.FirstName = con.FirstName;
+            contact.LastName = 'Hall';
+            contact.MobilePhone = '820-353-8503';
+            contact.Email = 'abby@hall.com';
+            contact.MailingStreet = '100 Cactus Boulevard';
+            contact.MailingCity = 'Scottsdale';
+            contact.MailingState = con.MailingState;
+            contact.MailingPostalCode = '85261';
+            contact.County__c = 'Maricopa';
+            contact.Fax = '820-353-8503';
+            contact.RecordTypeId = con.RecordTypeId;
+            contactUpdatedList.add(contact);
+        }
+        Test.startTest();
+        ContactService.updateUserDetails(contactUpdatedList, contactMap);
+        Test.stopTest();
+        User userUpdate = [
+            SELECT Id, Name, Email 
+            FROM User 
+            WHERE FirstName = 'Abby' 
+            AND ContactId IN :contactUpdatedList
+        ];
+        System.assert(userUpdate.Email == 'abby@hall.com');
+    }
+    
+    @isTest
+    private static void validateContact() {
+        Map<Id, Contact> contactMap = new Map<Id, Contact>([
+            SELECT Id, Name
+            FROM Contact
+        ]);
+        Test.startTest();
+        ContactService.validateContact(contactMap);
         Test.stopTest();
     }
 }
