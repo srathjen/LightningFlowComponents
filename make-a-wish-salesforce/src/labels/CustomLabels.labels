@@ -364,6 +364,13 @@
         <value>There might be a duplicate {0}. Please click [OK] to review the duplicates</value>
     </labels>
     <labels>
+        <fullName>Dynamic_Font_Tag_With_Color</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dynamic Font Tag With Color</shortDescription>
+        <value>&lt;font color="{0}"&gt;{1}&lt;/font&gt;</value>
+    </labels>
+    <labels>
         <fullName>Enter_Valid</fullName>
         <categories>Class Offering</categories>
         <language>en_US</language>

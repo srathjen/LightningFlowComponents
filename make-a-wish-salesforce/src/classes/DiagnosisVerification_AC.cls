@@ -55,6 +55,7 @@ public class DiagnosisVerification_AC {
             DiagnosisVerification_AC_Helper.createMapOfConditionDescriptionsByName(ALL_CONDITION_DESCRIPTIONS);
     private static final Map<Id, Condition_Description__c> MAP_OF_CONDITION_DESCRIPTIONS_BY_ID =
             new Map<Id, Condition_Description__c>(ALL_CONDITION_DESCRIPTIONS);
+    private static final String RED = 'Red'; 
 
     public DiagnosisVerification_AC() {
         pluHypTxt = '';
@@ -874,7 +875,11 @@ public class DiagnosisVerification_AC {
             currLead.I_m_Part_of_The_Treating_HealthCare_Team__c = wishChildWrapperIns.healthCareWork;
             currLead.Is_in_a_Comatose_Vegetative_State__c = wishChildWrapperIns.vegetativeState;
             currLead.RFI_Form_Info_Hidden__c = wishStatus;
-            currLead.Any_medical_reason_for_moving_quickly__c = wishChildWrapperIns.expediteTheProcess;//Added as per IME-107
+            If (wishChildWrapperIns.expediteTheProcess.containsIgnoreCase(Label.Select_Option_Yes))    {
+                currLead.any_medical_reason_for_moving_quickly__c = String.format(Label.Dynamic_Font_Tag_with_Color, new List<String> {RED,wishChildWrapperIns.expediteTheProcess});
+            }    else    {
+                currLead.Any_medical_reason_for_moving_quickly__c = wishChildWrapperIns.expediteTheProcess;//Added as per IME-107
+            }
             currLead.Please_Explain_Deteriorate__c = wishChildWrapperIns.explainDeteriorate;
             currLead.Please_Explain__c = wishChildWrapperIns.plzExplain;
             currLead.Will_Child_s_Condition_Deteriorate__c = wishChildWrapperIns.conditioDeteriorate;
