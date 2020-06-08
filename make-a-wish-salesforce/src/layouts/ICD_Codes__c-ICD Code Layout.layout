@@ -44,6 +44,10 @@
                 <behavior>Edit</behavior>
                 <field>Hidden_ICD_Code__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Skip_Medical_Question__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
