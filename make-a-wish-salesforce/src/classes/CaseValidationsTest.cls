@@ -54,6 +54,7 @@ private class CaseValidationsTest {
         Case oldCase = newCase.clone(true, true, true, true);
         newCase.IsLocked__c = oldCase.IsLocked__c = true;
         newCase.Status = Constant_AC.CASE_STATUS_CLOSED;
+        newCase.Closed_Date__c = Date.today();
         newCase.Adopted_By__c = 'Smiths';
 
         trac_TriggerHandlerBase.blockTrigger = true;
@@ -70,6 +71,7 @@ private class CaseValidationsTest {
         Case oldCase = newCase.clone(true, true, true, true);
         newCase.IsLocked__c = oldCase.IsLocked__c = true;
         newCase.Status = Constant_AC.CASE_STATUS_CLOSED;
+        newCase.Closed_Date__c = Date.today();
 
         trac_TriggerHandlerBase.blockTrigger = true;
         update newCase;
@@ -89,6 +91,7 @@ private class CaseValidationsTest {
         newCase.IsLocked__c = oldCase.IsLocked__c = true;
         newCase.Adopted_By__c = 'Smiths';
         oldCase.Status = Constant_AC.CASE_STATUS_CLOSED;
+        newCase.Closed_Date__c = Date.today();
 
         trac_TriggerHandlerBase.blockTrigger = true;
         update oldCase;
