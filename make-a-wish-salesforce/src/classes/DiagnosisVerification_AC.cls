@@ -108,7 +108,7 @@ public class DiagnosisVerification_AC {
         wishChildWrapperIns.healthCareWork = currLead.I_m_Part_of_The_Treating_HealthCare_Team__c;
         wishChildWrapperIns.vegetativeState = currLead.Is_in_a_Comatose_Vegetative_State__c;
         wishChildWrapperIns.explainDeteriorate = currLead.Please_Explain_Deteriorate__c;
-        wishChildWrapperIns.expediteTheProcess = currLead.Any_medical_reason_for_moving_quickly__c;//Added as per IME-107
+        wishChildWrapperIns.expediteTheProcess = currLead.Any_medical_reason_for_moving_quickly__c.stripHTMLTags();
         wishChildWrapperIns.conditioDeteriorate = currLead.Will_Child_s_Condition_Deteriorate__c;
         wishChildWrapperIns.wishChildEligibilityNotes = currLead.Why_do_you_feel_would_be_eligible_Wish__c;
         wishChildWrapperIns.plzExplain = currLead.Please_Explain__c;
