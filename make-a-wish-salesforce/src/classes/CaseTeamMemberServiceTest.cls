@@ -1,8 +1,6 @@
 /**
  * @description
- *
  * @author Steve Doucette, Traction on Demand
- *
  * @date 5/27/2020
  */
 @IsTest
@@ -143,7 +141,7 @@ private class CaseTeamMemberServiceTest {
         return [
                 SELECT Id, ContactId
                 FROM User
-                WHERE ContactId != NULL
+                WHERE ContactId != NULL AND IsActive = TRUE
                 ORDER BY CreatedDate
         ];
     }

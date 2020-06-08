@@ -204,6 +204,7 @@ public with sharing class CaseServiceTest {
 
             for (Case c : cases) {
                 c.Status = Constant_AC.CASE_STATUS_CLOSED;
+                c.Closed_Date__c = Date.today();
                 c.OwnerId = employee.Id;
             }
             update cases;
