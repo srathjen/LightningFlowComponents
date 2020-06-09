@@ -1,11 +1,11 @@
 /**
- * @description Author      : MST Solutions
- * Date        : 10/4/2016
- * Description : This DiagnosisVerification_AC_Test is used to cover the unit testing for DiagnosisVerification_AC.
+ * @description This DiagnosisVerification_AC_Test is used to cover the unit testing for DiagnosisVerification_AC.
  * Modification Log:
  * 23/03/2018 - Sankar - WVC-1835
  * 09/10/2019 - Manik - WLP-423
  * 01/02/2020 - CSmith - SIW-342 field name changes reverted.
+ * @author MST Solutions
+ * @date 10/4/2016
  **/
 @IsTest
 public class DiagnosisVerification_AC_Test {
@@ -131,6 +131,7 @@ public class DiagnosisVerification_AC_Test {
         leadFrieda.Ventilator__c = 'N/A';
         leadFrieda.Angina__c = 'Unknown;N/A';
         leadFrieda.Lung_Disease__c = 'Unknown;N/A';
+        leadFrieda.Any_medical_reason_for_moving_quickly__c = 'Test';
         insert leadList;
 
         List<cg__Lead_File__c> leadFileList = TestDataFactory.createLeadFile(1);
