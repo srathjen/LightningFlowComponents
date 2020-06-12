@@ -641,7 +641,7 @@ Modification Log:
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Has {!currLead.FirstName} {!currLead.LastName} had any unplanned hospital admissions in the past 12 months?</label></div>
                                                 <div class="col-md-6">
-                                                    <apex:selectList value="{!wishChildWrapperIns.unplannedHospitalAdmission}" multiselect="false" size="1" styleClass="form-control c-select exped-Process" id="unplannedHospital" onchange="changeHospitalQues();">
+                                                    <apex:selectList value="{!wishChildWrapperIns.unplannedHospitalAdmission}" multiselect="false" size="1" styleClass="form-control c-select exped-Process requiredField" id="unplannedHospital" onchange="changeHospitalQues();">
                                                         <apex:selectOption itemlabel="Please Select" itemvalue="" html-selected="selected"/>
                                                         <apex:selectOption itemlabel="Yes" itemvalue="Yes" />
                                                         <apex:selectOption itemLabel="No" itemValue="No"/>                                                        
