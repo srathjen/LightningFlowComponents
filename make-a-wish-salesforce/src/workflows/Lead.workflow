@@ -533,7 +533,7 @@ RecordType.Name = "Wish Child"</formula>
         <fullName>Send DV Signature Reminder to Medical Professional</fullName>
         <active>true</active>
         <description>SIW-432</description>
-        <formula>ISBLANK(Provider_Signature__c) &amp;&amp; DV_Present__c = True</formula>
+        <formula>ISBLANK(Provider_Signature__c) &amp;&amp; DV_Present__c = True &amp;&amp; Chapter_Name__c != 'Make-A-Wish Arizona'</formula>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
             <actions>
