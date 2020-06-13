@@ -60,7 +60,8 @@ public class WishChildWrapper {
     public String selectedItemValue { get; set; }
     /*SIW-287 Start*/
     public String unplannedHospitalAdmission { get; set; }
-    public Integer numberOfHospitalAdmission { get; set; }
+//    public Integer numberOfHospitalAdmission { get; set; }
+    public String numberOfHospitalAdmission { get; set; }  //Samer 508
     public String admittingDiagnosis { get; set; }
     public String ifICUAdmission { get; set; }
     /*SIW-287 End*/
