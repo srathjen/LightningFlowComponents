@@ -10,6 +10,7 @@
 // 02/06/2020 - Manoj - SIW-557: Updated placeholder to 'Acute Lymphoblastic Leukemia (ALL)' from 'Malignant Neoplasm' and to 'C91.0' from 'C00'
 // 16/06/2020 - Manoj - SIW-606: Changed method to navigate to home site
 // 18/06/2020 - Manoj - SIW-237: Added new field Preferred name
+-->
 
 <apex:page controller="WishReferralForm_AC" showHeader="false" applyBodyTag="false" sidebar="false" standardStylesheets="false" docType="html-5.0" cache="false">
     <!-- polyfill for prepend() -->
