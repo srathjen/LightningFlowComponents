@@ -2804,6 +2804,14 @@
         <value>Please enter other language</value>
     </labels>
     <labels>
+        <fullName>Wish_Referral_Placeholder_Preferred_Name</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Placeholder Preferred Name</shortDescription>
+        <value>Preferred Name/Nickname</value>
+    </labels>
+    <labels>
         <fullName>Wish_Referral_Postal_Code</fullName>
         <categories>Wish Referral</categories>
         <language>en_US</language>

@@ -29,6 +29,12 @@
 //                05/26/2020 - Manoj - SIW-372
 //                Made phone as required field under treating medical professional information
 //
+//                06/17/2020 - Manoj - SIW-532
+//                removed method isTextSelected for phone number validation
+//
+//                06/18/2020 - Manoj - SIW-330
+//                Limit Primary Diagnosis field to only accept values from drop-down
+//
 // format phone/date fields
 // target desktop
 // if (window.matchMedia("(min-width: 47.5rem)").matches) {
@@ -1236,15 +1242,13 @@ $('body').change('click', function(event) {
             var descName = ui.item.Code_To_Use__c;
             var otherDiagnosis = /^(Other )(.*)$/i.test(ui.item.Name);
             var notlistedDiagnosis = /^(Not Listed)$/i.test(ui.item.Name);
-            var ss1 = $('.searchDiagnosisId').html(ui.item.Name).text();
-            
+            var ss1 = $('.searchDiagnosisId').html(ui.item.Name).text();            
             icd.val('');
             icd.prop('disabled', false);
+            $(icd).focus();
+            $(pdi).addClass('value-selected');
             pdi.val(ui.item.Name);
-            pdi.val(ss1);
-            pdi.addClass('value-selected');
-            icd.focus();
-            
+            pdi.val(ss1); 
             if (typeof descName != 'undefined') {
                 icd.val(ui.item.Code_To_Use__c);
                 icd.prop('disabled', true);
@@ -1257,6 +1261,12 @@ $('body').change('click', function(event) {
             }
             return false;
         },
+        //SIW-330: Limit Primary Diagnosis field to only accept values from drop-down
+        change: function( event, ui ) {           
+            if (ui.item == undefined) {                             
+               $(this).val("");
+            }
+         },
         
     })
     .data("ui-autocomplete")._renderItem = function(ul, item) {
