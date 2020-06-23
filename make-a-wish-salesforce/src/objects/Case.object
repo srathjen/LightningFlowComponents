@@ -634,6 +634,46 @@
         <label>Wheelchair Powered</label>
     </fieldSets>
     <fields>
+        <fullName>Final_Close_Letter_Sent__c</fullName>
+        <externalId>false</externalId>
+        <label>Final Close Letter Sent</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Ninety_Day_Letter_Sent__c</fullName>
+        <externalId>false</externalId>
+        <label>90-Day Letter Sent</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Sixty_Day_Letter_Sent__c</fullName>
+        <externalId>false</externalId>
+        <label>60-Day Letter Sent</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Thirty_Day_Letter_Sent__c</fullName>
+        <externalId>false</externalId>
+        <label>30-Day Letter Sent</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Absent_Parent_Form__c</fullName>
         <defaultValue>false</defaultValue>
         <description>Absent parent form</description>
