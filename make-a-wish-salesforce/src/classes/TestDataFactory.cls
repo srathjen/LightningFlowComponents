@@ -8,6 +8,8 @@ public class TestDataFactory {
 
 	private final static Id CHAPTER_RT_ID = Constant_AC.CHAPTER_RT_ID;
 
+	@TestVisible private final static String USERNAME_SUFFIX = '@testorg.makeawish.com';
+
 	public static User adminUser {
 		get {
 			if (adminUser == null) {
@@ -194,7 +196,7 @@ public class TestDataFactory {
 			user.LanguageLocaleKey = 'en_US';
 			user.LocaleSidKey = 'en_US';
 			user.TimeZoneSidKey = 'America/Los_Angeles';
-			user.Username = 'testuser' + i + '@testorg.makeawish.com';
+			user.Username = 'testuser' + i + USERNAME_SUFFIX;
 			users.add(user);
 		}
 		return users;
