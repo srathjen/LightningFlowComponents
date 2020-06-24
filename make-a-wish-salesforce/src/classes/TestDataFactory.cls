@@ -194,7 +194,7 @@ public class TestDataFactory {
 			user.LanguageLocaleKey = 'en_US';
 			user.LocaleSidKey = 'en_US';
 			user.TimeZoneSidKey = 'America/Los_Angeles';
-			user.Username = 'testuser' + i + '@testorg.com';
+			user.Username = 'testuser' + i + '@testorg.makeawish.com';
 			users.add(user);
 		}
 		return users;

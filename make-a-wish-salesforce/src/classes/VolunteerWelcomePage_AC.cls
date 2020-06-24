@@ -40,17 +40,17 @@ public class VolunteerWelcomePage_AC {
 	private final static String ORG_AFFILIATION_STATUS_NOT_APPROVED = Constant_AC.ORG_AFFILIATION_STATUS_NOT_APPROVED;
 	private final static String ORG_AFFILIATION_STATUS_INACTIVE = Constant_AC.ORG_AFFILIATION_STATUS_INACTIVE;
 	private final static String TASK_TYPE_EMAIL = Constant_AC.TASK_TYPE_EMAIL;
-	private final static String PAGE_STATUS_COMPLETED = 'Completed';
+	@TestVisible private final static String PAGE_STATUS_COMPLETED = 'Completed';
 	private final static String PAGE_STATUS_IN_PROGRESS = 'In Progress';
-	private final static String GO_TO_PAGE_VOLUNTEER_LANDING = 'VolunteerLanding_VF';
-	private final static String GO_TO_PAGE_VOLUNTEER_ORIENTATION = 'VolunteerOrientation_VF';
-	private final static String GO_TO_PAGE_APPLICATION = 'Application_VF';
-	private final static String GO_TO_PAGE_APPLY_FOR_ROLES = 'ApplyForRoles_VF';
-	private final static String GO_TO_PAGE_BACKGROUND_CHECK = 'BackgroundCheck_VF';
-	private final static String GO_TO_PAGE_VOLUNTEER_TRAINING = 'VolunteerTraining_VF';
-	private final static String GO_TO_PAGE_VOLUNTEER_WELCOME_PAGE = 'VolunteerWelcomePage_VF';
+	@TestVisible private final static String GO_TO_PAGE_VOLUNTEER_LANDING = 'VolunteerLanding_VF';
+	@TestVisible private final static String GO_TO_PAGE_VOLUNTEER_ORIENTATION = 'VolunteerOrientation_VF';
+	@TestVisible private final static String GO_TO_PAGE_APPLICATION = 'Application_VF';
+	@TestVisible private final static String GO_TO_PAGE_APPLY_FOR_ROLES = 'ApplyForRoles_VF';
+	@TestVisible private final static String GO_TO_PAGE_BACKGROUND_CHECK = 'BackgroundCheck_VF';
+	@TestVisible private final static String GO_TO_PAGE_VOLUNTEER_TRAINING = 'VolunteerTraining_VF';
+	@TestVisible private final static String GO_TO_PAGE_VOLUNTEER_WELCOME_PAGE = 'VolunteerWelcomePage_VF';
 	private final static String BLANK = '';
-	public Boolean displayBecomAVolunteer { get; set; }
+	@TestVisible public Boolean displayBecomAVolunteer { get; set; }
 	public Boolean displayContinueProcess { get; set; }
 	public String welcomText { get; set; }
 	public String becomeAVolunteer { get; set; }
@@ -102,7 +102,6 @@ public class VolunteerWelcomePage_AC {
 					WHERE Id = :UserInfo.getUserId()
 			];
 		}
-		String log;
 		applicationStatus = null;
 		interviewStatus = null;
 		backgroundCheckStatus = null;
@@ -123,7 +122,6 @@ public class VolunteerWelcomePage_AC {
 		]) {
 			if (checkOrientationAndTraining.Class_Offering__r.Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId == trainingRecordTypeId) {
 				trainingList.add(checkOrientationAndTraining);
-				log = log + '|' + String.valueOf(checkOrientationAndTraining);
 			}
 		}
 		isBGRoleExpOOC = false;
@@ -135,7 +133,6 @@ public class VolunteerWelcomePage_AC {
 				(:VOLUNTEER_ROLE_STATUS_PENDING, :VOLUNTEER_ROLE_STATUS_OUT_OF_COMPLIANCE, :VOLUNTEER_ROLE_STATUS_ACTIVE)
 				AND Sub_status__c != :VOLUNTEER_ROLE_SUB_STATUS_UNDER_CHAPTER_REVIEW
 		]) {
-			log = String.valueOf(currRole);
 			isBGRoleExpOOC = true;
 		}
 		checkcontactApplicationList = [
@@ -163,24 +160,26 @@ public class VolunteerWelcomePage_AC {
 				FROM Background_check__c
 				WHERE Volunteer__c = :currentUser.ContactId
 		];
-		List<npe5__Affiliation__c> currAffliation = [
+
+		List<npe5__Affiliation__c> currAffiliation = [
 				SELECT Id,npe5__Organization__c
 				FROM npe5__Affiliation__c
 				WHERE npe5__Contact__c = :currentUser.ContactId
 				AND npe5__Primary__c = TRUE
 				LIMIT 1
 		];
-		if (currAffliation.size() > 0) {
-			chapterId = currAffliation[0].npe5__Organization__c;
+		if (currAffiliation.size() > 0) {
+			chapterId = currAffiliation[0].npe5__Organization__c;
 		}
-		Set<Id> chatperRoleIds = new Set<Id>();
+		Set<Id> chapterRoleIds = new Set<Id>();
 		for (Volunteer_Roles__c currRec : [
 				SELECT Id, Chapter_Role__c,Volunteer_Name__c
 				FROM Volunteer_Roles__c
 				WHERE Volunteer_Name__c = :currentUser.ContactId
 		]) {
-			chatperRoleIds.add(currRec.Chapter_Role__c);
+			chapterRoleIds.add(currRec.Chapter_Role__c);
 		}
+
 		for (Chapter_Role_O_T__c currChapterRoleOT : [
 				SELECT Id,Orientation_Training__c
 				FROM Chapter_Role_O_T__c
@@ -194,7 +193,7 @@ public class VolunteerWelcomePage_AC {
 		List<Chapter_Role_O_T__c> trainings = [
 				SELECT Id
 				FROM Chapter_Role_O_T__c
-				WHERE Chapter_Role__c IN :chatperRoleIds
+				WHERE Chapter_Role__c IN :chapterRoleIds
 				AND Orientation_Training__r.RecordTypeId = :trainingRecordTypeId
 				AND Required__c = TRUE
 		];
@@ -213,7 +212,6 @@ public class VolunteerWelcomePage_AC {
 				AND Class_Offering__r.Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId = :orientationRecordTypeId
 		]) {
 			completedVolunteerOrientationIdsIds.add(checkOrientationAndTraining.Id);
-			log = log + '|' + String.valueOf(completedVolunteerOrientationIdsIds);
 		}
 		Id nationalRT = Constant_AC.NATIONAL_RT_ID;
 		Id ProspectiveRT = Constant_AC.PROSPECTIVE_VOLUNTEER_RT_ID;
@@ -387,6 +385,7 @@ public class VolunteerWelcomePage_AC {
 			];
 			Integer coiDays = Integer.valueOf(Label.COI_no_of_expiration_days);
 			displayPopupconflict = false;
+
 			List<Conflict_Of_Interest__c> conflictIns = [
 					SELECT Id,Name,Expiration_Date__c,Signed_Date__c,Current__c,
 							Volunteer_Contact__c
@@ -407,8 +406,10 @@ public class VolunteerWelcomePage_AC {
 					LIMIT 1
 			];
 			Logvalue = String.valueOf(conflictIns);
-			if (ORG_AFFILIATION_STATUS_NOT_APPROVED.equals(affiliationList[0].npe5__Status__c)
-					|| ORG_AFFILIATION_STATUS_INACTIVE.equals(affiliationList[0].npe5__Status__c)) {
+			if (!affiliationList.isEmpty() && (
+			 	ORG_AFFILIATION_STATUS_NOT_APPROVED.equals(affiliationList[0].npe5__Status__c)
+				|| ORG_AFFILIATION_STATUS_INACTIVE.equals(affiliationList[0].npe5__Status__c))) {
+
 				isInactivePopup = true;
 			} else {
 				isCOIExpired = false;
@@ -481,7 +482,8 @@ public class VolunteerWelcomePage_AC {
 					if (currVolBGCheck[0].Status__c != BLANK
 							&& currVolBGCheck[0].Date__c >= Date.today()
 							&& Date.today().daysBetween(currVolBGCheck[0].Date__c) <= 30
-							&& !BACKGROUND_CHECK_STATUS_REJECTED.equals(currVolBGCheck[0].Status__c) && DbVolRoleBGReqCheck.size() > 0
+							&& !BACKGROUND_CHECK_STATUS_REJECTED.equals(currVolBGCheck[0].Status__c)
+							&& DbVolRoleBGReqCheck.size() > 0
 							&& currVolBGCheck[0].Current__c) {
 						nBCDays = (Date.today()).daysBetween(currVolBGCheck[0].Date__c);
 						displayPopup = true;
@@ -586,6 +588,7 @@ public class VolunteerWelcomePage_AC {
 				log = String.valueOf(updateContact);
 				update updateContact;
 			}
+
 			Background_check__c currVolBGCheck = [
 					SELECT Id,Volunteer__c,Volunteer__r.OwnerId,Date_Completed__c,Date__c,Current__c
 					FROM Background_check__c
@@ -649,6 +652,7 @@ public class VolunteerWelcomePage_AC {
 			}
 			return page;
 		} catch (Exception ex) {
+			System.debug(ex);
 			new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerWelcomePage_VF', 'confirmBackGroundCheck', recId, ex, log));
 			ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
 			ApexPages.addMessage(myMsg);

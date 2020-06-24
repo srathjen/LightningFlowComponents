@@ -71,7 +71,7 @@ global class CommunitiesLoginControllerTest {
 		List<npe5__Affiliation__c> affiliations = TestDataFactory.createAffiliation(1);
 		npe5__Affiliation__c affiliation = affiliations.get(0);
 		affiliation.npe5__Contact__c = volunteerUser.ContactId;
-		affiliation.npe5__Organization__c = TestClassUtil.createVolunteerAccount().Id;
+		affiliation.npe5__Organization__c = accounts[0].Id;
 		affiliation.npe5__Primary__c = true;
 		affiliation.npe5__Status__c = 'Pending';
 
