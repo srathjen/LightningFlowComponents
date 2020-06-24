@@ -1545,6 +1545,26 @@
     </customSettingAccesses>
     <description>This profile was changed to mirror Prospective Volunteer (Login) in February 2019 by Traction on Demand in order to accommodate licensing changes to the Community.</description>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Final_Close_Letter_Sent__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Ninety_Day_Letter_Sent__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Sixty_Day_Letter_Sent__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Thirty_Day_Letter_Sent__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>AccessTokenList__mdt.API_URL__c</field>
         <readable>false</readable>

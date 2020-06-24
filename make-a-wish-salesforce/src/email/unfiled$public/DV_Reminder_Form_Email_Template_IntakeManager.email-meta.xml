@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>It will be used to send an alert email to Intake Manager regarding Medical Professional for reviewing Diagnosis Verification Form.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Make_a_Wish_America</letterhead>
+    <name>Diagnosis Verification Reminder Form Email Template</name>
+    <style>freeForm</style>
+    <subject>Your follow-up is requested on an unsigned Diagnosis Verification</subject>
+    <textOnly>Hi {!Lead.Treating_Medical_Professional_First_Name__c},
+
+Please Review the Diagnosis Verification and submit.
+
+Password : {!Lead.00N2f000000ojKq}
+
+Thanks
+Make A Wish America</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

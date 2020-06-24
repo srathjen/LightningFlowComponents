@@ -35,6 +35,12 @@ public class customLookUpController {
                 sQuery = 'Select Id, Name,  Email, (SELECT Id, Name FROM Wish_Affiliations__r WHERE Wish__c =:caseId  AND (Under_18__c = \'No\' OR Under_18__c =  \'No Birthdate Recorded\') AND Wish_Affiliation_Type__c != \'Medical Professional\' ) From Contact Where Name LIKE: searchKey AND Id In (Select Contact__c From Wish_Affiliation__c WHERE Wish__c =:caseId  AND (Under_18__c = \'No\' OR Under_18__c =  \'No Birthdate Recorded\') AND Wish_Affiliation_Type__c != \'Medical Professional\' )'; 
             }
         }
+        else if(ObjectName == 'Condition_Description__c') {
+            sQuery =  'SELECT Id, ' + attributesList + ', Name FROM ' + ObjectName + ' WHERE Inactive__c = false AND Name LIKE :searchKey ORDER BY CreatedDate DESC'; 
+        }
+        else if(ObjectName == 'ICD_Codes__c') {
+            sQuery =  'SELECT Id, ' + attributesList + ', Name FROM ' + ObjectName + ' WHERE Condition_Description__r.Inactive__c = false AND Name LIKE :searchKey ORDER BY CreatedDate DESC'; 
+        }
         else{
             sQuery =  'select id, ' + attributesList + ', Name from ' +ObjectName + ' where Name LIKE: searchKey order by createdDate DESC'; 
         }

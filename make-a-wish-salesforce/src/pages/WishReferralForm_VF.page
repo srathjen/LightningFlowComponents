@@ -8,6 +8,8 @@
 // 17/04/2020 - Manoj - SIW-575 Modified methods 'languageselection' and 'checkPrimLangRequired' for Mobile issue
 // 27/04/2020 - Manoj - SIW-556 : Modified method 'getInputValue' to allow users to proceed even when select No in question "HAS THE REFERRAL BEEN DISCUSSED WITH THE CHILD'S HEALTHCARE PROVIDER?"
 // 02/06/2020 - Manoj - SIW-557: Updated placeholder to 'Acute Lymphoblastic Leukemia (ALL)' from 'Malignant Neoplasm' and to 'C91.0' from 'C00'
+// 16/06/2020 - Manoj - SIW-606: Changed method to navigate to home site
+// 18/06/2020 - Manoj - SIW-237: Added new field Preferred name
 -->
 
 <apex:page controller="WishReferralForm_AC" showHeader="false" applyBodyTag="false" sidebar="false" standardStylesheets="false" docType="html-5.0" cache="false">
@@ -309,6 +311,14 @@
                                 </div>
                             </div>
                         </div>
+                        <!--SIW-237 Start: Added new field Preferred name -->
+                        <div class="form-group row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-6">
+                                <apex:inputText value="{!currLead.Preferred_Name__c}" styleClass="form-control" html-placeholder="{!$Label.Wish_Referral_Placeholder_Preferred_Name}" id="preName" maxlength="40"  />
+                            </div>
+                        </div>
+                        <!--SIW-237 End -->                       
                         <div class="form-group row">
                             <div class="col-sm-3"><label>{!$Label.Wish_Referral_Gender}</label></div>
                             <div class="col-sm-6">
@@ -732,7 +742,7 @@
                     <p class="text-center">{!$Label.Wish_Referral_Thank_You_For_Submitting}</p>
                     <div class="text-center">
                         <button type="button" onClick="window.location.href=document.referrer" class="btn-md m-r-1" aria-label="Submit another referral"><span aria-hidden="true">{!$Label.Wish_Referral_Submit_Another_Referral}</span></button>
-                        <button type="button" onclick="window.parent.postMessage('home', '*');" class="btn-md" aria-label="Return to wish"><span aria-hidden="true">{!$Label.Wish_Referral_Return_to_Home_Site}</span></button>
+                        <button type="button" onclick="window.open('https://wish.org','_self')" class="btn-md" aria-label="Return to wish"><span aria-hidden="true">{!$Label.Wish_Referral_Return_to_Home_Site}</span></button><!--SIW-606: Changed method to navigate to home site -->
                     </div>
                 </div>
             </apex:outputpanel>

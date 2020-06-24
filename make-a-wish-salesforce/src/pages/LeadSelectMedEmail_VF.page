@@ -1,201 +1,276 @@
 <apex:page controller="LeadSelectMedEmailController_AC" standardStylesheets="false" sidebar="false">
-    <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/jquery.min.js')}"/> 
-    <apex:stylesheet value="{!URLFOR($Resource.SLDS, '/0_12_2/assets/styles/salesforce-lightning-design-system-vf.min.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/jquery.min.js')}"/>
+    <apex:stylesheet
+            value="{!URLFOR($Resource.SLDS, '/0_12_2/assets/styles/salesforce-lightning-design-system-vf.min.css')}"/>
     <apex:stylesheet value="{!URLFOR($Resource.SweetAlert, 'sweet-alert.css')}"/>
     <apex:includeScript value="{!URLFOR($Resource.SweetAlert, 'sweet-alert.js')}"/>
     <apex:includeScript value="/support/console/42.0/integration.js"/><!-- Added Includescript for IME-25-->
     <style type="text/css">
-        th {font-weight:bold !important}
-        .successMsg {color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6; padding:10px; border-radius:5px}
-        .alert-danger {display:none;border-radius: 5px;}
-        .alert-danger-email {display:none;border-radius: 5px;}<!-- Added per IME-59 -->
-        .alert-success {border-radius: 5px;}
-        .btn-process {float: right; margin-top: 1%;}
-        .slds {margin-top:3%}
-        .sweet-alert button.cancel {background:#006bb6}
-        .sweet-alert button.cancel:hover {background:#006bb6; opacity:.9}   
-        .hideBlock {display:none}
-        .confirm {background: grey;}
+        th {
+            font-weight: bold !important
+        }
+
+        .successMsg {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+            padding: 10px;
+            border-radius: 5px
+        }
+
+        .alert-danger {
+            display: none;
+            border-radius: 5px;
+        }
+
+        .alert-danger-email {
+            display: none;
+            border-radius: 5px;
+        }
+
+        <!--
+        Added per IME-59
+
+        -->
+        .alert-success {
+            border-radius: 5px;
+        }
+
+        .btn-process {
+            float: right;
+            margin-top: 1%;
+        }
+
+        .slds {
+            margin-top: 3%
+        }
+
+        .sweet-alert button.cancel {
+            background: #006bb6
+        }
+
+        .sweet-alert button.cancel:hover {
+            background: #006bb6;
+            opacity: .9
+        }
+
+        .hideBlock {
+            display: none
+        }
+
+        .confirm {
+            background: grey;
+        }
     </style>
     <div class="slds">
         <apex:form id="frm">
-        <apex:pagemessages id="msg" />
-        <input type="hidden" value="{!URLToRedirect}" class="getUrl"/>
+            <apex:pagemessages id="msg"/>
+            <input type="hidden" value="{!URLToRedirect}" class="getUrl"/>
             <div class="slds-card slds-m-horizontal--large">
                 <div class="slds-card__header slds-grid slds-grid--align-spread">
-                    <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Select Contact to send the Diagnosis Verification</h2>
+                    <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Select Contact to send the
+                        Diagnosis Verification</h2>
                 </div>
                 <table class="slds-table slds-table--bordered">
                     <thead>
-                        <tr>
-                            <th>Select</th>
-                            <th>First Name</th>
-                            <th>LastName</th>
-                            <th>Email</th>
-                            <th>Type</th>
-                        </tr>
+                    <tr>
+                        <th>Select</th>
+                        <th>First Name</th>
+                        <th>LastName</th>
+                        <th>Email</th>
+                        <th>Type</th>
+                    </tr>
                     </thead>
                     <tbody>
-                     <tr class="slds-text-title_caps">
-                            <td><input type="radio" data-type="Treating Medical Professional" data-email="{!currLead.Treating_Medical_Professional_Email__c}" name="rec" class="selVal"/></td>
-                            <td>{!currLead.Treating_Medical_Professional_First_Name__c}</td>
-                            <td>{!currLead.Treating_Medical_Professional_Last_Name__c}</td>
-                            <td>{!currLead.Treating_Medical_Professional_Email__c}</td>
-                            <td>Treating Medical Professional</td>
-                        </tr>
-                        
-                        
-                        <tr class="{!IF(currLead.Best_contact_for_Physician_Email__c == '','slds-text-title_caps hideBlock','slds-text-title_caps')}">
-                            <td><input type="radio" data-type="Best contact for Physician" data-email="{!currLead.Best_contact_for_Physician_Email__c}" name="rec" class="selVal"/></td>
-                            <td>{!currLead.Best_Contact_for_Physician_First_Name__C}</td>
-                            <td>{!currLead.Best_Contact_for_Physician_Last_Name__C}</td>
-                            <td>{!currLead.Best_contact_for_Physician_Email__c}</td>
-                            <td>Best contact for Physician</td>
-                        </tr>
-                        
-                        
-                        <tr class="{!IF(currLead.Alternate1MedicalProfessionalEmail__c == '','slds-text-title_caps hideBlock','slds-text-title_caps')}">
-                            <td><input type="radio" data-type="Alternate 1 Medical Professional"  data-email="{!currLead.Alternate1MedicalProfessionalEmail__c}"  name="rec" class="selVal"/></td>
-                            <td>{!currLead.Alternate1MedProfessionalFirstName__c}</td>
-                            <td>{!currLead.Alternate1MedProfessionalLastName__c}</td>
-                            <td>{!currLead.Alternate1MedicalProfessionalEmail__c}</td>
-                            <td>Alternate 1 Medical Professional</td>
-                        </tr>
-                        
-                        
-                        <tr class="{!IF(currLead.Alternate2MedProfessionalEmail__c == '','slds-text-title_caps hideBlock','slds-text-title_caps')}">
-                            <td><input type="radio" data-type="Alternate 2 Medical Professional" data-email="{!currLead.Alternate2MedProfessionalEmail__c}"  name="rec" class="selVal"/></td>
-                            <td>{!currLead.Alternate2MedProfessionalFirstName__c}</td>
-                            <td>{!currLead.Alternate2MedProfessionalLastName__c}</td>
-                            <td>{!currLead.Alternate2MedProfessionalEmail__c}</td>
-                            <td>Alternate 2 Medical Professional</td>
-                        </tr>    
+                    <tr class="slds-text-title_caps">
+                        <td><input type="radio" data-type="Treating Medical Professional"
+                                   data-email="{!currLead.Treating_Medical_Professional_Email__c}" name="rec"
+                                   class="selVal"/></td>
+                        <td>{!currLead.Treating_Medical_Professional_First_Name__c}</td>
+                        <td>{!currLead.Treating_Medical_Professional_Last_Name__c}</td>
+                        <td>{!currLead.Treating_Medical_Professional_Email__c}</td>
+                        <td>Treating Medical Professional</td>
+                    </tr>
+
+
+                    <tr class="{!IF(currLead.Best_contact_for_Physician_Email__c == '','slds-text-title_caps hideBlock','slds-text-title_caps')}">
+                        <td><input type="radio" data-type="Best contact for Physician"
+                                   data-email="{!currLead.Best_contact_for_Physician_Email__c}" name="rec"
+                                   class="selVal"/></td>
+                        <td>{!currLead.Best_Contact_for_Physician_First_Name__C}</td>
+                        <td>{!currLead.Best_Contact_for_Physician_Last_Name__C}</td>
+                        <td>{!currLead.Best_contact_for_Physician_Email__c}</td>
+                        <td>Best contact for Physician</td>
+                    </tr>
+
+
+                    <tr class="{!IF(currLead.Alternate1MedicalProfessionalEmail__c == '','slds-text-title_caps hideBlock','slds-text-title_caps')}">
+                        <td><input type="radio" data-type="Alternate 1 Medical Professional"
+                                   data-email="{!currLead.Alternate1MedicalProfessionalEmail__c}" name="rec"
+                                   class="selVal"/></td>
+                        <td>{!currLead.Alternate1MedProfessionalFirstName__c}</td>
+                        <td>{!currLead.Alternate1MedProfessionalLastName__c}</td>
+                        <td>{!currLead.Alternate1MedicalProfessionalEmail__c}</td>
+                        <td>Alternate 1 Medical Professional</td>
+                    </tr>
+
+
+                    <tr class="{!IF(currLead.Alternate2MedProfessionalEmail__c == '','slds-text-title_caps hideBlock','slds-text-title_caps')}">
+                        <td><input type="radio" data-type="Alternate 2 Medical Professional"
+                                   data-email="{!currLead.Alternate2MedProfessionalEmail__c}" name="rec"
+                                   class="selVal"/></td>
+                        <td>{!currLead.Alternate2MedProfessionalFirstName__c}</td>
+                        <td>{!currLead.Alternate2MedProfessionalLastName__c}</td>
+                        <td>{!currLead.Alternate2MedProfessionalEmail__c}</td>
+                        <td>Alternate 2 Medical Professional</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
             <div class="slds-m-horizontal--large">
                 <div style="margin-top:1%">
                     <apex:outputPanel rendered="{!success}">
-                        <div class="slds-notify slds-notify--alert slds-theme--success slds-theme--alert-texture alert-success" style="float:left">
+                        <div class="slds-notify slds-notify--alert slds-theme--success slds-theme--alert-texture alert-success"
+                             style="float:left">
                             <strong>Success!</strong> Diagnosis verification sent successfully.
                         </div>
                     </apex:outputPanel>
-                    
-                    <div class="slds-notify slds-notify--alert slds-theme--error slds-theme--alert-texture alert-danger" style="float:left">
+
+                    <div class="slds-notify slds-notify--alert slds-theme--error slds-theme--alert-texture alert-danger"
+                         style="float:left">
                         Please choose recipient
                     </div>
                     <!-- Added per IME-59 -->
-                    <div class="slds-notify slds-notify--alert slds-theme--error slds-theme--alert-texture alert-danger-email" style="float:left">
+                    <div class="slds-notify slds-notify--alert slds-theme--error slds-theme--alert-texture alert-danger-email"
+                         style="float:left">
                         Please provide the Email for selected Medical Professional or Using Paper Process for DV.
                     </div>
-                    <input type="button" value="Cancel" class="slds-button slds-button--neutral btn-process" onClick="Cancel();"/>
-                    <input type="button" value="Send Diagnosis Verification" onClick="PassEmailVal();" class="slds-button slds-button--brand btn-process" style="margin-right:5px"/>
+                    <input type="button" value="Cancel" class="slds-button slds-button--neutral btn-process"
+                           onClick="Cancel();"/>
+                    <input type="button" value="Send Diagnosis Verification" onClick="PassEmailVal();"
+                           class="slds-button slds-button--brand btn-process" style="margin-right:5px"/>
                 </div>
             </div>
-            <apex:actionFunction name="callupdateLead" action="{!updateLead}" reRender="frm,ChangeValue" oncomplete="GoToLeadPage()">
-                <apex:param id="aname" name="Type" value=""  />
-                <apex:param id="email" name="email" value=""  />
-                <apex:param id="resetValue" name="sendOrRest" value=""  />
+            <apex:actionFunction name="callupdateLead" action="{!updateLead}" reRender="frm,ChangeValue"
+                                 oncomplete="GoToLeadPage({!success})">
+                <apex:param id="aname" name="Type" value=""/>
+                <apex:param id="email" name="email" value=""/>
+                <apex:param id="resetValue" name="sendOrRest" value=""/>
             </apex:actionFunction>
             <script>
-            //IME 231
-            $( document ).ready(function() {
-                var availableContacts = [];
-                $('.selVal').each(function() {
-                    if(!$(this).parent().parent().hasClass('hideBlock')) { 
-                        availableContacts.push($(this));
+                //IME 231
+                $(document).ready(function () {
+                    var availableContacts = [];
+                    $('.selVal').each(function () {
+                        if (!$(this).parent().parent().hasClass('hideBlock')) {
+                            availableContacts.push($(this));
+                        }
+                    });
+                    if (availableContacts.length == 1) {
+                        availableContacts[0][0].checked = true;
                     }
                 });
-                if(availableContacts.length == 1){
-                    availableContacts[0][0].checked = true;
-                }
-            });
-            //IME 231
-            function PassEmailVal() { 
-                var emailTo = ''; 
-                var sendEmail = false; 
-                var email = '';
-                var paperDV = {!currLead.Using_Paper_Process_For_DV__c}//Added per IME-59
-                $('.selVal').each(function() { 
-                    if($(this).is(':checked')) { 
-                        emailTo = $(this).data( "type" ); 
-                        sendEmail = true; 
-                        email = $(this).data( "email" ); 
-                    } 
-                }); 
-                if(sendEmail) { 
-                    var hiddenMedEmail = '{!currLead.Part_A_Sent__c}';
-		    var hiddenMedEmailRec = '{!currLead.Part_A_Received__c}';
-                    var confirmMsg = hiddenMedEmailRec? "A Diagnosis Verification has already been sent and signed. Clicking Yes will reset all values in the DV form, and archive previous signed versions (in Docusign Status section) which cannot be undone.":"Are you sure you want to proceed? A Diagnosis Verification has already been sent for this wish child.";
-                    if(email.length > 1 && !paperDV){ //Added per IME-59
-                        if(hiddenMedEmail.trim().length) {
-                            swal({
-                                title: "Are you sure you want to proceed?",
-                                text: confirmMsg,
-                                showCancelButton: true,
-                                type: 'warning',
-                                confirmButtonColor: '#d33',
-                                confirmButtonText: 'No',
-                                cancelButtonText: "Yes",
-                                closeOnConfirm: true,
-                                closeOnCancel: true
-                            },
-                                 function(isConfirm) {
-                                     if (isConfirm) {
-                                     } else {
-                                         callupdateLead(emailTo,email,'Reset');                                      
-                                     }
-                                 });                            
+
+                //IME 231
+                function PassEmailVal() {
+                    var emailTo = '';
+                    var sendEmail = false;
+                    var email = '';
+                    var paperDV = {!currLead.Using_Paper_Process_For_DV__c}//Added per IME-59
+                        $('.selVal').each(function () {
+                            if ($(this).is(':checked')) {
+                                emailTo = $(this).data("type");
+                                sendEmail = true;
+                                email = $(this).data("email");
+                            }
+                        });
+                    if (sendEmail) {
+                        var hiddenMedEmail = '{!currLead.Part_A_Sent__c}';
+                        var hiddenMedEmailRec = '{!currLead.Part_A_Received__c}';
+                        var confirmMsg = hiddenMedEmailRec ? "A Diagnosis Verification has already been sent and signed. Clicking Yes will reset all values in the DV form, and archive previous signed versions (in Docusign Status section) which cannot be undone." : "Are you sure you want to proceed? A Diagnosis Verification has already been sent for this wish child.";
+                        if (email.length > 1 && !paperDV) { //Added per IME-59
+                            if (hiddenMedEmail.trim().length) {
+                                swal({
+                                        title: "Are you sure you want to proceed?",
+                                        text: confirmMsg,
+                                        showCancelButton: true,
+                                        type: 'warning',
+                                        confirmButtonColor: '#d33',
+                                        confirmButtonText: 'No',
+                                        cancelButtonText: "Yes",
+                                        closeOnConfirm: true,
+                                        closeOnCancel: true
+                                    },
+                                    function (isConfirm) {
+                                        if (isConfirm) {
+                                        } else {
+                                            callupdateLead(emailTo, email, 'Reset');
+                                        }
+                                    });
+                            } else {
+                                callupdateLead(emailTo, email, 'Send');
+                            }
                         } else {
-                            callupdateLead(emailTo,email, 'Send');                       
+                            //Added per IM-59
+                            $('.alert-danger-email').show();
+                            $('.alert-danger').hide();
                         }
-                    } else{
-                        //Added per IM-59
-                        $('.alert-danger-email').show();
-                        $('.alert-danger').hide();
+                    } else {
+                        $('.alert-danger').show();
+                        $('.alert-danger-email').hide(); //Added per IME-59
                     }
-                } else { 
-                    $('.alert-danger').show(); 
-                    $('.alert-danger-email').hide(); //Added per IME-59
                 }
-            }
-            function GoToLeadPage() {                
-                var leadId = '{!currLead.Id}';
-                if (typeof(sforce) != 'undefined' && sforce.one) {
-                    // Lightning
-                    swal({
-                        type: "success",                        
-                        icon: "success",
-                        title: "Success",
-                        confirmButtonColor: "#0070d2",
-                        text: "Diagnosis verification sent successfully.",         
-                        closeOnConfirm: true,
-                        closeOnCancel: true
-                    },
-                         function(isConfirm) {
-                             //IME-25 Check whether page is in console or not.
-                             if(sforce.console && sforce.console.isInConsole()){
-                                 var closeSubtab = function closeSubtab(result) {
-                                     //Getting current tab Id
-                                     var tabId = result.id;
-                                     sforce.console.closeTab(tabId);
-                                 };
-                                 sforce.console.getEnclosingTabId(closeSubtab);
-                             }
-                             sforce.one.navigateToSObject(leadId);
-                             
-                     });
-                    
-                }else{
-                    //classic
-                    window.location.href = '/' + leadId;                    
-                }                                               
-            }
-            function Cancel() {
-                window.history.back();
-            }
+
+                function GoToLeadPage(success) {
+                    // Fail if success is false
+                    if (!success) {
+                        swal({
+                            title: '',
+                            text: 'Unable to send Diagnosis Verification',
+                            type: "error",
+                            confirmButtonColor: '#0057B8',
+                            confirmButtonText: "Ok",
+                            closeOnConfirm: false
+                        });
+                    } else {
+                        var leadId = '{!currLead.Id}';
+                        if (typeof (sforce) != 'undefined' && sforce.one) {
+                            // Lightning
+                            swal({
+                                    type: "success",
+                                    icon: "success",
+                                    title: "Success",
+                                    confirmButtonColor: "#0070d2",
+                                    text: "Diagnosis verification sent successfully.",
+                                    closeOnConfirm: true,
+                                    closeOnCancel: true
+                                },
+                                function (isConfirm) {
+                                    //IME-25 Check whether page is in console or not.
+                                    if (sforce.console && sforce.console.isInConsole()) {
+                                        var closeSubtab = function closeSubtab(result) {
+                                            //Getting current tab Id
+                                            var tabId = result.id;
+                                            sforce.console.closeTab(tabId);
+                                        };
+                                        sforce.console.getEnclosingTabId(closeSubtab);
+                                    }
+                                    sforce.one.navigateToSObject(leadId);
+
+                                });
+
+                        } else {
+                            //classic
+                            window.location.href = '/' + leadId;
+                        }
+                    }
+                }
+
+                function Cancel() {
+                    window.history.back();
+                }
             </script>
-            
+
         </apex:form>
     </div>
 </apex:page>

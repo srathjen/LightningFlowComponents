@@ -334,6 +334,7 @@ global class WishReferralForm_AC {
                         SELECT Id, Name, Code_To_Use__c
                         FROM Condition_Description__c
                         WHERE Not_Listed__c = TRUE
+                    	 AND InActive__c = FALSE
                 ];
             }
             logValue = String.valueOf(conditionDescriptions);

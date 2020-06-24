@@ -18,6 +18,7 @@
  * 4. 15/04/2020 - Manoj      - SIW-531 : Setting value blank for Number_hospital_admissions__c field if no value provided from form for the associated question
  * 5. 15 Apr 2020 - Chris Smith - SIW-497 : Provided check on Save & Next to make sure ICD Codes and Condition
  * 6. 01 Jun 2020 - Manoj - SIW-508 : Added conditions to hide hospitalization questions from docusign
+ * 7. 12 Jun 2020 - Chris and Samer - SIW-508 : Fixed zero showing by default for number of hospitalizations.
  * Descriptions were looked up.
  **/
 public class DiagnosisVerification_AC {
@@ -108,7 +109,7 @@ public class DiagnosisVerification_AC {
         wishChildWrapperIns.healthCareWork = currLead.I_m_Part_of_The_Treating_HealthCare_Team__c;
         wishChildWrapperIns.vegetativeState = currLead.Is_in_a_Comatose_Vegetative_State__c;
         wishChildWrapperIns.explainDeteriorate = currLead.Please_Explain_Deteriorate__c;
-        wishChildWrapperIns.expediteTheProcess = currLead.Any_medical_reason_for_moving_quickly__c;//Added as per IME-107
+        wishChildWrapperIns.expediteTheProcess = currLead.Any_medical_reason_for_moving_quickly__c.stripHTMLTags();
         wishChildWrapperIns.conditioDeteriorate = currLead.Will_Child_s_Condition_Deteriorate__c;
         wishChildWrapperIns.wishChildEligibilityNotes = currLead.Why_do_you_feel_would_be_eligible_Wish__c;
         wishChildWrapperIns.plzExplain = currLead.Please_Explain__c;
@@ -126,7 +127,8 @@ public class DiagnosisVerification_AC {
         wishChildWrapperIns.alt2MedPhone = currLead.Alternate2MedProfessionalPhone__c;
         wishChildWrapperIns.alt2MedHosp = currLead.Alternate2HospitalTreatmentFacility__c;
         wishChildWrapperIns.unplannedHospitalAdmission = currLead.Unplanned_hospital_admissions__c;
-        wishChildWrapperIns.numberOfHospitalAdmission = Integer.valueOf(currLead.Number_hospital_admissions__c);
+        //wishChildWrapperIns.numberOfHospitalAdmission = Integer.valueOf(currLead.Number_hospital_admissions__c);
+        wishChildWrapperIns.numberOfHospitalAdmission = String.valueOf(currLead.Number_hospital_admissions__c);   //Samer 508     
         wishChildWrapperIns.admittingDiagnosis = currLead.Admitting_diagnosis__c;
         wishChildWrapperIns.ifICUAdmission = currLead.ICU_Admissions__c;
         //SIW-355 Start : Mapped 2 new added questions value to lead field on loading of page
@@ -905,7 +907,8 @@ public class DiagnosisVerification_AC {
             currLead.Unplanned_hospital_admissions__c = wishChildWrapperIns.unplannedHospitalAdmission;
             //SIW-531 Start : Setting value blank for Number_hospital_admissions__c if no value provided from form for this question
             if (wishChildWrapperIns.unplannedHospitalAdmission == 'Yes') {
-                currLead.Number_hospital_admissions__c = wishChildWrapperIns.numberOfHospitalAdmission;
+                //currLead.Number_hospital_admissions__c = wishChildWrapperIns.numberOfHospitalAdmission;
+                currLead.Number_hospital_admissions__c = Integer.valueof(wishChildWrapperIns.numberOfHospitalAdmission); //Samer 508
                 currLead.Admitting_diagnosis__c = wishChildWrapperIns.admittingDiagnosis;
                 currLead.ICU_Admissions__c = wishChildWrapperIns.ifICUAdmission;
             } else {

@@ -455,7 +455,7 @@
                                 <apex:outputpanel rendered="{!currLead.Any_medical_reason_for_moving_quickly__c!=Null}">
                                     <div class="container" style="width:100%;">
                                         <div class="left-col"> Is there a medical necessity to expedite the process?</div><!--SIW-355 changed verbiage-->
-                                        <div class="left-col"> {!currLead.Any_medical_reason_for_moving_quickly__c}</div>
+                                        <div class="left-col"><apex:outputText value="{!currLead.Any_medical_reason_for_moving_quickly__c}" escape="false" /></div>
                                     </div>
                                 </apex:outputpanel>
                                 

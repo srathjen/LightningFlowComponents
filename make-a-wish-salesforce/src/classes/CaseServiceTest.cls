@@ -204,6 +204,7 @@ public with sharing class CaseServiceTest {
 
             for (Case c : cases) {
                 c.Status = Constant_AC.CASE_STATUS_CLOSED;
+                c.Closed_Date__c = Date.today();
                 c.OwnerId = employee.Id;
             }
             update cases;
@@ -283,18 +284,6 @@ public with sharing class CaseServiceTest {
 
         cases[0].Status = Constant_AC.CASE_STATUS_READY_TO_ASSIGN;
         cases[0].Sub_Status__c = Constant_AC.CASE_SUB_STATUS_ABANDONED;
-        update cases;
-    }
-
-    @IsTest
-    static void testWishDetermined() {
-        Lead lead = getLead();
-        List<Case> cases = createCases(lead);
-        insert cases;
-
-        cases[0].Status = Constant_AC.CASE_STATUS_WISH_DETERMINED;
-        cases[0].Sub_Status__c = Constant_AC.CASE_SUB_STATUS_ABANDONED;
-        cases[0].Wish_Type__c = Constant_AC.CASE_WISH_TYPE_CRUISE_DISNEY;
         update cases;
     }
 

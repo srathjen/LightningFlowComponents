@@ -275,6 +275,7 @@ public class VolunteerWorkItems_AC_Test {
 				WHERE Wish_Type__c = :'Disney World'
 		];
 		wishCase.Status = 'Closed';
+        wishCase.Closed_Date__c = Date.today();
 		update wishCase;
 
 		Volunteer_Opportunity__c volOpp = [

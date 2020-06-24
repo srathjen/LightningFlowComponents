@@ -2034,6 +2034,26 @@
     </applicationVisibilities>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Case.Final_Close_Letter_Sent__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Ninety_Day_Letter_Sent__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Sixty_Day_Letter_Sent__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Thirty_Day_Letter_Sent__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>AccessTokenList__mdt.API_URL__c</field>
         <readable>false</readable>
     </fieldPermissions>

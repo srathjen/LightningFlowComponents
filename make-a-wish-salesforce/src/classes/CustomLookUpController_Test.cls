@@ -17,7 +17,20 @@ public class CustomLookUpController_Test {
         accountsDataFactory[1].Email__c = 'MAW.Arizona.Test@wish.org';
         insert accountsDataFactory;
         
+        Condition_Description__c conditionMelanoma = TestDataFactory.createConditionDescription(1)[0];
+        conditionMelanoma.Name = 'Malignant Melanoma';
+        conditionMelanoma.Treatment_Subspecialty__c = 'Oncology';
+        conditionMelanoma.Code_To_Use__c = 'C43.30';
+        conditionMelanoma.PR_Diagnosis__c = 'Malignant Melanoma';
+        conditionMelanoma.Group1__c = true;
+        conditionMelanoma.Not_Listed__c = true;
+        conditionMelanoma.InActive__c = false;
+        insert conditionMelanoma;
+        
         List<ICD_Codes__c> icdCodeList = TestDataFactory.createIcdCode(1);
+        icdCodeList[0].Name = 'C43.30';
+        icdCodeList[0].Condition_Description__c = conditionMelanoma.Id;
+        icdCodeList[0].Short_Description__c = 'Malignant Melanoma';
         insert icdCodeList;
         
         List<Contact> contactsDataFactory = TestDataFactory.createContact(4);
@@ -98,5 +111,25 @@ public class CustomLookUpController_Test {
         List<sObject> objAccountList = customLookUpController.fetchLookUpValues('Make-A-Wish','Account', additionalAttributes, null, '');
         System.assertEquals(true, !objAccountList.isEmpty());
         Test.stopTest();
+    }
+    
+    @isTest
+    public static void testConditionDescription() {
+        Test.startTest();
+        List<String> additionalAttributes = new List<String>();
+        additionalAttributes.add('Inactive__c');
+        Condition_Description__c returnValue = (Condition_Description__c)customLookUpController.fetchLookUpValues('Malignant','Condition_Description__c', additionalAttributes, null, '')[0];
+        Test.stopTest();
+        System.assert(returnValue.Inactive__c == false);
+    }
+    
+    @isTest
+    public static void testIcdCode() {
+        Test.startTest();
+        List<String> additionalAttributes = new List<String>();
+        additionalAttributes.add('Short_Description__c');
+        ICD_Codes__c returnCode = (ICD_Codes__c)customLookUpController.fetchLookUpValues('C43','ICD_Codes__c', additionalAttributes, null, '')[0];
+        Test.stopTest();
+        System.assert(returnCode.Short_Description__c == 'Malignant Melanoma');
     }
 }
