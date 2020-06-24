@@ -200,7 +200,7 @@ public class DocusignStatusService {
         List<Lead> leadList = new List<Lead>();
         if (!leadIdSet.isEmpty()) {
             for (Lead dbLead : [
-                    SELECT Id,isSign__c,Status,RFI_Form_Info_Hidden__c, Auto_Qualified__c, Provider_Signature__c, Part_A_DV_Recipient__c
+                    SELECT Id,isSign__c,Status,RFI_Form_Info_Hidden__c, Auto_Qualified__c, Provider_Signature__c, Part_A_DV_Recipient__c, Hidden_DV_Form_Name__c
                     FROM Lead
                     WHERE Id IN:leadIdSet AND Status = :Constant_AC.LEAD_STATUS_REFERRED AND Sub_Status__c = :Constant_AC.LEAD_SUB_STATUS_PENDING_DIAGNOSIS_VERIFICATION
             ]) {
@@ -214,7 +214,7 @@ public class DocusignStatusService {
                     dbLead.Is_Required_Bypass__c = false;//Added as per IME-60
                 }
                 dbLead.isSign__c = true;
-                dbLead.Provider_Signature__c = dbLead.Part_A_DV_Recipient__c; // SIW-103
+                dbLead.Provider_Signature__c = dbLead.Hidden_DV_Form_Name__c; // SIW-103 SIW-635
 
                 // Process Builder
                 if (leadByDocuSignCompletedDateTime.containsKey(dbLead.Id)) {

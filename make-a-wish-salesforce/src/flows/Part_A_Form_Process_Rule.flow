@@ -506,7 +506,7 @@
                 <stringValue>&quot;Diagnosis Verification sent to  &quot; &amp; [Lead].Hidden_DV_Form_Name__c &amp; &quot;.&quot;</stringValue>
             </value>
         </processMetadataValues>
-        <name>formula_10_myRule_7_A1_6917575887</name>
+        <name>formula_10_myRule_7_A1_2409397688</name>
         <dataType>String</dataType>
         <expression>&quot;Diagnosis Verification sent to  &quot; &amp; {!myVariable_current.Hidden_DV_Form_Name__c} &amp; &quot;.&quot;</expression>
     </formulas>
@@ -517,7 +517,7 @@
                 <stringValue>$Label.Salesforce_Support_User_Id </stringValue>
             </value>
         </processMetadataValues>
-        <name>formula_11_myRule_7_A1_5410597156</name>
+        <name>formula_11_myRule_7_A1_6059165622</name>
         <dataType>String</dataType>
         <expression>{!$Label.Salesforce_Support_User_Id}</expression>
     </formulas>
@@ -528,7 +528,7 @@
                 <stringValue>&quot;Diagnosis Verification sent to  &quot; &amp; [Lead].Hidden_DV_Form_Name__c &amp; &quot;.&quot;</stringValue>
             </value>
         </processMetadataValues>
-        <name>formula_4_myRule_1_A2_6595080276</name>
+        <name>formula_4_myRule_1_A2_0012006263</name>
         <dataType>String</dataType>
         <expression>&quot;Diagnosis Verification sent to  &quot; &amp; {!myVariable_current.Hidden_DV_Form_Name__c} &amp; &quot;.&quot;</expression>
     </formulas>
@@ -539,11 +539,11 @@
                 <stringValue>$Label.Salesforce_Support_User_Id </stringValue>
             </value>
         </processMetadataValues>
-        <name>formula_5_myRule_1_A2_2969003267</name>
+        <name>formula_5_myRule_1_A2_3741398641</name>
         <dataType>String</dataType>
         <expression>{!$Label.Salesforce_Support_User_Id}</expression>
     </formulas>
-    <interviewLabel>Part_A_Form_Process_Rule-14_InterviewLabel</interviewLabel>
+    <interviewLabel>Part_A_Form_Process_Rule-16_InterviewLabel</interviewLabel>
     <label>Part A Form Process Rule</label>
     <processMetadataValues>
         <name>ObjectType</name>
@@ -611,7 +611,7 @@
             </processMetadataValues>
             <field>Description</field>
             <value>
-                <elementReference>formula_4_myRule_1_A2_6595080276</elementReference>
+                <elementReference>formula_4_myRule_1_A2_0012006263</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -641,7 +641,7 @@
             </processMetadataValues>
             <field>OwnerId</field>
             <value>
-                <elementReference>formula_5_myRule_1_A2_2969003267</elementReference>
+                <elementReference>formula_5_myRule_1_A2_3741398641</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -807,7 +807,7 @@
             </processMetadataValues>
             <field>Description</field>
             <value>
-                <elementReference>formula_10_myRule_7_A1_6917575887</elementReference>
+                <elementReference>formula_10_myRule_7_A1_2409397688</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -837,7 +837,7 @@
             </processMetadataValues>
             <field>OwnerId</field>
             <value>
-                <elementReference>formula_11_myRule_7_A1_5410597156</elementReference>
+                <elementReference>formula_11_myRule_7_A1_6059165622</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -991,6 +991,9 @@
         <label>Update DV Recipient Name on Lead</label>
         <locationX>100</locationX>
         <locationY>400</locationY>
+        <connector>
+            <targetReference>myRule_1_A4</targetReference>
+        </connector>
         <filters>
             <processMetadataValues>
                 <name>implicit</name>
@@ -1046,6 +1049,135 @@
         <processMetadataValues>
             <name>evaluationType</name>
             <value>
+                <stringValue>criteria</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>extraTypeInfo</name>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>isChildRelationship</name>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>reference</name>
+            <value>
+                <stringValue>[Lead]</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>referenceTargetField</name>
+        </processMetadataValues>
+        <name>myRule_1_A4</name>
+        <label>Populate DV Recipient if Name Not Populated</label>
+        <locationX>100</locationX>
+        <locationY>500</locationY>
+        <filters>
+            <processMetadataValues>
+                <name>implicit</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </processMetadataValues>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <processMetadataValues>
+                <name>implicit</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>inputDataType</name>
+                <value>
+                    <stringValue>Boolean</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>DV Recipient</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideReferenceTo</name>
+                <value>
+                    <stringValue></stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>operatorDataType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Boolean</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>Part_A_DV_Recipient__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>DV Recipient</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideReferenceTo</name>
+                <value>
+                    <stringValue></stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>Part_A_DV_Recipient__c</field>
+            <value>
+                <elementReference>myVariable_current.HiddenMedicalProfessionalEmail__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <processMetadataValues>
+            <name>evaluationType</name>
+            <value>
                 <stringValue>always</stringValue>
             </value>
         </processMetadataValues>
@@ -1071,6 +1203,9 @@
         <label>Update DV Recipient Name on Lead</label>
         <locationX>700</locationX>
         <locationY>400</locationY>
+        <connector>
+            <targetReference>myRule_7_A4</targetReference>
+        </connector>
         <filters>
             <processMetadataValues>
                 <name>implicit</name>
@@ -1100,7 +1235,7 @@
             <processMetadataValues>
                 <name>leftHandSideLabel</name>
                 <value>
-                    <stringValue>Part A / DV Recipient</stringValue>
+                    <stringValue>DV Recipient</stringValue>
                 </value>
             </processMetadataValues>
             <processMetadataValues>
@@ -1118,6 +1253,135 @@
             <field>Part_A_DV_Recipient__c</field>
             <value>
                 <elementReference>myVariable_current.Hidden_DV_Form_Name__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <processMetadataValues>
+            <name>evaluationType</name>
+            <value>
+                <stringValue>criteria</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>extraTypeInfo</name>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>isChildRelationship</name>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>reference</name>
+            <value>
+                <stringValue>[Lead]</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>referenceTargetField</name>
+        </processMetadataValues>
+        <name>myRule_7_A4</name>
+        <label>Populate DV Recipient if Name Not Populated</label>
+        <locationX>700</locationX>
+        <locationY>500</locationY>
+        <filters>
+            <processMetadataValues>
+                <name>implicit</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </processMetadataValues>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <processMetadataValues>
+                <name>implicit</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>inputDataType</name>
+                <value>
+                    <stringValue>Boolean</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>DV Recipient</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideReferenceTo</name>
+                <value>
+                    <stringValue></stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>operatorDataType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Boolean</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>Part_A_DV_Recipient__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>DV Recipient</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideReferenceTo</name>
+                <value>
+                    <stringValue></stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>Part_A_DV_Recipient__c</field>
+            <value>
+                <elementReference>myVariable_current.HiddenMedicalProfessionalEmail__c</elementReference>
             </value>
         </inputAssignments>
         <object>Lead</object>

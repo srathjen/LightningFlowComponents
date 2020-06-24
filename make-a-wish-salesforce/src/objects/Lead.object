@@ -449,7 +449,7 @@
                 </value>
             </valueSetDefinition>
         </valueSet>
-    </fields>	
+    </fields>
     <fields>
     <fullName>Is_wish_referral_discussed_health_del__c</fullName>
     <externalId>false</externalId>
@@ -3293,7 +3293,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <trackHistory>false</trackHistory>
         <type>Checkbox</type>
 	    </fields>
-	 <fields>
+	    <fields>
         <fullName>Inquiry_Date__c</fullName>
         <description>It holds the Date of Inquriy form submitted.</description>
         <externalId>false</externalId>
@@ -3587,6 +3587,17 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
                 </value>
             </valueSetDefinition>
         </valueSet>
+    </fields>
+    <fields>
+        <fullName>Medical_Provider__c</fullName>
+        <description>Used in Mail Merge Template SIW-635</description>
+        <externalId>false</externalId>
+        <formula>BLANKVALUE("Healthcare Team",  Hidden_DV_Form_Name__c )</formula>
+        <label>Medical Provider</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Medical_Questions__c</fullName>
@@ -6923,9 +6934,9 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
             </valueSetDefinition>
         </valueSet>
     </fields>
-	<fields>
+    <fields>
 	<fullName>Expedite_timeframe__c</fullName>
-    <description>Used to hold &#39;ideal timeframe for wish&#39; values</description>
+    <description>Used to hold 'ideal timeframe for wish' values</description>
     <externalId>false</externalId>
     <label>Expedite timeframe</label>
     <required>false</required>
@@ -6970,7 +6981,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
     <type>LongTextArea</type>
     <visibleLines>3</visibleLines>
 	</fields>
-    <fields>
+	<fields>
         <fullName>unique_wish_identifier__c</fullName>
         <caseSensitive>false</caseSensitive>
         <description>To store the unique wish identifier</description>
