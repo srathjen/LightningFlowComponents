@@ -276,10 +276,11 @@ public class VolunteerTraining_AC_Test {
     }
 
     private static User getVolunteerUser() {
+        String usernameSuffixWildcard = '%' + TestDataFactory.USERNAME_SUFFIX;
         return [
                 SELECT Id, ContactId
                 FROM User
-                WHERE Username LIKE '%@testorg.com'
+                WHERE Username LIKE :usernameSuffixWildcard
         ];
     }
 
