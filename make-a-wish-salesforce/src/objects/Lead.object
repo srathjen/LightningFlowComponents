@@ -1522,15 +1522,15 @@
     </fields>
     <fields>
         <fullName>Best_contact_for_Physician_Email__c</fullName>
-        <description>It holds the Best contact for Physician Email</description>
-        <externalId>false</externalId>
-        <inlineHelpText>Who is the best person to contact for this physician?</inlineHelpText>
-        <label>Best contact for Physician Email</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Email</type>
-        <unique>false</unique>
+		<description>It holds the Best contact for Physician Email</description>
+		<externalId>false</externalId>
+		<inlineHelpText>This recipient is the best person to contact for the physician. They will automatically receive a copy of the &apos;Your patient is eligible for a wish&apos; email upon qualification.</inlineHelpText>
+		<label>Best contact for Physician Email</label>
+		<required>false</required>
+		<trackFeedHistory>false</trackFeedHistory>
+		<trackHistory>false</trackHistory>
+		<type>Email</type>
+		<unique>false</unique>
     </fields>
     <fields>
         <fullName>CampaignId</fullName>
@@ -6151,14 +6151,15 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
     </fields>
     <fields>
         <fullName>Treating_Medical_Professional_Email__c</fullName>
-        <description>This field will hold the Treating Medical Professional Email Address</description>
-        <externalId>false</externalId>
-        <label>Treating Medical Professional Email</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Email</type>
-        <unique>false</unique>
+		<description>This field will hold the Treating Medical Professional Email Address</description>
+		<externalId>false</externalId>
+		<inlineHelpText>This recipient will automatically receive a copy of the &apos;Your patient is eligible for a wish&apos; email upon qualification.</inlineHelpText>
+		<label>Treating Medical Professional Email</label>
+		<required>false</required>
+		<trackFeedHistory>false</trackFeedHistory>
+		<trackHistory>false</trackHistory>
+		<type>Email</type>
+		<unique>false</unique>
     </fields>
     <fields>
         <fullName>Treating_Medical_Professional_Fax__c</fullName>
