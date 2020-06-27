@@ -142,7 +142,7 @@
         return JSON.parse('{ ' +
             '"Wish__c":"' + wishCaseRecordId + '", "Wish_Affiliation_Type__c":"' + wishAffiliationTypeDefault + '","Residing_with_Wish_child__c":"",' +
             '"Medical_Needs__c":false,"Survey_Recipient__c":false,"Non_Comped__c":false,"Details__c":"",' +
-            '"Contact__r":{"FirstName":"","LastName":"","Birthdate":"","MailingStreet":"","MailingCity":"","MailingState":"",' +
+            '"Contact__r":{"Salutation":"","FirstName":"","LastName":"","Birthdate":"","MailingStreet":"","MailingCity":"","MailingState":"",' +
             '"MailingPostalCode":"","MailingCountry":"","npe01__PreferredPhone__c":"","Phone":"","npe01__HomeEmail__c":"",' +
             '"npsp__is_Address_Override__c":false,"npsp__Do_Not_Contact__c":false,"Do_Not_Contact_Notes__c":"","npsp__Deceased__c":false},' +
             '"Relationship__r":{"npe4__Type__c":"","Parent_Legal_Guardian__c":false,' +

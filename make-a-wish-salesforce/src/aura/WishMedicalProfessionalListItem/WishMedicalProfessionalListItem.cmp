@@ -26,6 +26,7 @@
     <aura:attribute name="states" type="Object[]" default="[]"/>
     <aura:attribute name="countries" type="Object[]" default="[]"/>
     <aura:attribute name="preferredPhoneOptions" type="Object[]" default="[]"/>
+    <aura:attribute name="salutationOptions" type="Object[]" default="[]"/>
     <aura:attribute name="relationshipTypes" type="Object[]" default="[]"/>
     <aura:attribute name="wishAffiliationTypes" type="Object[]" default="[]"/>
     <aura:attribute name="wishAffiliationLabels" type="Map" default="{}"/>
@@ -72,7 +73,9 @@
             <div id="tableHeader" class="">{!v.wishMedicalProfessional.Contact__r.Provider_Type__c}</div>
         </td>
         <td role="gridcell" data-label="{!v.contactLabels.name}">
-            <div id="tableHeader" class="">{!v.wishMedicalProfessional.Contact__r.Name}</div>
+            <div id="tableHeader" class="">
+                {!if(empty(v.wishMedicalProfessional.Contact__r.Salutation), v.wishMedicalProfessional.Contact__r.Name, concat(v.wishMedicalProfessional.Contact__r.Salutation + ' ', v.wishMedicalProfessional.Contact__r.Name))}
+            </div>
         </td>
         <td role="gridcell" data-label="{!v.relationshipLabels.qualifying_medical_professional__c}">
             <div class="text-align-left">
@@ -331,6 +334,25 @@
                             {!$Label.c.Wish_Affiliation_Contact_Information}
                         </span>
                         </h3>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <div class="slds-hint-parent slds-form-element">
+                            <label class="slds-form-element__label"
+                                   for="text-input-id-1">{!v.contactLabels.salutation}</label>
+                            <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
+                                <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
+                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
+                                                      iconName="utility:edit"
+                                                      onclick="{!c.onClickEdit}"/>
+                                <aura:if
+                                        isTrue="{!empty(v.wishMedicalProfessional.Contact__r.Salutation)}">
+                                    <br/>
+                                    <aura:set attribute="else">
+                                        <span id="text-input-id-1">{!v.wishMedicalProfessional.Contact__r.Salutation}</span>
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                        </div>
                     </div>
                     <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
                         <div class="slds-hint-parent slds-form-element">
@@ -729,6 +751,19 @@
                             {!$Label.c.Wish_Affiliation_Contact_Information}
                         </span>
                         </h3>
+                    </div>
+                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
+                        <lightning:select label="{!v.contactLabels.salutation}"
+                                          name="contactSalutation"
+                                          value="{!v.wishMedicalProfessional.Contact__r.Salutation}">
+                            <option value=""></option>
+                            <aura:iteration items="{!v.salutationOptions}"
+                                            var="salutationOption">
+                                <option value="{!salutationOption}">
+                                    {!salutationOption}
+                                </option>
+                            </aura:iteration>
+                        </lightning:select>
                     </div>
                     <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
                         <div class="{! !v.isValidFirstName ? 'slds-has-error' : ''}">

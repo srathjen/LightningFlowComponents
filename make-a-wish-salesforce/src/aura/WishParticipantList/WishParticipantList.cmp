@@ -35,6 +35,7 @@
     <aura:attribute name="states" type="Object[]" default="[]"/>
     <aura:attribute name="countries" type="Object[]" default="[]"/>
     <aura:attribute name="preferredPhoneOptions" type="Object[]" default="[]"/>
+    <aura:attribute name="salutationOptions" type="Object[]" default="[]"/>
     <aura:attribute name="residingWithChildOptions" type="Object[]" default="[]"/>
     <aura:attribute name="relationshipTypes" type="Object[]" default="[]"/>
     <aura:attribute name="wishAffiliationTypes" type="Object[]" default="[]"/>
@@ -141,6 +142,7 @@
                 <tbody>
                 <aura:iteration items="{!v.wishParticipants}" var="participant" indexVar="index">
                     <c:WishParticipantListItem
+                            salutationOptions="{!v.salutationOptions}"
                             preferredPhoneOptions="{!v.preferredPhoneOptions}"
                             countries="{!v.countries}"
                             states="{!v.states}"
@@ -328,6 +330,19 @@
                                 </div>
                             </aura:if>
                             <aura:if isTrue="{!v.showCreateContact}">
+                                <div class="slds-col slds-size_6-of-12">
+                                    <lightning:select label="{!v.contactLabels.salutation}"
+                                                      name="contactSalutation"
+                                                      value="{!v.newWishParticipant.Contact__r.Salutation}">
+                                        <option value=""></option>
+                                        <aura:iteration items="{!v.salutationOptions}"
+                                                        var="salutationOption">
+                                            <option value="{!salutationOption}">
+                                                {!salutationOption}
+                                            </option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
                                 <div class="slds-col slds-size_6-of-12">
                                     <div class="{! !v.isValidFirstName ? 'slds-has-error' : ''}">
                                         <lightning:input label="{!v.contactLabels.firstname}"

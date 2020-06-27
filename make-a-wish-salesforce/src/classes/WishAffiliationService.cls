@@ -337,7 +337,7 @@ public without sharing class WishAffiliationService {
         List<Wish_Affiliation__c> wishAffiliations = [
                 SELECT Id, Name, Wish_Affiliation_Type__c, Wish__c, Residing_with_Wish_child__c, Medical_Needs__c,
                         Survey_Recipient__c, Non_Comped__c, Details__c, Send_Clearance_Forms_To__c, Medical_Professional_Status__c,
-                        Contact__r.Name, Contact__r.FirstName, Contact__r.LastName, Contact__r.Birthdate, Contact__r.Current_Age__c,
+                        Contact__r.Salutation, Contact__r.Name, Contact__r.FirstName, Contact__r.LastName, Contact__r.Birthdate, Contact__r.Current_Age__c,
                         Contact__r.MailingStreet, Contact__r.MailingCity, Contact__r.MailingState, Contact__r.MailingPostalCode,
                         Contact__r.MailingCountry, Contact__r.npe01__PreferredPhone__c, Contact__r.Phone, Contact__r.HomePhone,
                         Contact__r.MobilePhone, Contact__r.OtherPhone, Contact__r.npe01__WorkPhone__c, Contact__r.npe01__HomeEmail__c,
@@ -872,7 +872,7 @@ public without sharing class WishAffiliationService {
         return [
                 SELECT Id, Name, Wish_Affiliation_Type__c, Wish__c, Residing_with_Wish_child__c, Medical_Needs__c,
                         Survey_Recipient__c, Non_Comped__c, Details__c, Send_Clearance_Forms_To__c, Medical_Professional_Status__c,
-                        Contact__r.Name, Contact__r.FirstName, Contact__r.LastName, Contact__r.Birthdate, Contact__r.Current_Age__c,
+                        Contact__r.Salutation, Contact__r.Name, Contact__r.FirstName, Contact__r.LastName, Contact__r.Birthdate, Contact__r.Current_Age__c,
                         Contact__r.MailingStreet, Contact__r.MailingCity, Contact__r.MailingState, Contact__r.MailingPostalCode,
                         Contact__r.MailingCountry, Contact__r.npe01__PreferredPhone__c, Contact__r.Phone, Contact__r.HomePhone,
                         Contact__r.MobilePhone, Contact__r.OtherPhone, Contact__r.npe01__WorkPhone__c, Contact__r.npe01__HomeEmail__c,
@@ -915,7 +915,7 @@ public without sharing class WishAffiliationService {
      */
     public static Contact findContactById(Id contactId) {
         return [
-                SELECT Id, Name, FirstName, LastName, Birthdate, MailingStreet,
+                SELECT Id, Name, Salutation, FirstName, LastName, Birthdate, MailingStreet,
                         MailingCity,MailingState, MailingPostalCode, MailingCountry,
                         npe01__PreferredPhone__c, Phone, npe01__HomeEmail__c, npe01__WorkEmail__c,
                         AccountId, Region_Chapter__c
@@ -1006,7 +1006,7 @@ public without sharing class WishAffiliationService {
      */
     public static List<SObject> findWishAffiliationsByCaseIdAndTypes(Id caseRecordId, List<String> wishAffiliationTypes, Boolean isUserAllowedToUpdateWishAffiliation) {
         String soqlQuery = 'SELECT Id, Name, Wish_Affiliation_Type__c, Wish__c, Residing_with_Wish_child__c,Validated_in_Interview__c,' +
-                ' Contact__c, Contact__r.Name, Contact__r.FirstName, Contact__r.Middle_Name__c, Contact__r.LastName, Contact__r.Birthdate, ' +
+                ' Contact__c, Contact__r.Name, Contact__r.Salutation, Contact__r.FirstName, Contact__r.Middle_Name__c, Contact__r.LastName, Contact__r.Birthdate, ' +
                 ' Contact__r.npe01__HomeEmail__c, Contact__r.T_Shirt_Size__c,' +
                 ' Relationship__c, Relationship__r.npe4__Type__c FROM Wish_Affiliation__c' +
                 ' WHERE Wish__c = :caseRecordId  AND Wish_Affiliation_Type__c IN :wishAffiliationTypes';

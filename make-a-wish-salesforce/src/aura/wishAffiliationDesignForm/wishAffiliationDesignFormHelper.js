@@ -22,6 +22,7 @@
             if (state === 'SUCCESS') {
                 cmp.set("v.wishAffiliationList", dataMap['wishAffiliations']);
                 cmp.set("v.relationshipTypes", dataMap['relationshipTypes']);
+                cmp.set("v.salutationOptions", dataMap['salutationOptions']);
                 cmp.set("v.residingWithChildOptions", dataMap['residingWithChild']);
                 cmp.set("v.isUserProfileAllowedToUpdateWishAffiliation", dataMap['isUserProfileAllowedToUpdateWishAffiliation']);
                 cmp.set("v.wishChildFirstName", dataMap['wishChildFirstName']);

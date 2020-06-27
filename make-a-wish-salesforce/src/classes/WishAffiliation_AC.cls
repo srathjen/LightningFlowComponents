@@ -24,6 +24,7 @@ public without sharing class WishAffiliation_AC {
 		final String mailingStateCodeFieldApiNameOfContact = 'MailingStateCode';
 		final String mailingCountryCodeFieldApiNameOfContact = 'MailingCountryCode';
 		final String preferredPhoneFieldApiNameOfContact = 'npe01__PreferredPhone__c';
+		final String salutationFieldApiNameOfContact = 'Salutation';
 		final String wishAffiliationSobjectApiName = 'Wish_Affiliation__c';
 		final String relationshipSobjectApiName = 'npe4__Relationship__c';
 		final String residingWithWishChildFieldApiNameOfWishAffiliation = 'Residing_with_Wish_child__c';
@@ -66,6 +67,10 @@ public without sharing class WishAffiliation_AC {
 			// Find Preferred Phone options
 			List<String> preferredPhoneOptions = Utils.getPicklistLabels(contactSobjectApiName, preferredPhoneFieldApiNameOfContact);
 			returnValuesMap.put('preferredPhoneOptions', preferredPhoneOptions);
+
+			// Find Salutation options
+			List<String> salutationOptions = Utils.getPicklistLabels(contactSobjectApiName, salutationFieldApiNameOfContact);
+			returnValuesMap.put('salutationOptions', salutationOptions);
 
 			// Find Relationship Types
 			List<String> relationshipTypes = Utils.getPicklistLabels(relationshipSobjectApiName, relationshipTypeFieldApiNameOfRelationship);
@@ -182,6 +187,16 @@ public without sharing class WishAffiliation_AC {
 				Boolean isUpdateContact = false;
 				Contact modifiedContact = modifiedWishAffiliation.Contact__r;
 				Contact existingContact = existingWishAffln.Contact__r;
+				//Salutation
+				String modifiedSalutation = modifiedContact.Salutation == null
+						? '' : modifiedContact.Salutation;
+				String existingSalutation = existingContact.Salutation == null
+						? '' : existingContact.Salutation;
+				if (String.isEmpty(existingSalutation)
+						&& modifiedSalutation != existingSalutation) {
+					updateContactRecord.Salutation = modifiedSalutation;
+					isUpdateContact = true;
+				}
 				//Firstname
 				String modifiedFirstName = modifiedContact.FirstName == null
 						? '' : modifiedContact.FirstName;
@@ -456,6 +471,7 @@ public without sharing class WishAffiliation_AC {
 					= (WishAffiliationWrapper) JSON.deserialize(wishAffiliationPayload, WishAffiliationWrapper.class);
 			// Build Contact
 			if (wrapper.contact != null) {
+				wishAffiliation.Contact__r.Salutation = wrapper.contact.Salutation;
 				wishAffiliation.Contact__r.FirstName = wrapper.contact.FirstName;
 				wishAffiliation.Contact__r.LastName = wrapper.contact.LastName;
 				wishAffiliation.Contact__r.Birthdate = wrapper.contact.Birthdate;

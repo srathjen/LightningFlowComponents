@@ -11,6 +11,7 @@
     <aura:attribute name="wishCaseRecordId" type="String" access="global"/>
     <aura:attribute name="wishAffiliationList" type="Object" access="global"/>
     <aura:attribute name="relationshipTypes" type="Object[]" default="[]"/>
+    <aura:attribute name="salutationOptions" type="Object[]" default="[]"/>
     <aura:attribute name="residingWithChildOptions" type="Object[]" default="[]"/>
     <aura:attribute name="isUserProfileAllowedToUpdateWishAffiliation" type="Boolean"/>
     <aura:attribute name="newWishAffiliation" type="Object"/>
@@ -42,6 +43,7 @@
         <aura:iteration items="{!v.wishAffiliationList}" var="affiliation" indexVar="index">
             <div class="slds-col slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-4 slds-m-bottom_small">
                 <c:wishAffiliationDesignList wishAffiliation="{!affiliation}"
+                                             salutationOptions="{!v.salutationOptions}"
                                              residingWithChildOptions="{!v.residingWithChildOptions}"
                                              isUserProfileAllowedToUpdateWishAffiliation="{!v.isUserProfileAllowedToUpdateWishAffiliation}"
                                              relationshipTypes="{!v.relationshipTypes}"/>
@@ -113,6 +115,22 @@
                                  id="error-01">{!$Label.c.Wish_Participant_Required_Field}</div>
                         </aura:if>
                     </div>
+                </div>
+                <!-- Contact Salutation -->
+                <div class="slds-col slds-size_1-of-1">
+                    <lightning:select aura:id="salutation"
+                                      label="{!$Label.c.Wish_Participant_Salutation}"
+                                      name="salutation"
+                                      value="{!v.newWishAffiliation.ContactSalutation}"
+                                      onchange="{!c.onChangeValidate}">
+                        <option value=""></option>
+                        <aura:iteration items="{!v.salutationOptions}"
+                                        var="salutation">
+                            <option value="{!salutation}">
+                                {!salutation}
+                            </option>
+                        </aura:iteration>
+                    </lightning:select>
                 </div>
                 <!-- Contact First Name -->
                 <div class="slds-col slds-size_1-of-1">
