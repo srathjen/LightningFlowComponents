@@ -23112,6 +23112,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>dsfs__DocuSign_Recipient_Status__c.DV_Form_Password__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>dsfs__DocuSign_Recipient_Status__c.Lead_ID__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -23133,6 +23138,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSign_Recipient_Status__c.Lead_Owner_Title__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>dsfs__DocuSign_Recipient_Status__c.Lead_Owner__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
