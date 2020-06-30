@@ -186,19 +186,23 @@
         <fullName>Additional_Parent_Guardian_Phone</fullName>
         <field>Additional_Parent_Phone__c</field>
         <formula>IF(
-LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""))= 11,
-"("&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),2,3)&amp;
-") "&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),5,3)&amp;
-"-"&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),8,4),
-"("&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),1,3)&amp;
-") "&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),4,3)&amp;
-"-"&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),7,4)
+ISBLANK(Additional_Parent_Phone__c),
+&apos;&apos;,
+IF(
+LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Additional_Parent_Phone__c , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;))= 11,
+&quot;(&quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Additional_Parent_Phone__c , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),2,3)&amp;
+&quot;) &quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Additional_Parent_Phone__c , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),5,3)&amp;
+&quot;-&quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Additional_Parent_Phone__c , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),8,4),
+&quot;(&quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Additional_Parent_Phone__c , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),1,3)&amp;
+&quot;) &quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Additional_Parent_Phone__c , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),4,3)&amp;
+&quot;-&quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Additional_Parent_Phone__c , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),7,4)
+)
 )</formula>
         <name>Additional Parent/Guardian Phone</name>
         <notifyAssignee>false</notifyAssignee>
@@ -208,21 +212,7 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),7,4)
     <fieldUpdates>
         <fullName>Alt_Phone_Update</fullName>
         <field>Alternate1MedProfessionalPhone__c</field>
-        <formula>IF(
-LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""))= 11,
-"("&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),2,3)&amp;
-") "&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),5,3)&amp;
-"-"&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),8,4),
-"("&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),1,3)&amp;
-") "&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),4,3)&amp;
-"-"&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),7,4)
-)</formula>
+        <formula>&apos;&apos;</formula>
         <name>Alt Phone Update</name>
         <notifyAssignee>false</notifyAssignee>
         <operation>Formula</operation>
@@ -233,19 +223,19 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),7,4)
         <description>SIW-147 this is to support the duplicate check to match with custom duplicate rules - format standard lead phone to (XXX) XXX-XXXX</description>
         <field>Phone</field>
         <formula>IF(
-LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""))= 11,
-"("&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),2,3)&amp;
-") "&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),5,3)&amp;
-"-"&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),8,4),
-"("&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),1,3)&amp;
-") "&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),4,3)&amp;
-"-"&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),7,4)
+LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;))= 11,
+&quot;(&quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),2,3)&amp;
+&quot;) &quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),5,3)&amp;
+&quot;-&quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),8,4),
+&quot;(&quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),1,3)&amp;
+&quot;) &quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),4,3)&amp;
+&quot;-&quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),7,4)
 )</formula>
         <name>Update Standard Lead Phone</name>
         <notifyAssignee>false</notifyAssignee>
