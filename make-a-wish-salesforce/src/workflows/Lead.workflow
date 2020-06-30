@@ -170,7 +170,66 @@
         <template>unfiled$public/DV_Reminder_Form_Email_Template_Second</template>
     </alerts>
     <alerts>
-        <fullName>Send_Email_to_Office_Referrar_email_with_Wish_Referral_Form</fullName>
+        <fullName>Send_Email_to_Office_Referrar_email_with_Wish_Referral_Form</fullName> <fieldUpdates>
+        <fullName>Additional_Parent_Guardian_Phone</fullName>
+        <field>Additional_Parent_Phone__c</field>
+        <formula>IF(
+ISBLANK(Additional_Parent_Phone__c),
+&apos;&apos;,
+IF(
+LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Additional_Parent_Phone__c , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;))= 11,
+&quot;(&quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Additional_Parent_Phone__c , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),2,3)&amp;
+&quot;) &quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Additional_Parent_Phone__c , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),5,3)&amp;
+&quot;-&quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Additional_Parent_Phone__c , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),8,4),
+&quot;(&quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Additional_Parent_Phone__c , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),1,3)&amp;
+&quot;) &quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Additional_Parent_Phone__c , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),4,3)&amp;
+&quot;-&quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Additional_Parent_Phone__c , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),7,4)
+)
+)</formula>
+        <name>Additional Parent/Guardian Phone</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Alt_Phone_Update</fullName>
+        <field>Alternate1MedProfessionalPhone__c</field>
+        <formula>&apos;&apos;</formula>
+        <name>Alt Phone Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Format_Standard_Lead_Phone</fullName>
+        <description>SIW-147 this is to support the duplicate check to match with custom duplicate rules - format standard lead phone to (XXX) XXX-XXXX</description>
+        <field>Phone</field>
+        <formula>IF(
+LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;))= 11,
+&quot;(&quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),2,3)&amp;
+&quot;) &quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),5,3)&amp;
+&quot;-&quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),8,4),
+&quot;(&quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),1,3)&amp;
+&quot;) &quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),4,3)&amp;
+&quot;-&quot;&amp;
+MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),7,4)
+)</formula>
+        <name>Update Standard Lead Phone</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
         <ccEmails>missionresources@wish.org</ccEmails>
         <description>Send Email to Office Referrar email with Wish Referral Form</description>
         <protected>false</protected>
@@ -182,76 +241,7 @@
         <senderType>OrgWideEmailAddress</senderType>
         <template>Automated_Wish_Granting_Email_Templates/Send_Wish_Referral_Form_to_Non_Active_Chapter_Office</template>
     </alerts>
-    <fieldUpdates>
-        <fullName>Additional_Parent_Guardian_Phone</fullName>
-        <field>Additional_Parent_Phone__c</field>
-        <formula>IF(
-LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""))= 11,
-"("&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),2,3)&amp;
-") "&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),5,3)&amp;
-"-"&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),8,4),
-"("&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),1,3)&amp;
-") "&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),4,3)&amp;
-"-"&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),7,4)
-)</formula>
-        <name>Additional Parent/Guardian Phone</name>
-        <notifyAssignee>false</notifyAssignee>
-        <operation>Formula</operation>
-        <protected>false</protected>
-    </fieldUpdates>
-    <fieldUpdates>
-        <fullName>Alt_Phone_Update</fullName>
-        <field>Alternate1MedProfessionalPhone__c</field>
-        <formula>IF(
-LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""))= 11,
-"("&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),2,3)&amp;
-") "&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),5,3)&amp;
-"-"&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),8,4),
-"("&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),1,3)&amp;
-") "&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),4,3)&amp;
-"-"&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),7,4)
-)</formula>
-        <name>Alt Phone Update</name>
-        <notifyAssignee>false</notifyAssignee>
-        <operation>Formula</operation>
-        <protected>false</protected>
-    </fieldUpdates>
-    <fieldUpdates>
-        <fullName>Format_Standard_Lead_Phone</fullName>
-        <description>SIW-147 this is to support the duplicate check to match with custom duplicate rules - format standard lead phone to (XXX) XXX-XXXX</description>
-        <field>Phone</field>
-        <formula>IF(
-LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""))= 11,
-"("&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),2,3)&amp;
-") "&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),5,3)&amp;
-"-"&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),8,4),
-"("&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),1,3)&amp;
-") "&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),4,3)&amp;
-"-"&amp;
-MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , ".", ''),"-",""),"+",""),7,4)
-)</formula>
-        <name>Update Standard Lead Phone</name>
-        <notifyAssignee>false</notifyAssignee>
-        <operation>Formula</operation>
-        <protected>false</protected>
-    </fieldUpdates>
+
     <fieldUpdates>
         <fullName>Populate_Date_of_Birth_Lead</fullName>
         <description>SIW-147 - Duplicate logic</description>
