@@ -112,6 +112,7 @@
   <types>
     <members>Case</members>
     <members>Contact</members>
+    <members>dsfs__DocuSign_Recipient_Status__c</members>
     <members>Endpoints__c</members>
     <members>Inkind_Donation_PDFs__c</members>
     <members>Lead</members>
@@ -158,6 +159,10 @@
     <members>Automated_Wish_Granting_Email_Templates/Send_Wish_Referral_Form_to_Non_Active_Chapter_Office</members>
     <members>Automated_Wish_Granting_Email_Templates/Wish_Form_Email_Notification_for_Salesforce_Team_when_Wish_Form_is_Edited</members>
     <members>unfiled$public/Case_Send_Email_to_Volunteer_for_Blank_Presentation_date</members>
+    <members>unfiled$public/Diagnosis_Verification_Reminder_Form_Email_Intake_Manager</members>
+    <members>unfiled$public/Docusign_Signature_Reminder_Final_Notice</members>
+    <members>unfiled$public/Docusign_Signature_Reminder_First_Notice</members>
+    <members>unfiled$public/Docusign_Signature_Reminder_Second_Notice</members>
     <members>unfiled$public/DV_Reminder_Form_Email_Template_Final</members>
     <members>unfiled$public/DV_Reminder_Form_Email_Template_First</members>
     <members>unfiled$public/DV_Reminder_Form_Email_Template_IntakeManager</members>
@@ -508,6 +513,7 @@
     <name>ValidationRule</name>
   </types>
   <types>
+    <members>dsfs__DocuSign_Recipient_Status__c</members>
     <members>Lead</members>
     <name>Workflow</name>
   </types>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>SW-432</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Make_a_Wish_America</letterhead>
+    <name>Diagnosis Verification Reminder Form Email Intake Manager</name>
+    <style>freeForm</style>
+    <subject>Your follow-up is requested on an unsigned Diagnosis Verification</subject>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>
