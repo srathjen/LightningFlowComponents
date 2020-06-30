@@ -170,7 +170,19 @@
         <template>unfiled$public/DV_Reminder_Form_Email_Template_Second</template>
     </alerts>
     <alerts>
-        <fullName>Send_Email_to_Office_Referrar_email_with_Wish_Referral_Form</fullName> <fieldUpdates>
+        <fullName>Send_Email_to_Office_Referrar_email_with_Wish_Referral_Form</fullName>
+        <ccEmails>missionresources@wish.org</ccEmails>
+        <description>Send Email to Office Referrar email with Wish Referral Form</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Office_Referral_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Automated_Wish_Granting_Email_Templates/Send_Wish_Referral_Form_to_Non_Active_Chapter_Office</template>
+    </alerts>
+    <fieldUpdates>
         <fullName>Additional_Parent_Guardian_Phone</fullName>
         <field>Additional_Parent_Phone__c</field>
         <formula>IF(
@@ -230,18 +242,6 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot
         <operation>Formula</operation>
         <protected>false</protected>
     </fieldUpdates>
-        <ccEmails>missionresources@wish.org</ccEmails>
-        <description>Send Email to Office Referrar email with Wish Referral Form</description>
-        <protected>false</protected>
-        <recipients>
-            <field>Office_Referral_Email__c</field>
-            <type>email</type>
-        </recipients>
-        <senderAddress>wvc@wish.org</senderAddress>
-        <senderType>OrgWideEmailAddress</senderType>
-        <template>Automated_Wish_Granting_Email_Templates/Send_Wish_Referral_Form_to_Non_Active_Chapter_Office</template>
-    </alerts>
-
     <fieldUpdates>
         <fullName>Populate_Date_of_Birth_Lead</fullName>
         <description>SIW-147 - Duplicate logic</description>
