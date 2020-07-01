@@ -54,7 +54,6 @@
         <fieldNames>Interview_date__c</fieldNames>
         <fieldNames>Additional_Interview_Date1__c</fieldNames>
         <fieldNames>Additional_Interview_date2__c</fieldNames>
-        <fieldNames>Wish_Vision_Interview_Notes__c</fieldNames>
         <info>&lt;p&gt;This child is ready to discuss their wish ideas! Encourage the volunteers/staff to schedule the wish visit within 2 weeks of being assigned to the wish so that we keep the wish moving.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;&lt;u&gt;Next Steps Include:&lt;/u&gt;&lt;/i&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Wish Visit scheduled with family&lt;/li&gt;&lt;li&gt;Wish Design forms should be completed and returned&lt;/li&gt;&lt;li&gt;Update to &lt;b&gt;Wish Determined&lt;/b&gt; once the completed Wish Design forms are received and reviewed&lt;/li&gt;&lt;/ul&gt;</info>
         <picklistValueName>Ready to Interview</picklistValueName>
     </pathAssistantSteps>
