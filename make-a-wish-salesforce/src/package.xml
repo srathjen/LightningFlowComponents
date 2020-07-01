@@ -171,6 +171,7 @@
     <members>Wish_Required_Signature_File__c</members>
     <members>WishReferralForm_Translation__mdt</members>
     <members>Spanish_Translations__mdt</members>
+    <members>Wish_Required_Signature__c</members>
     <name>CustomObject</name>
   </types>
   <types>
