@@ -617,6 +617,17 @@ Signed_Date__c  +  Days_From_Signature_to_Expiry__c
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
+    <fields>
+        <fullName>Race_Ethnicity_Details__c</fullName>
+        <externalId>false</externalId>
+        <label>Race/Ethnicity Details</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
     <label>Wish Required Signature</label>
     <listViews>
         <fullName>All</fullName>
