@@ -3,7 +3,8 @@ Author      : MST Solutions
 CreatedBy   : PradeepKumar S	
 Date        : 14/03/2018
 Description : Lightning component for storing the value of quailifying diagnosis and ICD Code in lightning experience
-// 02/06/2020 - Manoj      - SIW-557: Updated placeholder to 'Acute Lymphoblastic Leukemia (ALL)' from 'Malignant Neoplasm' and to 'C91.0' from 'C00'
+// 02/06/2020 - Manoj - SIW-557: Updated placeholder to 'Acute Lymphoblastic Leukemia (ALL)' from 'Malignant Neoplasm' and to 'C91.0' from 'C00'.
+// 30/06/2020 - Manoj - SIW-330: Modified method 'callAction' in helper to refersh the view after changing diagnosis in Qualifying diagnosis page.
 -->
 
 <aura:component implements="force:appHostable,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction,lightning:actionOverride" 
