@@ -360,6 +360,29 @@ public class ContactServiceTest {
         zipAz.External_Id__c = '85069';
         insert zipAz;
         
+        Case wishChildCase = TestDataFactory.createCase(1)[0];
+        wishChildCase.RecordTypeId = Constant_AC.WISH_RT_ID;
+        wishChildCase.ChapterName__c = arizonaChapter.Id;
+        wishChildCase.Subject = 'Parent Wish';
+        wishChildCase.Interview_date__c = System.today();
+        wishChildCase.Wish_Type__c = 'Disney World';
+        wishChildCase.Start_Date__c = System.today();
+        wishChildCase.End_Date__c = System.today();
+        wishChildCase.ContactId = wishChildContact1.Id;
+        wishChildCase.Status = 'New';
+        wishChildCase.Start_Date__c = System.today();
+        wishChildCase.Budget_Submitted_Date__c = System.today();
+        wishChildCase.Budget_Approved_Date__c = System.today();
+        insert wishChildCase;
+        
+        Wish_Signature_Forms__c wishForm = TestDataFactory.createWishSignatureForm(1)[0];
+        insert wishForm;
+        
+        Wish_Required_Signature__c wishSignature = TestDataFactory.createWishRequiredSignature(1)[0];
+        wishSignature.Wish_Case__c = wishChildCase.Id;
+        wishSignature.Wish_Signature_Form__c = wishForm.Id;
+        insert wishSignature;
+        
         trac_TriggerHandlerBase.blockTrigger = false;
     }
 
@@ -1027,5 +1050,33 @@ public class ContactServiceTest {
         Test.startTest();
         ContactService.validateContact(contactMap);
         Test.stopTest();
+    }
+    
+    @isTest
+    private static void validateUpdateRaceEthnicity() {
+        Map<Id, Wish_Required_Signature__c> wishSignatureNewVals = new Map<Id, Wish_Required_Signature__c>();
+        Map<Id, Wish_Required_Signature__c> wishSignatureOldVals = new Map<Id, Wish_Required_Signature__c>();
+        Id contactId;
+        for(Wish_Required_Signature__c signature : [
+            SELECT Id, Wish_Case__c, Wish_Case__r.ContactId, Race_Ethnicity_Details__c 
+            FROM Wish_Required_Signature__c 
+            WHERE Wish_Case__r.Contact.Name = 'Jack Smith'
+        ]) {
+            wishSignatureOldVals.put(signature.Id, signature);
+            Wish_Required_Signature__c updated = signature.clone(true, true, true, true);
+            updated.Race_Ethnicity_Details__c = 'White: A person having origins in any of the original peoples of Europe, the Middle East, or North Africa.';
+            wishSignatureNewVals.put(updated.Id, updated);
+            contactId = signature.Wish_Case__r.ContactId;
+        }
+        
+        Test.startTest();
+        ContactService.updateRaceEthnicity(wishSignatureNewVals, wishSignatureOldVals);
+        Test.stopTest();
+        Contact updatedContact = [
+            SELECT Id, Race_Ethnicity__c 
+            FROM Contact 
+            WHERE Id = :contactId
+        ];
+        System.assert(updatedContact.Race_Ethnicity__c == 'White');
     }
 }

@@ -4,13 +4,25 @@ public class ContactTrigger_AT_Test {
 	@TestSetup
 	static void setup() {
 		trac_TriggerHandlerBase.blockTrigger = true;
-
-		List<Account> accounts = TestDataFactory.createAccount(1);
+		
+		List<Account> accounts = TestDataFactory.createAccount(2);
 		Account account = accounts.get(0);
 		account.Name = 'Make-A-Wish Arizona';
 		account.RecordTypeId = Constant_AC.CHAPTER_RT_ID;
 		account.Alert_for_Unassigned_Wishes__c = 1;
+        Account knowlesFamily = accounts.get(1);
+        knowlesFamily.Name = 'Jenna Knowles & Family Household';
+        knowlesFamily.RecordTypeId = Constant_AC.HOUSEHOLD_RT_ID;
 		insert accounts;
+        
+        List<Contact> contacts = TestDataFactory.createContact(1);
+        Contact contactKnowles = contacts.get(0);
+        contactKnowles.RecordTypeId = Constant_AC.WISH_FAMILY_RT_ID;
+        contactKnowles.Region_Chapter__c = account.Id;
+        contactKnowles.AccountId = knowlesFamily.Id;
+        contactKnowles.FirstName = 'Allison';
+        contactKnowles.LastName = 'Knowles';
+        insert contacts;
 
 		List<Chapter_Vs_Role__c> chapterVsRoleList = TestDataFactory.createChapterVsRole(1, 'Arizona');
 		insert chapterVsRoleList;
@@ -107,4 +119,27 @@ public class ContactTrigger_AT_Test {
 		contact.Diagnosis__c = 'test';
 		insert contacts;
 	}
+    
+    @IsTest
+    public static void updateContactSpanishValues() {
+        Contact contactToUpdate = [
+            SELECT Id, Relationship__c, npe01__PreferredPhone__c
+            FROM Contact 
+            WHERE Name = 'Allison Knowles'
+        ];
+        contactToUpdate.Relationship__c = 'Madre';
+        contactToUpdate.npe01__PreferredPhone__c = 'Móvil';
+        
+        Test.startTest();
+        update contactToUpdate;
+        Test.stopTest();
+        
+        Contact updatedContact = [
+            SELECT Id, Relationship__c, npe01__PreferredPhone__c 
+            FROM Contact 
+            WHERE Id = :contactToUpdate.Id
+        ];
+        System.assert(updatedContact.Relationship__c == 'Mother');
+        System.assert(updatedContact.npe01__PreferredPhone__c == 'Mobile');
+    }
 }

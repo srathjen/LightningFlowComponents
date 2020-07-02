@@ -230,6 +230,18 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Lead_Owner_Phone__c</fullName>
+        <externalId>false</externalId>
+        <formula>dsfs__Parent_Status_Record__r.dsfs__Lead__r.Owner:User.Phone</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Lead Owner Phone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Lead_Owner_Title__c</fullName>
         <description>SIW-432</description>
         <externalId>false</externalId>
