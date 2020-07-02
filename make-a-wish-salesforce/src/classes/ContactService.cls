@@ -2084,4 +2084,84 @@ public class ContactService {
 		}
 		return contacts;
 	}
+    
+    /**
+    * Update race/ethnicity value from wish signature form
+    * @param newWishSignaturesMap
+    * @param oldWishSignaturesMap
+    */
+    public static void updateRaceEthnicity(Map<Id, Wish_Required_Signature__c> newWishSignaturesMap, Map<Id, Wish_Required_Signature__c> oldWishSignaturesMap) {
+        Map<Id, String> caseEthnicityMap = new Map<Id, String>();
+        for(Wish_Required_Signature__c signature : newWishSignaturesMap.values()) {
+            if(signature.Wish_Case__c != null) {
+                if(oldWishSignaturesMap == null && signature.Race_Ethnicity_Details__c != null) {
+                    caseEthnicityMap.put(signature.Wish_Case__c, signature.Race_Ethnicity_Details__c);
+                }
+                if(oldWishSignaturesMap != null && signature.Race_Ethnicity_Details__c != oldWishSignaturesMap.get(signature.Id).Race_Ethnicity_Details__c) {
+                    caseEthnicityMap.put(signature.Wish_Case__c, signature.Race_Ethnicity_Details__c);
+                }
+            }
+        }
+        if(caseEthnicityMap.isEmpty()) {
+            return;
+        }
+        Map<String, String> englishSpanishMap = new Map<String, String>();
+        for(Spanish_Translations__mdt mdt : [
+            SELECT Id, English__c, Spanish__c 
+            FROM Spanish_Translations__mdt 
+            WHERE Type__c = 'Race/Ethnicity' 
+            AND Active__c = true
+        ]) {
+            englishSpanishMap.put(mdt.Spanish__c, mdt.English__c);
+        }
+        Map<String, String> raceEthnicityPicklistValues = Utils.getFieldMap('Contact', 'Race_Ethnicity__c');
+        List<Contact> contactListToUpdate = new List<Contact>();
+        for(Case wishCase : [
+            SELECT Id, ContactId, Contact.Race_Ethnicity__c, Contact.Race_Ethnicity_Details__c 
+            FROM Case 
+            WHERE Id IN :caseEthnicityMap.keySet() 
+            AND ContactId != null
+        ]) {
+            Contact conUpdate = new Contact(Id = wishCase.ContactId);
+            List<String> stringList = caseEthnicityMap.get(wishCase.Id).split(':');
+            if(!String.isBlank(stringList[0]) && englishSpanishMap.containsKey(stringList[0])) {
+                conUpdate.Race_Ethnicity__c = englishSpanishMap.get(stringList[0]);
+            } else if(!String.isBlank(stringList[0]) && raceEthnicityPicklistValues.containsKey(stringList[0])) {
+                conUpdate.Race_Ethnicity__c = stringList[0];
+            }
+            contactListToUpdate.add(conUpdate);
+        }
+        try {
+            update contactListToUpdate;
+        } catch(Exception e) {
+            createContactDebugLog(contactListToUpdate, 'updateRaceEthnicity', e);
+        }
+    }
+    
+    /**
+    * Update picklist values to english counterpart if spanish value saved
+    * @param newContactsMap
+    * @param oldContactsMap
+    */
+    public static void updatePicklistTranslations(Map<Id, Contact> newContactsMap,  Map<Id, Contact> oldContactsMap) {
+        Map<String, String> relationshipPicklistValues = Utils.getFieldMap('Contact', 'Relationship__c');
+        Map<String, String> preferredPhonePicklistValues = Utils.getFieldMap('Contact', 'npe01__PreferredPhone__c');
+        Map<String, String> englishSpanishMap = new Map<String, String>();
+        for(Spanish_Translations__mdt mdt: [SELECT Id, English__c, Spanish__c FROM Spanish_Translations__mdt WHERE Active__c = true]) {
+            englishSpanishMap.put(mdt.Spanish__c, mdt.English__c);
+        }
+        for(Contact newContact : newContactsMap.values()) {
+            Contact oldContact = oldContactsMap.get(newContact.Id);
+            if(newContact.Relationship__c != oldContact.Relationship__c) {
+                if(englishSpanishMap.containsKey(newContact.Relationship__c) && relationshipPicklistValues.containsKey(englishSpanishMap.get(newContact.Relationship__c))) {
+                    newContact.Relationship__c = englishSpanishMap.get(newContact.Relationship__c);
+                }
+            }
+            if(newContact.npe01__PreferredPhone__c != oldContact.npe01__PreferredPhone__c) {
+                if(englishSpanishMap.containsKey(newContact.npe01__PreferredPhone__c) && preferredPhonePicklistValues.containsKey(englishSpanishMap.get(newContact.npe01__PreferredPhone__c))) {
+                    newContact.npe01__PreferredPhone__c = englishSpanishMap.get(newContact.npe01__PreferredPhone__c);
+                }
+            }
+        }
+    }
 }
