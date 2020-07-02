@@ -1256,6 +1256,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>WishRequiredSignatureDomain</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>WishRequiredSignatureFileDomain</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -21227,6 +21231,31 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Wish_Required_Signature__c.Wish_Signature_Form_Name_Text__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Wish_Required_Signature__c.Race_Ethnicity_Details__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+        <fieldPermissions>
+        <editable>false</editable>
+        <field>Spanish_Translations__mdt.Active__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Spanish_Translations__mdt.English__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Spanish_Translations__mdt.Spanish__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Spanish_Translations__mdt.Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
