@@ -11705,6 +11705,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Lead.Best_contact_for_Physician_Phone__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Lead.ChapterName__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -21238,7 +21243,7 @@
         <field>Wish_Required_Signature__c.Race_Ethnicity_Details__c</field>
         <readable>true</readable>
     </fieldPermissions>
-        <fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Spanish_Translations__mdt.Active__c</field>
         <readable>true</readable>

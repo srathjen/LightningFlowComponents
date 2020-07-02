@@ -922,6 +922,7 @@ public class LeadService {
         Set<String> bestPhysicianFName = new Set<String>();
         Set<String> bestPhysicianLName = new Set<String>();
         Set<String> bestPhysicianEmail = new Set<String>();
+        Set<String> bestPhysicianPhone = new Set<String>();
         Set<String> leadFNamesSet = new Set<String>();
         Set<String> leadLNamesSet = new Set<String>();
         Set<Date> leadbDaysSet = new Set<Date>();
@@ -954,6 +955,7 @@ public class LeadService {
                 chaptersSet.add(newLead.ChapterName__c);
                 bestPhysicianFName.add(newLead.Best_Contact_for_Physician_First_Name__c);
                 bestPhysicianLName.add(newLead.Best_Contact_for_Physician_Last_Name__c);
+                bestPhysicianPhone.add(newLead.Best_Contact_for_Physician_Phone__c);
                 bestPhysicianEmail.add(newLead.Best_contact_for_Physician_Email__c);
             }
 
@@ -981,7 +983,7 @@ public class LeadService {
                     FROM Contact
                     WHERE
                     FirstName IN :bestPhysicianFName AND LastName IN :bestPhysicianLName AND
-                    Email IN:bestPhysicianEmail AND RecordTypeId = :medicalProfessionalRT
+                    (Phone IN :bestPhysicianPhone OR Email IN:bestPhysicianEmail) AND RecordTypeId = :medicalProfessionalRT
             ];
 
             List<Contact> dupFamilyContacts = [

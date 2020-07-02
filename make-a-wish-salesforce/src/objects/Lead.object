@@ -451,6 +451,16 @@
         </valueSet>
     </fields>
     <fields>
+        <fullName>Best_contact_for_Physician_Phone__c</fullName>
+        <description>Stores the phone number for the Best Medical Contact</description>
+        <externalId>false</externalId>
+        <label>Best Contact for Treating MP: Phone</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Phone</type>
+    </fields>
+    <fields>
     <fullName>Is_wish_referral_discussed_health_del__c</fullName>
     <externalId>false</externalId>
     <label>Referral Discussed With Healthcare?</label>
@@ -7035,12 +7045,17 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Admitting_diagnosis__c</field>
+            <field>Best_contact_for_Physician_Email__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Best_contact_for_Physician_Email__c</field>
+            <field>Best_contact_for_Physician_Phone__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Admitting_diagnosis__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>

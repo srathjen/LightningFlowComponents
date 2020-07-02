@@ -117,6 +117,7 @@ public class DiagnosisVerification_AC {
         wishChildWrapperIns.bestPhyFname = currLead.Best_Contact_for_Physician_First_Name__c;
         wishChildWrapperIns.bestPhyLname = currLead.Best_Contact_for_Physician_Last_Name__c;
         wishChildWrapperIns.bestPhyEmail = currLead.Best_contact_for_Physician_Email__c;
+        wishChildWrapperIns.bestPhyPhone = currLead.Best_Contact_for_Physician_Phone__c;
         wishChildWrapperIns.alt1MedFname = currLead.Alternate1MedProfessionalFirstName__c;
         wishChildWrapperIns.alt1MedLname = currLead.Alternate1MedProfessionalLastName__c;
         wishChildWrapperIns.alt1MedEmail = currLead.Alternate1MedicalProfessionalEmail__c;
@@ -1182,6 +1183,7 @@ public class DiagnosisVerification_AC {
             currLead.Best_Contact_for_Physician_First_Name__c = wishChildWrapperIns.bestPhyFname;
             currLead.Best_Contact_for_Physician_Last_Name__c = wishChildWrapperIns.bestPhyLname;
             currLead.Best_contact_for_Physician_Email__c = wishChildWrapperIns.bestPhyEmail;
+            currLead.Best_Contact_for_Physician_Email__c = wishChildWRapperIns.bestPhyPhone;
             currLead.Alternate1MedProfessionalFirstName__c = wishChildWrapperIns.alt1MedFname;
             currLead.Alternate1MedProfessionalLastName__c = wishChildWrapperIns.alt1MedLname;
             currLead.Alternate1MedicalProfessionalEmail__c = wishChildWrapperIns.alt1MedEmail;
