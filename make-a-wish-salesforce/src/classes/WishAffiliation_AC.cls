@@ -586,6 +586,12 @@ public without sharing class WishAffiliation_AC {
 			// Guarantee that Contact is assigned a Record Type and Region Chapter
 			if (MEDICAL_PROFESSIONAL_WISH_AFFILIATION_TYPE.equals(wishAffiliationType)) {
 				contact.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+				contact.AccountId = regionChapterId;
+				if (String.isNotEmpty(contact.npe01__WorkEmail__c)) {
+					contact.npe01__Preferred_Email__c = Constant_AC.CONTACT_PREFERRED_EMAIL_WORK;
+				} else {
+					contact.npe01__Preferred_Email__c = '';
+				}
 			} else {
 				contact.RecordTypeId = Constant_AC.WISH_FAMILY_RT_ID;
 			}

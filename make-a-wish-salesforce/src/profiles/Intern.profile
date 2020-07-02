@@ -23129,6 +23129,46 @@
     <field>dsfs__DocuSign_Envelope__c.dsfs__Source_Object__c</field>
 </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>dsfs__DocuSign_Recipient_Status__c.DV_Form_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>dsfs__DocuSign_Recipient_Status__c.DV_Form_Password__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>dsfs__DocuSign_Recipient_Status__c.Lead_ID__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>dsfs__DocuSign_Recipient_Status__c.Lead_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>dsfs__DocuSign_Recipient_Status__c.Lead_Owner_Email__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>dsfs__DocuSign_Recipient_Status__c.Lead_Owner_Full_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>dsfs__DocuSign_Recipient_Status__c.Lead_Owner_Title__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>dsfs__DocuSign_Recipient_Status__c.Lead_Owner__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
     <editable>false</editable>
     <readable>false</readable>
     <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Account__c</field>

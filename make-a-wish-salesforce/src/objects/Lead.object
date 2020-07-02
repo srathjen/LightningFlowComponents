@@ -1524,7 +1524,7 @@
         <fullName>Best_contact_for_Physician_Email__c</fullName>
 		<description>It holds the Best contact for Physician Email</description>
 		<externalId>false</externalId>
-		<inlineHelpText>This recipient is the best person to contact for the physician. They will automatically receive a copy of the &apos;Your patient is eligible for a wish&apos; email upon qualification.</inlineHelpText>
+		<inlineHelpText>This recipient is the best person to contact for the physician. They will automatically receive a copy of the 'Your patient is eligible for a wish' email upon qualification.</inlineHelpText>
 		<label>Best contact for Physician Email</label>
 		<required>false</required>
 		<trackFeedHistory>false</trackFeedHistory>
@@ -1563,109 +1563,109 @@
         <unique>false</unique>
     </fields>
     <fields>
-    <fullName>Child_Age__c</fullName>
-    <description>It would capture the child of the age.</description>
-    <externalId>false</externalId>
-    <label>Age at Referral</label>
-    <required>false</required>
-    <trackFeedHistory>false</trackFeedHistory>
-    <trackHistory>false</trackHistory>
-    <type>Picklist</type>
-    <valueSet>
-        <valueSetDefinition>
-            <sorted>false</sorted>
-            <value>
-                <fullName>Under 2.5</fullName>
-                <default>false</default>
-                <label>Under 2.5</label>
-            </value>
-            <value>
-                <fullName>2.5</fullName>
-                <default>false</default>
-                <label>2.5</label>
-            </value>
-            <value>
-                <fullName>3</fullName>
-                <default>false</default>
-                <label>3</label>
-            </value>
-            <value>
-                <fullName>4</fullName>
-                <default>false</default>
-                <label>4</label>
-            </value>
-            <value>
-                <fullName>5</fullName>
-                <default>false</default>
-                <label>5</label>
-            </value>
-            <value>
-                <fullName>6</fullName>
-                <default>false</default>
-                <label>6</label>
-            </value>
-            <value>
-                <fullName>7</fullName>
-                <default>false</default>
-                <label>7</label>
-            </value>
-            <value>
-                <fullName>8</fullName>
-                <default>false</default>
-                <label>8</label>
-            </value>
-            <value>
-                <fullName>9</fullName>
-                <default>false</default>
-                <label>9</label>
-            </value>
-            <value>
-                <fullName>10</fullName>
-                <default>false</default>
-                <label>10</label>
-            </value>
-            <value>
-                <fullName>11</fullName>
-                <default>false</default>
-                <label>11</label>
-            </value>
-            <value>
-                <fullName>12</fullName>
-                <default>false</default>
-                <label>12</label>
-            </value>
-            <value>
-                <fullName>13</fullName>
-                <default>false</default>
-                <label>13</label>
-            </value>
-            <value>
-                <fullName>14</fullName>
-                <default>false</default>
-                <label>14</label>
-            </value>
-            <value>
-                <fullName>15</fullName>
-                <default>false</default>
-                <label>15</label>
-            </value>
-            <value>
-                <fullName>16</fullName>
-                <default>false</default>
-                <label>16</label>
-            </value>
-            <value>
-                <fullName>17</fullName>
-                <default>false</default>
-                <label>17</label>
-            </value>
-            <value>
-                <fullName>18 &amp; Above</fullName>
-                <default>false</default>
-                <label>18 &amp; Above</label>
-            </value>
-        </valueSetDefinition>
-    </valueSet>
+        <fullName>Child_Age__c</fullName>
+        <description>It would capture the child of the age.</description>
+        <externalId>false</externalId>
+        <label>Age at Referral</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Under 2.5</fullName>
+                    <default>false</default>
+                    <label>Under 2.5</label>
+                </value>
+                <value>
+                    <fullName>2.5</fullName>
+                    <default>false</default>
+                    <label>2.5</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+                <value>
+                    <fullName>4</fullName>
+                    <default>false</default>
+                    <label>4</label>
+                </value>
+                <value>
+                    <fullName>5</fullName>
+                    <default>false</default>
+                    <label>5</label>
+                </value>
+                <value>
+                    <fullName>6</fullName>
+                    <default>false</default>
+                    <label>6</label>
+                </value>
+                <value>
+                    <fullName>7</fullName>
+                    <default>false</default>
+                    <label>7</label>
+                </value>
+                <value>
+                    <fullName>8</fullName>
+                    <default>false</default>
+                    <label>8</label>
+                </value>
+                <value>
+                    <fullName>9</fullName>
+                    <default>false</default>
+                    <label>9</label>
+                </value>
+                <value>
+                    <fullName>10</fullName>
+                    <default>false</default>
+                    <label>10</label>
+                </value>
+                <value>
+                    <fullName>11</fullName>
+                    <default>false</default>
+                    <label>11</label>
+                </value>
+                <value>
+                    <fullName>12</fullName>
+                    <default>false</default>
+                    <label>12</label>
+                </value>
+                <value>
+                    <fullName>13</fullName>
+                    <default>false</default>
+                    <label>13</label>
+                </value>
+                <value>
+                    <fullName>14</fullName>
+                    <default>false</default>
+                    <label>14</label>
+                </value>
+                <value>
+                    <fullName>15</fullName>
+                    <default>false</default>
+                    <label>15</label>
+                </value>
+                <value>
+                    <fullName>16</fullName>
+                    <default>false</default>
+                    <label>16</label>
+                </value>
+                <value>
+                    <fullName>17</fullName>
+                    <default>false</default>
+                    <label>17</label>
+                </value>
+                <value>
+                    <fullName>18 &amp; Above</fullName>
+                    <default>false</default>
+                    <label>18 &amp; Above</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Child_Middle_Initial__c</fullName>
@@ -1945,7 +1945,7 @@
         <label>DOB</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <type>Date</type>
     </fields>
     <fields>
@@ -2099,7 +2099,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
     <fields>
         <fullName>Email</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
     </fields>
     <fields>
         <fullName>External_Id__c</fullName>
@@ -2238,7 +2238,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <label>Has This Child Ever Received Prior Wish?</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <type>Html</type>
         <visibleLines>10</visibleLines>
     </fields>
@@ -3357,7 +3357,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <label>Is In A Comatose/Vegetative State?</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <type>Picklist</type>
         <valueSet>
             <restricted>true</restricted>
@@ -3640,7 +3640,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
     <fields>
         <fullName>Name</fullName>
         <trackFeedHistory>true</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
     </fields>
     <fields>
         <fullName>Non_Verbal__c</fullName>
@@ -4321,7 +4321,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <length>90</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -6153,7 +6153,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <fullName>Treating_Medical_Professional_Email__c</fullName>
 		<description>This field will hold the Treating Medical Professional Email Address</description>
 		<externalId>false</externalId>
-		<inlineHelpText>This recipient will automatically receive a copy of the &apos;Your patient is eligible for a wish&apos; email upon qualification.</inlineHelpText>
+		<inlineHelpText>This recipient will automatically receive a copy of the 'Your patient is eligible for a wish' email upon qualification.</inlineHelpText>
 		<label>Treating Medical Professional Email</label>
 		<required>false</required>
 		<trackFeedHistory>false</trackFeedHistory>
