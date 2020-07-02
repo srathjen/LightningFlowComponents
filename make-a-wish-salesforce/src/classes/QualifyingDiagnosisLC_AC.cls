@@ -3,6 +3,7 @@
  *
  * @author Pradeep Kumar, MST Solutions
  * @date 20/03/2018
+ * 1. 30 Jun 2020 - Manoj - SIW-330: Mapped lead fields to get it saved at backend when user save diagnosis
  */
 public class QualifyingDiagnosisLC_AC {
 
@@ -61,15 +62,19 @@ public class QualifyingDiagnosisLC_AC {
                         SD4_ICD_Code__r.Id,
                         Qualifying_Diagnosis__c,
                         Qualifying_ICD__c,
-                        PR_Diagnosis__c
+                        PR_Diagnosis__c,
+            			PD_ICD_Code__c
                 FROM Lead
                 WHERE Id = :leadId
                 AND RecordTypeId = :Constant_AC.LEAD_RT_WISH_CHILD
                 LIMIT 1
         ];
+        //SIW-330: Mapped lead fields to get it saved at backend when user save diagnosis
+        data.PD_Condition_Description__c=Qualifying_Diagnosis;
+        data.PD_ICD_Code__c = Qualifying_ICD;
         data.Qualifying_Diagnosis__c = Qualifying_Diagnosis;
         data.Qualifying_ICD__c = Qualifying_ICD;
-        data.PR_Diagnosis__c = mawName;
+        data.PR_Diagnosis__c = Qualifying_Diagnosis;
         update data;
         result = 'UPDATED';
         return result;

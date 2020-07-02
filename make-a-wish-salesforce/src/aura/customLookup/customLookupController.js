@@ -14,9 +14,16 @@
         $A.util.addClass(forclose, 'slds-is-close');
         $A.util.removeClass(forclose, 'slds-is-open');
     },
-    keyPressController : function(component, event, helper) {
+    searchChange : function(component, event, helper) {
+        setTimeout(function(){
+            if($A.util.isEmpty(component.get("v.selectedRecord"))){
+                helper.clearValue(component,event);
+            }
+        }, 500);        
+    },
+    keyPressController : function(component, event, helper) {        
         // get the search Input keyword   
-        var getInputkeyWord = component.get("v.SearchKeyWord");
+        var getInputkeyWord = component.get("v.SearchKeyWord");       
         // check if getInputKeyWord size id more then 0 then open the lookup result List and 
         // call the helper 
         // else close the lookup result List part.   
@@ -35,23 +42,8 @@
     },
     
     // function for clear the Record Selaction 
-    clear :function(component,event,heplper){
-        var pillTarget = component.find("lookup-pill");
-        var lookUpTarget = component.find("lookupField"); 
-        
-        $A.util.addClass(pillTarget, 'slds-hide');
-        $A.util.removeClass(pillTarget, 'slds-show');
-        
-        $A.util.addClass(lookUpTarget, 'slds-show');
-        $A.util.removeClass(lookUpTarget, 'slds-hide');
-        
-        component.set("v.SearchKeyWord",null);
-        component.set("v.listOfSearchRecords", null );
-        component.set("v.selectedRecord", {} );   
-        
-         var compEvent = component.getEvent("lookupToDiagnosis"); // 
-        compEvent.setParams({"compmessage" : component.get("v.componentMessage") });
-    	compEvent.fire();
+    clear :function(component,event,helper){        
+        helper.clearValue(component,event);
     },
     
     // This function call when the end User Select any record from the result list.   

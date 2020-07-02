@@ -87,7 +87,7 @@
         component.find(objName).set("v.selectedRecord", selectedObject);   
     },
     
-    resetLookupValues: function(component, event){
+    resetLookupValues: function(component, event){        
         var _this = this;
         if(event.getParam('compmessage') == 'icdcode'){
             component.find('ConditionDescriptionLookup').set("v.disabledAttr","false");
@@ -176,7 +176,7 @@
             qualifyingDiagonsisValues  = component.get('v.qualifyingRecordObject');
             Qualifying_Diagnosis = (qualifyingDiagonsisValues.condDescriptionName) ? qualifyingDiagonsisValues.condDescriptionName : null;
             Qualifying_ICD = response;
-            component.set("v.ICDCodeId", response);     
+            component.set("v.ICDCodeId", response);
             _this.processDiagnosis(leadData,component,Qualifying_Diagnosis,Qualifying_ICD);
         });               
     },
@@ -273,7 +273,8 @@
         action.setCallback(this, function(response){
             var state = response.getState();
             if (state === "SUCCESS") {
-                callback(response.getReturnValue());                
+                callback(response.getReturnValue()); 
+                 $A.get('e.force:refreshView').fire();
             }else{
                 var toastEvent = $A.get("e.force:showToast");
                 toastEvent.setParams({
