@@ -23477,6 +23477,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>dsfs__DocuSign_Recipient_Status__c.Lead_Owner_Phone__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>dsfs__DocuSign_Recipient_Status__c.Lead_Owner_Title__c</field>
         <readable>true</readable>
     </fieldPermissions>
