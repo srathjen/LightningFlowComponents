@@ -1,3 +1,6 @@
+<!--
+// 30/06/2020 - Manoj - SIW-330: Modified method 'searchChange' in JS controller to remove free text from Primary Diagnosis input field in Qualifying diagnosis page.
+-->
 <aura:component controller="customLookUpController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
     <!--declare attributes--> 
     <aura:attribute name="selectedRecord" type="sObject" default="{}" description="Use,for store SELECTED sObject Record"/>
@@ -44,7 +47,7 @@
                         <lightning:icon class="slds-icon slds-icon slds-icon_small slds-icon-text-default" iconName="{!v.IconName}" size="x-small" alternativeText="icon"/>
                         <span class="slds-assistive-text"></span>
                     </span>
-                    <ui:inputText disabled="{!v.disabledAttr}"  updateOn="keyup,focus" keyup="{!c.keyPressController}" focus="{!c.keyPressController}" class="slds-lookup__search-input slds-input leftPaddingClass" value="{!v.SearchKeyWord}" placeholder="{!v.placeholderText}"/>
+                    <ui:inputText disabled="{!v.disabledAttr}"  updateOn="keyup,focus,change" keyup="{!c.keyPressController}" focus="{!c.keyPressController}" class="slds-lookup__search-input slds-input leftPaddingClass" value="{!v.SearchKeyWord}" placeholder="{!v.placeholderText}" change="{!c.searchChange}"/>
                 </div>   
             </div>
         </div>
