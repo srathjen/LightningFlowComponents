@@ -193,10 +193,6 @@
                                         <div class="left-col"> Email : </div>
                                         <div class="left-col"> {!currLead.Treating_Medical_Professional_Email__c}</div>
                                     </div>
-                                    <!-- <div class="container" style="width:100%;">
-                                        <div class="left-col"> Hospital or Treatment Facility : </div>
-                                        <div class="left-col"> {!currLead.Hospital_Treatment_Facility_Treating__c}</div>
-                                    </div> -->
                                 </apex:outputPanel>
                                 
                                 <apex:outputPanel rendered="{!if(currLead.Hidden_DV_form_Medical_professional_Type__c == 'Best contact for Physician', true, false)}">
@@ -208,20 +204,14 @@
                                         <div class="left-col"> Last Name : </div>
                                         <div class="left-col"> {!currLead.Best_Contact_for_Physician_Last_Name__c}</div>
                                     </div>
-                                    <!---- SIW-29 commenting lines for hiding the Best contact physician phone number. Jan2019 ------>
-                                    <!----<div class="container" style="width:100%;">
-                                        <div class="left-col"> Provider Phone : </div>
-                                        <div class="left-col"> {!currLead.Treating_Medical_Professional_Phone__c}</div>
-                                    </div>------>
-                                    <!---- SIW-29 updated email ID from treating medical professional to Best contact medical professional. Jan2019 ------>
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Phone : </div>
+                                        <div class="left-col"> {!currLead.Best_contact_for_Physician_Phone__c}</div>
+                                    </div>
                                     <div class="container" style="width:100%;">
                                         <div class="left-col"> Email : </div>
                                         <div class="left-col"> {!currLead.Best_contact_for_Physician_Email__c}</div>
                                     </div>
-                                    <!-- <div class="container" style="width:100%;">
-                                        <div class="left-col"> Hospital or Treatment Facility : </div>
-                                        <div class="left-col"> {!currLead.Hospital_Treatment_Facility_Treating__c}</div>
-                                    </div> -->
                                 </apex:outputPanel>
                                 
                                 <apex:outputPanel rendered="{!if(currLead.Hidden_DV_form_Medical_professional_Type__c == 'Alternate 1 Medical Professional', true, false)}">
@@ -241,10 +231,6 @@
                                         <div class="left-col"> Email : </div>
                                         <div class="left-col"> {!currLead.Alternate1MedicalProfessionalEmail__c}</div>
                                     </div>
-                                    <!-- <div class="container" style="width:100%;">
-                                        <div class="left-col"> Hospital or Treatment Facility : </div>
-                                        <div class="left-col"> {!currLead.Alternate1HospitalTreatmentFacility__c}</div>
-                                    </div> -->
                                 </apex:outputPanel>
                                 
                                 
@@ -265,10 +251,6 @@
                                         <div class="left-col"> Email : </div>
                                         <div class="left-col"> {!currLead.Alternate2MedProfessionalEmail__c}</div>
                                     </div>
-                                    <!-- <div class="container" style="width:100%;">
-                                        <div class="left-col"> Hospital or Treatment Facility : </div>
-                                        <div class="left-col"> {!currLead.Alternate2HospitalTreatmentFacility__c}</div>
-                                    </div> -->
                                 </apex:outputPanel>
                                 
                                 <div class="container" style="width:100%;">

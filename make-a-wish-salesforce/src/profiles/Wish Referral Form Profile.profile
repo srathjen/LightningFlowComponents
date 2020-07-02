@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <applicationVisibilities>
         <application>CRMfusionDBR101__DupeBlocker</application>
         <default>false</default>
@@ -251,11 +251,6 @@
         <apexClass>BroadcastTrigger_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>CaseCommentTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
@@ -508,8 +503,6 @@
         <apexClass>ForgotPasswordControllerTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>Hidden_ContactShareController_AC</apexClass>
         <enabled>false</enabled>
@@ -682,8 +675,6 @@
         <apexClass>Mock_ResponseGenerator</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>MultiselectPicklistComponent_AC</apexClass>
         <enabled>false</enabled>
@@ -772,12 +763,6 @@
         <apexClass>RecursiveTriggerHandler</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
-    
-    
-    
     <classAccesses>
         <apexClass>Relationship_AT_Test</apexClass>
         <enabled>false</enabled>
@@ -882,7 +867,6 @@
         <apexClass>UpdateWishAssignmentBatchTest_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>UserTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
@@ -915,8 +899,6 @@
         <apexClass>VolunteerInterviewTask_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
     <classAccesses>
         <apexClass>VolunteerJourneyService</apexClass>
         <enabled>false</enabled>
@@ -1165,9 +1147,6 @@
         <apexClass>batch_LeadChildAgeTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
-    
-    
     <classAccesses>
         <apexClass>batch_UpdateVolunteerLastEngage</apexClass>
         <enabled>false</enabled>
@@ -1188,7 +1167,6 @@
         <apexClass>batch_changeVolunOppSatus</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    
     <classAccesses>
         <apexClass>batch_changeVolunOppSatus_Test</apexClass>
         <enabled>false</enabled>
@@ -1230,7 +1208,12 @@
         <enabled>false</enabled>
     </classAccesses>
     <custom>true</custom>
-	<fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Best_contact_for_Physician_Phone__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Is_wish_referral_discussed_health_del__c</field>
         <readable>true</readable>

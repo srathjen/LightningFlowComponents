@@ -89,7 +89,7 @@ public class LeadConvertService {
                                 Alternate2MedProfessionalLastName__c, Alternate2MedProfessionalPhone__c,
                                 CountryCode, PostalCode, State, StateCode, Street, Treating_Medical_Professional_Contact_Id__c,
                                 Medical_Professional_ContactId__c, Wish_Family_ContactId__c, Best_contact_for_Physician_Email__c,
-                                Best_Contact_for_Physician_First_Name__c, Best_Contact_for_Physician_Last_Name__c,
+                                Best_Contact_for_Physician_First_Name__c, Best_Contact_for_Physician_Last_Name__c, Best_Contact_for_Physician_Phone__c,
                                 Additional_Parent_First_Name__c, Additional_Parent_Last_Name__c, Additional_Parent_City__c,
                                 Additional_Parent_Email__c, Additional_Parent_Phone__c, Additional_Parent_Postal_Code__c,
                                 Additional_Parent_State__c, Additional_Parent_Street__c, Hidden_Additional_Parent_Id__c,
@@ -301,6 +301,7 @@ public class LeadConvertService {
                 Set<String> bestPersonFirstNameSet = new Set<String>();
                 Set<String> bestPersonLastNameSet = new Set<String>();
                 Set<String> bestPersonEmailNameSet = new Set<String>();
+                Set<String> bestPersonPhoneSet = new Set<String>();
                 List<npe5__Affiliation__c> affiliationList = new List<npe5__Affiliation__c>();
                 Set<Id> wishFamilyContactIdSet = new Set<Id>();
                 List<npe5__Affiliation__c> updateAffiliationList = new List<npe5__Affiliation__c>();
@@ -395,6 +396,7 @@ public class LeadConvertService {
                             bestPersonFirstNameSet.add(convertedLead.Best_Contact_for_Physician_First_Name__c);
                             bestPersonLastNameSet.add(convertedLead.Best_Contact_for_Physician_Last_Name__c);
                             bestPersonEmailNameSet.add(convertedLead.Best_contact_for_Physician_Email__c);
+                            bestPersonPhoneSet.add(convertedLead.Best_contact_for_Physician_Phone__c);
                         }
                         if (medProfessionalEqualityWrapper.addQualify || Test.isRunningTest()) {
                             qualifyFirstNameSet.add(convertedLead.Referrer_FirstName__c);

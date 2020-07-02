@@ -23,6 +23,7 @@ public class WishChildWrapper {
     public String bestPhyFname { get; set; }
     public String bestPhyLname { get; set; }
     public String bestPhyEmail { get; set; }
+    public String bestPhyPhone { get; set; }
 
     /**
      * @description Used to get alternate 1 treating medical professional details.

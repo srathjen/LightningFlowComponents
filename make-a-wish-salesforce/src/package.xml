@@ -34,6 +34,11 @@
     <members>Lead.Expedite_timeframe__c</members>
     <members>Lead.Other_expedite_timeframe_comments__c</members>
     <members>Lead.Primary_Medical_Professional_Type_Other__c</members>
+    <members>Spanish_Translations__mdt.Active__c</members>
+    <members>Spanish_Translations__mdt.English__c</members>
+    <members>Spanish_Translations__mdt.Spanish__c</members>
+    <members>Spanish_Translations__mdt.Type__c</members>
+    <members>Wish_Required_Signature__c.Race_Ethnicity_Details__c</members>
     <members>WishReferralForm_Translation__mdt.Add_Parent_Legal_Guardian__c</members>
     <members>WishReferralForm_Translation__mdt.Additional_information__c</members>
     <members>WishReferralForm_Translation__mdt.Address__c</members>
@@ -98,11 +103,6 @@
     <members>WishReferralForm_Translation__mdt.Treating_medical_professional_informatio__c</members>
     <members>WishReferralForm_Translation__mdt.What_is_the_family_s_primary__c</members>
     <members>WishReferralForm_Translation__mdt.Wish_child_information__c</members>
-    <members>Spanish_Translations__mdt.Active__c</members>
-    <members>Spanish_Translations__mdt.English__c</members>
-    <members>Spanish_Translations__mdt.Spanish__c</members>
-    <members>Spanish_Translations__mdt.Type__c</members>
-    <members>Wish_Required_Signature__c.Race_Ethnicity_Details__c</members>
     <name>CustomField</name>
   </types>
   <types>
@@ -110,8 +110,6 @@
     <name>CustomLabels</name>
   </types>
   <types>
-    <members>Wish_Clearance_Needed_and_National_type.Trailer_Camper</members>
-    <members>WishReferralForm_Translation.es</members>
     <members>Spanish_Translations.Asian</members>
     <members>Spanish_Translations.Aunt</members>
     <members>Spanish_Translations.Black_or_African_American</members>
@@ -157,6 +155,8 @@
     <members>Spanish_Translations.White</members>
     <members>Spanish_Translations.Wife</members>
     <members>Spanish_Translations.Work</members>
+    <members>Wish_Clearance_Needed_and_National_type.Trailer_Camper</members>
+    <members>WishReferralForm_Translation.es</members>
     <name>CustomMetadata</name>
   </types>
   <types>
@@ -167,11 +167,11 @@
     <members>Inkind_Donation_PDFs__c</members>
     <members>Lead</members>
     <members>QuickText</members>
+    <members>Spanish_Translations__mdt</members>
     <members>Wish_Budget_Approver_Filter__c</members>
+    <members>Wish_Required_Signature__c</members>
     <members>Wish_Required_Signature_File__c</members>
     <members>WishReferralForm_Translation__mdt</members>
-    <members>Spanish_Translations__mdt</members>
-    <members>Wish_Required_Signature__c</members>
     <name>CustomObject</name>
   </types>
   <types>
