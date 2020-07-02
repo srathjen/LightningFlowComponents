@@ -123,11 +123,12 @@ public class ContactDomain extends trac_TriggerHandlerBase {
 				}
 			}
 		}
-		wishChildIdSet = ContactService.updateWishChildContactInfo(newContactsList);
-		ContactService.updateFamilyContactDetails(wishChildIdSet, newContactsList);
-		ContactService.matchConditionDescription(newContactsList, oldContactsMap);
-		ContactService.updateContactHiddenFields(newContactsList);
-		ContactService.clearHiddenFields(newContactsList);
+        wishChildIdSet = ContactService.updateWishChildContactInfo(newContactsList);
+        ContactService.updateFamilyContactDetails(wishChildIdSet, newContactsList);
+        ContactService.matchConditionDescription(newContactsList, oldContactsMap);
+        ContactService.updateContactHiddenFields(newContactsList);
+        ContactService.clearHiddenFields(newContactsList);
+        ContactService.updatePicklistTranslations(newContactsMap, oldContactsMap);
 	}
 
 	/**

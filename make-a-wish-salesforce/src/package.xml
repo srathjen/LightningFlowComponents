@@ -98,6 +98,11 @@
     <members>WishReferralForm_Translation__mdt.Treating_medical_professional_informatio__c</members>
     <members>WishReferralForm_Translation__mdt.What_is_the_family_s_primary__c</members>
     <members>WishReferralForm_Translation__mdt.Wish_child_information__c</members>
+    <members>Spanish_Translations__mdt.Active__c</members>
+    <members>Spanish_Translations__mdt.English__c</members>
+    <members>Spanish_Translations__mdt.Spanish__c</members>
+    <members>Spanish_Translations__mdt.Type__c</members>
+    <members>Wish_Required_Signature__c.Race_Ethnicity_Details__c</members>
     <name>CustomField</name>
   </types>
   <types>
@@ -107,6 +112,51 @@
   <types>
     <members>Wish_Clearance_Needed_and_National_type.Trailer_Camper</members>
     <members>WishReferralForm_Translation.es</members>
+    <members>Spanish_Translations.Asian</members>
+    <members>Spanish_Translations.Aunt</members>
+    <members>Spanish_Translations.Black_or_African_American</members>
+    <members>Spanish_Translations.Brother</members>
+    <members>Spanish_Translations.Cousin</members>
+    <members>Spanish_Translations.Coworker</members>
+    <members>Spanish_Translations.Daughter</members>
+    <members>Spanish_Translations.Employee</members>
+    <members>Spanish_Translations.Employer</members>
+    <members>Spanish_Translations.Family</members>
+    <members>Spanish_Translations.Father</members>
+    <members>Spanish_Translations.Foster_Brother</members>
+    <members>Spanish_Translations.Foster_Father</members>
+    <members>Spanish_Translations.Foster_Mother</members>
+    <members>Spanish_Translations.Foster_Sister</members>
+    <members>Spanish_Translations.Friend</members>
+    <members>Spanish_Translations.Granddaughter</members>
+    <members>Spanish_Translations.Grandfather</members>
+    <members>Spanish_Translations.Grandmother</members>
+    <members>Spanish_Translations.Grandson</members>
+    <members>Spanish_Translations.Guardian</members>
+    <members>Spanish_Translations.Half_Brother</members>
+    <members>Spanish_Translations.Half_sister</members>
+    <members>Spanish_Translations.Hispanic_or_Latino</members>
+    <members>Spanish_Translations.Home</members>
+    <members>Spanish_Translations.I_choose_not_to_self_identify</members>
+    <members>Spanish_Translations.Mobile</members>
+    <members>Spanish_Translations.Mother</members>
+    <members>Spanish_Translations.Native_American_or_Alaska_Native</members>
+    <members>Spanish_Translations.Native_Hawaiian_or_Other_Pacific_Islande</members>
+    <members>Spanish_Translations.Neighbor</members>
+    <members>Spanish_Translations.Other</members>
+    <members>Spanish_Translations.Partner</members>
+    <members>Spanish_Translations.Self</members>
+    <members>Spanish_Translations.Sister</members>
+    <members>Spanish_Translations.Son</members>
+    <members>Spanish_Translations.Stepbrother</members>
+    <members>Spanish_Translations.Stepfather</members>
+    <members>Spanish_Translations.Stepmother</members>
+    <members>Spanish_Translations.Stepsister</members>
+    <members>Spanish_Translations.Two_or_More_Races</members>
+    <members>Spanish_Translations.Uncle</members>
+    <members>Spanish_Translations.White</members>
+    <members>Spanish_Translations.Wife</members>
+    <members>Spanish_Translations.Work</members>
     <name>CustomMetadata</name>
   </types>
   <types>
@@ -120,6 +170,8 @@
     <members>Wish_Budget_Approver_Filter__c</members>
     <members>Wish_Required_Signature_File__c</members>
     <members>WishReferralForm_Translation__mdt</members>
+    <members>Spanish_Translations__mdt</members>
+    <members>Wish_Required_Signature__c</members>
     <name>CustomObject</name>
   </types>
   <types>
