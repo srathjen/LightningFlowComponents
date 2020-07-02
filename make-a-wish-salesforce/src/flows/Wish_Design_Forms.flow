@@ -1041,8 +1041,8 @@
     <assignments>
         <name>AssignEmergencyContactValues</name>
         <label>AssignEmergencyContactValues</label>
-        <locationX>2298</locationX>
-        <locationY>2815</locationY>
+        <locationX>3192</locationX>
+        <locationY>3613</locationY>
         <assignmentItems>
             <assignToReference>Wish_Child_D.Social_Media_Link__c</assignToReference>
             <operator>Assign</operator>
@@ -1271,8 +1271,8 @@
     <assignments>
         <name>AssignSchedulingValues_0_0</name>
         <label>AssignSchedulingValues</label>
-        <locationX>1899</locationX>
-        <locationY>3026</locationY>
+        <locationX>1477</locationX>
+        <locationY>3876</locationY>
         <assignmentItems>
             <assignToReference>Wish_Child_D.Already_wish_granted_by_MAW_Other_Org__c</assignToReference>
             <operator>Assign</operator>
@@ -3041,8 +3041,8 @@
     <assignments>
         <name>Validate_Empty</name>
         <label>ValidateEmpty</label>
-        <locationX>2055</locationX>
-        <locationY>3027</locationY>
+        <locationX>2556</locationX>
+        <locationY>3616</locationY>
         <assignmentItems>
             <assignToReference>ValidateEmpty</assignToReference>
             <operator>Assign</operator>
@@ -4068,8 +4068,8 @@
     <decisions>
         <name>Main_Screen_Details_Changed</name>
         <label>Main Screen Details Changed</label>
-        <locationX>1478</locationX>
-        <locationY>153</locationY>
+        <locationX>1393</locationX>
+        <locationY>280</locationY>
         <defaultConnector>
             <targetReference>FormSelection</targetReference>
         </defaultConnector>
@@ -4363,8 +4363,8 @@
     <decisions>
         <name>Navigate_Decision_0_0</name>
         <label>Navigate Decision</label>
-        <locationX>2489</locationX>
-        <locationY>2889</locationY>
+        <locationX>2052</locationX>
+        <locationY>3771</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Next_0_0</name>
@@ -4415,8 +4415,8 @@
     <decisions>
         <name>Navigate_Decision_0_0_0</name>
         <label>Navigate Decision</label>
-        <locationX>1705</locationX>
-        <locationY>3123</locationY>
+        <locationX>1070</locationX>
+        <locationY>4338</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Next_0_0_0</name>
@@ -5050,8 +5050,8 @@
     <decisions>
         <name>Required_Picklist</name>
         <label>Required Picklist</label>
-        <locationX>2045</locationX>
-        <locationY>2886</locationY>
+        <locationX>2421</locationX>
+        <locationY>3557</locationY>
         <defaultConnector>
             <targetReference>schedulingScreen</targetReference>
         </defaultConnector>
@@ -5132,8 +5132,8 @@
     <decisions>
         <name>Required_Picklist_0</name>
         <label>Required Picklist</label>
-        <locationX>1696</locationX>
-        <locationY>2777</locationY>
+        <locationX>301</locationX>
+        <locationY>3776</locationY>
         <defaultConnector>
             <targetReference>driverIdScreen</targetReference>
         </defaultConnector>
@@ -5492,7 +5492,7 @@
             <label>Submit</label>
         </rules>
     </decisions>
-    <description>Wish Vision and Wish Design forms completed during the Wish Interview by Wish Granter volunteers. Bug fixes from WLP 610 &amp; 617 &amp; 738. 19/11/20 SIW-475, SIW-505, SIW-548, SIW-549,SIW-641</description>
+    <description>Wish Vision and Wish Design forms completed during the Wish Interview by Wish Granter volunteers. Bug fixes from WLP 610 &amp; 617 &amp; 738. 19/11/20 SIW-475, SIW-505, SIW-548, SIW-549&lt; SIW-637</description>
     <dynamicChoiceSets>
         <name>childPriorWish_Choices</name>
         <dataType>String</dataType>
@@ -6144,6 +6144,12 @@
         <name>Wish_Details_Form_label</name>
         <dataType>String</dataType>
         <expression>{!$Setup.Wish_Interview_Form_Maps__c.Wish_Details_Form_DDP_Id__c}</expression>
+    </formulas>
+    <formulas>
+        <description>Set the Wish Granter 2 field to empty String if null</description>
+        <name>Wish_Granter_2_Default_Value</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!WishGranter2Output}),&quot;&quot;,{!WishGranter2Output})</expression>
     </formulas>
     <formulas>
         <name>Wish_Vision_Form_DDP_DeliveryOption_Label</name>
@@ -7992,8 +7998,8 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
     <screens>
         <name>driverIdScreen</name>
         <label>driverIdScreen</label>
-        <locationX>1721</locationX>
-        <locationY>1723</locationY>
+        <locationX>1928</locationX>
+        <locationY>2992</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -8211,8 +8217,8 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
     <screens>
         <name>emergencyContactPriorWishScreen</name>
         <label>emergencyContactPriorWishScreen</label>
-        <locationX>2107</locationX>
-        <locationY>2763</locationY>
+        <locationX>2742</locationX>
+        <locationY>3404</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -8499,10 +8505,10 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
-                    <leftValueReference>DetailsSaveNavigationDestination</leftValueReference>
-                    <operator>EqualTo</operator>
+                    <leftValueReference>NavigateSave</leftValueReference>
+                    <operator>NotEqualTo</operator>
                     <rightValue>
-                        <stringValue>EmergencyContact</stringValue>
+                        <booleanValue>true</booleanValue>
                     </rightValue>
                 </conditions>
                 <conditions>
@@ -8513,10 +8519,10 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
                     </rightValue>
                 </conditions>
                 <conditions>
-                    <leftValueReference>NavigateSave</leftValueReference>
-                    <operator>NotEqualTo</operator>
+                    <leftValueReference>DetailsSaveNavigationDestination</leftValueReference>
+                    <operator>EqualTo</operator>
                     <rightValue>
-                        <booleanValue>true</booleanValue>
+                        <stringValue>EmergencyContact</stringValue>
                     </rightValue>
                 </conditions>
             </visibilityRule>
@@ -9018,7 +9024,7 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
         <name>ParticipantSelectionScreen</name>
         <label>Participant Selection</label>
         <locationX>2410</locationX>
-        <locationY>1692</locationY>
+        <locationY>1693</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -9156,8 +9162,8 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
     <screens>
         <name>schedulingScreen</name>
         <label>schedulingScreen</label>
-        <locationX>1909</locationX>
-        <locationY>2765</locationY>
+        <locationX>1126</locationX>
+        <locationY>4173</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -10135,7 +10141,7 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
             <inputParameters>
                 <name>fieldsToDisplayList</name>
                 <value>
-                    <stringValue>firstName,middleName,lastName,salutation</stringValue>
+                    <stringValue>firstName,middleName,lastName</stringValue>
                 </value>
             </inputParameters>
             <isRequired>true</isRequired>
@@ -10601,8 +10607,8 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
         <description>Home screen with Wish Design Forms to complete.</description>
         <name>WishDesignFormMenu</name>
         <label>WishDesignFormMenu</label>
-        <locationX>1301</locationX>
-        <locationY>151</locationY>
+        <locationX>1240</locationX>
+        <locationY>34</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -10634,7 +10640,7 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
             <inputParameters>
                 <name>wishGranter1</name>
                 <value>
-                    <elementReference>WishGranter1Output</elementReference>
+                    <elementReference>WishGranter1Input</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -10646,7 +10652,7 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
             <inputParameters>
                 <name>wishGranter2</name>
                 <value>
-                    <elementReference>WishGranter2Output</elementReference>
+                    <elementReference>WishGranter2Input</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -10679,11 +10685,11 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
                 <name>formValue</name>
             </outputParameters>
             <outputParameters>
-                <assignToReference>WishGranter2Input</assignToReference>
+                <assignToReference>WishGranter2Output</assignToReference>
                 <name>wishGranter2</name>
             </outputParameters>
             <outputParameters>
-                <assignToReference>WishGranter1Input</assignToReference>
+                <assignToReference>WishGranter1Output</assignToReference>
                 <name>wishGranter1</name>
             </outputParameters>
             <outputParameters>
@@ -10753,7 +10759,7 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
             <helpText>&lt;p&gt;Encourage the child to think about a variety of options!&amp;nbsp;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;i&gt;Are there places you’ve always dreamed of visiting?&lt;/i&gt;&amp;nbsp;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Is there anything you’ve always imagined owning?&lt;/i&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;A person you admire that you would love to&amp;nbsp;meet?&lt;/i&gt;&amp;nbsp;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Have you ever imagined stepping into someone else’s shoes for a day?&lt;/i&gt;&amp;nbsp;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;This is not the space to identify&amp;nbsp;the one true wish, rather it is intended to record the ideas the wish child considered when thinking about a wish.&amp;nbsp;&amp;nbsp;&lt;/p&gt;</helpText>
             <isRequired>false</isRequired>
             <validationRule>
-                <errorMessage>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;Please limit size of When Thinking About A Wish, Some of My Wish Ideas Were...... to 1500 characters&lt;/span&gt;&lt;/p&gt;</errorMessage>
+                <errorMessage>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);&quot;&gt;Please limit size of When Thinking About A Wish, Some of My Wish Ideas Were...... to 1500 characters&lt;/span&gt;&lt;/p&gt;</errorMessage>
                 <formulaExpression>LEN({!WishVisionScreenFieldWishThinking})&lt;=1500</formulaExpression>
             </validationRule>
         </fields>
@@ -10766,6 +10772,10 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
             <fieldType>LargeTextArea</fieldType>
             <helpText>&lt;p&gt;&lt;span style=&quot;font-family: &amp;quot;Lato Light&amp;quot;, &amp;quot;Lato Light_MSFontService&amp;quot;, sans-serif; font-size: 12pt; color: rgb(0, 0, 0); background-color: inherit;&quot;&gt;Indicate which&amp;nbsp;&lt;/span&gt;&lt;u style=&quot;font-family: &amp;quot;Lato Light&amp;quot;, &amp;quot;Lato Light_MSFontService&amp;quot;, sans-serif; font-size: 12pt; color: rgb(0, 0, 0); background-color: inherit;&quot;&gt;one&lt;/u&gt;&lt;span style=&quot;font-family: &amp;quot;Lato Light&amp;quot;, &amp;quot;Lato Light_MSFontService&amp;quot;, sans-serif; font-size: 12pt; color: rgb(0, 0, 0); background-color: inherit;&quot;&gt;&amp;nbsp;of the ideas mentioned in the prior question represents the child’s wish.&amp;nbsp;&lt;/span&gt;&lt;b style=&quot;font-family: &amp;quot;Lato Light&amp;quot;, &amp;quot;Lato Light_MSFontService&amp;quot;, sans-serif; font-size: 12pt; color: rgb(0, 0, 0); background-color: inherit;&quot;&gt;Capture as much detail as possible -&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;font-family: &amp;quot;Lato Light&amp;quot;, &amp;quot;Lato Light_MSFontService&amp;quot;, sans-serif; font-size: 12pt; color: rgb(0, 0, 0); background-color: inherit;&quot;&gt;this information&amp;nbsp;will be&amp;nbsp;used to approve and plan the wish experience.&lt;/span&gt;&lt;/p&gt;</helpText>
             <isRequired>false</isRequired>
+            <validationRule>
+                <errorMessage>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(255, 0, 0);&quot;&gt;Please limit size of This is My Wish Because...... to 1500 characters&lt;/span&gt;&lt;/p&gt;</errorMessage>
+                <formulaExpression>LEN({!WishVisionScreenFieldMyWishIs})&lt;=1500</formulaExpression>
+            </validationRule>
         </fields>
         <fields>
             <name>WishVisionScreenFieldWishBecause</name>
@@ -10948,7 +10958,7 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
             <targetReference>Get_Wish_Case</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <textTemplates>
         <name>BaseForNewLine</name>
         <text>~~~
