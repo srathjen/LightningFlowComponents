@@ -19,6 +19,7 @@ Modification Log:
 13.28/05/2020 - Manoj      - SIW-262 : Made page scrollable to the fields in case of any error
 14.30/05/2020 - Manoj      - SIW-508 : Hide Hospitalization Questions if DV is autoqualifying
 15.02/06/2020 - Manoj      - SIW-557: Updated placeholder to 'Acute Lymphoblastic Leukemia (ALL)' from 'Malignant Neoplasm' and to 'C91.0' from 'C00'
+16.01/07/2020 - Manoj      - SIW-516: Added method to change qualified and non-qualified notification box based on comatose questions
 *********************************************************************************************************************************** -->
 <apex:page controller="DiagnosisVerification_AC" applyBodyTag="false" sidebar="false" showHeader="false" docType="html-5.0" standardStylesheets="false" title="Make-A-Wish | Diagnosis Verification Form" cache="false">
     <script>
@@ -432,10 +433,10 @@ Modification Log:
                                         <div class="col-md-12"><label>Is {!currLead.FirstName} {!currLead.LastName} in a comatose or vegetative state?</label></div>
                                         <div class="col-md-6 vegitative">
                                             <!--<apex:selectList value="{!wishChildWrapperIns.vegetativeState}" multiselect="false" size="1" styleClass="comatose form-control c-select VegetativePick requiredField" >-->
-                                            <apex:selectList value="{!wishChildWrapperIns.vegetativeState}" multiselect="false" size="1" styleClass="form-control c-select requiredField" >
+                                            <apex:selectList value="{!wishChildWrapperIns.vegetativeState}" multiselect="false" size="1" styleClass="form-control c-select requiredField" id="vegetativeVal" onchange="syncQues(this.value);">                                                   
                                                 <apex:selectOption itemlabel="Please Select" itemvalue=""/>
                                                 <apex:selectOption itemlabel="Yes" itemvalue="Yes" />
-                                                <apex:selectOption itemLabel="No" itemValue="No"/>
+                                                <apex:selectOption itemLabel="No" itemValue="No"/>                                                
                                             </apex:selectList>
                                         </div>
                                     </div>
@@ -466,39 +467,39 @@ Modification Log:
                                 <div class="step-two fadein-alert">
                                     <fieldset >
                                         
-                                        <apex:actionfunction action="{!WishChildEligibilityCheck}" name="checkEligible" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,hospitalQuestions">
+                                        <apex:actionfunction action="{!WishChildEligibilityCheck}" name="checkEligible" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
                                             <apex:param name="icdOrPcd" value="" />
                                             <apex:param name="diagnosisBlockNum" value="" />
                                         </apex:actionfunction>
                                         
-                                        <apex:actionfunction action="{!ResetDiagnosis}" name="resetDiagnosisBlock" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,hospitalQuestions">
+                                        <apex:actionfunction action="{!ResetDiagnosis}" name="resetDiagnosisBlock" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
                                             <apex:param name="diagnosisBlockNum" value="" />
                                         </apex:actionfunction>
-                                        <apex:actionfunction action="{!MedicalResponse}" name="medicalResponse" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,hospitalQuestions">
+                                        <apex:actionfunction action="{!MedicalResponse}" name="medicalResponse" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
                                             <apex:param name="medicalResponse" value="" />
                                             <apex:param name="diagnosisBlockNum" value="" />
                                             <apex:param name="questionNumber" value="" />
                                         </apex:actionfunction>
-                                        <apex:actionfunction action="{!RemoveDiagnosisBlock}" name="removeDiagnosisBlock" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,hospitalQuestions">
+                                        <apex:actionfunction action="{!RemoveDiagnosisBlock}" name="removeDiagnosisBlock" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
                                             <apex:param name="diagnosisBlockNum" value="" />
                                         </apex:actionfunction>
                                         <!--<apex:actionfunction action="{!RemoveDiagnosisBlock}" name="removeDiagnosisBlockAndSign"  onComplete="SaveAndSign();" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
 <apex:param name="diagnosisBlockNum" value="" />
 </apex:actionfunction>-->
-                                        <apex:actionfunction action="{!RemoveDiagnosisBlock}" name="removeDiagnosisBlockAndSign"  onComplete="CollectCondition();" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,hospitalQuestions">
+                                        <apex:actionfunction action="{!RemoveDiagnosisBlock}" name="removeDiagnosisBlockAndSign"  onComplete="CollectCondition();" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
                                             <apex:param name="diagnosisBlockNum" value="" />
                                         </apex:actionfunction>
-                                        <apex:actionFunction name="changeWishStatus" action="{!changeWishStatus}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,hospitalQuestions">
+                                        <apex:actionFunction name="changeWishStatus" action="{!changeWishStatus}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
                                             <apex:param name="diagnosisBlockNum" value="" />
                                             <apex:param name="questionNumber" value="" />
                                         </apex:actionFunction>
-                                        <apex:actionFunction name="deleteAttachment" action="{!deleteLeadFile}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,hospitalQuestions">
+                                        <apex:actionFunction name="deleteAttachment" action="{!deleteLeadFile}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
                                             <apex:param name="attachmentId" value="" />
                                         </apex:actionFunction>
-                                        <apex:actionFunction name="docusign" action="{!SubmitSign}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,LoadBlock,myMsg,hospitalQuestions" status="status"/>
+                                        <apex:actionFunction name="docusign" action="{!SubmitSign}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,LoadBlock,myMsg" status="status"/>
                                         <apex:actionFunction name="refreshAttachmentSection"  reRender="attachmentSection">
                                         </apex:actionFunction>
-                                        <apex:actionFunction name="saveMedInfo" action="{!SaveMedicalInformation}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,LoadBlock,hospitalQuestions" onComplete="docusignPageRedirect();" status="status">
+                                        <apex:actionFunction name="saveMedInfo" action="{!SaveMedicalInformation}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,LoadBlock" onComplete="docusignPageRedirect();" status="status">
                                             <apex:param name="travelString" value="" />
                                             <apex:param name="collectedConditionValue" value="" />
                                         </apex:actionFunction>
@@ -557,7 +558,7 @@ Modification Log:
                                                                     <apex:outputPanel rendered="{!medicalQuestion.medicalQuestion.Data_Type__c == 'Picklist'}">
                                                                         <div class="col-md-6">
                                                                             <apex:outputPanel rendered="{!diagnosisVerification.conditionDescription == 'Total Parenteral Nutrition (TPN)' && medicalQuestion.epilepsyPickVals.size > 0}"><label>Please select number of years</label></apex:outputPanel>
-                                                                            <apex:selectList size="1" value="{!medicalQuestion.selectedPickVal}" styleClass="{!rowNum} malignant{!diagnosisBlock} medicalPickList form-control c-select requiredField"  onChange="MedicalQuestionVisibility({!diagnosisBlock},{!rowNum},this.value,'malignant{!diagnosisBlock}')">
+                                                                            <apex:selectList size="1" value="{!medicalQuestion.selectedPickVal}" styleClass="{!rowNum} malignant{!diagnosisBlock} medicalPickList form-control c-select requiredField" id="isQues" onChange="MedicalQuestionVisibility({!diagnosisBlock},{!rowNum},this.value,'malignant{!diagnosisBlock}')">
                                                                                 <apex:selectoptions value="{!medicalQuestion.pickVals}"></apex:selectoptions>
                                                                             </apex:selectList>
                                                                         </div>
@@ -629,19 +630,17 @@ Modification Log:
                                                         <div class="col-xs-12"><label>Additional diagnoses may be necessary to determine eligibility.</label></div>
                                                     </div>
                                                 </apex:outputtext>
-                                                <apex:commandLink value="+ Add another diagnosis" styleClass="diagnosis-link" action="{!addDiagnosisVerification}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,hospitalQuestions"   />
+                                                <apex:commandLink value="+ Add another diagnosis" styleClass="diagnosis-link" action="{!addDiagnosisVerification}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace"   />
                                             </apex:outputPanel>
                                         </apex:outputPanel>
                                         
                                         <div class="seperator-top" style="padding-top:1rem">
-                                           <!-- SIW-508 : Added output panels to render based on status-->
-                                            <apex:outputPanel id="hospitalQuestions">
-                                                <apex:outputPanel rendered="{!wishStatus != 'Qualified'}">
+                                           <!-- SIW-508 : Added output panels to render based on status-->                                                                                         
                                             <!--SIW-287 Start : Added new questions-->
-                                            <div class="form-group row">
+                                            <div class="form-group row unplanned-admission-parent">
                                                 <div class="col-md-12"><label>Has {!currLead.FirstName} {!currLead.LastName} had any unplanned hospital admissions in the past 12 months?</label></div>
                                                 <div class="col-md-6">
-                                                    <apex:selectList value="{!wishChildWrapperIns.unplannedHospitalAdmission}" multiselect="false" size="1" styleClass="form-control c-select exped-Process requiredField" id="unplannedHospital" onchange="changeHospitalQues();">
+                                                    <apex:selectList value="{!wishChildWrapperIns.unplannedHospitalAdmission}" multiselect="false" size="1" styleClass="form-control c-select exped-Process requiredField" id="unplannedHospital" >
                                                         <apex:selectOption itemlabel="Please Select" itemvalue="" html-selected="selected"/>
                                                         <apex:selectOption itemlabel="Yes" itemvalue="Yes" />
                                                         <apex:selectOption itemLabel="No" itemValue="No"/>                                                        
@@ -666,20 +665,7 @@ Modification Log:
                                                     </apex:selectList>
                                                 </div>
                                             </div>                                          
-                                            <!--SIW-287 End-->
-                                            </apex:outputPanel>
-                                            <script>
-                                            //show/hide unplanned hospital admission textbox
-                                            var hosVal = document.querySelectorAll('[id$="unplannedHospital"]');                                                                                   
-                                            if(hosVal[0].value == 'Yes') {
-                                                $('.unplanned-admission').prop('hidden', false);
-                                                $(".unplanned-text").addClass("requiredField");
-                                            } else {                                               
-                                                $(".unplanned-text").removeClass("requiredField");
-                                                $('.unplanned-admission').prop('hidden', true);                                                
-                                            } 
-                                            </script>
-                                            </apex:outputPanel>
+                                            <!--SIW-287 End-->                                         
                                             
                                             <apex:outputPanel id="notEligibleWishDesc">
                                                 <apex:outputPanel rendered="{!wishStatus != 'Qualified'}">
@@ -1604,6 +1590,26 @@ Modification Log:
                                             }
                                         }
                                         //SIW-287 End
+                                        //SIW-516 Start : Added CSS to hide and display questions on DV form
+                                                if(document.querySelectorAll('[id$="isQues"]').length > 0){
+                                                  var a = document.querySelectorAll('[id$="isQues"]');
+                                                  var b = a[a.length-1];                                                  
+                                                  var vl = b.value;                                                 
+                                                  if(vl == 'Yes'){
+                                                    $('.unplanned-admission-parent').prop('hidden', true); 
+                                                    $('.unplanned-admission').prop('hidden', true);
+                                                    }
+                                                 else if(vl == 'No'){
+                                                  $('.unplanned-admission-parent').prop('hidden', false); 
+                                                    var hosVal = document.querySelectorAll('[id$="unplannedHospital"]');
+                                                    if(hosVal[0].value == 'Yes') {
+                                                        $('.unplanned-admission').prop('hidden', false);
+                                                    }else{
+                                                        $('.unplanned-admission').prop('hidden', true);
+                                                    }     
+                                                }
+                                                 }
+                                        //SIW-516 End
                                         
                                         //SIW-355 Start : Added CSS to hide and display questions on DV form
                                         // hide 'ideal timeframe' textbox onload
@@ -2377,6 +2383,19 @@ Modification Log:
         }
         // Used to display and hide medical questions based on response
         function MedicalQuestionVisibility(diagnosisBlock,picklistNum,blockValue,className) {
+            if(blockValue == 'Yes'){
+                $('.unplanned-admission-parent').prop('hidden', true); 
+                $('.unplanned-admission').prop('hidden', true);
+            }
+            else if(blockValue == 'No'){
+                $('.unplanned-admission-parent').prop('hidden', false); 
+                var hosVal = document.querySelectorAll('[id$="unplannedHospital"]');
+                if(hosVal[0].value == 'Yes') {
+                    $('.unplanned-admission').prop('hidden', false);
+                }else{
+                    $('.unplanned-admission').prop('hidden', true);
+                }     
+            }
             var nextElement = picklistNum+1;
             if(($(".statement-desc-patient input[type=radio]:checked").val()) > 5 ) {
                 medicalResponse('ShowNext',diagnosisBlock,picklistNum);
@@ -2387,7 +2406,7 @@ Modification Log:
                     });
                     $('.'+className).parents('.pd-MqList'+diagnosisBlock+picklistNum).nextAll().hide();
                 }
-                medicalResponse('Yes',diagnosisBlock,picklistNum);
+                medicalResponse('Yes',diagnosisBlock,picklistNum);                
             } else if ( blockValue == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with simple partial seizures' || blockValue == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures'
                        || blockValue == 'Generalized idiopathic epilepsy and epileptic syndromes' || blockValue == 'Lennox-Gastaut Syndrome' || blockValue == 'Epileptic Spasms'){
                 $('.epilepsyRadio'+diagnosisBlock).show();
@@ -2400,12 +2419,13 @@ Modification Log:
             }  else if(blockValue == 'Not Intractable' && ($('.malignant'+diagnosisBlock).val() != '')){
                 medicalResponse('No',diagnosisBlock,picklistNum);
             }  else if(blockValue == 'No' || blockValue == 'All other types of Cardiomyopathy' || blockValue == 'I don\'t know' || blockValue == 'None of these describe child'
-                       || blockValue == 'Short-term bridge' || blockValue == 'Long-term therapy' || blockValue == 'Hb-C' || blockValue == 'Hb-SS' || blockValue == 'Sickle-Cell Thalassemia' || blockValue == 'Other Sickle-Cell Disorder') {
-                if( $('.'+className).parents('.pd-MqList'+diagnosisBlock+picklistNum).next().hasClass('pd-MqList'+diagnosisBlock+nextElement)) {
+                       || blockValue == 'Short-term bridge' || blockValue == 'Long-term therapy' || blockValue == 'Hb-C' || blockValue == 'Hb-SS' || blockValue == 'Sickle-Cell Thalassemia' || blockValue == 'Other Sickle-Cell Disorder') {                       
+                if( $('.'+className).parents('.pd-MqList'+diagnosisBlock+picklistNum).next().hasClass('pd-MqList'+diagnosisBlock+nextElement)) {                    
                     changeWishStatus(diagnosisBlock,picklistNum);
-                } else {
+                } else {                 
                     medicalResponse('No',diagnosisBlock,picklistNum);
                 }
+                
             }
         }
         //SIW-262 : Made page scrollable to the fields in case of any error
@@ -2419,16 +2439,19 @@ Modification Log:
                 }
             }
         }
-        //SIW-287 : show/hide unplanned hospital admission textbox
-        function changeHospitalQues(){            
-            var hosVal = document.querySelectorAll('[id$="unplannedHospital"]');                                                                                   
-                                            if(hosVal[0].value == 'Yes') {
-                                                $('.unplanned-admission').prop('hidden', false);
-                                                $(".unplanned-text").addClass("requiredField");                                               
-                                            } else {                                               
-                                                $(".unplanned-text").removeClass("requiredField");
-                                                $('.unplanned-admission').prop('hidden', true);                                                
-                                            } 
+       //SIW-516: Added method to change qualified and non-qualified notification box based on comatose questions
+        function syncQues(vegValue){                    
+            if(document.querySelectorAll('[id$="isQues"]').length > 0){
+                var a = document.querySelectorAll('[id$="isQues"]');
+                var b = a[a.length-1];
+                var c = b.className.split(' ');
+                var db = c[1].slice(c[1].length - 1);
+                var pn = c[0];
+                var vl = b.value;
+                var cn = c[1];
+                MedicalQuestionVisibility(db,pn,vl,cn);
+            }
+           
         }
         </script>
     </body>
