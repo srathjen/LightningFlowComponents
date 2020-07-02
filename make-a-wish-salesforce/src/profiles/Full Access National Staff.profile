@@ -11023,6 +11023,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Lead.Best_contact_for_Physician_Phone__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Lead.ChapterName__c</field>
         <readable>true</readable>
     </fieldPermissions>

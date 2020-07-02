@@ -9,7 +9,6 @@
 // 27/04/2020 - Manoj - SIW-556 : Modified method 'getInputValue' to allow users to proceed even when select No in question "HAS THE REFERRAL BEEN DISCUSSED WITH THE CHILD'S HEALTHCARE PROVIDER?"
 // 02/06/2020 - Manoj - SIW-557: Updated placeholder to 'Acute Lymphoblastic Leukemia (ALL)' from 'Malignant Neoplasm' and to 'C91.0' from 'C00'
 // 16/06/2020 - Manoj - SIW-606: Changed method to navigate to home site
-// 18/06/2020 - Manoj - SIW-237: Added new field Preferred name
 -->
 
 <apex:page controller="WishReferralForm_AC" showHeader="false" applyBodyTag="false" sidebar="false" standardStylesheets="false" docType="html-5.0" cache="false">
@@ -705,12 +704,21 @@
                                 <apex:inputText value="{!currLead.Best_Contact_for_Physician_Last_Name__c}" styleClass="form-control" id="mpmaincontactlastname" maxlength="50" html-placeholder="{!$Label.Wish_Referral_Last_Name}" />
                             </div>
                         </div>
+                        
                         <div class="form-group row">
                             <div class="col-sm-3"><label class="sr-only">{!$Label.Wish_Referral_Email}</label></div>
                             <div class="col-sm-6">
                                 <apex:inputText value="{!currLead.Best_contact_for_Physician_Email__c}" styleClass="form-control bemail email-std notqualto" html-placeholder="email@domain.com" id="mpmaincontactemail" maxlength="80" />
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3"><label class="sr-only">{!$Label.Wish_Referral_Phone}</label></div>
+                            <div class="col-sm-6">
+                                <apex:inputText value="{!currLead.Best_contact_for_Physician_Phone__c}" styleclass="form-control bphone phonemask numbers-only" html-placeholder="(000) 000-0000" id="mpmaincontactphone" html-pattern=".{10,14}" maxlength="10" />
+                            </div>
+                        </div>  
+                        
+                        
                     </fieldset>
                     <fieldset class="fs">
                         <legend>Form Security</legend>
@@ -978,4 +986,3 @@
             </script>
         </body>
     </apex:page>
-    

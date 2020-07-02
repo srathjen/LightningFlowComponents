@@ -23,7 +23,7 @@ Modification Log:
                         City, State, Street, PostalCode, Medical_Professional_First_Name__c, Medical_Professional_Last_Name__c,
                         Medical_Professional_Phone__c, Medical_Professional_Email__c, Treating_Medical_Professional_First_Name__c,
                         Treating_Medical_Professional_Last_Name__c,Treating_Medical_Professional_Phone__c,
-                        Treating_Medical_Professional_Email__c, Best_contact_for_Physician_Email__c,
+                        Treating_Medical_Professional_Email__c, Best_contact_for_Physician_Email__c, Best_Contact_for_Physician_Phone__c,
                         Best_Contact_for_Physician_Last_Name__c,Best_Contact_for_Physician_First_Name__c,
                         Additional_Parent_City__c,Additional_Parent_Email__c,Alternate2MedProfessionalLastName__c,
                         Alternate2MedProfessionalPhone__c,Additional_Parent_First_Name__c,Additional_Parent_Last_Name__c,
@@ -57,7 +57,7 @@ Modification Log:
         List<Contact> dupBestContactPhysicians = ContactService.findDuplicatedContacts(
                 currLead.Best_Contact_for_Physician_First_Name__c,
                 currLead.Best_Contact_for_Physician_Last_Name__c,
-                null,
+                currLead.Best_Contact_for_Physician_Phone__c,
                 currLead.Best_contact_for_Physician_Email__c,
                 new List<Id>{
                         medicalProfessionalRT
