@@ -10,6 +10,7 @@
     <aura:attribute name="showModal" type="Boolean" default="false"/>
     <aura:attribute name="relationshipTypes" type="Object[]" default="[]"/>
     <aura:attribute name="residingWithChildOptions" type="Object[]" default="[]"/>
+    <aura:attribute name="salutationOptions" type="Object[]" default="[]"/>
     <aura:attribute name="isUserProfileAllowedToUpdateWishAffiliation" type="Boolean"/>
     <aura:attribute name="isButtonDisabled" type="Boolean" default="false"/>
     <!-- Attributes for Custom Toast -->
@@ -148,6 +149,22 @@
                                  id="error-01">{!$Label.c.Wish_Participant_Required_Field}</div>
                         </aura:if>
                     </div>
+                </div>
+                <!-- Contact Salutation -->
+                <div class="slds-col slds-size_1-of-1">
+                    <lightning:select aura:id="salutation"
+                                      label="{!$Label.c.Wish_Participant_Salutation}"
+                                      name="salutation"
+                                      value="{!v.wishAffiliation.wishAffRecord.Contact__r.Salutation}"
+                                      onchange="{!c.onChangeValidate}">
+                        <option value=""></option>
+                        <aura:iteration items="{!v.salutationOptions}"
+                                        var="salutationOption">
+                            <option value="{!salutationOption}">
+                                {!salutationOption}
+                            </option>
+                        </aura:iteration>
+                    </lightning:select>
                 </div>
                 <!-- Contact First Name -->
                 <div class="slds-col slds-size_1-of-1">
