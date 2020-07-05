@@ -23,6 +23,7 @@
                 component.set("v.states", dataMap['states']);
                 component.set("v.countries", dataMap['countries']);
                 component.set("v.preferredPhoneOptions", dataMap['preferredPhoneOptions']);
+                component.set("v.salutationOptions", dataMap['salutationOptions']);
                 component.set("v.residingWithChildOptions", dataMap['residingWithChildOptions']);
                 component.set("v.relationshipTypes", dataMap['relationshipTypes']);
                 component.set("v.isUserProfileAllowedToUpdateWishAffiliation", dataMap['isUserProfileAllowedToUpdateWishAffiliation']);

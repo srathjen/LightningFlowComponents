@@ -2291,6 +2291,14 @@
         <value>Review Contact</value>
     </labels>
     <labels>
+        <fullName>Wish_Participant_Salutation</fullName>
+        <categories>Wish Participant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Participant Salutation</shortDescription>
+        <value>Salutation</value>
+    </labels>
+    <labels>
         <fullName>Wish_Participant_Save</fullName>
         <categories>Wish Participant</categories>
         <language>en_US</language>

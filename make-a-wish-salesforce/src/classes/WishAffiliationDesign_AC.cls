@@ -93,6 +93,9 @@ public without sharing class WishAffiliationDesign_AC {
 			}
 			returnValuesMap.put('wishAffiliations', wrapperList);
 			returnValuesMap.put('countReqParticipants', countReqParticipants);
+			// Find Salutations
+			List<String> salutationOptions = Utils.getPicklistLabels('Contact', 'Salutation');
+			returnValuesMap.put('salutationOptions', salutationOptions);
 			// Find Relationship Types
 			List<String> relationshipTypes = Utils.getPicklistLabels('npe4__Relationship__c', 'npe4__Type__c');
 			returnValuesMap.put('relationshipTypes', relationshipTypes);
@@ -125,6 +128,7 @@ public without sharing class WishAffiliationDesign_AC {
 		try {
 			//Create Contact
 			Contact con = new Contact();
+			con.Salutation = newWishAffRecord.ContactSalutation;
 			con.FirstName = newWishAffRecord.ContactFirstName;
 			con.Middle_Name__c = newWishAffRecord.ContactMiddleName;
 			con.LastName = newWishAffRecord.ContactLastName;
@@ -232,6 +236,15 @@ public without sharing class WishAffiliationDesign_AC {
 				Boolean isUpdateContact = false;
 				Contact modifiedContact = wishAffiliation.wishAffRecord.Contact__r;
 				Contact existingContact = oldWishAffiliation.wishAffRecord.Contact__r;
+				//Salutation
+				String modifiedSalutation = modifiedContact.Salutation == null
+						? '' : modifiedContact.Salutation;
+				String existingSalutation = existingContact.Salutation == null
+						? '' : existingContact.Salutation;
+				if (modifiedSalutation != existingSalutation) {
+					updateContactRecord.Salutation = modifiedSalutation;
+					isUpdateContact = true;
+				}
 				//Firstname
 				String modifiedFirstName = modifiedContact.FirstName == null
 						? '' : modifiedContact.FirstName;
@@ -343,6 +356,7 @@ public without sharing class WishAffiliationDesign_AC {
 	public class newWishAffiliationRecordWrapper {
 		@AuraEnabled public Id WishAffiliationWishCaseRecordId { get; set; }
 		@AuraEnabled public String RelationshipType { get; set; }
+		@AuraEnabled public String ContactSalutation { get; set; }
 		@AuraEnabled public String ContactFirstName { get; set; }
 		@AuraEnabled public String ContactLastName { get; set; }
 		@AuraEnabled public Date ContactBirthdate { get; set; }

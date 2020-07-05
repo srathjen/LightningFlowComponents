@@ -22,6 +22,7 @@ public class WishAffiliation_AC_Test {
 		List<Contact> contactsDataFactory = TestDataFactory.createContact(4);
 		List<Contact> contacts = new List<Contact>();
 		Contact wishChildContact = contactsDataFactory.get(0);
+		wishChildContact.Salutation = 'Mr.';
 		wishChildContact.FirstName = 'Mark';
 		wishChildContact.LastName = 'Smith';
 		wishChildContact.ICD_10_Code__c = icdCode.Id;
@@ -32,6 +33,7 @@ public class WishAffiliation_AC_Test {
 		wishChildContact.MailingState = 'Arizona';
 		wishChildContact.MailingCity = 'Phoenix';
 		Contact wishFamilyContactFather = contactsDataFactory.get(1);
+		wishFamilyContactFather.Salutation = 'Mr.';
 		wishFamilyContactFather.FirstName = 'Jack';
 		wishFamilyContactFather.LastName = 'Smith';
 		wishFamilyContactFather.RecordTypeId = '01236000000xW2qAAE';
@@ -41,6 +43,7 @@ public class WishAffiliation_AC_Test {
 		wishFamilyContactFather.MailingState = 'Arizona';
 		wishFamilyContactFather.MailingCity = 'Phoenix';
 		Contact wishFamilyContactBrother = contactsDataFactory.get(2);
+		wishFamilyContactBrother.Salutation = 'Mr.';
 		wishFamilyContactBrother.FirstName = 'Danny';
 		wishFamilyContactBrother.LastName = 'Smith';
 		wishFamilyContactBrother.RecordTypeId = '01236000000xW2qAAE';
@@ -50,6 +53,7 @@ public class WishAffiliation_AC_Test {
 		wishFamilyContactBrother.MailingState = 'Arizona';
 		wishFamilyContactBrother.MailingCity = 'Phoenix';
 		Contact wishFamilyContactMother = contactsDataFactory.get(3);
+		wishFamilyContactMother.Salutation = 'Ms.';
 		wishFamilyContactMother.FirstName = 'Lucy';
 		wishFamilyContactMother.LastName = 'Smith';
 		wishFamilyContactMother.RecordTypeId = '01236000000xW2qAAE';
@@ -152,7 +156,7 @@ public class WishAffiliation_AC_Test {
 		Wish_Affiliation__c wishAffiliation = [
 				SELECT Id, Name, Wish_Affiliation_Type__c, Wish__c, Residing_with_Wish_child__c, Medical_Needs__c,
 						Survey_Recipient__c, Non_Comped__c, Details__c, Send_Clearance_Forms_To__c, Medical_Professional_Status__c,
-						Contact__r.Name, Contact__r.FirstName, Contact__r.LastName, Contact__r.Birthdate, Contact__r.Current_Age__c,
+						Contact__r.Salutation, Contact__r.Name, Contact__r.FirstName, Contact__r.LastName, Contact__r.Birthdate, Contact__r.Current_Age__c,
 						Contact__r.MailingStreet, Contact__r.MailingCity, Contact__r.MailingState, Contact__r.MailingPostalCode,
 						Contact__r.MailingCountry, Contact__r.npe01__PreferredPhone__c, Contact__r.Phone, Contact__r.HomePhone,
 						Contact__r.MobilePhone, Contact__r.OtherPhone, Contact__r.npe01__WorkPhone__c, Contact__r.npe01__HomeEmail__c,
@@ -170,7 +174,7 @@ public class WishAffiliation_AC_Test {
 				'"Wish__c":"' + wishCase.Id + '","Wish_Affiliation_Type__c":"Approved Participant","Residing_with_Wish_child__c":"No",' +
 				'"Medical_Needs__c":true,"Survey_Recipient__c":true,"Non_Comped__c":true,"Details__c":"The father of the wish child","Contact__c":"'
 				+ wishAffiliation.Contact__c + '","Relationship__c":"' + wishAffiliation.Relationship__c + '",' +
-				'"Contact__r":{"Id":"' + wishAffiliation.Contact__c + '","Name":"Jack Smith","FirstName":"Jack","LastName":"Smith",' +
+				'"Contact__r":{"Id":"' + wishAffiliation.Contact__c + '","Name":"Jack Smith","Salutation":"Mr.","FirstName":"Jack","LastName":"Smith",' +
 				'"Birthdate":"1950-01-01","npe01__PreferredPhone__c":"Home","Phone":"5553334444","npe01__HomeEmail__c":"js@email.com",' +
 				'"npsp__Do_Not_Contact__c":true,"Do_Not_Contact_Notes__c":"Do no Contact Father","npsp__Deceased__c":false,' +
 				'"MailingStreet":"1234 E Gold Dust Ave","MailingCity":"Phoenix","MailingPostalCode":"88333-2222","MailingState":"Arizona","MailingCountry":"United States"},' +
@@ -192,6 +196,7 @@ public class WishAffiliation_AC_Test {
 		System.assertEquals(true, newWishAffiliation.Survey_Recipient__c);
 		System.assertEquals(true, newWishAffiliation.Non_Comped__c);
 		System.assertEquals('The father of the wish child', newWishAffiliation.Details__c);
+		System.assertEquals('Mr.', newWishAffiliation.Contact__r.Salutation);
 		System.assertEquals('Jack', newWishAffiliation.Contact__r.FirstName);
 		System.assertEquals('Smith', newWishAffiliation.Contact__r.LastName);
 		System.assertEquals('1234 E Gold Dust Ave', newWishAffiliation.Contact__r.MailingStreet);
@@ -236,7 +241,7 @@ public class WishAffiliation_AC_Test {
 				'"Wish__c":"' + wishCase.Id + '","Wish_Affiliation_Type__c":"Requested Participant","Residing_with_Wish_child__c":"Yes",' +
 				'"Medical_Needs__c":true,"Survey_Recipient__c":true,"Non_Comped__c":true,"Details__c":"The father of the wish child","Contact__c":"'
 				+ wishAffiliation.Contact__c + '","Relationship__c":"' + wishAffiliation.Relationship__c + '",' +
-				'"Contact__r":{"Id":"' + wishAffiliation.Contact__c + '","Name":"Jack Smith","FirstName":"Jacky","LastName":"Smithz",' +
+				'"Contact__r":{"Id":"' + wishAffiliation.Contact__c + '","Name":"Jack Smith","Salutation":"Ms.","FirstName":"Jacky","LastName":"Smithz",' +
 				'"Birthdate":"1950-12-12","npe01__PreferredPhone__c":"Work","Phone":"5553331111","npe01__HomeEmail__c":"jacky@email.com",' +
 				'"npsp__Do_Not_Contact__c":true,"Do_Not_Contact_Notes__c":"Do no Contact Father","npsp__Deceased__c":true,' +
 				'"MailingStreet":"9999 Street","MailingCity":"New York","MailingPostalCode":"113377-2222","MailingState":"New York","MailingCountry":"United States"},' +
@@ -275,7 +280,7 @@ public class WishAffiliation_AC_Test {
 		String payload = '{ ' +
 				'"Wish__c":"' + wishCase.Id + '", "Wish_Affiliation_Type__c":"Approved Participant","Residing_with_Wish_child__c":"",' +
 				'"Medical_Needs__c":true,"Survey_Recipient__c":true,"Non_Comped__c":true,"Details__c":"The father",' +
-				'"Contact__r":{"FirstName":"John","LastName":"Doe","Birthdate":"","MailingStreet":"ABCDEF Street","MailingCity":"Phoenix","MailingState":"Arizona",' +
+				'"Contact__r":{"Salutation":"Mr.","FirstName":"John","LastName":"Doe","Birthdate":"","MailingStreet":"ABCDEF Street","MailingCity":"Phoenix","MailingState":"Arizona",' +
 				'"MailingPostalCode":"ABCDEF","MailingCountry":"United States","npe01__PreferredPhone__c":"Home", "Phone":"5554443333","npe01__HomeEmail__c":"jd@email.com",' +
 				'"npsp__Do_Not_Contact__c":true,"Do_Not_Contact_Notes__c":"Do not contact John","npsp__Deceased__c":false,"npsp__is_Address_Override__c":true},' +
 				'"Relationship__r":{"npe4__Type__c":"Father","Parent_Legal_Guardian__c":true,' +
@@ -297,6 +302,7 @@ public class WishAffiliation_AC_Test {
 		System.assertEquals(true, newWishAffiliation.Survey_Recipient__c);
 		System.assertEquals(true, newWishAffiliation.Non_Comped__c);
 		System.assertEquals('The father', newWishAffiliation.Details__c);
+		System.assertEquals('Mr.', newWishAffiliation.Contact__r.Salutation);
 		System.assertEquals('John', newWishAffiliation.Contact__r.FirstName);
 		System.assertEquals('Doe', newWishAffiliation.Contact__r.LastName);
 		System.assertEquals(null, newWishAffiliation.Contact__r.Birthdate);

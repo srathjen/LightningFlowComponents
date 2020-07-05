@@ -49,6 +49,7 @@
         return JSON.parse('{' +
             '"WishAffiliationWishCaseRecordId":"' + wishCaseRecordId +
             '","RelationshipType":"",' +
+            '"ContactSalutation":"",' +
             '"ContactFirstName":"",' +
             '"ContactMiddleName":"",' +
             '"ContactLastName":"",' +
