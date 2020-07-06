@@ -489,7 +489,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>FileUploadController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>FileUploadControllerTest</apexClass>
@@ -645,7 +645,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>LightningDataTableController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>LightningDataTableControllerTest</apexClass>
@@ -1069,7 +1069,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>WishSignatureController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>WishSignatureControllerTest</apexClass>
@@ -1185,7 +1185,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>customLookUpController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>trac_TriggerHandlerBase</apexClass>
