@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <classAccesses>
+        <apexClass>FileUploadController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>LightningDataTableController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>SendReferralEmailLC_AC</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
     <enabled>false</enabled>
     <apexClass>WishReferralFormSpanish_AC</apexClass>
 </classAccesses>
+    <classAccesses>
+        <apexClass>WishSignatureController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>customLookUpController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <custom>true</custom>
     <customMetadataTypeAccesses>
         <enabled>true</enabled>
@@ -121,7 +141,6 @@
         <default>false</default>
         <visible>false</visible>
     </applicationVisibilities>
-    
     <applicationVisibilities>
         <application>leadconvertchtr__Lead_Convert_Chatter</application>
         <default>false</default>
@@ -6977,11 +6996,6 @@
         <tab>fpro__FieldPro</tab>
         <visibility>Hidden</visibility>
     </tabVisibilities>
-    
-    
-    
-    
-    
     <tabVisibilities>
         <tab>leadconvertchtr__Chatter_Lead_Convert_Setup</tab>
         <visibility>Hidden</visibility>
@@ -7070,7 +7084,6 @@
         <tab>npsp__Engagement_Plan_Template__c</tab>
         <visibility>Hidden</visibility>
     </tabVisibilities>
-    
     <tabVisibilities>
         <tab>npsp__General_Accounting_Unit__c</tab>
         <visibility>Hidden</visibility>

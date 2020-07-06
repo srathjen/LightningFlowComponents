@@ -508,6 +508,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>Loop__ApplicationAuthorizationController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>MedicalRelationships_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
