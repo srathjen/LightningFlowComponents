@@ -301,7 +301,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>DisplayMobileFieldSetsCtlr</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>DisplayMobileFieldSetsCtlrTest</apexClass>
@@ -581,7 +581,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>NewWishBudgetController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>NewWishBudgetControllerTest</apexClass>
@@ -633,7 +633,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>QualifyingDiagnosisLC_AC</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>QualifyingDiagnosisLC_AC_TEST</apexClass>
@@ -673,7 +673,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>SendDiagnosisVerficationLC_AC</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>SendDiagnosisVerficationLC_ACTest</apexClass>
@@ -733,7 +733,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>TractionLinksController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>TractionLinksControllerTest</apexClass>
@@ -745,7 +745,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>UIThemeController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>UIThemeControllerTest</apexClass>
@@ -1085,7 +1085,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>wishBudgetsController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>wishBudgetsControllerTest</apexClass>

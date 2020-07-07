@@ -12,9 +12,8 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-    <enabled>false</enabled>
-    <apexClass>WishReferralFormSpanish_AC</apexClass>
-</classAccesses>
+        <apexClass>WishReferralFormSpanish_AC</apexClass>
+    </classAccesses>
     <classAccesses>
         <apexClass>WishSignatureController</apexClass>
         <enabled>true</enabled>
