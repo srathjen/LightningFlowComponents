@@ -793,7 +793,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>SendReferralEmailLC_AC</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>SendReferralEmailLC_AC_Test</apexClass>
