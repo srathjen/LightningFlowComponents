@@ -51,6 +51,13 @@
             <operator>equals</operator>
             <value>Make-A-Wish Colorado</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Lead.Wish_Child</value>
+        </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

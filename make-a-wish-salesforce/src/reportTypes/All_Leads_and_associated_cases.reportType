@@ -47,6 +47,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>RecordType</field>
+            <table>Lead</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Using_Paper_Process_For_DV__c</field>
             <table>Lead</table>
         </columns>

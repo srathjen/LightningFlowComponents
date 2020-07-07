@@ -53,6 +53,13 @@
             <operator>lessOrEqual</operator>
             <value>2/28/2019 12:00 AM</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>Lead$RecordType</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Lead.Wish_Child</value>
+        </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

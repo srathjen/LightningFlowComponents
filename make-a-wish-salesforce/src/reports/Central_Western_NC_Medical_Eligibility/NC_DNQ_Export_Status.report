@@ -48,6 +48,13 @@
             <operator>greaterThan</operator>
             <value>3/22/2019</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>Lead$RecordType</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Lead.Wish_Child</value>
+        </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>NC - DNQ Export Status</name>

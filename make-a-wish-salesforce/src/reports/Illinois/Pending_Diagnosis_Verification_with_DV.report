@@ -20,7 +20,7 @@
     </columns>
     <description>Will show instances where the DV has been filled out but that the status has not changed. This will include any system errors or when the DV completer does not complete the DocuSign process.</description>
     <filter>
-        <booleanFilter>1 AND 2 AND (3 OR 4) AND 5</booleanFilter>
+        <booleanFilter>1 AND 2 AND (3 OR 4) AND 5 AND 6 AND 7</booleanFilter>
         <criteriaItems>
             <column>Lead$Status</column>
             <isUnlocked>true</isUnlocked>
@@ -51,6 +51,19 @@
             <operator>contains</operator>
             <value>Illinois</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$RecordType</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Lead.Wish_Child</value>
+        </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

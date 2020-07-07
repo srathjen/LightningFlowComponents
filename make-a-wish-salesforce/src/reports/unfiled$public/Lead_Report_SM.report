@@ -34,7 +34,7 @@
         <field>Lead.Qualifying_ICD__c</field>
     </columns>
     <filter>
-        <booleanFilter>(1 AND 2 AND ((3 OR 6) OR (4 OR 7) OR (5 OR 8)))</booleanFilter>
+        <booleanFilter>((1 AND 2 AND ((3 OR 6) OR (4 OR 7) OR (5 OR 8)))) AND 9</booleanFilter>
         <criteriaItems>
             <column>FIRST_NAME</column>
             <isUnlocked>true</isUnlocked>
@@ -83,6 +83,13 @@
             <operator>equals</operator>
             <value>Z85.830</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Lead.Wish_Child</value>
+        </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Lead Report_SM</name>

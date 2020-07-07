@@ -843,6 +843,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>RecordType</field>
+            <table>Lead</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Parent_Last_Name__c</field>
             <table>Lead</table>
         </columns>

@@ -31,6 +31,15 @@
         <field>Lead.Medical_Provider_Category__c</field>
     </columns>
     <description>Monthly referrals</description>
+    <filter>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Lead.Wish_Child</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
     <format>Tabular</format>
     <name>ENC Monthly Referrals</name>
     <params>

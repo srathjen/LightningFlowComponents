@@ -151,6 +151,13 @@
             <operator>greaterOrEqual</operator>
             <value>12/12/2019 7:30 PM</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Lead.Wish_Child</value>
+        </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>13WL Referral Form Submission</name>

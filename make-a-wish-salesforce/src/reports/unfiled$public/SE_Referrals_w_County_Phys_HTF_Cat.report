@@ -38,7 +38,7 @@
     </columns>
     <description>List of current pending SE (and no County) referrals including county, Hospital/Treatment Facility, Physician, and Referral Source</description>
     <filter>
-        <booleanFilter>1 AND 2 AND 3 AND (4 OR 5 OR 6 OR 7 OR 8 OR 9 OR 10 OR 11 OR 12 OR 13)</booleanFilter>
+        <booleanFilter>((1 AND 2 AND 3 AND (4 OR 5 OR 6 OR 7 OR 8 OR 9 OR 10 OR 11 OR 12 OR 13)) AND 14) AND 15</booleanFilter>
         <criteriaItems>
             <column>Lead$ChapterName__c</column>
             <isUnlocked>true</isUnlocked>
@@ -117,6 +117,19 @@
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
+        <criteriaItems>
+            <column>Lead$RecordType</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Lead.Wish_Child</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$RecordType</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Lead.Wish_Child</value>
+        </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>SE Referrals w County, Phys, HTF, Cat</name>

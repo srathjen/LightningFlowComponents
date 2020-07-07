@@ -40,6 +40,19 @@
             <operator>equals</operator>
             <value>,Pending Diagnosis Verification,Pending Clarification - Chapter,Additional Information for Review</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Lead.Wish_Child</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Make-A-Wish Central &amp; No</name>
