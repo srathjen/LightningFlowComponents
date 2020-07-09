@@ -79,6 +79,13 @@
             <operator>contains</operator>
             <value>Illinois</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Lead.Wish_Child</value>
+        </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>
@@ -99,7 +106,7 @@
     <reportType>LeadList</reportType>
     <scope>org</scope>
     <showDetails>true</showDetails>
-    <showGrandTotal>false</showGrandTotal>
+    <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Lead.Qualified_Date__c</dateColumn>

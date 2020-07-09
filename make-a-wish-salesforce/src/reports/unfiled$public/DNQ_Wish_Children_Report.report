@@ -67,6 +67,13 @@
             <operator>equals</operator>
             <value>Make-A-Wish New Jersey</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Lead.Wish_Child</value>
+        </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>DNQ Wish Children Report</name>

@@ -58,7 +58,7 @@
         <field>Lead.Treating_Medical_Professional_Email__c</field>
     </columns>
     <filter>
-        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
+        <booleanFilter>(1 AND 2 AND 3 AND 4 AND 5 AND 6) AND 7</booleanFilter>
         <criteriaItems>
             <column>STATUS</column>
             <isUnlocked>true</isUnlocked>
@@ -95,6 +95,13 @@
             <operator>greaterThan</operator>
             <value>9/1/2016</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Lead.Wish_Child</value>
+        </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

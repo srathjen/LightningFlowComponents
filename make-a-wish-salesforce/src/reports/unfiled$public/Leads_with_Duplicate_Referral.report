@@ -170,6 +170,13 @@
             <operator>notContain</operator>
             <value>test</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>Lead$RecordType</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Lead.Wish_Child</value>
+        </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Leads with Duplicate Referral Submitted</name>
@@ -181,7 +188,7 @@
     <scope>organization</scope>
     <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
-    <showSubTotals>false</showSubTotals>
+    <showSubTotals>true</showSubTotals>
     <sortColumn>Lead$ChapterName__c</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>

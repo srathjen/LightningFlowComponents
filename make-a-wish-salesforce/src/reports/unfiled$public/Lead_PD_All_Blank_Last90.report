@@ -86,7 +86,7 @@
         <field>CREATED_DATE</field>
     </columns>
     <filter>
-        <booleanFilter>(1 AND 2 AND 3 AND 4 AND (5 OR 6))</booleanFilter>
+        <booleanFilter>((1 AND 2 AND 3 AND 4 AND (5 OR 6))) AND 7</booleanFilter>
         <criteriaItems>
             <column>FIRST_NAME</column>
             <isUnlocked>true</isUnlocked>
@@ -123,6 +123,13 @@
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Lead.Wish_Child</value>
+        </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

@@ -33,6 +33,15 @@
     <columns>
         <field>Lead.Referrer_Last_Name__c</field>
     </columns>
+    <filter>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Lead.Wish_Child</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
     <format>Tabular</format>
     <name>NENY FY19</name>
     <params>
