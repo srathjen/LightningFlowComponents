@@ -1077,10 +1077,12 @@
   </types>
   <types>
     <members>All_Leads_and_associated_cases</members>
+    <members>Leads_detail</members>
     <members>Leads_Export</members>
     <members>Leads_with_Activities</members>
     <members>Leads_with_Cases</members>
     <members>Leads_with_Diagnosis_Verification</members>
+    <members>Leads_with_Diagnosis_Verification_case_details</members>
     <members>Leads_with_DocuSign_Status</members>
     <members>Reports</members>
     <members>Reports_Used_in_Dashboards</members>
