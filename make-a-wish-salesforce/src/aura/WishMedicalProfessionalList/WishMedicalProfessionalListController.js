@@ -135,7 +135,8 @@
             '"Contact__r":{"Salutation":"","FirstName":"","LastName":"","Provider_Type__c":"","Fax":"","MailingStreet":"","MailingCity":"","MailingState":"",' +
             '"MailingPostalCode":"","MailingCountry":"","npe01__PreferredPhone__c":"","Phone":"","npe01__HomeEmail__c":"",' +
             '"npsp__Deceased__c":false},"Relationship__r":{"npe4__Type__c":"","npe4__Contact__c":"' + wishChildContactId + '",' +
-            '"Qualifying_Medical_Professional__c":false,"Treating_HCP__c":false,"Best_Contact__c":false,"Referring_Medical_Professional__c":false}}');
+            '"Qualifying_Medical_Professional__c":false,"Treating_HCP__c":false,"Best_Contact__c":false,"Referring_Medical_Professional__c":false,' +
+            '"Former_MP__c":false}}');
     },
 
     handleLookupSelectedEvent: function (component, event, helper) {
