@@ -1183,7 +1183,7 @@ public class DiagnosisVerification_AC {
             currLead.Best_Contact_for_Physician_First_Name__c = wishChildWrapperIns.bestPhyFname;
             currLead.Best_Contact_for_Physician_Last_Name__c = wishChildWrapperIns.bestPhyLname;
             currLead.Best_contact_for_Physician_Email__c = wishChildWrapperIns.bestPhyEmail;
-            currLead.Best_Contact_for_Physician_Email__c = wishChildWRapperIns.bestPhyPhone;
+            currLead.Best_Contact_for_Physician_Phone__c = wishChildWRapperIns.bestPhyPhone;
             currLead.Alternate1MedProfessionalFirstName__c = wishChildWrapperIns.alt1MedFname;
             currLead.Alternate1MedProfessionalLastName__c = wishChildWrapperIns.alt1MedLname;
             currLead.Alternate1MedicalProfessionalEmail__c = wishChildWrapperIns.alt1MedEmail;
@@ -1194,7 +1194,7 @@ public class DiagnosisVerification_AC {
             currLead.Alternate2MedProfessionalEmail__c = wishChildWrapperIns.alt2MedEmail;
             currLead.Alternate2MedProfessionalPhone__c = wishChildWrapperIns.alt2MedPhone;
             currLead.Alternate2HospitalTreatmentFacility__c = wishChildWrapperIns.alt2MedHosp;           
-
+            system.debug('Status-->'+currLead.Status);
             update currLead;
             insert diagnosisVerificationLstForInsert;
             insert diagnosisMedicalQuestionLst;
