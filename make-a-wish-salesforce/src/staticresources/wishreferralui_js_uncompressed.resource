@@ -217,10 +217,11 @@ $(".phonemask").keydown(function(e) {
      //SIW-532: Phone number disappear issue
     // if full phone number isn't entered and tab is pressed
     if (e.keyCode == 9) {
-        if(($(this).val().length) == 10 ){}
-        else if(($(this).val().length) != 14 ){
+        if(($(this).val().length) != 10 ){
+         if(($(this).val().length) != 14 ){
             $(this).val('')
-        }       
+        }   
+    }    
     }
 });
 $(".phonemask").attr('maxlength', '14');
