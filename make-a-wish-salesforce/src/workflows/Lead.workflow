@@ -123,53 +123,6 @@
         <template>Automated_Wish_Granting_Email_Templates/Lead_Email_Notification_for_Lead_Owner_of_Lead_Age_2_5</template>
     </alerts>
     <alerts>
-        <fullName>Send_DV_Signature_Reminder_to_Medical_Professional_Final_Notice</fullName>
-        <description>Send DV Signature Reminder to Medical Professional- Final Notice</description>
-        <protected>false</protected>
-        <recipients>
-            <field>HiddenMedicalProfessionalEmail__c</field>
-            <type>email</type>
-        </recipients>
-        <senderAddress>salesforce@wish.org</senderAddress>
-        <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/DV_Reminder_Form_Email_Template_Final</template>
-    </alerts>
-    <alerts>
-        <fullName>Send_DV_Signature_Reminder_to_Medical_Professional_First_Notice</fullName>
-        <description>Send DV Signature Reminder to Medical Professional- First Notice</description>
-        <protected>false</protected>
-        <recipients>
-            <field>HiddenMedicalProfessionalEmail__c</field>
-            <type>email</type>
-        </recipients>
-        <senderAddress>salesforce@wish.org</senderAddress>
-        <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/DV_Reminder_Form_Email_Template_First</template>
-    </alerts>
-    <alerts>
-        <fullName>Send_DV_Signature_Reminder_to_Medical_Professional_Intake_Manager</fullName>
-        <description>Send DV Signature Alert to Intake Manager</description>
-        <protected>false</protected>
-        <recipients>
-            <type>owner</type>
-        </recipients>
-        <senderAddress>salesforce@wish.org</senderAddress>
-        <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/DV_Reminder_Form_Email_Template_IntakeManager</template>
-    </alerts>
-    <alerts>
-        <fullName>Send_DV_Signature_Reminder_to_Medical_Professional_Second_Notice</fullName>
-        <description>Send DV Signature Reminder to Medical Professional- Second Notice</description>
-        <protected>false</protected>
-        <recipients>
-            <field>HiddenMedicalProfessionalEmail__c</field>
-            <type>email</type>
-        </recipients>
-        <senderAddress>salesforce@wish.org</senderAddress>
-        <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/DV_Reminder_Form_Email_Template_Second</template>
-    </alerts>
-    <alerts>
         <fullName>Send_Email_to_Office_Referrar_email_with_Wish_Referral_Form</fullName>
         <ccEmails>missionresources@wish.org</ccEmails>
         <description>Send Email to Office Referrar email with Wish Referral Form</description>
@@ -518,45 +471,6 @@ RecordType.Name = "Wish Child"</formula>
         </criteriaItems>
         <description>It send a email notification to Qualifying Medical Professional when child is NOT eligible.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
-    <rules>
-        <fullName>Send DV Signature Reminder to Medical Professional</fullName>
-        <active>true</active>
-        <description>SIW-432</description>
-        <formula>ISBLANK(Provider_Signature__c) &amp;&amp; DV_Present__c = True &amp;&amp; Chapter_Name__c != 'Make-A-Wish Arizona'</formula>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Send_DV_Signature_Reminder_to_Medical_Professional_Second_Notice</name>
-                <type>Alert</type>
-            </actions>
-            <timeLength>2</timeLength>
-            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Send_DV_Signature_Reminder_to_Medical_Professional_Intake_Manager</name>
-                <type>Alert</type>
-            </actions>
-            <timeLength>4</timeLength>
-            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Send_DV_Signature_Reminder_to_Medical_Professional_Final_Notice</name>
-                <type>Alert</type>
-            </actions>
-            <timeLength>3</timeLength>
-            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Send_DV_Signature_Reminder_to_Medical_Professional_First_Notice</name>
-                <type>Alert</type>
-            </actions>
-            <timeLength>1</timeLength>
-            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
     </rules>
     <tasks>
         <fullName>Lead_ET_Chapter_has_been_changed</fullName>
