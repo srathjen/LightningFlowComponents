@@ -196,10 +196,7 @@ function isTextSelected(input) {
     }
 }
 // auto format phone
-$(".phonemask").keydown(function(e) {
-    if (isTextSelected(this)) {
-        $(this).val('');
-    }
+$(".phonemask").keydown(function(e) {    
     if (($(this).val().length == 0) && (e.keyCode != 8)) {
         $(this).val($(this).val() + "(");
     } else if (($(this).val().length == 4) && (e.keyCode != 8)) {
@@ -217,9 +214,14 @@ $(".phonemask").keydown(function(e) {
         // remove space and parenthesis
         $(this).val($(this).val().substring(0, $(this).val().length - 2));
     }
+     //SIW-532: Phone number disappear issue
     // if full phone number isn't entered and tab is pressed
-    if (($(this).val().length) != 14 && (e.keyCode == 9)) {
-        $(this).val('')
+    if (e.keyCode == 9) {
+        if(($(this).val().length) != 10 ){
+         if(($(this).val().length) != 14 ){
+            $(this).val('')
+        }   
+    }    
     }
 });
 $(".phonemask").attr('maxlength', '14');
