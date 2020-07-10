@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
     <alerts>
         <fullName>Diagnosis_Form_Email_Alert</fullName>
         <description>Diagnosis Form Email Alert</description>
@@ -124,6 +123,53 @@
         <template>Automated_Wish_Granting_Email_Templates/Lead_Email_Notification_for_Lead_Owner_of_Lead_Age_2_5</template>
     </alerts>
     <alerts>
+        <fullName>Send_DV_Signature_Reminder_to_Medical_Professional_Final_Notice</fullName>
+        <description>Send DV Signature Reminder to Medical Professional- Final Notice</description>
+        <protected>false</protected>
+        <recipients>
+            <field>HiddenMedicalProfessionalEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>salesforce@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/DV_Reminder_Form_Email_Template_Final</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_DV_Signature_Reminder_to_Medical_Professional_First_Notice</fullName>
+        <description>Send DV Signature Reminder to Medical Professional- First Notice</description>
+        <protected>false</protected>
+        <recipients>
+            <field>HiddenMedicalProfessionalEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>salesforce@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/DV_Reminder_Form_Email_Template_First</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_DV_Signature_Reminder_to_Medical_Professional_Intake_Manager</fullName>
+        <description>Send DV Signature Alert to Intake Manager</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>salesforce@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/DV_Reminder_Form_Email_Template_IntakeManager</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_DV_Signature_Reminder_to_Medical_Professional_Second_Notice</fullName>
+        <description>Send DV Signature Reminder to Medical Professional- Second Notice</description>
+        <protected>false</protected>
+        <recipients>
+            <field>HiddenMedicalProfessionalEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>salesforce@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/DV_Reminder_Form_Email_Template_Second</template>
+    </alerts>
+    <alerts>
         <fullName>Send_Email_to_Office_Referrar_email_with_Wish_Referral_Form</fullName>
         <ccEmails>missionresources@wish.org</ccEmails>
         <description>Send Email to Office Referrar email with Wish Referral Form</description>
@@ -197,16 +243,6 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot
         <protected>false</protected>
     </fieldUpdates>
     <fieldUpdates>
-        <fullName>Populate_Age_Not_Met</fullName>
-        <description>SIW-543</description>
-        <field>AgeNotMet__c</field>
-        <literalValue>1</literalValue>
-        <name>Populate Age Not Met</name>
-        <notifyAssignee>false</notifyAssignee>
-        <operation>Literal</operation>
-        <protected>false</protected>
-    </fieldUpdates>
-    <fieldUpdates>
         <fullName>Populate_Date_of_Birth_Lead</fullName>
         <description>SIW-147 - Duplicate logic</description>
         <field>DOB_Text__c</field>
@@ -227,32 +263,6 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Phone , &quot;.&quot;, &apos;&apos;),&quot
         <protected>false</protected>
         <reevaluateOnChange>true</reevaluateOnChange>
     </fieldUpdates>
-    <fieldUpdates>
-        <fullName>Update_Initial_Address</fullName>
-        <description>SIW-297 
-This field is checked true when the Initial Address Verification is performed upon Lead Creation.  This field should only be updated on the initial Address check USPS</description>
-        <field>Initial_Address_Verification__c</field>
-        <literalValue>1</literalValue>
-        <name>Update Initial Address</name>
-        <notifyAssignee>false</notifyAssignee>
-        <operation>Literal</operation>
-        <protected>false</protected>
-    </fieldUpdates>
-    <rules>
-        <fullName>Initial Address Verification</fullName>
-        <actions>
-            <name>Update_Initial_Address</name>
-            <type>FieldUpdate</type>
-        </actions>
-        <active>false</active>
-        <criteriaItems>
-            <field>Lead.AddressVerified__c</field>
-            <operation>equals</operation>
-            <value>True</value>
-        </criteriaItems>
-        <description>SIW-297 This field is checked true when the Initial Address Verification is performed upon Lead Creation.  This field will be marked true once the Lead Address check USPS is performed</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
     <rules>
         <fullName>Lead %28Wish Child%29%3A Email Notification for Wish Child Lead Owner</fullName>
         <actions>
@@ -266,9 +276,9 @@ This field is checked true when the Initial Address Verification is performed up
         <active>true</active>
         <description>Whenever chapter updates based on the Postal Code, It will send an email notification to the Wish Child Lead Owner.</description>
         <formula>(ISCHANGED(Hidden_Chapter_Change_Confirmation__c) &amp;&amp; NOT(ISCHANGED(ChapterName__c)) &amp;&amp; 
-$Profile.Name != &apos;Integration&apos;)
+$Profile.Name != 'Integration')
 &amp;&amp;
-RecordType.Name = &quot;Wish Child&quot;</formula>
+RecordType.Name = "Wish Child"</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -346,20 +356,20 @@ RecordType.Name = &quot;Wish Child&quot;</formula>
 Converts this: 6043458787 --&gt;  (604) 345-8787</description>
         <formula>(AND
 (NOT(AND(LEN(Phone) == 14,
-LEFT(Phone,1) == &apos;(&apos;,       
+LEFT(Phone,1) == '(',       
 ISNUMBER(LEFT(RIGHT(Phone,13),3)),       
-LEFT(RIGHT(Phone,10),1) == &apos;)&apos;,       
-LEFT(RIGHT(Phone,9),1) == &apos; &apos;,       
+LEFT(RIGHT(Phone,10),1) == ')',       
+LEFT(RIGHT(Phone,9),1) == ' ',       
 ISNUMBER(LEFT(RIGHT(Phone,8),3)),       
-LEFT(RIGHT(Phone,5),1) == &apos;-&apos;,       
+LEFT(RIGHT(Phone,5),1) == '-',       
 ISNUMBER(RIGHT(Phone,4))     )   ),    
-ISNUMBER(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone , &quot;.&quot;, &apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;)),    
+ISNUMBER(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone , ".", ''),"-",""),"+","")),    
 OR(     
-LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone ,&quot;.&quot;,&apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;))=10,     
-AND(LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone,&quot;.&quot;,&apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;))=11,       
-LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone ,&quot;.&quot;,&apos;&apos;),&quot;-&quot;,&quot;&quot;),&quot;+&quot;,&quot;&quot;),1)=&quot;1&quot;     )   ) )) 
+LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone ,".",''),"-",""),"+",""))=10,     
+AND(LEN(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone,".",''),"-",""),"+",""))=11,       
+LEFT(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(Phone ,".",''),"-",""),"+",""),1)="1"     )   ) )) 
 &amp;&amp;  
-RecordType.Name = &quot;Wish Child&quot;</formula>
+RecordType.Name = "Wish Child"</formula>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
@@ -388,7 +398,7 @@ RecordType.Name = &quot;Wish Child&quot;</formula>
             <operation>equals</operation>
             <value>Wish Child</value>
         </criteriaItems>
-        <description>Notify the lead owner whenever a lead is created with Is there a medical reason to move quickly field equal to &apos;Yes&apos;</description>
+        <description>Notify the lead owner whenever a lead is created with Is there a medical reason to move quickly field equal to 'Yes'</description>
         <triggerType>onCreateOnly</triggerType>
     </rules>
     <rules>
@@ -429,7 +439,7 @@ RecordType.Name = &quot;Wish Child&quot;</formula>
         </actions>
         <active>true</active>
         <description>SIW-147 This supports Duplication check: Capture Information when a duplicate referral is submitted- matching rules do not support date fields.</description>
-        <formula>OR(ISNEW(), ISCHANGED(DOB__c)) &amp;&amp;  RecordType.Name = &quot;Wish Child&quot;</formula>
+        <formula>OR(ISNEW(), ISCHANGED(DOB__c)) &amp;&amp;  RecordType.Name = "Wish Child"</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -510,18 +520,43 @@ RecordType.Name = &quot;Wish Child&quot;</formula>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
-        <fullName>Update Age Not Met</fullName>
-        <actions>
-            <name>Populate_Age_Not_Met</name>
-            <type>FieldUpdate</type>
-        </actions>
+        <fullName>Send DV Signature Reminder to Medical Professional</fullName>
         <active>true</active>
-        <criteriaItems>
-            <field>Lead.Child_Age__c</field>
-            <operation>equals</operation>
-            <value>Under 2.5,18 &amp; Above</value>
-        </criteriaItems>
-        <triggerType>onAllChanges</triggerType>
+        <description>SIW-432</description>
+        <formula>ISBLANK(Provider_Signature__c) &amp;&amp; DV_Present__c = True &amp;&amp; Chapter_Name__c != 'Make-A-Wish Arizona'</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Send_DV_Signature_Reminder_to_Medical_Professional_Second_Notice</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>2</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Send_DV_Signature_Reminder_to_Medical_Professional_Intake_Manager</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>4</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Send_DV_Signature_Reminder_to_Medical_Professional_Final_Notice</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>3</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Send_DV_Signature_Reminder_to_Medical_Professional_First_Notice</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
     </rules>
     <tasks>
         <fullName>Lead_ET_Chapter_has_been_changed</fullName>
@@ -559,7 +594,7 @@ RecordType.Name = &quot;Wish Child&quot;</formula>
         <priority>Normal</priority>
         <protected>false</protected>
         <status>Completed</status>
-        <subject>Lead ET : We&apos;ve Received your Referral Inquiry</subject>
+        <subject>Lead ET : We've Received your Referral Inquiry</subject>
     </tasks>
     <tasks>
         <fullName>Lead_ET_Your_patient_is_eligible_for_a_wish</fullName>
