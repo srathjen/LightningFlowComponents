@@ -470,25 +470,6 @@
                     <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
                         <div class="slds-hint-parent slds-form-element">
                             <label class="slds-form-element__label"
-                                   for="text-input-id-1">{!v.contactLabels.salutation}</label>
-                            <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
-                                <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon
-                            slds-button__icon slds-button__icon_hint slds-grid_pull-padded bottom"
-                                                      iconName="utility:edit"
-                                                      onclick="{!c.onClickEdit}"/>
-                                <aura:if
-                                        isTrue="{!empty(v.wishRequestedParticipant.Contact__r.Salutation)}">
-                                    <br/>
-                                    <aura:set attribute="else">
-                                        <span id="text-input-id-1">{!v.wishRequestedParticipant.Contact__r.Salutation}</span>
-                                    </aura:set>
-                                </aura:if>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
-                        <div class="slds-hint-parent slds-form-element">
-                            <label class="slds-form-element__label"
                                    for="text-input-id-1">{!v.contactLabels.npe01__preferredphone__c}</label>
                             <div class="slds-form-element__control slds-grid slds-form-element_readonly slds-input-has-icon slds-input-has-icon_right">
                                 <lightning:buttonIcon iconClass="buttonIcon" class="slds-icon slds-input__icon

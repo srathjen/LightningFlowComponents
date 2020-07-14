@@ -23,7 +23,7 @@ public without sharing class WishAffiliationDesign_AC {
 		Integer countReqParticipants = 0;
 		try {
 			//Find Wish Affiliation Categories
-			List<String> wishAffiliationTypesOfCategory = WishAffiliationService.findWishAffiliationTypesNotBelongingToCategory(wishAffiliationCategory); 
+			List<String> wishAffiliationTypesOfCategory = WishAffiliationService.findWishAffiliationTypesNotBelongingToCategory(wishAffiliationCategory);
 			// Check to see if the User is allowed to edit directly the WishAffiliation:
 			Boolean isUserProfileAllowedToUpdateWishAffiliation = WishAffiliationService.isUserIdOrUserProfileAllowedToUpdateWishAffiliation();
 			returnValuesMap.put('isUserProfileAllowedToUpdateWishAffiliation', isUserProfileAllowedToUpdateWishAffiliation);
@@ -208,6 +208,24 @@ public without sharing class WishAffiliationDesign_AC {
 			if (!isAccessAllowed) {
 				wishChangeRequests = WishAffiliationService.buildVolunteerChangeRequests(wishAffiliation.wishAffRecord, oldWishAffiliation.wishAffRecord);
 				upsert wishChangeRequests;
+				// Fields Wish Affiliation Contact
+				Contact updateContactRecord = new Contact();
+				updateContactRecord.Id = wishAffiliation.wishAffRecord.Contact__c;
+				Boolean isUpdateContact = false;
+				Contact modifiedContact = wishAffiliation.wishAffRecord.Contact__r;
+				Contact existingContact = oldWishAffiliation.wishAffRecord.Contact__r;
+				// SIW-641 Salutation can be updated by a Volunteer
+				String modifiedSalutation = modifiedContact.Salutation == null
+						? '' : modifiedContact.Salutation;
+				String existingSalutation = existingContact.Salutation == null
+						? '' : existingContact.Salutation;
+				if (modifiedSalutation != existingSalutation) {
+					updateContactRecord.Salutation = modifiedSalutation;
+					isUpdateContact = true;
+				}
+				if (isUpdateContact) {
+					update updateContactRecord;
+				}
 			} else {
 				//Check if the value of fields got changed for Contact/Relationship/WishAffiliation
 				// Fields Wish Affiliation

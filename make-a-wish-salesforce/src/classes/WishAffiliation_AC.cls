@@ -187,13 +187,12 @@ public without sharing class WishAffiliation_AC {
 				Boolean isUpdateContact = false;
 				Contact modifiedContact = modifiedWishAffiliation.Contact__r;
 				Contact existingContact = existingWishAffln.Contact__r;
-				//Salutation
+				// SIW-641 Salutation can be updated by a Volunteer
 				String modifiedSalutation = modifiedContact.Salutation == null
 						? '' : modifiedContact.Salutation;
 				String existingSalutation = existingContact.Salutation == null
 						? '' : existingContact.Salutation;
-				if (String.isEmpty(existingSalutation)
-						&& modifiedSalutation != existingSalutation) {
+				if (modifiedSalutation != existingSalutation) {
 					updateContactRecord.Salutation = modifiedSalutation;
 					isUpdateContact = true;
 				}
