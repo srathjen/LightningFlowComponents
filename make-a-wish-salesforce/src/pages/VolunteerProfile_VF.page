@@ -55,7 +55,7 @@
                     <apex:pageMessages id="showmsg"/>
                     <h1>Profile</h1>
                     <apex:outputPanel rendered="{!PersonalInfoSave}" styleClass="p-info-btn-base">
-                        <!----------------------- Contact Details in Output Mode------------------------ -->
+                        <!-- --------------------- Contact Details in Output Mode------------------------ -->
                         <fieldset class="saved">
                             <legend>Your Information</legend>
                             <div class="col-md-12">
@@ -997,7 +997,7 @@
                             </div>
                         </fieldset>
                         <fieldset class="footer">
-                            <div class="form-group row">
+                            <div id="pageActions" class="form-group row">
                                 <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-6 col-md-push-10">
                                     <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md btn-p-save"
                                                         value="Save" action="{!SavePersonalInfo}"/>
@@ -1118,6 +1118,8 @@
 
     <apex:outputPanel id="uiStates">
         <script>
+            // format phone/date fields
+            // target desktop
             if (window.matchMedia("(min-width: 47.5rem)").matches) {
                 $(".f-phone").mask("(999) 999-9999").attr('maxlength', '15');
                 // tethered personal edit button
@@ -1131,6 +1133,7 @@
                         targetModifier: 'visible'
                     });
                 });
+
                 $('.p-info-btn').on('click', function () {
                     setIntervalX(function () {
                         init();
@@ -1157,37 +1160,36 @@
 
             function init() {
                 $(".f-phone").attr('type', 'tel');
+                // select fields - default options
+                // format birthday function
+                function formatBirthday() {
+                    $(".bday option:first, #j_id0\\:formId\\:birthday option:first").remove();
+                    $(".bday, #j_id0\\:formId\\:birthday").prepend('<option disabled="disabled" selected="selected">Day</option>');
+                    $(".bday, #j_id0\\:formId\\:birthday").addClass('c-select');
+                }
 
                 setIntervalX(function () {
                     $('.bday-wrap').find('select').addClass('form-control col-xs-12 col-sm-12 c-select bday required');
                 }, 50, 5);
-
                 $('.bmonth, #j_id0\\:formId\\:birthmonth').on('change', function () {
                     setIntervalX(function () {
                         $('.bday-wrap').find('select').addClass('form-control col-xs-12 col-sm-12 c-select bday required');
                         formatBirthday();
                     }, 50, 2);
                 });
-
                 if ($(".bday option") == "") {
                     formatBirthday()
                 }
-
                 $(".bday, #j_id0\\:formId\\:birthday").addClass('c-select required');
-
                 $(".bmonth").chosen({disable_search: "true", placeholder_text_single: "Month", width: "100%"});
-
                 $(".f-state").chosen({
                     no_results_text: "State not found",
                     placeholder_text_single: "Please select a State",
                     width: "100%"
                 });
-
                 // Initiate chosen multi selects
                 $(".sm-list").chosen({disable_search: "true", width: "100%"});
-
                 $(".multi").chosen({placeholder_text_multiple: "Please select all that apply", width: "100%"});
-
                 // Self-describe textarea
                 $('#j_id0\\:formId\\:gender').on('change', function () {
                     if ($(this).val() != null) {
@@ -1204,46 +1206,91 @@
                     }
                 });
 
+                // lang notes functions
+                function langNotes() {
+                    $('.lang').on('change', function () {
+                        if ($(this).val() != null) {
+                            if ($(this).val().indexOf('Other') != -1) {
+                                $('.lang-note').attr('placeholder', "Please specify other language(s)").addClass('required');
+                            } else {
+                                $('.lang-note').attr('placeholder', "Additional details (Optional)").val('').removeClass('required');
+                                $('.lang-note').valid();
+                            }
+                        }
+                    });
+                }
+
+                // prof skills show/hide "other" textbox
+                function profOtherSkills() {
+                    $('.prof-skills').on('change', function () {
+                        if ($(this).val() != null) {
+                            if ($(this).val().indexOf('Other') != -1) {
+                                $('.prof-skills-other').removeClass('sr-only');
+                            } else {
+                                $('.prof-skills-other').addClass('sr-only');
+                                $('.prof-skills-other').find('textarea').val('');
+                            }
+                        }
+                    });
+
+                    //display prof-skills if there is a value on page load
+                    if ($('.prof-skills').val() != null) {
+                        if ($('.prof-skills').val().indexOf('Other') != -1) {
+                            $('.prof-skills-other').removeClass('sr-only');
+                        }
+                    }
+                }
+
                 // remove chosen "x" button on ios and android
-                if (navigator.userAgent.match(/iPad/i) != null
-                    || navigator.userAgent.match(/Android/i) != null
-                    || navigator.userAgent.match(/iPhone/i) != null) {
+                if (navigator.userAgent.match(/iPad/i) != null || navigator.userAgent.match(/Android/i) != null || navigator.userAgent.match(/iPhone/i) != null) {
                     window.setInterval(function () {
                         $('.search-choice-close').prop('hidden', true);
                     }, 100);
                 }
-
                 $('table').find('thead').addClass('thead-default');
-
                 $(".sm-list").chosen({disable_search: "true", width: "100%"});
-
                 $(".multi").chosen({placeholder_text_multiple: "Please select all that apply", width: "100%"});
-
                 $(".f-state").chosen({
                     no_results_text: "State not found",
                     placeholder_text_single: "Please select a State",
                     width: "100%"
                 });
-
                 $(".bmonth").chosen({disable_search: "true", placeholder_text_single: "Month", width: "100%"});
-
                 langNotes();
-
                 profOtherSkills();
-
                 if ($('.otherskills-wrap').children('span').children('span').text() == "") {
                     $('.otherskills-wrap').addClass('sr-only');
                 }
-
                 // hide langnotes output if there is none
                 if ($('.langnotes-wrap').children('span').children('span').text() == "") {
                     $('.langnotes-wrap').addClass('sr-only');
                 }
 
+                // inputs: numbers only
+                function numOnly() {
+                    $(".numbers-only").keydown(function (e) {
+                        // Allow: backspace, delete, tab, escape and enter
+                        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+                            // Allow: Ctrl+A
+                            (e.keyCode == 65 && e.ctrlKey === true) ||
+                            // Allow: Ctrl+C
+                            (e.keyCode == 67 && e.ctrlKey === true) ||
+                            // Allow: Ctrl+X
+                            (e.keyCode == 88 && e.ctrlKey === true) ||
+                            // Allow: home, end, left, right
+                            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                            // let it happen, don't do anything
+                            return;
+                        }
+                        // Ensure that it is a number and stop the keypress
+                        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                            e.preventDefault();
+                        }
+                    });
+                }
+
                 $(".f-phone").mask("(999) 999-9999");
-
                 numOnly();
-
                 langNotes();
 
                 // form validation defaults
@@ -1251,11 +1298,9 @@
                     // required for chosen.js
                     ignore: ":hidden:not(.c-select)"
                 });
-
                 $.validator.addMethod("fullname", function (value) {
                     return /\w+\s+\w+/.test(value);
                 });
-
                 // validation rules and methods
                 $('form').validate({
                     errorElement: "em",
@@ -1292,6 +1337,160 @@
                     }
                 });
 
+                function formValidationRules() {
+                    // add validation rules for common fields
+                    $("input.firstname").each(function () {
+                        $(this).rules("add", {
+                            required: true,
+                            minlength: 2,
+                            maxlength: 40,
+                            messages: {
+                                required: "Oops! Please enter a first name",
+                                minlength: "Oops! Your first name must have more than 2 letters",
+                                maxlength: "We're sorry, you've reached the maximum allowed characters"
+                            }
+                        });
+                    });
+                    $("input.lastname").each(function () {
+                        $(this).rules("add", {
+                            required: true,
+                            minlength: 2,
+                            maxlength: 40,
+                            messages: {
+                                required: "Oops! Please enter a last name",
+                                minlength: "Oops! Your first name must have more than 2 letters",
+                                maxlength: "We're sorry, you've reached the maximum allowed characters"
+                            }
+                        });
+                    });
+                    $("input.phonechk").each(function () {
+                        $(this).rules("add", {
+                            required: true,
+                            phoneUS: true,
+                            minlength: 10,
+                            maxlength: 15,
+                            messages: {
+                                required: "Oops! Please enter a phone number",
+                                number: "Only numbers are accepted",
+                                minlength: "Opps! Please enter at least 10 digits",
+                                maxlength: "We're sorry, you've reached the maximum allowed characters"
+                            }
+                        });
+                    });
+                    $("input.email").each(function () {
+                        $(this).rules("add", {
+                            required: true,
+                            email: true,
+                            messages: {
+                                required: "Oops! Please enter a valid email address",
+                                email: "Oops! You've entered an invalid email address"
+                            }
+                        });
+                    });
+                    $("input.city").each(function () {
+                        $(this).rules("add", {
+                            required: true,
+                            minlength: 3,
+                            maxlength: 22,
+                            messages: {
+                                required: "Oops! Please enter a US city",
+                                minlength: "Oops! Please enter at least 3 characters",
+                                maxlength: "We're sorry, you've reached the maximum allowed characters"
+                            }
+                        });
+                    });
+                    $("input.postalcode").each(function () {
+                        $(this).rules("add", {
+                            required: true,
+                            zipcode: true,
+                            messages: {
+                                minlength: "Oops! Please enter a minimum of 5 digits",
+                                maxlength: "We're sorry, you've reached the maximum allowed characters"
+                            }
+                        });
+                    });
+                    $('.language').each(function () {
+                        $(this).chosen().change(function () {
+                            $(this).valid();
+                        });
+                        $(this).rules("add", {
+                            required: true,
+                            messages: {
+                                required: "Oops! Please select a language"
+                            }
+                        });
+                    });
+
+                    // add rules for all other fields
+                    $("input.address").rules("add", {
+                        required: true,
+                        minlength: 5,
+                        maxlength: 40,
+                        messages: {
+                            required: "Oops! Please enter an address",
+                            minlength: "Oops! Please enter a minimum of 5 characters",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        }
+                    });
+
+                    // auto format postal code
+                    $(".postalcode,.notrequired").keydown(function (e) {
+                        if (($(this).val().length == 5) && (e.keyCode != 8) && (e.keyCode != 9)) {
+                            // auto insert dash on 5th character keypress
+                            $(this).val($(this).val() + "-");
+                        }
+                        if (($(this).val().length == 7) && (e.keyCode == 8)) {
+                            // remove dash if on 7th character backspace is used
+                            $(this).val($(this).val().substring(0, $(this).val().length - 1));
+                        }
+                    });
+                    $("select.f-state").on('change', function () {
+                        $(this).chosen().change(function () {
+                            $(this).valid();
+                        });
+                        $(this).rules("add", {
+                            required: true,
+                            messages: {
+                                required: "Oops! Please select a state"
+                            }
+                        });
+                    });
+                    $("select.relationship").on('change', function () {
+                        $(this).chosen().change(function () {
+                            $(this).valid();
+                        });
+                        $(this).rules("add", {
+                            required: true,
+                            messages: {
+                                required: "Oops! Please select the relationship"
+                            }
+                        });
+                    })
+                    $(".fullname").rules("add", {
+                        required: true,
+                        fullname: true,
+                        minlength: 5,
+                        maxlength: 40,
+                        messages: {
+                            required: "Oops! Please enter a first and last name",
+                            fullname: "Oops! Please also enter a last name",
+                            minlength: "Oops! The full name must have more than 4 letters",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        }
+                    });
+
+                    if ($('#j_id0\\:formId\\:gender').val().indexOf('Self-describe') != -1) {
+                        $("textarea.selfdescreq").rules("add", {
+                            required: true,
+                            messages: {
+                                required: "Oops! Please enter a description pertaining to 'Self-describe'"
+                            }
+                        });
+                    } else {
+                        $('.self-desc-field').parent().removeClass("has-error");
+                    }
+                }
+
                 formValidationRules();
                 // trigger validation
                 // personal save btn
@@ -1307,71 +1506,74 @@
                 }, "Oops! Please enter a valid US postal code");
 
                 $('.btn-p-save').on('click', function () {
-                    <!--document.getElementById('{!$Component.formId.altemailaddress}').focus();-->
+                        console.log('Click');
+                        document.getElementById('{!$Component.formId.altemailaddress}').focus();
 
-                    $("select.f-state").chosen().change(function () {
-                        $(this).valid();
-                    });
+                        $("select.f-state").chosen().change(function () {
+                            $(this).valid();
+                        });
 
-                    $("select.f-state").rules("add", {
-                        required: true,
-                        messages: {
-                            required: "Oops! Please select a state"
-                        }
-                    });
-
-                    $(".preferredemailtype option").each(function () {
-                        if ($(this).val() !== '') {
-                            const name = $(this).val().toLowerCase() + 'emailaddress';
-                            const optionFieldId = '.' + name;
-                            const spanFieldId = '#' + 'requiredspan-' + name;
-                            $(spanFieldId).hide(0);
-                            $(optionFieldId).rules("remove");
-                        }
-                    });
-
-                    var checkEmail;
-                    if ($(".preferredemailtype").val() != '') {
-                        varChangeLowerCase = $(".preferredemailtype").val();
-                        checkEmail = varChangeLowerCase.toLowerCase() + 'emailaddress';
-                    }
-
-                    if ($(".preferredemailtype").val() != '' && $("." + checkEmail).val() == '') {
-                        $("." + checkEmail).rules("add", {
+                        $("select.f-state").rules("add", {
                             required: true,
                             messages: {
-                                required: "Oops! " + $(".preferredemailtype").val() + " email is required "
+                                required: "Oops! Please select a state"
                             }
                         });
-                        const spanFieldId = '#' + 'requiredspan-' + checkEmail;
-                        $(spanFieldId).show(0);
-                    } else {
-                        $(".personalemailaddress, .workemailaddress, .alternateemailaddress").parent().removeClass("has-feedback");
-                        $(".personalemailaddress, .workemailaddress, .alternateemailaddress").parent().removeClass("has-error");
-                        $(".personalemailaddress, .workemailaddress, .alternateemailaddress").prev('div').children("label").css("color", "1px solid #ccc");
-                        $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("required");
-                        $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("describedby");
-                        $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("invalid");
-                        $(".personalemailaddress, .workemailaddress, .alternateemailaddress").css("border", "1px solid #ccc");
-                        $(".personalemailaddress, .workemailaddress, .alternateemailaddress").children(".help-block").remove();
-                    }
 
-                    if ($('form').valid()) {
-                        $('form').submit();
-                        // taken from rendered button in order to control submit (rerender="formId, uiStates")
-                        setTimeout(func, 2000);
+                        $(".preferredemailtype option").each(function () {
+                            if ($(this).val() !== '') {
+                                const name = $(this).val().toLowerCase() + 'emailaddress';
+                                const optionFieldId = '.' + name;
+                                const spanFieldId = '#' + 'requiredspan-' + name;
+                                $(spanFieldId).hide(0);
+                                $(optionFieldId).rules("remove");
+                            }
+                        });
 
-                        function func() {
-                            return A4J.AJAX.Submit('j_id0:formId', event, {
-                                'similarityGroupingId': 'j_id0:formId:j_id320',
-                                'html5Validate': true,
-                                'parameters': {'j_id0:formId:j_id320': 'j_id0:formId:j_id320'}
-                            });
+                        var checkEmail;
+                        if ($(".preferredemailtype").val() != '') {
+                            varChangeLowerCase = $(".preferredemailtype").val();
+                            checkEmail = varChangeLowerCase.toLowerCase() + 'emailaddress';
                         }
+
+                        if ($(".preferredemailtype").val() != '' && $("." + checkEmail).val() == '') {
+                            $("." + checkEmail).rules("add", {
+                                required: true,
+                                messages: {
+                                    required: "Oops! " + $(".preferredemailtype").val() + " email is required "
+                                }
+                            });
+                            const spanFieldId = '#' + 'requiredspan-' + checkEmail;
+                            $(spanFieldId).show(0);
+                        } else {
+                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").parent().removeClass("has-feedback");
+                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").parent().removeClass("has-error");
+                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").prev('div').children("label").css("color", "1px solid #ccc");
+                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("required");
+                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("describedby");
+                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("invalid");
+                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").css("border", "1px solid #ccc");
+                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").children(".help-block").remove();
+                        }
+
+                        if ($('form').valid()) {
+                            $('form').submit();
+                            // taken from rendered button in order to control submit (rerender="formId, uiStates")
+                            setTimeout(func, 2000);
+
+                            function func() {
+                                return A4J.AJAX.Submit('j_id0:formId', event, {
+                                    'similarityGroupingId': 'j_id0:formId:j_id320',
+                                    'html5Validate': true,
+                                    'parameters': {'j_id0:formId:j_id320': 'j_id0:formId:j_id320'}
+                                });
+                            }
+                        }
+
+                        document.getElementById('{!$Component.formId.altemailaddress}').focus();
                     }
 
-                    document.getElementById('{!$Component.formId.showmsg}').focus();
-                });
+                );
 
                 // emergency save btn
                 $('.btn-e-save').on('click', function () {
@@ -1415,6 +1617,69 @@
                 }
             }
 
+            function checkState() {
+                var t = $("select[id$='state']").val();
+                var s = '#' + $("select[id$='state']").attr('id') + '_chosen';
+                var ss = s.split(':').join('_');
+                if (t == '') {
+                    $('html, body').animate({scrollTop: $(ss).offset().top - 500}, 0);
+                    return false;
+                }
+
+                var t = $("select[id$='lang']").val();
+                var s = '#' + $("select[id$='lang']").attr('id') + '_chosen';
+                var ss = s.split(':').join('_');
+                var c = $(ss).find('.chosen-choices').children().length;
+                if (c == 1) {
+                    $('html, body').animate({scrollTop: $(ss).offset().top - 500}, 0);
+                    return false;
+                }
+
+                var t = $("select[id$='read']").val();
+                var s = '#' + $("select[id$='read']").attr('id') + '_chosen';
+                var ss = s.split(':').join('_');
+                var c = $(ss).find('.chosen-choices').children().length;
+                if (c == 1) {
+                    $('html, body').animate({scrollTop: $(ss).offset().top - 500}, 0);
+                    return false;
+                }
+
+                var t = $("select[id$='write']").val();
+                var s = '#' + $("select[id$='write']").attr('id') + '_chosen';
+                var ss = s.split(':').join('_');
+                var c = $(ss).find('.chosen-choices').children().length;
+                if (c == 1) {
+                    $('html, body').animate({scrollTop: $(ss).offset().top - 500}, 0);
+                    return false;
+                }
+
+                var t = $("select[id$='speak']").val();
+                var s = '#' + $("select[id$='speak']").attr('id') + '_chosen';
+                var ss = s.split(':').join('_');
+                var c = $(ss).find('.chosen-choices').children().length;
+                if (c == 1) {
+                    $('html, body').animate({scrollTop: $(ss).offset().top - 500}, 0);
+                    return false;
+                }
+
+                var t = $("select[id$='understand']").val();
+                var s = '#' + $("select[id$='understand']").attr('id') + '_chosen';
+                var ss = s.split(':').join('_');
+                var c = $(ss).find('.chosen-choices').children().length;
+                if (c == 1) {
+                    $('html, body').animate({scrollTop: $(ss).offset().top - 500}, 0);
+                    return false;
+                }
+                if ($(".preferredphonetype").val() == '' || $(".preferredphonetype").val() == 0) {
+                    $('html, body').animate({scrollTop: $(".preferredphonetype").offset().top - 1900}, 0);
+                    return false;
+                }
+                if ($(".preferredemailtype").val() == '' || $(".preferredemailtype").val() == 0) {
+                    $('html, body').animate({scrollTop: $(".preferredemailtype").offset().top - 1800}, 0);
+                    return false;
+                }
+            }
+
             function setDynamicRequiredFields() {
                 var validator = $('form').validate();
                 validator.resetForm();
@@ -1441,226 +1706,6 @@
                     });
                     const spanFieldId = '#' + 'requiredspan-' + checkEmail;
                     $(spanFieldId).show(0);
-                }
-            }
-
-            // select fields - default options
-            // format birthday function
-            function formatBirthday() {
-                $(".bday option:first, #j_id0\\:formId\\:birthday option:first").remove();
-                $(".bday, #j_id0\\:formId\\:birthday").prepend('<option disabled="disabled" selected="selected">Day</option>');
-                $(".bday, #j_id0\\:formId\\:birthday").addClass('c-select');
-            }
-
-            function formValidationRules() {
-                // add validation rules for common fields
-                $("input.firstname").each(function () {
-                    $(this).rules("add", {
-                        required: true,
-                        minlength: 2,
-                        maxlength: 40,
-                        messages: {
-                            required: "Oops! Please enter a first name",
-                            minlength: "Oops! Your first name must have more than 2 letters",
-                            maxlength: "We're sorry, you've reached the maximum allowed characters"
-                        }
-                    });
-                });
-                $("input.lastname").each(function () {
-                    $(this).rules("add", {
-                        required: true,
-                        minlength: 2,
-                        maxlength: 40,
-                        messages: {
-                            required: "Oops! Please enter a last name",
-                            minlength: "Oops! Your first name must have more than 2 letters",
-                            maxlength: "We're sorry, you've reached the maximum allowed characters"
-                        }
-                    });
-                });
-                $("input.phonechk").each(function () {
-                    $(this).rules("add", {
-                        required: true,
-                        phoneUS: true,
-                        minlength: 10,
-                        maxlength: 15,
-                        messages: {
-                            required: "Oops! Please enter a phone number",
-                            number: "Only numbers are accepted",
-                            minlength: "Opps! Please enter at least 10 digits",
-                            maxlength: "We're sorry, you've reached the maximum allowed characters"
-                        }
-                    });
-                });
-                $("input.email").each(function () {
-                    $(this).rules("add", {
-                        required: true,
-                        email: true,
-                        messages: {
-                            required: "Oops! Please enter a valid email address",
-                            email: "Oops! You've entered an invalid email address"
-                        }
-                    });
-                });
-                $("input.city").each(function () {
-                    $(this).rules("add", {
-                        required: true,
-                        minlength: 3,
-                        maxlength: 22,
-                        messages: {
-                            required: "Oops! Please enter a US city",
-                            minlength: "Oops! Please enter at least 3 characters",
-                            maxlength: "We're sorry, you've reached the maximum allowed characters"
-                        }
-                    });
-                });
-                $("input.postalcode").each(function () {
-                    $(this).rules("add", {
-                        required: true,
-                        zipcode: true,
-                        messages: {
-                            minlength: "Oops! Please enter a minimum of 5 digits",
-                            maxlength: "We're sorry, you've reached the maximum allowed characters"
-                        }
-                    });
-                });
-                $('.language').each(function () {
-                    $(this).chosen().change(function () {
-                        $(this).valid();
-                    });
-                    $(this).rules("add", {
-                        required: true,
-                        messages: {
-                            required: "Oops! Please select a language"
-                        }
-                    });
-                });
-
-                // add rules for all other fields
-                $("input.address").rules("add", {
-                    required: true,
-                    minlength: 5,
-                    maxlength: 40,
-                    messages: {
-                        required: "Oops! Please enter an address",
-                        minlength: "Oops! Please enter a minimum of 5 characters",
-                        maxlength: "We're sorry, you've reached the maximum allowed characters"
-                    }
-                });
-
-                // auto format postal code
-                $(".postalcode,.notrequired").keydown(function (e) {
-                    if (($(this).val().length == 5) && (e.keyCode != 8) && (e.keyCode != 9)) {
-                        // auto insert dash on 5th character keypress
-                        $(this).val($(this).val() + "-");
-                    }
-                    if (($(this).val().length == 7) && (e.keyCode == 8)) {
-                        // remove dash if on 7th character backspace is used
-                        $(this).val($(this).val().substring(0, $(this).val().length - 1));
-                    }
-                });
-                $("select.f-state").on('change', function () {
-                    $(this).chosen().change(function () {
-                        $(this).valid();
-                    });
-                    $(this).rules("add", {
-                        required: true,
-                        messages: {
-                            required: "Oops! Please select a state"
-                        }
-                    });
-                });
-                $("select.relationship").on('change', function () {
-                    $(this).chosen().change(function () {
-                        $(this).valid();
-                    });
-                    $(this).rules("add", {
-                        required: true,
-                        messages: {
-                            required: "Oops! Please select the relationship"
-                        }
-                    });
-                })
-                $(".fullname").rules("add", {
-                    required: true,
-                    fullname: true,
-                    minlength: 5,
-                    maxlength: 40,
-                    messages: {
-                        required: "Oops! Please enter a first and last name",
-                        fullname: "Oops! Please also enter a last name",
-                        minlength: "Oops! The full name must have more than 4 letters",
-                        maxlength: "We're sorry, you've reached the maximum allowed characters"
-                    }
-                });
-
-                if ($('#j_id0\\:formId\\:gender').val().indexOf('Self-describe') != -1) {
-                    $("textarea.selfdescreq").rules("add", {
-                        required: true,
-                        messages: {
-                            required: "Oops! Please enter a description pertaining to 'Self-describe'"
-                        }
-                    });
-                } else {
-                    $('.self-desc-field').parent().removeClass("has-error");
-                }
-            }
-
-            // inputs: numbers only
-            function numOnly() {
-                $(".numbers-only").keydown(function (e) {
-                    // Allow: backspace, delete, tab, escape and enter
-                    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
-                        // Allow: Ctrl+A
-                        (e.keyCode == 65 && e.ctrlKey === true) ||
-                        // Allow: Ctrl+C
-                        (e.keyCode == 67 && e.ctrlKey === true) ||
-                        // Allow: Ctrl+X
-                        (e.keyCode == 88 && e.ctrlKey === true) ||
-                        // Allow: home, end, left, right
-                        (e.keyCode >= 35 && e.keyCode <= 39)) {
-                        // let it happen, don't do anything
-                        return;
-                    }
-                    // Ensure that it is a number and stop the keypress
-                    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-                        e.preventDefault();
-                    }
-                });
-            }
-
-            // lang notes functions
-            function langNotes() {
-                $('.lang').on('change', function () {
-                    if ($(this).val() != null) {
-                        if ($(this).val().indexOf('Other') != -1) {
-                            $('.lang-note').attr('placeholder', "Please specify other language(s)").addClass('required');
-                        } else {
-                            $('.lang-note').attr('placeholder', "Additional details (Optional)").val('').removeClass('required');
-                            $('.lang-note').valid();
-                        }
-                    }
-                });
-            }
-
-            // prof skills show/hide "other" textbox
-            function profOtherSkills() {
-                $('.prof-skills').on('change', function () {
-                    if ($(this).val() != null) {
-                        if ($(this).val().indexOf('Other') != -1) {
-                            $('.prof-skills-other').removeClass('sr-only');
-                        } else {
-                            $('.prof-skills-other').addClass('sr-only');
-                            $('.prof-skills-other').find('textarea').val('');
-                        }
-                    }
-                });
-
-                //display prof-skills if there is a value on page load
-                if ($('.prof-skills').val() != null) {
-                    if ($('.prof-skills').val().indexOf('Other') != -1) {
-                        $('.prof-skills-other').removeClass('sr-only');
-                    }
                 }
             }
 
