@@ -20,7 +20,6 @@
  * 6. 01 Jun 2020 - Manoj - SIW-508 : Added conditions to hide hospitalization questions from docusign
  * 7. 12 Jun 2020 - Chris and Samer - SIW-508 : Fixed zero showing by default for number of hospitalizations.
  * Descriptions were looked up.
- * 8. 01 July 2020 - Manoj - SIW-516 : Added logic to map lead fields based on conditions
  **/
 public class DiagnosisVerification_AC {
 
@@ -592,7 +591,7 @@ public class DiagnosisVerification_AC {
                     // Condition Description categories like Epilepsy, Cardiomyopathy with group 1 records are considered as eligible without asking Medical Questions
                     // Those questions are identified by using isEligible__c field
                     if (conditionDescriptionInfo[0].isEligible__c == true) {
-                        if (wishChildWrapperIns.describePatient != '7' && wishChildWrapperIns.describePatient != '8' && wishChildWrapperIns.describePatient != '6' && wishChildWrapperIns.vegetativeState == 'No') {
+                        if (wishChildWrapperIns.describePatient != '7' && wishChildWrapperIns.describePatient != '8' && wishChildWrapperIns.describePatient != '6' ) {
                             diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = true;
                         } else {
                             showAddAnotherDiagnosisBtn = true;
@@ -683,7 +682,7 @@ public class DiagnosisVerification_AC {
                         diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList.add(medicalWrapperItem);
                     }
                 } else if (isGroup1 == true) {
-                    if (wishChildWrapperIns.describePatient != '7' && wishChildWrapperIns.describePatient != '8' && wishChildWrapperIns.describePatient != '6' && wishChildWrapperIns.vegetativeState == 'No') {
+                    if (wishChildWrapperIns.describePatient != '7' && wishChildWrapperIns.describePatient != '8' && wishChildWrapperIns.describePatient != '6') {
                         diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = true;
                         diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode = icdCode;
                     } else {
@@ -698,7 +697,7 @@ public class DiagnosisVerification_AC {
                     }
                 }
             } else if (isGroup1 == true) {
-                if (wishChildWrapperIns.describePatient != '7' && wishChildWrapperIns.describePatient != '8' && wishChildWrapperIns.describePatient != '6' && wishChildWrapperIns.vegetativeState == 'No') {
+                if (wishChildWrapperIns.describePatient != '7' && wishChildWrapperIns.describePatient != '8' && wishChildWrapperIns.describePatient != '6' ) {
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = true;
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].icdCode = icdCode;
                 } else {
@@ -734,7 +733,7 @@ public class DiagnosisVerification_AC {
             Integer questionNumber = Integer.valueOf(ApexPages.currentPage().getParameters().get('questionNumber'));
 
             if (medicalResponse != null && medicalResponse == 'Yes') {
-                if (wishChildWrapperIns.describePatient != '7' && wishChildWrapperIns.describePatient != '8' && wishChildWrapperIns.describePatient != '6' && wishChildWrapperIns.vegetativeState == 'No') {
+                if (wishChildWrapperIns.describePatient != '7' && wishChildWrapperIns.describePatient != '8' && wishChildWrapperIns.describePatient != '6') {
                     showAddAnotherDiagnosisBtn = false;
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = true;
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList[questionNumber].isEligible = true;
@@ -750,12 +749,7 @@ public class DiagnosisVerification_AC {
                     if (icdCodeInfo.size() > 0) {
                         currLead.Qualifying_ICD__c = icdCodeInfo[0].Id;
                     }
-                }
-                else{
-                    showAddAnotherDiagnosisBtn = true;
-                    diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = false;
-                    diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList[questionNumber].isEligible = false;
-                }
+                }               
             } else if ((medicalResponse != null) && (medicalResponse == 'No' || medicalResponse == 'ShowNext')) {
                 if (diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList[questionNumber].isEligible) {
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = false;
@@ -901,29 +895,29 @@ public class DiagnosisVerification_AC {
             currLead.Increased_probability_of_premature_death__c = false;
             currLead.Risk_of_complications_premature_death__c = false;
             currLead.None_of_these_statements_describes_Child__c = false;
-            currLead.Responds_to_treatment_with_normal_health__c = false; 
-            //SIW-516 Start             
-                if(medicalResponse == 'Yes'){
-                    currLead.Unplanned_hospital_admissions__c = null;
-                    currLead.Number_hospital_admissions__c = null;
-                    currLead.Admitting_diagnosis__c = null;
-                    currLead.ICU_Admissions__c = null;
-                }    
-                else{   
-                currLead.Unplanned_hospital_admissions__c = wishChildWrapperIns.unplannedHospitalAdmission;
-                //SIW-531 Start : Setting value blank for Number_hospital_admissions__c if no value provided from form for this question
-                if (wishChildWrapperIns.unplannedHospitalAdmission == 'Yes') {
-                    //currLead.Number_hospital_admissions__c = wishChildWrapperIns.numberOfHospitalAdmission;
-                    currLead.Number_hospital_admissions__c = Integer.valueof(wishChildWrapperIns.numberOfHospitalAdmission); //Samer 508
-                    currLead.Admitting_diagnosis__c = wishChildWrapperIns.admittingDiagnosis;
-                    currLead.ICU_Admissions__c = wishChildWrapperIns.ifICUAdmission;
-                } else {
-                    currLead.Number_hospital_admissions__c = null;
-                    currLead.Admitting_diagnosis__c = null;
-                    currLead.ICU_Admissions__c = null;
-                }
-            }    
-              //SIW-516 End  
+            currLead.Responds_to_treatment_with_normal_health__c = false;
+            //SIW-508: Hide questions from Docusign
+            if (wishStatus == 'Qualified'){
+                currLead.Unplanned_hospital_admissions__c = null;
+                currLead.Number_hospital_admissions__c = null;
+                currLead.Admitting_diagnosis__c = null;
+                currLead.ICU_Admissions__c = null;
+            }
+            else{
+            currLead.Unplanned_hospital_admissions__c = wishChildWrapperIns.unplannedHospitalAdmission;
+            //SIW-531 Start : Setting value blank for Number_hospital_admissions__c if no value provided from form for this question
+            if (wishChildWrapperIns.unplannedHospitalAdmission == 'Yes') {
+                //currLead.Number_hospital_admissions__c = wishChildWrapperIns.numberOfHospitalAdmission;
+                currLead.Number_hospital_admissions__c = Integer.valueof(wishChildWrapperIns.numberOfHospitalAdmission); //Samer 508
+                currLead.Admitting_diagnosis__c = wishChildWrapperIns.admittingDiagnosis;
+                currLead.ICU_Admissions__c = wishChildWrapperIns.ifICUAdmission;
+            } else {
+                currLead.Number_hospital_admissions__c = null;
+                currLead.Admitting_diagnosis__c = null;
+                currLead.ICU_Admissions__c = null;
+            }
+            //SIW-531 End
+            }  
             //SIW-355 Start : Mapped 2 new added questions value to lead field on submission of DV form
             currLead.Expedite_timeframe__c = wishChildWrapperIns.timeFrameValue;
             currLead.Other_expedite_timeframe_comments__c = wishChildWrapperIns.idealtimeFrameValue;
@@ -1183,7 +1177,7 @@ public class DiagnosisVerification_AC {
             currLead.Best_Contact_for_Physician_First_Name__c = wishChildWrapperIns.bestPhyFname;
             currLead.Best_Contact_for_Physician_Last_Name__c = wishChildWrapperIns.bestPhyLname;
             currLead.Best_contact_for_Physician_Email__c = wishChildWrapperIns.bestPhyEmail;
-            currLead.Best_Contact_for_Physician_Email__c = wishChildWRapperIns.bestPhyPhone;
+            currLead.Best_Contact_for_Physician_Phone__c = wishChildWRapperIns.bestPhyPhone;
             currLead.Alternate1MedProfessionalFirstName__c = wishChildWrapperIns.alt1MedFname;
             currLead.Alternate1MedProfessionalLastName__c = wishChildWrapperIns.alt1MedLname;
             currLead.Alternate1MedicalProfessionalEmail__c = wishChildWrapperIns.alt1MedEmail;
@@ -1193,8 +1187,12 @@ public class DiagnosisVerification_AC {
             currLead.Alternate2MedProfessionalLastName__c = wishChildWrapperIns.alt2MedLname;
             currLead.Alternate2MedProfessionalEmail__c = wishChildWrapperIns.alt2MedEmail;
             currLead.Alternate2MedProfessionalPhone__c = wishChildWrapperIns.alt2MedPhone;
-            currLead.Alternate2HospitalTreatmentFacility__c = wishChildWrapperIns.alt2MedHosp;           
-
+            currLead.Alternate2HospitalTreatmentFacility__c = wishChildWrapperIns.alt2MedHosp;
+            
+            if (wishChildWrapperIns.vegetativeState == 'Yes') {
+                currLead.RFI_Form_Info_Hidden__c = 'Not Qualified';
+            }         
+            
             update currLead;
             insert diagnosisVerificationLstForInsert;
             insert diagnosisMedicalQuestionLst;
