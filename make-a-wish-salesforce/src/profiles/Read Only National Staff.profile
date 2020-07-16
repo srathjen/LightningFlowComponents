@@ -24233,6 +24233,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>npe4__Relationship__c.Former_MP__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>npe4__Relationship__c.Hidden_Preferred_Contact__c</field>
         <readable>true</readable>
     </fieldPermissions>

@@ -64,6 +64,10 @@
                 <behavior>Edit</behavior>
                 <field>Qualifying_Medical_Professional__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Former_MP__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
