@@ -1,0 +1,956 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Relationship_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>npsp__NPSP_Relationship_Compact_Layout</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>npsp__NPSP_Relationship_Compact_Layout</fullName>
+        <fields>Name</fields>
+        <fields>npe4__Contact__c</fields>
+        <fields>npe4__RelatedContact__c</fields>
+        <label>NPSP Relationship Compact Layout</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fieldSets>
+        <fullName>MedicalRelationships</fullName>
+        <description>This is used in MedicalRelationships_VF page.</description>
+        <displayedFields>
+            <field>Id</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>npe4__RelatedContact__r.FirstName</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>npe4__RelatedContact__r.LastName</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>npe4__RelatedContact__r.Provider_Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Referring_Medical_Professional__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Qualifying_Medical_Professional__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Treating_HCP__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Best_Contact__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Send_Wish_Forms__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>MedicalRelationships</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>Relationship_Field_Set</fullName>
+        <description>This is used to contact merge class.</description>
+        <displayedFields>
+            <field>Name</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>npe4__Contact__r.Name</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>npe4__Status__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>npe4__Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Referring_Medical_Professional__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Under_18__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>npe4__RelatedContact__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Relationship Field Set</label>
+    </fieldSets>
+    <fields>
+        <fullName>Adult_Emergency_Contact__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>User can find the Wish child&apos;s emergency contact using this field. if it is true, then this user can contact this person for emergency.</description>
+        <externalId>false</externalId>
+        <label>Adult Emergency Contact</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Best_Contact__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Best Contact for Treating Healthcare Provider</inlineHelpText>
+        <label>Best Contact for Treating MP</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Decead__c</fullName>
+        <externalId>false</externalId>
+        <formula>npe4__RelatedContact__r.npsp__Deceased__c</formula>
+        <inlineHelpText>This field can be updated on the individual&apos;s Contact Record.</inlineHelpText>
+        <label>Deceased</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>End_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>Wish_End_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Wish End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>External Id</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Former_MP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Former MP</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Hidden_Preferred_Contact__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is checked as True to check when the contact is selected in preferred in update contact info page.</description>
+        <externalId>false</externalId>
+        <label>Hidden Preferred Contact</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Hidden_isparentFirst__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Hidden isparentFirst</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Import_Id__c</fullName>
+        <externalId>false</externalId>
+        <label>Import Id</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Medical_Needs__c</fullName>
+        <description>It will indicate that wish participant requires medical needs or not</description>
+        <externalId>false</externalId>
+        <label>Medical Needs</label>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Migrated_Record__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field will indicate that record created from mulesoft or not</description>
+        <externalId>false</externalId>
+        <label>Migrated Record</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Non_Comped__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>FLS removed 2019-09-13 as the information in this field is now housed on the Wish Affiliation object.</description>
+        <externalId>false</externalId>
+        <label>Non-Comped</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Parent_Legal_Guardian__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>describe Parent or Legal Guardian of wish child</description>
+        <externalId>false</externalId>
+        <label>Parent/Legal Guardian</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Qualifying_Medical_Professional__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This should be checked when Type field is Medical Professional.</description>
+        <externalId>false</externalId>
+        <label>Qualifying MP</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Referring_Medical_Professional__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This should be checked when Type is selected as Medical Professional.</description>
+        <externalId>false</externalId>
+        <label>Referral Source</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Related_Contact_Record_Type__c</fullName>
+        <externalId>false</externalId>
+        <formula>npe4__RelatedContact__r.RecordType.DeveloperName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Related Contact Record Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Residing_with_Wish_child__c</fullName>
+        <description>It will define wish child residing with wish child or not. FLS removed 2019-09-13 as the information in this field is now housed on the Wish Affiliation object.</description>
+        <externalId>false</externalId>
+        <label>Residing with Wish child</label>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Send_Wish_Forms__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>FLS removed 2019-09-13 as the information in this field is now housed on the Wish Affiliation object.</description>
+        <externalId>false</externalId>
+        <label>Send Wish Forms to</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Start_date__c</fullName>
+        <externalId>false</externalId>
+        <formula>Wish_Start_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Wish Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Treating_HCP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Treating MP</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>UAT_Data_Warning__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(datevalue(CreatedDate) &lt; DATE(2019, 09, 25), TRUE, FALSE)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>UAT Data Warning</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Under_18__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Non-adults participants</description>
+        <externalId>false</externalId>
+        <label>Under 18</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Unique_Record_Count__c</fullName>
+        <description>Enables better record counting functions on reports.</description>
+        <externalId>false</externalId>
+        <formula>1</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Unique Record Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Wish_End_Date__c</fullName>
+        <description>This field populates wish end date.</description>
+        <externalId>false</externalId>
+        <label>Hidden Wish End  Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Wish_Participant__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Described Wish Participants</description>
+        <externalId>false</externalId>
+        <label>Wish Participant</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Wish_Start_Date__c</fullName>
+        <description>This field populates the wish start.</description>
+        <externalId>false</externalId>
+        <label>Hidden Wish Start Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>npe4__Contact__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Related Contact is this Contact&apos;s ______.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Related Contact is this Contact&apos;s ______.</inlineHelpText>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Relationships</relationshipLabel>
+        <relationshipName>Relationships</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>npe4__Description__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Additional information about this Relationship</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Additional information about this Relationship</inlineHelpText>
+        <label>Description</label>
+        <length>32000</length>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>6</visibleLines>
+    </fields>
+    <fields>
+        <fullName>npe4__ReciprocalRelationship__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <description>System field that links to the two sides of the Relationship together.  This field should not be modified directly.  The Reciprocal Relationship will have the opposite type, if available, of this Relationship.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System field that links to the two sides of the Relationship together.  This field should not be modified directly.  The Reciprocal Relationship will have the opposite type, if available, of this Relationship.</inlineHelpText>
+        <label>Reciprocal Relationship</label>
+        <referenceTo>npe4__Relationship__c</referenceTo>
+        <relationshipLabel>Relationships</relationshipLabel>
+        <relationshipName>Relationships</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>npe4__RelatedContact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Related Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Hidden Relationships List</relationshipLabel>
+        <relationshipName>Relationships1</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>npe4__Relationship_Explanation__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Text formula that constructs a sentence explaining the relationship between the two Contacts</description>
+        <externalId>false</externalId>
+        <formula>TEXT(npe4__RelatedContact__r.Salutation) + &quot; &quot; + npe4__RelatedContact__r.FirstName + &quot; &quot; + npe4__RelatedContact__r.LastName
++ &quot;  &quot;  +  $Label.npe4__Relationship_Explanation_Connector + &quot; &quot; + 
+TEXT(npe4__Contact__r.Salutation) + &quot; &quot; + npe4__Contact__r.FirstName + &quot; &quot; + npe4__Contact__r.LastName + &quot;&apos;s &quot; + TEXT(npe4__Type__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Text formula that constructs a sentence explaining the relationship between the two Contacts</inlineHelpText>
+        <label>Relationship Explanation</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>npe4__SYSTEM_SystemCreated__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>System field that indicates if this Relationship was created automatically as the reciprocal to another Relationships.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System field that indicates if this Relationship was created automatically as the reciprocal to another Relationships.</inlineHelpText>
+        <label>_SYSTEM: SystemCreated</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>npe4__Status__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Status of the Relationship.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Status of the Relationship.</inlineHelpText>
+        <label>Status</label>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Active</fullName>
+                    <default>true</default>
+                    <label>Active</label>
+                </value>
+                <value>
+                    <fullName>Inactive</fullName>
+                    <default>false</default>
+                    <label>Inactive</label>
+                </value>
+                <value>
+                    <fullName>Active Treating</fullName>
+                    <default>false</default>
+                    <label>Active Treating</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>npe4__Type__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Field that describes how the Related Contact is connected to the Contact.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Field that describes how the Related Contact is connected to the Contact.</inlineHelpText>
+        <label>Type</label>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Mother</fullName>
+                    <default>false</default>
+                    <label>Mother</label>
+                </value>
+                <value>
+                    <fullName>Father</fullName>
+                    <default>false</default>
+                    <label>Father</label>
+                </value>
+                <value>
+                    <fullName>Parent</fullName>
+                    <default>false</default>
+                    <label>Parent</label>
+                </value>
+                <value>
+                    <fullName>Sister</fullName>
+                    <default>false</default>
+                    <label>Sister</label>
+                </value>
+                <value>
+                    <fullName>Wish Child(Self)</fullName>
+                    <default>false</default>
+                    <label>Wish Child(Self)</label>
+                </value>
+                <value>
+                    <fullName>Brother</fullName>
+                    <default>false</default>
+                    <label>Brother</label>
+                </value>
+                <value>
+                    <fullName>Sibling</fullName>
+                    <default>false</default>
+                    <label>Sibling</label>
+                </value>
+                <value>
+                    <fullName>Grandmother</fullName>
+                    <default>false</default>
+                    <label>Grandmother</label>
+                </value>
+                <value>
+                    <fullName>Grandfather</fullName>
+                    <default>false</default>
+                    <label>Grandfather</label>
+                </value>
+                <value>
+                    <fullName>Stepmother</fullName>
+                    <default>false</default>
+                    <label>Stepmother</label>
+                </value>
+                <value>
+                    <fullName>Stepfather</fullName>
+                    <default>false</default>
+                    <label>Stepfather</label>
+                </value>
+                <value>
+                    <fullName>Step Sister</fullName>
+                    <default>false</default>
+                    <label>Step Sister</label>
+                </value>
+                <value>
+                    <fullName>Step Brother</fullName>
+                    <default>false</default>
+                    <label>Step Brother</label>
+                </value>
+                <value>
+                    <fullName>Half Sister</fullName>
+                    <default>false</default>
+                    <label>Half Sister</label>
+                </value>
+                <value>
+                    <fullName>Half Brother</fullName>
+                    <default>false</default>
+                    <label>Half Brother</label>
+                </value>
+                <value>
+                    <fullName>Foster Mother</fullName>
+                    <default>false</default>
+                    <label>Foster Mother</label>
+                </value>
+                <value>
+                    <fullName>Foster Father</fullName>
+                    <default>false</default>
+                    <label>Foster Father</label>
+                </value>
+                <value>
+                    <fullName>Foster Sister</fullName>
+                    <default>false</default>
+                    <label>Foster Sister</label>
+                </value>
+                <value>
+                    <fullName>Foster Brother</fullName>
+                    <default>false</default>
+                    <label>Foster Brother</label>
+                </value>
+                <value>
+                    <fullName>Aunt</fullName>
+                    <default>false</default>
+                    <label>Aunt</label>
+                </value>
+                <value>
+                    <fullName>Uncle</fullName>
+                    <default>false</default>
+                    <label>Uncle</label>
+                </value>
+                <value>
+                    <fullName>Cousin</fullName>
+                    <default>false</default>
+                    <label>Cousin</label>
+                </value>
+                <value>
+                    <fullName>Husband</fullName>
+                    <default>false</default>
+                    <label>Husband</label>
+                </value>
+                <value>
+                    <fullName>Wife</fullName>
+                    <default>false</default>
+                    <label>Wife</label>
+                </value>
+                <value>
+                    <fullName>Partner</fullName>
+                    <default>false</default>
+                    <label>Partner</label>
+                </value>
+                <value>
+                    <fullName>Friend</fullName>
+                    <default>false</default>
+                    <label>Friend</label>
+                </value>
+                <value>
+                    <fullName>Neighbor</fullName>
+                    <default>false</default>
+                    <label>Neighbor</label>
+                </value>
+                <value>
+                    <fullName>Family</fullName>
+                    <default>false</default>
+                    <label>Family</label>
+                </value>
+                <value>
+                    <fullName>Coworker</fullName>
+                    <default>false</default>
+                    <label>Coworker</label>
+                </value>
+                <value>
+                    <fullName>Son</fullName>
+                    <default>false</default>
+                    <label>Son</label>
+                </value>
+                <value>
+                    <fullName>Daughter</fullName>
+                    <default>false</default>
+                    <label>Daughter</label>
+                </value>
+                <value>
+                    <fullName>Grandson</fullName>
+                    <default>false</default>
+                    <label>Grandson</label>
+                </value>
+                <value>
+                    <fullName>Granddaughter</fullName>
+                    <default>false</default>
+                    <label>Granddaughter</label>
+                </value>
+                <value>
+                    <fullName>Employer</fullName>
+                    <default>false</default>
+                    <label>Employer</label>
+                </value>
+                <value>
+                    <fullName>Employee</fullName>
+                    <default>false</default>
+                    <label>Employee</label>
+                </value>
+                <value>
+                    <fullName>Medical Professional</fullName>
+                    <default>false</default>
+                    <label>Medical Professional</label>
+                </value>
+                <value>
+                    <fullName>Legal Guardian</fullName>
+                    <default>false</default>
+                    <label>Legal Guardian</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>npsp__Related_Opportunity_Contact_Role__c</fullName>
+        <deprecated>false</deprecated>
+        <description>When you create an Opportunity for the Contact in this Relationship, NPSP assigns this Opportunity Contact Role to the Related Contact.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>When you create an Opportunity for the Contact in this Relationship, NPSP assigns this Opportunity Contact Role to the Related Contact.</inlineHelpText>
+        <label>Related Opportunity Contact Role</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Soft Credit</fullName>
+                    <default>false</default>
+                    <label>Soft Credit</label>
+                </value>
+                <value>
+                    <fullName>Solicitor</fullName>
+                    <default>false</default>
+                    <label>Solicitor</label>
+                </value>
+                <value>
+                    <fullName>Tribute</fullName>
+                    <default>false</default>
+                    <label>Tribute</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Relationship</label>
+    <nameField>
+        <displayFormat>R-{000000}</displayFormat>
+        <label>Relationship Number</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Relationships</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>npe4__Related_Contact_Do_Not_Change</fullName>
+        <active>true</active>
+        <description>Do not allow user to change Related Contact value as it damages the paired relationship data</description>
+        <errorConditionFormula>and(not( ISNEW()), ISCHANGED( npe4__RelatedContact__c ))</errorConditionFormula>
+        <errorDisplayField>npe4__RelatedContact__c</errorDisplayField>
+        <errorMessage>Rather than change the contacts in an existing relationship, delete this relationship and create a new on between the new contacts</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>
