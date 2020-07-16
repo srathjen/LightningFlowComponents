@@ -271,7 +271,7 @@
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <inlineHelpText>Best Contact for Treating Healthcare Provider</inlineHelpText>
-        <label>Best Contact for Treating Healthcare Pro</label>
+        <label>Best Contact for Treating MP</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -310,6 +310,16 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Former_MP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Former MP</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Hidden_Preferred_Contact__c</fullName>
@@ -398,7 +408,7 @@
         <defaultValue>false</defaultValue>
         <description>This should be checked when Type field is Medical Professional.</description>
         <externalId>false</externalId>
-        <label>Qualifying Medical Team Member</label>
+        <label>Qualifying MP</label>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -479,7 +489,7 @@
         <fullName>Treating_HCP__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
-        <label>Treating Healthcare Provider</label>
+        <label>Treating MP</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
