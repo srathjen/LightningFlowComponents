@@ -267,7 +267,7 @@ public without sharing class WishSignatureController {
         public String wishAff;
     }
 
-    //Wrapper class to hold response of Adult, Minor and its Wish Affiliation Id
+    // Wrapper class to hold response of Adult, Minor and its Wish Affiliation Id
     public class AdultMinorWrapData {
         public String adult;
         public String minor;
