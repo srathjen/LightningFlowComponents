@@ -3650,6 +3650,16 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <trackHistory>true</trackHistory>
     </fields>
     <fields>
+        <fullName>Next_Step_Notes__c</fullName>
+        <description>Captures notes about the Next Steps to take on the lead.</description>
+        <externalId>false</externalId>
+        <label>Next Step Notes</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Non_Verbal__c</fullName>
         <description>This field is indicate the communication is Non-Verbal or Not.</description>
         <externalId>false</externalId>
