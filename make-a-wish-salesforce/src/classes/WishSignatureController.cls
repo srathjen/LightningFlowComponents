@@ -90,7 +90,9 @@ public without sharing class WishSignatureController {
                 List<childWrapper> wrapperList = new List<childWrapper>();
                 //Get a List of all medical professionals related to the case and put in WrapperList
                 for (Wish_Affiliation__c obj : [
-                        SELECT Id,Medical_Professional_Status__c,Contact__c,Contact__r.LastName,Contact__r.FirstName,Best_Medical_Contact__c, Send_Clearance_Forms_To__c
+                        SELECT Id, Medical_Professional_Status__c, Contact__c, Contact__r.LastName,
+                                Contact__r.FirstName, Best_Medical_Contact__c, Send_Clearance_Forms_To__c,
+                                Relationship__r.Former_MP__c
                         FROM Wish_Affiliation__c
                         WHERE Wish__c = :caseId AND Wish_Affiliation_Type__c = :Constant_AC.WISH_AFFILIATION_TYPE_MEDICAL_PROFESSIONAL
                 ]) {

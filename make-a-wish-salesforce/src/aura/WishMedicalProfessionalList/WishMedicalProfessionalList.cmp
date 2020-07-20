@@ -120,6 +120,11 @@
                             <span id="tableHeaderText">{!v.relationshipLabels.best_contact__c}</span>
                         </div>
                     </th>
+                    <th scope="col" title="{!v.relationshipLabels.former_mp__c}">
+                        <div class="slds-cell-wrap">
+                            <span id="tableHeaderText">{!v.relationshipLabels.former_mp__c}</span>
+                        </div>
+                    </th>
                     <th scope="col" title="{!v.wishAffiliationLabels.send_clearance_forms_to__c}">
                         <div class="slds-cell-wrap">
                             <span id="tableHeaderText">{!v.wishAffiliationLabels.send_clearance_forms_to__c}</span>
@@ -290,6 +295,13 @@
                                                  label="{!v.relationshipLabels.referring_medical_professional__c}"
                                                  name="relationshipBestContact"
                                                  checked="{!v.newWishMedicalProfessional.Relationship__r.Referring_Medical_Professional__c}"
+                                                 class="slds-p-top_small"/>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12">
+                                <lightning:input type="checkbox"
+                                                 label="{!v.relationshipLabels.former_mp__c}"
+                                                 name="relationshipBestContact"
+                                                 checked="{!v.newWishMedicalProfessional.Relationship__r.Former_MP__c}"
                                                  class="slds-p-top_small"/>
                             </div>
                             <div class="slds-col slds-size_1-of-1 slds-text-heading_small slds-p-top_medium">

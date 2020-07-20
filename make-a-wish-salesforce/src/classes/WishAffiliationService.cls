@@ -346,7 +346,8 @@ public without sharing class WishAffiliationService {
                         Relationship__r.npe4__Type__c, Relationship__r.Parent_Legal_Guardian__c,
                         Relationship__r.npe4__Contact__c, Relationship__r.npe4__Contact__r.Name,
                         Relationship__r.Qualifying_Medical_Professional__c, Relationship__r.Treating_HCP__c,
-                        Relationship__r.Best_Contact__c, Health_Treatment_Facility__c, Health_Treatment_Facility__r.Name, Relationship__r.Referring_Medical_Professional__c
+                        Relationship__r.Best_Contact__c, Health_Treatment_Facility__c, Health_Treatment_Facility__r.Name,
+                        Relationship__r.Referring_Medical_Professional__c, Relationship__r.Former_MP__c
                 FROM Wish_Affiliation__c
                 WHERE Wish__c = :caseRecordId
                 AND Wish_Affiliation_Type__c IN :wishAffiliationTypes
@@ -881,7 +882,8 @@ public without sharing class WishAffiliationService {
                         Relationship__r.Name, Relationship__r.npe4__Type__c, Relationship__r.Parent_Legal_Guardian__c,
                         Relationship__r.npe4__Contact__c, Relationship__r.npe4__Contact__r.Name,
                         Relationship__r.Qualifying_Medical_Professional__c, Relationship__r.Treating_HCP__c,
-                        Relationship__r.Best_Contact__c, Health_Treatment_Facility__c, Health_Treatment_Facility__r.Name, Relationship__r.Referring_Medical_Professional__c
+                        Relationship__r.Best_Contact__c, Health_Treatment_Facility__c, Health_Treatment_Facility__r.Name,
+                        Relationship__r.Referring_Medical_Professional__c, Relationship__r.Former_MP__c
                 FROM Wish_Affiliation__c
                 WHERE Id = :wishAffiliation
                 ORDER BY Wish_Affiliation_Type__c DESC, Contact__r.Name
@@ -897,7 +899,8 @@ public without sharing class WishAffiliationService {
     public static npe4__Relationship__c findRelationshipByRelatedContactAndContact(Id relatedContact, Id contact) {
         List<npe4__Relationship__c> relationships = [
                 SELECT Id, npe4__Type__c, Parent_Legal_Guardian__c, npe4__Contact__c,
-                        Qualifying_Medical_Professional__c, Treating_HCP__c, Best_Contact__c, Referring_Medical_Professional__c
+                        Qualifying_Medical_Professional__c, Treating_HCP__c, Best_Contact__c,
+                        Referring_Medical_Professional__c, Former_MP__c
                 FROM npe4__Relationship__c
                 WHERE npe4__RelatedContact__c = :relatedContact
                 AND npe4__Contact__c = :contact
