@@ -997,11 +997,10 @@
                             </div>
                         </fieldset>
                         <fieldset class="footer">
-                            <div class="form-group row">
+                            <div id="pageActions" class="form-group row">
                                 <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-6 col-md-push-10">
                                     <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md btn-p-save"
-                                                        value="Save" action="{!SavePersonalInfo}"
-                                                        onclick="checkState();"/>
+                                                        value="Save" action="{!SavePersonalInfo}"/>
                                 </div>
                                 <div class="col-xs-12 col-sm-4 col-md-2 col-sm-pull-2 col-md-push-6">
                                     <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md" value="Cancel"
@@ -1507,67 +1506,74 @@
                 }, "Oops! Please enter a valid US postal code");
 
                 $('.btn-p-save').on('click', function () {
-                    $("select.f-state").chosen().change(function () {
-                        $(this).valid();
-                    });
+                        console.log('Click');
+                        document.getElementById('{!$Component.formId.altemailaddress}').focus();
 
-                    $("select.f-state").rules("add", {
-                        required: true,
-                        messages: {
-                            required: "Oops! Please select a state"
-                        }
-                    });
+                        $("select.f-state").chosen().change(function () {
+                            $(this).valid();
+                        });
 
-                    $(".preferredemailtype option").each(function () {
-                        if ($(this).val() !== '') {
-                            const name = $(this).val().toLowerCase() + 'emailaddress';
-                            const optionFieldId = '.' + name;
-                            const spanFieldId = '#' + 'requiredspan-' + name;
-                            $(spanFieldId).hide(0);
-                            $(optionFieldId).rules("remove");
-                        }
-                    });
-
-                    var checkEmail;
-                    if ($(".preferredemailtype").val() != '') {
-                        varChangeLowerCase = $(".preferredemailtype").val();
-                        checkEmail = varChangeLowerCase.toLowerCase() + 'emailaddress';
-                    }
-
-                    if ($(".preferredemailtype").val() != '' && $("." + checkEmail).val() == '') {
-                        $("." + checkEmail).rules("add", {
+                        $("select.f-state").rules("add", {
                             required: true,
                             messages: {
-                                required: "Oops! " + $(".preferredemailtype").val() + " email is required "
+                                required: "Oops! Please select a state"
                             }
                         });
-                        const spanFieldId = '#' + 'requiredspan-' + checkEmail;
-                        $(spanFieldId).show(0);
-                    } else {
-                        $(".personalemailaddress, .workemailaddress, .alternateemailaddress").parent().removeClass("has-feedback");
-                        $(".personalemailaddress, .workemailaddress, .alternateemailaddress").parent().removeClass("has-error");
-                        $(".personalemailaddress, .workemailaddress, .alternateemailaddress").prev('div').children("label").css("color", "1px solid #ccc");
-                        $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("required");
-                        $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("describedby");
-                        $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("invalid");
-                        $(".personalemailaddress, .workemailaddress, .alternateemailaddress").css("border", "1px solid #ccc");
-                        $(".personalemailaddress, .workemailaddress, .alternateemailaddress").children(".help-block").remove();
-                    }
 
-                    if ($('form').valid()) {
-                        $('form').submit();
-                        // taken from rendered button in order to control submit (rerender="formId, uiStates")
-                        setTimeout(func, 2000);
+                        $(".preferredemailtype option").each(function () {
+                            if ($(this).val() !== '') {
+                                const name = $(this).val().toLowerCase() + 'emailaddress';
+                                const optionFieldId = '.' + name;
+                                const spanFieldId = '#' + 'requiredspan-' + name;
+                                $(spanFieldId).hide(0);
+                                $(optionFieldId).rules("remove");
+                            }
+                        });
 
-                        function func() {
-                            return A4J.AJAX.Submit('j_id0:formId', event, {
-                                'similarityGroupingId': 'j_id0:formId:j_id320',
-                                'html5Validate': true,
-                                'parameters': {'j_id0:formId:j_id320': 'j_id0:formId:j_id320'}
-                            });
+                        var checkEmail;
+                        if ($(".preferredemailtype").val() != '') {
+                            varChangeLowerCase = $(".preferredemailtype").val();
+                            checkEmail = varChangeLowerCase.toLowerCase() + 'emailaddress';
                         }
+
+                        if ($(".preferredemailtype").val() != '' && $("." + checkEmail).val() == '') {
+                            $("." + checkEmail).rules("add", {
+                                required: true,
+                                messages: {
+                                    required: "Oops! " + $(".preferredemailtype").val() + " email is required "
+                                }
+                            });
+                            const spanFieldId = '#' + 'requiredspan-' + checkEmail;
+                            $(spanFieldId).show(0);
+                        } else {
+                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").parent().removeClass("has-feedback");
+                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").parent().removeClass("has-error");
+                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").prev('div').children("label").css("color", "1px solid #ccc");
+                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("required");
+                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("describedby");
+                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("invalid");
+                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").css("border", "1px solid #ccc");
+                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").children(".help-block").remove();
+                        }
+
+                        if ($('form').valid()) {
+                            $('form').submit();
+                            // taken from rendered button in order to control submit (rerender="formId, uiStates")
+                            setTimeout(func, 2000);
+
+                            function func() {
+                                return A4J.AJAX.Submit('j_id0:formId', event, {
+                                    'similarityGroupingId': 'j_id0:formId:j_id320',
+                                    'html5Validate': true,
+                                    'parameters': {'j_id0:formId:j_id320': 'j_id0:formId:j_id320'}
+                                });
+                            }
+                        }
+
+                        document.getElementById('{!$Component.formId.altemailaddress}').focus();
                     }
-                });
+
+                );
 
                 // emergency save btn
                 $('.btn-e-save').on('click', function () {
@@ -1610,8 +1616,6 @@
                     formValidationRules();
                 }
             }
-
-            init();
 
             function checkState() {
                 var t = $("select[id$='state']").val();
@@ -1676,8 +1680,6 @@
                 }
             }
 
-            setDynamicRequiredFields();
-
             function setDynamicRequiredFields() {
                 var validator = $('form').validate();
                 validator.resetForm();
@@ -1706,8 +1708,10 @@
                     $(spanFieldId).show(0);
                 }
             }
+
+            init();
+            setDynamicRequiredFields();
         </script>
     </apex:outputPanel>
-    <div id="div">test</div>
     </body>
 </apex:page>
