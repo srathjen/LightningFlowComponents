@@ -147,6 +147,7 @@ public without sharing class WishAffiliation_AC {
 						existingRelationship.npe4__Type__c = modifiedRelationship.npe4__Type__c;
 						existingRelationship.Parent_Legal_Guardian__c = modifiedRelationship.Parent_Legal_Guardian__c;
 						existingRelationship.Referring_Medical_Professional__c = modifiedRelationship.Referring_Medical_Professional__c;
+						existingRelationship.Former_MP__c = modifiedRelationship.Former_MP__c;
 						if (MEDICAL_PROFESSIONAL_WISH_AFFILIATION_TYPE.equals(modifiedWishAffiliation.Wish_Affiliation_Type__c)) {
 							existingRelationship.Best_Contact__c = modifiedRelationship.Best_Contact__c;
 							existingRelationship.Qualifying_Medical_Professional__c = modifiedRelationship.Qualifying_Medical_Professional__c;
@@ -503,6 +504,7 @@ public without sharing class WishAffiliation_AC {
 					relationship.Treating_HCP__c = wrapper.relationship.Treating_HCP__c;
 					relationship.Best_Contact__c = wrapper.relationship.Best_Contact__c;
 					relationship.Referring_Medical_Professional__c = wrapper.relationship.Referring_Medical_Professional__c;
+					relationship.Former_MP__c = wrapper.relationship.Former_MP__c;
 					wishAffiliationMap.put('modifiedRelationship', relationship);
 				} else if (String.isEmpty(wrapper.relationship.npe4__Type__c) && wrapper.relationship.npe4__Contact__c == null) {
 					wishAffiliationMap.put('modifiedRelationship', null);

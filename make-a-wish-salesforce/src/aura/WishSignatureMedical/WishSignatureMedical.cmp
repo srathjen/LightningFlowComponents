@@ -42,7 +42,6 @@
         </lightning:layout>
     </lightning:card>
     
-    
     <!-- Add Required Signature Modal Begin -->
     <aura:if isTrue="{!v.showModal}">
         <c:sldsModal aura:id="addFormModal" closeModal="true"  closeAction="{!c.handleCancel}">
@@ -51,17 +50,6 @@
             </aura:set>
             <aura:set attribute="content">
                 <lightning:combobox name="FindForms" label="Find Forms" placeholder="Select a Form" options="{! v.options }" onchange="{! c.handleChange }"/>
-                <!--<c:customLookup aura:id="FindForms" objectAPIName="Wish_Signature_Forms__c"
-                                disabledAttr="false"
-                                IconName="doctype:gform"
-                                additionalParams=""
-                                componentMessage="conditiondescription"
-                                placeholderText="Find Wish Forms"
-                                selectedRecord="{!v.selectedLookUpRecord}"
-                                labelClass="slds-form-element__label slds-m-bottom_x-small"
-                                label="Find Forms "
-                                selectedRecordId="{!v.recordId}"
-                                formType = "Medical"/> -->
                 <span class="slds-form-element__label slds-p-top_large">
                     Choose Signer :  </span>
                     <lightning:accordion   allowMultipleSectionsOpen="true">
@@ -75,16 +63,22 @@
                                     </span>
                                     <dl class="slds-dl_horizontal">
                                         <dt class="slds-dl_horizontal__label">
-                                            <p class="slds-truncate" >Best Medical Contact :</p>
+                                            <p class="slds-truncate" >Best Medical Contact:</p>
                                         </dt>
                                         <dd class="slds-dl_horizontal__detail slds-tile__meta">
-                                                 <lightning:input type="checkbox" disabled="true" checked="{!item.wishAff.Best_Medical_Contact__c}"/>
+                                            <lightning:input type="checkbox" disabled="true" checked="{!item.wishAff.Best_Medical_Contact__c}"/>
                                         </dd>
                                          <dt class="slds-dl_horizontal__label">
-                                            <p class="slds-truncate" >Send Clearance Forms To :</p>
+                                            <p class="slds-truncate" >Send Clearance Forms To:</p>
                                         </dt>
                                         <dd class="slds-dl_horizontal__detail slds-tile__meta">
                                              <lightning:input type="checkbox" disabled="true" checked="{!item.wishAff.Send_Clearance_Forms_To__c}"/>
+                                        </dd>
+                                        <dt class="slds-dl_horizontal__label">
+                                            <p class="slds-truncate" >Former MP:</p>
+                                        </dt>
+                                        <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                                            <lightning:input type="checkbox" disabled="true" checked="{!item.wishAff.Relationship__r.Former_MP__c}"/>
                                         </dd>
                                     </dl>
                                     <lightning:layout multipleRows="true">
