@@ -117,6 +117,25 @@
     <flexiPageRegions>
         <componentInstances>
             <componentInstanceProperties>
+                <name>createQuickActionName</name>
+                <value>NewLead</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>lookupFieldName</name>
+                <value>Lead.Id</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>titleFieldName</name>
+                <value>Next Step Notes</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>updateQuickActionName</name>
+                <value>Lead.Next_Steps</value>
+            </componentInstanceProperties>
+            <componentName>console:relatedRecord</componentName>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
                 <name>relatedListComponentOverride</name>
                 <value>GRID</value>
             </componentInstanceProperties>
