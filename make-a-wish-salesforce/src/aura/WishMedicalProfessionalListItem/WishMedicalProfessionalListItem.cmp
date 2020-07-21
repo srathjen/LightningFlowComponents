@@ -137,7 +137,7 @@
     </tr>
     <aura:if isTrue="{!and(v.collapsed, !v.editMode)}">
         <tr class="item">
-            <td role="gridcell" colspan="8">
+            <td role="gridcell" colspan="9">
                 <div class="slds-grid slds-gutters slds-wrap">
                     <div class="slds-col slds-size_1-of-1 slds-text-heading_small slds-p-top_medium">
                         <h3 class="slds-section__title slds-theme--shade primaryPaletteBorder test-id__section-header-container">
@@ -632,7 +632,7 @@
     </aura:if>
     <aura:if isTrue="{!and(v.collapsed, v.editMode)}">
         <tr>
-            <td role="gridcell" colspan="8">
+            <td role="gridcell" colspan="9">
                 <div class="slds-grid slds-gutters slds-wrap">
                     <div class="slds-col slds-size_1-of-1 slds-text-heading_small slds-p-top_medium">
                         <h3 class="slds-section__title slds-theme--shade primaryPaletteBorder test-id__section-header-container">
@@ -946,7 +946,7 @@
     </aura:if>
     <aura:if isTrue="{!v.showToast}">
         <tr>
-            <td role="gridcell" colspan="8">
+            <td role="gridcell" colspan="9">
                 <div class="slds-grid">
                     <div class="slds-col slds-size_1-of-1 slds-grid_vertical-align-center slds-cell-wrap slds-text-align_center">
                         <c:CustomToast message="{!v.toastMessage}" messageType="{!v.toastMessageType}"/>
