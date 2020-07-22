@@ -26890,6 +26890,10 @@
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>DiagnosisVerification_TestNoJS_VF</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>DiagnosisVerification_VF</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
