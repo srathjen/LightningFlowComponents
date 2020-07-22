@@ -616,7 +616,9 @@ public class DiagnosisVerification_AC {
                         }
                     }
                 }
-            }
+            }    /* Certain browser or network settings will sometimes cause the paramater to not be sent from the page. 
+                    These instances typically will also fail to call this particular method. A check in the save method will 
+                    ensure these cases go to Eligibility Review so there is no need to add an else statement here */
 
             setWishStatus();
 
@@ -867,6 +869,9 @@ public class DiagnosisVerification_AC {
         try {
             String currentConditionFormattedString = ApexPages.currentPage().getParameters().get('travelString');
             String currentConditionChosenString = ApexPages.currentPage().getParameters().get('collectedConditionValue');
+            
+            //In the event that wishChildEligibility check is not called due to browser or network issues, this will send the case to medical eligibility review.
+            setWishStatus(); 
 
             currLead.Treating_Medical_Professional_First_Name__c = wishChildWrapperIns.treatingFName ;
             currLead.Treating_Medical_Professional_Last_Name__c = wishChildWrapperIns.treatingLName;
@@ -897,7 +902,7 @@ public class DiagnosisVerification_AC {
             currLead.None_of_these_statements_describes_Child__c = false;
             currLead.Responds_to_treatment_with_normal_health__c = false;
             //SIW-508: Hide questions from Docusign
-            if (wishStatus == 'Qualified'){
+            if (wishStatus == Constant_AC.LEAD_STATUS_QUALIFIED)    {
                 currLead.Unplanned_hospital_admissions__c = null;
                 currLead.Number_hospital_admissions__c = null;
                 currLead.Admitting_diagnosis__c = null;
@@ -1189,8 +1194,8 @@ public class DiagnosisVerification_AC {
             currLead.Alternate2MedProfessionalPhone__c = wishChildWrapperIns.alt2MedPhone;
             currLead.Alternate2HospitalTreatmentFacility__c = wishChildWrapperIns.alt2MedHosp;
             
-            if (wishChildWrapperIns.vegetativeState == 'Yes') {
-                currLead.RFI_Form_Info_Hidden__c = 'Not Qualified';
+            if (wishChildWrapperIns.vegetativeState == Constant_AC.LEAD_COMATOSE_VEGETATIVE_STATE_YES) {
+                currLead.RFI_Form_Info_Hidden__c = Constant_AC.LEAD_RFI_FORM_INFO_NOT_QUALIFIED;
             }         
             
             update currLead;
@@ -1224,16 +1229,16 @@ public class DiagnosisVerification_AC {
         PageReference reference;
 
         try {
-            if (wishChildWrapperIns.medProfTypeHid == 'Treating Medical Professional') {
+            if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL) {
                 mySenderName = currLead.Treating_Medical_Professional_First_Name__c + ' ' + currLead.Treating_Medical_Professional_Last_Name__c;
                 myEmail = currLead.Treating_Medical_Professional_Email__c;
-            } else if (wishChildWrapperIns.medProfTypeHid == 'Best contact for Physician') {
+            } else if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_BEST_CONTACT) {
                 mySenderName = currLead.Best_Contact_for_Physician_First_Name__c + ' ' + currLead.Best_Contact_for_Physician_Last_Name__c;
                 myEmail = currLead.Best_contact_for_Physician_Email__c;
-            } else if (wishChildWrapperIns.medProfTypeHid == 'Alternate 1 Medical Professional') {
+            } else if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL) {
                 mySenderName = currLead.Alternate1MedProfessionalFirstName__c + ' ' + currLead.Alternate1MedProfessionalLastName__c;
                 myEmail = currLead.Alternate1MedicalProfessionalEmail__c;
-            } else if (wishChildWrapperIns.medProfTypeHid == 'Alternate 2 Medical Professional') {
+            } else if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_2_MEDICAL_PROFESSIONAL) {
                 mySenderName = currLead.Alternate2MedProfessionalFirstName__c + ' ' + currLead.Alternate2MedProfessionalLastName__c;
                 myEmail = currLead.Alternate2MedProfessionalEmail__c;
             } else {
