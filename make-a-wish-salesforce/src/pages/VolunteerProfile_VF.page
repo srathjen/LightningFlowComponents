@@ -63,9 +63,11 @@
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="row">
-                                    <label class="col-xs-6 col-sm-6">Title: </label><span
-                                            class="col-xs-6 col-sm-6 text-muted"><apex:outputfield
-                                                value="{!contactInstance[0].Salutation}" id="salutation"/></span>
+                                    <label class="col-xs-6 col-sm-6">Title: </label>
+                                    <span class="col-xs-6 col-sm-6 text-muted">
+                                        <apex:outputfield value="{!contactInstance[0].Salutation}"
+                                                          id="salutation"/>
+                                    </span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Name:</apex:outputLabel>
@@ -405,7 +407,8 @@
                                         <div class="col-sm-6">
                                             <apex:inputText styleClass="form-control name-group firstname"
                                                             html-placeholder="FirstName" maxlength="50"
-                                                            value="{!contactInstance[0].FirstName}" id="firstN"/>
+                                                            value="{!contactInstance[0].FirstName}"
+                                                            id="firstN"/>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -1000,7 +1003,8 @@
                             <div id="pageActions" class="form-group row">
                                 <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-6 col-md-push-10">
                                     <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md btn-p-save"
-                                                        value="Save" action="{!SavePersonalInfo}"/>
+                                                        value="Save" onclick="validateForm()"
+                                                        action="{!SavePersonalInfo}"/>
                                 </div>
                                 <div class="col-xs-12 col-sm-4 col-md-2 col-sm-pull-2 col-md-push-6">
                                     <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md" value="Cancel"
@@ -1505,76 +1509,6 @@
                     return this.optional(element) || /^\d{5}(?:-\d{4})?$/.test(value);
                 }, "Oops! Please enter a valid US postal code");
 
-                $('.btn-p-save').on('click', function () {
-                        console.log('Click');
-                        document.getElementById('{!$Component.formId.altemailaddress}').focus();
-
-                        $("select.f-state").chosen().change(function () {
-                            $(this).valid();
-                        });
-
-                        $("select.f-state").rules("add", {
-                            required: true,
-                            messages: {
-                                required: "Oops! Please select a state"
-                            }
-                        });
-
-                        $(".preferredemailtype option").each(function () {
-                            if ($(this).val() !== '') {
-                                const name = $(this).val().toLowerCase() + 'emailaddress';
-                                const optionFieldId = '.' + name;
-                                const spanFieldId = '#' + 'requiredspan-' + name;
-                                $(spanFieldId).hide(0);
-                                $(optionFieldId).rules("remove");
-                            }
-                        });
-
-                        var checkEmail;
-                        if ($(".preferredemailtype").val() != '') {
-                            varChangeLowerCase = $(".preferredemailtype").val();
-                            checkEmail = varChangeLowerCase.toLowerCase() + 'emailaddress';
-                        }
-
-                        if ($(".preferredemailtype").val() != '' && $("." + checkEmail).val() == '') {
-                            $("." + checkEmail).rules("add", {
-                                required: true,
-                                messages: {
-                                    required: "Oops! " + $(".preferredemailtype").val() + " email is required "
-                                }
-                            });
-                            const spanFieldId = '#' + 'requiredspan-' + checkEmail;
-                            $(spanFieldId).show(0);
-                        } else {
-                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").parent().removeClass("has-feedback");
-                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").parent().removeClass("has-error");
-                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").prev('div').children("label").css("color", "1px solid #ccc");
-                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("required");
-                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("describedby");
-                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("invalid");
-                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").css("border", "1px solid #ccc");
-                            $(".personalemailaddress, .workemailaddress, .alternateemailaddress").children(".help-block").remove();
-                        }
-
-                        if ($('form').valid()) {
-                            $('form').submit();
-                            // taken from rendered button in order to control submit (rerender="formId, uiStates")
-                            setTimeout(func, 2000);
-
-                            function func() {
-                                return A4J.AJAX.Submit('j_id0:formId', event, {
-                                    'similarityGroupingId': 'j_id0:formId:j_id320',
-                                    'html5Validate': true,
-                                    'parameters': {'j_id0:formId:j_id320': 'j_id0:formId:j_id320'}
-                                });
-                            }
-                        }
-
-                        document.getElementById('{!$Component.formId.altemailaddress}').focus();
-                    }
-
-                );
-
                 // emergency save btn
                 $('.btn-e-save').on('click', function () {
                     $("select.relationship").chosen().change(function () {
@@ -1617,67 +1551,70 @@
                 }
             }
 
-            function checkState() {
-                var t = $("select[id$='state']").val();
-                var s = '#' + $("select[id$='state']").attr('id') + '_chosen';
-                var ss = s.split(':').join('_');
-                if (t == '') {
-                    $('html, body').animate({scrollTop: $(ss).offset().top - 500}, 0);
-                    return false;
+            function validateForm() {
+                $("select.f-state").chosen().change(function () {
+                    $(this).valid();
+                });
+
+                $("select.f-state").rules("add", {
+                    required: true,
+                    messages: {
+                        required: "Oops! Please select a state"
+                    }
+                });
+
+                $(".preferredemailtype option").each(function () {
+                    if ($(this).val() !== '') {
+                        const name = $(this).val().toLowerCase() + 'emailaddress';
+                        const optionFieldId = '.' + name;
+                        const spanFieldId = '#' + 'requiredspan-' + name;
+                        $(spanFieldId).hide(0);
+                        $(optionFieldId).rules("remove");
+                    }
+                });
+
+                var checkEmail;
+                if ($(".preferredemailtype").val() != '') {
+                    varChangeLowerCase = $(".preferredemailtype").val();
+                    checkEmail = varChangeLowerCase.toLowerCase() + 'emailaddress';
                 }
 
-                var t = $("select[id$='lang']").val();
-                var s = '#' + $("select[id$='lang']").attr('id') + '_chosen';
-                var ss = s.split(':').join('_');
-                var c = $(ss).find('.chosen-choices').children().length;
-                if (c == 1) {
-                    $('html, body').animate({scrollTop: $(ss).offset().top - 500}, 0);
-                    return false;
+                if ($(".preferredemailtype").val() != '' && $("." + checkEmail).val() == '') {
+                    $("." + checkEmail).rules("add", {
+                        required: true,
+                        messages: {
+                            required: "Oops! " + $(".preferredemailtype").val() + " email is required "
+                        }
+                    });
+                    const spanFieldId = '#' + 'requiredspan-' + checkEmail;
+                    $(spanFieldId).show(0);
+                } else {
+                    $(".personalemailaddress, .workemailaddress, .alternateemailaddress").parent().removeClass("has-feedback");
+                    $(".personalemailaddress, .workemailaddress, .alternateemailaddress").parent().removeClass("has-error");
+                    $(".personalemailaddress, .workemailaddress, .alternateemailaddress").prev('div').children("label").css("color", "1px solid #ccc");
+                    $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("required");
+                    $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("describedby");
+                    $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("invalid");
+                    $(".personalemailaddress, .workemailaddress, .alternateemailaddress").css("border", "1px solid #ccc");
+                    $(".personalemailaddress, .workemailaddress, .alternateemailaddress").children(".help-block").remove();
                 }
 
-                var t = $("select[id$='read']").val();
-                var s = '#' + $("select[id$='read']").attr('id') + '_chosen';
-                var ss = s.split(':').join('_');
-                var c = $(ss).find('.chosen-choices').children().length;
-                if (c == 1) {
-                    $('html, body').animate({scrollTop: $(ss).offset().top - 500}, 0);
-                    return false;
+                if ($('form').valid()) {
+                    $('form').submit();
+                    // taken from rendered button in order to control submit (rerender="formId, uiStates")
+                    setTimeout(func, 2000);
+
+                    function func() {
+                        return A4J.AJAX.Submit('j_id0:formId', event, {
+                            'similarityGroupingId': 'j_id0:formId:j_id320',
+                            'html5Validate': true,
+                            'parameters': {'j_id0:formId:j_id320': 'j_id0:formId:j_id320'}
+                        });
+                    }
                 }
 
-                var t = $("select[id$='write']").val();
-                var s = '#' + $("select[id$='write']").attr('id') + '_chosen';
-                var ss = s.split(':').join('_');
-                var c = $(ss).find('.chosen-choices').children().length;
-                if (c == 1) {
-                    $('html, body').animate({scrollTop: $(ss).offset().top - 500}, 0);
-                    return false;
-                }
-
-                var t = $("select[id$='speak']").val();
-                var s = '#' + $("select[id$='speak']").attr('id') + '_chosen';
-                var ss = s.split(':').join('_');
-                var c = $(ss).find('.chosen-choices').children().length;
-                if (c == 1) {
-                    $('html, body').animate({scrollTop: $(ss).offset().top - 500}, 0);
-                    return false;
-                }
-
-                var t = $("select[id$='understand']").val();
-                var s = '#' + $("select[id$='understand']").attr('id') + '_chosen';
-                var ss = s.split(':').join('_');
-                var c = $(ss).find('.chosen-choices').children().length;
-                if (c == 1) {
-                    $('html, body').animate({scrollTop: $(ss).offset().top - 500}, 0);
-                    return false;
-                }
-                if ($(".preferredphonetype").val() == '' || $(".preferredphonetype").val() == 0) {
-                    $('html, body').animate({scrollTop: $(".preferredphonetype").offset().top - 1900}, 0);
-                    return false;
-                }
-                if ($(".preferredemailtype").val() == '' || $(".preferredemailtype").val() == 0) {
-                    $('html, body').animate({scrollTop: $(".preferredemailtype").offset().top - 1800}, 0);
-                    return false;
-                }
+                let inputsWithValidationErrors = document.querySelectorAll('.has-error input');
+                document.getElementById(inputsWithValidationErrors[0].id).focus();
             }
 
             function setDynamicRequiredFields() {
