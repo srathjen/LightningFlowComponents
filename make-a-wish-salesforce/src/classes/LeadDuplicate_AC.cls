@@ -16,85 +16,92 @@ Modification Log:
 							are members of the merge_fields fieldset
 ****************************************************************************************/
 public class LeadDuplicate_AC {
-	public String currId { get; set; }
-	public Lead currLead { get; set; }
-	public Integer selectedRecordsCount { get; private set; } {
-		this.selectedRecordsCount = 0;
-	}
-	public List<FieldRow> fieldRows { get; private set; }
-	private static final String MASTER_KEY = '$MASTER$';
-	public List<leadWrapper> wrapperList = new List<leadWrapper>();
-	private Map<String, Lead> selectedRecords;
-	public Integer step { get; private set; }
-	public Boolean isFamilyInfo { get; set; }
-	public String contactId { get; set; }
-	public String bestToConId { get; set; }
-	public String treatingContactId { get; set; }
-	public String medicalConId { get; set; }
-	public String alternate1ConId { get; set; }
-	public String alternate2ConId { get; set; }
-	public Boolean displayPartASuccess { get; set; }
-	public Boolean noDuplicate { get; set; }
-	public Boolean noDuplicateBtm { get; set; }
-	public String masterLeadId;
-	public Boolean displayLeadDupPopup { get; set; }
-	public String additionalParentId { get; set; }
-	public String render { get; set; }
-	private final Id wishFamilyRT = Constant_AC.WISH_FAMILY_RT_ID;
-	private final Id medicalProfessionalRT = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
-	private final Id wishChild = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
-	public Boolean hideTreatingSection { get; set; }
-	public Boolean paperDVProcess { get; set; }
-	public List<Lead> masterLeadList { get; set; }
+    public String currId { get; set; }
+    public Lead currLead { get; set; }
+    public Integer selectedRecordsCount { get; private set; } {
+        this.selectedRecordsCount = 0;
+    }
+    public List<FieldRow> fieldRows { get; private set; }
+    private static final String MASTER_KEY = '$MASTER$';
+    public List<leadWrapper> wrapperList = new List<leadWrapper>();
+    private Map<String, Lead> selectedRecords;
+    public Integer step { get; private set; }
+    public Boolean isFamilyInfo { get; set; }
+    public String contactId { get; set; }
+    public String bestToConId { get; set; }
+    public String treatingContactId { get; set; }
+    public String medicalConId { get; set; }
+    public String alternate1ConId { get; set; }
+    public String alternate2ConId { get; set; }
+    public Boolean displayPartASuccess { get; set; }
+    public Boolean noDuplicate { get; set; }
+    public Boolean noDuplicateBtm { get; set; }
+    public String masterLeadId;
+    public Boolean displayLeadDupPopup { get; set; }
+    public String additionalParentId { get; set; }
+    public String render { get; set; }
+    private final Id wishFamilyRT = Constant_AC.WISH_FAMILY_RT_ID;
+    private final Id medicalProfessionalRT = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+    private final Id wishChild = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
+    public Boolean hideTreatingSection { get; set; }
+    public Boolean paperDVProcess { get; set; }
+    public List<Lead> masterLeadList { get; set; }
+    public Boolean displayModalWarning { get; set; }
+    public Boolean displayMergeWarning { get; set; }
+    public Boolean displayQualifiedWarning { get; set; }
+    public String warningMsg { get; set;}
 
 	/**
 	 * Standard set controller for displaying matching duplicates
 	 * @param controller
 	 */
-	public LeadDuplicate_AC(ApexPages.StandardSetController controller) {
-		selectedRecords = new Map<String, Lead>();
-		fieldRows = new List<FieldRow>();
-		step = 2;
-		isFamilyInfo = false;
-		noDuplicate = false;
-		noDuplicateBtm = false;
-		displayLeadDupPopup = false;
-		hideTreatingSection = false;
-		paperDVProcess = false;
-		if (ApexPages.currentPage().getParameters().get('wishFamily') != null) {
-			isFamilyInfo = Boolean.valueOf(ApexPages.currentPage().getParameters().get('wishFamily'));
-		}
-		if (ApexPages.currentPage().getParameters().get('Id') != null) {
-			currId = ApexPages.currentPage().getParameters().get('Id');
-		}
-		if (currId != null) {
-			currLead = findLead(currId);
-			masterLeadList = new List<Lead>();
-			masterLeadList.add(currLead);
-		} else {
-			currLead = new Lead();
-		}
-		
-		// Checking medical info and treating medical info is same or not. if it is same, then we are displaying duplicates on same table.
-		if (currLead.Id != null) {
-			if (currLead.Medical_Professional_First_Name__c != null
-					&& currLead.Medical_Professional_Last_Name__c != null
-					&& (currLead.Medical_Professional_Phone__c != null
-					|| currLead.Medical_Professional_Email__c != null)) {
-				if (LeadService.isSameMedicalProfessional(
-						currLead.Medical_Professional_First_Name__c, currLead.Treating_Medical_Professional_First_Name__c,
-						currLead.Treating_Medical_Professional_Last_Name__c, currLead.Medical_Professional_Last_Name__c,
-						currLead.Treating_Medical_Professional_Phone__c, currLead.Medical_Professional_Phone__c,
-						currLead.Treating_Medical_Professional_Email__c, currLead.Medical_Professional_Email__c
-				)) {
-					hideTreatingSection = true;
-				}
-			}
-			if (currLead.Using_Paper_Process_For_DV__c) {
-				paperDVProcess = true;
-			}
-		}
-	}
+    public LeadDuplicate_AC(ApexPages.StandardSetController controller) {
+        selectedRecords = new Map<String, Lead>();
+        fieldRows = new List<FieldRow>();
+        step = 2;
+        isFamilyInfo = false;
+        noDuplicate = false;
+        noDuplicateBtm = false;
+        displayLeadDupPopup = false;
+        hideTreatingSection = false;
+        paperDVProcess = false;
+        displayModalWarning = false;
+        displayMergeWarning = false;
+        displayQualifiedWarning = false;
+        warningMsg = '';
+        if (ApexPages.currentPage().getParameters().get('wishFamily') != null) {
+            isFamilyInfo = Boolean.valueOf(ApexPages.currentPage().getParameters().get('wishFamily'));
+        }
+        if (ApexPages.currentPage().getParameters().get('Id') != null) {
+            currId = ApexPages.currentPage().getParameters().get('Id');
+        }
+        if (currId != null) {
+            currLead = findLead(currId);
+            masterLeadList = new List<Lead>();
+            masterLeadList.add(currLead);
+        } else {
+            currLead = new Lead();
+        }
+        // Checking medical info and treating medical info is same or not. if it is same, then we are displaying duplicates on same table.
+        if (currLead.Id != null) {
+            if (currLead.Medical_Professional_First_Name__c != null
+                && currLead.Medical_Professional_Last_Name__c != null
+                && (currLead.Medical_Professional_Phone__c != null
+                    || currLead.Medical_Professional_Email__c != null)) {
+                        if (LeadService.isSameMedicalProfessional(
+                            currLead.Medical_Professional_First_Name__c, currLead.Treating_Medical_Professional_First_Name__c,
+                            currLead.Treating_Medical_Professional_Last_Name__c, currLead.Medical_Professional_Last_Name__c,
+                            currLead.Treating_Medical_Professional_Phone__c, currLead.Medical_Professional_Phone__c,
+                            currLead.Treating_Medical_Professional_Email__c, currLead.Medical_Professional_Email__c
+                        )) {
+                            hideTreatingSection = true;
+                        }
+                    }
+            if (currLead.Using_Paper_Process_For_DV__c) {
+                paperDVProcess = true;
+            }
+        }
+    }
 
 	/**
 	 * Fetching all duplicate lead records related with current lead id.
@@ -618,6 +625,7 @@ public class LeadDuplicate_AC {
 	private void loadMergeCandidates(Set<Id> mergeCandidates) {
 		String LogValue;
 		String recId;
+        Boolean preventMerge = false;
 		try {
 			Boolean flag = true;
 			// Check we have atleast 2 and not more than 3 records selected for merge. If not throw an error.
@@ -698,6 +706,9 @@ public class LeadDuplicate_AC {
 				wrapperList.clear();
 				for (Lead c : leads) {
 					this.selectedRecords.put(c.Id, c);
+                    if(c.Status == Constant_AC.LEAD_STATUS_QUALIFIED) {
+                        preventMerge = true;
+                    }
 				}
 				// Sort the standard fields list by name before creating the list of FieldRow for merge UI
 				List<String> standardFieldList = new List<String>();
@@ -761,8 +772,14 @@ public class LeadDuplicate_AC {
 				}
 				fieldRows.add(createdByRow);
 				fieldRows.add(lastModifiedByRow);
+                // If everything looks good go to "choose winning contact" step
 				this.step = 3;
-				// If everything looks good go to "choose winning contact" step
+                // If any selected lead is Qualified display error
+                if(preventMerge == true) {
+                    warningMsg = Label.Duplicate_Lead_Merge_Restrict;
+                    displayQualifiedWarning = true;
+                    displayModalWarning = true;
+                }
 			}
 		} catch (Exception ex) {
 			LogValue = String.valueOf(currLead);
@@ -773,7 +790,30 @@ public class LeadDuplicate_AC {
 
 		}
 	}
-
+    
+    /**
+    * Show warning message to user when Merge button is clicked
+    */
+    public void showModalWarning() {
+        warningMsg = Label.Duplicate_Lead_Merge_Warning;
+        displayMergeWarning = true;
+        displayModalWarning = true;
+    }
+    
+    /**
+    * Close modal warning message
+    */
+    public void closeModalWarning() {
+        displayModalWarning = false;
+    }
+    
+    /**
+    * Return to original lead record
+    */
+    public PageReference returnToLead() {
+        return new PageReference('/' + currLead.Id);
+    }
+    
 	/**
 	 * @param fieldDesc
 	 * @return

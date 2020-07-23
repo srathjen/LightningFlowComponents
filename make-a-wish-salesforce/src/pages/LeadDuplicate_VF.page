@@ -218,6 +218,10 @@ Modification Log:
             left: 0;
             z-index: 9998;
         }
+        .popupForegroundModal {
+        	opacity: 1!important;
+      		z-index: 9999; 
+        }
         .dupHasRes { table-layout: fixed; }
         table td { overflow: hidden; }
         
@@ -1196,7 +1200,7 @@ Modification Log:
                 <div class="slds-card slds-m-horizontal--large slds-m-bottom--large hide-when-modal-open slds-m-top--medium">                   
                     <div class="slds-card__header slds-grid slds-grid--align-spread">
                         <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Selected Leads</h2>
-                        <button type="button" class="slds-button slds-button--brand" data-toggle="modal" data-target="merge_warning_modal">Merge</button>
+                        <apex:commandButton value="Merge" action="{!showModalWarning}" styleClass="slds-button slds-button--brand"/>
                     </div>
                     <div class="slds-card__body">
                         <table class="slds-table slds-table--bordered">
@@ -1305,36 +1309,32 @@ Modification Log:
                           </table>
                         </div>
                       </div>
-                      
-                       <div>
-                    <div id="merge_warning_modal" tabindex="-1" aria-hidden="true" role="dialog" class="slds-modal slds-modal--prompt">
-                        <div class="slds-modal__container slds-modal--prompt slds-size--1-of-3">
-                            <div class="slds-modal__header slds-theme--error slds-theme--alert-texture">
-                                <button class="slds-button slds-button--icon-inverse slds-modal__close" data-dismiss="modal" data-target="merge_warning_modal">
-                                    <svg aria-hidden="true" class="slds-button__icon slds-button__icon--large" viewBox="0 0 24 24">
-                                        <path  d="M14.3 11.7l6-6c.3-.3.3-.7 0-1l-.9-1c-.3-.2-.7-.2-1 0l-6 6.1c-.2.2-.5.2-.7 0l-6-6.1c-.3-.3-.7-.3-1 0l-1 1c-.2.2-.2.7 0 .9l6.1 6.1c.2.2.2.4 0 .6l-6.1 6.1c-.3.3-.3.7 0 1l1 1c.2.2.7.2.9 0l6.1-6.1c.2-.2.4-.2.6 0l6.1 6.1c.2.2.7.2.9 0l1-1c.3-.3.3-.7 0-1l-6-6c-.2-.2-.2-.5 0-.7z"/>
-                                    </svg>
-                                    <span class="slds-assistive-text">Close</span>
-                                </button>
-                            </div>
-                            <div class="slds-modal__content">
-                                <div>
+                
+                <!-- SIW-653 -->
+                <apex:outputPanel id="modalWarning">
+                    <apex:outputPanel rendered="{!displayModalWarning}">
+                        <section  role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small">
+                            <div class = "popupBackground"/>
+                            <div class="slds-modal__container slds-modal--prompt slds-size--1-of-3 popupForegroundModal">
+                                <div class="slds-modal__header slds-theme--error slds-theme--alert-texture">
+                                </div>
+                                <div class="slds-modal__content slds-p-around_medium">
                                     <p class="slds-text-align--center">
-                                        <apex:outputText value="Merging Leads is an irreversible process."/>
+                                        <apex:outputText value="{!warningMsg}"/>
                                     </p>
                                 </div>
-                            </div>
-                            <div class="slds-modal__footer slds-theme--default">
-                                <div class="slds-x-small-buttons--horizontal">
-                                    <apex:commandButton action="{!mergeContacts}" value="Merge" reRender="{!render}" styleClass="slds-button slds-button--destructive"/>
-                                    <button class="slds-button slds-button--neutral" data-dismiss="modal" data-target="merge_warning_modal">Cancel</button>
+                                <div class="slds-modal__footer slds-theme--default" style="{!IF(displayQualifiedWarning, '', 'display:none')}">
+                                    <apex:commandButton value="Close" action="{!returnToLead}" styleClass="slds-button slds-button--neutral"/>
+                                </div>
+                                <div class="slds-modal__footer slds-theme--default" style="{!IF(displayMergeWarning, '', 'display:none')}">
+                                    <apex:commandButton value="Merge" action="{!mergeContacts}" reRender="modalWarning" style="margin-bottom:3px;" styleClass="slds-button slds-button--neutral"/>
+                                    <apex:commandButton value="Cancel" action="{!closeModalWarning}" reRender="modalWarning" styleClass="slds-button slds-button--neutral"/>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="slds-backdrop" tabindex="-1"></div>
-                </div>
-            </apex:form>
+                        </section>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+              </apex:form>
 
             <script>
                 document.getElementById('{!$Component.mergeForm}').addEventListener(

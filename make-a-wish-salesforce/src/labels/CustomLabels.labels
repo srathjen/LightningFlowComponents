@@ -364,6 +364,22 @@
         <value>There might be a duplicate {0}. Please click [OK] to review the duplicates</value>
     </labels>
     <labels>
+        <fullName>Duplicate_Lead_Merge_Restrict</fullName>
+        <categories>Lead</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Duplicate Lead Merge Restrict</shortDescription>
+        <value>Once a lead has been Qualified, you are not able to merge it with another record. Please mark the non-qualified lead as a duplicate by updating its Lead Status and Sub Status.</value>
+    </labels>
+    <labels>
+        <fullName>Duplicate_Lead_Merge_Warning</fullName>
+        <categories>Lead</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Duplicate Lead Merge Warning</shortDescription>
+        <value>Merging Leads is an irreversible process.</value>
+    </labels>
+    <labels>
         <fullName>Dynamic_Font_Tag_With_Color</fullName>
         <language>en_US</language>
         <protected>false</protected>
