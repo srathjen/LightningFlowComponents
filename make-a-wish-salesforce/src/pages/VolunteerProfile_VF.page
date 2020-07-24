@@ -1612,9 +1612,12 @@
                         });
                     }
                 }
-
-                let inputsWithValidationErrors = document.querySelectorAll('.has-error input');
-                document.getElementById(inputsWithValidationErrors[0].id).focus();
+                let elementsWithError = document.querySelectorAll('.has-error');
+                if(elementsWithError !== undefined){
+                    if(elementsWithError[0].querySelector('input') !== undefined){
+                        elementsWithError[0].querySelector('input').focus();
+                    }
+                }
             }
 
             function setDynamicRequiredFields() {
