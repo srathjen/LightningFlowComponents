@@ -223,9 +223,17 @@ public without sharing class WishAffiliationDesign_AC {
 					updateContactRecord.Salutation = modifiedSalutation;
 					isUpdateContact = true;
 				}
-				if (isUpdateContact) {
-					update updateContactRecord;
-				}
+                //SIW-609 Birthdate and Residing with Wish Child fields can be updated if previous value blank
+                if(existingContact.Birthdate == null && modifiedContact.Birthdate != null) {
+                    updateContactRecord.Birthdate = modifiedContact.Birthdate;
+                    isUpdateContact = true;
+                }
+                if(oldWishAffiliation.wishAffRecord.Residing_with_Wish_child__c == null && wishAffiliation.wishAffRecord.Residing_with_Wish_child__c != null) {
+                    updateWishAffRecord.Residing_with_Wish_child__c = wishAffiliation.wishAffRecord.Residing_with_Wish_child__c;
+                }
+                if (isUpdateContact) {
+                    update updateContactRecord;
+                }
 			} else {
 				//Check if the value of fields got changed for Contact/Relationship/WishAffiliation
 				// Fields Wish Affiliation
