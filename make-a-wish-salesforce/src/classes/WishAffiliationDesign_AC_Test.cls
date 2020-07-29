@@ -124,7 +124,6 @@ public with sharing class WishAffiliationDesign_AC_Test {
         wishAffiliationsDataFactory[2].Survey_Recipient__c = false;
         wishAffiliationsDataFactory[2].Medical_Needs__c = false;
         wishAffiliationsDataFactory[2].Contact__c = wishFamilyContactMother.Id;
-        wishAffiliationsDataFactory[2].Residing_with_Wish_child__c = 'No';
         wishAffiliationsDataFactory[2].Wish_Affiliation_Type__c = 'Other';
         wishAffiliations.add(wishAffiliation);
         wishAffiliations.add(wishAffiliationsDataFactory[1]);
@@ -238,9 +237,84 @@ public with sharing class WishAffiliationDesign_AC_Test {
 
         Wish_Affiliation__c newWishAff = [SELECT Id, Name FROM Wish_Affiliation__c WHERE Contact__r.FirstName = 'James'];
         System.assertEquals(true, newWishAff != null);
-
-
     }
-
-
+    
+    @isTest
+    static void addUpdateAsParticipantByRestrictedUser() {
+        Wish_Affiliation__c wishAff = [
+            SELECT Id, Name, Wish_Affiliation_Type__c, Wish__c, Residing_with_Wish_child__c,Validated_in_Interview__c,
+            Contact__c, Contact__r.Name, Contact__r.FirstName, Contact__r.Middle_Name__c, Contact__r.LastName, Contact__r.Birthdate,
+            Contact__r.Email, Contact__r.T_Shirt_Size__c,Relationship__c, Relationship__r.npe4__Type__c
+            FROM Wish_Affiliation__c
+            WHERE Contact__r.FirstName = 'Lucy'
+        ];
+        WishAffiliationDesign_AC.WishAffiliationWrapper wrap = new WishAffiliationDesign_AC.WishAffiliationWrapper();
+        wrap.wishAffRecord = wishAff;
+        String payloadOriginal = JSON.serialize(wrap);
+        //Make updates to the same Wish Affiliation
+        Wish_Affiliation__c wishAffClone = wishAff.clone();
+        wishAffClone.Id = wishAff.Id;
+        wishAffClone.Contact__r.Birthdate = Date.parse('07/27/1985');
+        wishAffClone.Residing_with_Wish_child__c = 'Yes';
+        WishAffiliationDesign_AC.WishAffiliationWrapper wrapDup = new WishAffiliationDesign_AC.WishAffiliationWrapper();
+        wrapDup.wishAffRecord = wishAffClone;
+        String payloadDuplicate = JSON.serialize(wrapDup);
+        
+        Test.startTest();
+        WishAffiliationDesign_AC.addUpdateAsParticipant(payloadDuplicate, payloadOriginal);
+        Test.stopTest();
+        //Verify DOB and Residing with Wish Child updates save because fields were not previously populated
+        Wish_Affiliation__c wishAffUpdateCheck = [
+            SELECT Id, Residing_with_Wish_child__c 
+            FROM Wish_Affiliation__c 
+            WHERE Id = :wishAff.Id
+        ];
+        Contact contactUpdateCheck = [
+            SELECT Id, Birthdate 
+            FROM Contact 
+            WHERE Id = :wishAff.Contact__c
+        ];
+        System.assert(wishAffUpdateCheck.Residing_with_Wish_child__c == 'Yes');
+        System.assert(contactUpdateCheck.Birthdate == Date.parse('07/27/1985'));
+    }
+    
+    @isTest
+    static void addUpdateAsParticipantByRestrictedUserIgnoreChange() {
+        Wish_Affiliation__c wishAff = [
+            SELECT Id, Name, Wish_Affiliation_Type__c, Wish__c, Residing_with_Wish_child__c,Validated_in_Interview__c,
+            Contact__c, Contact__r.Name, Contact__r.FirstName, Contact__r.Middle_Name__c, Contact__r.LastName, Contact__r.Birthdate,
+            Contact__r.Email, Contact__r.T_Shirt_Size__c,Relationship__c, Relationship__r.npe4__Type__c
+            FROM Wish_Affiliation__c
+            WHERE Contact__r.FirstName = 'Lucy'
+        ];
+        wishAff.Contact__r.Birthdate = Date.parse('07/27/1980');
+        wishAff.Residing_with_Wish_child__c = 'Yes';
+        WishAffiliationDesign_AC.WishAffiliationWrapper wrap = new WishAffiliationDesign_AC.WishAffiliationWrapper();
+        wrap.wishAffRecord = wishAff;
+        String payloadOriginal = JSON.serialize(wrap);
+        //Make updates to the same Wish Affiliation
+        Wish_Affiliation__c wishAffClone = wishAff.clone();
+        wishAffClone.Contact__r.Birthdate = Date.parse('07/27/1985');
+        wishAffClone.Residing_with_Wish_child__c = 'No';
+        WishAffiliationDesign_AC.WishAffiliationWrapper wrapDup = new WishAffiliationDesign_AC.WishAffiliationWrapper();
+        wrapDup.wishAffRecord = wishAffClone;
+        String payloadDuplicate = JSON.serialize(wrapDup);
+        
+        Test.startTest();
+        WishAffiliationDesign_AC.addUpdateAsParticipant(payloadDuplicate, payloadOriginal);
+        Test.stopTest();
+        //Verify DOB and Residing with Wish Child values did not update because fields were already populated
+        Wish_Affiliation__c wishAffUpdateCheck = [
+            SELECT Id, Residing_with_Wish_child__c 
+            FROM Wish_Affiliation__c 
+            WHERE Id = :wishAff.Id
+        ];
+        Contact contactUpdateCheck = [
+            SELECT Id, Birthdate 
+            FROM Contact 
+            WHERE Id = :wishAff.Contact__c
+        ];
+        System.assert(wishAffUpdateCheck.Residing_with_Wish_child__c != 'No');
+        System.assert(contactUpdateCheck.Birthdate != Date.parse('07/27/1985'));
+    }
 }
