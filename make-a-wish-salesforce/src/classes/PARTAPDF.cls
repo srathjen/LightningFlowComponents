@@ -3,6 +3,7 @@ Author      : MST Solutions
 Date        : 9/30/2016
 Description : This class is used to display the Medical Information in Docusign page
 1. 09/04/2020 - Manoj      - SIW-355 : Added 2 new field to get queried on page load
+2. 29 Jul 2020 - Manoj      - SIW-378 : Added  fields in query for new questions
 *******************************************************************************************************************/
 public class PARTAPDF {
     public Id leadId { get; set; }
@@ -10,10 +11,10 @@ public class PARTAPDF {
     public String currentCondition { get; set; }
     public List<Diagnosis_Verification__c> diagnosisVerificationList { get; set; }
     public Map<Id, String> medicalQuestionMap { get; set; }
-    public List<String> currentConditionList { get; set; }
+    public List<String> currentConditionList { get; set; }    
 
     public PARTAPDF() {
-        currentConditionList = new List<String>();
+        currentConditionList = new List<String>();       
         leadId = ApexPages.currentPage().getParameters().get('leadId');
         diagnosisVerificationList = new List<Diagnosis_Verification__c>();
         medicalQuestionMap = new Map<Id, String>();
@@ -45,7 +46,12 @@ public class PARTAPDF {
             'Please_Explain_Deteriorate__c',
             'ICD_Given_By_Referrer__r.Name',
             'Expedite_timeframe__c',
-            'Other_expedite_timeframe_comments__c'
+            'Other_expedite_timeframe_comments__c',
+            'Does_Child_Have_Cognitive_Delays__c',
+            'Does_Child_Have_Speech_or_Language_Delay__c',
+            'Non_Verbal_Communication_Method__c',
+            'Non_Verbal_Additional_Information__c',
+            'Non_Verbal__c'
         };
 
         try {

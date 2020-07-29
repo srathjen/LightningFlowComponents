@@ -19,6 +19,7 @@
  * 5. 15 Apr 2020 - Chris Smith - SIW-497 : Provided check on Save & Next to make sure ICD Codes and Condition
  * 6. 01 Jun 2020 - Manoj - SIW-508 : Added conditions to hide hospitalization questions from docusign
  * 7. 12 Jun 2020 - Chris and Samer - SIW-508 : Fixed zero showing by default for number of hospitalizations.
+ * 8. 29 Jul 2020 - Manoj      - SIW-378 : Mapped the fields for new questions
  * Descriptions were looked up.
  **/
 public class DiagnosisVerification_AC {
@@ -136,6 +137,52 @@ public class DiagnosisVerification_AC {
         wishChildWrapperIns.timeFrameValue = currLead.Expedite_timeframe__c;
         wishChildWrapperIns.idealtimeFrameValue = currLead.Other_expedite_timeframe_comments__c;
         //SIW-355 End
+        //SIW-378 Start : Mapping Question response from lead to display on form on page load  
+        Set<String> levelSet = new Set<String>{'Mild: Functions close to peers','Moderate: Functions below peers','Severe: Functions nothing like same-age peers, extremely cognitively delayed.'};
+        if(levelSet.contains(currLead.Does_Child_Have_Cognitive_Delays__c)){
+            wishChildWrapperIns.levelOfDelay = currLead.Does_Child_Have_Cognitive_Delays__c;
+            wishChildWrapperIns.hasCogDelay = 'Yes';
+            if(currLead.Non_Verbal__c == 'Yes' && currLead.Does_Child_Have_Cognitive_Delays__c != Constant_AC.Same_Age_Peers){
+                wishChildWrapperIns.needDesire = Constant_AC.Child_Non_Verbal;
+            }
+        }else if(currLead.Does_Child_Have_Cognitive_Delays__c == 'No' || currLead.Does_Child_Have_Cognitive_Delays__c == Constant_AC.Follow_Medical_Team){
+            wishChildWrapperIns.hasCogDelay = currLead.Does_Child_Have_Cognitive_Delays__c;
+            if(currLead.Non_Verbal__c == 'Yes'){
+                wishChildWrapperIns.needDesire = Constant_AC.Child_Non_Verbal;
+            }
+        }   
+        wishChildWrapperIns.alterComm =  currLead.Does_Child_Have_Speech_or_Language_Delay__c;     
+        wishChildWrapperIns.nonVerbalAddInfo = currLead.Non_Verbal_Additional_Information__c; 
+        if(currLead.Non_Verbal__c == 'No'){
+            if(currLead.Does_Child_Have_Speech_or_Language_Delay__c == 'Yes'){
+                wishChildWrapperIns.needDesire = Constant_AC.Child_Verbal_Delayed;
+            }else{
+                wishChildWrapperIns.alterComm = Constant_AC.Child_Verbal_Age;
+            }           
+        } 
+        if(currLead.Non_Verbal_Communication_Method__c != null){
+        List<String> commList = currLead.Non_Verbal_Communication_Method__c.split(';');
+        if(commList.size() > 0){
+            for(String s : commList){
+                if(s==Constant_AC.Care_Giver){
+                    wishChildWrapperIns.careGiver = true;
+                }
+                if(s==Constant_AC.Point_Desired){
+                    wishChildWrapperIns.pointDesired = true;
+                }
+                if(s==Constant_AC.Child_Desire){
+                    wishChildWrapperIns.childDesire = true;
+                }
+                if(s==Constant_AC.Sign_Lang){
+                    wishChildWrapperIns.signLang = true;
+                }
+                if(s==Constant_AC.Assistive_Comm){
+                    wishChildWrapperIns.assistiveComm = true;
+                }
+            }
+        } 
+    }                   
+        //SIW-378 End
 
         if (currLead.Child_will_ultimately_die_prematurely__c == true) {
             wishChildWrapperIns.describePatient = '1';
@@ -1197,7 +1244,52 @@ public class DiagnosisVerification_AC {
             if (wishChildWrapperIns.vegetativeState == Constant_AC.LEAD_COMATOSE_VEGETATIVE_STATE_YES) {
                 currLead.RFI_Form_Info_Hidden__c = Constant_AC.LEAD_RFI_FORM_INFO_NOT_QUALIFIED;
             }         
+            //SIW-378 Start : Mapping Question response to save in lead  
+            if(wishChildWrapperIns.hasCogDelay == 'Yes'){
+                currLead.Does_Child_Have_Cognitive_Delays__c = wishChildWrapperIns.levelOfDelay;
+            }else{
+                currLead.Does_Child_Have_Cognitive_Delays__c = wishChildWrapperIns.hasCogDelay;
+            }   
+            currLead.Does_Child_Have_Speech_or_Language_Delay__c = wishChildWrapperIns.alterComm;
+            currLead.Non_Verbal__c = '';
+            if(wishChildWrapperIns.alterComm != 'Yes'){
+                wishChildWrapperIns.needDesire = '';
+            }           
+            if(wishChildWrapperIns.alterComm == Constant_AC.Child_Verbal_Age || wishChildWrapperIns.needDesire == Constant_AC.Child_Verbal_Delayed){
+                currLead.Non_Verbal__c = 'No';
+            }
+            if(wishChildWrapperIns.needDesire == Constant_AC.Child_Non_Verbal){
+                currLead.Non_Verbal__c = 'Yes';
+            }            
             
+            if(wishChildWrapperIns.levelOfDelay == Constant_AC.Same_Age_Peers){
+                currLead.Non_Verbal__c = 'Yes';
+                currLead.Does_Child_Have_Speech_or_Language_Delay__c = 'Yes';
+            }
+            currLead.Non_Verbal_Communication_Method__c = '';
+            currLead.Non_Verbal_Additional_Information__c ='';
+            if(wishChildWrapperIns.levelOfDelay == Constant_AC.Same_Age_Peers || wishChildWrapperIns.needDesire == Constant_AC.Child_Non_Verbal){
+            String str = '';
+            if(wishChildWrapperIns.careGiver == true){
+                str = str + Constant_AC.Care_Giver+';';
+            }
+            if(wishChildWrapperIns.pointDesired == true){
+                str = str + Constant_AC.Point_Desired +';';
+            }
+            if(wishChildWrapperIns.childDesire == true){
+                str = str + Constant_AC.Child_Desire +';';
+            }
+            if(wishChildWrapperIns.signLang == true){
+                str = str +  Constant_AC.Sign_Lang +';';
+            }
+            if(wishChildWrapperIns.assistiveComm == true){
+                str = str +  Constant_AC.Assistive_Comm +';';
+            }
+            currLead.Non_Verbal_Communication_Method__c = str.substringBeforeLast(';');
+            currLead.Non_Verbal_Additional_Information__c = wishChildWrapperIns.nonVerbalAddInfo;
+            }
+            //SIW-378 End
+
             update currLead;
             insert diagnosisVerificationLstForInsert;
             insert diagnosisMedicalQuestionLst;
@@ -1435,9 +1527,14 @@ public class DiagnosisVerification_AC {
                 'isConverted',
                 'Please_Explain_Deteriorate__c',
                 'Expedite_timeframe__c',
-                'Other_expedite_timeframe_comments__c'
+                'Other_expedite_timeframe_comments__c',
+                'Does_Child_Have_Cognitive_Delays__c',
+                'Does_Child_Have_Speech_or_Language_Delay__c',
+                'Non_Verbal_Communication_Method__c',
+                'Non_Verbal_Additional_Information__c',
+                'Non_Verbal__c'
         };
-
+           
         for (String field : FIELDS_TO_SELECT) {
             query += field + ',';
         }
