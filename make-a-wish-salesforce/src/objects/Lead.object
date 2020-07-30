@@ -448,6 +448,24 @@
         </valueSet>
     </fields>
     <fields>
+        <fullName>Appeal__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Appeal</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Appeal_date__c</fullName>
+        <externalId>false</externalId>
+        <label>Appeal date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Best_contact_for_Physician_Phone__c</fullName>
         <description>Stores the phone number for the Best Medical Contact</description>
         <externalId>false</externalId>
@@ -456,6 +474,77 @@
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Does_Child_Have_Cognitive_Delays__c</fullName>
+        <externalId>false</externalId>
+        <label>Does Child Have Cognitive Delays?</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+                <value>
+                    <fullName>I don’t have access to that information. I recommend the chapter follow up with the medical team.</fullName>
+                    <default>false</default>
+                    <label>I don't have access to that information. I recommend the chapter follow up with the medical team.</label>
+                </value>
+                <value>
+                    <fullName>Mild: Functions close to peers</fullName>
+                    <default>false</default>
+                    <label>Mild: Functions close to peers</label>
+                </value>
+                <value>
+                    <fullName>Moderate: Functions below peers</fullName>
+                    <default>false</default>
+                    <label>Moderate: Functions below peers</label>
+                </value>
+                <value>
+                    <fullName>Severe: Functions nothing like same-age peers, extremely cognitively delayed.</fullName>
+                    <default>false</default>
+                    <label>Severe: Functions nothing like same-age peers, extremely cognitively delayed.</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Does_Child_Have_Speech_or_Language_Delay__c</fullName>
+        <description>SIW-657</description>
+        <externalId>false</externalId>
+        <label>Does Child Have Speech/Language Delays?</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>No, child is verbal at an age-appropriate level.</fullName>
+                    <default>false</default>
+                    <label>No, child is verbal at an age-appropriate level.</label>
+                </value>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>I don't have access to that information. I recommend the chapter follow up with the medical team</fullName>
+                    <default>false</default>
+                    <label>I don't have access to that information. I recommend the chapter follow up with the medical team</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
     <fullName>Is_wish_referral_discussed_health_del__c</fullName>
@@ -1735,7 +1824,7 @@
         <fullName>Communication__c</fullName>
         <description>It will hold which type of communication can understand by child</description>
         <externalId>false</externalId>
-        <inlineHelpText>Communication level of the referred child</inlineHelpText>
+        <inlineHelpText>Historical Data. This field used to capture the communication level of the referred child. New questions have been added to the DV to capture this information in more detail.</inlineHelpText>
         <label>Communication</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -3660,13 +3749,92 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>Non_Verbal_Additional_Information__c</fullName>
+        <description>SIW-657</description>
+        <externalId>false</externalId>
+        <label>Non-Verbal Additional Information</label>
+        <length>1000</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>LongTextArea</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Non_Verbal_Communication_Method__c</fullName>
+        <description>SIW-657</description>
+        <externalId>false</externalId>
+        <label>Non-Verbal Communication Method</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Crying without the capacity to indicate needs or wants to a caregiver well known to the child</fullName>
+                    <default>false</default>
+                    <label>Crying without the capacity to indicate needs or wants to a caregiver well known to the child</label>
+                </value>
+                <value>
+                    <fullName>Pointing at desired objects, reaching out for something or someone they want,  taking your hand to what they want</fullName>
+                    <default>false</default>
+                    <label>Pointing at desired objects, reaching out for something or someone they want. Taking your hand to what they want</label>
+                </value>
+                <value>
+                    <fullName>Repeating something they just heard in a manner suggesting the child is desiring (as opposed to just echoing words)</fullName>
+                    <default>false</default>
+                    <label>Repeating something they just heard in a manner suggesting the child is desiring (as opposed to just echoing words)</label>
+                </value>
+                <value>
+                    <fullName>Sign language (either standard or specific to the child)</fullName>
+                    <default>false</default>
+                    <label>Sign language (either standard or specific to the child)</label>
+                </value>
+                <value>
+                    <fullName>Assistive communication tool, tablet, or computer</fullName>
+                    <default>false</default>
+                    <label>Assistive communication tool, tablet, or computer</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
         <fullName>Non_Verbal__c</fullName>
+        <description>SIW-657</description>
+        <externalId>false</externalId>
+        <label>Non-Verbal</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>xxNon_Verbal__c</fullName>
         <description>This field is indicate the communication is Non-Verbal or Not.</description>
         <externalId>false</externalId>
         <formula>IF(INCLUDES(Communication__c, 'This child is non-verbal'), 'Yes', 'No')</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <inlineHelpText>Field auto-populates based on selection made in Communication field.</inlineHelpText>
-        <label>Non - Verbal</label>
+        <label>xxNon - Verbal</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <type>Text</type>
