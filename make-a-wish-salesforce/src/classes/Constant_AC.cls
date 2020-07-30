@@ -526,30 +526,28 @@ public class Constant_AC {
     /*
      * Role (Role__c) Constants
      */
-    public final static String ROLE_WISH_GRANTER = 'Wish Granter';
-    
-     /*
+    public final static String ROLE_WISH_GRANTER = 'Wish Granter';	
+  
+	 /*
      * SIW-378: labels for static text
      */
-    public final static String SAME_AGE_PEERS = 'Severe: Functions nothing like same-age peers, extremely cognitively delayed.';
-    public final static String CHILD_VERBAL_AGE = 'No, child is verbal at an age-appropriate level.';
-    public final static String CHILD_VERBAL_DELAYED = 'Yes, child is verbal but delayed and able to be understood by others';
-    public final static String CHILD_NON_VERBAL = 'No, child is non-verbal';
-    public final static String CARE_GIVER = 'Crying without the capacity to indicate needs or wants to a caregiver well known to the child';
-    public final static String POINT_DESIRED = 'Pointing at desired objects, reaching out for something or someone they want,  taking your hand to what they want';
-    public final static String CHILD_DESIRE = 'Repeating something they just heard in a manner suggesting the child is desiring (as opposed to just echoing words)';
-    public final static String SIGN_LANG = 'Sign language (either standard or specific to the child)';
-     public final static String ASSISTIVE_COMM = 'Assistive communication tool, tablet, or computer';
-     public final static String FOLLOW_MEDICAL_TEAM = 'I don’t have access to that information. I recommend the chapter follow up with the medical team';
-     public final static String HELP_TEXT_COGNITIVE = '(This question does not affect eligibility criteria. If the child’s condition is eligible, this information helps our volunteers and staff to plan an appropriate wish.)';
-     public final static String MILD_FUNCTION = 'Mild: Functions close to peers';
-     public final static String MODERATE_FUNCTION = 'Moderate: Functions below peers';
-     public final static String PLEASE_SELECT_ALL = '(Please select all that apply)';
-     public final static String PLACEHOLDER_ADD_INFO = 'Please add any additional information about the child’s ability to communicate.';
-     public final static String PLEASE_SELECT_TEXT = 'Please Select';
-     public final static String SELECTED_TEXT = 'selected';
-     public final static String YES_TEXT = 'Yes';
-     public final static String NO_TEXT = 'No';
-
-    
+	public final static String SAME_AGE_PEERS = 'Severe: Functions nothing like same-age peers, extremely cognitively delayed.';
+	public final static String CHILD_VERBAL_AGE = 'No, child is verbal at an age-appropriate level.';
+	public final static String CHILD_VERBAL_DELAYED = 'Yes, child is verbal but delayed and able to be understood by others';
+	public final static String CHILD_NON_VERBAL = 'No, child is non-verbal';
+	public final static String CARE_GIVER = 'Crying without the capacity to indicate needs or wants to a caregiver well known to the child';
+	public final static String POINT_DESIRED = 'Pointing at desired objects, reaching out for something or someone they want,  taking your hand to what they want';
+	public final static String CHILD_DESIRE = 'Repeating something they just heard in a manner suggesting the child is desiring (as opposed to just echoing words)';
+	public final static String SIGN_LANG = 'Sign language (either standard or specific to the child)';
+   public final static String ASSISTIVE_COMM = 'Assistive communication tool, tablet, or computer';
+   public final static String FOLLOW_MEDICAL_TEAM = 'I don’t have access to that information. I recommend the chapter follow up with the medical team';
+   public final static String HELP_TEXT_COGNITIVE = '(This question does not affect eligibility criteria. If the child’s condition is eligible, this information helps our volunteers and staff to plan an appropriate wish.)';
+   public final static String MILD_FUNCTION = 'Mild: Functions close to peers';
+   public final static String MODERATE_FUNCTION = 'Moderate: Functions below peers';
+   public final static String PLEASE_SELECT_ALL = '(Please select all that apply)';
+   public final static String PLACEHOLDER_ADD_INFO = 'Please add any additional information about the child’s ability to communicate.';
+   public final static String PLEASE_SELECT_TEXT = 'Please Select';
+   public final static String SELECTED_TEXT = 'selected';
+   public final static String YES_TEXT = 'Yes';
+   public final static String NO_TEXT = 'No';
 }

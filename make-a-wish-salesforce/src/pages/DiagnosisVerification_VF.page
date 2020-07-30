@@ -18,7 +18,8 @@ Modification Log:
 12.09/04/2020 - Manoj      - SIW-355 : Added 2 new questions. Also changed the placement of one question as mentiond in the ticket.
 13.28/05/2020 - Manoj      - SIW-262 : Made page scrollable to the fields in case of any error
 14.30/05/2020 - Manoj      - SIW-508 : Hide Hospitalization Questions if DV is autoqualifying
-15.02/06/2020 - Manoj      - SIW-557: Updated placeholder to 'Acute Lymphoblastic Leukemia (ALL)' from 'Malignant Neoplasm' and to 'C91.0' from 'C00'
+15.02/06/2020 - Manoj      - SIW-557 : Updated placeholder to 'Acute Lymphoblastic Leukemia (ALL)' from 'Malignant Neoplasm' and to 'C91.0' from 'C00'
+16.29/07/2020 - Manoj      - SIW-378 : Added and hide Questions as mentioned in ticket
 *********************************************************************************************************************************** -->
 <apex:page controller="DiagnosisVerification_AC" applyBodyTag="false" sidebar="false" showHeader="false" docType="html-5.0" standardStylesheets="false" title="Make-A-Wish | Diagnosis Verification Form" cache="false">
     <script>
@@ -56,6 +57,14 @@ Modification Log:
         .travel-wrap .seperator-top {padding:1rem 0; margin:0}
         .travel-wrap .disabled {color:#ccc; cursor:not-allowed;}
         .travel-wrap .inline-block {display: inline-block;}
+        .commNeed > div > div > div, .commNeed select {margin-left:2rem; width:calc(100% - 2rem)}
+        .commNeed > div > div > div, .commNeed select {margin-left:2rem; width:calc(100% - 2rem)}
+        .commNeed .form-group, .commNeed .form-check-label {margin-bottom:.5rem;}
+        .commNeed label {display:block}
+        .commNeed label + span {margin-bottom:1rem;}
+        .commNeed .seperator-top {padding:1rem 0; margin:0}
+        .commNeed .disabled {color:#ccc; cursor:not-allowed;}
+        .commNeed .inline-block {display: inline-block;}
         /* autocomplete drop-down */
         .ui-widget-content li {padding-left:1rem}
         .option-disabled {cursor:not-allowed !important;color:#bbb;opacity:1 !important;padding:.5rem 0 !important;border-bottom:1px dashed #bbb;margin-bottom:1rem !important;margin-left:1rem !important;font-size:.8rem;}
@@ -756,20 +765,8 @@ Modification Log:
                                             <div class="form-group row ideal-timeframe fadein-alert">                                                
                                                 <div class="col-md-6"><apex:inputTextarea styleClass="form-control ideal-time" html-maxlength="10000" html-placeholder="Please describe the ideal timeframe" value="{!wishChildWrapperIns.idealtimeFrameValue}" id="idealTime"/></div>
                                             </div> 
-                                            <!--SIW-355 End : Added new question-->                                           
-                                            
-                                            <div class="form-group row">
-                                                <div class="col-md-12"><label>In order to facilitate communication, please select all that apply to {!currLead.FirstName} {!currLead.LastName}</label></div>
-                                                 <div class="col-md-12">
-                                                            <span class="text-muted">(The following information was submitted by the person who referred the child. Please update as needed.) </span>
-                                                        </div>
-                                                <div class="col-md-6">
-                                                    <apex:selectList value="{!wishChildWrapperIns.communicationList}" multiselect="true" size="5" styleClass="form-control multi-lvl-one chosen multiCom">
-                                                        <apex:selectOptions value="{!wishChildWrapperIns.Communications}" />
-                                                    </apex:selectList>
-                                                </div>
-                                            </div>
-                                            
+                                            <!--SIW-355 End : Added new question--> 
+
                                         </div>
                                         <!-------------------------- Wish Not Eligible Section Block Starts ---------------------------->
                                         <apex:outputPanel id="notEligible">
@@ -802,7 +799,98 @@ Modification Log:
                                             </div>
                                             <!-- SIW-233 End -->
                                         </div>
-                                        
+                                        <!--SIW-378 Start : Added Question--> 
+                                        <div class="form-group row">
+                                        <div class="col-md-12"><label>Does {!currLead.FirstName} {!currLead.LastName} have cognitive delays?</label></div>
+                                        <div class="col-md-6">
+                                            <apex:selectList value="{!wishChildWrapperIns.hasCogDelay}" multiselect="false" size="1" styleClass="form-control c-select hasCog requiredField" id="hasDelay">
+                                            <apex:selectOption itemlabel="{!pleaseSelectText}" itemvalue="" html-selected="{!selectedText}"/>
+                                            <apex:selectOption itemlabel="{!noText}" itemvalue="{!noText}" />
+                                            <apex:selectOption itemLabel="{!yesText}" itemValue="{!yesText}"/>
+                                            <apex:selectOption itemLabel="{!followMedicalTeam}" itemValue="{!followMedicalTeam}"/>                                            
+                                        </apex:selectList>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <span class="text-muted">{!helpTextCognitive}</span>
+                                        </div>
+                                        </div>
+
+                                        <div class="form-group row indLevelDelay">
+                                            <div class="col-md-12"><label>Please indicate the level of delay.</label></div>
+                                            <div class="col-md-6">
+                                                <apex:selectList value="{!wishChildWrapperIns.levelOfDelay}" multiselect="false" size="1" styleClass="form-control c-select levDelay requiredField" id="levelDelay">
+                                                <apex:selectOption itemlabel="{!pleaseSelectText}" itemvalue="" html-selected="{!selectedText}"/>
+                                                <apex:selectOption itemlabel="{!mildFunction}" itemvalue="{!mildFunction}" />
+                                                <apex:selectOption itemLabel="{!moderateFunction}" itemValue="{!moderateFunction}"/>
+                                                <apex:selectOption itemLabel="{!sameAgePeers}" itemValue="{!sameAgePeers}"/>                                            
+                                            </apex:selectList>
+                                            </div>                                            
+                                            </div>
+                                            <!--Q2-->
+                                            <div class="form-group row alterComm">
+                                                <div class="col-md-12"><label>Does {!currLead.FirstName} {!currLead.LastName} have speech or language delays or use an alternative form of communication?</label></div>
+                                                <div class="col-md-6">
+                                                    <apex:selectList value="{!wishChildWrapperIns.alterComm}" multiselect="false" size="1" styleClass="form-control c-select alComm requiredField" id="alternateComm">
+                                                    <apex:selectOption itemlabel="{!pleaseSelectText}" itemvalue="" html-selected="{!selectedText}"/>
+                                                    <apex:selectOption itemlabel="{!childVerbalAge}" itemvalue="{!childVerbalAge}" />
+                                                    <apex:selectOption itemLabel="{!yesText}" itemValue="{!yesText}"/>
+                                                    <apex:selectOption itemLabel="{!followMedicalTeam}" itemValue="{!followMedicalTeam}"/>                                            
+                                                </apex:selectList>
+                                                </div>                                            
+                                            </div>
+
+                                                <div class="form-group row needDesire">
+                                                    <div class="col-md-12"><label>Can {!currLead.FirstName} {!currLead.LastName} express their needs and desires by saying them with words?</label></div>
+                                                    <div class="col-md-6">
+                                                        <apex:selectList value="{!wishChildWrapperIns.needDesire}" multiselect="false" size="1" styleClass="form-control c-select neeDes" id="needDes">
+                                                        <apex:selectOption itemlabel="{!pleaseSelectText}" itemvalue="" html-selected="{!selectedText}"/>
+                                                        <apex:selectOption itemlabel="{!childVerbalDelayed}" itemvalue="{!childVerbalDelayed}" />
+                                                        <apex:selectOption itemLabel="{!childNonVerbal}" itemValue="{!childNonVerbal}"/>
+                                                    </apex:selectList>
+                                                    </div>                                            
+                                                    </div>  
+                                                                                                                                                             
+                                                            <div class="commNeed">
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-12"><label>Which of the following best describes how {!currLead.FirstName} {!currLead.LastName} communicates needs and wants?</label> <span class="text-muted">{!pleaseSelectAllText}</span></div>
+                                                                </div>  
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-12">
+                                                                        <label class="form-check-label"><apex:inputCheckbox value="{!wishChildWrapperIns.careGiver}"  styleClass="comm_check_checkbox"/>{!careGiver}</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-12">
+                                                                        <label class="form-check-label"><apex:inputcheckbox value="{!wishChildWrapperIns.pointDesired}"  styleClass="comm_check_checkbox"/>{!pointDesired}</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-12">
+                                                                        <label class="form-check-label"><apex:inputcheckbox value="{!wishChildWrapperIns.childDesire}"  styleClass="comm_check_checkbox"/>{!childDesire}</label>
+                                                                    </div>
+                                                                </div> 
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-12">
+                                                                        <label class="form-check-label"><apex:inputcheckbox value="{!wishChildWrapperIns.signLang}"  styleClass="comm_check_checkbox"/>{!signLang}</label>
+                                                                    </div>
+                                                                </div> 
+                                                                <div class="form-group row ">
+                                                                    <div class="col-md-12">
+                                                                        <label class="form-check-label"><apex:inputcheckbox value="{!wishChildWrapperIns.assistiveComm}" styleClass="comm_check_checkbox"/>{!assistiveComm}</label>
+                                                                    </div>
+                                                                </div> 
+                                                                <div class="form-group row ">
+                                                                    <div class="col-md-6">
+                                                                        <apex:inputTextarea styleClass="form-control coNeed" html-maxlength="10000" value="{!wishChildWrapperIns.nonVerbalAddInfo}"  html-placeholder="{!placeHolderAddInfo}" />
+                                                                    </div>                                                                                                                     
+                                                                 </div>  
+                                                                </div>                                                      
+                                                                                                                                            
+                                                       
+                                                     
+                                        <!--SIW-378 End--> 
+
+
                                         <!--<div class="form-group row">
 <div class="col-md-6"><label>Is there additional information you would like to provide?</label></div>
 <div class="col-md-6">
@@ -1360,7 +1448,7 @@ Modification Log:
                                         <div class="col-md-12">
                                             <!--<apex:commandButton value="Save" style="border-right:1px solid #fff" styleClass="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md saveMedicalInfoBtn" action="{!SaveMedicalInformation}" rerender="diagonsisLoop,findAndReplace,notEligible" onClick="checkfunction();" onComplete="ShowSuccessMsg();"/>-->
                                             <input type="button" style="border-right:1px solid #fff" class="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md saveMedicalInfoBtn" value="Save" onClick="checkfunction();"/>
-                                            <input type="button" class="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md SS-btn" value="Save & Next" onclick="setTimeout(changeControl, 2100)"/>
+                                            <input type="button" class="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md SS-btn" value="Save & Next" onclick="validateMultiPicklist();setTimeout(changeControl, 2100)"/>
                                         </div>
                                     </fieldset>
                                     <script>
@@ -1630,6 +1718,141 @@ Modification Log:
                                         }
                                         //SIW-355 End
 
+                                            //SIW-378 Start : Added CSS to display follow up question on DV form 
+                                            $('.indLevelDelay').prop('hidden', true);
+                                            $('.alterComm').prop('hidden', true);
+                                            $('.commNeed').prop('hidden', true);
+                                            $('.needDesire').prop('hidden', true);
+                                        $('[id$=hasDelay]').on('change', function() {  
+                                            $('.needDesire').prop('hidden', true); 
+                                            $('.commNeed').prop('hidden', true);  
+                                            $('.needDesire').val("");    
+                                            $('.commNeed').val("");                                       
+                                            if(this.value == '{!yesText}') {
+                                                $('.indLevelDelay').prop('hidden', false);
+												$('.alterComm').prop('hidden', true); 
+												$(".levDelay").addClass("requiredField");
+                                                $('.levDelay').val("");                                                 												
+                                            } else if(this.value == ''){
+                                                $('.alterComm').prop('hidden', true);
+												$(".alComm").removeClass("requiredField");
+                                                $('.indLevelDelay').prop('hidden', true);  
+												$(".levDelay").removeClass("requiredField");
+                                            }else   {                                                
+                                                $('.indLevelDelay').prop('hidden', true);  
+												$('.alterComm').prop('hidden', false); 
+                                                $(".alComm").addClass("requiredField");
+												$(".levDelay").removeClass("requiredField");
+                                                $('.alComm').val("");
+                                            }
+                                        });
+                                        //display Follow up question if answer to previous question is Yes on page load
+                                        if ($('[id$=hasDelay]').val() != null && $('[id$=hasDelay]').val() != ''){
+                                            if ($('[id$=hasDelay]').val().indexOf('{!yesText}') != -1){
+                                                $('.indLevelDelay').prop('hidden', false);
+												$('.alterComm').prop('hidden', true);
+												$(".levDelay").addClass("requiredField");												
+                                            }else{
+												$('.alterComm').prop('hidden', false);
+												 $('.indLevelDelay').prop('hidden', true);
+												 $(".levDelay").removeClass("requiredField");
+											}
+                                        }
+                                       
+                                        $('[id$=alternateComm]').on('change', function() { 
+                                            $('.commNeed').prop('hidden', true);  
+                                            $(".neeDes").val("");                                          
+                                            if(this.value == '{!yesText}') {
+                                                $('.needDesire').prop('hidden', false);
+												$(".neeDes").addClass("requiredField");                                                
+                                            } else {                                                
+                                                $('.needDesire').prop('hidden', true);
+												$(".neeDes").removeClass("requiredField");                                               												
+                                            }
+                                        });
+                                        //display Follow up question if answer to previous question is Yes on page load
+                                        if ($('[id$=alternateComm]').val() != null && $('[id$=alternateComm]').val() != ''){
+                                            if ($('[id$=alternateComm]').val().indexOf('{!yesText}') != -1){
+                                                $('.needDesire').prop('hidden', false);	
+												$(".neeDes").addClass("requiredField");												
+                                            }else{
+												$('.needDesire').prop('hidden', true);
+												$(".neeDes").removeClass("requiredField");
+											}
+                                        }                                         
+                                        $('[id$=needDes]').on('change', function() {                                                                                     
+                                            if(this.value == '{!childNonVerbal}') {
+                                                $('.commNeed').prop('hidden', false);
+												$(".coNeed").addClass("requiredField");	
+                                                var x = document.querySelectorAll(".comm_check_checkbox");
+                                                var y = document.querySelectorAll(".coNeed");                                               
+                                                for(var i=0; i<x.length; i++){
+                                                    x[i].checked = false;
+                                                }      
+                                                y[0].value = '';   											
+                                            } else {                                                
+                                                $('.commNeed').prop('hidden', true); 
+												$(".coNeed").removeClass("requiredField");												
+                                            }
+                                        });
+                                        //display Follow up question if answer to previous question is 'No, child is non-verbal' on page load
+                                        if ($('[id$=needDes]').val() != null && $('[id$=needDes]').val() != ''){
+                                            if ($('[id$=needDes]').val().indexOf('{!childNonVerbal}') != -1){
+                                                $('.commNeed').prop('hidden', false);	
+												$(".coNeed").addClass("requiredField");												
+                                            }else{
+												$('.commNeed').prop('hidden', true);
+												$(".coNeed").removeClass("requiredField");
+											}
+                                        }
+                                        $('[id$=levelDelay]').on('change', function() {    
+                                            $('.needDesire').prop('hidden', true);     
+                                            $('.neeDes').val("");   
+                                            $('.alComm').val("");                                 
+                                            if(this.value == '{!sameAgePeers}') {
+												$('.alterComm').prop('hidden', true);
+												$(".alComm").removeClass("requiredField");
+                                                $('.commNeed').prop('hidden', false); 
+                                                var x = document.querySelectorAll(".comm_check_checkbox");
+                                                var y = document.querySelectorAll(".coNeed");                                               
+                                                for(var i=0; i<x.length; i++){
+                                                    x[i].checked = false;
+                                                }      
+                                                y[0].value = '';                                                												
+                                            } else if(this.value == ''){
+                                                $('.alterComm').prop('hidden', true);
+												$(".alComm").removeClass("requiredField");
+                                                $('.commNeed').prop('hidden', true); 
+												    $(".coNeed").removeClass("requiredField");
+                                            }else  {                                                
+                                                $('.commNeed').prop('hidden', true); 
+												$('.alterComm').prop('hidden', false);
+												$(".alComm").addClass("requiredField");
+                                               
+                                            }
+                                        });                                        
+                                        //display Follow up question if answer to previous question is 'Severe: Functions nothing like same-age peers, extremely cognitively delayed' on page load
+                                        if ($('[id$=levelDelay]').val() != null && $('[id$=levelDelay]').val() != ''){
+                                            if ($('[id$=levelDelay]').val().indexOf('{!sameAgePeers}') != -1){
+                                                $('.commNeed').prop('hidden', false);
+												$(".coNeed").addClass("requiredField");
+												$('.alterComm').prop('hidden', true);
+												$(".alComm").removeClass("requiredField");
+                                                if($('[id$=needDes]').val() == ''){
+                                                    $('.needDesire').prop('hidden', true);
+												$(".neeDes").removeClass("requiredField");
+                                                }												
+                                            }else{
+                                                $('.alterComm').prop('hidden', false);
+												$(".alComm").addClass("requiredField");
+                                                if($('[id$=needDes]').val() == '{!childVerbalDelayed}'){
+                                                    $('.commNeed').prop('hidden', true); 
+												    $(".coNeed").removeClass("requiredField");
+                                                }
+											}
+                                        }
+                                        //SIW-378 End
+
                                         // hide condition deteriorate explain textbox onload
                                         $('.condition-deteriorate-explain').prop('hidden', true);
                                         // show/hide condition deteriorate textbox
@@ -1653,11 +1876,13 @@ Modification Log:
                                         // set required field for multiselect (chosen)
                                         function multiCom(){
                                             var mc = $('.multiCom');
+                                            //alert('pp '+$(mc).val());
                                             if ($(mc).val() != null && $(mc).val().length > 0){
                                                 $(mc).next('.chosen-container-multi').removeClass('requiredField');
                                                 $(mc).next('.chosen-container-multi').css('border','');
                                             } else {
                                                 $(mc).next('.chosen-container-multi').addClass('requiredField');
+                                               // $(mc).next('.chosen-container-multi').css('border','1px solid rgb(255, 0, 0)');
                                             }
                                         } multiCom();
                                         $('.multiCom').on('change', function(){
@@ -2429,6 +2654,24 @@ Modification Log:
                                                 $(".unplanned-text").removeClass("requiredField");
                                                 $('.unplanned-admission').prop('hidden', true);                                                
                                             } 
+        }    
+        function validateMultiPicklist(){
+            var x = document.querySelectorAll(".comm_check_checkbox");
+            var y = document.querySelectorAll(".coNeed");
+            var isAnyChecked = false;
+            for(var i=0; i<x.length; i++){
+                if(x[i].checked == true){
+                    isAnyChecked = true;
+                    break;
+                }
+            }
+            if(isAnyChecked == true || y[0].value != ''){
+                $(".coNeed").removeClass("requiredField");
+                $('.commNeed').css('border','');
+            }else{
+                $(".coNeed").addClass("requiredField");              
+                $('.commNeed').css('border','1px solid rgb(255, 0, 0)');
+            }           
         }
         </script>
     </body>
