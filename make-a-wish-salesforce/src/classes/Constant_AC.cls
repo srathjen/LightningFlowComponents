@@ -169,7 +169,7 @@ public class Constant_AC {
     public static final String CASE_STATUS_PENDING_CLARIFICATION_MAC = 'Pending Clarification - MAC';
     public static final String CASE_STATUS_PENDING_CLARIFICATION_MAC_CONSULT_REQ = 'Pending Clarification - MAC Consult Req';
     public static final String CASE_STATUS_PENDING_CLARIFICATION_CHAPTER = 'Pending Clarification - Chapter';
-    public static final String Case_Status_On_Appeal = 'Additional Information for Review';
+    public static final String CASE_STATUS_ON_APPEAL = 'Additional Information for Review';
     public static final String CASE_SUB_STATUS_PENDING = 'Pending';
     public static final String CASE_SUB_STATUS_ABANDONED = 'Abandoned';
     public static final String CASE_SUB_STATUS_DNQ_MEDICAL = 'DNQ - Medical';
@@ -526,19 +526,19 @@ public class Constant_AC {
     /*
      * Role (Role__c) Constants
      */
-	public final static String ROLE_WISH_GRANTER = 'Wish Granter';
-	
-	 /*
+    public final static String ROLE_WISH_GRANTER = 'Wish Granter';
+    
+     /*
      * SIW-378: labels for static text
      */
-	public final static String SAME_AGE_PEERS = 'Severe: Functions nothing like same-age peers, extremely cognitively delayed.';
-	public final static String CHILD_VERBAL_AGE = 'No, child is verbal at an age-appropriate level.';
-	public final static String CHILD_VERBAL_DELAYED = 'Yes, child is verbal but delayed and able to be understood by others';
-	public final static String CHILD_NON_VERBAL = 'No, child is non-verbal';
-	public final static String CARE_GIVER = 'Crying without the capacity to indicate needs or wants to a caregiver well known to the child';
-	public final static String POINT_DESIRED = 'Pointing at desired objects, reaching out for something or someone they want,  taking your hand to what they want';
-	public final static String CHILD_DESIRE = 'Repeating something they just heard in a manner suggesting the child is desiring (as opposed to just echoing words)';
-	public final static String SIGN_LANG = 'Sign language (either standard or specific to the child)';
+    public final static String SAME_AGE_PEERS = 'Severe: Functions nothing like same-age peers, extremely cognitively delayed.';
+    public final static String CHILD_VERBAL_AGE = 'No, child is verbal at an age-appropriate level.';
+    public final static String CHILD_VERBAL_DELAYED = 'Yes, child is verbal but delayed and able to be understood by others';
+    public final static String CHILD_NON_VERBAL = 'No, child is non-verbal';
+    public final static String CARE_GIVER = 'Crying without the capacity to indicate needs or wants to a caregiver well known to the child';
+    public final static String POINT_DESIRED = 'Pointing at desired objects, reaching out for something or someone they want,  taking your hand to what they want';
+    public final static String CHILD_DESIRE = 'Repeating something they just heard in a manner suggesting the child is desiring (as opposed to just echoing words)';
+    public final static String SIGN_LANG = 'Sign language (either standard or specific to the child)';
      public final static String ASSISTIVE_COMM = 'Assistive communication tool, tablet, or computer';
      public final static String FOLLOW_MEDICAL_TEAM = 'I don’t have access to that information. I recommend the chapter follow up with the medical team';
      public final static String HELP_TEXT_COGNITIVE = '(This question does not affect eligibility criteria. If the child’s condition is eligible, this information helps our volunteers and staff to plan an appropriate wish.)';

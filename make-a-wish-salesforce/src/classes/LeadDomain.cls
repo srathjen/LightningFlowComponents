@@ -39,8 +39,6 @@ public class LeadDomain extends trac_TriggerHandlerBase {
     Map<Id, Lead> newLeadsMap = (Map<Id, Lead>) newRecordsMap;
     Map<Id, Lead> oldLeadsMap = (Map<Id, Lead>) oldRecordsMap;
 
-    Map<Id, Case> existingEligibilityCases = new Map<Id, Case>();
-
     /**
      * Before insert of Lead
      */
@@ -319,6 +317,7 @@ public class LeadDomain extends trac_TriggerHandlerBase {
            // SIW-309 : Added logic to create eligibility review case 
             if(!appealLeadList.isEmpty()){
                 List<Lead> appealsToUpdate = new List<Lead>();
+                /* May want to move this to LeadService at a later date */
                 for(Lead appealLead : appealLeadList)   {
                     if(existingEligibilityCases.containsKey(appealLead.id))    {
                         appealsToUpdate.add(appealLead);
