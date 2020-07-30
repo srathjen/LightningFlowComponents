@@ -2448,6 +2448,11 @@
         <visible>false</visible>
     </applicationVisibilities>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Appeal__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Contact.MP_Additional_Clinical_Details__c</field>
         <readable>true</readable>

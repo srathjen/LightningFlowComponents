@@ -644,7 +644,7 @@
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
     </fields>
-        <fields>
+    <fields>
         <fullName>Will_Childs_Condition_Deteriorate__c</fullName>
         <externalId>false</externalId>
         <label>Will Child’s Condition Deteriorate?</label>
@@ -673,6 +673,18 @@
                 </value>
             </valueSetDefinition>
         </valueSet>
+    </fields>
+    <fields>
+        <fullName>Appeal__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead__r.Appeal__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>This checkbox cannot be edited on the Case. Please use the Appeal checkbox on the Lead.</inlineHelpText>
+        <label>Appeal</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+
     </fields>
     <fields>
         <fullName>Final_Close_Letter_Sent__c</fullName>
