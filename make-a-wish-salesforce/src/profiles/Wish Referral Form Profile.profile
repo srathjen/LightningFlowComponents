@@ -11975,6 +11975,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Lead.xxNon_Verbal__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Lead_File__c.Content_Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
