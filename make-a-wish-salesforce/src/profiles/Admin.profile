@@ -2449,6 +2449,21 @@
     </applicationVisibilities>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.MP_Additional_Clinical_Details__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Condition_Deteriorate_Explanation__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Will_Childs_Condition_Deteriorate__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Case.Final_Close_Letter_Sent__c</field>
         <readable>true</readable>
     </fieldPermissions>

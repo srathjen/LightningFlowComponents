@@ -16,8 +16,16 @@
     <objectMapping>
         <inputObject>Lead</inputObject>
         <mappingFields>
+            <inputField>Why_do_you_feel_would_be_eligible_Wish__c</inputField>
+            <outputField>MP_Additional_Clinical_Details__c</outputField>
+        </mappingFields>
+        <mappingFields>
             <inputField>Auto_Qualified__c</inputField>
             <outputField>Auto_Qualified__c</outputField>
+        </mappingFields>
+        <mappingFields>
+            <inputField>Non_Verbal__c</inputField>
+            <outputField>Non_Verbal__c</outputField>
         </mappingFields>
         <mappingFields>
             <inputField>ChapterName__c</inputField>
@@ -48,6 +56,22 @@
             <outputField>Part_A_Received__c</outputField>
         </mappingFields>
         <mappingFields>
+            <inputField>Does_Child_Have_Cognitive_Delays__c</inputField>
+            <outputField>Cognitive_Delays__c</outputField>
+        </mappingFields>
+        <mappingFields>
+            <inputField>Does_Child_Have_Speech_or_Language_Delay__c</inputField>
+            <outputField>Does_Child_Have_Speech_Language_Delays__c</outputField>
+        </mappingFields>
+        <mappingFields>
+            <inputField>Part_A_Sent__c</inputField>
+            <outputField>Part_A_Sent__c</outputField>
+        </mappingFields>
+        <mappingFields>
+            <inputField>Expedite_timeframe__c</inputField>
+            <outputField>Expedite_timeframe__c</outputField>
+        </mappingFields>
+        <mappingFields>
             <inputField>Gender__c</inputField>
             <outputField>Gender__c</outputField>
         </mappingFields>
@@ -68,16 +92,24 @@
             <outputField>Provided_additional_information__c</outputField>
         </mappingFields>
         <mappingFields>
-            <inputField>Non_Verbal__c</inputField>
-            <outputField>Non_Verbal__c</outputField>
+            <inputField>Non_Verbal_Additional_Information__c</inputField>
+            <outputField>Non_Verbal_Additional_Information__c</outputField>
+        </mappingFields>
+        <mappingFields>
+            <inputField>Non_Verbal_Communication_Method__c</inputField>
+            <outputField>Non_Verbal_Communication_Method__c</outputField>
         </mappingFields>
         <mappingFields>
             <inputField>Other_diagnosis__c</inputField>
             <outputField>Other_diagnosis__c</outputField>
         </mappingFields>
         <mappingFields>
-            <inputField>Part_A_Sent__c</inputField>
-            <outputField>Part_A_Sent__c</outputField>
+            <inputField>Other_expedite_timeframe_comments__c</inputField>
+            <outputField>Other_expedite_timeframe_comments__c</outputField>
+        </mappingFields>
+        <mappingFields>
+            <inputField>OtherLanguage__c</inputField>
+            <outputField>Language_Notes__c</outputField>
         </mappingFields>
         <mappingFields>
             <inputField>PR_Diagnosis__c</inputField>
