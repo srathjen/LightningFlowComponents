@@ -4,6 +4,7 @@
  * Description :
  * 1. 01/09/2020 - Manoj      - SIW-287 : Added new fields to insert values in lead records upon submission of DV form.
  * 2. 09/04/2020 - Manoj      - SIW-355 : Added 2 new field in wrapper - timeFrameValue, idealtimeFrameValue
+ * 3. 29/07/2020 - Manoj      - SIW-378 : Added  new fields in wrapper mentioned in section
  **/
 public class WishChildWrapper {
     public String describePatient { get; set; }
@@ -70,6 +71,18 @@ public class WishChildWrapper {
     public String timeFrameValue { get; set; }
     public String idealtimeFrameValue { get; set; }
     /*SIW-355 End*/
+    /*SIW-378 Start*/
+    public String hasCogDelay { get; set; }
+    public String levelOfDelay { get; set; }
+    public String alterComm { get; set; }
+    public String needDesire { get; set; }    
+    public String nonVerbalAddInfo { get; set; }
+    public Boolean careGiver { get; set; }
+    public Boolean pointDesired { get; set; }
+    public Boolean childDesire { get; set; }
+    public Boolean signLang { get; set; }
+    public Boolean assistiveComm { get; set; }
+    /*SIW-378 End*/
     public WishChildWrapper() {
         communicationList = new List<String>();
     }

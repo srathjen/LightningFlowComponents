@@ -3,6 +3,7 @@
 2. 01/02/2020 - Manoj      - SIW-288 : Updated Question verbiage and help text on DV question.
 3. 11/02/2020 - Manoj      - SIW-376 : Commented first 2 statements as per SIW-376
 4. 09/04/2020 - Manoj      - SIW-355 : Changed the placement of one question as mentiond in the ticket, changed question verbiage for one question
+5. 29/07/2020 - Manoj      - SIW-378 : Added and hide Questions as mentioned in ticket
 *********************************************************************************************************************************** -->
 <apex:page showHeader="false" renderAs="pdf" sidebar="false" applyHtmlTag="false" standardStylesheets="false" controller="PARTAPDF" applyBodyTag="false" cache="false">
     <head>
@@ -408,15 +409,7 @@
                                             </table>
                                         </div>
                                     </div>
-                                </apex:outputPanel>
-                                
-                                
-                                <apex:outputpanel rendered="{!currLead.Communication__c != Null}">
-                                    <div class="container" style="width:100%;">
-                                        <div class="left-col"> In order to facilitate communication, please select all that apply to {!currLead.FirstName} {!currLead.LastName} :</div>
-                                        <div class="left-col"> {!currLead.Communication__c}</div>
-                                    </div>
-                                </apex:outputpanel>
+                                </apex:outputPanel> 
                                 
                                 <!--SIW-355 Start: Changed placement of below question -->
                                 <apex:outputpanel rendered="{!currLead.Will_Child_s_Condition_Deteriorate__c!=Null}">
@@ -471,6 +464,75 @@
                                     </div>
                                 </apex:outputpanel>
                                
+                                
+                                 <!--SIW-378 Start : Added Question--> 
+                                 <apex:outputpanel rendered="{!currLead.Does_Child_Have_Cognitive_Delays__c!=Null}">
+                                    <apex:outputpanel rendered="{!or(currLead.Does_Child_Have_Cognitive_Delays__c == noText,currLead.Does_Child_Have_Cognitive_Delays__c == followMedicalTeam)}">
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Does {!currLead.FirstName} {!currLead.LastName} have cognitive delays?</div>
+                                        <div class="left-col"> {!currLead.Does_Child_Have_Cognitive_Delays__c}</div>
+                                    </div>
+                                    </apex:outputpanel>                                
+                                <apex:outputpanel rendered="{!or(currLead.Does_Child_Have_Cognitive_Delays__c == mildFunction,currLead.Does_Child_Have_Cognitive_Delays__c == moderateFunction,currLead.Does_Child_Have_Cognitive_Delays__c == sameAgePeers)}">
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Does {!currLead.FirstName} {!currLead.LastName} have cognitive delays?</div>
+                                        <div class="left-col"> Yes</div>
+                                    </div>   
+                                <div class="container" style="width:100%;">
+                                        <div class="left-col"> Please indicate the level of delay.</div>
+                                        <div class="left-col"> {!currLead.Does_Child_Have_Cognitive_Delays__c}</div>
+                                    </div>
+                                </apex:outputpanel>
+                            </apex:outputpanel>
+                                <apex:outputpanel rendered="{!And(currLead.Does_Child_Have_Speech_or_Language_Delay__c!=Null,currLead.Does_Child_Have_Cognitive_Delays__c != sameAgePeers)}">
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Does {!currLead.FirstName} {!currLead.LastName} have speech or language delays or use an alternative form of communication?</div>
+                                        <div class="left-col"> {!currLead.Does_Child_Have_Speech_or_Language_Delay__c}</div>
+                                    </div>
+                                </apex:outputpanel>
+                                <apex:outputpanel rendered="{!currLead.Non_Verbal__c!=Null}">
+                                    <apex:outputpanel rendered="{!or(currLead.Does_Child_Have_Cognitive_Delays__c == noText,currLead.Does_Child_Have_Cognitive_Delays__c == followMedicalTeam)}">
+                                        <apex:outputpanel rendered="{!currLead.Non_Verbal__c==yesText}">    
+                                            <div class="container" style="width:100%;">
+                                                <div class="left-col"> Can {!currLead.FirstName} {!currLead.LastName} express their needs and desires by saying them with words?</div>
+                                                <div class="left-col"> No, child is non-verbal</div>
+                                            </div>
+                                        </apex:outputpanel>
+                                    </apex:outputpanel>
+                                    <apex:outputpanel rendered="{!or(currLead.Does_Child_Have_Cognitive_Delays__c == mildFunction,currLead.Does_Child_Have_Cognitive_Delays__c == moderateFunction,currLead.Does_Child_Have_Cognitive_Delays__c == sameAgePeers)}">
+                                        <apex:outputpanel rendered="{!And(currLead.Non_Verbal__c==yesText,currLead.Does_Child_Have_Cognitive_Delays__c != sameAgePeers)}">    
+                                            <div class="container" style="width:100%;">
+                                                <div class="left-col"> Can {!currLead.FirstName} {!currLead.LastName} express their needs and desires by saying them with words?</div>
+                                                <div class="left-col"> No, child is non-verbal</div>
+                                            </div>
+                                        </apex:outputpanel>
+                                    </apex:outputpanel>
+                                    <apex:outputpanel rendered="{!currLead.Non_Verbal__c== noText}">                                        
+                                        <apex:outputpanel rendered="{!currLead.Does_Child_Have_Speech_or_Language_Delay__c == yesText}">    
+                                            <div class="container" style="width:100%;">
+                                                <div class="left-col"> Can {!currLead.FirstName} {!currLead.LastName} express their needs and desires by saying them with words?</div>
+                                                <div class="left-col"> Yes, child is verbal but delayed and able to be understood by others</div>
+                                            </div>
+                                        </apex:outputpanel>
+                                        <apex:outputpanel rendered="{!and(currLead.Does_Child_Have_Speech_or_Language_Delay__c != yesText,currLead.Does_Child_Have_Speech_or_Language_Delay__c != childVerbalAge)}">    
+                                            <div class="container" style="width:100%;">
+                                                <div class="left-col"> Can {!currLead.FirstName} {!currLead.LastName} express their needs and desires by saying them with words?</div>
+                                                <div class="left-col"> No, child is verbal at an age-appropriate level.</div>
+                                            </div>
+                                        </apex:outputpanel>
+                                    </apex:outputpanel>
+                                </apex:outputpanel>
+                                <apex:outputpanel rendered="{!currLead.Non_Verbal_Communication_Method__c!=Null}">
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Which of the following best describes how {!currLead.FirstName} {!currLead.LastName} communicates needs and wants?</div>
+                                        <div class="left-col"> {!currLead.Non_Verbal_Communication_Method__c}</div>
+                                    </div>
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"></div>
+                                        <div class="left-col"> {!currLead.Non_Verbal_Additional_Information__c}</div>
+                                    </div>
+                                </apex:outputpanel>
+                                 <!--SIW-378 End--> 
                                 
                                 <!--<div class="container" style="width:100%;">
                                     <div class="left-col"> Travel Algorithm :</div>

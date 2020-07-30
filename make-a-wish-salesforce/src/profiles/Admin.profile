@@ -11729,6 +11729,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Lead.Appeal__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Appeal_date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Lead.Approximate_Diagnosis_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -11920,6 +11930,16 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Lead.DoNotCall</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Does_Child_Have_Cognitive_Delays__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Does_Child_Have_Speech_or_Language_Delay__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -12283,7 +12303,17 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
+        <field>Lead.Non_Verbal_Additional_Information__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Non_Verbal_Communication_Method__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Lead.Non_Verbal__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -13290,6 +13320,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Lead.unique_wish_identifier__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.xxNon_Verbal__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
