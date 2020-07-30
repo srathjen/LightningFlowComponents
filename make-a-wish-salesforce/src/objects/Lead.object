@@ -1824,7 +1824,7 @@
         <fullName>Communication__c</fullName>
         <description>It will hold which type of communication can understand by child</description>
         <externalId>false</externalId>
-        <inlineHelpText>Communication level of the referred child</inlineHelpText>
+        <inlineHelpText>Historical Data. This field used to capture the communication level of the referred child. New questions have been added to the DV to capture this information in more detail.</inlineHelpText>
         <label>Communication</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -3803,12 +3803,38 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
     </fields>
     <fields>
         <fullName>Non_Verbal__c</fullName>
+        <description>SIW-657</description>
+        <externalId>false</externalId>
+        <label>Non-Verbal</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>xxNon_Verbal__c</fullName>
         <description>This field is indicate the communication is Non-Verbal or Not.</description>
         <externalId>false</externalId>
         <formula>IF(INCLUDES(Communication__c, 'This child is non-verbal'), 'Yes', 'No')</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <inlineHelpText>Field auto-populates based on selection made in Communication field.</inlineHelpText>
-        <label>Non - Verbal</label>
+        <label>xxNon - Verbal</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <type>Text</type>
