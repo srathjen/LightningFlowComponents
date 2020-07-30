@@ -115,6 +115,7 @@ public class Constant_AC {
     public static final String LEAD_SUB_STATUS_PENDING_PART_A = 'Pending Part A';
     public static final String LEAD_SUB_STATUS_PENDING_PAPER_DV = 'Pending Paper DV';
     public static final String LEAD_SUB_STATUS_PENDING_CLARIFICATION_CHAPTER = 'Pending Clarification - Chapter';
+    public static final String LEAD_SUB_STATUS_ADDITIONAL_INFORMATION_FOR_REVIEW = 'Additional Information for Review';
     public static final String LEAD_SUB_STATUS_MEDICAL_REVIEWED = 'Medical Reviewed'; //SIW-524 DNQ-Medical Lead Sub-Status Changes
     public static final String LEAD_DUP_CHECK_BLOCK_LEAD_DUP = 'Block Lead Dup';
     public static final String LEAD_DUP_CHECK_BLOCK_CONTACT_DUP = 'Block Contact Dup';
@@ -168,6 +169,7 @@ public class Constant_AC {
     public static final String CASE_STATUS_PENDING_CLARIFICATION_MAC = 'Pending Clarification - MAC';
     public static final String CASE_STATUS_PENDING_CLARIFICATION_MAC_CONSULT_REQ = 'Pending Clarification - MAC Consult Req';
     public static final String CASE_STATUS_PENDING_CLARIFICATION_CHAPTER = 'Pending Clarification - Chapter';
+    public static final String CASE_STATUS_ON_APPEAL = 'Additional Information for Review';
     public static final String CASE_SUB_STATUS_PENDING = 'Pending';
     public static final String CASE_SUB_STATUS_ABANDONED = 'Abandoned';
     public static final String CASE_SUB_STATUS_DNQ_MEDICAL = 'DNQ - Medical';
@@ -498,6 +500,7 @@ public class Constant_AC {
      * Case Team Member Role Constants
      */
     public static final String CASE_TEAM_ROLE_INTAKE_MANAGER = 'Intake Manager';
+    public static final String CASE_TEAM_ROLE_National_Staff_MANAGER = 'Full Access National Staff';
     public static final String CASE_TEAM_ROLE_VOLUNTEER_MANAGER = 'Volunteer Manager';
     public static final String CASE_TEAM_ROLE_VOLUNTEER_MANAGER_INACTIVE = 'Volunteer Manager (Inactive)';
     public static final String CASE_TEAM_ROLE_WISH_COORDINATOR_INACTIVE = 'Wish Coordinator (Inactive)';
@@ -523,8 +526,8 @@ public class Constant_AC {
     /*
      * Role (Role__c) Constants
      */
-	public final static String ROLE_WISH_GRANTER = 'Wish Granter';
-	
+    public final static String ROLE_WISH_GRANTER = 'Wish Granter';	
+  
 	 /*
      * SIW-378: labels for static text
      */
@@ -536,17 +539,15 @@ public class Constant_AC {
 	public final static String POINT_DESIRED = 'Pointing at desired objects, reaching out for something or someone they want,  taking your hand to what they want';
 	public final static String CHILD_DESIRE = 'Repeating something they just heard in a manner suggesting the child is desiring (as opposed to just echoing words)';
 	public final static String SIGN_LANG = 'Sign language (either standard or specific to the child)';
-     public final static String ASSISTIVE_COMM = 'Assistive communication tool, tablet, or computer';
-     public final static String FOLLOW_MEDICAL_TEAM = 'I don’t have access to that information. I recommend the chapter follow up with the medical team';
-     public final static String HELP_TEXT_COGNITIVE = '(This question does not affect eligibility criteria. If the child’s condition is eligible, this information helps our volunteers and staff to plan an appropriate wish.)';
-     public final static String MILD_FUNCTION = 'Mild: Functions close to peers';
-     public final static String MODERATE_FUNCTION = 'Moderate: Functions below peers';
-     public final static String PLEASE_SELECT_ALL = '(Please select all that apply)';
-     public final static String PLACEHOLDER_ADD_INFO = 'Please add any additional information about the child’s ability to communicate.';
-     public final static String PLEASE_SELECT_TEXT = 'Please Select';
-     public final static String SELECTED_TEXT = 'selected';
-     public final static String YES_TEXT = 'Yes';
-     public final static String NO_TEXT = 'No';
-
-    
+   public final static String ASSISTIVE_COMM = 'Assistive communication tool, tablet, or computer';
+   public final static String FOLLOW_MEDICAL_TEAM = 'I don’t have access to that information. I recommend the chapter follow up with the medical team';
+   public final static String HELP_TEXT_COGNITIVE = '(This question does not affect eligibility criteria. If the child’s condition is eligible, this information helps our volunteers and staff to plan an appropriate wish.)';
+   public final static String MILD_FUNCTION = 'Mild: Functions close to peers';
+   public final static String MODERATE_FUNCTION = 'Moderate: Functions below peers';
+   public final static String PLEASE_SELECT_ALL = '(Please select all that apply)';
+   public final static String PLACEHOLDER_ADD_INFO = 'Please add any additional information about the child’s ability to communicate.';
+   public final static String PLEASE_SELECT_TEXT = 'Please Select';
+   public final static String SELECTED_TEXT = 'selected';
+   public final static String YES_TEXT = 'Yes';
+   public final static String NO_TEXT = 'No';
 }
