@@ -776,7 +776,7 @@ public class LeadDomain extends trac_TriggerHandlerBase {
      */
     private static Boolean isAppealLead(Lead newLead,Lead oldLead) {
         return newLead.Status == Constant_AC.LEAD_STATUS_ELIGIBILITY_REVIEW && oldLead.Status == Constant_AC.LEAD_STATUS_DNQ && newLead.Appeal__c == true
-            && (Utils.currentUser.Profile.Name == Constant_AC.CASE_TEAM_ROLE_INTAKE_MANAGER || Utils.currentUser.Profile.Name == 'System Administrator' || Utils.currentUser.Profile.Name == Constant_AC.CASE_TEAM_ROLE_National_Staff_MANAGER);
+            && (Utils.currentUser.Profile.Name == Constant_AC.CASE_TEAM_ROLE_INTAKE_MANAGER || Utils.currentUser.Profile.Name == Constant_AC.PROFILE_SYSTEM_ADMINISTRATOR || Utils.currentUser.Profile.Name == Constant_AC.CASE_TEAM_ROLE_National_Staff_MANAGER);
     }    
     
 /* SIW-309 : Check if Appeal is successful or not
@@ -786,6 +786,6 @@ public class LeadDomain extends trac_TriggerHandlerBase {
 */
     private static Boolean isAppealUnsuccessful(Lead newLead,Lead oldLead) {
         return newLead.Status == Constant_AC.LEAD_STATUS_DNQ && oldLead.Status == Constant_AC.LEAD_STATUS_ELIGIBILITY_REVIEW && newLead.Appeal__c == true
-            && ( Utils.currentUser.Profile.Name == 'System Administrator' || Utils.currentUser.Profile.Name == Constant_AC.CASE_TEAM_ROLE_National_Staff_MANAGER);    
+            && ( Utils.currentUser.Profile.Name == Constant_AC.PROFILE_SYSTEM_ADMINISTRATOR || Utils.currentUser.Profile.Name == Constant_AC.CASE_TEAM_ROLE_National_Staff_MANAGER);    
     } 
 }

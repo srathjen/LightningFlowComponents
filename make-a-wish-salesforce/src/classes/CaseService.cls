@@ -1738,7 +1738,7 @@ public class CaseService {
      */
     private static Boolean appealCheck(Lead appealLead) {
         return appealLead.Appeal__c == true
-            && (Utils.currentUser.Profile.Name == 'System Administrator' || Utils.currentUser.Profile.Name == Constant_AC.CASE_TEAM_ROLE_National_Staff_MANAGER);
+            && (Utils.currentUser.Profile.Name == Constant_AC.PROFILE_SYSTEM_ADMINISTRATOR || Utils.currentUser.Profile.Name == Constant_AC.CASE_TEAM_ROLE_National_Staff_MANAGER);
     }     
 
     /**
