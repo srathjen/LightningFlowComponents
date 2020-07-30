@@ -59,6 +59,27 @@ public class DiagnosisVerification_AC {
             new Map<Id, Condition_Description__c>(ALL_CONDITION_DESCRIPTIONS);
     private static final String RED = 'Red'; 
 
+    //SIW-378 : Adding labels to be used in VF page
+    public final String sameAgePeers { get; set; }
+    public final String childVerbalAge { get; set; }
+    public final String childVerbalDelayed { get; set; }
+    public final String childNonVerbal { get; set; }
+    public final String careGiver { get; set; }
+    public final String pointDesired { get; set; }
+    public final String childDesire { get; set; }
+    public final String signLang { get; set; }
+    public final String assistiveComm { get; set; }
+    public final String followMedicalTeam { get; set; }
+    public final String pleaseSelectText { get; set; }
+    public final String selectedText { get; set; }
+    public final String yesText { get; set; }
+    public final String noText { get; set; }
+    public final String helpTextCognitive { get; set; }
+    public final String mildFunction { get; set; }
+    public final String moderateFunction { get; set; }
+    public final String pleaseSelectAllText { get; set; }
+    public final String placeHolderAddInfo { get; set; }
+
     public DiagnosisVerification_AC() {
         pluHypTxt = '';
         wishChildWrapperIns = new WishChildWrapper();
@@ -68,6 +89,28 @@ public class DiagnosisVerification_AC {
         wrapCls = new DiagnosisWrapper();
         currLead = new Lead();
         icdLookupAttempted = false;
+
+        //SIW-378 : Assigning text from Constant__AC class
+        sameAgePeers = Constant_AC.SAME_AGE_PEERS;
+        childVerbalAge = Constant_AC.CHILD_VERBAL_AGE;
+        childVerbalDelayed = Constant_AC.CHILD_VERBAL_DELAYED;
+        childNonVerbal = Constant_AC.CHILD_NON_VERBAL;
+        careGiver = Constant_AC.CARE_GIVER;
+        pointDesired = Constant_AC.POINT_DESIRED;
+        childDesire = Constant_AC.CHILD_DESIRE;
+        signLang = Constant_AC.SIGN_LANG;
+        assistiveComm = Constant_AC.ASSISTIVE_COMM;
+        followMedicalTeam = Constant_AC.FOLLOW_MEDICAL_TEAM;
+        pleaseSelectText = Constant_AC.PLEASE_SELECT_TEXT;
+        selectedText = Constant_AC.SELECTED_TEXT;
+        yesText = Constant_AC.YES_TEXT;
+        noText = Constant_AC.NO_TEXT;
+        helpTextCognitive = Constant_AC.HELP_TEXT_COGNITIVE;
+        mildFunction = Constant_AC.MILD_FUNCTION;
+        moderateFunction = Constant_AC.MODERATE_FUNCTION;
+        pleaseSelectAllText = Constant_AC.PLEASE_SELECT_ALL;
+        placeHolderAddInfo = Constant_AC.PLACEHOLDER_ADD_INFO;
+
         leadId = ApexPages.currentPage().getParameters().get('leadId');
 
         if (leadId != null && leadId.length() > 0) {
@@ -136,53 +179,7 @@ public class DiagnosisVerification_AC {
         //SIW-355 Start : Mapped 2 new added questions value to lead field on loading of page
         wishChildWrapperIns.timeFrameValue = currLead.Expedite_timeframe__c;
         wishChildWrapperIns.idealtimeFrameValue = currLead.Other_expedite_timeframe_comments__c;
-        //SIW-355 End
-        //SIW-378 Start : Mapping Question response from lead to display on form on page load  
-        Set<String> levelSet = new Set<String>{'Mild: Functions close to peers','Moderate: Functions below peers','Severe: Functions nothing like same-age peers, extremely cognitively delayed.'};
-        if(levelSet.contains(currLead.Does_Child_Have_Cognitive_Delays__c)){
-            wishChildWrapperIns.levelOfDelay = currLead.Does_Child_Have_Cognitive_Delays__c;
-            wishChildWrapperIns.hasCogDelay = 'Yes';
-            if(currLead.Non_Verbal__c == 'Yes' && currLead.Does_Child_Have_Cognitive_Delays__c != Constant_AC.Same_Age_Peers){
-                wishChildWrapperIns.needDesire = Constant_AC.Child_Non_Verbal;
-            }
-        }else if(currLead.Does_Child_Have_Cognitive_Delays__c == 'No' || currLead.Does_Child_Have_Cognitive_Delays__c == Constant_AC.Follow_Medical_Team){
-            wishChildWrapperIns.hasCogDelay = currLead.Does_Child_Have_Cognitive_Delays__c;
-            if(currLead.Non_Verbal__c == 'Yes'){
-                wishChildWrapperIns.needDesire = Constant_AC.Child_Non_Verbal;
-            }
-        }   
-        wishChildWrapperIns.alterComm =  currLead.Does_Child_Have_Speech_or_Language_Delay__c;     
-        wishChildWrapperIns.nonVerbalAddInfo = currLead.Non_Verbal_Additional_Information__c; 
-        if(currLead.Non_Verbal__c == 'No'){
-            if(currLead.Does_Child_Have_Speech_or_Language_Delay__c == 'Yes'){
-                wishChildWrapperIns.needDesire = Constant_AC.Child_Verbal_Delayed;
-            }else{
-                wishChildWrapperIns.alterComm = Constant_AC.Child_Verbal_Age;
-            }           
-        } 
-        if(currLead.Non_Verbal_Communication_Method__c != null){
-        List<String> commList = currLead.Non_Verbal_Communication_Method__c.split(';');
-        if(commList.size() > 0){
-            for(String s : commList){
-                if(s==Constant_AC.Care_Giver){
-                    wishChildWrapperIns.careGiver = true;
-                }
-                if(s==Constant_AC.Point_Desired){
-                    wishChildWrapperIns.pointDesired = true;
-                }
-                if(s==Constant_AC.Child_Desire){
-                    wishChildWrapperIns.childDesire = true;
-                }
-                if(s==Constant_AC.Sign_Lang){
-                    wishChildWrapperIns.signLang = true;
-                }
-                if(s==Constant_AC.Assistive_Comm){
-                    wishChildWrapperIns.assistiveComm = true;
-                }
-            }
-        } 
-    }                   
-        //SIW-378 End
+        //SIW-355 End       
 
         if (currLead.Child_will_ultimately_die_prematurely__c == true) {
             wishChildWrapperIns.describePatient = '1';
@@ -201,6 +198,61 @@ public class DiagnosisVerification_AC {
         } else if (currLead.None_of_these_statements_describes_Child__c == true) {
             wishChildWrapperIns.describePatient = '8';
         }
+        
+        //SIW-378 Start : Mapping Question response from lead to display on form on page load   
+        if(wishChildWrapperIns.describePatient == null || wishChildWrapperIns.describePatient == ''){
+            wishChildWrapperIns.hasCogDelay = null;
+            wishChildWrapperIns.levelOfDelay = null;
+            wishChildWrapperIns.alterComm = null;
+            wishChildWrapperIns.needDesire = null;            
+        }       
+        else{
+        Set<String> levelSet = new Set<String>{mildFunction,moderateFunction,sameAgePeers};
+        if(levelSet.contains(currLead.Does_Child_Have_Cognitive_Delays__c)){
+            wishChildWrapperIns.levelOfDelay = currLead.Does_Child_Have_Cognitive_Delays__c;
+            wishChildWrapperIns.hasCogDelay = yesText;
+            if(currLead.Non_Verbal__c == yesText && currLead.Does_Child_Have_Cognitive_Delays__c != sameAgePeers){
+                wishChildWrapperIns.needDesire = childNonVerbal;
+            }
+        }else if(currLead.Does_Child_Have_Cognitive_Delays__c == noText || currLead.Does_Child_Have_Cognitive_Delays__c == followMedicalTeam){
+            wishChildWrapperIns.hasCogDelay = currLead.Does_Child_Have_Cognitive_Delays__c;
+            if(currLead.Non_Verbal__c == yesText){
+                wishChildWrapperIns.needDesire = childNonVerbal;
+            }
+        }   
+        wishChildWrapperIns.alterComm =  currLead.Does_Child_Have_Speech_or_Language_Delay__c;     
+        wishChildWrapperIns.nonVerbalAddInfo = currLead.Non_Verbal_Additional_Information__c; 
+        if(currLead.Non_Verbal__c == noText){
+            if(currLead.Does_Child_Have_Speech_or_Language_Delay__c == yesText){
+                wishChildWrapperIns.needDesire = childVerbalDelayed;
+            }else{
+                wishChildWrapperIns.alterComm = childVerbalAge;
+            }           
+        } 
+        if(currLead.Non_Verbal_Communication_Method__c != null){
+        List<String> commList = currLead.Non_Verbal_Communication_Method__c.split(';');
+        if(commList.size() > 0){
+            for(String s : commList){
+                if(s==careGiver){
+                    wishChildWrapperIns.careGiver = true;
+                }
+                if(s==pointDesired){
+                    wishChildWrapperIns.pointDesired = true;
+                }
+                if(s==childDesire){
+                    wishChildWrapperIns.childDesire = true;
+                }
+                if(s==signLang){
+                    wishChildWrapperIns.signLang = true;
+                }
+                if(s==assistiveComm){
+                    wishChildWrapperIns.assistiveComm = true;
+                }
+            }
+        } 
+    }       
+}            
+        //SIW-378 End
 
         if (currLead.Communication__c != null || String.isNotBlank(currLead.Communication__c)) {
             for (String com : currLead.Communication__c.split(';')) {
@@ -1245,45 +1297,45 @@ public class DiagnosisVerification_AC {
                 currLead.RFI_Form_Info_Hidden__c = Constant_AC.LEAD_RFI_FORM_INFO_NOT_QUALIFIED;
             }         
             //SIW-378 Start : Mapping Question response to save in lead  
-            if(wishChildWrapperIns.hasCogDelay == 'Yes'){
+            if(wishChildWrapperIns.hasCogDelay == yesText){
                 currLead.Does_Child_Have_Cognitive_Delays__c = wishChildWrapperIns.levelOfDelay;
             }else{
                 currLead.Does_Child_Have_Cognitive_Delays__c = wishChildWrapperIns.hasCogDelay;
             }   
             currLead.Does_Child_Have_Speech_or_Language_Delay__c = wishChildWrapperIns.alterComm;
             currLead.Non_Verbal__c = '';
-            if(wishChildWrapperIns.alterComm != 'Yes'){
+            if(wishChildWrapperIns.alterComm != yesText){
                 wishChildWrapperIns.needDesire = '';
             }           
-            if(wishChildWrapperIns.alterComm == Constant_AC.Child_Verbal_Age || wishChildWrapperIns.needDesire == Constant_AC.Child_Verbal_Delayed){
-                currLead.Non_Verbal__c = 'No';
+            if(wishChildWrapperIns.alterComm == childVerbalAge || wishChildWrapperIns.needDesire == childVerbalDelayed){
+                currLead.Non_Verbal__c = noText;
             }
-            if(wishChildWrapperIns.needDesire == Constant_AC.Child_Non_Verbal){
-                currLead.Non_Verbal__c = 'Yes';
+            if(wishChildWrapperIns.needDesire == childNonVerbal){
+                currLead.Non_Verbal__c = yesText;
             }            
             
-            if(wishChildWrapperIns.levelOfDelay == Constant_AC.Same_Age_Peers){
-                currLead.Non_Verbal__c = 'Yes';
-                currLead.Does_Child_Have_Speech_or_Language_Delay__c = 'Yes';
+            if(wishChildWrapperIns.levelOfDelay == sameAgePeers){
+                currLead.Non_Verbal__c = yesText;
+                currLead.Does_Child_Have_Speech_or_Language_Delay__c = yesText;
             }
             currLead.Non_Verbal_Communication_Method__c = '';
             currLead.Non_Verbal_Additional_Information__c ='';
-            if(wishChildWrapperIns.levelOfDelay == Constant_AC.Same_Age_Peers || wishChildWrapperIns.needDesire == Constant_AC.Child_Non_Verbal){
+            if(wishChildWrapperIns.levelOfDelay == sameAgePeers || wishChildWrapperIns.needDesire == childNonVerbal){
             String str = '';
             if(wishChildWrapperIns.careGiver == true){
-                str = str + Constant_AC.Care_Giver+';';
+                str = str + careGiver+';';
             }
             if(wishChildWrapperIns.pointDesired == true){
-                str = str + Constant_AC.Point_Desired +';';
+                str = str + pointDesired +';';
             }
             if(wishChildWrapperIns.childDesire == true){
-                str = str + Constant_AC.Child_Desire +';';
+                str = str + childDesire +';';
             }
             if(wishChildWrapperIns.signLang == true){
-                str = str +  Constant_AC.Sign_Lang +';';
+                str = str +  signLang +';';
             }
             if(wishChildWrapperIns.assistiveComm == true){
-                str = str +  Constant_AC.Assistive_Comm +';';
+                str = str +  assistiveComm +';';
             }
             currLead.Non_Verbal_Communication_Method__c = str.substringBeforeLast(';');
             currLead.Non_Verbal_Additional_Information__c = wishChildWrapperIns.nonVerbalAddInfo;

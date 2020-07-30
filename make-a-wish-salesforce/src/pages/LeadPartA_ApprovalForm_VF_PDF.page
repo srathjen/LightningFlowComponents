@@ -409,16 +409,7 @@
                                             </table>
                                         </div>
                                     </div>
-                                </apex:outputPanel>
-                                
-                                <!--SIW-378 Start : Hiding Question-->
-                                <!--apex:outputpanel rendered="{!currLead.Communication__c != Null}">
-                                    <div class="container" style="width:100%;">
-                                        <div class="left-col"> In order to facilitate communication, please select all that apply to {!currLead.FirstName} {!currLead.LastName} :</div>
-                                        <div class="left-col"> {!currLead.Communication__c}</div>
-                                    </div>
-                                </apex:outputpanel-->
-                                <!--SIW-378 End : Hiding Question--> 
+                                </apex:outputPanel> 
                                 
                                 <!--SIW-355 Start: Changed placement of below question -->
                                 <apex:outputpanel rendered="{!currLead.Will_Child_s_Condition_Deteriorate__c!=Null}">
@@ -476,13 +467,13 @@
                                 
                                  <!--SIW-378 Start : Added Question--> 
                                  <apex:outputpanel rendered="{!currLead.Does_Child_Have_Cognitive_Delays__c!=Null}">
-                                    <apex:outputpanel rendered="{!or(currLead.Does_Child_Have_Cognitive_Delays__c == 'No',currLead.Does_Child_Have_Cognitive_Delays__c == 'I don’t have access to that information. I recommend the chapter follow up with the medical team')}">
+                                    <apex:outputpanel rendered="{!or(currLead.Does_Child_Have_Cognitive_Delays__c == noText,currLead.Does_Child_Have_Cognitive_Delays__c == followMedicalTeam)}">
                                     <div class="container" style="width:100%;">
                                         <div class="left-col"> Does {!currLead.FirstName} {!currLead.LastName} have cognitive delays?</div>
                                         <div class="left-col"> {!currLead.Does_Child_Have_Cognitive_Delays__c}</div>
                                     </div>
                                     </apex:outputpanel>                                
-                                <apex:outputpanel rendered="{!or(currLead.Does_Child_Have_Cognitive_Delays__c == 'Mild: Functions close to peers',currLead.Does_Child_Have_Cognitive_Delays__c == 'Moderate: Functions below peers',currLead.Does_Child_Have_Cognitive_Delays__c == 'Severe: Functions nothing like same-age peers, extremely cognitively delayed.')}">
+                                <apex:outputpanel rendered="{!or(currLead.Does_Child_Have_Cognitive_Delays__c == mildFunction,currLead.Does_Child_Have_Cognitive_Delays__c == moderateFunction,currLead.Does_Child_Have_Cognitive_Delays__c == sameAgePeers)}">
                                     <div class="container" style="width:100%;">
                                         <div class="left-col"> Does {!currLead.FirstName} {!currLead.LastName} have cognitive delays?</div>
                                         <div class="left-col"> Yes</div>
@@ -493,37 +484,37 @@
                                     </div>
                                 </apex:outputpanel>
                             </apex:outputpanel>
-                                <apex:outputpanel rendered="{!And(currLead.Does_Child_Have_Speech_or_Language_Delay__c!=Null,currLead.Does_Child_Have_Cognitive_Delays__c != 'Severe: Functions nothing like same-age peers, extremely cognitively delayed.')}">
+                                <apex:outputpanel rendered="{!And(currLead.Does_Child_Have_Speech_or_Language_Delay__c!=Null,currLead.Does_Child_Have_Cognitive_Delays__c != sameAgePeers)}">
                                     <div class="container" style="width:100%;">
                                         <div class="left-col"> Does {!currLead.FirstName} {!currLead.LastName} have speech or language delays or use an alternative form of communication?</div>
                                         <div class="left-col"> {!currLead.Does_Child_Have_Speech_or_Language_Delay__c}</div>
                                     </div>
                                 </apex:outputpanel>
                                 <apex:outputpanel rendered="{!currLead.Non_Verbal__c!=Null}">
-                                    <apex:outputpanel rendered="{!or(currLead.Does_Child_Have_Cognitive_Delays__c == 'No',currLead.Does_Child_Have_Cognitive_Delays__c == 'I don’t have access to that information. I recommend the chapter follow up with the medical team')}">
-                                        <apex:outputpanel rendered="{!currLead.Non_Verbal__c=='Yes'}">    
+                                    <apex:outputpanel rendered="{!or(currLead.Does_Child_Have_Cognitive_Delays__c == noText,currLead.Does_Child_Have_Cognitive_Delays__c == followMedicalTeam)}">
+                                        <apex:outputpanel rendered="{!currLead.Non_Verbal__c==yesText}">    
                                             <div class="container" style="width:100%;">
                                                 <div class="left-col"> Can {!currLead.FirstName} {!currLead.LastName} express their needs and desires by saying them with words?</div>
                                                 <div class="left-col"> No, child is non-verbal</div>
                                             </div>
                                         </apex:outputpanel>
                                     </apex:outputpanel>
-                                    <apex:outputpanel rendered="{!or(currLead.Does_Child_Have_Cognitive_Delays__c == 'Mild: Functions close to peers',currLead.Does_Child_Have_Cognitive_Delays__c == 'Moderate: Functions below peers',currLead.Does_Child_Have_Cognitive_Delays__c == 'Severe: Functions nothing like same-age peers, extremely cognitively delayed.')}">
-                                        <apex:outputpanel rendered="{!And(currLead.Non_Verbal__c=='Yes',currLead.Does_Child_Have_Cognitive_Delays__c != 'Severe: Functions nothing like same-age peers, extremely cognitively delayed.')}">    
+                                    <apex:outputpanel rendered="{!or(currLead.Does_Child_Have_Cognitive_Delays__c == mildFunction,currLead.Does_Child_Have_Cognitive_Delays__c == moderateFunction,currLead.Does_Child_Have_Cognitive_Delays__c == sameAgePeers)}">
+                                        <apex:outputpanel rendered="{!And(currLead.Non_Verbal__c==yesText,currLead.Does_Child_Have_Cognitive_Delays__c != sameAgePeers)}">    
                                             <div class="container" style="width:100%;">
                                                 <div class="left-col"> Can {!currLead.FirstName} {!currLead.LastName} express their needs and desires by saying them with words?</div>
                                                 <div class="left-col"> No, child is non-verbal</div>
                                             </div>
                                         </apex:outputpanel>
                                     </apex:outputpanel>
-                                    <apex:outputpanel rendered="{!currLead.Non_Verbal__c=='No'}">                                        
-                                        <apex:outputpanel rendered="{!currLead.Does_Child_Have_Speech_or_Language_Delay__c == 'Yes'}">    
+                                    <apex:outputpanel rendered="{!currLead.Non_Verbal__c== noText}">                                        
+                                        <apex:outputpanel rendered="{!currLead.Does_Child_Have_Speech_or_Language_Delay__c == yesText}">    
                                             <div class="container" style="width:100%;">
                                                 <div class="left-col"> Can {!currLead.FirstName} {!currLead.LastName} express their needs and desires by saying them with words?</div>
                                                 <div class="left-col"> Yes, child is verbal but delayed and able to be understood by others</div>
                                             </div>
                                         </apex:outputpanel>
-                                        <apex:outputpanel rendered="{!and(currLead.Does_Child_Have_Speech_or_Language_Delay__c != 'Yes',currLead.Does_Child_Have_Speech_or_Language_Delay__c != 'No, child is verbal at an age-appropriate level.')}">    
+                                        <apex:outputpanel rendered="{!and(currLead.Does_Child_Have_Speech_or_Language_Delay__c != yesText,currLead.Does_Child_Have_Speech_or_Language_Delay__c != childVerbalAge)}">    
                                             <div class="container" style="width:100%;">
                                                 <div class="left-col"> Can {!currLead.FirstName} {!currLead.LastName} express their needs and desires by saying them with words?</div>
                                                 <div class="left-col"> No, child is verbal at an age-appropriate level.</div>

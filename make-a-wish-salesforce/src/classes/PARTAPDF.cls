@@ -11,13 +11,33 @@ public class PARTAPDF {
     public String currentCondition { get; set; }
     public List<Diagnosis_Verification__c> diagnosisVerificationList { get; set; }
     public Map<Id, String> medicalQuestionMap { get; set; }
-    public List<String> currentConditionList { get; set; }    
+    public List<String> currentConditionList { get; set; } 
+
+    //SIW-378 : Adding labels to be used in VF page
+    public final String sameAgePeers { get; set; }
+    public final String childVerbalAge { get; set; }  
+    public final String mildFunction { get; set; }
+    public final String moderateFunction { get; set; }  
+    public final String followMedicalTeam { get; set; }
+    public final String yesText { get; set; } 
+    public final String noText { get; set; }   
 
     public PARTAPDF() {
         currentConditionList = new List<String>();       
         leadId = ApexPages.currentPage().getParameters().get('leadId');
         diagnosisVerificationList = new List<Diagnosis_Verification__c>();
         medicalQuestionMap = new Map<Id, String>();
+
+        //SIW-378 : Assigning text from Constant__AC class
+        sameAgePeers = Constant_AC.SAME_AGE_PEERS;
+        mildFunction = Constant_AC.MILD_FUNCTION;
+        moderateFunction = Constant_AC.MODERATE_FUNCTION;
+        followMedicalTeam = Constant_AC.FOLLOW_MEDICAL_TEAM;
+        childVerbalAge = Constant_AC.CHILD_VERBAL_AGE;
+        yesText = Constant_AC.YES_TEXT;
+        noText = Constant_AC.NO_TEXT;
+        
+      
 
         loadData();
     }
