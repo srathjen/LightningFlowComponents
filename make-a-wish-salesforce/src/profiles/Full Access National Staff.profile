@@ -1762,6 +1762,11 @@
         <visible>false</visible>
     </applicationVisibilities>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Appeal__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Case.Final_Close_Letter_Sent__c</field>
         <readable>true</readable>
@@ -11024,6 +11029,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Any_medical_reason_for_moving_quickly__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Appeal__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Appeal_date__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

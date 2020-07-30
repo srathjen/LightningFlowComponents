@@ -4,6 +4,7 @@
  * @createdDate 7/26/2019
  * @update 3/25/2020 - SCC-155 New Lead Record types introduced
  * @update 4/14/2020 - SIW-297 Initial Address Verification check
+ * @update 7/22/2020 - SIW-309 Added logic for eligibility review case
  */
 public class LeadDomain extends trac_TriggerHandlerBase {
 
@@ -37,6 +38,8 @@ public class LeadDomain extends trac_TriggerHandlerBase {
     List<Lead> oldLeadsList = (List<Lead>) oldRecordsList;
     Map<Id, Lead> newLeadsMap = (Map<Id, Lead>) newRecordsMap;
     Map<Id, Lead> oldLeadsMap = (Map<Id, Lead>) oldRecordsMap;
+
+    Map<Id, Case> existingEligibilityCases = new Map<Id, Case>();
 
     /**
      * Before insert of Lead
@@ -105,7 +108,9 @@ public class LeadDomain extends trac_TriggerHandlerBase {
         Map<Id, Lead> accountIdLeadMap = new Map<Id, Lead>();
         Map<Id, Lead> icdCodeLeadMap = new Map<Id, Lead>();
         Map<Id, Set<Integer>> icdCodeDescriptionMatchMap = new Map<Id, Set<Integer>>();
-        List<Lead> eligibilityReviewLeads = new List<Lead>();
+        List<Lead> newEligibilityReviewLeads = new List<Lead>();
+        List<Lead> appealLeadList = new List<Lead>();
+        List<Case> reopenEligibilityCaseList = new List<Case>();
         List<Lead> potentialReferredLeadDuplicates = new List<Lead>();
         List<Lead> potentialReferredLeadContactDuplicates = new List<Lead>();
         List<Lead> qualifiedLeadsFieldValidation = new List<Lead>();
@@ -117,6 +122,7 @@ public class LeadDomain extends trac_TriggerHandlerBase {
         Set<String> updatedQualifyingDiagnoses = new Set<String>();
         List<Diagnosis_Verification__c> diagnosisVerifications = new List<Diagnosis_Verification__c>();
         Set<Id> completedTaskLeadSet = new Set<Id>();
+        Map<Id, Case> existingEligibilityCases = CaseService.getExistingEligibilityCases(newLeadsList);
 
         if (Utils.currentUser.Profile.Name == Constant_AC.PROFILE_INTEGRATION) {
             for (Lead newLead : newLeadsMap.values()) {
@@ -156,7 +162,7 @@ public class LeadDomain extends trac_TriggerHandlerBase {
                         newLead.AddressVerificationAttempted__c = null;
                         newLead.County__c = null;
                     }
-                    if (isLeadNew(newLead, oldLead)) {
+                    if (isLeadNewEligibilityReview(newLead, oldLead, existingEligibilityCases)) {
                         newLead.Sub_Status__c = LEAD_NEW;
                         newLead.Eligibility_Review_Date__c = Date.today();
                     }
@@ -165,10 +171,10 @@ public class LeadDomain extends trac_TriggerHandlerBase {
                     }
                     if (canLeadCompleteTask(newLead, oldLead)) {
                         completedTaskLeadSet.add(newLead.Id);
-                    }
-                    if (isLeadDNQ(newLead, oldLead)) {
-                        newLead.DNQ_Date__c = Date.today();
-                    }
+                    }    
+                    if (isLeadDNQ(newLead, oldLead) && !isAppealUnsuccessful(newLead, oldLead)) {
+                        newLead.DNQ_Date__c = Date.today();                       
+                    }                       
                     if (hasLeadChangedChapter(newLead, oldLead)) {
                         if (hasLeadChapterBackupChanged(newLead, oldLead)) {
                             newLead.Hidden_Chapter_Change_Confirmation__c = oldLead.ChapterName__c;
@@ -186,8 +192,8 @@ public class LeadDomain extends trac_TriggerHandlerBase {
                     }
                     if (isLeadQualified(newLead, oldLead)) {
                         diagnosisVerifications = DiagnosisVerificationService.findByLeadId(newLead.Id);
-                        newLead.Sub_Status__c = null;
-                        newLead.Qualified_Date__c = Date.today();//Added per IME-69
+                        newLead.Sub_Status__c = null;                       
+                        newLead.Qualified_Date__c = Date.today();//Added per IME-69 
                     }
                     if (isLeadQualifiedRequiredFieldValidation(newLead)) {
                         qualifiedLeadsFieldValidation.add(newLead);
@@ -218,7 +224,18 @@ public class LeadDomain extends trac_TriggerHandlerBase {
                         newLead.PR_Diagnosis__c = EMPTY;
                     }
                     if (isLeadEligibilityReview(newLead, oldLead)) {
-                        eligibilityReviewLeads.add(newLead);
+                        if(existingEligibilityCases.containsKey(newLead.id)) {
+                            if(!isLeadEligibilityReviewComatoseVegState(newLead, oldLead))    {
+                                newLead.sub_status__c = Constant_AC.LEAD_SUB_STATUS_ADDITIONAL_INFORMATION_FOR_REVIEW;
+                                reopenEligibilityCaseList.add(existingEligibilityCases.get(newLead.id));
+                            }  
+                        }   else    {
+                            newEligibilityReviewLeads.add(newLead);
+                        }
+                    }
+                    if(isAppealLead(newLead, oldLead)){
+                        newLead.Appeal_date__c = Date.today();
+                        appealLeadList.add(newLead);
                     }
                     if (hasLeadMedicalReasonMoveQuickly(newLead) && isLeadQualified(newLead, oldLead)) {
                         qualifiedRushLeads.add(newLead);
@@ -287,7 +304,7 @@ public class LeadDomain extends trac_TriggerHandlerBase {
                             });
                         }
                     }
-                }
+                }               
             }
             if (!accountIdLeadMap.isEmpty()) {
                 LeadService.setHiddenChapterName(accountIdLeadMap);
@@ -299,8 +316,22 @@ public class LeadDomain extends trac_TriggerHandlerBase {
             if (!updatedDiagnosisLeads.isEmpty()) {
                 LeadService.setMedicalInfo(updatedQualifyingDiagnoses, updatedQualifyingIcdCode, updatedDiagnosisLeads);
             }
-            if (!eligibilityReviewLeads.isEmpty()) {
-                CaseService.createEligibilityReview(eligibilityReviewLeads);
+           // SIW-309 : Added logic to create eligibility review case 
+            if(!appealLeadList.isEmpty()){
+                List<Lead> appealsToUpdate = new List<Lead>();
+                for(Lead appealLead : appealLeadList)   {
+                    if(existingEligibilityCases.containsKey(appealLead.id))    {
+                        appealsToUpdate.add(appealLead);
+                    }   // If there is not an existing case, one will be created below.
+                }
+                CaseService.updateEligibilityAppealLeadCase(appealsToUpdate);
+            }
+            //else 
+            if (!newEligibilityReviewLeads.isEmpty()) {
+                CaseService.createEligibilityReview(newEligibilityReviewLeads);                         
+            }
+            if (!reopenEligibilityCaseList.isEmpty())   {
+                CaseService.reOpenEligibilityCases(reopenEligibilityCaseList);
             }
             if (!potentialReferredLeadDuplicates.isEmpty()) {
                 LeadService.findDuplicateLeads(potentialReferredLeadDuplicates);
@@ -314,8 +345,8 @@ public class LeadDomain extends trac_TriggerHandlerBase {
             if (!potentialRushLeads.isEmpty()) {
                 TaskService.createRushTask(potentialRushLeads);
             }
-            if (!diagnosisVerifications.isEmpty() && !eligibilityReviewLeads.isEmpty()) {
-                LeadService.setQualifyingDiagnosis(diagnosisVerifications[0].ICD_Code__c, eligibilityReviewLeads);
+            if (!diagnosisVerifications.isEmpty() && !newEligibilityReviewLeads.isEmpty()) {
+                LeadService.setQualifyingDiagnosis(diagnosisVerifications[0].ICD_Code__c, newEligibilityReviewLeads);
             }
             if (!completedTaskLeadSet.isEmpty()) {
                 TaskService.updateCompleted(completedTaskLeadSet);
@@ -502,10 +533,10 @@ public class LeadDomain extends trac_TriggerHandlerBase {
      * @param oldLead
      * @return Boolean
      */
-    private static Boolean isLeadNew(Lead newLead, Lead oldLead) {
-        return newLead.Status == LEAD_ELIGIBILITY_REVIEW
-                && oldLead.Status != LEAD_ELIGIBILITY_REVIEW
-                && oldLead.Status != LEAD_DNQ;
+    private static Boolean isLeadNewEligibilityReview(Lead newLead, Lead oldLead, Map<id,Case> cases) {
+        return !cases.containsKey(newLead.id) && 
+                newLead.Status == LEAD_ELIGIBILITY_REVIEW
+                && oldLead.Status != LEAD_ELIGIBILITY_REVIEW;
     }
 
     /**
@@ -736,4 +767,25 @@ public class LeadDomain extends trac_TriggerHandlerBase {
                 && (newLead.PostalCode != oldLead.PostalCode)
                 && oldLead.Initial_Address_Verification__c == false;
     }
+    
+    /**
+     * SIW-309 : Check if Appeal is successful
+     * @param newLead  
+     * @param oldLead   
+     * @return Boolean
+     */
+    private static Boolean isAppealLead(Lead newLead,Lead oldLead) {
+        return newLead.Status == Constant_AC.LEAD_STATUS_ELIGIBILITY_REVIEW && oldLead.Status == Constant_AC.LEAD_STATUS_DNQ && newLead.Appeal__c == true
+            && (Utils.currentUser.Profile.Name == Constant_AC.CASE_TEAM_ROLE_INTAKE_MANAGER || Utils.currentUser.Profile.Name == 'System Administrator' || Utils.currentUser.Profile.Name == Constant_AC.CASE_TEAM_ROLE_National_Staff_MANAGER);
+    }    
+    
+/* SIW-309 : Check if Appeal is successful or not
+* @param newLead  
+* @param oldLead   
+* @return Boolean
+*/
+    private static Boolean isAppealUnsuccessful(Lead newLead,Lead oldLead) {
+        return newLead.Status == Constant_AC.LEAD_STATUS_DNQ && oldLead.Status == Constant_AC.LEAD_STATUS_ELIGIBILITY_REVIEW && newLead.Appeal__c == true
+            && ( Utils.currentUser.Profile.Name == 'System Administrator' || Utils.currentUser.Profile.Name == Constant_AC.CASE_TEAM_ROLE_National_Staff_MANAGER);    
+    } 
 }
