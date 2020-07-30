@@ -6,6 +6,7 @@
     <excludeButtons>Convert</excludeButtons>
     <excludeButtons>CreateCallList</excludeButtons>
     <excludeButtons>CreateSurveyInvitation</excludeButtons>
+    <excludeButtons>DataDotComClean</excludeButtons>
     <excludeButtons>FindDup</excludeButtons>
     <excludeButtons>Share</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
@@ -78,10 +79,6 @@
                 <showScrollbars>false</showScrollbars>
                 <width>0</width>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Debug__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -99,6 +96,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Sub_Status__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Appeal__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -246,6 +247,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Family_Dynamics_Notes__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Next_Step_Notes__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -571,6 +576,10 @@
                 <behavior>Edit</behavior>
                 <field>Pending_Diagnosis_Date__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Appeal_date__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
@@ -598,10 +607,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Part_A_Signed__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>I_am_Recognized_To_Practice_As_a__c</field>
             </layoutItems>
             <layoutItems>
@@ -614,11 +619,23 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Communication__c</field>
+                <field>Does_Child_Have_Cognitive_Delays__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
+                <behavior>Edit</behavior>
+                <field>Does_Child_Have_Speech_or_Language_Delay__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>Non_Verbal__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Non_Verbal_Communication_Method__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Non_Verbal_Additional_Information__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -733,6 +750,14 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>SD4_ICD_Code__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Communication__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Part_A_Signed__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -974,6 +999,7 @@
         <fields>CASES.SUBJECT</fields>
         <fields>CASES.CREATED_DATE</fields>
         <fields>CASES.PRIORITY</fields>
+        <fields>CASES.STATUS</fields>
         <relatedList>Case.Lead__c</relatedList>
     </relatedLists>
     <relatedLists>

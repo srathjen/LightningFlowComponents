@@ -9,6 +9,7 @@
 // 27/04/2020 - Manoj - SIW-556 : Modified method 'getInputValue' to allow users to proceed even when select No in question "HAS THE REFERRAL BEEN DISCUSSED WITH THE CHILD'S HEALTHCARE PROVIDER?"
 // 02/06/2020 - Manoj - SIW-557: Updated placeholder to 'Acute Lymphoblastic Leukemia (ALL)' from 'Malignant Neoplasm' and to 'C91.0' from 'C00'
 // 16/06/2020 - Manoj - SIW-606: Changed method to navigate to home site
+// 29/07/2020 - Manoj - SIW-378 : hide Questions as mentioned in ticket
 -->
 
 <apex:page controller="WishReferralForm_AC" showHeader="false" applyBodyTag="false" sidebar="false" standardStylesheets="false" docType="html-5.0" cache="false">
@@ -354,15 +355,7 @@
                                     <apex:selectOption itemLabel="{!$Label.Wish_Referral_Option_Not_Sure}" itemValue="{!$Label.Wish_Referral_Option_Not_Sure}" />
                                 </apex:selectList>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3">{!$Label.Wish_Referral_Facilitate_Communication}</label>
-                            <div class="col-sm-6">
-                                <apex:selectList value="{!communictionList}" size="4" id="communication" multiselect="true" styleClass="form-control col-xs-12 c-select multi" >
-                                    <apex:selectOptions value="{!communication}" />
-                                </apex:selectList>
-                            </div>
-                        </div>
+                        </div>                        
                     </fieldset>
                     <apex:outputPanel id="family">
                         <!-- family info -->

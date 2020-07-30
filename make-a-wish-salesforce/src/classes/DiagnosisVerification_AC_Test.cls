@@ -4,6 +4,7 @@
  * 23/03/2018 - Sankar - WVC-1835
  * 09/10/2019 - Manik - WLP-423
  * 01/02/2020 - CSmith - SIW-342 field name changes reverted.
+ * 29/07/2020 - Manoj - SIW-378 Added test data to cover changes.
  * @author MST Solutions
  * @date 10/4/2016
  **/
@@ -132,7 +133,10 @@ public class DiagnosisVerification_AC_Test {
         leadFrieda.Angina__c = 'Unknown;N/A';
         leadFrieda.Lung_Disease__c = 'Unknown;N/A';
         leadFrieda.Any_medical_reason_for_moving_quickly__c = 'Test';
-        insert leadList;
+        leadFrieda.Does_Child_Have_Cognitive_Delays__c = 'Moderate: Functions below peers';
+        leadFrieda.Non_Verbal__c = 'Yes';
+        leadFrieda.Non_Verbal_Communication_Method__c = 'Crying without the capacity to indicate needs or wants to a caregiver well known to the child;Sign language (either standard or specific to the child);Pointing at desired objects, reaching out for something or someone they want,  taking your hand to what they want;Repeating something they just heard in a manner suggesting the child is desiring (as opposed to just echoing words);Assistive communication tool, tablet, or computer';
+       	insert leadList;
 
         List<cg__Lead_File__c> leadFileList = TestDataFactory.createLeadFile(1);
         cg__Lead_File__c leadFileFrieda = leadFileList.get(0);
@@ -152,8 +156,8 @@ public class DiagnosisVerification_AC_Test {
         DocuSignCredentialsSetting__c setting = new DocuSignCredentialsSetting__c();
         setting.Name = 'Test Setting';
         setting.account__c = 'TestAccount';
-        insert setting;
-
+        insert setting;        
+            
         trac_TriggerHandlerBase.blockTrigger = false;
     }
 

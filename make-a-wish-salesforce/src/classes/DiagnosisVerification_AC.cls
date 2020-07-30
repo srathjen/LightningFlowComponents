@@ -19,6 +19,7 @@
  * 5. 15 Apr 2020 - Chris Smith - SIW-497 : Provided check on Save & Next to make sure ICD Codes and Condition
  * 6. 01 Jun 2020 - Manoj - SIW-508 : Added conditions to hide hospitalization questions from docusign
  * 7. 12 Jun 2020 - Chris and Samer - SIW-508 : Fixed zero showing by default for number of hospitalizations.
+ * 8. 29 Jul 2020 - Manoj      - SIW-378 : Mapped the fields for new questions
  * Descriptions were looked up.
  **/
 public class DiagnosisVerification_AC {
@@ -58,6 +59,27 @@ public class DiagnosisVerification_AC {
             new Map<Id, Condition_Description__c>(ALL_CONDITION_DESCRIPTIONS);
     private static final String RED = 'Red'; 
 
+    //SIW-378 : Adding labels to be used in VF page
+    public final String sameAgePeers { get; set; }
+    public final String childVerbalAge { get; set; }
+    public final String childVerbalDelayed { get; set; }
+    public final String childNonVerbal { get; set; }
+    public final String careGiver { get; set; }
+    public final String pointDesired { get; set; }
+    public final String childDesire { get; set; }
+    public final String signLang { get; set; }
+    public final String assistiveComm { get; set; }
+    public final String followMedicalTeam { get; set; }
+    public final String pleaseSelectText { get; set; }
+    public final String selectedText { get; set; }
+    public final String yesText { get; set; }
+    public final String noText { get; set; }
+    public final String helpTextCognitive { get; set; }
+    public final String mildFunction { get; set; }
+    public final String moderateFunction { get; set; }
+    public final String pleaseSelectAllText { get; set; }
+    public final String placeHolderAddInfo { get; set; }
+
     public DiagnosisVerification_AC() {
         pluHypTxt = '';
         wishChildWrapperIns = new WishChildWrapper();
@@ -67,6 +89,28 @@ public class DiagnosisVerification_AC {
         wrapCls = new DiagnosisWrapper();
         currLead = new Lead();
         icdLookupAttempted = false;
+
+        //SIW-378 : Assigning text from Constant__AC class
+        sameAgePeers = Constant_AC.SAME_AGE_PEERS;
+        childVerbalAge = Constant_AC.CHILD_VERBAL_AGE;
+        childVerbalDelayed = Constant_AC.CHILD_VERBAL_DELAYED;
+        childNonVerbal = Constant_AC.CHILD_NON_VERBAL;
+        careGiver = Constant_AC.CARE_GIVER;
+        pointDesired = Constant_AC.POINT_DESIRED;
+        childDesire = Constant_AC.CHILD_DESIRE;
+        signLang = Constant_AC.SIGN_LANG;
+        assistiveComm = Constant_AC.ASSISTIVE_COMM;
+        followMedicalTeam = Constant_AC.FOLLOW_MEDICAL_TEAM;
+        pleaseSelectText = Constant_AC.PLEASE_SELECT_TEXT;
+        selectedText = Constant_AC.SELECTED_TEXT;
+        yesText = Constant_AC.YES_TEXT;
+        noText = Constant_AC.NO_TEXT;
+        helpTextCognitive = Constant_AC.HELP_TEXT_COGNITIVE;
+        mildFunction = Constant_AC.MILD_FUNCTION;
+        moderateFunction = Constant_AC.MODERATE_FUNCTION;
+        pleaseSelectAllText = Constant_AC.PLEASE_SELECT_ALL;
+        placeHolderAddInfo = Constant_AC.PLACEHOLDER_ADD_INFO;
+
         leadId = ApexPages.currentPage().getParameters().get('leadId');
 
         if (leadId != null && leadId.length() > 0) {
@@ -135,7 +179,7 @@ public class DiagnosisVerification_AC {
         //SIW-355 Start : Mapped 2 new added questions value to lead field on loading of page
         wishChildWrapperIns.timeFrameValue = currLead.Expedite_timeframe__c;
         wishChildWrapperIns.idealtimeFrameValue = currLead.Other_expedite_timeframe_comments__c;
-        //SIW-355 End
+        //SIW-355 End       
 
         if (currLead.Child_will_ultimately_die_prematurely__c == true) {
             wishChildWrapperIns.describePatient = '1';
@@ -154,6 +198,61 @@ public class DiagnosisVerification_AC {
         } else if (currLead.None_of_these_statements_describes_Child__c == true) {
             wishChildWrapperIns.describePatient = '8';
         }
+        
+        //SIW-378 Start : Mapping Question response from lead to display on form on page load   
+        if(wishChildWrapperIns.describePatient == null || wishChildWrapperIns.describePatient == ''){
+            wishChildWrapperIns.hasCogDelay = null;
+            wishChildWrapperIns.levelOfDelay = null;
+            wishChildWrapperIns.alterComm = null;
+            wishChildWrapperIns.needDesire = null;            
+        }       
+        else{
+        Set<String> levelSet = new Set<String>{mildFunction,moderateFunction,sameAgePeers};
+        if(levelSet.contains(currLead.Does_Child_Have_Cognitive_Delays__c)){
+            wishChildWrapperIns.levelOfDelay = currLead.Does_Child_Have_Cognitive_Delays__c;
+            wishChildWrapperIns.hasCogDelay = yesText;
+            if(currLead.Non_Verbal__c == yesText && currLead.Does_Child_Have_Cognitive_Delays__c != sameAgePeers){
+                wishChildWrapperIns.needDesire = childNonVerbal;
+            }
+        }else if(currLead.Does_Child_Have_Cognitive_Delays__c == noText || currLead.Does_Child_Have_Cognitive_Delays__c == followMedicalTeam){
+            wishChildWrapperIns.hasCogDelay = currLead.Does_Child_Have_Cognitive_Delays__c;
+            if(currLead.Non_Verbal__c == yesText){
+                wishChildWrapperIns.needDesire = childNonVerbal;
+            }
+        }   
+        wishChildWrapperIns.alterComm =  currLead.Does_Child_Have_Speech_or_Language_Delay__c;     
+        wishChildWrapperIns.nonVerbalAddInfo = currLead.Non_Verbal_Additional_Information__c; 
+        if(currLead.Non_Verbal__c == noText){
+            if(currLead.Does_Child_Have_Speech_or_Language_Delay__c == yesText){
+                wishChildWrapperIns.needDesire = childVerbalDelayed;
+            }else{
+                wishChildWrapperIns.alterComm = childVerbalAge;
+            }           
+        } 
+        if(currLead.Non_Verbal_Communication_Method__c != null){
+        List<String> commList = currLead.Non_Verbal_Communication_Method__c.split(';');
+        if(commList.size() > 0){
+            for(String s : commList){
+                if(s==careGiver){
+                    wishChildWrapperIns.careGiver = true;
+                }
+                if(s==pointDesired){
+                    wishChildWrapperIns.pointDesired = true;
+                }
+                if(s==childDesire){
+                    wishChildWrapperIns.childDesire = true;
+                }
+                if(s==signLang){
+                    wishChildWrapperIns.signLang = true;
+                }
+                if(s==assistiveComm){
+                    wishChildWrapperIns.assistiveComm = true;
+                }
+            }
+        } 
+    }       
+}            
+        //SIW-378 End
 
         if (currLead.Communication__c != null || String.isNotBlank(currLead.Communication__c)) {
             for (String com : currLead.Communication__c.split(';')) {
@@ -1197,7 +1296,52 @@ public class DiagnosisVerification_AC {
             if (wishChildWrapperIns.vegetativeState == Constant_AC.LEAD_COMATOSE_VEGETATIVE_STATE_YES) {
                 currLead.RFI_Form_Info_Hidden__c = Constant_AC.LEAD_RFI_FORM_INFO_NOT_QUALIFIED;
             }         
+            //SIW-378 Start : Mapping Question response to save in lead  
+            if(wishChildWrapperIns.hasCogDelay == yesText){
+                currLead.Does_Child_Have_Cognitive_Delays__c = wishChildWrapperIns.levelOfDelay;
+            }else{
+                currLead.Does_Child_Have_Cognitive_Delays__c = wishChildWrapperIns.hasCogDelay;
+            }   
+            currLead.Does_Child_Have_Speech_or_Language_Delay__c = wishChildWrapperIns.alterComm;
+            currLead.Non_Verbal__c = '';
+            if(wishChildWrapperIns.alterComm != yesText){
+                wishChildWrapperIns.needDesire = '';
+            }           
+            if(wishChildWrapperIns.alterComm == childVerbalAge || wishChildWrapperIns.needDesire == childVerbalDelayed){
+                currLead.Non_Verbal__c = noText;
+            }
+            if(wishChildWrapperIns.needDesire == childNonVerbal){
+                currLead.Non_Verbal__c = yesText;
+            }            
             
+            if(wishChildWrapperIns.levelOfDelay == sameAgePeers){
+                currLead.Non_Verbal__c = yesText;
+                currLead.Does_Child_Have_Speech_or_Language_Delay__c = yesText;
+            }
+            currLead.Non_Verbal_Communication_Method__c = '';
+            currLead.Non_Verbal_Additional_Information__c ='';
+            if(wishChildWrapperIns.levelOfDelay == sameAgePeers || wishChildWrapperIns.needDesire == childNonVerbal){
+            String str = '';
+            if(wishChildWrapperIns.careGiver == true){
+                str = str + careGiver+';';
+            }
+            if(wishChildWrapperIns.pointDesired == true){
+                str = str + pointDesired +';';
+            }
+            if(wishChildWrapperIns.childDesire == true){
+                str = str + childDesire +';';
+            }
+            if(wishChildWrapperIns.signLang == true){
+                str = str +  signLang +';';
+            }
+            if(wishChildWrapperIns.assistiveComm == true){
+                str = str +  assistiveComm +';';
+            }
+            currLead.Non_Verbal_Communication_Method__c = str.substringBeforeLast(';');
+            currLead.Non_Verbal_Additional_Information__c = wishChildWrapperIns.nonVerbalAddInfo;
+            }
+            //SIW-378 End
+
             update currLead;
             insert diagnosisVerificationLstForInsert;
             insert diagnosisMedicalQuestionLst;
@@ -1435,9 +1579,14 @@ public class DiagnosisVerification_AC {
                 'isConverted',
                 'Please_Explain_Deteriorate__c',
                 'Expedite_timeframe__c',
-                'Other_expedite_timeframe_comments__c'
+                'Other_expedite_timeframe_comments__c',
+                'Does_Child_Have_Cognitive_Delays__c',
+                'Does_Child_Have_Speech_or_Language_Delay__c',
+                'Non_Verbal_Communication_Method__c',
+                'Non_Verbal_Additional_Information__c',
+                'Non_Verbal__c'
         };
-
+           
         for (String field : FIELDS_TO_SELECT) {
             query += field + ',';
         }
