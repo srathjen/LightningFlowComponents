@@ -356,6 +356,8 @@
     <members>Case.Wish_Timing</members>
     <members>Contact.Contact_Fields2</members>
     <members>Lead.Next_Steps</members>
+    <members>Contact.Medical_Information</members>
+    <members>Contact.Contact_Fields</members>
     <name>QuickAction</name>
   </types>
   <types>
