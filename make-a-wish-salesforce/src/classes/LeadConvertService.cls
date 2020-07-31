@@ -99,7 +99,8 @@ public class LeadConvertService {
                                 Any_medical_reason_for_moving_quickly__c, Department__c, Hospital_Treatment_Facility_Treating__c, Part_A_Received__c,
                                 Part_A_Sent__c, ChapterName__r.Qualified_Wish_Owner__c, Alternate_1_Medical_Professional_Type__c, Alternate_2_Medical_Professional_Type__c,
                                 Alternate1HospitalTreatmentFacility__c, Alternate2HospitalTreatmentFacility__c, Qualified_Date__c, PD_Condition_Description__c, Rush__c,
-                                Please_Explain__c, Referred_Date__c, Inquiry_Date__c, Out_of_Territory__c, unique_wish_identifier__c
+                                Please_Explain__c, Referred_Date__c, Inquiry_Date__c, Out_of_Territory__c, unique_wish_identifier__c,
+                    			Will_Child_s_Condition_Deteriorate__c, Please_Explain_Deteriorate__c, Expedite_timeframe__c
                         FROM Lead
                         WHERE Id IN:leadIdConvertedByContactIdMap.keySet()
                 ]) {

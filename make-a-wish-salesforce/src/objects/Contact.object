@@ -7009,10 +7009,20 @@ COMMENTS"</description>
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>MP_Additional_Clinical_Details__c</fullName>
+        <externalId>false</externalId>
+        <label>MP Additional Clinical Details</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
         <fullName>ReferralComment__c</fullName>
         <description>It will get the values from the Referral Comment in the lead when the lead is converted</description>
         <externalId>false</externalId>
-        <label>Referral Comment</label>
+        <label>MP Referral Comments</label>
         <length>100000</length>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
