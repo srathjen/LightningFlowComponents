@@ -7286,6 +7286,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.Cognitive_Delays__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.Color__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -7397,6 +7402,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Do_Not_Create_User__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Does_Child_Have_Speech_Language_Delays__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -7902,6 +7912,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Nickname__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Non_Verbal_Additional_Information__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Non_Verbal_Communication_Method__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
