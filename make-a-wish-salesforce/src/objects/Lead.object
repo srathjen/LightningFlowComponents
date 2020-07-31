@@ -16490,6 +16490,43 @@ RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>Please Enter Full Address (City, State, Street and Postal Code), Phone Number  and Gender.</errorMessage>
     </validationRules>
     <validationRules>
+        <fullName>Lead_Appeal_Checkbox_Only_For_DNQ</fullName>
+        <active>true</active>
+        <description>If an Intake Manager attempts to check the “Appeal” checkbox and the Lead status is not DNQ then UI displays an error message.</description>
+        <errorConditionFormula>AND( 
+NOT(
+ISPICKVAL(Status , 'Eligibility Review')
+),
+Appeal__c == true,
+ $Profile.Name  == 'Intake Manager'
+)</errorConditionFormula>
+        <errorMessage>The Appeal checkbox can only be checked when requesting an Appeal of the eligibility decision – Lead Status must equal DNQ.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Lead_Appeal_UnCheck_Only_For_NMA</fullName>
+        <active>true</active>
+        <description>If an Intake Manager locates the “Appeal” checkbox, and the box is checked, If they try to uncheck the box, then an error message displays to the user.</description>
+        <errorConditionFormula>AND(
+Appeal__c != true,
+ PRIORVALUE(Appeal__c) == true,
+$Profile.Name == 'Intake Manager'
+)</errorConditionFormula>
+        <errorMessage>Only National Medical Affairs can uncheck the Appeals checkbox. Please reach out to NMA if you need to uncheck this box.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Lead_Appeal_Validation_For_Status</fullName>
+        <active>true</active>
+        <description>If an Intake Manager attempts to change the status from DNQ to Eligibility Review and the “Appeal” checkbox is unchecked then,  
+An error message displays to the user when they attempt to save the lead record .</description>
+        <errorConditionFormula>AND(
+ISPICKVAL(Status , 'Eligibility Review') ,
+ISPICKVAL(PRIORVALUE(Status), 'DNQ'),  
+Appeal__c != true,
+$Profile.Name == 'Intake Manager'
+)</errorConditionFormula>
+        <errorMessage>A Lead that is in a status of DNQ can only be placed in Eligibility Review when requesting an Appeal of the eligibility decision. If requesting an Appeal, please check the “Appeal” checkbox on the Lead record before clicking Save.</errorMessage>
+    </validationRules>
+    <validationRules>
         <fullName>Lead_BirthDay_Date_Validation</fullName>
         <active>true</active>
         <description>This validation rule is used to prevent the date you have entered in the birthday date field if the value is today or greater than today.</description>
