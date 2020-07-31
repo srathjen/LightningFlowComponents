@@ -351,6 +351,7 @@
     <name>ProfileSessionSetting</name>
   </types>
   <types>
+     <members>Contact.Contact_Fields2</members>
     <members>Case.DatesP1</members>
     <members>Case.DatesP3</members>
     <members>Case.Wish_Timing</members>
