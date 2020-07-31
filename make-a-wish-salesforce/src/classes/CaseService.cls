@@ -152,7 +152,7 @@ public class CaseService {
         if (lead.Rush__c) {
             newCase.Rush__c = true;
             newCase.Rush_Explanation__c = lead.Please_Explain__c;
-            newCase.Rush_Timeframe__c = RUSH_TIME_FRAME;
+            newCase.Rush_Timeframe__c = lead.Expedite_timeframe__c == null ? RUSH_TIME_FRAME : lead.Expedite_timeframe__c;
         } else {
             newCase.Rush__c = false;
         }
@@ -171,6 +171,12 @@ public class CaseService {
             newCase.Fund_Id__c = lead.unique_wish_identifier__c;
             newCase.UWISource__c = UWI_SOURCE_LEAD;
             newCase.Wish_Assist__c = true;
+        }
+        if(!String.isBlank(lead.Will_Child_s_Condition_Deteriorate__c)) {
+            newCase.Will_Childs_Condition_Deteriorate__c = lead.Will_Child_s_Condition_Deteriorate__c;
+        }
+        if(!String.isBlank(lead.Please_Explain_Deteriorate__c)) {
+            newCase.Condition_Deteriorate_Explanation__c = lead.Please_Explain_Deteriorate__c;
         }
         return newCase;
     }
