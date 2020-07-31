@@ -16718,6 +16718,27 @@ RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>Please specify "I am recognized to practice as a" before changing the status to "Eligibility Review".</errorMessage>
     </validationRules>
     <validationRules>
+	   <fullName>Lead_DNQ_No_Change</fullName>
+    <active>true</active>
+    <description>SIW-649</description>
+    <errorConditionFormula>AND(
+OR(
+ISPICKVAL(Status,&apos;Inquiry&apos;),
+ISPICKVAL(Status,&apos;Referred&apos;),
+ISPICKVAL(Status,&apos;Qualified&apos;),
+ISPICKVAL(Status,&apos;Closed&apos;)
+)
+&amp;&amp;
+RecordType.Name =&quot;Wish Child&quot;
+&amp;&amp;
+ISPICKVAL(PRIORVALUE(Status),&quot;DNQ&quot;))
+&amp;&amp; $Profile.Name != &apos;System Administrator&apos;
+&amp;&amp;
+RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+    <errorDisplayField>Status</errorDisplayField>
+    <errorMessage>The status of a DNQd Lead cannot be updated.</errorMessage>
+	    </validationRules>
+    <validationRules>
         <fullName>Lead_Referral_Date_Validation</fullName>
         <active>true</active>
         <description>This validation rule is used to prevent the date you have entered in the Referred Date field if the value is before the inquiry date.</description>
@@ -16736,12 +16757,31 @@ RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>Please provide the ICD or Diagnosis given by referrer.</errorMessage>
     </validationRules>
     <validationRules>
-        <fullName>Lead_Status_QualifiedOrEligib_Validation</fullName>
-        <active>true</active>
-        <errorConditionFormula>AND(ISCHANGED(Status),AND(NOT(OR(ISPICKVAL(PRIORVALUE(Sub_Status__c),'Pending Diagnosis Verification'), ISPICKVAL(PRIORVALUE(Sub_Status__c), 'Pending Part A'),ISPICKVAL(PRIORVALUE(Sub_Status__c),'Pending Paper DV'))), NOT(ISPICKVAL(PRIORVALUE(Status), 'Eligibility Review')), ISPICKVAL(Status ,'Qualified'))) &amp;&amp; $Profile.Name != 'Integration' &amp;&amp; Migrated_Record__c == false
+     <fullName>Lead_Status_QualifiedOrEligib_Validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+OR(
+ISPICKVAL(Status,&apos;Qualified&apos;),
+ISPICKVAL(Status,&apos;Eligibility Review&apos;)
+),
+ISCHANGED(Status),
+AND(NOT(OR(ISPICKVAL(PRIORVALUE(Sub_Status__c),&apos;Pending Diagnosis Verification&apos;), ISPICKVAL(PRIORVALUE(Sub_Status__c), &apos;Pending Part A&apos;),ISPICKVAL(PRIORVALUE(Sub_Status__c),&apos;Pending Paper DV&apos;)))
+)
+)
+&amp;&amp; $Profile.Name != &apos;Full Access National Staff&apos;
+&amp;&amp; Migrated_Record__c == false
 &amp;&amp;
-RecordType.Name ="Wish Child"</errorConditionFormula>
-        <errorMessage>The status can be updated to Eligibility Review or Qualified only when the previous Sub Status is Pending Diagnosis Verification or Pending Part A or Pending Paper DV.</errorMessage>
+RecordType.Name =&quot;Wish Child&quot;
+&amp;&amp; NOT(ISPICKVAL(PRIORVALUE(Status),&apos;DNQ&apos;))
+&amp;&amp; NOT(ISPICKVAL(PRIORVALUE(Status),&apos;Eligibility Review&apos;))
+&amp;&amp; NOT(ISPICKVAL(PRIORVALUE(Status),&apos;Qualified&apos;))
+&amp;&amp; $Profile.Name != &apos;System Administrator&apos; 
+&amp;&amp; $Profile.Name != &apos;Integration&apos; 
+&amp;&amp; Migrated_Record__c == false
+&amp;&amp;
+RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+    <errorDisplayField>Status</errorDisplayField>
+    <errorMessage>The status can be updated to Eligibility Review or Qualified only when the previous Sub Status is Pending Diagnosis Verification or Pending Paper DV.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Status_Restrict_on_Referred</fullName>
@@ -16784,21 +16824,23 @@ RecordType.Name ="Wish Child"
         <errorMessage>Only the National Medical Advisor can change the Lead Status when a Lead is in Eligibility Review. Please reach out to the National Medical Advisor through Chatter on the Lead if the Lead Status needs to change.</errorMessage>
     </validationRules>
     <validationRules>
-        <fullName>Lead_Substatus_For_DNQ</fullName>
-        <active>true</active>
-        <description>Require substatus when lead status is changed to DNQ</description>
-        <errorConditionFormula>AND(     
+   <fullName>Lead_Substatus_For_DNQ</fullName>
+    <active>true</active>
+    <description>Require substatus when lead status is changed to DNQ</description>
+    <errorConditionFormula>AND(     
    OR(
-      ISPICKVAL(Status,'DNQ'),
-      ISPICKVAL(Status,'Closed')
+      ISPICKVAL(Status,&apos;DNQ&apos;),
+      ISPICKVAL(Status,&apos;Closed&apos;)
    ),
-   ISPICKVAL(Sub_Status__c,''),
-   $Profile.Name != 'Integration'
+   ISPICKVAL(Sub_Status__c,&apos;&apos;),
+   $Profile.Name != &apos;Integration&apos;
 )
 &amp;&amp;
-RecordType.Name ="Wish Child"</errorConditionFormula>
-        <errorDisplayField>Sub_Status__c</errorDisplayField>
-        <errorMessage>Please Enter Sub Status</errorMessage>
+RecordType.Name =&quot;Wish Child&quot;
+&amp;&amp;
+NOT(ISPICKVAL(PRIORVALUE(Status),&quot;Eligibility Review&quot;))</errorConditionFormula>
+    <errorDisplayField>Sub_Status__c</errorDisplayField>
+    <errorMessage>Please Enter Sub Status</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Wish_Aware_Validation</fullName>
