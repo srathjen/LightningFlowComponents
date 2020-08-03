@@ -354,10 +354,10 @@
     <members>Case.DatesP1</members>
     <members>Case.DatesP3</members>
     <members>Case.Wish_Timing</members>
-    <members>Contact.Contact_Fields2</members>
-    <members>Lead.Next_Steps</members>
-    <members>Contact.Medical_Information</members>
     <members>Contact.Contact_Fields</members>
+    <members>Contact.Contact_Fields2</members>
+    <members>Contact.Medical_Information</members>
+    <members>Lead.Next_Steps</members>
     <name>QuickAction</name>
   </types>
   <types>
