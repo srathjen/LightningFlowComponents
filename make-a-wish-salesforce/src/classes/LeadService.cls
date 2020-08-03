@@ -3,6 +3,7 @@
  * @author Gustavo Mayer, Traction on Demand
  * @createdDate 2/27/2020
  * @updated Bmac 06/26/2020 SIW-616 lines 770, 841, 857
+ * @updated Manoj 08/03/2020 SIW-378 : Reset fields: lines 143-148
  * @updated CSmith 06/05/2020 SIW-539 prevent any_medical_reason_for_moving_quickly__c from being reset. resetLead and resetLeadDVMedicalSummary methods */
 public class LeadService {
 
@@ -74,7 +75,9 @@ public class LeadService {
                 SELECT Id,Hidden_Potential_Rush__c,
                         Part_A_Received__c,Part_A_Sent__c, Status, Part_A_Form_Password__c,
                         Diagnosis_Given_By_Referrer__c, ICD_Given_By_Referrer__c,
-                        PD_Condition_Description__c, PD_ICD_Code__c
+                        PD_Condition_Description__c, PD_ICD_Code__c,Does_Child_Have_Cognitive_Delays__c,
+            			Does_Child_Have_Speech_or_Language_Delay__c,Non_Verbal_Communication_Method__c,
+            			Non_Verbal_Additional_Information__c,Non_Verbal__c
                 FROM Lead
                 WHERE Id = :leadId
         ];
@@ -136,6 +139,14 @@ public class LeadService {
         lead.Ventilator__c = EMPTY;
         lead.Why_do_you_feel_would_be_eligible_Wish__c = EMPTY;
         lead.Will_Child_s_Condition_Deteriorate__c = EMPTY;
+        
+        //SIW-378 : Reset Fields
+        lead.Does_Child_Have_Cognitive_Delays__c = EMPTY;
+        lead.Does_Child_Have_Speech_or_Language_Delay__c = EMPTY;
+        lead.Non_Verbal_Communication_Method__c = EMPTY;
+        lead.Non_Verbal_Additional_Information__c = EMPTY;
+        lead.Non_Verbal__c = EMPTY;
+        
         update lead;
         return lead;
     }
