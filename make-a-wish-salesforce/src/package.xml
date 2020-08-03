@@ -249,6 +249,10 @@
     <name>Layout</name>
   </types>
   <types>
+		<members>LeadConvertSettings</members>
+		<name>LeadConvertSettings</name>
+	</types>
+  <types>
     <members>*</members>
     <name>LightningComponentBundle</name>
   </types>
