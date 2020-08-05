@@ -493,9 +493,9 @@
                     <label>No</label>
                 </value>
                 <value>
-                    <fullName>I don’t have access to that information. I recommend the chapter follow up with the medical team.</fullName>
+                    <fullName>I do not have access to that information. I recommend the chapter follow up with the medical team</fullName>
                     <default>false</default>
-                    <label>I don't have access to that information. I recommend the chapter follow up with the medical team.</label>
+                    <label>I do not have access to that information. I recommend the chapter follow up with the medical team</label>
                 </value>
                 <value>
                     <fullName>Mild: Functions close to peers</fullName>
@@ -539,9 +539,9 @@
                     <label>Yes</label>
                 </value>
                 <value>
-                    <fullName>I don't have access to that information. I recommend the chapter follow up with the medical team</fullName>
+                    <fullName>I do not have access to that information. I recommend the chapter follow up with the medical team</fullName>
                     <default>false</default>
-                    <label>I don't have access to that information. I recommend the chapter follow up with the medical team</label>
+                    <label>I do not have access to that information. I recommend the chapter follow up with the medical team</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
