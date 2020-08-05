@@ -324,24 +324,24 @@ public with sharing class CaseServiceTest {
         insert cases;
        
         
-		List<Wish_Expense_Type__c> wishExpTypeList = TestDataFactory.createWishExpenseTypes(1, 'Airfare');
+        List<Wish_Expense_Type__c> wishExpTypeList = TestDataFactory.createWishExpenseTypes(1, 'Airfare');
         insert wishExpTypeList;
-		
-		List<Wish_Expense_Transaction_Code__c> wishExpTransCode = TestDataFactory.createWishTransCodes(1, 'Airfare Westjet');
+        
+        List<Wish_Expense_Transaction_Code__c> wishExpTransCode = TestDataFactory.createWishTransCodes(1, 'Airfare Westjet');
         wishExpTransCode[0].Wish_Expense_Type__c = wishExpTypeList[0].Id;
         insert wishExpTransCode;
-		List<Wish_Budget__c> wishBudgetList = TestDataFactory.createWishBudget(5, cases[0].Id);
+        List<Wish_Budget__c> wishBudgetList = TestDataFactory.createWishBudget(5, cases[0].Id);
         insert wishBudgetList;
         Test.startTest();
         List<Wish_Expense__c> wishExpenseList = TestDataFactory.createWishExpense(1, wishBudgetList[0].Id);
         wishExpenseList[0].Case__c = cases[0].Id;
         wishExpenseList[0].FE_Posted_Cash__c = 100;
         wishExpenseList[0].Wish_Expense_Transaction_Code__c = wishExpTransCode[0].Id;
-		wishExpenseList[0].Budget_Cash__c = wishExpenseList[0].Projected_Cash__c =wishExpenseList[0].FE_Posted_In_Kind__c = wishExpenseList[0].Actual_Cash__c=10;
-		wishExpenseList[0].Budget_In_Kind__c = wishExpenseList[0].Projected_In_Kind__c =wishExpenseList[0].Actual_In_Kind__c= 20;
+        wishExpenseList[0].Budget_Cash__c = wishExpenseList[0].Projected_Cash__c =wishExpenseList[0].FE_Posted_In_Kind__c = wishExpenseList[0].Actual_Cash__c=10;
+        wishExpenseList[0].Budget_In_Kind__c = wishExpenseList[0].Projected_In_Kind__c =wishExpenseList[0].Actual_In_Kind__c= 20;
         wishExpenseList[0].RecordTypeId = Constant_AC.WISH_EXPENSE_RT_FINANCE;
         insert wishExpenseList; 
-		
+        
         cases[0].Status = Constant_AC.CASE_STATUS_COMPLETED;
         cases[0].Diagnosis_Verification_Receive_Date__c = cases[0].Referral_Date__c = Date.today();
         try{
@@ -351,7 +351,7 @@ public with sharing class CaseServiceTest {
             
         }
     }
-	@IsTest
+    @IsTest
     static void testChangeToCompletedUpdate() {
         Lead lead = getLead();
         List<Case> cases = createWishCases(lead);
@@ -392,10 +392,10 @@ System.AssertEquals(expectedExceptionThrown, true);
         Lead lead = getLead();
         List<Case> cases = createWishCases(lead);
         insert cases;
-		
+        
         cases[0].Status = Constant_AC.CASE_STATUS_READY_TO_ASSIGN;
         cases[0].Sub_Status__c = Constant_AC.CASE_SUB_STATUS_ABANDONED;
-		
+        
         update cases;
     }
     @IsTest
@@ -403,7 +403,7 @@ System.AssertEquals(expectedExceptionThrown, true);
         Lead lead = getLead();
         List<Case> cases = createWishCases(lead);
         insert cases;
-		List<User> users;
+        List<User> users;
         System.runAs(TestDataFactory.adminUser) {
             users = TestDataFactory.createVolunteerUser(1, 'Active Volunteer (Login)', 'Manager');
             insert users;
@@ -422,7 +422,7 @@ System.AssertEquals(expectedExceptionThrown, true);
         insert caseTeamMembers;
         cases[0].Status = Constant_AC.CASE_STATUS_READY_TO_ASSIGN;
         cases[0].Sub_Status__c = Constant_AC.CASE_SUB_STATUS_ABANDONED;
-		cases[0].ownerid=users[0].Id;
+        cases[0].ownerid=users[0].Id;
         update cases;
     }
     @IsTest
@@ -430,7 +430,7 @@ System.AssertEquals(expectedExceptionThrown, true);
         Lead lead = getLead();
         List<Case> cases = createWishCases(lead);
         insert cases;
-		List<User> users;
+        List<User> users;
         System.runAs(TestDataFactory.adminUser) {
             users = TestDataFactory.createVolunteerUser(1, 'Active Volunteer (Login)', 'Manager');
             insert users;
@@ -449,7 +449,7 @@ System.AssertEquals(expectedExceptionThrown, true);
         insert caseTeamMembers;
         cases[0].Status = Constant_AC.CASE_STATUS_READY_TO_ASSIGN;
         cases[0].Sub_Status__c = Constant_AC.CASE_SUB_STATUS_ABANDONED;
-		
+        
         update cases;
     }
     @IsTest
@@ -560,7 +560,7 @@ System.AssertEquals(expectedExceptionThrown, true);
                         Treating_Medical_Professional_Email__c, ConvertedAccountId,
                         Why_do_you_feel_would_be_eligible_Wish__c, Part_A_Received__c, Part_A_Sent__c, ChapterName__c,
                         PD_Condition_Description__c, ChapterName__r.Qualified_Wish_Owner__c, FirstName, LastName, Rush__c,
-                        Please_Explain__c, Referred_Date__c, Inquiry_Date__c, Out_of_Territory__c, unique_wish_identifier__c,
+                        Please_Explain__c, Referred_Date__c,Please_Explain_Deteriorate__c, Will_Child_s_Condition_Deteriorate__c,Expedite_timeframe__c,Inquiry_Date__c, Out_of_Territory__c, unique_wish_identifier__c,
                         hospital_treatment_facility_treating__c
                 FROM Lead
                 WHERE Name = 'Jack Smith'
@@ -666,11 +666,11 @@ System.AssertEquals(expectedExceptionThrown, true);
         List<case> Caselist=CaseService.updateHiddenVolunteerInactive(CaseId);
         Test.stopTest();
         
-    }	
+    }   
     
     @IsTest
     public static void CreateCaseTeamMember() {
-	
+    
 
         User currentUser = Utils.currentUser;
         List<Account> accounts = TestDataFactory.createAccount(1);
@@ -736,7 +736,7 @@ System.AssertEquals(expectedExceptionThrown, true);
         wish.Budget_Approved_Date__c = System.today();
         wish.Update_Wish_Child_Form_Info__c = true;
         insert cases;
-		
+        
         List<Non_Wish_Events__c> nonWishEvents = TestDataFactory.createNonWishEvent(2);
         Non_Wish_Events__c nonWishEvent = nonWishEvents.get(0);
         nonWishEvent.Event_Name__c = 'Send Off';
@@ -753,8 +753,8 @@ System.AssertEquals(expectedExceptionThrown, true);
         nonWishEvent2.Chapter__c = volunteerUserContact.AccountId;
         nonWishEvent2.RecordTypeId = Constant_AC.EVENTS_ID;
         insert nonWishEvents;
-		
-		List<Role__c> roles = TestDataFactory.createRole(1, true);
+        
+        List<Role__c> roles = TestDataFactory.createRole(1, true);
         Role__c wishGranterRole = roles.get(0);
         wishGranterRole.Name = 'Wish Granter';
         wishGranterRole.isWishRole__c = true;
@@ -766,7 +766,7 @@ System.AssertEquals(expectedExceptionThrown, true);
         chapterRole.Role_Name__c = wishGranterRole.Id;
         chapterRole.Background_Check_Required__c = true;
         insert chapterRoles;
-		List<Volunteer_Opportunity__c> volunteerOpportunities = TestDataFactory.createVolunteerOpportunity(1);
+        List<Volunteer_Opportunity__c> volunteerOpportunities = TestDataFactory.createVolunteerOpportunity(1);
         Volunteer_Opportunity__c volunteerOpportunity = volunteerOpportunities.get(0);
         volunteerOpportunity.Chapter_Role_Opportunity__c = chapterRole.Id;
         volunteerOpportunity.Wish__c = wish.Id;
@@ -802,7 +802,7 @@ System.AssertEquals(expectedExceptionThrown, true);
             updateVolunteerOpportunity.Volunteer_Name__c = volunteerUser1.ContactId;
             Test.startTest();
             update updateVolunteerOpportunity;
-       		Set<Id> volunteerIds = new Set<Id>();
+            Set<Id> volunteerIds = new Set<Id>();
             volunteerIds.add(updateVolunteerOpportunity.id);
             list<Volunteer_Opportunity__c> volunteerOpportunities1 = new list<Volunteer_Opportunity__c>();
             volunteerOpportunities1.add(updateVolunteerOpportunity);
