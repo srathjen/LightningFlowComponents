@@ -3099,57 +3099,6 @@ IF(ISBLANK(COI_Expiration_Date__c)=TRUE, IMAGE("/resource/icons/COI_Missing.png"
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Communication__c</fullName>
-        <description>It will hold which type of communication can understand by child and this field mapped from lead at the time of lead conversion.</description>
-        <externalId>false</externalId>
-        <label>Communication</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>MultiselectPicklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>This child is non-verbal</fullName>
-                    <default>false</default>
-                    <label>This child is non-verbal</label>
-                </value>
-                <value>
-                    <fullName>This child is developmentally on target for chronological age</fullName>
-                    <default>false</default>
-                    <label>This child is developmentally on target for chronological age</label>
-                </value>
-                <value>
-                    <fullName>This child functions at a 0-2 year old, Sensorimotor stage</fullName>
-                    <default>false</default>
-                    <label>This child functions at a 0-2 year old, Sensorimotor stage</label>
-                </value>
-                <value>
-                    <fullName>This child functions at a 2-7 year old, Preoperational stage</fullName>
-                    <default>false</default>
-                    <label>This child functions at a 2-7 year old, Preoperational stage</label>
-                </value>
-                <value>
-                    <fullName>This child functions at a 7-11 year old, Concrete Operational stage</fullName>
-                    <default>false</default>
-                    <label>This child functions at a 7-11 year old, Concrete Operational stage</label>
-                </value>
-                <value>
-                    <fullName>This child functions at an 11+ year old, Formal Operational stage</fullName>
-                    <default>false</default>
-                    <label>This child functions at an 11+ year old, Formal Operational stage</label>
-                </value>
-                <value>
-                    <fullName>I am not sure</fullName>
-                    <default>false</default>
-                    <label>I am not sure</label>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
-        <visibleLines>4</visibleLines>
-    </fields>
-    <fields>
         <fullName>Contact_Account_Name__c</fullName>
         <description>It will be used as a hidden field to store the contact's account name</description>
         <externalId>false</externalId>
@@ -4429,77 +4378,77 @@ and the date it was or will be granted.</inlineHelpText>
         </valueSet>
     </fields>
     <fields>
-	   <fullName>Cognitive_Delays__c</fullName>
-    <description>SIW-657</description>
-    <externalId>false</externalId>
-    <label>Cognitive Delays</label>
-    <required>false</required>
-    <trackFeedHistory>false</trackFeedHistory>
-    <trackHistory>false</trackHistory>
-    <type>Picklist</type>
-    <valueSet>
-        <restricted>true</restricted>
-        <valueSetDefinition>
-            <sorted>false</sorted>
-            <value>
-                <fullName>No</fullName>
-                <default>false</default>
-                <label>No</label>
-            </value>
-            <value>
-                <fullName>I don&apos;t have access to that information. I recommend the chapter follow up with the medical team.</fullName>
-                <default>false</default>
-                <label>I don&apos;t have access to that information. I recommend the chapter follow up with the medical team.</label>
-            </value>
-            <value>
-                <fullName>Mild: Functions close to peers</fullName>
-                <default>false</default>
-                <label>Mild: Functions close to peers</label>
-            </value>
-            <value>
-                <fullName>Moderate: Functions below peers</fullName>
-                <default>false</default>
-                <label>Moderate: Functions below peers</label>
-            </value>
-            <value>
-                <fullName>Severe: Functions nothing like same-age peers, extremely cognitively delayed.</fullName>
-                <default>false</default>
-                <label>Severe: Functions nothing like same-age peers, extremely cognitively delayed.</label>
-            </value>
-        </valueSetDefinition>
-    </valueSet>
+        <fullName>Cognitive_Delays__c</fullName>
+        <description>SIW-657</description>
+        <externalId>false</externalId>
+        <label>Cognitive Delays</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+                <value>
+                    <fullName>I do not have access to that information. I recommend the chapter follow up with the medical team</fullName>
+                    <default>false</default>
+                    <label>I do not have access to that information. I recommend the chapter follow up with the medical team</label>
+                </value>
+                <value>
+                    <fullName>Mild: Functions close to peers</fullName>
+                    <default>false</default>
+                    <label>Mild: Functions close to peers</label>
+                </value>
+                <value>
+                    <fullName>Moderate: Functions below peers</fullName>
+                    <default>false</default>
+                    <label>Moderate: Functions below peers</label>
+                </value>
+                <value>
+                    <fullName>Severe: Functions nothing like same-age peers, extremely cognitively delayed.</fullName>
+                    <default>false</default>
+                    <label>Severe: Functions nothing like same-age peers, extremely cognitively delayed.</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
-	   <fullName>Does_Child_Have_Speech_Language_Delays__c</fullName>
-    <description>SIW-652</description>
-    <externalId>false</externalId>
-    <label>Speech or Language Delays</label>
-    <required>false</required>
-    <trackFeedHistory>false</trackFeedHistory>
-    <trackHistory>false</trackHistory>
-    <type>Picklist</type>
-    <valueSet>
-        <restricted>true</restricted>
-        <valueSetDefinition>
-            <sorted>false</sorted>
-            <value>
-                <fullName>No, child is verbal at an age-appropriate level.</fullName>
-                <default>false</default>
-                <label>No, child is verbal at an age-appropriate level.</label>
-            </value>
-            <value>
-                <fullName>Yes</fullName>
-                <default>false</default>
-                <label>Yes</label>
-            </value>
-            <value>
-                <fullName>I don&apos;t have access to that information. I recommend the chapter follow up with the medical team.</fullName>
-                <default>false</default>
-                <label>I don&apos;t have access to that information. I recommend the chapter follow up with the medical team.</label>
-            </value>
-        </valueSetDefinition>
-    </valueSet>
-	</fields>
+        <fullName>Does_Child_Have_Speech_Language_Delays__c</fullName>
+        <description>SIW-652</description>
+        <externalId>false</externalId>
+        <label>Speech or Language Delays</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>No, child is verbal at an age-appropriate level.</fullName>
+                    <default>false</default>
+                    <label>No, child is verbal at an age-appropriate level.</label>
+                </value>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>I do not have access to that information. I recommend the chapter follow up with the medical team</fullName>
+                    <default>false</default>
+                    <label>I do not have access to that information. I recommend the chapter follow up with the medical team</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
     <fields>
 	    <fullName>Non_Verbal_Communication_Method__c</fullName>
     <description>SIW-657</description>
@@ -4542,7 +4491,7 @@ and the date it was or will be granted.</inlineHelpText>
     </valueSet>
     <visibleLines>4</visibleLines>
 	</fields>
-    <fields>
+	<fields>
 	   <fullName>Non_Verbal_Additional_Information__c</fullName>
     <description>SIW-657</description>
     <externalId>false</externalId>
@@ -4553,7 +4502,7 @@ and the date it was or will be granted.</inlineHelpText>
     <type>LongTextArea</type>
     <visibleLines>5</visibleLines>
 	</fields>
-    <fields>
+	<fields>
 	  <fullName>Communication__c</fullName>
     <description>It will hold which type of communication can understand by child and this field mapped from lead at the time of lead conversion.</description>
     <externalId>false</externalId>
@@ -4605,7 +4554,7 @@ and the date it was or will be granted.</inlineHelpText>
     </valueSet>
     <visibleLines>4</visibleLines>
 	</fields>
-    <fields>
+	<fields>
         <fullName>Interview_Date__c</fullName>
         <externalId>false</externalId>
         <label>Interview Date</label>
