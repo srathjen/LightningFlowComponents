@@ -11929,6 +11929,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Lead.DV_Reminder_Last_Sent_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Lead.Debilitation_may_extend_over_many_years__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -23970,6 +23975,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>dsfs__DocuSign_Recipient_Status__c.DV_Form_Password__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>dsfs__DocuSign_Recipient_Status__c.Envelope_Number__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

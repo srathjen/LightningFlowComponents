@@ -22544,6 +22544,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>dsfs__DocuSign_Recipient_Status__c.Envelope_Number__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>dsfs__DocuSign_Recipient_Status__c.Lead_ID__c</field>
         <readable>true</readable>
     </fieldPermissions>

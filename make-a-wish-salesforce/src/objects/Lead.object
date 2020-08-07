@@ -476,6 +476,16 @@
         <type>Phone</type>
     </fields>
     <fields>
+        <fullName>DV_Reminder_Last_Sent_Date__c</fullName>
+        <description>SIW-659</description>
+        <externalId>false</externalId>
+        <label>DV Reminder Last Sent Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Does_Child_Have_Cognitive_Delays__c</fullName>
         <externalId>false</externalId>
         <label>Does Child Have Cognitive Delays?</label>
