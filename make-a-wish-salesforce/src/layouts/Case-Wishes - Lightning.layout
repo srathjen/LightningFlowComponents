@@ -2,6 +2,7 @@
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <customButtons>Wish_Expense</customButtons>
     <customButtons>Run_Download</customButtons>
+    <customButtons>Start_Wish_Interview</customButtons>
     <emailDefault>false</emailDefault>
     <excludeButtons>Clone</excludeButtons>
     <excludeButtons>CloseCase</excludeButtons>
@@ -85,10 +86,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Rush_Timeframe__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Appeal__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
