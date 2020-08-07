@@ -4,6 +4,7 @@
  * @createdDate 2/27/2020
  * @updated Bmac 06/26/2020 SIW-616 lines 770, 841, 857
  * @updated Manoj 08/03/2020 SIW-378 : Reset fields: lines 143-148
+ * @updated Manoj 08/06/2020 SIW-666 : Reset fields: lines 151-153
  * @updated CSmith 06/05/2020 SIW-539 prevent any_medical_reason_for_moving_quickly__c from being reset. resetLead and resetLeadDVMedicalSummary methods */
 public class LeadService {
 
@@ -146,7 +147,11 @@ public class LeadService {
         lead.Non_Verbal_Communication_Method__c = EMPTY;
         lead.Non_Verbal_Additional_Information__c = EMPTY;
         lead.Non_Verbal__c = EMPTY;
-        
+
+        //SIW-666 : Reset Fields
+        lead.Expedite_timeframe__c = EMPTY;
+        lead.Other_expedite_timeframe_comments__c = EMPTY;
+
         update lead;
         return lead;
     }

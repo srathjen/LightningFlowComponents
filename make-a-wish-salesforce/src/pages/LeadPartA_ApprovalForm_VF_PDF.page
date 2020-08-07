@@ -4,6 +4,7 @@
 3. 11/02/2020 - Manoj      - SIW-376 : Commented first 2 statements as per SIW-376
 4. 09/04/2020 - Manoj      - SIW-355 : Changed the placement of one question as mentiond in the ticket, changed question verbiage for one question
 5. 29/07/2020 - Manoj      - SIW-378 : Added and hide Questions as mentioned in ticket
+6. 07/08/2020 - Manoj      - SIW-654 : Added question label to be displayed in docusign
 *********************************************************************************************************************************** -->
 <apex:page showHeader="false" renderAs="pdf" sidebar="false" applyHtmlTag="false" standardStylesheets="false" controller="PARTAPDF" applyBodyTag="false" cache="false">
     <head>
@@ -528,7 +529,7 @@
                                         <div class="left-col"> {!currLead.Non_Verbal_Communication_Method__c}</div>
                                     </div>
                                     <div class="container" style="width:100%;">
-                                        <div class="left-col"></div>
+                                        <div class="left-col">{!placeHolderAddInfo}</div><!--SIW-654 : Added question label to be displayed in docusign -->
                                         <div class="left-col"> {!currLead.Non_Verbal_Additional_Information__c}</div>
                                     </div>
                                 </apex:outputpanel>
