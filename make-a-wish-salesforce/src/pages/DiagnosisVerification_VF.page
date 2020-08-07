@@ -20,6 +20,7 @@ Modification Log:
 14.30/05/2020 - Manoj      - SIW-508 : Hide Hospitalization Questions if DV is autoqualifying
 15.02/06/2020 - Manoj      - SIW-557 : Updated placeholder to 'Acute Lymphoblastic Leukemia (ALL)' from 'Malignant Neoplasm' and to 'C91.0' from 'C00'
 16.29/07/2020 - Manoj      - SIW-378 : Added and hide Questions as mentioned in ticket
+17.07/08/2020 - Manoj      - SIW-654 : Hide unnecessary question based on user input to previous questions
 *********************************************************************************************************************************** -->
 <apex:page controller="DiagnosisVerification_AC" applyBodyTag="false" sidebar="false" showHeader="false" docType="html-5.0" standardStylesheets="false" title="Make-A-Wish | Diagnosis Verification Form" cache="false">
     <script>
@@ -1654,12 +1655,14 @@ Modification Log:
                                                 $('.expedite-explain').prop('hidden', false);
                                                 $(".plz-Exp").addClass("requiredField");
                                                 $(".timeFrame").addClass("requiredField");
-                                            } else if(this.value == 'No' || this.value == 'Not Sure') {
+                                            } else {//SIW-654 : Updated logic to hide/show questions based on user inputs to previous question
                                                 $('.plz-Exp').val("");
                                                 $('.timeFrame').val("");
+                                                $('.ideal-time').val("");
                                                 $(".plz-Exp").removeClass("requiredField");
                                                 $(".timeFrame").removeClass("requiredField");
                                                 $('.expedite-explain').prop('hidden', true);
+                                                $('.ideal-timeframe').prop('hidden', true);
                                                 
                                             }
                                         });
@@ -1701,7 +1704,7 @@ Modification Log:
                                             if(this.value == 'Other') {
                                                 $('.ideal-timeframe').prop('hidden', false);
                                                 $(".ideal-time").addClass("requiredField");
-                                            } else{
+                                            } else{//SIW-654 : Updated logic to hide/show questions based on user inputs to previous question
                                                 $('.ideal-time').val("");
                                                 $(".ideal-time").removeClass("requiredField");
                                                 $('.ideal-timeframe').prop('hidden', true);                                                
@@ -1860,7 +1863,7 @@ Modification Log:
                                             if(this.value == 'Yes') {
                                                 $('.condition-deteriorate-explain').prop('hidden', false);
                                                 $(".detex").addClass("requiredField");
-                                            } else if(this.value == 'No' || this.value == 'Not Sure') {
+                                            } else {//SIW-654 : Updated logic to hide/show questions based on user inputs to previous question
                                                 $('.detex').val("");
                                                 $(".detex").removeClass("requiredField");
                                                 $('.condition-deteriorate-explain').prop('hidden', true);

@@ -4,6 +4,7 @@ Date        : 9/30/2016
 Description : This class is used to display the Medical Information in Docusign page
 1. 09/04/2020 - Manoj      - SIW-355 : Added 2 new field to get queried on page load
 2. 29 Jul 2020 - Manoj      - SIW-378 : Added  fields in query for new questions
+2. 07/08/2020  - Manoj      - SIW-654 : Added  fields for placeholder
 *******************************************************************************************************************/
 public class PARTAPDF {
     public Id leadId { get; set; }
@@ -20,7 +21,8 @@ public class PARTAPDF {
     public final String moderateFunction { get; set; }  
     public final String followMedicalTeam { get; set; }
     public final String yesText { get; set; } 
-    public final String noText { get; set; }   
+    public final String noText { get; set; }  
+    public final String placeHolderAddInfo { get; set; } 
 
     public PARTAPDF() {
         currentConditionList = new List<String>();       
@@ -36,8 +38,9 @@ public class PARTAPDF {
         childVerbalAge = Constant_AC.CHILD_VERBAL_AGE;
         yesText = Constant_AC.YES_TEXT;
         noText = Constant_AC.NO_TEXT;
-        
-      
+
+        //SIW-654 : Added  fields for placeholder
+        placeHolderAddInfo = Constant_AC.PLACEHOLDER_ADD_INFO;
 
         loadData();
     }
