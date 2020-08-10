@@ -528,6 +528,9 @@
                                         <div class="left-col"> Which of the following best describes how {!currLead.FirstName} {!currLead.LastName} communicates needs and wants?</div>
                                         <div class="left-col"> {!currLead.Non_Verbal_Communication_Method__c}</div>
                                     </div>
+                                </apex:outputpanel>
+                                <!--SIW-378 Issue fixed : Added seperate condition for 'Non_Verbal_Additional_Information__c' field -->
+                                <apex:outputpanel rendered="{!currLead.Non_Verbal_Additional_Information__c!=Null}">
                                     <div class="container" style="width:100%;">
                                         <div class="left-col">{!placeHolderAddInfo}</div><!--SIW-654 : Added question label to be displayed in docusign -->
                                         <div class="left-col"> {!currLead.Non_Verbal_Additional_Information__c}</div>
