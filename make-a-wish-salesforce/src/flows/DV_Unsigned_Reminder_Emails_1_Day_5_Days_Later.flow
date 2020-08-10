@@ -287,7 +287,7 @@
             <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>LeadID</elementReference>
+                <elementReference>$Record.Lead_ID__c</elementReference>
             </value>
         </filters>
         <object>Lead</object>
