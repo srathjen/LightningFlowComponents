@@ -40,6 +40,7 @@
             <operator>notEqual</operator>
             <value>Account.HH_Account</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>All HTF Accounts</name>

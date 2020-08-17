@@ -61,7 +61,7 @@
         <field>Lead$What_is_the_family_s_primary_spoken_lang__c</field>
     </columns>
     <columns>
-        <field>Lead$Non_Verbal__c</field>
+        <field>Lead$xxNon_Verbal__c</field>
     </columns>
     <description>Details status/sub-status for all leads</description>
     <filter>

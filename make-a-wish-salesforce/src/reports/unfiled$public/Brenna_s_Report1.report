@@ -95,6 +95,7 @@
             <operator>greaterOrEqual</operator>
             <value>2/1/2020</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Brenna&apos;s Report</name>

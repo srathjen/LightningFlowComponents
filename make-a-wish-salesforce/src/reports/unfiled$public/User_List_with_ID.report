@@ -25,6 +25,7 @@
             <operator>equals</operator>
             <value>Arizona - Chapter</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>User List with ID</name>

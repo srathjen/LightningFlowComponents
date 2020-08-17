@@ -20,13 +20,19 @@
         <field>STATUS</field>
     </columns>
     <columns>
-        <field>Lead.Non_Verbal__c</field>
+        <field>Lead.xxNon_Verbal__c</field>
     </columns>
     <columns>
         <field>CITY</field>
     </columns>
     <columns>
         <field>Lead.Any_medical_reason_for_moving_quickly__c</field>
+    </columns>
+    <columns>
+        <field>Lead.PD_Condition_Description__c</field>
+    </columns>
+    <columns>
+        <field>Lead.What_is_the_family_s_primary_spoken_lang__c</field>
     </columns>
     <filter>
         <criteriaItems>
@@ -58,8 +64,8 @@
     <sortOrder>Desc</sortOrder>
     <timeFrameFilter>
         <dateColumn>Lead.Part_A_Received__c</dateColumn>
-        <endDate>2020-02-21</endDate>
+        <endDate>2020-08-17</endDate>
         <interval>INTERVAL_CUSTOM</interval>
-        <startDate>2018-12-25</startDate>
+        <startDate>2019-12-25</startDate>
     </timeFrameFilter>
 </Report>

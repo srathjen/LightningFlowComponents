@@ -38,6 +38,7 @@
             <operator>notEqual</operator>
             <value>Granted,Completed,Closed</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Kids Approaching Travel Wishes</name>

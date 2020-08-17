@@ -73,6 +73,7 @@
             <operator>equals</operator>
             <value>Medical Professional</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Contacts with Relationships</name>

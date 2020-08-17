@@ -41,6 +41,7 @@
             <operator>equals</operator>
             <value>Volunteer_Opportunity__c.Wish</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Val_Wish_Opp</name>

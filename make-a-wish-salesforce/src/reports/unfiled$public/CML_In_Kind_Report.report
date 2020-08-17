@@ -89,6 +89,7 @@
             <operator>equals</operator>
             <value>In_Kind_Donation_Reimbursement__c.In_Kind_Donation</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <name>CML-In Kind Report</name>

@@ -50,6 +50,7 @@
             <operator>notEqual</operator>
             <value>Inactive,Completed,Closed,Denied</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

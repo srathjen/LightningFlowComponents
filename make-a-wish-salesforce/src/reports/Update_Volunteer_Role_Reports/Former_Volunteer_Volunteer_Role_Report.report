@@ -49,6 +49,7 @@
             <operator>equals</operator>
             <value>Former - Volunteer</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

@@ -79,26 +79,20 @@
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Mobile Phone:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].MobilePhone}" id="mobilePhone"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].MobilePhone}" id="mobilePhone"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Email:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].Email}" id="email"/> (<apex:outputField
-                                                value="{!contactInstance[0].npe01__Preferred_Email__c}"
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Email}" id="email"/> (<apex:outputField value="{!contactInstance[0].npe01__Preferred_Email__c}"
                                                 id="preferredEmail"/>)</span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Birthday:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].Birth_Month__c}" id="birthMon"/>&nbsp;<apex:outputField
-                                                value="{!contactInstance[0].Birth_Day__c}" id="birthD"/>, <apex:outputField
-                                                value="{!contactInstance[0].Birth_Year__c}" id="birthY"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Birth_Month__c}" id="birthMon"/>&nbsp;<apex:outputField value="{!contactInstance[0].Birth_Day__c}" id="birthD"/>, <apex:outputField value="{!contactInstance[0].Birth_Year__c}" id="birthY"/></span>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6">
-                                        <apex:outputLabel>Address</apex:outputLabel>
+                                        <apex:outputLabel >Address</apex:outputLabel>
                                     </div>
                                     <div class="col-xs-6 col-sm-6 text-muted">
                                         <address>
@@ -107,8 +101,7 @@
                                             <br/>
                                             <apex:outputField value="{!contactInstance[0].MailingCity}" id="mailCity"/>
                                             ,&nbsp;<apex:outputField value="{!contactInstance[0].MailingState}"
-                                                                     id="mailState"/>&nbsp;<apex:outputField
-                                                    value="{!contactInstance[0].mailingPostalCode}" id="mailPcode"/>
+                                                                     id="mailState"/>&nbsp;<apex:outputField value="{!contactInstance[0].mailingPostalCode}" id="mailPcode"/>
                                             <br/>
                                             <apex:outputField value="{!contactInstance[0].MailingCountrycode}"
                                                               id="countryCode"/>
@@ -123,16 +116,14 @@
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Background Check:
                                     </apex:outputLabel>
                                     <span class="col-xs-6 col-sm-6 text-muted">Expires:&nbsp;
-                                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param
-                                                        value="{!bcExpirationDate}"/></apex:outputText>
+                                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!bcExpirationDate}"/></apex:outputText>
                                         </span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Conflict of Interest:
                                     </apex:outputLabel>
                                     <span class="col-xs-6 col-sm-6 text-muted">Expires:&nbsp;
-                                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param
-                                                        value="{!COIExpirationDate}"/></apex:outputText>
+                                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!COIExpirationDate}"/></apex:outputText>
                                         </span>
                                 </div>
                             </div>
@@ -143,59 +134,50 @@
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Home Phone:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].HomePhone}" id="homePh"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].HomePhone}" id="homePh"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Other Phone:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].OtherPhone}" id="otherPh"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].OtherPhone}" id="otherPh"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Preferred Phone Type:
                                     </apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].npe01__PreferredPhone__c}"
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].npe01__PreferredPhone__c}"
                                                 id="preferredPhType"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Fax:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].Fax}" id="fax"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Fax}" id="fax"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Preferred Email Type:
                                     </apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].npe01__Preferred_Email__c}"
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].npe01__Preferred_Email__c}"
                                                 id="preferEmailType"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Personal Email:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].npe01__HomeEmail__c}"
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].npe01__HomeEmail__c}"
                                                 id="homeEmail"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Work Email:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].npe01__WorkEmail__c}"
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].npe01__WorkEmail__c}"
                                                 id="workEmail"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Alternate Email:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].npe01__AlternateEmail__c}" id="alterEmail"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].npe01__AlternateEmail__c}" id="alterEmail"/></span>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6">
-                                        <apex:outputLabel>Address 2:</apex:outputLabel>
+                                        <apex:outputLabel >Address 2:</apex:outputLabel>
                                     </div>
                                     <div class="col-xs-6 col-sm-6 text-muted">
                                         <address>
                                             <div class="text-muted">
-                                                <apex:outputField
-                                                        value="{!contactInstance[0].npe01__Primary_Address_Type__c}"
+                                                <apex:outputField value="{!contactInstance[0].npe01__Primary_Address_Type__c}"
                                                         id="primaryAdd"/>
                                             </div>
                                             <apex:outputField value="{!contactInstance[0].OtherCity}" id="otherCity"/>
@@ -218,20 +200,17 @@
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Gender:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].Gender__c}" id="gen"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Gender__c}" id="gen"/></span>
                                 </div>
                                 <div class="row gender-desc-output">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Gender Description:
                                     </apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].Self_describe_comment_box__c}"
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Self_describe_comment_box__c}"
                                                 id="genDesc"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Race/Ethnicity:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].Race_Ethnicity__c}"
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Race_Ethnicity__c}"
                                                 id="raceEthnicity"/> </span>
                                 </div>
                             </div>
@@ -243,14 +222,12 @@
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Professional Skills:
                                     </apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].Professional_Skills__c}"
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Professional_Skills__c}"
                                                 id="proSkill"/></span>
                                 </div>
                                 <div class="row otherskills-wrap">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Other Skills:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].Professional_Skills_Other_Notes__c}"
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Professional_Skills_Other_Notes__c}"
                                                 id="proSkillOtherNote"/></span>
                                 </div>
                             </div>
@@ -260,33 +237,27 @@
                             <div class="col-xs-12 col-sm-6">
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Languages:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].Language__c}" id="lan"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Language__c}" id="lan"/></span>
                                 </div>
                                 <div class="row langnotes-wrap">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Language Notes:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].language_notes__c}" id="lanNote"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].language_notes__c}" id="lanNote"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Read:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].Read__c}" id="re"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Read__c}" id="re"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Write:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].write__c}" id="wr"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].write__c}" id="wr"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Speak:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].speak__c}" id="spk"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].speak__c}" id="spk"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Understand:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].understand__c}" id="underStnd"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].understand__c}" id="underStnd"/></span>
                                 </div>
                             </div>
                         </fieldset>
@@ -296,41 +267,34 @@
                             <div class="col-xs-12 col-sm-6">
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Employer:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].Employer__c}" id="emp"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Employer__c}" id="emp"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Street:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].Street_Employer__c}" id="streetEmp"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Street_Employer__c}" id="streetEmp"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">City:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].City_Employer__c}" id="cityEmp"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].City_Employer__c}" id="cityEmp"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">State:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].State_Employer__c}" id="stateEmp"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].State_Employer__c}" id="stateEmp"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Zip:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].Zip_Employer__c}" id="zipEmp"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Zip_Employer__c}" id="zipEmp"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Phone:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].npe01__WorkPhone__c}" id="workPh"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].npe01__WorkPhone__c}" id="workPh"/></span>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-6">
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-10 col-sm-10">May we contact you at work:
                                     </apex:outputLabel>
-                                    <span class="col-xs-2 col-sm-2 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].May_We_Contact_You_at_Work__c}"
+                                    <span class="col-xs-2 col-sm-2 text-muted"><apex:outputField value="{!contactInstance[0].May_We_Contact_You_at_Work__c}"
                                                 id="mayWeContact"/></span>
                                 </div>
                                 <div class="row">
@@ -338,8 +302,7 @@
                                         of a wish<sup>®</sup> at work by learning more about our wishmakers at work<sup>®</sup>
                                         program?
                                     </apex:outputLabel>
-                                    <span class="col-xs-2 col-sm-2 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].Interested_involved_with_Make_A_Wish__c}"
+                                    <span class="col-xs-2 col-sm-2 text-muted"><apex:outputField value="{!contactInstance[0].Interested_involved_with_Make_A_Wish__c}"
                                                 id="interestedMakeWish"/></span>
                                 </div>
                             </div>
@@ -350,19 +313,16 @@
                             <div class="col-xs-12 col-sm-6">
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Name:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].Emergency_Contact__c}" id="emergeContact"/></span>
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Emergency_Contact__c}" id="emergeContact"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Relationship:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].Emergency_Contact_Relationship__c}"
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Emergency_Contact_Relationship__c}"
                                                 id="emergeConRelation"/></span>
                                 </div>
                                 <div class="row">
                                     <apex:outputLabel styleClass="col-xs-6 col-sm-6">Phone:</apex:outputLabel>
-                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField
-                                                value="{!contactInstance[0].Emergency_Contact_Phone__c}"
+                                    <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Emergency_Contact_Phone__c}"
                                                 id="emergeContactPh"/></span>
                                 </div>
                             </div>
@@ -370,8 +330,7 @@
                         <fieldset class="footer">
                             <div class="form-group row">
                                 <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-4 col-md-push-10 p-info">
-                                    <apex:commandButton
-                                            styleClass="col-xs-12 col-sm-12 col-md-12 btn-md edit p-info-btn"
+                                    <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md edit p-info-btn"
                                             value="edit" action="{!EditPersonalInfo}" reRender="formId, uiStates"/>
                                 </div>
                             </div>
@@ -391,8 +350,7 @@
                                             <label for="title">Title</label>
                                         </div>
                                         <div class="col-sm-6">
-                                            <apex:selectList
-                                                    styleclass="form-control col-xs-12 col-sm-12 c-select sm-list"
+                                            <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list"
                                                     value="{!contactInstance[0].Salutation}" size="1"
                                                     multiselect="false" id="sal">
                                                 <apex:selectOptions value="{!Titles}"/>
@@ -401,7 +359,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-3">
-                                            <apex:outputLabel>First Name</apex:outputLabel>
+                                            <apex:outputLabel >First Name</apex:outputLabel>
                                             <span style="color:red;">*</span>
                                         </div>
                                         <div class="col-sm-6">
@@ -413,7 +371,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-3">
-                                            <apex:outputLabel>Last Name</apex:outputLabel>
+                                            <apex:outputLabel >Last Name</apex:outputLabel>
                                             <span style="color:red;">*</span>
                                         </div>
                                         <div class="col-sm-6">
@@ -424,7 +382,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-3">
-                                            <apex:outputLabel>Middle Name</apex:outputLabel>
+                                            <apex:outputLabel >Middle Name</apex:outputLabel>
                                         </div>
                                         <div class="col-sm-6">
                                             <apex:inputText styleclass="form-control" maxlength="50" id="middleinitial"
@@ -460,8 +418,7 @@
                                             <apex:outputLabel for="prefemailaddresstype" styleClass="col-sm-3 sr-only">
                                                 Preferred Email Address Type
                                             </apex:outputLabel>
-                                            <apex:inputField
-                                                    styleClass="form-control sm-list c-select f-emailaddresstype required"
+                                            <apex:inputField styleClass="form-control sm-list c-select f-emailaddresstype required"
                                                     id="prefemailaddresstype"
                                                     value="{!contactInstance[0].npe01__Preferred_Email__c}"/>
                                         </div>
@@ -526,8 +483,7 @@
                                         <apex:outputLabel styleClass="col-sm-3" for="birthmonth">Birth Date <span
                                                     style="color:red;font-size:13px;">&nbsp;*</span></apex:outputLabel>
                                         <div class="col-xs-12 col-sm-6 col-md-6">
-                                            <apex:inputField
-                                                    styleClass="form-control col-xs-12 col-sm-12 col-md-12 c-select bmonth required"
+                                            <apex:inputField styleClass="form-control col-xs-12 col-sm-12 col-md-12 c-select bmonth required"
                                                     id="birthmonth" value="{!contactInstance[0].Birth_Month__c}"/>
                                         </div>
                                     </div>
@@ -558,17 +514,13 @@
                                     <div class="form-group row">
                                         <apex:outputLabel styleClass="col-sm-3">Background Check</apex:outputLabel>
                                         <div class="col-sm-6">
-                                            <span class="text-muted">Expires:&nbsp;<apex:outputText
-                                                        value="{0,date,MM'/'dd'/'yyyy}"><apex:param
-                                                            value="{!bcExpirationDate}"/></apex:outputText></span>
+                                            <span class="text-muted">Expires:&nbsp;<apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!bcExpirationDate}"/></apex:outputText></span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <apex:outputLabel styleClass="col-sm-3">Conflict of Interest</apex:outputLabel>
                                         <div class="col-sm-6">
-                                            <span class="text-muted">Expires:&nbsp;<apex:outputText
-                                                        value="{0,date,MM'/'dd'/'yyyy}"><apex:param
-                                                            value="{!COIExpirationDate}"/></apex:outputText></span>
+                                            <span class="text-muted">Expires:&nbsp;<apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!COIExpirationDate}"/></apex:outputText></span>
                                         </div>
                                     </div>
                                 </div>
@@ -601,8 +553,7 @@
                                             Type <span style="color:red;font-size:13px;">&nbsp;*</span>
                                         </apex:outputLabel>
                                         <div class="col-sm-6">
-                                            <apex:inputField
-                                                    styleClass="form-control col-xs-12 col-sm-12 c-select sm-list required preferredphonetype"
+                                            <apex:inputField styleClass="form-control col-xs-12 col-sm-12 c-select sm-list required preferredphonetype"
                                                     id="preferredphonetype"
                                                     value="{!contactInstance[0].npe01__PreferredPhone__c}"/>
                                         </div>
@@ -621,8 +572,7 @@
                                             Type <span style="color:red;font-size:13px;">&nbsp;*</span>
                                         </apex:outputLabel>
                                         <div class="col-sm-6">
-                                            <apex:inputField
-                                                    styleClass="form-control col-xs-12 col-sm-12 c-select sm-list required preferredemailtype"
+                                            <apex:inputField styleClass="form-control col-xs-12 col-sm-12 c-select sm-list required preferredemailtype"
                                                     id="preferredemailtype"
                                                     value="{!contactInstance[0].npe01__Preferred_Email__c}"
                                                     onChange="setDynamicRequiredFields()"
@@ -636,8 +586,7 @@
                                                   style="color:red;font-size:13px;">*</span>
                                         </apex:outputLabel>
                                         <div class="col-sm-6">
-                                            <apex:inputText
-                                                    styleClass="form-control f-homeemailaddress personalemailaddress"
+                                            <apex:inputText styleClass="form-control f-homeemailaddress personalemailaddress"
                                                     maxlength="50" id="personalemailaddress"
                                                     html-placeholder="personal_email@domain.com"
                                                     value="{!contactInstance[0].npe01__HomeEmail__c}"/>
@@ -650,8 +599,7 @@
                                                   style="color:red;font-size:13px;">*</span>
                                         </apex:outputLabel>
                                         <div class="col-sm-6">
-                                            <apex:inputText
-                                                    styleClass="form-control f-workemailaddress workemailaddress"
+                                            <apex:inputText styleClass="form-control f-workemailaddress workemailaddress"
                                                     maxlength="50" id="workemailaddress"
                                                     html-placeholder="work_email@domain.com"
                                                     value="{!contactInstance[0].npe01__WorkEmail__c}"/>
@@ -664,8 +612,7 @@
                                                   style="color:red;font-size:13px;">*</span>
                                         </apex:outputLabel>
                                         <div class="col-sm-6">
-                                            <apex:inputText
-                                                    styleClass="form-control f-emailaddress alternateemailaddress"
+                                            <apex:inputText styleClass="form-control f-emailaddress alternateemailaddress"
                                                     maxlength="50" id="altemailaddress"
                                                     html-placeholder="alternate_email@domain.com"
                                                     value="{!contactInstance[0].npe01__AlternateEmail__c}"/>
@@ -722,8 +669,7 @@
                                             <apex:outputLabel for="postalcode2">Postal Code</apex:outputLabel>
                                         </div>
                                         <div class="col-sm-6">
-                                            <apex:inputText
-                                                    styleClass="form-control f-postalcode2 postalcode1 notrequired numbers-only"
+                                            <apex:inputText styleClass="form-control f-postalcode2 postalcode1 notrequired numbers-only"
                                                     id="postalcode2" html-placeholder="00000-0000" maxlength="10"
                                                     html-minlength="5" value="{!contactInstance[0].OtherPostalCode}"/>
                                         </div>
@@ -733,7 +679,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-6">
                                     <div class="form-group row">
                                         <div class="col-sm-3">
-                                            <apex:outputLabel>Gender</apex:outputLabel>
+                                            <apex:outputLabel >Gender</apex:outputLabel>
                                         </div>
                                         <div class="col-sm-6">
                                             <apex:selectList styleClass="form-control c-select sm-list f-gender"
@@ -747,8 +693,7 @@
                                         <div class="col-sm-3"><label aria-labelledby="Self-Describe">Gender Description
                                                 <span>(Self-Describe selected)</span></label></div>
                                         <div class="col-sm-6">
-                                            <apex:inputTextarea
-                                                    value="{!contactInstance[0].Self_describe_comment_box__c}"
+                                            <apex:inputTextarea value="{!contactInstance[0].Self_describe_comment_box__c}"
                                                     styleClass="form-control self-desc-field" id="self-desc-tbox"
                                                     html-placeholder="Please enter a description pertaining to 'Self-describe'."/>
                                         </div>
@@ -1036,7 +981,7 @@
                         </fieldset>
                     </apex:pageBlock>
                     <!-- ---------------------- Award and Recognition ----------------------- -->
-                    <apex:pageBlock>
+                    <apex:pageBlock >
                         <!-- --------------------------- Orientation and Training ---------------------------- -->
                         <fieldset class="saved">
                             <legend>Class History</legend>

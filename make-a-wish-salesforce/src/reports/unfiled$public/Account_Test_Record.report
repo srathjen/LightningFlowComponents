@@ -19,6 +19,7 @@
             <operator>equals</operator>
             <value>Chandrasekar Nallusamy,Kanagaraj Arjunan,Jose Rathi Francis,Sophiya George,Sudharsan Kumaravel,Furqan Maqbool,Vennila Paramasivam,ChennaReddy UmmaReddy,Kesavakumar Murugesan</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Account Test Record</name>

@@ -180,7 +180,7 @@
                         <sortOrder>a</sortOrder>
                     </groupingSorts>
                 </groupingSortProperties>
-                <header>All Average In-Kind (Goal 36%)</header>
+                <header>All Average In-Kind (Goal 42%)</header>
                 <legendPosition>Right</legendPosition>
                 <maxValuesDisplayed>6</maxValuesDisplayed>
                 <report>unfiled$public/All_Average_Wish_In_Kind</report>

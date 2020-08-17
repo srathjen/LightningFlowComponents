@@ -29,6 +29,7 @@
             <operator>notEqual</operator>
             <value>Volunteer Orientation</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

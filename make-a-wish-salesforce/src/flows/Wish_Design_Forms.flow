@@ -10952,7 +10952,7 @@ TRIM(RIGHT({!Wish_Case_M.Active_Wish_Granter__c}, (LEN({!Wish_Case_M.Active_Wish
             <targetReference>Get_Wish_Case</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <textTemplates>
         <name>BaseForNewLine</name>
         <text>~~~

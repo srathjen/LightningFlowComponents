@@ -53,6 +53,7 @@
             <operator>contains</operator>
             <value>test</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Test Records - Orientation &amp; Training</name>

@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
         <value>Configurazione account DocuSign</value>
@@ -367,7 +366,6 @@
         <name>dsfs__UseSendOnBehalfOf__c</name>
     </fields>
     <gender>Masculine</gender>
-    
     <nameFieldLabel>Configurazione account DocuSign</nameFieldLabel>
     <startsWith>Consonant</startsWith>
 </CustomObjectTranslation>

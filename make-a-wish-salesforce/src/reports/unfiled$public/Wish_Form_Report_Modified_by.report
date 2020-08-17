@@ -34,6 +34,7 @@
             <operator>equals</operator>
             <value>Kanagaraj Arjunan</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Wish Form - Kanagaraj Arjunan</name>

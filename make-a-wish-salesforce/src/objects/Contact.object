@@ -4415,6 +4415,12 @@ and the date it was or will be granted.</inlineHelpText>
                     <default>false</default>
                     <label>Severe: Functions nothing like same-age peers, extremely cognitively delayed.</label>
                 </value>
+                <value>
+                    <fullName>I don't have access to that information. I recommend the chapter follow up with the medical team.</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>I don't have access to that information. I recommend the chapter follow up with the medical team.</label>
+                </value>
             </valueSetDefinition>
         </valueSet>
     </fields>
@@ -4445,6 +4451,12 @@ and the date it was or will be granted.</inlineHelpText>
                     <fullName>I do not have access to that information. I recommend the chapter follow up with the medical team</fullName>
                     <default>false</default>
                     <label>I do not have access to that information. I recommend the chapter follow up with the medical team</label>
+                </value>
+                <value>
+                    <fullName>I don't have access to that information. I recommend the chapter follow up with the medical team.</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>I don't have access to that information. I recommend the chapter follow up with the medical team.</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
@@ -11364,9 +11376,47 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Cognitive_Delays__c</picklist>
+            <values>
+                <fullName>I do not have access to that information%2E I recommend the chapter follow up with the medical team</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mild%3A Functions close to peers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Moderate%3A Functions below peers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Severe%3A Functions nothing like same-age peers%2C extremely cognitively delayed%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Communication__c</picklist>
             <values>
                 <fullName>I am not sure</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Does_Child_Have_Speech_Language_Delays__c</picklist>
+            <values>
+                <fullName>I do not have access to that information%2E I recommend the chapter follow up with the medical team</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No%2C child is verbal at an age-appropriate level%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -11398,6 +11448,25 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Spouse</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Expedite_timeframe__c</picklist>
+            <values>
+                <fullName>%3C 1 month</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1-3 months</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3-6 months</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -11601,6 +11670,29 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Prof%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Non_Verbal_Communication_Method__c</picklist>
+            <values>
+                <fullName>Assistive communication tool%2C tablet%2C or computer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Crying without the capacity to indicate needs or wants to a caregiver well known to the child</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pointing at desired objects%2C reaching out for something or someone they want%2C  taking your hand to what they want</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Repeating something they just heard in a manner suggesting the child is desiring %28as opposed to just echoing words%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sign language %28either standard or specific to the child%29</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -11922,6 +12014,17 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Wife</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Residing_In_US_7_Yrs__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -12873,9 +12976,47 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Cognitive_Delays__c</picklist>
+            <values>
+                <fullName>I do not have access to that information%2E I recommend the chapter follow up with the medical team</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mild%3A Functions close to peers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Moderate%3A Functions below peers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Severe%3A Functions nothing like same-age peers%2C extremely cognitively delayed%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Communication__c</picklist>
             <values>
                 <fullName>I am not sure</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Does_Child_Have_Speech_Language_Delays__c</picklist>
+            <values>
+                <fullName>I do not have access to that information%2E I recommend the chapter follow up with the medical team</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No%2C child is verbal at an age-appropriate level%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -12907,6 +13048,25 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Spouse</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Expedite_timeframe__c</picklist>
+            <values>
+                <fullName>%3C 1 month</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1-3 months</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3-6 months</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -13110,6 +13270,29 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Prof%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Non_Verbal_Communication_Method__c</picklist>
+            <values>
+                <fullName>Assistive communication tool%2C tablet%2C or computer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Crying without the capacity to indicate needs or wants to a caregiver well known to the child</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pointing at desired objects%2C reaching out for something or someone they want%2C  taking your hand to what they want</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Repeating something they just heard in a manner suggesting the child is desiring %28as opposed to just echoing words%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sign language %28either standard or specific to the child%29</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -13439,6 +13622,17 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Wife</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Residing_In_US_7_Yrs__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -14437,9 +14631,47 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Cognitive_Delays__c</picklist>
+            <values>
+                <fullName>I do not have access to that information%2E I recommend the chapter follow up with the medical team</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mild%3A Functions close to peers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Moderate%3A Functions below peers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Severe%3A Functions nothing like same-age peers%2C extremely cognitively delayed%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Communication__c</picklist>
             <values>
                 <fullName>I am not sure</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Does_Child_Have_Speech_Language_Delays__c</picklist>
+            <values>
+                <fullName>I do not have access to that information%2E I recommend the chapter follow up with the medical team</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No%2C child is verbal at an age-appropriate level%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -14471,6 +14703,25 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Spouse</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Expedite_timeframe__c</picklist>
+            <values>
+                <fullName>%3C 1 month</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1-3 months</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3-6 months</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -14674,6 +14925,29 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Prof%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Non_Verbal_Communication_Method__c</picklist>
+            <values>
+                <fullName>Assistive communication tool%2C tablet%2C or computer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Crying without the capacity to indicate needs or wants to a caregiver well known to the child</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pointing at desired objects%2C reaching out for something or someone they want%2C  taking your hand to what they want</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Repeating something they just heard in a manner suggesting the child is desiring %28as opposed to just echoing words%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sign language %28either standard or specific to the child%29</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -14995,6 +15269,17 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Wife</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Residing_In_US_7_Yrs__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -17675,9 +17960,47 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Cognitive_Delays__c</picklist>
+            <values>
+                <fullName>I do not have access to that information%2E I recommend the chapter follow up with the medical team</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mild%3A Functions close to peers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Moderate%3A Functions below peers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Severe%3A Functions nothing like same-age peers%2C extremely cognitively delayed%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Communication__c</picklist>
             <values>
                 <fullName>I am not sure</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Does_Child_Have_Speech_Language_Delays__c</picklist>
+            <values>
+                <fullName>I do not have access to that information%2E I recommend the chapter follow up with the medical team</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No%2C child is verbal at an age-appropriate level%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -17709,6 +18032,25 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Spouse</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Expedite_timeframe__c</picklist>
+            <values>
+                <fullName>%3C 1 month</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1-3 months</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3-6 months</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -17923,6 +18265,29 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Prof%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Non_Verbal_Communication_Method__c</picklist>
+            <values>
+                <fullName>Assistive communication tool%2C tablet%2C or computer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Crying without the capacity to indicate needs or wants to a caregiver well known to the child</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pointing at desired objects%2C reaching out for something or someone they want%2C  taking your hand to what they want</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Repeating something they just heard in a manner suggesting the child is desiring %28as opposed to just echoing words%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sign language %28either standard or specific to the child%29</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -18244,6 +18609,17 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Wife</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Residing_In_US_7_Yrs__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
                 <default>false</default>
             </values>
         </picklistValues>

@@ -100,6 +100,7 @@
             <operator>equals</operator>
             <value>Travel_Data__c.Activities_Excursions</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>RE Activities/Excursions Travel Data</name>

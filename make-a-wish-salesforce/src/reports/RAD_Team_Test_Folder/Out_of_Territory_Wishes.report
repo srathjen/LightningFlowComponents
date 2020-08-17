@@ -49,6 +49,7 @@
             <operator>lessThan</operator>
             <value>3/1/2018</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

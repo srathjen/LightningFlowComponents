@@ -23943,7 +23943,7 @@
     </objectPermissions>
     <tabSettings>
         <tab>Diagnosis_Verification__c</tab>
-        <visibility>Available</visibility>
+        <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
         <tab>dsfs__DocuSign_Status__c</tab>

@@ -28,6 +28,7 @@
             <operator>equals</operator>
             <value>P</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

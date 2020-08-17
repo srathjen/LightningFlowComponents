@@ -522,6 +522,12 @@
                     <default>false</default>
                     <label>Severe: Functions nothing like same-age peers, extremely cognitively delayed.</label>
                 </value>
+                <value>
+                    <fullName>I don’t have access to that information. I recommend the chapter follow up with the medical team.</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>I don’t have access to that information. I recommend the chapter follow up with the medical team.</label>
+                </value>
             </valueSetDefinition>
         </valueSet>
     </fields>
@@ -552,6 +558,12 @@
                     <fullName>I do not have access to that information. I recommend the chapter follow up with the medical team</fullName>
                     <default>false</default>
                     <label>I do not have access to that information. I recommend the chapter follow up with the medical team</label>
+                </value>
+                <value>
+                    <fullName>I don't have access to that information. I recommend the chapter follow up with the medical team</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>I don't have access to that information. I recommend the chapter follow up with the medical team</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
@@ -3693,17 +3705,6 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
                 </value>
             </valueSetDefinition>
         </valueSet>
-    </fields>
-    <fields>
-        <fullName>Medical_Provider__c</fullName>
-        <description>Used in Mail Merge Template SIW-635</description>
-        <externalId>false</externalId>
-        <formula>BLANKVALUE("Healthcare Team",  Hidden_DV_Form_Name__c )</formula>
-        <label>Medical Provider</label>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <type>Text</type>
-        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Medical_Questions__c</fullName>
@@ -7635,7 +7636,212 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <fullName>Merge_Fields</fullName>
         <description>It is used in the merge page layout.</description>
         <displayedFields>
-            <field>Relationship_to_child__c</field>
+            <field>FirstName</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Middle_Name__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Child_Middle_Initial__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>LastName</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Gender__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Self_describe_comment_box__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>DOB__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Any_medical_reason_for_moving_quickly__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Expedite_timeframe__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Referrer_Rush_Reason__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Please_Explain__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Other_expedite_timeframe_comments__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Out_of_Territory__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Has_this_child_ever_received_prior_wish__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Using_Paper_Process_For_DV__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Parent_Relationship_to_Child__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Parent_First_Name__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Parent_Last_Name__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Email</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Phone</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Region_Code__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>County__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Street</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>City</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>State</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>PostalCode</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>StateCode</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Additional_Parent_Relationship_to_Child__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Additional_Parent_First_Name__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Additional_Parent_Last_Name__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Additional_Parent_Phone__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Additional_Parent_Email__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Additional_Parent_Street__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Additional_Parent_City__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Additional_Parent_State__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Additional_Parent_Postal_Code__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>What_is_the_family_s_primary_spoken_lang__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>OtherLanguage__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>of_Siblings__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Sibling_Detail__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Family_Dynamics__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Family_Dynamics_Notes__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -7670,127 +7876,87 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>FirstName</field>
+            <field>Rush__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>LastName</field>
+            <field>How_Did_you_hear_about_Make_A_Wish__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Gender__c</field>
+            <field>Relationship_to_child__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>DOB__c</field>
+            <field>Other_Relationship_To_Child__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Has_this_child_ever_received_prior_wish__c</field>
+            <field>Is_wish_referral_discussed_health_del__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Communication__c</field>
+            <field>Medical_Provider_Category__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Parent_Relationship_to_Child__c</field>
+            <field>Other_Medical_Provider_Category__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Parent_First_Name__c</field>
+            <field>PD_Condition_Description__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Parent_Last_Name__c</field>
+            <field>PD_ICD_Code__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>City</field>
+            <field>Qualifying_Diagnosis__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>State</field>
+            <field>Qualifying_ICD__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>StateCode</field>
+            <field>Approximate_Diagnosis_Date__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Email</field>
+            <field>Diagnosis_Given_By_Referrer__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Phone</field>
+            <field>ICD_Given_By_Referrer__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>What_is_the_family_s_primary_spoken_lang__c</field>
+            <field>PR_Diagnosis__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>of_Siblings__c</field>
+            <field>Other_diagnosis__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Additional_Parent_Relationship_to_Child__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Additional_Parent_First_Name__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Additional_Parent_Last_Name__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Additional_Parent_City__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Additional_Parent_State__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Additional_Parent_Postal_Code__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Additional_Parent_Email__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Additional_Parent_Phone__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Additional_Parent_Primary__c</field>
+            <field>ReferralComment__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -7805,6 +7971,16 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
+            <field>Primary_Medical_Professional_Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Primary_Medical_Professional_Type_Other__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
             <field>Treating_Medical_Professional_Phone__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
@@ -7815,7 +7991,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Hospital_Treatment_Facility_Treating__c</field>
+            <field>Treating_Medical_Professional_Fax__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -7835,17 +8011,277 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>PD_ICD_Code__c</field>
+            <field>Department__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Approximate_Diagnosis_Date__c</field>
+            <field>Hospital_Treatment_Facility__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Rush__c</field>
+            <field>Hospital_Treatment_Facility_Treating__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate1MedProfessionalFirstName__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate1MedProfessionalLastName__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate_1_Medical_Professional_Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate_1_Med_Professional_Type_Other__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate1MedicalProfessionalEmail__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate1MedProfessionalPhone__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate1HospitalTreatmentFacility__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate1MedicalProfessionalFax__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate2MedProfessionalFirstName__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate2MedProfessionalLastName__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate_2_Medical_Professional_Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate_2_Med_Professional_Type_Other__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate2MedProfessionalEmail__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate2MedProfessionalPhone__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate2HospitalTreatmentFacility__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate2MedicalProfessionalFax__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Referred_Date__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>DNQ_Date__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Closed_Date__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Pending_Diagnosis_Date__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Part_A_Sent__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Part_A_Received__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Paper_DV_Sign_Date__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Provider_Signature__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>I_am_Recognized_To_Practice_As_a__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>I_m_Part_of_The_Treating_HealthCare_Team__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Is_in_a_Comatose_Vegetative_State__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Communication__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Why_do_you_feel_would_be_eligible_Wish__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Will_Child_s_Condition_Deteriorate__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Please_Explain_Deteriorate__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Current_Condition_Label__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Travel_Restriction__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Treatment_Subspecialty__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Provided_additional_information__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Unplanned_hospital_admissions__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Number_hospital_admissions__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Admitting_diagnosis__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>ICU_Admissions__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>SD1_Condition_Description__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>SD1_ICD_Code__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>SD2_Condition_Description__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>SD2_ICD_Code__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>SD3_Condition_Description__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>SD3_ICD_Code__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>SD4_Condition_Description__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>SD4_ICD_Code__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Salutation</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Salutation_AlternateMP1__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Salutation_AlternateMP2__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Salutation_BestContactMP__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Salutation_TreatingMP__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -8749,19 +9185,14 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <columns>LEAD.STATE_CODE</columns>
         <columns>LEAD.EMAIL</columns>
         <columns>LEAD.STATUS</columns>
+        <columns>Sub_Status__c</columns>
+        <columns>DV_Not_Signed__c</columns>
+        <columns>Provider_Signature__c</columns>
         <columns>Created_Date_Time__c</columns>
         <columns>CORE.USERS.ALIAS</columns>
         <columns>LEAD.UNREAD</columns>
         <columns>LEAD.STATE</columns>
-        <columns>CORE.USERS.FIRST_NAME</columns>
-        <columns>CORE.USERS.LAST_NAME</columns>
-        <columns>DV_Not_Signed__c</columns>
         <filterScope>Everything</filterScope>
-        <filters>
-            <field>Test_Record__c</field>
-            <operation>notEqual</operation>
-            <value>1</value>
-        </filters>
         <filters>
             <field>LEAD.RECORDTYPE</field>
             <operation>equals</operation>
@@ -8837,6 +9268,11 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
             <field>LEAD.RECORDTYPE</field>
             <operation>equals</operation>
             <value>Lead.Wish_Child</value>
+        </filters>
+        <filters>
+            <field>Test_Record__c</field>
+            <operation>equals</operation>
+            <value>0</value>
         </filters>
         <label>Arizona Open</label>
         <sharedTo>
@@ -9024,6 +9460,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <columns>Part_A_Sent__c</columns>
         <columns>LEAD.STATUS</columns>
         <columns>Sub_Status__c</columns>
+        <columns>CORE.USERS.ALIAS</columns>
         <columns>LEAD.CREATED_DATE</columns>
         <columns>LEAD.UNREAD</columns>
         <filterScope>Everything</filterScope>
@@ -9041,6 +9478,11 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
             <field>LEAD.RECORDTYPE</field>
             <operation>equals</operation>
             <value>Lead.Wish_Child</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.ALIAS</field>
+            <operation>equals</operation>
+            <value>amach</value>
         </filters>
         <label>Central &amp; Northern Florida All</label>
         <sharedTo>
@@ -9992,6 +10434,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <columns>Part_A_Sent__c</columns>
         <columns>LEAD.STATUS</columns>
         <columns>Sub_Status__c</columns>
+        <columns>DV_Not_Signed__c</columns>
         <columns>LEAD.CREATED_DATE</columns>
         <columns>LEAD.UNREAD</columns>
         <filterScope>Everything</filterScope>
@@ -11153,6 +11596,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <columns>Part_A_Sent__c</columns>
         <columns>LEAD.STATUS</columns>
         <columns>Sub_Status__c</columns>
+        <columns>DV_Not_Signed__c</columns>
         <columns>LEAD.CREATED_DATE</columns>
         <columns>LEAD.UNREAD</columns>
         <filterScope>Everything</filterScope>
@@ -11195,6 +11639,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <columns>County__c</columns>
         <columns>PD_Condition_Description__c</columns>
         <columns>PD_ICD_Code__c</columns>
+        <columns>DV_Not_Signed__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>ChapterName__c</field>
@@ -11920,6 +12365,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <columns>Part_A_Sent__c</columns>
         <columns>LEAD.STATUS</columns>
         <columns>Sub_Status__c</columns>
+        <columns>CORE.USERS.ALIAS</columns>
         <columns>LEAD.CREATED_DATE</columns>
         <columns>LEAD.UNREAD</columns>
         <filterScope>Everything</filterScope>
@@ -12434,6 +12880,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <columns>Part_A_Sent__c</columns>
         <columns>LEAD.STATUS</columns>
         <columns>Sub_Status__c</columns>
+        <columns>CORE.USERS.ALIAS</columns>
         <columns>LEAD.CREATED_DATE</columns>
         <columns>LEAD.UNREAD</columns>
         <filterScope>Everything</filterScope>
@@ -12469,6 +12916,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <columns>Part_A_Sent__c</columns>
         <columns>LEAD.STATUS</columns>
         <columns>Sub_Status__c</columns>
+        <columns>DV_Not_Signed__c</columns>
         <columns>LEAD.CREATED_DATE</columns>
         <columns>LEAD.UNREAD</columns>
         <filterScope>Everything</filterScope>
@@ -12799,11 +13247,6 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
             <field>LEAD.CREATED_DATE</field>
             <operation>equals</operation>
             <value>TODAY</value>
-        </filters>
-        <filters>
-            <field>LEAD.RECORDTYPE</field>
-            <operation>equals</operation>
-            <value>Lead.Wish_Child</value>
         </filters>
         <label>My Leads Today</label>
         <sharedTo>
@@ -13828,6 +14271,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <columns>Part_A_Sent__c</columns>
         <columns>LEAD.STATUS</columns>
         <columns>Sub_Status__c</columns>
+        <columns>DV_Not_Signed__c</columns>
         <columns>LEAD.CREATED_DATE</columns>
         <columns>LEAD.UNREAD</columns>
         <filterScope>Everything</filterScope>
@@ -14730,11 +15174,6 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
             <field>LEAD.CREATED_DATE</field>
             <operation>equals</operation>
             <value>LAST_N_DAYS:10</value>
-        </filters>
-        <filters>
-            <field>LEAD.RECORDTYPE</field>
-            <operation>equals</operation>
-            <value>Lead.Wish_Child</value>
         </filters>
         <label>Recently Created Leads-10 Days</label>
         <sharedTo>
@@ -15919,6 +16358,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
             <group>National_Office</group>
             <group>TriCounties</group>
             <group>Tri_Counties</group>
+            <role>Tri_Counties_Chapter</role>
         </sharedTo>
     </listViews>
     <listViews>
@@ -15959,6 +16399,8 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <sharedTo>
             <group>National_Office</group>
             <group>TriCounties</group>
+            <group>Tri_Counties</group>
+            <role>Tri_Counties_Chapter</role>
         </sharedTo>
     </listViews>
     <listViews>
@@ -15981,11 +16423,6 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
             <value>Make-A-Wish TriCounties</value>
         </filters>
         <filters>
-            <field>LEAD.STATUS</field>
-            <operation>equals</operation>
-            <value>Inquiry,Referred,Eligibility Review</value>
-        </filters>
-        <filters>
             <field>Rush__c</field>
             <operation>equals</operation>
             <value>1</value>
@@ -16000,10 +16437,17 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
             <operation>equals</operation>
             <value>Lead.Wish_Child</value>
         </filters>
+        <filters>
+            <field>LEAD.STATUS</field>
+            <operation>equals</operation>
+            <value>Inquiry,Referred,Eligibility Review</value>
+        </filters>
         <label>Tri-Counties Rush</label>
         <sharedTo>
             <group>National_Office</group>
             <group>TriCounties</group>
+            <group>Tri_Counties</group>
+            <role>Tri_Counties_Chapter</role>
         </sharedTo>
     </listViews>
     <listViews>
@@ -17798,10 +18242,6 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
-                <fullName>2</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>2%2E5</fullName>
                 <default>false</default>
             </values>
@@ -17877,9 +18317,66 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Does_Child_Have_Cognitive_Delays__c</picklist>
+            <values>
+                <fullName>I do not have access to that information%2E I recommend the chapter follow up with the medical team</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mild%3A Functions close to peers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Moderate%3A Functions below peers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Severe%3A Functions nothing like same-age peers%2C extremely cognitively delayed%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Does_Child_Have_Speech_or_Language_Delay__c</picklist>
+            <values>
+                <fullName>I do not have access to that information%2E I recommend the chapter follow up with the medical team</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No%2C child is verbal at an age-appropriate level%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Dup_Check__c</picklist>
             <values>
                 <fullName>Block Lead Dup</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Expedite_timeframe__c</picklist>
+            <values>
+                <fullName>%3C 1 month</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1-3 months</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3-6 months</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -18227,6 +18724,17 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Is_wish_referral_discussed_health_del__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>LeadSource</picklist>
             <values>
                 <fullName>Email</fullName>
@@ -18327,6 +18835,40 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
             </values>
             <values>
                 <fullName>Prof%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Non_Verbal_Communication_Method__c</picklist>
+            <values>
+                <fullName>Assistive communication tool%2C tablet%2C or computer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Crying without the capacity to indicate needs or wants to a caregiver well known to the child</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pointing at desired objects%2C reaching out for something or someone they want%2C  taking your hand to what they want</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Repeating something they just heard in a manner suggesting the child is desiring %28as opposed to just echoing words%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sign language %28either standard or specific to the child%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Non_Verbal__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
                 <default>false</default>
             </values>
         </picklistValues>

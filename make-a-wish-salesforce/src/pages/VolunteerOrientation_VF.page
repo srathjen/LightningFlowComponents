@@ -93,10 +93,10 @@
 
                 <apex:form id="frm1" styleClass="col-md-12">
                     <div class="messages">
-                        <apex:pagemessages/>
+                        <apex:pagemessages />
                     </div>
 
-                    <apex:pageBlock>
+                    <apex:pageBlock >
                         <apex:outputPanel rendered="{!(isOrientationExist == True)}">
                             <h3>{!$Label.Volunteer_Portal_Title_Confirmation_Registered}</h3>
                             <p>{!$Label.Volunteer_Portal_Confirmation_Registered_Orientation}</p>
@@ -127,8 +127,7 @@
                                     </thead>
                                     <tbody>
                                     <apex:repeat value="{!OrientationRecordList}" var="training">
-                                        <apex:outputPanel
-                                                rendered="{!(AND(training.volOppSize>0,training.status == 'Registered'))}">
+                                        <apex:outputPanel rendered="{!(AND(training.volOppSize>0,training.status == 'Registered'))}">
                                             <tr>
                                                 <td>{!training.orientationName}</td>
                                                 <td>{!training.chapterName}</td>

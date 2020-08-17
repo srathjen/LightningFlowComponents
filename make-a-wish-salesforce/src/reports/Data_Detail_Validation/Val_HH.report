@@ -95,6 +95,7 @@
             <operator>equals</operator>
             <value>Account.HH_Account</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Val_HH</name>

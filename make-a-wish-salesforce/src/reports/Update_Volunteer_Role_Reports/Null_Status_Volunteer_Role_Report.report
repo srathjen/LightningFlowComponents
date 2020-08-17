@@ -22,6 +22,7 @@
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <name>Null Status Volunteer Role Report</name>

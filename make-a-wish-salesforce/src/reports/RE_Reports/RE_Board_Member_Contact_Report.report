@@ -8,6 +8,7 @@
             <operator>equals</operator>
             <value>Board_Member</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <name>RE Board Member Contact Report</name>

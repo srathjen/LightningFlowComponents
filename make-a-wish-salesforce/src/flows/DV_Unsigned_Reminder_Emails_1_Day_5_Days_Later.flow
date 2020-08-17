@@ -233,12 +233,12 @@
     <formulas>
         <name>SentDate1DayAgo</name>
         <dataType>Boolean</dataType>
-        <expression>IF((DATEVALUE({!$Record.dsfs__Date_Sent__c}) + 1) = {!$Flow.CurrentDate}, TRUE, FALSE)</expression>
+        <expression>IF((DATEVALUE({!$Record.dsfs__Date_Sent__c}) + 5) = {!$Flow.CurrentDate}, TRUE, FALSE)</expression>
     </formulas>
     <formulas>
         <name>SentDate5DaysAgo</name>
         <dataType>Boolean</dataType>
-        <expression>IF((DATEVALUE({!$Record.dsfs__Date_Sent__c})+2)={!$Flow.CurrentDate}, TRUE, FALSE)</expression>
+        <expression>IF((DATEVALUE({!$Record.dsfs__Date_Sent__c})+10)={!$Flow.CurrentDate}, TRUE, FALSE)</expression>
     </formulas>
     <formulas>
         <name>SentToday</name>
@@ -439,7 +439,7 @@
     </recordUpdates>
     <start>
         <locationX>129</locationX>
-        <locationY>115</locationY>
+        <locationY>114</locationY>
         <connector>
             <targetReference>Get_Unsent_Recipient_Status_Records</targetReference>
         </connector>
@@ -461,7 +461,7 @@
             <field>dsfs__Date_Sent__c</field>
             <operator>GreaterThanOrEqualTo</operator>
             <value>
-                <dateTimeValue>2020-08-04T07:00:00.000Z</dateTimeValue>
+                <dateTimeValue>2020-08-12T07:00:00.000Z</dateTimeValue>
             </value>
         </filters>
         <filters>
@@ -482,7 +482,7 @@
         <schedule>
             <frequency>Daily</frequency>
             <startDate>2020-08-04</startDate>
-            <startTime>11:54:00.000Z</startTime>
+            <startTime>18:00:00.000Z</startTime>
         </schedule>
         <triggerType>Scheduled</triggerType>
     </start>

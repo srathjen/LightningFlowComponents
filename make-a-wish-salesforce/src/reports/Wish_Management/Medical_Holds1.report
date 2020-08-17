@@ -67,6 +67,7 @@
             <operator>equals</operator>
             <value>Hold - Medical</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Medical Holds</name>

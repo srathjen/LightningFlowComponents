@@ -55,6 +55,7 @@
             <operator>notEqual</operator>
             <value>Granted,Completed,Closed,DNQ,Denied,DNQ - National Medical Review,DNQ - National MAC Review</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Wish Volunteer Wish Child Detail</name>

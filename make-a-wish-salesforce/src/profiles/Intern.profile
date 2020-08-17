@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <classAccesses>
-        <apexClass>AccountTrigger_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>AddVolunteerRole_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -60,10 +56,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>Background_CheckBeforeDelete_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>Batch_UpdateVolunteerRoleStatus_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -105,10 +97,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>CaseServiceTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>CaseTriggerHandler_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -228,19 +216,11 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>ContactTrigger_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>CreateNewWish_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>CreateNewWish_ACTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>CreateVolunteerUser_ATTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -262,22 +242,6 @@
     <classAccesses>
         <apexClass>DelegatedApproverController_Test</apexClass>
         <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DeleteApexDebugLogRecordScheduleTest_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DeleteApexDebugLogRecordSchedule_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DeleteApexDebugLogRecords_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DeleteApexDebugLogRecords_Test</apexClass>
-        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>DiagnosisVerification_AC</apexClass>
@@ -313,10 +277,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>DocusignStatusTrigger_AT_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DynamicContent_ATTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -365,10 +325,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>InKindReimbursementApproval_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>InactiveVolunteerHandlerTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -464,10 +420,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>LeadFile_AT_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>LeadSelectMedEmailController_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -477,10 +429,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>LeadTrigger_AT_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Lead_Trigger_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -498,10 +446,6 @@
     <classAccesses>
         <apexClass>LookupSObjectCtrlTest</apexClass>
         <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Loop__ApplicationAuthorizationController</apexClass>
-        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>MedicalRelationships_AC</apexClass>
@@ -544,23 +488,7 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>NonWishEvents_ATTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>OTUB_UpdateVolUserStatusOnBGCOI_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>OTUB_UpdateVolUserStatusOnBGCOI_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>OrientationTraining_ATTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>OrientationandTrainingUtil</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -572,19 +500,7 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>ParentGuardianJSON2Apex</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>PartAFormWrapper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ParticipantJSON2Apex</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ProcessDdpExt</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -617,14 +533,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>RequiredSignatureExpiredBatchTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ReviewUploadTask_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ReviewUploadTask_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -672,19 +580,7 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>TestClassUtil</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>TestDataFactory</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>TestDataUtility_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>TimeSheetTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -705,10 +601,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>UIThemeControllerTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>UpdateWishAssignmentBatchTest_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -792,10 +684,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>VolunteerRole_AT_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>VolunteerSignUp_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -841,10 +729,6 @@
 </classAccesses>
     <classAccesses>
         <apexClass>WishAffiliationDesign_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishAffiliationParticipantService</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -984,10 +868,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>batch_LeadChildAgeSchedule</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>batch_LeadChildAgeTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -1052,14 +932,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <custom>true</custom>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>Wish_Affiliation_Category__mdt</name>
-    </customMetadataTypeAccesses>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>Wish_Clearance_Needed_and_National_type__mdt</name>
-    </customMetadataTypeAccesses>
     <description>This profile is having limited permissions for Intern users.</description>
     <flowAccesses>
         <enabled>false</enabled>
@@ -6883,7 +6755,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Contact.Birthdate</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -8818,22 +8690,22 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Contact.npe01__Last_Donation_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Contact.npe01__Lifetime_Giving_History_Amount__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Contact.npe01__Organization_Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Contact.npe01__Other_Address__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -8873,7 +8745,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Contact.npe01__Type_of_Account__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -8888,7 +8760,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Contact.npe01__Work_Address__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -9008,7 +8880,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Contact.npo02__OppAmountLastYearHH__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -9018,7 +8890,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Contact.npo02__OppAmountThisYearHH__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -9088,7 +8960,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Contact.npo02__Total_Household_Gifts__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -11178,9 +11050,9 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
+        <readable>false</readable>
         <field>Lead.Debug__c</field>
-        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -11439,8 +11311,8 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <readable>false</readable>
         <field>Lead.Initial_Address_Verification__c</field>
-        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -11550,11 +11422,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Medical_Provider_Category__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Lead.Medical_Provider__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -26355,6 +26222,9 @@
         <layout>Contact-npsp__Contact Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>ContactPointAddress-Contact Point Address Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>ContactPointEmail-Contact Point Email Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -26804,6 +26674,9 @@
         <layout>Solution-Solution Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Spanish_Translations__mdt-Spanish Translations Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Support_User_Access__mdt-Support User Access Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -27000,6 +26873,9 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Volunteer_Roles__c-Volunteer Role Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WishReferralForm_Translation__mdt-WishReferralForm Translation Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Wish_Affiliation_Category__mdt-Wish Affiliation Category Layout</layout>

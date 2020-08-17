@@ -38,6 +38,7 @@
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>5WL Send email to case owner vol inactiv</name>

@@ -38,6 +38,7 @@
             <operator>equals</operator>
             <value>Hold</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Vol Opps with Status of Hold /Wish</name>

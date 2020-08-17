@@ -73,6 +73,7 @@
             <operator>contains</operator>
             <value>001</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>All In-Kind</name>

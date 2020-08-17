@@ -95,7 +95,7 @@
         <field>Case.Publicity_OK__c</field>
     </columns>
     <filter>
-        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND ((6 AND 7 AND 8) OR (9 AND 10))</booleanFilter>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND ((6 AND 7 AND 8) OR 9) AND 10</booleanFilter>
         <criteriaItems>
             <column>RECORDTYPE</column>
             <isUnlocked>true</isUnlocked>
@@ -156,6 +156,7 @@
             <operator>lessOrEqual</operator>
             <value>TODAY</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

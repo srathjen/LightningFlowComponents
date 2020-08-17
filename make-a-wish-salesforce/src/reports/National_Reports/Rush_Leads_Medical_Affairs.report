@@ -77,7 +77,7 @@
         <field>Lead$Why_do_you_feel_would_be_eligible_Wish__c</field>
     </columns>
     <columns>
-        <field>Lead$Non_Verbal__c</field>
+        <field>Lead$xxNon_Verbal__c</field>
     </columns>
     <columns>
         <field>Lead$Communication__c</field>

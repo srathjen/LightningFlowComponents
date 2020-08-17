@@ -4,6 +4,6 @@
     <doesApiLoginRequireOrgDomain>false</doesApiLoginRequireOrgDomain>
     <enableNativeBrowserForAuthOnAndroid>false</enableNativeBrowserForAuthOnAndroid>
     <enableNativeBrowserForAuthOnIos>false</enableNativeBrowserForAuthOnIos>
-    <useStabilizedMyDomainHostnames>true</useStabilizedMyDomainHostnames>
+    <useStabilizedMyDomainHostnames>false</useStabilizedMyDomainHostnames>
     <useStabilizedSandboxMyDomainHostnames>true</useStabilizedSandboxMyDomainHostnames>
 </MyDomainSettings>

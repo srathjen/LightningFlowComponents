@@ -430,6 +430,7 @@
             <operator>equals</operator>
             <value>WC-32094</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Wish Forms - Wish Child</name>

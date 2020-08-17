@@ -331,6 +331,7 @@
             <operator>equals</operator>
             <value>Wish_Child_Form__c.Wish_Child</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Wish Forms - Wish Child - All</name>

@@ -83,6 +83,7 @@
             <operator>notContain</operator>
             <value>Nemo Clownfish</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Matrix</format>
     <groupingsAcross>

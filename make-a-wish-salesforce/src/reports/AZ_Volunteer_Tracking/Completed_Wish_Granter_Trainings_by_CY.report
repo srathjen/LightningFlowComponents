@@ -49,6 +49,7 @@
             <operator>contains</operator>
             <value>Arizona</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>
