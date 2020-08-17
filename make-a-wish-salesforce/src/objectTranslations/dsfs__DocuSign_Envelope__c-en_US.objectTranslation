@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <label><!-- Unique Record Count --></label>
         <name>Unique_Record_Count__c</name>
@@ -245,7 +244,6 @@
         <label><!-- Source Object --></label>
         <name>dsfs__Source_Object__c</name>
     </fields>
-    
     <webLinks>
         <label><!-- Learn_More --></label>
         <name>dsfs__Learn_More</name>

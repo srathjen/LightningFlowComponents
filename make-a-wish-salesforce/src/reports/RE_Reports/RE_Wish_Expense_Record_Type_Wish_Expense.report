@@ -86,6 +86,7 @@
             <operator>equals</operator>
             <value>Wish_Expense__c.Wish_Expense_Record_Type</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>RE Wish Expense Record Type Wish Expense</name>

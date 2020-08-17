@@ -12,6 +12,7 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <enabled>false</enabled>
         <apexClass>WishReferralFormSpanish_AC</apexClass>
     </classAccesses>
     <classAccesses>
@@ -23,10 +24,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <custom>true</custom>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>WishReferralForm_Translation__mdt</name>
-    </customMetadataTypeAccesses>
     <pageAccesses>
         <apexPage>BandwidthExceeded</apexPage>
         <enabled>true</enabled>
@@ -5372,6 +5369,26 @@
         <layout>Account-npsp__Organization Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Account-npsp__Organization Layout</layout>
+        <recordType>Account.Chapter</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-npsp__Household Layout</layout>
+        <recordType>Account.HH_Account</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-npsp__Organization Layout</layout>
+        <recordType>Account.Hospital_Treatment_Facility</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-npsp__Organization Layout</layout>
+        <recordType>Account.In_Kind_Donors</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-npsp__Organization Layout</layout>
+        <recordType>Account.Organization</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>AccountBrand-Account Brand Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -5455,6 +5472,34 @@
         <layout>Case-Diagnosis Verification Review</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Case-Diagnosis Verification Review</layout>
+        <recordType>Case.Diagnosis_Verification_Review</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Case-Diagnosis Verification Review</layout>
+        <recordType>Case.Wish</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Case-Diagnosis Verification Review</layout>
+        <recordType>Case.Wish_Assist</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Case-Diagnosis Verification Review</layout>
+        <recordType>Case.Wish_Determination</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Case-Diagnosis Verification Review</layout>
+        <recordType>Case.Wish_Effect</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Case-Diagnosis Verification Review</layout>
+        <recordType>Case.Wish_Granted</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Case-Diagnosis Verification Review</layout>
+        <recordType>Case.Wish_Planning_Anticipation</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>CaseClose-Close Case Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -5462,6 +5507,18 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Chapter_Action_Track__c-Chapter Action Track Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Chapter_Action_Track__c-Chapter Action Track Layout</layout>
+        <recordType>Chapter_Action_Track__c.Wish_Determination</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Chapter_Action_Track__c-Chapter Action Track Layout</layout>
+        <recordType>Chapter_Action_Track__c.Wish_Granting</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Chapter_Action_Track__c-Chapter Action Track Layout</layout>
+        <recordType>Chapter_Action_Track__c.Wish_Planning</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Chapter_Name_Setting__mdt-Chapter Name Settings Layout</layout>
@@ -5474,6 +5531,18 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Class_Offering__c-Class offering Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Class_Offering__c-Class offering Layout</layout>
+        <recordType>Class_Offering__c.In_Person</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Class_Offering__c-Class offering Layout</layout>
+        <recordType>Class_Offering__c.Virtual_Instructor_Lead</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Class_Offering__c-Class offering Layout</layout>
+        <recordType>Class_Offering__c.Virtual_Self_Paced</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>CollaborationGroup-Group Layout</layout>
@@ -5489,6 +5558,29 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Contact-npsp__Contact Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Contact-npsp__Contact Layout</layout>
+        <recordType>Contact.Board_Member</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Contact-npsp__Contact Layout</layout>
+        <recordType>Contact.Medical_Professional</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Contact-npsp__Contact Layout</layout>
+        <recordType>Contact.Volunteer_Contact</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Contact-npsp__Contact Layout</layout>
+        <recordType>Contact.Wish_Child</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Contact-npsp__Contact Layout</layout>
+        <recordType>Contact.Wish_Family</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ContactPointAddress-Contact Point Address Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>ContactPointEmail-Contact Point Email Layout</layout>
@@ -5519,6 +5611,18 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Dynamic_Content__c-Active Volunteer</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Dynamic_Content__c-Active Volunteer</layout>
+        <recordType>Dynamic_Content__c.Chapter_Active</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Dynamic_Content__c-Active Volunteer</layout>
+        <recordType>Dynamic_Content__c.Chapter_Prospective</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Dynamic_Content__c-Active Volunteer</layout>
+        <recordType>Dynamic_Content__c.National</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>EmailMessage-Email Message Layout</layout>
@@ -5570,6 +5674,14 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>In_Kind_Donation_Reimbursement__c-In Kind Donation</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>In_Kind_Donation_Reimbursement__c-In Kind Donation</layout>
+        <recordType>In_Kind_Donation_Reimbursement__c.In_Kind_Donation</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>In_Kind_Donation_Reimbursement__c-In Kind Donation</layout>
+        <recordType>In_Kind_Donation_Reimbursement__c.Reimbursement</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Individual-Individual Layout</layout>
@@ -5671,7 +5783,27 @@
         <layout>Medical_Questions__c-Medical Question Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Medical_Questions__c-Medical Question Layout</layout>
+        <recordType>Medical_Questions__c.Medical_Questions</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Medical_Questions__c-Medical Question Layout</layout>
+        <recordType>Medical_Questions__c.Travel_Algorithm</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Minor_Participant__c-Combo Form Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Minor_Participant__c-Combo Form Layout</layout>
+        <recordType>Minor_Participant__c.Combo_Form_Attachment</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Minor_Participant__c-Combo Form Layout</layout>
+        <recordType>Minor_Participant__c.Form_Tracker_Attachment</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Minor_Participant__c-Combo Form Layout</layout>
+        <recordType>Minor_Participant__c.Wish_Clarence_Attachment</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Mobile_Field_Sets__mdt-Mobile Field Set Layout</layout>
@@ -5680,10 +5812,42 @@
         <layout>Non_Wish_Events__c-Non-Wish %26 Events Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Non_Wish_Events__c-Non-Wish %26 Events Layout</layout>
+        <recordType>Non_Wish_Events__c.Events</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Non_Wish_Events__c-Non-Wish %26 Events Layout</layout>
+        <recordType>Non_Wish_Events__c.Non_Wish</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Office__c-Office Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Opportunity-npsp__Donation Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Opportunity-npsp__Donation Layout</layout>
+        <recordType>Opportunity.Donation</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Opportunity-npsp__Grant Layout</layout>
+        <recordType>Opportunity.Grant</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Opportunity-npsp__Donation Layout</layout>
+        <recordType>Opportunity.In_Kind_Gift</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Opportunity-npsp__Donation Layout</layout>
+        <recordType>Opportunity.MajorGift</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Opportunity-npsp__Donation Layout</layout>
+        <recordType>Opportunity.Matching_Gift</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Opportunity-npsp__Membership Layout</layout>
+        <recordType>Opportunity.Membership</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>OpportunityLineItem-Opportunity Product Layout</layout>
@@ -5696,6 +5860,18 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Orientation_Training__c-Orientation %26 Training %26 Interview Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Orientation_Training__c-Orientation %26 Training %26 Interview Layout</layout>
+        <recordType>Orientation_Training__c.Interview</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Orientation_Training__c-Orientation %26 Training %26 Interview Layout</layout>
+        <recordType>Orientation_Training__c.Orientation</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Orientation_Training__c-Orientation %26 Training %26 Interview Layout</layout>
+        <recordType>Orientation_Training__c.Training</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Participant_Turning_18_Wish_Forms__mdt-Participant Turning 18 Wish Forms Layout</layout>
@@ -5740,16 +5916,87 @@
         <layout>Solution-Solution Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Spanish_Translations__mdt-Spanish Translations Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Support_User_Access__mdt-Support User Access Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Task-Task Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Task-Task Layout</layout>
+        <recordType>Task.Background_Check</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Task-Task Layout</layout>
+        <recordType>Task.Contact_Updates</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Task-Task Layout</layout>
+        <recordType>Task.Default</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Task-Task Layout</layout>
+        <recordType>Task.Interview</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Task-Task Layout</layout>
+        <recordType>Task.Staff</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Task-Task Layout</layout>
+        <recordType>Task.Volunteer</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Task-Task Layout</layout>
+        <recordType>Task.Wish_Determination</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Task-Task Layout</layout>
+        <recordType>Task.Wish_Granting</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Task-Task Layout</layout>
+        <recordType>Task.Wish_Planning</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Time_sheet__c-Time sheet Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Travel_Data__c-Activities%2FExcursions</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Travel_Data__c-Activities%2FExcursions</layout>
+        <recordType>Travel_Data__c.Activities_Excursions</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Travel_Data__c-Activities%2FExcursions</layout>
+        <recordType>Travel_Data__c.Cruise</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Travel_Data__c-Activities%2FExcursions</layout>
+        <recordType>Travel_Data__c.Flight</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Travel_Data__c-Activities%2FExcursions</layout>
+        <recordType>Travel_Data__c.Ground_Transportation</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Travel_Data__c-Activities%2FExcursions</layout>
+        <recordType>Travel_Data__c.Limousine</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Travel_Data__c-Activities%2FExcursions</layout>
+        <recordType>Travel_Data__c.Lodging</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Travel_Data__c-Activities%2FExcursions</layout>
+        <recordType>Travel_Data__c.Medical_Needs</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Travel_Data__c-Activities%2FExcursions</layout>
+        <recordType>Travel_Data__c.Rental_Car</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>User-User Layout</layout>
@@ -5848,6 +6095,22 @@
         <layout>Volunteer_Opportunity__c-Volunteer Opportunity Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Volunteer_Opportunity__c-Volunteer Opportunity Layout</layout>
+        <recordType>Volunteer_Opportunity__c.Non_Wish_Event</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Volunteer_Opportunity__c-Volunteer Opportunity Layout</layout>
+        <recordType>Volunteer_Opportunity__c.Volunteer_Registered_Non_Wish</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Volunteer_Opportunity__c-Volunteer Opportunity Layout</layout>
+        <recordType>Volunteer_Opportunity__c.Volunteer_Registered_Wish</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Volunteer_Opportunity__c-Volunteer Opportunity Layout</layout>
+        <recordType>Volunteer_Opportunity__c.Wish</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Volunteer_Orientation_Training__c-Volunteer Orientation %26 Training Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -5872,6 +6135,26 @@
         <layout>Wish_Child_Form__c-Wish Child Form Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Wish_Child_Form__c-Wish Child Form Layout</layout>
+        <recordType>Wish_Child_Form__c.Wish_Child</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Wish_Child_Form__c-Wish Child Form Layout</layout>
+        <recordType>Wish_Child_Form__c.Wish_Form_Determination_Case</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Wish_Child_Form__c-Wish Child Form Layout</layout>
+        <recordType>Wish_Child_Form__c.Wish_Form_Driver_Information</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Wish_Child_Form__c-Wish Child Form Layout</layout>
+        <recordType>Wish_Child_Form__c.Wish_Form_Emergency_Contact</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Wish_Child_Form__c-Wish Child Form Layout</layout>
+        <recordType>Wish_Child_Form__c.Wish_Form_Family</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Wish_Clearance_Needed_and_National_type__mdt-Wish Clearance Needed and National type Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -5885,6 +6168,18 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Wish_Expense__c-Wish Expense Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Wish_Expense__c-Wish Expense Layout</layout>
+        <recordType>Wish_Expense__c.Budgeting</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Wish_Expense__c-Wish Expense Layout</layout>
+        <recordType>Wish_Expense__c.Finance</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Wish_Expense__c-Wish Expense Layout</layout>
+        <recordType>Wish_Expense__c.Wish_Expense_Record_Type</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Wish_Required_Signature_File__c-Wish Required Signature File Layout</layout>
@@ -7289,7 +7584,7 @@
         <name>UseWebLink</name>
     </userPermissions>
     <userPermissions>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
         <name>ViewPrivateStaticResources</name>
     </userPermissions>
 </Profile>

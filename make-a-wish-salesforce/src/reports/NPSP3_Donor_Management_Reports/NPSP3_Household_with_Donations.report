@@ -56,6 +56,7 @@
             <operator>equals</operator>
             <value>Household Account</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Households with Donations</name>

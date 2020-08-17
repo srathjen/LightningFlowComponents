@@ -47,6 +47,7 @@
             <operator>greaterThan</operator>
             <value>7</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

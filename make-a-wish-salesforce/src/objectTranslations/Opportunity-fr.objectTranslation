@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- BDE Entry FS v2 --></label>
         <name>npsp__BDE_Entry_FS_v2</name>
@@ -396,12 +395,6 @@
             <translation>Commémoration</translation>
         </picklistValues>
     </fields>
-    
-    
-    
-    
-    
-    
     <recordTypes>
         <description><!-- Donation Received --></description>
         <label><!-- Donation --></label>

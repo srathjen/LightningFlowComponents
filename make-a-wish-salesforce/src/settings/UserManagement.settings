@@ -4,7 +4,7 @@
     <enableConcealPersonalInfo>true</enableConcealPersonalInfo>
     <enableEnhancedPermsetMgmt>false</enableEnhancedPermsetMgmt>
     <enableEnhancedProfileMgmt>true</enableEnhancedProfileMgmt>
-    <enableNewProfileUI>false</enableNewProfileUI>
+    <enableNewProfileUI>true</enableNewProfileUI>
     <enableScrambleUserData>false</enableScrambleUserData>
     <enableUserSelfDeactivate>false</enableUserSelfDeactivate>
 </UserManagementSettings>

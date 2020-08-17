@@ -962,7 +962,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Non_Verbal__c</field>
+            <field>xxNon_Verbal__c</field>
             <table>Lead</table>
         </columns>
         <columns>

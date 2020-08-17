@@ -101,6 +101,7 @@
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Val_Travel</name>

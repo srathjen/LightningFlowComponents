@@ -110,6 +110,7 @@
             <operator>equals</operator>
             <value>make-a-wish arizona</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Wish Clearance Cases</name>

@@ -3220,7 +3220,7 @@ RECIP_RELATION_CODE"</description>
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Volunteer Opportunities</pluralLabel>
-    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypeTrackHistory>true</recordTypeTrackHistory>
     <recordTypes>
         <fullName>Non_Wish_Event</fullName>
         <active>true</active>

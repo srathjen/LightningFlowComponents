@@ -47,6 +47,7 @@
             <operator>notEqual</operator>
             <value>nemo clownfish</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Post Wish Evaluation - Previous Month</name>

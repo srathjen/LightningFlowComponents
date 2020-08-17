@@ -106,6 +106,7 @@
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Test Reimbursement New</name>

@@ -1,7 +1,7 @@
 <apex:page standardController="Volunteer_Opportunity__c" extensions="VolunteerWorkItems_AC"
            action="{!RegisterWishEvents}">
-    <apex:form>
-        <apex:pageMessages/>
+    <apex:form >
+        <apex:pageMessages />
         <center>
             <apex:CommandButton style="Width:7%" value="OK" action="{!registrationConfirmation}"
                                 rendered="{!isReferesh}" reRender="formId"/>

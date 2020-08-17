@@ -11,7 +11,7 @@
         <chartType>Donut</chartType>
         <enableHoverLabels>false</enableHoverLabels>
         <expandOthers>false</expandOthers>
-        <groupingColumn>Lead$Non_Verbal__c</groupingColumn>
+        <groupingColumn>Lead$xxNon_Verbal__c</groupingColumn>
         <legendPosition>Right</legendPosition>
         <location>CHART_BOTTOM</location>
         <showAxisLabels>true</showAxisLabels>
@@ -71,7 +71,7 @@
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>Lead$Non_Verbal__c</field>
+        <field>Lead$xxNon_Verbal__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <name>Nonverbal - FY20</name>

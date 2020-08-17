@@ -26,6 +26,7 @@
             <operator>equals</operator>
             <value>Prospective</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Current Prospective Volunteers</name>

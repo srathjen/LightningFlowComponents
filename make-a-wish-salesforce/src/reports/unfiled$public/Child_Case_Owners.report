@@ -13,6 +13,7 @@
             <operator>equals</operator>
             <value>Case.Wish_Determination,Case.Wish_Effect,Case.Wish_Granted,Case.Wish_Planning_Anticipation</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Child Case Owners</name>

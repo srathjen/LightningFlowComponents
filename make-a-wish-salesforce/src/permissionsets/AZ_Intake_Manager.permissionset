@@ -24,14 +24,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>Batch_UpdateVolunteerStatusSchedule_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Batch_UpdateVolunteerStatusSchedule_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>Batch_UpdateVolunteerStatus_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -52,10 +44,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>CaseTriggerHandler_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>CaseTrigger_AT_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -72,19 +60,11 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>ContactTrigger_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>CreateNewWish_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>CreateNewWish_ACTest</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>CreateVolunteerUser_ATTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -177,10 +157,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>LMSUserResponse_test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>LeadFile_AT_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -1260,18 +1236,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>NonWishEvents_ATTest</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>OTUB_UpdateVolUserStatusOnBGCOI_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>OTUB_UpdateVolUserStatusOnBGCOI_AC_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>PARTAPDF</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -1289,18 +1253,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>RecursiveTriggerHandler</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ReviewUploadTask_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>TestClassUtil</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>TestDataUtility_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -1384,19 +1336,11 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>batch_BGCExpReminderSchedule_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>batch_BGCExpReminder_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>batch_BGCExpReminder_AC_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_COIExpReminderSchedule_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -1408,10 +1352,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>batch_CheckBGCheckExpirationSchedule_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>batch_CheckBGCheckExpiration_AC_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -1420,19 +1360,11 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>batch_CheckCOIExpirationSchedule_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>batch_CheckCOIExpiration_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>batch_CheckCOIExpiration_AC_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_UpdateLastEngageSchedule_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -27947,10 +27879,6 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>ContactInfo_VF</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
         <apexPage>DVMedicalSummaryAttachment_VF</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
@@ -28355,10 +28283,6 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>VolunteerInterview_VF</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
         <apexPage>VolunteerLanding_VF</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
@@ -28436,10 +28360,6 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>WinformationAttachment_VF</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>WishChildPhoto_VF</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
@@ -29108,10 +29028,6 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>verification_success</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>wifAttachment_VF</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <recordTypeVisibilities>

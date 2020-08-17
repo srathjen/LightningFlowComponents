@@ -1,8 +1,7 @@
 <apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" docType="html-5.0"
            controller="VolunteerActiveTraining_AC" title="Make-A-Wish Communities | Training">
     <apex:include pageName="prospective_head" id="phead"/>
-    <apex:stylesheet
-            value="https://urldefense.proofpoint.com/v2/url?u=https-3A__cdn.datatables.net_1.10.12_css_jquery.dataTables.min.css-2522_&d=DwIG-g&c=YHcanBYpGrZxEbl-dEmkXYPwk0jOuY077yg_2uofQn0&r=6AYZIh8czRxv-eUaZEeyLZX3ZZrXZjvpB946bnqq32M&m=K0mlTkfF6VIJMXQvhdDWGiQYkaBzLF59h9EZZa3hiiY&s=nl50jNoZvBp4EcThsNRieaDjEX37vVqjzGj-NjeJIvw&e="/>
+    <apex:stylesheet value="https://urldefense.proofpoint.com/v2/url?u=https-3A__cdn.datatables.net_1.10.12_css_jquery.dataTables.min.css-2522_&d=DwIG-g&c=YHcanBYpGrZxEbl-dEmkXYPwk0jOuY077yg_2uofQn0&r=6AYZIh8czRxv-eUaZEeyLZX3ZZrXZjvpB946bnqq32M&m=K0mlTkfF6VIJMXQvhdDWGiQYkaBzLF59h9EZZa3hiiY&s=nl50jNoZvBp4EcThsNRieaDjEX37vVqjzGj-NjeJIvw&e="/>
     <style type="text/css">
         body > main {
             margin-bottom: 4em;
@@ -148,9 +147,9 @@
 
                 <apex:form id="frm1" styleClass="col-md-12">
                     <div class="messages">
-                        <apex:pagemessages/>
+                        <apex:pagemessages />
                     </div>
-                    <apex:pageBlock>
+                    <apex:pageBlock >
                         <apex:outputPanel rendered="{!(isTrainingExist == True)}">
                             <h3>{!$Label.Volunteer_Portal_Title_Confirmation_Success}</h3>
                             <p>{!$Label.Volunteer_Portal_Confirmation_Success}</p>
@@ -181,8 +180,7 @@
 
                                 <tbody>
                                 <apex:repeat value="{!TrainingRecordList}" var="training">
-                                    <apex:outputPanel
-                                            rendered="{!(AND(training.volOppSize>0,OR(training.status == 'Registered',training.status == 'Completed')))}">
+                                    <apex:outputPanel rendered="{!(AND(training.volOppSize>0,OR(training.status == 'Registered',training.status == 'Completed')))}">
                                         <apex:outputPanel rendered="{!(training.status == 'Registered')}">
                                             <tr>
                                                 <td>{!training.orientationName} </td>

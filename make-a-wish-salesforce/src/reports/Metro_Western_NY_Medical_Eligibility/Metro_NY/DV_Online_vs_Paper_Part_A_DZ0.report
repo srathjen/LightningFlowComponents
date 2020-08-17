@@ -29,6 +29,7 @@
             <operator>equals</operator>
             <value>Make-A-Wish Metro NY &amp; Western NY</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

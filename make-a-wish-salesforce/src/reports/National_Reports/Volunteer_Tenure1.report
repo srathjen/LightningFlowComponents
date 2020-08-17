@@ -22,6 +22,7 @@
             <operator>equals</operator>
             <value>Contact.Volunteer_Contact</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Volunteer Tenure</name>

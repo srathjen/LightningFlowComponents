@@ -74,10 +74,13 @@
         <field>OWNER</field>
     </columns>
     <columns>
-        <field>Case.Meet_PWL_Criteria__c</field>
+        <field>Case.Next_Step_Notes__c</field>
     </columns>
     <columns>
-        <field>Case.Comment_for_PWL_Not_Met__c</field>
+        <field>Case.Will_a_rental_car_seat_s_be_needed_Note__c</field>
+    </columns>
+    <columns>
+        <field>Case.Car_Seats_When_Needed__c</field>
     </columns>
     <description>Complete Wish Pipeline</description>
     <filter>
@@ -117,6 +120,7 @@
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>
@@ -138,7 +142,7 @@
     <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
-    <sortColumn>Case.Wish_Type__c</sortColumn>
+    <sortColumn>CONTACT.NAME</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>
         <dateColumn>Case.Qualified_Date__c</dateColumn>

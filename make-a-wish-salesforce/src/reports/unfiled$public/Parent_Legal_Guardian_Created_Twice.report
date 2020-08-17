@@ -37,6 +37,7 @@
             <operator>notEqual</operator>
             <value>Self,Medical Professional</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

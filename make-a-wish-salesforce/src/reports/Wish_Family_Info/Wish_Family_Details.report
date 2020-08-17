@@ -137,6 +137,10 @@
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <name>Wish Family Details</name>
+    <params>
+        <name>lsk</name>
+        <value>1</value>
+    </params>
     <reportType>Contacts_With_Case__c</reportType>
     <showDetails>true</showDetails>
 </Report>

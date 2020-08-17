@@ -48,6 +48,10 @@
     </columns>
     <columns>
         <aggregateTypes>Sum</aggregateTypes>
+        <field>Case.Budget_Cash_from_Budget__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
         <field>Case.Actual_Cash_from_Budget__c</field>
     </columns>
     <columns>
@@ -124,6 +128,7 @@
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

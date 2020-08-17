@@ -46,6 +46,7 @@
             <operator>equals</operator>
             <value>&quot;This child is non-verbal;This child functions at a 0-2 year old, Sensorimotor stage&quot;</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

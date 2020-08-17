@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <help><!-- Example: 1 AND (2 OR 3) --></help>
         <label><!-- Advanced Conditions --></label>
@@ -52,5 +51,4 @@
         <label><!-- Use Admin Credentials --></label>
         <name>Loop__Use_Admin_Credentials__c</name>
     </fields>
-    
 </CustomObjectTranslation>

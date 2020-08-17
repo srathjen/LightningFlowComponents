@@ -59,7 +59,7 @@
     </fieldUpdates>
     <rules>
         <fullName>Send DV Signature Reminder to Medical Professional</fullName>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>dsfs__DocuSign_Recipient_Status__c.dsfs__Date_Sent__c</field>
             <operation>notEqual</operation>
@@ -80,24 +80,24 @@
                 <name>Send_DV_Signature_Reminder_to_Medical_Professional_Final</name>
                 <type>Alert</type>
             </actions>
-            <timeLength>3</timeLength>
-            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+            <timeLength>10</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
         <workflowTimeTriggers>
             <actions>
                 <name>Send_DV_Signature_Reminder_to_Medical_Professional_Second</name>
                 <type>Alert</type>
             </actions>
-            <timeLength>2</timeLength>
-            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+            <timeLength>5</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
         <workflowTimeTriggers>
             <actions>
                 <name>Send_DV_Signature_Alert_to_Intake_Manager</name>
                 <type>Alert</type>
             </actions>
-            <timeLength>4</timeLength>
-            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+            <timeLength>15</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
         <workflowTimeTriggers>
             <actions>

@@ -3,6 +3,6 @@
     <enableEndUserLanguages>false</enableEndUserLanguages>
     <enableICULocaleDateFormat>false</enableICULocaleDateFormat>
     <enablePlatformLanguages>false</enablePlatformLanguages>
-    <enableTranslationWorkbench>false</enableTranslationWorkbench>
+    <enableTranslationWorkbench>true</enableTranslationWorkbench>
     <useLanguageFallback>false</useLanguageFallback>
 </LanguageSettings>

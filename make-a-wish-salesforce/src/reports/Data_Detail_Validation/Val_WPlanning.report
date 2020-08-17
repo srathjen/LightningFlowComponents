@@ -125,6 +125,7 @@
             <operator>equals</operator>
             <value>Case.Wish_Planning_Anticipation</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Val_WPlanning</name>

@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- Diagnosis Verfication Fieldset --></label>
         <name>Diagnosis_Verfication_Fieldset</name>
@@ -28,7 +27,6 @@
         <label><!-- BDE List FS --></label>
         <name>npsp__BDE_List_FS</name>
     </fieldSets>
-    
     <fields>
         <label><!-- Additional Parent/Guardian City --></label>
         <name>Additional_Parent_City__c</name>
@@ -617,6 +615,10 @@
         <name>Alternate2MedicalProfessionalFax__c</name>
     </fields>
     <fields>
+        <label><!-- Alternate 1 Med Professional Type-Other --></label>
+        <name>Alternate_1_Med_Professional_Type_Other__c</name>
+    </fields>
+    <fields>
         <label><!-- Alternate 1 Medical Professional Special --></label>
         <name>Alternate_1_Medical_Professional_Special__c</name>
     </fields>
@@ -651,6 +653,10 @@
             <masterLabel>Social Worker</masterLabel>
             <translation><!-- Social Worker --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Alternate 2 Med Professional Type-Other --></label>
+        <name>Alternate_2_Med_Professional_Type_Other__c</name>
     </fields>
     <fields>
         <label><!-- Alternate 2 Medical Professional Special --></label>
@@ -699,6 +705,14 @@
         <name>Any_medical_reason_for_moving_quickly__c</name>
     </fields>
     <fields>
+        <label><!-- Appeal --></label>
+        <name>Appeal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Appeal date --></label>
+        <name>Appeal_date__c</name>
+    </fields>
+    <fields>
         <help><!-- Does not need to be exact --></help>
         <label><!-- Approximate Diagnosis Date --></label>
         <name>Approximate_Diagnosis_Date__c</name>
@@ -726,9 +740,13 @@
         <name>Best_Contact_for_Physician_Last_Name__c</name>
     </fields>
     <fields>
-        <help><!-- Who is the best person to contact for this physician? --></help>
+        <help><!-- This recipient is the best person to contact for the physician. They will automatically receive a copy of the &apos;Your patient is eligible for a wish&apos; email upon qualification. --></help>
         <label><!-- Best contact for Physician Email --></label>
         <name>Best_contact_for_Physician_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Contact for Treating MP: Phone --></label>
+        <name>Best_contact_for_Physician_Phone__c</name>
     </fields>
     <fields>
         <label><!-- Chapter Name --></label>
@@ -777,10 +795,6 @@
         <picklistValues>
             <masterLabel>18 &amp; Above</masterLabel>
             <translation><!-- 18 &amp; Above --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>2</masterLabel>
-            <translation><!-- 2 --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>2.5</masterLabel>
@@ -842,7 +856,7 @@
         <name>Closed_Date__c</name>
     </fields>
     <fields>
-        <help><!-- Communication level of the referred child --></help>
+        <help><!-- Historical Data. This field used to capture the communication level of the referred child. New questions have been added to the DV to capture this information in more detail. --></help>
         <label><!-- Communication --></label>
         <name>Communication__c</name>
         <picklistValues>
@@ -946,9 +960,17 @@
         <name>DV_Present__c</name>
     </fields>
     <fields>
+        <label><!-- DV Reminder Last Sent Date --></label>
+        <name>DV_Reminder_Last_Sent_Date__c</name>
+    </fields>
+    <fields>
         <help><!-- Child has a condition without curative treatment options in which debilitation may extend over many years (e.g., severe treatment-resistant epilepsy, some metabolic diseases) --></help>
         <label><!-- Debilitation May Extend Over Many Years --></label>
         <name>Debilitation_may_extend_over_many_years__c</name>
+    </fields>
+    <fields>
+        <label><!-- Debug --></label>
+        <name>Debug__c</name>
     </fields>
     <fields>
         <label><!-- Department --></label>
@@ -962,6 +984,46 @@
     <fields>
         <label><!-- Diagnosis Pending Days --></label>
         <name>Diagnosis_Pending_Days__c</name>
+    </fields>
+    <fields>
+        <label><!-- Does Child Have Cognitive Delays? --></label>
+        <name>Does_Child_Have_Cognitive_Delays__c</name>
+        <picklistValues>
+            <masterLabel>I do not have access to that information. I recommend the chapter follow up with the medical team</masterLabel>
+            <translation><!-- I do not have access to that information. I recommend the chapter follow up with the medical team --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mild: Functions close to peers</masterLabel>
+            <translation><!-- Mild: Functions close to peers --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Moderate: Functions below peers</masterLabel>
+            <translation><!-- Moderate: Functions below peers --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Severe: Functions nothing like same-age peers, extremely cognitively delayed.</masterLabel>
+            <translation><!-- Severe: Functions nothing like same-age peers, extremely cognitively delayed. --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Does Child Have Speech/Language Delays? --></label>
+        <name>Does_Child_Have_Speech_or_Language_Delay__c</name>
+        <picklistValues>
+            <masterLabel>I do not have access to that information. I recommend the chapter follow up with the medical team</masterLabel>
+            <translation><!-- I do not have access to that information. I recommend the chapter follow up with the medical team --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No, child is verbal at an age-appropriate level.</masterLabel>
+            <translation><!-- No, child is verbal at an age-appropriate level. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- Hidden Dup Check --></label>
@@ -982,6 +1044,26 @@
     <fields>
         <label><!-- Eligibility to Qualified --></label>
         <name>Eligibility_to_Qualified__c</name>
+    </fields>
+    <fields>
+        <label><!-- Expedite timeframe --></label>
+        <name>Expedite_timeframe__c</name>
+        <picklistValues>
+            <masterLabel>1-3 months</masterLabel>
+            <translation><!-- 1-3 months --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3-6 months</masterLabel>
+            <translation><!-- 3-6 months --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>&lt; 1 month</masterLabel>
+            <translation><!-- &lt; 1 month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- External Id --></label>
@@ -1303,6 +1385,10 @@
         <name>Increased_probability_of_premature_death__c</name>
     </fields>
     <fields>
+        <label><!-- Initial Address Verification --></label>
+        <name>Initial_Address_Verification__c</name>
+    </fields>
+    <fields>
         <help><!-- Date when Lead is received from non-authorized referral source --></help>
         <label><!-- Inquiry Date --></label>
         <name>Inquiry_Date__c</name>
@@ -1327,6 +1413,18 @@
     <fields>
         <label><!-- Is In A Comatose/Vegetative State? --></label>
         <name>Is_in_a_Comatose_Vegetative_State__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Referral Discussed With Healthcare? --></label>
+        <name>Is_wish_referral_discussed_health_del__c</name>
         <picklistValues>
             <masterLabel>No</masterLabel>
             <translation><!-- No --></translation>
@@ -1441,9 +1539,48 @@
         <name>Migrated_Record__c</name>
     </fields>
     <fields>
-        <help><!-- Field auto-populates based on selection made in Communication field. --></help>
-        <label><!-- Non - Verbal --></label>
+        <label><!-- Next Step Notes --></label>
+        <name>Next_Step_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Non-Verbal Additional Information --></label>
+        <name>Non_Verbal_Additional_Information__c</name>
+    </fields>
+    <fields>
+        <label><!-- Non-Verbal Communication Method --></label>
+        <name>Non_Verbal_Communication_Method__c</name>
+        <picklistValues>
+            <masterLabel>Assistive communication tool, tablet, or computer</masterLabel>
+            <translation><!-- Assistive communication tool, tablet, or computer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Crying without the capacity to indicate needs or wants to a caregiver well known to the child</masterLabel>
+            <translation><!-- Crying without the capacity to indicate needs or wants to a caregiver well known to the child --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pointing at desired objects, reaching out for something or someone they want. Taking your hand to what they want</masterLabel>
+            <translation><!-- Pointing at desired objects, reaching out for something or someone they want. Taking your hand to what they want --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Repeating something they just heard in a manner suggesting the child is desiring (as opposed to just echoing words)</masterLabel>
+            <translation><!-- Repeating something they just heard in a manner suggesting the child is desiring (as opposed to just echoing words) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sign language (either standard or specific to the child)</masterLabel>
+            <translation><!-- Sign language (either standard or specific to the child) --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Non-Verbal --></label>
         <name>Non_Verbal__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <help><!-- None of these statements describe the Child --></help>
@@ -1477,6 +1614,10 @@
     <fields>
         <label><!-- Other Diagnosis --></label>
         <name>Other_diagnosis__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other expedite timeframe comments --></label>
+        <name>Other_expedite_timeframe_comments__c</name>
     </fields>
     <fields>
         <help><!-- Out-of-territory wish, being granted with the permission of the child&apos;s home chapter. --></help>
@@ -1723,6 +1864,10 @@
     <fields>
         <label><!-- Primary Medical Professional Subspecialt --></label>
         <name>Primary_Medical_Professional_Subspecialt__c</name>
+    </fields>
+    <fields>
+        <label><!-- Primary Medical Professional Type-Other --></label>
+        <name>Primary_Medical_Professional_Type_Other__c</name>
     </fields>
     <fields>
         <label><!-- Primary Medical Professional Type --></label>
@@ -2452,6 +2597,7 @@
         <name>Treating_Medical_Professional_Contact_Id__c</name>
     </fields>
     <fields>
+        <help><!-- This recipient will automatically receive a copy of the &apos;Your patient is eligible for a wish&apos; email upon qualification. --></help>
         <label><!-- Treating Medical Professional Email --></label>
         <name>Treating_Medical_Professional_Email__c</name>
     </fields>
@@ -2897,7 +3043,11 @@
         <label><!-- Unique Wish Identifier --></label>
         <name>unique_wish_identifier__c</name>
     </fields>
-    
+    <fields>
+        <help><!-- Field auto-populates based on selection made in Communication field. --></help>
+        <label><!-- xxNon - Verbal --></label>
+        <name>xxNon_Verbal__c</name>
+    </fields>
     <quickActions>
         <label><!-- Log a Call --></label>
         <name>Log_a_Call_Lead</name>
@@ -2905,6 +3055,10 @@
     <quickActions>
         <label><!-- New Task --></label>
         <name>New_Task_Lead</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Next Steps --></label>
+        <name>Next_Steps</name>
     </quickActions>
     <quickActions>
         <label><!-- Send Diagnosis Verification --></label>
@@ -2922,19 +3076,32 @@
         <errorMessage><!-- Please Enter Full Address (City, State, Street and Postal Code), Phone Number  and Gender. --></errorMessage>
         <name>Lead_Address_Phone_and_Gender_Validation</name>
     </validationRules>
-    
+    <validationRules>
+        <errorMessage><!-- The Appeal checkbox can only be checked when requesting an Appeal of the eligibility decision – Lead Status must equal DNQ. --></errorMessage>
+        <name>Lead_Appeal_Checkbox_Only_For_DNQ</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Only National Medical Affairs can uncheck the Appeals checkbox. Please reach out to NMA if you need to uncheck this box. --></errorMessage>
+        <name>Lead_Appeal_UnCheck_Only_For_NMA</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- A Lead that is in a status of DNQ can only be placed in Eligibility Review when requesting an Appeal of the eligibility decision. If requesting an Appeal, please check the “Appeal” checkbox on the Lead record before clicking Save. --></errorMessage>
+        <name>Lead_Appeal_Validation_For_Status</name>
+    </validationRules>
     <validationRules>
         <errorMessage><!-- The birthdate entered occurs in the future. Please re-enter the birthdate. --></errorMessage>
         <name>Lead_BirthDay_Date_Validation</name>
     </validationRules>
-    
     <validationRules>
         <errorMessage><!-- Please explain reason to expedite the process in Please Explain Expedite field. --></errorMessage>
         <name>Lead_Check_Expedite_Explanation</name>
     </validationRules>
-    
     <validationRules>
-        <errorMessage><!-- Please Enter DOB --></errorMessage>
+        <errorMessage><!-- The status of a DNQd Lead cannot be updated. --></errorMessage>
+        <name>Lead_DNQ_No_Change</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter the child&apos;s date of birth in the DOB field --></errorMessage>
         <name>Lead_DOB_Referral_Validation</name>
     </validationRules>
     <validationRules>
@@ -2965,7 +3132,6 @@
         <errorMessage><!-- Please Enter First Name --></errorMessage>
         <name>Lead_FirstName_Validation_Referred</name>
     </validationRules>
-    
     <validationRules>
         <errorMessage><!-- Please Enter Hospital_Treatment_Facility --></errorMessage>
         <name>Lead_Hospital_or_Treartment_Validation</name>
@@ -2978,17 +3144,10 @@
         <errorMessage><!-- The inquiry date must occur on or before the referral date. Please enter a valid inquiry date, or re-enter the date of referral. --></errorMessage>
         <name>Lead_Inquiry_and_Referr_Date_Validation</name>
     </validationRules>
-    
-    
-    
-    
-    
     <validationRules>
         <errorMessage><!-- Please Enter Treating Medical Professional Last Name --></errorMessage>
         <name>Lead_Physician_LastName_Validation</name>
     </validationRules>
-    
-    
     <validationRules>
         <errorMessage><!-- The qualified date cannot occur before the referral date. Please enter a valid qualified date, or re-enter the referral date. --></errorMessage>
         <name>Lead_Qualified_Date_Validation</name>
@@ -3001,22 +3160,12 @@
         <errorMessage><!-- The referral date must occur on or after the inquiry date. Please enter a valid referral date, or re-enter the inquiry date. --></errorMessage>
         <name>Lead_Referral_Date_Validation</name>
     </validationRules>
-    
     <validationRules>
         <errorMessage><!-- Please provide the ICD or Diagnosis given by referrer. --></errorMessage>
         <name>Lead_Referrer_Diagnosis_Validation</name>
     </validationRules>
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <validationRules>
-        <errorMessage><!-- The status can be updated to Eligibility Review or Qualified only when the previous Sub Status is Pending Diagnosis Verification or Pending Part A or Pending Paper DV. --></errorMessage>
+        <errorMessage><!-- The status can be updated to Eligibility Review or Qualified only when the previous Sub Status is Pending Diagnosis Verification or Pending Paper DV. --></errorMessage>
         <name>Lead_Status_QualifiedOrEligib_Validation</name>
     </validationRules>
     <validationRules>
@@ -3121,4 +3270,60 @@
         <name>Send_DNQ_Notification_to_Qualifying_Medical_Professional</name>
         <subject><!-- Send DNQ Notification to Qualifying Medical Professional --></subject>
     </workflowTasks>
+    <layouts>
+        <layout>Default Lead Layout</layout>
+        <sections>
+            <label><!-- Attachments --></label>
+            <section>Attachments</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Wish Child Lead Layout</layout>
+        <sections>
+            <label><!-- Alternate Medical Professionals --></label>
+            <section>Alternate Medical Professionals</section>
+        </sections>
+        <sections>
+            <label><!-- Attachments --></label>
+            <section>Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- Diagnosis Verification --></label>
+            <section>Diagnosis Verification</section>
+        </sections>
+        <sections>
+            <label><!-- Family Information --></label>
+            <section>Family Information</section>
+        </sections>
+        <sections>
+            <label><!-- Important Dates --></label>
+            <section>Important Dates</section>
+        </sections>
+        <sections>
+            <label><!-- Inquiry/Referral --></label>
+            <section>Inquiry/Referral</section>
+        </sections>
+        <sections>
+            <label><!-- Medical Information --></label>
+            <section>Medical Information</section>
+        </sections>
+        <sections>
+            <label><!-- Medical Professionals --></label>
+            <section>Medical Professionals</section>
+        </sections>
+        <sections>
+            <label><!-- Referral Source Information --></label>
+            <section>Referral Source Information</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <description><!-- Default Lead Record Type --></description>
+        <label><!-- Default --></label>
+        <name>Default</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Wish Child Lead Record Type --></description>
+        <label><!-- Wish Child --></label>
+        <name>Wish_Child</name>
+    </recordTypes>
 </CustomObjectTranslation>

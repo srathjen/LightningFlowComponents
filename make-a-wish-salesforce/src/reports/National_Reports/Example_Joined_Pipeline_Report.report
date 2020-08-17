@@ -324,6 +324,10 @@
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <name>Example Joined Pipeline Report</name>
+    <params>
+        <name>lsk</name>
+        <value>1</value>
+    </params>
     <reportType>CaseList</reportType>
     <showDetails>true</showDetails>
 </Report>

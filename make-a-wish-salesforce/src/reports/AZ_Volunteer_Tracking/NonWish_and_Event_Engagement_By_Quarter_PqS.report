@@ -1818,6 +1818,7 @@
             <operator>equals</operator>
             <value>0035C00000Id743</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

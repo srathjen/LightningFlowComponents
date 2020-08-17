@@ -38,6 +38,7 @@
             <operator>greaterThan</operator>
             <value>TODAY</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Volunteers Background Check Incomplete</name>

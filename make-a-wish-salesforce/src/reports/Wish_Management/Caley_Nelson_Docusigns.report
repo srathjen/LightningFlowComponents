@@ -61,6 +61,7 @@
             <operator>contains</operator>
             <value>caley nelson,cynthia wetmore,james williams,cathy lee-miller,michael henry,dana salzberg,alexandra walsh,britt olson,jessica boklan</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

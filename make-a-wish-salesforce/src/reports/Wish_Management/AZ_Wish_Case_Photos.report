@@ -67,6 +67,7 @@
             <operator>equals</operator>
             <value>AZ</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
         <value>Wish Required Signature File</value>
@@ -75,6 +74,10 @@
     <fields>
         <label><!-- Shortcut --></label>
         <name>Shortcut__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sync Id --></label>
+        <name>Sync_Id__c</name>
     </fields>
     <fields>
         <label><!-- Tags --></label>

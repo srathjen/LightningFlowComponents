@@ -107,6 +107,7 @@
             <operator>equals</operator>
             <value>LAST_FISCAL_QUARTER</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Draft- Reconcilation Report Pt. 2</name>

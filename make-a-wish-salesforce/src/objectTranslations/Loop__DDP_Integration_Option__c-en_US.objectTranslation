@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <help><!-- If left blank, the file name of the PDF will be used. --></help>
         <label><!-- Agreement Name --></label>
@@ -558,21 +557,6 @@
         <label><!-- Template Id --></label>
         <name>Loop__dsTemplateId__c</name>
     </fields>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <recordTypes>
         <description><!-- Allows you to run a DocGen Package to be attached to a record. --></description>
         <label><!-- Attach --></label>
