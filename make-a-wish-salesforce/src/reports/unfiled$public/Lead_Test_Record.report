@@ -55,7 +55,7 @@
                 <value>Lead.Wish_Child</value>
             </criteriaItems>
         </filter>
-        <format>Tabular</format>
+        <format>Summary</format>
         <name>Make-A-Wish Alabama Leads Without Test C</name>
         <params>
             <name>co</name>
@@ -119,7 +119,7 @@
                 <value>Lead.Wish_Child</value>
             </criteriaItems>
         </filter>
-        <format>Tabular</format>
+        <format>Summary</format>
         <name>Lead created by Wish Referral Form Site</name>
         <params>
             <name>co</name>

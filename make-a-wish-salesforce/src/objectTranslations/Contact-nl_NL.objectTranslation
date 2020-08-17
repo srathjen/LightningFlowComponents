@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- BDE Entry FS --></label>
         <name>npsp__BDE_Entry_FS</name>
@@ -357,10 +356,35 @@
         <name>Class_in_School__c</name>
     </fields>
     <fields>
+        <label><!-- Cognitive Delays --></label>
+        <name>Cognitive_Delays__c</name>
+        <picklistValues>
+            <masterLabel>I do not have access to that information. I recommend the chapter follow up with the medical team</masterLabel>
+            <translation><!-- I do not have access to that information. I recommend the chapter follow up with the medical team --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mild: Functions close to peers</masterLabel>
+            <translation><!-- Mild: Functions close to peers --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Moderate: Functions below peers</masterLabel>
+            <translation><!-- Moderate: Functions below peers --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Severe: Functions nothing like same-age peers, extremely cognitively delayed.</masterLabel>
+            <translation><!-- Severe: Functions nothing like same-age peers, extremely cognitively delayed. --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- Color --></label>
         <name>Color__c</name>
     </fields>
     <fields>
+        <help><!-- Historical Data. This field used to capture the communication level of the referred child. New questions have been added to the DV to capture this information in more detail. --></help>
         <label><!-- Communication --></label>
         <name>Communication__c</name>
         <picklistValues>
@@ -466,6 +490,22 @@
         <name>Do_Not_Create_User__c</name>
     </fields>
     <fields>
+        <label><!-- Speech or Language Delays --></label>
+        <name>Does_Child_Have_Speech_Language_Delays__c</name>
+        <picklistValues>
+            <masterLabel>I do not have access to that information. I recommend the chapter follow up with the medical team</masterLabel>
+            <translation><!-- I do not have access to that information. I recommend the chapter follow up with the medical team --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No, child is verbal at an age-appropriate level.</masterLabel>
+            <translation><!-- No, child is verbal at an age-appropriate level. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- Driver Type --></label>
         <name>Driver_Type__c</name>
         <picklistValues>
@@ -528,6 +568,26 @@
     <fields>
         <label><!-- Employer --></label>
         <name>Employer__c</name>
+    </fields>
+    <fields>
+        <label><!-- Expedite timeframe --></label>
+        <name>Expedite_timeframe__c</name>
+        <picklistValues>
+            <masterLabel>1-3 months</masterLabel>
+            <translation><!-- 1-3 months --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3-6 months</masterLabel>
+            <translation><!-- 3-6 months --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>&lt; 1 month</masterLabel>
+            <translation><!-- &lt; 1 month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- Expiration Date --></label>
@@ -1048,6 +1108,10 @@ and the date it was or will be granted. --></help>
         <name>Lead_Created_Date__c</name>
     </fields>
     <fields>
+        <label><!-- MP Additional Clinical Details --></label>
+        <name>MP_Additional_Clinical_Details__c</name>
+    </fields>
+    <fields>
         <help><!-- Last time USPS verification was attempted --></help>
         <label><!-- Mailing Address Verification Attempted --></label>
         <name>MailingAddressVerificationAttempted__c</name>
@@ -1121,6 +1185,34 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Nickname --></label>
         <name>Nickname__c</name>
+    </fields>
+    <fields>
+        <label><!-- Non-Verbal Additional Information --></label>
+        <name>Non_Verbal_Additional_Information__c</name>
+    </fields>
+    <fields>
+        <label><!-- Non-Verbal Communication Method --></label>
+        <name>Non_Verbal_Communication_Method__c</name>
+        <picklistValues>
+            <masterLabel>Assistive communication tool, tablet, or computer</masterLabel>
+            <translation><!-- Assistive communication tool, tablet, or computer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Crying without the capacity to indicate needs or wants to a caregiver well known to the child</masterLabel>
+            <translation><!-- Crying without the capacity to indicate needs or wants to a caregiver well known to the child --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pointing at desired objects, reaching out for something or someone they want. Taking your hand to what they want</masterLabel>
+            <translation><!-- Pointing at desired objects, reaching out for something or someone they want. Taking your hand to what they want --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Repeating something they just heard in a manner suggesting the child is desiring (as opposed to just echoing words)</masterLabel>
+            <translation><!-- Repeating something they just heard in a manner suggesting the child is desiring (as opposed to just echoing words) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sign language (either standard or specific to the child)</masterLabel>
+            <translation><!-- Sign language (either standard or specific to the child) --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- Non - Verbal --></label>
@@ -1207,6 +1299,10 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Other diagnosis --></label>
         <name>Other_diagnosis__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other expedite timeframe comments --></label>
+        <name>Other_expedite_timeframe_comments__c</name>
     </fields>
     <fields>
         <label><!-- PR Diagnosis --></label>
@@ -1876,7 +1972,7 @@ and the date it was or will be granted. --></help>
         <name>Recipient_Email__c</name>
     </fields>
     <fields>
-        <label><!-- Referral Comment --></label>
+        <label><!-- MP Referral Comments --></label>
         <name>ReferralComment__c</name>
     </fields>
     <fields>
@@ -2095,6 +2191,18 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Relationship To Wish Child (Other) --></label>
         <name>Relationship_to_Wish_Child__c</name>
+    </fields>
+    <fields>
+        <label><!-- Residing In US 7 Yrs --></label>
+        <name>Residing_In_US_7_Yrs__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- Hidden Residing in US --></label>
@@ -3799,7 +3907,6 @@ provide contact information for each site on which you are active. --></help>
             <section>Volunteer Details</section>
         </sections>
     </layouts>
-    
     <layouts>
         <layout>Medical Professional</layout>
         <sections>
@@ -3975,6 +4082,10 @@ provide contact information for each site on which you are active. --></help>
     <quickActions>
         <label><!-- Wish Child Fields --></label>
         <name>Contact_Fields</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Wish Child Fields2 --></label>
+        <name>Contact_Fields2</name>
     </quickActions>
     <quickActions>
         <label><!-- Driver Info - WF --></label>

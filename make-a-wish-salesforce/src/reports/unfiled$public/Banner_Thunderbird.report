@@ -125,6 +125,7 @@
             <operator>equals</operator>
             <value>graham</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <name>Banner Thunderbird</name>

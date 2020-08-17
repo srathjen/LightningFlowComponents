@@ -43,6 +43,7 @@
             <operator>contains</operator>
             <value>bhasin,zeng,pariury,laura davis,valenzuela,jamie sanchez,bianchi,laura lee,jacquelyn wall,dillavou,callaway</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Kids Approaching Travel - UMC</name>

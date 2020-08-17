@@ -40,6 +40,7 @@
             <operator>notEqual</operator>
             <value>Wish Volunteer Community Profile,Wish Referral Form Profile,Prospective Volunteer (Member),Chatter Free User,Prospective Volunteer (Login),Active Volunteer (Login),Active Volunteer (Member)</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Users</name>

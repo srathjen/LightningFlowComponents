@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <label><!-- Background Color --></label>
         <name>Loop__Background_Color__c</name>
@@ -218,5 +217,4 @@
         <label><!-- Vertical Offset --></label>
         <name>Loop__YOffset__c</name>
     </fields>
-    
 </CustomObjectTranslation>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
     <alerts>
         <fullName>Bc_BGCExpAlertToVolunteer</fullName>
         <description>Bc : BGCExpAlertToVolunteer</description>
@@ -135,7 +134,7 @@
     </fieldUpdates>
     <fieldUpdates>
         <fullName>Update_IsBackground_Expire</fullName>
-        <description>This field update is used to update the &quot;Hidden Background Expire&quot;  field. when the background check record get expire.</description>
+        <description>This field update is used to update the "Hidden Background Expire"  field. when the background check record get expire.</description>
         <field>HiddenBackgroundExpire__c</field>
         <literalValue>1</literalValue>
         <name>Update IsBackground Expire</name>
@@ -399,6 +398,19 @@
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
             <actions>
+                <name>Bc_Expiring_Before_30_Days_Email_Alert</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>BC_ET_Background_Check_Expiring_30_Days</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Background_check__c.Date__c</offsetFromField>
+            <timeLength>-30</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
                 <name>Bc_Expiring_Before_2_Days_Email_Alert</name>
                 <type>Alert</type>
             </actions>
@@ -452,19 +464,6 @@
             </actions>
             <offsetFromField>Background_check__c.Date__c</offsetFromField>
             <timeLength>-23</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Bc_Expiring_Before_30_Days_Email_Alert</name>
-                <type>Alert</type>
-            </actions>
-            <actions>
-                <name>BC_ET_Background_Check_Expiring_30_Days</name>
-                <type>Task</type>
-            </actions>
-            <offsetFromField>Background_check__c.Date__c</offsetFromField>
-            <timeLength>-30</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
     </rules>

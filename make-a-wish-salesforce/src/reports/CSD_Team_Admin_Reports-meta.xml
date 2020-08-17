@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ReportFolder xmlns="http://soap.sforce.com/2006/04/metadata">
     <folderShares>
-        <accessLevel>Manage</accessLevel>
-        <sharedTo>bgoodman@wish.org</sharedTo>
+        <accessLevel>EditAllContents</accessLevel>
+        <sharedTo>bmaclaughlin@wish.org</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
+    <folderShares>
+        <accessLevel>EditAllContents</accessLevel>
+        <sharedTo>cjames@wish.org</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
+    <folderShares>
+        <accessLevel>EditAllContents</accessLevel>
+        <sharedTo>cbsmith@wish.org</sharedTo>
         <sharedToType>User</sharedToType>
     </folderShares>
     <folderShares>
@@ -13,6 +23,21 @@
     <folderShares>
         <accessLevel>View</accessLevel>
         <sharedTo>lbrinkerhoff@wish.org</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
+    <folderShares>
+        <accessLevel>EditAllContents</accessLevel>
+        <sharedTo>mkumartammineny@wish.org</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
+    <folderShares>
+        <accessLevel>EditAllContents</accessLevel>
+        <sharedTo>mcominotto@wish.org</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
+    <folderShares>
+        <accessLevel>EditAllContents</accessLevel>
+        <sharedTo>sshrourou@wish.org</sharedTo>
         <sharedToType>User</sharedToType>
     </folderShares>
     <folderShares>

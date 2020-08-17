@@ -160,10 +160,6 @@
         <visible>false</visible>
     </applicationVisibilities>
     <classAccesses>
-        <apexClass>AccountTrigger_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>AddVolunteerRole_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -220,10 +216,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>Background_CheckBeforeDelete_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>Batch_UpdateVolunteerRoleStatus_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -265,10 +257,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>CaseServiceTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>CaseTriggerHandler_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -388,19 +376,11 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>ContactTrigger_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>CreateNewWish_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>CreateNewWish_ACTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>CreateVolunteerUser_ATTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -421,22 +401,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>DelegatedApproverController_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DeleteApexDebugLogRecordScheduleTest_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DeleteApexDebugLogRecordSchedule_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DeleteApexDebugLogRecords_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DeleteApexDebugLogRecords_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -473,10 +437,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>DocusignStatusTrigger_AT_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DynamicContent_ATTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -525,10 +485,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>InKindReimbursementApproval_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>InactiveVolunteerHandlerTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -624,10 +580,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>LeadFile_AT_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>LeadSelectMedEmailController_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -637,10 +589,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>LeadTrigger_AT_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Lead_Trigger_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -700,23 +648,7 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>NonWishEvents_ATTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>OTUB_UpdateVolUserStatusOnBGCOI_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>OTUB_UpdateVolUserStatusOnBGCOI_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>OrientationTraining_ATTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>OrientationandTrainingUtil</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -728,19 +660,7 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>ParentGuardianJSON2Apex</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>PartAFormWrapper</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ParticipantJSON2Apex</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ProcessDdpExt</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -773,14 +693,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>RequiredSignatureExpiredBatchTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ReviewUploadTask_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ReviewUploadTask_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -828,19 +740,7 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>TestClassUtil</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>TestDataFactory</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>TestDataUtility_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>TimeSheetTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -861,10 +761,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>UIThemeControllerTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>UpdateWishAssignmentBatchTest_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -948,10 +844,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>VolunteerRole_AT_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>VolunteerSignUp_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -997,10 +889,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>WishAffiliationDesign_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishAffiliationParticipantService</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -1137,10 +1025,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>batch_CheckCOIExpiration_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_LeadChildAgeSchedule</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -8669,9 +8553,9 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
+        <readable>false</readable>
         <field>ContactPointConsent.ContactPointTypeConsentId</field>
-        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -25782,6 +25666,9 @@
         <recordType>Contact.Wish_Family</recordType>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>ContactPointAddress-Contact Point Address Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>ContactPointEmail-Contact Point Email Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -26231,6 +26118,9 @@
         <layout>Solution-Solution Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Spanish_Translations__mdt-Spanish Translations Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Support_User_Access__mdt-Support User Access Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -26427,6 +26317,9 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Volunteer_Roles__c-Volunteer Role Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WishReferralForm_Translation__mdt-WishReferralForm Translation Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Wish_Affiliation_Category__mdt-Wish Affiliation Category Layout</layout>
@@ -27168,7 +27061,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishReferralFormOut_VF</apexPage>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishReferralForm_VF</apexPage>
@@ -27180,7 +27073,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishRelatedLinks_VF</apexPage>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishVisionFormChild</apexPage>
@@ -27352,12 +27245,12 @@
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Lead.Default</recordType>
-        <visible>false</visible>
+        <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
-        <default>false</default>
+        <default>true</default>
         <recordType>Lead.Wish_Child</recordType>
-        <visible>false</visible>
+        <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>false</default>

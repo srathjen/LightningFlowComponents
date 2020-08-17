@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- Additional Medical Requests --></label>
         <name>Additional_Medical_Requests</name>
@@ -194,6 +193,11 @@ planned vacations, etc.) that might impact your ability to participate in a wish
             <masterLabel>Yes</masterLabel>
             <translation><!-- Yes --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- This checkbox cannot be edited on the Case. Please use the Appeal checkbox on the Lead. --></help>
+        <label><!-- Appeal --></label>
+        <name>Appeal__c</name>
     </fields>
     <fields>
         <help><!-- The following medical restrictions and needs must be considered when fulfilling the wish. --></help>
@@ -426,6 +430,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <help><!-- Date when the chapter staff approve the wish concept --></help>
         <label><!-- Concept Approval Date --></label>
         <name>Concept_Approval_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Condition Deteriorate Explanation --></label>
+        <name>Condition_Deteriorate_Explanation__c</name>
     </fields>
     <fields>
         <label><!-- Current DOB --></label>
@@ -785,6 +793,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <help><!-- Any additional requests are at the discretion of the chapter office. If medical supplies are requested, please detail the relevant model number, manufacturer, size, dimensions, and any other pertinent information if needed during travel. --></help>
         <label><!-- Additional Medical Requests --></label>
         <name>Fill_wish_participant_name_medical_needs__c</name>
+    </fields>
+    <fields>
+        <label><!-- Final Close Letter Sent --></label>
+        <name>Final_Close_Letter_Sent__c</name>
     </fields>
     <fields>
         <help><!-- Field will update to Pending or Completed based on the status found in the Form Tracker. --></help>
@@ -1404,6 +1416,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Next_Step_Notes__c</name>
     </fields>
     <fields>
+        <label><!-- 90-Day Letter Sent --></label>
+        <name>Ninety_Day_Letter_Sent__c</name>
+    </fields>
+    <fields>
         <help><!-- This field can be updated on the related Household Account record. --></help>
         <label><!-- Non-Participant Emergency Number --></label>
         <name>Non_Participant_Emergency_Number__c</name>
@@ -1866,6 +1882,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Ready_to_Assign_Date__c</name>
     </fields>
     <fields>
+        <label><!-- Ready to Interview Date --></label>
+        <name>Ready_to_Interview_Date__c</name>
+    </fields>
+    <fields>
         <help><!-- Date when Lead is received from authorized referral source or Inquiry is updated. --></help>
         <label><!-- Referral Date --></label>
         <name>Referral_Date__c</name>
@@ -1931,20 +1951,24 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <label><!-- Rush Timeframe --></label>
         <name>Rush_Timeframe__c</name>
         <picklistValues>
-            <masterLabel>0-30 days</masterLabel>
-            <translation><!-- 0-30 days --></translation>
+            <masterLabel>1-3 months</masterLabel>
+            <translation><!-- 1-3 months --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>31-90 days</masterLabel>
-            <translation><!-- 31-90 days --></translation>
+            <masterLabel>3-6 months</masterLabel>
+            <translation><!-- 3-6 months --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>91-180 days</masterLabel>
-            <translation><!-- 91-180 days --></translation>
+            <masterLabel>&lt; 1 month</masterLabel>
+            <translation><!-- &lt; 1 month --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>ASAP</masterLabel>
             <translation><!-- ASAP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
         </picklistValues>
     </fields>
     <fields>
@@ -1974,6 +1998,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
             <masterLabel>Yes</masterLabel>
             <translation><!-- Yes --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- 60-Day Letter Sent --></label>
+        <name>Sixty_Day_Letter_Sent__c</name>
     </fields>
     <fields>
         <label><!-- Start Date --></label>
@@ -2120,6 +2148,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Test Record --></label>
         <name>Test_Record__c</name>
+    </fields>
+    <fields>
+        <label><!-- 30-Day Letter Sent --></label>
+        <name>Thirty_Day_Letter_Sent__c</name>
     </fields>
     <fields>
         <label><!-- This Is My Wish Because… --></label>
@@ -2296,6 +2328,22 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- When Thinking,Some Of My Wish Ideas Were --></label>
         <name>When_thinking_some_of_my_wish_ideas_were__c</name>
+    </fields>
+    <fields>
+        <label><!-- Will Child’s Condition Deteriorate? --></label>
+        <name>Will_Childs_Condition_Deteriorate__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Sure</masterLabel>
+            <translation><!-- Not Sure --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- Car Seats Note --></label>
@@ -2815,6 +2863,16 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>of_Days_Qualified_Granted__c</name>
     </fields>
     <fields>
+        <help><!-- Displays the number of days between the Parental Signatures Received (Status = Ready to Assign) and the date all volunteers are assigned (Status = Ready to Interview). --></help>
+        <label><!-- # of Days RTA - - &gt; Ready to Interview --></label>
+        <name>of_Days_RTA_Ready_to_Interview__c</name>
+    </fields>
+    <fields>
+        <help><!-- Displays the number of days between the date all volunteers are assigned (Status = Ready to Interview) and the Interview Date. --></help>
+        <label><!-- # of Days RTI - - &gt; Interviewed --></label>
+        <name>of_Days_RTI_Interviewed__c</name>
+    </fields>
+    <fields>
         <help><!-- Displays the number of days between the Parental Signatures Received (Status = Ready to Assign) and the first volunteer assigned dates --></help>
         <label><!-- # of Days Ready to Assign - - &gt; Assigned --></label>
         <name>of_Days_Ready_to_Assign_Assigned__c</name>
@@ -3208,7 +3266,7 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>Case_Closed_Date_Change_Validation</name>
     </validationRules>
     <validationRules>
-        <errorMessage><!-- Before the case is closed, a closed date value must be entered. --></errorMessage>
+        <errorMessage><!-- Before the case is closed, a closed date value must be entered. Deactivated for SIW-490. This blocks the save prior to being able to prompt user for a Closed Date. --></errorMessage>
         <name>Case_Closed_Date_Validation</name>
     </validationRules>
     <validationRules>

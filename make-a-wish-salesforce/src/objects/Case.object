@@ -8206,7 +8206,6 @@ NULL)</formula>
     </fields>
     <listViews>
         <fullName>AllOpenCases</fullName>
-        <columns>Anticipated_Start_Date__c</columns>
         <columns>CASES.CASE_NUMBER</columns>
         <columns>CASES.SUBJECT</columns>
         <columns>NAME</columns>
@@ -8220,14 +8219,9 @@ NULL)</formula>
         <columns>CASES.RECORDTYPE</columns>
         <filterScope>Everything</filterScope>
         <filters>
-            <field>CASES.RECORDTYPE</field>
-            <operation>equals</operation>
-            <value>Case.Wish</value>
-        </filters>
-        <filters>
             <field>CASES.STATUS</field>
-            <operation>notEqual</operation>
-            <value>Closed</value>
+            <operation>equals</operation>
+            <value>Qualified,Ready to Assign,Ready to Interview,Wish Determined,Pending Approval,Wish Design,Wish Scheduled,Granted</value>
         </filters>
         <label>All Open Cases</label>
         <sharedTo>
@@ -8697,9 +8691,9 @@ NULL)</formula>
         <columns>CASES.SUBJECT</columns>
         <columns>CASES.STATUS</columns>
         <columns>CASES.PRIORITY</columns>
-        <columns>CASES.CREATED_DATE</columns>
+        <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
         <columns>CORE.USERS.ALIAS</columns>
-        <columns>CASES.LAST_UPDATE</columns>
+        <columns>CASES.LAST_UPDATE_DATE_ONLY</columns>
         <columns>Migrated_Record__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
@@ -8708,9 +8702,9 @@ NULL)</formula>
             <value>Case.Wish</value>
         </filters>
         <filters>
-            <field>CASES.STATUS</field>
+            <field>ChapterName__c</field>
             <operation>equals</operation>
-            <value>Wish Determined</value>
+            <value>Make-A-Wish Test Chapter</value>
         </filters>
         <label>Test Chapter</label>
         <sharedTo>
@@ -8725,7 +8719,7 @@ NULL)</formula>
         <columns>CASES.STATUS</columns>
         <columns>Description__c</columns>
         <columns>Start_Date__c</columns>
-        <filterScope>Mine</filterScope>
+        <filterScope>Everything</filterScope>
         <filters>
             <field>CASES.RECORDTYPE</field>
             <operation>equals</operation>
@@ -9344,6 +9338,21 @@ NULL)</formula>
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Will_Childs_Condition_Deteriorate__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Sure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Wish_Clarence_Attachment__c</picklist>
             <values>
                 <fullName>No</fullName>
@@ -9895,7 +9904,7 @@ NULL)</formula>
             </values>
         </picklistValues>
         <picklistValues>
-        <picklist>Rush_Timeframe__c</picklist>
+            <picklist>Rush_Timeframe__c</picklist>
             <values>
                 <fullName>%3C 1 month</fullName>
                 <default>false</default>
@@ -10059,6 +10068,21 @@ NULL)</formula>
             </values>
             <values>
                 <fullName>MAW</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Will_Childs_Condition_Deteriorate__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Sure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -10809,6 +10833,21 @@ NULL)</formula>
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Will_Childs_Condition_Deteriorate__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Sure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Wish_Clarence_Attachment__c</picklist>
             <values>
                 <fullName>No</fullName>
@@ -11385,6 +11424,21 @@ NULL)</formula>
             </values>
             <values>
                 <fullName>MAW</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Will_Childs_Condition_Deteriorate__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Sure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -12120,6 +12174,21 @@ NULL)</formula>
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Will_Childs_Condition_Deteriorate__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Sure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Wish_Clarence_Attachment__c</picklist>
             <values>
                 <fullName>No</fullName>
@@ -12696,6 +12765,21 @@ NULL)</formula>
             </values>
             <values>
                 <fullName>MAW</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Will_Childs_Condition_Deteriorate__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Sure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -13287,6 +13371,21 @@ NULL)</formula>
             </values>
             <values>
                 <fullName>MAW</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Will_Childs_Condition_Deteriorate__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Sure</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
                 <default>false</default>
             </values>
         </picklistValues>

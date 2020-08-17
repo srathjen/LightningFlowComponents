@@ -125,6 +125,7 @@
             <operator>greaterOrEqual</operator>
             <value>9/1/2019</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

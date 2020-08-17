@@ -522,9 +522,9 @@
         <customTabListAdditionalFields>dsfs__Date_Signed__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>dsfs__Date_Declined__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>dsfs__Decline_Reason__c</customTabListAdditionalFields>
+        <excludedStandardButtons>New</excludedStandardButtons>
         <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
         <excludedStandardButtons>Accept</excludedStandardButtons>
-        <excludedStandardButtons>New</excludedStandardButtons>
         <lookupDialogsAdditionalFields>dsfs__DocuSign_Recipient_Email__c</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>dsfs__Recipient_Status__c</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>dsfs__Contact__c</lookupDialogsAdditionalFields>

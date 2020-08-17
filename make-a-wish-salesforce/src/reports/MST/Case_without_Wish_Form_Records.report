@@ -34,6 +34,7 @@
             <operator>notEqual</operator>
             <value>Completed</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Case without Wish Form Records</name>

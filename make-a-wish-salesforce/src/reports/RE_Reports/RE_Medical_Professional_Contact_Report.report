@@ -8,6 +8,7 @@
             <operator>equals</operator>
             <value>Medical_Professional</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <name>RE Medical Professional Contact Report</name>

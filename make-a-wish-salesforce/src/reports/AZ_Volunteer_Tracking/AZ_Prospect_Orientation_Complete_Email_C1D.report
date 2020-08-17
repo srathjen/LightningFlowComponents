@@ -56,6 +56,7 @@
             <operator>equals</operator>
             <value>THIS_MONTH</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>AZ - Prospect Orientation Complete Email</name>

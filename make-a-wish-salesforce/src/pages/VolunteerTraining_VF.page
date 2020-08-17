@@ -92,7 +92,7 @@
                         <apex:pagemessages id="msg"/>
                     </div>
 
-                    <apex:pageBlock>
+                    <apex:pageBlock >
                         <apex:outputPanel rendered="{!(isTrainingExist == True)}">
                             <h3>{!$Label.Volunteer_Portal_Title_Registered}</h3>
                             <p>{!$Label.Volunteer_Portal_Confirmation_Registered_Training}</p>
@@ -125,8 +125,7 @@
 
                                     <tbody>
                                     <apex:repeat value="{!TrainingRecordList}" var="training">
-                                        <apex:outputPanel
-                                                rendered="{!(AND(training.volOppSize>0,training.status == 'Registered'))}">
+                                        <apex:outputPanel rendered="{!(AND(training.volOppSize>0,training.status == 'Registered'))}">
                                             <tr>
                                                 <td>{!training.orientationName}</td>
                                                 <td>{!training.chapterName}</td>

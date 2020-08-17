@@ -49,6 +49,7 @@
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <name>Sample Case History Report</name>

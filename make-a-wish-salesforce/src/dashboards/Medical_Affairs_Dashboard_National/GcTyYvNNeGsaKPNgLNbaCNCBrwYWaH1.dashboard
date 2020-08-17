@@ -22,7 +22,7 @@
                 <expandOthers>false</expandOthers>
                 <groupingSortProperties/>
                 <header>Auto-Qualify YTD</header>
-                <report>MAWA_Medical_Eligibility/Medical_Outreach_Dashboard/Auto_qualify_dashboard</report>
+                <report>Medical_Outreach_Dashboard/Auto_qualify_dashboard</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>false</showValues>
@@ -46,7 +46,7 @@
                 <expandOthers>false</expandOthers>
                 <groupingSortProperties/>
                 <header>Referral Status YTD</header>
-                <report>MAWA_Medical_Eligibility/Medical_Outreach_Dashboard/Referral_Status_Dashboard</report>
+                <report>Medical_Outreach_Dashboard/Referral_Status_Dashboard</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>false</showValues>
@@ -70,7 +70,7 @@
                 <expandOthers>false</expandOthers>
                 <groupingSortProperties/>
                 <header>DV Cases YTD</header>
-                <report>MAWA_Medical_Eligibility/Medical_Outreach_Dashboard/DV_Cases_TY</report>
+                <report>Medical_Outreach_Dashboard/DV_Cases_TY</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>false</showValues>
@@ -94,7 +94,7 @@
                 <expandOthers>false</expandOthers>
                 <groupingSortProperties/>
                 <header>Auto-Qualify This Qtr</header>
-                <report>MAWA_Medical_Eligibility/Medical_Outreach_Dashboard/Auto_Qualify_This_Qtr</report>
+                <report>Medical_Outreach_Dashboard/Auto_Qualify_This_Qtr</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>false</showValues>
@@ -118,7 +118,7 @@
                 <expandOthers>false</expandOthers>
                 <groupingSortProperties/>
                 <header>Referral Status This Qtr</header>
-                <report>MAWA_Medical_Eligibility/Medical_Outreach_Dashboard/Referral_Status_This_Qtr</report>
+                <report>Medical_Outreach_Dashboard/Referral_Status_This_Qtr</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>false</showValues>
@@ -142,7 +142,7 @@
                 <expandOthers>false</expandOthers>
                 <groupingSortProperties/>
                 <header>DV Cases This Qtr</header>
-                <report>MAWA_Medical_Eligibility/Medical_Outreach_Dashboard/Copy_of_DV_Cases_This_QTR</report>
+                <report>Medical_Outreach_Dashboard/Copy_of_DV_Cases_This_QTR</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>false</showValues>
@@ -166,7 +166,7 @@
                 <expandOthers>false</expandOthers>
                 <groupingSortProperties/>
                 <header>Auto-Qualify YTD by DV Type (Filter)</header>
-                <report>MAWA_Medical_Eligibility/Medical_Outreach_Dashboard/Auto_Qualify_YTD_by_DV_Type_Filter</report>
+                <report>Medical_Outreach_Dashboard/Auto_Qualify_YTD_by_DV_Type_Filter</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>false</showValues>
@@ -190,7 +190,7 @@
                 <expandOthers>false</expandOthers>
                 <groupingSortProperties/>
                 <header>Auto-Qualify TQ by DV Type (Filter)</header>
-                <report>MAWA_Medical_Eligibility/Medical_Outreach_Dashboard/Auto_Qualify_TQ_by_DV_Type_Filter</report>
+                <report>Medical_Outreach_Dashboard/Auto_Qualify_TQ_by_DV_Type_Filter</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>false</showValues>

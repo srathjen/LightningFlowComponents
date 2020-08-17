@@ -30,6 +30,7 @@
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

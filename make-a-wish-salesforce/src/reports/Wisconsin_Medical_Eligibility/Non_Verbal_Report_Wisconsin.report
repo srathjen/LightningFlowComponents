@@ -40,7 +40,7 @@
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>Lead$Non_Verbal__c</field>
+        <field>Lead$xxNon_Verbal__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <name>Non Verbal Report</name>

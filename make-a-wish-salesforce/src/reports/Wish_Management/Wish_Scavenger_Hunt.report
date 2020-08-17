@@ -104,6 +104,7 @@
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Wish Scavenger Hunt</name>

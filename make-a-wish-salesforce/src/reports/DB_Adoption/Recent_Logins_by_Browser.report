@@ -66,6 +66,7 @@
             <operator>contains</operator>
             <value>IE</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Matrix</format>
     <groupingsAcross>

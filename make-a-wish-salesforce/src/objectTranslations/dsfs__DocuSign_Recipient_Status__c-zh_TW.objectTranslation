@@ -1,9 +1,48 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
         <value>DocuSign 收件人狀態</value>
     </caseValues>
+    <fields>
+        <label><!-- DV Form Name --></label>
+        <name>DV_Form_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- DV_Form_Password --></label>
+        <name>DV_Form_Password__c</name>
+    </fields>
+    <fields>
+        <label><!-- Envelope Number --></label>
+        <name>Envelope_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead ID --></label>
+        <name>Lead_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead Name --></label>
+        <name>Lead_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead Owner Email Text --></label>
+        <name>Lead_Owner_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead Owner Full Name --></label>
+        <name>Lead_Owner_Full_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead Owner Phone --></label>
+        <name>Lead_Owner_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead Owner Title --></label>
+        <name>Lead_Owner_Title__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead Owner Email --></label>
+        <name>Lead_Owner__c</name>
+    </fields>
     <fields>
         <label><!-- Account --></label>
         <name>dsfs__Account__c</name>
@@ -76,7 +115,6 @@
         <label><!-- Recipient Status --></label>
         <name>dsfs__Recipient_Status__c</name>
     </fields>
-    
     <nameFieldLabel>DocuSign 收件人名稱</nameFieldLabel>
     <webLinks>
         <label><!-- ResendDocuSignEmail --></label>

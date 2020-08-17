@@ -100,6 +100,7 @@
             <operator>equals</operator>
             <value>Travel_Data__c.Ground_Transportation</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>RE Ground TransportationTravel Data</name>

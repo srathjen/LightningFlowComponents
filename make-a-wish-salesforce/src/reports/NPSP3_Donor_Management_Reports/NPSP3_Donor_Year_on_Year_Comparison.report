@@ -108,6 +108,7 @@
             <operator>greaterOrEqual</operator>
             <value>LAST_N_YEARS:3</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

@@ -54,6 +54,7 @@
             <operator>equals</operator>
             <value>Qualified,Ready to Assign,Ready to Interview,Wish Determined,Pending Approval,Wish Design,Wish Scheduled,Inactive,Medical,Pending Clarification - Chapter</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

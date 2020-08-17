@@ -46,6 +46,7 @@
             <operator>equals</operator>
             <value>Opportunity.Grant</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Institutional Fundraising Goal this year</name>

@@ -66,11 +66,11 @@
     <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
-    <sortColumn>Lead.Referred_Date__c</sortColumn>
+    <sortColumn>Lead.Inquiry_Date__c</sortColumn>
     <sortOrder>Desc</sortOrder>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
-        <endDate>2019-12-02</endDate>
+        <endDate>2020-07-22</endDate>
         <interval>INTERVAL_CUSTOM</interval>
         <startDate>2019-05-09</startDate>
     </timeFrameFilter>

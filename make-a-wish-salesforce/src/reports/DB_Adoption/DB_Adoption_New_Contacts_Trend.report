@@ -56,6 +56,7 @@
             <operator>equals</operator>
             <value>LAST_N_DAYS:180</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

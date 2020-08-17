@@ -25,6 +25,7 @@
             <operator>equals</operator>
             <value>Temp. Historic Field Tracking</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Case Temp. Field Tracking</name>

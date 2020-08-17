@@ -60,7 +60,7 @@
             <column>STATUS</column>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
-            <value>Wish Determined,Pending Approval,Wish Design,Wish Scheduled</value>
+            <value>Inactive,Wish Determined,Pending Approval,Wish Design,Wish Scheduled</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
@@ -104,6 +104,7 @@
             <operator>lessOrEqual</operator>
             <value>8/31/2020</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

@@ -49,6 +49,7 @@
             <operator>equals</operator>
             <value>Granted,Completed</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <name>All Wishes</name>

@@ -22,6 +22,7 @@
             <operator>greaterOrEqual</operator>
             <value>15</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Longest Name Character Count</name>

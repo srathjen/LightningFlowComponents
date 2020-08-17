@@ -20,6 +20,7 @@
             <operator>equals</operator>
             <value>kpeterson2@phoenixchildrens.com</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Contacts by email address including ID</name>

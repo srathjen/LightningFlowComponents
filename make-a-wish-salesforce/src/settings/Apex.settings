@@ -5,8 +5,8 @@
     <enableApexApprovalLockUnlock>true</enableApexApprovalLockUnlock>
     <enableApexCtrlImplicitWithSharingPref>false</enableApexCtrlImplicitWithSharingPref>
     <enableApexPropertyGetterPref>false</enableApexPropertyGetterPref>
-    <enableAuraApexCtrlAuthUserAccessCheckPref>false</enableAuraApexCtrlAuthUserAccessCheckPref>
-    <enableAuraApexCtrlGuestUserAccessCheckPref>false</enableAuraApexCtrlGuestUserAccessCheckPref>
+    <enableAuraApexCtrlAuthUserAccessCheckPref>true</enableAuraApexCtrlAuthUserAccessCheckPref>
+    <enableAuraApexCtrlGuestUserAccessCheckPref>true</enableAuraApexCtrlGuestUserAccessCheckPref>
     <enableCompileOnDeploy>false</enableCompileOnDeploy>
     <enableDisableParallelApexTesting>true</enableDisableParallelApexTesting>
     <enableDoNotEmailDebugLog>false</enableDoNotEmailDebugLog>

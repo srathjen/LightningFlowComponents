@@ -17,6 +17,7 @@
         <backgroundColor>#0057B8</backgroundColor>
         <height>100</height>
         <horizontalAlignment>Center</horizontalAlignment>
+        <logo>SharedDocuments/MAWALogo.png</logo>
         <verticalAlignment>Middle</verticalAlignment>
     </header>
     <middleLine>

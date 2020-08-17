@@ -76,14 +76,15 @@
             <column>Case.Start_Date__c</column>
             <isUnlocked>true</isUnlocked>
             <operator>greaterOrEqual</operator>
-            <value>9/1/2018</value>
+            <value>9/1/2017</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.End_Date__c</column>
             <isUnlocked>true</isUnlocked>
             <operator>lessOrEqual</operator>
-            <value>8/31/2019</value>
+            <value>8/31/2020</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Completed Wishes FY 19</name>

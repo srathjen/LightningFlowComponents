@@ -510,7 +510,7 @@
         <object>Case</object>
     </recordUpdates>
     <startElementReference>isChangedDecision5_myRule_4_Subject</startElementReference>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>myVariable_current</name>
         <dataType>SObject</dataType>

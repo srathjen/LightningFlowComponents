@@ -53,6 +53,7 @@
             <operator>equals</operator>
             <value>Qualified,Ready to Assign,Ready to Interview,Wish Determined,Budget Approval - Submitted,Budget Approval - Approved,Wish Design,Wish Scheduled,Hold,Inactive,Granted,Escalated,In Progress,Medical,New,Open,Pending Clarification - Chapter,Pending Clarification - MAC,Approved - National Medical Review,Approved - National MAC Review,Pending Clarification - MAC Consult Req</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Case Owner Transfer Report</name>

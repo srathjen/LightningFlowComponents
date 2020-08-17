@@ -58,6 +58,7 @@
             <operator>notContain</operator>
             <value>test</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <name>New Contacts Report_SM</name>

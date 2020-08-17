@@ -53,6 +53,7 @@
             <operator>notContain</operator>
             <value>test</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Cases marked as Test Records</name>

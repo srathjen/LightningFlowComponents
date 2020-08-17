@@ -46,7 +46,7 @@
                 <value>Lead.Wish_Child</value>
             </criteriaItems>
         </filter>
-        <format>Tabular</format>
+        <format>Summary</format>
         <name>Leads block 1</name>
         <params>
             <name>co</name>
@@ -109,7 +109,7 @@
                 <value>Previous Wish,Medical,Age,No Response</value>
             </criteriaItems>
         </filter>
-        <format>Tabular</format>
+        <format>Summary</format>
         <name>Cases with Case Files block 2</name>
         <params>
             <name>units</name>

@@ -7,74 +7,14 @@
     <name>Diagnosis Verification Form Email Template</name>
     <style>freeForm</style>
     <subject>**Signature Required** Make-A-Wish Diagnosis Verification form</subject>
-    <textOnly>Password: {!Lead.Part_A_Form_Password__c}
+    <textOnly>Hi {!Lead.Treating_Medical_Professional_First_Name__c},
 
-Link: Diagnosis Verification
+Please Review the Diagnosis Verification and submit.
 
+Password : {!Lead.00N2f000000ojKq}
 
-
-Dear  {!BLANKVALUE(Lead.Hidden_DV_Form_Name__c, &quot;HealthCare Team&quot;)}
-
-
-
-Your patient, {!Lead.FirstName}, has been referred to Make-A-Wish®! Additional information is needed to make a final determination of medical eligibility for {!Lead.FirstName}. Please refer to the instructions below to complete our online Diagnosis Verification form.
-
-
-
-The Diagnosis Verification form is encrypted and password protected so you can feel confident adding comments safely regarding your patient’s health status. The confidential password above is not to be shared with any unapproved individuals.
-
-
-
-Please note: this form may be filled out by any member of the healthcare team familiar with the child’s medical condition who has access to his/her medical file.
-
-
-
-To complete the Diagnosis Verification form, please:
-
-• Copy the password provided above
-
-• Click the link above
-
-• Paste the password into the secured form
-
-• Complete the form in its entirety
-
-• Electronically sign and submit
-
-
-
-Using this electronic process:
-
-• Saves you time
-
-• Allows you to cut and paste directly from medical records
-
-• Streamlines correspondence via email
-
-• Allows providers to designate who receives emails
-
-• Allows the use of electronic signatures
-
-• Decreases the need for follow up with specific questions
-
-
-
-Please contact us if you have any questions about completing this form. Thank you for your assistance! Your time and support are appreciated.
-
-
-Sincerely,
-
-
-{!User.Name}
-
-{!User.Title}
-
-{!Lead.ChapterName__c}
-
-{!User.Email}
-
-
-{!User.Phone}</textOnly>
+Thanks
+Make A Wish America</textOnly>
     <type>html</type>
     <uiType>Aloha</uiType>
 </EmailTemplate>

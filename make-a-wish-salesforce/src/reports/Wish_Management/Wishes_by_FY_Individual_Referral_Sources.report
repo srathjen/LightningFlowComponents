@@ -157,6 +157,10 @@
     <description>Referral source by name</description>
     <format>MultiBlock</format>
     <name>Wishes by FY Individual Referral Sources</name>
+    <params>
+        <name>lsk</name>
+        <value>1</value>
+    </params>
     <reportType>CaseContactRole</reportType>
     <showDetails>true</showDetails>
 </Report>

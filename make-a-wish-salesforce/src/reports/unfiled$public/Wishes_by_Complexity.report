@@ -4,6 +4,10 @@
         <aggregateTypes>Sum</aggregateTypes>
         <field>Case.Unique_Record_Count__c</field>
     </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case.Wish_Complexity__c</field>
+    </columns>
     <description>Wishes by case owner and by priority (high/med/low).</description>
     <filter>
         <criteriaItems>
@@ -30,6 +34,7 @@
             <operator>notEqual</operator>
             <value>Granted,Completed,Closed</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Matrix</format>
     <groupingsAcross>
@@ -53,13 +58,11 @@
     </params>
     <reportType>CaseList</reportType>
     <scope>organization</scope>
-    <showDetails>false</showDetails>
+    <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Case.Referral_Date__c</dateColumn>
-        <endDate>2019-08-31</endDate>
         <interval>INTERVAL_CUSTOM</interval>
-        <startDate>2011-08-01</startDate>
     </timeFrameFilter>
 </Report>

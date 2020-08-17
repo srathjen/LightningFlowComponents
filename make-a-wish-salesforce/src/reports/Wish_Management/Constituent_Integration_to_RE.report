@@ -122,6 +122,7 @@
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Constituent Integration to RE</name>

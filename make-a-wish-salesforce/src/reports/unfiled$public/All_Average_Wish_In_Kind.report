@@ -104,6 +104,7 @@
             <operator>greaterOrEqual</operator>
             <value>9/1/2019</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>
@@ -111,7 +112,7 @@
         <field>CONTACT.NAME</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>All Average In-Kind (Goal 36%)</name>
+    <name>All Average In-Kind (Goal 42%)</name>
     <params>
         <name>units</name>
         <value>h</value>

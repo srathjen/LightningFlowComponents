@@ -95,6 +95,7 @@
             <operator>equals</operator>
             <value>Z85.830</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <name>Contacts Report_SM</name>

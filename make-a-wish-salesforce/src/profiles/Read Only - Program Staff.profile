@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <classAccesses>
-        <apexClass>AccountTrigger_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>AddVolunteerRole_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -60,10 +56,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>Background_CheckBeforeDelete_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>Batch_UpdateVolunteerRoleStatus_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -106,10 +98,6 @@
     <classAccesses>
         <apexClass>CaseServiceTest</apexClass>
         <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>CaseTriggerHandler_Test</apexClass>
-        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>CaseTrigger_AT_Test</apexClass>
@@ -228,19 +216,11 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>ContactTrigger_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>CreateNewWish_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>CreateNewWish_ACTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>CreateVolunteerUser_ATTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -262,22 +242,6 @@
     <classAccesses>
         <apexClass>DelegatedApproverController_Test</apexClass>
         <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DeleteApexDebugLogRecordScheduleTest_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DeleteApexDebugLogRecordSchedule_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DeleteApexDebugLogRecords_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DeleteApexDebugLogRecords_Test</apexClass>
-        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>DiagnosisVerificationReminder_AC</apexClass>
@@ -321,10 +285,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>DocusignStatusTrigger_AT_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DynamicContent_ATTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -374,10 +334,6 @@
     <classAccesses>
         <apexClass>InKindReimbursementApproval_AC_Test</apexClass>
         <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>InactiveVolunteerHandlerTest</apexClass>
-        <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>InkindandReimbursement_AC</apexClass>
@@ -472,10 +428,6 @@
     <apexClass>LeadDuplicate_ACTest</apexClass>
 </classAccesses>
     <classAccesses>
-        <apexClass>LeadFile_AT_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>LeadSelectMedEmailController_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -486,10 +438,6 @@
     <classAccesses>
         <apexClass>LeadTrigger_AT_Test</apexClass>
         <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Lead_Trigger_Test</apexClass>
-        <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>LightningDataTableController</apexClass>
@@ -506,10 +454,6 @@
     <classAccesses>
         <apexClass>LookupSObjectCtrlTest</apexClass>
         <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>Loop__ApplicationAuthorizationController</apexClass>
-        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>MedicalRelationships_AC</apexClass>
@@ -552,23 +496,7 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>NonWishEvents_ATTest</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>OTUB_UpdateVolUserStatusOnBGCOI_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>OTUB_UpdateVolUserStatusOnBGCOI_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>OrientationTraining_ATTest</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>OrientationandTrainingUtil</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -580,20 +508,8 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>ParentGuardianJSON2Apex</apexClass>
         <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>PartAFormWrapper</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ParticipantJSON2Apex</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ProcessDdpExt</apexClass>
-        <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>QualifyingDiagnosisLC_AC</apexClass>
@@ -625,14 +541,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>RequiredSignatureExpiredBatchTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ReviewUploadTask_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ReviewUploadTask_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -680,20 +588,8 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>TestClassUtil</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>TestDataFactory</apexClass>
         <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>TestDataUtility_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>TimeSheetTrigger_AT_Test</apexClass>
-        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>TractionLinksController</apexClass>
@@ -714,10 +610,6 @@
     <classAccesses>
         <apexClass>UIThemeControllerTest</apexClass>
         <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>UpdateWishAssignmentBatchTest_AC</apexClass>
-        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>UserTrigger_AT_Test</apexClass>
@@ -800,10 +692,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>VolunteerRole_AT_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>VolunteerSignUp_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -849,10 +737,6 @@
 </classAccesses>
     <classAccesses>
         <apexClass>WishAffiliationDesign_AC_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>WishAffiliationParticipantService</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -992,10 +876,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>batch_LeadChildAgeSchedule</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>batch_LeadChildAgeTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -1060,346 +940,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <custom>true</custom>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>AccessTokenList__mdt</name>
-    </customMetadataTypeAccesses>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>Case_Header_Codes__mdt</name>
-    </customMetadataTypeAccesses>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>Chapter_Name_Setting__mdt</name>
-    </customMetadataTypeAccesses>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>Mobile_Field_Sets__mdt</name>
-    </customMetadataTypeAccesses>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>Participant_Turning_18_Wish_Forms__mdt</name>
-    </customMetadataTypeAccesses>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>Support_User_Access__mdt</name>
-    </customMetadataTypeAccesses>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>Wish_Affiliation_Category__mdt</name>
-    </customMetadataTypeAccesses>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>Wish_Clearance_Needed_and_National_type__mdt</name>
-    </customMetadataTypeAccesses>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>npsp__Data_Import_Field_Mapping_Set__mdt</name>
-    </customMetadataTypeAccesses>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>npsp__Data_Import_Field_Mapping__mdt</name>
-    </customMetadataTypeAccesses>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>npsp__Data_Import_Object_Mapping_Set__mdt</name>
-    </customMetadataTypeAccesses>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>npsp__Data_Import_Object_Mapping__mdt</name>
-    </customMetadataTypeAccesses>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>npsp__Filter_Group__mdt</name>
-    </customMetadataTypeAccesses>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>npsp__Filter_Rule__mdt</name>
-    </customMetadataTypeAccesses>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>npsp__Opportunity_Stage_To_State_Mapping__mdt</name>
-    </customMetadataTypeAccesses>
-    <customMetadataTypeAccesses>
-        <enabled>true</enabled>
-        <name>npsp__Rollup__mdt</name>
-    </customMetadataTypeAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>ApexDebugLogSetting__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>Bypass_Triggers__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>CRMfusionDBR101__Account_Name_Filter__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>CRMfusionDBR101__Convert_Display_Field__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>CRMfusionDBR101__Country_Mapping__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>CRMfusionDBR101__FirstName_Mapping__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>CRMfusionDBR101__Fuzzy_Rule__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>CRMfusionDBR101__General_Setting__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>CRMfusionDBR101__State_Mapping__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>CRMfusionDBR101__Web_Lead_Source__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>Chapter_List__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>Chapter_Name_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>Chapter_Vs_Role__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>Closed_Case_Editing_Security_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>Database_Chapter_Mapping__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>DocuSignCredentialsSetting__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>FE_Database_Chapter_Mapping__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>Field_Trip__Logistics__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>HoldCurrentChapter__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>Loop__LoopSettings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>MaintenanceAlert__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>Turnon_Household_Trigger__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>URL_Links__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>UserSetting__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>VisualAntidote__FastFormsAuth__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>VisualAntidote__FastFormsSiteInfo__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>VisualAntidote__FastFormsTokenInfo__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>Volunteer_New_Application_Control__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>WM4SF3__WalkMeExtension__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>WM4SF3__WalkMeLicense__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>WishDeterminationSubCaseTaskList__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>WishGrantedSubCaseTaskList__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>Wish_Affiliation_Security_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>Wish_Form_Approval__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>Wish_Interview_Form_Maps__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>cg__CreatePreviewsConfig__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>cg__PreviewAndThumbnailSettings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>cg__PreviewFileTypesConfig__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>cg__SDriveBannedTags__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>cg__SDriveConfig__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>cg__UpdateSDriveObjectConf__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>cg__ViewSettings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>cwbtool__CWB_Setup__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>cwbtool__Record_Process__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>fpro__FieldPro_IncludeFields__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npe01__Contacts_And_Orgs_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npe01__Payment_Field_Mapping_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npe03__Custom_Field_Mapping__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npe03__Custom_Installment_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npe03__Recurring_Donations_Error_Queue__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npe03__Recurring_Donations_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npe4__Relationship_Auto_Create__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npe4__Relationship_Lookup__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npe4__Relationship_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npe5__Affiliations_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npo02__Households_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npo02__Opportunity_Rollup_Error__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npo02__User_Rollup_Field_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npsp__Address_Verification_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npsp__Allocations_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npsp__Batch_Data_Entry_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npsp__Customizable_Rollup_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npsp__Data_Import_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npsp__Error_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npsp__Household_Naming_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npsp__Levels_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npsp__Opportunity_Naming_Settings__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>npsp__Relationship_Sync_Excluded_Fields__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>p0pFD__ObjectsToDump__c</name>
-    </customSettingAccesses>
     <description>This profile is for Read Only Wish Access for Reporting and Analytics teams</description>
     <flowAccesses>
         <enabled>false</enabled>
@@ -1623,7 +1163,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>FormTrackerAttachment_VF</apexPage>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>IdeasHome</apexPage>
@@ -1655,7 +1195,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>Itinerary_VF</apexPage>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>LeadDuplicate_VF</apexPage>
@@ -1691,7 +1231,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>MergedDocuments_VF</apexPage>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>MobileBackgroundCheckFilePage</apexPage>
@@ -1763,7 +1303,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>VolunteerInterview_VF</apexPage>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>VolunteerLanding_VF</apexPage>
@@ -1815,7 +1355,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishChildPhoto_VF</apexPage>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishClearanceNoTravel_VF</apexPage>
@@ -1831,19 +1371,19 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishParticipants_VF</apexPage>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishReceipt</apexPage>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishReferralFormOutCSV_VF</apexPage>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishReferralFormOut_VF</apexPage>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishReferralForm_VF</apexPage>
@@ -1851,11 +1391,11 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishRelatedLinks</apexPage>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishRelatedLinks_VF</apexPage>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishVisionFormChild</apexPage>
@@ -1887,7 +1427,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>wifAttachment_VF</apexPage>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
     </pageAccesses>
     <applicationVisibilities>
         <application>CRMfusionDBR101__DupeBlocker</application>
@@ -9545,9 +9085,9 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
+        <readable>false</readable>
         <field>ContactPointConsent.ContactPointTypeConsentId</field>
-        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -11867,11 +11407,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Medical_Provider_Category__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Lead.Medical_Provider__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -26672,6 +26207,9 @@
         <layout>Contact-npsp__Contact Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>ContactPointAddress-Contact Point Address Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>ContactPointEmail-Contact Point Email Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -27121,6 +26659,9 @@
         <layout>Solution-Solution Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Spanish_Translations__mdt-Spanish Translations Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Support_User_Access__mdt-Support User Access Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -27317,6 +26858,9 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Volunteer_Roles__c-Volunteer Role Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WishReferralForm_Translation__mdt-WishReferralForm Translation Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Wish_Affiliation_Category__mdt-Wish Affiliation Category Layout</layout>

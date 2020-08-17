@@ -41,6 +41,7 @@
             <operator>equals</operator>
             <value>Volunteer Application Form</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Matrix</format>
     <groupingsAcross>

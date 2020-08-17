@@ -19,6 +19,7 @@
             <operator>contains</operator>
             <value>Signature Required -</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Docusign Status with Recipient Name</name>

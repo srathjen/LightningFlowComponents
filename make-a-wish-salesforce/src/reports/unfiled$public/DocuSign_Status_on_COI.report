@@ -41,6 +41,7 @@
             <operator>equals</operator>
             <value>Please review &amp; act on these document</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Matrix</format>
     <groupingsAcross>

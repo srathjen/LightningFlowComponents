@@ -68,6 +68,7 @@
             <operator>equals</operator>
             <value>Case.Wish_Granted</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Val_WGranting</name>

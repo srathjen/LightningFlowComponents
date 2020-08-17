@@ -28,6 +28,7 @@
             <operator>equals</operator>
             <value>Qualified,Ready to Assign</value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

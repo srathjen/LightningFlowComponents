@@ -15,7 +15,7 @@
         <legendPosition>Right</legendPosition>
         <location>CHART_BOTTOM</location>
         <showAxisLabels>false</showAxisLabels>
-        <showPercentage>false</showPercentage>
+        <showPercentage>true</showPercentage>
         <showTotal>true</showTotal>
         <showValues>true</showValues>
         <size>Medium</size>
@@ -57,6 +57,7 @@
             <operator>notEqual</operator>
             <value></value>
         </criteriaItems>
+        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

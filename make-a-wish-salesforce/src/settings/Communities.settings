@@ -5,7 +5,8 @@
     <enableCommunityWorkspaces>true</enableCommunityWorkspaces>
     <enableCspContactVisibilityPref>false</enableCspContactVisibilityPref>
     <enableCspNotesOnAccConPref>true</enableCspNotesOnAccConPref>
-    <enableGuestRecordReassignOrgPref>false</enableGuestRecordReassignOrgPref>
+    <enableExternalAccHierPref>false</enableExternalAccHierPref>
+    <enableGuestRecordReassignOrgPref>true</enableGuestRecordReassignOrgPref>
     <enableInviteChatterGuestEnabled>true</enableInviteChatterGuestEnabled>
     <enableNetPortalUserReportOpts>false</enableNetPortalUserReportOpts>
     <enableNetworksEnabled>true</enableNetworksEnabled>

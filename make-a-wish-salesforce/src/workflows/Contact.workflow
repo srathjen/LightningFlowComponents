@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
     <alerts>
         <fullName>Bc_Completed_Email_Pending_Volunteer_Training_Required_Email_Alert</fullName>
         <description>Bc:Completed Email, Pending Volunteer-Training Required Email Alert</description>
@@ -40,7 +39,7 @@
     </alerts>
     <alerts>
         <fullName>Send_Email_When_OT_Cancelled_have_Registered_and_No_Completed_OT</fullName>
-        <description>Send Email When OT Cancelled ,have Registered and No Completed OT</description>
+        <description>Deprecated: Send Email When OT Cancelled ,have Registered and No Completed OT</description>
         <protected>false</protected>
         <recipients>
             <field>npe01__HomeEmail__c</field>
@@ -253,22 +252,22 @@
         <formula>CASE( 
 npe01__Preferred_Email__c , 
 
-&quot;Work&quot;, 
+"Work", 
 if(len(npe01__WorkEmail__c)&gt;0, npe01__WorkEmail__c, 
 if(len(npe01__HomeEmail__c)&gt;0, npe01__HomeEmail__c, 
 npe01__AlternateEmail__c)), 
 
-&quot;Personal&quot;, 
+"Personal", 
 if(len(npe01__HomeEmail__c)&gt;0, npe01__HomeEmail__c, 
 if(len(npe01__WorkEmail__c)&gt;0, npe01__WorkEmail__c, 
 npe01__AlternateEmail__c)), 
 
-&quot;Home&quot;, 
+"Home", 
 if(len(npe01__HomeEmail__c)&gt;0, npe01__HomeEmail__c, 
 if(len(npe01__WorkEmail__c)&gt;0, npe01__WorkEmail__c, 
 npe01__AlternateEmail__c)), 
 
-&quot;Alternate&quot;, 
+"Alternate", 
 if(len(npe01__AlternateEmail__c)&gt;0, npe01__AlternateEmail__c, 
 if(len(npe01__WorkEmail__c)&gt;0, npe01__WorkEmail__c, 
 npe01__HomeEmail__c)), 
@@ -288,13 +287,13 @@ npe01__AlternateEmail__c
         <field>Phone</field>
         <formula>CASE(
   npe01__PreferredPhone__c ,
-&quot;Work&quot;,
+"Work",
   npe01__WorkPhone__c  ,
-&quot;Home&quot;,
+"Home",
  HomePhone,
-&quot;Mobile&quot;,
+"Mobile",
  MobilePhone,
-&quot;Other&quot;,
+"Other",
  OtherPhone,
 If(LEN( npe01__WorkPhone__c )&gt;0 , npe01__WorkPhone__c  ,
 if(LEN(  HomePhone)&gt;0,  HomePhone,
@@ -366,17 +365,17 @@ OtherPhone
         <field>Phone</field>
         <formula>CASE( 
 npe01__PreferredPhone__c , 
-&quot;Work&quot;, 
+"Work", 
 npe01__WorkPhone__c , 
-&quot;Household&quot;,
+"Household",
  npo02__Formula_HouseholdPhone__c ,
-&quot;Home&quot;, 
+"Home", 
 HomePhone, 
-&quot;Personal&quot;,
+"Personal",
 HomePhone,
-&quot;Mobile&quot;, 
+"Mobile", 
 MobilePhone, 
-&quot;Other&quot;, 
+"Other", 
 OtherPhone, 
 If(LEN( npe01__WorkPhone__c )&gt;0 , npe01__WorkPhone__c , 
 if(LEN( HomePhone)&gt;0, HomePhone, 
@@ -405,7 +404,7 @@ OtherPhone
             <operation>equals</operation>
             <value>Wish Child</value>
         </criteriaItems>
-        <description>This rule will fire when the lead is converted and &quot; Is We Need To Expedite The Process &quot; from lead is marked as true.</description>
+        <description>This rule will fire when the lead is converted and " Is We Need To Expedite The Process " from lead is marked as true.</description>
         <triggerType>onCreateOnly</triggerType>
     </rules>
     <rules>
@@ -440,10 +439,6 @@ OtherPhone
     </rules>
     <rules>
         <fullName>Send Email When OT Cancelled %2Chave Registered and No Completed OT</fullName>
-        <actions>
-            <name>Send_Email_When_OT_Cancelled_have_Registered_and_No_Completed_OT</name>
-            <type>Alert</type>
-        </actions>
         <actions>
             <name>Update_Volunteer_Orientation_Status</name>
             <type>FieldUpdate</type>
@@ -615,7 +610,7 @@ OtherPhone
         </actions>
         <active>true</active>
         <description>If the standard Email field is newly entered or changed AND the Preferred Email picklist is set to Alternate THEN Salesforce will fill in the Alternate Email field with the email address entered in the standard Email field.</description>
-        <formula>AND(      ISPICKVAL( npe01__Preferred_Email__c ,&quot;Alternate&quot;),      OR(           AND(                ISNEW(),                LEN(Email)&gt;0           ),           ISCHANGED( Email )      ) )</formula>
+        <formula>AND(      ISPICKVAL( npe01__Preferred_Email__c ,"Alternate"),      OR(           AND(                ISNEW(),                LEN(Email)&gt;0           ),           ISCHANGED( Email )      ) )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -626,7 +621,7 @@ OtherPhone
         </actions>
         <active>true</active>
         <description>If the standard Email field is newly entered or changed AND the Preferred Email picklist is set to Personal or Home THEN Salesforce will fill in the Personal Email field with the email address entered in the standard Email field.</description>
-        <formula>AND(     OR( ISPICKVAL( npe01__Preferred_Email__c ,&quot;Personal&quot;),ISPICKVAL( npe01__Preferred_Email__c ,&quot;Home&quot;)),      OR(           AND(                ISNEW(),                LEN(Email)&gt;0           ),           ISCHANGED( Email )      ) )</formula>
+        <formula>AND(     OR( ISPICKVAL( npe01__Preferred_Email__c ,"Personal"),ISPICKVAL( npe01__Preferred_Email__c ,"Home")),      OR(           AND(                ISNEW(),                LEN(Email)&gt;0           ),           ISCHANGED( Email )      ) )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -637,7 +632,7 @@ OtherPhone
         </actions>
         <active>true</active>
         <description>If the standard Email field is newly entered or changed AND the Preferred Email picklist is set to Work THEN Salesforce will fill in the Work Email field with the email address entered in the standard Email field.</description>
-        <formula>AND(      ISPICKVAL( npe01__Preferred_Email__c ,&quot;Work&quot;),      OR(           AND(                ISNEW(),                LEN(Email)&gt;0           ),           ISCHANGED( Email )      ) )</formula>
+        <formula>AND(      ISPICKVAL( npe01__Preferred_Email__c ,"Work"),      OR(           AND(                ISNEW(),                LEN(Email)&gt;0           ),           ISCHANGED( Email )      ) )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -648,7 +643,7 @@ OtherPhone
         </actions>
         <active>true</active>
         <description>If the standard Phone field is newly entered or changed AND the Preferred Phone picklist is set to Home THEN Salesforce will fill in the Home Phone field with the phone number entered in the standard Phone field.</description>
-        <formula>AND(      ISPICKVAL( npe01__PreferredPhone__c ,&quot;Home&quot;),      OR(           AND(                ISNEW(),                LEN(Phone)&gt;0           ),           ISCHANGED( Phone )      ) )</formula>
+        <formula>AND(      ISPICKVAL( npe01__PreferredPhone__c ,"Home"),      OR(           AND(                ISNEW(),                LEN(Phone)&gt;0           ),           ISCHANGED( Phone )      ) )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -659,7 +654,7 @@ OtherPhone
         </actions>
         <active>true</active>
         <description>If the standard Phone field is newly entered or changed AND the Preferred Phone picklist is set to Mobile THEN Salesforce will fill in the Mobile Phone field with the phone number entered in the standard Phone field.</description>
-        <formula>AND(      ISPICKVAL( npe01__PreferredPhone__c ,&quot;Mobile&quot;),      OR(           AND(                ISNEW(),                LEN(Phone)&gt;0           ),           ISCHANGED( Phone )      ) )</formula>
+        <formula>AND(      ISPICKVAL( npe01__PreferredPhone__c ,"Mobile"),      OR(           AND(                ISNEW(),                LEN(Phone)&gt;0           ),           ISCHANGED( Phone )      ) )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -670,7 +665,7 @@ OtherPhone
         </actions>
         <active>true</active>
         <description>If the standard Phone field is newly entered or changed AND the Preferred Phone picklist is set to Other THEN Salesforce will fill in the Other Phone field with the phone number entered in the standard Phone field.</description>
-        <formula>AND(      ISPICKVAL( npe01__PreferredPhone__c ,&quot;Other&quot;),      OR(           AND(                ISNEW(),                LEN(Phone)&gt;0           ),           ISCHANGED( Phone )      ) )</formula>
+        <formula>AND(      ISPICKVAL( npe01__PreferredPhone__c ,"Other"),      OR(           AND(                ISNEW(),                LEN(Phone)&gt;0           ),           ISCHANGED( Phone )      ) )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -681,7 +676,7 @@ OtherPhone
         </actions>
         <active>true</active>
         <description>If the standard Phone field is newly entered or changed AND the Preferred Phone picklist is set to Work THEN Salesforce will fill in the Work Phone field with the phone number entered in the standard Phone field.</description>
-        <formula>AND(      ISPICKVAL( npe01__PreferredPhone__c ,&quot;Work&quot;),      OR(           AND(                ISNEW(),                LEN(Phone)&gt;0           ),           ISCHANGED( Phone )      ) )</formula>
+        <formula>AND(      ISPICKVAL( npe01__PreferredPhone__c ,"Work"),      OR(           AND(                ISNEW(),                LEN(Phone)&gt;0           ),           ISCHANGED( Phone )      ) )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>

@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
         <label><!-- Calculated Value --></label>
         <name>CRMfusionDBR101__Calculated_Value__c</name>
@@ -124,5 +123,4 @@
         <label><!-- Filter Criteria --></label>
         <name>CRMfusionDBR101__Values__c</name>
     </fields>
-    
 </CustomObjectTranslation>
