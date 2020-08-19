@@ -404,7 +404,7 @@ label.error{
         <div class="form-group row">
             <label class="col-sm-3">{!formLabels.Has_this_child_ever_received__c}</label>
             <div class="col-sm-6">
-                <apex:selectList value="{!currLead.Has_this_child_ever_received_prior_wish__c}" id="priorWish" size="1" multiselect="false" styleClass="form-control col-xs-12 c-select chosen single" >
+                <apex:selectList value="{!currLead.Has_this_child_ever_received_prior_wish__c}" id="wcreceivedwish" size="1" multiselect="false" styleClass="form-control col-xs-12 c-select chosen single" >
                     <apex:selectOption itemLabel="--None--" itemValue="" />
                     <apex:selectOption itemLabel="Si" itemValue="Yes" />
                     <apex:selectOption itemLabel="No" itemValue="No" />

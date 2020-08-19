@@ -102,7 +102,7 @@ global class WishReferralForm_AC {
                     currLead.Hidden_Potential_Rush__c = currLead.Any_medical_reason_for_moving_quickly__c;
                 }
             }
-            if(currLead.Has_this_child_ever_received_prior_wish__c.containsIgnoreCase(Label.Select_Option_Yes)) {
+            if(currLead.Has_this_child_ever_received_prior_wish__c != null && currLead.Has_this_child_ever_received_prior_wish__c.containsIgnoreCase(Label.Select_Option_Yes)) {
                 currLead.Has_this_child_ever_received_prior_wish__c = String.format(Label.Dynamic_Font_Tag_with_Color, new List<String> {RED,currLead.Has_this_child_ever_received_prior_wish__c});
             }
             if(currLead.Relationship_to_child__c == null || currLead.Relationship_to_child__c == '') {

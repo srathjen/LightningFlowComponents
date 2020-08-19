@@ -209,7 +209,7 @@ function formValidationRules() {
         $(this).rules("add", {
             required: !0,
             messages: {
-                required: "Por favor seleccione su relación con el niño"
+                required: "Esta pregunta es obligatoria"
             }
         })
     }), $("input.firstname").each(function() {
@@ -372,7 +372,7 @@ function formValidationRules() {
             required: "Se requiere la fecha de nacimiento del niño",
             date: "Ingrese una fecha válida en el formato correcto"
         }
-    }), $("input.wcreceivedwish").rules("add", {
+    }), $("select.wcreceivedwish").rules("add", {
         required: !0,
         messages: {
             required: "Esta pregunta es obligatoria"
@@ -515,5 +515,5 @@ $("[id$=wcdob]").removeAttr("onfocus").mask("99/99/9999", {
                 opacity: ".5"
             }).addClass("disabled").prop("disabled", !0), void form.submit()
         }
-    }), $(".r2c").children("label").children("input").addClass("r2c-radio"), $("[id$=p-r2c-1]").addClass("r2c-select"), $("[id$=wcage]").addClass("r2c-select"), $("[id$=plang").addClass("language"), formValidationRules();
+    }), $(".r2c").children("label").children("input").addClass("r2c-radio"), $("[id$=p-r2c-1]").addClass("r2c-select"), $("[id$=wcage]").addClass("r2c-select"), $("[id$=wcreceivedwish]").addClass("r2c-select"), $("[id$=plang").addClass("language"), formValidationRules();
     

@@ -328,7 +328,7 @@ function formLogic() {
         medicalProviders = ["Nurse Practitioner", "Physician Assistant", "Physician"],
         childAgesEligible = ['2.5', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'],
         fieldClasses = ['firstname', 'lastname', 'phonechk', 'email', 'city', 'state-chk', 'address', 'postalcode', 'family-aware-chk', 'medprovider', 'r2c-manual-input', 'wcgender', 'wcage', 'wcdob', 'wcreceivedwish', 'language', 'siblings-chk', 'icd', 'pdiagnosis', 'facility', 'urgency', 'sibage'],
-        eligibleMsg = 'To be eligible, children must be older than 2½ years old and younger than 18 years old.',
+        eligibleMsg = 'To be eligible, children must be older than 2� years old and younger than 18 years old.',
     guardianPermissionMsg = "Please confirm that you have received your parent or guardians permission to complete this form.";
     refDisAddError = "If you would like to proceed, please fill out the form below.";//Added for SIW-556
     // To display error message when no is selected in is family aware input field
@@ -623,7 +623,7 @@ function formLogic() {
             .removeAttr('aria-required aria-describedby');
             
             // remove form validation rules
-            $('select[id$=aware-of-referral],select[id$=medprov],select[id$=p-r2c-2],input[id$=rfirstname],input[id$=frm\\:pfirstname],input[id$=frm\\:pfirstname2],input[id$=wcfirstname]input,[id$=mpfirstname],input[id$=rlastname],input[id$=frm\\:plastname],input[id$=frm\\:plastname2],input[id$=wclastname],input[id$=mplastname],input[id$=rphone],input[id$=pphonenumber],input[id$=pphonenumber2],input[id$=mpphone],input[id$=remail],input[id$=pemailaddress],input[id$=pemailaddress2],input[id$=pcity],input[id$=pcity2],input[id$=ppostalcode],input[id$=ppostalcode2],select[id$=p-state],select[id$=p-state2],input[id$=wcdob],select[id$=wcgender],input[id$=paddress],input[id$=paddress2],select[id$=plang],select[id$=plang2],input[id$=searchDiagnosisId],input[id$=mphospitalname],input[id$=psibfirstname],input[id$=psibfirstname2],input[id$=psiblastname],input[id$=psiblastname2],input[id$=psibage],input[id$=psibage2],select[id$=frm\\:diagnosisMonth],select[id$=frm\\:diagnosisYear],select[id$=urgency]').each(function() {
+            $('select[id$=aware-of-referral],select[id$=medprov],select[id$=p-r2c-2],input[id$=rfirstname],input[id$=frm\\:pfirstname],input[id$=frm\\:pfirstname2],input[id$=wcfirstname]input,[id$=mpfirstname],input[id$=rlastname],input[id$=frm\\:plastname],input[id$=frm\\:plastname2],input[id$=wclastname],input[id$=mplastname],input[id$=rphone],input[id$=pphonenumber],input[id$=pphonenumber2],input[id$=mpphone],input[id$=remail],input[id$=pemailaddress],input[id$=pemailaddress2],input[id$=pcity],input[id$=pcity2],input[id$=ppostalcode],input[id$=ppostalcode2],select[id$=p-state],select[id$=p-state2],input[id$=wcdob],select[id$=wcreceivedwish],select[id$=wcgender],input[id$=paddress],input[id$=paddress2],select[id$=plang],select[id$=plang2],input[id$=searchDiagnosisId],input[id$=mphospitalname],input[id$=psibfirstname],input[id$=psibfirstname2],input[id$=psiblastname],input[id$=psiblastname2],input[id$=psibage],input[id$=psibage2],select[id$=frm\\:diagnosisMonth],select[id$=frm\\:diagnosisYear],select[id$=urgency]').each(function() {
                 $(this).rules('remove');
             });
         }
@@ -717,6 +717,7 @@ function formLogic() {
             // }
             $('[id$=wcdob]').addClass('wcdob');
             $('[id$=wcgender]').addClass('wcgender');
+            $('[id$=wcreceivedwish]').addClass('wcreceivedwish'),
             $('[id$=paddress]').addClass('address');
             $('[id$=plang],[id$=plang2]').addClass('language');
             $('[id$=searchDiagnosisId]').addClass('pdiagnosis');
@@ -748,7 +749,7 @@ function formLogic() {
             $('[id$=rcity]').addClass('city');
             $('[id$=rpostalcode]').addClass('postalcode');
             $('[id$=urgency]').addClass('urgency');
-            
+            $('[id$=wcreceivedwish]').addClass('wcreceivedwish'),
             formValidationRules();
             
             $("[id$=searchDiagnosisId]").addClass("pdiagnosis"); // not for validation
@@ -785,6 +786,7 @@ function formLogic() {
                 // }
                 $('[id$=wcdob]').addClass('wcdob');
                 $('[id$=wcgender]').addClass('wcgender');
+                $('[id$=wcreceivedwish]').addClass('wcreceivedwish'),
                 $('[id$=paddress]').addClass('address');
                 $('[id$=plang],[id$=plang2]').addClass('language');
                 $('[id$=searchDiagnosisId]').addClass('pdiagnosis');
@@ -1637,7 +1639,7 @@ function formValidationRules() {
             date: "Oops! Please enter a valid date in the correct format"
         }
     });
-    $("input.wcreceivedwish").rules("add", {
+    $("select.wcreceivedwish").rules("add", {
         required: true,
         messages: {
             required: "Oops! This question is required"

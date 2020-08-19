@@ -348,7 +348,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3">{!$Label.Wish_Referral_Child_Had_Prior_Wish}</label>
                             <div class="col-sm-6">
-                                <apex:selectList value="{!currLead.Has_this_child_ever_received_prior_wish__c}" id="priorWish" size="1" multiselect="false" styleClass="form-control col-xs-12 c-select chosen single" >
+                                <apex:selectList value="{!currLead.Has_this_child_ever_received_prior_wish__c}" id="wcreceivedwish" size="1" multiselect="false" styleClass="form-control col-xs-12 c-select chosen single" >
                                     <apex:selectOption itemLabel="--None--" itemValue="" />
                                     <apex:selectOption itemLabel="{!$Label.Select_Option_Yes}" itemValue="{!$Label.Select_Option_Yes}" />
                                     <apex:selectOption itemLabel="{!$Label.Select_Option_No}" itemValue="{!$Label.Select_Option_No}" />
