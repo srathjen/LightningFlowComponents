@@ -633,6 +633,7 @@
   <types>
     <members>Case.DatesP1</members>
     <members>Case.DatesP3</members>
+    <members>Case.Communication_Profile<members>
     <members>Case.Wish_Timing</members>
     <members>Contact.Contact_Fields</members>
     <members>Contact.Contact_Fields2</members>
