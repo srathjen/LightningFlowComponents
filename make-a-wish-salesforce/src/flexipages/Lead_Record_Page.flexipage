@@ -154,6 +154,29 @@
     <flexiPageRegions>
         <componentInstances>
             <componentInstanceProperties>
+                <name>createQuickActionName</name>
+                <value>NewLead</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>lookupFieldName</name>
+                <value>Lead.Id</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>titleFieldName</name>
+                <value>Use this section to manually enter info received from a Paper DV</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>updateQuickActionName</name>
+                <value>Lead.Input_Paper_DV</value>
+            </componentInstanceProperties>
+            <componentName>console:relatedRecord</componentName>
+        </componentInstances>
+        <name>Facet-284de09c-a548-4fa6-9d29-f7ad3f50d9ec</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
+            <componentInstanceProperties>
                 <name>active</name>
                 <value>true</value>
             </componentInstanceProperties>
@@ -164,6 +187,17 @@
             <componentInstanceProperties>
                 <name>title</name>
                 <value>Standard.Tab.relatedLists</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:tab</componentName>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>body</name>
+                <value>Facet-284de09c-a548-4fa6-9d29-f7ad3f50d9ec</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>title</name>
+                <value>Paper DV Input</value>
             </componentInstanceProperties>
             <componentName>flexipage:tab</componentName>
         </componentInstances>
