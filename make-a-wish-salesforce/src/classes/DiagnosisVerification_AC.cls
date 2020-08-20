@@ -20,6 +20,7 @@
  * 6. 01 Jun 2020 - Manoj - SIW-508 : Added conditions to hide hospitalization questions from docusign
  * 7. 12 Jun 2020 - Chris and Samer - SIW-508 : Fixed zero showing by default for number of hospitalizations.
  * 8. 29 Jul 2020 - Manoj      - SIW-378 : Mapped the fields for new questions
+ * 9. 18 Aug 2020 - Manoj      - SIW-669: Show Add diagnosis option in case entered diagnosis results in comment text box
  * Descriptions were looked up.
  **/
 public class DiagnosisVerification_AC {
@@ -779,7 +780,10 @@ public class DiagnosisVerification_AC {
 
                         medicalWrapperItem.pickVals = Utils.picklistStringToOptions(medicalQuestion.Picklist_values__c, 'Please Select');
                         medicalWrapperItem.epilepsyPickVals = Utils.picklistStringToOptions(medicalQuestion.Epilepsy_picklist__c, 'Please Select');
-
+                        //SIW-669: Show Add diagnosis option in case entered diagnosis results in comment text box
+                        if(medicalQuestion.Data_Type__c == Constant_AC.COMMENT_BOX_TEXT){
+                            showAddAnotherDiagnosisBtn = true;
+                        }
                         diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList.add(medicalWrapperItem);
                     }
                 } else if (isGroup1 == true) {

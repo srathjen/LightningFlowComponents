@@ -4,6 +4,7 @@
  * @createdDate 6-19-2019
  // 04/28/2020 - Manoj - SIW-563 : Added label for 'Other'
  // 07/29/2020 - Manoj - SIW-378: Added labels for static text
+ // 08/21/2020 - Manoj - SIW-669: Added label COMMENT_BOX_TEXT
  */
 public class Constant_AC {
     public final static String CONTACT_WISH_CHILD_RT_LABEL = 'Wish Child';
@@ -551,5 +552,5 @@ public class Constant_AC {
      public final static String YES_TEXT = 'Yes';
      public final static String NO_TEXT = 'No';
 
-    
+     public final static String COMMENT_BOX_TEXT = 'Comment box';    
 }
