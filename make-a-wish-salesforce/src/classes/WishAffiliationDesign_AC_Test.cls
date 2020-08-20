@@ -255,6 +255,9 @@ public with sharing class WishAffiliationDesign_AC_Test {
         Wish_Affiliation__c wishAffClone = wishAff.clone();
         wishAffClone.Id = wishAff.Id;
         wishAffClone.Contact__r.Birthdate = Date.parse('07/27/1985');
+        wishAffClone.Contact__r.Salutation = 'Miss';
+        wishAffClone.Contact__r.Middle_Name__c = 'Jeanine';
+        wishAffClone.Contact__r.npe01__HomeEmail__c = 'Lucy.Jeanine@mail.com';
         wishAffClone.Residing_with_Wish_child__c = 'Yes';
         WishAffiliationDesign_AC.WishAffiliationWrapper wrapDup = new WishAffiliationDesign_AC.WishAffiliationWrapper();
         wrapDup.wishAffRecord = wishAffClone;
