@@ -1144,6 +1144,51 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <type>Lookup</type>
     </fields>
     <fields>
+	   <fullName>Professional_Comm_Profile_Sent_Date__c</fullName>
+    <description>SIW-468</description>
+    <externalId>false</externalId>
+    <inlineHelpText>With the permission of the child&apos;s parents/legal guardians, this Communication Profile for Non-Verbal Children should be sent to and completed by members of the child’s professional team.</inlineHelpText>
+    <label>Professional Comm Profile - Sent Date</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+	    </fields>
+    <fields>
+	    <fullName>Communication_Profile_Notes__c</fullName>
+    <externalId>false</externalId>
+    <label>Communication Profile Notes</label>
+    <length>32768</length>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+     </fields>
+    <fields>
+	    <fullName>Family_Comm_Profile_Sent_Date__c</fullName>
+    <description>Communication Profile for Non-Verbal Children</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This Communication Profile for Non-Verbal Children should be sent to and completed by the child’s parents/legal guardians.</inlineHelpText>
+    <label>Family Comm Profile - Sent Date</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+	     </fields>
+    <fields>
+	    <fullName>Professional_Comm_Profile_Received_Date__c</fullName>
+    <externalId>false</externalId>
+    <label>Professional Comm Profile-Received Date</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+		     </fields>
+    <fields>
         <fullName>Assigned_Date__c</fullName>
         <description>This field is used to capture the wish assigned date</description>
         <externalId>false</externalId>
@@ -1763,15 +1808,16 @@ Owner:User.FirstName+' '+Owner:User.LastName+BR()+Owner:User.Account_Name__c+BR(
         <type>TextArea</type>
     </fields>
     <fields>
-        <fullName>Communication_Profile__c</fullName>
-        <defaultValue>false</defaultValue>
-        <description>It is used to hold the communication profile</description>
-        <externalId>false</externalId>
-        <label>Communication Profile</label>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
+   <fullName>Communication_Profile__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>It is used to hold the communication profile</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Historical Data. This field was previously used to capture if a communication profile was received for the child. Please use the received date fields in this section to record when and which type of communication profile was received for this child.</inlineHelpText>
+    <label>Communication Profile</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Completed_Date__c</fullName>
@@ -1926,15 +1972,15 @@ Owner:User.FirstName+' '+Owner:User.LastName+BR()+Owner:User.Account_Name__c+BR(
         <type>Date</type>
     </fields>
     <fields>
-        <fullName>Date_Received_for_Communication_Profile__c</fullName>
-        <description>It is used to capture the Communication profile submitted date</description>
-        <externalId>false</externalId>
-        <label>Date - Communication Profile</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Date</type>
+      <fullName>Date_Received_for_Communication_Profile__c</fullName>
+    <description>It is used to capture the Communication profile submitted date</description>
+    <externalId>false</externalId>
+    <label>Family Comm Profile - Received Date</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
     </fields>
     <fields>
         <fullName>Date_Received_for_Entertainment_Sports__c</fullName>
