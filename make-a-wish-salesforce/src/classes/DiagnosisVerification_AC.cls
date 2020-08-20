@@ -781,12 +781,11 @@ public class DiagnosisVerification_AC {
                         medicalWrapperItem.pickVals = Utils.picklistStringToOptions(medicalQuestion.Picklist_values__c, 'Please Select');
                         medicalWrapperItem.epilepsyPickVals = Utils.picklistStringToOptions(medicalQuestion.Epilepsy_picklist__c, 'Please Select');
                         //SIW-669: Show Add diagnosis option in case entered diagnosis results in comment text box
-                        if(medicalQuestion.Data_Type__c == 'Comment box'){
+                        if(medicalQuestion.Data_Type__c == Constant_AC.COMMENT_BOX_TEXT){
                             showAddAnotherDiagnosisBtn = true;
                         }
                         diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList.add(medicalWrapperItem);
                     }
-                   System.debug('diagnosisVerificationWrapperLst '+JSON.serialize(diagnosisVerificationWrapperLst));
                 } else if (isGroup1 == true) {
                     if (wishChildWrapperIns.describePatient != '7' && wishChildWrapperIns.describePatient != '8' && wishChildWrapperIns.describePatient != '6') {
                         diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = true;
