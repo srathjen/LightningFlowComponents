@@ -812,24 +812,6 @@ public without sharing class WishAffiliationService {
             }
             wishChangeRequests.add(wishChangeRequest);
         }
-        //T-Shirt Size
-        String modifiedShirtSize = modifiedContact.T_Shirt_Size__c == null
-                ? '' : String.valueOf(modifiedContact.T_Shirt_Size__c);
-        String existingShirtSize = existingContact.T_Shirt_Size__c == null
-                ? '' : String.valueOf(existingContact.T_Shirt_Size__c);
-        if (!String.isEmpty(existingShirtSize)
-                && modifiedShirtSize != existingShirtSize) {
-            Wish_Change_Request__c wishChangeRequest = WishAffiliationService.initializeWishChangeRequest(
-                    Constant_AC.CONTACT_API_NAME, existingContactRecordName, CONTACT_TSHIRTSIZE_API_NAME,
-                    wishAffiliation.Wish__c, modifiedContact.Id, String.valueOf(existingContact.T_Shirt_Size__c),
-                    String.valueOf(modifiedContact.T_Shirt_Size__c), wishAffiliation.Id);
-            Wish_Change_Request__c existingChangeRequest = contactChangeRequests
-                    .get(wishChangeRequest.Field_API_Name_for_Proposed_Change__c);
-            if (existingChangeRequest != null) {
-                wishChangeRequest.Id = existingChangeRequest.Id;
-            }
-            wishChangeRequests.add(wishChangeRequest);
-        }
         return wishChangeRequests;
     }
 

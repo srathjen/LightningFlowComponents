@@ -223,7 +223,7 @@ public without sharing class WishAffiliationDesign_AC {
 					updateContactRecord.Salutation = modifiedSalutation;
 					isUpdateContact = true;
 				}
-                //SIW-609 Birthdate and Residing with Wish Child fields can be updated if previous value blank
+                //SIW-609 and SIW-671 Allow fields to be updated if previous value blank
                 if(existingContact.Birthdate == null && modifiedContact.Birthdate != null) {
                     updateContactRecord.Birthdate = modifiedContact.Birthdate;
                     isUpdateContact = true;
@@ -231,8 +231,41 @@ public without sharing class WishAffiliationDesign_AC {
                 if(oldWishAffiliation.wishAffRecord.Residing_with_Wish_child__c == null && wishAffiliation.wishAffRecord.Residing_with_Wish_child__c != null) {
                     updateWishAffRecord.Residing_with_Wish_child__c = wishAffiliation.wishAffRecord.Residing_with_Wish_child__c;
                 }
+                if(existingContact.FirstName == null && modifiedContact.FirstName != null) {
+                    updateContactRecord.FirstName = modifiedContact.FirstName;
+                    isUpdateContact = true;
+                }
+                if(existingContact.Middle_Name__c == null && modifiedContact.Middle_Name__c != null) {
+                    updateContactRecord.Middle_Name__c = modifiedContact.Middle_Name__c;
+                    isUpdateContact = true;
+                }
+                if(existingContact.LastName == null && modifiedContact.LastName != null) {
+                    updateContactRecord.LastName = modifiedContact.LastName;
+                    isUpdateContact = true;
+                }
+                if(existingContact.T_Shirt_Size__c == null && modifiedContact.T_Shirt_Size__c != null 
+                   || existingContact.T_Shirt_Size__c != modifiedContact.T_Shirt_Size__c) {
+                       updateContactRecord.T_Shirt_Size__c = modifiedContact.T_Shirt_Size__c;
+                       isUpdateContact = true;
+                   }
+                if(existingContact.npe01__HomeEmail__c == null && modifiedContact.npe01__HomeEmail__c != null) {
+                    updateContactRecord.npe01__HomeEmail__c = modifiedContact.npe01__HomeEmail__c;
+                    isUpdateContact = true;
+                }
+                npe4__Relationship__c updateRelationshipRecord = new npe4__Relationship__c();
+                Boolean isUpdateRelationship = false;
+                if(wishAffiliation.wishAffRecord.Relationship__c != null) {
+                    updateRelationshipRecord.Id = wishAffiliation.wishAffRecord.Relationship__c;
+                    if(oldWishAffiliation.wishAffRecord.Relationship__r.npe4__Type__c == null && wishAffiliation.wishAffRecord.Relationship__r.npe4__Type__c != null) {
+                        updateRelationshipRecord.npe4__Type__c = wishAffiliation.wishAffRecord.Relationship__r.npe4__Type__c;
+                        isUpdateRelationship = true;
+                    }
+                }
                 if (isUpdateContact) {
                     update updateContactRecord;
+                }
+                if (isUpdateRelationship) {
+                    update updateRelationshipRecord;
                 }
 			} else {
 				//Check if the value of fields got changed for Contact/Relationship/WishAffiliation

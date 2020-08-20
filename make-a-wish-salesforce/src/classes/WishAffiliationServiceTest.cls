@@ -933,7 +933,7 @@ public class WishAffiliationServiceTest {
         Test.stopTest();
 
         // ASSERT
-        System.assertEquals(8, changeRequests.size());
+        System.assertEquals(7, changeRequests.size());
     }
 
     @IsTest
