@@ -35,7 +35,7 @@
             <quickActionLayoutItems>
                 <emptySpace>false</emptySpace>
                 <field>Communication_Profile__c</field>
-                <uiBehavior>Readonly</uiBehavior>
+                <uiBehavior>Edit</uiBehavior>
             </quickActionLayoutItems>
         </quickActionLayoutColumns>
     </quickActionLayout>
