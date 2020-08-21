@@ -328,7 +328,7 @@ function formLogic() {
         medicalProviders = ["Nurse Practitioner", "Physician Assistant", "Physician"],
         childAgesEligible = ['2.5', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'],
         fieldClasses = ['firstname', 'lastname', 'phonechk', 'email', 'city', 'state-chk', 'address', 'postalcode', 'family-aware-chk', 'medprovider', 'r2c-manual-input', 'wcgender', 'wcage', 'wcdob', 'wcreceivedwish', 'language', 'siblings-chk', 'icd', 'pdiagnosis', 'facility', 'urgency', 'sibage'],
-        eligibleMsg = 'To be eligible, children must be older than 2� years old and younger than 18 years old.',
+        eligibleMsg = 'To be eligible, children must be older than 2½ years old and younger than 18 years old.',
     guardianPermissionMsg = "Please confirm that you have received your parent or guardians permission to complete this form.";
     refDisAddError = "If you would like to proceed, please fill out the form below.";//Added for SIW-556
     // To display error message when no is selected in is family aware input field
@@ -1086,7 +1086,7 @@ function PrimaryDiagnosis() {
         },
         response: function(event, ui) {
             ui.content.push({
-                'label': 'Please select a ICD code below',
+                'label': 'Please select an ICD code below',
                 'value': ''
             });
         },
