@@ -20,7 +20,7 @@ public class AffiliationService {
     private static final String CONTACT_WISH_CHILD_LABEL = Constant_AC.CONTACT_WISH_CHILD_RT_LABEL;
     private static final String TREATING_FACILITY_CURRENT = Constant_AC.ORG_AFFILIATION_TREATING_FACILITY_CURRENT;
     private static final String TEST_EXCEPTION = Constant_AC.TEST_EXCEPTION_ERROR;
-    private static final String PREFIX_STRING_MAKE_A_WISH = 'Make-a-Wish ';
+    private static final String PREFIX_STRING_MAKE_A_WISH = 'Make-A-Wish ';
     private static final String CLASS_NAME = 'AffiliationService';
     private static final String DEBUG_LOG_TYPE_ERROR = 'Error';
     private static final Id VOLUNTEER_RECORD_TYPE_ID = Constant_AC.VOLUNTEER_RT_ID;
@@ -266,9 +266,9 @@ public class AffiliationService {
                     WHERE npe5__Contact__c IN :volunteerContactIdsSet AND Id IN :affiliationsIdsSet
             ]) {
                 if (!chapterNamesSet.contains(getChapters.npe5__Organization__r.Name)) {
-                    chapterNamesSet.add(String.valueOf(getChapters.npe5__Organization__r.Name).removeStart(PREFIX_STRING_MAKE_A_WISH));
+                    chapterNamesSet.add(String.valueOf(getChapters.npe5__Organization__r.Name).removeStartIgnoreCase(PREFIX_STRING_MAKE_A_WISH));
                 }
-                volunteerChaptersMap.put(getChapters.npe5__Contact__c, String.valueOf(getChapters.npe5__Organization__r.Name).removeStart(PREFIX_STRING_MAKE_A_WISH));
+                volunteerChaptersMap.put(getChapters.npe5__Contact__c, String.valueOf(getChapters.npe5__Organization__r.Name).removeStartIgnoreCase(PREFIX_STRING_MAKE_A_WISH));
             }
 
             // Used to get volunteer user id and volunteer contact id
@@ -339,25 +339,22 @@ public class AffiliationService {
         }
         Set<Id> affiliationsIdsSet = new Set<Id>();
         Set<Id> volunteerContactIdsSet = new Set<Id>();
-        Set<Id> volunteerContactIdSet = new Set<Id>();
+        Set<Id> inactiveVolunteerContactIdSet = new Set<Id>();
         Set<Id> activeVolunteerIdSet = new Set<Id>();
         for (npe5__Affiliation__c modifiedAffiliation : newList) {
             if (modifiedAffiliation.npe5__Status__c == Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE
                     && oldMap.get(modifiedAffiliation.Id).npe5__Status__c != modifiedAffiliation.npe5__Status__c) {
                 volunteerContactIdsSet.add(modifiedAffiliation.npe5__Contact__c);
                 affiliationsIdsSet.add(modifiedAffiliation.Id);
-            }
-            if (modifiedAffiliation.npe5__Status__c != Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE
-                    && oldMap.get(modifiedAffiliation.Id).npe5__Status__c == Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE) {
-                volunteerContactIdSet.add(modifiedAffiliation.npe5__Contact__c);
-            }
-            if (modifiedAffiliation.npe5__Status__c == Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE
-                    && oldMap.get(modifiedAffiliation.Id).npe5__Status__c != Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE) {
                 activeVolunteerIdSet.add(modifiedAffiliation.npe5__Contact__c);
+            }    else if (modifiedAffiliation.npe5__Status__c != Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE
+                    && oldMap.get(modifiedAffiliation.Id).npe5__Status__c == Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE) {
+                inactiveVolunteerContactIdSet.add(modifiedAffiliation.npe5__Contact__c);
             }
         }
         addUserToChapterGroup(volunteerContactIdsSet, affiliationsIdsSet, newList);
-        inactiveAffiliations(volunteerContactIdSet, newList);
+        inactiveAffiliations(inactiveVolunteerContactIdSet, newList);
+        removeUserFromChatterGroups(inactiveVolunteerContactIdSet, newList);
         activeAffiliations(activeVolunteerIdSet, newList);
     }
 
@@ -379,7 +376,7 @@ public class AffiliationService {
                     FROM Account
                     WHERE Id IN :chapterNameSet
             ]) {
-                String groupNameTrim = chapterName.Name.removeStart(PREFIX_STRING_MAKE_A_WISH);
+                String groupNameTrim = chapterName.Name.removeStartIgnoreCase(PREFIX_STRING_MAKE_A_WISH);
                 groupNameMap.put(chapterName.Id, groupNameTrim);
             }
 
@@ -551,7 +548,54 @@ public class AffiliationService {
             }
         }
     }
-
+    
+    private static void removeUserFromChatterGroups(set<ID> volunteerContactSet, List<npe5__Affiliation__c> affiliationList)    {
+        if (volunteerContactSet.isEmpty())   { 
+            return; 
+        }
+        try    {
+            List<npe5__Affiliation__c> affiliationListWithOrgNames = [SELECT id, npe5__organization__r.name, npe5__Contact__c FROM npe5__Affiliation__c WHERE id IN : affiliationList];
+            Set<String> groupNames = new Set<String>();
+            for (npe5__Affiliation__c affiliationOrg : affiliationListWithOrgNames)    {
+                if (affiliationOrg.npe5__organization__r.name.startsWithIgnoreCase(PREFIX_STRING_MAKE_A_WISH))    {
+                    groupnames.add(affiliationOrg.npe5__organization__r.name.removeStartIgnoreCase(PREFIX_STRING_MAKE_A_WISH));
+                }
+            }
+            List<CollaborationGroup> chatGroupList = [SELECT id, name FROM CollaborationGroup WHERE name IN : groupNames];
+            Map<ID,String> groupIDToNameMap = new Map<ID, String>();
+            for(CollaborationGroup chatGroup : chatGroupList)    {
+                groupIDToNameMap.put(chatGroup.id,chatGroup.Name);
+            }
+            Map<ID, ID> contactToUserMap = new Map<ID, ID>();
+            
+            for(User volunteerUser : [SELECT id, contactID FROM User WHERE contactID IN : volunteerContactSet])    {
+                contactToUserMap.put(volunteerUser.contactID, volunteerUser.ID);
+            }
+            List<CollaborationGroupMember> chatterMembersForDelete = new List<CollaborationGroupMember>();
+            List<CollaborationGroupMember> chatterMemberList = [SELECT id, CollaborationGroupId, MemberID FROM CollaborationGroupMember WHERE MemberID IN : contactToUserMap.values() AND CollaborationGroupID IN : groupIDToNameMap.keyset()];
+            
+            for (npe5__Affiliation__c affiliation : affiliationListWithOrgNames)    {
+                for(CollaborationGroupMember groupMember : chatterMemberList)    {
+                    if(groupIDToNameMap.get(groupMember.CollaborationGroupID).contains(affiliation.npe5__Organization__r.name.removeStartIgnoreCase(PREFIX_STRING_MAKE_A_WISH))
+                        && groupMember.MemberID == contactToUserMap.get(affiliation.npe5__Contact__c) )    {
+                            chatterMembersForDelete.add(groupMember);
+                    }
+                }
+            }
+            
+            if (chatterMembersForDelete.size() > 0)    {
+                delete chatterMembersForDelete;
+            }
+        }    catch(Exception ex)    {
+            for (npe5__Affiliation__c currRec : affiliationList) {
+                ErrorMessage_AC.createDebugRec(CLASS_NAME, String.valueOf(currRec), String.valueOf(ex), 'removeUserFromChatterGroups', currRec.Id, ex.getStackTraceString() + '   ' + ex.getMessage(), DEBUG_LOG_TYPE_ERROR);
+                if (!Test.isRunningTest()) {
+                    currRec.addError(Label.Debug_log_error_message);
+                }
+            }
+        }
+    }
+    
     private static void activeAffiliations(Set<Id> volunteerIdsSet, List<npe5__Affiliation__c> exceptionList) {
         if (volunteerIdsSet.isEmpty()) {
             return;
@@ -616,7 +660,7 @@ public class AffiliationService {
                     FROM Account
                     WHERE Id IN :chapterNameSet
             ]) {
-                String chapterNameTrim = currentAccount.Name.removeStart(PREFIX_STRING_MAKE_A_WISH);
+                String chapterNameTrim = currentAccount.Name.removeStartIgnoreCase(PREFIX_STRING_MAKE_A_WISH);
                 chapterNameMap.put(currentAccount.Id, chapterNameTrim);
             }
 
