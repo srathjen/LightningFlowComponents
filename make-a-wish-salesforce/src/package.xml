@@ -631,15 +631,15 @@
     <name>Queue</name>
   </types>
   <types>
-    <members>Case.Communication_Profile</members>  
+    <members>Case.Communication_Profile</members>
     <members>Case.DatesP1</members>
     <members>Case.DatesP3</members>
     <members>Case.Wish_Timing</members>
     <members>Contact.Contact_Fields</members>
     <members>Contact.Contact_Fields2</members>
     <members>Contact.Medical_Information</members>
-    <members>Lead.Next_Steps</members>
     <members>Lead.Input_Paper_DV</members>
+    <members>Lead.Next_Steps</members>
     <name>QuickAction</name>
   </types>
   <types>
