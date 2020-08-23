@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Social Worker</fullName>
+        <default>false</default>
+        <label>Social Worker</label>
+    </customValue>
+    <customValue>
+        <fullName>Child Life Professional</fullName>
+        <default>false</default>
+        <label>Child Life Professional</label>
+    </customValue>
+    <customValue>
+        <fullName>Nurse</fullName>
+        <default>false</default>
+        <label>Nurse</label>
+    </customValue>
+    <customValue>
+        <fullName>Nurse Practitioner</fullName>
+        <default>false</default>
+        <label>Nurse Practitioner</label>
+    </customValue>
+    <customValue>
+        <fullName>Physician Assistant</fullName>
+        <default>false</default>
+        <label>Physician Assistant</label>
+    </customValue>
+    <customValue>
+        <fullName>Physician</fullName>
+        <default>false</default>
+        <label>Physician</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <masterLabel>Medical Provider Category</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>
