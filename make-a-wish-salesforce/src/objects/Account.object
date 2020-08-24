@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>CallHighlightAction</actionName>
         <type>Default</type>
@@ -1087,6 +1086,18 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Alias__c</fullName>
+        <description>Captures the HTF's Aliases.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Separate each of the HTF's aliases with a semi-colon. (ie Springfield General; SGH)</inlineHelpText>
+        <label>Alias</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>AnnualRevenue</fullName>
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
@@ -1216,6 +1227,19 @@
         <trackFeedHistory>false</trackFeedHistory>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Department__c</fullName>
+        <description>Captures the HTF's Department</description>
+        <externalId>false</externalId>
+        <label>Department</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>HTF_Departments</valueSetName>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Description</fullName>
@@ -3100,9 +3124,9 @@ Help Text</description>
                     <label>Enhancements/Icebreakers Build-A-Bear</label>
                 </value>
                 <value>
-                    <fullName>Enhancements/Icebreakers Dick&apos;s Sporting Goods</fullName>
+                    <fullName>Enhancements/Icebreakers Dick's Sporting Goods</fullName>
                     <default>false</default>
-                    <label>Enhancements/Icebreakers Dick&apos;s Sporting Goods</label>
+                    <label>Enhancements/Icebreakers Dick's Sporting Goods</label>
                 </value>
                 <value>
                     <fullName>Enhancements/Icebreakers Other</fullName>
@@ -3135,9 +3159,9 @@ Help Text</description>
                     <label>Furniture Ashley Furniture</label>
                 </value>
                 <value>
-                    <fullName>Furniture BJ&apos;s</fullName>
+                    <fullName>Furniture BJ's</fullName>
                     <default>false</default>
-                    <label>Furniture BJ&apos;s</label>
+                    <label>Furniture BJ's</label>
                 </value>
                 <value>
                     <fullName>Furniture Costco</fullName>
@@ -3165,9 +3189,9 @@ Help Text</description>
                     <label>Furniture Rooms To Go</label>
                 </value>
                 <value>
-                    <fullName>Furniture Sam&apos;s Club</fullName>
+                    <fullName>Furniture Sam's Club</fullName>
                     <default>false</default>
-                    <label>Furniture Sam&apos;s Club</label>
+                    <label>Furniture Sam's Club</label>
                 </value>
                 <value>
                     <fullName>Furniture Sears</fullName>
@@ -3295,9 +3319,9 @@ Help Text</description>
                     <label>Luggage Purchase Amazon</label>
                 </value>
                 <value>
-                    <fullName>Luggage Purchase BJ&apos;s</fullName>
+                    <fullName>Luggage Purchase BJ's</fullName>
                     <default>false</default>
-                    <label>Luggage Purchase BJ&apos;s</label>
+                    <label>Luggage Purchase BJ's</label>
                 </value>
                 <value>
                     <fullName>Luggage Purchase Costco</fullName>
@@ -3310,9 +3334,9 @@ Help Text</description>
                     <label>Luggage Purchase Other</label>
                 </value>
                 <value>
-                    <fullName>Luggage Purchase Sam&apos;s Club</fullName>
+                    <fullName>Luggage Purchase Sam's Club</fullName>
                     <default>false</default>
-                    <label>Luggage Purchase Sam&apos;s Club</label>
+                    <label>Luggage Purchase Sam's Club</label>
                 </value>
                 <value>
                     <fullName>Luggage Purchase Target</fullName>
@@ -3390,9 +3414,9 @@ Help Text</description>
                     <label>Misc/Other Other</label>
                 </value>
                 <value>
-                    <fullName>Misc/Other Sports Equipment Dick&apos;s Sporting Goods</fullName>
+                    <fullName>Misc/Other Sports Equipment Dick's Sporting Goods</fullName>
                     <default>false</default>
-                    <label>Misc/Other Sports Equipment Dick&apos;s Sporting Goods</label>
+                    <label>Misc/Other Sports Equipment Dick's Sporting Goods</label>
                 </value>
                 <value>
                     <fullName>Misc/Other Sports Equipment Other</fullName>
@@ -3405,9 +3429,9 @@ Help Text</description>
                     <label>Misc/Other Toys &amp; Books Amazon</label>
                 </value>
                 <value>
-                    <fullName>Misc/Other Toys &amp; Books BJ&apos;s</fullName>
+                    <fullName>Misc/Other Toys &amp; Books BJ's</fullName>
                     <default>false</default>
-                    <label>Misc/Other Toys &amp; Books BJ&apos;s</label>
+                    <label>Misc/Other Toys &amp; Books BJ's</label>
                 </value>
                 <value>
                     <fullName>Misc/Other Toys &amp; Books Costco</fullName>
@@ -3420,9 +3444,9 @@ Help Text</description>
                     <label>Misc/Other Toys &amp; Books Other</label>
                 </value>
                 <value>
-                    <fullName>Misc/Other Toys &amp; Books Sam&apos;s Club</fullName>
+                    <fullName>Misc/Other Toys &amp; Books Sam's Club</fullName>
                     <default>false</default>
-                    <label>Misc/Other Toys &amp; Books Sam&apos;s Club</label>
+                    <label>Misc/Other Toys &amp; Books Sam's Club</label>
                 </value>
                 <value>
                     <fullName>Misc/Other Toys &amp; Books Target</fullName>
@@ -3460,9 +3484,9 @@ Help Text</description>
                     <label>Playset/Playground Amazon</label>
                 </value>
                 <value>
-                    <fullName>Playset/Playground BJ&apos;s</fullName>
+                    <fullName>Playset/Playground BJ's</fullName>
                     <default>false</default>
-                    <label>Playset/Playground BJ&apos;s</label>
+                    <label>Playset/Playground BJ's</label>
                 </value>
                 <value>
                     <fullName>Trip Insurance</fullName>
@@ -3580,9 +3604,9 @@ Help Text</description>
                     <label>Playset/Playground PPG Paint Store</label>
                 </value>
                 <value>
-                    <fullName>Playset/Playground Sam&apos;s Club</fullName>
+                    <fullName>Playset/Playground Sam's Club</fullName>
                     <default>false</default>
-                    <label>Playset/Playground Sam&apos;s Club</label>
+                    <label>Playset/Playground Sam's Club</label>
                 </value>
                 <value>
                     <fullName>Playset/Playground Sears</fullName>
@@ -3635,9 +3659,9 @@ Help Text</description>
                     <label>Room Make-Over Amazon</label>
                 </value>
                 <value>
-                    <fullName>Room Make-Over BJ&apos;s</fullName>
+                    <fullName>Room Make-Over BJ's</fullName>
                     <default>false</default>
-                    <label>Room Make-Over BJ&apos;s</label>
+                    <label>Room Make-Over BJ's</label>
                 </value>
                 <value>
                     <fullName>Room Make-Over Costco</fullName>
@@ -3665,9 +3689,9 @@ Help Text</description>
                     <label>Room Make-Over PPG Paint Store</label>
                 </value>
                 <value>
-                    <fullName>Room Make-Over Sam&apos;s Club</fullName>
+                    <fullName>Room Make-Over Sam's Club</fullName>
                     <default>false</default>
-                    <label>Room Make-Over Sam&apos;s Club</label>
+                    <label>Room Make-Over Sam's Club</label>
                 </value>
                 <value>
                     <fullName>Room Make-Over Sears</fullName>
@@ -3705,9 +3729,9 @@ Help Text</description>
                     <label>Shopping Spree Best Buy</label>
                 </value>
                 <value>
-                    <fullName>Shopping Spree Dick&apos;s Sporting Goods</fullName>
+                    <fullName>Shopping Spree Dick's Sporting Goods</fullName>
                     <default>false</default>
-                    <label>Shopping Spree Dick&apos;s Sporting Goods</label>
+                    <label>Shopping Spree Dick's Sporting Goods</label>
                 </value>
                 <value>
                     <fullName>Shopping Spree Game Stop</fullName>
@@ -4384,9 +4408,9 @@ Help Text</description>
     <fields>
         <fullName>npsp__Matching_Gift_Administrator_Name__c</fullName>
         <deprecated>false</deprecated>
-        <description>The name of the company&apos;s Matching Gift administrator.</description>
+        <description>The name of the company's Matching Gift administrator.</description>
         <externalId>false</externalId>
-        <inlineHelpText>The name of the company&apos;s matching gift administrator.</inlineHelpText>
+        <inlineHelpText>The name of the company's matching gift administrator.</inlineHelpText>
         <label>Matching Gift Administrator Name</label>
         <length>255</length>
         <required>false</required>
@@ -4436,9 +4460,9 @@ Help Text</description>
     <fields>
         <fullName>npsp__Matching_Gift_Comments__c</fullName>
         <deprecated>false</deprecated>
-        <description>Additional notes about the company&apos;s Matching Gift program.</description>
+        <description>Additional notes about the company's Matching Gift program.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Additional notes about the company&apos;s matching gift program.</inlineHelpText>
+        <inlineHelpText>Additional notes about the company's matching gift program.</inlineHelpText>
         <label>Matching Gift Comments</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4459,9 +4483,9 @@ Help Text</description>
     <fields>
         <fullName>npsp__Matching_Gift_Email__c</fullName>
         <deprecated>false</deprecated>
-        <description>Email of the company&apos;s Matching Gift administrator.</description>
+        <description>Email of the company's Matching Gift administrator.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Email of the company&apos;s matching gift administrator.</inlineHelpText>
+        <inlineHelpText>Email of the company's matching gift administrator.</inlineHelpText>
         <label>Matching Gift Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4495,7 +4519,7 @@ Help Text</description>
     <fields>
         <fullName>npsp__Matching_Gift_Phone__c</fullName>
         <deprecated>false</deprecated>
-        <description>The phone number of the company&apos;s Matching Gift administrator.</description>
+        <description>The phone number of the company's Matching Gift administrator.</description>
         <externalId>false</externalId>
         <inlineHelpText>Phone for the matching gift administration office.</inlineHelpText>
         <label>Matching Gift Phone</label>
@@ -4537,7 +4561,7 @@ Help Text</description>
         <description>The Membership status of this Household, for example, Current, Expired, or Grace Period. The value is based on Membership End Date and Grace Period. The Default Grace Period is set in NPSP Settings, under Household Settings. This field is read only.</description>
         <externalId>false</externalId>
         <formula>if ( npo02__MembershipEndDate__c  &lt;today(), if (npo02__MembershipEndDate__c  &gt; ( TODAY() -
-IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Period__c)), $Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Period__c, 30)) , &quot;Grace Period&quot; , &quot;Expired&quot;) , if(isnull(npo02__MembershipEndDate__c ),&quot;&quot;,&quot;Current&quot;))</formula>
+IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Period__c)), $Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Period__c, 30)) , "Grace Period" , "Expired") , if(isnull(npo02__MembershipEndDate__c ),"","Current"))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <inlineHelpText>Formula: Current, expired, or grace period.  Default grace period set in Household Settings.</inlineHelpText>
         <label>Membership Status</label>
@@ -5671,6 +5695,153 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Department__c</picklist>
+            <values>
+                <fullName>Anesthesiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cardio-thoracic Surgeon</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cardiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Critical Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dermatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developmental Pediatrics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ENT %28Ear%2C Nose %26 Throat%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emergency Medicine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endocrinology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gastroenterology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General Pediatrics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Genetics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gynecology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hematology-Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hepatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospice %2F Palliative Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospital Medicine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Immunology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Infectious Disease</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Medicine %2F Hospitalist</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Interventional Radiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Metabolics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nephrology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neurology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neurosurgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ophthalmology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Orthopedics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Psychiatry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Psychology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pulmonology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radiation Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rheumatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Surgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transplant Hepatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Urology</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Do_Not_Contact__c</picklist>
             <values>
                 <fullName>No</fullName>
@@ -6135,6 +6306,153 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
             <values>
                 <fullName>4</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Department__c</picklist>
+            <values>
+                <fullName>Anesthesiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cardio-thoracic Surgeon</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cardiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Critical Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dermatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developmental Pediatrics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ENT %28Ear%2C Nose %26 Throat%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emergency Medicine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endocrinology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gastroenterology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General Pediatrics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Genetics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gynecology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hematology-Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hepatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospice %2F Palliative Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospital Medicine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Immunology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Infectious Disease</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Medicine %2F Hospitalist</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Interventional Radiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Metabolics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nephrology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neurology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neurosurgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ophthalmology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Orthopedics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Psychiatry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Psychology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pulmonology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radiation Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rheumatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Surgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transplant Hepatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Urology</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -6607,6 +6925,153 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
             <values>
                 <fullName>4</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Department__c</picklist>
+            <values>
+                <fullName>Anesthesiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cardio-thoracic Surgeon</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cardiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Critical Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dermatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developmental Pediatrics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ENT %28Ear%2C Nose %26 Throat%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emergency Medicine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endocrinology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gastroenterology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General Pediatrics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Genetics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gynecology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hematology-Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hepatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospice %2F Palliative Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospital Medicine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Immunology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Infectious Disease</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Medicine %2F Hospitalist</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Interventional Radiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Metabolics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nephrology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neurology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neurosurgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ophthalmology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Orthopedics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Psychiatry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Psychology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pulmonology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radiation Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rheumatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Surgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transplant Hepatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Urology</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -7926,6 +8391,153 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Department__c</picklist>
+            <values>
+                <fullName>Anesthesiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cardio-thoracic Surgeon</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cardiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Critical Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dermatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developmental Pediatrics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ENT %28Ear%2C Nose %26 Throat%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emergency Medicine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endocrinology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gastroenterology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General Pediatrics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Genetics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gynecology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hematology-Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hepatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospice %2F Palliative Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospital Medicine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Immunology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Infectious Disease</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Medicine %2F Hospitalist</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Interventional Radiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Metabolics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nephrology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neurology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neurosurgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ophthalmology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Orthopedics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Psychiatry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Psychology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pulmonology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radiation Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rheumatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Surgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transplant Hepatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Urology</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Do_Not_Contact__c</picklist>
             <values>
                 <fullName>No</fullName>
@@ -9173,6 +9785,153 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Department__c</picklist>
+            <values>
+                <fullName>Anesthesiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cardio-thoracic Surgeon</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cardiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Critical Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dermatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developmental Pediatrics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ENT %28Ear%2C Nose %26 Throat%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emergency Medicine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endocrinology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gastroenterology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General Pediatrics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Genetics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gynecology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hematology-Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hepatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospice %2F Palliative Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospital Medicine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Immunology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Infectious Disease</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Medicine %2F Hospitalist</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Interventional Radiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Metabolics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nephrology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neurology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neurosurgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ophthalmology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Orthopedics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Psychiatry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Psychology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pulmonology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radiation Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rheumatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Surgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transplant Hepatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Urology</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Industry</picklist>
             <values>
                 <fullName>Agriculture</fullName>
@@ -9401,8 +10160,8 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
     <validationRules>
         <fullName>Family_Dynamics_Validation</fullName>
         <active>true</active>
-        <description>FamilyDynamicsNotes should not be blank when &apos;Other&apos; is selected on &quot;Family Dynamics&quot;</description>
-        <errorConditionFormula>AND(ISPICKVAL(Family_Dynamics__c, &apos;Other&apos;), Family_Dynamics_Notes__c = NULL,$RecordType.DeveloperName = &apos;HH_Account&apos;,$Profile.Name != &apos;Integration&apos;)</errorConditionFormula>
+        <description>FamilyDynamicsNotes should not be blank when 'Other' is selected on "Family Dynamics"</description>
+        <errorConditionFormula>AND(ISPICKVAL(Family_Dynamics__c, 'Other'), Family_Dynamics_Notes__c = NULL,$RecordType.DeveloperName = 'HH_Account',$Profile.Name != 'Integration')</errorConditionFormula>
         <errorDisplayField>Family_Dynamics_Notes__c</errorDisplayField>
         <errorMessage>Please fill the Family Dynamics Notes</errorMessage>
     </validationRules>
@@ -9410,7 +10169,7 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <fullName>InkindAccount_Chapter_Validation</fullName>
         <active>true</active>
         <description>Used to restrict when the chapter name is removed from the</description>
-        <errorConditionFormula>AND($RecordType.Name = &apos;In Kind Donors&apos;,   ISBLANK( Chapter_Name__c ) ,$Profile.Name != &apos;Integration&apos;)</errorConditionFormula>
+        <errorConditionFormula>AND($RecordType.Name = 'In Kind Donors',   ISBLANK( Chapter_Name__c ) ,$Profile.Name != 'Integration')</errorConditionFormula>
         <errorDisplayField>Chapter_Name__c</errorDisplayField>
         <errorMessage>Chapter Name should not be Blank.</errorMessage>
     </validationRules>
@@ -9418,9 +10177,9 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <fullName>Program_NationalStaff_Account_Validation</fullName>
         <active>false</active>
         <description>This validation will fire when Program&amp;National Staff trying to create other than In-Kind Account</description>
-        <errorConditionFormula>(AND ( OR ( $Profile.Name  = &apos;Chapter Dev/Fin Staff&apos; , 
-          $Profile.Name = &apos;Read Only National Staff&apos;) , RecordType.Name  &lt;&gt; &apos;In Kind Donors&apos;))&amp;&amp; Migrated_Record__c = false</errorConditionFormula>
-        <errorMessage>You don&apos;t have access to create to this type of  account</errorMessage>
+        <errorConditionFormula>(AND ( OR ( $Profile.Name  = 'Chapter Dev/Fin Staff' , 
+          $Profile.Name = 'Read Only National Staff') , RecordType.Name  &lt;&gt; 'In Kind Donors'))&amp;&amp; Migrated_Record__c = false</errorConditionFormula>
+        <errorMessage>You don't have access to create to this type of  account</errorMessage>
     </validationRules>
     <webLinks>
         <fullName>Loop__LOOP</fullName>
@@ -9504,51 +10263,51 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <masterLabel>Verify with D&amp;B</masterLabel>
         <openType>onClickJavaScript</openType>
         <protected>false</protected>
-        <url>{!REQUIRESCRIPT(&quot;/apex/dsfs__DocuSign_JavaScript&quot;)}
+        <url>{!REQUIRESCRIPT("/apex/dsfs__DocuSign_JavaScript")}
         
-{!REQUIRESCRIPT(&apos;//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js&apos;)} 
-{!REQUIRESCRIPT(&apos;//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js&apos;)} 
+{!REQUIRESCRIPT('//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')} 
+{!REQUIRESCRIPT('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js')} 
 
-var html = &apos;&lt;div id=&quot;dialog&quot; style=&quot;display: none;&quot;&gt;&lt;/div&gt;&apos;;
+var html = '&lt;div id="dialog" style="display: none;"&gt;&lt;/div&gt;';
 
 var $g = jQuery.noConflict();
 
-var address = &apos;&lt;iframe id=&quot;dnbContent&quot; width=&quot;700&quot; height=&quot;730&quot; scrolling=&quot;no&quot; marginheight=&quot;0&quot; marginwidth=&quot;0&quot; frameborder=&quot;0&quot; src=&quot;&apos;+DocuSign_GetVerifyWithDnb(&apos;account&apos;)+&apos;&quot;&gt;&lt;/iframe&gt;&apos;;
+var address = '&lt;iframe id="dnbContent" width="700" height="730" scrolling="no" marginheight="0" marginwidth="0" frameborder="0" src="'+DocuSign_GetVerifyWithDnb('account')+'"&gt;&lt;/iframe&gt;';
 		
 $g(function() { 
 
-	$g(&apos;head&apos;).append(&apos;&lt;link rel=&quot;stylesheet&quot; href=&quot;https://code.jquery.com/ui/1.11.4/themes/redmond/jquery-ui.css&quot;/&gt;&apos;);
+	$g('head').append('&lt;link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/redmond/jquery-ui.css"/&gt;');
 
-	if($g(&apos;#dialog&apos;).length == 0) {
-		$g(&apos;body&apos;).append(html); 
+	if($g('#dialog').length == 0) {
+		$g('body').append(html); 
 	}
-	$g(&quot;#dialog&quot;).dialog({ 
+	$g("#dialog").dialog({ 
 		autoOpen: true, 
 		modal: true, 
 		width: 700,
 		height: 783,
 		open: function(event, ui) {
-		  if($g(&apos;#myNewImage&apos;).length == 0) {
-		     $g(&quot;.ui-dialog-titlebar&quot;).append(&quot;&lt;img src=&apos;&quot;+getDnbLogo()+&quot;&apos; id=&apos;myNewImage&apos; /&gt;&quot;);
+		  if($g('#myNewImage').length == 0) {
+		     $g(".ui-dialog-titlebar").append("&lt;img src='"+getDnbLogo()+"' id='myNewImage' /&gt;");
 		  }
-		  $g(&apos;.ui-widget-overlay&apos;).bind(&apos;click&apos;,function(){
-    			$g(&apos;#dialog&apos;).dialog(&quot;close&quot;);
+		  $g('.ui-widget-overlay').bind('click',function(){
+    			$g('#dialog').dialog("close");
 		  });
 		}
 	})
-	if($g(&apos;#dnbContent&apos;).length == 0) {
-		$g(&apos;#dialog&apos;).append(address); 
+	if($g('#dnbContent').length == 0) {
+		$g('#dialog').append(address); 
 	}
 
 
-	$g(&quot;.ui-dialog-title&quot;).hide();
-	$g(&quot;#dialog&quot;).css(&apos;padding&apos;, &apos;0px&apos;);
-	$g(&quot;.ui-widget-header&quot;).attr(&apos;style&apos;, &apos;padding-top:5px; padding-right:5px; padding-left:10px;padding-bottom:5px; border-radius:0px; background: #005172;border:0px;margin:auto;&apos;);
-	$g(&quot;.ui-button-text&quot;).css(&apos;padding&apos;, &apos;0&apos;);
-	$g(&quot;.ui-icon-closethick&quot;).attr(&apos;style&apos;, &apos;background-color:#005172; width:19px; height:19px; margin-top:-10px; margin-left:-10px;&apos;);
-	$g(&quot;.ui-dialog-titlebar-close&quot;).attr(&apos;style&apos;, &apos;border-radius:0px; padding:0px; width:18px; height:18px; border:0px;&apos;);
-	$g(&quot;.ui-dialog&quot;).css(&apos;z-index&apos;, &apos;10000&apos;);
-	$g(&quot;.ui-dialog&quot;).css(&apos;border-radius&apos;, &apos;0px&apos;);
+	$g(".ui-dialog-title").hide();
+	$g("#dialog").css('padding', '0px');
+	$g(".ui-widget-header").attr('style', 'padding-top:5px; padding-right:5px; padding-left:10px;padding-bottom:5px; border-radius:0px; background: #005172;border:0px;margin:auto;');
+	$g(".ui-button-text").css('padding', '0');
+	$g(".ui-icon-closethick").attr('style', 'background-color:#005172; width:19px; height:19px; margin-top:-10px; margin-left:-10px;');
+	$g(".ui-dialog-titlebar-close").attr('style', 'border-radius:0px; padding:0px; width:18px; height:18px; border:0px;');
+	$g(".ui-dialog").css('z-index', '10000');
+	$g(".ui-dialog").css('border-radius', '0px');
 });</url>
     </webLinks>
     <webLinks>
