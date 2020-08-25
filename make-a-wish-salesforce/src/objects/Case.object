@@ -1147,7 +1147,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
 	   <fullName>Professional_Comm_Profile_Sent_Date__c</fullName>
     <description>SIW-468</description>
     <externalId>false</externalId>
-    <inlineHelpText>With the permission of the child&apos;s parents/legal guardians, this Communication Profile for Non-Verbal Children should be sent to and completed by members of the child’s professional team.</inlineHelpText>
+    <inlineHelpText>With the permission of the child's parents/legal guardians, this Communication Profile for Non-Verbal Children should be sent to and completed by members of the child’s professional team.</inlineHelpText>
     <label>Professional Comm Profile - Sent Date</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
@@ -1155,7 +1155,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <trackTrending>false</trackTrending>
     <type>Date</type>
 	    </fields>
-    <fields>
+	    <fields>
 	    <fullName>Communication_Profile_Notes__c</fullName>
     <externalId>false</externalId>
     <label>Communication Profile Notes</label>
@@ -1166,7 +1166,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <type>LongTextArea</type>
     <visibleLines>3</visibleLines>
      </fields>
-    <fields>
+     <fields>
 	    <fullName>Family_Comm_Profile_Sent_Date__c</fullName>
     <description>Communication Profile for Non-Verbal Children</description>
     <externalId>false</externalId>
@@ -1178,7 +1178,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <trackTrending>false</trackTrending>
     <type>Date</type>
 	     </fields>
-    <fields>
+	     <fields>
 	    <fullName>Professional_Comm_Profile_Received_Date__c</fullName>
     <externalId>false</externalId>
     <label>Professional Comm Profile-Received Date</label>
@@ -1188,7 +1188,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <trackTrending>false</trackTrending>
     <type>Date</type>
 		     </fields>
-    <fields>
+		     <fields>
         <fullName>Assigned_Date__c</fullName>
         <description>This field is used to capture the wish assigned date</description>
         <externalId>false</externalId>
@@ -5503,7 +5503,7 @@ NULL)</formula>
         <externalId>false</externalId>
         <formula>Contact.LastName + ' ' +Contact.FirstName + ' ' + IF(!ISNULL(Contact.Birthdate),(TEXT(MONTH(Contact.Birthdate)) &amp; "-" &amp; TEXT(DAY(Contact.Birthdate)) &amp; "-" &amp; TEXT(YEAR(Contact.Birthdate))), '')</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>RE-FE Description</label>
+        <label>RE Description</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -6399,11 +6399,11 @@ TO BE LEFT OFF PAGE LAYOUTS</description>
     </fields>
     <fields>
         <fullName>Total_FE_Posted_Cash_Per_Participant__c</fullName>
-        <description>The total of FE Posted Cash expenses associated with the currently active Wish Budget, divided by the number of approved and requested participants.</description>
+        <description>The total of Posted Cash expenses associated with the currently active Wish Budget, divided by the number of approved and requested participants.</description>
         <externalId>false</externalId>
         <formula>Total_FE_Posted_Cash__c /  of_Approved_Participants__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Total FE Posted Cash Per Participant</label>
+        <label>Total Posted Cash Per Participant</label>
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
@@ -6413,9 +6413,9 @@ TO BE LEFT OFF PAGE LAYOUTS</description>
     </fields>
     <fields>
         <fullName>Total_FE_Posted_Cash__c</fullName>
-        <description>The sum of FE Posted Cash amounts from the Wish Expenses associated with the currently active Wish Budget.</description>
+        <description>The sum of Posted Cash amounts from the Wish Expenses associated with the currently active Wish Budget.</description>
         <externalId>false</externalId>
-        <label>Total FE Posted Cash</label>
+        <label>Total Posted Cash</label>
         <summarizedField>Wish_Budget__c.Total_FE_Posted_Cash__c</summarizedField>
         <summaryFilterItems>
             <field>Wish_Budget__c.Is_Active_Budget__c</field>
@@ -6430,12 +6430,12 @@ TO BE LEFT OFF PAGE LAYOUTS</description>
     </fields>
     <fields>
         <fullName>Total_FE_Posted_Costs_Per_Participant__c</fullName>
-        <description>The total of FE Posted expenses (both Cash and In Kind) associated with the currently active Wish Budget, divided by the number of approved and requested participants.</description>
+        <description>The total of Posted expenses (both Cash and In Kind) associated with the currently active Wish Budget, divided by the number of approved and requested participants.</description>
         <externalId>false</externalId>
         <formula>( Total_FE_Posted_Cash__c +  Total_FE_Posted_In_Kind__c )
 / of_Approved_Participants__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Total FE Posted Costs Per Participant</label>
+        <label>Total Posted Costs Per Participant</label>
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
@@ -6445,12 +6445,12 @@ TO BE LEFT OFF PAGE LAYOUTS</description>
     </fields>
     <fields>
         <fullName>Total_FE_Posted_Costs__c</fullName>
-        <description>All FE posted cash and in kind costs associated with the currently active Wish Budget associated with this wish.</description>
+        <description>All posted cash and in kind costs associated with the currently active Wish Budget associated with this wish.</description>
         <externalId>false</externalId>
         <formula>Total_FE_Posted_Cash__c +  Total_FE_Posted_In_Kind__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>FE Posted Cash + FE Posted In Kind</inlineHelpText>
-        <label>Total FE Posted Costs</label>
+        <inlineHelpText>Posted Cash + Posted In Kind</inlineHelpText>
+        <label>Total Posted Costs</label>
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
@@ -6460,11 +6460,11 @@ TO BE LEFT OFF PAGE LAYOUTS</description>
     </fields>
     <fields>
         <fullName>Total_FE_Posted_In_Kind_Per_Participant__c</fullName>
-        <description>The total of FE Posted In Kind expenses associated with the currently active Wish Budget, divided by the number of approved and requested participants.</description>
+        <description>The total of Posted In Kind expenses associated with the currently active Wish Budget, divided by the number of approved and requested participants.</description>
         <externalId>false</externalId>
         <formula>Total_FE_Posted_In_Kind__c / of_Approved_Participants__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Total FE Posted In Kind Per Participant</label>
+        <label>Total Posted In Kind Per Participant</label>
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
@@ -6474,9 +6474,9 @@ TO BE LEFT OFF PAGE LAYOUTS</description>
     </fields>
     <fields>
         <fullName>Total_FE_Posted_In_Kind__c</fullName>
-        <description>The sum of FE Posted In Kind amounts from the Wish Expenses associated with the currently active Wish Budget.</description>
+        <description>The sum of Posted In Kind amounts from the Wish Expenses associated with the currently active Wish Budget.</description>
         <externalId>false</externalId>
-        <label>Total FE Posted In Kind</label>
+        <label>Total Posted In Kind</label>
         <summarizedField>Wish_Budget__c.Total_FE_Posted_In_Kind__c</summarizedField>
         <summaryFilterItems>
             <field>Wish_Budget__c.Is_Active_Budget__c</field>
@@ -6493,7 +6493,7 @@ TO BE LEFT OFF PAGE LAYOUTS</description>
         <fullName>Total_FE_Posted_In_Kind_to_Cash_Ratio__c</fullName>
         <description>Provides the percentage of In-Kind relative to the total of all In-Kind and Cash expenses.</description>
         <externalId>false</externalId>
-        <label>Total FE Posted In-Kind to Cash Ratio</label>
+        <label>Total Posted In-Kind to Cash Ratio</label>
         <summarizedField>Wish_Budget__c.Total_FE_Posted_In_Kind_to_Cash_Ratio__c</summarizedField>
         <summaryFilterItems>
             <field>Wish_Budget__c.Is_Active_Budget__c</field>

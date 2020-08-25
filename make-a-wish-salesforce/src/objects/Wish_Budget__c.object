@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -261,11 +260,11 @@
     <fields>
         <fullName>Budget_Description__c</fullName>
         <externalId>false</externalId>
-        <formula>IF(  Is_Active_Budget__c  ,&quot;Active Budget&quot;,&quot;Archived Budget&quot;)+ &quot; &quot; + 
-Name + &quot; for &quot; + 
+        <formula>IF(  Is_Active_Budget__c  ,"Active Budget","Archived Budget")+ " " + 
+Name + " for " + 
  Wish_Child__c 
 + 
-IF(!ISBLANK(TEXT( Budget_Approval_Status__c )),&quot; - &quot; + TEXT( Budget_Approval_Status__c ),&quot;&quot;)</formula>
+IF(!ISBLANK(TEXT( Budget_Approval_Status__c ))," - " + TEXT( Budget_Approval_Status__c ),"")</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Budget Description</label>
         <required>false</required>
@@ -317,7 +316,7 @@ IF(!ISBLANK(TEXT( Budget_Approval_Status__c )),&quot; - &quot; + TEXT( Budget_Ap
     </fields>
     <fields>
         <fullName>GKTW_In_Kind_Value__c</fullName>
-        <description>The total of all Budget In Kind amounts for the related Wish Expenses, where the Wish Expense Type is &quot;Give Kids The World&quot;.</description>
+        <description>The total of all Budget In Kind amounts for the related Wish Expenses, where the Wish Expense Type is "Give Kids The World".</description>
         <externalId>false</externalId>
         <inlineHelpText>Budget In Kind total for Give Kids The World expenses.</inlineHelpText>
         <label>GKTW In Kind Value</label>
@@ -353,9 +352,9 @@ IF(!ISBLANK(TEXT( Budget_Approval_Status__c )),&quot; - &quot; + TEXT( Budget_Ap
     </fields>
     <fields>
         <fullName>Total_FE_Posted_Cash__c</fullName>
-        <description>The sum of FE Posted Cash amounts from the associated Wish Expenses.</description>
+        <description>The sum of Posted Cash amounts from the associated Wish Expenses.</description>
         <externalId>false</externalId>
-        <label>Total FE Posted Cash</label>
+        <label>Total Posted Cash</label>
         <summarizedField>Wish_Expense__c.FE_Posted_Cash__c</summarizedField>
         <summaryForeignKey>Wish_Expense__c.Wish_Budget__c</summaryForeignKey>
         <summaryOperation>sum</summaryOperation>
@@ -364,9 +363,9 @@ IF(!ISBLANK(TEXT( Budget_Approval_Status__c )),&quot; - &quot; + TEXT( Budget_Ap
     </fields>
     <fields>
         <fullName>Total_FE_Posted_In_Kind__c</fullName>
-        <description>The sum of FE Posted In Kind amounts from the associated Wish Expenses.</description>
+        <description>The sum of Posted In Kind amounts from the associated Wish Expenses.</description>
         <externalId>false</externalId>
-        <label>Total FE Posted In Kind</label>
+        <label>Total Posted In Kind</label>
         <summarizedField>Wish_Expense__c.FE_Posted_In_Kind__c</summarizedField>
         <summaryForeignKey>Wish_Expense__c.Wish_Budget__c</summaryForeignKey>
         <summaryOperation>sum</summaryOperation>
@@ -382,7 +381,7 @@ IF(!ISBLANK(Total_FE_Posted_Cash__c) &amp;&amp; ISBLANK(Total_FE_Posted_In_Kind_
 IF(ISBLANK(Total_FE_Posted_Cash__c) = NULL &amp;&amp; !ISBLANK(Total_FE_Posted_In_Kind__c), 1,
 IF(!ISBLANK(Total_FE_Posted_Cash__c) &amp;&amp; !ISBLANK(Total_FE_Posted_In_Kind__c), (Total_FE_Posted_In_Kind__c / (Total_FE_Posted_Cash__c + Total_FE_Posted_In_Kind__c)),NULL))))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Total FE Posted In-Kind to Cash Ratio</label>
+        <label>Total Posted In-Kind to Cash Ratio</label>
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
@@ -405,7 +404,7 @@ IF(!ISBLANK(Total_FE_Posted_Cash__c) &amp;&amp; !ISBLANK(Total_FE_Posted_In_Kind
     <fields>
         <fullName>Wish_Child__c</fullName>
         <externalId>false</externalId>
-        <formula>Wish_Case__r.Contact.FirstName + &quot; &quot; + Wish_Case__r.Contact.LastName</formula>
+        <formula>Wish_Case__r.Contact.FirstName + " " + Wish_Case__r.Contact.LastName</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Wish Child</label>
         <required>false</required>
@@ -429,7 +428,7 @@ IF(!ISBLANK(Total_FE_Posted_Cash__c) &amp;&amp; !ISBLANK(Total_FE_Posted_In_Kind
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Wish Budgets</pluralLabel>
-    <searchLayouts/>
+    <searchLayouts />
     <sharingModel>ControlledByParent</sharingModel>
     <validationRules>
         <fullName>Inactivate_Budget</fullName>
