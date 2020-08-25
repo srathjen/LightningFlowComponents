@@ -4,7 +4,6 @@
 
 <apex:page standardController="Wish_Expense__c" extensions="WishBudgetFormNew_AC" standardStylesheets="false" id="Pge"
            sidebar="false" showHeader="false">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
@@ -484,7 +483,7 @@
                                     Style="width:80px" colspan="2">Actual
                                 </th>
                                 <th class="slds-text-heading--label slds-text-align--center tdProjected" scope="col"
-                                    Style="width:80px" colspan="2">FE Posted
+                                    Style="width:80px" colspan="2">Posted
                                 </th>
                                 <th class="slds-text-heading--label slds-text-align--center" scope="col"
                                     Style="width:40px"></th>
@@ -527,7 +526,7 @@
                                 <th class="slds-text-heading--label tdProjected" scope="col" Style="width:40px">In
                                     Kind
                                 </th>
-                                <th class="slds-text-heading--label" scope="col" Style="width:40px">$ Diff(FE P - A)
+                                <th class="slds-text-heading--label" scope="col" Style="width:40px">$ Diff(P - A)
                                 </th>
                                 <th class="slds-text-heading--label slds-cell-wrap" scope="col" Style="width:40px"></th>
                             </tr>
