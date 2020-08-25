@@ -420,7 +420,7 @@ Converts this: 6043458787 --&gt;  (604) 345-8787</description>
             <name>Untick_Duplicate_Referral_Email</name>
             <type>FieldUpdate</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Lead.Lead_Owner_Dupe_Alert__c</field>
             <operation>equals</operation>
