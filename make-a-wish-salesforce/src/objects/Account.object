@@ -2402,6 +2402,17 @@ Help Text</description>
         <type>Picklist</type>
     </fields>
     <fields>
+        <fullName>Record_Ownership_Notes__c</fullName>
+        <description>Used to indicate reasons for exceptions to standard record ownership rules.</description>
+        <externalId>false</externalId>
+        <label>Record Ownership Notes</label>
+        <length>250</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Referral_Form_Password__c</fullName>
         <description>Use for to open Wish referral form</description>
         <externalId>false</externalId>

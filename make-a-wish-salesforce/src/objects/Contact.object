@@ -3204,6 +3204,32 @@ null)</formula>
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>DV_Method_Preference__c</fullName>
+        <description>Used to indicate if an MP prefers to receive the DV electronically or via paper (fax, mail), etc.</description>
+        <externalId>false</externalId>
+        <label>DV Method Preference</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Electronic</fullName>
+                    <default>false</default>
+                    <label>Electronic</label>
+                </value>
+                <value>
+                    <fullName>Paper</fullName>
+                    <default>false</default>
+                    <label>Paper</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
         <fullName>Date_of_Wish_Assigned__c</fullName>
         <description>Used to get the date of the wish that assigned to the volunteer</description>
         <externalId>false</externalId>
@@ -3444,6 +3470,16 @@ null)</formula>
         <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Exclude_MP_from_Referral_Form_Searches__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used to suppress the MP contact record from being displayed on the public facing referral form search components.</description>
+        <externalId>false</externalId>
+        <label>Exclude MP from Referral Form Searches</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Expiration_Date__c</fullName>
@@ -6978,6 +7014,18 @@ COMMENTS"</description>
         <trackHistory>false</trackHistory>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Record_Ownership_Notes__c</fullName>
+        <description>Used to indicate reasons for exceptions to standard record ownership rules.</description>
+        <externalId>false</externalId>
+        <label>Record Ownership Notes</label>
+        <length>250</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>ReferralComment__c</fullName>
