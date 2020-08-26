@@ -448,94 +448,6 @@
         </valueSet>
     </fields>
     <fields>
-        <fullName>Alt_1_MP_Category__c</fullName>
-        <description>Capture Alt 1 MP Category</description>
-        <externalId>false</externalId>
-        <label>Alt 1 MP Category</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetName>Medical_Provider_Category</valueSetName>
-        </valueSet>
-    </fields>
-    <fields>
-        <fullName>Alt_1_MP_City__c</fullName>
-        <description>Captures the Alt 1 MP's City</description>
-        <externalId>false</externalId>
-        <label>Alt 1 MP City</label>
-        <length>100</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Alt_1_MP_HTF_City__c</fullName>
-        <description>Captures the Alt 1 MP's HTF City</description>
-        <externalId>false</externalId>
-        <label>Alt 1 MP HTF City</label>
-        <length>100</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Alt_1_MP_HTF_Department__c</fullName>
-        <description>Captures the Alt 1 MP HTF's Department</description>
-        <externalId>false</externalId>
-        <label>Alt 1 MP HTF Department</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetName>HTF_Departments</valueSetName>
-        </valueSet>
-    </fields>
-    <fields>
-        <fullName>Alt_1_MP_HTF_Phone__c</fullName>
-        <description>Captures the Alt 1 MP's HTF Phone</description>
-        <externalId>false</externalId>
-        <label>Alt 1 MP HTF Phone</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Phone</type>
-    </fields>
-    <fields>
-        <fullName>Alt_1_MP_HTF_State__c</fullName>
-        <description>Captures the Alt 1 MP's HTF State</description>
-        <externalId>false</externalId>
-        <label>Alt 1 MP HTF State</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetName>State_Picklist</valueSetName>
-        </valueSet>
-    </fields>
-    <fields>
-        <fullName>Alt_1_MP_HTF_Street_Address__c</fullName>
-        <description>Captures the Alt 1 MP's HTF Street Address</description>
-        <externalId>false</externalId>
-        <label>Alt 1 MP HTF Street Address</label>
-        <length>255</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>Alt_1_MP_HTF__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <description>Captures the Alt 1 MP's HTF</description>
@@ -557,35 +469,6 @@
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Lookup</type>
-    </fields>
-    <fields>
-        <fullName>Alt_1_MP_Specialty__c</fullName>
-        <description>Captures Alt 1 MP's Specialties</description>
-        <externalId>false</externalId>
-        <label>Alt 1 MP Specialty</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>MultiselectPicklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetName>MP_Specialties</valueSetName>
-        </valueSet>
-        <visibleLines>4</visibleLines>
-    </fields>
-    <fields>
-        <fullName>Alt_1_MP_State__c</fullName>
-        <description>Captures the Alt 1 MP's State</description>
-        <externalId>false</externalId>
-        <label>Alt 1 MP State</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetName>State_Picklist</valueSetName>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Alt_1_MP__c</fullName>
@@ -610,82 +493,6 @@
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Lookup</type>
-    </fields>
-    <fields>
-        <fullName>Alt_2_MP_Category__c</fullName>
-        <description>Captures the Alt 2 MP's Category</description>
-        <externalId>false</externalId>
-        <label>Alt 2 MP Category</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetName>Medical_Provider_Category</valueSetName>
-        </valueSet>
-    </fields>
-    <fields>
-        <fullName>Alt_2_MP_City__c</fullName>
-        <description>Captures the Alt 2 MP's City</description>
-        <externalId>false</externalId>
-        <label>Alt 2 MP City</label>
-        <length>100</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Alt_2_MP_HTF_City__c</fullName>
-        <description>Captures the Alt 2 MP HTF City</description>
-        <externalId>false</externalId>
-        <label>Alt 2 MP HTF City</label>
-        <length>100</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Alt_2_MP_HTF_Department__c</fullName>
-        <description>Captures the Alt 2 MP's HTF Department</description>
-        <externalId>false</externalId>
-        <label>Alt 2 MP HTF Department</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetName>HTF_Departments</valueSetName>
-        </valueSet>
-    </fields>
-    <fields>
-        <fullName>Alt_2_MP_HTF_Phone__c</fullName>
-        <description>Captures the Alt 2 MP's HTF Phone</description>
-        <externalId>false</externalId>
-        <label>Alt 2 MP HTF Phone</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Phone</type>
-    </fields>
-    <fields>
-        <fullName>Alt_2_MP_HTF_State__c</fullName>
-        <description>Captures the Alt 2 MP's HTF State</description>
-        <externalId>false</externalId>
-        <label>Alt 2 MP HTF State</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetName>State_Picklist</valueSetName>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Alt_2_MP_HTF_Street_Address__c</fullName>
@@ -721,35 +528,6 @@
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Lookup</type>
-    </fields>
-    <fields>
-        <fullName>Alt_2_MP_Specialty__c</fullName>
-        <description>Captures the Alt 2 MP Specialties</description>
-        <externalId>false</externalId>
-        <label>Alt 2 MP Specialty</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>MultiselectPicklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetName>MP_Specialties</valueSetName>
-        </valueSet>
-        <visibleLines>4</visibleLines>
-    </fields>
-    <fields>
-        <fullName>Alt_2_MP_State__c</fullName>
-        <description>Captures the Alt 2 MP State</description>
-        <externalId>false</externalId>
-        <label>Alt 2 MP State</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetName>State_Picklist</valueSetName>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Alt_2_MP__c</fullName>
