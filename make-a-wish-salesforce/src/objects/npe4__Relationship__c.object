@@ -354,22 +354,6 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Medical_Needs__c</fullName>
-        <description>It will indicate that wish participant requires medical needs or not</description>
-        <externalId>false</externalId>
-        <label>Medical Needs</label>
-        <required>false</required>
-        <trackFeedHistory>true</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-            </valueSetDefinition>
-        </valueSet>
-    </fields>
-    <fields>
         <fullName>Migrated_Record__c</fullName>
         <defaultValue>false</defaultValue>
         <description>This field will indicate that record created from mulesoft or not</description>

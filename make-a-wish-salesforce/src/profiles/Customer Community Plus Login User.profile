@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+﻿<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <applicationVisibilities>
         <application>CRMfusionDBR101__DupeBlocker</application>
         <default>false</default>
@@ -23530,11 +23530,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>npe4__Relationship__c.Import_Id__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>npe4__Relationship__c.Medical_Needs__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>

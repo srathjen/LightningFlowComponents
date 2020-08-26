@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+﻿<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <categoryGroupVisibilities>
         <dataCategoryGroup>Chapter_Specific</dataCategoryGroup>
         <visibility>ALL</visibility>
@@ -24603,11 +24603,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>npe4__Relationship__c.Import_Id__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>npe4__Relationship__c.Medical_Needs__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
