@@ -799,6 +799,20 @@
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>Best_Contact_Category__c</fullName>
+        <description>Captures Best Contact MP Category</description>
+        <externalId>false</externalId>
+        <label>Best Contact Category</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Medical_Provider_Category</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
         <fullName>Best_Contact_City__c</fullName>
         <description>Captures the Best Contact's City</description>
         <externalId>false</externalId>
@@ -809,6 +823,16 @@
         <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Best_Contact_Fax__c</fullName>
+        <description>Captures the Best Contact MP Fax</description>
+        <externalId>false</externalId>
+        <label>Best Contact Fax</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Phone</type>
     </fields>
     <fields>
         <fullName>Best_Contact_HTF_City__c</fullName>
@@ -878,6 +902,18 @@
         <externalId>false</externalId>
         <label>Best Contact HTF Street Address</label>
         <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Best_Contact_HTF_Zip_Code__c</fullName>
+        <description>Captures the Best Contact's HTF Zip Code</description>
+        <externalId>false</externalId>
+        <label>Best Contact HTF Zip Code</label>
+        <length>10</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -1784,7 +1820,7 @@
         <fullName>Alternate1HospitalTreatmentFacility__c</fullName>
         <description>It will contains the alternate 1 hospital/treatment facility value</description>
         <externalId>false</externalId>
-        <label>Alt 1 MP HTF Name</label>
+        <label>Alternate 1 Hospital/Treatment Facility</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1796,7 +1832,7 @@
         <fullName>Alternate1MedProfessionalFirstName__c</fullName>
         <description>It contains alternate 1 Medical Professional First Name</description>
         <externalId>false</externalId>
-        <label>Alt 1 MP First Name</label>
+        <label>Alternate 1 Med Professional First Name</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1808,7 +1844,7 @@
         <fullName>Alternate1MedProfessionalLastName__c</fullName>
         <description>It contains alternate 1 medical professional last name</description>
         <externalId>false</externalId>
-        <label>Alt 1 MP Last Name</label>
+        <label>Alternate 1 Med Professional Last Name</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1820,7 +1856,7 @@
         <fullName>Alternate1MedProfessionalPhone__c</fullName>
         <description>It contains alternate 1 medical professional phone</description>
         <externalId>false</externalId>
-        <label>Alt 1 MP Phone</label>
+        <label>Alternate 1 Med Professional Phone</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -1830,7 +1866,7 @@
         <fullName>Alternate1MedicalProfessionalEmail__c</fullName>
         <description>It contains alternate 1 medical professional email</description>
         <externalId>false</externalId>
-        <label>Alt 1 MP Email</label>
+        <label>Alternate 1 Med Professional Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -1841,7 +1877,7 @@
         <fullName>Alternate1MedicalProfessionalFax__c</fullName>
         <description>It will contain the alternate 1 fax value</description>
         <externalId>false</externalId>
-        <label>Alt 1 MP Fax</label>
+        <label>Alternate 1 Med Professional Fax</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -1851,7 +1887,7 @@
         <fullName>Alternate2HospitalTreatmentFacility__c</fullName>
         <description>It will contains alternate 2 hospital/treatment facility value</description>
         <externalId>false</externalId>
-        <label>Alt 2 MP HTF Name</label>
+        <label>Alternate 2 Hospital/Treatment Facility</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1863,7 +1899,7 @@
         <fullName>Alternate2MedProfessionalEmail__c</fullName>
         <description>it contains Alternate 2 Med Professional Email</description>
         <externalId>false</externalId>
-        <label>Alt 2 MP Email</label>
+        <label>Alternate 2 Med Professional Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -1874,7 +1910,7 @@
         <fullName>Alternate2MedProfessionalFirstName__c</fullName>
         <description>It contains alternate 2 Med professional first name</description>
         <externalId>false</externalId>
-        <label>Alt 2 MP First Name</label>
+        <label>Alternate 2 Med Professional First Name</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1886,7 +1922,7 @@
         <fullName>Alternate2MedProfessionalLastName__c</fullName>
         <description>It contains alternate 2 med professional last name</description>
         <externalId>false</externalId>
-        <label>Alt 2 MP Last Name</label>
+        <label>Alternate 2 Med Professional Last Name</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1898,7 +1934,7 @@
         <fullName>Alternate2MedProfessionalPhone__c</fullName>
         <description>It contains alternate 2 med professional phone</description>
         <externalId>false</externalId>
-        <label>Alt 2 MP Phone</label>
+        <label>Alternate 2 Med Professional Phone</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -1908,7 +1944,7 @@
         <fullName>Alternate2MedicalProfessionalFax__c</fullName>
         <description>It will contain the  alternate 2 medical professional fax value</description>
         <externalId>false</externalId>
-        <label>Alt 2 MP Fax</label>
+        <label>Alternate 2 Med Professional Fax</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -1948,7 +1984,6 @@
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
         <valueSet>
-            <restricted>true</restricted>
             <valueSetDefinition>
                 <sorted>false</sorted>
                 <value>
@@ -1985,36 +2020,6 @@
                     <fullName>Other</fullName>
                     <default>false</default>
                     <label>Other</label>
-                </value>
-                <value>
-                    <fullName>Child Life Specialist</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                    <label>Child Life Specialist</label>
-                </value>
-                <value>
-                    <fullName>Medical Professional</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                    <label>Medical Professional</label>
-                </value>
-                <value>
-                    <fullName>Nurse/Health Aide</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                    <label>Nurse/Health Aide</label>
-                </value>
-                <value>
-                    <fullName>Other Medical Professional</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                    <label>Other Medical Professional</label>
-                </value>
-                <value>
-                    <fullName>Physician Assisstant</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                    <label>Physician Assisstant</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
@@ -4526,6 +4531,18 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Referring_MP_HTF_Zip_Code__c</fullName>
+        <description>Captures the Referring MP HTF Zip Code</description>
+        <externalId>false</externalId>
+        <label>Referring MP HTF Zip Code</label>
+        <length>10</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Referring_MP_HTF__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <description>Captures the Referring MP's HTF Account record</description>
@@ -4665,6 +4682,20 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>Treating_MP_Category__c</fullName>
+        <description>Captures the Treating MP's Category</description>
+        <externalId>false</externalId>
+        <label>Treating MP Category</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Medical_Provider_Category</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
         <fullName>Treating_MP_City__c</fullName>
         <description>Captures the Treating MP City</description>
         <externalId>false</externalId>
@@ -4687,6 +4718,20 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Treating_MP_HTF_Department__c</fullName>
+        <description>Captures the Treating MP's HTF Department</description>
+        <externalId>false</externalId>
+        <label>Treating MP HTF Department</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>HTF_Departments</valueSetName>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Treating_MP_HTF_Phone__c</fullName>
@@ -4718,6 +4763,18 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <externalId>false</externalId>
         <label>Treating MP HTF Street Address</label>
         <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Treating_MP_HTF_Zip_Code__c</fullName>
+        <description>Captures the Treating MP's HTF Zip Code</description>
+        <externalId>false</externalId>
+        <label>Treating MP HTF Zip Code</label>
+        <length>10</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -6896,7 +6953,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
     <fields>
         <fullName>Salutation_AlternateMP1__c</fullName>
         <externalId>false</externalId>
-        <label>Alt 1 MP Salutation</label>
+        <label>Salutation</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -6931,7 +6988,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
     <fields>
         <fullName>Salutation_AlternateMP2__c</fullName>
         <externalId>false</externalId>
-        <label>Alt 2 MP Salutation</label>
+        <label>Salutation</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
