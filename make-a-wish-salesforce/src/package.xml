@@ -648,6 +648,7 @@
     <members>Contact.Contact_Fields</members>
     <members>Contact.Contact_Fields2</members>
     <members>Contact.Medical_Information</members>
+    <members>Contact.Preferred_Contact</members>
     <members>Lead.Input_Paper_DV</members>
     <members>Lead.Next_Steps</members>
     <members>npe4__Relationship__c.Medical_Contact_Details</members>
