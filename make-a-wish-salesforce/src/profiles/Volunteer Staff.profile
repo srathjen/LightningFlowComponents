@@ -7410,6 +7410,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.Maiden_Alternate_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.MailingAddress</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -8196,6 +8201,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Recipient_Email__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Record_Ownership_Notes__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

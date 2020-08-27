@@ -32,11 +32,19 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>AccountId</field>
+                <field>Suffix__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Suffix__c</field>
+                <field>Maiden_Alternate_Name__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Nickname__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>AccountId</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -45,6 +53,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Specialty_Comments__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Provider_Type__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
@@ -70,11 +82,15 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Provider_Type__c</field>
+                <field>Record_Ownership_Notes__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Title</field>
+                <field>npsp__Primary_Affiliation__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Region_Code__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -135,11 +151,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>npsp__Do_Not_Contact__c</field>
+                <field>Do_Not_Contact_Notes__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Do_Not_Contact_Notes__c</field>
+                <field>npsp__Do_Not_Contact__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -170,6 +186,14 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>HasOptedOutOfFax</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Exclude_MP_from_Referral_Form_Searches__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>DV_Method_Preference__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
