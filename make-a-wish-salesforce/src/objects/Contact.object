@@ -5396,6 +5396,17 @@ IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientat
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Preferred_Contact_Best_Time_to_Call__c</fullName>
+        <externalId>false</externalId>
+        <label>Preferred Contact: Best Time to Call</label>
+        <length>150</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Preferred_Contact_Name__c</fullName>
         <externalId>false</externalId>
         <inlineHelpText>If this is Blank, then please update on the Update Contact Info page on the case.</inlineHelpText>
