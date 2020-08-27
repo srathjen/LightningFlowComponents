@@ -3649,16 +3649,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <type>Date</type>
     </fields>
     <fields>
-        <fullName>Intro_Email_Sent_Date__c</fullName>
-        <externalId>false</externalId>
-        <label>Intro Email Sent Date</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Date</type>
-    </fields>
-    <fields>
         <fullName>IsClosedOnCreate</fullName>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -6736,7 +6726,7 @@ TO BE LEFT OFF PAGE LAYOUTS</description>
         <fullName>Welcome_Call_Date__c</fullName>
         <description>DEMO</description>
         <externalId>false</externalId>
-        <label>Welcome Call Date</label>
+        <label>Welcome Communication Completed Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
