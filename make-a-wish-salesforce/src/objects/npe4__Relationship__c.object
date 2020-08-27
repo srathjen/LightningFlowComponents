@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -258,7 +257,7 @@
     <fields>
         <fullName>Adult_Emergency_Contact__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>User can find the Wish child&apos;s emergency contact using this field. if it is true, then this user can contact this person for emergency.</description>
+        <description>User can find the Wish child's emergency contact using this field. if it is true, then this user can contact this person for emergency.</description>
         <externalId>false</externalId>
         <label>Adult Emergency Contact</label>
         <trackFeedHistory>true</trackFeedHistory>
@@ -281,7 +280,7 @@
         <fullName>Decead__c</fullName>
         <externalId>false</externalId>
         <formula>npe4__RelatedContact__r.npsp__Deceased__c</formula>
-        <inlineHelpText>This field can be updated on the individual&apos;s Contact Record.</inlineHelpText>
+        <inlineHelpText>This field can be updated on the individual's Contact Record.</inlineHelpText>
         <label>Deceased</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -353,22 +352,6 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Medical_Needs__c</fullName>
-        <description>It will indicate that wish participant requires medical needs or not</description>
-        <externalId>false</externalId>
-        <label>Medical Needs</label>
-        <required>false</required>
-        <trackFeedHistory>true</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Migrated_Record__c</fullName>
@@ -567,9 +550,9 @@
     <fields>
         <fullName>npe4__Contact__c</fullName>
         <deprecated>false</deprecated>
-        <description>Related Contact is this Contact&apos;s ______.</description>
+        <description>Related Contact is this Contact's ______.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Related Contact is this Contact&apos;s ______.</inlineHelpText>
+        <inlineHelpText>Related Contact is this Contact's ______.</inlineHelpText>
         <label>Contact</label>
         <referenceTo>Contact</referenceTo>
         <relationshipLabel>Relationships</relationshipLabel>
@@ -633,9 +616,9 @@
         <deprecated>false</deprecated>
         <description>Text formula that constructs a sentence explaining the relationship between the two Contacts</description>
         <externalId>false</externalId>
-        <formula>TEXT(npe4__RelatedContact__r.Salutation) + &quot; &quot; + npe4__RelatedContact__r.FirstName + &quot; &quot; + npe4__RelatedContact__r.LastName
-+ &quot;  &quot;  +  $Label.npe4__Relationship_Explanation_Connector + &quot; &quot; + 
-TEXT(npe4__Contact__r.Salutation) + &quot; &quot; + npe4__Contact__r.FirstName + &quot; &quot; + npe4__Contact__r.LastName + &quot;&apos;s &quot; + TEXT(npe4__Type__c)</formula>
+        <formula>TEXT(npe4__RelatedContact__r.Salutation) + " " + npe4__RelatedContact__r.FirstName + " " + npe4__RelatedContact__r.LastName
++ "  "  +  $Label.npe4__Relationship_Explanation_Connector + " " + 
+TEXT(npe4__Contact__r.Salutation) + " " + npe4__Contact__r.FirstName + " " + npe4__Contact__r.LastName + "'s " + TEXT(npe4__Type__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <inlineHelpText>Text formula that constructs a sentence explaining the relationship between the two Contacts</inlineHelpText>
         <label>Relationship Explanation</label>
@@ -896,6 +879,11 @@ TEXT(npe4__Contact__r.Salutation) + &quot; &quot; + npe4__Contact__r.FirstName +
                     <default>false</default>
                     <label>Other</label>
                 </value>
+                <value>
+                    <fullName>Best Medical Contact</fullName>
+                    <default>false</default>
+                    <label>Best Medical Contact</label>
+                </value>
             </valueSetDefinition>
         </valueSet>
     </fields>
@@ -942,7 +930,7 @@ TEXT(npe4__Contact__r.Salutation) + &quot; &quot; + npe4__Contact__r.FirstName +
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Relationships</pluralLabel>
-    <searchLayouts/>
+    <searchLayouts />
     <sharingModel>ControlledByParent</sharingModel>
     <validationRules>
         <fullName>npe4__Related_Contact_Do_Not_Change</fullName>

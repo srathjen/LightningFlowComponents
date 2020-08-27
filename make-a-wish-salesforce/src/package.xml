@@ -186,6 +186,7 @@
     <members>Inkind_Donation_PDFs__c</members>
     <members>Lead</members>
     <members>Lead_File__c</members>
+    <members>npe4__Relationship__c</members>
     <members>QuickText</members>
     <members>Spanish_Translations__mdt</members>
     <members>Volunteer_Opportunity__c</members>
@@ -503,6 +504,7 @@
     <members>Case_Wish_Lightning</members>
     <members>Default_Lead_Record_Page</members>
     <members>Lead_Record_Page</members>
+    <members>Relationship_Record_Page</members>
     <members>Volunteer_Management_Home_Page</members>
     <name>FlexiPage</name>
   </types>
@@ -648,6 +650,7 @@
     <members>Contact.Medical_Information</members>
     <members>Lead.Input_Paper_DV</members>
     <members>Lead.Next_Steps</members>
+    <members>npe4__Relationship__c.Medical_Contact_Details</members>
     <name>QuickAction</name>
   </types>
   <types>

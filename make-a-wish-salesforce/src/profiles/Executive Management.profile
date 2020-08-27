@@ -1592,6 +1592,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Account.Record_Ownership_Notes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Case.Communication_Profile_Notes__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -6912,6 +6917,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.DV_Method_Preference__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.Date_of_Wish_Assigned__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -7008,6 +7018,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Employer__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Exclude_MP_from_Referral_Form_Searches__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -8188,6 +8203,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Recipient_Email__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Record_Ownership_Notes__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -24478,11 +24498,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>npe4__Relationship__c.Import_Id__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>npe4__Relationship__c.Medical_Needs__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
