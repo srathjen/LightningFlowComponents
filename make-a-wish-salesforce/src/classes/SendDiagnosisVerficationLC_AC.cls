@@ -38,7 +38,22 @@ public without sharing class SendDiagnosisVerficationLC_AC {
                         PD_Condition_Description__c,
                         Of_Times_Email_Sent__c,
                         Part_A_Received__c,
-                        isSign__c, Child_Age__c
+                        isSign__c, Child_Age__c,
+                        Relationship_to_child__c,
+                        Referring_MP__c,
+                        Referring_MP_HTF__c,
+                        Treating_MP__c,
+                        Treating_MP_HTF__c,
+                        Best_Contact__c,
+                        Best_Contact_HTF__c,
+                        Hospital_Treatment_Facility_Treating__c,
+                        Treating_Medical_Professional_First_Name__c,
+                        Treating_Medical_Professional_Last_Name__c,
+                        Referrer_FirstName__c,
+                        Referrer_Last_Name__c,
+                        Best_Contact_HTF_Name__c,
+                        Best_Contact_for_Physician_First_Name__c,
+                        Best_Contact_for_Physician_Last_Name__c
                 FROM Lead
                 WHERE Id = :leadId
                 AND RecordTypeId = :Constant_AC.LEAD_RT_WISH_CHILD

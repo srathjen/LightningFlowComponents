@@ -35,13 +35,53 @@ Modification Log:
             }else if(lead.Status != 'Referred'){
                 _this.handleReferredLead(lead.Status, component);                               
             }else{
-                _this.handleLeadDupe(lead, component);
+                _this.ensureMPandHTFContactCreation(lead, component);
             }
         }else {
             _this.handleConfirmation(false, component, "Please Enter ICD Code or Condition Description", function(){
                 _this.closeQuickAction();
             }, true);
         }        
+    },
+    ensureMPandHTFContactCreation: function(lead, component){
+        //Check if lookup fields for Medical Professionals and HTFs are populated or Not
+        var _this = this,
+        	msg = $A.get("$Label.c.MP_or_HTF_are_required");
+        var contacts = [];
+        
+        //if referrer type is medical professional checks for referrer MP and HTF contact creation 
+        if(lead.Relationship_to_child__c == 'Medical Professional'){
+            if(!lead.Referring_MP__c && (lead.Referrer_FirstName__c || lead.Referrer_Last_Name__c)){
+                contacts.push(lead.Referrer_FirstName__c+' '+lead.Referrer_Last_Name__c);
+            }
+            if(!lead.Referring_MP_HTF__c && lead.Referring_MP_HTF_Name__c){
+                contacts.push(lead.Referring_MP_HTF_Name__c);
+            }
+        }
+        if(!lead.Treating_MP__c && (lead.Treating_Medical_Professional_First_Name__c || lead.Treating_Medical_Professional_Last_Name__c)) {
+            contacts.push(lead.Treating_Medical_Professional_First_Name__c + ' '+ lead.Treating_Medical_Professional_Last_Name__c);
+        }
+        if(!lead.Treating_MP_HTF__c && lead.Hospital_Treatment_Facility_Treating__c) {
+            contacts.push(lead.Hospital_Treatment_Facility_Treating__c);
+        }
+        if(!lead.Best_Contact__c && (lead.Best_Contact_for_Physician_First_Name__c || lead.Best_Contact_for_Physician_Last_Name__c)){
+            contacts.push(lead.Best_Contact_for_Physician_First_Name__c+' '+lead.Best_Contact_for_Physician_Last_Name__c);
+        }
+        if(!lead.Best_Contact_HTF__c && lead.Best_Contact_HTF_Name__c){
+            contacts.push(lead.Best_Contact_HTF_Name__c);
+        }
+        if(contacts.length > 0){
+            var addinMsg = '';
+            for(var i=1; i<=contacts.length; i++){
+                addinMsg += i +')'+ contacts[i-1] + '</br>';
+            }
+            msg += '</br>' + addinMsg;
+            _this.handleConfirmation(false, component, msg, function(){
+                _this.closeQuickAction();
+            }, true);
+        } else {
+            _this.handleLeadDupe(lead, component);
+        }
     },
     handleLeadDupe: function(lead, component){
         //find for lead dupe
