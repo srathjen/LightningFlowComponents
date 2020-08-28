@@ -460,6 +460,11 @@
                 <operation>equals</operation>
                 <value>Hospital Treatment Facility</value>
             </filterItems>
+            <filterItems>
+                <field>Account.Exclude_HTF_from_Referral_Form_Searches__c</field>
+                <operation>equals</operation>
+                <value>False</value>
+            </filterItems>
             <isOptional>true</isOptional>
         </lookupFilter>
         <referenceTo>Account</referenceTo>
@@ -518,6 +523,11 @@
                 <field>Account.RecordTypeId</field>
                 <operation>equals</operation>
                 <value>Hospital Treatment Facility</value>
+            </filterItems>
+            <filterItems>
+                <field>Account.Exclude_HTF_from_Referral_Form_Searches__c</field>
+                <operation>equals</operation>
+                <value>False</value>
             </filterItems>
             <isOptional>true</isOptional>
         </lookupFilter>
@@ -710,6 +720,11 @@
                 <field>Account.RecordTypeId</field>
                 <operation>equals</operation>
                 <value>Hospital Treatment Facility</value>
+            </filterItems>
+            <filterItems>
+                <field>Account.Exclude_HTF_from_Referral_Form_Searches__c</field>
+                <operation>equals</operation>
+                <value>False</value>
             </filterItems>
             <isOptional>true</isOptional>
         </lookupFilter>
@@ -4333,6 +4348,11 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
                 <operation>equals</operation>
                 <value>Hospital Treatment Facility</value>
             </filterItems>
+            <filterItems>
+                <field>Account.Exclude_HTF_from_Referral_Form_Searches__c</field>
+                <operation>equals</operation>
+                <value>False</value>
+            </filterItems>
             <isOptional>true</isOptional>
         </lookupFilter>
         <referenceTo>Account</referenceTo>
@@ -4571,6 +4591,11 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
                 <field>Account.RecordTypeId</field>
                 <operation>equals</operation>
                 <value>Hospital Treatment Facility</value>
+            </filterItems>
+            <filterItems>
+                <field>Account.Exclude_HTF_from_Referral_Form_Searches__c</field>
+                <operation>equals</operation>
+                <value>False</value>
             </filterItems>
             <isOptional>true</isOptional>
         </lookupFilter>
