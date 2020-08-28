@@ -4314,11 +4314,6 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Case.Intro_Email_Sent_Date__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
         <editable>false</editable>
         <field>Case.IsClosedOnCreate</field>
         <readable>false</readable>
@@ -7061,6 +7056,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Position__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Preferred_Contact_Best_Time_to_Call__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -23531,11 +23531,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>npe4__Relationship__c.Import_Id__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>npe4__Relationship__c.Medical_Needs__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>

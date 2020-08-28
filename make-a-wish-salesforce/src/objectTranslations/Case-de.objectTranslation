@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+﻿<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- Additional Medical Requests --></label>
         <name>Additional_Medical_Requests</name>
@@ -1156,10 +1156,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <help><!-- Date when the interview has been scheduled/occurs with the family --></help>
         <label><!-- Interview Date --></label>
         <name>Interview_date__c</name>
-    </fields>
-    <fields>
-        <label><!-- Intro Email Sent Date --></label>
-        <name>Intro_Email_Sent_Date__c</name>
     </fields>
     <fields>
         <label><!-- Hidden IsLocked --></label>

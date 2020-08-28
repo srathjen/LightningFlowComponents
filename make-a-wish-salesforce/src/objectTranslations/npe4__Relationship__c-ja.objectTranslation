@@ -47,10 +47,6 @@
         <name>Import_Id__c</name>
     </fields>
     <fields>
-        <label><!-- Medical Needs --></label>
-        <name>Medical_Needs__c</name>
-    </fields>
-    <fields>
         <label><!-- Migrated Record --></label>
         <name>Migrated_Record__c</name>
     </fields>

@@ -7,6 +7,10 @@
                 <value>false</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
+                <name>enableActionsConfiguration</name>
+                <value>false</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
                 <name>hideChatterActions</name>
                 <value>false</value>
             </componentInstanceProperties>
@@ -23,6 +27,44 @@
     <flexiPageRegions>
         <componentInstances>
             <componentName>force:detailPanel</componentName>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>lookupFieldName</name>
+                <value>npe4__Relationship__c.Id</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>titleFieldName</name>
+                <value>Medical Contact Details</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>updateQuickActionName</name>
+                <value>npe4__Relationship__c.Medical_Contact_Details</value>
+            </componentInstanceProperties>
+            <componentName>console:relatedRecord</componentName>
+            <visibilityRule>
+                <booleanFilter>(1 AND 2) OR (3 AND 4)</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.npe4__Contact__r.RecordType.Name}</leftValue>
+                    <operator>CONTAINS</operator>
+                    <rightValue>Wish Child</rightValue>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.npe4__RelatedContact__r.RecordType.Name}</leftValue>
+                    <operator>CONTAINS</operator>
+                    <rightValue>Medical Professional</rightValue>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.npe4__Contact__r.RecordType.Name}</leftValue>
+                    <operator>CONTAINS</operator>
+                    <rightValue>Medical Professional</rightValue>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.npe4__RelatedContact__r.RecordType.Name}</leftValue>
+                    <operator>CONTAINS</operator>
+                    <rightValue>Wish Child</rightValue>
+                </criteria>
+            </visibilityRule>
         </componentInstances>
         <mode>Replace</mode>
         <name>detailTabContent</name>
