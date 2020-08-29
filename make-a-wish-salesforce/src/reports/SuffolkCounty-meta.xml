@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReportFolder xmlns="http://soap.sforce.com/2006/04/metadata">
+    <folderShares>
+        <accessLevel>EditAllContents</accessLevel>
+        <sharedTo>Suffolk_County_Chapter</sharedTo>
+        <sharedToType>Role</sharedToType>
+    </folderShares>
+    <name>Suffolk County</name>
+</ReportFolder>
