@@ -10,10 +10,5 @@
         <sharedTo>swilliams@wish.org</sharedTo>
         <sharedToType>User</sharedToType>
     </folderShares>
-    <folderShares>
-        <accessLevel>View</accessLevel>
-        <sharedTo>National_Staff</sharedTo>
-        <sharedToType>RoleAndSubordinates</sharedToType>
-    </folderShares>
     <name>Finance Reports Folder</name>
 </ReportFolder>
