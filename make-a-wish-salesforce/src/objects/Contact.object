@@ -5589,14 +5589,50 @@ IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientat
         <fullName>Provider_Type__c</fullName>
         <description>Provider types for medical professional contacts</description>
         <externalId>false</externalId>
-        <label>MP Category</label>
+        <label>Medical Provider Type</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
         <valueSet>
-            <restricted>true</restricted>
-            <valueSetName>Medical_Provider_Category</valueSetName>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Social Worker</fullName>
+                    <default>false</default>
+                    <label>Social Worker</label>
+                </value>
+                <value>
+                    <fullName>Child Life Professional</fullName>
+                    <default>false</default>
+                    <label>Child Life Professional</label>
+                </value>
+                <value>
+                    <fullName>Nurse</fullName>
+                    <default>false</default>
+                    <label>Nurse</label>
+                </value>
+                <value>
+                    <fullName>Nurse Practitioner</fullName>
+                    <default>false</default>
+                    <label>Nurse Practitioner</label>
+                </value>
+                <value>
+                    <fullName>Physician Assistant</fullName>
+                    <default>false</default>
+                    <label>Physician Assistant</label>
+                </value>
+                <value>
+                    <fullName>Physician</fullName>
+                    <default>false</default>
+                    <label>Physician</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
         </valueSet>
     </fields>
     <fields>
@@ -7875,7 +7911,149 @@ provide contact information for each site on which you are active.</inlineHelpTe
         <type>MultiselectPicklist</type>
         <valueSet>
             <restricted>true</restricted>
-            <valueSetName>MP_Specialties</valueSetName>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Brain Tumor</fullName>
+                    <default>false</default>
+                    <label>Brain Tumor</label>
+                </value>
+                <value>
+                    <fullName>Cardiology</fullName>
+                    <default>false</default>
+                    <label>Cardiology</label>
+                </value>
+                <value>
+                    <fullName>Critical Care Medicine</fullName>
+                    <default>false</default>
+                    <label>Critical Care Medicine</label>
+                </value>
+                <value>
+                    <fullName>Dermatology</fullName>
+                    <default>false</default>
+                    <label>Dermatology</label>
+                </value>
+                <value>
+                    <fullName>Endocrinology</fullName>
+                    <default>false</default>
+                    <label>Endocrinology</label>
+                </value>
+                <value>
+                    <fullName>Gastroenterology</fullName>
+                    <default>false</default>
+                    <label>Gastroenterology</label>
+                </value>
+                <value>
+                    <fullName>General Pediatrics</fullName>
+                    <default>false</default>
+                    <label>General Pediatrics</label>
+                </value>
+                <value>
+                    <fullName>Genetics</fullName>
+                    <default>false</default>
+                    <label>Genetics</label>
+                </value>
+                <value>
+                    <fullName>Genetics &amp; Metabolism</fullName>
+                    <default>false</default>
+                    <label>Genetics &amp; Metabolism</label>
+                </value>
+                <value>
+                    <fullName>Genitourinary</fullName>
+                    <default>false</default>
+                    <label>Genitourinary</label>
+                </value>
+                <value>
+                    <fullName>Hematology</fullName>
+                    <default>false</default>
+                    <label>Hematology</label>
+                </value>
+                <value>
+                    <fullName>Hospitalist</fullName>
+                    <default>false</default>
+                    <label>Hospitalist</label>
+                </value>
+                <value>
+                    <fullName>Immunology</fullName>
+                    <default>false</default>
+                    <label>Immunology</label>
+                </value>
+                <value>
+                    <fullName>Infectious Disease</fullName>
+                    <default>false</default>
+                    <label>Infectious Disease</label>
+                </value>
+                <value>
+                    <fullName>Nephrology</fullName>
+                    <default>false</default>
+                    <label>Nephrology</label>
+                </value>
+                <value>
+                    <fullName>Neurology</fullName>
+                    <default>false</default>
+                    <label>Neurology</label>
+                </value>
+                <value>
+                    <fullName>Oncology</fullName>
+                    <default>false</default>
+                    <label>Oncology</label>
+                </value>
+                <value>
+                    <fullName>Orthopedics</fullName>
+                    <default>false</default>
+                    <label>Orthopedics</label>
+                </value>
+                <value>
+                    <fullName>Otolaryngology</fullName>
+                    <default>false</default>
+                    <label>Otolaryngology</label>
+                </value>
+                <value>
+                    <fullName>Pain Medicine</fullName>
+                    <default>false</default>
+                    <label>Pain Medicine</label>
+                </value>
+                <value>
+                    <fullName>Palliative Care Medicine</fullName>
+                    <default>false</default>
+                    <label>Palliative Care Medicine</label>
+                </value>
+                <value>
+                    <fullName>Physical Medicine &amp; Rehabilitation</fullName>
+                    <default>false</default>
+                    <label>Physical Medicine &amp; Rehabilitation</label>
+                </value>
+                <value>
+                    <fullName>Pulmonology</fullName>
+                    <default>false</default>
+                    <label>Pulmonology</label>
+                </value>
+                <value>
+                    <fullName>Rheumatology</fullName>
+                    <default>false</default>
+                    <label>Rheumatology</label>
+                </value>
+                <value>
+                    <fullName>Surgery</fullName>
+                    <default>false</default>
+                    <label>Surgery</label>
+                </value>
+                <value>
+                    <fullName>Transplant</fullName>
+                    <default>false</default>
+                    <label>Transplant</label>
+                </value>
+                <value>
+                    <fullName>Trauma &amp; Emergency Services</fullName>
+                    <default>false</default>
+                    <label>Trauma &amp; Emergency Services</label>
+                </value>
+                <value>
+                    <fullName>Urology</fullName>
+                    <default>false</default>
+                    <label>Urology</label>
+                </value>
+            </valueSetDefinition>
         </valueSet>
         <visibleLines>10</visibleLines>
     </fields>
