@@ -10,7 +10,6 @@
     <aura:attribute name="matches"
                     type="Map[]"
                     description="The resulting matches returned by the Apex controller."/>
-
     <!-- Attributes (set from parent component) -->
     <aura:attribute name="lookupId" 
                     type="String"
@@ -50,7 +49,10 @@
                     type="Boolean"
                     description="Determine if the input field should be disabled"
                     default="false"/>
-
+    <aura:attribute name="isExternalLookup"
+                    type="Boolean"
+                    description="Boolean to specialize the search when its being exposed externally via Guest User."
+                    default="false"/>
     <!-- Events -->
     <aura:handler name="init"
                   value="{!this}"

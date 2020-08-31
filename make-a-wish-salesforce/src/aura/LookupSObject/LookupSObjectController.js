@@ -11,13 +11,13 @@
     },
     // Search an SObject for matches
     search : function(cmp, event, helper) {
-        var lookupId = cmp.get('v.lookupId');
-        var clearEvent = cmp.getEvent('lookupSObjectClear');
+        let lookupId = cmp.get('v.lookupId');
+        let clearEvent = cmp.getEvent('lookupSObjectClear');
         clearEvent.setParams({
             'lookupId': lookupId
         });
-        clearEvent.fire(); 
         helper.doSearch(cmp);
+        clearEvent.fire();
     },
     // Hide lookup list when focus is lost
     blur : function(cmp, event, helper) {

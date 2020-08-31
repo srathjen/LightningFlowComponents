@@ -1,0 +1,7 @@
+<!--
+ - Created by gmayer on 26-Aug-20.
+ -->
+
+<aura:event type="APPLICATION" description="ExternalLookupEvent">
+    <aura:attribute name="EventData" type="Object"/>
+</aura:event>

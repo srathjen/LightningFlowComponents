@@ -20,35 +20,52 @@ public with sharing class LookupSObjectCtlr {
 			String sObjectAPIName,
 			String fieldsToReturn,
 			String formattedOutput,
-			Map<String, Object> filter) {
+			Map<String, Object> filter,
+			Boolean isExternalLookup) {
+
 		// Sanitize the input
 		String sanitizedSearchString = String.escapeSingleQuotes(searchString);
 		String sanitizedSObjectAPIName = String.escapeSingleQuotes(sObjectAPIName);
 		String sanitizedFieldsToReturn = String.escapeSingleQuotes(fieldsToReturn);
 		List<String> listFields = sanitizedFieldsToReturn.split(',');
 		List<Result> results = new List<Result>();
+
 		// Build our SOSL query
 		String searchQuery = '';
-		if (sObjectAPIName.equals('Contact')) {
+		if (isExternalLookup && sObjectAPIName.equals('Contact')) {
+			// Search only on a specific set of fields on Contact Lookup
 			searchQuery = 'FIND \'' + sanitizedSearchString + '*\' ' +
-					'IN ALL FIELDS RETURNING ' + sanitizedSObjectAPIName + '(' + sanitizedFieldsToReturn + ') ' +
-					'LIMIT 50';
+					'IN NAME FIELDS RETURNING ' + sanitizedSObjectAPIName + '(' + sanitizedFieldsToReturn +
+					' WHERE Exclude_MP_from_Referral_Form_Searches__c = FALSE AND npsp__Deceased__c = FALSE)' +
+					' LIMIT 50';
+		} else if (isExternalLookup && sObjectAPIName.equals('Account')) {
+			searchQuery = 'FIND \'' + sanitizedSearchString + '*\' ' +
+					'IN NAME FIELDS RETURNING ' + sanitizedSObjectAPIName + '(' + sanitizedFieldsToReturn +
+					' WHERE Exclude_HTF_from_Referral_Form_Searches__c = FALSE)' +
+					' LIMIT 50';
 		} else {
 			// Standard behaviour
 			searchQuery = 'FIND \'' + sanitizedSearchString + '*\' ' +
 					'IN ALL FIELDS RETURNING ' + sanitizedSObjectAPIName + '(' + sanitizedFieldsToReturn + ') ' +
 					'LIMIT 50';
 		}
+
 		// Execute the Query
 		List<List<SObject>> searchList = Search.query(searchQuery);
+
 		// Create a list of matches to return
 		if (!searchList[0].isEmpty()) {
+			String blank = '';
 			for (SObject so : searchList[0]) {
 				Result r = new Result();
 				r.Id = so.Id;
 				List<String> fieldValues = new List<String>();
 				for (String f : listFields) {
-					fieldValues.add(String.valueOf(so.get(f.trim())));
+					if (String.isEmpty(String.valueOf(so.get(f.trim())))) {
+						fieldValues.add(blank);
+					} else {
+						fieldValues.add(String.valueOf(so.get(f.trim())));
+					}
 				}
 				r.Description = String.format(formattedOutput, fieldValues);
 				results.add(r);
