@@ -4,6 +4,7 @@ Modification Log:
 2. 25/04/2018 - Vignesh SM - IME 131 - Line No. 73, 100, 103-106
 3. 12/07/2018 - Vignesh SM - IME 231
 4. 06/01/2020- Brittany SIW-543
+5. 08/28/2020- Pramod N - ODP-19
 */({
     globalParams:{            
     },
@@ -71,11 +72,7 @@ Modification Log:
             contacts.push(lead.Best_Contact_HTF_Name__c);
         }
         if(contacts.length > 0){
-            var addinMsg = '';
-            for(var i=1; i<=contacts.length; i++){
-                addinMsg += i +')'+ contacts[i-1] + '</br>';
-            }
-            msg += '</br>' + addinMsg;
+            msg += '</br>' + contacts.toString();
             _this.handleConfirmation(false, component, msg, function(){
                 _this.closeQuickAction();
             }, true);
