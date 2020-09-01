@@ -72,7 +72,7 @@ Modification Log:
             contacts.push(lead.Best_Contact_HTF_Name__c);
         }
         if(contacts.length > 0){
-            msg += '</br>' + contacts.toString();
+            msg += '</br>' + contacts.join(", ");
             _this.handleConfirmation(false, component, msg, function(){
                 _this.closeQuickAction();
             }, true);
