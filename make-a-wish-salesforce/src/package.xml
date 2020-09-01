@@ -1527,6 +1527,7 @@
     <members>Metro_Western_NY_Medical_Eligibility/Lead_Owner_by_Status_Metro_Western_NY</members>
     <members>Metro_Western_NY_Medical_Eligibility/Leads_Details_Metro_Western_NY</members>
     <members>Metro_Western_NY_Medical_Eligibility/Metro_Inquiry_Records_mxS</members>
+    <members>Metro_Western_NY_Medical_Eligibility/Metro_NY</members>
     <members>Metro_Western_NY_Medical_Eligibility/Metro_NY/DV_Online_vs_Paper_Part_A_DZ0</members>
     <members>Metro_Western_NY_Medical_Eligibility/Non_Verbal_Report_Metro_Western_NY</members>
     <members>Metro_Western_NY_Medical_Eligibility/Rush_Referrals_Report_Metro_Western_NY</members>
@@ -2084,6 +2085,7 @@
     <members>OKI/MedicalEligibility67/Pending_Diagnosis_Verification_SlR</members>
     <members>OKI/Rush_Referrals_Report_OKI</members>
     <members>Oklahoma</members>
+    <members>Oklahoma_Medical_Eligibility</members>
     <members>Oklahoma_Medical_Eligibility/Cases_in_Diagnosis_Verification_OK</members>
     <members>Oklahoma_Medical_Eligibility/Copy_of_Kiyana_s_Leads_Detail</members>
     <members>Oklahoma_Medical_Eligibility/Diagnosis_DNQ_v_Qualified_FY18</members>
