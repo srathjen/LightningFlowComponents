@@ -124,7 +124,6 @@
                     count++;
                 }
             }
-            console.log(selectedArray);
             if(selectedArray.indexOf("Other") > -1){//SIW-569 Changed unsupported method 'includes' to 'indexOf' for IE11 issue
                 document.getElementById('otherlanguagediv').style.display='block';
             }
@@ -205,6 +204,18 @@
                         <span class="familyAwareError text-muted"></span>
                     </div>
                 </div>
+                <!--<div class="form-group row medicalProvider">
+                        <label class="col-sm-3">{!$Label.Wish_Referral_Medical_Professional_Category}</label>
+                        <div class="col-sm-6">
+                            <apex:inputField value="{!currLead.Medical_Provider_Category__c}" styleClass="form-control col-xs-12 col-sm-12 c-select medProvCat" id="medprov" />
+                        </div>
+                    </div>-->
+                <div class="form-group row medicalProvider">
+                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_Medical_Professional_Category}</label></div>
+                    <div class="col-sm-6">
+                        <apex:inputField value="{!currLead.Referring_MP_Category__c}" styleClass="form-control col-xs-12 col-sm-12 c-select medProvCat refmpcategory" id="refmpcategory" />
+                    </div>
+                </div>
                 <div class="form-group row other">
                     <label class="col-sm-3">{!$Label.Wish_Referral_Provide_Relationship_to_Child}</label>
                     <div class="col-sm-6">
@@ -251,7 +262,6 @@
                                         <apex:inputText value="{!currLead.Referrer_Phone__c}" styleClass="form-control rphone phonemask numbers-only phonechk-std" html-placeholder="(000) 000-0000" id="rphone" html-pattern=".{10,14}" maxlength="14" />
                                     </div>
                                 </div>
-
                                 <div class="row" id="remaildiv">
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Email}</label></div>
                                     <div class="form-group col-sm-6">
@@ -259,7 +269,6 @@
 
                                     </div>
                                 </div>
-
                                 <div class="row" id="remail1div">
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Email}</label></div>
                                     <div class="form-group col-sm-6">
@@ -282,7 +291,6 @@
                             </div>
                         </div>
                     </div>
-
                     <!--Referrer is Medical Professional-->
                     <div class="refToMP">
                         <div class="form-group row">
@@ -295,8 +303,6 @@
                                 <apex:inputHidden id="externalReferrerAccountLookupOutput" value="{!mpHtfSearch.referringHospitalFacilityId}"/>
                             </div>
                         </div>
-                    </div>
-                    <div class="refToMP">
                         <div class="form-group row">
                             <div class="col-sm-3"><label><u>{!$Label.Wish_Referral_Referring_Medical_Professional}</u></label></div>
                         </div>
@@ -310,15 +316,9 @@
                         <div class="form-group row newRefMpChk">
                             <div class="col-sm-3"><label><u>{!$Label.Wish_Referral_Create_New_Medical_Professional}</u></label></div>
                             <div class="col-sm-6" style="padding-top: 8px">
-                                <!--<apex:actionRegion >-->
-                                <apex:inputCheckbox id="createNewRefMPchk" value="{!createNewRefMP}"/>
-                                <!--onclick="renderNewMpForm('Referring')-->
-                                <!--<apex:actionSupport event="onclick" rerender="refMpCreate" action="{!updateCheckbox}"/>-->
-                                <!--</apex:actionRegion>-->
+                                <apex:inputCheckbox id="createNewRefMPchk" value="{!createNewRefMP}" onChange="onClickCreateCheckbox(this.id, this.checked)" />
                             </div>
                         </div>
-                        <!--<apex:outputPanel id="refMpCreate">-->
-                        <!--<apex:outputPanel id="refMpCreateForm" rendered="{!createNewRefMP}">-->
                         <div class = "refMpForm">
                             <div class="form-group row">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Title}</label></div>
@@ -359,18 +359,19 @@
                             <div class="form-group row">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_State}</label></div>
                                 <div class="col-sm-6">
-                                    <!--<apex:selectList size="1" id="treating-state" value="{!treatingMpState}" styleClass="form-control col-xs-12 c-select state" >-->
                                     <apex:selectList size="1" id="refmpstate" value="{!currLead.Referring_MP_State__c}" styleClass="form-control col-xs-12 c-select state refmpstate" >
                                         <apex:selectOptions value="{!States}" />
                                     </apex:selectList>
                                 </div>
                             </div>
+                            <!--
                             <div class="form-group row">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Medical_Professional_Category}</label></div>
                                 <div class="col-sm-6">
                                     <apex:inputField value="{!currLead.Referring_MP_Category__c}" styleClass="form-control col-xs-12 col-sm-12 c-select medProvCat refmpcategory" id="refmpcategory" />
                                 </div>
                             </div>
+							-->
                             <div class="form-group row"> <!--p-r2c-1-->
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Medical_Professional_Specialty}</label></div>
                                 <div class="col-sm-6">
@@ -751,8 +752,8 @@
                 </fieldset>
                 <fieldset>
                     <legend>{!$Label.Wish_Referral_Treating_Medical_Professional_Information}</legend>
-                    <div class = "mpSearchCreate">
-                        <div class="form-group row repeatMedProf">
+                    <!--<div class = "mpSearchCreate">-->
+                        <div class="form-group row repeatMedProf mpRel">
                             <div class="col-sm-12 offset-sm-3">
                                 <label class="c-input c-checkbox">
                                     <apex:inputCheckbox value="{!copyReferrerInfo}"/>
@@ -761,35 +762,36 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="trtMpInfo">
+                            <div class = "mpSearchCreate">
+                        <div class="form-group row mpRel">
                             <div class="col-sm-3"><label><u>TREATING HOSPITAL/FACILITY</u></label></div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row mpRel">
                             <div class="col-sm-3" style="padding-top: 12px"><label>HOSPITAL/FACILITY SEARCH</label></div>
                             <div class="col-sm-6">
                                 <div id="externalTreatingAccountLookup"></div>
                                 <apex:inputHidden id="externalTreatingAccountLookupOutput" value="{!mpHtfSearch.treatingHospitalFacilityId}"/>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row mpRel">
                             <div class="col-sm-3"><label><u>{!$Label.Wish_Referral_Treating_Medical_Professional}</u></label></div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row mpRel">
                             <div class="col-sm-3" style="padding-top: 12px"><label>{!$Label.Wish_Referral_Medical_Professional_Search}</label></div>
                             <div class="col-sm-6">
                                 <div id="externalTreatingContactLookup"></div>
                                 <apex:inputHidden id="externalTreatingContactLookupOutput" value="{!mpHtfSearch.treatingMedicalProfessionalId}"/>
                             </div>
                         </div>
-                        <div class="form-group row newTrtMpChk"> <!--newRefMpChk-->
+                        <div class="form-group row newTrtMpChk mpRel">
                             <div class="col-sm-3"><label><u>{!$Label.Wish_Referral_Create_New_Medical_Professional}</u></label></div>
                             <div class="col-sm-6" style="padding-top: 8px">
-                                <apex:inputCheckbox id="createNewTrtMPchk" value="{!createNewRefMP}"/>
+                                <apex:inputCheckbox id="createNewTrtMPchk" value="{!createNewRefMP}" onChange="onClickCreateCheckbox(this.id, this.checked)" />
                             </div>
                         </div>
-                    </div>
-                    <div class = "trtMpForm">
-                        <div class="medToRepeat">
+                            </div>
+                        <div class="medToRepeat trtMpForm">
                             <div class="form-group row mpRel">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Title}</label></div>
                                 <div class="col-sm-6">
@@ -829,7 +831,6 @@
                             <div class="form-group row mpRel">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_State}</label></div>
                                 <div class="col-sm-6">
-                                    <!--<apex:selectList size="1" id="treating-state" value="{!treatingMpState}" styleClass="form-control col-xs-12 c-select state" >-->
                                     <apex:selectList size="1" id="mstate" value="{!currLead.Treating_MP_State__c}" styleClass="form-control col-xs-12 c-select state mstate" >
                                         <apex:selectOptions value="{!States}" />
                                     </apex:selectList>
@@ -841,7 +842,7 @@
                                     <apex:inputField value="{!currLead.Treating_MP_Category__c}" styleClass="form-control col-xs-12 col-sm-12 c-select medProvCat mcategory" id="mcategory" />
                                 </div>
                             </div>
-                            <div class="form-group row mpRel"> <!--p-r2c-1-->
+                            <div class="form-group row mpRel">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Medical_Professional_Specialty}</label></div>
                                 <div class="col-sm-6">
                                     <apex:selectList size="1" id="trtspecialty" value="{!currLead.Treating_MP_Specialty__c}" styleClass="form-control col-xs-12 c-select mspecialty">
@@ -849,7 +850,7 @@
                                     </apex:selectList>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row" id = "trtHtf">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Hospital_or_Treatment_Facility}</label></div>
                                 <div class="col-sm-6">
                                     <apex:inputText value="{!currLead.Hospital_Treatment_Facility_Treating__c}" styleClass="form-control" id="mphospitalname" maxlength="50" html-placeholder="{!$Label.Wish_Referral_Placeholder_Hospital_Facility_Name}" />
@@ -863,7 +864,7 @@
                                 </div>
                             </div>
                             -->
-                        </div>
+                    </div>
                     </div>
                 </fieldset>
                 <fieldset class="connected main-office-contact">
@@ -873,12 +874,13 @@
                     <div class="form-group row repeatMedProfBest">
                         <div class="col-sm-12 offset-sm-3">
                             <label class="c-input c-checkbox">
-                                <apex:inputCheckbox value="{!copyReferrerInfo}"/>
+                                <apex:inputCheckbox value="{!copyReferrerInfoBest}"/>
                                 <span class="c-indicator sas"></span>
                                 {!$Label.Wish_Referral_Same_as_Referrer_Information}
                             </label>
                         </div>
                     </div>
+                    <div class="bestMpInfo">
                     <div class = "mpSearchCreate">
                         <div class="form-group row">
                             <div class="col-sm-3"><label><u>Best Medical Contact</u></label></div>
@@ -890,10 +892,10 @@
                                 <apex:inputHidden id="externalBestContactLookupOutput" value="{!mpHtfSearch.bestMedicalProfessionalId}"/>
                             </div>
                         </div>
-                        <div class="form-group row newBestMpChk"> <!--newRefMpChk-->
+                        <div class="form-group row newBestMpChk">
                             <div class="col-sm-3"><label><u>{!$Label.Wish_Referral_Create_New_Medical_Professional}</u></label></div>
                             <div class="col-sm-6" style="padding-top: 8px">
-                                <apex:inputCheckbox id="createNewBestMPchk" value="{!createNewRefMP}"/>
+                                <apex:inputCheckbox id="createNewBestMPchk" value="{!createNewRefMP}" onChange="onClickCreateCheckbox(this.id, this.checked)" />
                             </div>
                         </div>
                     </div>
@@ -921,7 +923,7 @@
                         <div class="form-group row">
                             <div class="col-sm-3"><label>{!$Label.Wish_Referral_Phone}</label></div>
                             <div class="col-sm-6">
-                                <apex:inputText value="{!currLead.Best_contact_for_Physician_Phone__c}" styleclass="form-control mpmaincontactphone numbers-only mpmaincontactphone" html-placeholder="(000) 000-0000" id="mpmaincontactphone" html-pattern=".{10,14}" maxlength="10" />
+                                <apex:inputText value="{!currLead.Best_contact_for_Physician_Phone__c}" styleclass="form-control phonemask numbers-only mpmaincontactphone" html-placeholder="(000) 000-0000" id="mpmaincontactphone" html-pattern=".{10,14}" maxlength="10" />
                             </div>
                         </div>
                         <div class="form-group row">
@@ -967,6 +969,7 @@
                             </div>
                         </div>
                         -->
+                    </div>
                     </div>
                 </fieldset>
 
@@ -1130,25 +1133,25 @@
             </script>
         <script>_satellite.pageBottom();</script>
     </apex:outputPanel>
-    <apex:includeLightning/>
+    <apex:includeLightning />
     <script>
         var rel = null;
         function changeRelationship(ref, val){
             $(".shownOnYes").addClass("fam-aware-overlay");//SIW-556 Issue fix
             rel = val;
             document.getElementById('hhh').style.display = 'none';
-            var prefix = ref.split('relationToChild')[0];
-            //alert(document.getElementsByClassName('remail')[0].id);
             if(val == 'Medical Professional'){
                 document.getElementById('remaildiv').style.display = '';
                 document.getElementById('remail1div').style.display = 'none';
                 document.getElementById('healthProvider').style.display = 'none';
                 document.getElementsByClassName('refToParent')[0].style.display = 'none';
                 document.getElementsByClassName('refToMP')[0].style.display = 'block';
-                document.getElementsByClassName('trtMpForm')[0].style.display = 'none';
                 for(let mpRelElement of document.getElementsByClassName('mpRel')) {
                     mpRelElement.style.display = 'block';
                 }
+                document.getElementById("trtHtf").style.display='none';
+                document.getElementsByClassName('repeatMedProf')[0].style.display = 'none';
+                document.getElementsByClassName('trtMpForm')[0].style.display = 'none';
             } else if(val == 'Self' || val == 'Parent/Guardian' || val == 'Family Member/Relative'){
                 document.getElementById('healthProvider').style.display = '';
                 document.getElementById('remail1div').style.display = 'none';
@@ -1158,6 +1161,7 @@
                 for(let mpRelElement of document.getElementsByClassName('mpRel')) {
                     mpRelElement.style.display = 'none';
                 }
+                document.getElementById("trtHtf").style.display='block';
             } else {
                 document.getElementById('remaildiv').style.display = 'none';
                 document.getElementById('remail1div').style.display = '';
@@ -1168,6 +1172,7 @@
                 for(let mpRelElement of document.getElementsByClassName('mpRel')) {
                     mpRelElement.style.display = 'none';
                 }
+                document.getElementById("trtHtf").style.display='block';
             }
             if(val == 'Parent/Guardian') {
                 $(".shownOnYes").addClass("fam-aware-overlay");
@@ -1249,89 +1254,93 @@
         }
         //SIW-370 Ends
 
-        $Lightning.use("c:ExternalLookupApp", function () {
-            $Lightning.createComponent("c:ExternalLookupSObject",
-                {
-                    lookupId: 'externalReferrerContactLookup',
-                    sObjectAPIName: 'Contact',
-                    label:'',
-                    pluralHint:'example: Doogie Howser',
-                    fieldsToReturn: 'Name, MailingState, MailingCity, Provider_Type__c, Specialty__c',
-                    formattedOutput: '{0} - {1}, {2}, {3}, {4}',
-                    iconFullName:''
-                },
-                "externalReferrerContactLookup",
-                function () {
-                    $A.eventService.addHandler({"event": "c:ExternalLookupEvent", "handler": handleEventResponse});
-                });
-        });
-        $Lightning.use("c:ExternalLookupApp", function () {
-            $Lightning.createComponent("c:ExternalLookupSObject",
-                {
-                    lookupId: 'externalReferrerAccountLookup',
-                    sObjectAPIName: 'Account',
-                    label:'',
-                    pluralHint:'Referring Hospital/Facility',
-                    fieldsToReturn: 'Name, Alias__c, BillingCity, BillingState',
-                    formattedOutput: '{0} - {1}, {2}, {3}',
-                    iconFullName:''
-                },
-                "externalReferrerAccountLookup",
-                function () {
-                    $A.eventService.addHandler({"event": "c:ExternalLookupEvent", "handler": handleEventResponse});
-                });
-        });
+        let isWishReferralFormSubmitted = (document.getElementById('j_id0:frm:panel') === undefined
+        || document.getElementById('j_id0:frm:panel') === null);
+        if(!isWishReferralFormSubmitted) {
+            $Lightning.use("c:ExternalLookupApp", function () {
+                $Lightning.createComponent("c:ExternalLookupSObject",
+                    {
+                        lookupId: 'externalReferrerContactLookup',
+                        sObjectAPIName: 'Contact',
+                        label:'',
+                        pluralHint:'example: Doogie Howser',
+                        fieldsToReturn: 'Name, MailingState, MailingCity, Provider_Type__c, Specialty__c',
+                        formattedOutput: '{0} - {1}, {2}, {3}, {4}',
+                        iconFullName:''
+                    },
+                    "externalReferrerContactLookup",
+                    function () {
 
-        $Lightning.use("c:ExternalLookupApp", function () {
-            $Lightning.createComponent("c:ExternalLookupSObject",
-                {
-                    lookupId: 'externalTreatingContactLookup',
-                    sObjectAPIName: 'Contact',
-                    label:'',
-                    pluralHint:'example: Doogie Howser',
-                    fieldsToReturn: 'Name, MailingState, MailingCity, Provider_Type__c, Specialty__c',
-                    formattedOutput: '{0} - {1}, {2}, {3}, {4}',
-                    iconFullName:''
-                },
-                "externalTreatingContactLookup",
-                function () {
-                    $A.eventService.addHandler({"event": "c:ExternalLookupEvent", "handler": handleEventResponse});
-                });
-        });
-        $Lightning.use("c:ExternalLookupApp", function () {
-            $Lightning.createComponent("c:ExternalLookupSObject",
-                {
-                    lookupId: 'externalTreatingAccountLookup',
-                    sObjectAPIName: 'Account',
-                    label:'',
-                    pluralHint:'Treating Hospital/Facility',
-                    fieldsToReturn: 'Name, Alias__c, BillingCity, BillingState',
-                    formattedOutput: '{0} - {1}, {2}, {3}',
-                    iconFullName:''
-                },
-                "externalTreatingAccountLookup",
-                function () {
-                    $A.eventService.addHandler({"event": "c:ExternalLookupEvent", "handler": handleEventResponse});
-                });
-        });
+                        $A.eventService.addHandler({"event": "c:ExternalLookupEvent", "handler": handleEventResponse});
+                    });
+            });
+            $Lightning.use("c:ExternalLookupApp", function () {
+                $Lightning.createComponent("c:ExternalLookupSObject",
+                    {
+                        lookupId: 'externalReferrerAccountLookup',
+                        sObjectAPIName: 'Account',
+                        label:'',
+                        pluralHint:'Referring Hospital/Facility',
+                        fieldsToReturn: 'Name, Alias__c, BillingCity, BillingState',
+                        formattedOutput: '{0} - {1}, {2}, {3}',
+                        iconFullName:''
+                    },
+                    "externalReferrerAccountLookup",
+                    function () {
+                        $A.eventService.addHandler({"event": "c:ExternalLookupEvent", "handler": handleEventResponse});
+                    });
+            });
+            $Lightning.use("c:ExternalLookupApp", function () {
+                $Lightning.createComponent("c:ExternalLookupSObject",
+                    {
+                        lookupId: 'externalTreatingContactLookup',
+                        sObjectAPIName: 'Contact',
+                        label:'',
+                        pluralHint:'example: Doogie Howser',
+                        fieldsToReturn: 'Name, MailingState, MailingCity, Provider_Type__c, Specialty__c',
+                        formattedOutput: '{0} - {1}, {2}, {3}, {4}',
+                        iconFullName:''
+                    },
+                    "externalTreatingContactLookup",
+                    function () {
+                        $A.eventService.addHandler({"event": "c:ExternalLookupEvent", "handler": handleEventResponse});
+                    });
+            });
+            $Lightning.use("c:ExternalLookupApp", function () {
+                $Lightning.createComponent("c:ExternalLookupSObject",
+                    {
+                        lookupId: 'externalTreatingAccountLookup',
+                        sObjectAPIName: 'Account',
+                        label:'',
+                        pluralHint:'Treating Hospital/Facility',
+                        fieldsToReturn: 'Name, Alias__c, BillingCity, BillingState',
+                        formattedOutput: '{0} - {1}, {2}, {3}',
+                        iconFullName:''
+                    },
+                    "externalTreatingAccountLookup",
+                    function () {
+                        $A.eventService.addHandler({"event": "c:ExternalLookupEvent", "handler": handleEventResponse});
+                    });
+            });
+            $Lightning.use("c:ExternalLookupApp", function () {
+                $Lightning.createComponent("c:ExternalLookupSObject",
+                    {
+                        lookupId: 'externalBestContactLookup',
+                        sObjectAPIName: 'Contact',
+                        label:'',
+                        pluralHint:'example: Doogie Howser',
+                        fieldsToReturn: 'Name, MailingState, MailingCity, Provider_Type__c, Specialty__c',
+                        formattedOutput: '{0} - {1}, {2}, {3}, {4}',
+                        iconFullName:''
+                    },
+                    "externalBestContactLookup",
+                    function () {
+                        $A.eventService.addHandler({"event": "c:ExternalLookupEvent", "handler": handleEventResponse});
+                    });
+            });
+        }
 
-        $Lightning.use("c:ExternalLookupApp", function () {
-            $Lightning.createComponent("c:ExternalLookupSObject",
-                {
-                    lookupId: 'externalBestContactLookup',
-                    sObjectAPIName: 'Contact',
-                    label:'',
-                    pluralHint:'example: Doogie Howser',
-                    fieldsToReturn: 'Name, MailingState, MailingCity, Provider_Type__c, Specialty__c',
-                    formattedOutput: '{0} - {1}, {2}, {3}, {4}',
-                    iconFullName:''
-                },
-                "externalBestContactLookup",
-                function () {
-                    $A.eventService.addHandler({"event": "c:ExternalLookupEvent", "handler": handleEventResponse});
-                });
-        });
-
+        // Function to handle the Event of the search component and get the Id of the record
         function handleEventResponse(event) {
             let eventData = event.getParam("EventData");
             let field;
@@ -1350,6 +1359,29 @@
                 field.value = eventData.recordId;
             } else if (field && eventData.eventType === 'clear') {
                 field.value = '';
+            }
+        }
+
+        // Function to change the Search related field to disabled
+        function onClickCreateCheckbox(id, isChecked){
+            let fieldInput;
+            let field;
+            if(id === 'j_id0:frm:createNewRefMPchk'){
+                fieldInput = document.querySelector('#externalReferrerContactLookup lightning-input');
+                field = document.getElementById('j_id0:frm:externalReferrerContactLookupOutput');
+            } else if(id === 'j_id0:frm:createNewTrtMPchk') {
+                fieldInput = document.querySelector('#externalTreatingContactLookup lightning-input');
+                field = document.getElementById('j_id0:frm:externalTreatingContactLookupOutput');
+            } else if(id === 'j_id0:frm:createNewBestMPchk') {
+                fieldInput = document.querySelector('#externalBestContactLookup lightning-input');
+                field = document.getElementById('j_id0:frm:externalBestContactLookupOutput');
+            }
+            if(field && fieldInput && isChecked === true){
+                field.value = '';
+                fieldInput.value = '';
+                fieldInput.disabled = true;
+            } if(field && fieldInput && isChecked === false){
+                fieldInput.disabled = false
             }
         }
     </script>

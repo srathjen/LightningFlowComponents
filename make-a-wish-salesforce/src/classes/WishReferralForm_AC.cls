@@ -24,6 +24,7 @@ global class WishReferralForm_AC {
 	public String warningMsg { get; set; }
 	public Boolean displayWarningPopup { get; set; }
 	public Boolean copyReferrerInfo { get; set; }
+    public Boolean copyReferrerInfoBest { get; set; }
 	public Boolean copyReferrerInfoToWish { get; set; }
 	public String currState { get; set; }
 	public String diagnosisMonth { get; set; }
@@ -47,6 +48,7 @@ global class WishReferralForm_AC {
 		currLead = new Lead();
 		copyReferrerInfoToWish = false;
 		copyReferrerInfo = false;
+        copyReferrerInfoBest = false;
 		icdOrPcd = '';
 		displayChildFrm = false;
 		YES = 'Yes';
@@ -61,17 +63,11 @@ global class WishReferralForm_AC {
 	 * Create new lead
 	 */
 	public PageReference CreateLead() {
-		if(String.isNotEmpty(mpHtfSearch.referringMedicalProfessionalId)){
-			currLead.Referring_MP__c = mpHtfSearch.referringMedicalProfessionalId;
-		} else if(String.isNotEmpty(mpHtfSearch.referringHospitalFacilityId)){
-			currLead.Treating_MP__c = mpHtfSearch.referringHospitalFacilityId;
-		} else if(String.isNotEmpty(mpHtfSearch.treatingMedicalProfessionalId)){
-			currLead.Treating_MP__c = mpHtfSearch.treatingMedicalProfessionalId;
-		} else if(String.isNotEmpty(mpHtfSearch.treatingHospitalFacilityId)){
-			currLead.Treating_MP__c = mpHtfSearch.treatingHospitalFacilityId;
-		} else if(String.isNotEmpty(mpHtfSearch.bestMedicalProfessionalId)){
-			currLead.Best_Contact__c = mpHtfSearch.bestMedicalProfessionalId;
+		if (currLead.Relationship_to_child__c != null) {
+			currLead.Relationship_to_child__c = currLead.Relationship_to_child__c.trim();
 		}
+
+		setLookupSearchMpHtf();
 
 		//SIW-563: Modified condition to fix email issue for all relationship type
 		if (currLead.Relationship_to_child__c != null) {
@@ -86,9 +82,6 @@ global class WishReferralForm_AC {
 		List<String> lstLog = new List<String>();
 		try {
 			currLead.PCD_ICD__c = icdOrPcd;
-			if (currLead.Relationship_to_child__c != null) {
-				currLead.Relationship_to_child__c = currLead.Relationship_to_child__c.trim();
-			}
 			currLead.Country = Constant_AC.LEAD_COUNTRY_UNITED_STATES;
 			List<ICD_Codes__c> icdCodeInfoList = getIcdCodes(diagnosisFilter);
 			if (icdCodeInfoList.size() > 0) {
@@ -204,16 +197,6 @@ global class WishReferralForm_AC {
 					currLead.ReferralComment__c = referralComment;
 				} else {
 					currLead.ReferralComment__c = '';
-				}
-				if (currLead.Relationship_to_child__c == Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL
-						&& (currLead.Medical_Provider_Category__c == Constant_AC.LEAD_MEDICAL_PROVIDER_NURSE_PRACTITIONER
-						|| currLead.Medical_Provider_Category__c == Constant_AC.LEAD_MEDICAL_PROVIDER_PHYSICIAN_ASSISTANT
-						|| currLead.Medical_Provider_Category__c == Constant_AC.LEAD_MEDICAL_PROVIDER_PHYSICIAN)) {
-					currLead.Medical_Professional_First_Name__c = currLead.Referrer_FirstName__c;
-					currLead.Medical_Professional_Last_Name__c = currLead.Referrer_Last_Name__c;
-					currLead.Medical_Professional_Phone__c = currLead.Referrer_Phone__c;
-					currLead.Medical_Professional_Email__c = currLead.Referrer_Email__c;
-					currLead.Hospital_Treatment_Facility__c = currLead.Hospital_Treatment_Facility_Treating__c;
 				}
 				if (!(String.isBlank(diagnosisYear))) {
 					if (String.isBlank(diagnosisMonth)) {
@@ -453,6 +436,58 @@ global class WishReferralForm_AC {
 			currLead.Medical_Professional_Email__c = '';
 		}
 	}
+
+	/**
+	 * Setting the lookup search Medical Professionals and Hospital Facilities on the Lead
+	*/
+	public void setLookupSearchMpHtf(){
+		if(String.isNotEmpty(currLead.Relationship_to_child__c)
+				&& currLead.Relationship_to_child__c.equals(Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL)) {
+			if(String.isNotEmpty(mpHtfSearch.referringMedicalProfessionalId)){
+				currLead.Referring_MP__c = mpHtfSearch.referringMedicalProfessionalId;
+			}
+			if(String.isNotEmpty(mpHtfSearch.referringHospitalFacilityId)){
+				currLead.Referring_MP_HTF__c = mpHtfSearch.referringHospitalFacilityId;
+			}
+			if(String.isNotEmpty(mpHtfSearch.treatingMedicalProfessionalId)){
+				currLead.Treating_MP__c = mpHtfSearch.treatingMedicalProfessionalId;
+			}
+			if(String.isNotEmpty(mpHtfSearch.treatingHospitalFacilityId)){
+				currLead.Treating_MP_HTF__c = mpHtfSearch.treatingHospitalFacilityId;
+			}
+			if(String.isNotEmpty(mpHtfSearch.bestMedicalProfessionalId)){
+				currLead.Best_Contact__c = mpHtfSearch.bestMedicalProfessionalId;
+			}
+			if(copyReferrerInfo == true) {
+				if(currLead.Referring_MP__c != null) {
+					currLead.Treating_MP__c = currLead.Referring_MP__c;
+				}
+				if(currLead.Referring_MP_HTF__c != null) {
+					currLead.Treating_MP_HTF__c = currLead.Referring_MP_HTF__c;
+				}
+			} else if(copyReferrerInfoBest == true) {
+				if(currLead.Referring_MP__c != null) {
+					currLead.Best_Contact__c = currLead.Referring_MP__c;
+				}
+				if(currLead.Referring_MP_HTF__c != null) {
+					currLead.Best_Contact_HTF__c = currLead.Referring_MP_HTF__c;
+				}
+			}
+		}
+	}
+    
+    /**
+	*Populate referrer information with MP referrer information
+	*/
+    public void populateReferralInfoFromMP() {
+        if(currLead.Referring_MP__c == null) {
+            currLead.Referrer_FirstName__c = currLead.Referring_MP_First_Name__c;
+            currLead.Referrer_Last_Name__c = currLead.Referring_MP_Last_Name__c;
+            currLead.Referrer_Phone__c = currLead.Referring_MP_Phone__c;
+            currLead.Referrer_Email__c = currLead.Referring_MP_Email__c;
+            currLead.Referrer_City__c = currLead.Referring_MP_City__c;
+        }
+    }
 
 	/**
 	 * Display data entry table based on number of siblings
