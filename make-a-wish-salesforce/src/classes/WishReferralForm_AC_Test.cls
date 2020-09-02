@@ -46,6 +46,11 @@ private class WishReferralForm_AC_Test {
 		List<ICD_Codes__c> icdCodes = TestDataFactory.createIcdCode(1);
 		icdCodes[0].Name = 'c00';
 		insert icdCodes;
+        
+        Account treatingHospital = TestDataFactory.createAccount(1)[0];
+        treatingHospital.recordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID;
+        treatingHospital.Name = 'Phoenix General Hospital';
+        insert treatingHospital;
 	}
 
 	@isTest
@@ -453,4 +458,46 @@ private class WishReferralForm_AC_Test {
 		obj.getdiaYear();
 		obj.getCommunication();
 	}
+    
+    @isTest
+    static void validateCopyLookupToTreatingMP() {
+        Contact referrer = [SELECT Id FROM Contact  WHERE FirstName = 'Testing1'];
+        Account hospital = [SELECT Id FROM Account WHERE Name = 'Phoenix General Hospital'];
+        
+        PageReference pageRef = Page.WishReferralForm_VF;
+        Test.setCurrentPage(pageRef);
+        ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
+        WishReferralForm_AC controller = new WishReferralForm_AC();
+        controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+        controller.copyReferrerInfo = true;
+        controller.currLead.Referring_MP__c = referrer.Id;
+        controller.currLead.Referring_MP_HTF__c = hospital.Id;
+        Test.startTest();
+        controller.CreateLead();
+        Test.stopTest();
+        
+        System.assert(controller.currLead.Treating_MP__c == controller.currLead.Referring_MP__c);
+        System.assert(controller.currLead.Treating_MP_HTF__c == controller.currLead.Referring_MP_HTF__c);
+    }
+    
+    @isTest
+    static void validateCopyLookupToBestMP() {
+        Contact referrer = [SELECT Id FROM Contact  WHERE FirstName = 'Testing1'];
+        Account hospital = [SELECT Id FROM Account WHERE Name = 'Phoenix General Hospital'];
+        
+        PageReference pageRef = Page.WishReferralForm_VF;
+        Test.setCurrentPage(pageRef);
+        ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
+        WishReferralForm_AC controller = new WishReferralForm_AC();
+        controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+        controller.copyReferrerInfoBest = true;
+        controller.currLead.Referring_MP__c = referrer.Id;
+        controller.currLead.Referring_MP_HTF__c = hospital.Id;
+        Test.startTest();
+        controller.CreateLead();
+        Test.stopTest();
+        
+        System.assert(controller.currLead.Best_Contact__c == controller.currLead.Referring_MP__c);
+        System.assert(controller.currLead.Best_Contact_HTF__c == controller.currLead.Referring_MP_HTF__c);
+    }
 }
