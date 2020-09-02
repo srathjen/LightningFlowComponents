@@ -56,15 +56,15 @@
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>lookupFieldName</name>
-                <value>Lead.Id</value>
+                <value>Id</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>titleFieldName</name>
-                <value>Medical Information</value>
+                <value>Diagnosis Verification</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>updateQuickActionName</name>
-                <value>Lead.Medical_Information</value>
+                <value>Lead.Diagnosis_Verification</value>
             </componentInstanceProperties>
             <componentName>console:relatedRecord</componentName>
         </componentInstances>
@@ -75,15 +75,15 @@
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>lookupFieldName</name>
-                <value>Id</value>
+                <value>Lead.Id</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>titleFieldName</name>
-                <value>Diagnosis Verification</value>
+                <value>Medical Information</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>updateQuickActionName</name>
-                <value>Lead.Diagnosis_Verification</value>
+                <value>Lead.Medical_Information</value>
             </componentInstanceProperties>
             <componentName>console:relatedRecord</componentName>
         </componentInstances>
