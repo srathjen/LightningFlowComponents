@@ -1697,7 +1697,15 @@
     <members>MissouriKansas/BaselineReports54/Non_Verbal_Report_Missouri_and_Kansas</members>
     <members>MissouriKansas/BaselineReports54/Rush_Referrals_Report_Missouri_Kansas</members>
     <members>MissouriKansas/MedicalEligibility54</members>
+    <members>MissouriKansas/MedicalEligibility54/Copy_of_Qualified_To_Contact</members>
+    <members>MissouriKansas/MedicalEligibility54/Hospital_Referral_Report</members>
+    <members>MissouriKansas/MedicalEligibility54/Leads_Need_Contact_for_DV</members>
     <members>MissouriKansas/MedicalEligibility54/Missouri_Kansas_Lead_Detail_94R</members>
+    <members>MissouriKansas/MedicalEligibility54/MOKAN_Leads_in_Eligibility_Review</members>
+    <members>MissouriKansas/MedicalEligibility54/MOKAN_Referrals_FY19</members>
+    <members>MissouriKansas/MedicalEligibility54/MOKAN_Referrals_YTD</members>
+    <members>MissouriKansas/MedicalEligibility54/Referrals_By_Month_FY19_and_FY20</members>
+    <members>MissouriKansas/MedicalEligibility54/Referrals_by_Referral_Source</members>
     <members>MOKAN</members>
     <members>MOKAN/Copy_of_Qualified_To_Contact</members>
     <members>MOKAN/Leads_Need_Contact_for_DV</members>
@@ -2117,6 +2125,7 @@
     <members>Oklahoma/MedicalEligibility66/HOSPITALS_PHYSICIANS</members>
     <members>Oklahoma/MedicalEligibility66/Leads_Detail_OK1</members>
     <members>Oklahoma/MedicalEligibility66/Organize_by_Date</members>
+    <members>Oklahoma/MedicalEligibility66/Physicians_hospitals_faxes</members>
     <members>Oklahoma/MedicalEligibility66/Referred_v_DNQ_how_did_you_hear</members>
     <members>Oklahoma/MedicalEligibility66/Wish_Referrals_Received6</members>
     <members>Oklahoma/Wish_Referrals_Received6</members>
@@ -2182,6 +2191,7 @@
     <members>PuertoRico/BaselineReports72/Rush_Referrals_Report_Puerto_Rico</members>
     <members>PuertoRico/Diagnosis_Questions_Puerto_Rico</members>
     <members>PuertoRico/MedicalEligibility72</members>
+    <members>PuertoRico/MedicalEligibility72/Diagnosis_Questions_Puerto_Rico</members>
     <members>RAD_Team_Test_Folder/AutoQualified_Report_jDK</members>
     <members>RAD_Team_Test_Folder/Cases_Referral_Source</members>
     <members>RAD_Team_Test_Folder/Cases_Total_Referrals</members>
