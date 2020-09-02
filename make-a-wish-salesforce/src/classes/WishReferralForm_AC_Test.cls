@@ -312,28 +312,31 @@ private class WishReferralForm_AC_Test {
 
 		System.assertEquals(Constant_AC.LEAD_STATUS_INQUIRY, controller.currLead.Status);
 	}
-
-	@isTest
-	static void relationshipMedicalProfessional() {
-		PageReference pageRef = Page.WishReferralForm_VF;
-		Test.setCurrentPage(pageRef);
-		ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
-
-		WishReferralForm_AC controller = new WishReferralForm_AC();
-		controller.currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
-		controller.currLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
-		controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
-		controller.currLead.Medical_Provider_Category__c = 'Nurse Practitioner';
-		controller.currLead.Referrer_FirstName__c = 'Doctor';
-		controller.currLead.Referrer_Last_Name__c = 'Pepper';
-
-		Test.startTest();
-		controller.CreateLead();
-		Test.stopTest();
-
-		System.assert(String.isNotEmpty(controller.currLead.Medical_Professional_First_Name__c));
-		System.assert(String.isNotEmpty(controller.currLead.Medical_Professional_Last_Name__c));
-	}
+    
+    @isTest
+    static void relationshipMedicalProfessional() {
+        PageReference pageRef = Page.WishReferralForm_VF;
+        Test.setCurrentPage(pageRef);
+        ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
+        
+        WishReferralForm_AC controller = new WishReferralForm_AC();
+        controller.currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
+        controller.currLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
+        controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+        controller.currLead.Medical_Provider_Category__c = 'Nurse Practitioner';
+        controller.currLead.Referring_MP_First_Name__c = 'Jamie';
+        controller.currLead.Referring_MP_Last_Name__c = 'Pepper';
+        controller.currLead.Referrer_Email__c = 'jamie@pepper.com';
+        controller.currLead.Referring_MP_City__c = 'Phoenix';
+        
+        Test.startTest();
+        controller.CreateLead();
+        Test.stopTest();
+        
+        System.assert(controller.currLead.Referrer_FirstName__c == controller.currLead.Referring_MP_First_Name__c);
+        System.assert(controller.currLead.Referrer_Last_Name__c == controller.currLead.Referring_MP_Last_Name__c);
+        System.assert(controller.currLead.Referrer_Email__c == controller.currLead.Referring_MP_Email__c);
+    }
 
 	@isTest
 	static void medicalFirstNameblank() {

@@ -204,12 +204,6 @@
                         <span class="familyAwareError text-muted"></span>
                     </div>
                 </div>
-                <!--<div class="form-group row medicalProvider">
-                        <label class="col-sm-3">{!$Label.Wish_Referral_Medical_Professional_Category}</label>
-                        <div class="col-sm-6">
-                            <apex:inputField value="{!currLead.Medical_Provider_Category__c}" styleClass="form-control col-xs-12 col-sm-12 c-select medProvCat" id="medprov" />
-                        </div>
-                    </div>-->
                 <div class="form-group row medicalProvider">
                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Medical_Professional_Category}</label></div>
                     <div class="col-sm-6">
@@ -294,10 +288,10 @@
                     <!--Referrer is Medical Professional-->
                     <div class="refToMP">
                         <div class="form-group row">
-                            <div class="col-sm-3"><label><u>REFFERING HOSPITAL/FACILITY</u></label></div>
+                            <div class="col-sm-3"><label><u>{!$Label.Wish_Referral_Referring_Hospital_Facility}</u></label></div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-3" style="padding-top: 12px"><label>HOSPITAL/FACILITY SEARCH</label></div>
+                            <div class="col-sm-3" style="padding-top: 12px"><label>{!$Label.Wish_Referral_Hospital_Facility_Search}</label></div>
                             <div class="col-sm-6">
                                 <div id="externalReferrerAccountLookup"></div>
                                 <apex:inputHidden id="externalReferrerAccountLookupOutput" value="{!mpHtfSearch.referringHospitalFacilityId}"/>
@@ -341,13 +335,13 @@
                             <div class="form-group row">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Phone}</label></div>
                                 <div class="col-sm-6">
-                                    <apex:inputText value="{!currLead.Referring_MP_Phone__c}" styleClass="form-control refmpphone phonemask numbers-only" html-placeholder="(000) 000-0000" id="refmpphone" html-pattern=".{10,14}" maxlength="10" />
+                                    <apex:inputText value="{!currLead.Referring_MP_Phone__c}" styleClass="form-control refmpphone phonemask numbers-only refContact" html-placeholder="(000) 000-0000" id="refmpphone" html-pattern=".{10,14}" maxlength="10" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Email}</label></div>
                                 <div class="form-group col-sm-6">
-                                    <apex:inputText value="{!currLead.Referring_MP_Email__c}" styleClass="form-control refmpemail email-std" html-placeholder="medicalprofessional_email@domain.com" id="refmpemail" maxlength="80" />
+                                    <apex:inputText value="{!currLead.Referring_MP_Email__c}" styleClass="form-control refmpemail email-std refContact" html-placeholder="medicalprofessional_email@domain.com" id="refmpemail" maxlength="80" />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -364,15 +358,7 @@
                                     </apex:selectList>
                                 </div>
                             </div>
-                            <!--
                             <div class="form-group row">
-                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Medical_Professional_Category}</label></div>
-                                <div class="col-sm-6">
-                                    <apex:inputField value="{!currLead.Referring_MP_Category__c}" styleClass="form-control col-xs-12 col-sm-12 c-select medProvCat refmpcategory" id="refmpcategory" />
-                                </div>
-                            </div>
-							-->
-                            <div class="form-group row"> <!--p-r2c-1-->
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Medical_Professional_Specialty}</label></div>
                                 <div class="col-sm-6">
                                     <apex:selectList size="1" id="refmpspecialty" value="{!currLead.Referring_MP_Specialty__c}" styleClass="form-control col-xs-12 c-select refmpspecialty">
@@ -380,23 +366,7 @@
                                     </apex:selectList>
                                 </div>
                             </div>
-                            <!--
-                            <div class="form-group row">
-                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Hospital_or_Treatment_Facility}</label></div>
-                                <div class="col-sm-6">
-                                    <apex:inputText value="{!currLead.Hospital_Treatment_Facility_Treating__c}" styleClass="form-control" id="refmphospitalname" maxlength="50" html-placeholder="{!$Label.Wish_Referral_Placeholder_Hospital_Facility_Name}" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3">{!$Label.Wish_Referral_HTF_Street_Address}</label>
-                                <div class="col-sm-6">
-                                    <apex:inputText value="{!currLead.Referring_MP_HTF_Street_Address__c}" styleClass="form-control" id="refmphospitalstreet" maxlength="50" html-placeholder="0000 NE 00 Ave" />
-                                </div>
-                            </div>
-                            -->
                         </div>
-                        <!--</apex:outputPanel>
-                    </apex:outputPanel>-->
                     </div>
                 </fieldset>
                 <!-- wish child info -->
@@ -752,45 +722,44 @@
                 </fieldset>
                 <fieldset>
                     <legend>{!$Label.Wish_Referral_Treating_Medical_Professional_Information}</legend>
-                    <!--<div class = "mpSearchCreate">-->
-                        <div class="form-group row repeatMedProf mpRel">
-                            <div class="col-sm-12 offset-sm-3">
-                                <label class="c-input c-checkbox">
-                                    <apex:inputCheckbox value="{!copyReferrerInfo}"/>
-                                    <span class="c-indicator sas"></span>
-                                    {!$Label.Wish_Referral_Same_as_Referrer_Information}
-                                </label>
+                    <div class="form-group row repeatMedProf mpRel">
+                        <div class="col-sm-12 offset-sm-3">
+                            <label class="c-input c-checkbox">
+                                <apex:inputCheckbox value="{!copyReferrerInfo}"/>
+                                <span class="c-indicator sas"></span>
+                                {!$Label.Wish_Referral_Same_as_Referrer_Information}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="trtMpInfo">
+                        <div class = "mpSearchCreate">
+                            <div class="form-group row mpRel">
+                                <div class="col-sm-3"><label><u>{!$Label.Wish_Referral_Treating_Hospital_Facility}</u></label></div>
+                            </div>
+                            <div class="form-group row mpRel">
+                                <div class="col-sm-3" style="padding-top: 12px"><label>{!$Label.Wish_Referral_Hospital_Facility_Search}</label></div>
+                                <div class="col-sm-6">
+                                    <div id="externalTreatingAccountLookup"></div>
+                                    <apex:inputHidden id="externalTreatingAccountLookupOutput" value="{!mpHtfSearch.treatingHospitalFacilityId}"/>
+                                </div>
+                            </div>
+                            <div class="form-group row mpRel">
+                                <div class="col-sm-3"><label><u>{!$Label.Wish_Referral_Treating_Medical_Professional}</u></label></div>
+                            </div>
+                            <div class="form-group row mpRel">
+                                <div class="col-sm-3" style="padding-top: 12px"><label>{!$Label.Wish_Referral_Medical_Professional_Search}</label></div>
+                                <div class="col-sm-6">
+                                    <div id="externalTreatingContactLookup"></div>
+                                    <apex:inputHidden id="externalTreatingContactLookupOutput" value="{!mpHtfSearch.treatingMedicalProfessionalId}"/>
+                                </div>
+                            </div>
+                            <div class="form-group row newTrtMpChk mpRel">
+                                <div class="col-sm-3"><label><u>{!$Label.Wish_Referral_Create_New_Medical_Professional}</u></label></div>
+                                <div class="col-sm-6" style="padding-top: 8px">
+                                    <apex:inputCheckbox id="createNewTrtMPchk" value="{!createNewRefMP}" onChange="onClickCreateCheckbox(this.id, this.checked)" />
+                                </div>
                             </div>
                         </div>
-                        <div class="trtMpInfo">
-                            <div class = "mpSearchCreate">
-                        <div class="form-group row mpRel">
-                            <div class="col-sm-3"><label><u>TREATING HOSPITAL/FACILITY</u></label></div>
-                        </div>
-                        <div class="form-group row mpRel">
-                            <div class="col-sm-3" style="padding-top: 12px"><label>HOSPITAL/FACILITY SEARCH</label></div>
-                            <div class="col-sm-6">
-                                <div id="externalTreatingAccountLookup"></div>
-                                <apex:inputHidden id="externalTreatingAccountLookupOutput" value="{!mpHtfSearch.treatingHospitalFacilityId}"/>
-                            </div>
-                        </div>
-                        <div class="form-group row mpRel">
-                            <div class="col-sm-3"><label><u>{!$Label.Wish_Referral_Treating_Medical_Professional}</u></label></div>
-                        </div>
-                        <div class="form-group row mpRel">
-                            <div class="col-sm-3" style="padding-top: 12px"><label>{!$Label.Wish_Referral_Medical_Professional_Search}</label></div>
-                            <div class="col-sm-6">
-                                <div id="externalTreatingContactLookup"></div>
-                                <apex:inputHidden id="externalTreatingContactLookupOutput" value="{!mpHtfSearch.treatingMedicalProfessionalId}"/>
-                            </div>
-                        </div>
-                        <div class="form-group row newTrtMpChk mpRel">
-                            <div class="col-sm-3"><label><u>{!$Label.Wish_Referral_Create_New_Medical_Professional}</u></label></div>
-                            <div class="col-sm-6" style="padding-top: 8px">
-                                <apex:inputCheckbox id="createNewTrtMPchk" value="{!createNewRefMP}" onChange="onClickCreateCheckbox(this.id, this.checked)" />
-                            </div>
-                        </div>
-                            </div>
                         <div class="medToRepeat trtMpForm">
                             <div class="form-group row mpRel">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Title}</label></div>
@@ -813,13 +782,13 @@
                             <div class="form-group row">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Phone}</label></div>
                                 <div class="col-sm-6">
-                                    <apex:inputText value="{!currLead.Treating_Medical_Professional_Phone__c}" styleClass="form-control mphone phonemask numbers-only" html-placeholder="(000) 000-0000" id="mphone" html-pattern=".{10,14}" maxlength="10" />
+                                    <apex:inputText value="{!currLead.Treating_Medical_Professional_Phone__c}" styleClass="form-control mphone phonemask numbers-only trtContact" html-placeholder="(000) 000-0000" id="mphone" html-pattern=".{10,14}" maxlength="10" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Email}</label></div>
                                 <div class="form-group col-sm-6">
-                                    <apex:inputText value="{!currLead.Treating_Medical_Professional_Email__c}" styleClass="form-control memail email-std" html-placeholder="medicalprofessional_email@domain.com" id="mpemail" maxlength="80" />
+                                    <apex:inputText value="{!currLead.Treating_Medical_Professional_Email__c}" styleClass="form-control memail email-std trtContact" html-placeholder="medicalprofessional_email@domain.com" id="mpemail" maxlength="80" />
                                 </div>
                             </div>
                             <div class="form-group row mpRel">
@@ -850,21 +819,13 @@
                                     </apex:selectList>
                                 </div>
                             </div>
-                            <div class="form-group row" id = "trtHtf">
+                            <div class="form-group row" id="trtHtf">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Hospital_or_Treatment_Facility}</label></div>
                                 <div class="col-sm-6">
                                     <apex:inputText value="{!currLead.Hospital_Treatment_Facility_Treating__c}" styleClass="form-control" id="mphospitalname" maxlength="50" html-placeholder="{!$Label.Wish_Referral_Placeholder_Hospital_Facility_Name}" />
                                 </div>
                             </div>
-                            <!--
-                            <div class="form-group row mpRel">
-                                <label class="col-sm-3">{!$Label.Wish_Referral_HTF_Street_Address}</label>
-                                <div class="col-sm-6">
-                                    <apex:inputText value="{!currLead.Treating_MP_HTF_Street_Address__c}" styleClass="form-control" id="mphospitalstreet" maxlength="50" html-placeholder="0000 NE 00 Ave" />
-                                </div>
-                            </div>
-                            -->
-                    </div>
+                        </div>
                     </div>
                 </fieldset>
                 <fieldset class="connected main-office-contact">
@@ -883,7 +844,7 @@
                     <div class="bestMpInfo">
                     <div class = "mpSearchCreate">
                         <div class="form-group row">
-                            <div class="col-sm-3"><label><u>Best Medical Contact</u></label></div>
+                            <div class="col-sm-3"><label><u>{!$Label.Wish_Referral_Best_Medical_Contact}</u></label></div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-3" style="padding-top: 12px"><label>{!$Label.Wish_Referral_Medical_Professional_Search}</label></div>
@@ -899,50 +860,47 @@
                             </div>
                         </div>
                     </div>
-                    <div class="medToRepeatBest">
-                        <div class="form-group row">
-                            <div class="col-sm-3"><label>{!$Label.Wish_Referral_Title}</label></div>
-                            <div class="col-sm-6">
-                                <apex:inputField value="{!currLead.Salutation_BestContactMP__c}" styleClass="form-control col-xs-12 col-sm-12 c-select bsalutation" id="bsalutation" />
+                        <div class="medToRepeatBest">
+                            <div class="form-group row">
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Title}</label></div>
+                                <div class="col-sm-6">
+                                    <apex:inputField value="{!currLead.Salutation_BestContactMP__c}" styleClass="form-control col-xs-12 col-sm-12 c-select bsalutation" id="bsalutation" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <!--label class="col-sm-3">{!$Label.Wish_Referral_Other_Treating_Medical_Professional}</label>-->
-                            <div class="col-sm-3"><label>{!$Label.Wish_Referral_Name}</label></div>
-                            <div class="col-sm-6">
-                                <apex:inputText value="{!currLead.Best_Contact_for_Physician_First_Name__c}" styleClass="form-control mpmaincontactfirstname" id="mpmaincontactfirstname" maxlength="50" html-placeholder="{!$Label.Wish_Referral_Placeholder_First_Name}" />
+                            <div class="form-group row">
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Name}</label></div>
+                                <div class="col-sm-6">
+                                    <apex:inputText value="{!currLead.Best_Contact_for_Physician_First_Name__c}" styleClass="form-control mpmaincontactfirstname" id="mpmaincontactfirstname" maxlength="50" html-placeholder="{!$Label.Wish_Referral_Placeholder_First_Name}" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <!--<div class="col-sm-3"><label class="sr-only">{!$Label.Wish_Referral_Last_Name}e</label></div>-->
-                            <div class="col-sm-3"><label class="sr-only" aria-label="last_name">{!$Label.Wish_Referral_Last_Name}</label></div>
-                            <div class="col-sm-6">
-                                <apex:inputText value="{!currLead.Best_Contact_for_Physician_Last_Name__c}" styleClass="form-control mpmaincontactlastname" id="mpmaincontactlastname" maxlength="50" html-placeholder="{!$Label.Wish_Referral_Last_Name}" />
+                            <div class="form-group row">
+                                <div class="col-sm-3"><label class="sr-only" aria-label="last_name">{!$Label.Wish_Referral_Last_Name}</label></div>
+                                <div class="col-sm-6">
+                                    <apex:inputText value="{!currLead.Best_Contact_for_Physician_Last_Name__c}" styleClass="form-control mpmaincontactlastname" id="mpmaincontactlastname" maxlength="50" html-placeholder="{!$Label.Wish_Referral_Last_Name}" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-3"><label>{!$Label.Wish_Referral_Phone}</label></div>
-                            <div class="col-sm-6">
-                                <apex:inputText value="{!currLead.Best_contact_for_Physician_Phone__c}" styleclass="form-control phonemask numbers-only mpmaincontactphone" html-placeholder="(000) 000-0000" id="mpmaincontactphone" html-pattern=".{10,14}" maxlength="10" />
+                            <div class="form-group row">
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Phone}</label></div>
+                                <div class="col-sm-6">
+                                    <apex:inputText value="{!currLead.Best_contact_for_Physician_Phone__c}" styleclass="form-control phonemask numbers-only mpmaincontactphone bestContact" html-placeholder="(000) 000-0000" id="mpmaincontactphone" html-pattern=".{10,14}" maxlength="10" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-3"><label>{!$Label.Wish_Referral_Email}</label></div>
-                            <div class="col-sm-6">
-                                <apex:inputText value="{!currLead.Best_contact_for_Physician_Email__c}" styleClass="form-control bemail email-std notqualto mpmaincontactemail" html-placeholder="email@domain.com" id="mpmaincontactemail" maxlength="80" />
+                            <div class="form-group row">
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Email}</label></div>
+                                <div class="col-sm-6">
+                                    <apex:inputText value="{!currLead.Best_contact_for_Physician_Email__c}" styleClass="form-control bemail email-std notqualto mpmaincontactemail bestContact" html-placeholder="email@domain.com" id="mpmaincontactemail" maxlength="80" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-3"><label>{!$Label.Wish_Referral_City}</label></div>
-                            <div class="col-sm-6">
-                                <apex:inputText value="{!currLead.Best_Contact_City__c}" styleClass="form-control rcity alpha-only bcity" html-placeholder="{!$Label.Wish_Referral_City}" id="bcity" maxlength="50"  />
+                            <div class="form-group row">
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_City}</label></div>
+                                <div class="col-sm-6">
+                                    <apex:inputText value="{!currLead.Best_Contact_City__c}" styleClass="form-control rcity alpha-only bcity" html-placeholder="{!$Label.Wish_Referral_City}" id="bcity" maxlength="50"  />
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-3"><label>{!$Label.Wish_Referral_State}</label></div>
-                            <div class="col-sm-6">
-                                <!--<apex:selectList size="1" id="treating-state" value="{!treatingMpState}" styleClass="form-control col-xs-12 c-select state" >-->
-                                <apex:selectList size="1" id="bstate" value="{!currLead.Best_Contact_State__c}" styleClass="form-control col-xs-12 c-select state bstate" >
+                            <div class="form-group row">
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_State}</label></div>
+                                <div class="col-sm-6">
+                                    <apex:selectList size="1" id="bstate" value="{!currLead.Best_Contact_State__c}" styleClass="form-control col-xs-12 c-select state bstate" >
                                     <apex:selectOptions value="{!States}" />
                                 </apex:selectList>
                             </div>
@@ -961,14 +919,6 @@
                                 </apex:selectList>
                             </div>
                         </div>
-                        <!--
-                        <div class="form-group row">
-                            <label class="col-sm-3">{!$Label.Wish_Referral_HTF_Street_Address}</label>
-                            <div class="col-sm-6">
-                                <apex:inputText value="{!currLead.Best_Contact_HTF_Street_Address__c}" styleClass="form-control" id="besthospitalstreet" maxlength="50" html-placeholder="0000 NE 00 Ave" />
-                            </div>
-                        </div>
-                        -->
                     </div>
                     </div>
                 </fieldset>
@@ -1240,7 +1190,6 @@
                 else{
                     elems[0].style.border = "1px solid rgba(0,0,0,.15)";
                 }
-
             }
         }
 
@@ -1381,7 +1330,7 @@
                 fieldInput.value = '';
                 fieldInput.disabled = true;
             } if(field && fieldInput && isChecked === false){
-                fieldInput.disabled = false
+                fieldInput.disabled = false;
             }
         }
     </script>

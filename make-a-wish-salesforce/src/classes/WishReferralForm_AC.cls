@@ -63,24 +63,23 @@ global class WishReferralForm_AC {
 	 * Create new lead
 	 */
 	public PageReference CreateLead() {
-		if (currLead.Relationship_to_child__c != null) {
-			currLead.Relationship_to_child__c = currLead.Relationship_to_child__c.trim();
-		}
-
-		setLookupSearchMpHtf();
-
-		//SIW-563: Modified condition to fix email issue for all relationship type
-		if (currLead.Relationship_to_child__c != null) {
-			if (currLead.Relationship_to_child__c.trim().equalsIgnoreCase(Constant_AC.Other_RT_LABEL)) {
-				currLead.Referrer_Email__c = remailTwo;
-			} else {
-				currLead.Referrer_Email__c = remailOne;
-			}
-		}
 		String logValue;
 		String recId;
 		List<String> lstLog = new List<String>();
 		try {
+            if (currLead.Relationship_to_child__c != null) {
+                currLead.Relationship_to_child__c = currLead.Relationship_to_child__c.trim();
+            }
+            setLookupSearchMpHtf();
+            
+            //SIW-563: Modified condition to fix email issue for all relationship type
+            if (currLead.Relationship_to_child__c != null) {
+                if (currLead.Relationship_to_child__c.trim().equalsIgnoreCase(Constant_AC.Other_RT_LABEL)) {
+                    currLead.Referrer_Email__c = remailTwo;
+                } else {
+                    currLead.Referrer_Email__c = remailOne;
+                }
+            }
 			currLead.PCD_ICD__c = icdOrPcd;
 			currLead.Country = Constant_AC.LEAD_COUNTRY_UNITED_STATES;
 			List<ICD_Codes__c> icdCodeInfoList = getIcdCodes(diagnosisFilter);
@@ -445,7 +444,9 @@ global class WishReferralForm_AC {
 				&& currLead.Relationship_to_child__c.equals(Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL)) {
 			if(String.isNotEmpty(mpHtfSearch.referringMedicalProfessionalId)){
 				currLead.Referring_MP__c = mpHtfSearch.referringMedicalProfessionalId;
-			}
+            } else {
+                populateReferralInfoFromMP();
+            }
 			if(String.isNotEmpty(mpHtfSearch.referringHospitalFacilityId)){
 				currLead.Referring_MP_HTF__c = mpHtfSearch.referringHospitalFacilityId;
 			}
