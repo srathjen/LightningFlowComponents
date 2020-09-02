@@ -549,6 +549,13 @@
         <value>00X36000001Ilh9</value>
     </labels>
     <labels>
+        <fullName>MP_or_HTF_are_required</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MP or HTF are required</shortDescription>
+        <value>The following Medical Professionals and/or Hospital Treatment Facilities are required to be matched prior to sending the Diagnosis Verification:</value>
+    </labels>
+    <labels>
         <fullName>MedicalAdviser</fullName>
         <language>en_US</language>
         <protected>false</protected>
