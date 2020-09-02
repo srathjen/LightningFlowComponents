@@ -823,6 +823,16 @@
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>DV_Signer__c</fullName>
+        <description>Captures the DV Signer Information</description>
+        <externalId>false</externalId>
+        <label>DV Signer</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Does_Child_Have_Cognitive_Delays__c</fullName>
         <externalId>false</externalId>
         <label>Does Child Have Cognitive Delays?</label>
