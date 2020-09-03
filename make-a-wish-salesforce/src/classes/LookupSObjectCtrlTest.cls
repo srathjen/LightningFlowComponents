@@ -37,11 +37,12 @@ private class LookupSObjectCtrlTest {
 	}
 
 	@IsTest
-	static void test_lookup_Contact() {
+	static void test_lookup_External_Contact() {
 		Test.startTest();
 		Contact ctc = new Contact();
 		ctc.FirstName = 'Bob';
 		ctc.LastName = 'Doe';
+		ctc.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
 		insert ctc;
 		Test.stopTest();
 
@@ -70,10 +71,11 @@ private class LookupSObjectCtrlTest {
 	}
 
 	@IsTest
-	static void test_lookup_Account() {
+	static void test_lookup_External_Account() {
 		Test.startTest();
 		Account acc = new Account();
 		acc.Name = 'United Health';
+		acc.RecordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID;
 		insert acc;
 		Test.stopTest();
 

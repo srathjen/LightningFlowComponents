@@ -5,6 +5,8 @@
  */
 public with sharing class LookupSObjectCtlr {
 
+	private final static Id medicalProfessionalRT = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+	private final static Id hospitalFacilityRT = Constant_AC.HOSPITAL_TREATMENT_ID;
 	/**
 	 * Find matching SObject record by keyword, SObject and return based on parameter
 	 * @param searchString
@@ -33,15 +35,19 @@ public with sharing class LookupSObjectCtlr {
 		// Build our SOSL query
 		String searchQuery = '';
 		if (isExternalLookup && sObjectAPIName.equals('Contact')) {
-			// Search only on a specific set of fields on Contact Lookup
+			// Search only on a specific set of fields on Medical Professional Contact Lookup
 			searchQuery = 'FIND \'' + sanitizedSearchString + '*\' ' +
 					'IN NAME FIELDS RETURNING ' + sanitizedSObjectAPIName + '(' + sanitizedFieldsToReturn +
-					' WHERE Exclude_MP_from_Referral_Form_Searches__c = FALSE AND npsp__Deceased__c = FALSE)' +
+					' WHERE RecordTypeId = :medicalProfessionalRT' +
+					' AND Exclude_MP_from_Referral_Form_Searches__c = FALSE' +
+					' AND npsp__Deceased__c = FALSE)' +
 					' LIMIT 50';
 		} else if (isExternalLookup && sObjectAPIName.equals('Account')) {
+			// Search only on a specific set of fields on Hospital/Facility Account Lookup
 			searchQuery = 'FIND \'' + sanitizedSearchString + '*\' ' +
 					'IN NAME FIELDS RETURNING ' + sanitizedSObjectAPIName + '(' + sanitizedFieldsToReturn +
-					' WHERE Exclude_HTF_from_Referral_Form_Searches__c = FALSE)' +
+					' WHERE RecordTypeId = :hospitalFacilityRT' +
+					' AND Exclude_HTF_from_Referral_Form_Searches__c = FALSE)' +
 					' LIMIT 50';
 		} else {
 			// Standard behaviour
