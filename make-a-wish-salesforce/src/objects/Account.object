@@ -1355,6 +1355,15 @@
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>Exclude_HTF_from_Referral_Form_Searches__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Excludes the HTF account from Referral Form Searches</description>
+        <externalId>false</externalId>
+        <label>Exclude HTF from Referral Form Searches</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>External_Id__c</fullName>
         <caseSensitive>false</caseSensitive>
         <description>External RE record Id for upserting</description>
@@ -1896,7 +1905,7 @@
     <fields>
         <fullName>ParentId</fullName>
         <lookupFilter>
-            <active>true</active>
+            <active>false</active>
             <booleanFilter>(1 AND 2 AND 3) OR (4 AND 2)</booleanFilter>
             <filterItems>
                 <field>$Profile.Name</field>
@@ -2422,6 +2431,19 @@ Help Text</description>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Region_Code__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Captures the HTF's Region within that Chapter</description>
+        <externalId>false</externalId>
+        <label>Region Code</label>
+        <referenceTo>Regions__c</referenceTo>
+        <relationshipLabel>Accounts</relationshipLabel>
+        <relationshipName>HTFAccounts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Relationship_type__c</fullName>

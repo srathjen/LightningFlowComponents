@@ -3324,7 +3324,8 @@ null)</formula>
         <fullName>Do_Not_Contact_Notes__c</fullName>
         <description>It will capture the detail information about the contact notes</description>
         <externalId>false</externalId>
-        <label>Do Not Contact Notes</label>
+        <inlineHelpText>Captures additional notes about the contact's communication preferences and any considerations</inlineHelpText>
+        <label>Contact Notes</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4498,6 +4499,18 @@ and the date it was or will be granted.</inlineHelpText>
         </valueSet>
     </fields>
     <fields>
+        <fullName>Maiden_Alternate_Name__c</fullName>
+        <description>Captures the MP's Maiden / Alternate Name</description>
+        <externalId>false</externalId>
+        <label>Maiden / Alternate Name</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
 	    <fullName>Non_Verbal_Communication_Method__c</fullName>
     <description>SIW-657</description>
     <externalId>false</externalId>
@@ -4989,7 +5002,7 @@ IF(  Medical_Professional_Count__c  &gt; 0 , IMAGE("/resource/icons/MedProf.png"
  If(Medical_Professional_Count__c = 0 &amp;&amp; Inactive_Medical_Professional_Count__c &gt; 0, "Inactive",""))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <inlineHelpText>To change the status, create or update this contact's related 'Organization Affiliation' records to a status of 'Active' or 'Inactive'. Note: this is the record or records related to the Chapter not a health treatment facility.</inlineHelpText>
-        <label>Medical Professional Status</label>
+        <label>MP Status</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <type>Text</type>

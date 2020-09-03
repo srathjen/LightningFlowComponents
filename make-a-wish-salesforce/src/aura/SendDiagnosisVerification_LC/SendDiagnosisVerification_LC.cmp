@@ -31,7 +31,7 @@ Description : Lightning component for recreating send diagnosis verification fun
             <div class="slds-grid slds-grid_align-center slds-m-top_medium slds-grid_vertical-align-center" style="height:210px;">
                 <div class="slds-col">
                     <lightning:icon class="slds-align_absolute-center" iconName="utility:info_alt" size="large" alternativeText="" variant="warning"/>
-                    <div class="slds-text-heading_medium slds-m-top_medium slds-text-align_center">{!v.dispMsg}</div>
+                    <div class="slds-text-heading_medium slds-m-top_medium slds-text-align_center"><aura:unescapedHtml value="{!v.dispMsg}"></aura:unescapedHtml></div>
                     <div class=" slds-m-top_large slds-align_absolute-center">
                         <lightning:button class="btn-spacing" variant="brand" label="OK" onclick="{! c.confirmAction }" />
                         <aura:if isTrue="{!v.showCancelBtn}">

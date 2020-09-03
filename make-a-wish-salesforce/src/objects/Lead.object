@@ -703,7 +703,7 @@
         <deleteConstraint>SetNull</deleteConstraint>
         <description>Captures the Best Contact's HTF Account record</description>
         <externalId>false</externalId>
-        <label>Best Contact HTF</label>
+        <label>Best Contact HTF Street Address</label>
         <lookupFilter>
             <active>true</active>
             <filterItems>
@@ -821,6 +821,16 @@
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>DV_Signer__c</fullName>
+        <description>Captures the DV Signer Information</description>
+        <externalId>false</externalId>
+        <label>DV Signer</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>Does_Child_Have_Cognitive_Delays__c</fullName>
@@ -5243,7 +5253,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <fullName>Primary_Medical_Professional_Subspecialt__c</fullName>
         <description>Temporary RE Placeholder</description>
         <externalId>false</externalId>
-        <label>Primary Medical Professional Subspecialt</label>
+        <label>Primary Medical Professional SubSpecialt</label>
         <length>100</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -5360,8 +5370,8 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <description>It will hold the provider signature</description>
         <externalId>false</externalId>
         <inlineHelpText>This field updates automatically with the signer's name when an electronic DV is signed, but can be manually updated for paper forms.</inlineHelpText>
-        <label>Provider Signature</label>
-        <length>90</length>
+        <label>Provider Signature (DEPRECATED)</label>
+        <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
