@@ -11,6 +11,7 @@ public class AffiliationService {
     private static final String ORG_AFFILIATION_STATUS_PENDING = Constant_AC.ORG_AFFILIATION_STATUS_PENDING;
     private static final String ORG_AFFILIATION_STATUS_ACTIVE = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
     private static final String ORG_AFFILIATION_STATUS_PROSPECTIVE = Constant_AC.ORG_AFFILIATION_STATUS_PROSPECTIVE;
+    private static final String ORG_AFFILIATION_CONSTITUENT_CODE_VOLUNTEER = 'Volunteer';
     private static final String TREATING_MED_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL;
     private static final String BEST_CONTACT = Constant_AC.LEAD_DV_FORM_TYPE_BEST_CONTACT;
     private static final String ALT1_MED_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL;
@@ -720,6 +721,7 @@ public class AffiliationService {
                 SELECT Id, npe5__Contact__c
                 FROM npe5__Affiliation__c
                 WHERE npe5__Contact__c IN :volunteerRoleStatusMap.keySet()
+                AND constituent_code__c = :ORG_AFFILIATION_CONSTITUENT_CODE_VOLUNTEER
         ]) {
             npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
             affiliation.Id = aff.Id;
