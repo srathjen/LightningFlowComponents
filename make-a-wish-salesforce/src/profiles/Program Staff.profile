@@ -6662,6 +6662,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.Alternate_Email_2__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.Alternate_Phone_Type__c</field>
         <readable>true</readable>
     </fieldPermissions>

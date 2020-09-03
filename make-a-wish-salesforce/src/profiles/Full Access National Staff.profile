@@ -1657,6 +1657,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.Alternate_Email_2__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.Cognitive_Delays__c</field>
         <readable>true</readable>
     </fieldPermissions>

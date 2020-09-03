@@ -122,6 +122,52 @@
         <template>Automated_Volunteer_Templates/Task_Interview_Completed_Email_Template</template>
     </alerts>
     <fieldUpdates>
+        <fullName>Contact_PreferredEmailUpdated</fullName>
+        <field>Email</field>
+        <formula>CASE(
+npe01__Preferred_Email__c ,
+
+"Work",
+if(len(npe01__WorkEmail__c)&gt;0, npe01__WorkEmail__c,
+if(LEN( npe01__AlternateEmail__c)&gt;0,npe01__AlternateEmail__c,
+if(len( Alternate_Email_2__c)&gt;0, Alternate_Email_2__c,
+npe01__HomeEmail__c))),
+
+"Personal",
+if(len(npe01__HomeEmail__c)&gt;0, npe01__HomeEmail__c,
+if(len(npe01__WorkEmail__c)&gt;0, npe01__WorkEmail__c,
+if(len(npe01__AlternateEmail__c)&gt;0, npe01__AlternateEmail__c,
+Alternate_Email_2__c))),
+
+"Home",
+if(len(npe01__HomeEmail__c)&gt;0, npe01__HomeEmail__c,
+if(len(npe01__WorkEmail__c)&gt;0, npe01__WorkEmail__c,
+if(len(npe01__AlternateEmail__c)&gt;0, npe01__AlternateEmail__c,
+Alternate_Email_2__c))),
+
+"Alternate 1",
+if(len(npe01__AlternateEmail__c)&gt;0, npe01__AlternateEmail__c,
+if(len(npe01__WorkEmail__c)&gt;0, npe01__WorkEmail__c,
+if(len( Alternate_Email_2__c)&gt;0, Alternate_Email_2__c,
+npe01__HomeEmail__c))),
+
+"Alternate 2",
+if(len( Alternate_Email_2__c)&gt;0, Alternate_Email_2__c,
+if(len(npe01__WorkEmail__c)&gt;0, npe01__WorkEmail__c,
+if(len(npe01__AlternateEmail__c)&gt;0, npe01__AlternateEmail__c,
+npe01__HomeEmail__c))),
+
+If(LEN(npe01__WorkEmail__c)&gt;0 , npe01__WorkEmail__c ,
+if(LEN( npe01__HomeEmail__c)&gt;0, npe01__HomeEmail__c,
+if(LEN( npe01__AlternateEmail__c)&gt;0,npe01__AlternateEmail__c,
+Alternate_Email_2__c
+))))</formula>
+        <name>Contact.PreferredEmailUpdated</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>Populate_Date_of_Birth_Contact</fullName>
         <field>DOB_Text__c</field>
         <formula>Text(Birthdate)</formula>
@@ -159,6 +205,15 @@
         <operation>Literal</operation>
         <protected>false</protected>
         <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UpdateAlternateEmail2</fullName>
+        <field>Alternate_Email_2__c</field>
+        <formula>Email</formula>
+        <name>UpdateAlternateEmail2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
     </fieldUpdates>
     <fieldUpdates>
         <fullName>Update_Contact_Info</fullName>
@@ -388,6 +443,39 @@ OtherPhone
         <protected>false</protected>
     </fieldUpdates>
     <rules>
+        <fullName>Contact%2EEmailChanged_Alternate1</fullName>
+        <actions>
+            <name>npe01__ContactAlternateEmailUpdate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>If the standard Email field is newly entered or changed AND the Preferred Email picklist is set to Alternate 1 THEN Salesforce will fill in the Alternate Email field with the email address entered in the standard Email field.</description>
+        <formula>AND(      ISPICKVAL( npe01__Preferred_Email__c ,"Alternate 1"),      OR(           AND(                ISNEW(),                LEN(Email)&gt;0           ),           ISCHANGED( Email )      ) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Contact%2EEmailChanged_Alternate2</fullName>
+        <actions>
+            <name>UpdateAlternateEmail2</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>If the standard Email field is newly entered or changed AND the Preferred Email picklist is set to Alternate 2 THEN Salesforce will fill in the Alternate 2 Email field with the email address entered in the standard Email field.</description>
+        <formula>AND(      ISPICKVAL( npe01__Preferred_Email__c ,"Alternate 2"),      OR(           AND(                ISNEW(),                LEN(Email)&gt;0           ),           ISCHANGED( Email )      ) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Contact%2EPreferred_Email_Updated</fullName>
+        <actions>
+            <name>Contact_PreferredEmailUpdated</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>This workflow OVERWRITES the existing value in the standard Email field based on the Preferred Email field value.  This rule needs to be turned on manually after an Upgrade to this package.</description>
+        <formula>OR( LEN(Email)=0, ISCHANGED(npe01__Preferred_Email__c) , ISCHANGED(npe01__WorkEmail__c) , ISCHANGED(npe01__HomeEmail__c) , ISCHANGED(npe01__AlternateEmail__c),ISCHANGED( Alternate_Email_2__c )  )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
         <fullName>Contact%3ARush Wish Reminder %26 Alerts</fullName>
         <actions>
             <name>Contact_Rush_Wish_Reminder_Alerts</name>
@@ -608,7 +696,7 @@ OtherPhone
             <name>npe01__ContactAlternateEmailUpdate</name>
             <type>FieldUpdate</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <description>If the standard Email field is newly entered or changed AND the Preferred Email picklist is set to Alternate THEN Salesforce will fill in the Alternate Email field with the email address entered in the standard Email field.</description>
         <formula>AND(      ISPICKVAL( npe01__Preferred_Email__c ,"Alternate"),      OR(           AND(                ISNEW(),                LEN(Email)&gt;0           ),           ISCHANGED( Email )      ) )</formula>
         <triggerType>onAllChanges</triggerType>
@@ -685,7 +773,7 @@ OtherPhone
             <name>npe01__ContactPreferredEmail</name>
             <type>FieldUpdate</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <description>This workflow OVERWRITES the existing value in the standard Email field based on the Preferred Email field value.  This rule needs to be turned on manually after an Upgrade to this package.</description>
         <formula>OR( LEN(Email)=0, ISCHANGED(npe01__Preferred_Email__c) , ISCHANGED(npe01__WorkEmail__c) , ISCHANGED(npe01__HomeEmail__c) , ISCHANGED(npe01__AlternateEmail__c)  )</formula>
         <triggerType>onAllChanges</triggerType>

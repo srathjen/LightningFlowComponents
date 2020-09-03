@@ -2063,6 +2063,17 @@ Medical_Professional_Icon__c  &amp; " " &amp; Volunteer_Icon__c &amp; " " &amp; 
         </valueSet>
     </fields>
     <fields>
+        <fullName>Alternate_Email_2__c</fullName>
+        <description>Captures the contacts 2nd Alternate Email</description>
+        <externalId>false</externalId>
+        <label>Alternate Email 2</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Alternate_Phone_Type__c</fullName>
         <description>This field is used to store the type of alternate phone.</description>
         <externalId>false</externalId>
@@ -9776,7 +9787,12 @@ IF(ISPICKVAL(npe01__Secondary_Address_Type__c,"Other"),
                 <value>
                     <fullName>Alternate</fullName>
                     <default>false</default>
-                    <label>Alternate</label>
+                    <label>Alternate 1</label>
+                </value>
+                <value>
+                    <fullName>Alternate 2</fullName>
+                    <default>false</default>
+                    <label>Alternate 2</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
