@@ -2026,6 +2026,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Account.DV_Method_Preference__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Account.Department__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -2067,6 +2072,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Case.Professional_Comm_Profile_Sent_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Alternate_Email_2__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

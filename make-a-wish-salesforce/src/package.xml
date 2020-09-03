@@ -652,6 +652,8 @@
     <members>Contact.Medical_Information</members>
     <members>Contact.Medical_Professional</members>
     <members>Contact.Preferred_Contact</members>
+    <members>Contact.Volunteer_Details_BM_VC</members>
+    <members>Contact.Wish_Family_Info</members>
     <members>Lead.Best_Contact_HTF_Unmatched</members>
     <members>Lead.Best_Contact_MP_Unmatched</members>
     <members>Lead.Diagnosis_Verification</members>

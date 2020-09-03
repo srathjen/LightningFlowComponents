@@ -2063,6 +2063,17 @@ Medical_Professional_Icon__c  &amp; " " &amp; Volunteer_Icon__c &amp; " " &amp; 
         </valueSet>
     </fields>
     <fields>
+        <fullName>Alternate_Email_2__c</fullName>
+        <description>Captures the contacts 2nd Alternate Email</description>
+        <externalId>false</externalId>
+        <label>Alternate Email 2</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Alternate_Phone_Type__c</fullName>
         <description>This field is used to store the type of alternate phone.</description>
         <externalId>false</externalId>
@@ -9776,7 +9787,12 @@ IF(ISPICKVAL(npe01__Secondary_Address_Type__c,"Other"),
                 <value>
                     <fullName>Alternate</fullName>
                     <default>false</default>
-                    <label>Alternate</label>
+                    <label>Alternate 1</label>
+                </value>
+                <value>
+                    <fullName>Alternate 2</fullName>
+                    <default>false</default>
+                    <label>Alternate 2</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
@@ -11478,6 +11494,17 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>DV_Method_Preference__c</picklist>
+            <values>
+                <fullName>Electronic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paper</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Does_Child_Have_Speech_Language_Delays__c</picklist>
             <values>
                 <fullName>I do not have access to that information%2E I recommend the chapter follow up with the medical team</fullName>
@@ -13078,6 +13105,17 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>DV_Method_Preference__c</picklist>
+            <values>
+                <fullName>Electronic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paper</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Does_Child_Have_Speech_Language_Delays__c</picklist>
             <values>
                 <fullName>I do not have access to that information%2E I recommend the chapter follow up with the medical team</fullName>
@@ -14393,10 +14431,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>npe01__PreferredPhone__c</picklist>
             <values>
-                <fullName>Home</fullName>
-                <default>true</default>
-            </values>
-            <values>
                 <fullName>Mobile</fullName>
                 <default>false</default>
             </values>
@@ -14406,7 +14440,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Work</fullName>
-                <default>false</default>
+                <default>true</default>
             </values>
         </picklistValues>
         <picklistValues>
@@ -14416,12 +14450,12 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Personal</fullName>
-                <default>true</default>
+                <fullName>Alternate 2</fullName>
+                <default>false</default>
             </values>
             <values>
                 <fullName>Work</fullName>
-                <default>false</default>
+                <default>true</default>
             </values>
         </picklistValues>
         <picklistValues>
@@ -14729,6 +14763,17 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             <picklist>Communication__c</picklist>
             <values>
                 <fullName>I am not sure</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DV_Method_Preference__c</picklist>
+            <values>
+                <fullName>Electronic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paper</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -16432,6 +16477,17 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>DV_Method_Preference__c</picklist>
+            <values>
+                <fullName>Electronic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paper</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Does_Child_Have_Speech_Language_Delays__c</picklist>
             <values>
                 <fullName>I do not have access to that information%2E I recommend the chapter follow up with the medical team</fullName>
@@ -18062,6 +18118,17 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>DV_Method_Preference__c</picklist>
+            <values>
+                <fullName>Electronic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paper</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Does_Child_Have_Speech_Language_Delays__c</picklist>
             <values>
                 <fullName>I do not have access to that information%2E I recommend the chapter follow up with the medical team</fullName>
@@ -19503,6 +19570,11 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <lookupDialogsAdditionalFields>CONTACT.ADDRESS2_CITY</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>CONTACT.ADDRESS2_STATE</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>CONTACT.ADDRESS2_ZIP</lookupDialogsAdditionalFields>
+        <lookupFilterFields>CONTACT.FIRST_NAME</lookupFilterFields>
+        <lookupFilterFields>CONTACT.LAST_NAME</lookupFilterFields>
+        <lookupFilterFields>CONTACT.ADDRESS2_CITY</lookupFilterFields>
+        <lookupFilterFields>CONTACT.ADDRESS2_STATE_CODE</lookupFilterFields>
+        <lookupFilterFields>Specialty__c</lookupFilterFields>
         <lookupPhoneDialogsAdditionalFields>FULL_NAME</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>CONTACT.PHONE1</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>CONTACT.PHONE4</lookupPhoneDialogsAdditionalFields>

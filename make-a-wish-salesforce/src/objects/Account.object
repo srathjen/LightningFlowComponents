@@ -1218,6 +1218,31 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>DV_Method_Preference__c</fullName>
+        <description>Used to indicate if an HTF prefers to receive the DV electronically or via paper (fax, mail), etc.</description>
+        <externalId>false</externalId>
+        <label>DV Method Preference</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Electronic</fullName>
+                    <default>false</default>
+                    <label>Electronic</label>
+                </value>
+                <value>
+                    <fullName>Paper</fullName>
+                    <default>false</default>
+                    <label>Paper</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
         <fullName>Department_Division__c</fullName>
         <description>It holds Department and Division records</description>
         <externalId>false</externalId>
@@ -6958,6 +6983,17 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
             <values>
                 <fullName>4</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DV_Method_Preference__c</picklist>
+            <values>
+                <fullName>Electronic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paper</fullName>
                 <default>false</default>
             </values>
         </picklistValues>

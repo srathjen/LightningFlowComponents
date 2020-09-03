@@ -1595,6 +1595,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Account.DV_Method_Preference__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Account.Department__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -6726,6 +6731,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Already_wish_granted_by_MAW_Other_Org__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Alternate_Email_2__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
