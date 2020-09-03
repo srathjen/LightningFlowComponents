@@ -4,14 +4,14 @@
  * Date        : 13/03/2018
  * Description : Class contains AURA enbaled utility methods used by the SendDiagnosisVerficationLC component
  * Modification Log:
- * 1. 03/28/2018 - Yuvraj - IME-59 - Line No: 22
+ * 1. 03/28/2018 - Yuvraj - IME-59 - Line No: 22Hospital_Treatment_Facility_Treating__c
  * 2. 04/12/2018 - Yuvraj - IME-77 - Line:No: 32
  * 3. 06/03/3030- Brittany - SIW-543
  **/
 public without sharing class SendDiagnosisVerficationLC_AC {
 
     /*
-     * @description     Get the neccessary lead information for further process of sending diagnosis verification
+     * @description     Get the necessary lead information for further process of sending diagnosis verification
      * @param           Id leadId`
      * @return          String
      * @date            unknown
@@ -20,40 +20,18 @@ public without sharing class SendDiagnosisVerficationLC_AC {
     @AuraEnabled
     public static Lead getLeadInformation(Id leadId) {
         Lead data = [
-                SELECT
-                        Id,
-                        Has_this_child_ever_received_prior_wish__c,
-                        Contact_Dup_Check__c,
-                        Using_Paper_Process_For_DV__c,
-                        Status,Dup_Check__c,
-                        Sub_Status__c,
-                        Treating_Medical_Professional_Email__c,
-                        Best_contact_for_Physician_Email__c,
-                        Alternate1MedicalProfessionalEmail__c,
-                        Alternate2MedProfessionalEmail__c,
-                        Part_A_Sent__c,
-                        HiddenMedicalProfessionalEmail__c,
-                        Pending_Diagnosis_Date__c,
-                        PD_ICD_Code__c,
-                        PD_Condition_Description__c,
-                        Of_Times_Email_Sent__c,
-                        Part_A_Received__c,
-                        isSign__c, Child_Age__c,
-                        Relationship_to_child__c,
-                        Referring_MP__c,
-                        Referring_MP_HTF__c,
-                        Treating_MP__c,
-                        Treating_MP_HTF__c,
-                        Best_Contact__c,
-                        Best_Contact_HTF__c,
-                        Hospital_Treatment_Facility_Treating__c,
-                        Treating_Medical_Professional_First_Name__c,
-                        Treating_Medical_Professional_Last_Name__c,
-                        Referrer_FirstName__c,
-                        Referrer_Last_Name__c,
-                        Best_Contact_HTF_Name__c,
-                        Best_Contact_for_Physician_First_Name__c,
-                        Best_Contact_for_Physician_Last_Name__c
+                SELECT Id, Has_this_child_ever_received_prior_wish__c, Contact_Dup_Check__c,
+                        Using_Paper_Process_For_DV__c, Status,Dup_Check__c, Sub_Status__c, Part_A_Sent__c,
+                        HiddenMedicalProfessionalEmail__c, Pending_Diagnosis_Date__c, PD_ICD_Code__c,
+                        PD_Condition_Description__c, Of_Times_Email_Sent__c, Part_A_Received__c,
+                        isSign__c, Child_Age__c, Relationship_to_child__c, Referring_MP__c, Referring_MP_HTF__c,
+                        Referrer_FirstName__c, Referrer_Last_Name__c, Referring_MP_HTF_Name__c,
+                        Treating_MP__c, Treating_MP_HTF__c, Hospital_Treatment_Facility_Treating__c,
+                        Treating_Medical_Professional_First_Name__c, Treating_Medical_Professional_Last_Name__c,
+                        Treating_Medical_Professional_Email__c, Best_Contact__c, Best_Contact_HTF__c,
+                        Best_Contact_HTF_Name__c, Best_Contact_for_Physician_First_Name__c,
+                        Best_Contact_for_Physician_Last_Name__c, Best_contact_for_Physician_Email__c,
+                        Alternate1MedicalProfessionalEmail__c, Alternate2MedProfessionalEmail__c
                 FROM Lead
                 WHERE Id = :leadId
                 AND RecordTypeId = :Constant_AC.LEAD_RT_WISH_CHILD
