@@ -19570,6 +19570,11 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <lookupDialogsAdditionalFields>CONTACT.ADDRESS2_CITY</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>CONTACT.ADDRESS2_STATE</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>CONTACT.ADDRESS2_ZIP</lookupDialogsAdditionalFields>
+        <lookupFilterFields>CONTACT.FIRST_NAME</lookupFilterFields>
+        <lookupFilterFields>CONTACT.LAST_NAME</lookupFilterFields>
+        <lookupFilterFields>CONTACT.ADDRESS2_CITY</lookupFilterFields>
+        <lookupFilterFields>CONTACT.ADDRESS2_STATE_CODE</lookupFilterFields>
+        <lookupFilterFields>Specialty__c</lookupFilterFields>
         <lookupPhoneDialogsAdditionalFields>FULL_NAME</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>CONTACT.PHONE1</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>CONTACT.PHONE4</lookupPhoneDialogsAdditionalFields>
