@@ -567,6 +567,36 @@
         <name>Alt2_Medical_Professional_Subspeciality__c</name>
     </fields>
     <fields>
+        <label><!-- Alt 1 MP HTF --></label>
+        <name>Alt_1_MP_HTF__c</name>
+        <relationshipLabel><!-- Alt 1 MP HTF for Referrals --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Alt 1 MP --></label>
+        <lookupFilter>
+            <errorMessage><!-- Please select an MP contact record. --></errorMessage>
+        </lookupFilter>
+        <name>Alt_1_MP__c</name>
+        <relationshipLabel><!-- Alt 1 MP for Referrals --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Alt 2 MP HTF Street Address --></label>
+        <name>Alt_2_MP_HTF_Street_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Alt 2 MP HTF --></label>
+        <name>Alt_2_MP_HTF__c</name>
+        <relationshipLabel><!-- Leads (Alt 2 MP HTF) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Alt 2 MP --></label>
+        <lookupFilter>
+            <errorMessage><!-- Please select an MP contact record. --></errorMessage>
+        </lookupFilter>
+        <name>Alt_2_MP__c</name>
+        <relationshipLabel><!-- Alt 2 MP for Referrals --></relationshipLabel>
+    </fields>
+    <fields>
         <label><!-- Alternate 1 Hospital/Treatment Facility --></label>
         <name>Alternate1HospitalTreatmentFacility__c</name>
     </fields>
@@ -732,20 +762,78 @@
         <name>Auto_Qualified__c</name>
     </fields>
     <fields>
-        <label><!-- Best Contact for Physician First Name --></label>
+        <label><!-- Best Contact Category --></label>
+        <name>Best_Contact_Category__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Contact City --></label>
+        <name>Best_Contact_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Contact Fax --></label>
+        <name>Best_Contact_Fax__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Contact HTF City --></label>
+        <name>Best_Contact_HTF_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Contact HTF Department --></label>
+        <name>Best_Contact_HTF_Department__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Contact HTF Name --></label>
+        <name>Best_Contact_HTF_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Contact HTF Phone --></label>
+        <name>Best_Contact_HTF_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Contact HTF State --></label>
+        <name>Best_Contact_HTF_State__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Contact HTF Street Address --></label>
+        <name>Best_Contact_HTF_Street_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Contact HTF Zip Code --></label>
+        <name>Best_Contact_HTF_Zip_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Contact HTF Street Address --></label>
+        <name>Best_Contact_HTF__c</name>
+        <relationshipLabel><!-- Best Contact HTF for Referrals --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Best Contact Specialty --></label>
+        <name>Best_Contact_Specialty__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Contact State --></label>
+        <name>Best_Contact_State__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Contact --></label>
+        <name>Best_Contact__c</name>
+        <relationshipLabel><!-- Best Contact for Referral --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Best Contact First Name --></label>
         <name>Best_Contact_for_Physician_First_Name__c</name>
     </fields>
     <fields>
-        <label><!-- Best Contact for Physician Last Name --></label>
+        <label><!-- Best Contact Last Name --></label>
         <name>Best_Contact_for_Physician_Last_Name__c</name>
     </fields>
     <fields>
         <help><!-- This recipient is the best person to contact for the physician. They will automatically receive a copy of the &apos;Your patient is eligible for a wish&apos; email upon qualification. --></help>
-        <label><!-- Best contact for Physician Email --></label>
+        <label><!-- Best Contact Email --></label>
         <name>Best_contact_for_Physician_Email__c</name>
     </fields>
     <fields>
-        <label><!-- Best Contact for Treating MP: Phone --></label>
+        <label><!-- Best Contact Phone --></label>
         <name>Best_contact_for_Physician_Phone__c</name>
     </fields>
     <fields>
@@ -962,6 +1050,10 @@
     <fields>
         <label><!-- DV Reminder Last Sent Date --></label>
         <name>DV_Reminder_Last_Sent_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- DV Signer --></label>
+        <name>DV_Signer__c</name>
     </fields>
     <fields>
         <help><!-- Child has a condition without curative treatment options in which debilitation may extend over many years (e.g., severe treatment-resistant epilepsy, some metabolic diseases) --></help>
@@ -1223,7 +1315,7 @@
         <name>Hidden_Wish_Child_Last_Initial__c</name>
     </fields>
     <fields>
-        <label><!-- Hospital/Treatment Facility --></label>
+        <label><!-- Treating MP HTF Name --></label>
         <name>Hospital_Treatment_Facility_Treating__c</name>
     </fields>
     <fields>
@@ -1862,7 +1954,7 @@
         <name>Primary_Medical_Professional_Specialty__c</name>
     </fields>
     <fields>
-        <label><!-- Primary Medical Professional Subspecialt --></label>
+        <label><!-- Primary Medical Professional SubSpecialt --></label>
         <name>Primary_Medical_Professional_Subspecialt__c</name>
     </fields>
     <fields>
@@ -1907,7 +1999,7 @@
     </fields>
     <fields>
         <help><!-- This field updates automatically with the signer&apos;s name when an electronic DV is signed, but can be manually updated for paper forms. --></help>
-        <label><!-- Provider Signature --></label>
+        <label><!-- Provider Signature (DEPRECATED) --></label>
         <name>Provider_Signature__c</name>
     </fields>
     <fields>
@@ -2317,6 +2409,103 @@
         <name>Referrer_Zip__c</name>
     </fields>
     <fields>
+        <label><!-- Referring MP Category --></label>
+        <name>Referring_MP_Category__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referring MP City --></label>
+        <name>Referring_MP_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referring MP Email --></label>
+        <name>Referring_MP_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referring MP Fax --></label>
+        <name>Referring_MP_Fax__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referring MP First Name --></label>
+        <name>Referring_MP_First_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referring MP HTF City --></label>
+        <name>Referring_MP_HTF_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referring MP HTF Department --></label>
+        <name>Referring_MP_HTF_Department__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referring MP HTF Name --></label>
+        <name>Referring_MP_HTF_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referring MP HTF Phone --></label>
+        <name>Referring_MP_HTF_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referring MP HTF State --></label>
+        <name>Referring_MP_HTF_State__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referring MP HTF Street Address --></label>
+        <name>Referring_MP_HTF_Street_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referring MP HTF Zip Code --></label>
+        <name>Referring_MP_HTF_Zip_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referring MP HTF --></label>
+        <name>Referring_MP_HTF__c</name>
+        <relationshipLabel><!-- HTF Referrals --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Referring MP Last Name --></label>
+        <name>Referring_MP_Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referring MP Phone --></label>
+        <name>Referring_MP_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referring MP Salutation --></label>
+        <name>Referring_MP_Salutation__c</name>
+        <picklistValues>
+            <masterLabel>Dr.</masterLabel>
+            <translation><!-- Dr. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mr.</masterLabel>
+            <translation><!-- Mr. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mrs.</masterLabel>
+            <translation><!-- Mrs. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ms.</masterLabel>
+            <translation><!-- Ms. --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Referring MP Specialty --></label>
+        <name>Referring_MP_Specialty__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referring MP State --></label>
+        <name>Referring_MP_State__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referring MP --></label>
+        <lookupFilter>
+            <errorMessage><!-- Please select an MP contact record. --></errorMessage>
+        </lookupFilter>
+        <name>Referring_MP__c</name>
+        <relationshipLabel><!-- Referring MP for Referral --></relationshipLabel>
+    </fields>
+    <fields>
         <label><!-- Region Code --></label>
         <name>Region_Code__c</name>
         <relationshipLabel><!-- Leads --></relationshipLabel>
@@ -2436,7 +2625,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Salutation --></label>
+        <label><!-- Best Contact Salutation --></label>
         <name>Salutation_BestContactMP__c</name>
         <picklistValues>
             <masterLabel>Dr.</masterLabel>
@@ -2456,7 +2645,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Salutation --></label>
+        <label><!-- Treating MP Salutation --></label>
         <name>Salutation_TreatingMP__c</name>
         <picklistValues>
             <masterLabel>Dr.</masterLabel>
@@ -2593,28 +2782,81 @@
         <name>Travel_algorithm__c</name>
     </fields>
     <fields>
+        <label><!-- Treating MP Category --></label>
+        <name>Treating_MP_Category__c</name>
+    </fields>
+    <fields>
+        <label><!-- Treating MP City --></label>
+        <name>Treating_MP_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Treating MP HTF City --></label>
+        <name>Treating_MP_HTF_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Treating MP HTF Department --></label>
+        <name>Treating_MP_HTF_Department__c</name>
+    </fields>
+    <fields>
+        <label><!-- Treating MP HTF Phone --></label>
+        <name>Treating_MP_HTF_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Treating MP HTF State --></label>
+        <name>Treating_MP_HTF_State__c</name>
+    </fields>
+    <fields>
+        <label><!-- Treating MP HTF Street Address --></label>
+        <name>Treating_MP_HTF_Street_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Treating MP HTF Zip Code --></label>
+        <name>Treating_MP_HTF_Zip_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Treating MP HTF --></label>
+        <name>Treating_MP_HTF__c</name>
+        <relationshipLabel><!-- Treating MP HTF for Referrals --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Treating MP Specialty --></label>
+        <name>Treating_MP_Specialty__c</name>
+    </fields>
+    <fields>
+        <label><!-- Treating MP State --></label>
+        <name>Treating_MP_State__c</name>
+    </fields>
+    <fields>
+        <label><!-- Treating MP --></label>
+        <lookupFilter>
+            <errorMessage><!-- Please select an MP Contact record. --></errorMessage>
+        </lookupFilter>
+        <name>Treating_MP__c</name>
+        <relationshipLabel><!-- Treating MP for Referral --></relationshipLabel>
+    </fields>
+    <fields>
         <label><!-- Hidden Treating Med Prof Contact Id --></label>
         <name>Treating_Medical_Professional_Contact_Id__c</name>
     </fields>
     <fields>
         <help><!-- This recipient will automatically receive a copy of the &apos;Your patient is eligible for a wish&apos; email upon qualification. --></help>
-        <label><!-- Treating Medical Professional Email --></label>
+        <label><!-- Treating MP Email --></label>
         <name>Treating_Medical_Professional_Email__c</name>
     </fields>
     <fields>
-        <label><!-- Treating Medical Professional Fax --></label>
+        <label><!-- Treating MP Fax --></label>
         <name>Treating_Medical_Professional_Fax__c</name>
     </fields>
     <fields>
-        <label><!-- Treating Medical Professional First Name --></label>
+        <label><!-- Treating MP First Name --></label>
         <name>Treating_Medical_Professional_First_Name__c</name>
     </fields>
     <fields>
-        <label><!-- Treating Medical Professional Last Name --></label>
+        <label><!-- Treating MP Last Name --></label>
         <name>Treating_Medical_Professional_Last_Name__c</name>
     </fields>
     <fields>
-        <label><!-- Treating Medical Professional Phone --></label>
+        <label><!-- Treating MP Phone --></label>
         <name>Treating_Medical_Professional_Phone__c</name>
     </fields>
     <fields>
@@ -2925,6 +3167,18 @@
         </picklistValues>
     </fields>
     <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Inquiry/Referral Method</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Inquiry/Referral Methods</value>
+        </caseValues>
+        <name>lead_source</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
         <label><!-- Preferred Email --></label>
         <name>npe01__Preferred_Email__c</name>
         <picklistValues>
@@ -3049,8 +3303,32 @@
         <name>xxNon_Verbal__c</name>
     </fields>
     <quickActions>
+        <label><!-- Best Contact HTF Unmatched --></label>
+        <name>Best_Contact_HTF_Unmatched</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Best Contact MP Unmatched --></label>
+        <name>Best_Contact_MP_Unmatched</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Diagnosis Verification --></label>
+        <name>Diagnosis_Verification</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Paper DV Input --></label>
+        <name>Input_Paper_DV</name>
+    </quickActions>
+    <quickActions>
         <label><!-- Log a Call --></label>
         <name>Log_a_Call_Lead</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- MP Lookups --></label>
+        <name>MP_Lookups</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Medical Information --></label>
+        <name>Medical_Information</name>
     </quickActions>
     <quickActions>
         <label><!-- New Task --></label>
@@ -3061,12 +3339,36 @@
         <name>Next_Steps</name>
     </quickActions>
     <quickActions>
+        <label><!-- Referral Source Non MP --></label>
+        <name>Referral_Source</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Referral Source Information --></label>
+        <name>Referral_Source_Information</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Referring HTF Unmatched --></label>
+        <name>Referring_HTF_Unmatched</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Referring MP Unmatched --></label>
+        <name>Referring_MP_Unmatched</name>
+    </quickActions>
+    <quickActions>
         <label><!-- Send Diagnosis Verification --></label>
         <name>Send_Diagnosis_Verification</name>
     </quickActions>
     <quickActions>
         <label><!-- Send Referral Email --></label>
         <name>Send_Referral_Email</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Treating HTF Unmatched --></label>
+        <name>Treating_HTF_Unmatched</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Treating MP Unmatched --></label>
+        <name>Treating_MP_Unmatched</name>
     </quickActions>
     <validationRules>
         <errorMessage><!-- Please fill the Family Dynamics Notes --></errorMessage>
@@ -3280,18 +3582,6 @@
     <layouts>
         <layout>Wish Child Lead Layout</layout>
         <sections>
-            <label><!-- Alternate Medical Professionals --></label>
-            <section>Alternate Medical Professionals</section>
-        </sections>
-        <sections>
-            <label><!-- Attachments --></label>
-            <section>Attachments</section>
-        </sections>
-        <sections>
-            <label><!-- Diagnosis Verification --></label>
-            <section>Diagnosis Verification</section>
-        </sections>
-        <sections>
             <label><!-- Family Information --></label>
             <section>Family Information</section>
         </sections>
@@ -3302,18 +3592,6 @@
         <sections>
             <label><!-- Inquiry/Referral --></label>
             <section>Inquiry/Referral</section>
-        </sections>
-        <sections>
-            <label><!-- Medical Information --></label>
-            <section>Medical Information</section>
-        </sections>
-        <sections>
-            <label><!-- Medical Professionals --></label>
-            <section>Medical Professionals</section>
-        </sections>
-        <sections>
-            <label><!-- Referral Source Information --></label>
-            <section>Referral Source Information</section>
         </sections>
     </layouts>
     <recordTypes>

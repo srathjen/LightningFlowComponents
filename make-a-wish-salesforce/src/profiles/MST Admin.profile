@@ -11219,6 +11219,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Lead.DV_Signer__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Lead.Debilitation_may_extend_over_many_years__c</field>
         <readable>true</readable>
     </fieldPermissions>
