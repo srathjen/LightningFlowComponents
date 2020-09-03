@@ -119,31 +119,6 @@
         <componentInstances>
             <componentInstanceProperties>
                 <name>createQuickActionName</name>
-                <value>npsp__NewContact</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>lookupFieldName</name>
-                <value>Lead.Referring_MP__c</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>titleFieldName</name>
-                <value>Referring MP Matched</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>updateQuickActionName</name>
-                <value>Contact.Medical_Professional</value>
-            </componentInstanceProperties>
-            <componentName>console:relatedRecord</componentName>
-            <visibilityRule>
-                <criteria>
-                    <leftValue>{!Record.Referring_MP__r.LastName}</leftValue>
-                    <operator>NE</operator>
-                </criteria>
-            </visibilityRule>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>createQuickActionName</name>
                 <value>NewLead</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
@@ -163,6 +138,31 @@
                 <criteria>
                     <leftValue>{!Record.Referring_MP_HTF__r.Name}</leftValue>
                     <operator>EQUAL</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>createQuickActionName</name>
+                <value>npsp__NewContact</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>lookupFieldName</name>
+                <value>Lead.Referring_MP__c</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>titleFieldName</name>
+                <value>Referring MP Matched</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>updateQuickActionName</name>
+                <value>Contact.Medical_Professional</value>
+            </componentInstanceProperties>
+            <componentName>console:relatedRecord</componentName>
+            <visibilityRule>
+                <criteria>
+                    <leftValue>{!Record.Referring_MP__r.LastName}</leftValue>
+                    <operator>NE</operator>
                 </criteria>
             </visibilityRule>
         </componentInstances>
@@ -223,31 +223,6 @@
         <componentInstances>
             <componentInstanceProperties>
                 <name>createQuickActionName</name>
-                <value>npsp__NewContact</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>lookupFieldName</name>
-                <value>Lead.Treating_MP__c</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>titleFieldName</name>
-                <value>Treating MP Matched</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>updateQuickActionName</name>
-                <value>Contact.Medical_Professional</value>
-            </componentInstanceProperties>
-            <componentName>console:relatedRecord</componentName>
-            <visibilityRule>
-                <criteria>
-                    <leftValue>{!Record.Treating_MP__r.LastName}</leftValue>
-                    <operator>NE</operator>
-                </criteria>
-            </visibilityRule>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>createQuickActionName</name>
                 <value>NewLead</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
@@ -267,6 +242,31 @@
                 <criteria>
                     <leftValue>{!Record.Treating_MP_HTF__r.Name}</leftValue>
                     <operator>EQUAL</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>createQuickActionName</name>
+                <value>npsp__NewContact</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>lookupFieldName</name>
+                <value>Lead.Treating_MP__c</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>titleFieldName</name>
+                <value>Treating MP Matched</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>updateQuickActionName</name>
+                <value>Contact.Medical_Professional</value>
+            </componentInstanceProperties>
+            <componentName>console:relatedRecord</componentName>
+            <visibilityRule>
+                <criteria>
+                    <leftValue>{!Record.Treating_MP__r.LastName}</leftValue>
+                    <operator>NE</operator>
                 </criteria>
             </visibilityRule>
         </componentInstances>
@@ -327,31 +327,6 @@
         <componentInstances>
             <componentInstanceProperties>
                 <name>createQuickActionName</name>
-                <value>npsp__NewContact</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>lookupFieldName</name>
-                <value>Lead.Best_Contact__c</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>titleFieldName</name>
-                <value>Best Contact Matched</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>updateQuickActionName</name>
-                <value>Contact.Medical_Professional</value>
-            </componentInstanceProperties>
-            <componentName>console:relatedRecord</componentName>
-            <visibilityRule>
-                <criteria>
-                    <leftValue>{!Record.Best_Contact__r.LastName}</leftValue>
-                    <operator>NE</operator>
-                </criteria>
-            </visibilityRule>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>createQuickActionName</name>
                 <value>NewLead</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
@@ -371,6 +346,31 @@
                 <criteria>
                     <leftValue>{!Record.Best_Contact_HTF__r.Name}</leftValue>
                     <operator>EQUAL</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>createQuickActionName</name>
+                <value>npsp__NewContact</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>lookupFieldName</name>
+                <value>Lead.Best_Contact__c</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>titleFieldName</name>
+                <value>Best Contact Matched</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>updateQuickActionName</name>
+                <value>Contact.Medical_Professional</value>
+            </componentInstanceProperties>
+            <componentName>console:relatedRecord</componentName>
+            <visibilityRule>
+                <criteria>
+                    <leftValue>{!Record.Best_Contact__r.LastName}</leftValue>
+                    <operator>NE</operator>
                 </criteria>
             </visibilityRule>
         </componentInstances>
