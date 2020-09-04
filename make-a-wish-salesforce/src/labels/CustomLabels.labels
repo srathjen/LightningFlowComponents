@@ -2362,6 +2362,94 @@
         <value>a1a4C000000cfNMQAY</value>
     </labels>
     <labels>
+        <fullName>Wish_Referral_Best_Medical_Contact</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Best Medical Contact</shortDescription>
+        <value>Best Medical Contact</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Create_New_Medical_Professional</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Create New Medical Professional</shortDescription>
+        <value>Create New Medical Professional</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_HTF_Street_Address</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral HTF Street Address</shortDescription>
+        <value>Hospital or Treatment Facility Street Address</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Hospital_Facility_Search</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Hospital Facility Search</shortDescription>
+        <value>Hospital/Facility Search</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Medical_Professional_Search</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Medical Professional Search</shortDescription>
+        <value>Medical Professional Search</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Medical_Professional_Specialty</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Medical Professional Specialty</shortDescription>
+        <value>Medical Professional Specialty</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Referring_Hospital_Facility</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Referring Hospital Facility</shortDescription>
+        <value>Referring Hospital/Facility</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Referring_Medical_Professional</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Referring Medical Professional</shortDescription>
+        <value>Referring Medical Professional</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Title</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Title</shortDescription>
+        <value>Title</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Treating_Hospital_Facility</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Treating Hospital Facility</shortDescription>
+        <value>Treating Hospital/Facility</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Treating_Medical_Professional</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Treating Medical Professional</shortDescription>
+        <value>Treating Medical Professional</value>
+    </labels>
+    <labels>
         <fullName>Wish_Referral_Add_Parent_Legal_Guardian</fullName>
         <categories>Wish Referral</categories>
         <language>en_US</language>

@@ -1,0 +1,24 @@
+<aura:component access="global" description="ExternalLookupSObject">
+    <aura:registerEvent name="ExternalLookupEvent" type="c:ExternalLookupEvent"/>
+    <aura:handler name="lookupSObjectSelect" event="c:LookupSObjectSelectEvent"
+                  action="{!c.handleLookupSelectedEvent}"/>
+    <aura:handler name="lookupSObjectClear" event="c:LookupSObjectClearEvent"
+                  action="{!c.handleLookupClearedEvent}"/>
+    <aura:attribute name="lookupId" type="String"/>
+    <aura:attribute name="sObjectAPIName" type="String"/>
+    <aura:attribute name="label" type="String"/>
+    <aura:attribute name="pluralHint" type="String"/>
+    <aura:attribute name="fieldsToReturn" type="String"/>
+    <aura:attribute name="formattedOutput" type="String"/>
+    <aura:attribute name="iconFullName" type="String"/>
+    <c:LookupSObject
+            lookupId="{!v.lookupId}"
+            sObjectAPIName="{!v.sObjectAPIName}"
+            label="{!v.label}"
+            pluralHint="{!v.pluralHint}"
+            fieldsToReturn="{!v.fieldsToReturn}"
+            formattedOutput="{!v.formattedOutput}"
+            iconFullName="{!v.iconFullName}"
+            recordId=""
+            isExternalLookup="true"/>
+</aura:component>

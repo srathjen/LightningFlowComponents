@@ -70,10 +70,8 @@
     handleSelection: function(cmp, event) {
         // Populate record id (used for binding to a parent component)
         cmp.set('v.recordId', event.getParam('recordId'));
-
         // Populate input with record name
         cmp.set('v.searchString', event.getParam('recordName'));
-
         // Hide the lookup list
         this.showLookupList(cmp, false);
     },
@@ -104,6 +102,7 @@
         var sObjectAPIName = cmp.get('v.sObjectAPIName');
         var fieldsToReturn = cmp.get('v.fieldsToReturn');
         var formattedOutput = cmp.get('v.formattedOutput');
+        var isExternalLookup = cmp.get('v.isExternalLookup');
 
         // Create an Apex action
         var action = cmp.get('c.lookup');
@@ -117,7 +116,8 @@
             "sObjectAPIName": sObjectAPIName,
             "fieldsToReturn": fieldsToReturn,
             "formattedOutput": formattedOutput,
-            "filter": filter
+            "filter": filter,
+            "isExternalLookup": isExternalLookup
         });
 
         // Define the callback
@@ -126,7 +126,6 @@
             // Callback succeeded
             if (state === "SUCCESS") {
                 var result = response.getReturnValue();
-
                 // Error checking
                 if (result.indexOf('406!!ERROR') !== -1) {
                     // error
@@ -144,24 +143,18 @@
                     cmp.set('v.matches', null);
                     return;
                 }
-
             } else if (state === "ERROR") {
                 // Handle any error by reporting it 
-
                 var errors = response.getError();
-
                 if (errors) {
-
                     if (errors[0] && errors[0].message) {
                         this.displayToast('Error', errors[0].message);
                     }
-
                 } else {
                     this.displayToast('Error', 'Unknown error.');
                 }
             }
         });
-
         // Enqueue the action
         $A.enqueueAction(action);
     },
@@ -170,7 +163,6 @@
      * Show/hide the listbox div (lookup list)
      */
     showLookupList: function(cmp, doShow) {
-
         if (doShow) {
             // Reveal the listbox
             $A.util.addClass(cmp.find('lookup-div'), 'slds-is-open');
@@ -187,7 +179,6 @@
      */
     displayToast: function(title, message) {
         var toast = $A.get("e.force:showToast");
-
         // For lightning1 show the toast
         if (toast) {
             //fire the toast event in Salesforce1
@@ -195,7 +186,6 @@
                 "title": title,
                 "message": message
             });
-
             toast.fire();
         } else // otherwise throw an alert
         {
