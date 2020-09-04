@@ -779,7 +779,9 @@
                     <div class="form-group row repeatMedProf mpRel">
                         <div class="col-sm-12 offset-sm-3">
                             <label class="c-input c-checkbox">
-                                <apex:inputCheckbox id="trtSameAsRefInfoChk" onChange="validateForm()" value="{!copyReferrerInfo}"/>
+                                <apex:inputCheckbox id="trtSameAsRefInfoChk"
+                                                    onChange="onChangeSameAsCheckbox(this.id, this.checked)"
+                                                    value="{!copyReferrerInfo}"/>
                                 <span class="c-indicator sas"></span>
                                 {!$Label.Wish_Referral_Same_as_Referrer_Information}
                             </label>
@@ -933,7 +935,9 @@
                     <div class="form-group row repeatMedProfBest">
                         <div class="col-sm-12 offset-sm-3">
                             <label class="c-input c-checkbox">
-                                <apex:inputCheckbox id="bestSameAsRefInfoChk" onChange="validateForm()" value="{!copyReferrerInfoBest}"/>
+                                <apex:inputCheckbox id="bestSameAsRefInfoChk"
+                                                    onChange="onChangeSameAsCheckbox(this.id, this.checked)"
+                                                    value="{!copyReferrerInfoBest}"/>
                                 <span class="c-indicator sas"></span>
                                 {!$Label.Wish_Referral_Same_as_Referrer_Information}
                             </label>
@@ -1662,6 +1666,32 @@
             }
         }
 
+        // Function to change the Search related field to disabled
+        function onChangeSameAsCheckbox(id, isChecked) {
+            let refContactOutput, fieldCreateChk;
+            refContactOutput = document.getElementById('j_id0:frm:externalReferrerContactLookupOutput');
+            if (id === 'j_id0:frm:trtSameAsRefInfoChk') {
+                fieldCreateChk = document.querySelectorAll('[id$="createNewTrtMPchk"]')[0].checked;
+                if (isChecked === true && fieldCreateChk === false) {
+                    document.getElementById('j_id0:frm:externalTreatingContactLookupOutput').value = refContactOutput.value;
+                } else {
+                    document.getElementById('j_id0:frm:externalTreatingContactLookupOutput').value = '';
+                    let externalTrtContact = document.querySelector('#externalTreatingContactLookup');
+                    externalTrtContact.querySelector('#input-5').value = '';
+                }
+            } else if (id === 'j_id0:frm:bestSameAsRefInfoChk') {
+                fieldCreateChk = document.querySelectorAll('[id$="createNewBestMPchk"]')[0].checked;
+                if (isChecked === true && fieldCreateChk === false) {
+                    document.getElementById('j_id0:frm:externalBestContactLookupOutput').value = refContactOutput.value;
+                } else {
+                    document.getElementById('j_id0:frm:externalBestContactLookupOutput').value = '';
+                    let externalBestContact = document.querySelector('#externalBestContactLookup');
+                    externalBestContact.querySelector('#input-9').value = '';
+                }
+            }
+            validateForm();
+        }
+
         // Validation function for Wish Referral Form
         function validateForm() {
             // SIW-370 starts : Added 2 methods to display error message for Primary Language field
@@ -1713,10 +1743,10 @@
             let trtCtcLookupOutput = document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0].value;
             let bestCtcLookupOutput = document.querySelectorAll('[id$="externalBestContactLookupOutput"]')[0].value;
             let referringSameAsTreatingSameAsBest = false;
-            if (refMpCategory === 'Nurse Practitioner' || refMpCategory === 'Physician' || refMpCategory === 'Physician Assistant'
-                && (refCtcLookupOutput === '' || trtCtcLookupOutput === '' || bestCtcLookupOutput === '')) {
+            if ((refMpCategory === 'Nurse Practitioner' || refMpCategory === 'Physician' || refMpCategory === 'Physician Assistant')
+                && (refCtcLookupOutput !== '')) {
                 referringSameAsTreatingSameAsBest = (refCtcLookupOutput === trtCtcLookupOutput)
-                    && (trtCtcLookupOutput === bestCtcLookupOutput);
+                    && (refCtcLookupOutput === bestCtcLookupOutput);
             }
 
             let externalRefContact = document.querySelector('#externalReferrerContactLookup');
