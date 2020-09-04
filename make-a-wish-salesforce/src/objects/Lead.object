@@ -823,6 +823,51 @@
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>DV_Signer_Email__c</fullName>
+        <description>Captures the DV Signer's Email</description>
+        <externalId>false</externalId>
+        <label>DV Signer Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DV_Signer_First_Name__c</fullName>
+        <description>Captures the DV Signers First Name</description>
+        <externalId>false</externalId>
+        <label>DV Signer First Name</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DV_Signer_Last_Name__c</fullName>
+        <description>Captures the DV Signers Last Name</description>
+        <externalId>false</externalId>
+        <label>DV Signer Last Name</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DV_Signer_Phone__c</fullName>
+        <description>Captures the DV Signer's Phone Number</description>
+        <externalId>false</externalId>
+        <label>DV Signer Phone</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Phone</type>
+    </fields>
+    <fields>
         <fullName>DV_Signer__c</fullName>
         <description>Captures the DV Signer Information</description>
         <externalId>false</externalId>
