@@ -145,7 +145,7 @@ if(len(npe01__WorkEmail__c)&gt;0, npe01__WorkEmail__c,
 if(len(npe01__AlternateEmail__c)&gt;0, npe01__AlternateEmail__c,
 Alternate_Email_2__c))),
 
-"Alternate 1",
+"Alternate",
 if(len(npe01__AlternateEmail__c)&gt;0, npe01__AlternateEmail__c,
 if(len(npe01__WorkEmail__c)&gt;0, npe01__WorkEmail__c,
 if(len( Alternate_Email_2__c)&gt;0, Alternate_Email_2__c,
@@ -450,7 +450,7 @@ OtherPhone
         </actions>
         <active>true</active>
         <description>If the standard Email field is newly entered or changed AND the Preferred Email picklist is set to Alternate 1 THEN Salesforce will fill in the Alternate Email field with the email address entered in the standard Email field.</description>
-        <formula>AND(      ISPICKVAL( npe01__Preferred_Email__c ,"Alternate 1"),      OR(           AND(                ISNEW(),                LEN(Email)&gt;0           ),           ISCHANGED( Email )      ) )</formula>
+        <formula>AND(      ISPICKVAL( npe01__Preferred_Email__c ,"Alternate"),      OR(           AND(                ISNEW(),                LEN(Email)&gt;0           ),           ISCHANGED( Email )      ) )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
