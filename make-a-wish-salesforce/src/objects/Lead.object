@@ -703,7 +703,7 @@
         <deleteConstraint>SetNull</deleteConstraint>
         <description>Captures the Best Contact's HTF Account record</description>
         <externalId>false</externalId>
-        <label>Best Contact HTF Street Address</label>
+        <label>Best Contact HTF</label>
         <lookupFilter>
             <active>true</active>
             <filterItems>
@@ -17972,7 +17972,7 @@ RecordType.Name ="Wish Child"</errorConditionFormula>
     </validationRules>
     <validationRules>
         <fullName>Lead_Hospital_or_Treartment_Validation</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Referred status, Hospital or Treatment Facility is mandatory</description>
         <errorConditionFormula>Hospital_Treatment_Facility_Treating__c == Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != 'Integration'
 &amp;&amp;
@@ -18000,7 +18000,7 @@ RecordType.Name ="Wish Child"</errorConditionFormula>
     </validationRules>
     <validationRules>
         <fullName>Lead_Physician_LastName_Validation</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Referred status, Physician Lastname  is mandatory</description>
         <errorConditionFormula>Treating_Medical_Professional_Last_Name__c == Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp;  (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != 'Integration'
 &amp;&amp;

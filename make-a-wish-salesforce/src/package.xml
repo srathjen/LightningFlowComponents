@@ -2946,6 +2946,11 @@
     <name>Settings</name>
   </types>
   <types>
+    <members>Account</members>
+    <members>Contact</members>
+    <name>SharingRules</name>
+  </types>
+  <types>
     <members>Wish_Volunteer_Community_C</members>
     <name>SiteDotCom</name>
   </types>

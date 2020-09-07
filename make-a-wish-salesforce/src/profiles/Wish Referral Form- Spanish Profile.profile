@@ -8,6 +8,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>LookupSObjectCtlr</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>SendReferralEmailLC_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -6443,6 +6447,7 @@
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>true</default>
+        <personAccountDefault>true</personAccountDefault>
         <recordType>Account.Organization</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
