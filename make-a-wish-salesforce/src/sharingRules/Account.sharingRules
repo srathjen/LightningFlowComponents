@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
     <sharingCriteriaRules>
         <fullName>Chapter_Record_Sharing_for_Internal_User</fullName>
         <accessLevel>Read</accessLevel>
@@ -19,6 +18,19 @@
             <value>In Kind Donors</value>
         </criteriaItems>
     </sharingCriteriaRules>
+    <sharingGuestRules>
+        <fullName>Guest_User_Access_to_HTF</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Guest User Access to HTFs</label>
+        <sharedTo>
+            <guestUser>Wish_Referral_Form</guestUser>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Hospital Treatment Facility</value>
+        </criteriaItems>
+    </sharingGuestRules>
     <sharingOwnerRules>
         <fullName>Alabama_Chapter</fullName>
         <accessLevel>Edit</accessLevel>
