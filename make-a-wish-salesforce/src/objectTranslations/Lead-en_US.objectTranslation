@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+﻿<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- Diagnosis Verfication Fieldset --></label>
         <name>Diagnosis_Verfication_Fieldset</name>
@@ -1050,10 +1050,6 @@
     <fields>
         <label><!-- DV Reminder Last Sent Date --></label>
         <name>DV_Reminder_Last_Sent_Date__c</name>
-    </fields>
-    <fields>
-        <label><!-- DV Signer --></label>
-        <name>DV_Signer__c</name>
     </fields>
     <fields>
         <help><!-- Child has a condition without curative treatment options in which debilitation may extend over many years (e.g., severe treatment-resistant epilepsy, some metabolic diseases) --></help>
@@ -3165,18 +3161,6 @@
             <masterLabel>Yes</masterLabel>
             <translation><!-- Yes --></translation>
         </picklistValues>
-    </fields>
-    <fields>
-        <caseValues>
-            <plural>false</plural>
-            <value>Inquiry/Referral Method</value>
-        </caseValues>
-        <caseValues>
-            <plural>true</plural>
-            <value>Inquiry/Referral Methods</value>
-        </caseValues>
-        <name>lead_source</name>
-        <startsWith>Consonant</startsWith>
     </fields>
     <fields>
         <label><!-- Preferred Email --></label>

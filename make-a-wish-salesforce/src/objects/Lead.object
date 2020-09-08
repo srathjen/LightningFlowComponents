@@ -823,14 +823,60 @@
         <type>Date</type>
     </fields>
     <fields>
-        <fullName>DV_Signer__c</fullName>
-        <description>Captures the DV Signer Information</description>
+        <fullName>DV_Signer_Changed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Captures whether the DV Signer is different from the Recipient</description>
         <externalId>false</externalId>
-        <label>DV Signer</label>
+        <inlineHelpText>Captures whether the DV Signer changed from the original recipient it was send to.</inlineHelpText>
+        <label>DV Signer Changed</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DV_Signer_Email__c</fullName>
+        <description>Captures the DV Signer's Email</description>
+        <externalId>false</externalId>
+        <label>DV Signer Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
-        <type>TextArea</type>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DV_Signer_First_Name__c</fullName>
+        <description>Captures the DV Signers First Name</description>
+        <externalId>false</externalId>
+        <label>DV Signer First Name</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DV_Signer_Last_Name__c</fullName>
+        <description>Captures the DV Signers Last Name</description>
+        <externalId>false</externalId>
+        <label>DV Signer Last Name</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DV_Signer_Phone__c</fullName>
+        <description>Captures the DV Signer's Phone Number</description>
+        <externalId>false</externalId>
+        <label>DV Signer Phone</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Phone</type>
     </fields>
     <fields>
         <fullName>Does_Child_Have_Cognitive_Delays__c</fullName>
@@ -2417,7 +2463,7 @@
         <fullName>DV_Not_Signed__c</fullName>
         <description>This field informs the intake manager that a docusign is present, but not signed</description>
         <externalId>false</externalId>
-        <formula>IF( (ISBLANK(Provider_Signature__c) &amp;&amp; DV_Present__c = True),
+        <formula>IF( (ISBLANK(DV_Signer_First_Name__c) &amp;&amp; DV_Present__c = True),
 IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Unsigned</label>
