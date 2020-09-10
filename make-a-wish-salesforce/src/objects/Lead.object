@@ -8574,6 +8574,21 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
+            <field>Non_Verbal__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Non_Verbal_Communication_Method__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Non_Verbal_Additional_Information__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
             <field>Any_medical_reason_for_moving_quickly__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
@@ -9160,21 +9175,6 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         </displayedFields>
         <displayedFields>
             <field>SD4_ICD_Code__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Salutation</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Salutation_AlternateMP1__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Salutation_AlternateMP2__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
