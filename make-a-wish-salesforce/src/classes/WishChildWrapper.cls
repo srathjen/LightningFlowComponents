@@ -83,6 +83,17 @@ public class WishChildWrapper {
     public Boolean signLang { get; set; }
     public Boolean assistiveComm { get; set; }
     /*SIW-378 End*/
+    /**
+     * ODP-17
+     * @description Used to get alternate 2 treating medical professional details.
+     **/
+    public String isSignerSame { get; set; }
+    public String dvSignerFname { get; set; }
+    public String dvSignerLname { get; set; }
+    public String dvSignerEmail { get; set; }
+    public String dvSignerPhone { get; set; }
+    /*ODP-17 End*/
+    
     public WishChildWrapper() {
         communicationList = new List<String>();
     }

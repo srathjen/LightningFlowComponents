@@ -81,6 +81,13 @@ public class DiagnosisVerification_AC {
     public final String pleaseSelectAllText { get; set; }
     public final String placeHolderAddInfo { get; set; }
 
+    //ODP-17 : Adding variables to hold DV Signer mail receiver Info
+    public String requestedDVSigner_firstName { get;set; }
+    public String requestedDVSigner_lastName { get;set; }
+    public String requestedDVSigner_phone { get;set; }
+    public String requestedDVSigner_email { get;set; }
+    public String requestedDVSigner_HTF_name { get; set; }
+
     public DiagnosisVerification_AC() {
         pluHypTxt = '';
         wishChildWrapperIns = new WishChildWrapper();
@@ -181,6 +188,46 @@ public class DiagnosisVerification_AC {
         wishChildWrapperIns.timeFrameValue = currLead.Expedite_timeframe__c;
         wishChildWrapperIns.idealtimeFrameValue = currLead.Other_expedite_timeframe_comments__c;
         //SIW-355 End       
+        //ODP-17 Start : Mapped new DV signer fields value
+        if (currLead.DV_Signer_Changed__c == true) {
+            wishChildWrapperIns.isSignerSame = 'No';
+        } else if (currLead.DV_Signer_Changed__c == false) {
+            wishChildWrapperIns.isSignerSame = 'Yes';
+        }
+        populateDVSignerInfo();
+        
+        if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL) {
+            requestedDVSigner_firstName = currLead.Treating_MP__r.FirstName;
+            requestedDVSigner_lastName = currLead.Treating_MP__r.LastName;
+            requestedDVSigner_phone = currLead.Treating_MP__r.Phone;
+            requestedDVSigner_email = currLead.Treating_MP__r.Email;
+            requestedDVSigner_HTF_name = currLead.Treating_MP_HTF__r.Name;
+        } else if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_BEST_CONTACT) {
+            requestedDVSigner_firstName = currLead.Best_Contact__r.FirstName;
+            requestedDVSigner_lastName = currLead.Best_Contact__r.LastName;
+            requestedDVSigner_phone = currLead.Best_Contact__r.Phone;
+            requestedDVSigner_email = currLead.Best_Contact__r.Email;
+            requestedDVSigner_HTF_name = currLead.Best_Contact_HTF__r.Name;
+        } else if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL) {
+            requestedDVSigner_firstName = currLead.ALT_1_MP__r.FirstName;
+            requestedDVSigner_lastName = currLead.ALT_1_MP__r.LastName;
+            requestedDVSigner_phone = currLead.ALT_1_MP__r.Phone;
+            requestedDVSigner_email = currLead.ALT_1_MP__r.Email;
+            requestedDVSigner_HTF_name = currLead.ALT_1_MP_HTF__r.Name;
+        } else if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_2_MEDICAL_PROFESSIONAL) {
+            requestedDVSigner_firstName = currLead.ALT_2_MP__r.FirstName;
+            requestedDVSigner_lastName = currLead.ALT_2_MP__r.LastName;
+            requestedDVSigner_phone = currLead.ALT_2_MP__r.Phone;
+            requestedDVSigner_email = currLead.ALT_2_MP__r.Email;
+            requestedDVSigner_HTF_name = currLead.ALT_2_MP_HTF__r.Name;
+        } else {
+            requestedDVSigner_firstName = '';
+            requestedDVSigner_lastName = '';
+            requestedDVSigner_phone = '';
+            requestedDVSigner_email = '';
+            requestedDVSigner_HTF_name = '';
+        }
+		//ODP-17 End
 
         if (currLead.Child_will_ultimately_die_prematurely__c == true) {
             wishChildWrapperIns.describePatient = '1';
@@ -1345,6 +1392,33 @@ public class DiagnosisVerification_AC {
             currLead.Non_Verbal_Additional_Information__c = wishChildWrapperIns.nonVerbalAddInfo;
             }
             //SIW-378 End
+            //ODP-17 Start : Add dvSigner info on Save
+            if(!String.isBlank(wishChildWrapperIns.isSignerSame)) {
+                if(wishChildWrapperIns.isSignerSame == 'Yes') {
+                	currLead.DV_Signer_Changed__c = false;
+                    currLead.DV_Signer_First_Name__c = requestedDVSigner_firstName;
+                    currLead.DV_Signer_Last_Name__c = requestedDVSigner_lastName;
+                    currLead.DV_Signer_Email__c = requestedDVSigner_email;
+                    currLead.DV_Signer_Phone__c = requestedDVSigner_phone;
+                } else {
+                    currLead.DV_Signer_Changed__c = true;
+                    if(!String.isBlank(wishChildWrapperIns.dvSignerFname)) {
+                        currLead.DV_Signer_First_Name__c = wishChildWrapperIns.dvSignerFname;
+                    }
+                    if(!String.isBlank(wishChildWrapperIns.dvSignerLname)) {
+                        currLead.DV_Signer_Last_Name__c = wishChildWrapperIns.dvSignerLname;
+                    }
+                    if(!String.isBlank(wishChildWrapperIns.dvSignerEmail)) {
+                        currLead.DV_Signer_Email__c = wishChildWrapperIns.dvSignerEmail;
+                    }
+                    if(!String.isBlank(wishChildWrapperIns.dvSignerPhone)) {
+                        currLead.DV_Signer_Phone__c = wishChildWrapperIns.dvSignerPhone;
+                    }
+                }
+            } else {
+                currLead.DV_Signer_Changed__c = false;
+            }
+			//ODP-17 End
 
             update currLead;
             insert diagnosisVerificationLstForInsert;
@@ -1377,7 +1451,11 @@ public class DiagnosisVerification_AC {
         PageReference reference;
 
         try {
-            if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL) {
+            //if(wishChildWrapperIns.isSignerSame == 'No'){
+                mySenderName = currLead.DV_Signer_First_Name__c + ' ' + currLead.DV_Signer_Last_Name__c;
+                myEmail = currLead.DV_Signer_Email__c;
+            //}
+            /*else if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL) {
                 mySenderName = currLead.Treating_Medical_Professional_First_Name__c + ' ' + currLead.Treating_Medical_Professional_Last_Name__c;
                 myEmail = currLead.Treating_Medical_Professional_Email__c;
             } else if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_BEST_CONTACT) {
@@ -1392,7 +1470,7 @@ public class DiagnosisVerification_AC {
             } else {
                 mySenderName = currLead.Treating_Medical_Professional_First_Name__c + ' ' + currLead.Treating_Medical_Professional_Last_Name__c;
                 myEmail = currLead.Treating_Medical_Professional_Email__c;
-            }
+            }*/
 
             String account;
             String IntegratorKey;
@@ -1588,7 +1666,11 @@ public class DiagnosisVerification_AC {
                 'Does_Child_Have_Speech_or_Language_Delay__c',
                 'Non_Verbal_Communication_Method__c',
                 'Non_Verbal_Additional_Information__c',
-                'Non_Verbal__c'
+                'Non_Verbal__c',
+                'Treating_MP__r.FirstName', 'Treating_MP__r.LastName', 'Treating_MP__r.Phone', 'Treating_MP__r.Email', 'Treating_MP_HTF__r.Name',
+                'Best_Contact__r.FirstName', 'Best_Contact__r.LastName', 'Best_Contact__r.Phone', 'Best_Contact__r.Email', 'Best_Contact_HTF__r.Name',
+                'ALT_1_MP__r.FirstName', 'ALT_1_MP__r.LastName', 'ALT_1_MP__r.Phone', 'ALT_1_MP__r.Email', 'ALT_1_MP_HTF__r.Name',
+                'ALT_2_MP__r.FirstName', 'ALT_2_MP__r.LastName', 'ALT_2_MP__r.Phone', 'ALT_2_MP__r.Email', 'ALT_2_MP_HTF__r.Name'
         };
            
         for (String field : FIELDS_TO_SELECT) {
@@ -1603,5 +1685,33 @@ public class DiagnosisVerification_AC {
         query += ' FROM Lead WHERE Id = :leadId';
 
         return Database.query(query);
+    }
+
+    /*
+     * @description     Used to populate DV_Signer information on VF page
+     *
+     * @author          Pramod N, Traction on demand
+     * @date            Sept 10, 2020
+     */
+    public void populateDVSignerInfo() {
+        if (wishChildWrapperIns.isSignerSame == 'No') {
+            if(currLead.DV_Signer_Changed__c == true) {
+                wishChildWrapperIns.dvSignerFname = currLead.DV_Signer_First_Name__c;
+                wishChildWrapperIns.dvSignerLname = currLead.DV_Signer_Last_Name__c;
+                wishChildWrapperIns.dvSignerEmail = currLead.DV_Signer_Email__c;
+                wishChildWrapperIns.dvSignerPhone = currLead.DV_Signer_Phone__c;
+            } else {
+                wishChildWrapperIns.dvSignerFname = '';
+                wishChildWrapperIns.dvSignerLname = '';
+                wishChildWrapperIns.dvSignerPhone = '';
+                wishChildWrapperIns.dvSignerEmail = '';
+            }
+        } 
+        else {
+            wishChildWrapperIns.dvSignerFname = '';
+            wishChildWrapperIns.dvSignerLname = '';
+            wishChildWrapperIns.dvSignerPhone = '';
+            wishChildWrapperIns.dvSignerEmail = '';
+        }
     }
 }
