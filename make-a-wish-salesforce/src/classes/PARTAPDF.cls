@@ -24,6 +24,12 @@ public class PARTAPDF {
     public final String noText { get; set; }  
     public final String placeHolderAddInfo { get; set; } 
 
+    //ODP-17 : To hold DV Signer Values
+    public String dvSignerFirstName { get; set; }
+    public String dvSignerLastName { get; set; }
+    public String dvSignerPhone { get; set; }
+    public String dvSignerEmail { get; set; }
+
     public PARTAPDF() {
         currentConditionList = new List<String>();       
         leadId = ApexPages.currentPage().getParameters().get('leadId');
@@ -94,7 +100,12 @@ public class PARTAPDF {
             query += ' WHERE Id = :leadId';
 
             currLead = Database.query(query);
-
+            //ODP-17 Start
+			dvSignerFirstName = currLead.DV_Signer_First_Name__c;
+            dvSignerLastName = currLead.DV_Signer_Last_Name__c;
+            dvSignerPhone = currLead.DV_Signer_Phone__c;
+            dvSignerEmail = currLead.DV_Signer_Email__c;
+            //ODP-17 End
             recValueList.add(String.valueOf(currLead));
 
             if (currLead.Current_Condition_Label__c != null) {

@@ -178,82 +178,26 @@
                             -->
                             <div class="wish-child-info" style="margin-top:1% !important">
                                 <div class="sectionHeader">Medical Professional Information</div>
-                                <apex:outputPanel rendered="{!if(currLead.Hidden_DV_form_Medical_professional_Type__c == 'Treating Medical Professional', true, false)}">
+                                <!--ODP-17 : Show "DV_SIGNER" info if some other user filled the form-->
+                                <apex:outputPanel>
                                     <div class="container" style="width:100%;">
                                         <div class="left-col"> First Name : </div>
-                                        <div class="left-col"> {!currLead.Treating_Medical_Professional_First_Name__c}</div>
+                                        <div class="left-col"> {!dvSignerFirstName}</div>
                                     </div>
                                     <div class="container" style="width:100%;">
                                         <div class="left-col"> Last Name : </div>
-                                        <div class="left-col"> {!currLead.Treating_Medical_Professional_Last_Name__c}</div>
+                                        <div class="left-col"> {!dvSignerLastName}</div>
                                     </div>
                                     <div class="container" style="width:100%;">
                                         <div class="left-col"> Phone : </div>
-                                        <div class="left-col"> {!currLead.Treating_Medical_Professional_Phone__c}</div>
+                                        <div class="left-col"> {!dvSignerPhone}</div>
                                     </div>
                                     <div class="container" style="width:100%;">
                                         <div class="left-col"> Email : </div>
-                                        <div class="left-col"> {!currLead.Treating_Medical_Professional_Email__c}</div>
+                                        <div class="left-col"> {!dvSignerEmail}</div>
                                     </div>
                                 </apex:outputPanel>
-                                
-                                <apex:outputPanel rendered="{!if(currLead.Hidden_DV_form_Medical_professional_Type__c == 'Best contact for Physician', true, false)}">
-                                    <div class="container" style="width:100%;">
-                                        <div class="left-col"> First Name : </div>
-                                        <div class="left-col"> {!currLead.Best_Contact_for_Physician_First_Name__c}</div>
-                                    </div>
-                                    <div class="container" style="width:100%;">
-                                        <div class="left-col"> Last Name : </div>
-                                        <div class="left-col"> {!currLead.Best_Contact_for_Physician_Last_Name__c}</div>
-                                    </div>
-                                    <div class="container" style="width:100%;">
-                                        <div class="left-col"> Phone : </div>
-                                        <div class="left-col"> {!currLead.Best_contact_for_Physician_Phone__c}</div>
-                                    </div>
-                                    <div class="container" style="width:100%;">
-                                        <div class="left-col"> Email : </div>
-                                        <div class="left-col"> {!currLead.Best_contact_for_Physician_Email__c}</div>
-                                    </div>
-                                </apex:outputPanel>
-                                
-                                <apex:outputPanel rendered="{!if(currLead.Hidden_DV_form_Medical_professional_Type__c == 'Alternate 1 Medical Professional', true, false)}">
-                                    <div class="container" style="width:100%;">
-                                        <div class="left-col"> First Name : </div>
-                                        <div class="left-col"> {!currLead.Alternate1MedProfessionalFirstName__c}</div>
-                                    </div>
-                                    <div class="container" style="width:100%;">
-                                        <div class="left-col"> Last Name : </div>
-                                        <div class="left-col"> {!currLead.Alternate1MedProfessionalLastName__c}</div>
-                                    </div>
-                                    <div class="container" style="width:100%;">
-                                        <div class="left-col"> Phone : </div>
-                                        <div class="left-col"> {!currLead.Alternate1MedProfessionalPhone__c}</div>
-                                    </div>
-                                    <div class="container" style="width:100%;">
-                                        <div class="left-col"> Email : </div>
-                                        <div class="left-col"> {!currLead.Alternate1MedicalProfessionalEmail__c}</div>
-                                    </div>
-                                </apex:outputPanel>
-                                
-                                
-                                 <apex:outputPanel rendered="{!if(currLead.Hidden_DV_form_Medical_professional_Type__c == 'Alternate 2 Medical Professional', true, false)}">
-                                    <div class="container" style="width:100%;">
-                                        <div class="left-col"> First Name : </div>
-                                        <div class="left-col"> {!currLead.Alternate2MedProfessionalFirstName__c}</div>
-                                    </div>
-                                    <div class="container" style="width:100%;">
-                                        <div class="left-col"> Last Name : </div>
-                                        <div class="left-col"> {!currLead.Alternate2MedProfessionalLastName__c}</div>
-                                    </div>
-                                    <div class="container" style="width:100%;">
-                                        <div class="left-col"> Phone : </div>
-                                        <div class="left-col"> {!currLead.Alternate2MedProfessionalPhone__c}</div>
-                                    </div>
-                                    <div class="container" style="width:100%;">
-                                        <div class="left-col"> Email : </div>
-                                        <div class="left-col"> {!currLead.Alternate2MedProfessionalEmail__c}</div>
-                                    </div>
-                                </apex:outputPanel>
+                                <!--END ODP-17-->
                                 
                                 <div class="container" style="width:100%;">
                                     <div class="left-col"> I am recognized by my state to practice as a : </div>
