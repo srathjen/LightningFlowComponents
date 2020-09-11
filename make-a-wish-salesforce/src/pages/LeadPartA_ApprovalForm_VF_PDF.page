@@ -5,6 +5,7 @@
 4. 09/04/2020 - Manoj      - SIW-355 : Changed the placement of one question as mentiond in the ticket, changed question verbiage for one question
 5. 29/07/2020 - Manoj      - SIW-378 : Added and hide Questions as mentioned in ticket
 6. 07/08/2020 - Manoj      - SIW-654 : Added question label to be displayed in docusign
+7. 11/09/2020 - Pramod     - ODP-17  : Added DV Signer Info
 *********************************************************************************************************************************** -->
 <apex:page showHeader="false" renderAs="pdf" sidebar="false" applyHtmlTag="false" standardStylesheets="false" controller="PARTAPDF" applyBodyTag="false" cache="false">
     <head>

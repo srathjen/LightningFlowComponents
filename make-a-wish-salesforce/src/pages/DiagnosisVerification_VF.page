@@ -22,6 +22,7 @@ Modification Log:
 16.29/07/2020 - Manoj      - SIW-378 : Added and hide Questions as mentioned in ticket
 17.07/08/2020 - Manoj      - SIW-654 : Hide unnecessary question based on user input to previous questions
 18.18/08/2020 - Manoj      - SIW-669: Show Add diagnosis option in case entered diagnosis results in comment text box
+19.11/09/2020 - Pramod     - ODP-17  : Added and Edited information for DV Signer in Provider Information Section
 *********************************************************************************************************************************** -->
 <apex:page controller="DiagnosisVerification_AC" applyBodyTag="false" sidebar="false" showHeader="false" docType="html-5.0" standardStylesheets="false" title="Make-A-Wish | Diagnosis Verification Form" cache="false">
     <script>
@@ -364,7 +365,7 @@ Modification Log:
                                     }
                                 }  
                                 </script>
-                                                                                                                         
+
                                 <!-- about -->
                                 <fieldset>
                                     <legend class="m-b-0">About {!currLead.FirstName} {!currLead.LastName}</legend>

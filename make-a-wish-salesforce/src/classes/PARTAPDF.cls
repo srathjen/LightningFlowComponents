@@ -3,8 +3,9 @@ Author      : MST Solutions
 Date        : 9/30/2016
 Description : This class is used to display the Medical Information in Docusign page
 1. 09/04/2020 - Manoj      - SIW-355 : Added 2 new field to get queried on page load
-2. 29 Jul 2020 - Manoj      - SIW-378 : Added  fields in query for new questions
-2. 07/08/2020  - Manoj      - SIW-654 : Added  fields for placeholder
+2. 29 Jul 2020 - Manoj     - SIW-378 : Added  fields in query for new questions
+2. 07/08/2020  - Manoj     - SIW-654 : Added  fields for placeholder
+3. 11/09/2020 - Pramod     - ODP-17  : Added fields to hold DV Signer Info 
 *******************************************************************************************************************/
 public class PARTAPDF {
     public Id leadId { get; set; }
