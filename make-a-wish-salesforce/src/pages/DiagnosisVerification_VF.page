@@ -242,6 +242,10 @@ Modification Log:
                                     </div>
                                     <!--ODP-17 starts-->
                                     <div class="form-group row">
+                                        <label class="col-md-3">Hospital or Treatment Facility</label>
+                                        <div class="col-md-6 text-muted">{!requestedDVSigner_HTF_name}</div>
+                                    </div>
+                                    <div class="form-group row">
                                         <div class="col-md-12"><label>WILL [{!requestedDVSigner_firstName} {!requestedDVSigner_lastName}] BE SIGNING THIS DOCUMENT?</label></div>
                                         <div class="col-md-6 vegitative">
                                             <!--<apex:selectList value="{!wishChildWrapperIns.vegetativeState}" multiselect="false" size="1" styleClass="comatose form-control c-select VegetativePick requiredField" >-->
@@ -255,12 +259,6 @@ Modification Log:
                                     <!--End ODP-17-->
                                    <input type="hidden" class="wish-Status" value="{!wishStatus}"/>
                                     <!--ODP-17 Start-->
-                                    <div class="form-group row signer-info">
-                                        <label class="col-md-3">Hospital or Treatment Facility</label>
-                                        <!-- SIW-232 <div class="col-md-6"> --> 
-                                        <!-- SIW-232 <apex:inputText value="{!wishChildWrapperIns.treatingHospital}" styleClass="form-control requiredField" maxlength="50" html-placeholder="Hospital/Facility Name"/> --> <!-- SIW-232 -->
-                                        <div class="col-md-6 text-muted">{!requestedDVSigner_HTF_name}</div>
-                                    </div>
                                     <legend class="signer-info">Signer Information</legend>
                                     <div class="form-group row signer-info">
                                         <div class="col-md-3"><label>First Name</label></div>
