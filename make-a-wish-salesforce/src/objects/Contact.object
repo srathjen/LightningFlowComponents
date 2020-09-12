@@ -3122,6 +3122,17 @@ IF(ISBLANK(COI_Expiration_Date__c)=TRUE, IMAGE("/resource/icons/COI_Missing.png"
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Contact_Notes__c</fullName>
+        <description>Captures the contact notes about there various pieces of contact info.</description>
+        <externalId>false</externalId>
+        <label>Contact Notes</label>
+        <length>1000</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
         <fullName>Contact_Owner_Dupe_Alert__c</fullName>
         <defaultValue>false</defaultValue>
         <description>When True this field triggers Sending the Duplicate Referral Email (via Workflow) to the Contact Owner, and then is immediately blanked out.</description>
