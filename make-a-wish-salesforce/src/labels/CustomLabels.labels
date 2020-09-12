@@ -254,6 +254,13 @@
         <value>5a81d5c0-fcaa-4dba-9712-5f206b7f7c13</value>
     </labels>
     <labels>
+        <fullName>DV_Form_Email_Template_API</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DV Form Email Template API</shortDescription>
+        <value>Part_A_Form_Email_Template</value>
+    </labels>
+    <labels>
         <fullName>DV_to_fax</fullName>
         <categories>Drawloop</categories>
         <language>en_US</language>
