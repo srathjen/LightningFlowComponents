@@ -52,7 +52,8 @@ public class Utils {
             if (currentUser == null) {
                 currentUser = [
                         SELECT Id, Name, Chapter_Name__c, UserRole.Name, ProfileId, Profile.Id, Profile.Name, ContactId,
-                                Contact.Account.Volunteer_Manager__c, Contact.OwnerId, Hidden_Role_Name_Id__c, CreatedDate
+                                Contact.Account.Volunteer_Manager__c, Contact.OwnerId, Hidden_Role_Name_Id__c, CreatedDate,
+                                Email, Title, Phone
                         FROM User
                         WHERE Id = :UserInfo.getUserId()
                         LIMIT 1

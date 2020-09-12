@@ -252,6 +252,9 @@ public class LeadDomain extends trac_TriggerHandlerBase {
                     if (isLeadPending(newLead)) {
                         newLead.Pending_Diagnosis_Date__c = Date.today();
                     }
+                    if(String.isNotEmpty(newLead.Hidden_DV_Form_Name__c)){
+                        newLead.Part_A_DV_Recipient__c = newLead.Hidden_DV_Form_Name__c;
+                    }
                     if (newLead.SD1_ICD_Code__c != oldLead.SD1_ICD_Code__c && newLead.SD1_ICD_Code__c != null) {
                         icdCodeLeadMap.put(newLead.SD1_ICD_Code__c, newLead);
                         if (icdCodeDescriptionMatchMap.containsKey(newLead.Id)) {

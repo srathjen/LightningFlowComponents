@@ -11,95 +11,277 @@
  * the date DV was signed
  * 5. 09/10/2019 - Manik - WLP-423
  * 6. 1/2/2020 - CSmith - SIW-342 - field name changes reverted
+ * 7. 11/9/2020 - Gus - ODP-16
  **/
 public class LeadSelectMedEmailController_AC {
+	public Boolean success { get; set; }
+	public Boolean isSend { get; set; }
+	public Lead currLead { get; set; }
+	public String URLToRedirect { get; set; }
+	public List<SendDiagnosisWrapper> contacts { get; set; }
+	public String log;
+	public String recId;
+	private static final String REFERRING_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_REFERRING_MEDICAL_PROFESSIONAL;
+	private static final String TREATING_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL;
+	private static final String BEST_CONTACT = Constant_AC.LEAD_DV_FORM_TYPE_BEST_CONTACT;
+	private static final String ALTERNATE_1_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL;
+	private static final String ALTERNATE_2_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_2_MEDICAL_PROFESSIONAL;
+	private static final String RELATIONSHIP_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_MEDICAL_PROFESSIONAL;
 
-    public Boolean success { get; set; }
-    public Lead currLead { get; set; }
-    public String URLToRedirect { get; set; }
-    public String Logvalue;
-    public String recId;
+	public LeadSelectMedEmailController_AC() {
+		currLead = findLead(ApexPages.currentPage().getParameters().get('id'));
+		contacts = findContacts(currLead);
+	}
 
-    public LeadSelectMedEmailController_AC() {
-        currLead = [
-                SELECT Id,Part_A_Form_Password__c,Using_Paper_Process_For_DV__c, Part_A_Sent__c,
-                        Best_Contact_for_Physician_Last_Name__c, HiddenMedicalProfessionalEmail__c,
-                        Best_Contact_for_Physician_First_Name__c,Best_contact_for_Physician_Email__c,
-                        Treating_Medical_Professional_First_Name__c,Of_Times_Email_Sent__c,
-                        Treating_Medical_Professional_Last_Name__c,Treating_Medical_Professional_Email__c,
-                        Alternate1MedProfessionalFirstName__c,Alternate1MedProfessionalLastName__c,
-                        Alternate1MedProfessionalPhone__c, Alternate1MedicalProfessionalEmail__c,
-                        Alternate2MedProfessionalFirstName__c, Alternate2MedProfessionalLastName__c,
-                        Alternate2MedProfessionalPhone__c, Alternate2MedProfessionalEmail__c,Part_A_Received__c
-                FROM Lead
-                WHERE Id = :ApexPages.currentPage().getParameters().get('id')
-        ];
-    }
+	/**
+	 * @description Update Lead medical professional type
+	 */
+	public void sendDiagnosisVerification() {
+		try {
+			if (ApexPages.currentPage().getParameters().get('action').equals('returnToLead')) {
+				isSend = false;
+				success = true;
+			} else if (ApexPages.currentPage().getParameters().get('action').equals('sendDv')) {
+				isSend = true;
+				DiagnosisVerificationService.deleteByLeadId(currLead.Id);
+				LeadService.resetLead(currLead);
+				URLToRedirect = Endpoints__c.getInstance().Instance_URL__c + '/' + currLead.Id;
+				currLead.HiddenMedicalProfessionalEmail__c = ApexPages.currentPage().getParameters().get('email');
+				currLead.Hidden_DV_form_Medical_professional_Type__c = ApexPages.currentPage().getParameters().get('type');
+				currLead.Sub_Status__c = Constant_AC.LEAD_SUB_STATUS_PENDING_DIAGNOSIS_VERIFICATION;
+				currLead.Pending_Diagnosis_Date__c = Date.today();
+				if (currLead.Of_Times_Email_Sent__c == null) {
+					currLead.Of_Times_Email_Sent__c = 0;
+				} else {
+					currLead.Of_Times_Email_Sent__c = currLead.Of_Times_Email_Sent__c + 1;
+				}
+				DiagnosisVerificationService.processSendDiagnosisVerification(currLead, currLead.HiddenMedicalProfessionalEmail__c);
+				update currLead;
+				success = true;
+			}
+		} catch (Exception ex) {
+			success = false;
+			log = String.valueOf(currLead);
+			recId = currLead.Id;
+			new ApexDebugLog().createLog(new ApexDebugLog.Error(
+					'LeadSelectMedEmailController_AC', 'updateLead', recId, ex, log));
+			ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
+			ApexPages.addMessage(myMsg);
+		}
+	}
 
-    /**
-     * @description Update Lead medical professional type
-     */
-    public void updateLead() {
-        try {
-            URLToRedirect = Endpoints__c.getInstance().Instance_URL__c + '/' + currLead.Id;
-            currLead.Hidden_DV_form_Medical_professional_Type__c = ApexPages.currentPage().getParameters().get('type');
-            currLead.HiddenMedicalProfessionalEmail__c = ApexPages.currentPage().getParameters().get('email');
-            currLead.Sub_Status__c = Constant_AC.LEAD_SUB_STATUS_PENDING_DIAGNOSIS_VERIFICATION;
-            if (currLead.Of_Times_Email_Sent__c == null) {
-                currLead.Of_Times_Email_Sent__c = 0;
-            }
-            currLead.Pending_Diagnosis_Date__c = Date.today();
-            if (ApexPages.currentPage().getParameters().get('sendOrRest') == 'Reset') {
-                currLead.Part_A_Form_Password__c = Utils.generateRandomNumber(6);
-                resetDVValues();
-                currLead.Part_A_Received__c = null;
-            }
-            currLead.Of_Times_Email_Sent__c = currLead.Of_Times_Email_Sent__c + 1;
-            update currLead;
-            success = true;
-        } catch (Exception ex) {
-            success = false;
-            Logvalue = String.valueOf(currLead);
-            recId = currLead.Id;
-            new ApexDebugLog().createLog(new ApexDebugLog.Error(
-                    'LeadSelectMedEmailController_AC', 'updateLead', recId, ex, Logvalue));
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
-            ApexPages.addMessage(myMsg);
-        }
-    }
+	/**
+	 * @description Redirect to Lead detail page.
+	 * @return Page Reference
+	 */
+	public PageReference GoToLeadViewPage() {
+		PageReference page = new PageReference('/' + currLead.Id);
+		return page;
+	}
 
-    /**
-     * @description Reset Lead fields and delete Diagnosis Verifications, Case, DocusSignStatus with Attachments and Lead Files
-     */
-    public void resetDVValues() {
-        try {
-            LeadService.resetLead(currLead.Id);
-            DiagnosisVerificationService.deleteByLeadId(currLead.Id);
-            CaseService.deleteByLeadIdAndRecordTypeNames(currLead.Id,
-                    new List<String>{
-                            Constant_AC.CASE_RECORD_TYPE_DIAGNOSIS_VERIFICATION_REVIEW
-                    });
-            DocuSignService.deleteByLeadIdAndDeleteRelatedAttachments(currLead.Id);
-            LeadFileService.deleteNonFolderByLeadId(currLead.Id);
-        } catch (Exception ex) {
-            success = false;
-            Logvalue = String.valueOf(currLead);
-            recId = currLead.Id;
-            new ApexDebugLog().createLog(new ApexDebugLog.Error(
-                    'LeadSelectMedEmailController_AC', 'resetDVValues', recId, ex, Logvalue));
-            ApexPages.Message myMsg = new ApexPages.Message(
-                    ApexPages.Severity.ERROR, Label.Debug_log_error_message);
-            ApexPages.addMessage(myMsg);
-        }
-    }
+	private Lead findLead(Id leadId) {
+		return [
+				SELECT Id, FirstName, ChapterName__c, Part_A_Form_Password__c, Part_A_Sent__c,
+						Part_A_Received__c, Using_Paper_Process_For_DV__c, Relationship_to_child__c,
+						HiddenMedicalProfessionalEmail__c, Of_Times_Email_Sent__c, Referring_MP__c,
+						Referring_MP__r.Name, Referring_MP__r.npe01__WorkEmail__c,
+						Referring_MP__r.npe01__AlternateEmail__c, Referring_MP__r.Alternate_Email_2__c,
+						Referring_MP_Email__c, Referring_MP__r.Contact_Notes__c, Treating_MP__c, Treating_MP__r.Name,
+						Treating_MP__r.npe01__WorkEmail__c, Treating_MP__r.npe01__AlternateEmail__c,
+						Treating_MP__r.Alternate_Email_2__c, Treating_Medical_Professional_Email__c,
+						Treating_MP__r.Contact_Notes__c, Best_Contact__c, Best_Contact__r.Name,
+						Best_Contact__r.npe01__WorkEmail__c, Best_Contact__r.npe01__AlternateEmail__c,
+						Best_Contact__r.Alternate_Email_2__c, Best_contact_for_Physician_Email__c, Best_Contact__r.Contact_Notes__c,
+						Alt_1_MP__c, Alt_1_MP__r.Name, Alt_1_MP__r.npe01__WorkEmail__c, Alt_1_MP__r.npe01__AlternateEmail__c,
+						Alt_1_MP__r.Alternate_Email_2__c, Alt_1_MP__r.Contact_Notes__c, Alt_2_MP__c,
+						Alt_2_MP__r.Name, Alt_2_MP__r.npe01__WorkEmail__c, Alt_2_MP__r.npe01__AlternateEmail__c,
+						Alt_2_MP__r.Alternate_Email_2__c, Alt_2_MP__r.Contact_Notes__c, Hidden_DV_Form_Name__c,
+						Hidden_Potential_Rush__c, Status, Diagnosis_Given_By_Referrer__c, ICD_Given_By_Referrer__c,
+						PD_Condition_Description__c, PD_ICD_Code__c,Does_Child_Have_Cognitive_Delays__c,
+						Does_Child_Have_Speech_or_Language_Delay__c,Non_Verbal_Communication_Method__c,
+						Non_Verbal_Additional_Information__c,Non_Verbal__c
+				FROM Lead
+				WHERE Id = :leadId
+		];
+	}
 
-    /**
-     * @description Redirect to Lead detail page.
-     *
-     * @return Page Reference
-     */
-    public PageReference GoToLeadViewPage() {
-        PageReference page = new PageReference('/' + currLead.Id);
-        return page;
-    }
+	private List<SendDiagnosisWrapper> findContacts(Lead lead) {
+		contacts = new List<SendDiagnosisWrapper>();
+		Boolean displayReferringContactInformation = true;
+		if (lead.Referring_MP__c == lead.Treating_MP__c) {
+			displayReferringContactInformation = false;
+		} else if (lead.Referring_MP__c == lead.Best_Contact__c) {
+			displayReferringContactInformation = false;
+		}
+		if (lead.Referring_MP__c != null && displayReferringContactInformation) {
+			SendDiagnosisWrapper referringMp = new SendDiagnosisWrapper();
+			referringMp.id = lead.Referring_MP__c;
+			referringMp.name = lead.Referring_MP__r.Name;
+			referringMp.type = REFERRING_MEDICAL_PROFESSIONAL;
+			if (String.isNotEmpty(lead.Referring_MP__r.npe01__WorkEmail__c)) {
+				referringMp.workEmail = lead.Referring_MP__r.npe01__WorkEmail__c;
+			}
+			if (String.isNotEmpty(lead.Referring_MP__r.npe01__AlternateEmail__c)) {
+				referringMp.alternateEmail1 = lead.Referring_MP__r.npe01__AlternateEmail__c;
+			}
+			if (String.isNotEmpty(lead.Referring_MP__r.Alternate_Email_2__c)) {
+				referringMp.alternateEmail2 = lead.Referring_MP__r.Alternate_Email_2__c;
+			}
+			if (String.isNotEmpty(lead.Referring_MP__r.Contact_Notes__c)) {
+				referringMp.contactNotes = lead.Referring_MP__r.Contact_Notes__c;
+			}
+			if (String.isNotEmpty(lead.Relationship_to_child__c)
+					&& RELATIONSHIP_MEDICAL_PROFESSIONAL.equals(lead.Relationship_to_child__c)
+					&& String.isNotEmpty(lead.Referring_MP_Email__c)) {
+				Boolean displayNewEmailProvided = displayNewEmailProvided(
+						lead.Referring_MP__r.npe01__WorkEmail__c,
+						lead.Referring_MP__r.npe01__AlternateEmail__c,
+						lead.Referring_MP__r.Alternate_Email_2__c,
+						lead.Referring_MP_Email__c
+				);
+				if (displayNewEmailProvided) {
+					referringMp.newEmailProvided = lead.Referring_MP_Email__c;
+				}
+			}
+			contacts.add(referringMp);
+		}
+		if (lead.Treating_MP__c != null) {
+			SendDiagnosisWrapper treatingMp = new SendDiagnosisWrapper();
+			treatingMp.id = lead.Treating_MP__c;
+			treatingMp.name = lead.Treating_MP__r.Name;
+			treatingMp.type = TREATING_MEDICAL_PROFESSIONAL;
+			if (String.isNotEmpty(lead.Treating_MP__r.npe01__WorkEmail__c)) {
+				treatingMp.workEmail = lead.Treating_MP__r.npe01__WorkEmail__c;
+			}
+			if (String.isNotEmpty(lead.Treating_MP__r.npe01__AlternateEmail__c)) {
+				treatingMp.alternateEmail1 = lead.Treating_MP__r.npe01__AlternateEmail__c;
+			}
+			if (String.isNotEmpty(lead.Treating_MP__r.Alternate_Email_2__c)) {
+				treatingMp.alternateEmail2 = lead.Treating_MP__r.Alternate_Email_2__c;
+			}
+			if (String.isNotEmpty(lead.Treating_MP__r.Contact_Notes__c)) {
+				treatingMp.contactNotes = lead.Treating_MP__r.Contact_Notes__c;
+			}
+			if (String.isNotEmpty(lead.Relationship_to_child__c)
+					&& RELATIONSHIP_MEDICAL_PROFESSIONAL.equals(lead.Relationship_to_child__c)
+					&& String.isNotEmpty(lead.Treating_Medical_Professional_Email__c)) {
+				Boolean displayNewEmailProvided = displayNewEmailProvided(
+						lead.Treating_MP__r.npe01__WorkEmail__c,
+						lead.Treating_MP__r.npe01__AlternateEmail__c,
+						lead.Treating_MP__r.Alternate_Email_2__c,
+						lead.Treating_Medical_Professional_Email__c
+				);
+				if (displayNewEmailProvided) {
+					treatingMp.newEmailProvided = lead.Treating_Medical_Professional_Email__c;
+				}
+			}
+			contacts.add(treatingMp);
+		}
+		if (lead.Best_Contact__c != null) {
+			SendDiagnosisWrapper bestContact = new SendDiagnosisWrapper();
+			bestContact.id = lead.Best_Contact__c;
+			bestContact.name = lead.Best_Contact__r.Name;
+			bestContact.type = BEST_CONTACT;
+			if (String.isNotEmpty(lead.Best_Contact__r.npe01__WorkEmail__c)) {
+				bestContact.workEmail = lead.Best_Contact__r.npe01__WorkEmail__c;
+			}
+			if (String.isNotEmpty(lead.Best_Contact__r.npe01__AlternateEmail__c)) {
+				bestContact.alternateEmail1 = lead.Best_Contact__r.npe01__AlternateEmail__c;
+			}
+			if (String.isNotEmpty(lead.Best_Contact__r.Alternate_Email_2__c)) {
+				bestContact.alternateEmail2 = lead.Best_Contact__r.Alternate_Email_2__c;
+			}
+			if (String.isNotEmpty(lead.Best_Contact__r.Contact_Notes__c)) {
+				bestContact.contactNotes = lead.Best_Contact__r.Contact_Notes__c;
+			}
+			if (String.isNotEmpty(lead.Relationship_to_child__c)
+					&& RELATIONSHIP_MEDICAL_PROFESSIONAL.equals(lead.Relationship_to_child__c)
+					&& String.isNotEmpty(lead.Best_contact_for_Physician_Email__c)) {
+				Boolean displayNewEmailProvided = displayNewEmailProvided(
+						lead.Best_Contact__r.npe01__WorkEmail__c,
+						lead.Best_Contact__r.npe01__AlternateEmail__c,
+						lead.Best_Contact__r.Alternate_Email_2__c,
+						lead.Best_contact_for_Physician_Email__c
+				);
+				if (displayNewEmailProvided) {
+					bestContact.newEmailProvided = lead.Best_contact_for_Physician_Email__c;
+				}
+			}
+			contacts.add(bestContact);
+		}
+		if (lead.Alt_1_MP__c != null) {
+			SendDiagnosisWrapper alternate1Mp = new SendDiagnosisWrapper();
+			alternate1Mp.id = lead.Alt_1_MP__c;
+			alternate1Mp.name = lead.Alt_1_MP__r.Name;
+			alternate1Mp.type = ALTERNATE_1_MEDICAL_PROFESSIONAL;
+			if (String.isNotEmpty(lead.Alt_1_MP__r.npe01__WorkEmail__c)) {
+				alternate1Mp.workEmail = lead.Alt_1_MP__r.npe01__WorkEmail__c;
+			}
+			if (String.isNotEmpty(lead.Alt_1_MP__r.npe01__AlternateEmail__c)) {
+				alternate1Mp.alternateEmail1 = lead.Alt_1_MP__r.npe01__AlternateEmail__c;
+			}
+			if (String.isNotEmpty(lead.Alt_1_MP__r.Alternate_Email_2__c)) {
+				alternate1Mp.alternateEmail2 = lead.Alt_1_MP__r.Alternate_Email_2__c;
+			}
+			if (String.isNotEmpty(lead.Alt_1_MP__r.Contact_Notes__c)) {
+				alternate1Mp.contactNotes = lead.Alt_1_MP__r.Contact_Notes__c;
+			}
+			contacts.add(alternate1Mp);
+		}
+		if (lead.Alt_2_MP__c != null) {
+			SendDiagnosisWrapper alternate2Mp = new SendDiagnosisWrapper();
+			alternate2Mp.id = lead.Alt_2_MP__c;
+			alternate2Mp.name = lead.Alt_2_MP__r.Name;
+			alternate2Mp.type = ALTERNATE_2_MEDICAL_PROFESSIONAL;
+			if (String.isNotEmpty(lead.Alt_2_MP__r.npe01__WorkEmail__c)) {
+				alternate2Mp.workEmail = lead.Alt_2_MP__r.npe01__WorkEmail__c;
+			}
+			if (String.isNotEmpty(lead.Alt_2_MP__r.npe01__AlternateEmail__c)) {
+				alternate2Mp.alternateEmail1 = lead.Alt_2_MP__r.npe01__AlternateEmail__c;
+			}
+			if (String.isNotEmpty(lead.Alt_2_MP__r.Alternate_Email_2__c)) {
+				alternate2Mp.alternateEmail2 = lead.Alt_2_MP__r.Alternate_Email_2__c;
+			}
+			if (String.isNotEmpty(lead.Alt_2_MP__r.Contact_Notes__c)) {
+				alternate2Mp.contactNotes = lead.Alt_2_MP__r.Contact_Notes__c;
+			}
+			contacts.add(alternate2Mp);
+		}
+		return contacts;
+	}
+
+	/**
+	 * Send Diagnosis Wrapper
+    */
+	public class SendDiagnosisWrapper {
+		public Id id { get; set; }
+		public String name { get; set; }
+		public String type { get; set; }
+		public String workEmail { get; set; }
+		public String alternateEmail1 { get; set; }
+		public String alternateEmail2 { get; set; }
+		public String newEmailProvided { get; set; }
+		public String contactNotes { get; set; }
+	}
+
+	/**
+	 * @description Check if any of the emails already provided as part of the Contact is same as the new provided email,
+	 * if already provided do not display the new provided e-mail
+	 * @param workEmail work email
+	 * @param alternateEmail1 alternate email 1
+	 * @param alternateEmail2 alternate email 2
+	 * @param newEmailProvided new email provided
+	 * @return true or false
+	*/
+	private static Boolean displayNewEmailProvided(String workEmail, String alternateEmail1, String alternateEmail2,
+			String newEmailProvided) {
+		if (String.isNotEmpty(workEmail) && newEmailProvided.equals(workEmail)) {
+			return false;
+		} else if (String.isNotEmpty(alternateEmail1) && newEmailProvided.equals(alternateEmail1)) {
+			return false;
+		} else if (String.isNotEmpty(alternateEmail2) && newEmailProvided.equals(alternateEmail2)) {
+			return false;
+		}
+		return true;
+	}
 }

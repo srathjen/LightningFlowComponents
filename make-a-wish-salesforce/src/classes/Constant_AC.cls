@@ -99,6 +99,7 @@ public class Constant_AC {
      * Lead Constants
      */
     public static final Id LEAD_RT_WISH_CHILD = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName().get('Wish_Child').getRecordTypeId();
+    public static final String LEAD_DV_FORM_TYPE_REFERRING_MEDICAL_PROFESSIONAL = 'Referring Medical Professional';
     public static final String LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL = 'Treating Medical Professional';
     public static final String LEAD_DV_FORM_TYPE_BEST_CONTACT = 'Best contact for Physician';
     public static final String LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL = 'Alternate 1 Medical Professional';
@@ -126,6 +127,7 @@ public class Constant_AC {
     public static final String LEAD_RELATIONSHIP_TO_CHILD_OTHER = 'Other';
     public static final String LEAD_RELATIONSHIP_TO_CHILD_SELF = 'Self';
     public static final String LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN = 'Parent/Guardian';
+    public static final String LEAD_RELATIONSHIP_TO_CHILD_MEDICAL_PROFESSIONAL = 'Medical Professional';
     public static final String LEAD_MEDICAL_PROVIDER_NURSE_PRACTITIONER = 'Nurse Practitioner';
     public static final String LEAD_MEDICAL_PROVIDER_PHYSICIAN_ASSISTANT = 'Physician Assistant';
     public static final String LEAD_MEDICAL_PROVIDER_PHYSICIAN = 'Physician';
@@ -552,5 +554,7 @@ public class Constant_AC {
      public final static String YES_TEXT = 'Yes';
      public final static String NO_TEXT = 'No';
 
-     public final static String COMMENT_BOX_TEXT = 'Comment box';    
+     public final static String COMMENT_BOX_TEXT = 'Comment box';
+
+    
 }
