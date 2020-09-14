@@ -47,4 +47,32 @@ public class DiagnosisVerificationService {
 		}
 		update diagnosisList;
 	}
+
+	/**
+	 * @description Update Contact on Diagnosis Verifications found by Lead Id
+	 * @param lead lead
+	 * @param targetEmail Email To Address
+	 */
+	public static void processSendDiagnosisVerification(Lead lead, String targetEmail) {
+		// Build Tasks
+		Task task = new Task();
+		task.Description = 'Diagnosis Verification sent to ' + lead.Hidden_DV_Form_Name__c + '.';
+		task.OwnerId = Label.Salesforce_Support_User_Id;
+		task.Priority = Constant_AC.TASK_PRIORITY_NORMAL;
+		task.Status = Constant_AC.TASK_STATUS_COMPLETED;
+		task.Subject = 'Lead ET : Your patient has been referred for a wish!';
+		task.WhoId = lead.Id;
+		// Build E-Mail to be sent
+		EmailService.EmailMessageWrapper emailMessageWrapper = new EmailService.EmailMessageWrapper(
+				lead.Id, Label.DV_Form_Email_Template_API, new List<String>{
+						targetEmail
+				});
+		List<Messaging.SingleEmailMessage> emailMessages = EmailService.buildEmail(
+				new List<EmailService.EmailMessageWrapper>{
+						emailMessageWrapper
+				}
+		);
+		insert task;
+		EmailService.sendEmail(emailMessages);
+	}
 }

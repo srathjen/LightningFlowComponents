@@ -186,18 +186,7 @@ public class LeadServiceTest {
 		Lead lead = getTestLead();
 
 		Test.startTest();
-		Lead updatedLead = LeadService.resetLead(lead.Id);
-		Test.stopTest();
-
-		System.assertEquals(Constant_AC.LEAD_STATUS_REFERRED, updatedLead.Status);
-	}
-
-	@IsTest
-	public static void shouldResetLeadDvMedicalSummary() {
-		Lead lead = getTestLead();
-
-		Test.startTest();
-		Lead updatedLead = LeadService.resetLeadDvMedicalSummary(lead.Id);
+		Lead updatedLead = LeadService.resetLead(lead);
 		Test.stopTest();
 
 		System.assertEquals(Constant_AC.LEAD_STATUS_REFERRED, updatedLead.Status);
@@ -641,7 +630,7 @@ public class LeadServiceTest {
 
 	private static Lead getTestLead() {
 		return [
-				SELECT Id, ChapterName__c
+				SELECT Id, ChapterName__c, Diagnosis_Given_By_Referrer__c, ICD_Given_By_Referrer__c, Status
 				FROM Lead
 				WHERE Name = 'Jack Smith'
 		];

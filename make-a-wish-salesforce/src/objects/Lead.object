@@ -2859,9 +2859,14 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
     </fields>
     <fields>
         <fullName>Hidden_DV_Form_Name__c</fullName>
-        <description>Append First Name and Last Name to the DV Email Template.</description>
+        <description>Dynamically displays the DV recipients name for sending of the DV Email Template.</description>
         <externalId>false</externalId>
-        <formula>IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Treating Medical Professional'),   TEXT (Salutation_TreatingMP__c) +' '+Treating_Medical_Professional_First_Name__c+' '+Treating_Medical_Professional_Last_Name__c ,IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c, 'Best contact for Physician'), TEXT (Salutation_BestContactMP__c) +' '+Best_Contact_for_Physician_First_Name__c +' '+Best_Contact_for_Physician_Last_Name__c,  IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Alternate 1 Medical Professional'),   TEXT (Salutation_AlternateMP1__c) +' '+Alternate1MedProfessionalFirstName__c  +' '+ Alternate1MedProfessionalLastName__c ,  IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Alternate 2 Medical Professional'),   TEXT (Salutation_AlternateMP2__c) +' '+Alternate2MedProfessionalFirstName__c   +' '+  Alternate2MedProfessionalLastName__c,  null) ) ) )</formula>
+        <formula>IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Treating Medical Professional'),   TEXT (Treating_MP__r.Salutation) +' '+Treating_MP__r.FirstName+' '+Treating_MP__r.LastName ,
+IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c, 'Best contact for Physician'), TEXT ( Best_Contact__r.Salutation ) +' '+Best_Contact__r.FirstName +' '+Best_Contact__r.LastName,  
+IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Alternate 1 Medical Professional'),   TEXT ( Alt_1_MP__r.Salutation ) +' '+Alt_1_MP__r.FirstName  +' '+ Alt_1_MP__r.LastName ,  
+IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Alternate 2 Medical Professional'),   TEXT (Alt_2_MP__r.Salutation) +' '+Alt_1_MP__r.FirstName   +' '+  Alt_1_MP__r.LastName,
+IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Referring Medical Professional'),   TEXT ( Referring_MP__r.Salutation) +' '+Referring_MP__r.FirstName   +' '+  Referring_MP__r.LastName,
+  null) ) ) ) )</formula>
         <label>Hidden DV Form Name</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -2881,6 +2886,11 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
             <restricted>true</restricted>
             <valueSetDefinition>
                 <sorted>false</sorted>
+                <value>
+                    <fullName>Referring Medical Professional</fullName>
+                    <default>false</default>
+                    <label>Referring Medical Professional</label>
+                </value>
                 <value>
                     <fullName>Treating Medical Professional</fullName>
                     <default>false</default>

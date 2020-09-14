@@ -247,7 +247,6 @@ public class LeadDuplicateService_Test {
 
 		Test.startTest();
 		String result = LeadDuplicateService.FindLeadDupe(lead.Id);
-		LeadDuplicateService.resetDVMedicalSummary(lead.Id);
 		System.assertEquals(LeadDuplicateService.DUPE_MESSAGE, result);
 		Test.stopTest();
 	}
@@ -263,7 +262,6 @@ public class LeadDuplicateService_Test {
 
 		Test.startTest();
 		String result = LeadDuplicateService.FindLeadDupe(lead.Id);
-		LeadDuplicateService.resetDVMedicalSummary(lead.Id);
 		System.assertEquals(null, result);
 		Test.stopTest();
 	}

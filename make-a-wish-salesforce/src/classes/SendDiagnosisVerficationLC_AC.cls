@@ -40,19 +40,6 @@ public without sharing class SendDiagnosisVerficationLC_AC {
     }
 
     /*
-     * @description     Wrapper method to call reset DV medical summary
-     * @param           Id leadId
-     * @return          String
-     * @date            unknown
-     * @author          MST Solutions
-    */
-    @AuraEnabled
-    public static String resetDVMedicalSummary(Id leadId) {
-        String result = LeadDuplicateService.resetDVMedicalSummary(leadId);
-        return result;
-    }
-
-    /*
      * @description     Wrapper method to call Find Lead Dupe
      * @param           Id leadId
      * @return          String

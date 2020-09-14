@@ -58,7 +58,6 @@ public class SendDiagnosisVerficationLC_ACTest {
                 FROM Lead
                 WHERE Name = 'Jack Smith'
         ];
-        SendDiagnosisVerficationLC_AC.resetDVMedicalSummary(lead.Id);
         SendDiagnosisVerficationLC_AC.findLeadDupe(lead.Id);
         SendDiagnosisVerficationLC_AC.findFamilyContactDupe(lead.Id);
     }
