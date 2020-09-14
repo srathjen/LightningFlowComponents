@@ -605,6 +605,26 @@ function formLogic() {
     }
     });
 
+    //show form fields to create new referral HTF if checkbox is true
+    $(".newRefHtfChk").on("change", function () {
+    checkVisible = $(".newRefHtfChk input").is(":checked");
+    if (checkVisible == true) {
+    $(".refHtfForm").css("display", "block");
+    } else if (checkVisible == false) {
+    $(".refHtfForm").css("display", "none");
+    }
+    });
+
+    //show form fields to create new referral HTF if checkbox is true
+    $(".newTrtHtfChk").on("change", function () {
+    checkVisible = $(".newTrtHtfChk input").is(":checked");
+    if (checkVisible == true) {
+    $(".trtHtfForm").css("display", "block");
+    } else if (checkVisible == false) {
+    $(".trtHtfForm").css("display", "none");
+    }
+    });
+
 //showing the check box used to replicate the value
 $(".medProvCat").on("change", function () {
   //var medLabel = $.inArray(labelName,labels);
@@ -622,9 +642,10 @@ $(".medProvCat").on("change", function () {
 //Replicating referrer value to treating medical professional
 $(".repeatMedProf").on("change", function () {
   checkVisibleCopy = $(".repeatMedProf input").is(":checked");
-  checkVisibleNew = $(".newRefMpChk input").is(":checked");
+  checkVisibleNewMp = $(".newRefMpChk input").is(":checked");
+  checkVisibleNewHtf = $(".newRefHtfChk input").is(":checked");
   if (checkVisibleCopy == true) {
-    if (checkVisibleNew == true) {
+    if (checkVisibleNewMp == true) {
       $(".msalutation").val($(".refmpsalutation").val());
       $(".mfirstname").val($(".refmpfirstname").val());
       $(".mlastname").val($(".refmplastname").val());
@@ -634,8 +655,22 @@ $(".repeatMedProf").on("change", function () {
       $(".mstate").val($(".refmpstate").val());
       $(".mcategory").val($(".refmpcategory").val());
       $(".mspecialty").val($(".refmpspecialty").val());
-    } else if(checkVisibleNew == false) {
+    } else if(checkVisibleNewMp == false) {
       $(".medToRepeat :input").each(function () {
+      $(this).val("");
+      });
+    }
+    if(checkVisibleNewHtf == true) {
+      $(".trthtfname").val($(".refhtfname").val());
+      $(".trthtfcity").val($(".refhtfcity").val());
+      $(".trthtfstate").val($(".refhtfstate").val());
+      $(".trthtfstreet").val($(".refhtfstreet").val());
+      $(".trthtfzip").val($(".refhtfzip").val());
+      $(".trthtfphone").val($(".refhtfphone").val());
+      $(".trthtfdept").val($(".refhtfdept").val());
+      $(".mphospitalname").val($(".refhtfname").val());
+    } else if(checkVisibleNewHtf == false) {
+      $(".trtHtfForm :input").each(function () {
       $(this).val("");
       });
     }
@@ -643,12 +678,10 @@ $(".repeatMedProf").on("change", function () {
     $(".repeatMedProfBest").css("display", "none");
   } else if (checkVisibleCopy == false) {
     $(".repeatMedProfBest").css("display", "block");
-    $(".medToRepeat :input").each(function () {
+    $(".medToRepeat :input, .trtHtfForm :input").each(function () {
       $(this).val("");
     });
-    $(".msalutation").val($(".msalutation option:first").val());
-    $(".mcategory").val($(".mcategory option:first").val());
-    $(".mspecialty").val($(".mspecialty option:first").val());
+    $("[id$=msalutation],[id$=mcategory],[id$=mspecialty],[id$=trthtfdept]").prop("selectedIndex", 0);
     $(".trtMpInfo").css("display", "block");
   }
 });
@@ -680,9 +713,7 @@ $(".repeatMedProf").on("change", function () {
       $(".medToRepeatBest :input").each(function () {
         $(this).val("");
       });
-      $(".bsalutation").val($(".bsalutation option:first").val());
-      $(".bcategory").val($(".bcategory option:first").val());
-      $(".bspecialty").val($(".bspecialty option:first").val());
+      $("[id$=bsalutation],[id$=bcategory],[id$=bspecialty]").prop("selectedIndex", 0);
       $(".bestMpInfo").css("display", "block");
     }
   });
@@ -991,9 +1022,9 @@ $(".repeatMedProf").on("change", function () {
         $("[id$=remail]").removeClass("email-std");
         $("[id$=remail]").addClass("email");
       }
-      $("[id$=pcity],[id$=bcity],[id$=trtcity]").addClass("city");
+      $("[id$=pcity],[id$=bcity],[id$=trtcity],[id$=refhtfcity],[id$=trthtfcity]").addClass("city");
       $("[id$=ppostalcode]").addClass("postalcode");
-      $("[id$=p-state],[id$=refmpstate],[id$=bstate],[id$=mstate]").addClass("state-chk");
+      $("[id$=p-state],[id$=refmpstate],[id$=bstate],[id$=mstate],[id$=refhtfstate],[id$=trthtfstate]").addClass("state-chk");
       $("[id$=wcdob]").addClass("wcdob");
       $("[id$=wcgender]").addClass("wcgender");
       $("[id$=wcreceivedwish]").addClass("wcreceivedwish"),
@@ -1003,12 +1034,16 @@ $(".repeatMedProf").on("change", function () {
       $("[id$=urgency]").addClass("urgency");
       $("[id$=mphospitalname]").addClass("facility");
       $(".refMpForm").css("display", "none");
+      $(".refHtfForm").css("display", "none");
+      $(".trtHtfForm").css("display", "none");
       $(".repeatMedProfBest").css("display","none");
       $(".mpSearchCreate").css("display", "block");
       $("[id$=refmpcategory],[id$=mcategory],[id$=bcategory]").addClass("medcategory");
       $("[id$=refmpphone], [id$=refmpemail]").addClass("phoneoremailref");
       $("[id$=mphone], [id$=memail]").addClass("phoneoremailtrt");
       $("[id$=mpmaincontactphone], [id$=mpmaincontactemail]").addClass("phoneoremailbest");
+      $("[id$=trthtfname], [id$=refhtfname]").addClass("acctname");
+
 
       formValidationRules();
       clearFuncSelf();
@@ -1045,10 +1080,9 @@ $(".repeatMedProf").on("change", function () {
       $("[id$=wcage]").parents(".form-group").removeClass("sr-only");
       $(".repeatMedProf").css("display", "none");
       $(".refMpForm").css("display", "none");
+      $(".refHtfForm").css("display", "none");
       $(".mpSearchCreate").css("display", "none");
-      $('[id$=createNewRefMPchk]').prop('checked',false);
-      $('[id$=createNewTrtMPchk]').prop('checked',false);
-      $('[id$=createNewBestMPchk]').prop('checked',false);
+      $('[id$=createNewRefMPchk],[id$=createNewTrtMPchk],[id$=createNewBestMPchk],[id$=newRefHtfChk],[id$=newTrtHtfChk]').prop('checked',false);
 
       clearFuncSelf();
       clearFuncParent();
@@ -1104,10 +1138,9 @@ $(".repeatMedProf").on("change", function () {
       $("[id$=urgency]").addClass("urgency");
       $(".repeatMedProf").css("display", "none");
       $(".refMpForm").css("display", "none");
+      $(".refHtfForm").css("display", "none");
       $(".mpSearchCreate").css("display", "none");
-      $('[id$=createNewRefMPchk ]').prop('checked',false);
-      $('[id$=createNewTrtMPchk]').prop('checked',false);
-      $('[id$=createNewBestMPchk]').prop('checked',false);
+      $('[id$=createNewRefMPchk],[id$=createNewTrtMPchk],[id$=createNewBestMPchk],[id$=newRefHtfChk],[id$=newTrtHtfChk]').prop('checked',false);
 
       if (
         labelNameRadio == " Self" ||
@@ -2195,6 +2228,18 @@ function formValidationRules() {
     messages: {
       require_from_group: "Oops! Please enter a phone number or email",
     },
+  });
+  $("input.acctname").each(function () {
+    $(this).rules("add", {
+      required: true,
+      minlength: 2,
+      maxlength: 50,
+      messages: {
+        required: "Oops! Please enter a name",
+        minlength: "Oops! The name must have more than 2 letters",
+        maxlength: "We're sorry, you've reached the maximum allowed characters",
+      },
+    });
   });
 }
 // always require this field
