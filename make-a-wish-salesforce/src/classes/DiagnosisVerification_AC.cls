@@ -1452,26 +1452,8 @@ public class DiagnosisVerification_AC {
         PageReference reference;
 
         try {
-            //if(wishChildWrapperIns.isSignerSame == 'No'){
-                mySenderName = currLead.DV_Signer_First_Name__c + ' ' + currLead.DV_Signer_Last_Name__c;
-                myEmail = currLead.DV_Signer_Email__c;
-            //}
-            /*else if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL) {
-                mySenderName = currLead.Treating_Medical_Professional_First_Name__c + ' ' + currLead.Treating_Medical_Professional_Last_Name__c;
-                myEmail = currLead.Treating_Medical_Professional_Email__c;
-            } else if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_BEST_CONTACT) {
-                mySenderName = currLead.Best_Contact_for_Physician_First_Name__c + ' ' + currLead.Best_Contact_for_Physician_Last_Name__c;
-                myEmail = currLead.Best_contact_for_Physician_Email__c;
-            } else if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL) {
-                mySenderName = currLead.Alternate1MedProfessionalFirstName__c + ' ' + currLead.Alternate1MedProfessionalLastName__c;
-                myEmail = currLead.Alternate1MedicalProfessionalEmail__c;
-            } else if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_2_MEDICAL_PROFESSIONAL) {
-                mySenderName = currLead.Alternate2MedProfessionalFirstName__c + ' ' + currLead.Alternate2MedProfessionalLastName__c;
-                myEmail = currLead.Alternate2MedProfessionalEmail__c;
-            } else {
-                mySenderName = currLead.Treating_Medical_Professional_First_Name__c + ' ' + currLead.Treating_Medical_Professional_Last_Name__c;
-                myEmail = currLead.Treating_Medical_Professional_Email__c;
-            }*/
+            mySenderName = currLead.DV_Signer_First_Name__c + ' ' + currLead.DV_Signer_Last_Name__c;
+            myEmail = currLead.DV_Signer_Email__c;
 
             String account;
             String IntegratorKey;
