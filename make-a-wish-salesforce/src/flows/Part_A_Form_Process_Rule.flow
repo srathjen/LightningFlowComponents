@@ -1387,7 +1387,7 @@
         <object>Lead</object>
     </recordUpdates>
     <startElementReference>isChangedDecision2_myRule_1_Of_Times_Email_Sent_c</startElementReference>
-    <status>Active</status>
+    <status>Obsolete</status>
     <variables>
         <name>myVariable_current</name>
         <dataType>SObject</dataType>
