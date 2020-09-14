@@ -222,21 +222,4 @@ Modification Log:
         }
         return null;
     }
-
-    webService static String resetDVMedicalSummary(Id leadId) {
-        try {
-            LeadService.resetLeadDvMedicalSummary(leadId);
-            DiagnosisVerificationService.deleteByLeadId(leadId);
-            DocuSignService.deleteByLeadIdAndDeleteRelatedAttachments(leadId);
-            CaseService.deleteByLeadIdAndRecordTypeNames(leadId, new List<String>{
-                    Constant_AC.DIAGNOSIS_RT_ID
-            });
-            LeadFileService.deleteNonFolderByLeadId(leadId);
-        } catch (Exception ex) {
-            String recId = leadId;
-            new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadWishFamilyDupe', 'resetDVMedicalSummary', recId, ex, String.valueOf(leadId)));
-            return Label.Debug_log_error_message;
-        }
-        return null;
-    }
 }
