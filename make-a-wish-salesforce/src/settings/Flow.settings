@@ -8,7 +8,6 @@
     <enableFlowNullPreviousValueFix>false</enableFlowNullPreviousValueFix>
     <enableFlowPauseEnabled>false</enableFlowPauseEnabled>
     <enableFlowUseApexExceptionEmail>true</enableFlowUseApexExceptionEmail>
-    <enableInvocableFlowFixEnabled>true</enableInvocableFlowFixEnabled>
     <enableLightningRuntimeEnabled>true</enableLightningRuntimeEnabled>
     <isAccessToInvokedApexRequired>false</isAccessToInvokedApexRequired>
     <isEnhancedFlowListViewVisible>true</isEnhancedFlowListViewVisible>
