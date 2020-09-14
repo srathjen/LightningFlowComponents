@@ -35,7 +35,7 @@ public class DiagnosisVerification_AC {
     private transient Map<String, String> travelMap;
     private transient Map<Id, Medical_Questions__c> medicalQuestionMap;
     private transient Map<String, List<Medical_Questions__c>> condDesMedicalQuestionMap;
-
+	
     public String pluHypTxt { get; set; }
     public String wishStatus { get; set; }
     public String otherDiagnosisBlock { get; set; }
@@ -81,14 +81,14 @@ public class DiagnosisVerification_AC {
     public final String moderateFunction { get; set; }
     public final String pleaseSelectAllText { get; set; }
     public final String placeHolderAddInfo { get; set; }
-
+    
     //ODP-17 : Adding variables to hold DV Signer mail receiver Info
     public String requestedDVSigner_firstName { get;set; }
     public String requestedDVSigner_lastName { get;set; }
     public String requestedDVSigner_phone { get;set; }
     public String requestedDVSigner_email { get;set; }
     public String requestedDVSigner_HTF_name { get; set; }
-
+    
     public DiagnosisVerification_AC() {
         pluHypTxt = '';
         wishChildWrapperIns = new WishChildWrapper();
@@ -152,11 +152,6 @@ public class DiagnosisVerification_AC {
         currLead.Current_Condition_Label__c = currLead.Travel_algorithm__c;
         wishChildWrapperIns.medProfTypeHid = currLead.Hidden_DV_form_Medical_professional_Type__c;
         wishChildWrapperIns.stillEligibile = currLead.Why_do_you_feel_would_be_eligible_Wish__c;
-        wishChildWrapperIns.treatingFName = currLead.Treating_Medical_Professional_First_Name__c;
-        wishChildWrapperIns.treatingLName = currLead.Treating_Medical_Professional_Last_Name__c;
-        wishChildWrapperIns.treatingPhone = currLead.Treating_Medical_Professional_Phone__c;
-        wishChildWrapperIns.treatingEmail = currLead.Treating_Medical_Professional_Email__c;
-        wishChildWrapperIns.treatingHospital = currLead.Hospital_Treatment_Facility_Treating__c;
         wishStatus = currLead.RFI_Form_Info_Hidden__c;
         wishChildWrapperIns.recognizationPickValSelected = currLead.I_am_Recognized_To_Practice_As_a__c;
         wishChildWrapperIns.healthCareWork = currLead.I_m_Part_of_The_Treating_HealthCare_Team__c;
@@ -166,20 +161,6 @@ public class DiagnosisVerification_AC {
         wishChildWrapperIns.conditioDeteriorate = currLead.Will_Child_s_Condition_Deteriorate__c;
         wishChildWrapperIns.wishChildEligibilityNotes = currLead.Why_do_you_feel_would_be_eligible_Wish__c;
         wishChildWrapperIns.plzExplain = currLead.Please_Explain__c;
-        wishChildWrapperIns.bestPhyFname = currLead.Best_Contact_for_Physician_First_Name__c;
-        wishChildWrapperIns.bestPhyLname = currLead.Best_Contact_for_Physician_Last_Name__c;
-        wishChildWrapperIns.bestPhyEmail = currLead.Best_contact_for_Physician_Email__c;
-        wishChildWrapperIns.bestPhyPhone = currLead.Best_Contact_for_Physician_Phone__c;
-        wishChildWrapperIns.alt1MedFname = currLead.Alternate1MedProfessionalFirstName__c;
-        wishChildWrapperIns.alt1MedLname = currLead.Alternate1MedProfessionalLastName__c;
-        wishChildWrapperIns.alt1MedEmail = currLead.Alternate1MedicalProfessionalEmail__c;
-        wishChildWrapperIns.alt1MedPhone = currLead.Alternate1MedProfessionalPhone__c;
-        wishChildWrapperIns.alt1MedHosp = currLead.Alternate1HospitalTreatmentFacility__c;
-        wishChildWrapperIns.alt2MedFname = currLead.Alternate2MedProfessionalFirstName__c;
-        wishChildWrapperIns.alt2MedLname = currLead.Alternate2MedProfessionalLastName__c;
-        wishChildWrapperIns.alt2MedEmail = currLead.Alternate2MedProfessionalEmail__c;
-        wishChildWrapperIns.alt2MedPhone = currLead.Alternate2MedProfessionalPhone__c;
-        wishChildWrapperIns.alt2MedHosp = currLead.Alternate2HospitalTreatmentFacility__c;
         wishChildWrapperIns.unplannedHospitalAdmission = currLead.Unplanned_hospital_admissions__c;
         //wishChildWrapperIns.numberOfHospitalAdmission = Integer.valueOf(currLead.Number_hospital_admissions__c);
         wishChildWrapperIns.numberOfHospitalAdmission = String.valueOf(currLead.Number_hospital_admissions__c);   //Samer 508     
@@ -229,7 +210,7 @@ public class DiagnosisVerification_AC {
             requestedDVSigner_HTF_name = '';
         }
 		//ODP-17 End
-
+		
         if (currLead.Child_will_ultimately_die_prematurely__c == true) {
             wishChildWrapperIns.describePatient = '1';
         } else if (currLead.Treatment_may_be_feasible_but_can_fail__c == true) {
@@ -1024,11 +1005,6 @@ public class DiagnosisVerification_AC {
             //In the event that wishChildEligibility check is not called due to browser or network issues, this will send the case to medical eligibility review.
             setWishStatus(); 
 
-            currLead.Treating_Medical_Professional_First_Name__c = wishChildWrapperIns.treatingFName ;
-            currLead.Treating_Medical_Professional_Last_Name__c = wishChildWrapperIns.treatingLName;
-            currLead.Treating_Medical_Professional_Phone__c = wishChildWrapperIns.treatingPhone;
-            currLead.Treating_Medical_Professional_Email__c = wishChildWrapperIns.treatingEmail;
-            currLead.Hospital_Treatment_Facility_Treating__c = wishChildWrapperIns.treatingHospital;
             currLead.I_am_Recognized_To_Practice_As_a__c = wishChildWrapperIns.recognizationPickValSelected;
             currLead.I_m_Part_of_The_Treating_HealthCare_Team__c = wishChildWrapperIns.healthCareWork;
             currLead.Is_in_a_Comatose_Vegetative_State__c = wishChildWrapperIns.vegetativeState;
@@ -1329,21 +1305,6 @@ public class DiagnosisVerification_AC {
             if (!String.isEmpty(currentConditionFormattedString)) {
                 currLead.Current_Condition_Label__c = currentConditionFormattedString;
             }
-
-            currLead.Best_Contact_for_Physician_First_Name__c = wishChildWrapperIns.bestPhyFname;
-            currLead.Best_Contact_for_Physician_Last_Name__c = wishChildWrapperIns.bestPhyLname;
-            currLead.Best_contact_for_Physician_Email__c = wishChildWrapperIns.bestPhyEmail;
-            currLead.Best_Contact_for_Physician_Phone__c = wishChildWRapperIns.bestPhyPhone;
-            currLead.Alternate1MedProfessionalFirstName__c = wishChildWrapperIns.alt1MedFname;
-            currLead.Alternate1MedProfessionalLastName__c = wishChildWrapperIns.alt1MedLname;
-            currLead.Alternate1MedicalProfessionalEmail__c = wishChildWrapperIns.alt1MedEmail;
-            currLead.Alternate1MedProfessionalPhone__c = wishChildWrapperIns.alt1MedPhone;
-            currLead.Alternate1HospitalTreatmentFacility__c = wishChildWrapperIns.alt1MedHosp;
-            currLead.Alternate2MedProfessionalFirstName__c = wishChildWrapperIns.alt2MedFname;
-            currLead.Alternate2MedProfessionalLastName__c = wishChildWrapperIns.alt2MedLname;
-            currLead.Alternate2MedProfessionalEmail__c = wishChildWrapperIns.alt2MedEmail;
-            currLead.Alternate2MedProfessionalPhone__c = wishChildWrapperIns.alt2MedPhone;
-            currLead.Alternate2HospitalTreatmentFacility__c = wishChildWrapperIns.alt2MedHosp;
             
             if (wishChildWrapperIns.vegetativeState == Constant_AC.LEAD_COMATOSE_VEGETATIVE_STATE_YES) {
                 currLead.RFI_Form_Info_Hidden__c = Constant_AC.LEAD_RFI_FORM_INFO_NOT_QUALIFIED;
@@ -1393,7 +1354,7 @@ public class DiagnosisVerification_AC {
             currLead.Non_Verbal_Additional_Information__c = wishChildWrapperIns.nonVerbalAddInfo;
             }
             //SIW-378 End
-            //ODP-17 Start : Add dvSigner info on Save
+			//ODP-17 Start : Add dvSigner info on Save
             if(!String.isBlank(wishChildWrapperIns.isSignerSame)) {
                 if(wishChildWrapperIns.isSignerSame == 'Yes') {
                 	currLead.DV_Signer_Changed__c = false;
@@ -1420,7 +1381,7 @@ public class DiagnosisVerification_AC {
                 currLead.DV_Signer_Changed__c = false;
             }
 			//ODP-17 End
-
+			
             update currLead;
             insert diagnosisVerificationLstForInsert;
             insert diagnosisMedicalQuestionLst;
@@ -1454,11 +1415,11 @@ public class DiagnosisVerification_AC {
         try {
             mySenderName = currLead.DV_Signer_First_Name__c + ' ' + currLead.DV_Signer_Last_Name__c;
             myEmail = currLead.DV_Signer_Email__c;
-
+            
             String account;
             String IntegratorKey;
             Map<String, DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
-
+            
             for (DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()) {
                 account = credentialIns.account__c;
                 IntegratorKey = credentialIns.IntegratorKey__c;
@@ -1669,7 +1630,7 @@ public class DiagnosisVerification_AC {
 
         return Database.query(query);
     }
-
+    
     /*
      * @description     Used to populate DV_Signer information on VF page
      *
