@@ -22,6 +22,7 @@ Modification Log:
 16.29/07/2020 - Manoj      - SIW-378 : Added and hide Questions as mentioned in ticket
 17.07/08/2020 - Manoj      - SIW-654 : Hide unnecessary question based on user input to previous questions
 18.18/08/2020 - Manoj      - SIW-669: Show Add diagnosis option in case entered diagnosis results in comment text box
+19.11/09/2020 - Pramod     - ODP-17  : Added and Edited information for DV Signer in Provider Information Section
 *********************************************************************************************************************************** -->
 <apex:page controller="DiagnosisVerification_AC" applyBodyTag="false" sidebar="false" showHeader="false" docType="html-5.0" standardStylesheets="false" title="Make-A-Wish | Diagnosis Verification Form" cache="false">
     <script>
@@ -237,183 +238,54 @@ Modification Log:
                                     <!-- SIW-232 Start -->
                                     <div class="form-group row">
                                         <label class="col-md-3">Name</label> 
-                                        <div class="col-md-4 text-muted">{!currLead.Treating_Medical_Professional_First_Name__c} {!currLead.Treating_Medical_Professional_Last_Name__c}</div>
+                                        <div class="col-md-4 text-muted">{!requestedDVSigner_firstName} {!requestedDVSigner_lastName}</div>
                                     </div>
+                                    <!--ODP-17 starts-->
+                                    <div class="form-group row">
+                                        <label class="col-md-3">Hospital or Treatment Facility</label>
+                                        <div class="col-md-6 text-muted">{!requestedDVSigner_HTF_name}</div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12"><label>WILL [{!requestedDVSigner_firstName} {!requestedDVSigner_lastName}] BE SIGNING THIS DOCUMENT?</label></div>
+                                        <div class="col-md-6 vegitative">
+                                            <!--<apex:selectList value="{!wishChildWrapperIns.vegetativeState}" multiselect="false" size="1" styleClass="comatose form-control c-select VegetativePick requiredField" >-->
+                                            <apex:selectList value="{!wishChildWrapperIns.isSignerSame}" multiselect="false" size="1" styleClass="form-control c-select requiredField" id="expectedMP" onchange="changeSignerinfo();">
+                                                <apex:selectOption itemlabel="Please Select" itemvalue=""/>
+                                                <apex:selectOption itemlabel="Yes" itemvalue="Yes" />
+                                                <apex:selectOption itemLabel="No" itemValue="No"/>
+                                            </apex:selectList>
+                                        </div>
+                                    </div>
+                                    <!--End ODP-17-->
                                    <input type="hidden" class="wish-Status" value="{!wishStatus}"/>
-                                    <apex:outputPanel rendered="{!if(wishChildWrapperIns.medProfTypeHid == 'Treating Medical Professional', true, false)}">
-                                    <!-- Treating Med Prof Block Starts -->
-                                        <div class="form-group row">
-                                            <label class="col-md-3">Hospital or Treatment Facility</label>
-                                            <!-- SIW-232 <div class="col-md-6"> --> 
-                                            <!-- SIW-232 <apex:inputText value="{!wishChildWrapperIns.treatingHospital}" styleClass="form-control requiredField" maxlength="50" html-placeholder="Hospital/Facility Name"/> --> <!-- SIW-232 -->
-                                            <div class="col-md-6 text-muted">{!currLead.Hospital_Treatment_Facility_Treating__c}</div>
+                                    <!--ODP-17 Start-->
+                                    <legend class="other-signer-info">Signer Information</legend>
+                                    <div class="form-group row other-signer-info">
+                                        <div class="col-md-3"><label>First Name</label></div>
+                                        <div class="col-md-6">
+                                            <apex:inputText id="originalSignerFirstName" value="{!wishChildWrapperIns.dvSignerFname}" styleClass="form-control requiredField" html-placeholder="First Name" />
                                         </div>
-                                        <legend>Your Information</legend>
-                                        <div class="form-group row">
-                                            <div class="col-md-3"><label>First Name</label></div>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.treatingFName}" styleClass="form-control requiredField" html-placeholder="First Name" />
-                                            </div>
+                                    </div>
+                                    <div class="form-group row other-signer-info">
+                                        <div class="col-md-3"><label>Last Name</label></div>
+                                        <div class="col-md-6">
+                                            <apex:inputText id="originalSignerLastName" value="{!wishChildWrapperIns.dvSignerLname}" styleClass="form-control requiredField" html-placeholder="Last Name"/>
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="col-md-3"><label>Last Name</label></div>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.treatingLName}" styleClass="form-control requiredField" html-placeholder="Last Name"/>
-                                            </div>
+                                    </div>
+                                    <div class="form-group row other-signer-info">
+                                        <div class="col-md-3"><label>Phone</label></div>
+                                        <div class="col-md-6">
+                                            <apex:inputText id="originalSignerPhone" value="{!wishChildWrapperIns.dvSignerPhone}" styleClass="form-control phonemask requiredField" html-placeholder="(000) 000-0000"/>
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="col-md-3"><label>Phone</label></div>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.treatingPhone}" id="pphone" styleClass="form-control phonemask requiredField" html-placeholder="(000) 000-0000"/>
-                                            </div>
-                                        </div> <!-- SIW-232 -->
-                                        <div class="form-group row">
-                                            <div class="col-md-3"><label>Email</label></div>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.treatingEmail}" id="pemail" styleClass="form-control requiredField" html-placeholder="your_email@domain.com"/>
-                                            </div>
+                                    </div> <!-- SIW-232 -->
+                                    <div class="form-group row other-signer-info">
+                                        <div class="col-md-3"><label>Email</label></div>
+                                        <div class="col-md-6">
+                                            <apex:inputText id="originalSignerEmail" value="{!wishChildWrapperIns.dvSignerEmail}" styleClass="form-control requiredField" html-placeholder="your_email@domain.com"/>
                                         </div>
-                                        <!-- div class="form-group row seperator-top" style="padding-top:1rem">
-                                            <label class="col-md-12">Hospital or Treatment Facility</label>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.treatingHospital}" styleClass="form-control requiredField" maxlength="50" html-placeholder="Hospital/Facility Name"/>
-                                            </div>
-                                        </div> --> <!-- SIW-233 -->
-                                        <!-- Treating Med Prof Block Ends -->
-                                    </apex:outputPanel>
-                                    <apex:outputPanel rendered="{!if(wishChildWrapperIns.medProfTypeHid == 'Best contact for Physician', true, false)}">
-                                        <!-- Best Phy Block Starts -->
-                                        
-                                        <div class="form-group row">
-                                            <label class="col-md-3">Hospital or Treatment Facility</label>
-                                            <!-- SIW-232 <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.treatingHospital}" styleClass="form-control requiredField" maxlength="50" html-placeholder="Hospital/Facility Name"/>
-                                            </div> -->
-                                            <div class="col-md-6 text-muted">{!currLead.Hospital_Treatment_Facility_Treating__c}</div>
-                                        </div> 
-                                        <legend>Your Information</legend>
-                                        <div class="form-group row">
-                                            <div class="col-md-3"><label>First Name</label></div>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.bestPhyFname}" styleClass="form-control requiredField" html-placeholder="First Name" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-md-3"><label>Last Name</label></div>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.bestPhyLname}" styleClass="form-control requiredField" html-placeholder="Last Name"/>
-                                            </div>
-                                        </div>
-                                        <!-- div class="form-group row">
-                                            <div class="col-md-3"><label>Phone</label></div>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.treatingPhone}" id="phypphone" styleClass="form-control phonemask requiredField" html-placeholder="(000) 000-0000"/>
-                                            </div>
-                                        </div -->
-                                        <div class="form-group row">
-                                            <div class="col-md-3"><label>Email</label></div>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.bestPhyEmail}" id="phypemail" styleClass="form-control requiredField" html-placeholder="your_email@domain.com"/>
-                                            </div>
-                                        </div>
-                                        <!-- div class="form-group row seperator-top" style="padding-top:1rem">
-                                            <label class="col-md-12">Hospital or Treatment Facility</label>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.treatingHospital}" styleClass="form-control requiredField" maxlength="50" html-placeholder="Hospital/Facility Name"/>
-                                            </div>
-                                        </div>--> <!-- SIW-232 -->
-                                        <!-- Best Phy Block Starts -->
-                                    </apex:outputPanel>
-                                    
-                                    
-                                    <apex:outputPanel rendered="{!if(wishChildWrapperIns.medProfTypeHid == 'Alternate 1 Medical Professional', true, false)}">
-                                        <!-- Alt1 Med Block Starts -->
-                                        <div class="form-group row">
-                                            <label class="col-md-3">Hospital or Treatment Facility</label>
-                                            <!-- SIW-232 <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.alt1MedHosp}" styleClass="form-control requiredField" maxlength="50" html-placeholder="Hospital/Facility Name"/>
-                                                <input type="hidden" class="wish-Status" value="{!wishStatus}"/>
-                                            </div> -->
-                                            <div class="col-md-6 text-muted">{!currLead.Hospital_Treatment_Facility_Treating__c}</div>
-                                        </div>
-                                        <legend>Your Information</legend>
-                                        <div class="form-group row">
-                                            <div class="col-md-3"><label>First Name</label></div>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.alt1MedFname}" styleClass="form-control requiredField" html-placeholder="First Name" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-md-3"><label>Last Name</label></div>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.alt1MedLname}" styleClass="form-control requiredField" html-placeholder="Last Name"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-md-3"><label>Phone</label></div>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.alt1MedPhone}" id="alt1phypphone" styleClass="form-control phonemask requiredField" html-placeholder="(000) 000-0000"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-md-3"><label>Email</label></div>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.alt1MedEmail}" id="alt1phypemail" styleClass="form-control requiredField" html-placeholder="your_email@domain.com"/>
-                                            </div>
-                                        </div>
-                                        <!--div class="form-group row seperator-top" style="padding-top:1rem">
-                                            <label class="col-md-12">Hospital or Treatment Facility</label>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.alt1MedHosp}" styleClass="form-control requiredField" maxlength="50" html-placeholder="Hospital/Facility Name"/>
-                                                <input type="hidden" class="wish-Status" value="{!wishStatus}"/>
-                                            </div>
-                                        </div> -->
-                                        <!-- Alt Med1 Block Starts -->
-                                    </apex:outputPanel>
-                                    
-                                    <apex:outputPanel rendered="{!if(wishChildWrapperIns.medProfTypeHid == 'Alternate 2 Medical Professional', true, false)}">
-                                        <!-- Alt Med2 Block Starts -->
-                                        <div class="form-group row">
-                                            <label class="col-md-3">Hospital or Treatment Facility</label>
-                                            <!-- SIW-232 <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.alt2MedHosp}" styleClass="form-control requiredField" maxlength="50" html-placeholder="Hospital/Facility Name"/>
-                                            </div> -->
-                                            <div class="col-md-6 text-muted">{!currLead.Hospital_Treatment_Facility_Treating__c}</div>
-                                        </div>
-                                        <legend>Your Information</legend>
-                                        <div class="form-group row">
-                                            <div class="col-md-3"><label>First Name</label></div>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.alt2MedFname}" styleClass="form-control requiredField" html-placeholder="First Name" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-md-3"><label>Last Name</label></div>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.alt2MedLname}" styleClass="form-control requiredField" html-placeholder="Last Name"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-md-3"><label>Phone</label></div>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.alt2MedPhone}" id="alt2phypphone" styleClass="form-control phonemask requiredField" html-placeholder="(000) 000-0000"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-md-3"><label>Email</label></div>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.alt2MedEmail}" id="alt2phypemail" styleClass="form-control requiredField" html-placeholder="your_email@domain.com"/>
-                                            </div>
-                                        </div>
-                                        <!-- div class="form-group row seperator-top" style="padding-top:1rem">
-                                            <label class="col-md-12">Hospital or Treatment Facility</label>
-                                            <div class="col-md-6">
-                                                <apex:inputText value="{!wishChildWrapperIns.alt2MedHosp}" styleClass="form-control requiredField" maxlength="50" html-placeholder="Hospital/Facility Name"/>
-                                            </div>
-                                        </div> -->
-                                        <!-- Alt Med2 Block Starts -->
-                                    </apex:outputPanel>
-                                    
+                                    </div>
+                                    <!--ODP-17 End-->
+
                                     <div class="form-group row">
                                         <label class="col-md-12">I am recognized by my state to practice as a</label>
                                         <div class="col-md-6">
@@ -434,7 +306,32 @@ Modification Log:
                                    
                                    <!-- SIW-232 End -->
                                 
-                                </fieldset>                                                                                             
+                                </fieldset>    
+                                <script>
+                                // Show/Hide Signer Information
+                                var hosVal = document.querySelectorAll('[id$="expectedMP"]');                                                                                   
+                                if(hosVal[0].value == 'Yes') {
+                                    $('.other-signer-info').prop('hidden', true);
+                                } else if(hosVal[0].value == 'No') {
+                                    $('.other-signer-info').prop('hidden', false);
+                                } else {
+                                    $('.other-signer-info').prop('hidden', true);
+                                } 
+                                </script>
+                                <script>
+                                function changeSignerinfo(){
+                                    // Show/Hide Signer Information
+                                    var hosVal = document.querySelectorAll('[id$="expectedMP"]');                                                                                   
+                                    if(hosVal[0].value == 'Yes') {
+                                        $('.other-signer-info').prop('hidden', true);
+                                    } else if(hosVal[0].value == 'No') {
+                                        $('.other-signer-info').prop('hidden', false);
+                                    } else {
+                                        $('.other-signer-info').prop('hidden', true);
+                                    }
+                                }  
+                                </script>
+
                                 <!-- about -->
                                 <fieldset>
                                     <legend class="m-b-0">About {!currLead.FirstName} {!currLead.LastName}</legend>

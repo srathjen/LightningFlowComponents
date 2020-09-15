@@ -22,6 +22,7 @@
  * 8. 29 Jul 2020 - Manoj      - SIW-378 : Mapped the fields for new questions
  * 9. 18 Aug 2020 - Manoj      - SIW-669: Show Add diagnosis option in case entered diagnosis results in comment text box
  * Descriptions were looked up.
+ * 10. 11 Sep 2020 - Pramod    - ODP-17: Added code for DV Signer Information
  **/
 public class DiagnosisVerification_AC {
 
@@ -34,7 +35,7 @@ public class DiagnosisVerification_AC {
     private transient Map<String, String> travelMap;
     private transient Map<Id, Medical_Questions__c> medicalQuestionMap;
     private transient Map<String, List<Medical_Questions__c>> condDesMedicalQuestionMap;
-
+	
     public String pluHypTxt { get; set; }
     public String wishStatus { get; set; }
     public String otherDiagnosisBlock { get; set; }
@@ -80,7 +81,14 @@ public class DiagnosisVerification_AC {
     public final String moderateFunction { get; set; }
     public final String pleaseSelectAllText { get; set; }
     public final String placeHolderAddInfo { get; set; }
-
+    
+    //ODP-17 : Adding variables to hold DV Signer mail receiver Info
+    public String requestedDVSigner_firstName { get;set; }
+    public String requestedDVSigner_lastName { get;set; }
+    public String requestedDVSigner_phone { get;set; }
+    public String requestedDVSigner_email { get;set; }
+    public String requestedDVSigner_HTF_name { get; set; }
+    
     public DiagnosisVerification_AC() {
         pluHypTxt = '';
         wishChildWrapperIns = new WishChildWrapper();
@@ -144,11 +152,6 @@ public class DiagnosisVerification_AC {
         currLead.Current_Condition_Label__c = currLead.Travel_algorithm__c;
         wishChildWrapperIns.medProfTypeHid = currLead.Hidden_DV_form_Medical_professional_Type__c;
         wishChildWrapperIns.stillEligibile = currLead.Why_do_you_feel_would_be_eligible_Wish__c;
-        wishChildWrapperIns.treatingFName = currLead.Treating_Medical_Professional_First_Name__c;
-        wishChildWrapperIns.treatingLName = currLead.Treating_Medical_Professional_Last_Name__c;
-        wishChildWrapperIns.treatingPhone = currLead.Treating_Medical_Professional_Phone__c;
-        wishChildWrapperIns.treatingEmail = currLead.Treating_Medical_Professional_Email__c;
-        wishChildWrapperIns.treatingHospital = currLead.Hospital_Treatment_Facility_Treating__c;
         wishStatus = currLead.RFI_Form_Info_Hidden__c;
         wishChildWrapperIns.recognizationPickValSelected = currLead.I_am_Recognized_To_Practice_As_a__c;
         wishChildWrapperIns.healthCareWork = currLead.I_m_Part_of_The_Treating_HealthCare_Team__c;
@@ -158,20 +161,6 @@ public class DiagnosisVerification_AC {
         wishChildWrapperIns.conditioDeteriorate = currLead.Will_Child_s_Condition_Deteriorate__c;
         wishChildWrapperIns.wishChildEligibilityNotes = currLead.Why_do_you_feel_would_be_eligible_Wish__c;
         wishChildWrapperIns.plzExplain = currLead.Please_Explain__c;
-        wishChildWrapperIns.bestPhyFname = currLead.Best_Contact_for_Physician_First_Name__c;
-        wishChildWrapperIns.bestPhyLname = currLead.Best_Contact_for_Physician_Last_Name__c;
-        wishChildWrapperIns.bestPhyEmail = currLead.Best_contact_for_Physician_Email__c;
-        wishChildWrapperIns.bestPhyPhone = currLead.Best_Contact_for_Physician_Phone__c;
-        wishChildWrapperIns.alt1MedFname = currLead.Alternate1MedProfessionalFirstName__c;
-        wishChildWrapperIns.alt1MedLname = currLead.Alternate1MedProfessionalLastName__c;
-        wishChildWrapperIns.alt1MedEmail = currLead.Alternate1MedicalProfessionalEmail__c;
-        wishChildWrapperIns.alt1MedPhone = currLead.Alternate1MedProfessionalPhone__c;
-        wishChildWrapperIns.alt1MedHosp = currLead.Alternate1HospitalTreatmentFacility__c;
-        wishChildWrapperIns.alt2MedFname = currLead.Alternate2MedProfessionalFirstName__c;
-        wishChildWrapperIns.alt2MedLname = currLead.Alternate2MedProfessionalLastName__c;
-        wishChildWrapperIns.alt2MedEmail = currLead.Alternate2MedProfessionalEmail__c;
-        wishChildWrapperIns.alt2MedPhone = currLead.Alternate2MedProfessionalPhone__c;
-        wishChildWrapperIns.alt2MedHosp = currLead.Alternate2HospitalTreatmentFacility__c;
         wishChildWrapperIns.unplannedHospitalAdmission = currLead.Unplanned_hospital_admissions__c;
         //wishChildWrapperIns.numberOfHospitalAdmission = Integer.valueOf(currLead.Number_hospital_admissions__c);
         wishChildWrapperIns.numberOfHospitalAdmission = String.valueOf(currLead.Number_hospital_admissions__c);   //Samer 508     
@@ -181,7 +170,47 @@ public class DiagnosisVerification_AC {
         wishChildWrapperIns.timeFrameValue = currLead.Expedite_timeframe__c;
         wishChildWrapperIns.idealtimeFrameValue = currLead.Other_expedite_timeframe_comments__c;
         //SIW-355 End       
-
+        //ODP-17 Start : Mapped new DV signer fields value
+        if (currLead.DV_Signer_Changed__c == true) {
+            wishChildWrapperIns.isSignerSame = 'No';
+        } else if (currLead.DV_Signer_Changed__c == false) {
+            wishChildWrapperIns.isSignerSame = 'Yes';
+        }
+        populateDVSignerInfo();
+        
+        if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL) {
+            requestedDVSigner_firstName = currLead.Treating_MP__r.FirstName;
+            requestedDVSigner_lastName = currLead.Treating_MP__r.LastName;
+            requestedDVSigner_phone = currLead.Treating_MP__r.Phone;
+            requestedDVSigner_email = currLead.Treating_MP__r.Email;
+            requestedDVSigner_HTF_name = currLead.Treating_MP_HTF__r.Name;
+        } else if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_BEST_CONTACT) {
+            requestedDVSigner_firstName = currLead.Best_Contact__r.FirstName;
+            requestedDVSigner_lastName = currLead.Best_Contact__r.LastName;
+            requestedDVSigner_phone = currLead.Best_Contact__r.Phone;
+            requestedDVSigner_email = currLead.Best_Contact__r.Email;
+            requestedDVSigner_HTF_name = currLead.Best_Contact_HTF__r.Name;
+        } else if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL) {
+            requestedDVSigner_firstName = currLead.ALT_1_MP__r.FirstName;
+            requestedDVSigner_lastName = currLead.ALT_1_MP__r.LastName;
+            requestedDVSigner_phone = currLead.ALT_1_MP__r.Phone;
+            requestedDVSigner_email = currLead.ALT_1_MP__r.Email;
+            requestedDVSigner_HTF_name = currLead.ALT_1_MP_HTF__r.Name;
+        } else if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_2_MEDICAL_PROFESSIONAL) {
+            requestedDVSigner_firstName = currLead.ALT_2_MP__r.FirstName;
+            requestedDVSigner_lastName = currLead.ALT_2_MP__r.LastName;
+            requestedDVSigner_phone = currLead.ALT_2_MP__r.Phone;
+            requestedDVSigner_email = currLead.ALT_2_MP__r.Email;
+            requestedDVSigner_HTF_name = currLead.ALT_2_MP_HTF__r.Name;
+        } else {
+            requestedDVSigner_firstName = '';
+            requestedDVSigner_lastName = '';
+            requestedDVSigner_phone = '';
+            requestedDVSigner_email = '';
+            requestedDVSigner_HTF_name = '';
+        }
+		//ODP-17 End
+		
         if (currLead.Child_will_ultimately_die_prematurely__c == true) {
             wishChildWrapperIns.describePatient = '1';
         } else if (currLead.Treatment_may_be_feasible_but_can_fail__c == true) {
@@ -976,11 +1005,6 @@ public class DiagnosisVerification_AC {
             //In the event that wishChildEligibility check is not called due to browser or network issues, this will send the case to medical eligibility review.
             setWishStatus(); 
 
-            currLead.Treating_Medical_Professional_First_Name__c = wishChildWrapperIns.treatingFName ;
-            currLead.Treating_Medical_Professional_Last_Name__c = wishChildWrapperIns.treatingLName;
-            currLead.Treating_Medical_Professional_Phone__c = wishChildWrapperIns.treatingPhone;
-            currLead.Treating_Medical_Professional_Email__c = wishChildWrapperIns.treatingEmail;
-            currLead.Hospital_Treatment_Facility_Treating__c = wishChildWrapperIns.treatingHospital;
             currLead.I_am_Recognized_To_Practice_As_a__c = wishChildWrapperIns.recognizationPickValSelected;
             currLead.I_m_Part_of_The_Treating_HealthCare_Team__c = wishChildWrapperIns.healthCareWork;
             currLead.Is_in_a_Comatose_Vegetative_State__c = wishChildWrapperIns.vegetativeState;
@@ -1281,21 +1305,6 @@ public class DiagnosisVerification_AC {
             if (!String.isEmpty(currentConditionFormattedString)) {
                 currLead.Current_Condition_Label__c = currentConditionFormattedString;
             }
-
-            currLead.Best_Contact_for_Physician_First_Name__c = wishChildWrapperIns.bestPhyFname;
-            currLead.Best_Contact_for_Physician_Last_Name__c = wishChildWrapperIns.bestPhyLname;
-            currLead.Best_contact_for_Physician_Email__c = wishChildWrapperIns.bestPhyEmail;
-            currLead.Best_Contact_for_Physician_Phone__c = wishChildWRapperIns.bestPhyPhone;
-            currLead.Alternate1MedProfessionalFirstName__c = wishChildWrapperIns.alt1MedFname;
-            currLead.Alternate1MedProfessionalLastName__c = wishChildWrapperIns.alt1MedLname;
-            currLead.Alternate1MedicalProfessionalEmail__c = wishChildWrapperIns.alt1MedEmail;
-            currLead.Alternate1MedProfessionalPhone__c = wishChildWrapperIns.alt1MedPhone;
-            currLead.Alternate1HospitalTreatmentFacility__c = wishChildWrapperIns.alt1MedHosp;
-            currLead.Alternate2MedProfessionalFirstName__c = wishChildWrapperIns.alt2MedFname;
-            currLead.Alternate2MedProfessionalLastName__c = wishChildWrapperIns.alt2MedLname;
-            currLead.Alternate2MedProfessionalEmail__c = wishChildWrapperIns.alt2MedEmail;
-            currLead.Alternate2MedProfessionalPhone__c = wishChildWrapperIns.alt2MedPhone;
-            currLead.Alternate2HospitalTreatmentFacility__c = wishChildWrapperIns.alt2MedHosp;
             
             if (wishChildWrapperIns.vegetativeState == Constant_AC.LEAD_COMATOSE_VEGETATIVE_STATE_YES) {
                 currLead.RFI_Form_Info_Hidden__c = Constant_AC.LEAD_RFI_FORM_INFO_NOT_QUALIFIED;
@@ -1345,7 +1354,34 @@ public class DiagnosisVerification_AC {
             currLead.Non_Verbal_Additional_Information__c = wishChildWrapperIns.nonVerbalAddInfo;
             }
             //SIW-378 End
-
+			//ODP-17 Start : Add dvSigner info on Save
+            if(!String.isBlank(wishChildWrapperIns.isSignerSame)) {
+                if(wishChildWrapperIns.isSignerSame == 'Yes') {
+                	currLead.DV_Signer_Changed__c = false;
+                    currLead.DV_Signer_First_Name__c = requestedDVSigner_firstName;
+                    currLead.DV_Signer_Last_Name__c = requestedDVSigner_lastName;
+                    currLead.DV_Signer_Email__c = requestedDVSigner_email;
+                    currLead.DV_Signer_Phone__c = requestedDVSigner_phone;
+                } else {
+                    currLead.DV_Signer_Changed__c = true;
+                    if(!String.isBlank(wishChildWrapperIns.dvSignerFname)) {
+                        currLead.DV_Signer_First_Name__c = wishChildWrapperIns.dvSignerFname;
+                    }
+                    if(!String.isBlank(wishChildWrapperIns.dvSignerLname)) {
+                        currLead.DV_Signer_Last_Name__c = wishChildWrapperIns.dvSignerLname;
+                    }
+                    if(!String.isBlank(wishChildWrapperIns.dvSignerEmail)) {
+                        currLead.DV_Signer_Email__c = wishChildWrapperIns.dvSignerEmail;
+                    }
+                    if(!String.isBlank(wishChildWrapperIns.dvSignerPhone)) {
+                        currLead.DV_Signer_Phone__c = wishChildWrapperIns.dvSignerPhone;
+                    }
+                }
+            } else {
+                currLead.DV_Signer_Changed__c = false;
+            }
+			//ODP-17 End
+			
             update currLead;
             insert diagnosisVerificationLstForInsert;
             insert diagnosisMedicalQuestionLst;
@@ -1377,27 +1413,13 @@ public class DiagnosisVerification_AC {
         PageReference reference;
 
         try {
-            if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL) {
-                mySenderName = currLead.Treating_Medical_Professional_First_Name__c + ' ' + currLead.Treating_Medical_Professional_Last_Name__c;
-                myEmail = currLead.Treating_Medical_Professional_Email__c;
-            } else if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_BEST_CONTACT) {
-                mySenderName = currLead.Best_Contact_for_Physician_First_Name__c + ' ' + currLead.Best_Contact_for_Physician_Last_Name__c;
-                myEmail = currLead.Best_contact_for_Physician_Email__c;
-            } else if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL) {
-                mySenderName = currLead.Alternate1MedProfessionalFirstName__c + ' ' + currLead.Alternate1MedProfessionalLastName__c;
-                myEmail = currLead.Alternate1MedicalProfessionalEmail__c;
-            } else if (wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_2_MEDICAL_PROFESSIONAL) {
-                mySenderName = currLead.Alternate2MedProfessionalFirstName__c + ' ' + currLead.Alternate2MedProfessionalLastName__c;
-                myEmail = currLead.Alternate2MedProfessionalEmail__c;
-            } else {
-                mySenderName = currLead.Treating_Medical_Professional_First_Name__c + ' ' + currLead.Treating_Medical_Professional_Last_Name__c;
-                myEmail = currLead.Treating_Medical_Professional_Email__c;
-            }
-
+            mySenderName = currLead.DV_Signer_First_Name__c + ' ' + currLead.DV_Signer_Last_Name__c;
+            myEmail = currLead.DV_Signer_Email__c;
+            
             String account;
             String IntegratorKey;
             Map<String, DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
-
+            
             for (DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()) {
                 account = credentialIns.account__c;
                 IntegratorKey = credentialIns.IntegratorKey__c;
@@ -1588,7 +1610,11 @@ public class DiagnosisVerification_AC {
                 'Does_Child_Have_Speech_or_Language_Delay__c',
                 'Non_Verbal_Communication_Method__c',
                 'Non_Verbal_Additional_Information__c',
-                'Non_Verbal__c'
+                'Non_Verbal__c',
+                'Treating_MP__r.FirstName', 'Treating_MP__r.LastName', 'Treating_MP__r.Phone', 'Treating_MP__r.Email', 'Treating_MP_HTF__r.Name',
+                'Best_Contact__r.FirstName', 'Best_Contact__r.LastName', 'Best_Contact__r.Phone', 'Best_Contact__r.Email', 'Best_Contact_HTF__r.Name',
+                'ALT_1_MP__r.FirstName', 'ALT_1_MP__r.LastName', 'ALT_1_MP__r.Phone', 'ALT_1_MP__r.Email', 'ALT_1_MP_HTF__r.Name',
+                'ALT_2_MP__r.FirstName', 'ALT_2_MP__r.LastName', 'ALT_2_MP__r.Phone', 'ALT_2_MP__r.Email', 'ALT_2_MP_HTF__r.Name'
         };
            
         for (String field : FIELDS_TO_SELECT) {
@@ -1603,5 +1629,33 @@ public class DiagnosisVerification_AC {
         query += ' FROM Lead WHERE Id = :leadId';
 
         return Database.query(query);
+    }
+    
+    /*
+     * @description     Used to populate DV_Signer information on VF page
+     *
+     * @author          Pramod N, Traction on demand
+     * @date            Sept 10, 2020
+     */
+    public void populateDVSignerInfo() {
+        if (wishChildWrapperIns.isSignerSame == 'No') {
+            if(currLead.DV_Signer_Changed__c == true) {
+                wishChildWrapperIns.dvSignerFname = currLead.DV_Signer_First_Name__c;
+                wishChildWrapperIns.dvSignerLname = currLead.DV_Signer_Last_Name__c;
+                wishChildWrapperIns.dvSignerEmail = currLead.DV_Signer_Email__c;
+                wishChildWrapperIns.dvSignerPhone = currLead.DV_Signer_Phone__c;
+            } else {
+                wishChildWrapperIns.dvSignerFname = '';
+                wishChildWrapperIns.dvSignerLname = '';
+                wishChildWrapperIns.dvSignerPhone = '';
+                wishChildWrapperIns.dvSignerEmail = '';
+            }
+        } 
+        else {
+            wishChildWrapperIns.dvSignerFname = '';
+            wishChildWrapperIns.dvSignerLname = '';
+            wishChildWrapperIns.dvSignerPhone = '';
+            wishChildWrapperIns.dvSignerEmail = '';
+        }
     }
 }

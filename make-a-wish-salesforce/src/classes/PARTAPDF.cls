@@ -3,8 +3,9 @@ Author      : MST Solutions
 Date        : 9/30/2016
 Description : This class is used to display the Medical Information in Docusign page
 1. 09/04/2020 - Manoj      - SIW-355 : Added 2 new field to get queried on page load
-2. 29 Jul 2020 - Manoj      - SIW-378 : Added  fields in query for new questions
-2. 07/08/2020  - Manoj      - SIW-654 : Added  fields for placeholder
+2. 29 Jul 2020 - Manoj     - SIW-378 : Added  fields in query for new questions
+2. 07/08/2020  - Manoj     - SIW-654 : Added  fields for placeholder
+3. 11/09/2020 - Pramod     - ODP-17  : Added fields to hold DV Signer Info 
 *******************************************************************************************************************/
 public class PARTAPDF {
     public Id leadId { get; set; }
@@ -23,6 +24,12 @@ public class PARTAPDF {
     public final String yesText { get; set; } 
     public final String noText { get; set; }  
     public final String placeHolderAddInfo { get; set; } 
+
+    //ODP-17 : To hold DV Signer Values
+    public String dvSignerFirstName { get; set; }
+    public String dvSignerLastName { get; set; }
+    public String dvSignerPhone { get; set; }
+    public String dvSignerEmail { get; set; }
 
     public PARTAPDF() {
         currentConditionList = new List<String>();       
@@ -94,7 +101,12 @@ public class PARTAPDF {
             query += ' WHERE Id = :leadId';
 
             currLead = Database.query(query);
-
+            //ODP-17 Start
+			dvSignerFirstName = currLead.DV_Signer_First_Name__c;
+            dvSignerLastName = currLead.DV_Signer_Last_Name__c;
+            dvSignerPhone = currLead.DV_Signer_Phone__c;
+            dvSignerEmail = currLead.DV_Signer_Email__c;
+            //ODP-17 End
             recValueList.add(String.valueOf(currLead));
 
             if (currLead.Current_Condition_Label__c != null) {
