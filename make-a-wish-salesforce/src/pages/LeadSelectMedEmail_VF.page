@@ -1,7 +1,6 @@
 <apex:page controller="LeadSelectMedEmailController_AC" standardStylesheets="false" sidebar="false">
     <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/jquery.min.js')}"/>
-    <apex:stylesheet
-            value="{!URLFOR($Resource.SLDS, '/0_12_2/assets/styles/salesforce-lightning-design-system-vf.min.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.SLDS, '/0_12_2/assets/styles/salesforce-lightning-design-system-vf.min.css')}"/>
     <apex:stylesheet value="{!URLFOR($Resource.SweetAlert, 'sweet-alert.css')}"/>
     <apex:includeScript value="{!URLFOR($Resource.SweetAlert, 'sweet-alert.js')}"/>
     <apex:includeScript value="/support/console/42.0/integration.js"/><!-- Added Includescript for IME-25-->
@@ -160,7 +159,7 @@
                                     type: 'warning'
                                 });
                             } else {
-                                sendDiagnosisVerification(emailTo, email, 'Send');
+                                sendDiagnosisVerification(emailTo, email, 'sendDv');
                             }
                         } else {
                             //Added per IM-59

@@ -55,8 +55,8 @@ public class LeadSelectMedEmailController_AC {
 				} else {
 					currLead.Of_Times_Email_Sent__c = currLead.Of_Times_Email_Sent__c + 1;
 				}
-				DiagnosisVerificationService.processSendDiagnosisVerification(currLead, currLead.HiddenMedicalProfessionalEmail__c);
 				update currLead;
+				DiagnosisVerificationService.processSendDiagnosisVerification(currLead, currLead.HiddenMedicalProfessionalEmail__c);
 				success = true;
 			}
 		} catch (Exception ex) {
