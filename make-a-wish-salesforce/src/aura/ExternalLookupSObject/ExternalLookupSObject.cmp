@@ -11,6 +11,7 @@
     <aura:attribute name="fieldsToReturn" type="String"/>
     <aura:attribute name="formattedOutput" type="String"/>
     <aura:attribute name="iconFullName" type="String"/>
+    <aura:attribute name="filter" type="Map[]"/>
     <c:LookupSObject
             lookupId="{!v.lookupId}"
             sObjectAPIName="{!v.sObjectAPIName}"
@@ -19,6 +20,7 @@
             fieldsToReturn="{!v.fieldsToReturn}"
             formattedOutput="{!v.formattedOutput}"
             iconFullName="{!v.iconFullName}"
+            filter="{!v.filter}"
             recordId=""
             isExternalLookup="true"/>
 </aura:component>

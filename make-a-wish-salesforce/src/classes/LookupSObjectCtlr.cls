@@ -7,13 +7,15 @@ public with sharing class LookupSObjectCtlr {
 
 	private final static Id medicalProfessionalRT = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
 	private final static Id hospitalFacilityRT = Constant_AC.HOSPITAL_TREATMENT_ID;
+
 	/**
 	 * Find matching SObject record by keyword, SObject and return based on parameter
-	 * @param searchString
-	 * @param sObjectAPIName
-	 * @param fieldsToReturn
-	 * @param formattedOutput
-	 * @param filter
+	 * @param searchString searchString
+	 * @param sObjectAPIName sObjectAPIName
+	 * @param fieldsToReturn fieldsToReturn
+	 * @param formattedOutput formattedOutput
+	 * @param filter filter
+	 * @param isExternalLookup isExternalLookup
 	 * @return String
 	 */
 	@AuraEnabled
@@ -22,7 +24,7 @@ public with sharing class LookupSObjectCtlr {
 			String sObjectAPIName,
 			String fieldsToReturn,
 			String formattedOutput,
-			Map<String, Object> filter,
+			Map<String, String> filter,
 			Boolean isExternalLookup) {
 
 		// Sanitize the input
@@ -31,23 +33,28 @@ public with sharing class LookupSObjectCtlr {
 		String sanitizedFieldsToReturn = String.escapeSingleQuotes(fieldsToReturn);
 		List<String> listFields = sanitizedFieldsToReturn.split(',');
 		List<Result> results = new List<Result>();
+		filter = filter == null ? new Map<String, String>() : filter;
 
 		// Build our SOSL query
 		String searchQuery = '';
 		if (isExternalLookup && sObjectAPIName.equals('Contact')) {
+			filter.put('RecordTypeId', 'RecordTypeId = ' + '\'' + medicalProfessionalRT + '\'');
+			filter.put('Exclude_MP_from_Referral_Form_Searches__c', 'Exclude_MP_from_Referral_Form_Searches__c = FALSE');
+			filter.put('npsp__Deceased__c', 'npsp__Deceased__c = FALSE');
+			String whereClause = buildQueryFilters(filter);
 			// Search only on a specific set of fields on Medical Professional Contact Lookup
 			searchQuery = 'FIND \'' + sanitizedSearchString + '*\' ' +
-					'IN NAME FIELDS RETURNING ' + sanitizedSObjectAPIName + '(' + sanitizedFieldsToReturn +
-					' WHERE RecordTypeId = :medicalProfessionalRT' +
-					' AND Exclude_MP_from_Referral_Form_Searches__c = FALSE' +
-					' AND npsp__Deceased__c = FALSE)' +
+					'IN NAME FIELDS RETURNING ' + sanitizedSObjectAPIName +
+					'(' + sanitizedFieldsToReturn + whereClause + ')' +
 					' LIMIT 50';
 		} else if (isExternalLookup && sObjectAPIName.equals('Account')) {
 			// Search only on a specific set of fields on Hospital/Facility Account Lookup
+			filter.put('RecordTypeId', 'RecordTypeId = ' + '\'' + hospitalFacilityRT + '\'');
+			filter.put('Exclude_HTF_from_Referral_Form_Searches__c', 'Exclude_HTF_from_Referral_Form_Searches__c = FALSE');
+			String whereClause = buildQueryFilters(filter);
 			searchQuery = 'FIND \'' + sanitizedSearchString + '*\' ' +
-					'IN NAME FIELDS RETURNING ' + sanitizedSObjectAPIName + '(' + sanitizedFieldsToReturn +
-					' WHERE RecordTypeId = :hospitalFacilityRT' +
-					' AND Exclude_HTF_from_Referral_Form_Searches__c = FALSE)' +
+					'IN ALL FIELDS RETURNING ' + sanitizedSObjectAPIName +
+					'(' + sanitizedFieldsToReturn + whereClause + ')' +
 					' LIMIT 50';
 		} else {
 			// Standard behaviour
@@ -105,6 +112,21 @@ public with sharing class LookupSObjectCtlr {
 			}
 		}
 		return JSON.serialize(result);
+	}
+
+	private static String buildQueryFilters(Map<String, String> filterMap){
+		String filter = '';
+		for(String f : filterMap.keySet()){
+			if(String.isEmpty(filterMap.get(f))) {
+				continue;
+			}
+			if(String.isEmpty(filter)){
+				filter = ' WHERE ' + filterMap.get(f);
+			} else {
+				filter = filter + ' AND ' + filterMap.get(f);
+			}
+		}
+		return filter;
 	}
 
 	// Wrapper class

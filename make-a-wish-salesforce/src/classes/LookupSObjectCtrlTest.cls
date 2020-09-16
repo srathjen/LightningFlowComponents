@@ -19,7 +19,7 @@ private class LookupSObjectCtrlTest {
 		String sObjectName = 'Opportunity';
 		String fieldsToReturn = 'Name, StageName';
 		String formattedOutput = '{1} - {0}';
-		Map<String, Object> filter = new Map<String, Object>();
+		Map<String, String> filter = new Map<String, String>();
 
 		String res = LookupSObjectCtlr.lookup(searchString, sObjectName, fieldsToReturn, formattedOutput, filter, false);
 
@@ -54,7 +54,7 @@ private class LookupSObjectCtrlTest {
 		String sObjectName = 'Contact';
 		String fieldsToReturn = 'Name';
 		String formattedOutput = '{0}';
-		Map<String, Object> filter = new Map<String, Object>();
+		Map<String, String> filter = new Map<String, String>();
 
 		String res = LookupSObjectCtlr.lookup(searchString, sObjectName, fieldsToReturn, formattedOutput, filter, true);
 
@@ -87,7 +87,7 @@ private class LookupSObjectCtrlTest {
 		String sObjectName = 'Account';
 		String fieldsToReturn = 'Name';
 		String formattedOutput = '{0}';
-		Map<String, Object> filter = new Map<String, Object>();
+		Map<String, String> filter = new Map<String, String>();
 
 		String res = LookupSObjectCtlr.lookup(searchString, sObjectName, fieldsToReturn, formattedOutput, filter, true);
 

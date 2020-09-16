@@ -12,238 +12,238 @@ global class WishReferralForm_AC {
 	@testVisible private static String ERROR_STRING_SELECT_MANDATORY_FIELDS = 'Please complete following mandatory fields : ';
 	@testVisible private static String ERROR_STRING_RELATIONSHIP_TO_CHILD = 'Please select Relationship To Child';
 
-    public String remailOne { get; set; }
-    public String remailTwo { get; set; }
-    public Lead currLead { get; set; }
-    public String diagnosisFilter { get; set; }
-    public String selectedDiagnosis { get; set; }
-    public Boolean displayChildFrm { get; set; }
-    public String lastName { get; set; }
-    public Boolean displayAckMsg { get; set; }
-    public List<siblingWrapper> currList;
-    public String warningMsg { get; set; }
-    public Boolean displayWarningPopup { get; set; }
-    public Boolean copyReferrerInfo { get; set; }
-    public Boolean copyReferrerInfoBest { get; set; }
-    public Boolean copyReferrerInfoToWish { get; set; }
-    public String currState { get; set; }
-    public String diagnosisMonth { get; set; }
-    public String diagnosisYear { get; set; }
-    public List<String> communictionList { get; set; }
-    public List<String> languageList { get; set; }
-    public String additionalParentState { get; set; }
-    public static String icdOrPcd;
-    public String refChildFormParent { get; set; }
-    public String referralComment { get; set; }
-    public String referralRush { get; set; }
-    public final String YES { get; set; }
-    private final String RED = 'Red';
-    public String treatingMpState { get; set; }
-    public Boolean createNewRefMP { get; set; }
-    public Boolean createNewRefHTF { get; set; }
-    public MpHtfSearchWrapper mpHtfSearch { get; set; }
+	public String remailOne { get; set; }
+	public String remailTwo { get; set; }
+	public Lead currLead { get; set; }
+	public String diagnosisFilter { get; set; }
+	public String selectedDiagnosis { get; set; }
+	public Boolean displayChildFrm { get; set; }
+	public String lastName { get; set; }
+	public Boolean displayAckMsg { get; set; }
+	public List<siblingWrapper> currList;
+	public String warningMsg { get; set; }
+	public Boolean displayWarningPopup { get; set; }
+	public Boolean copyReferrerInfo { get; set; }
+	public Boolean copyReferrerInfoBest { get; set; }
+	public Boolean copyReferrerInfoToWish { get; set; }
+	public String currState { get; set; }
+	public String diagnosisMonth { get; set; }
+	public String diagnosisYear { get; set; }
+	public List<String> communictionList { get; set; }
+	public List<String> languageList { get; set; }
+	public String additionalParentState { get; set; }
+	public static String icdOrPcd;
+	public String refChildFormParent { get; set; }
+	public String referralComment { get; set; }
+	public String referralRush { get; set; }
+	public final String YES { get; set; }
+	private final String RED = 'Red';
+	public String treatingMpState { get; set; }
+	public Boolean createNewRefMP { get; set; }
+	public Boolean createNewRefHTF { get; set; }
+	public MpHtfSearchWrapper mpHtfSearch { get; set; }
 
-    public WishReferralForm_AC() {
-        communictionList = new List<String>();
-        languageList = new List<String>();
-        currLead = new Lead();
-        copyReferrerInfoToWish = false;
-        copyReferrerInfo = false;
-        copyReferrerInfoBest = false;
-        icdOrPcd = '';
-        displayChildFrm = false;
-        YES = 'Yes';
-        createNewRefMP = false;
-        createNewRefHTF = false;
-        if (ApexPages.currentPage().getParameters().get('isSuccess') != null) {
-            displayAckMsg = Boolean.valueOf(ApexPages.currentPage().getParameters().get('isSuccess'));
-        }
-        mpHtfSearch = new MpHtfSearchWrapper();
-    }
+	public WishReferralForm_AC() {
+		communictionList = new List<String>();
+		languageList = new List<String>();
+		currLead = new Lead();
+		copyReferrerInfoToWish = false;
+		copyReferrerInfo = false;
+		copyReferrerInfoBest = false;
+		icdOrPcd = '';
+		displayChildFrm = false;
+		YES = 'Yes';
+		createNewRefMP = false;
+		createNewRefHTF = false;
+		if (ApexPages.currentPage().getParameters().get('isSuccess') != null) {
+			displayAckMsg = Boolean.valueOf(ApexPages.currentPage().getParameters().get('isSuccess'));
+		}
+		mpHtfSearch = new MpHtfSearchWrapper();
+	}
 
 	/**
 	 * Create new lead
 	 */
 	public PageReference CreateLead() {
-        String logValue;
-        String recId;
-        List<String> lstLog = new List<String>();
-        try {
-            if (currLead.Relationship_to_child__c != null) {
-                currLead.Relationship_to_child__c = currLead.Relationship_to_child__c.trim();
-            }
-            setLookupSearchMpHtf();
-            
-            //SIW-563: Modified condition to fix email issue for all relationship type
-            if (currLead.Relationship_to_child__c != null) {
-                if (currLead.Relationship_to_child__c.trim().equalsIgnoreCase(Constant_AC.Other_RT_LABEL)) {
-                    currLead.Referrer_Email__c = remailTwo;
-                } else {
-                    currLead.Referrer_Email__c = remailOne;
-                }
-            }
-            currLead.PCD_ICD__c = icdOrPcd;
-            currLead.Country = Constant_AC.LEAD_COUNTRY_UNITED_STATES;
-            List<ICD_Codes__c> icdCodeInfoList = getIcdCodes(diagnosisFilter);
-            if (icdCodeInfoList.size() > 0) {
-                currLead.PD_ICD_Code__c = icdCodeInfoList[0].Id;
-                currLead.ICD_Given_By_Referrer__c = icdCodeInfoList[0].Id;
-            }
-            currLead.PD_Condition_Description__c = selectedDiagnosis;
-            currLead.Diagnosis_Given_By_Referrer__c = selectedDiagnosis;
-            currLead.Company = Constant_AC.LEAD_COMPANY_MAKE_A_WISH;
-            currLead.LastName = lastName;
-            String zipCode = '';
-            String errorString = '';
-            Boolean flag = true;
-            currLead.State = currState;
-            currLead.LeadSource = Constant_AC.LEAD_SOURCE_ONLINE;
-            currLead.Additional_Parent_State__c = additionalParentState;
-            if (currLead.Has_this_child_ever_received_prior_wish__c != null) {
-                currLead.Has_this_child_ever_received_prior_wish__c = currLead.Has_this_child_ever_received_prior_wish__c.trim();
-            }
-            if (currLead.Any_medical_reason_for_moving_quickly__c != null) {
-                if (currLead.Any_medical_reason_for_moving_quickly__c.containsIgnoreCase(Label.Select_Option_Yes)) {
-                    currLead.Any_medical_reason_for_moving_quickly__c = String.format(Label.Dynamic_Font_Tag_with_Color, new List<String>{
-                        RED, currLead.Any_medical_reason_for_moving_quickly__c
-                            });
-                    currLead.Hidden_Potential_Rush__c = currLead.Any_medical_reason_for_moving_quickly__c;
-                    currLead.Rush__c = true;
-                    currLead.Referrer_Rush_Reason__c = referralRush;
-                } else {
-                    currLead.Hidden_Potential_Rush__c = currLead.Any_medical_reason_for_moving_quickly__c;
-                }
-            }
-            if (currLead.Has_this_child_ever_received_prior_wish__c != null && currLead.Has_this_child_ever_received_prior_wish__c.containsIgnoreCase(Label.Select_Option_Yes)) {
-                currLead.Has_this_child_ever_received_prior_wish__c = String.format(Label.Dynamic_Font_Tag_with_Color, new List<String>{
-                    RED, currLead.Has_this_child_ever_received_prior_wish__c
-                        });
-            }
-            if (currLead.Relationship_to_child__c == null || currLead.Relationship_to_child__c == '') {
-                flag = false;
-                ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR, ERROR_STRING_RELATIONSHIP_TO_CHILD);
-                ApexPages.addMessage(msg);
-                if (!Test.isRunningTest()) {
-                    return null;
-                }
-            }
-            
-            if (flag == false) {
-                if (errorString != '' || Test.isRunningTest()) {
-                    errorString = errorString.removeEnd(',');
-                    ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR, ERROR_STRING_SELECT_MANDATORY_FIELDS + errorString);
-                    ApexPages.addMessage(msg);
-                    return null;
-                }
-            }
-            if (flag == true) {
-                if (currLead.PostalCode != null && currLead.PostalCode != '') {
-                    zipCode = currLead.PostalCode;
-                } else {
-                    zipCode = currLead.Referrer_Zip__c;
-                }
-                if (currList != null) {
-                    for (siblingWrapper currVal : currList) {
-                        if (currLead.Sibling_Detail__c == null) {
-                            currLead.Sibling_Detail__c = '';
-                        }
-                        if (currVal.fName != null && currVal.fName != '') {
-                            currLead.Sibling_Detail__c += currVal.fName + ' | ';
-                        } else {
-                            currLead.Sibling_Detail__c += '-' + ' | ';
-                        }
-                        if (currVal.lName != null && currVal.lName != '') {
-                            currLead.Sibling_Detail__c += currVal.lName + ' | ';
-                        } else {
-                            currLead.Sibling_Detail__c += '-' + ' | ';
-                        }
-                        if (currVal.age != null && currVal.age != '') {
-                            currLead.Sibling_Detail__c += currVal.age + '<br>';
-                        } else {
-                            currLead.Sibling_Detail__c += '-' + '<br>';
-                        }
-                    }
-                }
-                //Route lead to chapter
-                String intakeManagerId = '';
-                if (zipCode != '') {
-                    List<Zip_Code__c> findChapterviaZipCode = new List<Zip_Code__c>(getChapterZipcode(zipCode));
-                    if (findChapterviaZipCode.size() > 0) {
-                        if (findChapterviaZipCode[0].Office__c != null && findChapterviaZipCode[0].Office__r.Chapter__c != null) {
-                            currLead.ChapterName__c = findChapterviaZipCode[0].Office__r.Chapter__c;
-                            if (findChapterviaZipCode[0].Office__r.Chapter__r.Intake_Manager__c != null) {
-                                currLead.OwnerId = findChapterviaZipCode[0].Office__r.Chapter__r.Intake_Manager__c;
-                                intakeManagerId = findChapterviaZipCode[0].Office__r.Chapter__r.Intake_Manager__c;
-                            }
-                        }
-                    }
-                } else {
-                    List<Account> currAccount = getMawAccount();
-                    if (currAccount.size() > 0) {
-                        currLead.ChapterName__c = currAccount[0].Id;
-                        if (currAccount[0].Intake_Manager__c != null) {
-                            currLead.OwnerId = currAccount[0].Intake_Manager__c;
-                            intakeManagerId = currAccount[0].Intake_Manager__c;
-                        }
-                    }
-                }
-                if (currLead.Relationship_to_child__c == Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_OTHER || currLead.Child_Age__c == Constant_AC.LEAD_CHILD_AGE_UNDER_2_5) {
-                    currLead.Status = Constant_AC.LEAD_STATUS_INQUIRY;
-                    currLead.RFI_Form_Info_Hidden__c = Constant_AC.LEAD_STATUS_INQUIRY;
-                } else {
-                    currLead.Status = Constant_AC.LEAD_STATUS_REFERRED;
-                    currLead.RFI_Form_Info_Hidden__c = Constant_AC.LEAD_STATUS_REFERRED;
-                }
-                if (currLead.Relationship_to_child__c == Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL) {
-                    currLead.ReferralComment__c = referralComment;
-                } else {
-                    currLead.ReferralComment__c = '';
-                }
-                if (!(String.isBlank(diagnosisYear))) {
-                    if (String.isBlank(diagnosisMonth)) {
-                        currLead.Approximate_Diagnosis_Date__c = diagnosisYear;
-                    } else {
-                        currLead.Approximate_Diagnosis_Date__c = diagnosisMonth + '   ' + diagnosisYear;
-                    }
-                }
-                String communications = '';
-                if (communictionList != null) {
-                    for (String s : communictionList) {
-                        communications += s + ';';
-                    }
-                }
-                currLead.Communication__c = communications;
-                String languages = '';
-                if (languageList != null) {
-                    for (String l : languageList) {
-                        languages += l + ';';
-                    }
-                }
-                currLead.What_is_the_family_s_primary_spoken_lang__c = languages;
-                lstLog = (createLogList(currLead, zipCode, diagnosisMonth, diagnosisYear));
-                Boolean redirection;
-                currLead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
-                insert currLead;
-                if (currLead.Id != null) {
-                    redirection = true;
-                }
-                if (redirection == true) {
-                    String arg;
-                    if (ApexPages.currentPage().getParameters().get('alt') == 't') {
-                        arg = '&alt=t';
-                    }
-                    PageReference reference = new PageReference('/apex/WishReferralForm_VF?isSuccess=True&chid=' + refChildFormParent + '&rel=' + currLead.Relationship_to_child__c + arg);
-                    reference.setRedirect(true);
-                    return reference;
-                }
-            }
-        } catch (Exception ex) {
-            logValue = String.join(lstLog, ', ');
-            new ApexDebugLog().createLog(new ApexDebugLog.Error('WishReferralForm_AC', 'CreateLead', recId, ex, logValue));
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
-            ApexPages.addMessage(myMsg);
-        }
-        return null;
+		String logValue;
+		String recId;
+		List<String> lstLog = new List<String>();
+		try {
+			if (currLead.Relationship_to_child__c != null) {
+				currLead.Relationship_to_child__c = currLead.Relationship_to_child__c.trim();
+			}
+			setLookupSearchMpHtf();
+
+			//SIW-563: Modified condition to fix email issue for all relationship type
+			if (currLead.Relationship_to_child__c != null) {
+				if (currLead.Relationship_to_child__c.trim().equalsIgnoreCase(Constant_AC.Other_RT_LABEL)) {
+					currLead.Referrer_Email__c = remailTwo;
+				} else {
+					currLead.Referrer_Email__c = remailOne;
+				}
+			}
+			currLead.PCD_ICD__c = icdOrPcd;
+			currLead.Country = Constant_AC.LEAD_COUNTRY_UNITED_STATES;
+			List<ICD_Codes__c> icdCodeInfoList = getIcdCodes(diagnosisFilter);
+			if (icdCodeInfoList.size() > 0) {
+				currLead.PD_ICD_Code__c = icdCodeInfoList[0].Id;
+				currLead.ICD_Given_By_Referrer__c = icdCodeInfoList[0].Id;
+			}
+			currLead.PD_Condition_Description__c = selectedDiagnosis;
+			currLead.Diagnosis_Given_By_Referrer__c = selectedDiagnosis;
+			currLead.Company = Constant_AC.LEAD_COMPANY_MAKE_A_WISH;
+			currLead.LastName = lastName;
+			String zipCode = '';
+			String errorString = '';
+			Boolean flag = true;
+			currLead.State = currState;
+			currLead.LeadSource = Constant_AC.LEAD_SOURCE_ONLINE;
+			currLead.Additional_Parent_State__c = additionalParentState;
+			if (currLead.Has_this_child_ever_received_prior_wish__c != null) {
+				currLead.Has_this_child_ever_received_prior_wish__c = currLead.Has_this_child_ever_received_prior_wish__c.trim();
+			}
+			if (currLead.Any_medical_reason_for_moving_quickly__c != null) {
+				if (currLead.Any_medical_reason_for_moving_quickly__c.containsIgnoreCase(Label.Select_Option_Yes)) {
+					currLead.Any_medical_reason_for_moving_quickly__c = String.format(Label.Dynamic_Font_Tag_with_Color, new List<String>{
+							RED, currLead.Any_medical_reason_for_moving_quickly__c
+					});
+					currLead.Hidden_Potential_Rush__c = currLead.Any_medical_reason_for_moving_quickly__c;
+					currLead.Rush__c = true;
+					currLead.Referrer_Rush_Reason__c = referralRush;
+				} else {
+					currLead.Hidden_Potential_Rush__c = currLead.Any_medical_reason_for_moving_quickly__c;
+				}
+			}
+			if (currLead.Has_this_child_ever_received_prior_wish__c != null && currLead.Has_this_child_ever_received_prior_wish__c.containsIgnoreCase(Label.Select_Option_Yes)) {
+				currLead.Has_this_child_ever_received_prior_wish__c = String.format(Label.Dynamic_Font_Tag_with_Color, new List<String>{
+						RED, currLead.Has_this_child_ever_received_prior_wish__c
+				});
+			}
+			if (currLead.Relationship_to_child__c == null || currLead.Relationship_to_child__c == '') {
+				flag = false;
+				ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR, ERROR_STRING_RELATIONSHIP_TO_CHILD);
+				ApexPages.addMessage(msg);
+				if (!Test.isRunningTest()) {
+					return null;
+				}
+			}
+
+			if (flag == false) {
+				if (errorString != '' || Test.isRunningTest()) {
+					errorString = errorString.removeEnd(',');
+					ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR, ERROR_STRING_SELECT_MANDATORY_FIELDS + errorString);
+					ApexPages.addMessage(msg);
+					return null;
+				}
+			}
+			if (flag == true) {
+				if (currLead.PostalCode != null && currLead.PostalCode != '') {
+					zipCode = currLead.PostalCode;
+				} else {
+					zipCode = currLead.Referrer_Zip__c;
+				}
+				if (currList != null) {
+					for (siblingWrapper currVal : currList) {
+						if (currLead.Sibling_Detail__c == null) {
+							currLead.Sibling_Detail__c = '';
+						}
+						if (currVal.fName != null && currVal.fName != '') {
+							currLead.Sibling_Detail__c += currVal.fName + ' | ';
+						} else {
+							currLead.Sibling_Detail__c += '-' + ' | ';
+						}
+						if (currVal.lName != null && currVal.lName != '') {
+							currLead.Sibling_Detail__c += currVal.lName + ' | ';
+						} else {
+							currLead.Sibling_Detail__c += '-' + ' | ';
+						}
+						if (currVal.age != null && currVal.age != '') {
+							currLead.Sibling_Detail__c += currVal.age + '<br>';
+						} else {
+							currLead.Sibling_Detail__c += '-' + '<br>';
+						}
+					}
+				}
+				//Route lead to chapter
+				String intakeManagerId = '';
+				if (zipCode != '') {
+					List<Zip_Code__c> findChapterviaZipCode = new List<Zip_Code__c>(getChapterZipcode(zipCode));
+					if (findChapterviaZipCode.size() > 0) {
+						if (findChapterviaZipCode[0].Office__c != null && findChapterviaZipCode[0].Office__r.Chapter__c != null) {
+							currLead.ChapterName__c = findChapterviaZipCode[0].Office__r.Chapter__c;
+							if (findChapterviaZipCode[0].Office__r.Chapter__r.Intake_Manager__c != null) {
+								currLead.OwnerId = findChapterviaZipCode[0].Office__r.Chapter__r.Intake_Manager__c;
+								intakeManagerId = findChapterviaZipCode[0].Office__r.Chapter__r.Intake_Manager__c;
+							}
+						}
+					}
+				} else {
+					List<Account> currAccount = getMawAccount();
+					if (currAccount.size() > 0) {
+						currLead.ChapterName__c = currAccount[0].Id;
+						if (currAccount[0].Intake_Manager__c != null) {
+							currLead.OwnerId = currAccount[0].Intake_Manager__c;
+							intakeManagerId = currAccount[0].Intake_Manager__c;
+						}
+					}
+				}
+				if (currLead.Relationship_to_child__c == Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_OTHER || currLead.Child_Age__c == Constant_AC.LEAD_CHILD_AGE_UNDER_2_5) {
+					currLead.Status = Constant_AC.LEAD_STATUS_INQUIRY;
+					currLead.RFI_Form_Info_Hidden__c = Constant_AC.LEAD_STATUS_INQUIRY;
+				} else {
+					currLead.Status = Constant_AC.LEAD_STATUS_REFERRED;
+					currLead.RFI_Form_Info_Hidden__c = Constant_AC.LEAD_STATUS_REFERRED;
+				}
+				if (currLead.Relationship_to_child__c == Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL) {
+					currLead.ReferralComment__c = referralComment;
+				} else {
+					currLead.ReferralComment__c = '';
+				}
+				if (!(String.isBlank(diagnosisYear))) {
+					if (String.isBlank(diagnosisMonth)) {
+						currLead.Approximate_Diagnosis_Date__c = diagnosisYear;
+					} else {
+						currLead.Approximate_Diagnosis_Date__c = diagnosisMonth + '   ' + diagnosisYear;
+					}
+				}
+				String communications = '';
+				if (communictionList != null) {
+					for (String s : communictionList) {
+						communications += s + ';';
+					}
+				}
+				currLead.Communication__c = communications;
+				String languages = '';
+				if (languageList != null) {
+					for (String l : languageList) {
+						languages += l + ';';
+					}
+				}
+				currLead.What_is_the_family_s_primary_spoken_lang__c = languages;
+				lstLog = (createLogList(currLead, zipCode, diagnosisMonth, diagnosisYear));
+				Boolean redirection;
+				currLead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
+				insert currLead;
+				if (currLead.Id != null) {
+					redirection = true;
+				}
+				if (redirection == true) {
+					String arg;
+					if (ApexPages.currentPage().getParameters().get('alt') == 't') {
+						arg = '&alt=t';
+					}
+					PageReference reference = new PageReference('/apex/WishReferralForm_VF?isSuccess=True&chid=' + refChildFormParent + '&rel=' + currLead.Relationship_to_child__c + arg);
+					reference.setRedirect(true);
+					return reference;
+				}
+			}
+		} catch (Exception ex) {
+			logValue = String.join(lstLog, ', ');
+			new ApexDebugLog().createLog(new ApexDebugLog.Error('WishReferralForm_AC', 'CreateLead', recId, ex, logValue));
+			ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
+			ApexPages.addMessage(myMsg);
+		}
+		return null;
 	}
 
 	//Return ICD code
@@ -441,56 +441,56 @@ global class WishReferralForm_AC {
 	/**
 	 * Setting the lookup search Medical Professionals and Hospital Facilities on the Lead
 	*/
-	public void setLookupSearchMpHtf(){
-		if(String.isNotEmpty(currLead.Relationship_to_child__c)
+	public void setLookupSearchMpHtf() {
+		if (String.isNotEmpty(currLead.Relationship_to_child__c)
 				&& currLead.Relationship_to_child__c.equals(Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL)) {
-			if(String.isNotEmpty(mpHtfSearch.referringMedicalProfessionalId)){
+			if (String.isNotEmpty(mpHtfSearch.referringMedicalProfessionalId)) {
 				currLead.Referring_MP__c = mpHtfSearch.referringMedicalProfessionalId;
-            } else {
-                populateReferralInfoFromMP();
-            }
-			if(String.isNotEmpty(mpHtfSearch.referringHospitalFacilityId)){
+			} else {
+				populateReferralInfoFromMP();
+			}
+			if (String.isNotEmpty(mpHtfSearch.referringHospitalFacilityId)) {
 				currLead.Referring_MP_HTF__c = mpHtfSearch.referringHospitalFacilityId;
 			}
-			if(String.isNotEmpty(mpHtfSearch.treatingMedicalProfessionalId)){
+			if (String.isNotEmpty(mpHtfSearch.treatingMedicalProfessionalId)) {
 				currLead.Treating_MP__c = mpHtfSearch.treatingMedicalProfessionalId;
 			}
-			if(String.isNotEmpty(mpHtfSearch.treatingHospitalFacilityId)){
+			if (String.isNotEmpty(mpHtfSearch.treatingHospitalFacilityId)) {
 				currLead.Treating_MP_HTF__c = mpHtfSearch.treatingHospitalFacilityId;
 			}
-			if(String.isNotEmpty(mpHtfSearch.bestMedicalProfessionalId)){
+			if (String.isNotEmpty(mpHtfSearch.bestMedicalProfessionalId)) {
 				currLead.Best_Contact__c = mpHtfSearch.bestMedicalProfessionalId;
 			}
-			if(copyReferrerInfo == true) {
-				if(currLead.Referring_MP__c != null) {
+			if (copyReferrerInfo == true) {
+				if (currLead.Referring_MP__c != null) {
 					currLead.Treating_MP__c = currLead.Referring_MP__c;
 				}
-				if(currLead.Referring_MP_HTF__c != null) {
+				if (currLead.Referring_MP_HTF__c != null) {
 					currLead.Treating_MP_HTF__c = currLead.Referring_MP_HTF__c;
 				}
-			} else if(copyReferrerInfoBest == true) {
-				if(currLead.Referring_MP__c != null) {
+			} else if (copyReferrerInfoBest == true) {
+				if (currLead.Referring_MP__c != null) {
 					currLead.Best_Contact__c = currLead.Referring_MP__c;
 				}
-				if(currLead.Referring_MP_HTF__c != null) {
+				if (currLead.Referring_MP_HTF__c != null) {
 					currLead.Best_Contact_HTF__c = currLead.Referring_MP_HTF__c;
 				}
 			}
 		}
 	}
-    
-    /**
+
+	/**
 	*Populate referrer information with MP referrer information
 	*/
-    public void populateReferralInfoFromMP() {
-        if(currLead.Referring_MP__c == null) {
-            currLead.Referrer_FirstName__c = currLead.Referring_MP_First_Name__c;
-            currLead.Referrer_Last_Name__c = currLead.Referring_MP_Last_Name__c;
-            currLead.Referrer_Phone__c = currLead.Referring_MP_Phone__c;
-            currLead.Referrer_Email__c = currLead.Referring_MP_Email__c;
-            currLead.Referrer_City__c = currLead.Referring_MP_City__c;
-        }
-    }
+	public void populateReferralInfoFromMP() {
+		if (currLead.Referring_MP__c == null) {
+			currLead.Referrer_FirstName__c = currLead.Referring_MP_First_Name__c;
+			currLead.Referrer_Last_Name__c = currLead.Referring_MP_Last_Name__c;
+			currLead.Referrer_Phone__c = currLead.Referring_MP_Phone__c;
+			currLead.Referrer_Email__c = currLead.Referring_MP_Email__c;
+			currLead.Referrer_City__c = currLead.Referring_MP_City__c;
+		}
+	}
 
 	/**
 	 * Display data entry table based on number of siblings
@@ -508,8 +508,21 @@ global class WishReferralForm_AC {
 	/**
 	 * Return list of states
 	*/
+	public List<SelectOption> getFilterStateOptions() {
+		List<SelectOption> predefinedOptions = new List<SelectOption>();
+		predefinedOptions.add(new SelectOption('', 'Select an option'));
+		predefinedOptions.add(new SelectOption('', 'None'));
+		List<SelectOption> options = new List<SelectOption>(getPicklistValues('State_Picklist__c', predefinedOptions));
+		return options;
+	}
+
+	/**
+	 * Return list of states
+	*/
 	public List<SelectOption> getStates() {
-		List<SelectOption> options = new List<SelectOption>(getPicklistValues('State_Picklist__c'));
+		List<SelectOption> predefinedOptions = new List<SelectOption>();
+		predefinedOptions.add(new SelectOption('', 'Select an option'));
+		List<SelectOption> options = new List<SelectOption>(getPicklistValues('State_Picklist__c', predefinedOptions));
 		return options;
 	}
 
@@ -517,7 +530,9 @@ global class WishReferralForm_AC {
 	 * Return relationship to child picklist values
 	 */
 	public List<SelectOption> getRelationshipsToChild() {
-		List<SelectOption> options = new List<SelectOption>(getPicklistValues('Parent_Relationship_to_Child__c'));
+		List<SelectOption> predefinedOptions = new List<SelectOption>();
+		predefinedOptions.add(new SelectOption('', 'Select an option'));
+		List<SelectOption> options = new List<SelectOption>(getPicklistValues('Parent_Relationship_to_Child__c', predefinedOptions));
 		return options;
 	}
 
@@ -525,7 +540,9 @@ global class WishReferralForm_AC {
 	 * Return how did you hear about MAW picklist values
 	 */
 	public List<SelectOption> getHereAboutMAW() {
-		List<SelectOption> options = new List<SelectOption>(getPicklistValues('How_Did_you_hear_about_Make_A_Wish__c'));
+		List<SelectOption> predefinedOptions = new List<SelectOption>();
+		predefinedOptions.add(new SelectOption('', 'Select an option'));
+		List<SelectOption> options = new List<SelectOption>(getPicklistValues('How_Did_you_hear_about_Make_A_Wish__c', predefinedOptions));
 		return options;
 	}
 
@@ -533,7 +550,9 @@ global class WishReferralForm_AC {
 	 * Return communication picklist values
 	 */
 	public List<SelectOption> getCommunication() {
-		List<SelectOption> options = new List<SelectOption>(getPicklistValues('Communication__c'));
+		List<SelectOption> predefinedOptions = new List<SelectOption>();
+		predefinedOptions.add(new SelectOption('', 'Select an option'));
+		List<SelectOption> options = new List<SelectOption>(getPicklistValues('Communication__c', predefinedOptions));
 		return options;
 	}
 
@@ -541,7 +560,9 @@ global class WishReferralForm_AC {
 	 * Return language picklist values
 	 */
 	public List<SelectOption> getlanguage() {
-		List<SelectOption> options = new List<SelectOption>(getPicklistValues('What_is_the_family_s_primary_spoken_lang__c'));
+		List<SelectOption> predefinedOptions = new List<SelectOption>();
+		predefinedOptions.add(new SelectOption('', 'Select an option'));
+		List<SelectOption> options = new List<SelectOption>(getPicklistValues('What_is_the_family_s_primary_spoken_lang__c', predefinedOptions));
 		return options;
 	}
 
@@ -561,7 +582,9 @@ global class WishReferralForm_AC {
 	 * Return number of siblings picklist values
 	 */
 	public List<SelectOption> getNoOfSiblings() {
-		List<SelectOption> options = new List<SelectOption>(getPicklistValues('of_Siblings__c'));
+		List<SelectOption> predefinedOptions = new List<SelectOption>();
+		predefinedOptions.add(new SelectOption('', 'Select an option'));
+		List<SelectOption> options = new List<SelectOption>(getPicklistValues('of_Siblings__c', predefinedOptions));
 		return options;
 	}
 
@@ -569,19 +592,23 @@ global class WishReferralForm_AC {
 	 * Return relationship to child picklist values
 	 */
 	public List<SelectOption> getMedicalSpecialty() {
-		List<SelectOption> options = new List<SelectOption>(getPicklistValues('Treating_MP_Specialty__c'));
+		List<SelectOption> predefinedOptions = new List<SelectOption>();
+		predefinedOptions.add(new SelectOption('', 'Select an option'));
+		List<SelectOption> options = new List<SelectOption>(getPicklistValues('Treating_MP_Specialty__c', predefinedOptions));
 		return options;
 	}
 
 	/**
 	 * Return list of picklist values based on field passed in
 	 */
-	public List<SelectOption> getPicklistValues(String fieldApiName) {
+	public List<SelectOption> getPicklistValues(String fieldApiName, List<SelectOption> predefinedOptions) {
 		Map<String, Schema.SObjectField> leadFieldsMap = new Map<String, Schema.SObjectField>();
 		leadFieldsMap = Schema.SObjectType.Lead.fields.getMap();
 		List<Schema.PicklistEntry> picklistValues = leadFieldsMap.get(fieldApiName).getDescribe().getPicklistValues();
 		List<SelectOption> options = new List<SelectOption>();
-		options.add(new SelectOption('', 'Select an option'));
+		if (!predefinedOptions.isEmpty()) {
+			options.addAll(predefinedOptions);
+		}
 		for (Schema.PicklistEntry value : picklistValues) {
 			if (value.isActive()) {
 				options.add(new SelectOption(value.getLabel(), value.getValue()));
