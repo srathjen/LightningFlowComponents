@@ -166,12 +166,20 @@
                             <div class="col-sm-3" style="padding-top:15px">
                                 <label>{!$Label.Wish_Referral_Referring_Hospital_Facility}</label></div>
                             <div class="col-sm-6" style="margin-bottom:-12px">
+                                <div style="display: flex; align-items: center;">
+                                    <label>Filter by State: </label>
+                                    <apex:selectList size="1" id="referrerAccountState"
+                                                     styleClass="form-control col-xs-12 c-select state referrerAccountState"
+                                                     onchange="updateHtfFilter('externalReferrerAccountLookup', this.value, 'Referring Hospital/Facility')">
+                                        <apex:selectOptions value="{!FilterStateOptions}"/>
+                                    </apex:selectList>
+                                </div>
                                 <div id="externalReferrerAccountLookup"></div>
-                                <apex:inputHidden id="externalReferrerAccountLookupOutput"
-                                                  value="{!mpHtfSearch.referringHospitalFacilityId}"/>
                                 <div style="opacity: 0;pointer-events: none;">
                                     <apex:inputText id="externalReferrerAccountLookupValidation"/>
                                 </div>
+                                <apex:inputHidden id="externalReferrerAccountLookupOutput"
+                                                  value="{!mpHtfSearch.referringHospitalFacilityId}"/>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -200,7 +208,8 @@
                             <div class="form-group row">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Address}</label></div>
                                 <div class="col-sm-6">
-                                    <apex:inputText value="{!currLead.Referring_MP_HTF_Street_Address__c}" styleClass="form-control refhtfstreet"
+                                    <apex:inputText value="{!currLead.Referring_MP_HTF_Street_Address__c}"
+                                                    styleClass="form-control refhtfstreet"
                                                     html-placeholder="0000 NE 00 Ave" id="refhtfstreet" maxlength="40"/>
                                 </div>
                             </div>
@@ -216,7 +225,8 @@
                             <div class="form-group row">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_State}</label></div>
                                 <div class="col-sm-6">
-                                    <apex:selectList size="1" id="refhtfstate" value="{!currLead.Referring_MP_HTF_State__c}"
+                                    <apex:selectList size="1" id="refhtfstate"
+                                                     value="{!currLead.Referring_MP_HTF_State__c}"
                                                      styleClass="form-control col-xs-12 c-select state refhtfstate">
                                         <apex:selectOptions value="{!States}"/>
                                     </apex:selectList>
@@ -225,7 +235,8 @@
                             <div class="form-group row">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Postal_Code}</label></div>
                                 <div class="col-sm-6">
-                                    <apex:inputText value="{!currLead.Referring_MP_HTF_Zip_Code__c}" styleClass="form-control refhtfzip numbers-only"
+                                    <apex:inputText value="{!currLead.Referring_MP_HTF_Zip_Code__c}"
+                                                    styleClass="form-control refhtfzip numbers-only"
                                                     html-placeholder="00000" id="refhtfzip" maxlength="5"/>
                                 </div>
                             </div>
@@ -243,7 +254,8 @@
                                 <div class="col-sm-6">
                                     <apex:inputField value="{!currLead.Referring_MP_HTF_Department__c}"
                                                      styleClass="form-control col-xs-12 col-sm-12 c-select refhtfdept"
-                                                     html-placeholder="{!$Label.Wish_Referral_HTF_Department}" id="refhtfdept"/>
+                                                     html-placeholder="{!$Label.Wish_Referral_HTF_Department}"
+                                                     id="refhtfdept"/>
                                 </div>
                             </div>
                         </div>
@@ -334,7 +346,7 @@
                                 <div class="col-sm-6">
                                     <apex:selectList size="1" id="refmpstate" value="{!currLead.Referring_MP_State__c}"
                                                      styleClass="form-control col-xs-12 c-select state refmpstate">
-                                        <apex:selectOptions value="{!States}"/>
+                                        <apex:selectOptions value="{!States}" />
                                     </apex:selectList>
                                 </div>
                             </div>
@@ -548,7 +560,8 @@
                                 </apex:selectList>
                                 <!-- IME-157 Ends -->
                                 <!--SIE-370 Added error message in case primary language is not selected-->
-                                <em id="langError" style="display:none;padding-top: 0.35rem;">Oops! Please enter a language</em>
+                                <em id="langError" style="display:none;padding-top: 0.35rem;">Oops! Please enter a
+                                    language</em>
                                 <!-- IME-157 Ends -->
                             </div>
                             <div style="opacity: 0;pointer-events: none;">
@@ -569,7 +582,7 @@
                         </div>
 
                         <apex:outputPanel id="rr">
-                            <apex:actionRegion >
+                            <apex:actionRegion>
                                 <div class="form-group row">
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Number_of_Siblings}</label>
                                     </div>
@@ -585,25 +598,26 @@
                                 </div>
                                 <div class="form-group row sibInfo">
                                     <apex:outputPanel id="table">
-                                        <apex:outputPanel rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
+                                        <apex:outputPanel
+                                                rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
                                             <label class="col-md-12">{!$Label.Wish_Referral_Sibling_Information}</label>
                                         </apex:outputPanel>
                                         <div class="col-md-12 sib-tablewrap">
                                             <apex:dataTable value="{!SiblingList}" var="currsibling"
                                                             styleClass="table table-maw table-hover">
-                                                <apex:column >
+                                                <apex:column>
                                                     <apex:inputText value="{!currsibling.fName}"
                                                                     styleClass="form-control"
                                                                     html-placeholder="{!$Label.Wish_Referral_Placeholder_First_Name}"
                                                                     id="psibfirstname"/>
                                                 </apex:column>
-                                                <apex:column >
+                                                <apex:column>
                                                     <apex:inputText value="{!currsibling.lName}"
                                                                     styleClass="form-control"
                                                                     html-placeholder="{!$Label.Wish_Referral_Last_Name}"
                                                                     id="psiblastname"/>
                                                 </apex:column>
-                                                <apex:column >
+                                                <apex:column>
                                                     <apex:inputText value="{!currsibling.age}" styleClass="form-control"
                                                                     html-placeholder="{!$Label.Wish_Referral_Age}"
                                                                     id="psibage"/>
@@ -863,13 +877,21 @@
                                 <div class="col-sm-3" style="padding-top:15px">
                                     <label>{!$Label.Wish_Referral_Treating_Hospital_Facility}</label></div>
                                 <div class="col-sm-6" style="margin-bottom:-12px">
+                                    <div style="display: flex; align-items: center;">
+                                        <label>Filter by State: </label>
+                                        <apex:selectList size="1" id="treatingAccountState"
+                                                         styleClass="form-control col-xs-12 c-select state treatingAccountState"
+                                                         onchange="updateHtfFilter('externalTreatingAccountLookup', this.value, 'Treating Hospital/Facility')">
+                                            <apex:selectOptions value="{!FilterStateOptions}"/>
+                                        </apex:selectList>
+                                    </div>
                                     <div id="externalTreatingAccountLookup"></div>
-                                    <apex:inputHidden id="externalTreatingAccountLookupOutput"
-                                                      value="{!mpHtfSearch.treatingHospitalFacilityId}"/>
                                     <div style="opacity: 0;pointer-events: none;">
                                         <apex:inputText id="externalTreatingAccountLookupValidation"/>
                                     </div>
                                 </div>
+                                <apex:inputHidden id="externalTreatingAccountLookupOutput"
+                                                  value="{!mpHtfSearch.treatingHospitalFacilityId}"/>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-3"></div>
@@ -897,8 +919,10 @@
                                 <div class="form-group row">
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Address}</label></div>
                                     <div class="col-sm-6">
-                                        <apex:inputText value="{!currLead.Treating_MP_HTF_Street_Address__c}" styleClass="form-control trthtfstreet"
-                                                        html-placeholder="0000 NE 00 Ave" id="trthtfstreet" maxlength="40"/>
+                                        <apex:inputText value="{!currLead.Treating_MP_HTF_Street_Address__c}"
+                                                        styleClass="form-control trthtfstreet"
+                                                        html-placeholder="0000 NE 00 Ave" id="trthtfstreet"
+                                                        maxlength="40"/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -913,7 +937,8 @@
                                 <div class="form-group row">
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_State}</label></div>
                                     <div class="col-sm-6">
-                                        <apex:selectList size="1" id="trthtfstate" value="{!currLead.Treating_MP_HTF_State__c}"
+                                        <apex:selectList size="1" id="trthtfstate"
+                                                         value="{!currLead.Treating_MP_HTF_State__c}"
                                                          styleClass="form-control col-xs-12 c-select state trthtfstate">
                                             <apex:selectOptions value="{!States}"/>
                                         </apex:selectList>
@@ -922,7 +947,8 @@
                                 <div class="form-group row">
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Postal_Code}</label></div>
                                     <div class="col-sm-6">
-                                        <apex:inputText value="{!currLead.Treating_MP_HTF_Zip_Code__c}" styleClass="form-control trthtfzip numbers-only"
+                                        <apex:inputText value="{!currLead.Treating_MP_HTF_Zip_Code__c}"
+                                                        styleClass="form-control trthtfzip numbers-only"
                                                         html-placeholder="00000" id="trthtfzip" maxlength="5"/>
                                     </div>
                                 </div>
@@ -940,7 +966,8 @@
                                     <div class="col-sm-6">
                                         <apex:inputField value="{!currLead.Treating_MP_HTF_Department__c}"
                                                          styleClass="form-control col-xs-12 col-sm-12 c-select trthtfdept"
-                                                         html-placeholder="{!$Label.Wish_Referral_HTF_Department}" id="trthtfdept"/>
+                                                         html-placeholder="{!$Label.Wish_Referral_HTF_Department}"
+                                                         id="trthtfdept"/>
                                     </div>
                                 </div>
                             </div>
@@ -1042,7 +1069,7 @@
                                 <div class="col-sm-6">
                                     <apex:inputField value="{!currLead.Treating_MP_Category__c}"
                                                      styleClass="form-control col-xs-12 col-sm-12 c-select mcategory"
-                                                     id="mcategory"/>
+                                                     id="mcategory"/><!--medProvCat-->
                                 </div>
                             </div>
                             <div class="form-group row mpRel">
@@ -1061,7 +1088,8 @@
                                     <label>{!$Label.Wish_Referral_Hospital_or_Treatment_Facility}</label></div>
                                 <div class="col-sm-6">
                                     <apex:inputText value="{!currLead.Hospital_Treatment_Facility_Treating__c}"
-                                                    styleClass="form-control mphospitalname" id="mphospitalname" maxlength="50"
+                                                    styleClass="form-control mphospitalname" id="mphospitalname"
+                                                    maxlength="50"
                                                     html-placeholder="{!$Label.Wish_Referral_Placeholder_Hospital_Facility_Name}"/>
                                 </div>
                             </div>
@@ -1184,7 +1212,7 @@
                                 <div class="col-sm-6">
                                     <apex:inputField value="{!currLead.Best_Contact_Category__c}"
                                                      styleClass="form-control col-xs-12 col-sm-12 c-select bcategory"
-                                                     id="bcategory"/>
+                                                     id="bcategory"/> <!--medProvCat-->
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -1294,11 +1322,22 @@
         </div>
     </div>
     <!-- / modal end -->
-    <apex:includeLightning />
+    <apex:includeLightning/>
     <script>
         window.addEventListener('load', () => {
             buildValidationLookupFields();
         });
+
+        function updateHtfFilter(lookupId, value, pluralHint) {
+            let filter = value === '' ? '' : {BillingState: 'BillingState = \'' + value + '\''};
+            let element = document.getElementById(lookupId);
+            if (element) {
+                element.removeChild(element.firstChild);
+            }
+            createLightningComponent(lookupId, 'Account', pluralHint,
+                'Name, Alias__c, BillingCity, BillingState', '{0} - {1}, {2}, {3}', filter);
+            buildValidationLookupFields();
+        }
 
         function buildValidationLookupFields() {
             let refAccountEm = document.createElement("em");
@@ -1483,7 +1522,7 @@
     <!--<script src="//ssl.wish.org/satellite/staging/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205-staging.js"></script>-->
     <!-- prod -->
     <script src="//ssl.wish.org/satellite/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205.js"></script>
-    <apex:outputPanel >
+    <apex:outputPanel>
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-2.2.4.min.js')}"></script>
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-ui-1.11.3.min.js')}"></script>
         <script>
@@ -1571,14 +1610,12 @@
                     window.parent.postMessage('home', '*');
                 }
             }
-
-
-
         </script>
         <script>_satellite.pageBottom();</script>
     </apex:outputPanel>
     <script>
         var rel = null;
+
         function changeRelationship(ref, val) {
             $(".shownOnYes").addClass("fam-aware-overlay");//SIW-556 Issue fix
             rel = val;
@@ -1667,83 +1704,36 @@
         let isWishReferralFormSubmitted = (document.getElementById('j_id0:frm:panel') === undefined
             || document.getElementById('j_id0:frm:panel') === null);
         if (!isWishReferralFormSubmitted) {
-            $Lightning.use("c:ExternalLookupApp", function () {
-                $Lightning.createComponent("c:ExternalLookupSObject",
-                    {
-                        lookupId: 'externalReferrerContactLookup',
-                        sObjectAPIName: 'Contact',
-                        label: '',
-                        pluralHint: 'Referring Medical Professional',
-                        fieldsToReturn: 'Name, MailingState, MailingCity, Provider_Type__c, Specialty__c',
-                        formattedOutput: '{0} - {1}, {2}, {3}, {4}',
-                        iconFullName: ''
-                    },
-                    "externalReferrerContactLookup",
-                    function () {
+            createLightningComponent('externalReferrerAccountLookup', 'Account', 'Referring Hospital/Facility',
+                'Name, Alias__c, BillingCity, BillingState', '{0} - {1}, {2}, {3}');
 
-                        $A.eventService.addHandler({"event": "c:ExternalLookupEvent", "handler": handleEventResponse});
-                    });
-            });
+            createLightningComponent('externalReferrerContactLookup', 'Contact', 'Referring Medical Professional',
+                'Name, MailingState, MailingCity, Provider_Type__c, Specialty__c', '{0} - {1}, {2}, {3}, {4}');
+
+            createLightningComponent('externalTreatingAccountLookup', 'Account', 'Treating Hospital/Facility',
+                'Name, Alias__c, BillingCity, BillingState', '{0} - {1}, {2}, {3}');
+
+            createLightningComponent('externalTreatingContactLookup', 'Contact', 'Referring Medical Professional',
+                'Name, MailingState, MailingCity, Provider_Type__c, Specialty__c', '{0} - {1}, {2}, {3}, {4}');
+
+            createLightningComponent('externalBestContactLookup', 'Contact', 'Medical Professional',
+                'Name, MailingState, MailingCity, Provider_Type__c, Specialty__c', '{0} - {1}, {2}, {3}, {4}');
+        }
+
+        function createLightningComponent(lookupId, sObjectAPIName, pluralHint, fieldsToReturn, formattedOutput, filter) {
             $Lightning.use("c:ExternalLookupApp", function () {
                 $Lightning.createComponent("c:ExternalLookupSObject",
                     {
-                        lookupId: 'externalReferrerAccountLookup',
-                        sObjectAPIName: 'Account',
+                        lookupId: lookupId,
+                        sObjectAPIName: sObjectAPIName,
                         label: '',
-                        pluralHint: 'Referring Hospital/Facility',
-                        fieldsToReturn: 'Name, Alias__c, BillingCity, BillingState',
-                        formattedOutput: '{0} - {1}, {2}, {3}',
-                        iconFullName: ''
+                        pluralHint: pluralHint,
+                        fieldsToReturn: fieldsToReturn,
+                        formattedOutput: formattedOutput,
+                        iconFullName: '',
+                        filter: filter
                     },
-                    "externalReferrerAccountLookup",
-                    function () {
-                        $A.eventService.addHandler({"event": "c:ExternalLookupEvent", "handler": handleEventResponse});
-                    });
-            });
-            $Lightning.use("c:ExternalLookupApp", function () {
-                $Lightning.createComponent("c:ExternalLookupSObject",
-                    {
-                        lookupId: 'externalTreatingContactLookup',
-                        sObjectAPIName: 'Contact',
-                        label: '',
-                        pluralHint: 'Treating Medical Professional',
-                        fieldsToReturn: 'Name, MailingState, MailingCity, Provider_Type__c, Specialty__c',
-                        formattedOutput: '{0} - {1}, {2}, {3}, {4}',
-                        iconFullName: ''
-                    },
-                    "externalTreatingContactLookup",
-                    function () {
-                        $A.eventService.addHandler({"event": "c:ExternalLookupEvent", "handler": handleEventResponse});
-                    });
-            });
-            $Lightning.use("c:ExternalLookupApp", function () {
-                $Lightning.createComponent("c:ExternalLookupSObject",
-                    {
-                        lookupId: 'externalTreatingAccountLookup',
-                        sObjectAPIName: 'Account',
-                        label: '',
-                        pluralHint: 'Treating Hospital/Facility',
-                        fieldsToReturn: 'Name, Alias__c, BillingCity, BillingState',
-                        formattedOutput: '{0} - {1}, {2}, {3}',
-                        iconFullName: ''
-                    },
-                    "externalTreatingAccountLookup",
-                    function () {
-                        $A.eventService.addHandler({"event": "c:ExternalLookupEvent", "handler": handleEventResponse});
-                    });
-            });
-            $Lightning.use("c:ExternalLookupApp", function () {
-                $Lightning.createComponent("c:ExternalLookupSObject",
-                    {
-                        lookupId: 'externalBestContactLookup',
-                        sObjectAPIName: 'Contact',
-                        label: '',
-                        pluralHint: 'Medical Professional',
-                        fieldsToReturn: 'Name, MailingState, MailingCity, Provider_Type__c, Specialty__c',
-                        formattedOutput: '{0} - {1}, {2}, {3}, {4}',
-                        iconFullName: ''
-                    },
-                    "externalBestContactLookup",
+                    lookupId,
                     function () {
                         $A.eventService.addHandler({"event": "c:ExternalLookupEvent", "handler": handleEventResponse});
                     });
@@ -1758,23 +1748,23 @@
             if (eventData.lookupId === 'externalReferrerContactLookup') {
                 let externalRefContact = document.querySelector('#externalReferrerContactLookup');
                 field = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0];
-                fieldInput = externalRefContact.querySelector('#input-1');
+                fieldInput = externalRefContact.querySelector('.slds-input');
             } else if (eventData.lookupId === 'externalReferrerAccountLookup') {
                 let externalRefAccount = document.querySelector('#externalReferrerAccountLookup');
                 field = document.querySelectorAll('[id$="externalReferrerAccountLookupOutput"]')[0];
-                fieldInput = externalRefAccount.querySelector('#input-3');
+                fieldInput = externalRefAccount.querySelector('.slds-input');
             } else if (eventData.lookupId === 'externalTreatingContactLookup') {
                 let externalTrtContact = document.querySelector('#externalTreatingContactLookup');
                 field = document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0];
-                fieldInput = externalTrtContact.querySelector('#input-5');
+                fieldInput = externalTrtContact.querySelector('.slds-input');
             } else if (eventData.lookupId === 'externalTreatingAccountLookup') {
                 let externalTrtAccount = document.querySelector('#externalTreatingAccountLookup');
                 field = document.querySelectorAll('[id$="externalTreatingAccountLookupOutput"]')[0];
-                fieldInput = externalTrtAccount.querySelector('#input-7');
+                fieldInput = externalTrtAccount.querySelector('.slds-input');
             } else if (eventData.lookupId === 'externalBestContactLookup') {
                 let externalBestContact = document.querySelector('#externalBestContactLookup');
                 field = document.querySelectorAll('[id$="externalBestContactLookupOutput"]')[0];
-                fieldInput = externalBestContact.querySelector('#input-9');
+                fieldInput = externalBestContact.querySelector('.slds-input');
             }
             if (field && eventData.eventType === 'select') {
                 field.value = eventData.recordId;
@@ -1824,7 +1814,7 @@
                 } else {
                     document.getElementById('j_id0:frm:externalTreatingContactLookupOutput').value = '';
                     let externalTrtContact = document.querySelector('#externalTreatingContactLookup');
-                    externalTrtContact.querySelector('#input-5').value = '';
+                    externalTrtContact.querySelector('.slds-input').value = '';
                 }
             } else if (id === 'j_id0:frm:bestSameAsRefInfoChk') {
                 fieldCreateChk = document.querySelectorAll('[id$="createNewBestMPchk"]')[0].checked;
@@ -1833,7 +1823,7 @@
                 } else {
                     document.getElementById('j_id0:frm:externalBestContactLookupOutput').value = '';
                     let externalBestContact = document.querySelector('#externalBestContactLookup');
-                    externalBestContact.querySelector('#input-9').value = '';
+                    externalBestContact.querySelector('.slds-input').value = '';
                 }
             }
             validateForm();
@@ -1869,21 +1859,18 @@
             // SIW-370 ends
 
             // Validating Lookup fields
-
-            // DO NOT DELETE!!!
-            // TODO: HOLDING THIS OFF FOR DOOGIE SPRINT 2
-            // let externalRefAccount = document.querySelector('#externalReferrerAccountLookup');
-            // if(externalRefAccount.querySelector('#input-3').value === ''){
-            //     document.querySelectorAll('[id$="externalReferrerAccountLookupValidation"]')[0].required = true;
-            //     document.querySelector('#refAccountEm').hidden = false;
-            //     externalRefAccount.querySelector('#input-3').style.border = "1px solid red";
-            // } else {
-            //     document.querySelectorAll('[id$="externalReferrerAccountLookupValidation"]')[0].required = false;
-            //     document.querySelector('#refAccountEm').hidden = true;
-            //     externalRefAccount.querySelector('#input-3').style.border = "";
-            //     document.querySelector('#externalReferrerAccountLookup').parentElement
-            //         .previousElementSibling.firstElementChild.style.color = '';
-            // }
+            let externalRefAccount = document.querySelector('#externalReferrerAccountLookup');
+            if (externalRefAccount.querySelector('.slds-input').value === '') {
+                document.querySelectorAll('[id$="externalReferrerAccountLookupValidation"]')[0].required = true;
+                document.querySelector('#refAccountEm').hidden = false;
+                externalRefAccount.querySelector('.slds-input').style.border = "1px solid red";
+            } else {
+                document.querySelectorAll('[id$="externalReferrerAccountLookupValidation"]')[0].required = false;
+                document.querySelector('#refAccountEm').hidden = true;
+                externalRefAccount.querySelector('.slds-input').style.border = "";
+                document.querySelector('#externalReferrerAccountLookup').parentElement
+                    .previousElementSibling.firstElementChild.style.color = '';
+            }
 
             let refMpCategory = document.querySelectorAll('[id$="refmpcategory"]')[0].value;
             let refCtcLookupOutput = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0].value;
@@ -1897,74 +1884,72 @@
             }
 
             let externalRefContact = document.querySelector('#externalReferrerContactLookup');
-            if(externalRefContact.querySelector('#input-1').value === ''
-                && document.querySelectorAll('[id$="createNewRefMPchk"]')[0].checked === false){
+            if (externalRefContact.querySelector('.slds-input').value === ''
+                && document.querySelectorAll('[id$="createNewRefMPchk"]')[0].checked === false) {
                 document.querySelectorAll('[id$="externalReferrerContactLookupValidation"]')[0].required = true;
                 document.querySelector('#refContactEm').hidden = false;
-                externalRefContact.querySelector('#input-1').style.border = "1px solid red";
+                externalRefContact.querySelector('.slds-input').style.border = "1px solid red";
             } else {
                 document.querySelectorAll('[id$="externalReferrerContactLookupValidation"]')[0].required = false;
                 document.querySelector('#refContactEm').hidden = true;
-                externalRefContact.querySelector('#input-1').style.border = "";
+                externalRefContact.querySelector('.slds-input').style.border = "";
                 document.querySelector('#externalReferrerContactLookup').parentElement
                     .previousElementSibling.firstElementChild.style.color = '';
             }
 
-            // DO NOT DELETE!!!
-            // TODO: HOLDING THIS OFF FOR DOOGIE SPRINT 2
-            // let externalTrtAccount = document.querySelector('#externalTreatingAccountLookup');
-            // if(externalTrtAccount.querySelector('#input-7').value === ''){
-            //     document.querySelectorAll('[id$="externalTreatingAccountLookupValidation"]')[0].required = true;
-            //     document.querySelector('#trtAccountEm').hidden = false;
-            //     externalTrtAccount.querySelector('#input-7').style.border = "1px solid red";
-            // } else {
-            //     document.querySelectorAll('[id$="externalTreatingAccountLookupValidation"]')[0].required = false;
-            //     document.querySelector('#trtAccountEm').hidden = true;
-            //     externalTrtAccount.querySelector('#input-7').style.border = "";
-            //     document.querySelector('#externalTreatingAccountLookup').parentElement
-            //         .previousElementSibling.firstElementChild.style.color = '';
-            // }
+            let externalTrtAccount = document.querySelector('#externalTreatingAccountLookup');
+            if (externalTrtAccount.querySelector('.slds-input').value === '') {
+                document.querySelectorAll('[id$="externalTreatingAccountLookupValidation"]')[0].required = true;
+                document.querySelector('#trtAccountEm').hidden = false;
+                externalTrtAccount.querySelector('.slds-input').style.border = "1px solid red";
+            } else {
+                document.querySelectorAll('[id$="externalTreatingAccountLookupValidation"]')[0].required = false;
+                document.querySelector('#trtAccountEm').hidden = true;
+                externalTrtAccount.querySelector('.slds-input').style.border = "";
+                document.querySelector('#externalTreatingAccountLookup').parentElement
+                    .previousElementSibling.firstElementChild.style.color = '';
+            }
 
             let externalTrtContact = document.querySelector('#externalTreatingContactLookup');
-            if(externalTrtContact.querySelector('#input-5').value === ''
-                && document.querySelectorAll('[id$="createNewTrtMPchk"]')[0].checked === false){
+            if (externalTrtContact.querySelector('.slds-input').value === ''
+                && document.querySelectorAll('[id$="createNewTrtMPchk"]')[0].checked === false) {
                 document.querySelectorAll('[id$="externalTreatingContactLookupValidation"]')[0].required = true;
                 document.querySelector('#trtContactEm').innerText = 'Oops! Please enter a Medical Professional';
                 document.querySelector('#trtContactEm').hidden = false;
-                externalTrtContact.querySelector('#input-5').style.border = "1px solid red";
-            } else if(referringSameAsTreatingSameAsBest === true
-                && document.querySelectorAll('[id$="trtSameAsRefInfoChk"]')[0].checked === false){
+                externalTrtContact.querySelector('.slds-input').style.border = "1px solid red";
+            } else if (referringSameAsTreatingSameAsBest === true
+                && document.querySelectorAll('[id$="trtSameAsRefInfoChk"]')[0].checked === false) {
                 document.querySelectorAll('[id$="externalTreatingContactLookupValidation"]')[0].required = true;
                 document.querySelector('#trtContactEm').innerText = 'Oops! Referring Medical Professional cannot be the same as the ' +
                     'Treating Medical Professional and Best Contact';
                 document.querySelector('#trtContactEm').hidden = false;
-                externalTrtContact.querySelector('#input-5').style.border = "1px solid red";
+                externalTrtContact.querySelector('.slds-input').style.border = "1px solid red";
             } else {
                 document.querySelectorAll('[id$="externalTreatingContactLookupValidation"]')[0].required = false;
                 document.querySelector('#trtContactEm').hidden = true;
-                externalTrtContact.querySelector('#input-5').style.border = "";
+                externalTrtContact.querySelector('.slds-input').style.border = "";
                 document.querySelector('#externalTreatingContactLookup').parentElement
                     .previousElementSibling.firstElementChild.style.color = '';
             }
 
             let externalBestContact = document.querySelector('#externalBestContactLookup');
-            if(externalBestContact.querySelector('#input-9').value === ''
-                && document.querySelectorAll('[id$="createNewBestMPchk"]')[0].checked === false){
+            if (externalBestContact.querySelector('.slds-input').value === ''
+                && document.querySelectorAll('[id$="createNewBestMPchk"]')[0].checked === false) {
                 document.querySelectorAll('[id$="externalBestContactLookupValidation"]')[0].required = true;
                 document.querySelector('#bestContactEm').innerText = 'Oops! Please enter a Medical Professional';
                 document.querySelector('#bestContactEm').hidden = false;
-                externalBestContact.querySelector('#input-9').style.border = "1px solid red";
-            } else if(referringSameAsTreatingSameAsBest === true
-                && document.querySelectorAll('[id$="bestSameAsRefInfoChk"]')[0].checked === false){
+                externalBestContact.querySelector('.slds-input').style.border = "1px solid red";
+            } else if (referringSameAsTreatingSameAsBest === true
+                && document.querySelectorAll('[id$="bestSameAsRefInfoChk"]')[0].checked === false) {
                 document.querySelectorAll('[id$="externalBestContactLookupValidation"]')[0].required = true;
                 document.querySelector('#bestContactEm').innerText = 'Oops! Referring Medical Professional cannot be the same as the ' +
                     'Treating Medical Professional and Best Contact';
                 document.querySelector('#bestContactEm').hidden = false;
-                externalBestContact.querySelector('#input-9').style.border = "1px solid red";
+                externalBestContact.querySelector('.slds-input').style.border = "1px solid red";
             } else {
                 document.querySelectorAll('[id$="externalBestContactLookupValidation"]')[0].required = false;
                 document.querySelector('#bestContactEm').hidden = true;
-                externalBestContact.querySelector('#input-9').style.border = "";
+                externalBestContact.querySelector('.slds-input').style.border = "";
                 document.querySelector('#externalBestContactLookup').parentElement
                     .previousElementSibling.firstElementChild.style.color = '';
             }
@@ -2044,6 +2029,10 @@
             color: #666;
             line-height: 5rem;
             text-align: center
+        }
+
+        .repeatMedProf {
+            padding-bottom: 30px;
         }
 
         .repeatMedProf label {
