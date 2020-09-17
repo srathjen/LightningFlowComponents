@@ -56,17 +56,63 @@
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>lookupFieldName</name>
-                <value>Id</value>
+                <value>Lead.Id</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>titleFieldName</name>
-                <value>Diagnosis Verification</value>
+                <value>Diagnosis Information</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>updateQuickActionName</name>
-                <value>Lead.Diagnosis_Verification</value>
+                <value>Lead.Medical_Information</value>
             </componentInstanceProperties>
             <componentName>console:relatedRecord</componentName>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>parentFieldApiName</name>
+                <value>Lead.Id</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>relatedListApiName</name>
+                <value>Diagnosis_Verification__r</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>relatedListComponentOverride</name>
+                <value>NONE</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>rowsToDisplay</name>
+                <value>10</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>showActionBar</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentName>force:relatedListSingleContainer</componentName>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>parentFieldApiName</name>
+                <value>Lead.Id</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>relatedListApiName</name>
+                <value>dsfs__DocuSign_Status__r</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>relatedListComponentOverride</name>
+                <value>NONE</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>rowsToDisplay</name>
+                <value>10</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>showActionBar</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentName>force:relatedListSingleContainer</componentName>
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
@@ -79,11 +125,11 @@
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>titleFieldName</name>
-                <value>Medical Information</value>
+                <value>Diagnosis Verification</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>updateQuickActionName</name>
-                <value>Lead.Medical_Information</value>
+                <value>Lead.Diagnosis_Verification</value>
             </componentInstanceProperties>
             <componentName>console:relatedRecord</componentName>
         </componentInstances>
@@ -91,6 +137,94 @@
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>decorate</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>richTextValue</name>
+                <value>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 20px; color: rgb(107, 109, 112);&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/274c.png&quot; alt=&quot;:x:&quot;&gt; &lt;/b&gt;&lt;b style=&quot;font-size: 22px; color: rgb(0, 0, 0);&quot;&gt;MP&lt;/b&gt;&lt;b style=&quot;color: rgb(0, 0, 0);&quot;&gt;&amp;nbsp;&lt;/b&gt;&lt;b style=&quot;color: rgb(107, 109, 112);&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;font-size: 0.8125rem; color: rgb(107, 109, 112);&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/274c.png&quot; alt=&quot;:x:&quot;&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(107, 109, 112);&quot;&gt; &lt;/span&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 22px;&quot;&gt;HTF&lt;/b&gt;&lt;/p&gt;</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:richText</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.Referring_MP__r.LastName}</leftValue>
+                    <operator>EQUAL</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Referring_MP_HTF__r.Name}</leftValue>
+                    <operator>EQUAL</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>decorate</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>richTextValue</name>
+                <value>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 20px;&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/2714-fe0f.png&quot; alt=&quot;:heavy_check_mark:&quot;&gt; &lt;/b&gt;&lt;b style=&quot;font-size: 22px; color: rgb(0, 0, 0);&quot;&gt;MP&lt;/b&gt;&lt;b style=&quot;color: rgb(0, 0, 0);&quot;&gt;&amp;nbsp;&lt;/b&gt;&lt;b&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;font-size: 0.8125rem;&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/274c.png&quot; alt=&quot;:x:&quot;&gt;&lt;/span&gt; &lt;b style=&quot;font-size: 22px; color: rgb(0, 0, 0);&quot;&gt;HTF&lt;/b&gt;&lt;/p&gt;</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:richText</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.Referring_MP__r.LastName}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Referring_MP_HTF__r.Name}</leftValue>
+                    <operator>EQUAL</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>decorate</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>richTextValue</name>
+                <value>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(107, 109, 112); font-size: 20px;&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/274c.png&quot; alt=&quot;:x:&quot;&gt; &lt;/b&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 22px;&quot;&gt;MP&lt;/b&gt;&lt;b style=&quot;color: rgb(107, 109, 112);&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/b&gt;&lt;b style=&quot;color: rgb(107, 109, 112); font-size: 20px;&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/2714-fe0f.png&quot; alt=&quot;:heavy_check_mark:&quot;&gt;&lt;/b&gt;&lt;span style=&quot;color: rgb(107, 109, 112);&quot;&gt; &lt;/span&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 22px;&quot;&gt;HTF&lt;/b&gt;&lt;/p&gt;</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:richText</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.Referring_MP__r.LastName}</leftValue>
+                    <operator>EQUAL</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Referring_MP_HTF__r.Name}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>decorate</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>richTextValue</name>
+                <value>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(107, 109, 112); font-size: 20px;&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/2714-fe0f.png&quot; alt=&quot;:heavy_check_mark:&quot;&gt; &lt;/b&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 22px;&quot;&gt;MP&lt;/b&gt;&lt;b style=&quot;color: rgb(107, 109, 112);&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/b&gt;&lt;b style=&quot;color: rgb(107, 109, 112); font-size: 20px;&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/2714-fe0f.png&quot; alt=&quot;:heavy_check_mark:&quot;&gt;&lt;/b&gt;&lt;span style=&quot;color: rgb(107, 109, 112);&quot;&gt; &lt;/span&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 22px;&quot;&gt;HTF&lt;/b&gt;&lt;/p&gt;</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:richText</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.Referring_MP__r.LastName}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Referring_MP_HTF__r.Name}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
                 <name>createQuickActionName</name>
@@ -113,6 +247,41 @@
                 <criteria>
                     <leftValue>{!Record.Referring_MP__r.LastName}</leftValue>
                     <operator>EQUAL</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>createQuickActionName</name>
+                <value>NewLead</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>lookupFieldName</name>
+                <value>Id</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>titleFieldName</name>
+                <value>New Referring HTF Contact Info</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>updateQuickActionName</name>
+                <value>Lead.New_MP_Contact_Info_Referring</value>
+            </componentInstanceProperties>
+            <componentName>console:relatedRecord</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND (2 OR 3)</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.Relationship_to_child__c}</leftValue>
+                    <operator>EQUAL</operator>
+                    <rightValue>Medical Professional</rightValue>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Referring_MP_Email__c}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Referring_MP_Phone__c}</leftValue>
+                    <operator>NE</operator>
                 </criteria>
             </visibilityRule>
         </componentInstances>
@@ -148,7 +317,7 @@
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>lookupFieldName</name>
-                <value>Id</value>
+                <value>Lead.Id</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>titleFieldName</name>
@@ -197,6 +366,94 @@
     <flexiPageRegions>
         <componentInstances>
             <componentInstanceProperties>
+                <name>decorate</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>richTextValue</name>
+                <value>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 20px; color: rgb(107, 109, 112);&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/274c.png&quot; alt=&quot;:x:&quot;&gt; &lt;/b&gt;&lt;b style=&quot;font-size: 22px; color: rgb(0, 0, 0);&quot;&gt;MP&lt;/b&gt;&lt;b style=&quot;color: rgb(0, 0, 0);&quot;&gt;&amp;nbsp;&lt;/b&gt;&lt;b style=&quot;color: rgb(107, 109, 112);&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;font-size: 0.8125rem; color: rgb(107, 109, 112);&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/274c.png&quot; alt=&quot;:x:&quot;&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(107, 109, 112);&quot;&gt; &lt;/span&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 22px;&quot;&gt;HTF&lt;/b&gt;&lt;/p&gt;</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:richText</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.Treating_MP__r.LastName}</leftValue>
+                    <operator>EQUAL</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Treating_MP_HTF__r.Name}</leftValue>
+                    <operator>EQUAL</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>decorate</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>richTextValue</name>
+                <value>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(107, 109, 112); font-size: 20px;&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/2714-fe0f.png&quot; alt=&quot;:heavy_check_mark:&quot;&gt; &lt;/b&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 22px;&quot;&gt;MP&lt;/b&gt;&lt;b style=&quot;color: rgb(0, 0, 0);&quot;&gt;&amp;nbsp;&lt;/b&gt;&lt;b style=&quot;color: rgb(107, 109, 112);&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;color: rgb(107, 109, 112); font-size: 0.8125rem;&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/274c.png&quot; alt=&quot;:x:&quot;&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(107, 109, 112);&quot;&gt; &lt;/span&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 22px;&quot;&gt;HTF&lt;/b&gt;&lt;/p&gt;</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:richText</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.Treating_MP__r.LastName}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Treating_MP_HTF__r.Name}</leftValue>
+                    <operator>EQUAL</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>decorate</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>richTextValue</name>
+                <value>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 20px; color: rgb(107, 109, 112);&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/274c.png&quot; alt=&quot;:x:&quot;&gt; &lt;/b&gt;&lt;b style=&quot;font-size: 22px; color: rgb(0, 0, 0);&quot;&gt;MP&lt;/b&gt;&lt;b style=&quot;color: rgb(107, 109, 112);&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/b&gt;&lt;b style=&quot;font-size: 20px; color: rgb(107, 109, 112);&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/2714-fe0f.png&quot; alt=&quot;:heavy_check_mark:&quot;&gt;&lt;/b&gt;&lt;span style=&quot;color: rgb(107, 109, 112);&quot;&gt; &lt;/span&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 22px;&quot;&gt;HTF&lt;/b&gt;&lt;/p&gt;</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:richText</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.Treating_MP__r.LastName}</leftValue>
+                    <operator>EQUAL</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Treating_MP_HTF__r.Name}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>decorate</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>richTextValue</name>
+                <value>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 20px; color: rgb(107, 109, 112);&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/2714-fe0f.png&quot; alt=&quot;:heavy_check_mark:&quot;&gt; &lt;/b&gt;&lt;b style=&quot;font-size: 22px; color: rgb(0, 0, 0);&quot;&gt;MP&lt;/b&gt;&lt;b style=&quot;color: rgb(107, 109, 112);&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/b&gt;&lt;b style=&quot;font-size: 20px; color: rgb(107, 109, 112);&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/2714-fe0f.png&quot; alt=&quot;:heavy_check_mark:&quot;&gt;&lt;/b&gt;&lt;span style=&quot;color: rgb(107, 109, 112);&quot;&gt; &lt;/span&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 22px;&quot;&gt;HTF&lt;/b&gt;&lt;/p&gt;</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:richText</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.Treating_MP__r.LastName}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Treating_MP_HTF__r.Name}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
                 <name>createQuickActionName</name>
                 <value>NewLead</value>
             </componentInstanceProperties>
@@ -217,6 +474,41 @@
                 <criteria>
                     <leftValue>{!Record.Treating_MP__r.LastName}</leftValue>
                     <operator>EQUAL</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>createQuickActionName</name>
+                <value>NewLead</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>lookupFieldName</name>
+                <value>Lead.Id</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>titleFieldName</name>
+                <value>New Treating HTF Contact Info</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>updateQuickActionName</name>
+                <value>Lead.New_MP_Contact_Info_Treating</value>
+            </componentInstanceProperties>
+            <componentName>console:relatedRecord</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND (2 OR 3)</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.Relationship_to_child__c}</leftValue>
+                    <operator>EQUAL</operator>
+                    <rightValue>Medical Professional</rightValue>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Treating_Medical_Professional_Phone__c}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Treating_Medical_Professional_Email__c}</leftValue>
+                    <operator>NE</operator>
                 </criteria>
             </visibilityRule>
         </componentInstances>
@@ -301,6 +593,94 @@
     <flexiPageRegions>
         <componentInstances>
             <componentInstanceProperties>
+                <name>decorate</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>richTextValue</name>
+                <value>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 20px; color: rgb(107, 109, 112);&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/274c.png&quot; alt=&quot;:x:&quot;&gt; &lt;/b&gt;&lt;b style=&quot;font-size: 22px; color: rgb(0, 0, 0);&quot;&gt;MP&lt;/b&gt;&lt;b style=&quot;color: rgb(0, 0, 0);&quot;&gt;&amp;nbsp;&lt;/b&gt;&lt;b style=&quot;color: rgb(107, 109, 112);&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;font-size: 0.8125rem; color: rgb(107, 109, 112);&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/274c.png&quot; alt=&quot;:x:&quot;&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(107, 109, 112);&quot;&gt; &lt;/span&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 22px;&quot;&gt;HTF&lt;/b&gt;&lt;/p&gt;</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:richText</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.Best_Contact__r.LastName}</leftValue>
+                    <operator>EQUAL</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Best_Contact_HTF__r.Name}</leftValue>
+                    <operator>EQUAL</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>decorate</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>richTextValue</name>
+                <value>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 20px; color: rgb(107, 109, 112);&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/2714-fe0f.png&quot; alt=&quot;:heavy_check_mark:&quot;&gt; &lt;/b&gt;&lt;b style=&quot;font-size: 22px; color: rgb(0, 0, 0);&quot;&gt;MP&lt;/b&gt;&lt;b style=&quot;color: rgb(0, 0, 0);&quot;&gt;&amp;nbsp;&lt;/b&gt;&lt;b style=&quot;color: rgb(107, 109, 112);&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;font-size: 0.8125rem; color: rgb(107, 109, 112);&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/274c.png&quot; alt=&quot;:x:&quot;&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(107, 109, 112);&quot;&gt; &lt;/span&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 22px;&quot;&gt;HTF&lt;/b&gt;&lt;/p&gt;</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:richText</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.Best_Contact__r.LastName}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Best_Contact_HTF__r.Name}</leftValue>
+                    <operator>EQUAL</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>decorate</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>richTextValue</name>
+                <value>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 20px; color: rgb(107, 109, 112);&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/274c.png&quot; alt=&quot;:x:&quot;&gt; &lt;/b&gt;&lt;b style=&quot;font-size: 22px; color: rgb(0, 0, 0);&quot;&gt;MP&lt;/b&gt;&lt;b style=&quot;color: rgb(107, 109, 112);&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/b&gt;&lt;b style=&quot;font-size: 20px; color: rgb(107, 109, 112);&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/2714-fe0f.png&quot; alt=&quot;:heavy_check_mark:&quot;&gt;&lt;/b&gt;&lt;span style=&quot;color: rgb(107, 109, 112);&quot;&gt; &lt;/span&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 22px;&quot;&gt;HTF&lt;/b&gt;&lt;/p&gt;</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:richText</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.Best_Contact__r.LastName}</leftValue>
+                    <operator>EQUAL</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Best_Contact_HTF__r.Name}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>decorate</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>richTextValue</name>
+                <value>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 20px; color: rgb(107, 109, 112);&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/2714-fe0f.png&quot; alt=&quot;:heavy_check_mark:&quot;&gt; &lt;/b&gt;&lt;b style=&quot;font-size: 22px; color: rgb(0, 0, 0);&quot;&gt;MP&lt;/b&gt;&lt;b style=&quot;color: rgb(107, 109, 112);&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/b&gt;&lt;b style=&quot;font-size: 20px; color: rgb(107, 109, 112);&quot;&gt;&lt;img src=&quot;https://a.slack-edge.com/production-standard-emoji-assets/10.2/google-medium/2714-fe0f.png&quot; alt=&quot;:heavy_check_mark:&quot;&gt;&lt;/b&gt;&lt;span style=&quot;color: rgb(107, 109, 112);&quot;&gt; &lt;/span&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 22px;&quot;&gt;HTF&lt;/b&gt;&lt;/p&gt;</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:richText</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.Best_Contact__r.LastName}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Best_Contact_HTF__r.Name}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
                 <name>createQuickActionName</name>
                 <value>NewLead</value>
             </componentInstanceProperties>
@@ -320,6 +700,45 @@
             <visibilityRule>
                 <criteria>
                     <leftValue>{!Record.Best_Contact__r.LastName}</leftValue>
+                    <operator>EQUAL</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>createQuickActionName</name>
+                <value>NewLead</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>lookupFieldName</name>
+                <value>Id</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>titleFieldName</name>
+                <value>New Best Contact HTF Contact Info</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>updateQuickActionName</name>
+                <value>Lead.New_MP_Contact_Info_Best</value>
+            </componentInstanceProperties>
+            <componentName>console:relatedRecord</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND 4 AND (2 OR 3)</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.Relationship_to_child__c}</leftValue>
+                    <operator>EQUAL</operator>
+                    <rightValue>Medical Professional</rightValue>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Best_contact_for_Physician_Phone__c}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Best_contact_for_Physician_Email__c}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Best_Contact_for_Physician_Last_Name__c}</leftValue>
                     <operator>EQUAL</operator>
                 </criteria>
             </visibilityRule>
@@ -477,7 +896,7 @@
             <componentName>console:relatedRecord</componentName>
             <visibilityRule>
                 <criteria>
-                    <leftValue>{!Record.Alt_1_MP__r.LastName}</leftValue>
+                    <leftValue>{!Record.Alt_2_MP__r.LastName}</leftValue>
                     <operator>NE</operator>
                 </criteria>
             </visibilityRule>
@@ -518,57 +937,7 @@
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>lookupFieldName</name>
-                <value>Id</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>titleFieldName</name>
-                <value>Treating MP Unmatched</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>updateQuickActionName</name>
-                <value>Lead.Treating_MP_Unmatched</value>
-            </componentInstanceProperties>
-            <componentName>console:relatedRecord</componentName>
-            <visibilityRule>
-                <criteria>
-                    <leftValue>{!Record.Treating_MP__r.LastName}</leftValue>
-                    <operator>NE</operator>
-                </criteria>
-            </visibilityRule>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>createQuickActionName</name>
-                <value>NewLead</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>lookupFieldName</name>
-                <value>Id</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>titleFieldName</name>
-                <value>Treating HTF Unmatched</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>updateQuickActionName</name>
-                <value>Lead.Treating_HTF_Unmatched</value>
-            </componentInstanceProperties>
-            <componentName>console:relatedRecord</componentName>
-            <visibilityRule>
-                <criteria>
-                    <leftValue>{!Record.Treating_MP_HTF__r.Name}</leftValue>
-                    <operator>NE</operator>
-                </criteria>
-            </visibilityRule>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>createQuickActionName</name>
-                <value>NewLead</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>lookupFieldName</name>
-                <value>Id</value>
+                <value>Lead.Id</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>titleFieldName</name>
@@ -580,8 +949,13 @@
             </componentInstanceProperties>
             <componentName>console:relatedRecord</componentName>
             <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
                 <criteria>
                     <leftValue>{!Record.Referring_MP__r.LastName}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Referring_MP_Last_Name__c}</leftValue>
                     <operator>NE</operator>
                 </criteria>
             </visibilityRule>
@@ -605,8 +979,73 @@
             </componentInstanceProperties>
             <componentName>console:relatedRecord</componentName>
             <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
                 <criteria>
                     <leftValue>{!Record.Referring_MP_HTF__r.Name}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Referring_MP_HTF_Name__c}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>createQuickActionName</name>
+                <value>NewLead</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>lookupFieldName</name>
+                <value>Lead.Id</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>titleFieldName</name>
+                <value>Treating MP Unmatched</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>updateQuickActionName</name>
+                <value>Lead.Treating_MP_Unmatched</value>
+            </componentInstanceProperties>
+            <componentName>console:relatedRecord</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.Treating_MP__r.LastName}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Treating_Medical_Professional_Last_Name__c}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>createQuickActionName</name>
+                <value>NewLead</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>lookupFieldName</name>
+                <value>Id</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>titleFieldName</name>
+                <value>Treating HTF Unmatched</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>updateQuickActionName</name>
+                <value>Lead.Treating_HTF_Unmatched</value>
+            </componentInstanceProperties>
+            <componentName>console:relatedRecord</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.Treating_MP_HTF__r.Name}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Hospital_Treatment_Facility_Treating__c}</leftValue>
                     <operator>NE</operator>
                 </criteria>
             </visibilityRule>
@@ -630,8 +1069,13 @@
             </componentInstanceProperties>
             <componentName>console:relatedRecord</componentName>
             <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
                 <criteria>
                     <leftValue>{!Record.Best_Contact__r.LastName}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Best_Contact_for_Physician_Last_Name__c}</leftValue>
                     <operator>NE</operator>
                 </criteria>
             </visibilityRule>
@@ -655,8 +1099,13 @@
             </componentInstanceProperties>
             <componentName>console:relatedRecord</componentName>
             <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
                 <criteria>
                     <leftValue>{!Record.Best_Contact_HTF__r.Name}</leftValue>
+                    <operator>NE</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Best_Contact_HTF_Name__c}</leftValue>
                     <operator>NE</operator>
                 </criteria>
             </visibilityRule>

@@ -1583,6 +1583,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Account.Contact_Notes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Account.DV_Method_Preference__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -6724,6 +6729,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Alternate_Email_2__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Alternate_Fax__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

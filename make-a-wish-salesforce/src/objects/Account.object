@@ -1218,6 +1218,16 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Contact_Notes__c</fullName>
+        <description>Captures the contact notes about the various pieces of contact info on the Account.</description>
+        <externalId>false</externalId>
+        <label>Contact Notes</label>
+        <length>1000</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
         <fullName>DV_Method_Preference__c</fullName>
         <description>Used to indicate if an HTF prefers to receive the DV electronically or via paper (fax, mail), etc.</description>
         <externalId>false</externalId>

@@ -2074,6 +2074,16 @@ Medical_Professional_Icon__c  &amp; " " &amp; Volunteer_Icon__c &amp; " " &amp; 
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Alternate_Fax__c</fullName>
+        <description>Captures the contact's alternate fax number.</description>
+        <externalId>false</externalId>
+        <label>Alternate Fax</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Phone</type>
+    </fields>
+    <fields>
         <fullName>Alternate_Phone_Type__c</fullName>
         <description>This field is used to store the type of alternate phone.</description>
         <externalId>false</externalId>
@@ -9764,9 +9774,9 @@ IF(ISPICKVAL(npe01__Secondary_Address_Type__c,"Other"),
                     <label>Mobile</label>
                 </value>
                 <value>
-                    <fullName>Other</fullName>
+                    <fullName>Alternate</fullName>
                     <default>false</default>
-                    <label>Other</label>
+                    <label>Alternate</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
@@ -12776,15 +12786,15 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>npe01__PreferredPhone__c</picklist>
             <values>
+                <fullName>Alternate</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Home</fullName>
                 <default>true</default>
             </values>
             <values>
                 <fullName>Mobile</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Other</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -14442,11 +14452,11 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>npe01__PreferredPhone__c</picklist>
             <values>
-                <fullName>Mobile</fullName>
+                <fullName>Alternate</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Other</fullName>
+                <fullName>Mobile</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -16124,15 +16134,15 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>npe01__PreferredPhone__c</picklist>
             <values>
+                <fullName>Alternate</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Home</fullName>
                 <default>true</default>
             </values>
             <values>
                 <fullName>Mobile</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Other</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -17789,15 +17799,15 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>npe01__PreferredPhone__c</picklist>
             <values>
+                <fullName>Alternate</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Home</fullName>
                 <default>true</default>
             </values>
             <values>
                 <fullName>Mobile</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Other</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -19458,15 +19468,15 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>npe01__PreferredPhone__c</picklist>
             <values>
+                <fullName>Alternate</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Home</fullName>
                 <default>true</default>
             </values>
             <values>
                 <fullName>Mobile</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Other</fullName>
                 <default>false</default>
             </values>
             <values>
