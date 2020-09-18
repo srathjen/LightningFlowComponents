@@ -1588,6 +1588,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Account.Contact_Notes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Account.DV_Method_Preference__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -6733,6 +6738,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.Alternate_Fax__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.Alternate_Phone_Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -9935,6 +9945,26 @@
         <editable>false</editable>
         <field>Event.npsp__Engagement_Plan__c</field>
         <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>External_ID__c.Account__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>External_ID__c.Contact__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>External_ID__c.External_ID__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>External_ID__c.External_Source__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -26621,6 +26651,9 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Event__c-Event Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>External_ID__c-External ID Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>FAQ__kav-FAQ Layout</layout>
