@@ -202,6 +202,12 @@ public class DiagnosisVerification_AC {
             requestedDVSigner_phone = currLead.ALT_2_MP__r.Phone;
             requestedDVSigner_email = currLead.ALT_2_MP__r.Email;
             requestedDVSigner_HTF_name = currLead.ALT_2_MP_HTF__r.Name;
+        } else if(wishChildWrapperIns.medProfTypeHid == Constant_AC.LEAD_DV_FORM_TYPE_REFERRING_MEDICAL_PROFESSIONAL) {
+            requestedDVSigner_firstName = currLead.Referring_MP__r.FirstName;
+            requestedDVSigner_lastName = currLead.Referring_MP__r.LastName;
+            requestedDVSigner_phone = currLead.Referring_MP__r.Phone;
+            requestedDVSigner_email = currLead.Referring_MP__r.Email;
+            requestedDVSigner_HTF_name = currLead.Referring_MP_HTF__r.Name;
         } else {
             requestedDVSigner_firstName = '';
             requestedDVSigner_lastName = '';
@@ -1614,7 +1620,8 @@ public class DiagnosisVerification_AC {
                 'Treating_MP__r.FirstName', 'Treating_MP__r.LastName', 'Treating_MP__r.Phone', 'Treating_MP__r.Email', 'Treating_MP_HTF__r.Name',
                 'Best_Contact__r.FirstName', 'Best_Contact__r.LastName', 'Best_Contact__r.Phone', 'Best_Contact__r.Email', 'Best_Contact_HTF__r.Name',
                 'ALT_1_MP__r.FirstName', 'ALT_1_MP__r.LastName', 'ALT_1_MP__r.Phone', 'ALT_1_MP__r.Email', 'ALT_1_MP_HTF__r.Name',
-                'ALT_2_MP__r.FirstName', 'ALT_2_MP__r.LastName', 'ALT_2_MP__r.Phone', 'ALT_2_MP__r.Email', 'ALT_2_MP_HTF__r.Name'
+                'ALT_2_MP__r.FirstName', 'ALT_2_MP__r.LastName', 'ALT_2_MP__r.Phone', 'ALT_2_MP__r.Email', 'ALT_2_MP_HTF__r.Name',
+                'Referring_MP__r.FirstName', 'Referring_MP__r.LastName', 'Referring_MP__r.Phone', 'Referring_MP__r.Email', 'Referring_MP_HTF__r.Name'
         };
            
         for (String field : FIELDS_TO_SELECT) {
