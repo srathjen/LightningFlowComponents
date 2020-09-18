@@ -25885,6 +25885,9 @@
         <layout>Event__c-Event Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>External_ID__c-External ID Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>FAQ__kav-FAQ Layout</layout>
     </layoutAssignments>
     <layoutAssignments>

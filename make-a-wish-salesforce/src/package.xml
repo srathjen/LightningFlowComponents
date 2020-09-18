@@ -182,6 +182,7 @@
     <members>DataUsePurpose</members>
     <members>dsfs__DocuSign_Recipient_Status__c</members>
     <members>Endpoints__c</members>
+    <members>External_ID__c</members>
     <members>ICD_Codes__c</members>
     <members>Inkind_Donation_PDFs__c</members>
     <members>Lead</members>
@@ -660,6 +661,9 @@
     <members>Lead.Input_Paper_DV</members>
     <members>Lead.Medical_Information</members>
     <members>Lead.MP_Lookups</members>
+    <members>Lead.New_MP_Contact_Info_Best</members>
+    <members>Lead.New_MP_Contact_Info_Referring</members>
+    <members>Lead.New_MP_Contact_Info_Treating</members>
     <members>Lead.Next_Steps</members>
     <members>Lead.Referral_Source</members>
     <members>Lead.Referral_Source_Information</members>
