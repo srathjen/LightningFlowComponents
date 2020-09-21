@@ -6450,7 +6450,6 @@
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>true</default>
-        <personAccountDefault>true</personAccountDefault>
         <recordType>Account.Organization</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>

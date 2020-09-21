@@ -17,6 +17,11 @@
         <name>Alert_for_Unassigned_Wishes__c</name>
     </fields>
     <fields>
+        <help><!-- Separate each of the HTF&apos;s aliases with a semi-colon. (ie Springfield General; SGH) --></help>
+        <label><!-- Alias --></label>
+        <name>Alias__c</name>
+    </fields>
+    <fields>
         <help><!-- Last time USPS verification was attempted --></help>
         <label><!-- Billing Address Verification Attempted --></label>
         <name>BillingAddressVerificationAttempted__c</name>
@@ -60,8 +65,28 @@
         <name>Company_Contact__c</name>
     </fields>
     <fields>
+        <label><!-- Contact Notes --></label>
+        <name>Contact_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- DV Method Preference --></label>
+        <name>DV_Method_Preference__c</name>
+        <picklistValues>
+            <masterLabel>Electronic</masterLabel>
+            <translation><!-- Electronic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Paper</masterLabel>
+            <translation><!-- Paper --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- Department/Division --></label>
         <name>Department_Division__c</name>
+    </fields>
+    <fields>
+        <label><!-- Department --></label>
+        <name>Department__c</name>
     </fields>
     <fields>
         <label><!-- Dev Staff Email --></label>
@@ -107,6 +132,10 @@
         <label><!-- Event Volunteer Assignment Approver --></label>
         <name>Event_Volunteer_Assignment_Approver__c</name>
         <relationshipLabel><!-- Accounts (Event Volunteer Assignment Approver) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Exclude HTF from Referral Form Searches --></label>
+        <name>Exclude_HTF_from_Referral_Form_Searches__c</name>
     </fields>
     <fields>
         <help><!-- External RE record Id for upserting --></help>
@@ -516,8 +545,17 @@
         <name>RE_Wish_Co_ordinator_Hidden_Email__c</name>
     </fields>
     <fields>
+        <label><!-- Record Ownership Notes --></label>
+        <name>Record_Ownership_Notes__c</name>
+    </fields>
+    <fields>
         <label><!-- Referral Form Password --></label>
         <name>Referral_Form_Password__c</name>
+    </fields>
+    <fields>
+        <label><!-- Region Code --></label>
+        <name>Region_Code__c</name>
+        <relationshipLabel><!-- Accounts --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- Relationship Type --></label>
@@ -1865,8 +1903,8 @@
     <layouts>
         <layout>Hospital Treatment Facility</layout>
         <sections>
-            <label><!-- Address --></label>
-            <section>Address</section>
+            <label><!-- Address Information --></label>
+            <section>Address Information</section>
         </sections>
         <sections>
             <label><!-- Fields --></label>
@@ -1966,6 +2004,10 @@
     <quickActions>
         <label><!-- Family Dynamics --></label>
         <name>Family_Dynamics</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Health Treatment Facility --></label>
+        <name>Health_Treatment_Facility</name>
     </quickActions>
     <quickActions>
         <label><!-- Log a Call --></label>

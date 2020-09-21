@@ -21183,7 +21183,15 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
         <picklistValues>
             <picklist>Best_Contact_Specialty__c</picklist>
             <values>
+                <fullName>Anesthesiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Brain Tumor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cardio-thoracic Surgeon</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -21199,7 +21207,19 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
+                <fullName>Developmental Pediatrics</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Endocrinology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ENT %28Ear%2C Nose %26 Throat%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emergency Medicine</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -21223,7 +21243,27 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
+                <fullName>Gynecology</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Hematology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hematology-Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hepatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospice%2FPalliative Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospital Medicine</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -21239,6 +21279,18 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
+                <fullName>Internal Medicine%2FHospitalist</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Interventional Radiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Metabolics</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Nephrology</fullName>
                 <default>false</default>
             </values>
@@ -21247,7 +21299,15 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
+                <fullName>Neurosurgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ophthalmology</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -21271,7 +21331,23 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
+                <fullName>Psychiatry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Psychology</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Pulmonology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radiation Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radiology</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -21284,6 +21360,10 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
             </values>
             <values>
                 <fullName>Transplant</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transplant Hepatology</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -22894,7 +22974,15 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
         <picklistValues>
             <picklist>Referring_MP_Specialty__c</picklist>
             <values>
+                <fullName>Anesthesiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Brain Tumor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cardio-thoracic Surgeon</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -22910,7 +22998,19 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
+                <fullName>Developmental Pediatrics</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Endocrinology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ENT %28Ear%2C Nose %26 Throat%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emergency Medicine</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -22934,7 +23034,27 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
+                <fullName>Gynecology</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Hematology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hematology-Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hepatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospice%2FPalliative Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospital Medicine</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -22950,6 +23070,18 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
+                <fullName>Internal Medicine%2FHospitalist</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Interventional Radiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Metabolics</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Nephrology</fullName>
                 <default>false</default>
             </values>
@@ -22958,7 +23090,15 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
+                <fullName>Neurosurgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ophthalmology</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -22982,7 +23122,23 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
+                <fullName>Psychiatry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Psychology</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Pulmonology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radiation Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radiology</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -22995,6 +23151,10 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
             </values>
             <values>
                 <fullName>Transplant</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transplant Hepatology</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -23940,7 +24100,15 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
         <picklistValues>
             <picklist>Treating_MP_Specialty__c</picklist>
             <values>
+                <fullName>Anesthesiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Brain Tumor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cardio-thoracic Surgeon</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -23956,7 +24124,19 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
+                <fullName>Developmental Pediatrics</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Endocrinology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ENT %28Ear%2C Nose %26 Throat%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emergency Medicine</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -23980,7 +24160,27 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
+                <fullName>Gynecology</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Hematology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hematology-Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hepatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospice%2FPalliative Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospital Medicine</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -23996,6 +24196,18 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
+                <fullName>Internal Medicine%2FHospitalist</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Interventional Radiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Metabolics</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Nephrology</fullName>
                 <default>false</default>
             </values>
@@ -24004,7 +24216,15 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
+                <fullName>Neurosurgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ophthalmology</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -24028,7 +24248,23 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
+                <fullName>Psychiatry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Psychology</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Pulmonology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radiation Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radiology</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -24041,6 +24277,10 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
             </values>
             <values>
                 <fullName>Transplant</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transplant Hepatology</fullName>
                 <default>false</default>
             </values>
             <values>
