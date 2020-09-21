@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- Diagnosis Verfication Fieldset --></label>
         <name>Diagnosis_Verfication_Fieldset</name>
@@ -802,9 +802,17 @@
         <name>Best_Contact_HTF_Zip_Code__c</name>
     </fields>
     <fields>
-        <label><!-- Best Contact HTF Street Address --></label>
+        <label><!-- Best Contact HTF --></label>
         <name>Best_Contact_HTF__c</name>
         <relationshipLabel><!-- Best Contact HTF for Referrals --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Best Contact MP Category --></label>
+        <name>Best_Contact_MP_Category__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Contact MP Fax --></label>
+        <name>Best_Contact_MP_Fax__c</name>
     </fields>
     <fields>
         <label><!-- Best Contact Specialty --></label>
@@ -1052,6 +1060,27 @@
         <name>DV_Reminder_Last_Sent_Date__c</name>
     </fields>
     <fields>
+        <help><!-- Captures whether the DV Signer changed from the original recipient it was send to. --></help>
+        <label><!-- DV Signer Changed --></label>
+        <name>DV_Signer_Changed__c</name>
+    </fields>
+    <fields>
+        <label><!-- DV Signer Email --></label>
+        <name>DV_Signer_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- DV Signer First Name --></label>
+        <name>DV_Signer_First_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- DV Signer Last Name --></label>
+        <name>DV_Signer_Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- DV Signer Phone --></label>
+        <name>DV_Signer_Phone__c</name>
+    </fields>
+    <fields>
         <help><!-- Child has a condition without curative treatment options in which debilitation may extend over many years (e.g., severe treatment-resistant epilepsy, some metabolic diseases) --></help>
         <label><!-- Debilitation May Extend Over Many Years --></label>
         <name>Debilitation_may_extend_over_many_years__c</name>
@@ -1272,6 +1301,10 @@
         <picklistValues>
             <masterLabel>Best contact for Physician</masterLabel>
             <translation><!-- Best contact for Physician --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Referring Medical Professional</masterLabel>
+            <translation><!-- Referring Medical Professional --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Treating Medical Professional</masterLabel>
@@ -2823,6 +2856,10 @@
         <name>Treating_MP_State__c</name>
     </fields>
     <fields>
+        <label><!-- Treating MP Type --></label>
+        <name>Treating_MP_Type__c</name>
+    </fields>
+    <fields>
         <label><!-- Treating MP --></label>
         <lookupFilter>
             <errorMessage><!-- Please select an MP Contact record. --></errorMessage>
@@ -3311,8 +3348,20 @@
         <name>MP_Lookups</name>
     </quickActions>
     <quickActions>
-        <label><!-- Medical Information --></label>
+        <label><!-- Diagnosis Information --></label>
         <name>Medical_Information</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New MP Contact Info - Best --></label>
+        <name>New_MP_Contact_Info_Best</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New MP Contact Info - Referring --></label>
+        <name>New_MP_Contact_Info_Referring</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New MP Contact Info - Treating --></label>
+        <name>New_MP_Contact_Info_Treating</name>
     </quickActions>
     <quickActions>
         <label><!-- New Task --></label>
