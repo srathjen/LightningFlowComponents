@@ -189,7 +189,8 @@
                         <div class="form-group row newRefHtfChk">
                             <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
                                 <label class="c-input c-checkbox">
-                                    <apex:inputCheckbox id="createNewRefHTFchk" value="{!createNewRefHTF}"/>
+                                    <apex:inputCheckbox id="createNewRefHTFchk"
+                                                        onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
                                     <span class="c-indicator sas"></span>
                                     {!$Label.Wish_Referral_Create_New_Hospital_Facility}
                                 </label>
@@ -241,7 +242,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Phone}</label></div>
+                                <div class="col-sm-3"><label>Facility {!$Label.Wish_Referral_Phone}</label></div>
                                 <div class="col-sm-6">
                                     <apex:inputText value="{!currLead.Referring_MP_HTF_Phone__c}"
                                                     styleClass="form-control refhtfphone phonemask numbers-only"
@@ -271,6 +272,42 @@
                                 </div>
                             </div>
                         </div>
+                        <!--Additional MP info for new affiliation-->
+                        <div class="refNewAff">
+                            <div class="form-group row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-6" style="margin-top:-10px; text-align: center">
+                                    <label>Please provide additional information (Optional)</label>
+                                </div>
+                                <apex:inputHidden id="referrerAffiliation"
+                                                  value="{!createAffiliationReferrer}"/>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3"/>
+                                <div class="col-sm-6">
+                                    <div style="display: flex; align-items: center;">
+                                        <label style="width:85px">{!$Label.Wish_Referral_Phone}</label>
+                                        <apex:inputText value="{!referrerNewAffPhone}"
+                                                        styleClass="form-control refmpaffphone phonemask numbers-only"
+                                                        html-placeholder="(000) 000-0000" id="refmpaffphone"
+                                                        html-pattern=".{10,14}" maxlength="10"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3"/>
+                                <div class="col-sm-6">
+                                    <div style="display: flex; align-items: center;">
+                                        <label style="width:85px">{!$Label.Wish_Referral_Email}</label>
+                                        <apex:inputText value="{!referrerNewAffEmail}"
+                                                        styleClass="form-control email-std refmpaffemail"
+                                                        html-placeholder="medicalprofessional_email@domain.com"
+                                                        id="refmpaffemail"
+                                                        maxlength="80"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <div class="col-sm-3"></div>
                             <div class="col-sm-6"><span class="field-word-seperator"></span></div>
@@ -278,7 +315,7 @@
                         <div class="form-group row newRefMpChk">
                             <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
                                 <label class="c-input c-checkbox">
-                                    <apex:inputCheckbox id="createNewRefMPchk" value="{!createNewRefMP}"
+                                    <apex:inputCheckbox id="createNewRefMPchk"
                                                         onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
                                     <span class="c-indicator sas"></span>
                                     {!$Label.Wish_Referral_Create_New_Medical_Professional}
@@ -346,7 +383,7 @@
                                 <div class="col-sm-6">
                                     <apex:selectList size="1" id="refmpstate" value="{!currLead.Referring_MP_State__c}"
                                                      styleClass="form-control col-xs-12 c-select state refmpstate">
-                                        <apex:selectOptions value="{!States}" />
+                                        <apex:selectOptions value="{!States}"/>
                                     </apex:selectList>
                                 </div>
                             </div>
@@ -900,7 +937,8 @@
                             <div class="form-group row newTrtHtfChk">
                                 <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
                                     <label class="c-input c-checkbox">
-                                        <apex:inputCheckbox id="createNewTrtHTFchk" value="{!createNewRefHTF}"/>
+                                        <apex:inputCheckbox id="createNewTrtHTFchk"
+                                                            onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
                                         <span class="c-indicator sas"></span>
                                         {!$Label.Wish_Referral_Create_New_Hospital_Facility}
                                     </label>
@@ -910,7 +948,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Name}</label></div>
                                     <div class="col-sm-6">
-                                        <apex:inputText value="{!currLead.Hospital_Treatment_Facility_Treating__c}"
+                                        <apex:inputText value="{!treatingHtfName}"
                                                         styleClass="form-control trthtfname alpha-only"
                                                         html-placeholder="{!$Label.Wish_Referral_Name}" id="trthtfname"
                                                         maxlength="50"/>
@@ -953,7 +991,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_Phone}</label></div>
+                                    <div class="col-sm-3"><label>Facility {!$Label.Wish_Referral_Phone}</label></div>
                                     <div class="col-sm-6">
                                         <apex:inputText value="{!currLead.Treating_MP_HTF_Phone__c}"
                                                         styleClass="form-control trthtfphone phonemask numbers-only"
@@ -983,6 +1021,41 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="trtNewAff">
+                                <div class="form-group row">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-6" style="margin-top:-10px; text-align: center">
+                                        <label>Please provide additional information (Optional)</label>
+                                    </div>
+                                    <apex:inputHidden id="treatingAffiliation"
+                                                      value="{!createAffiliationTreating}"/>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"/>
+                                    <div class="col-sm-6">
+                                        <div style="display: flex; align-items: center;">
+                                            <label style="width:85px">{!$Label.Wish_Referral_Phone}</label>
+                                            <apex:inputText value="{!treatingNewAffPhone}"
+                                                            styleClass="form-control trtmpaffphone phonemask numbers-only"
+                                                            html-placeholder="(000) 000-0000" id="trtmpaffphone"
+                                                            html-pattern=".{10,14}" maxlength="10"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"/>
+                                    <div class="col-sm-6">
+                                        <div style="display: flex; align-items: center;">
+                                            <label style="width:85px">{!$Label.Wish_Referral_Email}</label>
+                                            <apex:inputText value="{!treatingNewAffEmail}"
+                                                            styleClass="form-control email-std trtmpaffemail"
+                                                            html-placeholder="medicalprofessional_email@domain.com"
+                                                            id="trtmpaffemail"
+                                                            maxlength="80"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-6"><span class="field-word-seperator"></span></div>
@@ -990,7 +1063,7 @@
                             <div class="form-group row newTrtMpChk mpRel">
                                 <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
                                     <label class="c-input c-checkbox">
-                                        <apex:inputCheckbox id="createNewTrtMPchk" value="{!createNewRefMP}"
+                                        <apex:inputCheckbox id="createNewTrtMPchk"
                                                             onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
                                         <span class="c-indicator sas"></span>
                                         {!$Label.Wish_Referral_Create_New_Medical_Professional}
@@ -1069,7 +1142,7 @@
                                 <div class="col-sm-6">
                                     <apex:inputField value="{!currLead.Treating_MP_Category__c}"
                                                      styleClass="form-control col-xs-12 col-sm-12 c-select mcategory"
-                                                     id="mcategory"/><!--medProvCat-->
+                                                     id="mcategory"/>
                                 </div>
                             </div>
                             <div class="form-group row mpRel">
@@ -1126,6 +1199,41 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="bestNewAff">
+                                <div class="form-group row">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-6" style="margin-top:-10px; text-align: center">
+                                        <label>Please provide additional information (Optional)</label>
+                                    </div>
+                                    <apex:inputHidden id="bestAffiliation"
+                                                      value="{!createAffiliationBest}"/>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"/>
+                                    <div class="col-sm-6">
+                                        <div style="display: flex; align-items: center;">
+                                            <label style="width:85px">{!$Label.Wish_Referral_Phone}</label>
+                                            <apex:inputText value="{!bestNewAffPhone}"
+                                                            styleClass="form-control bestmpaffphone phonemask numbers-only"
+                                                            html-placeholder="(000) 000-0000" id="bestmpaffphone"
+                                                            html-pattern=".{10,14}" maxlength="10"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"/>
+                                    <div class="col-sm-6">
+                                        <div style="display: flex; align-items: center;">
+                                            <label style="width:85px">{!$Label.Wish_Referral_Email}</label>
+                                            <apex:inputText value="{!bestNewAffEmail}"
+                                                            styleClass="form-control email-std bestmpaffemail"
+                                                            html-placeholder="medicalprofessional_email@domain.com"
+                                                            id="bestmpaffemail"
+                                                            maxlength="80"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-6"><span class="field-word-seperator"></span></div>
@@ -1133,7 +1241,7 @@
                             <div class="form-group row newBestMpChk">
                                 <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
                                     <label class="c-input c-checkbox">
-                                        <apex:inputCheckbox id="createNewBestMPchk" value="{!createNewRefMP}"
+                                        <apex:inputCheckbox id="createNewBestMPchk"
                                                             onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
                                         <span class="c-indicator sas"></span>
                                         {!$Label.Wish_Referral_Create_New_Medical_Professional}
@@ -1610,6 +1718,8 @@
                     window.parent.postMessage('home', '*');
                 }
             }
+
+
         </script>
         <script>_satellite.pageBottom();</script>
     </apex:outputPanel>
@@ -1745,41 +1855,135 @@
             let eventData = event.getParam("EventData");
             let field;
             let fieldInput;
+            let fieldPair;
+            let inputType;
             if (eventData.lookupId === 'externalReferrerContactLookup') {
                 let externalRefContact = document.querySelector('#externalReferrerContactLookup');
                 field = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0];
                 fieldInput = externalRefContact.querySelector('.slds-input');
+                inputType = 'referrerContact';
+                fieldPair = document.querySelectorAll('[id$="externalReferrerAccountLookupOutput"]')[0];
             } else if (eventData.lookupId === 'externalReferrerAccountLookup') {
                 let externalRefAccount = document.querySelector('#externalReferrerAccountLookup');
                 field = document.querySelectorAll('[id$="externalReferrerAccountLookupOutput"]')[0];
                 fieldInput = externalRefAccount.querySelector('.slds-input');
+                inputType = 'referrerAccount';
+                fieldPair = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0];
             } else if (eventData.lookupId === 'externalTreatingContactLookup') {
                 let externalTrtContact = document.querySelector('#externalTreatingContactLookup');
                 field = document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0];
                 fieldInput = externalTrtContact.querySelector('.slds-input');
+                inputType = 'treatingContact';
+                fieldPair = document.querySelectorAll('[id$="externalTreatingAccountLookupOutput"]')[0];
             } else if (eventData.lookupId === 'externalTreatingAccountLookup') {
                 let externalTrtAccount = document.querySelector('#externalTreatingAccountLookup');
                 field = document.querySelectorAll('[id$="externalTreatingAccountLookupOutput"]')[0];
                 fieldInput = externalTrtAccount.querySelector('.slds-input');
+                inputType = 'treatingAccount';
+                fieldPair = document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0];
             } else if (eventData.lookupId === 'externalBestContactLookup') {
                 let externalBestContact = document.querySelector('#externalBestContactLookup');
                 field = document.querySelectorAll('[id$="externalBestContactLookupOutput"]')[0];
                 fieldInput = externalBestContact.querySelector('.slds-input');
+                inputType = 'bestContact';
+                fieldPair = document.querySelectorAll('[id$="externalTreatingAccountLookupOutput"]')[0];
             }
             if (field && eventData.eventType === 'select') {
                 field.value = eventData.recordId;
+                if (fieldPair.value) {
+                    Visualforce.remoting.Manager.invokeAction(
+                        '{!$RemoteAction.WishReferralForm_AC.searchAccountContactAffiliation}',
+                        field.value, fieldPair.value,
+                        function (result, event) {
+                            if (event.status && result === true) {
+                                if (inputType === 'referrerContact' || inputType === 'referrerAccount') {
+                                    document.getElementsByClassName('refNewAff')[0].style.display = 'block';
+                                    document.querySelectorAll('[id$="referrerAffiliation"]')[0].value = true;
+                                } else if (inputType === 'treatingContact' || inputType === 'treatingAccount') {
+                                    document.getElementsByClassName('trtNewAff')[0].style.display = 'block';
+                                    document.querySelectorAll('[id$="treatingAffiliation"]')[0].value = true;
+                                } else if (inputType === 'bestContact') {
+                                    document.getElementsByClassName('bestNewAff')[0].style.display = 'block';
+                                    document.querySelectorAll('[id$="bestAffiliation"]')[0].value = true;
+                                }
+                            }
+                        },
+                        {escape: true}
+                    );
+                }
+                if (inputType === 'referrerContact') {
+                    if (document.querySelector('[id$="createNewRefHTFchk"]').checked) {
+                        document.getElementsByClassName('refNewAff')[0].style.display = 'block';
+                    } else {
+                        Visualforce.remoting.Manager.invokeAction(
+                            '{!$RemoteAction.WishReferralForm_AC.checkEmptyContactFields}',
+                            field.value,
+                            function (result, event) {
+                                if (event.status && result === true) {
+                                    document.getElementsByClassName('refNewAff')[0].style.display = 'block';
+                                }
+                            },
+                            {escape: true}
+                        );
+                    }
+                } else if (inputType === 'treatingContact') {
+                    if (document.querySelector('[id$="createNewTrtHTFchk"]').checked) {
+                        document.getElementsByClassName('trtNewAff')[0].style.display = 'block';
+                    } else {
+                        Visualforce.remoting.Manager.invokeAction(
+                            '{!$RemoteAction.WishReferralForm_AC.checkEmptyContactFields}',
+                            field.value,
+                            function (result, event) {
+                                if (event.status && result === true) {
+                                    document.getElementsByClassName('trtNewAff')[0].style.display = 'block';
+                                }
+                            },
+                            {escape: true}
+                        );
+                    }
+                } else if (inputType === 'bestContact') {
+                    if (document.querySelector('[id$="createNewTrtHTFchk"]').checked) {
+                        document.getElementsByClassName('bestNewAff')[0].style.display = 'block';
+                    } else {
+                        Visualforce.remoting.Manager.invokeAction(
+                            '{!$RemoteAction.WishReferralForm_AC.checkEmptyContactFields}',
+                            field.value,
+                            function (result, event) {
+                                if (event.status && result === true) {
+                                    document.getElementsByClassName('bestNewAff')[0].style.display = 'block';
+                                }
+                            },
+                            {escape: true}
+                        );
+                    }
+                }
                 validateForm();
             } else if (field && eventData.eventType === 'clear') {
                 if (field.value !== '' && fieldInput.value !== '') {
                     fieldInput.value = '';
                 }
                 field.value = '';
+                if (inputType === 'referrerContact' || inputType === 'referrerAccount') {
+                    document.getElementsByClassName('refNewAff')[0].style.display = 'none';
+                    document.querySelectorAll('[id$="referrerAffiliation"]')[0].value = false;
+                } else if (inputType === 'treatingContact') {
+                    document.getElementsByClassName('trtNewAff')[0].style.display = 'none';
+                    document.querySelectorAll('[id$="treatingAffiliation"]')[0].value = false;
+                } else if (inputType === 'bestContact') {
+                    document.getElementsByClassName('bestNewAff')[0].style.display = 'none';
+                    document.querySelectorAll('[id$="bestAffiliation"]')[0].value = false;
+                } else if (inputType === 'treatingAccount') {
+                    document.getElementsByClassName('trtNewAff')[0].style.display = 'none';
+                    document.querySelectorAll('[id$="treatingAffiliation"]')[0].value = false;
+                    document.getElementsByClassName('bestNewAff')[0].style.display = 'none';
+                    document.querySelectorAll('[id$="bestAffiliation"]')[0].value = false;
+                }
                 validateForm();
             }
         }
 
         // Function to change the Search related field to disabled
-        function onChangeCreateCheckbox(id, isChecked) {
+        function onChangeCreateCheckbox(id, checked) {
             validateForm();
             let fieldInput;
             let field;
@@ -1792,24 +1996,30 @@
             } else if (id === 'j_id0:frm:createNewBestMPchk') {
                 fieldInput = document.querySelector('#externalBestContactLookup lightning-input');
                 field = document.getElementById('j_id0:frm:externalBestContactLookupOutput');
+            } else if (id === 'j_id0:frm:createNewRefHTFchk') {
+                fieldInput = document.querySelector('#externalReferrerAccountLookup lightning-input');
+                field = document.getElementById('j_id0:frm:externalReferrerAccountLookupOutput');
+            } else if (id === 'j_id0:frm:createNewTrtHTFchk') {
+                fieldInput = document.querySelector('#externalTreatingAccountLookup lightning-input');
+                field = document.getElementById('j_id0:frm:externalTreatingAccountLookupOutput');
             }
-            if (field && fieldInput && isChecked === true) {
+            if (field && fieldInput && checked === true) {
                 field.value = '';
                 fieldInput.value = '';
                 fieldInput.disabled = true;
             }
-            if (field && fieldInput && isChecked === false) {
+            if (field && fieldInput && checked === false) {
                 fieldInput.disabled = false;
             }
         }
 
         // Function to change the Search related field to disabled
-        function onChangeSameAsCheckbox(id, isChecked) {
+        function onChangeSameAsCheckbox(id, checked) {
             let refContactOutput, fieldCreateChk;
             refContactOutput = document.getElementById('j_id0:frm:externalReferrerContactLookupOutput');
             if (id === 'j_id0:frm:trtSameAsRefInfoChk') {
                 fieldCreateChk = document.querySelectorAll('[id$="createNewTrtMPchk"]')[0].checked;
-                if (isChecked === true && fieldCreateChk === false) {
+                if (checked === true && fieldCreateChk === false) {
                     document.getElementById('j_id0:frm:externalTreatingContactLookupOutput').value = refContactOutput.value;
                 } else {
                     document.getElementById('j_id0:frm:externalTreatingContactLookupOutput').value = '';
@@ -1818,7 +2028,7 @@
                 }
             } else if (id === 'j_id0:frm:bestSameAsRefInfoChk') {
                 fieldCreateChk = document.querySelectorAll('[id$="createNewBestMPchk"]')[0].checked;
-                if (isChecked === true && fieldCreateChk === false) {
+                if (checked === true && fieldCreateChk === false) {
                     document.getElementById('j_id0:frm:externalBestContactLookupOutput').value = refContactOutput.value;
                 } else {
                     document.getElementById('j_id0:frm:externalBestContactLookupOutput').value = '';
@@ -1834,44 +2044,31 @@
             // SIW-370 starts : Added 2 methods to display error message for Primary Language field
             let a = document.querySelectorAll('[id$="langI"]');
             a[0].required = true;
-            let elems = document.querySelectorAll('[id$="plang"]');
-            let elemsDiv = document.querySelectorAll('[id$="plang_chosen"]');
+            let elem = document.querySelectorAll('[id$="plang"]');
+            let elemDiv = document.querySelectorAll('[id$="plang_chosen"]');
             let e = document.querySelectorAll('[id$="langError"]');
             let lab = document.querySelectorAll('[id$="langLabel"]');
-            if (elems[0].value == '') {
+            if (elem[0].value === '') {
                 e[0].style.display = "block";
                 lab[0].style.color = "red";
-                elems[0].style.border = "1px solid red";
-                if (elemsDiv[0].querySelectorAll('div').length > 0) {
-                    elemsDiv[0].querySelectorAll('div')[0].style.border = "1px solid red";
+                elem[0].style.border = "1px solid red";
+                if (elemDiv[0].querySelectorAll('div').length > 0) {
+                    elemDiv[0].querySelectorAll('div')[0].style.border = "1px solid red";
                 } else {
-                    elems[0].style.border = "1px solid red";
+                    elem[0].style.border = "1px solid red";
                 }
             } else {
                 e[0].style.display = "none";
                 lab[0].style.color = "#75787B";
-                if (elemsDiv[0].querySelectorAll('div').length > 0) {
-                    elemsDiv[0].querySelectorAll('div')[0].style.border = "1px solid rgba(0,0,0,.15)";
+                if (elemDiv[0].querySelectorAll('div').length > 0) {
+                    elemDiv[0].querySelectorAll('div')[0].style.border = "1px solid rgba(0,0,0,.15)";
                 } else {
-                    elems[0].style.border = "1px solid rgba(0,0,0,.15)";
+                    elem[0].style.border = "1px solid rgba(0,0,0,.15)";
                 }
             }
             // SIW-370 ends
 
             // Validating Lookup fields
-            let externalRefAccount = document.querySelector('#externalReferrerAccountLookup');
-            if (externalRefAccount.querySelector('.slds-input').value === '') {
-                document.querySelectorAll('[id$="externalReferrerAccountLookupValidation"]')[0].required = true;
-                document.querySelector('#refAccountEm').hidden = false;
-                externalRefAccount.querySelector('.slds-input').style.border = "1px solid red";
-            } else {
-                document.querySelectorAll('[id$="externalReferrerAccountLookupValidation"]')[0].required = false;
-                document.querySelector('#refAccountEm').hidden = true;
-                externalRefAccount.querySelector('.slds-input').style.border = "";
-                document.querySelector('#externalReferrerAccountLookup').parentElement
-                    .previousElementSibling.firstElementChild.style.color = '';
-            }
-
             let refMpCategory = document.querySelectorAll('[id$="refmpcategory"]')[0].value;
             let refCtcLookupOutput = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0].value;
             let trtCtcLookupOutput = document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0].value;
@@ -1883,8 +2080,22 @@
                     && (refCtcLookupOutput === bestCtcLookupOutput);
             }
 
+            let externalRefAccount = document.querySelector('#externalReferrerAccountLookup');
+            if (document.querySelectorAll('[id$="externalReferrerAccountLookupOutput"]')[0].value === ''
+                && document.querySelectorAll('[id$="createNewRefHTFchk"]')[0].checked === false) {
+                document.querySelectorAll('[id$="externalReferrerAccountLookupValidation"]')[0].required = true;
+                document.querySelector('#refAccountEm').hidden = false;
+                externalRefAccount.querySelector('.slds-input').style.border = "1px solid red";
+            } else {
+                document.querySelectorAll('[id$="externalReferrerAccountLookupValidation"]')[0].required = false;
+                document.querySelector('#refAccountEm').hidden = true;
+                externalRefAccount.querySelector('.slds-input').style.border = "";
+                document.querySelector('#externalReferrerAccountLookup').parentElement
+                    .previousElementSibling.firstElementChild.style.color = '';
+            }
+
             let externalRefContact = document.querySelector('#externalReferrerContactLookup');
-            if (externalRefContact.querySelector('.slds-input').value === ''
+            if (document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0].value === ''
                 && document.querySelectorAll('[id$="createNewRefMPchk"]')[0].checked === false) {
                 document.querySelectorAll('[id$="externalReferrerContactLookupValidation"]')[0].required = true;
                 document.querySelector('#refContactEm').hidden = false;
@@ -1898,7 +2109,8 @@
             }
 
             let externalTrtAccount = document.querySelector('#externalTreatingAccountLookup');
-            if (externalTrtAccount.querySelector('.slds-input').value === '') {
+            if (document.querySelectorAll('[id$="externalTreatingAccountLookupOutput"]')[0].value === ''
+                && document.querySelectorAll('[id$="createNewTrtHTFchk"]')[0].checked === false) {
                 document.querySelectorAll('[id$="externalTreatingAccountLookupValidation"]')[0].required = true;
                 document.querySelector('#trtAccountEm').hidden = false;
                 externalTrtAccount.querySelector('.slds-input').style.border = "1px solid red";
@@ -1911,7 +2123,7 @@
             }
 
             let externalTrtContact = document.querySelector('#externalTreatingContactLookup');
-            if (externalTrtContact.querySelector('.slds-input').value === ''
+            if (document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0].value === ''
                 && document.querySelectorAll('[id$="createNewTrtMPchk"]')[0].checked === false) {
                 document.querySelectorAll('[id$="externalTreatingContactLookupValidation"]')[0].required = true;
                 document.querySelector('#trtContactEm').innerText = 'Oops! Please enter a Medical Professional';
@@ -1933,7 +2145,7 @@
             }
 
             let externalBestContact = document.querySelector('#externalBestContactLookup');
-            if (externalBestContact.querySelector('.slds-input').value === ''
+            if (document.querySelectorAll('[id$="externalBestContactLookupOutput"]')[0].value === ''
                 && document.querySelectorAll('[id$="createNewBestMPchk"]')[0].checked === false) {
                 document.querySelectorAll('[id$="externalBestContactLookupValidation"]')[0].required = true;
                 document.querySelector('#bestContactEm').innerText = 'Oops! Please enter a Medical Professional';

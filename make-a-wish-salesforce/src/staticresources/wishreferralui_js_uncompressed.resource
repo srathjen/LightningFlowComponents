@@ -580,6 +580,7 @@ function formLogic() {
   checkVisible = $(".newRefMpChk input").is(":checked");
   if (checkVisible == true) {
   $(".refMpForm").css("display", "block");
+  $(".refNewAff").css("display", "none");
   } else if (checkVisible == false) {
   $(".refMpForm").css("display", "none");
   }
@@ -590,6 +591,7 @@ function formLogic() {
     checkVisible = $(".newTrtMpChk input").is(":checked");
     if (checkVisible == true) {
     $(".trtMpForm").css("display", "block");
+    $(".trtNewAff").css("display", "none");
     } else if (checkVisible == false) {
     $(".trtMpForm").css("display", "none");
     }
@@ -600,6 +602,7 @@ function formLogic() {
     checkVisible = $(".newBestMpChk input").is(":checked");
     if (checkVisible == true) {
     $(".medToRepeatBest").css("display", "block");
+    $(".bestNewAff").css("display", "none");
     } else if (checkVisible == false) {
     $(".medToRepeatBest").css("display", "none");
     }
@@ -612,6 +615,7 @@ function formLogic() {
     $(".refHtfForm").css("display", "block");
     } else if (checkVisible == false) {
     $(".refHtfForm").css("display", "none");
+    $(".refNewAff").css("display", "none");
     }
     });
 
@@ -622,6 +626,8 @@ function formLogic() {
     $(".trtHtfForm").css("display", "block");
     } else if (checkVisible == false) {
     $(".trtHtfForm").css("display", "none");
+    $(".trtNewAff").css("display", "none");
+    $(".bestNewAff").css("display", "none");
     }
     });
 
@@ -668,7 +674,6 @@ $(".repeatMedProf").on("change", function () {
       $(".trthtfzip").val($(".refhtfzip").val());
       $(".trthtfphone").val($(".refhtfphone").val());
       $(".trthtfdept").val($(".refhtfdept").val());
-      $(".mphospitalname").val($(".refhtfname").val());
     } else if(checkVisibleNewHtf == false) {
       $(".trtHtfForm :input").each(function () {
       $(this).val("");
@@ -1038,6 +1043,9 @@ $(".repeatMedProf").on("change", function () {
       $(".trtHtfForm").css("display", "none");
       $(".repeatMedProfBest").css("display","none");
       $(".mpSearchCreate").css("display", "block");
+      $(".refNewAff").css("display","none");
+      $(".trtNewAff").css("display","none");
+      $(".bestNewAff").css("display","none");
       $("[id$=refmpcategory],[id$=mcategory],[id$=bcategory]").addClass("medcategory");
       $("[id$=refmpphone], [id$=refmpemail]").addClass("phoneoremailref");
       $("[id$=mphone], [id$=memail]").addClass("phoneoremailtrt");
