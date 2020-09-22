@@ -5522,6 +5522,18 @@ IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientat
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Primary_Affiliation_Name__c</fullName>
+        <description>Displays the Primary Affiliation Name for use in Reports and Flows</description>
+        <externalId>false</externalId>
+        <formula>npsp__Primary_Affiliation__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Primary Affiliation Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Primary_Diagnosis_Condition_Description__c</fullName>
         <description>Used to hold the Primary diagnosis condition description from lead record during conversion</description>
         <externalId>false</externalId>

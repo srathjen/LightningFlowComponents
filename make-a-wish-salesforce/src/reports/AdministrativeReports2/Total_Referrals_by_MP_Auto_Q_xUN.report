@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Contact.ReferringMP__r$LastName</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Contact.ReferringMP__r$Status</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Eligibility Review,Qualified,DNQ</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Contact$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Contact.ReferringMP__r$Auto_Qualified__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Total Referrals by MP - Auto Q</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Referring_MPs_with_Referrals__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Contact.ReferringMP__r$Referred_Date__c</dateColumn>
+        <interval>INTERVAL_CURFY</interval>
+    </timeFrameFilter>
+</Report>
