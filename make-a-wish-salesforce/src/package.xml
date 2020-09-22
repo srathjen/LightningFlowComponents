@@ -678,14 +678,21 @@
     <members>Adjustment_Repor/Adjustment_Report</members>
     <members>AdministrativeReports2/Copy_of_Leads_Qualified_and_DNQ_Curr_h1G</members>
     <members>AdministrativeReports2/Copy_of_New_Leads_with_DocuSign_Status_R_lKR</members>
+    <members>AdministrativeReports2/Copy_of_Qualified_referrals_vs_DNQd_Gxj</members>
     <members>AdministrativeReports2/Flown_Before_Wish_Forms</members>
     <members>AdministrativeReports2/Leads_Medical_Affairs_I_MFl</members>
     <members>AdministrativeReports2/New_Cases_Report_7cL2</members>
+    <members>AdministrativeReports2/New_Referring_MPs_with_Referrals_Report_YgC</members>
+    <members>AdministrativeReports2/New_Report_gYz</members>
+    <members>AdministrativeReports2/New_Report_KaS</members>
     <members>AdministrativeReports2/New_Report_qa0</members>
+    <members>AdministrativeReports2/Qualified_Referrals_vs_DNQs_lQp</members>
+    <members>AdministrativeReports2/Referrals_by_MP_ouK</members>
     <members>AdministrativeReports2/Reports_Used_in_Dashboards</members>
     <members>AdministrativeReports2/SalesforceTeamReports</members>
     <members>AdministrativeReports2/SalesforceTeamReports/Copy_of_Leads_Placeholder_Text_KM9</members>
     <members>AdministrativeReports2/SalesforceTeamReports/Copy_of_Leads_Placeholder_Text2_XkM</members>
+    <members>AdministrativeReports2/Total_Referrals_by_MP_Auto_Q_xUN</members>
     <members>AdministrativeReports2/X10WLWishchildturns2_xaE</members>
     <members>AdministrativeReports2/X11WL_o1h</members>
     <members>AdministrativeReports2/X14WL_Referral_Form_Qualified_Sub_pae</members>
@@ -2925,9 +2932,14 @@
     <members>Leads_with_Duplicate_within_Chapter</members>
     <members>Leads_with_ICD_Codes</members>
     <members>Leads_with_User_Status</members>
+    <members>Medical_Professionals_with_or_without_Referrals</members>
+    <members>Referring_HTF_s_with_Referrals</members>
+    <members>Referring_MPs_with_Referrals</members>
     <members>Reports</members>
     <members>Reports_Used_in_Dashboards</members>
     <members>screen_flows_prebuilt_crt</members>
+    <members>Treating_MP_HTF_s_with_Referrals</members>
+    <members>Treating_MPs_with_Referrals</members>
     <name>ReportType</name>
   </types>
   <types>
