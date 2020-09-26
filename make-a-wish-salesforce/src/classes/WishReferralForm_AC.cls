@@ -9,8 +9,8 @@ Description : It will capture the lead from Referral form.
 // 03/25/2020 - Gus Mayer - SCC-151 Assigning Lead Record Type to Wish Child
 // 04/28/2020 - Manoj -  SIW-563: Modified condition to fix email issue for all relationship type
 global class WishReferralForm_AC {
-	@testVisible private static String ERROR_STRING_SELECT_MANDATORY_FIELDS = 'Please complete following mandatory fields : ';
-	@testVisible private static String ERROR_STRING_RELATIONSHIP_TO_CHILD = 'Please select Relationship To Child';
+	@TestVisible private static String ERROR_STRING_SELECT_MANDATORY_FIELDS = 'Please complete following mandatory fields : ';
+	@TestVisible private static String ERROR_STRING_RELATIONSHIP_TO_CHILD = 'Please select Relationship To Child';
 
 	public String remailOne { get; set; }
 	public String remailTwo { get; set; }
@@ -38,7 +38,6 @@ global class WishReferralForm_AC {
 	public String referralRush { get; set; }
 	public final String YES { get; set; }
 	private final String RED = 'Red';
-	public String treatingMpState { get; set; }
 	public MpHtfSearchWrapper mpHtfSearch { get; set; }
 	public String treatingHtfName { get; set; }
 	public String referrerNewAffEmail { get; set; }
@@ -47,6 +46,9 @@ global class WishReferralForm_AC {
 	public String treatingNewAffPhone { get; set; }
 	public String bestNewAffEmail { get; set; }
 	public String bestNewAffPhone { get; set; }
+    public Boolean referrerContactEmpty { get;set; }
+    public Boolean treatingContactEmpty { get;set; }
+    public Boolean bestContactEmpty { get;set; }
 	public Boolean createAffiliationReferrer { get; set; }
 	public Boolean createAffiliationTreating { get; set; }
 	public Boolean createAffiliationBest { get; set; }
@@ -61,12 +63,15 @@ global class WishReferralForm_AC {
 		copyReferrerInfoBest = false;
 		icdOrPcd = '';
 		displayChildFrm = false;
-		YES = 'Yes';
-		createAffiliationReferrer = false;
-		createAffiliationTreating = false;
-		createAffiliationBest = false;
-		if (ApexPages.currentPage().getParameters().get('isSuccess') != null) {
-			displayAckMsg = Boolean.valueOf(ApexPages.currentPage().getParameters().get('isSuccess'));
+        YES = 'Yes';
+        referrerContactEmpty = false;
+        treatingContactEmpty = false;
+        bestContactEmpty = false;
+        createAffiliationReferrer = false;
+        createAffiliationTreating = false;
+        createAffiliationBest = false;
+        if (ApexPages.currentPage().getParameters().get('isSuccess') != null) {
+            displayAckMsg = Boolean.valueOf(ApexPages.currentPage().getParameters().get('isSuccess'));
 		}
 		mpHtfSearch = new MpHtfSearchWrapper();
 		newMpHtfAffiliations = new List<npe5__Affiliation__c>();
@@ -552,8 +557,8 @@ global class WishReferralForm_AC {
 			if (copyReferrerInfoBest == true && currLead.Referring_MP__c != null) {
 				currLead.Best_Contact__c = currLead.Referring_MP__c;
 			}
-			if (copyReferrerInfoBest == true && currLead.Referring_MP_HTF__c != null) {
-				currLead.Best_Contact_HTF__c = currLead.Referring_MP_HTF__c;
+			if (currLead.Treating_MP_HTF__c != null) {
+				currLead.Best_Contact_HTF__c = currLead.Treating_MP_HTF__c;
 			}
 			if (createAffiliationReferrer && currLead.Referring_MP__c != null && currLead.Referring_MP_HTF__c != null) {
 				newMpHtfAffiliations.add(createAffiliation(currLead.Referring_MP__c, currLead.Referring_MP_HTF__c));

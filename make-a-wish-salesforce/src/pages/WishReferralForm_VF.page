@@ -160,11 +160,12 @@
                             </div>
                         </div>
                     </div>
-                    <!--Referrer is Medical Professional-->
+                    
+                    <!-- REFERRER IS MEDICAL PROFESSIONAL -->
                     <div class="refToMP">
                         <div class="row" style="margin-top:-15px">
-                            <div class="col-sm-3" style="padding-top:15px">
-                                <label>{!$Label.Wish_Referral_Referring_Hospital_Facility}</label></div>
+                            <div class="col-sm-3" style="padding-top: 15px">
+                                <label>{!$Label.Wish_Referral_Referring_Medical_Professional}</label></div>
                             <div class="col-sm-6" style="margin-bottom:-12px">
                                 <div style="display: flex; align-items: center;">
                                     <label>Filter by State: </label>
@@ -174,105 +175,15 @@
                                         <apex:selectOptions value="{!FilterStateOptions}"/>
                                     </apex:selectList>
                                 </div>
-                                <div id="externalReferrerAccountLookup"></div>
-                                <div style="opacity: 0;pointer-events: none;">
-                                    <apex:inputText id="externalReferrerAccountLookupValidation"/>
-                                </div>
-                                <apex:inputHidden id="externalReferrerAccountLookupOutput"
-                                                  value="{!mpHtfSearch.referringHospitalFacilityId}"/>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-3"></div>
-                            <div class="col-sm-6"><span class="field-word-seperator"></span></div>
-                        </div>
-                        <div class="form-group row newRefHtfChk">
-                            <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
-                                <label class="c-input c-checkbox">
-                                    <apex:inputCheckbox id="createNewRefHTFchk"
-                                                        onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
-                                    <span class="c-indicator sas"></span>
-                                    {!$Label.Wish_Referral_Create_New_Hospital_Facility}
-                                </label>
-                            </div>
-                        </div>
-                        <div class="refHtfForm">
-                            <div class="form-group row">
-                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Name}</label></div>
-                                <div class="col-sm-6">
-                                    <apex:inputText value="{!currLead.Referring_MP_HTF_Name__c}"
-                                                    styleClass="form-control refhtfname alpha-only"
-                                                    html-placeholder="{!$Label.Wish_Referral_Name}" id="refhtfname"
-                                                    maxlength="50"/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Address}</label></div>
-                                <div class="col-sm-6">
-                                    <apex:inputText value="{!currLead.Referring_MP_HTF_Street_Address__c}"
-                                                    styleClass="form-control refhtfstreet"
-                                                    html-placeholder="0000 NE 00 Ave" id="refhtfstreet" maxlength="40"/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_City}</label></div>
-                                <div class="col-sm-6">
-                                    <apex:inputText value="{!currLead.Referring_MP_HTF_City__c}"
-                                                    styleClass="form-control refhtfcity alpha-only"
-                                                    html-placeholder="{!$Label.Wish_Referral_City}" id="refhtfcity"
-                                                    maxlength="50"/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_State}</label></div>
-                                <div class="col-sm-6">
-                                    <apex:selectList size="1" id="refhtfstate"
-                                                     value="{!currLead.Referring_MP_HTF_State__c}"
-                                                     styleClass="form-control col-xs-12 c-select state refhtfstate">
-                                        <apex:selectOptions value="{!States}"/>
-                                    </apex:selectList>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Postal_Code}</label></div>
-                                <div class="col-sm-6">
-                                    <apex:inputText value="{!currLead.Referring_MP_HTF_Zip_Code__c}"
-                                                    styleClass="form-control refhtfzip numbers-only"
-                                                    html-placeholder="00000" id="refhtfzip" maxlength="5"/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-3"><label>Facility {!$Label.Wish_Referral_Phone}</label></div>
-                                <div class="col-sm-6">
-                                    <apex:inputText value="{!currLead.Referring_MP_HTF_Phone__c}"
-                                                    styleClass="form-control refhtfphone phonemask numbers-only"
-                                                    html-placeholder="(000) 000-0000" id="refhtfphone"
-                                                    html-pattern=".{10,14}" maxlength="10"/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_HTF_Department}</label></div>
-                                <div class="col-sm-6">
-                                    <apex:inputField value="{!currLead.Referring_MP_HTF_Department__c}"
-                                                     styleClass="form-control col-xs-12 col-sm-12 c-select refhtfdept"
-                                                     html-placeholder="{!$Label.Wish_Referral_HTF_Department}"
-                                                     id="refhtfdept"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:-15px">
-                            <div class="col-sm-3" style="padding-top: 15px">
-                                <label>{!$Label.Wish_Referral_Referring_Medical_Professional}</label></div>
-                            <div class="col-sm-6" style="margin-bottom:-12px">
                                 <div id="externalReferrerContactLookup"></div>
                                 <apex:inputHidden id="externalReferrerContactLookupOutput"
                                                   value="{!mpHtfSearch.referringMedicalProfessionalId}"/>
                                 <div style="opacity: 0;pointer-events: none;">
                                     <apex:inputText id="externalReferrerContactLookupValidation"/>
                                 </div>
+                                <apex:inputHidden id="referrerContactEmpty" value="{!referrerContactEmpty}"/>
                             </div>
                         </div>
-                        <!--Additional MP info for new affiliation-->
                         <div class="refNewAff">
                             <div class="form-group row">
                                 <div class="col-sm-3"></div>
@@ -396,6 +307,97 @@
                                                      styleClass="form-control col-xs-12 c-select refmpspecialty">
                                         <apex:selectOptions value="{!MedicalSpecialty}"/>
                                     </apex:selectList>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row" style="margin-top: 5px">
+                            <div class="col-sm-3" style="padding-top:15px">
+                                <label>{!$Label.Wish_Referral_Referring_Hospital_Facility}</label></div>
+                            <div class="col-sm-6" style="margin-bottom:-12px">
+                                <div id="externalReferrerAccountLookup"></div>
+                                <div style="opacity: 0;pointer-events: none;">
+                                    <apex:inputText id="externalReferrerAccountLookupValidation"/>
+                                </div>
+                                <apex:inputHidden id="externalReferrerAccountLookupOutput"
+                                                  value="{!mpHtfSearch.referringHospitalFacilityId}"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-6"><span class="field-word-seperator"></span></div>
+                        </div>
+                        <div class="form-group row newRefHtfChk">
+                            <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
+                                <label class="c-input c-checkbox">
+                                    <apex:inputCheckbox id="createNewRefHTFchk"
+                                                        onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
+                                    <span class="c-indicator sas"></span>
+                                    {!$Label.Wish_Referral_Create_New_Hospital_Facility}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="refHtfForm">
+                            <div class="form-group row">
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Name}</label></div>
+                                <div class="col-sm-6">
+                                    <apex:inputText value="{!currLead.Referring_MP_HTF_Name__c}"
+                                                    styleClass="form-control refhtfname alpha-only"
+                                                    html-placeholder="{!$Label.Wish_Referral_Name}" id="refhtfname"
+                                                    maxlength="50"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Address}</label></div>
+                                <div class="col-sm-6">
+                                    <apex:inputText value="{!currLead.Referring_MP_HTF_Street_Address__c}"
+                                                    styleClass="form-control refhtfstreet"
+                                                    html-placeholder="0000 NE 00 Ave" id="refhtfstreet" maxlength="40"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_City}</label></div>
+                                <div class="col-sm-6">
+                                    <apex:inputText value="{!currLead.Referring_MP_HTF_City__c}"
+                                                    styleClass="form-control refhtfcity alpha-only"
+                                                    html-placeholder="{!$Label.Wish_Referral_City}" id="refhtfcity"
+                                                    maxlength="50"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_State}</label></div>
+                                <div class="col-sm-6">
+                                    <apex:selectList size="1" id="refhtfstate"
+                                                     value="{!currLead.Referring_MP_HTF_State__c}"
+                                                     styleClass="form-control col-xs-12 c-select state refhtfstate">
+                                        <apex:selectOptions value="{!States}"/>
+                                    </apex:selectList>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_Postal_Code}</label></div>
+                                <div class="col-sm-6">
+                                    <apex:inputText value="{!currLead.Referring_MP_HTF_Zip_Code__c}"
+                                                    styleClass="form-control refhtfzip numbers-only"
+                                                    html-placeholder="00000" id="refhtfzip" maxlength="5"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3"><label>Facility {!$Label.Wish_Referral_Phone}</label></div>
+                                <div class="col-sm-6">
+                                    <apex:inputText value="{!currLead.Referring_MP_HTF_Phone__c}"
+                                                    styleClass="form-control refhtfphone phonemask numbers-only"
+                                                    html-placeholder="(000) 000-0000" id="refhtfphone"
+                                                    html-pattern=".{10,14}" maxlength="10"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3"><label>{!$Label.Wish_Referral_HTF_Department}</label></div>
+                                <div class="col-sm-6">
+                                    <apex:inputField value="{!currLead.Referring_MP_HTF_Department__c}"
+                                                     styleClass="form-control col-xs-12 col-sm-12 c-select refhtfdept"
+                                                     html-placeholder="{!$Label.Wish_Referral_HTF_Department}"
+                                                     id="refhtfdept"/>
                                 </div>
                             </div>
                         </div>
@@ -619,7 +621,7 @@
                         </div>
 
                         <apex:outputPanel id="rr">
-                            <apex:actionRegion>
+                            <apex:actionRegion >
                                 <div class="form-group row">
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Number_of_Siblings}</label>
                                     </div>
@@ -635,26 +637,25 @@
                                 </div>
                                 <div class="form-group row sibInfo">
                                     <apex:outputPanel id="table">
-                                        <apex:outputPanel
-                                                rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
+                                        <apex:outputPanel rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
                                             <label class="col-md-12">{!$Label.Wish_Referral_Sibling_Information}</label>
                                         </apex:outputPanel>
                                         <div class="col-md-12 sib-tablewrap">
                                             <apex:dataTable value="{!SiblingList}" var="currsibling"
                                                             styleClass="table table-maw table-hover">
-                                                <apex:column>
+                                                <apex:column >
                                                     <apex:inputText value="{!currsibling.fName}"
                                                                     styleClass="form-control"
                                                                     html-placeholder="{!$Label.Wish_Referral_Placeholder_First_Name}"
                                                                     id="psibfirstname"/>
                                                 </apex:column>
-                                                <apex:column>
+                                                <apex:column >
                                                     <apex:inputText value="{!currsibling.lName}"
                                                                     styleClass="form-control"
                                                                     html-placeholder="{!$Label.Wish_Referral_Last_Name}"
                                                                     id="psiblastname"/>
                                                 </apex:column>
-                                                <apex:column>
+                                                <apex:column >
                                                     <apex:inputText value="{!currsibling.age}" styleClass="form-control"
                                                                     html-placeholder="{!$Label.Wish_Referral_Age}"
                                                                     id="psibage"/>
@@ -909,166 +910,73 @@
                         </div>
                     </div>
                     <div class="trtMpInfo">
-                        <div class="mpSearchCreate">
-                            <div class="row mpRel" style="margin-top:-15px">
-                                <div class="col-sm-3" style="padding-top:15px">
-                                    <label>{!$Label.Wish_Referral_Treating_Hospital_Facility}</label></div>
-                                <div class="col-sm-6" style="margin-bottom:-12px">
-                                    <div style="display: flex; align-items: center;">
-                                        <label>Filter by State: </label>
-                                        <apex:selectList size="1" id="treatingAccountState"
-                                                         styleClass="form-control col-xs-12 c-select state treatingAccountState"
-                                                         onchange="updateHtfFilter('externalTreatingAccountLookup', this.value, 'Treating Hospital/Facility')">
-                                            <apex:selectOptions value="{!FilterStateOptions}"/>
-                                        </apex:selectList>
-                                    </div>
-                                    <div id="externalTreatingAccountLookup"></div>
-                                    <div style="opacity: 0;pointer-events: none;">
-                                        <apex:inputText id="externalTreatingAccountLookupValidation"/>
-                                    </div>
+                        <div class="row mpRel" style="margin-top:-15px">
+                            <div class="col-sm-3" style="padding-top:15px">
+                                <label>{!$Label.Wish_Referral_Treating_Medical_Professional}</label></div>
+                            <div class="col-sm-6" style="margin-bottom:-12px">
+                                <div style="display: flex; align-items: center;">
+                                    <label>Filter by State: </label>
+                                    <apex:selectList size="1" id="treatingAccountState"
+                                                     styleClass="form-control col-xs-12 c-select state treatingAccountState"
+                                                     onchange="updateHtfFilter('externalTreatingAccountLookup', this.value, 'Treating Hospital/Facility')">
+                                        <apex:selectOptions value="{!FilterStateOptions}"/>
+                                    </apex:selectList>
                                 </div>
-                                <apex:inputHidden id="externalTreatingAccountLookupOutput"
-                                                  value="{!mpHtfSearch.treatingHospitalFacilityId}"/>
+                                <div id="externalTreatingContactLookup"></div>
+                                <apex:inputHidden id="externalTreatingContactLookupOutput"
+                                                  value="{!mpHtfSearch.treatingMedicalProfessionalId}"/>
+                                <div style="opacity: 0;pointer-events: none;">
+                                    <apex:inputText id="externalTreatingContactLookupValidation"/>
+                                </div>
+                                <apex:inputHidden id="treatingContactEmpty" value="{!treatingContactEmpty}"/>
                             </div>
+                        </div>
+                        <div class="trtNewAff">
                             <div class="form-group row">
                                 <div class="col-sm-3"></div>
-                                <div class="col-sm-6"><span class="field-word-seperator"></span></div>
+                                <div class="col-sm-6" style="margin-top:-10px; text-align: center">
+                                    <label>Please provide additional information (Optional)</label>
+                                </div>
+                                <apex:inputHidden id="treatingAffiliation"
+                                                  value="{!createAffiliationTreating}"/>
                             </div>
-                            <div class="form-group row newTrtHtfChk">
-                                <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
-                                    <label class="c-input c-checkbox">
-                                        <apex:inputCheckbox id="createNewTrtHTFchk"
-                                                            onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
-                                        <span class="c-indicator sas"></span>
-                                        {!$Label.Wish_Referral_Create_New_Hospital_Facility}
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="trtHtfForm">
-                                <div class="form-group row">
-                                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_Name}</label></div>
-                                    <div class="col-sm-6">
-                                        <apex:inputText value="{!treatingHtfName}"
-                                                        styleClass="form-control trthtfname alpha-only"
-                                                        html-placeholder="{!$Label.Wish_Referral_Name}" id="trthtfname"
-                                                        maxlength="50"/>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_Address}</label></div>
-                                    <div class="col-sm-6">
-                                        <apex:inputText value="{!currLead.Treating_MP_HTF_Street_Address__c}"
-                                                        styleClass="form-control trthtfstreet"
-                                                        html-placeholder="0000 NE 00 Ave" id="trthtfstreet"
-                                                        maxlength="40"/>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_City}</label></div>
-                                    <div class="col-sm-6">
-                                        <apex:inputText value="{!currLead.Treating_MP_HTF_City__c}"
-                                                        styleClass="form-control trthtfcity alpha-only"
-                                                        html-placeholder="{!$Label.Wish_Referral_City}" id="trthtfcity"
-                                                        maxlength="50"/>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_State}</label></div>
-                                    <div class="col-sm-6">
-                                        <apex:selectList size="1" id="trthtfstate"
-                                                         value="{!currLead.Treating_MP_HTF_State__c}"
-                                                         styleClass="form-control col-xs-12 c-select state trthtfstate">
-                                            <apex:selectOptions value="{!States}"/>
-                                        </apex:selectList>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_Postal_Code}</label></div>
-                                    <div class="col-sm-6">
-                                        <apex:inputText value="{!currLead.Treating_MP_HTF_Zip_Code__c}"
-                                                        styleClass="form-control trthtfzip numbers-only"
-                                                        html-placeholder="00000" id="trthtfzip" maxlength="5"/>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3"><label>Facility {!$Label.Wish_Referral_Phone}</label></div>
-                                    <div class="col-sm-6">
-                                        <apex:inputText value="{!currLead.Treating_MP_HTF_Phone__c}"
-                                                        styleClass="form-control trthtfphone phonemask numbers-only"
-                                                        html-placeholder="(000) 000-0000" id="trthtfphone"
+                            <div class="form-group row">
+                                <div class="col-sm-3"/>
+                                <div class="col-sm-6">
+                                    <div style="display: flex; align-items: center;">
+                                        <label style="width:85px">{!$Label.Wish_Referral_Phone}</label>
+                                        <apex:inputText value="{!treatingNewAffPhone}"
+                                                        styleClass="form-control trtmpaffphone phonemask numbers-only"
+                                                        html-placeholder="(000) 000-0000" id="trtmpaffphone"
                                                         html-pattern=".{10,14}" maxlength="10"/>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_HTF_Department}</label></div>
-                                    <div class="col-sm-6">
-                                        <apex:inputField value="{!currLead.Treating_MP_HTF_Department__c}"
-                                                         styleClass="form-control col-xs-12 col-sm-12 c-select trthtfdept"
-                                                         html-placeholder="{!$Label.Wish_Referral_HTF_Department}"
-                                                         id="trthtfdept"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mpRel" style="margin-top:-15px">
-                                <div class="col-sm-3" style="padding-top:15px">
-                                    <label>{!$Label.Wish_Referral_Treating_Medical_Professional}</label></div>
-                                <div class="col-sm-6" style="margin-bottom:-12px">
-                                    <div id="externalTreatingContactLookup"></div>
-                                    <apex:inputHidden id="externalTreatingContactLookupOutput"
-                                                      value="{!mpHtfSearch.treatingMedicalProfessionalId}"/>
-                                    <div style="opacity: 0;pointer-events: none;">
-                                        <apex:inputText id="externalTreatingContactLookupValidation"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="trtNewAff">
-                                <div class="form-group row">
-                                    <div class="col-sm-3"></div>
-                                    <div class="col-sm-6" style="margin-top:-10px; text-align: center">
-                                        <label>Please provide additional information (Optional)</label>
-                                    </div>
-                                    <apex:inputHidden id="treatingAffiliation"
-                                                      value="{!createAffiliationTreating}"/>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3"/>
-                                    <div class="col-sm-6">
-                                        <div style="display: flex; align-items: center;">
-                                            <label style="width:85px">{!$Label.Wish_Referral_Phone}</label>
-                                            <apex:inputText value="{!treatingNewAffPhone}"
-                                                            styleClass="form-control trtmpaffphone phonemask numbers-only"
-                                                            html-placeholder="(000) 000-0000" id="trtmpaffphone"
-                                                            html-pattern=".{10,14}" maxlength="10"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3"/>
-                                    <div class="col-sm-6">
-                                        <div style="display: flex; align-items: center;">
-                                            <label style="width:85px">{!$Label.Wish_Referral_Email}</label>
-                                            <apex:inputText value="{!treatingNewAffEmail}"
-                                                            styleClass="form-control email-std trtmpaffemail"
-                                                            html-placeholder="medicalprofessional_email@domain.com"
-                                                            id="trtmpaffemail"
-                                                            maxlength="80"/>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-3"></div>
-                                <div class="col-sm-6"><span class="field-word-seperator"></span></div>
-                            </div>
-                            <div class="form-group row newTrtMpChk mpRel">
-                                <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
-                                    <label class="c-input c-checkbox">
-                                        <apex:inputCheckbox id="createNewTrtMPchk"
-                                                            onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
-                                        <span class="c-indicator sas"></span>
-                                        {!$Label.Wish_Referral_Create_New_Medical_Professional}
-                                    </label>
+                                <div class="col-sm-3"/>
+                                <div class="col-sm-6">
+                                    <div style="display: flex; align-items: center;">
+                                        <label style="width:85px">{!$Label.Wish_Referral_Email}</label>
+                                        <apex:inputText value="{!treatingNewAffEmail}"
+                                                        styleClass="form-control email-std trtmpaffemail"
+                                                        html-placeholder="medicalprofessional_email@domain.com" id="trtmpaffemail"
+                                                        maxlength="80"/>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-group row mpRel">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-6"><span class="field-word-seperator"></span></div>
+                        </div>
+                        <div class="form-group row newTrtMpChk mpRel">
+                            <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
+                                <label class="c-input c-checkbox">
+                                    <apex:inputCheckbox id="createNewTrtMPchk"
+                                                        onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
+                                    <span class="c-indicator sas"></span>
+                                    {!$Label.Wish_Referral_Create_New_Medical_Professional}
+                                </label>
                             </div>
                         </div>
                         <div class="medToRepeat trtMpForm">
@@ -1167,6 +1075,99 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="treatingHtf"> <!--class="mpSearchCreate"-->
+                            <div class="row mpRel" style="margin-top: 5px">
+                                <div class="col-sm-3" style="padding-top:15px">
+                                    <label>{!$Label.Wish_Referral_Treating_Hospital_Facility}</label></div>
+                                <div class="col-sm-6" style="margin-bottom:-12px">
+                                    <div id="externalTreatingAccountLookup"></div>
+                                    <div style="opacity: 0;pointer-events: none;">
+                                        <apex:inputText id="externalTreatingAccountLookupValidation"/>
+                                    </div>
+                                </div>
+                                <apex:inputHidden id="externalTreatingAccountLookupOutput"
+                                                  value="{!mpHtfSearch.treatingHospitalFacilityId}"/>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-6"><span class="field-word-seperator"></span></div>
+                            </div>
+                            <div class="form-group row newTrtHtfChk">
+                                <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
+                                    <label class="c-input c-checkbox">
+                                        <apex:inputCheckbox id="createNewTrtHTFchk"
+                                                            onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
+                                        <span class="c-indicator sas"></span>
+                                        {!$Label.Wish_Referral_Create_New_Hospital_Facility}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="trtHtfForm">
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_Name}</label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputText value="{!treatingHtfName}"
+                                                        styleClass="form-control trthtfname alpha-only"
+                                                        html-placeholder="{!$Label.Wish_Referral_Name}" id="trthtfname"
+                                                        maxlength="50"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_Address}</label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputText value="{!currLead.Treating_MP_HTF_Street_Address__c}"
+                                                        styleClass="form-control trthtfstreet"
+                                                        html-placeholder="0000 NE 00 Ave" id="trthtfstreet"
+                                                        maxlength="40"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_City}</label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputText value="{!currLead.Treating_MP_HTF_City__c}"
+                                                        styleClass="form-control trthtfcity alpha-only"
+                                                        html-placeholder="{!$Label.Wish_Referral_City}" id="trthtfcity"
+                                                        maxlength="50"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_State}</label></div>
+                                    <div class="col-sm-6">
+                                        <apex:selectList size="1" id="trthtfstate"
+                                                         value="{!currLead.Treating_MP_HTF_State__c}"
+                                                         styleClass="form-control col-xs-12 c-select state trthtfstate">
+                                            <apex:selectOptions value="{!States}"/>
+                                        </apex:selectList>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_Postal_Code}</label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputText value="{!currLead.Treating_MP_HTF_Zip_Code__c}"
+                                                        styleClass="form-control trthtfzip numbers-only"
+                                                        html-placeholder="00000" id="trthtfzip" maxlength="5"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label>Facility {!$Label.Wish_Referral_Phone}</label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputText value="{!currLead.Treating_MP_HTF_Phone__c}"
+                                                        styleClass="form-control trthtfphone phonemask numbers-only"
+                                                        html-placeholder="(000) 000-0000" id="trthtfphone"
+                                                        html-pattern=".{10,14}" maxlength="10"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"><label>{!$Label.Wish_Referral_HTF_Department}</label></div>
+                                    <div class="col-sm-6">
+                                        <apex:inputField value="{!currLead.Treating_MP_HTF_Department__c}"
+                                                         styleClass="form-control col-xs-12 col-sm-12 c-select trthtfdept"
+                                                         html-placeholder="{!$Label.Wish_Referral_HTF_Department}"
+                                                         id="trthtfdept"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </fieldset>
                 <fieldset class="connected main-office-contact">
@@ -1197,6 +1198,7 @@
                                     <div style="opacity: 0;pointer-events: none;">
                                         <apex:inputText id="externalBestContactLookupValidation"/>
                                     </div>
+                                    <apex:inputHidden id="bestContactEmpty" value="{!bestContactEmpty}"/>
                                 </div>
                             </div>
                             <div class="bestNewAff">
@@ -1430,7 +1432,7 @@
         </div>
     </div>
     <!-- / modal end -->
-    <apex:includeLightning/>
+    <apex:includeLightning />
     <script>
         window.addEventListener('load', () => {
             buildValidationLookupFields();
@@ -1630,7 +1632,7 @@
     <!--<script src="//ssl.wish.org/satellite/staging/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205-staging.js"></script>-->
     <!-- prod -->
     <script src="//ssl.wish.org/satellite/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205.js"></script>
-    <apex:outputPanel>
+    <apex:outputPanel >
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-2.2.4.min.js')}"></script>
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-ui-1.11.3.min.js')}"></script>
         <script>
@@ -1823,7 +1825,7 @@
             createLightningComponent('externalTreatingAccountLookup', 'Account', 'Treating Hospital/Facility',
                 'Name, Alias__c, BillingCity, BillingState', '{0} - {1}, {2}, {3}');
 
-            createLightningComponent('externalTreatingContactLookup', 'Contact', 'Referring Medical Professional',
+            createLightningComponent('externalTreatingContactLookup', 'Contact', 'Treating Medical Professional',
                 'Name, MailingState, MailingCity, Provider_Type__c, Specialty__c', '{0} - {1}, {2}, {3}, {4}');
 
             createLightningComponent('externalBestContactLookup', 'Contact', 'Medical Professional',
@@ -1857,6 +1859,7 @@
             let fieldInput;
             let fieldPair;
             let inputType;
+            let emptyRefContact, emptyTrtContact, emptyBestContact = false;
             if (eventData.lookupId === 'externalReferrerContactLookup') {
                 let externalRefContact = document.querySelector('#externalReferrerContactLookup');
                 field = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0];
@@ -1890,6 +1893,7 @@
             }
             if (field && eventData.eventType === 'select') {
                 field.value = eventData.recordId;
+                //if both MP and HTF populated check if affiliation exists and render email and phone fields if none
                 if (fieldPair.value) {
                     Visualforce.remoting.Manager.invokeAction(
                         '{!$RemoteAction.WishReferralForm_AC.searchAccountContactAffiliation}',
@@ -1912,21 +1916,29 @@
                     );
                 }
                 if (inputType === 'referrerContact') {
+                    document.querySelector('[id$="createNewRefMPchk"]').disabled = true;
                     if (document.querySelector('[id$="createNewRefHTFchk"]').checked) {
                         document.getElementsByClassName('refNewAff')[0].style.display = 'block';
                     } else {
+                        //check if contact is missing all email and phone fields
                         Visualforce.remoting.Manager.invokeAction(
                             '{!$RemoteAction.WishReferralForm_AC.checkEmptyContactFields}',
                             field.value,
                             function (result, event) {
-                                if (event.status && result === true) {
-                                    document.getElementsByClassName('refNewAff')[0].style.display = 'block';
+                                if (event.status) {
+                                    if(result === true) {
+                                        document.getElementsByClassName('refNewAff')[0].style.display = 'block';
+                                        document.querySelectorAll('[id$="referrerContactEmpty"]')[0].value = true;
+                                    } else {
+                                        document.querySelectorAll('[id$="referrerContactEmpty"]')[0].value = false;
+                                    }
                                 }
                             },
                             {escape: true}
                         );
                     }
                 } else if (inputType === 'treatingContact') {
+                    document.querySelector('[id$="createNewTrtMPchk"]').disabled = true;
                     if (document.querySelector('[id$="createNewTrtHTFchk"]').checked) {
                         document.getElementsByClassName('trtNewAff')[0].style.display = 'block';
                     } else {
@@ -1934,14 +1946,20 @@
                             '{!$RemoteAction.WishReferralForm_AC.checkEmptyContactFields}',
                             field.value,
                             function (result, event) {
-                                if (event.status && result === true) {
-                                    document.getElementsByClassName('trtNewAff')[0].style.display = 'block';
+                                if (event.status) {
+                                    if(result === true) {
+                                        document.getElementsByClassName('trtNewAff')[0].style.display = 'block';
+                                        document.querySelectorAll('[id$="treatingContactEmpty"]')[0].value = true;
+                                    } else {
+                                        document.querySelectorAll('[id$="treatingContactEmpty"]')[0].value = false;
+                                    }
                                 }
                             },
                             {escape: true}
                         );
                     }
                 } else if (inputType === 'bestContact') {
+                    document.querySelector('[id$="createNewBestMPchk"]').disabled = true;
                     if (document.querySelector('[id$="createNewTrtHTFchk"]').checked) {
                         document.getElementsByClassName('bestNewAff')[0].style.display = 'block';
                     } else {
@@ -1949,13 +1967,22 @@
                             '{!$RemoteAction.WishReferralForm_AC.checkEmptyContactFields}',
                             field.value,
                             function (result, event) {
-                                if (event.status && result === true) {
-                                    document.getElementsByClassName('bestNewAff')[0].style.display = 'block';
+                                if (event.status) {
+                                    if(result === true) {
+                                        document.getElementsByClassName('bestNewAff')[0].style.display = 'block';
+                                        document.querySelectorAll('[id$="bestContactEmpty"]')[0].value = true;
+                                    } else {
+                                        document.querySelectorAll('[id$="bestContactEmpty"]')[0].value = false;
+                                    }
                                 }
                             },
                             {escape: true}
                         );
                     }
+                } else if(inputType === 'referrerAccount') {
+                    document.querySelector('[id$="createNewRefHTFchk"]').disabled = true;
+                } else if(inputType === 'treatingAccount') {
+                    document.querySelector('[id$="createNewTrtHTFchk"]').disabled = true;
                 }
                 validateForm();
             } else if (field && eventData.eventType === 'clear') {
@@ -1963,20 +1990,37 @@
                     fieldInput.value = '';
                 }
                 field.value = '';
-                if (inputType === 'referrerContact' || inputType === 'referrerAccount') {
+                if (inputType === 'referrerContact') {
+                    document.querySelector('[id$="createNewRefMPchk"]').disabled = false;
                     document.getElementsByClassName('refNewAff')[0].style.display = 'none';
                     document.querySelectorAll('[id$="referrerAffiliation"]')[0].value = false;
+                } else if (inputType === 'referrerAccount') {
+                    document.querySelector('[id$="createNewRefHTFchk"]').disabled = false;
+                    document.querySelectorAll('[id$="referrerAffiliation"]')[0].value = false;
+                    let referringContact = document.getElementById('j_id0:frm:referrerContactEmpty').value;
+                    if(referringContact === 'false') {
+                        document.getElementsByClassName('refNewAff')[0].style.display = 'none';
+                    }
                 } else if (inputType === 'treatingContact') {
+                    document.querySelector('[id$="createNewTrtMPchk"]').disabled = false;
                     document.getElementsByClassName('trtNewAff')[0].style.display = 'none';
                     document.querySelectorAll('[id$="treatingAffiliation"]')[0].value = false;
                 } else if (inputType === 'bestContact') {
+                    document.querySelector('[id$="createNewBestMPchk"]').disabled = false;
                     document.getElementsByClassName('bestNewAff')[0].style.display = 'none';
                     document.querySelectorAll('[id$="bestAffiliation"]')[0].value = false;
                 } else if (inputType === 'treatingAccount') {
-                    document.getElementsByClassName('trtNewAff')[0].style.display = 'none';
+                    document.querySelector('[id$="createNewTrtHTFchk"]').disabled = false;
                     document.querySelectorAll('[id$="treatingAffiliation"]')[0].value = false;
-                    document.getElementsByClassName('bestNewAff')[0].style.display = 'none';
                     document.querySelectorAll('[id$="bestAffiliation"]')[0].value = false;
+                    let treatingContact = document.getElementById('j_id0:frm:treatingContactEmpty').value;
+                    let bestContact = document.getElementById('j_id0:frm:bestContactEmpty').value;
+                    if(treatingContact === 'false') {
+                        document.getElementsByClassName('trtNewAff')[0].style.display = 'none';
+                    }
+                    if(bestContact === 'false') {
+                        document.getElementsByClassName('bestNewAff')[0].style.display = 'none';
+                    }
                 }
                 validateForm();
             }
@@ -1987,6 +2031,7 @@
             validateForm();
             let fieldInput;
             let field;
+            let fieldPair;
             if (id === 'j_id0:frm:createNewRefMPchk') {
                 fieldInput = document.querySelector('#externalReferrerContactLookup lightning-input');
                 field = document.getElementById('j_id0:frm:externalReferrerContactLookupOutput');
@@ -1999,9 +2044,21 @@
             } else if (id === 'j_id0:frm:createNewRefHTFchk') {
                 fieldInput = document.querySelector('#externalReferrerAccountLookup lightning-input');
                 field = document.getElementById('j_id0:frm:externalReferrerAccountLookupOutput');
+                fieldPair = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0];
+                if(fieldPair.value && checked === true) {
+                    document.getElementsByClassName('refNewAff')[0].style.display = 'block';
+                }
             } else if (id === 'j_id0:frm:createNewTrtHTFchk') {
                 fieldInput = document.querySelector('#externalTreatingAccountLookup lightning-input');
                 field = document.getElementById('j_id0:frm:externalTreatingAccountLookupOutput');
+                fieldPair = document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0];
+                let fieldPairBest = document.querySelectorAll('[id$="externalBestContactLookupOutput"]')[0];
+                if(fieldPair.value && checked === true) {
+                    document.getElementsByClassName('trtNewAff')[0].style.display = 'block';
+                }
+                if(fieldPairBest.value && checked === true) {
+                    document.getElementsByClassName('bestNewAff')[0].style.display = 'block';
+                }
             }
             if (field && fieldInput && checked === true) {
                 field.value = '';
