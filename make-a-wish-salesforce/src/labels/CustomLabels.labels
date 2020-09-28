@@ -2374,7 +2374,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Referral State Filter</shortDescription>
-        <value>Please Filter By State</value>
+        <value>Filter By State</value>
     </labels>
     <labels>
         <fullName>Wish_Referral_Create_New_Hospital_Facility</fullName>
