@@ -67,9 +67,9 @@ function formLogic() {
     }), $(".newBestMpChk").on("change", function () {
         checkVisible = $(".newBestMpChk input").is(":checked"), 1 == checkVisible ? ($(".medToRepeatBest").css("display","block"), $(".bestNewAff").css("display","none")) : 0 == checkVisible && ($(".medToRepeatBest").css("display","none"), $(".medToRepeatBest :input").each(function(){$(this).val("")}), $("[id$=bsalutation],[id$=bcategory],[id$=bspecialty]").prop("selectedIndex", 0))
     }), $(".newRefHtfChk").on("change",function() {
-        checkVisible=$(".newRefHtfChk input").is(":checked"),1==checkVisible?$(".refHtfForm").css("display","block"): 0 == checkVisible && ($(".refHtfForm").css("display","none"), $(".refNewAff").css("display","none"), $(".refHtfForm :input").each(function(){$(this).val("")}), $("[id$=refhtfdept]").prop("selectedIndex",0))
+        checkVisible=$(".newRefHtfChk input").is(":checked"),1==checkVisible?$(".refHtfForm").css("display","block"): 0 == checkVisible && ($(".refHtfForm").css("display","none"), $(".refHtfForm :input").each(function(){$(this).val("")}), $("[id$=refhtfdept]").prop("selectedIndex",0))
     }), $(".newTrtHtfChk").on("change",function() {
-        checkVisible=$(".newTrtHtfChk input").is(":checked"),1==checkVisible?$(".trtHtfForm").css("display","block"): 0 == checkVisible && ($(".trtHtfForm").css("display","none"),$(".trtNewAff").css("display","none"), $(".bestNewAff").css("display","none"), $(".trtHtfForm :input").each(function(){$(this).val("")}), $("[id$=trthtfdept]").prop("selectedIndex",0))
+        checkVisible=$(".newTrtHtfChk input").is(":checked"),1==checkVisible?$(".trtHtfForm").css("display","block"): 0 == checkVisible && ($(".trtHtfForm").css("display","none"), $(".trtHtfForm :input").each(function(){$(this).val("")}), $("[id$=trthtfdept]").prop("selectedIndex",0))
     }),  $(".medProvCat").on("change", function () {
         var e = $(".medProvCat").val();
         $.inArray(e, t) > -1 ? ($(".repeatMedProf").css("display", "block"), $(".repeatMedProfBest").css("display", "block")) : ($(".repeatMedProf").css("display", "none"), $(".repeatMedProfBest").css("display", "none"))

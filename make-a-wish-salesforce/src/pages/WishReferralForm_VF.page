@@ -1859,7 +1859,6 @@
             let fieldInput;
             let fieldPair;
             let inputType;
-            let emptyRefContact, emptyTrtContact, emptyBestContact = false;
             if (eventData.lookupId === 'externalReferrerContactLookup') {
                 let externalRefContact = document.querySelector('#externalReferrerContactLookup');
                 field = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0];
@@ -2045,19 +2044,28 @@
                 fieldInput = document.querySelector('#externalReferrerAccountLookup lightning-input');
                 field = document.getElementById('j_id0:frm:externalReferrerAccountLookupOutput');
                 fieldPair = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0];
+                let referringContactEmpty = document.getElementById('j_id0:frm:referrerContactEmpty').value;
                 if(fieldPair.value && checked === true) {
                     document.getElementsByClassName('refNewAff')[0].style.display = 'block';
+                } else if(checked === false && referringContactEmpty === 'false') {
+                    document.getElementsByClassName('refNewAff')[0].style.display = 'none';
                 }
             } else if (id === 'j_id0:frm:createNewTrtHTFchk') {
                 fieldInput = document.querySelector('#externalTreatingAccountLookup lightning-input');
                 field = document.getElementById('j_id0:frm:externalTreatingAccountLookupOutput');
                 fieldPair = document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0];
                 let fieldPairBest = document.querySelectorAll('[id$="externalBestContactLookupOutput"]')[0];
+                let treatingContactEmpty = document.getElementById('j_id0:frm:treatingContactEmpty').value;
+                let bestContactEmpty = document.getElementById('j_id0:frm:bestContactEmpty').value;
                 if(fieldPair.value && checked === true) {
                     document.getElementsByClassName('trtNewAff')[0].style.display = 'block';
+                } else if(checked === false && treatingContactEmpty === 'false') {
+                    document.getElementsByClassName('trtNewAff')[0].style.display = 'none';
                 }
                 if(fieldPairBest.value && checked === true) {
                     document.getElementsByClassName('bestNewAff')[0].style.display = 'block';
+                } else if(checked === false && bestContactEmpty === 'false') {
+                    document.getElementsByClassName('bestNewAff')[0].style.display = 'none';
                 }
             }
             if (field && fieldInput && checked === true) {

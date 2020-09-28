@@ -627,7 +627,6 @@ function formLogic() {
     $(".refHtfForm").css("display", "block");
     } else if (checkVisible == false) {
     $(".refHtfForm").css("display", "none");
-    $(".refNewAff").css("display", "none");
     $(".refHtfForm :input").each(function () {
       $(this).val("");
       });
@@ -642,8 +641,6 @@ function formLogic() {
     $(".trtHtfForm").css("display", "block");
     } else if (checkVisible == false) {
     $(".trtHtfForm").css("display", "none");
-    $(".trtNewAff").css("display", "none");
-    $(".bestNewAff").css("display", "none");
     $(".trtHtfForm :input").each(function () {
       $(this).val("");
       });
