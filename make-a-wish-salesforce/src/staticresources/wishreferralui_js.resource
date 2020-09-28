@@ -10,6 +10,10 @@ function stateFunc() {
     $("select.state option:first").remove(), $(".state").prepend('<option disabled="disabled" selected="selected">Please select a State</option>')
 }
 
+function stateFuncOptional() {
+    $("select.stateOptional option:first").remove(), $(".stateOptional").prepend('<option disabled="disabled" selected="selected">Please select a state (optional)</option>')
+}
+
 function resetSelect() {
     for (var e = document.querySelectorAll("select option"), a = 0, s = e.length; a < s; a++) e[a].selected = e[a].defaultSelected
 }
@@ -440,7 +444,7 @@ function formValidationRules() {
 
 $("[id$=wcdob]").removeAttr("onfocus").mask("99/99/9999", {placeholder: "mm/dd/yyyy"}), $("[id$=email],[id$=pemailaddress],[id$=pemailaddress2],[id$=mpemail]").attr("type", "email"), $(".main-office-contact").css("display", "none"), $(".r2c fieldset table tr td").children().unwrap().unwrap().unwrap().unwrap().unwrap(), $(".r2c input:first").clone().prependTo(".r2c label:first"), $(".r2c input:nth-child(3)").clone().prependTo(".r2c label:nth-child(4)"), $(".r2c input:nth-child(5)").clone().prependTo(".r2c label:nth-child(6)"), $(".r2c input:nth-child(7)").clone().prependTo(".r2c label:nth-child(8)"), $(".r2c input:nth-child(9)").clone().prependTo(".r2c label:nth-child(10)"), $(".r2c > input").remove(), $(".r2c label").addClass("col-xs-12 col-sm-6"), $(".r2c label input").attr("name", "r2c-radio"), $(".r2c-radio").click(function () {
     $(".familyAware").parent().parent().show()
-}), formLogic(), $("select").not(".state,.multi").each(function () {
+}), formLogic(), $("select").not(".state,.multi,.stateOptional").each(function () {
     $(this).find("option:first").remove(), "j_id0:frm:diagnosisYear" == $(this).attr("id") ? $("#j_id0\\:frm\\:diagnosisYear").prepend('<option value="">Year</option>') : "j_id0:frm:diagnosisMonth" == $(this).attr("id") ? $("#j_id0\\:frm\\:diagnosisMonth").prepend('<option value="">Month</option>') : $(this).prepend("<option selected disabled>Please select an option</option>")
 }), $("[id$=diagnosisMonth]").on("change", function () {
     var e = $("[id$=diagnosisYear]");
@@ -458,7 +462,7 @@ $("[id$=wcdob]").removeAttr("onfocus").mask("99/99/9999", {placeholder: "mm/dd/y
     e.preventDefault(), $("input[id$=frm\\:pfirstname2],input[id$=frm\\:plastname2],input[id$=pphonenumber2],input[id$=pemailaddress2],input[id$=pcity2],input[id$=ppostalcode2],select[id$=p-state2],input[id$=paddress2],select[id$=plang2],input[id$=psibfirstname2],input[id$=psiblastname2],input[id$=psibage2]").val(""), $("[id$=p-state2]").prop("selectedIndex", 0), $(this).parents(".connected").prop("hidden", !0), $(".guardian-2").css("display", "block"), "Select an option" == $("[id$=p-state2] option:nth-child(2)").text() && $("[id$=p-state2] option:nth-child(2)").remove(), $("select[id$=p-r2c-2]").prop("selectedIndex", 0), formValidationRules()
 }), $(".remove-block").on("click", function (e) {
     e.preventDefault(), $(".add-guardian").parents(".connected").prop("hidden", !1), $(".guardian-2").css("display", "none"), $("input[id$=frm\\:pfirstname2],input[id$=frm\\:plastname2],input[id$=pphonenumber2],input[id$=pemailaddress2],input[id$=pcity2],input[id$=ppostalcode2],select[id$=p-state2],select[id$=p-r2c-2],input[id$=paddress2],select[id$=plang2],input[id$=psibfirstname2],input[id$=psiblastname2],input[id$=psibage2]").val(""), $("[id$=p-state2]").prop("selectedIndex", 0)
-}), stateFunc(), $("select.multi").chosen({
+}), stateFunc(), stateFuncOptional(), $("select.multi").chosen({
     disable_search: !0,
     placeholder_text_multiple: "Please select all that apply",
     width: "100%"

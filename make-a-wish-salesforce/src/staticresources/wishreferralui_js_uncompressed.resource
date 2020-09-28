@@ -99,7 +99,7 @@ function getRadioVal(form, name) {
 
 // default select option
 $("select")
-  .not(".state,.multi")
+  .not(".state,.multi,.stateOptional")
   .each(function () {
     $(this).find("option:first").remove(); // remove first
     if ($(this).attr("id") == "j_id0:frm:diagnosisYear") {
@@ -313,6 +313,14 @@ function stateFunc() {
   //$('.state').chosen({disable_search:"true", placeholder_text_single: "Please Select a State", width:"100%"});
 }
 stateFunc();
+
+function stateFuncOptional() {
+  $("select.stateOptional option:first").remove(); // remove first
+  $(".stateOptional").prepend(
+    '<option disabled="disabled" selected="selected">Please select a State (Optional)</option>'
+  );
+}
+stateFuncOptional();
 // $('.chosen').on('change', function() {
 //     var stateParents = $( this ).parents().parents();
 //     $(stateParents).removeClass( "has-error" ).children('.col-md-3').children('label').css('color','');
