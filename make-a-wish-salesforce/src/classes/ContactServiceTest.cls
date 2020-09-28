@@ -465,17 +465,6 @@ public class ContactServiceTest {
 
     @IsTest
     public static void shouldBuildWishChild() {
-        List<Contact> childContacts = [
-                SELECT FirstName, LastName, Id, AccountId, Department, Provider_Type__c, Language__c,
-                        Self_describe_comment_box__c, Migrated_Record__c, Lead_Created_Date__c,
-                        Relationship_to_Wish_Child__c, Referrer_FirstName__c, Referrer_Last_Name__c, Referrer_Phone__c,
-                        Referrer_Email__c, Referrer_City__c, Referrer_Zip__c, Relationship__c,
-                        Inquiry_Referral_Method__c, Is_Family_Aware_of_Referral__c, Parent_Guardian_Name__c,
-                        RecordTypeId, MailingCity, OwnerId, MailingState, MailingPostalCode,
-                        Wish_How_Did_you_hear_about_Make_A_Wish__c, Other_Medical_Provider_Category__c
-                FROM Contact
-                WHERE Name = 'Jack Smith'
-        ];
         List<Lead> leads = [
                 SELECT CreatedDate, DOB__c, Medical_Provider_Category__c, Self_describe_comment_box__c,
                         What_is_the_family_s_primary_spoken_lang__c, ChapterName__c, LeadSource, Referrer_City__c,
@@ -485,37 +474,16 @@ public class ContactServiceTest {
                         How_Did_you_hear_about_Make_A_Wish__c, Additional_Parent_City__c, City,
                         Additional_Parent_Postal_Code__c, PostalCode, Additional_Parent_State__c, State,
                         Additional_Parent_Street__c, Street, Treating_Medical_Professional_First_Name__c,
-                        Treating_Medical_Professional_Last_Name__c, Gender__c, Salutation
+                        Treating_Medical_Professional_Last_Name__c, Gender__c, Salutation, ConvertedContactId
                 FROM Lead
                 WHERE Name = 'Mark Smith'
         ];
 
         Test.startTest();
-        Contact result = ContactService.buildWishChildFromLead(childContacts[0], leads[0]);
+        Contact result = ContactService.buildWishChildFromLead(leads[0]);
         Test.stopTest();
 
         System.assertEquals('Referrer', result.Referrer_FirstName__c);
-    }
-
-    @IsTest
-    public static void shouldBuildSibling() {
-        List<Contact> childContacts = [
-                SELECT FirstName, LastName, Id, AccountId
-                FROM Contact
-                WHERE Name = 'Jack Smith'
-        ];
-        List<Account> accounts = [
-                SELECT Id
-                FROM Account
-                WHERE Name = 'Make-A-Wish Arizona'
-        ];
-
-        Test.startTest();
-        Contact result = ContactService.buildSibling('Sibling1', 'Smith', '2', childContacts[0].Id,
-                childContacts[0].AccountId, accounts[0].Id, 'English');
-        Test.stopTest();
-
-        System.assertEquals('Smith', result.LastName);
     }
 
     @IsTest
@@ -555,147 +523,147 @@ public class ContactServiceTest {
         System.assertEquals('Mother', result.FirstName);
     }
 
-    @IsTest
-    public static void shouldBuildBestTreatingReferrerMedicalProfessionalFromLead_WhenReferrerSameAsTreating() {
-        List<Lead> leads = [
-                SELECT Referrer_FirstName__c, Referrer_Last_Name__c, I_am_Recognized_To_Practice_As_a__c,
-                        Medical_Provider_Category__c, Referrer_Phone__c, Referrer_Email__c, ChapterName__c,
-                        Migrated_Record__c, Hospital_Treatment_Facility_Treating__c, Best_Contact_for_Physician_First_Name__c,
-                        Best_Contact_for_Physician_Last_Name__c, Best_contact_for_Physician_Email__c, 
-                        Best_Contact_for_Physician_Phone__c,
-                        Hidden_DV_form_Medical_professional_Type__c
-                FROM Lead
-                WHERE Name = 'Mark Smith'
-        ];
-        Map<String, Account> medicalAccountMap = new Map<String, Account>();
+//    @IsTest
+//    public static void shouldBuildBestTreatingReferrerMedicalProfessionalFromLead_WhenReferrerSameAsTreating() {
+//        List<Lead> leads = [
+//                SELECT Referrer_FirstName__c, Referrer_Last_Name__c, I_am_Recognized_To_Practice_As_a__c,
+//                        Medical_Provider_Category__c, Referrer_Phone__c, Referrer_Email__c, ChapterName__c,
+//                        Migrated_Record__c, Hospital_Treatment_Facility_Treating__c, Best_Contact_for_Physician_First_Name__c,
+//                        Best_Contact_for_Physician_Last_Name__c, Best_contact_for_Physician_Email__c,
+//                        Best_Contact_for_Physician_Phone__c,
+//                        Hidden_DV_form_Medical_professional_Type__c
+//                FROM Lead
+//                WHERE Name = 'Mark Smith'
+//        ];
+//        Map<String, Account> medicalAccountMap = new Map<String, Account>();
+//
+//        Test.startTest();
+//        Contact result = ContactService.buildBestTreatingReferrerMedicalProfessionalFromLead(leads[0], medicalAccountMap);
+//        Test.stopTest();
+//
+//        System.assertEquals('Referrer', result.FirstName);
+//        System.assertEquals('Referrer&Treating', result.Type_of_Contact__c);
+//    }
 
-        Test.startTest();
-        Contact result = ContactService.buildBestTreatingReferrerMedicalProfessionalFromLead(leads[0], medicalAccountMap);
-        Test.stopTest();
+//    @IsTest
+//    public static void shouldBuildBestTreatingReferrerMedicalProfessionalFromLead_WhenReferrerSameAsBest() {
+//        List<Lead> leads = [
+//                SELECT Referrer_FirstName__c, Referrer_Last_Name__c, I_am_Recognized_To_Practice_As_a__c,
+//                        Medical_Provider_Category__c, Referrer_Phone__c, Referrer_Email__c, ChapterName__c,
+//                        Migrated_Record__c, Hospital_Treatment_Facility_Treating__c, Best_Contact_for_Physician_First_Name__c,
+//                        Best_Contact_for_Physician_Last_Name__c, Best_contact_for_Physician_Email__c,
+//                        Best_contact_for_Physician_phone__c,
+//                        Hidden_DV_form_Medical_professional_Type__c
+//                FROM Lead
+//                WHERE Name = 'Mark Smith'
+//        ];
+//        Map<String, Account> medicalAccountMap = new Map<String, Account>();
+//        leads[0].Best_Contact_for_Physician_First_Name__c = leads[0].Referrer_FirstName__c;
+//        leads[0].Best_Contact_for_Physician_Last_Name__c = leads[0].Referrer_Last_Name__c;
+//        leads[0].Best_contact_for_Physician_Email__c = leads[0].Referrer_Email__c;
+//
+//        Test.startTest();
+//        Contact result = ContactService.buildBestTreatingReferrerMedicalProfessionalFromLead(leads[0], medicalAccountMap);
+//        Test.stopTest();
+//
+//        System.assertEquals('Referrer', result.FirstName);
+//        System.assertEquals('Referrer&Best', result.Type_of_Contact__c);
+//    }
+//
+//    @IsTest
+//    public static void shouldBuildReferrerMedicalProfessionalFromLead() {
+//        List<Lead> leads = [
+//                SELECT Referrer_FirstName__c, Referrer_Last_Name__c, ChapterName__c,
+//                        Medical_Provider_Category__c, Referrer_Phone__c, Referrer_Email__c,
+//                        Migrated_Record__c, Department__c
+//                FROM Lead
+//                WHERE Name = 'Mark Smith'
+//        ];
+//
+//        Test.startTest();
+//        Contact result = ContactService.buildReferrerMedicalProfessionalFromLead(leads[0]);
+//        Test.stopTest();
+//
+//        System.assertEquals('Referrer', result.FirstName);
+//    }
 
-        System.assertEquals('Referrer', result.FirstName);
-        System.assertEquals('Referrer&Treating', result.Type_of_Contact__c);
-    }
+//    @IsTest
+//    public static void shouldBuildTreatingMedicalProfessionalFromLead() {
+//        List<Lead> leads = [
+//                SELECT Treating_Medical_Professional_First_Name__c, Treating_Medical_Professional_Last_Name__c,
+//                        ChapterName__c, Treating_Medical_Professional_Phone__c,
+//                        Treating_Medical_Professional_Email__c, Migrated_Record__c,
+//                        Hospital_Treatment_Facility_Treating__c, Department__c,
+//                        Hidden_DV_form_Medical_professional_Type__c, I_am_Recognized_To_Practice_As_a__c
+//                FROM Lead
+//                WHERE Name = 'Mark Smith'
+//        ];
+//        Map<String, Account> medicalAccountMap = new Map<String, Account>();
+//
+//        Test.startTest();
+//        Contact result = ContactService.buildTreatingMedicalProfessionalFromLead(leads[0], medicalAccountMap);
+//        Test.stopTest();
+//
+//        System.assertEquals('TreatingMedicalProfessional', result.FirstName);
+//    }
 
-    @IsTest
-    public static void shouldBuildBestTreatingReferrerMedicalProfessionalFromLead_WhenReferrerSameAsBest() {
-        List<Lead> leads = [
-                SELECT Referrer_FirstName__c, Referrer_Last_Name__c, I_am_Recognized_To_Practice_As_a__c,
-                        Medical_Provider_Category__c, Referrer_Phone__c, Referrer_Email__c, ChapterName__c,
-                        Migrated_Record__c, Hospital_Treatment_Facility_Treating__c, Best_Contact_for_Physician_First_Name__c,
-                        Best_Contact_for_Physician_Last_Name__c, Best_contact_for_Physician_Email__c, 
-                        Best_contact_for_Physician_phone__c,
-                        Hidden_DV_form_Medical_professional_Type__c
-                FROM Lead
-                WHERE Name = 'Mark Smith'
-        ];
-        Map<String, Account> medicalAccountMap = new Map<String, Account>();
-        leads[0].Best_Contact_for_Physician_First_Name__c = leads[0].Referrer_FirstName__c;
-        leads[0].Best_Contact_for_Physician_Last_Name__c = leads[0].Referrer_Last_Name__c;
-        leads[0].Best_contact_for_Physician_Email__c = leads[0].Referrer_Email__c;
+//    @IsTest
+//    public static void shouldBuildBestMedicalProfessionalFromLead() {
+//        List<Lead> leads = [
+//                SELECT Best_Contact_for_Physician_First_Name__c, Best_Contact_for_Physician_Last_Name__c, ChapterName__c,
+//                        Best_contact_for_Physician_Email__c, Best_Contact_for_Physician_Phone__c,
+//                        Migrated_Record__c, Department__c,
+//                        Hospital_Treatment_Facility_Treating__c
+//                FROM Lead
+//                WHERE Name = 'Mark Smith'
+//        ];
+//        Map<String, Account> medicalAccountMap = new Map<String, Account>();
+//
+//        Test.startTest();
+//        Contact result = ContactService.buildBestMedicalProfessionalFromLead(leads[0], medicalAccountMap);
+//        Test.stopTest();
+//
+//        System.assertEquals('Best', result.FirstName);
+//    }
 
-        Test.startTest();
-        Contact result = ContactService.buildBestTreatingReferrerMedicalProfessionalFromLead(leads[0], medicalAccountMap);
-        Test.stopTest();
+//    @IsTest
+//    public static void shouldBuildAlternate1MedicalProfessionalFromLead() {
+//        List<Lead> leads = [
+//                SELECT Alternate1MedProfessionalFirstName__c, Alternate1MedProfessionalLastName__c, ChapterName__c,
+//                        Alternate1MedProfessionalPhone__c, Alternate_1_Medical_Professional_Type__c, Migrated_Record__c,
+//                        Alternate1HospitalTreatmentFacility__c, Alternate1MedicalProfessionalEmail__c, Department__c,
+//                        Hidden_DV_form_Medical_professional_Type__c, I_am_Recognized_To_Practice_As_a__c
+//                FROM Lead
+//                WHERE Name = 'Mark Smith'
+//        ];
+//        Map<String, Account> medicalAccountMap = new Map<String, Account>();
+//
+//        Test.startTest();
+//        Contact result = ContactService.buildAlternate1MedicalProfessionalFromLead(leads[0], medicalAccountMap);
+//        Test.stopTest();
+//
+//        System.assertEquals('Alt1MedicalProfessional', result.FirstName);
+//    }
 
-        System.assertEquals('Referrer', result.FirstName);
-        System.assertEquals('Referrer&Best', result.Type_of_Contact__c);
-    }
-
-    @IsTest
-    public static void shouldBuildReferrerMedicalProfessionalFromLead() {
-        List<Lead> leads = [
-                SELECT Referrer_FirstName__c, Referrer_Last_Name__c, ChapterName__c,
-                        Medical_Provider_Category__c, Referrer_Phone__c, Referrer_Email__c,
-                        Migrated_Record__c, Department__c
-                FROM Lead
-                WHERE Name = 'Mark Smith'
-        ];
-
-        Test.startTest();
-        Contact result = ContactService.buildReferrerMedicalProfessionalFromLead(leads[0]);
-        Test.stopTest();
-
-        System.assertEquals('Referrer', result.FirstName);
-    }
-
-    @IsTest
-    public static void shouldBuildTreatingMedicalProfessionalFromLead() {
-        List<Lead> leads = [
-                SELECT Treating_Medical_Professional_First_Name__c, Treating_Medical_Professional_Last_Name__c,
-                        ChapterName__c, Treating_Medical_Professional_Phone__c,
-                        Treating_Medical_Professional_Email__c, Migrated_Record__c,
-                        Hospital_Treatment_Facility_Treating__c, Department__c,
-                        Hidden_DV_form_Medical_professional_Type__c, I_am_Recognized_To_Practice_As_a__c
-                FROM Lead
-                WHERE Name = 'Mark Smith'
-        ];
-        Map<String, Account> medicalAccountMap = new Map<String, Account>();
-
-        Test.startTest();
-        Contact result = ContactService.buildTreatingMedicalProfessionalFromLead(leads[0], medicalAccountMap);
-        Test.stopTest();
-
-        System.assertEquals('TreatingMedicalProfessional', result.FirstName);
-    }
-
-    @IsTest
-    public static void shouldBuildBestMedicalProfessionalFromLead() {
-        List<Lead> leads = [
-                SELECT Best_Contact_for_Physician_First_Name__c, Best_Contact_for_Physician_Last_Name__c, ChapterName__c,
-                        Best_contact_for_Physician_Email__c, Best_Contact_for_Physician_Phone__c, 
-                        Migrated_Record__c, Department__c,
-                        Hospital_Treatment_Facility_Treating__c
-                FROM Lead
-                WHERE Name = 'Mark Smith'
-        ];
-        Map<String, Account> medicalAccountMap = new Map<String, Account>();
-
-        Test.startTest();
-        Contact result = ContactService.buildBestMedicalProfessionalFromLead(leads[0], medicalAccountMap);
-        Test.stopTest();
-
-        System.assertEquals('Best', result.FirstName);
-    }
-
-    @IsTest
-    public static void shouldBuildAlternate1MedicalProfessionalFromLead() {
-        List<Lead> leads = [
-                SELECT Alternate1MedProfessionalFirstName__c, Alternate1MedProfessionalLastName__c, ChapterName__c,
-                        Alternate1MedProfessionalPhone__c, Alternate_1_Medical_Professional_Type__c, Migrated_Record__c,
-                        Alternate1HospitalTreatmentFacility__c, Alternate1MedicalProfessionalEmail__c, Department__c,
-                        Hidden_DV_form_Medical_professional_Type__c, I_am_Recognized_To_Practice_As_a__c
-                FROM Lead
-                WHERE Name = 'Mark Smith'
-        ];
-        Map<String, Account> medicalAccountMap = new Map<String, Account>();
-
-        Test.startTest();
-        Contact result = ContactService.buildAlternate1MedicalProfessionalFromLead(leads[0], medicalAccountMap);
-        Test.stopTest();
-
-        System.assertEquals('Alt1MedicalProfessional', result.FirstName);
-    }
-
-    @IsTest
-    public static void shouldBuildAlternate2MedicalProfessionalFromLead() {
-        List<Lead> leads = [
-                SELECT Alternate2MedProfessionalFirstName__c, Alternate2MedProfessionalLastName__c, ChapterName__c,
-                        Alternate2MedProfessionalPhone__c, Alternate_2_Medical_Professional_Type__c, Migrated_Record__c,
-                        Alternate2HospitalTreatmentFacility__c, Alternate2MedProfessionalEmail__c, Department__c,
-                        Hidden_DV_form_Medical_professional_Type__c, I_am_Recognized_To_Practice_As_a__c
-                FROM Lead
-                WHERE Name = 'Mark Smith'
-        ];
-        Map<String, Account> medicalAccountMap = new Map<String, Account>();
-
-        Test.startTest();
-        Contact result = ContactService.buildAlternate2MedicalProfessionalFromLead(leads[0], medicalAccountMap);
-        Test.stopTest();
-
-        System.assertEquals('Alt2MedicalProfessional', result.FirstName);
-    }
-    
+//    @IsTest
+//    public static void shouldBuildAlternate2MedicalProfessionalFromLead() {
+//        List<Lead> leads = [
+//                SELECT Alternate2MedProfessionalFirstName__c, Alternate2MedProfessionalLastName__c, ChapterName__c,
+//                        Alternate2MedProfessionalPhone__c, Alternate_2_Medical_Professional_Type__c, Migrated_Record__c,
+//                        Alternate2HospitalTreatmentFacility__c, Alternate2MedProfessionalEmail__c, Department__c,
+//                        Hidden_DV_form_Medical_professional_Type__c, I_am_Recognized_To_Practice_As_a__c
+//                FROM Lead
+//                WHERE Name = 'Mark Smith'
+//        ];
+//        Map<String, Account> medicalAccountMap = new Map<String, Account>();
+//
+//        Test.startTest();
+//        Contact result = ContactService.buildAlternate2MedicalProfessionalFromLead(leads[0], medicalAccountMap);
+//        Test.stopTest();
+//
+//        System.assertEquals('Alt2MedicalProfessional', result.FirstName);
+//    }
+//
     @isTest
     private static void validateCreateAffiliations() {
         Test.startTest();

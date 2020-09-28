@@ -73,6 +73,9 @@ public class DiagnosisVerificationService {
 				}
 		);
 		insert task;
+
+
+		System.debug('EMAIlZ ' + emailMessages);
 		EmailService.sendEmail(emailMessages);
 	}
 }
