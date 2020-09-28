@@ -2390,8 +2390,8 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Referral Other Treating Medical Professional</shortDescription>
-        <value>Please provide the best person in the Treating Medical Professional's Office to contact if different
-            than the Treating Medical Professional</value>
+        <value>Please provide the best person to contact on the Medical Team if different
+        from the Treating Medical Professional</value>
     </labels>
     <labels>
         <fullName>Wish_Referral_Best_Medical_Contact</fullName>

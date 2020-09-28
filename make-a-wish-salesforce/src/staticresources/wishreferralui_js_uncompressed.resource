@@ -583,6 +583,10 @@ function formLogic() {
   $(".refNewAff").css("display", "none");
   } else if (checkVisible == false) {
   $(".refMpForm").css("display", "none");
+  $(".refMpForm :input").each(function () {
+      $(this).val("");
+      });
+      $("[id$=refmpsalutation],[id$=refmpspecialty]").prop("selectedIndex", 0);
   }
   });
 
@@ -594,6 +598,10 @@ function formLogic() {
     $(".trtNewAff").css("display", "none");
     } else if (checkVisible == false) {
     $(".trtMpForm").css("display", "none");
+    $(".medToRepeat :input").each(function () {
+      $(this).val("");
+      });
+      $("[id$=msalutation],[id$=mcategory],[id$=mspecialty]").prop("selectedIndex", 0);
     }
     });
     
@@ -605,6 +613,10 @@ function formLogic() {
     $(".bestNewAff").css("display", "none");
     } else if (checkVisible == false) {
     $(".medToRepeatBest").css("display", "none");
+    $(".medToRepeatBest :input").each(function () {
+      $(this).val("");
+      });
+      $("[id$=bsalutation],[id$=bcategory],[id$=bspecialty]").prop("selectedIndex", 0);
     }
     });
 
@@ -615,7 +627,10 @@ function formLogic() {
     $(".refHtfForm").css("display", "block");
     } else if (checkVisible == false) {
     $(".refHtfForm").css("display", "none");
-    $(".refNewAff").css("display", "none");
+    $(".refHtfForm :input").each(function () {
+      $(this).val("");
+      });
+      $("[id$=refhtfdept]").prop("selectedIndex", 0);
     }
     });
 
@@ -626,8 +641,10 @@ function formLogic() {
     $(".trtHtfForm").css("display", "block");
     } else if (checkVisible == false) {
     $(".trtHtfForm").css("display", "none");
-    $(".trtNewAff").css("display", "none");
-    $(".bestNewAff").css("display", "none");
+    $(".trtHtfForm :input").each(function () {
+      $(this).val("");
+      });
+      $("[id$=trthtfdept]").prop("selectedIndex", 0);
     }
     });
 
@@ -1044,6 +1061,7 @@ $(".repeatMedProf").on("change", function () {
       $(".repeatMedProfBest").css("display","none");
       $(".mpSearchCreate").css("display", "block");
       $(".refNewAff").css("display","none");
+      $(".treatingHtf").css("display", "block");
       $(".trtNewAff").css("display","none");
       $(".bestNewAff").css("display","none");
       $("[id$=refmpcategory],[id$=mcategory],[id$=bcategory]").addClass("medcategory");
@@ -1090,6 +1108,8 @@ $(".repeatMedProf").on("change", function () {
       $(".refMpForm").css("display", "none");
       $(".refHtfForm").css("display", "none");
       $(".mpSearchCreate").css("display", "none");
+      $(".trtNewAff").css("display", "none");
+      $(".treatingHtf").css("display", "none");
       $('[id$=createNewRefMPchk],[id$=createNewTrtMPchk],[id$=createNewBestMPchk],[id$=newRefHtfChk],[id$=newTrtHtfChk]').prop('checked',false);
 
       clearFuncSelf();
@@ -1148,6 +1168,8 @@ $(".repeatMedProf").on("change", function () {
       $(".refMpForm").css("display", "none");
       $(".refHtfForm").css("display", "none");
       $(".mpSearchCreate").css("display", "none");
+      $(".trtNewAff").css("display", "none");
+      $(".treatingHtf").css("display", "none");
       $('[id$=createNewRefMPchk],[id$=createNewTrtMPchk],[id$=createNewBestMPchk],[id$=newRefHtfChk],[id$=newTrtHtfChk]').prop('checked',false);
 
       if (

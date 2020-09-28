@@ -501,13 +501,13 @@ private class WishReferralForm_AC_Test {
         controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
         controller.copyReferrerInfoBest = true;
         controller.currLead.Referring_MP__c = referrer.Id;
-        controller.currLead.Referring_MP_HTF__c = hospital.Id;
+        controller.currLead.Treating_MP_HTF__c = hospital.Id;
         Test.startTest();
         controller.CreateLead();
         Test.stopTest();
         
         System.assert(controller.currLead.Best_Contact__c == controller.currLead.Referring_MP__c);
-        System.assert(controller.currLead.Best_Contact_HTF__c == controller.currLead.Referring_MP_HTF__c);
+        System.assert(controller.currLead.Best_Contact_HTF__c == controller.currLead.Treating_MP_HTF__c);
     }
     
     @isTest
