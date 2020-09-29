@@ -425,11 +425,14 @@ public class AccountService {
             Map<String, List<Account>> chapterAccountMap = new Map<String, List<Account>>();
             Map<Id, Account> chapterNameMap = new Map<Id, Account>(ChapterStaffRecordSharing_AC.getChapterNameById(chapterIds));
             for(Account account : htfAccountList) {
-                String chapterName = chapterNameMap.get(account.Chapter_Name__c).Name;
-                if(chapterAccountMap.containsKey(chapterName)) {
-                    chapterAccountMap.get(chapterName).add(account);
-                } else {
-                    chapterAccountMap.put(chapterName, new List<Account>{account});
+                String chapterName;
+                if(chapterNameMap.containsKey(account.Chapter_Name__c)) {
+                    chapterName = chapterNameMap.get(account.Chapter_Name__c).Name;
+                    if(chapterAccountMap.containsKey(chapterName)) {
+                        chapterAccountMap.get(chapterName).add(account);
+                    } else {
+                        chapterAccountMap.put(chapterName, new List<Account>{account});
+                    }
                 }
             }
             if(!chapterAccountMap.isEmpty()) {
