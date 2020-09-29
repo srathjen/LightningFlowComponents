@@ -12,7 +12,6 @@ public without sharing class WishAffiliationService {
     private static final String WISH_AFFILIATION_RESIDING_WITH_WISH_CHILD_API_NAME = Constant_AC.WISH_AFFILIATION_RESIDING_WITH_WISH_CHILD_API_NAME;
     private static final String CONTACT_FIRSTNAME_API_NAME = Constant_AC.CONTACT_FIRSTNAME_API_NAME;
     private static final String CONTACT_MIDDLENAME_API_NAME = 'Middle_Name__c';
-    private static final String CONTACT_TSHIRTSIZE_API_NAME = 'T_Shirt_Size__c';
     private static final String CONTACT_LASTNAME_API_NAME = Constant_AC.CONTACT_LASTNAME_API_NAME;
     private static final String CONTACT_BIRTHDATE_API_NAME = Constant_AC.CONTACT_BIRTHDATE_API_NAME;
     private static final String CONTACT_MAILINGSTREET_API_NAME = Constant_AC.CONTACT_MAILINGSTREET_API_NAME;
@@ -66,13 +65,13 @@ public without sharing class WishAffiliationService {
      * @description Create wish affiliations for all other wish participants
      * @param newCasesByLeadId Map of new cases by lead Id
      * @param convertedLeadsById Map of all converted leads
-     * @param contacts
+     * @param contacts contacts
      * @param relationships List of new relationships
      * @param medicalAccountMap Map of medical facility accounts by facility name
-     * @return
+     * @return Wish Affiliations
      */
     public static List<Wish_Affiliation__c> createWishAffiliations(Map<Id, Case> newCasesByLeadId, Map<Id, Lead> convertedLeadsById,
-            List<Contact> contacts, List<npe4__Relationship__c> relationships, Map<String, Account> medicalAccountMap) {
+            List<npe4__Relationship__c> relationships) {
         // Duplicate leads exist in convertedLeadsById, so re-map them
         Map<Id, Lead> leadsById = new Map<Id, Lead>();
         for (Lead currentLead : convertedLeadsById.values()) {
@@ -86,15 +85,6 @@ public without sharing class WishAffiliationService {
             }
             relationshipsByContactId.get(currentRelationship.npe4__Contact__c).add(currentRelationship);
         }
-        // Map Contacts
-        Map<Id, Contact> contactsMap = new Map<Id, Contact>();
-        if (contacts != null) {
-            if (!contacts.isEmpty()) {
-                for (Contact ctc : contacts) {
-                    contactsMap.put(ctc.Id, ctc);
-                }
-            }
-        }
         // Create the wish affiliations
         List<Wish_Affiliation__c> affiliationsToInsert = new List<Wish_Affiliation__c>();
         for (Lead currentLead : leadsById.values()) {
@@ -105,14 +95,23 @@ public without sharing class WishAffiliationService {
                 for (npe4__Relationship__c currentRelationship : currentRelationships) {
                     // Medical professional
                     if (currentRelationship.npe4__Type__c == Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL) {
-                        Wish_Affiliation__c affiliation = createNewWishAffiliation(currentCase.Id, currentRelationship, Constant_AC.WISH_AFFILIATION_TYPE_MEDICAL_PROFESSIONAL);
-                        affiliation.Created_Via_Lead_Convert__c = true;
-                        if (medicalAccountMap != null && medicalAccountMap.containsKey(currentLead.Hospital_Treatment_Facility_Treating__c)) {
-                            Contact ctc = contactsMap.get(currentRelationship.npe4__RelatedContact__c);
-                            if (ctc != null && ctc.Hidden_Hospital_Account__c != null) {
-                                affiliation.Health_Treatment_Facility__c = ctc.Hidden_Hospital_Account__c;
-                            }
-                            affiliationsToInsert.add(affiliation);
+                        Wish_Affiliation__c wishAffiliation = createNewWishAffiliation(currentCase.Id, currentRelationship, Constant_AC.WISH_AFFILIATION_TYPE_MEDICAL_PROFESSIONAL);
+                        wishAffiliation.Created_Via_Lead_Convert__c = true;
+                        if (currentRelationship.Referring_Medical_Professional__c && currentLead.Referring_MP_HTF__c != null){
+                                wishAffiliation.Health_Treatment_Facility__c = currentLead.Referring_MP_HTF__c;
+                            affiliationsToInsert.add(wishAffiliation);
+                        } else if (currentRelationship.Treating_HCP__c && currentLead.Treating_MP_HTF__c != null){
+                            wishAffiliation.Health_Treatment_Facility__c = currentLead.Treating_MP_HTF__c;
+                            affiliationsToInsert.add(wishAffiliation);
+                        } else if (currentRelationship.Best_Contact__c && currentLead.Best_Contact_HTF__c != null){
+                            wishAffiliation.Health_Treatment_Facility__c = currentLead.Best_Contact_HTF__c;
+                            affiliationsToInsert.add(wishAffiliation);
+                        } else if (currentLead.Alt_1_MP_HTF__c != null){
+                            wishAffiliation.Health_Treatment_Facility__c = currentLead.Alt_1_MP_HTF__c;
+                            affiliationsToInsert.add(wishAffiliation);
+                        } else if (currentLead.Alt_2_MP_HTF__c != null){
+                            wishAffiliation.Health_Treatment_Facility__c = currentLead.Alt_2_MP_HTF__c;
+                            affiliationsToInsert.add(wishAffiliation);
                         }
                     } else {
                         Wish_Affiliation__c affiliation = createNewWishAffiliation(currentCase.Id, currentRelationship, Constant_AC.WISH_AFFILIATION_TYPE_OTHER);
