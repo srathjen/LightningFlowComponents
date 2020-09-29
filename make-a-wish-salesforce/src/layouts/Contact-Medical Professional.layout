@@ -260,6 +260,12 @@
                 <behavior>Edit</behavior>
                 <field>OwnerId</field>
             </layoutItems>
+            <layoutItems>
+                <page>ChapterChangeConfirmationContact_VF</page>
+                <showLabel>false</showLabel>
+                <showScrollbars>false</showScrollbars>
+                <width>0</width>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
