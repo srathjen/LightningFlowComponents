@@ -167,7 +167,7 @@ public class TaskServiceTest {
             WHERE Name = 'Francis Holland'
         ];
         Test.startTest();
-        Task welcomeTask = TaskService.buildSendWelcomeLetter(contact);
+        Task welcomeTask = TaskService.buildSendWelcomeLetter(contact.Id, contact.OwnerId);
         Test.stopTest();
         System.assert(welcomeTask.Subject == Constant_AC.TASK_SUBJECT_SEND_WELCOME_LETTER);
     }
@@ -180,7 +180,7 @@ public class TaskServiceTest {
             WHERE Name = 'Francis Holland'
         ];
         Test.startTest();
-        Task rushTask = TaskService.buildRush(contact);
+        Task rushTask = TaskService.buildRush(contact.Id);
         Test.stopTest();
         System.assert(rushTask.Subject == Constant_AC.TASK_SUBJECT_RUSH_QUALIFIED);
     }

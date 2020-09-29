@@ -17,12 +17,12 @@ public class TaskService {
     private static final String TASK_RT_STAFF_LABEL = Constant_AC.TASK_RT_STAFF_LABEL;
     private static final String WISH_BIRTHDAY_SUBJECT = 'Wish Child Birthday Reminder';
 
-    public static Task buildSendWelcomeLetter(Contact contact) {
+    public static Task buildSendWelcomeLetter(Id wishChildId, Id wishChildOwnerId) {
         return new Task(
-            OwnerId = contact.OwnerId,
+            WhoId = wishChildId,
+            OwnerId = wishChildOwnerId,
             SystemGeneratedTask__c = true,
             Subject = SUBJECT_SEND_WELCOME_LETTER,
-            WhoId = contact.Id,
             Description = SUBJECT_SEND_WELCOME_LETTER,
             Status = STATUS_IN_PROGRESS,
             ActivityDate = System.today() + 10,
@@ -32,18 +32,18 @@ public class TaskService {
 
     /**
      * Build Rush Task
-     * @param contact
+     * @param wishChildId
      * @return Task
      */
-    public static Task buildRush(Contact contact) {
+    public static Task buildRush(Id wishChildId) {
         return new Task(
+            WhoId = wishChildId,
             Description = DESCRIPTION_RUSH_QUALIFIED,
             Priority = PRIORITY_NORMAL,
             Status = STATUS_COMPLETED,
             Subject = SUBJECT_RUSH_QUALIFIED,
             OwnerId = Label.Salesforce_Support_User_Id,
-            ActivityDate = System.today(),
-            WhoId = contact.Id
+            ActivityDate = System.today()
         );
     }
 
