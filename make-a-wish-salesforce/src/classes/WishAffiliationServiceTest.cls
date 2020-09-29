@@ -648,7 +648,7 @@ public class WishAffiliationServiceTest {
         ];
         // ACT
         Test.startTest();
-        List<Wish_Affiliation__c> wishAffiliations = WishAffiliationService.createWishAffiliations(caseMapByLeadId, leadMap, contacts, relationships, null);
+        List<Wish_Affiliation__c> wishAffiliations = WishAffiliationService.createWishAffiliations(caseMapByLeadId, leadMap, relationships);
         Test.stopTest();
 
         // ASSERT

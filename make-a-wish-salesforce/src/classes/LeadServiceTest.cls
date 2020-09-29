@@ -261,29 +261,6 @@ public class LeadServiceTest {
 	}
 
 	@IsTest
-	public static void shouldCheckIfSameMedicalProfessional() {
-		String firstName1 = 'Mark';
-		String firstName2 = 'Mark';
-		String lastName1 = 'Smith';
-		String lastName2 = 'Smith';
-		String email1 = 'ms@email.com';
-		String email2 = 'ms@email.com';
-		String phone1 = '1233213333';
-		String phone2 = '1233213333';
-
-		Test.startTest();
-		Boolean result = LeadService.isSameMedicalProfessional(
-				firstName1, firstName2,
-				lastName1, lastName2,
-				email1, email2,
-				phone1, phone2
-		);
-		Test.stopTest();
-
-		System.assertEquals(true, result);
-	}
-
-	@IsTest
 	public static void shouldSetRegionCode() {
 		Account account = [
 				SELECT Id
