@@ -25,32 +25,18 @@ public class AccountService {
      * @param convertedAccountMap
      * @return
      */
-    public static Map<Id, Account> setHouseholdFields(Map<Id, Lead> convertedAccountMap) {
-        Map<Id, Account> accountMap = new Map<Id, Account>();
-        for (Account account : [
-                SELECT Id, Name, Volunteer_Manager__c, Intake_Manager__c,
-                        Volunteer_Manager__r.Name, Volunteer_Manager__r.Email,
-                        RecordTypeId
-                FROM Account
-                WHERE Id IN:convertedAccountMap.keySet()
-        ]) {
-            if (convertedAccountMap.containsKey(account.Id)) {
-                if (convertedAccountMap.get(account.Id).FirstName == null) {
-                    account.Name = convertedAccountMap.get(account.Id).LastName
-                            + FAMILY_HOUSEHOLD_NAME_APPEND;
-                } else {
-                    account.Name = convertedAccountMap.get(account.Id).FirstName
-                            + ' '
-                            + convertedAccountMap.get(account.Id).LastName
-                            + FAMILY_HOUSEHOLD_NAME_APPEND;
-                }
-                account.RecordTypeId = HOUSEHOLD_RECORD_TYPE_ID;
-                account.PrimaryLanguage__c =
-                        convertedAccountMap.get(account.Id).What_is_the_family_s_primary_spoken_lang__c;
-                accountMap.put(account.Id, account);
-            }
-        }
-        return accountMap;
+    public static Account setHouseholdFields(Lead lead) {
+		Account wishChildHouseholdAccount = new Account();
+		wishChildHouseholdAccount.Id = lead.ConvertedAccountId;
+		if (lead.FirstName == null) {
+			wishChildHouseholdAccount.Name = lead.LastName + FAMILY_HOUSEHOLD_NAME_APPEND;
+		} else {
+			wishChildHouseholdAccount.Name = lead.FirstName + ' ' + lead.LastName + FAMILY_HOUSEHOLD_NAME_APPEND;
+		}
+		wishChildHouseholdAccount.RecordTypeId = HOUSEHOLD_RECORD_TYPE_ID;
+		wishChildHouseholdAccount.PrimaryLanguage__c =
+				lead.What_is_the_family_s_primary_spoken_lang__c;
+        return wishChildHouseholdAccount;
     }
 
     /**
