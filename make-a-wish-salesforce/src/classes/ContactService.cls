@@ -1925,8 +1925,10 @@ public class ContactService {
                 AND Chapter_Name__c != null
             ]);
             for(Contact mpContact : contactHtfMap.values()) {
-                mpContact.Region_Chapter__c = accountMap.get(mpContact.npsp__Primary_Affiliation__c).Chapter_Name__c;
-                mpContact.Hidden_Chapter__c = mpContact.Region_Chapter__c;
+                if(accountMap.containsKey(mpContact.npsp__Primary_Affiliation__c)) {
+                    mpContact.Region_Chapter__c = accountMap.get(mpContact.npsp__Primary_Affiliation__c).Chapter_Name__c;
+                    mpContact.Hidden_Chapter__c = mpContact.Region_Chapter__c;
+                }
             }
         }
     }
@@ -1947,8 +1949,10 @@ public class ContactService {
             AND Region_Chapter__c = null]);
         
         for(Contact contact : mpContactList) {
-            contact.Region_Chapter__c = htfAccountMap.get(contact.npsp__Primary_Affiliation__c).Chapter_Name__c;
-            contact.Hidden_Chapter__c = contact.Region_Chapter__c;
+            if(htfAccountMap.containsKey(contact.npsp__Primary_Affiliation__c)) {
+                contact.Region_Chapter__c = htfAccountMap.get(contact.npsp__Primary_Affiliation__c).Chapter_Name__c;
+                contact.Hidden_Chapter__c = contact.Region_Chapter__c;
+            }
         }
         try {
             update mpContactList;
