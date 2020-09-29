@@ -2369,6 +2369,14 @@
         <value>a1a4C000000cfNMQAY</value>
     </labels>
     <labels>
+        <fullName>Wish_Referral_State_Filter</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral State Filter</shortDescription>
+        <value>Filter By State</value>
+    </labels>
+    <labels>
         <fullName>Wish_Referral_Create_New_Hospital_Facility</fullName>
         <categories>Wish Referral</categories>
         <language>en_US</language>

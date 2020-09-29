@@ -602,7 +602,6 @@ global class WishReferralForm_AC {
 	*/
 	public List<SelectOption> getFilterStateOptions() {
 		List<SelectOption> predefinedOptions = new List<SelectOption>();
-		predefinedOptions.add(new SelectOption('', 'Select an option'));
 		predefinedOptions.add(new SelectOption('', 'None'));
 		List<SelectOption> options = new List<SelectOption>(getPicklistValues('State_Picklist__c', predefinedOptions));
 		return options;
