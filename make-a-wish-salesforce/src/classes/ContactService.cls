@@ -17,17 +17,8 @@ public class ContactService {
     private final static String CHAPTER_ROLE_WISH_GRANTER = Constant_AC.CHAPTER_ROLE_WISH_GRANTER;
     private final static String CHAPTER_ROLE_WISH_GRANTER_MENTOR = Constant_AC.CHAPTER_ROLE_WISH_GRANTER_MENTOR;
     private final static String WISH_CHILD_RECORD_TYPE_LABEL = Constant_AC.CONTACT_WISH_CHILD_RT_LABEL;
-    private static final String LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL;
-    private static final String LEAD_DV_FORM_TYPE_BEST_CONTACT = Constant_AC.LEAD_DV_FORM_TYPE_BEST_CONTACT;
-    private static final String LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL;
-    private static final String LEAD_DV_FORM_TYPE_ALTERNATE_2_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_2_MEDICAL_PROFESSIONAL;
     private static final String LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN;
     private static final String CONTACT_TYPE_PARENT_LEGAL_GUARDIAN = Constant_AC.CONTACT_TYPE_PARENT_LEGAL_GUARDIAN;
-    private static final String CONTACT_TYPE_REFERRER_AND_BEST = Constant_AC.CONTACT_TYPE_REFERRER_AND_BEST;
-    private static final String CONTACT_TYPE_REFERRER_AND_TREATING = Constant_AC.CONTACT_TYPE_REFERRER_AND_TREATING;
-    private static final String CONTACT_TYPE_BEST = Constant_AC.CONTACT_TYPE_BEST;
-    private static final String CONTACT_TYPE_TREATING = Constant_AC.CONTACT_TYPE_TREATING;
-    private static final String CONTACT_TYPE_REFERRING = Constant_AC.CONTACT_TYPE_REFERRING;
     private static final String BOARD_MEMBER_RT_LABEL = Constant_AC.BOARD_MEMBER_RT_LABEL;
     private static final String SALUTATION_MASTER = Constant_AC.CONTACT_SALUTATION_MASTER;
     private static final String SALUTATION_MR = Constant_AC.CONTACT_SALUTATION_MR;
@@ -35,13 +26,10 @@ public class ContactService {
     private static final String SALUTATION_MS = Constant_AC.CONTACT_SALUTATION_MS;
     private static final String GENDER_MALE = Constant_AC.CONTACT_GENDER_MALE;
     private static final String GENDER_FEMALE = Constant_AC.CONTACT_GENDER_FEMALE;
-    private static final String UNKNOWN = Constant_AC.CONTACT_NAME_UNKNOWN;
-    private static final String WORK_EMAIL = Constant_AC.CONTACT_PREFERRED_EMAIL_WORK;
     private static final String AFFILIATION_STATUS_ACTIVE = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
     private static final String AFFILIATION_STATUS_PENDING = Constant_AC.ORG_AFFILIATION_STATUS_PENDING;
     private final static String ACCOUNT_NAME_MAW_AMERICA = Constant_AC.ACCOUNT_NAME_MAW_AMERICA;
     private final static String ROLE_NATIONAL_STAFF = Constant_AC.ROLE_NATIONAL_STAFF;
-    private static final String DASH = '-';
     private static final String EMPTY = '';
     private final static String REMOVE = 'Remove';
     private final static String PHONE_PLACEHOLDER = '9912121313';
@@ -278,7 +266,9 @@ public class ContactService {
      * @param lead
      * @return
      */
-    public static Contact buildWishChildFromLead(Contact wishChild, Lead lead) {
+    public static Contact buildWishChildFromLead(Lead lead) {
+        Contact wishChild = new Contact();
+        wishChild.Id = lead.ConvertedContactId;
         wishChild.Lead_Created_Date__c = Date.valueOf(lead.CreatedDate);
         wishChild.Birthdate = lead.DOB__c;
         wishChild.RecordTypeId = WISH_CHILD_RECORD_TYPE_ID;
@@ -333,66 +323,6 @@ public class ContactService {
     }
 
     /**
-     * Build Sibling
-     * @param firstName
-     * @param lastName
-     * @param age
-     * @param wishChildId
-     * @param accountId
-     * @param regionChapterId
-     * @param language
-     * @return Contact
-     */
-    public static Contact buildSibling(String firstName, String lastName, String age,
-            Id wishChildId, Id accountId, Id regionChapterId, String language) {
-        Contact newFamily = new Contact();
-        newFamily.FirstName = firstName;
-        newFamily.LastName = lastName;
-        newFamily.Sibling_Age__c = age;
-        newFamily.Wish_Child_Id_Hidden__c = wishChildId;
-        newFamily.RecordTypeId = WISH_FAMILY_RECORD_TYPE_ID;
-        newFamily.AccountId = accountId;
-        newFamily.Region_Chapter__c = regionChapterId;
-        newFamily.Language__c = language;
-        if ((!newFamily.FirstName.containsOnly(DASH) && newFamily.FirstName != null)
-                && (!newFamily.LastName.containsOnly(DASH) && newFamily.LastName != null)
-                && newFamily.Sibling_Age__c.isNumeric()) {
-        }
-        if ((!newFamily.FirstName.containsOnly(DASH)
-                && newFamily.FirstName != null)
-                && newFamily.LastName.containsOnly(DASH)
-                && newFamily.Sibling_Age__c.isNumeric()) {
-            newFamily.LastName = UNKNOWN;
-        }
-        if (newFamily.FirstName.containsOnly(DASH)
-                && (!newFamily.LastName.containsOnly(DASH)
-                && newFamily.LastName != null)
-                && newFamily.Sibling_Age__c.isNumeric()) {
-            newFamily.FirstName = EMPTY;
-        }
-        if ((!newFamily.FirstName.containsOnly(DASH) && newFamily.FirstName != null)
-                && (!newFamily.LastName.containsOnly(DASH) && newFamily.LastName != null)
-                && newFamily.Sibling_Age__c.containsOnly(DASH)) {
-            newFamily.Sibling_Age__c = null;
-        }
-        if (newFamily.FirstName.containsOnly(DASH)
-                && (!newFamily.LastName.containsOnly(DASH)
-                && newFamily.LastName != null)
-                && newFamily.Sibling_Age__c.containsOnly(DASH)) {
-            newFamily.FirstName = EMPTY;
-            newFamily.Sibling_Age__c = null;
-        }
-        if ((!newFamily.FirstName.containsOnly(DASH)
-                && newFamily.FirstName != null)
-                && newFamily.LastName.containsOnly(DASH)
-                && newFamily.Sibling_Age__c.containsOnly(DASH)) {
-            newFamily.LastName = UNKNOWN;
-            newFamily.Sibling_Age__c = null;
-        }
-        return newFamily;
-    }
-
-    /**
      * Build Parent Legal Guardian From Lead
      * @param lead
      * @param medicalAccountMap
@@ -418,8 +348,9 @@ public class ContactService {
         parentLegalGuardian.Language__c = lead.What_is_the_family_s_primary_spoken_lang__c;
         parentLegalGuardian.Relationship__c = lead.Parent_Relationship_to_Child__c;
         parentLegalGuardian.Migrated_Record__c = lead.Migrated_Record__c;
-        if (lead.Relationship_to_child__c == LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN) {
-            parentLegalGuardian.Type_of_Contact__c = LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN;
+        parentLegalGuardian.Type_of_Contact__c = Constant_AC.CONTACT_TYPE_PARENT_LEGAL_GUARDIAN;
+        if (lead.Relationship_to_child__c.equals(LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN)) {
+            parentLegalGuardian.Type_of_Contact__c = Constant_AC.CONTACT_TYPE_REFERRING;
         }
         return parentLegalGuardian;
     }
@@ -427,7 +358,6 @@ public class ContactService {
     /**
      * Build Additional Parent Legal Guardian From Lead
      * @param lead
-     * @param medicalAccountMap
      * @return Contact
      */
     public static Contact buildAdditionalParentLegalGuardianFromLead(Lead lead) {
@@ -449,6 +379,7 @@ public class ContactService {
         additionalParentLegalGuardian.Relationship__c = lead.Additional_Parent_Relationship_to_Child__c;
         additionalParentLegalGuardian.Region_Chapter__c = lead.ChapterName__c;
         additionalParentLegalGuardian.Migrated_Record__c = lead.Migrated_Record__c;
+        additionalParentLegalGuardian.Type_of_Contact__c = Constant_AC.CONTACT_TYPE_PARENT_LEGAL_GUARDIAN;
         if (lead.Additional_Parent_City__c != lead.City ||
                 lead.Additional_Parent_Postal_Code__c != lead.PostalCode ||
                 lead.Additional_Parent_State__c != lead.State ||
@@ -456,207 +387,6 @@ public class ContactService {
             additionalParentLegalGuardian.npsp__is_Address_Override__c = true;
         }
         return additionalParentLegalGuardian;
-    }
-
-    /**
-     * Build Best, Treating, Referring Medical Professional are same Contact From Lead
-     * @param lead
-     * @param medicalAccountMap
-     * @return Contact
-     */
-    public static Contact buildBestTreatingReferrerMedicalProfessionalFromLead(Lead lead, Map<String, Account> medicalAccountMap) {
-        Contact newSameReferrerMedicalContact = new Contact();
-        newSameReferrerMedicalContact.FirstName = lead.Referrer_FirstName__c;
-        newSameReferrerMedicalContact.LastName = lead.Referrer_Last_Name__c ;
-        if (medicalAccountMap.containsKey(lead.Hospital_Treatment_Facility_Treating__c)) {
-            newSameReferrerMedicalContact.Hidden_Hospital_Account__c =
-                    medicalAccountMap.get(lead.Hospital_Treatment_Facility_Treating__c).Id;
-        }
-        if (lead.Best_Contact_for_Physician_First_Name__c == lead.Referrer_FirstName__c
-                && lead.Best_Contact_for_Physician_Last_Name__c == lead.Referrer_Last_Name__c
-                && (lead.Best_contact_for_Physician_Email__c == lead.Referrer_Email__c)) {
-            newSameReferrerMedicalContact.Type_of_Contact__c = CONTACT_TYPE_REFERRER_AND_BEST;
-            if (lead.Hidden_DV_form_Medical_professional_Type__c == LEAD_DV_FORM_TYPE_BEST_CONTACT
-                    && lead.I_am_Recognized_To_Practice_As_a__c != null) {
-                newSameReferrerMedicalContact.Provider_Type__c = lead.I_am_Recognized_To_Practice_As_a__c;
-            } else {
-                newSameReferrerMedicalContact.Provider_Type__c = lead.Medical_Provider_Category__c;
-            }
-        } else {
-            newSameReferrerMedicalContact.Type_of_Contact__c = CONTACT_TYPE_REFERRER_AND_TREATING;
-            if (lead.Hidden_DV_form_Medical_professional_Type__c == LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL
-                    && lead.I_am_Recognized_To_Practice_As_a__c != null) {
-                newSameReferrerMedicalContact.Provider_Type__c = lead.I_am_Recognized_To_Practice_As_a__c;
-            } else {
-                newSameReferrerMedicalContact.Provider_Type__c = lead.Medical_Provider_Category__c;
-            }
-        }
-        newSameReferrerMedicalContact.AccountId = lead.ChapterName__c;
-        newSameReferrerMedicalContact.npe01__WorkPhone__c = lead.Referrer_Phone__c;
-        newSameReferrerMedicalContact.Phone = lead.Referrer_Phone__c;
-        newSameReferrerMedicalContact.npe01__Preferred_Email__c = WORK_EMAIL;
-        newSameReferrerMedicalContact.npe01__WorkEmail__c = lead.Referrer_Email__c;
-        newSameReferrerMedicalContact.RecordTypeId = MEDICAL_PROFESSIONAL_RECORD_TYPE_ID;
-        newSameReferrerMedicalContact.Region_Chapter__c = lead.ChapterName__c;
-        newSameReferrerMedicalContact.Migrated_Record__c = lead.Migrated_Record__c;
-        return newSameReferrerMedicalContact;
-    }
-
-    /**
-     * Build Referring Medical Professional From Lead
-     * @param lead
-     * @param medicalAccountMap
-     * @return Contact
-     */
-    public static Contact buildReferrerMedicalProfessionalFromLead(Lead lead) {
-        Contact newReferrerMedicalContact = new Contact();
-        newReferrerMedicalContact.FirstName = lead.Referrer_FirstName__c;
-        newReferrerMedicalContact.LastName = lead.Referrer_Last_Name__c;
-        newReferrerMedicalContact.AccountId = lead.ChapterName__c;
-        newReferrerMedicalContact.Phone = lead.Referrer_Phone__c;
-        newReferrerMedicalContact.npe01__WorkPhone__c = lead.Referrer_Phone__c;
-        newReferrerMedicalContact.npe01__WorkEmail__c = lead.Referrer_Email__c;
-        newReferrerMedicalContact.npe01__Preferred_Email__c = WORK_EMAIL;
-        newReferrerMedicalContact.Provider_Type__c = lead.Medical_Provider_Category__c;
-        newReferrerMedicalContact.RecordTypeId = MEDICAL_PROFESSIONAL_RECORD_TYPE_ID;
-        newReferrerMedicalContact.Region_Chapter__c = lead.ChapterName__c;
-        newReferrerMedicalContact.Migrated_Record__c = lead.Migrated_Record__c;
-        newReferrerMedicalContact.Type_of_Contact__c = CONTACT_TYPE_REFERRING;
-        if (lead.Department__c != null) {
-            newReferrerMedicalContact.Department = lead.Department__c;
-        }
-        return newReferrerMedicalContact;
-    }
-
-    /**
-     * Build Treating Medical Professional From Lead
-     * @param lead
-     * @param medicalAccountMap
-     * @return Contact
-     */
-    public static Contact buildTreatingMedicalProfessionalFromLead(Lead lead, Map<String, Account> medicalAccountMap) {
-        Contact newTreatingMedicalContact = new Contact();
-        newTreatingMedicalContact.FirstName = lead.Treating_Medical_Professional_First_Name__c;
-        newTreatingMedicalContact.LastName = lead.Treating_Medical_Professional_Last_Name__c;
-        newTreatingMedicalContact.AccountId = lead.ChapterName__c;
-        newTreatingMedicalContact.Phone = lead.Treating_Medical_Professional_Phone__c;
-        newTreatingMedicalContact.npe01__WorkPhone__c = lead.Treating_Medical_Professional_Phone__c;
-        newTreatingMedicalContact.npe01__WorkEmail__c = lead.Treating_Medical_Professional_Email__c;
-        newTreatingMedicalContact.npe01__Preferred_Email__c = WORK_EMAIL;
-        newTreatingMedicalContact.RecordTypeId = MEDICAL_PROFESSIONAL_RECORD_TYPE_ID;
-        newTreatingMedicalContact.Region_Chapter__c = lead.ChapterName__c;
-        newTreatingMedicalContact.Migrated_Record__c = lead.Migrated_Record__c;
-        newTreatingMedicalContact.Type_of_Contact__c = CONTACT_TYPE_TREATING;
-        if (medicalAccountMap.containsKey(lead.Hospital_Treatment_Facility_Treating__c)) {
-            newTreatingMedicalContact.Hidden_Hospital_Account__c =
-                    medicalAccountMap.get(lead.Hospital_Treatment_Facility_Treating__c).Id;
-        }
-        if (lead.Department__c != null) {
-            newTreatingMedicalContact.Department = lead.Department__c;
-        }
-        if (lead.Hidden_DV_form_Medical_professional_Type__c == LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL) {
-            newTreatingMedicalContact.Provider_Type__c = lead.I_am_Recognized_To_Practice_As_a__c;
-        }
-        return newTreatingMedicalContact;
-    }
-
-    /**
-     * Build Best Medical Professional From Lead
-     * @param lead
-     * @param medicalAccountMap
-     * @return Contact
-     */
-    public static Contact buildBestMedicalProfessionalFromLead(Lead lead, Map<String, Account> medicalAccountMap) {
-        Contact newBestContactMedicalContact = new Contact();
-        newBestContactMedicalContact.FirstName = lead.Best_Contact_for_Physician_First_Name__c;
-        newBestContactMedicalContact.LastName = lead.Best_Contact_for_Physician_Last_Name__c;
-        newBestContactMedicalContact.AccountId = lead.ChapterName__c;
-        newBestContactMedicalContact.npe01__Preferred_Email__c = WORK_EMAIL;
-        newBestContactMedicalContact.npe01__WorkEmail__c = lead.Best_contact_for_Physician_Email__c;
-        newBestContactMedicalContact.npe01__WorkPhone__c = lead.Best_Contact_for_Physician_Phone__c;
-        newBestContactMedicalContact.npe01__PreferredPhone__c = Constant_AC.CONTACT_PHONE_WORK;
-        newBestContactMedicalContact.RecordTypeId = MEDICAL_PROFESSIONAL_RECORD_TYPE_ID;
-        newBestContactMedicalContact.Region_Chapter__c = lead.ChapterName__c;
-        newBestContactMedicalContact.Migrated_Record__c = lead.Migrated_Record__c;
-        newBestContactMedicalContact.Type_of_Contact__c = CONTACT_TYPE_BEST;
-        if (lead.Department__c != null) {
-            newBestContactMedicalContact.Department = lead.Department__c;
-        }
-        if (medicalAccountMap.containsKey(lead.Hospital_Treatment_Facility_Treating__c)) {
-            newBestContactMedicalContact.Hidden_Hospital_Account__c =
-                    medicalAccountMap.get(lead.Hospital_Treatment_Facility_Treating__c).Id;
-        }
-        return newBestContactMedicalContact;
-    }
-
-    /**
-     * Build Alternate1 Medical Professional From Lead
-     * @param lead
-     * @param medicalAccountMap
-     * @return Contact
-     */
-    public static Contact buildAlternate1MedicalProfessionalFromLead(Lead lead, Map<String, Account> medicalAccountMap) {
-        Contact newAlt1MedicalContact = new Contact();
-        newAlt1MedicalContact.LastName = lead.Alternate1MedProfessionalLastName__c;
-        newAlt1MedicalContact.AccountId = lead.ChapterName__c;
-        newAlt1MedicalContact.npe01__WorkPhone__c = lead.Alternate1MedProfessionalPhone__c;
-        newAlt1MedicalContact.npe01__Preferred_Email__c = WORK_EMAIL;
-        newAlt1MedicalContact.Provider_Type__c = lead.Alternate_1_Medical_Professional_Type__c;
-        newAlt1MedicalContact.RecordTypeId = MEDICAL_PROFESSIONAL_RECORD_TYPE_ID;
-        newAlt1MedicalContact.Region_Chapter__c = lead.ChapterName__c;
-        newAlt1MedicalContact.Migrated_Record__c = lead.Migrated_Record__c;
-        if (lead.Alternate1MedProfessionalFirstName__c != null) {
-            newAlt1MedicalContact.FirstName = lead.Alternate1MedProfessionalFirstName__c;
-        }
-        if (medicalAccountMap.containsKey(lead.Alternate1HospitalTreatmentFacility__c)) {
-            newAlt1MedicalContact.Hidden_Hospital_Account__c =
-                    medicalAccountMap.get(lead.Alternate1HospitalTreatmentFacility__c).Id;
-        }
-        if (lead.Alternate1MedicalProfessionalEmail__c != null) {
-            newAlt1MedicalContact.npe01__WorkEmail__c = lead.Alternate1MedicalProfessionalEmail__c;
-        }
-        if (lead.Department__c != null) {
-            newAlt1MedicalContact.Department = lead.Department__c;
-        }
-        if (lead.Hidden_DV_form_Medical_professional_Type__c == LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL) {
-            newAlt1MedicalContact.Provider_Type__c = lead.I_am_Recognized_To_Practice_As_a__c;
-        }
-        return newAlt1MedicalContact;
-    }
-
-    /**
-     * Build Alternate2 Medical Professional From Lead
-     * @param lead
-     * @param medicalAccountMap
-     * @return Contact
-     */
-    public static Contact buildAlternate2MedicalProfessionalFromLead(Lead lead, Map<String, Account> medicalAccountMap) {
-        Contact newAlt2MedicalContact = new Contact();
-        newAlt2MedicalContact.LastName = lead.Alternate2MedProfessionalLastName__c;
-        newAlt2MedicalContact.AccountId = lead.ChapterName__c;
-        newAlt2MedicalContact.npe01__Preferred_Email__c = WORK_EMAIL;
-        newAlt2MedicalContact.npe01__WorkPhone__c = lead.Alternate2MedProfessionalPhone__c;
-        newAlt2MedicalContact.Provider_Type__c = lead.Alternate_2_Medical_Professional_Type__c;
-        newAlt2MedicalContact.RecordTypeId = MEDICAL_PROFESSIONAL_RECORD_TYPE_ID;
-        newAlt2MedicalContact.Region_Chapter__c = lead.ChapterName__c;
-        newAlt2MedicalContact.Migrated_Record__c = lead.Migrated_Record__c;
-        if (lead.Alternate2MedProfessionalFirstName__c != null) {
-            newAlt2MedicalContact.FirstName = lead.Alternate2MedProfessionalFirstName__c;
-        }
-        if (medicalAccountMap.containsKey(lead.Alternate2HospitalTreatmentFacility__c)) {
-            newAlt2MedicalContact.Hidden_Hospital_Account__c =
-                    medicalAccountMap.get(lead.Alternate2HospitalTreatmentFacility__c).Id;
-        }
-        if (lead.Alternate2MedProfessionalEmail__c != null) {
-            newAlt2MedicalContact.npe01__WorkEmail__c = lead.Alternate2MedProfessionalEmail__c;
-        }
-        if (lead.Department__c != null) {
-            newAlt2MedicalContact.Department = lead.Department__c;
-        }
-        if (lead.Hidden_DV_form_Medical_professional_Type__c == LEAD_DV_FORM_TYPE_ALTERNATE_2_MEDICAL_PROFESSIONAL) {
-            newAlt2MedicalContact.Provider_Type__c = lead.I_am_Recognized_To_Practice_As_a__c;
-        }
-        return newAlt2MedicalContact;
     }
 
     /**
@@ -2163,6 +1893,106 @@ public class ContactService {
                 if(englishSpanishMap.containsKey(newContact.npe01__PreferredPhone__c) && preferredPhonePicklistValues.containsKey(englishSpanishMap.get(newContact.npe01__PreferredPhone__c))) {
                     newContact.npe01__PreferredPhone__c = englishSpanishMap.get(newContact.npe01__PreferredPhone__c);
                 }
+            }
+        }
+    }
+    
+    /**
+    * Populate region chapter lookup based on primary account chapter relationship
+    * @param contactsList
+    * @param oldContactsMap
+    */
+    public static void populateRegionChapterOnMedicalProfessional(List<Contact> contactsList, Map<Id, Contact> oldContactsMap) {
+        if(contactsList.isEmpty()) {
+            return;
+        }
+        Map<Id, Contact> contactHtfMap = new Map<Id, Contact>();
+        for(Contact con : contactsList) {
+            if(con.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID && con.Region_Chapter__c == null) {
+                if(oldContactsMap == null && con.npsp__Primary_Affiliation__c != null) {
+                    contactHtfMap.put(con.npsp__Primary_Affiliation__c, con);
+                } else if(oldContactsMap != null && con.npsp__Primary_Affiliation__c != oldContactsMap.get(con.Id).npsp__Primary_Affiliation__c) {
+                    contactHtfMap.put(con.npsp__Primary_Affiliation__c, con);
+                }
+            }
+        }
+        if(!contactHtfMap.isEmpty()) {
+            Map<Id, Account> accountMap = new Map<Id, Account>([
+                SELECT Id, Chapter_Name__c 
+                FROM Account 
+                WHERE Id IN :contactHtfMap.keySet()
+                AND RecordTypeId = :Constant_AC.HOSPITAL_TREATMENT_ID
+                AND Chapter_Name__c != null
+            ]);
+            for(Contact mpContact : contactHtfMap.values()) {
+                mpContact.Region_Chapter__c = accountMap.get(mpContact.npsp__Primary_Affiliation__c).Chapter_Name__c;
+                mpContact.Hidden_Chapter__c = mpContact.Region_Chapter__c;
+            }
+        }
+    }
+    
+    /**
+    * Update region chapter lookup based on primary account chapter relationship
+    * @param htfAccountMap
+    */
+    public static void updateRegionChapterOnMedicalProfessional(Map<Id, Account> htfAccountMap) {
+        if(htfAccountMap.isEmpty()) {
+            return;
+        }
+        List<Contact> mpContactList = new List<Contact>([
+            SELECT Id, npsp__Primary_Affiliation__c, Region_Chapter__c 
+            FROM Contact 
+            WHERE npsp__Primary_Affiliation__c IN :htfAccountMap.keySet()
+            AND RecordTypeId = :Constant_AC.MEDICAL_PROFESSIONAL_RT_ID
+            AND Region_Chapter__c = null]);
+        
+        for(Contact contact : mpContactList) {
+            contact.Region_Chapter__c = htfAccountMap.get(contact.npsp__Primary_Affiliation__c).Chapter_Name__c;
+            contact.Hidden_Chapter__c = contact.Region_Chapter__c;
+        }
+        try {
+            update mpContactList;
+        } catch(Exception e) {
+            createContactDebugLog(mpContactList, 'updateRegionChapterOnMedicalProfessional', e);
+        }
+    }
+    
+    /**
+    * Share MP contact record to chapter users based on primary chapter affiliation 
+    * @param contactsList
+    * @param oldContactsMap
+    */
+    public static void shareMedicalProfessionalToChapter(List<Contact> contactsList, Map<Id, Contact> oldContactsMap) {
+        if(contactsList.isEmpty()) {
+            return;
+        }
+        Set<Id> chapterIds = new Set<Id>();
+        List<Contact> mpContactList = new List<Contact>();
+        for(Contact contact : contactsList) {
+            if(contact.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID 
+               && ((oldContactsMap == null && contact.Region_Chapter__c != null) 
+                   || (oldContactsMap != null && contact.Region_Chapter__c != oldContactsMap.get(contact.Id).Region_Chapter__c))) 
+            {
+                chapterIds.add(contact.Region_Chapter__c);
+                mpContactList.add(contact);
+            }
+        }
+        if(!chapterIds.isEmpty()) {
+            Map<Id, Account> chapterNameMap = new Map<Id, Account>(ChapterStaffRecordSharing_AC.getChapterNameById(chapterIds));
+            Map<String, List<Contact>> chapterContactMap = new Map<String, List<Contact>>();
+            for(Contact mpContact : mpContactList) {
+                String chapterName;
+                if(chapterNameMap.containsKey(mpContact.Region_Chapter__c)) {
+                    chapterName = chapterNameMap.get(mpContact.Region_Chapter__c).Name;
+                    if(chapterContactMap.containsKey(chapterName)) {
+                        chapterContactMap.get(chapterName).add(mpContact);
+                    } else {
+                        chapterContactMap.put(chapterName, new List<Contact>{mpContact});
+                    }
+                }
+            }
+            if(!chapterContactMap.isEmpty()) {
+                ChapterStaffRecordSharing_AC.ContactSharing(chapterContactMap);
             }
         }
     }

@@ -11,8 +11,7 @@ public class AccountServiceTest {
     private final static Id HOUSEHOLD_RECORD_TYPE_ID = Constant_AC.HOUSEHOLD_RT_ID;
     private final static Id CONTACT_WISH_CHILD = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
     private final static Id CONTACT_WISH_FAMILY = Constant_AC.WISH_FAMILY_RT_ID;
-    private final static Id HOSPITAL_TREATMENT_ID = Constant_AC.HOSPITAL_TREATMENT_ID;
-    
+
     @TestSetup
     public static void setup() {
         trac_TriggerHandlerBase.blockTrigger = true;
@@ -125,6 +124,31 @@ public class AccountServiceTest {
         lead2.Hospital_Treatment_Facility_Treating__c = 'Arizona State Hospital';
         insert leads;
         
+        List<Office__c> officeList = TestDataFactory.createOffice(2);
+        Office__c azOffice = officeList.get(0);
+        azOffice.Name = 'Make-A-Wish-Arizona';
+        azOffice.Chapter__c = account1.Id;
+        Office__c flOffice = officeList.get(1);
+        flOffice.Name = 'Make-A-Wish-Central & Northern Florida';
+        flOffice.Chapter__c = account3.Id;
+        insert officeList;
+        
+        List<Zip_Code__c> zipList = TestDataFactory.createZipCode(2);
+        Zip_Code__c arizonaZip = zipList.get(0);
+        arizonaZip.Name = '85001';
+        arizonaZip.Office__c = azOffice.Id;
+        arizonaZip.External_Id__c = '85001';
+        Zip_Code__c floridaZip = zipList.get(1);
+        floridaZip.Name = '33601';
+        floridaZip.Office__c = flOffice.Id;
+        floridaZip.External_Id__c = '33601';
+        insert zipList;
+        
+        Account htfAccount = TestDataFactory.createAccount(1)[0];
+        htfAccount.RecordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID;
+        htfAccount.Name = 'Sun Valley General Hospital';
+        htfAccount.BillingPostalCode = '85001';
+        insert htfAccount;
         
         trac_TriggerHandlerBase.blockTrigger = false;
     }
@@ -137,30 +161,23 @@ public class AccountServiceTest {
             WHERE Name IN ('Make-A-Wish Arizona')
         ];
         Lead lead = [
-            SELECT Id, FirstName, LastName, ChapterName__c, What_is_the_family_s_primary_spoken_lang__c
+            SELECT Id, FirstName, LastName, ChapterName__c, What_is_the_family_s_primary_spoken_lang__c, ConvertedAccountId
             FROM Lead
             WHERE Name = 'Jack Smith'
         ];
-        Set<Id> leadConvertAccountIds = new Set<Id>{account.Id};
-            Set<Id> chapterIds = new Set<Id>{lead.ChapterName__c};
-                Id chapterId;
-        Map<Id, Account> chapterUserMap = new Map<Id, Account>();
-        Map<Id, Lead> convertedAccountMap = new Map<Id, Lead>();
-        convertedAccountMap.put(account.Id, lead);
-        List<Account> updateAccountList = new List<Account>();
-        
+
         Test.startTest();
-        Map<Id, Account> results = AccountService.setHouseholdFields(convertedAccountMap);
+        Account result = AccountService.setHouseholdFields(lead);
         Test.stopTest();
-        
+
         String expectedName =
             lead.FirstName
             + ' '
             + lead.LastName
             + Constant_AC.FAMILY_HOUSEHOLD_NAME_APPEND;
         System.assertNotEquals(null, account.Id);
-        System.assertEquals(expectedName, results.get(account.Id).Name);
-    } 
+        System.assertEquals(expectedName, result.Name);
+    }
     
     @isTest 
     private static void validateMatchChapterForAccount() {
@@ -313,5 +330,25 @@ public class AccountServiceTest {
         hospitalAccountMap = AccountService.createHospitalTreatmentFacilities(new Set<Id>{lead.Id}, accountMap);
         Test.stopTest();
         System.assert(hospitalAccountMap.containsKey(lead.Alternate1HospitalTreatmentFacility__c));
+    }
+    
+    @isTest
+    private static void validatePopulateChapterOnHospitalAccount() {
+        Account htfAccount = [
+            SELECT Id, Chapter_Name__c, BillingPostalCode 
+            FROM Account 
+            WHERE Name = 'Sun Valley General Hospital'
+        ];
+        System.assert(htfAccount.Chapter_Name__c == null);
+        htfAccount.BillingPostalCode = '33601';
+        Test.startTest();
+        update htfAccount;
+        Test.stopTest();
+        Account htfUpdated = [
+            SELECT Id, Chapter_Name__c 
+            FROM Account 
+            WHERE Name = 'Sun Valley General Hospital'
+        ];
+        System.assert(htfUpdated.Chapter_Name__c != null);
     }
 }

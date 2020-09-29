@@ -38,7 +38,11 @@ public class ContactDomain extends trac_TriggerHandlerBase {
 			} else if (contact.RecordTypeId == WISH_FAMILY_RT_ID) {
 				contact.Relationship_Type__c = RELATIONSHIP_TYPE_PARENT_GUARDIAN;
 			}
+            if(contact.Region_Chapter__c != null) {
+                contact.Hidden_Chapter__c = contact.Region_Chapter__c;
+            }
 		}
+        ContactService.populateRegionChapterOnMedicalProfessional(newContactsList, null);
 	}
 
 	/**
@@ -74,6 +78,7 @@ public class ContactDomain extends trac_TriggerHandlerBase {
 		}
 		ChapterStaffRecordSharing_AC.ContactSharing(contactChapterMap);
 		ContactService.createVolunteerUser(newContactsMap.keySet());
+        ContactService.shareMedicalProfessionalToChapter(newContactsList, null);
 	}
 
 	/**
@@ -129,6 +134,7 @@ public class ContactDomain extends trac_TriggerHandlerBase {
         ContactService.updateContactHiddenFields(newContactsList);
         ContactService.clearHiddenFields(newContactsList);
         ContactService.updatePicklistTranslations(newContactsMap, oldContactsMap);
+        ContactService.populateRegionChapterOnMedicalProfessional(newContactsList, oldContactsMap);
 	}
 
 	/**
@@ -159,6 +165,7 @@ public class ContactDomain extends trac_TriggerHandlerBase {
 		ContactService.updateUserDetails(newContactsList, oldContactsMap);
 		ContactService.shareContactRecord(newContactsMap, oldContactsMap);
 		ContactService.updateHiddenCaseFields(newContactsList, oldContactsMap);
+        ContactService.shareMedicalProfessionalToChapter(newContactsList, oldContactsMap);
 	}
 
 	/**

@@ -38,7 +38,22 @@ public class ChapterChangeConfirmationPopup_AC_Test {
         lead.PD_ICD_Code__c = icdCode.Id;
         lead.Company = 'MAWA';
         insert lead;
-
+        
+        List<Contact> contacts = TestDataFactory.createContact(1);
+        Contact contactKnowles = contacts.get(0);
+        contactKnowles.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+        contactKnowles.Region_Chapter__c = account1.Id;
+        contactKnowles.FirstName = 'Allison';
+        contactKnowles.LastName = 'Knowles';
+        insert contacts;
+        
+        Account account3 = TestDataFactory.createAccount(1)[0];
+        account3.Name = 'Phoenix General Hospital';
+        account3.RecordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID;
+        account3.Chapter_Name__c = account2.Id;
+        account3.Hidden_Chapter__c = account1.Id;
+        insert account3;
+        
         trac_TriggerHandlerBase.blockTrigger = false;
     }
 
@@ -98,5 +113,44 @@ public class ChapterChangeConfirmationPopup_AC_Test {
         ];
         ApexPages.StandardController sc = new ApexPages.StandardController(lead);
         new ChapterChangeConfirmationPopup_AC(sc);
+    }
+    
+    @IsTest
+    public static void validateChapterChangeContact() {
+        Contact mpContact = [
+            SELECT Id, Region_Chapter__c 
+            FROM Contact 
+            WHERE Name = 'Allison Knowles'
+        ];
+        Test.startTest();
+        ChapterChangeConfirmationPopup_AC.updateContactChapter('accept', mpContact.Id);
+        Test.stopTest();
+        
+        Contact mpContactUpdated = [
+            SELECT Id, Hidden_Chapter__c 
+            FROM Contact 
+            WHERE Id = :mpContact.Id
+        ];
+        System.assert(mpContact.Region_Chapter__c == mpContactUpdated.Hidden_Chapter__c);
+    }
+    
+    
+    @IsTest
+    public static void validateChapterRevertAccount() {
+        Account htfAccount = [
+            SELECT Id, Hidden_Chapter__c
+            FROM Account 
+            WHERE Name = 'Phoenix General Hospital'
+        ];
+        Test.startTest();
+        ChapterChangeConfirmationPopup_AC.updateAccountChapter('revert', htfAccount.Id);
+        Test.stopTest();
+        
+        Account htfAccountUpdated = [
+            SELECT Id, Hidden_Chapter__c, Chapter_Name__c
+            FROM Account 
+            WHERE Name = 'Phoenix General Hospital'
+        ];
+        System.assert(htfAccount.Hidden_Chapter__c == htfAccountUpdated.Chapter_Name__c);
     }
 }
