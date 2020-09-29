@@ -1346,6 +1346,14 @@
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>ChapterChangeConfirmationAccount_VF</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>ChapterChangeConfirmationContact_VF</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>CommunitiesLanding</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
@@ -1844,6 +1852,11 @@
         <default>false</default>
         <visible>false</visible>
     </applicationVisibilities>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Account.Hidden_Chapter__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Account.Alias__c</field>
@@ -7422,6 +7435,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.HiddenOtherPhone__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Hidden_Chapter__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
