@@ -1926,7 +1926,6 @@ public class ContactService {
             ]);
             for(Contact mpContact : contactHtfMap.values()) {
                 mpContact.Region_Chapter__c = accountMap.get(mpContact.npsp__Primary_Affiliation__c).Chapter_Name__c;
-                mpContact.Hidden_Chapter__c = mpContact.Region_Chapter__c;
             }            
         }
     }
@@ -1948,7 +1947,6 @@ public class ContactService {
         
         for(Contact contact : mpContactList) {
             contact.Region_Chapter__c = htfAccountMap.get(contact.npsp__Primary_Affiliation__c).Chapter_Name__c;
-            contact.Hidden_Chapter__c = contact.Region_Chapter__c;
         }
         try {
             update mpContactList;
@@ -1981,11 +1979,14 @@ public class ContactService {
             Map<Id, Account> chapterNameMap = new Map<Id, Account>(ChapterStaffRecordSharing_AC.getChapterNameById(chapterIds));
             Map<String, List<Contact>> chapterContactMap = new Map<String, List<Contact>>();
             for(Contact mpContact : mpContactList) {
-                String chapterName = chapterNameMap.get(mpContact.Region_Chapter__c).Name;
-                if(chapterContactMap.containsKey(chapterName)) {
-                    chapterContactMap.get(chapterName).add(mpContact);
-                } else {
-                    chapterContactMap.put(chapterName, new List<Contact>{mpContact});
+                String chapterName;
+                if(chapterNameMap.containsKey(mpContact.Region_Chapter__c)) {
+                    chapterName = chapterNameMap.get(mpContact.Region_Chapter__c).Name;
+                    if(chapterContactMap.containsKey(chapterName)) {
+                        chapterContactMap.get(chapterName).add(mpContact);
+                    } else {
+                        chapterContactMap.put(chapterName, new List<Contact>{mpContact});
+                    }
                 }
             }
             if(!chapterContactMap.isEmpty()) {
