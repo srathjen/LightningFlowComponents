@@ -233,7 +233,7 @@ public class RelationshipService {
 	public static List<npe4__Relationship__c> buildWishFamilyLeadConvertRelationship(List<Contact> contacts) {
 		List<npe4__Relationship__c> relationships = new List<npe4__Relationship__c>();
 		for(Contact familyContact : contacts){
-			if (familyContact.Relationship_Type__c.equals(CONTACT_PARENT)) {
+			if (!familyContact.Type_of_Contact__c.equals(CONTACT_SIBLING)) {
 				// Parent Legal Guardian Relationship
 				npe4__Relationship__c parentLegGuardRelationship = new npe4__Relationship__c();
 				parentLegGuardRelationship.npe4__Contact__c = familyContact.Wish_Child_Id_Hidden__c;
