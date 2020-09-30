@@ -295,7 +295,7 @@
         <externalId>false</externalId>
         <formula>npsp__MailingStreet__c &amp; BR() &amp;
 npsp__MailingStreet2__c &amp; IF(LEN(npsp__MailingStreet2__c)&gt;0, BR(), &quot;&quot;) &amp; 
-psp__MailingCity__c &amp; IF(LEN(npsp__MailingCity__c) &gt; 0, &quot;, &quot;, &quot;&quot;) &amp; npsp__MailingState__c &amp; &quot; &quot; &amp; npsp__MailingPostalCode__c
+npsp__MailingCity__c &amp; IF(LEN(npsp__MailingCity__c) &gt; 0, &quot;, &quot;, &quot;&quot;) &amp; npsp__MailingState__c &amp; &quot; &quot; &amp; npsp__MailingPostalCode__c
 &amp; IF(LEN(npsp__MailingCountry__c)&gt;0, BR() &amp; npsp__MailingCountry__c, &quot;&quot;)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Mailing Address</label>
