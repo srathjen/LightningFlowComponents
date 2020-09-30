@@ -1925,8 +1925,11 @@ public class ContactService {
                 AND Chapter_Name__c != null
             ]);
             for(Contact mpContact : contactHtfMap.values()) {
-                mpContact.Region_Chapter__c = accountMap.get(mpContact.npsp__Primary_Affiliation__c).Chapter_Name__c;
-            }            
+                if(accountMap.containsKey(mpContact.npsp__Primary_Affiliation__c)) {
+                    mpContact.Region_Chapter__c = accountMap.get(mpContact.npsp__Primary_Affiliation__c).Chapter_Name__c;
+                    mpContact.Hidden_Chapter__c = mpContact.Region_Chapter__c;
+                }
+            }
         }
     }
     
@@ -1946,12 +1949,55 @@ public class ContactService {
             AND Region_Chapter__c = null]);
         
         for(Contact contact : mpContactList) {
-            contact.Region_Chapter__c = htfAccountMap.get(contact.npsp__Primary_Affiliation__c).Chapter_Name__c;
+            if(htfAccountMap.containsKey(contact.npsp__Primary_Affiliation__c)) {
+                contact.Region_Chapter__c = htfAccountMap.get(contact.npsp__Primary_Affiliation__c).Chapter_Name__c;
+                contact.Hidden_Chapter__c = contact.Region_Chapter__c;
+            }
         }
         try {
             update mpContactList;
         } catch(Exception e) {
             createContactDebugLog(mpContactList, 'updateRegionChapterOnMedicalProfessional', e);
+        }
+    }
+    
+    /**
+    * Share MP contact record to chapter users based on primary chapter affiliation 
+    * @param contactsList
+    * @param oldContactsMap
+    */
+    public static void shareMedicalProfessionalToChapter(List<Contact> contactsList, Map<Id, Contact> oldContactsMap) {
+        if(contactsList.isEmpty()) {
+            return;
+        }
+        Set<Id> chapterIds = new Set<Id>();
+        List<Contact> mpContactList = new List<Contact>();
+        for(Contact contact : contactsList) {
+            if(contact.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID 
+               && ((oldContactsMap == null && contact.Region_Chapter__c != null) 
+                   || (oldContactsMap != null && contact.Region_Chapter__c != oldContactsMap.get(contact.Id).Region_Chapter__c))) 
+            {
+                chapterIds.add(contact.Region_Chapter__c);
+                mpContactList.add(contact);
+            }
+        }
+        if(!chapterIds.isEmpty()) {
+            Map<Id, Account> chapterNameMap = new Map<Id, Account>(ChapterStaffRecordSharing_AC.getChapterNameById(chapterIds));
+            Map<String, List<Contact>> chapterContactMap = new Map<String, List<Contact>>();
+            for(Contact mpContact : mpContactList) {
+                String chapterName;
+                if(chapterNameMap.containsKey(mpContact.Region_Chapter__c)) {
+                    chapterName = chapterNameMap.get(mpContact.Region_Chapter__c).Name;
+                    if(chapterContactMap.containsKey(chapterName)) {
+                        chapterContactMap.get(chapterName).add(mpContact);
+                    } else {
+                        chapterContactMap.put(chapterName, new List<Contact>{mpContact});
+                    }
+                }
+            }
+            if(!chapterContactMap.isEmpty()) {
+                ChapterStaffRecordSharing_AC.ContactSharing(chapterContactMap);
+            }
         }
     }
 }

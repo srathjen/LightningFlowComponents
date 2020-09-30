@@ -219,4 +219,10 @@ public class Utils_Test {
         System.assertEquals(false, Utils.isEmail('NotAnEmail'));
         System.assertEquals(true, Utils.isEmail('Email@test.com'));
     }
+    
+    @IsTest
+    private static void splitString() {
+        String result = Utils.splitString('85016-1234', '-')[0];
+        System.assertEquals('85016', result);
+    }
 }

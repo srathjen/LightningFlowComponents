@@ -1,0 +1,36 @@
+<apex:page standardController="Account" extensions="ChapterChangeConfirmationPopup_AC">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <apex:outputPanel rendered="{!AND(OR(Account.Hidden_Chapter__c != null, Account.Hidden_Chapter__c != ''), Account.Hidden_Chapter__c != Account.Chapter_Name__c)}">
+        <script>
+        $(document).ready(function() {
+        var myUserContext = "{!$User.UITheme}";
+        setTimeout(function() { 
+            var isConfirm = confirm("Are you sure you want to reassign this account to a new chapter?");
+            if (isConfirm) {
+                ChapterChangeConfirmationPopup_AC.updateAccountChapter('accept','{!Account.Id}', function(result,event) { 
+                    if(event.type == 'exception') {
+                        alert(event.message);
+                    }                  
+                });                
+                return false;
+            } else {
+                ChapterChangeConfirmationPopup_AC.updateAccountChapter('revert','{!Account.Id}', function(result,event) { 
+                    if(event.type == 'exception') {
+                        alert(event.message);
+                    } else {
+                        if(result) {    
+                            if (myUserContext == 'Theme4t' || myUserContext == 'Theme4d' || myUserContext == 'Theme4u') {                                
+                                sforce.one.navigateToURL('/' + '{!Account.Id}', true);
+                            } else if (myUserContext == 'Theme3') {                                
+                                window.top.location = '/' + '{!Account.Id}';
+                            }                             
+                        }                           
+                    }                       
+                });
+                return false;
+            }
+        }, 2000);                             
+    }); 
+    </script>
+</apex:outputPanel>
+</apex:page>

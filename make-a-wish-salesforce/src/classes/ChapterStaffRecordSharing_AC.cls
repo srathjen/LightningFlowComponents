@@ -76,7 +76,7 @@ public class ChapterStaffRecordSharing_AC {
                     }
                 }
             }
-            insert contactsToShare;
+            Database.insert(contactsToShare, false);
             if (Test.isRunningTest()) {
                 throw new CommonTriggerException(Constant_AC.TEST_EXCEPTION_ERROR);
             }
@@ -119,7 +119,7 @@ public class ChapterStaffRecordSharing_AC {
                     }
                 }
             }
-            insert accountsToShare;
+            Database.insert(accountsToShare, false);
             if (Test.isRunningTest()) {
                 throw new CommonTriggerException(Constant_AC.TEST_EXCEPTION_ERROR);
             }
@@ -445,5 +445,56 @@ public class ChapterStaffRecordSharing_AC {
             chapterIdUserRoleMap.put(chapterNameMap.get(chapterName), chapterRoleNameMap.get(chapterName));
         }
         return chapterIdUserRoleMap;
+    }
+    
+    /**
+    * Returns map of zip codes and chapter association
+    * @param zipcodeList
+    * @return zipcodeChapterMap
+    */
+    public static Map<String, Id> getChapterByZipcode(List<String> zipcodeList) {
+        if(zipcodeList.isEmpty()) {
+            return new Map<String, Id>();
+        }
+        Map<String, Id> zipcodeChapterMap = new Map<String, Id>();
+        for(Zip_code__c zip : [SELECT Name, Office__r.Chapter__c FROM Zip_code__c WHERE Name IN :zipcodeList]) {
+            zipcodeChapterMap.put(zip.Name, zip.Office__r.Chapter__c);
+        }
+        return zipcodeChapterMap;
+    }
+    
+    /**
+    * Returns map of chapter accounts and its name
+    * @param accountIdSet
+    * @return chapterNameMap
+    */
+    public static Map<Id, Account> getChapterNameById(Set<Id> accountIdSet) {
+        if(accountIdSet.isEmpty()) {
+            return new Map<Id, Account>();
+        }
+        Map<Id, Account> chapterNameMap = new Map<Id, Account>([
+            SELECT Id, Name 
+            FROM Account 
+            WHERE Id IN :accountIdSet
+        ]);
+        return chapterNameMap;
+    }
+    
+    /**
+    * Returns map of chapter accounts and its intake manager
+    * @param chapterIds
+    * @param accountOwnerMap
+    */
+    public static Map<Id, Account> getAccountOwner(Set<Id> chapterIds) {
+        if(chapterIds.isEmpty()) {
+            return new Map<Id, Account>();
+        }
+        Map<Id, Account> accountOwnerMap = new Map<Id, Account>([
+            SELECT Id, Intake_Manager__c
+            FROM Account
+            WHERE Id IN :chapterIds
+            AND Intake_Manager__c != null
+        ]);
+        return accountOwnerMap;
     }
 }

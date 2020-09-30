@@ -42,9 +42,7 @@ public class Utils {
 
     /**
      * @description Retrieve information about the current user.
-     *
      * @author Chris Shinnimin, Traction on Demand
-     *
      * @date 2020-03-18
      */
     public static User currentUser {
@@ -66,10 +64,8 @@ public class Utils {
 
     /**
      * @description Find Picklist Field Label / Values Map
-     *
-     * @param sObjectApiName
-     * @param fieldApiName
-     *
+     * @param sObjectApiName object api name
+     * @param fieldApiName field api name
      * @return List of Picklist Options
      */
     public static Map<String, String> getFieldMap(String sObjectApiName, String fieldApiName) {
@@ -89,10 +85,8 @@ public class Utils {
 
     /**
      * @description Find Picklist Labels
-     *
-     * @param sObjectApiName
-     * @param fieldApiName
-     *
+     * @param sObjectApiName object api name
+     * @param fieldApiName field api name
      * @return List of Picklist Options
      */
     public static List<String> getPicklistLabels(String sObjectApiName, String fieldApiName) {
@@ -113,11 +107,9 @@ public class Utils {
 
     /**
      * @description Find Picklist Select Options
-     *
-     * @param sObjectApiName
-     * @param fieldApiName
+     * @param sObjectApiName object api name
+     * @param fieldApiName field api name
      * @param optionalPlaceholderOption
-     *
      * @return List of Picklist Options
      */
     public static List<SelectOption> getPicklistSelectOptions(String sObjectApiName, String fieldApiName, String optionalPlaceholderOption) {
@@ -139,10 +131,8 @@ public class Utils {
 
     /**
      * @description Find Field Paths
-     *
-     * @param sObjectApiName
-     * @param fieldApiName
-     *
+     * @param sObjectApiName object api name
+     * @param fieldApiName field api name
      * @return List of Field Paths
      */
     public static List<String> getFieldPaths(String sObjectApiName, String fieldApiName) {
@@ -162,9 +152,7 @@ public class Utils {
 
     /**
      * @description Find field labels
-     *
-     * @param sObjectApiName
-     *
+     * @param sObjectApiName object api name
      * @return Map of Picklist Options
      */
     public static Map<String, String> getFieldLabels(String sObjectApiName) {
@@ -183,10 +171,8 @@ public class Utils {
 
     /**
      * @description Format a Date field
-     *
-     * @param d
-     * @param format
-     *
+     * @param d Date
+     * @param format format
      * @return Formatted String Date
      */
     public static String formatDate(Date d, String format) {
@@ -200,10 +186,8 @@ public class Utils {
 
     /**
      * @description Parse a String to a Date
-     *
-     * @param d
-     * @param currentFormat
-     *
+     * @param d Date
+     * @param currentFormat current format
      * @return Date
      */
     public static Date parseDate(String d, String currentFormat) {
@@ -234,10 +218,8 @@ public class Utils {
 
     /**
      * @description Generate random number
-     *
-     * @param length
-     *
-     * @return
+     * @param length length
+     * @return String
      */
     public static String generateRandomNumber(Integer length) {
         if (length == null || length <= 0) {
@@ -254,9 +236,7 @@ public class Utils {
 
     /**
      * @description Generates a string of lowercase letters of specified length;
-     *
-     * @param numCharacters
-     *
+     * @param numCharacters number of characters
      * @return String
      */
     public static String generateRandomCharacterString(Integer numCharacters) {
@@ -273,38 +253,31 @@ public class Utils {
 
     /**
      * @description Generates a random email address.
-     *
-     * @return
+     * @return String
      */
     public static String generateRandomEmailAddress() {
         return generateRandomCharacterString(5) + '@' + generateRandomCharacterString(5) + '.' + generateRandomCharacterString(3);
     }
 
-    /*
+    /**
      * Static function to convert a comma separated String to a List<SelectOption>
-     *
-     * @param String picklistString
-     *
+     * @param picklistString picklist
+     * @param optionalPlaceholderOption placeholder
      * @return List<SelectOption>
-     *
      * @author Chris Shinnimin, Traction on Demand
      * @date 2020-03-03
     */
     public static List<SelectOption> picklistStringToOptions(String picklistString, String optionalPlaceholderOption) {
         List<SelectOption> selectOptions = new List<SelectOption>();
-
         if (String.isBlank(picklistString)) {
             return selectOptions;
         }
-
         if (optionalPlaceholderOption != null) {
             selectOptions.add(new SelectOption('', optionalPlaceholderOption));
         }
-
         for (String currString : picklistString.split(',')) {
             selectOptions.add(new SelectOption(currString, currString));
         }
-
         return selectOptions;
     }
 
@@ -313,9 +286,7 @@ public class Utils {
      * but when compared they are coming formatted and some are not causing the if statetment to fail
      * e.g: (555)555-5555 is not equal to 5555555555
      * Creating a method to remove special characters and alphabet
-     *
      * @param field
-     *
      * @return String
      */
     public static String removeFormatNumberField(String field) {
@@ -325,13 +296,11 @@ public class Utils {
         return field;
     }
 
-    /*
+    /**
      * @description		"Self Fieldset, it holds the mandatory fields of Self relationship."
      * 					This function was noticed duplicated in multiple classes, so pulled out
      * 					during code cleanup (Chris Shinnimin, Traction on Demand).
-     *
      * @return			List<Schema.FieldSetMember>
-     *
      * @date			unknown
      * @author			MST Solutions
      */
@@ -339,15 +308,12 @@ public class Utils {
         return SObjectType.Lead.fieldSets.Diagnosis_Verfication_Fieldset.getFields();
     }
 
-    /*
-     * @description 		Create a Map of sObject labels by Schema.SObjectFields.
-     *
-     * @param               Schema.DescribeSObjectResult describe: the sObject type
-     *
-     * @return              Map<Schema.SObjectField,String>
-     *
-     * @author				Chris Shinnimin, Traction on Demand
-     * @date				2020-03-30
+    /**
+     * @description Create a Map of sObject labels by Schema.SObjectFields.
+     * @param describe the sObject type
+     * @return Map<Schema.SObjectField,String>
+     * @author Chris Shinnimin, Traction on Demand
+     * @date 2020-03-30
     */
     public static Map<Schema.SObjectField, String> mapOfSObjectLabelsByFields(Schema.DescribeSObjectResult describe) {
         Map<Schema.SObjectField, String> mapOfSObjectLabelsByFields = new Map<Schema.SObjectField, String>();
@@ -365,6 +331,12 @@ public class Utils {
         return mapOfSObjectLabelsByFields;
     }
 
+    /**
+     * @description Parses AM/PM Time Format
+     * @param value time
+     * @param regex time pattern currently
+     * @return Datetime
+    */
     public static Datetime parseAmPm(String value, TimeRegexPattern regex) {
         Pattern p = Pattern.compile(regex.getPattern());
         Matcher m = p.matcher(value);
@@ -398,13 +370,9 @@ public class Utils {
 
     /**
      * @description Get a Map of UserRole.Name by User Id.
-     *
      * @param userIds
-     *
      * @return Map<Id,String>
-     *
      * @author MST Solutions
-     *
      * @date unknown
      */
     public static Map<Id, String> getUserRoleMap(Set<Id> userIds) {
@@ -423,13 +391,9 @@ public class Utils {
 
     /**
      * @description Validate whether a String contains an email address.
-     *
-     * @param email
-     *
+     * @param email email
      * @return Boolean
-     *
      * @author unknown
-     *
      * @date unknown
      */
     public static Boolean isEmail(String email) {
@@ -437,5 +401,21 @@ public class Utils {
         Matcher MyMatcher = MyPattern.matcher(email);
 
         return MyMatcher.matches();
+    }
+    
+    /**
+    * @description Splits string if contains character passed in
+    * @param stringToSplit
+    * @param charDelimiter
+    * @return List<String>
+    */
+    public static List<String> splitString(String stringToSplit, String charDelimiter) {
+        List<String> stringList = new List<String>();
+        if(stringToSplit.contains(charDelimiter)) {
+            stringList = stringToSplit.split(charDelimiter);
+        } else {
+            stringList.add(stringToSplit);
+        }
+        return stringList;
     }
 }

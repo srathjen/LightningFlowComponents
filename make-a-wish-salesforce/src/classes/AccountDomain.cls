@@ -36,6 +36,8 @@ public class AccountDomain extends trac_TriggerHandlerBase {
         if(!inKindAccountList.isEmpty()) {
             AccountService.matchChapterForAccount(ownerIdSet, inKindAccountList);
         }
+        AccountService.populateChapterOnHospitalAccount(newAccountsList, null);
+        AccountService.updateAccountOwnerToChapter(newAccountsList, null);
     }
     
     /**
@@ -70,6 +72,8 @@ public class AccountDomain extends trac_TriggerHandlerBase {
         if(!houseHoldAccountMap.isEmpty()) {
         	AccountService.setPrimaryContactForAccount(houseHoldAccountMap);
         }
+        AccountService.populateChapterOnHospitalAccount(newAccountsList, oldAccountsMap);
+        AccountService.updateAccountOwnerToChapter(newAccountsList, oldAccountsMap);
     }
     
     /**
@@ -132,6 +136,7 @@ public class AccountDomain extends trac_TriggerHandlerBase {
         if(!accountsToShareList.isEmpty()) {
             AccountService.createAccountShareEditAccess(accountsToShareList, chapterNameList);
         }
+        AccountService.shareHospitalAccountToChapter(newAccountsList, null);
     }
     
     /**
@@ -183,5 +188,6 @@ public class AccountDomain extends trac_TriggerHandlerBase {
         if(!houseHoldAccountIdsSet.isEmpty()) {
             AccountService.updateRelatedContactAddressWithHousehold(houseHoldAccountIdsSet);
         }
+        AccountService.shareHospitalAccountToChapter(newAccountsList, oldAccountsMap);
     }
 }
