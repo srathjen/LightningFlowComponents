@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -293,9 +294,9 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>npsp__MailingStreet__c &amp; BR() &amp;
-npsp__MailingStreet2__c &amp; IF(LEN(npsp__MailingStreet2__c)&gt;0, BR(), "") &amp; 
-npsp__MailingCity__c &amp; IF(LEN(npsp__MailingCity__c) &gt; 0, ", ", "") &amp; npsp__MailingState__c &amp; " " &amp; npsp__MailingPostalCode__c 
-&amp; IF(LEN(npsp__MailingCountry__c)&gt;0, BR() &amp; npsp__MailingCountry__c, "")</formula>
+npsp__MailingStreet2__c &amp; IF(LEN(npsp__MailingStreet2__c)&gt;0, BR(), &quot;&quot;) &amp; 
+psp__MailingCity__c &amp; IF(LEN(npsp__MailingCity__c) &gt; 0, &quot;, &quot;, &quot;&quot;) &amp; npsp__MailingState__c &amp; &quot; &quot; &amp; npsp__MailingPostalCode__c
+&amp; IF(LEN(npsp__MailingCountry__c)&gt;0, BR() &amp; npsp__MailingCountry__c, &quot;&quot;)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Mailing Address</label>
         <required>false</required>
@@ -307,7 +308,7 @@ npsp__MailingCity__c &amp; IF(LEN(npsp__MailingCity__c) &gt; 0, ", ", "") &amp; 
         <fullName>npsp__Formula_MailingStreetAddress__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
-        <formula>npsp__MailingStreet__c + IF(ISBLANK(npsp__MailingStreet2__c), '', ', ' + TRIM(npsp__MailingStreet2__c))</formula>
+        <formula>npsp__MailingStreet__c + IF(ISBLANK(npsp__MailingStreet2__c), &apos;&apos;, &apos;, &apos; + TRIM(npsp__MailingStreet2__c))</formula>
         <label>Mailing Street Address</label>
         <required>false</required>
         <trackTrending>false</trackTrending>
@@ -348,7 +349,7 @@ npsp__MailingCity__c &amp; IF(LEN(npsp__MailingCity__c) &gt; 0, ", ", "") &amp; 
     <fields>
         <fullName>npsp__Latest_End_Date__c</fullName>
         <deprecated>false</deprecated>
-        <description>The most recent ending date that this Address was used. Generally used with Latest Start Date to track a date range for an Address that's no longer in use.</description>
+        <description>The most recent ending date that this Address was used. Generally used with Latest Start Date to track a date range for an Address that&apos;s no longer in use.</description>
         <externalId>false</externalId>
         <inlineHelpText>The most recent ending date that this Address was used for this Household.</inlineHelpText>
         <label>Latest End Date</label>
@@ -360,7 +361,7 @@ npsp__MailingCity__c &amp; IF(LEN(npsp__MailingCity__c) &gt; 0, ", ", "") &amp; 
     <fields>
         <fullName>npsp__Latest_Start_Date__c</fullName>
         <deprecated>false</deprecated>
-        <description>The most recent starting date that this Address was used. Generally used with Latest End Date to track a date range for an Address that's no longer in use.</description>
+        <description>The most recent starting date that this Address was used. Generally used with Latest End Date to track a date range for an Address that&apos;s no longer in use.</description>
         <externalId>false</externalId>
         <inlineHelpText>The most recent starting date that this Address was used for this Household.</inlineHelpText>
         <label>Latest Start Date</label>
