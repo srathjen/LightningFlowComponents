@@ -41,8 +41,6 @@ public class LeadDuplicate_AC {
     public String additionalParentId { get; set; }
     public String render { get; set; }
     private final Id wishFamilyRT = Constant_AC.WISH_FAMILY_RT_ID;
-    private final Id medicalProfessionalRT = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
-    private final Id wishChild = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
     public Boolean hideTreatingSection { get; set; }
     public Boolean paperDVProcess { get; set; }
     public List<Lead> masterLeadList { get; set; }
@@ -82,21 +80,7 @@ public class LeadDuplicate_AC {
         } else {
             currLead = new Lead();
         }
-        // Checking medical info and treating medical info is same or not. if it is same, then we are displaying duplicates on same table.
         if (currLead.Id != null) {
-            if (currLead.Medical_Professional_First_Name__c != null
-                && currLead.Medical_Professional_Last_Name__c != null
-                && (currLead.Medical_Professional_Phone__c != null
-                    || currLead.Medical_Professional_Email__c != null)) {
-                        if (LeadService.isSameMedicalProfessional(
-                            currLead.Medical_Professional_First_Name__c, currLead.Treating_Medical_Professional_First_Name__c,
-                            currLead.Treating_Medical_Professional_Last_Name__c, currLead.Medical_Professional_Last_Name__c,
-                            currLead.Treating_Medical_Professional_Phone__c, currLead.Medical_Professional_Phone__c,
-                            currLead.Treating_Medical_Professional_Email__c, currLead.Medical_Professional_Email__c
-                        )) {
-                            hideTreatingSection = true;
-                        }
-                    }
             if (currLead.Using_Paper_Process_For_DV__c) {
                 paperDVProcess = true;
             }
@@ -140,106 +124,6 @@ public class LeadDuplicate_AC {
 					currLead.City, currLead.State, currLead.PostalCode, currLead.DOB__c,
 					new List<Id>{
 							wishFamilyRT
-					}
-			);
-		}
-		return dupContacts;
-	}
-
-	/**
-	 * Querying duplicate Medical Professional based on the current lead.
-	 * @return List of Contacts
-	 */
-	public List<Contact> getdupMedicalContactList() {
-		List<Contact> dupContacts = new List<Contact>();
-		if (currLead.Id != null) {
-			dupContacts = ContactService.findDuplicatedContacts(
-					currLead.Medical_Professional_First_Name__c,
-					currLead.Medical_Professional_Last_Name__c,
-					currLead.Medical_Professional_Phone__c,
-					currLead.Medical_Professional_Email__c,
-					new List<Id>{
-							medicalProfessionalRT
-					}
-			);
-		}
-		return dupContacts;
-	}
-
-	/**
-	 * Querying duplicate Alternate 1 Medical Professional based on the current lead
-	 * @return List of Contacts
-	 */
-	public List<Contact> getdupAlternate1MedicalContactList() {
-		List<Contact> dupContacts = new List<Contact>();
-		if (currLead.Id != null) {
-			dupContacts = ContactService.findDuplicatedContacts(
-					currLead.Alternate1MedProfessionalFirstName__c,
-					currLead.Alternate1MedProfessionalLastName__c,
-					currLead.Alternate1MedProfessionalPhone__c,
-					currLead.Alternate1MedicalProfessionalEmail__c,
-					new List<Id>{
-							medicalProfessionalRT
-					}
-			);
-		}
-		return dupContacts;
-	}
-
-	/**
-	 * Querying duplicate Alternate 2 Medical Professional based on the current lead.
-	 * @return List of Contacts
-	 */
-	public List<Contact> getdupAlternate2MedicalContactList() {
-		List<Contact> dupContacts = new List<Contact>();
-		if (currLead.Id != null) {
-			dupContacts = ContactService.findDuplicatedContacts(
-					currLead.Alternate2MedProfessionalFirstName__c,
-					currLead.Alternate2MedProfessionalLastName__c,
-					currLead.Alternate2MedProfessionalPhone__c,
-					currLead.Alternate2MedProfessionalEmail__c,
-					new List<Id>{
-							medicalProfessionalRT
-					}
-			);
-		}
-		return dupContacts;
-	}
-
-	/**
-	 * Querying duplicate Treating Medical Professional based on the current lead.
-	 * @return List of Contacts
-	 */
-	public List<Contact> getdupTreatingContactList() {
-		List<Contact> dupContacts = new List<Contact>();
-		if (currLead.Id != null) {
-			dupContacts = ContactService.findDuplicatedContacts(
-					currLead.Treating_Medical_Professional_First_Name__c,
-					currLead.Treating_Medical_Professional_Last_Name__c,
-					currLead.Treating_Medical_Professional_Phone__c,
-					currLead.Treating_Medical_Professional_Email__c,
-					new List<Id>{
-							medicalProfessionalRT
-					}
-			);
-		}
-		return dupContacts;
-	}
-
-	/**
-	 * Querying duplicate Best Contact Person in Physician hospital based on the current lead
-	 * @return List of Contacts
-	 */
-	public List<Contact> getbestPhysicianContactList() {
-		List<Contact> dupContacts = new List<Contact>();
-		if (currLead.Id != null) {
-			dupContacts = ContactService.findDuplicatedContacts(
-					currLead.Best_Contact_for_Physician_First_Name__c,
-					currLead.Best_Contact_for_Physician_Last_Name__c,
-					null,
-					currLead.Best_contact_for_Physician_Email__c,
-					new List<Id>{
-							medicalProfessionalRT
 					}
 			);
 		}

@@ -1015,4 +1015,30 @@ public class LeadService {
 			}
 		}
 	}
+
+	/**
+	 * Check if a Medical Professional contact equal
+	 * @param sourceFirstName
+	 * @param sourceLastName
+	 * @param sourcePhone
+	 * @param sourceEmail
+	 * @param targetFirstName
+	 * @param targetLastName
+	 * @param targetPhone
+	 * @param targetEmail
+	 * @return
+	 */
+	public static Boolean isSameMedicalProfessional(
+			String sourceFirstName, String targetFirstName,
+			String sourceLastName, String targetLastName,
+			String sourcePhone, String targetPhone,
+			String sourceEmail, String targetEmail) {
+		if (sourceFirstName == targetFirstName
+				&& sourceLastName == targetLastName
+				&& (sourcePhone == targetPhone || sourceEmail == targetEmail)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
