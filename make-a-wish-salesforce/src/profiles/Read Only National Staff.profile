@@ -25033,6 +25033,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>npsp__Address__c.External_ID__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>npsp__Address__c.npsp__API_Response__c</field>
         <readable>true</readable>
     </fieldPermissions>

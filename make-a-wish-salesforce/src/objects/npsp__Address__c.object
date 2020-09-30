@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -164,6 +163,18 @@
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>ControlledByParent</externalSharingModel>
     <fields>
+        <fullName>External_ID__c</fullName>
+        <description>Captures the RE ID of imported Address records.</description>
+        <externalId>false</externalId>
+        <label>External ID</label>
+        <length>30</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>npsp__API_Response__c</fullName>
         <deprecated>false</deprecated>
         <description>Contains the raw response or an error message.</description>
@@ -282,9 +293,9 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <formula>npsp__MailingStreet__c &amp; BR() &amp;
-npsp__MailingStreet2__c &amp; IF(LEN(npsp__MailingStreet2__c)&gt;0, BR(), &quot;&quot;) &amp; 
-npsp__MailingCity__c &amp; IF(LEN(npsp__MailingCity__c) &gt; 0, &quot;, &quot;, &quot;&quot;) &amp; npsp__MailingState__c &amp; &quot; &quot; &amp; npsp__MailingPostalCode__c 
-&amp; IF(LEN(npsp__MailingCountry__c)&gt;0, BR() &amp; npsp__MailingCountry__c, &quot;&quot;)</formula>
+npsp__MailingStreet2__c &amp; IF(LEN(npsp__MailingStreet2__c)&gt;0, BR(), "") &amp; 
+npsp__MailingCity__c &amp; IF(LEN(npsp__MailingCity__c) &gt; 0, ", ", "") &amp; npsp__MailingState__c &amp; " " &amp; npsp__MailingPostalCode__c 
+&amp; IF(LEN(npsp__MailingCountry__c)&gt;0, BR() &amp; npsp__MailingCountry__c, "")</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Mailing Address</label>
         <required>false</required>
@@ -296,7 +307,7 @@ npsp__MailingCity__c &amp; IF(LEN(npsp__MailingCity__c) &gt; 0, &quot;, &quot;, 
         <fullName>npsp__Formula_MailingStreetAddress__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
-        <formula>npsp__MailingStreet__c + IF(ISBLANK(npsp__MailingStreet2__c), &apos;&apos;, &apos;, &apos; + TRIM(npsp__MailingStreet2__c))</formula>
+        <formula>npsp__MailingStreet__c + IF(ISBLANK(npsp__MailingStreet2__c), '', ', ' + TRIM(npsp__MailingStreet2__c))</formula>
         <label>Mailing Street Address</label>
         <required>false</required>
         <trackTrending>false</trackTrending>
@@ -337,7 +348,7 @@ npsp__MailingCity__c &amp; IF(LEN(npsp__MailingCity__c) &gt; 0, &quot;, &quot;, 
     <fields>
         <fullName>npsp__Latest_End_Date__c</fullName>
         <deprecated>false</deprecated>
-        <description>The most recent ending date that this Address was used. Generally used with Latest Start Date to track a date range for an Address that&apos;s no longer in use.</description>
+        <description>The most recent ending date that this Address was used. Generally used with Latest Start Date to track a date range for an Address that's no longer in use.</description>
         <externalId>false</externalId>
         <inlineHelpText>The most recent ending date that this Address was used for this Household.</inlineHelpText>
         <label>Latest End Date</label>
@@ -349,7 +360,7 @@ npsp__MailingCity__c &amp; IF(LEN(npsp__MailingCity__c) &gt; 0, &quot;, &quot;, 
     <fields>
         <fullName>npsp__Latest_Start_Date__c</fullName>
         <deprecated>false</deprecated>
-        <description>The most recent starting date that this Address was used. Generally used with Latest End Date to track a date range for an Address that&apos;s no longer in use.</description>
+        <description>The most recent starting date that this Address was used. Generally used with Latest End Date to track a date range for an Address that's no longer in use.</description>
         <externalId>false</externalId>
         <inlineHelpText>The most recent starting date that this Address was used for this Household.</inlineHelpText>
         <label>Latest Start Date</label>
