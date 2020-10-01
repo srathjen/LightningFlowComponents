@@ -1906,34 +1906,25 @@ public class ContactService {
         if(contactsList.isEmpty()) {
             return;
         }
-        Set<Id> affiliationIdSet = new Set<Id>();
-        List<Contact> contactAffiliationList = new List<Contact>();
-        List<String> zipCodesList = new List<String>();
-        List<Contact> contactZipList = new List<Contact>();
+        Map<Id, Contact> contactHtfMap = new Map<Id, Contact>();
         for(Contact con : contactsList) {
             if(con.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID && con.Region_Chapter__c == null) {
-                if((oldContactsMap == null && con.npsp__Primary_Affiliation__c != null) 
-                   || (oldContactsMap != null && con.npsp__Primary_Affiliation__c != oldContactsMap.get(con.Id).npsp__Primary_Affiliation__c)) 
-                {
-                    affiliationIdSet.add(con.npsp__Primary_Affiliation__c);
-                    contactAffiliationList.add(con);
-                } else if((oldContactsMap == null && String.isNotBlank(con.MailingPostalCode)) 
-                          || (oldContactsMap != null && con.MailingPostalCode != oldContactsMap.get(con.Id).MailingPostalCode)) 
-                {
-                    zipCodesList.add(Utils.splitString(con.MailingPostalCode, '-')[0]);
-                    contactZipList.add(con);
+                if(oldContactsMap == null && con.npsp__Primary_Affiliation__c != null) {
+                    contactHtfMap.put(con.npsp__Primary_Affiliation__c, con);
+                } else if(oldContactsMap != null && con.npsp__Primary_Affiliation__c != oldContactsMap.get(con.Id).npsp__Primary_Affiliation__c) {
+                    contactHtfMap.put(con.npsp__Primary_Affiliation__c, con);
                 }
             }
         }
-        if(!contactAffiliationList.isEmpty()) {
+        if(!contactHtfMap.isEmpty()) {
             Map<Id, Account> accountMap = new Map<Id, Account>([
                 SELECT Id, Chapter_Name__c 
                 FROM Account 
-                WHERE Id IN :affiliationIdSet
+                WHERE Id IN :contactHtfMap.keySet()
                 AND RecordTypeId = :Constant_AC.HOSPITAL_TREATMENT_ID
                 AND Chapter_Name__c != null
             ]);
-            for(Contact mpContact : contactAffiliationList) {
+            for(Contact mpContact : contactHtfMap.values()) {
                 if(accountMap.containsKey(mpContact.npsp__Primary_Affiliation__c)) {
                     mpContact.Region_Chapter__c = accountMap.get(mpContact.npsp__Primary_Affiliation__c).Chapter_Name__c;
                     mpContact.Hidden_Chapter__c = mpContact.Region_Chapter__c;
