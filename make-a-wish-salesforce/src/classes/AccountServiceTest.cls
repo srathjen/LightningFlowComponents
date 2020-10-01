@@ -351,4 +351,17 @@ public class AccountServiceTest {
         ];
         System.assert(htfUpdated.Chapter_Name__c != null);
     }
+    
+    @isTest
+    private static void getDuplicateRecords() {
+        Account acct = new Account(name = 'Jack Smith & Family Account', BillingCity = 'Phoenix');
+        acct.RecordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID;
+        
+        AccountService.AccountDuplicateInput input = new AccountService.AccountDuplicateInput();
+        input.accountInput = acct;
+        Test.startTest();
+        List<List<Account>> result = AccountService.getDuplicateRecords(new List<AccountService.AccountDuplicateInput>{input});
+        Test.stopTest();
+        System.assert(result.get(0).size() >= 1);
+    }
 }

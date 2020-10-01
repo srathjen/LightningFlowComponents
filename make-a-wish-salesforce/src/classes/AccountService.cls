@@ -440,4 +440,45 @@ public class AccountService {
             }
         }
     }
+    
+    /**
+    * @description Get duplicate records for Account records according to Duplicate Rules
+    * @param accountInputs AccountDuplicateInput
+    * @return Wrapper List of Accounts
+    */
+    @InvocableMethod(Label='Find Account Duplicates' Description='Find duplicate contact records')
+    public static List<List<Account>> getDuplicateRecords(List<AccountDuplicateInput> accountInputs) {
+        List<Account> accounts = new List<Account>();
+        for(AccountDuplicateInput input : accountInputs){
+            accounts.add(input.accountInput);
+        }
+        Datacloud.FindDuplicatesResult[] results = Datacloud.FindDuplicates.findDuplicates(accounts);
+        if(results.isEmpty()) {
+            return new List<List<Account>>();
+        }
+        Set<Id> duplicateAccountsIds = new Set<Id>();
+        for (Datacloud.FindDuplicatesResult findDupeResult : results) {
+            for (Datacloud.DuplicateResult dupeResult : findDupeResult.getDuplicateResults()) {
+                for (Datacloud.MatchResult matchResult : dupeResult.getMatchResults()) {
+                    for (Datacloud.MatchRecord matchRecord : matchResult.getMatchRecords()) {
+                        Account duplicateAccount = (Account) matchRecord.getRecord();
+                        duplicateAccountsIds.add(duplicateAccount.Id);
+                    }
+                }
+            }
+        }
+        List<Account> duplicatedAccounts = [
+                SELECT Id, Name, Department__c, Phone, RE_Billing_Street__c, RE_Billing_City__c, RE_Billing_State_Province__c, Chapter_Name__c
+                FROM Account
+                WHERE Id IN :duplicateAccountsIds
+        ];
+        List<List<Account>> duplicatedAccountsList = new List<List<Account>>();
+        duplicatedAccountsList.add(duplicatedAccounts);
+        return duplicatedAccountsList;
+    }
+
+    public class AccountDuplicateInput {
+        @InvocableVariable(Label='Input Account Record' Description='Single record to evaluate duplicates' Required=true)
+        public Account accountInput;
+    }
 }

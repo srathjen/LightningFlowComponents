@@ -2000,4 +2000,46 @@ public class ContactService {
             }
         }
     }
+
+    /**
+    * @description Get duplicate records for Contact records according to Duplicate Rules
+    * @param contactInputs ContactDuplicateInput
+    * @return Wrapper List of Contacts
+    */
+    @InvocableMethod(Label='Find Contact Duplicates' Description='Find duplicate contact records')
+    public static List<List<Contact>> getDuplicateRecords(List<ContactDuplicateInput> contactInputs) {
+        List<Contact> contacts = new List<Contact>();
+        for(ContactDuplicateInput input : contactInputs){
+            contacts.add(input.contactInput);
+        }
+        Datacloud.FindDuplicatesResult[] results = Datacloud.FindDuplicates.findDuplicates(contacts);
+        if(results.isEmpty()) {
+            return new List<List<Contact>>();
+        }
+        Set<Id> duplicateContactsIds = new Set<Id>();
+        for (Datacloud.FindDuplicatesResult findDupeResult : results) {
+            for (Datacloud.DuplicateResult dupeResult : findDupeResult.getDuplicateResults()) {
+                for (Datacloud.MatchResult matchResult : dupeResult.getMatchResults()) {
+                    for (Datacloud.MatchRecord matchRecord : matchResult.getMatchRecords()) {
+                        Contact duplicateContact = (Contact) matchRecord.getRecord();
+                        duplicateContactsIds.add(duplicateContact.Id);
+                    }
+                }
+            }
+        }
+        List<Contact> duplicatedContacts = [
+                SELECT Id, FirstName, LastName, Email, Phone, MailingCity, MailingState, Primary_Affiliation_Name__c,
+                        Hidden_Chapter_Name__c, Provider_Type__c, Specialty__c
+                FROM Contact
+                WHERE Id IN :duplicateContactsIds
+        ];
+        List<List<Contact>> duplicatedContactsList = new List<List<Contact>>();
+        duplicatedContactsList.add(duplicatedContacts);
+        return duplicatedContactsList;
+    }
+
+    public class ContactDuplicateInput {
+        @InvocableVariable(Label='Input Contact Record' Description='Single record to evaluate duplicates' Required=true)
+        public Contact contactInput;
+    }
 }
