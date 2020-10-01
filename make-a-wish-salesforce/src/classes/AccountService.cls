@@ -360,7 +360,8 @@ public class AccountService {
                     account.Chapter_Name__c = zipChapterMap.get(zip);
                     account.Hidden_Chapter__c = account.Chapter_Name__c;
                 }
-            } else if(String.isNotBlank(account.ShippingPostalCode)) {
+            } else if(String.isNotBlank(account.ShippingPostalCode) && 
+zipChapterMap.containsKey(Utils.splitString(account.ShippingPostalCode, '-')[0])) {
                 zip = Utils.splitString(account.ShippingPostalCode, '-')[0];
                 if(zipChapterMap.containsKey(zip)) {
                     account.Chapter_Name__c = zipChapterMap.get(zip);
