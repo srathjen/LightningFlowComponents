@@ -24,7 +24,7 @@ public class PARTAPDF {
     public final String yesText { get; set; } 
     public final String noText { get; set; }  
     public final String placeHolderAddInfo { get; set; } 
-
+    
     //ODP-17 : To hold DV Signer Values
     public String dvSignerFirstName { get; set; }
     public String dvSignerLastName { get; set; }
@@ -60,28 +60,12 @@ public class PARTAPDF {
      */
     public void loadData() {
         List<String> recValueList = new List<String>();
-
         final List<String> FIELDS_TO_SELECT = new List<String>{
-            'Id',
-            'IsConverted',
-            'FirstName',
-            'LastName',
-            'Email',
-            'Phone',
-            'Name',
-            'Provided_Additional_Information__c',
-            'Diagnosis_Given_By_Referrer__c',
-            'RFI_Form_Info_Hidden__c',
-            'Override_Dupe_Check__c',
-            'Please_Explain_Deteriorate__c',
-            'ICD_Given_By_Referrer__r.Name',
-            'Expedite_timeframe__c',
-            'Other_expedite_timeframe_comments__c',
-            'Does_Child_Have_Cognitive_Delays__c',
-            'Does_Child_Have_Speech_or_Language_Delay__c',
-            'Non_Verbal_Communication_Method__c',
-            'Non_Verbal_Additional_Information__c',
-            'Non_Verbal__c'
+            'Id', 'IsConverted', 'FirstName', 'LastName', 'Email', 'Phone', 'Name', 'Provided_Additional_Information__c',
+            'Diagnosis_Given_By_Referrer__c', 'RFI_Form_Info_Hidden__c', 'Override_Dupe_Check__c', 'Please_Explain_Deteriorate__c',
+            'ICD_Given_By_Referrer__r.Name', 'Expedite_timeframe__c', 'Other_expedite_timeframe_comments__c',
+            'Does_Child_Have_Cognitive_Delays__c', 'Does_Child_Have_Speech_or_Language_Delay__c', 'Non_Verbal_Communication_Method__c',
+            'Non_Verbal_Additional_Information__c', 'Non_Verbal__c', 'Referring_MP__r.FirstName', 'Referring_MP__r.LastName'
         };
 
         try {
