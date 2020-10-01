@@ -1931,16 +1931,6 @@ public class ContactService {
                 }
             }
         }
-        if(!contactZipList.isEmpty()) {
-            Map<String, Id> zipChapterMap = new Map<String, Id>(ChapterStaffRecordSharing_AC.getChapterByZipcode(zipCodesList));
-            for(Contact mpContact : contactZipList) {
-                String zip = Utils.splitString(mpContact.MailingPostalCode, '-')[0];
-                if(zipChapterMap.containsKey(zip)) {
-                    mpContact.Region_Chapter__c = zipChapterMap.get(zip);
-                    mpContact.Hidden_Chapter__c = mpContact.Region_Chapter__c;
-                }
-            }
-        }
     }
     
     /**
