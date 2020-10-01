@@ -1906,27 +1906,46 @@ public class ContactService {
         if(contactsList.isEmpty()) {
             return;
         }
-        Map<Id, Contact> contactHtfMap = new Map<Id, Contact>();
+        Set<Id> affiliationIdSet = new Set<Id>();
+        List<Contact> contactAffiliationList = new List<Contact>();
+        List<String> zipCodesList = new List<String>();
+        List<Contact> contactZipList = new List<Contact>();
         for(Contact con : contactsList) {
             if(con.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID && con.Region_Chapter__c == null) {
-                if(oldContactsMap == null && con.npsp__Primary_Affiliation__c != null) {
-                    contactHtfMap.put(con.npsp__Primary_Affiliation__c, con);
-                } else if(oldContactsMap != null && con.npsp__Primary_Affiliation__c != oldContactsMap.get(con.Id).npsp__Primary_Affiliation__c) {
-                    contactHtfMap.put(con.npsp__Primary_Affiliation__c, con);
+                if((oldContactsMap == null && con.npsp__Primary_Affiliation__c != null) 
+                   || (oldContactsMap != null && con.npsp__Primary_Affiliation__c != oldContactsMap.get(con.Id).npsp__Primary_Affiliation__c)) 
+                {
+                    affiliationIdSet.add(con.npsp__Primary_Affiliation__c);
+                    contactAffiliationList.add(con);
+                } else if((oldContactsMap == null && String.isNotBlank(con.MailingPostalCode)) 
+                          || (oldContactsMap != null && con.MailingPostalCode != oldContactsMap.get(con.Id).MailingPostalCode)) 
+                {
+                    zipCodesList.add(Utils.splitString(con.MailingPostalCode, '-')[0]);
+                    contactZipList.add(con);
                 }
             }
         }
-        if(!contactHtfMap.isEmpty()) {
+        if(!contactAffiliationList.isEmpty()) {
             Map<Id, Account> accountMap = new Map<Id, Account>([
                 SELECT Id, Chapter_Name__c 
                 FROM Account 
-                WHERE Id IN :contactHtfMap.keySet()
+                WHERE Id IN :affiliationIdSet
                 AND RecordTypeId = :Constant_AC.HOSPITAL_TREATMENT_ID
                 AND Chapter_Name__c != null
             ]);
-            for(Contact mpContact : contactHtfMap.values()) {
+            for(Contact mpContact : contactAffiliationList) {
                 if(accountMap.containsKey(mpContact.npsp__Primary_Affiliation__c)) {
                     mpContact.Region_Chapter__c = accountMap.get(mpContact.npsp__Primary_Affiliation__c).Chapter_Name__c;
+                    mpContact.Hidden_Chapter__c = mpContact.Region_Chapter__c;
+                }
+            }
+        }
+        if(!contactZipList.isEmpty()) {
+            Map<String, Id> zipChapterMap = new Map<String, Id>(ChapterStaffRecordSharing_AC.getChapterByZipcode(zipCodesList));
+            for(Contact mpContact : contactZipList) {
+                String zip = Utils.splitString(mpContact.MailingPostalCode, '-')[0];
+                if(zipChapterMap.containsKey(zip)) {
+                    mpContact.Region_Chapter__c = zipChapterMap.get(zip);
                     mpContact.Hidden_Chapter__c = mpContact.Region_Chapter__c;
                 }
             }
@@ -1999,5 +2018,47 @@ public class ContactService {
                 ChapterStaffRecordSharing_AC.ContactSharing(chapterContactMap);
             }
         }
+    }
+
+    /**
+    * @description Get duplicate records for Contact records according to Duplicate Rules
+    * @param contactInputs ContactDuplicateInput
+    * @return Wrapper List of Contacts
+    */
+    @InvocableMethod(Label='Find Contact Duplicates' Description='Find duplicate contact records')
+    public static List<List<Contact>> getDuplicateRecords(List<ContactDuplicateInput> contactInputs) {
+        List<Contact> contacts = new List<Contact>();
+        for(ContactDuplicateInput input : contactInputs){
+            contacts.add(input.contactInput);
+        }
+        Datacloud.FindDuplicatesResult[] results = Datacloud.FindDuplicates.findDuplicates(contacts);
+        if(results.isEmpty()) {
+            return new List<List<Contact>>();
+        }
+        Set<Id> duplicateContactsIds = new Set<Id>();
+        for (Datacloud.FindDuplicatesResult findDupeResult : results) {
+            for (Datacloud.DuplicateResult dupeResult : findDupeResult.getDuplicateResults()) {
+                for (Datacloud.MatchResult matchResult : dupeResult.getMatchResults()) {
+                    for (Datacloud.MatchRecord matchRecord : matchResult.getMatchRecords()) {
+                        Contact duplicateContact = (Contact) matchRecord.getRecord();
+                        duplicateContactsIds.add(duplicateContact.Id);
+                    }
+                }
+            }
+        }
+        List<Contact> duplicatedContacts = [
+                SELECT Id, FirstName, LastName, Email, Phone, MailingCity, MailingState, Primary_Affiliation_Name__c,
+                        Hidden_Chapter_Name__c, Provider_Type__c, Specialty__c
+                FROM Contact
+                WHERE Id IN :duplicateContactsIds
+        ];
+        List<List<Contact>> duplicatedContactsList = new List<List<Contact>>();
+        duplicatedContactsList.add(duplicatedContacts);
+        return duplicatedContactsList;
+    }
+
+    public class ContactDuplicateInput {
+        @InvocableVariable(Label='Input Contact Record' Description='Single record to evaluate duplicates' Required=true)
+        public Contact contactInput;
     }
 }
