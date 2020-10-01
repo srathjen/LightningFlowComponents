@@ -165,7 +165,7 @@
     <externalSharingModel>ControlledByParent</externalSharingModel>
     <fields>
         <fullName>External_ID__c</fullName>
-        <description>Captures the RE ID of imported Address records.</description>
+        <description>Captures the RE ID / Foreign Key of imported Address records.</description>
         <externalId>false</externalId>
         <label>External ID</label>
         <length>30</length>
