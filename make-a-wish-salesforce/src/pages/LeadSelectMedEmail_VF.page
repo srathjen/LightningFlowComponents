@@ -20,7 +20,7 @@
                             <th title="First Name">Name</th>
                             <th title="Email">E-mail</th>
                             <th title="Type">Type</th>
-                            <th colspan="2" title="Type">Notes</th>
+                            <th colspan="2" title="Type">Contact Notes</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,7 +29,7 @@
                             <td>{!ctc.name}</td>
                             <td></td>
                             <td>{!ctc.type}</td>
-                            <td colspan="2" rowspan="{!ctc.numProvidedEmails}" style="white-space: break-spaces;">{!ctc.contactNotes}>asd</td>
+                            <td colspan="2" rowspan="{!ctc.numProvidedEmails}" style="white-space: break-spaces; vertical-align: text-top;">{!ctc.contactNotes}</td>
                         </tr>
                         <tr>
                             <td style="border: none; {!IF(ctc.workEmail == '','display:none;','')}"></td>
