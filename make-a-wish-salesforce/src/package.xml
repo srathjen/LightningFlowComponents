@@ -520,6 +520,15 @@
     <name>GlobalValueSet</name>
   </types>
   <types>
+    <members>npe01</members>
+    <members>npe03</members>
+    <members>npe4</members>
+    <members>npe5</members>
+    <members>npo02</members>
+    <members>npsp</members>
+    <name>InstalledPackage</name>
+  </types>
+  <types>
     <members>*</members>
     <name>Layout</name>
   </types>
