@@ -22,12 +22,10 @@ Modification Log:
     },
     handleDiagnosisVerficationProcess: function (lead, component) {
         //Handle diagnosis verfication - checking criteria and send to appropriate processing
-        var _this = this,
-            descIcd_criteria = lead.PD_Condition_Description__c || lead.PD_ICD_Code__c,
-            statusCriteria = lead.Sub_Status__c === 'Pending Diagnosis Verification'
-                || lead.Status === 'Eligibility Review';
-        if (descIcd_criteria) {
-            if (statusCriteria) {
+        let _this = this;
+        if (lead.PD_Condition_Description__c || lead.PD_ICD_Code__c) {
+            if (lead.Sub_Status__c === 'Pending Diagnosis Verification'
+                || lead.Status === 'Eligibility Review') {
                 _this.handleMediProfessional(lead, component);
             } else if (lead.Status !== 'Referred') {
                 _this.handleReferredLead(lead.Status, component);
@@ -126,17 +124,18 @@ Modification Log:
     },
     handleMediProfessional: function (lead, component) {
         //Check for medical professional
-        var _this = this,
+        let _this = this,
             paperDVProcess = lead.Using_Paper_Process_For_DV__c,
             AgeRequirementNotMet = lead.Child_Age__c === 'Under 2.5' || lead.Child_Age__c === '18 & Above';
-        if (!paperDVProcess) {
-            var verificationMessage = "Are you sure you want to submit Diagnosis Verification?";
-            if (AgeRequirementNotMet) {
-                verificationMessage = "This child did not meet our referral age. A DV should not be sent for this child unless your chapter has received a waiver from the Chapter Performance Committee. " + verificationMessage;
-            }
+        if (!paperDVProcess && !AgeRequirementNotMet) {
+            _this.navigateTo("/apex/LeadSelectMedEmail_VF?id=" + lead.Id);
+        } else if (!paperDVProcess && AgeRequirementNotMet) {
+            let verificationMessage = "This child did not meet our referral age. A DV should not be sent for this child unless your chapter has received a waiver from the Chapter Performance Committee. " + verificationMessage;
+            // }
             _this.handleConfirmation(false, component, verificationMessage, function () {
-                var checkMedProf = (lead.Treating_Medical_Professional_Email__c || lead.Treating_MP__c),
-                    checkAltProf = (lead.Best_contact_for_Physician_Email__c || lead.Best_Contact__c) || lead.Alternate1MedicalProfessionalEmail__c || lead.Alternate2MedProfessionalEmail__c,
+                let checkMedProf = (lead.Treating_Medical_Professional_Email__c || lead.Treating_MP__c),
+                    checkAltProf = (lead.Best_contact_for_Physician_Email__c || lead.Best_Contact__c)
+                        || lead.Alternate1MedicalProfessionalEmail__c || lead.Alternate2MedProfessionalEmail__c,
                     mediProf_criteria = checkMedProf || checkAltProf;
                 if (checkAltProf || checkMedProf) {
                     _this.navigateTo("/apex/LeadSelectMedEmail_VF?id=" + lead.Id);
@@ -154,8 +153,8 @@ Modification Log:
     },
     handleReferredLead: function (leadStatus, component) {
         //Check lead in referred status
-        var _this = this;
-        var msg = "Diagnosis verification cannot be sent when lead is in " + leadStatus + " status.";
+        let _this = this;
+        let msg = "Diagnosis verification cannot be sent when lead is in " + leadStatus + " status.";
         _this.handleConfirmation(false, component, msg, function () {
             _this.closeQuickAction();
         }, true);

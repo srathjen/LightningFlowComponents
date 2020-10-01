@@ -127,6 +127,11 @@ public class LeadService {
 		lead.Ventilator__c = EMPTY;
 		lead.Why_do_you_feel_would_be_eligible_Wish__c = EMPTY;
 		lead.Will_Child_s_Condition_Deteriorate__c = EMPTY;
+		lead.DV_Signer_Changed__c = false;
+		lead.DV_Signer_First_Name__c = EMPTY;
+		lead.DV_Signer_Last_Name__c = EMPTY;
+		lead.DV_Signer_Phone__c = EMPTY;
+		lead.DV_Signer_Email__c = EMPTY;
 
 		//SIW-378 : Reset Fields
 		lead.Does_Child_Have_Cognitive_Delays__c = EMPTY;

@@ -113,7 +113,10 @@ public class LeadSelectMedEmailController_AC {
 		} else if (lead.Referring_MP__c == lead.Best_Contact__c) {
 			displayReferringContactInformation = false;
 		}
-		if (lead.Referring_MP__c != null && displayReferringContactInformation) {
+		if (lead.Referring_MP__c != null && displayReferringContactInformation
+				&& (String.isNotEmpty(lead.Referring_MP__r.npe01__WorkEmail__c)
+				|| String.isNotEmpty(lead.Referring_MP__r.npe01__AlternateEmail__c)
+				|| String.isNotEmpty(lead.Referring_MP__r.Alternate_Email_2__c))) {
 			SendDiagnosisWrapper referringMp = new SendDiagnosisWrapper();
 			referringMp.id = lead.Referring_MP__c;
 			referringMp.name = lead.Referring_MP__r.Name;
@@ -143,9 +146,12 @@ public class LeadSelectMedEmailController_AC {
 					referringMp.newEmailProvided = lead.Referring_MP_Email__c;
 				}
 			}
+			referringMp.numProvidedEmails = countNumberOfEmailsProvided(referringMp);
 			contacts.add(referringMp);
 		}
-		if (lead.Treating_MP__c != null) {
+		if (lead.Treating_MP__c != null && (String.isNotEmpty(lead.Treating_MP__r.npe01__WorkEmail__c)
+				|| String.isNotEmpty(lead.Treating_MP__r.npe01__AlternateEmail__c)
+				|| String.isNotEmpty(lead.Treating_MP__r.Alternate_Email_2__c))) {
 			SendDiagnosisWrapper treatingMp = new SendDiagnosisWrapper();
 			treatingMp.id = lead.Treating_MP__c;
 			treatingMp.name = lead.Treating_MP__r.Name;
@@ -175,9 +181,12 @@ public class LeadSelectMedEmailController_AC {
 					treatingMp.newEmailProvided = lead.Treating_Medical_Professional_Email__c;
 				}
 			}
+			treatingMp.numProvidedEmails = countNumberOfEmailsProvided(treatingMp);
 			contacts.add(treatingMp);
 		}
-		if (lead.Best_Contact__c != null) {
+		if (lead.Best_Contact__c != null && (String.isNotEmpty(lead.Best_Contact__r.npe01__WorkEmail__c)
+				|| String.isNotEmpty(lead.Best_Contact__r.npe01__AlternateEmail__c)
+				|| String.isNotEmpty(lead.Best_Contact__r.Alternate_Email_2__c))) {
 			SendDiagnosisWrapper bestContact = new SendDiagnosisWrapper();
 			bestContact.id = lead.Best_Contact__c;
 			bestContact.name = lead.Best_Contact__r.Name;
@@ -207,9 +216,12 @@ public class LeadSelectMedEmailController_AC {
 					bestContact.newEmailProvided = lead.Best_contact_for_Physician_Email__c;
 				}
 			}
+			bestContact.numProvidedEmails = countNumberOfEmailsProvided(bestContact);
 			contacts.add(bestContact);
 		}
-		if (lead.Alt_1_MP__c != null) {
+		if (lead.Alt_1_MP__c != null && (String.isNotEmpty(lead.Alt_1_MP__r.npe01__WorkEmail__c)
+				|| String.isNotEmpty(lead.Alt_1_MP__r.npe01__AlternateEmail__c)
+				|| String.isNotEmpty(lead.Alt_1_MP__r.Alternate_Email_2__c))) {
 			SendDiagnosisWrapper alternate1Mp = new SendDiagnosisWrapper();
 			alternate1Mp.id = lead.Alt_1_MP__c;
 			alternate1Mp.name = lead.Alt_1_MP__r.Name;
@@ -226,9 +238,12 @@ public class LeadSelectMedEmailController_AC {
 			if (String.isNotEmpty(lead.Alt_1_MP__r.Contact_Notes__c)) {
 				alternate1Mp.contactNotes = lead.Alt_1_MP__r.Contact_Notes__c;
 			}
+			alternate1Mp.numProvidedEmails = countNumberOfEmailsProvided(alternate1Mp);
 			contacts.add(alternate1Mp);
 		}
-		if (lead.Alt_2_MP__c != null) {
+		if (lead.Alt_2_MP__c != null && (String.isNotEmpty(lead.Alt_2_MP__r.npe01__WorkEmail__c)
+				|| String.isNotEmpty(lead.Alt_2_MP__r.npe01__AlternateEmail__c)
+				|| String.isNotEmpty(lead.Alt_2_MP__r.Alternate_Email_2__c))) {
 			SendDiagnosisWrapper alternate2Mp = new SendDiagnosisWrapper();
 			alternate2Mp.id = lead.Alt_2_MP__c;
 			alternate2Mp.name = lead.Alt_2_MP__r.Name;
@@ -245,6 +260,7 @@ public class LeadSelectMedEmailController_AC {
 			if (String.isNotEmpty(lead.Alt_2_MP__r.Contact_Notes__c)) {
 				alternate2Mp.contactNotes = lead.Alt_2_MP__r.Contact_Notes__c;
 			}
+			alternate2Mp.numProvidedEmails = countNumberOfEmailsProvided(alternate2Mp);
 			contacts.add(alternate2Mp);
 		}
 		return contacts;
@@ -262,6 +278,7 @@ public class LeadSelectMedEmailController_AC {
 		public String alternateEmail2 { get; set; }
 		public String newEmailProvided { get; set; }
 		public String contactNotes { get; set; }
+		public Integer numProvidedEmails { get; set; }
 	}
 
 	/**
@@ -283,5 +300,28 @@ public class LeadSelectMedEmailController_AC {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * @description Count the number of provided emails
+	 * @param wrapper SendDiagnosisWrapper
+	 * @return Integer
+	*/
+	private static Integer countNumberOfEmailsProvided(SendDiagnosisWrapper wrapper) {
+		// Starts with 1 because the Name of the MP counts as a row
+		Integer num = 1;
+		if (String.isNotEmpty(wrapper.workEmail)) {
+			num++;
+		}
+		if (String.isNotEmpty(wrapper.alternateEmail1)) {
+			num++;
+		}
+		if (String.isNotEmpty(wrapper.alternateEmail2)) {
+			num++;
+		}
+		if (String.isNotEmpty(wrapper.newEmailProvided)) {
+			num++;
+		}
+		return num;
 	}
 }

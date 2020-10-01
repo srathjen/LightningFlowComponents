@@ -16,56 +16,59 @@
                 </div>
                 <table class="slds-table slds-table--bordered">
                     <thead class="thead-default">
-                    <tr>
-                        <th title="First Name">Name</th>
-                        <th title="Type">Type</th>
-                        <th colspan="3" title="Type">Notes</th>
-                    </tr>
+                        <tr>
+                            <th title="First Name">Name</th>
+                            <th title="Email">E-mail</th>
+                            <th title="Type">Type</th>
+                            <th colspan="2" title="Type">Notes</th>
+                        </tr>
                     </thead>
                     <tbody>
                     <apex:repeat value="{!contacts}" var="ctc">
                         <tr class="slds-text-title_caps">
                             <td>{!ctc.name}</td>
+                            <td></td>
                             <td>{!ctc.type}</td>
-                            <td colspan="3" rowspan="4" style="white-space: break-spaces;">{!ctc.contactNotes}</td>
-                        <tr>
-                            <td colspan="2"
-                                style="border: none; padding-left: 50px; {!IF(ctc.workEmail == '','display:none;','')}">
-                                <input id="{!ctc.type}WorkEmail" type="radio" name="rec" class="selVal"
-                                       value="{!ctc.workEmail}" data-type="{!ctc.type}" data-email="{!ctc.workEmail}"/>
-                                <label for="{!ctc.type}WorkEmail">{!ctc.workEmail} (Work E-mail)</label>
-                            </td>
+                            <td colspan="2" rowspan="{!ctc.numProvidedEmails}" style="white-space: break-spaces;">{!ctc.contactNotes}>asd</td>
                         </tr>
                         <tr>
-                            <td id="{!ctc.type}" colspan="2"
-                                style="border: none; padding-left: 50px; {!IF(ctc.alternateEmail1 == '','display:none;','')}">
+                            <td style="border: none; {!IF(ctc.workEmail == '','display:none;','')}"></td>
+                            <td id="{!ctc.type}" style="border: none; {!IF(ctc.workEmail == '','display:none;','')}">
+                                <input id="{!ctc.type}WorkEmail" type="radio" name="rec" class="selVal"
+                                       value="{!ctc.workEmail}" data-type="{!ctc.type}" data-email="{!ctc.workEmail}"/>
+                                <label for="{!ctc.type}WorkEmail">{!ctc.workEmail}</label>
+                            </td>
+                            <td style="border: none; {!IF(ctc.workEmail == '','display:none;','')}">Work</td>
+                        </tr>
+                        <tr>
+                            <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail1 == '','display:none;','')}"></td>
+                            <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail1 == '','display:none;','')}">
                                 <input id="{!ctc.type}AlternateEmail1" type="radio" name="rec" class="selVal"
                                        value="{!ctc.alternateEmail1}" data-type="{!ctc.type}"
                                        data-email="{!ctc.alternateEmail1}"/>
-                                <label for="{!ctc.type}AlternateEmail1">{!ctc.alternateEmail1} (Alternate 1
-                                    E-mail)</label>
+                                <label for="{!ctc.type}AlternateEmail1">{!ctc.alternateEmail1}</label>
                             </td>
+                            <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail1 == '','display:none;','')}">Alt 1</td>
                         </tr>
                         <tr>
-                            <td id="{!ctc.type}" colspan="2"
-                                style="border: none; padding-left: 50px; {!IF(ctc.alternateEmail2 == '','display:none;','')}">
+                            <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail2 == '','display:none;','')}"></td>
+                            <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail2 == '','display:none;','')}">
                                 <input id="{!ctc.type}AlternateEmail2" type="radio" name="rec" class="selVal"
                                        value="{!ctc.alternateEmail2}" data-type="{!ctc.type}"
                                        data-email="{!ctc.alternateEmail2}"/>
-                                <label for="{!ctc.type}AlternateEmail2">{!ctc.alternateEmail2} (Alternate 2
-                                    E-mail)</label>
+                                <label for="{!ctc.type}AlternateEmail2">{!ctc.alternateEmail2}</label>
                             </td>
+                            <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail2 == '','display:none;','')}">Alt 2</td>
                         </tr>
                         <tr>
-                            <td id="{!ctc.type}" colspan="2"
-                                style="border: none; padding-left: 50px; {!IF(ctc.newEmailProvided == '','display:none;','')}">
+                            <td id="{!ctc.type}" style="border: none; {!IF(ctc.newEmailProvided == '','display:none;','')}"></td>
+                            <td id="{!ctc.type}" style="border: none; {!IF(ctc.newEmailProvided == '','display:none;','')}">
                                 <input id="{!ctc.type}NewProvidedEmail" type="radio" name="rec" class="selVal"
                                        value="{!ctc.newEmailProvided}" data-type="{!ctc.type}"
                                        data-email="{!ctc.newEmailProvided}"/>
-                                <label for="{!ctc.type}NewProvidedEmail">{!ctc.newEmailProvided} (New Email
-                                    Provided)</label>
+                                <label for="{!ctc.type}NewProvidedEmail">{!ctc.newEmailProvided}</label>
                             </td>
-                        </tr>
+                            <td id="{!ctc.type}" style="border: none; {!IF(ctc.newEmailProvided == '','display:none;','')}">New Provided</td>
                         </tr>
                     </apex:repeat>
                     </tbody>
@@ -173,7 +176,7 @@
                 }
 
                 $(document).on('click', "#swalCancelButton", function () {
-                    sendDiagnosisVerification('', '', 'returnToLead');
+                    // Placeholder just to close the window and do nothing
                 });
 
                 $(document).on('click', "#swalConfirmButton", function () {
@@ -289,7 +292,7 @@
         }
 
         .slds {
-            margin-top: 3%
+            margin-top: 3%;
         }
 
         .sweet-alert {
@@ -301,25 +304,17 @@
         }
 
         #swalCancelButton {
-            background: #d33
+            background: #0057B8 !important;
+            opacity: .9;
         }
 
-        #swalCancelButton {
+        #swalConfirmButton {
             background: #d33;
-            opacity: .9
-        }
-
-        #swalConfirmButton {
-            background: #0057B8
-        }
-
-        #swalConfirmButton {
-            background: #0057B8;
-            opacity: .9
+            opacity: .9;
         }
 
         .hideBlock {
-            display: none
+            display: none;
         }
 
         .confirm {
