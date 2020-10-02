@@ -9,6 +9,7 @@ public class RelationshipService {
 	private final static Id MEDICAL_PROFESSIONAL_ID = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
 	private final static Id CONTACT_WISH_CHILD_RT_ID = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
 	private final static String MEDICAL_PROFESSIONAL_LABEL = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+	private static final String LEAD_DV_FORM_TYPE_REFERRING_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_REFERRING_MEDICAL_PROFESSIONAL;
 	private static final String LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL;
 	private static final String LEAD_DV_FORM_TYPE_BEST_CONTACT = Constant_AC.LEAD_DV_FORM_TYPE_BEST_CONTACT;
 	private static final String LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL;
@@ -26,6 +27,24 @@ public class RelationshipService {
 	 */
 	public static Map<Id, npe4__Relationship__c> buildLeadConvertRelationships(Lead convertedLead) {
 		Map<Id, npe4__Relationship__c> relationshipMap = new Map<Id, npe4__Relationship__c>();
+		// Create Relationship Referring Medical Professional
+		if (convertedLead.Referring_MP__c != null) {
+			npe4__Relationship__c newRelationship = new npe4__Relationship__c();
+			if (relationshipMap.containsKey(convertedLead.Referring_MP__c)) {
+				newRelationship = relationshipMap.get(convertedLead.Referring_MP__c);
+			} else {
+				newRelationship.npe4__Contact__c = convertedLead.ConvertedContactId;
+				newRelationship.npe4__Type__c = MEDICAL_PROFESSIONAL_LABEL;
+				newRelationship.npe4__RelatedContact__c = convertedLead.Referring_MP__c;
+				newRelationship.npe4__Status__c = RELATIONSHIP_ACTIVE;
+			}
+			newRelationship.Referring_Medical_Professional__c = true;
+			if (convertedLead.Hidden_DV_form_Medical_professional_Type__c == LEAD_DV_FORM_TYPE_REFERRING_MEDICAL_PROFESSIONAL) {
+				newRelationship.Qualifying_Medical_Professional__c = true;
+			}
+			relationshipMap.put(convertedLead.Referring_MP__c, newRelationship);
+		}
+
 		// Create Relationship Treating Medical Professional
 		if (convertedLead.Treating_MP__c != null) {
 			npe4__Relationship__c newRelationship = new npe4__Relationship__c();
@@ -48,28 +67,6 @@ public class RelationshipService {
 			relationshipMap.put(convertedLead.Treating_MP__c, newRelationship);
 		}
 
-		// Create Relationship Referring Medical Professional
-		if (convertedLead.Referring_MP__c != null) {
-			npe4__Relationship__c newRelationship = new npe4__Relationship__c();
-			if (relationshipMap.containsKey(convertedLead.Referring_MP__c)) {
-				newRelationship = relationshipMap.get(convertedLead.Referring_MP__c);
-			} else {
-				newRelationship.npe4__Contact__c = convertedLead.ConvertedContactId;
-				newRelationship.npe4__Type__c = MEDICAL_PROFESSIONAL_LABEL;
-				newRelationship.npe4__RelatedContact__c = convertedLead.Referring_MP__c;
-				newRelationship.npe4__Status__c = RELATIONSHIP_ACTIVE;
-				newRelationship.Treating_HCP__c = true;
-			}
-			newRelationship.Referring_Medical_Professional__c = true;
-			Boolean isTreatingMedicalProfessionalAlsoReferrer = convertedLead.Treating_MP__c == convertedLead.Referring_MP__c;
-			if (isTreatingMedicalProfessionalAlsoReferrer) {
-				if (convertedLead.Hidden_DV_form_Medical_professional_Type__c == LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL) {
-					newRelationship.Qualifying_Medical_Professional__c = true;
-				}
-			}
-			relationshipMap.put(convertedLead.Referring_MP__c, newRelationship);
-		}
-
 		// Create Relationship Alternate 1 Medical Professional
 		if (convertedLead.Alt_1_MP__c != null) {
 			npe4__Relationship__c newRelationship = new npe4__Relationship__c();
@@ -80,10 +77,6 @@ public class RelationshipService {
 				newRelationship.npe4__Type__c = MEDICAL_PROFESSIONAL_LABEL;
 				newRelationship.npe4__RelatedContact__c = convertedLead.Alt_1_MP__c ;
 				newRelationship.npe4__Status__c = RELATIONSHIP_ACTIVE;
-			}
-			Boolean isAlternate1MedicalProfessionalAlsoReferrer = convertedLead.Alt_1_MP__c == convertedLead.Referring_MP__c;
-			if (isAlternate1MedicalProfessionalAlsoReferrer) {
-				newRelationship.Referring_Medical_Professional__c = true;
 			}
 			if (convertedLead.Hidden_DV_form_Medical_professional_Type__c == LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL) {
 				newRelationship.Qualifying_Medical_Professional__c = true;
@@ -101,10 +94,6 @@ public class RelationshipService {
 				newRelationship.npe4__Type__c = MEDICAL_PROFESSIONAL_LABEL;
 				newRelationship.npe4__RelatedContact__c = convertedLead.Alt_2_MP__c ;
 				newRelationship.npe4__Status__c = RELATIONSHIP_ACTIVE;
-			}
-			Boolean isAlternate2MedicalProfessionalAlsoReferrer = convertedLead.Alt_2_MP__c == convertedLead.Referring_MP__c;
-			if (isAlternate2MedicalProfessionalAlsoReferrer) {
-				newRelationship.Referring_Medical_Professional__c = true;
 			}
 			if (convertedLead.Hidden_DV_form_Medical_professional_Type__c == LEAD_DV_FORM_TYPE_ALTERNATE_2_MEDICAL_PROFESSIONAL) {
 				newRelationship.Qualifying_Medical_Professional__c = true;
@@ -124,14 +113,6 @@ public class RelationshipService {
 				newRelationship.npe4__Status__c = RELATIONSHIP_ACTIVE;
 			}
 			newRelationship.Best_Contact__c = true;
-			Boolean isBestContactMedicalProfessionalAlsoReferrer = convertedLead.Best_Contact__c == convertedLead.Referring_MP__c;
-			if (isBestContactMedicalProfessionalAlsoReferrer) {
-				newRelationship.Referring_Medical_Professional__c = true;
-			}
-			Boolean isTreatingMedicalProfessionalAlsoBestContact = convertedLead.Treating_MP__c == convertedLead.Best_Contact__c;
-			if (isTreatingMedicalProfessionalAlsoBestContact) {
-				newRelationship.Treating_HCP__c = true;
-			}
 			if (convertedLead.Hidden_DV_form_Medical_professional_Type__c == LEAD_DV_FORM_TYPE_BEST_CONTACT) {
 				newRelationship.Qualifying_Medical_Professional__c = true;
 			}
