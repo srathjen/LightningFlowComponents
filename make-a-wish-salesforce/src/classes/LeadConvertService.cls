@@ -324,7 +324,8 @@ public class LeadConvertService {
 		Map<Id, Lead> convertedLeadsById = new Map<Id, Lead>();
 		for (Lead convertedLead : [
 				SELECT Id, ConvertedContactId, Referring_MP_HTF__c, Treating_MP_HTF__c,
-						Best_Contact_HTF__c, Part_A_Received__c, Part_A_Sent__c
+						Best_Contact_HTF__c, Part_A_Received__c, Part_A_Sent__c,
+						Alt_1_MP_HTF__c, Alt_2_MP_HTF__c
 				FROM Lead
 				WHERE Id IN :leadIds
 		]) {
