@@ -160,7 +160,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- REFERRER IS MEDICAL PROFESSIONAL -->
                     <div class="refToMP">
                         <div class="row" style="margin-top:-15px">
@@ -302,7 +302,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="row" style="padding-top: 25px">
                             <div class="col-sm-3" style="padding-top:15px">
                                 <label>{!$Label.Wish_Referral_Referring_Hospital_Facility}</label></div>
@@ -621,7 +621,7 @@
                         </div>
 
                         <apex:outputPanel id="rr">
-                            <apex:actionRegion >
+                            <apex:actionRegion>
                                 <div class="form-group row">
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Number_of_Siblings}</label>
                                     </div>
@@ -637,25 +637,26 @@
                                 </div>
                                 <div class="form-group row sibInfo">
                                     <apex:outputPanel id="table">
-                                        <apex:outputPanel rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
+                                        <apex:outputPanel
+                                                rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
                                             <label class="col-md-12">{!$Label.Wish_Referral_Sibling_Information}</label>
                                         </apex:outputPanel>
                                         <div class="col-md-12 sib-tablewrap">
                                             <apex:dataTable value="{!SiblingList}" var="currsibling"
                                                             styleClass="table table-maw table-hover">
-                                                <apex:column >
+                                                <apex:column>
                                                     <apex:inputText value="{!currsibling.fName}"
                                                                     styleClass="form-control"
                                                                     html-placeholder="{!$Label.Wish_Referral_Placeholder_First_Name}"
                                                                     id="psibfirstname"/>
                                                 </apex:column>
-                                                <apex:column >
+                                                <apex:column>
                                                     <apex:inputText value="{!currsibling.lName}"
                                                                     styleClass="form-control"
                                                                     html-placeholder="{!$Label.Wish_Referral_Last_Name}"
                                                                     id="psiblastname"/>
                                                 </apex:column>
-                                                <apex:column >
+                                                <apex:column>
                                                     <apex:inputText value="{!currsibling.age}" styleClass="form-control"
                                                                     html-placeholder="{!$Label.Wish_Referral_Age}"
                                                                     id="psibage"/>
@@ -951,7 +952,8 @@
                                         <label style="width:85px">{!$Label.Wish_Referral_Email}</label>
                                         <apex:inputText value="{!treatingNewAffEmail}"
                                                         styleClass="form-control email-std trtmpaffemail"
-                                                        html-placeholder="medicalprofessional_email@domain.com" id="trtmpaffemail"
+                                                        html-placeholder="medicalprofessional_email@domain.com"
+                                                        id="trtmpaffemail"
                                                         maxlength="80"/>
                                     </div>
                                 </div>
@@ -1433,7 +1435,7 @@
         </div>
     </div>
     <!-- / modal end -->
-    <apex:includeLightning />
+    <apex:includeLightning/>
     <script>
         window.addEventListener('load', () => {
             buildValidationLookupFields();
@@ -1633,7 +1635,7 @@
     <!--<script src="//ssl.wish.org/satellite/staging/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205-staging.js"></script>-->
     <!-- prod -->
     <script src="//ssl.wish.org/satellite/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205.js"></script>
-    <apex:outputPanel >
+    <apex:outputPanel>
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-2.2.4.min.js')}"></script>
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-ui-1.11.3.min.js')}"></script>
         <script>
@@ -1721,6 +1723,8 @@
                     window.parent.postMessage('home', '*');
                 }
             }
+
+
 
 
         </script>
@@ -1857,47 +1861,54 @@
         function handleEventResponse(event) {
             let eventData = event.getParam("EventData");
             let field;
+            let fieldOutput;
             let fieldInput;
             let fieldPair;
             let inputType;
+            let fieldCreateCheckbox;
             if (eventData.lookupId === 'externalReferrerContactLookup') {
-                let externalRefContact = document.querySelector('#externalReferrerContactLookup');
-                field = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0];
-                fieldInput = externalRefContact.querySelector('.slds-input');
+                field = document.querySelector('#externalReferrerContactLookup');
+                fieldOutput = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0];
+                fieldInput = field.querySelector('.slds-input');
                 inputType = 'referrerContact';
                 fieldPair = document.querySelectorAll('[id$="externalReferrerAccountLookupOutput"]')[0];
+                fieldCreateCheckbox = document.querySelectorAll('[id$="createNewRefMPchk"]')[0];
             } else if (eventData.lookupId === 'externalReferrerAccountLookup') {
-                let externalRefAccount = document.querySelector('#externalReferrerAccountLookup');
-                field = document.querySelectorAll('[id$="externalReferrerAccountLookupOutput"]')[0];
-                fieldInput = externalRefAccount.querySelector('.slds-input');
+                field = document.querySelector('#externalReferrerAccountLookup');
+                fieldOutput = document.querySelectorAll('[id$="externalReferrerAccountLookupOutput"]')[0];
+                fieldInput = field.querySelector('.slds-input');
                 inputType = 'referrerAccount';
                 fieldPair = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0];
+                fieldCreateCheckbox = document.querySelectorAll('[id$="createNewRefHTFchk"]')[0];
             } else if (eventData.lookupId === 'externalTreatingContactLookup') {
-                let externalTrtContact = document.querySelector('#externalTreatingContactLookup');
-                field = document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0];
-                fieldInput = externalTrtContact.querySelector('.slds-input');
+                field = document.querySelector('#externalTreatingContactLookup');
+                fieldOutput = document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0];
+                fieldInput = field.querySelector('.slds-input');
                 inputType = 'treatingContact';
                 fieldPair = document.querySelectorAll('[id$="externalTreatingAccountLookupOutput"]')[0];
+                fieldCreateCheckbox = document.querySelectorAll('[id$="createNewTrtMPchk"]')[0];
             } else if (eventData.lookupId === 'externalTreatingAccountLookup') {
-                let externalTrtAccount = document.querySelector('#externalTreatingAccountLookup');
-                field = document.querySelectorAll('[id$="externalTreatingAccountLookupOutput"]')[0];
-                fieldInput = externalTrtAccount.querySelector('.slds-input');
+                field = document.querySelector('#externalTreatingAccountLookup');
+                fieldOutput = document.querySelectorAll('[id$="externalTreatingAccountLookupOutput"]')[0];
+                fieldInput = field.querySelector('.slds-input');
                 inputType = 'treatingAccount';
                 fieldPair = document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0];
+                fieldCreateCheckbox = document.querySelectorAll('[id$="createNewTrtHTFchk"]')[0];
             } else if (eventData.lookupId === 'externalBestContactLookup') {
-                let externalBestContact = document.querySelector('#externalBestContactLookup');
-                field = document.querySelectorAll('[id$="externalBestContactLookupOutput"]')[0];
-                fieldInput = externalBestContact.querySelector('.slds-input');
+                field = document.querySelector('#externalBestContactLookup');
+                fieldOutput = document.querySelectorAll('[id$="externalBestContactLookupOutput"]')[0];
+                fieldInput = field.querySelector('.slds-input');
                 inputType = 'bestContact';
                 fieldPair = document.querySelectorAll('[id$="externalTreatingAccountLookupOutput"]')[0];
+                fieldCreateCheckbox = document.querySelectorAll('[id$="createNewBestMPchk"]')[0];
             }
-            if (field && eventData.eventType === 'select') {
-                field.value = eventData.recordId;
+            if (fieldOutput && eventData.eventType === 'select') {
+                fieldOutput.value = eventData.recordId;
                 //if both MP and HTF populated check if affiliation exists and render email and phone fields if none
                 if (fieldPair.value) {
                     Visualforce.remoting.Manager.invokeAction(
                         '{!$RemoteAction.WishReferralForm_AC.searchAccountContactAffiliation}',
-                        field.value, fieldPair.value,
+                        fieldOutput.value, fieldPair.value,
                         function (result, event) {
                             if (event.status && result === true) {
                                 if (inputType === 'referrerContact' || inputType === 'referrerAccount') {
@@ -1923,10 +1934,10 @@
                         //check if contact is missing all email and phone fields
                         Visualforce.remoting.Manager.invokeAction(
                             '{!$RemoteAction.WishReferralForm_AC.checkEmptyContactFields}',
-                            field.value,
+                            fieldOutput.value,
                             function (result, event) {
                                 if (event.status) {
-                                    if(result === true) {
+                                    if (result === true) {
                                         document.getElementsByClassName('refNewAff')[0].style.display = 'block';
                                         document.querySelectorAll('[id$="referrerContactEmpty"]')[0].value = true;
                                     } else {
@@ -1944,10 +1955,10 @@
                     } else {
                         Visualforce.remoting.Manager.invokeAction(
                             '{!$RemoteAction.WishReferralForm_AC.checkEmptyContactFields}',
-                            field.value,
+                            fieldOutput.value,
                             function (result, event) {
                                 if (event.status) {
-                                    if(result === true) {
+                                    if (result === true) {
                                         document.getElementsByClassName('trtNewAff')[0].style.display = 'block';
                                         document.querySelectorAll('[id$="treatingContactEmpty"]')[0].value = true;
                                     } else {
@@ -1965,10 +1976,10 @@
                     } else {
                         Visualforce.remoting.Manager.invokeAction(
                             '{!$RemoteAction.WishReferralForm_AC.checkEmptyContactFields}',
-                            field.value,
+                            fieldOutput.value,
                             function (result, event) {
                                 if (event.status) {
-                                    if(result === true) {
+                                    if (result === true) {
                                         document.getElementsByClassName('bestNewAff')[0].style.display = 'block';
                                         document.querySelectorAll('[id$="bestContactEmpty"]')[0].value = true;
                                     } else {
@@ -1979,17 +1990,16 @@
                             {escape: true}
                         );
                     }
-                } else if(inputType === 'referrerAccount') {
+                } else if (inputType === 'referrerAccount') {
                     document.querySelector('[id$="createNewRefHTFchk"]').disabled = true;
-                } else if(inputType === 'treatingAccount') {
+                } else if (inputType === 'treatingAccount') {
                     document.querySelector('[id$="createNewTrtHTFchk"]').disabled = true;
                 }
-                validateForm();
-            } else if (field && eventData.eventType === 'clear') {
-                if (field.value !== '' && fieldInput.value !== '') {
+            } else if (fieldOutput && eventData.eventType === 'clear') {
+                if (fieldOutput.value !== '' && fieldInput.value !== '') {
                     fieldInput.value = '';
                 }
-                field.value = '';
+                fieldOutput.value = '';
                 if (inputType === 'referrerContact') {
                     document.querySelector('[id$="createNewRefMPchk"]').disabled = false;
                     document.getElementsByClassName('refNewAff')[0].style.display = 'none';
@@ -1998,7 +2008,7 @@
                     document.querySelector('[id$="createNewRefHTFchk"]').disabled = false;
                     document.querySelectorAll('[id$="referrerAffiliation"]')[0].value = false;
                     let referringContact = document.getElementById('j_id0:frm:referrerContactEmpty').value;
-                    if(referringContact === 'false') {
+                    if (referringContact === 'false') {
                         document.getElementsByClassName('refNewAff')[0].style.display = 'none';
                     }
                 } else if (inputType === 'treatingContact') {
@@ -2015,20 +2025,19 @@
                     document.querySelectorAll('[id$="bestAffiliation"]')[0].value = false;
                     let treatingContact = document.getElementById('j_id0:frm:treatingContactEmpty').value;
                     let bestContact = document.getElementById('j_id0:frm:bestContactEmpty').value;
-                    if(treatingContact === 'false') {
+                    if (treatingContact === 'false') {
                         document.getElementsByClassName('trtNewAff')[0].style.display = 'none';
                     }
-                    if(bestContact === 'false') {
+                    if (bestContact === 'false') {
                         document.getElementsByClassName('bestNewAff')[0].style.display = 'none';
                     }
                 }
-                validateForm();
             }
+            validateLookupField(field, fieldOutput, fieldCreateCheckbox);
         }
 
         // Function to change the Search related field to disabled
         function onChangeCreateCheckbox(id, checked) {
-            validateForm();
             let fieldInput;
             let field;
             let fieldPair;
@@ -2046,9 +2055,9 @@
                 field = document.getElementById('j_id0:frm:externalReferrerAccountLookupOutput');
                 fieldPair = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0];
                 let referringContactEmpty = document.getElementById('j_id0:frm:referrerContactEmpty').value;
-                if(fieldPair.value && checked === true) {
+                if (fieldPair.value && checked === true) {
                     document.getElementsByClassName('refNewAff')[0].style.display = 'block';
-                } else if(checked === false && referringContactEmpty === 'false') {
+                } else if (checked === false && referringContactEmpty === 'false') {
                     document.getElementsByClassName('refNewAff')[0].style.display = 'none';
                 }
             } else if (id === 'j_id0:frm:createNewTrtHTFchk') {
@@ -2058,14 +2067,14 @@
                 let fieldPairBest = document.querySelectorAll('[id$="externalBestContactLookupOutput"]')[0];
                 let treatingContactEmpty = document.getElementById('j_id0:frm:treatingContactEmpty').value;
                 let bestContactEmpty = document.getElementById('j_id0:frm:bestContactEmpty').value;
-                if(fieldPair.value && checked === true) {
+                if (fieldPair.value && checked === true) {
                     document.getElementsByClassName('trtNewAff')[0].style.display = 'block';
-                } else if(checked === false && treatingContactEmpty === 'false') {
+                } else if (checked === false && treatingContactEmpty === 'false') {
                     document.getElementsByClassName('trtNewAff')[0].style.display = 'none';
                 }
-                if(fieldPairBest.value && checked === true) {
+                if (fieldPairBest.value && checked === true) {
                     document.getElementsByClassName('bestNewAff')[0].style.display = 'block';
-                } else if(checked === false && bestContactEmpty === 'false') {
+                } else if (checked === false && bestContactEmpty === 'false') {
                     document.getElementsByClassName('bestNewAff')[0].style.display = 'none';
                 }
             }
@@ -2102,7 +2111,6 @@
                     externalBestContact.querySelector('.slds-input').value = '';
                 }
             }
-            validateForm();
         }
 
         // Validation function for Wish Referral Form
@@ -2230,6 +2238,18 @@
                 externalBestContact.querySelector('.slds-input').style.border = "";
                 document.querySelector('#externalBestContactLookup').parentElement
                     .previousElementSibling.firstElementChild.style.color = '';
+            }
+        }
+
+        // Validation on Lookup Fields only to clear validations
+        function validateLookupField(field, fieldOutput, fieldCreateCheckbox) {
+            if (field && fieldOutput && fieldCreateCheckbox) {
+                let fieldValidation = '';
+                fieldValidation = fieldValidation.concat('[id$=\"', field.id, 'Validation\"]');
+                document.querySelectorAll(fieldValidation)[0].required = false;
+                field.querySelector('em').hidden = true;
+                field.querySelector('.slds-input').style.border = "";
+                field.parentElement.previousElementSibling.firstElementChild.style.color = '';
             }
         }
     </script>

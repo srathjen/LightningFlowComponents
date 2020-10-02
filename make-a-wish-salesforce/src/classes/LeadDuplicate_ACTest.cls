@@ -142,8 +142,6 @@ public class LeadDuplicate_ACTest {
 		controller.getdupLeadList();
 		controller.getdupContactList();
 		controller.getAdditionalParentContactList();
-		controller.getdupMedicalContactList();
-		controller.getdupTreatingContactList();
 		controller.getdupParentContactList();
 		controller.nextStep();
 	}
@@ -192,9 +190,6 @@ public class LeadDuplicate_ACTest {
 		currLead.add(leads[1]);
 		ApexPages.StandardSetController std = new ApexPages.StandardSetController(currLead);
 		LeadDuplicate_AC controller = new LeadDuplicate_AC(std);
-		controller.getdupAlternate1MedicalContactList();
-		controller.getdupAlternate2MedicalContactList();
-		controller.getbestPhysicianContactList();
 		for (Lead currDup : currLead) {
 			LeadDuplicate_AC.leadWrapper newWrapper = new LeadDuplicate_AC.leadWrapper(currDup);
 			newWrapper.selected = true;
