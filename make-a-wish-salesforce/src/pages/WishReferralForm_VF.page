@@ -308,9 +308,9 @@
                                 <label>{!$Label.Wish_Referral_Referring_Hospital_Facility}</label></div>
                             <div class="col-sm-6" style="margin-bottom:-12px">
                                 <div style="display: flex; align-items: center;">
-                                    <label>Filter by State (Optional): </label>
+                                    <label style="width:85px">{!$Label.Wish_Referral_State_Filter}:</label>
                                     <apex:selectList size="1" id="referrerAccountState"
-                                                     styleClass="form-control col-xs-12 c-select state referrerAccountState"
+                                                     styleClass="form-control col-xs-12 c-select stateOptional referrerAccountState"
                                                      onchange="updateHtfFilter('externalReferrerAccountLookup', this.value, 'Referring Hospital/Facility')">
                                         <apex:selectOptions value="{!FilterStateOptions}"/>
                                     </apex:selectList>
@@ -1076,9 +1076,9 @@
                                 </div>
                                 <div class="col-sm-6" style="margin-bottom:-12px">
                                     <div style="display: flex; align-items: center;">
-                                        <label>Filter by State (Optional): </label>
+                                        <label style="width:85px">{!$Label.Wish_Referral_State_Filter}:</label>
                                         <apex:selectList size="1" id="treatingAccountState"
-                                                         styleClass="form-control col-xs-12 c-select state treatingAccountState"
+                                                         styleClass="form-control col-xs-12 c-select stateOptional treatingAccountState"
                                                          onchange="updateHtfFilter('externalTreatingAccountLookup', this.value, 'Treating Hospital/Facility')">
                                             <apex:selectOptions value="{!FilterStateOptions}"/>
                                         </apex:selectList>
