@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Account.ReferringMPHTFLeads__r$Chapter_Name__c</field>
+    </columns>
+    <description>ODP-58</description>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account$DV_Method_Preference__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>HTFs by DV Method</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Referring_HTF_s_with_Referrals__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Account$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

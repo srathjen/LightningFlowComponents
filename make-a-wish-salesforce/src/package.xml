@@ -680,12 +680,22 @@
     <members>AdministrativeReports2/Copy_of_New_Leads_with_DocuSign_Status_R_lKR</members>
     <members>AdministrativeReports2/Copy_of_Qualified_referrals_vs_DNQd_Gxj</members>
     <members>AdministrativeReports2/Flown_Before_Wish_Forms</members>
+    <members>AdministrativeReports2/HTFs_by_DV_Method</members>
     <members>AdministrativeReports2/Leads_Medical_Affairs_I_MFl</members>
+    <members>AdministrativeReports2/Leads_with_Qualifying_Diagnoses</members>
+    <members>AdministrativeReports2/Medical_Professional_By_DV_Method</members>
+    <members>AdministrativeReports2/MP_by_Department</members>
+    <members>AdministrativeReports2/MP_by_Specialty</members>
+    <members>AdministrativeReports2/MP_for_Outreach_Materials</members>
     <members>AdministrativeReports2/New_Cases_Report_7cL2</members>
+    <members>AdministrativeReports2/New_DV_Signer_Last_90_Days_Arizona</members>
+    <members>AdministrativeReports2/New_MP_for_this_Quarter</members>
     <members>AdministrativeReports2/New_Referring_MPs_with_Referrals_Report_YgC</members>
     <members>AdministrativeReports2/New_Report_gYz</members>
     <members>AdministrativeReports2/New_Report_KaS</members>
     <members>AdministrativeReports2/New_Report_qa0</members>
+    <members>AdministrativeReports2/Qualified_Leads_by_Treating_HTF</members>
+    <members>AdministrativeReports2/Qualified_Leads_by_Treating_MP</members>
     <members>AdministrativeReports2/Qualified_Referrals_vs_DNQs_lQp</members>
     <members>AdministrativeReports2/Referrals_by_MP_ouK</members>
     <members>AdministrativeReports2/Reports_Used_in_Dashboards</members>
@@ -2931,6 +2941,7 @@
     <members>Leads_with_DocuSign_Status</members>
     <members>Leads_with_Duplicate_within_Chapter</members>
     <members>Leads_with_ICD_Codes</members>
+    <members>Leads_with_Qualifying_Diagnoses</members>
     <members>Leads_with_User_Status</members>
     <members>Medical_Professionals_with_or_without_Referrals</members>
     <members>Referring_HTF_s_with_Referrals</members>
