@@ -1170,6 +1170,17 @@
         <unique>true</unique>
     </fields>
     <fields>
+        <fullName>Chapter_Intake_Manager__c</fullName>
+        <description>Provides the name of the Intake Manager from the Chapter that owns the record (as indicated by Chapter Name).</description>
+        <externalId>false</externalId>
+        <formula>Chapter_Name__r.Intake_Manager__r.FirstName + " " +  Chapter_Name__r.Intake_Manager__r.LastName</formula>
+        <inlineHelpText>The Intake Manager from the Chapter that owns the record (as indicated by Chapter Name).</inlineHelpText>
+        <label>Chapter Intake Manager</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Chapter_Name_Text__c</fullName>
         <description>Displays the Account's Chapter Name as text.</description>
         <externalId>false</externalId>

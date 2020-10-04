@@ -504,6 +504,7 @@
   </types>
   <types>
     <members>Account_Record_Page</members>
+    <members>All_Other_Contacts_Record_Page</members>
     <members>Case_Wish_Lightning</members>
     <members>Default_Lead_Record_Page</members>
     <members>Lead_Record_Page</members>
@@ -586,6 +587,7 @@
     <members>Manage_Reports_and_Dashboard_Folders</members>
     <members>Manage_Reports_and_Dashboard_Folders1</members>
     <members>Medical_Diagnosis_Objects_Read_Permission</members>
+    <members>Merge_Contacts_and_Accounts</members>
     <members>National_Medical_Advisors</members>
     <members>Program_Supervisor</members>
     <members>RapidApproval_App_Visibility</members>
