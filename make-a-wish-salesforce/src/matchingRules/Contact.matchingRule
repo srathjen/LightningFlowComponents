@@ -1,5 +1,46 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<MatchingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><MatchingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <matchingRules>
+        <fullName>Medical_Professional_Contact_Match</fullName>
+        <booleanFilter>(1 AND 2 AND (3 OR 4)) OR (1 AND 2 AND (5 OR 6)) OR (1 AND 2 AND 7)</booleanFilter>
+        <description>Criteria used to identify possible duplicate medical professional contacts (contact record type = medical professional).</description>
+        <label>Medical Professional Contact Match</label>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>FirstName</fieldName>
+            <matchingMethod>FirstName</matchingMethod>
+        </matchingRuleItems>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>LastName</fieldName>
+            <matchingMethod>LastName</matchingMethod>
+        </matchingRuleItems>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>Email</fieldName>
+            <matchingMethod>Exact</matchingMethod>
+        </matchingRuleItems>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>Phone</fieldName>
+            <matchingMethod>Exact</matchingMethod>
+        </matchingRuleItems>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>MailingCity</fieldName>
+            <matchingMethod>City</matchingMethod>
+        </matchingRuleItems>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>MailingState</fieldName>
+            <matchingMethod>Exact</matchingMethod>
+        </matchingRuleItems>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>npsp__Primary_Affiliation__c</fieldName>
+            <matchingMethod>Exact</matchingMethod>
+        </matchingRuleItems>
+        <ruleStatus>Active</ruleStatus>
+    </matchingRules>
     <matchingRules>
         <fullName>Potential_Duplicates_Contacts</fullName>
         <booleanFilter>(1 AND 2) OR (1 AND 3 AND 4 AND 5 AND 6) OR(1 AND 8) OR (2 AND 3 AND 4 AND 5 AND 6)OR(2 AND 7) OR(2 AND 8) OR (9 AND 3 AND 4 AND 5 AND 6) OR(9 AND 8) OR (9 AND 1) OR (9 AND 2)</booleanFilter>

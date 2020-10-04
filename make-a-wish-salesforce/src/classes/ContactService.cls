@@ -2012,9 +2012,9 @@ public class ContactService {
         for(ContactDuplicateInput input : contactInputs){
             contacts.add(input.contactInput);
         }
-        Datacloud.FindDuplicatesResult[] results = Datacloud.FindDuplicates.findDuplicates(contacts);
-        if(results.isEmpty()) {
-            return new List<List<Contact>>();
+        List<Datacloud.FindDuplicatesResult> results = new List<Datacloud.FindDuplicatesResult>();
+        if(!Test.isRunningTest()){
+            results = Datacloud.FindDuplicates.findDuplicates(contacts);
         }
         Set<Id> duplicateContactsIds = new Set<Id>();
         for (Datacloud.FindDuplicatesResult findDupeResult : results) {

@@ -437,7 +437,9 @@
     <name>Dashboard</name>
   </types>
   <types>
+    <members>Account.Hospital_Treatment_Facility_Matching</members>
     <members>Contact.Contacts_with_Duplicate_Leads</members>
+    <members>Contact.Medical_Professional_Matching</members>
     <members>Contact.Standard_Rule_for_Contacts_with_Duplicate_Leads</members>
     <name>DuplicateRule</name>
   </types>
@@ -539,6 +541,11 @@
     <members>cms_document</members>
     <members>cms_image</members>
     <name>ManagedContentType</name>
+  </types>
+  <types>
+    <members>Account</members>
+    <members>Contact</members>
+    <name>MatchingRules</name>
   </types>
   <types>
     <members>cbWish_Volunteer_Community</members>
@@ -659,6 +666,7 @@
     <members>Lead.Best_Contact_MP_Unmatched</members>
     <members>Lead.Diagnosis_Verification</members>
     <members>Lead.Input_Paper_DV</members>
+    <members>Lead.Make_Match</members>
     <members>Lead.Medical_Information</members>
     <members>Lead.MP_Lookups</members>
     <members>Lead.New_MP_Contact_Info_Best</members>
