@@ -1136,6 +1136,9 @@
     <members>DB_Adoption/DB_Adoption_PROSPECT_w_Fields_Populated</members>
     <members>DB_Adoption/Recent_Logins_by_Browser</members>
     <members>DeprecatedReports/Monthly_Expense_Projection_WishBudget</members>
+    <members>DuplicateManagementODP</members>
+    <members>DuplicateManagementODP/Duplicated_HTFs_f1u</members>
+    <members>DuplicateManagementODP/Duplicated_MPs_TyZ</members>
     <members>East_Tennessee_Medical_Eligibility</members>
     <members>East_Tennessee_Medical_Eligibility/Cases_in_Diagnosis_Verification_Review_East_Tennessee</members>
     <members>East_Tennessee_Medical_Eligibility/Diagnosis_List_East_Tennessee</members>
@@ -2939,6 +2942,8 @@
   <types>
     <members>Accounts_with_Leads</members>
     <members>All_Leads_and_associated_cases</members>
+    <members>Duplicate_Accounts</members>
+    <members>Duplicate_Contacts</members>
     <members>Leads_detail</members>
     <members>Leads_Eligibility_Review_vs_Intake</members>
     <members>Leads_Export</members>
