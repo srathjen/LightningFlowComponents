@@ -181,6 +181,7 @@
     <members>Contact</members>
     <members>DataUsePurpose</members>
     <members>dsfs__DocuSign_Recipient_Status__c</members>
+    <members>DuplicateRecordSet</members>
     <members>Endpoints__c</members>
     <members>External_ID__c</members>
     <members>ICD_Codes__c</members>

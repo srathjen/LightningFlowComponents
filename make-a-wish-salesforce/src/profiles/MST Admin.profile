@@ -9618,6 +9618,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>DuplicateRecordSet.Duplicate_Item_Count__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Dynamic_Content__c.Active__c</field>
         <readable>true</readable>
