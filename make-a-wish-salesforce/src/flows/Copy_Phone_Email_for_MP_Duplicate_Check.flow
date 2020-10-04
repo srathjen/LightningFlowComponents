@@ -162,6 +162,7 @@
         </filters>
         <object>Contact</object>
         <triggerType>RecordBeforeSave</triggerType>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
     </start>
     <status>Active</status>
 </Flow>
