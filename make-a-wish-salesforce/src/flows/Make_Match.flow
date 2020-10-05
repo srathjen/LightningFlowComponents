@@ -79,6 +79,22 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Add_Create_to_to_Search_Results</name>
+        <label>Add Create to to Search Results</label>
+        <locationX>2927</locationX>
+        <locationY>1398</locationY>
+        <assignmentItems>
+            <assignToReference>MPSearchResults</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>CreateNewContact</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>LoopMPDupes</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Add_MP_to_Search_to_Collection</name>
         <label>Add MP to Search to Collection</label>
         <locationX>2332</locationX>
@@ -111,6 +127,22 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Add_to_AC_Search_Results</name>
+        <label>Add to AC Search Results</label>
+        <locationX>2852</locationX>
+        <locationY>742</locationY>
+        <assignmentItems>
+            <assignToReference>HTFSearchResults</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>CreateNewAccount</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>LoopHTFDupes</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Add_to_HTF_Search_Results</name>
         <label>Add to HTF Search Results</label>
         <locationX>2607</locationX>
@@ -129,8 +161,8 @@
     <assignments>
         <name>Assign_Account</name>
         <label>Assign Account</label>
-        <locationX>3249</locationX>
-        <locationY>1012</locationY>
+        <locationX>3233</locationX>
+        <locationY>1013</locationY>
         <assignmentItems>
             <assignToReference>ExistingAccountSelected</assignToReference>
             <operator>Assign</operator>
@@ -177,7 +209,7 @@
     <assignments>
         <name>Assign_Department</name>
         <label>Assign Department</label>
-        <locationX>3418</locationX>
+        <locationX>3362</locationX>
         <locationY>651</locationY>
         <assignmentItems>
             <assignToReference>DepartmentSelected</assignToReference>
@@ -193,8 +225,8 @@
     <assignments>
         <name>Assign_Existing_MP_to_ID</name>
         <label>Assign Existing MP to ID</label>
-        <locationX>3782</locationX>
-        <locationY>1463</locationY>
+        <locationX>3802</locationX>
+        <locationY>1466</locationY>
         <assignmentItems>
             <assignToReference>NewMPID</assignToReference>
             <operator>Assign</operator>
@@ -321,8 +353,8 @@
     <assignments>
         <name>Count_HTF_Dupes</name>
         <label>Count HTF Dupes</label>
-        <locationX>2830</locationX>
-        <locationY>908</locationY>
+        <locationX>2941</locationX>
+        <locationY>915</locationY>
         <assignmentItems>
             <assignToReference>HTFDupeCount</assignToReference>
             <operator>Add</operator>
@@ -337,8 +369,8 @@
     <assignments>
         <name>Count_MP_Dupes</name>
         <label>Count MP Dupes</label>
-        <locationX>2903</locationX>
-        <locationY>1525</locationY>
+        <locationX>3024</locationX>
+        <locationY>1530</locationY>
         <assignmentItems>
             <assignToReference>MPDupeCount</assignToReference>
             <operator>Add</operator>
@@ -348,6 +380,38 @@
         </assignmentItems>
         <connector>
             <targetReference>LoopMPDupes</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Create_New_MP</name>
+        <label>Create New MP</label>
+        <locationX>2829</locationX>
+        <locationY>1397</locationY>
+        <assignmentItems>
+            <assignToReference>CreateNewContact.LastName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>*** CREATE NEW ***</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Add_Create_to_to_Search_Results</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Create_NewAC</name>
+        <label>Create New</label>
+        <locationX>2743</locationX>
+        <locationY>739</locationY>
+        <assignmentItems>
+            <assignToReference>CreateNewAccount.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>*** CREATE NEW ***</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Add_to_AC_Search_Results</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -585,8 +649,8 @@
     <assignments>
         <name>Nullify_Search_Results</name>
         <label>Nullify Search Results</label>
-        <locationX>3572</locationX>
-        <locationY>1460</locationY>
+        <locationX>3582</locationX>
+        <locationY>1468</locationY>
         <assignmentItems>
             <assignToReference>SelectedContact</assignToReference>
             <operator>Assign</operator>
@@ -596,6 +660,22 @@
         </assignmentItems>
         <connector>
             <targetReference>Add_Existing_0_0</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Nullify_Search_Results_0</name>
+        <label>Nullify Search Results</label>
+        <locationX>3635</locationX>
+        <locationY>1299</locationY>
+        <assignmentItems>
+            <assignToReference>SelectedContact</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>EmptyContactCollection</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_Household</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -612,6 +692,22 @@
         </assignmentItems>
         <connector>
             <targetReference>Add_Existing</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Nullify_Search_Results_Accounts_0</name>
+        <label>Nullify Search Results</label>
+        <locationX>3584</locationX>
+        <locationY>658</locationY>
+        <assignmentItems>
+            <assignToReference>AccountSelected</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>EmptyAccountCollection</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>CreateNewHTF</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -1427,6 +1523,56 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Create_New_Selected</name>
+        <label>Create New Selected?</label>
+        <locationX>3329</locationX>
+        <locationY>907</locationY>
+        <defaultConnector>
+            <targetReference>Get_Existing_HTF_Values</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Create_New</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ExistingAccountSelected.Name</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>*** CREATE NEW ***</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_New</targetReference>
+            </connector>
+            <label>Yes Create New</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Create_New_Selected_0</name>
+        <label>Create New Selected?</label>
+        <locationX>3394</locationX>
+        <locationY>1482</locationY>
+        <defaultConnector>
+            <targetReference>Get_State</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Create_New_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ExistingContactSelected.LastName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>*** CREATE NEW ***</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_New_0</targetReference>
+            </connector>
+            <label>Yes Create New</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Does_Existing_Contact_have_Primary_Affiliation</name>
         <label>Does Existing Contact have Primary Affiliation</label>
         <locationX>3202</locationX>
@@ -1502,10 +1648,60 @@
         </rules>
     </decisions>
     <decisions>
+        <name>DuplicateDetected</name>
+        <label>DuplicateDetected</label>
+        <locationX>4258</locationX>
+        <locationY>1219</locationY>
+        <defaultConnector>
+            <targetReference>Error_Handling_0</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Dupe_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Flow.FaultMessage</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>DUPLICATES_DETECTED</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>DeleteMPHousehold</targetReference>
+            </connector>
+            <label>Yes Dupe Found</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>DuplicateDetected_0</name>
+        <label>DuplicateDetected</label>
+        <locationX>4187</locationX>
+        <locationY>645</locationY>
+        <defaultConnector>
+            <targetReference>Error_Handling_0</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Dupe_Found_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Flow.FaultMessage</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>DUPLICATES_DETECTED</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Dupe_Detected_0</targetReference>
+            </connector>
+            <label>Yes Dupe Found</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>HTF_Dupes_Found</name>
         <label>HTF Dupes Found</label>
-        <locationX>2959</locationX>
-        <locationY>730</locationY>
+        <locationX>3012</locationX>
+        <locationY>729</locationY>
         <defaultConnector>
             <targetReference>Create_New</targetReference>
         </defaultConnector>
@@ -1517,7 +1713,7 @@
                 <leftValueReference>HTFDupeCount</leftValueReference>
                 <operator>GreaterThan</operator>
                 <rightValue>
-                    <numberValue>0.0</numberValue>
+                    <numberValue>1.0</numberValue>
                 </rightValue>
             </conditions>
             <connector>
@@ -1828,7 +2024,7 @@
                 <leftValueReference>MPDupeCount</leftValueReference>
                 <operator>GreaterThan</operator>
                 <rightValue>
-                    <numberValue>0.0</numberValue>
+                    <numberValue>1.0</numberValue>
                 </rightValue>
             </conditions>
             <connector>
@@ -2027,8 +2223,8 @@
     <decisions>
         <name>Referring_HTF_Selected</name>
         <label>Referring HTF Selected?</label>
-        <locationX>1388</locationX>
-        <locationY>639</locationY>
+        <locationX>1385</locationX>
+        <locationY>586</locationY>
         <defaultConnector>
             <targetReference>Referring_MP_Selected</targetReference>
         </defaultConnector>
@@ -2714,7 +2910,7 @@ IF({!MPType}=&quot;Best Contact&quot;, Text({!Get_Lead_Info.Best_Contact_State__
             <targetReference>Loop_HTF_Search_Results</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>LoopHTFDupes</targetReference>
+            <targetReference>Create_NewAC</targetReference>
         </noMoreValuesConnector>
     </loops>
     <loops>
@@ -2756,28 +2952,28 @@ IF({!MPType}=&quot;Best Contact&quot;, Text({!Get_Lead_Info.Best_Contact_State__
             <targetReference>Loop_MP_Search_Results_for_Matches</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>LoopMPDupes</targetReference>
+            <targetReference>Create_New_MP</targetReference>
         </noMoreValuesConnector>
     </loops>
     <loops>
         <name>LoopAccounts</name>
         <label>LoopAccounts</label>
-        <locationX>3251</locationX>
-        <locationY>896</locationY>
+        <locationX>3237</locationX>
+        <locationY>897</locationY>
         <collectionReference>AccountSelected</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
             <targetReference>Assign_Account</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>Get_Existing_HTF_Values</targetReference>
+            <targetReference>Create_New_Selected</targetReference>
         </noMoreValuesConnector>
     </loops>
     <loops>
         <name>LoopHTFDupes</name>
         <label>LoopHTFDupes</label>
-        <locationX>2836</locationX>
-        <locationY>727</locationY>
+        <locationX>2923</locationX>
+        <locationY>733</locationY>
         <collectionReference>HTFSearchResults</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -2790,8 +2986,8 @@ IF({!MPType}=&quot;Best Contact&quot;, Text({!Get_Lead_Info.Best_Contact_State__
     <loops>
         <name>LoopMPDupes</name>
         <label>LoopMPDupes</label>
-        <locationX>2904</locationX>
-        <locationY>1390</locationY>
+        <locationX>3021</locationX>
+        <locationY>1395</locationY>
         <collectionReference>MPSearchResults</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -2812,7 +3008,7 @@ IF({!MPType}=&quot;Best Contact&quot;, Text({!Get_Lead_Info.Best_Contact_State__
             <targetReference>AssignContact</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>Get_State</targetReference>
+            <targetReference>Create_New_Selected_0</targetReference>
         </noMoreValuesConnector>
     </loops>
     <processMetadataValues>
@@ -2837,8 +3033,8 @@ IF({!MPType}=&quot;Best Contact&quot;, Text({!Get_Lead_Info.Best_Contact_State__
     <recordCreates>
         <name>Create_Household</name>
         <label>Create Household</label>
-        <locationX>3750</locationX>
-        <locationY>1288</locationY>
+        <locationX>3733</locationX>
+        <locationY>1292</locationY>
         <assignRecordIdToReference>NewMPHHID</assignRecordIdToReference>
         <connector>
             <targetReference>Create_MP</targetReference>
@@ -2881,14 +3077,14 @@ IF({!MPType}=&quot;Best Contact&quot;, Text({!Get_Lead_Info.Best_Contact_State__
     <recordCreates>
         <name>Create_MP</name>
         <label>Create MP</label>
-        <locationX>3826</locationX>
-        <locationY>1290</locationY>
+        <locationX>3855</locationX>
+        <locationY>1225</locationY>
         <assignRecordIdToReference>NewMPID</assignRecordIdToReference>
         <connector>
             <targetReference>Lead_HTF_Lookup_to_Update_0</targetReference>
         </connector>
         <faultConnector>
-            <targetReference>Error_Handling_0</targetReference>
+            <targetReference>DuplicateDetected</targetReference>
         </faultConnector>
         <inputAssignments>
             <field>FirstName</field>
@@ -2979,14 +3175,14 @@ IF({!MPType}=&quot;Best Contact&quot;, Text({!Get_Lead_Info.Best_Contact_State__
     <recordCreates>
         <name>CreateNewHTF</name>
         <label>CreateNewHTF</label>
-        <locationX>3684</locationX>
-        <locationY>729</locationY>
+        <locationX>3720</locationX>
+        <locationY>658</locationY>
         <assignRecordIdToReference>NewHTFID</assignRecordIdToReference>
         <connector>
             <targetReference>Lead_HTF_Lookup_to_Update</targetReference>
         </connector>
         <faultConnector>
-            <targetReference>Error_Handling_0</targetReference>
+            <targetReference>DuplicateDetected_0</targetReference>
         </faultConnector>
         <inputAssignments>
             <field>Alias__c</field>
@@ -3473,6 +3669,26 @@ IF({!MPType}=&quot;Best Contact&quot;, Text({!Get_Lead_Info.Best_Contact_State__
         </inputAssignments>
         <object>npe5__Affiliation__c</object>
     </recordCreates>
+    <recordDeletes>
+        <name>DeleteMPHousehold</name>
+        <label>DeleteMPHousehold</label>
+        <locationX>4187</locationX>
+        <locationY>1288</locationY>
+        <connector>
+            <targetReference>Dupe_Detected</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Error_Handling_0</targetReference>
+        </faultConnector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>NewMPHHID</elementReference>
+            </value>
+        </filters>
+        <object>Account</object>
+    </recordDeletes>
     <recordLookups>
         <name>Find_Matching_Affiliation</name>
         <label>Find Matching Affiliation</label>
@@ -3692,6 +3908,8 @@ IF({!MPType}=&quot;Best Contact&quot;, Text({!Get_Lead_Info.Best_Contact_State__
         <queriedFields>BillingState</queriedFields>
         <queriedFields>BillingPostalCode</queriedFields>
         <queriedFields>Chapter_Name_Text__c</queriedFields>
+        <sortField>Name</sortField>
+        <sortOrder>Asc</sortOrder>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
@@ -3825,6 +4043,8 @@ IF({!MPType}=&quot;Best Contact&quot;, Text({!Get_Lead_Info.Best_Contact_State__
         <queriedFields>MailingState</queriedFields>
         <queriedFields>Primary_Affiliation_Name__c</queriedFields>
         <queriedFields>Hidden_Chapter_Name__c</queriedFields>
+        <sortField>FirstName</sortField>
+        <sortOrder>Asc</sortOrder>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
@@ -3915,8 +4135,8 @@ IF({!MPType}=&quot;Best Contact&quot;, Text({!Get_Lead_Info.Best_Contact_State__
     <recordLookups>
         <name>Get_State</name>
         <label>Get Existing MP State</label>
-        <locationX>3471</locationX>
-        <locationY>1465</locationY>
+        <locationX>3486</locationX>
+        <locationY>1460</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Nullify_Search_Results</targetReference>
@@ -4235,13 +4455,13 @@ IF({!MPType}=&quot;Best Contact&quot;, Text({!Get_Lead_Info.Best_Contact_State__
     <screens>
         <name>Add_Existing_0</name>
         <label>Confirm New HTF</label>
-        <locationX>3549</locationX>
-        <locationY>654</locationY>
+        <locationX>3454</locationX>
+        <locationY>658</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>CreateNewHTF</targetReference>
+            <targetReference>Nullify_Search_Results_Accounts_0</targetReference>
         </connector>
         <fields>
             <name>ConfirmCreateHTF</name>
@@ -4254,7 +4474,7 @@ IF({!MPType}=&quot;Best Contact&quot;, Text({!Get_Lead_Info.Best_Contact_State__
     <screens>
         <name>Add_Existing_0_0</name>
         <label>Confirm Existing Contact</label>
-        <locationX>3676</locationX>
+        <locationX>3686</locationX>
         <locationY>1466</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -4273,13 +4493,13 @@ IF({!MPType}=&quot;Best Contact&quot;, Text({!Get_Lead_Info.Best_Contact_State__
     <screens>
         <name>Confirm_New_MP</name>
         <label>Confirm New MP</label>
-        <locationX>3676</locationX>
-        <locationY>1291</locationY>
+        <locationX>3537</locationX>
+        <locationY>1295</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Create_Household</targetReference>
+            <targetReference>Nullify_Search_Results_0</targetReference>
         </connector>
         <fields>
             <name>ConfirmCreateMP</name>
@@ -4638,6 +4858,44 @@ IF({!MPType}=&quot;Best Contact&quot;, Text({!Get_Lead_Info.Best_Contact_State__
         <fields>
             <name>ItemtoResolve3</name>
             <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 16px; background-color: rgb(255, 255, 255);&quot;&gt;Items to Resolve: &lt;/span&gt;&lt;b style=&quot;font-size: 16px; background-color: rgb(255, 255, 255);&quot;&gt;{!ResolveCountRemaining}&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Dupe_Detected</name>
+        <label>Dupe Detected</label>
+        <locationX>4073</locationX>
+        <locationY>1340</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Select_an_Existing_MP</targetReference>
+        </connector>
+        <fields>
+            <name>DupeAlertMessage</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(255, 0, 0); font-size: 16px;&quot;&gt;THE RECORD YOU ARE ATTEMPTING TO CREATE IS A DUPLICATE.  &lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;Please select a matching record or update the info you have provided.&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Dupe_Detected_0</name>
+        <label>Dupe Detected</label>
+        <locationX>4190</locationX>
+        <locationY>775</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Select_an_Existing_HTF</targetReference>
+        </connector>
+        <fields>
+            <name>DupeAlertMessage_0</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(255, 0, 0); font-size: 16px;&quot;&gt;THE RECORD YOU ARE ATTEMPTING TO CREATE IS A DUPLICATE.  &lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;Please select a matching record or update the info you have provided.&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -5076,7 +5334,7 @@ IF({!MPType}=&quot;Best Contact&quot;, Text({!Get_Lead_Info.Best_Contact_State__
             <inputParameters>
                 <name>column02_width</name>
                 <value>
-                    <numberValue>125.0</numberValue>
+                    <numberValue>145.0</numberValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -5094,7 +5352,7 @@ IF({!MPType}=&quot;Best Contact&quot;, Text({!Get_Lead_Info.Best_Contact_State__
             <inputParameters>
                 <name>column03_width</name>
                 <value>
-                    <numberValue>130.0</numberValue>
+                    <numberValue>110.0</numberValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -5322,13 +5580,13 @@ IF({!MPType}=&quot;Best Contact&quot;, Text({!Get_Lead_Info.Best_Contact_State__
             <inputParameters>
                 <name>column03_width</name>
                 <value>
-                    <numberValue>130.0</numberValue>
+                    <numberValue>110.0</numberValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column02_width</name>
                 <value>
-                    <numberValue>125.0</numberValue>
+                    <numberValue>145.0</numberValue>
                 </value>
             </inputParameters>
             <inputParameters>
