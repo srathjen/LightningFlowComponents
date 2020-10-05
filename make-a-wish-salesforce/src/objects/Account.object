@@ -1170,6 +1170,28 @@
         <unique>true</unique>
     </fields>
     <fields>
+        <fullName>Chapter_Intake_Manager__c</fullName>
+        <description>Provides the name of the Intake Manager from the Chapter that owns the record (as indicated by Chapter Name).</description>
+        <externalId>false</externalId>
+        <formula>Chapter_Name__r.Intake_Manager__r.FirstName + " " +  Chapter_Name__r.Intake_Manager__r.LastName</formula>
+        <inlineHelpText>The Intake Manager from the Chapter that owns the record (as indicated by Chapter Name).</inlineHelpText>
+        <label>Chapter Intake Manager</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Chapter_Name_Text__c</fullName>
+        <description>Displays the Account's Chapter Name as text.</description>
+        <externalId>false</externalId>
+        <formula>Chapter_Name__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Chapter Name (Text)</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Chapter_Name__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <description>This field will look up to chapter account</description>
@@ -10261,6 +10283,18 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <errorConditionFormula>AND($RecordType.Name = 'In Kind Donors',   ISBLANK( Chapter_Name__c ) ,$Profile.Name != 'Integration')</errorConditionFormula>
         <errorDisplayField>Chapter_Name__c</errorDisplayField>
         <errorMessage>Chapter Name should not be Blank.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Parent_Account_of_HTF_must_be_HTF</fullName>
+        <active>true</active>
+        <description>When setting the parent account of a HTF ensure that parent account is a HTF</description>
+        <errorConditionFormula>RecordType.Name = "Hospital Treatment Facility"
+&amp;&amp;
+Parent.RecordType.Name != "Hospital Treatment Facility"
+&amp;&amp;
+!ISBLANK(Parent.RecordType.Name)</errorConditionFormula>
+        <errorDisplayField>ParentId</errorDisplayField>
+        <errorMessage>The Parent Account of an HTF Account must be another HTF Account.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Program_NationalStaff_Account_Validation</fullName>

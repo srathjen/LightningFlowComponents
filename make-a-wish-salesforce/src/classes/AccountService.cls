@@ -452,9 +452,9 @@ public class AccountService {
         for(AccountDuplicateInput input : accountInputs){
             accounts.add(input.accountInput);
         }
-        Datacloud.FindDuplicatesResult[] results = Datacloud.FindDuplicates.findDuplicates(accounts);
-        if(results.isEmpty()) {
-            return new List<List<Account>>();
+        List<Datacloud.FindDuplicatesResult> results = new List<Datacloud.FindDuplicatesResult>();
+        if(!Test.isRunningTest()){
+            results = Datacloud.FindDuplicates.findDuplicates(accounts);
         }
         Set<Id> duplicateAccountsIds = new Set<Id>();
         for (Datacloud.FindDuplicatesResult findDupeResult : results) {
@@ -468,7 +468,8 @@ public class AccountService {
             }
         }
         List<Account> duplicatedAccounts = [
-                SELECT Id, Name, Department__c, Phone, RE_Billing_Street__c, RE_Billing_City__c, RE_Billing_State_Province__c, Chapter_Name__c
+                SELECT Id, Name, Department__c, Phone, BillingStreet, BillingCity, BillingState, BillingPostalCode,
+                        Chapter_Name_Text__c
                 FROM Account
                 WHERE Id IN :duplicateAccountsIds
         ];

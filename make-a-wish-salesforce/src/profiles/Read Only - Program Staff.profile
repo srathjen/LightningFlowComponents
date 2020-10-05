@@ -1590,6 +1590,16 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Account.Chapter_Intake_Manager__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Account.Chapter_Name_Text__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Account.Contact_Notes__c</field>
         <readable>true</readable>
@@ -6875,6 +6885,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.Chapter_Intake_Manager__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Contact.City_Employer__c</field>
         <readable>true</readable>
@@ -9594,6 +9609,11 @@
     <readable>false</readable>
     <field>Diagnosis_Verification__c.isEligible__c</field>
 </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>DuplicateRecordSet.Duplicate_Item_Count__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Dynamic_Content__c.Active__c</field>

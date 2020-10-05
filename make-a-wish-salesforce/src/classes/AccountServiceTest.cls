@@ -351,17 +351,17 @@ public class AccountServiceTest {
         ];
         System.assert(htfUpdated.Chapter_Name__c != null);
     }
-    
+
     @isTest
     private static void getDuplicateRecords() {
-        Account acct = new Account(name = 'Jack Smith & Family Account', BillingCity = 'Phoenix');
-        acct.RecordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID;
-        
+        // As Duplicate Rules might constantly change by Admin, this test is only to obtain coverage and not OOTB Duplicate Check
         AccountService.AccountDuplicateInput input = new AccountService.AccountDuplicateInput();
-        input.accountInput = acct;
+        Account duplicateAccount = new Account(Name = 'Jack Smith & Family Account', BillingCity = 'Phoenix', RecordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID);
+        input.accountInput = duplicateAccount;
+
         Test.startTest();
         List<List<Account>> result = AccountService.getDuplicateRecords(new List<AccountService.AccountDuplicateInput>{input});
         Test.stopTest();
-        System.assert(result.get(0).size() >= 1);
+        System.assert(result.get(0).size() == 0);
     }
 }

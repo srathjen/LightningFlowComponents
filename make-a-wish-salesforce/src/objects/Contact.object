@@ -3084,6 +3084,18 @@ IF(ISBLANK(COI_Expiration_Date__c)=TRUE, IMAGE("/resource/icons/COI_Missing.png"
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Chapter_Intake_Manager__c</fullName>
+        <description>Provides the name of the Intake Manager from the Chapter that owns the record (as indicated by Chapter Name).</description>
+        <externalId>false</externalId>
+        <formula>Region_Chapter__r.Intake_Manager__r.FirstName +' ' +  Region_Chapter__r.Intake_Manager__r.LastName</formula>
+        <inlineHelpText>The Intake Manager from the Chapter that owns the record (as indicated by Chapter Name).</inlineHelpText>
+        <label>Chapter Intake Manager</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>City_Employer__c</fullName>
         <description>It will hold the city value of the employer</description>
         <externalId>false</externalId>

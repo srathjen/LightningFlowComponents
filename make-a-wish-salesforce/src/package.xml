@@ -181,6 +181,7 @@
     <members>Contact</members>
     <members>DataUsePurpose</members>
     <members>dsfs__DocuSign_Recipient_Status__c</members>
+    <members>DuplicateRecordSet</members>
     <members>Endpoints__c</members>
     <members>External_ID__c</members>
     <members>ICD_Codes__c</members>
@@ -438,7 +439,9 @@
     <name>Dashboard</name>
   </types>
   <types>
+    <members>Account.Hospital_Treatment_Facility_Matching</members>
     <members>Contact.Contacts_with_Duplicate_Leads</members>
+    <members>Contact.Medical_Professional_Matching</members>
     <members>Contact.Standard_Rule_for_Contacts_with_Duplicate_Leads</members>
     <name>DuplicateRule</name>
   </types>
@@ -503,6 +506,7 @@
   </types>
   <types>
     <members>Account_Record_Page</members>
+    <members>All_Other_Contacts_Record_Page</members>
     <members>Case_Wish_Lightning</members>
     <members>Default_Lead_Record_Page</members>
     <members>Lead_Record_Page</members>
@@ -540,6 +544,11 @@
     <members>cms_document</members>
     <members>cms_image</members>
     <name>ManagedContentType</name>
+  </types>
+  <types>
+    <members>Account</members>
+    <members>Contact</members>
+    <name>MatchingRules</name>
   </types>
   <types>
     <members>cbWish_Volunteer_Community</members>
@@ -580,6 +589,7 @@
     <members>Manage_Reports_and_Dashboard_Folders</members>
     <members>Manage_Reports_and_Dashboard_Folders1</members>
     <members>Medical_Diagnosis_Objects_Read_Permission</members>
+    <members>Merge_Contacts_and_Accounts</members>
     <members>National_Medical_Advisors</members>
     <members>Program_Supervisor</members>
     <members>RapidApproval_App_Visibility</members>
@@ -660,6 +670,7 @@
     <members>Lead.Best_Contact_MP_Unmatched</members>
     <members>Lead.Diagnosis_Verification</members>
     <members>Lead.Input_Paper_DV</members>
+    <members>Lead.Make_Match</members>
     <members>Lead.Medical_Information</members>
     <members>Lead.MP_Lookups</members>
     <members>Lead.New_MP_Contact_Info_Best</members>
@@ -1127,6 +1138,9 @@
     <members>DB_Adoption/DB_Adoption_PROSPECT_w_Fields_Populated</members>
     <members>DB_Adoption/Recent_Logins_by_Browser</members>
     <members>DeprecatedReports/Monthly_Expense_Projection_WishBudget</members>
+    <members>DuplicateManagementODP</members>
+    <members>DuplicateManagementODP/Duplicated_HTFs_f1u</members>
+    <members>DuplicateManagementODP/Duplicated_MPs_TyZ</members>
     <members>East_Tennessee_Medical_Eligibility</members>
     <members>East_Tennessee_Medical_Eligibility/Cases_in_Diagnosis_Verification_Review_East_Tennessee</members>
     <members>East_Tennessee_Medical_Eligibility/Diagnosis_List_East_Tennessee</members>
@@ -2930,6 +2944,8 @@
   <types>
     <members>Accounts_with_Leads</members>
     <members>All_Leads_and_associated_cases</members>
+    <members>Duplicate_Accounts</members>
+    <members>Duplicate_Contacts</members>
     <members>Leads_detail</members>
     <members>Leads_Eligibility_Review_vs_Intake</members>
     <members>Leads_Export</members>
