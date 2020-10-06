@@ -14,8 +14,6 @@ Modification Log:
     });
 
     webService static String FindFamilyContactDupe(Id leadId) {
-        Id wishFamilyRT = Constant_AC.WISH_FAMILY_RT_ID;
-        Id medicalProfessionalRT = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
         String LogValue;
         Lead currLead = [
                 SELECT Id, FirstName,Name,Of_Times_Email_Sent__c,LastName,Parent_Last_Name__c,Parent_First_Name__c,
@@ -36,57 +34,12 @@ Modification Log:
                 AND RecordTypeId = :Constant_AC.LEAD_RT_WISH_CHILD
         ];
         LogValue = String.valueOf(currLead);
-        List<Contact> dupMedicalContacts = ContactService.findDuplicatedContacts(
-                currLead.Medical_Professional_First_Name__c,
-                currLead.Medical_Professional_Last_Name__c,
-                currLead.Medical_Professional_Phone__c,
-                currLead.Medical_Professional_Email__c,
-                new List<Id>{
-                        medicalProfessionalRT
-                }
-        );
-        List<Contact> dupTreatingContacts = ContactService.findDuplicatedContacts(
-                currLead.Treating_Medical_Professional_First_Name__c,
-                currLead.Treating_Medical_Professional_Last_Name__c,
-                currLead.Treating_Medical_Professional_Phone__c,
-                currLead.Treating_Medical_Professional_Email__c,
-                new List<Id>{
-                        medicalProfessionalRT
-                }
-        );
-        List<Contact> dupBestContactPhysicians = ContactService.findDuplicatedContacts(
-                currLead.Best_Contact_for_Physician_First_Name__c,
-                currLead.Best_Contact_for_Physician_Last_Name__c,
-                currLead.Best_Contact_for_Physician_Phone__c,
-                currLead.Best_contact_for_Physician_Email__c,
-                new List<Id>{
-                        medicalProfessionalRT
-                }
-        );
-        List<Contact> alternate1MedProfessional = ContactService.findDuplicatedContacts(
-                currLead.Alternate1MedProfessionalFirstName__c,
-                currLead.Alternate1MedProfessionalLastName__c,
-                '',
-                currLead.Alternate1MedicalProfessionalEmail__c,
-                new List<Id>{
-                        medicalProfessionalRT
-                }
-        );
-        List<Contact> alternate2MedProfessional = ContactService.findDuplicatedContacts(
-                currLead.Alternate2MedProfessionalFirstName__c,
-                currLead.Alternate2MedProfessionalLastName__c,
-                '',
-                currLead.Alternate2MedProfessionalEmail__c,
-                new List<Id>{
-                        medicalProfessionalRT
-                }
-        );
         List<Contact> dupFamilyContacts = ContactService.findFamilyDuplicatedContacts(
                 currLead.Parent_First_Name__c, currLead.Parent_Last_Name__c,
                 currLead.Phone, currLead.Email, currLead.Street,
                 currLead.City, currLead.State, currLead.PostalCode,
                 new List<Id>{
-                        wishFamilyRT
+                        Constant_AC.WISH_FAMILY_RT_ID
                 }
         );
         List<Contact> dupAdditionalFamilyContacts = ContactService.findFamilyDuplicatedContacts(
@@ -95,35 +48,16 @@ Modification Log:
                 currLead.Additional_Parent_Street__c, currLead.Additional_Parent_City__c,
                 currLead.Additional_Parent_State__c, currLead.Additional_Parent_Postal_Code__c,
                 new List<Id>{
-                        wishFamilyRT
+                        Constant_AC.WISH_FAMILY_RT_ID
                 }
         );
-        if ((!dupMedicalContacts.isEmpty()
-                || !dupTreatingContacts.isEmpty()
-                || !alternate1MedProfessional.isEmpty()
-                || !alternate2MedProfessional.isEmpty()) && (!dupFamilyContacts.isEmpty()
-                || !dupAdditionalFamilyContacts.isEmpty())) {
-            return String.format(Label.Existing_Record, new List<String>{
-                    'Wish Family and Medical Professional'
-            });
-        } else if (!dupMedicalContacts.isEmpty()
-                || !dupTreatingContacts.isEmpty()
-                || !alternate1MedProfessional.isEmpty()
-                || !alternate2MedProfessional.isEmpty()) {
-            return String.format(Label.Existing_Record, new List<String>{
-                    'Medical Professional'
-            });
-        } else if (!dupFamilyContacts.isEmpty()) {
+        if (!dupFamilyContacts.isEmpty()) {
             return String.format(Label.Existing_Record, new List<String>{
                     'Wish Family'
             });
         } else if (!dupAdditionalFamilyContacts.isEmpty()) {
             return String.format(Label.Existing_Record, new List<String>{
                     'Additional Parent/Guardian'
-            });
-        } else if (!dupBestContactPhysicians.isEmpty()) {
-            return String.format(Label.Existing_Record, new List<String>{
-                    'Best Physician Contact'
             });
         } else {
             return null;
