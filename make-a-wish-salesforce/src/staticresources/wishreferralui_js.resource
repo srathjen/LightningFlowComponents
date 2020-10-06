@@ -11,7 +11,10 @@ function stateFunc() {
 }
 
 function stateFuncOptional() {
-    $("select.stateOptional option:first").remove(), $(".stateOptional").prepend('<option disabled="disabled" selected="selected">Please select a state (optional)</option>')
+    let stateFilterSelectOptions = $("select.stateOptional");
+    $.each(stateFilterSelectOptions, function( i, l ){
+        $("<option selected disabled='true'>Please select a state (optional)</option>", { value: '', selected: true }).prependTo(l);
+    });
 }
 
 function resetSelect() {

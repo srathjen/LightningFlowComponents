@@ -1723,13 +1723,6 @@
                     window.parent.postMessage('home', '*');
                 }
             }
-
-
-
-
-
-
-
         </script>
         <script>_satellite.pageBottom();</script>
     </apex:outputPanel>
@@ -2048,6 +2041,7 @@
             let fieldInput;
             let field;
             let fieldPair;
+            let fieldFilter;
             if (id === 'j_id0:frm:createNewRefMPchk') {
                 fieldInput = document.querySelector('#externalReferrerContactLookup lightning-input');
                 field = document.getElementById('j_id0:frm:externalReferrerContactLookupOutput');
@@ -2061,6 +2055,7 @@
                 fieldInput = document.querySelector('#externalReferrerAccountLookup lightning-input');
                 field = document.getElementById('j_id0:frm:externalReferrerAccountLookupOutput');
                 fieldPair = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0];
+                fieldFilter = document.querySelectorAll('[id$="referrerAccountState"]')[0];
                 let referringContactEmpty = document.getElementById('j_id0:frm:referrerContactEmpty').value;
                 if (fieldPair.value && checked === true) {
                     document.getElementsByClassName('refNewAff')[0].style.display = 'block';
@@ -2071,6 +2066,7 @@
                 fieldInput = document.querySelector('#externalTreatingAccountLookup lightning-input');
                 field = document.getElementById('j_id0:frm:externalTreatingAccountLookupOutput');
                 fieldPair = document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0];
+                fieldFilter = document.querySelectorAll('[id$="treatingAccountState"]')[0];
                 let fieldPairBest = document.querySelectorAll('[id$="externalBestContactLookupOutput"]')[0];
                 let treatingContactEmpty = document.getElementById('j_id0:frm:treatingContactEmpty').value;
                 let bestContactEmpty = document.getElementById('j_id0:frm:bestContactEmpty').value;
@@ -2089,9 +2085,17 @@
                 field.value = '';
                 fieldInput.value = '';
                 fieldInput.disabled = true;
+                if (fieldFilter) {
+                    fieldFilter.disabled = true;
+                    fieldFilter.style = 'background: rgb(233, 234, 236)';
+                }
             }
             if (field && fieldInput && checked === false) {
                 fieldInput.disabled = false;
+                if (fieldFilter) {
+                    fieldFilter.disabled = false;
+                    fieldFilter.style = '';
+                }
             }
         }
 
