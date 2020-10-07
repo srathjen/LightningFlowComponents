@@ -318,11 +318,8 @@ public class ContactService {
                 wishChild.Salutation = EMPTY;
             }
         }
-        if(lead.Treating_MP__c != null){
-            wishChild.Hidden_Medical_Physician__c = String.isNotEmpty(lead.Treating_MP__r.FirstName)
-                    ? lead.Treating_MP__r.FirstName + SPACE + lead.Treating_MP__r.LastName
-                    : lead.Treating_MP__r.LastName;
-        }
+        wishChild.Hidden_Medical_Physician__c = lead.Treating_Medical_Professional_First_Name__c + ' '
+            + lead.Treating_Medical_Professional_Last_Name__c;
         return wishChild;
     }
 
@@ -434,7 +431,7 @@ public class ContactService {
                 npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
                 if (contact.RecordTypeId == MEDICAL_PROFESSIONAL_RECORD_TYPE_ID) {
                     affiliation.Constituent_Code__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
-//                    affiliation.npe5__Primary__c = true;
+                    affiliation.npe5__Primary__c = true;
                 } else if (contact.RecordTypeId == WISH_FAMILY_RECORD_TYPE_ID) {
                     affiliation.Constituent_Code__c = Constant_AC.WISH_FAMILY_RT_LABEL;
                 } else {
