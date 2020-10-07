@@ -18,8 +18,7 @@ Modification Log:
         Lead currLead = [
                 SELECT Id, FirstName,Name,Of_Times_Email_Sent__c,LastName,Parent_Last_Name__c,Parent_First_Name__c,
                         Email, DOB__c,Phone,ChapterName__c, Using_Paper_Process_For_DV__c,
-                        City, State, Street, PostalCode, Medical_Professional_First_Name__c, Medical_Professional_Last_Name__c,
-                        Medical_Professional_Phone__c, Medical_Professional_Email__c, Additional_Parent_City__c,
+                        City, State, Street, PostalCode, Additional_Parent_City__c,
                         Additional_Parent_Email__c, Additional_Parent_First_Name__c,Additional_Parent_Last_Name__c,
                         Additional_Parent_Phone__c, Additional_Parent_Postal_Code__c,Additional_Parent_State__c,Additional_Parent_Street__c
                 FROM Lead
@@ -63,9 +62,7 @@ Modification Log:
         try {
             List<Lead> leadList = [
                     SELECT Id, FirstName,Name,Of_Times_Email_Sent__c,LastName,Parent_Last_Name__c,Parent_First_Name__c,
-                            Email, DOB__c,Phone,ChapterName__c, City, State, Street, PostalCode,
-                            Medical_Professional_First_Name__c, Medical_Professional_Last_Name__c,
-                            Medical_Professional_Phone__c, Medical_Professional_Email__c
+                            Email, DOB__c,Phone,ChapterName__c, City, State, Street, PostalCode
                     FROM Lead
                     WHERE Id = :leadId
                     AND IsConverted = FALSE

@@ -82,12 +82,6 @@ public class AccountServiceTest {
         lead.PD_Condition_Description__c = 'Test Diagnosis';
         lead.Parent_First_Name__c = 'MAWAFirstJune';
         lead.Parent_Last_Name__c = 'MAWALastJune';
-        lead.Medical_Professional_First_Name__c = 'SteveJune';
-        lead.Medical_Professional_Last_Name__c = 'Waughone';
-        lead.Medical_Professional_Phone__c = '9600467578';
-        lead.Medical_Professional_Email__c = 'testmawa2d@gmail.com';
-        lead.Hospital_Treatment_Facility__c = 'Steve Smith AC';
-        lead.Hospital_Treatment_Facility_Treating__c = 'Steve Smith AC';
         lead.is_Family_Aware_of_Referral__c = 'Yes';
         lead.Medical_Questions__c = 'Test Diagnosis';
         lead.Lung_Disease__c = 'Test1;Test2';
@@ -112,9 +106,6 @@ public class AccountServiceTest {
         lead2.Diagnosis_Given_By_Referrer__c = 'Test Diagnosis';
         lead2.PD_ICD_Code__c = icdCode.Id;
         lead2.Company = 'MAW';
-        lead2.Alternate1HospitalTreatmentFacility__c = 'Phoenix Medical Center';
-        lead2.Alternate2HospitalTreatmentFacility__c = 'Scottsdale Medical Center';
-        lead2.Hospital_Treatment_Facility_Treating__c = 'Arizona State Hospital';
         insert leads;
         
         List<Office__c> officeList = TestDataFactory.createOffice(2);
@@ -255,7 +246,7 @@ public class AccountServiceTest {
                                                AND AccountId IN :accountList];
         system.assert(accountShareList.size() == 0);
         Test.startTest();
-        AccountService.shareChapterAccountsToGroups(chapterIdSet, accountsInKindList);
+        AccountService.shareChapterAccountsToGroups(accountsInKindList);
         Test.stopTest();
         accountShareList = [SELECT Id 
                             FROM AccountShare 
@@ -264,7 +255,7 @@ public class AccountServiceTest {
         system.assert(accountShareList.size() > 0);
     }
     
-    @isTest
+    /*@isTest
     private static void validateCreateAccountShareEditAccess() {
         Chapter_Vs_Role__c chapterRole = new Chapter_Vs_Role__c(Name = 'Central & Northern Florida', 
                                                                 Chapter_Name__c = 'Make-A-Wish Central & Northern Florida', 
@@ -282,7 +273,7 @@ public class AccountServiceTest {
         Test.startTest();
         AccountService.createAccountShareEditAccess(accountsList, chapterNamesList);
         Test.stopTest();
-    }
+    }*/
     
     @isTest
     private static void validateUpdateRelatedContactAddressWithHousehold() {
@@ -305,32 +296,18 @@ public class AccountServiceTest {
         Test.stopTest();
         System.assert(accountList[0].BillingCity == 'Scottsdale');
     }
-    
-    @isTest
-    private static void validateCreateHospitalTreatmentFacilities() {
-        Lead lead = [
-            SELECT Id, Alternate1HospitalTreatmentFacility__c, Alternate2HospitalTreatmentFacility__c, 
-            Hospital_Treatment_Facility_Treating__c 
-            FROM Lead 
-            WHERE Name = 'Gary Johnson'
-        ];
-        Map<String, Account> accountMap = new Map<String, Account>([
-            SELECT Id, Name 
-            FROM Account 
-        ]);
-        Map<String, Account> hospitalAccountMap = new Map<String, Account>();
-        Test.startTest();
-        hospitalAccountMap = AccountService.createHospitalTreatmentFacilities(new Set<Id>{lead.Id}, accountMap);
-        Test.stopTest();
-        System.assert(hospitalAccountMap.containsKey(lead.Alternate1HospitalTreatmentFacility__c));
-    }
-    
+
     @isTest
     private static void validatePopulateChapterOnHospitalAccount() {
         Account htfAccount = [
             SELECT Id, Chapter_Name__c, BillingPostalCode 
             FROM Account 
             WHERE Name = 'Sun Valley General Hospital'
+        ];
+        Account centralFloridaChapter = [
+            SELECT Id 
+            FROM Account 
+            WHERE Name = 'Make-A-Wish Central & Northern Florida'
         ];
         System.assert(htfAccount.Chapter_Name__c == null);
         htfAccount.BillingPostalCode = '33601';
@@ -343,6 +320,7 @@ public class AccountServiceTest {
             WHERE Name = 'Sun Valley General Hospital'
         ];
         System.assert(htfUpdated.Chapter_Name__c != null);
+        System.assert(htfUpdated.Chapter_Name__c == centralFloridaChapter.Id);
     }
 
     @isTest

@@ -103,8 +103,6 @@ public class LeadSelectMedEmailController_Test {
         lead.PD_Condition_Description__c = 'Test Diagnosis';
         lead.Parent_First_Name__c = 'MAWAFirstJune';
         lead.Parent_Last_Name__c = 'MAWALastJune';
-        lead.Hospital_Treatment_Facility__c = 'Steve Smith AC';
-        lead.Hospital_Treatment_Facility_Treating__c = 'Steve Smith AC';
         lead.Referring_MP__c = referringMp.Id;
         lead.Referring_MP_Email__c = 'mp@email.com';
         lead.Treating_MP__c = treatingMp.Id;

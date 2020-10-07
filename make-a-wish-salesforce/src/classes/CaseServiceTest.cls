@@ -61,7 +61,6 @@ public with sharing class CaseServiceTest {
 		lead.Sub_Status__c = 'Pending Paper DV';
 		lead.Appeal__c = true;
 		lead.unique_wish_identifier__c = 'testIdentifier';
-		lead.hospital_treatment_facility_treating__c = 'County Hospital';
 		insert lead;
 
 		List<dsfs__DocuSign_Status__c> docuSignStatuses = TestDataFactory.createDocusignStatus(1);
@@ -558,8 +557,7 @@ public with sharing class CaseServiceTest {
 						ConvertedAccountId, Why_do_you_feel_would_be_eligible_Wish__c, Part_A_Received__c, Part_A_Sent__c, ChapterName__c,
 						PD_Condition_Description__c, ChapterName__r.Qualified_Wish_Owner__c, FirstName, LastName, Rush__c,
 						Please_Explain__c, Referred_Date__c,Please_Explain_Deteriorate__c, Will_Child_s_Condition_Deteriorate__c,
-						Expedite_timeframe__c,Inquiry_Date__c, Out_of_Territory__c, unique_wish_identifier__c,
-						hospital_treatment_facility_treating__c
+						Expedite_timeframe__c,Inquiry_Date__c, Out_of_Territory__c, unique_wish_identifier__c
 				FROM Lead
 				WHERE Name = 'Jack Smith'
 		];

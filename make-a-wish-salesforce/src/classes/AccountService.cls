@@ -39,56 +39,6 @@ public class AccountService {
         return wishChildHouseholdAccount;
     }
 
-    /**
-    * Create Hospital Treatment Facility Account
-    * @param convertedLeadIds
-    * @param medicalAccountMap
-    * @return
-    */
-    public static Map<String, Account> createHospitalTreatmentFacilities(Set<Id> convertedLeadIds, Map<String, Account> medicalAccountMap) {
-        Map<String, Account> hospitalTreatmentFacilityMap = new Map<String, Account>();
-        for (Lead processConvertedLeads : [
-                SELECT Id,Name,Alternate1HospitalTreatmentFacility__c,
-                        Alternate2HospitalTreatmentFacility__c,
-                        Hospital_Treatment_Facility__c,Migrated_Record__c,
-                        Hospital_Treatment_Facility_Treating__c,ChapterName__c,
-                        Department__c
-                FROM Lead
-                WHERE Id IN:convertedLeadIds
-        ]) {
-            if (!medicalAccountMap.containsKey(processConvertedLeads.Hospital_Treatment_Facility_Treating__c)
-                    && processConvertedLeads.Hospital_Treatment_Facility_Treating__c != null) {
-                Account newAccount = new Account();
-                newAccount.Name = processConvertedLeads.Hospital_Treatment_Facility_Treating__c;
-                newAccount.RecordTypeId = HOSPITAL_TREATMENT_RECORD_TYPE_ID;
-                newAccount.Migrated_Record__c = processConvertedLeads.Migrated_Record__c;
-                hospitalTreatmentFacilityMap.put(newAccount.Name, newAccount);
-            }
-            if (!medicalAccountMap.containsKey(processConvertedLeads.Alternate1HospitalTreatmentFacility__c)
-                    && processConvertedLeads.Alternate1HospitalTreatmentFacility__c != null) {
-                Account newAccount = new Account();
-                newAccount.Name = processConvertedLeads.Alternate1HospitalTreatmentFacility__c;
-                newAccount.RecordTypeId = HOSPITAL_TREATMENT_RECORD_TYPE_ID;
-                newAccount.Migrated_Record__c = processConvertedLeads.Migrated_Record__c;
-                hospitalTreatmentFacilityMap.put(newAccount.Name, newAccount);
-            }
-            if (!medicalAccountMap.containsKey(processConvertedLeads.Alternate2HospitalTreatmentFacility__c)
-                    && processConvertedLeads.Alternate2HospitalTreatmentFacility__c != null) {
-                Account newAccount = new Account();
-                newAccount.Name = processConvertedLeads.Alternate2HospitalTreatmentFacility__c;
-                newAccount.RecordTypeId = HOSPITAL_TREATMENT_RECORD_TYPE_ID;
-                newAccount.Migrated_Record__c = processConvertedLeads.Migrated_Record__c;
-                hospitalTreatmentFacilityMap.put(newAccount.Name, newAccount);
-            }
-        }
-        if (!hospitalTreatmentFacilityMap.isEmpty()) {
-            RecursiveTriggerHandler.blockBeforeUpdate = true;
-            RecursiveTriggerHandler.blockAfterUpdate = true;
-            insert hospitalTreatmentFacilityMap.values();
-        }
-        return hospitalTreatmentFacilityMap;
-    }
-
     /** 
     * Populate chapter name lookup and chapter email on account
     * @param ownerIdSet
@@ -400,47 +350,7 @@ public class AccountService {
             }
         }
     }
-    
-    /**
-    * Share HTF record to chapter users based on primary chapter ownership 
-    * @param accountList
-    * @param oldAccountsMap
-    */
-    public static void shareHospitalAccountToChapter(List<Account> accountsList, Map<Id, Account> oldAccountsMap) {
-        if(accountsList.isEmpty()) {
-            return;
-        }
-        Set<Id> chapterIds = new Set<Id>();
-        List<Account> htfAccountList = new List<Account>();
-        for(Account account : accountsList) {
-            if(account.RecordTypeId == Constant_AC.HOSPITAL_TREATMENT_ID 
-               && ((oldAccountsMap == null && account.Chapter_Name__c != null) 
-                   || (oldAccountsMap != null && account.Chapter_Name__c != oldAccountsMap.get(account.Id).Chapter_Name__c))) 
-            {
-                chapterIds.add(account.Chapter_Name__c);
-                htfAccountList.add(account);
-            }
-        }
-        if(!chapterIds.isEmpty()) {
-            Map<String, List<Account>> chapterAccountMap = new Map<String, List<Account>>();
-            Map<Id, Account> chapterNameMap = new Map<Id, Account>(ChapterStaffRecordSharing_AC.getChapterNameById(chapterIds));
-            for(Account account : htfAccountList) {
-                String chapterName;
-                if(chapterNameMap.containsKey(account.Chapter_Name__c)) {
-                    chapterName = chapterNameMap.get(account.Chapter_Name__c).Name;
-                    if(chapterAccountMap.containsKey(chapterName)) {
-                        chapterAccountMap.get(chapterName).add(account);
-                    } else {
-                        chapterAccountMap.put(chapterName, new List<Account>{account});
-                    }
-                }
-            }
-            if(!chapterAccountMap.isEmpty()) {
-                ChapterStaffRecordSharing_AC.AccountSharing(chapterAccountMap);
-            }
-        }
-    }
-    
+
     /**
     * @description Get duplicate records for Account records according to Duplicate Rules
     * @param accountInputs AccountDuplicateInput

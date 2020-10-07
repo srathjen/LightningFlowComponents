@@ -89,12 +89,6 @@ public class LeadConvertServiceTest {
 		qualifiedLead.Wish_Family_ContactId__c = contact1.Id;
 		qualifiedLead.Additional_Parent_Last_Name__c = '';
 		qualifiedLead.Hidden_Additional_Parent_Id__c = contact2.Id;
-		qualifiedLead.Medical_Professional_First_Name__c = 'SteveJune';
-		qualifiedLead.Medical_Professional_Last_Name__c = 'Waughone';
-		qualifiedLead.Medical_Professional_Phone__c = '9600467578';
-		qualifiedLead.Medical_Professional_Email__c = 'testmawa2d@email.com';
-		qualifiedLead.Hospital_Treatment_Facility__c = 'Steve Smith AC';
-		qualifiedLead.Hospital_Treatment_Facility_Treating__c = 'Steve Smith AC';
 		qualifiedLead.Hidden_DV_form_Medical_professional_Type__c = Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL;
 		qualifiedLead.is_Family_Aware_of_Referral__c = 'Yes';
 		qualifiedLead.Medical_Questions__c = 'Test Diagnosis';
@@ -179,8 +173,6 @@ public class LeadConvertServiceTest {
         lead.Sibling_Detail__c = 'aa | aaab | 14 | bbb | bbbc | 15';
         lead.Wish_Family_ContactId__c = null;
         lead.Hidden_Additional_Parent_Id__c = null;
-        lead.HiddenAlternate1MedProfessionalId__c = null;
-        lead.HiddenAlternate2MedProfessionalId__c = null;
         lead.Hidden_DV_form_Medical_professional_Type__c = Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL;
         update lead;
 

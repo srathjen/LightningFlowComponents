@@ -118,7 +118,6 @@ public class LeadTrigger_AT_Test {
 		lead.Status = 'Referred';
 		lead.Sub_Status__c = 'Pending Part A';
 		lead.DOB__c = Date.today().addYears(-2);
-		lead.Hospital_Treatment_Facility_Treating__c = 'Malignant Neoplasm';
 		lead.Gender__c = 'Male';
 		lead.Street = '123 St';
 		lead.City = 'Phoenix';
@@ -145,7 +144,6 @@ public class LeadTrigger_AT_Test {
 
 		lead.Status = Constant_AC.LEAD_STATUS_QUALIFIED;
 		lead.DOB__c = Date.today().addYears(-2);
-		lead.Hospital_Treatment_Facility_Treating__c = 'Malignant Neoplasm';
 		lead.Gender__c = 'Male';
 		lead.Street = '123 St';
 		lead.City = 'Phoenix';
@@ -179,7 +177,6 @@ public class LeadTrigger_AT_Test {
 
 		lead.Status = Constant_AC.LEAD_STATUS_ELIGIBILITY_REVIEW;
 		lead.DOB__c = Date.today().addYears(-2);
-		lead.Hospital_Treatment_Facility_Treating__c = 'Malignant Neoplasm';
 		lead.Gender__c = 'Male';
 		lead.Street = '123 St';
 		lead.City = 'Phoenix';
