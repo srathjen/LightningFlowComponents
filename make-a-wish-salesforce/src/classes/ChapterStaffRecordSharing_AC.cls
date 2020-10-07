@@ -53,29 +53,34 @@ public class ChapterStaffRecordSharing_AC {
     /**
      * @param contactMap
      */
-    public static void ContactSharing(Map<String, List<Contact>> contactMap) {
-        try {
-            Map<String, String> ChapterRoleMap = findChapterRole(contactMap.keySet());
-            Map<String, List<User>> userMap = userRecMap(ChapterRoleMap.values());
-            List<ContactShare> contactsToShare = new List<ContactShare>();
-            for (String currChapter : contactMap.keySet()) {
-                if (ChapterRoleMap.containsKey(currChapter)) {
-                    if (userMap.containsKey(ChapterRoleMap.get(currChapter))) {
-                        for (Contact currCon : contactMap.get(currChapter)) {
-                            for (User currUser : userMap.get(ChapterRoleMap.get(currChapter))) {
-                                if (currCon.OwnerId != currUser.Id) {
-                                    ContactShare currSharing = new ContactShare();
-                                    currSharing.ContactId = currCon.Id;
-                                    currSharing.UserOrGroupId = currUser.Id;
-                                    currSharing.ContactAccessLevel = Constant_AC.RECORD_SHARE_EDIT;
-                                    currSharing.RowCause = Schema.ContactShare.RowCause.Manual;
-                                    contactsToShare.add(currSharing);
-                                }
+    public static Map<String, Id> ContactSharing(Map<String, List<Contact>> contactMap) {
+        if(contactMap.isEmpty()) {
+            return new Map<String, Id>();
+        }
+        Map<String, String> ChapterRoleMap = findChapterRole(contactMap.keySet());
+        Map<String, List<User>> userMap = userRecMap(ChapterRoleMap.values());
+        List<ContactShare> contactsToShare = new List<ContactShare>();
+        Map<String, Id> accountUserIdMap = new Map<String, Id>();
+        for (String currChapter : contactMap.keySet()) {
+            if (ChapterRoleMap.containsKey(currChapter)) {
+                if (userMap.containsKey(ChapterRoleMap.get(currChapter))) {
+                    for (Contact currCon : contactMap.get(currChapter)) {
+                        for (User currUser : userMap.get(ChapterRoleMap.get(currChapter))) {
+                            ContactShare currSharing = new ContactShare();
+                            currSharing.ContactId = currCon.Id;
+                            currSharing.UserOrGroupId = currUser.Id;
+                            currSharing.ContactAccessLevel = Constant_AC.RECORD_SHARE_EDIT;
+                            currSharing.RowCause = Schema.ContactShare.RowCause.Manual;
+                            contactsToShare.add(currSharing);
+                            if(currCon.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID) {
+                                accountUserIdMap.put(currCon.AccountId + '-' + currUser.Id, currUser.Id);
                             }
                         }
                     }
                 }
             }
+        }
+        try {
             Database.insert(contactsToShare, false);
             if (Test.isRunningTest()) {
                 throw new CommonTriggerException(Constant_AC.TEST_EXCEPTION_ERROR);
@@ -90,12 +95,16 @@ public class ChapterStaffRecordSharing_AC {
                 }
             }
         }
+        return accountUserIdMap;
     }
 
     /**
      * @param accountMap
      */
     public static void AccountSharing(Map<String, List<Account>> accountMap) {
+        if(accountMap.isEmpty()) {
+            return;
+        }
         try {
             Map<String, String> ChapterRoleMap = findChapterRole(accountMap.keySet());
             Map<String, List<User>> userMap = userRecMap(ChapterRoleMap.values());
@@ -131,6 +140,35 @@ public class ChapterStaffRecordSharing_AC {
                         currRec.addError(Label.Debug_log_error_message);
                     }
                 }
+            }
+        }
+    }
+    
+    public static void accountSharing(Map<String, Id> accountUserMap) {
+        if(accountUserMap.isEmpty()) {
+            return;
+        }
+        List<AccountShare> accountShareList = new List<AccountShare>();
+        for(String accountUser : accountUserMap.keySet()) {
+            AccountShare share = new AccountShare();
+            share.AccountId = Utils.splitString(accountUser, '-')[0];
+            share.UserOrGroupId = accountUserMap.get(accountUser);
+            share.AccountAccessLevel = Constant_AC.RECORD_SHARE_EDIT;
+            share.OpportunityAccessLevel = Constant_AC.RECORD_SHARE_READ;
+            share.CaseAccessLevel = Constant_AC.RECORD_SHARE_EDIT;
+            share.ContactAccessLevel = Constant_AC.RECORD_SHARE_EDIT;
+            share.RowCause = Schema.AccountShare.RowCause.Manual;
+            accountShareList.add(share);
+        }
+        try {
+            Database.insert(accountShareList, false);
+        } catch(Exception ex) {
+            system.debug('Exception');
+            for(Id accId : accountUserMap.keySet()) {
+                ErrorMessage_AC.createDebugRec(
+                    'ChapterStaffRecordSharing_AC', String.valueOf(accId), 
+                    String.valueOf(ex),'accountSharing', accId, ex.getStackTraceString() 
+                    + ' ' + ex.getMessage(), 'Error');
             }
         }
     }
@@ -373,7 +411,84 @@ public class ChapterStaffRecordSharing_AC {
         insert contactToShareList;
         return contactToShareList;
     }
-
+    
+    /**
+    * Create AccountShare records to give public groups read access on accounts
+    * @param accountList
+    * @param accountChapterNameMap
+    * @param publicGroupMap
+    */
+    public static void createAccountShareReadAccess(List<Account> accountList, Map<Id, String> accountChapterNameMap, Map<String, Id> publicGroupMap) {
+        if(accountList.isEmpty()) {
+            return;
+        }
+        List<AccountShare> accountShareList = new List<AccountShare>();
+        for (Account accountRecord : accountList) {
+            Id groupId;
+            if (accountChapterNameMap.containsKey(accountRecord.Chapter_Name__c)
+                && publicGroupMap.containsKey(accountChapterNameMap.get(accountRecord.Chapter_Name__c))) {
+                    groupId = publicGroupMap.get(accountChapterNameMap.get(accountRecord.Chapter_Name__c));
+                    AccountShare accountShare = new AccountShare();
+                    accountShare.AccountId = accountRecord.Id;
+                    accountShare.Accountaccesslevel = Constant_AC.RECORD_SHARE_READ;
+                    accountShare.CaseAccessLevel = Constant_AC.RECORD_SHARE_NONE;
+                    accountShare.ContactAccessLevel = Constant_AC.RECORD_SHARE_NONE;
+                    accountShare.OpportunityAccessLevel = Constant_AC.RECORD_SHARE_NONE;
+                    accountShare.UserOrGroupId = groupId;
+                    accountShareList.add(accountShare);
+                }
+        }
+        insert accountShareList;
+    }
+    
+    /**
+    * Delete ContactShare records that were manually created
+    * @param contactIds
+    */
+    public static void deleteContactShare(Set<Id> contactIds) {
+        if(contactIds.isEmpty()) {
+            return;
+        }
+        List<ContactShare> contactShareList = new List<ContactShare>([
+            SELECT Id 
+            FROM ContactShare 
+            WHERE ContactId IN :contactIds
+            AND RowCause = :Schema.ContactShare.RowCause.Manual
+        ]);
+        try {
+            delete contactShareList;
+        } catch(Exception ex) {
+            for(Id conId : contactIds) {
+                ErrorMessage_AC.createDebugRec('ChapterStaffRecordSharing_AC', String.valueOf(conId), String.valueOf(ex),
+                                               'deleteContactShare', conId, ex.getStackTraceString() + ' ' + ex.getMessage(), 'Error');
+            }
+        }
+    }
+        
+    /**
+    * Delete AccountShare records that were manually created
+    * @param accountIds
+    */
+    public static void deleteAccountShare(Set<Id> accountIds) {
+        if(accountIds.isEmpty()) {
+            return;
+        }
+        List<AccountShare> accountShareList = new List<AccountShare>([
+            SELECT Id 
+            FROM AccountShare 
+            WHERE AccountId IN :accountIds 
+            AND RowCause = :Schema.AccountShare.RowCause.Manual
+        ]);
+        try {
+            delete accountShareList;
+        } catch(Exception ex) {
+            for(Id accId : accountIds) {
+                ErrorMessage_AC.createDebugRec('ChapterStaffRecordSharing_AC', String.valueOf(accId), String.valueOf(ex),
+                                               'deleteAccountShare', accId, ex.getStackTraceString() + ' ' + ex.getMessage(), 'Error');
+            }
+        }
+    }
+    
     /**
      * @param usersRole
      *
@@ -476,6 +591,8 @@ public class ChapterStaffRecordSharing_AC {
             SELECT Id, Name 
             FROM Account 
             WHERE Id IN :accountIdSet
+            AND RecordTypeId = :Constant_AC.CHAPTER_RT_ID
+            AND Name != :Constant_AC.ACCOUNT_NAME_MAW_AMERICA
         ]);
         return chapterNameMap;
     }

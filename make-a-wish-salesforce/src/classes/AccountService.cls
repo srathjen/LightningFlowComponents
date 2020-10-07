@@ -11,9 +11,6 @@ public class AccountService {
     private final static Id CHAPTER_RECORD_TYPE_ID = Constant_AC.CHAPTER_RT_ID;
     private final static Id CONTACT_WISH_CHILD_RECORD_TYPE_ID = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
     private final static String WISH_FAMILY_RECORD_TYPE_LABEL = Constant_AC.WISH_FAMILY_RT_LABEL;
-    private final static String READ = Constant_AC.RECORD_SHARE_READ;
-    private final static String EDIT = Constant_AC.RECORD_SHARE_EDIT;
-    private final static String NONE = Constant_AC.RECORD_SHARE_NONE;
     private final static String RECORD_NAME_REMOVE_SUBSTRING_MAW = 'Make-A-Wish ';
     private final static String CHAPTER_SUBSTRING = ' - Chapter';
     private final static String USER_ROLE_NAME_NATIONAL_STAFF = 'National Staff';
@@ -172,6 +169,9 @@ public class AccountService {
     * @param accountWishCoordinatorMap
     */
     public static void submitAccountApprovalProcess(List<Account> accountList, Map<Id, Id> accountWishCoordinatorMap) {
+        if(accountList.isEmpty()) {
+            return;
+        }
         List<Approval.ProcessSubmitRequest> requestList = new List<Approval.ProcessSubmitRequest>();
         for (Account accountRecord : accountList) {
             if (accountWishCoordinatorMap.containsKey(accountRecord.Chapter_Name__c)
@@ -191,13 +191,100 @@ public class AccountService {
         }
         Approval.process(requestList);
     }
+    
+    /**
+    * Share record to chapter users based on primary chapter ownership 
+    * @param accountList
+    * @param oldAccountsMap
+    */
+    public static void shareAccountToChapter(List<Account> accountsList, Map<Id, Account> oldAccountsMap) {
+        if(accountsList.isEmpty()) {
+            return;
+        }
+        Set<Id> inKindChapterAccountIdSet = new Set<Id>();
+        Set<Id> chapterAccountIdSet = new Set<Id>();
+        List<Account> inKindAccountsList = new List<Account>();
+        Set<Id> chapterIdsHtf = new Set<Id>();
+        Set<Id> accountIdsDeleteShare = new Set<Id>();
+        List<Account> htfAccountList = new List<Account>();
+        for(Account account : accountsList) {
+            if(oldAccountsMap == null) {
+                if(account.RecordTypeId == Constant_AC.IN_KIND_ACCOUNT_ID) {
+                    inKindAccountsList.add(account);
+                    if(account.Chapter_Name__c != null) {
+                        inKindChapterAccountIdSet.add(account.Chapter_Name__c);
+                    }
+                } else if(account.RecordTypeId == CHAPTER_RECORD_TYPE_ID) {
+                    chapterAccountIdSet.add(account.Id);
+                } else if(account.RecordTypeId == Constant_AC.HOSPITAL_TREATMENT_ID && account.Chapter_Name__c != null) {
+                    chapterIdsHtf.add(account.Chapter_Name__c);
+                    htfAccountList.add(account);
+                } else {
+                    chapterAccountIdSet.add(account.Chapter_Name__c);
+                }
+            } else {
+                Account oldAccount = oldAccountsMap.get(account.Id);
+                if(account.RecordTypeId == Constant_AC.HOSPITAL_TREATMENT_ID && account.Chapter_Name__c != oldAccount.Chapter_Name__c) {
+                    chapterIdsHtf.add(account.Chapter_Name__c);
+                    htfAccountList.add(account);
+                    accountIdsDeleteShare.add(account.Id);
+                }
+            }
+        }
+        if(!inKindChapterAccountIdSet.isEmpty() || !chapterAccountIdSet.isEmpty()) {
+            Map<Id,Id> wishCoordinatorMap = new Map<Id,Id>();
+            Set<Id> accountIdSet = (new Map<Id, Account>(accountsList)).keySet();
+            Map<String,List<Account>> accountMapforSharing = new Map<String, List<Account>>();
+            
+            List<Account> inKindChapterList = new List<Account>([
+                SELECT Id, Name, Wish_Co_ordinator__c, OwnerId, Owner.UserRole.Name, Owner.ContactId, Volunteer_Manager__c,
+                RecordTypeId, Chapter_Name__c, Chapter_Name__r.Name
+                FROM Account
+                WHERE (Id IN :inKindChapterAccountIdSet OR (Chapter_Name__c IN :chapterAccountIdSet AND Id IN :accountIdSet))
+            ]);
+            for(Account accountRecord : inKindChapterList) {
+                if(accountRecord.RecordTypeId == CHAPTER_RECORD_TYPE_ID) {
+                    wishCoordinatorMap.put(accountRecord.Id, accountRecord.Wish_Co_ordinator__c);
+                } else if(accountRecord.Owner.userRole.Name == USER_ROLE_NAME_NATIONAL_STAFF) {
+                    if(accountMapforSharing.containsKey(accountRecord.Chapter_Name__r.Name)) {
+                        accountMapforSharing.get(accountRecord.Chapter_Name__r.Name).add(accountRecord);
+                    } else {
+                        accountMapforSharing.put(accountRecord.Chapter_Name__r.Name, new List<Account>{accountRecord}); 
+                    }
+                }
+            }
+            submitAccountApprovalProcess(inKindAccountsList, wishCoordinatorMap);
+            shareChapterAccountsToGroups(inKindAccountsList);
+            ChapterStaffRecordSharing_AC.AccountSharing(accountMapforSharing);
+        }
+        if(!htfAccountList.isEmpty()) {
+            ChapterStaffRecordSharing_AC.deleteAccountShare(accountIdsDeleteShare);
+            Map<String, List<Account>> chapterAccountMap = new Map<String, List<Account>>();
+            Map<Id, Account> chapterNameMap = new Map<Id, Account>(ChapterStaffRecordSharing_AC.getChapterNameById(chapterIdsHtf));
+            for(Account account : htfAccountList) {
+                String chapterName;
+                if(chapterNameMap.containsKey(account.Chapter_Name__c)) {
+                    chapterName = chapterNameMap.get(account.Chapter_Name__c).Name;
+                    if(chapterAccountMap.containsKey(chapterName)) {
+                        chapterAccountMap.get(chapterName).add(account);
+                    } else {
+                        chapterAccountMap.put(chapterName, new List<Account>{account});
+                    }
+                }
+            }
+            ChapterStaffRecordSharing_AC.AccountSharing(chapterAccountMap);
+        }
+    }
 
     /**
     * Share accounts to public groups based on chapter
     * @param chapterIdSet
     * @param accountList
     */
-    public static void shareChapterAccountsToGroups(Set<Id> chapterIdSet, List<Account> accountList) {
+    public static void shareChapterAccountsToGroups(List<Account> accountList) {
+        if(accountList.isEmpty()) {
+            return;
+        }
         Map<Id, String> chapterNameMap = new Map<Id, String>();
         Map<String, Id> publicGroupMap = new Map<String, Id>();
         for (Account accountRecord : [
@@ -215,93 +302,7 @@ public class AccountService {
         ]) {
             publicGroupMap.put(publicGroup.Name, publicGroup.Id);
         }
-        if (!chapterNameMap.isEmpty() && !publicGroupMap.isEmpty()) {
-            createAccountShareReadAccess(accountList, chapterNameMap, publicGroupMap);
-        }
-    }
-
-    /**
-    * Create AccountShare records to give public groups read access on accounts
-    * @param accountList
-    * @param accountChapterNameMap
-    * @param publicGroupMap
-    */
-    public static void createAccountShareReadAccess(List<Account> accountList, Map<Id, String> accountChapterNameMap, Map<String, Id> publicGroupMap) {
-        List<AccountShare> accountShareList = new List<AccountShare>();
-        Id groupId;
-        for (Account accountRecord : accountList) {
-            groupId = NULL;
-            if (accountChapterNameMap.containsKey(accountRecord.Chapter_Name__c)
-                    && publicGroupMap.containsKey(accountChapterNameMap.get(accountRecord.Chapter_Name__c))) {
-                groupId = publicGroupMap.get(accountChapterNameMap.get(accountRecord.Chapter_Name__c));
-                AccountShare accountShare = new AccountShare();
-                accountShare.AccountId = accountRecord.Id;
-                accountShare.Accountaccesslevel = READ;
-                accountShare.CaseAccessLevel = NONE;
-                accountShare.ContactAccessLevel = NONE;
-                accountShare.OpportunityAccessLevel = NONE;
-                accountShare.UserOrGroupId = groupId;
-                accountShareList.add(accountShare);
-            }
-        }
-        if (!accountShareList.isEmpty()) {
-            insert accountShareList;
-        }
-    }
-
-    /**
-    * Create AccountShare records to give users edit access on accounts based on chapter and role
-    * @param accountsList
-    * @param chapterNames
-    */
-    public static void createAccountShareEditAccess(List<Account> accountsList, List<String> chapterNames) {
-        Map<String, String> chapterRoleMap = new Map<String, String>();
-        Map<String, List<User>> userRoleMap = new Map<String, List<User>>();
-        List<AccountShare> accountShareEditList = new List<AccountShare>();
-        for (Chapter_Vs_Role__c chapterRole : [
-                SELECT Chapter_Name__c, Role_Name__c
-                FROM Chapter_Vs_Role__c
-                WHERE Chapter_Name__c IN :chapterNames
-        ]) {
-            chapterRoleMap.put(chapterRole.Chapter_Name__c, chapterRole.Role_Name__c);
-        }
-        for (User user : [
-                SELECT Id, userRole.Name
-                FROM User
-                WHERE userRole.Name IN :chapterRoleMap.values()
-                AND isActive = true
-        ]) {
-            if (userRoleMap.containsKey(user.userRole.Name)) {
-                userRoleMap.get(user.userRole.Name).add(user);
-            } else {
-                userRoleMap.put(user.userRole.Name, new List<User>{
-                        user
-                });
-            }
-        }
-        for (Account account : accountsList) {
-            if (account.Chapter_Name__r.Name != null) {
-                String accountChapter = account.Chapter_Name__r.Name.remove(RECORD_NAME_REMOVE_SUBSTRING_MAW) + CHAPTER_SUBSTRING;
-                if (userRoleMap.containsKey(accountChapter)) {
-                    for (User user : userRoleMap.get(accountChapter)) {
-                        if (account.OwnerId != user.Id) {
-                            AccountShare accountShare = new AccountShare();
-                            accountShare.accountId = account.Id;
-                            accountShare.UserOrGroupId = user.Id;
-                            accountShare.accountAccessLevel = EDIT;
-                            accountShare.OpportunityAccessLevel = READ;
-                            accountShare.CaseAccessLevel = EDIT;
-                            accountShare.ContactAccessLevel = EDIT;
-                            accountShare.RowCause = Schema.AccountShare.RowCause.Manual;
-                            accountShareEditList.add(accountShare);
-                        }
-                    }
-                }
-            }
-        }
-        if (!accountShareEditList.isEmpty()) {
-            insert accountShareEditList;
-        }
+        ChapterStaffRecordSharing_AC.createAccountShareReadAccess(accountList, chapterNameMap, publicGroupMap);
     }
 
     /**
@@ -360,7 +361,7 @@ public class AccountService {
                     account.Chapter_Name__c = zipChapterMap.get(zip);
                     account.Hidden_Chapter__c = account.Chapter_Name__c;
                 }
-            } else if(String.isNotBlank(account.ShippingPostalCode) && zipChapterMap.containsKey(Utils.splitString(account.ShippingPostalCode, '-')[0])) {
+            } else if(String.isNotBlank(account.ShippingPostalCode)) {
                 zip = Utils.splitString(account.ShippingPostalCode, '-')[0];
                 if(zipChapterMap.containsKey(zip)) {
                     account.Chapter_Name__c = zipChapterMap.get(zip);
@@ -400,47 +401,7 @@ public class AccountService {
             }
         }
     }
-    
-    /**
-    * Share HTF record to chapter users based on primary chapter ownership 
-    * @param accountList
-    * @param oldAccountsMap
-    */
-    public static void shareHospitalAccountToChapter(List<Account> accountsList, Map<Id, Account> oldAccountsMap) {
-        if(accountsList.isEmpty()) {
-            return;
-        }
-        Set<Id> chapterIds = new Set<Id>();
-        List<Account> htfAccountList = new List<Account>();
-        for(Account account : accountsList) {
-            if(account.RecordTypeId == Constant_AC.HOSPITAL_TREATMENT_ID 
-               && ((oldAccountsMap == null && account.Chapter_Name__c != null) 
-                   || (oldAccountsMap != null && account.Chapter_Name__c != oldAccountsMap.get(account.Id).Chapter_Name__c))) 
-            {
-                chapterIds.add(account.Chapter_Name__c);
-                htfAccountList.add(account);
-            }
-        }
-        if(!chapterIds.isEmpty()) {
-            Map<String, List<Account>> chapterAccountMap = new Map<String, List<Account>>();
-            Map<Id, Account> chapterNameMap = new Map<Id, Account>(ChapterStaffRecordSharing_AC.getChapterNameById(chapterIds));
-            for(Account account : htfAccountList) {
-                String chapterName;
-                if(chapterNameMap.containsKey(account.Chapter_Name__c)) {
-                    chapterName = chapterNameMap.get(account.Chapter_Name__c).Name;
-                    if(chapterAccountMap.containsKey(chapterName)) {
-                        chapterAccountMap.get(chapterName).add(account);
-                    } else {
-                        chapterAccountMap.put(chapterName, new List<Account>{account});
-                    }
-                }
-            }
-            if(!chapterAccountMap.isEmpty()) {
-                ChapterStaffRecordSharing_AC.AccountSharing(chapterAccountMap);
-            }
-        }
-    }
-    
+
     /**
     * @description Get duplicate records for Account records according to Duplicate Rules
     * @param accountInputs AccountDuplicateInput

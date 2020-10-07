@@ -87,10 +87,6 @@ public class AccountServiceTest {
         lead.Medical_Professional_Phone__c = '9600467578';
         lead.Medical_Professional_Email__c = 'testmawa2d@gmail.com';
         lead.Hospital_Treatment_Facility__c = 'Steve Smith AC';
-        lead.Treating_Medical_Professional_First_Name__c = 'SteveJune';
-        lead.Treating_Medical_Professional_Last_Name__c = 'Waughone';
-        lead.Treating_Medical_Professional_Phone__c = '9600467578';
-        lead.Treating_Medical_Professional_Email__c = 'testmawa2d@gmail.com';
         lead.Hospital_Treatment_Facility_Treating__c = 'Steve Smith AC';
         lead.Best_Contact_for_Physician_First_Name__c = 'SteveJune';
         lead.Best_Contact_for_Physician_Last_Name__c = 'Waughone';
@@ -262,33 +258,13 @@ public class AccountServiceTest {
                                                AND AccountId IN :accountList];
         system.assert(accountShareList.size() == 0);
         Test.startTest();
-        AccountService.shareChapterAccountsToGroups(chapterIdSet, accountsInKindList);
+        AccountService.shareChapterAccountsToGroups(accountsInKindList);
         Test.stopTest();
         accountShareList = [SELECT Id 
                             FROM AccountShare 
                             WHERE Accountaccesslevel = 'Read' 
                             AND AccountId IN :accountList];
         system.assert(accountShareList.size() > 0);
-    }
-    
-    @isTest
-    private static void validateCreateAccountShareEditAccess() {
-        Chapter_Vs_Role__c chapterRole = new Chapter_Vs_Role__c(Name = 'Central & Northern Florida', 
-                                                                Chapter_Name__c = 'Make-A-Wish Central & Northern Florida', 
-                                                                Role_Name__c = 'Central & Northern Florida - Chapter');
-        insert chapterRole;
-        List<String> chapterNamesList = new List<String>();
-        List<Account> accountsList = new List<Account>([SELECT Id, Name, Wish_Co_ordinator__c, OwnerId, Owner.UserRole.Name, Owner.ContactId, 
-                                                        Volunteer_Manager__c, RecordTypeId, Chapter_Name__c, Chapter_Name__r.Name 
-                                                        FROM Account]);
-        for(Account account : accountsList) {
-            if(account.Chapter_Name__r.Name != null) {
-                chapterNamesList.add(account.Chapter_Name__r.Name);
-            }
-        }
-        Test.startTest();
-        AccountService.createAccountShareEditAccess(accountsList, chapterNamesList);
-        Test.stopTest();
     }
     
     @isTest
@@ -339,6 +315,11 @@ public class AccountServiceTest {
             FROM Account 
             WHERE Name = 'Sun Valley General Hospital'
         ];
+        Account centralFloridaChapter = [
+            SELECT Id 
+            FROM Account 
+            WHERE Name = 'Make-A-Wish Central & Northern Florida'
+        ];
         System.assert(htfAccount.Chapter_Name__c == null);
         htfAccount.BillingPostalCode = '33601';
         Test.startTest();
@@ -350,6 +331,7 @@ public class AccountServiceTest {
             WHERE Name = 'Sun Valley General Hospital'
         ];
         System.assert(htfUpdated.Chapter_Name__c != null);
+        System.assert(htfUpdated.Chapter_Name__c == centralFloridaChapter.Id);
     }
 
     @isTest
