@@ -16,10 +16,14 @@ public class ChapterStaffRecordSharing_ACTest {
     public static void setUp() {
         trac_TriggerHandlerBase.blockTrigger = true;
         
+        User testUser = TestDataFactory.createIntegrationUser(1, 'Intake Manager', null)[0];
+        insert testUser;
+        
         List<Account> accountList = TestDataFactory.createAccount(2);
         Account accountAzChapter = accountList.get(0);
         accountAzChapter.Name = 'Make-A-Wish Arizona';
         accountAzChapter.RecordTypeId = CHAPTER_RT_ID;
+        accountAzChapter.Intake_Manager__c = testUser.Id;
         Account accountCullenFamily = accountList.get(1);
         accountCullenFamily.Name = 'Mallory Cullen & Family Account';
         accountCullenFamily.RecordTypeId = HOUSEHOLD_RECORD_TYPE_ID;
@@ -62,7 +66,7 @@ public class ChapterStaffRecordSharing_ACTest {
         leadMallory.Communication__c = 'rec1;rec2';
         insert leadList;
         
-        List<Contact> contactList = TestDataFactory.createContact(2);
+        List<Contact> contactList = TestDataFactory.createContact(3);
         Contact wishChildCameron = contactList.get(0);
         wishChildCameron.FirstName = 'Cameron';
         wishChildCameron.LastName = 'Avalon';
@@ -82,6 +86,11 @@ public class ChapterStaffRecordSharing_ACTest {
         volunteerLenny.Email = 'Hey.Bucko@gmail.com';
         volunteerLenny.RecordTypeId = VOLUNTEER_RT_ID;
         volunteerLenny.AccountId = accountAzChapter.Id;
+        Contact medicalProfessional = contactList.get(2);
+        medicalProfessional.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+        medicalProfessional.FirstName = 'Rhonda';
+        medicalProfessional.LastName = 'Stewert';
+        medicalProfessional.Region_Chapter__c = accountAzChapter.Id;
         insert contactList;
         
         List<Background_check__c> backgroundCheckList = TestDataFactory.createBackgroundCheck(1);
@@ -137,6 +146,34 @@ public class ChapterStaffRecordSharing_ACTest {
         volOpp.Chapter_Name__c = accountAzChapter.Id;
         insert volunteerOppList;
         
+        ContactShare conShare = new ContactShare();
+        conShare.UserOrGroupId = testUser.Id;
+        conShare.ContactAccessLevel = Constant_AC.RECORD_SHARE_EDIT;
+        conShare.RowCause = Schema.ContactShare.RowCause.Manual;
+        conShare.ContactId = medicalProfessional.Id;
+        insert conShare;
+        
+        AccountShare accShare = new AccountShare();
+        accShare.AccountId = accountCullenFamily.Id;
+        accShare.UserOrGroupId = testUser.Id;
+        accShare.Accountaccesslevel = Constant_AC.RECORD_SHARE_EDIT;
+        accShare.OpportunityAccessLevel = Constant_AC.RECORD_SHARE_READ;
+        accShare.CaseAccessLevel = Constant_AC.RECORD_SHARE_READ;
+        accShare.ContactAccessLevel = Constant_AC.RECORD_SHARE_READ;
+        accShare.RowCause = Schema.AccountShare.RowCause.Manual;
+        insert accShare;
+        
+        Office__c mawAzOffice = TestDataFactory.createOffice(1)[0];
+        mawAzOffice.Name = 'Make-A-Wish-Arizona';
+        mawAzOffice.Chapter__c = accountAzChapter.Id;
+        insert mawAzOffice;
+        
+        Zip_Code__c zipAz = TestDataFactory.createZipCode(1)[0];
+        zipAz.Name = '85069';
+        zipAz.Office__c = mawAzOffice.Id;
+        zipAz.External_Id__c = '85069';
+        insert zipAz;
+        
         trac_TriggerHandlerBase.blockTrigger = false;
     }
     
@@ -175,7 +212,7 @@ public class ChapterStaffRecordSharing_ACTest {
             WHERE Name = 'Make-A-Wish Arizona'
         ];
         List<Contact> contactList = [
-            SELECT Id, OwnerId
+            SELECT Id, OwnerId, AccountId, RecordTypeId
             FROM Contact
         ];
         Map<String, List<Contact>> contactMapforSharing = new Map<String, List<Contact>>();
@@ -444,5 +481,89 @@ public class ChapterStaffRecordSharing_ACTest {
         Test.stopTest();
         
         System.assert(chapterNameMap.get(chapterAccount.Id) == azChapterRole.Role_Name__c);
+    }
+    
+    @isTest
+    static void deleteContactShare() {
+        Map<Id, ContactShare> contactShareMap = new Map<Id, ContactShare>();
+        for(ContactShare conShare : [SELECT Id, ContactId FROM ContactShare WHERE RowCause = :Schema.ContactShare.RowCause.Manual]) {
+            contactShareMap.put(conShare.ContactId, conShare);
+        }
+        System.assert(!contactShareMap.values().isEmpty());
+        test.startTest();
+        ChapterStaffRecordSharing_AC.deleteContactShare(contactShareMap.keySet());
+        test.stopTest();
+        List<ContactShare> contactShareList = [
+            SELECT Id 
+            FROM ContactShare
+            WHERE RowCause = :Schema.ContactShare.RowCause.Manual
+        ];
+        System.assert(contactShareList.isEmpty());
+    }
+    
+    @isTest
+    static void deleteAccountShare() {
+        Map<Id, AccountShare> accountShareMap = new Map<Id, AccountShare>();
+        for(AccountShare accShare : [SELECT Id, AccountId FROM AccountShare WHERE RowCause = :Schema.AccountShare.RowCause.Manual]) {
+            accountShareMap.put(accShare.AccountId, accShare);
+        }
+        System.assert(!accountShareMap.values().isEmpty());
+        test.startTest();
+        ChapterStaffRecordSharing_AC.deleteAccountShare(accountShareMap.keySet());
+        test.stopTest();
+        List<AccountShare> accountShareList = [
+            SELECT Id 
+            FROM AccountShare
+            WHERE RowCause = :Schema.AccountShare.RowCause.Manual
+        ];
+        System.assert(accountShareList.isEmpty());
+    }
+    
+    @isTest
+    static void getChapterByZipcode() {
+        Map<String, Id> zipcodeChapterMap = new Map<String, Id>();
+        List<String> zipStringList = new List<String>();
+        zipStringList.add('85069');
+        test.startTest();
+        zipcodeChapterMap = ChapterStaffRecordSharing_AC.getChapterByZipcode(zipStringList);
+        test.stopTest();
+        Account azChapter = [
+            SELECT Id 
+            FROM Account 
+            WHERE Name = 'Make-A-Wish Arizona'
+        ];
+        System.assert(zipcodeChapterMap.get('85069') == azChapter.Id);
+    }
+    
+    @isTest
+    static void getChapterNameById() {
+        Account chapterAccount = [
+            SELECT Id, Name 
+            FROM Account 
+            WHERE RecordTypeId = :CHAPTER_RT_ID
+        ];
+        Set<Id> chapterIdSet = new Set<Id>();
+        chapterIdSet.add(chapterAccount.Id);
+        Map<Id, Account> chapterNameMap = new Map<Id, Account>();
+        test.startTest();
+        chapterNameMap = ChapterStaffRecordSharing_AC.getChapterNameById(chapterIdSet);
+        test.stopTest();
+        System.assert(chapterNameMap.get(chapterAccount.Id).Name == chapterAccount.Name);
+    }
+    
+    @isTest
+    static void getAccountOwner() {
+        Account chapterAccount = [
+            SELECT Id, Name, Intake_Manager__c
+            FROM Account 
+            WHERE Name = 'Make-A-Wish Arizona'
+        ];
+        Set<Id> chapterIdSet = new Set<Id>();
+        chapterIdSet.add(chapterAccount.Id);
+        Map<Id, Account> chapterOwnerMap = new Map<Id, Account>();
+        test.startTest();
+        chapterOwnerMap = ChapterStaffRecordSharing_AC.getAccountOwner(chapterIdSet);
+        test.stopTest();
+        System.assert(chapterOwnerMap.get(chapterAccount.Id).Intake_Manager__c == chapterAccount.Intake_Manager__c);
     }
 }

@@ -493,8 +493,8 @@ public class ContactServiceTest {
                         Other_Relationship_To_Child__c, is_Family_Aware_of_Referral__c, Migrated_Record__c,
                         How_Did_you_hear_about_Make_A_Wish__c, Additional_Parent_City__c, City,
                         Additional_Parent_Postal_Code__c, PostalCode, Additional_Parent_State__c, State,
-                        Additional_Parent_Street__c, Street, Treating_Medical_Professional_First_Name__c,
-                        Treating_Medical_Professional_Last_Name__c, Gender__c, Salutation, ConvertedContactId
+                        Additional_Parent_Street__c, Street, Gender__c, Salutation, ConvertedContactId,
+                        Treating_MP__c, Treating_MP__r.FirstName, Treating_MP__r.LastName
                 FROM Lead
                 WHERE Name = 'Mark Smith'
         ];

@@ -22,64 +22,41 @@ public class ContactDomain extends trac_TriggerHandlerBase {
 	/**
 	* Before insert of contact
 	*/
-	public override void handleBeforeInsert() {
-		for (Contact contact : newContactsList) {
-			if (!blockTrigger) {
-				if (contact.RecordTypeId == VOLUNTEER_RT_ID) {
-					contact.Region_Chapter__c = contact.AccountId;
-				}
-				if (contact.birth_day__c != null && contact.birth_year__c != null && contact.birth_month__c != null) {
-					date dtConverted = Date.valueOf(contact.birth_year__c + '-' + MONTH_VALUE_MAP.get(contact.birth_month__c) + '-' + contact.birth_day__c);
-					contact.BirthDate = dtConverted ;
-				}
-			}
-			if (contact.RecordTypeId == WISH_CHILD_RT_ID) {
-				contact.Relationship_Type__c = CONTACT_WISH_CHILD_RT_LABEL;
-			} else if (contact.RecordTypeId == WISH_FAMILY_RT_ID) {
-				contact.Relationship_Type__c = RELATIONSHIP_TYPE_PARENT_GUARDIAN;
-			}
+    public override void handleBeforeInsert() {
+        for (Contact contact : newContactsList) {
+            if (!blockTrigger) {
+                if (contact.RecordTypeId == VOLUNTEER_RT_ID) {
+                    contact.Region_Chapter__c = contact.AccountId;
+                }
+                if (contact.birth_day__c != null && contact.birth_year__c != null && contact.birth_month__c != null) {
+                    date dtConverted = Date.valueOf(contact.birth_year__c + '-' + MONTH_VALUE_MAP.get(contact.birth_month__c) + '-' + contact.birth_day__c);
+                    contact.BirthDate = dtConverted ;
+                }
+            }
+            if (contact.RecordTypeId == WISH_CHILD_RT_ID) {
+                contact.Relationship_Type__c = CONTACT_WISH_CHILD_RT_LABEL;
+            } else if (contact.RecordTypeId == WISH_FAMILY_RT_ID) {
+                contact.Relationship_Type__c = RELATIONSHIP_TYPE_PARENT_GUARDIAN;
+            }
             if(contact.Region_Chapter__c != null) {
                 contact.Hidden_Chapter__c = contact.Region_Chapter__c;
             }
-		}
+        }
         ContactService.populateRegionChapterOnMedicalProfessional(newContactsList, null);
-	}
+        ContactService.updateContactOwnerToChapter(newContactsList, null);
+    }
 
 	/**
 	* After insert of contact
 	*/
-	public override void handleAfterInsert() {
-		Set<Id> accountIds = new Set<Id>();
-		for (Contact contact : newContactsList) {
-			accountIds.add(contact.Region_Chapter__c);
-		}
-		Map<Id, Account> accountMap = new Map<Id, Account>([
-				SELECT Id, Name
-				FROM Account
-				WHERE Id IN :accountIds
-		]);
-
-		Map<String, List<Contact>> contactChapterMap = new Map<String, List<Contact>>();
-		for (Contact contact : newContactsList) {
-            Account contactRegionChapterAccount = accountMap.get(contact.Region_Chapter__c);
-			if (contact.Region_Chapter__c != null && contactRegionChapterAccount.Name != ACCOUNT_NAME_MAW_AMERICA) {
-				if (contactChapterMap.containsKey(contactRegionChapterAccount.Name)) {
-					contactChapterMap.get(contactRegionChapterAccount.Name).add(contact);
-				} else {
-					contactChapterMap.put(contactRegionChapterAccount.Name, new List<Contact>{
-							contact
-					});
-				}
-			}
-		}
-		if (!blockTrigger) {
-			RecursiveTriggerHandler.isFirstTime = false;
-			ContactService.createAffiliation(newContactsList);
-		}
-		ChapterStaffRecordSharing_AC.ContactSharing(contactChapterMap);
-		ContactService.createVolunteerUser(newContactsMap.keySet());
-        ContactService.shareMedicalProfessionalToChapter(newContactsList, null);
-	}
+    public override void handleAfterInsert() {
+        if (!blockTrigger) {
+            RecursiveTriggerHandler.isFirstTime = false;
+            ContactService.createAffiliation(newContactsList);
+        }
+        ContactService.shareContactToChapter(newContactsList, null);
+        ContactService.createVolunteerUser(newContactsMap.keySet());
+    }
 
 	/**
 	* Before update of contact
@@ -135,7 +112,8 @@ public class ContactDomain extends trac_TriggerHandlerBase {
         ContactService.clearHiddenFields(newContactsList);
         ContactService.updatePicklistTranslations(newContactsMap, oldContactsMap);
         ContactService.populateRegionChapterOnMedicalProfessional(newContactsList, oldContactsMap);
-	}
+        ContactService.updateContactOwnerToChapter(newContactsList, oldContactsMap);
+    }
 
 	/**
 	* After update of contact
@@ -165,7 +143,7 @@ public class ContactDomain extends trac_TriggerHandlerBase {
 		ContactService.updateUserDetails(newContactsList, oldContactsMap);
 		ContactService.shareContactRecord(newContactsMap, oldContactsMap);
 		ContactService.updateHiddenCaseFields(newContactsList, oldContactsMap);
-        ContactService.shareMedicalProfessionalToChapter(newContactsList, oldContactsMap);
+        ContactService.shareContactToChapter(newContactsList, oldContactsMap);
 	}
 
 	/**
