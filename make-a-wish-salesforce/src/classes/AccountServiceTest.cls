@@ -88,6 +88,9 @@ public class AccountServiceTest {
         lead.Medical_Professional_Email__c = 'testmawa2d@gmail.com';
         lead.Hospital_Treatment_Facility__c = 'Steve Smith AC';
         lead.Hospital_Treatment_Facility_Treating__c = 'Steve Smith AC';
+        lead.Best_Contact_for_Physician_First_Name__c = 'SteveJune';
+        lead.Best_Contact_for_Physician_Last_Name__c = 'Waughone';
+        lead.Best_contact_for_Physician_Email__c = 'testmawa2d@gmail.com';
         lead.is_Family_Aware_of_Referral__c = 'Yes';
         lead.Medical_Questions__c = 'Test Diagnosis';
         lead.Lung_Disease__c = 'Test1;Test2';
@@ -263,26 +266,6 @@ public class AccountServiceTest {
                             AND AccountId IN :accountList];
         system.assert(accountShareList.size() > 0);
     }
-    
-    /*@isTest
-    private static void validateCreateAccountShareEditAccess() {
-        Chapter_Vs_Role__c chapterRole = new Chapter_Vs_Role__c(Name = 'Central & Northern Florida', 
-                                                                Chapter_Name__c = 'Make-A-Wish Central & Northern Florida', 
-                                                                Role_Name__c = 'Central & Northern Florida - Chapter');
-        insert chapterRole;
-        List<String> chapterNamesList = new List<String>();
-        List<Account> accountsList = new List<Account>([SELECT Id, Name, Wish_Co_ordinator__c, OwnerId, Owner.UserRole.Name, Owner.ContactId, 
-                                                        Volunteer_Manager__c, RecordTypeId, Chapter_Name__c, Chapter_Name__r.Name 
-                                                        FROM Account]);
-        for(Account account : accountsList) {
-            if(account.Chapter_Name__r.Name != null) {
-                chapterNamesList.add(account.Chapter_Name__r.Name);
-            }
-        }
-        Test.startTest();
-        AccountService.createAccountShareEditAccess(accountsList, chapterNamesList);
-        Test.stopTest();
-    }*/
     
     @isTest
     private static void validateUpdateRelatedContactAddressWithHousehold() {

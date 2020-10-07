@@ -4,24 +4,40 @@ public class ContactTrigger_AT_Test {
 	@TestSetup
 	static void setup() {
 		trac_TriggerHandlerBase.blockTrigger = true;
-		
-		List<Account> accounts = TestDataFactory.createAccount(2);
-		Account account = accounts.get(0);
-		account.Name = 'Make-A-Wish Arizona';
-		account.RecordTypeId = Constant_AC.CHAPTER_RT_ID;
-		account.Alert_for_Unassigned_Wishes__c = 1;
+        
+        User testUser = TestDataFactory.createIntegrationUser(1, 'Intake Manager', null)[0];
+        insert testUser;
+        
+        List<Account> accounts = TestDataFactory.createAccount(3);
+        Account account = accounts.get(0);
+        account.Name = 'Make-A-Wish Arizona';
+        account.Intake_Manager__c = testUser.Id;
+        account.RecordTypeId = Constant_AC.CHAPTER_RT_ID;
+        account.Alert_for_Unassigned_Wishes__c = 1;
         Account knowlesFamily = accounts.get(1);
         knowlesFamily.Name = 'Jenna Knowles & Family Household';
         knowlesFamily.RecordTypeId = Constant_AC.HOUSEHOLD_RT_ID;
-		insert accounts;
+        Account chapterIllinois = accounts.get(2);
+        chapterIllinois.Name = 'Make-A-Wish Illinois';
+        chapterIllinois.RecordTypeId = Constant_AC.CHAPTER_RT_ID;
+        insert accounts;
+        Account htfIllinois = TestDataFactory.createAccount(1)[0];
+        htfIllinois.RecordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID;
+        htfIllinois.Name = 'Chicago General Hospital';
+        htfIllinois.Chapter_Name__c = chapterIllinois.Id;
+        insert htfIllinois;
         
-        List<Contact> contacts = TestDataFactory.createContact(1);
+        List<Contact> contacts = TestDataFactory.createContact(2);
         Contact contactKnowles = contacts.get(0);
         contactKnowles.RecordTypeId = Constant_AC.WISH_FAMILY_RT_ID;
         contactKnowles.Region_Chapter__c = account.Id;
         contactKnowles.AccountId = knowlesFamily.Id;
         contactKnowles.FirstName = 'Allison';
         contactKnowles.LastName = 'Knowles';
+        Contact mpContact = contacts.get(1);
+        mpContact.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+        mpContact.FirstName = 'Willow';
+        mpContact.LastName = 'Summers';
         insert contacts;
 
 		List<Chapter_Vs_Role__c> chapterVsRoleList = TestDataFactory.createChapterVsRole(1, 'Arizona');
@@ -141,5 +157,53 @@ public class ContactTrigger_AT_Test {
         ];
         System.assert(updatedContact.Relationship__c == 'Mother');
         System.assert(updatedContact.npe01__PreferredPhone__c == 'Mobile');
+    }
+    
+    @isTest
+    public static void updateContactOwner() {
+        Account azAccount = [
+            SELECT Id, Intake_Manager__c  
+            FROM Account WHERE Name = 'Make-A-Wish Arizona'
+        ];
+        Contact mpContact = TestDataFactory.createContact(1)[0];
+        mpContact.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+        mpContact.FirstName = 'Samantha';
+        mpContact.LastName = 'Jackson';
+        mpContact.Region_Chapter__c = azAccount.Id;
+        Test.startTest();
+        insert mpContact;
+        Test.stopTest();
+        
+        Contact mpContactUpdated = [
+            SELECT Id, OwnerId 
+            FROM Contact 
+            WHERE Name = 'Samantha Jackson'
+        ];
+        System.assert(mpContactUpdated.OwnerId == azAccount.Intake_Manager__c);
+    }
+    
+    @isTest
+    public static void populateRegionChapterOnMedicalProfessional() {
+        Account htfAccount = [
+            SELECT Id, Chapter_Name__c
+            FROM Account 
+            WHERE Name = 'Chicago General Hospital'
+        ];
+        Contact mpContact = [
+            SELECT Id, npsp__Primary_Affiliation__c, Region_Chapter__c 
+            FROM Contact 
+            WHERE Name = 'Willow Summers'
+        ];
+        Test.startTest();
+        mpContact.npsp__Primary_Affiliation__c = htfAccount.Id;
+        update mpContact;
+        Test.stopTest();
+        Contact mpContactUpdated = [
+            SELECT Id, npsp__Primary_Affiliation__c, Region_Chapter__c 
+            FROM Contact 
+            WHERE Name = 'Willow Summers'
+        ];
+        System.assert(mpContactUpdated.npsp__Primary_Affiliation__c == htfAccount.Id);
+        System.assert(mpContactUpdated.Region_Chapter__c == htfAccount.Chapter_Name__c);
     }
 }

@@ -17,6 +17,8 @@ public class ChapterStaffRecordSharing_ACTest {
         trac_TriggerHandlerBase.blockTrigger = true;
         
         User testUser = TestDataFactory.createIntegrationUser(1, 'Intake Manager', null)[0];
+        testUser.FirstName = 'Winston';
+        testUser.LastName = 'Ferguson';
         insert testUser;
         
         List<Account> accountList = TestDataFactory.createAccount(2);
@@ -33,6 +35,11 @@ public class ChapterStaffRecordSharing_ACTest {
         accountCullenFamily.BillingState = 'Arizona';
         accountCullenFamily.BillingPostalCode = '85016';
         insert accountList;
+        Account htfArizona = TestDataFactory.createAccount(1)[0];
+        htfArizona.RecordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID;
+        htfArizona.Name = 'Desert Ridge General Pediatrics';
+        //htfArizona.Chapter_Name__c = accountAzChapter.Id;
+        insert htfArizona;
         
         List<Chapter_Vs_Role__c> chapterVsRoleList = TestDataFactory.createChapterVsRole(1, 'Arizona');
         insert chapterVsRoleList;
@@ -462,7 +469,7 @@ public class ChapterStaffRecordSharing_ACTest {
         ];
         System.assert(!volunteerOppShareList.isEmpty());
     }
-    
+        
     @isTest
     static void getChapterNameTest() {
         Test.startTest();
@@ -483,6 +490,32 @@ public class ChapterStaffRecordSharing_ACTest {
         System.assert(chapterNameMap.get(chapterAccount.Id) == azChapterRole.Role_Name__c);
     }
     
+    @isTest
+    static void accountShare() {
+        User userToShare = [
+            SELECT Id 
+            FROM User 
+            WHERE Name = 'Winston Ferguson'
+        ];
+        Account htfAccount = [
+            SELECT Id 
+            FROM Account 
+            WHERE Name = 'Desert Ridge General Pediatrics'
+        ];
+        Map<String, Id> accountUserMap = new Map<String, Id>();
+        accountUserMap.put(String.valueOf(htfAccount.Id), userToShare.Id);
+        Test.startTest();
+        ChapterStaffRecordSharing_AC.accountSharing(accountUserMap);
+        Test.stopTest();
+        List<AccountShare> accountShareList = [
+            SELECT Id 
+            FROM AccountShare 
+            WHERE AccountId = :htfAccount.Id
+            AND UserOrGroupId = :userToShare.Id
+        ];
+        System.assert(!accountShareList.isEmpty());
+    }
+    	
     @isTest
     static void deleteContactShare() {
         Map<Id, ContactShare> contactShareMap = new Map<Id, ContactShare>();
