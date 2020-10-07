@@ -19,16 +19,9 @@ Modification Log:
                 SELECT Id, FirstName,Name,Of_Times_Email_Sent__c,LastName,Parent_Last_Name__c,Parent_First_Name__c,
                         Email, DOB__c,Phone,ChapterName__c, Using_Paper_Process_For_DV__c,
                         City, State, Street, PostalCode, Medical_Professional_First_Name__c, Medical_Professional_Last_Name__c,
-                        Medical_Professional_Phone__c, Medical_Professional_Email__c, Treating_Medical_Professional_First_Name__c,
-                        Treating_Medical_Professional_Last_Name__c,Treating_Medical_Professional_Phone__c,
-                        Treating_Medical_Professional_Email__c, Best_contact_for_Physician_Email__c, Best_Contact_for_Physician_Phone__c,
-                        Best_Contact_for_Physician_Last_Name__c,Best_Contact_for_Physician_First_Name__c,
-                        Additional_Parent_City__c,Additional_Parent_Email__c,Alternate2MedProfessionalLastName__c,
-                        Alternate2MedProfessionalPhone__c,Additional_Parent_First_Name__c,Additional_Parent_Last_Name__c,
-                        Additional_Parent_Phone__c,Alternate2MedProfessionalEmail__c,Alternate2MedProfessionalFirstName__c,
-                        Alternate1MedicalProfessionalEmail__c,Alternate1MedProfessionalPhone__c,
-                        Alternate1MedProfessionalLastName__c,Alternate1MedProfessionalFirstName__c,
-                        Additional_Parent_Postal_Code__c,Additional_Parent_State__c,Additional_Parent_Street__c
+                        Medical_Professional_Phone__c, Medical_Professional_Email__c, Additional_Parent_City__c,
+                        Additional_Parent_Email__c, Additional_Parent_First_Name__c,Additional_Parent_Last_Name__c,
+                        Additional_Parent_Phone__c, Additional_Parent_Postal_Code__c,Additional_Parent_State__c,Additional_Parent_Street__c
                 FROM Lead
                 WHERE Id = :leadId
                 AND RecordTypeId = :Constant_AC.LEAD_RT_WISH_CHILD
@@ -72,9 +65,7 @@ Modification Log:
                     SELECT Id, FirstName,Name,Of_Times_Email_Sent__c,LastName,Parent_Last_Name__c,Parent_First_Name__c,
                             Email, DOB__c,Phone,ChapterName__c, City, State, Street, PostalCode,
                             Medical_Professional_First_Name__c, Medical_Professional_Last_Name__c,
-                            Medical_Professional_Phone__c, Medical_Professional_Email__c,
-                            Treating_Medical_Professional_First_Name__c, Treating_Medical_Professional_Last_Name__c,
-                            Treating_Medical_Professional_Phone__c, Treating_Medical_Professional_Email__c
+                            Medical_Professional_Phone__c, Medical_Professional_Email__c
                     FROM Lead
                     WHERE Id = :leadId
                     AND IsConverted = FALSE

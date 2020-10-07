@@ -55,14 +55,7 @@ public class TaskServiceTest {
         lead.Medical_Professional_Phone__c = '9600467578';
         lead.Medical_Professional_Email__c = 'testmawa2d@gmail.com';
         lead.Hospital_Treatment_Facility__c = 'Steve Smith AC';
-        lead.Treating_Medical_Professional_First_Name__c = 'SteveJune';
-        lead.Treating_Medical_Professional_Last_Name__c = 'Waughone';
-        lead.Treating_Medical_Professional_Phone__c = '9600467578';
-        lead.Treating_Medical_Professional_Email__c = 'testmawa2d@gmail.com';
         lead.Hospital_Treatment_Facility_Treating__c = 'Steve Smith AC';
-        lead.Best_Contact_for_Physician_First_Name__c = 'SteveJune';
-        lead.Best_Contact_for_Physician_Last_Name__c = 'Waughone';
-        lead.Best_contact_for_Physician_Email__c = 'testmawa2d@gmail.com';
         lead.is_Family_Aware_of_Referral__c = 'Yes';
         lead.Medical_Questions__c = 'Test Diagnosis';
         lead.Lung_Disease__c = 'Test1;Test2';

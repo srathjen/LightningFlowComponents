@@ -179,9 +179,6 @@ public class LeadDomain extends trac_TriggerHandlerBase {
                         }
                         accountIdLeadMap.put(newLead.ChapterName__c, newLead);
                     }
-                    if (hasLeadTreatingMedicalEmailChanged(newLead, oldLead)) {
-                        newLead.HiddenMedicalProfessionalEmail__c = newLead.Treating_Medical_Professional_Email__c;
-                    }
                     if (isLeadReferred(newLead, oldLead)) {
                         newLead.Referred_Date__c = Date.today();
                     }
@@ -198,10 +195,6 @@ public class LeadDomain extends trac_TriggerHandlerBase {
                     }
                     if (isLeadEligibilityReviewPendingChapterClarification(newLead)) {
                         newLead.Sub_Status__c = null;
-                    }
-                    if (hasLeadMedicalProfessionalChanged(newLead, oldLead)) {
-                        newLead.Of_Times_Email_Sent__c = 0;
-                        newLead.Part_A_Form_Password__c = Utils.generateRandomNumber(6);
                     }
                     if (hasLeadReferredPotentialDuplicates(newLead, oldLead)) {
                         potentialReferredLeadDuplicates.add(newLead);
@@ -675,23 +668,6 @@ public class LeadDomain extends trac_TriggerHandlerBase {
                 && (newLead.Using_Paper_Process_For_DV__c == true
                 && (newLead.Sub_Status__c == LEAD_SUB_STATUS_PENDING_PART_A
                 || newLead.Sub_Status__c == LEAD_SUB_STATUS_PENDING_PAPER_DV)));
-    }
-
-    /**
-     * Check if Lead Medical Professionals changed
-     * @param newLead
-     * @param oldLead
-     * @return Boolean
-     */
-    private static Boolean hasLeadMedicalProfessionalChanged(Lead newLead, Lead oldLead) {
-        return (newLead.Treating_Medical_Professional_Email__c != oldLead.Treating_Medical_Professional_Email__c
-                && newLead.Hidden_DV_form_Medical_professional_Type__c == LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL)
-                || (newLead.Best_contact_for_Physician_Email__c != oldLead.Best_contact_for_Physician_Email__c
-                && newLead.Hidden_DV_form_Medical_professional_Type__c == LEAD_DV_FORM_TYPE_BEST_CONTACT)
-                || (newLead.Alternate1MedicalProfessionalEmail__c != oldLead.Alternate1MedicalProfessionalEmail__c
-                && newLead.Hidden_DV_form_Medical_professional_Type__c == LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL)
-                || (newLead.Alternate2MedProfessionalEmail__c != oldLead.Alternate2MedProfessionalEmail__c
-                && newLead.Hidden_DV_form_Medical_professional_Type__c == LEAD_DV_FORM_TYPE_ALTERNATE_2_MEDICAL_PROFESSIONAL);
     }
 
     /**

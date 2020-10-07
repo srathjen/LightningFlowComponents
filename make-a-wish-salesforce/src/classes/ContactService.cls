@@ -34,6 +34,7 @@ public class ContactService {
     private final static String REMOVE = 'Remove';
     private final static String PHONE_PLACEHOLDER = '9912121313';
     private final static String ZIP_PLACEHOLDER = '11111';
+    private static final String SPACE = ' ';
 
     /**
      * Activate Volunteer Contact Role
@@ -317,8 +318,11 @@ public class ContactService {
                 wishChild.Salutation = EMPTY;
             }
         }
-        wishChild.Hidden_Medical_Physician__c = lead.Treating_Medical_Professional_First_Name__c + ' '
-                + lead.Treating_Medical_Professional_Last_Name__c;
+        if(lead.Treating_MP__c != null){
+            wishChild.Hidden_Medical_Physician__c = String.isNotEmpty(lead.Treating_MP__r.FirstName)
+                    ? lead.Treating_MP__r.FirstName + SPACE + lead.Treating_MP__r.LastName
+                    : lead.Treating_MP__r.LastName;
+        }
         return wishChild;
     }
 

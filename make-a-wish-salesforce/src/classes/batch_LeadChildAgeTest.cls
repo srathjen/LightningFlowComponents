@@ -57,7 +57,6 @@ public class batch_LeadChildAgeTest {
             lead.Child_Age__c = 'Under 2.5';
             lead.Gender__c = 'Male';
             lead.Age_Requirement_Met__c = false;
-            lead.Treating_Medical_Professional_Email__c = 'medical.professional' + i + '@gmail.com';
             lead.is_Family_Aware_of_Referral__c = 'Yes';
             if (i < (leadListNew.size() / 3)) {
                 lead.DOB__c = Date.today().addYears(-1).addMonths(-6);

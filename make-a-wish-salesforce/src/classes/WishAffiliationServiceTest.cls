@@ -116,10 +116,6 @@ public class WishAffiliationServiceTest {
         lead.Medical_Professional_Phone__c = '55555555555';
         lead.Medical_Professional_Email__c = 'testmawa1s@gmail.com';
         lead.Hospital_Treatment_Facility__c = 'Banner Hospital';
-        lead.Treating_Medical_Professional_First_Name__c = 'Dr Max';
-        lead.Treating_Medical_Professional_Last_Name__c = 'Roger';
-        lead.Treating_Medical_Professional_Phone__c = '5555555555';
-        lead.Treating_Medical_Professional_Email__c = 'testmawa2d@gmail.com';
         lead.Hospital_Treatment_Facility_Treating__c = 'Banner Hospital';
         lead.Diagnosis_Given_By_Referrer__c = 'Test Diagnosis';
         lead.is_Family_Aware_of_Referral__c = 'Yes';

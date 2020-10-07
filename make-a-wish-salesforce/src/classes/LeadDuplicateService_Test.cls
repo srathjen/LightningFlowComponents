@@ -104,10 +104,6 @@ public class LeadDuplicateService_Test {
 		lead.Medical_Professional_Phone__c = '9600467559';
 		lead.Medical_Professional_Email__c = 'testmawa1s@gmail.com';
 		lead.Hospital_Treatment_Facility__c = 'Moss Hart AC';
-		lead.Treating_Medical_Professional_First_Name__c = 'SteveJune';
-		lead.Treating_Medical_Professional_Last_Name__c = 'Waughone';
-		lead.Treating_Medical_Professional_Phone__c = '9600467578';
-		lead.Treating_Medical_Professional_Email__c = 'testmawa2d@gmail.com';
 		lead.Hospital_Treatment_Facility_Treating__c = 'Steve Smith AC';
 		lead.Diagnosis_Given_By_Referrer__c = 'Test Diagnosis';
 		lead.is_Family_Aware_of_Referral__c = 'Yes';
@@ -147,10 +143,6 @@ public class LeadDuplicateService_Test {
 		leadDuplicated.Medical_Professional_Phone__c = '9600467559';
 		leadDuplicated.Medical_Professional_Email__c = 'testmawa1s@gmail.com';
 		leadDuplicated.Hospital_Treatment_Facility__c = 'Moss Hart AC';
-		leadDuplicated.Treating_Medical_Professional_First_Name__c = 'Steve';
-		leadDuplicated.Treating_Medical_Professional_Last_Name__c = 'Smith';
-		leadDuplicated.Treating_Medical_Professional_Phone__c = '9600467578';
-		leadDuplicated.Treating_Medical_Professional_Email__c = 'testmawa2d@gmail.com';
 		leadDuplicated.Hospital_Treatment_Facility_Treating__c = 'Steve Smith 2';
 		leadDuplicated.Diagnosis_Given_By_Referrer__c = 'Test Diagnosis2';
 		leadDuplicated.is_Family_Aware_of_Referral__c = 'Yes';
@@ -190,10 +182,6 @@ public class LeadDuplicateService_Test {
 		leadNotDuplicated.Medical_Professional_Phone__c = '9600467559';
 		leadNotDuplicated.Medical_Professional_Email__c = 'testmawa1s@gmail.com';
 		leadNotDuplicated.Hospital_Treatment_Facility__c = 'Moss Hart AC';
-		leadNotDuplicated.Treating_Medical_Professional_First_Name__c = 'Steve';
-		leadNotDuplicated.Treating_Medical_Professional_Last_Name__c = 'Smith';
-		leadNotDuplicated.Treating_Medical_Professional_Phone__c = '9600467578';
-		leadNotDuplicated.Treating_Medical_Professional_Email__c = 'testmawa2d@gmail.com';
 		leadNotDuplicated.Hospital_Treatment_Facility_Treating__c = 'Steve Smith 2';
 		leadNotDuplicated.Diagnosis_Given_By_Referrer__c = 'Test Diagnosis2';
 		leadNotDuplicated.is_Family_Aware_of_Referral__c = 'Yes';

@@ -12,7 +12,6 @@ public class LeadService {
 	private static final String ERROR_WISH_CHILD = Constant_AC.LEAD_ERROR_WISH_CHILD;
 	private static final String ERROR_WISH_ADDITIONAL_PARENT_GUARDIAN = Constant_AC.LEAD_ERROR_WISH_ADDITIONAL_PARENT_GUARDIAN;
 	private static final String ERROR_WISH_FAMILY = Constant_AC.LEAD_ERROR_WISH_FAMILY;
-	private static final String ERROR_WISH_FAMILY_AND_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_ERROR_WISH_FAMILY_AND_MEDICAL_PROFESSIONAL;
 	private static final String TYPE_LIGHTNING = Constant_AC.TYPE_LIGHTNING;
 	private static final String TYPE_CLASSIC = Constant_AC.TYPE_CLASSIC;
 	private static final String THEME_4D = Constant_AC.THEME_4D;

@@ -146,19 +146,22 @@ public class CaseService {
 	/**
     * @description Build Qualified Case
     * @param lead
-    * @param hasContactConverted
+    * @param qualifyingMedicalContact
     * @return Case
     */
-	public static Case buildQualifiedCaseFromLead(Lead lead) {
+	public static Case buildQualifiedCaseFromLead(Lead lead, Contact qualifyingMedicalContact) {
 		Case newCase = new Case();
 		newCase.RecordTypeId = WISH_RECORD_TYPE_ID;
 		newCase.ContactId = lead.ConvertedContactId;
 		newCase.Hidden_Lead_Id__c = lead.Id;
 		newCase.Qualified_Date__c = lead.Qualified_Date__c;
 		newCase.Migrated_Record__c = lead.Migrated_Record__c;
-		newCase.Qualifying_Medical_Professional_Name__c = lead.Treating_Medical_Professional_First_Name__c
-				+ SPACE + lead.Treating_Medical_Professional_Last_Name__c;
-		newCase.Qualifying_Medical_Professional_Email__c = lead.Treating_Medical_Professional_Email__c;
+		if(qualifyingMedicalContact != null){
+			newCase.Qualifying_Medical_Professional_Name__c = String.isNotEmpty(qualifyingMedicalContact.FirstName)
+			? qualifyingMedicalContact.FirstName + SPACE + qualifyingMedicalContact.LastName
+			: qualifyingMedicalContact.LastName;
+			newCase.Qualifying_Medical_Professional_Email__c = qualifyingMedicalContact.npe01__WorkEmail__c;
+		}
 		newCase.AccountId = lead.ConvertedAccountId;
 		newCase.Status = STATUS_QUALIFIED;
 		newCase.Hidden_Why_do_you_feel__c = lead.Why_do_you_feel_would_be_eligible_Wish__c;
