@@ -5,36 +5,36 @@
  */
 public class ContactService {
 
-    private final static Id MEDICAL_PROFESSIONAL_RECORD_TYPE_ID = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
-    private final static Id WISH_CHILD_RECORD_TYPE_ID = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
-    private final static Id WISH_FAMILY_RECORD_TYPE_ID = Constant_AC.WISH_FAMILY_RT_ID;
-    private final static Id VOLUNTEER_RT_ID = Constant_AC.VOLUNTEER_RT_ID;
-    private final static Id BOARD_MEMBER_RT_ID = Constant_AC.BOARD_MEMBER_RT_ID;
-    private final static Id STAFF_TASK_RT_ID = Constant_AC.STAFF_TASK_RT_ID;
-    private final static String VOLUNTEER_ROLE_STATUS_ACTIVE = Constant_AC.VOLUNTEER_ROLE_STATUS_ACTIVE;
-    private final static String ORG_AFFILIATION_STATUS_STATUS_ACTIVE = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
-    private final static String CHAPTER_ROLE_SINGLE_DAY_EVENT_VOLUNTEER = Constant_AC.CHAPTER_ROLE_SINGLE_DAY_EVENT_VOLUNTEER;
-    private final static String CHAPTER_ROLE_WISH_GRANTER = Constant_AC.CHAPTER_ROLE_WISH_GRANTER;
-    private final static String CHAPTER_ROLE_WISH_GRANTER_MENTOR = Constant_AC.CHAPTER_ROLE_WISH_GRANTER_MENTOR;
-    private final static String WISH_CHILD_RECORD_TYPE_LABEL = Constant_AC.CONTACT_WISH_CHILD_RT_LABEL;
-    private static final String LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN;
-    private static final String CONTACT_TYPE_PARENT_LEGAL_GUARDIAN = Constant_AC.CONTACT_TYPE_PARENT_LEGAL_GUARDIAN;
-    private static final String BOARD_MEMBER_RT_LABEL = Constant_AC.BOARD_MEMBER_RT_LABEL;
-    private static final String SALUTATION_MASTER = Constant_AC.CONTACT_SALUTATION_MASTER;
-    private static final String SALUTATION_MR = Constant_AC.CONTACT_SALUTATION_MR;
-    private static final String SALUTATION_MISS = Constant_AC.CONTACT_SALUTATION_MISS;
-    private static final String SALUTATION_MS = Constant_AC.CONTACT_SALUTATION_MS;
-    private static final String GENDER_MALE = Constant_AC.CONTACT_GENDER_MALE;
-    private static final String GENDER_FEMALE = Constant_AC.CONTACT_GENDER_FEMALE;
-    private static final String AFFILIATION_STATUS_ACTIVE = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
-    private static final String AFFILIATION_STATUS_PENDING = Constant_AC.ORG_AFFILIATION_STATUS_PENDING;
-    private final static String ACCOUNT_NAME_MAW_AMERICA = Constant_AC.ACCOUNT_NAME_MAW_AMERICA;
-    private final static String ROLE_NATIONAL_STAFF = Constant_AC.ROLE_NATIONAL_STAFF;
-    private static final String EMPTY = '';
-    private final static String REMOVE = 'Remove';
-    private final static String PHONE_PLACEHOLDER = '9912121313';
-    private final static String ZIP_PLACEHOLDER = '11111';
-    private static final String SPACE = ' ';
+	private final static Id MEDICAL_PROFESSIONAL_RECORD_TYPE_ID = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+	private final static Id WISH_CHILD_RECORD_TYPE_ID = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
+	private final static Id WISH_FAMILY_RECORD_TYPE_ID = Constant_AC.WISH_FAMILY_RT_ID;
+	private final static Id VOLUNTEER_RT_ID = Constant_AC.VOLUNTEER_RT_ID;
+	private final static Id BOARD_MEMBER_RT_ID = Constant_AC.BOARD_MEMBER_RT_ID;
+	private final static Id STAFF_TASK_RT_ID = Constant_AC.STAFF_TASK_RT_ID;
+	private final static String VOLUNTEER_ROLE_STATUS_ACTIVE = Constant_AC.VOLUNTEER_ROLE_STATUS_ACTIVE;
+	private final static String ORG_AFFILIATION_STATUS_STATUS_ACTIVE = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+	private final static String CHAPTER_ROLE_SINGLE_DAY_EVENT_VOLUNTEER = Constant_AC.CHAPTER_ROLE_SINGLE_DAY_EVENT_VOLUNTEER;
+	private final static String CHAPTER_ROLE_WISH_GRANTER = Constant_AC.CHAPTER_ROLE_WISH_GRANTER;
+	private final static String CHAPTER_ROLE_WISH_GRANTER_MENTOR = Constant_AC.CHAPTER_ROLE_WISH_GRANTER_MENTOR;
+	private final static String WISH_CHILD_RECORD_TYPE_LABEL = Constant_AC.CONTACT_WISH_CHILD_RT_LABEL;
+	private static final String LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_PARENT_GUARDIAN;
+	private static final String CONTACT_TYPE_PARENT_LEGAL_GUARDIAN = Constant_AC.CONTACT_TYPE_PARENT_LEGAL_GUARDIAN;
+	private static final String BOARD_MEMBER_RT_LABEL = Constant_AC.BOARD_MEMBER_RT_LABEL;
+	private static final String SALUTATION_MASTER = Constant_AC.CONTACT_SALUTATION_MASTER;
+	private static final String SALUTATION_MR = Constant_AC.CONTACT_SALUTATION_MR;
+	private static final String SALUTATION_MISS = Constant_AC.CONTACT_SALUTATION_MISS;
+	private static final String SALUTATION_MS = Constant_AC.CONTACT_SALUTATION_MS;
+	private static final String GENDER_MALE = Constant_AC.CONTACT_GENDER_MALE;
+	private static final String GENDER_FEMALE = Constant_AC.CONTACT_GENDER_FEMALE;
+	private static final String AFFILIATION_STATUS_ACTIVE = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+	private static final String AFFILIATION_STATUS_PENDING = Constant_AC.ORG_AFFILIATION_STATUS_PENDING;
+	private final static String ACCOUNT_NAME_MAW_AMERICA = Constant_AC.ACCOUNT_NAME_MAW_AMERICA;
+	private final static String ROLE_NATIONAL_STAFF = Constant_AC.ROLE_NATIONAL_STAFF;
+	private static final String EMPTY = '';
+	private final static String REMOVE = 'Remove';
+	private final static String PHONE_PLACEHOLDER = '9912121313';
+	private final static String ZIP_PLACEHOLDER = '11111';
+	private static final String SPACE = ' ';
 
 	/**
 	 * Activate Volunteer Contact Role
@@ -261,67 +261,70 @@ public class ContactService {
 		];
 	}
 
-    /**
-     * Set fields on Wish Child
-     * @param wishChild
-     * @param lead
-     * @return
-     */
-    public static Contact buildWishChildFromLead(Lead lead) {
-        Contact wishChild = new Contact();
-        wishChild.Id = lead.ConvertedContactId;
-        wishChild.Lead_Created_Date__c = Date.valueOf(lead.CreatedDate);
-        wishChild.Birthdate = lead.DOB__c;
-        wishChild.RecordTypeId = WISH_CHILD_RECORD_TYPE_ID;
-        wishChild.Provider_Type__c = lead.Medical_Provider_Category__c;
-        wishChild.Self_describe_comment_box__c = lead.Self_describe_comment_box__c;
-        wishChild.Language__c = lead.What_is_the_family_s_primary_spoken_lang__c;
-        wishChild.Region_Chapter__c = lead.ChapterName__c;
-        wishChild.Inquiry_Referral_Method__c = lead.LeadSource;
-        wishChild.Referrer_City__c = lead.Referrer_City__c;
-        wishChild.Referrer_Email__c = lead.Referrer_Email__c;
-        wishChild.Referrer_FirstName__c = lead.Referrer_FirstName__c;
-        wishChild.Referrer_Last_Name__c = lead.Referrer_Last_Name__c;
-        wishChild.Referrer_Phone__c = lead.Referrer_Phone__c;
-        wishChild.Referrer_Zip__c = lead.Referrer_Zip__c;
-        wishChild.Relationship__c = lead.Relationship_to_child__c;
-        wishChild.Other_Medical_Provider_Category__c = lead.Other_Medical_Provider_Category__c;
-        wishChild.Relationship_to_Wish_Child__c = lead.Other_Relationship_To_Child__c;
-        wishChild.Is_Family_Aware_of_Referral__c = lead.is_Family_Aware_of_Referral__c;
-        wishChild.Migrated_Record__c = lead.Migrated_Record__c;
-        wishChild.Wish_How_Did_you_hear_about_Make_A_Wish__c = lead.How_Did_you_hear_about_Make_A_Wish__c;
-        wishChild.Relationship_Type__c = WISH_CHILD_RECORD_TYPE_LABEL;
-        if (lead.Additional_Parent_City__c != lead.City ||
-                lead.Additional_Parent_Postal_Code__c != lead.PostalCode ||
-                lead.Additional_Parent_State__c != lead.State ||
-                lead.Additional_Parent_Street__c != lead.Street) {
-            wishChild.npsp__is_Address_Override__c = true;
-        }
-        if (lead.DOB__c != null) {
-            Date dob = lead.DOB__c;
-            Integer age;
-            if (Date.newInstance(2000, dob.month(), dob.day())
-                    <= Date.newInstance(2000, Date.today().month(), Date.today().day())) {
-                age = Date.today().year() - dob.year();
-            } else {
-                age = Date.today().year() - dob.year() - 1;
-            }
-            if ((age < 16) && lead.Gender__c == GENDER_MALE) {
-                wishChild.Salutation = SALUTATION_MASTER;
-            } else if ((age >= 16) && lead.Gender__c == GENDER_MALE) {
-                wishChild.Salutation = SALUTATION_MR;
-            } else if ((age < 16) && lead.Gender__c == GENDER_FEMALE) {
-                wishChild.Salutation = SALUTATION_MISS;
-            } else if ((age >= 16) && lead.Gender__c == GENDER_FEMALE) {
-                wishChild.Salutation = SALUTATION_MS;
-            } else {
-                wishChild.Salutation = EMPTY;
-            }
-        }
-        wishChild.Hidden_Medical_Physician__c = lead.Treating_Medical_Professional_First_Name__c + ' '
-            + lead.Treating_Medical_Professional_Last_Name__c;
-        return wishChild;
-    }
+	/**
+	 * Set fields on Wish Child
+	 * @param wishChild
+	 * @param lead
+	 * @return
+	 */
+	public static Contact buildWishChildFromLead(Lead lead) {
+		Contact wishChild = new Contact();
+		wishChild.Id = lead.ConvertedContactId;
+		wishChild.Lead_Created_Date__c = Date.valueOf(lead.CreatedDate);
+		wishChild.Birthdate = lead.DOB__c;
+		wishChild.RecordTypeId = WISH_CHILD_RECORD_TYPE_ID;
+		wishChild.Provider_Type__c = lead.Medical_Provider_Category__c;
+		wishChild.Self_describe_comment_box__c = lead.Self_describe_comment_box__c;
+		wishChild.Language__c = lead.What_is_the_family_s_primary_spoken_lang__c;
+		wishChild.Region_Chapter__c = lead.ChapterName__c;
+		wishChild.Inquiry_Referral_Method__c = lead.LeadSource;
+		wishChild.Referrer_City__c = lead.Referrer_City__c;
+		wishChild.Referrer_Email__c = lead.Referrer_Email__c;
+		wishChild.Referrer_FirstName__c = lead.Referrer_FirstName__c;
+		wishChild.Referrer_Last_Name__c = lead.Referrer_Last_Name__c;
+		wishChild.Referrer_Phone__c = lead.Referrer_Phone__c;
+		wishChild.Referrer_Zip__c = lead.Referrer_Zip__c;
+		wishChild.Relationship__c = lead.Relationship_to_child__c;
+		wishChild.Other_Medical_Provider_Category__c = lead.Other_Medical_Provider_Category__c;
+		wishChild.Relationship_to_Wish_Child__c = lead.Other_Relationship_To_Child__c;
+		wishChild.Is_Family_Aware_of_Referral__c = lead.is_Family_Aware_of_Referral__c;
+		wishChild.Migrated_Record__c = lead.Migrated_Record__c;
+		wishChild.Wish_How_Did_you_hear_about_Make_A_Wish__c = lead.How_Did_you_hear_about_Make_A_Wish__c;
+		wishChild.Relationship_Type__c = WISH_CHILD_RECORD_TYPE_LABEL;
+		if (lead.Additional_Parent_City__c != lead.City ||
+				lead.Additional_Parent_Postal_Code__c != lead.PostalCode ||
+				lead.Additional_Parent_State__c != lead.State ||
+				lead.Additional_Parent_Street__c != lead.Street) {
+			wishChild.npsp__is_Address_Override__c = true;
+		}
+		if (lead.DOB__c != null) {
+			Date dob = lead.DOB__c;
+			Integer age;
+			if (Date.newInstance(2000, dob.month(), dob.day())
+					<= Date.newInstance(2000, Date.today().month(), Date.today().day())) {
+				age = Date.today().year() - dob.year();
+			} else {
+				age = Date.today().year() - dob.year() - 1;
+			}
+			if ((age < 16) && lead.Gender__c == GENDER_MALE) {
+				wishChild.Salutation = SALUTATION_MASTER;
+			} else if ((age >= 16) && lead.Gender__c == GENDER_MALE) {
+				wishChild.Salutation = SALUTATION_MR;
+			} else if ((age < 16) && lead.Gender__c == GENDER_FEMALE) {
+				wishChild.Salutation = SALUTATION_MISS;
+			} else if ((age >= 16) && lead.Gender__c == GENDER_FEMALE) {
+				wishChild.Salutation = SALUTATION_MS;
+			} else {
+				wishChild.Salutation = EMPTY;
+			}
+		}
+		if (lead.Treating_MP__c != null) {
+			wishChild.Hidden_Medical_Physician__c = String.isNotEmpty(lead.Treating_MP__r.FirstName)
+					? lead.Treating_MP__r.FirstName + SPACE + lead.Treating_MP__r.LastName
+					: lead.Treating_MP__r.LastName;
+		}
+		return wishChild;
+	}
 
 	/**
 	 * Build Parent Legal Guardian From Lead
@@ -1385,35 +1388,35 @@ public class ContactService {
 		}
 	}
 
-    /**
-    * Share contact record to Chapter if owner changes to user with National Staff role
-    * @param newContactsMap
-    * @param oldContactsMap
-    */
-    public static void shareContactRecord(Map<Id, Contact> newContactsMap, Map<Id, Contact> oldContactsMap) {
-        Map<String, List<Contact>> contactMapforSharing = new Map<String, List<Contact>>();
-        for (Contact contact : [
-                SELECT Id, OwnerId, Migrated_record__c, AccountId, RecordTypeId, Owner.UserRole.Name, Region_Chapter__c,
-                        Hidden_Hospital_Account__c, Region_Chapter__r.Name, MailingState
-                FROM Contact
-                WHERE Id IN :newContactsMap.keySet()
-                AND Owner.UserRole.Name = :ROLE_NATIONAL_STAFF
-        ]) {
-            if (contact.OwnerId != oldContactsMap.get(contact.Id).OwnerId && contact.Region_Chapter__c != null
-                    && contact.Region_Chapter__r.Name != ACCOUNT_NAME_MAW_AMERICA) {
-                if (contactMapforSharing.containsKey(contact.Region_Chapter__r.Name)) {
-                    contactMapforSharing.get(contact.Region_Chapter__r.Name).add(contact);
-                } else {
-                    contactMapforSharing.put(contact.Region_Chapter__r.Name, new List<contact>{
-                            contact
-                    });
-                }
-            }
-        }
-        if (!contactMapforSharing.isEmpty()) {
-            ChapterStaffRecordSharing_AC.ContactSharing(contactMapforSharing);
-        }
-    }
+	/**
+	* Share contact record to Chapter if owner changes to user with National Staff role
+	* @param newContactsMap
+	* @param oldContactsMap
+	*/
+	public static void shareContactRecord(Map<Id, Contact> newContactsMap, Map<Id, Contact> oldContactsMap) {
+		Map<String, List<Contact>> contactMapforSharing = new Map<String, List<Contact>>();
+		for (Contact contact : [
+				SELECT Id, OwnerId, Migrated_record__c, AccountId, RecordTypeId, Owner.UserRole.Name, Region_Chapter__c,
+						Hidden_Hospital_Account__c, Region_Chapter__r.Name, MailingState
+				FROM Contact
+				WHERE Id IN :newContactsMap.keySet()
+				AND Owner.UserRole.Name = :ROLE_NATIONAL_STAFF
+		]) {
+			if (contact.OwnerId != oldContactsMap.get(contact.Id).OwnerId && contact.Region_Chapter__c != null
+					&& contact.Region_Chapter__r.Name != ACCOUNT_NAME_MAW_AMERICA) {
+				if (contactMapforSharing.containsKey(contact.Region_Chapter__r.Name)) {
+					contactMapforSharing.get(contact.Region_Chapter__r.Name).add(contact);
+				} else {
+					contactMapforSharing.put(contact.Region_Chapter__r.Name, new List<contact>{
+							contact
+					});
+				}
+			}
+		}
+		if (!contactMapforSharing.isEmpty()) {
+			ChapterStaffRecordSharing_AC.ContactSharing(contactMapforSharing);
+		}
+	}
 
 	/**
 	* Update hidden case fields
@@ -1774,290 +1777,51 @@ public class ContactService {
 		}
 	}
 
-    /**
-     * Update the number of Volunteer Opportunities assigned to the Volunteer Contact
-     * @param volunteerIds
-     */
-    public static List<Contact> updateAssignedNumberOfOpportunities(Set<Id> volunteerIds) {
-        List<Contact> contacts = new List<Contact>();
-        if (volunteerIds.isEmpty()) {
-            return contacts;
-        }
-        try {
-            for (Contact contact : [
-                    SELECT Id,Number_of_Assignments__c,Name, (
-                            SELECT Id,Volunteer_Name__c
-                            FROM Volunteer_Opportunities__r
-                            WHERE Volunteer_Name__c IN:volunteerIds
-                    )
-                    FROM Contact
-                    WHERE Id IN:volunteerIds
-            ]) {
-                Contact updateContact = new Contact();
-                updateContact.Id = contact.Id;
-                updateContact.Number_of_Assignments__c = contact.Volunteer_Opportunities__r.size();
-                contacts.add(updateContact);
-            }
-            update contacts;
-            if (Test.isRunningTest()) {
-                throw new CommonTriggerException('Test Class execution');
-            }
-        } catch (Exception ex) {
-            for (Volunteer_Opportunity__c volunteerOpportunity : [
-                    SELECT Id,Volunteer_Name__c
-                    FROM Volunteer_Opportunity__c
-                    WHERE Volunteer_Name__c IN:volunteerIds
-            ]) {
-                ErrorMessage_AC.createDebugRec('ContactService',
-                        String.valueOf(volunteerOpportunity), String.valueOf(ex),
-                        'updateAssignedNumberOfOpportunities', volunteerOpportunity.Id,
-                        ex.getStackTraceString(), 'Error');
-                if (!Test.isRunningTest()) {
-                    volunteerOpportunity.addError(Label.Debug_log_error_message);
-                }
-            }
-        }
-        return contacts;
-    }
-    
-    /**
-    * Update race/ethnicity value from wish signature form
-    * @param newWishSignaturesMap
-    * @param oldWishSignaturesMap
-    */
-    public static void updateRaceEthnicity(Map<Id, Wish_Required_Signature__c> newWishSignaturesMap, Map<Id, Wish_Required_Signature__c> oldWishSignaturesMap) {
-        Map<Id, String> caseEthnicityMap = new Map<Id, String>();
-        for(Wish_Required_Signature__c signature : newWishSignaturesMap.values()) {
-            if(signature.Wish_Case__c != null) {
-                if(oldWishSignaturesMap == null && signature.Race_Ethnicity_Details__c != null) {
-                    caseEthnicityMap.put(signature.Wish_Case__c, signature.Race_Ethnicity_Details__c);
-                }
-                if(oldWishSignaturesMap != null && signature.Race_Ethnicity_Details__c != oldWishSignaturesMap.get(signature.Id).Race_Ethnicity_Details__c) {
-                    caseEthnicityMap.put(signature.Wish_Case__c, signature.Race_Ethnicity_Details__c);
-                }
-            }
-        }
-        if(caseEthnicityMap.isEmpty()) {
-            return;
-        }
-        Map<String, String> englishSpanishMap = new Map<String, String>();
-        for(Spanish_Translations__mdt mdt : [
-            SELECT Id, English__c, Spanish__c 
-            FROM Spanish_Translations__mdt 
-            WHERE Type__c = 'Race/Ethnicity' 
-            AND Active__c = true
-        ]) {
-            englishSpanishMap.put(mdt.Spanish__c, mdt.English__c);
-        }
-        Map<String, String> raceEthnicityPicklistValues = Utils.getFieldMap('Contact', 'Race_Ethnicity__c');
-        List<Contact> contactListToUpdate = new List<Contact>();
-        for(Case wishCase : [
-            SELECT Id, ContactId, Contact.Race_Ethnicity__c, Contact.Race_Ethnicity_Details__c 
-            FROM Case 
-            WHERE Id IN :caseEthnicityMap.keySet() 
-            AND ContactId != null
-        ]) {
-            Contact conUpdate = new Contact(Id = wishCase.ContactId);
-            List<String> stringList = caseEthnicityMap.get(wishCase.Id).split(':');
-            if(!String.isBlank(stringList[0]) && englishSpanishMap.containsKey(stringList[0])) {
-                conUpdate.Race_Ethnicity__c = englishSpanishMap.get(stringList[0]);
-            } else if(!String.isBlank(stringList[0]) && raceEthnicityPicklistValues.containsKey(stringList[0])) {
-                conUpdate.Race_Ethnicity__c = stringList[0];
-            }
-            contactListToUpdate.add(conUpdate);
-        }
-        try {
-            update contactListToUpdate;
-        } catch(Exception e) {
-            createContactDebugLog(contactListToUpdate, 'updateRaceEthnicity', e);
-        }
-    }
-    
-    /**
-    * Update picklist values to english counterpart if spanish value saved
-    * @param newContactsMap
-    * @param oldContactsMap
-    */
-    public static void updatePicklistTranslations(Map<Id, Contact> newContactsMap,  Map<Id, Contact> oldContactsMap) {
-        Map<String, String> relationshipPicklistValues = Utils.getFieldMap('Contact', 'Relationship__c');
-        Map<String, String> preferredPhonePicklistValues = Utils.getFieldMap('Contact', 'npe01__PreferredPhone__c');
-        Map<String, String> englishSpanishMap = new Map<String, String>();
-        for(Spanish_Translations__mdt mdt: [SELECT Id, English__c, Spanish__c FROM Spanish_Translations__mdt WHERE Active__c = true]) {
-            englishSpanishMap.put(mdt.Spanish__c, mdt.English__c);
-        }
-        for(Contact newContact : newContactsMap.values()) {
-            Contact oldContact = oldContactsMap.get(newContact.Id);
-            if(newContact.Relationship__c != oldContact.Relationship__c) {
-                if(englishSpanishMap.containsKey(newContact.Relationship__c) && relationshipPicklistValues.containsKey(englishSpanishMap.get(newContact.Relationship__c))) {
-                    newContact.Relationship__c = englishSpanishMap.get(newContact.Relationship__c);
-                }
-            }
-            if(newContact.npe01__PreferredPhone__c != oldContact.npe01__PreferredPhone__c) {
-                if(englishSpanishMap.containsKey(newContact.npe01__PreferredPhone__c) && preferredPhonePicklistValues.containsKey(englishSpanishMap.get(newContact.npe01__PreferredPhone__c))) {
-                    newContact.npe01__PreferredPhone__c = englishSpanishMap.get(newContact.npe01__PreferredPhone__c);
-                }
-            }
-        }
-    }
-    
-    /**
-    * Populate region chapter lookup based on primary account chapter relationship
-    * @param contactsList
-    * @param oldContactsMap
-    */
-    public static void populateRegionChapterOnMedicalProfessional(List<Contact> contactsList, Map<Id, Contact> oldContactsMap) {
-        if(contactsList.isEmpty()) {
-            return;
-        }
-        Set<Id> affiliationIdSet = new Set<Id>();
-        List<Contact> contactAffiliationList = new List<Contact>();
-        List<String> zipCodesList = new List<String>();
-        List<Contact> contactZipList = new List<Contact>();
-        for(Contact con : contactsList) {
-            if(con.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID && con.Region_Chapter__c == null) {
-                if((oldContactsMap == null && con.npsp__Primary_Affiliation__c != null) 
-                   || (oldContactsMap != null && con.npsp__Primary_Affiliation__c != oldContactsMap.get(con.Id).npsp__Primary_Affiliation__c)) 
-                {
-                    affiliationIdSet.add(con.npsp__Primary_Affiliation__c);
-                    contactAffiliationList.add(con);
-                } else if((oldContactsMap == null && String.isNotBlank(con.MailingPostalCode)) 
-                          || (oldContactsMap != null && con.MailingPostalCode != oldContactsMap.get(con.Id).MailingPostalCode)) 
-                {
-                    zipCodesList.add(Utils.splitString(con.MailingPostalCode, '-')[0]);
-                    contactZipList.add(con);
-                }
-            }
-        }
-        if(!contactAffiliationList.isEmpty()) {
-            Map<Id, Account> accountMap = new Map<Id, Account>([
-                SELECT Id, Chapter_Name__c 
-                FROM Account 
-                WHERE Id IN :affiliationIdSet
-                AND RecordTypeId = :Constant_AC.HOSPITAL_TREATMENT_ID
-                AND Chapter_Name__c != null
-            ]);
-            for(Contact mpContact : contactAffiliationList) {
-                if(accountMap.containsKey(mpContact.npsp__Primary_Affiliation__c)) {
-                    mpContact.Region_Chapter__c = accountMap.get(mpContact.npsp__Primary_Affiliation__c).Chapter_Name__c;
-                    mpContact.Hidden_Chapter__c = mpContact.Region_Chapter__c;
-                }
-            }
-        }
-        if(!contactZipList.isEmpty()) {
-            Map<String, Id> zipChapterMap = new Map<String, Id>(ChapterStaffRecordSharing_AC.getChapterByZipcode(zipCodesList));
-            for(Contact mpContact : contactZipList) {
-                String zip = Utils.splitString(mpContact.MailingPostalCode, '-')[0];
-                if(zipChapterMap.containsKey(zip)) {
-                    mpContact.Region_Chapter__c = zipChapterMap.get(zip);
-                    mpContact.Hidden_Chapter__c = mpContact.Region_Chapter__c;
-                }
-            }
-        }
-    }
-    
-    /**
-    * Update region chapter lookup based on primary account chapter relationship
-    * @param htfAccountMap
-    */
-    public static void updateRegionChapterOnMedicalProfessional(Map<Id, Account> htfAccountMap) {
-        if(htfAccountMap.isEmpty()) {
-            return;
-        }
-        List<Contact> mpContactList = new List<Contact>([
-            SELECT Id, npsp__Primary_Affiliation__c, Region_Chapter__c 
-            FROM Contact 
-            WHERE npsp__Primary_Affiliation__c IN :htfAccountMap.keySet()
-            AND RecordTypeId = :Constant_AC.MEDICAL_PROFESSIONAL_RT_ID
-            AND Region_Chapter__c = null]);
-        
-        for(Contact contact : mpContactList) {
-            if(htfAccountMap.containsKey(contact.npsp__Primary_Affiliation__c)) {
-                contact.Region_Chapter__c = htfAccountMap.get(contact.npsp__Primary_Affiliation__c).Chapter_Name__c;
-                contact.Hidden_Chapter__c = contact.Region_Chapter__c;
-            }
-        }
-        try {
-            update mpContactList;
-        } catch(Exception e) {
-            createContactDebugLog(mpContactList, 'updateRegionChapterOnMedicalProfessional', e);
-        }
-    }
-    
-    /**
-    * Share contact record and related account if MP type to chapter users based on primary chapter affiliation 
-    * @param contactsList
-    * @param oldContactsMap
-    */
-    public static void shareContactToChapter(List<Contact> contactsList, Map<Id, Contact> oldContactsMap) {
-        if(contactsList.isEmpty()) {
-            return;
-        }
-        Set<Id> chapterIds = new Set<Id>();
-        Set<Id> contactIds = new Set<Id>();
-        Set<Id> accountIds = new Set<Id>();
-        List<Contact> contactToShareList = new List<Contact>();
-        for(Contact contact : contactsList) {
-            if(oldContactsMap == null && contact.Region_Chapter__c != null) {
-                chapterIds.add(contact.Region_Chapter__c);
-                contactToShareList.add(contact);
-            } else if(oldContactsMap != null && contact.Region_Chapter__c != oldContactsMap.get(contact.Id).Region_Chapter__c) {
-                chapterIds.add(contact.Region_Chapter__c);
-                contactToShareList.add(contact);
-                contactIds.add(contact.Id);
-                accountIds.add(contact.AccountId);
-            }
-        }
-        ChapterStaffRecordSharing_AC.deleteContactShare(contactIds);
-        ChapterStaffRecordSharing_AC.deleteAccountShare(accountIds);
-        if(!chapterIds.isEmpty()) {
-            Map<Id, Account> chapterNameMap = new Map<Id, Account>(ChapterStaffRecordSharing_AC.getChapterNameById(chapterIds));
-            Map<String, List<Contact>> chapterContactMap = new Map<String, List<Contact>>();
-            Map<String, Id> accountUserIdMap = new Map<String, Id>();
-            for(Contact mpContact : contactToShareList) {
-                String chapterName;
-                if(chapterNameMap.containsKey(mpContact.Region_Chapter__c)) {
-                    chapterName = chapterNameMap.get(mpContact.Region_Chapter__c).Name;
-                    if(chapterContactMap.containsKey(chapterName)) {
-                        chapterContactMap.get(chapterName).add(mpContact);
-                    } else {
-                        chapterContactMap.put(chapterName, new List<Contact>{mpContact});
-                    }
-                }
-            }
-            accountUserIdMap = ChapterStaffRecordSharing_AC.ContactSharing(chapterContactMap);
-            ChapterStaffRecordSharing_AC.accountSharing(accountUserIdMap);
-        }
-    }
-    
-    /**
-    * Update contact owner to chapter intake manager
-    * @param contactsList
-    * @param oldContactsMap
-    */
-    public static void updateContactOwnerToChapter(List<Contact> contactsList, Map<Id, Contact> oldContactsMap) {
-        if(contactsList.isEmpty()) {
-            return;
-        }
-        Map<Id, Contact> contactChapterMap = new Map<Id, Contact>();
-        for(Contact contact : contactsList) {
-            if(contact.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID) {
-                if(oldContactsMap == null && contact.Region_Chapter__c != null) {
-                    contactChapterMap.put(contact.Region_Chapter__c, contact);
-                } else if(oldContactsMap != null && contact.Region_Chapter__c != oldContactsMap.get(contact.Id).Region_Chapter__c) {
-                    contactChapterMap.put(contact.Region_Chapter__c, contact);
-                }
-            }
-        }
-        if(!contactChapterMap.isEmpty()) {
-            Map<Id, Account> accountOwnerMap = new Map<Id, Account>(
-                ChapterStaffRecordSharing_AC.getAccountOwner(contactChapterMap.keySet()));
-            for(Contact contact : contactChapterMap.values()) {
-                if(accountOwnerMap.containsKey(contact.Region_Chapter__c)) {
-                    contact.OwnerId = accountOwnerMap.get(contact.Region_Chapter__c).Intake_Manager__c;
-                }
-            }
-        }
-    }
+	/**
+	 * Update the number of Volunteer Opportunities assigned to the Volunteer Contact
+	 * @param volunteerIds
+	 */
+	public static List<Contact> updateAssignedNumberOfOpportunities(Set<Id> volunteerIds) {
+		List<Contact> contacts = new List<Contact>();
+		if (volunteerIds.isEmpty()) {
+			return contacts;
+		}
+		try {
+			for (Contact contact : [
+					SELECT Id,Number_of_Assignments__c,Name, (
+							SELECT Id,Volunteer_Name__c
+							FROM Volunteer_Opportunities__r
+							WHERE Volunteer_Name__c IN:volunteerIds
+					)
+					FROM Contact
+					WHERE Id IN:volunteerIds
+			]) {
+				Contact updateContact = new Contact();
+				updateContact.Id = contact.Id;
+				updateContact.Number_of_Assignments__c = contact.Volunteer_Opportunities__r.size();
+				contacts.add(updateContact);
+			}
+			update contacts;
+			if (Test.isRunningTest()) {
+				throw new CommonTriggerException('Test Class execution');
+			}
+		} catch (Exception ex) {
+			for (Volunteer_Opportunity__c volunteerOpportunity : [
+					SELECT Id,Volunteer_Name__c
+					FROM Volunteer_Opportunity__c
+					WHERE Volunteer_Name__c IN:volunteerIds
+			]) {
+				ErrorMessage_AC.createDebugRec('ContactService',
+						String.valueOf(volunteerOpportunity), String.valueOf(ex),
+						'updateAssignedNumberOfOpportunities', volunteerOpportunity.Id,
+						ex.getStackTraceString(), 'Error');
+				if (!Test.isRunningTest()) {
+					volunteerOpportunity.addError(Label.Debug_log_error_message);
+				}
+			}
+		}
+		return contacts;
+	}
 
 	/**
 	* Update race/ethnicity value from wish signature form

@@ -11,17 +11,15 @@ public class Constant_AC {
     public final static Id CONTACT_WISH_CHILD_RT_ID = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName().get('Wish_Child').getRecordTypeId();
     public final static Id IN_KIND_ACCOUNT_ID = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('In_Kind_Donors').getRecordTypeId();
     public final static Id DETERMINATION_TASK_RT_ID = Schema.SObjectType.Task.getRecordTypeInfosByDeveloperName().get('Wish_Determination').getRecordTypeId();
-    public final static Id DETERMINATION_CHAPTER_ACTION_RT_ID = Schema.SObjectType.Chapter_Action_Track__c.getRecordTypeInfosByDeveloperName().get('Wish_Determination').getRecordTypeId();
     public final static Id PLANNING_ANTICIPATION_TASK_RT_ID = Schema.SObjectType.Task.getRecordTypeInfosByDeveloperName().get('Wish_Planning').getRecordTypeId();
     public final static Id WISH_ASSIST_RT_ID = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Wish_Assist').getRecordTypeId();
-    public final static Id GRANT_CHAPTER_ACTION_RT_ID = Schema.SObjectType.Chapter_Action_Track__c.getRecordTypeInfosByDeveloperName().get('Wish_Granting').getRecordTypeId();
     public final static Id GRANT_TASK_RT_ID = Schema.SObjectType.Task.getRecordTypeInfosByDeveloperName().get('Wish_Granting').getRecordTypeId();
     public final static Id WISH_FAMILY_RT_ID = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName().get('Wish_Family').getRecordTypeId();
     public final static String WISH_FAMILY_RT_LABEL = 'Wish Family';
     public final static Id WISH_RT_ID = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Wish').getRecordTypeId();
     public final static Id MEDICAL_PROFESSIONAL_RT_ID = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName().get('Medical_Professional').getRecordTypeId();
     public final static String MEDICAL_PROFESSIONAL_RT_LABEL = 'Medical Professional';
-    public final static String Other_RT_LABEL = 'Other';//SIW-563 : Added label for 'Other'
+    public final static String Other_RT_LABEL = 'Other';
     public final static Id ORGANIZATION_RT_ID = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Organization').getRecordTypeId();
     public final static Id HOUSEHOLD_RT_ID = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('HH_Account').getRecordTypeId();
     public final static Id CHAPTER_RT_ID = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Chapter').getRecordTypeId();
@@ -118,7 +116,7 @@ public class Constant_AC {
     public static final String LEAD_SUB_STATUS_PENDING_PAPER_DV = 'Pending Paper DV';
     public static final String LEAD_SUB_STATUS_PENDING_CLARIFICATION_CHAPTER = 'Pending Clarification - Chapter';
     public static final String LEAD_SUB_STATUS_ADDITIONAL_INFORMATION_FOR_REVIEW = 'Additional Information for Review';
-    public static final String LEAD_SUB_STATUS_MEDICAL_REVIEWED = 'Medical Reviewed'; //SIW-524 DNQ-Medical Lead Sub-Status Changes
+    public static final String LEAD_SUB_STATUS_MEDICAL_REVIEWED = 'Medical Reviewed';
     public static final String LEAD_DUP_CHECK_BLOCK_LEAD_DUP = 'Block Lead Dup';
     public static final String LEAD_DUP_CHECK_BLOCK_CONTACT_DUP = 'Block Contact Dup';
     public static final String LEAD_COUNTRY_UNITED_STATES = 'United States';
@@ -137,9 +135,6 @@ public class Constant_AC {
     public static final String LEAD_ERROR_WISH_CHILD = 'Wish Child';
     public static final String LEAD_ERROR_WISH_ADDITIONAL_PARENT_GUARDIAN = 'Additional Parent/Guardian';
     public static final String LEAD_ERROR_WISH_FAMILY = 'Wish Family';
-    public static final String LEAD_ERROR_BEST = 'Best Physician Contact';
-    public static final String LEAD_ERROR_MEDICAL_PROFESSIONAL = 'Medical Professional';
-    public static final String LEAD_ERROR_WISH_FAMILY_AND_MEDICAL_PROFESSIONAL = 'Wish Family and Medical Professional';
     public static final String LEAD_RFI_FORM_INFO_QUALIFIED = 'Qualified';
     public static final String LEAD_RFI_FORM_INFO_NOT_QUALIFIED = 'Not Qualified';
 
@@ -164,7 +159,6 @@ public class Constant_AC {
     public static final String CASE_STATUS_DNQ_CHAPTER_MEDICAL_ADVISOR = 'DNQ - Chapter Medical Advisor';
     public static final String CASE_STATUS_INACTIVE = 'Inactive';
     public static final String CASE_STATUS_ESCALATED = 'Escalated';
-    public static final String CASE_STATUS_OPEN = 'Open';
     public static final String CASE_STATUS_QUALIFIED = 'Qualified';
     public static final String CASE_STATUS_READY_TO_ASSIGN = 'Ready to Assign';
     public static final String CASE_STATUS_READY_TO_INTERVIEW = 'Ready to Interview';
@@ -175,7 +169,6 @@ public class Constant_AC {
     public static final String CASE_STATUS_ON_APPEAL = 'Additional Information for Review';
     public static final String CASE_SUB_STATUS_PENDING = 'Pending';
     public static final String CASE_SUB_STATUS_ABANDONED = 'Abandoned';
-    public static final String CASE_SUB_STATUS_DNQ_MEDICAL = 'DNQ - Medical';
     public static final String CASE_SUB_STATUS_NON_VIEWABLE = 'Non-Viewable';
     public static final String CASE_WISH_CLEARANCE_APPROPRIATE = 'Appropriate';
     public static final String CASE_WISH_CLEARANCE_NOT_APPROPRIATE = 'Not Appropriate';
@@ -187,13 +180,11 @@ public class Constant_AC {
     public static final String CASE_WISH_TYPE_TRAVEL_OTHER = 'Travel-Other';
     public static final String CASE_WISH_TYPE_TRAVEL_INTERNATIONAL = 'Travel-International';
     public static final String CASE_WISH_TYPE_TRAVEL_HAWAII = 'Travel-Hawaii';
-    public static final String CASE_BUDGET_APPROVAL_STATUS_APPROVED = 'Approved';
     public static final String CASE_RECORD_TYPE_DIAGNOSIS_VERIFICATION_REVIEW = 'Diagnosis Verification Review';
     public static final String CASE_ORIGIN_WEB = 'Web';
     public static final String CASE_ORIGIN_EMAIL = 'Email';
     public static final String CASE_RUSH_TIME_FRAME = 'Select timeframe';
     public static final String CASE_UWI_SOURCE_LEAD = 'Lead';
-    public static final String CASE_SUBJECT_ELIGIBILITY_REVIEW = 'Eligibility Review';
 
     /**
      * Wish Affiliation Constants
@@ -224,10 +215,6 @@ public class Constant_AC {
     public static final String CONTACT_NPE01_HOMEEMAIL_API_NAME = 'npe01__HomeEmail__c';
     public static final String CONTACT_TYPE_SIBLING = 'Sibling';
     public static final String CONTACT_TYPE_PARENT_LEGAL_GUARDIAN = 'Parent/Guardian';
-    public static final String CONTACT_TYPE_REFERRER_AND_BEST = 'Referrer&Best';
-    public static final String CONTACT_TYPE_REFERRER_AND_TREATING = 'Referrer&Treating';
-    public static final String CONTACT_TYPE_BEST = 'BestContact';
-    public static final String CONTACT_TYPE_TREATING = 'Treating';
     public static final String CONTACT_TYPE_REFERRING = 'Referring';
     public static final String CONTACT_SALUTATION_MASTER = 'Master';
     public static final String CONTACT_SALUTATION_MR = 'Mr.';
@@ -238,7 +225,6 @@ public class Constant_AC {
     public static final String CONTACT_NAME_UNKNOWN = 'Unknown';
     public static final String CONTACT_STATUS_ROLE_SPECIFIC_TRAINING_AVAILABLE = 'Role Specific Training Available';
     public static final String CONTACT_ONBOARDING_STATUS_BACKGROUND_CHECK = 'Background Check';
-    public static final String CONTACT_PUBLICITY_YES = 'Yes';
     public static final String CONTACT_HIDDEN_VOLUNTEER_STATUS_TRAINING_REGISTERED = 'Training Registered';
     public static final String CONTACT_HIDDEN_VOLUNTEER_STATUS_ORIENTATION_COMPLETED = 'Orientation With Completed';
     public static final String CONTACT_HIDDEN_VOLUNTEER_STATUS_ORIENTATION_WITHOUT_COMPLETED = 'Orientation Without Completed';
@@ -336,7 +322,6 @@ public class Constant_AC {
      */
     public static final String DOCUSIGN_ENVELOPE_STATUS_COMPLETED = 'Completed';
     public static final String DOCUSIGN_SUBJECT_DIAGNOSIS_VERIFICATION_FORM = 'Diagnosis Verification Form';
-    public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_LIABILITY = 'Signature Required - Liability And Publicity Release Form';
     public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_WISH_FORM_AND_LIABILITY = 'Signature Required - Wish Form & Liability And Publicity Release Form';
     public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_WISH_CLEARANCE_FORM = 'Signature Required – Make-A-Wish Wish Clearance Form';
     public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_RUSH_WISH_CLEARANCE_FORM = 'Signature Required – Make-A-Wish Rush Wish Clearance Form';
@@ -385,7 +370,6 @@ public class Constant_AC {
     public static final String TASK_STATUS_COMPLETED = 'Completed';
     public static final String TASK_STATUS_IN_PROGRESS = 'In Progress';
     public static final String TASK_STATUS_SCHEDULED = 'Scheduled';
-    public static final String TASK_STATUS_DECLINED = 'Declined';
     public static final String TASK_STATUS_APPROVED = 'Approved';
     public static final String TASK_DESCRIPTION_RUSH_QUALIFIED = 'New RUSH referral qualified';
     public static final String TASK_SUBJECT_SEND_DIAGNOSIS_VERIFICATION = 'Send Diagnosis Verification';
@@ -417,7 +401,6 @@ public class Constant_AC {
     public static final String TASK_SUBJECT_RUSH_CHANGED = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary';
     public static final String TASK_SUBJECT_WISH_CONCEPT_APPROVAL = 'Wish concept approval';
     public static final String TASK_SUBJECT_WISH_NOT_CLOSED = 'Wish not closed';
-    public static final String TASK_SUBJECT_FOLLOWUP_ACTIVITIES_INCOMPLETE = 'Volunteer wish follow-up activities not complete';
     public static final String TASK_SUBJECT_FLIGHTS_BOOKED = 'Flights booked';
     public static final String TASK_SUBJECT_BUDGET = 'Budget';
     public static final String TASK_SUBJECT_REQUEST_PASSPORTS = 'Request Passports from family';
@@ -478,7 +461,6 @@ public class Constant_AC {
     public static final String BACKGROUND_CHECK_STATUS_REJECTED = 'Rejected';
     public static final String BACKGROUND_CHECK_STATUS_FIRST_ADVANTAGE = 'Received from First Advantage';
     public static final String BACKGROUND_CHECK_STATUS_MANUAL = 'Manual';
-    public static final String BACKGROUND_CHECK_SUBSTATUS_PASS = 'Pass';
     public static final String BACKGROUND_CHECK_RESIDED_IN_US_FOR_PAST_7_YEARS_YES = 'Yes';
     public static final String BACKGROUND_CHECK_RESIDED_IN_US_FOR_PAST_7_YEARS_NO = 'No';
 
