@@ -1,5 +1,13 @@
 ({
     getDocgenDetails : function(cmp, event) {
+        var emailId;
+        
+        if(cmp.find("changeEmail") && cmp.find("changeEmail").get("v.checked")) {
+            emailId = cmp.find("otherEmails") ? cmp.find("otherEmails").get("v.value") : '';
+        } else {
+            emailId = cmp.find("sendViaEmail") ? cmp.find("sendViaEmail").get("v.value") : '';
+        }
+        
         var action = cmp.get("c.getDocGen");
         action.setParams({
             wishSignId : cmp.get("v.wishReqSignRecord.Id"),
@@ -13,13 +21,13 @@
                 actionUpdate.setParams({
                     "wrsId": cmp.get("v.WRSId"),
                     "format" : 'E-Signature',
-                    "emailId" :  cmp.find("sendViaEmail") ? cmp.find("sendViaEmail").get("v.value") : ''
+                    "emailId" :  emailId
                 });
                 actionUpdate.setCallback(this, function (response) {
                     var state = response.getState();
                     if (state === 'SUCCESS') {
-                        var emailId = cmp.find("sendViaEmail") ? cmp.find("sendViaEmail").get("v.value") : '';
-                        console.log('emailId '+emailId);
+                        //var emailId = cmp.find("sendViaEmail") ? cmp.find("sendViaEmail").get("v.value") : '';
+                        //console.log('emailId '+emailId);
                         
                         var attachId = '';
                         if(cmp.find("fileUpload")){
