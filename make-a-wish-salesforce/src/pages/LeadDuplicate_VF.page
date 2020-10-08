@@ -11,14 +11,12 @@ Modification Log:
            sidebar="false"
            lightningStylesheets="true"
            standardStylesheets="false" cache="false">
-
     <apex:pagemessages id="msg"/>
     <apex:includeScript value="{!URLFOR($Resource.CumulusStaticResources, '/npsp-slds/modal.js')}"/>
     <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/jquery.min.js')}"/>
     <apex:stylesheet value="{!URLFOR($Resource.CumulusStaticResources, '/npsp-slds/npsp-common.css')}"/>
     <apex:stylesheet
             value="{!URLFOR($Resource.SLDS, '/0_12_2/assets/styles/salesforce-lightning-design-system-vf.min.css')}"/>
-
     <script>
         $(function () {
             $('.family').click(function () {
@@ -97,9 +95,7 @@ Modification Log:
                     $('.additionalConRadio').attr('disabled', false);
                 }
             });
-
         });
-
 
         function validateRadio() {
             var clsName;
@@ -120,7 +116,6 @@ Modification Log:
     <div class="slds">
         <style type="text/css">
             .slds .slds-tabs--path__stage {
-                /* fix weird issue where check icon was not aligning properly */
                 margin-top: -0.5rem;
             }
 
@@ -129,18 +124,12 @@ Modification Log:
             }
 
             .lookupHoverDetail {
-                /* hide those ugly hover dialogs that come with using apex:outputField with lookups */
                 display: none !important;
             }
 
             .kill-white-space {
-                /* some visualforce elements inject extra tags and linebreaks,
-                   causing unwanted spaces to appear in output. this fixes that */
                 display: inline-flex;
             }
-        </style>
-
-        <style type="text/css">
 
             .mybutton {
                 display: inline-block;
@@ -154,20 +143,8 @@ Modification Log:
             }
 
             .custPopup {
-                /* background-color: white;
-               border: 1px solid#E5c130;
-               border-radius: 4px;
-               left: 50%;
-                padding:10px;*/
                 z-index: 9999;
                 position: absolute;
-                /* These are the 3 css properties you will need to change so the popup
-                displays in the center of the screen. First set the width. Then set
-                margin-left to negative half of what the width is. You can add
-                the height property for a fixed size pop up if you want.
-                width: 500px;
-                margin-left: -250px;
-                top:100px;*/
             }
 
             .popupBackground {
@@ -285,15 +262,12 @@ Modification Log:
             }
         </style>
 
-
         <apex:outputText rendered="{!step == 2}">
             <apex:variable var="hasResults" value="{!(dupLeadList.size > 0 || dupContactList.size > 0)}"/>
             <apex:variable var="cardClass" value="{!IF(hasResults, '', 'slds-card--empty')}"/>
             <apex:form id="frm">
                 <apex:outputpanel rendered="{!isFamilyInfo == false}">
                     <apex:actionRegion>
-                        <!----------------------------------------SELECTED LEADS------------------------------------------------------->
-                        <!--IME 109-->
                         <div class="slds-notify slds-notify--alert slds-theme--inverse-text slds-theme--alert-texture help"
                              role="alert">
                             <span class="slds-assistive-text">Info</span>
@@ -340,8 +314,6 @@ Modification Log:
                                 </tbody>
                             </table>
                         </div>
-
-                        <!----------------------------------------SELECTED LEADS------------------------------------------------------->
                         <section class="slds-clearfix  slds-m-top--x-small slds-m-bottom--x-small slds-m-right--large">
                             <div class="slds-float--right">
                                 <label class="slds-checkbox">
@@ -427,7 +399,6 @@ Modification Log:
                                 </div>
                             </apex:outputText>
                         </div>
-                        <!-- </apex:outputPanel> -->
                     </apex:actionRegion>
                 </apex:outputpanel>
 
@@ -538,7 +509,6 @@ Modification Log:
                             </div>
                             <div class="slds-card__body">
                                 <apex:outputText rendered="{!dupParentContactList.size <0}">
-                                    <!--apex:outputText rendered="{!NOT(hasResults)}"-->
                                     <h3 class="slds-text-heading--small slds-p-top--large slds-p-bottom--large">
                                         <apex:outputText
                                                 value="{!$Label.npe01__contact_merge_error_confirm_message_nothing_found}"/>
@@ -578,10 +548,7 @@ Modification Log:
                                                 </div>
                                             </td>
                                         </tr>
-
                                         <apex:repeat value="{!dupParentContactList}" var="con">
-
-
                                             <tr>
                                                 <td>
                                                     <a href="{!URLFOR($Action.Contact.View, con.Id)}"
@@ -592,20 +559,15 @@ Modification Log:
                                                 </td>
                                                 <td>
                                                     <apex:outputText value="{!con.FirstName}"/>
-
                                                 </td>
                                                 <td>
-
                                                     <apex:outputText value="{!con.LastName}"/>
-
                                                 </td>
                                                 <td>
                                                     <apex:outputText value="{!con.Phone}"/>
-
                                                 </td>
                                                 <td>
                                                     <apex:outputText value="{!con.Email}"/>
-
                                                 </td>
                                                 <td style="border-right: 1px solid #d8dde6;"
                                                     class="slds-text-align--center">
@@ -614,13 +576,8 @@ Modification Log:
                                                            class="familyRadio overallRadio"/>
                                                 </td>
                                             </tr>
-
-
                                         </apex:repeat>
-
-
                                         <apex:inputhidden id="contactValue" value="{!contactId}"/>
-
                                         </tbody>
                                     </table>
                                 </apex:outputText>
@@ -628,15 +585,12 @@ Modification Log:
                         </div>
                     </apex:outputpanel>
 
-
                     <apex:outputpanel rendered="{!AdditionalParentContactList.size > 0}"
                                       StyleClass="TotalBox is_Existing">
-
                         <div class="slds-card slds-m-horizontal--large slds-m-top--large {!cardClass}">
                             <div class="slds-card__header slds-grid slds-grid--align-spread">
                                 <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Select Existing
                                     Additional Parent/Guardian Contact</h2>
-
                             </div>
                             <div class="slds-card__body">
                                 <apex:outputText rendered="{!AdditionalParentContactList.Size>0}">
@@ -673,7 +627,6 @@ Modification Log:
                                                 </div>
                                             </td>
                                         </tr>
-
                                         <apex:repeat value="{!AdditionalParentContactList}" var="additionalParent">
                                             <tr>
                                                 <td>
@@ -681,25 +634,18 @@ Modification Log:
                                                        class="slds-truncate">
                                                         <apex:outputText value="View"/>
                                                     </a>
-
                                                 </td>
                                                 <td>
                                                     <apex:outputText value="{!additionalParent.FirstName}"/>
-
                                                 </td>
                                                 <td>
-
                                                     <apex:outputText value="{!additionalParent.LastName}"/>
-
                                                 </td>
                                                 <td>
                                                     <apex:outputText value="{!additionalParent.Phone}"/>
-
                                                 </td>
-
                                                 <td>
                                                     <apex:outputText value="{!additionalParent.Email}"/>
-
                                                 </td>
                                                 <td style="border-right: 1px solid #d8dde6;"
                                                     class="slds-text-align--center">
@@ -707,34 +653,26 @@ Modification Log:
                                                            class="additionalConRadio ExistingRadio  overallRadio"
                                                            id="{!additionalParent.id}" VALUE="{!additionalParent.id}"
                                                            onclick="additionalParentValue(this,'{!$Component.addtionalConId}');"/>
-
                                                 </td>
                                             </tr>
                                         </apex:repeat>
                                         <apex:inputhidden value="{!additionalParentId}" id="addtionalConId"/>
                                         </tbody>
                                     </table>
-
                                     <div style="float:left; margin-top: -6%;  margin-right: 7%; position:absolute; margin-left: 87%;">
-
                                     </div>
-
                                 </apex:outputText>
                             </div>
                         </div>
                     </apex:outputpanel>
-
                     <br/>
-                    <center>
-                        <apex:commandbutton value="Complete Dupe Check" action="{!CompleteDupeCheck}"
-                                            reRender="{!render}" onClick="return validateRadio();"
-                                            styleClass="slds-button slds-button--brand"/> &nbsp;&nbsp;
-                        <apex:commandbutton value="Send Diagnosis Verification" action="{!ContinuePartAForm}"
-                                            onClick="return validateRadio();"
-                                            styleClass="slds-button slds-button--brand" disabled="{!paperDVProcess}"/>
-                    </center>
+                    <apex:commandbutton value="Complete Dupe Check" action="{!CompleteDupeCheck}"
+                                        reRender="{!render}" onClick="return validateRadio();"
+                                        styleClass="slds-button slds-button--brand"/> &nbsp;&nbsp;
+                    <apex:commandbutton value="Send Diagnosis Verification" action="{!ContinuePartAForm}"
+                                        onClick="return validateRadio();"
+                                        styleClass="slds-button slds-button--brand" disabled="{!paperDVProcess}"/>
                 </apex:outputpanel>
-
             </apex:form>
         </apex:outputText>
         <apex:outputText id="contactMerge" rendered="{!step == 3}">
@@ -758,7 +696,6 @@ Modification Log:
                         </div>
                     </div>
                 </apex:outputPanel>
-                <!--IME 109-->
                 <div class="slds-notify slds-notify--alert slds-theme--inverse-text slds-theme--alert-texture help"
                      role="alert">
                     <span class="slds-assistive-text">Info</span>
@@ -774,7 +711,6 @@ Modification Log:
                     <div class="slds-card__body">
                         <table class="slds-table slds-table--bordered">
                             <thead>
-                            <!-- header row(s) -->
                             <apex:repeat var="row" value="{!fieldRows}">
                                 <apex:outputText rendered="{!row.styleClass == 'header'}">
                                     <tr>
@@ -798,7 +734,6 @@ Modification Log:
                             </apex:repeat>
                             </thead>
                             <tbody>
-                            <!-- master row(s) -->
                             <apex:repeat var="row" value="{!fieldRows}">
                                 <apex:outputText rendered="{!row.fieldName == '$MASTER$'}">
                                     <tr>
@@ -828,10 +763,6 @@ Modification Log:
                                     </tr>
                                 </apex:outputText>
                             </apex:repeat>
-                            </tbody>
-
-                            <tbody>
-                            <!-- normal and separator rows go here -->
                             <apex:repeat var="row" value="{!fieldRows}">
                                 <apex:outputpanel rendered="{!row.showRadio}">
                                     <apex:outputText rendered="{!row.styleClass == 'separator'}">
@@ -842,18 +773,14 @@ Modification Log:
                                             </th>
                                         </tr>
                                     </apex:outputText>
-
                                     <apex:outputText
                                             rendered="{!row.styleClass != 'separator' && row.styleClass != 'header' && row.fieldName != '$MASTER$'}">
-
                                         <tr>
                                             <th class="slds-size--1-of-12">
                                                 <apex:inputHidden id="winner" value="{!row.selectedValue}"
                                                                   rendered="{!row.showRadio}"/>
                                                 <apex:outputText value="{!row.fieldLabel}" rendered="{!row.showRadio}"/>
                                             </th>
-
-
                                             <apex:repeat var="col" value="{!row.values}">
                                                 <apex:outputText rendered="{!row.showRadio}">
                                                     <td class="slds-form-element__control slds-size--1-of-3 slds-cell-wrap">
@@ -886,7 +813,6 @@ Modification Log:
                                                 </apex:outputText>
                                             </apex:repeat>
                                         </tr>
-
                                     </apex:outputText>
                                 </apex:outputpanel>
                             </apex:repeat>
@@ -896,7 +822,6 @@ Modification Log:
                     </div>
                 </div>
 
-                <!-- SIW-653 -->
                 <apex:outputPanel id="modalWarning">
                     <apex:outputPanel rendered="{!displayModalWarning}">
                         <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small">
@@ -928,7 +853,6 @@ Modification Log:
                     </apex:outputPanel>
                 </apex:outputPanel>
             </apex:form>
-
             <script>
                 document.getElementById('{!$Component.mergeForm}').addEventListener(
                     'submit',
@@ -945,36 +869,26 @@ Modification Log:
                     false
                 );
             </script>
-
-
         </apex:outputText>
-
-
     </div>
-
     <script>
         function changeValue(input, textid) {
-
             document.getElementById(textid).value = input.value;
         }
 
         function additionalParentValue(input, textid) {
-
             document.getElementById(textid).value = input.value;
         }
 
         function bestPersonValue(input, textid) {
-
             document.getElementById(textid).value = input.value;
         }
 
         function treatingValue(input, textid) {
-
             document.getElementById(textid).value = input.value;
         }
 
         function medicalValue(input, textid) {
-
             document.getElementById(textid).value = input.value;
         }
 
@@ -991,7 +905,5 @@ Modification Log:
             var conId = $(this).val();
             $('.alternateMedProf2').val(conId);
         });
-
     </script>
-
 </apex:page>

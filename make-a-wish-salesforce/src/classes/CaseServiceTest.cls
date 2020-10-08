@@ -61,10 +61,6 @@ public with sharing class CaseServiceTest {
 		lead.Sub_Status__c = 'Pending Paper DV';
 		lead.Appeal__c = true;
 		lead.unique_wish_identifier__c = 'testIdentifier';
-		lead.hospital_treatment_facility_treating__c = 'County Hospital';
-		lead.Treating_Medical_Professional_First_Name__c = 'Doc';
-		lead.Treating_Medical_Professional_Last_Name__c = 'Thomas';
-		lead.Treating_Medical_Professional_Email__c = 'dthomas@countyhospital.org';
 		insert lead;
 
 		List<dsfs__DocuSign_Status__c> docuSignStatuses = TestDataFactory.createDocusignStatus(1);
@@ -188,8 +184,13 @@ public with sharing class CaseServiceTest {
 		lead.referred_date__c = lead.inquiry_date__c = Date.today().addmonths(-1);
 		update lead;
 
+		Contact qualifyingMp = new Contact();
+		qualifyingMp.FirstName = 'Test2';
+		qualifyingMp.LastName = 'User3';
+		qualifyingMp.npe01__WorkEmail__c = 'mail@email.com';
+
 		Test.startTest();
-		Case result = CaseService.buildQualifiedCaseFromLead(lead);
+		Case result = CaseService.buildQualifiedCaseFromLead(lead, qualifyingMp);
 		Test.stopTest();
 
 		System.assertEquals('Qualified', result.Status);
@@ -553,12 +554,10 @@ public with sharing class CaseServiceTest {
 	private static Lead getLead() {
 		return [
 				SELECT Id, ConvertedContactId, Qualified_Date__c, Migrated_Record__c,
-						Treating_Medical_Professional_First_Name__c, Treating_Medical_Professional_Last_Name__c,
-						Treating_Medical_Professional_Email__c, ConvertedAccountId,
-						Why_do_you_feel_would_be_eligible_Wish__c, Part_A_Received__c, Part_A_Sent__c, ChapterName__c,
+						ConvertedAccountId, Why_do_you_feel_would_be_eligible_Wish__c, Part_A_Received__c, Part_A_Sent__c, ChapterName__c,
 						PD_Condition_Description__c, ChapterName__r.Qualified_Wish_Owner__c, FirstName, LastName, Rush__c,
-						Please_Explain__c, Referred_Date__c,Please_Explain_Deteriorate__c, Will_Child_s_Condition_Deteriorate__c,Expedite_timeframe__c,Inquiry_Date__c, Out_of_Territory__c, unique_wish_identifier__c,
-						hospital_treatment_facility_treating__c
+						Please_Explain__c, Referred_Date__c,Please_Explain_Deteriorate__c, Will_Child_s_Condition_Deteriorate__c,
+						Expedite_timeframe__c,Inquiry_Date__c, Out_of_Territory__c, unique_wish_identifier__c
 				FROM Lead
 				WHERE Name = 'Jack Smith'
 		];
@@ -604,7 +603,7 @@ public with sharing class CaseServiceTest {
 		List<Case> cases = createWishCases(lead);
 		insert cases;
 		Set<Id> caseId = new Set<Id>();
-		for (Case c : cases){
+		for (Case c : cases) {
 			caseId.add(c.Id);
 		}
 		Map<Id, Id> caseContactMap = new Map<Id, Id>();
@@ -803,20 +802,22 @@ public with sharing class CaseServiceTest {
 	}
 
 	@IsTest
-	public static void findCaseByLeadIdAndRecordType(){
+	public static void findCaseByLeadIdAndRecordType() {
 		Lead lead = [
 				SELECT Id
 				FROM Lead
 		][0];
 
 		Test.startTest();
-		CaseService.findCaseByLeadIdAndRecordType(new Set<Id>{lead.Id},
+		CaseService.findCaseByLeadIdAndRecordType(new Set<Id>{
+				lead.Id
+		},
 				Constant_AC.DIAGNOSIS_RT_ID);
 		Test.stopTest();
 	}
 
 	@IsTest
-	public static void setWishChildIdPartACases(){
+	public static void setWishChildIdPartACases() {
 		Lead lead = [
 				SELECT Id, ConvertedContactId
 				FROM Lead
@@ -825,13 +826,17 @@ public with sharing class CaseServiceTest {
 		insert cases;
 
 		Test.startTest();
-		CaseService.setWishChildIdPartACases(new Map<Id, Lead>{lead.Id => lead},
-				new Map<Id, Case>{cases[0].Id => cases[0]});
+		CaseService.setWishChildIdPartACases(new Map<Id, Lead>{
+				lead.Id => lead
+		},
+				new Map<Id, Case>{
+						cases[0].Id => cases[0]
+				});
 		Test.stopTest();
 	}
 
 	@IsTest
-	public static void setCaseAsRush(){
+	public static void setCaseAsRush() {
 		Lead lead = [
 				SELECT Id, ConvertedContactId, Rush__c
 				FROM Lead
@@ -840,7 +845,11 @@ public with sharing class CaseServiceTest {
 		insert cases;
 
 		Test.startTest();
-		CaseService.setCaseAsRush(new Map<Id, Case>{cases[0].Id => cases[0]}, new Map<Id, Case>{cases[0].Id => cases[0]});
+		CaseService.setCaseAsRush(new Map<Id, Case>{
+				cases[0].Id => cases[0]
+		}, new Map<Id, Case>{
+				cases[0].Id => cases[0]
+		});
 		Test.stopTest();
 	}
 }

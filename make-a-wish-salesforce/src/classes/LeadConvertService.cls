@@ -146,29 +146,21 @@ public class LeadConvertService {
 		for (Lead convertedLead : [
 				SELECT Id, Name, DOB__c, FirstName, Why_do_you_feel_would_be_eligible_Wish__c, LastName, CreatedDate, Migrated_Record__c,
 						I_am_Recognized_To_Practice_As_a__c, Sibling_Detail__c, Medical_Provider_Category__c,
-						ChapterName__r.Name, ChapterName__c, Treating_Medical_Professional_First_Name__c, ConvertedContactId, ConvertedAccountId,
-						Other_Relationship_To_Child__c, Relationship_to_child__c, LeadSource, Treating_Medical_Professional_Phone__c,
-						Treating_Medical_Professional_Email__c, is_Family_Aware_of_Referral__c, Treating_Medical_Professional_Last_Name__c, Referrer_City__c,
+						ChapterName__r.Name, ChapterName__c, ConvertedContactId, ConvertedAccountId,
+						Other_Relationship_To_Child__c, Relationship_to_child__c, LeadSource, is_Family_Aware_of_Referral__c, Referrer_City__c,
 						Referrer_Email__c, Referrer_FirstName__c, Referrer_Last_Name__c, Referrer_Phone__c, Referrer_Zip__c,
-						Parent_First_Name__c, Alternate1MedProfessionalPhone__c, Alternate1MedicalProfessionalEmail__c,
-						Alternate1MedProfessionalFirstName__c, Alternate1MedProfessionalLastName__c,
-						What_is_the_family_s_primary_spoken_lang__c, Parent_Last_Name__c, Email,
-						Phone, City, Alternate2MedProfessionalFirstName__c, Alternate2MedProfessionalEmail__c,
-						Alternate2MedProfessionalLastName__c, Alternate2MedProfessionalPhone__c,
-						CountryCode, PostalCode, State, StateCode, Street, Treating_Medical_Professional_Contact_Id__c,
-						Medical_Professional_ContactId__c, Wish_Family_ContactId__c, Best_contact_for_Physician_Email__c,
-						Best_Contact_for_Physician_First_Name__c, Best_Contact_for_Physician_Last_Name__c, Best_contact_for_Physician_Phone__c,
+						Parent_First_Name__c, What_is_the_family_s_primary_spoken_lang__c, Parent_Last_Name__c, Email,
+						Phone, City, CountryCode, PostalCode, State, StateCode, Street, Wish_Family_ContactId__c,
 						Additional_Parent_First_Name__c, Additional_Parent_Last_Name__c, Additional_Parent_City__c,
 						Additional_Parent_Email__c, Additional_Parent_Phone__c, Additional_Parent_Postal_Code__c,
 						Additional_Parent_State__c, Additional_Parent_Street__c, Hidden_Additional_Parent_Id__c,
-						Hidden_Best_Contact_Person_Id__c, Parent_Relationship_to_Child__c, HiddenAlternate1MedProfessionalId__c,
-						HiddenAlternate2MedProfessionalId__c, Self_describe_comment_box__c, Child_Age__c, Gender__c, Hidden_DV_form_Medical_professional_Type__c,
-						Additional_Parent_Relationship_to_Child__c, How_Did_you_hear_about_Make_A_Wish__c, Other_Medical_Provider_Category__c,
-						Any_medical_reason_for_moving_quickly__c, Department__c, Hospital_Treatment_Facility_Treating__c, Part_A_Received__c,
-						Part_A_Sent__c, ChapterName__r.Qualified_Wish_Owner__c, Alternate_1_Medical_Professional_Type__c, Alternate_2_Medical_Professional_Type__c,
-						Alternate1HospitalTreatmentFacility__c, Alternate2HospitalTreatmentFacility__c, Qualified_Date__c, PD_Condition_Description__c, Rush__c,
-						Please_Explain__c, Referred_Date__c, Inquiry_Date__c, Out_of_Territory__c, unique_wish_identifier__c,
-						Will_Child_s_Condition_Deteriorate__c, Please_Explain_Deteriorate__c, Expedite_timeframe__c,
+						Parent_Relationship_to_Child__c, Self_describe_comment_box__c, Child_Age__c, Gender__c,
+						Hidden_DV_form_Medical_professional_Type__c, Additional_Parent_Relationship_to_Child__c,
+						How_Did_you_hear_about_Make_A_Wish__c, Other_Medical_Provider_Category__c,
+						Any_medical_reason_for_moving_quickly__c, Department__c, Part_A_Received__c, Part_A_Sent__c,
+						ChapterName__r.Qualified_Wish_Owner__c, Qualified_Date__c, PD_Condition_Description__c,
+						Rush__c, Please_Explain__c, Referred_Date__c, Inquiry_Date__c, Out_of_Territory__c,
+						unique_wish_identifier__c, Will_Child_s_Condition_Deteriorate__c, Please_Explain_Deteriorate__c, Expedite_timeframe__c,
 						Referring_MP__r.Name, Referring_MP__r.npe01__WorkEmail__c, Referring_MP__r.npe01__AlternateEmail__c,
 						Referring_MP__r.Alternate_Email_2__c, Referring_MP_HTF__c, Treating_MP__c, Treating_MP__r.Name,
 						Treating_MP__r.npe01__WorkEmail__c, Treating_MP__r.npe01__AlternateEmail__c,
@@ -205,6 +197,9 @@ public class LeadConvertService {
 				wrapper.familyContacts.add(ContactService.buildAdditionalParentLegalGuardianFromLead(convertedLead));
 			}
 
+			// Find Medical Contacts
+			wrapper.medicalContacts = getMedicalContacts(convertedLead);
+
 			// Relationships Wish Child to Medical Professionals
 			wrapper.medicalRelationships = RelationshipService.buildLeadConvertRelationships(convertedLead).values();
 
@@ -224,7 +219,8 @@ public class LeadConvertService {
 			}
 
 			// Qualified Case
-			wrapper.qualifiedCase = CaseService.buildQualifiedCaseFromLead(convertedLead);
+			Contact qualifyingMedicalContact = getQualifyingMedicalProfessional(wrapper.medicalRelationships, wrapper.medicalContacts);
+			wrapper.qualifiedCase = CaseService.buildQualifiedCaseFromLead(convertedLead, qualifyingMedicalContact);
 
 			// Household Account of Wish Child
 			wrapper.wishChildAccount = AccountService.setHouseholdFields(convertedLead);
@@ -342,12 +338,81 @@ public class LeadConvertService {
 		WishAffiliationService.createWishAffiliations(casesByLeadId, convertedLeadsById, relationships);
 	}
 
+	private static Contact getQualifyingMedicalProfessional(List<npe4__Relationship__c> relationships, Map<Id, Contact> medicalContacts) {
+		for (npe4__Relationship__c relationship : relationships) {
+			if (relationship.Qualifying_Medical_Professional__c && medicalContacts.containsKey(relationship.npe4__RelatedContact__c)) {
+				return medicalContacts.get(relationship.npe4__RelatedContact__c);
+			}
+		}
+		return null;
+	}
+
+	private static Map<Id, Contact> getMedicalContacts(Lead convertedLead) {
+		Map<Id, Contact> mps = new Map<Id, Contact>();
+		if (convertedLead.Referring_MP__c != null) {
+			Contact referringMp = new Contact();
+			referringMp.Id = convertedLead.Referring_MP__c;
+			referringMp.FirstName = convertedLead.Referring_MP__r.FirstName;
+			referringMp.LastName = convertedLead.Referring_MP__r.LastName;
+			referringMp.npe01__WorkEmail__c = convertedLead.Referring_MP__r.npe01__WorkEmail__c;
+			referringMp.npe01__AlternateEmail__c = convertedLead.Referring_MP__r.npe01__AlternateEmail__c;
+			referringMp.Alternate_Email_2__c = convertedLead.Referring_MP__r.Alternate_Email_2__c;
+			mps.put(convertedLead.Referring_MP__c, referringMp);
+		}
+
+		if (convertedLead.Treating_MP__c != null) {
+			Contact treatingMp = new Contact();
+			treatingMp.Id = convertedLead.Treating_MP__c;
+			treatingMp.FirstName = convertedLead.Treating_MP__r.FirstName;
+			treatingMp.LastName = convertedLead.Treating_MP__r.LastName;
+			treatingMp.npe01__WorkEmail__c = convertedLead.Treating_MP__r.npe01__WorkEmail__c;
+			treatingMp.npe01__AlternateEmail__c = convertedLead.Treating_MP__r.npe01__AlternateEmail__c;
+			treatingMp.Alternate_Email_2__c = convertedLead.Treating_MP__r.Alternate_Email_2__c;
+			mps.put(convertedLead.Treating_MP__c, treatingMp);
+		}
+
+		if (convertedLead.Best_Contact__c != null) {
+			Contact bestContact = new Contact();
+			bestContact.Id = convertedLead.Best_Contact__c;
+			bestContact.FirstName = convertedLead.Best_Contact__r.FirstName;
+			bestContact.LastName = convertedLead.Best_Contact__r.LastName;
+			bestContact.npe01__WorkEmail__c = convertedLead.Best_Contact__r.npe01__WorkEmail__c;
+			bestContact.npe01__AlternateEmail__c = convertedLead.Best_Contact__r.npe01__AlternateEmail__c;
+			bestContact.Alternate_Email_2__c = convertedLead.Best_Contact__r.Alternate_Email_2__c;
+			mps.put(convertedLead.Best_Contact__c, bestContact);
+		}
+
+		if (convertedLead.Alt_1_MP__c != null) {
+			Contact alt1Mp = new Contact();
+			alt1Mp.Id = convertedLead.Alt_1_MP__c;
+			alt1Mp.FirstName = convertedLead.Alt_1_MP__r.FirstName;
+			alt1Mp.LastName = convertedLead.Alt_1_MP__r.LastName;
+			alt1Mp.npe01__WorkEmail__c = convertedLead.Alt_1_MP__r.npe01__WorkEmail__c;
+			alt1Mp.npe01__AlternateEmail__c = convertedLead.Alt_1_MP__r.npe01__AlternateEmail__c;
+			alt1Mp.Alternate_Email_2__c = convertedLead.Alt_1_MP__r.Alternate_Email_2__c;
+			mps.put(convertedLead.Alt_1_MP__c, alt1Mp);
+		}
+
+		if (convertedLead.Alt_2_MP__c != null) {
+			Contact alt2Mp = new Contact();
+			alt2Mp.Id = convertedLead.Alt_2_MP__c;
+			alt2Mp.FirstName = convertedLead.Alt_2_MP__r.FirstName;
+			alt2Mp.LastName = convertedLead.Alt_2_MP__r.LastName;
+			alt2Mp.npe01__WorkEmail__c = convertedLead.Alt_2_MP__r.npe01__WorkEmail__c;
+			alt2Mp.npe01__AlternateEmail__c = convertedLead.Alt_2_MP__r.npe01__AlternateEmail__c;
+			alt2Mp.Alternate_Email_2__c = convertedLead.Alt_2_MP__r.Alternate_Email_2__c;
+			mps.put(convertedLead.Alt_2_MP__c, alt2Mp);
+		}
+		return mps;
+	}
+
 	public class LeadConvertWrapper {
 		public Lead convertedLead { get; set; }
 		public Id wishChildContactId { get; set; }
 		public Account wishChildAccount { get; set; }
 		public Contact wishChild { get; set; }
 		public List<Contact> familyContacts { get; set; }
+		public Map<Id, Contact> medicalContacts { get; set; }
 		public List<npe4__Relationship__c> familyRelationships { get; set; }
 		public List<npe4__Relationship__c> medicalRelationships { get; set; }
 		public List<npe5__Affiliation__c> treatingHospitalAffiliations { get; set; }

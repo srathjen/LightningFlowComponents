@@ -19,7 +19,7 @@ public without sharing class SendDiagnosisVerficationLC_AC {
     */
     @AuraEnabled
     public static Lead getLeadInformation(Id leadId) {
-        Lead data = [
+        return [
                 SELECT Id, Has_this_child_ever_received_prior_wish__c, Contact_Dup_Check__c,
                         Using_Paper_Process_For_DV__c, Status,Dup_Check__c, Sub_Status__c, Part_A_Sent__c,
                         HiddenMedicalProfessionalEmail__c, Pending_Diagnosis_Date__c, PD_ICD_Code__c,
@@ -36,7 +36,6 @@ public without sharing class SendDiagnosisVerficationLC_AC {
                 WHERE Id = :leadId
                 AND RecordTypeId = :Constant_AC.LEAD_RT_WISH_CHILD
         ];
-        return data;
     }
 
     /*

@@ -80,19 +80,6 @@ public class LeadDuplicate_ACTest {
 		lead.Additional_Parent_Postal_Code__c = '35004';
 		lead.Additional_Parent_City__c = 'Test st';
 		lead.Additional_Parent_State__c = 'Alabama';
-		lead.Medical_Professional_First_Name__c = 'SteveJune';
-		lead.Medical_Professional_Last_Name__c = 'Waughone';
-		lead.Medical_Professional_Phone__c = '9600467578';
-		lead.Medical_Professional_Email__c = 'testmawa2d@gmail.com';
-		lead.Hospital_Treatment_Facility__c = 'Steve Smith AC';
-		lead.Treating_Medical_Professional_First_Name__c = 'SteveJune';
-		lead.Treating_Medical_Professional_Last_Name__c = 'Waughone';
-		lead.Treating_Medical_Professional_Phone__c = '9600467578';
-		lead.Treating_Medical_Professional_Email__c = 'testmawa2d@gmail.com';
-		lead.Hospital_Treatment_Facility_Treating__c = 'Steve Smith AC';
-		lead.Best_Contact_for_Physician_First_Name__c = 'SteveJune';
-		lead.Best_Contact_for_Physician_Last_Name__c = 'Waughone';
-		lead.Best_contact_for_Physician_Email__c = 'testmawa2d@gmail.com';
 		lead.is_Family_Aware_of_Referral__c = 'Yes';
 		lead.Medical_Questions__c = 'Test Diagnosis';
 		lead.Lung_Disease__c = 'Test1;Test2';
@@ -153,11 +140,6 @@ public class LeadDuplicate_ACTest {
 				FROM Lead
 				WHERE Name = 'Jack Smith'
 		];
-		List<Contact> contacts = [
-				SELECT Id
-				FROM Contact
-				WHERE Name = 'Jack Smith'
-		];
 		ApexPages.currentPage().getParameters().put('wishFamily', 'True');
 		ApexPages.currentPage().getParameters().put('Id', leads[0].Id);
 		List<Lead> currLead = new List<Lead>();
@@ -169,7 +151,6 @@ public class LeadDuplicate_ACTest {
 		controller.nextStep();
 		controller.ContinuePartAForm();
 		controller.hideTreatingSection = false;
-		controller.treatingContactId = contacts[0].Id;
 		controller.ContinuePartAForm();
 		controller.hideTreatingSection = true;
 		controller.ContinuePartAForm();

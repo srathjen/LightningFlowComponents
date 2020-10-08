@@ -76,14 +76,8 @@ public class DocusignStatusTrigger_AT_Test {
         referredLead.Referrer_Phone__c = '0600467559';
         referredLead.Referrer_City__c = 'Phoenix';
         referredLead.Referrer_Zip__c = '85264';
-        referredLead.Hospital_Treatment_Facility__c = 'Phoenix Medical Center';
-        referredLead.Hospital_Treatment_Facility_Treating__c = 'Phoenix Medical Center';
         referredLead.PD_Condition_Description__c = 'Malignant Melanoma';
         referredLead.Diagnosis_Given_By_Referrer__c = 'Malignant Melanoma';
-        referredLead.Treating_Medical_Professional_First_Name__c = 'John';
-        referredLead.Treating_Medical_Professional_Last_Name__c = 'Doe';
-        referredLead.Treating_Medical_Professional_Phone__c = '9600467578';
-        referredLead.Treating_Medical_Professional_Email__c = 'medical.prof.test@gmail.com';
         referredLead.I_am_Recognized_To_Practice_As_a__c = 'Physician';
         referredLead.Status = Constant_AC.LEAD_STATUS_REFERRED;
         referredLead.RFI_Form_Info_Hidden__c = Constant_AC.LEAD_RFI_FORM_INFO_QUALIFIED;

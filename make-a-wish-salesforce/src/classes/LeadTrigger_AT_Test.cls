@@ -118,9 +118,6 @@ public class LeadTrigger_AT_Test {
 		lead.Status = 'Referred';
 		lead.Sub_Status__c = 'Pending Part A';
 		lead.DOB__c = Date.today().addYears(-2);
-		lead.Hospital_Treatment_Facility_Treating__c = 'Malignant Neoplasm';
-		lead.Treating_Medical_Professional_First_Name__c = 'Treaing 1';
-		lead.Treating_Medical_Professional_Last_Name__c = 'Treaing 1';
 		lead.Gender__c = 'Male';
 		lead.Street = '123 St';
 		lead.City = 'Phoenix';
@@ -147,9 +144,6 @@ public class LeadTrigger_AT_Test {
 
 		lead.Status = Constant_AC.LEAD_STATUS_QUALIFIED;
 		lead.DOB__c = Date.today().addYears(-2);
-		lead.Hospital_Treatment_Facility_Treating__c = 'Malignant Neoplasm';
-		lead.Treating_Medical_Professional_First_Name__c = 'Treaing 1';
-		lead.Treating_Medical_Professional_Last_Name__c = 'Treaing 1';
 		lead.Gender__c = 'Male';
 		lead.Street = '123 St';
 		lead.City = 'Phoenix';
@@ -162,13 +156,8 @@ public class LeadTrigger_AT_Test {
 		lead.Sub_Status__c = 'Pending Diagnosis Verification';
 		lead.Hidden_Chapter_Change_Confirmation__c = account.Id;
 		lead.ChapterName__c = account.Id;
-		lead.Treating_Medical_Professional_Email__c = 'testupdate@email.com';
 		lead.Hidden_DV_form_Medical_professional_Type__c = Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL;
-		lead.Best_contact_for_Physician_Email__c = 'testupdate@email.com';
-		lead.Alternate1MedicalProfessionalEmail__c = 'testupdate@email.com';
-		lead.Alternate2MedProfessionalEmail__c = 'testupdate@email.com';
 		lead.Dup_Check__c = '';
-
 		update lead;
 	}
 
@@ -188,9 +177,6 @@ public class LeadTrigger_AT_Test {
 
 		lead.Status = Constant_AC.LEAD_STATUS_ELIGIBILITY_REVIEW;
 		lead.DOB__c = Date.today().addYears(-2);
-		lead.Hospital_Treatment_Facility_Treating__c = 'Malignant Neoplasm';
-		lead.Treating_Medical_Professional_First_Name__c = 'Treaing 1';
-		lead.Treating_Medical_Professional_Last_Name__c = 'Treaing 1';
 		lead.Gender__c = 'Male';
 		lead.Street = '123 St';
 		lead.City = 'Phoenix';
@@ -203,13 +189,8 @@ public class LeadTrigger_AT_Test {
 		lead.Sub_Status__c = 'Pending Diagnosis Verification';
 		lead.Hidden_Chapter_Change_Confirmation__c = account.Id;
 		lead.ChapterName__c = account.Id;
-		lead.Treating_Medical_Professional_Email__c = 'testupdate@email.com';
 		lead.Hidden_DV_form_Medical_professional_Type__c = Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL;
-		lead.Best_contact_for_Physician_Email__c = 'testupdate@email.com';
-		lead.Alternate1MedicalProfessionalEmail__c = 'testupdate@email.com';
-		lead.Alternate2MedProfessionalEmail__c = 'testupdate@email.com';
 		lead.Dup_Check__c = '';
-
 		update lead;
 	}
 

@@ -70,19 +70,6 @@ public class LeadServiceTest {
 		lead.PD_Condition_Description__c = 'Test Diagnosis';
 		lead.Parent_First_Name__c = 'MAWAFirstJune';
 		lead.Parent_Last_Name__c = 'MAWALastJune';
-		lead.Medical_Professional_First_Name__c = 'Bob';
-		lead.Medical_Professional_Last_Name__c = 'Medical Professional';
-		lead.Medical_Professional_Phone__c = '9600467578';
-		lead.Medical_Professional_Email__c = 'treatingMedicalProfessional@email.com';
-		lead.Hospital_Treatment_Facility__c = 'Steve Smith AC';
-		lead.Treating_Medical_Professional_First_Name__c = 'Bob';
-		lead.Treating_Medical_Professional_Last_Name__c = 'Treating Medical Professional';
-		lead.Treating_Medical_Professional_Phone__c = '9600467578';
-		lead.Treating_Medical_Professional_Email__c = 'treatingMedicalProfessional@email.com';
-		lead.Hospital_Treatment_Facility_Treating__c = 'Steve Smith AC';
-		lead.Best_Contact_for_Physician_First_Name__c = 'Bob';
-		lead.Best_Contact_for_Physician_Last_Name__c = 'Best Contact';
-		lead.Best_contact_for_Physician_Email__c = 'bestContact@email.com';
 		lead.is_Family_Aware_of_Referral__c = 'Yes';
 		lead.Medical_Questions__c = 'Test Diagnosis';
 		lead.Lung_Disease__c = 'Test1;Test2';
@@ -496,11 +483,7 @@ public class LeadServiceTest {
 	public static void shouldFindDuplicateContacts() {
 		List<Lead> leads = [
 				SELECT Id, FirstName, LastName, DOB__c, PostalCode, City, State, Phone, Email, ChapterName__c, Street,
-						Medical_Professional_First_Name__c, Medical_Professional_Last_Name__c, Medical_Professional_Phone__c,
-						Medical_Professional_Email__c, Treating_Medical_Professional_First_Name__c,
-						Treating_Medical_Professional_Last_Name__c, Treating_Medical_Professional_Phone__c,
-						Treating_Medical_Professional_Email__c, Parent_First_Name__c, Parent_Last_Name__c,
-						Best_Contact_for_Physician_First_Name__c ,Best_Contact_for_Physician_Last_Name__c ,Best_contact_for_Physician_Email__c
+						Parent_First_Name__c, Parent_Last_Name__c
 				FROM Lead
 		];
 		Account account = [

@@ -31,7 +31,6 @@ public class EmailServiceTest {
 		lead.PD_ICD_Code__c = icdCode.Id;
 		lead.Company = 'MAW';
 		lead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
-		lead.Treating_Medical_Professional_Email__c = 'TestMed@test.org';
 		insert lead;
 
 		trac_TriggerHandlerBase.blockTrigger = false;
