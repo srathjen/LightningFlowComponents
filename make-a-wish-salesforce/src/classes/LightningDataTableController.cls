@@ -190,6 +190,17 @@ public with sharing class LightningDataTableController {
 	}
 
 	/**
+	 * Hold metadata to support UI
+	 * @return Metadata Wrapper
+	 */
+	@AuraEnabled
+	public static MetadataWrapper getMetadata() {
+		MetadataWrapper metadataWrapper = new MetadataWrapper();
+		metadataWrapper.medicalProfessionalId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+		return metadataWrapper;
+	}
+
+	/**
 	 * Update Docusign, building Docusign external request call
 	 * @param action
 	 * @param resendToEmail
@@ -391,6 +402,7 @@ public with sharing class LightningDataTableController {
 	 */
 	@AuraEnabled
 	public static Wish_Required_Signature_File__c getWishFilePath(Id wrsId) {
+		system.debug('wrsId-->' + wrsId);
 		try {
 			if (wrsId != null) {
 				Wish_Required_Signature_File__c objFile = new Wish_Required_Signature_File__c();
@@ -452,5 +464,11 @@ public with sharing class LightningDataTableController {
 			lstDataTableColumns = new List<DataTableColumns>();
 			lstDataTableData = new List<sObject>();
 		}
+	}
+
+	// Wrapper class for holding metadata
+	public class MetadataWrapper {
+		@AuraEnabled
+		public String medicalProfessionalId { get; set; }
 	}
 }

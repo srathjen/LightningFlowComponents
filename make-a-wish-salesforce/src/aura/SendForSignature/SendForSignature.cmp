@@ -1,31 +1,32 @@
 <aura:component controller="LightningDataTableController">
-    
+
     <!-- attributes -->
     <aura:attribute name="showESendSignModal" type="Boolean" default="false"/>
-    <aura:attribute name="wishReqSignRecord" type="Wish_Required_Signature__c" />
-    <aura:attribute name="wishReqSignEmail" type="String" />
+    <aura:attribute name="wishReqSignRecord" type="Wish_Required_Signature__c"/>
+    <aura:attribute name="wishReqSignEmail" type="String"/>
     <aura:attribute name="WRSId" type="String"/>
     <aura:attribute name="errors" type="String"/>
     <aura:attribute name="wishForm" type="Wish_Signature_Forms__c"/>
     <aura:attribute name="iframeUrl" type="string" default="" access="private"/>
     <aura:attribute name="caseId" type="Id"/>
-    <aura:attribute name="emailId" type="String" />
-    <aura:attribute name="voidReason" type="String" />
-    <aura:attribute name="selectedLookUpRecord" type="Object" default="" />
+    <aura:attribute name="emailId" type="String"/>
+    <aura:attribute name="voidReason" type="String"/>
+    <aura:attribute name="selectedLookUpRecord" type="Object" default=""/>
     <aura:attribute name="typeOfSignature" type="String"/>
-    <aura:attribute name="rowStatus" type="String" />
-    <aura:attribute name="statusList" type="List" default="['Sent','Delivered','Delivery Failed','Declined']" />
-    <aura:attribute name="isValidStatus" type="Boolean" />
-    <aura:attribute name="otherEmails" type="Map" />
-    <aura:attribute name="selectedEmail" type="String" />
-    <aura:attribute name="MPRecordTypeId" type="String" />
-    
+    <aura:attribute name="rowStatus" type="String"/>
+    <aura:attribute name="statusList" type="List" default="['Sent','Delivered','Delivery Failed','Declined']"/>
+    <aura:attribute name="isValidStatus" type="Boolean"/>
+    <aura:attribute name="otherEmails" type="Map"/>
+    <aura:attribute name="selectedEmail" type="String"/>
+    <aura:attribute name="MPRecordTypeId" type="String"/>
+    <aura:attribute name="medicalProfessionalRtId" type="String"/>
+
     <!-- handlers-->
-    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <aura:registerEvent name="refreshEvent" type="c:refreshDataTable"/>
-    
+
     <!-- Body -->
-    <c:sldsModal aura:id="SendESignModal"  closeModal="true" closeAction="{!c.handleSendESignCancel}">
+    <c:sldsModal aura:id="SendESignModal" closeModal="true" closeAction="{!c.handleSendESignCancel}">
         <aura:set attribute="header">
             Send For E-Signature
         </aura:set>
@@ -33,88 +34,105 @@
             <lightning:accordion aura:id="accordion" activeSectionName="resend">
                 <!--Send Envelope -->
                 <aura:if isTrue="{!not(v.rowStatus eq 'Completed')}">
-                <lightning:accordionSection name="Send" label="Send For E-Signature">
-                     <lightning:card class="slds-box">
-                    <aura:if isTrue="{!not(empty(v.WRSId))}">
-                        <div class="slds-p-bottom_large slds-p-left_large slds-relative" style="width:500px">
-                            <div class="slds-text-font_monospace">
-                                Instructions: <br/>
-                                {!$Label.c.SendForESignatureInstructions}
-                                <br/>
-                            </div>
-                            <br/>
-                            <lightning:recordEditForm aura:id="recordViewForm"
-                                                      recordId="{!v.wishReqSignRecord.Id}"
-                                                      objectApiName="Wish_Required_Signature__c"
-                                                      onload="{!c.handleOnload}" >
-                                <lightning:messages />
-                                <lightning:inputField aura:id="sendViaEmail" fieldName="Sent_to_Email_Address__c" />
-                                <lightning:inputField fieldName="Wish_Affiliation__r.Contact__r.npe01__WorkEmail__c" class="slds-hidden"/>
-                                <lightning:inputField fieldName="Wish_Affiliation__r.Contact__r.npe01__AlternateEmail__c" class="slds-hidden"/>
-                                <lightning:inputField fieldName="Wish_Affiliation__r.Contact__r.Alternate_Email_2__c" class="slds-hidden"/>
-                                <lightning:inputField fieldName="Wish_Affiliation__r.Contact__r.RecordTypeId" class="slds-hidden"/>
-                            </lightning:recordEditForm> 
-                            
-                            <aura:if isTrue="{!(v.MPRecordTypeId == $Label.c.MedicalProfessionalRecordTypeId)}">
-                                <aura:if isTrue="{!not(empty(v.otherEmails))}">
-                                    <b><lightning:input aura:id="changeEmail" type="checkbox" name="chkbox" 
-                                                        label="Or select another email address:" onchange="{!c.enableDisableRadioButtons}" /></b>  
-                                    <lightning:radioGroup aura:id="otherEmails" 
-                                                          name="otherEmails"
-                                                          options="{! v.otherEmails }"
-                                                          value="{! v.selectedEmail }"
-                                                          type="radio"
-                                                          disabled="true"/>
+                    <lightning:accordionSection name="Send" label="Send For E-Signature">
+                        <lightning:card class="slds-box">
+                            <aura:if isTrue="{!not(empty(v.WRSId))}">
+                                <div class="slds-p-bottom_large slds-p-left_large slds-relative" style="width:500px">
+                                    <div class="slds-text-font_monospace">
+                                        Instructions: <br/>
+                                        {!$Label.c.SendForESignatureInstructions}
+                                        <br/>
+                                    </div>
+                                    <br/>
+                                    <lightning:recordEditForm aura:id="recordViewForm"
+                                                              recordId="{!v.wishReqSignRecord.Id}"
+                                                              objectApiName="Wish_Required_Signature__c"
+                                                              onload="{!c.handleOnload}">
+                                        <lightning:messages/>
+                                        <lightning:inputField aura:id="sendViaEmail"
+                                                              fieldName="Sent_to_Email_Address__c"/>
+                                        <lightning:inputField
+                                                fieldName="Wish_Affiliation__r.Contact__r.npe01__WorkEmail__c"
+                                                class="slds-hidden"/>
+                                        <lightning:inputField
+                                                fieldName="Wish_Affiliation__r.Contact__r.npe01__AlternateEmail__c"
+                                                class="slds-hidden"/>
+                                        <lightning:inputField
+                                                fieldName="Wish_Affiliation__r.Contact__r.Alternate_Email_2__c"
+                                                class="slds-hidden"/>
+                                        <lightning:inputField fieldName="Wish_Affiliation__r.Contact__r.RecordTypeId"
+                                                              class="slds-hidden"/>
+                                    </lightning:recordEditForm>
+
+                                    <aura:if isTrue="{!(v.MPRecordTypeId == v.medicalProfessionalRtId)}">
+                                        <aura:if isTrue="{!not(empty(v.otherEmails))}">
+                                            <b>
+                                                <lightning:input aura:id="changeEmail" type="checkbox" name="chkbox"
+                                                                 label="Or select another email address:"
+                                                                 onchange="{!c.enableDisableRadioButtons}"/>
+                                            </b>
+                                            <lightning:radioGroup aura:id="otherEmails"
+                                                                  name="otherEmails"
+                                                                  options="{! v.otherEmails }"
+                                                                  value="{! v.selectedEmail }"
+                                                                  type="radio"
+                                                                  disabled="true"/>
+                                        </aura:if>
+                                    </aura:if>
+                                    <c:FileUpload parentId="{!v.WRSId}" showButton="true" aura:id="fileUpload"
+                                                  buttonLabel="Add optional attachment to e-signature document"/>
+                                </div>
+                                <aura:if isTrue="{!not(empty(v.iframeUrl))}">
+                                    <div style="display:block;" class="slds-is-relative">
+                                        <iframe aura:id="iframe" src="{!v.iframeUrl}" scrolling="yes"
+                                                style="width:100%;height: 126px;border:0"/>
+                                    </div>
                                 </aura:if>
                             </aura:if>
-                            <c:FileUpload parentId="{!v.WRSId}" showButton="true" aura:id="fileUpload" buttonLabel="Add optional attachment to e-signature document"/>
-                        </div>
-                        <aura:if isTrue="{!not(empty(v.iframeUrl))}">
-                            <div style="display:block;" class="slds-is-relative">
-                                <iframe aura:id="iframe" src="{!v.iframeUrl}" scrolling="yes" style="width:100%;height: 126px;border:0" />
+                            <div class="slds-align_absolute-center">
+                                <lightning:button label="Generate Document" variant="brand" title="Send action"
+                                                  onclick="{! c.handleSendESign }"/>
+                                <lightning:button label="Cancel" title="Cancle action"
+                                                  onclick="{! c.handleSendESignCancel }"/>
                             </div>
-                        </aura:if>
-                    </aura:if>
-                    <div class="slds-align_absolute-center">
-                    <lightning:button label="Generate Document" variant="brand" title="Send action" onclick="{! c.handleSendESign }" />
-                    <lightning:button label="Cancel" title="Cancle action" onclick="{! c.handleSendESignCancel }" />
-                        </div>
-                    </lightning:card>
-                </lightning:accordionSection>
+                        </lightning:card>
+                    </lightning:accordionSection>
                 </aura:if>
-				
+
                 <!--Resend Envelope -->
                 <aura:if isTrue="{!v.isValidStatus}">
-                <lightning:accordionSection name="resend" label="Resend Envelope">
-                    <lightning:card class="slds-box">
-                        <aura:set attribute="title" >
+                    <lightning:accordionSection name="resend" label="Resend Envelope">
+                        <lightning:card class="slds-box">
+                            <aura:set attribute="title">
                             <span class="slds-align_absolute-center">
                                 <lightning:icon iconName="action:share" size="x-small"/>
                                 <span class="slds-m-left_small">Are you sure you want to Resend this envelope for E-Signature?</span>
                             </span>
-                        </aura:set>
+                            </aura:set>
 
                             <div class="slds-p-top_small slds-align_absolute-center">
-                                <lightning:button label="Resend" variant="brand" title="Resend action" onclick="{! c.handleResendEnv }" />
-                                <span  class="slds-p-right_medium" ></span>
-                                <lightning:button label="Cancel" title="Cancle action" onclick="{! c.handleSendESignCancel }" />
+                                <lightning:button label="Resend" variant="brand" title="Resend action"
+                                                  onclick="{! c.handleResendEnv }"/>
+                                <span class="slds-p-right_medium"></span>
+                                <lightning:button label="Cancel" title="Cancle action"
+                                                  onclick="{! c.handleSendESignCancel }"/>
                             </div>
 
-                    </lightning:card>
-                </lightning:accordionSection>
-                    
-                <!--Reassign Envelope -->
-                <lightning:accordionSection name="reassign" label="Reassign Envelope">
-                    <lightning:card class="slds-box">
-                        <aura:set attribute="title" >
+                        </lightning:card>
+                    </lightning:accordionSection>
+
+                    <!--Reassign Envelope -->
+                    <lightning:accordionSection name="reassign" label="Reassign Envelope">
+                        <lightning:card class="slds-box">
+                            <aura:set attribute="title">
                             <span class="slds-align_absolute-center">
                                 <lightning:icon iconName="action:user" size="x-small"/>
                                 <span class="slds-m-left_small">Are you sure you want to Reassign this envelope for E-Signature?</span>
                             </span>
-                        </aura:set>
-                        <div class="slds-p-top_small slds-p-around_medium">
+                            </aura:set>
+                            <div class="slds-p-top_small slds-p-around_medium">
                             <span class="slds-size_3-of-4">
-                                <c:customLookup aura:id="FindForms" objectAPIName="Contact" 
+                                <c:customLookup aura:id="FindForms" objectAPIName="Contact"
                                                 disabledAttr="false"
                                                 IconName="doctype:gform"
                                                 additionalParams=""
@@ -124,49 +142,55 @@
                                                 labelClass="slds-form-element__label slds-m-bottom_x-small"
                                                 label="Find Signers "
                                                 selectedRecordId="{!v.caseId}"
-                                                formType = "{!v.typeOfSignature}"/>
+                                                formType="{!v.typeOfSignature}"/>
                             </span>
-                            <aura:if isTrue="{!not(empty(v.selectedLookUpRecord))}">
-                                <br/>
-                            <span class="slds-size_3-of-4">
-                                <lightning:input aura:id = "reassignEmail"  required="true" type="email" value="{!v.selectedLookUpRecord.Email}" label=" Send To Email Address:" default="" />
+                                <aura:if isTrue="{!not(empty(v.selectedLookUpRecord))}">
+                                    <br/>
+                                    <span class="slds-size_3-of-4">
+                                <lightning:input aura:id="reassignEmail" required="true" type="email"
+                                                 value="{!v.selectedLookUpRecord.Email}" label=" Send To Email Address:"
+                                                 default=""/>
                             </span>
-                            </aura:if>
-                        </div>
-                        <div class="slds-align_absolute-center">
-                            <lightning:button label="Reassign" variant="brand" title="Reassign action" onclick="{! c.handleResendEnv }" />
-                            <span  class="slds-p-right_medium" ></span>
-                            <lightning:button label="Cancel" title="Cancle action" onclick="{! c.handleSendESignCancel }" />
-                        </div>
-                    </lightning:card>
-                </lightning:accordionSection>
+                                </aura:if>
+                            </div>
+                            <div class="slds-align_absolute-center">
+                                <lightning:button label="Reassign" variant="brand" title="Reassign action"
+                                                  onclick="{! c.handleResendEnv }"/>
+                                <span class="slds-p-right_medium"></span>
+                                <lightning:button label="Cancel" title="Cancle action"
+                                                  onclick="{! c.handleSendESignCancel }"/>
+                            </div>
+                        </lightning:card>
+                    </lightning:accordionSection>
                 </aura:if>
-                
+
                 <!--Void Envelope -->
                 <aura:if isTrue="{!or(v.isValidStatus ,v.rowStatus eq 'Completed')}">
-                <lightning:accordionSection name="voided" label="Void Envelope">
-                    <lightning:card class="slds-box">
-                        <aura:set attribute="title" >
+                    <lightning:accordionSection name="voided" label="Void Envelope">
+                        <lightning:card class="slds-box">
+                            <aura:set attribute="title">
                             <span class="slds-align_absolute-center">
                                 <lightning:icon iconName="action:remove" size="x-small"/>
                                 <span class="slds-m-left_small"> Are you sure you want to Void this envelope for E-Signature?</span>
                             </span>
-                        </aura:set>
-                        <div class="slds-p-top_small slds-p-around_medium">
+                            </aura:set>
+                            <div class="slds-p-top_small slds-p-around_medium">
                             <span class="slds-size_3-of-4">
-                                <lightning:textarea label="Void Reason" value="{!v.voidReason}" placeholder="Reason for voiding if any.."/>
+                                <lightning:textarea label="Void Reason" value="{!v.voidReason}"
+                                                    placeholder="Reason for voiding if any.."/>
                             </span>
-                        </div>
-                          <div class="slds-align_absolute-center">
-                         <lightning:button label="Void" variant="brand" title="Void action" onclick="{! c.handleResendEnv }" />
-                            <span  class="slds-p-right_medium" ></span>
-                            <lightning:button label="Cancel" title="Cancle action" onclick="{! c.handleSendESignCancel }" />
-                        </div>
-                    </lightning:card>
-                </lightning:accordionSection>
+                            </div>
+                            <div class="slds-align_absolute-center">
+                                <lightning:button label="Void" variant="brand" title="Void action"
+                                                  onclick="{! c.handleResendEnv }"/>
+                                <span class="slds-p-right_medium"></span>
+                                <lightning:button label="Cancel" title="Cancle action"
+                                                  onclick="{! c.handleSendESignCancel }"/>
+                            </div>
+                        </lightning:card>
+                    </lightning:accordionSection>
                 </aura:if>
             </lightning:accordion>
         </aura:set>
     </c:sldsModal>
-    
 </aura:component>
