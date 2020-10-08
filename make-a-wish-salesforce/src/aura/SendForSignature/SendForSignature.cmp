@@ -15,7 +15,10 @@
     <aura:attribute name="typeOfSignature" type="String"/>
     <aura:attribute name="rowStatus" type="String" />
     <aura:attribute name="statusList" type="List" default="['Sent','Delivered','Delivery Failed','Declined']" />
-     <aura:attribute name="isValidStatus" type="Boolean" />
+    <aura:attribute name="isValidStatus" type="Boolean" />
+    <aura:attribute name="otherEmails" type="Map" />
+    <aura:attribute name="selectedEmail" type="String" />
+    <aura:attribute name="MPRecordTypeId" type="String" />
     
     <!-- handlers-->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
@@ -46,7 +49,24 @@
                                                       onload="{!c.handleOnload}" >
                                 <lightning:messages />
                                 <lightning:inputField aura:id="sendViaEmail" fieldName="Sent_to_Email_Address__c" />
+                                <lightning:inputField fieldName="Wish_Affiliation__r.Contact__r.npe01__WorkEmail__c" class="slds-hidden"/>
+                                <lightning:inputField fieldName="Wish_Affiliation__r.Contact__r.npe01__AlternateEmail__c" class="slds-hidden"/>
+                                <lightning:inputField fieldName="Wish_Affiliation__r.Contact__r.Alternate_Email_2__c" class="slds-hidden"/>
+                                <lightning:inputField fieldName="Wish_Affiliation__r.Contact__r.RecordTypeId" class="slds-hidden"/>
                             </lightning:recordEditForm> 
+                            
+                            <aura:if isTrue="{!(v.MPRecordTypeId == $Label.c.MedicalProfessionalRecordTypeId)}">
+                                <aura:if isTrue="{!not(empty(v.otherEmails))}">
+                                    <b><lightning:input aura:id="changeEmail" type="checkbox" name="chkbox" 
+                                                        label="Or select another email address:" onchange="{!c.enableDisableRadioButtons}" /></b>  
+                                    <lightning:radioGroup aura:id="otherEmails" 
+                                                          name="otherEmails"
+                                                          options="{! v.otherEmails }"
+                                                          value="{! v.selectedEmail }"
+                                                          type="radio"
+                                                          disabled="true"/>
+                                </aura:if>
+                            </aura:if>
                             <c:FileUpload parentId="{!v.WRSId}" showButton="true" aura:id="fileUpload" buttonLabel="Add optional attachment to e-signature document"/>
                         </div>
                         <aura:if isTrue="{!not(empty(v.iframeUrl))}">
