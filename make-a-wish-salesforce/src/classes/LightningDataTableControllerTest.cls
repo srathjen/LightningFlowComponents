@@ -351,4 +351,13 @@ public class LightningDataTableControllerTest {
 		}
 		Test.stopTest();
 	}
+
+	@IsTest
+	public static void testGetMetadata() {
+		Test.startTest();
+		LightningDataTableController.MetadataWrapper metadataWrapper = LightningDataTableController.getMetadata();
+		Test.stopTest();
+		String metadataMedRtId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+		System.assertEquals(metadataMedRtId, metadataWrapper.medicalProfessionalId);
+	}
 }
