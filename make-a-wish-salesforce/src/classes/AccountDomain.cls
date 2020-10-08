@@ -31,6 +31,9 @@ public class AccountDomain extends trac_TriggerHandlerBase {
             } else if(newAccount.RecordTypeId == HOUSEHOLD_RECORD_TYPE_ID) {
                 newAccount.Migrated_Record__c = true;
             }
+            if(newAccount.Chapter_Name__c != null) {
+                newAccount.Hidden_Chapter__c = newAccount.Chapter_Name__c;
+            }
         }
         //Populate chapter lookup and chapter email for In Kind Donors account
         if(!inKindAccountList.isEmpty()) {
@@ -70,7 +73,7 @@ public class AccountDomain extends trac_TriggerHandlerBase {
         }
         //Set primary contact for account
         if(!houseHoldAccountMap.isEmpty()) {
-        	AccountService.setPrimaryContactForAccount(houseHoldAccountMap);
+            AccountService.setPrimaryContactForAccount(houseHoldAccountMap);
         }
         AccountService.populateChapterOnHospitalAccount(newAccountsList, oldAccountsMap);
         AccountService.updateAccountOwnerToChapter(newAccountsList, oldAccountsMap);
@@ -80,70 +83,13 @@ public class AccountDomain extends trac_TriggerHandlerBase {
     * After insert of account
     */
     public override void handleAfterInsert() {
-        Set<Id> inKindChapterAccountIdSet = new Set<Id>();
-        Set<Id> chapterAccountIdSet = new Set<Id>();
-        List<Account> inKindAccountsList = new List<Account>();
-        Set<Id> accountIdSet = (new Map<Id, Account>(newAccountsList)).keySet();
-        Map<Id,Id> wishCoordinatorMap = new Map<Id,Id>();
-        Map<Id, String> chapterNameMap = new Map<Id, String>();
-        Map<String, Id> publicGroupMap = new Map<String,Id>();
-        List<Account> accountsToShareList = new List<Account>();
-        List<String> chapterNameList = new List<String>();
-        
-        for(Account newAccount : newAccountsList) {
-            if(newAccount.RecordTypeId == IN_KIND_RECORD_TYPE_ID) {
-                inKindAccountsList.add(newAccount);
-                if(newAccount.Chapter_Name__c != null) {
-                    inKindChapterAccountIdSet.add(newAccount.Chapter_Name__c);
-                }
-            } else if(newAccount.RecordTypeId == CHAPTER_RECORD_TYPE_ID) {
-				chapterAccountIdSet.add(newAccount.Id);
-			} else {
-				chapterAccountIdSet.add(newAccount.Chapter_Name__c);
-			}
-        }
-        for(Account accountRecord : [SELECT Id, Name, Wish_Co_ordinator__c, OwnerId, Owner.UserRole.Name, Owner.ContactId, 
-                                    Volunteer_Manager__c, RecordTypeId, Chapter_Name__c, Chapter_Name__r.Name
-                                    FROM Account
-                                    WHERE (Id IN :inKindChapterAccountIdSet 
-                                    OR (Chapter_Name__c IN :chapterAccountIdSet AND Id IN :accountIdSet))]) {
-                if(accountRecord.RecordTypeId == CHAPTER_RECORD_TYPE_ID) {
-                    wishCoordinatorMap.put(accountRecord.Id, accountRecord.Wish_Co_ordinator__c);
-                    chapterNameMap.put(accountRecord.Id, accountRecord.Name.removeStart(RECORD_NAME_REMOVE_SUBSTRING_MAW));
-                } else if(accountRecord.Owner.userRole.Name == USER_ROLE_NAME_NATIONAL_STAFF 
-                          && accountRecord.Chapter_Name__r.Name != null) {
-                              accountsToShareList.add(accountRecord);
-                              chapterNameList.add(accountRecord.Chapter_Name__r.Name);
-                }
-        }
-        if(!chapterNameMap.isEmpty()) {
-            for(Group publicGroup : [SELECT Id, Name 
-                                	FROM Group 
-                                	WHERE Type = :GROUP_TYPE_REGULAR 
-                                	AND Name IN :chapterNameMap.values()]) {
-                publicGroupMap.put(publicGroup.Name, publicGroup.Id);
-            }
-        }
-        //Create approval process request for In Kind Donors account
-        if(!wishCoordinatorMap.isEmpty()) {
-            AccountService.submitAccountApprovalProcess(inKindAccountsList, wishCoordinatorMap);
-        }
-        //Share accounts to public groups based on chapter
-        if(!publicGroupMap.isEmpty() && !chapterNameMap.isEmpty()) {
-            AccountService.createAccountShareReadAccess(inKindAccountsList, chapterNameMap, publicGroupMap);
-        }
-        //Share accounts to users based on chapter and role
-        if(!accountsToShareList.isEmpty()) {
-            AccountService.createAccountShareEditAccess(accountsToShareList, chapterNameList);
-        }
-        AccountService.shareHospitalAccountToChapter(newAccountsList, null);
+        AccountService.shareAccountToChapter(newAccountsList, null);
     }
     
     /**
     * After update of account
     */
     public override void handleAfterUpdate() {
-        Set<Id> chapterIdsSet = new Set<Id>();
         Set<Id> houseHoldAccountIdsSet = new Set<Id>();
         Map<Id, String> chapterEmailMap = new Map<Id, String>();
         List<Account> accountList = new List<Account>();
@@ -151,43 +97,38 @@ public class AccountDomain extends trac_TriggerHandlerBase {
             Account oldAccount = oldAccountsMap.get(newAccount.Id);
             if(newAccount.RecordTypeId == IN_KIND_RECORD_TYPE_ID) {
                 if(newAccount.In_Kind_Approval_Status__c == IN_KIND_ACCOUNT_APPROVAL_STATUS_REJECTED 
-                    && oldAccount.In_Kind_Approval_Status__c != IN_KIND_ACCOUNT_APPROVAL_STATUS_REJECTED) {
-                    	chapterIdsSet.add(newAccount.Chapter_Name__c);
-                    	accountList.add(newAccount);
-                }
+                   && oldAccount.In_Kind_Approval_Status__c != IN_KIND_ACCOUNT_APPROVAL_STATUS_REJECTED) {
+                       accountList.add(newAccount);
+                   }
                 if((newAccount.Chapter_Name__c != oldAccount.Chapter_Name__c 
                     && newAccount.In_Kind_Approval_Status__c != IN_KIND_ACCOUNT_APPROVAL_STATUS_REJECTED)
-                    || newAccount.Chapter_Name__c == null &&  oldAccount.Chapter_Name__c != null) {
-                       	chapterIdsSet.add(oldAccount.Chapter_Name__c);
-                       	accountList.add(newAccount);
-                }
+                   || newAccount.Chapter_Name__c == null &&  oldAccount.Chapter_Name__c != null) {
+                       accountList.add(newAccount);
+                   }
             }
             if(newAccount.RecordTypeId == CHAPTER_RECORD_TYPE_ID 
-                && newAccount.DevStaffEmail__c != null 
-                && newAccount.DevStaffEmail__c != oldAccount.DevStaffEmail__c) {
+               && newAccount.DevStaffEmail__c != null 
+               && newAccount.DevStaffEmail__c != oldAccount.DevStaffEmail__c) {
                    chapterEmailMap.put(newAccount.Id, newAccount.DevStaffEmail__c);
-            }
+               }
             if(newAccount.RecordTypeId == HOUSEHOLD_RECORD_TYPE_ID 
-                && (newAccount.BillingStreet != oldAccount.BillingStreet 
-                || newAccount.BillingCity != oldAccount.BillingCity 
-                || newAccount.BillingState != oldAccount.BillingState
-                || newAccount.BillingCountry != oldAccount.BillingCountry 
-                || newAccount.BillingPostalCode != oldAccount.BillingPostalCode)) {
-                    houseHoldAccountIdsSet.add(newAccount.Id);
-            }
+               && (newAccount.BillingStreet != oldAccount.BillingStreet 
+                   || newAccount.BillingCity != oldAccount.BillingCity 
+                   || newAccount.BillingState != oldAccount.BillingState
+                   || newAccount.BillingCountry != oldAccount.BillingCountry 
+                   || newAccount.BillingPostalCode != oldAccount.BillingPostalCode)) {
+                       houseHoldAccountIdsSet.add(newAccount.Id);
+                   }
         }
         //Update dev staff email on case
         if(!chapterEmailMap.isEmpty()) {
             CaseService.updateGrantingCaseDevStaffEmail(chapterEmailMap);
         }
-        //Share chapter accounts to public groups
-        if(!chapterIdsSet.isEmpty()) {
-            AccountService.shareChapterAccountsToGroups(chapterIdsSet, accountList);
-        }
         //Update the wish family contact address
         if(!houseHoldAccountIdsSet.isEmpty()) {
             AccountService.updateRelatedContactAddressWithHousehold(houseHoldAccountIdsSet);
         }
-        AccountService.shareHospitalAccountToChapter(newAccountsList, oldAccountsMap);
+        AccountService.shareChapterAccountsToGroups(accountList);
+        AccountService.shareAccountToChapter(newAccountsList, oldAccountsMap);
     }
 }

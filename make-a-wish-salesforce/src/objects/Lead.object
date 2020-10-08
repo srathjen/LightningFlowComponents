@@ -17883,17 +17883,17 @@ RecordType.Name ="Wish Child"</errorConditionFormula>
         <active>true</active>
         <description>If an Intake Manager attempts to check the “Appeal” checkbox and the Lead status is not DNQ then UI displays an error message.</description>
         <errorConditionFormula>AND( 
-NOT(
-OR(
-ISPICKVAL(Status , 'DNQ')
-,
-AND(IsPickVal(Status, 'Eligibility Review'), 
- IsPickVal(PRIORVALUE(Status), 'DNQ') 
-)
-)
-),
+ OR(ISCHANGED(Status), ISCHANGED(Appeal__c)),
+  NOT(
+   OR(
+    ISPICKVAL(Status , 'DNQ'),
+    AND(IsPickVal(Status, 'Eligibility Review'), 
+    IsPickVal(PRIORVALUE(Status), 'DNQ') 
+   )
+  )
+ ),
 Appeal__c == true,
- $Profile.Name  == 'Intake Manager'
+$Profile.Name  == 'Intake Manager'
 )</errorConditionFormula>
         <errorMessage>The Appeal checkbox can only be checked when requesting an Appeal of the eligibility decision – Lead Status must equal DNQ.</errorMessage>
     </validationRules>
