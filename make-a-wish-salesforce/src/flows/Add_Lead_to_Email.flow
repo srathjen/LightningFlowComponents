@@ -72,6 +72,7 @@ LEFT(TRIM(SUBSTITUTE({!$Record.HtmlBody}, LEFT({!$Record.HtmlBody}, FIND(&quot;0
         </connector>
         <object>EmailMessage</object>
         <triggerType>RecordBeforeSave</triggerType>
+        <recordTriggerType>Create</recordTriggerType>
     </start>
     <status>Active</status>
 </Flow>
