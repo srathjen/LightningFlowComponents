@@ -15,9 +15,10 @@
                 &#9776;
             </button>
             <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar">
-                <ul class="active-user-main">
+                <ul class="active-user-main" style="width:auto;right: 12%;">
                     <li><a href="/VolunteerAssignmentOpportunities_VF">Join a Wish Team</a></li>
                     <li><a href="/MyAssignment_VF">My Assignments</a></li>
+                    <li><a href="/VolunteerActiveTraining_VF">Training</a></li>
                     <li><a href="/VolunteerActivities_VF">My Tasks</a></li>
                 </ul>
                 <ul class="active-user-subnav">
@@ -30,17 +31,17 @@
                     
     
     
-    			<!--Walkme Extension Script - PRODUCTION Snippet - START -->
-    
-                        <script type="text/javascript">
-                        (function() {var walkme = document.createElement('script');
-                                     walkme.type = 'text/javascript'; walkme.async = true;
-                                     walkme.src = 'https://cdn.walkme.com/users/12ce3d1ce46b47b1931d30135493da28/walkme_12ce3d1ce46b47b1931d30135493da28_https.js';
-                                     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(walkme, s);
-                                     window._walkmeConfig = {smartLoad:true}; })();
-                        </script>
-
-				<!--Walkme Extension Script - PRODUCTION Snippet - END -->
+                <!--Walkme Extension Script - 12-11-2018 SP - STARTS HERE -->
+ 
+                <script type="text/javascript">
+                (function() {var walkme = document.createElement('script');
+                             walkme.type = 'text/javascript'; walkme.async = true;
+                             walkme.src = 'https://cdn.walkme.com/users/12ce3d1ce46b47b1931d30135493da28/test/walkme_12ce3d1ce46b47b1931d30135493da28_https.js';
+                             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(walkme, s);
+                             window._walkmeConfig = {smartLoad:true}; })();
+                </script>
+ 
+                <!--Walkme Extension Script - 12-11-2018 SP - END -->
     
 </header>
 </apex:page>

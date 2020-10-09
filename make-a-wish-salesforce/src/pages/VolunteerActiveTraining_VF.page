@@ -44,7 +44,7 @@
             }, 2000);
         }
     </script>
-    <!-- Popup styling starts here -->
+    <!-- Popup styling start here -->
     <style type="text/css">
         .vfHelpText a {
             position: relative;
@@ -137,14 +137,6 @@
                     <h1 class="col-md-12">{!$Label.Volunteer_Portal_Page_Title_Training}</h1>
                 </div>
 
-                <nav>
-                    <ul class="step">
-                        <li>
-                            <a href="/VolunteerProfile_VF">{!$Label.Volunteer_Portal_Back_To_Profile}</a>
-                        </li>
-                    </ul>
-                </nav>
-
                 <apex:form id="frm1" styleClass="col-md-12">
                     <div class="messages">
                         <apex:pagemessages />
@@ -159,7 +151,7 @@
                             <p>{!$Label.Volunteer_Portal_Confirmation_Cancelled_Training}</p>
                         </apex:outputPanel>
                         <apex:outputPanel rendered="{!If(checkExistProgram == true, false,true)}">
-                            <p><strong>{!$Label.Volunteer_Portal_Table_Section_Training}</strong></p>
+                            <p><h3>{!$Label.Volunteer_Portal_Table_Section_Training}</h3></p>
                             <table id="dataTab1" class="table table-maw table-hover" width="100%">
                                 <thead class="thead-default">
                                 <tr>
@@ -221,9 +213,9 @@
                                 </tbody>
                             </table>
                         </apex:outputPanel>
-
+                        <br/>
                         <apex:outputPanel id="myPanel">
-                            <h2>{!$Label.Volunteer_Portal_Table_Section_Upcoming_Training}</h2>
+                            <h3>{!$Label.Volunteer_Portal_Table_Section_Upcoming_Training}</h3>
                             <table id="dataTab2" class="table table-maw table-hover" width="100%">
                                 <thead class="thead-default">
                                 <tr>
@@ -270,7 +262,67 @@
                             </table>
                         </apex:outputPanel>
                     </apex:pageBlock>
+                    <hr/>
                     <div class="row">
+                          <apex:pageBlock >
+                        <!-- --------------------------- Orientation and Training ---------------------------- -->
+                        <fieldset class="saved">
+                            <h3>{!$Label.Volunteer_Portal_Table_Section_Class_History}</h3>
+                            <strong>{!$Label.Volunteer_Portal_Table_Section_Orientation}</strong>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="row table-wrap">
+                                    <apex:pageblocktable value="{!orientationList}" styleClass="table table-maw thead-default"  var="a"
+                                                         id="dataTab1" rendered="{!orientationList.size>0}">
+                                        <apex:column headervalue="Name" value="{!a.OrientationName}"/>
+                                        <apex:column headervalue="Chapter Name" value="{!a.chapterName}"/>
+                                        <apex:column headervalue="Date">
+                                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                                <apex:param value="{!a.orientationDate}"/>
+                                            </apex:outputText>
+                                        </apex:column>
+                                        <apex:column headervalue="Start Time" value="{!a.startTime}"/>
+                                        <apex:column headervalue="End Time" value="{!a.endTime}"/>
+                                        <apex:column headervalue="Location" value="{!a.location}"/>
+                                        <apex:column headerValue="Record Type" value="{!a.recordTypeName}"/>
+                                        <apex:column headerValue="Status" value="{!a.attendance}"/>
+                                    </apex:pageblocktable>
+                                    <apex:outputText rendered="{!orientationList.size ==0}"><span class="text-muted">No Orientation Records Found</span>
+                                    </apex:outputText>
+                                </div>
+                            </div><br/><br/>
+                            <strong>{!$Label.Volunteer_Portal_Table_Section_Training1}</strong>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="row table-wrap">
+                                    <apex:pageblocktable value="{!trainingList}" styleClass="table table-maw thead-default" var="a"
+                                                         id="dataTab2" rendered="{!trainingList.size>0}">
+                                        <apex:column headervalue="Name" value="{!a.OrientationName}"/>
+                                        <apex:column headervalue="Chapter Name" value="{!a.chapterName}"/>
+                                        <apex:column headervalue="Date">
+                                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                                <apex:param value="{!a.orientationDate}"/>
+                                            </apex:outputText>
+                                        </apex:column>
+                                        <apex:column headervalue="Start Time" value="{!a.startTime}"/>
+                                        <apex:column headervalue="End Time" value="{!a.endTime}"/>
+                                        <apex:column headervalue="Location" value="{!a.location}"/>
+                                        <apex:column headerValue="Record Type" value="{!a.recordTypeName}"/>
+                                        <apex:column headerValue="Status" value="{!a.attendance}"/>
+                                        <apex:column headerValue="LINK">
+                                            <apex:commandLink action="{!viewLMS}"
+                                                              oncomplete="openLMS('{!ssoURL}','{!courseURL}');"
+                                                              rendered="{!(a.recordTypeName == 'Virtual - Self Paced')}">
+                                                Start Course
+                                                <apex:param name="lMSCourseId" value="{!a.courseId}"
+                                                            assignTo="{!lMSCourseId}"/>
+                                            </apex:commandLink>
+                                        </apex:column>
+                                    </apex:pageblocktable>
+                                    <apex:outputText rendered="{!trainingList.size ==0}"><span class="text-muted">No Training Records found</span>
+                                    </apex:outputText>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </apex:pageBlock>
                         <div class="col-md-12">
                             <h3>{!$Label.Volunteer_Portal_Additional_Information}</h3>
                             <apex:outputText value="{!orientationContent}" escape="false"/>
@@ -312,6 +364,8 @@
                                                 <apex:CommandButton value="No" action="{!No}"
                                                                     styleClass="col-sm-offset-3 col-md-offset-4 col-md-12 col-sm-6 col-md-4 btn-md"/>
                                             </div>
+                                      
+                      
                                         </div>
                                     </div>
                                 </div>
@@ -325,6 +379,15 @@
     <apex:include pageName="prospective_footer" id="pfooter"/>
     <script src="https://urldefense.proofpoint.com/v2/url?u=https-3A__cdn.datatables.net_1.10.12_js_jquery.dataTables.min.js&d=DwIG-g&c=YHcanBYpGrZxEbl-dEmkXYPwk0jOuY077yg_2uofQn0&r=6AYZIh8czRxv-eUaZEeyLZX3ZZrXZjvpB946bnqq32M&m=K0mlTkfF6VIJMXQvhdDWGiQYkaBzLF59h9EZZa3hiiY&s=0P9Tjf-bFKO_0NNcnlruBpgq-907F_MpZ58c6Vqk6VY&e= "></script>
     <script src="{!URLFOR($Resource.prospective_assets, ' web/js/stacktable.min.js ')}"></script>
+     <!-- chosen select -->
+    <script src="{!URLFOR($Resource.prospective_assets, 'web/js/chosen.jquery.min.js')}"></script>
+    <!-- masked input -->
+    <script src="{!URLFOR($Resource.prospective_assets,'web/js/jq.maskedinput.min.js')}"
+            type="text/javascript"></script>
+    <!-- validate forms -->
+    <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.validate.min.js')}"></script>
+    <!-- validate form (additional methods) -->
+    <script src="{!URLFOR($Resource.prospective_assets, 'web/js/additional-methods.min.js')}"></script>
 
     <script>
         $(document).ready(function () {

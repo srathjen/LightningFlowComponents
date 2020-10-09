@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?><CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
+        <fullName>Volunteer_Portal_Table_Section_Class_History</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Table Section - Class History</shortDescription>
+        <value>Class History</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Portal_Table_Section_Orientation</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Table Section - Orientation</shortDescription>
+        <value>Orientation Details</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Portal_Table_Section_Training</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Table Section - Training</shortDescription>
+        <value>Registered Training Details</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Portal_Table_Section_Training1</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Table Section - Training1</shortDescription>
+        <value>Training Details</value>
+    </labels>
+    <labels>
         <fullName>AWSDefaultFilePathPrefix</fullName>
         <categories>SDrive</categories>
         <language>en_US</language>
