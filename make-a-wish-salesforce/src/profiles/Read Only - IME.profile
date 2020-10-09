@@ -1638,6 +1638,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Case.Lead_Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Case.Ninety_Day_Letter_Sent__c</field>
         <readable>true</readable>
     </fieldPermissions>
