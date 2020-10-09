@@ -129,6 +129,7 @@
         </filters>
         <object>EmailMessage</object>
         <triggerType>RecordAfterSave</triggerType>
+        <recordTriggerType>Create</recordTriggerType>
     </start>
     <status>Draft</status>
     <variables>
