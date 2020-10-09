@@ -3727,7 +3727,7 @@ null)</formula>
     <fields>
         <fullName>Hidden_Chapter_Name__c</fullName>
         <externalId>false</externalId>
-        <formula>MID(Region_Chapter__r.Name, 12, len(Region_Chapter__r.Name)-11)</formula>
+        <formula>MID(Region_Chapter__r.Name, 13, len(Region_Chapter__r.Name)-12)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Chapter Name</label>
         <required>false</required>

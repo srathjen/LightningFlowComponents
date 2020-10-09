@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
     <alerts>
         <fullName>Account_In_Kind_Donor_Account_For_Approval_Email_Alert</fullName>
         <description>Account:In Kind Donor Account For Approval Email Alert</description>
@@ -11,6 +10,17 @@
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>Automated_Wish_Granting_Email_Templates/Account_In_Kind_Donors_Approval_Email_Template</template>
+    </alerts>
+    <alerts>
+        <fullName>Fire_New_HTF_Owner_Alert</fullName>
+        <description>Fire New HTF Owner Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <senderAddress>salesforce@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Automated_Wish_Granting_Email_Templates/Account_HTF_Owner_Changed_Update_New_Owner</template>
     </alerts>
     <fieldUpdates>
         <fullName>In_Kind_Approval_Field_Status_Update</fullName>
@@ -42,4 +52,19 @@
         <operation>Literal</operation>
         <protected>false</protected>
     </fieldUpdates>
+    <rules>
+        <fullName>Account%3A Alert New HTF Owner</fullName>
+        <actions>
+            <name>Fire_New_HTF_Owner_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>Fires an alert to the Intake Manager when an HTF is assigned to their chapter.</description>
+        <formula>!ISNEW()
+&amp;&amp;
+ISCHANGED(Chapter_Name__c)
+&amp;&amp;
+!ISBLANK(Chapter_Name__c)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
 </Workflow>

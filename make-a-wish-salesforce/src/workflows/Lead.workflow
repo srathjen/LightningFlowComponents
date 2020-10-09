@@ -37,6 +37,17 @@
         <template>Medical_Eligibility_Emails/Duplicate_on_Referral_Inquiry_Email</template>
     </alerts>
     <alerts>
+        <fullName>Fire_New_DV_Signer_Alert</fullName>
+        <description>Fire New DV Signer Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>salesforce@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Automated_Wish_Granting_Email_Templates/Lead_New_DV_Signer</template>
+    </alerts>
+    <alerts>
         <fullName>Lead_Email_Alert_for_Lead_Owner_Regarding_Chapter_Update</fullName>
         <description>Lead: Email Alert for Lead Owner Regarding Chapter Update</description>
         <protected>false</protected>
@@ -432,6 +443,21 @@ Converts this: 6043458787 --&gt;  (604) 345-8787</description>
             <value>Wish Child</value>
         </criteriaItems>
         <description>Send Duplicate Referral Email Alert if Duplicate Lead Found</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Lead%3A Alert New DV Signer</fullName>
+        <actions>
+            <name>Fire_New_DV_Signer_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Lead.DV_Signer_Changed__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Fires an alert to the Lead Record Owner when DV Signer Changed is updated to TRUE.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>

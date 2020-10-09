@@ -182,6 +182,7 @@
     <members>DataUsePurpose</members>
     <members>dsfs__DocuSign_Recipient_Status__c</members>
     <members>DuplicateRecordSet</members>
+    <members>EmailMessage</members>
     <members>Endpoints__c</members>
     <members>External_ID__c</members>
     <members>ICD_Codes__c</members>
@@ -478,9 +479,14 @@
     <members>Automated_Volunteer_Templates/Volunteer_Opportunity_Non_Wish_Rejected</members>
     <members>Automated_Volunteer_Templates/Volunteer_Opportunity_Wish_Approved</members>
     <members>Automated_Volunteer_Templates/Volunteer_Opportunity_Wish_Rejected</members>
+    <members>Automated_Wish_Granting_Email_Templates/Account_HTF_Owner_Changed_Update_New_Owner</members>
     <members>Automated_Wish_Granting_Email_Templates/Case_Email_alert_to_wish_granters</members>
+    <members>Automated_Wish_Granting_Email_Templates/Contact_MP_Owner_Changed_Update_New_Owner</members>
+    <members>Automated_Wish_Granting_Email_Templates/Lead_New_DV_Signer</members>
     <members>Automated_Wish_Granting_Email_Templates/Send_Wish_Referral_Form_to_Non_Active_Chapter_Office</members>
     <members>Automated_Wish_Granting_Email_Templates/Wish_Form_Email_Notification_for_Salesforce_Team_when_Wish_Form_is_Edited</members>
+    <members>Medical_Professional_Email_Templates/Med_Professional_DNQ_to_MP</members>
+    <members>Medical_Professional_Email_Templates/Med_Professional_Request_for_more_information</members>
     <members>unfiled$public/Case_Send_Email_to_Volunteer_for_Blank_Presentation_date</members>
     <members>unfiled$public/Diagnosis_Verification_Reminder_Form_Email_Intake_Manager</members>
     <members>unfiled$public/Docusign_Signature_Reminder_Final_Notice</members>
@@ -682,6 +688,7 @@
     <members>Lead.Referral_Source_Information</members>
     <members>Lead.Referring_HTF_Unmatched</members>
     <members>Lead.Referring_MP_Unmatched</members>
+    <members>Lead.SendEmail</members>
     <members>Lead.Treating_HTF_Unmatched</members>
     <members>Lead.Treating_MP_Unmatched</members>
     <members>npe4__Relationship__c.Medical_Contact_Details</members>
@@ -3193,6 +3200,7 @@
     <name>ValidationRule</name>
   </types>
   <types>
+    <members>Account</members>
     <members>Background_check__c</members>
     <members>Conflict_Of_Interest__c</members>
     <members>Contact</members>
