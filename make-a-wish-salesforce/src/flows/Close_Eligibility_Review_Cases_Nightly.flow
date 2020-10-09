@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>A schedule flow to auto close eligilibity review cases where the lead has qualified or closed or DNQ&apos;d.</description>
+    <formulas>
+        <name>DescriptionUpdate</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Description} + 
+&quot;Case automatically as a result of a Lead Status update.&quot;</expression>
+    </formulas>
+    <interviewLabel>Close Eligibility Review Cases Nightly {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Close Eligibility Review Cases Nightly</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Close_Case</name>
+        <label>Close Case</label>
+        <locationX>176</locationX>
+        <locationY>276</locationY>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>DescriptionUpdate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Closed</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Close_Case</targetReference>
+        </connector>
+        <filters>
+            <field>Subject</field>
+            <operator>Contains</operator>
+            <value>
+                <stringValue>Eligibility Review</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Lead_Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Qualified</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Lead_Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Closed</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Lead_Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>DNQ</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>IsClosed</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Case</object>
+        <schedule>
+            <frequency>Daily</frequency>
+            <startDate>2020-10-08</startDate>
+            <startTime>21:00:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>
