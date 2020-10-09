@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>It will be used to request more information related to the Diagnosis Verification form</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Make_a_Wish_America</letterhead>
+    <name>Med Professional: Request for more information</name>
+    <style>freeForm</style>
+    <subject>Action Requested: Make-A-Wish Request for More Information</subject>
+    <textOnly>Hello Dr. {!Lead.DV_Signer_First_Name__c} {!Lead.DV_Signer_Last_Name__c},
+
+Thank you for completing our electronic Diagnosis Verification form for {!Lead.FirstName}’s Make-A-Wish referral!
+
+Make-A-Wish grants wishes to children with critical illnesses (i.e. a progressive, degenerative or malignant conditions) that are currently placing the child’s life in jeopardy. We are reviewing your patient’s medical eligibility and have the following additional questions:
+
+[ENTER QUESTIONS HERE]
+
+For more information about our eligibility criteria, please visit our medical professional referral page at https://wish.org/medical-referral. We appreciate your help. Thank you for partnering with us in granting life-changing wishes for your patients with critical illnesses!
+
+Regards,
+{!Lead.OwnerFullName}
+
+
+
+Wish Referral: {!Lead.Id}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

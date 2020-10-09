@@ -1,0 +1,16 @@
+<table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
+<tr valign="top" height="400" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<div style=""><span style="font-family: arial;">Hello Dr. {!Lead.DV_Signer_First_Name__c} {!Lead.DV_Signer_Last_Name__c},</span></div>
+<br><font face="arial" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="font-size: 12pt;">
+Thank you for completing our electronic Diagnosis Verification form for </span>{!Lead.FirstName}<span style="font-size: 12pt;">’s Make-A-Wish referral!</span></font><br>
+<br><font face="arial" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="font-size: 12pt;">
+Make-A-Wish grants wishes to children with critical illnesses (i.e. a progressive, degenerative or malignant conditions) that are currently placing the child’s life in jeopardy. We are reviewing your patient’s medical eligibility and have the following additional questions:</span></font><br>
+<br>
+<span bgcolor="#ffe600" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; background-color: rgb(255, 255, 0);"><b>[ENTER QUESTIONS HERE]</b></span><br>
+<br><font face="arial" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="font-size: 12pt;">
+For more information about our eligibility criteria, please visit our medical professional referral page at </span></font><a href="https://wish.org/medical-referral" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><u><span textcolor="#0563C1" style="color: #0563C1">https://wish.org/medical-referral</span></u></a><font face="arial" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="font-size: 12pt;">. We appreciate your help. Thank you for partnering with us in granting life-changing wishes for your patients with critical illnesses!</span></font><br>
+<br><font face="arial" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="font-size: 12pt;">
+Regards,</span></font><br><div><span style="font-family: arial; font-size: 16px; background-color: rgb(255, 255, 255);">{!Lead.OwnerFullName}</span></div><div><span style="font-family: arial; font-size: 16px; background-color: rgb(255, 255, 255);"><br></span></div><div><span style="font-family: arial; font-size: 16px; background-color: rgb(255, 255, 255);"><br></span></div><div><span style="font-family: arial; font-size: 16px; background-color: rgb(255, 255, 255);"><br></span></div><div><font color="#999999"><span style="font-family: arial; font-size: 16px; background-color: rgb(255, 255, 255);">Wish Referral#&nbsp;</span><font face="arial">{!Lead.Id}</font></font></div>]]></td>
+</tr>
+</table>

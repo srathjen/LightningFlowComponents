@@ -38,6 +38,17 @@
         <template>Medical_Eligibility_Emails/Duplicate_on_Referral_Inquiry_Email</template>
     </alerts>
     <alerts>
+        <fullName>Fire_New_MP_Owner_Alert</fullName>
+        <description>Fire New MP Owner Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>salesforce@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Automated_Wish_Granting_Email_Templates/Contact_MP_Owner_Changed_Update_New_Owner</template>
+    </alerts>
+    <alerts>
         <fullName>Send_Email_When_OT_Cancelled_have_Registered_and_No_Completed_OT</fullName>
         <description>Deprecated: Send Email When OT Cancelled ,have Registered and No Completed OT</description>
         <protected>false</protected>
@@ -473,6 +484,21 @@ OtherPhone
         <active>true</active>
         <description>This workflow OVERWRITES the existing value in the standard Email field based on the Preferred Email field value.  This rule needs to be turned on manually after an Upgrade to this package.</description>
         <formula>OR( LEN(Email)=0, ISCHANGED(npe01__Preferred_Email__c) , ISCHANGED(npe01__WorkEmail__c) , ISCHANGED(npe01__HomeEmail__c) , ISCHANGED(npe01__AlternateEmail__c),ISCHANGED( Alternate_Email_2__c )  )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Contact%3A Alert New MP Owner</fullName>
+        <actions>
+            <name>Fire_New_MP_Owner_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>First an alert to the Intake Manager when an MP is assigned to their chapter.</description>
+        <formula>!ISNEW()
+&amp;&amp;
+ISCHANGED(Region_Chapter__c)
+&amp;&amp;
+!ISBLANK(Region_Chapter__c)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>

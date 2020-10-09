@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignments>
+        <name>Update_Email</name>
+        <label>Update Email</label>
+        <locationX>176</locationX>
+        <locationY>333</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Related_Referral__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>GetLeadIDFromBody</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.HtmlBody</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>UpdateHTML</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.TextBody</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>UpdateText</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <formulas>
+        <name>GetLeadIDFromBody</name>
+        <dataType>String</dataType>
+        <expression>IF( CONTAINS({!$Record.HtmlBody}, &quot;00Q&quot;)=TRUE, 
+LEFT(TRIM(SUBSTITUTE({!$Record.HtmlBody}, LEFT({!$Record.HtmlBody}, FIND(&quot;00Q&quot;, {!$Record.HtmlBody})-1),&quot;&quot;)),15), &quot;&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>UpdateHTML</name>
+        <dataType>String</dataType>
+        <expression>SUBSTITUTE({!$Record.HtmlBody}, &quot;&lt;span style=\&quot;color:#ffffff;\&quot;&gt;&quot;+ &quot;        WISH REFERRAL# &quot; + {!GetLeadIDFromBody} + &quot;&lt;/span&gt;&quot;,&quot;&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>UpdateText</name>
+        <dataType>String</dataType>
+        <expression>SUBSTITUTE({!$Record.TextBody}, &quot;        WISH REFERRAL# &quot; + {!GetLeadIDFromBody},&quot;&quot;)</expression>
+    </formulas>
+    <interviewLabel>Add Lead to Email {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Add Lead to Outgoing Email</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Update_Email</targetReference>
+        </connector>
+        <object>EmailMessage</object>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>
