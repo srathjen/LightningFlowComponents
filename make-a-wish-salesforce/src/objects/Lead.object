@@ -3943,6 +3943,42 @@ IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Referring Medical Pr
         <visibleLines>3</visibleLines>
     </fields>
     <fields>
+        <fullName>Matched_Referring_MP_Email__c</fullName>
+        <description>Displays the Matched Referring MP Email for email alerts</description>
+        <externalId>false</externalId>
+        <formula>Referring_MP__r.Email</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Matched Referring MP Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Matched_Referring_MP_First_Name__c</fullName>
+        <description>Displays the Referring MPs First Name for Email Alerts</description>
+        <externalId>false</externalId>
+        <formula>Referring_MP__r.FirstName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Matched Referring MP First Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Matched_Referring_MP_Last_Name__c</fullName>
+        <description>Displays the Matched Referring MP Last Name for Email alerts</description>
+        <externalId>false</externalId>
+        <formula>Referring_MP__r.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Matched Referring MP Last Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Medical_Professional_ContactId__c</fullName>
         <description>It is an hidden field. Storing the original Medical Professional Contact Id. So while converting the lead, we can create a relationship under this Record instead of creating dup medical professional contact. we are capturing value for this field on Find Duplicate page.</description>
         <externalId>false</externalId>

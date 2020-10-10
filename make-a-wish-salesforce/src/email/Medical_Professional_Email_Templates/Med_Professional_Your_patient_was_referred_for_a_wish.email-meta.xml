@@ -4,9 +4,25 @@
     <description>It will be used to send an email to Medical Professional when child is NOT eligible.</description>
     <encodingKey>ISO-8859-1</encodingKey>
     <letterhead>Make_a_Wish_America</letterhead>
-    <name>Med Professional: Your patient was referred for a wish</name>
+    <name>Med Professional: Your patient does not meet our medical eligibility criteria.</name>
     <style>freeForm</style>
-    <subject>Your patient was referred for a wish.</subject>
+    <subject>Your patient does not meet our medical eligibility criteria.</subject>
+    <textOnly>Wish child name: {!Lead.Name}
+
+Primary diagnosis: {!Lead.PD_Condition_Description__c}
+
+Additional diagnosis: N/A
+
+After reviewing the information submitted on the Diagnosis Verification Form, we have concluded your patient does not meet our medical eligibility criteria at this time. If you feel additional medical information can be provided to support wish eligibility, please contact {!Lead.OwnerFullName} at  {!Lead.Phone} or at {!Lead.OwnerEmail}. Should {!Lead.FirstName}’s medical condition change in the future, please contact us again for a reevaluation.
+
+Thank you for your diligent care for this child and remaining a strong advocate for pediatric health. If you have any further questions regarding eligibility criteria or this decision, please contact us at the phone number or email provided above.
+
+Warmly,
+{!Lead.OwnerFullName}
+{!Lead.OwnerTitle}
+{!Lead.ChapterName__c}
+{!Lead.OwnerEmail}
+{!Lead.OwnerPhone}</textOnly>
     <type>html</type>
     <uiType>Aloha</uiType>
 </EmailTemplate>
