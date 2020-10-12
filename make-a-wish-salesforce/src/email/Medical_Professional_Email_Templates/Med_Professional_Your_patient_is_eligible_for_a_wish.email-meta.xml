@@ -7,6 +7,22 @@
     <name>Med Professional: Your patient is eligible for a wish</name>
     <style>freeForm</style>
     <subject>Your patient is eligible for a wish!</subject>
+    <textOnly>Wish child name: {!Lead.Name}
+
+Primary diagnosis: {!Lead.PD_Condition_Description__c}
+
+We are happy to inform you that your patient {!Lead.FirstName}{!Lead.Child_Middle_Initial__c} has been referred to Make-A-Wish® and is medically eligible to receive a wish! {!Lead.FirstName} and {!Lead.FirstName}&apos;s family will be contacted soon to set-up an initial visit with the wish granting team. We encourage the medical team to speak with the family about the upcoming wish meeting and provide guidance if there are any foreseeable wish restrictions.
+
+Our goal is to provide a wish experience to impact {!Lead.FirstName} and {!Lead.FirstName}&apos;s family for years to come. We find it is beneficial to the child and family to explore what brings the child the most hope, strength and joy to ensure a meaningful and unforgettable wish experience.
+
+Thank you for your diligent care of {!Lead.FirstName}. We are looking forward to a long-lasting relationship with {!Lead.FirstName}&apos;s family, you, and your medical team. If you have any questions, comments, or concerns, please contact us at any point during the wish process.
+
+Warmly,
+{!Lead.OwnerFullName}
+{!Lead.OwnerTitle}
+{!Lead.ChapterName__c}
+{!Lead.OwnerEmail}
+{!Lead.OwnerPhone}</textOnly>
     <type>html</type>
     <uiType>Aloha</uiType>
 </EmailTemplate>

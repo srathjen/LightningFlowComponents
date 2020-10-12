@@ -487,6 +487,8 @@
     <members>Automated_Wish_Granting_Email_Templates/Wish_Form_Email_Notification_for_Salesforce_Team_when_Wish_Form_is_Edited</members>
     <members>Medical_Professional_Email_Templates/Med_Professional_DNQ_to_MP</members>
     <members>Medical_Professional_Email_Templates/Med_Professional_Request_for_more_information</members>
+    <members>Medical_Professional_Email_Templates/Med_Professional_Your_patient_is_eligible_for_a_wish</members>
+    <members>Medical_Professional_Email_Templates/Med_Professional_Your_patient_was_referred_for_a_wish</members>
     <members>unfiled$public/Case_Send_Email_to_Volunteer_for_Blank_Presentation_date</members>
     <members>unfiled$public/Diagnosis_Verification_Reminder_Form_Email_Intake_Manager</members>
     <members>unfiled$public/Docusign_Signature_Reminder_Final_Notice</members>

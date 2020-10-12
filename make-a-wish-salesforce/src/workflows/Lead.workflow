@@ -63,7 +63,7 @@
         <description>Lead:Email Alert to Qualifying Medical Professional when child is NOT eligible</description>
         <protected>false</protected>
         <recipients>
-            <field>Treating_Medical_Professional_Email__c</field>
+            <field>DV_Signer_Email__c</field>
             <type>email</type>
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
@@ -75,11 +75,7 @@
         <description>Lead:Email Alert to Qualifying Medical Professional when child is eligible</description>
         <protected>false</protected>
         <recipients>
-            <field>Best_contact_for_Physician_Email__c</field>
-            <type>email</type>
-        </recipients>
-        <recipients>
-            <field>Treating_Medical_Professional_Email__c</field>
+            <field>DV_Signer_Email__c</field>
             <type>email</type>
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
@@ -178,6 +174,34 @@ MID(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE( Additional_Parent_Phone__c , ".", ''),"-",
         <field>Alternate1MedProfessionalPhone__c</field>
         <formula>''</formula>
         <name>Alt Phone Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Copy_Referring_MP_Email</fullName>
+        <field>Referrer_Email__c</field>
+        <formula>IF(ISBLANK(Referring_MP__c),  Referring_MP_Email__c,  Matched_Referring_MP_Email__c)</formula>
+        <name>Copy Referring MP Email</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Copy_Referring_MP_First_Name</fullName>
+        <field>Referrer_FirstName__c</field>
+        <formula>IF(ISBLANK(Referring_MP__c),  Referring_MP_First_Name__c,  Referring_MP__r.FirstName )</formula>
+        <name>Copy Referring MP First Name</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Copy_Referring_MP_Last_Name</fullName>
+        <field>Referrer_Last_Name__c</field>
+        <formula>IF(ISBLANK(Referring_MP__c),  Referring_MP_Last_Name__c , Referring_MP__r.LastName )</formula>
+        <name>Copy Referring MP Last Name</name>
         <notifyAssignee>false</notifyAssignee>
         <operation>Formula</operation>
         <protected>false</protected>
@@ -459,6 +483,28 @@ Converts this: 6043458787 --&gt;  (604) 345-8787</description>
         </criteriaItems>
         <description>Fires an alert to the Lead Record Owner when DV Signer Changed is updated to TRUE.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Lead%3A Transfer Matched Referring MP Emails</fullName>
+        <actions>
+            <name>Copy_Referring_MP_Email</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Copy_Referring_MP_First_Name</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Copy_Referring_MP_Last_Name</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Lead.Referrer_Email__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <description>Moves the Matched  and unmatched Referring MP values into the fields used for the referral confirmation Email</description>
+        <triggerType>onCreateOnly</triggerType>
     </rules>
     <rules>
         <fullName>Lead%3AQualifying Medical Professional when child is NOT eligible</fullName>
