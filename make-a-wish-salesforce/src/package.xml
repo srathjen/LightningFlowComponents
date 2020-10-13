@@ -124,6 +124,7 @@
     <name>CustomLabels</name>
   </types>
   <types>
+    <members>Chapter_Name_Setting.Make_A_Wish_South_Dakota_Montana</members>
     <members>Spanish_Translations.Asian</members>
     <members>Spanish_Translations.Aunt</members>
     <members>Spanish_Translations.Black_or_African_American</members>
@@ -532,6 +533,10 @@
     <members>Medical_Provider_Category</members>
     <members>MP_Specialties</members>
     <name>GlobalValueSet</name>
+  </types>
+  <types>
+    <members>South_Dakota_Montana</members>
+    <name>Group</name>
   </types>
   <types>
     <members>*</members>
@@ -2404,6 +2409,16 @@
     <members>SouthDakota/BaselineReports73/Rush_Referrals_Report_SDakota</members>
     <members>SouthDakota/Lead_Owner_by_Status_SDakota</members>
     <members>SouthDakota/MedicalEligibility73</members>
+    <members>SouthDakotaMontana</members>
+    <members>SouthDakotaMontanaMedicalEligibiliy</members>
+    <members>SouthDakotaMontanaMedicalEligibiliy/Cases_in_Diagnosis_Verification_Review_San_Diego</members>
+    <members>SouthDakotaMontanaMedicalEligibiliy/Diagnosis_List_SD</members>
+    <members>SouthDakotaMontanaMedicalEligibiliy/Diagnosis_Questions_SDM</members>
+    <members>SouthDakotaMontanaMedicalEligibiliy/DNQ_Referrer_Contact_detail_SDM</members>
+    <members>SouthDakotaMontanaMedicalEligibiliy/Lead_Owner_by_Status_SDM</members>
+    <members>SouthDakotaMontanaMedicalEligibiliy/Leads_Detail_SDM</members>
+    <members>SouthDakotaMontanaMedicalEligibiliy/Non_Verbal_Report_SDM</members>
+    <members>SouthDakotaMontanaMedicalEligibiliy/Rush_Referrals_Report_SDM</members>
     <members>Southern_Florida_Medical_Eligibility</members>
     <members>Southern_Florida_Medical_Eligibility/Cases_in_Diagnosis_Verification_Review_Southern_Florida</members>
     <members>Southern_Florida_Medical_Eligibility/Diagnosis_List_Southern_Florida</members>
@@ -2979,6 +2994,10 @@
     <members>Treating_MP_HTF_s_with_Referrals</members>
     <members>Treating_MPs_with_Referrals</members>
     <name>ReportType</name>
+  </types>
+  <types>
+    <members>South_Dakota_Montana_Chapter</members>
+    <name>Role</name>
   </types>
   <types>
     <members>Apex</members>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
     <sharingOwnerRules>
         <fullName>Alabama_Chapter</fullName>
         <accessLevel>Read</accessLevel>
@@ -407,18 +406,6 @@
         </sharedFrom>
     </sharingOwnerRules>
     <sharingOwnerRules>
-        <fullName>Montana_Chapter</fullName>
-        <accessLevel>Read</accessLevel>
-        <description>Grants Read access to Montana Chapter Staff</description>
-        <label>Montana - Chapter</label>
-        <sharedTo>
-            <role>Montana_Chapter</role>
-        </sharedTo>
-        <sharedFrom>
-            <role>Montana_Chapter</role>
-        </sharedFrom>
-    </sharingOwnerRules>
-    <sharingOwnerRules>
         <fullName>National_Staff</fullName>
         <accessLevel>Read</accessLevel>
         <description>Grants Read access to National Staff</description>
@@ -632,18 +619,6 @@
         </sharedTo>
         <sharedFrom>
             <role>South_Carolina_Chapter</role>
-        </sharedFrom>
-    </sharingOwnerRules>
-    <sharingOwnerRules>
-        <fullName>South_Dakota_Chapter</fullName>
-        <accessLevel>Read</accessLevel>
-        <description>Grants Read access to South Dakota Chapter Staff</description>
-        <label>South Dakota - Chapter</label>
-        <sharedTo>
-            <role>South_Dakota_Chapter</role>
-        </sharedTo>
-        <sharedFrom>
-            <role>South_Dakota_Chapter</role>
         </sharedFrom>
     </sharingOwnerRules>
     <sharingOwnerRules>
