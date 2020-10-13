@@ -14115,7 +14115,6 @@ IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Referring Medical Pr
         </filters>
         <label>Montana All</label>
         <sharedTo>
-            <group>Montana</group>
             <role>National_Staff</role>
         </sharedTo>
     </listViews>
@@ -14155,7 +14154,6 @@ IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Referring Medical Pr
         </filters>
         <label>Montana Open</label>
         <sharedTo>
-            <group>Montana</group>
             <role>National_Staff</role>
         </sharedTo>
     </listViews>
@@ -14200,7 +14198,6 @@ IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Referring Medical Pr
         </filters>
         <label>Montana Rush</label>
         <sharedTo>
-            <group>Montana</group>
             <group>National_Office</group>
         </sharedTo>
     </listViews>
@@ -16603,7 +16600,7 @@ IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Referring Medical Pr
         <filters>
             <field>ChapterName__c</field>
             <operation>equals</operation>
-            <value>Make-A-Wish South Dakota</value>
+            <value>Make-A-Wish South Dakota &amp; Montana</value>
         </filters>
         <filters>
             <field>Test_Record__c</field>
@@ -16615,9 +16612,9 @@ IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Referring Medical Pr
             <operation>equals</operation>
             <value>Lead.Wish_Child</value>
         </filters>
-        <label>South Dakota All</label>
+        <label>South Dakota &amp; Montana All</label>
         <sharedTo>
-            <group>South_Dakota</group>
+            <group>South_Dakota_Montana</group>
             <role>National_Staff</role>
         </sharedTo>
     </listViews>
@@ -16638,7 +16635,7 @@ IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Referring Medical Pr
         <filters>
             <field>ChapterName__c</field>
             <operation>equals</operation>
-            <value>Make-A-Wish South Dakota</value>
+            <value>Make-A-Wish South Dakota &amp; Montana</value>
         </filters>
         <filters>
             <field>LEAD.STATUS</field>
@@ -16655,9 +16652,9 @@ IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Referring Medical Pr
             <operation>equals</operation>
             <value>Lead.Wish_Child</value>
         </filters>
-        <label>South Dakota Open</label>
+        <label>South Dakota &amp; Montana Open</label>
         <sharedTo>
-            <group>South_Dakota</group>
+            <group>South_Dakota_Montana</group>
             <role>National_Staff</role>
         </sharedTo>
     </listViews>
@@ -16678,7 +16675,7 @@ IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Referring Medical Pr
         <filters>
             <field>ChapterName__c</field>
             <operation>equals</operation>
-            <value>Make-A-Wish South Dakota</value>
+            <value>Make-A-Wish South Dakota &amp; Montana</value>
         </filters>
         <filters>
             <field>LEAD.STATUS</field>
@@ -16700,10 +16697,10 @@ IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Referring Medical Pr
             <operation>equals</operation>
             <value>Lead.Wish_Child</value>
         </filters>
-        <label>South Dakota Rush</label>
+        <label>South Dakota &amp; Montana Rush</label>
         <sharedTo>
             <group>National_Office</group>
-            <group>South_Dakota</group>
+            <group>South_Dakota_Montana</group>
         </sharedTo>
     </listViews>
     <listViews>
