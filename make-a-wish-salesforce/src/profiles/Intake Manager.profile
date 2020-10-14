@@ -28464,7 +28464,7 @@
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Account.Hospital_Treatment_Facility</recordType>
-        <visible>false</visible>
+        <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>false</default>
@@ -28540,7 +28540,7 @@
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Contact.Medical_Professional</recordType>
-        <visible>false</visible>
+        <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>false</default>

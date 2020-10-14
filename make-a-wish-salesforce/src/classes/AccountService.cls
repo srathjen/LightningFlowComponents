@@ -330,30 +330,46 @@ public class AccountService {
 	* @param accountList
 	* @param oldAccountsMap
 	*/
-	public static void updateAccountOwnerToChapter(List<Account> accountsList, Map<Id, Account> oldAccountsMap) {
-		if (accountsList.isEmpty()) {
-			return;
-		}
-		Map<Id, Account> accountChapterMap = new Map<Id, Account>();
-		for (Account account : accountsList) {
-			if (account.RecordTypeId == Constant_AC.HOSPITAL_TREATMENT_ID) {
-				if (oldAccountsMap == null && account.Chapter_Name__c != null) {
-					accountChapterMap.put(account.Chapter_Name__c, account);
-				} else if (oldAccountsMap != null && account.Chapter_Name__c != oldAccountsMap.get(account.Id).Chapter_Name__c) {
-					accountChapterMap.put(account.Chapter_Name__c, account);
-				}
-			}
-		}
-		if (!accountChapterMap.isEmpty()) {
-			Map<Id, Account> accountOwnerMap = new Map<Id, Account>(
-					ChapterStaffRecordSharing_AC.getAccountOwner(accountChapterMap.keySet()));
-			for (Account account : accountChapterMap.values()) {
-				if (accountOwnerMap.containsKey(account.Chapter_Name__c)) {
-					account.OwnerId = accountOwnerMap.get(account.Chapter_Name__c).Intake_Manager__c;
-				}
-			}
-		}
-	}
+	public static void updateAccountOwner(List<Account> accountsList, Map<Id, Account> oldAccountsMap) {
+        if (accountsList.isEmpty()) {
+            return;
+        }
+        Set<Id> chapterIdSet = new Set<Id>();
+        List<Account> hospitalAccountList = new List<Account>();
+        Map<Id, Account> accountContactMap = new Map<Id, Account>();
+        for (Account account : accountsList) {
+            if (account.RecordTypeId == Constant_AC.HOSPITAL_TREATMENT_ID) {
+                if ((oldAccountsMap == null && account.Chapter_Name__c != null) || 
+                    (oldAccountsMap != null && account.Chapter_Name__c != oldAccountsMap.get(account.Id).Chapter_Name__c)) {
+                    chapterIdSet.add(account.Chapter_Name__c);
+                    hospitalAccountList.add(account);
+                }
+            } else if(account.RecordTypeId == Constant_AC.HOUSEHOLD_RT_ID) {
+                if(oldAccountsMap != null && account.npe01__One2OneContact__c != oldAccountsMap.get(account.Id).npe01__One2OneContact__c) {
+                    accountContactMap.put(account.npe01__One2OneContact__c, account);
+                }
+            }
+        }
+        if (!chapterIdSet.isEmpty()) {
+            Map<Id, Account> accountOwnerMap = new Map<Id, Account>(
+                ChapterStaffRecordSharing_AC.getAccountOwner(chapterIdSet));
+            for (Account account : hospitalAccountList) {
+                if (accountOwnerMap.containsKey(account.Chapter_Name__c)) {
+                    account.OwnerId = accountOwnerMap.get(account.Chapter_Name__c).Intake_Manager__c;
+                }
+            }
+        }
+        if (!accountContactMap.isEmpty()) {
+            Map<Id, Contact> contactMap = new Map<Id, Contact>([
+                SELECT Id, OwnerId 
+                FROM Contact WHERE 
+                Id IN :accountContactMap.keySet()
+            ]);
+            for (Account householdAccount : accountContactMap.values()) {
+                householdAccount.OwnerId = contactMap.get(householdAccount.npe01__One2OneContact__c).OwnerId;
+            }
+        }
+    }
 
 	/**
 	* @description Get duplicate records for Account records according to Duplicate Rules
