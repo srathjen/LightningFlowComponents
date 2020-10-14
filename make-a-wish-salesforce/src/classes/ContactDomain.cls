@@ -115,36 +115,36 @@ public class ContactDomain extends trac_TriggerHandlerBase {
         ContactService.updateContactOwnerToChapter(newContactsList, oldContactsMap);
     }
 
-	/**
-	* After update of contact
-	*/
-	public override void handleAfterUpdate() {
-		if (RecursiveTriggerHandler.blockAfterUpdate) {
-			return;
-		}
-		List<Contact> volunteerContactList = new List<Contact>();
-		for (Contact newContact : newContactsList) {
-			Contact oldContact = oldContactsMap.get(newContact.Id);
-			if (newContact.recordTypeId == VOLUNTEER_RT_ID && oldContact.recordTypeId != VOLUNTEER_RT_ID) {
-				volunteerContactList.add(newContact);
-			}
-		}
-		if (RecursiveTriggerHandler.isFirstTime || Test.isRunningTest()) {
-			RecursiveTriggerHandler.isFirstTime = false;
-			ContactService.updateEmailAddress(newContactsList, oldContactsMap);
-		}
-		ContactService.createAffiliation(volunteerContactList);
-		ContactService.updateHouseHoldAddress(newContactsList, oldContactsMap);
-		ContactService.updateRelationship(newContactsList, oldContactsMap);
-		ContactService.updateMedicalProfessional(newContactsList, oldContactsMap);
-		ContactService.updateOrgAffiliationStatus(newContactsList, oldContactsMap);
-		ContactService.createVolunteerRoles(newContactsList, oldContactsMap);
-		ContactService.createZipcodeUpdateTask(newContactsList, oldContactsMap);
-		ContactService.updateUserDetails(newContactsList, oldContactsMap);
-		ContactService.shareContactRecord(newContactsMap, oldContactsMap);
-		ContactService.updateHiddenCaseFields(newContactsList, oldContactsMap);
-    	ContactService.shareContactToChapter(newContactsList, oldContactsMap);
-	}
+    /**
+    * After update of contact
+    */
+    public override void handleAfterUpdate() {
+        if (RecursiveTriggerHandler.blockAfterUpdate) {
+            return;
+        }
+        List<Contact> volunteerContactList = new List<Contact>();
+        for (Contact newContact : newContactsList) {
+            Contact oldContact = oldContactsMap.get(newContact.Id);
+            if (newContact.recordTypeId == VOLUNTEER_RT_ID && oldContact.recordTypeId != VOLUNTEER_RT_ID) {
+                volunteerContactList.add(newContact);
+            }
+        }
+        if (RecursiveTriggerHandler.isFirstTime || Test.isRunningTest()) {
+            RecursiveTriggerHandler.isFirstTime = false;
+            ContactService.updateEmailAddress(newContactsList, oldContactsMap);
+        }
+        ContactService.createAffiliation(volunteerContactList);
+        ContactService.updateHouseHoldAddress(newContactsList, oldContactsMap);
+        ContactService.updateRelationship(newContactsList, oldContactsMap);
+        ContactService.updateMedicalProfessional(newContactsList, oldContactsMap);
+        ContactService.updateOrgAffiliationStatus(newContactsList, oldContactsMap);
+        ContactService.createVolunteerRoles(newContactsList, oldContactsMap);
+        ContactService.createZipcodeUpdateTask(newContactsList, oldContactsMap);
+        ContactService.updateUserDetails(newContactsList, oldContactsMap);
+        ContactService.shareContactRecord(newContactsMap, oldContactsMap);
+        ContactService.updateHiddenCaseFields(newContactsList, oldContactsMap);
+        ContactService.shareContactToChapter(newContactsList, oldContactsMap);
+    }
 
 	/**
 	* Before delete of contact

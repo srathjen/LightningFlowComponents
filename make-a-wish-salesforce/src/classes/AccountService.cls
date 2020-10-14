@@ -331,13 +331,13 @@ public class AccountService {
 	* @param oldAccountsMap
 	*/
 	public static void updateAccountOwner(List<Account> accountsList, Map<Id, Account> oldAccountsMap) {
-		if (accountsList.isEmpty()) {
-			return;
-		}
+        if (accountsList.isEmpty()) {
+            return;
+        }
         Set<Id> chapterIdSet = new Set<Id>();
         List<Account> hospitalAccountList = new List<Account>();
         Map<Id, Account> accountContactMap = new Map<Id, Account>();
-		for (Account account : accountsList) {
+        for (Account account : accountsList) {
             if (account.RecordTypeId == Constant_AC.HOSPITAL_TREATMENT_ID) {
                 if ((oldAccountsMap == null && account.Chapter_Name__c != null) || 
                     (oldAccountsMap != null && account.Chapter_Name__c != oldAccountsMap.get(account.Id).Chapter_Name__c)) {
@@ -350,14 +350,14 @@ public class AccountService {
                 }
             }
         }
-		if (!chapterIdSet.isEmpty()) {
-			Map<Id, Account> accountOwnerMap = new Map<Id, Account>(
-					ChapterStaffRecordSharing_AC.getAccountOwner(chapterIdSet));
-			for (Account account : hospitalAccountList) {
-				if (accountOwnerMap.containsKey(account.Chapter_Name__c)) {
-					account.OwnerId = accountOwnerMap.get(account.Chapter_Name__c).Intake_Manager__c;
-				}
-			}
+        if (!chapterIdSet.isEmpty()) {
+            Map<Id, Account> accountOwnerMap = new Map<Id, Account>(
+                ChapterStaffRecordSharing_AC.getAccountOwner(chapterIdSet));
+            for (Account account : hospitalAccountList) {
+                if (accountOwnerMap.containsKey(account.Chapter_Name__c)) {
+                    account.OwnerId = accountOwnerMap.get(account.Chapter_Name__c).Intake_Manager__c;
+                }
+            }
         }
         if (!accountContactMap.isEmpty()) {
             Map<Id, Contact> contactMap = new Map<Id, Contact>([
@@ -369,7 +369,7 @@ public class AccountService {
                 householdAccount.OwnerId = contactMap.get(householdAccount.npe01__One2OneContact__c).OwnerId;
             }
         }
-	}
+    }
 
 	/**
 	* @description Get duplicate records for Account records according to Duplicate Rules
