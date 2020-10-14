@@ -427,14 +427,24 @@ public class ContactService {
 				affiliation.npe5__Status__c = AFFILIATION_STATUS_ACTIVE;
 				insertAffiliationList.add(affiliation);
 			}
-			if ((contact.RecordTypeId == MEDICAL_PROFESSIONAL_RECORD_TYPE_ID
+            if(contact.RecordTypeId == MEDICAL_PROFESSIONAL_RECORD_TYPE_ID 
+               && contact.npsp__Primary_Affiliation__c != null) {
+                npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
+                affiliation.Constituent_Code__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+                affiliation.npe5__Primary__c = true;
+                affiliation.npe5__Organization__c = contact.npsp__Primary_Affiliation__c;
+                affiliation.npe5__Contact__c = contact.Id;
+                affiliation.npe5__StartDate__c = Date.Today();
+                affiliation.npe5__Status__c = AFFILIATION_STATUS_ACTIVE;
+                insertAffiliationList.add(affiliation);
+            } else if ((contact.RecordTypeId == MEDICAL_PROFESSIONAL_RECORD_TYPE_ID
 					|| contact.RecordTypeId == WISH_FAMILY_RECORD_TYPE_ID
 					|| contact.RecordTypeId == WISH_CHILD_RECORD_TYPE_ID)
 					&& contact.Region_Chapter__c != null) {
 				npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
 				if (contact.RecordTypeId == MEDICAL_PROFESSIONAL_RECORD_TYPE_ID) {
 					affiliation.Constituent_Code__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
-//                    affiliation.npe5__Primary__c = true;
+                    //affiliation.npe5__Primary__c = true;
 				} else if (contact.RecordTypeId == WISH_FAMILY_RECORD_TYPE_ID) {
 					affiliation.Constituent_Code__c = Constant_AC.WISH_FAMILY_RT_LABEL;
 				} else {
@@ -446,7 +456,7 @@ public class ContactService {
 				affiliation.npe5__Status__c = AFFILIATION_STATUS_ACTIVE;
 				insertAffiliationList.add(affiliation);
 			}
-		}
+        }
 		updateContactAffiliation(contactIdSet);
 		try {
 			insert insertAffiliationList;
@@ -2046,26 +2056,28 @@ public class ContactService {
 		if (contactsList.isEmpty()) {
 			return;
 		}
-		Map<Id, Contact> contactChapterMap = new Map<Id, Contact>();
-		for (Contact contact : contactsList) {
-			if (contact.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID) {
-				if (oldContactsMap == null && contact.Region_Chapter__c != null) {
-					contactChapterMap.put(contact.Region_Chapter__c, contact);
-				} else if (oldContactsMap != null && contact.Region_Chapter__c != oldContactsMap.get(contact.Id).Region_Chapter__c) {
-					contactChapterMap.put(contact.Region_Chapter__c, contact);
-				}
-			}
-		}
-		if (!contactChapterMap.isEmpty()) {
-			Map<Id, Account> accountOwnerMap = new Map<Id, Account>(
-					ChapterStaffRecordSharing_AC.getAccountOwner(contactChapterMap.keySet()));
-			for (Contact contact : contactChapterMap.values()) {
-				if (accountOwnerMap.containsKey(contact.Region_Chapter__c)) {
-					contact.OwnerId = accountOwnerMap.get(contact.Region_Chapter__c).Intake_Manager__c;
-				}
-			}
-		}
-	}
+        Map<Id, Contact> contactChapterMap = new Map<Id, Contact>();
+        Set<Id> chapterIdSet = new Set<Id>();
+        List<Contact> mpContactList = new List<Contact>();
+        for (Contact contact : contactsList) {
+            if (contact.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID) {
+                if((oldContactsMap == null && contact.Region_Chapter__c != null) || 
+                   (oldContactsMap != null && contact.Region_Chapter__c != oldContactsMap.get(contact.Id).Region_Chapter__c)) {
+                    chapterIdSet.add(contact.Region_Chapter__c);
+                    mpContactList.add(contact);
+                }
+            }
+        }
+        if (!chapterIdSet.isEmpty()) {
+            Map<Id, Account> accountOwnerMap = new Map<Id, Account>(
+					ChapterStaffRecordSharing_AC.getAccountOwner(chapterIdSet));
+            for (Contact contact : mpContactList) {
+                if (accountOwnerMap.containsKey(contact.Region_Chapter__c)) {
+                    contact.OwnerId = accountOwnerMap.get(contact.Region_Chapter__c).Intake_Manager__c;
+                }
+            }
+        }
+    }
 
 	/**
 	* @description Get duplicate records for Contact records according to Duplicate Rules

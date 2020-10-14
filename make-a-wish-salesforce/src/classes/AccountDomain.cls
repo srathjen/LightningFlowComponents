@@ -40,7 +40,7 @@ public class AccountDomain extends trac_TriggerHandlerBase {
             AccountService.matchChapterForAccount(ownerIdSet, inKindAccountList);
         }
         AccountService.populateChapterOnHospitalAccount(newAccountsList, null);
-        AccountService.updateAccountOwnerToChapter(newAccountsList, null);
+        AccountService.updateAccountOwner(newAccountsList, null);
     }
     
     /**
@@ -76,7 +76,7 @@ public class AccountDomain extends trac_TriggerHandlerBase {
             AccountService.setPrimaryContactForAccount(houseHoldAccountMap);
         }
         AccountService.populateChapterOnHospitalAccount(newAccountsList, oldAccountsMap);
-        AccountService.updateAccountOwnerToChapter(newAccountsList, oldAccountsMap);
+        AccountService.updateAccountOwner(newAccountsList, oldAccountsMap);
     }
     
     /**

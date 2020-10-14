@@ -547,7 +547,8 @@ public class ContactServiceTest {
 	private static void validateCreateAffiliations() {
 		Test.startTest();
 		Map<Id, Contact> contactMap = new Map<Id, Contact>([
-				SELECT Id, RecordTypeId, Name, AccountId, Hidden_Hospital_Account__c, Region_Chapter__c
+				SELECT Id, RecordTypeId, Name, AccountId, Hidden_Hospital_Account__c, 
+            	Region_Chapter__c, npsp__Primary_Affiliation__c
 				FROM Contact
 		]);
 		ContactService.createAffiliation(contactMap.values());
