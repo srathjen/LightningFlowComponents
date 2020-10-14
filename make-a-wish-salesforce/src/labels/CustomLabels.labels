@@ -739,6 +739,14 @@
             to Docusign.</value>
     </labels>
     <labels>
+        <fullName>Send_DV_Email_Empty</fullName>
+        <categories>Diagnosis Verification</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Send DV Email Empty</shortDescription>
+        <value>Please add an email address for one of the medical professionals associated with this lead, or send a paper DV instead.</value>
+    </labels>
+    <labels>
         <fullName>Shopping_Spree_DDP</fullName>
         <categories>Drawloop</categories>
         <language>en_US</language>

@@ -18,8 +18,8 @@
                     <thead class="thead-default">
                         <tr>
                             <th title="First Name">Name</th>
-                            <th title="Email">E-mail</th>
                             <th title="Type">Type</th>
+                            <th title="Email">Email</th>
                             <th colspan="2" title="Type">Contact Notes</th>
                         </tr>
                     </thead>
@@ -27,50 +27,55 @@
                     <apex:repeat value="{!contacts}" var="ctc">
                         <tr class="slds-text-title_caps">
                             <td>{!ctc.name}</td>
-                            <td></td>
                             <td>{!ctc.type}</td>
+                            <td></td>
                             <td colspan="2" rowspan="{!ctc.numProvidedEmails}" style="white-space: break-spaces; vertical-align: text-top;">{!ctc.contactNotes}</td>
                         </tr>
                         <tr>
                             <td style="border: none; {!IF(ctc.workEmail == '','display:none;','')}"></td>
+                            <td style="border: none; {!IF(ctc.workEmail == '','display:none;','')}">Work</td>
                             <td id="{!ctc.type}" style="border: none; {!IF(ctc.workEmail == '','display:none;','')}">
                                 <input id="{!ctc.type}WorkEmail" type="radio" name="rec" class="selVal"
                                        value="{!ctc.workEmail}" data-type="{!ctc.type}" data-email="{!ctc.workEmail}"/>
                                 <label for="{!ctc.type}WorkEmail">{!ctc.workEmail}</label>
                             </td>
-                            <td style="border: none; {!IF(ctc.workEmail == '','display:none;','')}">Work</td>
                         </tr>
                         <tr>
                             <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail1 == '','display:none;','')}"></td>
+                            <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail1 == '','display:none;','')}">Alt 1</td>
                             <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail1 == '','display:none;','')}">
                                 <input id="{!ctc.type}AlternateEmail1" type="radio" name="rec" class="selVal"
                                        value="{!ctc.alternateEmail1}" data-type="{!ctc.type}"
                                        data-email="{!ctc.alternateEmail1}"/>
                                 <label for="{!ctc.type}AlternateEmail1">{!ctc.alternateEmail1}</label>
                             </td>
-                            <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail1 == '','display:none;','')}">Alt 1</td>
                         </tr>
                         <tr>
                             <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail2 == '','display:none;','')}"></td>
+                            <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail2 == '','display:none;','')}">Alt 2</td>
                             <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail2 == '','display:none;','')}">
                                 <input id="{!ctc.type}AlternateEmail2" type="radio" name="rec" class="selVal"
                                        value="{!ctc.alternateEmail2}" data-type="{!ctc.type}"
                                        data-email="{!ctc.alternateEmail2}"/>
                                 <label for="{!ctc.type}AlternateEmail2">{!ctc.alternateEmail2}</label>
                             </td>
-                            <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail2 == '','display:none;','')}">Alt 2</td>
                         </tr>
                         <tr>
                             <td id="{!ctc.type}" style="border: none; {!IF(ctc.newEmailProvided == '','display:none;','')}"></td>
+                            <td id="{!ctc.type}" style="border: none; {!IF(ctc.newEmailProvided == '','display:none;','')}">New Provided</td>
                             <td id="{!ctc.type}" style="border: none; {!IF(ctc.newEmailProvided == '','display:none;','')}">
                                 <input id="{!ctc.type}NewProvidedEmail" type="radio" name="rec" class="selVal"
                                        value="{!ctc.newEmailProvided}" data-type="{!ctc.type}"
                                        data-email="{!ctc.newEmailProvided}"/>
                                 <label for="{!ctc.type}NewProvidedEmail">{!ctc.newEmailProvided}</label>
                             </td>
-                            <td id="{!ctc.type}" style="border: none; {!IF(ctc.newEmailProvided == '','display:none;','')}">New Provided</td>
                         </tr>
                     </apex:repeat>
+                    <apex:outputPanel rendered="{!IF(contacts.size == 0, true, false)}">
+                        <tr class="slds-text-title_caps">
+                            <td colspan="5" style="text-align: center">{!$Label.Send_DV_Email_Empty}</td>
+                        </tr>
+                    </apex:outputPanel>
                     </tbody>
                 </table>
             </div>
@@ -92,20 +97,25 @@
                          style="float:left">
                         Please provide the Email for selected Medical Professional or Using Paper Process for DV.
                     </div>
-                    <apex:actionStatus id="status">
-                        <apex:facet name="start">
-                            <div id="loadingSpinner">
-                                <img src="/img/loading32.gif"/>
-                                <p>Loading...</p>
-                            </div>
-                        </apex:facet>
-                        <apex:facet name="stop">
-                            <input type="button" value="Cancel" class="slds-button slds-button--neutral btn-process"
-                                   onClick="cancel();"/>
-                            <input type="button" value="Send Diagnosis Verification" onClick="passEmailVal();"
-                                   class="slds-button slds-button--brand btn-process" style="margin-right:5px"/>
-                        </apex:facet>
-                    </apex:actionStatus>
+                    <apex:outputPanel rendered="{!IF(contacts.size != 0, true, false)}">
+                        <apex:actionStatus id="status">
+                            <apex:facet name="start">
+                                <div id="loadingSpinner">
+                                    <img src="/img/loading32.gif"/>
+                                    <p>Loading...</p>
+                                </div>
+                            </apex:facet>
+                            <apex:facet name="stop">
+                                <input type="button" value="Cancel" class="slds-button slds-button--neutral btn-process" onClick="cancel();"/>
+                                <input type="button" value="Send Diagnosis Verification" onClick="passEmailVal();"
+                                       class="slds-button slds-button--brand btn-process" style="margin-right:5px"/>
+                            </apex:facet>
+                        </apex:actionStatus>
+                    </apex:outputPanel>
+
+                    <apex:outputPanel rendered="{!IF(contacts.size == 0, true, false)}">
+                        <input type="button" value="Return to Lead" class="slds-button slds-button--brand btn-process" onClick="cancel();"/>
+                    </apex:outputPanel>
                 </div>
             </div>
             <apex:actionFunction name="sendDiagnosisVerification" action="{!sendDiagnosisVerification}"
