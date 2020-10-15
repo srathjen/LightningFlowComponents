@@ -23,7 +23,6 @@ public class LeadSelectMedEmailController_AC {
 	public String recId;
 	private static final String REFERRING_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_REFERRING_MEDICAL_PROFESSIONAL;
 	private static final String TREATING_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL;
-	private static final String BEST_CONTACT = Constant_AC.LEAD_DV_FORM_TYPE_BEST_CONTACT;
 	private static final String ALTERNATE_1_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL;
 	private static final String ALTERNATE_2_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_2_MEDICAL_PROFESSIONAL;
 	private static final String RELATIONSHIP_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_MEDICAL_PROFESSIONAL;
@@ -190,7 +189,7 @@ public class LeadSelectMedEmailController_AC {
 			SendDiagnosisWrapper bestContact = new SendDiagnosisWrapper();
 			bestContact.id = lead.Best_Contact__c;
 			bestContact.name = lead.Best_Contact__r.Name;
-			bestContact.type = BEST_CONTACT;
+			bestContact.type = System.Label.Wish_Referral_Best_Medical_Contact;
 			if (String.isNotEmpty(lead.Best_Contact__r.npe01__WorkEmail__c)) {
 				bestContact.workEmail = lead.Best_Contact__r.npe01__WorkEmail__c;
 			}
