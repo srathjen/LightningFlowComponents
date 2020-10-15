@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -267,6 +266,18 @@
         </valueSet>
     </fields>
     <fields>
+        <fullName>Contact_Chapter_Name__c</fullName>
+        <description>Displays the Chapter Name for the related contact.</description>
+        <externalId>false</externalId>
+        <formula>npe5__Contact__r.Region_Chapter__r.Name</formula>
+        <label>Contact Chapter Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>External_Id__c</fullName>
         <caseSensitive>false</caseSensitive>
         <description>It will hold the External Id value for avoiding duplicate</description>
@@ -310,6 +321,19 @@
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Organization_Chapter_Name__c</fullName>
+        <description>Display's the Chapter Name of the related Organization</description>
+        <externalId>false</externalId>
+        <formula>npe5__Organization__r.Chapter_Name__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Organization Chapter Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Region_Code__c</fullName>
@@ -388,7 +412,7 @@
     </fields>
     <fields>
         <fullName>Treating_Facility__c</fullName>
-        <description>Ability to have multiple &quot;Current&quot; and/or multiple &quot;Previous&quot; facilities indicated in the case the child is being treated at multiple facilities</description>
+        <description>Ability to have multiple "Current" and/or multiple "Previous" facilities indicated in the case the child is being treated at multiple facilities</description>
         <externalId>false</externalId>
         <label>Treating Facility</label>
         <required>false</required>
@@ -439,7 +463,7 @@
     </fields>
     <fields>
         <fullName>User_Email_Hidden__c</fullName>
-        <description>It will be used as hidden field to store the user&apos;s email</description>
+        <description>It will be used as hidden field to store the user's email</description>
         <externalId>false</externalId>
         <label>User Email Hidden</label>
         <required>false</required>
@@ -516,7 +540,7 @@
         <defaultValue>false</defaultValue>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
-        <inlineHelpText>If checked, the Affiliation&apos;s Organization will be stored on the Contact record.</inlineHelpText>
+        <inlineHelpText>If checked, the Affiliation's Organization will be stored on the Contact record.</inlineHelpText>
         <label>Primary</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -620,12 +644,12 @@
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Affiliations</pluralLabel>
-    <searchLayouts/>
+    <searchLayouts />
     <sharingModel>ControlledByParent</sharingModel>
     <validationRules>
         <fullName>Affiliation_Treating_Facility_Hospital</fullName>
         <active>true</active>
-        <errorConditionFormula>AND(npe5__Organization__r.RecordType.Name != &apos;Hospital Treatment Facility&apos;,  NOT(ISBLANK(TEXT(Treating_Facility__c))),$Profile.Name != &apos;Integration&apos; )</errorConditionFormula>
+        <errorConditionFormula>AND(npe5__Organization__r.RecordType.Name != 'Hospital Treatment Facility',  NOT(ISBLANK(TEXT(Treating_Facility__c))),$Profile.Name != 'Integration' )</errorConditionFormula>
         <errorDisplayField>Treating_Facility__c</errorDisplayField>
         <errorMessage>Treating Facility can only be entered when the Organization record type is a Hospital Treating Facility.</errorMessage>
     </validationRules>

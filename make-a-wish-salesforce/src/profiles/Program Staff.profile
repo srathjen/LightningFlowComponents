@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <classAccesses>
         <apexClass>AWSFilePathService</apexClass>
         <enabled>false</enabled>
@@ -24698,6 +24698,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>npe5__Affiliation__c.Contact_Chapter_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>npe5__Affiliation__c.External_Id__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -24714,6 +24719,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>npe5__Affiliation__c.Migrated_Record__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>npe5__Affiliation__c.Organization_Chapter_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
