@@ -7,9 +7,9 @@
     <name>Med Professional: DNQ to MP</name>
     <style>freeForm</style>
     <subject>Make-A-Wish Referral Follow-up</subject>
-    <textOnly>Hello Dr. {!Lead.DV_Signer_First_Name__c} {!Lead.DV_Signer_Last_Name__c},
+    <textOnly>Hello Dr. {!Contact.FirstName} {!Contact.LastName},
 
-After reviewing the information that was submitted for {!Lead.FirstName}’s evaluation of wish eligibility, we have concluded that your patient does not meet our medical eligibility criteria for a wish at this time. If you would like to review our criteria please visit us online at www.md.wish.org.
+After reviewing the information that was submitted for &lt;INSERT WISH CHILD NAME&gt; ’s evaluation of wish eligibility, we have concluded that your patient does not meet our medical eligibility criteria for a wish at this time. If you would like to review our criteria please visit us online at www.md.wish.org.
 
 If you feel there is additional information you could provide that would be supportive of wish eligibility, please contact us.
 
@@ -18,12 +18,12 @@ If in the future, should the child’s medical condition change, we encourage yo
 Thanks to the support of you and other medical professionals around the country, we continue to come closer each year to our vision of making every eligible child’s wish come true.
 
 Regards,
-{!Lead.OwnerFullName}
+{!User.FirstName} {!User.LastName}
 
 
 
 
-Wish Referral: {!Lead.Id}</textOnly>
+Wish Referral# {!Lead.Id}</textOnly>
     <type>html</type>
     <uiType>Aloha</uiType>
 </EmailTemplate>
