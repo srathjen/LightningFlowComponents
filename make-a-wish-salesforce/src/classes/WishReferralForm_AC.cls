@@ -49,10 +49,6 @@ global class WishReferralForm_AC {
 	public Boolean referrerContactEmpty { get; set; }
 	public Boolean treatingContactEmpty { get; set; }
 	public Boolean bestContactEmpty { get; set; }
-	public Boolean createAffiliationReferrer { get; set; }
-	public Boolean createAffiliationTreating { get; set; }
-	public Boolean createAffiliationBest { get; set; }
-	public List<npe5__Affiliation__c> newMpHtfAffiliations { get; set; }
 
 	public WishReferralForm_AC() {
 		communictionList = new List<String>();
@@ -67,14 +63,10 @@ global class WishReferralForm_AC {
 		referrerContactEmpty = false;
 		treatingContactEmpty = false;
 		bestContactEmpty = false;
-		createAffiliationReferrer = false;
-		createAffiliationTreating = false;
-		createAffiliationBest = false;
 		if (ApexPages.currentPage().getParameters().get('isSuccess') != null) {
 			displayAckMsg = Boolean.valueOf(ApexPages.currentPage().getParameters().get('isSuccess'));
 		}
 		mpHtfSearch = new MpHtfSearchWrapper();
-		newMpHtfAffiliations = new List<npe5__Affiliation__c>();
 	}
 
 	/**
@@ -261,7 +253,6 @@ global class WishReferralForm_AC {
 				Boolean redirection;
 				currLead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
 				insert currLead;
-				insert newMpHtfAffiliations;
 				if (currLead.Id != null) {
 					redirection = true;
 				}
@@ -560,28 +551,7 @@ global class WishReferralForm_AC {
 			if (currLead.Treating_MP_HTF__c != null) {
 				currLead.Best_Contact_HTF__c = currLead.Treating_MP_HTF__c;
 			}
-			if (createAffiliationReferrer && currLead.Referring_MP__c != null && currLead.Referring_MP_HTF__c != null) {
-				newMpHtfAffiliations.add(createAffiliation(currLead.Referring_MP__c, currLead.Referring_MP_HTF__c));
-			}
-			if (createAffiliationTreating && currLead.Treating_MP__c != null && currLead.Treating_MP_HTF__c != null) {
-				newMpHtfAffiliations.add(createAffiliation(currLead.Treating_MP__c, currLead.Treating_MP_HTF__c));
-			}
-			if (createAffiliationBest && currLead.Best_Contact__c != null && currLead.Treating_MP_HTF__c != null) {
-				newMpHtfAffiliations.add(createAffiliation(currLead.Best_Contact__c, currLead.Treating_MP_HTF__c));
-			}
 		}
-	}
-
-	//Create new medical professional affiliation with hospital account
-	private npe5__Affiliation__c createAffiliation(Id contactId, Id accountId) {
-		npe5__Affiliation__c mpHtfAffiliation = new npe5__Affiliation__c ();
-		mpHtfAffiliation.npe5__Contact__c = contactId;
-		mpHtfAffiliation.npe5__Organization__c = accountId;
-		mpHtfAffiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
-		mpHtfAffiliation.npe5__StartDate__c = date.today();
-		mpHtfAffiliation.Constituent_Code__c = Constant_AC.WISH_AFFILIATION_TYPE_MEDICAL_PROFESSIONAL;
-		mpHtfAffiliation.npe5__Description__c = 'Created by IME Referral Form';
-		return mpHtfAffiliation;
 	}
 
 	/**
