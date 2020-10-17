@@ -7232,6 +7232,16 @@ null)</formula>
         <description>It holds the contact region chapter</description>
         <externalId>false</externalId>
         <label>Chapter Name</label>
+        <lookupFilter>
+            <active>true</active>
+            <errorMessage>Please select a valid Chapter Account.</errorMessage>
+            <filterItems>
+                <field>Account.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Chapter</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
         <referenceTo>Account</referenceTo>
         <relationshipLabel>Contacts (Region Chapter)</relationshipLabel>
         <relationshipName>Contacts</relationshipName>
@@ -13383,14 +13393,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Master</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Miss</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Mr%2E</fullName>
                 <default>false</default>
             </values>
@@ -13400,10 +13402,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Ms%2E</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Prof%2E</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -19562,6 +19560,21 @@ $Profile.Name  != 'Integration'
         <errorConditionFormula>AND( Publicity_Candidate__c = TRUE, 
 ISBLANK( Reason_for_Publicity_Candidate__c ),$Profile.Name  != 'Integration')</errorConditionFormula>
         <errorMessage>Please enter value for Reason for Publicity Candidate in order to enter check Publicity Candidate</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Ensure_the_MP_has_a_Chapter_or_Zip</fullName>
+        <active>true</active>
+        <description>Ensure the User populates a Chapter Name or Zip Code on a new MP.</description>
+        <errorConditionFormula>ISNEW()
+&amp;&amp;
+RecordType.Name = "Medical Professional"
+&amp;&amp;
+ISBLANK(Region_Chapter__c)
+&amp;&amp;
+ISBLANK(MailingPostalCode)
+&amp;&amp;
+$Profile.Name != "Wish Referral Form Profile"</errorConditionFormula>
+        <errorMessage>Please populate a Chapter Name or Zip Code to ensure the MP gets routed to a chapter.</errorMessage>
     </validationRules>
     <webLinks>
         <fullName>Loop__LOOP</fullName>
