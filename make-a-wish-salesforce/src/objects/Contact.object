@@ -11317,7 +11317,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <fullName>Board_Member</fullName>
         <active>true</active>
         <compactLayoutAssignment>Lightning_Contacts</compactLayoutAssignment>
-        <description>It will display the board member information</description>
+        <description>A contact representing a board member</description>
         <label>Board Member</label>
         <picklistValues>
             <picklist>Already_wish_granted_by_MAW_Other_Org__c</picklist>
@@ -12268,10 +12268,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>Specialty__c</picklist>
             <values>
-                <fullName>Brain Tumor</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Cardiology</fullName>
                 <default>false</default>
             </values>
@@ -12300,18 +12296,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Genetics %26 Metabolism</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Genitourinary</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Hematology</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Hospitalist</fullName>
                 <default>false</default>
             </values>
@@ -12332,23 +12316,11 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Oncology</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Orthopedics</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Otolaryngology</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Pain Medicine</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Palliative Care Medicine</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -12361,10 +12333,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Rheumatology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Surgery</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -12928,7 +12896,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <fullName>Medical_Professional</fullName>
         <active>true</active>
         <compactLayoutAssignment>Lightning_Contacts</compactLayoutAssignment>
-        <description>It will display the information about the medical professional.</description>
+        <description>A contact representing a medical professional</description>
         <label>Medical Professional</label>
         <picklistValues>
             <picklist>Already_wish_granted_by_MAW_Other_Org__c</picklist>
@@ -13887,10 +13855,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>Specialty__c</picklist>
             <values>
-                <fullName>Brain Tumor</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Cardiology</fullName>
                 <default>false</default>
             </values>
@@ -13919,18 +13883,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Genetics %26 Metabolism</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Genitourinary</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Hematology</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Hospitalist</fullName>
                 <default>false</default>
             </values>
@@ -13951,23 +13903,11 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Oncology</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Orthopedics</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Otolaryngology</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Pain Medicine</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Palliative Care Medicine</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -13980,10 +13920,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Rheumatology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Surgery</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -14590,7 +14526,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <fullName>Volunteer_Contact</fullName>
         <active>true</active>
         <compactLayoutAssignment>Lightning_Volunteer</compactLayoutAssignment>
-        <description>It will display the information about the volunteer.</description>
+        <description>A contact representing a volunteer</description>
         <label>Volunteer Contact</label>
         <picklistValues>
             <picklist>Already_wish_granted_by_MAW_Other_Org__c</picklist>
@@ -15541,10 +15477,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>Specialty__c</picklist>
             <values>
-                <fullName>Brain Tumor</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Cardiology</fullName>
                 <default>false</default>
             </values>
@@ -15573,18 +15505,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Genetics %26 Metabolism</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Genitourinary</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Hematology</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Hospitalist</fullName>
                 <default>false</default>
             </values>
@@ -15605,23 +15525,11 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Oncology</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Orthopedics</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Otolaryngology</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Pain Medicine</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Palliative Care Medicine</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -15634,10 +15542,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Rheumatology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Surgery</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -16276,7 +16180,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <fullName>Wish_Child</fullName>
         <active>true</active>
         <compactLayoutAssignment>Lightning_Contacts</compactLayoutAssignment>
-        <description>It will display the child related information.</description>
+        <description>A contact representing a wish child</description>
         <label>Wish Child</label>
         <picklistValues>
             <picklist>Already_wish_granted_by_MAW_Other_Org__c</picklist>
@@ -17151,10 +17055,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>Specialty__c</picklist>
             <values>
-                <fullName>Brain Tumor</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Cardiology</fullName>
                 <default>false</default>
             </values>
@@ -17183,18 +17083,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Genetics %26 Metabolism</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Genitourinary</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Hematology</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Hospitalist</fullName>
                 <default>false</default>
             </values>
@@ -17215,23 +17103,11 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Oncology</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Orthopedics</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Otolaryngology</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Pain Medicine</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Palliative Care Medicine</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -17244,10 +17120,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Rheumatology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Surgery</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -17941,7 +17813,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <fullName>Wish_Family</fullName>
         <active>true</active>
         <compactLayoutAssignment>Lightning_Contacts</compactLayoutAssignment>
-        <description>It will display the wish kid family related information.</description>
+        <description>A contact representing a wish family member</description>
         <label>Wish Family</label>
         <picklistValues>
             <picklist>Already_wish_granted_by_MAW_Other_Org__c</picklist>
@@ -18903,10 +18775,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>Specialty__c</picklist>
             <values>
-                <fullName>Brain Tumor</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Cardiology</fullName>
                 <default>false</default>
             </values>
@@ -18935,18 +18803,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Genetics %26 Metabolism</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Genitourinary</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Hematology</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Hospitalist</fullName>
                 <default>false</default>
             </values>
@@ -18967,23 +18823,11 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Oncology</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Orthopedics</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Otolaryngology</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Pain Medicine</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Palliative Care Medicine</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -18996,10 +18840,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Rheumatology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Surgery</fullName>
                 <default>false</default>
             </values>
             <values>

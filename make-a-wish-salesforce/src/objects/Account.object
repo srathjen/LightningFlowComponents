@@ -5766,7 +5766,7 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <fullName>Chapter</fullName>
         <active>true</active>
         <compactLayoutAssignment>Chapter_Minipage_layout</compactLayoutAssignment>
-        <description>It displays the name of the state in which the account belongs.</description>
+        <description>An Account representing a Make-A-Wish chapter</description>
         <label>Chapter</label>
         <picklistValues>
             <picklist>AccountSource</picklist>
@@ -5791,6 +5791,17 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
             <values>
                 <fullName>4</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DV_Method_Preference__c</picklist>
+            <values>
+                <fullName>Electronic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paper</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -6381,7 +6392,7 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <fullName>HH_Account</fullName>
         <active>true</active>
         <compactLayoutAssignment>Wish_Household</compactLayoutAssignment>
-        <description>An Account representing a Household containing one or more individuals</description>
+        <description>An Account representing a household containing one or more individuals</description>
         <label>Household Account</label>
         <picklistValues>
             <picklist>AccountSource</picklist>
@@ -6406,6 +6417,17 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
             <values>
                 <fullName>4</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DV_Method_Preference__c</picklist>
+            <values>
+                <fullName>Electronic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paper</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -8457,7 +8479,7 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <fullName>In_Kind_Donors</fullName>
         <active>true</active>
         <compactLayoutAssignment>NPSP_Organization_Account</compactLayoutAssignment>
-        <description>This record type associated with In Kind Donors page layout</description>
+        <description>An account representing an in-kind donor</description>
         <label>In Kind Donors</label>
         <picklistValues>
             <picklist>AccountSource</picklist>
@@ -8498,6 +8520,17 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
             <values>
                 <fullName>4</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DV_Method_Preference__c</picklist>
+            <values>
+                <fullName>Electronic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paper</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -9892,6 +9925,17 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
             <values>
                 <fullName>4</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DV_Method_Preference__c</picklist>
+            <values>
+                <fullName>Electronic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paper</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
