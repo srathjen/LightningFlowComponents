@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <applicationVisibilities>
         <application>CRMfusionDBR101__DupeBlocker</application>
         <default>false</default>
@@ -25436,11 +25436,11 @@
         <recordType>Account.HH_Account</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Account-Volunteer In-Kind Donor</layout>
+        <layout>Account-In-Kind Donors - Volunteer</layout>
         <recordType>Account.In_Kind_Donors</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Account-Volunteer In-Kind Donor</layout>
+        <layout>Account-In-Kind Donors - Volunteer</layout>
         <recordType>Account.Organization</recordType>
     </layoutAssignments>
     <layoutAssignments>

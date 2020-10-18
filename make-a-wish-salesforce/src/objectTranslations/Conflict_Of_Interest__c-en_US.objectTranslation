@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -93,13 +93,6 @@
         <label><!-- Hidden Volunteer is Inactive --></label>
         <name>Volunteer_is_Inactive__c</name>
     </fields>
-    <layouts>
-        <layout>Conflict Of Interest Chapter Staff Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
     <layouts>
         <layout>Conflict Of Interest Layout</layout>
         <sections>

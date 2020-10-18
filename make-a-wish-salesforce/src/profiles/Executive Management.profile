@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <classAccesses>
         <apexClass>AddVolunteerRole_AC</apexClass>
         <enabled>false</enabled>
@@ -26630,7 +26630,7 @@
         <recordType>Contact.Medical_Professional</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Contact-Volunteer_Contact</layout>
+        <layout>Contact-Board Member</layout>
         <recordType>Contact.Board_Member</recordType>
     </layoutAssignments>
     <layoutAssignments>

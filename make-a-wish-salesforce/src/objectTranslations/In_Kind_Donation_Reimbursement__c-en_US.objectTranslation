@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -819,53 +819,7 @@ If this is a volunteer donor, gift subtype should begin with DRPS --></help>
         </sections>
     </layouts>
     <layouts>
-        <layout>In Kind Donation Chapter Staff Layout</layout>
-        <sections>
-            <label><!-- Attachment information --></label>
-            <section>Attachment information</section>
-        </sections>
-        <sections>
-            <label><!-- Attachments --></label>
-            <section>Attachments</section>
-        </sections>
-        <sections>
-            <label><!-- Chapter Staff Only --></label>
-            <section>Chapter Staff Only</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
-    <layouts>
         <layout>Reimbursement</layout>
-        <sections>
-            <label><!-- Attachment information --></label>
-            <section>Attachment information</section>
-        </sections>
-        <sections>
-            <label><!-- Attachments --></label>
-            <section>Attachments</section>
-        </sections>
-        <sections>
-            <label><!-- Chapter Staff Only --></label>
-            <section>Chapter Staff Only</section>
-        </sections>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Expense Description Section --></label>
-            <section>Expense Description Section</section>
-        </sections>
-        <sections>
-            <label><!-- Payment Mailing Address --></label>
-            <section>Payment Mailing Address</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Reimbursement Chapter Staff Layout</layout>
         <sections>
             <label><!-- Attachment information --></label>
             <section>Attachment information</section>
