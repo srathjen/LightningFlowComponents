@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -84,13 +84,6 @@
         <label><!-- Hidden isEligible --></label>
         <name>isEligible__c</name>
     </fields>
-    <layouts>
-        <layout>Diagnosis Verification Chapter Staff Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
     <layouts>
         <layout>Diagnosis Verification Layout</layout>
         <sections>

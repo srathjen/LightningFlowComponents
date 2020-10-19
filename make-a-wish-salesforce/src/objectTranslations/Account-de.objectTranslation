@@ -1967,21 +1967,6 @@
             <section>Location</section>
         </sections>
     </layouts>
-    <layouts>
-        <layout>Volunteer In-Kind Donor</layout>
-        <sections>
-            <label><!-- Chapter Staff only --></label>
-            <section>Chapter Staff only</section>
-        </sections>
-        <sections>
-            <label><!-- Fields --></label>
-            <section>Fields</section>
-        </sections>
-        <sections>
-            <label><!-- Location --></label>
-            <section>Location</section>
-        </sections>
-    </layouts>
     <quickActions>
         <label><!-- New Account --></label>
         <name>CreateInKindDonorAccount</name>

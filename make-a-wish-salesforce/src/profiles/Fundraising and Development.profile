@@ -26635,7 +26635,7 @@
         <recordType>Contact.Medical_Professional</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Contact-Volunteer_Contact</layout>
+        <layout>Contact-Board Member</layout>
         <recordType>Contact.Board_Member</recordType>
     </layoutAssignments>
     <layoutAssignments>
