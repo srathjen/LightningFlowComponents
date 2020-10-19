@@ -366,6 +366,7 @@ public class ContactServiceTest {
 		insert volunteerOpportunities;
 
 		Lead qualifiedLead = TestDataFactory.createQualifiedLead(arizonaChapter.Id, icdCodes[0].Id);
+		qualifiedLead.Referring_MP__c = medProfessional.Id;
 		qualifiedLead.Treating_MP__c = medProfessional.Id;
 		insert qualifiedLead;
 
@@ -488,7 +489,8 @@ public class ContactServiceTest {
 		List<Lead> leads = [
 				SELECT CreatedDate, DOB__c, Medical_Provider_Category__c, Self_describe_comment_box__c,
 						What_is_the_family_s_primary_spoken_lang__c, ChapterName__c, LeadSource, Referrer_City__c,
-						Referrer_Email__c, Referrer_FirstName__c, Referrer_Last_Name__c, Referrer_Phone__c,
+						Referrer_Email__c, Referring_MP__c, Referring_MP__r.FirstName, Referring_MP__r.LastName,
+						Referrer_FirstName__c, Referrer_Last_Name__c, Referrer_Phone__c,
 						Referrer_Zip__c, Relationship_to_child__c, Other_Medical_Provider_Category__c,
 						Other_Relationship_To_Child__c, is_Family_Aware_of_Referral__c, Migrated_Record__c,
 						How_Did_you_hear_about_Make_A_Wish__c, Additional_Parent_City__c, City,
@@ -503,7 +505,8 @@ public class ContactServiceTest {
 		Contact result = ContactService.buildWishChildFromLead(leads[0]);
 		Test.stopTest();
 
-		System.assertEquals('Referrer', result.Referrer_FirstName__c);
+		System.assertEquals('Lewis', result.Referrer_FirstName__c);
+		System.assertEquals('Hall', result.Referrer_Last_Name__c);
 	}
 
 	@IsTest
@@ -603,30 +606,6 @@ public class ContactServiceTest {
 		];
 		Test.stopTest();
 		System.assert(updatedContacts[0].Hidden_Zip_Code__c == null);
-	}
-
-	@isTest
-	private static void validateUpdateOrgAffiliationStatus() {
-		Map<Id, Contact> contactMap = new Map<Id, Contact>();
-		List<Contact> newContactsList = new List<Contact>();
-		for (Contact contact : [
-				SELECT Id, is_Application__c
-				FROM Contact
-				WHERE is_Application__c != null
-		]) {
-			contactMap.put(contact.Id, contact);
-			Contact updatedContact = new Contact(Id = contact.Id, is_Application__c = 'Rejected');
-			newContactsList.add(updatedContact);
-		}
-		Test.startTest();
-		ContactService.updateOrgAffiliationStatus(newContactsList, contactMap);
-		List<npe5__Affiliation__c> affiliationList = [
-				SELECT Id, npe5__Status__c
-				FROM npe5__Affiliation__c
-				WHERE npe5__Contact__c IN :contactMap.keySet()
-		];
-		Test.stopTest();
-		System.assert(affiliationList[0].npe5__Status__c == 'Not Approved');
 	}
 
 	@isTest
