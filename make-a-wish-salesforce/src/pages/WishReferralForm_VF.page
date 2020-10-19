@@ -182,8 +182,6 @@
                                 <div class="col-sm-6" style="margin-top:-10px; text-align: center">
                                     <label>Please provide additional information (Optional)</label>
                                 </div>
-                                <apex:inputHidden id="referrerAffiliation"
-                                                  value="{!createAffiliationReferrer}"/>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-3"/>
@@ -621,7 +619,7 @@
                         </div>
 
                         <apex:outputPanel id="rr">
-                            <apex:actionRegion>
+                            <apex:actionRegion >
                                 <div class="form-group row">
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Number_of_Siblings}</label>
                                     </div>
@@ -637,26 +635,25 @@
                                 </div>
                                 <div class="form-group row sibInfo">
                                     <apex:outputPanel id="table">
-                                        <apex:outputPanel
-                                                rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
+                                        <apex:outputPanel rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
                                             <label class="col-md-12">{!$Label.Wish_Referral_Sibling_Information}</label>
                                         </apex:outputPanel>
                                         <div class="col-md-12 sib-tablewrap">
                                             <apex:dataTable value="{!SiblingList}" var="currsibling"
                                                             styleClass="table table-maw table-hover">
-                                                <apex:column>
+                                                <apex:column >
                                                     <apex:inputText value="{!currsibling.fName}"
                                                                     styleClass="form-control"
                                                                     html-placeholder="{!$Label.Wish_Referral_Placeholder_First_Name}"
                                                                     id="psibfirstname"/>
                                                 </apex:column>
-                                                <apex:column>
+                                                <apex:column >
                                                     <apex:inputText value="{!currsibling.lName}"
                                                                     styleClass="form-control"
                                                                     html-placeholder="{!$Label.Wish_Referral_Last_Name}"
                                                                     id="psiblastname"/>
                                                 </apex:column>
-                                                <apex:column>
+                                                <apex:column >
                                                     <apex:inputText value="{!currsibling.age}" styleClass="form-control"
                                                                     html-placeholder="{!$Label.Wish_Referral_Age}"
                                                                     id="psibage"/>
@@ -930,8 +927,6 @@
                                 <div class="col-sm-6" style="margin-top:-10px; text-align: center">
                                     <label>Please provide additional information (Optional)</label>
                                 </div>
-                                <apex:inputHidden id="treatingAffiliation"
-                                                  value="{!createAffiliationTreating}"/>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-3"/>
@@ -1210,8 +1205,6 @@
                                     <div class="col-sm-6" style="margin-top:-10px; text-align: center">
                                         <label>Please provide additional information (Optional)</label>
                                     </div>
-                                    <apex:inputHidden id="bestAffiliation"
-                                                      value="{!createAffiliationBest}"/>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3"/>
@@ -1435,7 +1428,7 @@
         </div>
     </div>
     <!-- / modal end -->
-    <apex:includeLightning/>
+    <apex:includeLightning />
     <script>
         window.addEventListener('load', () => {
             buildValidationLookupFields();
@@ -1635,7 +1628,7 @@
     <!--<script src="//ssl.wish.org/satellite/staging/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205-staging.js"></script>-->
     <!-- prod -->
     <script src="//ssl.wish.org/satellite/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205.js"></script>
-    <apex:outputPanel>
+    <apex:outputPanel >
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-2.2.4.min.js')}"></script>
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-ui-1.11.3.min.js')}"></script>
         <script>
@@ -1910,13 +1903,10 @@
                                 if (event.status && result === true) {
                                     if (inputType === 'referrerContact' || inputType === 'referrerAccount') {
                                         document.getElementsByClassName('refNewAff')[0].style.display = 'block';
-                                        document.querySelectorAll('[id$="referrerAffiliation"]')[0].value = true;
                                     } else if (inputType === 'treatingContact' || inputType === 'treatingAccount') {
                                         document.getElementsByClassName('trtNewAff')[0].style.display = 'block';
-                                        document.querySelectorAll('[id$="treatingAffiliation"]')[0].value = true;
                                     } else if (inputType === 'bestContact') {
                                         document.getElementsByClassName('bestNewAff')[0].style.display = 'block';
-                                        document.querySelectorAll('[id$="bestAffiliation"]')[0].value = true;
                                     }
                                 }
                             },
@@ -2000,10 +1990,8 @@
                     if (inputType === 'referrerContact') {
                         document.querySelector('[id$="createNewRefMPchk"]').disabled = false;
                         document.getElementsByClassName('refNewAff')[0].style.display = 'none';
-                        document.querySelectorAll('[id$="referrerAffiliation"]')[0].value = false;
                     } else if (inputType === 'referrerAccount') {
                         document.querySelector('[id$="createNewRefHTFchk"]').disabled = false;
-                        document.querySelectorAll('[id$="referrerAffiliation"]')[0].value = false;
                         let referringContact = document.getElementById('j_id0:frm:referrerContactEmpty').value;
                         if (referringContact === 'false') {
                             document.getElementsByClassName('refNewAff')[0].style.display = 'none';
@@ -2011,15 +1999,11 @@
                     } else if (inputType === 'treatingContact') {
                         document.querySelector('[id$="createNewTrtMPchk"]').disabled = false;
                         document.getElementsByClassName('trtNewAff')[0].style.display = 'none';
-                        document.querySelectorAll('[id$="treatingAffiliation"]')[0].value = false;
                     } else if (inputType === 'bestContact') {
                         document.querySelector('[id$="createNewBestMPchk"]').disabled = false;
                         document.getElementsByClassName('bestNewAff')[0].style.display = 'none';
-                        document.querySelectorAll('[id$="bestAffiliation"]')[0].value = false;
                     } else if (inputType === 'treatingAccount') {
                         document.querySelector('[id$="createNewTrtHTFchk"]').disabled = false;
-                        document.querySelectorAll('[id$="treatingAffiliation"]')[0].value = false;
-                        document.querySelectorAll('[id$="bestAffiliation"]')[0].value = false;
                         let treatingContact = document.getElementById('j_id0:frm:treatingContactEmpty').value;
                         let bestContact = document.getElementById('j_id0:frm:bestContactEmpty').value;
                         if (treatingContact === 'false') {
@@ -2231,15 +2215,8 @@
                 }
 
                 let externalBestContact = document.querySelector('#externalBestContactLookup');
-                if (document.querySelectorAll('[id$="externalBestContactLookupOutput"]')[0].value === ''
-                    && document.querySelectorAll('[id$="createNewBestMPchk"]')[0].checked === false) {
-                    document.querySelectorAll('[id$="externalBestContactLookupValidation"]')[0].required = true;
-                    document.querySelector('#bestContactEm').innerText = 'Oops! Please enter a Medical Professional';
-                    document.querySelector('#bestContactEm').hidden = false;
-                    externalBestContact.querySelector('.slds-input').style.border = "1px solid red";
-                } else if (referringSameAsTreatingSameAsBest === true
+                if (referringSameAsTreatingSameAsBest === true
                     && document.querySelectorAll('[id$="bestSameAsRefInfoChk"]')[0].checked === false) {
-                    document.querySelectorAll('[id$="externalBestContactLookupValidation"]')[0].required = true;
                     document.querySelector('#bestContactEm').innerText = 'Oops! Referring Medical Professional cannot be the same as the ' +
                         'Treating Medical Professional and Best Contact';
                     document.querySelector('#bestContactEm').hidden = false;

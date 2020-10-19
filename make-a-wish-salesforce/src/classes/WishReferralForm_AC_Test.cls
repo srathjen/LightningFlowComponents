@@ -474,17 +474,10 @@ private class WishReferralForm_AC_Test {
         controller.copyReferrerInfo = true;
         controller.currLead.Referring_MP__c = referrer.Id;
         controller.currLead.Referring_MP_HTF__c = hospital.Id;
-        controller.createAffiliationReferrer = true;
         Test.startTest();
         controller.CreateLead();
         Test.stopTest();
         
-        List<npe5__Affiliation__c> affiliationList = [
-            SELECT Id 
-            FROM npe5__Affiliation__c 
-            WHERE npe5__Contact__c = :referrer.Id
-        ];
-        System.assert(!affiliationList.isEmpty());
         System.assert(controller.currLead.Treating_MP__c == controller.currLead.Referring_MP__c);
         System.assert(controller.currLead.Treating_MP_HTF__c == controller.currLead.Referring_MP_HTF__c);
     }
