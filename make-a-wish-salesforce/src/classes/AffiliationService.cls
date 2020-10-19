@@ -695,10 +695,10 @@ public class AffiliationService {
 				WHERE npe5__Contact__c IN :mpChapterAffiliations.keySet()
 				AND npe5__Organization__c IN :mpChapterAffiliations.values()
 		]){
-			affiliation.npe5__Primary__c = false;
+            affiliation.npe5__Primary__c = false;
             affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
             affiliation.npe5__EndDate__c = null;
-			mpPrimaryAffiliationsUpdate.add(affiliation);
+            mpPrimaryAffiliationsUpdate.add(affiliation);
 		}
 		update mpPrimaryAffiliationsUpdate;
 	}
