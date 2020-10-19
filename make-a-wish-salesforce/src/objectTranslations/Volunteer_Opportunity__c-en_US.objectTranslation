@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+﻿<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
         <value>Volunteer Opportunity</value>
@@ -963,21 +963,6 @@
         </sections>
     </layouts>
     <layouts>
-        <layout>Non Wish &amp; Event Chapter Staff Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Non-Wish &amp; Event Details --></label>
-            <section>Non-Wish &amp; Event Details</section>
-        </sections>
-        <sections>
-            <label><!-- Volunteer Details --></label>
-            <section>Volunteer Details</section>
-        </sections>
-    </layouts>
-    <layouts>
         <layout>Non Wish &amp; Event for Volunteers</layout>
         <sections>
             <label><!-- Custom Links --></label>
@@ -1049,28 +1034,6 @@
         <sections>
             <label><!-- Wish Details --></label>
             <section>Wish Details</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Wish (for Vol Opp Approvals)</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Wish Chapter Staff Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Volunteer Details --></label>
-            <section>Volunteer Details</section>
-        </sections>
-        <sections>
-            <label><!-- Wish Child Details --></label>
-            <section>Wish Child Details</section>
         </sections>
     </layouts>
     <layouts>

@@ -1,16 +1,16 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<font face="arial"><span style="font-size: 12pt;">Hello Dr. {!Lead.DV_Signer_First_Name__c} {!Lead.DV_Signer_Last_Name__c},</span></font><br>
-<br><font face="arial"><span style="font-size: 12pt;">
-After reviewing the information that was submitted for {!Lead.FirstName}’s evaluation of wish eligibility, we have concluded that your patient does not meet our medical eligibility criteria for a wish at this time. If you would like to review our criteria please visit us online at </span></font><a href="http://www.md.wish.org" style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><u><span textcolor="#0563C1" style="color: #0563C1">www.md.wish.org</span></u></a><font face="arial"><span style="font-size: 12pt;">.</span></font><br>
-<br><font face="arial"><span style="font-size: 12pt;">
+<![CDATA[<font face="arial" style=""><span style="font-size: 12pt;">Hello Dr. </span>{!Contact.FirstName}&nbsp;{!Contact.LastName}<span style="font-size: 12pt;">,</span></font><br>
+<br><font face="arial" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="font-size: 12pt;">
+After reviewing the information that was submitted for <b style="background-color: rgb(255, 255, 102);">&lt;INSERT WISH CHILD NAME&gt;</b> ’s evaluation of wish eligibility, we have concluded that your patient does not meet our medical eligibility criteria for a wish at this time. If you would like to review our criteria please visit us online at </span></font><a href="http://www.md.wish.org" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><u><span textcolor="#0563C1" style="color: #0563C1">www.md.wish.org</span></u></a><font face="arial" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="font-size: 12pt;">.</span></font><br>
+<br><font face="arial" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="font-size: 12pt;">
 If you feel there is additional information you could provide that would be supportive of wish eligibility, please contact us.</span></font><br>
-<br><font face="arial"><span style="font-size: 12pt;">
-If in the future, should the child’s medical condition change, we encourage you to refer the child again using the online referral form on </span></font><a href="http://www.md.wish.org" style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><u><span textcolor="#0563C1" style="color: #0563C1">www.md.wish.org</span></u></a><font face="arial"><span style="font-size: 12pt;">.</span></font><br>
-<br><font face="arial"><span style="font-size: 12pt;">
+<br><font face="arial" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="font-size: 12pt;">
+If in the future, should the child’s medical condition change, we encourage you to refer the child again using the online referral form on </span></font><a href="http://www.md.wish.org" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><u><span textcolor="#0563C1" style="color: #0563C1">www.md.wish.org</span></u></a><font face="arial" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="font-size: 12pt;">.</span></font><br>
+<br><font face="arial" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="font-size: 12pt;">
 Thanks to the support of you and other medical professionals around the country, we continue to come closer each year to our vision of making every eligible child’s wish come true.</span></font><br>
-<br><font face="arial"><span style="font-size: 12pt;">
-Regards,</span></font><br><div style=""><font face="arial">{!Lead.OwnerFullName}</font></div><div style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><br></div><div style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><br></div><div style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><br></div><div style="font-family: arial; font-size: 12pt;"><font color="#cccccc"><br></font></div><div style="font-family: arial; font-size: 12pt;"><font color="#cccccc">Wish Referral# {!Lead.Id}</font></div>]]></td>
+<br><font face="arial" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="font-size: 12pt;">
+Regards,</span></font><br><div style=""><font face="arial">{!User.FirstName}&nbsp;{!User.LastName}</font></div><div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><br></div><div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><br></div><div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><br></div><div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><font color="#cccccc"><br></font></div><div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><font color="#cccccc">Wish Referral# {!Lead.Id}</font></div>]]></td>
 </tr>
 </table>

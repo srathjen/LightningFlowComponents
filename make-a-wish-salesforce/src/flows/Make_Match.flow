@@ -3461,6 +3461,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         </inputAssignments>
         <object>Lead</object>
     </recordUpdates>
+    <runInMode>SystemModeWithoutSharing</runInMode>
     <screens>
         <name>Add_Existing</name>
         <label>Confirm Existing HTF</label>

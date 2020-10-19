@@ -6,6 +6,14 @@
     <name>Account: HTF Owner Changed.   Update New Owner.</name>
     <style>freeForm</style>
     <subject>{!Account.Name} has been re-assigned to the {!Account.Chapter_Name_Text__c} Chapter</subject>
+    <textOnly>A hospital/treatment facility record has been re-assigned to the {!Account.Chapter_Name_Text__c} Chapter.
+
+{!Account.Name}
+{!Account.Department__c}
+{!Account.BillingAddress}
+{!Account.Phone}
+
+{!Account.Link}</textOnly>
     <type>html</type>
     <uiType>Aloha</uiType>
 </EmailTemplate>

@@ -509,6 +509,10 @@ Converts this: 6043458787 --&gt;  (604) 345-8787</description>
     <rules>
         <fullName>Lead%3AQualifying Medical Professional when child is NOT eligible</fullName>
         <actions>
+            <name>Lead_Email_Alert_to_Qualifying_Medical_Professional_when_child_is_NOT_eligible</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
             <name>Send_DNQ_Notification_to_Qualifying_Medical_Professional</name>
             <type>Task</type>
         </actions>

@@ -22,7 +22,7 @@
         <matchingRuleItems>
             <blankValueBehavior>NullNotAllowed</blankValueBehavior>
             <fieldName>Phone</fieldName>
-            <matchingMethod>Exact</matchingMethod>
+            <matchingMethod>Phone</matchingMethod>
         </matchingRuleItems>
         <matchingRuleItems>
             <blankValueBehavior>NullNotAllowed</blankValueBehavior>

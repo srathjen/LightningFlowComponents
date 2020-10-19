@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -238,7 +237,7 @@
     </fields>
     <fields>
         <fullName>Contact__c</fullName>
-        <description>A Wish Affiliation&apos;s related Contact.</description>
+        <description>A Wish Affiliation's related Contact.</description>
         <externalId>false</externalId>
         <label>Contact</label>
         <referenceTo>Contact</referenceTo>
@@ -298,7 +297,7 @@
         <fullName>Full_Name__c</fullName>
         <description>Displays the Full Name of the Wish Affiliations Primary Contact and a Hyperlink link to their Salesforce record.</description>
         <externalId>false</externalId>
-        <formula>HYPERLINK(&quot;/&quot; &amp; Contact__r.Id,  Contact__r.FirstName &amp; &quot; &quot; &amp;  Contact__r.LastName , &quot;_self&quot;)</formula>
+        <formula>HYPERLINK("/" &amp; Contact__r.Id,  Contact__r.FirstName &amp; " " &amp;  Contact__r.LastName , "_self")</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Full Name</label>
         <required>false</required>
@@ -310,18 +309,18 @@
     <fields>
         <fullName>Health_Treatment_Facility__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
-        <description>A Wish Affiliation&apos;s related &quot;Health Treatment Facility&quot; account.</description>
+        <description>A Wish Affiliation's related "Health Treatment Facility" account.</description>
         <externalId>false</externalId>
         <label>Hospital Treatment Facility</label>
         <lookupFilter>
             <active>true</active>
-            <errorMessage>The Account record type must be of the type &quot;Hospital Treatment Facility&quot;</errorMessage>
+            <errorMessage>The Account record type must be of the type "Hospital Treatment Facility"</errorMessage>
             <filterItems>
                 <field>Account.RecordType.Name</field>
                 <operation>equals</operation>
                 <value>Hospital Treatment Facility</value>
             </filterItems>
-            <infoMessage>The Account record type must be of the type &quot;Hospital Treatment Facility&quot;</infoMessage>
+            <infoMessage>The Account record type must be of the type "Hospital Treatment Facility"</infoMessage>
             <isOptional>false</isOptional>
         </lookupFilter>
         <referenceTo>Account</referenceTo>
@@ -355,11 +354,11 @@
     </fields>
     <fields>
         <fullName>Medical_Professional_Status__c</fullName>
-        <description>Uses the status of a Medical Professional&apos;s Affiliation to the chapter to determine their status.</description>
+        <description>Uses the status of a Medical Professional's Affiliation to the chapter to determine their status.</description>
         <externalId>false</externalId>
         <formula>Contact__r.Medical_Professional_Status__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>To change the status, create or update this contact&apos;s related &apos;Organization Affiliation&apos; records (on the contact) to a status of &apos;Active&apos; or &apos;Inactive&apos;. Note: this is the record or records related to the Chapter not a health treatment facility.</inlineHelpText>
+        <inlineHelpText>To change the status, create or update this contact's related 'Organization Affiliation' records (on the contact) to a status of 'Active' or 'Inactive'. Note: this is the record or records related to the Chapter not a health treatment facility.</inlineHelpText>
         <label>Medical Professional Status</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -369,7 +368,7 @@
     </fields>
     <fields>
         <fullName>My_Wish_Affiliation__c</fullName>
-        <description>True when the user viewing the record is also the related Wish Case&apos;s Owner</description>
+        <description>True when the user viewing the record is also the related Wish Case's Owner</description>
         <externalId>false</externalId>
         <formula>IF($User.Id = Wish__r.OwnerId, TRUE, FALSE)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -381,7 +380,7 @@
     <fields>
         <fullName>Non_Comped__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>Used to denote when a contact has decided to participate in the wish at their own expense ie Make a Wish is not &apos;Comp&apos;ing their expenses.</description>
+        <description>Used to denote when a contact has decided to participate in the wish at their own expense ie Make a Wish is not 'Comp'ing their expenses.</description>
         <externalId>false</externalId>
         <label>Non-Comped</label>
         <trackHistory>true</trackHistory>
@@ -413,7 +412,7 @@
     </fields>
     <fields>
         <fullName>Qualifying_Medical_Team_Member__c</fullName>
-        <description>True if the related relationship record&apos;s &apos;Qualifying Medical Team Member&apos; field is True.</description>
+        <description>True if the related relationship record's 'Qualifying Medical Team Member' field is True.</description>
         <externalId>false</externalId>
         <formula>Relationship__r.Qualifying_Medical_Professional__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -436,7 +435,7 @@
         <fullName>Related_To__c</fullName>
         <description>If there is a related relationship record it displays the name of the related contact, and a Hyperlink link to their Salesforce record.</description>
         <externalId>false</externalId>
-        <formula>HYPERLINK(&quot;/&quot; &amp; Relationship__r.npe4__Contact__r.Id,  Relationship__r.npe4__Contact__r.FirstName &amp; &quot; &quot; &amp; Relationship__r.npe4__Contact__r.LastName , &quot;_self&quot;)</formula>
+        <formula>HYPERLINK("/" &amp; Relationship__r.npe4__Contact__r.Id,  Relationship__r.npe4__Contact__r.FirstName &amp; " " &amp; Relationship__r.npe4__Contact__r.LastName , "_self")</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Related To</label>
         <required>false</required>
@@ -461,7 +460,7 @@
     <fields>
         <fullName>Relationship__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
-        <description>A Wish Affiliation&apos;s related Relationship record.</description>
+        <description>A Wish Affiliation's related Relationship record.</description>
         <externalId>false</externalId>
         <label>Relationship</label>
         <referenceTo>npe4__Relationship__c</referenceTo>
@@ -509,6 +508,23 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Specific_Type__c</fullName>
+        <description>Displays a detail wish affiliation type.</description>
+        <externalId>false</externalId>
+        <formula>Text(Wish_Affiliation_Type__c) +  
+IF(Parent_Legal_Guardian__c = TRUE || Referral_Source__c = TRUE || Treating_HCP__c = TRUE || Best_Medical_Contact__c = TRUE, " - ","") +
+IF(Parent_Legal_Guardian__c = TRUE, "Parent/Guardian ", "") +
+IF(Referral_Source__c = TRUE, "Referrer ", "") + 
+IF(Treating_HCP__c = TRUE, "Treating ", "") + 
+IF(Best_Medical_Contact__c = TRUE, "B.M.C. ", "")</formula>
+        <label>Specific Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Survey_Recipient__c</fullName>
         <defaultValue>false</defaultValue>
         <description>Denoted the participant who should receive the survey following the completion of the wish.</description>
@@ -521,7 +537,7 @@
     </fields>
     <fields>
         <fullName>Treating_HCP__c</fullName>
-        <description>True if the related relationships record&apos;s &apos;Treating Health Care Professional&apos; field is True.</description>
+        <description>True if the related relationships record's 'Treating Health Care Professional' field is True.</description>
         <externalId>false</externalId>
         <formula>Relationship__r.Treating_HCP__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -532,10 +548,10 @@
     </fields>
     <fields>
         <fullName>Under_18__c</fullName>
-        <description>&apos;Yes&apos; if the related contact is less than 18 years old.</description>
+        <description>'Yes' if the related contact is less than 18 years old.</description>
         <externalId>false</externalId>
-        <formula>IF(ISBLANK(Contact__r.Birthdate), &quot;No Birthdate Recorded&quot;,
-IF(Contact__r.Birthdate &gt; ADDMONTHS(TODAY(),-216), &quot;Yes&quot;, &quot;No&quot;))</formula>
+        <formula>IF(ISBLANK(Contact__r.Birthdate), "No Birthdate Recorded",
+IF(Contact__r.Birthdate &gt; ADDMONTHS(TODAY(),-216), "Yes", "No"))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Under 18 Years of Age</label>
         <required>false</required>
@@ -607,18 +623,18 @@ IF(Contact__r.Birthdate &gt; ADDMONTHS(TODAY(),-216), &quot;Yes&quot;, &quot;No&
     </fields>
     <fields>
         <fullName>Wish__c</fullName>
-        <description>The Wish Affiliation&apos;s related Wish.</description>
+        <description>The Wish Affiliation's related Wish.</description>
         <externalId>false</externalId>
         <label>Wish</label>
         <lookupFilter>
             <active>true</active>
-            <errorMessage>The Wish (case) record type must be of the type &apos;Wish&apos;.</errorMessage>
+            <errorMessage>The Wish (case) record type must be of the type 'Wish'.</errorMessage>
             <filterItems>
                 <field>Case.RecordType.Name</field>
                 <operation>equals</operation>
                 <value>Wish</value>
             </filterItems>
-            <infoMessage>The Wish (Case) record type must be of the type &apos;Wish&apos;.</infoMessage>
+            <infoMessage>The Wish (Case) record type must be of the type 'Wish'.</infoMessage>
             <isOptional>false</isOptional>
         </lookupFilter>
         <referenceTo>Case</referenceTo>
@@ -633,7 +649,7 @@ IF(Contact__r.Birthdate &gt; ADDMONTHS(TODAY(),-216), &quot;Yes&quot;, &quot;No&
     </fields>
     <fields>
         <fullName>Work_Email__c</fullName>
-        <description>Displays the related contact&apos;s work email address</description>
+        <description>Displays the related contact's work email address</description>
         <externalId>false</externalId>
         <formula>Contact__r.npe01__WorkEmail__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -646,7 +662,7 @@ IF(Contact__r.Birthdate &gt; ADDMONTHS(TODAY(),-216), &quot;Yes&quot;, &quot;No&
     </fields>
     <fields>
         <fullName>Work_Phone__c</fullName>
-        <description>Displays the related contact&apos;s work phone number</description>
+        <description>Displays the related contact's work phone number</description>
         <externalId>false</externalId>
         <formula>Contact__r.npe01__WorkPhone__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -741,7 +757,7 @@ IF(Contact__r.Birthdate &gt; ADDMONTHS(TODAY(),-216), &quot;Yes&quot;, &quot;No&
         <fullName>Med_Profs_must_be_linked_to_a_HTF_Acc</fullName>
         <active>true</active>
         <description>All Medical Professionals must be linked to a HTF Account before you can save the record.</description>
-        <errorConditionFormula>Relationship_Type__c = &quot;Medical Professional&quot;
+        <errorConditionFormula>Relationship_Type__c = "Medical Professional"
 &amp;&amp;
 ISBLANK(Health_Treatment_Facility__c)
 &amp;&amp;
@@ -752,17 +768,17 @@ Created_Via_Lead_Convert__c = false</errorConditionFormula>
     <validationRules>
         <fullName>Non_Med_Profs_cant_have_a_HTF_Acc</fullName>
         <active>true</active>
-        <description>Only Relationship Types of &apos;Medical Professional&apos; can be linked to a HTF Account</description>
-        <errorConditionFormula>Relationship_Type__c != &quot;Medical Professional&quot;
+        <description>Only Relationship Types of 'Medical Professional' can be linked to a HTF Account</description>
+        <errorConditionFormula>Relationship_Type__c != "Medical Professional"
 &amp;&amp;
 ISBLANK(Health_Treatment_Facility__c )=FALSE</errorConditionFormula>
-        <errorMessage>Only Medical Professionals can be linked to a Health Treatment Facility Account.  Please keep the HTF Account lookup blank, or update the Relationship Type to &apos;Medical Professional&apos;.</errorMessage>
+        <errorMessage>Only Medical Professionals can be linked to a Health Treatment Facility Account.  Please keep the HTF Account lookup blank, or update the Relationship Type to 'Medical Professional'.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Wish_Child_Cannot_Be_Hidden</fullName>
         <active>true</active>
-        <description>The Wish Child&apos;s Wish Affiliation cannot be set to &quot;Hide from Restricted Users&quot; as much functionality is dependent on users being able to see the wish child and their data.</description>
-        <errorConditionFormula>ISPICKVAL( Wish_Affiliation_Type__c , &quot;Wish Child&quot;)
+        <description>The Wish Child's Wish Affiliation cannot be set to "Hide from Restricted Users" as much functionality is dependent on users being able to see the wish child and their data.</description>
+        <errorConditionFormula>ISPICKVAL( Wish_Affiliation_Type__c , "Wish Child")
 &amp;&amp;
 Hide_from_Restricted_Users__c</errorConditionFormula>
         <errorDisplayField>Hide_from_Restricted_Users__c</errorDisplayField>

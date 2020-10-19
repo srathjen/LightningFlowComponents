@@ -196,6 +196,7 @@
     <members>QuickText</members>
     <members>Spanish_Translations__mdt</members>
     <members>Volunteer_Opportunity__c</members>
+    <members>Wish_Affiliation__c</members>
     <members>Wish_Budget__c</members>
     <members>Wish_Budget_Approver_Filter__c</members>
     <members>Wish_Child_Form__c</members>
@@ -1117,6 +1118,9 @@
     <members>Data_Detail_Validation/Val_WPlanning</members>
     <members>Data_Validation/All_Contacts_by_Type</members>
     <members>Data_Validation/All_HTF_Accounts</members>
+    <members>Data_Validation/HTF_Accounts_no_Chapter_BQq</members>
+    <members>Data_Validation/MP_Contact_Non_HTFNo_Primary_Affiliatio_dX7</members>
+    <members>Data_Validation/MP_Contacts_no_Chapter_ckD</members>
     <members>Data_Validation/Wishes_by_Status</members>
     <members>Data_Validation/WRS_Delivered_with_DS_Status_Not_Deliver</members>
     <members>Data_Validation/WRS_Sent_with_DS_Status_Not_Sent</members>
@@ -3230,5 +3234,5 @@
     <members>Lead</members>
     <name>Workflow</name>
   </types>
-  <version>47.0</version>
+  <version>48.0</version>
 </Package>

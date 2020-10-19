@@ -44,8 +44,8 @@ Modification Log:
         let contacts = [];
         //if referrer type is medical professional checks for referrer MP and HTF contact creation
         if (lead.Relationship_to_child__c === 'Medical Professional') {
-            if (!lead.Referring_MP__c && (lead.Referrer_FirstName__c || lead.Referrer_Last_Name__c)) {
-                contacts.push(lead.Referrer_FirstName__c + ' ' + lead.Referrer_Last_Name__c);
+            if (!lead.Referring_MP__c && (lead.Referring_MP_First_Name__c || lead.Referring_MP_Last_Name__c)) {
+                contacts.push(lead.Referring_MP_First_Name__c + ' ' + lead.Referring_MP_Last_Name__c);
             }
             if (!lead.Referring_MP_HTF__c && lead.Referring_MP_HTF_Name__c) {
                 contacts.push(lead.Referring_MP_HTF_Name__c);
