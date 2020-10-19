@@ -314,14 +314,16 @@ public without sharing class WishAffiliationService {
 	 * @return Contact
 	 */
 	public static Contact updateSpecificPhoneField(Contact contact) {
-		if (CONTACT_PHONE_HOME.equals(contact.npe01__PreferredPhone__c)) {
-			contact.HomePhone = contact.Phone;
-		} else if (CONTACT_PHONE_MOBILE.equals(contact.npe01__PreferredPhone__c)) {
-			contact.MobilePhone = contact.Phone;
-		} else if (CONTACT_PHONE_OTHER.equals(contact.npe01__PreferredPhone__c)) {
-			contact.OtherPhone = contact.Phone;
-		} else if (CONTACT_PHONE_WORK.equals(contact.npe01__PreferredPhone__c)) {
-			contact.npe01__WorkPhone__c = contact.Phone;
+		if(String.isNotEmpty(contact.Phone)){
+			if (CONTACT_PHONE_HOME.equals(contact.npe01__PreferredPhone__c)) {
+				contact.HomePhone = contact.Phone;
+			} else if (CONTACT_PHONE_MOBILE.equals(contact.npe01__PreferredPhone__c)) {
+				contact.MobilePhone = contact.Phone;
+			} else if (CONTACT_PHONE_OTHER.equals(contact.npe01__PreferredPhone__c)) {
+				contact.OtherPhone = contact.Phone;
+			} else if (CONTACT_PHONE_WORK.equals(contact.npe01__PreferredPhone__c)) {
+				contact.npe01__WorkPhone__c = contact.Phone;
+			}
 		}
 		return contact;
 	}
@@ -338,8 +340,9 @@ public without sharing class WishAffiliationService {
 						Survey_Recipient__c, Non_Comped__c, Details__c, Send_Clearance_Forms_To__c, Medical_Professional_Status__c,
 						Contact__r.Salutation, Contact__r.Name, Contact__r.FirstName, Contact__r.LastName, Contact__r.Birthdate, Contact__r.Current_Age__c,
 						Contact__r.MailingStreet, Contact__r.MailingCity, Contact__r.MailingState, Contact__r.MailingPostalCode,
-						Contact__r.MailingCountry, Contact__r.npe01__PreferredPhone__c, Contact__r.Phone, Contact__r.HomePhone,
+						Contact__r.MailingCountry, Contact__r.npe01__Preferred_Email__c, Contact__r.npe01__PreferredPhone__c, Contact__r.Phone, Contact__r.HomePhone,
 						Contact__r.MobilePhone, Contact__r.OtherPhone, Contact__r.npe01__WorkPhone__c, Contact__r.npe01__HomeEmail__c,
+						Contact__r.npe01__AlternateEmail__c, Contact__r.Alternate_Email_2__c, Contact__r.Alternate_Fax__c,
 						Contact__r.npe01__WorkEmail__c, Contact__r.npsp__Do_Not_Contact__c, Contact__r.Do_Not_Contact_Notes__c,
 						Contact__r.npsp__Deceased__c, Contact__r.Provider_Type__c, Contact__r.Fax, Contact__r.npsp__is_Address_Override__c,
 						Relationship__r.npe4__Type__c, Relationship__r.Parent_Legal_Guardian__c,
@@ -856,10 +859,11 @@ public without sharing class WishAffiliationService {
 						Survey_Recipient__c, Non_Comped__c, Details__c, Send_Clearance_Forms_To__c, Medical_Professional_Status__c,
 						Contact__r.Salutation, Contact__r.Name, Contact__r.FirstName, Contact__r.LastName, Contact__r.Birthdate, Contact__r.Current_Age__c,
 						Contact__r.MailingStreet, Contact__r.MailingCity, Contact__r.MailingState, Contact__r.MailingPostalCode,
-						Contact__r.MailingCountry, Contact__r.npe01__PreferredPhone__c, Contact__r.Phone, Contact__r.HomePhone,
+						Contact__r.MailingCountry, Contact__r.npe01__Preferred_Email__c, Contact__r.npe01__PreferredPhone__c, Contact__r.Phone, Contact__r.HomePhone,
 						Contact__r.MobilePhone, Contact__r.OtherPhone, Contact__r.npe01__WorkPhone__c, Contact__r.npe01__HomeEmail__c,
 						Contact__r.npe01__WorkEmail__c, Contact__r.npsp__Do_Not_Contact__c, Contact__r.Do_Not_Contact_Notes__c,
 						Contact__r.npsp__Deceased__c, Contact__r.Provider_Type__c, Contact__r.Fax, Contact__r.npsp__is_Address_Override__c,
+						Contact__r.npe01__AlternateEmail__c, Contact__r.Alternate_Email_2__c, Contact__r.Alternate_Fax__c,
 						Relationship__r.Name, Relationship__r.npe4__Type__c, Relationship__r.Parent_Legal_Guardian__c,
 						Relationship__r.npe4__Contact__c, Relationship__r.npe4__Contact__r.Name,
 						Relationship__r.Qualifying_Medical_Professional__c, Relationship__r.Treating_HCP__c,
@@ -900,8 +904,9 @@ public without sharing class WishAffiliationService {
 	public static Contact findContactById(Id contactId) {
 		return [
 				SELECT Id, Name, Salutation, FirstName, LastName, Birthdate, MailingStreet,
-						MailingCity,MailingState, MailingPostalCode, MailingCountry,
+						MailingCity,MailingState, MailingPostalCode, MailingCountry, npe01__Preferred_Email__c,
 						npe01__PreferredPhone__c, Phone, npe01__HomeEmail__c, npe01__WorkEmail__c,
+						npe01__AlternateEmail__c, Alternate_Email_2__c, Alternate_Fax__c, MobilePhone,
 						AccountId, Region_Chapter__c
 				FROM Contact
 				WHERE Id = :contactId

@@ -14,7 +14,6 @@ public class ContactDomain extends trac_TriggerHandlerBase {
 	private final static Id WISH_FAMILY_RT_ID = Constant_AC.WISH_FAMILY_RT_ID;
 	private final static Id BOARD_MEMBER_RT_ID = Constant_AC.BOARD_MEMBER_RT_ID;
 	private final static String CONTACT_WISH_CHILD_RT_LABEL = Constant_AC.CONTACT_WISH_CHILD_RT_LABEL;
-	private final static String ACCOUNT_NAME_MAW_AMERICA = Constant_AC.ACCOUNT_NAME_MAW_AMERICA;
 	private final static String RELATIONSHIP_TYPE_PARENT_GUARDIAN = Constant_AC.CONTACT_TYPE_PARENT_LEGAL_GUARDIAN;
 	private final static Map<String, String> MONTH_VALUE_MAP = constructMonthNameValueMap();
 	private final static Map<String, String> MONTH_NAME_MAP = constructMonthValueNameMap();
@@ -22,41 +21,41 @@ public class ContactDomain extends trac_TriggerHandlerBase {
 	/**
 	* Before insert of contact
 	*/
-    public override void handleBeforeInsert() {
-        for (Contact contact : newContactsList) {
-            if (!blockTrigger) {
-                if (contact.RecordTypeId == VOLUNTEER_RT_ID) {
-                    contact.Region_Chapter__c = contact.AccountId;
-                }
-                if (contact.birth_day__c != null && contact.birth_year__c != null && contact.birth_month__c != null) {
-                    date dtConverted = Date.valueOf(contact.birth_year__c + '-' + MONTH_VALUE_MAP.get(contact.birth_month__c) + '-' + contact.birth_day__c);
-                    contact.BirthDate = dtConverted ;
-                }
-            }
-            if (contact.RecordTypeId == WISH_CHILD_RT_ID) {
-                contact.Relationship_Type__c = CONTACT_WISH_CHILD_RT_LABEL;
-            } else if (contact.RecordTypeId == WISH_FAMILY_RT_ID) {
-                contact.Relationship_Type__c = RELATIONSHIP_TYPE_PARENT_GUARDIAN;
-            }
-            if(contact.Region_Chapter__c != null) {
-                contact.Hidden_Chapter__c = contact.Region_Chapter__c;
-            }
-        }
-        ContactService.populateRegionChapterOnMedicalProfessional(newContactsList, null);
-        ContactService.updateContactOwnerToChapter(newContactsList, null);
-    }
+	public override void handleBeforeInsert() {
+		for (Contact contact : newContactsList) {
+			if (!blockTrigger) {
+				if (contact.RecordTypeId == VOLUNTEER_RT_ID) {
+					contact.Region_Chapter__c = contact.AccountId;
+				}
+				if (contact.birth_day__c != null && contact.birth_year__c != null && contact.birth_month__c != null) {
+					date dtConverted = Date.valueOf(contact.birth_year__c + '-' + MONTH_VALUE_MAP.get(contact.birth_month__c) + '-' + contact.birth_day__c);
+					contact.BirthDate = dtConverted ;
+				}
+			}
+			if (contact.RecordTypeId == WISH_CHILD_RT_ID) {
+				contact.Relationship_Type__c = CONTACT_WISH_CHILD_RT_LABEL;
+			} else if (contact.RecordTypeId == WISH_FAMILY_RT_ID) {
+				contact.Relationship_Type__c = RELATIONSHIP_TYPE_PARENT_GUARDIAN;
+			}
+			if (contact.Region_Chapter__c != null) {
+				contact.Hidden_Chapter__c = contact.Region_Chapter__c;
+			}
+		}
+		ContactService.populateRegionChapterOnMedicalProfessional(newContactsList, null);
+		ContactService.updateContactOwnerToChapter(newContactsList, null);
+	}
 
 	/**
 	* After insert of contact
 	*/
-    public override void handleAfterInsert() {
-        if (!blockTrigger) {
-            RecursiveTriggerHandler.isFirstTime = false;
-            ContactService.createAffiliation(newContactsList);
-        }
-        ContactService.shareContactToChapter(newContactsList, null);
-        ContactService.createVolunteerUser(newContactsMap.keySet());
-    }
+	public override void handleAfterInsert() {
+		if (!blockTrigger) {
+			RecursiveTriggerHandler.isFirstTime = false;
+			AffiliationService.createAffiliation(newContactsList);
+		}
+		ContactService.shareContactToChapter(newContactsList, null);
+		ContactService.createVolunteerUser(newContactsMap.keySet());
+	}
 
 	/**
 	* Before update of contact
@@ -105,46 +104,46 @@ public class ContactDomain extends trac_TriggerHandlerBase {
 				}
 			}
 		}
-        wishChildIdSet = ContactService.updateWishChildContactInfo(newContactsList);
-        ContactService.updateFamilyContactDetails(wishChildIdSet, newContactsList);
-        ContactService.matchConditionDescription(newContactsList, oldContactsMap);
-        ContactService.updateContactHiddenFields(newContactsList);
-        ContactService.clearHiddenFields(newContactsList);
-        ContactService.updatePicklistTranslations(newContactsMap, oldContactsMap);
-        ContactService.populateRegionChapterOnMedicalProfessional(newContactsList, oldContactsMap);
-        ContactService.updateContactOwnerToChapter(newContactsList, oldContactsMap);
-    }
+		wishChildIdSet = ContactService.updateWishChildContactInfo(newContactsList);
+		ContactService.updateFamilyContactDetails(wishChildIdSet, newContactsList);
+		ContactService.matchConditionDescription(newContactsList, oldContactsMap);
+		ContactService.updateContactHiddenFields(newContactsList);
+		ContactService.clearHiddenFields(newContactsList);
+		ContactService.updatePicklistTranslations(newContactsMap, oldContactsMap);
+		ContactService.populateRegionChapterOnMedicalProfessional(newContactsList, oldContactsMap);
+		ContactService.updateContactOwnerToChapter(newContactsList, oldContactsMap);
+	}
 
-    /**
-    * After update of contact
-    */
-    public override void handleAfterUpdate() {
-        if (RecursiveTriggerHandler.blockAfterUpdate) {
-            return;
-        }
-        List<Contact> volunteerContactList = new List<Contact>();
-        for (Contact newContact : newContactsList) {
-            Contact oldContact = oldContactsMap.get(newContact.Id);
-            if (newContact.recordTypeId == VOLUNTEER_RT_ID && oldContact.recordTypeId != VOLUNTEER_RT_ID) {
-                volunteerContactList.add(newContact);
-            }
-        }
-        if (RecursiveTriggerHandler.isFirstTime || Test.isRunningTest()) {
-            RecursiveTriggerHandler.isFirstTime = false;
-            ContactService.updateEmailAddress(newContactsList, oldContactsMap);
-        }
-        ContactService.createAffiliation(volunteerContactList);
-        ContactService.updateHouseHoldAddress(newContactsList, oldContactsMap);
-        ContactService.updateRelationship(newContactsList, oldContactsMap);
-        ContactService.updateMedicalProfessional(newContactsList, oldContactsMap);
-        ContactService.updateOrgAffiliationStatus(newContactsList, oldContactsMap);
-        ContactService.createVolunteerRoles(newContactsList, oldContactsMap);
-        ContactService.createZipcodeUpdateTask(newContactsList, oldContactsMap);
-        ContactService.updateUserDetails(newContactsList, oldContactsMap);
-        ContactService.shareContactRecord(newContactsMap, oldContactsMap);
-        ContactService.updateHiddenCaseFields(newContactsList, oldContactsMap);
-        ContactService.shareContactToChapter(newContactsList, oldContactsMap);
-    }
+	/**
+	* After update of contact
+	*/
+	public override void handleAfterUpdate() {
+		if (RecursiveTriggerHandler.blockAfterUpdate) {
+			return;
+		}
+		List<Contact> volunteerContactList = new List<Contact>();
+		for (Contact newContact : newContactsList) {
+			Contact oldContact = oldContactsMap.get(newContact.Id);
+			if (newContact.recordTypeId == VOLUNTEER_RT_ID && oldContact.recordTypeId != VOLUNTEER_RT_ID) {
+				volunteerContactList.add(newContact);
+			}
+		}
+		if (RecursiveTriggerHandler.isFirstTime || Test.isRunningTest()) {
+			RecursiveTriggerHandler.isFirstTime = false;
+			ContactService.updateEmailAddress(newContactsList, oldContactsMap);
+		}
+		AffiliationService.createAffiliation(volunteerContactList);
+		ContactService.updateHouseHoldAddress(newContactsList, oldContactsMap);
+		ContactService.updateRelationship(newContactsList, oldContactsMap);
+		ContactService.updateMedicalProfessional(newContactsList, oldContactsMap);
+		AffiliationService.updateOrgAffiliationStatus(newContactsList, oldContactsMap);
+		ContactService.createVolunteerRoles(newContactsList, oldContactsMap);
+		ContactService.createZipcodeUpdateTask(newContactsList, oldContactsMap);
+		ContactService.updateUserDetails(newContactsList, oldContactsMap);
+		ContactService.shareContactRecord(newContactsMap, oldContactsMap);
+		ContactService.updateHiddenCaseFields(newContactsList, oldContactsMap);
+		ContactService.shareContactToChapter(newContactsList, oldContactsMap);
+	}
 
 	/**
 	* Before delete of contact

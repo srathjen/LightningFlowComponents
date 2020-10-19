@@ -23,6 +23,7 @@ public without sharing class WishAffiliation_AC {
 		final String accountSobjectApiName = 'Account';
 		final String mailingStateCodeFieldApiNameOfContact = 'MailingStateCode';
 		final String mailingCountryCodeFieldApiNameOfContact = 'MailingCountryCode';
+		final String preferredEmailFieldApiNameOfContact = 'npe01__Preferred_Email__c';
 		final String preferredPhoneFieldApiNameOfContact = 'npe01__PreferredPhone__c';
 		final String salutationFieldApiNameOfContact = 'Salutation';
 		final String wishAffiliationSobjectApiName = 'Wish_Affiliation__c';
@@ -63,6 +64,10 @@ public without sharing class WishAffiliation_AC {
 			// Find Country options
 			List<String> countries = Utils.getPicklistLabels(contactSobjectApiName, mailingCountryCodeFieldApiNameOfContact);
 			returnValuesMap.put('countries', countries);
+
+			// Find Preferred Email options
+			List<String> preferredEmailOptions = Utils.getPicklistLabels(contactSobjectApiName, preferredEmailFieldApiNameOfContact);
+			returnValuesMap.put('preferredEmailOptions', preferredEmailOptions);
 
 			// Find Preferred Phone options
 			List<String> preferredPhoneOptions = Utils.getPicklistLabels(contactSobjectApiName, preferredPhoneFieldApiNameOfContact);
@@ -261,6 +266,15 @@ public without sharing class WishAffiliation_AC {
 						? '' : existingContact.MailingPostalCode;
 				if (String.isEmpty(existingMailingPostalCode) && modifiedMailingPostalCode != existingMailingPostalCode) {
 					updateContactRecord.MailingPostalCode = modifiedMailingPostalCode;
+					isUpdateContact = true;
+				}
+				//Preferred Email
+				String modifiedPreferredEmail = modifiedContact.npe01__Preferred_Email__c == null
+						? '' : modifiedContact.npe01__Preferred_Email__c;
+				String existingPreferredEmail = existingContact.npe01__Preferred_Email__c == null
+						? '' : existingContact.npe01__Preferred_Email__c;
+				if (String.isEmpty(existingPreferredEmail) && modifiedPreferredEmail != existingPreferredEmail) {
+					updateContactRecord.npe01__Preferred_Email__c = modifiedPreferredEmail;
 					isUpdateContact = true;
 				}
 				//Preferred Phone
@@ -480,6 +494,7 @@ public without sharing class WishAffiliation_AC {
 				wishAffiliation.Contact__r.MailingState = wrapper.contact.MailingState;
 				wishAffiliation.Contact__r.MailingPostalCode = wrapper.contact.MailingPostalCode;
 				wishAffiliation.Contact__r.MailingCountry = wrapper.contact.MailingCountry;
+				wishAffiliation.Contact__r.npe01__Preferred_Email__c = wrapper.contact.npe01__Preferred_Email__c;
 				wishAffiliation.Contact__r.npe01__PreferredPhone__c = wrapper.contact.npe01__PreferredPhone__c;
 				wishAffiliation.Contact__r.Phone = wrapper.contact.Phone;
 				wishAffiliation.Contact__r.npe01__HomeEmail__c = wrapper.contact.npe01__HomeEmail__c;
@@ -490,6 +505,12 @@ public without sharing class WishAffiliation_AC {
 				wishAffiliation.Contact__r.Provider_Type__c = wrapper.contact.Provider_Type__c;
 				wishAffiliation.Contact__r.Fax = wrapper.contact.Fax;
 				wishAffiliation.Contact__r.npe01__WorkEmail__c = wrapper.contact.npe01__WorkEmail__c;
+				wishAffiliation.Contact__r.npe01__WorkPhone__c = wrapper.contact.npe01__WorkPhone__c;
+				wishAffiliation.Contact__r.MobilePhone = wrapper.contact.MobilePhone;
+				wishAffiliation.Contact__r.OtherPhone = wrapper.contact.OtherPhone;
+				wishAffiliation.Contact__r.npe01__AlternateEmail__c = wrapper.contact.npe01__AlternateEmail__c;
+				wishAffiliation.Contact__r.Alternate_Email_2__c = wrapper.contact.Alternate_Email_2__c;
+				wishAffiliation.Contact__r.Alternate_Fax__c = wrapper.contact.Alternate_Fax__c;
 			}
 			// Build Relationship
 			if (wrapper.relationship != null) {

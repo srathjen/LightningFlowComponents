@@ -25,44 +25,184 @@ public class AffiliationService {
 	private static final Id VOLUNTEER_RECORD_TYPE_ID = Constant_AC.VOLUNTEER_RT_ID;
 
 	/**
-	 * @description Build Medical Affiliations
+	 * @description Find existing Affiliations
+	 * @param contactIds contact ids
+	 * @param accountIds account ids
+	 * @return Map of Affiliations
+	*/
+	public static Map<String, npe5__Affiliation__c> findExistingAffiliations(Set<Id> contactIds, Set<Id> accountIds) {
+		Map<String, npe5__Affiliation__c> affiliationMap = new Map<String, npe5__Affiliation__c>();
+		for (npe5__Affiliation__c affiliation : [
+				SELECT Id, npe5__Contact__c, npe5__Organization__c, npe5__Organization__r.RecordTypeId,
+						npe5__Status__c, npe5__Primary__c, Constituent_Code__c, npe5__StartDate__c
+				FROM npe5__Affiliation__c
+				WHERE npe5__Contact__c IN :contactIds
+				OR npe5__Organization__c IN :accountIds
+		]) {
+			String contactAccountKey = String.valueOf(affiliation.npe5__Contact__c) + String.valueOf(affiliation.npe5__Organization__c);
+			affiliationMap.put(contactAccountKey, affiliation);
+		}
+		return affiliationMap;
+	}
+
+	/**
+	 * @description Build Wish Child Affiliations
 	 * @param convertedLead
 	 * @return List of Affiliations
 	 */
-	public static List<npe5__Affiliation__c> buildTreatingHospitalAffiliation(Lead convertedLead) {
+	public static List<npe5__Affiliation__c> buildWishChildAffiliation(Lead convertedLead) {
 		List<npe5__Affiliation__c> affiliations = new List<npe5__Affiliation__c>();
+
+		npe5__Affiliation__c chapterAffiliation = new npe5__Affiliation__c();
+		chapterAffiliation.Constituent_Code__c = Constant_AC.CONTACT_WISH_CHILD_RT_LABEL;
+		chapterAffiliation.npe5__Organization__c = convertedLead.ConvertedContact.Region_Chapter__c;
+		chapterAffiliation.npe5__Contact__c = convertedLead.ConvertedContactId;
+		chapterAffiliation.npe5__StartDate__c = Date.today();
+		chapterAffiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+		chapterAffiliation.npe5__Primary__c = false;
+		affiliations.add(chapterAffiliation);
+
 		if (convertedLead.Hidden_DV_form_Medical_professional_Type__c != null) {
-			npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
-			affiliation.npe5__Contact__c = convertedLead.ConvertedContactId;
-			affiliation.Treating_Facility__c = CURRENT_TREATING_FACILITY;
+			npe5__Affiliation__c treatingHtfAffiliation = new npe5__Affiliation__c();
+			treatingHtfAffiliation.npe5__Contact__c = convertedLead.ConvertedContactId;
+			treatingHtfAffiliation.Treating_Facility__c = CURRENT_TREATING_FACILITY;
+			treatingHtfAffiliation.npe5__Primary__c = false;
+			treatingHtfAffiliation.npe5__StartDate__c = Date.today();
+			treatingHtfAffiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
 			if (convertedLead.Hidden_DV_form_Medical_professional_Type__c.equals(REFERRING_MED_PROFESSIONAL)
 					&& convertedLead.Referring_MP_HTF__c != null) {
-				affiliation.npe5__Organization__c = convertedLead.Referring_MP_HTF__c;
-				affiliations.add(affiliation);
+				treatingHtfAffiliation.npe5__Organization__c = convertedLead.Referring_MP_HTF__c;
+				affiliations.add(treatingHtfAffiliation);
 			} else if (convertedLead.Hidden_DV_form_Medical_professional_Type__c.equals(TREATING_MED_PROFESSIONAL)
 					&& convertedLead.Treating_MP_HTF__c != null) {
-				affiliation.npe5__Organization__c = convertedLead.Treating_MP_HTF__c;
-				affiliations.add(affiliation);
+				treatingHtfAffiliation.npe5__Organization__c = convertedLead.Treating_MP_HTF__c;
+				affiliations.add(treatingHtfAffiliation);
 			} else if (convertedLead.Hidden_DV_form_Medical_professional_Type__c.equals(BEST_CONTACT)
 					&& convertedLead.Best_Contact_HTF__c != null) {
-				affiliation.npe5__Organization__c = convertedLead.Best_Contact_HTF__c;
-				affiliations.add(affiliation);
+				treatingHtfAffiliation.npe5__Organization__c = convertedLead.Best_Contact_HTF__c;
+				affiliations.add(treatingHtfAffiliation);
 			} else if (convertedLead.Hidden_DV_form_Medical_professional_Type__c.equals(ALT2_MED_PROFESSIONAL)
 					&& convertedLead.Alt_2_MP_HTF__c != null) {
-				affiliation.npe5__Organization__c = convertedLead.Alt_2_MP_HTF__c;
-				affiliations.add(affiliation);
+				treatingHtfAffiliation.npe5__Organization__c = convertedLead.Alt_2_MP_HTF__c;
+				affiliations.add(treatingHtfAffiliation);
 			} else if (convertedLead.Hidden_DV_form_Medical_professional_Type__c.equals(ALT1_MED_PROFESSIONAL)
 					&& convertedLead.Alt_1_MP_HTF__c != null) {
-				affiliation.npe5__Organization__c = convertedLead.Alt_1_MP_HTF__c;
-				affiliations.add(affiliation);
+				treatingHtfAffiliation.npe5__Organization__c = convertedLead.Alt_1_MP_HTF__c;
+				affiliations.add(treatingHtfAffiliation);
 			}
 		}
 		return affiliations;
 	}
 
 	/**
+	 * @description Build Medical Professional Hospital Facilities Affiliations
+	 * @param lead lead
+	 * @param mpHtfAffiliations existing mp htf affiliations
+	 * @return List of Affiliations
+	 */
+	public static List<npe5__Affiliation__c> buildMedicalProfessionalHospitalAffiliation(Lead lead,
+			Map<String, npe5__Affiliation__c> mpHtfAffiliations) {
+		List<npe5__Affiliation__c> affiliations = new List<npe5__Affiliation__c>();
+		Boolean referringMpHasPrimaryHtfAffiliation = false;
+		Boolean treatingMpHasPrimaryHtfAffiliation = false;
+		Boolean bestMpHasPrimaryHtfAffiliation = false;
+		Boolean alt1MpHasPrimaryHtfAffiliation = false;
+		Boolean alt2MpHasPrimaryHtfAffiliation = false;
+
+		for (String key : mpHtfAffiliations.keySet()) {
+			if (lead.Referring_MP__c != null && key.contains(lead.Referring_MP__c) && mpHtfAffiliations.get(key).npe5__Primary__c
+					&& mpHtfAffiliations.get(key).npe5__Organization__r.RecordTypeId.equals(Constant_AC.HOSPITAL_TREATMENT_ID)) {
+				referringMpHasPrimaryHtfAffiliation = true;
+			}
+			if (lead.Treating_MP__c != null && key.contains(lead.Treating_MP__c) && mpHtfAffiliations.get(key).npe5__Primary__c
+					&& mpHtfAffiliations.get(key).npe5__Organization__r.RecordTypeId.equals(Constant_AC.HOSPITAL_TREATMENT_ID)) {
+				treatingMpHasPrimaryHtfAffiliation = true;
+			}
+			if (lead.Best_Contact__c != null && key.contains(lead.Best_Contact__c) && mpHtfAffiliations.get(key).npe5__Primary__c
+					&& mpHtfAffiliations.get(key).npe5__Organization__r.RecordTypeId.equals(Constant_AC.HOSPITAL_TREATMENT_ID)) {
+				bestMpHasPrimaryHtfAffiliation = true;
+			}
+			if (lead.Alt_1_MP__c != null && key.contains(lead.Alt_1_MP__c) && mpHtfAffiliations.get(key).npe5__Primary__c
+					&& mpHtfAffiliations.get(key).npe5__Organization__r.RecordTypeId.equals(Constant_AC.HOSPITAL_TREATMENT_ID)) {
+				alt1MpHasPrimaryHtfAffiliation = true;
+			}
+			if (lead.Alt_2_MP__c != null && key.contains(lead.Alt_2_MP__c) && mpHtfAffiliations.get(key).npe5__Primary__c
+					&& mpHtfAffiliations.get(key).npe5__Organization__r.RecordTypeId.equals(Constant_AC.HOSPITAL_TREATMENT_ID)) {
+				alt2MpHasPrimaryHtfAffiliation = true;
+			}
+		}
+
+		if (lead.Referring_MP__c != null && lead.Referring_MP_HTF__c != null
+				&& !mpHtfAffiliations.containsKey(String.valueOf(lead.Referring_MP__c) + String.valueOf(lead.Referring_MP_HTF__c))) {
+			npe5__Affiliation__c aff = new npe5__Affiliation__c();
+			aff.npe5__Contact__c = lead.Referring_MP__c;
+			aff.npe5__Organization__c = lead.Referring_MP_HTF__c;
+			aff.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+			aff.Constituent_Code__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+			aff.npe5__StartDate__c = Date.today();
+			if (!referringMpHasPrimaryHtfAffiliation) {
+				aff.npe5__Primary__c = true;
+			}
+			affiliations.add(aff);
+		}
+		if (lead.Treating_MP__c != null && lead.Treating_MP_HTF__c != null
+				&& !mpHtfAffiliations.containsKey(String.valueOf(lead.Treating_MP__c) + String.valueOf(lead.Treating_MP_HTF__c))) {
+			npe5__Affiliation__c aff = new npe5__Affiliation__c();
+			aff.npe5__Contact__c = lead.Treating_MP__c;
+			aff.npe5__Organization__c = lead.Treating_MP_HTF__c;
+			aff.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+			aff.Constituent_Code__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+			aff.npe5__StartDate__c = Date.today();
+			if (!treatingMpHasPrimaryHtfAffiliation) {
+				aff.npe5__Primary__c = true;
+			}
+			affiliations.add(aff);
+		}
+		if (lead.Best_Contact__c != null && lead.Best_Contact_HTF__c != null
+				&& !mpHtfAffiliations.containsKey(String.valueOf(lead.Best_Contact__c) + String.valueOf(lead.Best_Contact_HTF__c))) {
+			npe5__Affiliation__c aff = new npe5__Affiliation__c();
+			aff.npe5__Contact__c = lead.Best_Contact__c;
+			aff.npe5__Organization__c = lead.Best_Contact_HTF__c;
+			aff.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+			aff.Constituent_Code__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+			aff.npe5__StartDate__c = Date.today();
+			if (!bestMpHasPrimaryHtfAffiliation) {
+				aff.npe5__Primary__c = true;
+			}
+			affiliations.add(aff);
+		}
+		if (lead.Alt_1_MP__c != null && lead.Alt_1_MP_HTF__c != null
+				&& !mpHtfAffiliations.containsKey(String.valueOf(lead.Alt_1_MP__c) + String.valueOf(lead.Alt_1_MP_HTF__c))) {
+			npe5__Affiliation__c aff = new npe5__Affiliation__c();
+			aff.npe5__Contact__c = lead.Alt_1_MP__c;
+			aff.npe5__Organization__c = lead.Alt_1_MP_HTF__c;
+			aff.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+			aff.Constituent_Code__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+			aff.npe5__StartDate__c = Date.today();
+			if (!alt1MpHasPrimaryHtfAffiliation) {
+				aff.npe5__Primary__c = true;
+			}
+			affiliations.add(aff);
+		}
+		if (lead.Alt_2_MP__c != null && lead.Alt_2_MP_HTF__c != null
+				&& !mpHtfAffiliations.containsKey(String.valueOf(lead.Alt_2_MP__c) + String.valueOf(lead.Alt_2_MP_HTF__c))) {
+			npe5__Affiliation__c aff = new npe5__Affiliation__c();
+			aff.npe5__Contact__c = lead.Alt_2_MP__c;
+			aff.npe5__Organization__c = lead.Alt_2_MP_HTF__c;
+			aff.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+			aff.Constituent_Code__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+			aff.npe5__StartDate__c = Date.today();
+			if (!alt2MpHasPrimaryHtfAffiliation) {
+				aff.npe5__Primary__c = true;
+			}
+			affiliations.add(aff);
+		}
+		return affiliations;
+	}
+
+	/**
 	 * @description Whenever first Affiliation record has fallen under contact, assigning that record as primary.
-	 * @param newList
+	 * @param newList list
 	 */
 	public static void setStatusAndPrimary(List<npe5__Affiliation__c> newList) {
 		Set<Id> contactIds = new Set<Id>();
@@ -74,11 +214,11 @@ public class AffiliationService {
 			return;
 		}
 
-		Map<Id, Contact> getContactRecType = new Map<Id, Contact>();
-		getContactRecType.putAll([
-				SELECT Id,RecordTypeId
+		Map<Id, Contact> getContactRecType = new Map<Id, Contact>([
+				SELECT Id, RecordTypeId
 				FROM Contact
 				WHERE Id IN :contactIds
+				AND RecordTypeId != :Constant_AC.MEDICAL_PROFESSIONAL_RT_ID
 		]);
 
 		Map<String, Integer> contactsMap = new Map<String, Integer>();
@@ -91,16 +231,15 @@ public class AffiliationService {
 			contactsMap.put(String.valueOf(ar.get('npe5__Contact__c')), Integer.valueOf(ar.get('cnt')));
 		}
 
-		for (npe5__Affiliation__c currRec : newList) {
-			if (!(contactsMap.containsKey(currRec.npe5__Contact__c))) {
-				currRec.npe5__Primary__c = true;
+		for (npe5__Affiliation__c affiliation : newList) {
+			if (!(contactsMap.containsKey(affiliation.npe5__Contact__c))) {
+				affiliation.npe5__Primary__c = true;
 			}
-
-			if (currRec.npe5__Contact__c != null && getContactRecType.containsKey(currRec.npe5__Contact__c)) {
-				if (getContactRecType.get(currRec.npe5__Contact__c).RecordTypeId != VOLUNTEER_RECORD_TYPE_ID) {
-					currRec.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+			if (affiliation.npe5__Contact__c != null && getContactRecType.containsKey(affiliation.npe5__Contact__c)) {
+				if (getContactRecType.get(affiliation.npe5__Contact__c).RecordTypeId != VOLUNTEER_RECORD_TYPE_ID) {
+					affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
 				} else {
-					currRec.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_PENDING;
+					affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_PENDING;
 				}
 			}
 		}
@@ -366,6 +505,225 @@ public class AffiliationService {
 		} catch (Exception ex) {
 			for (Id currRec : exceptionMap.keySet()) {
 				ErrorMessage_AC.createDebugRec(CLASS_NAME, exceptionMap.get(currRec), String.valueOf(ex), 'removeMemberFromGroup', currRec, ex.getStackTraceString() + '   ' + ex.getMessage(), DEBUG_LOG_TYPE_ERROR);
+			}
+		}
+	}
+
+	/**
+	 * @description Update Affiliation Status based on Volunteer Roles of Volunteer
+	 * @param volunteerRoleCountMap
+	 * @param volunteerRoleStatusMap
+	 * @param inActiveSingleStatusMap
+	 * @param declinedStatusMap
+	 * @param OCCStatusMap
+	 * @param pendingStatusMap
+	 * @param trainedVRsSet
+	 */
+	public static void updateAffiliationFromVolunteerRoleStatus(
+			Map<String, Integer> volunteerRoleCountMap, Map<Id, List<Volunteer_Roles__c>> volunteerRoleStatusMap,
+			Map<Id, List<Volunteer_Roles__c>> inActiveSingleStatusMap, Map<Id, List<Volunteer_Roles__c>> declinedStatusMap,
+			Map<Id, List<Volunteer_Roles__c>> OCCStatusMap, Map<Id, List<Volunteer_Roles__c>> pendingStatusMap,
+			Map<Id, List<Volunteer_Roles__c>> trainedVRsSet) {
+		if (volunteerRoleStatusMap.isEmpty()) {
+			return;
+		}
+		List<npe5__Affiliation__c> updateAffiliations = new List<npe5__Affiliation__c>();
+		for (npe5__Affiliation__c aff : [
+				SELECT Id, npe5__Contact__c
+				FROM npe5__Affiliation__c
+				WHERE npe5__Contact__c IN :volunteerRoleStatusMap.keySet()
+				AND constituent_code__c = :ORG_AFFILIATION_CONSTITUENT_CODE_VOLUNTEER
+		]) {
+			npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
+			affiliation.Id = aff.Id;
+			if (volunteerRoleCountMap.get(aff.npe5__Contact__c) == 1) {
+				if (inActiveSingleStatusMap.containsKey(aff.npe5__Contact__c)) {
+					affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_INACTIVE;
+				} else if (declinedStatusMap.containsKey(aff.npe5__Contact__c)) {
+					affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_NOT_APPROVED;
+				} else if (OCCStatusMap.containsKey(aff.npe5__Contact__c)) {
+					affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_OUT_OF_COMPLIANCE;
+				} else if (pendingStatusMap.containsKey(aff.npe5__Contact__c)) {
+					affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_PENDING;
+				}
+			} else if (volunteerRoleCountMap.get(aff.npe5__Contact__c) > 1) {
+				if (pendingStatusMap.containsKey(aff.npe5__Contact__c)
+						&& !trainedVRsSet.containsKey(aff.npe5__Contact__c)) {
+					affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_PENDING;
+				} else if (inActiveSingleStatusMap.containsKey(aff.npe5__Contact__c)
+						&& (inActiveSingleStatusMap.get(aff.npe5__Contact__c).size()
+						== volunteerRoleCountMap.get(aff.npe5__Contact__c)
+						|| (!pendingStatusMap.containsKey(aff.npe5__Contact__c)
+						&& !OCCStatusMap.containsKey(aff.npe5__Contact__c)))) {
+					affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_INACTIVE;
+				} else if (declinedStatusMap.containsKey(aff.npe5__Contact__c)
+						&& (declinedStatusMap.get(aff.npe5__Contact__c)).size()
+						== volunteerRoleCountMap.get(aff.npe5__Contact__c)) {
+					affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_NOT_APPROVED;
+				} else if (OCCStatusMap.containsKey(aff.npe5__Contact__c)
+						&& ((OCCStatusMap.get(aff.npe5__Contact__c).size() == volunteerRoleCountMap.get(aff.npe5__Contact__c))
+						|| (!pendingStatusMap.containsKey(aff.npe5__Contact__c)))) {
+					affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_OUT_OF_COMPLIANCE;
+				}
+			}
+			if (trainedVRsSet.containsKey(aff.npe5__Contact__c)) {
+				affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_ACTIVE;
+			}
+			updateAffiliations.add(affiliation);
+		}
+		update updateAffiliations;
+	}
+
+	/**
+	 * @description Update Inactive Affiliation
+	 * @param volunteerRoleStatusMap
+	 */
+	public static void updateInactiveAffiliationFromContact(Map<Id, List<Volunteer_Roles__c>> volunteerRoleStatusMap) {
+		if (volunteerRoleStatusMap.isEmpty()) {
+			return;
+		}
+		try {
+			List<npe5__Affiliation__c> updateAffiliations = new List<npe5__Affiliation__c>();
+			for (npe5__Affiliation__c aff : [
+					SELECT Id, npe5__Contact__c
+					FROM npe5__Affiliation__c
+					WHERE npe5__Contact__c IN :volunteerRoleStatusMap.keySet()
+					AND npe5__Status__c != :ORG_AFFILIATION_STATUS_ACTIVE
+					AND npe5__Status__c != :ORG_AFFILIATION_STATUS_PENDING
+			]) {
+				npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
+				affiliation.Id = aff.Id;
+				affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_PROSPECTIVE;
+				updateAffiliations.add(affiliation);
+			}
+			update updateAffiliations;
+			if (Test.isRunningTest()) {
+				throw new CommonTriggerException('Test Class execution');
+			}
+		} catch (Exception ex) {
+			for (List<Volunteer_Roles__c> volunteerRoles : volunteerRoleStatusMap.values()) {
+				for (Volunteer_Roles__c volunteerRole : volunteerRoles) {
+					ErrorMessage_AC.createDebugRec('AffiliationService',
+							String.valueOf(volunteerRole), String.valueOf(ex), 'updateInactiveAffiliationFromContact',
+							volunteerRole.Id, ex.getStackTraceString() + '   ' + ex.getMessage(), 'Error');
+					if (!Test.isRunningTest()) {
+						volunteerRole.addError(Label.Debug_log_error_message);
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	* Create affiliation for contact
+	* @param contactList
+	*/
+	public static void createAffiliation(List<Contact> contactList) {
+		List<npe5__Affiliation__c> insertAffiliationList = new List<npe5__Affiliation__c>();
+		Set<Id> volunteerContactIds = new Set<Id>();
+		Map<Id, Id> mpChapterAffiliations = new Map<Id, Id>();
+		for (Contact contact : contactList) {
+			if (contact.RecordTypeId != Constant_AC.MEDICAL_PROFESSIONAL_RT_ID) {
+				npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
+				if (contact.RecordTypeId == Constant_AC.VOLUNTEER_RT_ID) {
+					affiliation.Constituent_Code__c = Constant_AC.VOLUNTEER_TASK_RT_LABEL;
+					affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_PENDING;
+					affiliation.npe5__Primary__c = true;
+					volunteerContactIds.add(contact.Id);
+				} else if (contact.RecordTypeId == Constant_AC.BOARD_MEMBER_RT_ID) {
+					affiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
+				}
+				affiliation.npe5__Contact__c = contact.Id;
+				affiliation.npe5__StartDate__c = Date.today();
+				affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+				insertAffiliationList.add(affiliation);
+			}
+			if ((contact.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID
+					|| contact.RecordTypeId == Constant_AC.WISH_FAMILY_RT_ID
+					|| contact.RecordTypeId == Constant_AC.CONTACT_WISH_CHILD_RT_ID)
+					&& contact.Region_Chapter__c != null) {
+				npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
+				if (contact.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID) {
+					affiliation.Constituent_Code__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+					mpChapterAffiliations.put(contact.Id, contact.Region_Chapter__c);
+				} else if (contact.RecordTypeId == Constant_AC.WISH_FAMILY_RT_ID) {
+					affiliation.Constituent_Code__c = Constant_AC.WISH_FAMILY_RT_LABEL;
+				} else {
+					affiliation.Constituent_Code__c = Constant_AC.CONTACT_WISH_CHILD_RT_LABEL;
+				}
+				affiliation.npe5__Organization__c = contact.Region_Chapter__c;
+				affiliation.npe5__Contact__c = contact.Id;
+				affiliation.npe5__StartDate__c = Date.today();
+				affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+				insertAffiliationList.add(affiliation);
+			}
+		}
+		List<npe5__Affiliation__c> affiliationList = new List<npe5__Affiliation__c>();
+		if (!volunteerContactIds.isEmpty()) {
+			for (npe5__Affiliation__c affiliation : [
+					SELECT Id, npe5__Primary__c
+					FROM npe5__Affiliation__c
+					WHERE npe5__Contact__c IN :volunteerContactIds
+					AND npe5__Primary__c = TRUE
+			]) {
+				affiliation.npe5__Primary__c = false;
+				affiliationList.add(affiliation);
+			}
+		}
+		try {
+			update affiliationList;
+			insert insertAffiliationList;
+		} catch (Exception e) {
+			createContactDebugLog(affiliationList, 'createAffiliation', e);
+			createContactDebugLog(insertAffiliationList, 'createAffiliation', e);
+		}
+		List<npe5__Affiliation__c> mpPrimaryAffiliationsUpdate = new List<npe5__Affiliation__c>();
+		for(npe5__Affiliation__c affiliation : [
+				SELECT Id, npe5__Primary__c
+				FROM npe5__Affiliation__c
+				WHERE npe5__Contact__c IN :mpChapterAffiliations.keySet()
+				AND npe5__Organization__c IN :mpChapterAffiliations.values()
+		]){
+			affiliation.npe5__Primary__c = false;
+			mpPrimaryAffiliationsUpdate.add(affiliation);
+		}
+		update mpPrimaryAffiliationsUpdate;
+	}
+
+	/**
+	* Update affiliation status based on contact application status
+	* @param newContactsList
+	* @param oldContactsMap
+	*/
+	public static void updateOrgAffiliationStatus(List<Contact> newContactsList, Map<Id, Contact> oldContactsMap) {
+		Map<Id, Contact> contactMap = new Map<Id, Contact>();
+		for (Contact newContact : newContactsList) {
+			if (newContact.is_Application__c != oldContactsMap.get(newContact.Id).is_Application__c) {
+				contactMap.put(newContact.Id, newContact);
+			}
+		}
+		if (!contactMap.isEmpty()) {
+			List<npe5__Affiliation__c> affiliationList = new List<npe5__Affiliation__c>();
+			for (npe5__Affiliation__c dbAffiliationRec : [
+					SELECT Id, npe5__Contact__c, npe5__Primary__c, npe5__Status__c, npe5__Organization__c
+					FROM npe5__Affiliation__c
+					WHERE npe5__Contact__c IN :contactMap.keySet() AND npe5__Status__c != 'Active'
+			]) {
+				if (contactMap.containsKey(dbAffiliationRec.npe5__Contact__c)) {
+					npe5__Affiliation__c updateAffiliation = new npe5__Affiliation__c();
+					updateAffiliation.Id = dbAffiliationRec.Id;
+					if (contactMap.get(dbAffiliationRec.npe5__Contact__c).is_Application__c == 'Complete') {
+						updateAffiliation.npe5__Status__c = 'Pending';
+					} else if (contactMap.get(dbAffiliationRec.npe5__Contact__c).is_Application__c == 'Rejected') {
+						updateAffiliation.npe5__Status__c = 'Not Approved';
+					}
+					affiliationList.add(updateAffiliation);
+				}
+			}
+			try {
+				update affiliationList;
+			} catch (Exception e) {
+				createContactDebugLog(affiliationList, 'updateOrgAffiliationStatus', e);
 			}
 		}
 	}
@@ -674,108 +1032,11 @@ public class AffiliationService {
 		}
 	}
 
-	/**
-	 * @description Update Affiliation Status based on Volunteer Roles of Volunteer
-	 * @param volunteerRoleCountMap
-	 * @param volunteerRoleStatusMap
-	 * @param inActiveSingleStatusMap
-	 * @param declinedStatusMap
-	 * @param OCCStatusMap
-	 * @param pendingStatusMap
-	 * @param trainedVRsSet
-	 */
-	public static void updateAffiliationFromVolunteerRoleStatus(
-			Map<String, Integer> volunteerRoleCountMap, Map<Id, List<Volunteer_Roles__c>> volunteerRoleStatusMap,
-			Map<Id, List<Volunteer_Roles__c>> inActiveSingleStatusMap, Map<Id, List<Volunteer_Roles__c>> declinedStatusMap,
-			Map<Id, List<Volunteer_Roles__c>> OCCStatusMap, Map<Id, List<Volunteer_Roles__c>> pendingStatusMap,
-			Map<Id, List<Volunteer_Roles__c>> trainedVRsSet) {
-		if (volunteerRoleStatusMap.isEmpty()) {
-			return;
-		}
-		List<npe5__Affiliation__c> updateAffiliations = new List<npe5__Affiliation__c>();
-		for (npe5__Affiliation__c aff : [
-				SELECT Id, npe5__Contact__c
-				FROM npe5__Affiliation__c
-				WHERE npe5__Contact__c IN :volunteerRoleStatusMap.keySet()
-				AND constituent_code__c = :ORG_AFFILIATION_CONSTITUENT_CODE_VOLUNTEER
-		]) {
-			npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
-			affiliation.Id = aff.Id;
-			if (volunteerRoleCountMap.get(aff.npe5__Contact__c) == 1) {
-				if (inActiveSingleStatusMap.containsKey(aff.npe5__Contact__c)) {
-					affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_INACTIVE;
-				} else if (declinedStatusMap.containsKey(aff.npe5__Contact__c)) {
-					affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_NOT_APPROVED;
-				} else if (OCCStatusMap.containsKey(aff.npe5__Contact__c)) {
-					affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_OUT_OF_COMPLIANCE;
-				} else if (pendingStatusMap.containsKey(aff.npe5__Contact__c)) {
-					affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_PENDING;
-				}
-			} else if (volunteerRoleCountMap.get(aff.npe5__Contact__c) > 1) {
-				if (pendingStatusMap.containsKey(aff.npe5__Contact__c)
-						&& !trainedVRsSet.containsKey(aff.npe5__Contact__c)) {
-					affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_PENDING;
-				} else if (inActiveSingleStatusMap.containsKey(aff.npe5__Contact__c)
-						&& (inActiveSingleStatusMap.get(aff.npe5__Contact__c).size()
-						== volunteerRoleCountMap.get(aff.npe5__Contact__c)
-						|| (!pendingStatusMap.containsKey(aff.npe5__Contact__c)
-						&& !OCCStatusMap.containsKey(aff.npe5__Contact__c)))) {
-					affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_INACTIVE;
-				} else if (declinedStatusMap.containsKey(aff.npe5__Contact__c)
-						&& (declinedStatusMap.get(aff.npe5__Contact__c)).size()
-						== volunteerRoleCountMap.get(aff.npe5__Contact__c)) {
-					affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_NOT_APPROVED;
-				} else if (OCCStatusMap.containsKey(aff.npe5__Contact__c)
-						&& ((OCCStatusMap.get(aff.npe5__Contact__c).size() == volunteerRoleCountMap.get(aff.npe5__Contact__c))
-						|| (!pendingStatusMap.containsKey(aff.npe5__Contact__c)))) {
-					affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_OUT_OF_COMPLIANCE;
-				}
-			}
-			if (trainedVRsSet.containsKey(aff.npe5__Contact__c)) {
-				affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_ACTIVE;
-			}
-			updateAffiliations.add(affiliation);
-		}
-		update updateAffiliations;
-	}
-
-	/**
-	 * @description Update Inactive Affiliation
-	 * @param volunteerRoleStatusMap
-	 */
-	public static void updateInactiveAffiliationFromContact(Map<Id, List<Volunteer_Roles__c>> volunteerRoleStatusMap) {
-		if (volunteerRoleStatusMap.isEmpty()) {
-			return;
-		}
-		try {
-			List<npe5__Affiliation__c> updateAffiliations = new List<npe5__Affiliation__c>();
-			for (npe5__Affiliation__c aff : [
-					SELECT Id, npe5__Contact__c
-					FROM npe5__Affiliation__c
-					WHERE npe5__Contact__c IN :volunteerRoleStatusMap.keySet()
-					AND npe5__Status__c != :ORG_AFFILIATION_STATUS_ACTIVE
-					AND npe5__Status__c != :ORG_AFFILIATION_STATUS_PENDING
-			]) {
-				npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
-				affiliation.Id = aff.Id;
-				affiliation.npe5__Status__c = ORG_AFFILIATION_STATUS_PROSPECTIVE;
-				updateAffiliations.add(affiliation);
-			}
-			update updateAffiliations;
-			if (Test.isRunningTest()) {
-				throw new CommonTriggerException('Test Class execution');
-			}
-		} catch (Exception ex) {
-			for (List<Volunteer_Roles__c> volunteerRoles : volunteerRoleStatusMap.values()) {
-				for (Volunteer_Roles__c volunteerRole : volunteerRoles) {
-					ErrorMessage_AC.createDebugRec('AffiliationService',
-							String.valueOf(volunteerRole), String.valueOf(ex), 'updateInactiveAffiliationFromContact',
-							volunteerRole.Id, ex.getStackTraceString() + '   ' + ex.getMessage(), 'Error');
-					if (!Test.isRunningTest()) {
-						volunteerRole.addError(Label.Debug_log_error_message);
-					}
-				}
-			}
+	private static void createContactDebugLog(List<SObject> exceptionList, String methodName, Exception ex) {
+		for (SObject record : exceptionList) {
+			ErrorMessage_AC.createDebugRec('AffiliationService', String.valueOf(record), String.valueOf(ex),
+					methodName, record.Id, ex.getStackTraceString() + ' ' + ex.getMessage(), 'Error');
+			record.addError(Label.Debug_log_error_message);
 		}
 	}
 }

@@ -46,8 +46,19 @@ public class LeadConvertService {
 			if (leadIdConvertedByContactIdMap.isEmpty()) {
 				return;
 			}
+
+			// Get lead fields
+			List<Lead> convertedLeads = LeadService.findLeadById(leadIdConvertedByContactIdMap.keySet());
+
+			// Find existing Affiliations Medical Professionals to Hospital Facilities
+			Set<Id> medicalProfessionalIds = findMedicalProfessionalIdsFromLead(convertedLeads);
+			Set<Id> hospitalFacilityIds = findHospitalFacilityIdsFromLead(convertedLeads);
+			Map<String, npe5__Affiliation__c> existingMpHtfAffiliationMap =
+					AffiliationService.findExistingAffiliations(medicalProfessionalIds, hospitalFacilityIds);
+
 			// Generate Lead Convert Wrappers from Lead
-			leadConvertByWishChildId = generateLeadConvertWrapper(leadIdConvertedByContactIdMap);
+			leadConvertByWishChildId = generateLeadConvertWrapper(convertedLeads, existingMpHtfAffiliationMap);
+
 			Map<Id, Lead> convertedLeadById = new Map<Id, Lead>();
 			Map<Id, Case> caseMap = new Map<Id, Case>();
 			List<cg__ContactFile__c> contactFileFolders = new List<cg__ContactFile__c>();
@@ -69,6 +80,7 @@ public class LeadConvertService {
 				leadConvertNewContacts.addAll(wrapper.familyContacts);
 				relationships.addAll(wrapper.medicalRelationships);
 				affiliations.addAll(wrapper.treatingHospitalAffiliations);
+				affiliations.addAll(wrapper.medicalProfessionalHospitalAffiliations);
 			}
 
 			// Update Diagnosis Verification with converted Wish Child Contact Id
@@ -111,12 +123,21 @@ public class LeadConvertService {
 			insert caseMap.values();
 			insert tasks;
 			insert leadConvertNewContacts;
+
 			for (LeadConvertWrapper leadConvertWrapper : leadConvertByWishChildId.values()) {
 				leadConvertWrapper.familyRelationships = RelationshipService.buildWishFamilyLeadConvertRelationship(leadConvertNewContacts);
 				relationships.addAll(leadConvertWrapper.familyRelationships);
 			}
 			insert relationships;
 			insert affiliations;
+
+			// Revert any Affiliations which got set to Former, set them to Active
+			List<npe5__Affiliation__c> updatedActiveAffiliations = new List<npe5__Affiliation__c>();
+			for(npe5__Affiliation__c affiliation : affiliations){
+				affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+				updatedActiveAffiliations.add(affiliation);
+			}
+			update updatedActiveAffiliations;
 
 			// Generate Wish Affiliations
 			Set<Id> relationshipIds = new Set<Id>();
@@ -125,6 +146,7 @@ public class LeadConvertService {
 			}
 			generateWishAffiliationsFromLead(convertedLeadById.keySet(), relationshipIds);
 		} catch (Exception ex) {
+			System.debug('processConvertedLead ' + ex);
 			for (LeadConvertWrapper wrapper : leadConvertByWishChildId.values()) {
 				ErrorMessage_AC.createDebugRec('LeadConvertService',
 						String.valueOf(wrapper.convertedLead), String.valueOf(ex), 'convertLead',
@@ -138,94 +160,73 @@ public class LeadConvertService {
 
 	/**
 	 * @description Build objects to insert, update from the Converted Leads
-	 * @param leadIdConvertedByContactIdMap lead map
+	 * @param convertedLeads converted leads
 	 * @return Map of lead convert wrapper
 	 */
-	private static Map<Id, LeadConvertWrapper> generateLeadConvertWrapper(Map<Id, Id> leadIdConvertedByContactIdMap) {
+	private static Map<Id, LeadConvertWrapper> generateLeadConvertWrapper(List<Lead> convertedLeads,
+			Map<String, npe5__Affiliation__c> existingMpHtfAffiliationMap) {
 		Map<Id, LeadConvertWrapper> wrappers = new Map<Id, LeadConvertWrapper>();
-		for (Lead convertedLead : [
-				SELECT Id, Name, DOB__c, FirstName, Why_do_you_feel_would_be_eligible_Wish__c, LastName, CreatedDate, Migrated_Record__c,
-						I_am_Recognized_To_Practice_As_a__c, Sibling_Detail__c, Medical_Provider_Category__c,
-						ChapterName__r.Name, ChapterName__c, ConvertedContactId, ConvertedAccountId,
-						Other_Relationship_To_Child__c, Relationship_to_child__c, LeadSource, is_Family_Aware_of_Referral__c, Referrer_City__c,
-						Referrer_Email__c, Referrer_FirstName__c, Referrer_Last_Name__c, Referrer_Phone__c, Referrer_Zip__c,
-						Parent_First_Name__c, What_is_the_family_s_primary_spoken_lang__c, Parent_Last_Name__c, Email,
-						Phone, City, CountryCode, PostalCode, State, StateCode, Street, Wish_Family_ContactId__c,
-						Additional_Parent_First_Name__c, Additional_Parent_Last_Name__c, Additional_Parent_City__c,
-						Additional_Parent_Email__c, Additional_Parent_Phone__c, Additional_Parent_Postal_Code__c,
-						Additional_Parent_State__c, Additional_Parent_Street__c, Hidden_Additional_Parent_Id__c,
-						Parent_Relationship_to_Child__c, Self_describe_comment_box__c, Child_Age__c, Gender__c,
-						Hidden_DV_form_Medical_professional_Type__c, Additional_Parent_Relationship_to_Child__c,
-						How_Did_you_hear_about_Make_A_Wish__c, Other_Medical_Provider_Category__c,
-						Any_medical_reason_for_moving_quickly__c, Department__c, Part_A_Received__c, Part_A_Sent__c,
-						ChapterName__r.Qualified_Wish_Owner__c, Qualified_Date__c, PD_Condition_Description__c,
-						Rush__c, Please_Explain__c, Referred_Date__c, Inquiry_Date__c, Out_of_Territory__c,
-						unique_wish_identifier__c, Will_Child_s_Condition_Deteriorate__c, Please_Explain_Deteriorate__c, Expedite_timeframe__c,
-						Referring_MP__r.Name, Referring_MP__r.npe01__WorkEmail__c, Referring_MP__r.npe01__AlternateEmail__c,
-						Referring_MP__r.Alternate_Email_2__c, Referring_MP_HTF__c, Treating_MP__c, Treating_MP__r.Name,
-						Treating_MP__r.npe01__WorkEmail__c, Treating_MP__r.npe01__AlternateEmail__c,
-						Treating_MP__r.Alternate_Email_2__c, Treating_MP_HTF__c, Best_Contact__c, Best_Contact__r.Name,
-						Best_Contact__r.npe01__WorkEmail__c, Best_Contact__r.npe01__AlternateEmail__c,
-						Best_Contact__r.Alternate_Email_2__c, Best_Contact_HTF__c, Alt_1_MP__c, Alt_1_MP__r.Name,
-						Alt_1_MP__r.npe01__WorkEmail__c, Alt_1_MP__r.npe01__AlternateEmail__c, Alt_1_MP__r.Alternate_Email_2__c,
-						Alt_1_MP_HTF__c, Alt_2_MP__c, Alt_2_MP__r.Name, Alt_2_MP__r.npe01__WorkEmail__c, Alt_2_MP__r.npe01__AlternateEmail__c,
-						Alt_2_MP__r.Alternate_Email_2__c, Alt_2_MP_HTF__c, ConvertedContact.Id, ConvertedContact.OwnerId,
-						ConvertedAccount.Id, ConvertedAccount.Name, ConvertedAccount.Volunteer_Manager__c, ConvertedAccount.Intake_Manager__c,
-						ConvertedAccount.Volunteer_Manager__r.Name, ConvertedAccount.Volunteer_Manager__r.Email, ConvertedAccount.RecordTypeId
-				FROM Lead
-				WHERE Id IN:leadIdConvertedByContactIdMap.keySet()
-		]) {
-			LeadConvertWrapper wrapper = new LeadConvertWrapper();
-			// Set the source Lead
-			wrapper.convertedLead = convertedLead;
+		for (Lead convertedLead : convertedLeads) {
+			try {
+				LeadConvertWrapper wrapper = new LeadConvertWrapper();
+				// Set the source Lead
+				wrapper.convertedLead = convertedLead;
 
-			// Update fields on converted Wish Child Contact
-			wrapper.wishChild = ContactService.buildWishChildFromLead(convertedLead);
+				// Update fields on converted Wish Child Contact
+				wrapper.wishChild = ContactService.buildWishChildFromLead(convertedLead);
 
-			// Create Family Contacts
-			// Siblings of Wish Child
-			wrapper.familyContacts = new List<Contact>();
-			wrapper.familyContacts.addAll(extractSiblingContacts(convertedLead));
+				// Create Family Contacts
+				// Siblings of Wish Child
+				wrapper.familyContacts = new List<Contact>();
+				wrapper.familyContacts.addAll(extractSiblingContacts(convertedLead));
 
-			// Parent/Legal Guardian of Wish Child
-			if (convertedLead.Parent_Last_Name__c != null && convertedLead.Wish_Family_ContactId__c == null) {
-				wrapper.familyContacts.add(ContactService.buildParentLegalGuardianFromLead(convertedLead));
+				// Parent/Legal Guardian of Wish Child
+				if (convertedLead.Parent_Last_Name__c != null && convertedLead.Wish_Family_ContactId__c == null) {
+					wrapper.familyContacts.add(ContactService.buildParentLegalGuardianFromLead(convertedLead));
+				}
+
+				// Additional Parent/Legal Guardian of Wish Child
+				if (convertedLead.Additional_Parent_Last_Name__c != null && convertedLead.Hidden_Additional_Parent_Id__c == null) {
+					wrapper.familyContacts.add(ContactService.buildAdditionalParentLegalGuardianFromLead(convertedLead));
+				}
+
+				// Find Medical Contacts
+				wrapper.medicalContacts = getMedicalContacts(convertedLead);
+
+				// Relationships Wish Child to Medical Professionals
+				wrapper.medicalRelationships = RelationshipService.buildLeadConvertRelationships(convertedLead).values();
+
+				// Affiliations Medical Professional and Hospital Facilities
+				wrapper.medicalProfessionalHospitalAffiliations = AffiliationService.buildMedicalProfessionalHospitalAffiliation(
+						convertedLead, existingMpHtfAffiliationMap);
+
+				// Affiliations Wish Child to Hospital Facilities
+				wrapper.treatingHospitalAffiliations = AffiliationService.buildWishChildAffiliation(convertedLead);
+
+				// Folders
+				wrapper.contactFolders = ContactFileService.buildFileFoldersLeadConvert(convertedLead.ConvertedContactId);
+
+				// Welcome Letter Task
+				wrapper.tasks = new List<Task>();
+				wrapper.tasks.add(TaskService.buildSendWelcomeLetter(convertedLead.ConvertedContactId, convertedLead.ConvertedContact.OwnerId));
+
+				// Rush Task
+				if (convertedLead.Any_medical_reason_for_moving_quickly__c.containsIgnoreCase(Constant_AC.LEAD_MEDICAL_REASON_FOR_MOVING_QUICKLY_YES)) {
+					wrapper.tasks.add(TaskService.buildRush(convertedLead.ConvertedContactId));
+				}
+
+				// Qualified Case
+				Contact qualifyingMedicalContact = getQualifyingMedicalProfessional(wrapper.medicalRelationships, wrapper.medicalContacts);
+				wrapper.qualifiedCase = CaseService.buildQualifiedCaseFromLead(convertedLead, qualifyingMedicalContact);
+
+				// Household Account of Wish Child
+				wrapper.wishChildAccount = AccountService.setHouseholdFields(convertedLead);
+
+				wrappers.put(convertedLead.ConvertedContactId, wrapper);
+
+			} catch (Exception ex) {
+				System.debug('generateLeadConvertWrapper ' + ex);
 			}
-
-			// Additional Parent/Legal Guardian of Wish Child
-			if (convertedLead.Additional_Parent_Last_Name__c != null && convertedLead.Hidden_Additional_Parent_Id__c == null) {
-				wrapper.familyContacts.add(ContactService.buildAdditionalParentLegalGuardianFromLead(convertedLead));
-			}
-
-			// Find Medical Contacts
-			wrapper.medicalContacts = getMedicalContacts(convertedLead);
-
-			// Relationships Wish Child to Medical Professionals
-			wrapper.medicalRelationships = RelationshipService.buildLeadConvertRelationships(convertedLead).values();
-
-			// Affiliations Wish Child to Hospital Facilities
-			wrapper.treatingHospitalAffiliations = AffiliationService.buildTreatingHospitalAffiliation(convertedLead);
-
-			// Folders
-			wrapper.contactFolders = ContactFileService.buildFileFoldersLeadConvert(convertedLead.ConvertedContactId);
-
-			// Welcome Letter Task
-			wrapper.tasks = new List<Task>();
-			wrapper.tasks.add(TaskService.buildSendWelcomeLetter(convertedLead.ConvertedContactId, convertedLead.ConvertedContact.OwnerId));
-
-			// Rush Task
-			if (convertedLead.Any_medical_reason_for_moving_quickly__c.containsIgnoreCase(Constant_AC.LEAD_MEDICAL_REASON_FOR_MOVING_QUICKLY_YES)) {
-				wrapper.tasks.add(TaskService.buildRush(convertedLead.ConvertedContactId));
-			}
-
-			// Qualified Case
-			Contact qualifyingMedicalContact = getQualifyingMedicalProfessional(wrapper.medicalRelationships, wrapper.medicalContacts);
-			wrapper.qualifiedCase = CaseService.buildQualifiedCaseFromLead(convertedLead, qualifyingMedicalContact);
-
-			// Household Account of Wish Child
-			wrapper.wishChildAccount = AccountService.setHouseholdFields(convertedLead);
-
-			wrappers.put(convertedLead.ConvertedContactId, wrapper);
 		}
 		return wrappers;
 	}
@@ -406,6 +407,60 @@ public class LeadConvertService {
 		return mps;
 	}
 
+	/**
+	 * @description Find the Medical Professional Ids from Lead
+	 * @param leads leads
+	 * @return contact ids
+	*/
+	private static Set<Id> findMedicalProfessionalIdsFromLead(List<Lead> leads){
+		Set<Id> medicalProfessionalContactIds = new Set<Id>();
+		for(Lead lead : leads){
+			if(lead.Referring_MP__c != null){
+				medicalProfessionalContactIds.add(lead.Referring_MP__c);
+			}
+			if(lead.Treating_MP__c != null){
+				medicalProfessionalContactIds.add(lead.Treating_MP__c);
+			}
+			if(lead.Best_Contact__c != null){
+				medicalProfessionalContactIds.add(lead.Best_Contact__c);
+			}
+			if(lead.Alt_1_MP__c != null){
+				medicalProfessionalContactIds.add(lead.Alt_1_MP__c);
+			}
+			if(lead.Alt_2_MP__c != null){
+				medicalProfessionalContactIds.add(lead.Alt_2_MP__c);
+			}
+		}
+		return medicalProfessionalContactIds;
+	}
+
+	/**
+	 * @description Find the Hospital Facility Ids from Lead
+	 * @param leads leads
+	 * @return account ids
+	*/
+	private static Set<Id> findHospitalFacilityIdsFromLead(List<Lead> leads){
+		Set<Id> hospitalFacilityAccountIds = new Set<Id>();
+		for(Lead lead : leads){
+			if(lead.Referring_MP_HTF__c != null){
+				hospitalFacilityAccountIds.add(lead.Referring_MP_HTF__c);
+			}
+			if(lead.Treating_MP_HTF__c != null){
+				hospitalFacilityAccountIds.add(lead.Treating_MP_HTF__c);
+			}
+			if(lead.Best_Contact_HTF__c != null){
+				hospitalFacilityAccountIds.add(lead.Best_Contact_HTF__c);
+			}
+			if(lead.Alt_1_MP_HTF__c != null){
+				hospitalFacilityAccountIds.add(lead.Alt_1_MP_HTF__c);
+			}
+			if(lead.Alt_2_MP_HTF__c != null){
+				hospitalFacilityAccountIds.add(lead.Alt_2_MP_HTF__c);
+			}
+		}
+		return hospitalFacilityAccountIds;
+	}
+
 	public class LeadConvertWrapper {
 		public Lead convertedLead { get; set; }
 		public Id wishChildContactId { get; set; }
@@ -415,6 +470,7 @@ public class LeadConvertService {
 		public Map<Id, Contact> medicalContacts { get; set; }
 		public List<npe4__Relationship__c> familyRelationships { get; set; }
 		public List<npe4__Relationship__c> medicalRelationships { get; set; }
+		public List<npe5__Affiliation__c> medicalProfessionalHospitalAffiliations { get; set; }
 		public List<npe5__Affiliation__c> treatingHospitalAffiliations { get; set; }
 		public List<Task> tasks { get; set; }
 		public Case qualifiedCase { get; set; }
