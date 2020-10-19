@@ -48,6 +48,11 @@
     <members>Lead.Other_expedite_timeframe_comments__c</members>
     <members>Lead.Primary_Medical_Professional_Type_Other__c</members>
     <members>npe4__Relationship__c.Former_MP__c</members>
+    <members>npe5__Affiliation__c.Contact_Chapter_Name__c</members>
+    <members>npe5__Affiliation__c.npe5__Primary__c</members>
+    <members>npe5__Affiliation__c.Organization_Chapter_Name__c</members>
+    <members>npe5__Affiliation__c.Treating_Facility__c</members>
+    <members>npe5__Affiliation__c.User_Email_Hidden__c</members>
     <members>Spanish_Translations__mdt.Active__c</members>
     <members>Spanish_Translations__mdt.English__c</members>
     <members>Spanish_Translations__mdt.Spanish__c</members>
