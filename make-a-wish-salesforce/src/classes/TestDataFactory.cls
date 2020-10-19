@@ -41,6 +41,7 @@ public class TestDataFactory {
 		for (Integer i = 0; i < num; i++) {
 			Account a = new Account();
 			a.Name = 'Chapter' + i;
+			a.BillingPostalCode = '85001';
 			accounts.add(a);
 		}
 		return accounts;

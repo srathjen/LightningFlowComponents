@@ -24782,6 +24782,11 @@
 </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>npe5__Affiliation__c.Contact_Chapter_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>npe5__Affiliation__c.External_Id__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -24800,6 +24805,11 @@
     <readable>false</readable>
     <field>npe5__Affiliation__c.Migrated_Record__c</field>
 </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>npe5__Affiliation__c.Organization_Chapter_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <fieldPermissions>
     <editable>false</editable>
     <readable>false</readable>

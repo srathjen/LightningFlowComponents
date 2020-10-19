@@ -1021,28 +1021,43 @@ public class LeadService {
 	}
 
 	/**
-	 * Check if a Medical Professional contact equal
-	 * @param sourceFirstName
-	 * @param sourceLastName
-	 * @param sourcePhone
-	 * @param sourceEmail
-	 * @param targetFirstName
-	 * @param targetLastName
-	 * @param targetPhone
-	 * @param targetEmail
-	 * @return
-	 */
-	public static Boolean isSameMedicalProfessional(
-			String sourceFirstName, String targetFirstName,
-			String sourceLastName, String targetLastName,
-			String sourcePhone, String targetPhone,
-			String sourceEmail, String targetEmail) {
-		if (sourceFirstName == targetFirstName
-				&& sourceLastName == targetLastName
-				&& (sourcePhone == targetPhone || sourceEmail == targetEmail)) {
-			return true;
-		} else {
-			return false;
-		}
+	 * @description Find Leads by Id
+	 * @param leadIds Lead Ids
+	 * @return list of Leads
+    */
+	public static List<Lead> findLeadById(Set<Id> leadIds){
+		return [
+				SELECT Id, Name, DOB__c, FirstName, Why_do_you_feel_would_be_eligible_Wish__c, LastName, CreatedDate, Migrated_Record__c,
+						I_am_Recognized_To_Practice_As_a__c, Sibling_Detail__c, Medical_Provider_Category__c,
+						ChapterName__r.Name, ChapterName__c, ConvertedContactId, ConvertedAccountId,
+						Other_Relationship_To_Child__c, Relationship_to_child__c, LeadSource, is_Family_Aware_of_Referral__c, Referrer_City__c,
+						Referrer_Email__c, Referrer_FirstName__c, Referrer_Last_Name__c, Referrer_Phone__c, Referrer_Zip__c,
+						Parent_First_Name__c, What_is_the_family_s_primary_spoken_lang__c, Parent_Last_Name__c, Email,
+						Phone, City, CountryCode, PostalCode, State, StateCode, Street, Wish_Family_ContactId__c,
+						Additional_Parent_First_Name__c, Additional_Parent_Last_Name__c, Additional_Parent_City__c,
+						Additional_Parent_Email__c, Additional_Parent_Phone__c, Additional_Parent_Postal_Code__c,
+						Additional_Parent_State__c, Additional_Parent_Street__c, Hidden_Additional_Parent_Id__c,
+						Parent_Relationship_to_Child__c, Self_describe_comment_box__c, Child_Age__c, Gender__c,
+						Hidden_DV_form_Medical_professional_Type__c, Additional_Parent_Relationship_to_Child__c,
+						How_Did_you_hear_about_Make_A_Wish__c, Other_Medical_Provider_Category__c,
+						Any_medical_reason_for_moving_quickly__c, Department__c, Part_A_Received__c, Part_A_Sent__c,
+						ChapterName__r.Qualified_Wish_Owner__c, Qualified_Date__c, PD_Condition_Description__c,
+						Rush__c, Please_Explain__c, Referred_Date__c, Inquiry_Date__c, Out_of_Territory__c,
+						unique_wish_identifier__c, Will_Child_s_Condition_Deteriorate__c, Please_Explain_Deteriorate__c, Expedite_timeframe__c,
+						Referring_MP__r.Name, Referring_MP__r.FirstName, Referring_MP__r.LastName, Referring_MP__r.npe01__WorkEmail__c,
+						Referring_MP__r.npe01__AlternateEmail__c, Referring_MP__r.Alternate_Email_2__c, Referring_MP_HTF__c,
+						Treating_MP__c, Treating_MP__r.Name, Treating_MP__r.FirstName, Treating_MP__r.LastName,
+						Treating_MP__r.npe01__WorkEmail__c, Treating_MP__r.npe01__AlternateEmail__c, Treating_MP__r.Alternate_Email_2__c,
+						Treating_MP_HTF__c, Best_Contact__c, Best_Contact__r.Name, Best_Contact__r.FirstName, Best_Contact__r.LastName,
+						Best_Contact__r.npe01__WorkEmail__c, Best_Contact__r.npe01__AlternateEmail__c, Best_Contact__r.Alternate_Email_2__c,
+						Best_Contact_HTF__c, Alt_1_MP__c, Alt_1_MP__r.Name, Alt_1_MP__r.FirstName, Alt_1_MP__r.LastName,
+						Alt_1_MP__r.npe01__WorkEmail__c, Alt_1_MP__r.npe01__AlternateEmail__c, Alt_1_MP__r.Alternate_Email_2__c,
+						Alt_1_MP_HTF__c, Alt_2_MP__c, Alt_2_MP__r.Name, Alt_2_MP__r.FirstName, Alt_2_MP__r.LastName, Alt_2_MP__r.npe01__WorkEmail__c,
+						Alt_2_MP__r.npe01__AlternateEmail__c, Alt_2_MP__r.Alternate_Email_2__c, Alt_2_MP_HTF__c, ConvertedContact.Id, ConvertedContact.OwnerId,
+						ConvertedContact.Region_Chapter__c, ConvertedAccount.Id, ConvertedAccount.Name, ConvertedAccount.Volunteer_Manager__c, ConvertedAccount.Intake_Manager__c,
+						ConvertedAccount.Volunteer_Manager__r.Name, ConvertedAccount.Volunteer_Manager__r.Email, ConvertedAccount.RecordTypeId
+				FROM Lead
+				WHERE Id IN:leadIds
+		];
 	}
 }

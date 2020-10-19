@@ -175,7 +175,7 @@ public class WishAffiliation_AC_Test {
 				'"Medical_Needs__c":true,"Survey_Recipient__c":true,"Non_Comped__c":true,"Details__c":"The father of the wish child","Contact__c":"'
 				+ wishAffiliation.Contact__c + '","Relationship__c":"' + wishAffiliation.Relationship__c + '",' +
 				'"Contact__r":{"Id":"' + wishAffiliation.Contact__c + '","Name":"Jack Smith","Salutation":"Mr.","FirstName":"Jack","LastName":"Smith",' +
-				'"Birthdate":"1950-01-01","npe01__PreferredPhone__c":"Home","Phone":"5553334444","npe01__HomeEmail__c":"js@email.com",' +
+				'"Birthdate":"1950-01-01","npe01__PreferredPhone__c":"Home","npe01__Preferred_Email__c":"Work","Phone":"5553334444","npe01__HomeEmail__c":"js@email.com",' +
 				'"npsp__Do_Not_Contact__c":true,"Do_Not_Contact_Notes__c":"Do no Contact Father","npsp__Deceased__c":false,' +
 				'"MailingStreet":"1234 E Gold Dust Ave","MailingCity":"Phoenix","MailingPostalCode":"88333-2222","MailingState":"Arizona","MailingCountry":"United States"},' +
 				'"Relationship__r":{"Id":"' + wishAffiliation.Relationship__c + '","npe4__Type__c":"Stepfather","Parent_Legal_Guardian__c":true,' +

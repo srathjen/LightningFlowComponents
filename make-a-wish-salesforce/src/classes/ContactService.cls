@@ -9,7 +9,6 @@ public class ContactService {
 	private final static Id WISH_CHILD_RECORD_TYPE_ID = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
 	private final static Id WISH_FAMILY_RECORD_TYPE_ID = Constant_AC.WISH_FAMILY_RT_ID;
 	private final static Id VOLUNTEER_RT_ID = Constant_AC.VOLUNTEER_RT_ID;
-	private final static Id BOARD_MEMBER_RT_ID = Constant_AC.BOARD_MEMBER_RT_ID;
 	private final static Id STAFF_TASK_RT_ID = Constant_AC.STAFF_TASK_RT_ID;
 	private final static String VOLUNTEER_ROLE_STATUS_ACTIVE = Constant_AC.VOLUNTEER_ROLE_STATUS_ACTIVE;
 	private final static String ORG_AFFILIATION_STATUS_STATUS_ACTIVE = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
@@ -26,8 +25,6 @@ public class ContactService {
 	private static final String SALUTATION_MS = Constant_AC.CONTACT_SALUTATION_MS;
 	private static final String GENDER_MALE = Constant_AC.CONTACT_GENDER_MALE;
 	private static final String GENDER_FEMALE = Constant_AC.CONTACT_GENDER_FEMALE;
-	private static final String AFFILIATION_STATUS_ACTIVE = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
-	private static final String AFFILIATION_STATUS_PENDING = Constant_AC.ORG_AFFILIATION_STATUS_PENDING;
 	private final static String ACCOUNT_NAME_MAW_AMERICA = Constant_AC.ACCOUNT_NAME_MAW_AMERICA;
 	private final static String ROLE_NATIONAL_STAFF = Constant_AC.ROLE_NATIONAL_STAFF;
 	private static final String EMPTY = '';
@@ -269,59 +266,69 @@ public class ContactService {
 	 */
 	public static Contact buildWishChildFromLead(Lead lead) {
 		Contact wishChild = new Contact();
-		wishChild.Id = lead.ConvertedContactId;
-		wishChild.Lead_Created_Date__c = Date.valueOf(lead.CreatedDate);
-		wishChild.Birthdate = lead.DOB__c;
-		wishChild.RecordTypeId = WISH_CHILD_RECORD_TYPE_ID;
-		wishChild.Provider_Type__c = lead.Medical_Provider_Category__c;
-		wishChild.Self_describe_comment_box__c = lead.Self_describe_comment_box__c;
-		wishChild.Language__c = lead.What_is_the_family_s_primary_spoken_lang__c;
-		wishChild.Region_Chapter__c = lead.ChapterName__c;
-		wishChild.Inquiry_Referral_Method__c = lead.LeadSource;
-		wishChild.Referrer_City__c = lead.Referrer_City__c;
-		wishChild.Referrer_Email__c = lead.Referrer_Email__c;
-		wishChild.Referrer_FirstName__c = lead.Referrer_FirstName__c;
-		wishChild.Referrer_Last_Name__c = lead.Referrer_Last_Name__c;
-		wishChild.Referrer_Phone__c = lead.Referrer_Phone__c;
-		wishChild.Referrer_Zip__c = lead.Referrer_Zip__c;
-		wishChild.Relationship__c = lead.Relationship_to_child__c;
-		wishChild.Other_Medical_Provider_Category__c = lead.Other_Medical_Provider_Category__c;
-		wishChild.Relationship_to_Wish_Child__c = lead.Other_Relationship_To_Child__c;
-		wishChild.Is_Family_Aware_of_Referral__c = lead.is_Family_Aware_of_Referral__c;
-		wishChild.Migrated_Record__c = lead.Migrated_Record__c;
-		wishChild.Wish_How_Did_you_hear_about_Make_A_Wish__c = lead.How_Did_you_hear_about_Make_A_Wish__c;
-		wishChild.Relationship_Type__c = WISH_CHILD_RECORD_TYPE_LABEL;
-		if (lead.Additional_Parent_City__c != lead.City ||
-				lead.Additional_Parent_Postal_Code__c != lead.PostalCode ||
-				lead.Additional_Parent_State__c != lead.State ||
-				lead.Additional_Parent_Street__c != lead.Street) {
-			wishChild.npsp__is_Address_Override__c = true;
-		}
-		if (lead.DOB__c != null) {
-			Date dob = lead.DOB__c;
-			Integer age;
-			if (Date.newInstance(2000, dob.month(), dob.day())
-					<= Date.newInstance(2000, Date.today().month(), Date.today().day())) {
-				age = Date.today().year() - dob.year();
+		try {
+			wishChild.Id = lead.ConvertedContactId;
+			wishChild.Lead_Created_Date__c = Date.valueOf(lead.CreatedDate);
+			wishChild.Birthdate = lead.DOB__c;
+			wishChild.RecordTypeId = WISH_CHILD_RECORD_TYPE_ID;
+			wishChild.Provider_Type__c = lead.Medical_Provider_Category__c;
+			wishChild.Self_describe_comment_box__c = lead.Self_describe_comment_box__c;
+			wishChild.Language__c = lead.What_is_the_family_s_primary_spoken_lang__c;
+			wishChild.Region_Chapter__c = lead.ChapterName__c;
+			wishChild.Inquiry_Referral_Method__c = lead.LeadSource;
+			if (Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_MEDICAL_PROFESSIONAL.equals(lead.Relationship_to_child__c)
+					&& lead.Referring_MP__c != null) {
+				wishChild.Referrer_FirstName__c = lead.Referring_MP__r.FirstName;
+				wishChild.Referrer_Last_Name__c = lead.Referring_MP__r.LastName;
 			} else {
-				age = Date.today().year() - dob.year() - 1;
+				wishChild.Referrer_City__c = lead.Referrer_City__c;
+				wishChild.Referrer_Email__c = lead.Referrer_Email__c;
+				wishChild.Referrer_FirstName__c = lead.Referrer_FirstName__c;
+				wishChild.Referrer_Last_Name__c = lead.Referrer_Last_Name__c;
+				wishChild.Referrer_Phone__c = lead.Referrer_Phone__c;
+				wishChild.Referrer_Zip__c = lead.Referrer_Zip__c;
 			}
-			if ((age < 16) && lead.Gender__c == GENDER_MALE) {
-				wishChild.Salutation = SALUTATION_MASTER;
-			} else if ((age >= 16) && lead.Gender__c == GENDER_MALE) {
-				wishChild.Salutation = SALUTATION_MR;
-			} else if ((age < 16) && lead.Gender__c == GENDER_FEMALE) {
-				wishChild.Salutation = SALUTATION_MISS;
-			} else if ((age >= 16) && lead.Gender__c == GENDER_FEMALE) {
-				wishChild.Salutation = SALUTATION_MS;
-			} else {
-				wishChild.Salutation = EMPTY;
+			wishChild.Relationship__c = lead.Relationship_to_child__c;
+			wishChild.Other_Medical_Provider_Category__c = lead.Other_Medical_Provider_Category__c;
+			wishChild.Relationship_to_Wish_Child__c = lead.Other_Relationship_To_Child__c;
+			wishChild.Is_Family_Aware_of_Referral__c = lead.is_Family_Aware_of_Referral__c;
+			wishChild.Migrated_Record__c = lead.Migrated_Record__c;
+			wishChild.Wish_How_Did_you_hear_about_Make_A_Wish__c = lead.How_Did_you_hear_about_Make_A_Wish__c;
+			wishChild.Relationship_Type__c = WISH_CHILD_RECORD_TYPE_LABEL;
+			if (lead.Additional_Parent_City__c != lead.City ||
+					lead.Additional_Parent_Postal_Code__c != lead.PostalCode ||
+					lead.Additional_Parent_State__c != lead.State ||
+					lead.Additional_Parent_Street__c != lead.Street) {
+				wishChild.npsp__is_Address_Override__c = true;
 			}
-		}
-		if (lead.Treating_MP__c != null) {
-			wishChild.Hidden_Medical_Physician__c = String.isNotEmpty(lead.Treating_MP__r.FirstName)
-					? lead.Treating_MP__r.FirstName + SPACE + lead.Treating_MP__r.LastName
-					: lead.Treating_MP__r.LastName;
+			if (lead.DOB__c != null) {
+				Date dob = lead.DOB__c;
+				Integer age;
+				if (Date.newInstance(2000, dob.month(), dob.day())
+						<= Date.newInstance(2000, Date.today().month(), Date.today().day())) {
+					age = Date.today().year() - dob.year();
+				} else {
+					age = Date.today().year() - dob.year() - 1;
+				}
+				if ((age < 16) && lead.Gender__c == GENDER_MALE) {
+					wishChild.Salutation = SALUTATION_MASTER;
+				} else if ((age >= 16) && lead.Gender__c == GENDER_MALE) {
+					wishChild.Salutation = SALUTATION_MR;
+				} else if ((age < 16) && lead.Gender__c == GENDER_FEMALE) {
+					wishChild.Salutation = SALUTATION_MISS;
+				} else if ((age >= 16) && lead.Gender__c == GENDER_FEMALE) {
+					wishChild.Salutation = SALUTATION_MS;
+				} else {
+					wishChild.Salutation = EMPTY;
+				}
+			}
+			if (lead.Treating_MP__c != null) {
+				wishChild.Hidden_Medical_Physician__c = String.isNotEmpty(lead.Treating_MP__r.FirstName)
+						? lead.Treating_MP__r.FirstName + SPACE + lead.Treating_MP__r.LastName
+						: lead.Treating_MP__r.LastName;
+			}
+		} catch (Exception ex) {
+			System.debug('buildWishChildFromLead ' + ex);
 		}
 		return wishChild;
 	}
@@ -391,102 +398,6 @@ public class ContactService {
 			additionalParentLegalGuardian.npsp__is_Address_Override__c = true;
 		}
 		return additionalParentLegalGuardian;
-	}
-
-	/**
-	* Create affiliation for contact
-	* @param contactList
-	*/
-	public static void createAffiliation(List<Contact> contactList) {
-		List<npe5__Affiliation__c> insertAffiliationList = new List<npe5__Affiliation__c>();
-		Set<Id> contactIdSet = new Set<Id>();
-		for (Contact contact : contactList) {
-			if ((contact.RecordTypeId == MEDICAL_PROFESSIONAL_RECORD_TYPE_ID
-					&& contact.Hidden_Hospital_Account__c != null)
-					|| contact.RecordTypeId != MEDICAL_PROFESSIONAL_RECORD_TYPE_ID) {
-				npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
-				if (contact.RecordTypeId == MEDICAL_PROFESSIONAL_RECORD_TYPE_ID) {
-					affiliation.npe5__Primary__c = false;
-					if (contact.Hidden_Hospital_Account__c != null) {
-						affiliation.npe5__Organization__c = contact.Hidden_Hospital_Account__c;
-					}
-				} else if (contact.RecordTypeId == VOLUNTEER_RT_ID) {
-					affiliation.Constituent_Code__c = Constant_AC.VOLUNTEER_TASK_RT_LABEL;
-					affiliation.npe5__Status__c = AFFILIATION_STATUS_PENDING;
-					affiliation.npe5__Primary__c = true;
-					contactIdSet.add(contact.Id);
-				} else if (contact.RecordTypeId == BOARD_MEMBER_RT_ID) {
-					affiliation.Constituent_Code__c = BOARD_MEMBER_RT_LABEL;
-				}
-				if (contact.RecordTypeId != MEDICAL_PROFESSIONAL_RECORD_TYPE_ID
-						|| contact.Hidden_Hospital_Account__c == null) {
-					affiliation.npe5__Organization__c = contact.AccountId;
-				}
-				affiliation.npe5__Contact__c = contact.Id;
-				affiliation.npe5__StartDate__c = Date.today();
-				affiliation.npe5__Status__c = AFFILIATION_STATUS_ACTIVE;
-				insertAffiliationList.add(affiliation);
-			}
-            if(contact.RecordTypeId == MEDICAL_PROFESSIONAL_RECORD_TYPE_ID 
-               && contact.npsp__Primary_Affiliation__c != null) {
-                npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
-                affiliation.Constituent_Code__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
-                affiliation.npe5__Primary__c = true;
-                affiliation.npe5__Organization__c = contact.npsp__Primary_Affiliation__c;
-                affiliation.npe5__Contact__c = contact.Id;
-                affiliation.npe5__StartDate__c = Date.Today();
-                affiliation.npe5__Status__c = AFFILIATION_STATUS_ACTIVE;
-                insertAffiliationList.add(affiliation);
-            } else if ((contact.RecordTypeId == MEDICAL_PROFESSIONAL_RECORD_TYPE_ID
-					|| contact.RecordTypeId == WISH_FAMILY_RECORD_TYPE_ID
-					|| contact.RecordTypeId == WISH_CHILD_RECORD_TYPE_ID)
-					&& contact.Region_Chapter__c != null) {
-				npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
-				if (contact.RecordTypeId == MEDICAL_PROFESSIONAL_RECORD_TYPE_ID) {
-					affiliation.Constituent_Code__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
-                    //affiliation.npe5__Primary__c = true;
-				} else if (contact.RecordTypeId == WISH_FAMILY_RECORD_TYPE_ID) {
-					affiliation.Constituent_Code__c = Constant_AC.WISH_FAMILY_RT_LABEL;
-				} else {
-					affiliation.Constituent_Code__c = Constant_AC.CONTACT_WISH_CHILD_RT_LABEL;
-				}
-				affiliation.npe5__Organization__c = contact.Region_Chapter__c;
-				affiliation.npe5__Contact__c = contact.Id;
-				affiliation.npe5__StartDate__c = Date.Today();
-				affiliation.npe5__Status__c = AFFILIATION_STATUS_ACTIVE;
-				insertAffiliationList.add(affiliation);
-			}
-        }
-		updateContactAffiliation(contactIdSet);
-		try {
-			insert insertAffiliationList;
-		} catch (Exception e) {
-			createContactDebugLog(insertAffiliationList, 'createAffiliation', e);
-		}
-	}
-
-	/**
-	* Update contact affiliation record
-	* @param contactIds
-	*/
-	public static void updateContactAffiliation(Set<Id> contactIds) {
-		List<npe5__Affiliation__c> affiliationList = new List<npe5__Affiliation__c>();
-		if (!contactIds.isEmpty()) {
-			for (npe5__Affiliation__c affiliation : [
-					SELECT Id, npe5__Primary__c
-					FROM npe5__Affiliation__c
-					WHERE npe5__Contact__c IN :contactIds
-					AND npe5__Primary__c = true
-			]) {
-				affiliation.npe5__Primary__c = false;
-				affiliationList.add(affiliation);
-			}
-			try {
-				update affiliationList;
-			} catch (Exception e) {
-				createContactDebugLog(affiliationList, 'updateContactAffiliation', e);
-			}
-		}
 	}
 
 	/**
@@ -886,44 +797,6 @@ public class ContactService {
 			}
 		}
 		return contactIcdList;
-	}
-
-	/**
-	* Update affiliation status based on contact application status
-	* @param newContactsList
-	* @param oldContactsMap
-	*/
-	public static void updateOrgAffiliationStatus(List<Contact> newContactsList, Map<Id, Contact> oldContactsMap) {
-		Map<Id, Contact> contactMap = new Map<Id, Contact>();
-		for (Contact newContact : newContactsList) {
-			if (newContact.is_Application__c != oldContactsMap.get(newContact.Id).is_Application__c) {
-				contactMap.put(newContact.Id, newContact);
-			}
-		}
-		if (!contactMap.isEmpty()) {
-			List<npe5__Affiliation__c> affiliationList = new List<npe5__Affiliation__c>();
-			for (npe5__Affiliation__c dbAffiliationRec : [
-					SELECT Id, npe5__Contact__c, npe5__Primary__c, npe5__Status__c, npe5__Organization__c
-					FROM npe5__Affiliation__c
-					WHERE npe5__Contact__c IN :contactMap.keySet() AND npe5__Status__c != 'Active'
-			]) {
-				if (contactMap.containsKey(dbAffiliationRec.npe5__Contact__c)) {
-					npe5__Affiliation__c updateAffiliation = new npe5__Affiliation__c();
-					updateAffiliation.Id = dbAffiliationRec.Id;
-					if (contactMap.get(dbAffiliationRec.npe5__Contact__c).is_Application__c == 'Complete') {
-						updateAffiliation.npe5__Status__c = 'Pending';
-					} else if (contactMap.get(dbAffiliationRec.npe5__Contact__c).is_Application__c == 'Rejected') {
-						updateAffiliation.npe5__Status__c = 'Not Approved';
-					}
-					affiliationList.add(updateAffiliation);
-				}
-			}
-			try {
-				update affiliationList;
-			} catch (Exception e) {
-				createContactDebugLog(affiliationList, 'updateOrgAffiliationStatus', e);
-			}
-		}
 	}
 
 	/**
@@ -1774,20 +1647,6 @@ public class ContactService {
 	}
 
 	/**
-	* Create debug log when error occurs
-	* @param exceptionList
-	* @param methodName
-	* @param exception
-	*/
-	public static void createContactDebugLog(List<SObject> exceptionList, String methodName, Exception ex) {
-		for (SObject record : exceptionList) {
-			ErrorMessage_AC.createDebugRec('ContactService', String.valueOf(record), String.valueOf(ex),
-					methodName, record.Id, ex.getStackTraceString() + ' ' + ex.getMessage(), 'Error');
-			record.addError(Label.Debug_log_error_message);
-		}
-	}
-
-	/**
 	 * Update the number of Volunteer Opportunities assigned to the Volunteer Contact
 	 * @param volunteerIds
 	 */
@@ -2056,28 +1915,28 @@ public class ContactService {
 		if (contactsList.isEmpty()) {
 			return;
 		}
-        Map<Id, Contact> contactChapterMap = new Map<Id, Contact>();
-        Set<Id> chapterIdSet = new Set<Id>();
-        List<Contact> mpContactList = new List<Contact>();
-        for (Contact contact : contactsList) {
-            if (contact.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID) {
-                if((oldContactsMap == null && contact.Region_Chapter__c != null) || 
-                   (oldContactsMap != null && contact.Region_Chapter__c != oldContactsMap.get(contact.Id).Region_Chapter__c)) {
-                    chapterIdSet.add(contact.Region_Chapter__c);
-                    mpContactList.add(contact);
-                }
-            }
-        }
-        if (!chapterIdSet.isEmpty()) {
-            Map<Id, Account> accountOwnerMap = new Map<Id, Account>(
+		Map<Id, Contact> contactChapterMap = new Map<Id, Contact>();
+		Set<Id> chapterIdSet = new Set<Id>();
+		List<Contact> mpContactList = new List<Contact>();
+		for (Contact contact : contactsList) {
+			if (contact.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID) {
+				if ((oldContactsMap == null && contact.Region_Chapter__c != null) ||
+						(oldContactsMap != null && contact.Region_Chapter__c != oldContactsMap.get(contact.Id).Region_Chapter__c)) {
+					chapterIdSet.add(contact.Region_Chapter__c);
+					mpContactList.add(contact);
+				}
+			}
+		}
+		if (!chapterIdSet.isEmpty()) {
+			Map<Id, Account> accountOwnerMap = new Map<Id, Account>(
 					ChapterStaffRecordSharing_AC.getAccountOwner(chapterIdSet));
-            for (Contact contact : mpContactList) {
-                if (accountOwnerMap.containsKey(contact.Region_Chapter__c)) {
-                    contact.OwnerId = accountOwnerMap.get(contact.Region_Chapter__c).Intake_Manager__c;
-                }
-            }
-        }
-    }
+			for (Contact contact : mpContactList) {
+				if (accountOwnerMap.containsKey(contact.Region_Chapter__c)) {
+					contact.OwnerId = accountOwnerMap.get(contact.Region_Chapter__c).Intake_Manager__c;
+				}
+			}
+		}
+	}
 
 	/**
 	* @description Get duplicate records for Contact records according to Duplicate Rules
@@ -2119,5 +1978,19 @@ public class ContactService {
 	public class ContactDuplicateInput {
 		@InvocableVariable(Label='Input Contact Record' Description='Single record to evaluate duplicates' Required=true)
 		public Contact contactInput;
+	}
+
+	/**
+	* Create debug log when error occurs
+	* @param exceptionList exceptions
+	* @param methodName method name
+	* @param ex exception
+	*/
+	private static void createContactDebugLog(List<SObject> exceptionList, String methodName, Exception ex) {
+		for (SObject record : exceptionList) {
+			ErrorMessage_AC.createDebugRec('ContactService', String.valueOf(record), String.valueOf(ex),
+					methodName, record.Id, ex.getStackTraceString() + ' ' + ex.getMessage(), 'Error');
+			record.addError(Label.Debug_log_error_message);
+		}
 	}
 }
