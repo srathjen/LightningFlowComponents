@@ -19246,6 +19246,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Wish_Affiliation__c.Specific_Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Wish_Affiliation__c.Survey_Recipient__c</field>
         <readable>true</readable>

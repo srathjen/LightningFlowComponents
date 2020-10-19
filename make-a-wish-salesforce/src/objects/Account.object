@@ -1198,28 +1198,14 @@
         <externalId>false</externalId>
         <label>Chapter Name</label>
         <lookupFilter>
-            <active>false</active>
-            <filterItems>
-                <field>$Profile.Name</field>
-                <operation>equals</operation>
-                <value>Active Volunteer</value>
-            </filterItems>
+            <active>true</active>
+            <errorMessage>Please select a valid Chapter Account.</errorMessage>
             <filterItems>
                 <field>Account.RecordTypeId</field>
                 <operation>equals</operation>
                 <value>Chapter</value>
             </filterItems>
-            <filterItems>
-                <field>$User.Account_Name__c</field>
-                <operation>equals</operation>
-                <valueField>Account.Name</valueField>
-            </filterItems>
-            <filterItems>
-                <field>$Profile.Name</field>
-                <operation>equals</operation>
-                <value>Active Volunteer</value>
-            </filterItems>
-            <isOptional>true</isOptional>
+            <isOptional>false</isOptional>
         </lookupFilter>
         <referenceTo>Account</referenceTo>
         <relationshipLabel>Accounts</relationshipLabel>
@@ -5766,7 +5752,7 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <fullName>Chapter</fullName>
         <active>true</active>
         <compactLayoutAssignment>Chapter_Minipage_layout</compactLayoutAssignment>
-        <description>It displays the name of the state in which the account belongs.</description>
+        <description>An Account representing a Make-A-Wish chapter</description>
         <label>Chapter</label>
         <picklistValues>
             <picklist>AccountSource</picklist>
@@ -5791,6 +5777,17 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
             <values>
                 <fullName>4</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DV_Method_Preference__c</picklist>
+            <values>
+                <fullName>Electronic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paper</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -6381,7 +6378,7 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <fullName>HH_Account</fullName>
         <active>true</active>
         <compactLayoutAssignment>Wish_Household</compactLayoutAssignment>
-        <description>An Account representing a Household containing one or more individuals</description>
+        <description>An Account representing a household containing one or more individuals</description>
         <label>Household Account</label>
         <picklistValues>
             <picklist>AccountSource</picklist>
@@ -6406,6 +6403,17 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
             <values>
                 <fullName>4</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DV_Method_Preference__c</picklist>
+            <values>
+                <fullName>Electronic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paper</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -8457,7 +8465,7 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <fullName>In_Kind_Donors</fullName>
         <active>true</active>
         <compactLayoutAssignment>NPSP_Organization_Account</compactLayoutAssignment>
-        <description>This record type associated with In Kind Donors page layout</description>
+        <description>An account representing an in-kind donor</description>
         <label>In Kind Donors</label>
         <picklistValues>
             <picklist>AccountSource</picklist>
@@ -8498,6 +8506,17 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
             <values>
                 <fullName>4</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>DV_Method_Preference__c</picklist>
+            <values>
+                <fullName>Electronic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paper</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -9896,6 +9915,17 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>DV_Method_Preference__c</picklist>
+            <values>
+                <fullName>Electronic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paper</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Department__c</picklist>
             <values>
                 <fullName>Anesthesiology</fullName>
@@ -10268,6 +10298,21 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <searchResultsAdditionalFields>npo02__TotalOppAmount__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>Private</sharingModel>
+    <validationRules>
+        <fullName>Ensure_the_HTF_has_a_Chapter_or_Zip</fullName>
+        <active>true</active>
+        <description>Ensure the User populates a Chapter Name or Zip Code on a new HTF.</description>
+        <errorConditionFormula>ISNEW()
+&amp;&amp;
+RecordType.Name = "Hospital Treatment Facility"
+&amp;&amp;
+ISBLANK(Chapter_Name__c)
+&amp;&amp;
+ISBLANK( BillingPostalCode )
+&amp;&amp;
+$Profile.Name != "Wish Referral Form Profile"</errorConditionFormula>
+        <errorMessage>Please populate a Chapter Name or Zip Code to ensure the HTF gets routed to a chapter.</errorMessage>
+    </validationRules>
     <validationRules>
         <fullName>Family_Dynamics_Validation</fullName>
         <active>true</active>

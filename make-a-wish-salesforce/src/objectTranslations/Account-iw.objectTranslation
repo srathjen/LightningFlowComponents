@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+﻿<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- BDE Entry FS --></label>
         <name>npsp__BDE_Entry_FS</name>
@@ -1913,17 +1913,6 @@
     </layouts>
     <layouts>
         <layout>Hospital Treatment Facility - Volunteer</layout>
-        <sections>
-            <label><!-- Address --></label>
-            <section>Address</section>
-        </sections>
-        <sections>
-            <label><!-- Fields --></label>
-            <section>Fields</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Hospital Treatment Facility Chapter Staff Layout</layout>
         <sections>
             <label><!-- Address --></label>
             <section>Address</section>
