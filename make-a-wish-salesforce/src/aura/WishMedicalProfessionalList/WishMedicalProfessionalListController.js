@@ -133,8 +133,9 @@
             '"Wish__c":"' + wishCaseRecordId + '", "Wish_Affiliation_Type__c":"' + wishAffiliationTypeDefault + '",' +
             '"Details__c":"","Send_Clearance_Forms_To__c":false,"Health_Treatment_Facility__c":"",' +
             '"Contact__r":{"Salutation":"","FirstName":"","LastName":"","Provider_Type__c":"","Fax":"","MailingStreet":"","MailingCity":"","MailingState":"",' +
-            '"MailingPostalCode":"","MailingCountry":"","npe01__PreferredPhone__c":"","Phone":"","npe01__HomeEmail__c":"",' +
-            '"npsp__Deceased__c":false},"Relationship__r":{"npe4__Type__c":"","npe4__Contact__c":"' + wishChildContactId + '",' +
+            '"MailingPostalCode":"","MailingCountry":"","npe01__PreferredPhone__c":"","npe01__Preferred_Email__c":"","Phone":"","npe01__HomeEmail__c":"",' +
+            '"npe01__AlternateEmail__c":"","Alternate_Email_2__c":"","Alternate_Fax__c":"","npsp__Deceased__c":false},' +
+            '"Relationship__r":{"npe4__Type__c":"","npe4__Contact__c":"' + wishChildContactId + '",' +
             '"Qualifying_Medical_Professional__c":false,"Treating_HCP__c":false,"Best_Contact__c":false,"Referring_Medical_Professional__c":false,' +
             '"Former_MP__c":false}}');
     },

@@ -21,6 +21,7 @@
                 component.set("v.wishMedicalProfessionals", dataMap['wishAffiliations']);
                 component.set("v.states", dataMap['states']);
                 component.set("v.countries", dataMap['countries']);
+                component.set("v.preferredEmailOptions", dataMap['preferredEmailOptions']);
                 component.set("v.preferredPhoneOptions", dataMap['preferredPhoneOptions']);
                 component.set("v.salutationOptions", dataMap['salutationOptions']);
                 component.set("v.residingWithChildOptions", dataMap['residingWithChildOptions']);

@@ -33,6 +33,7 @@
     <aura:attribute name="states" type="Object[]" default="[]"/>
     <aura:attribute name="countries" type="Object[]" default="[]"/>
     <aura:attribute name="preferredPhoneOptions" type="Object[]" default="[]"/>
+    <aura:attribute name="preferredEmailOptions" type="Object[]" default="[]"/>
     <aura:attribute name="salutationOptions" type="Object[]" default="[]"/>
     <aura:attribute name="relationshipTypes" type="Object[]" default="[]"/>
     <aura:attribute name="wishAffiliationTypes" type="Object[]" default="[]"/>
@@ -141,6 +142,7 @@
                 <aura:iteration items="{!v.wishMedicalProfessionals}" var="MedicalProfessional" indexVar="index">
                     <c:WishMedicalProfessionalListItem
                             preferredPhoneOptions="{!v.preferredPhoneOptions}"
+                            preferredEmailOptions="{!v.preferredEmailOptions}"
                             salutationOptions="{!v.salutationOptions}"
                             countries="{!v.countries}"
                             states="{!v.states}"
@@ -391,11 +393,6 @@
                                     </lightning:select>
                                 </div>
                                 <div class="slds-col slds-size_6-of-12">
-                                    <lightning:input label="{!v.contactLabels.npe01__workemail__c}"
-                                                     name="contactWorkEmail"
-                                                     value="{!v.newWishMedicalProfessional.Contact__r.npe01__WorkEmail__c}"/>
-                                </div>
-                                <div class="slds-col slds-size_6-of-12">
                                     <lightning:select label="{!v.contactLabels.npe01__preferredphone__c}"
                                                       name="contactPreferredPhone"
                                                       value="{!v.newWishMedicalProfessional.Contact__r.npe01__PreferredPhone__c}">
@@ -409,6 +406,55 @@
                                     </lightning:select>
                                 </div>
                                 <div class="slds-col slds-size_6-of-12">
+                                    <lightning:select label="{!v.contactLabels.npe01__preferred_email__c}"
+                                                      name="contactPreferredEmail"
+                                                      value="{!v.newWishMedicalProfessional.Contact__r.npe01__Preferred_Email__c}">
+                                        <option value=""></option>
+                                        <aura:iteration items="{!v.preferredEmailOptions}"
+                                                        var="preferredEmailOption">
+                                            <option value="{!preferredEmailOption}">
+                                                {!preferredEmailOption}
+                                            </option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <lightning:input type="tel"
+                                                     label="{!v.contactLabels.npe01__workphone__c}"
+                                                     name="contactWorkPhone"
+                                                     value="{!v.newWishMedicalProfessional.Contact__r.npe01__WorkPhone__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <lightning:input type="email"
+                                                     label="{!v.contactLabels.npe01__workemail__c}"
+                                                     name="contactWorkEmail"
+                                                     value="{!v.newWishMedicalProfessional.Contact__r.npe01__WorkEmail__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <lightning:input type="tel"
+                                                     label="{!v.contactLabels.mobilephone}"
+                                                     name="contactMobilePhone"
+                                                     value="{!v.newWishMedicalProfessional.Contact__r.MobilePhone}"/>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <lightning:input type="email"
+                                                     label="{!v.contactLabels.npe01__alternateemail__c}"
+                                                     name="contactAlternateEmail"
+                                                     value="{!v.newWishMedicalProfessional.Contact__r.npe01__AlternateEmail__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <lightning:input type="tel"
+                                                     label="{!v.contactLabels.otherphone}"
+                                                     name="contactOtherPhone"
+                                                     value="{!v.newWishMedicalProfessional.Contact__r.OtherPhone}"/>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <lightning:input type="email"
+                                                     label="{!v.contactLabels.alternate_email_2__c}"
+                                                     name="contactAlternate2Email"
+                                                     value="{!v.newWishMedicalProfessional.Contact__r.Alternate_Email_2__c}"/>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
                                     <lightning:input type="tel"
                                                      label="{!v.contactLabels.fax}"
                                                      name="contactFax"
@@ -416,9 +462,9 @@
                                 </div>
                                 <div class="slds-col slds-size_6-of-12">
                                     <lightning:input type="tel"
-                                                     label="{!$Label.c.Wish_Affiliation_Phone}"
-                                                     name="contactPhone"
-                                                     value="{!v.newWishMedicalProfessional.Contact__r.Phone}"/>
+                                                     label="{!v.contactLabels.alternate_fax__c}"
+                                                     name="contactAlternateFax"
+                                                     value="{!v.newWishMedicalProfessional.Contact__r.Alternate_Fax__c}"/>
                                 </div>
                                 <div class="slds-col slds-size_6-of-12">
                                     <lightning:input aura:id="contactDeceased"
