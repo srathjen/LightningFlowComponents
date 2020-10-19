@@ -65,7 +65,7 @@
                                     </lightning:recordEditForm>
 
                                     <aura:if isTrue="{!(v.MPRecordTypeId == v.medicalProfessionalRtId)}">
-                                        <aura:if isTrue="{!not(empty(v.otherEmails))}">
+                                        <aura:if isTrue="{!and(not(empty(v.otherEmails)), v.otherEmails.length >= 2)}">
                                             <b>
                                                 <lightning:input aura:id="changeEmail" type="checkbox" name="chkbox"
                                                                  label="Or select another email address:"
