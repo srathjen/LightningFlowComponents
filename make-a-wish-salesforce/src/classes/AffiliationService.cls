@@ -657,6 +657,17 @@ public class AffiliationService {
 				affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
 				insertAffiliationList.add(affiliation);
 			}
+            if(contact.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID 
+               && contact.npsp__Primary_Affiliation__c != null) {
+                npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
+                affiliation.Constituent_Code__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+                affiliation.npe5__Primary__c = true;
+                affiliation.npe5__Organization__c = contact.npsp__Primary_Affiliation__c;
+                affiliation.npe5__Contact__c = contact.Id;
+                affiliation.npe5__StartDate__c = Date.Today();
+                affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+                insertAffiliationList.add(affiliation);
+            }
 		}
 		List<npe5__Affiliation__c> affiliationList = new List<npe5__Affiliation__c>();
 		if (!volunteerContactIds.isEmpty()) {
@@ -684,8 +695,10 @@ public class AffiliationService {
 				WHERE npe5__Contact__c IN :mpChapterAffiliations.keySet()
 				AND npe5__Organization__c IN :mpChapterAffiliations.values()
 		]){
-			affiliation.npe5__Primary__c = false;
-			mpPrimaryAffiliationsUpdate.add(affiliation);
+            affiliation.npe5__Primary__c = false;
+            affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+            affiliation.npe5__EndDate__c = null;
+            mpPrimaryAffiliationsUpdate.add(affiliation);
 		}
 		update mpPrimaryAffiliationsUpdate;
 	}
