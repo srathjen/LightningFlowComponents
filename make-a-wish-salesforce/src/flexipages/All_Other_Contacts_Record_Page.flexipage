@@ -862,6 +862,35 @@
     <flexiPageRegions>
         <componentInstances>
             <componentInstanceProperties>
+                <name>decorate</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>richTextValue</name>
+                <value>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 16px; color: rgb(255, 0, 0);&quot;&gt;YOU ONLY HAVE READ ACCESS TO THIS RECORD.&lt;/b&gt;&lt;b style=&quot;font-size: 16px; color: rgb(0, 0, 0);&quot;&gt; &lt;/b&gt;&lt;/p&gt;</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:richText</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND 2 AND 3</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.Edit_Access__c}</leftValue>
+                    <operator>EQUAL</operator>
+                    <rightValue>false</rightValue>
+                </criteria>
+                <criteria>
+                    <leftValue>{!$User.Profile.Name}</leftValue>
+                    <operator>CONTAINS</operator>
+                    <rightValue>Intake Manager</rightValue>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.RecordType.Name}</leftValue>
+                    <operator>CONTAINS</operator>
+                    <rightValue>Medical Professional</rightValue>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
                 <name>tabs</name>
                 <value>Facet-2739513c-4698-4541-bd9f-ac1de8924dff</value>
             </componentInstanceProperties>
