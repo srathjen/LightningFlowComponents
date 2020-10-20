@@ -4,6 +4,10 @@
     <category>leads</category>
     <deployed>true</deployed>
     <description>ODP-42</description>
+    <join>
+        <outerJoin>false</outerJoin>
+        <relationship>TreatingMP__r</relationship>
+    </join>
     <label>Treating MPs with Referrals</label>
     <sections>
         <columns>
