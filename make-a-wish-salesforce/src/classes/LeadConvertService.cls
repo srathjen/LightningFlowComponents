@@ -50,14 +50,8 @@ public class LeadConvertService {
 			// Get lead fields
 			List<Lead> convertedLeads = LeadService.findLeadById(leadIdConvertedByContactIdMap.keySet());
 
-			// Find existing Affiliations Medical Professionals to Hospital Facilities
-			Set<Id> medicalProfessionalIds = findMedicalProfessionalIdsFromLead(convertedLeads);
-			Set<Id> hospitalFacilityIds = findHospitalFacilityIdsFromLead(convertedLeads);
-			Map<String, npe5__Affiliation__c> existingMpHtfAffiliationMap =
-					AffiliationService.findExistingAffiliations(medicalProfessionalIds, hospitalFacilityIds);
-
 			// Generate Lead Convert Wrappers from Lead
-			leadConvertByWishChildId = generateLeadConvertWrapper(convertedLeads, existingMpHtfAffiliationMap);
+			leadConvertByWishChildId = generateLeadConvertWrapper(convertedLeads);
 
 			Map<Id, Lead> convertedLeadById = new Map<Id, Lead>();
 			Map<Id, Case> caseMap = new Map<Id, Case>();
@@ -80,7 +74,6 @@ public class LeadConvertService {
 				leadConvertNewContacts.addAll(wrapper.familyContacts);
 				relationships.addAll(wrapper.medicalRelationships);
 				affiliations.addAll(wrapper.treatingHospitalAffiliations);
-				affiliations.addAll(wrapper.medicalProfessionalHospitalAffiliations);
 			}
 
 			// Update Diagnosis Verification with converted Wish Child Contact Id
@@ -131,14 +124,6 @@ public class LeadConvertService {
 			insert relationships;
 			insert affiliations;
 
-			// Revert any Affiliations which got set to Former, set them to Active
-			List<npe5__Affiliation__c> updatedActiveAffiliations = new List<npe5__Affiliation__c>();
-			for(npe5__Affiliation__c affiliation : affiliations){
-				affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
-				updatedActiveAffiliations.add(affiliation);
-			}
-			update updatedActiveAffiliations;
-
 			// Generate Wish Affiliations
 			Set<Id> relationshipIds = new Set<Id>();
 			for (npe4__Relationship__c rel : relationships) {
@@ -163,8 +148,7 @@ public class LeadConvertService {
 	 * @param convertedLeads converted leads
 	 * @return Map of lead convert wrapper
 	 */
-	private static Map<Id, LeadConvertWrapper> generateLeadConvertWrapper(List<Lead> convertedLeads,
-			Map<String, npe5__Affiliation__c> existingMpHtfAffiliationMap) {
+	private static Map<Id, LeadConvertWrapper> generateLeadConvertWrapper(List<Lead> convertedLeads) {
 		Map<Id, LeadConvertWrapper> wrappers = new Map<Id, LeadConvertWrapper>();
 		for (Lead convertedLead : convertedLeads) {
 			try {
@@ -195,10 +179,6 @@ public class LeadConvertService {
 
 				// Relationships Wish Child to Medical Professionals
 				wrapper.medicalRelationships = RelationshipService.buildLeadConvertRelationships(convertedLead).values();
-
-				// Affiliations Medical Professional and Hospital Facilities
-				wrapper.medicalProfessionalHospitalAffiliations = AffiliationService.buildMedicalProfessionalHospitalAffiliation(
-						convertedLead, existingMpHtfAffiliationMap);
 
 				// Affiliations Wish Child to Hospital Facilities
 				wrapper.treatingHospitalAffiliations = AffiliationService.buildWishChildAffiliation(convertedLead);
@@ -407,60 +387,6 @@ public class LeadConvertService {
 		return mps;
 	}
 
-	/**
-	 * @description Find the Medical Professional Ids from Lead
-	 * @param leads leads
-	 * @return contact ids
-	*/
-	private static Set<Id> findMedicalProfessionalIdsFromLead(List<Lead> leads){
-		Set<Id> medicalProfessionalContactIds = new Set<Id>();
-		for(Lead lead : leads){
-			if(lead.Referring_MP__c != null){
-				medicalProfessionalContactIds.add(lead.Referring_MP__c);
-			}
-			if(lead.Treating_MP__c != null){
-				medicalProfessionalContactIds.add(lead.Treating_MP__c);
-			}
-			if(lead.Best_Contact__c != null){
-				medicalProfessionalContactIds.add(lead.Best_Contact__c);
-			}
-			if(lead.Alt_1_MP__c != null){
-				medicalProfessionalContactIds.add(lead.Alt_1_MP__c);
-			}
-			if(lead.Alt_2_MP__c != null){
-				medicalProfessionalContactIds.add(lead.Alt_2_MP__c);
-			}
-		}
-		return medicalProfessionalContactIds;
-	}
-
-	/**
-	 * @description Find the Hospital Facility Ids from Lead
-	 * @param leads leads
-	 * @return account ids
-	*/
-	private static Set<Id> findHospitalFacilityIdsFromLead(List<Lead> leads){
-		Set<Id> hospitalFacilityAccountIds = new Set<Id>();
-		for(Lead lead : leads){
-			if(lead.Referring_MP_HTF__c != null){
-				hospitalFacilityAccountIds.add(lead.Referring_MP_HTF__c);
-			}
-			if(lead.Treating_MP_HTF__c != null){
-				hospitalFacilityAccountIds.add(lead.Treating_MP_HTF__c);
-			}
-			if(lead.Best_Contact_HTF__c != null){
-				hospitalFacilityAccountIds.add(lead.Best_Contact_HTF__c);
-			}
-			if(lead.Alt_1_MP_HTF__c != null){
-				hospitalFacilityAccountIds.add(lead.Alt_1_MP_HTF__c);
-			}
-			if(lead.Alt_2_MP_HTF__c != null){
-				hospitalFacilityAccountIds.add(lead.Alt_2_MP_HTF__c);
-			}
-		}
-		return hospitalFacilityAccountIds;
-	}
-
 	public class LeadConvertWrapper {
 		public Lead convertedLead { get; set; }
 		public Id wishChildContactId { get; set; }
@@ -470,7 +396,6 @@ public class LeadConvertService {
 		public Map<Id, Contact> medicalContacts { get; set; }
 		public List<npe4__Relationship__c> familyRelationships { get; set; }
 		public List<npe4__Relationship__c> medicalRelationships { get; set; }
-		public List<npe5__Affiliation__c> medicalProfessionalHospitalAffiliations { get; set; }
 		public List<npe5__Affiliation__c> treatingHospitalAffiliations { get; set; }
 		public List<Task> tasks { get; set; }
 		public Case qualifiedCase { get; set; }
