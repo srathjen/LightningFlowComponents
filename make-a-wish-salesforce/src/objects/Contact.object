@@ -3413,6 +3413,16 @@ null)</formula>
         </valueSet>
     </fields>
     <fields>
+        <fullName>Edit_Access__c</fullName>
+        <description>Checks to see if the User's Role Matches the Chapter.</description>
+        <externalId>false</externalId>
+        <formula>CONTAINS($UserRole.Name,  Hidden_Chapter_Name__c ) ||  OwnerId = $User.Id</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Edit Access</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Electronics_Games_that_I_like_to_play__c</fullName>
         <description>It will capture the details,Wish Child likes to play with Electronics/Games.</description>
         <externalId>false</externalId>

@@ -1603,6 +1603,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Account.Edit_Access__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Account.Exclude_HTF_from_Referral_Form_Searches__c</field>
         <readable>true</readable>
@@ -7030,6 +7035,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Driver_Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.Edit_Access__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
