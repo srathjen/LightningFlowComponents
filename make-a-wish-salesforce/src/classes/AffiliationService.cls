@@ -623,22 +623,23 @@ public class AffiliationService {
 		Set<Id> volunteerContactIds = new Set<Id>();
 		Map<Id, Id> mpChapterAffiliations = new Map<Id, Id>();
 		for (Contact contact : contactList) {
-			if (contact.RecordTypeId != Constant_AC.MEDICAL_PROFESSIONAL_RT_ID) {
+			if (contact.RecordTypeId == Constant_AC.VOLUNTEER_RT_ID) {
 				npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
-				if (contact.RecordTypeId == Constant_AC.VOLUNTEER_RT_ID) {
-					affiliation.Constituent_Code__c = Constant_AC.VOLUNTEER_TASK_RT_LABEL;
-					affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_PENDING;
-					affiliation.npe5__Primary__c = true;
-					volunteerContactIds.add(contact.Id);
-				} else if (contact.RecordTypeId == Constant_AC.BOARD_MEMBER_RT_ID) {
-					affiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
-				}
+				affiliation.Constituent_Code__c = Constant_AC.VOLUNTEER_TASK_RT_LABEL;
+				affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_PENDING;
+				affiliation.npe5__Primary__c = true;
+				affiliation.npe5__Organization__c = contact.Region_Chapter__c;
+				affiliation.npe5__Contact__c = contact.Id;
+				volunteerContactIds.add(contact.Id);
+				insertAffiliationList.add(affiliation);
+			} else if (contact.RecordTypeId == Constant_AC.BOARD_MEMBER_RT_ID) {
+				npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
+				affiliation.Constituent_Code__c = Constant_AC.BOARD_MEMBER_RT_LABEL;
 				affiliation.npe5__Contact__c = contact.Id;
 				affiliation.npe5__StartDate__c = Date.today();
 				affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
 				insertAffiliationList.add(affiliation);
-			}
-			if ((contact.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID
+			} else if ((contact.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID
 					|| contact.RecordTypeId == Constant_AC.WISH_FAMILY_RT_ID
 					|| contact.RecordTypeId == Constant_AC.CONTACT_WISH_CHILD_RT_ID)
 					&& contact.Region_Chapter__c != null) {
@@ -664,7 +665,7 @@ public class AffiliationService {
                 affiliation.npe5__Primary__c = true;
                 affiliation.npe5__Organization__c = contact.npsp__Primary_Affiliation__c;
                 affiliation.npe5__Contact__c = contact.Id;
-                affiliation.npe5__StartDate__c = Date.Today();
+                affiliation.npe5__StartDate__c = Date.today();
                 affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
                 insertAffiliationList.add(affiliation);
             }
@@ -681,13 +682,8 @@ public class AffiliationService {
 				affiliationList.add(affiliation);
 			}
 		}
-		try {
-			update affiliationList;
-			insert insertAffiliationList;
-		} catch (Exception e) {
-			createContactDebugLog(affiliationList, 'createAffiliation', e);
-			createContactDebugLog(insertAffiliationList, 'createAffiliation', e);
-		}
+		update affiliationList;
+		insert insertAffiliationList;
 		List<npe5__Affiliation__c> mpPrimaryAffiliationsUpdate = new List<npe5__Affiliation__c>();
 		for(npe5__Affiliation__c affiliation : [
 				SELECT Id, npe5__Primary__c
