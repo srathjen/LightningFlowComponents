@@ -638,6 +638,7 @@ public class AffiliationService {
 				affiliation.npe5__Contact__c = contact.Id;
 				affiliation.npe5__StartDate__c = Date.today();
 				affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+				affiliation.npe5__Organization__c = contact.Region_Chapter__c;
 				insertAffiliationList.add(affiliation);
 			} else if ((contact.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID
 					|| contact.RecordTypeId == Constant_AC.WISH_FAMILY_RT_ID
