@@ -5,11 +5,11 @@ public class DocumentController_Test {
         Test.setMock(HttpCalloutMock.class, new MockHttpResponseGenerator());
 
         //inserting account records
-        Account acc = new Account();
-        acc.Name = 'Make-A-Wish Alabama';
-        acc.Email__c = 'test@demo.com';
-        acc.Chapter_Id__c = '041501';
-        insert acc;
+        List<Account> accounts = TestDataFactory.createAccount(1);
+        Account account1 = accounts.get(0);
+        account1.Name = 'Make-A-Wish Arizona';
+        account1.RecordTypeId = Constant_AC.CHAPTER_RT_ID;
+        insert accounts;
 
         //inserting contact record.
         Id RecordTypeIdContact = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Board Member').getRecordTypeId();
@@ -17,8 +17,8 @@ public class DocumentController_Test {
         con.RecordTypeId = RecordTypeIdContact;
         con.FirstName = 'test';
         con.LastName = 'Volunteer';
-        con.AccountId = acc.Id;
-        con.Region_Chapter__c = acc.Id;
+        con.AccountId = account1.Id;
+        con.Region_Chapter__c = account1.Id;
         insert con;
 
         //inserting background record.
