@@ -12,9 +12,8 @@ public class DocumentController_Test {
         insert accounts;
 
         //inserting contact record.
-        Id RecordTypeIdContact = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Board Member').getRecordTypeId();
         Contact con = new Contact();
-        con.RecordTypeId = RecordTypeIdContact;
+        con.RecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Board Member').getRecordTypeId();
         con.FirstName = 'test';
         con.LastName = 'Volunteer';
         con.AccountId = account1.Id;
