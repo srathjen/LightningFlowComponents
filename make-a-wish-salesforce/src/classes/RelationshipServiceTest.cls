@@ -26,6 +26,7 @@ public class RelationshipServiceTest {
 		medHolland.LastName = 'Holland';
 		medHolland.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
 		medHolland.AccountId = azAccount.Id;
+        medHolland.Region_Chapter__c = azAccount.Id;
 		Contact medWatson = contactList.get(1);
 		medWatson.FirstName = 'Jessica';
 		medWatson.LastName = 'Watson';
@@ -33,16 +34,19 @@ public class RelationshipServiceTest {
 		medWatson.Type_of_Contact__c = 'Referrer&Treating';
 		medWatson.npe01__WorkEmail__c = 'nurse.watson@email.com';
 		medWatson.AccountId = azAccount.Id;
+        medWatson.Region_Chapter__c = azAccount.Id;
 		Contact medSmith = contactList.get(2);
 		medSmith.FirstName = 'Jacobi';
 		medSmith.LastName = 'Smith';
 		medSmith.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
 		medSmith.AccountId = azAccount.Id;
+        medSmith.Region_Chapter__c = azAccount.Id;
 		Contact medJohnson = contactList.get(3);
 		medJohnson.FirstName = 'Pam';
 		medJohnson.LastName = 'Johnson';
 		medJohnson.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
 		medJohnson.AccountId = azAccount.Id;
+        medJohnson.Region_Chapter__c = azAccount.Id;
 		Contact famGeorge = contactList.get(4);
 		famGeorge.FirstName = 'William';
 		famGeorge.LastName = 'George';

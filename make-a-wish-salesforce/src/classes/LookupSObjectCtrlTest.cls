@@ -1,5 +1,18 @@
 @IsTest
 private class LookupSObjectCtrlTest {
+    
+    @TestSetup
+    static void setup() {
+        trac_TriggerHandlerBase.blockTrigger = true;
+        
+        List<Account> accounts = TestDataFactory.createAccount(1);
+        Account account = accounts.get(0);
+        account.Name = 'Make-A-Wish Arizona';
+        account.RecordTypeId = Constant_AC.CHAPTER_RT_ID;
+        insert accounts;
+        
+        trac_TriggerHandlerBase.blockTrigger = false;
+    }
 
 	@IsTest
 	static void test_lookup_Opportunity() {
@@ -38,11 +51,13 @@ private class LookupSObjectCtrlTest {
 
 	@IsTest
 	static void test_lookup_External_Contact() {
+        Account chapterAccount = [SELECT Id FROM Account WHERE Name = 'Make-A-Wish Arizona'];
 		Test.startTest();
 		Contact ctc = new Contact();
 		ctc.FirstName = 'Bob';
 		ctc.LastName = 'Doe';
 		ctc.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+        ctc.Region_Chapter__c = chapterAccount.Id;
 		insert ctc;
 		Test.stopTest();
 
@@ -72,10 +87,12 @@ private class LookupSObjectCtrlTest {
 
 	@IsTest
 	static void test_lookup_External_Account() {
+        Account chapterAccount = [SELECT Id FROM Account WHERE Name = 'Make-A-Wish Arizona'];
 		Test.startTest();
 		Account acc = new Account();
 		acc.Name = 'United Health';
 		acc.RecordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID;
+        acc.Chapter_Name__c = chapterAccount.Id;
 		insert acc;
 		Test.stopTest();
 
@@ -87,7 +104,7 @@ private class LookupSObjectCtrlTest {
 		String sObjectName = 'Account';
 		String fieldsToReturn = 'Name';
 		String formattedOutput = '{0}';
-		Map<String, String> filter = new Map<String, String>();
+		Map<String, String> filter = new Map<String, String	>();
 
 		String res = LookupSObjectCtlr.lookup(searchString, sObjectName, fieldsToReturn, formattedOutput, filter, true);
 

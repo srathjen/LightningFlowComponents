@@ -39,6 +39,7 @@ public class LeadSelectMedEmailController_Test {
         referringMp.npe01__AlternateEmail__c = 'bobAlt1@email.com';
         referringMp.Alternate_Email_2__c = 'bobAlt2@email.com';
         referringMp.Contact_Notes__c = 'Contact notes for Referring MP';
+        referringMp.Region_Chapter__c = account.Id;
 
         Contact treatingMp = contacts.get(2);
         treatingMp.AccountId = account.Id;
@@ -49,6 +50,7 @@ public class LeadSelectMedEmailController_Test {
         treatingMp.npe01__AlternateEmail__c = 'jackAlt2@email.com';
         treatingMp.Alternate_Email_2__c = 'jackAlt2@email.com';
         treatingMp.Contact_Notes__c = 'Contact notes for Treating MP';
+        treatingMp.Region_Chapter__c = account.Id;
 
         Contact bestMp = contacts.get(3);
         bestMp.AccountId = account.Id;
@@ -59,6 +61,7 @@ public class LeadSelectMedEmailController_Test {
         bestMp.npe01__AlternateEmail__c = 'markAlt2@email.com';
         bestMp.Alternate_Email_2__c = 'markAlt2@email.com';
         bestMp.Contact_Notes__c = 'Contact notes for Best MP';
+        bestMp.Region_Chapter__c = account.Id;
 
         Contact alt1Mp = contacts.get(4);
         alt1Mp.AccountId = account.Id;
@@ -69,6 +72,7 @@ public class LeadSelectMedEmailController_Test {
         alt1Mp.npe01__AlternateEmail__c = 'joeAlt1@email.com';
         alt1Mp.Alternate_Email_2__c = 'joeAlt2@email.com';
         alt1Mp.Contact_Notes__c = 'Contact notes for Alt 1 MP';
+        alt1Mp.Region_Chapter__c = account.Id;
 
         Contact alt2Mp = contacts.get(5);
         alt2Mp.AccountId = account.Id;
@@ -79,6 +83,7 @@ public class LeadSelectMedEmailController_Test {
         alt2Mp.npe01__AlternateEmail__c = 'danAlt2@email.com';
         alt2Mp.Alternate_Email_2__c = 'danAlt2@email.com';
         alt2Mp.Contact_Notes__c = 'Contact notes for Alt 2 MP';
+        alt2Mp.Region_Chapter__c = account.Id;
         insert contacts;
 
         List<Lead> leads = TestDataFactory.createLead(1);

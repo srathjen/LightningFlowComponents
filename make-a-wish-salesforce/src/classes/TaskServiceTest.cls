@@ -77,6 +77,7 @@ public class TaskServiceTest {
         medHolland.LastName = 'Holland';
         medHolland.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
         medHolland.AccountId = account1.Id;
+        medHolland.Region_Chapter__c = account1.Id;
         insert medHolland;
         
         trac_TriggerHandlerBase.blockTrigger = false;

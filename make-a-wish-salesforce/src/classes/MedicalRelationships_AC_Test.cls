@@ -10,8 +10,15 @@ private class MedicalRelationships_AC_Test {
     static void setup() {
         trac_TriggerHandlerBase.blockTrigger = true;
 
+        List<Account> accounts = TestDataFactory.createAccount(1);
+        Account account = accounts.get(0);
+        account.Name = 'Make-A-Wish Arizona';
+        account.RecordTypeId = Constant_AC.CHAPTER_RT_ID;
+        insert accounts;
+
         List<Contact> contacts = TestDataFactory.createContact(2);
         contacts[1].RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+        contacts[1].Region_Chapter__c = account.Id;
         insert contacts;
 
         Case c = TestDataFactory.createCase(1)[0];

@@ -25,15 +25,16 @@ public class LightningDataTableControllerTest {
 		ICD_Codes__c obj = new ICD_Codes__c();
 		obj.Name = 'Q917';
 		insert obj;
-		List<Contact> contactsDataFactory = TestDataFactory.createContact(4);
-		contactsDataFactory[0].RecordTypeId = WISH_CHILD_RECORD_TYPE_ID;
-		contactsDataFactory[0].ICD_10_Code__c = obj.Id;
-		contactsDataFactory[1].RecordTypeId = WISH_FAMILY_RECORD_TYPE_ID;
-		contactsDataFactory[1].BirthDate = System.today().addYears(-20);
-		contactsDataFactory[2].RecordTypeId = MEDICAL_PROF_RECORD_TYPE_ID;
-		contactsDataFactory[3].RecordTypeId = WISH_FAMILY_RECORD_TYPE_ID;
-		contactsDataFactory[3].BirthDate = System.today().addYears(-10);
-		insert contactsDataFactory;
+        List<Contact> contactsDataFactory = TestDataFactory.createContact(4);
+        contactsDataFactory[0].RecordTypeId = WISH_CHILD_RECORD_TYPE_ID;
+        contactsDataFactory[0].ICD_10_Code__c = obj.Id;
+        contactsDataFactory[1].RecordTypeId = WISH_FAMILY_RECORD_TYPE_ID;
+        contactsDataFactory[1].BirthDate = System.today().addYears(-20);
+        contactsDataFactory[2].RecordTypeId = MEDICAL_PROF_RECORD_TYPE_ID;
+        contactsDataFactory[2].Region_Chapter__c = accountsDataFactory[1].Id;
+        contactsDataFactory[3].RecordTypeId = WISH_FAMILY_RECORD_TYPE_ID;
+        contactsDataFactory[3].BirthDate = System.today().addYears(-10);
+        insert contactsDataFactory;
 
 		List<Case> casesDataFactory = TestDataFactory.createCase(1);
 		casesDataFactory[0].RecordTypeId = WISH_RECORD_TYPE_ID;
