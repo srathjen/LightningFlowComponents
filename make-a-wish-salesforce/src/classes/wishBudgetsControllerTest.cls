@@ -15,9 +15,11 @@ public with sharing class wishBudgetsControllerTest {
 
     @TestSetup
     private static void insertTestData() {
-        List<Account> accountsDataFactory = TestDataFactory.createAccount(2);
+        List<Account> accountsDataFactory = TestDataFactory.createAccount(4);
         accountsDataFactory[0].RecordTypeId = HOUSEHOLD_RECORD_TYPE_ID;
-        accountsDataFactory[1].RecordTypeId = CHAPTER_RECORD_TYPE_ID ;
+        accountsDataFactory[1].RecordTypeId = CHAPTER_RECORD_TYPE_ID;
+        accountsDataFactory[2].RecordTypeId = CHAPTER_RECORD_TYPE_ID;
+        accountsDataFactory[3].RecordTypeId = CHAPTER_RECORD_TYPE_ID;
         insert accountsDataFactory;
 
         ICD_Codes__c obj = new ICD_Codes__c();
@@ -28,9 +30,12 @@ public with sharing class wishBudgetsControllerTest {
         contactsDataFactory[0].ICD_10_Code__c = obj.Id;
         contactsDataFactory[1].RecordTypeId = WISH_FAMILY_RECORD_TYPE_ID;
         contactsDataFactory[1].Birthdate = System.today().addYears(-20);
+        contactsDataFactory[1].Region_Chapter__c = accountsDataFactory[1].Id;
         contactsDataFactory[2].RecordTypeId = MEDICAL_PROF_RECORD_TYPE_ID;
+        contactsDataFactory[2].Region_Chapter__c = accountsDataFactory[2].Id;
         contactsDataFactory[3].RecordTypeId = WISH_FAMILY_RECORD_TYPE_ID;
         contactsDataFactory[3].Birthdate = System.today().addYears(-10);
+        contactsDataFactory[3].Region_Chapter__c = accountsDataFactory[3].Id;
         insert contactsDataFactory;
 
         List<Case> casesDataFactory = TestDataFactory.createCase(1);
