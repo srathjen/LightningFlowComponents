@@ -38,6 +38,7 @@ public class ContactTrigger_AT_Test {
         mpContact.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
         mpContact.FirstName = 'Willow';
         mpContact.LastName = 'Summers';
+        mpContact.Region_Chapter__c = chapterIllinois.Id;
         insert contacts;
         
         List<Chapter_Vs_Role__c> chapterVsRoleList = TestDataFactory.createChapterVsRole(1, 'Arizona');
@@ -195,6 +196,7 @@ public class ContactTrigger_AT_Test {
             WHERE Name = 'Willow Summers'
         ];
         Test.startTest();
+        mpContact.Region_Chapter__c = null;
         mpContact.npsp__Primary_Affiliation__c = htfAccount.Id;
         update mpContact;
         Test.stopTest();

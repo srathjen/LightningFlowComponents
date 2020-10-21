@@ -22,6 +22,7 @@ public class DiagnosisVerificationServiceTest {
         Contact contact = contacts.get(0);
         contact.LastName = 'Liu';
         contact.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+        contact.Region_Chapter__c = account1.Id;
         insert contacts;
 
         List<ICD_Codes__c> icdCodesDataFactory = TestDataFactory.createIcdCode(1);

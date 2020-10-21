@@ -32,6 +32,7 @@ public with sharing class NewWishBudgetControllerTest {
         contactsDataFactory[1].RecordTypeId = WISH_FAMILY_RECORD_TYPE_ID;
         contactsDataFactory[1].Birthdate = System.today().addYears(-20);
         contactsDataFactory[2].RecordTypeId = MEDICAL_PROF_RECORD_TYPE_ID;
+        contactsDataFactory[2].Region_Chapter__c = accountsDataFactory[1].Id;
         contactsDataFactory[3].RecordTypeId = WISH_FAMILY_RECORD_TYPE_ID;
         contactsDataFactory[3].Birthdate = System.today().addYears(-10);
         insert contactsDataFactory;

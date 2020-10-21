@@ -27,12 +27,13 @@ public with sharing class CaseServiceTest {
 		contact1.Region_Code__c = region.Id;
 		contact1.County__c = 'Test';
 		contact1.RecordTypeId = Constant_AC.CONTACT_WISH_CHILD_RT_ID;
+		contact1.Region_Chapter__c = account1.Id;
 		Contact contact2 = contacts.get(1);
 		contact2.FirstName = 'Test2';
 		contact2.LastName = 'User3';
 		contact2.AccountId = account2.Id;
 		contact2.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
-
+		contact2.Region_Chapter__c = account2.Id;
 		contact1.Diagnosis__c = contact2.Diagnosis__c = 'Test';
 		insert contacts;
 
