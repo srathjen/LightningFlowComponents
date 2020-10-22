@@ -6,11 +6,6 @@
         <label>Anesthesiology</label>
     </customValue>
     <customValue>
-        <fullName>Brain Tumor</fullName>
-        <default>false</default>
-        <label>Brain Tumor</label>
-    </customValue>
-    <customValue>
         <fullName>Cardiology</fullName>
         <default>false</default>
         <label>Cardiology</label>
@@ -61,29 +56,19 @@
         <label>General Pediatrics</label>
     </customValue>
     <customValue>
+        <fullName>General Surgery</fullName>
+        <default>false</default>
+        <label>General Surgery</label>
+    </customValue>
+    <customValue>
         <fullName>Genetics</fullName>
         <default>false</default>
         <label>Genetics</label>
     </customValue>
     <customValue>
-        <fullName>Genetics &amp; Metabolism</fullName>
-        <default>false</default>
-        <label>Genetics &amp; Metabolism</label>
-    </customValue>
-    <customValue>
-        <fullName>Genitourinary</fullName>
-        <default>false</default>
-        <label>Genitourinary</label>
-    </customValue>
-    <customValue>
         <fullName>Gynecology</fullName>
         <default>false</default>
         <label>Gynecology</label>
-    </customValue>
-    <customValue>
-        <fullName>Hematology</fullName>
-        <default>false</default>
-        <label>Hematology</label>
     </customValue>
     <customValue>
         <fullName>Hematology-Oncology</fullName>
@@ -104,11 +89,6 @@
         <fullName>Hospitalist</fullName>
         <default>false</default>
         <label>Hospitalist</label>
-    </customValue>
-    <customValue>
-        <fullName>Hospital Medicine</fullName>
-        <default>false</default>
-        <label>Hospital Medicine</label>
     </customValue>
     <customValue>
         <fullName>Immunology</fullName>
@@ -151,11 +131,6 @@
         <label>Neurosurgery</label>
     </customValue>
     <customValue>
-        <fullName>Oncology</fullName>
-        <default>false</default>
-        <label>Oncology</label>
-    </customValue>
-    <customValue>
         <fullName>Ophthalmology</fullName>
         <default>false</default>
         <label>Ophthalmology</label>
@@ -166,19 +141,9 @@
         <label>Orthopedics</label>
     </customValue>
     <customValue>
-        <fullName>Otolaryngology</fullName>
-        <default>false</default>
-        <label>Otolaryngology</label>
-    </customValue>
-    <customValue>
         <fullName>Pain Medicine</fullName>
         <default>false</default>
         <label>Pain Medicine</label>
-    </customValue>
-    <customValue>
-        <fullName>Palliative Care Medicine</fullName>
-        <default>false</default>
-        <label>Palliative Care Medicine</label>
     </customValue>
     <customValue>
         <fullName>Physical Medicine &amp; Rehabilitation</fullName>
@@ -216,19 +181,9 @@
         <label>Rheumatology</label>
     </customValue>
     <customValue>
-        <fullName>Surgery</fullName>
-        <default>false</default>
-        <label>Surgery</label>
-    </customValue>
-    <customValue>
         <fullName>Transplant</fullName>
         <default>false</default>
         <label>Transplant</label>
-    </customValue>
-    <customValue>
-        <fullName>Transplant Hepatology</fullName>
-        <default>false</default>
-        <label>Transplant Hepatology</label>
     </customValue>
     <customValue>
         <fullName>Trauma &amp; Emergency Services</fullName>
