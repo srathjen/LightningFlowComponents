@@ -16,9 +16,14 @@
         <label>Cardio-thoracic Surgeon</label>
     </customValue>
     <customValue>
-        <fullName>Critical Care Medicine</fullName>
+        <fullName>Critical Care</fullName>
         <default>false</default>
         <label>Critical Care</label>
+    </customValue>
+    <customValue>
+        <fullName>Critical Care Medicine</fullName>
+        <default>false</default>
+        <label>Critical Care Medicine</label>
     </customValue>
     <customValue>
         <fullName>Dermatology</fullName>
