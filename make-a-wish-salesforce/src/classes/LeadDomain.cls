@@ -400,6 +400,20 @@ public class LeadDomain extends trac_TriggerHandlerBase {
 					}
 				}
 			}
+		}
+		if (!newLeadMap.isEmpty()) {
+			TaskService.createLeadTask(newLeadMap.keySet());
+		}
+		if (!leadMap.isEmpty()) {
+			ChapterStaffRecordSharing_AC.LeadSharing(leadMap);
+		}
+
+		for(Lead newLead : [
+				SELECT Id, Referring_MP__c, Treating_MP__c, Best_Contact__c, Alt_1_MP__c, Alt_2_MP__c,
+						Referring_MP_HTF__c, Treating_MP_HTF__c, Best_Contact_HTF__c, Alt_1_MP_HTF__c, Alt_2_MP_HTF__c
+				FROM Lead
+				WHERE Id IN :newLeadsMap.keySet()
+		]){
 			if (newLead.Referring_MP__c != null) {
 				medicalProfessionalContactIds.add(newLead.Referring_MP__c);
 			}
@@ -431,12 +445,7 @@ public class LeadDomain extends trac_TriggerHandlerBase {
 				hospitalFacilityAccountIds.add(newLead.Alt_2_MP_HTF__c);
 			}
 		}
-		if (!newLeadMap.isEmpty()) {
-			TaskService.createLeadTask(newLeadMap.keySet());
-		}
-		if (!leadMap.isEmpty()) {
-			ChapterStaffRecordSharing_AC.LeadSharing(leadMap);
-		}
+
 		Map<String, npe5__Affiliation__c> existingMpHtfAffiliations =
 				AffiliationService.findExistingAffiliations(medicalProfessionalContactIds, hospitalFacilityAccountIds);
 
@@ -498,38 +507,45 @@ public class LeadDomain extends trac_TriggerHandlerBase {
 							rushLeadMap.put(newLead.Id, false);
 						}
 					}
-
-					if (newLead.Referring_MP__c != null) {
-						medicalProfessionalContactIds.add(newLead.Referring_MP__c);
-					}
-					if (newLead.Treating_MP__c != null) {
-						medicalProfessionalContactIds.add(newLead.Treating_MP__c);
-					}
-					if (newLead.Best_Contact__c != null) {
-						medicalProfessionalContactIds.add(newLead.Best_Contact__c);
-					}
-					if (newLead.Alt_1_MP__c != null) {
-						medicalProfessionalContactIds.add(newLead.Alt_1_MP__c);
-					}
-					if (newLead.Alt_2_MP__c != null) {
-						medicalProfessionalContactIds.add(newLead.Alt_2_MP__c);
-					}
-					if (newLead.Referring_MP_HTF__c != null) {
-						hospitalFacilityAccountIds.add(newLead.Referring_MP_HTF__c);
-					}
-					if (newLead.Treating_MP_HTF__c != null) {
-						hospitalFacilityAccountIds.add(newLead.Treating_MP_HTF__c);
-					}
-					if (newLead.Best_Contact_HTF__c != null) {
-						hospitalFacilityAccountIds.add(newLead.Best_Contact_HTF__c);
-					}
-					if (newLead.Alt_1_MP_HTF__c != null) {
-						hospitalFacilityAccountIds.add(newLead.Alt_1_MP_HTF__c);
-					}
-					if (newLead.Alt_2_MP_HTF__c != null) {
-						hospitalFacilityAccountIds.add(newLead.Alt_2_MP_HTF__c);
-					}
 				}
+			}
+		}
+
+		for(Lead newLead : [
+				SELECT Id, Referring_MP__c, Treating_MP__c, Best_Contact__c, Alt_1_MP__c, Alt_2_MP__c,
+						Referring_MP_HTF__c, Treating_MP_HTF__c, Best_Contact_HTF__c, Alt_1_MP_HTF__c, Alt_2_MP_HTF__c
+				FROM Lead
+				WHERE Id IN :newLeadsMap.keySet()
+		]){
+			if (newLead.Referring_MP__c != null) {
+				medicalProfessionalContactIds.add(newLead.Referring_MP__c);
+			}
+			if (newLead.Treating_MP__c != null) {
+				medicalProfessionalContactIds.add(newLead.Treating_MP__c);
+			}
+			if (newLead.Best_Contact__c != null) {
+				medicalProfessionalContactIds.add(newLead.Best_Contact__c);
+			}
+			if (newLead.Alt_1_MP__c != null) {
+				medicalProfessionalContactIds.add(newLead.Alt_1_MP__c);
+			}
+			if (newLead.Alt_2_MP__c != null) {
+				medicalProfessionalContactIds.add(newLead.Alt_2_MP__c);
+			}
+			if (newLead.Referring_MP_HTF__c != null) {
+				hospitalFacilityAccountIds.add(newLead.Referring_MP_HTF__c);
+			}
+			if (newLead.Treating_MP_HTF__c != null) {
+				hospitalFacilityAccountIds.add(newLead.Treating_MP_HTF__c);
+			}
+			if (newLead.Best_Contact_HTF__c != null) {
+				hospitalFacilityAccountIds.add(newLead.Best_Contact_HTF__c);
+			}
+			if (newLead.Alt_1_MP_HTF__c != null) {
+				hospitalFacilityAccountIds.add(newLead.Alt_1_MP_HTF__c);
+			}
+			if (newLead.Alt_2_MP_HTF__c != null) {
+				hospitalFacilityAccountIds.add(newLead.Alt_2_MP_HTF__c);
 			}
 		}
 

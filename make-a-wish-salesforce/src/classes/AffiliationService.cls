@@ -52,16 +52,6 @@ public class AffiliationService {
 	 */
 	public static List<npe5__Affiliation__c> buildWishChildAffiliation(Lead convertedLead) {
 		List<npe5__Affiliation__c> affiliations = new List<npe5__Affiliation__c>();
-
-		npe5__Affiliation__c chapterAffiliation = new npe5__Affiliation__c();
-		chapterAffiliation.Constituent_Code__c = Constant_AC.CONTACT_WISH_CHILD_RT_LABEL;
-		chapterAffiliation.npe5__Organization__c = convertedLead.ConvertedContact.Region_Chapter__c;
-		chapterAffiliation.npe5__Contact__c = convertedLead.ConvertedContactId;
-		chapterAffiliation.npe5__StartDate__c = Date.today();
-		chapterAffiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
-		chapterAffiliation.npe5__Primary__c = false;
-		affiliations.add(chapterAffiliation);
-
 		if (convertedLead.Hidden_DV_form_Medical_professional_Type__c != null) {
 			npe5__Affiliation__c treatingHtfAffiliation = new npe5__Affiliation__c();
 			treatingHtfAffiliation.npe5__Contact__c = convertedLead.ConvertedContactId;

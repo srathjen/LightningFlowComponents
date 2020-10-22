@@ -8,11 +8,8 @@ public class AccountDomain extends trac_TriggerHandlerBase {
     private final static Id HOUSEHOLD_RECORD_TYPE_ID = Constant_AC.HOUSEHOLD_RT_ID;
     private final static Id CHAPTER_RECORD_TYPE_ID = Constant_AC.CHAPTER_RT_ID;
     private final static Id IN_KIND_RECORD_TYPE_ID = Constant_AC.IN_KIND_ACCOUNT_ID;
-    private final static String USER_ROLE_NAME_NATIONAL_STAFF = 'National Staff';
     private final static String IN_KIND_ACCOUNT_APPROVAL_STATUS_REJECTED = 'Rejected';
-    private final static String GROUP_TYPE_REGULAR = 'Regular';
-    private final static String RECORD_NAME_REMOVE_SUBSTRING_MAW = 'Make-A-Wish ';
-    
+
     private List<Account> newAccountsList = (List<Account>)newRecordsList;
     private List<Account> oldAccountsList = (List<Account>)oldRecordsList;
     private Map<Id, Account> newAccountsMap = (Map<Id, Account>)newRecordsMap;
