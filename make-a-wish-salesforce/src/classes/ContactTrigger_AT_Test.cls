@@ -44,6 +44,17 @@ public class ContactTrigger_AT_Test {
         List<Chapter_Vs_Role__c> chapterVsRoleList = TestDataFactory.createChapterVsRole(1, 'Arizona');
         insert chapterVsRoleList;
         
+        Office__c mawAzOffice = TestDataFactory.createOffice(1)[0];
+        mawAzOffice.Name = 'Make-A-Wish-Arizona';
+        mawAzOffice.Chapter__c = account.Id;
+        insert mawAzOffice;
+        
+        Zip_Code__c zipAz = TestDataFactory.createZipCode(1)[0];
+        zipAz.Name = '85069';
+        zipAz.Office__c = mawAzOffice.Id;
+        zipAz.External_Id__c = '85069';
+        insert zipAz;
+        
         trac_TriggerHandlerBase.blockTrigger = false;
     }
     
@@ -207,5 +218,30 @@ public class ContactTrigger_AT_Test {
         ];
         System.assert(mpContactUpdated.npsp__Primary_Affiliation__c == htfAccount.Id);
         System.assert(mpContactUpdated.Region_Chapter__c == htfAccount.Chapter_Name__c);
+    }
+    
+    @isTest
+    public static void populateRegionChapterOnMedicalProfessionalByZipcode() {
+        Account azChapter = [
+            SELECT Id 
+            FROM Account 
+            WHERE Name = 'Make-A-Wish Arizona'
+        ];
+        Contact mpContact = [
+            SELECT Id, npsp__Primary_Affiliation__c, Region_Chapter__c 
+            FROM Contact 
+            WHERE Name = 'Willow Summers'
+        ];
+        Test.startTest();
+        mpContact.Region_Chapter__c = null;
+        mpContact.MailingPostalCode = '85069';
+        update mpContact;
+        Test.stopTest();
+        Contact mpContactUpdated = [
+            SELECT Id, Region_Chapter__c 
+            FROM Contact 
+            WHERE Id = :mpContact.Id
+        ];
+        System.assert(mpContactUpdated.Region_Chapter__c == azChapter.Id);
     }
 }

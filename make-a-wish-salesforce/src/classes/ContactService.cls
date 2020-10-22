@@ -1354,32 +1354,6 @@ public class ContactService {
 	}
 
 	/**
-	* Display error message when the contact record is associated with a lead
-	* @param contactMap
-	*/
-	public static void validateContact(Map<Id, Contact> contactMap) {
-		if (!contactMap.isEmpty()) {
-			List<Lead> leadList = new List<Lead>([
-					SELECT Id, Wish_Family_ContactId__c, Hidden_Additional_Parent_Id__c,
-							Referring_MP__c, Treating_MP__c, Best_Contact__c, Alt_1_MP__c, Alt_2_MP__c
-					FROM Lead
-					WHERE Wish_Family_ContactId__c IN :contactMap.keySet()
-					OR Hidden_Additional_Parent_Id__c IN :contactMap.keySet()
-					OR Referring_MP__c IN :contactMap.keySet()
-					OR Treating_MP__c IN :contactMap.keySet()
-					OR Best_Contact__c IN :contactMap.keySet()
-					OR Alt_1_MP__c IN :contactMap.keySet()
-					OR Alt_2_MP__c IN :contactMap.keySet()
-			]);
-			if (!leadList.isEmpty()) {
-				for (Contact dbContact : contactMap.values()) {
-					dbContact.addError('You cannot delete this Contact as it is associated with a Lead');
-				}
-			}
-		}
-	}
-
-	/**
 	* Updates fields on wish child record to hidden field
 	* @param contactList
 	* @return wishChildIdSet
