@@ -250,6 +250,32 @@ global class WishReferralForm_AC {
 				if (String.isBlank(currLead.Best_contact_for_Physician_Phone__c)) {
 					currLead.Best_contact_for_Physician_Phone__c = bestNewAffPhone;
 				}
+				if (String.isBlank(currLead.Best_contact_for_Physician_Phone__c)) {
+					currLead.Best_contact_for_Physician_Phone__c = bestNewAffPhone;
+				}
+				if (currLead.Relationship_to_child__c == Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL) {
+					if(String.isBlank(currLead.Best_Contact_HTF_Name__c) && !String.isBlank(currLead.Hospital_Treatment_Facility_Treating__c)){
+						currLead.Best_Contact_HTF_Name__c = currLead.Hospital_Treatment_Facility_Treating__c;
+					}
+					if(String.isBlank(currLead.Best_Contact_HTF_Street_Address__c) && !String.isBlank(currLead.Treating_MP_HTF_Street_Address__c)){
+						currLead.Best_Contact_HTF_Street_Address__c = currLead.Treating_MP_HTF_Street_Address__c;
+					}
+					if(String.isBlank(currLead.Best_Contact_HTF_City__c) && !String.isBlank(currLead.Treating_MP_HTF_City__c)){
+						currLead.Best_Contact_HTF_City__c = currLead.Treating_MP_HTF_City__c;
+					}
+					if(String.isBlank(currLead.Best_Contact_HTF_State__c) && !String.isBlank(currLead.Treating_MP_HTF_State__c)){
+						currLead.Best_Contact_HTF_State__c = currLead.Treating_MP_HTF_State__c;
+					}
+					if(String.isBlank(currLead.Best_Contact_HTF_Zip_Code__c) && !String.isBlank(currLead.Treating_MP_HTF_Zip_Code__c)){
+						currLead.Best_Contact_HTF_Zip_Code__c = currLead.Treating_MP_HTF_Zip_Code__c;
+					}
+					if(String.isBlank(currLead.Best_Contact_HTF_Phone__c) && !String.isBlank(currLead.Treating_MP_HTF_Phone__c)){
+						currLead.Best_Contact_HTF_Phone__c = currLead.Treating_MP_HTF_Phone__c;
+					}
+					if(String.isBlank(currLead.Best_Contact_HTF_Department__c) && !String.isBlank(currLead.Treating_MP_HTF_Department__c)){
+						currLead.Best_Contact_HTF_Department__c = currLead.Treating_MP_HTF_Department__c;
+					}
+				}
 				Boolean redirection;
 				currLead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
 				insert currLead;
