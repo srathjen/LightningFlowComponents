@@ -157,7 +157,6 @@ public class ContactDomain extends trac_TriggerHandlerBase {
 				wishFormIdSet.add(contact.Hidden_Wish_Form_Id__c);
 			}
 		}
-		ContactService.validateContact(contactMap);
 	}
 
 	//Check if mailing address has been updated

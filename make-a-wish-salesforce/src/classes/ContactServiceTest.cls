@@ -146,6 +146,19 @@ public class ContactServiceTest {
 		wishChildContact2Mother.MailingState = 'Arizona';
 		wishChildContact2Mother.MailingCity = 'Phoenix';
 		wishChildContact2Mother.Hidden_Zip_Code__c = '85260';
+        wishChildContact2Mother.Hidden_Use_as_Household_Address__c = true;
+        wishChildContact2Mother.AccountId = watkinsFamily.Id;
+        wishChildContact2Mother.Hidden_Phone__c = '9912121313';
+        wishChildContact2Mother.HiddenMobilePhone__c = '9912121313';
+        wishChildContact2Mother.Hidden_Work_Phone__c = '9912121313';
+        wishChildContact2Mother.HiddenOtherPhone__c = '9912121313';
+        wishChildContact2Mother.Hidden_Email__c = Label.Dummy_Email;
+        wishChildContact2Mother.Hidden_Preferred_Phone_Types__c = Label.Dummy_Email;
+        wishChildContact2Mother.Hidden_Street__c = Label.Dummy_Email;
+        wishChildContact2Mother.Hidden_city__c = Label.Dummy_Email;
+        wishChildContact2Mother.Hidden_State__c = Label.Dummy_Email;
+        wishChildContact2Mother.Hidden_Zip_Code__c = '11111';
+        wishChildContact2Mother.Hidden_Same_Address__c = true;
 		wishChildContact2Mother.Relationship__c = 'Mother';
 
 		Contact wishChildContact2Father = contacts.get(5);
@@ -156,7 +169,8 @@ public class ContactServiceTest {
 		wishChildContact2Father.Phone = '5558956789';
 		wishChildContact2Father.MobilePhone = '9876598555';
 		wishChildContact2Father.HomePhone = '5558956789';
-		wishChildContact2Father.npe01__PreferredPhone__c = '9876598555';
+        wishChildContact2Father.npe01__WorkPhone__c = '5678905674';
+		wishChildContact2Father.npe01__PreferredPhone__c = 'Work';
 		wishChildContact2Father.OtherPhone = '5208209898';
 		wishChildContact2Father.npe01__WorkPhone__c = '5208209898';
 		wishChildContact2Father.Hidden_First_Name__c = 'Joel';
@@ -177,6 +191,7 @@ public class ContactServiceTest {
 		wishChildContact2Father.Hidden_State__c = 'Arizona';
 		wishChildContact2Father.Hidden_Country__c = 'United States';
 		wishChildContact2Father.Hidden_Zip_Code__c = '85260';
+        wishChildContact2Father.Hidden_Phone__c = '5218209898';
 
 		Contact medProfessional = contacts.get(6);
 		medProfessional.RecordTypeId = MEDICAL_PROFESSIONAL_RECORD_TYPE_ID;
@@ -369,6 +384,13 @@ public class ContactServiceTest {
 		qualifiedLead.Referring_MP__c = medProfessional.Id;
 		qualifiedLead.Treating_MP__c = medProfessional.Id;
 		insert qualifiedLead;
+        
+        Lead wishLead = TestDataFactory.createQualifiedLead(arizonaChapter.Id, icdCodes[0].Id);
+        wishLead.FirstName = 'Rebecca';
+        wishLead.LastName = 'Black';
+        wishLead.Gender__c = 'Female';
+        wishLead.Relationship_to_child__c = 'Family Member/Relative';
+        insert wishLead;
 
 		Office__c mawAzOffice = TestDataFactory.createOffice(1)[0];
 		mawAzOffice.Name = 'Make-A-Wish-Arizona';
@@ -508,6 +530,29 @@ public class ContactServiceTest {
 		System.assertEquals('Lewis', result.Referrer_FirstName__c);
 		System.assertEquals('Hall', result.Referrer_Last_Name__c);
 	}
+    
+    @IsTest
+    public static void shouldBuildWishChildNonMP() {
+        List<Lead> leads = [
+				SELECT CreatedDate, DOB__c, Medical_Provider_Category__c, Self_describe_comment_box__c,
+						What_is_the_family_s_primary_spoken_lang__c, ChapterName__c, LeadSource, Referrer_City__c,
+						Referrer_Email__c, Referring_MP__c, Referring_MP__r.FirstName, Referring_MP__r.LastName,
+						Referrer_FirstName__c, Referrer_Last_Name__c, Referrer_Phone__c,
+						Referrer_Zip__c, Relationship_to_child__c, Other_Medical_Provider_Category__c,
+						Other_Relationship_To_Child__c, is_Family_Aware_of_Referral__c, Migrated_Record__c,
+						How_Did_you_hear_about_Make_A_Wish__c, Additional_Parent_City__c, City,
+						Additional_Parent_Postal_Code__c, PostalCode, Additional_Parent_State__c, State,
+						Additional_Parent_Street__c, Street, Gender__c, Salutation, ConvertedContactId,
+						Treating_MP__c, Treating_MP__r.FirstName, Treating_MP__r.LastName
+				FROM Lead
+				WHERE Name = 'Rebecca Black'
+		];
+        
+        Test.startTest();
+        Contact result = ContactService.buildWishChildFromLead(leads[0]);
+        Test.stopTest();
+        System.assertEquals(leads[0].Referrer_FirstName__c, result.Referrer_FirstName__c);
+    }
 
 	@IsTest
 	public static void shouldBuildParentLegalGuardianFromLead() {
@@ -892,17 +937,6 @@ public class ContactServiceTest {
 				AND ContactId IN :contactUpdatedList
 		];
 		System.assert(userUpdate.Email == 'abby@hall.com');
-	}
-
-	@isTest
-	private static void validateContact() {
-		Map<Id, Contact> contactMap = new Map<Id, Contact>([
-				SELECT Id, Name
-				FROM Contact
-		]);
-		Test.startTest();
-		ContactService.validateContact(contactMap);
-		Test.stopTest();
 	}
 
 	@isTest
