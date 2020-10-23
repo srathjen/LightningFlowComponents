@@ -27,7 +27,7 @@
                 if (cmp.isValid()) {
                     helper.showLookupList(cmp, false);
                 }
-            }), 150
+            }), 1000
         );
     }
 });
