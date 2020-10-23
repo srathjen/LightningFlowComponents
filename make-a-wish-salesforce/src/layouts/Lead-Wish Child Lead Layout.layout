@@ -6,7 +6,6 @@
     <excludeButtons>Convert</excludeButtons>
     <excludeButtons>CreateCallList</excludeButtons>
     <excludeButtons>CreateSurveyInvitation</excludeButtons>
-    <excludeButtons>DataDotComClean</excludeButtons>
     <excludeButtons>FindDup</excludeButtons>
     <excludeButtons>Share</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
@@ -51,11 +50,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Expedite_timeframe__c</field>
+                <field>Referrer_Rush_Reason__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Referrer_Rush_Reason__c</field>
+                <field>Expedite_timeframe__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -64,10 +63,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Auto_Qualified__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Qualified_Date__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
@@ -81,22 +76,6 @@
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Diagnosis_Given_By_Referrer__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>PD_ICD_Code__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>is_Family_Aware_of_Referral__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Age_Requirement_Met__c</field>
-            </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>OwnerId</field>
@@ -119,15 +98,19 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Part_A_Form_Password__c</field>
+                <field>Age_Requirement_Met__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Migrated_Record__c</field>
+                <field>Diagnosis_Given_By_Referrer__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>unique_wish_identifier__c</field>
+                <field>PD_ICD_Code__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>is_Family_Aware_of_Referral__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -136,14 +119,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Other_expedite_timeframe_comments__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Hidden_DV_form_Medical_professional_Type__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Office_Referral_Email__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -305,6 +280,10 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>Qualified_Date__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>Appeal_date__c</field>
             </layoutItems>
         </layoutColumns>
@@ -362,6 +341,10 @@
                 <behavior>Edit</behavior>
                 <field>RecordTypeId</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Migrated_Record__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -379,6 +362,14 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>RFI_Form_Info_Hidden__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Part_A_Form_Password__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>unique_wish_identifier__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
