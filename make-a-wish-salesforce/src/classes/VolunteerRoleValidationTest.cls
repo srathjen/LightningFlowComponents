@@ -56,6 +56,12 @@ public class VolunteerRoleValidationTest {
 		volunteerRoleArizonaPending.Hidden_Previous_Status__c = 'Status';
 		volunteerRoleArizonaPending.Hidden_Previous_Sub_Status__c = 'Sub Status';
 		insert volunteerRoles;
+        
+        User volunteerUser = TestDataFactory.createVolunteerUser(1, 'Active Volunteer (Login)', 'Manager').get(0);
+        volunteerUser.LastName = 'Smith0';
+        volunteerUser.Email = 'js@email.com';
+        volunteerUser.Username = 'testuser0@testorg.com';
+        insert volunteerUser;
 
 		trac_TriggerHandlerBase.blockTrigger = false;
 	}
@@ -66,10 +72,14 @@ public class VolunteerRoleValidationTest {
 				SELECT Id, Chapter_Name__c
 				FROM Volunteer_Roles__c
 		];
-
 		Map<String, String> chapterNameRoleMap = new Map<String, String>();
 		chapterNameRoleMap.put('Make-A-Wish Arizona', 'Arizona - Chapter');
-
-		VolunteerRoleValidation.validatePermission(volunteerRoles, chapterNameRoleMap);
-	}
+        
+        User volunteerUser = [SELECT Id FROM User WHERE LastName = 'Smith0'];
+        
+        System.runAs(volunteerUser) {
+            VolunteerRoleValidation.validatePermission(volunteerRoles, chapterNameRoleMap);
+            
+        }
+    }
 }
