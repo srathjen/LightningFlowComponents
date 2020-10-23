@@ -5260,7 +5260,7 @@ IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Referring Medical Pr
         <description>This field will capture the date when the status is changed Part A Sent to Eligibility Review/Qualified</description>
         <externalId>false</externalId>
         <inlineHelpText>This date updates automatically when an electronic DV is signed but can be manually updated for paper forms.</inlineHelpText>
-        <label>Diagnosis Verification Received</label>
+        <label>DV Received Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -24137,37 +24137,6 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
             </values>
         </picklistValues>
         <picklistValues>
-            <picklist>Best_Contact_MP_Category__c</picklist>
-            <values>
-                <fullName>Child Life Professional</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Nurse</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Nurse Practitioner</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Other</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Physician</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Physician Assistant</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Social Worker</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
             <picklist>Best_Contact_Specialty__c</picklist>
             <values>
                 <fullName>Anesthesiology</fullName>
@@ -24182,7 +24151,7 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
-                <fullName>Critical Care</fullName>
+                <fullName>Critical Care Medicine</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -25937,7 +25906,7 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
-                <fullName>Critical Care</fullName>
+                <fullName>Critical Care Medicine</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -27201,7 +27170,7 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
-                <fullName>Critical Care</fullName>
+                <fullName>Critical Care Medicine</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -27593,37 +27562,6 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
             </values>
             <values>
                 <fullName>Wyoming</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>Treating_MP_Type__c</picklist>
-            <values>
-                <fullName>Child Life Professional</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Nurse</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Nurse Practitioner</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Other</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Physician</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Physician Assistant</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Social Worker</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
