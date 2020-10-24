@@ -4287,6 +4287,18 @@ IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Referring Medical Pr
         </valueSet>
     </fields>
     <fields>
+        <fullName>Qualified_DNQ_Date__c</fullName>
+        <description>Displays Either the Qualified or DNQ Date</description>
+        <externalId>false</externalId>
+        <formula>IF (TEXT(Status) = "Qualified", Qualified_Date__c,
+IF (Text(Status) = "DNQ", DNQ_Date__c , NULL))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Qualified / DNQ Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Referring_MP_Category__c</fullName>
         <description>Captures the Referring MP's Category</description>
         <externalId>false</externalId>

@@ -3395,4 +3395,12 @@
         </columns>
         <masterLabel>HTF Referrals</masterLabel>
     </sections>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Qualified_DNQ_Date__c</field>
+            <table>Account.ReferringMPHTFLeads__r</table>
+        </columns>
+        <masterLabel>Leads</masterLabel>
+    </sections>
 </ReportType>

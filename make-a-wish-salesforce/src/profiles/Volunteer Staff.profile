@@ -11941,6 +11941,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Lead.Qualified_DNQ_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Lead.Qualified_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>

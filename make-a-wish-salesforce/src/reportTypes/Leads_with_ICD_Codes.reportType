@@ -1888,6 +1888,11 @@
             <field>PostalCode</field>
             <table>ICD_Codes__c.Leads__r</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Qualified_DNQ_Date__c</field>
+            <table>ICD_Codes__c.Leads__r</table>
+        </columns>
         <masterLabel>Leads</masterLabel>
     </sections>
 </ReportType>

@@ -2813,6 +2813,11 @@
             <field>What_is_the_family_s_primary_spoken_lang__c</field>
             <table>Account.Leads__r</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Qualified_DNQ_Date__c</field>
+            <table>Account.Leads__r</table>
+        </columns>
         <masterLabel>Leads</masterLabel>
     </sections>
 </ReportType>
