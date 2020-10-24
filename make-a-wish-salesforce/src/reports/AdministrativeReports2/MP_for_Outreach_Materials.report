@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <columns>
-        <field>ACCOUNT.NAME</field>
-    </columns>
-    <columns>
-        <field>ADDRESS1_LINE1</field>
-    </columns>
-    <columns>
-        <field>ADDRESS2_LINE1</field>
-    </columns>
-    <columns>
         <field>FK_CNTC_SALUTATION</field>
     </columns>
     <columns>
@@ -25,25 +16,67 @@
         <field>FK_CNTC_EMAIL</field>
     </columns>
     <columns>
-        <field>FK_CNTC_ADDR2_LINE1</field>
+        <field>ADDRESS1_STREET</field>
     </columns>
-    <description>ODP-58</description>
+    <columns>
+        <field>ADDRESS1_CITY</field>
+    </columns>
+    <columns>
+        <field>ADDRESS1_STATE_CODE</field>
+    </columns>
+    <columns>
+        <field>ADDRESS1_ZIP</field>
+    </columns>
+    <description>MP for Outreach Materials</description>
     <filter>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Account.Hospital_Treatment_Facility</value>
         </criteriaItems>
         <criteriaItems>
             <column>FK_CNTC_RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Medical_Professional</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>ADDRESS1_STREET</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.Chapter_Name__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>Arizona</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>npe5__Affiliation__c.Constituent_Code__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Medical Professional</value>
+        </criteriaItems>
         <language>en_US</language>
     </filter>
-    <format>Tabular</format>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>ACCOUNT.NAME</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>FK_$Contact.Hidden_Contact_Full_Name__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
     <name>MP for Outreach Materials</name>
     <params>
         <name>co</name>
@@ -51,9 +84,9 @@
     </params>
     <reportType>AccountCustomEntity$npe5__Affiliation__c@npe5__Affiliation__c.npe5__Contact__c</reportType>
     <scope>organization</scope>
-    <showDetails>true</showDetails>
-    <showGrandTotal>true</showGrandTotal>
-    <showSubTotals>true</showSubTotals>
+    <showDetails>false</showDetails>
+    <showGrandTotal>false</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

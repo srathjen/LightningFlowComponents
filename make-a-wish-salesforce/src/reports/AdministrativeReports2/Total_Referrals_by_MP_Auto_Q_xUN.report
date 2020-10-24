@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>RowCount/PARENTGROUPVAL(Lead.Unique_Record_Count__c:SUM, Contact.Hidden_Contact_Full_Name__c)</calculatedFormula>
+        <datatype>percent</datatype>
+        <developerName>FORMULA1</developerName>
+        <downGroupingContext>Contact.ReferringMP__r$Auto_Qualified__c</downGroupingContext>
+        <isActive>true</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>% of Auto-Qualified</masterLabel>
+        <scale>0</scale>
+    </aggregates>
+    <columns>
+        <field>Contact.ReferringMP__r$FirstName</field>
+    </columns>
     <columns>
         <field>Contact.ReferringMP__r$LastName</field>
     </columns>
+    <description>Total Referrals by MP - Auto Qualified %</description>
     <filter>
         <criteriaItems>
             <column>Contact.ReferringMP__r$Status</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Eligibility Review,Qualified,DNQ</value>
@@ -15,7 +30,7 @@
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>Contact$Name</field>
+        <field>Contact$Hidden_Contact_Full_Name__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <groupingsDown>
@@ -23,18 +38,18 @@
         <field>Contact.ReferringMP__r$Auto_Qualified__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>Total Referrals by MP - Auto Q</name>
+    <name>Total Referrals by MP - Auto Q %</name>
     <params>
         <name>co</name>
-        <value>1</value>
+        <value>0</value>
     </params>
     <reportType>Referring_MPs_with_Referrals__c</reportType>
     <scope>organization</scope>
-    <showDetails>true</showDetails>
+    <showDetails>false</showDetails>
     <showGrandTotal>true</showGrandTotal>
-    <showSubTotals>true</showSubTotals>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Contact.ReferringMP__r$Referred_Date__c</dateColumn>
-        <interval>INTERVAL_CURFY</interval>
+        <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>

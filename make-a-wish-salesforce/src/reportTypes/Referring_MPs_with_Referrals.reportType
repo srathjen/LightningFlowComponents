@@ -27,6 +27,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>OtherLatitude</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Salutation</field>
             <table>Contact</table>
         </columns>
@@ -87,21 +92,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>OtherLatitude</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>OtherLongitude</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>OtherGeocodeAccuracy</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>MailingAddress</field>
             <table>Contact</table>
         </columns>
@@ -123,6 +113,16 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>MailingPostalCode</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>OtherLongitude</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>OtherGeocodeAccuracy</field>
             <table>Contact</table>
         </columns>
         <columns>
@@ -322,11 +322,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>npe01__Last_Donation_Date__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>npe01__Lifetime_Giving_History_Amount__c</field>
             <table>Contact</table>
         </columns>
@@ -363,16 +358,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>npe01__Secondary_Address_Type__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>npe01__SystemAccountProcessor__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>npe01__SystemIsIndividual__c</field>
             <table>Contact</table>
         </columns>
         <columns>
@@ -573,11 +558,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>npo02__Soft_Credit_Two_Years_Ago__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>npo02__SystemHouseholdProcessor__c</field>
             <table>Contact</table>
         </columns>
         <columns>
@@ -1183,26 +1163,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>About_Me__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Account_Email__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Account_Phone__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Contact_Account_Name__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Hidden_Use_as_Household_Address__c</field>
             <table>Contact</table>
         </columns>
         <columns>
@@ -4786,6 +4746,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Best_Contact_Category__c</field>
+            <table>Contact.ReferringMP__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Qualified_DNQ_Date__c</field>
             <table>Contact.ReferringMP__r</table>
         </columns>
         <columns>

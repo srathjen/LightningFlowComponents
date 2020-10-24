@@ -10,9 +10,6 @@
         <field>LAST_NAME</field>
     </columns>
     <columns>
-        <field>TITLE</field>
-    </columns>
-    <columns>
         <field>ADDRESS2_STREET</field>
     </columns>
     <columns>
@@ -23,9 +20,6 @@
     </columns>
     <columns>
         <field>ADDRESS2_STATE</field>
-    </columns>
-    <columns>
-        <field>ADDRESS2_COUNTRY</field>
     </columns>
     <columns>
         <field>PHONE1</field>
@@ -39,23 +33,25 @@
     <columns>
         <field>EMAIL</field>
     </columns>
-    <columns>
-        <field>OWNER_FULL_NAME</field>
-    </columns>
-    <columns>
-        <field>ACCOUNT.NAME</field>
-    </columns>
-    <description>ODP-58</description>
+    <description>New MP for this Quarter</description>
     <filter>
         <criteriaItems>
             <column>CONTACT_RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Medical_Professional</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Region_Chapter__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>Arizona</value>
+        </criteriaItems>
         <language>en_US</language>
     </filter>
-    <format>Summary</format>
+    <format>Tabular</format>
     <name>New MP for this Quarter</name>
     <params>
         <name>co</name>
@@ -68,6 +64,6 @@
     <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
-        <interval>INTERVAL_CURRENTQ</interval>
+        <interval>INTERVAL_CURRENT</interval>
     </timeFrameFilter>
 </Report>

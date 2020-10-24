@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
         <field>LAST_NAME</field>
     </columns>
     <columns>
@@ -21,22 +24,25 @@
     <columns>
         <field>Lead.DV_Signer_Phone__c</field>
     </columns>
-    <description>ODP-58</description>
+    <description>New DV Signer Last 90 Days</description>
     <filter>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Lead.Wish_Child</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.ChapterName__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.DV_Signer_Changed__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
@@ -44,7 +50,7 @@
         <language>en_US</language>
     </filter>
     <format>Tabular</format>
-    <name>New DV Signer - Last 90 Days - Arizona</name>
+    <name>New DV Signer - Last 90 Days</name>
     <params>
         <name>co</name>
         <value>1</value>

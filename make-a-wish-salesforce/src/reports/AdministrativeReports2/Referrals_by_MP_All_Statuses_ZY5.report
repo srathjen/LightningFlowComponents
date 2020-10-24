@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
-    <aggregates>
-        <calculatedFormula>RowCount/PARENTGROUPVAL(Lead.Unique_Record_Count__c:SUM, Contact.Hidden_Contact_Full_Name__c)</calculatedFormula>
-        <datatype>percent</datatype>
-        <developerName>FORMULA1</developerName>
-        <downGroupingContext>Contact.ReferringMP__r$Status</downGroupingContext>
-        <isActive>true</isActive>
-        <isCrossBlock>false</isCrossBlock>
-        <masterLabel>% of Status</masterLabel>
-        <scale>0</scale>
-    </aggregates>
     <chart>
         <backgroundColor1>#FFFFFF</backgroundColor1>
         <backgroundColor2>#FFFFFF</backgroundColor2>
@@ -22,7 +12,7 @@
         <chartType>Line</chartType>
         <enableHoverLabels>false</enableHoverLabels>
         <expandOthers>true</expandOthers>
-        <groupingColumn>Contact.ReferringMP__r$Status</groupingColumn>
+        <groupingColumn>Contact.ReferringMP__r$Referred_Date__c</groupingColumn>
         <location>CHART_BOTTOM</location>
         <showAxisLabels>true</showAxisLabels>
         <showPercentage>false</showPercentage>
@@ -42,15 +32,8 @@
         <aggregateTypes>Sum</aggregateTypes>
         <field>Contact.ReferringMP__r$Unique_Record_Count__c</field>
     </columns>
-    <description>Referrals by MP - DNQ vs  Qualified - All Time</description>
+    <description>Referrals by MP - All Statuses - All Time (Year By Year)</description>
     <filter>
-        <criteriaItems>
-            <column>Contact.ReferringMP__r$Qualified_DNQ_Date__c</column>
-            <columnToColumn>false</columnToColumn>
-            <isUnlocked>true</isUnlocked>
-            <operator>notEqual</operator>
-            <value></value>
-        </criteriaItems>
         <criteriaItems>
             <column>Contact.ReferringMP__r$ChapterName__c</column>
             <columnToColumn>false</columnToColumn>
@@ -60,18 +43,18 @@
         </criteriaItems>
         <language>en_US</language>
     </filter>
-    <format>Summary</format>
+    <format>Matrix</format>
+    <groupingsAcross>
+        <dateGranularity>FiscalYear</dateGranularity>
+        <field>Contact.ReferringMP__r$Referred_Date__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsAcross>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>Contact$Hidden_Contact_Full_Name__c</field>
+        <field>Contact$Name</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <groupingsDown>
-        <dateGranularity>Day</dateGranularity>
-        <field>Contact.ReferringMP__r$Status</field>
-        <sortOrder>Asc</sortOrder>
-    </groupingsDown>
-    <name>Referrals by MP - DNQ vs  Qual.</name>
+    <name>Referrals by MP - All Statuses</name>
     <params>
         <name>co</name>
         <value>0</value>
@@ -82,7 +65,7 @@
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
-        <dateColumn>Contact.ReferringMP__r$Referred_Date__c</dateColumn>
+        <dateColumn>Contact$CreatedDate</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>

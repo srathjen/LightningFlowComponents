@@ -710,6 +710,7 @@
   </types>
   <types>
     <members>Adjustment_Repor/Adjustment_Report</members>
+    <members>AdministrativeReports2/All_Referrals_by_Chapter_DNQ_vs_Qual_n7o</members>
     <members>AdministrativeReports2/Copy_of_Leads_Qualified_and_DNQ_Curr_h1G</members>
     <members>AdministrativeReports2/Copy_of_New_Leads_with_DocuSign_Status_R_lKR</members>
     <members>AdministrativeReports2/Copy_of_Qualified_referrals_vs_DNQd_Gxj</members>
@@ -731,6 +732,10 @@
     <members>AdministrativeReports2/Qualified_Leads_by_Treating_HTF</members>
     <members>AdministrativeReports2/Qualified_Leads_by_Treating_MP</members>
     <members>AdministrativeReports2/Qualified_Referrals_vs_DNQs_lQp</members>
+    <members>AdministrativeReports2/Referrals_by_Department_DNQ_vs_Qual_YD4</members>
+    <members>AdministrativeReports2/Referrals_by_HTF_All_Statues_P4x</members>
+    <members>AdministrativeReports2/Referrals_by_HTF_All_Statuses_5wx</members>
+    <members>AdministrativeReports2/Referrals_by_MP_All_Statuses_ZY5</members>
     <members>AdministrativeReports2/Referrals_by_MP_ouK</members>
     <members>AdministrativeReports2/Reports_Used_in_Dashboards</members>
     <members>AdministrativeReports2/SalesforceTeamReports</members>
