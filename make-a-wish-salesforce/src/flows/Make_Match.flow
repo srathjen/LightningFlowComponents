@@ -27,8 +27,8 @@
     <actionCalls>
         <name>Get_MP_Duplicates</name>
         <label>Get MP Duplicates</label>
-        <locationX>2162</locationX>
-        <locationY>1382</locationY>
+        <locationX>2273</locationX>
+        <locationY>1393</locationY>
         <actionName>ContactService</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -51,8 +51,8 @@
     <assignments>
         <name>Add_0_0</name>
         <label>AddMP</label>
-        <locationX>2244</locationX>
-        <locationY>1383</locationY>
+        <locationX>2402</locationX>
+        <locationY>1399</locationY>
         <assignmentItems>
             <assignToReference>MPtoSearch.Hidden_Chapter_Name__c</assignToReference>
             <operator>Assign</operator>
@@ -97,8 +97,8 @@
     <assignments>
         <name>Add_MP_to_Search_to_Collection</name>
         <label>Add MP to Search to Collection</label>
-        <locationX>2358</locationX>
-        <locationY>1382</locationY>
+        <locationX>2516</locationX>
+        <locationY>1400</locationY>
         <assignmentItems>
             <assignToReference>MPtoSearchCollection</assignToReference>
             <operator>Add</operator>
@@ -108,22 +108,6 @@
         </assignmentItems>
         <connector>
             <targetReference>Nullify_MP_Variables</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <name>Add_Name_to_MP_Search_Collection</name>
-        <label>Add Name to MP Search Collection</label>
-        <locationX>2799</locationX>
-        <locationY>1709</locationY>
-        <assignmentItems>
-            <assignToReference>MPSearchResults</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <elementReference>Loop_Name_Matches_for_Dupes</elementReference>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>Loop_Name_Matches_for_Dupes</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -145,8 +129,8 @@
     <assignments>
         <name>Add_to_HTF_Search_Results</name>
         <label>Add to HTF Search Results</label>
-        <locationX>2607</locationX>
-        <locationY>1009</locationY>
+        <locationX>2623</locationX>
+        <locationY>1146</locationY>
         <assignmentItems>
             <assignToReference>HTFSearchResults</assignToReference>
             <operator>Add</operator>
@@ -401,8 +385,8 @@
     <assignments>
         <name>Create_NewAC</name>
         <label>Create New</label>
-        <locationX>2743</locationX>
-        <locationY>739</locationY>
+        <locationX>2758</locationX>
+        <locationY>745</locationY>
         <assignmentItems>
             <assignToReference>CreateNewAccount.Name</assignToReference>
             <operator>Assign</operator>
@@ -468,8 +452,8 @@
     <assignments>
         <name>HTF_To_Search_Assignment_0_0</name>
         <label>HTF To Search Assignment</label>
-        <locationX>2279</locationX>
-        <locationY>842</locationY>
+        <locationX>2292</locationX>
+        <locationY>876</locationY>
         <assignmentItems>
             <assignToReference>HTFtoSearch.Name</assignToReference>
             <operator>Assign</operator>
@@ -526,8 +510,8 @@
     <assignments>
         <name>MP_to_Search_Assignment</name>
         <label>MP to Search Assignment</label>
-        <locationX>2078</locationX>
-        <locationY>1382</locationY>
+        <locationX>2153</locationX>
+        <locationY>1385</locationY>
         <assignmentItems>
             <assignToReference>MPtoSearch.FirstName</assignToReference>
             <operator>Assign</operator>
@@ -584,8 +568,8 @@
     <assignments>
         <name>Nullify_MP_Variables</name>
         <label>Nullify MP Variables</label>
-        <locationX>2466</locationX>
-        <locationY>1382</locationY>
+        <locationX>2648</locationX>
+        <locationY>1396</locationY>
         <assignmentItems>
             <assignToReference>MPDupeCount</assignToReference>
             <operator>Assign</operator>
@@ -643,7 +627,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Get_MP_Name_Matches</targetReference>
+            <targetReference>Create_New_MP</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -736,6 +720,20 @@
                 <elementReference>EmptyAccountCollection</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Get_HTF_Name_Matches</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>EmptyAccountCollection</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>AccountSelected</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>EmptyAccountCollection</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>HTF_To_Search_Assignment_0</targetReference>
         </connector>
@@ -808,8 +806,8 @@
     <assignments>
         <name>NullSearchValues</name>
         <label>NullSearchValues</label>
-        <locationX>1987</locationX>
-        <locationY>1381</locationY>
+        <locationX>2027</locationX>
+        <locationY>1384</locationY>
         <assignmentItems>
             <assignToReference>MPtoSearchCollection</assignToReference>
             <operator>Assign</operator>
@@ -826,6 +824,20 @@
         </assignmentItems>
         <assignmentItems>
             <assignToReference>MPSearchResults</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>EmptyContactCollection</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>MPMatchingNames</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>EmptyContactCollection</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>SelectedContact</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>EmptyContactCollection</elementReference>
@@ -1718,35 +1730,10 @@
         </rules>
     </decisions>
     <decisions>
-        <name>Match</name>
-        <label>Match?</label>
-        <locationX>2567</locationX>
-        <locationY>1548</locationY>
-        <defaultConnector>
-            <targetReference>Loop_Name_Matches_for_Dupes</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>YES</defaultConnectorLabel>
-        <rules>
-            <name>NPtheydonotmatch</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Loop_Name_Matches_for_Dupes.Id</leftValueReference>
-                <operator>NotEqualTo</operator>
-                <rightValue>
-                    <elementReference>Loop_MP_Search_Results_for_Matches.Id</elementReference>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Loop_MP_Search_Results_for_Matches</targetReference>
-            </connector>
-            <label>NO</label>
-        </rules>
-    </decisions>
-    <decisions>
         <name>MatchingHTF</name>
         <label>Match?</label>
-        <locationX>2503</locationX>
-        <locationY>880</locationY>
+        <locationX>2427</locationX>
+        <locationY>877</locationY>
         <defaultConnector>
             <targetReference>Loop_HTF_Name_Matches</targetReference>
         </defaultConnector>
@@ -2525,34 +2512,6 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         </noMoreValuesConnector>
     </loops>
     <loops>
-        <name>Loop_MP_Search_Results_for_Matches</name>
-        <label>Loop MP Search Results for Matches</label>
-        <locationX>2810</locationX>
-        <locationY>1545</locationY>
-        <collectionReference>MPSearchResults</collectionReference>
-        <iterationOrder>Asc</iterationOrder>
-        <nextValueConnector>
-            <targetReference>Match</targetReference>
-        </nextValueConnector>
-        <noMoreValuesConnector>
-            <targetReference>Add_Name_to_MP_Search_Collection</targetReference>
-        </noMoreValuesConnector>
-    </loops>
-    <loops>
-        <name>Loop_Name_Matches_for_Dupes</name>
-        <label>Loop Name Matches for Dupes</label>
-        <locationX>2725</locationX>
-        <locationY>1384</locationY>
-        <collectionReference>Get_MP_Name_Matches</collectionReference>
-        <iterationOrder>Asc</iterationOrder>
-        <nextValueConnector>
-            <targetReference>Loop_MP_Search_Results_for_Matches</targetReference>
-        </nextValueConnector>
-        <noMoreValuesConnector>
-            <targetReference>Create_New_MP</targetReference>
-        </noMoreValuesConnector>
-    </loops>
-    <loops>
         <name>LoopAccounts</name>
         <label>LoopAccounts</label>
         <locationX>3237</locationX>
@@ -3078,54 +3037,6 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Lead</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
-        <name>Get_MP_Name_Matches</name>
-        <label>Get MP Name Matches</label>
-        <locationX>2596</locationX>
-        <locationY>1383</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Loop_Name_Matches_for_Dupes</targetReference>
-        </connector>
-        <faultConnector>
-            <targetReference>Error_Handling_0</targetReference>
-        </faultConnector>
-        <filters>
-            <field>RecordTypeId</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>MPRTID</elementReference>
-            </value>
-        </filters>
-        <filters>
-            <field>FirstName</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>MPtoSearch.FirstName</elementReference>
-            </value>
-        </filters>
-        <filters>
-            <field>LastName</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>MPtoSearch.LastName</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>false</getFirstRecordOnly>
-        <object>Contact</object>
-        <queriedFields>Id</queriedFields>
-        <queriedFields>FirstName</queriedFields>
-        <queriedFields>LastName</queriedFields>
-        <queriedFields>Phone</queriedFields>
-        <queriedFields>Email</queriedFields>
-        <queriedFields>MailingCity</queriedFields>
-        <queriedFields>MailingState</queriedFields>
-        <queriedFields>Primary_Affiliation_Name__c</queriedFields>
-        <queriedFields>Hidden_Chapter_Name__c</queriedFields>
-        <sortField>FirstName</sortField>
-        <sortOrder>Asc</sortOrder>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
@@ -3947,8 +3858,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <screens>
         <name>Error_Handling</name>
         <label>Error Handling</label>
-        <locationX>166</locationX>
-        <locationY>3107</locationY>
+        <locationX>190</locationX>
+        <locationY>1441</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -5309,6 +5220,14 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <value>
             <numberValue>0.0</numberValue>
         </value>
+    </variables>
+    <variables>
+        <name>MPMatchingNames</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Contact</objectType>
     </variables>
     <variables>
         <name>MPRTID</name>
