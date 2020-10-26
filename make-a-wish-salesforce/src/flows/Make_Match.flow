@@ -97,8 +97,8 @@
     <assignments>
         <name>Add_MP_to_Search_to_Collection</name>
         <label>Add MP to Search to Collection</label>
-        <locationX>2332</locationX>
-        <locationY>1381</locationY>
+        <locationX>2358</locationX>
+        <locationY>1382</locationY>
         <assignmentItems>
             <assignToReference>MPtoSearchCollection</assignToReference>
             <operator>Add</operator>
@@ -729,6 +729,13 @@
                 <elementReference>EmptyAccountRecord</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>HTFSearchResults</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>EmptyAccountCollection</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>HTF_To_Search_Assignment_0</targetReference>
         </connector>
@@ -815,6 +822,13 @@
             <operator>Assign</operator>
             <value>
                 <elementReference>EmptyContactRecord</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>MPSearchResults</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>EmptyContactCollection</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -2044,7 +2058,7 @@
             <field>EntityParticleId</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Lead.00N6w000000OAFv</stringValue>
+                <stringValue>Lead.00N03000000Q0Im</stringValue>
             </value>
         </filters>
         <filters>
@@ -2083,7 +2097,7 @@
             <field>EntityParticleId</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Lead.00N6w000000O8jP</stringValue>
+                <stringValue>Lead.00N03000000Q0Ij</stringValue>
             </value>
         </filters>
         <filters>
@@ -2106,7 +2120,7 @@
             <field>EntityParticleId</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Lead.00N6w000000O8uh</stringValue>
+                <stringValue>Lead.00N03000000Q0Is</stringValue>
             </value>
         </filters>
         <filters>
@@ -2129,7 +2143,7 @@
             <field>EntityParticleId</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Lead.00N6w000000O8kh</stringValue>
+                <stringValue>Lead.00N03000000Q0It</stringValue>
             </value>
         </filters>
         <filters>
