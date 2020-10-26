@@ -7,13 +7,13 @@
  */
 @IsTest
 public class ChapterChangeConfirmationPopup_AC_Test {
-
+    
     private final static Id CHAPTER_RECORD_TYPE_ID = Constant_AC.CHAPTER_RT_ID;
-
+    
     @TestSetup
     public static void setup() {
         trac_TriggerHandlerBase.blockTrigger = true;
-
+        
         List<Account> accounts = TestDataFactory.createAccount(2);
         Account account1 = accounts.get(0);
         account1.Name = 'Make-A-Wish Arizona';
@@ -22,11 +22,11 @@ public class ChapterChangeConfirmationPopup_AC_Test {
         account2.Name = 'Make-A-Wish New York';
         account2.RecordTypeId = CHAPTER_RECORD_TYPE_ID;
         insert accounts;
-
+        
         List<ICD_Codes__c> icdCodesDataFactory = TestDataFactory.createIcdCode(1);
         ICD_Codes__c icdCode = icdCodesDataFactory.get(0);
         insert icdCode;
-
+        
         List<Lead> leadsDataFactory = TestDataFactory.createLead(1);
         Lead lead = leadsDataFactory.get(0);
         lead.ChapterName__c = accounts[0].Id;
@@ -56,60 +56,60 @@ public class ChapterChangeConfirmationPopup_AC_Test {
         
         trac_TriggerHandlerBase.blockTrigger = false;
     }
-
+    
     @IsTest
     public static void shouldRevertChapterName() {
         Account oldChapter = [
-                SELECT Id
-                FROM Account
-                WHERE Name IN ('Make-A-Wish New York')
+            SELECT Id
+            FROM Account
+            WHERE Name IN ('Make-A-Wish New York')
         ];
         Account newChapter = [
-                SELECT Id
-                FROM Account
-                WHERE Name IN ('Make-A-Wish Arizona')
+            SELECT Id
+            FROM Account
+            WHERE Name IN ('Make-A-Wish Arizona')
         ];
         Lead lead = [
-                SELECT Id, ChapterName__c
-                FROM Lead
-                WHERE Name = 'Jack Smith'
+            SELECT Id, ChapterName__c
+            FROM Lead
+            WHERE Name = 'Jack Smith'
         ];
         System.assertEquals(newChapter.Id, lead.ChapterName__c);
-
+        
         Test.startTest();
         String hiddenChapterName = ChapterChangeConfirmationPopup_AC.updateLeadChapter('revert', lead.Id);
         Test.stopTest();
-
+        
         System.assertEquals(oldChapter.Id, hiddenChapterName);
     }
-
+    
     @IsTest
     public static void shouldBackupChapterName() {
         Account newChapter = [
-                SELECT Id
-                FROM Account
-                WHERE Name IN ('Make-A-Wish Arizona')
+            SELECT Id
+            FROM Account
+            WHERE Name IN ('Make-A-Wish Arizona')
         ];
         Lead lead = [
-                SELECT Id, ChapterName__c
-                FROM Lead
-                WHERE Name = 'Jack Smith'
+            SELECT Id, ChapterName__c
+            FROM Lead
+            WHERE Name = 'Jack Smith'
         ];
         System.assertEquals(newChapter.Id, lead.ChapterName__c);
-
+        
         Test.startTest();
         String hiddenChapterName = ChapterChangeConfirmationPopup_AC.updateLeadChapter('accept', lead.Id);
         Test.stopTest();
-
+        
         System.assertEquals(newChapter.Id, hiddenChapterName);
     }
-
+    
     @IsTest
     public static void shouldCallClassConstructor() {
         Lead lead = [
-                SELECT Id, ChapterName__c
-                FROM Lead
-                WHERE Name = 'Jack Smith'
+            SELECT Id, ChapterName__c
+            FROM Lead
+            WHERE Name = 'Jack Smith'
         ];
         ApexPages.StandardController sc = new ApexPages.StandardController(lead);
         new ChapterChangeConfirmationPopup_AC(sc);
@@ -134,6 +134,25 @@ public class ChapterChangeConfirmationPopup_AC_Test {
         System.assert(mpContact.Region_Chapter__c == mpContactUpdated.Hidden_Chapter__c);
     }
     
+    @IsTest
+    public static void validateChapterRevertContact() {
+        Contact mpContact = [
+            SELECT Id, Hidden_Chapter__c 
+            FROM Contact 
+            WHERE Name = 'Allison Knowles'
+        ];
+        Test.startTest();
+        ChapterChangeConfirmationPopup_AC.updateContactChapter('revert', mpContact.Id);
+        Test.stopTest();
+        
+        Contact mpContactUpdated = [
+            SELECT Id, Region_Chapter__c 
+            FROM Contact 
+            WHERE Id = :mpContact.Id
+        ];
+        System.assert(mpContact.Hidden_Chapter__c == mpContactUpdated.Region_Chapter__c);
+    }
+    
     
     @IsTest
     public static void validateChapterRevertAccount() {
@@ -152,5 +171,54 @@ public class ChapterChangeConfirmationPopup_AC_Test {
             WHERE Name = 'Phoenix General Hospital'
         ];
         System.assert(htfAccount.Hidden_Chapter__c == htfAccountUpdated.Chapter_Name__c);
+    }
+    
+    @IsTest
+    public static void validateChapterChangeAccount() {
+        Account htfAccount = [
+            SELECT Id, Chapter_Name__c
+            FROM Account 
+            WHERE Name = 'Phoenix General Hospital'
+        ];
+        Test.startTest();
+        ChapterChangeConfirmationPopup_AC.updateAccountChapter('accept', htfAccount.Id);
+        Test.stopTest();
+        
+        Account htfAccountUpdated = [
+            SELECT Id, Hidden_Chapter__c
+            FROM Account 
+            WHERE Name = 'Phoenix General Hospital'
+        ];
+        System.assert(htfAccount.Chapter_Name__c == htfAccountUpdated.Hidden_Chapter__c);
+    }
+    
+    @IsTest
+    public static void updateAccountChapterException() {
+        Lead lead = [SELECT Id FROM Lead LIMIT 1];
+        Account htfAccount = [
+            SELECT Id, Chapter_Name__c, Hidden_Chapter__c
+            FROM Account 
+            WHERE Name = 'Phoenix General Hospital'
+        ];
+        htfAccount.Hidden_Chapter__c = lead.Id;
+        update htfAccount;
+        Test.startTest();
+        ChapterChangeConfirmationPopup_AC.updateAccountChapter('revert', htfAccount.Id);
+        Test.stopTest();
+    }
+    
+    @IsTest
+    public static void updateContactChapterException() {
+        Lead lead = [SELECT Id FROM Lead LIMIT 1];
+        Contact mpContact = [
+            SELECT Id, Hidden_Chapter__c 
+            FROM Contact 
+            WHERE Name = 'Allison Knowles'
+        ];
+        mpContact.Hidden_Chapter__c = lead.Id;
+        update mpContact;
+        Test.startTest();
+        ChapterChangeConfirmationPopup_AC.updateContactChapter('revert', mpContact.Id);
+        Test.stopTest();
     }
 }
