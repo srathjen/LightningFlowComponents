@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <aggregates>
-        <calculatedFormula>RowCount / PARENTGROUPVAL(Lead.Unique_Record_Count__c:SUM, GRAND_SUMMARY)</calculatedFormula>
+        <calculatedFormula>RowCount / PARENTGROUPVAL(Lead.Unique_Record_Count__c:SUM, Lead.ChapterName__c)</calculatedFormula>
         <datatype>percent</datatype>
         <developerName>FORMULA1</developerName>
-        <downGroupingContext>Lead.Treating_MP_HTF__c</downGroupingContext>
+        <downGroupingContext>STATUS</downGroupingContext>
         <isActive>true</isActive>
         <isCrossBlock>false</isCrossBlock>
-        <masterLabel>% of Referrals</masterLabel>
+        <masterLabel>% of Status</masterLabel>
         <scale>0</scale>
     </aggregates>
     <columns>
@@ -17,39 +17,48 @@
         <field>LAST_NAME</field>
     </columns>
     <columns>
-        <field>Lead.PD_ICD_Code__c</field>
+        <field>TITLE</field>
     </columns>
     <columns>
-        <field>Lead.Qualifying_ICD__c</field>
+        <field>COMPANY</field>
     </columns>
     <columns>
-        <field>Lead.Qualifying_Diagnosis__c</field>
+        <field>EMAIL</field>
     </columns>
-    <description>Qualified Leads by Treating HTF</description>
+    <columns>
+        <field>LEAD_SOURCE</field>
+    </columns>
+    <columns>
+        <field>STREET</field>
+    </columns>
+    <columns>
+        <field>RATING</field>
+    </columns>
+    <columns>
+        <field>OWNER</field>
+    </columns>
     <filter>
         <criteriaItems>
-            <column>STATUS</column>
+            <column>Lead.Qualified_DNQ_Date__c</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
-            <operator>equals</operator>
-            <value>Qualified</value>
-        </criteriaItems>
-        <criteriaItems>
-            <column>Lead.ChapterName__c</column>
-            <columnToColumn>false</columnToColumn>
-            <isUnlocked>true</isUnlocked>
-            <operator>contains</operator>
-            <value>Arizona</value>
+            <operator>notEqual</operator>
+            <value></value>
         </criteriaItems>
         <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>Lead.Treating_MP_HTF__c</field>
+        <field>Lead.ChapterName__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>Qualified Leads by Treating HTF</name>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>STATUS</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>All Referrals by Chapter - DNQ vs Qual.</name>
     <params>
         <name>co</name>
         <value>1</value>
@@ -60,7 +69,7 @@
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
-        <dateColumn>Lead.Referred_Date__c</dateColumn>
+        <dateColumn>CREATED_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>

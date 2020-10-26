@@ -2360,4 +2360,12 @@
         </columns>
         <masterLabel>Leads (Qualifying ICD)</masterLabel>
     </sections>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Qualified_DNQ_Date__c</field>
+            <table>ICD_Codes__c.Leads7__r</table>
+        </columns>
+        <masterLabel>Leads</masterLabel>
+    </sections>
 </ReportType>

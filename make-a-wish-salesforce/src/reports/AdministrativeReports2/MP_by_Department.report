@@ -1,51 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>RowCount/PARENTGROUPVAL(FK_Contact.Unique_Record_Count__c:SUM, GRAND_SUMMARY)</calculatedFormula>
+        <datatype>percent</datatype>
+        <developerName>FORMULA1</developerName>
+        <downGroupingContext>Account.Department__c</downGroupingContext>
+        <isActive>true</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>% of Departments</masterLabel>
+        <scale>0</scale>
+    </aggregates>
     <columns>
-        <field>USERS.NAME</field>
-    </columns>
-    <columns>
-        <field>ACCOUNT.NAME</field>
-    </columns>
-    <columns>
-        <field>TYPE</field>
-    </columns>
-    <columns>
-        <field>RATING</field>
-    </columns>
-    <columns>
-        <field>DUE_DATE</field>
-    </columns>
-    <columns>
-        <field>LAST_UPDATE</field>
-    </columns>
-    <columns>
-        <field>ADDRESS1_STATE_CODE</field>
+        <field>FK_$Contact.Hidden_Contact_Full_Name__c</field>
     </columns>
     <columns>
         <field>CUST_NAME</field>
     </columns>
-    <columns>
-        <field>FK_NAME</field>
-    </columns>
-    <description>ODP-58</description>
+    <description>MPs % by Department</description>
     <filter>
         <criteriaItems>
             <column>npe5__Affiliation__c.npe5__Primary__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Account.Hospital_Treatment_Facility</value>
         </criteriaItems>
         <criteriaItems>
             <column>FK_CNTC_RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Medical_Professional</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>npe5__Affiliation__c.Constituent_Code__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Medical Professional</value>
         </criteriaItems>
         <language>en_US</language>
     </filter>
@@ -55,14 +54,14 @@
         <field>Account.Department__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>MP by Department</name>
+    <name>MPs % by HTF Department</name>
     <params>
         <name>co</name>
         <value>1</value>
     </params>
     <reportType>AccountCustomEntity$npe5__Affiliation__c@npe5__Affiliation__c.npe5__Contact__c</reportType>
     <scope>organization</scope>
-    <showDetails>true</showDetails>
+    <showDetails>false</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
     <timeFrameFilter>

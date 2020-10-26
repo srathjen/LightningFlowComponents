@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <aggregates>
-        <calculatedFormula>RowCount/PARENTGROUPVAL(Lead.Unique_Record_Count__c:SUM, Contact.Hidden_Contact_Full_Name__c)</calculatedFormula>
+        <calculatedFormula>RowCount/PARENTGROUPVAL(Lead.Unique_Record_Count__c:SUM, GRAND_SUMMARY)</calculatedFormula>
         <datatype>percent</datatype>
         <developerName>FORMULA1</developerName>
-        <downGroupingContext>Contact.ReferringMP__r$Status</downGroupingContext>
+        <downGroupingContext>Account$Department__c</downGroupingContext>
         <isActive>true</isActive>
         <isCrossBlock>false</isCrossBlock>
         <masterLabel>% of Status</masterLabel>
@@ -15,15 +15,16 @@
         <backgroundColor2>#FFFFFF</backgroundColor2>
         <backgroundFadeDir>Diagonal</backgroundFadeDir>
         <chartSummaries>
-            <aggregate>Sum</aggregate>
             <axisBinding>y</axisBinding>
-            <column>Contact.ReferringMP__r$Unique_Record_Count__c</column>
+            <column>RowCount</column>
         </chartSummaries>
-        <chartType>Line</chartType>
+        <chartType>VerticalColumnStacked</chartType>
         <enableHoverLabels>false</enableHoverLabels>
         <expandOthers>true</expandOthers>
-        <groupingColumn>Contact.ReferringMP__r$Status</groupingColumn>
+        <groupingColumn>Account$Department__c</groupingColumn>
+        <legendPosition>Right</legendPosition>
         <location>CHART_BOTTOM</location>
+        <secondaryGroupingColumn>Account.ReferringMPHTFLeads__r$Status</secondaryGroupingColumn>
         <showAxisLabels>true</showAxisLabels>
         <showPercentage>false</showPercentage>
         <showTotal>false</showTotal>
@@ -36,53 +37,49 @@
         <titleSize>18</titleSize>
     </chart>
     <columns>
-        <field>Contact.ReferringMP__r$Name</field>
+        <field>Account.ReferringMPHTFLeads__r$Name</field>
     </columns>
-    <columns>
-        <aggregateTypes>Sum</aggregateTypes>
-        <field>Contact.ReferringMP__r$Unique_Record_Count__c</field>
-    </columns>
-    <description>Referrals by MP - DNQ vs  Qualified - All Time</description>
+    <description>Referrals by Department - DNQ vs Qualified % - All Time.</description>
     <filter>
         <criteriaItems>
-            <column>Contact.ReferringMP__r$Qualified_DNQ_Date__c</column>
-            <columnToColumn>false</columnToColumn>
-            <isUnlocked>true</isUnlocked>
-            <operator>notEqual</operator>
-            <value></value>
-        </criteriaItems>
-        <criteriaItems>
-            <column>Contact.ReferringMP__r$ChapterName__c</column>
+            <column>Account$Chapter_Name__c</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Arizona</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.ReferringMPHTFLeads__r$Qualified_DNQ_Date__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
         </criteriaItems>
         <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>Contact$Hidden_Contact_Full_Name__c</field>
+        <field>Account$Department__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>Contact.ReferringMP__r$Status</field>
+        <field>Account.ReferringMPHTFLeads__r$Status</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>Referrals by MP - DNQ vs  Qual.</name>
+    <name>Referrals by Department - DNQ vs Qual.</name>
     <params>
         <name>co</name>
-        <value>0</value>
+        <value>1</value>
     </params>
-    <reportType>Referring_MPs_with_Referrals__c</reportType>
+    <reportType>Referring_HTF_s_with_Referrals__c</reportType>
     <scope>organization</scope>
     <showDetails>false</showDetails>
     <showGrandTotal>true</showGrandTotal>
-    <showSubTotals>false</showSubTotals>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
-        <dateColumn>Contact.ReferringMP__r$Referred_Date__c</dateColumn>
+        <dateColumn>Account.ReferringMPHTFLeads__r$Referred_Date__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>
