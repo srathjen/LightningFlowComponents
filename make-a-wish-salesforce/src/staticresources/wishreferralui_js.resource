@@ -85,15 +85,15 @@ function formLogic() {
             $(this).val("")
         }),1==checkVisibleNewHtf?($(".trthtfname").val($(".refhtfname").val()),$(".trthtfcity").val($(".refhtfcity").val()),$(".trthtfstate").val($(".refhtfstate").val()),$(".trthtfstreet").val($(".refhtfstreet").val()),$(".trthtfzip").val($(".refhtfzip").val()),$(".trthtfphone").val($(".refhtfphone").val()),$(".trthtfdept").val($(".refhtfdept").val())):0==checkVisibleNewHtf&&$(".trtHtfForm :input").each(function(){
             $(this).val("")
-        }),$(".trtMpInfo").css("display","none"),$(".repeatMedProfBest").css("display","none")):0==checkVisibleCopy&&($(".repeatMedProfBest").css("display","block"),$(".medToRepeat :input, .trtHtfForm :input").each(function(){
+        }),$(".trtmpaffphone").val($(".refmpaffphone").val()), $(".trtmpaffemail").val($(".refmpaffemail").val()), $(".trtMpInfo").css("display","none"),$(".repeatMedProfBest").css("display","none")):0==checkVisibleCopy&&($(".repeatMedProfBest").css("display","block"),$(".medToRepeat :input, .trtHtfForm :input").each(function(){
             $(this).val("")
-        }),$("[id$=msalutation],[id$=mcategory],[id$=mspecialty],[id$=trthtfdept]").prop("selectedIndex",0),$(".trtMpInfo").css("display","block"))
+        }),$("[id$=msalutation],[id$=mcategory],[id$=mspecialty],[id$=trthtfdept]").prop("selectedIndex",0), $("[id$=trtmpaffphone], [id$=trtmpaffemail]").val(""), $(".trtMpInfo").css("display","block"))
     }), $(".repeatMedProfBest").on("change", function () {
         checkVisibleCopy = $(".repeatMedProfBest input").is(":checked"), checkVisibleNew = $(".newRefMpChk input").is(":checked"), 1 == checkVisibleCopy ? (1 == checkVisibleNew ? ($(".bsalutation").val($(".refmpsalutation").val()), $(".mpmaincontactfirstname").val($(".refmpfirstname").val()), $(".mpmaincontactlastname").val($(".refmplastname").val()), $(".mpmaincontactphone").val($(".refmpphone").val()), $(".mpmaincontactemail").val($(".refmpemail").val()), $(".bcity").val($(".refmpcity").val()), $(".bstate").val($(".refmpstate").val()), $(".bcategory").val($(".refmpcategory").val()), $(".bspecialty").val($(".refmpspecialty").val())) : 0 == checkVisibleNew && $(".medToRepeatBest :input").each(function () {
             $(this).val("")
-        }), $(".bestMpInfo").css("display", "none"), $(".repeatMedProf").css("display", "none")) : 0 == checkVisibleCopy && ($(".repeatMedProf").css("display", "block"), $(".medToRepeatBest :input").each(function () {
+        }), $(".bestmpaffphone").val($(".refmpaffphone").val()), $(".bestmpaffemail").val($(".refmpaffemail").val()), $(".bestMpInfo").css("display", "none"), $(".repeatMedProf").css("display", "none")) : 0 == checkVisibleCopy && ($(".repeatMedProf").css("display", "block"), $(".medToRepeatBest :input").each(function () {
             $(this).val("")
-        }), $(".bsalutation").val($(".bsalutation option:first").val()), $(".bcategory").val($(".bcategory option:first").val()), $(".bspecialty").val($(".bspecialty option:first").val()), $(".bestMpInfo").css("display", "block"))
+        }), $(".bsalutation").val($(".bsalutation option:first").val()), $(".bcategory").val($(".bcategory option:first").val()), $(".bspecialty").val($(".bspecialty option:first").val()), $("[id$=bestmpaffphone], [id$=bestmpaffemail]").val(""), $(".bestMpInfo").css("display", "block"))
     }), $(".refToRepeat :input").on("keyup", o), $(".clone-guardian-1 input").click(function () {
         $(this).is(":checked") ? ($("[id$=paddress2]").val($("[id$=paddress]").val()), $("[id$=pcity2]").val($("[id$=pcity]").val()), $("[id$=p-state2]").val($("[id$=p-state]").val()), $("[id$=ppostalcode2]").val($("[id$=ppostalcode]").val())) : ($("[id$=paddress2], [id$=pcity2], [id$=ppostalcode2]").val(""), $("[id$=p-state2]").prop("selectedIndex", 0))
     }), $(".refToParent :input").on("keyup", c), $("[id$=nSib],[id$=nSib2]").on("change", function () {
