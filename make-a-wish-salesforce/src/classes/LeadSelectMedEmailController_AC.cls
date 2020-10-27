@@ -60,10 +60,8 @@ public class LeadSelectMedEmailController_AC {
 			}
 		} catch (Exception ex) {
 			success = false;
-			log = String.valueOf(currLead);
-			recId = currLead.Id;
 			new ApexDebugLog().createLog(new ApexDebugLog.Error(
-					'LeadSelectMedEmailController_AC', 'updateLead', recId, ex, log));
+					'LeadSelectMedEmailController_AC', 'updateLead', currLead.Id, ex, String.valueOf(currLead)));
 			ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
 			ApexPages.addMessage(myMsg);
 		}
@@ -120,6 +118,7 @@ public class LeadSelectMedEmailController_AC {
 			referringMp.id = lead.Referring_MP__c;
 			referringMp.name = lead.Referring_MP__r.Name;
 			referringMp.type = REFERRING_MEDICAL_PROFESSIONAL;
+			referringMp.hiddenDvFormMedicalProfessionalType = Constant_AC.LEAD_DV_FORM_TYPE_REFERRING_MEDICAL_PROFESSIONAL;
 			if (String.isNotEmpty(lead.Referring_MP__r.npe01__WorkEmail__c)) {
 				referringMp.workEmail = lead.Referring_MP__r.npe01__WorkEmail__c;
 			}
@@ -155,6 +154,7 @@ public class LeadSelectMedEmailController_AC {
 			treatingMp.id = lead.Treating_MP__c;
 			treatingMp.name = lead.Treating_MP__r.Name;
 			treatingMp.type = TREATING_MEDICAL_PROFESSIONAL;
+			treatingMp.hiddenDvFormMedicalProfessionalType = Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL;
 			if (String.isNotEmpty(lead.Treating_MP__r.npe01__WorkEmail__c)) {
 				treatingMp.workEmail = lead.Treating_MP__r.npe01__WorkEmail__c;
 			}
@@ -190,6 +190,7 @@ public class LeadSelectMedEmailController_AC {
 			bestContact.id = lead.Best_Contact__c;
 			bestContact.name = lead.Best_Contact__r.Name;
 			bestContact.type = System.Label.Wish_Referral_Best_Medical_Contact;
+			bestContact.hiddenDvFormMedicalProfessionalType = Constant_AC.LEAD_DV_FORM_TYPE_BEST_CONTACT;
 			if (String.isNotEmpty(lead.Best_Contact__r.npe01__WorkEmail__c)) {
 				bestContact.workEmail = lead.Best_Contact__r.npe01__WorkEmail__c;
 			}
@@ -225,6 +226,7 @@ public class LeadSelectMedEmailController_AC {
 			alternate1Mp.id = lead.Alt_1_MP__c;
 			alternate1Mp.name = lead.Alt_1_MP__r.Name;
 			alternate1Mp.type = ALTERNATE_1_MEDICAL_PROFESSIONAL;
+			alternate1Mp.hiddenDvFormMedicalProfessionalType = Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL;
 			if (String.isNotEmpty(lead.Alt_1_MP__r.npe01__WorkEmail__c)) {
 				alternate1Mp.workEmail = lead.Alt_1_MP__r.npe01__WorkEmail__c;
 			}
@@ -247,6 +249,7 @@ public class LeadSelectMedEmailController_AC {
 			alternate2Mp.id = lead.Alt_2_MP__c;
 			alternate2Mp.name = lead.Alt_2_MP__r.Name;
 			alternate2Mp.type = ALTERNATE_2_MEDICAL_PROFESSIONAL;
+			alternate2Mp.hiddenDvFormMedicalProfessionalType = Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_2_MEDICAL_PROFESSIONAL;
 			if (String.isNotEmpty(lead.Alt_2_MP__r.npe01__WorkEmail__c)) {
 				alternate2Mp.workEmail = lead.Alt_2_MP__r.npe01__WorkEmail__c;
 			}
@@ -272,6 +275,7 @@ public class LeadSelectMedEmailController_AC {
 		public Id id { get; set; }
 		public String name { get; set; }
 		public String type { get; set; }
+		public String hiddenDvFormMedicalProfessionalType { get; set; }
 		public String workEmail { get; set; }
 		public String alternateEmail1 { get; set; }
 		public String alternateEmail2 { get; set; }

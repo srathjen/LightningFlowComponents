@@ -36,7 +36,7 @@
                             <td style="border: none; {!IF(ctc.workEmail == '','display:none;','')}">Work</td>
                             <td id="{!ctc.type}" style="border: none; {!IF(ctc.workEmail == '','display:none;','')}">
                                 <input id="{!ctc.type}WorkEmail" type="radio" name="rec" class="selVal"
-                                       value="{!ctc.workEmail}" data-type="{!ctc.type}" data-email="{!ctc.workEmail}"/>
+                                       value="{!ctc.workEmail}" data-type="{!ctc.hiddenDvFormMedicalProfessionalType}" data-email="{!ctc.workEmail}"/>
                                 <label for="{!ctc.type}WorkEmail">{!ctc.workEmail}</label>
                             </td>
                         </tr>
@@ -45,7 +45,7 @@
                             <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail1 == '','display:none;','')}">Alt 1</td>
                             <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail1 == '','display:none;','')}">
                                 <input id="{!ctc.type}AlternateEmail1" type="radio" name="rec" class="selVal"
-                                       value="{!ctc.alternateEmail1}" data-type="{!ctc.type}"
+                                       value="{!ctc.alternateEmail1}" data-type="{!ctc.hiddenDvFormMedicalProfessionalType}"
                                        data-email="{!ctc.alternateEmail1}"/>
                                 <label for="{!ctc.type}AlternateEmail1">{!ctc.alternateEmail1}</label>
                             </td>
@@ -55,7 +55,7 @@
                             <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail2 == '','display:none;','')}">Alt 2</td>
                             <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail2 == '','display:none;','')}">
                                 <input id="{!ctc.type}AlternateEmail2" type="radio" name="rec" class="selVal"
-                                       value="{!ctc.alternateEmail2}" data-type="{!ctc.type}"
+                                       value="{!ctc.alternateEmail2}" data-type="{!ctc.hiddenDvFormMedicalProfessionalType}"
                                        data-email="{!ctc.alternateEmail2}"/>
                                 <label for="{!ctc.type}AlternateEmail2">{!ctc.alternateEmail2}</label>
                             </td>
@@ -65,7 +65,7 @@
                             <td id="{!ctc.type}" style="border: none; {!IF(ctc.newEmailProvided == '','display:none;','')}">New Provided</td>
                             <td id="{!ctc.type}" style="border: none; {!IF(ctc.newEmailProvided == '','display:none;','')}">
                                 <input id="{!ctc.type}NewProvidedEmail" type="radio" name="rec" class="selVal"
-                                       value="{!ctc.newEmailProvided}" data-type="{!ctc.type}"
+                                       value="{!ctc.newEmailProvided}" data-type="{!ctc.hiddenDvFormMedicalProfessionalType}"
                                        data-email="{!ctc.newEmailProvided}"/>
                                 <label for="{!ctc.type}NewProvidedEmail">{!ctc.newEmailProvided}</label>
                             </td>
