@@ -137,29 +137,36 @@ public class AffiliationService {
 		}
 		if (lead.Treating_MP__c != null && lead.Treating_MP_HTF__c != null
 				&& !mpHtfAffiliations.containsKey(String.valueOf(lead.Treating_MP__c) + String.valueOf(lead.Treating_MP_HTF__c))) {
-			npe5__Affiliation__c aff = new npe5__Affiliation__c();
-			aff.npe5__Contact__c = lead.Treating_MP__c;
-			aff.npe5__Organization__c = lead.Treating_MP_HTF__c;
-			aff.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
-			aff.Constituent_Code__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
-			aff.npe5__StartDate__c = Date.today();
-			if (!treatingMpHasPrimaryHtfAffiliation) {
-				aff.npe5__Primary__c = true;
+			Boolean isTreatingSameAsReferrerMpHtf = lead.Treating_MP__c == lead.Referring_MP__c && lead.Treating_MP_HTF__c == lead.Referring_MP_HTF__c;
+			if (!isTreatingSameAsReferrerMpHtf) {
+				npe5__Affiliation__c aff = new npe5__Affiliation__c();
+				aff.npe5__Contact__c = lead.Treating_MP__c;
+				aff.npe5__Organization__c = lead.Treating_MP_HTF__c;
+				aff.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+				aff.Constituent_Code__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+				aff.npe5__StartDate__c = Date.today();
+				if (!treatingMpHasPrimaryHtfAffiliation) {
+					aff.npe5__Primary__c = true;
+				}
+				affiliations.add(aff);
 			}
-			affiliations.add(aff);
 		}
 		if (lead.Best_Contact__c != null && lead.Best_Contact_HTF__c != null
 				&& !mpHtfAffiliations.containsKey(String.valueOf(lead.Best_Contact__c) + String.valueOf(lead.Best_Contact_HTF__c))) {
-			npe5__Affiliation__c aff = new npe5__Affiliation__c();
-			aff.npe5__Contact__c = lead.Best_Contact__c;
-			aff.npe5__Organization__c = lead.Best_Contact_HTF__c;
-			aff.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
-			aff.Constituent_Code__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
-			aff.npe5__StartDate__c = Date.today();
-			if (!bestMpHasPrimaryHtfAffiliation) {
-				aff.npe5__Primary__c = true;
+			Boolean isBestSameAsReferrerMpHtf = lead.Best_Contact__c == lead.Referring_MP__c && lead.Best_Contact_HTF__c == lead.Referring_MP_HTF__c;
+			Boolean isBestSameAsTreatingMpHtf = lead.Best_Contact__c == lead.Treating_MP__c && lead.Best_Contact_HTF__c == lead.Treating_MP_HTF__c;
+			if (!isBestSameAsReferrerMpHtf && !isBestSameAsTreatingMpHtf) {
+				npe5__Affiliation__c aff = new npe5__Affiliation__c();
+				aff.npe5__Contact__c = lead.Best_Contact__c;
+				aff.npe5__Organization__c = lead.Best_Contact_HTF__c;
+				aff.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+				aff.Constituent_Code__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+				aff.npe5__StartDate__c = Date.today();
+				if (!bestMpHasPrimaryHtfAffiliation) {
+					aff.npe5__Primary__c = true;
+				}
+				affiliations.add(aff);
 			}
-			affiliations.add(aff);
 		}
 		if (lead.Alt_1_MP__c != null && lead.Alt_1_MP_HTF__c != null
 				&& !mpHtfAffiliations.containsKey(String.valueOf(lead.Alt_1_MP__c) + String.valueOf(lead.Alt_1_MP_HTF__c))) {
@@ -649,17 +656,17 @@ public class AffiliationService {
 				affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
 				insertAffiliationList.add(affiliation);
 			}
-            if(contact.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID 
-               && contact.npsp__Primary_Affiliation__c != null) {
-                npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
-                affiliation.Constituent_Code__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
-                affiliation.npe5__Primary__c = true;
-                affiliation.npe5__Organization__c = contact.npsp__Primary_Affiliation__c;
-                affiliation.npe5__Contact__c = contact.Id;
-                affiliation.npe5__StartDate__c = Date.today();
-                affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
-                insertAffiliationList.add(affiliation);
-            }
+			if (contact.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID
+					&& contact.npsp__Primary_Affiliation__c != null) {
+				npe5__Affiliation__c affiliation = new npe5__Affiliation__c();
+				affiliation.Constituent_Code__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+				affiliation.npe5__Primary__c = true;
+				affiliation.npe5__Organization__c = contact.npsp__Primary_Affiliation__c;
+				affiliation.npe5__Contact__c = contact.Id;
+				affiliation.npe5__StartDate__c = Date.today();
+				affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+				insertAffiliationList.add(affiliation);
+			}
 		}
 		List<npe5__Affiliation__c> affiliationList = new List<npe5__Affiliation__c>();
 		if (!volunteerContactIds.isEmpty()) {
@@ -676,16 +683,16 @@ public class AffiliationService {
 		update affiliationList;
 		insert insertAffiliationList;
 		List<npe5__Affiliation__c> mpPrimaryAffiliationsUpdate = new List<npe5__Affiliation__c>();
-		for(npe5__Affiliation__c affiliation : [
+		for (npe5__Affiliation__c affiliation : [
 				SELECT Id, npe5__Primary__c
 				FROM npe5__Affiliation__c
 				WHERE npe5__Contact__c IN :mpChapterAffiliations.keySet()
 				AND npe5__Organization__c IN :mpChapterAffiliations.values()
-		]){
-            affiliation.npe5__Primary__c = false;
-            affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
-            affiliation.npe5__EndDate__c = null;
-            mpPrimaryAffiliationsUpdate.add(affiliation);
+		]) {
+			affiliation.npe5__Primary__c = false;
+			affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
+			affiliation.npe5__EndDate__c = null;
+			mpPrimaryAffiliationsUpdate.add(affiliation);
 		}
 		update mpPrimaryAffiliationsUpdate;
 	}

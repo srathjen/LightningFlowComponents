@@ -576,14 +576,14 @@ global class WishReferralForm_AC {
 			if (copyReferrerInfoBest == true && currLead.Referring_MP__c != null) {
 				currLead.Best_Contact__c = currLead.Referring_MP__c;
 			}
-			if (currLead.Treating_MP_HTF__c != null && !copyReferrerInfo
-					&& (currLead.Best_Contact__c != null || String.isNotEmpty(currLead.Best_Contact_for_Physician_First_Name__c)
-					|| String.isNotEmpty(currLead.Best_Contact_for_Physician_Last_Name__c))) {
-				currLead.Best_Contact_HTF__c = currLead.Treating_MP_HTF__c;
-			} else if (currLead.Referring_MP_HTF__c != null && copyReferrerInfoBest
+			if (currLead.Referring_MP_HTF__c != null && copyReferrerInfoBest
 					&& (currLead.Best_Contact__c != null || String.isNotEmpty(currLead.Best_Contact_for_Physician_First_Name__c)
 					|| String.isNotEmpty(currLead.Best_Contact_for_Physician_Last_Name__c))) {
 				currLead.Best_Contact_HTF__c = currLead.Referring_MP_HTF__c;
+			} else if (currLead.Treating_MP_HTF__c != null && (currLead.Best_Contact__c != null
+					|| String.isNotEmpty(currLead.Best_Contact_for_Physician_First_Name__c)
+					|| String.isNotEmpty(currLead.Best_Contact_for_Physician_Last_Name__c))) {
+				currLead.Best_Contact_HTF__c = currLead.Treating_MP_HTF__c;
 			}
 		}
 	}
