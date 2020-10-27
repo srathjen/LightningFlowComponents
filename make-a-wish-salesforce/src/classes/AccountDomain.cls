@@ -67,6 +67,10 @@ public class AccountDomain extends trac_TriggerHandlerBase {
                    newAccount.ShippingAddressVerified__c = false;
                    newAccount.ShippingAddressVerificationAttempted__c = null;
                }
+            if(newAccount.Chapter_Name__c != oldAccount.Chapter_Name__c 
+               && newAccount.Region_Code__c == oldAccount.Region_Code__c) {
+                newAccount.Region_Code__c = null;
+            }
         }
         //Set primary contact for account
         if(!houseHoldAccountMap.isEmpty()) {

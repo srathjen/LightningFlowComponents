@@ -1788,6 +1788,7 @@ public class ContactService {
 				if (accountMap.containsKey(mpContact.npsp__Primary_Affiliation__c)) {
 					mpContact.Region_Chapter__c = accountMap.get(mpContact.npsp__Primary_Affiliation__c).Chapter_Name__c;
 					mpContact.Hidden_Chapter__c = mpContact.Region_Chapter__c;
+                    mpContact.Region_Code__c = null;
 				}
 			}
 		}
@@ -1798,6 +1799,7 @@ public class ContactService {
 				if (zipChapterMap.containsKey(zip)) {
 					mpContact.Region_Chapter__c = zipChapterMap.get(zip);
 					mpContact.Hidden_Chapter__c = mpContact.Region_Chapter__c;
+                    mpContact.Region_Code__c = null;
 				}
 			}
 		}
@@ -1823,6 +1825,7 @@ public class ContactService {
 			if (htfAccountMap.containsKey(contact.npsp__Primary_Affiliation__c)) {
 				contact.Region_Chapter__c = htfAccountMap.get(contact.npsp__Primary_Affiliation__c).Chapter_Name__c;
 				contact.Hidden_Chapter__c = contact.Region_Chapter__c;
+                contact.Region_Code__c = null;
 			}
 		}
 		try {
