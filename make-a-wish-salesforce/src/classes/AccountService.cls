@@ -280,52 +280,52 @@ public class AccountService {
 		}
 	}
 
-	/**
-	* Populate Chapter Name on the HTF Account
-	* @param accountList
-	*/
-	public static void populateChapterOnHospitalAccount(List<Account> accountsList, Map<Id, Account> oldAccountsMap) {
-		if (accountsList.isEmpty()) {
-			return;
-		}
-		List<String> zipCodesList = new List<String>();
-		Map<String, Id> zipChapterMap = new Map<String, Id>();
-		Map<Id, Account> htfAccountMap = new Map<Id, Account>();
-		for (Account account : accountsList) {
-			if (account.RecordTypeId == Constant_AC.HOSPITAL_TREATMENT_ID && account.Chapter_Name__c == null) {
-				if (oldAccountsMap == null || (account.BillingPostalCode != oldAccountsMap.get(account.Id).BillingPostalCode ||
-						account.ShippingPostalCode != oldAccountsMap.get(account.Id).ShippingPostalCode)) {
-					if (String.isNotBlank(account.BillingPostalCode)) {
-						zipCodesList.add(Utils.splitString(account.BillingPostalCode, '-')[0]);
-						htfAccountMap.put(account.Id, account);
-					} else if (String.isNotBlank(account.ShippingPostalCode)) {
-						zipCodesList.add(Utils.splitString(account.ShippingPostalCode, '-')[0]);
-						htfAccountMap.put(account.Id, account);
-					}
-				}
-			}
-		}
-		zipChapterMap = ChapterStaffRecordSharing_AC.getChapterByZipcode(zipCodesList);
-		for (Account account : htfAccountMap.values()) {
-			String zip;
-			if (String.isNotBlank(account.BillingPostalCode)) {
-				zip = Utils.splitString(account.BillingPostalCode, '-')[0];
-				if (zipChapterMap.containsKey(zip)) {
-					account.Chapter_Name__c = zipChapterMap.get(zip);
-					account.Hidden_Chapter__c = account.Chapter_Name__c;
+    /**
+    * Populate Chapter Name on the HTF Account
+    * @param accountList
+    */
+    public static void populateChapterOnHospitalAccount(List<Account> accountsList, Map<Id, Account> oldAccountsMap) {
+        if (accountsList.isEmpty()) {
+            return;
+        }
+        List<String> zipCodesList = new List<String>();
+        Map<String, Id> zipChapterMap = new Map<String, Id>();
+        Map<Id, Account> htfAccountMap = new Map<Id, Account>();
+        for (Account account : accountsList) {
+            if (account.RecordTypeId == Constant_AC.HOSPITAL_TREATMENT_ID && account.Chapter_Name__c == null) {
+                if (oldAccountsMap == null || (account.BillingPostalCode != oldAccountsMap.get(account.Id).BillingPostalCode ||
+                                               account.ShippingPostalCode != oldAccountsMap.get(account.Id).ShippingPostalCode)) {
+                                                   if (String.isNotBlank(account.BillingPostalCode)) {
+                                                       zipCodesList.add(Utils.splitString(account.BillingPostalCode, '-')[0]);
+                                                       htfAccountMap.put(account.Id, account);
+                                                   } else if (String.isNotBlank(account.ShippingPostalCode)) {
+                                                       zipCodesList.add(Utils.splitString(account.ShippingPostalCode, '-')[0]);
+                                                       htfAccountMap.put(account.Id, account);
+                                                   }
+                                               }
+            }
+        }
+        zipChapterMap = ChapterStaffRecordSharing_AC.getChapterByZipcode(zipCodesList);
+        for (Account account : htfAccountMap.values()) {
+            String zip;
+            if (String.isNotBlank(account.BillingPostalCode)) {
+                zip = Utils.splitString(account.BillingPostalCode, '-')[0];
+                if (zipChapterMap.containsKey(zip)) {
+                    account.Chapter_Name__c = zipChapterMap.get(zip);
+                    account.Hidden_Chapter__c = account.Chapter_Name__c;
                     account.Region_Code__c = null;
-				}
-			} else if (String.isNotBlank(account.ShippingPostalCode)) {
-				zip = Utils.splitString(account.ShippingPostalCode, '-')[0];
-				if (zipChapterMap.containsKey(zip)) {
-					account.Chapter_Name__c = zipChapterMap.get(zip);
-					account.Hidden_Chapter__c = account.Chapter_Name__c;
+                }
+            } else if (String.isNotBlank(account.ShippingPostalCode)) {
+                zip = Utils.splitString(account.ShippingPostalCode, '-')[0];
+                if (zipChapterMap.containsKey(zip)) {
+                    account.Chapter_Name__c = zipChapterMap.get(zip);
+                    account.Hidden_Chapter__c = account.Chapter_Name__c;
                     account.Region_Code__c = null;
-				}
-			}
-		}
-		ContactService.updateRegionChapterOnMedicalProfessional(htfAccountMap);
-	}
+                }
+            }
+        }
+        ContactService.updateRegionChapterOnMedicalProfessional(htfAccountMap);
+    }
 
 	/**
 	* Update account owner to chapter intake manager

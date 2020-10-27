@@ -1750,90 +1750,90 @@ public class ContactService {
 		}
 	}
 
-	/**
-	* Populate region chapter lookup based on primary account chapter relationship
-	* @param contactsList
-	* @param oldContactsMap
-	*/
-	public static void populateRegionChapterOnMedicalProfessional(List<Contact> contactsList, Map<Id, Contact> oldContactsMap) {
-		if (contactsList.isEmpty()) {
-			return;
-		}
-		Set<Id> affiliationIdSet = new Set<Id>();
-		List<Contact> contactAffiliationList = new List<Contact>();
-		List<String> zipCodesList = new List<String>();
-		List<Contact> contactZipList = new List<Contact>();
-		for (Contact con : contactsList) {
-			if (con.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID && con.Region_Chapter__c == null) {
-				if ((oldContactsMap == null && con.npsp__Primary_Affiliation__c != null)
-						|| (oldContactsMap != null && con.npsp__Primary_Affiliation__c != oldContactsMap.get(con.Id).npsp__Primary_Affiliation__c)) {
-					affiliationIdSet.add(con.npsp__Primary_Affiliation__c);
-					contactAffiliationList.add(con);
-				} else if ((oldContactsMap == null && String.isNotBlank(con.MailingPostalCode))
-						|| (oldContactsMap != null && con.MailingPostalCode != oldContactsMap.get(con.Id).MailingPostalCode)) {
-					zipCodesList.add(Utils.splitString(con.MailingPostalCode, '-')[0]);
-					contactZipList.add(con);
-				}
-			}
-		}
-		if (!contactAffiliationList.isEmpty()) {
-			Map<Id, Account> accountMap = new Map<Id, Account>([
-					SELECT Id, Chapter_Name__c
-					FROM Account
-					WHERE Id IN :affiliationIdSet
-					AND RecordTypeId = :Constant_AC.HOSPITAL_TREATMENT_ID
-					AND Chapter_Name__c != null
-			]);
-			for (Contact mpContact : contactAffiliationList) {
-				if (accountMap.containsKey(mpContact.npsp__Primary_Affiliation__c)) {
-					mpContact.Region_Chapter__c = accountMap.get(mpContact.npsp__Primary_Affiliation__c).Chapter_Name__c;
-					mpContact.Hidden_Chapter__c = mpContact.Region_Chapter__c;
+    /**
+    * Populate region chapter lookup based on primary account chapter relationship
+    * @param contactsList
+    * @param oldContactsMap
+    */
+    public static void populateRegionChapterOnMedicalProfessional(List<Contact> contactsList, Map<Id, Contact> oldContactsMap) {
+        if (contactsList.isEmpty()) {
+            return;
+        }
+        Set<Id> affiliationIdSet = new Set<Id>();
+        List<Contact> contactAffiliationList = new List<Contact>();
+        List<String> zipCodesList = new List<String>();
+        List<Contact> contactZipList = new List<Contact>();
+        for (Contact con : contactsList) {
+            if (con.RecordTypeId == Constant_AC.MEDICAL_PROFESSIONAL_RT_ID && con.Region_Chapter__c == null) {
+                if ((oldContactsMap == null && con.npsp__Primary_Affiliation__c != null)
+                    || (oldContactsMap != null && con.npsp__Primary_Affiliation__c != oldContactsMap.get(con.Id).npsp__Primary_Affiliation__c)) {
+                        affiliationIdSet.add(con.npsp__Primary_Affiliation__c);
+                        contactAffiliationList.add(con);
+                    } else if ((oldContactsMap == null && String.isNotBlank(con.MailingPostalCode))
+                               || (oldContactsMap != null && con.MailingPostalCode != oldContactsMap.get(con.Id).MailingPostalCode)) {
+                                   zipCodesList.add(Utils.splitString(con.MailingPostalCode, '-')[0]);
+                                   contactZipList.add(con);
+                               }
+            }
+        }
+        if (!contactAffiliationList.isEmpty()) {
+            Map<Id, Account> accountMap = new Map<Id, Account>([
+                SELECT Id, Chapter_Name__c
+                FROM Account
+                WHERE Id IN :affiliationIdSet
+                AND RecordTypeId = :Constant_AC.HOSPITAL_TREATMENT_ID
+                AND Chapter_Name__c != null
+            ]);
+            for (Contact mpContact : contactAffiliationList) {
+                if (accountMap.containsKey(mpContact.npsp__Primary_Affiliation__c)) {
+                    mpContact.Region_Chapter__c = accountMap.get(mpContact.npsp__Primary_Affiliation__c).Chapter_Name__c;
+                    mpContact.Hidden_Chapter__c = mpContact.Region_Chapter__c;
                     mpContact.Region_Code__c = null;
-				}
-			}
-		}
-		if (!contactZipList.isEmpty()) {
-			Map<String, Id> zipChapterMap = new Map<String, Id>(ChapterStaffRecordSharing_AC.getChapterByZipcode(zipCodesList));
-			for (Contact mpContact : contactZipList) {
-				String zip = Utils.splitString(mpContact.MailingPostalCode, '-')[0];
-				if (zipChapterMap.containsKey(zip)) {
-					mpContact.Region_Chapter__c = zipChapterMap.get(zip);
-					mpContact.Hidden_Chapter__c = mpContact.Region_Chapter__c;
+                }
+            }
+        }
+        if (!contactZipList.isEmpty()) {
+            Map<String, Id> zipChapterMap = new Map<String, Id>(ChapterStaffRecordSharing_AC.getChapterByZipcode(zipCodesList));
+            for (Contact mpContact : contactZipList) {
+                String zip = Utils.splitString(mpContact.MailingPostalCode, '-')[0];
+                if (zipChapterMap.containsKey(zip)) {
+                    mpContact.Region_Chapter__c = zipChapterMap.get(zip);
+                    mpContact.Hidden_Chapter__c = mpContact.Region_Chapter__c;
                     mpContact.Region_Code__c = null;
-				}
-			}
-		}
-	}
-
-	/**
-	* Update region chapter lookup based on primary account chapter relationship
-	* @param htfAccountMap
-	*/
-	public static void updateRegionChapterOnMedicalProfessional(Map<Id, Account> htfAccountMap) {
-		if (htfAccountMap.isEmpty()) {
-			return;
-		}
-		List<Contact> mpContactList = new List<Contact>([
-				SELECT Id, npsp__Primary_Affiliation__c, Region_Chapter__c
-				FROM Contact
-				WHERE npsp__Primary_Affiliation__c IN :htfAccountMap.keySet()
-				AND RecordTypeId = :Constant_AC.MEDICAL_PROFESSIONAL_RT_ID
-				AND Region_Chapter__c = null
-		]);
-
-		for (Contact contact : mpContactList) {
-			if (htfAccountMap.containsKey(contact.npsp__Primary_Affiliation__c)) {
-				contact.Region_Chapter__c = htfAccountMap.get(contact.npsp__Primary_Affiliation__c).Chapter_Name__c;
-				contact.Hidden_Chapter__c = contact.Region_Chapter__c;
+                }
+            }
+        }
+    }
+    
+    /**
+    * Update region chapter lookup based on primary account chapter relationship
+    * @param htfAccountMap
+    */
+    public static void updateRegionChapterOnMedicalProfessional(Map<Id, Account> htfAccountMap) {
+        if (htfAccountMap.isEmpty()) {
+            return;
+        }
+        List<Contact> mpContactList = new List<Contact>([
+            SELECT Id, npsp__Primary_Affiliation__c, Region_Chapter__c
+            FROM Contact
+            WHERE npsp__Primary_Affiliation__c IN :htfAccountMap.keySet()
+            AND RecordTypeId = :Constant_AC.MEDICAL_PROFESSIONAL_RT_ID
+            AND Region_Chapter__c = null
+        ]);
+        
+        for (Contact contact : mpContactList) {
+            if (htfAccountMap.containsKey(contact.npsp__Primary_Affiliation__c)) {
+                contact.Region_Chapter__c = htfAccountMap.get(contact.npsp__Primary_Affiliation__c).Chapter_Name__c;
+                contact.Hidden_Chapter__c = contact.Region_Chapter__c;
                 contact.Region_Code__c = null;
-			}
-		}
-		try {
-			update mpContactList;
-		} catch (Exception e) {
-			createContactDebugLog(mpContactList, 'updateRegionChapterOnMedicalProfessional', e);
-		}
-	}
+            }
+        }
+        try {
+            update mpContactList;
+        } catch (Exception e) {
+            createContactDebugLog(mpContactList, 'updateRegionChapterOnMedicalProfessional', e);
+        }
+    }
 
 	/**
 	* Share contact record and related account if MP type to chapter users based on primary chapter affiliation
