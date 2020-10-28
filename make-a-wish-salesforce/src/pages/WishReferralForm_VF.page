@@ -1432,6 +1432,7 @@
     <script>
         window.addEventListener('load', () => {
             buildValidationLookupFields();
+            turnOffAutocomplete();
         });
 
         function updateHtfFilter(lookupId, value, pluralHint) {
@@ -2247,6 +2248,24 @@
             } catch (err) {
                 // Silently catch error
             }
+        }
+
+        function turnOffAutocomplete(){
+            // Turn off autocomplete for Search Fields
+            document.querySelector('#externalReferrerAccountLookup')
+                .querySelector('input').setAttribute('autocomplete', 'off');
+
+            document.querySelector('#externalReferrerContactLookup')
+                .querySelector('input').setAttribute('autocomplete', 'off');
+
+            document.querySelector('#externalTreatingAccountLookup')
+                .querySelector('input').setAttribute('autocomplete', 'off');
+
+            document.querySelector('#externalTreatingContactLookup')
+                .querySelector('input').setAttribute('autocomplete', 'off');
+
+            document.querySelector('#externalBestContactLookup')
+                .querySelector('input').setAttribute('autocomplete', 'off');
         }
     </script>
     <!-- custom style for referral page -->
