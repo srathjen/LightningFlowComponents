@@ -95,6 +95,22 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Add_HTF_Name_Matches_to_results</name>
+        <label>Add HTF Name Matches to results</label>
+        <locationX>2656</locationX>
+        <locationY>665</locationY>
+        <assignmentItems>
+            <assignToReference>HTFSearchResults</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Get_HTF_Name_Matches</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_NewAC</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Add_MP_to_Search_to_Collection</name>
         <label>Add MP to Search to Collection</label>
         <locationX>2516</locationX>
@@ -152,6 +168,13 @@
             <operator>Assign</operator>
             <value>
                 <elementReference>LoopAccounts</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CountSelectedHTFs</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
             </value>
         </assignmentItems>
         <connector>
@@ -321,13 +344,20 @@
     <assignments>
         <name>AssignContact</name>
         <label>AssignContact</label>
-        <locationX>3312</locationX>
+        <locationX>3350</locationX>
         <locationY>1637</locationY>
         <assignmentItems>
             <assignToReference>ExistingContactSelected</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>SelectedContacts</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CountMPSelections</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
             </value>
         </assignmentItems>
         <connector>
@@ -337,8 +367,8 @@
     <assignments>
         <name>Count_HTF_Dupes</name>
         <label>Count HTF Dupes</label>
-        <locationX>2941</locationX>
-        <locationY>915</locationY>
+        <locationX>2919</locationX>
+        <locationY>903</locationY>
         <assignmentItems>
             <assignToReference>HTFDupeCount</assignToReference>
             <operator>Add</operator>
@@ -566,6 +596,22 @@
         </connector>
     </assignments>
     <assignments>
+        <name>NoSelection</name>
+        <label>NoSelection</label>
+        <locationX>3333</locationX>
+        <locationY>797</locationY>
+        <assignmentItems>
+            <assignToReference>CountSelectedHTFs</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>-1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Select_an_Existing_HTF</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Nullify_MP_Variables</name>
         <label>Nullify MP Variables</label>
         <locationX>2648</locationX>
@@ -633,8 +679,8 @@
     <assignments>
         <name>Nullify_Search_Results</name>
         <label>Nullify Search Results</label>
-        <locationX>3582</locationX>
-        <locationY>1468</locationY>
+        <locationX>3604</locationX>
+        <locationY>1466</locationY>
         <assignmentItems>
             <assignToReference>SelectedContact</assignToReference>
             <operator>Assign</operator>
@@ -848,6 +894,38 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Reset_HTF_Selected</name>
+        <label>Reset HTF Selected</label>
+        <locationX>3129</locationX>
+        <locationY>971</locationY>
+        <assignmentItems>
+            <assignToReference>CountSelectedHTFs</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>LoopAccounts</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Reset_MPSelectionCount</name>
+        <label>Reset MPSelectionCount</label>
+        <locationX>3279</locationX>
+        <locationY>1488</locationY>
+        <assignmentItems>
+            <assignToReference>CountMPSelections</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>SelectedContacts</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Resolved_Best_Contact</name>
         <label>Resolved Best Contact</label>
         <locationX>4146</locationX>
@@ -1052,6 +1130,22 @@
         </assignmentItems>
         <connector>
             <targetReference>Lead_HTF_Lookup_to_Update</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_MP_Count_for_Alert</name>
+        <label>Set MP Count for Alert</label>
+        <locationX>3232</locationX>
+        <locationY>1635</locationY>
+        <assignmentItems>
+            <assignToReference>CountMPSelections</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>-1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Select_an_Existing_MP</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -1502,9 +1596,9 @@
     </decisions>
     <decisions>
         <name>Create_New_Selected</name>
-        <label>Create New Selected?</label>
-        <locationX>3329</locationX>
-        <locationY>907</locationY>
+        <label>Create New Selected? Non Selected?</label>
+        <locationX>3325</locationX>
+        <locationY>911</locationY>
         <defaultConnector>
             <targetReference>Get_Existing_HTF_Values</targetReference>
         </defaultConnector>
@@ -1524,12 +1618,27 @@
             </connector>
             <label>Yes Create New</label>
         </rules>
+        <rules>
+            <name>No_HTF_Selected</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>CountSelectedHTFs</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NoSelection</targetReference>
+            </connector>
+            <label>No HTF Selected</label>
+        </rules>
     </decisions>
     <decisions>
         <name>Create_New_Selected_0</name>
         <label>Create New Selected?</label>
-        <locationX>3394</locationX>
-        <locationY>1482</locationY>
+        <locationX>3436</locationX>
+        <locationY>1478</locationY>
         <defaultConnector>
             <targetReference>Get_State</targetReference>
         </defaultConnector>
@@ -1548,6 +1657,21 @@
                 <targetReference>Create_New_0</targetReference>
             </connector>
             <label>Yes Create New</label>
+        </rules>
+        <rules>
+            <name>No_Selection_MP</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>CountMPSelections</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_MP_Count_for_Alert</targetReference>
+            </connector>
+            <label>No Selection MP</label>
         </rules>
     </decisions>
     <decisions>
@@ -2487,15 +2611,12 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <name>Loop_HTF_Name_Matches</name>
         <label>Loop HTF Name Matches</label>
         <locationX>2623</locationX>
-        <locationY>739</locationY>
+        <locationY>786</locationY>
         <collectionReference>Get_HTF_Name_Matches</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
             <targetReference>Loop_HTF_Search_Results</targetReference>
         </nextValueConnector>
-        <noMoreValuesConnector>
-            <targetReference>Create_NewAC</targetReference>
-        </noMoreValuesConnector>
     </loops>
     <loops>
         <name>Loop_HTF_Search_Results</name>
@@ -2556,8 +2677,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <loops>
         <name>SelectedContacts</name>
         <label>SelectedContacts</label>
-        <locationX>3316</locationX>
-        <locationY>1473</locationY>
+        <locationX>3348</locationX>
+        <locationY>1476</locationY>
         <collectionReference>SelectedContact</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -2923,20 +3044,34 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <recordLookups>
         <name>Get_HTF_Name_Matches</name>
         <label>Get HTF Name Matches</label>
-        <locationX>2513</locationX>
-        <locationY>730</locationY>
+        <locationX>2514</locationX>
+        <locationY>729</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Loop_HTF_Name_Matches</targetReference>
+            <targetReference>Add_HTF_Name_Matches_to_results</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Error_Handling_0</targetReference>
         </faultConnector>
         <filters>
             <field>Name</field>
+            <operator>Contains</operator>
+            <value>
+                <elementReference>HTFtoSearch.Name</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Alias__c</field>
             <operator>EqualTo</operator>
             <value>
                 <elementReference>HTFtoSearch.Name</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>HTFRTID</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
@@ -3127,8 +3262,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <recordLookups>
         <name>Get_State</name>
         <label>Get Existing MP State</label>
-        <locationX>3486</locationX>
-        <locationY>1460</locationY>
+        <locationX>3533</locationX>
+        <locationY>1475</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Nullify_Search_Results</targetReference>
@@ -3428,7 +3563,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <screens>
         <name>Add_Existing_0_0</name>
         <label>Confirm Existing Contact</label>
-        <locationX>3684</locationX>
+        <locationX>3703</locationX>
         <locationY>1466</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -3931,7 +4066,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>LoopAccounts</targetReference>
+            <targetReference>Reset_HTF_Selected</targetReference>
         </connector>
         <fields>
             <name>HTFtoSearchRecord</name>
@@ -4086,6 +4221,21 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
+            <name>SelectionAlert</name>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;PLEASE MAKE A SELECTION.&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>CountSelectedHTFs</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <numberValue>-1.0</numberValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
             <name>SelectHTF</name>
             <extensionName>c:datatableFSC</extensionName>
             <fieldType>ComponentInstance</fieldType>
@@ -4232,13 +4382,13 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <screens>
         <name>Select_an_Existing_MP</name>
         <label>Select an Existing MP</label>
-        <locationX>3229</locationX>
-        <locationY>1473</locationY>
+        <locationX>3198</locationX>
+        <locationY>1484</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>SelectedContacts</targetReference>
+            <targetReference>Reset_MPSelectionCount</targetReference>
         </connector>
         <fields>
             <name>UnmatchedMPtoSearchRecord</name>
@@ -4424,6 +4574,21 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <name>MPSearchResultRecords</name>
             <fieldText>&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 16px; color: rgb(9, 140, 0);&quot;&gt;Select Matching MP:&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>NoMPSelectionAlert</name>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;color: rgb(255, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;PLEASE MAKE A SELECTION.&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>CountMPSelections</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <numberValue>-1.0</numberValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
         </fields>
         <fields>
             <name>SelectMPs</name>
@@ -4956,6 +5121,28 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>CountMPSelections</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+    <variables>
+        <name>CountSelectedHTFs</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
     </variables>
     <variables>
         <name>CreateNewAccount</name>
