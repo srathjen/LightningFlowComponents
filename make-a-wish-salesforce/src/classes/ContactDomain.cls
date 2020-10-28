@@ -103,6 +103,10 @@ public class ContactDomain extends trac_TriggerHandlerBase {
 					newContact.is_Active_Volunteer__c = false;
 				}
 			}
+            if(newContact.Region_Chapter__c != oldContact.Region_Chapter__c 
+               && newContact.Region_Code__c == oldContact.Region_Code__c) {
+                newContact.Region_Code__c = null;
+            }
 		}
 		wishChildIdSet = ContactService.updateWishChildContactInfo(newContactsList);
 		ContactService.updateFamilyContactDetails(wishChildIdSet, newContactsList);
