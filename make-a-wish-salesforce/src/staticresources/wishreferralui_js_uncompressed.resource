@@ -99,7 +99,7 @@ function getRadioVal(form, name) {
 
 // default select option
 $("select")
-  .not(".state,.multi,.stateOptional")
+  .not(".state,.multi")
   .each(function () {
     $(this).find("option:first").remove(); // remove first
     if ($(this).attr("id") == "j_id0:frm:diagnosisYear") {
@@ -313,14 +313,6 @@ function stateFunc() {
   //$('.state').chosen({disable_search:"true", placeholder_text_single: "Please Select a State", width:"100%"});
 }
 stateFunc();
-
-function stateFuncOptional() {
-  $("select.stateOptional option:first").remove(); // remove first
-  $(".stateOptional").prepend(
-    '<option disabled="disabled" selected="selected">Please select a State (Optional)</option>'
-  );
-}
-stateFuncOptional();
 // $('.chosen').on('change', function() {
 //     var stateParents = $( this ).parents().parents();
 //     $(stateParents).removeClass( "has-error" ).children('.col-md-3').children('label').css('color','');
@@ -704,6 +696,8 @@ $(".repeatMedProf").on("change", function () {
       $(this).val("");
       });
     }
+    $(".trtmpaffphone").val($(".refmpaffphone").val());
+    $(".trtmpaffemail").val($(".refmpaffemail").val());
     $(".trtMpInfo").css("display", "none");
     $(".repeatMedProfBest").css("display", "none");
   } else if (checkVisibleCopy == false) {
@@ -712,6 +706,7 @@ $(".repeatMedProf").on("change", function () {
       $(this).val("");
     });
     $("[id$=msalutation],[id$=mcategory],[id$=mspecialty],[id$=trthtfdept]").prop("selectedIndex", 0);
+    $("[id$=trtmpaffphone], [id$=trtmpaffemail]").val("");
     $(".trtMpInfo").css("display", "block");
   }
 });
@@ -736,6 +731,8 @@ $(".repeatMedProf").on("change", function () {
           $(this).val("");
         });
       }
+      $(".bestmpaffphone").val($(".refmpaffphone").val());
+      $(".bestNewAffEmail").val($(".refmpaffemail").val());
       $(".bestMpInfo").css("display", "none");
       $(".repeatMedProf").css("display", "none");
     } else if (checkVisibleCopy == false) {
@@ -744,6 +741,7 @@ $(".repeatMedProf").on("change", function () {
         $(this).val("");
       });
       $("[id$=bsalutation],[id$=bcategory],[id$=bspecialty]").prop("selectedIndex", 0);
+      $("[id$=bestmpaffphone], [id$=bestmpaffemail]").val("");
       $(".bestMpInfo").css("display", "block");
     }
   });
