@@ -80,7 +80,8 @@ public with sharing class LookupSObjectCtlr {
 						fieldValues.add(String.valueOf(so.get(f.trim())));
 					}
 				}
-				r.Description = String.format(formattedOutput, fieldValues);
+				String cleanFormattedOutput = cleanFormattedOutput(fieldValues, formattedOutput);
+				r.Description = String.format(cleanFormattedOutput, fieldValues);
 				results.add(r);
 			}
 		}
@@ -108,7 +109,8 @@ public with sharing class LookupSObjectCtlr {
 			result.Id = (Id) objects[0].get('Id');
 			for (String f : listFields) {
 				fieldValues.add(String.valueOf(objects[0].get(f.trim())));
-				result.Description = String.format(formattedOutput, fieldValues);
+				String cleanFormattedOutput = cleanFormattedOutput(fieldValues, formattedOutput);
+				result.Description = String.format(cleanFormattedOutput, fieldValues);
 			}
 		}
 		return JSON.serialize(result);
@@ -127,6 +129,37 @@ public with sharing class LookupSObjectCtlr {
 			}
 		}
 		return filter;
+	}
+
+	private static String cleanFormattedOutput(List<String> fieldValues, String formattedOutput){
+		List<String> formattedOutputGroup = new List<String>();
+		String token = '';
+		List<String> tokens = formattedOutput.splitByCharacterType();
+		for(Integer i=0; i<tokens.size(); i++){
+			String s = tokens[i];
+			if(s.equals('{') && token.contains('{') && token.contains('}')){
+				formattedOutputGroup.add(token);
+				token = '';
+				token += s;
+			} else if(tokens.size() == i+1){
+				token += s;
+				formattedOutputGroup.add(token);
+			} else {
+				token += s;
+			}
+		}
+		List<String> formattedOutputList = new List<String>();
+		for(Integer i=0; i<fieldValues.size(); i++){
+			if(String.isNotEmpty(fieldValues[i])){
+				formattedOutputList.add(formattedOutputGroup[i]);
+			}
+		}
+		String cleanedFormattedOutput = String.join(formattedOutputList, '');
+		Integer lastBracket = cleanedFormattedOutput.lastIndexOf('}');
+		if(!String.valueOf(cleanedFormattedOutput.getChars()).equals(String.valueOf(lastBracket))){
+			cleanedFormattedOutput = cleanedFormattedOutput.substring(0, lastBracket+1);
+		}
+		return cleanedFormattedOutput;
 	}
 
 	// Wrapper class
