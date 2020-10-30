@@ -19,19 +19,25 @@ public class LeadConvertService {
 				WHERE IsConverted = TRUE
 				LIMIT 1
 		];
-		for (Lead lead : qualifiedLeadMap.values()) {
-			// Add all updated leads to the LeadConvert object
-			Database.LeadConvert lc = new Database.LeadConvert();
-			lc.setLeadId(lead.Id);
-			lc.setDoNotCreateOpportunity(true);
-			lc.setConvertedStatus(convertStatus.MasterLabel);
-			leadConverts.add(lc);
-		}
-		if (!leadConverts.isEmpty()) {
-			List<Database.LeadConvertResult> convertResults = Database.convertLead(leadConverts);
-			for (Database.LeadConvertResult leadResult : convertResults) {
-				leadIdConvertedByContactIdMap.put(leadResult.getLeadId(), leadResult.getContactId());
+		try {
+			for (Lead lead : qualifiedLeadMap.values()) {
+				// Add all updated leads to the LeadConvert object
+				Database.LeadConvert lc = new Database.LeadConvert();
+				lc.setLeadId(lead.Id);
+				lc.setDoNotCreateOpportunity(true);
+				lc.setConvertedStatus(convertStatus.MasterLabel);
+				leadConverts.add(lc);
 			}
+			if (!leadConverts.isEmpty()) {
+				List<Database.LeadConvertResult> convertResults = Database.convertLead(leadConverts);
+				for (Database.LeadConvertResult leadResult : convertResults) {
+					leadIdConvertedByContactIdMap.put(leadResult.getLeadId(), leadResult.getContactId());
+				}
+			}
+		} catch (Exception ex) {
+			System.debug('Lead Convert Exception: ' + ex);
+			new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadConvertService', 'convertLead', qualifiedLeadMap.values()[0].Id,
+					ex, 'Lead convert process failed, please contact your administrator.'));
 		}
 		return leadIdConvertedByContactIdMap;
 	}
