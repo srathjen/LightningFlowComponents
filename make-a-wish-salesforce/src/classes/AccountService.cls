@@ -291,22 +291,33 @@ public class AccountService {
         List<String> zipCodesList = new List<String>();
         Map<String, Id> zipChapterMap = new Map<String, Id>();
         Map<Id, Account> htfAccountMap = new Map<Id, Account>();
+        List<Account> htfAccountList = new List<Account>();
         for (Account account : accountsList) {
             if (account.RecordTypeId == Constant_AC.HOSPITAL_TREATMENT_ID && account.Chapter_Name__c == null) {
-                if (oldAccountsMap == null || (account.BillingPostalCode != oldAccountsMap.get(account.Id).BillingPostalCode ||
-                                               account.ShippingPostalCode != oldAccountsMap.get(account.Id).ShippingPostalCode)) {
-                                                   if (String.isNotBlank(account.BillingPostalCode)) {
-                                                       zipCodesList.add(Utils.splitString(account.BillingPostalCode, '-')[0]);
-                                                       htfAccountMap.put(account.Id, account);
-                                                   } else if (String.isNotBlank(account.ShippingPostalCode)) {
-                                                       zipCodesList.add(Utils.splitString(account.ShippingPostalCode, '-')[0]);
-                                                       htfAccountMap.put(account.Id, account);
-                                                   }
-                                               }
+                if(oldAccountsMap == null) {
+                    if (String.isNotBlank(account.BillingPostalCode)) {
+                        zipCodesList.add(Utils.splitString(account.BillingPostalCode, '-')[0]);
+                        htfAccountList.add(account);
+                    } else if (String.isNotBlank(account.ShippingPostalCode)) {
+                        zipCodesList.add(Utils.splitString(account.ShippingPostalCode, '-')[0]);
+                        htfAccountList.add(account);
+                    }
+                } else if((account.BillingPostalCode != oldAccountsMap.get(account.Id).BillingPostalCode 
+                           || account.ShippingPostalCode != oldAccountsMap.get(account.Id).ShippingPostalCode)) {
+                    if (String.isNotBlank(account.BillingPostalCode)) {
+                        zipCodesList.add(Utils.splitString(account.BillingPostalCode, '-')[0]);
+                        htfAccountList.add(account);
+                        htfAccountMap.put(account.Id, account);
+                    } else if (String.isNotBlank(account.ShippingPostalCode)) {
+                        zipCodesList.add(Utils.splitString(account.ShippingPostalCode, '-')[0]);
+                        htfAccountList.add(account);
+                        htfAccountMap.put(account.Id, account);
+                    }
+                }
             }
         }
         zipChapterMap = ChapterStaffRecordSharing_AC.getChapterByZipcode(zipCodesList);
-        for (Account account : htfAccountMap.values()) {
+        for (Account account : htfAccountList) {
             String zip;
             if (String.isNotBlank(account.BillingPostalCode)) {
                 zip = Utils.splitString(account.BillingPostalCode, '-')[0];
