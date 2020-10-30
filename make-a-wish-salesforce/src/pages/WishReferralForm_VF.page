@@ -340,7 +340,7 @@
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Name}</label></div>
                                 <div class="col-sm-6">
                                     <apex:inputText value="{!currLead.Referring_MP_HTF_Name__c}"
-                                                    styleClass="form-control refhtfname alpha-only"
+                                                    styleClass="form-control refhtfname"
                                                     html-placeholder="{!$Label.Wish_Referral_Name}" id="refhtfname"
                                                     maxlength="50"/>
                                 </div>
@@ -1105,7 +1105,7 @@
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Name}</label></div>
                                     <div class="col-sm-6">
                                         <apex:inputText value="{!treatingHtfName}"
-                                                        styleClass="form-control trthtfname alpha-only"
+                                                        styleClass="form-control trthtfname"
                                                         html-placeholder="{!$Label.Wish_Referral_Name}" id="trthtfname"
                                                         maxlength="50"/>
                                     </div>
