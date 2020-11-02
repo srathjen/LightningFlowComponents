@@ -8279,6 +8279,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.RecordType__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.Record_Ownership_Notes__c</field>
         <readable>true</readable>
     </fieldPermissions>
