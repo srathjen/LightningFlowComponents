@@ -451,6 +451,7 @@
     <members>Account.Hospital_Treatment_Facility_Matching</members>
     <members>Contact.Contacts_with_Duplicate_Leads</members>
     <members>Contact.Medical_Professional_Matching</members>
+    <members>Contact.NPSP_Contact_Personal_Email_Match</members>
     <members>Contact.Standard_Rule_for_Contacts_with_Duplicate_Leads</members>
     <name>DuplicateRule</name>
   </types>

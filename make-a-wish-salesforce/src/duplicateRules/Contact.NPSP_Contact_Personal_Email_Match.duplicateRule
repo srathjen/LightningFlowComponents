@@ -15,5 +15,5 @@
     <operationsOnInsert>Alert</operationsOnInsert>
     <operationsOnInsert>Report</operationsOnInsert>
     <securityOption>EnforceSharingRules</securityOption>
-    <sortOrder>2</sortOrder>
+    <sortOrder>1</sortOrder>
 </DuplicateRule>
