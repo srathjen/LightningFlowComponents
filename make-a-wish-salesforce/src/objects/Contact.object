@@ -7117,6 +7117,18 @@ COMMENTS"</description>
         <visibleLines>3</visibleLines>
     </fields>
     <fields>
+        <fullName>RecordType__c</fullName>
+        <description>Stored the Contact Recordtype as a text value for use in matching rules by recordtype.</description>
+        <externalId>false</externalId>
+        <label>RecordType Matching</label>
+        <length>75</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Record_Ownership_Notes__c</fullName>
         <description>Used to indicate reasons for exceptions to standard record ownership rules.</description>
         <externalId>false</externalId>

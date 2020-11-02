@@ -11,10 +11,6 @@
         <objectMapping>
             <inputObject>Contact</inputObject>
             <mappingFields>
-                <inputField>MailingPostalCode</inputField>
-                <outputField>PostalCode</outputField>
-            </mappingFields>
-            <mappingFields>
                 <inputField>FirstName</inputField>
                 <outputField>FirstName</outputField>
             </mappingFields>
@@ -39,6 +35,10 @@
                 <outputField>Street</outputField>
             </mappingFields>
             <mappingFields>
+                <inputField>MailingPostalCode</inputField>
+                <outputField>PostalCode</outputField>
+            </mappingFields>
+            <mappingFields>
                 <inputField>Title</inputField>
                 <outputField>Title</outputField>
             </mappingFields>
@@ -55,5 +55,5 @@
     <operationsOnInsert>Report</operationsOnInsert>
     <operationsOnUpdate>Report</operationsOnUpdate>
     <securityOption>EnforceSharingRules</securityOption>
-    <sortOrder>3</sortOrder>
+    <sortOrder>2</sortOrder>
 </DuplicateRule>

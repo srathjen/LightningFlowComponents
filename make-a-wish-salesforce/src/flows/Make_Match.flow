@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <actionCalls>
+        <name>BeforeCreateMPDupeScan</name>
+        <label>BeforeCreateMPDupeScan</label>
+        <locationX>4229</locationX>
+        <locationY>1892</locationY>
+        <actionName>ContactService</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>CountMPMatches</targetReference>
+        </connector>
+        <inputParameters>
+            <name>contactInput</name>
+            <value>
+                <elementReference>BeforeCreateDupeCheckMP</elementReference>
+            </value>
+        </inputParameters>
+        <outputParameters>
+            <assignToReference>BeforeCreateMPMatches</assignToReference>
+            <name>output</name>
+        </outputParameters>
+    </actionCalls>
+    <actionCalls>
         <name>Get_Duplicate_HTFs</name>
         <label>Get Duplicate HTFs</label>
-        <locationX>2169</locationX>
-        <locationY>715</locationY>
+        <locationX>2249</locationX>
+        <locationY>870</locationY>
         <actionName>AccountService</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -25,10 +46,31 @@
         </outputParameters>
     </actionCalls>
     <actionCalls>
+        <name>Get_Duplicate_HTFs_0</name>
+        <label>Get Duplicate HTFs</label>
+        <locationX>4010</locationX>
+        <locationY>517</locationY>
+        <actionName>AccountService</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Loop_HTF_Dupe_Matches</targetReference>
+        </connector>
+        <inputParameters>
+            <name>accountInput</name>
+            <value>
+                <elementReference>BeforeCreateDupeCheckHTF</elementReference>
+            </value>
+        </inputParameters>
+        <outputParameters>
+            <assignToReference>BeforeCreateHTFMatches</assignToReference>
+            <name>output</name>
+        </outputParameters>
+    </actionCalls>
+    <actionCalls>
         <name>Get_MP_Duplicates</name>
         <label>Get MP Duplicates</label>
-        <locationX>2273</locationX>
-        <locationY>1393</locationY>
+        <locationX>2389</locationX>
+        <locationY>1915</locationY>
         <actionName>ContactService</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -51,8 +93,8 @@
     <assignments>
         <name>Add_0_0</name>
         <label>AddMP</label>
-        <locationX>2402</locationX>
-        <locationY>1399</locationY>
+        <locationX>2519</locationX>
+        <locationY>1922</locationY>
         <assignmentItems>
             <assignToReference>MPtoSearch.Hidden_Chapter_Name__c</assignToReference>
             <operator>Assign</operator>
@@ -81,8 +123,8 @@
     <assignments>
         <name>Add_Create_to_to_Search_Results</name>
         <label>Add Create to to Search Results</label>
-        <locationX>2927</locationX>
-        <locationY>1398</locationY>
+        <locationX>3044</locationX>
+        <locationY>1920</locationY>
         <assignmentItems>
             <assignToReference>MPSearchResults</assignToReference>
             <operator>Add</operator>
@@ -95,10 +137,26 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Add_Create_to_to_Search_Results_0</name>
+        <label>Add Create to to Search Results</label>
+        <locationX>5056</locationX>
+        <locationY>2037</locationY>
+        <assignmentItems>
+            <assignToReference>BeforeCreateMPMatches</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>CreateNewContact</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Select_a_Before_Create_Matching_MP</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Add_HTF_Name_Matches_to_results</name>
         <label>Add HTF Name Matches to results</label>
-        <locationX>2656</locationX>
-        <locationY>665</locationY>
+        <locationX>2733</locationX>
+        <locationY>888</locationY>
         <assignmentItems>
             <assignToReference>HTFSearchResults</assignToReference>
             <operator>Add</operator>
@@ -113,8 +171,8 @@
     <assignments>
         <name>Add_MP_to_Search_to_Collection</name>
         <label>Add MP to Search to Collection</label>
-        <locationX>2516</locationX>
-        <locationY>1400</locationY>
+        <locationX>2633</locationX>
+        <locationY>1922</locationY>
         <assignmentItems>
             <assignToReference>MPtoSearchCollection</assignToReference>
             <operator>Add</operator>
@@ -127,10 +185,33 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Add_State</name>
+        <label>Add State</label>
+        <locationX>4502</locationX>
+        <locationY>1884</locationY>
+        <assignmentItems>
+            <assignToReference>BeforeCreateDupeCheckMP.MailingState</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ScreenDefaultState</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateDupeCheckMP.Hidden_Chapter_Name__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ChapterName_0.recordName</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>AddtoBeforeCreateMPCollection</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Add_to_AC_Search_Results</name>
         <label>Add to AC Search Results</label>
-        <locationX>2852</locationX>
-        <locationY>742</locationY>
+        <locationX>2933</locationX>
+        <locationY>898</locationY>
         <assignmentItems>
             <assignToReference>HTFSearchResults</assignToReference>
             <operator>Add</operator>
@@ -143,26 +224,42 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Add_to_HTF_Search_Results</name>
-        <label>Add to HTF Search Results</label>
-        <locationX>2623</locationX>
-        <locationY>1146</locationY>
+        <name>Add_to_AC_Search_Results_0</name>
+        <label>Add to AC Search Results</label>
+        <locationX>4299</locationX>
+        <locationY>799</locationY>
         <assignmentItems>
-            <assignToReference>HTFSearchResults</assignToReference>
+            <assignToReference>BeforeCreateHTFMatches</assignToReference>
             <operator>Add</operator>
             <value>
-                <elementReference>Loop_HTF_Name_Matches</elementReference>
+                <elementReference>CreateNewAccount</elementReference>
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Loop_HTF_Name_Matches</targetReference>
+            <targetReference>Select_a_Before_Create_Matching_HTF</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>AddtoBeforeCreateMPCollection</name>
+        <label>AddtoBeforeCreateMPCollection</label>
+        <locationX>4643</locationX>
+        <locationY>1884</locationY>
+        <assignmentItems>
+            <assignToReference>BeforeCreateMPCollection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>BeforeCreateDupeCheckMP</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>DuplicateDetected</targetReference>
         </connector>
     </assignments>
     <assignments>
         <name>Assign_Account</name>
         <label>Assign Account</label>
-        <locationX>3233</locationX>
-        <locationY>1013</locationY>
+        <locationX>3468</locationX>
+        <locationY>1492</locationY>
         <assignmentItems>
             <assignToReference>ExistingAccountSelected</assignToReference>
             <operator>Assign</operator>
@@ -182,10 +279,33 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_Account_0</name>
+        <label>Assign Account</label>
+        <locationX>3839</locationX>
+        <locationY>1015</locationY>
+        <assignmentItems>
+            <assignToReference>ExistingAccountSelected</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Selected_Before_HTF</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CountSelectedHTFs</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Selected_Before_HTF</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Assign_Best_Contact_HTF_ID</name>
         <label>Assign Best Contact HTF ID</label>
         <locationX>1085</locationX>
-        <locationY>853</locationY>
+        <locationY>1277</locationY>
         <assignmentItems>
             <assignToReference>BestHTFID</assignToReference>
             <operator>Assign</operator>
@@ -201,7 +321,7 @@
         <name>Assign_Best_Contact_ID</name>
         <label>Assign Best Contact ID</label>
         <locationX>924</locationX>
-        <locationY>846</locationY>
+        <locationY>1270</locationY>
         <assignmentItems>
             <assignToReference>BestContactID</assignToReference>
             <operator>Assign</operator>
@@ -214,26 +334,10 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Assign_Department</name>
-        <label>Assign Department</label>
-        <locationX>3362</locationX>
-        <locationY>651</locationY>
-        <assignmentItems>
-            <assignToReference>DepartmentSelected</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>Department</elementReference>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>Add_Existing_0</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
         <name>Assign_Existing_MP_to_ID</name>
         <label>Assign Existing MP to ID</label>
-        <locationX>3802</locationX>
-        <locationY>1466</locationY>
+        <locationX>4329</locationX>
+        <locationY>2452</locationY>
         <assignmentItems>
             <assignToReference>NewMPID</assignToReference>
             <operator>Assign</operator>
@@ -249,7 +353,7 @@
         <name>Assign_Referring_MP_ID</name>
         <label>Assign Referring MP ID</label>
         <locationX>358</locationX>
-        <locationY>831</locationY>
+        <locationY>1255</locationY>
         <assignmentItems>
             <assignToReference>ReferringMPID</assignToReference>
             <operator>Assign</operator>
@@ -265,7 +369,7 @@
         <name>Assign_Referring_MP_ID_0</name>
         <label>Assign Referring HTF ID</label>
         <locationX>511</locationX>
-        <locationY>834</locationY>
+        <locationY>1258</locationY>
         <assignmentItems>
             <assignToReference>ReferringHTFID</assignToReference>
             <operator>Assign</operator>
@@ -280,8 +384,8 @@
     <assignments>
         <name>Assign_Search_HTF_to_Collection</name>
         <label>Assign Search HTF to Collection</label>
-        <locationX>2066</locationX>
-        <locationY>716</locationY>
+        <locationX>2146</locationX>
+        <locationY>872</locationY>
         <assignmentItems>
             <assignToReference>HTFtoSearchCollection</assignToReference>
             <operator>Add</operator>
@@ -296,8 +400,8 @@
     <assignments>
         <name>Assign_Search_HTF_to_Collection_0</name>
         <label>Assign Search HTF to Collection</label>
-        <locationX>2383</locationX>
-        <locationY>730</locationY>
+        <locationX>2463</locationX>
+        <locationY>885</locationY>
         <assignmentItems>
             <assignToReference>HTFtoSearchCollection</assignToReference>
             <operator>Add</operator>
@@ -310,10 +414,26 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Assign_Search_HTF_to_Collection_0_0</name>
+        <label>Assign Search HTF to Collection</label>
+        <locationX>4348</locationX>
+        <locationY>522</locationY>
+        <assignmentItems>
+            <assignToReference>BeforeCreateHTFCollection</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>BeforeCreateDupeCheckHTF</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>DuplicateDetected_0_0</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Assign_Treating_HTF_ID</name>
         <label>Assign Treating HTF ID</label>
         <locationX>651</locationX>
-        <locationY>841</locationY>
+        <locationY>1265</locationY>
         <assignmentItems>
             <assignToReference>TreatingHTFID</assignToReference>
             <operator>Assign</operator>
@@ -329,7 +449,7 @@
         <name>Assign_Treating_MP_ID</name>
         <label>Assign Treating MP ID</label>
         <locationX>782</locationX>
-        <locationY>841</locationY>
+        <locationY>1265</locationY>
         <assignmentItems>
             <assignToReference>TreatingMPID</assignToReference>
             <operator>Assign</operator>
@@ -344,8 +464,8 @@
     <assignments>
         <name>AssignContact</name>
         <label>AssignContact</label>
-        <locationX>3350</locationX>
-        <locationY>1637</locationY>
+        <locationX>3553</locationX>
+        <locationY>2701</locationY>
         <assignmentItems>
             <assignToReference>ExistingContactSelected</assignToReference>
             <operator>Assign</operator>
@@ -365,10 +485,91 @@
         </connector>
     </assignments>
     <assignments>
+        <name>AssignContact_0</name>
+        <label>AssignContact</label>
+        <locationX>4645</locationX>
+        <locationY>2230</locationY>
+        <assignmentItems>
+            <assignToReference>ExistingContactSelected</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>SelectedBeforeContacts</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CountMPSelections</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>SelectedBeforeContacts</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>BeforeCreateMPDupeCheck</name>
+        <label>BeforeCreateMPDupeCheck</label>
+        <locationX>4114</locationX>
+        <locationY>1889</locationY>
+        <assignmentItems>
+            <assignToReference>BeforeCreateDupeCheckMP.FirstName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MPName.firstName</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateDupeCheckMP.LastName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MPName.lastName</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateDupeCheckMP.Email</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MPEmail.value</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateDupeCheckMP.Phone</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MPPhone.value</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateDupeCheckMP.MailingCity</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MPCity</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateDupeCheckMP.RecordTypeId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MPRTID</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateDupeCheckMP.RecordType__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Medical Professional</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>BeforeCreateMPDupeScan</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Count_HTF_Dupes</name>
         <label>Count HTF Dupes</label>
-        <locationX>2919</locationX>
-        <locationY>903</locationY>
+        <locationX>2999</locationX>
+        <locationY>1058</locationY>
         <assignmentItems>
             <assignToReference>HTFDupeCount</assignToReference>
             <operator>Add</operator>
@@ -381,10 +582,42 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Count_HTF_Matches</name>
+        <label>Count HTF Matches</label>
+        <locationX>4127</locationX>
+        <locationY>356</locationY>
+        <assignmentItems>
+            <assignToReference>BeforeCreateHTFMatchCount</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_HTF_Dupe_Matches</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Count_Matches</name>
+        <label>Count Matches</label>
+        <locationX>4346</locationX>
+        <locationY>1712</locationY>
+        <assignmentItems>
+            <assignToReference>BeforeCreateMPMatchCount</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>CountMPMatches</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Count_MP_Dupes</name>
         <label>Count MP Dupes</label>
-        <locationX>3024</locationX>
-        <locationY>1530</locationY>
+        <locationX>3140</locationX>
+        <locationY>2052</locationY>
         <assignmentItems>
             <assignToReference>MPDupeCount</assignToReference>
             <operator>Add</operator>
@@ -399,8 +632,8 @@
     <assignments>
         <name>Create_New_MP</name>
         <label>Create New MP</label>
-        <locationX>2829</locationX>
-        <locationY>1397</locationY>
+        <locationX>2945</locationX>
+        <locationY>1920</locationY>
         <assignmentItems>
             <assignToReference>CreateNewContact.LastName</assignToReference>
             <operator>Assign</operator>
@@ -415,8 +648,8 @@
     <assignments>
         <name>Create_NewAC</name>
         <label>Create New</label>
-        <locationX>2758</locationX>
-        <locationY>745</locationY>
+        <locationX>2838</locationX>
+        <locationY>900</locationY>
         <assignmentItems>
             <assignToReference>CreateNewAccount.Name</assignToReference>
             <operator>Assign</operator>
@@ -429,10 +662,82 @@
         </connector>
     </assignments>
     <assignments>
+        <name>HTF_Screen_Values</name>
+        <label>HTF Screen Values</label>
+        <locationX>3410</locationX>
+        <locationY>522</locationY>
+        <assignmentItems>
+            <assignToReference>ScreenValueHTFName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>HTF_Name</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenValueAlias</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Alias</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenValueHTFStreet</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>HTFStreetAddress</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenValueHTFCity</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>HTFCity</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenValueHTFState</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>HTFState</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenValueHTFZip</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Zip_Code</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenValueHTFChapter</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ChapterName.recordId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>DepartmentSelected</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Department</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenValueHTFPhone</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>HTFPhone.value</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Zip_Or_Chapter_Populated</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>HTF_To_Search_Assignment_0</name>
         <label>HTF To Search Assignment</label>
-        <locationX>1956</locationX>
-        <locationY>715</locationY>
+        <locationX>2036</locationX>
+        <locationY>870</locationY>
         <assignmentItems>
             <assignToReference>HTFtoSearch.Name</assignToReference>
             <operator>Assign</operator>
@@ -482,8 +787,8 @@
     <assignments>
         <name>HTF_To_Search_Assignment_0_0</name>
         <label>HTF To Search Assignment</label>
-        <locationX>2292</locationX>
-        <locationY>876</locationY>
+        <locationX>2373</locationX>
+        <locationY>1032</locationY>
         <assignmentItems>
             <assignToReference>HTFtoSearch.Name</assignToReference>
             <operator>Assign</operator>
@@ -538,10 +843,84 @@
         </connector>
     </assignments>
     <assignments>
+        <name>HTF_To_Search_Assignment_0_0_0</name>
+        <label>HTF To Search Assignment</label>
+        <locationX>3897</locationX>
+        <locationY>515</locationY>
+        <assignmentItems>
+            <assignToReference>BeforeCreateDupeCheckHTF.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>HTF_Name</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateDupeCheckHTF.Phone</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Alias</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateDupeCheckHTF.BillingStreet</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>HTFStreetAddress</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateDupeCheckHTF.BillingPostalCode</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Zip_Code</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateDupeCheckHTF.RecordTypeId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>HTFRTID</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateDupeCheckHTF.Chapter_Name__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ChapterName.recordId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateDupeCheckHTF.Chapter_Name_Text__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ChapterName.recordName</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_Duplicate_HTFs_0</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>HTF_To_Search_Assignment_0_0_0_0</name>
+        <label>HTF To Search Assignment</label>
+        <locationX>4237</locationX>
+        <locationY>520</locationY>
+        <assignmentItems>
+            <assignToReference>BeforeCreateDupeCheckHTF.BillingState</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>HTFState</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assign_Search_HTF_to_Collection_0_0</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>MP_to_Search_Assignment</name>
         <label>MP to Search Assignment</label>
-        <locationX>2153</locationX>
-        <locationY>1385</locationY>
+        <locationX>2269</locationX>
+        <locationY>1907</locationY>
         <assignmentItems>
             <assignToReference>MPtoSearch.FirstName</assignToReference>
             <operator>Assign</operator>
@@ -591,6 +970,13 @@
                 <elementReference>MPRTID</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>MPtoSearch.RecordType__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Medical Professional</stringValue>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>Get_MP_Duplicates</targetReference>
         </connector>
@@ -598,8 +984,8 @@
     <assignments>
         <name>NoSelection</name>
         <label>NoSelection</label>
-        <locationX>3333</locationX>
-        <locationY>797</locationY>
+        <locationX>3473</locationX>
+        <locationY>1233</locationY>
         <assignmentItems>
             <assignToReference>CountSelectedHTFs</assignToReference>
             <operator>Assign</operator>
@@ -612,10 +998,142 @@
         </connector>
     </assignments>
     <assignments>
+        <name>NoSelection_0</name>
+        <label>NoSelection</label>
+        <locationX>4003</locationX>
+        <locationY>721</locationY>
+        <assignmentItems>
+            <assignToReference>CountSelectedHTFs</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>-1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Select_a_Before_Create_Matching_HTF</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Nullify_HTF_Screen_Values</name>
+        <label>Nullify HTF Screen Values</label>
+        <locationX>4717</locationX>
+        <locationY>521</locationY>
+        <assignmentItems>
+            <assignToReference>ScreenValueHTFName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenValueAlias</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenValueHTFStreet</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenValueHTFCity</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenValueHTFState</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenValueHTFZip</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenValueHTFChapter</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Lead_HTF_Lookup_to_Update</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Nullify_HTF_Screen_Values_0</name>
+        <label>Nullify HTF Screen Values</label>
+        <locationX>4440</locationX>
+        <locationY>1311</locationY>
+        <assignmentItems>
+            <assignToReference>ScreenValueHTFName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenValueAlias</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenValueHTFStreet</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenValueHTFCity</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenValueHTFState</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenValueHTFZip</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenValueHTFChapter</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Lead_HTF_Lookup_to_Update</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Nullify_MP_Variables</name>
         <label>Nullify MP Variables</label>
-        <locationX>2648</locationX>
-        <locationY>1396</locationY>
+        <locationX>2764</locationX>
+        <locationY>1918</locationY>
         <assignmentItems>
             <assignToReference>MPDupeCount</assignToReference>
             <operator>Assign</operator>
@@ -679,8 +1197,8 @@
     <assignments>
         <name>Nullify_Search_Results</name>
         <label>Nullify Search Results</label>
-        <locationX>3604</locationX>
-        <locationY>1466</locationY>
+        <locationX>3985</locationX>
+        <locationY>2451</locationY>
         <assignmentItems>
             <assignToReference>SelectedContact</assignToReference>
             <operator>Assign</operator>
@@ -695,8 +1213,8 @@
     <assignments>
         <name>Nullify_Search_Results_0</name>
         <label>Nullify Search Results</label>
-        <locationX>3635</locationX>
-        <locationY>1299</locationY>
+        <locationX>3997</locationX>
+        <locationY>1888</locationY>
         <assignmentItems>
             <assignToReference>SelectedContact</assignToReference>
             <operator>Assign</operator>
@@ -704,15 +1222,36 @@
                 <elementReference>EmptyContactCollection</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateMPCollection</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>EmptyContactCollection</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateMPMatches</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>EmptyContactCollection</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateMPMatchCount</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </assignmentItems>
         <connector>
-            <targetReference>Create_Household</targetReference>
+            <targetReference>BeforeCreateMPDupeCheck</targetReference>
         </connector>
     </assignments>
     <assignments>
         <name>Nullify_Search_Results_Accounts</name>
         <label>Nullify Search Results</label>
-        <locationX>3508</locationX>
-        <locationY>893</locationY>
+        <locationX>4035</locationX>
+        <locationY>1313</locationY>
         <assignmentItems>
             <assignToReference>AccountSelected</assignToReference>
             <operator>Assign</operator>
@@ -727,8 +1266,8 @@
     <assignments>
         <name>Nullify_Search_Results_Accounts_0</name>
         <label>Nullify Search Results</label>
-        <locationX>3584</locationX>
-        <locationY>658</locationY>
+        <locationX>3768</locationX>
+        <locationY>517</locationY>
         <assignmentItems>
             <assignToReference>AccountSelected</assignToReference>
             <operator>Assign</operator>
@@ -736,15 +1275,36 @@
                 <elementReference>EmptyAccountCollection</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateHTFCollection</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>EmptyAccountCollection</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateHTFMatches</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>EmptyAccountCollection</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateHTFMatchCount</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </assignmentItems>
         <connector>
-            <targetReference>CreateNewHTF</targetReference>
+            <targetReference>HTF_To_Search_Assignment_0_0_0</targetReference>
         </connector>
     </assignments>
     <assignments>
         <name>Nullify_Search_Variables</name>
         <label>Nullify Search Variables</label>
-        <locationX>1872</locationX>
-        <locationY>716</locationY>
+        <locationX>1953</locationX>
+        <locationY>872</locationY>
         <assignmentItems>
             <assignToReference>HTFtoSearchCollection</assignToReference>
             <operator>Assign</operator>
@@ -787,8 +1347,8 @@
     <assignments>
         <name>Nullify_Variables</name>
         <label>Nullify Variables</label>
-        <locationX>2283</locationX>
-        <locationY>717</locationY>
+        <locationX>2363</locationX>
+        <locationY>873</locationY>
         <assignmentItems>
             <assignToReference>HTFDupeCount</assignToReference>
             <operator>Assign</operator>
@@ -852,8 +1412,8 @@
     <assignments>
         <name>NullSearchValues</name>
         <label>NullSearchValues</label>
-        <locationX>2027</locationX>
-        <locationY>1384</locationY>
+        <locationX>2144</locationX>
+        <locationY>1907</locationY>
         <assignmentItems>
             <assignToReference>MPtoSearchCollection</assignToReference>
             <operator>Assign</operator>
@@ -896,8 +1456,8 @@
     <assignments>
         <name>Reset_HTF_Selected</name>
         <label>Reset HTF Selected</label>
-        <locationX>3129</locationX>
-        <locationY>971</locationY>
+        <locationX>3338</locationX>
+        <locationY>1338</locationY>
         <assignmentItems>
             <assignToReference>CountSelectedHTFs</assignToReference>
             <operator>Assign</operator>
@@ -910,10 +1470,26 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Reset_HTF_Selected_0</name>
+        <label>Reset HTF Selected</label>
+        <locationX>3993</locationX>
+        <locationY>880</locationY>
+        <assignmentItems>
+            <assignToReference>CountSelectedHTFs</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Selected_Before_HTF</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Reset_MPSelectionCount</name>
         <label>Reset MPSelectionCount</label>
-        <locationX>3279</locationX>
-        <locationY>1488</locationY>
+        <locationX>3404</locationX>
+        <locationY>2522</locationY>
         <assignmentItems>
             <assignToReference>CountMPSelections</assignToReference>
             <operator>Assign</operator>
@@ -926,10 +1502,26 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Reset_MPSelectionCount_0</name>
+        <label>Reset MPSelectionCount</label>
+        <locationX>4758</locationX>
+        <locationY>2097</locationY>
+        <assignmentItems>
+            <assignToReference>CountMPSelections</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>SelectedBeforeContacts</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Resolved_Best_Contact</name>
         <label>Resolved Best Contact</label>
-        <locationX>4146</locationX>
-        <locationY>2031</locationY>
+        <locationX>4563</locationX>
+        <locationY>3094</locationY>
         <assignmentItems>
             <assignToReference>BestContacttoResolve</assignToReference>
             <operator>Assign</operator>
@@ -951,8 +1543,8 @@
     <assignments>
         <name>Resolved_Best_Contact_HTF</name>
         <label>Resolved Best Contact HTF</label>
-        <locationX>4055</locationX>
-        <locationY>241</locationY>
+        <locationX>5033</locationX>
+        <locationY>50</locationY>
         <assignmentItems>
             <assignToReference>BestContactHTFtoResolve</assignToReference>
             <operator>Assign</operator>
@@ -974,8 +1566,8 @@
     <assignments>
         <name>Resolved_Referring_HTF</name>
         <label>Resolved Referring HTF</label>
-        <locationX>3910</locationX>
-        <locationY>486</locationY>
+        <locationX>4888</locationX>
+        <locationY>295</locationY>
         <assignmentItems>
             <assignToReference>ReferringHTFtoResolve</assignToReference>
             <operator>Assign</operator>
@@ -997,8 +1589,8 @@
     <assignments>
         <name>Resolved_Referring_MP</name>
         <label>Resolved Referring MP</label>
-        <locationX>3910</locationX>
-        <locationY>1797</locationY>
+        <locationX>4326</locationX>
+        <locationY>2862</locationY>
         <assignmentItems>
             <assignToReference>ReferringMPtoResolve</assignToReference>
             <operator>Assign</operator>
@@ -1020,8 +1612,8 @@
     <assignments>
         <name>Resolved_Treating_HTF</name>
         <label>Resolved Treating HTF</label>
-        <locationX>3978</locationX>
-        <locationY>364</locationY>
+        <locationX>4956</locationX>
+        <locationY>172</locationY>
         <assignmentItems>
             <assignToReference>TreatingHTFtoResolve</assignToReference>
             <operator>Assign</operator>
@@ -1043,8 +1635,8 @@
     <assignments>
         <name>Resolved_Treating_MP</name>
         <label>Resolved Treating MP</label>
-        <locationX>4043</locationX>
-        <locationY>1905</locationY>
+        <locationX>4459</locationX>
+        <locationY>2969</locationY>
         <assignmentItems>
             <assignToReference>TreatingMPtoresolve</assignToReference>
             <operator>Assign</operator>
@@ -1064,10 +1656,268 @@
         </connector>
     </assignments>
     <assignments>
+        <name>ScreenValues</name>
+        <label>ScreenValues</label>
+        <locationX>3508</locationX>
+        <locationY>1910</locationY>
+        <assignmentItems>
+            <assignToReference>ScreenFN</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MPName.firstName</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenLN</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MPName.lastName</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenSalutation</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MPName.salutation</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenEmail</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MPEmail.value</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenPhone</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MPPhone.value</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenFax</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MPFax.value</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenCity</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MPCity</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenState</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MPState</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenCategory</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MP_Category</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenSpecialty</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MP_Specialty</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenChapter</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ChapterName_0.recordId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>StateAlertFalse</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>ScreenValuesNullified</name>
+        <label>Screen Values Nullified</label>
+        <locationX>5027</locationX>
+        <locationY>2206</locationY>
+        <assignmentItems>
+            <assignToReference>ScreenFN</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenLN</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenSalutation</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenEmail</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenPhone</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenFax</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenCity</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenState</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenCategory</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenSpecialty</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenChapter</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Lead_HTF_Lookup_to_Update_0</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>ScreenValuesNullified_0</name>
+        <label>Screen Values Nullified</label>
+        <locationX>4213</locationX>
+        <locationY>2451</locationY>
+        <assignmentItems>
+            <assignToReference>ScreenFN</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenLN</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenSalutation</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenEmail</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenPhone</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenFax</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenCity</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenState</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenCategory</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenSpecialty</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ScreenChapter</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assign_Existing_MP_to_ID</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Set_Best_Contact_for_Contact_Search</name>
         <label>Set Best Contact for Contact Search</label>
-        <locationX>1809</locationX>
-        <locationY>1652</locationY>
+        <locationX>1784</locationX>
+        <locationY>2077</locationY>
         <assignmentItems>
             <assignToReference>ContactNameSearchFN</assignToReference>
             <operator>Assign</operator>
@@ -1097,7 +1947,7 @@
         <name>Set_Best_HTF_for_Account_Search</name>
         <label>Set Best HTF for Account Search</label>
         <locationX>1683</locationX>
-        <locationY>1452</locationY>
+        <locationY>1876</locationY>
         <assignmentItems>
             <assignToReference>AccountNameSearch</assignToReference>
             <operator>Assign</operator>
@@ -1119,8 +1969,8 @@
     <assignments>
         <name>Set_Existing_HTF_ID</name>
         <label>Set Existing HTF ID</label>
-        <locationX>3714</locationX>
-        <locationY>901</locationY>
+        <locationX>4304</locationX>
+        <locationY>1314</locationY>
         <assignmentItems>
             <assignToReference>NewHTFID</assignToReference>
             <operator>Assign</operator>
@@ -1129,14 +1979,14 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Lead_HTF_Lookup_to_Update</targetReference>
+            <targetReference>Nullify_HTF_Screen_Values_0</targetReference>
         </connector>
     </assignments>
     <assignments>
         <name>Set_MP_Count_for_Alert</name>
         <label>Set MP Count for Alert</label>
-        <locationX>3232</locationX>
-        <locationY>1635</locationY>
+        <locationX>3718</locationX>
+        <locationY>2249</locationY>
         <assignmentItems>
             <assignToReference>CountMPSelections</assignToReference>
             <operator>Assign</operator>
@@ -1152,7 +2002,7 @@
         <name>Set_Referring_HTF_for_Account_Search</name>
         <label>Set Referring HTF for Account Search</label>
         <locationX>1546</locationX>
-        <locationY>711</locationY>
+        <locationY>1135</locationY>
         <assignmentItems>
             <assignToReference>AccountNameSearch</assignToReference>
             <operator>Assign</operator>
@@ -1175,7 +2025,7 @@
         <name>Set_Referring_MP_for_Contact_Search</name>
         <label>Set Referring MP for Contact Search</label>
         <locationX>1541</locationX>
-        <locationY>844</locationY>
+        <locationY>1268</locationY>
         <assignmentItems>
             <assignToReference>ContactNameSearchFN</assignToReference>
             <operator>Assign</operator>
@@ -1205,7 +2055,7 @@
         <name>Set_Screen_Variables</name>
         <label>Set Screen Variables</label>
         <locationX>1309</locationX>
-        <locationY>640</locationY>
+        <locationY>1064</locationY>
         <assignmentItems>
             <assignToReference>ReferringMPtoResolve</assignToReference>
             <operator>Assign</operator>
@@ -1263,7 +2113,7 @@
         <name>Set_Treating_HTF_for_Account_Search_0</name>
         <label>Set Treating HTF for Account Search</label>
         <locationX>1612</locationX>
-        <locationY>1103</locationY>
+        <locationY>1527</locationY>
         <assignmentItems>
             <assignToReference>AccountNameSearch</assignToReference>
             <operator>Assign</operator>
@@ -1286,7 +2136,7 @@
         <name>Set_Treating_MP_for_Contact_Search</name>
         <label>Set Treating MP for Contact Search</label>
         <locationX>1557</locationX>
-        <locationY>1265</locationY>
+        <locationY>1689</locationY>
         <assignmentItems>
             <assignToReference>ContactNameSearchFN</assignToReference>
             <operator>Assign</operator>
@@ -1313,10 +2163,42 @@
         </connector>
     </assignments>
     <assignments>
+        <name>SetAlerttoFalse</name>
+        <label>SetAlerttoFalse</label>
+        <locationX>3296</locationX>
+        <locationY>524</locationY>
+        <assignmentItems>
+            <assignToReference>ChapterZipAlert</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>HTF_Screen_Values</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>SetAlerttoTrue</name>
+        <label>SetAlerttoTrue</label>
+        <locationX>3514</locationX>
+        <locationY>735</locationY>
+        <assignmentItems>
+            <assignToReference>ChapterZipAlert</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_New</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>StateAlertFalse</name>
         <label>StateAlertFalse</label>
-        <locationX>3295</locationX>
-        <locationY>1299</locationY>
+        <locationX>3621</locationX>
+        <locationY>1898</locationY>
         <assignmentItems>
             <assignToReference>StateAlert</assignToReference>
             <operator>Assign</operator>
@@ -1331,8 +2213,8 @@
     <assignments>
         <name>StateAlertTrue</name>
         <label>StateAlertTrue</label>
-        <locationX>3299</locationX>
-        <locationY>1136</locationY>
+        <locationX>3510</locationX>
+        <locationY>1782</locationY>
         <assignmentItems>
             <assignToReference>StateAlert</assignToReference>
             <operator>Assign</operator>
@@ -1354,10 +2236,42 @@
     </choices>
     <choices>
         <name>HTFDeptDefault</name>
-        <choiceText>{!DepartmentDisplay}</choiceText>
+        <choiceText>{!DepartmentLabel}</choiceText>
         <dataType>String</dataType>
         <value>
-            <elementReference>DepartmentDefault</elementReference>
+            <elementReference>DepartmentLabel</elementReference>
+        </value>
+    </choices>
+    <choices>
+        <name>HTFStateDefault</name>
+        <choiceText>{!StateHTFPicklistLabel}</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <elementReference>StateHTFPicklistLabel</elementReference>
+        </value>
+    </choices>
+    <choices>
+        <name>MPCategoryChoice</name>
+        <choiceText>{!MPCategoryLabel}</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <elementReference>MPCategoryLabel</elementReference>
+        </value>
+    </choices>
+    <choices>
+        <name>MPSpecialtyChoice</name>
+        <choiceText>{!SpecialtyMPLabel}</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <elementReference>SpecialtyMPLabel</elementReference>
+        </value>
+    </choices>
+    <choices>
+        <name>MPStateChoice</name>
+        <choiceText>{!StatePicklistLabel}</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <elementReference>StatePicklistLabel</elementReference>
         </value>
     </choices>
     <choices>
@@ -1368,35 +2282,11 @@
             <booleanValue>true</booleanValue>
         </value>
     </choices>
-    <choices>
-        <name>UnmatchedMPCategoryChoice</name>
-        <choiceText>{!MPCategoryLabel}</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <elementReference>MP_Category</elementReference>
-        </value>
-    </choices>
-    <choices>
-        <name>UnmatchedMPSpecialtyChoice</name>
-        <choiceText>{!SpecialtyMPLabel}</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <elementReference>MP_Specialty</elementReference>
-        </value>
-    </choices>
-    <choices>
-        <name>UnmatchedMPStateChoice</name>
-        <choiceText>{!StatePicklistLabel}</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <elementReference>StatePicklistLabel</elementReference>
-        </value>
-    </choices>
     <decisions>
         <name>All_Matched</name>
         <label>All Matched?</label>
         <locationX>1087</locationX>
-        <locationY>645</locationY>
+        <locationY>1069</locationY>
         <defaultConnector>
             <targetReference>Select_Screen</targetReference>
         </defaultConnector>
@@ -1498,7 +2388,7 @@
         <name>Best_Contact_Exists_0</name>
         <label>Best Contact Exists</label>
         <locationX>846</locationX>
-        <locationY>642</locationY>
+        <locationY>1066</locationY>
         <defaultConnector>
             <targetReference>Best_Contact_HTF_Exists_0_0</targetReference>
         </defaultConnector>
@@ -1523,7 +2413,7 @@
         <name>Best_Contact_HTF_Exists_0_0</name>
         <label>Best Contact HTF Exists</label>
         <locationX>975</locationX>
-        <locationY>642</locationY>
+        <locationY>1066</locationY>
         <defaultConnector>
             <targetReference>All_Matched</targetReference>
         </defaultConnector>
@@ -1548,7 +2438,7 @@
         <name>Best_Contact_HTF_Selected</name>
         <label>Best Contact HTF Selected?</label>
         <locationX>1382</locationX>
-        <locationY>1458</locationY>
+        <locationY>1882</locationY>
         <defaultConnector>
             <targetReference>Best_Contact_Selected</targetReference>
         </defaultConnector>
@@ -1573,7 +2463,7 @@
         <name>Best_Contact_Selected</name>
         <label>Best Contact Selected?</label>
         <locationX>1379</locationX>
-        <locationY>1657</locationY>
+        <locationY>2081</locationY>
         <defaultConnector>
             <targetReference>Get_Lead_Info</targetReference>
         </defaultConnector>
@@ -1597,8 +2487,8 @@
     <decisions>
         <name>Create_New_Selected</name>
         <label>Create New Selected? Non Selected?</label>
-        <locationX>3325</locationX>
-        <locationY>911</locationY>
+        <locationX>3690</locationX>
+        <locationY>1310</locationY>
         <defaultConnector>
             <targetReference>Get_Existing_HTF_Values</targetReference>
         </defaultConnector>
@@ -1637,8 +2527,8 @@
     <decisions>
         <name>Create_New_Selected_0</name>
         <label>Create New Selected?</label>
-        <locationX>3436</locationX>
-        <locationY>1478</locationY>
+        <locationX>3711</locationX>
+        <locationY>2458</locationY>
         <defaultConnector>
             <targetReference>Get_State</targetReference>
         </defaultConnector>
@@ -1675,51 +2565,131 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Create_New_Selected_0_0</name>
+        <label>Create New Selected?</label>
+        <locationX>4459</locationX>
+        <locationY>2049</locationY>
+        <defaultConnector>
+            <targetReference>Get_State</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Create_New_0_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ExistingContactSelected.LastName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>*** CREATE NEW ***</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_New_0</targetReference>
+            </connector>
+            <label>Yes Create New</label>
+        </rules>
+        <rules>
+            <name>No_Selection_MP_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>CountMPSelections</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Select_a_Before_Create_Matching_MP</targetReference>
+            </connector>
+            <label>No Selection MP</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Create_New_Selected_0_0_0</name>
+        <label>Create New Selected? Non Selected?</label>
+        <locationX>3614</locationX>
+        <locationY>815</locationY>
+        <defaultConnector>
+            <targetReference>Get_Existing_HTF_Values</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Create_New_0_0_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ExistingAccountSelected.Name</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>*** CREATE NEW ***</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_New</targetReference>
+            </connector>
+            <label>Yes Create New</label>
+        </rules>
+        <rules>
+            <name>No_HTF_Selected_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>CountSelectedHTFs</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>NoSelection_0</targetReference>
+            </connector>
+            <label>No HTF Selected</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>DuplicateDetected</name>
         <label>DuplicateDetected</label>
-        <locationX>4258</locationX>
-        <locationY>1219</locationY>
+        <locationX>4811</locationX>
+        <locationY>1889</locationY>
         <defaultConnector>
-            <targetReference>Error_Handling_0</targetReference>
+            <targetReference>Create_Household</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>
             <name>Yes_Dupe_Found</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>$Flow.FaultMessage</leftValueReference>
-                <operator>Contains</operator>
+                <leftValueReference>BeforeCreateMPMatchCount</leftValueReference>
+                <operator>GreaterThan</operator>
                 <rightValue>
-                    <stringValue>DUPLICATES_DETECTED</stringValue>
+                    <numberValue>0.0</numberValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>DeleteMPHousehold</targetReference>
+                <targetReference>Add_Create_to_to_Search_Results_0</targetReference>
             </connector>
             <label>Yes Dupe Found</label>
         </rules>
     </decisions>
     <decisions>
-        <name>DuplicateDetected_0</name>
+        <name>DuplicateDetected_0_0</name>
         <label>DuplicateDetected</label>
-        <locationX>4187</locationX>
-        <locationY>645</locationY>
+        <locationX>4455</locationX>
+        <locationY>530</locationY>
         <defaultConnector>
-            <targetReference>Error_Handling_0</targetReference>
+            <targetReference>CreateNewHTF</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>
-            <name>Yes_Dupe_Found_0</name>
+            <name>Yes_Dupe_Found_0_0</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>$Flow.FaultMessage</leftValueReference>
-                <operator>Contains</operator>
+                <leftValueReference>BeforeCreateHTFMatchCount</leftValueReference>
+                <operator>GreaterThan</operator>
                 <rightValue>
-                    <stringValue>DUPLICATES_DETECTED</stringValue>
+                    <numberValue>0.0</numberValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Dupe_Detected_0</targetReference>
+                <targetReference>Add_to_AC_Search_Results_0</targetReference>
             </connector>
             <label>Yes Dupe Found</label>
         </rules>
@@ -1727,8 +2697,8 @@
     <decisions>
         <name>HTF_Dupes_Found</name>
         <label>HTF Dupes Found</label>
-        <locationX>3012</locationX>
-        <locationY>729</locationY>
+        <locationX>3093</locationX>
+        <locationY>884</locationY>
         <defaultConnector>
             <targetReference>Create_New</targetReference>
         </defaultConnector>
@@ -1752,8 +2722,8 @@
     <decisions>
         <name>Lead_HTF_Lookup_to_Update</name>
         <label>Lead HTF Lookup to Update</label>
-        <locationX>3797</locationX>
-        <locationY>832</locationY>
+        <locationX>4437</locationX>
+        <locationY>1150</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Referring</name>
@@ -1804,8 +2774,8 @@
     <decisions>
         <name>Lead_HTF_Lookup_to_Update_0</name>
         <label>Lead MP Lookup to Update</label>
-        <locationX>3912</locationX>
-        <locationY>1400</locationY>
+        <locationX>4445</locationX>
+        <locationY>2453</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Referring_0</name>
@@ -1854,35 +2824,10 @@
         </rules>
     </decisions>
     <decisions>
-        <name>MatchingHTF</name>
-        <label>Match?</label>
-        <locationX>2427</locationX>
-        <locationY>877</locationY>
-        <defaultConnector>
-            <targetReference>Loop_HTF_Name_Matches</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Yes</defaultConnectorLabel>
-        <rules>
-            <name>NoHTFDoesnotmatch</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Loop_HTF_Search_Results.Id</leftValueReference>
-                <operator>NotEqualTo</operator>
-                <rightValue>
-                    <elementReference>Loop_HTF_Name_Matches.Id</elementReference>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Loop_HTF_Search_Results</targetReference>
-            </connector>
-            <label>NO</label>
-        </rules>
-    </decisions>
-    <decisions>
         <name>MP_Dupes_Found</name>
         <label>MP Dupes Found</label>
-        <locationX>3117</locationX>
-        <locationY>1397</locationY>
+        <locationX>3234</locationX>
+        <locationY>1920</locationY>
         <defaultConnector>
             <targetReference>Create_New_0</targetReference>
         </defaultConnector>
@@ -1907,7 +2852,7 @@
         <name>Referring_HTF_Exists_0</name>
         <label>Referring HTF Exists</label>
         <locationX>428</locationX>
-        <locationY>638</locationY>
+        <locationY>1062</locationY>
         <defaultConnector>
             <targetReference>Treating_HTF_Exists_0_0</targetReference>
         </defaultConnector>
@@ -1932,7 +2877,7 @@
         <name>Referring_HTF_Selected</name>
         <label>Referring HTF Selected?</label>
         <locationX>1385</locationX>
-        <locationY>586</locationY>
+        <locationY>1010</locationY>
         <defaultConnector>
             <targetReference>Referring_MP_Selected</targetReference>
         </defaultConnector>
@@ -1957,7 +2902,7 @@
         <name>Referring_MP_Exists</name>
         <label>Referring MP Exists</label>
         <locationX>292</locationX>
-        <locationY>637</locationY>
+        <locationY>1061</locationY>
         <defaultConnector>
             <targetReference>Referring_HTF_Exists_0</targetReference>
         </defaultConnector>
@@ -1982,7 +2927,7 @@
         <name>Referring_MP_Selected</name>
         <label>Referring MP Selected</label>
         <locationX>1385</locationX>
-        <locationY>844</locationY>
+        <locationY>1268</locationY>
         <defaultConnector>
             <targetReference>Treating_HTF_Selected</targetReference>
         </defaultConnector>
@@ -2006,8 +2951,8 @@
     <decisions>
         <name>State_Selected</name>
         <label>State Selected?</label>
-        <locationX>3388</locationX>
-        <locationY>1298</locationY>
+        <locationX>3739</locationX>
+        <locationY>1885</locationY>
         <defaultConnector>
             <targetReference>Confirm_New_MP</targetReference>
         </defaultConnector>
@@ -2039,7 +2984,7 @@
         <name>Treating_HTF_Exists_0_0</name>
         <label>Treating HTF Exists</label>
         <locationX>572</locationX>
-        <locationY>641</locationY>
+        <locationY>1065</locationY>
         <defaultConnector>
             <targetReference>Treating_MP_Exists</targetReference>
         </defaultConnector>
@@ -2064,7 +3009,7 @@
         <name>Treating_HTF_Selected</name>
         <label>Treating HTF Selected</label>
         <locationX>1384</locationX>
-        <locationY>1060</locationY>
+        <locationY>1484</locationY>
         <defaultConnector>
             <targetReference>Treating_MP_Selected</targetReference>
         </defaultConnector>
@@ -2089,7 +3034,7 @@
         <name>Treating_MP_Exists</name>
         <label>Treating MP Exists</label>
         <locationX>710</locationX>
-        <locationY>640</locationY>
+        <locationY>1064</locationY>
         <defaultConnector>
             <targetReference>Best_Contact_Exists_0</targetReference>
         </defaultConnector>
@@ -2114,7 +3059,7 @@
         <name>Treating_MP_Selected</name>
         <label>Treating MP Selected</label>
         <locationX>1382</locationX>
-        <locationY>1265</locationY>
+        <locationY>1689</locationY>
         <defaultConnector>
             <targetReference>Best_Contact_HTF_Selected</targetReference>
         </defaultConnector>
@@ -2133,6 +3078,52 @@
                 <targetReference>Set_Treating_MP_for_Contact_Search</targetReference>
             </connector>
             <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Zip_Or_Chapter_Populated</name>
+        <label>Zip Or Chapter Populated?</label>
+        <locationX>3512</locationX>
+        <locationY>520</locationY>
+        <defaultConnector>
+            <targetReference>Add_Existing_0</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Yes</defaultConnectorLabel>
+        <rules>
+            <name>No_Zip_Chapter</name>
+            <conditionLogic>(1 OR 3) AND (2 OR 4)</conditionLogic>
+            <conditions>
+                <leftValueReference>ScreenValueHTFChapter</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>ScreenValueHTFZip</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>ScreenValueHTFChapter</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>ScreenValueHTFZip</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>SetAlerttoTrue</targetReference>
+            </connector>
+            <label>No Zip/Chapter</label>
         </rules>
     </decisions>
     <description>Assists Intake Managers in linking or creating MPs and HTFs for incoming referrals.</description>
@@ -2154,14 +3145,6 @@
         <valueField>Id</valueField>
     </dynamicChoiceSets>
     <dynamicChoiceSets>
-        <name>BillingState</name>
-        <dataType>Picklist</dataType>
-        <displayField xsi:nil="true"/>
-        <object xsi:nil="true"/>
-        <picklistField>BillingStateCode</picklistField>
-        <picklistObject>Account</picklistObject>
-    </dynamicChoiceSets>
-    <dynamicChoiceSets>
         <name>HTFDeptPicklist</name>
         <dataType>String</dataType>
         <displayField>Label</displayField>
@@ -2169,14 +3152,14 @@
             <field>EntityParticleId</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Lead.00N03000000Q0Im</stringValue>
+                <stringValue>Lead.00N6w000000OAFv</stringValue>
             </value>
         </filters>
         <filters>
             <field>Value</field>
             <operator>NotEqualTo</operator>
             <value>
-                <elementReference>UnmatchedHTFDept</elementReference>
+                <elementReference>ScreenDefaultDepartment</elementReference>
             </value>
         </filters>
         <object>PicklistValueInfo</object>
@@ -2193,12 +3176,13 @@
         <picklistObject>Lead</picklistObject>
     </dynamicChoiceSets>
     <dynamicChoiceSets>
-        <name>MailingState</name>
+        <name>HTFStatePicklist</name>
         <dataType>Picklist</dataType>
         <displayField xsi:nil="true"/>
         <object xsi:nil="true"/>
-        <picklistField>MailingStateCode</picklistField>
-        <picklistObject>Contact</picklistObject>
+        <picklistField>Treating_MP_HTF_State__c</picklistField>
+        <picklistObject>Lead</picklistObject>
+        <sortOrder>Asc</sortOrder>
     </dynamicChoiceSets>
     <dynamicChoiceSets>
         <name>MPCategoryPicklist</name>
@@ -2208,14 +3192,14 @@
             <field>EntityParticleId</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Lead.00N03000000Q0Ij</stringValue>
+                <stringValue>Lead.00N6w000000O8nM</stringValue>
             </value>
         </filters>
         <filters>
             <field>Value</field>
             <operator>NotEqualTo</operator>
             <value>
-                <elementReference>UnmatchedMPCategory</elementReference>
+                <elementReference>ScreenDefaultCategory</elementReference>
             </value>
         </filters>
         <object>PicklistValueInfo</object>
@@ -2231,14 +3215,46 @@
             <field>EntityParticleId</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Lead.00N03000000Q0Is</stringValue>
+                <stringValue>Lead.00N6w000000O8uc</stringValue>
             </value>
         </filters>
         <filters>
             <field>Value</field>
             <operator>NotEqualTo</operator>
             <value>
-                <elementReference>UnmatchedMPSpecialty</elementReference>
+                <elementReference>ScreenDefaultSpecialty</elementReference>
+            </value>
+        </filters>
+        <object>PicklistValueInfo</object>
+        <sortField>Label</sortField>
+        <sortOrder>Asc</sortOrder>
+        <valueField>Value</valueField>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>MPStatePicklist</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Treating_MP_State__c</picklistField>
+        <picklistObject>Lead</picklistObject>
+        <sortOrder>Asc</sortOrder>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>StateHTFPicklist</name>
+        <dataType>String</dataType>
+        <displayField>Label</displayField>
+        <filters>
+            <field>EntityParticleId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Lead.00N6w000000O8k9</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Value</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <elementReference>ScreenDefaultHTFState</elementReference>
             </value>
         </filters>
         <object>PicklistValueInfo</object>
@@ -2254,14 +3270,14 @@
             <field>EntityParticleId</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Lead.00N03000000Q0It</stringValue>
+                <stringValue>Lead.00N6w000000O8k9</stringValue>
             </value>
         </filters>
         <filters>
             <field>Value</field>
             <operator>NotEqualTo</operator>
             <value>
-                <elementReference>UnmatchedMPState</elementReference>
+                <elementReference>ScreenDefaultState</elementReference>
             </value>
         </filters>
         <object>PicklistValueInfo</object>
@@ -2301,6 +3317,11 @@ IF(ISBLANK({!UnmatchedHTFDept})=FALSE, {!UnmatchedHTFDept},NULL))</expression>
         <name>DepartmentDisplay</name>
         <dataType>String</dataType>
         <expression>IF(!ISBLANK({!DepartmentDefault}), {!DepartmentDefault}, &quot;Select an Option&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>DepartmentLabel</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenDefaultDepartment}) ||{!ScreenDefaultDepartment}=&quot;&quot; , &quot; &quot;, {!ScreenDefaultDepartment})</expression>
     </formulas>
     <formulas>
         <name>HTFStateCode</name>
@@ -2361,7 +3382,7 @@ IF(ISBLANK({!UnmatchedHTFDept})=FALSE, {!UnmatchedHTFDept},NULL))</expression>
     <formulas>
         <name>MPCategoryLabel</name>
         <dataType>String</dataType>
-        <expression>IF(ISBLANK({!UnmatchedMPCategory}), &quot; &quot;, {!UnmatchedMPCategory})</expression>
+        <expression>IF(ISBLANK({!ScreenDefaultCategory}) || {!ScreenDefaultCategory} = &quot;&quot;, &quot; &quot;, {!ScreenDefaultCategory})</expression>
     </formulas>
     <formulas>
         <name>MPStateCode</name>
@@ -2455,14 +3476,119 @@ IF( {!MPType}=&quot;Best Medical Contact&quot;, IF(ISBLANK({!Get_Best_Contact_HT
         <scale>0</scale>
     </formulas>
     <formulas>
+        <name>ScreenDefaultCategory</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenCategory}) || {!ScreenCategory}=&quot;&quot;, {!UnmatchedMPCategory},{!ScreenCategory})</expression>
+    </formulas>
+    <formulas>
+        <name>ScreenDefaultCity</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenCity}) || {!ScreenCity}=&quot;&quot;, {!UnmatchedMPCity},{!ScreenCity})</expression>
+    </formulas>
+    <formulas>
+        <name>ScreenDefaultDepartment</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!DepartmentSelected}) || {!DepartmentSelected} = &quot;&quot;, {!UnmatchedHTFDept} , {!DepartmentSelected})</expression>
+    </formulas>
+    <formulas>
+        <name>ScreenDefaultEmail</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenEmail}) || {!ScreenEmail}=&quot;&quot;, {!UnmatchedMPEmail},{!ScreenEmail})</expression>
+    </formulas>
+    <formulas>
+        <name>ScreenDefaultFax</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenFax}) || {!ScreenFax}=&quot;&quot;, {!UnmatchedMPFax},{!ScreenFax})</expression>
+    </formulas>
+    <formulas>
+        <name>ScreenDefaultFN</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenFN}) || {!ScreenFN}=&quot;&quot;, {!UnmatchedMPFirstName},{!ScreenFN})</expression>
+    </formulas>
+    <formulas>
+        <name>ScreenDefaultHTFAlias</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenValueAlias}) || {!ScreenValueAlias} = &quot;&quot;, &quot;&quot; , {!ScreenValueAlias})</expression>
+    </formulas>
+    <formulas>
+        <name>ScreenDefaultHTFChapter</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenValueHTFChapter}) || {!ScreenValueHTFChapter} = &quot;&quot;, &quot;&quot; , {!ScreenValueHTFChapter})</expression>
+    </formulas>
+    <formulas>
+        <name>ScreenDefaultHTFCity</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenValueHTFCity}) || {!ScreenValueHTFCity} = &quot;&quot;, {!UnmatchedHTFCity} , {!ScreenValueHTFCity})</expression>
+    </formulas>
+    <formulas>
+        <name>ScreenDefaultHTFName</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenValueHTFName}) || {!ScreenValueHTFName} = &quot;&quot;, {!UnmatchedHTFName} , {!ScreenValueHTFName})</expression>
+    </formulas>
+    <formulas>
+        <name>ScreenDefaultHTFPhone</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenValueHTFPhone}) || {!ScreenValueHTFPhone} = &quot;&quot;, {!UnmatchedHTFPhone} , {!ScreenValueHTFPhone})</expression>
+    </formulas>
+    <formulas>
+        <name>ScreenDefaultHTFState</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenValueHTFState}) || {!ScreenValueHTFState} = &quot;&quot;, {!UnmatchedHTFState} , {!ScreenValueHTFState})</expression>
+    </formulas>
+    <formulas>
+        <name>ScreenDefaultHTFStreet</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenValueHTFStreet}) || {!ScreenValueHTFStreet} = &quot;&quot;, {!UnmatchedHTFStreet} , {!ScreenValueHTFStreet})</expression>
+    </formulas>
+    <formulas>
+        <name>ScreenDefaultHTFZip</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenValueHTFZip}) || {!ScreenValueHTFZip} = &quot;&quot;, {!UnmatchedHTFZipCode} , {!ScreenValueHTFZip})</expression>
+    </formulas>
+    <formulas>
+        <name>ScreenDefaultLN</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenLN}) || {!ScreenLN}=&quot;&quot;, {!UnmatchedMPLastName},{!ScreenLN})</expression>
+    </formulas>
+    <formulas>
+        <name>ScreenDefaultMPChapter</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenChapter}) || {!ScreenChapter}=&quot;&quot;, {!Get_Lead_Info.ChapterName__r.Id},{!ScreenChapter})</expression>
+    </formulas>
+    <formulas>
+        <name>ScreenDefaultPhone</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenPhone}) || {!ScreenPhone}=&quot;&quot;, {!UnmatchedMPPhone},{!ScreenPhone})</expression>
+    </formulas>
+    <formulas>
+        <name>ScreenDefaultSalutation</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenSalutation}) || {!ScreenSalutation}=&quot;&quot;, {!UnmatchedMPSalutation},{!ScreenSalutation})</expression>
+    </formulas>
+    <formulas>
+        <name>ScreenDefaultSpecialty</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenSpecialty}) || {!ScreenSpecialty}=&quot;&quot;, {!UnmatchedMPSpecialty},{!ScreenSpecialty})</expression>
+    </formulas>
+    <formulas>
+        <name>ScreenDefaultState</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenState}) || {!ScreenState}=&quot;&quot;, {!UnmatchedMPState},{!ScreenState})</expression>
+    </formulas>
+    <formulas>
         <name>SpecialtyMPLabel</name>
         <dataType>String</dataType>
-        <expression>IF(ISBLANK({!UnmatchedMPSpecialty}), &quot; &quot;, {!UnmatchedMPSpecialty})</expression>
+        <expression>IF(ISBLANK({!ScreenDefaultSpecialty}) || {!ScreenDefaultSpecialty}=&quot;&quot; , &quot; &quot;, {!ScreenDefaultSpecialty})</expression>
+    </formulas>
+    <formulas>
+        <name>StateHTFPicklistLabel</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!ScreenDefaultHTFState}) || {!ScreenDefaultHTFState}=&quot;&quot; , &quot; &quot;, {!ScreenDefaultHTFState})</expression>
     </formulas>
     <formulas>
         <name>StatePicklistLabel</name>
         <dataType>String</dataType>
-        <expression>IF(ISBLANK({!UnmatchedMPState}), &quot; &quot;, {!UnmatchedMPState})</expression>
+        <expression>IF(ISBLANK({!ScreenDefaultState}) || {!ScreenDefaultState} = &quot;&quot; , &quot; &quot;, {!ScreenDefaultState})</expression>
     </formulas>
     <formulas>
         <name>TreatingHTFName</name>
@@ -2608,35 +3734,38 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <interviewLabel>Make &amp; Match {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Make &amp; Match</label>
     <loops>
-        <name>Loop_HTF_Name_Matches</name>
-        <label>Loop HTF Name Matches</label>
-        <locationX>2623</locationX>
-        <locationY>786</locationY>
-        <collectionReference>Get_HTF_Name_Matches</collectionReference>
+        <name>CountMPMatches</name>
+        <label>CountMPMatches</label>
+        <locationX>4344</locationX>
+        <locationY>1892</locationY>
+        <collectionReference>BeforeCreateMPMatches</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
-            <targetReference>Loop_HTF_Search_Results</targetReference>
-        </nextValueConnector>
-    </loops>
-    <loops>
-        <name>Loop_HTF_Search_Results</name>
-        <label>Loop HTF Search Results</label>
-        <locationX>2698</locationX>
-        <locationY>884</locationY>
-        <collectionReference>HTFSearchResults</collectionReference>
-        <iterationOrder>Asc</iterationOrder>
-        <nextValueConnector>
-            <targetReference>MatchingHTF</targetReference>
+            <targetReference>Count_Matches</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>Add_to_HTF_Search_Results</targetReference>
+            <targetReference>Add_State</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>Loop_HTF_Dupe_Matches</name>
+        <label>Loop HTF Dupe Matches</label>
+        <locationX>4124</locationX>
+        <locationY>518</locationY>
+        <collectionReference>BeforeCreateHTFMatches</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Count_HTF_Matches</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>HTF_To_Search_Assignment_0_0_0_0</targetReference>
         </noMoreValuesConnector>
     </loops>
     <loops>
         <name>LoopAccounts</name>
         <label>LoopAccounts</label>
-        <locationX>3237</locationX>
-        <locationY>897</locationY>
+        <locationX>3475</locationX>
+        <locationY>1341</locationY>
         <collectionReference>AccountSelected</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -2649,8 +3778,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <loops>
         <name>LoopHTFDupes</name>
         <label>LoopHTFDupes</label>
-        <locationX>2923</locationX>
-        <locationY>733</locationY>
+        <locationX>3003</locationX>
+        <locationY>888</locationY>
         <collectionReference>HTFSearchResults</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -2663,8 +3792,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <loops>
         <name>LoopMPDupes</name>
         <label>LoopMPDupes</label>
-        <locationX>3021</locationX>
-        <locationY>1395</locationY>
+        <locationX>3138</locationX>
+        <locationY>1917</locationY>
         <collectionReference>MPSearchResults</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -2675,10 +3804,38 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         </noMoreValuesConnector>
     </loops>
     <loops>
+        <name>Selected_Before_HTF</name>
+        <label>Selected Before HTF</label>
+        <locationX>3836</locationX>
+        <locationY>856</locationY>
+        <collectionReference>AccountSelected</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Assign_Account_0</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Create_New_Selected_0_0_0</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>SelectedBeforeContacts</name>
+        <label>SelectedBeforeContacts</label>
+        <locationX>4645</locationX>
+        <locationY>2095</locationY>
+        <collectionReference>SelectedContact</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>AssignContact_0</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Create_New_Selected_0_0</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
         <name>SelectedContacts</name>
         <label>SelectedContacts</label>
-        <locationX>3348</locationX>
-        <locationY>1476</locationY>
+        <locationX>3557</locationX>
+        <locationY>2523</locationY>
         <collectionReference>SelectedContact</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -2710,8 +3867,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <recordCreates>
         <name>Create_Household</name>
         <label>Create Household</label>
-        <locationX>3733</locationX>
-        <locationY>1292</locationY>
+        <locationX>5153</locationX>
+        <locationY>1878</locationY>
         <assignRecordIdToReference>NewMPHHID</assignRecordIdToReference>
         <connector>
             <targetReference>Create_MP</targetReference>
@@ -2754,15 +3911,21 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <recordCreates>
         <name>Create_MP</name>
         <label>Create MP</label>
-        <locationX>3855</locationX>
-        <locationY>1225</locationY>
+        <locationX>5160</locationX>
+        <locationY>2202</locationY>
         <assignRecordIdToReference>NewMPID</assignRecordIdToReference>
         <connector>
-            <targetReference>Lead_HTF_Lookup_to_Update_0</targetReference>
+            <targetReference>ScreenValuesNullified</targetReference>
         </connector>
         <faultConnector>
-            <targetReference>DuplicateDetected</targetReference>
+            <targetReference>Error_Handling_0</targetReference>
         </faultConnector>
+        <inputAssignments>
+            <field>Fax</field>
+            <value>
+                <elementReference>MPFax.value</elementReference>
+            </value>
+        </inputAssignments>
         <inputAssignments>
             <field>FirstName</field>
             <value>
@@ -2852,14 +4015,14 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <recordCreates>
         <name>CreateNewHTF</name>
         <label>CreateNewHTF</label>
-        <locationX>3720</locationX>
-        <locationY>658</locationY>
+        <locationX>4593</locationX>
+        <locationY>529</locationY>
         <assignRecordIdToReference>NewHTFID</assignRecordIdToReference>
         <connector>
-            <targetReference>Lead_HTF_Lookup_to_Update</targetReference>
+            <targetReference>Nullify_HTF_Screen_Values</targetReference>
         </connector>
         <faultConnector>
-            <targetReference>DuplicateDetected_0</targetReference>
+            <targetReference>Error_Handling_0</targetReference>
         </faultConnector>
         <inputAssignments>
             <field>Alias__c</field>
@@ -2870,25 +4033,25 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <inputAssignments>
             <field>BillingCity</field>
             <value>
-                <elementReference>HTFAddress.city</elementReference>
+                <elementReference>HTFCity</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <field>BillingPostalCode</field>
             <value>
-                <elementReference>HTFAddress.postalCode</elementReference>
+                <elementReference>Zip_Code</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <field>BillingState</field>
             <value>
-                <elementReference>HTFAddress.province</elementReference>
+                <elementReference>HTFState</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <field>BillingStreet</field>
             <value>
-                <elementReference>HTFAddress.street</elementReference>
+                <elementReference>HTFStreetAddress</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -2923,31 +4086,11 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         </inputAssignments>
         <object>Account</object>
     </recordCreates>
-    <recordDeletes>
-        <name>DeleteMPHousehold</name>
-        <label>DeleteMPHousehold</label>
-        <locationX>4187</locationX>
-        <locationY>1288</locationY>
-        <connector>
-            <targetReference>Dupe_Detected</targetReference>
-        </connector>
-        <faultConnector>
-            <targetReference>Error_Handling_0</targetReference>
-        </faultConnector>
-        <filters>
-            <field>Id</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>NewMPHHID</elementReference>
-            </value>
-        </filters>
-        <object>Account</object>
-    </recordDeletes>
     <recordLookups>
         <name>Get_Best_Contact</name>
         <label>Get Best Contact</label>
         <locationX>859</locationX>
-        <locationY>1043</locationY>
+        <locationY>1467</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Assign_Best_Contact_ID</targetReference>
@@ -2975,7 +4118,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <name>Get_Best_Contact_HTF_Account_0</name>
         <label>Get Best Contact HTF Account</label>
         <locationX>990</locationX>
-        <locationY>1048</locationY>
+        <locationY>1472</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Assign_Best_Contact_HTF_ID</targetReference>
@@ -2999,8 +4142,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <recordLookups>
         <name>Get_Existing_HTF_Values</name>
         <label>Get Existing HTF Values</label>
-        <locationX>3416</locationX>
-        <locationY>901</locationY>
+        <locationX>3859</locationX>
+        <locationY>1299</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Nullify_Search_Results_Accounts</targetReference>
@@ -3044,8 +4187,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <recordLookups>
         <name>Get_HTF_Name_Matches</name>
         <label>Get HTF Name Matches</label>
-        <locationX>2514</locationX>
-        <locationY>729</locationY>
+        <locationX>2594</locationX>
+        <locationY>884</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Add_HTF_Name_Matches_to_results</targetReference>
@@ -3090,8 +4233,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <recordLookups>
         <name>Get_HTF_RT_ID</name>
         <label>Get HTF RT ID</label>
-        <locationX>1788</locationX>
-        <locationY>718</locationY>
+        <locationX>1868</locationX>
+        <locationY>873</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Nullify_Search_Variables</targetReference>
@@ -3122,8 +4265,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <recordLookups>
         <name>Get_HTF_RT_ID_0</name>
         <label>Get HH RT ID</label>
-        <locationX>1908</locationX>
-        <locationY>1378</locationY>
+        <locationX>2024</locationX>
+        <locationY>1900</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>NullSearchValues</targetReference>
@@ -3155,7 +4298,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <name>Get_Lead_Info</name>
         <label>Get Lead Info</label>
         <locationX>179</locationX>
-        <locationY>635</locationY>
+        <locationY>1059</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Referring_MP_Exists</targetReference>
@@ -3177,8 +4320,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <recordLookups>
         <name>Get_MP_RT_ID</name>
         <label>Get MP RT ID</label>
-        <locationX>1813</locationX>
-        <locationY>1371</locationY>
+        <locationX>1929</locationX>
+        <locationY>1893</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_HTF_RT_ID_0</targetReference>
@@ -3210,7 +4353,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <name>Get_Referring_HTF_Account</name>
         <label>Get Referring HTF Account</label>
         <locationX>433</locationX>
-        <locationY>1033</locationY>
+        <locationY>1457</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Assign_Referring_MP_ID_0</targetReference>
@@ -3235,7 +4378,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <name>Get_Referring_MP_Contact</name>
         <label>Get Referring MP Contact</label>
         <locationX>304</locationX>
-        <locationY>1020</locationY>
+        <locationY>1444</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Assign_Referring_MP_ID</targetReference>
@@ -3262,8 +4405,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <recordLookups>
         <name>Get_State</name>
         <label>Get Existing MP State</label>
-        <locationX>3533</locationX>
-        <locationY>1475</locationY>
+        <locationX>3851</locationX>
+        <locationY>2443</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Nullify_Search_Results</targetReference>
@@ -3316,7 +4459,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <name>Get_Treating_HTF_Account</name>
         <label>Get Treating HTF Account</label>
         <locationX>580</locationX>
-        <locationY>1040</locationY>
+        <locationY>1464</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Assign_Treating_HTF_ID</targetReference>
@@ -3341,7 +4484,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <name>Get_Treating_MP_Contact</name>
         <label>Get Treating MP Contact</label>
         <locationX>715</locationX>
-        <locationY>1033</locationY>
+        <locationY>1457</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Assign_Treating_MP_ID</targetReference>
@@ -3368,8 +4511,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <recordUpdates>
         <name>Update_Best_Contact</name>
         <label>Update Best Contact</label>
-        <locationX>4146</locationX>
-        <locationY>1735</locationY>
+        <locationX>4563</locationX>
+        <locationY>2799</locationY>
         <connector>
             <targetReference>Resolved_Best_Contact</targetReference>
         </connector>
@@ -3394,8 +4537,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <recordUpdates>
         <name>Update_Referring_HTF</name>
         <label>Update Referring HTF</label>
-        <locationX>3910</locationX>
-        <locationY>621</locationY>
+        <locationX>4888</locationX>
+        <locationY>777</locationY>
         <connector>
             <targetReference>Resolved_Referring_HTF</targetReference>
         </connector>
@@ -3420,8 +4563,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <recordUpdates>
         <name>Update_Referring_HTF_0</name>
         <label>Update Treating HTF</label>
-        <locationX>3979</locationX>
-        <locationY>770</locationY>
+        <locationX>4957</locationX>
+        <locationY>925</locationY>
         <connector>
             <targetReference>Resolved_Treating_HTF</targetReference>
         </connector>
@@ -3446,8 +4589,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <recordUpdates>
         <name>Update_Referring_HTF_0_0</name>
         <label>Update Best HTF</label>
-        <locationX>4055</locationX>
-        <locationY>909</locationY>
+        <locationX>5033</locationX>
+        <locationY>1064</locationY>
         <connector>
             <targetReference>Resolved_Best_Contact_HTF</targetReference>
         </connector>
@@ -3472,8 +4615,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <recordUpdates>
         <name>Update_Referring_MP</name>
         <label>Update Referring MP</label>
-        <locationX>3909</locationX>
-        <locationY>1615</locationY>
+        <locationX>4325</locationX>
+        <locationY>2679</locationY>
         <connector>
             <targetReference>Resolved_Referring_MP</targetReference>
         </connector>
@@ -3498,8 +4641,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <recordUpdates>
         <name>Update_Treating_MP</name>
         <label>Update Treating MP</label>
-        <locationX>4042</locationX>
-        <locationY>1633</locationY>
+        <locationX>4459</locationX>
+        <locationY>2697</locationY>
         <connector>
             <targetReference>Resolved_Treating_MP</targetReference>
         </connector>
@@ -3525,8 +4668,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <screens>
         <name>Add_Existing</name>
         <label>Confirm Existing HTF</label>
-        <locationX>3610</locationX>
-        <locationY>902</locationY>
+        <locationX>4162</locationX>
+        <locationY>1309</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -3544,8 +4687,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <screens>
         <name>Add_Existing_0</name>
         <label>Confirm New HTF</label>
-        <locationX>3454</locationX>
-        <locationY>658</locationY>
+        <locationX>3646</locationX>
+        <locationY>516</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -3554,7 +4697,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         </connector>
         <fields>
             <name>ConfirmCreateHTF</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;Click &lt;/span&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;&apos;Next&apos;&lt;/b&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt; to create the following record &lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px; background-color: rgb(255, 255, 255);&quot;&gt;as the {!HTFType}&apos;s HTF for this lead.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;{!HTF_Name}&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;{!Alias}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;{!DepartmentSelected}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;{!HTFAddress.street}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;{!HTFAddress.city}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;{!HTFAddress.province}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;{!HTFAddress.postalCode}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;{!ChapterName.recordName}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;Items to Resolve: &lt;/span&gt;&lt;b style=&quot;background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;{!ResolveCountRemaining}&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;Click &lt;/span&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;&apos;Next&apos;&lt;/b&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt; to create the following record &lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px; background-color: rgb(255, 255, 255);&quot;&gt;as the {!HTFType}&apos;s HTF for this lead.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;{!HTF_Name}&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;{!Alias}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;{!DepartmentSelected}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;{!HTFStreetAddress}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;{!HTFCity}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;{!HTFState}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;{!Zip_Code}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;{!ChapterName.recordName}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;Items to Resolve: &lt;/span&gt;&lt;b style=&quot;background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;{!ResolveCountRemaining}&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -3563,13 +4706,13 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <screens>
         <name>Add_Existing_0_0</name>
         <label>Confirm Existing Contact</label>
-        <locationX>3703</locationX>
-        <locationY>1466</locationY>
+        <locationX>4093</locationX>
+        <locationY>2450</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Assign_Existing_MP_to_ID</targetReference>
+            <targetReference>ScreenValuesNullified_0</targetReference>
         </connector>
         <fields>
             <name>ConfirmExistingHTF_0</name>
@@ -3582,8 +4725,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <screens>
         <name>Confirm_New_MP</name>
         <label>Confirm New MP</label>
-        <locationX>3537</locationX>
-        <locationY>1294</locationY>
+        <locationX>3868</locationX>
+        <locationY>1890</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -3601,13 +4744,13 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <screens>
         <name>Create_New</name>
         <label>Create New HTF</label>
-        <locationX>3132</locationX>
-        <locationY>655</locationY>
+        <locationX>3112</locationX>
+        <locationY>533</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Assign_Department</targetReference>
+            <targetReference>SetAlerttoFalse</targetReference>
         </connector>
         <fields>
             <name>CreateaNewHTF</name>
@@ -3618,7 +4761,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <name>HTF_Name</name>
             <dataType>String</dataType>
             <defaultValue>
-                <elementReference>UnmatchedHTFName</elementReference>
+                <elementReference>ScreenDefaultHTFName</elementReference>
             </defaultValue>
             <fieldText>HTF Name</fieldText>
             <fieldType>InputField</fieldType>
@@ -3627,6 +4770,9 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <fields>
             <name>Alias</name>
             <dataType>String</dataType>
+            <defaultValue>
+                <elementReference>ScreenDefaultHTFAlias</elementReference>
+            </defaultValue>
             <fieldText>HTF Alias</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
@@ -3654,60 +4800,66 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>value</name>
                 <value>
-                    <elementReference>UnmatchedHTFPhone</elementReference>
+                    <elementReference>ScreenDefaultHTFPhone</elementReference>
                 </value>
             </inputParameters>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
         <fields>
-            <name>HTFAddress</name>
-            <extensionName>flowruntime:address</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>inputCountryOptions</name>
-                <value>
-                    <stringValue>USA</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>inputProvinceOptions</name>
-                <value>
-                    <elementReference>BillingState</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>country</name>
-                <value>
-                    <stringValue>USA</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>city</name>
-                <value>
-                    <elementReference>UnmatchedHTFCity</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>postalCode</name>
-                <value>
-                    <elementReference>UnmatchedHTFZipCode</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>province</name>
-                <value>
-                    <elementReference>UnmatchedHTFState</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>street</name>
-                <value>
-                    <elementReference>UnmatchedHTFStreet</elementReference>
-                </value>
-            </inputParameters>
+            <name>HTFStreetAddress</name>
+            <dataType>String</dataType>
+            <defaultValue>
+                <elementReference>ScreenDefaultHTFStreet</elementReference>
+            </defaultValue>
+            <fieldText>Street Address</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>HTFCity</name>
+            <dataType>String</dataType>
+            <defaultValue>
+                <elementReference>ScreenDefaultHTFCity</elementReference>
+            </defaultValue>
+            <fieldText>City</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>HTFState</name>
+            <choiceReferences>HTFStateDefault</choiceReferences>
+            <choiceReferences>HTFStatePicklist</choiceReferences>
+            <dataType>String</dataType>
+            <defaultSelectedChoiceReference>HTFStateDefault</defaultSelectedChoiceReference>
+            <fieldText>State</fieldText>
+            <fieldType>DropdownBox</fieldType>
             <isRequired>true</isRequired>
-            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
+            <name>ChapterZipAlertMsg</name>
+            <fieldText>&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;Please provide a Chapter or Zip Code.&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>ChapterZipAlert</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Zip_Code</name>
+            <dataType>String</dataType>
+            <defaultValue>
+                <elementReference>ScreenDefaultHTFZip</elementReference>
+            </defaultValue>
+            <fieldText>Zip Code</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
         </fields>
         <fields>
             <name>ChapterName</name>
@@ -3716,7 +4868,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>recordId</name>
                 <value>
-                    <elementReference>Get_Lead_Info.ChapterName__r.Id</elementReference>
+                    <elementReference>ScreenDefaultHTFChapter</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -3751,13 +4903,13 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <screens>
         <name>Create_New_0</name>
         <label>Create New Contact</label>
-        <locationX>3223</locationX>
-        <locationY>1292</locationY>
+        <locationX>3378</locationX>
+        <locationY>1911</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>StateAlertFalse</targetReference>
+            <targetReference>ScreenValues</targetReference>
         </connector>
         <fields>
             <name>NoMatchesFound</name>
@@ -3777,13 +4929,13 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>firstName</name>
                 <value>
-                    <elementReference>UnmatchedMPFirstName</elementReference>
+                    <elementReference>ScreenDefaultFN</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>lastName</name>
                 <value>
-                    <elementReference>UnmatchedMPLastName</elementReference>
+                    <elementReference>ScreenDefaultLN</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -3795,7 +4947,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>salutation</name>
                 <value>
-                    <elementReference>UnmatchedMPSalutation</elementReference>
+                    <elementReference>ScreenDefaultSalutation</elementReference>
                 </value>
             </inputParameters>
             <isRequired>true</isRequired>
@@ -3808,7 +4960,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>value</name>
                 <value>
-                    <elementReference>UnmatchedMPEmail</elementReference>
+                    <elementReference>ScreenDefaultEmail</elementReference>
                 </value>
             </inputParameters>
             <isRequired>true</isRequired>
@@ -3827,7 +4979,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>value</name>
                 <value>
-                    <elementReference>UnmatchedMPPhone</elementReference>
+                    <elementReference>ScreenDefaultPhone</elementReference>
                 </value>
             </inputParameters>
             <isRequired>true</isRequired>
@@ -3852,7 +5004,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>value</name>
                 <value>
-                    <elementReference>UnmatchedMPFax</elementReference>
+                    <elementReference>ScreenDefaultFax</elementReference>
                 </value>
             </inputParameters>
             <isRequired>true</isRequired>
@@ -3862,7 +5014,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <name>MPCity</name>
             <dataType>String</dataType>
             <defaultValue>
-                <elementReference>UnmatchedMPCity</elementReference>
+                <elementReference>ScreenDefaultCity</elementReference>
             </defaultValue>
             <fieldText>City</fieldText>
             <fieldType>InputField</fieldType>
@@ -3870,7 +5022,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         </fields>
         <fields>
             <name>SelectStatePrompt</name>
-            <fieldText>&lt;p&gt;&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;Please Select a State.&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;Please Select a State.&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
@@ -3885,30 +5037,30 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         </fields>
         <fields>
             <name>MPState</name>
-            <choiceReferences>UnmatchedMPStateChoice</choiceReferences>
-            <choiceReferences>MailingState</choiceReferences>
+            <choiceReferences>MPStateChoice</choiceReferences>
+            <choiceReferences>MPStatePicklist</choiceReferences>
             <dataType>String</dataType>
-            <defaultSelectedChoiceReference>UnmatchedMPStateChoice</defaultSelectedChoiceReference>
+            <defaultSelectedChoiceReference>MPStateChoice</defaultSelectedChoiceReference>
             <fieldText>State</fieldText>
             <fieldType>DropdownBox</fieldType>
             <isRequired>true</isRequired>
         </fields>
         <fields>
             <name>MP_Category</name>
-            <choiceReferences>UnmatchedMPCategoryChoice</choiceReferences>
+            <choiceReferences>MPCategoryChoice</choiceReferences>
             <choiceReferences>MPCategoryPicklist</choiceReferences>
             <dataType>String</dataType>
-            <defaultSelectedChoiceReference>UnmatchedMPCategoryChoice</defaultSelectedChoiceReference>
+            <defaultSelectedChoiceReference>MPCategoryChoice</defaultSelectedChoiceReference>
             <fieldText>MP Category</fieldText>
             <fieldType>DropdownBox</fieldType>
             <isRequired>true</isRequired>
         </fields>
         <fields>
             <name>MP_Specialty</name>
-            <choiceReferences>UnmatchedMPSpecialtyChoice</choiceReferences>
+            <choiceReferences>MPSpecialtyChoice</choiceReferences>
             <choiceReferences>MPSpecialtyPicklist</choiceReferences>
             <dataType>String</dataType>
-            <defaultSelectedChoiceReference>UnmatchedMPSpecialtyChoice</defaultSelectedChoiceReference>
+            <defaultSelectedChoiceReference>MPSpecialtyChoice</defaultSelectedChoiceReference>
             <fieldText>MP Specialty</fieldText>
             <fieldType>DropdownBox</fieldType>
             <isRequired>true</isRequired>
@@ -3920,7 +5072,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>recordId</name>
                 <value>
-                    <elementReference>Get_Lead_Info.ChapterName__r.Id</elementReference>
+                    <elementReference>ScreenDefaultMPChapter</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -3953,48 +5105,10 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <showHeader>true</showHeader>
     </screens>
     <screens>
-        <name>Dupe_Detected</name>
-        <label>Dupe Detected</label>
-        <locationX>4073</locationX>
-        <locationY>1340</locationY>
-        <allowBack>false</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <connector>
-            <targetReference>Select_an_Existing_MP</targetReference>
-        </connector>
-        <fields>
-            <name>DupeAlertMessage</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(255, 0, 0); font-size: 16px;&quot;&gt;THE RECORD YOU ARE ATTEMPTING TO CREATE IS A DUPLICATE.  &lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;Please select a matching record or update the info you have provided.&lt;/b&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>Dupe_Detected_0</name>
-        <label>Dupe Detected</label>
-        <locationX>4190</locationX>
-        <locationY>775</locationY>
-        <allowBack>false</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <connector>
-            <targetReference>Select_an_Existing_HTF</targetReference>
-        </connector>
-        <fields>
-            <name>DupeAlertMessage_0</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(255, 0, 0); font-size: 16px;&quot;&gt;THE RECORD YOU ARE ATTEMPTING TO CREATE IS A DUPLICATE.  &lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;Please select a matching record or update the info you have provided.&lt;/b&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
         <name>Error_Handling</name>
         <label>Error Handling</label>
         <locationX>190</locationX>
-        <locationY>1441</locationY>
+        <locationY>1865</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -4012,8 +5126,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <screens>
         <name>Error_Handling_0</name>
         <label>Error Handling</label>
-        <locationX>4356</locationX>
-        <locationY>1137</locationY>
+        <locationX>5340</locationX>
+        <locationY>1482</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -4022,7 +5136,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         </connector>
         <fields>
             <name>ErrorHandlingText_0</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;Oops! Something went wrong.&lt;/b&gt;  &lt;/p&gt;&lt;p&gt;Please provide the following to your system administrator:&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Error Message: {!$Flow.FaultMessage}&lt;/p&gt;&lt;p&gt;Record Id: {!recordId}&lt;/p&gt;&lt;p&gt;Flow: Make &amp;amp; Match&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;Oops! Something went wrong.&lt;/b&gt;  &lt;/p&gt;&lt;p&gt;Please provide the following information to your system administrator:&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Error Message: {!$Flow.FaultMessage}&lt;/p&gt;&lt;p&gt;Record Id: {!recordId}&lt;/p&gt;&lt;p&gt;Flow: Make &amp;amp; Match&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -4032,7 +5146,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <name>Matching_Complete</name>
         <label>Matching Complete</label>
         <locationX>1213</locationX>
-        <locationY>854</locationY>
+        <locationY>1278</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -4058,10 +5172,723 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <showHeader>true</showHeader>
     </screens>
     <screens>
+        <name>Select_a_Before_Create_Matching_HTF</name>
+        <label>Select a Before Create Matching HTF</label>
+        <locationX>4136</locationX>
+        <locationY>798</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Reset_HTF_Selected_0</targetReference>
+        </connector>
+        <fields>
+            <name>HTFtoSearchRecord_0</name>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;font-size: 16px; color: rgb(9, 140, 0); background-color: rgb(255, 255, 255);&quot;&gt;Attempted to create the following &apos;&lt;/b&gt;&lt;b style=&quot;font-size: 16px; color: rgb(9, 140, 0);&quot;&gt;{!HTFType}&apos; HTF Account:&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>HTFtoSearchRecordDetails_0</name>
+            <extensionName>c:datatableFSC</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>mydata_standard1</name>
+                <value>
+                    <elementReference>BeforeCreateHTFCollection</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>hideShow</name>
+                <value>
+                    <stringValue>hide</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column01_label</name>
+                <value>
+                    <stringValue>HTF Name</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column01_fieldName</name>
+                <value>
+                    <stringValue>Name</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column01_width</name>
+                <value>
+                    <numberValue>332.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column02_fieldName</name>
+                <value>
+                    <stringValue>BillingCity</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column02_label</name>
+                <value>
+                    <stringValue>City</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column02_width</name>
+                <value>
+                    <numberValue>150.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column03_fieldName</name>
+                <value>
+                    <stringValue>BillingState</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column03_label</name>
+                <value>
+                    <stringValue>State</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column03_width</name>
+                <value>
+                    <numberValue>150.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column04_fieldName</name>
+                <value>
+                    <stringValue>BillingPostalCode</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column04_label</name>
+                <value>
+                    <stringValue>Zip Code</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column04_width</name>
+                <value>
+                    <numberValue>100.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column05_fieldName</name>
+                <value>
+                    <stringValue>Department__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column05_label</name>
+                <value>
+                    <stringValue>Department</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column05_width</name>
+                <value>
+                    <numberValue>200.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column06_width</name>
+                <value>
+                    <numberValue>150.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column06_label</name>
+                <value>
+                    <stringValue>Chapter</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column06_fieldName</name>
+                <value>
+                    <stringValue>Chapter_Name_Text__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>singleSelection</name>
+                <value>
+                    <stringValue>1</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>selectedRows_standard1</name>
+                <value>
+                    <elementReference>HTFtoSearchCollection</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>HTFtoSearchCollection</assignToReference>
+                <name>selectedRows_standard1</name>
+            </outputParameters>
+        </fields>
+        <fields>
+            <name>HTFResultRecords_0</name>
+            <fieldText>&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 16px; color: rgb(255, 0, 0);&quot;&gt;But the following duplicate(s) were found.  &lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;color: rgb(255, 0, 0); font-size: 16px;&quot;&gt;Please select an existing record or update the values of your new HTF. &lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>SelectionAlert_0</name>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;PLEASE MAKE A SELECTION.&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>CountSelectedHTFs</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <numberValue>-1.0</numberValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>SelectHTF_0</name>
+            <extensionName>c:datatableFSC</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>mydata_standard1</name>
+                <value>
+                    <elementReference>BeforeCreateHTFMatches</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column01_fieldName</name>
+                <value>
+                    <stringValue>Name</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column01_label</name>
+                <value>
+                    <stringValue>HTF Name</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column02_fieldName</name>
+                <value>
+                    <stringValue>BillingCity</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column02_label</name>
+                <value>
+                    <stringValue>City</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column03_fieldName</name>
+                <value>
+                    <stringValue>BillingState</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column03_label</name>
+                <value>
+                    <stringValue>State</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column04_fieldName</name>
+                <value>
+                    <stringValue>BillingPostalCode</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column04_label</name>
+                <value>
+                    <stringValue>Zip Code</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column05_fieldName</name>
+                <value>
+                    <stringValue>Department__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column05_label</name>
+                <value>
+                    <stringValue>Department</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>singleSelection</name>
+                <value>
+                    <stringValue>1</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>selectedRows_standard1</name>
+                <value>
+                    <elementReference>AccountSelected</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column01_width</name>
+                <value>
+                    <numberValue>300.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column02_width</name>
+                <value>
+                    <numberValue>150.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column03_width</name>
+                <value>
+                    <numberValue>150.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column04_width</name>
+                <value>
+                    <numberValue>100.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column05_width</name>
+                <value>
+                    <numberValue>200.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column06_fieldName</name>
+                <value>
+                    <stringValue>Chapter_Name_Text__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column06_label</name>
+                <value>
+                    <stringValue>Chapter</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column06_width</name>
+                <value>
+                    <numberValue>150.0</numberValue>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>AccountSelected</assignToReference>
+                <name>selectedRows_standard1</name>
+            </outputParameters>
+        </fields>
+        <fields>
+            <name>ItemstoResolve1_0</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 16px; color: rgb(62, 62, 60);&quot;&gt;Items to Resolve: &lt;/span&gt;&lt;b style=&quot;background-color: rgb(255, 255, 255); font-size: 16px; color: rgb(62, 62, 60);&quot;&gt;{!ResolveCountRemaining} &lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Select_a_Before_Create_Matching_MP</name>
+        <label>Select a Before Create Matching MP</label>
+        <locationX>4884</locationX>
+        <locationY>2047</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Reset_MPSelectionCount_0</targetReference>
+        </connector>
+        <fields>
+            <name>UnmatchedMPtoSearchRecord_0</name>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;background-color: rgb(255, 255, 255); color: rgb(9, 140, 0); font-size: 16px;&quot;&gt;Attempted to create the following {!MPType} Contact:&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>UnmatchedMPSearch_0</name>
+            <extensionName>c:datatableFSC</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>mydata_standard4</name>
+                <value>
+                    <elementReference>BeforeCreateMPCollection</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>singleSelection</name>
+                <value>
+                    <stringValue>1</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column01_fieldName</name>
+                <value>
+                    <stringValue>FirstName</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column01_width</name>
+                <value>
+                    <numberValue>117.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column02_fieldName</name>
+                <value>
+                    <stringValue>LastName</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column02_label</name>
+                <value>
+                    <stringValue>Last Name</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column02_width</name>
+                <value>
+                    <numberValue>145.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column03_fieldName</name>
+                <value>
+                    <stringValue>Phone</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column03_label</name>
+                <value>
+                    <stringValue>Phone</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column03_width</name>
+                <value>
+                    <numberValue>110.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column04_fieldName</name>
+                <value>
+                    <stringValue>Email</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column04_label</name>
+                <value>
+                    <stringValue>Email</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column04_width</name>
+                <value>
+                    <numberValue>200.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column05_fieldName</name>
+                <value>
+                    <stringValue>MailingCity</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column05_label</name>
+                <value>
+                    <stringValue>City</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column05_width</name>
+                <value>
+                    <numberValue>100.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column06_fieldName</name>
+                <value>
+                    <stringValue>MailingState</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column06_label</name>
+                <value>
+                    <stringValue>State</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column06_width</name>
+                <value>
+                    <numberValue>100.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column07_fieldName</name>
+                <value>
+                    <stringValue>Primary_Affiliation_Name__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column07_label</name>
+                <value>
+                    <stringValue>Related HTF Name</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column07_width</name>
+                <value>
+                    <numberValue>225.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column08_width</name>
+                <value>
+                    <numberValue>200.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column08_label</name>
+                <value>
+                    <stringValue>Chapter</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column08_fieldName</name>
+                <value>
+                    <stringValue>Hidden_Chapter_Name__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>selectedRows_standard4</name>
+                <value>
+                    <elementReference>MPtoSearchCollection</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>hideShow</name>
+                <value>
+                    <stringValue>hide</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column01_label</name>
+                <value>
+                    <stringValue>First Name</stringValue>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
+            <name>MPSearchResultRecords_0</name>
+            <fieldText>&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;color: rgb(255, 0, 0); font-size: 16px;&quot;&gt;But the following duplicate(s) were found.  &lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;color: rgb(255, 0, 0); font-size: 16px;&quot;&gt;Please select an existing record or update the values of your new contact. &lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>NoMPSelectionAlert_0</name>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;color: rgb(255, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;PLEASE MAKE A SELECTION.&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>CountMPSelections</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <numberValue>-1.0</numberValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>SelectMPs_0</name>
+            <extensionName>c:datatableFSC</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>column01_fieldName</name>
+                <value>
+                    <stringValue>FirstName</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column01_label</name>
+                <value>
+                    <stringValue>First Name</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column02_fieldName</name>
+                <value>
+                    <stringValue>LastName</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column02_label</name>
+                <value>
+                    <stringValue>Last Name</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column03_fieldName</name>
+                <value>
+                    <stringValue>Phone</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column03_label</name>
+                <value>
+                    <stringValue>Phone</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column04_fieldName</name>
+                <value>
+                    <stringValue>Email</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column04_label</name>
+                <value>
+                    <stringValue>Email</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column05_fieldName</name>
+                <value>
+                    <stringValue>MailingCity</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column05_label</name>
+                <value>
+                    <stringValue>City</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>singleSelection</name>
+                <value>
+                    <stringValue>1</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>mydata_standard4</name>
+                <value>
+                    <elementReference>BeforeCreateMPMatches</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column06_fieldName</name>
+                <value>
+                    <stringValue>MailingState</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column06_label</name>
+                <value>
+                    <stringValue>State</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>selectedRows_standard4</name>
+                <value>
+                    <elementReference>SelectedContact</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column07_fieldName</name>
+                <value>
+                    <stringValue>Primary_Affiliation_Name__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column07_label</name>
+                <value>
+                    <stringValue>Primary HTF</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column03_width</name>
+                <value>
+                    <numberValue>110.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column02_width</name>
+                <value>
+                    <numberValue>145.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column01_width</name>
+                <value>
+                    <numberValue>85.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column04_width</name>
+                <value>
+                    <numberValue>200.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column06_width</name>
+                <value>
+                    <numberValue>100.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column07_width</name>
+                <value>
+                    <numberValue>225.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column08_width</name>
+                <value>
+                    <numberValue>200.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column08_label</name>
+                <value>
+                    <stringValue>Chapter</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column08_fieldName</name>
+                <value>
+                    <stringValue>Hidden_Chapter_Name__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column05_width</name>
+                <value>
+                    <numberValue>100.0</numberValue>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>SelectedContact</assignToReference>
+                <name>selectedRows_standard4</name>
+            </outputParameters>
+        </fields>
+        <fields>
+            <name>ItemtoResolve4_0</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 16px; background-color: rgb(255, 255, 255);&quot;&gt;Items to Resolve: &lt;/span&gt;&lt;b style=&quot;font-size: 16px; background-color: rgb(255, 255, 255);&quot;&gt;{!ResolveCountRemaining}&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
         <name>Select_an_Existing_HTF</name>
         <label>Select an Existing HTF</label>
-        <locationX>3128</locationX>
-        <locationY>790</locationY>
+        <locationX>3226</locationX>
+        <locationY>1196</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -4382,8 +6209,8 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <screens>
         <name>Select_an_Existing_MP</name>
         <label>Select an Existing MP</label>
-        <locationX>3198</locationX>
-        <locationY>1484</locationY>
+        <locationX>3238</locationX>
+        <locationY>2433</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -4774,7 +6601,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <name>Select_Screen</name>
         <label>Select Screen</label>
         <locationX>1206</locationX>
-        <locationY>648</locationY>
+        <locationY>1072</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -5044,7 +6871,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     </screens>
     <start>
         <locationX>53</locationX>
-        <locationY>481</locationY>
+        <locationY>905</locationY>
         <connector>
             <targetReference>Get_Lead_Info</targetReference>
         </connector>
@@ -5064,6 +6891,76 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <name>BeforeCreateDupeCheckHTF</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <name>BeforeCreateDupeCheckMP</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Contact</objectType>
+    </variables>
+    <variables>
+        <name>BeforeCreateHTFCollection</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <name>BeforeCreateHTFMatchCount</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+    <variables>
+        <name>BeforeCreateHTFMatches</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <name>BeforeCreateMPCollection</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Contact</objectType>
+    </variables>
+    <variables>
+        <name>BeforeCreateMPMatchCount</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+    <variables>
+        <name>BeforeCreateMPMatches</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Contact</objectType>
     </variables>
     <variables>
         <name>BestContactAffiliationMatch</name>
@@ -5107,6 +7004,16 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ChapterZipAlert</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
     </variables>
     <variables>
         <name>ContactNameSearchFN</name>
@@ -5535,6 +7442,139 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
     <variables>
         <name>ReferringMPtoResolve</name>
         <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ScreenCategory</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ScreenChapter</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ScreenCity</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ScreenEmail</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ScreenFax</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ScreenFN</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ScreenLN</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ScreenPhone</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ScreenSalutation</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ScreenSpecialty</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ScreenState</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ScreenValueAlias</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ScreenValueHTFChapter</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ScreenValueHTFCity</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ScreenValueHTFName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ScreenValueHTFPhone</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ScreenValueHTFState</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ScreenValueHTFStreet</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ScreenValueHTFZip</name>
+        <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
