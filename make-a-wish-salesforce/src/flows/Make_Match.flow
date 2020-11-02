@@ -1236,6 +1236,13 @@
                 <elementReference>EmptyContactCollection</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateMPMatchCount</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>BeforeCreateMPDupeCheck</targetReference>
         </connector>
@@ -1280,6 +1287,13 @@
             <operator>Assign</operator>
             <value>
                 <elementReference>EmptyAccountCollection</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateHTFMatchCount</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>0.0</numberValue>
             </value>
         </assignmentItems>
         <connector>
@@ -5170,7 +5184,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         </connector>
         <fields>
             <name>HTFtoSearchRecord_0</name>
-            <fieldText>&lt;p&gt;&lt;b style=&quot;font-size: 16px; color: rgb(9, 140, 0); background-color: rgb(255, 255, 255);&quot;&gt;Attempted to create the following &lt;/b&gt;&lt;b style=&quot;font-size: 16px; color: rgb(9, 140, 0);&quot;&gt;{!HTFType},&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;font-size: 16px; color: rgb(9, 140, 0); background-color: rgb(255, 255, 255);&quot;&gt;Attempted to create the following &apos;&lt;/b&gt;&lt;b style=&quot;font-size: 16px; color: rgb(9, 140, 0);&quot;&gt;{!HTFType}&apos; HTF Account:&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -5492,7 +5506,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         </connector>
         <fields>
             <name>UnmatchedMPtoSearchRecord_0</name>
-            <fieldText>&lt;p&gt;&lt;b style=&quot;font-size: 16px; color: rgb(9, 140, 0); background-color: rgb(255, 255, 255);&quot;&gt;Attempted to create the following {!MPType}&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;background-color: rgb(255, 255, 255); color: rgb(9, 140, 0); font-size: 16px;&quot;&gt;Attempted to create the following {!MPType} Contact:&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
