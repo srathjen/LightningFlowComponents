@@ -3128,23 +3128,6 @@
     </decisions>
     <description>Assists Intake Managers in linking or creating MPs and HTFs for incoming referrals.</description>
     <dynamicChoiceSets>
-        <name>AccountsFound</name>
-        <dataType>String</dataType>
-        <displayField>Name</displayField>
-        <filters>
-            <field>Name</field>
-            <operator>Contains</operator>
-            <value>
-                <elementReference>AccountNameSearch</elementReference>
-            </value>
-        </filters>
-        <limit>15</limit>
-        <object>Account</object>
-        <sortField>Name</sortField>
-        <sortOrder>Asc</sortOrder>
-        <valueField>Id</valueField>
-    </dynamicChoiceSets>
-    <dynamicChoiceSets>
         <name>HTFDeptPicklist</name>
         <dataType>String</dataType>
         <displayField>Label</displayField>
@@ -3152,7 +3135,7 @@
             <field>EntityParticleId</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Lead.00N6w000000OAFv</stringValue>
+                <stringValue>Lead.00N4C000001Wzrm</stringValue>
             </value>
         </filters>
         <filters>
@@ -3192,7 +3175,7 @@
             <field>EntityParticleId</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Lead.00N6w000000O8nM</stringValue>
+                <stringValue>Lead.00N4C000001Wzrl</stringValue>
             </value>
         </filters>
         <filters>
@@ -3215,7 +3198,7 @@
             <field>EntityParticleId</field>
             <operator>EqualTo</operator>
             <value>
-                <stringValue>Lead.00N6w000000O8uc</stringValue>
+                <stringValue>Lead.00N4C000001WxxF</stringValue>
             </value>
         </filters>
         <filters>
@@ -3238,52 +3221,6 @@
         <picklistField>Treating_MP_State__c</picklistField>
         <picklistObject>Lead</picklistObject>
         <sortOrder>Asc</sortOrder>
-    </dynamicChoiceSets>
-    <dynamicChoiceSets>
-        <name>StateHTFPicklist</name>
-        <dataType>String</dataType>
-        <displayField>Label</displayField>
-        <filters>
-            <field>EntityParticleId</field>
-            <operator>EqualTo</operator>
-            <value>
-                <stringValue>Lead.00N6w000000O8k9</stringValue>
-            </value>
-        </filters>
-        <filters>
-            <field>Value</field>
-            <operator>NotEqualTo</operator>
-            <value>
-                <elementReference>ScreenDefaultHTFState</elementReference>
-            </value>
-        </filters>
-        <object>PicklistValueInfo</object>
-        <sortField>Label</sortField>
-        <sortOrder>Asc</sortOrder>
-        <valueField>Value</valueField>
-    </dynamicChoiceSets>
-    <dynamicChoiceSets>
-        <name>StatesMPPicklist</name>
-        <dataType>String</dataType>
-        <displayField>Label</displayField>
-        <filters>
-            <field>EntityParticleId</field>
-            <operator>EqualTo</operator>
-            <value>
-                <stringValue>Lead.00N6w000000O8k9</stringValue>
-            </value>
-        </filters>
-        <filters>
-            <field>Value</field>
-            <operator>NotEqualTo</operator>
-            <value>
-                <elementReference>ScreenDefaultState</elementReference>
-            </value>
-        </filters>
-        <object>PicklistValueInfo</object>
-        <sortField>Label</sortField>
-        <sortOrder>Asc</sortOrder>
-        <valueField>Value</valueField>
     </dynamicChoiceSets>
     <formulas>
         <name>BestContactHTFName</name>

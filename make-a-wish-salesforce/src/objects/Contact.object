@@ -12355,26 +12355,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>Specialty__c</picklist>
             <values>
-                <fullName>Cardiology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Critical Care Medicine</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Dermatology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Endocrinology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Gastroenterology</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>General Pediatrics</fullName>
                 <default>false</default>
             </values>
@@ -15628,26 +15608,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>Specialty__c</picklist>
             <values>
-                <fullName>Cardiology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Critical Care Medicine</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Dermatology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Endocrinology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Gastroenterology</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>General Pediatrics</fullName>
                 <default>false</default>
             </values>
@@ -17205,26 +17165,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         </picklistValues>
         <picklistValues>
             <picklist>Specialty__c</picklist>
-            <values>
-                <fullName>Cardiology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Critical Care Medicine</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Dermatology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Endocrinology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Gastroenterology</fullName>
-                <default>false</default>
-            </values>
             <values>
                 <fullName>General Pediatrics</fullName>
                 <default>false</default>
@@ -18925,26 +18865,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         </picklistValues>
         <picklistValues>
             <picklist>Specialty__c</picklist>
-            <values>
-                <fullName>Cardiology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Critical Care Medicine</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Dermatology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Endocrinology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Gastroenterology</fullName>
-                <default>false</default>
-            </values>
             <values>
                 <fullName>General Pediatrics</fullName>
                 <default>false</default>

@@ -356,12 +356,61 @@
         <name>Cake_Candy__c</name>
     </fields>
     <fields>
+        <help><!-- The Intake Manager from the Chapter that owns the record (as indicated by Chapter Name). --></help>
+        <label><!-- Chapter Intake Manager --></label>
+        <name>Chapter_Intake_Manager__c</name>
+    </fields>
+    <fields>
         <label><!-- City --></label>
         <name>City_Employer__c</name>
     </fields>
     <fields>
         <label><!-- Class In School --></label>
         <name>Class_in_School__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact Email Status --></label>
+        <name>CloudingoAgent__CES__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mailing Address Record Type --></label>
+        <name>CloudingoAgent__MAR__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mailing Address Status --></label>
+        <name>CloudingoAgent__MAS__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mailing Address Vacancy --></label>
+        <name>CloudingoAgent__MAV__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mailing Residential Delivery Indicator --></label>
+        <name>CloudingoAgent__MRDI__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mailing Timezone --></label>
+        <name>CloudingoAgent__MTZ__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Address Record Type --></label>
+        <name>CloudingoAgent__OAR__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Address Status --></label>
+        <name>CloudingoAgent__OAS__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Address Vacancy --></label>
+        <name>CloudingoAgent__OAV__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Residential Delivery Indicator --></label>
+        <name>CloudingoAgent__ORDI__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Timezone --></label>
+        <name>CloudingoAgent__OTZ__c</name>
     </fields>
     <fields>
         <label><!-- Cognitive Delays --></label>
@@ -543,6 +592,10 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Edit Access --></label>
+        <name>Edit_Access__c</name>
+    </fields>
+    <fields>
         <label><!-- Electronics/Games That I Like To Play --></label>
         <name>Electronics_Games_that_I_like_to_play__c</name>
     </fields>
@@ -685,6 +738,10 @@
     <fields>
         <label><!-- Hidden Chapter Name --></label>
         <name>Hidden_Chapter_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Chapter --></label>
+        <name>Hidden_Chapter__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Contact Full Name --></label>
@@ -1397,6 +1454,10 @@ and the date it was or will be granted. --></help>
         <name>Primary_Address__c</name>
     </fields>
     <fields>
+        <label><!-- Primary Affiliation Name --></label>
+        <name>Primary_Affiliation_Name__c</name>
+    </fields>
+    <fields>
         <label><!-- Primary Condition Description --></label>
         <name>Primary_Diagnosis_Condition_Description__c</name>
     </fields>
@@ -2009,6 +2070,10 @@ and the date it was or will be granted. --></help>
         <name>Recipient_Email__c</name>
     </fields>
     <fields>
+        <label><!-- RecordType Matching --></label>
+        <name>RecordType__c</name>
+    </fields>
+    <fields>
         <label><!-- Record Ownership Notes --></label>
         <name>Record_Ownership_Notes__c</name>
     </fields>
@@ -2050,6 +2115,9 @@ and the date it was or will be granted. --></help>
     </fields>
     <fields>
         <label><!-- Chapter Name --></label>
+        <lookupFilter>
+            <errorMessage><!-- Please select a valid Chapter Account. --></errorMessage>
+        </lookupFilter>
         <name>Region_Chapter__c</name>
         <relationshipLabel><!-- Contacts (Region Chapter) --></relationshipLabel>
     </fields>
@@ -2437,20 +2505,36 @@ provide contact information for each site on which you are active. --></help>
         <label><!-- Specialty --></label>
         <name>Specialty__c</name>
         <picklistValues>
-            <masterLabel>Brain Tumor</masterLabel>
-            <translation><!-- Brain Tumor --></translation>
+            <masterLabel>Anesthesiology</masterLabel>
+            <translation><!-- Anesthesiology --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cardio-thoracic Surgeon</masterLabel>
+            <translation><!-- Cardio-thoracic Surgeon --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Cardiology</masterLabel>
             <translation><!-- Cardiology --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Critical Care Medicine</masterLabel>
-            <translation><!-- Critical Care Medicine --></translation>
+            <masterLabel>Critical Care</masterLabel>
+            <translation><!-- Critical Care --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Dermatology</masterLabel>
             <translation><!-- Dermatology --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Developmental Pediatrics</masterLabel>
+            <translation><!-- Developmental Pediatrics --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ENT (Ear, Nose &amp; Throat)</masterLabel>
+            <translation><!-- ENT (Ear, Nose &amp; Throat) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Emergency Medicine</masterLabel>
+            <translation><!-- Emergency Medicine --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Endocrinology</masterLabel>
@@ -2465,20 +2549,28 @@ provide contact information for each site on which you are active. --></help>
             <translation><!-- General Pediatrics --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>General Surgery</masterLabel>
+            <translation><!-- General Surgery --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Genetics</masterLabel>
             <translation><!-- Genetics --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Genetics &amp; Metabolism</masterLabel>
-            <translation><!-- Genetics &amp; Metabolism --></translation>
+            <masterLabel>Gynecology</masterLabel>
+            <translation><!-- Gynecology --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Genitourinary</masterLabel>
-            <translation><!-- Genitourinary --></translation>
+            <masterLabel>Hematology-Oncology</masterLabel>
+            <translation><!-- Hematology-Oncology --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Hematology</masterLabel>
-            <translation><!-- Hematology --></translation>
+            <masterLabel>Hepatology</masterLabel>
+            <translation><!-- Hepatology --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hospice/Palliative Care</masterLabel>
+            <translation><!-- Hospice/Palliative Care --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Hospitalist</masterLabel>
@@ -2493,6 +2585,18 @@ provide contact information for each site on which you are active. --></help>
             <translation><!-- Infectious Disease --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Internal Medicine/Hospitalist</masterLabel>
+            <translation><!-- Internal Medicine/Hospitalist --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Interventional Radiology</masterLabel>
+            <translation><!-- Interventional Radiology --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Metabolics</masterLabel>
+            <translation><!-- Metabolics --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Nephrology</masterLabel>
             <translation><!-- Nephrology --></translation>
         </picklistValues>
@@ -2501,40 +2605,48 @@ provide contact information for each site on which you are active. --></help>
             <translation><!-- Neurology --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Oncology</masterLabel>
-            <translation><!-- Oncology --></translation>
+            <masterLabel>Neurosurgery</masterLabel>
+            <translation><!-- Neurosurgery --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ophthalmology</masterLabel>
+            <translation><!-- Ophthalmology --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Orthopedics</masterLabel>
             <translation><!-- Orthopedics --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Otolaryngology</masterLabel>
-            <translation><!-- Otolaryngology --></translation>
-        </picklistValues>
-        <picklistValues>
             <masterLabel>Pain Medicine</masterLabel>
             <translation><!-- Pain Medicine --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Palliative Care Medicine</masterLabel>
-            <translation><!-- Palliative Care Medicine --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Physical Medicine &amp; Rehabilitation</masterLabel>
             <translation><!-- Physical Medicine &amp; Rehabilitation --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Psychiatry</masterLabel>
+            <translation><!-- Psychiatry --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Psychology</masterLabel>
+            <translation><!-- Psychology --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Pulmonology</masterLabel>
             <translation><!-- Pulmonology --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Rheumatology</masterLabel>
-            <translation><!-- Rheumatology --></translation>
+            <masterLabel>Radiation Oncology</masterLabel>
+            <translation><!-- Radiation Oncology --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Surgery</masterLabel>
-            <translation><!-- Surgery --></translation>
+            <masterLabel>Radiology</masterLabel>
+            <translation><!-- Radiology --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rheumatology</masterLabel>
+            <translation><!-- Rheumatology --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Transplant</masterLabel>
@@ -3482,16 +3594,16 @@ provide contact information for each site on which you are active. --></help>
         <label><!-- Preferred Phone --></label>
         <name>npe01__PreferredPhone__c</name>
         <picklistValues>
+            <masterLabel>Alternate</masterLabel>
+            <translation><!-- Alternate --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Home</masterLabel>
             <translation>Thuis</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Mobile</masterLabel>
             <translation>Mobiel</translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Other</masterLabel>
-            <translation>Overig</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Work</masterLabel>
@@ -4257,27 +4369,27 @@ provide contact information for each site on which you are active. --></help>
         <name>Wish_Survey_Contact_Information</name>
     </quickActions>
     <recordTypes>
-        <description><!-- It will display the board member information --></description>
+        <description><!-- A contact representing a board member --></description>
         <label><!-- Board Member --></label>
         <name>Board_Member</name>
     </recordTypes>
     <recordTypes>
-        <description><!-- It will display the information about the medical professional. --></description>
+        <description><!-- A contact representing a medical professional --></description>
         <label><!-- Medical Professional --></label>
         <name>Medical_Professional</name>
     </recordTypes>
     <recordTypes>
-        <description><!-- It will display the information about the volunteer. --></description>
+        <description><!-- A contact representing a volunteer --></description>
         <label><!-- Volunteer Contact --></label>
         <name>Volunteer_Contact</name>
     </recordTypes>
     <recordTypes>
-        <description><!-- It will display the child related information. --></description>
+        <description><!-- A contact representing a wish child --></description>
         <label><!-- Wish Child --></label>
         <name>Wish_Child</name>
     </recordTypes>
     <recordTypes>
-        <description><!-- It will display the wish kid family related information. --></description>
+        <description><!-- A contact representing a wish family member --></description>
         <label><!-- Wish Family --></label>
         <name>Wish_Family</name>
     </recordTypes>
@@ -4312,6 +4424,10 @@ provide contact information for each site on which you are active. --></help>
     <validationRules>
         <errorMessage><!-- Please enter value for Reason for Publicity Candidate in order to enter check Publicity Candidate --></errorMessage>
         <name>Contact_Publicity_Candidate_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please populate a Chapter Name or Zip Code to ensure the MP gets routed to a chapter. --></errorMessage>
+        <name>Ensure_the_MP_has_a_Chapter_or_Zip</name>
     </validationRules>
     <webLinks>
         <label><!-- LOOP --></label>
@@ -4352,6 +4468,10 @@ provide contact information for each site on which you are active. --></help>
     <webLinks>
         <label><!-- Merge_Contacts --></label>
         <name>npsp__Merge_Contacts</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- New_Gift --></label>
+        <name>npsp__New_Gift</name>
     </webLinks>
     <webLinks>
         <label><!-- Recalculate_Rollups --></label>
