@@ -8011,11 +8011,11 @@ provide contact information for each site on which you are active.</inlineHelpTe
         <valueSet>
             <restricted>true</restricted>
             <valueSetDefinition>
-                <sorted>false</sorted>
+                <sorted>true</sorted>
                 <value>
-                    <fullName>Brain Tumor</fullName>
+                    <fullName>Anesthesiology</fullName>
                     <default>false</default>
-                    <label>Brain Tumor</label>
+                    <label>Anesthesiology</label>
                 </value>
                 <value>
                     <fullName>Cardiology</fullName>
@@ -8023,9 +8023,14 @@ provide contact information for each site on which you are active.</inlineHelpTe
                     <label>Cardiology</label>
                 </value>
                 <value>
-                    <fullName>Critical Care Medicine</fullName>
+                    <fullName>Cardio-thoracic Surgeon</fullName>
                     <default>false</default>
-                    <label>Critical Care Medicine</label>
+                    <label>Cardio-thoracic Surgeon</label>
+                </value>
+                <value>
+                    <fullName>Critical Care</fullName>
+                    <default>false</default>
+                    <label>Critical Care</label>
                 </value>
                 <value>
                     <fullName>Dermatology</fullName>
@@ -8033,9 +8038,24 @@ provide contact information for each site on which you are active.</inlineHelpTe
                     <label>Dermatology</label>
                 </value>
                 <value>
+                    <fullName>Developmental Pediatrics</fullName>
+                    <default>false</default>
+                    <label>Developmental Pediatrics</label>
+                </value>
+                <value>
+                    <fullName>Emergency Medicine</fullName>
+                    <default>false</default>
+                    <label>Emergency Medicine</label>
+                </value>
+                <value>
                     <fullName>Endocrinology</fullName>
                     <default>false</default>
                     <label>Endocrinology</label>
+                </value>
+                <value>
+                    <fullName>ENT (Ear, Nose &amp; Throat)</fullName>
+                    <default>false</default>
+                    <label>ENT (Ear, Nose &amp; Throat)</label>
                 </value>
                 <value>
                     <fullName>Gastroenterology</fullName>
@@ -8048,24 +8068,34 @@ provide contact information for each site on which you are active.</inlineHelpTe
                     <label>General Pediatrics</label>
                 </value>
                 <value>
+                    <fullName>General Surgery</fullName>
+                    <default>false</default>
+                    <label>General Surgery</label>
+                </value>
+                <value>
                     <fullName>Genetics</fullName>
                     <default>false</default>
                     <label>Genetics</label>
                 </value>
                 <value>
-                    <fullName>Genetics &amp; Metabolism</fullName>
+                    <fullName>Gynecology</fullName>
                     <default>false</default>
-                    <label>Genetics &amp; Metabolism</label>
+                    <label>Gynecology</label>
                 </value>
                 <value>
-                    <fullName>Genitourinary</fullName>
+                    <fullName>Hematology-Oncology</fullName>
                     <default>false</default>
-                    <label>Genitourinary</label>
+                    <label>Hematology-Oncology</label>
                 </value>
                 <value>
-                    <fullName>Hematology</fullName>
+                    <fullName>Hepatology</fullName>
                     <default>false</default>
-                    <label>Hematology</label>
+                    <label>Hepatology</label>
+                </value>
+                <value>
+                    <fullName>Hospice/Palliative Care</fullName>
+                    <default>false</default>
+                    <label>Hospice/Palliative Care</label>
                 </value>
                 <value>
                     <fullName>Hospitalist</fullName>
@@ -8083,6 +8113,21 @@ provide contact information for each site on which you are active.</inlineHelpTe
                     <label>Infectious Disease</label>
                 </value>
                 <value>
+                    <fullName>Internal Medicine/Hospitalist</fullName>
+                    <default>false</default>
+                    <label>Internal Medicine/Hospitalist</label>
+                </value>
+                <value>
+                    <fullName>Interventional Radiology</fullName>
+                    <default>false</default>
+                    <label>Interventional Radiology</label>
+                </value>
+                <value>
+                    <fullName>Metabolics</fullName>
+                    <default>false</default>
+                    <label>Metabolics</label>
+                </value>
+                <value>
                     <fullName>Nephrology</fullName>
                     <default>false</default>
                     <label>Nephrology</label>
@@ -8093,9 +8138,14 @@ provide contact information for each site on which you are active.</inlineHelpTe
                     <label>Neurology</label>
                 </value>
                 <value>
-                    <fullName>Oncology</fullName>
+                    <fullName>Neurosurgery</fullName>
                     <default>false</default>
-                    <label>Oncology</label>
+                    <label>Neurosurgery</label>
+                </value>
+                <value>
+                    <fullName>Ophthalmology</fullName>
+                    <default>false</default>
+                    <label>Ophthalmology</label>
                 </value>
                 <value>
                     <fullName>Orthopedics</fullName>
@@ -8103,19 +8153,9 @@ provide contact information for each site on which you are active.</inlineHelpTe
                     <label>Orthopedics</label>
                 </value>
                 <value>
-                    <fullName>Otolaryngology</fullName>
-                    <default>false</default>
-                    <label>Otolaryngology</label>
-                </value>
-                <value>
                     <fullName>Pain Medicine</fullName>
                     <default>false</default>
                     <label>Pain Medicine</label>
-                </value>
-                <value>
-                    <fullName>Palliative Care Medicine</fullName>
-                    <default>false</default>
-                    <label>Palliative Care Medicine</label>
                 </value>
                 <value>
                     <fullName>Physical Medicine &amp; Rehabilitation</fullName>
@@ -8123,19 +8163,34 @@ provide contact information for each site on which you are active.</inlineHelpTe
                     <label>Physical Medicine &amp; Rehabilitation</label>
                 </value>
                 <value>
+                    <fullName>Psychiatry</fullName>
+                    <default>false</default>
+                    <label>Psychiatry</label>
+                </value>
+                <value>
+                    <fullName>Psychology</fullName>
+                    <default>false</default>
+                    <label>Psychology</label>
+                </value>
+                <value>
                     <fullName>Pulmonology</fullName>
                     <default>false</default>
                     <label>Pulmonology</label>
                 </value>
                 <value>
+                    <fullName>Radiation Oncology</fullName>
+                    <default>false</default>
+                    <label>Radiation Oncology</label>
+                </value>
+                <value>
+                    <fullName>Radiology</fullName>
+                    <default>false</default>
+                    <label>Radiology</label>
+                </value>
+                <value>
                     <fullName>Rheumatology</fullName>
                     <default>false</default>
                     <label>Rheumatology</label>
-                </value>
-                <value>
-                    <fullName>Surgery</fullName>
-                    <default>false</default>
-                    <label>Surgery</label>
                 </value>
                 <value>
                     <fullName>Transplant</fullName>
@@ -12300,26 +12355,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>Specialty__c</picklist>
             <values>
-                <fullName>Cardiology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Critical Care Medicine</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Dermatology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Endocrinology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Gastroenterology</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>General Pediatrics</fullName>
                 <default>false</default>
             </values>
@@ -13875,15 +13910,35 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>Specialty__c</picklist>
             <values>
+                <fullName>Anesthesiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cardio-thoracic Surgeon</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Cardiology</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Critical Care Medicine</fullName>
+                <fullName>Critical Care</fullName>
                 <default>false</default>
             </values>
             <values>
                 <fullName>Dermatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developmental Pediatrics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ENT %28Ear%2C Nose %26 Throat%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emergency Medicine</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -13899,7 +13954,27 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
+                <fullName>General Surgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Genetics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gynecology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hematology-Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hepatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospice%2FPalliative Care</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -13915,11 +13990,31 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
+                <fullName>Internal Medicine%2FHospitalist</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Interventional Radiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Metabolics</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Nephrology</fullName>
                 <default>false</default>
             </values>
             <values>
                 <fullName>Neurology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neurosurgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ophthalmology</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -13935,7 +14030,23 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
+                <fullName>Psychiatry</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Psychology</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Pulmonology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radiation Oncology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Radiology</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -15497,26 +15608,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>Specialty__c</picklist>
             <values>
-                <fullName>Cardiology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Critical Care Medicine</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Dermatology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Endocrinology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Gastroenterology</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>General Pediatrics</fullName>
                 <default>false</default>
             </values>
@@ -17074,26 +17165,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         </picklistValues>
         <picklistValues>
             <picklist>Specialty__c</picklist>
-            <values>
-                <fullName>Cardiology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Critical Care Medicine</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Dermatology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Endocrinology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Gastroenterology</fullName>
-                <default>false</default>
-            </values>
             <values>
                 <fullName>General Pediatrics</fullName>
                 <default>false</default>
@@ -18794,26 +18865,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         </picklistValues>
         <picklistValues>
             <picklist>Specialty__c</picklist>
-            <values>
-                <fullName>Cardiology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Critical Care Medicine</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Dermatology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Endocrinology</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Gastroenterology</fullName>
-                <default>false</default>
-            </values>
             <values>
                 <fullName>General Pediatrics</fullName>
                 <default>false</default>
