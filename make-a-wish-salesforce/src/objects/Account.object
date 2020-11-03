@@ -1181,6 +1181,17 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Chapter_Match__c</fullName>
+        <description>Merge Matching for ODP-95</description>
+        <externalId>false</externalId>
+        <formula>IF(Chapter_Name__r.Chapter_Id__c = LEFT( External_Id__c ,3),"Chapter Match","Chapter Mismatch")</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Chapter Match</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Chapter_Name_Text__c</fullName>
         <description>Displays the Account's Chapter Name as text.</description>
         <externalId>false</externalId>

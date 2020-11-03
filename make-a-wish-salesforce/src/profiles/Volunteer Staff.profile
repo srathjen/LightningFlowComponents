@@ -1596,6 +1596,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Account.Chapter_Match__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Account.Chapter_Name_Text__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -6897,6 +6902,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.Chapter_Intake_Manager__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.Chapter_Match__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
