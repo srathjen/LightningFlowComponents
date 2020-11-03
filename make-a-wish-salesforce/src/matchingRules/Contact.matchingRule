@@ -34,7 +34,7 @@
             <fieldName>RecordType__c</fieldName>
             <matchingMethod>Exact</matchingMethod>
         </matchingRuleItems>
-        <ruleStatus>Inactive</ruleStatus>
+        <ruleStatus>Active</ruleStatus>
     </matchingRules>
     <matchingRules>
         <fullName>Potential_Duplicates_Contacts</fullName>
@@ -107,6 +107,6 @@
             <fieldName>npe01__HomeEmail__c</fieldName>
             <matchingMethod>Exact</matchingMethod>
         </matchingRuleItems>
-        <ruleStatus>Inactive</ruleStatus>
+        <ruleStatus>Active</ruleStatus>
     </matchingRules>
 </MatchingRules>
