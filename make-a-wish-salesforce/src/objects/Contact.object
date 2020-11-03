@@ -3096,6 +3096,18 @@ IF(ISBLANK(COI_Expiration_Date__c)=TRUE, IMAGE("/resource/icons/COI_Missing.png"
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Chapter_Match__c</fullName>
+        <description>Merge Matching for ODP-94</description>
+        <externalId>false</externalId>
+        <formula>IF(Region_Chapter__r.Chapter_Id__c = LEFT( External_Id__c ,3),"Chapter Match","Chapter Mismatch")</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Chapter Match</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>City_Employer__c</fullName>
         <description>It will hold the city value of the employer</description>
         <externalId>false</externalId>
