@@ -28,6 +28,50 @@ public class DVMedicalSummaryAttachment_AC_Test {
         List<ICD_Codes__c> icdCodes = TestDataFactory.createIcdCode(1);
         insert icdCodes;
 
+        List<Contact> contactList = TestDataFactory.createContact(8);
+        Contact mpContactLee = contactList.get(0);
+        mpContactLee.FirstName = 'Ken';
+        mpContactLee.LastName = 'Lee';
+        mpContactLee.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+        mpContactLee.Region_Chapter__c = account.Id;
+        Contact mpContactMiller = contactList.get(1);
+        mpContactMiller.FirstName = 'Jennifer';
+        mpContactMiller.LastName = 'Miller';
+        mpContactMiller.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+        mpContactMiller.Region_Chapter__c = account.Id;
+        Contact mpContactJohnson = contactList.get(2);
+        mpContactJohnson.FirstName = 'Raymond';
+        mpContactJohnson.LastName = 'Johnson';
+        mpContactJohnson.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+        mpContactJohnson.Region_Chapter__c = account.Id;
+        Contact mpContactPatel = contactList.get(3);
+        mpContactPatel.FirstName = 'Daniel';
+        mpContactPatel.LastName = 'Patel';
+        mpContactPatel.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+        mpContactPatel.Region_Chapter__c = account.Id;
+        Contact mpContactBrown = contactList.get(4);
+        mpContactBrown.FirstName = 'Rachel';
+        mpContactBrown.LastName = 'Brown';
+        mpContactBrown.RecordTypeId = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
+        mpContactBrown.Region_Chapter__c = account.Id;
+        Contact wishFamilyWalker = contactList.get(5);
+        wishFamilyWalker.FirstName = 'Lucy';
+        wishFamilyWalker.LastName = 'Walker';
+        wishFamilyWalker.RecordTypeId = Constant_AC.WISH_FAMILY_RT_ID;
+        wishFamilyWalker.Region_Chapter__c = account.Id;
+        Contact boardMember = contactList.get(6);
+        boardMember.FirstName = 'Samuel';
+        boardMember.LastName = 'Crane';
+        boardMember.RecordTypeId = Constant_AC.BOARD_MEMBER_RT_ID;
+        boardMember.Region_Chapter__c = account.Id;
+        Contact volunteer = contactList.get(7);
+        volunteer.FirstName = 'Katherine';
+        volunteer.LastName = 'Buckland';
+        volunteer.RecordTypeId = Constant_AC.VOLUNTEER_RT_ID;
+        volunteer.AccountId = account.Id;
+        volunteer.Region_Chapter__c = account.Id;
+        insert contactList;
+
         List<Lead> leadsDataFactory = TestDataFactory.createLead(1);
         Lead lead = leadsDataFactory.get(0);
         lead.ChapterName__c = accounts[0].Id;
@@ -38,6 +82,12 @@ public class DVMedicalSummaryAttachment_AC_Test {
         lead.Diagnosis_Given_By_Referrer__c = 'Test Diagnosis';
         lead.PD_ICD_Code__c = icdCodes[0].Id;
         lead.Company = 'MAW';
+        lead.Referring_MP__c = mpContactLee.Id;
+        lead.Treating_MP__c = mpContactMiller.Id;
+        lead.Best_Contact__c = mpContactJohnson.Id;
+        lead.Alt_1_MP__c = mpContactPatel.Id;
+        lead.Alt_2_MP__c = mpContactBrown.Id;
+        lead.Hidden_DV_form_Medical_professional_Type__c = Constant_AC.LEAD_DV_FORM_TYPE_REFERRING_MEDICAL_PROFESSIONAL;
         insert leadsDataFactory;
 
         List<cg__Lead_File__c> leadFilesDataFactory = TestDataFactory.createLeadFile(1);
@@ -48,11 +98,11 @@ public class DVMedicalSummaryAttachment_AC_Test {
         trac_TriggerHandlerBase.blockTrigger = false;
     }
 
-    //Attachment for Diagnosis Verification
     @IsTest
     public static void getAttachmentWhenSaved() {
         Lead lead = [
-                SELECT Id
+                SELECT Id, Hidden_DV_form_Medical_professional_Type__c, Referring_MP__c, Treating_MP__c, Best_Contact__c,
+                        Alt_1_MP__c, Alt_2_MP__c
                 FROM Lead
                 WHERE Name = 'Jack Smith'
         ];
@@ -79,11 +129,11 @@ public class DVMedicalSummaryAttachment_AC_Test {
         Test.stopTest();
     }
 
-    //Attachment for Diagnosis Verification
     @IsTest
     public static void getAttachmentWhenDeleted() {
         Lead lead = [
-                SELECT Id
+                SELECT Id, Hidden_DV_form_Medical_professional_Type__c, Referring_MP__c, Treating_MP__c, Best_Contact__c,
+                        Alt_1_MP__c, Alt_2_MP__c
                 FROM Lead
                 WHERE Name = 'Jack Smith'
         ];
@@ -107,6 +157,101 @@ public class DVMedicalSummaryAttachment_AC_Test {
         currDiagnosisVerificationDupe.save();
         currDiagnosisVerificationDupe.attachmentId = leadFile[0].Id;
         currDiagnosisVerificationDupe.removeAttachment();
+        Test.stopTest();
+    }
+
+    @IsTest
+    public static void findAttachmentIdReferringMp() {
+        Lead lead = [
+                SELECT Id, Hidden_DV_form_Medical_professional_Type__c, Referring_MP__c, Treating_MP__c, Best_Contact__c,
+                        Alt_1_MP__c, Alt_2_MP__c
+                FROM Lead
+                WHERE Name = 'Jack Smith'
+        ];
+        lead.Hidden_DV_form_Medical_professional_Type__c = Constant_AC.LEAD_DV_FORM_TYPE_REFERRING_MEDICAL_PROFESSIONAL;
+        update lead;
+
+        Test.startTest();
+        Test.setCurrentPage(Page.DVMedicalSummaryAttachment_VF);
+        ApexPages.currentPage().getParameters().put('id', lead.Id);
+        ApexPages.currentPage().getParameters().put('saved', 'true');
+        new DVMedicalSummaryAttachment_AC();
+        Test.stopTest();
+    }
+
+    @IsTest
+    public static void findAttachmentIdTreatingMp() {
+        Lead lead = [
+                SELECT Id, Hidden_DV_form_Medical_professional_Type__c, Referring_MP__c, Treating_MP__c, Best_Contact__c,
+                        Alt_1_MP__c, Alt_2_MP__c
+                FROM Lead
+                WHERE Name = 'Jack Smith'
+        ];
+        lead.Hidden_DV_form_Medical_professional_Type__c = Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL;
+        update lead;
+
+        Test.startTest();
+        Test.setCurrentPage(Page.DVMedicalSummaryAttachment_VF);
+        ApexPages.currentPage().getParameters().put('id', lead.Id);
+        ApexPages.currentPage().getParameters().put('saved', 'true');
+        new DVMedicalSummaryAttachment_AC();
+        Test.stopTest();
+    }
+
+    @IsTest
+    public static void findAttachmentIdBestMp() {
+        Lead lead = [
+                SELECT Id, Hidden_DV_form_Medical_professional_Type__c, Referring_MP__c, Treating_MP__c, Best_Contact__c,
+                        Alt_1_MP__c, Alt_2_MP__c
+                FROM Lead
+                WHERE Name = 'Jack Smith'
+        ];
+        lead.Hidden_DV_form_Medical_professional_Type__c = Constant_AC.LEAD_DV_FORM_TYPE_BEST_CONTACT;
+        update lead;
+
+        Test.startTest();
+        Test.setCurrentPage(Page.DVMedicalSummaryAttachment_VF);
+        ApexPages.currentPage().getParameters().put('id', lead.Id);
+        ApexPages.currentPage().getParameters().put('saved', 'true');
+        new DVMedicalSummaryAttachment_AC();
+        Test.stopTest();
+    }
+
+    @IsTest
+    public static void findAttachmentIdAlt1Mp() {
+        Lead lead = [
+                SELECT Id, Hidden_DV_form_Medical_professional_Type__c, Referring_MP__c, Treating_MP__c, Best_Contact__c,
+                        Alt_1_MP__c, Alt_2_MP__c
+                FROM Lead
+                WHERE Name = 'Jack Smith'
+        ];
+        lead.Hidden_DV_form_Medical_professional_Type__c = Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL;
+        update lead;
+
+        Test.startTest();
+        Test.setCurrentPage(Page.DVMedicalSummaryAttachment_VF);
+        ApexPages.currentPage().getParameters().put('id', lead.Id);
+        ApexPages.currentPage().getParameters().put('saved', 'true');
+        new DVMedicalSummaryAttachment_AC();
+        Test.stopTest();
+    }
+
+    @IsTest
+    public static void findAttachmentIdAlt2Mp() {
+        Lead lead = [
+                SELECT Id, Hidden_DV_form_Medical_professional_Type__c, Referring_MP__c, Treating_MP__c, Best_Contact__c,
+                        Alt_1_MP__c, Alt_2_MP__c
+                FROM Lead
+                WHERE Name = 'Jack Smith'
+        ];
+        lead.Hidden_DV_form_Medical_professional_Type__c = Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_2_MEDICAL_PROFESSIONAL;
+        update lead;
+
+        Test.startTest();
+        Test.setCurrentPage(Page.DVMedicalSummaryAttachment_VF);
+        ApexPages.currentPage().getParameters().put('id', lead.Id);
+        ApexPages.currentPage().getParameters().put('saved', 'true');
+        new DVMedicalSummaryAttachment_AC();
         Test.stopTest();
     }
 }

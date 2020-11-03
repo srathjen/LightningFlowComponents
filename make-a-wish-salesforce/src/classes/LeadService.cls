@@ -131,6 +131,7 @@ public class LeadService {
 		lead.DV_Signer_Last_Name__c = EMPTY;
 		lead.DV_Signer_Phone__c = EMPTY;
 		lead.DV_Signer_Email__c = EMPTY;
+		lead.Part_A_Form_Password__c = Utils.generateRandomNumber(6);
 
 		//SIW-378 : Reset Fields
 		lead.Does_Child_Have_Cognitive_Delays__c = EMPTY;
@@ -466,8 +467,6 @@ public class LeadService {
 				ErrorMessage_AC.createDebugRec('LeadService',
 						String.valueOf(lead), String.valueOf(ex), 'updateLeadOwner',
 						lead.Id, ex.getStackTraceString(), 'Error');
-			}
-			for (Lead lead : accountIdLeadMap.values()) {
 				lead.addError(Label.Debug_log_error_message);
 			}
 		}
@@ -775,8 +774,6 @@ public class LeadService {
 				ErrorMessage_AC.createdebugRec('LeadService',
 						String.valueOf(lead), String.valueOf(ex), 'findDuplicateLeads',
 						lead.Id, ex.getStackTraceString(), 'Error');
-			}
-			for (Lead lead : leadList) {
 				lead.addError(Label.Debug_log_error_message);
 			}
 		}
@@ -895,8 +892,6 @@ public class LeadService {
 				ErrorMessage_AC.createDebugRec('LeadService',
 						String.valueOf(lead), String.valueOf(ex), 'findDuplicateContacts',
 						lead.Id, ex.getStackTraceString(), 'Error');
-			}
-			for (Lead lead : leadRecords) {
 				lead.addError(Label.Debug_log_error_message);
 			}
 		}
@@ -915,25 +910,16 @@ public class LeadService {
 				}
 			}
 			if (le.DOB__c == null) {
-				if (String.isEmpty(message)) {
-					message = Schema.SObjectType.Lead.fields.DOB__c.label;
-				} else {
-					message = message + COMMA_SPACE + Schema.SObjectType.Lead.fields.DOB__c.label;
-				}
+				message = String.isEmpty(message) ? Schema.SObjectType.Lead.fields.DOB__c.label :
+						message + COMMA_SPACE + Schema.SObjectType.Lead.fields.DOB__c.label;
 			}
 			if (le.Any_medical_reason_for_moving_quickly__c == null) {
-				if (String.isEmpty(message)) {
-					message = Schema.SObjectType.Lead.fields.Any_medical_reason_for_moving_quickly__c.label;
-				} else {
-					message = message + COMMA_SPACE + Schema.SObjectType.Lead.fields.Any_medical_reason_for_moving_quickly__c.label;
-				}
+				message = String.isEmpty(message) ? Schema.SObjectType.Lead.fields.Any_medical_reason_for_moving_quickly__c.label :
+						message + COMMA_SPACE + Schema.SObjectType.Lead.fields.Any_medical_reason_for_moving_quickly__c.label;
 			}
 			if (le.I_am_Recognized_To_Practice_As_a__c == null) {
-				if (String.isEmpty(message)) {
-					message = Schema.SObjectType.Lead.fields.I_am_Recognized_To_Practice_As_a__c.label;
-				} else {
-					message = message + COMMA_SPACE + Schema.SObjectType.Lead.fields.I_am_Recognized_To_Practice_As_a__c.label;
-				}
+				message = String.isEmpty(message) ? Schema.SObjectType.Lead.fields.I_am_Recognized_To_Practice_As_a__c.label :
+						message + COMMA_SPACE + Schema.SObjectType.Lead.fields.I_am_Recognized_To_Practice_As_a__c.label;
 			}
 			if (String.isNotBlank(message)) {
 				for (Lead leadTemp : leadList) {
@@ -1025,7 +1011,7 @@ public class LeadService {
 	 * @param leadIds Lead Ids
 	 * @return list of Leads
     */
-	public static List<Lead> findLeadById(Set<Id> leadIds){
+	public static List<Lead> findLeadById(Set<Id> leadIds) {
 		return [
 				SELECT Id, Name, DOB__c, FirstName, Why_do_you_feel_would_be_eligible_Wish__c, LastName, CreatedDate, Migrated_Record__c,
 						I_am_Recognized_To_Practice_As_a__c, Sibling_Detail__c, Medical_Provider_Category__c,
