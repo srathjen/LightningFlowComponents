@@ -1184,7 +1184,7 @@
         <fullName>Chapter_Match__c</fullName>
         <description>Merge Matching for ODP-95</description>
         <externalId>false</externalId>
-        <formula>IF(Chapter_Name__r.Chapter_Id__c = LEFT( External_Id__c ,3),"Chapter Match","Chapter Mismatch")</formula>
+        <formula>IF(Chapter_Name__r.Chapter_Id__c = LEFT( External_Id__c ,3),"Chapter Match",null)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Chapter Match</label>
         <required>false</required>
