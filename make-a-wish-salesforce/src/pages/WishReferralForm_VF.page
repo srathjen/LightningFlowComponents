@@ -14,6 +14,50 @@
 -->
 <apex:page controller="WishReferralForm_AC" showHeader="false" applyBodyTag="false" sidebar="false"
            standardStylesheets="false" docType="html-5.0" cache="false">
+    <script>
+    //Adding Other Language field
+    function languageselection(selectedlanguageId) {
+        var selectedArray = new Array();
+        var selObj = document.getElementById(selectedlanguageId);
+        var i;
+        var count = 0;
+        for (i = 0; i < selObj.options.length; i++) {
+            if (selObj.options[i].selected) {
+                selectedArray[count] = selObj.options[i].value;
+                count++;
+            }
+        }
+        console.log(selectedArray);
+        if (selectedArray.indexOf("Other") > -1) {//SIW-569 Changed unsupported method 'includes' to 'indexOf' for IE11 issue
+            document.getElementById('otherlanguagediv').style.display = 'block';
+        } else {
+            document.getElementsByClassName('otherlanguageclass')[0].value = '';
+            document.getElementById('otherlanguagediv').style.display = 'none';
+        }
+        //SIW-370 changed to display and hide primary language input box red or grey
+        var elemsDiv = document.querySelectorAll('[id$="plang_chosen"]');
+        var elems = document.querySelectorAll('[id$="plang"]');
+        var e = document.querySelectorAll('[id$="langError"]');
+        var lab = document.querySelectorAll('[id$="langLabel"]');
+        if (elems[0].value == '') {
+            e[0].style.display = "block";
+            lab[0].style.color = "red";
+            if (elemsDiv[0].querySelectorAll('div').length > 0) {
+                elemsDiv[0].querySelectorAll('div')[0].style.border = "1px solid red";
+            } else {
+                elems[0].style.border = "1px solid red";
+            }
+        } else {
+            e[0].style.display = "none";
+            lab[0].style.color = "#75787B";
+            if (elemsDiv[0].querySelectorAll('div').length > 0) {
+                elemsDiv[0].querySelectorAll('div')[0].style.border = "1px solid rgba(0,0,0,.15)";
+            } else {
+                elems[0].style.border = "1px solid rgba(0,0,0,.15)";
+            }
+        }
+    }
+    </script>
     <body>
     <apex:form id="frm" styleClass="portal inquiry">
         <apex:outputpanel rendered="{!displayAckMsg == false}" id="panel">
@@ -1318,7 +1362,7 @@
                                 <div class="col-sm-6">
                                     <apex:inputField value="{!currLead.Best_Contact_Category__c}"
                                                      styleClass="form-control col-xs-12 col-sm-12 c-select bcategory"
-                                                     id="bcategory"/> <!--medProvCat-->
+                                                     id="bcategory"/>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -1581,48 +1625,6 @@
         var refchid = getQueryVariable('chid');
         document.querySelector("meta[name='ref-chid']").setAttribute('content', refchid);
         // $('meta[name=ref-chid]').attr('content', refchid);
-
-        //Adding Other Language field
-        function languageselection(selectedlanguageId) {
-            var selectedArray = new Array();
-            var selObj = document.getElementById(selectedlanguageId);
-            var i;
-            var count = 0;
-            for (i = 0; i < selObj.options.length; i++) {
-                if (selObj.options[i].selected) {
-                    selectedArray[count] = selObj.options[i].value;
-                    count++;
-                }
-            }
-            if (selectedArray.indexOf("Other") > -1) {//SIW-569 Changed unsupported method 'includes' to 'indexOf' for IE11 issue
-                document.getElementById('otherlanguagediv').style.display = 'block';
-            } else {
-                document.getElementsByClassName('otherlanguageclass')[0].value = '';
-                document.getElementById('otherlanguagediv').style.display = 'none';
-            }
-            //SIW-370 changed to display and hide primary language input box red or grey
-            var elemsDiv = document.querySelectorAll('[id$="plang_chosen"]');
-            var elems = document.querySelectorAll('[id$="plang"]');
-            var e = document.querySelectorAll('[id$="langError"]');
-            var lab = document.querySelectorAll('[id$="langLabel"]');
-            if (elems[0].value == '') {
-                e[0].style.display = "block";
-                lab[0].style.color = "red";
-                if (elemsDiv[0].querySelectorAll('div').length > 0) {
-                    elemsDiv[0].querySelectorAll('div')[0].style.border = "1px solid red";
-                } else {
-                    elems[0].style.border = "1px solid red";
-                }
-            } else {
-                e[0].style.display = "none";
-                lab[0].style.color = "#75787B";
-                if (elemsDiv[0].querySelectorAll('div').length > 0) {
-                    elemsDiv[0].querySelectorAll('div')[0].style.border = "1px solid rgba(0,0,0,.15)";
-                } else {
-                    elems[0].style.border = "1px solid rgba(0,0,0,.15)";
-                }
-            }
-        }
     </script>
     <!-- maw satellite script -->
     <!-- dev -->
@@ -1733,13 +1735,15 @@
                 document.getElementById('healthProvider').style.display = 'none';
                 document.getElementsByClassName('refToParent')[0].style.display = 'none';
                 document.getElementsByClassName('refToMP')[0].style.display = 'block';
-                for (let mpRelElement of document.getElementsByClassName('mpRel')) {
-                    mpRelElement.style.display = 'block';
+                let mpRelElement = document.getElementsByClassName('mpRel');
+                for (i = 0; i < mpRelElement.length; i++) {
+                    mpRelElement[i].style.display = 'block';
                 }
                 document.getElementById("trtHtf").style.display = 'none';
                 document.getElementsByClassName('repeatMedProf')[0].style.display = 'none';
                 document.getElementsByClassName('trtMpForm')[0].style.display = 'none';
                 document.getElementsByClassName('bestMpInfo')[0].style.display = 'block';
+                document.getElementsByClassName('repeatMedProfBest')[0].style.display = 'block';
             } else if (val == 'Self' || val == 'Parent/Guardian' || val == 'Family Member/Relative') {
                 document.getElementById('healthProvider').style.display = '';
                 document.getElementById('remail1div').style.display = 'none';
@@ -1747,11 +1751,13 @@
                 document.getElementsByClassName('refToMP')[0].style.display = 'none';
                 document.getElementsByClassName('trtMpInfo')[0].style.display = 'block';
                 document.getElementsByClassName('trtMpForm')[0].style.display = 'block';
-                for (let mpRelElement of document.getElementsByClassName('mpRel')) {
-                    mpRelElement.style.display = 'none';
+                let mpRelElement = document.getElementsByClassName('mpRel');
+                for (i = 0; i < mpRelElement.length; i++) {
+                    mpRelElement[i].style.display = 'none';
                 }
-                for (let nonmpRelElement of document.getElementsByClassName('nonMpRel')) {
-                    nonmpRelElement.style.display = 'block';
+                let nonmpRelElement = document.getElementsByClassName('nonMpRel');
+                for (i = 0; i < mpRelElement.length; i++) {
+                    nonmpRelElement[i].style.display = 'block';
                 }
             } else {
                 document.getElementById('remaildiv').style.display = 'none';
@@ -1760,8 +1766,9 @@
                 document.getElementsByClassName('refToParent')[0].style.display = 'block';
                 document.getElementsByClassName('refToMP')[0].style.display = 'none';
                 document.getElementsByClassName('trtMpForm')[0].style.display = 'block';
-                for (let mpRelElement of document.getElementsByClassName('mpRel')) {
-                    mpRelElement.style.display = 'none';
+                let mpRelElement = document.getElementsByClassName('mpRel');
+                for (i = 0; i < mpRelElement.length; i++) {
+                    mpRelElement[i].style.display = 'none';
                 }
                 document.getElementById("trtHtf").style.display = 'block';
             }
@@ -1815,16 +1822,16 @@
                 'Name, Alias__c, BillingCity, BillingState', '{0} - {1}, {2}, {3}');
 
             createLightningComponent('externalReferrerContactLookup', 'Contact', 'Referring Medical Professional',
-                'Name, MailingState, MailingCity, Provider_Type__c, Specialty__c', '{0} - {1}, {2}, {3}, {4}');
+                'Name, MailingCity, MailingState, Provider_Type__c, Specialty__c', '{0} - {1}, {2}, {3}, {4}');
 
             createLightningComponent('externalTreatingAccountLookup', 'Account', 'Treating Hospital/Facility',
                 'Name, Alias__c, BillingCity, BillingState', '{0} - {1}, {2}, {3}');
 
             createLightningComponent('externalTreatingContactLookup', 'Contact', 'Treating Medical Professional',
-                'Name, MailingState, MailingCity, Provider_Type__c, Specialty__c', '{0} - {1}, {2}, {3}, {4}');
+                'Name, MailingCity, MailingState, Provider_Type__c, Specialty__c', '{0} - {1}, {2}, {3}, {4}');
 
             createLightningComponent('externalBestContactLookup', 'Contact', 'Medical Professional',
-                'Name, MailingState, MailingCity, Provider_Type__c, Specialty__c', '{0} - {1}, {2}, {3}, {4}');
+                'Name, MailingCity, MailingState, Provider_Type__c, Specialty__c', '{0} - {1}, {2}, {3}, {4}');
         }
 
         function createLightningComponent(lookupId, sObjectAPIName, pluralHint, fieldsToReturn, formattedOutput, filter) {
@@ -1936,6 +1943,12 @@
                                 {escape: true}
                             );
                         }
+                        //check if referring & treating are the same
+                        let refLookupOutput = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0].value;
+                        let trtLookupOutput = document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0].value;
+                        if(refLookupOutput === trtLookupOutput) {
+                            document.getElementsByClassName('repeatMedProfBest')[0].style.display = 'none';
+                        }
                     } else if (inputType === 'treatingContact') {
                         document.querySelector('[id$="createNewTrtMPchk"]').disabled = true;
                         if (document.querySelector('[id$="createNewTrtHTFchk"]').checked) {
@@ -1956,6 +1969,12 @@
                                 },
                                 {escape: true}
                             );
+                        }
+                        //check if referring & treating are the same
+                        let refLookupOutput = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0].value;
+                        let trtLookupOutput = document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0].value;
+                        if(refLookupOutput === trtLookupOutput) {
+                            document.getElementsByClassName('repeatMedProfBest')[0].style.display = 'none';
                         }
                     } else if (inputType === 'bestContact') {
                         document.querySelector('[id$="createNewBestMPchk"]').disabled = true;
@@ -1991,6 +2010,7 @@
                     if (inputType === 'referrerContact') {
                         document.querySelector('[id$="createNewRefMPchk"]').disabled = false;
                         document.getElementsByClassName('refNewAff')[0].style.display = 'none';
+                        document.getElementsByClassName('repeatMedProfBest')[0].style.display = 'block';
                     } else if (inputType === 'referrerAccount') {
                         document.querySelector('[id$="createNewRefHTFchk"]').disabled = false;
                         let referringContact = document.getElementById('j_id0:frm:referrerContactEmpty').value;
@@ -2000,6 +2020,7 @@
                     } else if (inputType === 'treatingContact') {
                         document.querySelector('[id$="createNewTrtMPchk"]').disabled = false;
                         document.getElementsByClassName('trtNewAff')[0].style.display = 'none';
+                        document.getElementsByClassName('repeatMedProfBest')[0].style.display = 'block'
                     } else if (inputType === 'bestContact') {
                         document.querySelector('[id$="createNewBestMPchk"]').disabled = false;
                         document.getElementsByClassName('bestNewAff')[0].style.display = 'none';
