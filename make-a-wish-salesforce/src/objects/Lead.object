@@ -2873,7 +2873,7 @@ IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <formula>IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Treating Medical Professional'),   TEXT (Treating_MP__r.Salutation) +' '+Treating_MP__r.FirstName+' '+Treating_MP__r.LastName ,
 IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c, 'Best contact for Physician'), TEXT ( Best_Contact__r.Salutation ) +' '+Best_Contact__r.FirstName +' '+Best_Contact__r.LastName,  
 IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Alternate 1 Medical Professional'),   TEXT ( Alt_1_MP__r.Salutation ) +' '+Alt_1_MP__r.FirstName  +' '+ Alt_1_MP__r.LastName ,  
-IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Alternate 2 Medical Professional'),   TEXT (Alt_2_MP__r.Salutation) +' '+Alt_1_MP__r.FirstName   +' '+  Alt_1_MP__r.LastName,
+IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Alternate 2 Medical Professional'),   TEXT (Alt_2_MP__r.Salutation) +' '+Alt_2_MP__r.FirstName   +' '+  Alt_2_MP__r.LastName,
 IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Referring Medical Professional'),   TEXT ( Referring_MP__r.Salutation) +' '+Referring_MP__r.FirstName   +' '+  Referring_MP__r.LastName,
   null) ) ) ) )</formula>
         <label>Hidden DV Form Name</label>
