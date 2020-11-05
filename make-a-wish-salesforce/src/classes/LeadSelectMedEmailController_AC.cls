@@ -81,22 +81,22 @@ public class LeadSelectMedEmailController_AC {
 				SELECT Id, FirstName, ChapterName__c, Part_A_Form_Password__c, Part_A_Sent__c,
 						Part_A_Received__c, Using_Paper_Process_For_DV__c, Relationship_to_child__c,
 						HiddenMedicalProfessionalEmail__c, Of_Times_Email_Sent__c, Referring_MP__c,
-						Referring_MP__r.Name, Referring_MP__r.npe01__WorkEmail__c, Referring_MP__r.npsp__Deceased__c,
+						Referring_MP__r.Name, Referring_MP__r.npe01__WorkEmail__c,
 						Referring_MP__r.npe01__AlternateEmail__c, Referring_MP__r.Alternate_Email_2__c,
 						Referring_MP_Email__c, Referring_MP__r.Contact_Notes__c, Treating_MP__c, Treating_MP__r.Name,
 						Treating_MP__r.npe01__WorkEmail__c, Treating_MP__r.npe01__AlternateEmail__c,
 						Treating_MP__r.Alternate_Email_2__c, Treating_Medical_Professional_Email__c,
-						Treating_MP__r.Contact_Notes__c, Treating_MP__r.npsp__Deceased__c, Best_Contact__c, Best_Contact__r.Name,
-						Best_Contact__r.npe01__WorkEmail__c, Best_Contact__r.npe01__AlternateEmail__c, Best_Contact__r.npsp__Deceased__c,
+						Treating_MP__r.Contact_Notes__c, Best_Contact__c, Best_Contact__r.Name,
+						Best_Contact__r.npe01__WorkEmail__c, Best_Contact__r.npe01__AlternateEmail__c,
 						Best_Contact__r.Alternate_Email_2__c, Best_contact_for_Physician_Email__c, Best_Contact__r.Contact_Notes__c,
 						Alt_1_MP__c, Alt_1_MP__r.Name, Alt_1_MP__r.npe01__WorkEmail__c, Alt_1_MP__r.npe01__AlternateEmail__c,
-						Alt_1_MP__r.Alternate_Email_2__c, Alt_1_MP__r.Contact_Notes__c, Alt_1_MP__r.npsp__Deceased__c, Alt_2_MP__c,
+						Alt_1_MP__r.Alternate_Email_2__c, Alt_1_MP__r.Contact_Notes__c, Alt_2_MP__c,
 						Alt_2_MP__r.Name, Alt_2_MP__r.npe01__WorkEmail__c, Alt_2_MP__r.npe01__AlternateEmail__c,
-						Alt_2_MP__r.Alternate_Email_2__c, Alt_2_MP__r.Contact_Notes__c, Alt_2_MP__r.npsp__Deceased__c,
-						Hidden_DV_Form_Name__c, Hidden_Potential_Rush__c, Status, Diagnosis_Given_By_Referrer__c, ICD_Given_By_Referrer__c,
+						Alt_2_MP__r.Alternate_Email_2__c, Alt_2_MP__r.Contact_Notes__c, Hidden_DV_Form_Name__c,
+						Hidden_Potential_Rush__c, Status, Diagnosis_Given_By_Referrer__c, ICD_Given_By_Referrer__c,
 						PD_Condition_Description__c, PD_ICD_Code__c,Does_Child_Have_Cognitive_Delays__c,
 						Does_Child_Have_Speech_or_Language_Delay__c,Non_Verbal_Communication_Method__c,
-						Non_Verbal_Additional_Information__c,Non_Verbal__c 
+						Non_Verbal_Additional_Information__c,Non_Verbal__c
 				FROM Lead
 				WHERE Id = :leadId
 		];
@@ -110,7 +110,7 @@ public class LeadSelectMedEmailController_AC {
 		} else if (lead.Referring_MP__c == lead.Best_Contact__c) {
 			displayReferringContactInformation = false;
 		}
-		if (lead.Referring_MP__c != null && displayReferringContactInformation && !lead.Referring_MP__r.npsp__Deceased__c
+		if (lead.Referring_MP__c != null && displayReferringContactInformation
 				&& (String.isNotEmpty(lead.Referring_MP__r.npe01__WorkEmail__c)
 				|| String.isNotEmpty(lead.Referring_MP__r.npe01__AlternateEmail__c)
 				|| String.isNotEmpty(lead.Referring_MP__r.Alternate_Email_2__c))) {
@@ -147,7 +147,7 @@ public class LeadSelectMedEmailController_AC {
 			referringMp.numProvidedEmails = countNumberOfEmailsProvided(referringMp);
 			contacts.add(referringMp);
 		}
-		if (lead.Treating_MP__c != null && !lead.Treating_MP__r.npsp__Deceased__c && (String.isNotEmpty(lead.Treating_MP__r.npe01__WorkEmail__c)
+		if (lead.Treating_MP__c != null && (String.isNotEmpty(lead.Treating_MP__r.npe01__WorkEmail__c)
 				|| String.isNotEmpty(lead.Treating_MP__r.npe01__AlternateEmail__c)
 				|| String.isNotEmpty(lead.Treating_MP__r.Alternate_Email_2__c))) {
 			SendDiagnosisWrapper treatingMp = new SendDiagnosisWrapper();
@@ -183,7 +183,7 @@ public class LeadSelectMedEmailController_AC {
 			treatingMp.numProvidedEmails = countNumberOfEmailsProvided(treatingMp);
 			contacts.add(treatingMp);
 		}
-		if (lead.Best_Contact__c != null && !lead.Best_Contact__r.npsp__Deceased__c && (String.isNotEmpty(lead.Best_Contact__r.npe01__WorkEmail__c)
+		if (lead.Best_Contact__c != null && (String.isNotEmpty(lead.Best_Contact__r.npe01__WorkEmail__c)
 				|| String.isNotEmpty(lead.Best_Contact__r.npe01__AlternateEmail__c)
 				|| String.isNotEmpty(lead.Best_Contact__r.Alternate_Email_2__c))) {
 			SendDiagnosisWrapper bestContact = new SendDiagnosisWrapper();
@@ -219,7 +219,7 @@ public class LeadSelectMedEmailController_AC {
 			bestContact.numProvidedEmails = countNumberOfEmailsProvided(bestContact);
 			contacts.add(bestContact);
 		}
-		if (lead.Alt_1_MP__c != null && !lead.Alt_1_MP__r.npsp__Deceased__c && (String.isNotEmpty(lead.Alt_1_MP__r.npe01__WorkEmail__c)
+		if (lead.Alt_1_MP__c != null && (String.isNotEmpty(lead.Alt_1_MP__r.npe01__WorkEmail__c)
 				|| String.isNotEmpty(lead.Alt_1_MP__r.npe01__AlternateEmail__c)
 				|| String.isNotEmpty(lead.Alt_1_MP__r.Alternate_Email_2__c))) {
 			SendDiagnosisWrapper alternate1Mp = new SendDiagnosisWrapper();
@@ -242,7 +242,7 @@ public class LeadSelectMedEmailController_AC {
 			alternate1Mp.numProvidedEmails = countNumberOfEmailsProvided(alternate1Mp);
 			contacts.add(alternate1Mp);
 		}
-		if (lead.Alt_2_MP__c != null && !lead.Alt_2_MP__r.npsp__Deceased__c && (String.isNotEmpty(lead.Alt_2_MP__r.npe01__WorkEmail__c)
+		if (lead.Alt_2_MP__c != null && (String.isNotEmpty(lead.Alt_2_MP__r.npe01__WorkEmail__c)
 				|| String.isNotEmpty(lead.Alt_2_MP__r.npe01__AlternateEmail__c)
 				|| String.isNotEmpty(lead.Alt_2_MP__r.Alternate_Email_2__c))) {
 			SendDiagnosisWrapper alternate2Mp = new SendDiagnosisWrapper();
