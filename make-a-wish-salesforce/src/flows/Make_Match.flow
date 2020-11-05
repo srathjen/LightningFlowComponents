@@ -24,8 +24,8 @@
     <actionCalls>
         <name>Get_Duplicate_HTFs</name>
         <label>Get Duplicate HTFs</label>
-        <locationX>2249</locationX>
-        <locationY>870</locationY>
+        <locationX>2308</locationX>
+        <locationY>889</locationY>
         <actionName>AccountService</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -150,22 +150,6 @@
         </assignmentItems>
         <connector>
             <targetReference>Select_a_Before_Create_Matching_MP</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <name>Add_HTF_Name_Matches_to_results</name>
-        <label>Add HTF Name Matches to results</label>
-        <locationX>2733</locationX>
-        <locationY>888</locationY>
-        <assignmentItems>
-            <assignToReference>HTFSearchResults</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <elementReference>Get_HTF_Name_Matches</elementReference>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>Create_NewAC</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -384,8 +368,8 @@
     <assignments>
         <name>Assign_Search_HTF_to_Collection</name>
         <label>Assign Search HTF to Collection</label>
-        <locationX>2146</locationX>
-        <locationY>872</locationY>
+        <locationX>2172</locationX>
+        <locationY>887</locationY>
         <assignmentItems>
             <assignToReference>HTFtoSearchCollection</assignToReference>
             <operator>Add</operator>
@@ -400,8 +384,8 @@
     <assignments>
         <name>Assign_Search_HTF_to_Collection_0</name>
         <label>Assign Search HTF to Collection</label>
-        <locationX>2463</locationX>
-        <locationY>885</locationY>
+        <locationX>2685</locationX>
+        <locationY>895</locationY>
         <assignmentItems>
             <assignToReference>HTFtoSearchCollection</assignToReference>
             <operator>Add</operator>
@@ -410,7 +394,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Get_HTF_Name_Matches</targetReference>
+            <targetReference>Create_NewAC</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -648,7 +632,7 @@
     <assignments>
         <name>Create_NewAC</name>
         <label>Create New</label>
-        <locationX>2838</locationX>
+        <locationX>2809</locationX>
         <locationY>900</locationY>
         <assignmentItems>
             <assignToReference>CreateNewAccount.Name</assignToReference>
@@ -736,8 +720,8 @@
     <assignments>
         <name>HTF_To_Search_Assignment_0</name>
         <label>HTF To Search Assignment</label>
-        <locationX>2036</locationX>
-        <locationY>870</locationY>
+        <locationX>2037</locationX>
+        <locationY>885</locationY>
         <assignmentItems>
             <assignToReference>HTFtoSearch.Name</assignToReference>
             <operator>Assign</operator>
@@ -787,8 +771,8 @@
     <assignments>
         <name>HTF_To_Search_Assignment_0_0</name>
         <label>HTF To Search Assignment</label>
-        <locationX>2373</locationX>
-        <locationY>1032</locationY>
+        <locationX>2556</locationX>
+        <locationY>896</locationY>
         <assignmentItems>
             <assignToReference>HTFtoSearch.Name</assignToReference>
             <operator>Assign</operator>
@@ -1303,8 +1287,8 @@
     <assignments>
         <name>Nullify_Search_Variables</name>
         <label>Nullify Search Variables</label>
-        <locationX>1953</locationX>
-        <locationY>872</locationY>
+        <locationX>1923</locationX>
+        <locationY>875</locationY>
         <assignmentItems>
             <assignToReference>HTFtoSearchCollection</assignToReference>
             <operator>Assign</operator>
@@ -1327,13 +1311,6 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>Get_HTF_Name_Matches</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>EmptyAccountCollection</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
             <assignToReference>AccountSelected</assignToReference>
             <operator>Assign</operator>
             <value>
@@ -1347,8 +1324,8 @@
     <assignments>
         <name>Nullify_Variables</name>
         <label>Nullify Variables</label>
-        <locationX>2363</locationX>
-        <locationY>873</locationY>
+        <locationX>2443</locationX>
+        <locationY>891</locationY>
         <assignmentItems>
             <assignToReference>HTFDupeCount</assignToReference>
             <operator>Assign</operator>
@@ -4122,56 +4099,10 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         </outputAssignments>
     </recordLookups>
     <recordLookups>
-        <name>Get_HTF_Name_Matches</name>
-        <label>Get HTF Name Matches</label>
-        <locationX>2594</locationX>
-        <locationY>884</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Add_HTF_Name_Matches_to_results</targetReference>
-        </connector>
-        <faultConnector>
-            <targetReference>Error_Handling_0</targetReference>
-        </faultConnector>
-        <filters>
-            <field>Name</field>
-            <operator>Contains</operator>
-            <value>
-                <elementReference>HTFtoSearch.Name</elementReference>
-            </value>
-        </filters>
-        <filters>
-            <field>Alias__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>HTFtoSearch.Name</elementReference>
-            </value>
-        </filters>
-        <filters>
-            <field>RecordTypeId</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>HTFRTID</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>false</getFirstRecordOnly>
-        <object>Account</object>
-        <queriedFields>Id</queriedFields>
-        <queriedFields>Name</queriedFields>
-        <queriedFields>Department__c</queriedFields>
-        <queriedFields>BillingCity</queriedFields>
-        <queriedFields>BillingState</queriedFields>
-        <queriedFields>BillingPostalCode</queriedFields>
-        <queriedFields>Chapter_Name_Text__c</queriedFields>
-        <sortField>Name</sortField>
-        <sortOrder>Asc</sortOrder>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
         <name>Get_HTF_RT_ID</name>
         <label>Get HTF RT ID</label>
-        <locationX>1868</locationX>
-        <locationY>873</locationY>
+        <locationX>1811</locationX>
+        <locationY>881</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Nullify_Search_Variables</targetReference>
