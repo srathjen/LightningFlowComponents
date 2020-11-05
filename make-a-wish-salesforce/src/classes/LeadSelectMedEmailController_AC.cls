@@ -81,22 +81,22 @@ public class LeadSelectMedEmailController_AC {
 				SELECT Id, FirstName, ChapterName__c, Part_A_Form_Password__c, Part_A_Sent__c,
 						Part_A_Received__c, Using_Paper_Process_For_DV__c, Relationship_to_child__c,
 						HiddenMedicalProfessionalEmail__c, Of_Times_Email_Sent__c, Referring_MP__c,
-						Referring_MP__r.Name, Referring_MP__r.npe01__WorkEmail__c,
+						Referring_MP__r.Name, Referring_MP__r.npe01__WorkEmail__c, Referring_MP__r.npsp__Deceased__c,
 						Referring_MP__r.npe01__AlternateEmail__c, Referring_MP__r.Alternate_Email_2__c,
 						Referring_MP_Email__c, Referring_MP__r.Contact_Notes__c, Treating_MP__c, Treating_MP__r.Name,
 						Treating_MP__r.npe01__WorkEmail__c, Treating_MP__r.npe01__AlternateEmail__c,
 						Treating_MP__r.Alternate_Email_2__c, Treating_Medical_Professional_Email__c,
-						Treating_MP__r.Contact_Notes__c, Best_Contact__c, Best_Contact__r.Name,
-						Best_Contact__r.npe01__WorkEmail__c, Best_Contact__r.npe01__AlternateEmail__c,
+						Treating_MP__r.Contact_Notes__c, Treating_MP__r.npsp__Deceased__c, Best_Contact__c, Best_Contact__r.Name,
+						Best_Contact__r.npe01__WorkEmail__c, Best_Contact__r.npe01__AlternateEmail__c, Best_Contact__r.npsp__Deceased__c,
 						Best_Contact__r.Alternate_Email_2__c, Best_contact_for_Physician_Email__c, Best_Contact__r.Contact_Notes__c,
 						Alt_1_MP__c, Alt_1_MP__r.Name, Alt_1_MP__r.npe01__WorkEmail__c, Alt_1_MP__r.npe01__AlternateEmail__c,
-						Alt_1_MP__r.Alternate_Email_2__c, Alt_1_MP__r.Contact_Notes__c, Alt_2_MP__c,
+						Alt_1_MP__r.Alternate_Email_2__c, Alt_1_MP__r.Contact_Notes__c, Alt_1_MP__r.npsp__Deceased__c, Alt_2_MP__c,
 						Alt_2_MP__r.Name, Alt_2_MP__r.npe01__WorkEmail__c, Alt_2_MP__r.npe01__AlternateEmail__c,
-						Alt_2_MP__r.Alternate_Email_2__c, Alt_2_MP__r.Contact_Notes__c, Hidden_DV_Form_Name__c,
-						Hidden_Potential_Rush__c, Status, Diagnosis_Given_By_Referrer__c, ICD_Given_By_Referrer__c,
+						Alt_2_MP__r.Alternate_Email_2__c, Alt_2_MP__r.Contact_Notes__c, Alt_2_MP__r.npsp__Deceased__c,
+						Hidden_DV_Form_Name__c, Hidden_Potential_Rush__c, Status, Diagnosis_Given_By_Referrer__c, ICD_Given_By_Referrer__c,
 						PD_Condition_Description__c, PD_ICD_Code__c,Does_Child_Have_Cognitive_Delays__c,
 						Does_Child_Have_Speech_or_Language_Delay__c,Non_Verbal_Communication_Method__c,
-						Non_Verbal_Additional_Information__c,Non_Verbal__c
+						Non_Verbal_Additional_Information__c,Non_Verbal__c 
 				FROM Lead
 				WHERE Id = :leadId
 		];
@@ -110,11 +110,10 @@ public class LeadSelectMedEmailController_AC {
 		} else if (lead.Referring_MP__c == lead.Best_Contact__c) {
 			displayReferringContactInformation = false;
 		}
-		if (lead.Referring_MP__c != null && displayReferringContactInformation
+		if (lead.Referring_MP__c != null && displayReferringContactInformation && !lead.Referring_MP__r.npsp__Deceased__c
 				&& (String.isNotEmpty(lead.Referring_MP__r.npe01__WorkEmail__c)
 				|| String.isNotEmpty(lead.Referring_MP__r.npe01__AlternateEmail__c)
-				|| String.isNotEmpty(lead.Referring_MP__r.Alternate_Email_2__c)
-				|| String.isNotEmpty(lead.Referring_MP_Email__c))) {
+				|| String.isNotEmpty(lead.Referring_MP__r.Alternate_Email_2__c))) {
 			SendDiagnosisWrapper referringMp = new SendDiagnosisWrapper();
 			referringMp.id = lead.Referring_MP__c;
 			referringMp.name = lead.Referring_MP__r.Name;
@@ -132,16 +131,25 @@ public class LeadSelectMedEmailController_AC {
 			if (String.isNotEmpty(lead.Referring_MP__r.Contact_Notes__c)) {
 				referringMp.contactNotes = lead.Referring_MP__r.Contact_Notes__c;
 			}
-			if (String.isNotEmpty(lead.Referring_MP_Email__c)) {
-				referringMp.newEmailProvided = lead.Referring_MP_Email__c;
+			if (String.isNotEmpty(lead.Relationship_to_child__c)
+					&& RELATIONSHIP_MEDICAL_PROFESSIONAL.equals(lead.Relationship_to_child__c)
+					&& String.isNotEmpty(lead.Referring_MP_Email__c)) {
+				Boolean displayNewEmailProvided = displayNewEmailProvided(
+						lead.Referring_MP__r.npe01__WorkEmail__c,
+						lead.Referring_MP__r.npe01__AlternateEmail__c,
+						lead.Referring_MP__r.Alternate_Email_2__c,
+						lead.Referring_MP_Email__c
+				);
+				if (displayNewEmailProvided) {
+					referringMp.newEmailProvided = lead.Referring_MP_Email__c;
+				}
 			}
 			referringMp.numProvidedEmails = countNumberOfEmailsProvided(referringMp);
 			contacts.add(referringMp);
 		}
-		if (lead.Treating_MP__c != null && (String.isNotEmpty(lead.Treating_MP__r.npe01__WorkEmail__c)
+		if (lead.Treating_MP__c != null && !lead.Treating_MP__r.npsp__Deceased__c && (String.isNotEmpty(lead.Treating_MP__r.npe01__WorkEmail__c)
 				|| String.isNotEmpty(lead.Treating_MP__r.npe01__AlternateEmail__c)
-				|| String.isNotEmpty(lead.Treating_MP__r.Alternate_Email_2__c)
-				|| String.isNotEmpty(lead.Treating_Medical_Professional_Email__c))) {
+				|| String.isNotEmpty(lead.Treating_MP__r.Alternate_Email_2__c))) {
 			SendDiagnosisWrapper treatingMp = new SendDiagnosisWrapper();
 			treatingMp.id = lead.Treating_MP__c;
 			treatingMp.name = lead.Treating_MP__r.Name;
@@ -159,16 +167,25 @@ public class LeadSelectMedEmailController_AC {
 			if (String.isNotEmpty(lead.Treating_MP__r.Contact_Notes__c)) {
 				treatingMp.contactNotes = lead.Treating_MP__r.Contact_Notes__c;
 			}
-			if (String.isNotEmpty(lead.Treating_Medical_Professional_Email__c)) {
-				treatingMp.newEmailProvided = lead.Treating_Medical_Professional_Email__c;
+			if (String.isNotEmpty(lead.Relationship_to_child__c)
+					&& RELATIONSHIP_MEDICAL_PROFESSIONAL.equals(lead.Relationship_to_child__c)
+					&& String.isNotEmpty(lead.Treating_Medical_Professional_Email__c)) {
+				Boolean displayNewEmailProvided = displayNewEmailProvided(
+						lead.Treating_MP__r.npe01__WorkEmail__c,
+						lead.Treating_MP__r.npe01__AlternateEmail__c,
+						lead.Treating_MP__r.Alternate_Email_2__c,
+						lead.Treating_Medical_Professional_Email__c
+				);
+				if (displayNewEmailProvided) {
+					treatingMp.newEmailProvided = lead.Treating_Medical_Professional_Email__c;
+				}
 			}
 			treatingMp.numProvidedEmails = countNumberOfEmailsProvided(treatingMp);
 			contacts.add(treatingMp);
 		}
-		if (lead.Best_Contact__c != null && (String.isNotEmpty(lead.Best_Contact__r.npe01__WorkEmail__c)
+		if (lead.Best_Contact__c != null && !lead.Best_Contact__r.npsp__Deceased__c && (String.isNotEmpty(lead.Best_Contact__r.npe01__WorkEmail__c)
 				|| String.isNotEmpty(lead.Best_Contact__r.npe01__AlternateEmail__c)
-				|| String.isNotEmpty(lead.Best_Contact__r.Alternate_Email_2__c)
-				|| String.isNotEmpty(lead.Best_contact_for_Physician_Email__c))) {
+				|| String.isNotEmpty(lead.Best_Contact__r.Alternate_Email_2__c))) {
 			SendDiagnosisWrapper bestContact = new SendDiagnosisWrapper();
 			bestContact.id = lead.Best_Contact__c;
 			bestContact.name = lead.Best_Contact__r.Name;
@@ -186,13 +203,23 @@ public class LeadSelectMedEmailController_AC {
 			if (String.isNotEmpty(lead.Best_Contact__r.Contact_Notes__c)) {
 				bestContact.contactNotes = lead.Best_Contact__r.Contact_Notes__c;
 			}
-			if (String.isNotEmpty(lead.Best_contact_for_Physician_Email__c)) {
-				bestContact.newEmailProvided = lead.Best_contact_for_Physician_Email__c;
+			if (String.isNotEmpty(lead.Relationship_to_child__c)
+					&& RELATIONSHIP_MEDICAL_PROFESSIONAL.equals(lead.Relationship_to_child__c)
+					&& String.isNotEmpty(lead.Best_contact_for_Physician_Email__c)) {
+				Boolean displayNewEmailProvided = displayNewEmailProvided(
+						lead.Best_Contact__r.npe01__WorkEmail__c,
+						lead.Best_Contact__r.npe01__AlternateEmail__c,
+						lead.Best_Contact__r.Alternate_Email_2__c,
+						lead.Best_contact_for_Physician_Email__c
+				);
+				if (displayNewEmailProvided) {
+					bestContact.newEmailProvided = lead.Best_contact_for_Physician_Email__c;
+				}
 			}
 			bestContact.numProvidedEmails = countNumberOfEmailsProvided(bestContact);
 			contacts.add(bestContact);
 		}
-		if (lead.Alt_1_MP__c != null && (String.isNotEmpty(lead.Alt_1_MP__r.npe01__WorkEmail__c)
+		if (lead.Alt_1_MP__c != null && !lead.Alt_1_MP__r.npsp__Deceased__c && (String.isNotEmpty(lead.Alt_1_MP__r.npe01__WorkEmail__c)
 				|| String.isNotEmpty(lead.Alt_1_MP__r.npe01__AlternateEmail__c)
 				|| String.isNotEmpty(lead.Alt_1_MP__r.Alternate_Email_2__c))) {
 			SendDiagnosisWrapper alternate1Mp = new SendDiagnosisWrapper();
@@ -215,7 +242,7 @@ public class LeadSelectMedEmailController_AC {
 			alternate1Mp.numProvidedEmails = countNumberOfEmailsProvided(alternate1Mp);
 			contacts.add(alternate1Mp);
 		}
-		if (lead.Alt_2_MP__c != null && (String.isNotEmpty(lead.Alt_2_MP__r.npe01__WorkEmail__c)
+		if (lead.Alt_2_MP__c != null && !lead.Alt_2_MP__r.npsp__Deceased__c && (String.isNotEmpty(lead.Alt_2_MP__r.npe01__WorkEmail__c)
 				|| String.isNotEmpty(lead.Alt_2_MP__r.npe01__AlternateEmail__c)
 				|| String.isNotEmpty(lead.Alt_2_MP__r.Alternate_Email_2__c))) {
 			SendDiagnosisWrapper alternate2Mp = new SendDiagnosisWrapper();
@@ -255,6 +282,27 @@ public class LeadSelectMedEmailController_AC {
 		public String newEmailProvided { get; set; }
 		public String contactNotes { get; set; }
 		public Integer numProvidedEmails { get; set; }
+	}
+
+	/**
+	 * @description Check if any of the emails already provided as part of the Contact is same as the new provided email,
+	 * if already provided do not display the new provided e-mail
+	 * @param workEmail work email
+	 * @param alternateEmail1 alternate email 1
+	 * @param alternateEmail2 alternate email 2
+	 * @param newEmailProvided new email provided
+	 * @return true or false
+	*/
+	private static Boolean displayNewEmailProvided(String workEmail, String alternateEmail1, String alternateEmail2,
+			String newEmailProvided) {
+		if (String.isNotEmpty(workEmail) && newEmailProvided.equals(workEmail)) {
+			return false;
+		} else if (String.isNotEmpty(alternateEmail1) && newEmailProvided.equals(alternateEmail1)) {
+			return false;
+		} else if (String.isNotEmpty(alternateEmail2) && newEmailProvided.equals(alternateEmail2)) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
