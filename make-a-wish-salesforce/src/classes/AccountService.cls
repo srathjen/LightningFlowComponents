@@ -280,63 +280,63 @@ public class AccountService {
 		}
 	}
 
-    /**
-    * Populate Chapter Name on the HTF Account
-    * @param accountList
-    */
-    public static void populateChapterOnHospitalAccount(List<Account> accountsList, Map<Id, Account> oldAccountsMap) {
-        if (accountsList.isEmpty()) {
-            return;
-        }
-        List<String> zipCodesList = new List<String>();
-        Map<String, Id> zipChapterMap = new Map<String, Id>();
-        Map<Id, Account> htfAccountMap = new Map<Id, Account>();
-        List<Account> htfAccountList = new List<Account>();
-        for (Account account : accountsList) {
-            if (account.RecordTypeId == Constant_AC.HOSPITAL_TREATMENT_ID && account.Chapter_Name__c == null) {
-                if(oldAccountsMap == null) {
-                    if (String.isNotBlank(account.BillingPostalCode)) {
-                        zipCodesList.add(Utils.splitString(account.BillingPostalCode, '-')[0]);
-                        htfAccountList.add(account);
-                    } else if (String.isNotBlank(account.ShippingPostalCode)) {
-                        zipCodesList.add(Utils.splitString(account.ShippingPostalCode, '-')[0]);
-                        htfAccountList.add(account);
-                    }
-                } else if((account.BillingPostalCode != oldAccountsMap.get(account.Id).BillingPostalCode 
-                           || account.ShippingPostalCode != oldAccountsMap.get(account.Id).ShippingPostalCode)) {
-                    if (String.isNotBlank(account.BillingPostalCode)) {
-                        zipCodesList.add(Utils.splitString(account.BillingPostalCode, '-')[0]);
-                        htfAccountList.add(account);
-                        htfAccountMap.put(account.Id, account);
-                    } else if (String.isNotBlank(account.ShippingPostalCode)) {
-                        zipCodesList.add(Utils.splitString(account.ShippingPostalCode, '-')[0]);
-                        htfAccountList.add(account);
-                        htfAccountMap.put(account.Id, account);
-                    }
-                }
-            }
-        }
-        zipChapterMap = ChapterStaffRecordSharing_AC.getChapterByZipcode(zipCodesList);
-        for (Account account : htfAccountList) {
-            String zip;
-            if (String.isNotBlank(account.BillingPostalCode)) {
-                zip = Utils.splitString(account.BillingPostalCode, '-')[0];
-                if (zipChapterMap.containsKey(zip)) {
-                    account.Chapter_Name__c = zipChapterMap.get(zip);
-                    account.Hidden_Chapter__c = account.Chapter_Name__c;
-                    account.Region_Code__c = null;
-                }
-            } else if (String.isNotBlank(account.ShippingPostalCode)) {
-                zip = Utils.splitString(account.ShippingPostalCode, '-')[0];
-                if (zipChapterMap.containsKey(zip)) {
-                    account.Chapter_Name__c = zipChapterMap.get(zip);
-                    account.Hidden_Chapter__c = account.Chapter_Name__c;
-                    account.Region_Code__c = null;
-                }
-            }
-        }
-        ContactService.updateRegionChapterOnMedicalProfessional(htfAccountMap);
-    }
+	/**
+	* Populate Chapter Name on the HTF Account
+	* @param accountList
+	*/
+	public static void populateChapterOnHospitalAccount(List<Account> accountsList, Map<Id, Account> oldAccountsMap) {
+		if (accountsList.isEmpty()) {
+			return;
+		}
+		List<String> zipCodesList = new List<String>();
+		Map<String, Id> zipChapterMap = new Map<String, Id>();
+		Map<Id, Account> htfAccountMap = new Map<Id, Account>();
+		List<Account> htfAccountList = new List<Account>();
+		for (Account account : accountsList) {
+			if (account.RecordTypeId == Constant_AC.HOSPITAL_TREATMENT_ID && account.Chapter_Name__c == null) {
+				if (oldAccountsMap == null) {
+					if (String.isNotBlank(account.BillingPostalCode)) {
+						zipCodesList.add(Utils.splitString(account.BillingPostalCode, '-')[0]);
+						htfAccountList.add(account);
+					} else if (String.isNotBlank(account.ShippingPostalCode)) {
+						zipCodesList.add(Utils.splitString(account.ShippingPostalCode, '-')[0]);
+						htfAccountList.add(account);
+					}
+				} else if ((account.BillingPostalCode != oldAccountsMap.get(account.Id).BillingPostalCode
+						|| account.ShippingPostalCode != oldAccountsMap.get(account.Id).ShippingPostalCode)) {
+					if (String.isNotBlank(account.BillingPostalCode)) {
+						zipCodesList.add(Utils.splitString(account.BillingPostalCode, '-')[0]);
+						htfAccountList.add(account);
+						htfAccountMap.put(account.Id, account);
+					} else if (String.isNotBlank(account.ShippingPostalCode)) {
+						zipCodesList.add(Utils.splitString(account.ShippingPostalCode, '-')[0]);
+						htfAccountList.add(account);
+						htfAccountMap.put(account.Id, account);
+					}
+				}
+			}
+		}
+		zipChapterMap = ChapterStaffRecordSharing_AC.getChapterByZipcode(zipCodesList);
+		for (Account account : htfAccountList) {
+			String zip;
+			if (String.isNotBlank(account.BillingPostalCode)) {
+				zip = Utils.splitString(account.BillingPostalCode, '-')[0];
+				if (zipChapterMap.containsKey(zip)) {
+					account.Chapter_Name__c = zipChapterMap.get(zip);
+					account.Hidden_Chapter__c = account.Chapter_Name__c;
+					account.Region_Code__c = null;
+				}
+			} else if (String.isNotBlank(account.ShippingPostalCode)) {
+				zip = Utils.splitString(account.ShippingPostalCode, '-')[0];
+				if (zipChapterMap.containsKey(zip)) {
+					account.Chapter_Name__c = zipChapterMap.get(zip);
+					account.Hidden_Chapter__c = account.Chapter_Name__c;
+					account.Region_Code__c = null;
+				}
+			}
+		}
+		ContactService.updateRegionChapterOnMedicalProfessional(htfAccountMap);
+	}
 
 	/**
 	* Update account owner to chapter intake manager
@@ -344,45 +344,46 @@ public class AccountService {
 	* @param oldAccountsMap
 	*/
 	public static void updateAccountOwner(List<Account> accountsList, Map<Id, Account> oldAccountsMap) {
-        if (accountsList.isEmpty()) {
-            return;
-        }
-        Set<Id> chapterIdSet = new Set<Id>();
-        List<Account> hospitalAccountList = new List<Account>();
-        Map<Id, Account> accountContactMap = new Map<Id, Account>();
-        for (Account account : accountsList) {
-            if (account.RecordTypeId == Constant_AC.HOSPITAL_TREATMENT_ID) {
-                if ((oldAccountsMap == null && account.Chapter_Name__c != null) || 
-                    (oldAccountsMap != null && account.Chapter_Name__c != oldAccountsMap.get(account.Id).Chapter_Name__c)) {
-                    chapterIdSet.add(account.Chapter_Name__c);
-                    hospitalAccountList.add(account);
-                }
-            } else if(account.RecordTypeId == Constant_AC.HOUSEHOLD_RT_ID) {
-                if(oldAccountsMap != null && account.npe01__One2OneContact__c != oldAccountsMap.get(account.Id).npe01__One2OneContact__c) {
-                    accountContactMap.put(account.npe01__One2OneContact__c, account);
-                }
-            }
-        }
-        if (!chapterIdSet.isEmpty()) {
-            Map<Id, Account> accountOwnerMap = new Map<Id, Account>(
-                ChapterStaffRecordSharing_AC.getAccountOwner(chapterIdSet));
-            for (Account account : hospitalAccountList) {
-                if (accountOwnerMap.containsKey(account.Chapter_Name__c)) {
-                    account.OwnerId = accountOwnerMap.get(account.Chapter_Name__c).Intake_Manager__c;
-                }
-            }
-        }
-        if (!accountContactMap.isEmpty()) {
-            Map<Id, Contact> contactMap = new Map<Id, Contact>([
-                SELECT Id, OwnerId 
-                FROM Contact WHERE 
-                Id IN :accountContactMap.keySet()
-            ]);
-            for (Account householdAccount : accountContactMap.values()) {
-                householdAccount.OwnerId = contactMap.get(householdAccount.npe01__One2OneContact__c).OwnerId;
-            }
-        }
-    }
+		if (accountsList.isEmpty()) {
+			return;
+		}
+		Set<Id> chapterIdSet = new Set<Id>();
+		List<Account> hospitalAccountList = new List<Account>();
+		Map<Id, Account> accountContactMap = new Map<Id, Account>();
+		for (Account account : accountsList) {
+			if (account.RecordTypeId == Constant_AC.HOSPITAL_TREATMENT_ID) {
+				if ((oldAccountsMap == null && account.Chapter_Name__c != null) ||
+						(oldAccountsMap != null && account.Chapter_Name__c != oldAccountsMap.get(account.Id).Chapter_Name__c)) {
+					chapterIdSet.add(account.Chapter_Name__c);
+					hospitalAccountList.add(account);
+				}
+			} else if (account.RecordTypeId == Constant_AC.HOUSEHOLD_RT_ID) {
+				if (oldAccountsMap != null && account.npe01__One2OneContact__c != oldAccountsMap.get(account.Id).npe01__One2OneContact__c) {
+					accountContactMap.put(account.npe01__One2OneContact__c, account);
+				}
+			}
+		}
+		if (!chapterIdSet.isEmpty()) {
+			Map<Id, Account> accountOwnerMap = new Map<Id, Account>(
+					ChapterStaffRecordSharing_AC.getAccountOwner(chapterIdSet));
+			for (Account account : hospitalAccountList) {
+				if (accountOwnerMap.containsKey(account.Chapter_Name__c)) {
+					account.OwnerId = accountOwnerMap.get(account.Chapter_Name__c).Intake_Manager__c;
+				}
+			}
+		}
+		if (!accountContactMap.isEmpty()) {
+			Map<Id, Contact> contactMap = new Map<Id, Contact>([
+					SELECT Id, OwnerId
+					FROM Contact
+					WHERE
+							Id IN :accountContactMap.keySet()
+			]);
+			for (Account householdAccount : accountContactMap.values()) {
+				householdAccount.OwnerId = contactMap.get(householdAccount.npe01__One2OneContact__c).OwnerId;
+			}
+		}
+	}
 
 	/**
 	* @description Get duplicate records for Account records according to Duplicate Rules
@@ -392,8 +393,16 @@ public class AccountService {
 	@InvocableMethod(Label='Find Account Duplicates' Description='Find duplicate contact records')
 	public static List<List<Account>> getDuplicateRecords(List<AccountDuplicateInput> accountInputs) {
 		List<Account> accounts = new List<Account>();
+		Set<String> accountNamesSearch = new Set<String>();
+		Set<String> accountAliasSearch = new Set<String>();
 		for (AccountDuplicateInput input : accountInputs) {
 			accounts.add(input.accountInput);
+			if (String.isNotEmpty(input.accountInput.Name)) {
+				accountNamesSearch.add('%' + input.accountInput.Name + '%');
+			}
+			if (String.isNotEmpty(input.accountInput.Alias__c)) {
+				accountAliasSearch.add('%' + input.accountInput.Alias__c + '%');
+			}
 		}
 		List<Datacloud.FindDuplicatesResult> results = new List<Datacloud.FindDuplicatesResult>();
 		if (!Test.isRunningTest()) {
@@ -410,14 +419,27 @@ public class AccountService {
 				}
 			}
 		}
-		List<Account> duplicatedAccounts = [
+		Map<Id, Account> duplicatedAccounts = new Map<Id, Account>([
 				SELECT Id, Name, Department__c, Phone, BillingStreet, BillingCity, BillingState, BillingPostalCode,
 						Chapter_Name_Text__c
 				FROM Account
 				WHERE Id IN :duplicateAccountsIds
-		];
+		]);
+
+		for (Account acc : [
+				SELECT Id, Name, Department__c, Phone, BillingStreet, BillingCity, BillingState, BillingPostalCode,
+						Chapter_Name_Text__c
+				FROM Account
+				WHERE (Name LIKE :accountNamesSearch OR Name LIKE :accountAliasSearch)
+				AND RecordTypeId = :Constant_AC.HOSPITAL_TREATMENT_ID
+				LIMIT 100
+		]) {
+			if(!duplicatedAccounts.containsKey(acc.Id)){
+				duplicatedAccounts.put(acc.Id, acc);
+			}
+		}
 		List<List<Account>> duplicatedAccountsList = new List<List<Account>>();
-		duplicatedAccountsList.add(duplicatedAccounts);
+		duplicatedAccountsList.add(duplicatedAccounts.values());
 		return duplicatedAccountsList;
 	}
 
