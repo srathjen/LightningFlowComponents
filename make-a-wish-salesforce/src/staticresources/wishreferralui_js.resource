@@ -7,13 +7,25 @@ function getRadioVal(e, a) {
 }
 
 function stateFunc() {
-    $("select.state option:first").remove(), $(".state").prepend('<option disabled="disabled" selected="selected">Please select a State</option>')
+    let stateSelectOptions = $("select.state");
+    $.each(stateSelectOptions, function( i, l ) {
+        $(this).find("option:first").remove();
+        $("<option selected disabled='true'>Please select a State</option>", { value: '', selected: true }).prependTo(l);
+    });
 }
 
 function stateFuncOptional() {
     let stateFilterSelectOptions = $("select.stateOptional");
-    $.each(stateFilterSelectOptions, function( i, l ){
+    $.each(stateFilterSelectOptions, function( i, l ) {
         $("<option selected disabled='true'>Please select a state (optional)</option>", { value: '', selected: true }).prependTo(l);
+    });
+}
+
+function optionApplicable() {
+    let deptFilterSelectOptions = $("select.optionApplicable");
+    $.each(deptFilterSelectOptions, function( i, l ) {
+        $(this).find("option:first").remove();
+        $("<option selected disabled='true'>Please select an option (if applicable)</option>", { value: '', selected: true }).prependTo(l);
     });
 }
 
@@ -68,15 +80,15 @@ function formLogic() {
     }), $(".medprovcat-other-wrap").css("display", "none"), $("[id$=medprov]").on("change", function () {
         null != $(this).val() && (-1 != $(this).val().indexOf("Other") ? $(".medprovcat-other-wrap").css("display", "block") : ($(".medprovcat-other-wrap").css("display", "none"), $(".medprovcat-other").val("")))
     }), $(".newRefMpChk").on("change", function () {
-        checkVisible = $(".newRefMpChk input").is(":checked"), 1 == checkVisible ? $($(".refMpForm").css("display", "block"), $("[id$=refmpfirstname]").addClass("firstname"), $(".refNewAff").css("display","none")) : 0 == checkVisible && ($(".refMpForm").css("display","none"), $(".refMpForm :input").each(function(){$(this).val("")}), $("[id$=refmpsalutation],[id$=refmpspecialty]").prop("selectedIndex", 0))
+        checkVisible = $(".newRefMpChk input").is(":checked"), 1 == checkVisible ? $($(".refMpForm").css("display", "block"), $("[id$=refmpfirstname]").addClass("firstname"), $(".refNewAff").css("display","none")) : 0 == checkVisible && ($(".refMpForm").css("display","none"), $(".refMpForm :input").each(function(){$(this).val("")}), $("[id$=refmpsalutation],[id$=refmpspecialty],[id$=refmpstate]").prop("selectedIndex", 0))
     }), $(".newTrtMpChk").on("change", function () {
-        checkVisible = $(".newTrtMpChk input").is(":checked"), 1 == checkVisible ? ($(".trtMpForm").css("display","block"), $(".trtNewAff").css("display","none")) : 0 == checkVisible && ($(".trtMpForm").css("display","none"),$(".medToRepeat :input").each(function(){$(this).val("")}), $("[id$=msalutation],[id$=mcategory],[id$=mspecialty]").prop("selectedIndex", 0))
+        checkVisible = $(".newTrtMpChk input").is(":checked"), 1 == checkVisible ? ($(".trtMpForm").css("display","block"), $(".trtNewAff").css("display","none")) : 0 == checkVisible && ($(".trtMpForm").css("display","none"),$(".medToRepeat :input").each(function(){$(this).val("")}), $("[id$=msalutation],[id$=mcategory],[id$=mspecialty],[id$=mstate]").prop("selectedIndex", 0))
     }), $(".newBestMpChk").on("change", function () {
-        checkVisible = $(".newBestMpChk input").is(":checked"), 1 == checkVisible ? ($(".medToRepeatBest").css("display","block"), $(".bestNewAff").css("display","none")) : 0 == checkVisible && ($(".medToRepeatBest").css("display","none"), $(".medToRepeatBest :input").each(function(){$(this).val("")}), $("[id$=bsalutation],[id$=bcategory],[id$=bspecialty]").prop("selectedIndex", 0))
+        checkVisible = $(".newBestMpChk input").is(":checked"), 1 == checkVisible ? ($(".medToRepeatBest").css("display","block"), $(".bestNewAff").css("display","none")) : 0 == checkVisible && ($(".medToRepeatBest").css("display","none"), $(".medToRepeatBest :input").each(function(){$(this).val("")}), $("[id$=bsalutation],[id$=bcategory],[id$=bspecialty],[id$=bstate]").prop("selectedIndex", 0))
     }), $(".newRefHtfChk").on("change",function() {
-        checkVisible=$(".newRefHtfChk input").is(":checked"),1==checkVisible?$(".refHtfForm").css("display","block"): 0 == checkVisible && ($(".refHtfForm").css("display","none"), $(".refHtfForm :input").each(function(){$(this).val("")}), $("[id$=refhtfdept]").prop("selectedIndex",0))
+        checkVisible=$(".newRefHtfChk input").is(":checked"),1==checkVisible?$(".refHtfForm").css("display","block"): 0 == checkVisible && ($(".refHtfForm").css("display","none"), $(".refHtfForm :input").each(function(){$(this).val("")}), $("[id$=refhtfdept], [id$=refhtfstate]").prop("selectedIndex",0))
     }), $(".newTrtHtfChk").on("change",function() {
-        checkVisible=$(".newTrtHtfChk input").is(":checked"),1==checkVisible?$(".trtHtfForm").css("display","block"): 0 == checkVisible && ($(".trtHtfForm").css("display","none"), $(".trtHtfForm :input").each(function(){$(this).val("")}), $("[id$=trthtfdept]").prop("selectedIndex",0))
+        checkVisible=$(".newTrtHtfChk input").is(":checked"),1==checkVisible?$(".trtHtfForm").css("display","block"): 0 == checkVisible && ($(".trtHtfForm").css("display","none"), $(".trtHtfForm :input").each(function(){$(this).val("")}), $("[id$=trthtfdept], [id$=trthtfstate]").prop("selectedIndex",0))
     }),  $(".medProvCat").on("change", function () {
         var e = $(".medProvCat").val();
         $.inArray(e, t) > -1 ? ($(".repeatMedProf").css("display", "block")) : ($(".repeatMedProf").css("display", "none"))
@@ -87,15 +99,15 @@ function formLogic() {
             $(this).val("")
         }),$(".trtmpaffphone").val($(".refmpaffphone").val()), $(".trtmpaffemail").val($(".refmpaffemail").val()), $(".trtMpInfo").css("display","none"),$(".repeatMedProfBest").css("display","none")):0==checkVisibleCopy&&($(".repeatMedProfBest").css("display","block"),$(".medToRepeat :input, .trtHtfForm :input").each(function(){
             $(this).val("")
-        }),$("[id$=msalutation],[id$=mcategory],[id$=mspecialty],[id$=trthtfdept]").prop("selectedIndex",0), $("[id$=trtmpaffphone], [id$=trtmpaffemail]").val(""), $(".trtMpInfo").css("display","block"))
+        }),$("[id$=msalutation],[id$=mcategory],[id$=mspecialty],[id$=trthtfdept],[id$=mstate],[id$=trthtfstate]").prop("selectedIndex",0), $("[id$=trtmpaffphone], [id$=trtmpaffemail]").val(""), $(".trtMpInfo").css("display","block"))
     }), $(".repeatMedProfBest").on("change",function() {
         if(checkVisibleCopy = $(".repeatMedProfBest input").is(":checked"),checkVisibleNew=$(".newRefMpChk input").is(":checked"), 1 == checkVisibleCopy) 1 == checkVisibleNew ? ($(".bsalutation").val($(".refmpsalutation").val()),$(".mpmaincontactfirstname").val($(".refmpfirstname").val()),$(".mpmaincontactlastname").val($(".refmplastname").val()),$(".mpmaincontactphone").val($(".refmpphone").val()),$(".mpmaincontactemail").val($(".refmpemail").val()),$(".bcity").val($(".refmpcity").val()),$(".bstate").val($(".refmpstate").val()),$(".bcategory").val($(".refmpcategory").val()),$(".bspecialty").val($(".refmpspecialty").val())) : 0 == checkVisibleNew && $(".medToRepeatBest :input").each(function() {
             $(this).val("")
         }),$(".bestmpaffphone").val($(".refmpaffphone").val()),$(".bestmpaffemail").val($(".refmpaffemail").val()),$(".bestMpInfo").css("display","none"),$(".repeatMedProf").css("display","none"); else if(0 == checkVisibleCopy) {$(".medToRepeatBest :input").each(function(){
             $(this).val("")
-        }),$("[id$=bsalutation],[id$=bcategory],[id$=bspecialty]").prop("selectedIndex",0),$("[id$=bestmpaffphone], [id$=bestmpaffemail]").val(""),$(".bestMpInfo").css("display","block"); var e=$(".medProvCat").val();$.inArray(e, t)>-1&&$(".repeatMedProf").css("display","block")}
+        }),$("[id$=bsalutation],[id$=bcategory],[id$=bspecialty],[id$=bstate]").prop("selectedIndex",0),$("[id$=bestmpaffphone], [id$=bestmpaffemail]").val(""),$(".bestMpInfo").css("display","block"); var e=$(".medProvCat").val();$.inArray(e, t)>-1&&$(".repeatMedProf").css("display","block")}
     }), $(".refToRepeat :input").on("keyup", o), $(".clone-guardian-1 input").click(function () {
-        $(this).is(":checked") ? ($("[id$=paddress2]").val($("[id$=paddress]").val()), $("[id$=pcity2]").val($("[id$=pcity]").val()), $("[id$=p-state2]").val($("[id$=p-state]").val()), $("[id$=ppostalcode2]").val($("[id$=ppostalcode]").val())) : ($("[id$=paddress2], [id$=pcity2], [id$=ppostalcode2]").val(""), $("[id$=p-state2]").prop("selectedIndex", 0))
+        $(this).is(":checked") ? ($("[id$=paddress2]").val($("[id$=paddress]").val()), $("[id$=pcity2]").val($("[id$=pcity1]").val()), $("[id$=p-state2]").val($("[id$=p-state]").val()), $("[id$=ppostalcode2]").val($("[id$=ppostalcode]").val())) : ($("[id$=paddress2], [id$=pcity2], [id$=ppostalcode2]").val(""), $("[id$=p-state2]").prop("selectedIndex", 0))
     }), $(".refToParent :input").on("keyup", c), $("[id$=nSib],[id$=nSib2]").on("change", function () {
         var e = getRadioVal(document.getElementById("j_id0:frm"), "r2c-radio");
 
@@ -465,7 +477,7 @@ $("[id$=wcdob]").removeAttr("onfocus").mask("99/99/9999", {placeholder: "mm/dd/y
     e.preventDefault(), $("input[id$=frm\\:pfirstname2],input[id$=frm\\:plastname2],input[id$=pphonenumber2],input[id$=pemailaddress2],input[id$=pcity2],input[id$=ppostalcode2],select[id$=p-state2],input[id$=paddress2],select[id$=plang2],input[id$=psibfirstname2],input[id$=psiblastname2],input[id$=psibage2]").val(""), $("[id$=p-state2]").prop("selectedIndex", 0), $(this).parents(".connected").prop("hidden", !0), $(".guardian-2").css("display", "block"), "Select an option" == $("[id$=p-state2] option:nth-child(2)").text() && $("[id$=p-state2] option:nth-child(2)").remove(), $("select[id$=p-r2c-2]").prop("selectedIndex", 0), formValidationRules()
 }), $(".remove-block").on("click", function (e) {
     e.preventDefault(), $(".add-guardian").parents(".connected").prop("hidden", !1), $(".guardian-2").css("display", "none"), $("input[id$=frm\\:pfirstname2],input[id$=frm\\:plastname2],input[id$=pphonenumber2],input[id$=pemailaddress2],input[id$=pcity2],input[id$=ppostalcode2],select[id$=p-state2],select[id$=p-r2c-2],input[id$=paddress2],select[id$=plang2],input[id$=psibfirstname2],input[id$=psiblastname2],input[id$=psibage2]").val(""), $("[id$=p-state2]").prop("selectedIndex", 0)
-}), stateFunc(), stateFuncOptional(), $("select.multi").chosen({
+}), stateFunc(), stateFuncOptional(), optionApplicable(), $("select.multi").chosen({
     disable_search: !0,
     placeholder_text_multiple: "Please select all that apply",
     width: "100%"
