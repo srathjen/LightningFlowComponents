@@ -1000,8 +1000,8 @@
     <assignments>
         <name>Nullify_HTF_Screen_Values</name>
         <label>Nullify HTF Screen Values</label>
-        <locationX>4717</locationX>
-        <locationY>521</locationY>
+        <locationX>4721</locationX>
+        <locationY>529</locationY>
         <assignmentItems>
             <assignToReference>ScreenValueHTFName</assignToReference>
             <operator>Assign</operator>
@@ -3128,14 +3128,6 @@
         <valueField>Value</valueField>
     </dynamicChoiceSets>
     <dynamicChoiceSets>
-        <name>HTFDepts</name>
-        <dataType>Picklist</dataType>
-        <displayField xsi:nil="true"/>
-        <object xsi:nil="true"/>
-        <picklistField>Best_Contact_HTF_Department__c</picklistField>
-        <picklistObject>Lead</picklistObject>
-    </dynamicChoiceSets>
-    <dynamicChoiceSets>
         <name>HTFStatePicklist</name>
         <dataType>Picklist</dataType>
         <displayField xsi:nil="true"/>
@@ -3222,15 +3214,14 @@
         <scale>0</scale>
     </formulas>
     <formulas>
-        <name>DepartmentDefault</name>
+        <name>CategoryCreateValue</name>
         <dataType>String</dataType>
-        <expression>IF(ISBLANK({!DepartmentSelected})=FALSE, {!DepartmentSelected}, 
-IF(ISBLANK({!UnmatchedHTFDept})=FALSE, {!UnmatchedHTFDept},NULL))</expression>
+        <expression>IF({!MP_Category}= &quot; &quot;, NULL, {!MP_Category})</expression>
     </formulas>
     <formulas>
-        <name>DepartmentDisplay</name>
+        <name>DepartmentCreateValue</name>
         <dataType>String</dataType>
-        <expression>IF(!ISBLANK({!DepartmentDefault}), {!DepartmentDefault}, &quot;Select an Option&quot;)</expression>
+        <expression>IF({!Department}=&quot; &quot;, NULL,{!Department})</expression>
     </formulas>
     <formulas>
         <name>DepartmentLabel</name>
@@ -3490,9 +3481,19 @@ IF( {!MPType}=&quot;Best Medical Contact&quot;, IF(ISBLANK({!Get_Best_Contact_HT
         <expression>IF(ISBLANK({!ScreenState}) || {!ScreenState}=&quot;&quot;, {!UnmatchedMPState},{!ScreenState})</expression>
     </formulas>
     <formulas>
+        <name>SpecialtyCreateValue</name>
+        <dataType>String</dataType>
+        <expression>IF({!MP_Specialty}= &quot; &quot;, NULL, {!MP_Specialty})</expression>
+    </formulas>
+    <formulas>
         <name>SpecialtyMPLabel</name>
         <dataType>String</dataType>
         <expression>IF(ISBLANK({!ScreenDefaultSpecialty}) || {!ScreenDefaultSpecialty}=&quot;&quot; , &quot; &quot;, {!ScreenDefaultSpecialty})</expression>
+    </formulas>
+    <formulas>
+        <name>StateHTFCreateValue</name>
+        <dataType>String</dataType>
+        <expression>IF({!HTFState}=&quot; &quot;, NULL, {!HTFState})</expression>
     </formulas>
     <formulas>
         <name>StateHTFPicklistLabel</name>
@@ -3873,7 +3874,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <inputAssignments>
             <field>Provider_Type__c</field>
             <value>
-                <elementReference>MP_Category</elementReference>
+                <elementReference>CategoryCreateValue</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -3897,7 +3898,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <inputAssignments>
             <field>Specialty__c</field>
             <value>
-                <elementReference>MP_Specialty</elementReference>
+                <elementReference>SpecialtyCreateValue</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -3959,7 +3960,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <inputAssignments>
             <field>BillingState</field>
             <value>
-                <elementReference>HTFState</elementReference>
+                <elementReference>StateHTFCreateValue</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -3977,7 +3978,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
         <inputAssignments>
             <field>Department__c</field>
             <value>
-                <elementReference>DepartmentSelected</elementReference>
+                <elementReference>DepartmentCreateValue</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
