@@ -437,7 +437,7 @@
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_HTF_Department}</label></div>
                                 <div class="col-sm-6">
                                     <apex:inputField value="{!currLead.Referring_MP_HTF_Department__c}"
-                                                     styleClass="form-control col-xs-12 col-sm-12 c-select refhtfdept"
+                                                     styleClass="form-control col-xs-12 col-sm-12 c-select optionApplicable refhtfdept"
                                                      html-placeholder="{!$Label.Wish_Referral_HTF_Department}"
                                                      id="refhtfdept"/>
                                 </div>
@@ -586,7 +586,7 @@
                             <div class="col-sm-6">
                                 <apex:inputText value="{!currLead.City}"
                                                 styleClass="form-control pcity pcity1 alpha-only"
-                                                html-placeholder="{!$Label.Wish_Referral_City}" id="pcity"
+                                                html-placeholder="{!$Label.Wish_Referral_City}" id="pcity1"
                                                 maxlength="40"/>
                             </div>
                         </div>
@@ -1203,7 +1203,7 @@
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_HTF_Department}</label></div>
                                     <div class="col-sm-6">
                                         <apex:inputField value="{!currLead.Treating_MP_HTF_Department__c}"
-                                                         styleClass="form-control col-xs-12 col-sm-12 c-select trthtfdept"
+                                                         styleClass="form-control col-xs-12 col-sm-12 c-select optionApplicable trthtfdept"
                                                          html-placeholder="{!$Label.Wish_Referral_HTF_Department}"
                                                          id="trthtfdept"/>
                                     </div>
