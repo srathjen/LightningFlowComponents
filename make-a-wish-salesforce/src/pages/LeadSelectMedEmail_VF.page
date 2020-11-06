@@ -165,8 +165,8 @@
                                     title: "Are you sure you want to proceed?",
                                     text: confirmMsg +
                                         '<br/>' +
-                                        '<button type="button" id="swalCancelButton" style="">No</button> ' +
-                                        '<button type="button" id="swalConfirmButton" >Yes</button> ',
+                                        '<button type="button" id="swalConfirmButton" >Yes</button> ' +
+                                        '<button type="button" id="swalCancelButton" style="">No</button> ',
                                     html: true,
                                     showConfirmButton: false,
                                     type: 'warning'
@@ -208,7 +208,7 @@
                             title: '',
                             text: 'Unable to send Diagnosis Verification',
                             type: "error",
-                            confirmButtonColor: '#0057B8',
+                            confirmButtonColor: '#0070d2',
                             confirmButtonText: "Ok",
                             closeOnConfirm: false
                         });
@@ -319,7 +319,7 @@
         }
 
         #swalConfirmButton {
-            background: #d33;
+            background: #0057B8;
             opacity: .9;
         }
 
