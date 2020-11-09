@@ -86,7 +86,7 @@ public class batch_LeadChildAgeTest {
 
         Lead[] leadsUpdatedList = getLeads();
         //Assert that number of the leads that should have been updated have been updated
-        System.assertEquals(20, leadsUpdatedList.size());
+        System.assertEquals(10, leadsUpdatedList.size());
         CronTrigger ct = getCronTrigger(jobId);
         System.assertEquals(CRON_STRING, ct.CronExpression);
     }
@@ -106,7 +106,7 @@ public class batch_LeadChildAgeTest {
 
         Lead[] leadsUpdatedList = getLeads();
         //Assert that number of the leads that should have been updated have been updated
-        System.assertEquals(20, leadsUpdatedList.size());
+        System.assertEquals(10, leadsUpdatedList.size());
         CronTrigger ct = getCronTrigger(jobId);
         System.assertEquals(CRON_STRING, ct.CronExpression);
     }

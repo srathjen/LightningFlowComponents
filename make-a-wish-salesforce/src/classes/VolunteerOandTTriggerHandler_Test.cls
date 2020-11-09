@@ -81,26 +81,6 @@ public class VolunteerOandTTriggerHandler_Test {
 
     // Converting Prospective Volunteer As Active.
     @IsTest
-    static void completeTraining() {
-        SetupPackage pkg = new SetupPackage();
-        Test.startTest();
-        Volunteer_Orientation_Training__c createVolTraining = TestDataFactory.createVolunteerOrientationAndTraining(1)[0];
-        createVolTraining.Class_Offering__c = pkg.classOffering.Id;
-        createVolTraining.Hidden_O_T_Id__c = pkg.orientationTraining.Id;
-        createVolTraining.Registered_Date__c = Date.today();
-        createVolTraining.Volunteer__c = pkg.volunteer.Id;
-        createVolTraining.Type__c = Constant_AC.VOLUNTEER_ORIENTATION_TRAINING_TYPE_TRAINING;
-        createVolTraining.RE_Completed_Date__c = String.valueOf(System.today());
-        createVolTraining.Volunteer_Attendance__c = Constant_AC.VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED;
-        insert createVolTraining;
-        update createVolTraining;
-        Test.stopTest();
-
-        System.assertEquals(createVolTraining.Volunteer_Attendance__c, Constant_AC.VOLUNTEER_ORIENTATION_TRAINING_VOLUNTEER_ATTENDANCE_COMPLETED);
-    }
-
-    // Converting Prospective Volunteer As Active.
-    @IsTest
     static void cancelledTraining() {
         SetupPackage pkg = new SetupPackage();
         Test.startTest();
