@@ -207,9 +207,15 @@
 
                     <!-- REFERRER IS MEDICAL PROFESSIONAL -->
                     <div class="refToMP">
-                        <div class="row" style="margin-top:-15px">
-                            <div class="col-sm-3" style="padding-top: 15px">
-                                <label>{!$Label.Wish_Referral_Referring_Medical_Professional}</label></div>
+                        <div class="form-group row" style="margin-top:-40px;margin-botton:-20px;">
+                            <div class="col-sm-9" style="line-height:25px;margin-top:-15px;">
+                                <legend><span class="text-muted">{!$Label.Wish_Referral_Lookup_Instructions}</span></legend>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:-10px">
+                            <div class="col-sm-3" style="padding-top:15px">
+                                <label>{!$Label.Wish_Referral_Referring_Medical_Professional}</label>
+                            </div>
                             <div class="col-sm-6" style="margin-bottom:-12px">
                                 <div id="externalReferrerContactLookup"></div>
                                 <apex:inputHidden id="externalReferrerContactLookupOutput"
