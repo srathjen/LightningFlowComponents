@@ -2409,6 +2409,14 @@
         <value>a1a4C000000cfNMQAY</value>
     </labels>
     <labels>
+        <fullName>Wish_Referral_Lookup_Instructions</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Lookup Instructions</shortDescription>
+        <value>Please search for your name and hospital/facility below and select. If you are unable to locate either in our system, select the &quot;Create New Medical Professional&quot; and/or &quot;Create New Hospital/Facility&quot; to add a new record, which will remain on file for future reference.</value>
+    </labels>
+    <labels>
         <fullName>Wish_Referral_State_Filter</fullName>
         <categories>Wish Referral</categories>
         <language>en_US</language>
