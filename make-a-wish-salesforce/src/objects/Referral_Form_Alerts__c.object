@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Custom settings to control conditional alert messages and referral form suppression.</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Deactivate_MP_HTF_Search__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Deactivates the MP HTF Search fields</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Deactivates the MP HTF Search fields</inlineHelpText>
+        <label>Deactivate MP HTF Search</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Deactivate_Referral_Form__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If 'True' the Referral From will not function and the 'Deactivated Message' will be displayed in its place.</description>
+        <externalId>false</externalId>
+        <label>Deactivate Referral Form</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Deactivated_Message__c</fullName>
+        <description>Message displayed when the referral form is deactivated.</description>
+        <externalId>false</externalId>
+        <label>Deactivated Message</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Display_Warning__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If 'True' the Warning Message will be displayed on the form.</description>
+        <externalId>false</externalId>
+        <label>Display Warning</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Warning_Message__c</fullName>
+        <description>Warning message displayed at the top of the referral form.</description>
+        <externalId>false</externalId>
+        <label>Warning Message</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Referral Form Alerts</label>
+    <visibility>Public</visibility>
+</CustomObject>
