@@ -5,6 +5,7 @@
  */
 @isTest
 private class WishReferralForm_AC_Test {
+
 	@testSetup
 	static void setup() {
 		List<Account> chapterAccounts = TestDataFactory.createChapterAccount(1);
@@ -46,60 +47,72 @@ private class WishReferralForm_AC_Test {
 		List<ICD_Codes__c> icdCodes = TestDataFactory.createIcdCode(1);
 		icdCodes[0].Name = 'c00';
 		insert icdCodes;
-        
-        Account treatingHospital = TestDataFactory.createAccount(1)[0];
-        treatingHospital.recordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID;
-        treatingHospital.Name = 'Phoenix General Hospital';
-        insert treatingHospital;
+
+		Account treatingHospital = TestDataFactory.createAccount(1)[0];
+		treatingHospital.recordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID;
+		treatingHospital.Name = 'Phoenix General Hospital';
+		insert treatingHospital;
+
+		Referral_Form_Alerts__c wishReferralFormSettings = new Referral_Form_Alerts__c();
+		wishReferralFormSettings.Display_Warning__c = false;
+		wishReferralFormSettings.Warning_Message__c = 'Warning';
+		wishReferralFormSettings.Deactivate_Referral_Form__c = false;
+		wishReferralFormSettings.Deactivated_Message__c = 'Message';
+		wishReferralFormSettings.Deactivate_MP_HTF_Search__c = false;
+		insert wishReferralFormSettings;
 	}
 
-    @isTest
-    static void relationshipNone() {
-        PageReference pageRef = Page.WishReferralForm_VF;
-        Test.setCurrentPage(pageRef);
-        ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
-        
-        WishReferralForm_AC controller = new WishReferralForm_AC();
-        controller.currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
-        controller.currLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
-        controller.warningMsg = 'test';
-        controller.displayWarningPopup = true;
-        controller.CreateLead();
-        controller.currLead.Child_Age__c = 'Under 2.5';
-        
-        WishReferralForm_AC.siblingWrapper sw = new WishReferralForm_AC.siblingWrapper();
-        String fname = sw.fName;
-        String lname = sw.lName;
-        String age = sw.age;
-        
-        Test.startTest();
-        controller.getlanguage();
-        controller.getdiaYear();
-        controller.getNoOfSiblings();
-        controller.getSelfRequiredFields();
-        controller.getNonMedicalReqFields();
-        controller.getMedicalRequiredFields();
-        Test.stopTest();
-        
-        Boolean relationToChildErrorFound = false;
-        Boolean completeMandatoryErrorFound = false;
-        
-        for(ApexPages.Message msg :  ApexPages.getMessages()) {
-            if (msg.getSummary() == WishReferralForm_AC.ERROR_STRING_RELATIONSHIP_TO_CHILD) {
-                relationToChildErrorFound = true;
-            }
-            if (msg.getSummary().contains(WishReferralForm_AC.ERROR_STRING_SELECT_MANDATORY_FIELDS)) {
-                completeMandatoryErrorFound = true;
-            }
-        }
-        
-        System.assert(relationToChildErrorFound);
-        System.assert(completeMandatoryErrorFound);
-    }
+	@isTest
+	static void relationshipNone() {
+		PageReference pageRef = Page.WishReferralForm_VF;
+		Test.setCurrentPage(pageRef);
+		ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
+
+		WishReferralForm_AC controller = new WishReferralForm_AC();
+		controller.currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
+		controller.currLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
+		controller.warningMsg = 'test';
+		controller.displayWarningPopup = true;
+		controller.CreateLead();
+		controller.currLead.Child_Age__c = 'Under 2.5';
+
+		WishReferralForm_AC.siblingWrapper sw = new WishReferralForm_AC.siblingWrapper();
+		String fname = sw.fName;
+		String lname = sw.lName;
+		String age = sw.age;
+
+		Test.startTest();
+		controller.getlanguage();
+		controller.getdiaYear();
+		controller.getNoOfSiblings();
+		controller.getSelfRequiredFields();
+		controller.getNonMedicalReqFields();
+		controller.getMedicalRequiredFields();
+		Test.stopTest();
+
+		Boolean relationToChildErrorFound = false;
+		Boolean completeMandatoryErrorFound = false;
+
+		for (ApexPages.Message msg : ApexPages.getMessages()) {
+			if (msg.getSummary() == WishReferralForm_AC.ERROR_STRING_RELATIONSHIP_TO_CHILD) {
+				relationToChildErrorFound = true;
+			}
+			if (msg.getSummary().contains(WishReferralForm_AC.ERROR_STRING_SELECT_MANDATORY_FIELDS)) {
+				completeMandatoryErrorFound = true;
+			}
+		}
+
+		System.assert(relationToChildErrorFound);
+		System.assert(completeMandatoryErrorFound);
+	}
 
 	@isTest
 	static void relationshipSelf() {
-		Account chapterAccount = [SELECT Intake_Manager__c FROM Account WHERE Name = :Constant_AC.ACCOUNT_NAME_MAW_AMERICA];
+		Account chapterAccount = [
+				SELECT Intake_Manager__c
+				FROM Account
+				WHERE Name = :Constant_AC.ACCOUNT_NAME_MAW_AMERICA
+		];
 
 		PageReference pageRef = Page.WishReferralForm_VF;
 		Test.setCurrentPage(pageRef);
@@ -161,7 +174,7 @@ private class WishReferralForm_AC_Test {
 		controller.currLead.Treating_Medical_Professional_Email__c = 'mcavennila@gmail.com';
 		controller.currLead.Any_medical_reason_for_moving_quickly__c = 'yes';
 		controller.currList = new List<WishReferralForm_AC.SiblingWrapper>{
-			new WishReferralForm_AC.SiblingWrapper()
+				new WishReferralForm_AC.SiblingWrapper()
 		};
 		controller.currList[0].fName = 'Test';
 		controller.currList[0].lName = 'Test';
@@ -230,7 +243,11 @@ private class WishReferralForm_AC_Test {
 
 	@isTest
 	static void relationshipSelf3() {
-		ICD_Codes__c icdCode = [SELECT Id, Name FROM ICD_Codes__c WHERE Name = 'c00'];
+		ICD_Codes__c icdCode = [
+				SELECT Id, Name
+				FROM ICD_Codes__c
+				WHERE Name = 'c00'
+		];
 
 		PageReference pageRef = Page.WishReferralForm_VF;
 		Test.setCurrentPage(pageRef);
@@ -289,7 +306,7 @@ private class WishReferralForm_AC_Test {
 		Lead dupeLead3 = dupeLead.clone();
 		dupeLead3.Status = 'Other';
 		insert new List<Lead>{
-			dupeLead, dupeLead2, dupeLead3
+				dupeLead, dupeLead2, dupeLead3
 		};
 
 		Test.startTest();
@@ -317,33 +334,33 @@ private class WishReferralForm_AC_Test {
 
 		System.assertEquals(Constant_AC.LEAD_STATUS_INQUIRY, controller.currLead.Status);
 	}
-    
-    @isTest
-    static void relationshipMedicalProfessional() {
-        PageReference pageRef = Page.WishReferralForm_VF;
-        Test.setCurrentPage(pageRef);
-        ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
-        
-        WishReferralForm_AC controller = new WishReferralForm_AC();
-        controller.getMedicalSpecialty();
-        controller.getFilterStateOptions();
-        controller.currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
-        controller.currLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
-        controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
-        controller.currLead.Medical_Provider_Category__c = 'Nurse Practitioner';
-        controller.currLead.Referring_MP_First_Name__c = 'Jamie';
-        controller.currLead.Referring_MP_Last_Name__c = 'Pepper';
-        controller.currLead.Referrer_Email__c = 'jamie@pepper.com';
-        controller.currLead.Referring_MP_City__c = 'Phoenix';
-        
-        Test.startTest();
-        controller.CreateLead();
-        Test.stopTest();
-        
-        System.assert(controller.currLead.Referrer_FirstName__c == controller.currLead.Referring_MP_First_Name__c);
-        System.assert(controller.currLead.Referrer_Last_Name__c == controller.currLead.Referring_MP_Last_Name__c);
-        System.assert(controller.currLead.Referrer_Email__c == controller.currLead.Referring_MP_Email__c);
-    }
+
+	@isTest
+	static void relationshipMedicalProfessional() {
+		PageReference pageRef = Page.WishReferralForm_VF;
+		Test.setCurrentPage(pageRef);
+		ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
+
+		WishReferralForm_AC controller = new WishReferralForm_AC();
+		controller.getMedicalSpecialty();
+		controller.getFilterStateOptions();
+		controller.currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
+		controller.currLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
+		controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+		controller.currLead.Medical_Provider_Category__c = 'Nurse Practitioner';
+		controller.currLead.Referring_MP_First_Name__c = 'Jamie';
+		controller.currLead.Referring_MP_Last_Name__c = 'Pepper';
+		controller.currLead.Referrer_Email__c = 'jamie@pepper.com';
+		controller.currLead.Referring_MP_City__c = 'Phoenix';
+
+		Test.startTest();
+		controller.CreateLead();
+		Test.stopTest();
+
+		System.assert(controller.currLead.Referrer_FirstName__c == controller.currLead.Referring_MP_First_Name__c);
+		System.assert(controller.currLead.Referrer_Last_Name__c == controller.currLead.Referring_MP_Last_Name__c);
+		System.assert(controller.currLead.Referrer_Email__c == controller.currLead.Referring_MP_Email__c);
+	}
 
 	@isTest
 	static void medicalFirstNameblank() {
@@ -460,81 +477,109 @@ private class WishReferralForm_AC_Test {
 		obj.getdiaYear();
 		obj.getCommunication();
 	}
-    
-    @isTest
-    static void validateCopyLookupToTreatingMP() {
-        Contact referrer = [SELECT Id FROM Contact  WHERE FirstName = 'Testing1'];
-        Account hospital = [SELECT Id FROM Account WHERE Name = 'Phoenix General Hospital'];
-        
-        PageReference pageRef = Page.WishReferralForm_VF;
-        Test.setCurrentPage(pageRef);
-        ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
-        WishReferralForm_AC controller = new WishReferralForm_AC();
-        controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
-        controller.copyReferrerInfo = true;
-        controller.currLead.Referring_MP__c = referrer.Id;
-        controller.currLead.Referring_MP_HTF__c = hospital.Id;
-        Test.startTest();
-        controller.CreateLead();
-        Test.stopTest();
-        
-        System.assert(controller.currLead.Treating_MP__c == controller.currLead.Referring_MP__c);
-        System.assert(controller.currLead.Treating_MP_HTF__c == controller.currLead.Referring_MP_HTF__c);
-    }
-    
-    @isTest
-    static void validateCopyLookupToBestMP() {
-        Contact referrer = [SELECT Id FROM Contact  WHERE FirstName = 'Testing1'];
-        Account hospital = [SELECT Id FROM Account WHERE Name = 'Phoenix General Hospital'];
-        
-        PageReference pageRef = Page.WishReferralForm_VF;
-        Test.setCurrentPage(pageRef);
-        ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
-        WishReferralForm_AC controller = new WishReferralForm_AC();
-        controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
-        controller.copyReferrerInfoBest = true;
-        controller.currLead.Referring_MP__c = referrer.Id;
-        controller.currLead.Treating_MP_HTF__c = hospital.Id;
-        Test.startTest();
-        controller.CreateLead();
-        Test.stopTest();
-        
-        System.assert(controller.currLead.Best_Contact__c == controller.currLead.Referring_MP__c);
-        System.assert(controller.currLead.Best_Contact_HTF__c == controller.currLead.Treating_MP_HTF__c);
-    }
-    
-    @isTest
-    static void validateSearchAccountContactAffiliation() {
-        Contact referrer = [SELECT Id FROM Contact  WHERE FirstName = 'Testing1'];
-        Account hospital = [SELECT Id FROM Account WHERE Name = 'Phoenix General Hospital'];
-        Boolean affiliationNotExist;
-        
-        Test.startTest();
-        PageReference pageRef = Page.WishReferralForm_VF;
-        Test.setCurrentPage(pageRef);
-        ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
-        WishReferralForm_AC controller = new WishReferralForm_AC();
-        controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
-        affiliationNotExist = WishReferralForm_AC.searchAccountContactAffiliation(referrer.Id, hospital.Id);
-        Test.stopTest();
-        
-        System.assert(affiliationNotExist == true);
-    }
-    
-    @isTest
-    static void validateCheckEmptyContactFields() {
-        Contact referrer = [SELECT Id FROM Contact  WHERE FirstName = 'Testing1'];
-        Boolean contactAllEmptyFields;
-        
-        Test.startTest();
-        PageReference pageRef = Page.WishReferralForm_VF;
-        Test.setCurrentPage(pageRef);
-        ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
-        WishReferralForm_AC controller = new WishReferralForm_AC();
-        controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
-        contactAllEmptyFields = WishReferralForm_AC.checkEmptyContactFields(referrer.Id);
-        Test.stopTest();
-        
-        System.assert(contactAllEmptyFields == true);
-    }
+
+	@isTest
+	static void validateCopyLookupToTreatingMP() {
+		Contact referrer = [
+				SELECT Id
+				FROM Contact
+				WHERE FirstName = 'Testing1'
+		];
+		Account hospital = [
+				SELECT Id
+				FROM Account
+				WHERE Name = 'Phoenix General Hospital'
+		];
+
+		PageReference pageRef = Page.WishReferralForm_VF;
+		Test.setCurrentPage(pageRef);
+		ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
+		WishReferralForm_AC controller = new WishReferralForm_AC();
+		controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+		controller.copyReferrerInfo = true;
+		controller.currLead.Referring_MP__c = referrer.Id;
+		controller.currLead.Referring_MP_HTF__c = hospital.Id;
+		Test.startTest();
+		controller.CreateLead();
+		Test.stopTest();
+
+		System.assert(controller.currLead.Treating_MP__c == controller.currLead.Referring_MP__c);
+		System.assert(controller.currLead.Treating_MP_HTF__c == controller.currLead.Referring_MP_HTF__c);
+	}
+
+	@isTest
+	static void validateCopyLookupToBestMP() {
+		Contact referrer = [
+				SELECT Id
+				FROM Contact
+				WHERE FirstName = 'Testing1'
+		];
+		Account hospital = [
+				SELECT Id
+				FROM Account
+				WHERE Name = 'Phoenix General Hospital'
+		];
+
+		PageReference pageRef = Page.WishReferralForm_VF;
+		Test.setCurrentPage(pageRef);
+		ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
+		WishReferralForm_AC controller = new WishReferralForm_AC();
+		controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+		controller.copyReferrerInfoBest = true;
+		controller.currLead.Referring_MP__c = referrer.Id;
+		controller.currLead.Treating_MP_HTF__c = hospital.Id;
+		Test.startTest();
+		controller.CreateLead();
+		Test.stopTest();
+
+		System.assert(controller.currLead.Best_Contact__c == controller.currLead.Referring_MP__c);
+		System.assert(controller.currLead.Best_Contact_HTF__c == controller.currLead.Treating_MP_HTF__c);
+	}
+
+	@isTest
+	static void validateSearchAccountContactAffiliation() {
+		Contact referrer = [
+				SELECT Id
+				FROM Contact
+				WHERE FirstName = 'Testing1'
+		];
+		Account hospital = [
+				SELECT Id
+				FROM Account
+				WHERE Name = 'Phoenix General Hospital'
+		];
+		Boolean affiliationNotExist;
+
+		Test.startTest();
+		PageReference pageRef = Page.WishReferralForm_VF;
+		Test.setCurrentPage(pageRef);
+		ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
+		WishReferralForm_AC controller = new WishReferralForm_AC();
+		controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+		affiliationNotExist = WishReferralForm_AC.searchAccountContactAffiliation(referrer.Id, hospital.Id);
+		Test.stopTest();
+
+		System.assert(affiliationNotExist == true);
+	}
+
+	@isTest
+	static void validateCheckEmptyContactFields() {
+		Contact referrer = [
+				SELECT Id
+				FROM Contact
+				WHERE FirstName = 'Testing1'
+		];
+		Boolean contactAllEmptyFields;
+
+		Test.startTest();
+		PageReference pageRef = Page.WishReferralForm_VF;
+		Test.setCurrentPage(pageRef);
+		ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
+		WishReferralForm_AC controller = new WishReferralForm_AC();
+		controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+		contactAllEmptyFields = WishReferralForm_AC.checkEmptyContactFields(referrer.Id);
+		Test.stopTest();
+
+		System.assert(contactAllEmptyFields == true);
+	}
 }

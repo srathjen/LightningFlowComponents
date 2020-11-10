@@ -49,6 +49,12 @@ global class WishReferralForm_AC {
 	public Boolean referrerContactEmpty { get; set; }
 	public Boolean treatingContactEmpty { get; set; }
 	public Boolean bestContactEmpty { get; set; }
+	// Site setting attributes:
+	public Boolean isSearchMpHtfDeactivated { get; set; }
+	public Boolean isDeactivatedReferralForm { get; set; }
+	public String deactivatedMessage { get; set; }
+	public Boolean isDisplayWarningMessage { get; set; }
+	public String warningMessage { get; set; }
 
 	public WishReferralForm_AC() {
 		communictionList = new List<String>();
@@ -67,6 +73,7 @@ global class WishReferralForm_AC {
 			displayAckMsg = Boolean.valueOf(ApexPages.currentPage().getParameters().get('isSuccess'));
 		}
 		mpHtfSearch = new MpHtfSearchWrapper();
+		setWishReferralFormSettings();
 	}
 
 	/**
@@ -749,5 +756,21 @@ global class WishReferralForm_AC {
 		public String treatingMedicalProfessionalId { get; set; }
 		public String treatingHospitalFacilityId { get; set; }
 		public String bestMedicalProfessionalId { get; set; }
+	}
+
+	/**
+	 * Wish Referral Form Custom Settings
+	*/
+	private void setWishReferralFormSettings() {
+		Referral_Form_Alerts__c wishReferralFormSettings = [
+				SELECT Display_Warning__c, Warning_Message__c, Deactivate_Referral_Form__c, Deactivated_Message__c,
+						Deactivate_MP_HTF_Search__c
+				FROM Referral_Form_Alerts__c
+		];
+		isDisplayWarningMessage = wishReferralFormSettings.Display_Warning__c;
+		warningMessage = wishReferralFormSettings.Warning_Message__c;
+		isDeactivatedReferralForm = wishReferralFormSettings.Deactivate_Referral_Form__c;
+		deactivatedMessage = wishReferralFormSettings.Deactivated_Message__c;
+		isSearchMpHtfDeactivated = wishReferralFormSettings.Deactivate_MP_HTF_Search__c;
 	}
 }
