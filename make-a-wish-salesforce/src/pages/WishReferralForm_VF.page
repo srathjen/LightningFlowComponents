@@ -15,52 +15,55 @@
 <apex:page controller="WishReferralForm_AC" showHeader="false" applyBodyTag="false" sidebar="false"
            standardStylesheets="false" docType="html-5.0" cache="false">
     <script>
-    //Adding Other Language field
-    function languageselection(selectedlanguageId) {
-        var selectedArray = new Array();
-        var selObj = document.getElementById(selectedlanguageId);
-        var i;
-        var count = 0;
-        for (i = 0; i < selObj.options.length; i++) {
-            if (selObj.options[i].selected) {
-                selectedArray[count] = selObj.options[i].value;
-                count++;
+        //Adding Other Language field
+        function languageselection(selectedlanguageId) {
+            var selectedArray = new Array();
+            var selObj = document.getElementById(selectedlanguageId);
+            var i;
+            var count = 0;
+            for (i = 0; i < selObj.options.length; i++) {
+                if (selObj.options[i].selected) {
+                    selectedArray[count] = selObj.options[i].value;
+                    count++;
+                }
             }
-        }
-        console.log(selectedArray);
-        if (selectedArray.indexOf("Other") > -1) {//SIW-569 Changed unsupported method 'includes' to 'indexOf' for IE11 issue
-            document.getElementById('otherlanguagediv').style.display = 'block';
-        } else {
-            document.getElementsByClassName('otherlanguageclass')[0].value = '';
-            document.getElementById('otherlanguagediv').style.display = 'none';
-        }
-        //SIW-370 changed to display and hide primary language input box red or grey
-        var elemsDiv = document.querySelectorAll('[id$="plang_chosen"]');
-        var elems = document.querySelectorAll('[id$="plang"]');
-        var e = document.querySelectorAll('[id$="langError"]');
-        var lab = document.querySelectorAll('[id$="langLabel"]');
-        if (elems[0].value == '') {
-            e[0].style.display = "block";
-            lab[0].style.color = "red";
-            if (elemsDiv[0].querySelectorAll('div').length > 0) {
-                elemsDiv[0].querySelectorAll('div')[0].style.border = "1px solid red";
+            if (selectedArray.indexOf("Other") > -1) {//SIW-569 Changed unsupported method 'includes' to 'indexOf' for IE11 issue
+                document.getElementById('otherlanguagediv').style.display = 'block';
             } else {
-                elems[0].style.border = "1px solid red";
+                document.getElementsByClassName('otherlanguageclass')[0].value = '';
+                document.getElementById('otherlanguagediv').style.display = 'none';
             }
-        } else {
-            e[0].style.display = "none";
-            lab[0].style.color = "#75787B";
-            if (elemsDiv[0].querySelectorAll('div').length > 0) {
-                elemsDiv[0].querySelectorAll('div')[0].style.border = "1px solid rgba(0,0,0,.15)";
+            //SIW-370 changed to display and hide primary language input box red or grey
+            var elemsDiv = document.querySelectorAll('[id$="plang_chosen"]');
+            var elems = document.querySelectorAll('[id$="plang"]');
+            var e = document.querySelectorAll('[id$="langError"]');
+            var lab = document.querySelectorAll('[id$="langLabel"]');
+            if (elems[0].value == '') {
+                e[0].style.display = "block";
+                lab[0].style.color = "red";
+                if (elemsDiv[0].querySelectorAll('div').length > 0) {
+                    elemsDiv[0].querySelectorAll('div')[0].style.border = "1px solid red";
+                } else {
+                    elems[0].style.border = "1px solid red";
+                }
             } else {
-                elems[0].style.border = "1px solid rgba(0,0,0,.15)";
+                e[0].style.display = "none";
+                lab[0].style.color = "#75787B";
+                if (elemsDiv[0].querySelectorAll('div').length > 0) {
+                    elemsDiv[0].querySelectorAll('div')[0].style.border = "1px solid rgba(0,0,0,.15)";
+                } else {
+                    elems[0].style.border = "1px solid rgba(0,0,0,.15)";
+                }
             }
         }
-    }
     </script>
     <body>
-    <apex:form id="frm" styleClass="portal inquiry">
+    <div class="alertUserMessage"
+         style="{! IF(isDeactivatedReferralForm == true, 'display: block', 'display: none')}">{!deactivatedMessage}</div>
+    <apex:form id="frm" styleClass="portal inquiry" rendered="{!!isDeactivatedReferralForm}">
         <apex:outputpanel rendered="{!displayAckMsg == false}" id="panel">
+            <div class="alertUserMessage"
+                 style="{! IF(isDisplayWarningMessage == true, 'display: block', 'display: none')}">{!warningMessage}</div>
             <fieldset>
                 <apex:pagemessages id="msg"/>
                 <apex:inputText value="{!refChildFormParent}" id="childToParent" styleClass="chid-value"
@@ -69,7 +72,8 @@
                 <div class="row" style="margin-bottom:2rem">
                     <div class="form-group r2c mySelect23 radioClickable radioSection">
                         <apex:selectRadio value="{!currLead.Relationship_to_child__c}" id="relationToChild"
-                                          layout="pageDirection" onchange="changeRelationship(this.id, this.value)"
+                                          layout="pageDirection" onchange="changeRelationship(this.id, this.value);
+                                applyMedicalReferralSettings({!isSearchMpHtfDeactivated});"
                                           styleClass="relationToChildClass">
                             <apex:selectOptions value="{!Relationships}"/>
                         </apex:selectRadio>
@@ -207,72 +211,83 @@
 
                     <!-- REFERRER IS MEDICAL PROFESSIONAL -->
                     <div class="refToMP">
-                        <div class="form-group row" style="margin-top:-40px;margin-botton:-20px;">
-                            <div class="col-sm-9" style="line-height:25px;margin-top:-15px;">
-                                <legend><span class="text-muted">{!$Label.Wish_Referral_Lookup_Instructions}</span></legend>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top:-10px">
-                            <div class="col-sm-3" style="padding-top:15px">
+                        <!-- Start: ODP-193 TO BE DELETED AFTER DATA MIGRATION -->
+                        <div id="referringMpLabel" class="row">
+                            <div class="col-sm-3">
                                 <label>{!$Label.Wish_Referral_Referring_Medical_Professional}</label>
                             </div>
-                            <div class="col-sm-6" style="margin-bottom:-12px">
-                                <div id="externalReferrerContactLookup"></div>
-                                <apex:inputHidden id="externalReferrerContactLookupOutput"
-                                                  value="{!mpHtfSearch.referringMedicalProfessionalId}"/>
-                                <div style="opacity: 0;pointer-events: none;">
-                                    <apex:inputText id="externalReferrerContactLookupValidation"/>
-                                </div>
-                                <apex:inputHidden id="referrerContactEmpty" value="{!referrerContactEmpty}"/>
-                            </div>
                         </div>
-                        <div class="refNewAff">
+                        <!-- End: ODP-193 TO BE DELETED AFTER DATA MIGRATION -->
+                        <div id="referralMpSearch">
+                            <div class="form-group row" style="margin-top:-40px;margin-botton:-20px;">
+                                <div class="col-sm-9" style="line-height:25px;margin-top:-15px;">
+                                    <legend><span class="text-muted">{!$Label.Wish_Referral_Lookup_Instructions}</span>
+                                    </legend>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:-10px">
+                                <div class="col-sm-3" style="padding-top:15px">
+                                    <label>{!$Label.Wish_Referral_Referring_Medical_Professional}</label>
+                                </div>
+                                <div class="col-sm-6" style="margin-bottom:-12px">
+                                    <div id="externalReferrerContactLookup"></div>
+                                    <apex:inputHidden id="externalReferrerContactLookupOutput"
+                                                      value="{!mpHtfSearch.referringMedicalProfessionalId}"/>
+                                    <div style="opacity: 0;pointer-events: none;">
+                                        <apex:inputText id="externalReferrerContactLookupValidation"/>
+                                    </div>
+                                    <apex:inputHidden id="referrerContactEmpty" value="{!referrerContactEmpty}"/>
+                                </div>
+                            </div>
+                            <div class="refNewAff">
+                                <div class="form-group row">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-6" style="margin-top:-10px; text-align: center">
+                                        <label>Please provide additional information (Optional)</label>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"/>
+                                    <div class="col-sm-6">
+                                        <div style="display: flex; align-items: center;">
+                                            <label style="width:85px">{!$Label.Wish_Referral_Phone}</label>
+                                            <apex:inputText value="{!referrerNewAffPhone}"
+                                                            styleClass="form-control refmpaffphone phonemask numbers-only"
+                                                            html-placeholder="(000) 000-0000" id="refmpaffphone"
+                                                            html-pattern=".{10,14}" maxlength="10"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"/>
+                                    <div class="col-sm-6">
+                                        <div style="display: flex; align-items: center;">
+                                            <label style="width:85px">{!$Label.Wish_Referral_Email}</label>
+                                            <apex:inputText value="{!referrerNewAffEmail}"
+                                                            styleClass="form-control email-std refmpaffemail"
+                                                            html-placeholder="medicalprofessional_email@domain.com"
+                                                            id="refmpaffemail"
+                                                            maxlength="80"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <div class="col-sm-3"></div>
-                                <div class="col-sm-6" style="margin-top:-10px; text-align: center">
-                                    <label>Please provide additional information (Optional)</label>
-                                </div>
+                                <div class="col-sm-6"><span class="field-word-seperator"></span></div>
                             </div>
-                            <div class="form-group row">
-                                <div class="col-sm-3"/>
-                                <div class="col-sm-6">
-                                    <div style="display: flex; align-items: center;">
-                                        <label style="width:85px">{!$Label.Wish_Referral_Phone}</label>
-                                        <apex:inputText value="{!referrerNewAffPhone}"
-                                                        styleClass="form-control refmpaffphone phonemask numbers-only"
-                                                        html-placeholder="(000) 000-0000" id="refmpaffphone"
-                                                        html-pattern=".{10,14}" maxlength="10"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-3"/>
-                                <div class="col-sm-6">
-                                    <div style="display: flex; align-items: center;">
-                                        <label style="width:85px">{!$Label.Wish_Referral_Email}</label>
-                                        <apex:inputText value="{!referrerNewAffEmail}"
-                                                        styleClass="form-control email-std refmpaffemail"
-                                                        html-placeholder="medicalprofessional_email@domain.com"
-                                                        id="refmpaffemail"
-                                                        maxlength="80"/>
-                                    </div>
+                            <div class="form-group row newRefMpChk">
+                                <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
+                                    <label class="c-input c-checkbox">
+                                        <apex:inputCheckbox id="createNewRefMPchk"
+                                                            onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
+                                        <span class="c-indicator sas"></span>
+                                        {!$Label.Wish_Referral_Create_New_Medical_Professional}
+                                    </label>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-sm-3"></div>
-                            <div class="col-sm-6"><span class="field-word-seperator"></span></div>
-                        </div>
-                        <div class="form-group row newRefMpChk">
-                            <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
-                                <label class="c-input c-checkbox">
-                                    <apex:inputCheckbox id="createNewRefMPchk"
-                                                        onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
-                                    <span class="c-indicator sas"></span>
-                                    {!$Label.Wish_Referral_Create_New_Medical_Professional}
-                                </label>
-                            </div>
-                        </div>
+
                         <div class="refMpForm">
                             <div class="form-group row">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Title}</label></div>
@@ -351,40 +366,50 @@
                             </div>
                         </div>
 
-                        <div class="row" style="padding-top: 25px">
-                            <div class="col-sm-3" style="padding-top:15px">
-                                <label>{!$Label.Wish_Referral_Referring_Hospital_Facility}</label></div>
-                            <div class="col-sm-6" style="margin-bottom:-12px">
-                                <div style="display: flex; align-items: center;">
-                                    <label style="width:85px">{!$Label.Wish_Referral_State_Filter}:</label>
-                                    <apex:selectList size="1" id="referrerAccountState"
-                                                     styleClass="form-control col-xs-12 c-select stateOptional referrerAccountState"
-                                                     onchange="updateHtfFilter('externalReferrerAccountLookup', this.value, 'Referring Hospital/Facility')">
-                                        <apex:selectOptions value="{!FilterStateOptions}"/>
-                                    </apex:selectList>
-                                </div>
-                                <div id="externalReferrerAccountLookup"></div>
-                                <div style="opacity: 0;pointer-events: none;">
-                                    <apex:inputText id="externalReferrerAccountLookupValidation"/>
-                                </div>
-                                <apex:inputHidden id="externalReferrerAccountLookupOutput"
-                                                  value="{!mpHtfSearch.referringHospitalFacilityId}"/>
+                        <!-- Start: ODP-193 TO BE DELETED AFTER DATA MIGRATION -->
+                        <div id="referringHtfLabel" class="row">
+                            <div class="col-sm-3">
+                                <label>{!$Label.Wish_Referral_Referring_Hospital_Facility}</label>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-sm-3"></div>
-                            <div class="col-sm-6"><span class="field-word-seperator"></span></div>
-                        </div>
-                        <div class="form-group row newRefHtfChk">
-                            <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
-                                <label class="c-input c-checkbox">
-                                    <apex:inputCheckbox id="createNewRefHTFchk"
-                                                        onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
-                                    <span class="c-indicator sas"></span>
-                                    {!$Label.Wish_Referral_Create_New_Hospital_Facility}
-                                </label>
+                        <!-- End: ODP-193 TO BE DELETED AFTER DATA MIGRATION -->
+                        <div id="referralHtfSearch">
+                            <div class="row" style="padding-top: 25px">
+                                <div class="col-sm-3" style="padding-top:15px">
+                                    <label>{!$Label.Wish_Referral_Referring_Hospital_Facility}</label></div>
+                                <div class="col-sm-6" style="margin-bottom:-12px">
+                                    <div style="display: flex; align-items: center;">
+                                        <label style="width:85px">{!$Label.Wish_Referral_State_Filter}:</label>
+                                        <apex:selectList size="1" id="referrerAccountState"
+                                                         styleClass="form-control col-xs-12 c-select stateOptional referrerAccountState"
+                                                         onchange="updateHtfFilter('externalReferrerAccountLookup', this.value, 'Referring Hospital/Facility')">
+                                            <apex:selectOptions value="{!FilterStateOptions}"/>
+                                        </apex:selectList>
+                                    </div>
+                                    <div id="externalReferrerAccountLookup"></div>
+                                    <div style="opacity: 0;pointer-events: none;">
+                                        <apex:inputText id="externalReferrerAccountLookupValidation"/>
+                                    </div>
+                                    <apex:inputHidden id="externalReferrerAccountLookupOutput"
+                                                      value="{!mpHtfSearch.referringHospitalFacilityId}"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-6"><span class="field-word-seperator"></span></div>
+                            </div>
+                            <div class="form-group row newRefHtfChk">
+                                <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
+                                    <label class="c-input c-checkbox">
+                                        <apex:inputCheckbox id="createNewRefHTFchk"
+                                                            onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
+                                        <span class="c-indicator sas"></span>
+                                        {!$Label.Wish_Referral_Create_New_Hospital_Facility}
+                                    </label>
+                                </div>
                             </div>
                         </div>
+
                         <div class="refHtfForm">
                             <div class="form-group row">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Name}</label></div>
@@ -669,7 +694,7 @@
                         </div>
 
                         <apex:outputPanel id="rr">
-                            <apex:actionRegion >
+                            <apex:actionRegion>
                                 <div class="form-group row">
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Number_of_Siblings}</label>
                                     </div>
@@ -685,25 +710,26 @@
                                 </div>
                                 <div class="form-group row sibInfo">
                                     <apex:outputPanel id="table">
-                                        <apex:outputPanel rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
+                                        <apex:outputPanel
+                                                rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
                                             <label class="col-md-12">{!$Label.Wish_Referral_Sibling_Information}</label>
                                         </apex:outputPanel>
                                         <div class="col-md-12 sib-tablewrap">
                                             <apex:dataTable value="{!SiblingList}" var="currsibling"
                                                             styleClass="table table-maw table-hover">
-                                                <apex:column >
+                                                <apex:column>
                                                     <apex:inputText value="{!currsibling.fName}"
                                                                     styleClass="form-control"
                                                                     html-placeholder="{!$Label.Wish_Referral_Placeholder_First_Name}"
                                                                     id="psibfirstname"/>
                                                 </apex:column>
-                                                <apex:column >
+                                                <apex:column>
                                                     <apex:inputText value="{!currsibling.lName}"
                                                                     styleClass="form-control"
                                                                     html-placeholder="{!$Label.Wish_Referral_Last_Name}"
                                                                     id="psiblastname"/>
                                                 </apex:column>
-                                                <apex:column >
+                                                <apex:column>
                                                     <apex:inputText value="{!currsibling.age}" styleClass="form-control"
                                                                     html-placeholder="{!$Label.Wish_Referral_Age}"
                                                                     id="psibage"/>
@@ -957,67 +983,80 @@
                             </label>
                         </div>
                     </div>
+
                     <div class="trtMpInfo">
-                        <div class="row mpRel" style="margin-top:-15px">
-                            <div class="col-sm-3" style="padding-top:15px">
-                                <label>{!$Label.Wish_Referral_Treating_Medical_Professional}</label></div>
-                            <div class="col-sm-6" style="margin-bottom:-12px">
-                                <div id="externalTreatingContactLookup"></div>
-                                <apex:inputHidden id="externalTreatingContactLookupOutput"
-                                                  value="{!mpHtfSearch.treatingMedicalProfessionalId}"/>
-                                <div style="opacity: 0;pointer-events: none;">
-                                    <apex:inputText id="externalTreatingContactLookupValidation"/>
-                                </div>
-                                <apex:inputHidden id="treatingContactEmpty" value="{!treatingContactEmpty}"/>
+                        <!-- Start: ODP-193 TO BE DELETED AFTER DATA MIGRATION -->
+                        <div id="treatingMpLabel" class="row">
+                            <div class="col-sm-3">
+                                <label>{!$Label.Wish_Referral_Treating_Medical_Professional}</label>
                             </div>
                         </div>
-                        <div class="trtNewAff">
-                            <div class="form-group row">
+                        <!-- End: ODP-193 TO BE DELETED AFTER DATA MIGRATION -->
+
+                        <div id="treatingMpSearch">
+                            <div class="row mpRel" style="margin-top:-15px">
+                                <div class="col-sm-3" style="padding-top:15px">
+                                    <label>{!$Label.Wish_Referral_Treating_Medical_Professional}</label></div>
+                                <div class="col-sm-6" style="margin-bottom:-12px">
+                                    <div id="externalTreatingContactLookup"></div>
+                                    <apex:inputHidden id="externalTreatingContactLookupOutput"
+                                                      value="{!mpHtfSearch.treatingMedicalProfessionalId}"/>
+                                    <div style="opacity: 0;pointer-events: none;">
+                                        <apex:inputText id="externalTreatingContactLookupValidation"/>
+                                    </div>
+                                    <apex:inputHidden id="treatingContactEmpty" value="{!treatingContactEmpty}"/>
+                                </div>
+                            </div>
+                            <div class="trtNewAff">
+                                <div class="form-group row">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-6" style="margin-top:-10px; text-align: center">
+                                        <label>Please provide additional information (Optional)</label>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"/>
+                                    <div class="col-sm-6">
+                                        <div style="display: flex; align-items: center;">
+                                            <label style="width:85px">{!$Label.Wish_Referral_Phone}</label>
+                                            <apex:inputText value="{!treatingNewAffPhone}"
+                                                            styleClass="form-control trtmpaffphone phonemask numbers-only"
+                                                            html-placeholder="(000) 000-0000" id="trtmpaffphone"
+                                                            html-pattern=".{10,14}" maxlength="10"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"/>
+                                    <div class="col-sm-6">
+                                        <div style="display: flex; align-items: center;">
+                                            <label style="width:85px">{!$Label.Wish_Referral_Email}</label>
+                                            <apex:inputText value="{!treatingNewAffEmail}"
+                                                            styleClass="form-control email-std trtmpaffemail"
+                                                            html-placeholder="medicalprofessional_email@domain.com"
+                                                            id="trtmpaffemail"
+                                                            maxlength="80"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row mpRel">
                                 <div class="col-sm-3"></div>
-                                <div class="col-sm-6" style="margin-top:-10px; text-align: center">
-                                    <label>Please provide additional information (Optional)</label>
-                                </div>
+                                <div class="col-sm-6"><span class="field-word-seperator"></span></div>
                             </div>
-                            <div class="form-group row">
-                                <div class="col-sm-3"/>
-                                <div class="col-sm-6">
-                                    <div style="display: flex; align-items: center;">
-                                        <label style="width:85px">{!$Label.Wish_Referral_Phone}</label>
-                                        <apex:inputText value="{!treatingNewAffPhone}"
-                                                        styleClass="form-control trtmpaffphone phonemask numbers-only"
-                                                        html-placeholder="(000) 000-0000" id="trtmpaffphone"
-                                                        html-pattern=".{10,14}" maxlength="10"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-3"/>
-                                <div class="col-sm-6">
-                                    <div style="display: flex; align-items: center;">
-                                        <label style="width:85px">{!$Label.Wish_Referral_Email}</label>
-                                        <apex:inputText value="{!treatingNewAffEmail}"
-                                                        styleClass="form-control email-std trtmpaffemail"
-                                                        html-placeholder="medicalprofessional_email@domain.com"
-                                                        id="trtmpaffemail"
-                                                        maxlength="80"/>
-                                    </div>
+                            <div class="form-group row newTrtMpChk mpRel">
+                                <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
+                                    <label class="c-input c-checkbox">
+                                        <apex:inputCheckbox id="createNewTrtMPchk"
+                                                            onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
+                                        <span class="c-indicator sas"></span>
+                                        {!$Label.Wish_Referral_Create_New_Medical_Professional}
+                                    </label>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row mpRel">
-                            <div class="col-sm-3"></div>
-                            <div class="col-sm-6"><span class="field-word-seperator"></span></div>
-                        </div>
-                        <div class="form-group row newTrtMpChk mpRel">
-                            <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
-                                <label class="c-input c-checkbox">
-                                    <apex:inputCheckbox id="createNewTrtMPchk"
-                                                        onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
-                                    <span class="c-indicator sas"></span>
-                                    {!$Label.Wish_Referral_Create_New_Medical_Professional}
-                                </label>
-                            </div>
-                        </div>
+
+
                         <div class="medToRepeat trtMpForm">
                             <div class="form-group row mpRel">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Title}</label></div>
@@ -1114,42 +1153,55 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Start: ODP-193 TO BE DELETED AFTER DATA MIGRATION -->
+                        <div id="treatingHtfLabel" class="row">
+                            <div class="col-sm-3">
+                                <label>{!$Label.Wish_Referral_Treating_Hospital_Facility}</label>
+                            </div>
+                        </div>
+                        <!-- End: ODP-193 TO BE DELETED AFTER DATA MIGRATION -->
+
                         <div class="treatingHtf">
-                            <div class="row mpRel" style="padding-top: 25px">
-                                <div class="col-sm-3" style="padding-top:15px">
-                                    <label>{!$Label.Wish_Referral_Treating_Hospital_Facility}</label>
-                                </div>
-                                <div class="col-sm-6" style="margin-bottom:-12px">
-                                    <div style="display: flex; align-items: center;">
-                                        <label style="width:85px">{!$Label.Wish_Referral_State_Filter}:</label>
-                                        <apex:selectList size="1" id="treatingAccountState"
-                                                         styleClass="form-control col-xs-12 c-select stateOptional treatingAccountState"
-                                                         onchange="updateHtfFilter('externalTreatingAccountLookup', this.value, 'Treating Hospital/Facility')">
-                                            <apex:selectOptions value="{!FilterStateOptions}"/>
-                                        </apex:selectList>
+
+                            <div id="treatingHtfSearch">
+                                <div class="row mpRel" style="padding-top: 25px">
+                                    <div class="col-sm-3" style="padding-top:15px">
+                                        <label>{!$Label.Wish_Referral_Treating_Hospital_Facility}</label>
                                     </div>
-                                    <div id="externalTreatingAccountLookup"></div>
-                                    <div style="opacity: 0;pointer-events: none;">
-                                        <apex:inputText id="externalTreatingAccountLookupValidation"/>
+                                    <div class="col-sm-6" style="margin-bottom:-12px">
+                                        <div style="display: flex; align-items: center;">
+                                            <label style="width:85px">{!$Label.Wish_Referral_State_Filter}:</label>
+                                            <apex:selectList size="1" id="treatingAccountState"
+                                                             styleClass="form-control col-xs-12 c-select stateOptional treatingAccountState"
+                                                             onchange="updateHtfFilter('externalTreatingAccountLookup', this.value, 'Treating Hospital/Facility')">
+                                                <apex:selectOptions value="{!FilterStateOptions}"/>
+                                            </apex:selectList>
+                                        </div>
+                                        <div id="externalTreatingAccountLookup"></div>
+                                        <div style="opacity: 0;pointer-events: none;">
+                                            <apex:inputText id="externalTreatingAccountLookupValidation"/>
+                                        </div>
+                                    </div>
+                                    <apex:inputHidden id="externalTreatingAccountLookupOutput"
+                                                      value="{!mpHtfSearch.treatingHospitalFacilityId}"/>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-6"><span class="field-word-seperator"></span></div>
+                                </div>
+                                <div class="form-group row newTrtHtfChk">
+                                    <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
+                                        <label class="c-input c-checkbox">
+                                            <apex:inputCheckbox id="createNewTrtHTFchk"
+                                                                onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
+                                            <span class="c-indicator sas"></span>
+                                            {!$Label.Wish_Referral_Create_New_Hospital_Facility}
+                                        </label>
                                     </div>
                                 </div>
-                                <apex:inputHidden id="externalTreatingAccountLookupOutput"
-                                                  value="{!mpHtfSearch.treatingHospitalFacilityId}"/>
                             </div>
-                            <div class="form-group row">
-                                <div class="col-sm-3"></div>
-                                <div class="col-sm-6"><span class="field-word-seperator"></span></div>
-                            </div>
-                            <div class="form-group row newTrtHtfChk">
-                                <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
-                                    <label class="c-input c-checkbox">
-                                        <apex:inputCheckbox id="createNewTrtHTFchk"
-                                                            onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
-                                        <span class="c-indicator sas"></span>
-                                        {!$Label.Wish_Referral_Create_New_Hospital_Facility}
-                                    </label>
-                                </div>
-                            </div>
+
                             <div class="trtHtfForm">
                                 <div class="form-group row">
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Name}</label></div>
@@ -1234,70 +1286,81 @@
                             </label>
                         </div>
                     </div>
+
                     <div class="bestMpInfo">
-                        <div class="mpSearchCreate">
-                            <div class="row">
-                                <div class="col-sm-3" style="padding-top:15px">
-                                    <label>{!$Label.Wish_Referral_Best_Medical_Contact}</label></div>
-                                <div class="col-sm-6" style="margin-bottom:-12px">
-                                    <div id="externalBestContactLookup"></div>
-                                    <apex:inputHidden id="externalBestContactLookupOutput"
-                                                      value="{!mpHtfSearch.bestMedicalProfessionalId}"/>
-                                    <div style="opacity: 0;pointer-events: none;">
-                                        <apex:inputText id="externalBestContactLookupValidation"/>
-                                    </div>
-                                    <apex:inputHidden id="bestContactEmpty" value="{!bestContactEmpty}"/>
-                                </div>
+                        <!-- Start: ODP-193 TO BE DELETED AFTER DATA MIGRATION -->
+                        <div id="bestMpLabel" class="row">
+                            <div class="col-sm-3">
+                                <label>{!$Label.Wish_Referral_Best_Medical_Contact}</label>
                             </div>
-                            <div class="bestNewAff">
+                        </div>
+                        <!-- End: ODP-193 TO BE DELETED AFTER DATA MIGRATION -->
+                        <div id="bestMpSearch">
+                            <div class="mpSearchCreate">
+                                <div class="row">
+                                    <div class="col-sm-3" style="padding-top:15px">
+                                        <label>{!$Label.Wish_Referral_Best_Medical_Contact}</label></div>
+                                    <div class="col-sm-6" style="margin-bottom:-12px">
+                                        <div id="externalBestContactLookup"></div>
+                                        <apex:inputHidden id="externalBestContactLookupOutput"
+                                                          value="{!mpHtfSearch.bestMedicalProfessionalId}"/>
+                                        <div style="opacity: 0;pointer-events: none;">
+                                            <apex:inputText id="externalBestContactLookupValidation"/>
+                                        </div>
+                                        <apex:inputHidden id="bestContactEmpty" value="{!bestContactEmpty}"/>
+                                    </div>
+                                </div>
+                                <div class="bestNewAff">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3"></div>
+                                        <div class="col-sm-6" style="margin-top:-10px; text-align: center">
+                                            <label>Please provide additional information (Optional)</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-3"/>
+                                        <div class="col-sm-6">
+                                            <div style="display: flex; align-items: center;">
+                                                <label style="width:85px">{!$Label.Wish_Referral_Phone}</label>
+                                                <apex:inputText value="{!bestNewAffPhone}"
+                                                                styleClass="form-control bestmpaffphone phonemask numbers-only"
+                                                                html-placeholder="(000) 000-0000" id="bestmpaffphone"
+                                                                html-pattern=".{10,14}" maxlength="10"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-3"/>
+                                        <div class="col-sm-6">
+                                            <div style="display: flex; align-items: center;">
+                                                <label style="width:85px">{!$Label.Wish_Referral_Email}</label>
+                                                <apex:inputText value="{!bestNewAffEmail}"
+                                                                styleClass="form-control email-std bestmpaffemail"
+                                                                html-placeholder="medicalprofessional_email@domain.com"
+                                                                id="bestmpaffemail"
+                                                                maxlength="80"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <div class="col-sm-3"></div>
-                                    <div class="col-sm-6" style="margin-top:-10px; text-align: center">
-                                        <label>Please provide additional information (Optional)</label>
-                                    </div>
+                                    <div class="col-sm-6"><span class="field-word-seperator"></span></div>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3"/>
-                                    <div class="col-sm-6">
-                                        <div style="display: flex; align-items: center;">
-                                            <label style="width:85px">{!$Label.Wish_Referral_Phone}</label>
-                                            <apex:inputText value="{!bestNewAffPhone}"
-                                                            styleClass="form-control bestmpaffphone phonemask numbers-only"
-                                                            html-placeholder="(000) 000-0000" id="bestmpaffphone"
-                                                            html-pattern=".{10,14}" maxlength="10"/>
-                                        </div>
+                                <div class="form-group row newBestMpChk">
+                                    <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
+                                        <label class="c-input c-checkbox">
+                                            <apex:inputCheckbox id="createNewBestMPchk"
+                                                                onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
+                                            <span class="c-indicator sas"></span>
+                                            {!$Label.Wish_Referral_Create_New_Medical_Professional}
+                                        </label>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3"/>
-                                    <div class="col-sm-6">
-                                        <div style="display: flex; align-items: center;">
-                                            <label style="width:85px">{!$Label.Wish_Referral_Email}</label>
-                                            <apex:inputText value="{!bestNewAffEmail}"
-                                                            styleClass="form-control email-std bestmpaffemail"
-                                                            html-placeholder="medicalprofessional_email@domain.com"
-                                                            id="bestmpaffemail"
-                                                            maxlength="80"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-3"></div>
-                                <div class="col-sm-6"><span class="field-word-seperator"></span></div>
-                            </div>
-                            <div class="form-group row newBestMpChk">
-                                <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
-                                    <label class="c-input c-checkbox">
-                                        <apex:inputCheckbox id="createNewBestMPchk"
-                                                            onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
-                                        <span class="c-indicator sas"></span>
-                                        {!$Label.Wish_Referral_Create_New_Medical_Professional}
-                                    </label>
                                 </div>
                             </div>
                         </div>
-                        <div class="medToRepeatBest">
+
+                        <div id="bestMpSearchSection" class="medToRepeatBest">
                             <div class="form-group row">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Title}</label></div>
                                 <div class="col-sm-6">
@@ -1478,7 +1541,7 @@
         </div>
     </div>
     <!-- / modal end -->
-    <apex:includeLightning />
+    <apex:includeLightning/>
     <script>
         window.addEventListener('load', () => {
             turnOffAutocomplete();
@@ -1637,7 +1700,7 @@
     <!--<script src="//ssl.wish.org/satellite/staging/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205-staging.js"></script>-->
     <!-- prod -->
     <script src="//ssl.wish.org/satellite/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205.js"></script>
-    <apex:outputPanel >
+    <apex:outputPanel>
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-2.2.4.min.js')}"></script>
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-ui-1.11.3.min.js')}"></script>
         <script>
@@ -1725,6 +1788,17 @@
                     window.parent.postMessage('home', '*');
                 }
             }
+
+
+
+
+
+
+
+
+
+
+
         </script>
         <script>_satellite.pageBottom();</script>
     </apex:outputPanel>
@@ -1783,12 +1857,40 @@
             }
         }
 
+        <!-- Start: ODP-193 TO BE DELETED AFTER DATA MIGRATION -->
+        function applyMedicalReferralSettings(isSearchMpHtfDeactivated) {
+            if (isSearchMpHtfDeactivated === true) {
+                document.querySelector('[id$="createNewRefMPchk"]').checked = true;
+                document.querySelector('[id$="createNewRefHTFchk"]').checked = true;
+                document.querySelector('[id$="createNewTrtMPchk"]').checked = true;
+                document.querySelector('[id$="createNewTrtHTFchk"]').checked = true;
+                document.querySelector('[id$="createNewBestMPchk"]').checked = true;
+
+                document.getElementById("referralMpSearch").hidden = true;
+                document.getElementById("referralHtfSearch").hidden = true;
+                $(".refMpForm").css("display", "block");
+                $(".refHtfForm").css("display", "block");
+                document.getElementById("treatingMpSearch").hidden = true;
+                document.getElementById("treatingHtfSearch").hidden = true;
+                $(".trtMpForm").css("display", "block");
+                $(".trtHtfForm").css("display", "block");
+                document.getElementById("bestMpSearch").hidden = true;
+                document.getElementById("bestMpSearchSection").style.display = 'block';
+            } else if (isSearchMpHtfDeactivated === false) {
+                document.getElementById("referringMpLabel").hidden = true;
+                document.getElementById("referringHtfLabel").hidden = true;
+                document.getElementById("treatingMpLabel").hidden = true;
+                document.getElementById("treatingHtfLabel").hidden = true;
+                document.getElementById("bestMpLabel").hidden = true;
+            }
+        }
+        <!-- End: ODP-193 TO BE DELETED AFTER DATA MIGRATION -->
+
         //SIW-556 : Modified this method to allow users to proceed even when select No in question "HAS THE REFERRAL BEEN DISCUSSED WITH THE CHILD'S HEALTHCARE PROVIDER?"
         function getInputValue() {
             // Selecting the input element and get its value document.querySelector('.searchField').value;
             var inputVal1 = document.querySelectorAll(".searchFieldDis");
             var inputVal2 = document.querySelectorAll(".searchFieldAwa");
-
             if (rel == 'Self' || rel == 'Family Member/Relative') {
                 if (inputVal2[0].value == 'Yes') {
                     if (inputVal1[0].value == 'Yes' || inputVal1[0].value == 'No') {
@@ -1796,13 +1898,11 @@
                     } else {
                         $(".shownOnYes").addClass("fam-aware-overlay")
                     }
-
                 } else {
                     $(".shownOnYes").addClass("fam-aware-overlay")
                 }
             } else if (rel == 'Parent/Guardian') {
                 $(".shownOnYes").removeClass("fam-aware-overlay")
-
             } else {
                 if (inputVal1[0].value == 'Yes' || inputVal2[0].value == 'Yes') {
                     $(".shownOnYes").removeClass("fam-aware-overlay")
@@ -1952,7 +2052,7 @@
                         //check if referring & treating are the same
                         let refLookupOutput = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0].value;
                         let trtLookupOutput = document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0].value;
-                        if(refLookupOutput === trtLookupOutput) {
+                        if (refLookupOutput === trtLookupOutput) {
                             document.getElementsByClassName('repeatMedProfBest')[0].style.display = 'none';
                         }
                     } else if (inputType === 'treatingContact') {
@@ -1979,7 +2079,7 @@
                         //check if referring & treating are the same
                         let refLookupOutput = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0].value;
                         let trtLookupOutput = document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0].value;
-                        if(refLookupOutput === trtLookupOutput) {
+                        if (refLookupOutput === trtLookupOutput) {
                             document.getElementsByClassName('repeatMedProfBest')[0].style.display = 'none';
                         }
                     } else if (inputType === 'bestContact') {
@@ -2277,18 +2377,13 @@
             }
         }
 
-        function turnOffAutocomplete(){
+        function turnOffAutocomplete() {
             // Turn off autocomplete for Search Fields
-            document.querySelector('#externalReferrerAccountLookup')
-                .querySelector('input').setAttribute('autocomplete', 'off');
-            document.querySelector('#externalReferrerContactLookup')
-                .querySelector('input').setAttribute('autocomplete', 'off');
-            document.querySelector('#externalTreatingAccountLookup')
-                .querySelector('input').setAttribute('autocomplete', 'off');
-            document.querySelector('#externalTreatingContactLookup')
-                .querySelector('input').setAttribute('autocomplete', 'off');
-            document.querySelector('#externalBestContactLookup')
-                .querySelector('input').setAttribute('autocomplete', 'off');
+            document.querySelector('#externalReferrerAccountLookup').querySelector('input').setAttribute('autocomplete', 'off');
+            document.querySelector('#externalReferrerContactLookup').querySelector('input').setAttribute('autocomplete', 'off');
+            document.querySelector('#externalTreatingAccountLookup').querySelector('input').setAttribute('autocomplete', 'off');
+            document.querySelector('#externalTreatingContactLookup').querySelector('input').setAttribute('autocomplete', 'off');
+            document.querySelector('#externalBestContactLookup').querySelector('input').setAttribute('autocomplete', 'off');
         }
     </script>
     <!-- custom style for referral page -->
@@ -2631,6 +2726,11 @@
 
         .text-center {
             text-align: center;
+        }
+
+        .alertUserMessage {
+            text-align: center;
+            color: red;
         }
     </style>
     </body>
