@@ -39,6 +39,6 @@
             <fieldName>Fax</fieldName>
             <matchingMethod>Phone</matchingMethod>
         </matchingRuleItems>
-        <ruleStatus>Inactive</ruleStatus>
+        <ruleStatus>Active</ruleStatus>
     </matchingRules>
 </MatchingRules>
