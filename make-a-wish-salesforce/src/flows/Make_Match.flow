@@ -822,6 +822,20 @@
                 <elementReference>UnmatchedHTFState</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>HTFtoSearch.Department__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>UnmatchedHTFDept</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>HTFtoSearch.BillingCity</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>UnmatchedHTFCity</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>Assign_Search_HTF_to_Collection_0</targetReference>
         </connector>
@@ -880,6 +894,13 @@
                 <elementReference>ChapterName.recordName</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateDupeCheckHTF.BillingCity</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>HTFCity</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>Get_Duplicate_HTFs_0</targetReference>
         </connector>
@@ -894,6 +915,13 @@
             <operator>Assign</operator>
             <value>
                 <elementReference>HTFState</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>BeforeCreateDupeCheckHTF.Department__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Department</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -5093,31 +5121,31 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>column02_fieldName</name>
                 <value>
-                    <stringValue>BillingCity</stringValue>
+                    <stringValue>BillingStreet</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column02_label</name>
                 <value>
-                    <stringValue>City</stringValue>
+                    <stringValue>Street</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column02_width</name>
                 <value>
-                    <numberValue>150.0</numberValue>
+                    <numberValue>200.0</numberValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column03_fieldName</name>
                 <value>
-                    <stringValue>BillingState</stringValue>
+                    <stringValue>BillingCity</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column03_label</name>
                 <value>
-                    <stringValue>State</stringValue>
+                    <stringValue>City</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -5129,13 +5157,13 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>column04_fieldName</name>
                 <value>
-                    <stringValue>BillingPostalCode</stringValue>
+                    <stringValue>BillingState</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column04_label</name>
                 <value>
-                    <stringValue>Zip Code</stringValue>
+                    <stringValue>State</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -5147,37 +5175,37 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>column05_fieldName</name>
                 <value>
-                    <stringValue>Department__c</stringValue>
+                    <stringValue>BillingPostalCode</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column05_label</name>
                 <value>
-                    <stringValue>Department</stringValue>
+                    <stringValue>Zip Code</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column05_width</name>
                 <value>
-                    <numberValue>200.0</numberValue>
+                    <numberValue>100.0</numberValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column06_width</name>
                 <value>
-                    <numberValue>150.0</numberValue>
+                    <numberValue>200.0</numberValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column06_label</name>
                 <value>
-                    <stringValue>Chapter</stringValue>
+                    <stringValue>Department</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column06_fieldName</name>
                 <value>
-                    <stringValue>Chapter_Name_Text__c</stringValue>
+                    <stringValue>Department__c</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -5190,6 +5218,24 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
                 <name>selectedRows_standard1</name>
                 <value>
                     <elementReference>HTFtoSearchCollection</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column07_width</name>
+                <value>
+                    <numberValue>150.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column07_label</name>
+                <value>
+                    <stringValue>Chapter</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column07_fieldName</name>
+                <value>
+                    <stringValue>Chapter_Name_Text__c</stringValue>
                 </value>
             </inputParameters>
             <isRequired>true</isRequired>
@@ -5243,49 +5289,49 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>column02_fieldName</name>
                 <value>
-                    <stringValue>BillingCity</stringValue>
+                    <stringValue>BillingStreet</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column02_label</name>
                 <value>
-                    <stringValue>City</stringValue>
+                    <stringValue>Street</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column03_fieldName</name>
                 <value>
-                    <stringValue>BillingState</stringValue>
+                    <stringValue>BillingCity</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column03_label</name>
                 <value>
-                    <stringValue>State</stringValue>
+                    <stringValue>City</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column04_fieldName</name>
                 <value>
-                    <stringValue>BillingPostalCode</stringValue>
+                    <stringValue>BillingState</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column04_label</name>
                 <value>
-                    <stringValue>Zip Code</stringValue>
+                    <stringValue>State</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column05_fieldName</name>
                 <value>
-                    <stringValue>Department__c</stringValue>
+                    <stringValue>BillingPostalCode</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column05_label</name>
                 <value>
-                    <stringValue>Department</stringValue>
+                    <stringValue>Zip Code</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -5309,7 +5355,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>column02_width</name>
                 <value>
-                    <numberValue>150.0</numberValue>
+                    <numberValue>200.0</numberValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -5327,25 +5373,43 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>column05_width</name>
                 <value>
-                    <numberValue>200.0</numberValue>
+                    <numberValue>100.0</numberValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column06_fieldName</name>
                 <value>
-                    <stringValue>Chapter_Name_Text__c</stringValue>
+                    <stringValue>Department__c</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column06_label</name>
                 <value>
-                    <stringValue>Chapter</stringValue>
+                    <stringValue>Department</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column06_width</name>
                 <value>
+                    <numberValue>200.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column07_width</name>
+                <value>
                     <numberValue>150.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column07_label</name>
+                <value>
+                    <stringValue>Chapter</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column07_fieldName</name>
+                <value>
+                    <stringValue>Chapter_Name_Text__c</stringValue>
                 </value>
             </inputParameters>
             <isRequired>true</isRequired>
@@ -5806,31 +5870,31 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>column02_fieldName</name>
                 <value>
-                    <stringValue>BillingCity</stringValue>
+                    <stringValue>BillingStreet</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column02_label</name>
                 <value>
-                    <stringValue>City</stringValue>
+                    <stringValue>Street</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column02_width</name>
                 <value>
-                    <numberValue>150.0</numberValue>
+                    <numberValue>200.0</numberValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column03_fieldName</name>
                 <value>
-                    <stringValue>BillingState</stringValue>
+                    <stringValue>BillingCity</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column03_label</name>
                 <value>
-                    <stringValue>State</stringValue>
+                    <stringValue>City</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -5842,13 +5906,13 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>column04_fieldName</name>
                 <value>
-                    <stringValue>BillingPostalCode</stringValue>
+                    <stringValue>BillingState</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column04_label</name>
                 <value>
-                    <stringValue>Zip Code</stringValue>
+                    <stringValue>State</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -5860,37 +5924,37 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>column05_fieldName</name>
                 <value>
-                    <stringValue>Department__c</stringValue>
+                    <stringValue>BillingPostalCode</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column05_label</name>
                 <value>
-                    <stringValue>Department</stringValue>
+                    <stringValue>Zip Code</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column05_width</name>
                 <value>
-                    <numberValue>200.0</numberValue>
+                    <numberValue>100.0</numberValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column06_width</name>
                 <value>
-                    <numberValue>150.0</numberValue>
+                    <numberValue>200.0</numberValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column06_label</name>
                 <value>
-                    <stringValue>Chapter</stringValue>
+                    <stringValue>Department</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column06_fieldName</name>
                 <value>
-                    <stringValue>Chapter_Name_Text__c</stringValue>
+                    <stringValue>Department__c</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -5956,49 +6020,49 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>column02_fieldName</name>
                 <value>
-                    <stringValue>BillingCity</stringValue>
+                    <stringValue>BillingStreet</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column02_label</name>
                 <value>
-                    <stringValue>City</stringValue>
+                    <stringValue>Street</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column03_fieldName</name>
                 <value>
-                    <stringValue>BillingState</stringValue>
+                    <stringValue>BillingCity</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column03_label</name>
                 <value>
-                    <stringValue>State</stringValue>
+                    <stringValue>City</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column04_fieldName</name>
                 <value>
-                    <stringValue>BillingPostalCode</stringValue>
+                    <stringValue>BillingState</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column04_label</name>
                 <value>
-                    <stringValue>Zip Code</stringValue>
+                    <stringValue>State</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column05_fieldName</name>
                 <value>
-                    <stringValue>Department__c</stringValue>
+                    <stringValue>BillingPostalCode</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column05_label</name>
                 <value>
-                    <stringValue>Department</stringValue>
+                    <stringValue>Zip Code</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -6022,7 +6086,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>column02_width</name>
                 <value>
-                    <numberValue>150.0</numberValue>
+                    <numberValue>200.0</numberValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -6040,25 +6104,43 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, Text({!Get_Lead_Info.Best_Contact
             <inputParameters>
                 <name>column05_width</name>
                 <value>
-                    <numberValue>200.0</numberValue>
+                    <numberValue>100.0</numberValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column06_fieldName</name>
                 <value>
-                    <stringValue>Chapter_Name_Text__c</stringValue>
+                    <stringValue>Department__c</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column06_label</name>
                 <value>
-                    <stringValue>Chapter</stringValue>
+                    <stringValue>Department</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>column06_width</name>
                 <value>
+                    <numberValue>200.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column07_width</name>
+                <value>
                     <numberValue>150.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column07_label</name>
+                <value>
+                    <stringValue>Chapter</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>column07_fieldName</name>
+                <value>
+                    <stringValue>Chapter_Name_Text__c</stringValue>
                 </value>
             </inputParameters>
             <isRequired>true</isRequired>
