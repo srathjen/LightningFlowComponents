@@ -72,8 +72,9 @@
                 <div class="row" style="margin-bottom:2rem">
                     <div class="form-group r2c mySelect23 radioClickable radioSection">
                         <apex:selectRadio value="{!currLead.Relationship_to_child__c}" id="relationToChild"
-                                          layout="pageDirection" onchange="changeRelationship(this.id, this.value);
-                                applyMedicalReferralSettings({!isSearchMpHtfDeactivated});"
+                                          layout="pageDirection"
+                                          onchange="changeRelationship(this.id, this.value);
+                                                  applyMedicalReferralSettings({!isSearchMpHtfDeactivated}, this.value);"
                                           styleClass="relationToChildClass">
                             <apex:selectOptions value="{!Relationships}"/>
                         </apex:selectRadio>
@@ -1543,11 +1544,6 @@
     <!-- / modal end -->
     <apex:includeLightning/>
     <script>
-        window.addEventListener('load', () => {
-            turnOffAutocomplete();
-            buildValidationLookupFields();
-        });
-
         function updateHtfFilter(lookupId, value, pluralHint) {
             let filter = value === '' ? '' : {BillingState: 'BillingState = \'' + value + '\''};
             let element = document.getElementById(lookupId);
@@ -1560,45 +1556,55 @@
         }
 
         function buildValidationLookupFields() {
-            let refAccountEm = document.createElement("em");
-            refAccountEm.setAttribute('id', 'refAccountEm');
-            refAccountEm.setAttribute('hidden', 'true');
-            refAccountEm.appendChild(document.createTextNode("Oops! Please enter a Hospital/Facility"));
-            document.querySelector('#externalReferrerAccountLookup')
-                .querySelector('.slds-combobox__form-element')
-                .appendChild(refAccountEm);
+            if (!document.querySelector('#refAccountEm')) {
+                let refAccountEm = document.createElement("em");
+                refAccountEm.setAttribute('id', 'refAccountEm');
+                refAccountEm.setAttribute('hidden', 'true');
+                refAccountEm.appendChild(document.createTextNode("Oops! Please enter a Hospital/Facility"));
+                document.querySelector('#externalReferrerAccountLookup')
+                    .querySelector('.slds-combobox__form-element')
+                    .appendChild(refAccountEm);
+            }
 
-            let refContactEm = document.createElement("em");
-            refContactEm.setAttribute('id', 'refContactEm');
-            refContactEm.setAttribute('hidden', 'true');
-            refContactEm.appendChild(document.createTextNode("Oops! Please enter a Medical Professional"));
-            document.querySelector('#externalReferrerContactLookup')
-                .querySelector('.slds-combobox__form-element')
-                .appendChild(refContactEm);
+            if (!document.querySelector('#refContactEm')) {
+                let refContactEm = document.createElement("em");
+                refContactEm.setAttribute('id', 'refContactEm');
+                refContactEm.setAttribute('hidden', 'true');
+                refContactEm.appendChild(document.createTextNode("Oops! Please enter a Medical Professional"));
+                document.querySelector('#externalReferrerContactLookup')
+                    .querySelector('.slds-combobox__form-element')
+                    .appendChild(refContactEm);
+            }
 
-            let trtAccountEm = document.createElement("em");
-            trtAccountEm.setAttribute('id', 'trtAccountEm');
-            trtAccountEm.setAttribute('hidden', 'true');
-            trtAccountEm.appendChild(document.createTextNode("Oops! Please enter a Hospital/Facility"));
-            document.querySelector('#externalTreatingAccountLookup')
-                .querySelector('.slds-combobox__form-element')
-                .appendChild(trtAccountEm);
+            if (!document.querySelector('#trtAccountEm')) {
+                let trtAccountEm = document.createElement("em");
+                trtAccountEm.setAttribute('id', 'trtAccountEm');
+                trtAccountEm.setAttribute('hidden', 'true');
+                trtAccountEm.appendChild(document.createTextNode("Oops! Please enter a Hospital/Facility"));
+                document.querySelector('#externalTreatingAccountLookup')
+                    .querySelector('.slds-combobox__form-element')
+                    .appendChild(trtAccountEm);
+            }
 
-            let trtContactEm = document.createElement("em");
-            trtContactEm.setAttribute('id', 'trtContactEm');
-            trtContactEm.setAttribute('hidden', 'true');
-            trtContactEm.appendChild(document.createTextNode("Oops! Please enter a Medical Professional"));
-            document.querySelector('#externalTreatingContactLookup')
-                .querySelector('.slds-combobox__form-element')
-                .appendChild(trtContactEm);
+            if (!document.querySelector('#trtContactEm')) {
+                let trtContactEm = document.createElement("em");
+                trtContactEm.setAttribute('id', 'trtContactEm');
+                trtContactEm.setAttribute('hidden', 'true');
+                trtContactEm.appendChild(document.createTextNode("Oops! Please enter a Medical Professional"));
+                document.querySelector('#externalTreatingContactLookup')
+                    .querySelector('.slds-combobox__form-element')
+                    .appendChild(trtContactEm);
+            }
 
-            let bestContactEm = document.createElement("em");
-            bestContactEm.setAttribute('id', 'bestContactEm');
-            bestContactEm.setAttribute('hidden', 'true');
-            bestContactEm.appendChild(document.createTextNode("Oops! Please enter a Medical Professional"));
-            document.querySelector('#externalBestContactLookup')
-                .querySelector('.slds-combobox__form-element')
-                .appendChild(bestContactEm);
+            if (!document.querySelector('#bestContactEm')) {
+                let bestContactEm = document.createElement("em");
+                bestContactEm.setAttribute('id', 'bestContactEm');
+                bestContactEm.setAttribute('hidden', 'true');
+                bestContactEm.appendChild(document.createTextNode("Oops! Please enter a Medical Professional"));
+                document.querySelector('#externalBestContactLookup')
+                    .querySelector('.slds-combobox__form-element')
+                    .appendChild(bestContactEm);
+            }
         }
 
         (function (arr) {
@@ -1799,6 +1805,11 @@
 
 
 
+
+
+
+
+
         </script>
         <script>_satellite.pageBottom();</script>
     </apex:outputPanel>
@@ -1836,7 +1847,7 @@
                     mpRelElement[i].style.display = 'none';
                 }
                 let nonmpRelElement = document.getElementsByClassName('nonMpRel');
-                for (i = 0; i < mpRelElement.length; i++) {
+                for (let i = 0; i < nonmpRelElement.length; i++) {
                     nonmpRelElement[i].style.display = 'block';
                 }
             } else {
@@ -1857,34 +1868,45 @@
             }
         }
 
-        <!-- Start: ODP-193 TO BE DELETED AFTER DATA MIGRATION -->
-        function applyMedicalReferralSettings(isSearchMpHtfDeactivated) {
-            if (isSearchMpHtfDeactivated === true) {
-                document.querySelector('[id$="createNewRefMPchk"]').checked = true;
-                document.querySelector('[id$="createNewRefHTFchk"]').checked = true;
-                document.querySelector('[id$="createNewTrtMPchk"]').checked = true;
-                document.querySelector('[id$="createNewTrtHTFchk"]').checked = true;
-                document.querySelector('[id$="createNewBestMPchk"]').checked = true;
+        function applyMedicalReferralSettings(isSearchMpHtfDeactivated, relationshipType) {
+            if (relationshipType === 'Medical Professional') {
+                buildValidationLookupFields();
 
-                document.getElementById("referralMpSearch").hidden = true;
-                document.getElementById("referralHtfSearch").hidden = true;
-                $(".refMpForm").css("display", "block");
-                $(".refHtfForm").css("display", "block");
-                document.getElementById("treatingMpSearch").hidden = true;
-                document.getElementById("treatingHtfSearch").hidden = true;
-                $(".trtMpForm").css("display", "block");
-                $(".trtHtfForm").css("display", "block");
-                document.getElementById("bestMpSearch").hidden = true;
-                document.getElementById("bestMpSearchSection").style.display = 'block';
-            } else if (isSearchMpHtfDeactivated === false) {
-                document.getElementById("referringMpLabel").hidden = true;
-                document.getElementById("referringHtfLabel").hidden = true;
-                document.getElementById("treatingMpLabel").hidden = true;
-                document.getElementById("treatingHtfLabel").hidden = true;
-                document.getElementById("bestMpLabel").hidden = true;
+                // Turn off autocomplete
+                document.querySelector('#externalReferrerAccountLookup').querySelector('input').setAttribute('autocomplete', 'off');
+                document.querySelector('#externalReferrerContactLookup').querySelector('input').setAttribute('autocomplete', 'off');
+                document.querySelector('#externalTreatingAccountLookup').querySelector('input').setAttribute('autocomplete', 'off');
+                document.querySelector('#externalTreatingContactLookup').querySelector('input').setAttribute('autocomplete', 'off');
+                document.querySelector('#externalBestContactLookup').querySelector('input').setAttribute('autocomplete', 'off');
+
+                <!-- Start: ODP-193 TO BE DELETED AFTER DATA MIGRATION -->
+                if (isSearchMpHtfDeactivated && isSearchMpHtfDeactivated === true) {
+                    document.querySelector('[id$="createNewRefMPchk"]').checked = true;
+                    document.querySelector('[id$="createNewRefHTFchk"]').checked = true;
+                    document.querySelector('[id$="createNewTrtMPchk"]').checked = true;
+                    document.querySelector('[id$="createNewTrtHTFchk"]').checked = true;
+                    document.querySelector('[id$="createNewBestMPchk"]').checked = true;
+
+                    document.getElementById("referralMpSearch").hidden = true;
+                    document.getElementById("referralHtfSearch").hidden = true;
+                    $(".refMpForm").css("display", "block");
+                    $(".refHtfForm").css("display", "block");
+                    document.getElementById("treatingMpSearch").hidden = true;
+                    document.getElementById("treatingHtfSearch").hidden = true;
+                    $(".trtMpForm").css("display", "block");
+                    $(".trtHtfForm").css("display", "block");
+                    document.getElementById("bestMpSearch").hidden = true;
+                    document.getElementById("bestMpSearchSection").style.display = 'block';
+                } else {
+                    document.getElementById("referringMpLabel").hidden = true;
+                    document.getElementById("referringHtfLabel").hidden = true;
+                    document.getElementById("treatingMpLabel").hidden = true;
+                    document.getElementById("treatingHtfLabel").hidden = true;
+                    document.getElementById("bestMpLabel").hidden = true;
+                }
+                <!-- End: ODP-193 TO BE DELETED AFTER DATA MIGRATION -->
             }
         }
-        <!-- End: ODP-193 TO BE DELETED AFTER DATA MIGRATION -->
 
         //SIW-556 : Modified this method to allow users to proceed even when select No in question "HAS THE REFERRAL BEEN DISCUSSED WITH THE CHILD'S HEALTHCARE PROVIDER?"
         function getInputValue() {
@@ -2006,6 +2028,7 @@
                     fieldPair = document.querySelectorAll('[id$="externalTreatingAccountLookupOutput"]')[0];
                     fieldCreateCheckbox = document.querySelectorAll('[id$="createNewBestMPchk"]')[0];
                 }
+
                 if (fieldOutput && eventData.eventType === 'select') {
                     fieldOutput.value = eventData.recordId;
                     //if both MP and HTF populated check if affiliation exists and render email and phone fields if none
@@ -2357,7 +2380,7 @@
                         .previousElementSibling.firstElementChild.style.color = '';
                 }
             } catch (err) {
-                // Silently catch error
+                console.log(err);
             }
         }
 
@@ -2373,17 +2396,8 @@
                     field.parentElement.previousElementSibling.firstElementChild.style.color = '';
                 }
             } catch (err) {
-                // Silently catch error
+                console.log(err);
             }
-        }
-
-        function turnOffAutocomplete() {
-            // Turn off autocomplete for Search Fields
-            document.querySelector('#externalReferrerAccountLookup').querySelector('input').setAttribute('autocomplete', 'off');
-            document.querySelector('#externalReferrerContactLookup').querySelector('input').setAttribute('autocomplete', 'off');
-            document.querySelector('#externalTreatingAccountLookup').querySelector('input').setAttribute('autocomplete', 'off');
-            document.querySelector('#externalTreatingContactLookup').querySelector('input').setAttribute('autocomplete', 'off');
-            document.querySelector('#externalBestContactLookup').querySelector('input').setAttribute('autocomplete', 'off');
         }
     </script>
     <!-- custom style for referral page -->
