@@ -5385,7 +5385,7 @@ IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientat
         <fullName>Other_Medical_Provider_Category__c</fullName>
         <description>It holds the Other Medical Provider Category value comes from the lead</description>
         <externalId>false</externalId>
-        <label>Other Medical Provider Category</label>
+        <label>Other Medical Professional Category</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
