@@ -4553,6 +4553,18 @@ IF (Text(Status) = "DNQ", DNQ_Date__c , NULL))</formula>
         </valueSet>
     </fields>
     <fields>
+        <fullName>Referring_MP_Zip_Code__c</fullName>
+        <description>Captures the Referring MP Zip Code</description>
+        <externalId>false</externalId>
+        <label>Referring MP Zip Code</label>
+        <length>10</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Referring_MP__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <description>Captures the Referring MPs contact record</description>
@@ -18049,6 +18061,12 @@ RecordType.Name ="Wish Child"</errorConditionFormula>
         <description>Used to prevent wish child record when there is no Primary Diagnosis</description>
         <errorConditionFormula>AND(ISBLANK(PD_Condition_Description__c), ISBLANK( PD_ICD_Code__c ),$Profile.Name != 'Integration', $Profile.Name != 'Wish Referral Form Profile' )
 &amp;&amp;
+((!ISPICKVAL(Status, "DNQ")
+&amp;&amp;
+!ISPICKVAL(Status, "Closed")) 
+||
+(ISPICKVAL(Status, "DNQ")&amp;&amp; ISPICKVAL(Sub_Status__c, "Medical Reviewed"))) 
+&amp;&amp;
 RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>Please provide the ICD Code or Primary Diagnosis.</errorMessage>
     </validationRules>
@@ -18105,13 +18123,14 @@ RecordType.Name ="Wish Child"</errorConditionFormula>
     </validationRules>
     <validationRules>
         <fullName>Lead_Hospital_or_Treartment_Validation</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Referred status, Hospital or Treatment Facility is mandatory</description>
-        <errorConditionFormula>Hospital_Treatment_Facility_Treating__c == Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != 'Integration'
+        <active>true</active>
+        <description>Whenever a lead is created/updated to a 'Referred' status, an 'Unmatched Treating MP HTF' OR linked Treating MP HTF account is mandatory</description>
+        <errorConditionFormula>ISBLANK(Hospital_Treatment_Facility_Treating__c) &amp;&amp;
+ISBLANK( Treating_MP_HTF__c ) &amp;&amp;
+ (Text(Status) == 'Referred') &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != 'Integration'
 &amp;&amp;
 RecordType.Name ="Wish Child"</errorConditionFormula>
-        <errorDisplayField>Hospital_Treatment_Facility_Treating__c</errorDisplayField>
-        <errorMessage>Please Enter Hospital_Treatment_Facility</errorMessage>
+        <errorMessage>Please enter an Unmatched Treating MP HTF Name OR link a Treating MP HTF Account record to the lead before placing the lead into a 'Referred' status.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Inquiry_and_Birth_Date_Validation</fullName>
@@ -18128,18 +18147,25 @@ RecordType.Name ="Wish Child"</errorConditionFormula>
         <description>This validation rule is used to prevent the date you have entered in the Inquiry Date field if the value is after the referral date.</description>
         <errorConditionFormula>AND(Inquiry_Date__c &gt; Referred_Date__c,$Profile.Name != 'Integration')
 &amp;&amp;
+!ISPICKVAL(Status, "DNQ")
+&amp;&amp;
+!ISPICKVAL(Status, "Closed")
+&amp;&amp;
 RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>The inquiry date must occur on or before the referral date. Please enter a valid inquiry date, or re-enter the date of referral.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Physician_LastName_Validation</fullName>
-        <active>false</active>
-        <description>Whenever lead is created/updated with Referred status, Physician Lastname  is mandatory</description>
-        <errorConditionFormula>Treating_Medical_Professional_Last_Name__c == Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp;  (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != 'Integration'
+        <active>true</active>
+        <description>Whenever lead is created/updated with Referred status, Unmatched Treating MP First Name Last Name OR a linked Treating MP contact record is mandatory</description>
+        <errorConditionFormula>ISBLANK(Treating_Medical_Professional_First_Name__c) &amp;&amp; 
+ISBLANK(Treating_Medical_Professional_Last_Name__c) &amp;&amp; 
+ISBLANK(Treating_MP__c) &amp;&amp;
+(Text(Status) == 'Referred') &amp;&amp;  
+(ISBLANK(Text(RFI_Form_Info_Hidden__c)) || Id != Null) &amp;&amp;  $Profile.Name  != 'Integration'
 &amp;&amp;
 RecordType.Name ="Wish Child"</errorConditionFormula>
-        <errorDisplayField>Treating_Medical_Professional_Last_Name__c</errorDisplayField>
-        <errorMessage>Please Enter Treating Medical Professional Last Name</errorMessage>
+        <errorMessage>Please enter an 'Unmatched Treating MP First &amp; Last Name' or link a 'Treating MP' contact to the lead before placing the lead in a 'Referred' status.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Qualified_Date_Validation</fullName>
@@ -18190,7 +18216,7 @@ RecordType.Name ="Wish Child"</errorConditionFormula>
 	    </validationRules>
 	    <validationRules>
         <fullName>Lead_Referral_Date_Validation</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>This validation rule is used to prevent the date you have entered in the Referred Date field if the value is before the inquiry date.</description>
         <errorConditionFormula>AND(Referred_Date__c &lt; Inquiry_Date__c,$Profile.Name != 'Integration')
 &amp;&amp;
@@ -18202,6 +18228,10 @@ RecordType.Name ="Wish Child"</errorConditionFormula>
         <active>true</active>
         <description>Used to prevent wish child record when there is no Primary Diagnosis</description>
         <errorConditionFormula>AND(ISBLANK(Diagnosis_Given_By_Referrer__c), ISBLANK( ICD_Given_By_Referrer__c),$Profile.Name != 'Integration', $Profile.Name != 'Wish Referral Form Profile' )
+&amp;&amp;
+!ISPICKVAL(Status, "DNQ")
+&amp;&amp;
+!ISPICKVAL(Status, "Closed")
 &amp;&amp;
 RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>Please provide the ICD or Diagnosis given by referrer.</errorMessage>

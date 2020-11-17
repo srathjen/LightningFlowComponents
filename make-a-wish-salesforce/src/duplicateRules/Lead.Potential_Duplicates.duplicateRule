@@ -13,6 +13,20 @@
             <sortOrder>1</sortOrder>
             <table>Lead</table>
         </duplicateRuleFilterItems>
+        <duplicateRuleFilterItems>
+            <field>Alias</field>
+            <operation>notEqual</operation>
+            <value>dtran</value>
+            <sortOrder>2</sortOrder>
+            <table>User</table>
+        </duplicateRuleFilterItems>
+        <duplicateRuleFilterItems>
+            <field>Alias</field>
+            <operation>notEqual</operation>
+            <value>iuser</value>
+            <sortOrder>3</sortOrder>
+            <table>User</table>
+        </duplicateRuleFilterItems>
     </duplicateRuleFilter>
     <duplicateRuleMatchRules>
         <matchRuleSObjectType>Lead</matchRuleSObjectType>
@@ -41,6 +55,10 @@
                 <outputField>FirstName</outputField>
             </mappingFields>
             <mappingFields>
+                <inputField xsi:nil="true"/>
+                <outputField>Zip_Employer__c</outputField>
+            </mappingFields>
+            <mappingFields>
                 <inputField>LastName</inputField>
                 <outputField>LastName</outputField>
             </mappingFields>
@@ -56,14 +74,10 @@
                 <inputField xsi:nil="true"/>
                 <outputField>Street__c</outputField>
             </mappingFields>
-            <mappingFields>
-                <inputField xsi:nil="true"/>
-                <outputField>Zip_Employer__c</outputField>
-            </mappingFields>
             <outputObject>Contact</outputObject>
         </objectMapping>
     </duplicateRuleMatchRules>
-    <isActive>true</isActive>
+    <isActive>false</isActive>
     <masterLabel>Potential Duplicates</masterLabel>
     <operationsOnUpdate>Report</operationsOnUpdate>
     <securityOption>EnforceSharingRules</securityOption>

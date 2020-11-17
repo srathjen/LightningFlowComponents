@@ -455,7 +455,7 @@ public class LeadDomain extends trac_TriggerHandlerBase {
 				mpHtfAffiliations = AffiliationService.buildMedicalProfessionalHospitalAffiliation(newLead, existingMpHtfAffiliations);
 			}
 		}
-		insert mpHtfAffiliations;
+		insertBypassDuplicateRules(mpHtfAffiliations);
 	}
 
 	/**
@@ -558,7 +558,7 @@ public class LeadDomain extends trac_TriggerHandlerBase {
 				mpHtfAffiliations = AffiliationService.buildMedicalProfessionalHospitalAffiliation(newLead, existingMpHtfAffiliations);
 			}
 		}
-		insert mpHtfAffiliations;
+		insertBypassDuplicateRules(mpHtfAffiliations);
 
 		if (!qualifiedLeadMap.isEmpty()) {
 			Map<Id, Id> convertedLeadByContactId = LeadConvertService.convertLead(qualifiedLeadMap);
@@ -857,13 +857,24 @@ public class LeadDomain extends trac_TriggerHandlerBase {
 				&& (Utils.currentUser.Profile.Name == Constant_AC.CASE_TEAM_ROLE_INTAKE_MANAGER || Utils.currentUser.Profile.Name == Constant_AC.PROFILE_SYSTEM_ADMINISTRATOR || Utils.currentUser.Profile.Name == Constant_AC.CASE_TEAM_ROLE_National_Staff_MANAGER);
 	}
 
-/* SIW-309 : Check if Appeal is successful or not
-* @param newLead  
-* @param oldLead   
-* @return Boolean
-*/
+	/* SIW-309 : Check if Appeal is successful or not
+	* @param newLead
+	* @param oldLead
+	* @return Boolean
+	*/
 	private static Boolean isAppealUnsuccessful(Lead newLead, Lead oldLead) {
 		return newLead.Status == Constant_AC.LEAD_STATUS_DNQ && oldLead.Status == Constant_AC.LEAD_STATUS_ELIGIBILITY_REVIEW && newLead.Appeal__c == true
 				&& (Utils.currentUser.Profile.Name == Constant_AC.PROFILE_SYSTEM_ADMINISTRATOR || Utils.currentUser.Profile.Name == Constant_AC.CASE_TEAM_ROLE_National_Staff_MANAGER);
+	}
+
+	/**
+	 * @description Insert Objects bypassing Duplicate Rules
+	 * @param objects object generic
+	 * @return List of Database SaveResult
+	*/
+	private static List<Database.SaveResult> insertBypassDuplicateRules(List<SObject> objects){
+		Database.DMLOptions dml = new Database.DMLOptions();
+		dml.duplicateRuleHeader.allowSave = true;
+		return Database.insert(objects, dml);
 	}
 }

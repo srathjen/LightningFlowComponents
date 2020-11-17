@@ -3,20 +3,20 @@
     <actionOnInsert>Allow</actionOnInsert>
     <actionOnUpdate>Allow</actionOnUpdate>
     <alertText>Use one of these records?</alertText>
-    <description>Identify Health Treatment Facility Accounts with possible duplicates.</description>
+    <description>HTF Make &amp; Match Rules - Provides Fuzzier matching results during the Make &amp; Match process</description>
     <duplicateRuleFilter>
         <booleanFilter xsi:nil="true"/>
         <duplicateRuleFilterItems>
-            <field>RecordType</field>
+            <field>MM_Duplicate_Check__c</field>
             <operation>equals</operation>
-            <value>Hospital Treatment Facility</value>
+            <value>true</value>
             <sortOrder>1</sortOrder>
             <table>Account</table>
         </duplicateRuleFilterItems>
         <duplicateRuleFilterItems>
-            <field>MM_Duplicate_Check__c</field>
+            <field>RecordType</field>
             <operation>equals</operation>
-            <value>false</value>
+            <value>Hospital Treatment Facility</value>
             <sortOrder>2</sortOrder>
             <table>Account</table>
         </duplicateRuleFilterItems>
@@ -30,29 +30,29 @@
         <duplicateRuleFilterItems>
             <field>Alias</field>
             <operation>notEqual</operation>
-            <value>dtran</value>
+            <value>iuser</value>
             <sortOrder>4</sortOrder>
             <table>User</table>
         </duplicateRuleFilterItems>
         <duplicateRuleFilterItems>
             <field>Alias</field>
             <operation>notEqual</operation>
-            <value>iuser</value>
+            <value>dtran</value>
             <sortOrder>5</sortOrder>
             <table>User</table>
         </duplicateRuleFilterItems>
     </duplicateRuleFilter>
     <duplicateRuleMatchRules>
         <matchRuleSObjectType>Account</matchRuleSObjectType>
-        <matchingRule>Health_Treatment_Facility_Matching_Rule</matchingRule>
+        <matchingRule>HTF_M_M_Account_Match</matchingRule>
         <objectMapping xsi:nil="true"/>
     </duplicateRuleMatchRules>
     <isActive>false</isActive>
-    <masterLabel>Hospital Treatment Facility Matching</masterLabel>
+    <masterLabel>HTF M&amp;M Account Match</masterLabel>
     <operationsOnInsert>Alert</operationsOnInsert>
     <operationsOnInsert>Report</operationsOnInsert>
     <operationsOnUpdate>Alert</operationsOnUpdate>
     <operationsOnUpdate>Report</operationsOnUpdate>
-    <securityOption>EnforceSharingRules</securityOption>
-    <sortOrder>2</sortOrder>
+    <securityOption>BypassSharingRules</securityOption>
+    <sortOrder>1</sortOrder>
 </DuplicateRule>

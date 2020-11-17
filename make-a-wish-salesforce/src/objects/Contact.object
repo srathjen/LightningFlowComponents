@@ -330,7 +330,7 @@
     <compactLayouts>
         <fullName>Lightning_Contacts</fullName>
         <fields>Name</fields>
-        <fields>AccountId</fields>
+        <fields>Region_Chapter__c</fields>
         <fields>Phone</fields>
         <fields>Email</fields>
         <fields>Alerts__c</fields>
@@ -3046,6 +3046,16 @@ IF(  Board_Member_Count__c  &gt; 0 &amp;&amp;  Active_Board_Member__c =TRUE, IMA
         <visibleLines>3</visibleLines>
     </fields>
     <fields>
+        <fullName>Bypass_Duplicate_Rule__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If True the duplicate rule will not fire on the MP when it is created.</description>
+        <externalId>false</externalId>
+        <label>Bypass MP Duplicate Rule</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>COI_Expiration_Date__c</fullName>
         <description>It holds the Expiration Date of COI</description>
         <externalId>false</externalId>
@@ -4574,6 +4584,16 @@ and the date it was or will be granted.</inlineHelpText>
                 </value>
             </valueSetDefinition>
         </valueSet>
+    </fields>
+    <fields>
+        <fullName>MM_Duplicate_Check__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If TRUE fires the M&amp;M Contact MP Duplicate Rule upon create.</description>
+        <externalId>false</externalId>
+        <label>M&amp;M Duplicate Check</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Maiden_Alternate_Name__c</fullName>

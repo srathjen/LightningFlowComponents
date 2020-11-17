@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?><MatchingRules xmlns="http://soap.sforce.com/2006/04/metadata">
     <matchingRules>
+        <fullName>MP_MM_Contact_Match</fullName>
+        <booleanFilter>(1 AND 2 AND (3 OR 4) AND 6) OR (1 AND 2 AND 5 AND 6) OR (1 AND 2 AND 6 AND 7)</booleanFilter>
+        <description>Criteria used to identify possible matching MP contacts in the Make &amp; Match process (contact record type = medical professional).</description>
+        <label>MP M&amp;M Contact Match</label>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>FirstName</fieldName>
+            <matchingMethod>FirstName</matchingMethod>
+        </matchingRuleItems>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>LastName</fieldName>
+            <matchingMethod>LastName</matchingMethod>
+        </matchingRuleItems>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>Email</fieldName>
+            <matchingMethod>Exact</matchingMethod>
+        </matchingRuleItems>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>Phone</fieldName>
+            <matchingMethod>Phone</matchingMethod>
+        </matchingRuleItems>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>MailingCity</fieldName>
+            <matchingMethod>City</matchingMethod>
+        </matchingRuleItems>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>RecordType__c</fieldName>
+            <matchingMethod>Exact</matchingMethod>
+        </matchingRuleItems>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>Region_Chapter__c</fieldName>
+            <matchingMethod>Exact</matchingMethod>
+        </matchingRuleItems>
+        <ruleStatus>Inactive</ruleStatus>
+    </matchingRules>
+    <matchingRules>
         <fullName>Medical_Professional_Contact_Match</fullName>
         <booleanFilter>(1 AND 2 AND (3 OR 4) AND 6) OR (1 AND 2 AND 5 AND 6)</booleanFilter>
         <description>Criteria used to identify possible duplicate medical professional contacts (contact record type = medical professional).</description>
@@ -34,7 +76,7 @@
             <fieldName>RecordType__c</fieldName>
             <matchingMethod>Exact</matchingMethod>
         </matchingRuleItems>
-        <ruleStatus>Active</ruleStatus>
+        <ruleStatus>Inactive</ruleStatus>
     </matchingRules>
     <matchingRules>
         <fullName>Potential_Duplicates_Contacts</fullName>
@@ -107,6 +149,6 @@
             <fieldName>npe01__HomeEmail__c</fieldName>
             <matchingMethod>Exact</matchingMethod>
         </matchingRuleItems>
-        <ruleStatus>Active</ruleStatus>
+        <ruleStatus>Inactive</ruleStatus>
     </matchingRules>
 </MatchingRules>

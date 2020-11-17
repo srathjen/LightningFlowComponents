@@ -133,6 +133,16 @@
         <template>Automated_Volunteer_Templates/Task_Interview_Completed_Email_Template</template>
     </alerts>
     <fieldUpdates>
+        <fullName>Contact_Duplicate_Bypass_Equals_False</fullName>
+        <description>Reset the contact MP Duplicate Rule Bypass checkbox</description>
+        <field>Bypass_Duplicate_Rule__c</field>
+        <literalValue>0</literalValue>
+        <name>Contact Duplicate Bypass Equals False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>Contact_PreferredEmailUpdated</fullName>
         <field>Email</field>
         <formula>CASE(
@@ -500,6 +510,26 @@ ISCHANGED(Region_Chapter__c)
 &amp;&amp;
 !ISBLANK(Region_Chapter__c)</formula>
         <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Contact%3A Remove Duplicate Bypass After Create</fullName>
+        <actions>
+            <name>Contact_Duplicate_Bypass_Equals_False</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Contact.Bypass_Duplicate_Rule__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contact.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Medical Professional</value>
+        </criteriaItems>
+        <description>Used to remove the MP Duplicate Rule Bypass leveraged in the M&amp;M function to ensure duplicate checks run on additional updates to the MP record created.</description>
+        <triggerType>onCreateOnly</triggerType>
     </rules>
     <rules>
         <fullName>Contact%3ARush Wish Reminder %26 Alerts</fullName>

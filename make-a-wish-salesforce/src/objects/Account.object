@@ -1125,6 +1125,15 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Bypass_HTF_Duplicate_Check__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>When 'True' will cause the record to not fire the HTF Duplicate Rule.</description>
+        <externalId>false</externalId>
+        <label>Bypass HTF Duplicate Check</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Category__c</fullName>
         <externalId>false</externalId>
         <label>Category</label>
@@ -1919,6 +1928,15 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>MM_Duplicate_Check__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If TRUE fires the M&amp;M Account HTF Duplicate Rule upon create.</description>
+        <externalId>false</externalId>
+        <label>M&amp;M Duplicate Check</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Migrated_Record__c</fullName>
         <defaultValue>false</defaultValue>
         <description>Created from external system.</description>
@@ -2482,6 +2500,17 @@ Help Text</description>
         <fullName>Rating</fullName>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>RecordType_Matching__c</fullName>
+        <description>Populated with 'HTF' when the account Recordtype is HTF.  Used to filter fuzzy name matches on HTFs.</description>
+        <externalId>false</externalId>
+        <label>Recordtype Matching</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Record_Ownership_Notes__c</fullName>
