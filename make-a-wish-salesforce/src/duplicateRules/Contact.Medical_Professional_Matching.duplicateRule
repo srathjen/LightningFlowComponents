@@ -47,7 +47,7 @@
         <matchingRule>Medical_Professional_Contact_Match</matchingRule>
         <objectMapping xsi:nil="true"/>
     </duplicateRuleMatchRules>
-    <isActive>false</isActive>
+    <isActive>true</isActive>
     <masterLabel>Medical Professional Matching</masterLabel>
     <operationsOnInsert>Alert</operationsOnInsert>
     <operationsOnInsert>Report</operationsOnInsert>

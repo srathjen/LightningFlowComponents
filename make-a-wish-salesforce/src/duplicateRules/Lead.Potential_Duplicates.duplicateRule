@@ -77,7 +77,7 @@
             <outputObject>Contact</outputObject>
         </objectMapping>
     </duplicateRuleMatchRules>
-    <isActive>false</isActive>
+    <isActive>true</isActive>
     <masterLabel>Potential Duplicates</masterLabel>
     <operationsOnUpdate>Report</operationsOnUpdate>
     <securityOption>EnforceSharingRules</securityOption>
