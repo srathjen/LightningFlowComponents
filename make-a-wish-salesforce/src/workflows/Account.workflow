@@ -23,6 +23,16 @@
         <template>Automated_Wish_Granting_Email_Templates/Account_HTF_Owner_Changed_Update_New_Owner</template>
     </alerts>
     <fieldUpdates>
+        <fullName>Account_Duplicate_Bypass_Equals_False</fullName>
+        <description>Reset the account HTF Duplicate Rule Bypass checkbox</description>
+        <field>Bypass_HTF_Duplicate_Check__c</field>
+        <literalValue>0</literalValue>
+        <name>Account Duplicate Bypass Equals False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>In_Kind_Approval_Field_Status_Update</fullName>
         <description>Used to set rejected value to approval field</description>
         <field>In_Kind_Approval_Status__c</field>
@@ -66,5 +76,29 @@ ISCHANGED(Chapter_Name__c)
 &amp;&amp;
 !ISBLANK(Chapter_Name__c)</formula>
         <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Account%3A Remove Duplicate Bypass After Create</fullName>
+        <actions>
+            <name>Account_Duplicate_Bypass_Equals_False</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Bypass_HTF_Duplicate_Check__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Hospital Treatment Facility</value>
+        </criteriaItems>
+        <description>Used to remove the HTF Duplicate Rule Bypass leveraged in the M&amp;M function to ensure duplicate checks run on additional updates to the HTF record created.</description>
+        <triggerType>onCreateOnly</triggerType>
+        <workflowTimeTriggers>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
     </rules>
 </Workflow>
