@@ -3,7 +3,7 @@
     <actionOnInsert>Allow</actionOnInsert>
     <actionOnUpdate>Allow</actionOnUpdate>
     <alertText>Use one of these records?</alertText>
-    <description>Identify Medical Professional Contacts with possible duplicates.</description>
+    <description>MP Make &amp; Match Rules - Provides Fuzzier matching results during the Make &amp; Match process</description>
     <duplicateRuleFilter>
         <booleanFilter xsi:nil="true"/>
         <duplicateRuleFilterItems>
@@ -16,7 +16,7 @@
         <duplicateRuleFilterItems>
             <field>MM_Duplicate_Check__c</field>
             <operation>equals</operation>
-            <value>false</value>
+            <value>true</value>
             <sortOrder>2</sortOrder>
             <table>Contact</table>
         </duplicateRuleFilterItems>
@@ -44,15 +44,15 @@
     </duplicateRuleFilter>
     <duplicateRuleMatchRules>
         <matchRuleSObjectType>Contact</matchRuleSObjectType>
-        <matchingRule>Medical_Professional_Contact_Match</matchingRule>
+        <matchingRule>MP_MM_Contact_Match</matchingRule>
         <objectMapping xsi:nil="true"/>
     </duplicateRuleMatchRules>
     <isActive>false</isActive>
-    <masterLabel>Medical Professional Matching</masterLabel>
+    <masterLabel>MP M&amp;M Contact Match</masterLabel>
     <operationsOnInsert>Alert</operationsOnInsert>
     <operationsOnInsert>Report</operationsOnInsert>
     <operationsOnUpdate>Alert</operationsOnUpdate>
     <operationsOnUpdate>Report</operationsOnUpdate>
-    <securityOption>EnforceSharingRules</securityOption>
-    <sortOrder>3</sortOrder>
+    <securityOption>BypassSharingRules</securityOption>
+    <sortOrder>4</sortOrder>
 </DuplicateRule>
