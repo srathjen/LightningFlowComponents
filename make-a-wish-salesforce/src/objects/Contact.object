@@ -3046,6 +3046,16 @@ IF(  Board_Member_Count__c  &gt; 0 &amp;&amp;  Active_Board_Member__c =TRUE, IMA
         <visibleLines>3</visibleLines>
     </fields>
     <fields>
+        <fullName>Bypass_Duplicate_Rule__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If True the duplicate rule will not fire on the MP when it is created.</description>
+        <externalId>false</externalId>
+        <label>Bypass MP Duplicate Rule</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>COI_Expiration_Date__c</fullName>
         <description>It holds the Expiration Date of COI</description>
         <externalId>false</externalId>
@@ -5365,7 +5375,7 @@ IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientat
         <fullName>Other_Medical_Provider_Category__c</fullName>
         <description>It holds the Other Medical Provider Category value comes from the lead</description>
         <externalId>false</externalId>
-        <label>Other Medical Provider Category</label>
+        <label>Other Medical Professional Category</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -5678,50 +5688,14 @@ IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientat
         <fullName>Provider_Type__c</fullName>
         <description>Provider types for medical professional contacts</description>
         <externalId>false</externalId>
-        <label>Medical Provider Type</label>
+        <label>Medical Professional Category</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
         <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Social Worker</fullName>
-                    <default>false</default>
-                    <label>Social Worker</label>
-                </value>
-                <value>
-                    <fullName>Child Life Professional</fullName>
-                    <default>false</default>
-                    <label>Child Life Professional</label>
-                </value>
-                <value>
-                    <fullName>Nurse</fullName>
-                    <default>false</default>
-                    <label>Nurse</label>
-                </value>
-                <value>
-                    <fullName>Nurse Practitioner</fullName>
-                    <default>false</default>
-                    <label>Nurse Practitioner</label>
-                </value>
-                <value>
-                    <fullName>Physician Assistant</fullName>
-                    <default>false</default>
-                    <label>Physician Assistant</label>
-                </value>
-                <value>
-                    <fullName>Physician</fullName>
-                    <default>false</default>
-                    <label>Physician</label>
-                </value>
-                <value>
-                    <fullName>Other</fullName>
-                    <default>false</default>
-                    <label>Other</label>
-                </value>
-            </valueSetDefinition>
+            <restricted>true</restricted>
+            <valueSetName>Medical_Provider_Category</valueSetName>
         </valueSet>
     </fields>
     <fields>
