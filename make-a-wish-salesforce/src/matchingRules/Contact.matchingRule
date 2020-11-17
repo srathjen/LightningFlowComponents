@@ -39,7 +39,7 @@
             <fieldName>Region_Chapter__c</fieldName>
             <matchingMethod>Exact</matchingMethod>
         </matchingRuleItems>
-        <ruleStatus>Inactive</ruleStatus>
+        <ruleStatus>Active</ruleStatus>
     </matchingRules>
     <matchingRules>
         <fullName>Medical_Professional_Contact_Match</fullName>
@@ -76,7 +76,7 @@
             <fieldName>RecordType__c</fieldName>
             <matchingMethod>Exact</matchingMethod>
         </matchingRuleItems>
-        <ruleStatus>Inactive</ruleStatus>
+        <ruleStatus>Active</ruleStatus>
     </matchingRules>
     <matchingRules>
         <fullName>Potential_Duplicates_Contacts</fullName>

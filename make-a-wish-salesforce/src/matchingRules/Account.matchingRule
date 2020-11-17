@@ -44,7 +44,7 @@
             <fieldName>RecordType_Matching__c</fieldName>
             <matchingMethod>Exact</matchingMethod>
         </matchingRuleItems>
-        <ruleStatus>Inactive</ruleStatus>
+        <ruleStatus>Active</ruleStatus>
     </matchingRules>
     <matchingRules>
         <fullName>Health_Treatment_Facility_Matching_Rule</fullName>
@@ -86,6 +86,6 @@
             <fieldName>Fax</fieldName>
             <matchingMethod>Phone</matchingMethod>
         </matchingRuleItems>
-        <ruleStatus>Inactive</ruleStatus>
+        <ruleStatus>Active</ruleStatus>
     </matchingRules>
 </MatchingRules>
