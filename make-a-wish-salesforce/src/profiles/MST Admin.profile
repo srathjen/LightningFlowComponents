@@ -1594,6 +1594,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Account.Bypass_HTF_Duplicate_Check__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Account.Chapter_Intake_Manager__c</field>
         <readable>true</readable>
@@ -1631,6 +1636,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Account.Exclude_HTF_from_Referral_Form_Searches__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Account.MM_Duplicate_Check__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Account.RecordType_Matching__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -6890,6 +6905,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.Bypass_Duplicate_Rule__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.COI_Expiration_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -7491,6 +7511,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Lead_Created_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.MM_Duplicate_Check__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

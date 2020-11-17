@@ -450,10 +450,13 @@
   </types>
   <types>
     <members>Account.Hospital_Treatment_Facility_Matching</members>
+    <members>Account.HTF_Make_Match</members>
     <members>Contact.Contacts_with_Duplicate_Leads</members>
     <members>Contact.Medical_Professional_Matching</members>
+    <members>Contact.MP_M_M_Contact_Match</members>
     <members>Contact.NPSP_Contact_Personal_Email_Match</members>
     <members>Contact.Standard_Rule_for_Contacts_with_Duplicate_Leads</members>
+    <members>Lead.Potential_Duplicates</members>
     <name>DuplicateRule</name>
   </types>
   <types>

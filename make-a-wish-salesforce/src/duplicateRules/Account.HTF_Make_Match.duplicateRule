@@ -3,29 +3,29 @@
     <actionOnInsert>Allow</actionOnInsert>
     <actionOnUpdate>Allow</actionOnUpdate>
     <alertText>Use one of these records?</alertText>
-    <description>Identify Medical Professional Contacts with possible duplicates.</description>
+    <description>HTF Make &amp; Match Rules - Provides Fuzzier matching results during the Make &amp; Match process</description>
     <duplicateRuleFilter>
         <booleanFilter xsi:nil="true"/>
         <duplicateRuleFilterItems>
-            <field>RecordType</field>
-            <operation>equals</operation>
-            <value>Medical Professional</value>
-            <sortOrder>1</sortOrder>
-            <table>Contact</table>
-        </duplicateRuleFilterItems>
-        <duplicateRuleFilterItems>
             <field>MM_Duplicate_Check__c</field>
             <operation>equals</operation>
-            <value>false</value>
-            <sortOrder>2</sortOrder>
-            <table>Contact</table>
+            <value>true</value>
+            <sortOrder>1</sortOrder>
+            <table>Account</table>
         </duplicateRuleFilterItems>
         <duplicateRuleFilterItems>
-            <field>Bypass_Duplicate_Rule__c</field>
+            <field>RecordType</field>
+            <operation>equals</operation>
+            <value>Hospital Treatment Facility</value>
+            <sortOrder>2</sortOrder>
+            <table>Account</table>
+        </duplicateRuleFilterItems>
+        <duplicateRuleFilterItems>
+            <field>Bypass_HTF_Duplicate_Check__c</field>
             <operation>equals</operation>
             <value>false</value>
             <sortOrder>3</sortOrder>
-            <table>Contact</table>
+            <table>Account</table>
         </duplicateRuleFilterItems>
         <duplicateRuleFilterItems>
             <field>Alias</field>
@@ -43,16 +43,16 @@
         </duplicateRuleFilterItems>
     </duplicateRuleFilter>
     <duplicateRuleMatchRules>
-        <matchRuleSObjectType>Contact</matchRuleSObjectType>
-        <matchingRule>Medical_Professional_Contact_Match</matchingRule>
+        <matchRuleSObjectType>Account</matchRuleSObjectType>
+        <matchingRule>HTF_M_M_Account_Match</matchingRule>
         <objectMapping xsi:nil="true"/>
     </duplicateRuleMatchRules>
     <isActive>false</isActive>
-    <masterLabel>Medical Professional Matching</masterLabel>
+    <masterLabel>HTF M&amp;M Account Match</masterLabel>
     <operationsOnInsert>Alert</operationsOnInsert>
     <operationsOnInsert>Report</operationsOnInsert>
     <operationsOnUpdate>Alert</operationsOnUpdate>
     <operationsOnUpdate>Report</operationsOnUpdate>
-    <securityOption>EnforceSharingRules</securityOption>
-    <sortOrder>3</sortOrder>
+    <securityOption>BypassSharingRules</securityOption>
+    <sortOrder>1</sortOrder>
 </DuplicateRule>

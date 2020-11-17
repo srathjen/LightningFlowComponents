@@ -1,7 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?><MatchingRules xmlns="http://soap.sforce.com/2006/04/metadata">
     <matchingRules>
+        <fullName>HTF_M_M_Account_Match</fullName>
+        <booleanFilter>(1 AND 8) OR (1 AND 3 AND 8) OR (1 AND 2 AND 3 AND 4 AND 8) OR (1 AND 5 AND 8) OR (1 AND 8 AND (6 OR 7))</booleanFilter>
+        <description>Criteria used to identify possible matching HTF accounts in the Make &amp; Match process (Account Record Type = health treatment facility).</description>
+        <label>HTF M&amp;M Account Match</label>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>Name</fieldName>
+            <matchingMethod>CompanyName</matchingMethod>
+        </matchingRuleItems>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>BillingStreet</fieldName>
+            <matchingMethod>Street</matchingMethod>
+        </matchingRuleItems>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>BillingCity</fieldName>
+            <matchingMethod>City</matchingMethod>
+        </matchingRuleItems>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>BillingState</fieldName>
+            <matchingMethod>Exact</matchingMethod>
+        </matchingRuleItems>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>BillingPostalCode</fieldName>
+            <matchingMethod>Exact</matchingMethod>
+        </matchingRuleItems>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>Phone</fieldName>
+            <matchingMethod>Phone</matchingMethod>
+        </matchingRuleItems>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>Fax</fieldName>
+            <matchingMethod>Phone</matchingMethod>
+        </matchingRuleItems>
+        <matchingRuleItems>
+            <blankValueBehavior>NullNotAllowed</blankValueBehavior>
+            <fieldName>RecordType_Matching__c</fieldName>
+            <matchingMethod>Exact</matchingMethod>
+        </matchingRuleItems>
+        <ruleStatus>Inactive</ruleStatus>
+    </matchingRules>
+    <matchingRules>
         <fullName>Health_Treatment_Facility_Matching_Rule</fullName>
-        <booleanFilter>(1 AND 2 AND 3 AND 4 AND 5) OR (1 AND 5) OR (1 AND (6 OR 7))</booleanFilter>
+        <booleanFilter>(1 AND 3) OR (1 AND 2 AND 3 AND 4) OR (1 AND 5) OR (1 AND (6 OR 7))</booleanFilter>
         <description>Criteria used to identify possible duplicate Health Treatment Facility accounts (account record type = health treatment facility).</description>
         <label>Health Treatment Facility Account Match</label>
         <matchingRuleItems>
@@ -39,6 +86,6 @@
             <fieldName>Fax</fieldName>
             <matchingMethod>Phone</matchingMethod>
         </matchingRuleItems>
-        <ruleStatus>Active</ruleStatus>
+        <ruleStatus>Inactive</ruleStatus>
     </matchingRules>
 </MatchingRules>
