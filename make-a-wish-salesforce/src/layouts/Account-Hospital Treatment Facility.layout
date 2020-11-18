@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
-    <excludeButtons>DataDotComCompanyHierarchy</excludeButtons>
+    <excludeButtons>DataDotComAccountInsights</excludeButtons>
+    <excludeButtons>DataDotComClean</excludeButtons>
     <excludeButtons>IncludeOffline</excludeButtons>
     <excludeButtons>Share</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
@@ -180,6 +181,11 @@
     <platformActionList>
         <actionListContext>Record</actionListContext>
         <platformActionListItems>
+            <actionName>FeedItem.TextPost</actionName>
+            <actionType>QuickAction</actionType>
+            <sortOrder>0</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
             <actionName>FeedItem.ContentPost</actionName>
             <actionType>QuickAction</actionType>
             <sortOrder>1</sortOrder>
@@ -218,11 +224,6 @@
             <actionName>SendEmail</actionName>
             <actionType>QuickAction</actionType>
             <sortOrder>8</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>FeedItem.TextPost</actionName>
-            <actionType>QuickAction</actionType>
-            <sortOrder>0</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
             <actionName>EmailHighlightAction</actionName>
@@ -306,14 +307,12 @@
     </relatedLists>
     <relatedLists>
         <fields>FULL_NAME</fields>
-        <fields>LEAD.PHONE</fields>
         <fields>ChapterName__c</fields>
         <fields>LEAD.STATUS</fields>
         <relatedList>Lead.Referring_MP_HTF__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>FULL_NAME</fields>
-        <fields>LEAD.PHONE</fields>
         <fields>ChapterName__c</fields>
         <fields>LEAD.STATUS</fields>
         <relatedList>Lead.Treating_MP_HTF__c</relatedList>

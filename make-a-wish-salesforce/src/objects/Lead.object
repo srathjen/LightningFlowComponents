@@ -18158,8 +18158,8 @@ RecordType.Name ="Wish Child"</errorConditionFormula>
         <fullName>Lead_Physician_LastName_Validation</fullName>
         <active>true</active>
         <description>Whenever lead is created/updated with Referred status, Unmatched Treating MP First Name Last Name OR a linked Treating MP contact record is mandatory</description>
-        <errorConditionFormula>ISBLANK(Treating_Medical_Professional_First_Name__c) &amp;&amp; 
-ISBLANK(Treating_Medical_Professional_Last_Name__c) &amp;&amp; 
+        <errorConditionFormula>(ISBLANK(Treating_Medical_Professional_First_Name__c) || 
+ISBLANK(Treating_Medical_Professional_Last_Name__c)) &amp;&amp; 
 ISBLANK(Treating_MP__c) &amp;&amp;
 (Text(Status) == 'Referred') &amp;&amp;  
 (ISBLANK(Text(RFI_Form_Info_Hidden__c)) || Id != Null) &amp;&amp;  $Profile.Name  != 'Integration'

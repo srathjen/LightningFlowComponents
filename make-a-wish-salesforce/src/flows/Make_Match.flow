@@ -1573,6 +1573,22 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Override_Alert</name>
+        <label>Override Alert</label>
+        <locationX>3680</locationX>
+        <locationY>1595</locationY>
+        <assignmentItems>
+            <assignToReference>OverrideAlert</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_New_0</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Reset_HTF_Selected</name>
         <label>Reset HTF Selected</label>
         <locationX>3901</locationX>
@@ -2350,6 +2366,13 @@
         </assignmentItems>
         <assignmentItems>
             <assignToReference>ZipAlert</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>OverrideAlert</assignToReference>
             <operator>Assign</operator>
             <value>
                 <booleanValue>false</booleanValue>
@@ -3488,6 +3511,68 @@
             </connector>
             <label>No Zip</label>
         </rules>
+        <rules>
+            <name>override</name>
+            <conditionLogic>(1 OR 2) AND 3</conditionLogic>
+            <conditions>
+                <leftValueReference>MP_Zip_Code</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>MP_Zip_Code</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>No_Zip_Code_Available_Assign_MP_to_My_Chapter</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Confirm_New_MP</targetReference>
+            </connector>
+            <label>override</label>
+        </rules>
+        <rules>
+            <name>Zip_and_Override</name>
+            <conditionLogic>(1 OR 2 OR 4) AND 3</conditionLogic>
+            <conditions>
+                <leftValueReference>MP_Zip_Code</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>MP_Zip_Code</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>No_Zip_Code_Available_Assign_MP_to_My_Chapter</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>MP_Zip_Code</leftValueReference>
+                <operator>NotEqualTo</operator>
+            </conditions>
+            <connector>
+                <targetReference>Override_Alert</targetReference>
+            </connector>
+            <label>Zip and Override</label>
+        </rules>
     </decisions>
     <decisions>
         <name>Treating_HTF_Exists_0_0</name>
@@ -4033,7 +4118,7 @@ IF( {!MPType}=&quot;Best Medical Contact&quot;, IF(ISBLANK({!Get_Best_Contact_HT
     <formulas>
         <name>ScreenDefaultMPZipCode</name>
         <dataType>String</dataType>
-        <expression>IF(ISBLANK({!ScreenMPZipCode}) || {!ScreenMPZipCode} = &quot;&quot;, {!UnmatchedMPZipCode} , {!ScreenMPZipCode})</expression>
+        <expression>IF(ISBLANK(TRIM({!ScreenMPZipCode})) || TRIM({!ScreenMPZipCode}) = NULL, {!UnmatchedMPZipCode} , TRIM({!ScreenMPZipCode}))</expression>
     </formulas>
     <formulas>
         <name>ScreenDefaultNoZip</name>
@@ -5650,6 +5735,21 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, &quot;&quot;, &quot;&quot;)))</ex
             <isRequired>false</isRequired>
         </fields>
         <fields>
+            <name>OverrideAlertMsg</name>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;Please select only one option to proceed. Enter a zip code OR check the box below if you do not have a zip code.&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>OverrideAlert</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
             <name>No_Zip_Code_Available_Assign_MP_to_My_Chapter</name>
             <dataType>Boolean</dataType>
             <defaultValue>
@@ -6689,7 +6789,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, &quot;&quot;, &quot;&quot;)))</ex
         </fields>
         <fields>
             <name>HTFResultRecords</name>
-            <fieldText>&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;color: rgb(9, 140, 0); font-size: 16px;&quot;&gt;It looks like a record may already exist. Please select the matching record below or select ‘Create New’ to proceed with making a new &lt;/b&gt;&lt;b style=&quot;color: rgb(9, 140, 0); font-size: 16px; background-color: rgb(255, 255, 255);&quot;&gt;{!HTFType}&apos;s HTF&lt;/b&gt;&lt;b style=&quot;color: rgb(9, 140, 0); font-size: 16px;&quot;&gt;, then click &apos;Next&apos;.&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 16px; color: rgb(9, 140, 0);&quot;&gt;It looks like a record may already exist. Please select the matching &lt;/b&gt;&lt;b style=&quot;font-size: 16px; color: rgb(9, 140, 0); background-color: rgb(255, 255, 255);&quot;&gt;{!HTFType}&apos;s HTF&lt;/b&gt;&lt;b style=&quot;font-size: 16px; color: rgb(9, 140, 0);&quot;&gt; below or select ‘Create New’ to proceed with making a new &lt;/b&gt;&lt;b style=&quot;font-size: 16px; color: rgb(9, 140, 0); background-color: rgb(255, 255, 255);&quot;&gt;{!HTFType}&apos;s HTF&lt;/b&gt;&lt;b style=&quot;font-size: 16px; color: rgb(9, 140, 0);&quot;&gt;, then click &apos;Next&apos;.&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -8081,6 +8181,16 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, &quot;&quot;, &quot;&quot;)))</ex
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>OverrideAlert</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
     </variables>
     <variables>
         <name>recordId</name>

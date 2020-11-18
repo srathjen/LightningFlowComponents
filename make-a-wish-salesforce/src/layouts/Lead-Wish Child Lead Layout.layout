@@ -406,11 +406,6 @@
             <sortOrder>4</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
-            <actionName>ChangeOwnerOne</actionName>
-            <actionType>StandardButton</actionType>
-            <sortOrder>5</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
             <actionName>Edit</actionName>
             <actionType>StandardButton</actionType>
             <sortOrder>6</sortOrder>
@@ -449,6 +444,11 @@
             <actionName>Delete</actionName>
             <actionType>StandardButton</actionType>
             <sortOrder>13</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
+            <actionName>ChangeOwnerOne</actionName>
+            <actionType>StandardButton</actionType>
+            <sortOrder>5</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
             <actionName>EmailHighlightAction</actionName>
@@ -507,7 +507,6 @@
         <fields>dsfs__Subject__c</fields>
         <fields>dsfs__Completed_Date_Time__c</fields>
         <fields>dsfs__Envelope_Status__c</fields>
-        <fields>dsfs__Sender__c</fields>
         <relatedList>dsfs__DocuSign_Status__c.dsfs__Lead__c</relatedList>
         <sortField>dsfs__Completed_Date_Time__c</sortField>
         <sortOrder>Desc</sortOrder>

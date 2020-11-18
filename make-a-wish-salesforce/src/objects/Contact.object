@@ -5385,7 +5385,7 @@ IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientat
         <fullName>Other_Medical_Provider_Category__c</fullName>
         <description>It holds the Other Medical Provider Category value comes from the lead</description>
         <externalId>false</externalId>
-        <label>Other Medical Professional Category</label>
+        <label>Other Medical Professional Type</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -11430,6 +11430,13 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         </filters>
         <label>Wish Child</label>
     </listViews>
+    <profileSearchLayouts>
+        <fields>FULL_NAME</fields>
+        <fields>CONTACT.ADDRESS2_CITY</fields>
+        <fields>CONTACT.ADDRESS2_STATE_CODE</fields>
+        <fields>Specialty__c</fields>
+        <profileName>Intake Manager</profileName>
+    </profileSearchLayouts>
     <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
     <recordTypeTrackHistory>false</recordTypeTrackHistory>
     <recordTypes>
@@ -19583,12 +19590,13 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <searchFilterFields>CONTACT.BIRTHDATE</searchFilterFields>
         <searchResultsAdditionalFields>FULL_NAME</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CONTACT.BIRTHDATE</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Diagnosis__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CONTACT.PHONE1</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CONTACT.EMAIL</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CONTACT.ADDRESS2_CITY</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CONTACT.ADDRESS2_STATE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CONTACT.ADDRESS2_ZIP</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.FIRST_NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.LAST_NAME</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>Private</sharingModel>
     <validationRules>
