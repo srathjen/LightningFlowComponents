@@ -5736,7 +5736,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, &quot;&quot;, &quot;&quot;)))</ex
         </fields>
         <fields>
             <name>OverrideAlertMsg</name>
-            <fieldText>&lt;p&gt;&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;You cannot &apos;Assign MP to my chapter&apos; when a Zip Code is provided.&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;Please select only one option to proceed. Enter a zip code OR check the box below if you do not have a zip code.&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>

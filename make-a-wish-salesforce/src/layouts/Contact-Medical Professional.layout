@@ -76,6 +76,10 @@
                 <field>Record_Ownership_Notes__c</field>
             </layoutItems>
             <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Region_Chapter__c</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>Chapter_Intake_Manager__c</field>
             </layoutItems>
@@ -268,10 +272,6 @@
                 <field>OwnerId</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Region_Chapter__c</field>
-            </layoutItems>
-            <layoutItems>
                 <page>ChapterChangeConfirmationContact_VF</page>
                 <showLabel>false</showLabel>
                 <showScrollbars>false</showScrollbars>
@@ -343,21 +343,6 @@
             <sortOrder>7</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
-            <actionName>Clone</actionName>
-            <actionType>StandardButton</actionType>
-            <sortOrder>8</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>Delete</actionName>
-            <actionType>StandardButton</actionType>
-            <sortOrder>9</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>EnableCustomerPortal</actionName>
-            <actionType>StandardButton</actionType>
-            <sortOrder>10</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
             <actionName>LoginToNetworkAsUser</actionName>
             <actionType>StandardButton</actionType>
             <sortOrder>11</sortOrder>
@@ -381,6 +366,21 @@
             <actionName>Share</actionName>
             <actionType>StandardButton</actionType>
             <sortOrder>15</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
+            <actionName>Clone</actionName>
+            <actionType>StandardButton</actionType>
+            <sortOrder>8</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
+            <actionName>Delete</actionName>
+            <actionType>StandardButton</actionType>
+            <sortOrder>9</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
+            <actionName>EnableCustomerPortal</actionName>
+            <actionType>StandardButton</actionType>
+            <sortOrder>10</sortOrder>
         </platformActionListItems>
     </platformActionList>
     <quickActionList>
@@ -471,21 +471,18 @@
     </relatedLists>
     <relatedLists>
         <fields>FULL_NAME</fields>
-        <fields>LEAD.PHONE</fields>
         <fields>ChapterName__c</fields>
         <fields>LEAD.STATUS</fields>
         <relatedList>Lead.Treating_MP__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>FULL_NAME</fields>
-        <fields>LEAD.PHONE</fields>
         <fields>ChapterName__c</fields>
         <fields>LEAD.STATUS</fields>
         <relatedList>Lead.Best_Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>FULL_NAME</fields>
-        <fields>LEAD.PHONE</fields>
         <fields>ChapterName__c</fields>
         <fields>LEAD.STATUS</fields>
         <relatedList>Lead.Referring_MP__c</relatedList>
