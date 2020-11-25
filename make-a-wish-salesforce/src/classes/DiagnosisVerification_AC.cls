@@ -89,6 +89,12 @@ public class DiagnosisVerification_AC {
 	public String requestedDVSigner_email { get; set; }
 	public String requestedDVSigner_HTF_name { get; set; }
 
+	// Site setting attributes:
+	public Boolean isDisplayWarningMessage { get; set; }
+	public String warningMessage { get; set; }
+	public Boolean isDeactivatedForm { get; set; }
+	public String deactivatedMessage { get; set; }
+
 	public DiagnosisVerification_AC() {
 		pluHypTxt = '';
 		wishChildWrapperIns = new WishChildWrapper();
@@ -125,6 +131,8 @@ public class DiagnosisVerification_AC {
 		if (leadId != null && leadId.length() > 0) {
 			loadData();
 		}
+
+		setDvFormSettings();
 	}
 
 	/*
@@ -1649,5 +1657,19 @@ public class DiagnosisVerification_AC {
 			wishChildWrapperIns.dvSignerPhone = '';
 			wishChildWrapperIns.dvSignerEmail = '';
 		}
+	}
+
+	/**
+	 * Wish Referral Form Custom Settings
+	*/
+	private void setDvFormSettings() {
+		Referral_Form_Alerts__c formSettings = [
+				SELECT Display_DV_Form_Warning_Message__c, DV_Form_Warning_Message__c, Deactivate_DV_Form__c, Deactivated_DV_Form_Message__c
+				FROM Referral_Form_Alerts__c
+		];
+		isDisplayWarningMessage = formSettings.Display_DV_Form_Warning_Message__c;
+		warningMessage = formSettings.DV_Form_Warning_Message__c;
+		isDeactivatedForm = formSettings.Deactivate_DV_Form__c;
+		deactivatedMessage = formSettings.Deactivated_DV_Form_Message__c;
 	}
 }
