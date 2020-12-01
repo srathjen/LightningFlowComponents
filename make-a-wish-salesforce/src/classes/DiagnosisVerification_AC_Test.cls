@@ -156,7 +156,14 @@ public class DiagnosisVerification_AC_Test {
         DocuSignCredentialsSetting__c setting = new DocuSignCredentialsSetting__c();
         setting.Name = 'Test Setting';
         setting.account__c = 'TestAccount';
-        insert setting;        
+        insert setting;
+
+		Referral_Form_Alerts__c diagnosisFormSettings = new Referral_Form_Alerts__c();
+        diagnosisFormSettings.Display_DV_Form_Warning_Message__c = false;
+        diagnosisFormSettings.DV_Form_Warning_Message__c = 'Warning Message';
+        diagnosisFormSettings.Deactivate_DV_Form__c = false;
+        diagnosisFormSettings.Deactivated_DV_Form_Message__c = 'Deactivated Form Message';
+        insert diagnosisFormSettings;
             
         trac_TriggerHandlerBase.blockTrigger = false;
     }
