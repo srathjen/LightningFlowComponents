@@ -125,6 +125,11 @@ public class LeadTrigger_AT_Test {
 		lead.PostalCode = '35004';
 		lead.Email = 'mcavennila@gmail.com';
 		lead.Phone = '8220708920';
+		lead.Treating_Medical_Professional_First_Name__c = 'Dr. Jack';
+		lead.Treating_Medical_Professional_Last_Name__c = 'Doe';
+		lead.Treating_Medical_Professional_Phone__c = '8220708921';
+		lead.Treating_Medical_Professional_Email__c = 'jdoe@email.com';
+		lead.Hospital_Treatment_Facility_Treating__c = 'Treating Facility';
 		insert leads;
 	}
 

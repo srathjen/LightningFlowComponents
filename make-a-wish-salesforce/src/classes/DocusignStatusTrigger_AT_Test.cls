@@ -81,6 +81,11 @@ public class DocusignStatusTrigger_AT_Test {
         referredLead.I_am_Recognized_To_Practice_As_a__c = 'Physician';
         referredLead.Status = Constant_AC.LEAD_STATUS_REFERRED;
         referredLead.RFI_Form_Info_Hidden__c = Constant_AC.LEAD_RFI_FORM_INFO_QUALIFIED;
+        referredLead.Treating_Medical_Professional_First_Name__c = 'Dr. Jack';
+        referredLead.Treating_Medical_Professional_Last_Name__c = 'Doe';
+        referredLead.Treating_Medical_Professional_Phone__c = '8220708921';
+        referredLead.Treating_Medical_Professional_Email__c = 'jdoe@email.com';
+        referredLead.Hospital_Treatment_Facility_Treating__c = 'Treating Facility';
         insert referredLead;
         
         List<dsfs__DocuSign_Status__c> docusignStatusList = TestDataFactory.createDocusignStatus(3);

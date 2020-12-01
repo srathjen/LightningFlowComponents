@@ -193,6 +193,10 @@ public class WishReferralFormSpanish_AC_Test {
         dupeLead.PostalCode = controller.currLead.PostalCode;
         dupeLead.Email = controller.currLead.Email;
         dupeLead.Phone = controller.currLead.Phone;
+        dupeLead.Treating_Medical_Professional_First_Name__c = 'Dr. Jack';
+        dupeLead.Treating_Medical_Professional_Last_Name__c = 'Doe';
+        dupeLead.Treating_Medical_Professional_Phone__c = '8220708921';
+        dupeLead.Treating_Medical_Professional_Email__c = 'jdoe@email.com';
         controller.currLead.What_is_the_family_s_primary_spoken_lang__c = 'English';
         controller.diagnosisFilter = icdCode.Name;
         controller.selectedDiagnosis = conditionDescription.Name;

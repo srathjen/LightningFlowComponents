@@ -62,6 +62,11 @@ public with sharing class CaseServiceTest {
 		lead.Sub_Status__c = 'Pending Paper DV';
 		lead.Appeal__c = true;
 		lead.unique_wish_identifier__c = 'testIdentifier';
+		lead.Treating_Medical_Professional_First_Name__c = 'Dr. Jack';
+		lead.Treating_Medical_Professional_Last_Name__c = 'Doe';
+		lead.Treating_Medical_Professional_Phone__c = '8220708921';
+		lead.Treating_Medical_Professional_Email__c = 'jdoe@email.com';
+		lead.Hospital_Treatment_Facility_Treating__c = 'Treating Facility';
 		insert lead;
 
 		List<dsfs__DocuSign_Status__c> docuSignStatuses = TestDataFactory.createDocusignStatus(1);

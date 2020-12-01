@@ -132,6 +132,11 @@ public class LeadSelectMedEmailController_Test {
         lead.isSign__c = true;
         lead.Travel_algorithm__c = 'Test1;Test2;';
         lead.Relationship_to_child__c = Constant_AC.LEAD_RELATIONSHIP_TO_CHILD_MEDICAL_PROFESSIONAL;
+        lead.Treating_Medical_Professional_First_Name__c = 'Dr. Jack';
+        lead.Treating_Medical_Professional_Last_Name__c = 'Doe';
+        lead.Treating_Medical_Professional_Phone__c = '8220708921';
+        lead.Treating_Medical_Professional_Email__c = 'jdoe@email.com';
+        lead.Hospital_Treatment_Facility_Treating__c = 'Treating Facility';
         insert leads;
 
         List<Case> cases = TestDataFactory.createCase(1);

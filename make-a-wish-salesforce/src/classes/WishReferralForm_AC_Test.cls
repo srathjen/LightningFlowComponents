@@ -260,7 +260,10 @@ private class WishReferralForm_AC_Test {
 		dupeLead.Diagnosis_Given_By_Referrer__c = 'Referrer';
 		dupeLead.Hospital_Treatment_Facility__c = 'Treating Facility';
 		dupeLead.Hospital_Treatment_Facility_Treating__c = 'Treating Facility';
+		dupeLead.Treating_Medical_Professional_First_Name__c = 'Dr. Jack';
 		dupeLead.Treating_Medical_Professional_Last_Name__c = 'Treating Professional';
+		dupeLead.Treating_Medical_Professional_Phone__c = '8220708921';
+		dupeLead.Treating_Medical_Professional_Email__c = 'jdoe@email.com';
 		dupeLead.Gender__c = 'Male';
 		dupeLead.Company = 'Test Company';
 
