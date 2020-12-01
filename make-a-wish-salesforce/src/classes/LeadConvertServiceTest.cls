@@ -107,6 +107,11 @@ public class LeadConvertServiceTest {
 		qualifiedLead.Travel_algorithm__c = 'Test1;Test2;';
 		qualifiedLead.Sibling_Detail__c = 'aa | aaab | 14 <br> bbb | bbbc | 15 <br>';
 		qualifiedLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+		qualifiedLead.Treating_Medical_Professional_First_Name__c = 'Dr. Jack';
+		qualifiedLead.Treating_Medical_Professional_Last_Name__c = 'Doe';
+		qualifiedLead.Treating_Medical_Professional_Phone__c = '8220708921';
+		qualifiedLead.Treating_Medical_Professional_Email__c = 'jdoe@email.com';
+		qualifiedLead.Hospital_Treatment_Facility_Treating__c = 'Treating Facility';
 		insert leads;
 
 		qualifiedLead.Sub_Status__c = Constant_AC.LEAD_SUB_STATUS_PENDING_DIAGNOSIS_VERIFICATION;

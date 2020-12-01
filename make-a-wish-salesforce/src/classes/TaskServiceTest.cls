@@ -65,6 +65,11 @@ public class TaskServiceTest {
         lead.Chronic_Heart_Failure__c = 'Test1;Test2';
         lead.isSign__c = true;
         lead.Travel_algorithm__c = 'Test1;Test2;';
+        lead.Treating_Medical_Professional_First_Name__c = 'Dr. Jack';
+        lead.Treating_Medical_Professional_Last_Name__c = 'Doe';
+        lead.Treating_Medical_Professional_Phone__c = '8220708921';
+        lead.Treating_Medical_Professional_Email__c = 'jdoe@email.com';
+        lead.Hospital_Treatment_Facility_Treating__c = 'Treating Facility';
         insert leads;
         
         List<Task> tasks = TestDataFactory.createTask(1);

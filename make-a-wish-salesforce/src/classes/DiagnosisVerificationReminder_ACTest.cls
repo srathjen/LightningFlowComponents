@@ -54,11 +54,6 @@ private class DiagnosisVerificationReminder_ACTest {
             leadList[i].Email = 'testmawa2@gmail.com';
             leadList[i].Phone = '8220708920';
             leadList[i].What_is_the_family_s_primary_spoken_lang__c = 'English';
-            leadList[i].Hospital_Treatment_Facility_Treating__c = 'Malignant Neoplasm';
-            leadList[i].Treating_Medical_Professional_First_Name__c = 'Treating' + i;
-            leadList[i].Treating_Medical_Professional_Last_Name__c = 'Treating' + i;
-            leadList[i].Treating_Medical_Professional_Phone__c = '8220708921';
-            leadList[i].Treating_Medical_Professional_Email__c = 'testmawa3@gmail.com';
             leadList[i].Any_medical_reason_for_moving_quickly__c = 'yes';
             leadList[i].PD_Condition_Description__c = 'c00';
             leadList[i].PD_ICD_Code__c = icdCode.Id;
@@ -66,6 +61,11 @@ private class DiagnosisVerificationReminder_ACTest {
             leadList[i].Company = 'MST';
             leadList[i].Status = 'Referred';
             leadList[i].Referred_Date__c = TODAY.addDays(-3);
+            leadList[i].Treating_Medical_Professional_First_Name__c = 'Dr. Jack';
+            leadList[i].Treating_Medical_Professional_Last_Name__c = 'Doe';
+            leadList[i].Treating_Medical_Professional_Phone__c = '8220708921';
+            leadList[i].Treating_Medical_Professional_Email__c = 'jdoe@email.com';
+            leadList[i].Hospital_Treatment_Facility_Treating__c = 'Treating Facility';
         }
         insert leadList;
         trac_TriggerHandlerBase.blockTrigger = false;
