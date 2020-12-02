@@ -3358,6 +3358,16 @@ null)</formula>
         <trackHistory>false</trackHistory>
     </fields>
     <fields>
+        <fullName>Designated_Master_Record__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field used to identify Designated Master Record for Duplicate Management (ODP-95)</description>
+        <externalId>false</externalId>
+        <label>Designated Master Record</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Diagnosis_Given_By_Referrer__c</fullName>
         <description>Used to hold the diagnosis given by referrer</description>
         <externalId>false</externalId>
@@ -3433,6 +3443,16 @@ null)</formula>
                 </value>
             </valueSetDefinition>
         </valueSet>
+    </fields>
+    <fields>
+        <fullName>Duplicate_Flag__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is to identify Duplicates for Duplicate Management (ODP-95)</description>
+        <externalId>false</externalId>
+        <label>Duplicate Flag</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Edit_Access__c</fullName>
