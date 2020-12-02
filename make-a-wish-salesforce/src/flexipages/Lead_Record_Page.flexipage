@@ -269,7 +269,7 @@
             </componentInstanceProperties>
             <componentName>console:relatedRecord</componentName>
             <visibilityRule>
-                <booleanFilter>1 AND (2 OR 3)</booleanFilter>
+                <booleanFilter>1 AND 4 AND (2 OR 3)</booleanFilter>
                 <criteria>
                     <leftValue>{!Record.Relationship_to_child__c}</leftValue>
                     <operator>EQUAL</operator>
@@ -282,6 +282,10 @@
                 <criteria>
                     <leftValue>{!Record.Referring_MP_Phone__c}</leftValue>
                     <operator>NE</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Referring_MP_Last_Name__c}</leftValue>
+                    <operator>EQUAL</operator>
                 </criteria>
             </visibilityRule>
         </componentInstances>
@@ -496,7 +500,7 @@
             </componentInstanceProperties>
             <componentName>console:relatedRecord</componentName>
             <visibilityRule>
-                <booleanFilter>1 AND (2 OR 3)</booleanFilter>
+                <booleanFilter>1 AND 4 AND (2 OR 3)</booleanFilter>
                 <criteria>
                     <leftValue>{!Record.Relationship_to_child__c}</leftValue>
                     <operator>EQUAL</operator>
@@ -509,6 +513,10 @@
                 <criteria>
                     <leftValue>{!Record.Treating_Medical_Professional_Email__c}</leftValue>
                     <operator>NE</operator>
+                </criteria>
+                <criteria>
+                    <leftValue>{!Record.Treating_Medical_Professional_Last_Name__c}</leftValue>
+                    <operator>EQUAL</operator>
                 </criteria>
             </visibilityRule>
         </componentInstances>
