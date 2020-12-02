@@ -1309,6 +1309,15 @@
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
     <fields>
+        <fullName>Designated_Master_Record__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field used to identify Designated Master Record for Duplicate Management (ODP-95)</description>
+        <externalId>false</externalId>
+        <label>Designated Master Record</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>DevStaffEmail__c</fullName>
         <description>This field will holds dev staff email</description>
         <externalId>false</externalId>
@@ -1353,6 +1362,15 @@
                 </value>
             </valueSetDefinition>
         </valueSet>
+    </fields>
+    <fields>
+        <fullName>Duplicate_Flag__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to identify Duplicates for Duplicate Management (ODP-95)</description>
+        <externalId>false</externalId>
+        <label>Duplicate Flag</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Edit_Access__c</fullName>

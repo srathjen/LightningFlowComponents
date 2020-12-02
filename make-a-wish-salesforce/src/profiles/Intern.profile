@@ -1626,6 +1626,16 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Account.Designated_Master_Record__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Account.Duplicate_Flag__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Account.Edit_Access__c</field>
         <readable>true</readable>
@@ -7047,6 +7057,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.Designated_Master_Record__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.Diagnosis_Given_By_Referrer__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -7078,6 +7093,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Driver_Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Duplicate_Flag__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
