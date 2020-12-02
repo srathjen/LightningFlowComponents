@@ -1955,6 +1955,17 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>MergeGroup__c</fullName>
+        <description>ODP-95 for purposes of Merge</description>
+        <externalId>false</externalId>
+        <label>MergeGroup</label>
+        <length>5</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Migrated_Record__c</fullName>
         <defaultValue>false</defaultValue>
         <description>Created from external system.</description>
