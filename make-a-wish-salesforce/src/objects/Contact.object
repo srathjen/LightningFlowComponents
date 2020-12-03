@@ -4628,6 +4628,17 @@ and the date it was or will be granted.</inlineHelpText>
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>MergeGroup__c</fullName>
+        <externalId>false</externalId>
+        <label>MergeGroup</label>
+        <length>5</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
 	    <fullName>Non_Verbal_Communication_Method__c</fullName>
     <description>SIW-657</description>
     <externalId>false</externalId>

@@ -1652,6 +1652,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Account.MergeGroup__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Account.RecordType_Matching__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -7583,6 +7588,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.Medical_Professional_Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.MergeGroup__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
