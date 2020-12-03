@@ -711,8 +711,7 @@
                                 </div>
                                 <div class="form-group row sibInfo">
                                     <apex:outputPanel id="table">
-                                        <apex:outputPanel
-                                                rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
+                                        <apex:outputPanel rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
                                             <label class="col-md-12">{!$Label.Wish_Referral_Sibling_Information}</label>
                                         </apex:outputPanel>
                                         <div class="col-md-12 sib-tablewrap">
@@ -987,7 +986,7 @@
 
                     <div class="trtMpInfo">
                         <!-- Start: ODP-193 TO BE DELETED AFTER DATA MIGRATION -->
-                        <div id="treatingMpLabel" class="row">
+                        <div id="treatingMpLabel" class="row mpRel">
                             <div class="col-sm-3">
                                 <label>{!$Label.Wish_Referral_Treating_Medical_Professional}</label>
                             </div>
@@ -1156,7 +1155,7 @@
                         </div>
 
                         <!-- Start: ODP-193 TO BE DELETED AFTER DATA MIGRATION -->
-                        <div id="treatingHtfLabel" class="row">
+                        <div id="treatingHtfLabel" class="row mpRel">
                             <div class="col-sm-3">
                                 <label>{!$Label.Wish_Referral_Treating_Hospital_Facility}</label>
                             </div>
