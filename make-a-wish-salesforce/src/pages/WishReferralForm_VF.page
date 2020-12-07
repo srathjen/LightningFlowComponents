@@ -1360,7 +1360,7 @@
                             </div>
                         </div>
 
-                        <div id="bestMpSearchSection" class="medToRepeatBest">
+                        <div id="medToRepeatBest">
                             <div class="form-group row">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Title}</label></div>
                                 <div class="col-sm-6">
@@ -1897,7 +1897,7 @@
                     document.getElementById("trtHtfForm").style.display = 'block';
 
                     document.getElementById("bestMpSearch").hidden = true;
-                    document.getElementById("bestMpSearchSection").style.display = 'block';
+                    document.getElementById("medToRepeatBest").style.display = 'block';
                 } else {
                     document.getElementById("referringMpLabel").hidden = true;
                     document.getElementById("referringHtfLabel").hidden = true;

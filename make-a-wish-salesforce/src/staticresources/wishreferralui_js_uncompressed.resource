@@ -615,11 +615,13 @@ function formLogic() {
     $(".newBestMpChk").on("change", function () {
         checkVisible = $(".newBestMpChk input").is(":checked");
         if (checkVisible == true) {
-            $(".medToRepeatBest").css("display", "block");
+            // $(".medToRepeatBest").css("display", "block");
+            document.getElementById('medToRepeatBest').style.display = 'block';
             $(".bestNewAff").css("display", "none");
         } else if (checkVisible == false) {
-            $(".medToRepeatBest").css("display", "none");
-            $(".medToRepeatBest :input").each(function () {
+            // $("medToRepeatBest").css("display", "none");
+            document.getElementById('medToRepeatBest').style.display = 'none';
+            $("#medToRepeatBest :input").each(function () {
                 $(this).val("");
             });
             $("[id$=bsalutation],[id$=bcategory],[id$=bspecialty]").prop("selectedIndex", 0);
@@ -737,7 +739,7 @@ function formLogic() {
                 $(".bcategory").val($(".refmpcategory").val());
                 $(".bspecialty").val($(".refmpspecialty").val());
             } else if (checkVisibleNew == false) {
-                $(".medToRepeatBest :input").each(function () {
+                $("#medToRepeatBest :input").each(function () {
                     $(this).val("");
                 });
             }
@@ -747,7 +749,7 @@ function formLogic() {
             $(".repeatMedProf").css("display", "none");
         } else if (checkVisibleCopy == false) {
             $(".repeatMedProf").css("display", "block");
-            $(".medToRepeatBest :input").each(function () {
+            $("#medToRepeatBest :input").each(function () {
                 $(this).val("");
             });
             $("[id$=bsalutation],[id$=bcategory],[id$=bspecialty]").prop("selectedIndex", 0);
@@ -1040,7 +1042,7 @@ function formLogic() {
                 "display",
                 "block"
             );
-            $(".other, .medToRepeatBest").css("display", "none");
+            $(".other, #medToRepeatBest").css("display", "none");
             $("[id$=aware-of-referral]").addClass("family-aware-chk");
             $("[id$=medprov]").addClass("medprovider");
             $(".medical-additional-info").show();
