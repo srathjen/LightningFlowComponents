@@ -289,7 +289,7 @@
                             </div>
                         </div>
 
-                        <div class="refMpForm">
+                        <div id="refMpForm">
                             <div class="form-group row">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Title}</label></div>
                                 <div class="col-sm-6">
@@ -411,7 +411,7 @@
                             </div>
                         </div>
 
-                        <div class="refHtfForm">
+                        <div id="refHtfForm">
                             <div class="form-group row">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Name}</label></div>
                                 <div class="col-sm-6">
@@ -1057,7 +1057,7 @@
                         </div>
 
 
-                        <div class="medToRepeat trtMpForm">
+                        <div id="trtMpForm" class="medToRepeat">
                             <div class="form-group row mpRel">
                                 <div class="col-sm-3"><label>{!$Label.Wish_Referral_Title}</label></div>
                                 <div class="col-sm-6">
@@ -1202,7 +1202,7 @@
                                 </div>
                             </div>
 
-                            <div class="trtHtfForm">
+                            <div id="trtHtfForm">
                                 <div class="form-group row">
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Name}</label></div>
                                     <div class="col-sm-6">
@@ -1831,7 +1831,7 @@
                 }
                 document.getElementById("trtHtf").style.display = 'none';
                 document.getElementsByClassName('repeatMedProf')[0].style.display = 'none';
-                document.getElementsByClassName('trtMpForm')[0].style.display = 'none';
+                document.getElementById('trtMpForm').style.display = 'none';
                 document.getElementsByClassName('bestMpInfo')[0].style.display = 'block';
                 document.getElementsByClassName('repeatMedProfBest')[0].style.display = 'block';
             } else if (val == 'Self' || val == 'Parent/Guardian' || val == 'Family Member/Relative') {
@@ -1840,7 +1840,7 @@
                 document.getElementsByClassName('refToParent')[0].style.display = 'block';
                 document.getElementsByClassName('refToMP')[0].style.display = 'none';
                 document.getElementsByClassName('trtMpInfo')[0].style.display = 'block';
-                document.getElementsByClassName('trtMpForm')[0].style.display = 'block';
+                document.getElementById('trtMpForm').style.display = 'block';
                 let mpRelElement = document.getElementsByClassName('mpRel');
                 for (i = 0; i < mpRelElement.length; i++) {
                     mpRelElement[i].style.display = 'none';
@@ -1855,7 +1855,7 @@
                 document.getElementById('healthProvider').style.display = 'none';
                 document.getElementsByClassName('refToParent')[0].style.display = 'block';
                 document.getElementsByClassName('refToMP')[0].style.display = 'none';
-                document.getElementsByClassName('trtMpForm')[0].style.display = 'block';
+                document.getElementById('trtMpForm').style.display = 'block';
                 let mpRelElement = document.getElementsByClassName('mpRel');
                 for (i = 0; i < mpRelElement.length; i++) {
                     mpRelElement[i].style.display = 'none';
@@ -1888,12 +1888,14 @@
 
                     document.getElementById("referralMpSearch").hidden = true;
                     document.getElementById("referralHtfSearch").hidden = true;
-                    $(".refMpForm").css("display", "block");
-                    $(".refHtfForm").css("display", "block");
+                    document.getElementById("refMpForm").style.display = 'block';
+                    document.getElementById("refHtfForm").style.display = 'block';
+
                     document.getElementById("treatingMpSearch").hidden = true;
                     document.getElementById("treatingHtfSearch").hidden = true;
-                    $(".trtMpForm").css("display", "block");
-                    $(".trtHtfForm").css("display", "block");
+                    document.getElementById("trtMpForm").style.display = 'block';
+                    document.getElementById("trtHtfForm").style.display = 'block';
+
                     document.getElementById("bestMpSearch").hidden = true;
                     document.getElementById("bestMpSearchSection").style.display = 'block';
                 } else {
