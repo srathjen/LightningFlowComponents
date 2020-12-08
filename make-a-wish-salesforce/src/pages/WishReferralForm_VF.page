@@ -346,7 +346,7 @@
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Phone}</label></div>
                                     <div class="col-sm-6">
                                         <apex:inputText value="{!currLead.Referring_MP_Phone__c}"
-                                                        styleClass="form-control refmpphone phonemask numbers-only phoneoremailref"
+                                                        styleClass="form-control refmpphone phonemask numbers-only refContact"
                                                         html-placeholder="(000) 000-0000" id="refmpphone"
                                                         html-pattern=".{10,14}" maxlength="10"/>
                                         <span class="errorSpan" id="email_phone_error_message"></span>
@@ -356,7 +356,7 @@
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Email}</label></div>
                                     <div class="col-sm-6">
                                         <apex:inputText value="{!currLead.Referring_MP_Email__c}"
-                                                        styleClass="form-control refmpemail email-std"
+                                                        styleClass="form-control refmpemail email-std refContact"
                                                         html-placeholder="medicalprofessional_email@domain.com"
                                                         id="refmpemail" maxlength="80"/>
                                     </div>
@@ -724,7 +724,7 @@
                             </div>
 
                             <apex:outputPanel id="rr">
-                                <apex:actionRegion>
+                                <apex:actionRegion >
                                     <div class="form-group row">
                                         <div class="col-sm-3"><label>{!$Label.Wish_Referral_Number_of_Siblings}</label>
                                         </div>
@@ -740,26 +740,25 @@
                                     </div>
                                     <div class="form-group row sibInfo">
                                         <apex:outputPanel id="table">
-                                            <apex:outputPanel
-                                                    rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
+                                            <apex:outputPanel rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
                                                 <label class="col-md-12">{!$Label.Wish_Referral_Sibling_Information}</label>
                                             </apex:outputPanel>
                                             <div class="col-md-12 sib-tablewrap">
                                                 <apex:dataTable value="{!SiblingList}" var="currsibling"
                                                                 styleClass="table table-maw table-hover">
-                                                    <apex:column>
+                                                    <apex:column >
                                                         <apex:inputText value="{!currsibling.fName}"
                                                                         styleClass="form-control"
                                                                         html-placeholder="{!$Label.Wish_Referral_Placeholder_First_Name}"
                                                                         id="psibfirstname"/>
                                                     </apex:column>
-                                                    <apex:column>
+                                                    <apex:column >
                                                         <apex:inputText value="{!currsibling.lName}"
                                                                         styleClass="form-control"
                                                                         html-placeholder="{!$Label.Wish_Referral_Last_Name}"
                                                                         id="psiblastname"/>
                                                     </apex:column>
-                                                    <apex:column>
+                                                    <apex:column >
                                                         <apex:inputText value="{!currsibling.age}"
                                                                         styleClass="form-control"
                                                                         html-placeholder="{!$Label.Wish_Referral_Age}"
@@ -1125,7 +1124,7 @@
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Phone}</label></div>
                                     <div class="col-sm-6">
                                         <apex:inputText value="{!currLead.Treating_Medical_Professional_Phone__c}"
-                                                        styleClass="form-control mphone phonemask numbers-only phoneoremailtrt"
+                                                        styleClass="form-control mphone phonemask numbers-only trtContact"
                                                         html-placeholder="(000) 000-0000" id="mphone"
                                                         html-pattern=".{10,14}" maxlength="10"/>
                                     </div>
@@ -1134,7 +1133,7 @@
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Email}</label></div>
                                     <div class="form-group col-sm-6">
                                         <apex:inputText value="{!currLead.Treating_Medical_Professional_Email__c}"
-                                                        styleClass="form-control memail email-std"
+                                                        styleClass="form-control memail email-std trtContact"
                                                         html-placeholder="medicalprofessional_email@domain.com"
                                                         id="memail"
                                                         maxlength="80"/>
@@ -1434,7 +1433,7 @@
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Phone}</label></div>
                                     <div class="col-sm-6">
                                         <apex:inputText value="{!currLead.Best_contact_for_Physician_Phone__c}"
-                                                        styleclass="form-control phonemask numbers-only mpmaincontactphone phoneoremailbest"
+                                                        styleclass="form-control phonemask numbers-only mpmaincontactphone bestContact"
                                                         html-placeholder="(000) 000-0000" id="mpmaincontactphone"
                                                         html-pattern=".{10,14}" maxlength="10"/>
                                     </div>
@@ -1443,7 +1442,7 @@
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Email}</label></div>
                                     <div class="col-sm-6">
                                         <apex:inputText value="{!currLead.Best_contact_for_Physician_Email__c}"
-                                                        styleClass="form-control bemail email-std notqualto mpmaincontactemail"
+                                                        styleClass="form-control bemail email-std notqualto mpmaincontactemail bestContact"
                                                         html-placeholder="email@domain.com" id="mpmaincontactemail"
                                                         maxlength="80"/>
                                     </div>
@@ -1584,7 +1583,7 @@
         </div>
     </div>
     <!-- / modal end -->
-    <apex:includeLightning/>
+    <apex:includeLightning />
     <script>
         function updateHtfFilter(lookupId, value, pluralHint) {
             let filter = value === '' ? '' : {BillingState: 'BillingState = \'' + value + '\''};
@@ -1748,7 +1747,7 @@
     <!--<script src="//ssl.wish.org/satellite/staging/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205-staging.js"></script>-->
     <!-- prod -->
     <script src="//ssl.wish.org/satellite/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205.js"></script>
-    <apex:outputPanel>
+    <apex:outputPanel >
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-2.2.4.min.js')}"></script>
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-ui-1.11.3.min.js')}"></script>
         <script>
