@@ -106,7 +106,7 @@
                                 </div>
                             </apex:facet>
                             <apex:facet name="stop">
-                                <input type="button" value="Cancel" class="slds-button slds-button--neutral btn-process" onClick="cancel();"/>
+                                <input type="button" value="Cancel" class="slds-button slds-button--neutral btn-process" onClick="closeConsoleTab();return false"/>
                                 <input type="button" value="Send Diagnosis Verification" onClick="passEmailVal();"
                                        class="slds-button slds-button--brand btn-process" style="margin-right:5px"/>
                             </apex:facet>
@@ -264,6 +264,15 @@
                 function cancel() {
                     window.history.back();
                 }
+
+                function closeConsoleTab() {
+                    sforce.console.getEnclosingTabId(closeSubtab);
+                }
+                
+                let closeSubtab = function closeSubtab(result) {
+                    let tabId = result.id;
+                    sforce.console.closeTab(tabId, null);
+                };
             </script>
 
         </apex:form>
