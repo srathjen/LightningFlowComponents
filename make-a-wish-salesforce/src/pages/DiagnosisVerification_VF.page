@@ -608,7 +608,7 @@ Modification Log:
                                 </fieldset>
                                 <!-- provider -->
                                 <fieldset>
-                                    <legend>Provider Information</legend>
+                                    <legend>Medical Professional Information</legend>
                                     <!-- SIW-232 Start -->
                                     <div class="form-group row">
                                         <label class="col-md-3">Name</label>
@@ -680,7 +680,7 @@ Modification Log:
                                     <!--ODP-17 End-->
 
                                     <div class="form-group row">
-                                        <label class="col-md-12">I am recognized by my state to practice as a</label>
+                                        <label class="col-md-12">I, the signer, am recognized by my state to practice as a</label>
                                         <div class="col-md-6">
                                             <apex:selectList title="PickList1" size="1"
                                                              value="{!wishChildWrapperIns.recognizationPickValSelected}"
@@ -692,7 +692,7 @@ Modification Log:
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-md-12">I have direct knowledge of this patient's condition and
+                                        <label class="col-md-12">I, the signer, have direct knowledge of this patient's condition and
                                             I am part of the treating healthcare team</label>
                                         <div class="col-md-6">
                                             <apex:selectList value="{!wishChildWrapperIns.healthCareWork}" size="1"
