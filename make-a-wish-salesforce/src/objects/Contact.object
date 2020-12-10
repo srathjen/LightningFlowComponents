@@ -8640,9 +8640,24 @@ provide contact information for each site on which you are active.</inlineHelpTe
                     <label>V</label>
                 </value>
                 <value>
-                    <fullName>MD</fullName>
+                    <fullName>APNP</fullName>
                     <default>false</default>
-                    <label>MD</label>
+                    <label>APNP</label>
+                </value>
+                <value>
+                    <fullName>APRN</fullName>
+                    <default>false</default>
+                    <label>APRN</label>
+                </value>
+                <value>
+                    <fullName>CCLS</fullName>
+                    <default>false</default>
+                    <label>CCLS</label>
+                </value>
+                <value>
+                    <fullName>CLS</fullName>
+                    <default>false</default>
+                    <label>CLS</label>
                 </value>
                 <value>
                     <fullName>DO</fullName>
@@ -8650,9 +8665,44 @@ provide contact information for each site on which you are active.</inlineHelpTe
                     <label>DO</label>
                 </value>
                 <value>
-                    <fullName>PA</fullName>
+                    <fullName>LCSW</fullName>
                     <default>false</default>
-                    <label>PA</label>
+                    <label>LCSW</label>
+                </value>
+                <value>
+                    <fullName>LPN</fullName>
+                    <default>false</default>
+                    <label>LPN</label>
+                </value>
+                <value>
+                    <fullName>LSW</fullName>
+                    <default>false</default>
+                    <label>LSW</label>
+                </value>
+                <value>
+                    <fullName>LVN</fullName>
+                    <default>false</default>
+                    <label>LVN</label>
+                </value>
+                <value>
+                    <fullName>MA</fullName>
+                    <default>false</default>
+                    <label>MA</label>
+                </value>
+                <value>
+                    <fullName>MD</fullName>
+                    <default>false</default>
+                    <label>MD</label>
+                </value>
+                <value>
+                    <fullName>MSN</fullName>
+                    <default>false</default>
+                    <label>MSN</label>
+                </value>
+                <value>
+                    <fullName>MSW</fullName>
+                    <default>false</default>
+                    <label>MSW</label>
                 </value>
                 <value>
                     <fullName>NP</fullName>
@@ -8665,39 +8715,14 @@ provide contact information for each site on which you are active.</inlineHelpTe
                     <label>OD</label>
                 </value>
                 <value>
-                    <fullName>RN</fullName>
-                    <default>false</default>
-                    <label>RN</label>
-                </value>
-                <value>
-                    <fullName>LVN</fullName>
-                    <default>false</default>
-                    <label>LVN</label>
-                </value>
-                <value>
-                    <fullName>LPN</fullName>
-                    <default>false</default>
-                    <label>LPN</label>
-                </value>
-                <value>
                     <fullName>OT</fullName>
                     <default>false</default>
                     <label>OT</label>
                 </value>
                 <value>
-                    <fullName>PT</fullName>
+                    <fullName>PA</fullName>
                     <default>false</default>
-                    <label>PT</label>
-                </value>
-                <value>
-                    <fullName>RRT</fullName>
-                    <default>false</default>
-                    <label>RRT</label>
-                </value>
-                <value>
-                    <fullName>R.Ph.</fullName>
-                    <default>false</default>
-                    <label>R.Ph.</label>
+                    <label>PA</label>
                 </value>
                 <value>
                     <fullName>PharmD</fullName>
@@ -8705,24 +8730,34 @@ provide contact information for each site on which you are active.</inlineHelpTe
                     <label>PharmD</label>
                 </value>
                 <value>
-                    <fullName>MA</fullName>
+                    <fullName>PhD</fullName>
                     <default>false</default>
-                    <label>MA</label>
+                    <label>PhD</label>
                 </value>
                 <value>
-                    <fullName>MSW</fullName>
+                    <fullName>PT</fullName>
                     <default>false</default>
-                    <label>MSW</label>
+                    <label>PT</label>
                 </value>
                 <value>
-                    <fullName>LSW</fullName>
+                    <fullName>R.Ph.</fullName>
                     <default>false</default>
-                    <label>LSW</label>
+                    <label>R.Ph.</label>
                 </value>
                 <value>
-                    <fullName>CLS</fullName>
+                    <fullName>RN</fullName>
                     <default>false</default>
-                    <label>CLS</label>
+                    <label>RN</label>
+                </value>
+                <value>
+                    <fullName>RRT</fullName>
+                    <default>false</default>
+                    <label>RRT</label>
+                </value>
+                <value>
+                    <fullName>ST</fullName>
+                    <default>false</default>
+                    <label>ST</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
@@ -13608,6 +13643,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>Provider_Type__c</picklist>
             <values>
+                <fullName>Child Life Professional</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Nurse</fullName>
                 <default>false</default>
             </values>
@@ -13983,10 +14022,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <fullName>Anesthesiology</fullName>
                 <default>false</default>
             </values>
-            <values>
-                <fullName>Cardio-thoracic Surgeon</fullName>
-                <default>false</default>
-            </values>
+            
             <values>
                 <fullName>Cardiology</fullName>
                 <default>false</default>
@@ -14047,20 +14083,13 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <fullName>Hospice%2FPalliative Care</fullName>
                 <default>false</default>
             </values>
-            <values>
-                <fullName>Hospitalist</fullName>
-                <default>false</default>
-            </values>
+            
             <values>
                 <fullName>Immunology</fullName>
                 <default>false</default>
             </values>
             <values>
                 <fullName>Infectious Disease</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Internal Medicine%2FHospitalist</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -14099,6 +14128,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <fullName>Physical Medicine %26 Rehabilitation</fullName>
                 <default>false</default>
             </values>
+            
             <values>
                 <fullName>Psychiatry</fullName>
                 <default>false</default>
@@ -14346,6 +14376,22 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>Suffix__c</picklist>
             <values>
+                <fullName>APNP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>APRN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CCLS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DO</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>II</fullName>
                 <default>false</default>
             </values>
@@ -14359,6 +14405,54 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Jr%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LCSW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LPN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MSN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MSW</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>OT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PhD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ST</fullName>
                 <default>false</default>
             </values>
             <values>
