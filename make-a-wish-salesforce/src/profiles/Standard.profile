@@ -10063,6 +10063,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>External_ID__c.Chapter_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>External_ID__c.Contact__c</field>
         <readable>true</readable>
     </fieldPermissions>
