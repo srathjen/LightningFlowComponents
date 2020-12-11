@@ -126,7 +126,7 @@
                         <div class="col-sm-6">
                             <apex:inputField value="{!currLead.Referring_MP_Category__c}"
                                              styleClass="form-control col-xs-12 col-sm-12 c-select medProvCat refmpcategory"
-                                             id="refmpcategory"/>
+                                             id="refmpcategory" onchange="getInputValue();"/>
                         </div>
                     </div>
                     <div class="form-group row other">
@@ -724,7 +724,7 @@
                             </div>
 
                             <apex:outputPanel id="rr">
-                                <apex:actionRegion >
+                                <apex:actionRegion>
                                     <div class="form-group row">
                                         <div class="col-sm-3"><label>{!$Label.Wish_Referral_Number_of_Siblings}</label>
                                         </div>
@@ -740,25 +740,26 @@
                                     </div>
                                     <div class="form-group row sibInfo">
                                         <apex:outputPanel id="table">
-                                            <apex:outputPanel rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
+                                            <apex:outputPanel
+                                                    rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
                                                 <label class="col-md-12">{!$Label.Wish_Referral_Sibling_Information}</label>
                                             </apex:outputPanel>
                                             <div class="col-md-12 sib-tablewrap">
                                                 <apex:dataTable value="{!SiblingList}" var="currsibling"
                                                                 styleClass="table table-maw table-hover">
-                                                    <apex:column >
+                                                    <apex:column>
                                                         <apex:inputText value="{!currsibling.fName}"
                                                                         styleClass="form-control"
                                                                         html-placeholder="{!$Label.Wish_Referral_Placeholder_First_Name}"
                                                                         id="psibfirstname"/>
                                                     </apex:column>
-                                                    <apex:column >
+                                                    <apex:column>
                                                         <apex:inputText value="{!currsibling.lName}"
                                                                         styleClass="form-control"
                                                                         html-placeholder="{!$Label.Wish_Referral_Last_Name}"
                                                                         id="psiblastname"/>
                                                     </apex:column>
-                                                    <apex:column >
+                                                    <apex:column>
                                                         <apex:inputText value="{!currsibling.age}"
                                                                         styleClass="form-control"
                                                                         html-placeholder="{!$Label.Wish_Referral_Age}"
@@ -1583,7 +1584,7 @@
         </div>
     </div>
     <!-- / modal end -->
-    <apex:includeLightning />
+    <apex:includeLightning/>
     <script>
         function updateHtfFilter(lookupId, value, pluralHint) {
             let filter = value === '' ? '' : {BillingState: 'BillingState = \'' + value + '\''};
@@ -1747,7 +1748,7 @@
     <!--<script src="//ssl.wish.org/satellite/staging/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205-staging.js"></script>-->
     <!-- prod -->
     <script src="//ssl.wish.org/satellite/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205.js"></script>
-    <apex:outputPanel >
+    <apex:outputPanel>
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-2.2.4.min.js')}"></script>
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-ui-1.11.3.min.js')}"></script>
         <script>
@@ -1835,6 +1836,9 @@
                     window.parent.postMessage('home', '*');
                 }
             }
+
+
+
 
         </script>
         <script>_satellite.pageBottom();</script>
@@ -1941,23 +1945,32 @@
             // Selecting the input element and get its value document.querySelector('.searchField').value;
             var inputVal1 = document.querySelectorAll(".searchFieldDis");
             var inputVal2 = document.querySelectorAll(".searchFieldAwa");
-            if (rel == 'Self' || rel == 'Family Member/Relative') {
-                if (inputVal2[0].value == 'Yes') {
-                    if (inputVal1[0].value == 'Yes' || inputVal1[0].value == 'No') {
-                        $(".shownOnYes").removeClass("fam-aware-overlay")
+            if (rel === 'Self' || rel === 'Family Member/Relative') {
+                if (inputVal2[0].value === 'Yes') {
+                    if (inputVal1[0].value === 'Yes' || inputVal1[0].value == 'No') {
+                        $(".shownOnYes").removeClass("fam-aware-overlay");
                     } else {
-                        $(".shownOnYes").addClass("fam-aware-overlay")
+                        $(".shownOnYes").addClass("fam-aware-overlay");
                     }
                 } else {
-                    $(".shownOnYes").addClass("fam-aware-overlay")
+                    $(".shownOnYes").addClass("fam-aware-overlay");
                 }
-            } else if (rel == 'Parent/Guardian') {
-                $(".shownOnYes").removeClass("fam-aware-overlay")
+            } else if (rel === 'Parent/Guardian') {
+                $(".shownOnYes").removeClass("fam-aware-overlay");
+            } else if (rel === 'Medical Professional') {
+                let awareOfReferral = document.querySelectorAll('[id$="aware-of-referral"]')[0].value;
+                let refMpCategory = document.querySelectorAll('[id$="refmpcategory"]')[0].value;
+                if (awareOfReferral === 'Yes' && refMpCategory !== undefined && refMpCategory !== ''
+                    && refMpCategory !== 'Please select an option') {
+                    $(".shownOnYes").removeClass("fam-aware-overlay");
+                } else if (awareOfReferral === 'No'){
+                    $(".shownOnYes").addClass("fam-aware-overlay");
+                }
             } else {
-                if (inputVal1[0].value == 'Yes' || inputVal2[0].value == 'Yes') {
-                    $(".shownOnYes").removeClass("fam-aware-overlay")
+                if (inputVal1[0].value === 'Yes' || inputVal2[0].value === 'Yes') {
+                    $(".shownOnYes").removeClass("fam-aware-overlay");
                 } else {
-                    $(".shownOnYes").addClass("fam-aware-overlay")
+                    $(".shownOnYes").addClass("fam-aware-overlay");
                 }
             }
         }
