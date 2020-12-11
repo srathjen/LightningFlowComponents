@@ -3095,7 +3095,7 @@
         <defaultConnectorLabel>Yes - Ready</defaultConnectorLabel>
         <rules>
             <name>No_Not_Ready</name>
-            <conditionLogic>or</conditionLogic>
+            <conditionLogic>1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7 OR (8 AND 9) OR (8 AND 10) OR (11 AND 12)</conditionLogic>
             <conditions>
                 <leftValueReference>Get_Lead_Info.Street</leftValueReference>
                 <operator>IsNull</operator>
@@ -3140,6 +3140,41 @@
             </conditions>
             <conditions>
                 <leftValueReference>Get_Lead_Info.ChapterName__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Lead_Info.Treating_MP__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Lead_Info.Treating_Medical_Professional_First_Name__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Lead_Info.Treating_Medical_Professional_Last_Name__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Lead_Info.Hospital_Treatment_Facility_Treating__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Lead_Info.Treating_MP_HTF__c</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
@@ -3918,6 +3953,20 @@
 &apos;West Virginia&apos;,&apos;WV&apos;,
 &apos;Wyoming&apos;,&apos;WY&apos;,
 NULL)</expression>
+    </formulas>
+    <formulas>
+        <name>MissingDataFieldsList</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!Get_Lead_Info.Street}), &quot; • Street&quot; + BR() , &quot;&quot;) +
+IF(ISBLANK({!Get_Lead_Info.City}), &quot; • City&quot; + BR(), &quot;&quot;) +
+IF(ISBLANK({!Get_Lead_Info.State}), &quot; • State&quot; + BR(), &quot;&quot;) +
+IF(ISBLANK({!Get_Lead_Info.PostalCode}), &quot; • Zip Code&quot; + BR(), &quot;&quot;) +
+IF(ISBLANK({!Get_Lead_Info.Phone}), &quot; • Phone&quot; + BR(), &quot;&quot;) +
+IF(ISBLANK(TEXT({!Get_Lead_Info.Gender__c})), &quot; • Gender&quot; + BR(), &quot;&quot;) +
+IF(ISBLANK({!Get_Lead_Info.ChapterName__c}), &quot; • Chapter Name&quot; + BR(), &quot;&quot;) +
+IF(ISBLANK({!Get_Lead_Info.Treating_Medical_Professional_First_Name__c}) &amp;&amp; ISBLANK({!Get_Lead_Info.Treating_MP__c}) , &quot; • Treating MP First Name&quot; + BR(), &quot;&quot;) +
+IF(ISBLANK({!Get_Lead_Info.Treating_Medical_Professional_Last_Name__c}) &amp;&amp; ISBLANK({!Get_Lead_Info.Treating_MP__c}), &quot; • Treating MP Last Name&quot; + BR(), &quot;&quot;) +
+IF(ISBLANK({!Get_Lead_Info.Hospital_Treatment_Facility_Treating__c}) &amp;&amp; ISBLANK({!Get_Lead_Info.Treating_MP_HTF__c}), &quot; • Treating HTF Name&quot; + BR(), &quot;&quot;)</expression>
     </formulas>
     <formulas>
         <name>MPAutoAssignChapterID</name>
@@ -5406,7 +5455,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, &quot;&quot;, &quot;&quot;)))</ex
         </connector>
         <fields>
             <name>ConfirmExistingHTF_0</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0);&quot;&gt;Click &lt;/span&gt;&lt;b style=&quot;font-size: 16px; color: rgb(0, 0, 0);&quot;&gt;&apos;Next&apos;&lt;/b&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0);&quot;&gt; to link the following record &lt;/span&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;as the {!MPType} for this lead.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 16px; color: rgb(0, 0, 0);&quot;&gt;{!ExistingMPFirstName}&amp;nbsp;{!ExistingMPLastName}&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;Phone: {!ExistingMPPhone}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;Email: {!ExistingMPEmail}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;﻿{!ExistingMPCity}, {!ExistingMPState}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;Primary HTF: {!ExistingMPAffiliation}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px; font-family: var(--lwc-fontFamily,&amp;quot;Salesforce Sans&amp;quot;, Arial, sans-serif);&quot;&gt;Chapter: &lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px; background-color: rgb(255, 255, 255);&quot;&gt;{!ExistingMPChapter}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;Items to Resolve: &lt;/span&gt;&lt;b style=&quot;background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;{!ResolveCountRemaining}&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;Click &lt;/span&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;&apos;Next&apos;&lt;/b&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt; to link the following record &lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px; background-color: rgb(255, 255, 255);&quot;&gt;as the {!MPType} for this lead.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;{!ExistingMPFirstName}&amp;nbsp;{!ExistingMPLastName}&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;Phone: {!ExistingMPPhone}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;Email: {!ExistingMPEmail}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;﻿City: {!ExistingMPCity}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;State: {!ExistingMPState}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;Primary HTF: {!ExistingMPAffiliation}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-family: var(--lwc-fontFamily,&amp;quot;Salesforce Sans&amp;quot;, Arial, sans-serif); font-size: 16px; color: rgb(0, 0, 0);&quot;&gt;Chapter: &lt;/span&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;{!ExistingMPChapter}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 16px; background-color: rgb(255, 255, 255);&quot;&gt;Items to Resolve: &lt;/span&gt;&lt;b style=&quot;font-size: 16px; background-color: rgb(255, 255, 255);&quot;&gt;{!ResolveCountRemaining}&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -5425,7 +5474,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, &quot;&quot;, &quot;&quot;)))</ex
         </connector>
         <fields>
             <name>ConfirmCreateMP</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0);&quot;&gt;Click &lt;/span&gt;&lt;b style=&quot;font-size: 16px; color: rgb(0, 0, 0);&quot;&gt;&apos;Next&apos;&lt;/b&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0);&quot;&gt; to run the duplicate check again before creating a new&lt;/span&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt; {!MPType} for this lead.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 16px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;Name: &lt;/b&gt;&lt;b style=&quot;font-size: 16px; color: rgb(0, 0, 0);&quot;&gt;{!MPName.salutation} {!MPName.firstName}  &lt;/b&gt;&lt;b style=&quot;font-size: 16px; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;{!MPName.lastName}&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;Email: {!MPEmail.value}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;Phone: {!MPPhone.value}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;Fax: {!MPFax.value}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;City/State: {!MPCity} {!MPState} &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;Zip Code: {!MP_Zip_Code}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0);&quot;&gt;Category: {!MP_Category}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0);&quot;&gt;Specialty: {!MP_Specialty}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0);&quot;&gt;Chapter: &lt;/span&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0); background-color: var(--lwc-colorBackgroundInput,rgb(255, 255, 255));&quot;&gt;&amp;nbsp;{!MPAutoAssignedChapterName}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 16px; background-color: rgb(255, 255, 255);&quot;&gt;Items to Resolve: &lt;/span&gt;&lt;b style=&quot;font-size: 16px; background-color: rgb(255, 255, 255);&quot;&gt;{!ResolveCountRemaining}&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;Click &lt;/span&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;&apos;Next&apos;&lt;/b&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt; to run the duplicate check again before creating a new&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px; background-color: rgb(255, 255, 255);&quot;&gt; {!MPType} for this lead.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;Name: &lt;/b&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;{!MPName.salutation} {!MPName.firstName}  &lt;/b&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 16px; background-color: rgb(255, 255, 255);&quot;&gt;{!MPName.lastName}&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;Email: {!MPEmail.value}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0);&quot;&gt;Phone: {!MPPhone.value}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;Fax: {!MPFax.value}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;City: {!MPCity}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;State: {!MPState} &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;Zip Code: {!MP_Zip_Code}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;Category: {!MP_Category}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;Specialty: {!MP_Specialty}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;Chapter: &lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px; background-color: var(--lwc-colorBackgroundInput,rgb(255, 255, 255));&quot;&gt;&amp;nbsp;{!MPAutoAssignedChapterName}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;Items to Resolve: &lt;/span&gt;&lt;b style=&quot;background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;{!ResolveCountRemaining}&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -5737,7 +5786,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, &quot;&quot;, &quot;&quot;)))</ex
         </fields>
         <fields>
             <name>ZipCodeAlert</name>
-            <fieldText>&lt;p&gt;&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;No related HTF Chapter found. Please input a Zip Code  or Assign MP to you chapter.&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;No related HTF chapter was found. &lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;Please input a zip code or assign the MP to your chapter.&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
@@ -5762,7 +5811,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, &quot;&quot;, &quot;&quot;)))</ex
         </fields>
         <fields>
             <name>OverrideAlertMsg</name>
-            <fieldText>&lt;p&gt;&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;Please select only one option to proceed. Enter a zip code OR check the box below if you do not have a zip code.&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;Please select only one option to proceed.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt; Enter a zip code OR check the box below if you do not have a zip code.&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
@@ -5871,7 +5920,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, &quot;&quot;, &quot;&quot;)))</ex
         <allowPause>false</allowPause>
         <fields>
             <name>MissingDataAlert</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;MISSING DATA DETECTED&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;The lead record must have ALL the following fields populated before you can proceed with the Make &amp;amp; Match process:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Chapter&lt;/li&gt;&lt;li&gt;Street&lt;/li&gt;&lt;li&gt;City&lt;/li&gt;&lt;li&gt;State&lt;/li&gt;&lt;li&gt;Zip Code&lt;/li&gt;&lt;li&gt;Phone&lt;/li&gt;&lt;li&gt;Gender&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Please update the lead and try again.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;color: rgb(255, 0, 0);&quot;&gt;MISSING DATA DETECTED&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;The lead record must have ALL the following fields populated before you can proceed with the Make &amp;amp; Match process:&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;{!MissingDataFieldsList}&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Please update the lead and try again.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
