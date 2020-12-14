@@ -2818,6 +2818,15 @@ Help Text</description>
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
     <fields>
+        <fullName>Test_Record__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Is this record a "Test Record"?</description>
+        <externalId>false</externalId>
+        <label>Test Record</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>TickerSymbol</fullName>
         <trackFeedHistory>false</trackFeedHistory>
     </fields>

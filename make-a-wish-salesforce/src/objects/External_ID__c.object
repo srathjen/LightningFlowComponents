@@ -168,6 +168,82 @@
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>Chapter_Name__c</fullName>
+        <description>Converts the 3 digit chapter ID code from the beginning of the External ID field into a chapter name.</description>
+        <externalId>false</externalId>
+        <formula>CASE(Value(LEFT(External_ID__c,3)),
+033, "Make-A-Wish Central New York",
+031, "Make-A-Wish Central &amp; South Texas",
+009, "Make-A-Wish Colorado",
+054, "Make-A-Wish Connecticut",
+030, "Make-A-Wish Minnesota",
+036, "Make-A-Wish Mississippi",
+047, "Central &amp; Western North Carolina",
+010, "Make-A-Wish Metro NY &amp; Western NY",
+073, "Make-A-Wish Missouri &amp; Kansas",
+086, "Make-A-Wish Montana",
+011, "Make-A-Wish Ohio, Kentucky &amp; Indiana",
+063, "Make-A-Wish Oklahoma",
+005, "Make-A-Wish Oregon",
+071, "Make-A-Wish Puerto Rico",
+084, "Make-A-Wish Rio Grande Valley",
+024, "Make-A-Wish San Diego",
+017, "Make-A-Wish Southern Florida",
+083, "Make-A-Wish Southern Nevada",
+034, "Make-A-Wish South Carolina",
+043, "Make-A-Wish Wyoming",
+012, "Make-A-Wish Northeastern &amp; Central California and Northern Nevada",
+051, "Make-A-Wish Philadelphia, DE &amp; SV",
+059, "Make-A-Wish Alabama",
+001, "Make-A-Wish Arizona",
+080, "Make-A-Wish Central &amp; Northern Florida",
+064, "Make-A-Wish Eastern North Carolina",
+068, "Make-A-Wish East Tennessee",
+081, "Make-A-Wish Georgia",
+025, "Make-A-Wish Greater Bay Area",
+015, "Make-A-Wish Greater Los Angeles",
+008, "Make-A-Wish Greater PA &amp; WV",
+048, "Make-A-Wish Alaska &amp; Washington",
+007, "Make-A-Wish Orange County &amp; Inland Empire",
+044, "Make-A-Wish Central California",
+027, "Make-A-Wish South Dakota &amp; Montana",
+014, "Make-A-Wish Suffolk County",
+035, "Make-A-Wish Texas Gulf Coast &amp; Louisiana",
+039, "Make-A-Wish TriCounties",
+042, "Make-A-Wish Utah",
+069, "Make-A-Wish Vermont",
+029, "Make-A-Wish Wisconsin",
+067, "Make-A-Wish Greater Virginia",
+077, "Make-A-Wish Guam",
+013, "Make-A-Wish Hawaii",
+053, "Make-A-Wish Hudson Valley",
+056, "Make-A-Wish Idaho",
+045, "Make-A-Wish Illinois",
+065, "Make-A-Wish Iowa",
+028, "Make-A-Wish Kansas",
+079, "Make-A-Wish Maine",
+066, "Make-A-Wish Massachusetts &amp; Rhode Island",
+022, "Make-A-Wish Michigan",
+018, "Make-A-Wish Nebraska",
+058, "Make-A-Wish New Hampshire",
+003, "Make-A-Wish New Jersey",
+057, "Make-A-Wish New Mexico",
+060, "Make-A-Wish Northeast New York",
+050, "Make-A-Wish North Dakota",
+006, "Make-A-Wish North Texas",
+085, "Make-A-Wish Middle Tennessee",
+016, "Make-A-Wish MidAtlantic",
+049, "Make-A-Wish MidSouth",
+100, "Make-A-Wish America", "")</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Chapter Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Contact__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <description>Captures the External ID's Related Contact</description>

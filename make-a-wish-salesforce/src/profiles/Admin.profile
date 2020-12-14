@@ -2114,6 +2114,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Account.Test_Record__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Case.Appeal__c</field>
         <readable>true</readable>
@@ -10536,6 +10541,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>External_ID__c.Account__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>External_ID__c.Chapter_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

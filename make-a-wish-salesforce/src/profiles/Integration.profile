@@ -1667,6 +1667,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Account.Test_Record__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Case.Communication_Profile_Notes__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -10063,6 +10068,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>External_ID__c.Account__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>External_ID__c.Chapter_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
