@@ -419,7 +419,7 @@ function formLogic() {
             "sibage",
         ],
         eligibleMsg =
-            "To be eligible, children must be older than 2� years old and younger than 18 years old.",
+            "To be eligible, children must be older than 2½ years old and younger than 18 years old.",
         guardianPermissionMsg =
             "Please confirm that you have received your parent or guardians permission to complete this form.";
     refDisAddError =
@@ -656,6 +656,7 @@ function formLogic() {
                 $(".mstate").val($(".refmpstate").val());
                 $(".mcategory").val($(".refmpcategory").val());
                 $(".mspecialty").val($(".refmpspecialty").val());
+                $(".mzip").val($(".refmpzip").val());
             } else if (checkVisibleNewMp == false) {
                 $(".medToRepeat :input").each(function () {
                     $(this).val("");
@@ -704,6 +705,7 @@ function formLogic() {
                 $(".bstate").val($(".refmpstate").val());
                 $(".bcategory").val($(".refmpcategory").val());
                 $(".bspecialty").val($(".refmpspecialty").val());
+                $(".bzip").val($(".refmpzip").val());
             } else if (checkVisibleNew == false) {
                 $("#medToRepeatBest :input").each(function () {
                     $(this).val("");

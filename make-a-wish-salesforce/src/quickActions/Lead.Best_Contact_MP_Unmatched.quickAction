@@ -32,6 +32,11 @@
             </quickActionLayoutItems>
             <quickActionLayoutItems>
                 <emptySpace>false</emptySpace>
+                <field>Best_Contact_Zip_Code__c</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
                 <field>Best_Contact_Category__c</field>
                 <uiBehavior>Edit</uiBehavior>
             </quickActionLayoutItems>
@@ -58,6 +63,10 @@
             <quickActionLayoutItems>
                 <emptySpace>false</emptySpace>
                 <field>Best_Contact_State__c</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>true</emptySpace>
                 <uiBehavior>Edit</uiBehavior>
             </quickActionLayoutItems>
             <quickActionLayoutItems>
