@@ -4,8 +4,9 @@
     <formulas>
         <name>DescriptionUpdate</name>
         <dataType>String</dataType>
-        <expression>{!$Record.Description} + 
-&quot;Case automatically as a result of a Lead Status update.&quot;</expression>
+        <expression>IF (ISBLANK({!$Record.Description}),  
+&quot;Case closed automatically as a result of a Lead Status update.&quot;, 
+{!$Record.Description} + &quot; Case closed automatically as a result of a Lead Status update.&quot;)</expression>
     </formulas>
     <interviewLabel>Close Eligibility Review Cases Nightly {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Close Eligibility Review Cases Nightly</label>
