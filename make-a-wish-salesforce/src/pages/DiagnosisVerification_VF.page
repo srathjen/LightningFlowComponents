@@ -680,7 +680,7 @@ Modification Log:
                                     <!--ODP-17 End-->
 
                                     <div class="form-group row">
-                                        <label class="col-md-12">I, the signer, am recognized by my state to practice as a</label>
+                                        <label class="col-md-12">{!SIGNER_RECOGNIZED_AS_A}</label>
                                         <div class="col-md-6">
                                             <apex:selectList title="PickList1" size="1"
                                                              value="{!wishChildWrapperIns.recognizationPickValSelected}"
@@ -692,8 +692,7 @@ Modification Log:
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-md-12">I, the signer, have direct knowledge of this patient's condition and
-                                            I am part of the treating healthcare team</label>
+                                        <label class="col-md-12">{!SIGNER_DIRECT_KNOWLEDGE}</label>
                                         <div class="col-md-6">
                                             <apex:selectList value="{!wishChildWrapperIns.healthCareWork}" size="1"
                                                              multiselect="false"
@@ -1424,8 +1423,8 @@ Modification Log:
                                                     <div class="col-md-12"><label class="form-check-label">
                                                             <apex:inputCheckbox
                                                                     value="{!travelAlgorithmWrapperIns.infectious}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Infectious Tuberculosis</label>
+                                                                    styleClass="check_checkbox"/>{!INFECTIOUS_TUBERCULOSIS}
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
@@ -1433,8 +1432,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.airborne}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Airborne Viral Infections of High Mortality</label>
+                                                                    styleClass="check_checkbox"/>{!AIRBORNE_VIRAL_INFECTIONS_OF_HIGH_MORTALITY}
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
@@ -1442,8 +1441,7 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.pneumothorax}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Pneumothorax</label>
+                                                                    styleClass="check_checkbox"/>{!PNEUMOTHORAX}</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
@@ -1451,8 +1449,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.pleural}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Pleural Effusion</label>
+                                                                    styleClass="check_checkbox"/>{!PLEURAL_EFFUSION}
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
@@ -1460,8 +1458,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.lungDisease}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Severe Restrictive Lung Disease</label>
+                                                                    styleClass="check_checkbox"/>{!SEVERE_RESTRICTIVE_LUNG_DISEASE}
+                                                        </label>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <apex:selectList
@@ -1478,8 +1476,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.oxygen}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Oxygen dependence at sea level</label>
+                                                                    styleClass="check_checkbox"/>{!OXYGEN_DEPENDENCE_AT_SEA_LEVEL}
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
@@ -1487,8 +1485,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.seaLevel}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Oxygen requirement >4L/min at sea level</label>
+                                                                    styleClass="check_checkbox"/>{!OXYGEN_REQUIREMENT_4L_MIN_AT_SEA_LEVEL}
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
@@ -1496,8 +1494,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.longTermOxygen}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Long-term oxygen within last 6 months</label>
+                                                                    styleClass="check_checkbox"/>{!LONG_TERM_OXYGEN_WITHIN_LAST_6_MONTHS}
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
@@ -1505,17 +1503,16 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.respiratoryIllness}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Hospitalization for acute respiratory illness in the past 6
-                                                            weeks</label>
+                                                                    styleClass="check_checkbox"/>{!HOSPITALIZATION_FOR_ACUTE_RESPIRATORY}
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.pht}"
-                                                                                styleClass="check_checkbox"/>
-                                                            Pulmonary hypertension</label>
+                                                                                styleClass="check_checkbox"/>{!PULMONARY_HYPERTENSION}
+                                                        </label>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <apex:selectList value="{!pluHypTxt}" multiselect="false"
@@ -1531,8 +1528,8 @@ Modification Log:
                                                     <div class="col-md-12"><label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.ventilator}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Ventilator Dependence</label>
+                                                                    styleClass="check_checkbox"/>{!VENTILATOR_DEPENDENCE}
+                                                        </label>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <apex:selectList
@@ -1554,8 +1551,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.angina}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Chest Pain/Angina</label>
+                                                                    styleClass="check_checkbox"/>{!CHEST_PAIN_ANGINA}
+                                                        </label>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <apex:selectList
@@ -1572,8 +1569,7 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.arrhythmia}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Arrhythmia</label>
+                                                                    styleClass="check_checkbox"/>{!ARRHYTHMIA}</label>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <apex:selectList
@@ -1590,8 +1586,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.heartFailure}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Acute Heart Failure</label>
+                                                                    styleClass="check_checkbox"/>{!ACUTE_HEART_FAILURE}
+                                                        </label>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <apex:selectList
@@ -1608,8 +1604,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.chronicHeartFailure}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Chronic Heart Failure</label>
+                                                                    styleClass="check_checkbox"/>{!CHRONIC_HEART_FAILURE}
+                                                        </label>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <apex:selectList
@@ -1626,8 +1622,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.congenitalHeartDisease}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Cyanotic Congenital Heart Disease</label>
+                                                                    styleClass="check_checkbox"/>{!CYANOTIC_CONGENITAL_HEART_DISEASE}
+                                                        </label>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <apex:selectList
@@ -1644,8 +1640,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputCheckbox
                                                                     value="{!travelAlgorithmWrapperIns.uncontrolledHypertension}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Severe Uncontrolled Hypertension</label>
+                                                                    styleClass="check_checkbox"/>{!SEVERE_UNCONTROLLED_HYPERTENSION}
+                                                        </label>
                                                     </div>
                                                 </div>
 
@@ -1658,8 +1654,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.acuteoRChronicHepatitis}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Acute or Chronic Hepatitis</label>
+                                                                    styleClass="check_checkbox"/>{!ACUTE_OR_CHRONIC_HEPATITIS}
+                                                        </label>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <apex:selectList
@@ -1677,8 +1673,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.portalHypertension}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Portal Hypertension</label>
+                                                                    styleClass="check_checkbox"/>{!PORTAL_HYPERTENSION}
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
@@ -1686,16 +1682,17 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.heptopulmonarySyndrome}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Heptopulmonary Syndrome</label>
+                                                                    styleClass="check_checkbox"/>{!HEPTOPULMONARY_SYNDROME}
+                                                        </label>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox styleClass="check_checkbox"/>
-                                                            Chronic liver disease</label>
+                                                            <apex:inputcheckbox
+                                                                    styleClass="check_checkbox"/>{!CHRONIC_LIVER_DISEASE}
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
@@ -1703,8 +1700,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.liverDisease}"
-                                                                    styleClass="check_checkbox"/>
-                                                            End Stage Liver Disease</label>
+                                                                    styleClass="check_checkbox"/>{!END_STAGE_LIVER_DISEASE}
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
@@ -1712,8 +1709,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.esophagealVarices}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Esophageal varices or history of</label>
+                                                                    styleClass="check_checkbox"/>{!ESOPHAGEAL_VARICES_OR_HISTORY_OF}
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
@@ -1721,8 +1718,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.portopulmonaryHypertension}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Portopulmonary Hypertension</label>
+                                                                    styleClass="check_checkbox"/>{!PORTOPULMONARY_HYPERTENSION}
+                                                        </label>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <apex:selectList
@@ -1744,8 +1741,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.intracranialPressure}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Increased Intracranial Pressure</label>
+                                                                    styleClass="check_checkbox"/>{!INCREASED_INTRACRANIAL_PRESSURE}
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
@@ -1753,8 +1750,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.strokes}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Transient Ischemic Attacks or Strokes</label>
+                                                                    styleClass="check_checkbox"/>{!TRANSIENT_ISCHEMIC_ATTACKS_OR_STROKES}
+                                                        </label>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <apex:selectList
@@ -1766,14 +1763,13 @@ Modification Log:
                                                         </apex:selectList>
                                                     </div>
                                                 </div>
-                                                <div class="form-group row checkContainer checkContainer">
+                                                <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.convulsiveDisorder}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Unstable or uncontrolled epilepsy, seizure disorder,
-                                                            convulsive disorder</label>
+                                                                    styleClass="check_checkbox"/>{!UNSTABLE_OR_UNCONTROLLED_EPILEPSY}
+                                                        </label>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <apex:selectList
@@ -1790,8 +1786,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.panicDisorder}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Panic Disorder</label>
+                                                                    styleClass="check_checkbox"/>{!PANIC_DISORDER}
+                                                        </label>
                                                     </div>
                                                 </div>
 
@@ -1805,8 +1801,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.majorbleeding}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Major bleeding</label>
+                                                                    styleClass="check_checkbox"/>{!MAJOR_BLEEDING}
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
@@ -1814,8 +1810,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.symptomaticAnemia}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Symptomatic Anemia</label>
+                                                                    styleClass="check_checkbox"/>{!SYMPTOMATIC_ANEMIA}
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
@@ -1823,8 +1819,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputCheckbox
                                                                     value="{!travelAlgorithmWrapperIns.sickleCellAnemia}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Sickle Cell Anemia</label>
+                                                                    styleClass="check_checkbox"/>{!SICKLE_CELL_ANEMIA}
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
@@ -1832,8 +1828,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputcheckbox
                                                                     value="{!travelAlgorithmWrapperIns.surgeryinTwoMonths}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Surgery in the past 2 months</label>
+                                                                    styleClass="check_checkbox"/>{!SURGERY_IN_THE_PAST_2_MONTHS}
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <!--Added 'I am not sure' and 'Medically fragile/medically complex' checkbox here as part of SIW-379 -->
@@ -1842,8 +1838,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputCheckbox
                                                                     value="{!travelAlgorithmWrapperIns.travelRestriction}"
-                                                                    styleClass="check_checkbox"/>
-                                                            Medically fragile/medically complex</label>
+                                                                    styleClass="check_checkbox"/>{!MEDICALLY_FRAGILE_MEDICALLY_COMPLEX}
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
@@ -1851,8 +1847,8 @@ Modification Log:
                                                         <label class="form-check-label">
                                                             <apex:inputCheckbox
                                                                     value="{!travelAlgorithmWrapperIns.iamNotSure}"
-                                                                    styleClass="check_checkbox"/>
-                                                            I am not sure</label>
+                                                                    styleClass="check_checkbox"/>{!I_AM_NOT_SURE}
+                                                        </label>
                                                     </div>
                                                 </div>
 
@@ -1861,8 +1857,7 @@ Modification Log:
                                                                 class="form-check-label inline-block">
                                                             <apex:inputCheckbox
                                                                     value="{!travelAlgorithmWrapperIns.noneApply}"
-                                                                    styleClass="check_checkbox"/>
-                                                            None Apply</label>
+                                                                    styleClass="check_checkbox"/>{!NONE_APPLY}</label>
                                                     </div>
                                                 </div>
                                             </div>

@@ -81,6 +81,44 @@ public class DiagnosisVerification_AC {
 	public final String moderateFunction { get; set; }
 	public final String pleaseSelectAllText { get; set; }
 	public final String placeHolderAddInfo { get; set; }
+	public final String INFECTIOUS_TUBERCULOSIS { get; set; }
+	public final String AIRBORNE_VIRAL_INFECTIONS_OF_HIGH_MORTALITY { get; set; }
+	public final String PNEUMOTHORAX { get; set; }
+	public final String PLEURAL_EFFUSION { get; set; }
+	public final String SEVERE_RESTRICTIVE_LUNG_DISEASE { get; set; }
+	public final String OXYGEN_DEPENDENCE_AT_SEA_LEVEL { get; set; }
+	public final String OXYGEN_REQUIREMENT_4L_MIN_AT_SEA_LEVEL { get; set; }
+	public final String LONG_TERM_OXYGEN_WITHIN_LAST_6_MONTHS { get; set; }
+	public final String HOSPITALIZATION_FOR_ACUTE_RESPIRATORY { get; set; }
+	public final String PULMONARY_HYPERTENSION { get; set; }
+	public final String VENTILATOR_DEPENDENCE { get; set; }
+	public final String CHEST_PAIN_ANGINA { get; set; }
+	public final String ARRHYTHMIA { get; set; }
+	public final String ACUTE_HEART_FAILURE { get; set; }
+	public final String CHRONIC_HEART_FAILURE { get; set; }
+	public final String CYANOTIC_CONGENITAL_HEART_DISEASE { get; set; }
+	public final String SEVERE_UNCONTROLLED_HYPERTENSION { get; set; }
+	public final String ACUTE_OR_CHRONIC_HEPATITIS { get; set; }
+	public final String PORTAL_HYPERTENSION { get; set; }
+	public final String HEPTOPULMONARY_SYNDROME { get; set; }
+	public final String CHRONIC_LIVER_DISEASE { get; set; }
+	public final String END_STAGE_LIVER_DISEASE { get; set; }
+	public final String ESOPHAGEAL_VARICES_OR_HISTORY_OF { get; set; }
+	public final String PORTOPULMONARY_HYPERTENSION { get; set; }
+	public final String INCREASED_INTRACRANIAL_PRESSURE { get; set; }
+	public final String TRANSIENT_ISCHEMIC_ATTACKS_OR_STROKES { get; set; }
+	public final String UNSTABLE_OR_UNCONTROLLED_EPILEPSY { get; set; }
+	public final String PANIC_DISORDER { get; set; }
+	public final String MAJOR_BLEEDING { get; set; }
+	public final String SYMPTOMATIC_ANEMIA { get; set; }
+	public final String SICKLE_CELL_ANEMIA { get; set; }
+	public final String SURGERY_IN_THE_PAST_2_MONTHS { get; set; }
+	public final String MEDICALLY_FRAGILE_MEDICALLY_COMPLEX { get; set; }
+	public final String I_AM_NOT_SURE { get; set; }
+	public final String NONE_APPLY { get; set; }
+
+	public final String SIGNER_RECOGNIZED_AS_A {get; set; }
+	public final String SIGNER_DIRECT_KNOWLEDGE {get; set; }
 
 	//ODP-17 : Adding variables to hold DV Signer mail receiver Info
 	public String requestedDVSigner_firstName { get; set; }
@@ -125,6 +163,44 @@ public class DiagnosisVerification_AC {
 		moderateFunction = Constant_AC.MODERATE_FUNCTION;
 		pleaseSelectAllText = Constant_AC.PLEASE_SELECT_ALL;
 		placeHolderAddInfo = Constant_AC.PLACEHOLDER_ADD_INFO;
+		INFECTIOUS_TUBERCULOSIS = Constant_AC.INFECTIOUS_TUBERCULOSIS;
+		AIRBORNE_VIRAL_INFECTIONS_OF_HIGH_MORTALITY = Constant_AC.AIRBORNE_VIRAL_INFECTIONS_OF_HIGH_MORTALITY;
+		PNEUMOTHORAX = Constant_AC.PNEUMOTHORAX;
+		PLEURAL_EFFUSION = Constant_AC.PLEURAL_EFFUSION;
+		SEVERE_RESTRICTIVE_LUNG_DISEASE = Constant_AC.SEVERE_RESTRICTIVE_LUNG_DISEASE;
+		OXYGEN_DEPENDENCE_AT_SEA_LEVEL = Constant_AC.OXYGEN_DEPENDENCE_AT_SEA_LEVEL;
+		OXYGEN_REQUIREMENT_4L_MIN_AT_SEA_LEVEL = Constant_AC.OXYGEN_REQUIREMENT_4L_MIN_AT_SEA_LEVEL;
+		LONG_TERM_OXYGEN_WITHIN_LAST_6_MONTHS = Constant_AC.LONG_TERM_OXYGEN_WITHIN_LAST_6_MONTHS;
+		HOSPITALIZATION_FOR_ACUTE_RESPIRATORY = Constant_AC.HOSPITALIZATION_FOR_ACUTE_RESPIRATORY;
+		PULMONARY_HYPERTENSION = Constant_AC.PULMONARY_HYPERTENSION;
+		VENTILATOR_DEPENDENCE = Constant_AC.VENTILATOR_DEPENDENCE;
+		CHEST_PAIN_ANGINA = Constant_AC.CHEST_PAIN_ANGINA;
+		ARRHYTHMIA = Constant_AC.ARRHYTHMIA;
+		ACUTE_HEART_FAILURE = Constant_AC.ACUTE_HEART_FAILURE;
+		CHRONIC_HEART_FAILURE = Constant_AC.CHRONIC_HEART_FAILURE;
+		CYANOTIC_CONGENITAL_HEART_DISEASE = Constant_AC.CYANOTIC_CONGENITAL_HEART_DISEASE;
+		SEVERE_UNCONTROLLED_HYPERTENSION = Constant_AC.SEVERE_UNCONTROLLED_HYPERTENSION;
+		ACUTE_OR_CHRONIC_HEPATITIS = Constant_AC.ACUTE_OR_CHRONIC_HEPATITIS;
+		PORTAL_HYPERTENSION = Constant_AC.PORTAL_HYPERTENSION;
+		HEPTOPULMONARY_SYNDROME = Constant_AC.HEPTOPULMONARY_SYNDROME;
+		CHRONIC_LIVER_DISEASE = Constant_AC.CHRONIC_LIVER_DISEASE;
+		END_STAGE_LIVER_DISEASE = Constant_AC.END_STAGE_LIVER_DISEASE;
+		ESOPHAGEAL_VARICES_OR_HISTORY_OF = Constant_AC.ESOPHAGEAL_VARICES_OR_HISTORY_OF;
+		PORTOPULMONARY_HYPERTENSION = Constant_AC.PORTOPULMONARY_HYPERTENSION;
+		INCREASED_INTRACRANIAL_PRESSURE = Constant_AC.INCREASED_INTRACRANIAL_PRESSURE;
+		TRANSIENT_ISCHEMIC_ATTACKS_OR_STROKES = Constant_AC.TRANSIENT_ISCHEMIC_ATTACKS_OR_STROKES;
+		UNSTABLE_OR_UNCONTROLLED_EPILEPSY = Constant_AC.UNSTABLE_OR_UNCONTROLLED_EPILEPSY;
+		PANIC_DISORDER = Constant_AC.PANIC_DISORDER;
+		MAJOR_BLEEDING = Constant_AC.MAJOR_BLEEDING;
+		SYMPTOMATIC_ANEMIA = Constant_AC.SYMPTOMATIC_ANEMIA;
+		SICKLE_CELL_ANEMIA = Constant_AC.SICKLE_CELL_ANEMIA;
+		SURGERY_IN_THE_PAST_2_MONTHS = Constant_AC.SURGERY_IN_THE_PAST_2_MONTHS;
+		MEDICALLY_FRAGILE_MEDICALLY_COMPLEX = Constant_AC.MEDICALLY_FRAGILE_MEDICALLY_COMPLEX;
+		I_AM_NOT_SURE = Constant_AC.I_AM_NOT_SURE;
+		NONE_APPLY = Constant_AC.NONE_APPLY;
+
+		SIGNER_RECOGNIZED_AS_A = 'I, the signer, am recognized by my state to practice as a';
+		SIGNER_DIRECT_KNOWLEDGE = 'I, the signer, have direct knowledge of this patient\'s condition and I am part of the treating healthcare team';
 
 		leadId = ApexPages.currentPage().getParameters().get('leadId');
 
