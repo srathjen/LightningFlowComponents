@@ -562,10 +562,10 @@ function formLogic() {
             $(".refNewAff").css("display", "none");
         } else if (checkVisible == false) {
             document.getElementById("refMpForm").style.display = 'none';
-            $(".refMpForm :input").each(function () {
+            $("#refMpForm :input").each(function () {
                 $(this).val("");
             });
-            $("[id$=refmpsalutation],[id$=refmpspecialty]").prop("selectedIndex", 0);
+            $("[id$=refmpsalutation],[id$=refmpspecialty],[id$=refmpstate]").prop("selectedIndex", 0);
         }
     });
 
