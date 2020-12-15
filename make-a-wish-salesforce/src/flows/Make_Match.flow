@@ -3782,8 +3782,8 @@
     <dynamicChoiceSets>
         <name>HTFStatePicklist</name>
         <dataType>Picklist</dataType>
-        <displayField xsi:nil="true"/>
-        <object xsi:nil="true"/>
+        <displayField xsi:nil="true" />
+        <object xsi:nil="true" />
         <picklistField>Treating_MP_HTF_State__c</picklistField>
         <picklistObject>Lead</picklistObject>
         <sortOrder>Asc</sortOrder>
@@ -3837,8 +3837,8 @@
     <dynamicChoiceSets>
         <name>MPStatePicklist</name>
         <dataType>Picklist</dataType>
-        <displayField xsi:nil="true"/>
-        <object xsi:nil="true"/>
+        <displayField xsi:nil="true" />
+        <object xsi:nil="true" />
         <picklistField>Treating_MP_State__c</picklistField>
         <picklistObject>Lead</picklistObject>
         <sortOrder>Asc</sortOrder>
@@ -5417,7 +5417,7 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, &quot;&quot;, &quot;&quot;)))</ex
         </connector>
         <fields>
             <name>ConfirmExistingHTF</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0);&quot;&gt;Click &lt;/span&gt;&lt;b style=&quot;font-size: 16px; color: rgb(0, 0, 0);&quot;&gt;&apos;Next&apos;&lt;/b&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0);&quot;&gt; to link the following record &lt;/span&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;as the {!HTFType}&apos;s HTF for this lead.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 16px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;{!ExistingHTFName}&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px; background-color: rgb(255, 255, 255);&quot;&gt;{!ExistingHTFDepartment}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;﻿{!ExistingHTFCity}, {!ExistingHTFState} {!ExistingHTFZip}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 16px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;﻿{!ExistingHTFChapter}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;Items to Resolve: &lt;/span&gt;&lt;b style=&quot;background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;{!ResolveCountRemaining}&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;Click &lt;/span&gt;&lt;b style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt;&apos;Next&apos;&lt;/b&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px;&quot;&gt; to link the following record &lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 16px; background-color: rgb(255, 255, 255);&quot;&gt;as the {!HTFType}&apos;s HTF for this lead.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;Name: {!ExistingHTFName}&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: 16px; color: rgb(0, 0, 0);&quot;&gt;Department: {!ExistingHTFDepartment}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;City: ﻿{!ExistingHTFCity}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;State: {!ExistingHTFState}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;Zip: {!ExistingHTFZip}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); font-size: 16px;&quot;&gt;Chapter: ﻿{!ExistingHTFChapter}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 16px; background-color: rgb(255, 255, 255);&quot;&gt;Items to Resolve: &lt;/span&gt;&lt;b style=&quot;font-size: 16px; background-color: rgb(255, 255, 255);&quot;&gt;{!ResolveCountRemaining}&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
