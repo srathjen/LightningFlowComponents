@@ -419,7 +419,7 @@ function formLogic() {
             "sibage",
         ],
         eligibleMsg =
-            "To be eligible, children must be older than 2� years old and younger than 18 years old.",
+            "To be eligible, children must be older than 2½ years old and younger than 18 years old.",
         guardianPermissionMsg =
             "Please confirm that you have received your parent or guardians permission to complete this form.";
     refDisAddError =
@@ -562,10 +562,10 @@ function formLogic() {
             $(".refNewAff").css("display", "none");
         } else if (checkVisible == false) {
             document.getElementById("refMpForm").style.display = 'none';
-            $(".refMpForm :input").each(function () {
+            $("#refMpForm :input").each(function () {
                 $(this).val("");
             });
-            $("[id$=refmpsalutation],[id$=refmpspecialty]").prop("selectedIndex", 0);
+            $("[id$=refmpsalutation],[id$=refmpspecialty],[id$=refmpstate]").prop("selectedIndex", 0);
         }
     });
 
@@ -643,6 +643,7 @@ function formLogic() {
                 $(".mstate").val($(".refmpstate").val());
                 $(".mcategory").val($(".refmpcategory").val());
                 $(".mspecialty").val($(".refmpspecialty").val());
+                $(".mzip").val($(".refmpzip").val());
             } else if (checkVisibleNewMp == false) {
                 $(".medToRepeat :input").each(function () {
                     $(this).val("");
@@ -691,6 +692,7 @@ function formLogic() {
                 $(".bstate").val($(".refmpstate").val());
                 $(".bcategory").val($(".refmpcategory").val());
                 $(".bspecialty").val($(".refmpspecialty").val());
+                $(".bzip").val($(".refmpzip").val());
             } else if (checkVisibleNew == false) {
                 $("#medToRepeatBest :input").each(function () {
                     $(this).val("");
