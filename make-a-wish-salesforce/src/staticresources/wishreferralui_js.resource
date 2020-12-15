@@ -419,7 +419,7 @@ function formLogic() {
             "sibage",
         ],
         eligibleMsg =
-            "To be eligible, children must be older than 2½ years old and younger than 18 years old.",
+            "To be eligible, children must be older than 2� years old and younger than 18 years old.",
         guardianPermissionMsg =
             "Please confirm that you have received your parent or guardians permission to complete this form.";
     refDisAddError =
@@ -562,10 +562,10 @@ function formLogic() {
             $(".refNewAff").css("display", "none");
         } else if (checkVisible == false) {
             document.getElementById("refMpForm").style.display = 'none';
-            $("#refMpForm :input").each(function () {
+            $(".refMpForm :input").each(function () {
                 $(this).val("");
             });
-            $("[id$=refmpsalutation],[id$=refmpspecialty],[id$=refmpstate]").prop("selectedIndex", 0);
+            $("[id$=refmpsalutation],[id$=refmpspecialty]").prop("selectedIndex", 0);
         }
     });
 
@@ -627,19 +627,6 @@ function formLogic() {
         }
     });
 
-    //showing the check box used to replicate the value
-    $(".medProvCat").on("change", function () {
-        var medValSelected = $(".medProvCat").val();
-        var medVal = $.inArray(medValSelected, medicalProviders);
-        if (medVal > -1) {
-            $(".repeatMedProf").css("display", "block");
-            $(".repeatMedProfBest").css("display", "block");
-        } else {
-            $(".repeatMedProf").css("display", "none");
-            $(".repeatMedProfBest").css("display", "none");
-        }
-    });
-
     //Replicating referrer value to treating medical professional
     $(".repeatMedProf").on("change", function () {
         checkVisibleCopy = $(".repeatMedProf input").is(":checked");
@@ -656,7 +643,6 @@ function formLogic() {
                 $(".mstate").val($(".refmpstate").val());
                 $(".mcategory").val($(".refmpcategory").val());
                 $(".mspecialty").val($(".refmpspecialty").val());
-                $(".mzip").val($(".refmpzip").val());
             } else if (checkVisibleNewMp == false) {
                 $(".medToRepeat :input").each(function () {
                     $(this).val("");
@@ -705,7 +691,6 @@ function formLogic() {
                 $(".bstate").val($(".refmpstate").val());
                 $(".bcategory").val($(".refmpcategory").val());
                 $(".bspecialty").val($(".refmpspecialty").val());
-                $(".bzip").val($(".refmpzip").val());
             } else if (checkVisibleNew == false) {
                 $("#medToRepeatBest :input").each(function () {
                     $(this).val("");
@@ -716,7 +701,11 @@ function formLogic() {
             $(".bestMpInfo").css("display", "none");
             $(".repeatMedProf").css("display", "none");
         } else if (checkVisibleCopy == false) {
-            $(".repeatMedProf").css("display", "block");
+            let category = document.querySelectorAll('[id$="refmpcategory"]')[0].value;
+            if (category === 'Nurse Practitioner' || category === 'Physician Assistant'
+                || category === 'Physician') {
+                $(".repeatMedProf").css("display", "block");
+            }
             $("#medToRepeatBest :input").each(function () {
                 $(this).val("");
             });
@@ -791,7 +780,6 @@ function formLogic() {
             $(".sibInfo").css("display", "block");
             // if self or parent/guadian
             if (r2cRadioSelected == "Self" || r2cRadioSelected == "Parent/Guardian") {
-                console.log("self or parent/guardian selected");
                 setIntervalX(
                     function () {
                         $("[id$=psibfirstname],[id$=psibfirstname2]").addClass("firstname");
@@ -1308,8 +1296,6 @@ function formLogic() {
                         '<span class="text-muted age-text">2 1/2 years old</span>'
                     ).insertAfter(wcDob);
                     if (r2cRadioSelected == "Self") {
-                        console.log("between 2.5 - 13 years");
-                        console.log("Self is selected");
                         $("#age13under-modal").modal("show");
                         $(".alertMsg").text(guardianPermissionMsg);
                     }
@@ -1333,8 +1319,6 @@ function formLogic() {
                         " years old</span>"
                     ).insertAfter(wcDob);
                     if (r2cRadioSelected == "Self" && ageGroup == 3) {
-                        console.log("Self is selected");
-                        console.log("between 2.5 - 13 years");
                         $(".alertMsg").text(guardianPermissionMsg);
                         $("#age13under-modal").modal("show");
                     }
@@ -1528,57 +1512,57 @@ function PrimaryDiagnosis() {
     });
 
     pdi.autocomplete({
-            minLength: 2,
-            source: function (request, response) {
-                queryTerm = request.term;
-                WishReferralForm_AC.searchCondition(request.term, function (
-                    result,
-                    event
-                ) {
-                    if (event.type == "exception") {
-                        alert(event.message);
-                    } else {
-                        eventObjects = result;
-                        response(eventObjects);
-                    }
-                });
-            },
-            response: function (event, ui) {
-                ui.content.push({
-                    label: "Please select a diagnosis below",
-                    value: "",
-                });
-            },
-            select: function (event, ui) {
-                var descName = ui.item.Code_To_Use__c;
-                var otherDiagnosis = /^(Other )(.*)$/i.test(ui.item.Name);
-                var notlistedDiagnosis = /^(Not Listed)$/i.test(ui.item.Name);
-                var ss1 = $(".searchDiagnosisId").html(ui.item.Name).text();
-                icd.val("");
-                icd.prop("disabled", false);
-                $(icd).focus();
-                $(pdi).addClass("value-selected");
-                pdi.val(ui.item.Name);
-                pdi.val(ss1);
-                if (typeof descName != "undefined") {
-                    icd.val(ui.item.Code_To_Use__c);
-                    icd.prop("disabled", true);
-                }
-                if (otherDiagnosis || notlistedDiagnosis) {
-                    $(".primary-diagnosis-other").prop("hidden", false);
+        minLength: 2,
+        source: function (request, response) {
+            queryTerm = request.term;
+            WishReferralForm_AC.searchCondition(request.term, function (
+                result,
+                event
+            ) {
+                if (event.type == "exception") {
+                    alert(event.message);
                 } else {
-                    $(".primary-diagnosis-other").prop("hidden", true);
-                    $(".primary-diagnosis-other").find("textarea").val("");
+                    eventObjects = result;
+                    response(eventObjects);
                 }
-                return false;
-            },
-            //SIW-330: Limit Primary Diagnosis field to only accept values from drop-down
-            change: function (event, ui) {
-                if (ui.item == undefined) {
-                    $(this).val("");
-                }
-            },
-        })
+            });
+        },
+        response: function (event, ui) {
+            ui.content.push({
+                label: "Please select a diagnosis below",
+                value: "",
+            });
+        },
+        select: function (event, ui) {
+            var descName = ui.item.Code_To_Use__c;
+            var otherDiagnosis = /^(Other )(.*)$/i.test(ui.item.Name);
+            var notlistedDiagnosis = /^(Not Listed)$/i.test(ui.item.Name);
+            var ss1 = $(".searchDiagnosisId").html(ui.item.Name).text();
+            icd.val("");
+            icd.prop("disabled", false);
+            $(icd).focus();
+            $(pdi).addClass("value-selected");
+            pdi.val(ui.item.Name);
+            pdi.val(ss1);
+            if (typeof descName != "undefined") {
+                icd.val(ui.item.Code_To_Use__c);
+                icd.prop("disabled", true);
+            }
+            if (otherDiagnosis || notlistedDiagnosis) {
+                $(".primary-diagnosis-other").prop("hidden", false);
+            } else {
+                $(".primary-diagnosis-other").prop("hidden", true);
+                $(".primary-diagnosis-other").find("textarea").val("");
+            }
+            return false;
+        },
+        //SIW-330: Limit Primary Diagnosis field to only accept values from drop-down
+        change: function (event, ui) {
+            if (ui.item == undefined) {
+                $(this).val("");
+            }
+        },
+    })
         .data("ui-autocomplete")._renderItem = function (ul, item) {
         var entry = "<a>" + item.Name;
 

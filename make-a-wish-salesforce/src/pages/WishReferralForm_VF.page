@@ -126,7 +126,8 @@
                         <div class="col-sm-6">
                             <apex:inputField value="{!currLead.Referring_MP_Category__c}"
                                              styleClass="form-control col-xs-12 col-sm-12 c-select medProvCat refmpcategory"
-                                             id="refmpcategory" onchange="getInputValue();"/>
+                                             id="refmpcategory"
+                                             onchange="getInputValue();changeMedicalCategory(this.value)"/>
                         </div>
                     </div>
                     <div class="form-group row other">
@@ -732,7 +733,7 @@
                             </div>
 
                             <apex:outputPanel id="rr">
-                                <apex:actionRegion >
+                                <apex:actionRegion>
                                     <div class="form-group row">
                                         <div class="col-sm-3"><label>{!$Label.Wish_Referral_Number_of_Siblings}</label>
                                         </div>
@@ -748,25 +749,26 @@
                                     </div>
                                     <div class="form-group row sibInfo">
                                         <apex:outputPanel id="table">
-                                            <apex:outputPanel rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
+                                            <apex:outputPanel
+                                                    rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
                                                 <label class="col-md-12">{!$Label.Wish_Referral_Sibling_Information}</label>
                                             </apex:outputPanel>
                                             <div class="col-md-12 sib-tablewrap">
                                                 <apex:dataTable value="{!SiblingList}" var="currsibling"
                                                                 styleClass="table table-maw table-hover">
-                                                    <apex:column >
+                                                    <apex:column>
                                                         <apex:inputText value="{!currsibling.fName}"
                                                                         styleClass="form-control"
                                                                         html-placeholder="{!$Label.Wish_Referral_Placeholder_First_Name}"
                                                                         id="psibfirstname"/>
                                                     </apex:column>
-                                                    <apex:column >
+                                                    <apex:column>
                                                         <apex:inputText value="{!currsibling.lName}"
                                                                         styleClass="form-control"
                                                                         html-placeholder="{!$Label.Wish_Referral_Last_Name}"
                                                                         id="psiblastname"/>
                                                     </apex:column>
-                                                    <apex:column >
+                                                    <apex:column>
                                                         <apex:inputText value="{!currsibling.age}"
                                                                         styleClass="form-control"
                                                                         html-placeholder="{!$Label.Wish_Referral_Age}"
@@ -1607,7 +1609,7 @@
         </div>
     </div>
     <!-- / modal end -->
-    <apex:includeLightning />
+    <apex:includeLightning/>
     <script>
         function updateHtfFilter(lookupId, value, pluralHint) {
             let filter = value === '' ? '' : {BillingState: 'BillingState = \'' + value + '\''};
@@ -1771,7 +1773,7 @@
     <!--<script src="//ssl.wish.org/satellite/staging/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205-staging.js"></script>-->
     <!-- prod -->
     <script src="//ssl.wish.org/satellite/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205.js"></script>
-    <apex:outputPanel >
+    <apex:outputPanel>
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-2.2.4.min.js')}"></script>
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-ui-1.11.3.min.js')}"></script>
         <script>
@@ -1863,6 +1865,8 @@
 
 
 
+
+
         </script>
         <script>_satellite.pageBottom();</script>
     </apex:outputPanel>
@@ -1918,6 +1922,31 @@
             }
             if (val == 'Parent/Guardian') {
                 $(".shownOnYes").addClass("fam-aware-overlay");
+            }
+        }
+
+        function changeMedicalCategory(category) {
+            if (category === 'Social Worker' || category === 'Child Life Professional'
+                || category === 'Nurse' || category === 'Other') {
+                document.querySelectorAll('[id$="trtSameAsRefInfoChk"]')[0].checked = false;
+                document.getElementsByClassName('trtMpInfo')[0].style.display = 'block';
+                document.getElementsByClassName('repeatMedProf')[0].style.display = 'none';
+                document.getElementsByClassName('repeatMedProfBest')[0].style.display = 'block';
+            } else if (category === 'Nurse Practitioner' || category === 'Physician Assistant'
+                || category === 'Physician') {
+                if (document.querySelectorAll('[id$="trtSameAsRefInfoChk"]')[0].checked === false
+                    && document.querySelectorAll('[id$="bestSameAsRefInfoChk"]')[0].checked === true) {
+                    document.getElementsByClassName('repeatMedProf')[0].style.display = 'none';
+                    document.getElementsByClassName('repeatMedProfBest')[0].style.display = 'block';
+                } else if (document.querySelectorAll('[id$="trtSameAsRefInfoChk"]')[0].checked === true
+                    && document.querySelectorAll('[id$="bestSameAsRefInfoChk"]')[0].checked === false) {
+                    document.getElementsByClassName('repeatMedProf')[0].style.display = 'block';
+                    document.getElementsByClassName('repeatMedProfBest')[0].style.display = 'none';
+                } else if (document.querySelectorAll('[id$="trtSameAsRefInfoChk"]')[0].checked === false
+                    && document.querySelectorAll('[id$="bestSameAsRefInfoChk"]')[0].checked === false) {
+                    document.getElementsByClassName('repeatMedProf')[0].style.display = 'block';
+                    document.getElementsByClassName('repeatMedProfBest')[0].style.display = 'block';
+                }
             }
         }
 
@@ -1986,7 +2015,7 @@
                 if (awareOfReferral === 'Yes' && refMpCategory !== undefined && refMpCategory !== ''
                     && refMpCategory !== 'Please select an option') {
                     $(".shownOnYes").removeClass("fam-aware-overlay");
-                } else if (awareOfReferral === 'No'){
+                } else if (awareOfReferral === 'No') {
                     $(".shownOnYes").addClass("fam-aware-overlay");
                 }
             } else {
@@ -2056,6 +2085,7 @@
                 let fieldPair;
                 let inputType;
                 let fieldCreateCheckbox;
+
                 if (eventData.lookupId === 'externalReferrerContactLookup') {
                     field = document.querySelector('#externalReferrerContactLookup');
                     fieldOutput = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0];
@@ -2203,7 +2233,9 @@
                     if (inputType === 'referrerContact') {
                         document.querySelector('[id$="createNewRefMPchk"]').disabled = false;
                         document.getElementsByClassName('refNewAff')[0].style.display = 'none';
-                        document.getElementsByClassName('repeatMedProfBest')[0].style.display = 'block';
+                        if (document.querySelectorAll('[id$="trtSameAsRefInfoChk"]')[0].checked === false) {
+                            document.getElementsByClassName('repeatMedProfBest')[0].style.display = 'block';
+                        }
                     } else if (inputType === 'referrerAccount') {
                         document.querySelector('[id$="createNewRefHTFchk"]').disabled = false;
                         let referringContact = document.getElementById('j_id0:frm:referrerContactEmpty').value;
@@ -2213,7 +2245,9 @@
                     } else if (inputType === 'treatingContact') {
                         document.querySelector('[id$="createNewTrtMPchk"]').disabled = false;
                         document.getElementsByClassName('trtNewAff')[0].style.display = 'none';
-                        document.getElementsByClassName('repeatMedProfBest')[0].style.display = 'block'
+                        if (document.querySelectorAll('[id$="trtSameAsRefInfoChk"]')[0].checked === false) {
+                            document.getElementsByClassName('repeatMedProfBest')[0].style.display = 'block';
+                        }
                     } else if (inputType === 'bestContact') {
                         document.querySelector('[id$="createNewBestMPchk"]').disabled = false;
                         document.getElementsByClassName('bestNewAff')[0].style.display = 'none';
@@ -2463,6 +2497,7 @@
                 console.log(err);
             }
         }
+
     </script>
     <!-- custom style for referral page -->
     <style>
