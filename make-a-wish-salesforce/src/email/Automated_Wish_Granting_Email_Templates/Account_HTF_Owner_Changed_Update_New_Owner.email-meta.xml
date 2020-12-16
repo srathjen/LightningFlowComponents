@@ -13,7 +13,9 @@
 {!Account.BillingAddress}
 {!Account.Phone}
 
-{!Account.Link}</textOnly>
+{!Account.Link}
+
+Please note: Because of the change in ownership, the region code for this record has been removed.  Please review this HTF record and update it as necessary.</textOnly>
     <type>html</type>
     <uiType>Aloha</uiType>
 </EmailTemplate>

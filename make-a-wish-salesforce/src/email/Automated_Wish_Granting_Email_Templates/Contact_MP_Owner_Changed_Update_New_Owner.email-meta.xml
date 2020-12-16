@@ -6,7 +6,7 @@
     <name>Contact: MP Owner Changed.  Update New Owner</name>
     <style>freeForm</style>
     <subject>{!Contact.Name} has been re-assigned to the {!Contact.Hidden_Chapter_Name__c} Chapter</subject>
-    <textOnly>A medical professional&apos;s contact record has been re-assigned to the {!Contact.Hidden_Chapter_Name__c} Chapter!
+    <textOnly>A medical professional&apos;s contact record has been re-assigned to the {!Contact.Hidden_Chapter_Name__c} Chapter.
 
 {!Contact.Name}
 {!Contact.MailingAddress}
@@ -17,7 +17,9 @@
 {!Contact.Provider_Type__c}
 {!Contact.Specialty__c}
 
-{!Contact.Link}</textOnly>
+{!Contact.Link}
+
+Please note: Because of the change in ownership, the region code for this record has been removed.  Please review this MP record and update it as necessary.</textOnly>
     <type>html</type>
     <uiType>Aloha</uiType>
 </EmailTemplate>
