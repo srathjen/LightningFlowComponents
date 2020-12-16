@@ -88,7 +88,7 @@
                                  disabled="true"/>
             </div>
         </td>
-        <td role="gridcell" data-label="{!v.relationshipLabels.treating_hcp__c}">
+        <td role="gridcell" data-label="{!'Current ' + v.relationshipLabels.treating_hcp__c}">
             <div class="text-align-left">
                 <lightning:input type="checkbox"
                                  name="relationshipTreatingHcp"
@@ -104,11 +104,11 @@
                                  disabled="true"/>
             </div>
         </td>
-        <td role="gridcell" data-label="{!v.relationshipLabels.former_mp__c}">
+        <td role="gridcell" data-label="{!v.relationshipLabels.referring_medical_professional__c}">
             <div class="text-align-left">
                 <lightning:input type="checkbox"
                                  name="relationshipFormerMedicalProfessional"
-                                 checked="{!v.wishMedicalProfessional.Relationship__r.Former_MP__c}"
+                                 checked="{!v.wishMedicalProfessional.Relationship__r.Referring_Medical_Professional__c}"
                                  disabled="true"/>
             </div>
         </td>
@@ -305,7 +305,7 @@
                                                       iconName="utility:edit"
                                                       onclick="{!c.onClickEdit}"/>
                                 <span id="text-input-id-1"><lightning:input type="checkbox"
-                                                                            label="{!v.relationshipLabels.treating_hcp__c}"
+                                                                            label="{!'Current ' + v.relationshipLabels.treating_hcp__c}"
                                                                             disabled="true"
                                                                             checked="{!v.wishMedicalProfessional.Relationship__r.Treating_HCP__c}"/></span>
                             </div>
@@ -865,7 +865,7 @@
                     </div>
                     <div class="slds-col slds-medium-size_1-of-2 slds-x-small-size_1-of-1 text-align-left">
                         <lightning:input type="checkbox"
-                                         label="{!v.relationshipLabels.treating_hcp__c}"
+                                         label="{!'Current ' + v.relationshipLabels.treating_hcp__c}"
                                          name="relationshipTreatingHcp"
                                          checked="{!v.wishMedicalProfessional.Relationship__r.Treating_HCP__c}"
                                          class="slds-p-top_medium"/>

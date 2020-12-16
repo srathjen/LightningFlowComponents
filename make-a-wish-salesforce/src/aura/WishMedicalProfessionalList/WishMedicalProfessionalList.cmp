@@ -113,7 +113,7 @@
                     </th>
                     <th scope="col" title="{!v.relationshipLabels.treating_hcp__c}">
                         <div class="slds-cell-wrap">
-                            <span id="tableHeaderText">{!v.relationshipLabels.treating_hcp__c}</span>
+                            <span id="tableHeaderText">{!'Current ' + v.relationshipLabels.treating_hcp__c}</span>
                         </div>
                     </th>
                     <th scope="col" title="{!v.relationshipLabels.best_contact__c}">
@@ -121,9 +121,9 @@
                             <span id="tableHeaderText">{!v.relationshipLabels.best_contact__c}</span>
                         </div>
                     </th>
-                    <th scope="col" title="{!v.relationshipLabels.former_mp__c}">
+                    <th scope="col" title="{!v.relationshipLabels.referring_medical_professional__c}">
                         <div class="slds-cell-wrap">
-                            <span id="tableHeaderText">{!v.relationshipLabels.former_mp__c}</span>
+                            <span id="tableHeaderText">{!v.relationshipLabels.referring_medical_professional__c}</span>
                         </div>
                     </th>
                     <th scope="col" title="{!v.wishAffiliationLabels.send_clearance_forms_to__c}">
@@ -280,7 +280,7 @@
                             </div>
                             <div class="slds-col slds-size_6-of-12">
                                 <lightning:input type="checkbox"
-                                                 label="{!v.relationshipLabels.treating_hcp__c}"
+                                                 label="{!'Current ' + v.relationshipLabels.treating_hcp__c}"
                                                  name="relationshipTreatingHcp"
                                                  checked="{!v.newWishMedicalProfessional.Relationship__r.Treating_HCP__c}"
                                                  class="slds-p-top_small"/>
