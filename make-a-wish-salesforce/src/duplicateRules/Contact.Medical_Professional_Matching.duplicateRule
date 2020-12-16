@@ -28,17 +28,10 @@
             <table>Contact</table>
         </duplicateRuleFilterItems>
         <duplicateRuleFilterItems>
-            <field>Alias</field>
+            <field>Profile</field>
             <operation>notEqual</operation>
-            <value>iuser</value>
+            <value>Integration</value>
             <sortOrder>4</sortOrder>
-            <table>User</table>
-        </duplicateRuleFilterItems>
-        <duplicateRuleFilterItems>
-            <field>Alias</field>
-            <operation>notEqual</operation>
-            <value>dtran</value>
-            <sortOrder>5</sortOrder>
             <table>User</table>
         </duplicateRuleFilterItems>
     </duplicateRuleFilter>
@@ -47,7 +40,7 @@
         <matchingRule>Medical_Professional_Contact_Match</matchingRule>
         <objectMapping xsi:nil="true"/>
     </duplicateRuleMatchRules>
-    <isActive>true</isActive>
+    <isActive>false</isActive>
     <masterLabel>Medical Professional Matching</masterLabel>
     <operationsOnInsert>Alert</operationsOnInsert>
     <operationsOnInsert>Report</operationsOnInsert>
