@@ -14,17 +14,10 @@
             <table>Lead</table>
         </duplicateRuleFilterItems>
         <duplicateRuleFilterItems>
-            <field>Alias</field>
+            <field>Profile</field>
             <operation>notEqual</operation>
-            <value>dtran</value>
+            <value>Integration</value>
             <sortOrder>2</sortOrder>
-            <table>User</table>
-        </duplicateRuleFilterItems>
-        <duplicateRuleFilterItems>
-            <field>Alias</field>
-            <operation>notEqual</operation>
-            <value>iuser</value>
-            <sortOrder>3</sortOrder>
             <table>User</table>
         </duplicateRuleFilterItems>
     </duplicateRuleFilter>
@@ -77,7 +70,7 @@
             <outputObject>Contact</outputObject>
         </objectMapping>
     </duplicateRuleMatchRules>
-    <isActive>true</isActive>
+    <isActive>false</isActive>
     <masterLabel>Potential Duplicates</masterLabel>
     <operationsOnUpdate>Report</operationsOnUpdate>
     <securityOption>EnforceSharingRules</securityOption>
