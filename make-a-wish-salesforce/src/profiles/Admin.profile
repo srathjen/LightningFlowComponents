@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="UTF-8"?>
+<Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <classAccesses>
         <apexClass>AWSFilePathService</apexClass>
         <enabled>true</enabled>
@@ -12211,6 +12212,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Best_Contact_Zip_Code__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.MP_HTFs_Matched__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Matched__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

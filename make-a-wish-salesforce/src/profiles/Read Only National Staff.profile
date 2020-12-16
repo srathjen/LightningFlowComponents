@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="UTF-8"?>
+<Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <classAccesses>
         <apexClass>AddVolunteerRole_AC</apexClass>
         <enabled>false</enabled>
@@ -11724,6 +11725,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Lead.MP_HTFs_Matched__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Lead.Matched_Referring_MP_Email__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -11735,6 +11741,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Lead.Matched_Referring_MP_Last_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Matched__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
