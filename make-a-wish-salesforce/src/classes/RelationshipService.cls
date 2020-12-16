@@ -56,7 +56,7 @@ public class RelationshipService {
 				newRelationship.npe4__RelatedContact__c = convertedLead.Treating_MP__c;
 				newRelationship.npe4__Status__c = RELATIONSHIP_ACTIVE;
 			}
-            newRelationship.Treating_HCP__c = true;
+            		newRelationship.Treating_HCP__c = true;
 			Boolean isTreatingMedicalProfessionalAlsoReferrer = convertedLead.Treating_MP__c == convertedLead.Referring_MP__c;
 			if (isTreatingMedicalProfessionalAlsoReferrer) {
 				newRelationship.Referring_Medical_Professional__c = true;
