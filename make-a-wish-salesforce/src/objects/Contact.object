@@ -3212,7 +3212,7 @@ IF(ISBLANK(COI_Expiration_Date__c)=TRUE, IMAGE("/resource/icons/COI_Missing.png"
         <externalId>false</externalId>
         <formula>Datevalue(CreatedDate)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Created Date</label>
+        <label>Created Date (No Time)</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <type>Date</type>

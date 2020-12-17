@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- BDE Entry FS --></label>
         <name>npsp__BDE_Entry_FS</name>
@@ -344,6 +344,10 @@
         <name>Broadcast_Number__c</name>
     </fields>
     <fields>
+        <label><!-- Bypass MP Duplicate Rule --></label>
+        <name>Bypass_Duplicate_Rule__c</name>
+    </fields>
+    <fields>
         <label><!-- COI Expiration Date --></label>
         <name>COI_Expiration_Date__c</name>
     </fields>
@@ -361,12 +365,60 @@
         <name>Chapter_Intake_Manager__c</name>
     </fields>
     <fields>
+        <label><!-- Chapter Match --></label>
+        <name>Chapter_Match__c</name>
+    </fields>
+    <fields>
         <label><!-- City --></label>
         <name>City_Employer__c</name>
     </fields>
     <fields>
         <label><!-- Class In School --></label>
         <name>Class_in_School__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact Email Status --></label>
+        <name>CloudingoAgent__CES__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mailing Address Record Type --></label>
+        <name>CloudingoAgent__MAR__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mailing Address Status --></label>
+        <name>CloudingoAgent__MAS__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mailing Address Vacancy --></label>
+        <name>CloudingoAgent__MAV__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mailing Residential Delivery Indicator --></label>
+        <name>CloudingoAgent__MRDI__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mailing Timezone --></label>
+        <name>CloudingoAgent__MTZ__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Address Record Type --></label>
+        <name>CloudingoAgent__OAR__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Address Status --></label>
+        <name>CloudingoAgent__OAS__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Address Vacancy --></label>
+        <name>CloudingoAgent__OAV__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Residential Delivery Indicator --></label>
+        <name>CloudingoAgent__ORDI__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Timezone --></label>
+        <name>CloudingoAgent__OTZ__c</name>
     </fields>
     <fields>
         <label><!-- Cognitive Delays --></label>
@@ -450,7 +502,7 @@
         <name>Created_Date_Test__c</name>
     </fields>
     <fields>
-        <label><!-- Created Date --></label>
+        <label><!-- Created Date (No Time) --></label>
         <name>Created_Date__c</name>
     </fields>
     <fields>
@@ -503,6 +555,10 @@
         <name>Department__c</name>
     </fields>
     <fields>
+        <label><!-- Designated Master Record --></label>
+        <name>Designated_Master_Record__c</name>
+    </fields>
+    <fields>
         <label><!-- Diagnosis Given By Referrer --></label>
         <name>Diagnosis_Given_By_Referrer__c</name>
     </fields>
@@ -512,7 +568,7 @@
     </fields>
     <fields>
         <help><!-- Captures additional notes about the contact&apos;s communication preferences and any considerations --></help>
-        <label><!-- Contact Notes --></label>
+        <label><!-- Do Not Contact Notes --></label>
         <name>Do_Not_Contact_Notes__c</name>
     </fields>
     <fields>
@@ -546,6 +602,10 @@
             <masterLabel>Preferred</masterLabel>
             <translation><!-- Preferred --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Duplicate Flag --></label>
+        <name>Duplicate_Flag__c</name>
     </fields>
     <fields>
         <label><!-- Edit Access --></label>
@@ -1150,6 +1210,10 @@ and the date it was or will be granted. --></help>
         <name>Lead_Created_Date__c</name>
     </fields>
     <fields>
+        <label><!-- M&amp;M Duplicate Check --></label>
+        <name>MM_Duplicate_Check__c</name>
+    </fields>
+    <fields>
         <label><!-- MP Additional Clinical Details --></label>
         <name>MP_Additional_Clinical_Details__c</name>
     </fields>
@@ -1207,6 +1271,10 @@ and the date it was or will be granted. --></help>
         <help><!-- To change the status, create or update this contact&apos;s related &apos;Organization Affiliation&apos; records to a status of &apos;Active&apos; or &apos;Inactive&apos;. Note: this is the record or records related to the Chapter not a health treatment facility. --></help>
         <label><!-- MP Status --></label>
         <name>Medical_Professional_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- MergeGroup --></label>
+        <name>MergeGroup__c</name>
     </fields>
     <fields>
         <label><!-- Middle Name --></label>
@@ -1335,7 +1403,7 @@ and the date it was or will be granted. --></help>
         <name>OtherAddressVerified__c</name>
     </fields>
     <fields>
-        <label><!-- Other Medical Provider Category --></label>
+        <label><!-- Other Medical Professional Type --></label>
         <name>Other_Medical_Provider_Category__c</name>
     </fields>
     <fields>
@@ -1466,36 +1534,8 @@ and the date it was or will be granted. --></help>
         <name>Provided_additional_information__c</name>
     </fields>
     <fields>
-        <label><!-- Medical Provider Type --></label>
+        <label><!-- Medical Professional Type --></label>
         <name>Provider_Type__c</name>
-        <picklistValues>
-            <masterLabel>Child Life Professional</masterLabel>
-            <translation><!-- Child Life Professional --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Nurse</masterLabel>
-            <translation><!-- Nurse --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Nurse Practitioner</masterLabel>
-            <translation><!-- Nurse Practitioner --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Other</masterLabel>
-            <translation><!-- Other --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Physician</masterLabel>
-            <translation><!-- Physician --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Physician Assistant</masterLabel>
-            <translation><!-- Physician Assistant --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Social Worker</masterLabel>
-            <translation><!-- Social Worker --></translation>
-        </picklistValues>
     </fields>
     <fields>
         <help><!-- Check this box if you feel the wish child would be a good publicity candidate. --></help>
@@ -2460,162 +2500,6 @@ provide contact information for each site on which you are active. --></help>
     <fields>
         <label><!-- Specialty --></label>
         <name>Specialty__c</name>
-        <picklistValues>
-            <masterLabel>Anesthesiology</masterLabel>
-            <translation><!-- Anesthesiology --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Cardio-thoracic Surgeon</masterLabel>
-            <translation><!-- Cardio-thoracic Surgeon --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Cardiology</masterLabel>
-            <translation><!-- Cardiology --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Critical Care</masterLabel>
-            <translation><!-- Critical Care --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Dermatology</masterLabel>
-            <translation><!-- Dermatology --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Developmental Pediatrics</masterLabel>
-            <translation><!-- Developmental Pediatrics --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>ENT (Ear, Nose &amp; Throat)</masterLabel>
-            <translation><!-- ENT (Ear, Nose &amp; Throat) --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Emergency Medicine</masterLabel>
-            <translation><!-- Emergency Medicine --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Endocrinology</masterLabel>
-            <translation><!-- Endocrinology --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Gastroenterology</masterLabel>
-            <translation><!-- Gastroenterology --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>General Pediatrics</masterLabel>
-            <translation><!-- General Pediatrics --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>General Surgery</masterLabel>
-            <translation><!-- General Surgery --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Genetics</masterLabel>
-            <translation><!-- Genetics --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Gynecology</masterLabel>
-            <translation><!-- Gynecology --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Hematology-Oncology</masterLabel>
-            <translation><!-- Hematology-Oncology --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Hepatology</masterLabel>
-            <translation><!-- Hepatology --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Hospice/Palliative Care</masterLabel>
-            <translation><!-- Hospice/Palliative Care --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Hospitalist</masterLabel>
-            <translation><!-- Hospitalist --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Immunology</masterLabel>
-            <translation><!-- Immunology --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Infectious Disease</masterLabel>
-            <translation><!-- Infectious Disease --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Internal Medicine/Hospitalist</masterLabel>
-            <translation><!-- Internal Medicine/Hospitalist --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Interventional Radiology</masterLabel>
-            <translation><!-- Interventional Radiology --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Metabolics</masterLabel>
-            <translation><!-- Metabolics --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Nephrology</masterLabel>
-            <translation><!-- Nephrology --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Neurology</masterLabel>
-            <translation><!-- Neurology --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Neurosurgery</masterLabel>
-            <translation><!-- Neurosurgery --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Ophthalmology</masterLabel>
-            <translation><!-- Ophthalmology --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Orthopedics</masterLabel>
-            <translation><!-- Orthopedics --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Pain Medicine</masterLabel>
-            <translation><!-- Pain Medicine --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Physical Medicine &amp; Rehabilitation</masterLabel>
-            <translation><!-- Physical Medicine &amp; Rehabilitation --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Psychiatry</masterLabel>
-            <translation><!-- Psychiatry --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Psychology</masterLabel>
-            <translation><!-- Psychology --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Pulmonology</masterLabel>
-            <translation><!-- Pulmonology --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Radiation Oncology</masterLabel>
-            <translation><!-- Radiation Oncology --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Radiology</masterLabel>
-            <translation><!-- Radiology --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Rheumatology</masterLabel>
-            <translation><!-- Rheumatology --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Transplant</masterLabel>
-            <translation><!-- Transplant --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Trauma &amp; Emergency Services</masterLabel>
-            <translation><!-- Trauma &amp; Emergency Services --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Urology</masterLabel>
-            <translation><!-- Urology --></translation>
-        </picklistValues>
     </fields>
     <fields>
         <label><!-- Sport/Athlete --></label>
@@ -2849,6 +2733,18 @@ provide contact information for each site on which you are active. --></help>
         <label><!-- Suffix --></label>
         <name>Suffix__c</name>
         <picklistValues>
+            <masterLabel>APNP</masterLabel>
+            <translation><!-- APNP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>APRN</masterLabel>
+            <translation><!-- APRN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CCLS</masterLabel>
+            <translation><!-- CCLS --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>CLS</masterLabel>
             <translation><!-- CLS --></translation>
         </picklistValues>
@@ -2873,6 +2769,10 @@ provide contact information for each site on which you are active. --></help>
             <translation><!-- Jr. --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>LCSW</masterLabel>
+            <translation><!-- LCSW --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>LPN</masterLabel>
             <translation><!-- LPN --></translation>
         </picklistValues>
@@ -2891,6 +2791,10 @@ provide contact information for each site on which you are active. --></help>
         <picklistValues>
             <masterLabel>MD</masterLabel>
             <translation><!-- MD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MSN</masterLabel>
+            <translation><!-- MSN --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>MSW</masterLabel>
@@ -2917,6 +2821,10 @@ provide contact information for each site on which you are active. --></help>
             <translation><!-- PT --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>PhD</masterLabel>
+            <translation><!-- PhD --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>PharmD</masterLabel>
             <translation><!-- PharmD --></translation>
         </picklistValues>
@@ -2931,6 +2839,10 @@ provide contact information for each site on which you are active. --></help>
         <picklistValues>
             <masterLabel>RRT</masterLabel>
             <translation><!-- RRT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ST</masterLabel>
+            <translation><!-- ST --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Sr.</masterLabel>
@@ -3650,7 +3562,6 @@ provide contact information for each site on which you are active. --></help>
         <name>npe01__Type_of_Account__c</name>
     </fields>
     <fields>
-        <help>Siehe Feld "Bevorzugte E-Mail-Adresse".</help>
         <label><!-- Work Email --></label>
         <name>npe01__WorkEmail__c</name>
     </fields>
@@ -4324,6 +4235,26 @@ provide contact information for each site on which you are active. --></help>
         <label><!-- Wish Survey Contact Information --></label>
         <name>Wish_Survey_Contact_Information</name>
     </quickActions>
+    <quickActions>
+        <label><!-- DocuSign --></label>
+        <name>dsfs__ContactDocuSignAction</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New Affiliation --></label>
+        <name>npsp__New_Affiliation</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New Recurring Donation --></label>
+        <name>npsp__New_Recurring_Donation</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New Relationship --></label>
+        <name>npsp__New_Relationship</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Quick Update --></label>
+        <name>npsp__Quick_Update</name>
+    </quickActions>
     <recordTypes>
         <description><!-- A contact representing a board member --></description>
         <label><!-- Board Member --></label>
@@ -4385,6 +4316,10 @@ provide contact information for each site on which you are active. --></help>
         <errorMessage><!-- Please populate a Chapter Name or Zip Code to ensure the MP gets routed to a chapter. --></errorMessage>
         <name>Ensure_the_MP_has_a_Chapter_or_Zip</name>
     </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please leave the &apos;Chapter Name&apos; blank so the record can be routed to the correct chapter based on its zip code. --></errorMessage>
+        <name>Suppress_Chapter_input_on_new_MPs</name>
+    </validationRules>
     <webLinks>
         <label><!-- LOOP --></label>
         <name>Loop__LOOP</name>
@@ -4424,6 +4359,10 @@ provide contact information for each site on which you are active. --></help>
     <webLinks>
         <label><!-- Merge_Contacts --></label>
         <name>npsp__Merge_Contacts</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- New_Gift --></label>
+        <name>npsp__New_Gift</name>
     </webLinks>
     <webLinks>
         <label><!-- Recalculate_Rollups --></label>
