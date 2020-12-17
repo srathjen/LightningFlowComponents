@@ -130,7 +130,7 @@ Modification Log:
         if (!paperDVProcess && !AgeRequirementNotMet) {
             _this.navigateTo("/apex/LeadSelectMedEmail_VF?id=" + lead.Id);
         } else if (!paperDVProcess && AgeRequirementNotMet) {
-            let verificationMessage = "This child did not meet our referral age. A DV should not be sent for this child unless your chapter has received a waiver from the Chapter Performance Committee. " + verificationMessage;
+            let verificationMessage = "This child did not meet our referral age. A DV should not be sent for this child unless your chapter has received a waiver from the Chapter Performance Committee.";
             // }
             _this.handleConfirmation(false, component, verificationMessage, function () {
                 let checkMedProf = (lead.Treating_Medical_Professional_Email__c || lead.Treating_MP__c),
