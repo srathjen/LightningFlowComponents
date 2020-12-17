@@ -177,16 +177,6 @@
             </quickActionLayoutItems>
             <quickActionLayoutItems>
                 <emptySpace>false</emptySpace>
-                <field>Responds_to_treatment_with_normal_health__c</field>
-                <uiBehavior>Edit</uiBehavior>
-            </quickActionLayoutItems>
-            <quickActionLayoutItems>
-                <emptySpace>false</emptySpace>
-                <field>Risk_of_complications_premature_death__c</field>
-                <uiBehavior>Edit</uiBehavior>
-            </quickActionLayoutItems>
-            <quickActionLayoutItems>
-                <emptySpace>false</emptySpace>
                 <field>Treatment_may_be_feasible_but_can_fail__c</field>
                 <uiBehavior>Edit</uiBehavior>
             </quickActionLayoutItems>
