@@ -3782,8 +3782,8 @@
     <dynamicChoiceSets>
         <name>HTFStatePicklist</name>
         <dataType>Picklist</dataType>
-        <displayField xsi:nil="true" />
-        <object xsi:nil="true" />
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
         <picklistField>Treating_MP_HTF_State__c</picklistField>
         <picklistObject>Lead</picklistObject>
         <sortOrder>Asc</sortOrder>
@@ -3837,8 +3837,8 @@
     <dynamicChoiceSets>
         <name>MPStatePicklist</name>
         <dataType>Picklist</dataType>
-        <displayField xsi:nil="true" />
-        <object xsi:nil="true" />
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
         <picklistField>Treating_MP_State__c</picklistField>
         <picklistObject>Lead</picklistObject>
         <sortOrder>Asc</sortOrder>
@@ -7454,6 +7454,9 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, &quot;&quot;, &quot;&quot;)))</ex
         <fields>
             <name>Referring_MP</name>
             <dataType>Boolean</dataType>
+            <defaultValue>
+                <booleanValue>true</booleanValue>
+            </defaultValue>
             <fieldText>&lt;div style=&quot;color:#16325C;font-size:16px;&quot;;&gt; {!ReferringMPName}    (Referring MP)&lt;/div&gt;</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
@@ -7482,6 +7485,9 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, &quot;&quot;, &quot;&quot;)))</ex
         <fields>
             <name>Referring_HTF</name>
             <dataType>Boolean</dataType>
+            <defaultValue>
+                <booleanValue>true</booleanValue>
+            </defaultValue>
             <fieldText>&lt;div style=&quot;color:#16325C;font-size:16px;&quot;;&gt; {!ReferringHTFName}    (Referring HTF)&lt;/div&gt;</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
@@ -7510,6 +7516,9 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, &quot;&quot;, &quot;&quot;)))</ex
         <fields>
             <name>Treating_MP</name>
             <dataType>Boolean</dataType>
+            <defaultValue>
+                <booleanValue>true</booleanValue>
+            </defaultValue>
             <fieldText>&lt;div style=&quot;color:#16325C;font-size:16px;&quot;;&gt; {!TreatingMPName}    (Treating MP)&lt;/div&gt;</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
@@ -7535,6 +7544,9 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, &quot;&quot;, &quot;&quot;)))</ex
         <fields>
             <name>Treating_HTF</name>
             <dataType>Boolean</dataType>
+            <defaultValue>
+                <booleanValue>true</booleanValue>
+            </defaultValue>
             <fieldText>&lt;div style=&quot;color:#16325C;font-size:16px;&quot;;&gt; {!TreatingHTFName}    (Treating HTF)&lt;/div&gt;</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
@@ -7563,6 +7575,9 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, &quot;&quot;, &quot;&quot;)))</ex
         <fields>
             <name>Best_Contact</name>
             <dataType>Boolean</dataType>
+            <defaultValue>
+                <booleanValue>true</booleanValue>
+            </defaultValue>
             <fieldText>&lt;div style=&quot;color:#16325C;font-size:16px;&quot;;&gt; {!BestContactMPName}    (Best Medical Contact)&lt;/div&gt;</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
@@ -7591,6 +7606,9 @@ IF({!MPType}=&quot;Best Medical Contact&quot;, &quot;&quot;, &quot;&quot;)))</ex
         <fields>
             <name>Best_Contact_HTF</name>
             <dataType>Boolean</dataType>
+            <defaultValue>
+                <booleanValue>true</booleanValue>
+            </defaultValue>
             <fieldText>&lt;div style=&quot;color:#16325C;font-size:16px;&quot;;&gt; {!BestContactHTFName}    (Best Medical Contact HTF)&lt;/div&gt;</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
