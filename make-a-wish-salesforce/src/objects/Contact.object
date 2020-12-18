@@ -1896,8 +1896,7 @@
     </fields>
     <fields>
         <fullName>AccountId</fullName>
-        <inlineHelpText>Volunteer, Medical Professional, Board Member- Chapter account
-Wish Child, Wish Family- Household account</inlineHelpText>
+        <inlineHelpText>This field is automatically populated by the system upon creation of a new record.</inlineHelpText>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Lookup</type>
@@ -3213,7 +3212,7 @@ IF(ISBLANK(COI_Expiration_Date__c)=TRUE, IMAGE("/resource/icons/COI_Missing.png"
         <externalId>false</externalId>
         <formula>Datevalue(CreatedDate)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Created Date</label>
+        <label>Created Date (No Time)</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <type>Date</type>
@@ -3401,7 +3400,7 @@ null)</formula>
         <description>It will capture the detail information about the contact notes</description>
         <externalId>false</externalId>
         <inlineHelpText>Captures additional notes about the contact's communication preferences and any considerations</inlineHelpText>
-        <label>Contact Notes</label>
+        <label>Do Not Contact Notes</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -9836,7 +9835,7 @@ IF( Volunteer_Count__c &gt; 0 &amp;&amp; is_Active_Volunteer__c = FALSE, IMAGE("
         <deprecated>false</deprecated>
         <description>Alternate Email is an optional fourth email: Not personal, preferred, or work email.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Alternate Email is an optional fourth email: Not personal, preferred, or work email.</inlineHelpText>
+        <inlineHelpText>Alternate emails are optional and should be used for medical professionals who work at more than one location.</inlineHelpText>
         <label>Alternate Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -10172,7 +10171,6 @@ IF(ISPICKVAL(npe01__Secondary_Address_Type__c,"Other"),
         <deprecated>false</deprecated>
         <description>See Preferred Email field.</description>
         <externalId>false</externalId>
-        <inlineHelpText>See Preferred Email field.</inlineHelpText>
         <label>Work Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
