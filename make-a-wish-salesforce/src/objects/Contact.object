@@ -9835,7 +9835,7 @@ IF( Volunteer_Count__c &gt; 0 &amp;&amp; is_Active_Volunteer__c = FALSE, IMAGE("
         <deprecated>false</deprecated>
         <description>Alternate Email is an optional fourth email: Not personal, preferred, or work email.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Alternate emails are optional and should be used for medical professionals who work at more than one location.</inlineHelpText>
+        <inlineHelpText>Alternate emails are optional and should be used for Medical Professionals who work at more than one location.</inlineHelpText>
         <label>Alternate Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -11141,7 +11141,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <deprecated>false</deprecated>
         <description>The Account marked as Primary in this Contact's list of Organization Affiliations.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Used to track this contact's primary place of employment.  For Medical Professionals, this is their primary hospital/treatment facility.</inlineHelpText>
+        <inlineHelpText>Used to track this contact's primary place of employment. For Medical Professionals, this is their primary hospital/treatment facility.</inlineHelpText>
         <label>Primary Affiliation</label>
         <referenceTo>Account</referenceTo>
         <relationshipLabel>Do Not Use.  Use Organization Affiliations.</relationshipLabel>
