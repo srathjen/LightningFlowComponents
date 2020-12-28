@@ -11,6 +11,7 @@
 // 16/06/2020 - Manoj - SIW-606: Changed method to navigate to home site
 // 29/07/2020 - Manoj - SIW-378 : hide Questions as mentioned in ticket
 // 03/09/2020 - Michelle / Gus - ODP9,10,11,12,14,38 : Revamping Wish Referral Form
+// 23/12/2020 - Manoj - ODP-281 : Added JS method 'agent' to capture the browser specific details in field 'Referral_Browser_Type__c' on Lead
 -->
 <apex:page controller="WishReferralForm_AC" showHeader="false" applyBodyTag="false" sidebar="false"
            standardStylesheets="false" docType="html-5.0" cache="false">
@@ -1564,6 +1565,7 @@
                 </div>
             </apex:outputpanel>
             <apex:inputText value="{!currLead.Relationship_to_child__c}" id="rToChild" styleClass="Relchild sr-only"/>
+            <apex:inputHidden id="usAg" value="{!currLead.Referral_Browser_Type__c}"/>
         </apex:form>
     </div>
     <div class="modal fade" id="warningModal" data-target="#warningModal" tabindex="-1" data-backdrop="static"
@@ -1872,8 +1874,13 @@
     </apex:outputPanel>
     <script>
         var rel = null;
-
+        //ODP-281 : Added JS method 'agent' to capture the browser specific details in field 'Referral_Browser_Type__c' on Lead
+        function agent() {
+            var u = navigator.userAgent;
+            document.querySelectorAll('[id$="usAg"]')[0].value = u;
+        }        
         function changeRelationship(ref, val) {
+            agent();
             $(".shownOnYes").addClass("fam-aware-overlay");//SIW-556 Issue fix
             rel = val;
             document.getElementById('hhh').style.display = 'none';

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -303,7 +302,7 @@
     </fields>
     <fields>
         <fullName>Additional_Parent_First_Name__c</fullName>
-        <description>It&apos;s store the Additional Parent/Guardian First Name.</description>
+        <description>It's store the Additional Parent/Guardian First Name.</description>
         <externalId>false</externalId>
         <label>Additional Parent/Guardian First Name</label>
         <length>150</length>
@@ -451,7 +450,7 @@
     <fields>
         <fullName>Alt_1_MP_HTF__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
-        <description>Captures the Alt 1 MP&apos;s HTF</description>
+        <description>Captures the Alt 1 MP's HTF</description>
         <externalId>false</externalId>
         <label>Alt 1 MP HTF</label>
         <lookupFilter>
@@ -474,7 +473,7 @@
     <fields>
         <fullName>Alt_1_MP__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
-        <description>Captures the Alt 1 MP&apos;s Contact record</description>
+        <description>Captures the Alt 1 MP's Contact record</description>
         <externalId>false</externalId>
         <label>Alt 1 MP</label>
         <lookupFilter>
@@ -497,7 +496,7 @@
     </fields>
     <fields>
         <fullName>Alt_2_MP_HTF_Street_Address__c</fullName>
-        <description>Captures the Alt 2 MP&apos;s HTF Street Address</description>
+        <description>Captures the Alt 2 MP's HTF Street Address</description>
         <externalId>false</externalId>
         <label>Alt 2 MP HTF Street Address</label>
         <length>255</length>
@@ -510,7 +509,7 @@
     <fields>
         <fullName>Alt_2_MP_HTF__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
-        <description>Captures the Alt 2 MP&apos;s HTF Account record</description>
+        <description>Captures the Alt 2 MP's HTF Account record</description>
         <externalId>false</externalId>
         <label>Alt 2 MP HTF</label>
         <lookupFilter>
@@ -533,7 +532,7 @@
     <fields>
         <fullName>Alt_2_MP__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
-        <description>Captures the Alt 2 MP&apos;s contact record</description>
+        <description>Captures the Alt 2 MP's contact record</description>
         <externalId>false</externalId>
         <label>Alt 2 MP</label>
         <lookupFilter>
@@ -593,7 +592,7 @@
     </fields>
     <fields>
         <fullName>Best_Contact_City__c</fullName>
-        <description>Captures the Best Contact&apos;s City</description>
+        <description>Captures the Best Contact's City</description>
         <externalId>false</externalId>
         <label>Best Contact City</label>
         <length>100</length>
@@ -615,7 +614,7 @@
     </fields>
     <fields>
         <fullName>Best_Contact_HTF_City__c</fullName>
-        <description>Captures the Best Contact&apos;s HTF City</description>
+        <description>Captures the Best Contact's HTF City</description>
         <externalId>false</externalId>
         <label>Best Contact HTF City</label>
         <length>100</length>
@@ -627,7 +626,7 @@
     </fields>
     <fields>
         <fullName>Best_Contact_HTF_Department__c</fullName>
-        <description>Captures the Best Contact&apos;s HTF Department</description>
+        <description>Captures the Best Contact's HTF Department</description>
         <externalId>false</externalId>
         <label>Best Contact HTF Department</label>
         <required>false</required>
@@ -641,7 +640,7 @@
     </fields>
     <fields>
         <fullName>Best_Contact_HTF_Name__c</fullName>
-        <description>Captures the Best Contact&apos;s HTF Name</description>
+        <description>Captures the Best Contact's HTF Name</description>
         <externalId>false</externalId>
         <label>Best Contact HTF Name</label>
         <length>255</length>
@@ -653,7 +652,7 @@
     </fields>
     <fields>
         <fullName>Best_Contact_HTF_Phone__c</fullName>
-        <description>Captures the Best Contact&apos;s HTF Phone</description>
+        <description>Captures the Best Contact's HTF Phone</description>
         <externalId>false</externalId>
         <label>Best Contact HTF Phone</label>
         <required>false</required>
@@ -663,7 +662,7 @@
     </fields>
     <fields>
         <fullName>Best_Contact_HTF_State__c</fullName>
-        <description>Captures the Best Contact&apos;s HTF State</description>
+        <description>Captures the Best Contact's HTF State</description>
         <externalId>false</externalId>
         <label>Best Contact HTF State</label>
         <required>false</required>
@@ -677,7 +676,7 @@
     </fields>
     <fields>
         <fullName>Best_Contact_HTF_Street_Address__c</fullName>
-        <description>Captures the Best Contact&apos;s HTF Street Address</description>
+        <description>Captures the Best Contact's HTF Street Address</description>
         <externalId>false</externalId>
         <label>Best Contact HTF Street Address</label>
         <length>255</length>
@@ -689,7 +688,7 @@
     </fields>
     <fields>
         <fullName>Best_Contact_HTF_Zip_Code__c</fullName>
-        <description>Captures the Best Contact&apos;s HTF Zip Code</description>
+        <description>Captures the Best Contact's HTF Zip Code</description>
         <externalId>false</externalId>
         <label>Best Contact HTF Zip Code</label>
         <length>10</length>
@@ -702,7 +701,7 @@
     <fields>
         <fullName>Best_Contact_HTF__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
-        <description>Captures the Best Contact&apos;s HTF Account record</description>
+        <description>Captures the Best Contact's HTF Account record</description>
         <externalId>false</externalId>
         <label>Best Contact HTF</label>
         <lookupFilter>
@@ -748,7 +747,7 @@
     </fields>
     <fields>
         <fullName>Best_Contact_Specialty__c</fullName>
-        <description>Captures the Best Contact&apos;s Specialties</description>
+        <description>Captures the Best Contact's Specialties</description>
         <externalId>false</externalId>
         <label>Best Contact Specialty</label>
         <required>false</required>
@@ -762,7 +761,7 @@
     </fields>
     <fields>
         <fullName>Best_Contact_State__c</fullName>
-        <description>Captures the Best Contact&apos;s State</description>
+        <description>Captures the Best Contact's State</description>
         <externalId>false</externalId>
         <label>Best Contact State</label>
         <required>false</required>
@@ -777,7 +776,7 @@
     <fields>
         <fullName>Best_Contact__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
-        <description>Captures the Best Contact&apos;s Contact record</description>
+        <description>Captures the Best Contact's Contact record</description>
         <externalId>false</externalId>
         <label>Best Contact</label>
         <lookupFilter>
@@ -835,7 +834,7 @@
     </fields>
     <fields>
         <fullName>DV_Signer_Email__c</fullName>
-        <description>Captures the DV Signer&apos;s Email</description>
+        <description>Captures the DV Signer's Email</description>
         <externalId>false</externalId>
         <label>DV Signer Email</label>
         <required>false</required>
@@ -870,7 +869,7 @@
     </fields>
     <fields>
         <fullName>DV_Signer_Phone__c</fullName>
-        <description>Captures the DV Signer&apos;s Phone Number</description>
+        <description>Captures the DV Signer's Phone Number</description>
         <externalId>false</externalId>
         <label>DV Signer Phone</label>
         <required>false</required>
@@ -953,17 +952,17 @@
                     <label>I do not have access to that information. I recommend the chapter follow up with the medical team</label>
                 </value>
                 <value>
-                    <fullName>I don&apos;t have access to that information. I recommend the chapter follow up with the medical team</fullName>
+                    <fullName>I don't have access to that information. I recommend the chapter follow up with the medical team</fullName>
                     <default>false</default>
                     <isActive>false</isActive>
-                    <label>I don&apos;t have access to that information. I recommend the chapter follow up with the medical team</label>
+                    <label>I don't have access to that information. I recommend the chapter follow up with the medical team</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
     </fields>
     <fields>
         <fullName>Edit_Access__c</fullName>
-        <description>Checks to see if the User&apos;s Role Matches the Chapter.</description>
+        <description>Checks to see if the User's Role Matches the Chapter.</description>
         <externalId>false</externalId>
         <formula>CONTAINS($UserRole.Name, Chapter_Name__c) ||  OwnerId = $User.Id</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -1581,7 +1580,7 @@
     </fields>
     <fields>
         <fullName>Additional_Parent_Street__c</fullName>
-        <description>It&apos;s store the Additional Parent/Guardian street.</description>
+        <description>It's store the Additional Parent/Guardian street.</description>
         <externalId>false</externalId>
         <label>Additional Parent/Guardian Street</label>
         <length>150</length>
@@ -1986,7 +1985,7 @@
         <fullName>Are_Other_Diagnosis_Eligible_For_Wish__c</fullName>
         <description>it will hold information about is there are any other diagnosis for wish eligibility</description>
         <externalId>false</externalId>
-        <inlineHelpText>Are there additional diagnoses that would help determine the child&apos;s eligibility for a wish?</inlineHelpText>
+        <inlineHelpText>Are there additional diagnoses that would help determine the child's eligibility for a wish?</inlineHelpText>
         <label>Are Other Diagnosis Eligible For Wish?</label>
         <length>255</length>
         <required>false</required>
@@ -2045,7 +2044,7 @@
         <fullName>Best_contact_for_Physician_Email__c</fullName>
         <description>It holds the Best contact for Physician Email</description>
         <externalId>false</externalId>
-        <inlineHelpText>This recipient is the best person to contact for the physician. They will automatically receive a copy of the &apos;Your patient is eligible for a wish&apos; email upon qualification.</inlineHelpText>
+        <inlineHelpText>This recipient is the best person to contact for the physician. They will automatically receive a copy of the 'Your patient is eligible for a wish' email upon qualification.</inlineHelpText>
         <label>Best Contact Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2075,7 +2074,7 @@
         <fullName>Chapter_Name__c</fullName>
         <description>This Field hold the name of the state.</description>
         <externalId>false</externalId>
-        <formula>&apos;Make-A-Wish &apos;+State</formula>
+        <formula>'Make-A-Wish '+State</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Chapter Name</label>
         <required>false</required>
@@ -2304,7 +2303,7 @@
     </fields>
     <fields>
         <fullName>Congenital_Heart_Disease__c</fullName>
-        <description>It will hold the value of Travel Algorithm&apos;s Congenital_Heart_Disease value.</description>
+        <description>It will hold the value of Travel Algorithm's Congenital_Heart_Disease value.</description>
         <externalId>false</externalId>
         <label>Hidden Congenita Heart Disease</label>
         <length>32768</length>
@@ -2336,7 +2335,7 @@
     </fields>
     <fields>
         <fullName>Convulsive_Disorders__c</fullName>
-        <description>It will hold the value of Conclusive Disorder&apos;s Travel Algorithm.</description>
+        <description>It will hold the value of Conclusive Disorder's Travel Algorithm.</description>
         <externalId>false</externalId>
         <inlineHelpText>Seizure disorder</inlineHelpText>
         <label>Hidden Convulsive Disorders</label>
@@ -2474,7 +2473,7 @@
         <description>This field informs the intake manager that a docusign is present, but not signed</description>
         <externalId>false</externalId>
         <formula>IF( (ISBLANK(DV_Signer_First_Name__c) &amp;&amp; DV_Present__c = True),
-IMAGE(&quot;/resource/icons/4-exclaimpoint.png&quot;,&quot;&quot;,32,32),&quot;&quot;)</formula>
+IMAGE("/resource/icons/4-exclaimpoint.png","",32,32),"")</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Unsigned</label>
         <required>false</required>
@@ -2871,11 +2870,11 @@ IMAGE(&quot;/resource/icons/4-exclaimpoint.png&quot;,&quot;&quot;,32,32),&quot;&
         <fullName>Hidden_DV_Form_Name__c</fullName>
         <description>Dynamically displays the DV recipients name for sending of the DV Email Template.</description>
         <externalId>false</externalId>
-        <formula>IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , &apos;Treating Medical Professional&apos;),   TEXT (Treating_MP__r.Salutation) +&apos; &apos;+Treating_MP__r.FirstName+&apos; &apos;+Treating_MP__r.LastName ,
-IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c, &apos;Best contact for Physician&apos;), TEXT ( Best_Contact__r.Salutation ) +&apos; &apos;+Best_Contact__r.FirstName +&apos; &apos;+Best_Contact__r.LastName,  
-IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , &apos;Alternate 1 Medical Professional&apos;),   TEXT ( Alt_1_MP__r.Salutation ) +&apos; &apos;+Alt_1_MP__r.FirstName  +&apos; &apos;+ Alt_1_MP__r.LastName ,  
-IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , &apos;Alternate 2 Medical Professional&apos;),   TEXT (Alt_2_MP__r.Salutation) +&apos; &apos;+Alt_2_MP__r.FirstName   +&apos; &apos;+  Alt_2_MP__r.LastName,
-IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , &apos;Referring Medical Professional&apos;),   TEXT ( Referring_MP__r.Salutation) +&apos; &apos;+Referring_MP__r.FirstName   +&apos; &apos;+  Referring_MP__r.LastName,
+        <formula>IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Treating Medical Professional'),   TEXT (Treating_MP__r.Salutation) +' '+Treating_MP__r.FirstName+' '+Treating_MP__r.LastName ,
+IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c, 'Best contact for Physician'), TEXT ( Best_Contact__r.Salutation ) +' '+Best_Contact__r.FirstName +' '+Best_Contact__r.LastName,  
+IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Alternate 1 Medical Professional'),   TEXT ( Alt_1_MP__r.Salutation ) +' '+Alt_1_MP__r.FirstName  +' '+ Alt_1_MP__r.LastName ,  
+IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Alternate 2 Medical Professional'),   TEXT (Alt_2_MP__r.Salutation) +' '+Alt_2_MP__r.FirstName   +' '+  Alt_2_MP__r.LastName,
+IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Referring Medical Professional'),   TEXT ( Referring_MP__r.Salutation) +' '+Referring_MP__r.FirstName   +' '+  Referring_MP__r.LastName,
   null) ) ) ) )</formula>
         <label>Hidden DV Form Name</label>
         <required>false</required>
@@ -3076,9 +3075,9 @@ IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , &apos;Referring Medic
                     <label>Friend</label>
                 </value>
                 <value>
-                    <fullName>Brochure at the Doctor&apos;s Office</fullName>
+                    <fullName>Brochure at the Doctor's Office</fullName>
                     <default>false</default>
-                    <label>Brochure at the Doctor&apos;s Office</label>
+                    <label>Brochure at the Doctor's Office</label>
                 </value>
                 <value>
                     <fullName>Email</fullName>
@@ -3331,10 +3330,10 @@ IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , &apos;Referring Medic
                     <label>News/Radio/TV-?</label>
                 </value>
                 <value>
-                    <fullName>News/Radio/TV-mom can&apos;t remember the channel</fullName>
+                    <fullName>News/Radio/TV-mom can't remember the channel</fullName>
                     <default>false</default>
                     <isActive>false</isActive>
-                    <label>News/Radio/TV-mom can&apos;t remember the channel</label>
+                    <label>News/Radio/TV-mom can't remember the channel</label>
                 </value>
                 <value>
                     <fullName>Other Wish Family</fullName>
@@ -3589,10 +3588,10 @@ IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , &apos;Referring Medic
                     <label>Parent</label>
                 </value>
                 <value>
-                    <fullName>Parent Referral-heard avout MAW from another child at Rady&apos;s</fullName>
+                    <fullName>Parent Referral-heard avout MAW from another child at Rady's</fullName>
                     <default>false</default>
                     <isActive>false</isActive>
-                    <label>Parent Referral-heard avout MAW from another child at Rady&apos;s</label>
+                    <label>Parent Referral-heard avout MAW from another child at Rady's</label>
                 </value>
                 <value>
                     <fullName>Social Media-facebook</fullName>
@@ -3643,10 +3642,10 @@ IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , &apos;Referring Medic
                     <label>Wish Family-WC- Mia Frost</label>
                 </value>
                 <value>
-                    <fullName>Wish Family-mom&apos;s brother, Joshua Reid, former wish kid</fullName>
+                    <fullName>Wish Family-mom's brother, Joshua Reid, former wish kid</fullName>
                     <default>false</default>
                     <isActive>false</isActive>
-                    <label>Wish Family-mom&apos;s brother, Joshua Reid, former wish kid</label>
+                    <label>Wish Family-mom's brother, Joshua Reid, former wish kid</label>
                 </value>
                 <value>
                     <fullName>parent referral</fullName>
@@ -3757,7 +3756,7 @@ IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , &apos;Referring Medic
         <fullName>I_m_Part_of_The_Treating_HealthCare_Team__c</fullName>
         <description>This field will identify whether he/she is part of the treating health care team or not</description>
         <externalId>false</externalId>
-        <label>I&apos;m Part Of The Treating HealthCare Team</label>
+        <label>I'm Part Of The Treating HealthCare Team</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -4016,7 +4015,7 @@ FALSE, TRUE)</formula>
         <fullName>Matched__c</fullName>
         <description>Displays a Red X when there is unmatched Data to address.</description>
         <externalId>false</externalId>
-        <formula>IF(  MP_HTFs_Matched__c = FALSE, IMAGE(&quot;/resource/icons/RedX.png&quot;,&quot;Red X&quot;,28,28), IMAGE(&quot;/resource/icons/GreenCheckmark.png&quot;,&quot;Green Checkmark&quot;,28,28))</formula>
+        <formula>IF(  MP_HTFs_Matched__c = FALSE, IMAGE("/resource/icons/RedX.png","Red X",28,28), IMAGE("/resource/icons/GreenCheckmark.png","Green Checkmark",28,28))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Matched?</label>
         <required>false</required>
@@ -4326,8 +4325,8 @@ FALSE, TRUE)</formula>
         <fullName>Qualified_DNQ_Date__c</fullName>
         <description>Displays Either the Qualified or DNQ Date</description>
         <externalId>false</externalId>
-        <formula>IF (TEXT(Status) = &quot;Qualified&quot;, Qualified_Date__c,
-IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
+        <formula>IF (TEXT(Status) = "Qualified", Qualified_Date__c,
+IF (Text(Status) = "DNQ", DNQ_Date__c , NULL))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Qualified / DNQ Date</label>
         <required>false</required>
@@ -4335,8 +4334,20 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>Referral_Browser_Type__c</fullName>
+        <description>Captures browser the user used to submit the referral form.</description>
+        <externalId>false</externalId>
+        <label>Referral Browser Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Referring_MP_Category__c</fullName>
-        <description>Captures the Referring MP&apos;s Category</description>
+        <description>Captures the Referring MP's Category</description>
         <externalId>false</externalId>
         <label>Referring MP Category</label>
         <required>false</required>
@@ -4362,7 +4373,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Referring_MP_Email__c</fullName>
-        <description>Captures the Referring MP&apos;s Email</description>
+        <description>Captures the Referring MP's Email</description>
         <externalId>false</externalId>
         <label>Referring MP Email</label>
         <required>false</required>
@@ -4373,7 +4384,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Referring_MP_Fax__c</fullName>
-        <description>Captures the Referring MP&apos;s Fax</description>
+        <description>Captures the Referring MP's Fax</description>
         <externalId>false</externalId>
         <label>Referring MP Fax</label>
         <required>false</required>
@@ -4383,7 +4394,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Referring_MP_First_Name__c</fullName>
-        <description>Captures the Referring MP&apos;s First Name</description>
+        <description>Captures the Referring MP's First Name</description>
         <externalId>false</externalId>
         <label>Referring MP First Name</label>
         <length>255</length>
@@ -4395,7 +4406,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Referring_MP_HTF_City__c</fullName>
-        <description>Captures the Referring MP&apos;s HTF City</description>
+        <description>Captures the Referring MP's HTF City</description>
         <externalId>false</externalId>
         <label>Referring MP HTF City</label>
         <length>100</length>
@@ -4407,7 +4418,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Referring_MP_HTF_Department__c</fullName>
-        <description>Captures the Referring MP&apos;s HTF Department</description>
+        <description>Captures the Referring MP's HTF Department</description>
         <externalId>false</externalId>
         <label>Referring MP HTF Department</label>
         <required>false</required>
@@ -4421,7 +4432,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Referring_MP_HTF_Name__c</fullName>
-        <description>Captures the Referring MP&apos;s HTF Name</description>
+        <description>Captures the Referring MP's HTF Name</description>
         <externalId>false</externalId>
         <label>Referring MP HTF Name</label>
         <length>255</length>
@@ -4433,7 +4444,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Referring_MP_HTF_Phone__c</fullName>
-        <description>Captures the Referring MP&apos;s HTF Phone</description>
+        <description>Captures the Referring MP's HTF Phone</description>
         <externalId>false</externalId>
         <label>Referring MP HTF Phone</label>
         <required>false</required>
@@ -4443,7 +4454,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Referring_MP_HTF_State__c</fullName>
-        <description>Captures the Referring MP&apos;s HTF State</description>
+        <description>Captures the Referring MP's HTF State</description>
         <externalId>false</externalId>
         <label>Referring MP HTF State</label>
         <required>false</required>
@@ -4457,7 +4468,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Referring_MP_HTF_Street_Address__c</fullName>
-        <description>Captures the Referring MP&apos;s HTF Street Address</description>
+        <description>Captures the Referring MP's HTF Street Address</description>
         <externalId>false</externalId>
         <label>Referring MP HTF Street Address</label>
         <length>255</length>
@@ -4482,7 +4493,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     <fields>
         <fullName>Referring_MP_HTF__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
-        <description>Captures the Referring MP&apos;s HTF Account record</description>
+        <description>Captures the Referring MP's HTF Account record</description>
         <externalId>false</externalId>
         <label>Referring MP HTF</label>
         <lookupFilter>
@@ -4504,7 +4515,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Referring_MP_Last_Name__c</fullName>
-        <description>Captures the Referring MP&apos;s Last Name</description>
+        <description>Captures the Referring MP's Last Name</description>
         <externalId>false</externalId>
         <label>Referring MP Last Name</label>
         <length>255</length>
@@ -4516,7 +4527,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Referring_MP_Phone__c</fullName>
-        <description>Captures the Referring MP&apos;s Phone</description>
+        <description>Captures the Referring MP's Phone</description>
         <externalId>false</externalId>
         <label>Referring MP Phone</label>
         <required>false</required>
@@ -4526,7 +4537,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Referring_MP_Salutation__c</fullName>
-        <description>Captures the Referring MP&apos;s Salutation</description>
+        <description>Captures the Referring MP's Salutation</description>
         <externalId>false</externalId>
         <label>Referring MP Salutation</label>
         <required>false</required>
@@ -4562,7 +4573,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Referring_MP_Specialty__c</fullName>
-        <description>Captures the Referring MP&apos;s Specialties</description>
+        <description>Captures the Referring MP's Specialties</description>
         <externalId>false</externalId>
         <label>Referring MP Specialty</label>
         <required>false</required>
@@ -4576,7 +4587,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Referring_MP_State__c</fullName>
-        <description>Captures the Referring MP&apos;s State</description>
+        <description>Captures the Referring MP's State</description>
         <externalId>false</externalId>
         <label>Referring MP State</label>
         <required>false</required>
@@ -4653,7 +4664,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Treating_MP_Category__c</fullName>
-        <description>Captures the Treating MP&apos;s Category</description>
+        <description>Captures the Treating MP's Category</description>
         <externalId>false</externalId>
         <label>Treating MP Category</label>
         <required>false</required>
@@ -4679,7 +4690,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Treating_MP_HTF_City__c</fullName>
-        <description>Captures the Treating MP&apos;s HTF City</description>
+        <description>Captures the Treating MP's HTF City</description>
         <externalId>false</externalId>
         <label>Treating MP HTF City</label>
         <length>100</length>
@@ -4691,7 +4702,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Treating_MP_HTF_Department__c</fullName>
-        <description>Captures the Treating MP&apos;s HTF Department</description>
+        <description>Captures the Treating MP's HTF Department</description>
         <externalId>false</externalId>
         <label>Treating MP HTF Department</label>
         <required>false</required>
@@ -4705,7 +4716,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Treating_MP_HTF_Phone__c</fullName>
-        <description>Captures the Treating MP&apos;s HTF Phone</description>
+        <description>Captures the Treating MP's HTF Phone</description>
         <externalId>false</externalId>
         <label>Treating MP HTF Phone</label>
         <required>false</required>
@@ -4715,7 +4726,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Treating_MP_HTF_State__c</fullName>
-        <description>Captures the Treating MP&apos;s HTF State</description>
+        <description>Captures the Treating MP's HTF State</description>
         <externalId>false</externalId>
         <label>Treating MP HTF State</label>
         <required>false</required>
@@ -4729,7 +4740,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Treating_MP_HTF_Street_Address__c</fullName>
-        <description>Captures the Treating MP&apos;s HTF Street Address</description>
+        <description>Captures the Treating MP's HTF Street Address</description>
         <externalId>false</externalId>
         <label>Treating MP HTF Street Address</label>
         <length>255</length>
@@ -4741,7 +4752,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Treating_MP_HTF_Zip_Code__c</fullName>
-        <description>Captures the Treating MP&apos;s HTF Zip Code</description>
+        <description>Captures the Treating MP's HTF Zip Code</description>
         <externalId>false</externalId>
         <label>Treating MP HTF Zip Code</label>
         <length>10</length>
@@ -4754,7 +4765,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     <fields>
         <fullName>Treating_MP_HTF__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
-        <description>Captures the Treating MP&apos;s HTF Account record</description>
+        <description>Captures the Treating MP's HTF Account record</description>
         <externalId>false</externalId>
         <label>Treating MP HTF</label>
         <lookupFilter>
@@ -4776,7 +4787,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Treating_MP_Specialty__c</fullName>
-        <description>Captures the Treating MP&apos;s Specialties</description>
+        <description>Captures the Treating MP's Specialties</description>
         <externalId>false</externalId>
         <label>Treating MP Specialty</label>
         <required>false</required>
@@ -4790,7 +4801,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Treating_MP_State__c</fullName>
-        <description>Captures the Treating MP&apos;s State</description>
+        <description>Captures the Treating MP's State</description>
         <externalId>false</externalId>
         <label>Treating MP State</label>
         <required>false</required>
@@ -4804,7 +4815,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Treating_MP_Type__c</fullName>
-        <description>Captures the Treating MP&apos;s Type</description>
+        <description>Captures the Treating MP's Type</description>
         <externalId>false</externalId>
         <label>Treating MP Type</label>
         <required>false</required>
@@ -4819,7 +4830,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     <fields>
         <fullName>Treating_MP__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
-        <description>Captures the Treating MP&apos;s Contact Record</description>
+        <description>Captures the Treating MP's Contact Record</description>
         <externalId>false</externalId>
         <label>Treating MP</label>
         <lookupFilter>
@@ -4849,7 +4860,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
         <fullName>xxNon_Verbal__c</fullName>
         <description>This field is indicate the communication is Non-Verbal or Not.</description>
         <externalId>false</externalId>
-        <formula>IF(INCLUDES(Communication__c, &apos;This child is non-verbal&apos;), &apos;Yes&apos;, &apos;No&apos;)</formula>
+        <formula>IF(INCLUDES(Communication__c, 'This child is non-verbal'), 'Yes', 'No')</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <inlineHelpText>Field auto-populates based on selection made in Communication field.</inlineHelpText>
         <label>xxNon - Verbal</label>
@@ -4948,7 +4959,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Other_diagnosis__c</fullName>
-        <description>Used to hold the other diagnosis values when &quot;other Diagnosis&quot; is selected</description>
+        <description>Used to hold the other diagnosis values when "other Diagnosis" is selected</description>
         <externalId>false</externalId>
         <label>Other Diagnosis</label>
         <length>1100</length>
@@ -4961,7 +4972,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
         <fullName>Out_of_Territory__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
-        <inlineHelpText>Out-of-territory wish, being granted with the permission of the child&apos;s home chapter.</inlineHelpText>
+        <inlineHelpText>Out-of-territory wish, being granted with the permission of the child's home chapter.</inlineHelpText>
         <label>Out of Territory</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -5043,7 +5054,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Parent_First_Name__c</fullName>
-        <description>It hold the First name of wish&apos;s parent.</description>
+        <description>It hold the First name of wish's parent.</description>
         <externalId>false</externalId>
         <label>Parent/Guardian First Name</label>
         <length>100</length>
@@ -5067,7 +5078,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Parent_Last_Name__c</fullName>
-        <description>It hold the last name of Wish&apos;s parent.</description>
+        <description>It hold the last name of Wish's parent.</description>
         <externalId>false</externalId>
         <label>Parent/Guardian Last Name</label>
         <length>100</length>
@@ -5387,7 +5398,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Please_Explain_Deteriorate__c</fullName>
-        <description>It holds the explanation for question(Do you expect this child&apos;s condition will significantly deteriorate in the next 3-6 months?)</description>
+        <description>It holds the explanation for question(Do you expect this child's condition will significantly deteriorate in the next 3-6 months?)</description>
         <externalId>false</externalId>
         <label>Please Explain Condition Deteriorate</label>
         <length>32768</length>
@@ -5550,7 +5561,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
         <fullName>Provider_Signature__c</fullName>
         <description>It will hold the provider signature</description>
         <externalId>false</externalId>
-        <inlineHelpText>This field updates automatically with the signer&apos;s name when an electronic DV is signed, but can be manually updated for paper forms.</inlineHelpText>
+        <inlineHelpText>This field updates automatically with the signer's name when an electronic DV is signed, but can be manually updated for paper forms.</inlineHelpText>
         <label>Provider Signature (DEPRECATED)</label>
         <length>255</length>
         <required>false</required>
@@ -5883,7 +5894,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
         <fullName>RE_Family_s_primary_spoken_language__c</fullName>
         <description>PRIMARY_LANGUAGE</description>
         <externalId>false</externalId>
-        <label>RE Family&apos;s primary spoken language</label>
+        <label>RE Family's primary spoken language</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -6644,7 +6655,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Referrer_City__c</fullName>
-        <description>It will capture city of the wih&apos;s parent.</description>
+        <description>It will capture city of the wih's parent.</description>
         <externalId>false</externalId>
         <label>Referrer City</label>
         <length>100</length>
@@ -6701,7 +6712,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Referrer_Rush_Reason__c</fullName>
-        <description>This field is created to capture the response in case user select Yes for the question &apos;IS THERE A MEDICAL REASON WHY WE NEED TO MOVE QUICKLY?&apos; in Wish referral form</description>
+        <description>This field is created to capture the response in case user select Yes for the question 'IS THERE A MEDICAL REASON WHY WE NEED TO MOVE QUICKLY?' in Wish referral form</description>
         <externalId>false</externalId>
         <label>Referrer Rush Reason</label>
         <length>32768</length>
@@ -6712,7 +6723,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Referrer_Zip__c</fullName>
-        <description>It will capture the zipcode of wish&apos;s parent.</description>
+        <description>It will capture the zipcode of wish's parent.</description>
         <externalId>false</externalId>
         <label>Referrer Zip</label>
         <length>5</length>
@@ -7387,7 +7398,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
         <fullName>Treating_Medical_Professional_Email__c</fullName>
         <description>This field will hold the Treating Medical Professional Email Address</description>
         <externalId>false</externalId>
-        <inlineHelpText>This recipient will automatically receive a copy of the &apos;Your patient is eligible for a wish&apos; email upon qualification.</inlineHelpText>
+        <inlineHelpText>This recipient will automatically receive a copy of the 'Your patient is eligible for a wish' email upon qualification.</inlineHelpText>
         <label>Treating MP Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -7871,9 +7882,9 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
         <fullName>Will_Child_s_Condition_Deteriorate__c</fullName>
-        <description>It will hold detail about whether they expect this child&apos;s condition will significantly deteriorate in the next 3-6 months.</description>
+        <description>It will hold detail about whether they expect this child's condition will significantly deteriorate in the next 3-6 months.</description>
         <externalId>false</externalId>
-        <label>Will Child&apos;s Condition Deteriorate?</label>
+        <label>Will Child's Condition Deteriorate?</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -8171,7 +8182,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     </fields>
     <fields>
 	<fullName>Expedite_timeframe__c</fullName>
-    <description>Used to hold &apos;ideal timeframe for wish&apos; values</description>
+    <description>Used to hold 'ideal timeframe for wish' values</description>
     <externalId>false</externalId>
     <label>Expedite timeframe</label>
     <required>false</required>
@@ -16430,7 +16441,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
             <operation>equals</operation>
             <value>Lead.Wish_Child</value>
         </filters>
-        <label>Ryan&apos;s Leads</label>
+        <label>Ryan's Leads</label>
         <sharedTo>
             <group>National_Office</group>
         </sharedTo>
@@ -17378,7 +17389,7 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
             <operation>equals</operation>
             <value>Lead.Wish_Child</value>
         </filters>
-        <label>Today&apos;s Leads AZ</label>
+        <label>Today's Leads AZ</label>
         <sharedTo>
             <role>Arizona_Chapter</role>
             <role>National_Staff</role>
@@ -17987,10 +17998,10 @@ IF (Text(Status) = &quot;DNQ&quot;, DNQ_Date__c , NULL))</formula>
     <validationRules>
         <fullName>Family_Dynamics_Validation</fullName>
         <active>true</active>
-        <description>FamilyDynamicsNotes should not be blank when &apos;Other&apos; is selected on &quot;Family Dynamics&quot;</description>
-        <errorConditionFormula>AND(ISPICKVAL(Family_Dynamics__c, &apos;Other&apos;), Family_Dynamics_Notes__c = NULL,$Profile.Name != &apos;Integration&apos;)
+        <description>FamilyDynamicsNotes should not be blank when 'Other' is selected on "Family Dynamics"</description>
+        <errorConditionFormula>AND(ISPICKVAL(Family_Dynamics__c, 'Other'), Family_Dynamics_Notes__c = NULL,$Profile.Name != 'Integration')
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>Family_Dynamics_Notes__c</errorDisplayField>
         <errorMessage>Please fill the Family Dynamics Notes</errorMessage>
     </validationRules>
@@ -17998,9 +18009,9 @@ RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
         <fullName>Lead_Address_Phone_and_Gender_Validation</fullName>
         <active>true</active>
         <errorConditionFormula>AND(OR((Street == Null || City == Null || PostalCode == Null || State == Null  ),
-(Text(Gender__c) == Null),Phone== Null),$Profile.Name != &apos;Integration&apos;,(Text(Status) == &apos;Referred&apos;),(Text(RFI_Form_Info_Hidden__c) == Null || Id != Null))
+(Text(Gender__c) == Null),Phone== Null),$Profile.Name != 'Integration',(Text(Status) == 'Referred'),(Text(RFI_Form_Info_Hidden__c) == Null || Id != Null))
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>Please Enter Full Address (City, State, Street and Postal Code), Phone Number  and Gender.</errorMessage>
     </validationRules>
     <validationRules>
@@ -18011,14 +18022,14 @@ RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
  OR(ISCHANGED(Status), ISCHANGED(Appeal__c)),
   NOT(
    OR(
-    ISPICKVAL(Status , &apos;DNQ&apos;),
-    AND(IsPickVal(Status, &apos;Eligibility Review&apos;), 
-    IsPickVal(PRIORVALUE(Status), &apos;DNQ&apos;) 
+    ISPICKVAL(Status , 'DNQ'),
+    AND(IsPickVal(Status, 'Eligibility Review'), 
+    IsPickVal(PRIORVALUE(Status), 'DNQ') 
    )
   )
  ),
 Appeal__c == true,
-$Profile.Name  == &apos;Intake Manager&apos;
+$Profile.Name  == 'Intake Manager'
 )</errorConditionFormula>
         <errorMessage>The Appeal checkbox can only be checked when requesting an Appeal of the eligibility decision – Lead Status must equal DNQ.</errorMessage>
     </validationRules>
@@ -18029,7 +18040,7 @@ $Profile.Name  == &apos;Intake Manager&apos;
         <errorConditionFormula>AND(
 Appeal__c != true,
  PRIORVALUE(Appeal__c) == true,
-$Profile.Name == &apos;Intake Manager&apos;
+$Profile.Name == 'Intake Manager'
 )</errorConditionFormula>
         <errorMessage>Only National Medical Affairs can uncheck the Appeals checkbox. Please reach out to NMA if you need to uncheck this box.</errorMessage>
     </validationRules>
@@ -18039,10 +18050,10 @@ $Profile.Name == &apos;Intake Manager&apos;
         <description>If an Intake Manager attempts to change the status from DNQ to Eligibility Review and the “Appeal” checkbox is unchecked then,  
 An error message displays to the user when they attempt to save the lead record .</description>
         <errorConditionFormula>AND(
-ISPICKVAL(Status , &apos;Eligibility Review&apos;) ,
-ISPICKVAL(PRIORVALUE(Status), &apos;DNQ&apos;),  
+ISPICKVAL(Status , 'Eligibility Review') ,
+ISPICKVAL(PRIORVALUE(Status), 'DNQ'),  
 Appeal__c != true,
-$Profile.Name == &apos;Intake Manager&apos;
+$Profile.Name == 'Intake Manager'
 )</errorConditionFormula>
         <errorMessage>A Lead that is in a status of DNQ can only be placed in Eligibility Review when requesting an Appeal of the eligibility decision. If requesting an Appeal, please check the “Appeal” checkbox on the Lead record before clicking Save.</errorMessage>
     </validationRules>
@@ -18050,112 +18061,112 @@ $Profile.Name == &apos;Intake Manager&apos;
         <fullName>Lead_BirthDay_Date_Validation</fullName>
         <active>true</active>
         <description>This validation rule is used to prevent the date you have entered in the birthday date field if the value is today or greater than today.</description>
-        <errorConditionFormula>AND(DOB__c &gt; TODAY(),$Profile.Name != &apos;Integration&apos;)
+        <errorConditionFormula>AND(DOB__c &gt; TODAY(),$Profile.Name != 'Integration')
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>The birthdate entered occurs in the future. Please re-enter the birthdate.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Check_Expedite_Explanation</fullName>
         <active>true</active>
         <description>Please Explain Expedite field is required when Do We Need To Expedite The Process? field is Yes</description>
-        <errorConditionFormula>AND( CONTAINS(Any_medical_reason_for_moving_quickly__c , &apos;Yes&apos;),ISBLANK(Please_Explain__c),  ISPICKVAL( Status , &apos;Qualified&apos;), $Profile.Name != &apos;Integration&apos;)
+        <errorConditionFormula>AND( CONTAINS(Any_medical_reason_for_moving_quickly__c , 'Yes'),ISBLANK(Please_Explain__c),  ISPICKVAL( Status , 'Qualified'), $Profile.Name != 'Integration')
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>Please explain reason to expedite the process in Please Explain Expedite field.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_DOB_Referral_Validation</fullName>
         <active>true</active>
         <description>When lead is changed to Referred, DOB is mandatory.</description>
-        <errorConditionFormula>AND(ISPICKVAL(Status,&apos;Referred&apos;), ISBLANK(DOB__c), $Profile.Name != &apos;Integration&apos;)
+        <errorConditionFormula>AND(ISPICKVAL(Status,'Referred'), ISBLANK(DOB__c), $Profile.Name != 'Integration')
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>DOB__c</errorDisplayField>
-        <errorMessage>Please enter the child&apos;s date of birth in the DOB field</errorMessage>
+        <errorMessage>Please enter the child's date of birth in the DOB field</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_DOB_When_Elig_Rev</fullName>
         <active>true</active>
-        <description>Date of Birth is required before changing the status to &quot;Eligibility Review&quot;.</description>
+        <description>Date of Birth is required before changing the status to "Eligibility Review".</description>
         <errorConditionFormula>AND( 
 ISCHANGED(Status), 
-ISPICKVAL(Status,&apos;Eligibility Review&apos;), 
+ISPICKVAL(Status,'Eligibility Review'), 
 ISBLANK (DOB__c ), 
 (OR( 
-ISPICKVAL(PRIORVALUE(Status),&apos;Referred&apos;), 
-ISPICKVAL(PRIORVALUE(Status),&apos;Inquiry&apos;)) 
+ISPICKVAL(PRIORVALUE(Status),'Referred'), 
+ISPICKVAL(PRIORVALUE(Status),'Inquiry')) 
 ) 
 )
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
-        <errorMessage>Please enter the child&apos;s date of birth in the DOB field before changing the status to &quot;Eligibility Review&quot;</errorMessage>
+RecordType.Name ="Wish Child"</errorConditionFormula>
+        <errorMessage>Please enter the child's date of birth in the DOB field before changing the status to "Eligibility Review"</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_DV_Received_When_Elig_Rev</fullName>
         <active>true</active>
-        <description>Diagnosis Verification Received Date must be entered before changing the status to &quot;Eligibility Review&quot;</description>
+        <description>Diagnosis Verification Received Date must be entered before changing the status to "Eligibility Review"</description>
         <errorConditionFormula>AND(
 ISCHANGED(Status),
-ISPICKVAL(Status,&apos;Eligibility Review&apos;),
+ISPICKVAL(Status,'Eligibility Review'),
 ISBLANK (Part_A_Received__c),
 (OR(
-$Profile.Name = &apos;Intake Manager&apos;,
-$Profile.Name = &apos;Program Staff&apos;)
+$Profile.Name = 'Intake Manager',
+$Profile.Name = 'Program Staff')
 ),
 (OR(
-ISPICKVAL(PRIORVALUE(Status),&apos;Referred&apos;),
-ISPICKVAL(PRIORVALUE(Status),&apos;Inquiry&apos;))
+ISPICKVAL(PRIORVALUE(Status),'Referred'),
+ISPICKVAL(PRIORVALUE(Status),'Inquiry'))
 )
 )
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>Part_A_Received__c</errorDisplayField>
-        <errorMessage>Please enter the Diagnosis Verification Received Date before changing the status to &quot;Eligibility Review&quot;</errorMessage>
+        <errorMessage>Please enter the Diagnosis Verification Received Date before changing the status to "Eligibility Review"</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Diagnosis_Validation</fullName>
         <active>true</active>
         <description>Used to prevent wish child record when there is no Primary Diagnosis</description>
-        <errorConditionFormula>AND(ISBLANK(PD_Condition_Description__c), ISBLANK( PD_ICD_Code__c ),$Profile.Name != &apos;Integration&apos;, $Profile.Name != &apos;Wish Referral Form Profile&apos; )
+        <errorConditionFormula>AND(ISBLANK(PD_Condition_Description__c), ISBLANK( PD_ICD_Code__c ),$Profile.Name != 'Integration', $Profile.Name != 'Wish Referral Form Profile' )
 &amp;&amp;
-((!ISPICKVAL(Status, &quot;DNQ&quot;)
+((!ISPICKVAL(Status, "DNQ")
 &amp;&amp;
-!ISPICKVAL(Status, &quot;Closed&quot;)) 
+!ISPICKVAL(Status, "Closed")) 
 ||
-(ISPICKVAL(Status, &quot;DNQ&quot;)&amp;&amp; ISPICKVAL(Sub_Status__c, &quot;Medical Reviewed&quot;))) 
+(ISPICKVAL(Status, "DNQ")&amp;&amp; ISPICKVAL(Sub_Status__c, "Medical Reviewed"))) 
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>Please provide the ICD Code or Primary Diagnosis.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Explain_Expedite_When_Elig_Rev</fullName>
         <active>true</active>
-        <description>If &quot;potential rush&quot; = &quot;yes&quot;, please explain expedite before changing the status to &quot;Eligibility Review&quot;.</description>
-        <errorConditionFormula>ISPICKVAL(Status, &quot;Eligibility Review&quot;)  
+        <description>If "potential rush" = "yes", please explain expedite before changing the status to "Eligibility Review".</description>
+        <errorConditionFormula>ISPICKVAL(Status, "Eligibility Review")  
 &amp;&amp;
  ( 
-  ISPICKVAL(PRIORVALUE(Status), &quot;Inquiry&quot;) 
+  ISPICKVAL(PRIORVALUE(Status), "Inquiry") 
   || 
-  ISPICKVAL(PRIORVALUE(Status), &quot;Referred&quot;)
+  ISPICKVAL(PRIORVALUE(Status), "Referred")
  )
 &amp;&amp;
 
-CONTAINS (UPPER(Any_medical_reason_for_moving_quickly__c), &quot;YES&quot;)
+CONTAINS (UPPER(Any_medical_reason_for_moving_quickly__c), "YES")
 
 &amp;&amp;
 ISBLANK (Please_Explain__c )
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
-        <errorMessage>Please explain the reason to expedite the process in the Please Explain Expedite field before changing the status to &quot;Eligibility Review&quot;.</errorMessage>
+RecordType.Name ="Wish Child"</errorConditionFormula>
+        <errorMessage>Please explain the reason to expedite the process in the Please Explain Expedite field before changing the status to "Eligibility Review".</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Family_Referral_Validation</fullName>
         <active>true</active>
         <description>When lead is changed to Referred, is Family Aware of Referral is mandatory.</description>
-        <errorConditionFormula>Text(Status) == &apos;Referred&apos; &amp;&amp;  Text(is_Family_Aware_of_Referral__c) == Null &amp;&amp;    (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name != &apos;Integration&apos;
+        <errorConditionFormula>Text(Status) == 'Referred' &amp;&amp;  Text(is_Family_Aware_of_Referral__c) == Null &amp;&amp;    (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name != 'Integration'
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>is_Family_Aware_of_Referral__c</errorDisplayField>
         <errorMessage>Please fill the is Famil Aware of Referral field.</errorMessage>
     </validationRules>
@@ -18163,9 +18174,9 @@ RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
         <fullName>Lead_FirstName_Validation</fullName>
         <active>true</active>
         <description>Whenever lead is created/updated with Inquiry status,First Name is mandatory.</description>
-        <errorConditionFormula>FirstName == Null &amp;&amp; (Text(Status) == &apos;Inquiry&apos;) &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp;  $Profile.Name != &apos;Integration&apos;
+        <errorConditionFormula>FirstName == Null &amp;&amp; (Text(Status) == 'Inquiry') &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp;  $Profile.Name != 'Integration'
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>FirstName</errorDisplayField>
         <errorMessage>Please Enter First Name</errorMessage>
     </validationRules>
@@ -18173,43 +18184,43 @@ RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
         <fullName>Lead_FirstName_Validation_Referred</fullName>
         <active>true</active>
         <description>Whenever lead is created/updated with Inquiry status,First Name is mandatory.</description>
-        <errorConditionFormula>FirstName == Null &amp;&amp; (Text(Status) == &apos;Referred&apos;) &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != &apos;Integration&apos;
+        <errorConditionFormula>FirstName == Null &amp;&amp; (Text(Status) == 'Referred') &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != 'Integration'
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>FirstName</errorDisplayField>
         <errorMessage>Please Enter First Name</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Hospital_or_Treartment_Validation</fullName>
         <active>true</active>
-        <description>Whenever a lead is created/updated to a &apos;Referred&apos; status, an &apos;Unmatched Treating MP HTF&apos; OR linked Treating MP HTF account is mandatory</description>
+        <description>Whenever a lead is created/updated to a 'Referred' status, an 'Unmatched Treating MP HTF' OR linked Treating MP HTF account is mandatory</description>
         <errorConditionFormula>ISBLANK(Hospital_Treatment_Facility_Treating__c) &amp;&amp;
 ISBLANK( Treating_MP_HTF__c ) &amp;&amp;
- (Text(Status) == &apos;Referred&apos;) &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != &apos;Integration&apos;
+ (Text(Status) == 'Referred') &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != 'Integration'
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
-        <errorMessage>Please enter an Unmatched Treating MP HTF Name OR link a Treating MP HTF Account record to the lead before placing the lead into a &apos;Referred&apos; status.</errorMessage>
+RecordType.Name ="Wish Child"</errorConditionFormula>
+        <errorMessage>Please enter an Unmatched Treating MP HTF Name OR link a Treating MP HTF Account record to the lead before placing the lead into a 'Referred' status.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Inquiry_and_Birth_Date_Validation</fullName>
         <active>true</active>
         <description>This validation rule is used to prevent the date you have entered in the Inquiry Date field if the value is before the wish child birthday date.</description>
-        <errorConditionFormula>AND(Inquiry_Date__c &lt; DOB__c,$Profile.Name != &apos;Integration&apos;)
+        <errorConditionFormula>AND(Inquiry_Date__c &lt; DOB__c,$Profile.Name != 'Integration')
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
-        <errorMessage>The inquiry date entered occurs before the wish child&apos;s date of birth. Please enter a valid inquiry date, or re-enter the wish child&apos;s birthdate.</errorMessage>
+RecordType.Name ="Wish Child"</errorConditionFormula>
+        <errorMessage>The inquiry date entered occurs before the wish child's date of birth. Please enter a valid inquiry date, or re-enter the wish child's birthdate.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Inquiry_and_Referr_Date_Validation</fullName>
         <active>true</active>
         <description>This validation rule is used to prevent the date you have entered in the Inquiry Date field if the value is after the referral date.</description>
-        <errorConditionFormula>AND(Inquiry_Date__c &gt; Referred_Date__c,$Profile.Name != &apos;Integration&apos;)
+        <errorConditionFormula>AND(Inquiry_Date__c &gt; Referred_Date__c,$Profile.Name != 'Integration')
 &amp;&amp;
-!ISPICKVAL(Status, &quot;DNQ&quot;)
+!ISPICKVAL(Status, "DNQ")
 &amp;&amp;
-!ISPICKVAL(Status, &quot;Closed&quot;)
+!ISPICKVAL(Status, "Closed")
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>The inquiry date must occur on or before the referral date. Please enter a valid inquiry date, or re-enter the date of referral.</errorMessage>
     </validationRules>
     <validationRules>
@@ -18219,37 +18230,37 @@ RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
         <errorConditionFormula>(ISBLANK(Treating_Medical_Professional_First_Name__c) || 
 ISBLANK(Treating_Medical_Professional_Last_Name__c)) &amp;&amp; 
 ISBLANK(Treating_MP__c) &amp;&amp;
-(Text(Status) == &apos;Referred&apos;) &amp;&amp;  
-(ISBLANK(Text(RFI_Form_Info_Hidden__c)) || Id != Null) &amp;&amp;  $Profile.Name  != &apos;Integration&apos;
+(Text(Status) == 'Referred') &amp;&amp;  
+(ISBLANK(Text(RFI_Form_Info_Hidden__c)) || Id != Null) &amp;&amp;  $Profile.Name  != 'Integration'
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
-        <errorMessage>Please enter an &apos;Unmatched Treating MP First &amp; Last Name&apos; or link a &apos;Treating MP&apos; contact to the lead before placing the lead in a &apos;Referred&apos; status.</errorMessage>
+RecordType.Name ="Wish Child"</errorConditionFormula>
+        <errorMessage>Please enter an 'Unmatched Treating MP First &amp; Last Name' or link a 'Treating MP' contact to the lead before placing the lead in a 'Referred' status.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Qualified_Date_Validation</fullName>
         <active>true</active>
         <description>This validation rule is used to prevent the date you have entered in the Qualified Date field if the value is before the referral date.</description>
-        <errorConditionFormula>AND(Qualified_Date__c &lt;  Referred_Date__c,$Profile.Name != &apos;Integration&apos;)
+        <errorConditionFormula>AND(Qualified_Date__c &lt;  Referred_Date__c,$Profile.Name != 'Integration')
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>The qualified date cannot occur before the referral date. Please enter a valid qualified date, or re-enter the referral date.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Recog_To_Practice_Req_When_Elig_Rev</fullName>
         <active>true</active>
-        <description>When the status is changed to &quot;Eligibility Review&quot;, the field &quot;I am recognized to practice as a&quot; is required.</description>
+        <description>When the status is changed to "Eligibility Review", the field "I am recognized to practice as a" is required.</description>
         <errorConditionFormula>AND( 
 ISCHANGED(Status), 
-ISPICKVAL(Status,&apos;Eligibility Review&apos;),
+ISPICKVAL(Status,'Eligibility Review'),
 ISBLANK(TEXT(I_am_Recognized_To_Practice_As_a__c )),
 (OR( 
-ISPICKVAL(PRIORVALUE(Status),&apos;Referred&apos;), 
-ISPICKVAL(PRIORVALUE(Status),&apos;Inquiry&apos;)) 
+ISPICKVAL(PRIORVALUE(Status),'Referred'), 
+ISPICKVAL(PRIORVALUE(Status),'Inquiry')) 
 ) 
 )
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
-        <errorMessage>Please specify &quot;I am recognized to practice as a&quot; before changing the status to &quot;Eligibility Review&quot;.</errorMessage>
+RecordType.Name ="Wish Child"</errorConditionFormula>
+        <errorMessage>Please specify "I am recognized to practice as a" before changing the status to "Eligibility Review".</errorMessage>
     </validationRules>
     <validationRules>
 	   <fullName>Lead_DNQ_No_Change</fullName>
@@ -18257,18 +18268,18 @@ RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
     <description>SIW-649</description>
     <errorConditionFormula>AND(
 OR(
-ISPICKVAL(Status,&apos;Inquiry&apos;),
-ISPICKVAL(Status,&apos;Referred&apos;),
-ISPICKVAL(Status,&apos;Qualified&apos;),
-ISPICKVAL(Status,&apos;Closed&apos;)
+ISPICKVAL(Status,'Inquiry'),
+ISPICKVAL(Status,'Referred'),
+ISPICKVAL(Status,'Qualified'),
+ISPICKVAL(Status,'Closed')
 )
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;
+RecordType.Name ="Wish Child"
 &amp;&amp;
-ISPICKVAL(PRIORVALUE(Status),&quot;DNQ&quot;))
-&amp;&amp; $Profile.Name != &apos;System Administrator&apos;
+ISPICKVAL(PRIORVALUE(Status),"DNQ"))
+&amp;&amp; $Profile.Name != 'System Administrator'
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+RecordType.Name ="Wish Child"</errorConditionFormula>
     <errorDisplayField>Status</errorDisplayField>
     <errorMessage>The status of a DNQd Lead cannot be updated.</errorMessage>
 	    </validationRules>
@@ -18276,22 +18287,22 @@ RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
         <fullName>Lead_Referral_Date_Validation</fullName>
         <active>false</active>
         <description>This validation rule is used to prevent the date you have entered in the Referred Date field if the value is before the inquiry date.</description>
-        <errorConditionFormula>AND(Referred_Date__c &lt; Inquiry_Date__c,$Profile.Name != &apos;Integration&apos;)
+        <errorConditionFormula>AND(Referred_Date__c &lt; Inquiry_Date__c,$Profile.Name != 'Integration')
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>The referral date must occur on or after the inquiry date. Please enter a valid referral date, or re-enter the inquiry date.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Referrer_Diagnosis_Validation</fullName>
         <active>true</active>
         <description>Used to prevent wish child record when there is no Primary Diagnosis</description>
-        <errorConditionFormula>AND(ISBLANK(Diagnosis_Given_By_Referrer__c), ISBLANK( ICD_Given_By_Referrer__c),$Profile.Name != &apos;Integration&apos;, $Profile.Name != &apos;Wish Referral Form Profile&apos; )
+        <errorConditionFormula>AND(ISBLANK(Diagnosis_Given_By_Referrer__c), ISBLANK( ICD_Given_By_Referrer__c),$Profile.Name != 'Integration', $Profile.Name != 'Wish Referral Form Profile' )
 &amp;&amp;
-!ISPICKVAL(Status, &quot;DNQ&quot;)
+!ISPICKVAL(Status, "DNQ")
 &amp;&amp;
-!ISPICKVAL(Status, &quot;Closed&quot;)
+!ISPICKVAL(Status, "Closed")
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorMessage>Please provide the ICD or Diagnosis given by referrer.</errorMessage>
     </validationRules>
     <validationRules>
@@ -18299,25 +18310,25 @@ RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
     <active>true</active>
     <errorConditionFormula>AND(
 OR(
-ISPICKVAL(Status,&apos;Qualified&apos;),
-ISPICKVAL(Status,&apos;Eligibility Review&apos;)
+ISPICKVAL(Status,'Qualified'),
+ISPICKVAL(Status,'Eligibility Review')
 ),
 ISCHANGED(Status),
-AND(NOT(OR(ISPICKVAL(PRIORVALUE(Sub_Status__c),&apos;Pending Diagnosis Verification&apos;), ISPICKVAL(PRIORVALUE(Sub_Status__c), &apos;Pending Part A&apos;),ISPICKVAL(PRIORVALUE(Sub_Status__c),&apos;Pending Paper DV&apos;)))
+AND(NOT(OR(ISPICKVAL(PRIORVALUE(Sub_Status__c),'Pending Diagnosis Verification'), ISPICKVAL(PRIORVALUE(Sub_Status__c), 'Pending Part A'),ISPICKVAL(PRIORVALUE(Sub_Status__c),'Pending Paper DV')))
 )
 )
-&amp;&amp; $Profile.Name != &apos;Full Access National Staff&apos;
+&amp;&amp; $Profile.Name != 'Full Access National Staff'
 &amp;&amp; Migrated_Record__c == false
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;
-&amp;&amp; NOT(ISPICKVAL(PRIORVALUE(Status),&apos;DNQ&apos;))
-&amp;&amp; NOT(ISPICKVAL(PRIORVALUE(Status),&apos;Eligibility Review&apos;))
-&amp;&amp; NOT(ISPICKVAL(PRIORVALUE(Status),&apos;Qualified&apos;))
-&amp;&amp; $Profile.Name != &apos;System Administrator&apos; 
-&amp;&amp; $Profile.Name != &apos;Integration&apos; 
+RecordType.Name ="Wish Child"
+&amp;&amp; NOT(ISPICKVAL(PRIORVALUE(Status),'DNQ'))
+&amp;&amp; NOT(ISPICKVAL(PRIORVALUE(Status),'Eligibility Review'))
+&amp;&amp; NOT(ISPICKVAL(PRIORVALUE(Status),'Qualified'))
+&amp;&amp; $Profile.Name != 'System Administrator' 
+&amp;&amp; $Profile.Name != 'Integration' 
 &amp;&amp; Migrated_Record__c == false
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+RecordType.Name ="Wish Child"</errorConditionFormula>
     <errorDisplayField>Status</errorDisplayField>
     <errorMessage>The status can be updated to Eligibility Review or Qualified only when the previous Sub Status is Pending Diagnosis Verification or Pending Paper DV.</errorMessage>
     </validationRules>
@@ -18326,19 +18337,19 @@ RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
         <active>false</active>
         <description>Restrict the lead owner from changing the status from Eligibility Review</description>
         <errorConditionFormula>AND( 
-$Profile.Name != &apos;Full Access National Staff&apos;, 
-$Profile.Name != &apos;System Administrator&apos;,                                                              
+$Profile.Name != 'Full Access National Staff', 
+$Profile.Name != 'System Administrator',                                                              
 ISCHANGED(Status), 
-ISPICKVAL(PRIORVALUE(Status),&apos;Eligibility Review&apos;), 
-ISPICKVAL(Status,&apos;Referred&apos;), 
+ISPICKVAL(PRIORVALUE(Status),'Eligibility Review'), 
+ISPICKVAL(Status,'Referred'), 
 CASE(Sub_Status__c,
-&quot;Pending Diagnosis Verification&quot;,1,
-&quot;Pending Part A&quot;,1,
-&quot;Pending Paper DV&quot;,1,
+"Pending Diagnosis Verification",1,
+"Pending Part A",1,
+"Pending Paper DV",1,
 0)=0 
 )
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>Status</errorDisplayField>
         <errorMessage>Only the National Medical Advisor can change the Lead Status when a Lead is in Eligibility Review. Please reach out to the National Medical Advisor through Chatter on the Lead if the Lead Status needs to change.</errorMessage>
     </validationRules>
@@ -18346,17 +18357,17 @@ RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
         <fullName>Lead_Status_Restriction_on_Eligibility</fullName>
         <active>true</active>
         <errorConditionFormula>AND(
-$Profile.Name != &apos;Full Access National Staff&apos;,
-$Profile.Name != &apos;System Administrator&apos;,
+$Profile.Name != 'Full Access National Staff',
+$Profile.Name != 'System Administrator',
 ISCHANGED(Status),
-ISPICKVAL(PRIORVALUE(Status),&apos;Eligibility Review&apos;),
+ISPICKVAL(PRIORVALUE(Status),'Eligibility Review'),
 OR(
-ISPICKVAL(Status,&apos;Inquiry&apos;),
-ISPICKVAL(Status,&apos;DNQ&apos;),
-ISPICKVAL(Status,&apos;Qualified&apos;)
+ISPICKVAL(Status,'Inquiry'),
+ISPICKVAL(Status,'DNQ'),
+ISPICKVAL(Status,'Qualified')
 )
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;
+RecordType.Name ="Wish Child"
 )</errorConditionFormula>
         <errorDisplayField>Status</errorDisplayField>
         <errorMessage>Only the National Medical Advisor can change the Lead Status when a Lead is in Eligibility Review. Please reach out to the National Medical Advisor through Chatter on the Lead if the Lead Status needs to change.</errorMessage>
@@ -18367,16 +18378,16 @@ RecordType.Name =&quot;Wish Child&quot;
     <description>Require substatus when lead status is changed to DNQ</description>
     <errorConditionFormula>AND(     
    OR(
-      ISPICKVAL(Status,&apos;DNQ&apos;),
-      ISPICKVAL(Status,&apos;Closed&apos;)
+      ISPICKVAL(Status,'DNQ'),
+      ISPICKVAL(Status,'Closed')
    ),
-   ISPICKVAL(Sub_Status__c,&apos;&apos;),
-   $Profile.Name != &apos;Integration&apos;
+   ISPICKVAL(Sub_Status__c,''),
+   $Profile.Name != 'Integration'
 )
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;
+RecordType.Name ="Wish Child"
 &amp;&amp;
-NOT(ISPICKVAL(PRIORVALUE(Status),&quot;Eligibility Review&quot;))</errorConditionFormula>
+NOT(ISPICKVAL(PRIORVALUE(Status),"Eligibility Review"))</errorConditionFormula>
     <errorDisplayField>Sub_Status__c</errorDisplayField>
     <errorMessage>Please Enter Sub Status</errorMessage>
     </validationRules>
@@ -18384,18 +18395,18 @@ NOT(ISPICKVAL(PRIORVALUE(Status),&quot;Eligibility Review&quot;))</errorConditio
         <fullName>Lead_Wish_Aware_Validation</fullName>
         <active>true</active>
         <description>It will thrown an error when the is Family Aware of Referral? filed value is not yes at the time of lead creation</description>
-        <errorConditionFormula>Text(is_Family_Aware_of_Referral__c) != &apos;Yes&apos; &amp;&amp; Text(Status) == &apos;Inquiry&apos; &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; $Profile.Name  != &apos;Integration&apos;
+        <errorConditionFormula>Text(is_Family_Aware_of_Referral__c) != 'Yes' &amp;&amp; Text(Status) == 'Inquiry' &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; $Profile.Name  != 'Integration'
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>is_Family_Aware_of_Referral__c</errorDisplayField>
         <errorMessage>Please Enter is Family Aware of Referral? value as Yes</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_sub_Status_Validation</fullName>
         <active>true</active>
-        <errorConditionFormula>AND(ISNEW(), ISPICKVAL( Sub_Status__c , &apos;Pending Diagnosis Verification&apos;)) &amp;&amp; $Profile.Name  != &apos;Integration&apos;
+        <errorConditionFormula>AND(ISNEW(), ISPICKVAL( Sub_Status__c , 'Pending Diagnosis Verification')) &amp;&amp; $Profile.Name  != 'Integration'
 &amp;&amp;
-RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
+RecordType.Name ="Wish Child"</errorConditionFormula>
         <errorDisplayField>Sub_Status__c</errorDisplayField>
         <errorMessage>Please save the record before updating the sub status as Pending Diagnosis Verification.</errorMessage>
     </validationRules>
@@ -18541,61 +18552,61 @@ RecordType.Name =&quot;Wish Child&quot;</errorConditionFormula>
         <masterLabel>Send Diagnosis Verification</masterLabel>
         <openType>onClickJavaScript</openType>
         <protected>false</protected>
-        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)}
-{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)}
+        <url>{!REQUIRESCRIPT("/soap/ajax/24.0/connection.js")}
+{!REQUIRESCRIPT("/soap/ajax/24.0/apex.js")}
 //Value assignment 
-var leadIdR = &quot;{!Lead.Id}&quot;;
-var l = new sforce.SObject(&quot;Lead&quot;);
-var priorWish = &quot;{!JSENCODE(Lead.Has_this_child_ever_received_prior_wish__c)}&quot;;
-var hiddenMedEmail = &quot;{!Lead.Part_A_Sent__c}&quot;;
-var conDupStatus = &quot;{!Lead.Contact_Dup_Check__c}&quot;;
+var leadIdR = "{!Lead.Id}";
+var l = new sforce.SObject("Lead");
+var priorWish = "{!JSENCODE(Lead.Has_this_child_ever_received_prior_wish__c)}";
+var hiddenMedEmail = "{!Lead.Part_A_Sent__c}";
+var conDupStatus = "{!Lead.Contact_Dup_Check__c}";
 priorWish = priorWish.toLowerCase();
-var leadStatus = &quot;{!Lead.Status}&quot;;
-var dupStatus = &quot;{!Lead.Dup_Check__c}&quot;;
-var leadSubStatus = &quot;{!Lead.Sub_Status__c}&quot;;
-var TretMedProfEmail = &quot;{! Lead.Treating_Medical_Professional_Email__c}&quot;;
-var bestPhysicianEmail = &quot;{!Lead.Best_contact_for_Physician_Email__c}&quot;;
-var alternate1MedEmail = &quot;{!Lead.Alternate1MedicalProfessionalEmail__c}&quot;;
-var alternate2MedEmai = &quot;{!Lead.Alternate2MedProfessionalEmail__c}&quot;;
-var hasItSentBefore = &quot;{!Lead.Part_A_Sent__c}&quot;;
-var hiddenRecpEmail = &quot;{!Lead.HiddenMedicalProfessionalEmail__c}&quot;;
-var icdCode = &quot;{!Lead.PD_ICD_Code__c}&quot;;
-var conditionDescription = &quot;{!Lead.PD_Condition_Description__c}&quot;;
-var paperDVProcess = &quot;{!Lead.Using_Paper_Process_For_DV__c}&quot;
+var leadStatus = "{!Lead.Status}";
+var dupStatus = "{!Lead.Dup_Check__c}";
+var leadSubStatus = "{!Lead.Sub_Status__c}";
+var TretMedProfEmail = "{! Lead.Treating_Medical_Professional_Email__c}";
+var bestPhysicianEmail = "{!Lead.Best_contact_for_Physician_Email__c}";
+var alternate1MedEmail = "{!Lead.Alternate1MedicalProfessionalEmail__c}";
+var alternate2MedEmai = "{!Lead.Alternate2MedProfessionalEmail__c}";
+var hasItSentBefore = "{!Lead.Part_A_Sent__c}";
+var hiddenRecpEmail = "{!Lead.HiddenMedicalProfessionalEmail__c}";
+var icdCode = "{!Lead.PD_ICD_Code__c}";
+var conditionDescription = "{!Lead.PD_Condition_Description__c}";
+var paperDVProcess = "{!Lead.Using_Paper_Process_For_DV__c}"
 
 
 function SendToTreatingMedProf(medProfType) {
     l.Id = leadIdR;
     l.Hidden_DV_form_Medical_professional_Type__c = medProfType;
-    l.Of_Times_Email_Sent__c = &quot;{! IF(ISBLANK(Lead.Of_Times_Email_Sent__c), 0, Lead.Of_Times_Email_Sent__c ) }&quot;;
+    l.Of_Times_Email_Sent__c = "{! IF(ISBLANK(Lead.Of_Times_Email_Sent__c), 0, Lead.Of_Times_Email_Sent__c ) }";
     l.Of_Times_Email_Sent__c = parseInt(l.Of_Times_Email_Sent__c) + 1;
     l.HiddenMedicalProfessionalEmail__c = TretMedProfEmail;
-    l.Sub_Status__c = &apos;Pending Diagnosis Verification&apos;;
+    l.Sub_Status__c = 'Pending Diagnosis Verification';
     
     var processStatus = sforce.connection.update([l]);
-    if (processStatus[0].success === &quot;false&quot;) {
+    if (processStatus[0].success === "false") {
         alert(processStatus[0].errors.message);
-        //alert(&apos;An unexpected error has occurred. The system administrator has been alerted.&apos;); 
+        //alert('An unexpected error has occurred. The system administrator has been alerted.'); 
     } else {
-        alert(&quot;Diagnosis Verification sent successfully.&quot;);
+        alert("Diagnosis Verification sent successfully.");
         window.location.reload();
     }
 }
 
 function checkForMultipleRecp() {
 if({!NOT( Lead.Using_Paper_Process_For_DV__c )}){
-    if (confirm(&quot;Are you sure you want to submit Diagnosis Verification?&quot;) == true) {
+    if (confirm("Are you sure you want to submit Diagnosis Verification?") == true) {
         if ((TretMedProfEmail.length &gt; 0 &amp;&amp; bestPhysicianEmail.length &gt; 0) || (alternate1MedEmail.length &gt; 0 || alternate2MedEmai.length &gt; 0)) {
-            window.location.href = &apos;/apex/LeadSelectMedEmail_VF?id={!Lead.Id}&apos;;
+            window.location.href = '/apex/LeadSelectMedEmail_VF?id={!Lead.Id}';
         } else if (TretMedProfEmail.length &gt; 0) {
-            UpdateLeadRec(&apos;Treating Medical Professional&apos;);
+            UpdateLeadRec('Treating Medical Professional');
         } else {
-            alert(&apos;Please provide Treating Medical Professional Email or check the box for Using Paper Process for DV.&apos;);
+            alert('Please provide Treating Medical Professional Email or check the box for Using Paper Process for DV.');
         }
     }
 } else {
 
-	alert(&quot;No potential duplicates found. Please send the Paper Diagnosis Verification Form manually.&quot;);
+	alert("No potential duplicates found. Please send the Paper Diagnosis Verification Form manually.");
 
 }
 }
@@ -18603,16 +18614,16 @@ if({!NOT( Lead.Using_Paper_Process_For_DV__c )}){
 
 function UpdateLeadRec(medProfType) {
     if (hasItSentBefore.length &gt; 0) {
-        if (confirm(&quot;Are you sure you want to proceed? A Diagnosis Verification has already been sent and signed. Clicking Yes will reset all values in the DV form, and archive previous signed versions (in Docusign Status section) which cannot be undone.&quot;) == true) {
+        if (confirm("Are you sure you want to proceed? A Diagnosis Verification has already been sent and signed. Clicking Yes will reset all values in the DV form, and archive previous signed versions (in Docusign Status section) which cannot be undone.") == true) {
             try {
-                var dvReset = sforce.apex.execute(&quot;LeadWishFamilyDupe&quot;, &quot;resetDVMedicalSummary&quot;, {
-                    leadId: &apos;{!Lead.Id}&apos;
+                var dvReset = sforce.apex.execute("LeadWishFamilyDupe", "resetDVMedicalSummary", {
+                    leadId: '{!Lead.Id}'
                 });
-                alert(&quot;Diagnosis Verification sent successfully.&quot;);
+                alert("Diagnosis Verification sent successfully.");
                 window.location.reload();
             } catch (e) {
                 alert(e);
-                //alert(&apos;An unexpected error has occurred. The system administrator has been alerted.&apos;); 
+                //alert('An unexpected error has occurred. The system administrator has been alerted.'); 
             }
         }
     } else {
@@ -18622,40 +18633,40 @@ function UpdateLeadRec(medProfType) {
 
 if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
     //Diagnosis Verification 
-    if (leadSubStatus == &apos;Pending Diagnosis Verification&apos; || leadStatus == &apos;Eligibility Review&apos;) {
+    if (leadSubStatus == 'Pending Diagnosis Verification' || leadStatus == 'Eligibility Review') {
         checkForMultipleRecp();
-    } else if (leadStatus != &apos;Referred&apos;) {
-        alert(&quot;Diagnosis verification cannot be sent when lead in &quot; + leadStatus + &quot; status.&quot;);
+    } else if (leadStatus != 'Referred') {
+        alert("Diagnosis verification cannot be sent when lead in " + leadStatus + " status.");
     } else {
-        var leadDupe = &apos;&apos;;
-        leadDupe = sforce.apex.execute(&quot;LeadWishFamilyDupe&quot;, &quot;FindLeadDupe&quot;, {
-            leadId: &apos;{!Lead.Id}&apos;
+        var leadDupe = '';
+        leadDupe = sforce.apex.execute("LeadWishFamilyDupe", "FindLeadDupe", {
+            leadId: '{!Lead.Id}'
         });
-        if (leadDupe != null &amp;&amp; leadDupe != &apos;&apos; &amp;&amp; dupStatus != &apos;Block Lead Dup&apos;) {
+        if (leadDupe != null &amp;&amp; leadDupe != '' &amp;&amp; dupStatus != 'Block Lead Dup') {
             if (confirm(leadDupe)) {
-                window.location.href = &apos;/apex/LeadDuplicate_VF?id={!Lead.Id}&apos;;
+                window.location.href = '/apex/LeadDuplicate_VF?id={!Lead.Id}';
             }
-        } else if (leadDupe == null || leadDupe == &apos;&apos; || dupStatus == &apos;Block Lead Dup&apos;) {
-            if (priorWish.search(&apos;yes&apos;) &gt;= 0) {
-                alert(&quot;Diagnosis verification cannot be sent as this child has received prior wish.&quot;);
+        } else if (leadDupe == null || leadDupe == '' || dupStatus == 'Block Lead Dup') {
+            if (priorWish.search('yes') &gt;= 0) {
+                alert("Diagnosis verification cannot be sent as this child has received prior wish.");
             } else if (TretMedProfEmail.length &lt; 1 &amp;&amp; {!NOT( Lead.Using_Paper_Process_For_DV__c )}) {
-                alert(&apos;Please provide Treating Medical Professional Email or check the box for Using Paper Process for DV.&apos;);
+                alert('Please provide Treating Medical Professional Email or check the box for Using Paper Process for DV.');
             } else {
-                var dupe = sforce.apex.execute(&quot;LeadWishFamilyDupe&quot;, &quot;FindFamilyContactDupe&quot;, {
-                    leadId: &apos;{!Lead.Id}&apos;
+                var dupe = sforce.apex.execute("LeadWishFamilyDupe", "FindFamilyContactDupe", {
+                    leadId: '{!Lead.Id}'
                 });
-                if (dupe != null &amp;&amp; dupe != &apos;&apos; &amp;&amp; conDupStatus != &apos;Block Contact Dup&apos;) {
+                if (dupe != null &amp;&amp; dupe != '' &amp;&amp; conDupStatus != 'Block Contact Dup') {
                     if (confirm(dupe)) {
-                        window.location.href = &apos;/apex/LeadDuplicate_VF?id={!Lead.Id}&amp;wishFamily=true&apos;;
+                        window.location.href = '/apex/LeadDuplicate_VF?id={!Lead.Id}&amp;wishFamily=true';
                     }
-                } else if (dupe == null || dupe == &apos;&apos; || conDupStatus == &apos;Block Contact Dup&apos;) {
+                } else if (dupe == null || dupe == '' || conDupStatus == 'Block Contact Dup') {
                     checkForMultipleRecp();
                 }
             }
         }
     }
 } else {
-    alert(&apos;Please Enter ICD Code or Condition Description&apos;);
+    alert('Please Enter ICD Code or Condition Description');
 }</url>
     </webLinks>
     <webLinks>
@@ -18683,7 +18694,7 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
     </webLinks>
     <businessProcesses>
         <fullName>Default</fullName>
-        <description>Lead Process for &apos;Default&apos; Leads</description>
+        <description>Lead Process for 'Default' Leads</description>
         <isActive>true</isActive>
         <values>
             <fullName>Closed - Converted</fullName>
