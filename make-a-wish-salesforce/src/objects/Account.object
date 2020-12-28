@@ -266,7 +266,7 @@
     </compactLayouts>
     <enableEnhancedLookup>true</enableEnhancedLookup>
     <enableFeeds>true</enableFeeds>
-    <enableHistory>false</enableHistory>
+    <enableHistory>true</enableHistory>
     <externalSharingModel>Private</externalSharingModel>
     <fieldSets>
         <fullName>npsp__BDE_Entry_FS</fullName>
@@ -1094,6 +1094,7 @@
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -1104,6 +1105,7 @@
     <fields>
         <fullName>BillingAddress</fullName>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
     </fields>
     <fields>
         <fullName>BillingAddressVerificationAttempted__c</fullName>
@@ -1232,6 +1234,7 @@
         <relationshipName>Accounts</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
         <type>Lookup</type>
     </fields>
     <fields>
@@ -1252,6 +1255,7 @@
         <label>Contact Notes</label>
         <length>1000</length>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
         <type>LongTextArea</type>
         <visibleLines>5</visibleLines>
     </fields>
@@ -1388,6 +1392,7 @@
         <label>Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
         <type>Email</type>
         <unique>false</unique>
     </fields>
@@ -1816,6 +1821,7 @@
     <fields>
         <fullName>Fax</fullName>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
     </fields>
     <fields>
         <fullName>From_Mulesoft__c</fullName>
@@ -1977,6 +1983,7 @@
     <fields>
         <fullName>Name</fullName>
         <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
     </fields>
     <fields>
         <fullName>No_Direct_Contact__c</fullName>
@@ -2050,11 +2057,13 @@
             <isOptional>false</isOptional>
         </lookupFilter>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
         <type>Hierarchy</type>
     </fields>
     <fields>
         <fullName>Phone</fullName>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
     </fields>
     <fields>
         <fullName>Pre_2012_Wishes__c</fullName>
@@ -2786,6 +2795,7 @@ Help Text</description>
     <fields>
         <fullName>ShippingAddress</fullName>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
     </fields>
     <fields>
         <fullName>ShippingAddressVerificationAttempted__c</fullName>
@@ -2978,6 +2988,7 @@ Help Text</description>
     <fields>
         <fullName>Website</fullName>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
     </fields>
     <fields>
         <fullName>Wish_Co_ordinator_Hidden_Email__c</fullName>
