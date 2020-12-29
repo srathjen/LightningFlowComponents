@@ -2068,7 +2068,7 @@ Medical_Professional_Icon__c  &amp; " " &amp; Volunteer_Icon__c &amp; " " &amp; 
         <label>Alternate Email 2</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <type>Email</type>
         <unique>false</unique>
     </fields>
@@ -3171,7 +3171,7 @@ IF(ISBLANK(COI_Expiration_Date__c)=TRUE, IMAGE("/resource/icons/COI_Missing.png"
         <label>Contact Notes</label>
         <length>1000</length>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <type>LongTextArea</type>
         <visibleLines>5</visibleLines>
     </fields>
@@ -3603,7 +3603,7 @@ null)</formula>
     <fields>
         <fullName>Fax</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
     </fields>
     <fields>
         <fullName>FirstNameCharacterCount__c</fullName>
@@ -5160,7 +5160,7 @@ IF(  Medical_Professional_Count__c  &gt; 0 , IMAGE("/resource/icons/MedProf.png"
     <fields>
         <fullName>MobilePhone</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
     </fields>
     <fields>
         <fullName>Movie__c</fullName>
@@ -5200,7 +5200,7 @@ IF(  Medical_Professional_Count__c  &gt; 0 , IMAGE("/resource/icons/MedProf.png"
     <fields>
         <fullName>Name</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
     </fields>
     <fields>
         <fullName>Nickname__c</fullName>
@@ -5409,7 +5409,7 @@ IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientat
     <fields>
         <fullName>OtherPhone</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
     </fields>
     <fields>
         <fullName>Other_Medical_Provider_Category__c</fullName>
@@ -7331,7 +7331,7 @@ null)</formula>
         <relationshipName>Contacts</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <type>Lookup</type>
     </fields>
     <fields>
