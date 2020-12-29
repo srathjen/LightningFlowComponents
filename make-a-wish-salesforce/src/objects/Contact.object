@@ -9839,7 +9839,7 @@ IF( Volunteer_Count__c &gt; 0 &amp;&amp; is_Active_Volunteer__c = FALSE, IMAGE("
         <label>Alternate Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <type>Email</type>
         <unique>false</unique>
     </fields>
@@ -10174,7 +10174,7 @@ IF(ISPICKVAL(npe01__Secondary_Address_Type__c,"Other"),
         <label>Work Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <type>Email</type>
         <unique>false</unique>
     </fields>
