@@ -1622,9 +1622,6 @@
              data-keyboard="false" role="dialog" aria-labelledby="Warning Modal No HTF" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <!--<div class="modal-header">
-                        <h1 class="modal-title" id="exit-form"></h1>
-                    </div>-->
                     <div class="modal-body">
                         <p class="text-muted col-xs-12" style="text-align:center">{!$Label.Wish_Referral_No_Referring_HTF_Warning}</p>
                     </div>
