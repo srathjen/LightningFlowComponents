@@ -4243,6 +4243,15 @@ FALSE, TRUE)</formula>
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>No_Referring_HTF__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>No HTF</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Non_Verbal_Additional_Information__c</fullName>
         <description>SIW-657</description>
         <externalId>false</externalId>
