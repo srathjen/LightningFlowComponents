@@ -435,22 +435,13 @@
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-6"><span class="field-word-seperator"></span></div>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-3"></div>
-                                    <div class="col-sm-3 newRefHtfChk" style="margin-top:-10px">
+                                <div class="form-group row newRefHtfChk">
+                                    <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
                                         <label class="c-input c-checkbox">
                                             <apex:inputCheckbox id="createNewRefHTFchk"
                                                                 onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
                                             <span class="c-indicator sas"></span>
                                             {!$Label.Wish_Referral_Create_New_Hospital_Facility}
-                                        </label>
-                                    </div>
-                                    <div class="col-sm-3 skipRefHtfChk" style="margin-top:-10px">
-                                        <label class="c-input c-checkbox">
-                                            <apex:inputCheckbox id="noRefHtfChk" value="{!currLead.No_Referring_HTF__c}"
-                                                                onChange="onChangeNoReferringHtf(this.id, this.checked)"/>
-                                            <span class="c-indicator sas"></span>
-                                            {!$Label.Wish_Referral_No_Referring_HTF}
                                         </label>
                                     </div>
                                 </div>
@@ -743,7 +734,7 @@
                             </div>
 
                             <apex:outputPanel id="rr">
-                                <apex:actionRegion >
+                                <apex:actionRegion>
                                     <div class="form-group row">
                                         <div class="col-sm-3"><label>{!$Label.Wish_Referral_Number_of_Siblings}</label>
                                         </div>
@@ -759,25 +750,26 @@
                                     </div>
                                     <div class="form-group row sibInfo">
                                         <apex:outputPanel id="table">
-                                            <apex:outputPanel rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
+                                            <apex:outputPanel
+                                                    rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
                                                 <label class="col-md-12">{!$Label.Wish_Referral_Sibling_Information}</label>
                                             </apex:outputPanel>
                                             <div class="col-md-12 sib-tablewrap">
                                                 <apex:dataTable value="{!SiblingList}" var="currsibling"
                                                                 styleClass="table table-maw table-hover">
-                                                    <apex:column >
+                                                    <apex:column>
                                                         <apex:inputText value="{!currsibling.fName}"
                                                                         styleClass="form-control"
                                                                         html-placeholder="{!$Label.Wish_Referral_Placeholder_First_Name}"
                                                                         id="psibfirstname"/>
                                                     </apex:column>
-                                                    <apex:column >
+                                                    <apex:column>
                                                         <apex:inputText value="{!currsibling.lName}"
                                                                         styleClass="form-control"
                                                                         html-placeholder="{!$Label.Wish_Referral_Last_Name}"
                                                                         id="psiblastname"/>
                                                     </apex:column>
-                                                    <apex:column >
+                                                    <apex:column>
                                                         <apex:inputText value="{!currsibling.age}"
                                                                         styleClass="form-control"
                                                                         html-placeholder="{!$Label.Wish_Referral_Age}"
@@ -1573,7 +1565,7 @@
                 </div>
             </apex:outputpanel>
             <apex:inputText value="{!currLead.Relationship_to_child__c}" id="rToChild" styleClass="Relchild sr-only"/>
-			 <apex:inputHidden id="usAg" value="{!currLead.Referral_Browser_Type__c}"/>
+            <apex:inputHidden id="usAg" value="{!currLead.Referral_Browser_Type__c}"/>
         </apex:form>
     </div>
     <div class="modal fade" id="warningModal" data-target="#warningModal" tabindex="-1" data-backdrop="static"
@@ -1618,23 +1610,8 @@
             </div>
         </div>
     </div>
-        <div class="modal fade" id="warningModalNoHTF" data-target="#warningModalNoHTF" tabindex="-1" data-backdrop="static"
-             data-keyboard="false" role="dialog" aria-labelledby="Warning Modal No HTF" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <p class="text-muted col-xs-12" style="text-align:center">{!$Label.Wish_Referral_No_Referring_HTF_Warning}</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button"
-                                style="font-family:'Lato', Arial, sans-serif; color:#fff; border:none; text-transform:uppercase; height:4rem;"
-                                class="btn-md" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">OK</span></button>
-                    </div>
-                </div>
-            </div>
-        </div>
     <!-- / modal end -->
-    <apex:includeLightning />
+    <apex:includeLightning/>
     <script>
         function updateHtfFilter(lookupId, value, pluralHint) {
             let filter = value === '' ? '' : {BillingState: 'BillingState = \'' + value + '\''};
@@ -1798,7 +1775,7 @@
     <!--<script src="//ssl.wish.org/satellite/staging/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205-staging.js"></script>-->
     <!-- prod -->
     <script src="//ssl.wish.org/satellite/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205.js"></script>
-    <apex:outputPanel >
+    <apex:outputPanel>
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-2.2.4.min.js')}"></script>
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-ui-1.11.3.min.js')}"></script>
         <script>
@@ -1901,7 +1878,7 @@
         function agent() {
             var u = navigator.userAgent;
             document.querySelectorAll('[id$="usAg"]')[0].value = u;
-        }
+        }        
         function changeRelationship(ref, val) {
             agent();
             $(".shownOnYes").addClass("fam-aware-overlay");//SIW-556 Issue fix
@@ -2252,7 +2229,6 @@
                         }
                     } else if (inputType === 'referrerAccount') {
                         document.querySelector('[id$="createNewRefHTFchk"]').disabled = true;
-                        document.querySelector('[id$="noRefHtfChk"]').disabled = true;
                     } else if (inputType === 'treatingAccount') {
                         document.querySelector('[id$="createNewTrtHTFchk"]').disabled = true;
                     }
@@ -2269,7 +2245,6 @@
                         }
                     } else if (inputType === 'referrerAccount') {
                         document.querySelector('[id$="createNewRefHTFchk"]').disabled = false;
-                        document.querySelector('[id$="noRefHtfChk"]').disabled = false;
                         let referringContact = document.getElementById('j_id0:frm:referrerContactEmpty').value;
                         if (referringContact === 'false') {
                             document.getElementsByClassName('refNewAff')[0].style.display = 'none';
@@ -2307,7 +2282,6 @@
             let field;
             let fieldPair;
             let fieldFilter;
-            let noHtfCheckbox;
             if (id === 'j_id0:frm:createNewRefMPchk') {
                 fieldInput = document.querySelector('#externalReferrerContactLookup lightning-input');
                 field = document.getElementById('j_id0:frm:externalReferrerContactLookupOutput');
@@ -2322,7 +2296,6 @@
                 field = document.getElementById('j_id0:frm:externalReferrerAccountLookupOutput');
                 fieldPair = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0];
                 fieldFilter = document.querySelectorAll('[id$="referrerAccountState"]')[0];
-                noHtfCheckbox = document.querySelectorAll('[id$="noRefHtfChk"]')[0];
                 let referringContactEmpty = document.getElementById('j_id0:frm:referrerContactEmpty').value;
                 if (fieldPair.value && checked === true) {
                     document.getElementsByClassName('refNewAff')[0].style.display = 'block';
@@ -2356,7 +2329,6 @@
                     fieldFilter.disabled = true;
                     fieldFilter.style = 'background: rgb(233, 234, 236)';
                 }
-                noHtfCheckbox.disabled = true;
             }
             if (field && fieldInput && checked === false) {
                 fieldInput.disabled = false;
@@ -2364,28 +2336,6 @@
                     fieldFilter.disabled = false;
                     fieldFilter.style = '';
                 }
-                noHtfCheckbox.disabled = false;
-            }
-        }
-        
-        //Displays warning message to user in modal that no HTF will be recorded for referring MP
-        function onChangeNoReferringHtf(id, checked) {
-            let referringStateFilter = document.querySelectorAll('[id$="referrerAccountState"]')[0];
-            let referringHtfSearch = document.querySelector('#externalReferrerAccountLookup lightning-input');
-            let referringHtfCreate = document.querySelector('[id$="createNewRefHTFchk"]');
-            if(checked === true) {
-                $("#warningModalNoHTF").modal("show");
-                referringStateFilter.disabled = true;
-                referringStateFilter.style = 'background: rgb(233, 234, 236)';
-                referringHtfSearch.value = '';
-                referringHtfSearch.disabled = true;
-                document.getElementById('j_id0:frm:externalReferrerAccountLookupOutput').value = '';
-                referringHtfCreate.disabled = true;
-            } else {
-                referringStateFilter.disabled = false;
-                referringStateFilter.style = '';
-                referringHtfSearch.disabled = false;
-                referringHtfCreate.disabled = false;
             }
         }
 
@@ -2458,8 +2408,7 @@
 
                 let externalRefAccount = document.querySelector('#externalReferrerAccountLookup');
                 if (document.querySelectorAll('[id$="externalReferrerAccountLookupOutput"]')[0].value === ''
-                    && document.querySelectorAll('[id$="createNewRefHTFchk"]')[0].checked === false 
-                    && document.querySelectorAll('[id$="noRefHtfChk"]')[0].checked === false) {
+                    && document.querySelectorAll('[id$="createNewRefHTFchk"]')[0].checked === false) {
                     document.querySelectorAll('[id$="externalReferrerAccountLookupValidation"]')[0].required = true;
                     document.querySelector('#refAccountEm').hidden = false;
                     externalRefAccount.querySelector('.slds-input').style.border = "1px solid red";
@@ -2555,7 +2504,7 @@
                 console.log(err);
             }
         }
-        
+
     </script>
     <!-- custom style for referral page -->
     <style>

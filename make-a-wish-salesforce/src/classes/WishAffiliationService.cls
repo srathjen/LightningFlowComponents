@@ -100,9 +100,7 @@ public without sharing class WishAffiliationService {
 						if (rel.Referring_Medical_Professional__c && lead.Referring_MP_HTF__c != null) {
 							wishAffiliation.Health_Treatment_Facility__c = lead.Referring_MP_HTF__c;
 							affiliationsToInsert.add(wishAffiliation);
-                        } else if(rel.Referring_Medical_Professional__c) {
-                            affiliationsToInsert.add(wishAffiliation);
-                        } else if (rel.Treating_HCP__c && lead.Treating_MP_HTF__c != null) {
+						} else if (rel.Treating_HCP__c && lead.Treating_MP_HTF__c != null) {
 							wishAffiliation.Health_Treatment_Facility__c = lead.Treating_MP_HTF__c;
 							affiliationsToInsert.add(wishAffiliation);
 						} else if (rel.Best_Contact__c && lead.Best_Contact_HTF__c != null) {
@@ -114,7 +112,7 @@ public without sharing class WishAffiliationService {
 						} else if (lead.Alt_2_MP__c != null && rel.npe4__RelatedContact__c == lead.Alt_2_MP__c && lead.Alt_2_MP_HTF__c != null) {
 							wishAffiliation.Health_Treatment_Facility__c = lead.Alt_2_MP_HTF__c;
 							affiliationsToInsert.add(wishAffiliation);
-                        }
+						}
 					} else {
 						Wish_Affiliation__c affiliation = createNewWishAffiliation(currentCase.Id, rel, Constant_AC.WISH_AFFILIATION_TYPE_OTHER);
 						affiliationsToInsert.add(affiliation);
