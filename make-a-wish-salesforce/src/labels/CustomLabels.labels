@@ -2409,22 +2409,6 @@
         <value>a1a4C000000cfNMQAY</value>
     </labels>
     <labels>
-        <fullName>Wish_Referral_No_Referring_HTF</fullName>
-        <categories>Wish Referral</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Wish Referral No Referring HTF</shortDescription>
-        <value>I Am Not Associated With A Hospital/Facility</value>
-    </labels>
-    <labels>
-        <fullName>Wish_Referral_No_Referring_HTF_Warning</fullName>
-        <categories>Wish Referral</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Wish Referral No Referring HTF Warning</shortDescription>
-        <value>Most referring medical professionals are associated with a hospital/treatment facility with the exception of a school nurse, etc. If you marked this by mistake, please uncheck and provide your referring hospital/treatment facility.</value>
-    </labels>
-    <labels>
         <fullName>Wish_Referral_Lookup_Instructions</fullName>
         <categories>Wish Referral</categories>
         <language>en_US</language>
