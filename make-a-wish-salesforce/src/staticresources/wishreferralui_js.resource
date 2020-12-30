@@ -35,6 +35,9 @@
 //                06/18/2020 - Manoj - SIW-330
 //                Limit Primary Diagnosis field to only accept values from drop-down
 //
+//                12/30/2020 - Manoj - ODP-291
+//                Fixed issue: Exposing of form for Parent and Family type relationship
+//
 // format phone/date fields
 // target desktop
 // if (window.matchMedia("(min-width: 47.5rem)").matches) {
@@ -1135,7 +1138,6 @@ function formLogic() {
                 $(".other").css("display", "block");
             }
             if (labelNameRadio == " Parent/Guardian") {
-                $(".shownOnYes").removeClass("fam-aware-overlay");
                 $("[id$=aware-of-referral]").removeClass("family-aware-chk");
                 $("[id$=aware-of-referral]").parent().parent().css("display", "none");
                 $('[id$=aware-of-referral] option[value="Yes"]').prop("selected", true);
