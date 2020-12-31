@@ -5123,13 +5123,13 @@ IF(  Medical_Professional_Count__c  &gt; 0 , IMAGE("/resource/icons/MedProf.png"
     </fields>
     <fields>
         <fullName>Medical_Professional_Status__c</fullName>
-        <description>Uses the status of a Medical Professional&apos;s Affiliation to the chapter or Do Not Contact/Deceased to determine their status.</description>
+        <description>Uses the status of a Medical Professional&apos;s Affiliation to the chapter or Deceased to determine their status.</description>
         <externalId>false</externalId>
         <formula>IF(OR((Medical_Professional_Count__c = 0 &amp;&amp; Inactive_Medical_Professional_Count__c &gt; 0),
-                                    npsp__Deceased__c = True, npsp__Do_Not_Contact__c = True), &quot;Inactive&quot;, 
+                                    npsp__Deceased__c = True), &quot;Inactive&quot;, 
                 IF(Medical_Professional_Count__c &gt; 0, &quot;Active&quot;, &quot;&quot;))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>To change the status, create or update this contact&apos;s related &apos;Organization Affiliation&apos; records to a status of &apos;Active&apos; or &apos;Inactive&apos; or check/uncheck &apos;Do Not Contact&apos; or &apos;Deceased&apos;. Note: this is the record(s) related to the Chapter not an HTF.</inlineHelpText>
+        <inlineHelpText>To change the status, create or update this contact&apos;s related &apos;Organization Affiliation&apos; records to a status of &apos;Active&apos; or &apos;Inactive&apos; or check/uncheck &apos;Deceased&apos;. Note: this is the record(s) related to the Chapter not an HTF.</inlineHelpText>
         <label>MP Status</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
