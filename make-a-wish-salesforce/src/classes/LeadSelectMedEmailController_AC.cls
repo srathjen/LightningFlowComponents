@@ -22,7 +22,7 @@ public class LeadSelectMedEmailController_AC {
 	public List<SendDiagnosisWrapper> contacts { get; set; }
 	public String log;
 	public String recId;
-    public Boolean doNotContact { get; set; }
+    	public Boolean doNotContact { get; set; }
 	private static final String REFERRING_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_REFERRING_MEDICAL_PROFESSIONAL;
 	private static final String TREATING_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL;
 	private static final String ALTERNATE_1_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL;
