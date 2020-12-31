@@ -12,6 +12,7 @@
  * 5. 09/10/2019 - Manik - WLP-423
  * 6. 1/2/2020 - CSmith - SIW-342 - field name changes reverted
  * 7. 11/9/2020 - Gus - ODP-16
+ * 8. 12/30/2020 - Michelle - ODP-176
  **/
 public class LeadSelectMedEmailController_AC {
 	public Boolean success { get; set; }
@@ -21,6 +22,7 @@ public class LeadSelectMedEmailController_AC {
 	public List<SendDiagnosisWrapper> contacts { get; set; }
 	public String log;
 	public String recId;
+    public Boolean doNotContact { get; set; }
 	private static final String REFERRING_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_REFERRING_MEDICAL_PROFESSIONAL;
 	private static final String TREATING_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL;
 	private static final String ALTERNATE_1_MEDICAL_PROFESSIONAL = Constant_AC.LEAD_DV_FORM_TYPE_ALTERNATE_1_MEDICAL_PROFESSIONAL;
@@ -31,6 +33,22 @@ public class LeadSelectMedEmailController_AC {
 		currLead = findLead(ApexPages.currentPage().getParameters().get('id'));
 		contacts = findContacts(currLead);
 	}
+        
+    /**
+    * @description Checks if the selected contact is marked Deceased or Do Not Contact
+    */
+    public void checkContactStatus() {
+        doNotContact = false;
+        String contactId = ApexPages.currentPage().getParameters().get('contactid');
+        List<Contact> mpContact = new List<Contact>([
+            SELECT Id, npsp__Do_Not_Contact__c, npsp__Deceased__c 
+            FROM Contact 
+            WHERE Id = :contactId
+        ]);
+        if(!mpContact.isEmpty() && (mpContact[0].npsp__Do_Not_Contact__c || mpContact[0].npsp__Deceased__c)) {
+            doNotContact = true;
+        }
+    }
 
 	/**
 	 * @description Update Lead medical professional type
