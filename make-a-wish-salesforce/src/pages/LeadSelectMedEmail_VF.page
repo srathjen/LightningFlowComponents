@@ -36,7 +36,8 @@
                             <td style="border: none; {!IF(ctc.workEmail == '','display:none;','')}">Work</td>
                             <td id="{!ctc.type}" style="border: none; {!IF(ctc.workEmail == '','display:none;','')}">
                                 <input id="{!ctc.type}WorkEmail" type="radio" name="rec" class="selVal"
-                                       value="{!ctc.workEmail}" data-type="{!ctc.hiddenDvFormMedicalProfessionalType}" data-email="{!ctc.workEmail}"/>
+                                       value="{!ctc.workEmail}" data-type="{!ctc.hiddenDvFormMedicalProfessionalType}" data-email="{!ctc.workEmail}"
+                                       data-contact="{!ctc.Id}"/>
                                 <label for="{!ctc.type}WorkEmail">{!ctc.workEmail}</label>
                             </td>
                         </tr>
@@ -46,7 +47,7 @@
                             <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail1 == '','display:none;','')}">
                                 <input id="{!ctc.type}AlternateEmail1" type="radio" name="rec" class="selVal"
                                        value="{!ctc.alternateEmail1}" data-type="{!ctc.hiddenDvFormMedicalProfessionalType}"
-                                       data-email="{!ctc.alternateEmail1}"/>
+                                       data-email="{!ctc.alternateEmail1}" data-contact="{!ctc.Id}"/>
                                 <label for="{!ctc.type}AlternateEmail1">{!ctc.alternateEmail1}</label>
                             </td>
                         </tr>
@@ -56,7 +57,7 @@
                             <td id="{!ctc.type}" style="border: none; {!IF(ctc.alternateEmail2 == '','display:none;','')}">
                                 <input id="{!ctc.type}AlternateEmail2" type="radio" name="rec" class="selVal"
                                        value="{!ctc.alternateEmail2}" data-type="{!ctc.hiddenDvFormMedicalProfessionalType}"
-                                       data-email="{!ctc.alternateEmail2}"/>
+                                       data-email="{!ctc.alternateEmail2}" data-contact="{!ctc.Id}"/>
                                 <label for="{!ctc.type}AlternateEmail2">{!ctc.alternateEmail2}</label>
                             </td>
                         </tr>
@@ -66,7 +67,7 @@
                             <td id="{!ctc.type}" style="border: none; {!IF(ctc.newEmailProvided == '','display:none;','')}">
                                 <input id="{!ctc.type}NewProvidedEmail" type="radio" name="rec" class="selVal"
                                        value="{!ctc.newEmailProvided}" data-type="{!ctc.hiddenDvFormMedicalProfessionalType}"
-                                       data-email="{!ctc.newEmailProvided}"/>
+                                       data-email="{!ctc.newEmailProvided}" data-contact="{!ctc.Id}"/>
                                 <label for="{!ctc.type}NewProvidedEmail">{!ctc.newEmailProvided}</label>
                             </td>
                         </tr>
@@ -107,7 +108,7 @@
                             </apex:facet>
                             <apex:facet name="stop">
                                 <input type="button" value="Cancel" class="slds-button slds-button--neutral btn-process" onClick="closeConsoleTab();return false"/>
-                                <input type="button" value="Send Diagnosis Verification" onClick="passEmailVal();"
+                                <input type="button" value="Send Diagnosis Verification" onClick="passContactId();"
                                        class="slds-button slds-button--brand btn-process" style="margin-right:5px"/>
                             </apex:facet>
                         </apex:actionStatus>
@@ -125,6 +126,11 @@
                 <apex:param id="email" name="email" value=""/>
                 <apex:param id="action" name="action" value=""/>
             </apex:actionFunction>
+            <!--ODP 176-->
+            <apex:actionFunction name="checkContactStatus" action="{!checkContactStatus}"
+                                 status="status" oncomplete="displayWarning({!doNotContact})">
+                <apex:param id="contact" name="contactid" value=""/>
+            </apex:actionFunction>
             <script>
                 //IME 231
                 $(document).ready(function () {
@@ -138,6 +144,39 @@
                         availableContacts[0][0].checked = true;
                     }
                 });
+            
+            	function passContactId() {
+                    let contactId = '';
+                    $('.selVal').each(function () {
+                        if ($(this).is(':checked')) {
+                            contactId = $(this).data("contact");
+                        }
+                    });
+                    if(contactId) {
+                        $('.alert-danger').hide();
+                        checkContactStatus(contactId);
+                    } else {
+                        $('.alert-danger').show();
+                    }
+                }
+            
+            	function displayWarning(doNotContact) {
+                    if(doNotContact) {
+                        let msg = "Unable to send a Diagnosis Verification to this contact." + 
+                            " Their record is marked as 'Do Not Contact' and/or 'Deceased'." + 
+                            " If this is in error, please update their contact record and try again.";
+                        swal({
+                            title: '',
+                            text: msg,
+                            type: "error",
+                            confirmButtonColor: '#0070d2',
+                            confirmButtonText: "OK",
+                            closeOnConfirm: false
+                        });
+                    } else {
+                        passEmailVal();
+                    }
+                }
 
                 //IME 231
                 function passEmailVal() {

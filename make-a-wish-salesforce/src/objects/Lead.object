@@ -4652,7 +4652,7 @@ IF (Text(Status) = "DNQ", DNQ_Date__c , NULL))</formula>
                 <operation>equals</operation>
                 <value>False</value>
             </filterItems>
-            <isOptional>false</isOptional>
+            <isOptional>true</isOptional>
         </lookupFilter>
         <referenceTo>Contact</referenceTo>
         <relationshipLabel>Referring MP for Referral</relationshipLabel>
@@ -4846,7 +4846,7 @@ IF (Text(Status) = "DNQ", DNQ_Date__c , NULL))</formula>
                 <operation>equals</operation>
                 <value>False</value>
             </filterItems>
-            <isOptional>false</isOptional>
+            <isOptional>true</isOptional>
         </lookupFilter>
         <referenceTo>Contact</referenceTo>
         <relationshipLabel>Treating MP for Referral</relationshipLabel>

@@ -84,6 +84,7 @@ public class LeadSelectMedEmailController_Test {
         alt2Mp.Alternate_Email_2__c = 'danAlt2@email.com';
         alt2Mp.Contact_Notes__c = 'Contact notes for Alt 2 MP';
         alt2Mp.Region_Chapter__c = account.Id;
+        alt2Mp.npsp__Do_Not_Contact__c = true;
         insert contacts;
 
         List<Lead> leads = TestDataFactory.createLead(1);
@@ -204,5 +205,26 @@ public class LeadSelectMedEmailController_Test {
         selectLead.sendDiagnosisVerification();
         selectLead.GoToLeadViewPage();
         System.assert(selectLead.success);
+    }
+    
+    @IsTest
+    private static void checkContactStatus() {
+        Lead lead = [
+            SELECT Id 
+            FROM Lead 
+            WHERE Name = 'Jack Smith'
+        ];
+        Contact doNotContact = [
+            SELECT Id 
+            FROM Contact 
+            WHERE Name = 'Dan Alt2Mp'
+        ];
+        PageReference pageRef = Page.LeadSelectMedEmail_VF;
+        Test.setCurrentPage(pageRef);
+        ApexPages.currentPage().getParameters().put('id', lead.Id);
+        ApexPages.currentPage().getParameters().put('contactid', doNotContact.Id);
+        LeadSelectMedEmailController_AC selectMp = new LeadSelectMedEmailController_AC();
+        selectMp.checkContactStatus();
+        System.assert(selectMp.doNotContact);
     }
 }
