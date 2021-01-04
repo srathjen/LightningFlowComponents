@@ -121,6 +121,7 @@ private class WishReferralForm_AC_Test {
 		controller.currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
 		controller.currLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
 		controller.currLead.Relationship_To_Child__c = 'Self';
+        controller.currLead.Referrer_Zip__c = '35004';
 		controller.currLead.Child_Age__c = '5';
 
 		Test.startTest();
@@ -330,6 +331,7 @@ private class WishReferralForm_AC_Test {
 		controller.currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
 		controller.currLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
 		controller.currLead.Relationship_to_child__c = 'Other';
+        controller.currLead.Referrer_Zip__c = '35004';
 
 		Test.startTest();
 		controller.CreateLead();
@@ -401,6 +403,7 @@ private class WishReferralForm_AC_Test {
 		controller.currLead.LastName = 'Test';
 		controller.currLead.DOB__c = Date.today() - 1050;
 		controller.currLead.Child_Age__c = '16';
+        controller.currLead.Referrer_Zip__c = '35004';
 
 		Test.startTest();
 		controller.CreateLead();
@@ -585,4 +588,26 @@ private class WishReferralForm_AC_Test {
 
 		System.assert(contactAllEmptyFields == true);
 	}
+    
+    @isTest
+    static void validateReferrerZipLength() {
+        PageReference pageRef = Page.WishReferralForm_VF;
+        Test.setCurrentPage(pageRef);
+        ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
+        
+        WishReferralForm_AC controller = new WishReferralForm_AC();
+        controller.currLead.Has_this_child_ever_received_prior_wish__c = 'No';
+        controller.currLead.Any_medical_reason_for_moving_quickly__c = 'No';
+        controller.currLead.Relationship_to_child__c = 'Parent/Guardian';
+        controller.currLead.FirstName = 'Danielle';
+        controller.currLead.LastName = 'Watkins';
+        controller.currLead.DOB__c = Date.today() - 1050;
+        controller.currLead.Child_Age__c = '16';
+        controller.currLead.Referrer_Zip__c = '35004-1234';
+        
+        Test.startTest();
+        controller.CreateLead();
+        Test.stopTest();
+        System.assert(controller.currLead.Referrer_Zip__c.length() == 5);
+    }
 }
