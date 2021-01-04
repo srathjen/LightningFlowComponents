@@ -329,10 +329,27 @@ public class AccountServiceTest {
 	}
 
 	@isTest
-	private static void getDuplicateRecords() {
+	private static void findDuplicateRecords() {
 		// As Duplicate Rules might constantly change by Admin, this test is only to obtain coverage and not OOTB Duplicate Check
 		AccountService.AccountDuplicateInput input = new AccountService.AccountDuplicateInput();
-		Account duplicateAccount = new Account(Name = 'Jack Smith & Family Account', BillingCity = 'Phoenix', RecordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID);
+		Account duplicateAccount = new Account(Name = 'Jack Smith & Family Account', BillingCity = 'Phoenix', RecordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID,
+				Alias__c = 'Jack');
+		input.accountInput = duplicateAccount;
+
+		Test.startTest();
+		List<List<Account>> result = AccountService.getDuplicateRecords(new List<AccountService.AccountDuplicateInput>{
+				input
+		});
+		Test.stopTest();
+		System.assert(result.get(0).size() == 0);
+	}
+
+	@isTest
+	private static void findDuplicateRecords_WithMultipleAlias() {
+		// As Duplicate Rules might constantly change by Admin, this test is only to obtain coverage and not OOTB Duplicate Check
+		AccountService.AccountDuplicateInput input = new AccountService.AccountDuplicateInput();
+		Account duplicateAccount = new Account(Name = 'Jack Smith\'s & Family Account', BillingCity = 'Phoenix', RecordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID,
+		Alias__c = 'ack; Smith\'s; Family');
 		input.accountInput = duplicateAccount;
 
 		Test.startTest();
