@@ -106,31 +106,31 @@ private class WishReferralForm_AC_Test {
 		System.assert(completeMandatoryErrorFound);
 	}
 
-	@isTest
-	static void relationshipSelf() {
-		Account chapterAccount = [
-				SELECT Intake_Manager__c
-				FROM Account
-				WHERE Name = :Constant_AC.ACCOUNT_NAME_MAW_AMERICA
-		];
-
-		PageReference pageRef = Page.WishReferralForm_VF;
-		Test.setCurrentPage(pageRef);
-		ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
-		WishReferralForm_AC controller = new WishReferralForm_AC();
-		controller.currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
-		controller.currLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
-		controller.currLead.Relationship_To_Child__c = 'Self';
+    @isTest
+    static void relationshipSelf() {
+        Account chapterAccount = [
+            SELECT Intake_Manager__c
+            FROM Account
+            WHERE Name = :Constant_AC.ACCOUNT_NAME_MAW_AMERICA
+        ];
+        
+        PageReference pageRef = Page.WishReferralForm_VF;
+        Test.setCurrentPage(pageRef);
+        ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
+        WishReferralForm_AC controller = new WishReferralForm_AC();
+        controller.currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
+        controller.currLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
+        controller.currLead.Relationship_To_Child__c = 'Self';
         controller.currLead.Referrer_Zip__c = '35004';
-		controller.currLead.Child_Age__c = '5';
-
-		Test.startTest();
-		controller.CreateLead();
-		controller.copyReferralInfo();
-		Test.stopTest();
-
-		System.assertEquals(Constant_AC.LEAD_STATUS_REFERRED, controller.currLead.Status);
-	}
+        controller.currLead.Child_Age__c = '5';
+        
+        Test.startTest();
+        controller.CreateLead();
+        controller.copyReferralInfo();
+        Test.stopTest();
+        
+        System.assertEquals(Constant_AC.LEAD_STATUS_REFERRED, controller.currLead.Status);
+    }
 
 	@isTest
 	static void relationshipSelf1() {
@@ -321,24 +321,24 @@ private class WishReferralForm_AC_Test {
 		System.assertEquals(Constant_AC.LEAD_STATUS_REFERRED, controller.currLead.Status);
 	}
 
-	@isTest
-	static void relationshipOther() {
-		PageReference pageRef = Page.WishReferralForm_VF;
-		Test.setCurrentPage(pageRef);
-		ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
-
-		WishReferralForm_AC controller = new WishReferralForm_AC();
-		controller.currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
-		controller.currLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
-		controller.currLead.Relationship_to_child__c = 'Other';
+    @isTest
+    static void relationshipOther() {
+        PageReference pageRef = Page.WishReferralForm_VF;
+        Test.setCurrentPage(pageRef);
+        ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
+        
+        WishReferralForm_AC controller = new WishReferralForm_AC();
+        controller.currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
+        controller.currLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
+        controller.currLead.Relationship_to_child__c = 'Other';
         controller.currLead.Referrer_Zip__c = '35004';
-
-		Test.startTest();
-		controller.CreateLead();
-		Test.stopTest();
-
-		System.assertEquals(Constant_AC.LEAD_STATUS_INQUIRY, controller.currLead.Status);
-	}
+        
+        Test.startTest();
+        controller.CreateLead();
+        Test.stopTest();
+        
+        System.assertEquals(Constant_AC.LEAD_STATUS_INQUIRY, controller.currLead.Status);
+    }
 
 	@isTest
 	static void relationshipMedicalProfessional() {
@@ -390,27 +390,27 @@ private class WishReferralForm_AC_Test {
 		System.assert(String.isNotEmpty(controller.currLead.Medical_Professional_Last_Name__c));
 	}
 
-	@isTest
-	static void relationshipFamily() {
-		PageReference pageRef = Page.WishReferralForm_VF;
-		Test.setCurrentPage(pageRef);
-		ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
-
-		WishReferralForm_AC controller = new WishReferralForm_AC();
-		controller.currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
-		controller.currLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
-		controller.currLead.Relationship_to_child__c = 'Parent/Guardian';
-		controller.currLead.LastName = 'Test';
-		controller.currLead.DOB__c = Date.today() - 1050;
-		controller.currLead.Child_Age__c = '16';
+    @isTest
+    static void relationshipFamily() {
+        PageReference pageRef = Page.WishReferralForm_VF;
+        Test.setCurrentPage(pageRef);
+        ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
+        
+        WishReferralForm_AC controller = new WishReferralForm_AC();
+        controller.currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
+        controller.currLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
+        controller.currLead.Relationship_to_child__c = 'Parent/Guardian';
+        controller.currLead.LastName = 'Test';
+        controller.currLead.DOB__c = Date.today() - 1050;
+        controller.currLead.Child_Age__c = '16';
         controller.currLead.Referrer_Zip__c = '35004';
-
-		Test.startTest();
-		controller.CreateLead();
-		Test.stopTest();
-
-		System.assertEquals(Constant_AC.LEAD_STATUS_REFERRED, controller.currLead.Status);
-	}
+        
+        Test.startTest();
+        controller.CreateLead();
+        Test.stopTest();
+        
+        System.assertEquals(Constant_AC.LEAD_STATUS_REFERRED, controller.currLead.Status);
+    }
 
 	@isTest
 	static void relationshipSibling() {
