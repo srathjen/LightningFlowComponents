@@ -15,6 +15,7 @@ public class AccountService {
 	private final static String CHAPTER_SUBSTRING = ' - Chapter';
 	private final static String USER_ROLE_NAME_NATIONAL_STAFF = 'National Staff';
 	private final static String GROUP_TYPE_REGULAR = 'Regular';
+	private final static String ALIAS_SEPARATOR = ';';
 
 	/**
 	 * Sets FirstName, LastName and Household fields on Account
@@ -393,15 +394,15 @@ public class AccountService {
 	@InvocableMethod(Label='Find Account Duplicates' Description='Find duplicate contact records')
 	public static List<List<Account>> getDuplicateRecords(List<AccountDuplicateInput> accountInputs) {
 		List<Account> accounts = new List<Account>();
-		Set<String> accountNamesSearch = new Set<String>();
+		Set<String> accountNameSearch = new Set<String>();
 		Set<String> accountAliasSearch = new Set<String>();
 		for (AccountDuplicateInput input : accountInputs) {
 			accounts.add(input.accountInput);
 			if (String.isNotEmpty(input.accountInput.Name)) {
-				accountNamesSearch.add('%' + input.accountInput.Name + '%');
+				accountNameSearch.add(input.accountInput.Name);
 			}
 			if (String.isNotEmpty(input.accountInput.Alias__c)) {
-				accountAliasSearch.add('%' + input.accountInput.Alias__c + '%');
+				accountAliasSearch.add(input.accountInput.Alias__c);
 			}
 		}
 		List<Datacloud.FindDuplicatesResult> results = new List<Datacloud.FindDuplicatesResult>();
@@ -426,14 +427,36 @@ public class AccountService {
 				WHERE Id IN :duplicateAccountsIds
 		]);
 
-		for (Account acc : [
-				SELECT Id, Name, Department__c, Phone, BillingStreet, BillingCity, BillingState, BillingPostalCode,
-						Chapter_Name_Text__c
-				FROM Account
-				WHERE (Name LIKE :accountNamesSearch OR Name LIKE :accountAliasSearch)
-				AND RecordTypeId = :Constant_AC.HOSPITAL_TREATMENT_ID
-				LIMIT 100
-		]) {
+		String soqlQuery = 'SELECT Id, Name, Department__c, Phone, BillingStreet, BillingCity, BillingState, BillingPostalCode, Chapter_Name_Text__c' +
+				' FROM Account' +
+				' WHERE RecordTypeId = :HOSPITAL_TREATMENT_RECORD_TYPE_ID';
+
+		List<String> nameAliasWhereClauseTokens = new List<String>();
+		for(String nameToken : accountNameSearch){
+			nameToken = nameToken.contains('\'') ? nameToken.replace('\'', '\\\'') : nameToken;
+			nameAliasWhereClauseTokens.add('Name LIKE \'%' + nameToken + '%\'');
+		}
+		for(String aliasToken : accountAliasSearch){
+			if(aliasToken.contains(ALIAS_SEPARATOR)){
+				List<String> multipleSubTokens = aliasToken.split('['+ALIAS_SEPARATOR+']');
+				for(String aliasChildToken : multipleSubTokens){
+					aliasChildToken = aliasChildToken.contains('\'') ? aliasChildToken.replace('\'', '\\\'') : aliasChildToken;
+					nameAliasWhereClauseTokens.add('Alias__c LIKE \'%' + aliasChildToken.trim() + '%\'');
+				}
+			} else {
+				aliasToken = aliasToken.contains('\'') ? aliasToken.replace('\'', '\\\'') : aliasToken;
+				nameAliasWhereClauseTokens.add('Alias__c LIKE \'%' + aliasToken.trim() + '%\'');
+			}
+		}
+		if(!nameAliasWhereClauseTokens.isEmpty()){
+			String nameAliasWhereClause = String.join(nameAliasWhereClauseTokens, ' OR ');
+			soqlQuery += ' AND (' + nameAliasWhereClause + ')';
+		}
+		soqlQuery += ' LIMIT 100';
+
+		List<Account> accountsQueried = (List<Account>) Database.query(soqlQuery);
+
+		for (Account acc : accountsQueried) {
 			if(!duplicatedAccounts.containsKey(acc.Id)){
 				duplicatedAccounts.put(acc.Id, acc);
 			}
