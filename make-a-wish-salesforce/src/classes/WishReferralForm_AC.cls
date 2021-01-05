@@ -98,6 +98,9 @@ global class WishReferralForm_AC {
 					currLead.Referrer_Email__c = remailOne;
 				}
 			}
+            if(!String.isBlank(currLead.Referrer_Zip__c) && currLead.Referrer_Zip__c.length() > 5) {
+                currLead.Referrer_Zip__c = currLead.Referrer_Zip__c.substring(0, 5);
+            }
 			currLead.PCD_ICD__c = icdOrPcd;
 			currLead.Country = Constant_AC.LEAD_COUNTRY_UNITED_STATES;
 			List<ICD_Codes__c> icdCodeInfoList = getIcdCodes(diagnosisFilter);
@@ -183,6 +186,9 @@ global class WishReferralForm_AC {
 				//Route lead to chapter
 				String intakeManagerId = '';
 				if (zipCode != '') {
+                    if(zipCode.length() > 5) {
+                        zipCode = zipCode.substring(0, 5);
+                    }
 					List<Zip_Code__c> findChapterviaZipCode = new List<Zip_Code__c>(getChapterZipcode(zipCode));
 					if (findChapterviaZipCode.size() > 0) {
 						if (findChapterviaZipCode[0].Office__c != null && findChapterviaZipCode[0].Office__r.Chapter__c != null) {
