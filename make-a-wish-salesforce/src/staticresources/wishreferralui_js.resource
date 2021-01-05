@@ -34,10 +34,9 @@
 //
 //                06/18/2020 - Manoj - SIW-330
 //                Limit Primary Diagnosis field to only accept values from drop-down
-//
+//                  
 //                12/30/2020 - Manoj - ODP-291
 //                Fixed issue: Exposing of form for Parent and Family type relationship
-//
 // format phone/date fields
 // target desktop
 // if (window.matchMedia("(min-width: 47.5rem)").matches) {
@@ -1749,6 +1748,8 @@ $("form[id$=frm]").validate({
             $("#b98084695645e0e89ec5a2f3c41f0a2d").is(":checked") == true ||
             $("#2-b98084695645e0e89ec5a2f3c41f0a2d").val() !== "udh&6**33#"
         ) {
+            onsubmit: false;
+        } else if($("[id$=submitForm]").val() === 'false') {
             onsubmit: false;
         } else {
             if ($("form[id$=frm]").valid()) {
