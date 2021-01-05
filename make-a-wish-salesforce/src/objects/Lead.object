@@ -971,6 +971,28 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Hidden_Email_Alert_Best_Contact__c</fullName>
+        <description>Captures the email address for the Best Contact's eligibility email alert.</description>
+        <externalId>false</externalId>
+        <label>Hidden Email Alert - Best Contact</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_Email_Alert_Treating_MP__c</fullName>
+        <description>Captures the email address for the Treating MPs eligibility email alert.</description>
+        <externalId>false</externalId>
+        <label>Hidden Email Alert - Treating MP</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
     <fullName>Is_wish_referral_discussed_health_del__c</fullName>
     <externalId>false</externalId>
     <label>Referral Discussed With Healthcare?</label>
