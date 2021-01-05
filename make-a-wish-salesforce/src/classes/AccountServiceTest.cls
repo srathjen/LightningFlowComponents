@@ -168,7 +168,7 @@ public class AccountServiceTest {
 		System.assertEquals(expectedName, result.Name);
 	}
 
-	@isTest
+	@IsTest
 	private static void validateMatchChapterForAccount() {
 		List<Account> accountsInKindDonors = new List<Account>([
 				SELECT Id, Name, OwnerId, Chapter_Name__c, Wish_Co_ordinator_Hidden_Email__c
@@ -188,7 +188,7 @@ public class AccountServiceTest {
 		System.assert(accountsUpdatedList[0].Wish_Co_ordinator_Hidden_Email__c != null);
 	}
 
-	@isTest
+	@IsTest
 	private static void validatePrimaryContactForAccount() {
 		List<Account> accountList = new List<Account>([
 				SELECT Id, npe01__One2OneContact__c
@@ -207,7 +207,7 @@ public class AccountServiceTest {
 		System.assert(accountList[0].npe01__One2OneContact__c == contact.Id);
 	}
 
-	@isTest
+	@IsTest
 	private static void validateSubmitAccountApprovalProcess() {
 		List<Account> accountsInKindList = new List<Account>();
 		Map<Id, Id> wishCoordinatorMap = new Map<Id, Id>();
@@ -242,7 +242,7 @@ public class AccountServiceTest {
 		system.assert(processItem.size() > 0);
 	}
 
-	@isTest
+	@IsTest
 	private static void validateCreateAccountShareReadAccess() {
 		List<Account> accountsInKindList = new List<Account>();
 		Set<Id> chapterIdSet = new Set<Id>();
@@ -278,7 +278,7 @@ public class AccountServiceTest {
 		system.assert(accountShareList.size() > 0);
 	}
 
-	@isTest
+	@IsTest
 	private static void validateUpdateRelatedContactAddressWithHousehold() {
 		Set<Id> accountIdSet = new Set<Id>();
 		List<Account> accountList = new List<Account>([
@@ -302,7 +302,7 @@ public class AccountServiceTest {
 		System.assert(accountList[0].BillingCity == 'Scottsdale');
 	}
 
-	@isTest
+	@IsTest
 	private static void validatePopulateChapterOnHospitalAccount() {
 		Account htfAccount = [
 				SELECT Id, Chapter_Name__c, BillingPostalCode
@@ -328,28 +328,11 @@ public class AccountServiceTest {
 		System.assert(htfUpdated.Chapter_Name__c == centralFloridaChapter.Id);
 	}
 
-	@isTest
+	@IsTest
 	private static void findDuplicateRecords() {
 		// As Duplicate Rules might constantly change by Admin, this test is only to obtain coverage and not OOTB Duplicate Check
 		AccountService.AccountDuplicateInput input = new AccountService.AccountDuplicateInput();
-		Account duplicateAccount = new Account(Name = 'Jack Smith & Family Account', BillingCity = 'Phoenix', RecordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID,
-				Alias__c = 'Jack');
-		input.accountInput = duplicateAccount;
-
-		Test.startTest();
-		List<List<Account>> result = AccountService.getDuplicateRecords(new List<AccountService.AccountDuplicateInput>{
-				input
-		});
-		Test.stopTest();
-		System.assert(result.get(0).size() == 0);
-	}
-
-	@isTest
-	private static void findDuplicateRecords_WithMultipleAlias() {
-		// As Duplicate Rules might constantly change by Admin, this test is only to obtain coverage and not OOTB Duplicate Check
-		AccountService.AccountDuplicateInput input = new AccountService.AccountDuplicateInput();
-		Account duplicateAccount = new Account(Name = 'Jack Smith\'s & Family Account', BillingCity = 'Phoenix', RecordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID,
-		Alias__c = 'ack; Smith\'s; Family');
+		Account duplicateAccount = new Account(Name = 'Jack Smith & Family Account', BillingCity = 'Phoenix', RecordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID);
 		input.accountInput = duplicateAccount;
 
 		Test.startTest();

@@ -386,11 +386,6 @@ public class AccountService {
 		}
 	}
 
-	/**
-	* @description Get duplicate records for Account records according to Duplicate Rules
-	* @param accountInputs AccountDuplicateInput
-	* @return Wrapper List of Accounts
-	*/
 	@InvocableMethod(Label='Find Account Duplicates' Description='Find duplicate contact records')
 	public static List<List<Account>> getDuplicateRecords(List<AccountDuplicateInput> accountInputs) {
 		List<Account> accounts = new List<Account>();
@@ -400,9 +395,7 @@ public class AccountService {
 			accounts.add(input.accountInput);
 			if (String.isNotEmpty(input.accountInput.Name)) {
 				accountNameSearch.add(input.accountInput.Name);
-			}
-			if (String.isNotEmpty(input.accountInput.Alias__c)) {
-				accountAliasSearch.add(input.accountInput.Alias__c);
+				accountAliasSearch.add(input.accountInput.Name);
 			}
 		}
 		List<Datacloud.FindDuplicatesResult> results = new List<Datacloud.FindDuplicatesResult>();
@@ -432,21 +425,10 @@ public class AccountService {
 				' WHERE RecordTypeId = :HOSPITAL_TREATMENT_RECORD_TYPE_ID';
 
 		List<String> nameAliasWhereClauseTokens = new List<String>();
-		for(String nameToken : accountNameSearch){
-			nameToken = nameToken.contains('\'') ? nameToken.replace('\'', '\\\'') : nameToken;
-			nameAliasWhereClauseTokens.add('Name LIKE \'%' + nameToken + '%\'');
-		}
-		for(String aliasToken : accountAliasSearch){
-			if(aliasToken.contains(ALIAS_SEPARATOR)){
-				List<String> multipleSubTokens = aliasToken.split('['+ALIAS_SEPARATOR+']');
-				for(String aliasChildToken : multipleSubTokens){
-					aliasChildToken = aliasChildToken.contains('\'') ? aliasChildToken.replace('\'', '\\\'') : aliasChildToken;
-					nameAliasWhereClauseTokens.add('Alias__c LIKE \'%' + aliasChildToken.trim() + '%\'');
-				}
-			} else {
-				aliasToken = aliasToken.contains('\'') ? aliasToken.replace('\'', '\\\'') : aliasToken;
-				nameAliasWhereClauseTokens.add('Alias__c LIKE \'%' + aliasToken.trim() + '%\'');
-			}
+		for(String token : accountNameSearch){
+			token = token.contains('\'') ? token.replace('\'', '\\\'') : token;
+			nameAliasWhereClauseTokens.add('Name LIKE \'%' + token + '%\'');
+			nameAliasWhereClauseTokens.add('Alias__c LIKE \'%' + token + '%\'');
 		}
 		if(!nameAliasWhereClauseTokens.isEmpty()){
 			String nameAliasWhereClause = String.join(nameAliasWhereClauseTokens, ' OR ');
