@@ -21572,36 +21572,6 @@
         <layout>Broadcast__c-Broadcast Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>CCMI__Milestone_Assignment2__c-CCMI__Assignment Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>CCMI__Milestone_Assignment__c-CCMI__Milestone Task Assignment Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>CCMI__Milestone_Phase__c-CCMI__Milestone Phase Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>CCMI__Milestone_Project__c-CCMI__Milestone Project Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>CCMI__Milestone_Sub_Task__c-CCMI__Milestone Sub Task Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>CCMI__Milestone_Task__c-CCMI__Milestone Task Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>CCMI__Preferences__c-CCMI__Preferences Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>CCMI__Sample_Data__c-CCMI__Sample Data Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>CCMI__Timesheet__c-CCMI__Timesheet Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>CCMI__Work__c-CCMI__Time Entry Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
         <layout>CRMfusionDBR101__AutoConvert_Mapping__c-CRMfusionDBR101__DupeBlocker Auto-Convert Mapping Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
