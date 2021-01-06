@@ -532,18 +532,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <custom>true</custom>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>CCMI__Branding__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>CCMI__MSA_Terms__c</name>
-    </customSettingAccesses>
-    <customSettingAccesses>
-        <enabled>true</enabled>
-        <name>CCMI__Time_Options__c</name>
-    </customSettingAccesses>
     <pageAccesses>
         <apexPage>AddVolunteerRole_VF</apexPage>
         <enabled>true</enabled>
@@ -570,42 +558,6 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>BandwidthExceeded</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>CCMI__data_loader</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>CCMI__help</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>CCMI__my_assignments</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>CCMI__my_day</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>CCMI__project_tab_override</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>CCMI__project_view</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>CCMI__project_view_readonly</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>CCMI__projects_app</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>CCMI__timecard_tab</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
