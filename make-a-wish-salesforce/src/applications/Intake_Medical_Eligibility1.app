@@ -18,6 +18,15 @@
         <pageOrSobjectType>Lead</pageOrSobjectType>
         <recordType>Lead.Wish_Child</recordType>
         <type>Flexipage</type>
+        <profile>National Medical Advisor</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Lead_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Lead</pageOrSobjectType>
+        <recordType>Lead.Wish_Child</recordType>
+        <type>Flexipage</type>
         <profile>Volunteer Staff</profile>
     </profileActionOverrides>
     <profileActionOverrides>
@@ -3148,6 +3157,7 @@
             <tab>standard-Account</tab>
         </mappings>
         <mappings>
+            <fieldName>Lead__c</fieldName>
             <tab>standard-Case</tab>
         </mappings>
         <mappings>
@@ -3160,6 +3170,7 @@
             <tab>standard-Feed</tab>
         </mappings>
         <mappings>
+            <fieldName>Alt_1_MP__c</fieldName>
             <tab>standard-Lead</tab>
         </mappings>
         <mappings>

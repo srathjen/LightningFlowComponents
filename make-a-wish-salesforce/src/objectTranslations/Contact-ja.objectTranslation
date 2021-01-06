@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+﻿<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- BDE Entry FS --></label>
         <name>npsp__BDE_Entry_FS</name>
@@ -375,50 +375,6 @@
     <fields>
         <label><!-- Class In School --></label>
         <name>Class_in_School__c</name>
-    </fields>
-    <fields>
-        <label><!-- Contact Email Status --></label>
-        <name>CloudingoAgent__CES__c</name>
-    </fields>
-    <fields>
-        <label><!-- Mailing Address Record Type --></label>
-        <name>CloudingoAgent__MAR__c</name>
-    </fields>
-    <fields>
-        <label><!-- Mailing Address Status --></label>
-        <name>CloudingoAgent__MAS__c</name>
-    </fields>
-    <fields>
-        <label><!-- Mailing Address Vacancy --></label>
-        <name>CloudingoAgent__MAV__c</name>
-    </fields>
-    <fields>
-        <label><!-- Mailing Residential Delivery Indicator --></label>
-        <name>CloudingoAgent__MRDI__c</name>
-    </fields>
-    <fields>
-        <label><!-- Mailing Timezone --></label>
-        <name>CloudingoAgent__MTZ__c</name>
-    </fields>
-    <fields>
-        <label><!-- Other Address Record Type --></label>
-        <name>CloudingoAgent__OAR__c</name>
-    </fields>
-    <fields>
-        <label><!-- Other Address Status --></label>
-        <name>CloudingoAgent__OAS__c</name>
-    </fields>
-    <fields>
-        <label><!-- Other Address Vacancy --></label>
-        <name>CloudingoAgent__OAV__c</name>
-    </fields>
-    <fields>
-        <label><!-- Other Residential Delivery Indicator --></label>
-        <name>CloudingoAgent__ORDI__c</name>
-    </fields>
-    <fields>
-        <label><!-- Other Timezone --></label>
-        <name>CloudingoAgent__OTZ__c</name>
     </fields>
     <fields>
         <label><!-- Cognitive Delays --></label>
@@ -4235,26 +4191,6 @@ provide contact information for each site on which you are active. --></help>
         <label><!-- Wish Survey Contact Information --></label>
         <name>Wish_Survey_Contact_Information</name>
     </quickActions>
-    <quickActions>
-        <label><!-- DocuSign --></label>
-        <name>dsfs__ContactDocuSignAction</name>
-    </quickActions>
-    <quickActions>
-        <label><!-- New Affiliation --></label>
-        <name>npsp__New_Affiliation</name>
-    </quickActions>
-    <quickActions>
-        <label><!-- New Recurring Donation --></label>
-        <name>npsp__New_Recurring_Donation</name>
-    </quickActions>
-    <quickActions>
-        <label><!-- New Relationship --></label>
-        <name>npsp__New_Relationship</name>
-    </quickActions>
-    <quickActions>
-        <label><!-- Quick Update --></label>
-        <name>npsp__Quick_Update</name>
-    </quickActions>
     <recordTypes>
         <description><!-- A contact representing a board member --></description>
         <label><!-- Board Member --></label>
@@ -4316,10 +4252,6 @@ provide contact information for each site on which you are active. --></help>
         <errorMessage><!-- Please populate a Chapter Name or Zip Code to ensure the MP gets routed to a chapter. --></errorMessage>
         <name>Ensure_the_MP_has_a_Chapter_or_Zip</name>
     </validationRules>
-    <validationRules>
-        <errorMessage><!-- Please leave the &apos;Chapter Name&apos; blank so the record can be routed to the correct chapter based on its zip code. --></errorMessage>
-        <name>Suppress_Chapter_input_on_new_MPs</name>
-    </validationRules>
     <webLinks>
         <label><!-- LOOP --></label>
         <name>Loop__LOOP</name>
@@ -4359,10 +4291,6 @@ provide contact information for each site on which you are active. --></help>
     <webLinks>
         <label><!-- Merge_Contacts --></label>
         <name>npsp__Merge_Contacts</name>
-    </webLinks>
-    <webLinks>
-        <label><!-- New_Gift --></label>
-        <name>npsp__New_Gift</name>
     </webLinks>
     <webLinks>
         <label><!-- Recalculate_Rollups --></label>

@@ -655,6 +655,7 @@
     <members>Knowledge Only User</members>
     <members>MarketingProfile</members>
     <members>MST Admin</members>
+    <members>National Medical Advisor</members>
     <members>Office Staff</members>
     <members>Program Staff</members>
     <members>Prospective Volunteer %28Login%29</members>
@@ -673,6 +674,7 @@
     <name>Profile</name>
   </types>
   <types>
+    <members>National_Medical_Advisor_profilePasswordPolicy1609888301616</members>
     <members>Wish_Referral_Form_Spanish_Profile_profilePasswordPolicy1588954219544</members>
     <name>ProfilePasswordPolicy</name>
   </types>
