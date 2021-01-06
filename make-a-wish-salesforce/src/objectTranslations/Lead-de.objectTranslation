@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+﻿<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- Diagnosis Verfication Fieldset --></label>
         <name>Diagnosis_Verfication_Fieldset</name>
@@ -3610,21 +3610,6 @@
         <sections>
             <label><!-- Attachments --></label>
             <section>Attachments</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Wish Child Lead Layout</layout>
-        <sections>
-            <label><!-- Family Information --></label>
-            <section>Family Information</section>
-        </sections>
-        <sections>
-            <label><!-- Important Dates --></label>
-            <section>Important Dates</section>
-        </sections>
-        <sections>
-            <label><!-- Inquiry/Referral --></label>
-            <section>Inquiry/Referral</section>
         </sections>
     </layouts>
     <recordTypes>

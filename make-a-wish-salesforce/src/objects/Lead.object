@@ -272,6 +272,7 @@
         <fields>Email</fields>
         <fields>Matched__c</fields>
         <fields>Rush__c</fields>
+        <fields>Num_of_Attachments__c</fields>
         <label>Wish Child Compact Layout</label>
     </compactLayouts>
     <enableFeeds>true</enableFeeds>
@@ -4351,6 +4352,19 @@ FALSE, TRUE)</formula>
                 </value>
             </valueSetDefinition>
         </valueSet>
+    </fields>
+    <fields>
+        <fullName>Num_of_Attachments__c</fullName>
+        <description>Counts the number of Lead File records (excluding folders) related to a Lead record.</description>
+        <externalId>false</externalId>
+        <label># of Attachments</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Qualified_DNQ_Date__c</fullName>

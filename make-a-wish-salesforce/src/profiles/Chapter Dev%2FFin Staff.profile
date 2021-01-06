@@ -11760,6 +11760,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Num_of_Attachments__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Lead.Referral_Browser_Type__c</field>
         <readable>false</readable>
@@ -26925,14 +26930,14 @@
         <layout>InkindDon_reimburseFile__c-In Kind Donation %26 Reimbursement File Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Lead-Wish Child Lead Layout</layout>
+        <layout>Lead-Wish Child Lead Layout %28Intake Managers%29</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Lead-Default Lead Layout</layout>
         <recordType>Lead.Default</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Lead-Wish Child Lead Layout</layout>
+        <layout>Lead-Wish Child Lead Layout %28Intake Managers%29</layout>
         <recordType>Lead.Wish_Child</recordType>
     </layoutAssignments>
     <layoutAssignments>

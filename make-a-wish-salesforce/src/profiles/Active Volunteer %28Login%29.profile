@@ -25750,14 +25750,14 @@
         <layout>InkindDon_reimburseFile__c-In Kind Donation %26 Reimbursement File Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Lead-Wish Child Lead Layout</layout>
+        <layout>Lead-Wish Child Lead Layout %28Intake Managers%29</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Lead-Wish Child Lead Layout</layout>
+        <layout>Lead-Wish Child Lead Layout %28Intake Managers%29</layout>
         <recordType>Lead.Default</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Lead-Wish Child Lead Layout</layout>
+        <layout>Lead-Wish Child Lead Layout %28Intake Managers%29</layout>
         <recordType>Lead.Wish_Child</recordType>
     </layoutAssignments>
     <layoutAssignments>
