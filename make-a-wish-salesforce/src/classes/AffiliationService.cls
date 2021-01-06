@@ -732,8 +732,42 @@ public class AffiliationService {
 			} catch (Exception e) {
 				createContactDebugLog(affiliationList, 'updateOrgAffiliationStatus', e);
 			}
-		}
+		}        
 	}
+    
+    /**
+    * Update affiliation status based on contact deceased value
+    * @param newContactsList
+    * @param oldContactsMap
+    */
+    public static void updateAffiliationStatusContactDeceased(List<Contact> newContactsList, Map<Id, Contact> oldContactsMap) {
+        if(newContactsList.isEmpty()) {
+            return;
+        }
+        Set<Id> contactIds = new Set<Id>();
+        for (Contact newContact : newContactsList) {
+            if(newContact.npsp__Deceased__c && !oldContactsMap.get(newContact.Id).npsp__Deceased__c) {
+                contactIds.add(newContact.Id);
+            }
+        }
+        if(!contactIds.isEmpty()) {
+            List<npe5__Affiliation__c> affiliationsList = new List<npe5__Affiliation__c>([
+                SELECT Id, npe5__Contact__c, npe5__Status__c, npe5__EndDate__c
+                FROM npe5__Affiliation__c
+                WHERE npe5__Contact__c IN :contactIds 
+                AND npe5__Status__c = :Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE
+            ]);
+            for(npe5__Affiliation__c affiliation : affiliationsList) {
+                affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_INACTIVE;
+                affiliation.npe5__EndDate__c = System.today();
+            }
+            try{
+                update affiliationsList;
+            } catch(Exception e) {
+                createContactDebugLog(affiliationsList, 'updateOrgAffiliationStatus', e);
+            }
+        }
+    }
 
 	//used to update the status field in contact for reporting purpose
 	private static void updateContact(Map<Id, npe5__Affiliation__c> affiliationMap, Set<Id> affiliationIds,

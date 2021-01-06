@@ -147,6 +147,7 @@ public class ContactDomain extends trac_TriggerHandlerBase {
 		ContactService.shareContactRecord(newContactsMap, oldContactsMap);
 		ContactService.updateHiddenCaseFields(newContactsList, oldContactsMap);
 		ContactService.shareContactToChapter(newContactsList, oldContactsMap);
+        AffiliationService.updateAffiliationStatusContactDeceased(newContactsList, oldContactsMap);
 	}
 
 	/**

@@ -67,6 +67,7 @@ private class AffiliationServiceTest {
         mpLeeAffiliation.npe5__Contact__c = mpContactLee.Id;
         mpLeeAffiliation.npe5__Organization__c = arizonaHospital.Id;
         mpLeeAffiliation.npe5__Primary__c = true;
+        mpLeeAffiliation.npe5__Status__c = 'Active';
         npe5__Affiliation__c mpMillerAffiliation = affiliationList.get(1);
         mpMillerAffiliation.npe5__Contact__c = mpContactMiller.Id;
         mpMillerAffiliation.npe5__Organization__c = arizonaHospital.Id;
@@ -250,5 +251,29 @@ private class AffiliationServiceTest {
             WHERE npe5__Contact__c IN :volunteerMap.keySet()
         ];
         System.assert(affiliationUpdatedList[0].npe5__Status__c == 'Not Approved');
+    }
+    
+    @isTest
+    private static void updateAffiliationStatusContactDeceased() {
+        Map<Id, Contact> contactMap = new Map<Id, Contact>([
+            SELECT Id, npsp__Deceased__c 
+            FROM Contact
+            WHERE Name = 'Ken Lee'
+        ]);
+        List<Contact> updatedContactList = new List<Contact>();
+        for(Contact con : contactMap.values()) {
+            Contact contact = new Contact(Id = con.Id);
+            contact.npsp__Deceased__c = true;
+            updatedContactList.add(contact);
+        }
+        Test.startTest();
+        AffiliationService.updateAffiliationStatusContactDeceased(updatedContactList, contactMap);
+        Test.stopTest();
+        List<npe5__Affiliation__c> affiliationUpdatedList = [
+            SELECT Id, npe5__Status__c 
+            FROM npe5__Affiliation__c 
+            WHERE npe5__Contact__c IN :contactMap.keySet()
+        ];
+        System.assert(affiliationUpdatedList[0].npe5__Status__c == 'Inactive');
     }
 }
