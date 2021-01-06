@@ -114,7 +114,8 @@ public class LeadSelectMedEmailController_AC {
 						Hidden_Potential_Rush__c, Status, Diagnosis_Given_By_Referrer__c, ICD_Given_By_Referrer__c,
 						PD_Condition_Description__c, PD_ICD_Code__c,Does_Child_Have_Cognitive_Delays__c,
 						Does_Child_Have_Speech_or_Language_Delay__c,Non_Verbal_Communication_Method__c,
-						Non_Verbal_Additional_Information__c,Non_Verbal__c
+						Non_Verbal_Additional_Information__c,Non_Verbal__c,Referring_MP_Last_Name__c,
+						Treating_Medical_Professional_Last_Name__c,Best_Contact_for_Physician_Last_Name__c
 				FROM Lead
 				WHERE Id = :leadId
 		];
@@ -150,7 +151,7 @@ public class LeadSelectMedEmailController_AC {
 			if (String.isNotEmpty(lead.Referring_MP__r.Contact_Notes__c)) {
 				referringMp.contactNotes = lead.Referring_MP__r.Contact_Notes__c;
 			}
-			if (String.isNotEmpty(lead.Referring_MP_Email__c)) {
+			if (String.isNotEmpty(lead.Referring_MP_Email__c) && String.isBlank(lead.Referring_MP_Last_Name__c)) {
 				referringMp.newEmailProvided = lead.Referring_MP_Email__c;
 			}
 			referringMp.numProvidedEmails = countNumberOfEmailsProvided(referringMp);
@@ -177,8 +178,10 @@ public class LeadSelectMedEmailController_AC {
 			if (String.isNotEmpty(lead.Treating_MP__r.Contact_Notes__c)) {
 				treatingMp.contactNotes = lead.Treating_MP__r.Contact_Notes__c;
 			}
-			if (String.isNotEmpty(lead.Treating_Medical_Professional_Email__c)) {
+			if (String.isNotEmpty(lead.Treating_Medical_Professional_Email__c) && String.isBlank(lead.Treating_Medical_Professional_Last_Name__c)) {
 				treatingMp.newEmailProvided = lead.Treating_Medical_Professional_Email__c;
+			} else if (lead.Referring_MP__c == lead.Treating_MP__c && String.isNotEmpty(lead.Referring_MP_Email__c) && String.isBlank(lead.Referring_MP_Last_Name__c)) {
+				treatingMp.newEmailProvided = lead.Referring_MP_Email__c;
 			}
 			treatingMp.numProvidedEmails = countNumberOfEmailsProvided(treatingMp);
 			contacts.add(treatingMp);
@@ -204,8 +207,10 @@ public class LeadSelectMedEmailController_AC {
 			if (String.isNotEmpty(lead.Best_Contact__r.Contact_Notes__c)) {
 				bestContact.contactNotes = lead.Best_Contact__r.Contact_Notes__c;
 			}
-			if (String.isNotEmpty(lead.Best_contact_for_Physician_Email__c)) {
+			if (String.isNotEmpty(lead.Best_contact_for_Physician_Email__c) && String.isBlank(lead.Best_Contact_for_Physician_Last_Name__c)) {
 				bestContact.newEmailProvided = lead.Best_contact_for_Physician_Email__c;
+			} else if (lead.Referring_MP__c == lead.Best_Contact__c && String.isNotEmpty(lead.Referring_MP_Email__c) && String.isBlank(lead.Referring_MP_Last_Name__c)) {
+				bestContact.newEmailProvided = lead.Referring_MP_Email__c;
 			}
 			bestContact.numProvidedEmails = countNumberOfEmailsProvided(bestContact);
 			contacts.add(bestContact);
