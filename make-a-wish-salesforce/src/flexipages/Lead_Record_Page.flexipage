@@ -4171,10 +4171,16 @@
             </componentInstanceProperties>
             <componentName>console:relatedRecord</componentName>
             <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
                 <criteria>
                     <leftValue>{!Record.IsConverted}</leftValue>
                     <operator>EQUAL</operator>
                     <rightValue>false</rightValue>
+                </criteria>
+                <criteria>
+                    <leftValue>{!$User.Profile.Name}</leftValue>
+                    <operator>NE</operator>
+                    <rightValue>National Medical Advisor</rightValue>
                 </criteria>
             </visibilityRule>
         </componentInstances>
