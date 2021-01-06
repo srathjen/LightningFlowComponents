@@ -435,13 +435,22 @@
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-6"><span class="field-word-seperator"></span></div>
                                 </div>
-                                <div class="form-group row newRefHtfChk">
-                                    <div class="col-sm-12 offset-sm-3" style="margin-top:-10px">
+                                <div class="form-group row">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-3 newRefHtfChk" style="margin-top:-10px">
                                         <label class="c-input c-checkbox">
                                             <apex:inputCheckbox id="createNewRefHTFchk"
                                                                 onChange="onChangeCreateCheckbox(this.id, this.checked)"/>
                                             <span class="c-indicator sas"></span>
                                             {!$Label.Wish_Referral_Create_New_Hospital_Facility}
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-3 skipRefHtfChk" style="margin-top:-10px">
+                                        <label class="c-input c-checkbox">
+                                            <apex:inputCheckbox id="noRefHtfChk" value="{!currLead.No_Referring_HTF__c}"
+                                                                onChange="onChangeNoReferringHtf(this.id, this.checked)"/>
+                                            <span class="c-indicator sas"></span>
+                                            {!$Label.Wish_Referral_No_Referring_HTF}
                                         </label>
                                     </div>
                                 </div>
@@ -734,7 +743,7 @@
                             </div>
 
                             <apex:outputPanel id="rr">
-                                <apex:actionRegion>
+                                <apex:actionRegion >
                                     <div class="form-group row">
                                         <div class="col-sm-3"><label>{!$Label.Wish_Referral_Number_of_Siblings}</label>
                                         </div>
@@ -750,26 +759,25 @@
                                     </div>
                                     <div class="form-group row sibInfo">
                                         <apex:outputPanel id="table">
-                                            <apex:outputPanel
-                                                    rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
+                                            <apex:outputPanel rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
                                                 <label class="col-md-12">{!$Label.Wish_Referral_Sibling_Information}</label>
                                             </apex:outputPanel>
                                             <div class="col-md-12 sib-tablewrap">
                                                 <apex:dataTable value="{!SiblingList}" var="currsibling"
                                                                 styleClass="table table-maw table-hover">
-                                                    <apex:column>
+                                                    <apex:column >
                                                         <apex:inputText value="{!currsibling.fName}"
                                                                         styleClass="form-control"
                                                                         html-placeholder="{!$Label.Wish_Referral_Placeholder_First_Name}"
                                                                         id="psibfirstname"/>
                                                     </apex:column>
-                                                    <apex:column>
+                                                    <apex:column >
                                                         <apex:inputText value="{!currsibling.lName}"
                                                                         styleClass="form-control"
                                                                         html-placeholder="{!$Label.Wish_Referral_Last_Name}"
                                                                         id="psiblastname"/>
                                                     </apex:column>
-                                                    <apex:column>
+                                                    <apex:column >
                                                         <apex:inputText value="{!currsibling.age}"
                                                                         styleClass="form-control"
                                                                         html-placeholder="{!$Label.Wish_Referral_Age}"
@@ -1547,6 +1555,7 @@
                         <apex:commandbutton value="{!$Label.Submit_Label}" action="{!createLead}"
                                             styleClass="submitBtn col-xs-12 col-sm-4 col-sm-4 col-sm-push-8 push-sm-8 btn-md submit"
                                             onclick="validateForm()"/>
+                        <input type="hidden" id="submitForm" name="submitForm" value=""/>
                     </fieldset>
                 </div>
             </apex:outputpanel>
@@ -1610,8 +1619,23 @@
             </div>
         </div>
     </div>
+        <div class="modal fade" id="warningModalNoHTF" data-target="#warningModalNoHTF" tabindex="-1" data-backdrop="static"
+             data-keyboard="false" role="dialog" aria-labelledby="Warning Modal No HTF" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p class="text-muted col-xs-12" style="text-align:center">{!$Label.Wish_Referral_No_Referring_HTF_Warning}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                                style="font-family:'Lato', Arial, sans-serif; color:#fff; border:none; text-transform:uppercase; height:4rem;"
+                                class="btn-md" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">OK</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
     <!-- / modal end -->
-    <apex:includeLightning/>
+    <apex:includeLightning />
     <script>
         function updateHtfFilter(lookupId, value, pluralHint) {
             let filter = value === '' ? '' : {BillingState: 'BillingState = \'' + value + '\''};
@@ -1775,7 +1799,7 @@
     <!--<script src="//ssl.wish.org/satellite/staging/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205-staging.js"></script>-->
     <!-- prod -->
     <script src="//ssl.wish.org/satellite/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205.js"></script>
-    <apex:outputPanel>
+    <apex:outputPanel >
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-2.2.4.min.js')}"></script>
         <script src="{!URLFOR($Resource.wff_assets, 'wff_assets/js/jquery-ui-1.11.3.min.js')}"></script>
         <script>
@@ -1878,7 +1902,7 @@
         function agent() {
             var u = navigator.userAgent;
             document.querySelectorAll('[id$="usAg"]')[0].value = u;
-        }        
+        }
         function changeRelationship(ref, val) {
             agent();
             $(".shownOnYes").addClass("fam-aware-overlay");//SIW-556 Issue fix
@@ -2229,6 +2253,7 @@
                         }
                     } else if (inputType === 'referrerAccount') {
                         document.querySelector('[id$="createNewRefHTFchk"]').disabled = true;
+                        document.querySelector('[id$="noRefHtfChk"]').disabled = true;
                     } else if (inputType === 'treatingAccount') {
                         document.querySelector('[id$="createNewTrtHTFchk"]').disabled = true;
                     }
@@ -2245,6 +2270,7 @@
                         }
                     } else if (inputType === 'referrerAccount') {
                         document.querySelector('[id$="createNewRefHTFchk"]').disabled = false;
+                        document.querySelector('[id$="noRefHtfChk"]').disabled = false;
                         let referringContact = document.getElementById('j_id0:frm:referrerContactEmpty').value;
                         if (referringContact === 'false') {
                             document.getElementsByClassName('refNewAff')[0].style.display = 'none';
@@ -2282,6 +2308,7 @@
             let field;
             let fieldPair;
             let fieldFilter;
+            let noHtfCheckbox;
             if (id === 'j_id0:frm:createNewRefMPchk') {
                 fieldInput = document.querySelector('#externalReferrerContactLookup lightning-input');
                 field = document.getElementById('j_id0:frm:externalReferrerContactLookupOutput');
@@ -2296,6 +2323,7 @@
                 field = document.getElementById('j_id0:frm:externalReferrerAccountLookupOutput');
                 fieldPair = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0];
                 fieldFilter = document.querySelectorAll('[id$="referrerAccountState"]')[0];
+                noHtfCheckbox = document.querySelectorAll('[id$="noRefHtfChk"]')[0];
                 let referringContactEmpty = document.getElementById('j_id0:frm:referrerContactEmpty').value;
                 if (fieldPair.value && checked === true) {
                     document.getElementsByClassName('refNewAff')[0].style.display = 'block';
@@ -2329,6 +2357,7 @@
                     fieldFilter.disabled = true;
                     fieldFilter.style = 'background: rgb(233, 234, 236)';
                 }
+                noHtfCheckbox.disabled = true;
             }
             if (field && fieldInput && checked === false) {
                 fieldInput.disabled = false;
@@ -2336,6 +2365,28 @@
                     fieldFilter.disabled = false;
                     fieldFilter.style = '';
                 }
+                noHtfCheckbox.disabled = false;
+            }
+        }
+        
+        //Displays warning message to user in modal that no HTF will be recorded for referring MP
+        function onChangeNoReferringHtf(id, checked) {
+            let referringStateFilter = document.querySelectorAll('[id$="referrerAccountState"]')[0];
+            let referringHtfSearch = document.querySelector('#externalReferrerAccountLookup lightning-input');
+            let referringHtfCreate = document.querySelector('[id$="createNewRefHTFchk"]');
+            if(checked === true) {
+                $("#warningModalNoHTF").modal("show");
+                referringStateFilter.disabled = true;
+                referringStateFilter.style = 'background: rgb(233, 234, 236)';
+                referringHtfSearch.value = '';
+                referringHtfSearch.disabled = true;
+                document.getElementById('j_id0:frm:externalReferrerAccountLookupOutput').value = '';
+                referringHtfCreate.disabled = true;
+            } else {
+                referringStateFilter.disabled = false;
+                referringStateFilter.style = '';
+                referringHtfSearch.disabled = false;
+                referringHtfCreate.disabled = false;
             }
         }
 
@@ -2367,6 +2418,8 @@
         // Validation function for Wish Referral Form
         function validateForm() {
             try {
+                let submitForm = document.querySelector('#submitForm');
+                submitForm.value = '';
                 // SIW-370 starts : Added 2 methods to display error message for Primary Language field
                 let a = document.querySelectorAll('[id$="langI"]');
                 a[0].required = true;
@@ -2378,6 +2431,7 @@
                     e[0].style.display = "block";
                     lab[0].style.color = "red";
                     elem[0].style.border = "1px solid red";
+                    submitForm.value = 'false';
                     if (elemDiv[0].querySelectorAll('div').length > 0) {
                         elemDiv[0].querySelectorAll('div')[0].style.border = "1px solid red";
                     } else {
@@ -2393,96 +2447,106 @@
                     }
                 }
                 // SIW-370 ends
-
-                // Validating Lookup fields
-                let refMpCategory = document.querySelectorAll('[id$="refmpcategory"]')[0].value;
-                let refCtcLookupOutput = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0].value;
-                let trtCtcLookupOutput = document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0].value;
-                let bestCtcLookupOutput = document.querySelectorAll('[id$="externalBestContactLookupOutput"]')[0].value;
-                let referringSameAsTreatingSameAsBest = false;
-                if ((refMpCategory === 'Nurse Practitioner' || refMpCategory === 'Physician' || refMpCategory === 'Physician Assistant')
-                    && (refCtcLookupOutput !== '')) {
-                    referringSameAsTreatingSameAsBest = (refCtcLookupOutput === trtCtcLookupOutput)
+                
+                let refRelationship = $(".radioSection input:checked").parent().text();
+                if(refRelationship === ' Medical Professional') {
+                    // Validating Lookup fields
+                    let refMpCategory = document.querySelectorAll('[id$="refmpcategory"]')[0].value;
+                    let refCtcLookupOutput = document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0].value;
+                    let trtCtcLookupOutput = document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0].value;
+                    let bestCtcLookupOutput = document.querySelectorAll('[id$="externalBestContactLookupOutput"]')[0].value;
+                    let referringSameAsTreatingSameAsBest = false;
+                    if ((refMpCategory === 'Nurse Practitioner' || refMpCategory === 'Physician' || refMpCategory === 'Physician Assistant')
+                        && (refCtcLookupOutput !== '')) {
+                        referringSameAsTreatingSameAsBest = (refCtcLookupOutput === trtCtcLookupOutput)
                         && (refCtcLookupOutput === bestCtcLookupOutput);
-                }
-
-                let externalRefAccount = document.querySelector('#externalReferrerAccountLookup');
-                if (document.querySelectorAll('[id$="externalReferrerAccountLookupOutput"]')[0].value === ''
-                    && document.querySelectorAll('[id$="createNewRefHTFchk"]')[0].checked === false) {
-                    document.querySelectorAll('[id$="externalReferrerAccountLookupValidation"]')[0].required = true;
-                    document.querySelector('#refAccountEm').hidden = false;
-                    externalRefAccount.querySelector('.slds-input').style.border = "1px solid red";
-                } else {
-                    document.querySelectorAll('[id$="externalReferrerAccountLookupValidation"]')[0].required = false;
-                    document.querySelector('#refAccountEm').hidden = true;
-                    externalRefAccount.querySelector('.slds-input').style.border = "";
-                    document.querySelector('#externalReferrerAccountLookup').parentElement
+                    }
+                    
+                    let externalRefAccount = document.querySelector('#externalReferrerAccountLookup');
+                    if (document.querySelectorAll('[id$="externalReferrerAccountLookupOutput"]')[0].value === ''
+                        && document.querySelectorAll('[id$="createNewRefHTFchk"]')[0].checked === false 
+                        && document.querySelectorAll('[id$="noRefHtfChk"]')[0].checked === false) {
+                        document.querySelectorAll('[id$="externalReferrerAccountLookupValidation"]')[0].required = true;
+                        document.querySelector('#refAccountEm').hidden = false;
+                        externalRefAccount.querySelector('.slds-input').style.border = "1px solid red";
+                        submitForm.value = 'false';
+                    } else {
+                        document.querySelectorAll('[id$="externalReferrerAccountLookupValidation"]')[0].required = false;
+                        document.querySelector('#refAccountEm').hidden = true;
+                        externalRefAccount.querySelector('.slds-input').style.border = "";
+                        document.querySelector('#externalReferrerAccountLookup').parentElement
                         .previousElementSibling.firstElementChild.style.color = '';
-                }
-
-                let externalRefContact = document.querySelector('#externalReferrerContactLookup');
-                if (document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0].value === ''
-                    && document.querySelectorAll('[id$="createNewRefMPchk"]')[0].checked === false) {
-                    document.querySelectorAll('[id$="externalReferrerContactLookupValidation"]')[0].required = true;
-                    document.querySelector('#refContactEm').hidden = false;
-                    externalRefContact.querySelector('.slds-input').style.border = "1px solid red";
-                } else {
-                    document.querySelectorAll('[id$="externalReferrerContactLookupValidation"]')[0].required = false;
-                    document.querySelector('#refContactEm').hidden = true;
-                    externalRefContact.querySelector('.slds-input').style.border = "";
-                    document.querySelector('#externalReferrerContactLookup').parentElement
+                    }
+                    
+                    let externalRefContact = document.querySelector('#externalReferrerContactLookup');
+                    if (document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0].value === ''
+                        && document.querySelectorAll('[id$="createNewRefMPchk"]')[0].checked === false) {
+                        document.querySelectorAll('[id$="externalReferrerContactLookupValidation"]')[0].required = true;
+                        document.querySelector('#refContactEm').hidden = false;
+                        externalRefContact.querySelector('.slds-input').style.border = "1px solid red";
+                        submitForm.value = 'false';
+                    } else {
+                        document.querySelectorAll('[id$="externalReferrerContactLookupValidation"]')[0].required = false;
+                        document.querySelector('#refContactEm').hidden = true;
+                        externalRefContact.querySelector('.slds-input').style.border = "";
+                        document.querySelector('#externalReferrerContactLookup').parentElement
                         .previousElementSibling.firstElementChild.style.color = '';
-                }
-
-                let externalTrtAccount = document.querySelector('#externalTreatingAccountLookup');
-                if (document.querySelectorAll('[id$="externalTreatingAccountLookupOutput"]')[0].value === ''
-                    && document.querySelectorAll('[id$="createNewTrtHTFchk"]')[0].checked === false) {
-                    document.querySelectorAll('[id$="externalTreatingAccountLookupValidation"]')[0].required = true;
-                    document.querySelector('#trtAccountEm').hidden = false;
-                    externalTrtAccount.querySelector('.slds-input').style.border = "1px solid red";
-                } else {
-                    document.querySelectorAll('[id$="externalTreatingAccountLookupValidation"]')[0].required = false;
-                    document.querySelector('#trtAccountEm').hidden = true;
-                    externalTrtAccount.querySelector('.slds-input').style.border = "";
-                    document.querySelector('#externalTreatingAccountLookup').parentElement
+                    }
+                    
+                    let externalTrtAccount = document.querySelector('#externalTreatingAccountLookup');
+                    if (document.querySelectorAll('[id$="externalTreatingAccountLookupOutput"]')[0].value === ''
+                        && document.querySelectorAll('[id$="createNewTrtHTFchk"]')[0].checked === false) {
+                        document.querySelectorAll('[id$="externalTreatingAccountLookupValidation"]')[0].required = true;
+                        document.querySelector('#trtAccountEm').hidden = false;
+                        externalTrtAccount.querySelector('.slds-input').style.border = "1px solid red";
+                        submitForm.value = 'false';
+                    } else {
+                        document.querySelectorAll('[id$="externalTreatingAccountLookupValidation"]')[0].required = false;
+                        document.querySelector('#trtAccountEm').hidden = true;
+                        externalTrtAccount.querySelector('.slds-input').style.border = "";
+                        document.querySelector('#externalTreatingAccountLookup').parentElement
                         .previousElementSibling.firstElementChild.style.color = '';
-                }
-
-                let externalTrtContact = document.querySelector('#externalTreatingContactLookup');
-                if (document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0].value === ''
-                    && document.querySelectorAll('[id$="createNewTrtMPchk"]')[0].checked === false) {
-                    document.querySelectorAll('[id$="externalTreatingContactLookupValidation"]')[0].required = true;
-                    document.querySelector('#trtContactEm').innerText = 'Oops! Please enter a Medical Professional';
-                    document.querySelector('#trtContactEm').hidden = false;
-                    externalTrtContact.querySelector('.slds-input').style.border = "1px solid red";
-                } else if (referringSameAsTreatingSameAsBest === true
-                    && document.querySelectorAll('[id$="trtSameAsRefInfoChk"]')[0].checked === false) {
-                    document.querySelectorAll('[id$="externalTreatingContactLookupValidation"]')[0].required = true;
-                    document.querySelector('#trtContactEm').innerText = 'Oops! Referring Medical Professional cannot be the same as the ' +
-                        'Treating Medical Professional and Best Contact';
-                    document.querySelector('#trtContactEm').hidden = false;
-                    externalTrtContact.querySelector('.slds-input').style.border = "1px solid red";
-                } else {
-                    document.querySelectorAll('[id$="externalTreatingContactLookupValidation"]')[0].required = false;
-                    document.querySelector('#trtContactEm').hidden = true;
-                    externalTrtContact.querySelector('.slds-input').style.border = "";
-                    document.querySelector('#externalTreatingContactLookup').parentElement
+                    }
+                    
+                    let externalTrtContact = document.querySelector('#externalTreatingContactLookup');
+                    if (document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0].value === ''
+                        && document.querySelectorAll('[id$="createNewTrtMPchk"]')[0].checked === false) {
+                        document.querySelectorAll('[id$="externalTreatingContactLookupValidation"]')[0].required = true;
+                        document.querySelector('#trtContactEm').innerText = 'Oops! Please enter a Medical Professional';
+                        document.querySelector('#trtContactEm').hidden = false;
+                        externalTrtContact.querySelector('.slds-input').style.border = "1px solid red";
+                        submitForm.value = 'false';
+                    } else if (referringSameAsTreatingSameAsBest === true
+                               && document.querySelectorAll('[id$="trtSameAsRefInfoChk"]')[0].checked === false) {
+                        document.querySelectorAll('[id$="externalTreatingContactLookupValidation"]')[0].required = true;
+                        document.querySelector('#trtContactEm').innerText = 'Oops! Referring Medical Professional cannot be the same as the ' +
+                            'Treating Medical Professional and Best Contact';
+                        document.querySelector('#trtContactEm').hidden = false;
+                        externalTrtContact.querySelector('.slds-input').style.border = "1px solid red";
+                        submitForm.value = 'false';
+                    } else {
+                        document.querySelectorAll('[id$="externalTreatingContactLookupValidation"]')[0].required = false;
+                        document.querySelector('#trtContactEm').hidden = true;
+                        externalTrtContact.querySelector('.slds-input').style.border = "";
+                        document.querySelector('#externalTreatingContactLookup').parentElement
                         .previousElementSibling.firstElementChild.style.color = '';
-                }
-
-                let externalBestContact = document.querySelector('#externalBestContactLookup');
-                if (referringSameAsTreatingSameAsBest === true
-                    && document.querySelectorAll('[id$="bestSameAsRefInfoChk"]')[0].checked === false) {
-                    document.querySelector('#bestContactEm').innerText = 'Oops! Referring Medical Professional cannot be the same as the ' +
-                        'Treating Medical Professional and Best Contact';
-                    document.querySelector('#bestContactEm').hidden = false;
-                    externalBestContact.querySelector('.slds-input').style.border = "1px solid red";
-                } else {
-                    document.querySelectorAll('[id$="externalBestContactLookupValidation"]')[0].required = false;
-                    document.querySelector('#bestContactEm').hidden = true;
-                    externalBestContact.querySelector('.slds-input').style.border = "";
-                    document.querySelector('#externalBestContactLookup').parentElement
+                    }
+                    
+                    let externalBestContact = document.querySelector('#externalBestContactLookup');
+                    if (referringSameAsTreatingSameAsBest === true
+                        && document.querySelectorAll('[id$="bestSameAsRefInfoChk"]')[0].checked === false) {
+                        document.querySelector('#bestContactEm').innerText = 'Oops! Referring Medical Professional cannot be the same as the ' +
+                            'Treating Medical Professional and Best Contact';
+                        document.querySelector('#bestContactEm').hidden = false;
+                        externalBestContact.querySelector('.slds-input').style.border = "1px solid red";
+                        submitForm.value = 'false';
+                    } else {
+                        document.querySelectorAll('[id$="externalBestContactLookupValidation"]')[0].required = false;
+                        document.querySelector('#bestContactEm').hidden = true;
+                        externalBestContact.querySelector('.slds-input').style.border = "";
+                        document.querySelector('#externalBestContactLookup').parentElement
                         .previousElementSibling.firstElementChild.style.color = '';
+                    }
                 }
             } catch (err) {
                 console.log(err);
@@ -2504,7 +2568,7 @@
                 console.log(err);
             }
         }
-
+        
     </script>
     <!-- custom style for referral page -->
     <style>
