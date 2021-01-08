@@ -18374,6 +18374,7 @@ RecordType.Name ="Wish Child"</errorConditionFormula>
         <description>Restrict the lead owner from changing the status from Eligibility Review</description>
         <errorConditionFormula>AND( 
 $Profile.Name != 'Full Access National Staff', 
+$Profile.Name != 'National Medical Advisor', 
 $Profile.Name != 'System Administrator',                                                              
 ISCHANGED(Status), 
 ISPICKVAL(PRIORVALUE(Status),'Eligibility Review'), 
@@ -18394,6 +18395,7 @@ RecordType.Name ="Wish Child"</errorConditionFormula>
         <active>true</active>
         <errorConditionFormula>AND(
 $Profile.Name != 'Full Access National Staff',
+$Profile.Name != 'National Medical Advisor',
 $Profile.Name != 'System Administrator',
 ISCHANGED(Status),
 ISPICKVAL(PRIORVALUE(Status),'Eligibility Review'),
