@@ -348,7 +348,7 @@
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Phone}</label></div>
                                     <div class="col-sm-6">
                                         <apex:inputText value="{!currLead.Referring_MP_Phone__c}"
-                                                        styleClass="form-control refmpphone phonemask numbers-only refContact"
+                                                        styleClass="form-control refmpphone phonemask numbers-only phoneoremailref"
                                                         html-placeholder="(000) 000-0000" id="refmpphone"
                                                         html-pattern=".{10,14}" maxlength="10"/>
                                         <span class="errorSpan" id="email_phone_error_message"></span>
@@ -358,7 +358,7 @@
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Email}</label></div>
                                     <div class="col-sm-6">
                                         <apex:inputText value="{!currLead.Referring_MP_Email__c}"
-                                                        styleClass="form-control refmpemail email-std refContact"
+                                                        styleClass="form-control refmpemail email-std"
                                                         html-placeholder="medicalprofessional_email@domain.com"
                                                         id="refmpemail" maxlength="80"/>
                                     </div>
@@ -1143,7 +1143,7 @@
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Phone}</label></div>
                                     <div class="col-sm-6">
                                         <apex:inputText value="{!currLead.Treating_Medical_Professional_Phone__c}"
-                                                        styleClass="form-control mphone phonemask numbers-only trtContact"
+                                                        styleClass="form-control mphone phonemask numbers-only phoneoremailtrt"
                                                         html-placeholder="(000) 000-0000" id="mphone"
                                                         html-pattern=".{10,14}" maxlength="10"/>
                                     </div>
@@ -1152,7 +1152,7 @@
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Email}</label></div>
                                     <div class="form-group col-sm-6">
                                         <apex:inputText value="{!currLead.Treating_Medical_Professional_Email__c}"
-                                                        styleClass="form-control memail email-std trtContact"
+                                                        styleClass="form-control memail email-std"
                                                         html-placeholder="medicalprofessional_email@domain.com"
                                                         id="memail"
                                                         maxlength="80"/>
@@ -1460,7 +1460,7 @@
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Phone}</label></div>
                                     <div class="col-sm-6">
                                         <apex:inputText value="{!currLead.Best_contact_for_Physician_Phone__c}"
-                                                        styleclass="form-control phonemask numbers-only mpmaincontactphone bestContact"
+                                                        styleclass="form-control phonemask numbers-only mpmaincontactphone phoneoremailbest"
                                                         html-placeholder="(000) 000-0000" id="mpmaincontactphone"
                                                         html-pattern=".{10,14}" maxlength="10"/>
                                     </div>
@@ -1469,7 +1469,7 @@
                                     <div class="col-sm-3"><label>{!$Label.Wish_Referral_Email}</label></div>
                                     <div class="col-sm-6">
                                         <apex:inputText value="{!currLead.Best_contact_for_Physician_Email__c}"
-                                                        styleClass="form-control bemail email-std notqualto mpmaincontactemail bestContact"
+                                                        styleClass="form-control bemail email-std notqualto mpmaincontactemail"
                                                         html-placeholder="email@domain.com" id="mpmaincontactemail"
                                                         maxlength="80"/>
                                     </div>
@@ -1619,21 +1619,21 @@
             </div>
         </div>
     </div>
-        <div class="modal fade" id="warningModalNoHTF" data-target="#warningModalNoHTF" tabindex="-1" data-backdrop="static"
-             data-keyboard="false" role="dialog" aria-labelledby="Warning Modal No HTF" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <p class="text-muted col-xs-12" style="text-align:center">{!$Label.Wish_Referral_No_Referring_HTF_Warning}</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button"
-                                style="font-family:'Lato', Arial, sans-serif; color:#fff; border:none; text-transform:uppercase; height:4rem;"
-                                class="btn-md" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">OK</span></button>
-                    </div>
+    <div class="modal fade" id="warningModalNoHTF" data-target="#warningModalNoHTF" tabindex="-1" data-backdrop="static"
+         data-keyboard="false" role="dialog" aria-labelledby="Warning Modal No HTF" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p class="text-muted col-xs-12" style="text-align:center">{!$Label.Wish_Referral_No_Referring_HTF_Warning}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                            style="font-family:'Lato', Arial, sans-serif; color:#fff; border:none; text-transform:uppercase; height:4rem;"
+                            class="btn-md" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">OK</span></button>
                 </div>
             </div>
         </div>
+    </div>
     <!-- / modal end -->
     <apex:includeLightning />
     <script>
@@ -2368,7 +2368,7 @@
                 noHtfCheckbox.disabled = false;
             }
         }
-        
+
         //Displays warning message to user in modal that no HTF will be recorded for referring MP
         function onChangeNoReferringHtf(id, checked) {
             let referringStateFilter = document.querySelectorAll('[id$="referrerAccountState"]')[0];
@@ -2447,7 +2447,7 @@
                     }
                 }
                 // SIW-370 ends
-                
+
                 let refRelationship = $(".radioSection input:checked").parent().text();
                 if(refRelationship === ' Medical Professional') {
                     // Validating Lookup fields
@@ -2459,12 +2459,11 @@
                     if ((refMpCategory === 'Nurse Practitioner' || refMpCategory === 'Physician' || refMpCategory === 'Physician Assistant')
                         && (refCtcLookupOutput !== '')) {
                         referringSameAsTreatingSameAsBest = (refCtcLookupOutput === trtCtcLookupOutput)
-                        && (refCtcLookupOutput === bestCtcLookupOutput);
+                            && (refCtcLookupOutput === bestCtcLookupOutput);
                     }
-                    
                     let externalRefAccount = document.querySelector('#externalReferrerAccountLookup');
                     if (document.querySelectorAll('[id$="externalReferrerAccountLookupOutput"]')[0].value === ''
-                        && document.querySelectorAll('[id$="createNewRefHTFchk"]')[0].checked === false 
+                        && document.querySelectorAll('[id$="createNewRefHTFchk"]')[0].checked === false
                         && document.querySelectorAll('[id$="noRefHtfChk"]')[0].checked === false) {
                         document.querySelectorAll('[id$="externalReferrerAccountLookupValidation"]')[0].required = true;
                         document.querySelector('#refAccountEm').hidden = false;
@@ -2475,9 +2474,9 @@
                         document.querySelector('#refAccountEm').hidden = true;
                         externalRefAccount.querySelector('.slds-input').style.border = "";
                         document.querySelector('#externalReferrerAccountLookup').parentElement
-                        .previousElementSibling.firstElementChild.style.color = '';
+                            .previousElementSibling.firstElementChild.style.color = '';
                     }
-                    
+
                     let externalRefContact = document.querySelector('#externalReferrerContactLookup');
                     if (document.querySelectorAll('[id$="externalReferrerContactLookupOutput"]')[0].value === ''
                         && document.querySelectorAll('[id$="createNewRefMPchk"]')[0].checked === false) {
@@ -2490,12 +2489,13 @@
                         document.querySelector('#refContactEm').hidden = true;
                         externalRefContact.querySelector('.slds-input').style.border = "";
                         document.querySelector('#externalReferrerContactLookup').parentElement
-                        .previousElementSibling.firstElementChild.style.color = '';
+                            .previousElementSibling.firstElementChild.style.color = '';
                     }
-                    
+
                     let externalTrtAccount = document.querySelector('#externalTreatingAccountLookup');
                     if (document.querySelectorAll('[id$="externalTreatingAccountLookupOutput"]')[0].value === ''
-                        && document.querySelectorAll('[id$="createNewTrtHTFchk"]')[0].checked === false) {
+                        && document.querySelectorAll('[id$="createNewTrtHTFchk"]')[0].checked === false
+                        && document.querySelectorAll('[id$="trtSameAsRefInfoChk"]')[0].checked === false) {
                         document.querySelectorAll('[id$="externalTreatingAccountLookupValidation"]')[0].required = true;
                         document.querySelector('#trtAccountEm').hidden = false;
                         externalTrtAccount.querySelector('.slds-input').style.border = "1px solid red";
@@ -2505,19 +2505,20 @@
                         document.querySelector('#trtAccountEm').hidden = true;
                         externalTrtAccount.querySelector('.slds-input').style.border = "";
                         document.querySelector('#externalTreatingAccountLookup').parentElement
-                        .previousElementSibling.firstElementChild.style.color = '';
+                            .previousElementSibling.firstElementChild.style.color = '';
                     }
-                    
+
                     let externalTrtContact = document.querySelector('#externalTreatingContactLookup');
                     if (document.querySelectorAll('[id$="externalTreatingContactLookupOutput"]')[0].value === ''
-                        && document.querySelectorAll('[id$="createNewTrtMPchk"]')[0].checked === false) {
+                        && document.querySelectorAll('[id$="createNewTrtMPchk"]')[0].checked === false
+                        && document.querySelectorAll('[id$="trtSameAsRefInfoChk"]')[0].checked === false) {
                         document.querySelectorAll('[id$="externalTreatingContactLookupValidation"]')[0].required = true;
                         document.querySelector('#trtContactEm').innerText = 'Oops! Please enter a Medical Professional';
                         document.querySelector('#trtContactEm').hidden = false;
                         externalTrtContact.querySelector('.slds-input').style.border = "1px solid red";
                         submitForm.value = 'false';
                     } else if (referringSameAsTreatingSameAsBest === true
-                               && document.querySelectorAll('[id$="trtSameAsRefInfoChk"]')[0].checked === false) {
+                        && document.querySelectorAll('[id$="trtSameAsRefInfoChk"]')[0].checked === false) {
                         document.querySelectorAll('[id$="externalTreatingContactLookupValidation"]')[0].required = true;
                         document.querySelector('#trtContactEm').innerText = 'Oops! Referring Medical Professional cannot be the same as the ' +
                             'Treating Medical Professional and Best Contact';
@@ -2529,9 +2530,9 @@
                         document.querySelector('#trtContactEm').hidden = true;
                         externalTrtContact.querySelector('.slds-input').style.border = "";
                         document.querySelector('#externalTreatingContactLookup').parentElement
-                        .previousElementSibling.firstElementChild.style.color = '';
+                            .previousElementSibling.firstElementChild.style.color = '';
                     }
-                    
+
                     let externalBestContact = document.querySelector('#externalBestContactLookup');
                     if (referringSameAsTreatingSameAsBest === true
                         && document.querySelectorAll('[id$="bestSameAsRefInfoChk"]')[0].checked === false) {
@@ -2545,7 +2546,7 @@
                         document.querySelector('#bestContactEm').hidden = true;
                         externalBestContact.querySelector('.slds-input').style.border = "";
                         document.querySelector('#externalBestContactLookup').parentElement
-                        .previousElementSibling.firstElementChild.style.color = '';
+                            .previousElementSibling.firstElementChild.style.color = '';
                     }
                 }
             } catch (err) {
@@ -2568,10 +2569,15 @@
                 console.log(err);
             }
         }
-        
+
     </script>
     <!-- custom style for referral page -->
     <style>
+
+        #auraErrorMessage{
+            display: none;
+        }
+
         .page {
             display: none;
         }
