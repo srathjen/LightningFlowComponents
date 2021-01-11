@@ -2081,7 +2081,8 @@ function formValidationRules() {
     });
     $(".phoneoremailtrt").rules("add", {
         required: function () {
-            return ($("[id$=memail]").val() == "");
+            return ($(".radioSection input:checked").parent().text() === ' Medical Professional' 
+                    && $("[id$=memail]").val() == "");
         }, messages: {required: "Oops! Please enter a phone number or email"}
     }); 
     $(".phoneoremailbest").rules("add", {
