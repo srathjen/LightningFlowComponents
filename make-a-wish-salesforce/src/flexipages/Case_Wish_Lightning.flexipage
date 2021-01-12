@@ -1869,7 +1869,7 @@
         <componentInstances>
             <componentName>QualifyingDiagnosisButton</componentName>
             <visibilityRule>
-                <booleanFilter>1 AND (2 OR 3) AND (4 OR 5)</booleanFilter>
+                <booleanFilter>1 AND (2 OR 3 OR 6) AND (4 OR 5)</booleanFilter>
                 <criteria>
                     <leftValue>{!Record.RecordType.Name}</leftValue>
                     <operator>EQUAL</operator>
@@ -1894,6 +1894,11 @@
                     <leftValue>{!Record.Status}</leftValue>
                     <operator>NE</operator>
                     <rightValue>Approved - National MAC Review</rightValue>
+                </criteria>
+                <criteria>
+                    <leftValue>{!$User.Profile.Name}</leftValue>
+                    <operator>EQUAL</operator>
+                    <rightValue>National Medical Advisor</rightValue>
                 </criteria>
             </visibilityRule>
         </componentInstances>
