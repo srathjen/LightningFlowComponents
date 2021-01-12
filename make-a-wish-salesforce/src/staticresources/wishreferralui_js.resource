@@ -34,9 +34,10 @@
 //
 //                06/18/2020 - Manoj - SIW-330
 //                Limit Primary Diagnosis field to only accept values from drop-down
-//                  
+//
 //                12/30/2020 - Manoj - ODP-291
 //                Fixed issue: Exposing of form for Parent and Family type relationship
+//
 // format phone/date fields
 // target desktop
 // if (window.matchMedia("(min-width: 47.5rem)").matches) {
@@ -2073,23 +2074,21 @@ function formValidationRules() {
             },
         });
     });
-    $("input.phoneoremailref").rules("add", {
-        require_from_group: [1, ".refContact"],
-        messages: {
-            require_from_group: "Oops! Please enter a phone number or email",
-        },
+    $(".phoneoremailref").rules("add", {
+        required: function () {
+            return ($("[id$=refmpemail]").val() == "");
+        }, messages: {required: "Oops! Please enter a phone number or email"}
     });
-    $("input.phoneoremailtrt").rules("add", {
-        require_from_group: [1, ".trtContact"],
-        messages: {
-            require_from_group: "Oops! Please enter a phone number or email",
-        },
-    });
-    $("input.phoneoremailbest").rules("add", {
-        require_from_group: [1, ".bestContact"],
-        messages: {
-            require_from_group: "Oops! Please enter a phone number or email",
-        },
+    $(".phoneoremailtrt").rules("add", {
+        required: function () {
+            return ($(".radioSection input:checked").parent().text() === ' Medical Professional' 
+                    && $("[id$=memail]").val() == "");
+        }, messages: {required: "Oops! Please enter a phone number or email"}
+    }); 
+    $(".phoneoremailbest").rules("add", {
+        required: function () {
+            return ($("[id$=mpmaincontactemail]").val() == "");
+        }, messages: {required: "Oops! Please enter a phone number or email"}
     });
     $("input.acctname").each(function () {
         $(this).rules("add", {

@@ -533,13 +533,13 @@ private class WishReferralForm_AC_Test {
 		controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
 		controller.copyReferrerInfoBest = true;
 		controller.currLead.Referring_MP__c = referrer.Id;
-		controller.currLead.Treating_MP_HTF__c = hospital.Id;
+		controller.currLead.Referring_MP_HTF__c = hospital.Id;
 		Test.startTest();
 		controller.CreateLead();
 		Test.stopTest();
 
 		System.assert(controller.currLead.Best_Contact__c == controller.currLead.Referring_MP__c);
-		System.assert(controller.currLead.Best_Contact_HTF__c == controller.currLead.Treating_MP_HTF__c);
+		System.assert(controller.currLead.Best_Contact_HTF__c == controller.currLead.Referring_MP_HTF__c);
 	}
 
 	@isTest
@@ -609,5 +609,65 @@ private class WishReferralForm_AC_Test {
         controller.CreateLead();
         Test.stopTest();
         System.assert(controller.currLead.Referrer_Zip__c.length() == 5);
+    }
+    
+    @isTest
+    static void validateCopyReferrerToBestHTF() {
+        Contact referrer = [
+            SELECT Id
+            FROM Contact
+            WHERE FirstName = 'Testing1'
+        ];
+        
+        PageReference pageRef = Page.WishReferralForm_VF;
+        Test.setCurrentPage(pageRef);
+        ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
+        WishReferralForm_AC controller = new WishReferralForm_AC();
+        controller.copyReferrerInfoBest = true;
+        controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+        controller.currLead.PostalCode = '35004';
+        controller.currLead.Referring_MP__c = referrer.Id;
+        controller.currLead.Referring_MP_HTF_Name__c = 'General Hospital';
+        controller.currLead.Referring_MP_HTF_Street_Address__c = '500 Main Street';
+        controller.currLead.Referring_MP_HTF_City__c = 'Phoenix';
+        controller.currLead.Referring_MP_HTF_State__c = 'Arizona';
+        controller.currLead.Referring_MP_HTF_Zip_Code__c = '85001';
+        controller.currLead.Referring_MP_HTF_Phone__c = '(978) 979-8787';
+        controller.currLead.Referring_MP_HTF_Department__c = 'General Pediatrics';
+        
+        Test.startTest();
+        controller.createLead();
+        Test.stopTest();
+        System.assert(controller.currLead.Best_Contact_HTF_Name__c == controller.currLead.Referring_MP_HTF_Name__c);
+    }
+    
+    @isTest
+    static void validateCopyTreatingToBestHTF() {
+        Contact bestMedicalContact = [
+            SELECT Id
+            FROM Contact
+            WHERE FirstName = 'Testing1'
+        ];
+        
+        PageReference pageRef = Page.WishReferralForm_VF;
+        Test.setCurrentPage(pageRef);
+        ApexPages.currentPage().getParameters().put('isSuccess', 'Test');
+        WishReferralForm_AC controller = new WishReferralForm_AC();
+        controller.copyReferrerInfoBest = false;
+        controller.currLead.Relationship_to_child__c = Constant_AC.MEDICAL_PROFESSIONAL_RT_LABEL;
+        controller.currLead.PostalCode = '35004';
+        controller.currLead.Best_Contact__c = bestMedicalContact.Id;
+        controller.currLead.Hospital_Treatment_Facility_Treating__c = 'General Hospital';
+        controller.currLead.Treating_MP_HTF_Street_Address__c = '500 Main Street';
+        controller.currLead.Treating_MP_HTF_City__c = 'Phoenix';
+        controller.currLead.Treating_MP_HTF_State__c = 'Arizona';
+        controller.currLead.Treating_MP_HTF_Zip_Code__c = '85001';
+        controller.currLead.Treating_MP_HTF_Phone__c = '(978) 979-8787';
+        controller.currLead.Treating_MP_HTF_Department__c = 'General Pediatrics';
+        
+        Test.startTest();
+        controller.createLead();
+        Test.stopTest();
+        System.assert(controller.currLead.Best_Contact_HTF_Name__c == controller.currLead.Hospital_Treatment_Facility_Treating__c);
     }
 }
