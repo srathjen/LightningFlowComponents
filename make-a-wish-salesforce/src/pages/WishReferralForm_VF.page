@@ -2573,6 +2573,11 @@
     </script>
     <!-- custom style for referral page -->
     <style>
+
+        #auraErrorMessage{
+            display: none;
+        }
+
         .page {
             display: none;
         }
