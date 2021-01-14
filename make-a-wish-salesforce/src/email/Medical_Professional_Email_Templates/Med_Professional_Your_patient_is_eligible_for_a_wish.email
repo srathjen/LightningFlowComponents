@@ -4,7 +4,7 @@
 <![CDATA[<div style="text-align: left;"><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 12pt; line-height: normal; background: white;"></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal; background: white;"><span style="font-size: 12pt; font-family: Lato, serif;">Wish child name:&nbsp;{!Lead.Name}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal; background: white;">
 
 </p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal; background: white;"><span style="font-size: 12pt; font-family: Lato, serif;">Primary diagnosis:&nbsp;{!Lead.PD_Condition_Description__c}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal; background: white;"><br></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 12pt; line-height: normal; background: white;"><span style="font-family: Lato, serif;">We are happy to inform you that your
-patient {!Lead.FirstName}{!Lead.Child_Middle_Initial__c} has
+patient {!Lead.FirstName} has
 been referred to Make-A-Wish® and is medically eligible to receive a
 wish! {!Lead.FirstName}&nbsp;and {!Lead.FirstName}'s&nbsp;family will be
 contacted soon to set-up an initial visit with the wish granting team. We
