@@ -616,6 +616,9 @@ public class AffiliationService {
 	* @param contactList
 	*/
 	public static void createAffiliation(List<Contact> contactList) {
+        if(contactList.isEmpty()) {
+            return;
+        }
 		List<npe5__Affiliation__c> insertAffiliationList = new List<npe5__Affiliation__c>();
 		Set<Id> volunteerContactIds = new Set<Id>();
 		Map<Id, Id> mpChapterAffiliations = new Map<Id, Id>();
@@ -684,10 +687,11 @@ public class AffiliationService {
 		insert insertAffiliationList;
 		List<npe5__Affiliation__c> mpPrimaryAffiliationsUpdate = new List<npe5__Affiliation__c>();
 		for (npe5__Affiliation__c affiliation : [
-				SELECT Id, npe5__Primary__c
-				FROM npe5__Affiliation__c
-				WHERE npe5__Contact__c IN :mpChapterAffiliations.keySet()
-				AND npe5__Organization__c IN :mpChapterAffiliations.values()
+                    SELECT Id, npe5__Primary__c
+                    FROM npe5__Affiliation__c
+                    WHERE npe5__Contact__c IN :mpChapterAffiliations.keySet()
+                    AND npe5__Organization__c IN :mpChapterAffiliations.values()
+                    AND Id IN :insertAffiliationList
 		]) {
 			affiliation.npe5__Primary__c = false;
 			affiliation.npe5__Status__c = Constant_AC.ORG_AFFILIATION_STATUS_ACTIVE;
@@ -709,7 +713,7 @@ public class AffiliationService {
 				contactMap.put(newContact.Id, newContact);
 			}
 		}
-		if (!contactMap.isEmpty()) {
+        if (!contactMap.isEmpty()) {
 			List<npe5__Affiliation__c> affiliationList = new List<npe5__Affiliation__c>();
 			for (npe5__Affiliation__c dbAffiliationRec : [
 					SELECT Id, npe5__Contact__c, npe5__Primary__c, npe5__Status__c, npe5__Organization__c
@@ -736,18 +740,23 @@ public class AffiliationService {
 	}
     
     /**
-    * Update affiliation status based on contact deceased value
+    * Update affiliation status to inactive if contact deceased or changes chapter
     * @param newContactsList
     * @param oldContactsMap
     */
-    public static void updateAffiliationStatusContactDeceased(List<Contact> newContactsList, Map<Id, Contact> oldContactsMap) {
+    public static void updateAffiliationStatusInactive(List<Contact> newContactsList, Map<Id, Contact> oldContactsMap) {
         if(newContactsList.isEmpty()) {
             return;
         }
         Set<Id> contactIds = new Set<Id>();
+        List<Contact> contactChapterList = new List<Contact>();
         for (Contact newContact : newContactsList) {
             if(newContact.npsp__Deceased__c && !oldContactsMap.get(newContact.Id).npsp__Deceased__c) {
                 contactIds.add(newContact.Id);
+            }
+            if(newContact.Region_Chapter__c != oldContactsMap.get(newContact.Id).Region_Chapter__c) {
+                contactIds.add(newContact.Id);
+                contactChapterList.add(newContact);
             }
         }
         if(!contactIds.isEmpty()) {
@@ -763,8 +772,9 @@ public class AffiliationService {
             }
             try{
                 update affiliationsList;
+                createAffiliation(contactChapterList);
             } catch(Exception e) {
-                createContactDebugLog(affiliationsList, 'updateOrgAffiliationStatus', e);
+                createContactDebugLog(affiliationsList, 'updateAffiliationStatusInactive', e);
             }
         }
     }

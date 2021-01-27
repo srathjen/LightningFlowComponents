@@ -18,6 +18,25 @@
             <value>In Kind Donors</value>
         </criteriaItems>
     </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Chapter_Account_Edit_Access</fullName>
+        <accessLevel>Edit</accessLevel>
+        <accountSettings>
+            <caseAccessLevel>None</caseAccessLevel>
+            <contactAccessLevel>Read</contactAccessLevel>
+            <opportunityAccessLevel>None</opportunityAccessLevel>
+        </accountSettings>
+        <description>Gives edit access of chapter accounts to the public group Intake Managers which allows group to edit their org affiliations</description>
+        <label>Chapter Account Edit Access</label>
+        <sharedTo>
+            <group>Intake_Managers</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Chapter</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
     <sharingGuestRules>
         <fullName>Guest_User_Access_to_HTF</fullName>
         <accessLevel>Read</accessLevel>

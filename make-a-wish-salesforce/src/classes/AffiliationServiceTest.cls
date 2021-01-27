@@ -254,9 +254,9 @@ private class AffiliationServiceTest {
     }
     
     @isTest
-    private static void updateAffiliationStatusContactDeceased() {
+    private static void updateAffiliationStatusInactive() {
         Map<Id, Contact> contactMap = new Map<Id, Contact>([
-            SELECT Id, npsp__Deceased__c 
+            SELECT Id, npsp__Deceased__c, Region_Chapter__c
             FROM Contact
             WHERE Name = 'Ken Lee'
         ]);
@@ -267,7 +267,7 @@ private class AffiliationServiceTest {
             updatedContactList.add(contact);
         }
         Test.startTest();
-        AffiliationService.updateAffiliationStatusContactDeceased(updatedContactList, contactMap);
+        AffiliationService.updateAffiliationStatusInactive(updatedContactList, contactMap);
         Test.stopTest();
         List<npe5__Affiliation__c> affiliationUpdatedList = [
             SELECT Id, npe5__Status__c 
