@@ -1304,7 +1304,7 @@ function formLogic() {
                         $(".alertMsg").text(guardianPermissionMsg);
                     }
                 } else if (ageGroup == 5) {
-                    $(wcAge).prop("selectedIndex", 19); //SIW:374 - Modified this index to 19 for selecting option '18 & above' in case age is greater than 18 or equal to 18
+                    $(wcAge).prop("selectedIndex", 18);
                     $('<span class="text-muted age-text">Over 18 years old</span>').insertAfter(wcDob);
                     ageAlert();
                     // between ages 2.5 and 18 years
