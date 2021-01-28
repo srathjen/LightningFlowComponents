@@ -7215,6 +7215,11 @@ IF (Text(Status) = "DNQ", DNQ_Date__c , NULL))</formula>
                     <label>Duplicate</label>
                 </value>
                 <value>
+                    <fullName>Invalid</fullName>
+                    <default>false</default>
+                    <label>Invalid</label>
+                </value>
+                <value>
                     <fullName>Medical Reviewed</fullName>
                     <default>false</default>
                     <label>Medical Reviewed</label>
@@ -7274,6 +7279,11 @@ IF (Text(Status) = "DNQ", DNQ_Date__c , NULL))</formula>
                     <default>false</default>
                     <label>Previous Wish</label>
                 </value>
+                <value>
+                    <fullName>Refused</fullName>
+                    <default>false</default>
+                    <label>Refused</label>
+                </value>
             </valueSetDefinition>
             <valueSettings>
                 <controllingFieldValue>Eligibility Review</controllingFieldValue>
@@ -7313,11 +7323,19 @@ IF (Text(Status) = "DNQ", DNQ_Date__c , NULL))</formula>
             </valueSettings>
             <valueSettings>
                 <controllingFieldValue>Closed</controllingFieldValue>
+                <valueName>Invalid</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Closed</controllingFieldValue>
                 <valueName>No Family Response</valueName>
             </valueSettings>
             <valueSettings>
                 <controllingFieldValue>Closed</controllingFieldValue>
                 <valueName>No Medical Response</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Closed</controllingFieldValue>
+                <valueName>Refused</valueName>
             </valueSettings>
             <valueSettings>
                 <controllingFieldValue>DNQ</controllingFieldValue>
@@ -23898,10 +23916,7 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>Anesthesiology</fullName>
                 <default>false</default>
             </values>
-            <values>
-                <fullName>Cardio-thoracic Surgeon</fullName>
-                <default>false</default>
-            </values>
+            
             <values>
                 <fullName>Cardiology</fullName>
                 <default>false</default>
@@ -23938,6 +23953,7 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>General Pediatrics</fullName>
                 <default>false</default>
             </values>
+            
             <values>
                 <fullName>Genetics</fullName>
                 <default>false</default>
@@ -23955,7 +23971,7 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
-                <fullName>Hospice %2F Palliative Care</fullName>
+                <fullName>Hospice%2FPalliative Care</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -23968,10 +23984,6 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
             </values>
             <values>
                 <fullName>Infectious Disease</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Internal Medicine %2F Hospitalist</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -24002,6 +24014,12 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>Orthopedics</fullName>
                 <default>false</default>
             </values>
+            
+            <values>
+                <fullName>Physical Medicine %26 Rehabilitation</fullName>
+                <default>false</default>
+            </values>
+            
             <values>
                 <fullName>Psychiatry</fullName>
                 <default>false</default>
@@ -24026,12 +24044,9 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>Rheumatology</fullName>
                 <default>false</default>
             </values>
+            
             <values>
-                <fullName>Surgery</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Transplant Hepatology</fullName>
+                <fullName>Trauma %26 Emergency Services</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -24300,16 +24315,13 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>Anesthesiology</fullName>
                 <default>false</default>
             </values>
-            <values>
-                <fullName>Cardio-thoracic Surgeon</fullName>
-                <default>false</default>
-            </values>
+            
             <values>
                 <fullName>Cardiology</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Critical Care Medicine</fullName>
+                <fullName>Critical Care</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -24341,6 +24353,10 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
+                <fullName>General Surgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Genetics</fullName>
                 <default>false</default>
             </values>
@@ -24360,20 +24376,13 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>Hospice%2FPalliative Care</fullName>
                 <default>false</default>
             </values>
-            <values>
-                <fullName>Hospitalist</fullName>
-                <default>false</default>
-            </values>
+            
             <values>
                 <fullName>Immunology</fullName>
                 <default>false</default>
             </values>
             <values>
                 <fullName>Infectious Disease</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Internal Medicine%2FHospitalist</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -24412,6 +24421,7 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>Physical Medicine %26 Rehabilitation</fullName>
                 <default>false</default>
             </values>
+            
             <values>
                 <fullName>Psychiatry</fullName>
                 <default>false</default>
@@ -25634,10 +25644,7 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>Anesthesiology</fullName>
                 <default>false</default>
             </values>
-            <values>
-                <fullName>Cardio-thoracic Surgeon</fullName>
-                <default>false</default>
-            </values>
+            
             <values>
                 <fullName>Cardiology</fullName>
                 <default>false</default>
@@ -25674,6 +25681,7 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>General Pediatrics</fullName>
                 <default>false</default>
             </values>
+            
             <values>
                 <fullName>Genetics</fullName>
                 <default>false</default>
@@ -25691,7 +25699,7 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
-                <fullName>Hospice %2F Palliative Care</fullName>
+                <fullName>Hospice%2FPalliative Care</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -25704,10 +25712,6 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
             </values>
             <values>
                 <fullName>Infectious Disease</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Internal Medicine %2F Hospitalist</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -25738,6 +25742,12 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>Orthopedics</fullName>
                 <default>false</default>
             </values>
+            
+            <values>
+                <fullName>Physical Medicine %26 Rehabilitation</fullName>
+                <default>false</default>
+            </values>
+            
             <values>
                 <fullName>Psychiatry</fullName>
                 <default>false</default>
@@ -25762,12 +25772,9 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>Rheumatology</fullName>
                 <default>false</default>
             </values>
+            
             <values>
-                <fullName>Surgery</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Transplant Hepatology</fullName>
+                <fullName>Trauma %26 Emergency Services</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -26055,16 +26062,13 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>Anesthesiology</fullName>
                 <default>false</default>
             </values>
-            <values>
-                <fullName>Cardio-thoracic Surgeon</fullName>
-                <default>false</default>
-            </values>
+            
             <values>
                 <fullName>Cardiology</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Critical Care Medicine</fullName>
+                <fullName>Critical Care</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -26096,6 +26100,10 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
+                <fullName>General Surgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Genetics</fullName>
                 <default>false</default>
             </values>
@@ -26115,20 +26123,13 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>Hospice%2FPalliative Care</fullName>
                 <default>false</default>
             </values>
-            <values>
-                <fullName>Hospitalist</fullName>
-                <default>false</default>
-            </values>
+            
             <values>
                 <fullName>Immunology</fullName>
                 <default>false</default>
             </values>
             <values>
                 <fullName>Infectious Disease</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Internal Medicine%2FHospitalist</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -26167,6 +26168,7 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>Physical Medicine %26 Rehabilitation</fullName>
                 <default>false</default>
             </values>
+            
             <values>
                 <fullName>Psychiatry</fullName>
                 <default>false</default>
@@ -26832,6 +26834,10 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
+                <fullName>Invalid</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Medical Review Not Required</fullName>
                 <default>false</default>
             </values>
@@ -26879,6 +26885,10 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>Previous Wish</fullName>
                 <default>false</default>
             </values>
+            <values>
+                <fullName>Refused</fullName>
+                <default>false</default>
+            </values>
         </picklistValues>
         <picklistValues>
             <picklist>Treating_MP_Category__c</picklist>
@@ -26917,10 +26927,7 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>Anesthesiology</fullName>
                 <default>false</default>
             </values>
-            <values>
-                <fullName>Cardio-thoracic Surgeon</fullName>
-                <default>false</default>
-            </values>
+            
             <values>
                 <fullName>Cardiology</fullName>
                 <default>false</default>
@@ -26957,6 +26964,7 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>General Pediatrics</fullName>
                 <default>false</default>
             </values>
+            
             <values>
                 <fullName>Genetics</fullName>
                 <default>false</default>
@@ -26974,7 +26982,7 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
-                <fullName>Hospice %2F Palliative Care</fullName>
+                <fullName>Hospice%2FPalliative Care</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -26987,10 +26995,6 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
             </values>
             <values>
                 <fullName>Infectious Disease</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Internal Medicine %2F Hospitalist</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -27021,6 +27025,12 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>Orthopedics</fullName>
                 <default>false</default>
             </values>
+            
+            <values>
+                <fullName>Physical Medicine %26 Rehabilitation</fullName>
+                <default>false</default>
+            </values>
+            
             <values>
                 <fullName>Psychiatry</fullName>
                 <default>false</default>
@@ -27045,12 +27055,9 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>Rheumatology</fullName>
                 <default>false</default>
             </values>
+            
             <values>
-                <fullName>Surgery</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Transplant Hepatology</fullName>
+                <fullName>Trauma %26 Emergency Services</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -27319,16 +27326,13 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>Anesthesiology</fullName>
                 <default>false</default>
             </values>
-            <values>
-                <fullName>Cardio-thoracic Surgeon</fullName>
-                <default>false</default>
-            </values>
+            
             <values>
                 <fullName>Cardiology</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Critical Care Medicine</fullName>
+                <fullName>Critical Care</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -27360,6 +27364,10 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <default>false</default>
             </values>
             <values>
+                <fullName>General Surgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Genetics</fullName>
                 <default>false</default>
             </values>
@@ -27379,20 +27387,13 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>Hospice%2FPalliative Care</fullName>
                 <default>false</default>
             </values>
-            <values>
-                <fullName>Hospitalist</fullName>
-                <default>false</default>
-            </values>
+            
             <values>
                 <fullName>Immunology</fullName>
                 <default>false</default>
             </values>
             <values>
                 <fullName>Infectious Disease</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Internal Medicine%2FHospitalist</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -27431,6 +27432,7 @@ if (conditionDescription.length &gt; 0 || icdCode.length &gt; 0) {
                 <fullName>Physical Medicine %26 Rehabilitation</fullName>
                 <default>false</default>
             </values>
+            
             <values>
                 <fullName>Psychiatry</fullName>
                 <default>false</default>
