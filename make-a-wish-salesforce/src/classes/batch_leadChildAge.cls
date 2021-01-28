@@ -22,6 +22,7 @@ global class batch_leadChildAge implements Database.Batchable<SObject>, Schedula
                 AND Age_Requirement_Met__c = FALSE
                 AND Child_Age__c = :Constant_AC.LEAD_CHILD_AGE_UNDER_2_5
                 AND RecordTypeId = :Constant_AC.LEAD_RT_WISH_CHILD
+                AND DOB__c != Null
         ]);
     }
 
@@ -29,9 +30,6 @@ global class batch_leadChildAge implements Database.Batchable<SObject>, Schedula
         List<Lead> updateLeads = new List<Lead>();
         try {
             for (Lead leads : scope) {
-                if(leads.dob__c == null) {
-                    continue;
-                }
                 Integer daysInCurrentMonth = Date.daysInMonth(runDate.year(), runDate.month());
                 Date twoAndHalfToday = runDate.addYears(-2).addMonths(-6);
                 Integer daysInSixthMonth = Date.daysInMonth(twoAndHalfToday.year(), twoAndHalfToday.month());
