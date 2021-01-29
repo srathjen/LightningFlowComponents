@@ -66,6 +66,7 @@ public class batch_LeadChildAgeTest {
                 lead.DOB__c = Date.today().addYears(-2).addMonths(-6);
             }
         }
+        leadListNew[leadListNew.Size()-1].dob__c = null;
         insert leadListNew;
 
         trac_TriggerHandlerBase.blockTrigger = false;
@@ -85,8 +86,8 @@ public class batch_LeadChildAgeTest {
         Test.stopTest();
 
         Lead[] leadsUpdatedList = getLeads();
-        //Assert that number of the leads that should have been updated have been updated
-        System.assertEquals(10, leadsUpdatedList.size());
+        //Assert that number of the leads that should have been updated have been updated. The one with no DOB will not be updated.
+        System.assertEquals(9, leadsUpdatedList.size());
         CronTrigger ct = getCronTrigger(jobId);
         System.assertEquals(CRON_STRING, ct.CronExpression);
     }
@@ -105,12 +106,12 @@ public class batch_LeadChildAgeTest {
         Test.stopTest();
 
         Lead[] leadsUpdatedList = getLeads();
-        //Assert that number of the leads that should have been updated have been updated
+        //Assert that number of the leads that should have been updated have been updated. 
         System.assertEquals(10, leadsUpdatedList.size());
         CronTrigger ct = getCronTrigger(jobId);
         System.assertEquals(CRON_STRING, ct.CronExpression);
     }
-
+  
     private static List<Lead> getLeads() {
         return [
                 SELECT Id, Age_Requirement_Met__c
