@@ -547,8 +547,8 @@
     <name>GlobalValueSet</name>
   </types>
   <types>
-    <members>South_Dakota_Montana</members>
     <members>Intake_Managers</members>
+    <members>South_Dakota_Montana</members>
     <name>Group</name>
   </types>
   <types>

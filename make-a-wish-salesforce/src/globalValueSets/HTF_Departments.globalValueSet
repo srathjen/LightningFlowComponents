@@ -11,9 +11,9 @@
         <label>Cardiology</label>
     </customValue>
     <customValue>
-        <fullName>Cardio-thoracic Surgeon</fullName>
+        <fullName>Cardio-thoracic Surgery</fullName>
         <default>false</default>
-        <label>Cardio-thoracic Surgeon</label>
+        <label>Cardio-thoracic Surgery</label>
     </customValue>
     <customValue>
         <fullName>Critical Care</fullName>
@@ -31,9 +31,9 @@
         <label>Developmental Pediatrics</label>
     </customValue>
     <customValue>
-        <fullName>ENT (Ear, Nose &amp; Throat)</fullName>
+        <fullName>Emergency Medicine</fullName>
         <default>false</default>
-        <label>ENT (Ear, Nose &amp; Throat)</label>
+        <label>Emergency Medicine</label>
     </customValue>
     <customValue>
         <fullName>Endocrinology</fullName>
@@ -41,14 +41,9 @@
         <label>Endocrinology</label>
     </customValue>
     <customValue>
-        <fullName>Metabolics</fullName>
+        <fullName>ENT (Ear, Nose &amp; Throat)</fullName>
         <default>false</default>
-        <label>Metabolics</label>
-    </customValue>
-    <customValue>
-        <fullName>Emergency Medicine</fullName>
-        <default>false</default>
-        <label>Emergency Medicine</label>
+        <label>ENT (Ear, Nose &amp; Throat)</label>
     </customValue>
     <customValue>
         <fullName>Gastroenterology</fullName>
@@ -59,6 +54,11 @@
         <fullName>General Pediatrics</fullName>
         <default>false</default>
         <label>General Pediatrics</label>
+    </customValue>
+    <customValue>
+        <fullName>General Surgery</fullName>
+        <default>false</default>
+        <label>General Surgery</label>
     </customValue>
     <customValue>
         <fullName>Genetics</fullName>
@@ -81,9 +81,9 @@
         <label>Hepatology</label>
     </customValue>
     <customValue>
-        <fullName>Hospice / Palliative Care</fullName>
+        <fullName>Hospice/Palliative Care</fullName>
         <default>false</default>
-        <label>Hospice / Palliative Care</label>
+        <label>Hospice/Palliative Care</label>
     </customValue>
     <customValue>
         <fullName>Hospital Medicine</fullName>
@@ -101,14 +101,14 @@
         <label>Infectious Disease</label>
     </customValue>
     <customValue>
-        <fullName>Internal Medicine / Hospitalist</fullName>
-        <default>false</default>
-        <label>Internal Medicine / Hospitalist</label>
-    </customValue>
-    <customValue>
         <fullName>Interventional Radiology</fullName>
         <default>false</default>
         <label>Interventional Radiology</label>
+    </customValue>
+    <customValue>
+        <fullName>Metabolics</fullName>
+        <default>false</default>
+        <label>Metabolics</label>
     </customValue>
     <customValue>
         <fullName>Nephrology</fullName>
@@ -136,9 +136,19 @@
         <label>Orthopedics</label>
     </customValue>
     <customValue>
-        <fullName>Psychology</fullName>
+        <fullName>Pain Medicine</fullName>
         <default>false</default>
-        <label>Psychology</label>
+        <label>Pain Medicine</label>
+    </customValue>
+    <customValue>
+        <fullName>Physical Medicine &amp; Rehabilitation</fullName>
+        <default>false</default>
+        <label>Physical Medicine &amp; Rehabilitation</label>
+    </customValue>
+    <customValue>
+        <fullName>Primary Care</fullName>
+        <default>false</default>
+        <label>Primary Care</label>
     </customValue>
     <customValue>
         <fullName>Psychiatry</fullName>
@@ -146,14 +156,14 @@
         <label>Psychiatry</label>
     </customValue>
     <customValue>
+        <fullName>Psychology</fullName>
+        <default>false</default>
+        <label>Psychology</label>
+    </customValue>
+    <customValue>
         <fullName>Pulmonology</fullName>
         <default>false</default>
         <label>Pulmonology</label>
-    </customValue>
-    <customValue>
-        <fullName>Urology</fullName>
-        <default>false</default>
-        <label>Urology</label>
     </customValue>
     <customValue>
         <fullName>Radiation Oncology</fullName>
@@ -171,15 +181,20 @@
         <label>Rheumatology</label>
     </customValue>
     <customValue>
-        <fullName>Surgery</fullName>
+        <fullName>Transplant</fullName>
         <default>false</default>
-        <label>Surgery</label>
+        <label>Transplant</label>
     </customValue>
     <customValue>
-        <fullName>Transplant Hepatology</fullName>
+        <fullName>Trauma &amp; Emergency Services</fullName>
         <default>false</default>
-        <label>Transplant Hepatology</label>
+        <label>Trauma &amp; Emergency Services</label>
+    </customValue>
+    <customValue>
+        <fullName>Urology</fullName>
+        <default>false</default>
+        <label>Urology</label>
     </customValue>
     <masterLabel>HTF Departments</masterLabel>
-    <sorted>false</sorted>
+    <sorted>true</sorted>
 </GlobalValueSet>

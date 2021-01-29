@@ -5896,7 +5896,7 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
-                <fullName>Cardio-thoracic Surgeon</fullName>
+                <fullName>Cardio-thoracic Surgery</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -5936,6 +5936,10 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
+                <fullName>General Surgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Genetics</fullName>
                 <default>false</default>
             </values>
@@ -5952,7 +5956,7 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
-                <fullName>Hospice %2F Palliative Care</fullName>
+                <fullName>Hospice%2FPalliative Care</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -5965,10 +5969,6 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
             <values>
                 <fullName>Infectious Disease</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Internal Medicine %2F Hospitalist</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -6000,6 +6000,18 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
+                <fullName>Pain Medicine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Physical Medicine %26 Rehabilitation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Primary Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Psychiatry</fullName>
                 <default>false</default>
             </values>
@@ -6024,11 +6036,11 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
-                <fullName>Surgery</fullName>
+                <fullName>Transplant</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Transplant Hepatology</fullName>
+                <fullName>Trauma %26 Emergency Services</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -6522,7 +6534,7 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
-                <fullName>Cardio-thoracic Surgeon</fullName>
+                <fullName>Cardio-thoracic Surgery</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -6562,6 +6574,10 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
+                <fullName>General Surgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Genetics</fullName>
                 <default>false</default>
             </values>
@@ -6578,7 +6594,7 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
-                <fullName>Hospice %2F Palliative Care</fullName>
+                <fullName>Hospice%2FPalliative Care</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -6591,10 +6607,6 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
             <values>
                 <fullName>Infectious Disease</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Internal Medicine %2F Hospitalist</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -6626,6 +6638,18 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
+                <fullName>Pain Medicine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Physical Medicine %26 Rehabilitation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Primary Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Psychiatry</fullName>
                 <default>false</default>
             </values>
@@ -6650,11 +6674,11 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
-                <fullName>Surgery</fullName>
+                <fullName>Transplant</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Transplant Hepatology</fullName>
+                <fullName>Trauma %26 Emergency Services</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -7152,7 +7176,7 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
-                <fullName>Cardio-thoracic Surgeon</fullName>
+                <fullName>Cardio-thoracic Surgery</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -7192,6 +7216,10 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
+                <fullName>General Surgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Genetics</fullName>
                 <default>false</default>
             </values>
@@ -7208,7 +7236,7 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
-                <fullName>Hospice %2F Palliative Care</fullName>
+                <fullName>Hospice%2FPalliative Care</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -7221,10 +7249,6 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
             <values>
                 <fullName>Infectious Disease</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Internal Medicine %2F Hospitalist</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -7256,6 +7280,18 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
+                <fullName>Pain Medicine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Physical Medicine %26 Rehabilitation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Primary Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Psychiatry</fullName>
                 <default>false</default>
             </values>
@@ -7280,11 +7316,11 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
-                <fullName>Surgery</fullName>
+                <fullName>Transplant</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Transplant Hepatology</fullName>
+                <fullName>Trauma %26 Emergency Services</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -8625,7 +8661,7 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
-                <fullName>Cardio-thoracic Surgeon</fullName>
+                <fullName>Cardio-thoracic Surgery</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -8665,6 +8701,10 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
+                <fullName>General Surgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Genetics</fullName>
                 <default>false</default>
             </values>
@@ -8681,7 +8721,7 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
-                <fullName>Hospice %2F Palliative Care</fullName>
+                <fullName>Hospice%2FPalliative Care</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -8694,10 +8734,6 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
             <values>
                 <fullName>Infectious Disease</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Internal Medicine %2F Hospitalist</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -8729,6 +8765,18 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
+                <fullName>Pain Medicine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Physical Medicine %26 Rehabilitation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Primary Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Psychiatry</fullName>
                 <default>false</default>
             </values>
@@ -8753,11 +8801,11 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
-                <fullName>Surgery</fullName>
+                <fullName>Transplant</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Transplant Hepatology</fullName>
+                <fullName>Trauma %26 Emergency Services</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -10030,7 +10078,7 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
-                <fullName>Cardio-thoracic Surgeon</fullName>
+                <fullName>Cardio-thoracic Surgery</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -10070,6 +10118,10 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
+                <fullName>General Surgery</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Genetics</fullName>
                 <default>false</default>
             </values>
@@ -10086,7 +10138,7 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
-                <fullName>Hospice %2F Palliative Care</fullName>
+                <fullName>Hospice%2FPalliative Care</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -10099,10 +10151,6 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
             <values>
                 <fullName>Infectious Disease</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Internal Medicine %2F Hospitalist</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -10134,6 +10182,18 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
+                <fullName>Pain Medicine</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Physical Medicine %26 Rehabilitation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Primary Care</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Psychiatry</fullName>
                 <default>false</default>
             </values>
@@ -10158,11 +10218,11 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
                 <default>false</default>
             </values>
             <values>
-                <fullName>Surgery</fullName>
+                <fullName>Transplant</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Transplant Hepatology</fullName>
+                <fullName>Trauma %26 Emergency Services</fullName>
                 <default>false</default>
             </values>
             <values>
