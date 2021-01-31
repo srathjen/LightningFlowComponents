@@ -104,12 +104,12 @@
         <value>You have no access to create broadcast records for other chapters.</value>
     </labels>
     <labels>
-        <fullName>COI_no_of_expiration_days</fullName>
+    <fullName>COI_no_of_expiration_days</fullName>
         <categories>It holds the expiration duration for COI</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>COI no of expiration days</shortDescription>
-        <value>30</value>
+        <value>31</value>
     </labels>
     <labels>
         <fullName>Cancel_Label</fullName>
