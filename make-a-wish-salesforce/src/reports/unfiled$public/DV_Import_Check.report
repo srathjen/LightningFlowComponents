@@ -37,12 +37,14 @@
     <filter>
         <criteriaItems>
             <column>STATUS</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Qualified,DNQ,Duplicate</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Lead.Wish_Child</value>
@@ -64,7 +66,7 @@
     <sortOrder>Desc</sortOrder>
     <timeFrameFilter>
         <dateColumn>Lead.Part_A_Received__c</dateColumn>
-        <endDate>2020-08-17</endDate>
+        <endDate>2021-02-04</endDate>
         <interval>INTERVAL_CUSTOM</interval>
         <startDate>2019-12-25</startDate>
     </timeFrameFilter>

@@ -30,24 +30,28 @@
     <filter>
         <criteriaItems>
             <column>CONTACT_ID</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value></value>
         </criteriaItems>
         <criteriaItems>
             <column>PROFILE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Prospective Volunteer (Member)</value>
         </criteriaItems>
         <criteriaItems>
             <column>PROFILE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Prospective Volunteer (Login)</value>
         </criteriaItems>
         <criteriaItems>
             <column>User.Account_Name__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>

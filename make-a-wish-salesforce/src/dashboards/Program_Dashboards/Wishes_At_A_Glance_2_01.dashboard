@@ -35,7 +35,7 @@
                 </groupingSortProperties>
                 <header>Current Open Leads by Referred Date</header>
                 <legendPosition>Bottom</legendPosition>
-                <report>Wish_Management/Lead_Status_Current_FY_No_Qualified</report>
+                <report>ArchiveAZWishManagement/Lead_Status_Current_FY_No_Qualified</report>
                 <showPercentage>false</showPercentage>
                 <showValues>false</showValues>
                 <sortBy>RowLabelAscending</sortBy>
@@ -59,7 +59,7 @@
                 <groupingSortProperties/>
                 <header>Anticipated Start Dates</header>
                 <legendPosition>Bottom</legendPosition>
-                <report>Wish_Management/Pipeline_by_Anticipated_Date</report>
+                <report>ArchiveAZWishManagement/Pipeline_by_Anticipated_Date</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>true</showValues>
@@ -95,7 +95,7 @@
                 </groupingSortProperties>
                 <header>Wishes Scheduled by Month</header>
                 <legendPosition>Bottom</legendPosition>
-                <report>Wish_Management/Wishes_Scheduled_by_Month</report>
+                <report>ArchiveAZWishManagement/Wishes_Scheduled_by_Month</report>
                 <showPercentage>false</showPercentage>
                 <showValues>true</showValues>
                 <sortBy>RowLabelAscending</sortBy>
@@ -131,7 +131,7 @@
                 </groupingSortProperties>
                 <header>Inquiry and Referral Leads</header>
                 <legendPosition>Right</legendPosition>
-                <report>Wish_Management/Leads</report>
+                <report>ArchiveAZWishManagement/Leads</report>
                 <showPercentage>false</showPercentage>
                 <showTotal>true</showTotal>
                 <showValues>true</showValues>
@@ -169,7 +169,7 @@
                 </groupingSortProperties>
                 <header>Wish Pipeline Wishes Grouped by National Type</header>
                 <legendPosition>Right</legendPosition>
-                <report>Wish_Management/Wish_Pipeline_Grouped_by_Wish_Type1</report>
+                <report>ArchiveAZWishManagement/Wish_Pipeline_Grouped_by_Wish_Type1</report>
                 <showPercentage>false</showPercentage>
                 <showValues>true</showValues>
                 <sortBy>RowLabelDescending</sortBy>
@@ -209,7 +209,7 @@
                 </groupingSortProperties>
                 <header>Completed and Granted Wishes FYTD</header>
                 <legendPosition>Right</legendPosition>
-                <report>Wish_Management/Completed_Wishes_FYTD_uXR</report>
+                <report>ArchiveAZWishManagement/Completed_Wishes_FYTD_uXR</report>
                 <showPercentage>false</showPercentage>
                 <showValues>true</showValues>
                 <sortBy>RowLabelAscending</sortBy>
@@ -244,7 +244,7 @@
                 </groupingSortProperties>
                 <header>Wish Pipeline</header>
                 <legendPosition>Bottom</legendPosition>
-                <report>Wish_Management/Wish_Pipeline_1</report>
+                <report>ArchiveAZWishManagement/Wish_Pipeline_1</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>true</showPicturesOnCharts>
                 <showValues>true</showValues>
@@ -280,7 +280,7 @@
                 </groupingSortProperties>
                 <header>DNQ Referrals Current Fiscal Year</header>
                 <legendPosition>Bottom</legendPosition>
-                <report>Wish_Management/DNQ_Leads_Current_Fiscal_Year</report>
+                <report>ArchiveAZWishManagement/DNQ_Leads_Current_Fiscal_Year</report>
                 <showPercentage>false</showPercentage>
                 <showValues>true</showValues>
                 <sortBy>RowLabelAscending</sortBy>
@@ -304,7 +304,7 @@
                 <groupingSortProperties/>
                 <header>Eligible Referrals Current Fiscal Year</header>
                 <legendPosition>Bottom</legendPosition>
-                <report>Wish_Management/Eligible_Referrals_FYTD</report>
+                <report>ArchiveAZWishManagement/Eligible_Referrals_FYTD</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>true</showValues>

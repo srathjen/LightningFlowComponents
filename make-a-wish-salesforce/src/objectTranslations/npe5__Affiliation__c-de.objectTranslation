@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <caseType>Nominative</caseType>
         <plural>false</plural>
@@ -92,6 +92,10 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Contact Chapter Name --></label>
+        <name>Contact_Chapter_Name__c</name>
+    </fields>
+    <fields>
         <label><!-- External Id --></label>
         <name>External_Id__c</name>
     </fields>
@@ -106,6 +110,10 @@
     <fields>
         <label><!-- Migrated Record --></label>
         <name>Migrated_Record__c</name>
+    </fields>
+    <fields>
+        <label><!-- Organization Chapter Name --></label>
+        <name>Organization_Chapter_Name__c</name>
     </fields>
     <fields>
         <label><!-- Region Code --></label>

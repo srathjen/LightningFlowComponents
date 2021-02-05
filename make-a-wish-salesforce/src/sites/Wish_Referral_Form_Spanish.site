@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomSite xmlns="http://soap.sforce.com/2006/04/metadata">
     <active>true</active>
     <allowHomePage>false</allowHomePage>
@@ -22,8 +22,8 @@
     <masterLabel>Wish Referral Form- Spanish</masterLabel>
     <referrerPolicyOriginWhenCrossOrigin>false</referrerPolicyOriginWhenCrossOrigin>
     <requireHttps>true</requireHttps>
-    <requireInsecurePortalAccess>false</requireInsecurePortalAccess>
-    
+    <siteAdmin>salesforce@wish.org</siteAdmin>
+    <siteGuestRecordDefaultOwner>mkumartammineny@wish.org</siteGuestRecordDefaultOwner>
     <siteTemplate>SiteTemplate</siteTemplate>
     <siteType>Visualforce</siteType>
     <subdomain>wish</subdomain>

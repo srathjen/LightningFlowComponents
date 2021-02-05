@@ -33,6 +33,7 @@
     <filter>
         <criteriaItems>
             <column>Lead.Auto_Qualified__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>

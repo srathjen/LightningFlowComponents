@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>CallHighlightAction</actionName>
         <type>Default</type>
@@ -226,8 +225,8 @@
         <externalId>false</externalId>
         <formula>TRIM(If( Contact.Account.Name !=null  , 
 		Contact.Account.Name  , 
-		if(  UserRole.Name  !=null &amp;&amp; UserRole.Name  != &apos;National Staff&apos;, 	
-			&apos;Make-A-Wish &apos; + LEFT(UserRole.Name,FIND(&quot; -&quot;, UserRole.Name)) , 
+		if(  UserRole.Name  !=null &amp;&amp; UserRole.Name  != 'National Staff', 	
+			'Make-A-Wish ' + LEFT(UserRole.Name,FIND(" -", UserRole.Name)) , 
 			null)
 ))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -479,7 +478,7 @@
     <fields>
         <fullName>Month_Of_Inactive__c</fullName>
         <externalId>false</externalId>
-        <formula>CASE(MONTH(Inactive_Date__c ),1,&quot;January&quot;,2,&quot;FEBRUARY&quot;,3,&quot;MARCH&quot;,4,&quot;APRIL&quot;,5,&quot;MAY&quot;,6,&quot;JUNE&quot;,7,&quot;JULY&quot;,8,&quot;AUGUST&quot;,9,&quot;SEPTEMBER&quot;,10,&quot;OCTOBER&quot;,11,&quot;NOVEMBER&quot;,12,&quot;DECEMBER&quot;,null)</formula>
+        <formula>CASE(MONTH(Inactive_Date__c ),1,"January",2,"FEBRUARY",3,"MARCH",4,"APRIL",5,"MAY",6,"JUNE",7,"JULY",8,"AUGUST",9,"SEPTEMBER",10,"OCTOBER",11,"NOVEMBER",12,"DECEMBER",null)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Month Of Inactive</label>
         <required>false</required>
@@ -662,6 +661,27 @@
         <label>Active AZ Community Users</label>
     </listViews>
     <listViews>
+        <fullName>Active_Users_Non_Volunteers</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.USER_ROLE.NAME</field>
+            <operation>notContain</operation>
+            <value>Customer User</value>
+        </filters>
+        <label>Active Users_Non_Volunteers</label>
+    </listViews>
+    <listViews>
         <fullName>AdminUsers</fullName>
         <columns>FULL_NAME</columns>
         <columns>CORE.USERS.ALIAS</columns>
@@ -687,8 +707,10 @@
         <columns>CORE.USER_ROLE.NAME</columns>
         <columns>CORE.USERS.ACTIVE</columns>
         <columns>CORE.PROFILE.NAME</columns>
+        <columns>CREATED_DATE</columns>
         <filterScope>Everything</filterScope>
         <label>All Users</label>
+        <language>en_US</language>
     </listViews>
     <listViews>
         <fullName>Arizona_Users</fullName>

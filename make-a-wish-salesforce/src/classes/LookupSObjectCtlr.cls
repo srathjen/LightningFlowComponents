@@ -3,7 +3,7 @@
  * @author Gustavo Mayer, Traction on Demand
  * @createdDate 6/20/2019
  */
-public with sharing class LookupSObjectCtlr {
+public without sharing class LookupSObjectCtlr {
 
 	private final static Id medicalProfessionalRT = Constant_AC.MEDICAL_PROFESSIONAL_RT_ID;
 	private final static Id hospitalFacilityRT = Constant_AC.HOSPITAL_TREATMENT_ID;
@@ -34,7 +34,9 @@ public with sharing class LookupSObjectCtlr {
 		List<String> listFields = sanitizedFieldsToReturn.split(',');
 		List<Result> results = new List<Result>();
 		filter = filter == null ? new Map<String, String>() : filter;
-
+        system.debug('@@@@sanitizedSearchString:'+sanitizedSearchString);
+        system.debug('@@@@sanitizedSObjectAPIName:'+sanitizedSObjectAPIName);
+                
 		// Build our SOSL query
 		String searchQuery = '';
 		if (isExternalLookup && sObjectAPIName.equals('Contact')) {
@@ -62,10 +64,12 @@ public with sharing class LookupSObjectCtlr {
 					'IN ALL FIELDS RETURNING ' + sanitizedSObjectAPIName + '(' + sanitizedFieldsToReturn + ') ' +
 					'LIMIT 50';
 		}
-
+        system.debug('@@@searchQuery:'+searchQuery);
 		// Execute the Query
 		List<List<SObject>> searchList = Search.query(searchQuery);
-
+        system.debug('@@@searchList:'+ searchList);
+        system.debug('@@@searchList size:'+ searchList[0].size());           
+        
 		// Create a list of matches to return
 		if (!searchList[0].isEmpty()) {
 			String blank = '';
@@ -73,18 +77,25 @@ public with sharing class LookupSObjectCtlr {
 				Result r = new Result();
 				r.Id = so.Id;
 				List<String> fieldValues = new List<String>();
+                
+        		system.debug('@@@listFields:'+ listFields);
 				for (String f : listFields) {
 					if (String.isEmpty(String.valueOf(so.get(f.trim())))) {
 						fieldValues.add(blank);
+        			system.debug('@@@here1:');
 					} else {
 						fieldValues.add(String.valueOf(so.get(f.trim())));
+        			system.debug('@@@here2:');
 					}
 				}
+                system.debug('@@@fieldValues ' + fieldValues);
 				String cleanFormattedOutput = cleanFormattedOutput(fieldValues, formattedOutput);
 				r.Description = String.format(cleanFormattedOutput, fieldValues);
 				results.add(r);
+                system.debug('@@@r ' + r);
 			}
 		}
+        system.debug('@@@@results:'+results);
 		return JSON.serialize(results);
 	}
 
@@ -159,6 +170,7 @@ public with sharing class LookupSObjectCtlr {
 		if(!String.valueOf(cleanedFormattedOutput.getChars()).equals(String.valueOf(lastBracket))){
 			cleanedFormattedOutput = cleanedFormattedOutput.substring(0, lastBracket+1);
 		}
+        system.debug('@@@cleanedFormattedOutput ' + cleanedFormattedOutput);
 		return cleanedFormattedOutput;
 	}
 

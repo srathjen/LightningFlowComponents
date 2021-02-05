@@ -25,12 +25,14 @@
     <filter>
         <criteriaItems>
             <column>In_Kind_Donation_Reimbursement__c.Approved_Date__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>notEqual</operator>
             <value></value>
         </criteriaItems>
         <criteriaItems>
             <column>field_key</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>notContain</operator>
             <value>Created,Record Locked,Record unlocked</value>

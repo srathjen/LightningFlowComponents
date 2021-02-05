@@ -35,7 +35,7 @@
                 <header>Total Active Wishes</header>
                 <legendPosition>Right</legendPosition>
                 <maxValuesDisplayed>6</maxValuesDisplayed>
-                <report>Wish_Management/Total_Active_Wishes_zmW</report>
+                <report>ArchiveAZWishManagement/Total_Active_Wishes_zmW</report>
                 <showPercentage>false</showPercentage>
                 <showTotal>true</showTotal>
                 <showValues>true</showValues>
@@ -71,7 +71,7 @@
                 </groupingSortProperties>
                 <header>Outstanding Budget Approvals</header>
                 <legendPosition>Bottom</legendPosition>
-                <report>Wish_Management/Copy_of_Outstanding_Budget_Approvals_l0H</report>
+                <report>ArchiveAZWishManagement/Copy_of_Outstanding_Budget_Approvals_l0H</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>true</showValues>
@@ -107,7 +107,7 @@
                 </groupingSortProperties>
                 <header>Total Active Rush Wishes</header>
                 <legendPosition>Right</legendPosition>
-                <report>Wish_Management/Total_Active_Rush_Wishes_waM</report>
+                <report>ArchiveAZWishManagement/Total_Active_Rush_Wishes_waM</report>
                 <showPercentage>false</showPercentage>
                 <showTotal>true</showTotal>
                 <showValues>true</showValues>

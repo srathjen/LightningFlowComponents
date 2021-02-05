@@ -31,12 +31,14 @@
         <booleanFilter>1 OR 2</booleanFilter>
         <criteriaItems>
             <column>Lead.Provided_additional_information__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Please enter additional information here</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Other_expedite_timeframe_comments__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Please describe the ideal timeframe</value>

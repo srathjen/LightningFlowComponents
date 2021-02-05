@@ -105,5 +105,9 @@
     </fields>
     <gender>Masculine</gender>
     <nameFieldLabel>Nome configurazione busta DocuSign</nameFieldLabel>
+    <quickActions>
+        <label><!-- Save --></label>
+        <name>dsfs__Save</name>
+    </quickActions>
     <startsWith>Consonant</startsWith>
 </CustomObjectTranslation>

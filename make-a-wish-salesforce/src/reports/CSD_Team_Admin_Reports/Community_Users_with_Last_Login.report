@@ -24,12 +24,14 @@
     <filter>
         <criteriaItems>
             <column>User.User_License__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Salesforce</value>
         </criteriaItems>
         <criteriaItems>
             <column>User.User_License__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notContain</operator>
             <value>Chatter</value>

@@ -40,12 +40,14 @@
     <filter>
         <criteriaItems>
             <column>Wish_Required_Signature__c.Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Voided</value>
         </criteriaItems>
         <criteriaItems>
             <column>FK_$dsfs__DocuSign_Status__c.dsfs__Envelope_Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Voided</value>

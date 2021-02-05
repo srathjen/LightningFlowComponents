@@ -43,12 +43,14 @@
     <filter>
         <criteriaItems>
             <column>Lead.ChapterName__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Central &amp; Western North Carolina</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Lead.Wish_Child</value>

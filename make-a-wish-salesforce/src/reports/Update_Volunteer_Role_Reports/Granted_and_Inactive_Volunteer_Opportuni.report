@@ -75,30 +75,35 @@
         <booleanFilter>(1 AND  3 AND (2 OR 4)) AND 5</booleanFilter>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Volunteer_Name__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value></value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Wish_Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Granted</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Out of Compliance</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Inactive__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Wish_Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Completed</value>

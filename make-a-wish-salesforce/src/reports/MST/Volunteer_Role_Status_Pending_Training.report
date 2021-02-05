@@ -15,12 +15,14 @@
     <filter>
         <criteriaItems>
             <column>Volunteer_Roles__c.Role_Name__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Celebrity Host,Fundraising volunteer,medical outreach volunteer,Speaker&apos;s Bureau,Special Events,All Roles,Wish Granter Mentor,Wish Granter,Airport Greeter,Board Member</value>
         </criteriaItems>
         <criteriaItems>
             <column>CUST_ID</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value></value>

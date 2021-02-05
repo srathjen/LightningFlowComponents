@@ -21,6 +21,7 @@
     <filter>
         <criteriaItems>
             <column>field_key</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Temp. Historic Field Tracking</value>

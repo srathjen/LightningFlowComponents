@@ -435,7 +435,6 @@
     </relatedLists>
     <relatedLists>
         <fields>TASK.SUBJECT</fields>
-        <fields>TASK.WHAT_NAME</fields>
         <fields>Confirmed_Date__c</fields>
         <fields>Confirmed_Time__c</fields>
         <fields>ACTIVITY.TASK</fields>
@@ -449,7 +448,6 @@
         <excludeButtons>LogCall</excludeButtons>
         <excludeButtons>MailMerge</excludeButtons>
         <fields>TASK.SUBJECT</fields>
-        <fields>TASK.WHAT_NAME</fields>
         <fields>TASK.DUE_DATE</fields>
         <fields>CORE.USERS.FULL_NAME</fields>
         <fields>TASK.LAST_UPDATE</fields>

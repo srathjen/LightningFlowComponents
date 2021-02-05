@@ -34,12 +34,14 @@
     <filter>
         <criteriaItems>
             <column>CUST_RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Wish_Child_Form__c.Wish_Form_Family</value>
         </criteriaItems>
         <criteriaItems>
             <column>Wish_Child_Form__c.Contact__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value></value>

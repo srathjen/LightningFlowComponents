@@ -105,4 +105,8 @@
     </fields>
     <gender>Neuter</gender>
     <nameFieldLabel>Configuratienaam DocuSign-envelop</nameFieldLabel>
+    <quickActions>
+        <label><!-- Save --></label>
+        <name>dsfs__Save</name>
+    </quickActions>
 </CustomObjectTranslation>

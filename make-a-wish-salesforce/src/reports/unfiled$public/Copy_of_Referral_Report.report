@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>STREET</field>
+    </columns>
+    <columns>
+        <field>CITY</field>
+    </columns>
+    <columns>
+        <field>STATE_CODE</field>
+    </columns>
+    <columns>
+        <field>Lead.County__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Referred_Date__c</field>
+    </columns>
+    <columns>
+        <field>Lead.ICD_Given_By_Referrer__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Diagnosis_Given_By_Referrer__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Medical_Provider_Category__c</field>
+    </columns>
+    <columns>
+        <field>STATUS</field>
+    </columns>
+    <columns>
+        <field>Lead.Hospital_Treatment_Facility_Treating__c</field>
+    </columns>
+    <description>May 2018 Referrals</description>
+    <format>Tabular</format>
+    <name>Copy of Referral Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadList</reportType>
+    <scope>user</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead.Referred_Date__c</dateColumn>
+        <endDate>2020-04-30</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2020-04-01</startDate>
+    </timeFrameFilter>
+</Report>

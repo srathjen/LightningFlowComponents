@@ -16,6 +16,10 @@
     <objectMapping>
         <inputObject>Lead</inputObject>
         <mappingFields>
+            <inputField>Migrated_Record__c</inputField>
+            <outputField>Migrated_Record__c</outputField>
+        </mappingFields>
+        <mappingFields>
             <inputField>Why_do_you_feel_would_be_eligible_Wish__c</inputField>
             <outputField>MP_Additional_Clinical_Details__c</outputField>
         </mappingFields>
@@ -82,10 +86,6 @@
         <mappingFields>
             <inputField>Inquiry_Date__c</inputField>
             <outputField>B_C_Expiration_Date__c</outputField>
-        </mappingFields>
-        <mappingFields>
-            <inputField>Migrated_Record__c</inputField>
-            <outputField>Migrated_Record__c</outputField>
         </mappingFields>
         <mappingFields>
             <inputField>Provided_additional_information__c</inputField>
@@ -156,22 +156,6 @@
             <outputField>SD1_ICD_Code__c</outputField>
         </mappingFields>
         <mappingFields>
-            <inputField>SD4_ICD_Code__c</inputField>
-            <outputField>SD4_ICD_Code__c</outputField>
-        </mappingFields>
-        <mappingFields>
-            <inputField>Travel_Restriction__c</inputField>
-            <outputField>Travel_Recommendation__c</outputField>
-        </mappingFields>
-        <mappingFields>
-            <inputField>Treating_Medical_Professional_Email__c</inputField>
-            <outputField>Hidden_Medical_Physician_Email__c</outputField>
-        </mappingFields>
-        <mappingFields>
-            <inputField>PD_ICD_Code__c</inputField>
-            <outputField>ICD_10_Code__c</outputField>
-        </mappingFields>
-        <mappingFields>
             <inputField>SD2_Condition_Description__c</inputField>
             <outputField>SD2_Condition_Description__c</outputField>
         </mappingFields>
@@ -190,6 +174,22 @@
         <mappingFields>
             <inputField>SD4_Condition_Description__c</inputField>
             <outputField>SD4_Condition_Description__c</outputField>
+        </mappingFields>
+        <mappingFields>
+            <inputField>SD4_ICD_Code__c</inputField>
+            <outputField>SD4_ICD_Code__c</outputField>
+        </mappingFields>
+        <mappingFields>
+            <inputField>Travel_Restriction__c</inputField>
+            <outputField>Travel_Recommendation__c</outputField>
+        </mappingFields>
+        <mappingFields>
+            <inputField>Treating_Medical_Professional_Email__c</inputField>
+            <outputField>Hidden_Medical_Physician_Email__c</outputField>
+        </mappingFields>
+        <mappingFields>
+            <inputField>PD_ICD_Code__c</inputField>
+            <outputField>ICD_10_Code__c</outputField>
         </mappingFields>
         <outputObject>Contact</outputObject>
     </objectMapping>

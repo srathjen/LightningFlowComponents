@@ -67,18 +67,21 @@
     <filter>
         <criteriaItems>
             <column>Lead.Relationship_to_child__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Medical Professional</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Medical_Provider_Category__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Child Life Specialist</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Lead.Wish_Child</value>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
         <value>Wish Affiliation</value>
@@ -121,6 +120,10 @@
     <fields>
         <label><!-- Send Clearance Forms To --></label>
         <name>Send_Clearance_Forms_To__c</name>
+    </fields>
+    <fields>
+        <label><!-- Specific Type --></label>
+        <name>Specific_Type__c</name>
     </fields>
     <fields>
         <help><!-- Note: Only one survey receipt per wish can be selected.  If this contact is selected, any existing survey recipient (for this wish) will be deselected. --></help>

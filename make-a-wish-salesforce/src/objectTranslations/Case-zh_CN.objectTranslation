@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- Additional Medical Requests --></label>
         <name>Additional_Medical_Requests</name>
@@ -418,6 +418,11 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Comments__c</name>
     </fields>
     <fields>
+        <label><!-- Communication Profile Notes --></label>
+        <name>Communication_Profile_Notes__c</name>
+    </fields>
+    <fields>
+        <help><!-- Historical Data. This field was previously used to capture if a communication profile was received for the child. Please use the received date fields in this section to record when and which type of communication profile was received for this child. --></help>
         <label><!-- Communication Profile --></label>
         <name>Communication_Profile__c</name>
     </fields>
@@ -471,7 +476,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Date_Received_for_Child_s_Medical_Summar__c</name>
     </fields>
     <fields>
-        <label><!-- Date - Communication Profile --></label>
+        <label><!-- Family Comm Profile - Received Date --></label>
         <name>Date_Received_for_Communication_Profile__c</name>
     </fields>
     <fields>
@@ -774,6 +779,11 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <help><!-- Date when the family is leaving prior to scheduled start date --></help>
         <label><!-- Extended Start Date --></label>
         <name>Extended_Start_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- This Communication Profile for Non-Verbal Children should be sent to and completed by the child’s parents/legal guardians. --></help>
+        <label><!-- Family Comm Profile - Sent Date --></label>
+        <name>Family_Comm_Profile_Sent_Date__c</name>
     </fields>
     <fields>
         <help><!-- What were the wish family’s favorite parts of the wish experience? --></help>
@@ -1240,6 +1250,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Lead Converted --></label>
         <name>Lead_Converted__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead Status --></label>
+        <name>Lead_Status__c</name>
     </fields>
     <fields>
         <label><!-- Lead --></label>
@@ -1735,6 +1749,15 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Primary_Diagnosis__c</name>
     </fields>
     <fields>
+        <label><!-- Professional Comm Profile-Received Date --></label>
+        <name>Professional_Comm_Profile_Received_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- With the permission of the child&apos;s parents/legal guardians, this Communication Profile for Non-Verbal Children should be sent to and completed by members of the child’s professional team. --></help>
+        <label><!-- Professional Comm Profile - Sent Date --></label>
+        <name>Professional_Comm_Profile_Sent_Date__c</name>
+    </fields>
+    <fields>
         <label><!-- Projected Status --></label>
         <name>Projected_Status__c</name>
         <picklistValues>
@@ -1825,7 +1848,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>RE_Extended_Start_Date__c</name>
     </fields>
     <fields>
-        <label><!-- RE-FE Description --></label>
+        <label><!-- RE Description --></label>
         <name>RE_FE_Description__c</name>
     </fields>
     <fields>
@@ -2162,32 +2185,32 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>To_me_the_most_important_part_of_my_wish__c</name>
     </fields>
     <fields>
-        <label><!-- Total FE Posted Cash Per Participant --></label>
+        <label><!-- Total Posted Cash Per Participant --></label>
         <name>Total_FE_Posted_Cash_Per_Participant__c</name>
     </fields>
     <fields>
-        <label><!-- Total FE Posted Cash --></label>
+        <label><!-- Total Posted Cash --></label>
         <name>Total_FE_Posted_Cash__c</name>
     </fields>
     <fields>
-        <label><!-- Total FE Posted Costs Per Participant --></label>
+        <label><!-- Total Posted Costs Per Participant --></label>
         <name>Total_FE_Posted_Costs_Per_Participant__c</name>
     </fields>
     <fields>
-        <help><!-- FE Posted Cash + FE Posted In Kind --></help>
-        <label><!-- Total FE Posted Costs --></label>
+        <help><!-- Posted Cash + Posted In Kind --></help>
+        <label><!-- Total Posted Costs --></label>
         <name>Total_FE_Posted_Costs__c</name>
     </fields>
     <fields>
-        <label><!-- Total FE Posted In Kind Per Participant --></label>
+        <label><!-- Total Posted In Kind Per Participant --></label>
         <name>Total_FE_Posted_In_Kind_Per_Participant__c</name>
     </fields>
     <fields>
-        <label><!-- Total FE Posted In Kind --></label>
+        <label><!-- Total Posted In Kind --></label>
         <name>Total_FE_Posted_In_Kind__c</name>
     </fields>
     <fields>
-        <label><!-- Total FE Posted In-Kind to Cash Ratio --></label>
+        <label><!-- Total Posted In-Kind to Cash Ratio --></label>
         <name>Total_FE_Posted_In_Kind_to_Cash_Ratio__c</name>
     </fields>
     <fields>
@@ -2270,7 +2293,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Volunteer_Manager_Email__c</name>
     </fields>
     <fields>
-        <label><!-- Welcome Call Date --></label>
+        <label><!-- Welcome Communication Completed Date --></label>
         <name>Welcome_Call_Date__c</name>
     </fields>
     <fields>
@@ -2987,7 +3010,7 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>Case_Log_a_Call</name>
     </quickActions>
     <quickActions>
-        <label><!-- Communication Profile --></label>
+        <label><!-- Non-Verbal Communication Profiles --></label>
         <name>Communication_Profile</name>
     </quickActions>
     <quickActions>
@@ -3189,6 +3212,10 @@ arrangements/unique circumstances for any requested wish participant not residin
     <quickActions>
         <label><!-- Wish Timing --></label>
         <name>Wish_Timing</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- DocuSign --></label>
+        <name>dsfs__CaseDocuSignAction</name>
     </quickActions>
     <recordTypes>
         <description><!-- It display Part A information --></description>

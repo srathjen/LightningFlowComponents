@@ -97,18 +97,21 @@
     <filter>
         <criteriaItems>
             <column>Lead$ChapterName__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>make-a-wish Alaska &amp; Washington,make-a-wish north texas,make-a-wish arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead$Status</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Qualified</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead$RecordType</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Lead.Wish_Child</value>

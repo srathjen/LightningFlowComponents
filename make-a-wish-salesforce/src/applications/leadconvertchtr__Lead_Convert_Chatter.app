@@ -12,4 +12,5 @@
     <tabs>standard-Contact</tabs>
     <tabs>standard-Account</tabs>
     <tabs>standard-Opportunity</tabs>
+    <tabs>cg__AttachmentSync__c</tabs>
 </CustomApplication>

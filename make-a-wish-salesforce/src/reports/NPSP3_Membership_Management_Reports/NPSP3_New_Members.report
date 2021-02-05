@@ -70,12 +70,14 @@
     <filter>
         <criteriaItems>
             <column>Contact.npo02__LastMembershipAmount__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>greaterThan</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.npo02__MembershipJoinDate__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>LAST_N_DAYS:60</value>

@@ -12,4 +12,5 @@
     <tabs>CRMfusionDBR101__DupeBlocker_Settings_VF</tabs>
     <tabs>standard-Dashboard</tabs>
     <tabs>standard-report</tabs>
+    <tabs>cg__AttachmentSync__c</tabs>
 </CustomApplication>

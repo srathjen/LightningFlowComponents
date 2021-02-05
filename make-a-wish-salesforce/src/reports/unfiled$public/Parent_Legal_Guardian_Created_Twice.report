@@ -27,12 +27,14 @@
     <filter>
         <criteriaItems>
             <column>npe4__Relationship__c$npe4__Contact__c.RecordType</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Wish_Child</value>
         </criteriaItems>
         <criteriaItems>
             <column>npe4__Relationship__c$npe4__Type__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Self,Medical Professional</value>

@@ -128,10 +128,10 @@
             </value>
         </filters>
         <object>EmailMessage</object>
-        <triggerType>RecordAfterSave</triggerType>
         <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>ClonedTask</name>
         <dataType>SObject</dataType>

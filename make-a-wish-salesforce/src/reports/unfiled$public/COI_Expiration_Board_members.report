@@ -24,18 +24,21 @@
     <filter>
         <criteriaItems>
             <column>Contact$RecordType</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Board_Member</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact$Account</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Conflict_Of_Interest__r$Current__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>

@@ -43,12 +43,14 @@
         <booleanFilter>1 OR 2</booleanFilter>
         <criteriaItems>
             <column>Orientation_Training__c.Chapter_Name__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Alabama</value>
         </criteriaItems>
         <criteriaItems>
             <column>CUST_NAME</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>test</value>

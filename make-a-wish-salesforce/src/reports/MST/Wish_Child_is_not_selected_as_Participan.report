@@ -16,6 +16,7 @@
     <filter>
         <criteriaItems>
             <column>Wish_Child_Form__c$Hidden_Same_as_Family__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>

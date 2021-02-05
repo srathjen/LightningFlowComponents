@@ -7,4 +7,5 @@
     <label>RapidApproval</label>
     <tabs>GETGSI__Approval_Config</tabs>
     <tabs>GETGSI__Approval_Status__c</tabs>
+    <tabs>cg__AttachmentSync__c</tabs>
 </CustomApplication>

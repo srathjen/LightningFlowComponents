@@ -11,12 +11,14 @@
         <filter>
             <criteriaItems>
                 <column>Condition_Description__c.Medical_Questions__r$Id</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value></value>
             </criteriaItems>
             <criteriaItems>
                 <column>Condition_Description__c$Group1__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>1</value>
@@ -50,6 +52,7 @@
         <filter>
             <criteriaItems>
                 <column>Condition_Description__c.ICD_Codes__r$Group1__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>1</value>

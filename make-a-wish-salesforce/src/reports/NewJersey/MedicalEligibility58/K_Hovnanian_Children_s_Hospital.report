@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Lead$Name</field>
+    </columns>
+    <columns>
+        <field>Lead$Hospital_Treatment_Facility_Treating__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Relationship_to_child__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Referrer_FirstName__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Referrer_Last_Name__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Referrer_Email__c</field>
+    </columns>
+    <description>New Jersey</description>
+    <filter>
+        <booleanFilter>1 AND 2</booleanFilter>
+        <criteriaItems>
+            <column>Lead$ChapterName__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Make-A-Wish New Jersey</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Hospital_Treatment_Facility_Treating__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>Hackensack,jersey shore,joseph m sanz</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Lead$Status</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <field>Lead$DNQ_Date__c</field>
+        <sortOrder>Desc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Lead$Referrer_City__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>DNQ Hackensack Hospitals Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Leads_detail__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead$DNQ_Date__c</dateColumn>
+        <endDate>2020-09-30</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2019-04-01</startDate>
+    </timeFrameFilter>
+</Report>

@@ -49,12 +49,14 @@
     <filter>
         <criteriaItems>
             <column>LASTRUNDATE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>notEqual</operator>
             <value>LAST_N_DAYS:180</value>
         </criteriaItems>
         <criteriaItems>
             <column>LASTRUNDATE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value></value>

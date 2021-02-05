@@ -19,7 +19,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -32,8 +32,8 @@
     <recordUpdates>
         <name>Close_Case</name>
         <label>Close Case</label>
-        <locationX>176</locationX>
-        <locationY>276</locationY>
+        <locationX>776</locationX>
+        <locationY>324</locationY>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -56,8 +56,8 @@
         <object>Case</object>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
-        <locationY>0</locationY>
+        <locationX>650</locationX>
+        <locationY>48</locationY>
         <connector>
             <targetReference>Close_Case</targetReference>
         </connector>

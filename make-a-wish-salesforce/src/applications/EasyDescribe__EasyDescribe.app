@@ -8,4 +8,5 @@
     <label>EasyDescribe</label>
     <tabs>EasyDescribe__EasyDescribe</tabs>
     <tabs>Apex_Debug_Log__c</tabs>
+    <tabs>cg__AttachmentSync__c</tabs>
 </CustomApplication>

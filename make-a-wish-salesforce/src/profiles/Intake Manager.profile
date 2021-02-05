@@ -28631,7 +28631,6 @@
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>true</default>
-        <personAccountDefault>true</personAccountDefault>
         <recordType>Account.Hospital_Treatment_Facility</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
@@ -28708,7 +28707,6 @@
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>true</default>
-        <personAccountDefault>true</personAccountDefault>
         <recordType>Contact.Medical_Professional</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>

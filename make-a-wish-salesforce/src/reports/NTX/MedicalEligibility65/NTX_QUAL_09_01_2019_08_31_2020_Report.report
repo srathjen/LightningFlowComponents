@@ -23,24 +23,28 @@
         <booleanFilter>1 AND 2 AND (3 AND 4)</booleanFilter>
         <criteriaItems>
             <column>Lead$ChapterName__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish North Texas</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead$Status</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Qualified</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead$Qualified_Date__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>greaterOrEqual</operator>
             <value>9/1/2019</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead$Qualified_Date__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>lessOrEqual</operator>
             <value>8/31/2020</value>

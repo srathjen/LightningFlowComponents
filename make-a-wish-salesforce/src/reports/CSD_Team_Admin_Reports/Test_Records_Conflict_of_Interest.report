@@ -39,6 +39,7 @@
     <filter>
         <criteriaItems>
             <column>Contact$Name</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>test</value>

@@ -11,7 +11,7 @@
     <enableDirectMessages>false</enableDirectMessages>
     <enableGuestChatter>false</enableGuestChatter>
     <enableGuestFileAccess>false</enableGuestFileAccess>
-    <enableGuestMemberVisibility>true</enableGuestMemberVisibility>
+    <enableGuestMemberVisibility>false</enableGuestMemberVisibility>
     <enableInvitation>false</enableInvitation>
     <enableKnowledgeable>false</enableKnowledgeable>
     <enableMemberVisibility>true</enableMemberVisibility>
@@ -50,7 +50,7 @@
         <selfRegProfilePageOverrideSetting>VisualForce</selfRegProfilePageOverrideSetting>
     </networkPageOverrides>
     <picassoSite>Wish_Volunteer_Community_C</picassoSite>
-    <selfRegProfile>prospective volunteer (login)</selfRegProfile>
+    <selfRegProfile>Prospective Volunteer %28Login%29</selfRegProfile>
     <selfRegistration>true</selfRegistration>
     <sendWelcomeEmail>false</sendWelcomeEmail>
     <site>Wish_Volunteer_Community</site>

@@ -42,6 +42,7 @@
     <filter>
         <criteriaItems>
             <column>Lead$Status</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Eligibility Review</value>

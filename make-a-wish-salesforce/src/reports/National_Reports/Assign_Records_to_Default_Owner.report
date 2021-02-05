@@ -55,6 +55,7 @@
     <filter>
         <criteriaItems>
             <column>CONTACT_OWNER</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>guest</value>

@@ -46,12 +46,14 @@
     <filter>
         <criteriaItems>
             <column>Contact.npo02__OppAmountLastYear__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>greaterThan</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.npo02__OppAmountThisYear__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>0</value>

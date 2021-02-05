@@ -39,6 +39,7 @@
     <filter>
         <criteriaItems>
             <column>Chapter_Role_O_T__c.Orientation_Training__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Test</value>

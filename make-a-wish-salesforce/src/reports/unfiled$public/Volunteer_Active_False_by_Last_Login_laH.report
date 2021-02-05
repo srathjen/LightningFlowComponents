@@ -19,12 +19,14 @@
     <filter>
         <criteriaItems>
             <column>User.User_License__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Community</value>
         </criteriaItems>
         <criteriaItems>
             <column>User.Volunteer_Active__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>

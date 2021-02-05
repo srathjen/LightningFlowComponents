@@ -489,4 +489,12 @@
         <label><!-- Refresh_Name --></label>
         <name>npsp__Refresh_Name</name>
     </webLinks>
+    <quickActions>
+        <label><!-- Generate Documents --></label>
+        <name>Loop__RunDDP</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- DocuSign --></label>
+        <name>dsfs__OpportunityDocuSignAction</name>
+    </quickActions>
 </CustomObjectTranslation>

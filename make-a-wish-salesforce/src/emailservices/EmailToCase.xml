@@ -4,12 +4,6 @@
     <attachmentOption>All</attachmentOption>
     <authenticationFailureAction>Bounce</authenticationFailureAction>
     <authorizationFailureAction>Discard</authorizationFailureAction>
-    <emailServicesAddresses>
-        <developerName>36000000BPWK</developerName>
-        <isActive>true</isActive>
-        <localPart>wvcfullcopy</localPart>
-        <runAsUser>salesforce@wish.org</runAsUser>
-    </emailServicesAddresses>
     <functionInactiveAction>Bounce</functionInactiveAction>
     <functionName>EmailToCase</functionName>
     <isActive>true</isActive>

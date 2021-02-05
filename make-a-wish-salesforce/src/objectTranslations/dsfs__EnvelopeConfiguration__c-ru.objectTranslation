@@ -157,4 +157,8 @@
     </fields>
     <gender>Neuter</gender>
     <nameFieldLabel>Имя конфигурации конверта DocuSign</nameFieldLabel>
+    <quickActions>
+        <label><!-- Save --></label>
+        <name>dsfs__Save</name>
+    </quickActions>
 </CustomObjectTranslation>

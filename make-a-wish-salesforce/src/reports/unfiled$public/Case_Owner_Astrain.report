@@ -52,12 +52,6 @@
         <field>Case.Concept_Approval_Date__c</field>
     </columns>
     <columns>
-        <field>Case.Budget_Approved_Date__c</field>
-    </columns>
-    <columns>
-        <field>Case.Anticipated_Start_Date__c</field>
-    </columns>
-    <columns>
         <field>Case.Start_Date__c</field>
     </columns>
     <columns>
@@ -66,45 +60,67 @@
     <columns>
         <field>OWNER</field>
     </columns>
+    <columns>
+        <field>Case.Active_Wish_Granter__c</field>
+    </columns>
+    <columns>
+        <field>Case.Wish_Granter_1__c</field>
+    </columns>
+    <columns>
+        <field>Case.Wish_Granter_1_Cell__c</field>
+    </columns>
+    <columns>
+        <field>Case.Wish_granter_2__c</field>
+    </columns>
+    <columns>
+        <field>Case.Wish_Granter_2_Cell__c</field>
+    </columns>
     <filter>
         <criteriaItems>
             <column>STATUS</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Qualified,Ready to Assign,Ready to Interview,Wish Determined,Wish Design,Wish Scheduled,Budget Approval - Submitted,Budget Approval - Approved,Hold,Inactive</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.ChapterName__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Assist__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>CONTACT.NAME</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>nemo clownfish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Test_Record__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>OWNER</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>astrain</value>

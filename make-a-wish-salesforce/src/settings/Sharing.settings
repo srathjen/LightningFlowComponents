@@ -8,6 +8,8 @@
     <enableManualUserRecordSharing>true</enableManualUserRecordSharing>
     <enablePortalUserCaseSharing>true</enablePortalUserCaseSharing>
     <enablePortalUserVisibility>true</enablePortalUserVisibility>
-    <enableSecureGuestAccess>true</enableSecureGuestAccess>
+    <enableRemoveTMGroupMembership>false</enableRemoveTMGroupMembership>
+    <enableRestrictAccessLookupRecords>false</enableRestrictAccessLookupRecords>
+    <enableSecureGuestAccess>false</enableSecureGuestAccess>
     <enableStandardReportVisibility>false</enableStandardReportVisibility>
 </SharingSettings>

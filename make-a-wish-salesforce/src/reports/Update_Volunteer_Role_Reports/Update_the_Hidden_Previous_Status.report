@@ -23,18 +23,21 @@
         <booleanFilter>1 OR 2 OR 3</booleanFilter>
         <criteriaItems>
             <column>Volunteer_Roles__c.Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Roles__c.Hidden_Previous_Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Former - Chapter</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Roles__c.Hidden_Previous_Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Pending Training</value>

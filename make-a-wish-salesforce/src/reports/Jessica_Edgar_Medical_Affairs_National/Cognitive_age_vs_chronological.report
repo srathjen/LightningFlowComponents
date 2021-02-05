@@ -1,29 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
-    <chart>
-        <backgroundColor1>#FFFFFF</backgroundColor1>
-        <backgroundColor2>#FFFFFF</backgroundColor2>
-        <backgroundFadeDir>Diagonal</backgroundFadeDir>
-        <chartSummaries>
-            <axisBinding>y</axisBinding>
-            <column>RowCount</column>
-        </chartSummaries>
-        <chartType>HorizontalBar</chartType>
-        <enableHoverLabels>false</enableHoverLabels>
-        <expandOthers>true</expandOthers>
-        <groupingColumn>Lead.Communication__c</groupingColumn>
-        <location>CHART_BOTTOM</location>
-        <showAxisLabels>true</showAxisLabels>
-        <showPercentage>false</showPercentage>
-        <showTotal>false</showTotal>
-        <showValues>false</showValues>
-        <size>Medium</size>
-        <summaryAxisRange>Auto</summaryAxisRange>
-        <textColor>#000000</textColor>
-        <textSize>12</textSize>
-        <titleColor>#000000</titleColor>
-        <titleSize>18</titleSize>
-    </chart>
     <columns>
         <field>FIRST_NAME</field>
     </columns>
@@ -33,27 +9,38 @@
     <columns>
         <field>Lead.Child_Age__c</field>
     </columns>
+    <columns>
+        <field>Lead.Communication__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Does_Child_Have_Cognitive_Delays__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Does_Child_Have_Speech_or_Language_Delay__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Qualifying_Diagnosis__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Non_Verbal_Communication_Method__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Non_Verbal__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Non_Verbal_Additional_Information__c</field>
+    </columns>
     <filter>
         <criteriaItems>
             <column>STATUS</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
-            <value>Inquiry,Referred,Eligibility Review,Qualified,DNQ</value>
-        </criteriaItems>
-        <criteriaItems>
-            <column>Lead.Communication__c</column>
-            <isUnlocked>false</isUnlocked>
-            <operator>equals</operator>
-            <value>&quot;This child is non-verbal;This child functions at a 0-2 year old, Sensorimotor stage&quot;</value>
+            <value>Eligibility Review,Qualified</value>
         </criteriaItems>
         <language>en_US</language>
     </filter>
-    <format>Summary</format>
-    <groupingsDown>
-        <dateGranularity>Day</dateGranularity>
-        <field>Lead.Communication__c</field>
-        <sortOrder>Asc</sortOrder>
-    </groupingsDown>
+    <format>Tabular</format>
     <name>Cognitive age vs chronological</name>
     <params>
         <name>co</name>
@@ -64,8 +51,10 @@
     <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
+    <sortColumn>Lead.Does_Child_Have_Cognitive_Delays__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
-        <interval>INTERVAL_CUSTOM</interval>
+        <interval>INTERVAL_CURFY</interval>
     </timeFrameFilter>
 </Report>

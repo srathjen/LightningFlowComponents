@@ -10,6 +10,7 @@
     <filter>
         <criteriaItems>
             <column>Condition_Description__c$Group1__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>

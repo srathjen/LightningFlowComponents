@@ -90,12 +90,14 @@
     <filter>
         <criteriaItems>
             <column>Travel_Data__c$Migrated_Record__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Travel_Data__c$RecordType</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Travel_Data__c.Rental_Car</value>

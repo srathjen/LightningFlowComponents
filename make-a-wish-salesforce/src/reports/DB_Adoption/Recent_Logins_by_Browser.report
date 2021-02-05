@@ -62,6 +62,7 @@
     <filter>
         <criteriaItems>
             <column>BROWSER_TYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>IE</value>

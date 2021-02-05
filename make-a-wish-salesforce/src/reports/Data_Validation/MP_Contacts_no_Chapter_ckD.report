@@ -56,12 +56,14 @@
         <booleanFilter>1 AND 2</booleanFilter>
         <criteriaItems>
             <column>CONTACT_RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Medical_Professional</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Region_Chapter__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value></value>

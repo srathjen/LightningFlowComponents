@@ -49,12 +49,14 @@
     <filter>
         <criteriaItems>
             <column>Wish_Expense__c$RecordType</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Wish_Expense__c.Budgeting</value>
         </criteriaItems>
         <criteriaItems>
             <column>Wish_Expense__c$CreatedBy</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>integration user</value>

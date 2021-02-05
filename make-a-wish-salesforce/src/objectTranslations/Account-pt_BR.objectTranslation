@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- BDE Entry FS --></label>
         <name>npsp__BDE_Entry_FS</name>
@@ -32,6 +32,10 @@
         <name>BillingAddressVerified__c</name>
     </fields>
     <fields>
+        <label><!-- Bypass HTF Duplicate Check --></label>
+        <name>Bypass_HTF_Duplicate_Check__c</name>
+    </fields>
+    <fields>
         <label><!-- Category --></label>
         <name>Category__c</name>
         <picklistValues>
@@ -56,7 +60,23 @@
         <name>Chapter_Id__c</name>
     </fields>
     <fields>
+        <help><!-- The Intake Manager from the Chapter that owns the record (as indicated by Chapter Name). --></help>
+        <label><!-- Chapter Intake Manager --></label>
+        <name>Chapter_Intake_Manager__c</name>
+    </fields>
+    <fields>
+        <label><!-- Chapter Match --></label>
+        <name>Chapter_Match__c</name>
+    </fields>
+    <fields>
+        <label><!-- Chapter Name (Text) --></label>
+        <name>Chapter_Name_Text__c</name>
+    </fields>
+    <fields>
         <label><!-- Chapter Name --></label>
+        <lookupFilter>
+            <errorMessage><!-- Please select a valid Chapter Account. --></errorMessage>
+        </lookupFilter>
         <name>Chapter_Name__c</name>
         <relationshipLabel><!-- Accounts --></relationshipLabel>
     </fields>
@@ -89,6 +109,10 @@
         <name>Department__c</name>
     </fields>
     <fields>
+        <label><!-- Designated Master Record --></label>
+        <name>Designated_Master_Record__c</name>
+    </fields>
+    <fields>
         <label><!-- Dev Staff Email --></label>
         <name>DevStaffEmail__c</name>
     </fields>
@@ -107,6 +131,14 @@
             <masterLabel>Yes</masterLabel>
             <translation><!-- Yes --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Duplicate Flag --></label>
+        <name>Duplicate_Flag__c</name>
+    </fields>
+    <fields>
+        <label><!-- Edit Access --></label>
+        <name>Edit_Access__c</name>
     </fields>
     <fields>
         <label><!-- Email --></label>
@@ -279,6 +311,10 @@
         <name>From_Mulesoft__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Chapter --></label>
+        <name>Hidden_Chapter__c</name>
+    </fields>
+    <fields>
         <label><!-- Wish Form --></label>
         <name>Hidden_Wish_Form_Id__c</name>
         <relationshipLabel><!-- Accounts --></relationshipLabel>
@@ -319,6 +355,14 @@
     <fields>
         <label><!-- Medical Advisor Email --></label>
         <name>MAC_Email_del__c</name>
+    </fields>
+    <fields>
+        <label><!-- M&amp;M Duplicate Check --></label>
+        <name>MM_Duplicate_Check__c</name>
+    </fields>
+    <fields>
+        <label><!-- MergeGroup --></label>
+        <name>MergeGroup__c</name>
     </fields>
     <fields>
         <label><!-- Migrated Record --></label>
@@ -545,6 +589,10 @@
         <name>RE_Wish_Co_ordinator_Hidden_Email__c</name>
     </fields>
     <fields>
+        <label><!-- Recordtype Matching --></label>
+        <name>RecordType_Matching__c</name>
+    </fields>
+    <fields>
         <label><!-- Record Ownership Notes --></label>
         <name>Record_Ownership_Notes__c</name>
     </fields>
@@ -690,6 +738,10 @@
         <help><!-- USPS Verified --></help>
         <label><!-- Shipping Address Verified --></label>
         <name>ShippingAddressVerified__c</name>
+    </fields>
+    <fields>
+        <label><!-- Test Record --></label>
+        <name>Test_Record__c</name>
     </fields>
     <fields>
         <label><!-- Timezone --></label>
@@ -1907,6 +1959,14 @@
             <section>Address Information</section>
         </sections>
         <sections>
+            <label><!-- Contact Information --></label>
+            <section>Contact Information</section>
+        </sections>
+        <sections>
+            <label><!-- Contact Notes --></label>
+            <section>Contact Notes</section>
+        </sections>
+        <sections>
             <label><!-- Fields --></label>
             <section>Fields</section>
         </sections>
@@ -2011,13 +2071,17 @@
         <label><!-- New Task --></label>
         <name>New_Task_WL</name>
     </quickActions>
+    <quickActions>
+        <label><!-- DocuSign --></label>
+        <name>dsfs__AccountDocuSignAction</name>
+    </quickActions>
     <recordTypes>
-        <description><!-- It displays the name of the state in which the account belongs. --></description>
+        <description><!-- An Account representing a Make-A-Wish chapter --></description>
         <label><!-- Chapter --></label>
         <name>Chapter</name>
     </recordTypes>
     <recordTypes>
-        <description><!-- An Account representing a Household containing one or more individuals --></description>
+        <description><!-- An Account representing a household containing one or more individuals --></description>
         <label><!-- Household Account --></label>
         <name>HH_Account</name>
     </recordTypes>
@@ -2027,7 +2091,7 @@
         <name>Hospital_Treatment_Facility</name>
     </recordTypes>
     <recordTypes>
-        <description><!-- This record type associated with In Kind Donors page layout --></description>
+        <description><!-- An account representing an in-kind donor --></description>
         <label><!-- In Kind Donors --></label>
         <name>In_Kind_Donors</name>
     </recordTypes>
@@ -2037,12 +2101,20 @@
         <name>Organization</name>
     </recordTypes>
     <validationRules>
+        <errorMessage><!-- Please populate a Chapter Name or Zip Code to ensure the HTF gets routed to a chapter. --></errorMessage>
+        <name>Ensure_the_HTF_has_a_Chapter_or_Zip</name>
+    </validationRules>
+    <validationRules>
         <errorMessage><!-- Please fill the Family Dynamics Notes --></errorMessage>
         <name>Family_Dynamics_Validation</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- Chapter Name should not be Blank. --></errorMessage>
         <name>InkindAccount_Chapter_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The Parent Account of an HTF Account must be another HTF Account. --></errorMessage>
+        <name>Parent_Account_of_HTF_must_be_HTF</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- You don&apos;t have access to create to this type of  account --></errorMessage>

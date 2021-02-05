@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
         <value>Don récurrent</value>
@@ -56,7 +55,7 @@
     </fields>
     <fields>
         <help>Nombre de versements.  Uniquement utilisé avec des dons réguliers avec date de fin.</help>
-        <label><!-- Installments --></label>
+        <label><!-- Number of Planned Installments --></label>
         <name>npe03__Installments__c</name>
     </fields>
     <fields>
@@ -128,28 +127,28 @@
         <name>npsp__Always_Use_Last_Day_Of_Month__c</name>
     </fields>
     <fields>
-        <help><!-- The reason this Recurring Donation was closed. --></help>
-        <label><!-- Closed Reason --></label>
+        <help>Le motif de ce Don récurrent a été fermé.</help>
+        <label><!-- Status Reason --></label>
         <name>npsp__ClosedReason__c</name>
         <picklistValues>
             <masterLabel>Card Expired</masterLabel>
-            <translation><!-- Card Expired --></translation>
+            <translation>Carte expirée</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Deceased Donor</masterLabel>
-            <translation><!-- Deceased Donor --></translation>
+            <translation>Donateur décédé</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Financial Difficulty</masterLabel>
-            <translation><!-- Financial Difficulty --></translation>
+            <translation>Difficulté financière</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>No Longer Interested</masterLabel>
-            <translation><!-- No Longer Interested --></translation>
+            <translation>N'est plus intéressé</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Unknown</masterLabel>
-            <translation><!-- Unknown --></translation>
+            <translation>Inconnu</translation>
         </picklistValues>
     </fields>
     <fields>
@@ -282,56 +281,56 @@
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- The Installment Frequency along with Installment Period defines the installment schedule of this Recurring Donation. For example, if Installment Period is Monthly and Installment Frequency is 3, the schedule would be defined as &quot;every 3 months&quot;. --></help>
+        <help>La Fréquence de versement et la Période de versement définissent le calendrier des versements de ce Don récurrent. Par ex., si la Période de versement est Mensuelle et la Fréquence de versement est 3, le calendrier est défini sur « tous les 3 mois ».</help>
         <label><!-- Installment Frequency --></label>
         <name>npsp__InstallmentFrequency__c</name>
     </fields>
     <fields>
-        <help><!-- The form of payment for this Recurring Donation. NPSP automatically copies the selected value to each related Payment record. --></help>
+        <help>Le mode de paiement pour ce don récurrent. NPSP copie automatiquement la valeur sélectionnée dans chaque enregistrement de Paiement.</help>
         <label><!-- Payment Method --></label>
         <name>npsp__PaymentMethod__c</name>
         <picklistValues>
             <masterLabel>ACH/EFT</masterLabel>
-            <translation><!-- ACH/EFT --></translation>
+            <translation>CCA/TEF</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Check</masterLabel>
-            <translation><!-- Check --></translation>
+            <translation>Chèque</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Credit Card</masterLabel>
-            <translation><!-- Credit Card --></translation>
+            <translation>Carte de crédit</translation>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Default value is Open, meaning a recurring donation with no end date. --></help>
+        <help>La valeur par défaut est Ouvert, qui signifie que le don récurrent n'a pas de date de fin.</help>
         <label><!-- Recurring Type --></label>
         <name>npsp__RecurringType__c</name>
         <picklistValues>
             <masterLabel>Open</masterLabel>
-            <translation><!-- Open --></translation>
+            <translation>Ouvert</translation>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- The date of the first installment Opportunity for this Recurring Donation. Changes made to this field after the schedule has started will not impact future installment Opportunities or the schedule. The default is the current date. --></help>
+        <help>La date à partir de laquelle les informations nouvelles ou mises à jour sur ce calendrier (Montant, Jour du mois, etc.) s'appliquent pour ce Don récurrent. Le paramètre par défaut est la date actuelle.</help>
         <label><!-- Effective Date --></label>
         <name>npsp__StartDate__c</name>
     </fields>
     <fields>
-        <help><!-- Indicates if this Recurring Donation is actively in use, temporarily suspended, or closed. --></help>
+        <help>Indique si ce Don récurrent est activement utilisé, temporairement suspendu ou fermé.</help>
         <label><!-- Status --></label>
         <name>npsp__Status__c</name>
         <picklistValues>
             <masterLabel>Active</masterLabel>
-            <translation><!-- Active --></translation>
+            <translation>Actif</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Closed</masterLabel>
-            <translation><!-- Closed --></translation>
+            <translation>Fermé</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Lapsed</masterLabel>
-            <translation><!-- Lapsed --></translation>
+            <translation>Écoulé</translation>
         </picklistValues>
     </fields>
     <gender>Masculine</gender>
@@ -353,4 +352,28 @@
         <label><!-- Recalculate_Rollups --></label>
         <name>npsp__Recalculate_Rollups</name>
     </webLinks>
+    <quickActions>
+        <label><!-- New Opportunity --></label>
+        <name>npe03__New_Opportunity</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Quick Update --></label>
+        <name>npe03__Quick_Update</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Close Recurring Donation --></label>
+        <name>npsp__Close_Recurring_Donation</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New Opportunity --></label>
+        <name>npsp__New_Opportunity</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Pause --></label>
+        <name>npsp__Pause</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Quick Update --></label>
+        <name>npsp__Quick_Update</name>
+    </quickActions>
 </CustomObjectTranslation>

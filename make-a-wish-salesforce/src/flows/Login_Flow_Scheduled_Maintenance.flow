@@ -3,8 +3,8 @@
     <assignments>
         <name>Force_Logout</name>
         <label>Force Logout</label>
-        <locationX>440</locationX>
-        <locationY>187</locationY>
+        <locationX>50</locationX>
+        <locationY>518</locationY>
         <assignmentItems>
             <assignToReference>LoginFlow_ForceLogout</assignToReference>
             <operator>Assign</operator>
@@ -16,8 +16,8 @@
     <decisions>
         <name>User_Lockout</name>
         <label>User Lockout?</label>
-        <locationX>296</locationX>
-        <locationY>187</locationY>
+        <locationX>314</locationX>
+        <locationY>398</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Yes</name>
@@ -51,7 +51,7 @@
     <formulas>
         <name>LinktoGalaxyFormula</name>
         <dataType>String</dataType>
-        <expression>IF({!MaintenanceAlert_isActiveLockout_formula},IF({!$User.ProfileId}={!fullAccessNatStaff_ProfileId},&apos;&apos;,{!ForUpdatesOnProgressFollowThisLink_template}),&apos;&apos;)</expression>
+        <expression>IF({!MaintenanceAlert_isActiveLockout_formula},IF(OR({!$User.ProfileId}={!IntakeManager_ProfileId},{!$User.ProfileId}={!ProgramStaff_ProfileId},{!$User.ProfileId}={!VolunteerStaff_ProfileId}),&apos;&apos;,{!ForUpdatesOnProgressFollowThisLink_template}),&apos;&apos;)</expression>
     </formulas>
     <formulas>
         <name>MaintenanceAlert_Body1_formula</name>
@@ -87,6 +87,12 @@
         </value>
     </processMetadataValues>
     <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
         <name>OriginBuilderType</name>
         <value>
             <stringValue>LightningFlowBuilder</stringValue>
@@ -96,8 +102,8 @@
     <recordLookups>
         <name>Get_User</name>
         <label>Get User</label>
-        <locationX>182</locationX>
-        <locationY>50</locationY>
+        <locationX>314</locationX>
+        <locationY>158</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>System_Alert</targetReference>
@@ -117,8 +123,8 @@
     <screens>
         <name>System_Alert</name>
         <label>System Alert</label>
-        <locationX>304</locationX>
-        <locationY>50</locationY>
+        <locationX>314</locationX>
+        <locationY>278</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -134,8 +140,8 @@
         <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>50</locationX>
-        <locationY>50</locationY>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Get_User</targetReference>
         </connector>
@@ -157,6 +163,16 @@
         </value>
     </variables>
     <variables>
+        <name>IntakeManager_ProfileId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>00e36000001baGVAAY</stringValue>
+        </value>
+    </variables>
+    <variables>
         <name>LoginFlow_ForceLogout</name>
         <dataType>Boolean</dataType>
         <isCollection>false</isCollection>
@@ -172,5 +188,25 @@
         <isCollection>false</isCollection>
         <isInput>true</isInput>
         <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>ProgramStaff_ProfileId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>00e360000012UgtAAE</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>VolunteerStaff_ProfileId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>00e36000000HGpLAAW</stringValue>
+        </value>
     </variables>
 </Flow>

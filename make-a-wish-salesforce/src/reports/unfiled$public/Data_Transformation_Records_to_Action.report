@@ -11,24 +11,28 @@
         <booleanFilter>(1 AND 2 AND 3) AND 4</booleanFilter>
         <criteriaItems>
             <column>ProcessInstance$Status</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>P,M,S</value>
         </criteriaItems>
         <criteriaItems>
             <column>ProcessInstance$ProcessDefinition</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notContain</operator>
             <value>Reimbursement</value>
         </criteriaItems>
         <criteriaItems>
             <column>ProcessInstance$ProcessDefinition</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notContain</operator>
             <value>Donors</value>
         </criteriaItems>
         <criteriaItems>
             <column>ProcessInstance$ProcessDefinition</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Volunteer Role Approval Process</value>

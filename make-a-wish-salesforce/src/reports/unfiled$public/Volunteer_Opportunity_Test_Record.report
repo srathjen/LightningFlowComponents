@@ -20,6 +20,7 @@
         <filter>
             <criteriaItems>
                 <column>CUST_CREATED_NAME</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Chandrasekar Nallusamy,Kanagaraj Arjunan,Jose Rathi Francis,Sophiya George,Sudharsan Kumaravel,Furqan Maqbool,Vennila Paramasivam,ChennaReddy UmmaReddy,Kesavakumar Murugesan</value>
@@ -60,6 +61,7 @@
         <filter>
             <criteriaItems>
                 <column>Volunteer_Opportunity__c.Chapter_Name__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Alabama</value>

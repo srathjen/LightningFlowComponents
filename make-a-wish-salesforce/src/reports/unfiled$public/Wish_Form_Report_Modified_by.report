@@ -30,6 +30,7 @@
     <filter>
         <criteriaItems>
             <column>CUST_LAST_UPDATE_NAME</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Kanagaraj Arjunan</value>

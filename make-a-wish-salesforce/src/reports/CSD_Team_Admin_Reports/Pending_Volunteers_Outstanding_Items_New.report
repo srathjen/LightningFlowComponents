@@ -22,18 +22,21 @@
     <filter>
         <criteriaItems>
             <column>npe5__Affiliation__c$npe5__Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Prospective,Pending</value>
         </criteriaItems>
         <criteriaItems>
             <column>npe5__Affiliation__c$npe5__Contact__c.Test_Record__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>npe5__Affiliation__c$npe5__Organization__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>

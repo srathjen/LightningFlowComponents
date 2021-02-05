@@ -28,6 +28,7 @@
     <filter>
         <criteriaItems>
             <column>Awards_Recognition__c.Migrated_Record__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>

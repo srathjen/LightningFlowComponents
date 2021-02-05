@@ -10,4 +10,5 @@
     <tabs>dsfs__DocuSignAccountConfiguration__c</tabs>
     <tabs>Awards_Recognition__c</tabs>
     <tabs>Apex_Debug_Log__c</tabs>
+    <tabs>cg__AttachmentSync__c</tabs>
 </CustomApplication>

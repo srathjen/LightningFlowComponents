@@ -52,30 +52,35 @@
         <booleanFilter>1 AND 4 AND 5 AND (2 AND 3)</booleanFilter>
         <criteriaItems>
             <column>Lead$ChapterName__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Illinois</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead$Sub_Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Pending Diagnosis Verification</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.dsfs__DocuSign_Status__r$dsfs__Envelope_Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Completed</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead$Test_Record__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead$RecordType</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Lead.Wish_Child</value>

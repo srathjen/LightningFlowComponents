@@ -11,19 +11,14 @@
         <label>Cardiology</label>
     </customValue>
     <customValue>
-        <fullName>Cardio-thoracic Surgeon</fullName>
+        <fullName>Cardio-thoracic Surgery</fullName>
         <default>false</default>
-        <label>Cardio-thoracic Surgeon</label>
+        <label>Cardio-thoracic Surgery</label>
     </customValue>
     <customValue>
         <fullName>Critical Care</fullName>
         <default>false</default>
         <label>Critical Care</label>
-    </customValue>
-    <customValue>
-        <fullName>Critical Care Medicine</fullName>
-        <default>false</default>
-        <label>Critical Care Medicine</label>
     </customValue>
     <customValue>
         <fullName>Dermatology</fullName>
@@ -91,9 +86,9 @@
         <label>Hospice/Palliative Care</label>
     </customValue>
     <customValue>
-        <fullName>Hospitalist</fullName>
+        <fullName>Hospital Medicine</fullName>
         <default>false</default>
-        <label>Hospitalist</label>
+        <label>Hospital Medicine</label>
     </customValue>
     <customValue>
         <fullName>Immunology</fullName>
@@ -104,11 +99,6 @@
         <fullName>Infectious Disease</fullName>
         <default>false</default>
         <label>Infectious Disease</label>
-    </customValue>
-    <customValue>
-        <fullName>Internal Medicine/Hospitalist</fullName>
-        <default>false</default>
-        <label>Internal Medicine/Hospitalist</label>
     </customValue>
     <customValue>
         <fullName>Interventional Radiology</fullName>
@@ -156,6 +146,11 @@
         <label>Physical Medicine &amp; Rehabilitation</label>
     </customValue>
     <customValue>
+        <fullName>Primary Care</fullName>
+        <default>false</default>
+        <label>Primary Care</label>
+    </customValue>
+    <customValue>
         <fullName>Psychiatry</fullName>
         <default>false</default>
         <label>Psychiatry</label>
@@ -199,6 +194,30 @@
         <fullName>Urology</fullName>
         <default>false</default>
         <label>Urology</label>
+    </customValue>
+    <customValue>
+        <fullName>Hospitalist</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Hospitalist</label>
+    </customValue>
+    <customValue>
+        <fullName>Critical Care Medicine</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Critical Care Medicine</label>
+    </customValue>
+    <customValue>
+        <fullName>Internal Medicine/Hospitalist</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Internal Medicine/Hospitalist</label>
+    </customValue>
+    <customValue>
+        <fullName>Cardio-thoracic Surgeon</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Cardio-thoracic Surgeon</label>
     </customValue>
     <masterLabel>MP Specialties</masterLabel>
     <sorted>true</sorted>

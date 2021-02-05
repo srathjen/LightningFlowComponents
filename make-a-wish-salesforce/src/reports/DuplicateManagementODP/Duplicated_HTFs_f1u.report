@@ -4,10 +4,10 @@
         <field>Account$Name</field>
     </columns>
     <columns>
-        <field>Account$BillingAddress</field>
+        <field>Account$Parent</field>
     </columns>
     <columns>
-        <field>Account$Department__c</field>
+        <field>Account$BillingAddress</field>
     </columns>
     <columns>
         <field>Account$Chapter_Name__c</field>
@@ -15,15 +15,24 @@
     <filter>
         <criteriaItems>
             <column>Account$RecordType</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Account.Hospital_Treatment_Facility</value>
         </criteriaItems>
         <criteriaItems>
             <column>Account.DuplicateRecordItems$DuplicateRecordSet.Duplicate_Item_Count__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>greaterThan</operator>
             <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account$Chapter_Name__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>test</value>
         </criteriaItems>
         <language>en_US</language>
     </filter>

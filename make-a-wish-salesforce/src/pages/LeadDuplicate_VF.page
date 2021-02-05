@@ -15,8 +15,7 @@ Modification Log:
     <apex:includeScript value="{!URLFOR($Resource.CumulusStaticResources, '/npsp-slds/modal.js')}"/>
     <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/jquery.min.js')}"/>
     <apex:stylesheet value="{!URLFOR($Resource.CumulusStaticResources, '/npsp-slds/npsp-common.css')}"/>
-    <apex:stylesheet
-            value="{!URLFOR($Resource.SLDS, '/0_12_2/assets/styles/salesforce-lightning-design-system-vf.min.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.SLDS, '/0_12_2/assets/styles/salesforce-lightning-design-system-vf.min.css')}"/>
     <script>
         $(function () {
             $('.family').click(function () {
@@ -267,7 +266,7 @@ Modification Log:
             <apex:variable var="cardClass" value="{!IF(hasResults, '', 'slds-card--empty')}"/>
             <apex:form id="frm">
                 <apex:outputpanel rendered="{!isFamilyInfo == false}">
-                    <apex:actionRegion>
+                    <apex:actionRegion >
                         <div class="slds-notify slds-notify--alert slds-theme--inverse-text slds-theme--alert-texture help"
                              role="alert">
                             <span class="slds-assistive-text">Info</span>
@@ -339,8 +338,7 @@ Modification Log:
                                 <div class="slds-card__body">
                                     <apex:outputText rendered="{!NOT(hasResults)}">
                                         <h3 class="slds-text-heading--small slds-p-top--large slds-p-bottom--large">
-                                            <apex:outputText
-                                                    value="{!$Label.npe01__contact_merge_error_confirm_message_nothing_found}"/>
+                                            <apex:outputText value="{!$Label.npe01__contact_merge_error_confirm_message_nothing_found}"/>
                                         </h3>
                                     </apex:outputText>
                                     <apex:outputText rendered="{!AND(hasResults,dupLeadList.size > 0)}">
@@ -359,8 +357,7 @@ Modification Log:
                                             <apex:repeat value="{!dupLeadList}" var="item">
                                                 <tr>
                                                     <td class="slds-row-select">
-                                                        <apex:outputPanel
-                                                                rendered="{!(currLead.ChapterName__c == item.currentLead.ChapterName__c)}">
+                                                        <apex:outputPanel rendered="{!(currLead.ChapterName__c == item.currentLead.ChapterName__c)}">
                                                             <label class="slds-checkbox">
                                                                 <apex:inputCheckbox value="{!item.selected}"/>
                                                                 <span class="slds-checkbox--faux"></span>
@@ -388,8 +385,7 @@ Modification Log:
                                                         </apex:outputText>
                                                     </td>
                                                     <td>
-                                                        <apex:outputText
-                                                                value="{!item.currentLead.chapterName__r.Name}"/>
+                                                        <apex:outputText value="{!item.currentLead.chapterName__r.Name}"/>
                                                     </td>
                                                 </tr>
                                             </apex:repeat>
@@ -411,8 +407,7 @@ Modification Log:
                         <div class="slds-card__body">
                             <apex:outputText rendered="{!NOT(hasResults)}">
                                 <h3 class="slds-text-heading--small slds-p-top--large slds-p-bottom--large">
-                                    <apex:outputText
-                                            value="{!$Label.npe01__contact_merge_error_confirm_message_nothing_found}"/>
+                                    <apex:outputText value="{!$Label.npe01__contact_merge_error_confirm_message_nothing_found}"/>
                                 </h3>
                             </apex:outputText>
                             <apex:outputText rendered="{!hasResults}">
@@ -510,8 +505,7 @@ Modification Log:
                             <div class="slds-card__body">
                                 <apex:outputText rendered="{!dupParentContactList.size <0}">
                                     <h3 class="slds-text-heading--small slds-p-top--large slds-p-bottom--large">
-                                        <apex:outputText
-                                                value="{!$Label.npe01__contact_merge_error_confirm_message_nothing_found}"/>
+                                        <apex:outputText value="{!$Label.npe01__contact_merge_error_confirm_message_nothing_found}"/>
                                     </h3>
                                 </apex:outputText>
                                 <apex:outputText rendered="{!dupParentContactList.size >0}">
@@ -723,8 +717,7 @@ Modification Log:
                                                     </span>
                                                 <span class="slds-text-body--small kill-white-space">
                                                         (<apex:commandLink action="{!selectDefaultRecord}"
-                                                                           value="select all"><apex:param
-                                                                name="recordId"
+                                                                           value="select all"><apex:param name="recordId"
                                                                 value="{!col.objId}"/></apex:commandLink>)
                                                     </span>
                                             </th>
@@ -773,8 +766,7 @@ Modification Log:
                                             </th>
                                         </tr>
                                     </apex:outputText>
-                                    <apex:outputText
-                                            rendered="{!row.styleClass != 'separator' && row.styleClass != 'header' && row.fieldName != '$MASTER$'}">
+                                    <apex:outputText rendered="{!row.styleClass != 'separator' && row.styleClass != 'header' && row.fieldName != '$MASTER$'}">
                                         <tr>
                                             <th class="slds-size--1-of-12">
                                                 <apex:inputHidden id="winner" value="{!row.selectedValue}"
@@ -785,15 +777,13 @@ Modification Log:
                                                 <apex:outputText rendered="{!row.showRadio}">
                                                     <td class="slds-form-element__control slds-size--1-of-3 slds-cell-wrap">
                                                         <label class="slds-radio">
-                                                            <apex:outputText
-                                                                    rendered="{!row.selectedValue == col.objId}">
+                                                            <apex:outputText rendered="{!row.selectedValue == col.objId}">
                                                                 <input type="radio" class="radio-winner-value"
                                                                        checked="true" name="{!row.fieldName}"
                                                                        data-target="{!$Component.winner}"
                                                                        value="{!col.objId}"/>
                                                             </apex:outputText>
-                                                            <apex:outputText
-                                                                    rendered="{!row.selectedValue != col.objId}">
+                                                            <apex:outputText rendered="{!row.selectedValue != col.objId}">
                                                                 <input type="radio" class="radio-winner-value"
                                                                        name="{!row.fieldName}"
                                                                        data-target="{!$Component.winner}"

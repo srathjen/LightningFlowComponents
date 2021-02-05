@@ -99,6 +99,7 @@
     <filter>
         <criteriaItems>
             <column>In_Kind_Donation_Reimbursement__c$RecordType</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>In_Kind_Donation_Reimbursement__c.Reimbursement</value>

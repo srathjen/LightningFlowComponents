@@ -15,18 +15,21 @@
     <filter>
         <criteriaItems>
             <column>Volunteer_Orientation_Training__c$Migrated_Record__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Orientation_Training__c$Class_Offering__c.Chapter__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Orientation_Training__c$Orientation_Training_Hidden__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Wish Granter Training,Volunteer Orientation</value>

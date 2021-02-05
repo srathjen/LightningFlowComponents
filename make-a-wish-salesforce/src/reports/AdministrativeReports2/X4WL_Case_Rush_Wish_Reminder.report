@@ -25,21 +25,6 @@
         <aggregateTypes>Sum</aggregateTypes>
         <field>Case.Rush__c</field>
     </columns>
-    <filter>
-        <criteriaItems>
-            <column>Case.Rush__c</column>
-            <isUnlocked>true</isUnlocked>
-            <operator>equals</operator>
-            <value>1</value>
-        </criteriaItems>
-        <criteriaItems>
-            <column>RECORDTYPE</column>
-            <isUnlocked>true</isUnlocked>
-            <operator>equals</operator>
-            <value>Case.Wish</value>
-        </criteriaItems>
-        <language>en_US</language>
-    </filter>
     <format>Tabular</format>
     <name>4WL Case:Rush Wish Reminder &amp;</name>
     <params>
@@ -57,8 +42,8 @@
     <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CREATED_DATEONLY</dateColumn>
-        <endDate>2019-12-09</endDate>
+        <endDate>2020-09-24</endDate>
         <interval>INTERVAL_CUSTOM</interval>
-        <startDate>2019-12-06</startDate>
+        <startDate>2020-09-01</startDate>
     </timeFrameFilter>
 </Report>

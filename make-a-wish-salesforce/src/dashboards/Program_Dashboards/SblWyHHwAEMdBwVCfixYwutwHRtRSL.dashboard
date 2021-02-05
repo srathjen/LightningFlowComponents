@@ -35,7 +35,7 @@
                 <header>Available Wish Granters by Region</header>
                 <legendPosition>Right</legendPosition>
                 <maxValuesDisplayed>6</maxValuesDisplayed>
-                <report>AZ_Volunteer_Tracking/Available_Wish_Granters_by_Region_DV8</report>
+                <report>VolunteerTracking/Available_Wish_Granters_by_Region_DV8</report>
                 <showPercentage>false</showPercentage>
                 <showTotal>true</showTotal>
                 <showValues>true</showValues>
@@ -59,7 +59,7 @@
                 <expandOthers>false</expandOthers>
                 <groupingSortProperties/>
                 <header>Wish Granters Needed By Region</header>
-                <report>AZ_Volunteer_Tracking/Wish_Granters_Needed_By_Region_xE0</report>
+                <report>ArchiveAZVolunteerTracking/Wish_Granters_Needed_By_Region_xE0</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>false</showValues>
@@ -96,7 +96,7 @@
                 <header>Volunteer by Region</header>
                 <legendPosition>Right</legendPosition>
                 <maxValuesDisplayed>6</maxValuesDisplayed>
-                <report>AZ_Volunteer_Tracking/Volunteer_by_Region_Op7</report>
+                <report>ArchiveAZVolunteerTracking/Volunteer_by_Region_Op7</report>
                 <showPercentage>false</showPercentage>
                 <showTotal>true</showTotal>
                 <showValues>true</showValues>
@@ -120,7 +120,7 @@
                 <expandOthers>false</expandOthers>
                 <groupingSortProperties/>
                 <header>Wishes In Progress by Region</header>
-                <report>Wish_Management/Wishes_In_Progress_by_Region_IAm</report>
+                <report>ArchiveAZWishManagement/Wishes_In_Progress_by_Region_IAm</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>false</showValues>

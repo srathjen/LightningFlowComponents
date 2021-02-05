@@ -6,4 +6,5 @@
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <label>Config Workbook</label>
     <tabs>cwbtool__CWB_Tool</tabs>
+    <tabs>cg__AttachmentSync__c</tabs>
 </CustomApplication>

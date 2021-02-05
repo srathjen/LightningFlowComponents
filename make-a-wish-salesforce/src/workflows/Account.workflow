@@ -70,11 +70,7 @@
         </actions>
         <active>true</active>
         <description>Fires an alert to the Intake Manager when an HTF is assigned to their chapter.</description>
-        <formula>!ISNEW()
-&amp;&amp;
-ISCHANGED(Chapter_Name__c)
-&amp;&amp;
-!ISBLANK(Chapter_Name__c)</formula>
+        <formula>!ISNEW() &amp;&amp; ISCHANGED(Chapter_Name__c) &amp;&amp; !ISBLANK(Chapter_Name__c)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>

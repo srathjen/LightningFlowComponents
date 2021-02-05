@@ -15,6 +15,7 @@
     <filter>
         <criteriaItems>
             <column>LAST_LOGIN</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>greaterOrEqual</operator>
             <value>12/16/2019 8:00 PM</value>

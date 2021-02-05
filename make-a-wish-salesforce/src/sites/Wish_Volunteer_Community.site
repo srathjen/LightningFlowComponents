@@ -24,9 +24,9 @@
     <masterLabel>Wish Volunteer Community</masterLabel>
     <referrerPolicyOriginWhenCrossOrigin>false</referrerPolicyOriginWhenCrossOrigin>
     <requireHttps>true</requireHttps>
-    <requireInsecurePortalAccess>false</requireInsecurePortalAccess>
     <selfRegPage>CommunitiesSelfReg</selfRegPage>
     <siteAdmin>salesforce@wish.org</siteAdmin>
+    <siteGuestRecordDefaultOwner>salesforce@wish.org</siteGuestRecordDefaultOwner>
     <siteType>ChatterNetwork</siteType>
     <subdomain>make-a-wish</subdomain>
 </CustomSite>

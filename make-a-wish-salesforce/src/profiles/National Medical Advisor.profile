@@ -9870,6 +9870,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Lead.Best_Contact_MP_Category__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Best_Contact_MP_Fax__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Lead.Best_Contact_Specialty__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -11011,6 +11021,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Treating_MP_State__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Treating_MP_Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

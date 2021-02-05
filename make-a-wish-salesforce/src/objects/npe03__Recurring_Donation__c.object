@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -217,7 +216,7 @@
         <externalId>false</externalId>
         <formula>if(
   LEN(npe03__Contact__c)&gt;0,
-  npe03__Contact__r.FirstName  &amp; &quot; &quot; &amp; npe03__Contact__r.LastName,
+  npe03__Contact__r.FirstName  &amp; " " &amp; npe03__Contact__r.LastName,
    npe03__Organization__r.Name
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -303,7 +302,7 @@ OR(
         <description>Number of installments (donations) you expect to receive. For Fixed-Length Recurring Donations only.</description>
         <externalId>false</externalId>
         <inlineHelpText>Number of installments.  Only used with Non-Open Ended Recurring Donations.</inlineHelpText>
-        <label>Installments</label>
+        <label>Number of Planned Installments</label>
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
@@ -329,9 +328,9 @@ OR(
     <fields>
         <fullName>npe03__Next_Payment_Date__c</fullName>
         <deprecated>false</deprecated>
-        <description>Holds the date of the next recurring payment.  Manually editing this field will recalculate all future opportunity&apos;s close dates based on the scheduled defined.</description>
+        <description>Holds the date of the next recurring payment.  Manually editing this field will recalculate all future opportunity's close dates based on the scheduled defined.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Holds the date of the next recurring payment.  Manually editing this field will recalculate all future opportunity&apos;s close dates based on the scheduled defined.</inlineHelpText>
+        <inlineHelpText>Holds the date of the next recurring payment.  Manually editing this field will recalculate all future opportunity's close dates based on the scheduled defined.</inlineHelpText>
         <label>Next Donation Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -377,6 +376,7 @@ OR(
         <externalId>false</externalId>
         <label>Account</label>
         <referenceTo>Account</referenceTo>
+        <relationshipLabel>Recurring Donations</relationshipLabel>
         <relationshipName>RecurringDonations</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -406,6 +406,7 @@ OR(
         <externalId>false</externalId>
         <label>Campaign</label>
         <referenceTo>Campaign</referenceTo>
+        <relationshipLabel>Recurring Donations</relationshipLabel>
         <relationshipName>Recurring_Donations_Pledges</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -416,7 +417,7 @@ OR(
     <fields>
         <fullName>npe03__Schedule_Type__c</fullName>
         <deprecated>false</deprecated>
-        <description>Tells Salesforce how to compute the amount for each child opportunity, based on what you&apos;ve entered in the Amount field. For Fixed-Length Recurring Donations only.</description>
+        <description>Tells Salesforce how to compute the amount for each child opportunity, based on what you've entered in the Amount field. For Fixed-Length Recurring Donations only.</description>
         <externalId>false</externalId>
         <inlineHelpText>Whether the Amount is used for each installment (Multiple By), or Amount is split between installments (Divide By).  Only used with Non-Open Ended Recurring Donations.</inlineHelpText>
         <label>Schedule Type</label>
@@ -464,8 +465,8 @@ OR(
         <formula>IF(TEXT( npe03__Open_Ended_Status__c) =  $Label.npe03__RecurringDonationOpenStatus, 0,
 CASE(
  npe03__Schedule_Type__c ,
-&quot;Multiply By&quot;, npe03__Installments__c * npe03__Amount__c ,
-&quot;Divide By&quot;,npe03__Amount__c
+"Multiply By", npe03__Installments__c * npe03__Amount__c ,
+"Divide By",npe03__Amount__c
 ,0
 ))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -482,7 +483,7 @@ CASE(
         <defaultValue>false</defaultValue>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
-        <inlineHelpText>When checked, all future monthly or quarterly donation installments will be set to the last day of the month, regardless of the actual date in the &quot;Next Donation Date&quot; field. This is ignored when the installment period is not set to Monthly or Quarterly.</inlineHelpText>
+        <inlineHelpText>When checked, all future monthly or quarterly donation installments will be set to the last day of the month, regardless of the actual date in the "Next Donation Date" field. This is ignored when the installment period is not set to Monthly or Quarterly.</inlineHelpText>
         <label>Always use last day of month</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -492,10 +493,10 @@ CASE(
     <fields>
         <fullName>npsp__ClosedReason__c</fullName>
         <deprecated>false</deprecated>
-        <description>The reason this Recurring Donation was closed.</description>
+        <description>The reason this Recurring Donation has its current Status value.</description>
         <externalId>false</externalId>
         <inlineHelpText>The reason this Recurring Donation was closed.</inlineHelpText>
-        <label>Closed Reason</label>
+        <label>Status Reason</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -708,9 +709,9 @@ CASE(
     <fields>
         <fullName>npsp__InstallmentFrequency__c</fullName>
         <deprecated>false</deprecated>
-        <description>The Installment Frequency along with Installment Period defines the installment schedule of this Recurring Donation. For example, if Installment Period is Monthly and Installment Frequency is 3, the schedule would be defined as &quot;every 3 months&quot;.</description>
+        <description>The Installment Frequency along with Installment Period defines the installment schedule of this Recurring Donation. For example, if Installment Period is Monthly and Installment Frequency is 3, the schedule is defined as "every 3 months".</description>
         <externalId>false</externalId>
-        <inlineHelpText>The Installment Frequency along with Installment Period defines the installment schedule of this Recurring Donation. For example, if Installment Period is Monthly and Installment Frequency is 3, the schedule would be defined as &quot;every 3 months&quot;.</inlineHelpText>
+        <inlineHelpText>The Installment Frequency along with Installment Period defines the installment schedule of this Recurring Donation. For example, if Installment Period is Monthly and Installment Frequency is 3, the schedule would be defined as "every 3 months".</inlineHelpText>
         <label>Installment Frequency</label>
         <precision>3</precision>
         <required>false</required>
@@ -757,7 +758,7 @@ CASE(
     <fields>
         <fullName>npsp__RecurringType__c</fullName>
         <deprecated>false</deprecated>
-        <description>Default value is Open, meaning a recurring donation with no end date.</description>
+        <description>Select Open for an ongoing Recurring Donation. Select Fixed for a Recurring Donation that has a specific number of installments. For Fixed, you must also populate the Number of Planned Installments field.</description>
         <externalId>false</externalId>
         <inlineHelpText>Default value is Open, meaning a recurring donation with no end date.</inlineHelpText>
         <label>Recurring Type</label>
@@ -782,7 +783,7 @@ CASE(
         <fullName>npsp__StartDate__c</fullName>
         <defaultValue>Today()</defaultValue>
         <deprecated>false</deprecated>
-        <description>The date that new or updated schedule information (Amount, Day of Month, etc.) for this Recurring Donation should take effect. The default is the current date.</description>
+        <description>The date that new or updated schedule information (Amount, Day of Month, etc.) for this Recurring Donation takes effect. The default is the current date.</description>
         <externalId>false</externalId>
         <inlineHelpText>The date of the first installment Opportunity for this Recurring Donation. Changes made to this field after the schedule has started will not impact future installment Opportunities or the schedule. The default is the current date.</inlineHelpText>
         <label>Effective Date</label>
@@ -826,7 +827,7 @@ CASE(
             </valueSetDefinition>
         </valueSet>
     </fields>
-    <label>Recurring Donations</label>
+    <label>Recurring Donation</label>
     <nameField>
         <label>Recurring Donation Name</label>
         <trackFeedHistory>false</trackFeedHistory>
@@ -872,7 +873,7 @@ CASE(
         <openType>replace</openType>
         <protected>false</protected>
         <requireRowSelection>false</requireRowSelection>
-        <url>{!URLFOR($Action.npe03__Recurring_Donation__c.New, null, [Name=Account.Name,retURL=&quot;/&quot;&amp;Account.Id])}</url>
+        <url>{!URLFOR($Action.npe03__Recurring_Donation__c.New, null, [Name=Account.Name,retURL="/"&amp;Account.Id])}</url>
     </webLinks>
     <webLinks>
         <fullName>npe03__New_Recurring_Donation_Pledge_Account</fullName>
@@ -885,7 +886,7 @@ CASE(
         <openType>replace</openType>
         <protected>false</protected>
         <requireRowSelection>false</requireRowSelection>
-        <url>{!URLFOR($Action.npe03__Recurring_Donation__c.New, null,  [Name  =  Contact.FirstName &amp; &quot; &quot;&amp; Contact.LastName&amp;&quot; Donation - &quot;&amp;   TEXT( TODAY()),retURL=&quot;/&quot;&amp;Contact.Id])}</url>
+        <url>{!URLFOR($Action.npe03__Recurring_Donation__c.New, null,  [Name  =  Contact.FirstName &amp; " "&amp; Contact.LastName&amp;" Donation - "&amp;   TEXT( TODAY()),retURL="/"&amp;Contact.Id])}</url>
     </webLinks>
     <webLinks>
         <fullName>npe03__Refresh_Opportunities</fullName>
@@ -897,7 +898,7 @@ CASE(
         <masterLabel>Refresh Opportunities</masterLabel>
         <openType>replace</openType>
         <protected>false</protected>
-        <url>{!URLFOR(&apos;/apex/npsp__RD_AddDonationsBTN?id=&apos; + npe03__Recurring_Donation__c.Id)}</url>
+        <url>{!URLFOR('/apex/npsp__RD_AddDonationsBTN?id=' + npe03__Recurring_Donation__c.Id)}</url>
     </webLinks>
     <webLinks>
         <fullName>npsp__Recalculate_Rollups</fullName>

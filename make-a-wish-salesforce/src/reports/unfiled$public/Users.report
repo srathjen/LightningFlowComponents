@@ -36,6 +36,7 @@
     <filter>
         <criteriaItems>
             <column>PROFILE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Wish Volunteer Community Profile,Wish Referral Form Profile,Prospective Volunteer (Member),Chatter Free User,Prospective Volunteer (Login),Active Volunteer (Login),Active Volunteer (Member)</value>

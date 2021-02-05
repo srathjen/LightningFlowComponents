@@ -16,6 +16,7 @@
     <filter>
         <criteriaItems>
             <column>Contact$Email</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>kpeterson2@phoenixchildrens.com</value>

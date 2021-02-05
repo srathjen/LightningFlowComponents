@@ -31,17 +31,17 @@
                     
     
     
-                <!--Walkme Extension Script - 12-11-2018 SP - STARTS HERE -->
- 
+                <!--Walkme Extension Script - Production - START -->
+   
                 <script type="text/javascript">
                 (function() {var walkme = document.createElement('script');
-                             walkme.type = 'text/javascript'; walkme.async = true;
-                             walkme.src = 'https://cdn.walkme.com/users/12ce3d1ce46b47b1931d30135493da28/test/walkme_12ce3d1ce46b47b1931d30135493da28_https.js';
-                             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(walkme, s);
-                             window._walkmeConfig = {smartLoad:true}; })();
+                    walkme.type = 'text/javascript'; walkme.async = true;
+                    walkme.src = 'https://cdn.walkme.com/users/12ce3d1ce46b47b1931d30135493da28/walkme_12ce3d1ce46b47b1931d30135493da28_https.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(walkme, s);
+                    window._walkmeConfig = {smartLoad:true}; })();
                 </script>
- 
-                <!--Walkme Extension Script - 12-11-2018 SP - END -->
+   
+                <!--Walkme Extension Script - Production - END -->
     
 </header>
 </apex:page>

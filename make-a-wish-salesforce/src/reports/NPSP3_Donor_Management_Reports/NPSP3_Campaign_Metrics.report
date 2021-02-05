@@ -82,6 +82,7 @@
     <filter>
         <criteriaItems>
             <column>ACTUAL_COST</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>greaterThan</operator>
             <value>0</value>

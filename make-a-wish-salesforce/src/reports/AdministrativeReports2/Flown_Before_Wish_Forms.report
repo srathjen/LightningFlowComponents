@@ -12,12 +12,14 @@
     <filter>
         <criteriaItems>
             <column>FK_$Case.Has_your_family_flown_before__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
         <criteriaItems>
             <column>Wish_Child_Form__c.Has_your_family_flown_before__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value></value>

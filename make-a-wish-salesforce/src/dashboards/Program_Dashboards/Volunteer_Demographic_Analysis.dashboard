@@ -18,7 +18,7 @@
             <expandOthers>false</expandOthers>
             <groupingSortProperties/>
             <legendPosition>Bottom</legendPosition>
-            <report>Chapter_Volunteer_Reports/Active_AZ_Volunteers_by_Gender</report>
+            <report>Chapter_Reports/Active_AZ_Volunteers_by_Gender</report>
             <showPercentage>false</showPercentage>
             <showValues>true</showValues>
             <sortBy>RowLabelAscending</sortBy>
@@ -39,7 +39,7 @@
             <expandOthers>false</expandOthers>
             <groupingSortProperties/>
             <legendPosition>Bottom</legendPosition>
-            <report>Chapter_Volunteer_Reports/Active_AZ_Volunteers_by_Ethnicity</report>
+            <report>ChapterVolunteerReports/Active_AZ_Volunteers_by_Ethnicity</report>
             <showPercentage>false</showPercentage>
             <showValues>true</showValues>
             <sortBy>RowLabelAscending</sortBy>
@@ -60,7 +60,7 @@
             <expandOthers>false</expandOthers>
             <groupingSortProperties/>
             <legendPosition>Bottom</legendPosition>
-            <report>Chapter_Volunteer_Reports/Active_AZ_Volunteers_by_Language</report>
+            <report>Chapter_Reports/Active_AZ_Volunteers_by_Language</report>
             <showPercentage>false</showPercentage>
             <showValues>true</showValues>
             <sortBy>RowLabelAscending</sortBy>

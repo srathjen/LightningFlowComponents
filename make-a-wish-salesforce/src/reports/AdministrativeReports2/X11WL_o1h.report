@@ -48,6 +48,7 @@
     <filter>
         <criteriaItems>
             <column>Contact.Contact_Owner_Dupe_Alert__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>

@@ -31,6 +31,9 @@
         <field>Lead.Please_Explain__c</field>
     </columns>
     <columns>
+        <field>Lead.Qualified_Date__c</field>
+    </columns>
+    <columns>
         <field>Lead.Has_this_child_ever_received_prior_wish__c</field>
     </columns>
     <columns>
@@ -138,24 +141,31 @@
     <columns>
         <field>Lead.Will_Child_s_Condition_Deteriorate__c</field>
     </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Lead.Rush__c</field>
+    </columns>
     <filter>
         <criteriaItems>
-            <column>STATUS</column>
-            <isUnlocked>true</isUnlocked>
-            <operator>equals</operator>
-            <value>Inquiry,Referred</value>
-        </criteriaItems>
-        <criteriaItems>
-            <column>Lead.Qualified_Date__c</column>
-            <isUnlocked>true</isUnlocked>
-            <operator>greaterOrEqual</operator>
-            <value>12/12/2019</value>
-        </criteriaItems>
-        <criteriaItems>
             <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Lead.Wish_Child</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Qualified_Date__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>greaterOrEqual</operator>
+            <value>9/2/2020</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Any_medical_reason_for_moving_quickly__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>Yes</value>
         </criteriaItems>
         <language>en_US</language>
     </filter>
@@ -170,6 +180,8 @@
     <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
+    <sortColumn>Lead.Any_medical_reason_for_moving_quickly__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
