@@ -15,4 +15,5 @@
     <tabs>standard-Chatter</tabs>
     <tabs>standard-Knowledge</tabs>
     <tabs>Apex_Debug_Log__c</tabs>
+    <tabs>cg__AttachmentSync__c</tabs>
 </CustomApplication>

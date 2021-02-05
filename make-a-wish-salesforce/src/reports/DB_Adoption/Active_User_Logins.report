@@ -35,6 +35,7 @@
     <filter>
         <criteriaItems>
             <column>LAST_LOGIN</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>LAST_N_DAYS:14</value>

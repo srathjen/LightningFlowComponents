@@ -15,6 +15,7 @@
     <filter>
         <criteriaItems>
             <column>Report$ReportTypeEnumOrId</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Lead</value>

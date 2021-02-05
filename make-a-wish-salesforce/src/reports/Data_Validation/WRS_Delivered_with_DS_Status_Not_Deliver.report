@@ -42,6 +42,7 @@
     <filter>
         <criteriaItems>
             <column>Wish_Required_Signature__c.Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Delivered</value>

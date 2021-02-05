@@ -9,60 +9,70 @@
     <filter>
         <criteriaItems>
             <column>FOLDER</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notContain</operator>
             <value>Medical Eligibility</value>
         </criteriaItems>
         <criteriaItems>
             <column>FOLDER</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notContain</operator>
             <value>medical</value>
         </criteriaItems>
         <criteriaItems>
             <column>SHORT_NAME</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notContain</operator>
             <value>Sample Report</value>
         </criteriaItems>
         <criteriaItems>
             <column>SHORT_NAME</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notContain</operator>
             <value>lead</value>
         </criteriaItems>
         <criteriaItems>
             <column>SHORT_NAME</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notContain</operator>
             <value>helen</value>
         </criteriaItems>
         <criteriaItems>
             <column>SHORT_NAME</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notContain</operator>
             <value>DV</value>
         </criteriaItems>
         <criteriaItems>
             <column>SHORT_NAME</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notContain</operator>
             <value>copy of</value>
         </criteriaItems>
         <criteriaItems>
             <column>FOLDER</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notContain</operator>
             <value>CSD</value>
         </criteriaItems>
         <criteriaItems>
             <column>SHORT_NAME</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notContain</operator>
             <value>referral</value>
         </criteriaItems>
         <criteriaItems>
             <column>SHORT_NAME</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notContain</operator>
             <value>referrer</value>

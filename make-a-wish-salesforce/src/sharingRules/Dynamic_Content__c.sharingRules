@@ -547,10 +547,10 @@
         <description>Grants Read access to Orange Country &amp; the Inland Empire - Chapter Staff</description>
         <label>Orange Country &amp; the Inland Empire - Chapter</label>
         <sharedTo>
-            <role>Orange_Country_the_Inland_Empire_Chapter</role>
+            <role>Orange_County_Inland_Empire_Chapter</role>
         </sharedTo>
         <sharedFrom>
-            <role>Orange_Country_the_Inland_Empire_Chapter</role>
+            <role>Orange_County_Inland_Empire_Chapter</role>
         </sharedFrom>
     </sharingOwnerRules>
     <sharingOwnerRules>

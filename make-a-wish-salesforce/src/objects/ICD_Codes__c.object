@@ -263,14 +263,14 @@
         <columns>NAME</columns>
         <columns>Group1__c</columns>
         <columns>Condition_Description__c</columns>
-        <columns>LAST_UPDATE</columns>
-        <columns>Short_Description__c</columns>
+        <columns>Skip_Medical_Question__c</columns>
         <columns>Long_Description__c</columns>
+        <columns>LAST_UPDATE</columns>
         <filterScope>Everything</filterScope>
         <filters>
-            <field>LAST_UPDATE</field>
-            <operation>greaterOrEqual</operation>
-            <value>12/4/2018 12:00 AM</value>
+            <field>Condition_Description__c</field>
+            <operation>equals</operation>
+            <value>Cardiomyopathy</value>
         </filters>
         <label>All</label>
     </listViews>

@@ -20,12 +20,14 @@
     <filter>
         <criteriaItems>
             <column>Wish_Budget__c$Budget_Approval_Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Submitted</value>
         </criteriaItems>
         <criteriaItems>
             <column>Wish_Budget__c$Is_Active_Budget__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>

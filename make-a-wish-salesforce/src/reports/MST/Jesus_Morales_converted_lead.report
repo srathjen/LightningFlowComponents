@@ -54,12 +54,14 @@
     <filter>
         <criteriaItems>
             <column>FIRST_NAME</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Jesus</value>
         </criteriaItems>
         <criteriaItems>
             <column>LAST_NAME</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Morales</value>

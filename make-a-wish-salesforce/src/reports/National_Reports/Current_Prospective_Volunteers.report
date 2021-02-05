@@ -22,6 +22,7 @@
     <filter>
         <criteriaItems>
             <column>npe5__Affiliation__c$npe5__Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Prospective</value>

@@ -8,4 +8,5 @@
     <tabs>WM4SF3__Tab_License</tabs>
     <tabs>WM4SF3__WalkMe_Extension_Configuration</tabs>
     <tabs>WM4SF3__Advanced</tabs>
+    <tabs>cg__AttachmentSync__c</tabs>
 </CustomApplication>

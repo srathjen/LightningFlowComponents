@@ -100,4 +100,8 @@
         <name>dsfs__STB__c</name>
     </fields>
     <nameFieldLabel>DocuSignエンベロープ設定の名前</nameFieldLabel>
+    <quickActions>
+        <label><!-- Save --></label>
+        <name>dsfs__Save</name>
+    </quickActions>
 </CustomObjectTranslation>

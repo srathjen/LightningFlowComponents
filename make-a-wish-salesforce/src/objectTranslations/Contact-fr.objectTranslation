@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- BDE Entry FS --></label>
         <name>npsp__BDE_Entry_FS</name>
@@ -1224,7 +1224,7 @@ and the date it was or will be granted. --></help>
         <name>Medical_Professional_Icon__c</name>
     </fields>
     <fields>
-        <help><!-- To change the status, create or update this contact&apos;s related &apos;Organization Affiliation&apos; records to a status of &apos;Active&apos; or &apos;Inactive&apos;. Note: this is the record or records related to the Chapter not a health treatment facility. --></help>
+        <help><!-- To change the status, create or update this contact&apos;s related &apos;Organization Affiliation&apos; records to a status of &apos;Active&apos; or &apos;Inactive&apos;. Note: this is the record or records related to the Chapter not a health treatment facility --></help>
         <label><!-- MP Status --></label>
         <name>Medical_Professional_Status__c</name>
     </fields>
@@ -1490,8 +1490,36 @@ and the date it was or will be granted. --></help>
         <name>Provided_additional_information__c</name>
     </fields>
     <fields>
-        <label><!-- Medical Professional Type --></label>
+        <label><!-- Medical Provider Type --></label>
         <name>Provider_Type__c</name>
+        <picklistValues>
+            <masterLabel>Child Life Professional</masterLabel>
+            <translation><!-- Child Life Professional --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nurse</masterLabel>
+            <translation><!-- Nurse --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nurse Practitioner</masterLabel>
+            <translation><!-- Nurse Practitioner --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Physician</masterLabel>
+            <translation><!-- Physician --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Physician Assistant</masterLabel>
+            <translation><!-- Physician Assistant --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Social Worker</masterLabel>
+            <translation><!-- Social Worker --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <help><!-- Check this box if you feel the wish child would be a good publicity candidate. --></help>
@@ -4190,6 +4218,10 @@ provide contact information for each site on which you are active. --></help>
     <quickActions>
         <label><!-- Wish Survey Contact Information --></label>
         <name>Wish_Survey_Contact_Information</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- DocuSign --></label>
+        <name>dsfs__ContactDocuSignAction</name>
     </quickActions>
     <recordTypes>
         <description><!-- A contact representing a board member --></description>

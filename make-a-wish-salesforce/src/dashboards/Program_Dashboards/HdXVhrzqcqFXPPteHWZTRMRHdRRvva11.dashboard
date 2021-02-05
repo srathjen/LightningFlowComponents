@@ -41,7 +41,7 @@
                 <indicatorHighColor>#00716B</indicatorHighColor>
                 <indicatorLowColor>#C23934</indicatorLowColor>
                 <indicatorMiddleColor>#FFB75D</indicatorMiddleColor>
-                <report>Wish_Management/of_Days_Referred_Qualified_lni</report>
+                <report>WishManagement/of_Days_Referred_Qualified_lni</report>
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>0</rowIndex>
@@ -69,7 +69,7 @@
                 <indicatorHighColor>#00716B</indicatorHighColor>
                 <indicatorLowColor>#C23934</indicatorLowColor>
                 <indicatorMiddleColor>#FFB75D</indicatorMiddleColor>
-                <report>Wish_Management/of_Days_Qualified_Welcome_Call_y8t</report>
+                <report>WishManagement/of_Days_Qualified_Welcome_Call_y8t</report>
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>0</rowIndex>
@@ -97,7 +97,7 @@
                 <indicatorHighColor>#00716B</indicatorHighColor>
                 <indicatorLowColor>#C23934</indicatorLowColor>
                 <indicatorMiddleColor>#FFB75D</indicatorMiddleColor>
-                <report>Wish_Management/of_Days_Welcome_Ready_to_Assign_WpS</report>
+                <report>WishManagement/of_Days_Welcome_Ready_to_Assign_WpS</report>
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>0</rowIndex>
@@ -125,7 +125,7 @@
                 <indicatorHighColor>#00716B</indicatorHighColor>
                 <indicatorLowColor>#C23934</indicatorLowColor>
                 <indicatorMiddleColor>#FFB75D</indicatorMiddleColor>
-                <report>Wish_Management/of_Days_Ready_to_Assign_Assigned_K2L</report>
+                <report>WishManagement/of_Days_Ready_to_Assign_Assigned_K2L</report>
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>0</rowIndex>
@@ -153,7 +153,7 @@
                 <indicatorHighColor>#00716B</indicatorHighColor>
                 <indicatorLowColor>#C23934</indicatorLowColor>
                 <indicatorMiddleColor>#FFB75D</indicatorMiddleColor>
-                <report>Wish_Management/Avg_of_Days_from_Assigned_to_Interview_MmB</report>
+                <report>WishManagement/Avg_of_Days_from_Assigned_to_Interview_MmB</report>
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>5</rowIndex>
@@ -181,7 +181,7 @@
                 <indicatorHighColor>#00716B</indicatorHighColor>
                 <indicatorLowColor>#C23934</indicatorLowColor>
                 <indicatorMiddleColor>#FFB75D</indicatorMiddleColor>
-                <report>Wish_Management/Avg_Days_Interviewed_Determined_bpj</report>
+                <report>WishManagement/Avg_Days_Interviewed_Determined_bpj</report>
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>5</rowIndex>
@@ -209,7 +209,7 @@
                 <indicatorHighColor>#00716B</indicatorHighColor>
                 <indicatorLowColor>#C23934</indicatorLowColor>
                 <indicatorMiddleColor>#FFB75D</indicatorMiddleColor>
-                <report>Wish_Management/Avg_Days_Determined_Budget_Submitted_RAC</report>
+                <report>WishManagement/Avg_Days_Determined_Budget_Submitted_RAC</report>
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>5</rowIndex>
@@ -237,7 +237,7 @@
                 <indicatorHighColor>#00716B</indicatorHighColor>
                 <indicatorLowColor>#C23934</indicatorLowColor>
                 <indicatorMiddleColor>#FFB75D</indicatorMiddleColor>
-                <report>Wish_Management/of_Days_Budget_Submitted_Approved_xsr</report>
+                <report>WishManagement/of_Days_Budget_Submitted_Approved_xsr</report>
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>5</rowIndex>
@@ -265,7 +265,7 @@
                 <indicatorHighColor>#00716B</indicatorHighColor>
                 <indicatorLowColor>#C23934</indicatorLowColor>
                 <indicatorMiddleColor>#FFB75D</indicatorMiddleColor>
-                <report>Wish_Management/Avg_Days_Budget_Approved_Granted_nQO</report>
+                <report>Wish_Family_Info/Avg_Days_Budget_Approved_Granted_nQO</report>
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>10</rowIndex>
@@ -293,7 +293,7 @@
                 <indicatorHighColor>#00716B</indicatorHighColor>
                 <indicatorLowColor>#C23934</indicatorLowColor>
                 <indicatorMiddleColor>#FFB75D</indicatorMiddleColor>
-                <report>Wish_Management/of_Days_Wish_Granted_Wish_Complete_KVf</report>
+                <report>WishManagement/of_Days_Wish_Granted_Wish_Complete_KVf</report>
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>10</rowIndex>
@@ -321,7 +321,7 @@
                 <indicatorHighColor>#00716B</indicatorHighColor>
                 <indicatorLowColor>#C23934</indicatorLowColor>
                 <indicatorMiddleColor>#FFB75D</indicatorMiddleColor>
-                <report>Wish_Management/of_Days_Qualified_Granted_OwT</report>
+                <report>WishManagement/of_Days_Qualified_Granted_OwT</report>
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>10</rowIndex>

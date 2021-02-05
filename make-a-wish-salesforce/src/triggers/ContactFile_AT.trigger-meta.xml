@@ -2,8 +2,8 @@
 <ApexTrigger xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>37.0</apiVersion>
     <packageVersions>
-        <majorNumber>1</majorNumber>
-        <minorNumber>27</minorNumber>
+        <majorNumber>2</majorNumber>
+        <minorNumber>5</minorNumber>
         <namespace>cg</namespace>
     </packageVersions>
     <status>Active</status>

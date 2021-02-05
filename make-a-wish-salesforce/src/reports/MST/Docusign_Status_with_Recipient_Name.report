@@ -15,6 +15,7 @@
     <filter>
         <criteriaItems>
             <column>dsfs__DocuSign_Status__c.dsfs__Subject__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Signature Required -</value>

@@ -30,6 +30,7 @@
     <filter>
         <criteriaItems>
             <column>dsfs__DocuSign_Status__c.dsfs__Subject__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Please review &amp; act on these document</value>

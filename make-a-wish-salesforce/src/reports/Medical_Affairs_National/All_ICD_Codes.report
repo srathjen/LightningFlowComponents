@@ -20,6 +20,7 @@
         <booleanFilter>1</booleanFilter>
         <criteriaItems>
             <column>ICD_Codes__c$Hidden_ICD_Code__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>

@@ -17,18 +17,21 @@
         <booleanFilter>(1 OR 2 )AND 3</booleanFilter>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Wish_Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Completed</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Wish_Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Granted</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Hold</value>

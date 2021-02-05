@@ -8268,9 +8268,9 @@ NULL)</formula>
         <columns>CASES.RECORDTYPE</columns>
         <filterScope>Everything</filterScope>
         <filters>
-            <field>CASES.STATUS</field>
-            <operation>equals</operation>
-            <value>Qualified,Ready to Assign,Ready to Interview,Wish Determined,Pending Approval,Wish Design,Wish Scheduled,Granted</value>
+            <field>ChapterName__c</field>
+            <operation>contains</operation>
+            <value>Arizona</value>
         </filters>
         <label>All Open Cases</label>
         <sharedTo>
@@ -8669,6 +8669,7 @@ NULL)</formula>
         <columns>CASES.LAST_UPDATE_DATE_ONLY</columns>
         <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
         <columns>Days_Pending_Clarification_Icon__c</columns>
+        <columns>ChapterName__c</columns>
         <filterScope>Queue</filterScope>
         <filters>
             <field>CASES.RECORDTYPE</field>
@@ -8807,6 +8808,46 @@ NULL)</formula>
             <value>Make-A-Wish Arizona</value>
         </filters>
         <label>Wish Assist</label>
+    </listViews>
+    <listViews>
+        <fullName>Wish_Interviews_Started</fullName>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5</booleanFilter>
+        <columns>CASES.SUBJECT</columns>
+        <columns>CASES.STATUS</columns>
+        <columns>Sub_Status__c</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>Date_Wish_Child_Form__c</columns>
+        <columns>Date_Wish_Information_Form__c</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>CASES.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Case.Wish</value>
+        </filters>
+        <filters>
+            <field>ChapterName__c</field>
+            <operation>contains</operation>
+            <value>Arizona</value>
+        </filters>
+        <filters>
+            <field>CASES.STATUS</field>
+            <operation>equals</operation>
+            <value>Ready to Interview</value>
+        </filters>
+        <filters>
+            <field>Test_Record__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>Date_Wish_Child_Form__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>12/15/2019</value>
+        </filters>
+        <label>Wish Interviews Started</label>
+        <sharedTo>
+            <role>Arizona_Chapter</role>
+        </sharedTo>
     </listViews>
     <listViews>
         <fullName>X30_days_to_Start_Date</fullName>

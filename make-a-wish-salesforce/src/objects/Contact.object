@@ -2114,7 +2114,7 @@ Medical_Professional_Icon__c  &amp; " " &amp; Volunteer_Icon__c &amp; " " &amp; 
         <label>Alternate Phone</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <type>Phone</type>
     </fields>
     <fields>
@@ -5123,12 +5123,12 @@ IF(  Medical_Professional_Count__c  &gt; 0 , IMAGE("/resource/icons/MedProf.png"
     </fields>
     <fields>
         <fullName>Medical_Professional_Status__c</fullName>
-        <description>Uses the status of a Medical Professional&apos;s Affiliation to the chapter to determine their status.</description>
+        <description>Uses the status of a Medical Professional's Affiliation to the chapter to determine their status.</description>
         <externalId>false</externalId>
-        <formula>If(Medical_Professional_Count__c &gt; 0, &quot;Active&quot;,
-    If(Medical_Professional_Count__c = 0 &amp;&amp; Inactive_Medical_Professional_Count__c &gt; 0, &quot;Inactive&quot;,&quot;&quot;))</formula>
+        <formula>If(Medical_Professional_Count__c &gt; 0, "Active",
+    If(Medical_Professional_Count__c = 0 &amp;&amp; Inactive_Medical_Professional_Count__c &gt; 0, "Inactive",""))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>To change the status, create or update this contact&apos;s related &apos;Organization Affiliation&apos; records to a status of &apos;Active&apos; or &apos;Inactive&apos;. Note: this is the record or records related to the Chapter not a health treatment facility</inlineHelpText>
+        <inlineHelpText>To change the status, create or update this contact's related 'Organization Affiliation' records to a status of 'Active' or 'Inactive'. Note: this is the record or records related to the Chapter not a health treatment facility</inlineHelpText>
         <label>MP Status</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -5731,7 +5731,7 @@ IF(ISBLANK(Orientation_Completed_Date__c) &amp;&amp; ISBLANK(Registered_Orientat
         <label>Medical Provider Type</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <type>Picklist</type>
         <valueSet>
             <valueSetDefinition>
@@ -7343,7 +7343,7 @@ null)</formula>
 2.Region Chapter needs to be filled in order to see the Region Code based on Chapters.</inlineHelpText>
         <label>Region Code</label>
         <lookupFilter>
-            <active>true</active>
+            <active>false</active>
             <booleanFilter>1 OR 2</booleanFilter>
             <filterItems>
                 <field>$Source.Region_Chapter__c</field>
@@ -8068,208 +8068,11 @@ provide contact information for each site on which you are active.</inlineHelpTe
         <label>Specialty</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <type>MultiselectPicklist</type>
         <valueSet>
             <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>true</sorted>
-                <value>
-                    <fullName>Anesthesiology</fullName>
-                    <default>false</default>
-                    <label>Anesthesiology</label>
-                </value>
-                <value>
-                    <fullName>Cardiology</fullName>
-                    <default>false</default>
-                    <label>Cardiology</label>
-                </value>
-                <value>
-                    <fullName>Cardio-thoracic Surgeon</fullName>
-                    <default>false</default>
-                    <label>Cardio-thoracic Surgeon</label>
-                </value>
-                <value>
-                    <fullName>Critical Care</fullName>
-                    <default>false</default>
-                    <label>Critical Care</label>
-                </value>
-                <value>
-                    <fullName>Dermatology</fullName>
-                    <default>false</default>
-                    <label>Dermatology</label>
-                </value>
-                <value>
-                    <fullName>Developmental Pediatrics</fullName>
-                    <default>false</default>
-                    <label>Developmental Pediatrics</label>
-                </value>
-                <value>
-                    <fullName>Emergency Medicine</fullName>
-                    <default>false</default>
-                    <label>Emergency Medicine</label>
-                </value>
-                <value>
-                    <fullName>Endocrinology</fullName>
-                    <default>false</default>
-                    <label>Endocrinology</label>
-                </value>
-                <value>
-                    <fullName>ENT (Ear, Nose &amp; Throat)</fullName>
-                    <default>false</default>
-                    <label>ENT (Ear, Nose &amp; Throat)</label>
-                </value>
-                <value>
-                    <fullName>Gastroenterology</fullName>
-                    <default>false</default>
-                    <label>Gastroenterology</label>
-                </value>
-                <value>
-                    <fullName>General Pediatrics</fullName>
-                    <default>false</default>
-                    <label>General Pediatrics</label>
-                </value>
-                <value>
-                    <fullName>General Surgery</fullName>
-                    <default>false</default>
-                    <label>General Surgery</label>
-                </value>
-                <value>
-                    <fullName>Genetics</fullName>
-                    <default>false</default>
-                    <label>Genetics</label>
-                </value>
-                <value>
-                    <fullName>Gynecology</fullName>
-                    <default>false</default>
-                    <label>Gynecology</label>
-                </value>
-                <value>
-                    <fullName>Hematology-Oncology</fullName>
-                    <default>false</default>
-                    <label>Hematology-Oncology</label>
-                </value>
-                <value>
-                    <fullName>Hepatology</fullName>
-                    <default>false</default>
-                    <label>Hepatology</label>
-                </value>
-                <value>
-                    <fullName>Hospice/Palliative Care</fullName>
-                    <default>false</default>
-                    <label>Hospice/Palliative Care</label>
-                </value>
-                <value>
-                    <fullName>Hospitalist</fullName>
-                    <default>false</default>
-                    <label>Hospitalist</label>
-                </value>
-                <value>
-                    <fullName>Immunology</fullName>
-                    <default>false</default>
-                    <label>Immunology</label>
-                </value>
-                <value>
-                    <fullName>Infectious Disease</fullName>
-                    <default>false</default>
-                    <label>Infectious Disease</label>
-                </value>
-                <value>
-                    <fullName>Internal Medicine/Hospitalist</fullName>
-                    <default>false</default>
-                    <label>Internal Medicine/Hospitalist</label>
-                </value>
-                <value>
-                    <fullName>Interventional Radiology</fullName>
-                    <default>false</default>
-                    <label>Interventional Radiology</label>
-                </value>
-                <value>
-                    <fullName>Metabolics</fullName>
-                    <default>false</default>
-                    <label>Metabolics</label>
-                </value>
-                <value>
-                    <fullName>Nephrology</fullName>
-                    <default>false</default>
-                    <label>Nephrology</label>
-                </value>
-                <value>
-                    <fullName>Neurology</fullName>
-                    <default>false</default>
-                    <label>Neurology</label>
-                </value>
-                <value>
-                    <fullName>Neurosurgery</fullName>
-                    <default>false</default>
-                    <label>Neurosurgery</label>
-                </value>
-                <value>
-                    <fullName>Ophthalmology</fullName>
-                    <default>false</default>
-                    <label>Ophthalmology</label>
-                </value>
-                <value>
-                    <fullName>Orthopedics</fullName>
-                    <default>false</default>
-                    <label>Orthopedics</label>
-                </value>
-                <value>
-                    <fullName>Pain Medicine</fullName>
-                    <default>false</default>
-                    <label>Pain Medicine</label>
-                </value>
-                <value>
-                    <fullName>Physical Medicine &amp; Rehabilitation</fullName>
-                    <default>false</default>
-                    <label>Physical Medicine &amp; Rehabilitation</label>
-                </value>
-                <value>
-                    <fullName>Psychiatry</fullName>
-                    <default>false</default>
-                    <label>Psychiatry</label>
-                </value>
-                <value>
-                    <fullName>Psychology</fullName>
-                    <default>false</default>
-                    <label>Psychology</label>
-                </value>
-                <value>
-                    <fullName>Pulmonology</fullName>
-                    <default>false</default>
-                    <label>Pulmonology</label>
-                </value>
-                <value>
-                    <fullName>Radiation Oncology</fullName>
-                    <default>false</default>
-                    <label>Radiation Oncology</label>
-                </value>
-                <value>
-                    <fullName>Radiology</fullName>
-                    <default>false</default>
-                    <label>Radiology</label>
-                </value>
-                <value>
-                    <fullName>Rheumatology</fullName>
-                    <default>false</default>
-                    <label>Rheumatology</label>
-                </value>
-                <value>
-                    <fullName>Transplant</fullName>
-                    <default>false</default>
-                    <label>Transplant</label>
-                </value>
-                <value>
-                    <fullName>Trauma &amp; Emergency Services</fullName>
-                    <default>false</default>
-                    <label>Trauma &amp; Emergency Services</label>
-                </value>
-                <value>
-                    <fullName>Urology</fullName>
-                    <default>false</default>
-                    <label>Urology</label>
-                </value>
-            </valueSetDefinition>
+            <valueSetName>MP_Specialties</valueSetName>
         </valueSet>
         <visibleLines>10</visibleLines>
     </fields>
@@ -11204,12 +11007,9 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <columns>ACCOUNT.NAME</columns>
         <columns>CONTACT.RECORDTYPE</columns>
         <columns>Region_Chapter__c</columns>
+        <columns>Created_Date__c</columns>
+        <columns>CONTACT.CREATED_DATE</columns>
         <filterScope>Everything</filterScope>
-        <filters>
-            <field>Test_Record__c</field>
-            <operation>equals</operation>
-            <value>1</value>
-        </filters>
         <label>All Contacts</label>
     </listViews>
     <listViews>
@@ -11264,11 +11064,12 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
     <listViews>
         <fullName>Medical_Prof_Contact</fullName>
         <columns>FULL_NAME</columns>
-        <columns>ACCOUNT.NAME</columns>
-        <columns>CONTACT.TITLE</columns>
+        <columns>Region_Chapter__c</columns>
         <columns>CONTACT.PHONE1</columns>
         <columns>CONTACT.EMAIL</columns>
-        <columns>CORE.USERS.ALIAS</columns>
+        <columns>Exclude_MP_from_Referral_Form_Searches__c</columns>
+        <columns>CONTACT.ADDRESS2_ZIP</columns>
+        <columns>Zip_Employer__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>CONTACT.RECORDTYPE</field>
@@ -11357,6 +11158,37 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             <value>0</value>
         </filters>
         <label>Onboarding Volunteers - Last 90 Days</label>
+    </listViews>
+    <listViews>
+        <fullName>Test_Chapter_Medical_Prof_Contacts</fullName>
+        <booleanFilter>1 AND 2</booleanFilter>
+        <columns>FULL_NAME</columns>
+        <columns>Region_Chapter__c</columns>
+        <columns>Test_Record__c</columns>
+        <columns>Exclude_MP_from_Referral_Form_Searches__c</columns>
+        <columns>CONTACT.TITLE</columns>
+        <columns>CONTACT.PHONE1</columns>
+        <columns>CONTACT.EMAIL</columns>
+        <columns>CONTACT.CREATED_DATE</columns>
+        <columns>MailingAddressVerified__c</columns>
+        <columns>MailingAddressVerificationAttempted__c</columns>
+        <columns>CONTACT.ADDRESS2_ZIP</columns>
+        <columns>Zip_Employer__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CONTACT.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Contact.Medical_Professional</value>
+        </filters>
+        <filters>
+            <field>Region_Chapter__c</field>
+            <operation>contains</operation>
+            <value>test</value>
+        </filters>
+        <label>Test Chapter Medical Prof Contacts</label>
+        <sharedTo>
+            <role>National_Staff</role>
+        </sharedTo>
     </listViews>
     <listViews>
         <fullName>Volunteer_Contact</fullName>
@@ -11481,11 +11313,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <fullName>Wish_Child</fullName>
         <columns>FULL_NAME</columns>
         <columns>ACCOUNT.NAME</columns>
-        <columns>CONTACT.TITLE</columns>
         <columns>CONTACT.PHONE1</columns>
         <columns>CONTACT.EMAIL</columns>
-        <columns>CORE.USERS.ALIAS</columns>
         <columns>Region_Chapter__c</columns>
+        <columns>CONTACT.CREATED_DATE</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>CONTACT.RECORDTYPE</field>
@@ -12458,6 +12289,22 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>Specialty__c</picklist>
             <values>
+                <fullName>Cardiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dermatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endocrinology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gastroenterology</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>General Pediatrics</fullName>
                 <default>false</default>
             </values>
@@ -12466,7 +12313,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Hospitalist</fullName>
+                <fullName>Hospital Medicine</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -12495,6 +12342,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Physical Medicine %26 Rehabilitation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Primary Care</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -14020,7 +13871,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <fullName>Anesthesiology</fullName>
                 <default>false</default>
             </values>
-            
+            <values>
+                <fullName>Cardio-thoracic Surgery</fullName>
+                <default>false</default>
+            </values>
             <values>
                 <fullName>Cardiology</fullName>
                 <default>false</default>
@@ -14081,7 +13935,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <fullName>Hospice%2FPalliative Care</fullName>
                 <default>false</default>
             </values>
-            
+            <values>
+                <fullName>Hospital Medicine</fullName>
+                <default>false</default>
+            </values>
             <values>
                 <fullName>Immunology</fullName>
                 <default>false</default>
@@ -14126,7 +13983,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <fullName>Physical Medicine %26 Rehabilitation</fullName>
                 <default>false</default>
             </values>
-            
+            <values>
+                <fullName>Primary Care</fullName>
+                <default>false</default>
+            </values>
             <values>
                 <fullName>Psychiatry</fullName>
                 <default>false</default>
@@ -15770,6 +15630,22 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>Specialty__c</picklist>
             <values>
+                <fullName>Cardiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dermatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endocrinology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gastroenterology</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>General Pediatrics</fullName>
                 <default>false</default>
             </values>
@@ -15778,7 +15654,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Hospitalist</fullName>
+                <fullName>Hospital Medicine</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -15807,6 +15683,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Physical Medicine %26 Rehabilitation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Primary Care</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -17328,6 +17208,22 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>Specialty__c</picklist>
             <values>
+                <fullName>Cardiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dermatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endocrinology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gastroenterology</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>General Pediatrics</fullName>
                 <default>false</default>
             </values>
@@ -17336,7 +17232,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Hospitalist</fullName>
+                <fullName>Hospital Medicine</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -17365,6 +17261,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Physical Medicine %26 Rehabilitation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Primary Care</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -19028,6 +18928,22 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <picklistValues>
             <picklist>Specialty__c</picklist>
             <values>
+                <fullName>Cardiology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dermatology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Endocrinology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gastroenterology</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>General Pediatrics</fullName>
                 <default>false</default>
             </values>
@@ -19036,7 +18952,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Hospitalist</fullName>
+                <fullName>Hospital Medicine</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -19065,6 +18981,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Physical Medicine %26 Rehabilitation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Primary Care</fullName>
                 <default>false</default>
             </values>
             <values>

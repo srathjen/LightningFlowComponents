@@ -69,18 +69,21 @@
     <filter>
         <criteriaItems>
             <column>npe4__Relationship__c.npe4__Type__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Medical Professional</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Provider_Type__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Social Worker</value>
         </criteriaItems>
         <criteriaItems>
             <column>EMAIL</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>kpeterson2@phoenixchildrens.com</value>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>User.IdpEventLog$UserId$App</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Unique</aggregateTypes>
+        <field>User$LastLoginDate</field>
+    </columns>
+    <columns>
+        <field>User.IdpEventLog$UserId$ErrorCode</field>
+    </columns>
+    <description>Report to identify users of mobile apps.</description>
+    <filter>
+        <criteriaItems>
+            <column>User.IdpEventLog$UserId$App</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Nintex DocGen for Salesforce</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>User.IdpEventLog$UserId$App</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Support User App</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>User.IdpEventLog$UserId$App</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Workbench</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>User.IdpEventLog$UserId$App</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>S-Drive</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>User.IdpEventLog$UserId$App</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Dataloader Partner</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>User.IdpEventLog$UserId$App</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Power of Us Hub</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>User$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Mobile Users Identity Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Identity_Users__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>User.IdpEventLog$UserId$App</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>User$LastLoginDate</dateColumn>
+        <endDate>2020-05-18</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2020-01-01</startDate>
+    </timeFrameFilter>
+</Report>

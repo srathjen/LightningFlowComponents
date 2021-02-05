@@ -22,7 +22,7 @@
                 <expandOthers>false</expandOthers>
                 <groupingSortProperties/>
                 <legendPosition>Bottom</legendPosition>
-                <report>Chapter_Volunteer_Reports/Active_AZ_Wish_Granters_by_Region</report>
+                <report>ChapterVolunteerReports/Active_AZ_Wish_Granters_by_Region</report>
                 <showPercentage>true</showPercentage>
                 <showValues>true</showValues>
                 <sortBy>RowLabelAscending</sortBy>
@@ -62,7 +62,7 @@
                     </groupingSorts>
                 </groupingSortProperties>
                 <legendPosition>Right</legendPosition>
-                <report>Wish_Management/Pipeline_grouped_by_Region_Code</report>
+                <report>ArchiveAZWishManagement/Pipeline_grouped_by_Region_Code</report>
                 <showPercentage>false</showPercentage>
                 <showValues>false</showValues>
                 <sortBy>RowLabelAscending</sortBy>
@@ -85,7 +85,7 @@
                 <enableHover>false</enableHover>
                 <expandOthers>false</expandOthers>
                 <groupingSortProperties/>
-                <report>Chapter_Volunteer_Reports/Active_Wish_Granters_by_Wish_Count</report>
+                <report>Chapter_Reports/Active_Wish_Granters_by_Wish_Count</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>false</showValues>
@@ -142,7 +142,7 @@
                 </flexComponentProperties>
                 <groupingSortProperties/>
                 <header>Active Volunteer Birthdays by Month</header>
-                <report>Chapter_Volunteer_Reports/Active_Volunteer_Birthday_s_by_Month</report>
+                <report>ChapterVolunteerReports/Active_Volunteer_Birthday_s_by_Month</report>
             </dashboardComponent>
             <rowIndex>8</rowIndex>
             <rowSpan>8</rowSpan>
@@ -165,7 +165,7 @@
                 <indicatorLowColor>#C23934</indicatorLowColor>
                 <indicatorMiddleColor>#FFB75D</indicatorMiddleColor>
                 <metricLabel>Active Wish Granters</metricLabel>
-                <report>Chapter_Volunteer_Reports/DB_Active_WG_Count</report>
+                <report>ChapterVolunteerReports/DB_Active_WG_Count</report>
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>16</rowIndex>
@@ -189,7 +189,7 @@
                 <indicatorHighColor>#00716B</indicatorHighColor>
                 <indicatorLowColor>#C23934</indicatorLowColor>
                 <indicatorMiddleColor>#FFB75D</indicatorMiddleColor>
-                <report>Chapter_Volunteer_Reports/Active_Nonwish_Granters_sKQ</report>
+                <report>ChapterVolunteerReports/Active_Nonwish_Granters_sKQ</report>
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>16</rowIndex>
@@ -214,7 +214,7 @@
                 <indicatorHighColor>#C23934</indicatorHighColor>
                 <indicatorLowColor>#008080</indicatorLowColor>
                 <indicatorMiddleColor>#FFB75D</indicatorMiddleColor>
-                <report>AZ_Volunteer_Tracking/Avg_days_to_Assign_a_Vol_Opp_6_month_W84</report>
+                <report>VolunteerTracking/Avg_days_to_Assign_a_Vol_Opp_6_month_W84</report>
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>16</rowIndex>
@@ -239,7 +239,7 @@
                 <indicatorHighColor>#00716B</indicatorHighColor>
                 <indicatorLowColor>#C23934</indicatorLowColor>
                 <indicatorMiddleColor>#FFB75D</indicatorMiddleColor>
-                <report>Chapter_Volunteer_Reports/Expired_BCs_Last_60_Days_AhD</report>
+                <report>ArchinvAZChapterVolunteerReports/Expired_BCs_Last_60_Days_AhD</report>
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>16</rowIndex>
@@ -264,7 +264,7 @@
                 <indicatorHighColor>#00716B</indicatorHighColor>
                 <indicatorLowColor>#C23934</indicatorLowColor>
                 <indicatorMiddleColor>#FFB75D</indicatorMiddleColor>
-                <report>Chapter_Volunteer_Reports/Expired_COIs_Last_60_Days_P0i</report>
+                <report>ArchinvAZChapterVolunteerReports/Expired_COIs_Last_60_Days_P0i</report>
                 <showRange>false</showRange>
             </dashboardComponent>
             <rowIndex>16</rowIndex>

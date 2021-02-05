@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ReportFolder xmlns="http://soap.sforce.com/2006/04/metadata">
     <folderShares>
-        <accessLevel>EditAllContents</accessLevel>
+        <accessLevel>Manage</accessLevel>
+        <sharedTo>mgatto@philadesv.wish.org</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
+    <folderShares>
+        <accessLevel>View</accessLevel>
         <sharedTo>Philadelphia_Northern_Delaware_Susquehanna_Valley_Chapter</sharedTo>
         <sharedToType>Role</sharedToType>
     </folderShares>

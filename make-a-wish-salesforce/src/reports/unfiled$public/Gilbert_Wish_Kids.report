@@ -39,18 +39,21 @@
     <filter>
         <criteriaItems>
             <column>CONTACT2.CITY</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Gilbert</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Publicity_OK__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Yes</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.npsp__Deceased__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>

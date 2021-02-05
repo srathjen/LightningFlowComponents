@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <caseType>Nominative</caseType>
         <plural>false</plural>
@@ -54,7 +53,7 @@
     </fields>
     <fields>
         <help><!-- Best Contact for Treating Healthcare Provider --></help>
-        <label><!-- Best Contact for Treating Healthcare Pro --></label>
+        <label><!-- Best Contact for Treating MP --></label>
         <name>Best_Contact__c</name>
     </fields>
     <fields>
@@ -69,6 +68,10 @@
     <fields>
         <label><!-- External Id --></label>
         <name>External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Former MP --></label>
+        <name>Former_MP__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Preferred Contact --></label>
@@ -95,7 +98,7 @@
         <name>Parent_Legal_Guardian__c</name>
     </fields>
     <fields>
-        <label><!-- Qualifying Medical Team Member --></label>
+        <label><!-- Qualifying MP --></label>
         <name>Qualifying_Medical_Professional__c</name>
     </fields>
     <fields>
@@ -127,7 +130,7 @@
         <name>Start_date__c</name>
     </fields>
     <fields>
-        <label><!-- Treating Healthcare Provider --></label>
+        <label><!-- Treating MP --></label>
         <name>Treating_HCP__c</name>
     </fields>
     <fields>
@@ -210,6 +213,10 @@
         <picklistValues>
             <masterLabel>Aunt</masterLabel>
             <translation>Tante</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Best Medical Contact</masterLabel>
+            <translation><!-- Best Medical Contact --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Brother</masterLabel>
@@ -378,7 +385,6 @@
         </picklistValues>
     </fields>
     <gender>Feminine</gender>
-    
     <layouts>
         <layout>Relationship Layout - Volunteer</layout>
         <sections>
@@ -395,4 +401,8 @@
         <errorMessage><!-- Rather than change the contacts in an existing relationship, delete this relationship and create a new on between the new contacts --></errorMessage>
         <name>npe4__Related_Contact_Do_Not_Change</name>
     </validationRules>
+    <quickActions>
+        <label><!-- Medical Contact Details --></label>
+        <name>Medical_Contact_Details</name>
+    </quickActions>
 </CustomObjectTranslation>

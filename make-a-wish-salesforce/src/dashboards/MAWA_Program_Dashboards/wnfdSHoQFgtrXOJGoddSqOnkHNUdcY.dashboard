@@ -35,7 +35,7 @@
                 <header>Total Number of Wishes- Current FY</header>
                 <legendPosition>Right</legendPosition>
                 <maxValuesDisplayed>6</maxValuesDisplayed>
-                <report>Wish_Management/New_Cases_Report_0Rv</report>
+                <report>ArchiveAZWishManagement/New_Cases_Report_0Rv</report>
                 <showPercentage>false</showPercentage>
                 <showTotal>true</showTotal>
                 <showValues>true</showValues>
@@ -71,7 +71,7 @@
                 </groupingSortProperties>
                 <header>Number of wishes by Case Owner FY20</header>
                 <legendPosition>Bottom</legendPosition>
-                <report>Wish_Management/Number_of_wishes_by_case_owner_per_year_6Qp</report>
+                <report>ArchiveAZWishManagement/Number_of_wishes_by_case_owner_per_year_6Qp</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>true</showValues>
@@ -107,7 +107,7 @@
                 </groupingSortProperties>
                 <header>Number of Wishes, By Type FY20</header>
                 <legendPosition>Bottom</legendPosition>
-                <report>Wish_Management/Copy_of_Number_of_wishes_by_type_F_Ryr</report>
+                <report>ArchiveAZWishManagement/Copy_of_Number_of_wishes_by_type_F_Ryr</report>
                 <showPercentage>false</showPercentage>
                 <showValues>true</showValues>
                 <sortBy>RowLabelAscending</sortBy>
@@ -142,7 +142,7 @@
                 </groupingSortProperties>
                 <header># of Referrals by Referral Source FY20</header>
                 <legendPosition>Bottom</legendPosition>
-                <report>Wish_Management/New_Leads_Report_Opb</report>
+                <report>WishManagement/New_Leads_Report_Opb</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>true</showValues>
@@ -183,7 +183,7 @@
                 </groupingSortProperties>
                 <header>Number of Referrals per HTF FY 20</header>
                 <legendPosition>Right</legendPosition>
-                <report>Wish_Management/Number_of_Referrals_per_HTF_FY20_eAF</report>
+                <report>ArchiveAZWishManagement/Number_of_Referrals_per_HTF_FY20_eAF</report>
                 <showPercentage>false</showPercentage>
                 <showValues>true</showValues>
                 <sortBy>RowLabelAscending</sortBy>

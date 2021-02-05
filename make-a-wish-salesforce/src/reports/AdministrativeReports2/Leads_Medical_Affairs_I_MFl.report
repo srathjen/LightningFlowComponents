@@ -140,22 +140,32 @@
     </columns>
     <filter>
         <criteriaItems>
-            <column>STATUS</column>
-            <isUnlocked>true</isUnlocked>
-            <operator>equals</operator>
-            <value>Inquiry,Referred</value>
-        </criteriaItems>
-        <criteriaItems>
             <column>Lead.Created_Date_Time__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>greaterOrEqual</operator>
-            <value>12/12/2019 7:30 PM</value>
+            <value>9/23/2020 5:30 PM</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Lead.Wish_Child</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Created_Date_Time__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>lessOrEqual</operator>
+            <value>9/23/2020 8:00 PM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Any_medical_reason_for_moving_quickly__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>Yes</value>
         </criteriaItems>
         <language>en_US</language>
     </filter>
@@ -170,9 +180,11 @@
     <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
+    <sortColumn>Lead.Created_Date_Time__c</sortColumn>
+    <sortOrder>Desc</sortOrder>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
-        <startDate>2019-12-12</startDate>
+        <startDate>2020-09-23</startDate>
     </timeFrameFilter>
 </Report>

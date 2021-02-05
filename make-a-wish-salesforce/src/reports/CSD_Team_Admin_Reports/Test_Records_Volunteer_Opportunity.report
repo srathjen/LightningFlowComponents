@@ -99,6 +99,7 @@
     <filter>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Chapter_Name__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Alabama</value>

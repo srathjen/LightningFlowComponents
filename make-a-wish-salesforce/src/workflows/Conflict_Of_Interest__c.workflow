@@ -264,19 +264,6 @@
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
             <actions>
-                <name>COI_Expiring_Before_30_Days_Email_Alert</name>
-                <type>Alert</type>
-            </actions>
-            <actions>
-                <name>COI_ET_COI_Expiring_30_Days</name>
-                <type>Task</type>
-            </actions>
-            <offsetFromField>Conflict_Of_Interest__c.Expiration_Date__c</offsetFromField>
-            <timeLength>-30</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-        <workflowTimeTriggers>
-            <actions>
                 <name>COI_Expiring_Before_9_Days_Email_Alert</name>
                 <type>Alert</type>
             </actions>
@@ -330,6 +317,19 @@
             </actions>
             <offsetFromField>Conflict_Of_Interest__c.Expiration_Date__c</offsetFromField>
             <timeLength>-23</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>COI_Expiring_Before_30_Days_Email_Alert</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>COI_ET_COI_Expiring_30_Days</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Conflict_Of_Interest__c.Expiration_Date__c</offsetFromField>
+            <timeLength>-30</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
     </rules>

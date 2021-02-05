@@ -22,8 +22,8 @@
     <masterLabel>Wish Referral Form</masterLabel>
     <referrerPolicyOriginWhenCrossOrigin>false</referrerPolicyOriginWhenCrossOrigin>
     <requireHttps>true</requireHttps>
-    <requireInsecurePortalAccess>false</requireInsecurePortalAccess>
     <siteAdmin>salesforce@wish.org</siteAdmin>
+    <siteGuestRecordDefaultOwner>salesforce@wish.org</siteGuestRecordDefaultOwner>
     <siteTemplate>SiteTemplate</siteTemplate>
     <siteType>Visualforce</siteType>
     <subdomain>wish</subdomain>

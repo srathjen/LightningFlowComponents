@@ -33,18 +33,21 @@
     <filter>
         <criteriaItems>
             <column>CUST_NAME</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Samer Leads</value>
         </criteriaItems>
         <criteriaItems>
             <column>Field_Trip__Field_Analysis__c.Field_Trip__isRequired__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Field_Trip__Field_Analysis__c.Field_Trip__Populated_On_Percent__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>lessOrEqual</operator>
             <value>10</value>

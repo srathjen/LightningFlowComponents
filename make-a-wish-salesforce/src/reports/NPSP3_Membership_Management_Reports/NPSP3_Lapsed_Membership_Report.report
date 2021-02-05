@@ -70,12 +70,14 @@
     <filter>
         <criteriaItems>
             <column>Contact.npo02__LastMembershipAmount__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>greaterThan</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.npo02__MembershipEndDate__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>lessThan</operator>
             <value>TODAY</value>

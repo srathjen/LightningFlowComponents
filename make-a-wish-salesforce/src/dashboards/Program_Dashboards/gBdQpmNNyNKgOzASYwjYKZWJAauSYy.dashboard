@@ -35,7 +35,7 @@
                 <header>AZ Wish Case Photos</header>
                 <legendPosition>Right</legendPosition>
                 <maxValuesDisplayed>6</maxValuesDisplayed>
-                <report>Wish_Management/AZ_Wish_Case_Photos</report>
+                <report>WishManagement/AZ_Wish_Case_Photos</report>
                 <showPercentage>false</showPercentage>
                 <showValues>true</showValues>
                 <sortBy>RowLabelAscending</sortBy>
@@ -71,7 +71,7 @@
                 <header>Upcoming PR Wishes</header>
                 <legendPosition>Right</legendPosition>
                 <maxValuesDisplayed>6</maxValuesDisplayed>
-                <report>Wish_Management/DRAFT_Upcoming_PR_Wishes</report>
+                <report>ArchiveAZWishManagement/DRAFT_Upcoming_PR_Wishes</report>
                 <showPercentage>false</showPercentage>
                 <showTotal>true</showTotal>
                 <showValues>true</showValues>
@@ -107,7 +107,7 @@
                 </groupingSortProperties>
                 <header>Wish Kids Publicity Friendly</header>
                 <legendPosition>Bottom</legendPosition>
-                <report>Wish_Management/DRAFT_Wish_Kids_Publicity_Friendly</report>
+                <report>ArchiveAZWishManagement/DRAFT_Wish_Kids_Publicity_Friendly</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>true</showValues>
@@ -144,7 +144,7 @@
                 </groupingSortProperties>
                 <header>Cases for Adoption</header>
                 <legendPosition>Bottom</legendPosition>
-                <report>Wish_Management/Cases_for_Adoption_wtP</report>
+                <report>WishManagement/Cases_for_Adoption_wtP</report>
                 <showPercentage>false</showPercentage>
                 <showPicturesOnCharts>false</showPicturesOnCharts>
                 <showValues>true</showValues>

@@ -27,24 +27,28 @@
     <filter>
         <criteriaItems>
             <column>Volunteer_Roles__c.Migrated_Record__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Roles__c.Hidden_Previous_Sub_Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Missing</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Roles__c.Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Out of Compliance</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Roles__c.Role_Name__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Wish Granter</value>

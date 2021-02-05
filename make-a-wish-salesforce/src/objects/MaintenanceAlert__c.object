@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <customSettingsType>Hierarchy</customSettingsType>
     <description>Scheduled System Maintenance alert content for use on WVC login page and login flows for internal users.</description>
     <enableFeeds>false</enableFeeds>
@@ -58,5 +57,16 @@
         <type>Checkbox</type>
     </fields>
     <label>MaintenanceAlert</label>
+    <listViews>
+        <fullName>All_with_Fields</fullName>
+        <columns>SETUP_OWNER_NAME</columns>
+        <columns>NAME</columns>
+        <columns>SETUP_TYPE</columns>
+        <columns>isActive__c</columns>
+        <columns>isActiveLockout__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All with Fields</label>
+        <language>en_US</language>
+    </listViews>
     <visibility>Public</visibility>
 </CustomObject>

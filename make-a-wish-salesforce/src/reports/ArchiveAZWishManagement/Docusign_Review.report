@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>FK_NAME</field>
+    </columns>
+    <columns>
+        <field>dsfs__DocuSign_Status__c.dsfs__Subject__c</field>
+    </columns>
+    <columns>
+        <field>dsfs__DocuSign_Status__c.dsfs__Envelope_Status__c</field>
+    </columns>
+    <columns>
+        <field>dsfs__DocuSign_Status__c.dsfs__Sent_Date_Time__c</field>
+    </columns>
+    <columns>
+        <field>dsfs__DocuSign_Status__c.dsfs__Viewed_Date_Time__c</field>
+    </columns>
+    <columns>
+        <field>dsfs__DocuSign_Status__c.dsfs__Completed_Date_Time__c</field>
+    </columns>
+    <description>Docusign review for children in pipeline</description>
+    <filter>
+        <criteriaItems>
+            <column>FK_$Case.Wish_Assist__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>FK_$Case.Test_Record__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>FK_$Contact.Region_Chapter__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Make-A-Wish Arizona</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>FK_CASE_STATUS</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Granted,Completed,Closed,Wish Scheduled,Open</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Matrix</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>FK_CNTC_NAME</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Docusign Review</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$dsfs__DocuSign_Status__c@dsfs__DocuSign_Status__c.dsfs__Case__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>dsfs__DocuSign_Status__c.dsfs__Completed_Date_Time__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

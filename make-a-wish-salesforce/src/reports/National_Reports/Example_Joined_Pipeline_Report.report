@@ -17,42 +17,49 @@
         <filter>
             <criteriaItems>
                 <column>STATUS</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Qualified,Ready to Assign,Ready to Interview</value>
             </criteriaItems>
             <criteriaItems>
                 <column>CONTACT_RECORDTYPE</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Contact.Wish_Child</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.ChapterName__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Make-A-Wish Arizona</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Wish_Assist__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Test_Record__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
             <criteriaItems>
                 <column>OWNER</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>notEqual</operator>
                 <value>Historic Wishes-001AZ</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Qualified_Date__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>greaterThan</operator>
                 <value>9/1/2017</value>
@@ -94,24 +101,28 @@
         <filter>
             <criteriaItems>
                 <column>STATUS</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Wish Determined</value>
             </criteriaItems>
             <criteriaItems>
                 <column>OWNER</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>notEqual</operator>
                 <value>Historic Wishes-001AZ</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Test_Record__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Qualified_Date__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>greaterThan</operator>
                 <value>9/1/2017</value>
@@ -153,24 +164,28 @@
         <filter>
             <criteriaItems>
                 <column>STATUS</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Budget Approval - Submitted,Budget Approval - Approved</value>
             </criteriaItems>
             <criteriaItems>
                 <column>OWNER</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>notEqual</operator>
                 <value>Historic Wishes-001AZ</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Test_Record__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Qualified_Date__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>greaterThan</operator>
                 <value>9/1/2017</value>
@@ -212,24 +227,28 @@
         <filter>
             <criteriaItems>
                 <column>STATUS</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Wish Design,Wish Scheduled</value>
             </criteriaItems>
             <criteriaItems>
                 <column>OWNER</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>notEqual</operator>
                 <value>Historic Wishes-001AZ</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Test_Record__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Qualified_Date__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>greaterThan</operator>
                 <value>9/1/2017</value>
@@ -271,24 +290,28 @@
         <filter>
             <criteriaItems>
                 <column>STATUS</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Granted,Completed</value>
             </criteriaItems>
             <criteriaItems>
                 <column>OWNER</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>notEqual</operator>
                 <value>Historic Wishes-001AZ</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Test_Record__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Qualified_Date__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>greaterThan</operator>
                 <value>9/1/2017</value>

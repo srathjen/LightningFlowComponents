@@ -20,7 +20,7 @@
             <groupingSortProperties/>
             <header>Pipeline by Anticipated Start Date</header>
             <legendPosition>Bottom</legendPosition>
-            <report>Wish_Management/CFY_Pipeline_by_Anticipated_St_Date</report>
+            <report>ArchiveAZWishManagement/CFY_Pipeline_by_Anticipated_St_Date</report>
             <showPercentage>false</showPercentage>
             <showPicturesOnCharts>false</showPicturesOnCharts>
             <showValues>true</showValues>
@@ -43,7 +43,7 @@
             <groupingSortProperties/>
             <header>Wishes Scheduled by Month</header>
             <legendPosition>Bottom</legendPosition>
-            <report>Wish_Management/Wishes_Scheduled_by_Month</report>
+            <report>ArchiveAZWishManagement/Wishes_Scheduled_by_Month</report>
             <showPercentage>false</showPercentage>
             <showPicturesOnCharts>false</showPicturesOnCharts>
             <showValues>true</showValues>

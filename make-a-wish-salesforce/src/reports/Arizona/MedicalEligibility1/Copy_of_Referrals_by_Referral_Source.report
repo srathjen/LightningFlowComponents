@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>Lead.Treating_MP_HTF__c</field>
+    </columns>
+    <columns>
+        <field>Lead.PD_ICD_Code__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Qualifying_ICD__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Qualifying_Diagnosis__c</field>
+    </columns>
+    <description>All referrals by medical specialty based on referral type (parent, social worker, physician, etc.) with possibility to sort or filter by Hospital Treatment Facility.</description>
+    <filter>
+        <criteriaItems>
+            <column>STATUS</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Inquiry,Referred,Eligibility Review,Qualified,DNQ,Closed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.ChapterName__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>Arizona</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Lead.Relationship_to_child__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Copy of Referrals by Referral Source</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadList</reportType>
+    <scope>org</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead.Referred_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

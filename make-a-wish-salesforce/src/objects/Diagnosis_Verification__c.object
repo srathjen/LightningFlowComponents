@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -365,6 +364,7 @@
         <columns>Group1__c</columns>
         <columns>ICD_Code__c</columns>
         <columns>PCD_ICD__c</columns>
+        <columns>Medical_Question_Answer__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
@@ -374,7 +374,7 @@
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Diagnosis Verification</pluralLabel>
-    <searchLayouts/>
+    <searchLayouts />
     <sharingModel>Read</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

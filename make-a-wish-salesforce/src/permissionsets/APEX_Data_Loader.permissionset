@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <description>Ability to give a non-admin user access to download Apex dataloader.</description>
-    <hasActivationRequired>false</hasActivationRequired>
-    <label>APEX Data Loader</label>
-    <license>Salesforce</license>
     <fieldPermissions>
         <editable>false</editable>
         <field>Account.AccountNumber</field>
@@ -23923,6 +23920,9 @@
         <field>npsp__Trigger_Handler__c.npsp__Usernames_to_Exclude__c</field>
         <readable>false</readable>
     </fieldPermissions>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>APEX Data Loader</label>
+    <license>Salesforce</license>
     <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>
@@ -25965,6 +25965,10 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ManageReportsInPubFolders</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ManageTranslation</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>

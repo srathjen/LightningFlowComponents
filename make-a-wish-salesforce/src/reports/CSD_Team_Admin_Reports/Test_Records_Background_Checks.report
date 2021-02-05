@@ -54,6 +54,7 @@
     <filter>
         <criteriaItems>
             <column>Background_check__c.Volunteer__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>test</value>

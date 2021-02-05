@@ -34,6 +34,9 @@
         <field>Lead.Any_medical_reason_for_moving_quickly__c</field>
     </columns>
     <columns>
+        <field>Lead.Qualified_Date__c</field>
+    </columns>
+    <columns>
         <field>Lead.Please_Explain__c</field>
     </columns>
     <columns>
@@ -146,19 +149,15 @@
     </columns>
     <filter>
         <criteriaItems>
-            <column>STATUS</column>
-            <isUnlocked>true</isUnlocked>
-            <operator>notEqual</operator>
-            <value>Inquiry,Referred</value>
-        </criteriaItems>
-        <criteriaItems>
             <column>Lead.Qualified_Date__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
-            <operator>greaterOrEqual</operator>
-            <value>12/13/2019</value>
+            <operator>equals</operator>
+            <value>9/3/2020</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Lead.Wish_Child</value>
@@ -176,6 +175,8 @@
     <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
+    <sortColumn>Lead.Qualified_Date__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

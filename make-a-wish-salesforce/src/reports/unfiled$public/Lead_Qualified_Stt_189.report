@@ -18,24 +18,28 @@
     <filter>
         <criteriaItems>
             <column>Lead.Qualified_Date__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>5/2/2018</value>
         </criteriaItems>
         <criteriaItems>
             <column>LAST_UPDATE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>5/2/2018 12:00 AM</value>
         </criteriaItems>
         <criteriaItems>
             <column>LAST_UPDATE_BY</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Kanagaraj Arjunan</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Lead.Wish_Child</value>

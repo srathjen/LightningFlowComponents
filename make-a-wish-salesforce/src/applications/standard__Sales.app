@@ -20,4 +20,6 @@
     <tabs>Background_Check_File__c</tabs>
     <tabs>Regions__c</tabs>
     <tabs>Apex_Debug_Log__c</tabs>
+    <tabs>cg__AttachmentSync__c</tabs>
+    <tabs>standard-WaveHome</tabs>
 </CustomApplication>

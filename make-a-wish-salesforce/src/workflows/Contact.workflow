@@ -504,11 +504,7 @@ OtherPhone
         </actions>
         <active>true</active>
         <description>First an alert to the Intake Manager when an MP is assigned to their chapter.</description>
-        <formula>!ISNEW()
-&amp;&amp;
-ISCHANGED(Region_Chapter__c)
-&amp;&amp;
-!ISBLANK(Region_Chapter__c)</formula>
+        <formula>!ISNEW() &amp;&amp; ISCHANGED(Region_Chapter__c) &amp;&amp; !ISBLANK(Region_Chapter__c)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>

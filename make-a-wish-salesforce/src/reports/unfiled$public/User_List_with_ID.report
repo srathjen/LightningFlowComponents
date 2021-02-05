@@ -21,6 +21,7 @@
     <filter>
         <criteriaItems>
             <column>ROLE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Arizona - Chapter</value>

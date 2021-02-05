@@ -12,6 +12,7 @@
     <filter>
         <criteriaItems>
             <column>Volunteer_Roles__c.Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Pending Training,Chapter Review,Former - Chapter,Former - Volunteer</value>

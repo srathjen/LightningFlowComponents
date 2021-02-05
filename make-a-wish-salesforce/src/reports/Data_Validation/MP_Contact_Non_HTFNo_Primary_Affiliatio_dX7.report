@@ -47,18 +47,21 @@
         <booleanFilter>1 AND (2 OR 3)</booleanFilter>
         <criteriaItems>
             <column>CONTACT_RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Medical_Professional</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Primary_Affiliation_Name__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Make-A-Wish,Household</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.npsp__Primary_Affiliation__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value></value>

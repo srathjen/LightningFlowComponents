@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Lead.dsfs__DocuSign_Status__r$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Lead$Name</field>
+    </columns>
+    <columns>
+        <field>Lead.dsfs__DocuSign_Status__r$Name</field>
+    </columns>
+    <columns>
+        <field>Lead.dsfs__DocuSign_Status__r$dsfs__Subject__c</field>
+    </columns>
+    <columns>
+        <field>Lead.dsfs__DocuSign_Status__r$dsfs__Envelope_Status__c</field>
+    </columns>
+    <columns>
+        <field>Lead$Status</field>
+    </columns>
+    <columns>
+        <field>Lead$Sub_Status__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Lead.dsfs__DocuSign_Status__r$dsfs__Subject__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Diagnosis Verification Form</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.dsfs__DocuSign_Status__r$CreatedDate</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>greaterOrEqual</operator>
+            <value>11/23/2020 12:00 AM</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>New Docusign DV Forms</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Leads_with_DocuSign_Status__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Lead$AddressVerificationAttempted__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

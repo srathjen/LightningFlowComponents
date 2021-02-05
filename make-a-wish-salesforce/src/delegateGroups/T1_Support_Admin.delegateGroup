@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DelegateGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <groups>South Dakota &amp; Montana</groups>
+    <groups>Alabama</groups>
+    <groups>Alaska &amp; Washington</groups>
+    <groups>Arizona</groups>
+    <groups>Central California</groups>
+    <groups>Central New York</groups>
+    <groups>Central &amp; Northern Florida</groups>
+    <groups>Central &amp; South Texas</groups>
+    <groups>Central &amp; Western North Carolina</groups>
+    <groups>Chapter Finance Team</groups>
+    <groups>Colorado</groups>
+    <groups>Connecticut</groups>
+    <groups>East Tennessee</groups>
+    <groups>Eastern North Carolina</groups>
+    <groups>Georgia</groups>
+    <groups>Greater Bay Area</groups>
+    <groups>Greater Los Angeles</groups>
+    <groups>Greater Pennsylvania &amp; West Virginia</groups>
+    <groups>Greater Virginia</groups>
+    <groups>Guam</groups>
+    <groups>Hawaii</groups>
+    <groups>Hudson Valley</groups>
+    <groups>Idaho</groups>
+    <groups>Illinois</groups>
+    <groups>Iowa</groups>
+    <groups>Kansas</groups>
+    <groups>Maine</groups>
+    <groups>Massachusetts &amp; Rhode Island</groups>
+    <groups>Metro New York &amp; Western New York</groups>
+    <groups>Michigan</groups>
+    <groups>Mid-Atlantic</groups>
+    <groups>Mid-South</groups>
+    <groups>Middle Tennessee</groups>
+    <groups>Minnesota</groups>
+    <groups>Mississippi</groups>
+    <groups>Missouri &amp; Kansas</groups>
+    <groups>NE &amp;Central California &amp; Northern Nevada</groups>
+    <groups>Nebraska</groups>
+    <groups>New Hampshire</groups>
+    <groups>New Jersey</groups>
+    <groups>New Mexico</groups>
+    <groups>North Dakota</groups>
+    <groups>North Texas</groups>
+    <groups>Northeast New York</groups>
+    <groups>Ohio, Kentucky &amp; Indiana</groups>
+    <groups>Oklahoma</groups>
+    <groups>Orange County &amp; the Inland Empire</groups>
+    <groups>Oregon</groups>
+    <groups>Philadelphia, N Delaware &amp; Susquehanna</groups>
+    <groups>Puerto Rico</groups>
+    <groups>Rio Grande Valley</groups>
+    <groups>San Diego</groups>
+    <groups>South Carolina</groups>
+    <groups>Southern Florida</groups>
+    <groups>Southern Nevada</groups>
+    <groups>Suffolk County</groups>
+    <groups>Texas Gulf Coast &amp; Louisiana</groups>
+    <groups>Tri-Counties</groups>
+    <groups>Utah</groups>
+    <groups>Vermont</groups>
+    <groups>Wisconsin</groups>
+    <groups>Wyoming</groups>
+    <groups>National Office</groups>
+    <groups>Greater Penn. &amp; West Virginia</groups>
+    <groups>Metro New York &amp; West New York</groups>
+    <groups>MidAtlantic</groups>
+    <groups>MidSouth</groups>
+    <groups>Orange Country &amp; Inland Empire</groups>
+    <groups>Philadelphia, N.DE Susquehanna</groups>
+    <groups>TriCounties</groups>
+    <groups>America</groups>
+    <groups>National Office Medical Review</groups>
+    <label>T1 Support Admin</label>
+    <loginAccess>true</loginAccess>
+    <permissionSets>Merge Contacts and Accounts</permissionSets>
+    <profiles>Full Access National Staff</profiles>
+    <profiles>Intake Manager</profiles>
+    <roles>National Staff</roles>
+</DelegateGroup>

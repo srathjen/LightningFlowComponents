@@ -29,6 +29,7 @@
         <filter>
             <criteriaItems>
                 <column>CONTACT_CREATED</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Chandrasekar Nallusamy,Kanagaraj Arjunan,Jose Rathi Francis,Sophiya George,Sudharsan Kumaravel,Furqan Maqbool,Vennila Paramasivam,ChennaReddy UmmaReddy,Kesavakumar Murugesan,Vinodhini Balraj</value>
@@ -75,12 +76,14 @@
         <filter>
             <criteriaItems>
                 <column>Contact.Region_Chapter__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Make-A-Wish Alabama,Test Chapter</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Contact.Test_Record__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>

@@ -193,10 +193,6 @@
         <type>ConnectedApp</type>
     </appMenuItems>
     <appMenuItems>
-        <name>standard__LightningInstrumentation</name>
-        <type>CustomApplication</type>
-    </appMenuItems>
-    <appMenuItems>
         <name>VisualAntidote__FastForms</name>
         <type>CustomApplication</type>
     </appMenuItems>
@@ -267,5 +263,9 @@
     <appMenuItems>
         <name>Cloudingo_Test</name>
         <type>ConnectedApp</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>standard__Insights</name>
+        <type>CustomApplication</type>
     </appMenuItems>
 </AppMenu>

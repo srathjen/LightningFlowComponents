@@ -41,12 +41,14 @@
     <filter>
         <criteriaItems>
             <column>Lead$ChapterName__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish New Jersey</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead$Relationship_to_child__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>,Self,Medical Professional,Parent/Guardian,Family Member/Relative,Other</value>

@@ -398,19 +398,6 @@
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
             <actions>
-                <name>Bc_Expiring_Before_30_Days_Email_Alert</name>
-                <type>Alert</type>
-            </actions>
-            <actions>
-                <name>BC_ET_Background_Check_Expiring_30_Days</name>
-                <type>Task</type>
-            </actions>
-            <offsetFromField>Background_check__c.Date__c</offsetFromField>
-            <timeLength>-30</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-        <workflowTimeTriggers>
-            <actions>
                 <name>Bc_Expiring_Before_2_Days_Email_Alert</name>
                 <type>Alert</type>
             </actions>
@@ -464,6 +451,19 @@
             </actions>
             <offsetFromField>Background_check__c.Date__c</offsetFromField>
             <timeLength>-23</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Bc_Expiring_Before_30_Days_Email_Alert</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>BC_ET_Background_Check_Expiring_30_Days</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Background_check__c.Date__c</offsetFromField>
+            <timeLength>-30</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
     </rules>

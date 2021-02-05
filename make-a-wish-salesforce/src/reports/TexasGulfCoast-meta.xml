@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ReportFolder xmlns="http://soap.sforce.com/2006/04/metadata">
     <folderShares>
-        <accessLevel>EditAllContents</accessLevel>
+        <accessLevel>Manage</accessLevel>
+        <sharedTo>bacevedo@texgulf.wish.org</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
+    <folderShares>
+        <accessLevel>View</accessLevel>
         <sharedTo>Texas_Gulf_Coast_Louisiana_Chapter</sharedTo>
         <sharedToType>Role</sharedToType>
     </folderShares>
-    <name>Texas Gulf Coast &amp; Louisiana</name>
+    <name>Texas Gulf Coast</name>
 </ReportFolder>

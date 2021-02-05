@@ -185,6 +185,7 @@
     <tabs>dsfs__DocuSignAccountConfiguration__c</tabs>
     <tabs>Awards_Recognition__c</tabs>
     <tabs>Apex_Debug_Log__c</tabs>
+    <tabs>cg__AttachmentSync__c</tabs>
     <workspaceConfig>
         <mappings>
             <tab>Apex_Debug_Log__c</tab>
@@ -197,6 +198,9 @@
         </mappings>
         <mappings>
             <tab>Travel_Data__c</tab>
+        </mappings>
+        <mappings>
+            <tab>cg__AttachmentSync__c</tab>
         </mappings>
         <mappings>
             <tab>dsfs__DocuSignAccountConfiguration__c</tab>

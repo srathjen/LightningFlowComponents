@@ -12,24 +12,28 @@
     <filter>
         <criteriaItems>
             <column>Contact$RecordType</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Wish_Child</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact$Birthdate</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>greaterOrEqual</operator>
             <value>12/13/2001</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact$Birthdate</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>lessOrEqual</operator>
             <value>12/16/2001</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Cases$Status</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Granted,Completed,Closed,DNQ,Denied,Medical,New,Pending Clarification - Chapter,Pending Clarification - MAC,Approved - National Medical Review,Approved - National MAC Review,DNQ - National Medical Review,DNQ - National MAC Review,Pending Clarification - MAC Consult Req,Additional Information for Review</value>

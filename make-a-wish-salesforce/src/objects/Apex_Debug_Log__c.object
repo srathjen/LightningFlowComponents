@@ -278,6 +278,16 @@
         <columns>Method__c</columns>
         <columns>Message__c</columns>
         <filterScope>Everything</filterScope>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>greaterOrEqual</operation>
+            <value>1/1/2020 12:00 AM</value>
+        </filters>
+        <filters>
+            <field>Apex_Class__c</field>
+            <operation>notContain</operation>
+            <value>BackGroundCheck</value>
+        </filters>
         <label>All</label>
     </listViews>
     <listViews>
@@ -297,9 +307,9 @@
         <columns>OWNER.ALIAS</columns>
         <filterScope>Everything</filterScope>
         <filters>
-            <field>Method__c</field>
+            <field>CREATED_DATE</field>
             <operation>equals</operation>
-            <value>CreateLead</value>
+            <value>1/15/2021 12:00 AM</value>
         </filters>
         <label>__Search</label>
     </listViews>

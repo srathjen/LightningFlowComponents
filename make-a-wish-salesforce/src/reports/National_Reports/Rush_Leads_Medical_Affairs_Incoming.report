@@ -28,6 +28,9 @@
         <field>Lead.Any_medical_reason_for_moving_quickly__c</field>
     </columns>
     <columns>
+        <field>Lead.Referrer_Rush_Reason__c</field>
+    </columns>
+    <columns>
         <field>Lead.Please_Explain__c</field>
     </columns>
     <columns>
@@ -138,36 +141,44 @@
     <columns>
         <field>Lead.Will_Child_s_Condition_Deteriorate__c</field>
     </columns>
+    <columns>
+        <field>LEAD_ID</field>
+    </columns>
     <filter>
         <criteriaItems>
             <column>Lead.Rush__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>STATUS</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
-            <value>Inquiry,Referred</value>
-        </criteriaItems>
-        <criteriaItems>
-            <column>Lead.Created_Date_Time__c</column>
-            <isUnlocked>true</isUnlocked>
-            <operator>greaterOrEqual</operator>
-            <value>12/12/2019 7:30 PM</value>
-        </criteriaItems>
-        <criteriaItems>
-            <column>Lead.Created_Date_Time__c</column>
-            <isUnlocked>true</isUnlocked>
-            <operator>lessOrEqual</operator>
-            <value>12/16/2019 4:00 PM</value>
+            <value>Inquiry,Referred,Eligibility Review</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Lead.Wish_Child</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.Test_Record__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.ChapterName__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>test,central california</value>
         </criteriaItems>
         <language>en_US</language>
     </filter>
@@ -182,9 +193,11 @@
     <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
+    <sortColumn>Lead.Created_Date_Time__c</sortColumn>
+    <sortOrder>Desc</sortOrder>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
-        <startDate>2019-12-12</startDate>
+        <startDate>2020-12-02</startDate>
     </timeFrameFilter>
 </Report>

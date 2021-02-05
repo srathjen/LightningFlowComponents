@@ -13,6 +13,7 @@
     <filter>
         <criteriaItems>
             <column>Background_check__c.Migrated_Record__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>

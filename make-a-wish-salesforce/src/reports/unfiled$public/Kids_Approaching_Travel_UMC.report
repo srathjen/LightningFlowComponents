@@ -33,12 +33,14 @@
     <filter>
         <criteriaItems>
             <column>STATUS</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Granted,Completed,Closed</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Qualifying_Medical_Professional_Email__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>bhasin,zeng,pariury,laura davis,valenzuela,jamie sanchez,bianchi,laura lee,jacquelyn wall,dillavou,callaway</value>

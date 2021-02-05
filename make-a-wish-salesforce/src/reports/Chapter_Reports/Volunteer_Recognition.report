@@ -18,6 +18,7 @@
     <filter>
         <criteriaItems>
             <column>Awards_Recognition__c$Volunteer_Contact__c.Hidden_Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Active</value>

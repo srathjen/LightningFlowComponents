@@ -32,24 +32,28 @@
         <filter>
             <criteriaItems>
                 <column>RECORDTYPE</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Case.Wish</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Contact.Region_Chapter__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>contains</operator>
                 <value>make-a-wish arizona</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Test_Record__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Contact.Referrer_Last_Name__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>contains</operator>
                 <value>nelson</value>
@@ -108,30 +112,35 @@
         <filter>
             <criteriaItems>
                 <column>RECORDTYPE</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Case.Wish</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.ChapterName__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>contains</operator>
                 <value>make-a-wish arizona</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Test_Record__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Contact.Referrer_Last_Name__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>contains</operator>
                 <value>nelson</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Contact.Referrer_FirstName__c</column>
+                <columnToColumn>false</columnToColumn>
                 <isUnlocked>true</isUnlocked>
                 <operator>contains</operator>
                 <value>caley</value>

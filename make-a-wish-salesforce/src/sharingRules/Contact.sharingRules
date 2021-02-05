@@ -12,6 +12,19 @@
             <value>Medical Professional</value>
         </criteriaItems>
     </sharingGuestRules>
+    <sharingGuestRules>
+        <fullName>Guest_User_Access_to_Medical_Professionals</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Guest User Access to Medical Professionals</label>
+        <sharedTo>
+            <guestUser>Wish_Referral_Form</guestUser>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Medical Professional</value>
+        </criteriaItems>
+    </sharingGuestRules>
     <sharingOwnerRules>
         <fullName>Alabama_Chapter</fullName>
         <accessLevel>Edit</accessLevel>

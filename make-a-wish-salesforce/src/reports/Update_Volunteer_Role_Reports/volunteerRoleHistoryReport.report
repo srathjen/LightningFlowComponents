@@ -27,24 +27,28 @@
     <filter>
         <criteriaItems>
             <column>field_key</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Status</value>
         </criteriaItems>
         <criteriaItems>
             <column>NEWVAL</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Out of Compliance</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Roles__c.Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Out of Compliance</value>
         </criteriaItems>
         <criteriaItems>
             <column>OLDVAL</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Former - Chapter</value>

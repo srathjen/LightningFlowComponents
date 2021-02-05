@@ -207,4 +207,8 @@
         <label><!-- New_Household_Member --></label>
         <name>npo02__New_Household_Member</name>
     </webLinks>
+    <quickActions>
+        <label><!-- Update Household --></label>
+        <name>npsp__Update_Household</name>
+    </quickActions>
 </CustomObjectTranslation>

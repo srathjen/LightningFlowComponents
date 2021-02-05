@@ -7,10 +7,10 @@
         <field>Contact$MailingAddress</field>
     </columns>
     <columns>
-        <field>Contact$Specialty__c</field>
+        <field>Contact$Phone</field>
     </columns>
     <columns>
-        <field>Contact$Provider_Type__c</field>
+        <field>Contact$Email</field>
     </columns>
     <columns>
         <field>Contact$Region_Chapter__c</field>
@@ -18,12 +18,14 @@
     <filter>
         <criteriaItems>
             <column>Contact.DuplicateRecordItems$DuplicateRecordSet.Duplicate_Item_Count__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>greaterThan</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact$RecordType</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Medical_Professional</value>

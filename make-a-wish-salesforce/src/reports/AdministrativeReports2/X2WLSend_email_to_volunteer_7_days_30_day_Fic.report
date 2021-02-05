@@ -19,12 +19,14 @@
     <filter>
         <criteriaItems>
             <column>Background_check__c.Date__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>greaterOrEqual</operator>
             <value>1/12/2020</value>
         </criteriaItems>
         <criteriaItems>
             <column>Background_check__c.Date__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>lessOrEqual</operator>
             <value>1/15/2020</value>

@@ -1,24 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <article>None</article>
         <plural>false</plural>
-        <value><!-- Recurring Donations --></value>
+        <value><!-- Recurring Donation --></value>
     </caseValues>
     <caseValues>
         <article>Definite</article>
         <plural>false</plural>
-        <value><!-- הRecurring Donations --></value>
+        <value><!-- הRecurring Donation --></value>
     </caseValues>
     <caseValues>
         <article>None</article>
         <plural>true</plural>
-        <value><!-- Recurring Donations --></value>
+        <value><!-- Recurring Donation --></value>
     </caseValues>
     <caseValues>
         <article>Definite</article>
         <plural>true</plural>
-        <value><!-- הRecurring Donations --></value>
+        <value><!-- הRecurring Donation --></value>
     </caseValues>
     <fields>
         <label><!-- Amount --></label>
@@ -68,7 +67,7 @@
     </fields>
     <fields>
         <help>מספר התשלומים.  משמש רק עבור תרומות חוזרות ללא סיום פתוח.</help>
-        <label><!-- Installments --></label>
+        <label><!-- Number of Planned Installments --></label>
         <name>npe03__Installments__c</name>
     </fields>
     <fields>
@@ -141,7 +140,7 @@
     </fields>
     <fields>
         <help><!-- The reason this Recurring Donation was closed. --></help>
-        <label><!-- Closed Reason --></label>
+        <label><!-- Status Reason --></label>
         <name>npsp__ClosedReason__c</name>
         <picklistValues>
             <masterLabel>Card Expired</masterLabel>
@@ -364,4 +363,28 @@
         <label><!-- Recalculate_Rollups --></label>
         <name>npsp__Recalculate_Rollups</name>
     </webLinks>
+    <quickActions>
+        <label><!-- New Opportunity --></label>
+        <name>npe03__New_Opportunity</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Quick Update --></label>
+        <name>npe03__Quick_Update</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Close Recurring Donation --></label>
+        <name>npsp__Close_Recurring_Donation</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New Opportunity --></label>
+        <name>npsp__New_Opportunity</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Pause --></label>
+        <name>npsp__Pause</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Quick Update --></label>
+        <name>npsp__Quick_Update</name>
+    </quickActions>
 </CustomObjectTranslation>

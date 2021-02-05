@@ -30,7 +30,6 @@
             <casePriority>Medium</casePriority>
             <createTask>true</createTask>
             <emailAddress>wvcsupport@wish.org.test</emailAddress>
-            <emailServicesAddress>wvcfullcopy@2af56ntdmo3e5mbmdgbvxb0j5owq8l41t0k5873rp7vi61496r.36-orf0eai.na30.case.salesforce.com</emailServicesAddress>
             <isVerified>false</isVerified>
             <routingName>Make-A-Wish America</routingName>
             <saveEmailHeaders>false</saveEmailHeaders>
@@ -43,6 +42,9 @@
     <enableDraftEmails>false</enableDraftEmails>
     <enableEarlyEscalationRuleTriggers>false</enableEarlyEscalationRuleTriggers>
     <enableEmailActionDefaultsHandler>false</enableEmailActionDefaultsHandler>
+    <enableEscalateQfiToCaseInternal>false</enableEscalateQfiToCaseInternal>
+    <enableEscalateQfiToCaseNetworks>false</enableEscalateQfiToCaseNetworks>
+    <enableExtNetworksCaseFeedEnabled>false</enableExtNetworksCaseFeedEnabled>
     <enableSuggestedArticlesApplication>false</enableSuggestedArticlesApplication>
     <enableSuggestedArticlesCustomerPortal>false</enableSuggestedArticlesCustomerPortal>
     <enableSuggestedArticlesPartnerPortal>false</enableSuggestedArticlesPartnerPortal>
@@ -58,6 +60,7 @@
     <systemUserEmail>automatedcase@00d36000000orf0eai.ext</systemUserEmail>
     <useSystemEmailAddress>false</useSystemEmailAddress>
     <useSystemUserAsDefaultCaseUser>false</useSystemUserAsDefaultCaseUser>
+    <visibleInCssCheckbox>true</visibleInCssCheckbox>
     <webToCase>
         <enableWebToCase>false</enableWebToCase>
     </webToCase>

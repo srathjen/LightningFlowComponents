@@ -559,24 +559,20 @@ Modification Log:
                                         <label class="col-md-3">Referrer Name</label>
                                         <!--                                        <div class="col-md-4 text-muted">{!currLead.Referrer_FirstName__c} {!currLead.Referrer_Last_Name__c}</div>-->
 
-                                        <apex:outputPanel
-                                                rendered="{!If(currLead.Relationship_to_child__c != 'Medical Professional', true, false)}">
+                                        <apex:outputPanel rendered="{!If(currLead.Relationship_to_child__c != 'Medical Professional', true, false)}">
                                             <div class="col-md-4 text-muted">{!currLead.Referrer_FirstName__c} {!currLead.Referrer_Last_Name__c}</div>
                                         </apex:outputPanel>
-                                        <apex:outputPanel
-                                                rendered="{!If(currLead.Relationship_to_child__c == 'Medical Professional', true, false)}">
+                                        <apex:outputPanel rendered="{!If(currLead.Relationship_to_child__c == 'Medical Professional', true, false)}">
                                             <div class="col-md-4 text-muted">{!currLead.Referring_MP__r.FirstName} {!currLead.Referring_MP__r.LastName}</div>
                                         </apex:outputPanel>
 
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-3">Referrer Relationship</label>
-                                        <apex:outputPanel
-                                                rendered="{!If(currLead.Relationship_to_child__c != 'Other', true, false)}">
+                                        <apex:outputPanel rendered="{!If(currLead.Relationship_to_child__c != 'Other', true, false)}">
                                             <div class="col-md-4 text-muted">{!currLead.Relationship_to_child__c}</div>
                                         </apex:outputPanel>
-                                        <apex:outputPanel
-                                                rendered="{!If(currLead.Relationship_to_child__c != 'Other', false, true)}">
+                                        <apex:outputPanel rendered="{!If(currLead.Relationship_to_child__c != 'Other', false, true)}">
                                             <div class="col-md-4 text-muted">{!currLead.Other_Relationship_To_Child__c}</div>
                                         </apex:outputPanel>
                                     </div>
@@ -584,24 +580,20 @@ Modification Log:
 
                                     <div class="form-group row">
                                         <label class="col-md-3">Diagnosis Given By Referrer</label>
-                                        <apex:outputPanel
-                                                rendered="{!If(currLead.Diagnosis_Given_By_Referrer__c != null, true, false)}">
+                                        <apex:outputPanel rendered="{!If(currLead.Diagnosis_Given_By_Referrer__c != null, true, false)}">
                                             <div class="col-md-4 text-muted">{!currLead.Diagnosis_Given_By_Referrer__c}</div>
                                         </apex:outputPanel>
-                                        <apex:outputPanel
-                                                rendered="{!If(currLead.Diagnosis_Given_By_Referrer__c != null, false, true)}">
+                                        <apex:outputPanel rendered="{!If(currLead.Diagnosis_Given_By_Referrer__c != null, false, true)}">
                                             <div class="col-md-4 text-muted">-</div>
                                         </apex:outputPanel>
                                     </div>
 
                                     <div class="form-group row">
                                         <label class="col-md-3">ICD Code Given By Referrer</label>
-                                        <apex:outputPanel
-                                                rendered="{!If(currLead.ICD_Given_By_Referrer__r.Name != null, true, false)}">
+                                        <apex:outputPanel rendered="{!If(currLead.ICD_Given_By_Referrer__r.Name != null, true, false)}">
                                             <div class="col-md-4 text-muted">{!currLead.ICD_Given_By_Referrer__r.Name}</div>
                                         </apex:outputPanel>
-                                        <apex:outputPanel
-                                                rendered="{!If(currLead.ICD_Given_By_Referrer__r.Name != null, false, true)}">
+                                        <apex:outputPanel rendered="{!If(currLead.ICD_Given_By_Referrer__r.Name != null, false, true)}">
                                             <div class="col-md-4 text-muted">-</div>
                                         </apex:outputPanel>
                                     </div>
@@ -685,8 +677,7 @@ Modification Log:
                                             <apex:selectList title="PickList1" size="1"
                                                              value="{!wishChildWrapperIns.recognizationPickValSelected}"
                                                              styleClass="StateRecognization form-control c-select StateRecPick requiredField">
-                                                <apex:selectOptions
-                                                        value="{!wishChildWrapperIns.StateRecognizationPicklistValues}"/>
+                                                <apex:selectOptions value="{!wishChildWrapperIns.StateRecognizationPicklistValues}"/>
                                             </apex:selectList>
                                         </div>
                                     </div>
@@ -759,23 +750,17 @@ Modification Log:
                                                                   onchange="doMore(this.value);"
                                                                   styleClass="StatementPat requiredField">
                                                     <!--Commented first 2 statements as per SIW-376 -->
-                                                    <apex:selectOption
-                                                            itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition for which curative treatment may be feasible but can fail; non-adherence is not included as a treatment failure. (e.g., cancer, irreversible organ failure)"
+                                                    <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition for which curative treatment may be feasible but can fail; non-adherence is not included as a treatment failure. (e.g., cancer, irreversible organ failure)"
                                                             itemValue="2"/>
-                                                    <apex:selectOption
-                                                            itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition with a known history of a significantly shortened life expectancy, but frequent and/or long periods of intensive treatment may prolong life and allow participation in normal activities (e.g., cystic fibrosis, solid organ transplant)"
+                                                    <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition with a known history of a significantly shortened life expectancy, but frequent and/or long periods of intensive treatment may prolong life and allow participation in normal activities (e.g., cystic fibrosis, solid organ transplant)"
                                                             itemValue="3"/>
-                                                    <apex:selectOption
-                                                            itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition without curative treatment options in which debilitation may extend over many years (e.g., severe treatment-resistant epilepsy, some metabolic diseases)"
+                                                    <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition without curative treatment options in which debilitation may extend over many years (e.g., severe treatment-resistant epilepsy, some metabolic diseases)"
                                                             itemValue="4"/>
-                                                    <apex:selectOption
-                                                            itemLabel="{!currLead.FirstName} {!currLead.LastName} has an irreversible but non-progressive condition with life-threatening comorbidities and a known history of a significantly shortened life expectancy (e.g. anoxic brain injury, severe cerebral palsy)"
+                                                    <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has an irreversible but non-progressive condition with life-threatening comorbidities and a known history of a significantly shortened life expectancy (e.g. anoxic brain injury, severe cerebral palsy)"
                                                             itemValue="5"/>
-                                                    <apex:selectOption
-                                                            itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition for which there is no reasonable hope of cure and from which children or young people will experience a significantly shortened life expectancy (e.g., Duchenne muscular dystrophy or neurodegenerative disease)"
+                                                    <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition for which there is no reasonable hope of cure and from which children or young people will experience a significantly shortened life expectancy (e.g., Duchenne muscular dystrophy or neurodegenerative disease)"
                                                             itemValue="1"/>
-                                                    <apex:selectOption
-                                                            itemLabel="None of these statements describe {!currLead.FirstName} {!currLead.LastName}"
+                                                    <apex:selectOption itemLabel="None of these statements describe {!currLead.FirstName} {!currLead.LastName}"
                                                             itemValue="8"/>
                                                     <apex:actionFunction name="start" action="{!changePatientValue}"
                                                                          reRender="none">
@@ -864,8 +849,7 @@ Modification Log:
                                                         <div class="col-md-3"><label>Diagnosis</label></div>
                                                         <div class="col-md-6">
                                                             <!--SIW-557: Updated placeholder to 'Acute Lymphoblastic Leukemia (ALL)' from 'Malignant Neoplasm'-->
-                                                            <apex:inputText
-                                                                    value="{!diagnosisVerification.conditionDescription}"
+                                                            <apex:inputText value="{!diagnosisVerification.conditionDescription}"
                                                                     id="input-pdi"
                                                                     styleClass="requiredField1 placeHolder form-control searchDiagnosisId{!diagnosisBlock} {!diagnosisVerification.pcdOrIcd} {!diagnosisVerification.valueSelectedPCD} inptBx"
                                                                     html-placeholder="example: Acute Lymphoblastic Leukemia (ALL)"
@@ -900,8 +884,7 @@ Modification Log:
                                                                               styleClass="diagnosis-link" value="x"
                                                                               onclick="ClearFieldProperty({!diagnosisBlock});"
                                                                               reRender="notEligible"/>
-                                                            <apex:outputPanel
-                                                                    rendered="{!IF(diagnosisVerification.shortDescription == '', false, true)}">
+                                                            <apex:outputPanel rendered="{!IF(diagnosisVerification.shortDescription == '', false, true)}">
                                                                 <span id="shortTextId1" class="shortTextId text-muted">Description: </span>
                                                                 <apex:outputText id="shortTextId"
                                                                                  value="{!diagnosisVerification.shortDescription}"
@@ -920,44 +903,36 @@ Modification Log:
                                                                     <div class="malignantQues qus{!rowNum} col-md-12">
                                                                         <label>{!medicalQuestion.medicalQuestion.Question__c}</label>
                                                                     </div>
-                                                                    <apex:outputPanel
-                                                                            rendered="{!medicalQuestion.medicalQuestion.Data_Type__c == 'Picklist'}">
+                                                                    <apex:outputPanel rendered="{!medicalQuestion.medicalQuestion.Data_Type__c == 'Picklist'}">
                                                                         <div class="col-md-6">
-                                                                            <apex:outputPanel
-                                                                                    rendered="{!diagnosisVerification.conditionDescription == 'Total Parenteral Nutrition (TPN)' && medicalQuestion.epilepsyPickVals.size > 0}">
+                                                                            <apex:outputPanel rendered="{!diagnosisVerification.conditionDescription == 'Total Parenteral Nutrition (TPN)' && medicalQuestion.epilepsyPickVals.size > 0}">
                                                                                 <label>Please select number of
                                                                                     years</label></apex:outputPanel>
                                                                             <apex:selectList size="1"
                                                                                              value="{!medicalQuestion.selectedPickVal}"
                                                                                              styleClass="{!rowNum} malignant{!diagnosisBlock} medicalPickList form-control c-select requiredField"
                                                                                              onChange="MedicalQuestionVisibility({!diagnosisBlock},{!rowNum},this.value,'malignant{!diagnosisBlock}')">
-                                                                                <apex:selectoptions
-                                                                                        value="{!medicalQuestion.pickVals}"></apex:selectoptions>
+                                                                                <apex:selectoptions value="{!medicalQuestion.pickVals}"></apex:selectoptions>
                                                                             </apex:selectList>
                                                                         </div>
                                                                     </apex:outputPanel>
-                                                                    <apex:outputPanel
-                                                                            rendered="{!medicalQuestion.medicalQuestion.Data_Type__c == 'Comment box'}">
+                                                                    <apex:outputPanel rendered="{!medicalQuestion.medicalQuestion.Data_Type__c == 'Comment box'}">
                                                                         <div class="col-md-6">
-                                                                            <apex:inputTextarea
-                                                                                    styleClass="form-control reaseonForNeed medicalPickList requiredField "
+                                                                            <apex:inputTextarea styleClass="form-control reaseonForNeed medicalPickList requiredField "
                                                                                     html-maxlength="10000"
                                                                                     value="{!medicalQuestion.reasonForNeed}"/>
                                                                         </div>
                                                                     </apex:outputPanel>
-                                                                    <apex:outputPanel
-                                                                            rendered="{!medicalQuestion.epilepsyPickVals.size > 0}">
+                                                                    <apex:outputPanel rendered="{!medicalQuestion.epilepsyPickVals.size > 0}">
                                                                         <div class="col-md-6 epilepsyRadio{!diagnosisBlock}">
-                                                                            <apex:outputPanel
-                                                                                    rendered="{!diagnosisVerification.conditionDescription == 'Total Parenteral Nutrition (TPN)'}">
+                                                                            <apex:outputPanel rendered="{!diagnosisVerification.conditionDescription == 'Total Parenteral Nutrition (TPN)'}">
                                                                                 <label>Please select number of
                                                                                     months</label></apex:outputPanel>
                                                                             <apex:selectList size="1"
                                                                                              value="{!medicalQuestion.epilepsySelectedPickVal}"
                                                                                              styleClass="epilepsyRadioPick{!diagnosisBlock} medicalPickList form-control c-select"
                                                                                              onChange="MedicalQuestionVisibility({!diagnosisBlock},{!rowNum},this.value,'epilepsyRadioPick{!diagnosisBlock}')">
-                                                                                <apex:selectoptions
-                                                                                        value="{!medicalQuestion.epilepsyPickVals}"></apex:selectoptions>
+                                                                                <apex:selectoptions value="{!medicalQuestion.epilepsyPickVals}"></apex:selectoptions>
                                                                             </apex:selectList>
                                                                         </div>
                                                                     </apex:outputPanel>
@@ -1021,10 +996,9 @@ Modification Log:
                                                 </apex:outputPanel>
 
                                             </apex:repeat>
-                                            <apex:outputPanel
-                                                    rendered="{!showAddAnotherDiagnosisBtn == true && wishStatus != 'Qualified' }"
+                                            <apex:outputPanel rendered="{!showAddAnotherDiagnosisBtn == true && wishStatus != 'Qualified' }"
                                                     id="qualifiedmsg" styleClass="text-warning">
-                                                <apex:outputtext>
+                                                <apex:outputtext >
                                                     <div class="form-group row">
                                                         <div class="col-xs-12"><label>Additional diagnoses may be
                                                                 necessary to determine eligibility.</label></div>
@@ -1048,8 +1022,7 @@ Modification Log:
                                                                 any unplanned hospital admissions in the past 12
                                                                 months?</label></div>
                                                         <div class="col-md-6">
-                                                            <apex:selectList
-                                                                    value="{!wishChildWrapperIns.unplannedHospitalAdmission}"
+                                                            <apex:selectList value="{!wishChildWrapperIns.unplannedHospitalAdmission}"
                                                                     multiselect="false" size="1"
                                                                     styleClass="form-control c-select exped-Process requiredField"
                                                                     id="unplannedHospital"
@@ -1066,8 +1039,7 @@ Modification Log:
                                                         <div class="col-md-12"><label>How many times has the child been
                                                                 admitted?</label></div>
                                                         <div class="col-md-6">
-                                                            <apex:inputText
-                                                                    styleClass="form-control unplanned-nbr requiredField"
+                                                            <apex:inputText styleClass="form-control unplanned-nbr requiredField"
                                                                     id="admBox" maxlength="3"
                                                                     value="{!wishChildWrapperIns.numberOfHospitalAdmission}"
                                                                     onkeyup="decimalOnly(this);"/>
@@ -1079,16 +1051,14 @@ Modification Log:
                                                         <div class="col-md-12"><label>What was the admitting
                                                                 diagnosis?</label></div>
                                                         <div class="col-md-6">
-                                                            <apex:inputTextarea
-                                                                    styleClass="form-control unplanned-text requiredField"
+                                                            <apex:inputTextarea styleClass="form-control unplanned-text requiredField"
                                                                     html-maxlength="10000"
                                                                     value="{!wishChildWrapperIns.admittingDiagnosis}"/>
                                                         </div>
                                                         <div class="col-md-12"><label>Did any of the hospitalizations
                                                                 include admission into the ICU?</label></div>
                                                         <div class="col-md-6">
-                                                            <apex:selectList
-                                                                    value="{!wishChildWrapperIns.ifICUAdmission}"
+                                                            <apex:selectList value="{!wishChildWrapperIns.ifICUAdmission}"
                                                                     multiselect="false" size="1"
                                                                     styleClass="form-control c-select exped-Process requiredField"
                                                                     id="ICUAdmission">
@@ -1126,8 +1096,7 @@ Modification Log:
                                                                 currently placing the child's life in jeopardy).</label>
                                                         </div><!--SIW-288 : Updated Question Verbiage as per 288-->
                                                         <div class="col-md-6">
-                                                            <apex:inputTextarea
-                                                                    value="{!wishChildWrapperIns.stillEligibile}"
+                                                            <apex:inputTextarea value="{!wishChildWrapperIns.stillEligibile}"
                                                                     id="description"
                                                                     styleClass="form-control requiredField"/>
                                                         </div>
@@ -1421,8 +1390,7 @@ Modification Log:
                                                 </div>
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12"><label class="form-check-label">
-                                                            <apex:inputCheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.infectious}"
+                                                            <apex:inputCheckbox value="{!travelAlgorithmWrapperIns.infectious}"
                                                                     styleClass="check_checkbox"/>{!INFECTIOUS_TUBERCULOSIS}
                                                         </label>
                                                     </div>
@@ -1430,8 +1398,7 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.airborne}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.airborne}"
                                                                     styleClass="check_checkbox"/>{!AIRBORNE_VIRAL_INFECTIONS_OF_HIGH_MORTALITY}
                                                         </label>
                                                     </div>
@@ -1439,16 +1406,14 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.pneumothorax}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.pneumothorax}"
                                                                     styleClass="check_checkbox"/>{!PNEUMOTHORAX}</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.pleural}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.pleural}"
                                                                     styleClass="check_checkbox"/>{!PLEURAL_EFFUSION}
                                                         </label>
                                                     </div>
@@ -1456,26 +1421,22 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.lungDisease}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.lungDisease}"
                                                                     styleClass="check_checkbox"/>{!SEVERE_RESTRICTIVE_LUNG_DISEASE}
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <apex:selectList
-                                                                value="{!travelAlgorithmWrapperIns.lungDiseaseString}"
+                                                        <apex:selectList value="{!travelAlgorithmWrapperIns.lungDiseaseString}"
                                                                 styleClass="form-control multi pick_dependent"
                                                                 multiselect="true">
-                                                            <apex:selectOptions
-                                                                    value="{!travelAlgorithmWrapperIns.LungDiseaseList}"/>
+                                                            <apex:selectOptions value="{!travelAlgorithmWrapperIns.LungDiseaseList}"/>
                                                         </apex:selectList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.oxygen}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.oxygen}"
                                                                     styleClass="check_checkbox"/>{!OXYGEN_DEPENDENCE_AT_SEA_LEVEL}
                                                         </label>
                                                     </div>
@@ -1483,8 +1444,7 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.seaLevel}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.seaLevel}"
                                                                     styleClass="check_checkbox"/>{!OXYGEN_REQUIREMENT_4L_MIN_AT_SEA_LEVEL}
                                                         </label>
                                                     </div>
@@ -1492,8 +1452,7 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.longTermOxygen}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.longTermOxygen}"
                                                                     styleClass="check_checkbox"/>{!LONG_TERM_OXYGEN_WITHIN_LAST_6_MONTHS}
                                                         </label>
                                                     </div>
@@ -1501,8 +1460,7 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.respiratoryIllness}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.respiratoryIllness}"
                                                                     styleClass="check_checkbox"/>{!HOSPITALIZATION_FOR_ACUTE_RESPIRATORY}
                                                         </label>
                                                     </div>
@@ -1518,26 +1476,22 @@ Modification Log:
                                                         <apex:selectList value="{!pluHypTxt}" multiselect="false"
                                                                          size="1"
                                                                          styleclass="form-control c-select pick_dependent">
-                                                            <apex:selectOptions
-                                                                    value="{!travelAlgorithmWrapperIns.phtList}"/>
+                                                            <apex:selectOptions value="{!travelAlgorithmWrapperIns.phtList}"/>
                                                         </apex:selectList>
 
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12"><label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.ventilator}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.ventilator}"
                                                                     styleClass="check_checkbox"/>{!VENTILATOR_DEPENDENCE}
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <apex:selectList
-                                                                value="{!travelAlgorithmWrapperIns.ventilatorText}"
+                                                        <apex:selectList value="{!travelAlgorithmWrapperIns.ventilatorText}"
                                                                 multiselect="false" size="1"
                                                                 styleclass="form-control c-select pick_dependent">
-                                                            <apex:selectOptions
-                                                                    value="{!travelAlgorithmWrapperIns.ventilatorList}"/>
+                                                            <apex:selectOptions value="{!travelAlgorithmWrapperIns.ventilatorList}"/>
                                                         </apex:selectList>
                                                     </div>
                                                 </div>
@@ -1549,97 +1503,81 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.angina}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.angina}"
                                                                     styleClass="check_checkbox"/>{!CHEST_PAIN_ANGINA}
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <apex:selectList
-                                                                value="{!travelAlgorithmWrapperIns.anginaString}"
+                                                        <apex:selectList value="{!travelAlgorithmWrapperIns.anginaString}"
                                                                 multiselect="true" size="4"
                                                                 styleclass="form-control multi pick_dependent">
-                                                            <apex:selectOptions
-                                                                    value="{!travelAlgorithmWrapperIns.anginaList}"/>
+                                                            <apex:selectOptions value="{!travelAlgorithmWrapperIns.anginaList}"/>
                                                         </apex:selectList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.arrhythmia}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.arrhythmia}"
                                                                     styleClass="check_checkbox"/>{!ARRHYTHMIA}</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <apex:selectList
-                                                                value="{!travelAlgorithmWrapperIns.ArrhythmiaString}"
+                                                        <apex:selectList value="{!travelAlgorithmWrapperIns.ArrhythmiaString}"
                                                                 styleclass="form-control multi pick_dependent" size="4"
                                                                 multiselect="true">
-                                                            <apex:selectOptions
-                                                                    value="{!travelAlgorithmWrapperIns.ArrhythmiaList}"/>
+                                                            <apex:selectOptions value="{!travelAlgorithmWrapperIns.ArrhythmiaList}"/>
                                                         </apex:selectList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.heartFailure}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.heartFailure}"
                                                                     styleClass="check_checkbox"/>{!ACUTE_HEART_FAILURE}
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <apex:selectList
-                                                                value="{!travelAlgorithmWrapperIns.heartFailureString}"
+                                                        <apex:selectList value="{!travelAlgorithmWrapperIns.heartFailureString}"
                                                                 multiselect="true" size="4"
                                                                 styleclass="form-control multi pick_dependent">
-                                                            <apex:selectoptions
-                                                                    value="{!travelAlgorithmWrapperIns.heartFailureList}"/>
+                                                            <apex:selectoptions value="{!travelAlgorithmWrapperIns.heartFailureList}"/>
                                                         </apex:selectList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.chronicHeartFailure}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.chronicHeartFailure}"
                                                                     styleClass="check_checkbox"/>{!CHRONIC_HEART_FAILURE}
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <apex:selectList
-                                                                value="{!travelAlgorithmWrapperIns.chronicHeartFailureString}"
+                                                        <apex:selectList value="{!travelAlgorithmWrapperIns.chronicHeartFailureString}"
                                                                 styleclass="form-control multi pick_dependent" size="4"
                                                                 multiselect="true">
-                                                            <apex:selectOptions
-                                                                    value="{!travelAlgorithmWrapperIns.chronicHeartFailureList}"/>
+                                                            <apex:selectOptions value="{!travelAlgorithmWrapperIns.chronicHeartFailureList}"/>
                                                         </apex:selectList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.congenitalHeartDisease}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.congenitalHeartDisease}"
                                                                     styleClass="check_checkbox"/>{!CYANOTIC_CONGENITAL_HEART_DISEASE}
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <apex:selectList
-                                                                value="{!travelAlgorithmWrapperIns.congenitalHeartDiseaseString}"
+                                                        <apex:selectList value="{!travelAlgorithmWrapperIns.congenitalHeartDiseaseString}"
                                                                 styleClass="form-control multi pick_dependent"
                                                                 multiselect="true" size="4">
-                                                            <apex:selectOptions
-                                                                    value="{!travelAlgorithmWrapperIns.congenitalHeartDiseaseList}"/>
+                                                            <apex:selectOptions value="{!travelAlgorithmWrapperIns.congenitalHeartDiseaseList}"/>
                                                         </apex:selectList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputCheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.uncontrolledHypertension}"
+                                                            <apex:inputCheckbox value="{!travelAlgorithmWrapperIns.uncontrolledHypertension}"
                                                                     styleClass="check_checkbox"/>{!SEVERE_UNCONTROLLED_HYPERTENSION}
                                                         </label>
                                                     </div>
@@ -1652,27 +1590,23 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.acuteoRChronicHepatitis}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.acuteoRChronicHepatitis}"
                                                                     styleClass="check_checkbox"/>{!ACUTE_OR_CHRONIC_HEPATITIS}
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <apex:selectList
-                                                                value="{!travelAlgorithmWrapperIns.chronicHepatitisString}"
+                                                        <apex:selectList value="{!travelAlgorithmWrapperIns.chronicHepatitisString}"
                                                                 multiselect="false"
                                                                 styleclass="form-control c-select pick_dependent"
                                                                 size="1">
-                                                            <apex:selectOptions
-                                                                    value="{!travelAlgorithmWrapperIns.HepatitisValues}"/>
+                                                            <apex:selectOptions value="{!travelAlgorithmWrapperIns.HepatitisValues}"/>
                                                         </apex:selectList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.portalHypertension}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.portalHypertension}"
                                                                     styleClass="check_checkbox"/>{!PORTAL_HYPERTENSION}
                                                         </label>
                                                     </div>
@@ -1680,8 +1614,7 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.heptopulmonarySyndrome}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.heptopulmonarySyndrome}"
                                                                     styleClass="check_checkbox"/>{!HEPTOPULMONARY_SYNDROME}
                                                         </label>
                                                     </div>
@@ -1690,16 +1623,14 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    styleClass="check_checkbox"/>{!CHRONIC_LIVER_DISEASE}
+                                                            <apex:inputcheckbox styleClass="check_checkbox"/>{!CHRONIC_LIVER_DISEASE}
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.liverDisease}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.liverDisease}"
                                                                     styleClass="check_checkbox"/>{!END_STAGE_LIVER_DISEASE}
                                                         </label>
                                                     </div>
@@ -1707,8 +1638,7 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.esophagealVarices}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.esophagealVarices}"
                                                                     styleClass="check_checkbox"/>{!ESOPHAGEAL_VARICES_OR_HISTORY_OF}
                                                         </label>
                                                     </div>
@@ -1716,18 +1646,15 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.portopulmonaryHypertension}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.portopulmonaryHypertension}"
                                                                     styleClass="check_checkbox"/>{!PORTOPULMONARY_HYPERTENSION}
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <apex:selectList
-                                                                value="{!travelAlgorithmWrapperIns.pulmonaryHypertensionString}"
+                                                        <apex:selectList value="{!travelAlgorithmWrapperIns.pulmonaryHypertensionString}"
                                                                 styleclass="form-control c-select pick_dependent"
                                                                 size="1">
-                                                            <apex:selectOptions
-                                                                    value="{!travelAlgorithmWrapperIns.pulmonaryHypertensionValues}"/>
+                                                            <apex:selectOptions value="{!travelAlgorithmWrapperIns.pulmonaryHypertensionValues}"/>
                                                         </apex:selectList>
                                                     </div>
                                                 </div>
@@ -1739,8 +1666,7 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.intracranialPressure}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.intracranialPressure}"
                                                                     styleClass="check_checkbox"/>{!INCREASED_INTRACRANIAL_PRESSURE}
                                                         </label>
                                                     </div>
@@ -1748,44 +1674,37 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.strokes}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.strokes}"
                                                                     styleClass="check_checkbox"/>{!TRANSIENT_ISCHEMIC_ATTACKS_OR_STROKES}
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <apex:selectList
-                                                                value="{!travelAlgorithmWrapperIns.strokesType}"
+                                                        <apex:selectList value="{!travelAlgorithmWrapperIns.strokesType}"
                                                                 styleclass="form-control c-select pick_dependent"
                                                                 size="1">
-                                                            <apex:selectOptions
-                                                                    value="{!travelAlgorithmWrapperIns.StrokeValues}"/>
+                                                            <apex:selectOptions value="{!travelAlgorithmWrapperIns.StrokeValues}"/>
                                                         </apex:selectList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.convulsiveDisorder}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.convulsiveDisorder}"
                                                                     styleClass="check_checkbox"/>{!UNSTABLE_OR_UNCONTROLLED_EPILEPSY}
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <apex:selectList
-                                                                value="{!travelAlgorithmWrapperIns.convulsiveDisorders}"
+                                                        <apex:selectList value="{!travelAlgorithmWrapperIns.convulsiveDisorders}"
                                                                 multiselect="true"
                                                                 styleclass="form-control multi pick_dependent">
-                                                            <apex:selectOptions
-                                                                    value="{!travelAlgorithmWrapperIns.convulsiveDisorderList}"/>
+                                                            <apex:selectOptions value="{!travelAlgorithmWrapperIns.convulsiveDisorderList}"/>
                                                         </apex:selectList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.panicDisorder}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.panicDisorder}"
                                                                     styleClass="check_checkbox"/>{!PANIC_DISORDER}
                                                         </label>
                                                     </div>
@@ -1799,8 +1718,7 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.majorbleeding}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.majorbleeding}"
                                                                     styleClass="check_checkbox"/>{!MAJOR_BLEEDING}
                                                         </label>
                                                     </div>
@@ -1808,8 +1726,7 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.symptomaticAnemia}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.symptomaticAnemia}"
                                                                     styleClass="check_checkbox"/>{!SYMPTOMATIC_ANEMIA}
                                                         </label>
                                                     </div>
@@ -1817,8 +1734,7 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputCheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.sickleCellAnemia}"
+                                                            <apex:inputCheckbox value="{!travelAlgorithmWrapperIns.sickleCellAnemia}"
                                                                     styleClass="check_checkbox"/>{!SICKLE_CELL_ANEMIA}
                                                         </label>
                                                     </div>
@@ -1826,8 +1742,7 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputcheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.surgeryinTwoMonths}"
+                                                            <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.surgeryinTwoMonths}"
                                                                     styleClass="check_checkbox"/>{!SURGERY_IN_THE_PAST_2_MONTHS}
                                                         </label>
                                                     </div>
@@ -1836,8 +1751,7 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputCheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.travelRestriction}"
+                                                            <apex:inputCheckbox value="{!travelAlgorithmWrapperIns.travelRestriction}"
                                                                     styleClass="check_checkbox"/>{!MEDICALLY_FRAGILE_MEDICALLY_COMPLEX}
                                                         </label>
                                                     </div>
@@ -1845,8 +1759,7 @@ Modification Log:
                                                 <div class="form-group row checkContainer">
                                                     <div class="col-md-12">
                                                         <label class="form-check-label">
-                                                            <apex:inputCheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.iamNotSure}"
+                                                            <apex:inputCheckbox value="{!travelAlgorithmWrapperIns.iamNotSure}"
                                                                     styleClass="check_checkbox"/>{!I_AM_NOT_SURE}
                                                         </label>
                                                     </div>
@@ -1855,8 +1768,7 @@ Modification Log:
                                                 <div class="form-group row checkContainer seperator-top">
                                                     <div class="col-md-12" style="padding:0"><label
                                                                 class="form-check-label inline-block">
-                                                            <apex:inputCheckbox
-                                                                    value="{!travelAlgorithmWrapperIns.noneApply}"
+                                                            <apex:inputCheckbox value="{!travelAlgorithmWrapperIns.noneApply}"
                                                                     styleClass="check_checkbox"/>{!NONE_APPLY}</label>
                                                     </div>
                                                 </div>

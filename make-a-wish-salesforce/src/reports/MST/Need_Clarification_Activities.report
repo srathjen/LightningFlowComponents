@@ -25,24 +25,28 @@
     <filter>
         <criteriaItems>
             <column>Case$Status</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Wish Determined</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case$Sub_Status__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Need Clarification</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Activities$Task_Type__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Wish Planning,Wish Granting</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Activities$Status</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Completed</value>

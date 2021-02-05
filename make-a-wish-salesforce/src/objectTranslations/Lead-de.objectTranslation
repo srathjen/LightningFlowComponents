@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- Diagnosis Verfication Fieldset --></label>
         <name>Diagnosis_Verfication_Fieldset</name>
@@ -823,6 +823,10 @@
         <name>Best_Contact_State__c</name>
     </fields>
     <fields>
+        <label><!-- Best Contact Zip Code --></label>
+        <name>Best_Contact_Zip_Code__c</name>
+    </fields>
+    <fields>
         <label><!-- Best Contact --></label>
         <name>Best_Contact__c</name>
         <relationshipLabel><!-- Best Contact for Referral --></relationshipLabel>
@@ -1151,6 +1155,10 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Edit Access --></label>
+        <name>Edit_Access__c</name>
+    </fields>
+    <fields>
         <label><!-- Eligibility Review Date --></label>
         <name>Eligibility_Review_Date__c</name>
     </fields>
@@ -1310,6 +1318,14 @@
             <masterLabel>Treating Medical Professional</masterLabel>
             <translation><!-- Treating Medical Professional --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Hidden Email Alert - Best Contact --></label>
+        <name>Hidden_Email_Alert_Best_Contact__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Email Alert - Treating MP --></label>
+        <name>Hidden_Email_Alert_Treating_MP__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Field --></label>
@@ -1568,6 +1584,26 @@
         <name>Lung_Disease__c</name>
     </fields>
     <fields>
+        <label><!-- MP/ HTFs Matched --></label>
+        <name>MP_HTFs_Matched__c</name>
+    </fields>
+    <fields>
+        <label><!-- Matched Referring MP Email --></label>
+        <name>Matched_Referring_MP_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Matched Referring MP First Name --></label>
+        <name>Matched_Referring_MP_First_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Matched Referring MP Last Name --></label>
+        <name>Matched_Referring_MP_Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Matched? --></label>
+        <name>Matched__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Medical Professional ContactId --></label>
         <name>Medical_Professional_ContactId__c</name>
     </fields>
@@ -1664,6 +1700,10 @@
         <name>Next_Step_Notes__c</name>
     </fields>
     <fields>
+        <label><!-- No HTF --></label>
+        <name>No_Referring_HTF__c</name>
+    </fields>
+    <fields>
         <label><!-- Non-Verbal Additional Information --></label>
         <name>Non_Verbal_Additional_Information__c</name>
     </fields>
@@ -1707,6 +1747,10 @@
         <help><!-- None of these statements describe the Child --></help>
         <label><!-- None Of These Statements Describes Child --></label>
         <name>None_of_these_statements_describes_Child__c</name>
+    </fields>
+    <fields>
+        <label><!-- # of Attachments --></label>
+        <name>Num_of_Attachments__c</name>
     </fields>
     <fields>
         <label><!-- Number hospital admissions --></label>
@@ -1949,7 +1993,7 @@
     </fields>
     <fields>
         <help><!-- This date updates automatically when an electronic DV is signed but can be manually updated for paper forms. --></help>
-        <label><!-- Diagnosis Verification Received --></label>
+        <label><!-- DV Received Date --></label>
         <name>Part_A_Received__c</name>
     </fields>
     <fields>
@@ -2034,6 +2078,10 @@
     <fields>
         <label><!-- Hidden Pulmonary Hypertension --></label>
         <name>Pulmonary_Hypertension__c</name>
+    </fields>
+    <fields>
+        <label><!-- Qualified / DNQ Date --></label>
+        <name>Qualified_DNQ_Date__c</name>
     </fields>
     <fields>
         <label><!-- Qualified Date --></label>
@@ -2401,6 +2449,10 @@
         <name>ReferralComment__c</name>
     </fields>
     <fields>
+        <label><!-- Referral Browser Type --></label>
+        <name>Referral_Browser_Type__c</name>
+    </fields>
+    <fields>
         <help><!-- Date the Initial lead from an authorized referral source is received. --></help>
         <label><!-- Referred Date --></label>
         <name>Referred_Date__c</name>
@@ -2527,10 +2579,11 @@
         <name>Referring_MP_State__c</name>
     </fields>
     <fields>
+        <label><!-- Referring MP Zip Code --></label>
+        <name>Referring_MP_Zip_Code__c</name>
+    </fields>
+    <fields>
         <label><!-- Referring MP --></label>
-        <lookupFilter>
-            <errorMessage><!-- Please select an MP contact record. --></errorMessage>
-        </lookupFilter>
         <name>Referring_MP__c</name>
         <relationshipLabel><!-- Referring MP for Referral --></relationshipLabel>
     </fields>
@@ -2733,6 +2786,10 @@
             <translation><!-- Duplicate --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Invalid</masterLabel>
+            <translation><!-- Invalid --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Medical Review Not Required</masterLabel>
             <translation><!-- Medical Review Not Required --></translation>
         </picklistValues>
@@ -2779,6 +2836,10 @@
         <picklistValues>
             <masterLabel>Previous Wish</masterLabel>
             <translation><!-- Previous Wish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Refused</masterLabel>
+            <translation><!-- Refused --></translation>
         </picklistValues>
     </fields>
     <fields>
@@ -2860,10 +2921,11 @@
         <name>Treating_MP_Type__c</name>
     </fields>
     <fields>
+        <label><!-- Treating MP Zip Code --></label>
+        <name>Treating_MP_Zip_Code__c</name>
+    </fields>
+    <fields>
         <label><!-- Treating MP --></label>
-        <lookupFilter>
-            <errorMessage><!-- Please select an MP Contact record. --></errorMessage>
-        </lookupFilter>
         <name>Treating_MP__c</name>
         <relationshipLabel><!-- Treating MP for Referral --></relationshipLabel>
     </fields>
@@ -3348,6 +3410,10 @@
         <name>MP_Lookups</name>
     </quickActions>
     <quickActions>
+        <label><!-- Make &amp; Match --></label>
+        <name>Make_Match</name>
+    </quickActions>
+    <quickActions>
         <label><!-- Diagnosis Information --></label>
         <name>Medical_Information</name>
     </quickActions>
@@ -3388,6 +3454,10 @@
         <name>Referring_MP_Unmatched</name>
     </quickActions>
     <quickActions>
+        <label><!-- Email --></label>
+        <name>SendEmail</name>
+    </quickActions>
+    <quickActions>
         <label><!-- Send Diagnosis Verification --></label>
         <name>Send_Diagnosis_Verification</name>
     </quickActions>
@@ -3402,6 +3472,10 @@
     <quickActions>
         <label><!-- Treating MP Unmatched --></label>
         <name>Treating_MP_Unmatched</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- DocuSign --></label>
+        <name>dsfs__LeadDocuSignAction</name>
     </quickActions>
     <validationRules>
         <errorMessage><!-- Please fill the Family Dynamics Notes --></errorMessage>
@@ -3468,7 +3542,7 @@
         <name>Lead_FirstName_Validation_Referred</name>
     </validationRules>
     <validationRules>
-        <errorMessage><!-- Please Enter Hospital_Treatment_Facility --></errorMessage>
+        <errorMessage><!-- Please enter an Unmatched Treating MP HTF Name OR link a Treating MP HTF Account record to the lead before placing the lead into a &apos;Referred&apos; status. --></errorMessage>
         <name>Lead_Hospital_or_Treartment_Validation</name>
     </validationRules>
     <validationRules>
@@ -3480,7 +3554,7 @@
         <name>Lead_Inquiry_and_Referr_Date_Validation</name>
     </validationRules>
     <validationRules>
-        <errorMessage><!-- Please Enter Treating Medical Professional Last Name --></errorMessage>
+        <errorMessage><!-- Please enter an &apos;Unmatched Treating MP First &amp; Last Name&apos; or link a &apos;Treating MP&apos; contact to the lead before placing the lead in a &apos;Referred&apos; status. --></errorMessage>
         <name>Lead_Physician_LastName_Validation</name>
     </validationRules>
     <validationRules>
@@ -3610,6 +3684,44 @@
         <sections>
             <label><!-- Attachments --></label>
             <section>Attachments</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Wish Child Lead Layout (Intake Managers)</layout>
+        <sections>
+            <label><!-- Family Information --></label>
+            <section>Family Information</section>
+        </sections>
+        <sections>
+            <label><!-- Important Dates --></label>
+            <section>Important Dates</section>
+        </sections>
+        <sections>
+            <label><!-- Inquiry/Referral --></label>
+            <section>Inquiry/Referral</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Wish Child Lead Layout (NMA)</layout>
+        <sections>
+            <label><!-- Diagnosis Information --></label>
+            <section>Diagnosis Information</section>
+        </sections>
+        <sections>
+            <label><!-- Diagnosis Verification --></label>
+            <section>Diagnosis Verification</section>
+        </sections>
+        <sections>
+            <label><!-- Family Information --></label>
+            <section>Family Information</section>
+        </sections>
+        <sections>
+            <label><!-- Important Dates --></label>
+            <section>Important Dates</section>
+        </sections>
+        <sections>
+            <label><!-- Inquiry/Referral --></label>
+            <section>Inquiry/Referral</section>
         </sections>
     </layouts>
     <recordTypes>

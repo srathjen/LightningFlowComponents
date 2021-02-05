@@ -37,54 +37,63 @@
         <booleanFilter>((1 AND 2 AND ((3 OR 6) OR (4 OR 7) OR (5 OR 8)))) AND 9</booleanFilter>
         <criteriaItems>
             <column>FIRST_NAME</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notContain</operator>
             <value>test</value>
         </criteriaItems>
         <criteriaItems>
             <column>LAST_NAME</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notContain</operator>
             <value>test</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.PD_Condition_Description__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Osteogenic Sarcoma</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Diagnosis_Given_By_Referrer__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Osteogenic Sarcoma</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Qualifying_Diagnosis__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Osteogenic Sarcoma</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.PD_ICD_Code__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Z85.830</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.ICD_Given_By_Referrer__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Z85.830</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Qualifying_ICD__c</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Z85.830</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Lead.Wish_Child</value>
