@@ -1709,6 +1709,7 @@
     <members>Arizona/WishManagement/of_Days_Welcome_Ready_to_Assign_WpS</members>
     <members>Arizona/WishManagement/of_Days_Wish_Granted_Wish_Complete_KVf</members>
     <members>Arizona/WishManagement/Recently_Edited_Cases_and_Contacts_UAT</members>
+    <members>AZ_Donor_Care</members>
     <members>AZ_Donor_Care/AZ_Volunteers_Export_for_RE</members>
     <members>AZ_Donor_Care/AZ_Volunteers_New_Since_Launch_Helen_s</members>
     <members>AZ_Donor_Care/AZ_Wish_Families_for_Import_XzR</members>
@@ -1722,6 +1723,7 @@
     <members>AZ_Medical_Eligibility/AZ_Leads_Detail</members>
     <members>AZ_Medical_Eligibility/AZ_Non_Verbal_Report</members>
     <members>AZ_Medical_Eligibility/AZ_Rush_Referrals_Report</members>
+    <members>AZ_Volunteer_Tracking</members>
     <members>AZ_Volunteer_Tracking/Active_Single_Day_Event_Volunteers_2w1</members>
     <members>AZ_Volunteer_Tracking/Active_Wish_Granters_without_Wish_Ydx</members>
     <members>AZ_Volunteer_Tracking/Available_Wish_Granters_by_Region_DV8</members>
@@ -1733,6 +1735,8 @@
     <members>AZ_Volunteer_Tracking/AZ_Volunteer_Opportunities</members>
     <members>AZ_Volunteer_Tracking/AZ_Volunteers_New_Since_January_2018</members>
     <members>AZ_Volunteer_Tracking/AZ_Volunteers_New_Since_Launch_Status</members>
+    <members>AZ_Volunteer_Tracking/BC_Created_this_week</members>
+    <members>AZ_Volunteer_Tracking/BC_Expiration_date_5_18_7_18</members>
     <members>AZ_Volunteer_Tracking/BCs_Pending_24j</members>
     <members>AZ_Volunteer_Tracking/COI_Expiration_Dates_Pc6</members>
     <members>AZ_Volunteer_Tracking/COI_Volunteers_Without_W53</members>
@@ -1752,13 +1756,16 @@
     <members>AZ_Volunteer_Tracking/Vol_Onboarding_Training_Overview_CUv</members>
     <members>AZ_Volunteer_Tracking/Volunteer_Active_by_Role_nYD</members>
     <members>AZ_Volunteer_Tracking/Volunteer_Application_Status_oha</members>
+    <members>AZ_Volunteer_Tracking/Volunteer_Average_Rating_MYB</members>
     <members>AZ_Volunteer_Tracking/Volunteer_BC_Status_PgK</members>
     <members>AZ_Volunteer_Tracking/Volunteer_by_Region_Op7</members>
+    <members>AZ_Volunteer_Tracking/Volunteer_hours_by_volunteer_STD</members>
     <members>AZ_Volunteer_Tracking/Volunteer_hours_Last_month_gVl</members>
     <members>AZ_Volunteer_Tracking/Volunteer_Onboarding_Overview_pl4</members>
     <members>AZ_Volunteer_Tracking/Volunteer_Orientation_Status_Tm2</members>
     <members>AZ_Volunteer_Tracking/Volunteer_OT_Registration_9ae</members>
     <members>AZ_Volunteer_Tracking/Volunteer_Pending_by_Role_rNE</members>
+    <members>AZ_Volunteer_Tracking/Volunteer_Performance_Rating_29M</members>
     <members>AZ_Volunteer_Tracking/Volunteer_related_WCs_DO_NOT_EDIT_ls2</members>
     <members>AZ_Volunteer_Tracking/Volunteer_Tenure_and_Wishes_Granted_gp7</members>
     <members>AZ_Volunteer_Tracking/Volunteer_Training_Attendance_jmY</members>
@@ -1908,6 +1915,7 @@
     <members>Chapter_Reports/Wish_Case_Photos</members>
     <members>Chapter_Reports/Wish_Child_Photos</members>
     <members>Chapter_Reports/Wish_Granters_No_Current_Assignments</members>
+    <members>Chapter_Volunteer_Reports</members>
     <members>Chapter_Volunteer_Reports/Active_AZ_Volunteers_by_Ethnicity</members>
     <members>Chapter_Volunteer_Reports/Active_AZ_Volunteers_by_Gender</members>
     <members>Chapter_Volunteer_Reports/Active_AZ_Volunteers_by_Language</members>
@@ -1935,6 +1943,7 @@
     <members>Chapter_Volunteer_Reports/Expired_COIs_Last_60_Days_P0i</members>
     <members>Chapter_Volunteer_Reports/New_Wish_Granters_with_no_Granted_Wishes_EEc</members>
     <members>Chapter_Volunteer_Reports/Non_Wish_Granter_Volunteer_Roles</members>
+    <members>Chapter_Volunteer_Reports/Orientation_Training_WLP_15_fbU</members>
     <members>Chapter_Volunteer_Reports/Prospective_Volunteer_Adoption</members>
     <members>Chapter_Volunteer_Reports/Registration_into_Orientation_and_Traini</members>
     <members>Chapter_Volunteer_Reports/Reimbursement_Files_AZ</members>
