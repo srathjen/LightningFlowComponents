@@ -182,7 +182,7 @@ public class PARTAPDF {
                 Condition_Description__c,
                 Condition_Description__r.Name,
                 Current_Condition__c,
-                Data_Type__c,
+                // Data_Type__c,
                 Epilepsy_picklist__c,
                 Picklist_values__c,
                 Question__c,
