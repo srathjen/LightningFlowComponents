@@ -273,6 +273,7 @@
         <fields>Matched__c</fields>
         <fields>Rush__c</fields>
         <fields>Num_of_Attachments__c</fields>
+        <fields>DV_Status__c</fields>
         <label>Wish Child Compact Layout</label>
     </compactLayouts>
     <enableFeeds>true</enableFeeds>
@@ -816,7 +817,7 @@
         <fullName>DV_Reminder_Last_Sent_Date__c</fullName>
         <description>SIW-659</description>
         <externalId>false</externalId>
-        <label>DV Reminder Last Sent Date</label>
+        <label>DV Reminder Sent Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -828,7 +829,7 @@
         <description>Captures whether the DV Signer is different from the Recipient</description>
         <externalId>false</externalId>
         <inlineHelpText>Captures whether the DV Signer changed from the original recipient it was send to.</inlineHelpText>
-        <label>DV Signer Changed</label>
+        <label>DV Respondent Changed</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Checkbox</type>
@@ -837,7 +838,7 @@
         <fullName>DV_Signer_Email__c</fullName>
         <description>Captures the DV Signer's Email</description>
         <externalId>false</externalId>
-        <label>DV Signer Email</label>
+        <label>DV Respondent Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -848,7 +849,7 @@
         <fullName>DV_Signer_First_Name__c</fullName>
         <description>Captures the DV Signers First Name</description>
         <externalId>false</externalId>
-        <label>DV Signer First Name</label>
+        <label>DV Respondent First Name</label>
         <length>100</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -860,7 +861,7 @@
         <fullName>DV_Signer_Last_Name__c</fullName>
         <description>Captures the DV Signers Last Name</description>
         <externalId>false</externalId>
-        <label>DV Signer Last Name</label>
+        <label>DV Respondent Last Name</label>
         <length>100</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -872,11 +873,30 @@
         <fullName>DV_Signer_Phone__c</fullName>
         <description>Captures the DV Signer's Phone Number</description>
         <externalId>false</externalId>
-        <label>DV Signer Phone</label>
+        <label>DV Respondent Phone</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>DV_Status__c</fullName>
+        <description>Captures the current status of the most recently sent DV Form</description>
+        <externalId>false</externalId>
+        <formula>IF(!ISBLANK( Part_A_Received__c ), "Completed",
+
+IF(!ISBLANK( Last_DV_Save_Date__c ), "In Progress",
+
+IF(ISBLANK(Last_DV_Save_Date__c) &amp;&amp; !ISBLANK( Part_A_Sent__c ), "Sent",
+
+IF(ISBLANK(Part_A_Sent__c), "Not Sent", ""))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Captures the current status of the most recently sent DV Form</inlineHelpText>
+        <label>DV Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Does_Child_Have_Cognitive_Delays__c</fullName>
@@ -970,6 +990,16 @@
         <label>Edit Access</label>
         <trackHistory>false</trackHistory>
         <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>First_DV_Sent_Date__c</fullName>
+        <description>Captures the date that the first DV Form was sent to an MP</description>
+        <externalId>false</externalId>
+        <label>First DV Sent Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
     </fields>
     <fields>
         <fullName>Hidden_Email_Alert_Best_Contact__c</fullName>
@@ -3936,6 +3966,16 @@ IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Referring Medical Pr
     </fields>
     <fields>
         <fullName>LastTransferDate</fullName>
+    </fields>
+    <fields>
+        <fullName>Last_DV_Save_Date__c</fullName>
+        <description>Captures the most recent date that the DV Form was saved OR submitted by an MP</description>
+        <externalId>false</externalId>
+        <label>Last DV Save Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
     </fields>
     <fields>
         <fullName>LeadSource</fullName>
@@ -18229,6 +18269,13 @@ IF (Text(Status) = "DNQ", DNQ_Date__c , NULL))</formula>
         <searchResultsAdditionalFields>LEAD.CREATED_DATE</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>Read</sharingModel>
+    <validationRules>
+        <fullName>Cannot_Qualify_Lead_Without_DV</fullName>
+        <active>true</active>
+        <description>You cannot manually qualify a lead without a completed DV.  Please Ensure a DV has been completed.</description>
+        <errorConditionFormula>ISPICKVAL(Status, "Qualified") &amp;&amp;  ISBLANK(Part_A_Received__c)</errorConditionFormula>
+        <errorMessage>You cannot manually qualify a lead without a completed DV.  Please Ensure a DV has been completed.</errorMessage>
+    </validationRules>
     <validationRules>
         <fullName>Family_Dynamics_Validation</fullName>
         <active>true</active>
