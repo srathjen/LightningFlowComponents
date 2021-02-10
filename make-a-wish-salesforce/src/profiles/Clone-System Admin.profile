@@ -27107,6 +27107,9 @@
         <layout>Macro-Macro Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Medical_Question_Response_Option__c-Medical Question Response %28Option%29 Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Medical_Questions__c-Medical Question Layout</layout>
     </layoutAssignments>
     <layoutAssignments>

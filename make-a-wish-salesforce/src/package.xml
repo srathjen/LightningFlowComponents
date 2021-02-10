@@ -220,6 +220,7 @@
     <members>Lead</members>
     <members>Lead_File__c</members>
     <members>MaintenanceAlert__c</members>
+    <members>Medical_Question_Response_Option__c</members>
     <members>npe03__Recurring_Donation__c</members>
     <members>npe4__Relationship__c</members>
     <members>npe5__Affiliation__c</members>
@@ -615,6 +616,7 @@
     <members>Default_Lead_Record_Page</members>
     <members>Intake_Medical_Eligibility_UtilityBar</members>
     <members>Lead_Record_Page</members>
+    <members>Medical_Questions_Response_Page</members>
     <members>Relationship_Record_Page</members>
     <members>Volunteer_Management_Home_Page</members>
     <name>FlexiPage</name>
