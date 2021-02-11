@@ -903,6 +903,9 @@ Modification Log:
                                                                     <div class="malignantQues qus{!rowNum} col-md-12">
                                                                         <label>{!medicalQuestion.medicalQuestion.Question__c}</label>
                                                                     </div>
+                                                                    <!-- DVS-120 -->
+
+                                                                    <!-- 
                                                                     <apex:outputPanel rendered="{!medicalQuestion.medicalQuestion.Data_Type__c == 'Picklist'}">
                                                                         <div class="col-md-6">
                                                                             <apex:outputPanel rendered="{!diagnosisVerification.conditionDescription == 'Total Parenteral Nutrition (TPN)' && medicalQuestion.epilepsyPickVals.size > 0}">
@@ -923,11 +926,11 @@ Modification Log:
                                                                                     value="{!medicalQuestion.reasonForNeed}"/>
                                                                         </div>
                                                                     </apex:outputPanel>
+                                                                -->
                                                                     <apex:outputPanel rendered="{!medicalQuestion.epilepsyPickVals.size > 0}">
                                                                         <div class="col-md-6 epilepsyRadio{!diagnosisBlock}">
                                                                             <apex:outputPanel rendered="{!diagnosisVerification.conditionDescription == 'Total Parenteral Nutrition (TPN)'}">
-                                                                                <label>Please select number of
-                                                                                    months</label></apex:outputPanel>
+                                                                                <label>Please select number of months</label></apex:outputPanel>
                                                                             <apex:selectList size="1"
                                                                                              value="{!medicalQuestion.epilepsySelectedPickVal}"
                                                                                              styleClass="epilepsyRadioPick{!diagnosisBlock} medicalPickList form-control c-select"
