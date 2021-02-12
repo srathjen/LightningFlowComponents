@@ -24,10 +24,6 @@
                 <behavior>Edit</behavior>
                 <field>PR_Diagnosis__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Qualification_Level__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -51,6 +47,10 @@
         <editHeading>true</editHeading>
         <label>Qualification Information</label>
         <layoutColumns>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Qualification_Level__c</field>
+            </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Qualify_If_No_Questions__c</field>
