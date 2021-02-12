@@ -220,6 +220,7 @@
     <members>Lead</members>
     <members>Lead_File__c</members>
     <members>MaintenanceAlert__c</members>
+    <members>Medical_Questions__c</members>
     <members>npe03__Recurring_Donation__c</members>
     <members>npe4__Relationship__c</members>
     <members>npe5__Affiliation__c</members>
