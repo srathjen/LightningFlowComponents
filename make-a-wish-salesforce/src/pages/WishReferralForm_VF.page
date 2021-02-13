@@ -81,7 +81,8 @@
          style="{! IF(isDeactivatedReferralForm == true, 'display: block', 'display: none')}">{!deactivatedMessage}</div>
     <div id="loading">Loading Referral Form, please wait...</div>
     <div class="page">
-        <apex:form id="frm" styleClass="portal inquiry" rendered="{!!isDeactivatedReferralForm}">
+        <apex:form id="frm" styleClass="portal inquiry" rendered="{!!isDeactivatedReferralForm}" html-autocomplete="off"> 
+            <input type="hidden" autocomplete="false"/>
             <apex:outputpanel rendered="{!displayAckMsg == false}" id="panel">
                 <div class="alertUserMessage"
                      style="{! IF(isDisplayWarningMessage == true, 'display: block', 'display: none')}">{!warningMessage}</div>
@@ -1984,13 +1985,6 @@
         function applyMedicalReferralSettings(isSearchMpHtfDeactivated, relationshipType) {
             if (relationshipType === 'Medical Professional') {
                 buildValidationLookupFields();
-
-                // Turn off autocomplete
-                document.querySelector('#externalReferrerAccountLookup').querySelector('input').setAttribute('autocomplete', 'off');
-                document.querySelector('#externalReferrerContactLookup').querySelector('input').setAttribute('autocomplete', 'off');
-                document.querySelector('#externalTreatingAccountLookup').querySelector('input').setAttribute('autocomplete', 'off');
-                document.querySelector('#externalTreatingContactLookup').querySelector('input').setAttribute('autocomplete', 'off');
-                document.querySelector('#externalBestContactLookup').querySelector('input').setAttribute('autocomplete', 'off');
 
                 <!-- Start: ODP-193 TO BE DELETED AFTER DATA MIGRATION -->
                 if (isSearchMpHtfDeactivated && isSearchMpHtfDeactivated === true) {
