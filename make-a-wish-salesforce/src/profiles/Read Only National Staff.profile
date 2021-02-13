@@ -6589,6 +6589,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Condition_Description__c.Has_Med_Questions_w_Qualifying_Response__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Condition_Description__c.Has_Medical_Questions__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Condition_Description__c.InActive__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -6600,6 +6610,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Condition_Description__c.PR_Diagnosis__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <readable>false</readable>
+        <field>Condition_Description__c.Qualification_Level__c</field>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Condition_Description__c.Qualify_If_No_Questions__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
