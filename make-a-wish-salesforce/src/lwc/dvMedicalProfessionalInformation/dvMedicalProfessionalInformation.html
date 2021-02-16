@@ -1,0 +1,151 @@
+<!--
+ - @description Medical Professional Information component for the Diagnosis Verification process
+ - @author Michelle Cominotto, Make-A-Wish
+ - @createdDate 02/08/2021
+-->
+<template>
+  <div class="container">
+    <c-modal
+      modal-config={modalConfig}
+      onmodalactionevent={handleModalEvent}
+      if:true={isShowModal}
+    ></c-modal>
+    <header class="header">
+      <h1>MEDICAL PROFESSIONAL INFORMATION</h1>
+    </header>
+
+    <section class="form" if:true={dvLeadInfo}>
+      <div class="output row">
+        <label
+          class="slds-form-element__legend slds-form-element__label column left"
+        >
+          TREATING MEDICAL PROFESSIONAL:
+        </label>
+        <p class="column center">&nbsp;</p>
+        <label class="slds-form-element__label column right"
+          >{dvLeadInfo.treatingMpName}</label
+        >
+      </div>
+      <div class="output row">
+        <label
+          class="slds-form-element__legend slds-form-element__label column left"
+        >
+          TREATING HOSPITAL OR FACILITY:
+        </label>
+        <p class="column center">&nbsp;</p>
+        <label class="slds-form-element__label column right"
+          >{dvLeadInfo.treatingHtfName}</label
+        >
+      </div>
+      <label class="slds-form-element__legend slds-form-element__label">
+        {dvRecipientLabel}
+      </label>
+      <lightning-combobox
+        class="input"
+        name="Signer"
+        value={isRecipientSigner}
+        placeholder="Please Select"
+        options={yesNoOptions}
+        onchange={handleSignerChange}
+        required="true"
+        variant="label-hidden"
+      ></lightning-combobox>
+
+      <section class="conditionalForm" if:true={showNewSignerInformation}>
+        <header class="header">
+          <h1>YOUR INFORMATION</h1>
+        </header>
+        <label class="slds-form-element__legend slds-form-element__label">
+          FIRST NAME:
+        </label>
+        <lightning-input
+          class="input"
+          type="text"
+          placeholder="First Name"
+          value={dvSignerFirstName}
+          onchange={handleFirstNameChange}
+          required="true"
+          max-length="100"
+          variant="label-hidden"
+        ></lightning-input>
+        <label class="slds-form-element__legend slds-form-element__label">
+          LAST NAME:
+        </label>
+        <lightning-input
+          class="input"
+          type="text"
+          placeholder="Last Name"
+          value={dvSignerLastName}
+          onchange={handleLastNameChange}
+          required="true"
+          max-length="100"
+          variant="label-hidden"
+        ></lightning-input>
+        <label class="slds-form-element__legend slds-form-element__label">
+          EMAIL:
+        </label>
+        <lightning-input
+          class="input"
+          type="email"
+          placeholder="your_email@domain.com"
+          value={dvSignerEmail}
+          onchange={handleEmailChange}
+          required="true"
+          max-length="80"
+          variant="label-hidden"
+        ></lightning-input>
+        <label class="slds-form-element__legend slds-form-element__label">
+          PHONE:
+        </label>
+        <lightning-input
+          class="input"
+          type="tel"
+          placeholder="(000) 000-0000"
+          value={dvSignerPhone}
+          onchange={handlePhoneChange}
+          required="true"
+          max-length="14"
+          min-length="14"
+          variant="label-hidden"
+        ></lightning-input>
+      </section>
+
+      <label class="slds-form-element__legend slds-form-element__label">
+        I AM RECOGNIZED BY MY STATE TO PRACTICE AS A:
+      </label>
+      <lightning-combobox
+        class="input"
+        name="ProfessionalType"
+        value={mpTypeSelection}
+        placeholder="Please Select"
+        options={mpTypeOptions}
+        onchange={handleMpTypeChange}
+        required="true"
+        variant="label-hidden"
+      ></lightning-combobox>
+      <label class="slds-form-element__legend slds-form-element__label">
+        I HAVE DIRECT KNOWLEDGE OF THIS PATIENT'S CONDITION AND AM PART OF THE
+        TREATING HEALTHCARE TEAM:
+      </label>
+      <lightning-combobox
+        class="input"
+        name="HealthcareTeam"
+        value={isHealthcareTeam}
+        placeholder="Please Select"
+        options={yesNoOptions}
+        onchange={handleHealthcareTeamChange}
+        required="true"
+        variant="label-hidden"
+      ></lightning-combobox>
+    </section>
+
+    <section class="footer" if:true={dvLeadInfo}>
+      <input
+        type="button"
+        onclick={handleSaveClick}
+        class="buttonSave"
+        value="SAVE"
+      />
+    </section>
+  </div>
+</template>
