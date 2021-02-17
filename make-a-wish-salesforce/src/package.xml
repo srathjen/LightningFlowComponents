@@ -221,6 +221,7 @@
     <members>Lead_File__c</members>
     <members>MaintenanceAlert__c</members>
     <members>Medical_Questions__c</members>
+    <members>Medical_Question_Response_Option__c</members>
     <members>npe03__Recurring_Donation__c</members>
     <members>npe4__Relationship__c</members>
     <members>npe5__Affiliation__c</members>
@@ -616,6 +617,7 @@
     <members>Default_Lead_Record_Page</members>
     <members>Intake_Medical_Eligibility_UtilityBar</members>
     <members>Lead_Record_Page</members>
+    <members>Medical_Questions_Response_Page</members>
     <members>Relationship_Record_Page</members>
     <members>Volunteer_Management_Home_Page</members>
     <name>FlexiPage</name>
@@ -733,6 +735,7 @@
     <members>View_and_Edit_Back_Ground_Check_Files</members>
     <members>View_and_Edit_Converted_Leads</members>
     <members>View_Donations</members>
+    <members>View_Public_Folders</members>
     <members>View_Setup_Menu</members>
     <members>Wish_Budget_and_Wish_Expenses</members>
     <name>PermissionSet</name>
@@ -780,11 +783,15 @@
   </types>
   <types>
     <members>National_Medical_Advisor_profilePasswordPolicy1609888301616</members>
+    <members>National_Medical_Advisor_profilePasswordPolicy1611598583131</members>
     <members>Wish_Referral_Form_Spanish_Profile_profilePasswordPolicy1588954219544</members>
+    <members>Wish_Referral_Form_Spanish_Profile_profilePasswordPolicy1590617442414</members>
     <name>ProfilePasswordPolicy</name>
   </types>
   <types>
+    <members>null_profileSessionSetting1611598583181</members>
     <members>Wish_Referral_Form_Spanish_Profile_profileSessionSetting1588954219684</members>
+    <members>Wish_Referral_Form_Spanish_Profile_profileSessionSetting1590617442489</members>
     <name>ProfileSessionSetting</name>
   </types>
   <types>

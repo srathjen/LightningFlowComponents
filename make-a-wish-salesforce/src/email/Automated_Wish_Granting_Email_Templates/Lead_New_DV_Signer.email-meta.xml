@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
     <available>true</available>
-    <description>It will be used to inform the Lead record owner when a new DV signer information is received</description>
+    <description>It will be used to inform the Lead record owner when a new DV respondent information is received</description>
     <encodingKey>ISO-8859-1</encodingKey>
     <letterhead>Make_a_Wish_America</letterhead>
-    <name>Lead: New DV Signer</name>
+    <name>Lead: New DV Respondent</name>
     <style>freeForm</style>
-    <subject>New DV Signer has completed the DV for {!Lead.Name}</subject>
+    <subject>New DV respondent has completed the DV for {!Lead.Name}</subject>
     <type>html</type>
     <uiType>Aloha</uiType>
 </EmailTemplate>

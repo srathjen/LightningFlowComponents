@@ -184,6 +184,24 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Has_Med_Questions_w_Qualifying_Response__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Set to True if the Condition Description Has Medical Questions with Qualifying Response</description>
+        <externalId>false</externalId>
+        <label>Has Med Questions w Qualifying Response</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Has_Medical_Questions__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Set to True if the Condition Description has related Medical Questions</description>
+        <externalId>false</externalId>
+        <label>Has Medical Questions</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>InActive__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
@@ -211,6 +229,33 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Qualification_Level__c</fullName>
+        <description>Captures the Qualification Level for the Condition Description</description>
+        <externalId>false</externalId>
+        <formula>IF( Has_Medical_Questions__c = FALSE  &amp;&amp;  Qualify_If_No_Questions__c = FALSE, "Needs Review Without Specific Questions",
+IF( Has_Medical_Questions__c = FALSE  &amp;&amp;  Qualify_If_No_Questions__c = TRUE, "Auto Qualify Without Questions",
+IF( Has_Med_Questions_w_Qualifying_Response__c = TRUE, "Auto Qualify Conditional on Questions", "Needs Review With Specific Questions")))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Set automatically based on the values in the following fields:
+Qualify If No Questions
+Has Medical Questions 
+Has Med Questions w Qualifying Response</inlineHelpText>
+        <label>Qualification Level</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Qualify_If_No_Questions__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Set to True if the Condition Description Qualifies without Medical Questions</description>
+        <externalId>false</externalId>
+        <label>Qualify If No Questions</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Treatment_Subspecialty__c</fullName>
