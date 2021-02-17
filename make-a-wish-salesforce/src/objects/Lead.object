@@ -5447,7 +5447,7 @@ IF (Text(Status) = "DNQ", DNQ_Date__c , NULL))</formula>
         <description>This will capture the date when the lead status is changed from Referred to Part A Sent</description>
         <externalId>false</externalId>
         <inlineHelpText>Date when DV is sent to Medical Professional</inlineHelpText>
-        <label>DV Sent</label>
+        <label>Last DV Sent Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
