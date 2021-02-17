@@ -1,0 +1,325 @@
+<!--
+ - @description Additional Medical Questions component, the additional medical questions component for the Diagnosis Verification process.
+ - @author Gustavo Mayer, Traction on Demand
+ - @createdDate 08/Feb/2021
+-->
+<template>
+  <div class="container">
+    <header class="header">
+      <h1>ADDITIONAL MEDICAL QUESTIONS</h1>
+    </header>
+
+    <section class="form" if:true={leadId}>
+      <label
+        class="slds-form-element__legend slds-form-element__label unplannedHospitalAdmissions"
+      >
+        {unplannedHospitalAdmissionsLabel}
+      </label>
+      <lightning-combobox
+        class="field unplannedHospitalAdmissions"
+        label=""
+        placeholder="Please Select"
+        value={unplannedHospitalAdmissions}
+        options={yesOrNoOptions}
+        onchange={handleChangeUnplannedHospitalAdmissions}
+        required={isUnplannedHospitalAdmissionsRequired}
+        variant="label-hidden"
+      ></lightning-combobox>
+      <label
+        class="slds-form-element__legend slds-form-element__label timesChildAdmitted"
+      >
+        {timesChildAdmittedLabel}
+      </label>
+      <lightning-input
+        class="field timesChildAdmitted"
+        type="text"
+        label=""
+        value={timesChildAdmitted}
+        onchange={handleChangeTimesChildAdmitted}
+        pattern="[0-9]*"
+        max-length="3"
+        message-when-pattern-mismatch="Please type only numbers"
+        required={isTimesChildAdmittedRequired}
+        variant="label-hidden"
+      ></lightning-input>
+      <label
+        class="slds-form-element__legend slds-form-element__label admittedDiagnosis"
+      >
+        {admittedDiagnosisLabel}
+      </label>
+      <lightning-textarea
+        class="field admittedDiagnosis"
+        label=""
+        value={admittedDiagnosis}
+        onchange={handleChangeAdmittedDiagnosis}
+        max-length="255"
+        required={isAdmittedDiagnosisRequired}
+        variant="label-hidden"
+      ></lightning-textarea>
+      <label
+        class="slds-form-element__legend slds-form-element__label hospitalizationAdmissionIcu"
+      >
+        {hospitalizationAdmissionIcuLabel}
+      </label>
+      <lightning-combobox
+        class="field hospitalizationAdmissionIcu"
+        label=""
+        placeholder="Please Select"
+        value={hospitalizationAdmissionIcu}
+        onchange={handleChangeHospitalizationAdmissionIcu}
+        options={yesOrNoOptions}
+        required={isHospitalizationAdmissionIcuRequired}
+        variant="label-hidden"
+      ></lightning-combobox>
+      <label
+        class="slds-form-element__legend slds-form-element__label additionalClinicalDetails"
+      >
+        {additionalClinicalDetailsLabel}
+      </label>
+      <lightning-textarea
+        class="field additionalClinicalDetails"
+        label=""
+        value={additionalClinicalDetails}
+        onchange={handleChangeAdditionalClinicalDetails}
+        max-length="255"
+        required={isAdditionalClinicalDetailsRequired}
+        variant="label-hidden"
+      ></lightning-textarea>
+      <div class="fieldDetails">{additionalClinicalDetailsSecondLabel}</div>
+      <label
+        class="slds-form-element__legend slds-form-element__label statementDescribePatient"
+        >{statementDescribePatientLabel}</label
+      >
+      <div class="slds-form-element__control">
+        <div class="slds-radio">
+          <lightning-radio-group
+            class="field statementDescribePatient"
+            type="radio"
+            name="radioGroup"
+            label=""
+            options={statementDescribePatientOptions}
+            value={statementDescribePatient}
+            onchange={handleChangeStatementDescribePatient}
+            required={isStatementDescribePatientRequired}
+            variant="label-hidden"
+          ></lightning-radio-group>
+        </div>
+      </div>
+      <label
+        class="slds-form-element__legend slds-form-element__label expectConditionDeteriorate"
+      >
+        {expectConditionDeteriorateLabel}
+      </label>
+      <lightning-combobox
+        class="field expectConditionDeteriorate"
+        label=""
+        placeholder="Please Select"
+        value={expectConditionDeteriorate}
+        onchange={handleChangeExpectConditionDeteriorate}
+        options={yesOrNoOrNotSureOptions}
+        required={isExpectConditionDeteriorateRequired}
+        variant="label-hidden"
+      ></lightning-combobox>
+      <label
+        class="slds-form-element__legend slds-form-element__label expectConditionDeteriorateExplain"
+      >
+        {expectConditionDeteriorateExplainLabel}
+      </label>
+      <lightning-textarea
+        class="field expectConditionDeteriorateExplain"
+        label=""
+        value={expectConditionDeteriorateExplain}
+        onchange={handleChangeExpectConditionDeteriorateExplain}
+        max-length="32768"
+        required={isExpectConditionDeteriorateExplainRequired}
+        variant="label-hidden"
+      ></lightning-textarea>
+      <label
+        class="slds-form-element__legend slds-form-element__label medicalExpediteProcess"
+      >
+        {medicalExpediteProcessLabel}
+      </label>
+      <lightning-combobox
+        class="field medicalExpediteProcess"
+        label=""
+        placeholder="Please Select"
+        value={medicalExpediteProcess}
+        onchange={handleChangeMedicalExpediteProcess}
+        options={yesOrNoOrNotSureOptions}
+        required={isMedicalExpediteProcessRequired}
+        variant="label-hidden"
+      ></lightning-combobox>
+      <label
+        class="slds-form-element__legend slds-form-element__label medicalExpediteProcessReason"
+      >
+        {medicalExpediteProcessReasonLabel}
+      </label>
+      <lightning-textarea
+        class="field medicalExpediteProcessReason"
+        label=""
+        value={medicalExpediteProcessReason}
+        onchange={handleChangeMedicalExpediteProcessReason}
+        max-length="32768"
+        required={isMedicalExpediteProcessReasonRequired}
+        variant="label-hidden"
+      ></lightning-textarea>
+      <label
+        class="slds-form-element__legend slds-form-element__label provideTimeFrameWish"
+      >
+        {provideTimeFrameWishLabel}
+      </label>
+      <lightning-combobox
+        class="field provideTimeFrameWish"
+        label=""
+        placeholder="Please Select"
+        value={provideTimeFrameWish}
+        onchange={handleChangeProvideTimeFrameWish}
+        options={provideTimeFrameWishOptions}
+        required={isProvideTimeFrameWishRequired}
+        variant="label-hidden"
+      ></lightning-combobox>
+      <label
+        class="slds-form-element__legend slds-form-element__label provideTimeFrameWishInformation"
+      >
+        {provideTimeFrameWishInformationLabel}
+      </label>
+      <lightning-textarea
+        class="field provideTimeFrameWishInformation"
+        label=""
+        value={provideTimeFrameWishInformation}
+        onchange={handleChangeProvideTimeFrameWishInformation}
+        max-length="32768"
+        required={isProvideTimeFrameWishInformationRequired}
+        variant="label-hidden"
+      ></lightning-textarea>
+      <label class="slds-form-element__legend slds-form-element__label">
+        {medicalSummaryAttachmentLabel}
+      </label>
+      <lightning-input
+        class="field"
+        type="text"
+        label=""
+        value="PLACEHOLDER FOR FILE UPLOAD"
+        onchange={handleChangeMedicalSummaryAttachment}
+        variant="label-hidden"
+      ></lightning-input>
+      <label
+        class="slds-form-element__legend slds-form-element__label additionalInfoProvide"
+      >
+        {additionalInfoProvideLabel}
+      </label>
+      <lightning-textarea
+        class="field additionalInfoProvide"
+        label=""
+        value={additionalInfoProvide}
+        onchange={handleChangeAdditionalInfoProvide}
+        max-length="32768"
+        required={isAdditionalInfoProvideRequired}
+        variant="label-hidden"
+      ></lightning-textarea>
+      <div class="fieldDetails">{additionalInfoProvideSecondLabel}</div>
+      <label
+        class="slds-form-element__legend slds-form-element__label cognitiveDelay"
+      >
+        {cognitiveDelayLabel}
+      </label>
+      <lightning-combobox
+        class="field cognitiveDelay"
+        label=""
+        placeholder="Please Select"
+        value={cognitiveDelay}
+        onchange={handleChangeCognitiveDelay}
+        options={cognitiveDelayOptions}
+        required={isCognitiveDelayRequired}
+        variant="label-hidden"
+      ></lightning-combobox>
+      <div class="fieldDetails">{cognitiveDelaySecondLabel}</div>
+      <label
+        class="slds-form-element__legend slds-form-element__label levelOfDelay"
+      >
+        {levelOfDelayLabel}
+      </label>
+      <lightning-combobox
+        class="field levelOfDelay"
+        label=""
+        placeholder="Please Select"
+        value={levelOfDelay}
+        onchange={handleChangeLevelOfDelay}
+        options={levelOfDelayOptions}
+        required={isLevelOfDelayRequired}
+        variant="label-hidden"
+      ></lightning-combobox>
+      <label
+        class="slds-form-element__legend slds-form-element__label speechLanguageDelay"
+      >
+        {speechLanguageDelayLabel}
+      </label>
+      <lightning-combobox
+        class="field speechLanguageDelay"
+        label=""
+        placeholder="Please Select"
+        value={speechLanguageDelay}
+        onchange={handleChangeSpeechLanguageDelay}
+        options={speechLanguageDelayOptions}
+        required={isSpeechLanguageDelayRequired}
+        variant="label-hidden"
+      ></lightning-combobox>
+      <label
+        class="slds-form-element__legend slds-form-element__label expressNeedsDesires"
+      >
+        {expressNeedsDesiresLabel}
+      </label>
+      <lightning-combobox
+        class="field expressNeedsDesires"
+        label=""
+        placeholder="Please Select"
+        value={expressNeedsDesires}
+        onchange={handleChangeExpressNeedsDesires}
+        options={expressNeedsDesiresOptions}
+        required={isExpressNeedsDesiresRequired}
+        variant="label-hidden"
+      ></lightning-combobox>
+      <label
+        class="slds-form-element__legend slds-form-element__label describeCommunicationNeeds"
+        >{describeCommunicationNeedsLabel}</label
+      >
+      <div class="slds-form-element__control">
+        <div class="slds-checkbox">
+          <lightning-checkbox-group
+            class="field describeCommunicationNeeds"
+            name="describeCommunicationNeedsCheckboxGroup"
+            label=""
+            value={describeCommunicationNeeds}
+            onchange={handleChangeDescribeCommunicationNeeds}
+            options={describeCommunicationNeedsOptions}
+            required={isDescribeCommunicationNeedsRequired}
+            variant="label-hidden"
+          ></lightning-checkbox-group>
+        </div>
+      </div>
+      <label
+        class="slds-form-element__legend slds-form-element__label describeCommunicationNeedsInformation"
+      >
+        {describeCommunicationNeedsInformationLabel}
+      </label>
+      <lightning-textarea
+        class="field describeCommunicationNeedsInformation"
+        label=""
+        value={describeCommunicationNeedsInformation}
+        onchange={handleChangeDescribeCommunicationNeedsInformation}
+        max-length="32768"
+        required={isDescribeCommunicationNeedsInformationRequired}
+        variant="label-hidden"
+      ></lightning-textarea>
+    </section>
+
+    <section class="actions" if:true={leadId}>
+      <input
+        type="button"
+        onclick={handleClickSave}
+        class="buttonSave"
+        value="SAVE"
+      />
+    </section>
+  </div>
+</template>
