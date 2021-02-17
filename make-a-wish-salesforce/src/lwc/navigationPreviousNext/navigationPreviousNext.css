@@ -1,0 +1,9 @@
+.container {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.actionsRight {
+  float: right;
+  padding-left: 5px;
+}

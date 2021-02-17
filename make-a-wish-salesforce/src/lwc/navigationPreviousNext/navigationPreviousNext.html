@@ -1,0 +1,26 @@
+<!--
+ - @description Previous/Next navigation component, usages for paginating with previous/next.
+ - @author Gustavo Mayer, Traction on Demand
+ - @createdDate 08/Feb/2021
+-->
+<template>
+  <lightning-button
+    if:true={hasPrevious}
+    value="previous"
+    class="actionPrevious"
+    label="Previous"
+    variant="neutral"
+    onclick={handleNavigation}
+  >
+  </lightning-button>
+  <lightning-button
+    if:true={hasNext}
+    value="next"
+    class="actionsRight"
+    label="Next"
+    variant="brand"
+    disabled={isNextStepBlocked}
+    onclick={handleNavigation}
+  >
+  </lightning-button>
+</template>

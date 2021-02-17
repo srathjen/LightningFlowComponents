@@ -1,0 +1,7 @@
+<aura:documentation>
+  <aura:description>Documentation</aura:description>
+  <aura:example name="Form Out" ref="formOutDocumentation" label="Label">
+    Form Out is a Application placeholder Aura Application to be able to use
+    Lightning Out between VisualForce page and Lightning Web Components
+  </aura:example>
+</aura:documentation>
