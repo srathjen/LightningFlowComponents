@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -195,12 +194,25 @@
         <fullName>Data_Type__c</fullName>
         <externalId>false</externalId>
         <label>Data Type</label>
-        <length>20</length>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Comment Box</fullName>
+                    <default>false</default>
+                    <label>Comment Box</label>
+                </value>
+                <value>
+                    <fullName>Picklist - Single</fullName>
+                    <default>false</default>
+                    <label>Picklist - Single</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Epilepsy_picklist__c</fullName>
@@ -212,6 +224,51 @@
         <trackTrending>false</trackTrending>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Next_Action__c</fullName>
+        <description>Captures the action the system should take upon receiving a response to this question.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Next Action is only used in conjunction with Data Type "Comment Box"</inlineHelpText>
+        <label>Next Action</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Data_Type__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Next Question in Sort Order</fullName>
+                    <default>false</default>
+                    <label>Next Question in Sort Order</label>
+                </value>
+                <value>
+                    <fullName>Specified Question</fullName>
+                    <default>false</default>
+                    <label>Specified Question</label>
+                </value>
+                <value>
+                    <fullName>Stop</fullName>
+                    <default>false</default>
+                    <label>Stop</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Comment Box</controllingFieldValue>
+                <valueName>Next Question in Sort Order</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Comment Box</controllingFieldValue>
+                <valueName>Specified Question</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Comment Box</controllingFieldValue>
+                <valueName>Stop</valueName>
+            </valueSettings>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Picklist_values__c</fullName>
@@ -257,6 +314,62 @@
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Specified_Question__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Captures the next question if the Next Action is denoted as Next Specified Question.</description>
+        <externalId>false</externalId>
+        <label>Specified Question</label>
+        <referenceTo>Medical_Questions__c</referenceTo>
+        <relationshipLabel>Medical Questions</relationshipLabel>
+        <relationshipName>Medical_Questions</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Travel_Question_Group__c</fullName>
+        <description>Determines the medical category that a Travel Algorithm record will display in on the DV form.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines the medical category that a Travel Algorithm record will display in on the DV form.</inlineHelpText>
+        <label>Travel Question Group</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Respiratory System</fullName>
+                    <default>false</default>
+                    <label>Respiratory System</label>
+                </value>
+                <value>
+                    <fullName>Circulatory System and Heart</fullName>
+                    <default>false</default>
+                    <label>Circulatory System and Heart</label>
+                </value>
+                <value>
+                    <fullName>Gastrointestinal System/Liver</fullName>
+                    <default>false</default>
+                    <label>Gastrointestinal System/Liver</label>
+                </value>
+                <value>
+                    <fullName>Nervous System</fullName>
+                    <default>false</default>
+                    <label>Nervous System</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Wrapper_Variable__c</fullName>
@@ -310,7 +423,30 @@
         <description>It contains the list of current conditions for travel algorithm</description>
         <label>Travel Algorithm</label>
     </recordTypes>
-    <searchLayouts/>
+    <searchLayouts />
     <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Do_not_set_picklist_question_Responses</fullName>
+        <active>true</active>
+        <description>For Picklist questions, please specify the next action on each response option, not on the Medical Question.  Next Action on the Medical Question is for Comment question types only.</description>
+        <errorConditionFormula>(!ISBLANK(TEXT(Next_Action__c)) ||  !ISBLANK(Specified_Question__c)) &amp;&amp;  ISPICKVAL(Data_Type__c, "Picklist - Single")</errorConditionFormula>
+        <errorMessage>For Picklist questions, please specify the next action on each response record, not on the Medical Question record directly.  Next Action + Specified Questions on the Medical Question record are for Comment question types only.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Next_Action_is_Question_select_Question</fullName>
+        <active>true</active>
+        <description>If the Next Action is a Specified Question, please select a Medical Question.</description>
+        <errorConditionFormula>ISPICKVAL(Next_Action__c, "Specified Question") &amp;&amp;  ISBLANK(Specified_Question__c)</errorConditionFormula>
+        <errorDisplayField>Specified_Question__c</errorDisplayField>
+        <errorMessage>If the Next Action is a Specified Question, please select a Medical Question.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Next_Action_not_a_question_no_question</fullName>
+        <active>true</active>
+        <description>If the Next Action is not a specified question, please leave the specified question field blank.</description>
+        <errorConditionFormula>!ISPICKVAL( Next_Action__c , "Specified Question") &amp;&amp; !ISBLANK( Specified_Question__c)</errorConditionFormula>
+        <errorDisplayField>Specified_Question__c</errorDisplayField>
+        <errorMessage>If the Next Action is not a specified question, please leave the specified question field blank.</errorMessage>
+    </validationRules>
     <visibility>Public</visibility>
 </CustomObject>
