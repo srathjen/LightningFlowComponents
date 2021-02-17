@@ -27713,7 +27713,7 @@
         <layout>npe4__Relationship_Error__c-npe4__Relationship Error Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>npe4__Relationship__c-npe4__Relationship Layout</layout>
+        <layout>npe4__Relationship__c-Relationship Layout - Volunteer</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>npe5__Affiliation__c-npe5__Affiliation Layout</layout>
