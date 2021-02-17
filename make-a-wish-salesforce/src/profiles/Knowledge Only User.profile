@@ -13620,6 +13620,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Medical_Questions__c.Next_Action__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Medical_Questions__c.Picklist_values__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -13636,6 +13641,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Medical_Questions__c.Sort_Order__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Medical_Questions__c.Specified_Question__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Medical_Questions__c.Travel_Question_Group__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -26019,6 +26034,9 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Macro-Macro Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Medical_Question_Response_Option__c-Medical Question Response %28Option%29 Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Medical_Questions__c-Medical Question Layout</layout>
