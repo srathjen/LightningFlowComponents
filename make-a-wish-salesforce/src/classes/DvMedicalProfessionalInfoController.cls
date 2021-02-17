@@ -9,8 +9,7 @@ public class DvMedicalProfessionalInfoController {
     public static MedicalProfessionalInformationWrapper getLeadMedicalProfessionalInformation(Id recordId) {
         MedicalProfessionalInformationWrapper dvMedicalInfoWrapper = new MedicalProfessionalInformationWrapper();
         
-        Lead dvLead = new Lead();
-        dvLead = [
+        Lead dvLead = [
             SELECT Id, Treating_Medical_Professional_First_Name__c, Treating_Medical_Professional_Last_Name__c,
             Hospital_Treatment_Facility_Treating__c, Hidden_DV_form_Medical_professional_Type__c,
             DV_Signer_First_Name__c, DV_Signer_Last_Name__c, DV_Signer_Phone__c, DV_Signer_Email__c,
@@ -20,7 +19,6 @@ public class DvMedicalProfessionalInfoController {
             I_am_Recognized_To_Practice_As_a__c, I_m_Part_of_The_Treating_HealthCare_Team__c
             FROM Lead 
             WHERE Id = :recordId
-            LIMIT 1
         ];
         
         if(dvLead != null) {
