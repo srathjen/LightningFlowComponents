@@ -4,12 +4,10 @@
 @createdDate 08/Feb/2021
 **/
 import { api, LightningElement, wire } from "lwc";
-import InputUtils from "c/inputUtils";
 import findAdditionalMedicalQuestions from "@salesforce/apex/DvAdditionalMedicalQuestionsController.getAdditionalMedicalQuestionsByLeadId";
 import saveAdditionalMedicalQuestions from "@salesforce/apex/DvAdditionalMedicalQuestionsController.saveAdditionalMedicalQuestions";
 
 export default class DvAdditionalMedicalQuestions extends LightningElement {
-  utils = new InputUtils();
 
   /**
    * PROPERTIES:
@@ -133,7 +131,7 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
 
   showHideUnplannedHospitalAdmissionFields(value) {
     const unplannedHospitalAdmissions = this.template.querySelectorAll(
-      ".unplannedHospitalAdmissions"
+        ".unplannedHospitalAdmissions"
     );
     const timesChildAdmitted = this.template.querySelectorAll(
       ".timesChildAdmitted"
