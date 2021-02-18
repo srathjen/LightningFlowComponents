@@ -4,6 +4,18 @@
         <visibility>ALL</visibility>
     </categoryGroupVisibilities>
     <classAccesses>
+        <apexClass>DiagnosisVerificationController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DvAdditionalMedicalQuestionsController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DvMedicalProfessionalInfoController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>AddVolunteerRole_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -1036,6 +1048,10 @@
         <enabled>false</enabled>
         <flow>Wish_Form_Email_Alert_on_Wish_Form_Create_Edit</flow>
     </flowAccesses>
+    <pageAccesses>
+        <apexPage>DiagnosisVerification</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
     <pageAccesses>
         <apexPage>AddVolunteerRole_VF</apexPage>
         <enabled>true</enabled>
