@@ -4,6 +4,18 @@
         <visibility>ALL</visibility>
     </categoryGroupVisibilities>
     <classAccesses>
+        <apexClass>DiagnosisVerificationController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DvAdditionalMedicalQuestionsController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DvMedicalProfessionalInfoController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>AddVolunteerRole_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -532,6 +544,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <custom>true</custom>
+    <pageAccesses>
+        <apexPage>DiagnosisVerification</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
     <pageAccesses>
         <apexPage>AddVolunteerRole_VF</apexPage>
         <enabled>true</enabled>

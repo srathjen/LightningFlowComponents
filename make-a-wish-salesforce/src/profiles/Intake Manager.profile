@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <classAccesses>
+        <apexClass>DiagnosisVerificationController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DvAdditionalMedicalQuestionsController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DvMedicalProfessionalInfoController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>AWSFilePathService</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -1293,6 +1305,10 @@
     </classAccesses>
     <custom>true</custom>
     <description>This profile is mainly used for the lightning users who would be using Lightning Experience</description>
+    <pageAccesses>
+        <apexPage>DiagnosisVerification</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
     <pageAccesses>
         <apexPage>AddVolunteerRole_VF</apexPage>
         <enabled>false</enabled>

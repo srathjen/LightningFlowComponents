@@ -160,6 +160,18 @@
         <visible>false</visible>
     </applicationVisibilities>
     <classAccesses>
+        <apexClass>DiagnosisVerificationController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DvAdditionalMedicalQuestionsController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DvMedicalProfessionalInfoController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>AddVolunteerRole_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -26903,6 +26915,10 @@
         <object>Wish_Affiliation__c</object>
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
+    <pageAccesses>
+        <apexPage>DiagnosisVerification</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
     <pageAccesses>
         <apexPage>AddVolunteerRole_VF</apexPage>
         <enabled>false</enabled>
