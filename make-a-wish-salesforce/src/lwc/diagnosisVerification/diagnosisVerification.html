@@ -22,9 +22,8 @@
     </template>
     <div if:false={isSubmitCanceled}>
       <!-- LOGIN -->
-      <section class="login" if:false={isLoginSuccessful}>
-        <!--Placeholder for Login Component-->
-        <c-dv-login></c-dv-login>
+      <section class="login section" if:false={isLoginSuccessful}>
+<!--        <c-dv-login></c-dv-login>-->
         <lightning-button
           label="Placeholder Login"
           onclick={handleLoginSuccessfulEvent}
@@ -36,11 +35,10 @@
         <div class="fixedSection">
           <div class="section">
             <h1>CHILD INFORMATION</h1>
-            <c-dv-child-information></c-dv-child-information>
+<!--            <c-dv-child-information></c-dv-child-information>-->
           </div>
           <div class="section">
             <h1>PROVIDED DIAGNOSIS SUMMARY</h1>
-            Placeholder for Provided Diagnosis Summary fields
           </div>
         </div>
 
@@ -74,7 +72,7 @@
 
         <!-- TRAVEL QUESTIONS COMPONENT -->
         <div class="slds-hide section step4">
-          <c-dv-travel-questions></c-dv-travel-questions>
+<!--          <c-dv-travel-questions></c-dv-travel-questions>-->
         </div>
       </section>
 

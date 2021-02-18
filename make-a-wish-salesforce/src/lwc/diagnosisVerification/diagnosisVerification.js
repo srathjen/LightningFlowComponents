@@ -57,9 +57,9 @@ export default class DiagnosisVerification extends LightningElement {
   }
 
   processStepNavigation(currentStepId) {
-    this.template
-      .querySelector("c-dv-child-information")
-      .handleLoadChildInformation(this.leadId);
+    // this.template
+    //   .querySelector("c-dv-child-information")
+    //   .handleLoadChildInformation(this.leadId);
     const step1 = this.template.querySelectorAll(".step1");
     this.hide(step1);
     const step2 = this.template.querySelectorAll(".step2");
@@ -81,9 +81,9 @@ export default class DiagnosisVerification extends LightningElement {
         .handleLoadAdditionalMedicalQuestions(this.leadId);
       this.show(step3);
     } else if (currentStepId === 4) {
-      this.template
-        .querySelector("c-dv-travel-questions")
-        .handleLoadTravelQuestions(this.leadId);
+      // this.template
+      //   .querySelector("c-dv-travel-questions")
+      //   .handleLoadTravelQuestions(this.leadId);
       this.show(step4);
     }
   }
