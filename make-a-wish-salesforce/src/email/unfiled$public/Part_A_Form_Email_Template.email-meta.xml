@@ -6,7 +6,7 @@
     <letterhead>Make_a_Wish_America</letterhead>
     <name>Diagnosis Verification Form Email Template</name>
     <style>freeForm</style>
-    <subject>**Signature Required** Make-A-Wish Diagnosis Verification form</subject>
+    <subject>**Action Required** Make-A-Wish Diagnosis Verification form</subject>
     <textOnly>Hi {!Lead.Treating_Medical_Professional_First_Name__c},
 
 Please Review the Diagnosis Verification and submit.
