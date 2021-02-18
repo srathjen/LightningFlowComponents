@@ -1,0 +1,53 @@
+<!--
+ - @description Path navigation component, usages for paginating with progress path.
+ - @author Gustavo Mayer, Traction on Demand
+ - @createdDate 08/Feb/2021
+-->
+<template>
+  <div class="container slds-path">
+    <div class="slds-grid slds-path__track">
+      <div class="slds-grid slds-path__scroller-container">
+        <div class="slds-path__scroller">
+          <div class="slds-path__scroller_inner">
+            <ul
+              class="slds-path__nav"
+              role="listbox"
+              aria-orientation="horizontal"
+            >
+              <template for:each={progressBarSteps} for:item="step">
+                <li
+                  key={step.id}
+                  class={step.style}
+                  role="presentation"
+                  data-id={step.id}
+                  onclick={handleNavigateToStep}
+                >
+                  <span
+                    aria-selected="false"
+                    class="slds-path__link"
+                    role="option"
+                    tabindex="-1"
+                    data-id={step.id}
+                  >
+                    <span class="slds-path__stage">
+                      <lightning-icon
+                        icon-name="utility:check"
+                        alternative-text="Complete"
+                        title="Check"
+                        variant="inverse"
+                        size="small"
+                      ></lightning-icon>
+                    </span>
+                    <span class="slds-path__title" data-id={step.id}
+                      >{step.label}</span
+                    >
+                  </span>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

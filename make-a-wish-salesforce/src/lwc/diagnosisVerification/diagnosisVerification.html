@@ -1,0 +1,99 @@
+<!--  
+ - @description Diagnosis Verification component, the parent component for the Diagnosis Verification process.
+ - @author Gustavo Mayer, Traction on Demand
+ - @createdDate 08/Feb/2021
+-->
+<template>
+  <div class="notification">
+    <c-notification-toast
+      notification-config={notificationConfig}
+    ></c-notification-toast>
+  </div>
+  <div class="container slds-is-relative">
+    <!-- DISPLAY SPINNER -->
+    <template if:true={isShowSpinner}>
+      <div>
+        <lightning-spinner
+          alternative-text="Loading"
+          size="large"
+          variant="brand"
+        ></lightning-spinner>
+      </div>
+    </template>
+    <div if:false={isSubmitCanceled}>
+      <!-- LOGIN -->
+      <section class="login section" if:false={isLoginSuccessful}>
+<!--        <c-dv-login></c-dv-login>-->
+        <lightning-button
+          label="Placeholder Login"
+          onclick={handleLoginSuccessfulEvent}
+        ></lightning-button>
+      </section>
+
+      <section class="main" if:true={isLoginSuccessful}>
+        <!-- SUMMARY -->
+        <div class="fixedSection">
+          <div class="section">
+            <h1>CHILD INFORMATION</h1>
+<!--            <c-dv-child-information></c-dv-child-information>-->
+          </div>
+          <div class="section">
+            <h1>PROVIDED DIAGNOSIS SUMMARY</h1>
+          </div>
+        </div>
+
+        <!-- NAVIGATION PROGRESS PATH -->
+        <c-navigation-progress-path
+          if:true={isShowNavigation}
+          process={process}
+          onnavigationstepevent={handleNavigationStepEvent}
+        ></c-navigation-progress-path>
+
+        <!-- MEDICAL PROFESSIONAL INFORMATION COMPONENT -->
+        <div class="slds-hide section step1">
+          <c-dv-medical-professional-information
+            oncancelsubmit={handleCancelSubmit}
+            onshowspinner={handleShowSpinner}
+            onsavemedicalprofessionalinformationevent={handleSaveMedicalProfessionalInformationEvent}
+          ></c-dv-medical-professional-information>
+        </div>
+
+        <!-- DIAGNOSIS COMPONENT -->
+        <div class="slds-hide section step2">
+          Placeholder for Diagnosis component
+        </div>
+
+        <!-- ADDITIONAL MEDICAL QUESTIONS COMPONENT -->
+        <div class="slds-hide section step3">
+          <c-dv-additional-medical-questions
+            onsaveadditionalmedicalquestions={handleSaveAdditionalMedicalQuestionsEvent}
+          ></c-dv-additional-medical-questions>
+        </div>
+
+        <!-- TRAVEL QUESTIONS COMPONENT -->
+        <div class="slds-hide section step4">
+<!--          <c-dv-travel-questions></c-dv-travel-questions>-->
+        </div>
+      </section>
+
+      <!-- DIAGNOSIS VERIFICATION ACTIONS -->
+      <section class="actions" if:true={isLoginSuccessful}>
+        <c-navigation-previous-next
+          if:true={isShowNavigation}
+          onnavigationstepevent={handleNavigationStepEvent}
+          process={process}
+        ></c-navigation-previous-next>
+      </section>
+    </div>
+  </div>
+
+  <!-- CANCELED SUBMISSION SECTION-->
+  <div class="cancelSection" if:true={isSubmitCanceled}>
+    <p class="cancelMessage">
+      Your form has been successfully saved. If you would like more information,
+      please contact your local Make-A-Wish chapter. Click
+      <a href="https://wish.org/local-chapters"> here</a> for a local chapter
+      directory.
+    </p>
+  </div>
+</template>

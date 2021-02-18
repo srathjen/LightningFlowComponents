@@ -1,0 +1,103 @@
+<!-- 
+ * @description Diagnosis Verification VisualForce page
+ * @author Gustavo Mayer, Traction on Demand
+ * @createdDate 08/Feb/2021
+ -->
+<apex:page id="DiagnosisVerification" applyBodyTag="false" sidebar="false" showHeader="false"
+           docType="html-5.0" standardStylesheets="false" title="Make-A-Wish | Diagnosis Verification Form"
+           cache="false">
+    <apex:slds />
+    <apex:includeLightning />
+    <style>
+        #container {
+            display: none;
+        }
+    </style>
+    <body id="container">
+        <span>
+            <header role="main-header" class="container">
+                <div class="row">
+                    <nav class="col-xs-3 col-xs-offset-9 pre-nav" role="top_menubar"></nav>
+                </div>
+                <div class="row">
+                    <apex:outputLink styleClass="center-block maw-logo" value="">
+                        <span class="sr-only" aria-label="Make-A-Wish">Make-A-Wish&reg;</span>
+                    </apex:outputLink>
+                </div>
+                <nav class="navbar navbar-dark sub-nav">
+                    <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar">
+                    </div>
+                </nav>
+            </header>
+        </span>
+        <main role="main" class="container">
+            <div class="row">
+                <h1 class="col-md-12">Diagnosis Verification</h1>
+            </div>
+
+            <div id='diagnosisVerificationComponent'></div>
+        </main>
+        <span>
+            <footer class="container-fluid">
+                <div class="container">
+                    <section class="row">
+                        <div class="col-md-4 col-md-push-4">
+                            <a class=" btn-md cnt" href="https://wish.org/wishes/stay-in-touch">
+                                <div class="col-xs-8 rich-text">
+                                    <span class="title">Stay In Touch!</span>
+                                    <span class="detail">Sign up to receive email from Make-A-Wish.</span>
+                                </div>
+                            </a>
+                        </div>
+                    </section>
+                    <section class="row legal">
+                        <span class="col-sm-1 col-md-2 col-lg-1">
+                            <a class="bbb"
+                               href="http://wish.org/about-us/making-a-difference/managing-funds/better-business-bureau">
+                                <span class="sr-only">Better Business Bureau</span>
+                            </a>
+                        </span>
+                        <div class="col-sm-11 col-md-10 col-lg-11">
+                            <p>&copy;2006-2016 Make-A-Wish Foundation of America<br/>
+                                Make-A-Wish Foundation of America is an Arizona nonprofit corporation exempt from federal income tax under Section 501(c)(3) of the Internal Revenue Code.<br/>
+                                <a href="https://wish.org/content/terms-and-policy">Privacy Policy &amp; Terms</a> | <a
+                                        href="https://wish.org/content/faq">FAQ</a></p>
+                        </div>
+                    </section>
+                </div>
+            </footer>
+        </span>
+        <script>
+            window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.min.js')}"><\/script>')</script>
+        <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, 'web/js/bootstrap.min.js')}"><\/script>')</script>
+        <script>
+            (function ($, root, undefined) {
+                // prepend meta/link tags before VF head output
+                $('head').prepend('<meta http-equiv="x-ua-compatible" content="ie=edge" /><meta http-equiv="content-type" content="text/html; charset=utf-8" /><meta name="HandheldFriendly" content="True" /><meta name="MobileOptimized" content="480" /><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" /><meta http-equiv="cleartype" content="on" />');
+                $('style').before('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous" /><link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css"/><link rel="stylesheet" href="{!URLFOR($Resource.prospective_assets, 'web/css/chosen.min.css')}"/><link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.prospective_assets, 'web/css/core.css')}" media="all">');
+                $(document).ready(function () {
+                    $(window).keydown(function (event) {
+                        if (event.keyCode == 13 && !$('.password')) {
+                            event.preventDefault();
+                            return false;
+                        }
+                    });
+                });
+            })(jQuery);
+
+            function createLightningComponent(app, component, elementId, params) {
+                const leadId = params.leadId;
+                $Lightning.use(app, function () {
+                    $Lightning.createComponent(component,
+                        {leadId: leadId},
+                        elementId,
+                        function () {
+                            document.getElementById("container").style.display = 'block';
+                        });
+                });
+            }
+
+            createLightningComponent('c:FormOut', 'c:diagnosisVerification', 'diagnosisVerificationComponent', {leadId: '{!$CurrentPage.parameters.leadId}'});
+        </script>
+    </body>
+</apex:page>

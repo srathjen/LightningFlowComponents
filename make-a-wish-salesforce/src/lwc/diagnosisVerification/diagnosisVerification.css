@@ -1,0 +1,36 @@
+.fixedSection > div > h1 {
+  font-family: "Droid Serif", serif;
+  font-size: 1rem;
+  color: #75787b;
+}
+
+.section {
+  padding: 5px;
+  border: 1px solid #bbbcbc;
+  margin-bottom: 10px;
+}
+
+.fixedSection {
+  display: flex;
+}
+
+.fixedSection > div {
+  width: 50%;
+}
+
+.notification {
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+}
+
+.cancelSection {
+  padding: 30px;
+  border: 1px solid #bbbcbc;
+}
+
+.cancelMessage {
+  font-family: "Lato", Arial, sans-serif;
+  font-size: 16px;
+  color: #75787b;
+}
