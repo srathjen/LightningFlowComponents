@@ -3,8 +3,9 @@
  *
  * @author          MST Solutions
  * @createdDate     unknown
+ * 02/17/2020 SIW-836
  */
-public with sharing class ForgotPasswordController {
+public class ForgotPasswordController {
     public String username { get; set; }
     public Boolean displayAckMsg { get; set; }
     public Boolean success;
