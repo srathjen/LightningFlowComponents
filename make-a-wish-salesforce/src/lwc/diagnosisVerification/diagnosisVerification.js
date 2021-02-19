@@ -21,11 +21,11 @@ export default class DiagnosisVerification extends LightningElement {
     message: "",
     variant: "success",
     autoClose: true,
-    autoCloseErrorWarning: true
+    autoCloseErrorWarning: true,
   };
 
   @wire(findDiagnosisVerification, {
-    leadId: "$_leadId"
+    leadId: "$_leadId",
   })
   wired(result) {
     if (result.data) {
@@ -37,9 +37,22 @@ export default class DiagnosisVerification extends LightningElement {
     }
   }
 
-  handleLoginSuccessfulEvent() {
-    this._leadId = this.leadId;
-    this.isLoginSuccessful = true;
+  handleLoginEvent(event) {
+    const login = event.detail;
+    if(login.isLoginSuccessful){
+      this._leadId = this.leadId;
+      this.isLoginSuccessful = true;
+    } else {
+      this.isLoginSuccessful = false;
+      this.notificationConfig = {
+        title: login.message,
+        message: "",
+        variant: "error",
+        autoClose: true,
+        autoCloseErrorWarning: true,
+      };
+      this.template.querySelector("c-notification-toast").showCustomNotice();
+    }
   }
 
   handleNavigationStepEvent(event) {
@@ -50,7 +63,7 @@ export default class DiagnosisVerification extends LightningElement {
         message: "",
         variant: "error",
         autoClose: true,
-        autoCloseErrorWarning: true
+        autoCloseErrorWarning: true,
       };
       this.template.querySelector("c-notification-toast").showCustomNotice();
     } else {
@@ -113,7 +126,7 @@ export default class DiagnosisVerification extends LightningElement {
 
     if (event.detail.medicalProfessionalInformation) {
       const {
-        partOfHealthcareTeam
+        partOfHealthcareTeam,
       } = event.detail.medicalProfessionalInformation;
       if (partOfHealthcareTeam === "Yes") {
         this.process = {
@@ -122,12 +135,12 @@ export default class DiagnosisVerification extends LightningElement {
             {
               id: 1,
               label: "Medical Professional Information",
-              status: "active"
+              status: "active",
             },
             { id: 2, label: "Diagnosis", status: "active" },
             { id: 3, label: "Additional Medical Questions", status: "active" },
-            { id: 4, label: "Travel Questions", status: "active" }
-          ]
+            { id: 4, label: "Travel Questions", status: "active" },
+          ],
         };
       } else {
         this.process = {
@@ -136,16 +149,16 @@ export default class DiagnosisVerification extends LightningElement {
             {
               id: 1,
               label: "Medical Professional Information",
-              status: "active"
+              status: "active",
             },
             { id: 2, label: "Diagnosis", status: "incomplete" },
             {
               id: 3,
               label: "Additional Medical Questions",
-              status: "incomplete"
+              status: "incomplete",
             },
-            { id: 4, label: "Travel Questions", status: "incomplete" }
-          ]
+            { id: 4, label: "Travel Questions", status: "incomplete" },
+          ],
         };
       }
     }
@@ -164,7 +177,7 @@ export default class DiagnosisVerification extends LightningElement {
       message: "Please click ‘Submit’ to complete Diagnosis Verification.",
       variant: "success",
       autoClose: true,
-      autoCloseErrorWarning: true
+      autoCloseErrorWarning: true,
     };
     this.template.querySelector("c-notification-toast").showCustomNotice();
   }

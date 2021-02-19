@@ -8,7 +8,6 @@ import findAdditionalMedicalQuestions from "@salesforce/apex/DvAdditionalMedical
 import saveAdditionalMedicalQuestions from "@salesforce/apex/DvAdditionalMedicalQuestionsController.saveAdditionalMedicalQuestions";
 
 export default class DvAdditionalMedicalQuestions extends LightningElement {
-
   /**
    * PROPERTIES:
    */
@@ -112,6 +111,9 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
       );
       this.showHideExpressNeedsDesiresFields(this.expressNeedsDesires);
 
+      const fileManager = this.template.querySelector("c-file-manager");
+      fileManager.handleLoadFileManager(this.leadId);
+
       this.setRequiredFields();
     } else if (result.error) {
       console.error(result.error);
@@ -131,7 +133,7 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
 
   showHideUnplannedHospitalAdmissionFields(value) {
     const unplannedHospitalAdmissions = this.template.querySelectorAll(
-        ".unplannedHospitalAdmissions"
+      ".unplannedHospitalAdmissions"
     );
     const timesChildAdmitted = this.template.querySelectorAll(
       ".timesChildAdmitted"
@@ -296,11 +298,6 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
 
   handleChangeProvideTimeFrameWishInformation(event) {
     this.provideTimeFrameWishInformation = event.target.value;
-    this.setRequiredFields();
-  }
-
-  handleChangeMedicalSummaryAttachment(event) {
-    this.medicalSummaryAttachment = event.target.value;
     this.setRequiredFields();
   }
 
@@ -747,6 +744,10 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
 
   get medicalSummaryAttachmentLabel() {
     return `MEDICAL SUMMARY (RECENT ECHO/MRI REPORTS MAY ALSO BE HELPFUL, DEPENDING ON DIAGNOSIS):`;
+  }
+
+  get medicalSummaryAttachmentSecondLabel() {
+    return `File upload might take a while, please click refresh if you do not see your file.`;
   }
 
   get additionalInfoProvideLabel() {
