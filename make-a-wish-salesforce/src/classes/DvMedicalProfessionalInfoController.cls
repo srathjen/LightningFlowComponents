@@ -10,8 +10,7 @@ public class DvMedicalProfessionalInfoController {
         MedicalProfessionalInformationWrapper dvMedicalInfoWrapper = new MedicalProfessionalInformationWrapper();
         
         Lead dvLead = [
-            SELECT Id, Treating_Medical_Professional_First_Name__c, Treating_Medical_Professional_Last_Name__c,
-            Hospital_Treatment_Facility_Treating__c, Hidden_DV_form_Medical_professional_Type__c,
+            SELECT Id, Treating_MP_HTF__r.Name, Hidden_DV_form_Medical_professional_Type__c,
             DV_Signer_First_Name__c, DV_Signer_Last_Name__c, DV_Signer_Phone__c, DV_Signer_Email__c,
             Treating_MP__r.FirstName, Treating_MP__r.LastName, Referring_MP__r.FirstName, Referring_MP__r.LastName,
             Best_Contact__r.FirstName, Best_Contact__r.LastName, ALT_1_MP__r.FirstName, ALT_1_MP__r.LastName, 
@@ -24,9 +23,9 @@ public class DvMedicalProfessionalInfoController {
         if(dvLead != null) {
             dvMedicalInfoWrapper.leadId = dvLead.Id;
             dvMedicalInfoWrapper.leadRecordTypeId = dvLead.RecordTypeId;
-            dvMedicalInfoWrapper.treatingMpName = dvLead.Treating_Medical_Professional_First_Name__c + ' ' + 
-                dvLead.Treating_Medical_Professional_Last_Name__c;
-            dvMedicalInfoWrapper.treatingHtfName = dvLead.Hospital_Treatment_Facility_Treating__c;
+            dvMedicalInfoWrapper.treatingMpName = dvLead.Treating_MP__r.FirstName + ' ' + 
+                dvLead.Treating_MP__r.LastName;
+            dvMedicalInfoWrapper.treatingHtfName = dvLead.Treating_MP_HTF__r.Name;
             dvMedicalInfoWrapper.practicingMpType = dvLead.I_am_Recognized_To_Practice_As_a__c;
             dvMedicalInfoWrapper.partOfHealthcareTeam = dvLead.I_m_Part_of_The_Treating_HealthCare_Team__c;
             dvMedicalInfoWrapper.changedDvSigner = dvLead.DV_Signer_Changed__c;

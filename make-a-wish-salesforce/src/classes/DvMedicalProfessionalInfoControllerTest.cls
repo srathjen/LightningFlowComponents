@@ -10,11 +10,14 @@ private class DvMedicalProfessionalInfoControllerTest {
     private static void setup() {
         trac_TriggerHandlerBase.blockTrigger = true;
         
-        List<Account> accounts = TestDataFactory.createAccount(1);
+        List<Account> accounts = TestDataFactory.createAccount(2);
         Account accountAz = accounts.get(0);
         accountAz.Name = 'Make-A-Wish Arizona';
         accountAz.RecordTypeId = Constant_AC.CHAPTER_RT_ID;
         accountAz.Onboarded_on_SF__c = true;
+        Account hospitalAz = accounts.get(1);
+        hospitalAz.Name = 'Phoenix General Hospital';
+        hospitalAz.RecordTypeId = Constant_AC.HOSPITAL_TREATMENT_ID;
         insert accounts;
         
         List<Condition_Description__c> conditionDescriptions = TestDataFactory.createConditionDescription(1);
@@ -62,10 +65,15 @@ private class DvMedicalProfessionalInfoControllerTest {
         wishKid.Hospital_Treatment_Facility_Treating__c = 'Phoenix General Hospital';
         wishKid.Hidden_DV_form_Medical_professional_Type__c = Constant_AC.LEAD_DV_FORM_TYPE_TREATING_MEDICAL_PROFESSIONAL;
         wishKid.Referring_MP__c = mpContact.Id;
+        wishKid.Referring_MP_HTF__c = hospitalAz.Id;
         wishKid.Treating_MP__c = mpContact.Id;
+        wishKid.Treating_MP_HTF__c  = hospitalAz.Id;
         wishKid.Best_Contact__c = mpContact.Id;
+        wishKid.Best_Contact_HTF__c = hospitalAz.Id;
         wishKid.ALT_1_MP__c = altMpContact.Id;
+        wishKid.Alt_1_MP_HTF__c = hospitalAz.Id;
         wishKid.ALT_2_MP__c = altTwoMpContact.Id;
+        wishKid.Alt_2_MP_HTF__c = hospitalAz.Id;
         wishKid.DV_Signer_Changed__c = false;
         wishKid.I_am_Recognized_To_Practice_As_a__c = 'Physician';
         wishKid.is_Family_Aware_of_Referral__c = 'Yes';
@@ -90,7 +98,7 @@ private class DvMedicalProfessionalInfoControllerTest {
     @isTest
     private static void getLeadInformationTreatingMpRecipient() {
         Lead lead = [
-            SELECT Id, Hospital_Treatment_Facility_Treating__c, DV_Signer_Changed__c, 
+            SELECT Id, Treating_MP_HTF__r.Name, DV_Signer_Changed__c, 
             I_am_Recognized_To_Practice_As_a__c, I_m_Part_of_The_Treating_HealthCare_Team__c, 
             Treating_MP__c, Treating_MP__r.FirstName, Treating_MP__r.LastName
             FROM Lead 
@@ -103,7 +111,7 @@ private class DvMedicalProfessionalInfoControllerTest {
         test.stopTest();
         
         System.assert((lead.Treating_MP__r.FirstName + ' ' + lead.Treating_MP__r.LastName) == medicalInfoWrapper.dvRecipient);
-        System.assert(lead.Hospital_Treatment_Facility_Treating__c == medicalInfoWrapper.treatingHtfName);
+        System.assert(lead.Treating_MP_HTF__r.Name == medicalInfoWrapper.treatingHtfName);
         System.assert(lead.DV_Signer_Changed__c == medicalInfoWrapper.changedDvSigner);
         System.assert(lead.I_am_Recognized_To_Practice_As_a__c == medicalInfoWrapper.practicingMpType);
         System.assert(lead.I_m_Part_of_The_Treating_HealthCare_Team__c == medicalInfoWrapper.partOfHealthcareTeam);
@@ -112,7 +120,7 @@ private class DvMedicalProfessionalInfoControllerTest {
     @isTest
     private static void getLeadInformationReferringMpRecipient() {
         Lead lead = [
-            SELECT Id, Hospital_Treatment_Facility_Treating__c, Referring_MP__c, 
+            SELECT Id, Treating_MP_HTF__r.Name, Referring_MP__c, 
             Referring_MP__r.FirstName, Referring_MP__r.LastName
             FROM Lead 
             WHERE Name = 'Samantha Walker'
@@ -126,13 +134,13 @@ private class DvMedicalProfessionalInfoControllerTest {
         test.stopTest();
         
         System.assert((lead.Referring_MP__r.FirstName + ' ' + lead.Referring_MP__r.LastName) == medicalInfoWrapper.dvRecipient);
-        System.assert(lead.Hospital_Treatment_Facility_Treating__c == medicalInfoWrapper.treatingHtfName);
+        System.assert(lead.Treating_MP_HTF__r.Name == medicalInfoWrapper.treatingHtfName);
     }
     
     @isTest
     private static void getLeadInformationBestContactRecipient() {
         Lead lead = [
-            SELECT Id, Hospital_Treatment_Facility_Treating__c, Best_Contact__c, 
+            SELECT Id, Treating_MP_HTF__r.Name, Best_Contact__c,
             Best_Contact__r.FirstName, Best_Contact__r.LastName
             FROM Lead 
             WHERE Name = 'Samantha Walker'
@@ -146,13 +154,13 @@ private class DvMedicalProfessionalInfoControllerTest {
         test.stopTest();
         
         System.assert((lead.Best_Contact__r.FirstName + ' ' + lead.Best_Contact__r.LastName) == medicalInfoWrapper.dvRecipient);
-        System.assert(lead.Hospital_Treatment_Facility_Treating__c == medicalInfoWrapper.treatingHtfName);
+        System.assert(lead.Treating_MP_HTF__r.Name == medicalInfoWrapper.treatingHtfName);
     }
     
     @isTest
     private static void getLeadInformationAltMpOneRecipient() {
         Lead lead = [
-            SELECT Id, Hospital_Treatment_Facility_Treating__c, ALT_1_MP__c, 
+            SELECT Id, Treating_MP_HTF__r.Name, ALT_1_MP__c, 
             ALT_1_MP__r.FirstName, ALT_1_MP__r.LastName
             FROM Lead 
             WHERE Name = 'Samantha Walker'
@@ -166,13 +174,13 @@ private class DvMedicalProfessionalInfoControllerTest {
         test.stopTest();
         
         System.assert((lead.ALT_1_MP__r.FirstName + ' ' + lead.ALT_1_MP__r.LastName) == medicalInfoWrapper.dvRecipient);
-        System.assert(lead.Hospital_Treatment_Facility_Treating__c == medicalInfoWrapper.treatingHtfName);
+        System.assert(lead.Treating_MP_HTF__r.Name == medicalInfoWrapper.treatingHtfName);
     }
     
     @isTest
     private static void getLeadInformationAltMpTwoRecipient() {
         Lead lead = [
-            SELECT Id, Hospital_Treatment_Facility_Treating__c, ALT_2_MP__c, 
+            SELECT Id, Treating_MP_HTF__r.Name, ALT_2_MP__c, 
             ALT_2_MP__r.FirstName, ALT_2_MP__r.LastName
             FROM Lead 
             WHERE Name = 'Samantha Walker'
@@ -186,7 +194,7 @@ private class DvMedicalProfessionalInfoControllerTest {
         test.stopTest();
         
         System.assert((lead.ALT_2_MP__r.FirstName + ' ' + lead.ALT_2_MP__r.LastName) == medicalInfoWrapper.dvRecipient);
-        System.assert(lead.Hospital_Treatment_Facility_Treating__c == medicalInfoWrapper.treatingHtfName);
+        System.assert(lead.Treating_MP_HTF__r.Name == medicalInfoWrapper.treatingHtfName);
     }
     
     @isTest
