@@ -4,7 +4,7 @@
 
 .header {
   font-family: "Droid Serif", serif;
-  font-size: 16px;
+  font-size: 1rem;
   color: #75787b;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -15,42 +15,30 @@
   font-family: "Lato", Arial, sans-serif;
 }
 
-.form > .input {
-  font-family: "Lato", Arial, sans-serif;
-  font-size: 12px;
-  color: #75787b;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.form > .output {
-  font-family: "Lato", Arial, sans-serif;
-  font-size: 12px;
-  color: #75787b;
-  padding-top: 5px;
-  padding-bottom: 10px;
-}
-
-.form > .conditionalForm > .input {
-  font-family: "Lato", Arial, sans-serif;
-  font-size: 12px;
-  color: #75787b;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.conditionalForm {
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
-.footer {
+.form > label {
   padding-top: 20px;
-  padding-bottom: 10px;
-  float: right;
 }
 
-.buttonSave {
+.form > .field {
+  font-family: "Lato", Arial, sans-serif;
+  font-size: 0.75rem;
+  color: #75787b;
+}
+
+.form > .fieldDetails {
+  font-family: "Lato", Arial, sans-serif;
+  font-size: 0.75rem;
+  color: #75787b;
+  padding-bottom: 10px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 20px;
+}
+
+.buttonViewForm {
   font-family: "Lato", Arial, sans-serif;
   font-size: 0.875rem;
   font-weight: 900;
@@ -70,38 +58,14 @@
   -moz-appearance: none;
 }
 
-.buttonSave:hover {
+.buttonViewForm:hover {
   background: #cc464a;
 }
 
-.buttonSave:focus {
+.buttonViewForm:focus {
   outline: none;
 }
 
-.buttonSave:active {
+.buttonViewForm:active {
   transform: scale(0.99);
-}
-
-.column {
-  float: left;
-  padding-left: 15px;
-}
-
-.left {
-  width: 15%;
-}
-
-.center {
-  width: 5%;
-}
-
-.right {
-  width: 80%;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
 }

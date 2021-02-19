@@ -6,7 +6,6 @@
     <excludeButtons>Convert</excludeButtons>
     <excludeButtons>CreateCallList</excludeButtons>
     <excludeButtons>CreateSurveyInvitation</excludeButtons>
-    <excludeButtons>DataDotComClean</excludeButtons>
     <excludeButtons>FindDup</excludeButtons>
     <excludeButtons>Share</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
@@ -757,6 +756,7 @@
         <fields>NAME</fields>
         <fields>ICD_Code__c</fields>
         <fields>Condition_Description__c</fields>
+        <fields>of_MQ_Answers__c</fields>
         <fields>Short_Description__c</fields>
         <relatedList>Diagnosis_Verification__c.Lead__c</relatedList>
     </relatedLists>

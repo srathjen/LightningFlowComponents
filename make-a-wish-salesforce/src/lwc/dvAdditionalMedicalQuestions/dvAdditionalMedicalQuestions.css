@@ -24,6 +24,13 @@
   padding-top: 20px;
 }
 
+.fileUploadLabel {
+  font-family: "Lato", Arial, sans-serif;
+  font-size: 0.75rem;
+  color: #6b6d70;
+  font-weight: 900;
+}
+
 .form > .field {
   font-family: "Lato", Arial, sans-serif;
   font-size: 0.75rem;

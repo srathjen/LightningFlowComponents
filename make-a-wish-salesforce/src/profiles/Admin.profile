@@ -10205,6 +10205,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Diagnosis_Verification__c.of_MQ_Answers__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>DuplicateRecordSet.Duplicate_Item_Count__c</field>
         <readable>true</readable>

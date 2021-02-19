@@ -1,0 +1,72 @@
+<!--
+ - @description File Manager, component to handle file uploads when we cannot use Lightning File component.
+ - @author Gustavo Mayer, Traction on Demand
+ - @createdDate 16/Feb/2021
+-->
+<template>
+  <div class="slds-form-element">
+    <ul
+      if:true={hasFiles}
+      class="slds-has-dividers_bottom-space slds-p-bottom_small list"
+    >
+      <template for:each={files} for:item="file" for:index="index">
+        <li
+          class="slds-item"
+          data-index={index}
+          key={file.index}
+          id={index}
+        >
+          <lightning-icon
+            icon-name="utility:delete"
+            size="x-small"
+            variant="border-filled"
+            alternative-text="Remove"
+            title="Remove"
+            class="deleteIcon"
+            data-id={file.fileId}
+            onclick={handleDeleteFile}
+          >
+          </lightning-icon>
+          <span>{file.fileName}</span>
+        </li>
+      </template>
+    </ul>
+    <div class="message">{message}</div>
+    <div class="actions">
+      <div>
+        <input
+          type="file"
+          class="slds-file-selector__input slds-assistive-text uploadButton"
+          accept="*"
+          id="file-upload-input-A"
+          aria-labelledby="file-selector-primary-label file-selector-secondary-label"
+          onchange={handleFilesChange}
+        />
+        <label
+          class="slds-file-selector__body"
+          for="file-upload-input-A"
+          id="file-selector-secondary-labelA"
+        >
+          <span
+            class="slds-file-selector__button slds-button slds-button_neutral"
+          >
+            Upload File
+          </span>
+        </label>
+      </div>
+      <div>
+        <lightning-button
+          label="Refresh"
+          variant="neutral"
+          onclick={handleRefresh}
+        ></lightning-button>
+      </div>
+    </div>
+    <div class="spinner slds-hide">
+      <lightning-spinner
+        size="small"
+        alternative-text="Loading..."
+      ></lightning-spinner>
+    </div>
+  </div>
+</template>

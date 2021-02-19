@@ -15,7 +15,7 @@
       <div>
         <lightning-spinner
           alternative-text="Loading"
-          size="large"
+          size="small"
           variant="brand"
         ></lightning-spinner>
       </div>
@@ -23,11 +23,10 @@
     <div if:false={isSubmitCanceled}>
       <!-- LOGIN -->
       <section class="login section" if:false={isLoginSuccessful}>
-<!--        <c-dv-login></c-dv-login>-->
-        <lightning-button
-          label="Placeholder Login"
-          onclick={handleLoginSuccessfulEvent}
-        ></lightning-button>
+        <c-dv-login
+          lead-id={leadId}
+          onlogin={handleLoginEvent}
+        ></c-dv-login>
       </section>
 
       <section class="main" if:true={isLoginSuccessful}>
@@ -60,7 +59,7 @@
 
         <!-- DIAGNOSIS COMPONENT -->
         <div class="slds-hide section step2">
-          Placeholder for Diagnosis component
+<!--          <c-dv-diagnosis></c-dv-diagnosis>-->
         </div>
 
         <!-- ADDITIONAL MEDICAL QUESTIONS COMPONENT -->

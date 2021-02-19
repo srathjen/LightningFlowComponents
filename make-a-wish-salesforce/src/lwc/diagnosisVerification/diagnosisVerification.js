@@ -5,6 +5,7 @@
 */
 import { LightningElement, api, wire } from "lwc";
 import findDiagnosisVerification from "@salesforce/apex/DiagnosisVerificationController.getDiagnosisVerificationByLeadId";
+import updateLastDvSaveDate from "@salesforce/apex/DiagnosisVerificationController.updateLastDvSaveDate";
 
 export default class DiagnosisVerification extends LightningElement {
   @api leadId;
@@ -16,6 +17,7 @@ export default class DiagnosisVerification extends LightningElement {
   isSubmitCanceled = false;
   isShowSpinner = false;
   notificationConfig = {
+    title: "",
     message: "",
     variant: "success",
     autoClose: true,
@@ -35,15 +37,30 @@ export default class DiagnosisVerification extends LightningElement {
     }
   }
 
-  handleLoginSuccessfulEvent() {
-    this._leadId = this.leadId;
-    this.isLoginSuccessful = true;
+  handleLoginEvent(event) {
+    const login = event.detail;
+    if(login.isLoginSuccessful){
+      this._leadId = this.leadId;
+      this.isLoginSuccessful = true;
+    } else {
+      this.isLoginSuccessful = false;
+      this.notificationConfig = {
+        title: login.message,
+        message: "",
+        variant: "error",
+        autoClose: true,
+        autoCloseErrorWarning: true,
+      };
+      this.template.querySelector("c-notification-toast").showCustomNotice();
+    }
   }
 
   handleNavigationStepEvent(event) {
     if (event.detail.error) {
       this.notificationConfig = {
-        message: 'Please fill out the Medical Professional Information and click save',
+        title:
+          "Please fill out the Medical Professional Information and click save",
+        message: "",
         variant: "error",
         autoClose: true,
         autoCloseErrorWarning: true,
@@ -74,6 +91,9 @@ export default class DiagnosisVerification extends LightningElement {
         .handleLoadMedicalProfessionalInformation(this.leadId);
       this.show(step1);
     } else if (currentStepId === 2) {
+      // this.template
+      //   .querySelector("c-dv-diagnosis")
+      //   .handleLoadDvDiagnosis(this.leadId);
       this.show(step2);
     } else if (currentStepId === 3) {
       this.template
@@ -100,9 +120,11 @@ export default class DiagnosisVerification extends LightningElement {
   }
 
   handleSaveMedicalProfessionalInformationEvent(event) {
+    this.updateLeadLastDvSaveDate();
+    this.showSaveSuccessMessage();
     this.isShowSpinner = event.detail.showSpinner;
 
-    if(event.detail.medicalProfessionalInformation){
+    if (event.detail.medicalProfessionalInformation) {
       const {
         partOfHealthcareTeam,
       } = event.detail.medicalProfessionalInformation;
@@ -143,7 +165,31 @@ export default class DiagnosisVerification extends LightningElement {
   }
 
   handleSaveAdditionalMedicalQuestionsEvent(event) {
+    this.updateLeadLastDvSaveDate();
+    this.showSaveSuccessMessage();
     this.isShowSpinner = event.detail.showSpinner;
+  }
+
+  showSaveSuccessMessage() {
+    this.notificationConfig = {
+      title:
+        "Your form has been successfully saved but has not yet been submitted.",
+      message: "Please click ‘Submit’ to complete Diagnosis Verification.",
+      variant: "success",
+      autoClose: true,
+      autoCloseErrorWarning: true,
+    };
+    this.template.querySelector("c-notification-toast").showCustomNotice();
+  }
+
+  updateLeadLastDvSaveDate() {
+    updateLastDvSaveDate({ leadId: this._leadId })
+      .then((result) => {
+        console.log("Last DV Save date updated successfully.");
+      })
+      .catch((error) => {
+        console.log("Error updating last dv save date.");
+      });
   }
 
   show(elms) {
