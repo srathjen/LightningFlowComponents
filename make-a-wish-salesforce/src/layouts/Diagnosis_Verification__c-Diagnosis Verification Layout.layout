@@ -28,6 +28,10 @@
                 <behavior>Edit</behavior>
                 <field>Short_Description__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>of_MQ_Answers__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -93,7 +97,6 @@
         <fields>Question__c</fields>
         <fields>Medical_Question_Answer__c</fields>
         <fields>Comment__c</fields>
-        <fields>Epilepsy_Value__c</fields>
         <fields>NAME</fields>
         <fields>Medical_Question__c</fields>
         <relatedList>DiagnosisMedicalQuestions__c.Diagnosis_Verification__c</relatedList>
