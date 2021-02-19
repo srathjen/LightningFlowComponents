@@ -354,6 +354,19 @@
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
+    <fields>
+        <fullName>of_MQ_Answers__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Captures the Number of Medical Questions Answers in relation to a DV</description>
+        <externalId>false</externalId>
+        <label># of MQ Answers</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
     <label>Diagnosis Verification</label>
     <listViews>
         <fullName>All</fullName>

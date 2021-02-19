@@ -8950,6 +8950,11 @@
 </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Diagnosis_Verification__c.of_MQ_Answers__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Dynamic_Content__c.Active__c</field>
         <readable>true</readable>
     </fieldPermissions>
