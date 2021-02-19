@@ -58,6 +58,21 @@ public with sharing class DiagnosisVerificationController {
 		return dvw;
 	}
 
+    @AuraEnabled
+    public static void updateLastDvSaveDate(String leadId) {
+        Lead updateLead = new Lead();
+        updateLead.Id = leadId;
+        updateLead.Last_DV_Save_Date__c = date.today();
+        
+        try {
+            update updateLead;
+        } catch(Exception e) {
+            ErrorMessage_AC.createDebugRec('DiagnosisVerificationController', String.valueOf(updateLead), String.valueOf(e),
+                                           'updateLastDvSaveDate', updateLead.Id, e.getStackTraceString() 
+                                           + ' ' + e.getMessage(), 'Error');
+        }
+    }
+
 	public class DiagnosisVerificationWrapper {
 		@AuraEnabled
 		public String leadId { get; set; }

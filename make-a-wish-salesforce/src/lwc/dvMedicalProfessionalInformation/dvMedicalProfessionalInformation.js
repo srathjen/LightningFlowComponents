@@ -52,11 +52,16 @@ export default class DvMedicalProfessionalInformation extends LightningElement {
         this.dvSignerLastName = data.dvSignerLastName;
         this.dvSignerPhone = data.dvSignerPhone;
         this.dvSignerEmail = data.dvSignerEmail;
+      } else if (data.isPreviouslySaved) {
+        this.isRecipientSigner = "Yes";
+        this.showNewSignerInformation = false;
       } else {
         this.showNewSignerInformation = false;
       }
     } else if (error) {
-      console.log("Error occurred retrieving lead information: " + error);
+      console.log(
+        "Error occurred retrieving lead information: " + JSON.stringify(error)
+      );
     }
   }
 
@@ -171,11 +176,21 @@ export default class DvMedicalProfessionalInformation extends LightningElement {
   }
 
   handleSaveClick(event) {
+    this.dispatchEvent(new CustomEvent("showspinner", { detail: true }));
     this.copyToWrapper();
     saveLeadMedicalProfessionalInformation({
       dvMedicalInfoWrapper: this.dvLeadInfo
     })
-      .then((result) => {})
+      .then((result) => {
+        this.dispatchEvent(
+          new CustomEvent("savemedicalprofessionalinformationevent", {
+            detail: {
+              medicalProfessionalInformation: this.dvLeadInfo,
+              showSpinner: false
+            }
+          })
+        );
+      })
       .catch((error) => {
         this.saveError = error;
       });
