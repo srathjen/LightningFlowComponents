@@ -74,9 +74,9 @@ export default class DiagnosisVerification extends LightningElement {
   }
 
   processStepNavigation(currentStepId) {
-    // this.template
-    //   .querySelector("c-dv-child-information")
-    //   .handleLoadChildInformation(this.leadId);
+    this.template
+      .querySelector("c-dv-child-information")
+      .handleLoadChildInformation(this.leadId);
     const step1 = this.template.querySelectorAll(".step1");
     this.hide(step1);
     const step2 = this.template.querySelectorAll(".step2");
