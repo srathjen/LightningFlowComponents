@@ -78,9 +78,5 @@ private class DvChildInfoControllerTest {
         System.assert(lead.Gender__c == ChildInformationWrapper.Gender);
         System.assert(lead.DOB_Text__c == ChildInformationWrapper.DOB);
         
-    
-    
-        System.debug('Retrieving Lead');
-        System.debug(DvChildInfoController.getLeadChildInformation(lead.Id));
     }
 }
