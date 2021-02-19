@@ -38,6 +38,7 @@ private class DvChildInfoControllerTest {
         DvLead.RecordTypeId = Constant_AC.LEAD_RT_WISH_CHILD;
         DvLead.FirstName = 'Samantha';
         DvLead.LastName = 'Walker';
+        DvLead.Gender__c = 'Female';
         DvLead.ChapterName__c = accountAz.Id;
         DvLead.Treating_Medical_Professional_First_Name__c = 'Daniel';
         DvLead.Treating_Medical_Professional_Last_Name__c = 'Thompson';
@@ -66,7 +67,19 @@ private class DvChildInfoControllerTest {
     
     @isTest
     private static void getLeadInformation() {
-        Lead lead = [SELECT Id FROM Lead WHERE Name = 'Samantha Walker'];
+        Lead lead = [SELECT Id, Name, Gender__c, DOB_Text__c FROM Lead WHERE Name = 'Samantha Walker'];
+
+        test.startTest();
+        DvChildInfoController.ChildInformationWrapper childInformationWrapper = 
+        DvChildInfoController.getLeadChildInformation(lead.Id);
+        test.stopTest();
+
+        System.assert(lead.Name == ChildInformationWrapper.Name);
+        System.assert(lead.Gender__c == ChildInformationWrapper.Gender);
+        System.assert(lead.DOB_Text__c == ChildInformationWrapper.DOB);
+        
+    
+    
         System.debug('Retrieving Lead');
         System.debug(DvChildInfoController.getLeadChildInformation(lead.Id));
     }
