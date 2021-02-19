@@ -134,4 +134,23 @@ public with sharing class DiagnosisVerificationControllerTest {
 
 		System.assertEquals(1, dvw.process.currentStepId);
 	}
+    
+    @IsTest
+    public static void shouldUpdateLastDvSaveDate() {
+        Lead lead = [
+            SELECT Id
+            FROM Lead
+            WHERE Name = 'Jack Smith'
+        ];
+        Test.startTest();
+        DiagnosisVerificationController.updateLastDvSaveDate(lead.Id);
+        Test.stopTest();
+        
+        Lead updatedLead = [
+            SELECT Id, Last_DV_Save_Date__c 
+            FROM Lead
+            WHERE Id = :lead.Id
+        ];
+        System.assert(updatedLead.Last_DV_Save_Date__c == date.today());
+    }
 }
