@@ -1,0 +1,51 @@
+:host {
+  display: block;
+}
+
+ul {
+  padding-bottom: 10px;
+}
+
+li {
+  display: flex;
+  flex-direction: row;
+}
+
+.deleteIcon {
+  padding-right: 10px;
+}
+
+.deleteIcon:hover {
+  --sds-c-icon-color-foreground-default: #e32020;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  padding-right: 10px;
+}
+
+.actions > div {
+  margin-right: 5px;
+}
+
+.uploadLabel {
+  font-family: "Lato", Arial, sans-serif;
+  font-size: 0.75rem;
+  color: #6b6d70;
+  font-weight: 900;
+}
+
+.message {
+  font-family: "Lato", Arial, sans-serif;
+  font-size: 0.75rem;
+  padding-bottom: 5px;
+}
+
+.messageSuccess {
+  color: #0e9f00;
+}
+
+.messageError {
+  color: #bc0008;
+}

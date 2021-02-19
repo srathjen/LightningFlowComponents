@@ -192,17 +192,13 @@
         required={isProvideTimeFrameWishInformationRequired}
         variant="label-hidden"
       ></lightning-textarea>
-      <label class="slds-form-element__legend slds-form-element__label">
-        {medicalSummaryAttachmentLabel}
-      </label>
-      <lightning-input
-        class="field"
-        type="text"
-        label=""
-        value="PLACEHOLDER FOR FILE UPLOAD"
-        onchange={handleChangeMedicalSummaryAttachment}
-        variant="label-hidden"
-      ></lightning-input>
+      <label class="medicalSummaryAttachment fileUploadLabel"
+        >{medicalSummaryAttachmentLabel}</label
+      >
+      <c-file-manager
+              class="field medicalSummaryAttachment"
+      ></c-file-manager>
+      <div class="fieldDetails">{medicalSummaryAttachmentSecondLabel}</div>
       <label
         class="slds-form-element__legend slds-form-element__label additionalInfoProvide"
       >

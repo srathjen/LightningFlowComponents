@@ -111,9 +111,6 @@ public with sharing class DvAdditionalMedicalQuestionsController {
 	public static SaveAdditionalMedicalQuestionsResultWrapper saveAdditionalMedicalQuestions(
 			AdditionalMedicalQuestionsWrapper amq
 	) {
-
-		System.debug('WRAPPERZ ' + amq);
-
 		Lead lead = [
 				SELECT Id, FirstName, Status, Provided_additional_information__c, Why_do_you_feel_would_be_eligible_Wish__c,
 						Please_Explain_Deteriorate__c, Any_medical_reason_for_moving_quickly__c,
@@ -181,8 +178,6 @@ public with sharing class DvAdditionalMedicalQuestionsController {
 				lead.Non_Verbal_Communication_Method__c = String.join(amq.describeCommunicationNeeds, ';');
 				lead.Non_Verbal_Additional_Information__c = amq.describeCommunicationNeedsInformation;
 			}
-			System.debug('SAVING');
-			System.debug('LEADZ-' + lead);
 			update lead;
 
 			SaveAdditionalMedicalQuestionsResultWrapper sqr = new SaveAdditionalMedicalQuestionsResultWrapper();

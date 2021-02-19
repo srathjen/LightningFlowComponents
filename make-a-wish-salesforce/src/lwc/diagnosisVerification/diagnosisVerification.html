@@ -23,11 +23,10 @@
     <div if:false={isSubmitCanceled}>
       <!-- LOGIN -->
       <section class="login section" if:false={isLoginSuccessful}>
-        <!--<c-dv-login></c-dv-login>-->
-        <lightning-button
-          label="Placeholder Login"
-          onclick={handleLoginSuccessfulEvent}
-        ></lightning-button>
+        <c-dv-login
+          lead-id={leadId}
+          onlogin={handleLoginEvent}
+        ></c-dv-login>
       </section>
 
       <section class="main" if:true={isLoginSuccessful}>
@@ -35,7 +34,7 @@
         <div class="fixedSection">
           <div class="section">
             <h1>CHILD INFORMATION</h1>
-            <!--            <c-dv-child-information></c-dv-child-information>-->
+<!--            <c-dv-child-information></c-dv-child-information>-->
           </div>
           <div class="section">
             <h1>PROVIDED DIAGNOSIS SUMMARY</h1>
@@ -60,7 +59,7 @@
 
         <!-- DIAGNOSIS COMPONENT -->
         <div class="slds-hide section step2">
-          <!--          <c-dv-diagnosis></c-dv-diagnosis>-->
+<!--          <c-dv-diagnosis></c-dv-diagnosis>-->
         </div>
 
         <!-- ADDITIONAL MEDICAL QUESTIONS COMPONENT -->
@@ -72,7 +71,7 @@
 
         <!-- TRAVEL QUESTIONS COMPONENT -->
         <div class="slds-hide section step4">
-          <!--          <c-dv-travel-questions></c-dv-travel-questions>-->
+<!--          <c-dv-travel-questions></c-dv-travel-questions>-->
         </div>
       </section>
 
