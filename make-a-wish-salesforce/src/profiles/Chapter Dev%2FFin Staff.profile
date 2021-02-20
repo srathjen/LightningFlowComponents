@@ -4,12 +4,12 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <enabled>false</enabled>
         <apexClass>DvAdditionalMedicalQuestionsController</apexClass>
-        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <enabled>false</enabled>
         <apexClass>DvMedicalProfessionalInfoController</apexClass>
-        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>AddVolunteerRole_AC</apexClass>

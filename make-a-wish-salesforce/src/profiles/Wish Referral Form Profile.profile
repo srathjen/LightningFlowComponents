@@ -160,11 +160,27 @@
         <visible>false</visible>
     </applicationVisibilities>
     <classAccesses>
+        <apexClass>AWSFilePathService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DVChildInfoController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>DiagnosisVerificationController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>DvAdditionalMedicalQuestionsController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DvDiagnosisController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DvLoginController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -361,7 +377,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>Constant_AC</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>ContactFile_AT_Test</apexClass>
@@ -446,6 +462,10 @@
     <classAccesses>
         <apexClass>DocusignStatusTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DvTravelQuestionsController</apexClass>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>EmailTrigger_AT_Test</apexClass>
@@ -577,7 +597,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>LeadDomain</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>LeadDuplicate_AC</apexClass>
@@ -588,12 +608,20 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>LeadFileService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>LeadSelectMedEmailController_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>LeadSelectMedEmailController_Test</apexClass>
         <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>LeadService</apexClass>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>LeadTrigger_AT_Test</apexClass>
