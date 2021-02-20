@@ -3,7 +3,7 @@
  * @author Gustavo Mayer, Traction on Demand
  * @createdDate 08/Feb/2021
  */
-public with sharing class DiagnosisVerificationController {
+public without sharing class DiagnosisVerificationController {
 
 	private final static String STEP_STATUS_ACTIVE = 'active';
 	private final static String NO = 'no';

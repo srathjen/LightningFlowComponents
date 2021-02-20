@@ -3,7 +3,7 @@
 * @author Brittany Maclaughlin, Make-A-Wish
 * @createdDate 02/09/2021
 */
-public class DVChildInfoController {
+public without sharing class DVChildInfoController {
     
     @AuraEnabled(cacheable=true)
     public static ChildInformationWrapper getLeadChildInformation(String leadId) {
