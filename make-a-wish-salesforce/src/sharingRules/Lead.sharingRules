@@ -13,19 +13,6 @@
             <value>Alabama</value>
         </criteriaItems>
     </sharingCriteriaRules>
-    <sharingGuestRules>
-        <fullName>Share_Leads_with_Guest_User</fullName>
-        <accessLevel>Read</accessLevel>
-        <label>Share Leads with Guest User</label>
-        <sharedTo>
-            <guestUser>Wish_Referral_Form</guestUser>
-        </sharedTo>
-        <criteriaItems>
-            <field>RecordTypeId</field>
-            <operation>equals</operation>
-            <value>Wish Child</value>
-        </criteriaItems>
-    </sharingGuestRules>
     <sharingOwnerRules>
         <fullName>Alabama_Chapter</fullName>
         <accessLevel>Edit</accessLevel>
