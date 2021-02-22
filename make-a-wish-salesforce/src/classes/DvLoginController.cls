@@ -3,7 +3,7 @@
  * @author Pramod Nagar, Traction on Demand
  * @createdDate 11/Feb/2021
  */
-public with sharing class DvLoginController {
+public without sharing class DvLoginController {
 
 	@AuraEnabled(Cacheable=true)
 	public static DvLoginFieldsWrapper getLeadInfoByLeadId(String leadId) {

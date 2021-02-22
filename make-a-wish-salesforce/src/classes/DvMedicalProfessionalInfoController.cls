@@ -3,7 +3,7 @@
 * @author Michelle Cominotto, Make-A-Wish
 * @createdDate 02/08/2021
 */
-public class DvMedicalProfessionalInfoController {
+public without sharing class DvMedicalProfessionalInfoController {
     
     @AuraEnabled(cacheable=true)
     public static MedicalProfessionalInformationWrapper getLeadMedicalProfessionalInformation(Id recordId) {

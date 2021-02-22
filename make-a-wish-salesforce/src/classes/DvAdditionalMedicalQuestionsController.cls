@@ -3,7 +3,7 @@
  * @author Gustavo Mayer, Traction on Demand
  * @createdDate 08/Feb/2021
  */
-public with sharing class DvAdditionalMedicalQuestionsController {
+public without sharing class DvAdditionalMedicalQuestionsController {
 
 	public static String YES = Constant_AC.YES_TEXT;
 	public static String NO = Constant_AC.NO_TEXT;
