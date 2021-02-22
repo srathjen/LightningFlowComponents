@@ -9,7 +9,8 @@
     <subject>**Action Required** Make-A-Wish Diagnosis Verification form</subject>
     <textOnly>Hi {!Lead.Treating_Medical_Professional_First_Name__c},
 
-Please Review the Diagnosis Verification and submit.
+Please Review the Diagnosis Verification and submit. Click the following:
+{!Setup.Endpoints__c.DVReturn_URL__c}/DiagnosisVerification?LeadId={!Lead.Id}
 
 Password : {!Lead.00N2f000000ojKq}
 
