@@ -3,7 +3,7 @@
 * @author Gustavo Mayer, Traction on Demand
 * @createdDate 17/Feb/2021
 */
-public with sharing class FileManagerController {
+public without sharing class FileManagerController {
 
 	/**
 	 * Finds files
