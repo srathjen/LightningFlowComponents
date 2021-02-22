@@ -476,6 +476,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>FileManagerController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>FileUploadController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
