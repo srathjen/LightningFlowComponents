@@ -1,0 +1,43 @@
+<!--
+ - @description Diagnosis component for the Diagnosis Verification process
+ - @author Michelle Cominotto, Make-A-Wish
+ - @createdDate 02/18/2021
+-->
+<template>
+  <div class="container">
+    <c-modal
+      modal-config={modalConfig}
+      onmodalactionevent={handleModalEvent}
+      if:true={isShowModal}
+    ></c-modal>
+
+    <header class="header">
+      <h1>{leadNameLabel}</h1>
+    </header>
+
+    <section class="form" if:true={dvDiagnosis}>
+      <label class="slds-form-element__legend slds-form-element__label">
+        {comatoseLabel}
+      </label>
+      <lightning-combobox
+        class="input"
+        name="Comatose"
+        value={comatoseState}
+        placeholder="Please Select"
+        options={yesNoOptions}
+        onchange={handleComatoseChange}
+        required="true"
+        variant="label-hidden"
+      ></lightning-combobox>
+    </section>
+
+    <section class="footer" if:true={dvDiagnosis}>
+      <input
+        type="button"
+        onclick={handleSaveClick}
+        class="buttonSave"
+        value="SAVE"
+      />
+    </section>
+  </div>
+</template>
