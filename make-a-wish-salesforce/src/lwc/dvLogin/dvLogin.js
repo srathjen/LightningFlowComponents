@@ -30,7 +30,9 @@ export default class DvLogin extends LightningElement {
 
   handleLogin() {
     let passwordInputComp = this.template.querySelector("lightning-input");
-    if (this.actualPassword !== this.inputPassword) {
+    if (!this.inputPassword) {
+      passwordInputComp.reportValidity();
+    } else if (this.actualPassword !== this.inputPassword) {
       passwordInputComp.setCustomValidity(
         "You have entered an incorrect password. Please try again, or contact chapter staff for access."
       );
