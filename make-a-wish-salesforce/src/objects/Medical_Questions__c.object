@@ -416,12 +416,110 @@
         <compactLayoutAssignment>medical_question_compact_layout</compactLayoutAssignment>
         <description>It contains medical questions</description>
         <label>Medical Questions</label>
+        <picklistValues>
+            <picklist>Data_Type__c</picklist>
+            <values>
+                <fullName>Comment Box</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Picklist - Single</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Next_Action__c</picklist>
+            <values>
+                <fullName>Next Question in Sort Order</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Specified Question</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Stop</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Travel_Question_Group__c</picklist>
+            <values>
+                <fullName>Circulatory System and Heart</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gastrointestinal System%2FLiver</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nervous System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Respiratory System</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
     </recordTypes>
     <recordTypes>
         <fullName>Travel_Algorithm</fullName>
         <active>true</active>
         <description>It contains the list of current conditions for travel algorithm</description>
         <label>Travel Algorithm</label>
+        <picklistValues>
+            <picklist>Data_Type__c</picklist>
+            <values>
+                <fullName>Comment Box</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Picklist - Single</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Next_Action__c</picklist>
+            <values>
+                <fullName>Next Question in Sort Order</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Specified Question</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Stop</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Travel_Question_Group__c</picklist>
+            <values>
+                <fullName>Circulatory System and Heart</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gastrointestinal System%2FLiver</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nervous System</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Respiratory System</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
     </recordTypes>
     <searchLayouts />
     <sharingModel>ReadWrite</sharingModel>
