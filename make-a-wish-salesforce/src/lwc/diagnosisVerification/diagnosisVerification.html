@@ -23,10 +23,7 @@
     <div if:false={isSubmitCanceled}>
       <!-- LOGIN -->
       <section class="login section" if:false={isLoginSuccessful}>
-        <c-dv-login
-          lead-id={leadId}
-          onlogin={handleLoginEvent}
-        ></c-dv-login>
+        <c-dv-login lead-id={leadId} onlogin={handleLoginEvent}></c-dv-login>
       </section>
 
       <section class="main" if:true={isLoginSuccessful}>
@@ -59,7 +56,11 @@
 
         <!-- DIAGNOSIS COMPONENT -->
         <div class="slds-hide section step2">
-<!--          <c-dv-diagnosis></c-dv-diagnosis>-->
+          <c-dv-diagnosis
+            oncancelsubmit={handleCancelSubmit}
+            onshowspinner={handleShowSpinner}
+            onsavediagnosis={handleSaveDiagnosis}
+          ></c-dv-diagnosis>
         </div>
 
         <!-- ADDITIONAL MEDICAL QUESTIONS COMPONENT -->
@@ -71,7 +72,7 @@
 
         <!-- TRAVEL QUESTIONS COMPONENT -->
         <div class="slds-hide section step4">
-<!--          <c-dv-travel-questions></c-dv-travel-questions>-->
+          <!--<c-dv-travel-questions></c-dv-travel-questions>-->
         </div>
       </section>
 
