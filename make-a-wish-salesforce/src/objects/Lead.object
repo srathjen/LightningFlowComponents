@@ -3971,6 +3971,7 @@ IF(ISPICKVAL(Hidden_DV_form_Medical_professional_Type__c , 'Referring Medical Pr
         <fullName>Last_DV_Save_Date__c</fullName>
         <description>Captures the most recent date that the DV Form was saved OR submitted by an MP</description>
         <externalId>false</externalId>
+        <inlineHelpText>Captures the most recent date that the DV Form was saved OR submitted by an MP</inlineHelpText>
         <label>Last DV Save Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
