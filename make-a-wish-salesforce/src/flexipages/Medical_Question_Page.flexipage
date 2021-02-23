@@ -6,6 +6,14 @@
                 <name>collapsed</name>
                 <value>false</value>
             </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>enableActionsConfiguration</name>
+                <value>false</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>hideChatterActions</name>
+                <value>false</value>
+            </componentInstanceProperties>
             <componentName>force:highlightsPanel</componentName>
         </componentInstances>
         <mode>Replace</mode>
@@ -21,18 +29,6 @@
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <mode>Replace</mode>
-        <name>relatedTabContent</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <componentInstances>
-            <componentName>runtime_sales_activities:activityPanel</componentName>
-        </componentInstances>
-        <name>facet-74057b9a-a901-412e-894d-4ddbd5e02345</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
         <componentInstances>
             <componentInstanceProperties>
                 <name>active</name>
@@ -45,28 +41,6 @@
             <componentInstanceProperties>
                 <name>title</name>
                 <value>Standard.Tab.detail</value>
-            </componentInstanceProperties>
-            <componentName>flexipage:tab</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>body</name>
-                <value>relatedTabContent</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>title</name>
-                <value>Standard.Tab.collaborate</value>
-            </componentInstanceProperties>
-            <componentName>flexipage:tab</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>body</name>
-                <value>facet-74057b9a-a901-412e-894d-4ddbd5e02345</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>title</name>
-                <value>Standard.Tab.activity</value>
             </componentInstanceProperties>
             <componentName>flexipage:tab</componentName>
         </componentInstances>
@@ -93,6 +67,36 @@
                 <value>NONE</value>
             </componentInstanceProperties>
             <componentName>force:relatedListContainer</componentName>
+        </componentInstances>
+        <name>Facet-e260f8ae-54c6-4386-8f56-a0b32fa32403</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>active</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>body</name>
+                <value>Facet-e260f8ae-54c6-4386-8f56-a0b32fa32403</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>title</name>
+                <value>Standard.Tab.relatedLists</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:tab</componentName>
+        </componentInstances>
+        <name>Facet-5139066b-6a24-4a24-a636-fbd55252187a</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>tabs</name>
+                <value>Facet-5139066b-6a24-4a24-a636-fbd55252187a</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:tabset</componentName>
         </componentInstances>
         <mode>Replace</mode>
         <name>sidebar</name>
