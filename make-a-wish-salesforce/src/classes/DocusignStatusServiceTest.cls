@@ -101,7 +101,7 @@ public class DocusignStatusServiceTest {
 		wishSignature.Wish_Signature_Form__c = wishForm.Id;
 		insert wishSignature;
 
-		List<dsfs__DocuSign_Status__c> docusignStatusList = TestDataFactory.createDocusignStatus(4);
+		List<dsfs__DocuSign_Status__c> docusignStatusList = TestDataFactory.createDocusignStatus(3);
 		dsfs__DocuSign_Status__c dsfsVolunteer1 = docusignStatusList.get(0);
 		dsfsVolunteer1.Docusign_Hidden_Contact__c = volunteerHector.Id;
 		dsfsVolunteer1.dsfs__Envelope_Status__c = Constant_AC.DOCUSIGN_ENVELOPE_STATUS_COMPLETED;
@@ -119,16 +119,7 @@ public class DocusignStatusServiceTest {
 		dsfsVolunteer2.Wish_Required_Signature__c = wishSignature.Id;
 		dsfsVolunteer2.isConflict__c = false;
 
-		dsfs__DocuSign_Status__c dsfsLead = docusignStatusList.get(2);
-		dsfsLead.dsfs__Lead__c = referredLead.Id;
-		dsfsLead.Docusign_Hidden_Contact__c = volunteerHector.Id;
-		dsfsLead.dsfs__Envelope_Status__c = Constant_AC.DOCUSIGN_STATUS_ENVELOPE_STATUS_SENT;
-		dsfsLead.dsfs__Subject__c = Constant_AC.DOCUSIGN_SUBJECT_DIAGNOSIS_VERIFICATION_FORM;
-		dsfsLead.dsfs__Contact__c = volunteerHector.Id;
-		dsfsLead.Wish_Required_Signature__c = wishSignature.Id;
-		dsfsLead.isConflict__c = false;
-
-		dsfs__DocuSign_Status__c dsfsCase = docusignStatusList.get(3);
+		dsfs__DocuSign_Status__c dsfsCase = docusignStatusList.get(2);
 		dsfsCase.dsfs__Case__c = wishChildCase.Id;
         dsfsCase.Docusign_Hidden_Contact__c = volunteerHector.Id;
 		dsfsCase.dsfs__Subject__c = Constant_AC.DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_WISH_CLEARANCE_FORM;
@@ -184,53 +175,6 @@ public class DocusignStatusServiceTest {
 
         Test.startTest();
         DocusignStatusService.updateRelatedParentRecords(newDocusignStatuses, oldDocusignStatusesMap, Date.today());
-		Test.stopTest();
-	}
-
-	@IsTest
-	public static void shouldUpdateLeads() {
-		List<dsfs__DocuSign_Status__c> docuSignStatuses = [
-				SELECT Id, Docusign_Hidden_Contact__c, dsfs__Envelope_Status__c, isConflict__c, dsfs__Lead__c,
-						dsfs__Case__c, dsfs__Contact__c, dsfs__Subject__c, dsfs__Completed_Date_Time__c
-				FROM dsfs__DocuSign_Status__c
-                WHERE dsfs__Envelope_Status__c = :Constant_AC.DOCUSIGN_STATUS_ENVELOPE_STATUS_SENT
-                LIMIT 1
-		];
-		Contact wishChildAnthony = [
-				SELECT Id
-				FROM Contact
-				WHERE LastName = 'Edwards'
-		];
-        docuSignStatuses.get(0).dsfs__Envelope_Status__c = Constant_AC.DOCUSIGN_ENVELOPE_STATUS_COMPLETED;
-		dsfs__DocuSign_Status__c oldDocusignStatus = new dsfs__DocuSign_Status__c();
-        oldDocusignStatus.Id = docuSignStatuses.get(0).Id;
-        oldDocusignStatus.dsfs__Contact__c = wishChildAnthony.Id;
-        oldDocusignStatus.dsfs__Envelope_Status__c = Constant_AC.DOCUSIGN_RECIPIENT_STATUS_SENT;
-        oldDocusignStatus.dsfs__Case__c = docuSignStatuses.get(0).dsfs__Case__c;
-
-		Map<Id, dsfs__DocuSign_Status__c> oldDocusignStatuses = new Map<Id, dsfs__DocuSign_Status__c>{oldDocusignStatus.Id => oldDocusignStatus};
-		Test.startTest();
-		DocusignStatusService.updateLeads(docuSignStatuses, oldDocusignStatuses);
-		Test.stopTest();
-	}
-
-	@IsTest
-	public static void shouldWishChildDVAttachment() {
-		Attachment attachment = [
-				SELECT ParentId
-				FROM Attachment
-				LIMIT 1
-		];
-		Contact contact = [
-				SELECT Id
-				FROM Contact
-                WHERE Name = 'Anthony Edwards'
-				LIMIT 1
-		];
-		Test.startTest();
-		DocusignStatusService.wishChildDVAttachment(new Map<Id, Id>{
-				contact.Id => attachment.ParentId
-		});
 		Test.stopTest();
 	}
 }

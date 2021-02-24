@@ -38,6 +38,7 @@ public class DocuSignServiceTest {
 		List<dsfs__DocuSign_Status__c> docuSignStatuses = TestDataFactory.createDocusignStatus(1);
 		dsfs__DocuSign_Status__c docuSignStatus = docuSignStatuses.get(0);
 		docuSignStatus.dsfs__Lead__c = lead.Id;
+        	docuSignStatus.dsfs__Envelope_Status__c = 'Completed';
 		insert docuSignStatuses;
 
 		List<Attachment> attachments = TestDataFactory.createAttachments(1, docuSignStatus.Id);
@@ -45,32 +46,17 @@ public class DocuSignServiceTest {
 		attachment.ContentType = 'Text';
 		insert attachments;
 	}
-
-	@IsTest
-	public static void shouldDeleteLeadsDocusignStatusesAndAttachments() {
-		Lead lead = [
-				SELECT Id
-				FROM Lead
-				WHERE Name = 'Jack Smith'
-		];
-		List<Id> leadIds = new List<Id>();
-		leadIds.add(lead.Id);
-
-		Test.startTest();
-		DocuSignService.deleteByLeadIdAndDeleteRelatedAttachments(lead.Id);
-		Test.stopTest();
-
-		List<dsfs__DocuSign_Status__c> docuSignStatuses = [
-				SELECT Id
-				FROM dsfs__DocuSign_Status__c
-				WHERE dsfs__Lead__c = :lead.Id
-		];
-		List<Attachment> attachments = [
-				SELECT Id
-				FROM Attachment
-				WHERE ContentType = 'Text'
-		];
-		System.assertEquals(0, docuSignStatuses.size());
-		System.assertEquals(0, attachments.size());
-	}
+    
+    @isTest
+    public static void shouldFindByLeadAndEnvelopeStatus() {
+        Set<Id> leadIds = new Set<Id>();
+        Id leadId = [SELECT Id FROM Lead WHERE Name = 'Jack Smith'].Id;
+        leadIds.add(leadId);
+        
+        test.startTest();
+        List<dsfs__DocuSign_Status__c> docusignStatusList = DocuSignService.findByLeadAndEnvelopeStatus(leadIds, 'Completed');
+        test.stopTest();
+        
+        System.assert(!docusignStatusList.isEmpty());
+    }
 }

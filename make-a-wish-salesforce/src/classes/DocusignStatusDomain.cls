@@ -18,10 +18,4 @@ public class DocusignStatusDomain extends trac_TriggerHandlerBase {
             DocusignStatusService.updateRelatedParentRecords(newList, oldMap, Date.today());
         }
     }
-
-    public override void handleAfterUpdate() {
-        if (!RecursiveTriggerHandler.blockAfterUpdate) {
-            DocusignStatusService.updateLeads(newList, oldMap);
-        }
-    }
 }

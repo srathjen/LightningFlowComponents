@@ -112,6 +112,7 @@ public class LeadConvertServiceTest {
 		qualifiedLead.Treating_Medical_Professional_Phone__c = '8220708921';
 		qualifiedLead.Treating_Medical_Professional_Email__c = 'jdoe@email.com';
 		qualifiedLead.Hospital_Treatment_Facility_Treating__c = 'Treating Facility';
+        	qualifiedLead.Part_A_Received__c = date.today();
 		insert leads;
 
 		qualifiedLead.Sub_Status__c = Constant_AC.LEAD_SUB_STATUS_PENDING_DIAGNOSIS_VERIFICATION;

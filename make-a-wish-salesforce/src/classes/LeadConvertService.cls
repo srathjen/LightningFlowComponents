@@ -85,9 +85,6 @@ public class LeadConvertService {
 			// Update Diagnosis Verification with converted Wish Child Contact Id
 			DiagnosisVerificationService.updateContact(convertedLeadById);
 
-			// Update Docusign Status Contact to be the converted Wish Child Id
-			updateElectronicSigner(leadIdConvertedByContactIdMap);
-
 			// Find any existing Diagnosis Verification Review Cases
 			Map<Id, Case> existingDiagnosisVerificationCaseMap =
 					CaseService.findCaseByLeadIdAndRecordType(convertedLeadById.keySet(), Constant_AC.DIAGNOSIS_RT_ID);
@@ -102,9 +99,6 @@ public class LeadConvertService {
 			List<dsfs__DocuSign_Status__c> docuSignStatuses = DocuSignService.findByLeadAndEnvelopeStatus(
 					convertedLeadById.keySet(), Constant_AC.DOCUSIGN_ENVELOPE_STATUS_COMPLETED);
 
-			// Update Completed Docusign Status Contact to be the converted Wish Child Id
-			List<dsfs__DocuSign_Status__c > dsfsList = DocuSignService.setContact(docuSignStatuses, convertedLeadById);
-
 			// Set Diagnosis Verification
 			caseMap = CaseService.setDVReceiveDate(docuSignStatuses, caseMap);
 
@@ -116,7 +110,6 @@ public class LeadConvertService {
 			insert contactFileFolders;
 			insert contactFiles;
 			update accountWishChildHousehold;
-			update dsfsList;
 			update partACaseList;
 			update wishChildUpdates;
 			insert caseMap.values();
@@ -278,15 +271,6 @@ public class LeadConvertService {
 			}
 		}
 		return siblingContacts;
-	}
-
-	/**
-	 * @description Asynchronously update the electronic signer on DocuSign status record related to lead
-	 * @param leadContactMap lead contact map
-	 */
-	@Future
-	private static void updateElectronicSigner(Map<Id, Id> leadContactMap) {
-		DocuSignService.updateElectronicSigner(leadContactMap, Constant_AC.DOCUSIGN_SUBJECT_DIAGNOSIS_VERIFICATION_FORM);
 	}
 
 	/**
