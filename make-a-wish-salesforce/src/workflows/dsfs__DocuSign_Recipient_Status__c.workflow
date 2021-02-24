@@ -28,34 +28,18 @@
         <description>SIW-432 Reminders when DV docusign are not signed</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
-            <actions>
-                <name>Send_DV_Signature_Reminder_to_Medical_Professional_Final</name>
-                <type>Alert</type>
-            </actions>
             <timeLength>10</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
         <workflowTimeTriggers>
-            <actions>
-                <name>Send_DV_Signature_Reminder_to_Medical_Professional_Second</name>
-                <type>Alert</type>
-            </actions>
             <timeLength>5</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
         <workflowTimeTriggers>
-            <actions>
-                <name>Send_DV_Signature_Alert_to_Intake_Manager</name>
-                <type>Alert</type>
-            </actions>
             <timeLength>15</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
         <workflowTimeTriggers>
-            <actions>
-                <name>Send_DV_Signature_Reminder_to_Medical_Professional_First</name>
-                <type>Alert</type>
-            </actions>
             <timeLength>1</timeLength>
             <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
