@@ -1,6 +1,0 @@
-<table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
-<tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[Dear&nbsp;{!dsfs__DocuSign_Recipient_Status__c.Lead_Owner_Full_Name__c},<div><br><div>We have made several attempts to notify {!dsfs__DocuSign_Recipient_Status__c.DV_Form_Name__c} of the missing signature needed to complete the DV for&nbsp;{!dsfs__DocuSign_Recipient_Status__c.Lead_Name__c}.</div><div>This message is to notify you that no further alerts will be sent and it is recommended you follow up with the medical professional to obtain the necessary signature or close the referral.</div><div><br></div><div>This is an automated message.</div></div>]]></td>
-</tr>
-</table>
