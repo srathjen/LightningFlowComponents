@@ -2,19 +2,18 @@
 <ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
     <baseObject>Condition_Description__c</baseObject>
     <category>other</category>
-    <deployed>true</deployed>
-    <description>Condition descriptions with or without Medical Questions</description>
+    <deployed>false</deployed>
+    <description>Condition Descriptions with Medical Questions with or without Medical Question Responses</description>
     <join>
-        <outerJoin>true</outerJoin>
+        <join>
+            <outerJoin>true</outerJoin>
+            <relationship>Medical_Question_Response_Options__r</relationship>
+        </join>
+        <outerJoin>false</outerJoin>
         <relationship>Medical_Questions__r</relationship>
     </join>
-    <label>Condition Description w/ or w/out Med questions</label>
+    <label>Condition Descriptions w Med Questions &amp; Responses</label>
     <sections>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Code_To_Use__c</field>
-            <table>Condition_Description__c</table>
-        </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Id</field>
@@ -22,7 +21,12 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>CreatedBy</field>
+            <field>Owner</field>
+            <table>Condition_Description__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Name</field>
             <table>Condition_Description__c</table>
         </columns>
         <columns>
@@ -32,7 +36,57 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>CreatedBy</field>
+            <table>Condition_Description__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>LastModifiedDate</field>
+            <table>Condition_Description__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>LastModifiedBy</field>
+            <table>Condition_Description__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Code_To_Use__c</field>
+            <table>Condition_Description__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Group1__c</field>
+            <table>Condition_Description__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>InActive__c</field>
+            <table>Condition_Description__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Not_Listed__c</field>
+            <table>Condition_Description__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Treatment_Subspecialty__c</field>
+            <table>Condition_Description__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>PR_Diagnosis__c</field>
+            <table>Condition_Description__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>isEligible__c</field>
+            <table>Condition_Description__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Qualify_If_No_Questions__c</field>
             <table>Condition_Description__c</table>
         </columns>
         <columns>
@@ -47,57 +101,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>isEligible__c</field>
-            <table>Condition_Description__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>InActive__c</field>
-            <table>Condition_Description__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>LastModifiedBy</field>
-            <table>Condition_Description__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>LastModifiedDate</field>
-            <table>Condition_Description__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>true</checkedByDefault>
-            <field>Name</field>
-            <table>Condition_Description__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Not_Listed__c</field>
-            <table>Condition_Description__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Owner</field>
-            <table>Condition_Description__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>PR_Diagnosis__c</field>
-            <table>Condition_Description__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Qualification_Level__c</field>
-            <table>Condition_Description__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Qualify_If_No_Questions__c</field>
-            <table>Condition_Description__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Treatment_Subspecialty__c</field>
             <table>Condition_Description__c</table>
         </columns>
         <masterLabel>Condition Description</masterLabel>
@@ -105,7 +109,22 @@
     <sections>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>CreatedBy</field>
+            <field>Id</field>
+            <table>Condition_Description__c.Medical_Questions__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Owner</field>
+            <table>Condition_Description__c.Medical_Questions__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Name</field>
+            <table>Condition_Description__c.Medical_Questions__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>RecordType</field>
             <table>Condition_Description__c.Medical_Questions__r</table>
         </columns>
         <columns>
@@ -115,27 +134,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Current_Condition__c</field>
-            <table>Condition_Description__c.Medical_Questions__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Data_Type__c</field>
-            <table>Condition_Description__c.Medical_Questions__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Epilepsy_picklist__c</field>
-            <table>Condition_Description__c.Medical_Questions__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>LastActivityDate</field>
-            <table>Condition_Description__c.Medical_Questions__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>LastModifiedBy</field>
+            <field>CreatedBy</field>
             <table>Condition_Description__c.Medical_Questions__r</table>
         </columns>
         <columns>
@@ -145,17 +144,22 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Id</field>
-            <table>Condition_Description__c.Medical_Questions__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>true</checkedByDefault>
-            <field>Name</field>
+            <field>LastModifiedBy</field>
             <table>Condition_Description__c.Medical_Questions__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Owner</field>
+            <field>LastActivityDate</field>
+            <table>Condition_Description__c.Medical_Questions__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Current_Condition__c</field>
+            <table>Condition_Description__c.Medical_Questions__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Epilepsy_picklist__c</field>
             <table>Condition_Description__c.Medical_Questions__r</table>
         </columns>
         <columns>
@@ -175,7 +179,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>RecordType</field>
+            <field>Wrapper_Variable__c</field>
             <table>Condition_Description__c.Medical_Questions__r</table>
         </columns>
         <columns>
@@ -185,14 +189,72 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Wrapper_Variable__c</field>
+            <field>Next_Action__c</field>
             <table>Condition_Description__c.Medical_Questions__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Condition_Description__c</field>
+            <field>Specified_Question__c</field>
+            <table>Condition_Description__c.Medical_Questions__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Data_Type__c</field>
             <table>Condition_Description__c.Medical_Questions__r</table>
         </columns>
         <masterLabel>Medical Questions</masterLabel>
+    </sections>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Id</field>
+            <table>Condition_Description__c.Medical_Questions__r.Medical_Question_Response_Options__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Name</field>
+            <table>Condition_Description__c.Medical_Questions__r.Medical_Question_Response_Options__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>CreatedDate</field>
+            <table>Condition_Description__c.Medical_Questions__r.Medical_Question_Response_Options__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>CreatedBy</field>
+            <table>Condition_Description__c.Medical_Questions__r.Medical_Question_Response_Options__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>LastModifiedDate</field>
+            <table>Condition_Description__c.Medical_Questions__r.Medical_Question_Response_Options__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>LastModifiedBy</field>
+            <table>Condition_Description__c.Medical_Questions__r.Medical_Question_Response_Options__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Response__c</field>
+            <table>Condition_Description__c.Medical_Questions__r.Medical_Question_Response_Options__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Next_Action__c</field>
+            <table>Condition_Description__c.Medical_Questions__r.Medical_Question_Response_Options__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Next_Question__c</field>
+            <table>Condition_Description__c.Medical_Questions__r.Medical_Question_Response_Options__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Sort_Order__c</field>
+            <table>Condition_Description__c.Medical_Questions__r.Medical_Question_Response_Options__r</table>
+        </columns>
+        <masterLabel>Medical Question Response (Options)</masterLabel>
     </sections>
 </ReportType>

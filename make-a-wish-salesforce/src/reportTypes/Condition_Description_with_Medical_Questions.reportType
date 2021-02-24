@@ -37,6 +37,16 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Has_Med_Questions_w_Qualifying_Response__c</field>
+            <table>Condition_Description__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Has_Medical_Questions__c</field>
+            <table>Condition_Description__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>isEligible__c</field>
             <table>Condition_Description__c</table>
         </columns>
@@ -80,6 +90,16 @@
             <field>PR_Diagnosis__c</field>
             <table>Condition_Description__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Qualification_Level__c</field>
+            <table>Condition_Description__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Qualify_If_No_Questions__c</field>
+            <table>Condition_Description__c</table>
+        </columns>
         <masterLabel>Condition Description</masterLabel>
     </sections>
     <sections>
@@ -91,6 +111,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>CreatedDate</field>
+            <table>Condition_Description__c.Medical_Questions__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Condition_Description__c</field>
             <table>Condition_Description__c.Medical_Questions__r</table>
         </columns>
         <columns>
@@ -135,6 +160,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Next_Action__c</field>
+            <table>Condition_Description__c.Medical_Questions__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Owner</field>
             <table>Condition_Description__c.Medical_Questions__r</table>
         </columns>
@@ -165,12 +195,12 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Wrapper_Variable__c</field>
+            <field>Specified_Question__c</field>
             <table>Condition_Description__c.Medical_Questions__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Condition_Description__c</field>
+            <field>Wrapper_Variable__c</field>
             <table>Condition_Description__c.Medical_Questions__r</table>
         </columns>
         <masterLabel>Medical Questions</masterLabel>

@@ -2062,7 +2062,14 @@
     <members>CSD_Team_Admin_Reports/Copy_of_Volunteer_User_Login_History_TXW</members>
     <members>CSD_Team_Admin_Reports/Dashboard_Reports_by_Running_User_Ufi</members>
     <members>CSD_Team_Admin_Reports/DVSMedicalDataCleanup</members>
+    <members>CSD_Team_Admin_Reports/DVSMedicalDataCleanup/CDs_with_eligibility_fields_Ukd</members>
+    <members>CSD_Team_Admin_Reports/DVSMedicalDataCleanup/Data_Validation_Data_Type_picklist_jx0</members>
+    <members>CSD_Team_Admin_Reports/DVSMedicalDataCleanup/Group_1_with_no_MQs_for_data_transform_u8F</members>
+    <members>CSD_Team_Admin_Reports/DVSMedicalDataCleanup/Medical_Questions_Comment_Boxes_for_a9t</members>
     <members>CSD_Team_Admin_Reports/DVSMedicalDataCleanup/New_Condition_Description_Report_GSO</members>
+    <members>CSD_Team_Admin_Reports/DVSMedicalDataCleanup/New_Report_yLp</members>
+    <members>CSD_Team_Admin_Reports/DVSMedicalDataCleanup/Picklist_Questions_with_Responses_qTd</members>
+    <members>CSD_Team_Admin_Reports/DVSMedicalDataCleanup/Picklist_Questions_with_Specified_Questi_3mU</members>
     <members>CSD_Team_Admin_Reports/ICD_codes_w_CDesc_w_MedQs</members>
     <members>CSD_Team_Admin_Reports/Lead_Object_Reports_NJf</members>
     <members>CSD_Team_Admin_Reports/Lead_Owner_Transfer_Report_X0C</members>
@@ -4377,6 +4384,9 @@
     <members>All_Leads_and_associated_cases</members>
     <members>Cases_with_Sum_of_Expenses</members>
     <members>Cases_with_Wish_Budget_with_Wish_Expenses</members>
+    <members>CD_with_or_without_Med_questions</members>
+    <members>Condition_Description_with_Medical_Questions</members>
+    <members>Condition_Descriptions_w_Med_Questions_Responses</members>
     <members>Contacts_and_Training</members>
     <members>Duplicate_Accounts</members>
     <members>Duplicate_Contacts</members>
