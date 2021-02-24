@@ -359,7 +359,7 @@
         <defaultValue>0</defaultValue>
         <description>Captures the Number of Medical Questions Answers in relation to a DV</description>
         <externalId>false</externalId>
-        <label># of MQ Answers</label>
+        <label># of Diagnosis Answers</label>
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
@@ -367,7 +367,7 @@
         <type>Number</type>
         <unique>false</unique>
     </fields>
-    <label>Diagnosis Verification</label>
+    <label>Diagnosis</label>
     <listViews>
         <fullName>All</fullName>
         <columns>NAME</columns>
@@ -383,10 +383,10 @@
     </listViews>
     <nameField>
         <displayFormat>DV-{000}</displayFormat>
-        <label>Diagnosis Verification Name</label>
+        <label>Diagnosis Name</label>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Diagnosis Verification</pluralLabel>
+    <pluralLabel>Diagnoses</pluralLabel>
     <searchLayouts />
     <sharingModel>Read</sharingModel>
     <visibility>Public</visibility>
