@@ -13,6 +13,7 @@ export default class DvDiagnosis extends LightningElement {
   dvDiagnosis;
   leadName;
   comatoseState;
+  receivedDate;
   isShowModal = false;
   modalConfig;
 
@@ -84,9 +85,12 @@ export default class DvDiagnosis extends LightningElement {
       this.comatoseState = "";
     } else {
       this.dispatchEvent(new CustomEvent("showspinner", { detail: true }));
+      let today = new Date();
+      this.receivedDate = today.toISOString();
       let diagnosis = {
         leadId: this.leadId,
-        comatoseVegetativeState: this.comatoseState
+        comatoseVegetativeState: this.comatoseState,
+        receivedDate: this.receivedDate
       };
 
       saveLeadDvDiagnosis({

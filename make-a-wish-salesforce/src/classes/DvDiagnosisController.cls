@@ -29,6 +29,9 @@ public without sharing class DvDiagnosisController {
         Lead updateLead = new Lead();
         updateLead.Id = diagnosisWrapper.leadId;
         updateLead.Is_in_a_Comatose_Vegetative_State__c = diagnosisWrapper.comatoseVegetativeState;
+        if(updateLead.Is_in_a_Comatose_Vegetative_State__c == Constant_AC.LEAD_COMATOSE_VEGETATIVE_STATE_YES) {
+            updateLead.Part_A_Received__c = diagnosisWrapper.receivedDate;
+        }
 
         try {
             update updateLead;
@@ -46,5 +49,7 @@ public without sharing class DvDiagnosisController {
         public String leadName {get; set;}
         @AuraEnabled
         public String comatoseVegetativeState {get; set;}
+        @AuraEnabled
+        public Date receivedDate {get; set;}
     }
 }
