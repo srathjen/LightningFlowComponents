@@ -818,6 +818,7 @@
     <members>Contact.Volunteer_Details_BM_VC</members>
     <members>Contact.Wish_Family_Info</members>
     <members>dsfs__EnvelopeConfiguration__c.dsfs__Save</members>
+    <members>Lead.Attachments</members>
     <members>Lead.Best_Contact_HTF_Unmatched</members>
     <members>Lead.Best_Contact_MP_Unmatched</members>
     <members>Lead.Diagnosis_Verification</members>
