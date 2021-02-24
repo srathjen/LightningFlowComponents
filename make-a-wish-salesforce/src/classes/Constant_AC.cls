@@ -323,7 +323,6 @@ public class Constant_AC {
 	 * Docusign Status
 	 */
 	public static final String DOCUSIGN_ENVELOPE_STATUS_COMPLETED = 'Completed';
-	public static final String DOCUSIGN_SUBJECT_DIAGNOSIS_VERIFICATION_FORM = 'Diagnosis Verification Form';
 	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_WISH_FORM_AND_LIABILITY = 'Signature Required - Wish Form & Liability And Publicity Release Form';
 	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_WISH_CLEARANCE_FORM = 'Signature Required – Make-A-Wish Wish Clearance Form';
 	public static final String DOCUSIGN_STATUS_SUBJECT_SIGNATURE_REQUIRED_RUSH_WISH_CLEARANCE_FORM = 'Signature Required – Make-A-Wish Rush Wish Clearance Form';
