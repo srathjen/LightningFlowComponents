@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Condition_Description__c$Name</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c.Medical_Questions__r$Name</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c.Medical_Questions__r$Picklist_values__c</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c.Medical_Questions__r$Id</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Condition_Description__c.Medical_Questions__r$Sort_Order__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Condition_Description__c$InActive__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Condition_Description__c.Medical_Questions__r$Data_Type__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Picklist - Single</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Picklist Questions for Response upload</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Condition_Description_with_Medical_Questions__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Condition_Description__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>
