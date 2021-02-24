@@ -4678,5 +4678,12 @@
     <members>Lead</members>
     <name>Workflow</name>
   </types>
+  <types>
+    <members>dsfs__DocuSign_Recipient_Status__c.Send_DV_Signature_Alert_to_Intake_Manager</members>
+    <members>dsfs__DocuSign_Recipient_Status__c.Send_DV_Signature_Reminder_to_Medical_Professional_Final</members>
+    <members>dsfs__DocuSign_Recipient_Status__c.Send_DV_Signature_Reminder_to_Medical_Professional_First</members>
+    <members>dsfs__DocuSign_Recipient_Status__c.Send_DV_Signature_Reminder_to_Medical_Professional_Second</members>
+    <name>WorkflowAlert</name>
+  </types>
   <version>48.0</version>
 </Package>
