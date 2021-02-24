@@ -38,7 +38,7 @@ public class DocuSignServiceTest {
 		List<dsfs__DocuSign_Status__c> docuSignStatuses = TestDataFactory.createDocusignStatus(1);
 		dsfs__DocuSign_Status__c docuSignStatus = docuSignStatuses.get(0);
 		docuSignStatus.dsfs__Lead__c = lead.Id;
-        docuSignStatus.dsfs__Envelope_Status__c = 'Completed';
+        	docuSignStatus.dsfs__Envelope_Status__c = 'Completed';
 		insert docuSignStatuses;
 
 		List<Attachment> attachments = TestDataFactory.createAttachments(1, docuSignStatus.Id);
