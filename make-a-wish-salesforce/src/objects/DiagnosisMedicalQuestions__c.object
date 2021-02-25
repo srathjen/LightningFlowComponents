@@ -238,7 +238,7 @@
     <label>Diagnosis Answer</label>
     <nameField>
         <displayFormat>DQ-{0000}</displayFormat>
-        <label>MQ Answer</label>
+        <label>Diagnosis Answer</label>
         <trackHistory>false</trackHistory>
         <type>AutoNumber</type>
     </nameField>
