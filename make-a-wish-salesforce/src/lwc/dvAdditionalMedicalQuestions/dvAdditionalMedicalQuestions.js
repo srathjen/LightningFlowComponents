@@ -1,11 +1,11 @@
 /**
-@description Additional Medical Questions component, the additional medical questions component for the Diagnosis Verification process.
-@author Gustavo Mayer, Traction on Demand
-@createdDate 08/Feb/2021
-**/
-import { api, LightningElement, wire } from "lwc";
-import findAdditionalMedicalQuestions from "@salesforce/apex/DvAdditionalMedicalQuestionsController.getAdditionalMedicalQuestionsByLeadId";
-import saveAdditionalMedicalQuestions from "@salesforce/apex/DvAdditionalMedicalQuestionsController.saveAdditionalMedicalQuestions";
+ @description Additional Medical Questions component, the additional medical questions component for the Diagnosis Verification process.
+ @author Gustavo Mayer, Traction on Demand
+ @createdDate 08/Feb/2021
+ **/
+import { api, LightningElement, wire } from 'lwc';
+import findAdditionalMedicalQuestions from '@salesforce/apex/DvAdditionalMedicalQuestionsController.getAdditionalMedicalQuestionsByLeadId';
+import saveAdditionalMedicalQuestions from '@salesforce/apex/DvAdditionalMedicalQuestionsController.saveAdditionalMedicalQuestions';
 
 export default class DvAdditionalMedicalQuestions extends LightningElement {
   /**
@@ -13,27 +13,27 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
    */
   leadId;
   isLeadQualifying;
-  wishChildFirstName = "";
-  unplannedHospitalAdmissions = "";
-  timesChildAdmitted = "";
-  admittedDiagnosis = "";
-  hospitalizationAdmissionIcu = "";
-  additionalClinicalDetails = "";
-  statementDescribePatient = "";
-  expectConditionDeteriorate = "";
-  expectConditionDeteriorateExplain = "";
-  medicalExpediteProcess = "";
-  medicalExpediteProcessReason = "";
-  provideTimeFrameWish = "";
-  provideTimeFrameWishInformation = "";
-  medicalSummaryAttachment = "";
-  additionalInfoProvide = "";
-  cognitiveDelay = "";
-  levelOfDelay = "";
-  speechLanguageDelay = "";
-  expressNeedsDesires = "";
-  describeCommunicationNeeds = [""];
-  describeCommunicationNeedsInformation = "";
+  wishChildFirstName = '';
+  unplannedHospitalAdmissions = '';
+  timesChildAdmitted = '';
+  admittedDiagnosis = '';
+  hospitalizationAdmissionIcu = '';
+  additionalClinicalDetails = '';
+  statementDescribePatient = '';
+  expectConditionDeteriorate = '';
+  expectConditionDeteriorateExplain = '';
+  medicalExpediteProcess = '';
+  medicalExpediteProcessReason = '';
+  provideTimeFrameWish = '';
+  provideTimeFrameWishInformation = '';
+  medicalSummaryAttachment = '';
+  additionalInfoProvide = '';
+  cognitiveDelay = '';
+  levelOfDelay = '';
+  speechLanguageDelay = '';
+  expressNeedsDesires = '';
+  describeCommunicationNeeds = [''];
+  describeCommunicationNeedsInformation = '';
 
   isUnplannedHospitalAdmissionsRequired = true;
   isTimesChildAdmittedRequired = false;
@@ -61,7 +61,7 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
   }
 
   @wire(findAdditionalMedicalQuestions, {
-    leadId: "$leadId",
+    leadId: '$leadId',
   })
   wired(result) {
     if (result.data) {
@@ -111,7 +111,7 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
       );
       this.showHideExpressNeedsDesiresFields(this.expressNeedsDesires);
 
-      const fileManager = this.template.querySelector("c-file-manager");
+      const fileManager = this.template.querySelector('c-file-manager');
       fileManager.handleLoadFileManager(this.leadId);
 
       this.setRequiredFields();
@@ -133,16 +133,16 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
 
   showHideUnplannedHospitalAdmissionFields(value) {
     const unplannedHospitalAdmissions = this.template.querySelectorAll(
-      ".unplannedHospitalAdmissions"
+      '.unplannedHospitalAdmissions'
     );
     const timesChildAdmitted = this.template.querySelectorAll(
-      ".timesChildAdmitted"
+      '.timesChildAdmitted'
     );
     const admittedDiagnosis = this.template.querySelectorAll(
-      ".admittedDiagnosis"
+      '.admittedDiagnosis'
     );
     const hospitalizationAdmissionIcu = this.template.querySelectorAll(
-      ".hospitalizationAdmissionIcu"
+      '.hospitalizationAdmissionIcu'
     );
 
     if (this.isLeadQualifying) {
@@ -150,13 +150,13 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
       this.hide(timesChildAdmitted);
       this.hide(admittedDiagnosis);
       this.hide(hospitalizationAdmissionIcu);
-      this.unplannedHospitalAdmissions = "";
-      this.timesChildAdmitted = "";
-      this.admittedDiagnosis = "";
-      this.hospitalizationAdmissionIcu = "";
+      this.unplannedHospitalAdmissions = '';
+      this.timesChildAdmitted = '';
+      this.admittedDiagnosis = '';
+      this.hospitalizationAdmissionIcu = '';
     } else if (!this.isLeadQualifying) {
       this.show(unplannedHospitalAdmissions);
-      if (value && value === "Yes") {
+      if (value && value === 'Yes') {
         this.show(timesChildAdmitted);
         this.show(admittedDiagnosis);
         this.show(hospitalizationAdmissionIcu);
@@ -164,9 +164,9 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
         this.hide(timesChildAdmitted);
         this.hide(admittedDiagnosis);
         this.hide(hospitalizationAdmissionIcu);
-        this.timesChildAdmitted = "";
-        this.admittedDiagnosis = "";
-        this.hospitalizationAdmissionIcu = "";
+        this.timesChildAdmitted = '';
+        this.admittedDiagnosis = '';
+        this.hospitalizationAdmissionIcu = '';
       }
     }
   }
@@ -193,10 +193,10 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
 
   showHideAdditionalClinicalDetailsFields() {
     const additionalClinicalDetails = this.template.querySelectorAll(
-      ".additionalClinicalDetails"
+      '.additionalClinicalDetails'
     );
     if (this.isLeadQualifying) {
-      this.additionalClinicalDetails = "";
+      this.additionalClinicalDetails = '';
       this.hide(additionalClinicalDetails);
     } else if (!this.isLeadQualifying) {
       this.show(additionalClinicalDetails);
@@ -212,10 +212,10 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
 
   showHideStatementDescribePatientFields() {
     const statementDescribePatient = this.template.querySelectorAll(
-      ".statementDescribePatient"
+      '.statementDescribePatient'
     );
     if (this.isLeadQualifying) {
-      this.statementDescribePatient = "";
+      this.statementDescribePatient = '';
       this.hide(statementDescribePatient);
     } else if (!this.isLeadQualifying) {
       this.show(statementDescribePatient);
@@ -230,13 +230,13 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
 
   showHideConditionDeteriorateFields(value) {
     const expectConditionDeteriorateExplain = this.template.querySelectorAll(
-      ".expectConditionDeteriorateExplain"
+      '.expectConditionDeteriorateExplain'
     );
-    if (value && value === "Yes") {
+    if (value && value === 'Yes') {
       this.show(expectConditionDeteriorateExplain);
     } else {
       this.hide(expectConditionDeteriorateExplain);
-      this.expectConditionDeteriorateExplain = "";
+      this.expectConditionDeteriorateExplain = '';
     }
   }
 
@@ -252,24 +252,24 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
 
   showHideMedicalExpediteProcessFields(value) {
     const medicalExpediteProcessReason = this.template.querySelectorAll(
-      ".medicalExpediteProcessReason"
+      '.medicalExpediteProcessReason'
     );
     const provideTimeFrameWish = this.template.querySelectorAll(
-      ".provideTimeFrameWish"
+      '.provideTimeFrameWish'
     );
     const provideTimeFrameWishInformation = this.template.querySelectorAll(
-      ".provideTimeFrameWishInformation"
+      '.provideTimeFrameWishInformation'
     );
-    if (value && value === "Yes") {
+    if (value && value === 'Yes') {
       this.show(medicalExpediteProcessReason);
       this.show(provideTimeFrameWish);
     } else {
       this.hide(medicalExpediteProcessReason);
       this.hide(provideTimeFrameWish);
       this.hide(provideTimeFrameWishInformation);
-      this.medicalExpediteProcessReason = "";
-      this.provideTimeFrameWish = "";
-      this.provideTimeFrameWishInformation = "";
+      this.medicalExpediteProcessReason = '';
+      this.provideTimeFrameWish = '';
+      this.provideTimeFrameWishInformation = '';
     }
   }
 
@@ -286,13 +286,13 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
 
   showHideProvideTimeFrameFields(value) {
     const provideTimeFrameWishInformation = this.template.querySelectorAll(
-      ".provideTimeFrameWishInformation"
+      '.provideTimeFrameWishInformation'
     );
-    if (value && value === "Other") {
+    if (value && value === 'Other') {
       this.show(provideTimeFrameWishInformation);
     } else {
       this.hide(provideTimeFrameWishInformation);
-      this.provideTimeFrameWishInformation = "";
+      this.provideTimeFrameWishInformation = '';
     }
   }
 
@@ -318,46 +318,41 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
 
   showHideCognitiveDelayFields(value, newValue) {
     const speechLanguageDelay = this.template.querySelectorAll(
-      ".speechLanguageDelay"
+      '.speechLanguageDelay'
     );
-    const levelOfDelay = this.template.querySelectorAll(".levelOfDelay");
+    const levelOfDelay = this.template.querySelectorAll('.levelOfDelay');
     const expressNeedsDesires = this.template.querySelectorAll(
-      ".expressNeedsDesires"
+      '.expressNeedsDesires'
     );
     const describeCommunicationNeeds = this.template.querySelectorAll(
-      ".describeCommunicationNeeds"
+      '.describeCommunicationNeeds'
     );
     const describeCommunicationNeedsInformation = this.template.querySelectorAll(
-      ".describeCommunicationNeedsInformation"
+      '.describeCommunicationNeedsInformation'
     );
 
     // Reset all fields if there is a change to the value
     if (value && value !== newValue) {
-      this.speechLanguageDelay = "";
+      this.speechLanguageDelay = '';
       this.hide(speechLanguageDelay);
       this.hide(levelOfDelay);
       this.hide(expressNeedsDesires);
       this.hide(describeCommunicationNeeds);
       this.hide(describeCommunicationNeedsInformation);
-      this.levelOfDelay = "";
-      this.expressNeedsDesires = "";
-      this.describeCommunicationNeeds = "";
-      this.describeCommunicationNeedsInformation = "";
+      this.levelOfDelay = '';
+      this.expressNeedsDesires = '';
+      this.describeCommunicationNeeds = '';
+      this.describeCommunicationNeedsInformation = '';
     }
 
-    if (
-      newValue &&
-      (newValue === "No" ||
-        newValue ===
-          "I do not have access to that information. I recommend the chapter follow up with the medical team")
-    ) {
+    if (newValue && newValue === 'No') {
       this.show(speechLanguageDelay);
       this.hide(levelOfDelay);
       this.hide(expressNeedsDesires);
       this.hide(describeCommunicationNeeds);
       this.hide(describeCommunicationNeedsInformation);
-      this.levelOfDelay = "";
-    } else if (newValue && newValue === "Yes") {
+      this.levelOfDelay = '';
+    } else if (newValue && newValue === 'Yes') {
       this.show(levelOfDelay);
       this.hide(speechLanguageDelay);
       this.hide(expressNeedsDesires);
@@ -369,11 +364,11 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
       this.hide(expressNeedsDesires);
       this.hide(describeCommunicationNeeds);
       this.hide(describeCommunicationNeedsInformation);
-      this.speechLanguageDelay = "";
-      this.levelOfDelay = "";
-      this.expressNeedsDesires = "";
-      this.describeCommunicationNeeds = "";
-      this.describeCommunicationNeedsInformation = "";
+      this.speechLanguageDelay = '';
+      this.levelOfDelay = '';
+      this.expressNeedsDesires = '';
+      this.describeCommunicationNeeds = '';
+      this.describeCommunicationNeedsInformation = '';
     }
   }
 
@@ -386,16 +381,16 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
 
   showHideLevelOfDelayFields(value, newValue) {
     const speechLanguageDelay = this.template.querySelectorAll(
-      ".speechLanguageDelay"
+      '.speechLanguageDelay'
     );
     const expressNeedsDesires = this.template.querySelectorAll(
-      ".expressNeedsDesires"
+      '.expressNeedsDesires'
     );
     const describeCommunicationNeeds = this.template.querySelectorAll(
-      ".describeCommunicationNeeds"
+      '.describeCommunicationNeeds'
     );
     const describeCommunicationNeedsInformation = this.template.querySelectorAll(
-      ".describeCommunicationNeedsInformation"
+      '.describeCommunicationNeedsInformation'
     );
 
     // Reset all fields if there is a change to the value
@@ -404,16 +399,16 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
       this.hide(expressNeedsDesires);
       this.hide(describeCommunicationNeeds);
       this.hide(describeCommunicationNeedsInformation);
-      this.speechLanguageDelay = "";
-      this.expressNeedsDesires = "";
-      this.describeCommunicationNeeds = "";
-      this.describeCommunicationNeedsInformation = "";
+      this.speechLanguageDelay = '';
+      this.expressNeedsDesires = '';
+      this.describeCommunicationNeeds = '';
+      this.describeCommunicationNeedsInformation = '';
     }
 
     if (
       newValue &&
-      (newValue === "Mild: Functions close to peers" ||
-        newValue === "Moderate: Functions below peers")
+      (newValue === 'Mild: Functions close to peers' ||
+        newValue === 'Moderate: Functions below peers')
     ) {
       this.show(speechLanguageDelay);
       this.hide(describeCommunicationNeeds);
@@ -421,7 +416,7 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
     } else if (
       newValue &&
       newValue ===
-        "Severe: Functions nothing like same-age peers, extremely cognitively delayed."
+        'Severe: Functions nothing like same-age peers, extremely cognitively delayed.'
     ) {
       this.show(describeCommunicationNeeds);
       this.show(describeCommunicationNeedsInformation);
@@ -431,10 +426,10 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
       this.hide(expressNeedsDesires);
       this.hide(describeCommunicationNeeds);
       this.hide(describeCommunicationNeedsInformation);
-      this.speechLanguageDelay = "";
-      this.expressNeedsDesires = "";
-      this.describeCommunicationNeeds = "";
-      this.describeCommunicationNeedsInformation = "";
+      this.speechLanguageDelay = '';
+      this.expressNeedsDesires = '';
+      this.describeCommunicationNeeds = '';
+      this.describeCommunicationNeedsInformation = '';
     }
   }
 
@@ -449,13 +444,13 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
 
   showHideSpeechLanguageDelayFields(value, newValue) {
     const expressNeedsDesires = this.template.querySelectorAll(
-      ".expressNeedsDesires"
+      '.expressNeedsDesires'
     );
     const describeCommunicationNeeds = this.template.querySelectorAll(
-      ".describeCommunicationNeeds"
+      '.describeCommunicationNeeds'
     );
     const describeCommunicationNeedsInformation = this.template.querySelectorAll(
-      ".describeCommunicationNeedsInformation"
+      '.describeCommunicationNeedsInformation'
     );
 
     // Reset all fields if there is a change to the value
@@ -463,20 +458,20 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
       this.hide(expressNeedsDesires);
       this.hide(describeCommunicationNeeds);
       this.hide(describeCommunicationNeedsInformation);
-      this.expressNeedsDesires = "";
-      this.describeCommunicationNeeds = "";
-      this.describeCommunicationNeedsInformation = "";
+      this.expressNeedsDesires = '';
+      this.describeCommunicationNeeds = '';
+      this.describeCommunicationNeedsInformation = '';
     }
 
-    if (newValue && newValue === "Yes") {
+    if (newValue && newValue === 'Yes') {
       this.show(expressNeedsDesires);
     } else {
       this.hide(expressNeedsDesires);
       this.hide(describeCommunicationNeeds);
       this.hide(describeCommunicationNeedsInformation);
-      this.expressNeedsDesires = "";
-      this.describeCommunicationNeeds = "";
-      this.describeCommunicationNeedsInformation = "";
+      this.expressNeedsDesires = '';
+      this.describeCommunicationNeeds = '';
+      this.describeCommunicationNeedsInformation = '';
     }
   }
 
@@ -488,19 +483,19 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
 
   showHideExpressNeedsDesiresFields(value) {
     const describeCommunicationNeeds = this.template.querySelectorAll(
-      ".describeCommunicationNeeds"
+      '.describeCommunicationNeeds'
     );
     const describeCommunicationNeedsInformation = this.template.querySelectorAll(
-      ".describeCommunicationNeedsInformation"
+      '.describeCommunicationNeedsInformation'
     );
-    if (value && value === "No, child is non-verbal") {
+    if (value && value === 'No, child is non-verbal') {
       this.show(describeCommunicationNeeds);
       this.show(describeCommunicationNeedsInformation);
     } else {
       this.hide(describeCommunicationNeeds);
       this.hide(describeCommunicationNeedsInformation);
-      this.describeCommunicationNeeds = "";
-      this.describeCommunicationNeedsInformation = "";
+      this.describeCommunicationNeeds = '';
+      this.describeCommunicationNeedsInformation = '';
     }
   }
 
@@ -516,7 +511,7 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
 
   setRequiredFields() {
     const unplannedHospitalAdmissions = this.template.querySelectorAll(
-      ".field, .unplannedHospitalAdmissions"
+      '.field, .unplannedHospitalAdmissions'
     );
 
     if (this.isLeadQualifying) {
@@ -526,7 +521,7 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
       this.isHospitalizationAdmissionIcuRequired = false;
     } else if (!this.isLeadQualifying) {
       this.isUnplannedHospitalAdmissionsRequired = true;
-      if (unplannedHospitalAdmissions.value === "Yes") {
+      if (unplannedHospitalAdmissions.value === 'Yes') {
         this.isTimesChildAdmittedRequired = true;
         this.isAdmittedDiagnosisRequired = true;
         this.isHospitalizationAdmissionIcuRequired = true;
@@ -550,18 +545,18 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
     }
 
     const expectConditionDeteriorate = this.template.querySelectorAll(
-      ".expectConditionDeteriorate"
+      '.expectConditionDeteriorate'
     );
-    if (expectConditionDeteriorate.value === "Yes") {
+    if (expectConditionDeteriorate.value === 'Yes') {
       this.isExpectConditionDeteriorateExplainRequired = true;
     } else {
       this.isExpectConditionDeteriorateExplainRequired = false;
     }
 
     const medicalExpediteProcess = this.template.querySelectorAll(
-      ".medicalExpediteProcess"
+      '.medicalExpediteProcess'
     );
-    if (medicalExpediteProcess.value === "Yes") {
+    if (medicalExpediteProcess.value === 'Yes') {
       this.isMedicalExpediteProcessReasonRequired = true;
       this.isProvideTimeFrameWishRequired = true;
     } else {
@@ -570,23 +565,19 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
     }
 
     const provideTimeFrameWish = this.template.querySelectorAll(
-      ".provideTimeFrameWish"
+      '.provideTimeFrameWish'
     );
-    if (provideTimeFrameWish.value === "Other") {
+    if (provideTimeFrameWish.value === 'Other') {
       this.isProvideTimeFrameWishInformationRequired = true;
     } else {
       this.isProvideTimeFrameWishInformationRequired = false;
     }
 
-    const cognitiveDelay = this.template.querySelectorAll(".cognitiveDelay");
-    if (cognitiveDelay.value === "Yes") {
+    const cognitiveDelay = this.template.querySelectorAll('.cognitiveDelay');
+    if (cognitiveDelay.value === 'Yes') {
       this.isLevelOfDelayRequired = true;
       this.isSpeechLanguageDelayRequired = false;
-    } else if (
-      cognitiveDelay.value === "No" ||
-      cognitiveDelay.value ===
-        "I do not have access to that information. I recommend the chapter follow up with the medical team"
-    ) {
+    } else if (cognitiveDelay.value === 'No') {
       this.isLevelOfDelayRequired = false;
       this.isSpeechLanguageDelayRequired = true;
     } else {
@@ -594,17 +585,17 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
       this.isSpeechLanguageDelayRequired = false;
     }
 
-    const levelOfDelay = this.template.querySelectorAll(".levelOfDelay");
+    const levelOfDelay = this.template.querySelectorAll('.levelOfDelay');
     if (
-      levelOfDelay.value === "Mild: Functions close to peers" ||
-      levelOfDelay.value === "Moderate: Functions below peers"
+      levelOfDelay.value === 'Mild: Functions close to peers' ||
+      levelOfDelay.value === 'Moderate: Functions below peers'
     ) {
       this.isSpeechLanguageDelayRequired = true;
       this.isDescribeCommunicationNeedsRequired = false;
       this.isDescribeCommunicationNeedsInformationRequired = false;
     } else if (
       levelOfDelay.value ===
-      "Severe: Functions nothing like same-age peers, extremely cognitively delayed."
+      'Severe: Functions nothing like same-age peers, extremely cognitively delayed.'
     ) {
       this.isSpeechLanguageDelayRequired = false;
       this.isDescribeCommunicationNeedsRequired = true;
@@ -616,18 +607,18 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
     }
 
     const speechLanguageDelay = this.template.querySelectorAll(
-      ".speechLanguageDelay"
+      '.speechLanguageDelay'
     );
-    if (speechLanguageDelay.value === "Yes") {
+    if (speechLanguageDelay.value === 'Yes') {
       this.isExpressNeedsDesiresRequired = true;
     } else {
       this.isExpressNeedsDesiresRequired = false;
     }
 
     const expressNeedsDesires = this.template.querySelectorAll(
-      ".expressNeedsDesires"
+      '.expressNeedsDesires'
     );
-    if (expressNeedsDesires.value === "No, child is non-verbal") {
+    if (expressNeedsDesires.value === 'No, child is non-verbal') {
       this.isDescribeCommunicationNeedsRequired = true;
       this.isDescribeCommunicationNeedsInformationRequired = true;
     } else {
@@ -638,7 +629,7 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
 
   handleClickSave() {
     this.dispatchEvent(
-      new CustomEvent("saveadditionalmedicalquestions", {
+      new CustomEvent('saveadditionalmedicalquestions', {
         detail: {
           showSpinner: true,
         },
@@ -647,7 +638,7 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
 
     const describeCommunicationNeedsList = this.describeCommunicationNeeds
       ? this.describeCommunicationNeeds
-      : [""];
+      : [''];
     const additionalMedicalQuestions = {
       leadId: this.leadId,
       unplannedHospitalAdmissions: this.unplannedHospitalAdmissions,
@@ -677,7 +668,7 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
     })
       .then((result) => {
         this.dispatchEvent(
-          new CustomEvent("saveadditionalmedicalquestions", {
+          new CustomEvent('saveadditionalmedicalquestions', {
             detail: {
               showSpinner: false,
             },
@@ -754,10 +745,6 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
     return `IS THERE ADDITIONAL INFORMATION YOU WOULD LIKE TO PROVIDE?`;
   }
 
-  get additionalInfoProvideSecondLabel() {
-    return `(e.g., additional information that will help us make an eligibility determination for conditions that require review on a case-by-case basis.)`;
-  }
-
   get cognitiveDelayLabel() {
     return `DOES ${this.wishChildFirstName.toUpperCase()} HAVE COGNITIVE DELAYS?`;
   }
@@ -788,16 +775,16 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
 
   get yesOrNoOptions() {
     return [
-      { label: "Yes", value: "Yes" },
-      { label: "No", value: "No" },
+      { label: 'Yes', value: 'Yes' },
+      { label: 'No', value: 'No' },
     ];
   }
 
   get yesOrNoOrNotSureOptions() {
     return [
-      { label: "Yes", value: "Yes" },
-      { label: "No", value: "No" },
-      { label: "Not Sure", value: "Not Sure" },
+      { label: 'Yes', value: 'Yes' },
+      { label: 'No', value: 'No' },
+      { label: 'Not Sure', value: 'Not Sure' },
     ];
   }
 
@@ -805,68 +792,62 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
     return [
       {
         label: `${this.wishChildFirstName} has a condition for which curative treatment may be feasible but can fail; non-adherence is not included as a treatment failure. (e.g., cancer, irreversible organ failure)`,
-        value: "TREATMENT_MAY_BE_FEASIBLE_BUT_CAN_FAIL",
+        value: 'TREATMENT_MAY_BE_FEASIBLE_BUT_CAN_FAIL',
       },
       {
         label: `${this.wishChildFirstName} has a condition with a known history of a significantly shortened life expectancy, but frequent and/or long periods of intensive treatment may prolong life and allow participation in normal activities (e.g., cystic fibrosis, solid organ transplant)`,
-        value: "TREATMENT_MAY_PROLONG_NORMAL_ACTIVITIES",
+        value: 'TREATMENT_MAY_PROLONG_NORMAL_ACTIVITIES',
       },
       {
         label: `${this.wishChildFirstName} has a condition without curative treatment options in which debilitation may extend over many years (e.g., severe treatment-resistant epilepsy, some metabolic diseases)`,
-        value: "DEBILITATION_MAY_EXTEND_OVER_MANY_YEARS",
+        value: 'DEBILITATION_MAY_EXTEND_OVER_MANY_YEARS',
       },
       {
         label: `${this.wishChildFirstName} has an irreversible but non-progressive condition with life-threatening comorbidities and a known history of a significantly shortened life expectancy (e.g. anoxic brain injury, severe cerebral palsy)`,
-        value: "INCREASED_PROBABILITY_OF_PREMATURE_DEATH",
+        value: 'INCREASED_PROBABILITY_OF_PREMATURE_DEATH',
       },
       {
         label: `${this.wishChildFirstName} has a condition for which there is no reasonable hope of cure and from which children or young people will experience a significantly shortened life expectancy (e.g., Duchenne muscular dystrophy or neurodegenerative disease)`,
-        value: "CHILD_WILL_ULTIMATELY_DIE_PREMATURELY",
+        value: 'CHILD_WILL_ULTIMATELY_DIE_PREMATURELY',
       },
       {
         label: `None of these statements describe ${this.wishChildFirstName}`,
-        value: "NONE_OF_THESE_STATEMENTS_DESCRIBES_CHILD",
+        value: 'NONE_OF_THESE_STATEMENTS_DESCRIBES_CHILD',
       },
     ];
   }
 
   get cognitiveDelayOptions() {
     return [
-      { label: "Yes", value: "Yes" },
-      { label: "No", value: "No" },
-      {
-        label:
-          "I do not have access to that information. I recommend the chapter follow up with the medical team",
-        value:
-          "I do not have access to that information. I recommend the chapter follow up with the medical team",
-      },
+      { label: 'Yes', value: 'Yes' },
+      { label: 'No', value: 'No' },
     ];
   }
 
   get provideTimeFrameWishOptions() {
     return [
-      { label: "< 1 month", value: "< 1 month" },
-      { label: "1-3 months", value: "< 1 month" },
-      { label: "3-6 months", value: "3-6 months" },
-      { label: "Other", value: "Other" },
+      { label: '< 1 month', value: '< 1 month' },
+      { label: '1-3 months', value: '< 1 month' },
+      { label: '3-6 months', value: '3-6 months' },
+      { label: 'Other', value: 'Other' },
     ];
   }
 
   get levelOfDelayOptions() {
     return [
       {
-        label: "Mild: Functions close to peers",
-        value: "Mild: Functions close to peers",
+        label: 'Mild: Functions close to peers',
+        value: 'Mild: Functions close to peers',
       },
       {
-        label: "Moderate: Functions below peers",
-        value: "Moderate: Functions below peers",
+        label: 'Moderate: Functions below peers',
+        value: 'Moderate: Functions below peers',
       },
       {
         label:
-          "Severe: Functions nothing like same-age peers, extremely cognitively delayed.",
+          'Severe: Functions nothing like same-age peers, extremely cognitively delayed.',
         value:
-          "Severe: Functions nothing like same-age peers, extremely cognitively delayed.",
+          'Severe: Functions nothing like same-age peers, extremely cognitively delayed.',
       },
     ];
   }
@@ -874,16 +855,10 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
   get speechLanguageDelayOptions() {
     return [
       {
-        label: "No, child is verbal at an age-appropriate level.",
-        value: "No, child is verbal at an age-appropriate level.",
+        label: 'No, child is verbal at an age-appropriate level.',
+        value: 'No, child is verbal at an age-appropriate level.',
       },
-      { label: "Yes", value: "Yes" },
-      {
-        label:
-          "I do not have access to that information. I recommend the chapter follow up with the medical team",
-        value:
-          "I do not have access to that information. I recommend the chapter follow up with the medical team",
-      },
+      { label: 'Yes', value: 'Yes' },
     ];
   }
 
@@ -891,11 +866,11 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
     return [
       {
         label:
-          "Yes, child is verbal but delayed and able to be understood by others",
+          'Yes, child is verbal but delayed and able to be understood by others',
         value:
-          "Yes, child is verbal but delayed and able to be understood by others",
+          'Yes, child is verbal but delayed and able to be understood by others',
       },
-      { label: "No, child is non-verbal", value: "No, child is non-verbal" },
+      { label: 'No, child is non-verbal', value: 'No, child is non-verbal' },
     ];
   }
 
@@ -903,44 +878,44 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
     return [
       {
         label:
-          "Crying without the capacity to indicate needs or wants to a caregiver well known to the child",
+          'Crying without the capacity to indicate needs or wants to a caregiver well known to the child',
         value:
-          "Crying without the capacity to indicate needs or wants to a caregiver well known to the child",
+          'Crying without the capacity to indicate needs or wants to a caregiver well known to the child',
       },
       {
         label:
-          "Pointing at desired objects, reaching out for something or someone they want,  taking your hand to what they want",
+          'Pointing at desired objects, reaching out for something or someone they want,  taking your hand to what they want',
         value:
-          "Pointing at desired objects, reaching out for something or someone they want,  taking your hand to what they want",
+          'Pointing at desired objects, reaching out for something or someone they want,  taking your hand to what they want',
       },
       {
         label:
-          "Repeating something they just heard in a manner suggesting the child is desiring (as opposed to just echoing words)",
+          'Repeating something they just heard in a manner suggesting the child is desiring (as opposed to just echoing words)',
         value:
-          "Repeating something they just heard in a manner suggesting the child is desiring (as opposed to just echoing words)",
+          'Repeating something they just heard in a manner suggesting the child is desiring (as opposed to just echoing words)',
       },
       {
-        label: "Sign language (either standard or specific to the child)",
-        value: "Sign language (either standard or specific to the child)",
+        label: 'Sign language (either standard or specific to the child)',
+        value: 'Sign language (either standard or specific to the child)',
       },
       {
-        label: "Assistive communication tool, tablet, or computer",
-        value: "Assistive communication tool, tablet, or computer",
+        label: 'Assistive communication tool, tablet, or computer',
+        value: 'Assistive communication tool, tablet, or computer',
       },
     ];
   }
 
   show(elms) {
     elms.forEach((element) => {
-      element.classList.remove("slds-hide");
-      element.classList.add("slds-show");
+      element.classList.remove('slds-hide');
+      element.classList.add('slds-show');
     });
   }
 
   hide(elms) {
     elms.forEach((element) => {
-      element.classList.add("slds-hide");
-      element.classList.remove("slds-show");
+      element.classList.add('slds-hide');
+      element.classList.remove('slds-show');
     });
   }
 }
