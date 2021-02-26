@@ -176,12 +176,37 @@ export default class DiagnosisVerification extends LightningElement {
     this.isShowSpinner = event.detail.showSpinner;
   }
 
+  handleSaveTravelQuestionsEvent(event) {
+    const eventDetail = event.detail;
+    if (eventDetail) {
+      if (eventDetail.message) {
+        if (eventDetail.success === true) {
+          this.showSaveSuccessMessage();
+        } else if (eventDetail.success === false) {
+          this.showErrorMessage(eventDetail.message);
+        }
+      }
+    }
+    this.isShowSpinner = event.detail.showSpinner;
+  }
+
   showSaveSuccessMessage() {
     this.notificationConfig = {
       title:
         "Your form has been successfully saved but has not yet been submitted.",
       message: "Please click ‘Submit’ to complete Diagnosis Verification.",
       variant: "success",
+      autoClose: true,
+      autoCloseErrorWarning: true
+    };
+    this.template.querySelector("c-notification-toast").showCustomNotice();
+  }
+
+  showErrorMessage(message) {
+    this.notificationConfig = {
+      title: message,
+      message: "",
+      variant: "error",
       autoClose: true,
       autoCloseErrorWarning: true
     };
