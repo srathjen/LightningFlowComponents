@@ -56,7 +56,7 @@
         onchange={handleChangeLungDiseaseCheckbox}
       ></lightning-input>
       <lightning-checkbox-group
-        class="innerLungDiseaseOptions"
+        class="inset innerLungDiseaseOptions"
         name="lungDiseaseCheckboxSet"
         label="Please select all that apply"
         required={isLungDisease}
@@ -100,7 +100,7 @@
         onchange={handleChangePulmonaryHypertensionCheckbox}
       ></lightning-input>
       <lightning-combobox
-        class="innerPulmonaryHypertensionOptions"
+        class="inset innerPulmonaryHypertensionOptions"
         name="pulmonaryHypertensionCombobox"
         label=""
         options={pulmonaryHypertensionOptions}
@@ -116,7 +116,7 @@
         onchange={handleChangeVentilatorDependenceCheckbox}
       ></lightning-input>
       <lightning-combobox
-        class="innerVentilatorDependenceOptions"
+        class="inset innerVentilatorDependenceOptions"
         name="ventilatorDepenceCombobox"
         label=""
         options={ventilatorDependenceOptions}
@@ -124,7 +124,9 @@
         onchange={handleChangeVentilatorDependenceCombobox}
         required={isVentilatorDependenceChecked}
       ></lightning-combobox>
-      <h1>CIRCULATORY SYSTEM AND HEART</h1>
+      <label class="slds-form-element__legend slds-form-element__label"
+        ><h1>CIRCULATORY SYSTEM AND HEART</h1></label
+      >
       <lightning-input
         type="checkbox"
         disabled={isNoneChecked}
@@ -135,7 +137,7 @@
         onchange={handleChangeChestPainCheckbox}
       ></lightning-input>
       <lightning-checkbox-group
-        class="innerChestPainOptions"
+        class="inset innerChestPainOptions"
         name="chestPainCheckboxSet"
         label="Please select all that apply"
         options={chestPainOptions}
@@ -153,7 +155,7 @@
         onchange={handleChangeArrhythmiaCheckbox}
       ></lightning-input>
       <lightning-checkbox-group
-        class="innerArrhythmiaOptions"
+        class="inset innerArrhythmiaOptions"
         name="arrhythmiaCheckboxSet"
         label="Please select all that apply"
         options={arrhythmiaOptions}
@@ -171,7 +173,7 @@
         onchange={handleChangeAcuteHeartFailureCheckbox}
       ></lightning-input>
       <lightning-checkbox-group
-        class="innerAcuteHeartFailureOptions"
+        class="inset innerAcuteHeartFailureOptions"
         name="acuteHeartFailureCheckboxSet"
         label="Please select all that apply"
         options={acuteHeartFailureOptions}
@@ -189,7 +191,7 @@
         onchange={handleChangeChronicHeartFailureCheckbox}
       ></lightning-input>
       <lightning-checkbox-group
-        class="innerChronicHeartFailureOptions"
+        class="inset innerChronicHeartFailureOptions"
         name="chronicHeartFailureCheckboxSet"
         label="Please select all that apply"
         options={chronicHeartFailureOptions}
@@ -207,7 +209,7 @@
         onchange={handleChangeCyanoticHeartDiseaseCheckbox}
       ></lightning-input>
       <lightning-checkbox-group
-        class="innerCyanoticicHeartDiseaseOptions"
+        class="inset innerCyanoticicHeartDiseaseOptions"
         name="cyanoticHeartDiseaseCheckboxSet"
         label="Please select all that apply"
         options={cyanoticHeartDiseaseOptions}
@@ -224,7 +226,9 @@
         checked={isUncontrolledHypertensionChecked}
         onchange={handleChangeUncontrolledHypertensionCheckbox}
       ></lightning-input>
-      <h1>GASTROINTESTINAL SYSTEM/LIVER</h1>
+      <label class="slds-form-element__legend slds-form-element__label">
+        <h1>GASTROINTESTINAL SYSTEM/LIVER</h1></label
+      >
       <lightning-input
         type="checkbox"
         disabled={isNoneChecked}
@@ -235,7 +239,7 @@
         onchange={handleChangeHepatitisCheckbox}
       ></lightning-input>
       <lightning-combobox
-        class="innerHepatitisOptions"
+        class="inset innerHepatitisOptions"
         name="hepatitisCombobox"
         options={hepatitisOptions}
         value={hepatitisSelection}
@@ -297,7 +301,7 @@
         onchange={handleChangePortopulmonaryCheckbox}
       ></lightning-input>
       <lightning-combobox
-        class="innerPortopulmonaryOptions"
+        class="inset innerPortopulmonaryOptions"
         name="portopulmonaryCombobox"
         label=""
         options={portopulmonaryOptions}
@@ -306,7 +310,9 @@
         onchange={handleChangePortopulmonaryCombobox}
         required={isPortopulmonaryChecked}
       ></lightning-combobox>
-      <h1>NERVOUS SYSTEM</h1>
+      <label class="slds-form-element__legend slds-form-element__label"
+        ><h1>NERVOUS SYSTEM</h1></label
+      >
       <lightning-input
         type="checkbox"
         disabled={isNoneChecked}
@@ -326,7 +332,7 @@
         onchange={handleChangeStrokeCheckbox}
       ></lightning-input>
       <lightning-combobox
-        class="innerStrokeOptions"
+        class="inset innerStrokeOptions"
         name="strokeCombobox"
         label=""
         options={strokeOptions}
@@ -346,7 +352,7 @@
         onchange={handleChangeConvulsiveDisorderCheckbox}
       ></lightning-input>
       <lightning-checkbox-group
-        class="innerConvulsiveDisorderOptions"
+        class="inset innerConvulsiveDisorderOptions"
         name="convulsiveDisorderCheckboxSet"
         label="Please select all that apply"
         options={convulsiveDisorderOptions}
@@ -363,7 +369,9 @@
         checked={isPanicDisorderChecked}
         onchange={handleChangePanicDisorderCheckbox}
       ></lightning-input>
-      <h1>OTHER</h1>
+      <label class="slds-form-element__legend slds-form-element__label"
+        ><h1>OTHER</h1></label
+      >
       <lightning-input
         type="checkbox"
         disabled={isNoneChecked}

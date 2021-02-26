@@ -44,6 +44,10 @@
   padding-bottom: 5px;
 }
 
+.inset {
+  padding-left: 15px;
+}
+
 .footer {
   padding-top: 20px;
   padding-bottom: 10px;
