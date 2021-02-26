@@ -6,6 +6,8 @@ export default class DvLogin extends LightningElement {
   actualPassword;
   inputPassword;
   isLeadReviewed;
+  isDisplayAlert;
+  alertMessage;
 
   @wire(getPassword, {
     leadId: "$leadId",
@@ -14,6 +16,8 @@ export default class DvLogin extends LightningElement {
     if (result.data) {
       this.actualPassword = result.data.formPassword;
       this.isLeadReviewed = result.data.isLeadReviewed;
+      this.isDisplayAlert = result.data.isDisplayAlertMessage;
+      this.alertMessage = result.data.alertMessage;
     } else if (result.error) {
       console.error(result.error);
     }
