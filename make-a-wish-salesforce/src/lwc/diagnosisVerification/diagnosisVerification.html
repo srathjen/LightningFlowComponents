@@ -22,9 +22,9 @@
     </template>
     <div if:false={isSubmitCanceled}>
       <!-- LOGIN -->
-      <section class="login section" if:false={isLoginSuccessful}>
+      <div class="login" if:false={isLoginSuccessful}>
         <c-dv-login lead-id={leadId} onlogin={handleLoginEvent}></c-dv-login>
-      </section>
+      </div>
 
       <section class="main" if:true={isLoginSuccessful}>
         <!-- SUMMARY -->
