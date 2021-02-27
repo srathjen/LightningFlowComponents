@@ -515,7 +515,6 @@ Modification Log:
                                         &nbsp;
                                     </div>
                                     <div style="position: fixed; left: 45%; top: 35%; bottom: 0; right: 0; z-index: 1001;">
-                                    <div style="position: fixed; left: 45%; top: 35%; bottom: 0; right: 0; z-index: 1001;">S
                                         <img src="{!URLFOR($Resource.WishReferralStyle, 'WishReferralStyle/img/loader-circle-blue.gif')}"/>
                                     </div>
                                 </apex:facet>
