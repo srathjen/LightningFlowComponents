@@ -750,7 +750,7 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
   }
 
   get cognitiveDelaySecondLabel() {
-    return `(this question does not affect eligibility criteria. if the child's condition is eligible, this information helps our volunteers and staff to plan an appropriate wish.)`;
+    return `(The following questions do not affect a child's eligibility. If this child’s condition is eligible, this information helps our volunteers and staff to plan a developmentally appropriate wish.)`;
   }
 
   get levelOfDelayLabel() {
