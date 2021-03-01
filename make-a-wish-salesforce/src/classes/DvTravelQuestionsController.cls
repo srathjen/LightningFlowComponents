@@ -17,20 +17,7 @@ public without sharing class DvTravelQuestionsController {
    */
   @AuraEnabled(Cacheable=true)
   public static TravelQuestionsWrapper getTravelWrapperByLead(String leadId) {
-    //try {
     return setLoadValues(leadId);
-    /* } catch (Exception e) {
-      ErrorMessage_AC.createDebugRec(
-        'dvTravelQuestionsController',
-        '',
-        String.valueOf(e),
-        'getTravelWrapperByLead',
-        'Null',
-        e.getStackTraceString(),
-        'Error'
-      );
-      return newTravelQuestionsWrapper();
-    } */
   }
 
   /**
@@ -63,14 +50,6 @@ public without sharing class DvTravelQuestionsController {
 
     wrapper.leadId = leadToFetch;
 
-    if (!String.isBlank(wishChild.lung_disease__c)) {
-      wrapper.lungDiseaseSelections = wishChild.lung_disease__c.split(';');
-      wrapper.isLungDisease = true;
-    } else {
-      wrapper.lungDiseaseSelections = new List<String>();
-      wrapper.isLungDisease = false;
-    }
-
     //some of the values are not stored to individual fields and are only listed in the Current Condition Label
     //this can be moved to a helper method and perhaps a helper Class? For length alone and SOC.
     if (!String.isBlank(wishChild.Travel_Algorithm__c)) {
@@ -101,6 +80,13 @@ public without sharing class DvTravelQuestionsController {
       )
       ? true
       : false;
+    if (!String.isBlank(wishChild.lung_disease__c)) {
+      wrapper.lungDiseaseSelections = wishChild.lung_disease__c.split(';');
+      wrapper.isLungDisease = true;
+    } else {
+      wrapper.lungDiseaseSelections = new List<String>();
+      wrapper.isLungDisease = false;
+    }
     wrapper.isOxygenDependenceChecked = travelAlgorithmFieldMap.containsKey(
         Constant_AC.OXYGEN_DEPENDENCE_AT_SEA_LEVEL
       )
@@ -388,7 +374,7 @@ public without sharing class DvTravelQuestionsController {
         ? algorithmString += Constant_AC.HEPTOPULMONARY_SYNDROME + ';'
         : algorithmString;
       algorithmString = wrapper.isLiverDiseaseChecked
-        ? algorithmString += Constant_AC.END_STAGE_LIVER_DISEASE + ';'
+        ? algorithmString += Constant_AC.CHRONIC_LIVER_DISEASE + ';'
         : algorithmString;
       algorithmString = wrapper.isEndStageLiverChecked
         ? algorithmString += Constant_AC.END_STAGE_LIVER_DISEASE + ';'
@@ -429,22 +415,25 @@ public without sharing class DvTravelQuestionsController {
     wishChild.Travel_Algorithm__c = algorithmString;
 
     //algorithmString contains only the conditions that were selected at the time save was called.
-    //Perform the translation and store
-    for (String condition : algorithmString.split(';')) {
-      conditionString +=
-        Integer.valueOf(conditionCount) +
-        DOT_SPACE +
-        condition +
-        '\n';
-      recommendationString +=
-        Integer.valueOf(conditionCount) +
-        DOT_SPACE +
-        conditionsToRecommendations.get(condition) +
-        '\n';
-      conditionCount += 1;
+    //Perform the translation if anything was selected or skip if none selected.
+    if (!String.isBlank(algorithmString)) {
+      for (String condition : algorithmString.split(';')) {
+        conditionString +=
+          Integer.valueOf(conditionCount) +
+          DOT_SPACE +
+          condition +
+          '\n';
+        recommendationString +=
+          Integer.valueOf(conditionCount) +
+          DOT_SPACE +
+          conditionsToRecommendations.get(condition) +
+          '\n';
+        conditionCount += 1;
+      }
     }
 
-    //process lung disease subselections
+    //The remaining conditions have their own field to store the information
+    //The conditions are one per line and formatted like this: <condition>: <subselection>;
     wishChild.lung_disease__c = String.join(wrapper.lungDiseaseSelections, ';');
     if (!wrapper.lungDiseaseSelections.isEmpty()) {
       for (String lungSelection : wrapper.lungDiseaseSelections) {
@@ -466,7 +455,6 @@ public without sharing class DvTravelQuestionsController {
       }
     }
 
-    //process pulmonary hypertension subselection
     wishChild.Pulmonary_Hypertension__c = wrapper.pulmonaryHypertensionSelection;
     if (
       !String.isBlank(wrapper.pulmonaryHypertensionSelection) &&
@@ -489,7 +477,6 @@ public without sharing class DvTravelQuestionsController {
       conditionCount += 1;
     }
 
-    //process ventilator subselection
     wishChild.Ventilator__c = wrapper.ventilatorDependenceSelection;
     if (!String.isBlank(wrapper.ventilatorDependenceSelection)) {
       conditionString +=
@@ -506,9 +493,6 @@ public without sharing class DvTravelQuestionsController {
         '\n';
       conditionCount += 1;
     }
-
-    //The remaining conditions have their own field to store the information
-    //The conditions are one per line and formatted like this: <condition>: <subselection>;
 
     wishChild.angina__c = String.join(wrapper.chestPainSelections, ';');
     if (!wrapper.chestPainSelections.isEmpty()) {
@@ -612,7 +596,7 @@ public without sharing class DvTravelQuestionsController {
             DOT_SPACE +
             Constant_AC.CYANOTIC_CONGENITAL_HEART_DISEASE +
             ': ' +
-            wrapper.cyanoticHeartDiseaseSelections +
+            selection +
             '\n';
           recommendationString +=
             Integer.valueOf(conditionCount) +
@@ -642,18 +626,18 @@ public without sharing class DvTravelQuestionsController {
     }
 
     wishChild.Hidden_Proto_Pulmonary_Hypertension__c = wrapper.portopulmonarySelection;
-    if (!String.isBlank(wrapper.hepatitisSelection)) {
+    if (!String.isBlank(wrapper.portopulmonarySelection)) {
       conditionString +=
         Integer.valueOf(conditionCount) +
         DOT_SPACE +
-        Constant_AC.ACUTE_OR_CHRONIC_HEPATITIS +
+        Constant_AC.PORTOPULMONARY_HYPERTENSION +
         ': ' +
-        wrapper.hepatitisSelection +
+        wrapper.portopulmonarySelection +
         '\n';
       recommendationString +=
         Integer.valueOf(conditionCount) +
         DOT_SPACE +
-        conditionsToRecommendations.get(wrapper.hepatitisSelection) +
+        conditionsToRecommendations.get(wrapper.portopulmonarySelection) +
         '\n';
       conditionCount += 1;
     }

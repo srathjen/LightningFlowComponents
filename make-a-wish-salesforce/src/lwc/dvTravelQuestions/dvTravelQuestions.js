@@ -89,7 +89,8 @@ export default class DvTravelQuestions extends LightningElement {
       this.showHidePulmonaryHypertensionCombobox();
       this.isVentilatorDependenceChecked =
         result.data.isVentilatorDependenceChecked;
-      this.ventilatorSelection = result.data.ventilatorDependenceSelection;
+      this.ventilatorDependenceSelection =
+        result.data.ventilatorDependenceSelection;
       this.showHideVentilatorDependenceCombobox();
       this.isChestPainChecked = result.data.isChestPainChecked;
       this.chestPainSelections = result.data.chestPainSelections;
@@ -143,6 +144,7 @@ export default class DvTravelQuestions extends LightningElement {
       this.isMedicallyFragileChecked = result.data.isMedicallyFragileChecked;
       this.isNotSureChecked = result.data.isNotSureChecked;
       this.isNoneChecked = result.data.isNoneChecked;
+      this.updatePrimaryConditions();
     }
   }
 
@@ -164,8 +166,8 @@ export default class DvTravelQuestions extends LightningElement {
         value: "Current or frequent hypercapnia"
       },
       {
-        label: "FEV1 less than 50% predicted",
-        value: "FEV1 less than 50% predicted"
+        label: "FEV1 less than 50% pedicted",
+        value: "FEV1 less than 50% pedicted"
       },
       {
         label: "Required long-term oxygen in the past 6 months",
@@ -375,8 +377,8 @@ export default class DvTravelQuestions extends LightningElement {
   get cyanoticHeartDiseaseOptions() {
     return [
       {
-        label: "NYHA class IV",
-        value: "NYHA class IV"
+        label: "NYHA Class IV",
+        value: "NYHA Class IV"
       },
       {
         label: "Dyspnea at rest",
@@ -574,7 +576,7 @@ export default class DvTravelQuestions extends LightningElement {
     this.showHideChestPainCheckboxset();
   }
 
-  handleChangeChestPainCheckboxset(event) {
+  handleChangeChestPainCheckboxSet(event) {
     this.chestPainSelections = event.target.value;
     this.updatePrimaryConditions();
   }
