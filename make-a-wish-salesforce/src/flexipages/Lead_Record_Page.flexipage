@@ -4186,6 +4186,38 @@
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
+                <name>createQuickActionName</name>
+                <value>NewLead</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>lookupFieldName</name>
+                <value>Lead.Id</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>titleFieldName</name>
+                <value># of Attachments</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>updateQuickActionName</name>
+                <value>Lead.Attachments</value>
+            </componentInstanceProperties>
+            <componentName>console:relatedRecord</componentName>
+            <visibilityRule>
+                <booleanFilter>1 AND 2</booleanFilter>
+                <criteria>
+                    <leftValue>{!Record.IsConverted}</leftValue>
+                    <operator>EQUAL</operator>
+                    <rightValue>false</rightValue>
+                </criteria>
+                <criteria>
+                    <leftValue>{!$User.Profile.Name}</leftValue>
+                    <operator>EQUAL</operator>
+                    <rightValue>National Medical Advisor</rightValue>
+                </criteria>
+            </visibilityRule>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
                 <name>relatedListComponentOverride</name>
                 <value>GRID</value>
             </componentInstanceProperties>
@@ -4290,6 +4322,12 @@
                 <value>Facet-a3903d7b-5a45-44fc-a87f-f53cc99b8101</value>
             </componentInstanceProperties>
             <componentName>flexipage:tabset</componentName>
+        </componentInstances>
+        <componentInstances>
+            <componentName>dvChildInformation</componentName>
+        </componentInstances>
+        <componentInstances>
+            <componentName>dvLogin</componentName>
         </componentInstances>
         <name>sidebar</name>
         <type>Region</type>

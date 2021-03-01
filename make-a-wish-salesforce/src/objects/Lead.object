@@ -272,7 +272,6 @@
         <fields>Email</fields>
         <fields>Matched__c</fields>
         <fields>Rush__c</fields>
-        <fields>Num_of_Attachments__c</fields>
         <fields>DV_Status__c</fields>
         <label>Wish Child Compact Layout</label>
     </compactLayouts>

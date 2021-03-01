@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -143,7 +142,7 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>Used to hold the medical questions for Diagnosis</description>
+    <description>Used to hold the answers to medical questions prompted by a 'Condition Description' provided by an MP during the DV process.</description>
     <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableEnhancedLookup>true</enableEnhancedLookup>
@@ -171,9 +170,8 @@
         <deleteConstraint>SetNull</deleteConstraint>
         <description>Used to hold the related diagnosis verification for the medical question</description>
         <externalId>false</externalId>
-        <label>Diagnosis Verification</label>
+        <label>Diagnosis</label>
         <referenceTo>Diagnosis_Verification__c</referenceTo>
-        <relationshipLabel>DiagnosisMedicalQuestions</relationshipLabel>
         <relationshipName>DiagnosisMedicalQuestions</relationshipName>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -219,7 +217,7 @@
     </fields>
     <fields>
         <fullName>Question__c</fullName>
-        <description>Medical Question for related &apos;DiagnosisMedicalQuestion&apos; answer.</description>
+        <description>Medical Question for related 'DiagnosisMedicalQuestion' answer.</description>
         <externalId>false</externalId>
         <label>Question</label>
         <length>32768</length>
@@ -237,15 +235,15 @@
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
-    <label>DiagnosisMedicalQuestions</label>
+    <label>Diagnosis Answer</label>
     <nameField>
         <displayFormat>DQ-{0000}</displayFormat>
-        <label>DiagnosisQuestion</label>
+        <label>Diagnosis Answer</label>
         <trackHistory>false</trackHistory>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>DiagnosisMedicalQuestions</pluralLabel>
-    <searchLayouts/>
+    <pluralLabel>Diagnosis Answers</pluralLabel>
+    <searchLayouts />
     <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

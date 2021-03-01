@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Fired via a scheduled flow that runs daily</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Make_a_Wish_America</letterhead>
+    <name>Incomplete DV 7 Day Reminder Email - Original Recipient</name>
+    <style>freeForm</style>
+    <subject>Make-A-Wish - Diagnosis Verification Reminder</subject>
+    <textOnly>Dear {!Lead.Hidden_DV_Form_Name__c},
+
+This is an automated message to remind you to complete our online Diagnosis Verification form for your patient, {!Lead.FirstName}. We cannot make a final determination of medical eligibility for {!Lead.FirstName} until this form is completed by you or a member of the child’s healthcare team. Please use the link and password below to complete the form.
+
+Password: {!Lead.Part_A_Form_Password__c}
+Link: {!$Setup.Endpoints__c.DVReturn_URL__c}/DiagnosisVerification?LeadId={!Lead.Id}
+
+Please contact us if you have any questions about completing this form. Thank you for your assistance! Your time and support are appreciated.
+
+Sincerely,
+{!Lead.Owner_Full_Name__c}
+{!Lead.Owner_Title__c}
+{!Lead.ChapterName__c}
+{!Lead.Owner_Email__c}
+{!Lead.Owner_Phone__c}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>
