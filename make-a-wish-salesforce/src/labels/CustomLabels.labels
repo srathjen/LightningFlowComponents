@@ -1,36 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
-    <labels>
-        <fullName>Volunteer_Portal_Table_Section_Class_History</fullName>
-        <categories>Volunteer Portal</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Volunteer Portal Table Section - Class History</shortDescription>
-        <value>Class History</value>
-    </labels>
-    <labels>
-        <fullName>Volunteer_Portal_Table_Section_Orientation</fullName>
-        <categories>Volunteer Portal</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Volunteer Portal Table Section - Orientation</shortDescription>
-        <value>Orientation Details</value>
-    </labels>
-    <labels>
-        <fullName>Volunteer_Portal_Table_Section_Training</fullName>
-        <categories>Volunteer Portal</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Volunteer Portal Table Section - Training</shortDescription>
-        <value>Registered Training Details</value>
-    </labels>
-    <labels>
-        <fullName>Volunteer_Portal_Table_Section_Training1</fullName>
-        <categories>Volunteer Portal</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Volunteer Portal Table Section - Training1</shortDescription>
-        <value>Training Details</value>
-    </labels>
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
         <fullName>AWSDefaultFilePathPrefix</fullName>
         <categories>SDrive</categories>
@@ -104,7 +73,7 @@
         <value>You have no access to create broadcast records for other chapters.</value>
     </labels>
     <labels>
-    <fullName>COI_no_of_expiration_days</fullName>
+        <fullName>COI_no_of_expiration_days</fullName>
         <categories>It holds the expiration duration for COI</categories>
         <language>en_US</language>
         <protected>false</protected>
@@ -124,21 +93,21 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>CaseTrigger_Add_County</shortDescription>
-        <value>Please add county on the wish child's contact record.</value>
+        <value>Please add county on the wish child&apos;s contact record.</value>
     </labels>
     <labels>
         <fullName>CaseTrigger_Add_Region</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>CaseTrigger_Add_Region</shortDescription>
-        <value>Please add region on the wish child's contact record.</value>
+        <value>Please add region on the wish child&apos;s contact record.</value>
     </labels>
     <labels>
         <fullName>CaseTrigger_Add_Region_County</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>CaseTrigger_Add_Region_County</shortDescription>
-        <value>Please add region and county on the wish child's contact record.</value>
+        <value>Please add region and county on the wish child&apos;s contact record.</value>
     </labels>
     <labels>
         <fullName>CaseTrigger_Air_Travel_Aware</fullName>
@@ -346,6 +315,27 @@
             record.</value>
     </labels>
     <labels>
+        <fullName>Diagnosis_Verification_Form_Redirect</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DV_Form_Redirect_Message</shortDescription>
+        <value>We have improved our Diagnosis Verification form!</value>
+    </labels>
+    <labels>
+        <fullName>Diagnosis_Verification_Form_Redirect2</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Diagnosis Verification Form Redirect2</shortDescription>
+        <value>Please click “Ok” to be redirected to the new form.</value>
+    </labels>
+    <labels>
+        <fullName>Diagnosis_Verification_Form_Redirect_Head</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Diagnosis Verification Form Redirect Head</shortDescription>
+        <value>NEW DIAGNOSIS VERIFICATION FORM</value>
+    </labels>
+    <labels>
         <fullName>Diagnosis_Verification_Lead_Duplicates</fullName>
         <categories>Lead</categories>
         <language>en_US</language>
@@ -370,39 +360,6 @@
         <value>kanagumca_jcet@hotmail.com</value>
     </labels>
     <labels>
-        <fullName>Duplicate_Lead_Message_1</fullName>
-        <categories>Lead</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Duplicate Lead Message 1</shortDescription>
-        <value>'You can either choose "No duplicate Found" or any lead(s) under Select Existing Leads.'</value>
-    </labels>
-    <labels>
-        <fullName>Duplicate_Lead_Message_2</fullName>
-        <categories>Lead</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Duplicate Lead Message 2</shortDescription>
-        <value>Please select an existing lead to merge or check "No Duplicate Found" if the leads displayed
-            are not duplicates.</value>
-    </labels>
-    <labels>
-        <fullName>Duplicate_Lead_Message_3</fullName>
-        <categories>Lead</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Duplicate Lead Message 3</shortDescription>
-        <value>Please select 2 leads for merging</value>
-    </labels>
-    <labels>
-        <fullName>Duplicate_Record</fullName>
-        <categories>Record</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Duplicate Record</shortDescription>
-        <value>There might be a duplicate {0}. Please click [OK] to review the duplicates</value>
-    </labels>
-    <labels>
         <fullName>Duplicate_Lead_Merge_Restrict</fullName>
         <categories>Lead</categories>
         <language>en_US</language>
@@ -419,11 +376,44 @@
         <value>Merging Leads is an irreversible process.</value>
     </labels>
     <labels>
+        <fullName>Duplicate_Lead_Message_1</fullName>
+        <categories>Lead</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Duplicate Lead Message 1</shortDescription>
+        <value>&apos;You can either choose &quot;No duplicate Found&quot; or any lead(s) under Select Existing Leads.&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Duplicate_Lead_Message_2</fullName>
+        <categories>Lead</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Duplicate Lead Message 2</shortDescription>
+        <value>Please select an existing lead to merge or check &quot;No Duplicate Found&quot; if the leads displayed
+            are not duplicates.</value>
+    </labels>
+    <labels>
+        <fullName>Duplicate_Lead_Message_3</fullName>
+        <categories>Lead</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Duplicate Lead Message 3</shortDescription>
+        <value>Please select 2 leads for merging</value>
+    </labels>
+    <labels>
+        <fullName>Duplicate_Record</fullName>
+        <categories>Record</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Duplicate Record</shortDescription>
+        <value>There might be a duplicate {0}. Please click [OK] to review the duplicates.</value>
+    </labels>
+    <labels>
         <fullName>Dynamic_Font_Tag_With_Color</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Dynamic Font Tag With Color</shortDescription>
-        <value>&lt;font color="{0}"&gt;{1}&lt;/font&gt;</value>
+        <value>&lt;font color=&quot;{0}&quot;&gt;{1}&lt;/font&gt;</value>
     </labels>
     <labels>
         <fullName>Enter_Valid</fullName>
@@ -491,6 +481,14 @@
         <protected>false</protected>
         <shortDescription>InKind_Return_Message</shortDescription>
         <value>Please click OK to return to the In-Kind Donation &amp; Reimbursement Page.</value>
+    </labels>
+    <labels>
+        <fullName>Instance_Url</fullName>
+        <categories>It will hold the instance url</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Instance Url</shortDescription>
+        <value>https://make-a-wish.my.salesforce.com</value>
     </labels>
     <labels>
         <fullName>Interation_User_Profile</fullName>
@@ -842,6 +840,48 @@
         <value>Error while retrieving records:</value>
     </labels>
     <labels>
+        <fullName>VolunteerSignUp_Over18</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerSignUp_Over18</shortDescription>
+        <value>Thank you for your interest in volunteering with Make-A-Wish. Most volunteer opportunities are designed for individuals over the age of 18. If you are under the age of 18, please contact your local chapter to discuss what, if any, opportunities we currently have available.</value>
+    </labels>
+    <labels>
+        <fullName>VolunteerSignUp_Required_Fields</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerSignUp_Required_Fields</shortDescription>
+        <value>Please fill out all required fields.</value>
+    </labels>
+    <labels>
+        <fullName>VolunteerSignUp_Username_In_Use</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerSignUp_Username_In_Use</shortDescription>
+        <value>The username you provided is already in use. Please enter a different username to continue the sign up process. If you have already signed up, please click &quot;Log In&quot; to access the login page.</value>
+    </labels>
+    <labels>
+        <fullName>VolunteerSignUp_Valid_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerSignUp_Valid_Email</shortDescription>
+        <value>Please enter a valid email address.</value>
+    </labels>
+    <labels>
+        <fullName>VolunteerSignUp_Valid_Username</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerSignUp_Valid_Username</shortDescription>
+        <value>Please enter a valid username. Username must be in email format (name@domain.com).</value>
+    </labels>
+    <labels>
+        <fullName>VolunteerSignUp_Zip_Code</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VolunteerSignUp_Zip_Code</shortDescription>
+        <value>Please enter a 5 digit zip code.</value>
+    </labels>
+    <labels>
         <fullName>Volunteer_Onboarding_Resided_in_US</fullName>
         <language>en_US</language>
         <protected>false</protected>
@@ -910,7 +950,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Volunteer Portal Alert - Specialized Training Required</shortDescription>
-        <value>Thank you for your interest in this opportunity. 'This opportunity requires specialized training that you have not completed,
+        <value>Thank you for your interest in this opportunity. &apos;This opportunity requires specialized training that you have not completed,
             contact chapter staff for more information about expanding your volunteer opportunities.</value>
     </labels>
     <labels>
@@ -991,8 +1031,8 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Volunteer Portal Subsection Better Experience Content</shortDescription>
-        <value>Please select the radio option "Always allow pop-ups for this
-            domain", in the URL bar (Pop up Blocker options) then click start course
+        <value>Please select the radio option &quot;Always allow pop-ups for this
+            domain&quot;, in the URL bar (Pop up Blocker options) then click start course
             again.</value>
     </labels>
     <labels>
@@ -1371,12 +1411,36 @@
         <value>Available Training Details</value>
     </labels>
     <labels>
+        <fullName>Volunteer_Portal_Table_Section_Class_History</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Table Section - Class History</shortDescription>
+        <value>Class History</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Portal_Table_Section_Orientation</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Table Section - Orientation</shortDescription>
+        <value>Orientation Details</value>
+    </labels>
+    <labels>
         <fullName>Volunteer_Portal_Table_Section_Training</fullName>
         <categories>Volunteer Portal</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Volunteer Portal Table Section - Training</shortDescription>
         <value>Registered Training Details</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Portal_Table_Section_Training1</fullName>
+        <categories>Volunteer Portal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Portal Table Section - Training1</shortDescription>
+        <value>Training Details</value>
     </labels>
     <labels>
         <fullName>Volunteer_Portal_Table_Section_Upcoming_Training</fullName>
@@ -1493,48 +1557,6 @@
         <protected>false</protected>
         <shortDescription>Volunteer Role Volunteer Count Less</shortDescription>
         <value>Volunteer need count should not be less than the volunteer registered count.</value>
-    </labels>
-    <labels>
-        <fullName>VolunteerSignUp_Over18</fullName>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>VolunteerSignUp_Over18</shortDescription>
-        <value>Thank you for your interest in volunteering with Make-A-Wish. Most volunteer opportunities are designed for individuals over the age of 18. If you are under the age of 18, please contact your local chapter to discuss what, if any, opportunities we currently have available.</value>
-    </labels>
-    <labels>
-        <fullName>VolunteerSignUp_Required_Fields</fullName>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>VolunteerSignUp_Required_Fields</shortDescription>
-        <value>Please fill out all required fields.</value>
-    </labels>
-    <labels>
-        <fullName>VolunteerSignUp_Username_In_Use</fullName>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>VolunteerSignUp_Username_In_Use</shortDescription>
-        <value>The username you provided is already in use. Please enter a different username to continue the sign up process. If you have already signed up, please click "Log In" to access the login page.</value>
-    </labels>
-    <labels>
-        <fullName>VolunteerSignUp_Valid_Email</fullName>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>VolunteerSignUp_Valid_Email</shortDescription>
-        <value>Please enter a valid email address.</value>
-    </labels>
-    <labels>
-        <fullName>VolunteerSignUp_Valid_Username</fullName>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>VolunteerSignUp_Valid_Username</shortDescription>
-        <value>Please enter a valid username. Username must be in email format (name@domain.com).</value>
-    </labels>
-    <labels>
-        <fullName>VolunteerSignUp_Zip_Code</fullName>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>VolunteerSignUp_Zip_Code</shortDescription>
-        <value>Please enter a 5 digit zip code.</value>
     </labels>
     <labels>
         <fullName>WG_FinalStep_FileClosed</fullName>
@@ -2578,6 +2600,14 @@
         <value>Approximate Diagnosis Date</value>
     </labels>
     <labels>
+        <fullName>Wish_Referral_Best_Medical_Contact</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Best Medical Contact</shortDescription>
+        <value>Best Medical Contact</value>
+    </labels>
+    <labels>
         <fullName>Wish_Referral_Child_Had_Prior_Wish</fullName>
         <categories>Wish Referral</categories>
         <language>en_US</language>
@@ -2592,6 +2622,22 @@
         <protected>false</protected>
         <shortDescription>Wish Referral City</shortDescription>
         <value>City</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Create_New_Hospital_Facility</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Create New Hospital Facility</shortDescription>
+        <value>Create New Hospital/Facility</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Create_New_Medical_Professional</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Create New Medical Professional</shortDescription>
+        <value>Create New Medical Professional</value>
     </labels>
     <labels>
         <fullName>Wish_Referral_Date_of_Birth</fullName>
@@ -2615,7 +2661,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Referral Discussed Healthcare Provider</shortDescription>
-        <value>Has the referral been discussed with the child's healthcare provider?</value>
+        <value>Has the referral been discussed with the child&apos;s healthcare provider?</value>
     </labels>
     <labels>
         <fullName>Wish_Referral_Email</fullName>
@@ -2666,12 +2712,28 @@
         <value>(Self-Describe Selected)</value>
     </labels>
     <labels>
+        <fullName>Wish_Referral_HTF_Department</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral HTF Department</shortDescription>
+        <value>Department</value>
+    </labels>
+    <labels>
         <fullName>Wish_Referral_Hear_About_Make_A_Wish</fullName>
         <categories>Wish Referral</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Referral Hear About Make A Wish</shortDescription>
         <value>How did you hear about Make-A-Wish?</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Hospital_Facility_Search</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Hospital Facility Search</shortDescription>
+        <value>Hospital/Facility Search</value>
     </labels>
     <labels>
         <fullName>Wish_Referral_Hospital_or_Treatment_Facility</fullName>
@@ -2714,6 +2776,14 @@
         <value>Last Name</value>
     </labels>
     <labels>
+        <fullName>Wish_Referral_Lookup_Instructions</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Lookup Instructions</shortDescription>
+        <value>Please search for your name and hospital/facility below and select. If you are unable to locate either in our system, select the &quot;Create New Medical Professional&quot; and/or &quot;Create New Hospital/Facility&quot; to add a new record, which will remain on file for future reference.</value>
+    </labels>
+    <labels>
         <fullName>Wish_Referral_Medical_Information</fullName>
         <categories>Wish Referral</categories>
         <language>en_US</language>
@@ -2728,6 +2798,22 @@
         <protected>false</protected>
         <shortDescription>Wish Referral Medical Professional Category</shortDescription>
         <value>Medical Professional Category</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Medical_Professional_Search</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Medical Professional Search</shortDescription>
+        <value>Medical Professional Search</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Medical_Professional_Specialty</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Medical Professional Specialty</shortDescription>
+        <value>Medical Professional Specialty</value>
     </labels>
     <labels>
         <fullName>Wish_Referral_Medical_Reason</fullName>
@@ -2922,6 +3008,15 @@
         <value>Other Medical Professional Category</value>
     </labels>
     <labels>
+        <fullName>Wish_Referral_Other_Treating_Medical_Professional</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Other Treating Medical Professional</shortDescription>
+        <value>Please provide the best person to contact on the Medical Team if different
+        from the Treating Medical Professional</value>
+    </labels>
+    <labels>
         <fullName>Wish_Referral_Parent_or_Guardian</fullName>
         <categories>Wish Referral</categories>
         <language>en_US</language>
@@ -2959,7 +3054,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Referral Placeholder Description Self Describe</shortDescription>
-        <value>Please enter a description pertaining to 'Self-describe'.</value>
+        <value>Please enter a description pertaining to &apos;Self-describe&apos;.</value>
     </labels>
     <labels>
         <fullName>Wish_Referral_Placeholder_Diagnosis_Example</fullName>
@@ -3074,6 +3169,22 @@
         <value>Referrer Information</value>
     </labels>
     <labels>
+        <fullName>Wish_Referral_Referring_Hospital_Facility</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Referring Hospital Facility</shortDescription>
+        <value>Referring Hospital/Facility</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Referring_Medical_Professional</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Referring Medical Professional</shortDescription>
+        <value>Referring Medical Professional</value>
+    </labels>
+    <labels>
         <fullName>Wish_Referral_Relationship_to_Child</fullName>
         <categories>Wish Referral</categories>
         <language>en_US</language>
@@ -3130,6 +3241,14 @@
         <value>State</value>
     </labels>
     <labels>
+        <fullName>Wish_Referral_State_Filter</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral State Filter</shortDescription>
+        <value>Filter By State</value>
+    </labels>
+    <labels>
         <fullName>Wish_Referral_Submit_Another_Referral</fullName>
         <categories>Wish Referral</categories>
         <language>en_US</language>
@@ -3145,6 +3264,30 @@
         <shortDescription>Wish Referral Thank You For Submitting</shortDescription>
         <value>Thank you for submitting a referral. Chapter staff will be in contact soon if additional information is
             required.</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Title</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Title</shortDescription>
+        <value>Title</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Treating_Hospital_Facility</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Treating Hospital Facility</shortDescription>
+        <value>Treating Hospital/Facility</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Referral_Treating_Medical_Professional</fullName>
+        <categories>Wish Referral</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Referral Treating Medical Professional</shortDescription>
+        <value>Treating Medical Professional</value>
     </labels>
     <labels>
         <fullName>Wish_Referral_Treating_Medical_Professional_Information</fullName>
