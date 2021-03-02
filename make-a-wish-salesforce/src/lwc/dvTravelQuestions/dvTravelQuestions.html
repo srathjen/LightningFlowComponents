@@ -1,0 +1,447 @@
+<!-- 
+  @description Travel Questions Component, provides conditions and recommended travel restrictions for wish children
+  @author Christopher Smith, MAWA
+  @createdDate 10/Feb/2021
+-->
+<template>
+  <div class="container">
+    <header class="header">
+      <h1>CURRENT CONDITIONS THAT IMPACT TRAVEL</h1>
+      <h1>DOES CHILD QUALIFIED HAVE ANY OF THE FOLLOWING CONDITIONS?</h1>
+    </header>
+
+    <section class="form" if:true={leadId}>
+      <label class="slds-form-element__legend slds-form-element__label"
+        ><h1>(Please select all that apply)</h1></label
+      ><br />
+
+      <label class="slds-form-element__legend slds-form-element__label"
+        >RESPIRATORY SYSTEM</label
+      ><br />
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        label="Infectious Tuberculosis"
+        checked={isTuberculosisChecked}
+        onchange={handleChangeTuberculosisCheckbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        label="Airborne Viral Infections of High Mortality"
+        checked={isAirborneChecked}
+        onchange={handleChangeAirborneCheckbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        label="Pneumothorax"
+        checked={isPneumothoraxChecked}
+        onchange={handleChangePneumothoraxCheckbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        label="Pleural Effusion"
+        checked={isPleuralEffusionChecked}
+        onchange={handleChangePleuralEffusionCheckbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="lungDisease"
+        name="lungDiseaseCheckboxSet"
+        label="Severe Restrictive Lung Disease"
+        checked={isLungDisease}
+        onchange={handleChangeLungDiseaseCheckbox}
+      ></lightning-input>
+      <lightning-checkbox-group
+        class="inset innerLungDiseaseOptions"
+        name="lungDiseaseCheckboxSet"
+        label="Please select all that apply"
+        required={isLungDisease}
+        options={lungDiseaseOptions}
+        value={lungDiseaseSelections}
+        onchange={handleChangeLungDiseaseCheckboxSet}
+      ></lightning-checkbox-group>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        label="Oxygen Dependence at Sea Level"
+        checked={isOxygenDependenceChecked}
+        onchange={handleChangeOxygenDependenceCheckbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        label="Oxygen Requirement >4L/min at Sea Level"
+        checked={isOxygenRequiredGreaterThan4}
+        onchange={handleChangeOxygenRequriedGreaterThan4Checkbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        label="Long-term Oxygen Within Last 6 Months"
+        checked={isLongTermOxygenChecked}
+        onchange={handleChangeLongTermOxygenCheckbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        label="Hospitalization for Acute Respiratory Illness in the Past 6 Weeks"
+        checked={isAcuteRespiratoryHospitalizationChecked}
+        onchange={handleChangeAcuteRespiratoryHospitalizationCheckbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        label="Pulmonary Hypertension"
+        checked={isPulmonaryHypertensionChecked}
+        onchange={handleChangePulmonaryHypertensionCheckbox}
+      ></lightning-input>
+      <lightning-combobox
+        class="inset innerPulmonaryHypertensionOptions"
+        name="pulmonaryHypertensionCombobox"
+        label=""
+        options={pulmonaryHypertensionOptions}
+        value={pulmonaryHypertensionSelection}
+        required={isPulmonaryHypertensionChecked}
+        onchange={handleChangePulmonaryHypertensionCombobox}
+      ></lightning-combobox>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        label="Ventilator Dependence"
+        checked={isVentilatorDependenceChecked}
+        onchange={handleChangeVentilatorDependenceCheckbox}
+      ></lightning-input>
+      <lightning-combobox
+        class="inset innerVentilatorDependenceOptions"
+        name="ventilatorDepenceCombobox"
+        label=""
+        options={ventilatorDependenceOptions}
+        value={ventilatorDependenceSelection}
+        onchange={handleChangeVentilatorDependenceCombobox}
+        required={isVentilatorDependenceChecked}
+      ></lightning-combobox>
+      <label class="slds-form-element__legend slds-form-element__label"
+        ><h1>CIRCULATORY SYSTEM AND HEART</h1></label
+      >
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="chestpain"
+        name="chestPainCheckbox"
+        label="Chest Pain/Angina"
+        checked={isChestPainChecked}
+        onchange={handleChangeChestPainCheckbox}
+      ></lightning-input>
+      <lightning-checkbox-group
+        class="inset innerChestPainOptions"
+        name="chestPainCheckboxSet"
+        label="Please select all that apply"
+        options={chestPainOptions}
+        value={chestPainSelections}
+        required="isChestPainChecked"
+        onchange={handleChangeChestPainCheckboxSet}
+      ></lightning-checkbox-group>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="arrhythmia"
+        name="arrhythmiaCheckbox"
+        label="Arrythmia"
+        checked={isArrhythmiaChecked}
+        onchange={handleChangeArrhythmiaCheckbox}
+      ></lightning-input>
+      <lightning-checkbox-group
+        class="inset innerArrhythmiaOptions"
+        name="arrhythmiaCheckboxSet"
+        label="Please select all that apply"
+        options={arrhythmiaOptions}
+        value={arrhythmiaSelections}
+        required={isArrhythmiaChecked}
+        onchange={handleChangeArrhythmiaCheckboxset}
+      ></lightning-checkbox-group>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="acuteheartfailure"
+        name="acuteHeartFailureCheckbox"
+        label="Acute Heart Failure"
+        checked={isAcuteHeartFailureChecked}
+        onchange={handleChangeAcuteHeartFailureCheckbox}
+      ></lightning-input>
+      <lightning-checkbox-group
+        class="inset innerAcuteHeartFailureOptions"
+        name="acuteHeartFailureCheckboxSet"
+        label="Please select all that apply"
+        options={acuteHeartFailureOptions}
+        value={acuteHeartFailureSelections}
+        required={isAcuteHeartFailureChecked}
+        onchange={handleChangeAcuteHeartFailureCheckboxset}
+      ></lightning-checkbox-group>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="chronicheartfailure"
+        name="chronicHeartFailureCheckbox"
+        label="Chronic Heart Failure"
+        checked={isChronicHeartFailureChecked}
+        onchange={handleChangeChronicHeartFailureCheckbox}
+      ></lightning-input>
+      <lightning-checkbox-group
+        class="inset innerChronicHeartFailureOptions"
+        name="chronicHeartFailureCheckboxSet"
+        label="Please select all that apply"
+        options={chronicHeartFailureOptions}
+        value={chronicHeartFailureSelections}
+        required={isChronicHeartFailureChecked}
+        onchange={handleChangeChronicHeartFailureCheckboxset}
+      ></lightning-checkbox-group>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="cyanoticheartdisease"
+        name="cyanoticHeartDiseaseCheckbox"
+        label="Cyanotic Congenital Heart Disease"
+        checked={isCyanoticHeartDiseaseChecked}
+        onchange={handleChangeCyanoticHeartDiseaseCheckbox}
+      ></lightning-input>
+      <lightning-checkbox-group
+        class="inset innerCyanoticicHeartDiseaseOptions"
+        name="cyanoticHeartDiseaseCheckboxSet"
+        label="Please select all that apply"
+        options={cyanoticHeartDiseaseOptions}
+        value={cyanoticHeartDiseaseSelections}
+        required={isCyanoticHeartDiseaseChecked}
+        onchange={handleChangeCyanoticHeartDiseaseCheckboxset}
+      ></lightning-checkbox-group>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="uncontrolledhypertension"
+        name="uncontrolledHypertensionCheckbox"
+        label="Severe Uncontrolled Hypertension"
+        checked={isUncontrolledHypertensionChecked}
+        onchange={handleChangeUncontrolledHypertensionCheckbox}
+      ></lightning-input>
+      <label class="slds-form-element__legend slds-form-element__label">
+        <h1>GASTROINTESTINAL SYSTEM/LIVER</h1></label
+      >
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="hepatitis"
+        name="hepatitisCheckbox"
+        label="Acute or Chronic Hepatitis"
+        checked={isHepatitisChecked}
+        onchange={handleChangeHepatitisCheckbox}
+      ></lightning-input>
+      <lightning-combobox
+        class="inset innerHepatitisOptions"
+        name="hepatitisCombobox"
+        options={hepatitisOptions}
+        value={hepatitisSelection}
+        required={isHepatitisChecked}
+        onchange={handleChangeHepatitisCombobox}
+      ></lightning-combobox>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="portalhypertension"
+        name="portalHypertensionCheckbox"
+        label="Portal Hypertension"
+        checked={isPortalHypertensionChecked}
+        onchange={handleChangePortalHypertensionCheckbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="heptopulmonary"
+        name="heptoulmonaryCheckbox"
+        label="Heptopulmonary Syndrome"
+        checked={isHeptopulmonaryChecked}
+        onchange={handleChangeHeptopulmonaryCheckbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="liverdisease"
+        name="liverDiseaseCheckbox"
+        label="Chronic Liver Disease"
+        checked={isLiverDiseaseChecked}
+        onchange={handleChangeLiverDiseaseCheckbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="endstageliver"
+        name="endStageLiverCheckbox"
+        label="End Stage Liver Disease"
+        checked={isEndStageLiverChecked}
+        onchange={handleChangeEndStageLiverCheckbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="esophogealvarices"
+        name="esophogealVaricesCheckbox"
+        label="Esophageal Varices or History of"
+        checked={isEsophogealVaricesChecked}
+        onchange={handleChangeEsophogealVaricesCheckbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="portopulmonary"
+        name="portopulmonaryCheckbox"
+        label="Portopulmonary Hypertension"
+        checked={isPortopulmonaryChecked}
+        onchange={handleChangePortopulmonaryCheckbox}
+      ></lightning-input>
+      <lightning-combobox
+        class="inset innerPortopulmonaryOptions"
+        name="portopulmonaryCombobox"
+        label=""
+        options={portopulmonaryOptions}
+        value={portopulmonarySelection}
+        placeholder="Please Select"
+        onchange={handleChangePortopulmonaryCombobox}
+        required={isPortopulmonaryChecked}
+      ></lightning-combobox>
+      <label class="slds-form-element__legend slds-form-element__label"
+        ><h1>NERVOUS SYSTEM</h1></label
+      >
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="intracranialpressure"
+        name="intracranialPressureCheckbox"
+        label="Increased Intracranial Pressure"
+        checked={isIntracranialPressureChecked}
+        onchange={handleChangeIntracranialPressureCheckbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="stroke"
+        name="strokeCheckbox"
+        label="Transient Ischemic Attacks or Strokes"
+        checked={isStrokeChecked}
+        onchange={handleChangeStrokeCheckbox}
+      ></lightning-input>
+      <lightning-combobox
+        class="inset innerStrokeOptions"
+        name="strokeCombobox"
+        label=""
+        options={strokeOptions}
+        value={strokeSelection}
+        placeholder="Please Select"
+        onchange={handleChangeStrokeCombobox}
+        required={isStrokeChecked}
+      ></lightning-combobox>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="convulsivedisorder"
+        name="convulsiveDisorderCheckbox"
+        label="Unstable or Uncontrolled Epilepsy, Seizure Disorder, Convulsive
+        Disorder"
+        checked={isConvulsiveDisorderChecked}
+        onchange={handleChangeConvulsiveDisorderCheckbox}
+      ></lightning-input>
+      <lightning-checkbox-group
+        class="inset innerConvulsiveDisorderOptions"
+        name="convulsiveDisorderCheckboxSet"
+        label="Please select all that apply"
+        options={convulsiveDisorderOptions}
+        value={convulsiveDisorderSelections}
+        required={isConvulsiveDisorderChecked}
+        onchange={handleChangeConvulsiveDisorderCheckboxset}
+      ></lightning-checkbox-group>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="panicdisorder"
+        name="panicDisorderCheckbox"
+        label="Panic Disorder"
+        checked={isPanicDisorderChecked}
+        onchange={handleChangePanicDisorderCheckbox}
+      ></lightning-input>
+      <label class="slds-form-element__legend slds-form-element__label"
+        ><h1>OTHER</h1></label
+      >
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="majorbleeding"
+        name="majorBleedingCheckbox"
+        label="Major Bleeding"
+        checked={isMajorBleedingChecked}
+        onchange={handleChangeMajorBleedingCheckbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="symptomaticanemia"
+        name="symptomaticAnemiaCheckbox"
+        label="Symptomatic Anemia"
+        checked={isSymptomaticAnemiaChecked}
+        onchange={handleChangeSymptomaticAnemiaCheckbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="sicklecell"
+        name="sickleCellCheckbox"
+        label="Sickle Cell Anemia"
+        checked={isSickleCellChecked}
+        onchange={handleChangeSickleCellCheckbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="surgery"
+        name="surgeryCheckbox"
+        label="Surgery in the Past 2 Months"
+        checked={isSurgeryChecked}
+        onchange={handleChangeSurgeryCheckbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        class="medicallyfragile"
+        name="medicallyFragileCheckbox"
+        label="Medically Fragile/Medically Complex"
+        checked={isMedicallyFragileChecked}
+        onchange={handleChangeMedicallyFragileCheckbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        disabled={isNoneChecked}
+        name="notsure"
+        label="I Am Not Sure"
+        checked={isNotSureChecked}
+        onchange={handleChangeNotSureCheckbox}
+      ></lightning-input>
+      <lightning-input
+        type="checkbox"
+        class="none"
+        name="none"
+        label="None Apply"
+        checked={isNoneChecked}
+        onchange={handleChangeNoneCheckbox}
+        disabled={arePrimaryConditionsChecked}
+      ></lightning-input>
+    </section>
+    <section class="footer" if:true={leadId}>
+      <input
+        type="button"
+        onclick={handleSaveClick}
+        class="buttonSave"
+        value="SAVE"
+      />
+    </section>
+  </div>
+</template>
