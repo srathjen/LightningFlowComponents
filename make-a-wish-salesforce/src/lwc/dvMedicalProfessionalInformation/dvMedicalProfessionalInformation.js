@@ -4,7 +4,7 @@
 @createdDate 02/08/2021
 **/
 
-import { LightningElement, api, wire, track } from "lwc";
+import { LightningElement, api, wire } from "lwc";
 import getLeadMedicalProfessionalInformation from "@salesforce/apex/DvMedicalProfessionalInfoController.getLeadMedicalProfessionalInformation";
 import saveLeadMedicalProfessionalInformation from "@salesforce/apex/DvMedicalProfessionalInfoController.saveLeadMedicalProfessionalInformation";
 import { getPicklistValues } from "lightning/uiObjectInfoApi";
@@ -31,6 +31,18 @@ export default class DvMedicalProfessionalInformation extends LightningElement {
 
   @api handleLoadMedicalProfessionalInformation(leadId) {
     this.leadId = leadId;
+  }
+
+  @api validateInput() {
+    let isValid = true;
+    let inputFields = this.template.querySelectorAll(
+      "lightning-input, lightning-combobox"
+    );
+    isValid = this.utils.validateInputs(inputFields);
+    if (isValid) {
+      this.saveMedicalProfessionalInformation(false, false, true);
+    }
+    return isValid;
   }
 
   @wire(getLeadMedicalProfessionalInformation, { recordId: "$leadId" })
@@ -126,32 +138,68 @@ export default class DvMedicalProfessionalInformation extends LightningElement {
     } else {
       this.showNewSignerInformation = false;
     }
+    if (this.isRecipientSigner) {
+      let inputIsSigner = this.template.querySelector(".signer");
+      inputIsSigner.setCustomValidity("");
+      inputIsSigner.reportValidity();
+    }
   }
 
   handleFirstNameChange(event) {
     this.dvSignerFirstName = event.detail.value;
+    if (this.dvSignerFirstName) {
+      let inputFirstName = this.template.querySelector(".firstName");
+      inputFirstName.setCustomValidity("");
+      inputFirstName.reportValidity();
+    }
   }
 
   handleLastNameChange(event) {
     this.dvSignerLastName = event.detail.value;
+    if (this.dvSignerLastName) {
+      let inputLastName = this.template.querySelector(".lastName");
+      inputLastName.setCustomValidity("");
+      inputLastName.reportValidity();
+    }
   }
 
   handleEmailChange(event) {
     this.dvSignerEmail = event.detail.value;
+    let check = this.utils.validateEmail(this.dvSignerEmail);
+    if (check) {
+      let inputEmail = this.template.querySelector(".email");
+      inputEmail.setCustomValidity("");
+      inputEmail.reportValidity();
+    }
   }
 
   handlePhoneChange(event) {
     this.dvSignerPhone = this.utils.applyPhoneMask(event.target.value);
+    if (this.dvSignerPhone.length === 14) {
+      let phoneInput = this.template.querySelector(".phone");
+      phoneInput.setCustomValidity("");
+      phoneInput.reportValidity();
+    }
   }
 
   handleMpTypeChange(event) {
     this.mpTypeSelection = event.detail.value;
+    if (this.mpTypeSelection) {
+      let inputMpType = this.template.querySelector(".mpType");
+      inputMpType.setCustomValidity("");
+      inputMpType.reportValidity();
+    }
   }
 
   handleHealthcareTeamChange(event) {
     this.isHealthcareTeam = event.detail.value;
     if (this.isHealthcareTeam === "No") {
       this.displayModal();
+    }
+    if (this.isHealthcareTeam) {
+      let inputHealthcareTeam = this.template.querySelector(".healthcareTeam");
+      inputHealthcareTeam.setCustomValidity("");
+      inputHealthcareTeam.reportValidity();
     }
   }
 
@@ -167,15 +215,33 @@ export default class DvMedicalProfessionalInformation extends LightningElement {
         dvMedicalInfoWrapper: this.dvLeadInfo
       })
         .then((result) => {
-          this.dispatchEvent(new CustomEvent("cancelsubmit"));
+          this.dispatchEvent(
+            new CustomEvent("cancelsubmit", {
+              detail: {
+                success: true
+              }
+            })
+          );
         })
         .catch((error) => {
-          this.saveError = error;
+          this.saveError = error.body.message;
+          this.dispatchEvent(
+            new CustomEvent("cancelsubmit", {
+              detail: {
+                success: false,
+                message: "An error occurred."
+              }
+            })
+          );
         });
     }
   }
 
-  handleSaveClick(event) {
+  handleSaveClick() {
+    this.saveMedicalProfessionalInformation(true, false, false);
+  }
+
+  saveMedicalProfessionalInformation(showMessage, showSpinner, showNext) {
     this.dispatchEvent(new CustomEvent("showspinner", { detail: true }));
     this.copyToWrapper();
     saveLeadMedicalProfessionalInformation({
@@ -185,14 +251,26 @@ export default class DvMedicalProfessionalInformation extends LightningElement {
         this.dispatchEvent(
           new CustomEvent("savemedicalprofessionalinformationevent", {
             detail: {
+              success: true,
+              showMessage: showMessage,
               medicalProfessionalInformation: this.dvLeadInfo,
-              showSpinner: false
+              showSpinner: showSpinner,
+              showNext: showNext
             }
           })
         );
       })
       .catch((error) => {
-        this.saveError = error;
+        this.saveError = error.body.message;
+        this.dispatchEvent(
+          new CustomEvent("savemedicalprofessionalinformationevent", {
+            detail: {
+              success: false,
+              message: "An error occurred while saving.",
+              showSpinner: showSpinner
+            }
+          })
+        );
       });
   }
 }

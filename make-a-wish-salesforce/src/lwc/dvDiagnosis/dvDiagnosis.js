@@ -7,6 +7,8 @@
 import { LightningElement, api, wire } from "lwc";
 import getLeadDvDiagnosis from "@salesforce/apex/DvDiagnosisController.getLeadDvDiagnosis";
 import saveLeadDvDiagnosis from "@salesforce/apex/DvDiagnosisController.saveLeadDvDiagnosis";
+//import findMedicalQuestions from "@salesforce/apex/DvDiagnosisController.findDiagnosisMedicalQuestionsByCondition";
+import InputUtils from "c/inputUtils";
 
 export default class DvDiagnosis extends LightningElement {
   leadId;
@@ -16,9 +18,24 @@ export default class DvDiagnosis extends LightningElement {
   receivedDate;
   isShowModal = false;
   modalConfig;
+  //primaryDiagnosis;
+  //primaryDiagnosisMedicalQuestions = [];
+  utils = new InputUtils();
 
   @api handleLoadDvDiagnosis(leadId) {
     this.leadId = leadId;
+  }
+
+  @api validateInput() {
+    let isValid = true;
+    let inputFields = this.template.querySelectorAll(
+      "lightning-combobox, lightning-textarea"
+    );
+    isValid = this.utils.validateInputs(inputFields);
+    if (isValid) {
+      this.saveDiagnosis(false, true, true);
+    }
+    return isValid;
   }
 
   @wire(getLeadDvDiagnosis, { recordId: "$leadId" })
@@ -48,6 +65,14 @@ export default class DvDiagnosis extends LightningElement {
       " IN A COMATOSE OR VEGETATIVE STATE?"
     );
   }
+
+  /*get primaryDiagnosisLabel() {
+    return "PRIMARY DIAGNOSIS";
+  }
+
+  get primaryDiagnosisHelpTextLabel() {
+    return "Based on Make-A-Wish Eligibility Criteria";
+  }*/
 
   get yesNoOptions() {
     return [
@@ -97,22 +122,40 @@ export default class DvDiagnosis extends LightningElement {
         diagnosisWrapper: diagnosis
       })
         .then((result) => {
-          this.dispatchEvent(new CustomEvent("cancelsubmit"));
+          this.dispatchEvent(
+            new CustomEvent("cancelsubmit", {
+              detail: {
+                success: true
+              }
+            })
+          );
         })
         .catch((error) => {
-          console.log("Error saving diagnosis " + JSON.stringify(error));
+          this.dispatchEvent(
+            new CustomEvent("cancelsubmit", {
+              detail: {
+                success: false,
+                message: "Error saving diagnosis information."
+              }
+            })
+          );
         });
     }
   }
 
-  handleSaveClick(event) {
+  handleSaveClick() {
+    this.saveDiagnosis(true, true, false);
+  }
+
+  saveDiagnosis(showMessage, showSpinner, showNext) {
     this.dispatchEvent(
-      new CustomEvent("savediagnosis", {
+      new CustomEvent("savediagnosisevent", {
         detail: {
-          showSpinner: true
+          showSpinner: showSpinner
         }
       })
     );
+
     let diagnosis = {
       leadId: this.leadId,
       comatoseVegetativeState: this.comatoseState
@@ -123,15 +166,76 @@ export default class DvDiagnosis extends LightningElement {
     })
       .then((result) => {
         this.dispatchEvent(
-          new CustomEvent("savediagnosis", {
+          new CustomEvent("savediagnosisevent", {
             detail: {
-              showSpinner: false
+              success: true,
+              showMessage: showMessage,
+              showSpinner: false,
+              showNext: showNext
             }
           })
         );
       })
       .catch((error) => {
-        console.log("Error saving diagnosis " + JSON.stringify(error));
+        this.dispatchEvent(
+          new CustomEvent("savediagnosisevent", {
+            detail: {
+              success: false,
+              message: "An error occurred while saving.",
+              showSpinner: false
+            }
+          })
+        );
       });
   }
+
+  /*handleDiagnosisChangeEvent(event) {
+    const eventDetail = event.detail;
+    if (eventDetail) {
+      console.log("CD -> " + JSON.stringify(event.detail));
+      if (eventDetail.conditionDescriptionId) {
+        const conditionWrapper = {
+          leadId: this.leadId,
+          conditionDescriptionId: eventDetail.conditionDescriptionId
+          // eventDetail.conditionDescriptionName;
+          // eventDetail.icdCodeId;
+          // eventDetail.icdCodeName;
+          // eventDetail.icdCodeDescription;
+        };
+
+        findMedicalQuestions({
+          conditionWrapper
+        })
+          .then((result) => {
+            console.log(JSON.stringify(result));
+            this.primaryDiagnosisMedicalQuestions = result;
+          })
+          .catch((error) => {
+            console.log(
+              "Error finding medical questions " + JSON.stringify(error)
+            );
+          });
+      }
+    }
+  }
+
+  handleChangeMedicalQuestion(event) {
+    console.log("Id " + event.target.id);
+    console.log("Key " + event.target.accessKey);
+    console.log("Dataset " + JSON.stringify(event.target.dataset));
+    console.log("Value " + event.target.value);
+    console.log("Index " + event.target.dataset.id);
+    // const value = event.target.value;
+    // let primaryDiagnosisMedicalQuestionsCopy = [...this.primaryDiagnosisMedicalQuestions];
+    // primaryDiagnosisMedicalQuestionsCopy[event.target.dataset.id].answer = value;
+    // console.log('Index ' + JSON.stringify(primaryDiagnosisMedicalQuestionsCopy));
+    // this.primaryDiagnosisMedicalQuestions = primaryDiagnosisMedicalQuestionsCopy;
+  }
+
+  get yesNoOptions() {
+    return [
+      { label: "Yes", value: "Yes" },
+      { label: "No", value: "No" }
+    ];
+  }*/
 }

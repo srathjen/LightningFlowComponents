@@ -56,13 +56,15 @@ export default class NavigationPreviousNext extends LightningElement {
     let processUpdate = { ...this._process };
     if (event.target.value === "previous") {
       processUpdate.currentStepId = processUpdate.currentStepId - 1;
+      processUpdate.stepAction = "previous";
     } else if (event.target.value === "next") {
       processUpdate.currentStepId = processUpdate.currentStepId + 1;
+      processUpdate.stepAction = "next";
     }
     const navigationStepEvent = new CustomEvent("navigationstepevent", {
       detail: {
-        process: processUpdate,
-      },
+        process: processUpdate
+      }
     });
     this.dispatchEvent(navigationStepEvent);
   }
