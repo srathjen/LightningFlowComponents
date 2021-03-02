@@ -18,6 +18,20 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+.form > .field {
+  font-family: "Lato", Arial, sans-serif;
+  font-size: 0.75rem;
+  color: #75787b;
+}
+
+.fieldDetails {
+  font-family: "Lato", Arial, sans-serif;
+  font-size: 0.75rem;
+  color: #75787b;
+  padding-bottom: 10px;
+}
+
 .footer {
   padding-top: 20px;
   padding-bottom: 10px;
