@@ -27801,6 +27801,9 @@
     <layoutAssignments>
         <layout>npsp__Trigger_Handler__c-npsp__Trigger Handler Layout</layout>
     </layoutAssignments>
+    <layoutAssignments>
+        <layout>trac_Diagnosis_Verification_Form_Alert__mdt-Diagnosis Verification Form Alert Layout</layout>
+    </layoutAssignments>
     <objectPermissions>
         <allowCreate>false</allowCreate>
         <allowDelete>false</allowDelete>

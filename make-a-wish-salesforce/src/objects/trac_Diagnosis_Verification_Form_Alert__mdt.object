@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>trac_Alert_Message__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Alert Message</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>trac_Display_Alert__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Display Alert</label>
+        <type>Checkbox</type>
+    </fields>
     <label>Diagnosis Verification Form Alert</label>
     <pluralLabel>Diagnosis Verification Form Alerts</pluralLabel>
     <visibility>Public</visibility>
