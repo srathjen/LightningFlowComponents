@@ -546,5 +546,15 @@
         <errorDisplayField>Specified_Question__c</errorDisplayField>
         <errorMessage>If the Next Action is not a specified question, please leave the specified question field blank.</errorMessage>
     </validationRules>
+    <validationRules>
+        <fullName>Sort_Order_for_Medical_Questions</fullName>
+        <active>true</active>
+        <description>Questions of the record type "Medical Questions" must has a sort order.</description>
+        <errorConditionFormula>ISBLANK(Sort_Order__c )
+&amp;&amp;
+RecordType.DeveloperName = "Medical_Questions"</errorConditionFormula>
+        <errorDisplayField>Sort_Order__c</errorDisplayField>
+        <errorMessage>All medical questions must have a sort order.</errorMessage>
+    </validationRules>
     <visibility>Public</visibility>
 </CustomObject>
