@@ -34,3 +34,11 @@
   font-size: 16px;
   color: #75787b;
 }
+
+.output {
+  font-family: "Lato", Arial, sans-serif;
+  font-size: 12px;
+  color: #75787b;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}

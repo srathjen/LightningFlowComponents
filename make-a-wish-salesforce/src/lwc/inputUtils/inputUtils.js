@@ -13,4 +13,22 @@ export default class InputUtils {
     const regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     return regex.test(email);
   };
+
+  validateInputs = (elements) => {
+    let isValid = true;
+    let counter = 0;
+    elements.forEach((element) => {
+      if (element.checkValidity() === false) {
+        counter++;
+        isValid = false;
+      } else {
+        element.setCustomValidity("");
+      }
+      element.reportValidity();
+      if (counter === 1) {
+        element.focus();
+      }
+    });
+    return isValid;
+  };
 }

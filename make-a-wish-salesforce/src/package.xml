@@ -585,6 +585,8 @@
     <members>Automated_Wish_Granting_Email_Templates/Lead_New_DV_Signer</members>
     <members>Automated_Wish_Granting_Email_Templates/Send_Wish_Referral_Form_to_Non_Active_Chapter_Office</members>
     <members>Automated_Wish_Granting_Email_Templates/Wish_Form_Email_Notification_for_Salesforce_Team_when_Wish_Form_is_Edited</members>
+    <members>Medical_Eligibility_Emails/Incomplete_DV_7_Day_Reminder_Email</members>
+    <members>Medical_Eligibility_Emails/Incomplete_DV_7_Day_Reminder_Email_New_Responent</members>
     <members>Medical_Professional_Email_Templates/Med_Professional_DNQ_to_MP</members>
     <members>Medical_Professional_Email_Templates/Med_Professional_Request_for_more_information</members>
     <members>Medical_Professional_Email_Templates/Med_Professional_Your_patient_is_eligible_for_a_wish</members>
@@ -819,6 +821,7 @@
     <members>Contact.Volunteer_Details_BM_VC</members>
     <members>Contact.Wish_Family_Info</members>
     <members>dsfs__EnvelopeConfiguration__c.dsfs__Save</members>
+    <members>Lead.Attachments</members>
     <members>Lead.Best_Contact_HTF_Unmatched</members>
     <members>Lead.Best_Contact_MP_Unmatched</members>
     <members>Lead.Diagnosis_Verification</members>
@@ -835,6 +838,7 @@
     <members>Lead.Referral_Source_Information</members>
     <members>Lead.Referring_HTF_Unmatched</members>
     <members>Lead.Referring_MP_Unmatched</members>
+    <members>Lead.Send_DV_Reminder</members>
     <members>Lead.SendEmail</members>
     <members>Lead.Treating_HTF_Unmatched</members>
     <members>Lead.Treating_MP_Unmatched</members>
@@ -4687,6 +4691,18 @@
     <members>dsfs__DocuSign_Recipient_Status__c</members>
     <members>Lead</members>
     <name>Workflow</name>
+  </types>
+  <types>
+    <members>dsfs__DocuSign_Recipient_Status__c.Send_DV_Signature_Alert_to_Intake_Manager</members>
+    <members>dsfs__DocuSign_Recipient_Status__c.Send_DV_Signature_Reminder_to_Medical_Professional_Final</members>
+    <members>dsfs__DocuSign_Recipient_Status__c.Send_DV_Signature_Reminder_to_Medical_Professional_First</members>
+    <members>dsfs__DocuSign_Recipient_Status__c.Send_DV_Signature_Reminder_to_Medical_Professional_Second</members>
+    <name>WorkflowAlert</name>
+  </types>
+  <types>
+    <members>dsfs__DocuSign_Recipient_Status__c.Send DV Signature Reminder to Medical Professional</members>
+    <members>dsfs__DocuSign_Recipient_Status__c.Update Lead Owner Email for notification</members>
+    <name>WorkflowRule</name>
   </types>
   <version>48.0</version>
 </Package>

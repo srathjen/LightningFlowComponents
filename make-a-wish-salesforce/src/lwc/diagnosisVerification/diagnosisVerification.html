@@ -42,7 +42,6 @@
         <c-navigation-progress-path
           if:true={isShowNavigation}
           process={process}
-          onnavigationstepevent={handleNavigationStepEvent}
         ></c-navigation-progress-path>
 
         <!-- MEDICAL PROFESSIONAL INFORMATION COMPONENT -->
@@ -59,7 +58,7 @@
           <c-dv-diagnosis
             oncancelsubmit={handleCancelSubmit}
             onshowspinner={handleShowSpinner}
-            onsavediagnosis={handleSaveDiagnosis}
+            onsavediagnosisevent={handleSaveDiagnosisEvent}
           ></c-dv-diagnosis>
         </div>
 
@@ -72,7 +71,9 @@
 
         <!-- TRAVEL QUESTIONS COMPONENT -->
         <div class="slds-hide section step4">
-          <!--<c-dv-travel-questions></c-dv-travel-questions>-->
+          <c-dv-travel-questions
+            onsavetravelquestionsaveevent={handleSaveTravelQuestionsEvent}
+          ></c-dv-travel-questions>
         </div>
       </section>
 
@@ -85,6 +86,36 @@
         ></c-navigation-previous-next>
       </section>
     </div>
+
+    <!--<section if:true={isShowAcknowledgeStatements}>
+      <lightning-input
+        class="output"
+        type="checkbox"
+        name="SubmitCheckbox"
+        label="By checking this box, I acknowledge that the following statements are
+        true:"
+        onchange={handleAcknowledgeCheckboxChange}
+      ></lightning-input>
+      <lightning-formatted-rich-text
+        class="output"
+        value={mpTypeLabel}
+      ></lightning-formatted-rich-text>
+      <lightning-formatted-rich-text
+        class="output"
+        value={directKnowledgeLabel}
+      ></lightning-formatted-rich-text>
+      <lightning-formatted-rich-text
+        class="output"
+        value={informationProvidedLabel}
+      ></lightning-formatted-rich-text>
+      <lightning-button
+        if:true={isShowSubmit}
+        value="Submit"
+        label="Submit"
+        variant="brand"
+        onclick={handleValidations}
+      ></lightning-button>
+    </section>-->
   </div>
 
   <!-- CANCELED SUBMISSION SECTION-->

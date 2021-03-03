@@ -1,11 +1,12 @@
 /**
-@description Additional Medical Questions component, the additional medical questions component for the Diagnosis Verification process.
-@author Gustavo Mayer, Traction on Demand
-@createdDate 08/Feb/2021
-**/
+ @description Additional Medical Questions component, the additional medical questions component for the Diagnosis Verification process.
+ @author Gustavo Mayer, Traction on Demand
+ @createdDate 08/Feb/2021
+ **/
 import { api, LightningElement, wire } from "lwc";
 import findAdditionalMedicalQuestions from "@salesforce/apex/DvAdditionalMedicalQuestionsController.getAdditionalMedicalQuestionsByLeadId";
 import saveAdditionalMedicalQuestions from "@salesforce/apex/DvAdditionalMedicalQuestionsController.saveAdditionalMedicalQuestions";
+import InputUtils from "c/inputUtils";
 
 export default class DvAdditionalMedicalQuestions extends LightningElement {
   /**
@@ -34,6 +35,7 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
   expressNeedsDesires = "";
   describeCommunicationNeeds = [""];
   describeCommunicationNeedsInformation = "";
+  utils = new InputUtils();
 
   isUnplannedHospitalAdmissionsRequired = true;
   isTimesChildAdmittedRequired = false;
@@ -60,8 +62,20 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
     this.leadId = leadId;
   }
 
+  @api validateInput() {
+    let isValid = true;
+    let inputFields = this.template.querySelectorAll(
+      "lightning-input, lightning-combobox, lightning-textarea, lightning-radio-group, lightning-checkbox-group"
+    );
+    isValid = this.utils.validateInputs(inputFields);
+    if (isValid) {
+      this.saveAdditionalMedicalQuestions(false, true, true);
+    }
+    return isValid;
+  }
+
   @wire(findAdditionalMedicalQuestions, {
-    leadId: "$leadId",
+    leadId: "$leadId"
   })
   wired(result) {
     if (result.data) {
@@ -345,12 +359,7 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
       this.describeCommunicationNeedsInformation = "";
     }
 
-    if (
-      newValue &&
-      (newValue === "No" ||
-        newValue ===
-          "I do not have access to that information. I recommend the chapter follow up with the medical team")
-    ) {
+    if (newValue && newValue === "No") {
       this.show(speechLanguageDelay);
       this.hide(levelOfDelay);
       this.hide(expressNeedsDesires);
@@ -582,11 +591,7 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
     if (cognitiveDelay.value === "Yes") {
       this.isLevelOfDelayRequired = true;
       this.isSpeechLanguageDelayRequired = false;
-    } else if (
-      cognitiveDelay.value === "No" ||
-      cognitiveDelay.value ===
-        "I do not have access to that information. I recommend the chapter follow up with the medical team"
-    ) {
+    } else if (cognitiveDelay.value === "No") {
       this.isLevelOfDelayRequired = false;
       this.isSpeechLanguageDelayRequired = true;
     } else {
@@ -637,11 +642,15 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
   }
 
   handleClickSave() {
+    this.saveAdditionalMedicalQuestions(true, true, false);
+  }
+
+  saveAdditionalMedicalQuestions(showMessage, showSpinner, showNext) {
     this.dispatchEvent(
       new CustomEvent("saveadditionalmedicalquestions", {
         detail: {
-          showSpinner: true,
-        },
+          showSpinner: showSpinner
+        }
       })
     );
 
@@ -670,21 +679,35 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
       expressNeedsDesires: this.expressNeedsDesires,
       describeCommunicationNeeds: describeCommunicationNeedsList,
       describeCommunicationNeedsInformation: this
-        .describeCommunicationNeedsInformation,
+        .describeCommunicationNeedsInformation
     };
+
     saveAdditionalMedicalQuestions({
-      amq: additionalMedicalQuestions,
+      amq: additionalMedicalQuestions
     })
       .then((result) => {
         this.dispatchEvent(
           new CustomEvent("saveadditionalmedicalquestions", {
             detail: {
+              success: true,
+              showMessage: showMessage,
               showSpinner: false,
-            },
+              showNext: showNext
+            }
           })
         );
       })
-      .catch((error) => {});
+      .catch((error) => {
+        this.dispatchEvent(
+          new CustomEvent("saveadditionalmedicalquestions", {
+            detail: {
+              success: false,
+              message: "An error occurred while saving.",
+              showSpinner: false
+            }
+          })
+        );
+      });
   }
 
   /**
@@ -754,16 +777,12 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
     return `IS THERE ADDITIONAL INFORMATION YOU WOULD LIKE TO PROVIDE?`;
   }
 
-  get additionalInfoProvideSecondLabel() {
-    return `(e.g., additional information that will help us make an eligibility determination for conditions that require review on a case-by-case basis.)`;
-  }
-
   get cognitiveDelayLabel() {
     return `DOES ${this.wishChildFirstName.toUpperCase()} HAVE COGNITIVE DELAYS?`;
   }
 
   get cognitiveDelaySecondLabel() {
-    return `(this question does not affect eligibility criteria. if the child's condition is eligible, this information helps our volunteers and staff to plan an appropriate wish.)`;
+    return `(The following questions do not affect a child's eligibility. If this child’s condition is eligible, this information helps our volunteers and staff to plan a developmentally appropriate wish.)`;
   }
 
   get levelOfDelayLabel() {
@@ -789,7 +808,7 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
   get yesOrNoOptions() {
     return [
       { label: "Yes", value: "Yes" },
-      { label: "No", value: "No" },
+      { label: "No", value: "No" }
     ];
   }
 
@@ -797,7 +816,7 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
     return [
       { label: "Yes", value: "Yes" },
       { label: "No", value: "No" },
-      { label: "Not Sure", value: "Not Sure" },
+      { label: "Not Sure", value: "Not Sure" }
     ];
   }
 
@@ -805,41 +824,35 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
     return [
       {
         label: `${this.wishChildFirstName} has a condition for which curative treatment may be feasible but can fail; non-adherence is not included as a treatment failure. (e.g., cancer, irreversible organ failure)`,
-        value: "TREATMENT_MAY_BE_FEASIBLE_BUT_CAN_FAIL",
+        value: "TREATMENT_MAY_BE_FEASIBLE_BUT_CAN_FAIL"
       },
       {
         label: `${this.wishChildFirstName} has a condition with a known history of a significantly shortened life expectancy, but frequent and/or long periods of intensive treatment may prolong life and allow participation in normal activities (e.g., cystic fibrosis, solid organ transplant)`,
-        value: "TREATMENT_MAY_PROLONG_NORMAL_ACTIVITIES",
+        value: "TREATMENT_MAY_PROLONG_NORMAL_ACTIVITIES"
       },
       {
         label: `${this.wishChildFirstName} has a condition without curative treatment options in which debilitation may extend over many years (e.g., severe treatment-resistant epilepsy, some metabolic diseases)`,
-        value: "DEBILITATION_MAY_EXTEND_OVER_MANY_YEARS",
+        value: "DEBILITATION_MAY_EXTEND_OVER_MANY_YEARS"
       },
       {
         label: `${this.wishChildFirstName} has an irreversible but non-progressive condition with life-threatening comorbidities and a known history of a significantly shortened life expectancy (e.g. anoxic brain injury, severe cerebral palsy)`,
-        value: "INCREASED_PROBABILITY_OF_PREMATURE_DEATH",
+        value: "INCREASED_PROBABILITY_OF_PREMATURE_DEATH"
       },
       {
         label: `${this.wishChildFirstName} has a condition for which there is no reasonable hope of cure and from which children or young people will experience a significantly shortened life expectancy (e.g., Duchenne muscular dystrophy or neurodegenerative disease)`,
-        value: "CHILD_WILL_ULTIMATELY_DIE_PREMATURELY",
+        value: "CHILD_WILL_ULTIMATELY_DIE_PREMATURELY"
       },
       {
         label: `None of these statements describe ${this.wishChildFirstName}`,
-        value: "NONE_OF_THESE_STATEMENTS_DESCRIBES_CHILD",
-      },
+        value: "NONE_OF_THESE_STATEMENTS_DESCRIBES_CHILD"
+      }
     ];
   }
 
   get cognitiveDelayOptions() {
     return [
       { label: "Yes", value: "Yes" },
-      { label: "No", value: "No" },
-      {
-        label:
-          "I do not have access to that information. I recommend the chapter follow up with the medical team",
-        value:
-          "I do not have access to that information. I recommend the chapter follow up with the medical team",
-      },
+      { label: "No", value: "No" }
     ];
   }
 
@@ -848,7 +861,7 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
       { label: "< 1 month", value: "< 1 month" },
       { label: "1-3 months", value: "< 1 month" },
       { label: "3-6 months", value: "3-6 months" },
-      { label: "Other", value: "Other" },
+      { label: "Other", value: "Other" }
     ];
   }
 
@@ -856,18 +869,18 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
     return [
       {
         label: "Mild: Functions close to peers",
-        value: "Mild: Functions close to peers",
+        value: "Mild: Functions close to peers"
       },
       {
         label: "Moderate: Functions below peers",
-        value: "Moderate: Functions below peers",
+        value: "Moderate: Functions below peers"
       },
       {
         label:
           "Severe: Functions nothing like same-age peers, extremely cognitively delayed.",
         value:
-          "Severe: Functions nothing like same-age peers, extremely cognitively delayed.",
-      },
+          "Severe: Functions nothing like same-age peers, extremely cognitively delayed."
+      }
     ];
   }
 
@@ -875,15 +888,9 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
     return [
       {
         label: "No, child is verbal at an age-appropriate level.",
-        value: "No, child is verbal at an age-appropriate level.",
+        value: "No, child is verbal at an age-appropriate level."
       },
-      { label: "Yes", value: "Yes" },
-      {
-        label:
-          "I do not have access to that information. I recommend the chapter follow up with the medical team",
-        value:
-          "I do not have access to that information. I recommend the chapter follow up with the medical team",
-      },
+      { label: "Yes", value: "Yes" }
     ];
   }
 
@@ -893,9 +900,9 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
         label:
           "Yes, child is verbal but delayed and able to be understood by others",
         value:
-          "Yes, child is verbal but delayed and able to be understood by others",
+          "Yes, child is verbal but delayed and able to be understood by others"
       },
-      { label: "No, child is non-verbal", value: "No, child is non-verbal" },
+      { label: "No, child is non-verbal", value: "No, child is non-verbal" }
     ];
   }
 
@@ -905,28 +912,28 @@ export default class DvAdditionalMedicalQuestions extends LightningElement {
         label:
           "Crying without the capacity to indicate needs or wants to a caregiver well known to the child",
         value:
-          "Crying without the capacity to indicate needs or wants to a caregiver well known to the child",
+          "Crying without the capacity to indicate needs or wants to a caregiver well known to the child"
       },
       {
         label:
           "Pointing at desired objects, reaching out for something or someone they want,  taking your hand to what they want",
         value:
-          "Pointing at desired objects, reaching out for something or someone they want,  taking your hand to what they want",
+          "Pointing at desired objects, reaching out for something or someone they want,  taking your hand to what they want"
       },
       {
         label:
           "Repeating something they just heard in a manner suggesting the child is desiring (as opposed to just echoing words)",
         value:
-          "Repeating something they just heard in a manner suggesting the child is desiring (as opposed to just echoing words)",
+          "Repeating something they just heard in a manner suggesting the child is desiring (as opposed to just echoing words)"
       },
       {
         label: "Sign language (either standard or specific to the child)",
-        value: "Sign language (either standard or specific to the child)",
+        value: "Sign language (either standard or specific to the child)"
       },
       {
         label: "Assistive communication tool, tablet, or computer",
-        value: "Assistive communication tool, tablet, or computer",
-      },
+        value: "Assistive communication tool, tablet, or computer"
+      }
     ];
   }
 

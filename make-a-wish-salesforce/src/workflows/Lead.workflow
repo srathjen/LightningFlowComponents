@@ -91,6 +91,30 @@
         <template>Medical_Professional_Email_Templates/Med_Professional_Your_patient_is_eligible_for_a_wish</template>
     </alerts>
     <alerts>
+        <fullName>Lead_Incomplete_Diagnosis_Verification_7_Day_Reminder_New_Respondent</fullName>
+        <description>Lead: Incomplete Diagnosis Verification 7 Day Reminder - New Respondent</description>
+        <protected>false</protected>
+        <recipients>
+            <field>DV_Signer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Medical_Eligibility_Emails/Incomplete_DV_7_Day_Reminder_Email_New_Responent</template>
+    </alerts>
+    <alerts>
+        <fullName>Lead_Incomplete_Diagnosis_Verification_7_Day_Reminder_Original_Recipient</fullName>
+        <description>Lead: Incomplete Diagnosis Verification 7 Day Reminder - Original Recipient</description>
+        <protected>false</protected>
+        <recipients>
+            <field>HiddenMedicalProfessionalEmail__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Medical_Eligibility_Emails/Incomplete_DV_7_Day_Reminder_Email</template>
+    </alerts>
+    <alerts>
         <fullName>Lead_Notify_owner_Qualified_RUSH_lead</fullName>
         <description>Lead: Notify owner Qualified RUSH lead</description>
         <protected>false</protected>

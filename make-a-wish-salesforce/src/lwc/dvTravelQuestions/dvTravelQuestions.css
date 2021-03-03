@@ -1,0 +1,111 @@
+:host {
+  display: block;
+}
+
+.header {
+  font-family: "Droid Serif", serif;
+  font-size: 16px;
+  color: #75787b;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.container {
+  font-family: "Lato", Arial, sans-serif;
+}
+
+.form > .input {
+  font-family: "Lato", Arial, sans-serif;
+  font-size: 12px;
+  color: #75787b;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.form > .output {
+  font-family: "Lato", Arial, sans-serif;
+  font-size: 12px;
+  color: #75787b;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
+.form > .conditionalForm > .input {
+  font-family: "Lato", Arial, sans-serif;
+  font-size: 12px;
+  color: #75787b;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.conditionalForm {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.inset {
+  padding-left: 15px;
+}
+
+.footer {
+  padding-top: 20px;
+  padding-bottom: 10px;
+  float: right;
+}
+
+.buttonSave {
+  font-family: "Lato", Arial, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 900;
+  width: 180px;
+  height: 40px;
+  display: inline-block;
+  border: none;
+  margin: 0;
+  text-decoration: none;
+  background: #ff585d;
+  color: #ffffff;
+  line-height: 1;
+  cursor: pointer;
+  text-align: center;
+  transition: background 250ms ease-in-out, transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.buttonSave:hover {
+  background: #cc464a;
+}
+
+.buttonSave:focus {
+  outline: none;
+}
+
+.buttonSave:active {
+  transform: scale(0.99);
+}
+
+.column {
+  float: left;
+  padding-left: 15px;
+}
+
+.left {
+  width: 15%;
+}
+
+.center {
+  width: 5%;
+}
+
+.right {
+  width: 80%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}

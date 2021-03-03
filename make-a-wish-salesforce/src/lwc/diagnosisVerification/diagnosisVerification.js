@@ -16,6 +16,8 @@ export default class DiagnosisVerification extends LightningElement {
   isShowNavigation = false;
   isSubmitCanceled = false;
   isShowSpinner = false;
+  isShowAcknowledgeStatements = false;
+  isShowSubmit = false;
   notificationConfig = {
     title: "",
     message: "",
@@ -31,7 +33,7 @@ export default class DiagnosisVerification extends LightningElement {
     if (result.data) {
       this.process = result.data.process;
       this.isShowNavigation = true;
-      this.processStepNavigation(1);
+      this.processStepNavigation(1, "load");
     } else if (result.error) {
       console.error("Test " + result.error);
     }
@@ -55,6 +57,26 @@ export default class DiagnosisVerification extends LightningElement {
     }
   }
 
+  updateProcess(stepId, step1Status, step2Status, step3Status, step4Status) {
+    this.process = {
+      currentStepId: stepId,
+      steps: [
+        {
+          id: 1,
+          label: "Medical Professional Information",
+          status: step1Status
+        },
+        { id: 2, label: "Diagnosis", status: step2Status },
+        {
+          id: 3,
+          label: "Additional Medical Questions",
+          status: step3Status
+        },
+        { id: 4, label: "Travel Questions", status: step4Status }
+      ]
+    };
+  }
+
   handleNavigationStepEvent(event) {
     if (event.detail.error) {
       this.notificationConfig = {
@@ -69,11 +91,14 @@ export default class DiagnosisVerification extends LightningElement {
     } else {
       let processUpdate = event.detail.process;
       this.process = processUpdate;
-      this.processStepNavigation(processUpdate.currentStepId);
+      this.processStepNavigation(
+        processUpdate.currentStepId,
+        processUpdate.stepAction
+      );
     }
   }
 
-  processStepNavigation(currentStepId) {
+  processStepNavigation(currentStepId, stepAction) {
     this.template
       .querySelector("c-dv-child-information")
       .handleLoadChildInformation(this.leadId);
@@ -85,34 +110,71 @@ export default class DiagnosisVerification extends LightningElement {
     this.hide(step3);
     const step4 = this.template.querySelectorAll(".step4");
     this.hide(step4);
+    this.isShowAcknowledgeStatements = false;
+    let validationCheck;
     if (currentStepId === 1) {
+      this.updateProcess(1, "active", "incomplete", "incomplete", "incomplete");
       this.template
         .querySelector("c-dv-medical-professional-information")
         .handleLoadMedicalProfessionalInformation(this.leadId);
       this.show(step1);
     } else if (currentStepId === 2) {
-      this.template
-        .querySelector("c-dv-diagnosis")
-        .handleLoadDvDiagnosis(this.leadId);
-      this.show(step2);
+      if (stepAction === "next") {
+        this.show(step1);
+        validationCheck = this.template
+          .querySelector("c-dv-medical-professional-information")
+          .validateInput();
+      } else if (stepAction === "previous") {
+        this.updateProcess(2, "active", "active", "incomplete", "incomplete");
+        this.template
+          .querySelector("c-dv-diagnosis")
+          .handleLoadDvDiagnosis(this.leadId);
+        this.show(step2);
+      }
+      if (validationCheck === false) {
+        this.updateProcess(
+          1,
+          "active",
+          "incomplete",
+          "incomplete",
+          "incomplete"
+        );
+      }
     } else if (currentStepId === 3) {
-      this.template
-        .querySelector("c-dv-additional-medical-questions")
-        .handleLoadAdditionalMedicalQuestions(this.leadId);
-      this.show(step3);
+      if (stepAction === "next") {
+        this.show(step2);
+        validationCheck = this.template
+          .querySelector("c-dv-diagnosis")
+          .validateInput();
+      } else if (stepAction === "previous") {
+        this.updateProcess(3, "active", "active", "active", "incomplete");
+        this.template
+          .querySelector("c-dv-additional-medical-questions")
+          .handleLoadAdditionalMedicalQuestions(this.leadId);
+        this.show(step3);
+      }
+      if (validationCheck === false) {
+        this.updateProcess(2, "active", "active", "incomplete", "incomplete");
+      }
     } else if (currentStepId === 4) {
-      /*this.template
-        .querySelector("c-dv-travel-questions")
-        .handleLoadTravelQuestions(this.leadId);*/
-      this.show(step4);
+      this.show(step3);
+      validationCheck = this.template
+        .querySelector("c-dv-additional-medical-questions")
+        .validateInput();
+      if (validationCheck === false) {
+        this.updateProcess(3, "active", "active", "active", "incomplete");
+      }
     }
   }
 
   handleCancelSubmit(event) {
     this.isShowSpinner = false;
-    this.isSubmitCanceled = true;
-    const spinner = this.template.querySelectorAll(".spinner");
-    this.hide(spinner);
+    if (event.detail.success) {
+      this.isSubmitCanceled = true;
+      this.updateLeadLastDvSaveDate();
+    } else {
+      this.showErrorMessage(event.detail.message);
+    }
   }
 
   handleShowSpinner(event) {
@@ -120,61 +182,93 @@ export default class DiagnosisVerification extends LightningElement {
   }
 
   handleSaveMedicalProfessionalInformationEvent(event) {
-    this.updateLeadLastDvSaveDate();
-    this.showSaveSuccessMessage();
-    this.isShowSpinner = event.detail.showSpinner;
-
-    if (event.detail.medicalProfessionalInformation) {
-      const {
-        partOfHealthcareTeam
-      } = event.detail.medicalProfessionalInformation;
-      if (partOfHealthcareTeam === "Yes") {
-        this.process = {
-          currentStepId: 1,
-          steps: [
-            {
-              id: 1,
-              label: "Medical Professional Information",
-              status: "active"
-            },
-            { id: 2, label: "Diagnosis", status: "active" },
-            { id: 3, label: "Additional Medical Questions", status: "active" },
-            { id: 4, label: "Travel Questions", status: "active" }
-          ]
-        };
-      } else {
-        this.process = {
-          currentStepId: 1,
-          steps: [
-            {
-              id: 1,
-              label: "Medical Professional Information",
-              status: "active"
-            },
-            { id: 2, label: "Diagnosis", status: "incomplete" },
-            {
-              id: 3,
-              label: "Additional Medical Questions",
-              status: "incomplete"
-            },
-            { id: 4, label: "Travel Questions", status: "incomplete" }
-          ]
-        };
+    if (event.detail.success) {
+      this.updateLeadLastDvSaveDate();
+      if (event.detail.showMessage) {
+        this.showSaveSuccessMessage();
       }
+      if (event.detail.showNext) {
+        this.updateProcess(2, "active", "active", "incomplete", "incomplete");
+        this.template
+          .querySelector("c-dv-diagnosis")
+          .handleLoadDvDiagnosis(this.leadId);
+        this.hide(this.template.querySelectorAll(".step1"));
+        this.show(this.template.querySelectorAll(".step2"));
+      }
+    } else {
+      this.showErrorMessage(event.detail.message);
     }
+    this.isShowSpinner = event.detail.showSpinner;
+  }
+
+  handleSaveDiagnosisEvent(event) {
+    if (event.detail.success) {
+      this.updateLeadLastDvSaveDate();
+      if (event.detail.showMessage) {
+        this.showSaveSuccessMessage();
+      }
+      if (event.detail.showNext) {
+        this.updateProcess(3, "active", "active", "active", "incomplete");
+        this.template
+          .querySelector("c-dv-additional-medical-questions")
+          .handleLoadAdditionalMedicalQuestions(this.leadId);
+        this.hide(this.template.querySelectorAll(".step2"));
+        this.show(this.template.querySelectorAll(".step3"));
+      }
+    } else if (event.detail.success === false) {
+      this.showErrorMessage(event.detail.message);
+    }
+    this.isShowSpinner = event.detail.showSpinner;
   }
 
   handleSaveAdditionalMedicalQuestionsEvent(event) {
-    this.updateLeadLastDvSaveDate();
-    this.showSaveSuccessMessage();
+    if (event.detail.success) {
+      this.updateLeadLastDvSaveDate();
+      if (event.detail.showMessage) {
+        this.showSaveSuccessMessage();
+      }
+      if (event.detail.showNext) {
+        this.updateProcess(4, "active", "active", "active", "active");
+        this.template
+          .querySelector("c-dv-travel-questions")
+          .handleLoadTravelQuestions(this.leadId);
+        this.hide(this.template.querySelectorAll(".step3"));
+        this.show(this.template.querySelectorAll(".step4"));
+        this.isShowAcknowledgeStatements = true;
+      }
+    } else if (event.detail.success === false) {
+      this.showErrorMessage(event.detail.message);
+    }
     this.isShowSpinner = event.detail.showSpinner;
   }
 
-  handleSaveDiagnosis(event) {
-    this.updateLeadLastDvSaveDate();
-    this.showSaveSuccessMessage();
+  handleSaveTravelQuestionsEvent(event) {
+    const eventDetail = event.detail;
+    if (eventDetail) {
+      if (eventDetail.message) {
+        if (eventDetail.success === true) {
+          this.showSaveSuccessMessage();
+        } else if (eventDetail.success === false) {
+          this.showErrorMessage(eventDetail.message);
+        }
+      }
+    }
     this.isShowSpinner = event.detail.showSpinner;
   }
+
+  /*handleAcknowledgeCheckboxChange(event) {
+    if (event.detail.checked) {
+      this.isShowSubmit = true;
+    } else {
+      this.isShowSubmit = false;
+    }
+  }
+
+  handleValidations(event) {
+    let check = this.template
+      .querySelector("c-dv-medical-professional-information")
+      .validateInput();
+  }*/
 
   showSaveSuccessMessage() {
     this.notificationConfig = {
@@ -182,6 +276,17 @@ export default class DiagnosisVerification extends LightningElement {
         "Your form has been successfully saved but has not yet been submitted.",
       message: "Please click ‘Submit’ to complete Diagnosis Verification.",
       variant: "success",
+      autoClose: true,
+      autoCloseErrorWarning: true
+    };
+    this.template.querySelector("c-notification-toast").showCustomNotice();
+  }
+
+  showErrorMessage(message) {
+    this.notificationConfig = {
+      title: message,
+      message: "",
+      variant: "error",
       autoClose: true,
       autoCloseErrorWarning: true
     };
@@ -211,4 +316,16 @@ export default class DiagnosisVerification extends LightningElement {
       element.classList.remove("slds-show");
     });
   }
+
+  /*get mpTypeLabel() {
+    return "&bull; I am recognized by my state to practice as a ---<br>";
+  }
+
+  get directKnowledgeLabel() {
+    return "&bull; I have direct knowledge of this patients condition and I am part of the treating healthcare team<br>";
+  }
+
+  get informationProvidedLabel() {
+    return "&bull; The information I have provided is accurate and complete to the best of my knowledge<br>";
+  }*/
 }

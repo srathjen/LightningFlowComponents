@@ -41,7 +41,7 @@
         {dvRecipientLabel}
       </label>
       <lightning-combobox
-        class="input"
+        class="input signer"
         name="Signer"
         value={isRecipientSigner}
         placeholder="Please Select"
@@ -59,7 +59,7 @@
           FIRST NAME:
         </label>
         <lightning-input
-          class="input"
+          class="input firstName"
           type="text"
           placeholder="First Name"
           value={dvSignerFirstName}
@@ -72,7 +72,7 @@
           LAST NAME:
         </label>
         <lightning-input
-          class="input"
+          class="input lastName"
           type="text"
           placeholder="Last Name"
           value={dvSignerLastName}
@@ -80,25 +80,29 @@
           required="true"
           max-length="100"
           variant="label-hidden"
+          name="Last Name"
         ></lightning-input>
         <label class="slds-form-element__legend slds-form-element__label">
           EMAIL:
         </label>
         <lightning-input
-          class="input"
+          class="input email"
           type="email"
           placeholder="your_email@domain.com"
           value={dvSignerEmail}
           onchange={handleEmailChange}
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          message-when-pattern-mismatch="Enter a valid email format."
           required="true"
           max-length="80"
           variant="label-hidden"
+          name="Email"
         ></lightning-input>
         <label class="slds-form-element__legend slds-form-element__label">
           PHONE:
         </label>
         <lightning-input
-          class="input"
+          class="input phone"
           type="tel"
           placeholder="(000) 000-0000"
           value={dvSignerPhone}
@@ -107,6 +111,7 @@
           max-length="14"
           min-length="14"
           variant="label-hidden"
+          name="Phone"
         ></lightning-input>
       </section>
 
@@ -114,7 +119,7 @@
         I AM RECOGNIZED BY MY STATE TO PRACTICE AS A:
       </label>
       <lightning-combobox
-        class="input"
+        class="input mpType"
         name="ProfessionalType"
         value={mpTypeSelection}
         placeholder="Please Select"
@@ -128,7 +133,7 @@
         TREATING HEALTHCARE TEAM:
       </label>
       <lightning-combobox
-        class="input"
+        class="input healthcareTeam"
         name="HealthcareTeam"
         value={isHealthcareTeam}
         placeholder="Please Select"

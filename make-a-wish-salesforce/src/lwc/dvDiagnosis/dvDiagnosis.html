@@ -29,6 +29,66 @@
         required="true"
         variant="label-hidden"
       ></lightning-combobox>
+
+      <!--<label class="slds-form-element__legend slds-form-element__label">
+        {primaryDiagnosisLabel}
+      </label>
+      <div class="slds-form-element__control">
+        <div class="fieldDetails">{primaryDiagnosisHelpTextLabel}</div>
+        <c-dv-condition-icd-code-search
+                ondiagnosischange={handleDiagnosisChangeEvent}
+                class="field primaryDiagnosis">
+        </c-dv-condition-icd-code-search>
+      </div>
+
+      <template
+              for:each={primaryDiagnosisMedicalQuestions}
+              for:item="questionItem"
+              for:index="indexMedicalQuestion"
+      >-->
+      <!--          <label class="slds-form-element__legend slds-form-element__label">-->
+      <!--            PRIMARY DIAGNOSIS QUESTIONS-->
+      <!--          </label>-->
+      <!--          <li-->
+      <!--              data-index={indexConditionDescription}-->
+      <!--              role="presentation"-->
+      <!--              class="slds-listbox__item"-->
+      <!--          >-->
+      <!--          </li>-->
+
+      <!--        <div key={questionItem.question} if:true={questionItem.isPicklist}>{questionItem.question}</div>-->
+      <!--        <div key={questionItem.question} if:false={questionItem.isCommentBox}>{questionItem.question}</div>-->
+
+      <!--<div key={questionItem.question} if:true={questionItem.isPicklist}>
+          <label class="slds-form-element__legend slds-form-element__label">
+            {questionItem.question}
+          </label>
+          <lightning-combobox
+                  class="field"
+                  label=""
+                  placeholder="Please Select"
+                  value={questionItem.answer}
+                  data-id={questionItem.name}
+                  options={questionItem.answerOptions}
+                  onchange={handleChangeMedicalQuestion}
+                  required
+                  variant="label-hidden"
+          ></lightning-combobox>
+
+        </div>
+        <div key={questionItem.question} if:true={questionItem.isCommentBox}>
+          <lightning-textarea
+                  class="field"
+                  label=""
+                  value=""
+                  onchange={handleChangeAdmittedDiagnosis}
+                  max-length="255"
+                  required
+                  variant="label-hidden"
+          ></lightning-textarea>
+        </div>
+
+      </template>-->
     </section>
 
     <section class="footer" if:true={dvDiagnosis}>
