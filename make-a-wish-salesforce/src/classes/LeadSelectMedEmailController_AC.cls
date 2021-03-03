@@ -13,6 +13,7 @@
  * 6. 1/2/2020 - CSmith - SIW-342 - field name changes reverted
  * 7. 11/9/2020 - Gus - ODP-16
  * 8. 12/30/2020 - Michelle - ODP-176
+ * 9. 3-march-2021 - Pramod - DVS-166
  **/
 public class LeadSelectMedEmailController_AC {
 	public Boolean success { get; set; }
@@ -69,8 +70,11 @@ public class LeadSelectMedEmailController_AC {
 				currLead.Pending_Diagnosis_Date__c = Date.today();
 				if (currLead.Of_Times_Email_Sent__c == null) {
 					currLead.Of_Times_Email_Sent__c = 0;
+					currLead.First_DV_Sent_Date__c = Date.today();
 				} else {
 					currLead.Of_Times_Email_Sent__c = currLead.Of_Times_Email_Sent__c + 1;
+					currLead.DV_Reminder_Last_Sent_Date__c = null;
+					currLead.Last_DV_Save_Date__c = null;
 				}
 				update currLead;
 				DiagnosisVerificationService.processSendDiagnosisVerification(currLead, currLead.HiddenMedicalProfessionalEmail__c);
