@@ -1,33 +1,43 @@
 <template>
-  <div class="container">
-    <header class="header">
-      <h1>LOGIN</h1>
-    </header>
-    <section class="form">
-      <label class="slds-form-element__legend slds-form-element__label">
-        Password:
-      </label>
-      <lightning-input
-        class="login"
-        type="text"
-        label=""
-        onfocus={handlePasswordFocus}
-        onchange={handlePasswordChange}
-        value={inputPassword}
-        autocomplete="off"
-        required
-        variant="label-hidden"
-        max-length=20
-      >
-      </lightning-input>
-    </section>
-    <section class="actions">
-      <input
-        type="button"
-        onclick={handleLogin}
-        class="buttonViewForm"
-        value="VIEW FORM"
-      />
-    </section>
-  </div>
+  <!-- LOGIN SECTION -->
+  <section class="section">
+    <div class="container">
+      <header class="header">
+        <h1>LOGIN</h1>
+      </header>
+
+      <section class="form">
+        <label class="slds-form-element__legend slds-form-element__label">
+          Password:
+        </label>
+        <lightning-input
+          class="login"
+          type="text"
+          label=""
+          onfocus={handlePasswordFocus}
+          onchange={handlePasswordChange}
+          value={inputPassword}
+          autocomplete="off"
+          required
+          variant="label-hidden"
+          max-length=20
+        >
+        </lightning-input>
+      </section>
+      <section class="actions">
+        <input
+          type="button"
+          onclick={handleLogin}
+          class="buttonViewForm"
+          value="VIEW FORM"
+        />
+      </section>
+    </div>
+  </section>
+  <!-- DISPLAY SPECIAL MESSAGES -->
+  <section class="section" if:true={isDisplayAlert}>
+    <div class="container">
+      <p class="alertMessage">{alertMessage}</p>
+    </div>
+  </section>
 </template>
