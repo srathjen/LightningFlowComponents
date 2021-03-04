@@ -550,11 +550,13 @@
         <fullName>Sort_Order_for_Medical_Questions</fullName>
         <active>true</active>
         <description>Questions of the record type "Medical Questions" must has a sort order.</description>
-        <errorConditionFormula>ISBLANK(Sort_Order__c )
+        <errorConditionFormula>(ISBLANK(Sort_Order__c)
+||
+Sort_Order__c=0)
 &amp;&amp;
 RecordType.DeveloperName = "Medical_Questions"</errorConditionFormula>
         <errorDisplayField>Sort_Order__c</errorDisplayField>
-        <errorMessage>All medical questions must have a sort order.</errorMessage>
+        <errorMessage>All medical questions must have a sort order of 1 or more.</errorMessage>
     </validationRules>
     <visibility>Public</visibility>
 </CustomObject>
