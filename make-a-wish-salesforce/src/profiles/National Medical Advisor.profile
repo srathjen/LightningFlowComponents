@@ -10140,6 +10140,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Diagnosis_for_MP_Email__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Does_Child_Have_Cognitive_Delays__c</field>
         <readable>true</readable>

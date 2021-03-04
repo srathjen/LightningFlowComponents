@@ -11453,6 +11453,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Lead.Diagnosis_for_MP_Email__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Lead.DoNotCall</field>
         <readable>false</readable>
     </fieldPermissions>

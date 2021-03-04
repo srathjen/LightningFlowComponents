@@ -898,6 +898,17 @@ IF(ISBLANK(Part_A_Sent__c), "Not Sent", ""))))</formula>
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Diagnosis_for_MP_Email__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(Qualifying_Diagnosis__c), Long_Description__c, Qualifying_Diagnosis__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Diagnosis for MP Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Does_Child_Have_Cognitive_Delays__c</fullName>
         <externalId>false</externalId>
         <label>Does Child Have Cognitive Delays?</label>
