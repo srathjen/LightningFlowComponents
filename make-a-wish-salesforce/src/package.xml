@@ -2699,6 +2699,7 @@
     <members>Medical_Affairs_National/Auto_qualifying_Cond_Desc_w_no_Med_Ques</members>
     <members>Medical_Affairs_National/Cases_in_Diagnosis_Verification_qoT</members>
     <members>Medical_Affairs_National/Chapters_using_Paper_DV3</members>
+    <members>Medical_Affairs_National/Cond_Description_by_Qualificatio_eUn</members>
     <members>Medical_Affairs_National/Condition_Descriptions_w_or_w_ou</members>
     <members>Medical_Affairs_National/Copy_of_All_Referrals_1vD</members>
     <members>Medical_Affairs_National/Copy_of_Diagnosis_Questions_mdg</members>
@@ -4393,6 +4394,7 @@
     <members>Cases_with_Wish_Budget_with_Wish_Expenses</members>
     <members>CD_with_or_without_Med_questions</members>
     <members>Condition_Description_with_Medical_Questions</members>
+    <members>Condition_Descriptions</members>
     <members>Condition_Descriptions_w_Med_Questions_Responses</members>
     <members>Contacts_and_Training</members>
     <members>Duplicate_Accounts</members>

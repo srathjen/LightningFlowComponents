@@ -76,6 +76,11 @@
             <field>PR_Diagnosis__c</field>
             <table>Condition_Description__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Qualification_Level__c</field>
+            <table>Condition_Description__c</table>
+        </columns>
         <masterLabel>Condition Description</masterLabel>
     </sections>
 </ReportType>
