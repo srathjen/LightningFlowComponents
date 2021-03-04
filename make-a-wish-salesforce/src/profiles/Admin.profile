@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <classAccesses>
         <apexClass>DVChildInfoController</apexClass>
         <enabled>true</enabled>
@@ -11976,6 +11976,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Diagnosis_Pending_Days__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Diagnosis_for_MP_Email__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

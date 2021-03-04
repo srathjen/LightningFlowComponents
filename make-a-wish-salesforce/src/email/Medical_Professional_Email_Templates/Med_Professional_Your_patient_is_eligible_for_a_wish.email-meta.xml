@@ -9,7 +9,7 @@
     <subject>Your patient is eligible for a wish!</subject>
     <textOnly>Wish child name: {!Lead.Name}
 
-Primary diagnosis: {!Lead.PD_Condition_Description__c}
+Qualifying diagnosis: {!Lead.Diagnosis_for_MP_Email__c}
 
 We are happy to inform you that your patient {!Lead.FirstName} has been referred to Make-A-Wish® and is medically eligible to receive a wish! {!Lead.FirstName} and {!Lead.FirstName}&apos;s family will be contacted soon to set-up an initial visit with the wish granting team. We encourage the medical team to speak with the family about the upcoming wish meeting and provide guidance if there are any foreseeable wish restrictions.
 
