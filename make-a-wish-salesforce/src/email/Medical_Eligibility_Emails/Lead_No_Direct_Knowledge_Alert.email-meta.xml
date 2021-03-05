@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Alert sent to the Lead owner when the DV respondent does not have direct knowledge about the wish child&apos;s condition.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Make_a_Wish_America</letterhead>
+    <name>Lead: No Direct Knowledge Alert</name>
+    <style>freeForm</style>
+    <subject>Action Required: Medical Professional does not have direct knowledge of {!Lead.FirstName} {!Lead.LastName}’s condition</subject>
+    <textOnly>{!Lead.OwnerFirstName} {!Lead.OwnerLastName},
+
+The medical professional who completed the DV for {!Lead.FirstName} {!Lead.LastName} has confirmed that this child is in a comatose or vegetative state. Therefore, they do not need to continue completing the DV form. Please manually change the child&apos;s Lead Status to DNQ and send any necessary communication.
+
+If you feel this was selected in error, please reach out to the child&apos;s medical team to confirm, and resend a new DV if necessary.
+
+Click here to view the child’s lead record: {!Lead.Link}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>
