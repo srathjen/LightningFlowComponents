@@ -9,13 +9,37 @@
     <subject>**Action Required** Make-A-Wish Diagnosis Verification form</subject>
     <textOnly>Hi {!Lead.Treating_Medical_Professional_First_Name__c},
 
+Password : {!Lead.00N2f000000ojKq}
 Please Review the Diagnosis Verification and submit. Click the following:
 {!Setup.Endpoints__c.DVReturn_URL__c}/DiagnosisVerification?LeadId={!Lead.Id}
 
-Password : {!Lead.00N2f000000ojKq}
 
-Thanks
-Make A Wish America</textOnly>
+Dear {!Lead.Hidden_DV_Form_Name__c},
+
+Your patient, {!Lead.FirstName}, has been referred to Make-A-Wish®! Make-A-Wish grants wishes to children with critical illness (degenerative, progressive, or malignant) that, despite adherence to the treatment plan, is currently placing the child’s life in jeopardy. 
+
+Additional information is needed to make a final determination of medical eligibility for {!Lead.FirstName}. Please refer to the instructions below to complete our online Diagnosis Verification form.
+
+The Diagnosis Verification form is encrypted and password protected so you can feel confident adding comments safely regarding your patient’s health status. The confidential password above is not to be shared with any unapproved individuals. 
+
+To complete the Diagnosis Verification form, please: 
+- Ensure you are a member of this child’s healthcare team with knowledge to complete this form in its entirety
+- Copy the password provided above
+- Click the link above
+- Paste the password into the secured form
+- Complete the form in its entirety, referencing the Referral Guidance Sheets on www.md.wish.org as necessary 
+- Verify the content and submit
+
+Please contact us if you have any questions about completing this form. Thank you for your assistance! Your time and support are appreciated.
+
+ 
+
+Sincerely,
+{!User.Name}
+{!User.Title}
+{!Lead.ChapterName__c}
+{!User.Email}
+{!User.Phone}</textOnly>
     <type>html</type>
     <uiType>Aloha</uiType>
 </EmailTemplate>
