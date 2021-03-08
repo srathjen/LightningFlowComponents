@@ -48,6 +48,17 @@
         <template>Automated_Wish_Granting_Email_Templates/Lead_New_DV_Signer</template>
     </alerts>
     <alerts>
+        <fullName>Lead_Comatose_Alert</fullName>
+        <description>Lead: Comatose Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Medical_Eligibility_Emails/Lead_Comatose_Alert</template>
+    </alerts>
+    <alerts>
         <fullName>Lead_Email_Alert_for_Lead_Owner_Regarding_Chapter_Update</fullName>
         <description>Lead: Email Alert for Lead Owner Regarding Chapter Update</description>
         <protected>false</protected>
@@ -113,6 +124,17 @@
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>Medical_Eligibility_Emails/Incomplete_DV_7_Day_Reminder_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>Lead_No_Direct_Knowledge_Alert</fullName>
+        <description>Lead: No Direct Knowledge Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Medical_Eligibility_Emails/Lead_No_Direct_Knowledge_Alert</template>
     </alerts>
     <alerts>
         <fullName>Lead_Notify_owner_Qualified_RUSH_lead</fullName>

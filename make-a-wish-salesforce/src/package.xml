@@ -587,6 +587,8 @@
     <members>Automated_Wish_Granting_Email_Templates/Wish_Form_Email_Notification_for_Salesforce_Team_when_Wish_Form_is_Edited</members>
     <members>Medical_Eligibility_Emails/Incomplete_DV_7_Day_Reminder_Email</members>
     <members>Medical_Eligibility_Emails/Incomplete_DV_7_Day_Reminder_Email_New_Responent</members>
+    <members>Medical_Eligibility_Emails/Lead_Comatose_Alert</members>
+    <members>Medical_Eligibility_Emails/Lead_No_Direct_Knowledge_Alert</members>
     <members>Medical_Professional_Email_Templates/Med_Professional_DNQ_to_MP</members>
     <members>Medical_Professional_Email_Templates/Med_Professional_Request_for_more_information</members>
     <members>Medical_Professional_Email_Templates/Med_Professional_Your_patient_is_eligible_for_a_wish</members>
