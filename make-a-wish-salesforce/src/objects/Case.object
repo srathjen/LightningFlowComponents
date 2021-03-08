@@ -13548,14 +13548,6 @@ NULL)</formula>
     </searchLayouts>
     <sharingModel>Private</sharingModel>
     <validationRules>
-        <fullName>Absent_Parent_Form_Validation</fullName>
-        <active>false</active>
-        <description>There should be a value for Date - Absent Parent Form when wish status is Completed.</description>
-        <errorConditionFormula>AND(Absent_Parent_Form__c = true, ISBLANK(  Date_Received_for_Absent_Parent_Form__c),Migrated_Record__c = false )</errorConditionFormula>
-        <errorDisplayField>Date_Received_for_Absent_Parent_Form__c</errorDisplayField>
-        <errorMessage>There should be value on Date - Absent Parent Form when wish status is Completed.</errorMessage>
-    </validationRules>
-    <validationRules>
         <fullName>Cannot_Change_or_Delete_Wish_Child</fullName>
         <active>true</active>
         <description>Prevents users from removing the wish child from the wish case.</description>
@@ -13581,57 +13573,11 @@ $Permission.Program_Supervisor != TRUE</errorConditionFormula>
         <errorMessage>Adopted By cannot be Blank when Adopted is checked.</errorMessage>
     </validationRules>
     <validationRules>
-        <fullName>Case_Budget_Approval_Approved</fullName>
-        <active>false</active>
-        <description>1. Since Budget Approval-Approved is an automatic status update, users should not be allowed to update to this status manually.
-2. Once changed to Budget Approval-Approved, user can only go to Wish Design.
-3. Once changed to Budget Approval-Approve</description>
-        <errorConditionFormula>AND($Profile.Name != 'Integration',$RecordType.Name = "Wish",ISCHANGED(Status),NOT(Wish_Assist__c),NOT(Rush__c),OR(
- 
-AND(NOT(ISPICKVAL(Status,'Wish Design')),NOT(ISPICKVAL(Status,'Hold')),NOT(ISPICKVAL(Status,'DNQ')),NOT(ISPICKVAL(Status,'Inactive')),NOT(ISPICKVAL(Status,'Closed')),
-ISPICKVAL(PRIORVALUE(Status),'Budget Approval - Approved'),NOT($Permission.Program_Supervisor),NOT(ISPICKVAL(Status,'Wish Scheduled'))), 
-
-AND(ISPICKVAL(PRIORVALUE(Status),'Budget Approval - Approved'),AND(NOT(ISPICKVAL(Status,'Wish Design')),NOT(ISPICKVAL(Status,'Hold')),NOT(ISPICKVAL(Status,'DNQ')),
-NOT(ISPICKVAL(Status,'Inactive')),NOT(ISPICKVAL(Status,'Closed')),NOT(ISPICKVAL(Status,'Ready to Interview')),NOT(ISPICKVAL(Status,'Wish Determined'))),$Permission.Program_Supervisor,NOT(ISPICKVAL(Status,'Wish Scheduled')))))</errorConditionFormula>
-        <errorMessage>From Budget Approval - Approved, the status can only be changed to Wish Design, Wish Scheduled, On-Hold, Inactive, DNQ, Closed (or Ready to Interview &amp; Wish Determined with Program Supervisor permission set).</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Case_Budget_Approval_Submitted</fullName>
-        <active>false</active>
-        <description>1. Since BudgetApproval-Submitted is an automatic status update, users not  allowed to update to this status manually.
-2. Once changed to Budget Approval-Submitted, only  Program Supervisor permission set can change the status to ReadyToInterview/WishDet</description>
-        <errorConditionFormula>AND($Profile.Name != 'Integration',NOT(Wish_Assist__c),NOT(Rush__c),$RecordType.Name = "Wish",NOT(ISPICKVAL(PRIORVALUE(Status),'Inactive')),NOT(ISPICKVAL(PRIORVALUE(Status),'Hold')), 
-
-OR( 
-
-AND(ISPICKVAL(PRIORVALUE(Status),'Budget Approval - Submitted'), 
-$Permission.Program_Supervisor,AND(NOT(ISPICKVAL(Status,'Ready to Interview')), 
-NOT(ISPICKVAL(Status,'Wish Determined')),NOT(ISPICKVAL(Status,'Budget Approval - approved')),ISCHANGED(Status))), 
-
-AND(ISPICKVAL(PRIORVALUE(Status),'Budget Approval - Submitted'),ISCHANGED(Status),NOT($Permission.Program_Supervisor), OR(AND(ISNULL( Budget_Approved_Date__c ), 
-ISPICKVAL(Status,'Budget Approval - approved')),NOT(ISPICKVAL(Status,'Budget Approval - approved')))), 
-
-AND(ISPICKVAL(PRIORVALUE(Status),'Budget Approval - Submitted'),ISNULL( Budget_Approved_Date__c ), 
-ISCHANGED(Status),ISPICKVAL(Status,'Budget Approval - approved') 
-) 
-
-))</errorConditionFormula>
-        <errorMessage>When the budget is approved, it will automatically update to Budget Approval - Approved status. The status cannot be changed manually from this status without Program Supervisor permission set.</errorMessage>
-    </validationRules>
-    <validationRules>
         <fullName>Case_Check_Expedite_Validation</fullName>
         <active>true</active>
         <description>This rules is used to check the Please expedite field is provided or not.</description>
         <errorConditionFormula>IF(AND($Profile.Name != 'Integration',RecordType.Name == 'Diagnosis Verification Review',OR(CONTAINS(Lead__r.Any_medical_reason_for_moving_quickly__c, 'Yes'),CONTAINS(Lead__r.Any_medical_reason_for_moving_quickly__c, 'yes')),ISBLANK(Lead__r.Please_Explain__c), OR(ISPICKVAL( Status , 'Approved - National Medical Review'),ISPICKVAL( Status , 'Approved - National MAC Review')) ), true, false)</errorConditionFormula>
         <errorMessage>Please explain reason to expedite the process in Please Explain Expedite field in Lead.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Case_ChildCaseOwnerChangeValidation</fullName>
-        <active>false</active>
-        <description>Used to restrict user to change the owner of the sub cases</description>
-        <errorConditionFormula>AND(OR(RecordType.Name == 'Wish Determination',RecordType.Name == 'Wish Planning',RecordType.Name == 'Wish Impact', RecordType.Name == 'Wish Granting', RecordType.Name == 'Wish Assist') , OwnerId &lt;&gt; Parent.OwnerId,$Profile.Name != 'Integration',ISCHANGED(OwnerId))</errorConditionFormula>
-        <errorDisplayField>Absent_Parent_Form__c</errorDisplayField>
-        <errorMessage>You cannot change the owner of the subcase</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Close_Date_Referral_Date_Validation</fullName>
@@ -13647,14 +13593,6 @@ ISCHANGED(Status),ISPICKVAL(Status,'Budget Approval - approved')
         <errorConditionFormula>AND(NOT($Permission.Program_Supervisor ), NOT(ISBLANK( PRIORVALUE(Closed_Date__c ))),$RecordType.Name = "Wish",$Profile.Name != 'Integration',ISCHANGED(Closed_Date__c ) )</errorConditionFormula>
         <errorDisplayField>Closed_Date__c</errorDisplayField>
         <errorMessage>You do not have permission to edit this record. Please contact your program supervisor to edit the date</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Case_Closed_Date_Validation</fullName>
-        <active>false</active>
-        <description>When the case is closed, there must be entered a closed date value and program supervisor only able to edit the closed date value.</description>
-        <errorConditionFormula>AND(ISBLANK(Closed_Date__c ),$RecordType.Name = "Wish",$Profile.Name != 'Integration',OR(ISPICKVAL( Status,'DNQ'),ISPICKVAL( Status,'Closed'),ISPICKVAL( Status,'Denied'),ISPICKVAL( Status,'Medical')))</errorConditionFormula>
-        <errorDisplayField>Closed_Date__c</errorDisplayField>
-        <errorMessage>Before the case is closed, a closed date value must be entered. Deactivated for SIW-490. This blocks the save prior to being able to prompt user for a Closed Date.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Closed_Status</fullName>
@@ -13729,29 +13667,11 @@ OR(ISCHANGED(Status),
         <errorMessage>From Granted, the status can only be changed to Completed or Inactive. Program Supervisor permission is required to change the status to Wish Scheduled.</errorMessage>
     </validationRules>
     <validationRules>
-        <fullName>Case_Hold_Rule</fullName>
-        <active>false</active>
-        <description>From Hold, they can only go back to the previous status.</description>
-        <errorConditionFormula>AND($Profile.Name != 'Integration',$RecordType.Name = "Wish",ISCHANGED(Status),NOT(ISNEW()), 
-AND(ISPICKVAL(PRIORVALUE(Status),"Hold"),NOT(ISBLANK(Hidden_Hold_Status_Value__c)), 
-OR(Migrated_Record__c = true,Migrated_Record__c =false),TEXT(Status) != Hidden_Hold_Status_Value__c),NOT(Wish_Assist__c),NOT(Rush__c))</errorConditionFormula>
-        <errorMessage>From Hold, they can only go back to the previous status.</errorMessage>
-    </validationRules>
-    <validationRules>
         <fullName>Case_Inactive_Date_Validation</fullName>
         <active>true</active>
         <description>This validation rule is used to prevent the date you have entered in the Inactive date field if the value is before the Referral Date.</description>
         <errorConditionFormula>AND(Inactive_Date__c &lt;  Referral_Date__c,$Profile.Name != 'Integration',$RecordType.Name = "Wish")</errorConditionFormula>
         <errorMessage>The inactive date cannot occur before the referral date. Please enter a valid inactive date, or re-enter the referral date.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Case_Inactive_Rule</fullName>
-        <active>false</active>
-        <description>From Inactive, they can only go back to the previous status.</description>
-        <errorConditionFormula>AND($Profile.Name != 'Integration',$RecordType.Name = "Wish",ISCHANGED(Status),NOT(ISNEW()),
-AND(ISPICKVAL(PRIORVALUE(Status),"Inactive"),NOT(ISBLANK(Hidden_Hold_Status_Value__c)), 
-OR(Migrated_Record__c = true,Migrated_Record__c =false),TEXT(Status) != Hidden_Hold_Status_Value__c),NOT(Wish_Assist__c),NOT(Rush__c))</errorConditionFormula>
-        <errorMessage>From Inactive, they can only go back to the previous status.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Inquiry_and_Birth_Date_Validation</fullName>
@@ -13843,13 +13763,6 @@ $Profile.Name != 'Integration', $RecordType.Name = "Wish"
         <errorMessage>From Qualified, the status can only be changed to Ready to Assign, Inactive, or Closed.</errorMessage>
     </validationRules>
     <validationRules>
-        <fullName>Case_Qualified_Date_Validation</fullName>
-        <active>false</active>
-        <description>This validation rule is used to prevent the date you have entered in the Qualified Date field if the value is before the referral date.</description>
-        <errorConditionFormula>AND(Qualified_Date__c  &lt;  Referral_Date__c,$Profile.Name != 'Integration',$RecordType.Name = "Wish")</errorConditionFormula>
-        <errorMessage>The qualified date cannot occur before the referral date. Please enter a valid qualified date, or re-enter the referral date.</errorMessage>
-    </validationRules>
-    <validationRules>
         <fullName>Case_Ready_To_Interview_Status</fullName>
         <active>true</active>
         <description>From Ready To Interview, the status can only be changed to Wish Determined, Inactive, Closed, or Ready to Assign, unless this wish is a Rush wish.</description>
@@ -13939,24 +13852,6 @@ Except: Wish Assist or Rush</description>
         <errorMessage>Please enter values to 'Rush Explanation &amp; Rush Timeframe'  fields in order  to check Rush.</errorMessage>
     </validationRules>
     <validationRules>
-        <fullName>Case_Status_Restrict_on_Additional</fullName>
-        <active>false</active>
-        <description>Value restriction on "Additional Information for Review" to be selected on corresponding Lead record by Intake Manager</description>
-        <errorConditionFormula>AND( 
-$Profile.Name != 'System Administrator',
-$Profile.Name != 'Intake Manager',  
-ISPICKVAL(Status,'Additional Information for Review') 
-)</errorConditionFormula>
-        <errorMessage>Case status of "'Additional Information for Review'" can only be selected on corresponding Lead record by Intake Manager</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Case_Timeframe_Validation</fullName>
-        <active>false</active>
-        <description>To check for valid timeframe</description>
-        <errorConditionFormula>AND( ISPICKVAL(Status, "Ready to Assign"), Rush__c = TRUE, NOT Migrated_Record__c, OR(OR(Text(Rush_Timeframe__c) == Null,Text(Rush_Timeframe__c) == 'Select timeframe'), ISBLANK(Rush_Explanation__c)) )</errorConditionFormula>
-        <errorMessage>Please select valid timeframe</errorMessage>
-    </validationRules>
-    <validationRules>
         <fullName>Case_Wish_Design</fullName>
         <active>true</active>
         <description>From Wish Design, the status can only be changed to Ready to Interview, Wish Determined, Pending Approval, Wish Scheduled, Inactive, or Closed.</description>
@@ -14002,23 +13897,6 @@ NOT(Wish_Assist__c),
 NOT(Rush__c)
 )</errorConditionFormula>
         <errorMessage>From Wish Determined, the status can only be changed to Pending Approval, Inactive, or Closed (or Ready to Interview with Program Supervisor permission set).</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Case_Wish_Determined_Status_Validation</fullName>
-        <active>false</active>
-        <description>This validation will fire when the case status is wish determined and Meet PWL Criteria is empty</description>
-        <errorConditionFormula>AND(ISPICKVAL( Status ,'Wish Determined'), 
-ISBLANK(TEXT(Meet_PWL_Criteria__c)), ISPICKVAL(Sub_Status__c,'Within Policy'))</errorConditionFormula>
-        <errorDisplayField>Meet_PWL_Criteria__c</errorDisplayField>
-        <errorMessage>Meet PWL Criteria needs to be present when wish status is Wish Determined</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Case_Wish_Determined_Validation</fullName>
-        <active>false</active>
-        <description>When the case status is Wish Determined the sub status should have value</description>
-        <errorConditionFormula>Text(Status) == 'Wish Determined' &amp;&amp; Text(Sub_Status__c) == Null &amp;&amp; $Profile.Name != 'Integration' &amp;&amp; $RecordType.Name = "Wish"</errorConditionFormula>
-        <errorDisplayField>Sub_Status__c</errorDisplayField>
-        <errorMessage>You should enter value for sub status when the status is Wish Determined.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Wish_Scheduled</fullName>
@@ -14068,73 +13946,11 @@ NOT(Rush__c)
         <errorMessage>Please fill the Chapter Medical Advisor Name.</errorMessage>
     </validationRules>
     <validationRules>
-        <fullName>Childs_Medical_Summary_Form_Validation</fullName>
-        <active>false</active>
-        <description>There should be a value for Date - Child’s Medical Summary Form when wish status is Completed.</description>
-        <errorConditionFormula>AND( Child_s_Medical_Summary_Form__c  = true, ISBLANK(  Date_Received_for_Child_s_Medical_Summar__c  ),Migrated_Record__c = false )</errorConditionFormula>
-        <errorDisplayField>Date_Received_for_Child_s_Medical_Summar__c</errorDisplayField>
-        <errorMessage>There should be value on Date - Child’s Medical Summary Form when wish status is Completed.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Communication_Profile_Validation</fullName>
-        <active>false</active>
-        <description>There should be a value for Date - Communication Profile when wish status is Completed.</description>
-        <errorConditionFormula>AND(  Communication_Profile__c  = true, ISBLANK(  Date_Received_for_Communication_Profile__c ),Migrated_Record__c=false )</errorConditionFormula>
-        <errorDisplayField>Date_Received_for_Communication_Profile__c</errorDisplayField>
-        <errorMessage>There should be value on Date - Communication Profile when wish status is Completed.</errorMessage>
-    </validationRules>
-    <validationRules>
         <fullName>Diagnosis_Verification_Received_Date</fullName>
         <active>true</active>
         <errorConditionFormula>AND(ISPICKVAL(Status,'Completed'),ISBLANK(  Diagnosis_Verification_Receive_Date__c ),$RecordType.Name = "Wish")</errorConditionFormula>
         <errorDisplayField>Absent_Parent_Form__c</errorDisplayField>
         <errorMessage>Diagnosis Verification Received Date should not be Blank.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Entertainment_Sports_Wish_LOValidation</fullName>
-        <active>false</active>
-        <description>There should be a value for Date - Entertainment &amp; Sports Wish LOU when wish status is Completed.</description>
-        <errorConditionFormula>AND(  Entertainment_Sports_Wish_LOU__c   = true, ISBLANK(  Date_Received_for_Entertainment_Sports__c),Migrated_Record__c=false )</errorConditionFormula>
-        <errorDisplayField>Date_Received_for_Entertainment_Sports__c</errorDisplayField>
-        <errorMessage>There should be value on Date - Entertainment &amp; Sports when wish status is Completed.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Guardianship_Document_Validation</fullName>
-        <active>false</active>
-        <description>There should be a value for Date - Guardianship Document when wish status is Completed.</description>
-        <errorConditionFormula>AND(  Guardianship_Document__c = true, ISBLANK(  Date_Received_for_Guardianship_Document__c ),Migrated_Record__c=false )</errorConditionFormula>
-        <errorDisplayField>Date_Received_for_Guardianship_Document__c</errorDisplayField>
-        <errorMessage>There should be value on Date - Guardianship Document when wish status is Completed.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Liability_Release_and_Authorization_Date</fullName>
-        <active>false</active>
-        <description>There should be a value for Date - Liability Release and Authorization when wish status is Completed.</description>
-        <errorConditionFormula>AND( Liability_Release_and_Authorization__c = true, ISBLANK(  Date_Liability_Release_Authorization__c ),Migrated_Record__c = false )</errorConditionFormula>
-        <errorDisplayField>Date_Liability_Release_Authorization__c</errorDisplayField>
-        <errorMessage>There should be value on Date - Liability Release and Authorization when wish status is Completed.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>National_type_editable</fullName>
-        <active>false</active>
-        <description>When the status is Wish Determined, only someone with the permission set "National Type Editable" can change the Wish National Type.</description>
-        <errorConditionFormula>AND(
-ISPICKVAL( Status , 'Wish Determined'),
-$RecordType.Name = "Wish",
-ISCHANGED( Wish_Type__c ),
-NOT(ISBLANK(TEXT(PRIORVALUE(Wish_Type__c )))), 
-NOT($Permission.National_Type_editable),
-NOT(ISCHANGED(Status))
-)</errorConditionFormula>
-        <errorMessage>Please reach out to your supervisor to change the wish type and open a new case.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Passports_Validation</fullName>
-        <active>false</active>
-        <description>There should be a value for Date - Passports when wish status is Completed.</description>
-        <errorConditionFormula>AND(Passports__c = true, ISBLANK(  Date_Received_for_Passports__c),Migrated_Record__c = false)</errorConditionFormula>
-        <errorDisplayField>Date_Received_for_Passports__c</errorDisplayField>
-        <errorMessage>There should be value on Date - Passports when wish status is Completed.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Planing_Case_Form_Validation</fullName>
@@ -14150,30 +13966,6 @@ AND(Visas__c,True,ISNULL(Date_Received_for_Visas__c))),
 ISCHANGED(Status)
 )</errorConditionFormula>
         <errorMessage>Please fill the value for  corresponding date fields.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Prevent_Case_Budget_Approval_Approved</fullName>
-        <active>false</active>
-        <description>This validation will fire when the status is changed from DNQ,Hold,Inactive,Closed to Budget Approval Approved.</description>
-        <errorConditionFormula>AND($Profile.Name != 'Integration',$RecordType.Name = "Wish",NOT(Wish_Assist__c),NOT(Rush__c),OR(
-
-AND(ISPICKVAL(PRIORVALUE(Status),'Budget Approval - Approved'),
-NOT($Permission.Program_Supervisor),NOT(ISPICKVAL(Status,'Wish Design')),NOT(ISPICKVAL(Status,'Inactive')),NOT(ISPICKVAL(Status,'Wish Scheduled')),
-NOT(ISPICKVAL(Status,'DNQ')),NOT(ISPICKVAL(Status,'Hold')),NOT(ISPICKVAL(Status,'Closed'))),
-
-AND(ISPICKVAL(PRIORVALUE(Status),'Budget Approval - Approved'),NOT(ISPICKVAL(Status,'Wish Design')),NOT(ISPICKVAL(Status,'Inactive')),
-NOT(ISPICKVAL(Status,'DNQ')),NOT(ISPICKVAL(Status,'Hold')),NOT(ISPICKVAL(Status,'Closed')),NOT(ISPICKVAL(Status,'Ready to interview')),
-NOT(ISPICKVAL(Status,'Wish Determined')),$Permission.Program_Supervisor,NOT(ISPICKVAL(Status,'Wish Scheduled')))),ISCHANGED(Status))</errorConditionFormula>
-        <errorMessage>The status cannot be changed manually from this status</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Prevent_Case_Budget_Approval_Submitted</fullName>
-        <active>false</active>
-        <description>This validation will fire when the status is changed from DNQ,Hold,Inactive,Closed to Budget Approval Submitted.</description>
-        <errorConditionFormula>AND(ISPICKVAL(Status,'Budget Approval - Submitted'),ISCHANGED(Status),$Profile.Name  != 'Integration',$RecordType.Name = "Wish",OR(ISPICKVAL(PRIORVALUE(Status),'DNQ'),
-ISPICKVAL(PRIORVALUE(Status),'Hold'),ISPICKVAL(PRIORVALUE(Status),'Inactive'),ISPICKVAL(PRIORVALUE(Status),'Closed')),NOT(ISNEW()),
-NOT($Permission.Program_Supervisor))</errorConditionFormula>
-        <errorMessage>The status cannot be changed manually from this status.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Qualifying_Validation</fullName>
@@ -14205,60 +13997,12 @@ NOT($Permission.Program_Supervisor))</errorConditionFormula>
         <errorMessage>You don't have access to close the wish</errorMessage>
     </validationRules>
     <validationRules>
-        <fullName>Single_Parent_Form_Validation</fullName>
-        <active>false</active>
-        <description>There should be a value for Date - Single Parent Form when wish status is Completed.</description>
-        <errorConditionFormula>AND(Single_Parent_Form__c = true, ISBLANK(  Date_Received_for_Single_Parent_Form__c),Migrated_Record__c = false )</errorConditionFormula>
-        <errorDisplayField>Date_Received_for_Single_Parent_Form__c</errorDisplayField>
-        <errorMessage>There should be value on Date - Single Parent Form when wish status is Completed.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Visas_Validation</fullName>
-        <active>false</active>
-        <description>There should be a value for Date - Visas when wish status is Completed.</description>
-        <errorConditionFormula>AND(   Visas__c = true, ISBLANK(  Date_Received_for_Visas__c ) ,Migrated_Record__c=false)</errorConditionFormula>
-        <errorDisplayField>Date_Received_for_Visas__c</errorDisplayField>
-        <errorMessage>There should be value on Date - Visas when wish status is Completed.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Wish_Child_Form_Receive_Date_Validation</fullName>
-        <active>false</active>
-        <description>There should be a value for Date - Wish Child Form when wish status is Completed.</description>
-        <errorConditionFormula>AND( Wish_Child_Form__c = true, ISBLANK( Date_Wish_Child_Form__c ),Migrated_Record__c=false )</errorConditionFormula>
-        <errorDisplayField>Date_Wish_Child_Form__c</errorDisplayField>
-        <errorMessage>There should be value on Date - Wish Child Form when wish status is Completed.</errorMessage>
-    </validationRules>
-    <validationRules>
         <fullName>Wish_Completed_Status_Validation</fullName>
         <active>true</active>
         <description>There should be value on End Date when wish status is Completed.</description>
         <errorConditionFormula>AND(ISPICKVAL(Status,'Completed'),ISBLANK(End_Date__c),$RecordType.Name = "Wish")</errorConditionFormula>
         <errorDisplayField>End_Date__c</errorDisplayField>
         <errorMessage>There should be a value for End date when wish status is Completed</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Wish_Family_Form_Receive_Date_Validation</fullName>
-        <active>false</active>
-        <description>There should be a value for Date - Wish Child Form when wish status is Completed.</description>
-        <errorConditionFormula>AND(  Wish_Family_Form__c = true, ISBLANK(  Date_Wish_Family_Form__c),Migrated_Record__c=false )</errorConditionFormula>
-        <errorDisplayField>Date_Wish_Family_Form__c</errorDisplayField>
-        <errorMessage>There should be value on Date - Wish Family Form when wish status is Completed.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Wish_Information_Form_Rece_Date_Validat</fullName>
-        <active>false</active>
-        <description>There should be a value for Date - Wish Information Form when wish status is Completed.</description>
-        <errorConditionFormula>AND(Wish_Information_Form__c = true, ISBLANK( Date_Wish_Information_Form__c),Migrated_Record__c=false )</errorConditionFormula>
-        <errorDisplayField>Date_Wish_Information_Form__c</errorDisplayField>
-        <errorMessage>There should be value on Date - Wish Information Form when wish status is Completed.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Wish_Safety_Authorization_PartB_Form</fullName>
-        <active>false</active>
-        <description>There should be a value for Date - Wish Safety Authorization Part B Form when wish status is Completed.</description>
-        <errorConditionFormula>AND(  Wish_Safety_Authorization_Part_B_Form__c = true, ISBLANK(  Date_Received_for_Wish_Safety_Authorizat__c),Migrated_Record__c=false )</errorConditionFormula>
-        <errorDisplayField>Date_Received_for_Wish_Safety_Authorizat__c</errorDisplayField>
-        <errorMessage>There should be value on Date - Wish Safety Authorization Part B Form when wish status is Completed.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Wish_Scheduled_Status_Validation</fullName>

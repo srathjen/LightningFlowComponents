@@ -245,10 +245,6 @@
         <errorMessage><!-- Volunteer Attendance must be set to &apos;Completed&apos; to leverage the &apos;Completion Status&apos; field. --></errorMessage>
         <name>Complete_to_Use_Completion_Status</name>
     </validationRules>
-    <validationRules>
-        <errorMessage><!-- There is no available seats for this training --></errorMessage>
-        <name>Restrict_no_available_seats</name>
-    </validationRules>
     <workflowTasks>
         <name>O_T_ET_Orientation_Cancelled</name>
         <subject><!-- O&amp;T ET : Orientation Cancelled --></subject>

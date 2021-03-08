@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+﻿<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- Diagnosis Verfication Fieldset --></label>
         <name>Diagnosis_Verfication_Fieldset</name>
@@ -3566,20 +3566,12 @@
         <name>Lead_Recog_To_Practice_Req_When_Elig_Rev</name>
     </validationRules>
     <validationRules>
-        <errorMessage><!-- The referral date must occur on or after the inquiry date. Please enter a valid referral date, or re-enter the inquiry date. --></errorMessage>
-        <name>Lead_Referral_Date_Validation</name>
-    </validationRules>
-    <validationRules>
         <errorMessage><!-- Please provide the ICD or Diagnosis given by referrer. --></errorMessage>
         <name>Lead_Referrer_Diagnosis_Validation</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- The status can be updated to Eligibility Review or Qualified only when the previous Sub Status is Pending Diagnosis Verification or Pending Paper DV. --></errorMessage>
         <name>Lead_Status_QualifiedOrEligib_Validation</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- Only the National Medical Advisor can change the Lead Status when a Lead is in Eligibility Review. Please reach out to the National Medical Advisor through Chatter on the Lead if the Lead Status needs to change. --></errorMessage>
-        <name>Lead_Status_Restrict_on_Referred</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- Only the National Medical Advisor can change the Lead Status when a Lead is in Eligibility Review. Please reach out to the National Medical Advisor through Chatter on the Lead if the Lead Status needs to change. --></errorMessage>

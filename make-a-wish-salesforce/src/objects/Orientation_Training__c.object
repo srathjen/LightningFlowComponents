@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -1644,16 +1643,8 @@
             </values>
         </picklistValues>
     </recordTypes>
-    <searchLayouts/>
+    <searchLayouts />
     <sharingModel>Read</sharingModel>
     <startsWith>Vowel</startsWith>
-    <validationRules>
-        <fullName>Negative_value_validation</fullName>
-        <active>false</active>
-        <description>It will restrict the users from entering negative value</description>
-        <errorConditionFormula>Max_Capacity__c &lt;= 0</errorConditionFormula>
-        <errorDisplayField>Max_Capacity__c</errorDisplayField>
-        <errorMessage>please enter value as &gt; 0</errorMessage>
-    </validationRules>
     <visibility>Public</visibility>
 </CustomObject>

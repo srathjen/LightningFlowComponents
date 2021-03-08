@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
     <alerts>
         <fullName>This_Email_Alert_will_send_when_the_Non_Wish_volunteer_opportunity_is_Approved_b</fullName>
         <description>This Email Alert will send when the Non - Wish volunteer opportunity is Approved by the chapter staff</description>
@@ -150,20 +149,6 @@
         <protected>false</protected>
     </fieldUpdates>
     <rules>
-        <fullName>Volunteer Opportunity %3A Non - Wish Approved</fullName>
-        <active>false</active>
-        <description>This Work flow rule will fire when the Volunteer opportunity Non - Wish is Approved by the chapter staff.</description>
-        <formula>AND( Volunteer_Name__c != Null, Wish__c  == Null, Non_Wish_Event__c != Null,  TEXT( Status__c )  = &apos;Approved&apos; , ISCHANGED(Status__c), $Profile.Name != &apos;Integration&apos;)</formula>
-        <triggerType>onAllChanges</triggerType>
-    </rules>
-    <rules>
-        <fullName>Volunteer Opportunity %3A Non - Wish Rejected</fullName>
-        <active>false</active>
-        <description>This Work flow rule will fire when the Volunteer opportunity Non - Wish is rejected by the chapter staff.</description>
-        <formula>AND( Volunteer_Name__c != Null, Wish__c  == Null, Non_Wish_Event__c != Null,  TEXT(  Reason_Inactive__c  )  = &apos;Not Approved&apos; ,ISCHANGED(  Reason_Inactive__c  ),  $Profile.Name != &apos;Integration&apos; )</formula>
-        <triggerType>onAllChanges</triggerType>
-    </rules>
-    <rules>
         <fullName>Volunteer Opportunity %3A Update Hidden Hold Status</fullName>
         <actions>
             <name>Volunteer_OPP_Update_allow_Hold_Status</name>
@@ -176,20 +161,6 @@
             <value>True</value>
         </criteriaItems>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
-    <rules>
-        <fullName>Volunteer Opportunity %3A Wish Approved</fullName>
-        <active>false</active>
-        <description>This Work flow rule will fire when the Volunteer opportunity Wish is Approved by the chapter staff.</description>
-        <formula>AND( Volunteer_Name__c != Null, Wish__c  != Null, Non_Wish_Event__c == Null,  TEXT( Status__c )  = &apos;Approved&apos; , ISCHANGED( Status__c ),$Profile.Name != &apos;Integration&apos;)</formula>
-        <triggerType>onAllChanges</triggerType>
-    </rules>
-    <rules>
-        <fullName>Volunteer Opportunity %3A Wish Rejected</fullName>
-        <active>false</active>
-        <description>This Work flow rule will fire when the Volunteer opportunity Wish is Approved by the chapter staff.</description>
-        <formula>AND( Volunteer_Name__c != Null, Wish__c  != Null, Non_Wish_Event__c == Null, TEXT(  Reason_Inactive__c  )  = &apos;Not Approved&apos; , ISCHANGED(  Reason_Inactive__c  ),   $Profile.Name != &apos;Integration&apos;)</formula>
-        <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
         <fullName>Volunteer Opportunity%3AChangeStatusInactiveWorkflowRule</fullName>

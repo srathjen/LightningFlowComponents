@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+﻿<?xml version="1.0" encoding="utf-8"?><CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldSets>
         <label><!-- BDE Entry FS --></label>
         <name>npsp__BDE_Entry_FS</name>
@@ -1911,29 +1911,6 @@
         <name>npsp__Number_of_Household_Members__c</name>
     </fields>
     <layouts>
-        <layout>Chapter - Volunteer</layout>
-        <sections>
-            <label><!-- Address --></label>
-            <section>Address</section>
-        </sections>
-        <sections>
-            <label><!-- Attachments --></label>
-            <section>Attachments</section>
-        </sections>
-        <sections>
-            <label><!-- Designated Users --></label>
-            <section>Designated Users</section>
-        </sections>
-        <sections>
-            <label><!-- Fields --></label>
-            <section>Fields</section>
-        </sections>
-        <sections>
-            <label><!-- Historic Wish Numbers --></label>
-            <section>Historic Wish Numbers</section>
-        </sections>
-    </layouts>
-    <layouts>
         <layout>Chapters</layout>
         <sections>
             <label><!-- Address --></label>
@@ -1972,48 +1949,7 @@
         </sections>
     </layouts>
     <layouts>
-        <layout>Hospital Treatment Facility - Volunteer</layout>
-        <sections>
-            <label><!-- Address --></label>
-            <section>Address</section>
-        </sections>
-        <sections>
-            <label><!-- Fields --></label>
-            <section>Fields</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Household Layout - Volunteers</layout>
-        <sections>
-            <label><!-- Address --></label>
-            <section>Address</section>
-        </sections>
-        <sections>
-            <label><!-- Emergency Contact --></label>
-            <section>Emergency Contact</section>
-        </sections>
-        <sections>
-            <label><!-- Fields --></label>
-            <section>Fields</section>
-        </sections>
-    </layouts>
-    <layouts>
         <layout>In Kind Donors</layout>
-        <sections>
-            <label><!-- Chapter Staff only --></label>
-            <section>Chapter Staff only</section>
-        </sections>
-        <sections>
-            <label><!-- Fields --></label>
-            <section>Fields</section>
-        </sections>
-        <sections>
-            <label><!-- Location --></label>
-            <section>Location</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>In-Kind Donors - Volunteer</layout>
         <sections>
             <label><!-- Chapter Staff only --></label>
             <section>Chapter Staff only</section>
@@ -2115,10 +2051,6 @@
     <validationRules>
         <errorMessage><!-- The Parent Account of an HTF Account must be another HTF Account. --></errorMessage>
         <name>Parent_Account_of_HTF_must_be_HTF</name>
-    </validationRules>
-    <validationRules>
-        <errorMessage><!-- You don&apos;t have access to create to this type of  account --></errorMessage>
-        <name>Program_NationalStaff_Account_Validation</name>
     </validationRules>
     <webLinks>
         <label><!-- LOOP --></label>

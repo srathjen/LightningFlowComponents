@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -232,11 +231,11 @@
     </fields>
     <fields>
         <fullName>Active_Volunteer__c</fullName>
-        <description>Display&apos;s the Volunteer&apos;s Active Status</description>
+        <description>Display's the Volunteer's Active Status</description>
         <externalId>false</externalId>
         <formula>Volunteer__r.is_Active_Volunteer__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>Edit via the Volunteer&apos;s contact record</inlineHelpText>
+        <inlineHelpText>Edit via the Volunteer's contact record</inlineHelpText>
         <label>Active Volunteer</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -244,11 +243,11 @@
     </fields>
     <fields>
         <fullName>B_C_Expiration_Date__c</fullName>
-        <description>Displays the Volunteer&apos;s BC Expiration Date</description>
+        <description>Displays the Volunteer's BC Expiration Date</description>
         <externalId>false</externalId>
         <formula>Volunteer__r.B_C_Expiration_Date__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>Edited via the volunteer&apos;s contact record.</inlineHelpText>
+        <inlineHelpText>Edited via the volunteer's contact record.</inlineHelpText>
         <label>B/C Expiration Date</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -257,11 +256,11 @@
     </fields>
     <fields>
         <fullName>COI_Expiration_Date__c</fullName>
-        <description>Displays the Volunteer&apos;s COI Expiration Date</description>
+        <description>Displays the Volunteer's COI Expiration Date</description>
         <externalId>false</externalId>
         <formula>Volunteer__r.COI_Expiration_Date__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>Edited via the volunteer&apos;s contact record.</inlineHelpText>
+        <inlineHelpText>Edited via the volunteer's contact record.</inlineHelpText>
         <label>COI Expiration Date</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -307,7 +306,7 @@
     </fields>
     <fields>
         <fullName>Completion_Status__c</fullName>
-        <description>Captures the status of a volunteer&apos;s training or orientation.</description>
+        <description>Captures the status of a volunteer's training or orientation.</description>
         <externalId>false</externalId>
         <label>Completion Status</label>
         <required>false</required>
@@ -340,7 +339,7 @@
         <fullName>Date_Cancelled__c</fullName>
         <description>It will display the training cancelled date.</description>
         <externalId>false</externalId>
-        <formula>if( ISPICKVAL(Volunteer_Attendance__c,&apos;Cancelled&apos;), TODAY() ,null)</formula>
+        <formula>if( ISPICKVAL(Volunteer_Attendance__c,'Cancelled'), TODAY() ,null)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Date Cancelled</label>
         <required>false</required>
@@ -509,22 +508,22 @@
     <fields>
         <fullName>Orientation_Training_email_signature__c</fullName>
         <externalId>false</externalId>
-        <formula>IF(Account_Name__c =&quot;&quot; &amp;&amp; Class_Offering__r.Owner:User.Email=&quot;&quot; &amp;&amp; Class_Offering__r.Owner:User.Phone=&quot;&quot;, Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:User.LastName,
+        <formula>IF(Account_Name__c ="" &amp;&amp; Class_Offering__r.Owner:User.Email="" &amp;&amp; Class_Offering__r.Owner:User.Phone="", Class_Offering__r.Owner:User.FirstName +' '+ Class_Offering__r.Owner:User.LastName,
 
-IF(Account_Name__c =&quot;&quot; &amp;&amp; Class_Offering__r.Owner:User.Phone=&quot;&quot;, Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:User.LastName + BR() + Class_Offering__r.Owner:User.Email,
+IF(Account_Name__c ="" &amp;&amp; Class_Offering__r.Owner:User.Phone="", Class_Offering__r.Owner:User.FirstName +' '+ Class_Offering__r.Owner:User.LastName + BR() + Class_Offering__r.Owner:User.Email,
 
-IF(Account_Name__c =&quot;&quot; &amp;&amp; Class_Offering__r.Owner:User.Email=&quot;&quot;, Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:User.LastName + BR() + Class_Offering__r.Owner:User.Phone,
+IF(Account_Name__c ="" &amp;&amp; Class_Offering__r.Owner:User.Email="", Class_Offering__r.Owner:User.FirstName +' '+ Class_Offering__r.Owner:User.LastName + BR() + Class_Offering__r.Owner:User.Phone,
 
-IF(Class_Offering__r.Owner:User.Email=&quot;&quot; &amp;&amp; Class_Offering__r.Owner:User.Phone=&quot;&quot;, Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:User.LastName + BR() + Account_Name__c ,
+IF(Class_Offering__r.Owner:User.Email="" &amp;&amp; Class_Offering__r.Owner:User.Phone="", Class_Offering__r.Owner:User.FirstName +' '+ Class_Offering__r.Owner:User.LastName + BR() + Account_Name__c ,
 
-IF(Account_Name__c =&quot;&quot;, Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:User.LastName + BR() +  Class_Offering__r.Owner:User.Phone + BR() + Class_Offering__r.Owner:User.Email,
+IF(Account_Name__c ="", Class_Offering__r.Owner:User.FirstName +' '+ Class_Offering__r.Owner:User.LastName + BR() +  Class_Offering__r.Owner:User.Phone + BR() + Class_Offering__r.Owner:User.Email,
 
-IF(Class_Offering__r.Owner:User.Phone=&quot;&quot;, Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:User.LastName + BR() +  Account_Name__c   + BR() + Class_Offering__r.Owner:User.Email,
+IF(Class_Offering__r.Owner:User.Phone="", Class_Offering__r.Owner:User.FirstName +' '+ Class_Offering__r.Owner:User.LastName + BR() +  Account_Name__c   + BR() + Class_Offering__r.Owner:User.Email,
 
-IF(Class_Offering__r.Owner:User.Email=&quot;&quot;, Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:User.LastName + BR() +  Account_Name__c   + BR() + Class_Offering__r.Owner:User.Phone,
+IF(Class_Offering__r.Owner:User.Email="", Class_Offering__r.Owner:User.FirstName +' '+ Class_Offering__r.Owner:User.LastName + BR() +  Account_Name__c   + BR() + Class_Offering__r.Owner:User.Phone,
 
 
-Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:User.LastName + BR() +  Account_Name__c   + BR() + Class_Offering__r.Owner:User.Phone + BR() + Class_Offering__r.Owner:User.Email
+Class_Offering__r.Owner:User.FirstName +' '+ Class_Offering__r.Owner:User.LastName + BR() +  Account_Name__c   + BR() + Class_Offering__r.Owner:User.Phone + BR() + Class_Offering__r.Owner:User.Email
 )))))))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Orientation Training email signature</label>
@@ -782,7 +781,7 @@ Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:U
             <operation>equals</operation>
             <value>TODAY</value>
         </filters>
-        <label>All Volunteers for Today&apos;s Classes</label>
+        <label>All Volunteers for Today's Classes</label>
     </listViews>
     <listViews>
         <fullName>All_volunteers_for_a_class_offering</fullName>
@@ -820,18 +819,12 @@ Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:U
     <validationRules>
         <fullName>Complete_to_Use_Completion_Status</fullName>
         <active>true</active>
-        <description>A Volunteer Orientation and Training Record must be &apos;Complete&apos; to Use &apos;Completion Status&apos; field.</description>
-        <errorConditionFormula>!ISPICKVAL( Volunteer_Attendance__c , &quot;Completed&quot;)
+        <description>A Volunteer Orientation and Training Record must be 'Complete' to Use 'Completion Status' field.</description>
+        <errorConditionFormula>!ISPICKVAL( Volunteer_Attendance__c , "Completed")
 &amp;&amp;
 !ISBLANK(TEXT(Completion_Status__c))</errorConditionFormula>
         <errorDisplayField>Volunteer_Attendance__c</errorDisplayField>
-        <errorMessage>Volunteer Attendance must be set to &apos;Completed&apos; to leverage the &apos;Completion Status&apos; field.</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Restrict_no_available_seats</fullName>
-        <active>false</active>
-        <errorConditionFormula>OR(ISNEW() &amp;&amp; (00N3600000MqwNY.00N3600000MqwOw &lt;= 0)  &amp;&amp; ISPICKVAL(Volunteer_Attendance__c ,&apos;Registered&apos;),( 00N3600000MqwNY.00N3600000MqwOw &lt;= 0)&amp;&amp; ISPICKVAL(Volunteer_Attendance__c ,&apos;Registered&apos;) )</errorConditionFormula>
-        <errorMessage>There is no available seats for this training</errorMessage>
+        <errorMessage>Volunteer Attendance must be set to 'Completed' to leverage the 'Completion Status' field.</errorMessage>
     </validationRules>
     <visibility>Public</visibility>
 </CustomObject>

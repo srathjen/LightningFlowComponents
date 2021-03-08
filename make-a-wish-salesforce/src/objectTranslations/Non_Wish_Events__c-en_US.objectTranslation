@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
@@ -544,28 +544,6 @@
         <sections>
             <label><!-- Volunteer Related Details --></label>
             <section>Volunteer Related Details</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Event for Volunteers</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Volunteer Role --></label>
-            <section>Volunteer Role</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Non Wish for Volunteers</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Volunteer Role --></label>
-            <section>Volunteer Role</section>
         </sections>
     </layouts>
     <layouts>

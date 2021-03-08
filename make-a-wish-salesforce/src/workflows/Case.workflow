@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
     <alerts>
         <fullName>Budget_Submitted_Alert</fullName>
         <description>Budget Submitted Alert</description>
@@ -359,7 +358,7 @@
     </fieldUpdates>
     <fieldUpdates>
         <fullName>Case_Enter_Date_Pending_Clarification</fullName>
-        <description>Enter today&apos;s date in the Date - Pending Clarification field.</description>
+        <description>Enter today's date in the Date - Pending Clarification field.</description>
         <field>Date_Pending_Clarification__c</field>
         <formula>TODAY()</formula>
         <name>Case: Enter Date - Pending Clarification</name>
@@ -500,21 +499,6 @@
         <protected>false</protected>
     </fieldUpdates>
     <rules>
-        <fullName>Case %3A Abandoned Wish Rule</fullName>
-        <actions>
-            <name>Case_Abandoned_Wish_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>Case_ET_Abandoned_Wish_Notification</name>
-            <type>Task</type>
-        </actions>
-        <active>false</active>
-        <description>This rule will fire when the case sub status is changed as &quot;Abandoned&quot;.</description>
-        <formula>AND(ISCHANGED(Sub_Status__c),ISPICKVAL(Sub_Status__c, &apos;Abandoned&apos;), $Profile.Name != &apos;Integration&apos;,RecordType.Name = &apos;Wish&apos;)</formula>
-        <triggerType>onAllChanges</triggerType>
-    </rules>
-    <rules>
         <fullName>Case %3A SendEmailToCaseMember</fullName>
         <actions>
             <name>Send_Email_when_VO_is_inactive</name>
@@ -539,45 +523,6 @@
             <operation>equals</operation>
             <value>Wish</value>
         </criteriaItems>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
-    <rules>
-        <fullName>Case %3A Unassigned  Wish Workflow Rule</fullName>
-        <actions>
-            <name>Case_Unassigned_Wish_Email_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>Case_ET_Wish_Unassigned_Alert</name>
-            <type>Task</type>
-        </actions>
-        <active>false</active>
-        <booleanFilter>1 AND (2 OR 3) AND 4 AND 5</booleanFilter>
-        <criteriaItems>
-            <field>Case.RecordTypeId</field>
-            <operation>equals</operation>
-            <value>Wish</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Case_Member_Count__c</field>
-            <operation>lessThan</operation>
-            <value>2</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Case_Member_Count__c</field>
-            <operation>equals</operation>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.isEmail__c</field>
-            <operation>equals</operation>
-            <value>True</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>notEqual</operation>
-            <value>Integration</value>
-        </criteriaItems>
-        <description>This workflow will fire when the wish is not assigned for particular time period</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
@@ -645,7 +590,7 @@
             <field>Case.Date_Pending_Clarification__c</field>
             <operation>notEqual</operation>
         </criteriaItems>
-        <description>When there is a date in the &quot;Date - Pending Clarification&quot; field but the case status is not &quot;Pending Clarification - Chapter&quot;, then clear the value in the &quot;Date - Pending Clarification&quot; field on the case.</description>
+        <description>When there is a date in the "Date - Pending Clarification" field but the case status is not "Pending Clarification - Chapter", then clear the value in the "Date - Pending Clarification" field on the case.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
@@ -673,20 +618,6 @@
         </workflowTimeTriggers>
     </rules>
     <rules>
-        <fullName>Case%3A Email to MAC Team</fullName>
-        <actions>
-            <name>Send_Email_to_MAC_Team</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>Update_isEmail</name>
-            <type>FieldUpdate</type>
-        </actions>
-        <active>false</active>
-        <formula>AND(isEmail__c  = TRUE,ISCHANGED(isEmail__c), Migrated_Record__c = false)</formula>
-        <triggerType>onAllChanges</triggerType>
-    </rules>
-    <rules>
         <fullName>Case%3A Enter Date-Pending Clarification</fullName>
         <actions>
             <name>Case_Enter_Date_Pending_Clarification</name>
@@ -702,7 +633,7 @@
             <field>Case.Date_Pending_Clarification__c</field>
             <operation>equals</operation>
         </criteriaItems>
-        <description>If the case status is &quot;pending clarification - chapter&quot;, then stamp today&apos;s date in the Case.Date_Pending_Clarification field.</description>
+        <description>If the case status is "pending clarification - chapter", then stamp today's date in the Case.Date_Pending_Clarification field.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
@@ -715,101 +646,6 @@
         <description>This is used to fetch description from standard Description field.</description>
         <formula>(ISBLANK(PRIORVALUE(Description))&amp;&amp;!ISBLANK(Description)) || ISCHANGED(Description)</formula>
         <triggerType>onAllChanges</triggerType>
-    </rules>
-    <rules>
-        <fullName>Case%3A Wish Child Birthday</fullName>
-        <actions>
-            <name>Wish_Child_Birthday_Reminder</name>
-            <type>Task</type>
-        </actions>
-        <active>false</active>
-        <description>Used to create a birthday task when the birthday is lesser that 21 days</description>
-        <formula>AND( OR( ISNEW() ,ISCHANGED(Birthdate__c)) , NOT(ISNULL(Birthdate__c)), CurrentDOB__c - Today()  &lt;  21, Migrated_Record__c = false, NOT(ISPICKVAL(Status, &apos;Completed&apos;)), NOT(ISPICKVAL(Status, &apos;Closed&apos;)), NOT(ISPICKVAL(Status, &apos;DNQ&apos;)), NOT(ISPICKVAL(Status, &apos;Granted&apos;)), Contact.npsp__Deceased__c  = false,  RecordType.Name  = &apos;Wish&apos;)</formula>
-        <triggerType>onAllChanges</triggerType>
-    </rules>
-    <rules>
-        <fullName>Case%3ABirthday Task</fullName>
-        <active>false</active>
-        <description>This workflow will create Task to Volunteer for Wish Child Birthday</description>
-        <formula>AND(NOT(ISNULL(Birthdate__c)),((CurrentDOB__c - Today())&gt; 21)) &amp;&amp;  $Profile.Name != &apos;Integration&apos;</formula>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Birthday_Task</name>
-                <type>Task</type>
-            </actions>
-            <offsetFromField>Case.CurrentDOB__c</offsetFromField>
-            <timeLength>-21</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-    </rules>
-    <rules>
-        <fullName>Case%3AFollow-up on wish clearance</fullName>
-        <active>false</active>
-        <criteriaItems>
-            <field>Case.Wish_Clearance_Sent_Date__c</field>
-            <operation>notEqual</operation>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Wish_Clearance_Received_Date__c</field>
-            <operation>equals</operation>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>notEqual</operation>
-            <value>Integration</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.RecordTypeId</field>
-            <operation>equals</operation>
-            <value>Wish</value>
-        </criteriaItems>
-        <description>Used to create a task to Chapter Staff if Wish Clearance received is null after 14 days the form sent</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Follow_up_on_wish_clearance</name>
-                <type>Task</type>
-            </actions>
-            <offsetFromField>Case.Wish_Clearance_Sent_Date__c</offsetFromField>
-            <timeLength>14</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-    </rules>
-    <rules>
-        <fullName>Case%3AQualifying Medical Professional when wish is determined</fullName>
-        <actions>
-            <name>Case_ET_Your_patient_decided_on_a_wish</name>
-            <type>Task</type>
-        </actions>
-        <active>false</active>
-        <criteriaItems>
-            <field>Case.Status</field>
-            <operation>equals</operation>
-            <value>Wish Determined</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>notEqual</operation>
-            <value>Integration</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Sub_Status__c</field>
-            <operation>equals</operation>
-            <value>Within Policy</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.UWISource__c</field>
-            <operation>notEqual</operation>
-            <value>Lead</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.RecordTypeId</field>
-            <operation>equals</operation>
-            <value>Wish</value>
-        </criteriaItems>
-        <description>It send a email notification to Qualifying Medical Professional when wish is determined.</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
         <fullName>Case%3AQualifying Medical Professional when wish is granted</fullName>
@@ -923,13 +759,6 @@ https://make-a-wish.my.salesforce.com/00N3600000StVJe?setupid=CaseFields</descri
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
-        <fullName>Notification to Development Team Regarding Wish Presentation Rule</fullName>
-        <active>false</active>
-        <description>This will fire for granting case to send an email alert to dev team when presentation date is set and presentation set check box true</description>
-        <formula>AND(RecordType.Name = &apos;Wish Granting&apos;,NOT(ISBLANK(Presentation_Date__c)),ISCHANGED(Presentation_Date__c),Wish_Presentation_Set__c = true,  $Profile.Name != &apos;Integration&apos;)</formula>
-        <triggerType>onAllChanges</triggerType>
-    </rules>
-    <rules>
         <fullName>Rush Wish Child Summary Rule</fullName>
         <actions>
             <name>UpdateIsRushWishChild</name>
@@ -970,86 +799,14 @@ https://make-a-wish.my.salesforce.com/00N3600000StVJe?setupid=CaseFields</descri
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
-        <fullName>Send Email to National Team</fullName>
-        <actions>
-            <name>Update_is_National_in_Case</name>
-            <type>FieldUpdate</type>
-        </actions>
-        <active>false</active>
-        <description>This rule will fire when the isNational check box is checked.</description>
-        <formula>AND(isNational__c = TRUE,ISCHANGED(isNational__c), Migrated_Record__c = false)</formula>
-        <triggerType>onAllChanges</triggerType>
-    </rules>
-    <rules>
-        <fullName>Send Reply Email to National MAC Team</fullName>
-        <actions>
-            <name>Send_Reply_Emal_to_National_MAC_team_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <active>false</active>
-        <description>This work flow will fire when the national mac team reply to the case comment.</description>
-        <formula>AND(NOT(ISNULL(MAC_Email__c)),ISCHANGED(Case_Comment__c),(isNational__c = true),(isNationalReply__c = true),(  $Profile.Name != &apos;Integration&apos;),RecordType.DeveloperName =&apos;Diagnosis_Verification_Review&apos;)</formula>
-        <triggerType>onAllChanges</triggerType>
-    </rules>
-    <rules>
-        <fullName>Send Reply email to MAC team</fullName>
-        <actions>
-            <name>Send_Reply_email_to_MAC_team</name>
-            <type>Alert</type>
-        </actions>
-        <active>false</active>
-        <description>This work flow rule is used to send replay email to MAC team.</description>
-        <formula>AND(ISCHANGED(Case_Comment__c),isNational__c = false, isEmail__c = true, $Profile.Name != &apos;Integration&apos;, RecordType.DeveloperName =&apos;Diagnosis_Verification_Review&apos;)</formula>
-        <triggerType>onAllChanges</triggerType>
-    </rules>
-    <rules>
         <fullName>Update_DateStatus</fullName>
         <actions>
             <name>UpdateStatusDate</name>
             <type>FieldUpdate</type>
         </actions>
         <active>true</active>
-        <formula>AND(OR(ISCHANGED( Status ),ISNEW()),  $Profile.Name != &apos;Integration&apos;)</formula>
+        <formula>AND(OR(ISCHANGED( Status ),ISNEW()),  $Profile.Name != 'Integration')</formula>
         <triggerType>onAllChanges</triggerType>
-    </rules>
-    <rules>
-        <fullName>Wish %3A InActive Wish Granter Alert Workflow Rule</fullName>
-        <actions>
-            <name>Case_Send_Email_to_Wish_Granter_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>Case_Uncheck_is_Email_Wish_Granter</name>
-            <type>FieldUpdate</type>
-        </actions>
-        <actions>
-            <name>Case_ET_Wish_Granter_is_now_Inactive</name>
-            <type>Task</type>
-        </actions>
-        <active>false</active>
-        <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
-        <criteriaItems>
-            <field>Case.isEmailWishGranter__c</field>
-            <operation>equals</operation>
-            <value>True</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>notEqual</operation>
-            <value>Integration</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.RecordTypeId</field>
-            <operation>equals</operation>
-            <value>Wish</value>
-        </criteriaItems>
-        <description>This Email alert is used to send an email to wish granters</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
         <fullName>Wish Close</fullName>
@@ -1074,91 +831,6 @@ https://make-a-wish.my.salesforce.com/00N3600000StVJe?setupid=CaseFields</descri
             <value>Integration</value>
         </criteriaItems>
         <description>Used update isApprove Field when the child case is closed</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
-    <rules>
-        <fullName>Wish Family Form Not Submitted Alert Rule</fullName>
-        <active>false</active>
-        <criteriaItems>
-            <field>Case.RecordTypeId</field>
-            <operation>equals</operation>
-            <value>Wish</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Wish_Family_Form_Submitted__c</field>
-            <operation>equals</operation>
-            <value>False</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>notEqual</operation>
-            <value>Integration</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Interview_date__c</field>
-            <operation>notEqual</operation>
-        </criteriaItems>
-        <description>This workflow will fire when there is no wish family form submitted for particular time period</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-        <workflowTimeTriggers>
-            <offsetFromField>Case.Interview_date__c</offsetFromField>
-            <timeLength>5</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-    </rules>
-    <rules>
-        <fullName>Wish%3A Task For Family Form Not Submitted</fullName>
-        <active>false</active>
-        <criteriaItems>
-            <field>Case.RecordTypeId</field>
-            <operation>equals</operation>
-            <value>Wish</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Wish_Family_Form_Submitted__c</field>
-            <operation>equals</operation>
-            <value>False</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>notEqual</operation>
-            <value>Integration</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Interview_date__c</field>
-            <operation>notEqual</operation>
-        </criteriaItems>
-        <description>Used to create Task for wish owner if wish family form is not submitted after interview date entered</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Wish_Family_Packet_not_submitted</name>
-                <type>Task</type>
-            </actions>
-            <offsetFromField>Case.Interview_date__c</offsetFromField>
-            <timeLength>6</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-    </rules>
-    <rules>
-        <fullName>Wish%3AInterview Date Not Set After 21 Days</fullName>
-        <active>false</active>
-        <criteriaItems>
-            <field>Case.RecordTypeId</field>
-            <operation>equals</operation>
-            <value>Wish</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Interview_Date_Not_Set__c</field>
-            <operation>equals</operation>
-            <value>True</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
-        </criteriaItems>
-        <description>This workflow will fire if the interview date is not yet set after 21 days from the case created date</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <tasks>
@@ -1321,7 +993,7 @@ https://make-a-wish.my.salesforce.com/00N3600000StVJe?setupid=CaseFields</descri
         <priority>Normal</priority>
         <protected>false</protected>
         <status>Completed</status>
-        <subject>Case ET : Your patient&apos;s wish has been fulfilled!</subject>
+        <subject>Case ET : Your patient's wish has been fulfilled!</subject>
     </tasks>
     <tasks>
         <fullName>Follow_up_on_wish_clearance</fullName>

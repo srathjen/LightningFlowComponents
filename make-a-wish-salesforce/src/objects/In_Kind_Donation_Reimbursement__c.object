@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="utf-8"?><CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -333,7 +332,7 @@ If this is a volunteer donor, appeal should begin with DRPS</inlineHelpText>
     </fields>
     <fields>
         <fullName>Approved_By__c</fullName>
-        <description>stores the approved by information when wish owner or wish owner&apos;s manager approved</description>
+        <description>stores the approved by information when wish owner or wish owner's manager approved</description>
         <externalId>false</externalId>
         <label>Approved By</label>
         <length>255</length>
@@ -345,7 +344,7 @@ If this is a volunteer donor, appeal should begin with DRPS</inlineHelpText>
     </fields>
     <fields>
         <fullName>Approved_Date__c</fullName>
-        <description>stores the approved date when wish owner or wish owner&apos;s manager approved</description>
+        <description>stores the approved date when wish owner or wish owner's manager approved</description>
         <externalId>false</externalId>
         <label>Approved Date</label>
         <required>false</required>
@@ -455,7 +454,7 @@ If this is a volunteer donor, appeal should begin with DRPS</inlineHelpText>
     </fields>
     <fields>
         <fullName>Country__c</fullName>
-        <description>This filed will capture current login  volunteer user&apos;s country</description>
+        <description>This filed will capture current login  volunteer user's country</description>
         <externalId>false</externalId>
         <label>Country</label>
         <required>false</required>
@@ -765,7 +764,7 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <fullName>In_Kind_Donor_Name__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
-        <inlineHelpText>If donation made by a business, please add business name here. If this is a personal donation please add your name below in the &apos;Volunteer Donor&apos; field.</inlineHelpText>
+        <inlineHelpText>If donation made by a business, please add business name here. If this is a personal donation please add your name below in the 'Volunteer Donor' field.</inlineHelpText>
         <label>Business Donor</label>
         <lookupFilter>
             <active>true</active>
@@ -815,7 +814,7 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
     </fields>
     <fields>
         <fullName>Login_Users_City__c</fullName>
-        <description>This filed is used to capture the current login volunteer user&apos;s city</description>
+        <description>This filed is used to capture the current login volunteer user's city</description>
         <externalId>false</externalId>
         <label>City</label>
         <length>255</length>
@@ -827,7 +826,7 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
     </fields>
     <fields>
         <fullName>Login_users_Street__c</fullName>
-        <description>This field will capture current login volunteer&apos;s street</description>
+        <description>This field will capture current login volunteer's street</description>
         <externalId>false</externalId>
         <label>Street</label>
         <length>255</length>
@@ -839,7 +838,7 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
     </fields>
     <fields>
         <fullName>Login_users_Zip__c</fullName>
-        <description>This field will capture current login user&apos;s zip</description>
+        <description>This field will capture current login user's zip</description>
         <externalId>false</externalId>
         <label>Zip</label>
         <length>5</length>
@@ -852,7 +851,7 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
     <fields>
         <fullName>Make_check_payable_to_me__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>If this field checked then the current login user details will be saved automatically otherwise its override with user&apos;s entered value in the fields</description>
+        <description>If this field checked then the current login user details will be saved automatically otherwise its override with user's entered value in the fields</description>
         <externalId>false</externalId>
         <inlineHelpText>Select if you would like check to be payed to you, address details can be edited once saved</inlineHelpText>
         <label>Make check payable to me</label>
@@ -1375,7 +1374,7 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <fullName>Wish_child_Name__c</fullName>
         <description>This field will pull wish child name from parent wish</description>
         <externalId>false</externalId>
-        <formula>Wish__r.Contact.FirstName + &apos; &apos; +  Wish__r.Contact.LastName</formula>
+        <formula>Wish__r.Contact.FirstName + ' ' +  Wish__r.Contact.LastName</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Wish Child Name</label>
         <required>false</required>
@@ -1412,7 +1411,7 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
     </fields>
     <fields>
         <fullName>login_users_State__c</fullName>
-        <description>This field will capture current current login volunteer user&apos;s state</description>
+        <description>This field will capture current current login volunteer user's state</description>
         <externalId>false</externalId>
         <label>State</label>
         <required>false</required>
@@ -2861,7 +2860,7 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <fullName>IKR_AccountName_VolunteerName_Validation</fullName>
         <active>true</active>
         <description>This validation will fire if user enter values for both In-Kind Donor Name and Volunteer Name</description>
-        <errorConditionFormula>AND(!ISBLANK( In_Kind_Donor_Name__c ), !ISBLANK(vounteer_Name__c),$Profile.Name &lt;&gt; &apos;Integration&apos; )</errorConditionFormula>
+        <errorConditionFormula>AND(!ISBLANK( In_Kind_Donor_Name__c ), !ISBLANK(vounteer_Name__c),$Profile.Name &lt;&gt; 'Integration' )</errorConditionFormula>
         <errorDisplayField>In_Kind_Donor_Name__c</errorDisplayField>
         <errorMessage>Please enter either the Business Donor or Volunteer Donor.</errorMessage>
     </validationRules>
@@ -2869,24 +2868,16 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <fullName>IKR_Editing_Approved_Record_Validation</fullName>
         <active>true</active>
         <description>This validation will fire after the record is approved and try to edit the record</description>
-        <errorConditionFormula>AND(NOT($Permission.Program_Supervisor ),!ISBLANK( Approved_Date__c), $Profile.Name &lt;&gt; &apos;Integration&apos;)</errorConditionFormula>
+        <errorConditionFormula>AND(NOT($Permission.Program_Supervisor ),!ISBLANK( Approved_Date__c), $Profile.Name &lt;&gt; 'Integration')</errorConditionFormula>
         <errorMessage>You do not have access to edit the approved record</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>InKind_Gift_Value_Change_Validation</fullName>
         <active>true</active>
         <description>This validation used to force the enter for reason for changing the gift value</description>
-        <errorConditionFormula>OR((AND(ISCHANGED( Gift_Value__c ), ISBLANK( Reason_for_Gift_Value_Change__c ), $Profile.Name &lt;&gt; &apos;Integration&apos;, HiddenIsSubmittedforApproval__c  = true)),( AND(ISBLANK( Reason_for_Gift_Value_Change__c ), NOT( ISBLANK( PRIORVALUE(Reason_for_Gift_Value_Change__c) )))))</errorConditionFormula>
+        <errorConditionFormula>OR((AND(ISCHANGED( Gift_Value__c ), ISBLANK( Reason_for_Gift_Value_Change__c ), $Profile.Name &lt;&gt; 'Integration', HiddenIsSubmittedforApproval__c  = true)),( AND(ISBLANK( Reason_for_Gift_Value_Change__c ), NOT( ISBLANK( PRIORVALUE(Reason_for_Gift_Value_Change__c) )))))</errorConditionFormula>
         <errorDisplayField>Reason_for_Gift_Value_Change__c</errorDisplayField>
         <errorMessage>You should enter the reason for changing the gift value</errorMessage>
-    </validationRules>
-    <validationRules>
-        <fullName>Inkind_Reimbursement_Attachment_Validati</fullName>
-        <active>false</active>
-        <description>This validation will fire if  there is no attachment and attachments filed value is selected as attached</description>
-        <errorConditionFormula>OR(AND(!(Is_Attached__c), ISPICKVAL( Attachments__c ,&apos;Yes- Attached&apos;)),AND((Is_Attached__c), !(ISPICKVAL( Attachments__c ,&apos;Yes- Attached&apos;))))</errorConditionFormula>
-        <errorDisplayField>Attachments__c</errorDisplayField>
-        <errorMessage>Please add the attachment otherwise should select attachment as &apos;No&apos;, or  if attachment is added value should be Yes- Attached</errorMessage>
     </validationRules>
     <visibility>Public</visibility>
     <webLinks>
@@ -2898,7 +2889,7 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <openType>onClickJavaScript</openType>
         <protected>false</protected>
         <requireRowSelection>true</requireRowSelection>
-        <url>window.open(&apos;/001/o&apos;,&apos;_blank&apos;);</url>
+        <url>window.open('/001/o','_blank');</url>
     </webLinks>
     <webLinks>
         <fullName>Submit_For_Approval</fullName>
@@ -2909,27 +2900,27 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <masterLabel>Submit For Approval</masterLabel>
         <openType>onClickJavaScript</openType>
         <protected>false</protected>
-        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)}
-{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)}
+        <url>{!REQUIRESCRIPT("/soap/ajax/24.0/connection.js")}
+{!REQUIRESCRIPT("/soap/ajax/24.0/apex.js")}
 if(!{!ISNULL( In_Kind_Donation_Reimbursement__c.Wish__c )}){
 
 
 
-if(&apos;{!In_Kind_Donation_Reimbursement__c.RecordType}&apos; == &apos;In-Kind Donation&apos;){
-  var dupe = sforce.apex.execute(&quot;InKindReimbursementApproval_AC&quot;, &quot;submitApproval&quot;,{inKindId :&apos;{!In_Kind_Donation_Reimbursement__c.Id}&apos;,recordType:&quot;In-Kind Donation&quot;});  
+if('{!In_Kind_Donation_Reimbursement__c.RecordType}' == 'In-Kind Donation'){
+  var dupe = sforce.apex.execute("InKindReimbursementApproval_AC", "submitApproval",{inKindId :'{!In_Kind_Donation_Reimbursement__c.Id}',recordType:"In-Kind Donation"});  
             alert(dupe);
-            window.location.href = &apos;/setup/ui/recordtypeselect.jsp?ent=01I36000002mOA5&amp;retURL=%2Fa1r%2Fo&amp;save_new_url=%2Fa1r%2Fe%3FretURL%3D%252Fa1r%252Fo&apos;; 
+            window.location.href = '/setup/ui/recordtypeselect.jsp?ent=01I36000002mOA5&amp;retURL=%2Fa1r%2Fo&amp;save_new_url=%2Fa1r%2Fe%3FretURL%3D%252Fa1r%252Fo'; 
 }
-else if(&apos;{!In_Kind_Donation_Reimbursement__c.RecordType}&apos; == &apos;Reimbursement&apos;){
-            var dupe = sforce.apex.execute(&quot;InKindReimbursementApproval_AC&quot;, &quot;submitApproval&quot;,{inKindId :&apos;{!In_Kind_Donation_Reimbursement__c.Id}&apos;,recordType:&quot;Reimbursement&quot;});  
+else if('{!In_Kind_Donation_Reimbursement__c.RecordType}' == 'Reimbursement'){
+            var dupe = sforce.apex.execute("InKindReimbursementApproval_AC", "submitApproval",{inKindId :'{!In_Kind_Donation_Reimbursement__c.Id}',recordType:"Reimbursement"});  
             alert(dupe);
-             window.location.href = &apos;/setup/ui/recordtypeselect.jsp?ent=01I36000002mOA5&amp;retURL=%2Fa1r%2Fo&amp;save_new_url=%2Fa1r%2Fe%3FretURL%3D%252Fa1r%252Fo&apos;; 
+             window.location.href = '/setup/ui/recordtypeselect.jsp?ent=01I36000002mOA5&amp;retURL=%2Fa1r%2Fo&amp;save_new_url=%2Fa1r%2Fe%3FretURL%3D%252Fa1r%252Fo'; 
         }
 }
 
 else
 {
-   alert(&apos;Please enter the Wish number in order to submit for approval&apos;);
+   alert('Please enter the Wish number in order to submit for approval');
 
 }</url>
     </webLinks>
